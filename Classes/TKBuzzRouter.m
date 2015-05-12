@@ -16,6 +16,9 @@
 
 @property (nonatomic, assign) BOOL isActive;
 
+@property (nonatomic, strong) NSError *lastWorkerError;
+@property (nonatomic, strong) NSMutableDictionary *workerRouters;
+
 @end
 
 @implementation TKBuzzRouter
@@ -24,10 +27,91 @@
 
 - (void)cancelRequests
 {
+  for (TKBuzzRouter *worker in self.workerRouters) {
+    [worker cancelRequests];
+  }
+  self.workerRouters = nil;
+  self.lastWorkerError = nil;
+  
   self.isActive = NO;
 }
 
-- (void)downloadTrip:(NSURL *)url	completion:(SGTripDownloadBlock)completion
+- (void)multiFetchTripsForRequest:(TripRequest *)request
+                       completion:(void (^)(TripRequest *, NSError *))completion
+{
+  [self cancelRequests];
+  self.isActive = YES;
+  
+  NSArray *enabledModes       = [request.spanningRegion modeIdentifiers];
+  NSSet *groupedIdentifiers   = [SVKTransportModes groupedModeIdentifiers:enabledModes includeGroupForAll:YES];
+  
+  if (!self.workerRouters) {
+    self.workerRouters = [NSMutableDictionary dictionaryWithCapacity:groupedIdentifiers.count];
+  }
+  
+  NSSet *minimized = [TKUserProfileHelper minimizedModeIdentifiers];
+  NSSet *hidden = [TKUserProfileHelper hiddenModeIdentifiers];
+  
+  for (NSSet *modeIdentifiers in groupedIdentifiers) {
+    TKBuzzRouter *worker = self.workerRouters[modeIdentifiers];
+    if (worker) {
+      continue;
+    }
+    
+    worker = [[TKBuzzRouter alloc] init];
+    self.workerRouters[modeIdentifiers] = worker;
+    worker.modeIdentifiers = modeIdentifiers;
+    
+    __weak typeof(self) weakSelf = self;
+    [worker fetchTripsForRequest:request
+                  minimizedModes:minimized
+                     hiddenModes:hidden
+                         success:
+     ^(TripRequest *completedRequest, NSSet *completedIdentifiers) {
+       typeof(weakSelf) strongSelf = weakSelf;
+       if (strongSelf) {
+         [strongSelf handleMultiFetchResult:completedRequest
+                             completedModes:completedIdentifiers
+                                      error:nil
+                                 completion:completion];
+       }
+     }
+                         failure:
+     ^(NSError *error, NSSet *erroredIdentifiers) {
+       typeof(weakSelf) strongSelf = weakSelf;
+       if (strongSelf) {
+         [strongSelf handleMultiFetchResult:request
+                             completedModes:erroredIdentifiers
+                                      error:error
+                                 completion:completion];
+       }
+     }];
+  }
+}
+
+- (void)handleMultiFetchResult:(TripRequest *)request
+                completedModes:(NSSet *)modeIdentifiers
+                         error:(NSError *)error
+                    completion:(void (^)(TripRequest *, NSError *))completion
+{
+  [self.workerRouters removeObjectForKey:modeIdentifiers];
+  
+  if (self.workerRouters.count == 0) {
+
+    NSError *errorToShow = nil;
+    if (request.trips.count == 0) {
+      errorToShow = error ?: self.lastWorkerError;
+    }
+    completion(request, errorToShow);
+    
+  } else {
+    self.lastWorkerError = error;
+  }
+}
+
+- (void)downloadTrip:(NSURL *)url
+  intoTripKitContext:(NSManagedObjectContext *)tripKitContext
+          completion:(TKTripDownloadBlock)completion
 {
   [self hitURLForTripDownload:url completion:
    ^(NSURL *requestURL, id JSON, NSError *error) {
@@ -35,6 +119,7 @@
      if (JSON) {
        DLog(@"Downloaded trip JSON for: %@", requestURL);
        [self parseJSON:JSON
+     forTripKitContext:tripKitContext
             completion:^(Trip *trip) {
          trip.shareURL = url;
          if (completion) {
@@ -51,7 +136,7 @@
     }];
 }
 
-- (void)updateTrip:(Trip *)trip completion:(SGTripDownloadBlock)completion
+- (void)updateTrip:(Trip *)trip completion:(TKTripDownloadBlock)completion
 {
   NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
 //  DLog(@"Updating trip from URL: %@", updateURL);
@@ -184,6 +269,7 @@
        DLog(@"Request returned JSON: %@", task.currentRequest.URL);
        [strongSelf2 parseJSON:responseObject
                   forURLQuery:task.currentRequest.URL.query
+            forTripKitContext:strongSelf2.currentRequest.managedObjectContext
                       success:success
                       failure:failure];
      }
@@ -242,6 +328,7 @@
 
 - (void)parseJSON:(id)json
 			forURLQuery:(NSString *)urlQuery
+forTripKitContext:(NSManagedObjectContext *)tripKitContext
 					success:(TKRouterSuccess)success
 					failure:(TKRouterError)failure
 {
@@ -253,13 +340,13 @@
   }
 	
 	// make sure that the parent context is saved
-  NSManagedObjectContext *tripKitContext = self.tripKit.tripKitContext;
   [tripKitContext performBlock:^{
     NSError *error = nil;
     BOOL saved = [tripKitContext save:&error];
     
     if (saved) {
       [self parseAndAddResult:json
+           intoTripKitContext:tripKitContext
                   forURLQuery:urlQuery
                       success:
        ^(NSArray *addedTrips) {
@@ -304,7 +391,7 @@
 
 - (void)parseJSON:(id)json
      updatingTrip:(Trip *)trip
-       completion:(SGTripDownloadBlock)completion
+       completion:(TKTripDownloadBlock)completion
 {
   NSString *error = [json objectForKey:@"error"];
   if (error) {
@@ -314,7 +401,7 @@
     return;
   }
   
-  NSManagedObjectContext *tripKitContext = self.tripKit.tripKitContext;
+  NSManagedObjectContext *tripKitContext = trip.managedObjectContext;
   TKRoutingParser *parser = [[TKRoutingParser alloc] initWithTripKitContext:tripKitContext];
   [parser parseJSON:json
        updatingTrip:trip
@@ -335,7 +422,8 @@
 }
 
 - (void)parseJSON:(id)json
-       completion:(SGTripDownloadBlock)completion
+forTripKitContext:(NSManagedObjectContext *)tripKitContext
+       completion:(TKTripDownloadBlock)completion
 {
   NSString *error = [json objectForKey:@"error"];
   if (error) {
@@ -346,7 +434,6 @@
   }
   
   // parse it
-  NSManagedObjectContext *tripKitContext = self.tripKit.tripKitContext;
   TKRoutingParser *parser = [[TKRoutingParser alloc] initWithTripKitContext:tripKitContext];
   [parser parseAndAddResult:json
                  completion:
@@ -363,7 +450,7 @@
    }];
 }
 
-#pragma mark - Requests
+#pragma mark - Single Requests
 
 - (NSDictionary *)createRequestParametersForRequest:(TripRequest *)request
                                  andModeIdentifiers:(NSSet *)modeIdentifiers
@@ -417,13 +504,12 @@
 #pragma mark - Results
 
 - (void)parseAndAddResult:(id)json
+       intoTripKitContext:(NSManagedObjectContext *)tripKitContext
 							forURLQuery:(NSString *)urlQuery
                   success:(void (^)(NSArray *addedTrips))completion
 									failure:(TKRouterError)failure
 {
   ZAssert(completion && failure, @"Success and failure blocks are required");
-  
-  NSManagedObjectContext *tripKitContext = self.tripKit.tripKitContext;
   ZAssert(tripKitContext != nil, @"Managed object context required!");
   
   // analyse result

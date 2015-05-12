@@ -10,9 +10,12 @@
 
 @class Trip;
 
-typedef void (^SGTripDownloadBlock)(Trip *trip);
+typedef void (^TKTripDownloadBlock)(Trip *trip);
 
 @interface TKBuzzRouter : TKRouter
+
+- (void)multiFetchTripsForRequest:(TripRequest *)request
+                       completion:(void (^)(TripRequest *, NSError *))completion;
 
 - (NSDictionary *)createRequestParametersForRequest:(TripRequest *)request
                                  andModeIdentifiers:(NSSet *)modeIdentifiers
@@ -23,10 +26,11 @@ typedef void (^SGTripDownloadBlock)(Trip *trip);
                         failure:(TKRouterError)failure;
 
 - (void)downloadTrip:(NSURL *)url
-          completion:(SGTripDownloadBlock)completion;
+  intoTripKitContext:(NSManagedObjectContext *)tripKitContext
+          completion:(TKTripDownloadBlock)completion;
 
 - (void)updateTrip:(Trip *)trip
-        completion:(SGTripDownloadBlock)completion;
+        completion:(TKTripDownloadBlock)completion;
 
 
 @end

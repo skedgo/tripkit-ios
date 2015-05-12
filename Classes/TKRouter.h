@@ -16,13 +16,24 @@
 typedef void(^TKRouterSuccess)(TripRequest *request, NSSet *modeIdentifiers);
 typedef void(^TKRouterError)(NSError *error, NSSet *modeIdentifiers);
 
-
+/**
+ A TKRouter calculates trips for routing requests.
+ 
+ @note TKRouter itself is an abstract class. Most likely you will want to create an instance of TKBuzzRouter to talk to the SkedGo backend.
+ 
+ @note Subclasses need to implement `-fetchTripsForCurrentRequestSuccess:failure` and `-cancelRequests`.
+ */
 @interface TKRouter : NSObject
 
 @property (nonatomic, strong) TripRequest *currentRequest;
 @property (nonatomic, copy) NSSet *modeIdentifiers;
-@property (nonatomic, strong) TKTripKit *tripKit;
 
+/**
+ The main method to call to have the router calculate trips.
+ 
+ @param request An instance of a `TripRequest` which specifies what kind of trips should get calculated.
+ @param minimized 
+ */
 - (void)fetchTripsForRequest:(TripRequest *)request
               minimizedModes:(NSSet *)minimized
                  hiddenModes:(NSSet *)hidden
@@ -33,6 +44,9 @@ typedef void(^TKRouterError)(NSError *error, NSSet *modeIdentifiers);
 
 - (void)cancelRequests;
 
+/**
+ @note Abstract method called by the superclass. Only for subclasses to overwrite. Do not call this directly.
+ */
 - (void)fetchTripsForCurrentRequestSuccess:(TKRouterSuccess)success
                                    failure:(TKRouterError)failure;
 

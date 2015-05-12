@@ -17,7 +17,7 @@
 - (void)fakeRouteResultForRequest:(TripRequest *)request
 {
   if (nil == self.parser) {
-    NSManagedObjectContext *tripKitContext = self.tripKit.tripKitContext;
+    NSManagedObjectContext *tripKitContext = [[TKTripKit sharedInstance] tripKitContext];
     self.parser = [[TKRoutingParser alloc] initWithTripKitContext:tripKitContext];
   }
   

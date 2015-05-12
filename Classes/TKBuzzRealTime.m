@@ -337,7 +337,6 @@
 {
   if (!_helperRouter) {
     _helperRouter = [[TKBuzzRouter alloc] init];
-    _helperRouter.tripKit = [TKTripKit sharedInstance];
   }
   return _helperRouter;
 }

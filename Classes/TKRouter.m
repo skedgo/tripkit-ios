@@ -53,7 +53,7 @@
   // we'll adjust the visibility in the completion block
   request.defaultVisibility = TripGroupVisibilityHidden;
 
-  self.currentRequest = request;
+  _currentRequest = request;
   return [self fetchTripsForCurrentRequestSuccess:
           ^(TripRequest *theRequest, NSSet *modeIdentifiers) {
             [theRequest adjustVisibilityForMinimizedModeIdentifiers:minimized
