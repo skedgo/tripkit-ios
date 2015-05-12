@@ -1,0 +1,88 @@
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ ohne Verkehr";
+
+/* No comment provided by engineer. */
+"1 stop" = "1 Stop";
+
+/* Indication of an activity */
+"ActivityIndication" = "Ich nehme den %@ um %@ von %@.";
+
+/* Arrival time sorter title */
+"Arrival" = "Ankunft";
+
+/* The place of arrival */
+"ArrivalLocation" = "Ankunft bei %@";
+
+/* The place of arrival with time */
+"ArrivalLocationTime" = "Ankunft bei %@ um %@";
+
+/* Arrival %time.
+   Time arrival */
+"ArrivalTime" = "Ankunft um %@";
+
+/* Single line instruction to arrive */
+"Arrive" = "Ankung";
+
+/* Departure time sorter title */
+"Departure" = "Abfahrt";
+
+/* Time of the bus departure */
+"DepartureTime" = " um %@";
+
+/* Destination of the bus */
+"Direction" = "Richtung: %@";
+
+/* Walking time */
+"Duration" = " für %@";
+
+/* Single line instruction to leave */
+"Leave" = "Abfahrt";
+
+/* The place of departure */
+"LeaveLocation" = "Abfahrt von %@";
+
+/* The place of departure with time */
+"LeaveLocationTime" = "Abfahrt von %@ um %@";
+
+/* Time departure */
+"LeaveTime" = "Abfahrt um %@";
+
+/* No comment provided by engineer. */
+"Live traffic" = "Live-Verkehr";
+
+/* ArrivalTime */
+"MessageArrivalTime" = "Ich komme bei %@ um %@ an.";
+
+/* Arrival Location */
+"PrimaryLocationEnd" = "Nach %@";
+
+/* Departure Location */
+"PrimaryLocationStart" = "Von %@";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
+"PrimaryLocationStationary" = "Bei %@";
+
+/* No comment provided by engineer. */
+"Real-time" = "Echtzeit";
+
+/* Indicator for a ride share vehicle such as Uber, Lyft */
+"Ride share" = "Ride-Share";
+
+/* A shuttle which are like big taxis with usually defined operating hours and limited service areas, e.g., an airport shuttle bus that takes you from the airport to your hotel. */
+"Shuttle" = "Shuttlebus";
+
+/* Number of stops before you get off a vehicle */
+"Stops" = "%ld Stops";
+
+/* From %time1 to %time2 */
+"TimeFromToShortFormat" = "%@ bis %@";
+
+/* No comment provided by engineer. */
+"Trip" = "Trip";
+
+/* Vehicle 'x' updated */
+"VehicleCalledUpdated" = "Fahrzeug %@, aktualisiert vor %@";
+
+/* Vehicle updated */
+"VehicleUpdated" = "Aktualisiert vor %@";
+

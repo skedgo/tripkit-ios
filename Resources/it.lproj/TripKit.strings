@@ -1,0 +1,88 @@
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ w/o traffico"; // 
+
+/* No comment provided by engineer. */
+"1 stop" = "Una fermata";
+
+/* Indication of an activity */
+"ActivityIndication" = "Prendo il %@ alle %@ da %@.";
+
+/* Arrival time sorter title */
+"Arrival" = "Arrivo";
+
+/* The place of arrival */
+"ArrivalLocation" = "Arriva a %@";
+
+/* The place of arrival with time */
+"ArrivalLocationTime" = "Arriva a %@ alle %@";
+
+/* Arrival %time.
+   Time arrival */
+"ArrivalTime" = "Arriva alle %@";
+
+/* Single line instruction to arrive */
+"Arrive" = "Arriva";
+
+/* Departure time sorter title */
+"Departure" = "Partenza";
+
+/* Time of the bus departure */
+"DepartureTime" = " alle %@";
+
+/* Destination of the bus */
+"Direction" = "Direzione: %@";
+
+/* Walking time */
+"Duration" = " per %@";
+
+/* Single line instruction to leave */
+"Leave" = "Partire";
+
+/* The place of departure */
+"LeaveLocation" = "Parte da %@";
+
+/* The place of departure with time */
+"LeaveLocationTime" = "Parte da %@ alle %@";
+
+/* Time departure */
+"LeaveTime" = "Parte alle %@";
+
+/* No comment provided by engineer. */
+"Live traffic" = "traffico in tempo reale"; // 
+
+/* ArrivalTime */
+"MessageArrivalTime" = "Arrivo a %@ alle %@.";
+
+/* Arrival Location */
+"PrimaryLocationEnd" = "A %@";
+
+/* Departure Location */
+"PrimaryLocationStart" = "Da %@";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
+"PrimaryLocationStationary" = "A %@";
+
+/* No comment provided by engineer. */
+"Real-time" = "Tempo reale";
+
+/* Indicator for a ride share vehicle such as Uber, Lyft */
+"Ride share" = "Condividi corsa"; // 
+
+/* A shuttle which are like big taxis with usually defined operating hours and limited service areas, e.g., an airport shuttle bus that takes you from the airport to your hotel. */
+"Shuttle" = "Navetta";
+
+/* Number of stops before you get off a vehicle */
+"Stops" = "%ld Fermate";
+
+/* From %time1 to %time2 */
+"TimeFromToShortFormat" = "%@ a %@";
+
+/* No comment provided by engineer. */
+"Trip" = "Viaggio";
+
+/* Vehicle 'x' updated */
+"VehicleCalledUpdated" = "Veicolo %@ aggiornato dal %@ ";
+
+/* Vehicle updated */
+"VehicleUpdated" = "Aggiornato dal %@ ";
+

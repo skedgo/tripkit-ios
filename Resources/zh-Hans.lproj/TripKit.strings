@@ -1,0 +1,88 @@
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ w/o traffic"; // TODO
+
+/* No comment provided by engineer. */
+"1 stop" = "1站";
+
+/* Indication of an activity */
+"ActivityIndication" = "我将于%2$@从%3$@搭乘%1$@.";
+
+/* Arrival time sorter title */
+"Arrival" = "到达";
+
+/* The place of arrival */
+"ArrivalLocation" = "到达%@";
+
+/* The place of arrival with time */
+"ArrivalLocationTime" = "在%2$@到达%1$@";
+
+/* Arrival %time.
+ Time arrival */
+"ArrivalTime" = "在%@到达";
+
+/* Single line instruction to arrive */
+"Arrive" = "到达";
+
+/* Departure time sorter title */
+"Departure" = "离站";
+
+/* Time of the bus departure */
+"DepartureTime" = " 于%@";
+
+/* Destination of the bus */
+"Direction" = "方向: %@";
+
+/* Walking time */
+"Duration" = " %@";
+
+/* Single line instruction to leave */
+"Leave" = "出发";
+
+/* The place of departure */
+"LeaveLocation" = "离开%@";
+
+/* The place of departure with time */
+"LeaveLocationTime" = "在%2$@离开%1$@";
+
+/* Time departure */
+"LeaveTime" = "于%@离开";
+
+/* No comment provided by engineer. */
+"Live traffic" = "Live traffic"; // TODO
+
+/* ArrivalTime */
+"MessageArrivalTime" = "我将于%2$@到达%1$@.";
+
+/* Arrival Location */
+"PrimaryLocationEnd" = "目的地: %@";
+
+/* Departure Location */
+"PrimaryLocationStart" = "出发地: %@";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
+"PrimaryLocationStationary" = "时刻 %@";
+
+/* No comment provided by engineer. */
+"Real-time" = "即时";
+
+/* Indicator for a ride share vehicle such as Uber, Lyft */
+"Ride share" = "Ride share"; // TODO
+
+/* A shuttle which are like big taxis with usually defined operating hours and limited service areas, e.g., an airport shuttle bus that takes you from the airport to your hotel. */
+"Shuttle" = "接驳车";
+
+/* Number of stops before you get off a vehicle */
+"Stops" = "%ld站";
+
+/* From %time1 to %time2 */
+"TimeFromToShortFormat" = "%@ ～ %@";
+
+/* No comment provided by engineer. */
+"Trip" = "旅程";
+
+/* Vehicle 'x' updated */
+"VehicleCalledUpdated" = "车辆%@的位置在%@前更新";
+
+/* Vehicle updated */
+"VehicleUpdated" = "%@前更新";
+

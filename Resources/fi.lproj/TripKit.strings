@@ -1,0 +1,88 @@
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ w/o traffic"; // TODO
+
+/* No comment provided by engineer. */
+"1 stop" = "1 pysäkki";
+
+/* Indication of an activity */
+"ActivityIndication" = "Vien %@ klo %@ %@:stä.";
+
+/* Arrival time sorter title */
+"Arrival" = "Saapumis";
+
+/* The place of arrival */
+"ArrivalLocation" = "Saavu klo %@";
+
+/* The place of arrival with time */
+"ArrivalLocationTime" = "Saavu %@:lla klo %@";
+
+/* Arrival %time.
+   Time arrival */
+"ArrivalTime" = "Ssavu klo %@";
+
+/* Single line instruction to arrive */
+"Arrive" = "Saavu";
+
+/* Departure time sorter title */
+"Departure" = "Lähtö";
+
+/* Time of the bus departure */
+"DepartureTime" = " klo %@";
+
+/* Destination of the bus */
+"Direction" = "Suunta: %@";
+
+/* Walking time */
+"Duration" = " %@";
+
+/* Single line instruction to leave */
+"Leave" = "Lähde";
+
+/* The place of departure */
+"LeaveLocation" = "Lähde %@:stä";
+
+/* The place of departure with time */
+"LeaveLocationTime" = "Lähde %@:stä klo %@";
+
+/* Time departure */
+"LeaveTime" = "Lähde klo %@";
+
+/* No comment provided by engineer. */
+"Live traffic" = "Live traffic"; // TODO
+
+/* ArrivalTime */
+"MessageArrivalTime" = "Saavun %@:iin klo %@.";
+
+/* Arrival Location */
+"PrimaryLocationEnd" = "%@:iin";
+
+/* Departure Location */
+"PrimaryLocationStart" = "%@:stä";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
+"PrimaryLocationStationary" = "%@:ssä";
+
+/* No comment provided by engineer. */
+"Real-time" = "Reaaliaikai";
+
+/* Indicator for a ride share vehicle such as Uber, Lyft */
+"Ride share" = "Ride share"; // TODO
+
+/* A shuttle which are like big taxis with usually defined operating hours and limited service areas, e.g., an airport shuttle bus that takes you from the airport to your hotel. */
+"Shuttle" = "Shuttle";
+
+/* Number of stops before you get off a vehicle */
+"Stops" = "%ld  pysäkkiä";
+
+/* From %time1 to %time2 */
+"TimeFromToShortFormat" = "%@ - %@";
+
+/* No comment provided by engineer. */
+"Trip" = "Matka";
+
+/* Vehicle 'x' updated */
+"VehicleCalledUpdated" = "Ajoneuvo %@ päivitty %@ sitten";
+
+/* Vehicle updated */
+"VehicleUpdated" = "Päivitty %@ sitten";
+

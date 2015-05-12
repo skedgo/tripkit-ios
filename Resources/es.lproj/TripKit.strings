@@ -1,0 +1,88 @@
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ sin tráfico";
+
+/* No comment provided by engineer. */
+"1 stop" = "1 parada";
+
+/* Indication of an activity */
+"ActivityIndication" = "Voy a tomar un %@ a las %@ desde %@.";
+
+/* Arrival time sorter title */
+"Arrival" = "Llegada";
+
+/* The place of arrival */
+"ArrivalLocation" = "Llegada a %@";
+
+/* The place of arrival with time */
+"ArrivalLocationTime" = "Llegada a %@ a las %@";
+
+/* Arrival %time.
+   Time arrival */
+"ArrivalTime" = "Llegada a las %@";
+
+/* Single line instruction to arrive */
+"Arrive" = "Llegada";
+
+/* Departure time sorter title */
+"Departure" = "Partida";
+
+/* Time of the bus departure */
+"DepartureTime" = " a las %@";
+
+/* Destination of the bus */
+"Direction" = "Dirección: %@";
+
+/* Walking time */
+"Duration" = " por %@";
+
+/* Single line instruction to leave */
+"Leave" = "Partida";
+
+/* The place of departure */
+"LeaveLocation" = "Salir de %@";
+
+/* The place of departure with time */
+"LeaveLocationTime" = "Salir de %@ a las %@";
+
+/* Time departure */
+"LeaveTime" = "Salir a las %@";
+
+/* No comment provided by engineer. */
+"Live traffic" = "Tráfico en tiempo real";
+
+/* ArrivalTime */
+"MessageArrivalTime" = "Voy a llegar a %@ a las %@.";
+
+/* Arrival Location */
+"PrimaryLocationEnd" = "Hacia %@";
+
+/* Departure Location */
+"PrimaryLocationStart" = "Desde %@";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
+"PrimaryLocationStationary" = "En %@";
+
+/* No comment provided by engineer. */
+"Real-time" = "Tiempo Real";
+
+/* Indicator for a ride share vehicle such as Uber, Lyft */
+"Ride share" = "Vehículo compartido";
+
+/* A shuttle which are like big taxis with usually defined operating hours and limited service areas, e.g., an airport shuttle bus that takes you from the airport to your hotel. */
+"Shuttle" = "Shuttle";
+
+/* Number of stops before you get off a vehicle */
+"Stops" = "%ld paradas";
+
+/* From %time1 to %time2 */
+"TimeFromToShortFormat" = "%@ hasta %@";
+
+/* No comment provided by engineer. */
+"Trip" = "Viaje";
+
+/* Vehicle 'x' updated */
+"VehicleCalledUpdated" = "Vehículo %@ actualizado hace %@";
+
+/* Vehicle updated */
+"VehicleUpdated" = "Actualizado hace %@";
+

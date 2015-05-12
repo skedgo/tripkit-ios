@@ -1,0 +1,88 @@
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ w/o traffic"; // TODO
+
+/* No comment provided by engineer. */
+"1 stop" = "1 station";
+
+/* Indication of an activity */
+"ActivityIndication" = "Ik neem de %@ om %@ vanuit %@.";
+
+/* Arrival time sorter title */
+"Arrival" = "Aankomst";
+
+/* The place of arrival */
+"ArrivalLocation" = "Arriveer op %@";
+
+/* The place of arrival with time */
+"ArrivalLocationTime" = "Arriveer op %@ om %@";
+
+/* Arrival %time.
+   Time arrival */
+"ArrivalTime" = "Arriveer om %@";
+
+/* Single line instruction to arrive */
+"Arrive" = "Arriveer";
+
+/* Departure time sorter title */
+"Departure" = "Vertrek";
+
+/* Time of the bus departure */
+"DepartureTime" = " om %@";
+
+/* Destination of the bus */
+"Direction" = "Eindpunt: %@";
+
+/* Walking time */
+"Duration" = " voor %@";
+
+/* Single line instruction to leave */
+"Leave" = "Vertrek";
+
+/* The place of departure */
+"LeaveLocation" = "Verlaat %@";
+
+/* The place of departure with time */
+"LeaveLocationTime" = "Verlaat %@ om %@";
+
+/* Time departure */
+"LeaveTime" = "Vetrek om %@";
+
+/* No comment provided by engineer. */
+"Live traffic" = "Live traffic"; // TODO
+
+/* ArrivalTime */
+"MessageArrivalTime" = "Ik kom aan op %@ om %@.";
+
+/* Arrival Location */
+"PrimaryLocationEnd" = "Naar %@";
+
+/* Departure Location */
+"PrimaryLocationStart" = "Van %@";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
+"PrimaryLocationStationary" = "Op %@";
+
+/* No comment provided by engineer. */
+"Real-time" = "Real-time";
+
+/* Indicator for a ride share vehicle such as Uber, Lyft */
+"Ride share" = "Ride share"; // TODO
+
+/* A shuttle which are like big taxis with usually defined operating hours and limited service areas, e.g., an airport shuttle bus that takes you from the airport to your hotel. */
+"Shuttle" = "Shuttle";
+
+/* Number of stops before you get off a vehicle */
+"Stops" = "%ld stations";
+
+/* From %time1 to %time2 */
+"TimeFromToShortFormat" = "%@ tot %@";
+
+/* No comment provided by engineer. */
+"Trip" = "Trip";
+
+/* Vehicle 'x' updated */
+"VehicleCalledUpdated" = "Voertuig %@ bijgewerkt %@ geleden";
+
+/* Vehicle updated */
+"VehicleUpdated" = "Bijgewerkt %@ geleden";
+
