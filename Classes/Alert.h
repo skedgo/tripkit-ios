@@ -12,20 +12,22 @@
 
 @class Service, StopLocation, SGNamedCoordinate;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Alert : NSManagedObject <STKDisplayablePoint>
 
-@property (nonatomic, retain) SGNamedCoordinate *location;
+@property (nonatomic, retain, nullable) SGNamedCoordinate *location;
 @property (nonatomic, retain) NSNumber * hashCode;
 @property (nonatomic, copy) NSString * title;
-@property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain, nullable) NSString * text;
+@property (nonatomic, retain, nullable) NSString * url;
 @property (nonatomic, retain) NSNumber * severity; // higher the more severe
-@property (nonatomic, retain) NSDate * startTime;
-@property (nonatomic, retain) NSDate * endTime;
+@property (nonatomic, retain, nullable) NSDate * startTime;
+@property (nonatomic, retain, nullable) NSDate * endTime;
 @property (nonatomic, assign) BOOL toDelete;
 
-@property (nonatomic, retain) NSString *idService;
-@property (nonatomic, retain) NSString *idStopCode;
+@property (nonatomic, retain, nullable) NSString *idService;
+@property (nonatomic, retain, nullable) NSString *idStopCode;
 
 + (instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode
                       inTripKitContext:(NSManagedObjectContext *)tripKitContext;
@@ -44,3 +46,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END
