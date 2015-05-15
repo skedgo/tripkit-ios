@@ -22,3 +22,5 @@ NSString *const TKDefaultsKeyProfileTransportConcessionPricing = @"profileTransp
 NSString *const TKDefaultsKeyProfileSortedModeIdentifiers = @"profileSortedModeIdentifiers";
 NSString *const TKDefaultsKeyProfileMinimizedModeIdentifiers = @"profileMinimizedModeIdentifiers";
 NSString *const TKDefaultsKeyProfileHiddenModeIdentifiers = @"profileHiddenModeIdentifiers";
+
+NSString *const TKDefaultsKeyProfileEnableRealBookings = @"profileEnableRealBookings";

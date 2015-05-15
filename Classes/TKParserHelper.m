@@ -55,9 +55,16 @@
   }
   [paras setObject:@([sharedDefaults integerForKey:TKDefaultsKeyProfileTransportWalkSpeed])		forKey:@"ws"];
   [paras setObject:@([sharedDefaults integerForKey:TKDefaultsKeyProfileTransportTransferTime]) forKey:@"tt"];
-  [paras setObject:@([sharedDefaults integerForKey:SVKDefaultsKeyProfileEnableFlights]) forKey:@"ef"];
-  [paras setObject:@([sharedDefaults integerForKey:SVKDefaultsKeyProfileEnableInterregional]) forKey:@"ir"];
   
+  // beta features
+  if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableFlights]) {
+    [paras setObject:@(YES) forKey:@"ef"];
+  }
+  if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableInterregional]) {
+    [paras setObject:@(YES) forKey:@"it"];
+  }
+
+  [paras setObject:@(! [sharedDefaults boolForKey:TKDefaultsKeyProfileEnableRealBookings]) forKey:@"bsb"];
   return paras;
 }
 
