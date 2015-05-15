@@ -61,7 +61,7 @@
     [paras setObject:@(YES) forKey:@"ef"];
   }
   if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableInterregional]) {
-    [paras setObject:@(YES) forKey:@"it"];
+    [paras setObject:@(YES) forKey:@"ir"];
   }
 
   [paras setObject:@(! [sharedDefaults boolForKey:TKDefaultsKeyProfileEnableRealBookings]) forKey:@"bsb"];
