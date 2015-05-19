@@ -121,7 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)assignVehicle:(nullable id<STKVehicular>)vehicle;
 
 /**
- @return the transport mode identifier that this segment is using (if any)
+ @return the transport mode identifier that this segment is using (if any). Can return `nil` for stationary segments such as "leave your house" or "wait between two buses" or "park your car"
  */
 - (nullable NSString *)modeIdentifier;
 - (nullable ModeInfo *)modeInfo;
