@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="TripKit" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D131" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="TripKit" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Alert" representedClassName="Alert" syncable="YES">
         <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="hashCode" attributeType="Integer 32" indexed="YES" syncable="YES"/>
@@ -131,6 +131,7 @@
         <attribute name="progressURLString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="saveURLString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shareURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="temporaryURLString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <attribute name="totalCalories" optional="YES" attributeType="Float" syncable="YES"/>
         <attribute name="totalCarbon" optional="YES" attributeType="Float" syncable="YES"/>
@@ -189,7 +190,7 @@
         <element name="Shape" positionX="601" positionY="348" width="128" height="163"/>
         <element name="StopLocation" positionX="-101" positionY="369" width="128" height="253"/>
         <element name="StopVisits" positionX="124" positionY="243" width="128" height="238"/>
-        <element name="Trip" positionX="315" positionY="-252" width="128" height="358"/>
+        <element name="Trip" positionX="315" positionY="-252" width="128" height="373"/>
         <element name="TripGroup" positionX="99" positionY="-186" width="128" height="163"/>
         <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="223"/>
         <element name="Vehicle" positionX="529" positionY="153" width="128" height="178"/>

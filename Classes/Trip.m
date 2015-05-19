@@ -33,7 +33,7 @@ typedef NSUInteger SGTripFlag;
 @dynamic flags;
 @dynamic mainSegmentHashCode;
 @dynamic minutes;
-@dynamic saveURLString, shareURLString;
+@dynamic saveURLString, shareURLString, temporaryURLString;
 @dynamic updateURLString, progressURLString;
 @dynamic totalCalories, totalCarbon, totalHassle, totalPrice, totalWalking, totalPriceUSD;
 @dynamic currencySymbol;

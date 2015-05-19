@@ -483,6 +483,7 @@
       trip.mainSegmentHashCode  = tripDict[@"mainSegmentHashCode"]  ?: trip.mainSegmentHashCode;
       trip.saveURLString        = tripDict[@"saveURL"]              ?: trip.saveURLString;
       trip.shareURLString       = tripDict[@"shareURL"]             ?: trip.shareURLString;
+      trip.temporaryURLString   = tripDict[@"temporaryURL"]         ?: trip.temporaryURLString;
       trip.updateURLString      = tripDict[@"updateURL"]            ?: trip.updateURLString;
       trip.progressURLString    = tripDict[@"progressURL"]          ?: trip.progressURLString;
       
