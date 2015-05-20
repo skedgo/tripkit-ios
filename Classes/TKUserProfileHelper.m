@@ -73,7 +73,7 @@
     return [NSSet setWithArray:minimizedArray];
   } else {
     // defaults
-    return [NSSet setWithObjects:SVKTransportModeIdentifierMotorbike, SVKTransportModeIdentifierWalking, nil];
+    return [NSSet setWithObjects:SVKTransportModeIdentifierMotorbike, SVKTransportModeIdentifierTaxi, SVKTransportModeIdentifierWalking, nil];
   }
 }
 
