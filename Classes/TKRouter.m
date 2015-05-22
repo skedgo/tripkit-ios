@@ -34,8 +34,6 @@
 }
 
 - (void)fetchTripsForRequest:(TripRequest *)request
-              minimizedModes:(NSSet *)minimized
-                 hiddenModes:(NSSet *)hidden
 										 success:(TKRouterSuccess)success
 										 failure:(TKRouterError)failure
 {
@@ -50,18 +48,8 @@
     return;
   }
 
-  // we'll adjust the visibility in the completion block
-  request.defaultVisibility = TripGroupVisibilityHidden;
-
   _currentRequest = request;
-  return [self fetchTripsForCurrentRequestSuccess:
-          ^(TripRequest *theRequest, NSSet *modeIdentifiers) {
-            [theRequest adjustVisibilityForMinimizedModeIdentifiers:minimized
-                                              hiddenModeIdentifiers:hidden];
-            if (success) {
-              success(theRequest, modeIdentifiers);
-            }
-          }
+  return [self fetchTripsForCurrentRequestSuccess:success
                                           failure:failure];
 }
 

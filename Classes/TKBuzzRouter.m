@@ -49,9 +49,10 @@
     self.workerRouters = [NSMutableDictionary dictionaryWithCapacity:groupedIdentifiers.count];
   }
   
-  NSSet *minimized = [TKUserProfileHelper minimizedModeIdentifiers];
-  NSSet *hidden = [TKUserProfileHelper hiddenModeIdentifiers];
+  // we'll adjust the visibility in the completion block
+  request.defaultVisibility = TripGroupVisibilityHidden;
   
+
   for (NSSet *modeIdentifiers in groupedIdentifiers) {
     TKBuzzRouter *worker = self.workerRouters[modeIdentifiers];
     if (worker) {
@@ -64,12 +65,17 @@
     
     __weak typeof(self) weakSelf = self;
     [worker fetchTripsForRequest:request
-                  minimizedModes:minimized
-                     hiddenModes:hidden
                          success:
      ^(TripRequest *completedRequest, NSSet *completedIdentifiers) {
        typeof(weakSelf) strongSelf = weakSelf;
        if (strongSelf) {
+         // We get thet minimized and hidden modes here in the completion block
+         // since they might have changed while waiting for results
+         NSSet *minimized = [TKUserProfileHelper minimizedModeIdentifiers];
+         NSSet *hidden = [TKUserProfileHelper hiddenModeIdentifiers];
+         [completedRequest adjustVisibilityForMinimizedModeIdentifiers:minimized
+                                                 hiddenModeIdentifiers:hidden];
+         
          [strongSelf handleMultiFetchResult:completedRequest
                              completedModes:completedIdentifiers
                                       error:nil

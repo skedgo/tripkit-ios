@@ -35,8 +35,6 @@ typedef void(^TKRouterError)(NSError *error, NSSet *modeIdentifiers);
  @param minimized 
  */
 - (void)fetchTripsForRequest:(TripRequest *)request
-              minimizedModes:(NSSet *)minimized
-                 hiddenModes:(NSSet *)hidden
 										 success:(TKRouterSuccess)success
 										 failure:(TKRouterError)failure;
 
