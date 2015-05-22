@@ -28,18 +28,6 @@
   }
 }
 
-+ (void)toggleMinimizedStateOfModeIdentifier:(NSString *)modeIdentifier
-{
-  
-  NSMutableSet *minimized = [NSMutableSet setWithSet:[self minimizedModeIdentifiers]];
-  if ([minimized containsObject:modeIdentifier]) {
-    [minimized removeObject:modeIdentifier];
-  } else {
-    [minimized addObject:modeIdentifier];
-  }
-  [[NSUserDefaults sharedDefaults] setObject:minimized forKey:TKDefaultsKeyProfileMinimizedModeIdentifiers];
-}
-
 + (NSArray *)orderedEnabledModeIdentifiersForAvailableModeIdentifiers:(NSArray *)available
 {
   NSMutableArray *orderedEnabled = [NSMutableArray arrayWithArray:available];
