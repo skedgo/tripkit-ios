@@ -276,7 +276,7 @@ typedef enum {
 }
 
 + (void)fillInStop:(StopLocation *)stop
-        completion:(void (^)(BOOL))completion
+        completion:(void (^)(BOOL success))completion
 {
   // now send it off to the server
   SVKServer *server = [SVKServer sharedInstance];
@@ -318,13 +318,15 @@ typedef enum {
           ZAssert([privateStop.stopCode isEqualToString:stop.stopCode], @"Public cell (%@) doesn't match ours (%@)", stop, privateStop);
           
           // set the stop properties
-          [self addStop:privateStop fromResponse:responseObject];
+          BOOL success = [self addStop:privateStop fromResponse:responseObject];
           
           // save it
-          NSError *privateError = nil;
-          BOOL saved = [temporaryContext save:&privateError];
-          ZAssert(saved, @"Could not save context: %@", privateError);
-          completion(saved);
+          if (success) {
+            NSError *privateError = nil;
+            success = [temporaryContext save:&privateError];
+            ZAssert(success, @"Could not save context: %@", privateError);
+          }
+          completion(success);
         }];
        
      }
@@ -517,7 +519,7 @@ typedef enum {
   }
 }
 
-+ (void)addStop:(StopLocation *)stop
++ (BOOL)addStop:(StopLocation *)stop
    fromResponse:(id)responseObject
 {
   NSManagedObjectContext *tripKitContext = stop.managedObjectContext;
@@ -535,12 +537,12 @@ typedef enum {
       // is this our stop?
       if ([stop.stopCode isEqualToString:code]) {
         [TKParserHelper updateStopLocation:stop
-                                   fromDictionary:stopDict];
+                            fromDictionary:stopDict];
         
       } else {
         // we always add all the stops, because the cell is new
         StopLocation *newStop = [TKParserHelper insertNewStopLocation:stopDict
-                                                            inTripKitContext:tripKitContext];
+                                                     inTripKitContext:tripKitContext];
         
         // make sure we have an ID
         NSError *error = nil;
@@ -548,7 +550,9 @@ typedef enum {
         ZAssert(! error, @"Error obtaining permanent ID for '%@': %@", newStop, error);
       }
     }
+    return stopList.count > 0;
   }
+  return NO;
 }
 
 @end

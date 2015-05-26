@@ -44,7 +44,7 @@ enum SGInfoProviderError {
 											completion:(SGServiceCompletionBlock)completion;
 
 + (void)fillInStop:(StopLocation *)stop
-        completion:(void (^)(BOOL))completion;
+        completion:(void (^)(BOOL success))completion;
 
 - (void)addContentToService:(Service *)service
                fromResponse:(id)responseObject;
