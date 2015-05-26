@@ -28,7 +28,9 @@
 - (void)cancelRequests
 {
   for (TKBuzzRouter *worker in self.workerRouters) {
-    [worker cancelRequests];
+      if ([worker respondsToSelector:@selector(cancelRequests)]) {
+          [worker cancelRequests];
+      }
   }
   self.workerRouters = nil;
   self.lastWorkerError = nil;
