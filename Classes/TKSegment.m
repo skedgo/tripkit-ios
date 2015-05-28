@@ -510,6 +510,11 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.template.shapes;
 }
 
+- (NSArray *)shortedShapes {
+    NSSortDescriptor *indexSort = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+    return [[self.template.shapes allObjects] sortedArrayUsingDescriptors:@[indexSort]];
+}
+
 - (BOOL)isWalking {
   return [self.template isWalking];
 }

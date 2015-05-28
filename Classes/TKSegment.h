@@ -82,6 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return A set of `Shape` instances
  */
 - (nullable NSSet *)shapes;
+- (nullable NSArray *)shortedShapes;
 
 - (nullable NSString *)notes;
 - (NSTimeInterval)duration:(BOOL)includingContinuation;
