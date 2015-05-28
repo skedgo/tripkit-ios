@@ -28,6 +28,23 @@
   }
 }
 
++ (BOOL)modeIdentifierIsMinimized:(NSString *)modeIdentifier
+{
+  return [[self minimizedModeIdentifiers] containsObject:modeIdentifier];
+}
+
++ (void)setModeIdentifier:(NSString *)modeIdentifier
+              toMinimized:(BOOL)minimized
+{
+  NSMutableSet *minimizedModes = [NSMutableSet setWithSet:[self minimizedModeIdentifiers]];
+  if (minimized) {
+    [minimizedModes addObject:modeIdentifier];
+  } else {
+    [minimizedModes removeObject:modeIdentifier];
+  }
+  [[NSUserDefaults sharedDefaults] setObject:[minimizedModes allObjects] forKey:TKDefaultsKeyProfileMinimizedModeIdentifiers];
+}
+
 + (NSArray *)orderedEnabledModeIdentifiersForAvailableModeIdentifiers:(NSArray *)available
 {
   NSMutableArray *orderedEnabled = [NSMutableArray arrayWithArray:available];

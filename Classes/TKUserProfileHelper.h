@@ -20,6 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
                                    minimized:(nullable NSSet *)minimized
                                       hidden:(nullable NSSet *)hidden;
 
++ (BOOL)modeIdentifierIsMinimized:(NSString *)modeIdentifier;
+
++ (void)setModeIdentifier:(NSString *)modeIdentifier
+              toMinimized:(BOOL)minimized;
+
 + (NSArray *)orderedEnabledModeIdentifiersForAvailableModeIdentifiers:(NSArray *)available;
 
 + (NSSet *)minimizedModeIdentifiers;
