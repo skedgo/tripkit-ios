@@ -326,6 +326,11 @@ NSString *const UninitializedString =  @"UninitializedString";
 	return self.service.code;
 }
 
+- (nullable NSString *)ticketWebsiteURLString
+{
+  return self.reference.ticketWebsiteURLString;
+}
+
 - (NSTimeInterval)duration:(BOOL)includingContinuation
 {
 	TKSegment *segment = includingContinuation ? [self finalSegmentIncludingContinuation] : self;

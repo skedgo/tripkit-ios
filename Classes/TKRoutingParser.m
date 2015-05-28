@@ -537,6 +537,8 @@
           service.number		= refDict[@"serviceNumber"]     ?: service.number;
           reference.service = service;
           
+          reference.ticketWebsiteURLString = refDict[@"ticketWebsiteURL"];
+          
           // set the trip status
           if (service.frequency.integerValue == 0) {
             trip.departureTimeIsFixed = YES;

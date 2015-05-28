@@ -126,37 +126,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)modeIdentifier;
 - (nullable ModeInfo *)modeInfo;
 
-/* Public transport related things
- */
-- (nullable NSString *)smsMessage;
-- (nullable NSString *)smsNumber;
-- (nullable NSString *)scheduledServiceCode;
-- (nullable NSString *)scheduledStartStopCode;
-- (nullable NSString *)scheduledEndStopCode;
-- (nullable NSString *)scheduledServiceNumber;
-- (nullable NSNumber *)frequency;
-- (nullable Service *)service;
 - (BOOL)hasAlerts;
 - (NSArray *)alerts;
 - (NSArray *)alertsWithLocation;
-
-- (BOOL)usesVisit:(StopVisits *)visit;
-- (BOOL)shouldShowVisit:(StopVisits *)visit;
-
-/**
- Checks if the provided visit matches this segment. This is not just for where the visit is used by this segment, but also for the parts before and after. This call deals with continuations and if the visit is part of a continuation, the visit is still considered to match this segment.
- 
- @param visit The visit to match to this segment.
- 
- @return If the provided visit is matching this segment.
- */
-- (BOOL)matchesVisit:(StopVisits *)visit;
-
-/**
- @param visit The stop visit that the user nominates to switch to.
- @return The best guess of what kind of waypoint it would be when the user decided to switch to `visit`. Anything before the start of this segment is getting on, anything after its end is getting off, in between we return `unknown` if it's in the middle third.
- */
-- (BHSegmentWaypoint)guessWaypointTypeForVisit:(StopVisits *)visit;
 
 - (TKSegment *)finalSegmentIncludingContinuation;
 
@@ -178,7 +150,43 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)canShowAlternativeLocation;
 
-// Booking
+///-----------------------------------------------------------------------------
+/// @name Public transport
+///-----------------------------------------------------------------------------
+
+- (nullable NSString *)smsMessage;
+- (nullable NSString *)smsNumber;
+- (nullable NSString *)scheduledServiceCode;
+- (nullable NSString *)scheduledStartStopCode;
+- (nullable NSString *)scheduledEndStopCode;
+- (nullable NSString *)scheduledServiceNumber;
+- (nullable NSNumber *)frequency;
+- (nullable Service *)service;
+- (nullable NSString *)ticketWebsiteURLString;
+
+- (BOOL)usesVisit:(StopVisits *)visit;
+- (BOOL)shouldShowVisit:(StopVisits *)visit;
+
+/**
+ Checks if the provided visit matches this segment. This is not just for where the visit is used by this segment, but also for the parts before and after. This call deals with continuations and if the visit is part of a continuation, the visit is still considered to match this segment.
+ 
+ @param visit The visit to match to this segment.
+ 
+ @return If the provided visit is matching this segment.
+ */
+- (BOOL)matchesVisit:(StopVisits *)visit;
+
+/**
+ @param visit The stop visit that the user nominates to switch to.
+ @return The best guess of what kind of waypoint it would be when the user decided to switch to `visit`. Anything before the start of this segment is getting on, anything after its end is getting off, in between we return `unknown` if it's in the middle third.
+ */
+- (BHSegmentWaypoint)guessWaypointTypeForVisit:(StopVisits *)visit;
+
+
+///-----------------------------------------------------------------------------
+/// @name In-app and external bookings
+///-----------------------------------------------------------------------------
+
 - (BOOL)bookingIsAvailable;
 - (nullable NSString *)bookingTitle;
 - (nullable NSURL *)bookingInternalURL;
