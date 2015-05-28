@@ -95,14 +95,19 @@ typedef NSUInteger SGSegmentFlag;
   [self setData:vehicleUUID forKey:@"vehicleUUID"];
 }
 
+- (NSDictionary *)bookingData
+{
+  return [self dataForKey:@"booking"];
+}
+
 - (void)setBookingData:(NSDictionary *)data
 {
   [self setData:data forKey:@"booking"];
 }
 
-- (NSDictionary *)bookingData
+- (NSDictionary *)sharedVehicleData
 {
-  return [self dataForKey:@"booking"];
+  return [self dataForKey:@"sharedVehicle"];
 }
 
 - (void)setSharedVehicleData:(NSDictionary *)data
@@ -110,9 +115,14 @@ typedef NSUInteger SGSegmentFlag;
   [self setData:data forKey:@"sharedVehicle"];
 }
 
-- (NSDictionary *)sharedVehicleData
+- (NSString *)ticketWebsiteURLString
 {
-  return [self dataForKey:@"sharedVehicle"];
+  return [self dataForKey:@"ticketWebsiteURL"];
+}
+
+- (void)setTicketWebsiteURLString:(NSString *)ticketWebsiteURLString
+{
+  [self setData:ticketWebsiteURLString forKey:@"ticketWebsiteURL"];
 }
 
 - (BOOL)timesAreRealTime

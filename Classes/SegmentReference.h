@@ -33,6 +33,7 @@
 @property (nonatomic, copy) NSString *vehicleUUID;
 @property (nonatomic, copy) NSDictionary *bookingData;
 @property (nonatomic, copy) NSDictionary *sharedVehicleData;
+@property (nonatomic, copy) NSString *ticketWebsiteURLString;
 
 @property (nonatomic, assign) BOOL timesAreRealTime;
 
