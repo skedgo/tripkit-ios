@@ -58,6 +58,10 @@ NS_ASSUME_NONNULL_BEGIN
                         ofTimeType:(SGTimeType)timeType
                 intoTripKitContext:(NSManagedObjectContext *)context;
 
++ (NSString *)timeStringForTime:(nullable NSDate *)time
+                     ofTimeType:(SGTimeType)timeType
+                       timeZone:(NSTimeZone *)timeZone;
+
 - (TripRequest *)insertedEmptyCopy;
 
 - (void)remove;
@@ -85,6 +89,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSTimeZone *)arrivalTimeZone;
 
 - (NSString *)timeSorterTitle;
+
+- (NSString *)timeString;
 
 /* Set the time and type for this request.
  */

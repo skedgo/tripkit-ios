@@ -85,6 +85,52 @@
   return newTrip;
 }
 
++ (NSString *)timeStringForTime:(nullable NSDate *)time
+                     ofTimeType:(SGTimeType)timeType
+                       timeZone:(NSTimeZone *)timeZone
+{
+  NSString *title = nil;
+  switch (timeType) {
+    case SGTimeTypeLeaveASAP: {
+      title = NSLocalizedStringFromTable(@"Leave now", @"TripKit", nil);
+      break;
+    }
+      
+    case SGTimeTypeLeaveAfter:
+    case SGTimeTypeArriveBefore: {
+      NSString *prefix = timeType == SGTimeTypeLeaveAfter ? NSLocalizedStringFromTable(@"Leave ", @"TripKit", @"Leave field title") : NSLocalizedStringFromTable(@"Arrive ", @"TripKit", @"Arrive field title");
+      
+      NSMutableString *titleBuilder = [NSMutableString stringWithString:prefix];
+      
+      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+      dateFormatter.timeStyle = NSDateFormatterShortStyle;
+      dateFormatter.dateStyle = NSDateFormatterShortStyle;
+      dateFormatter.locale = [SGStyleManager applicationLocale];
+      dateFormatter.doesRelativeDateFormatting = YES;
+      
+      dateFormatter.timeZone = timeZone;
+      NSString *timeString = [dateFormatter stringFromDate:time];
+      if (timeString) {
+        timeString = [timeString stringByReplacingOccurrencesOfString:@" pm" withString:@"pm"];
+        timeString = [timeString stringByReplacingOccurrencesOfString:@" am" withString:@"am"];
+        timeString = [timeString lowercaseStringWithLocale:[NSLocale systemLocale]];
+        [titleBuilder appendString:timeString];
+      }
+      
+      if (timeZone && ![timeZone isEqualToTimeZone:[NSTimeZone defaultTimeZone]]) {
+        [titleBuilder appendFormat:@" %@", timeZone.abbreviation];
+      }
+      title = titleBuilder;
+      break;
+    }
+      
+    default:
+      break;
+  }
+  
+  return title;
+}
+
 - (TripRequest *)insertedEmptyCopy
 {
   if (! self.managedObjectContext) {
@@ -133,6 +179,13 @@
 - (NSTimeZone *)arrivalTimeZone
 {
   return [[SVKRegionManager sharedInstance] timeZoneForCoordinate:[self.toLocation coordinate]];
+}
+
+- (NSString *)timeString
+{
+  return [TripRequest timeStringForTime:self.time
+                             ofTimeType:self.type
+                               timeZone:[self departureTimeZone]];
 }
 
 - (SVKRegion *)localRegion
