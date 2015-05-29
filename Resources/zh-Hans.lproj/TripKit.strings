@@ -32,7 +32,8 @@
  Time arrival */
 "ArrivalTime" = "在%@到达";
 
-/* Single line instruction to arrive */
+/* Prefix for selected 'arrive by' time
+   Single line instruction to arrive */
 "Arrive" = "到达";
 
 /* Departure time sorter title */
@@ -47,8 +48,12 @@
 /* Walking time */
 "Duration" = " %@";
 
-/* Single line instruction to leave */
+/* Prefix for selected 'leave after' time
+   Single line instruction to leave */
 "Leave" = "出发";
+
+/* No comment provided by engineer. */
+"Leave now" = "现在出发";
 
 /* The place of departure */
 "LeaveLocation" = "离开%@";

@@ -98,9 +98,10 @@
       
     case SGTimeTypeLeaveAfter:
     case SGTimeTypeArriveBefore: {
-      NSString *prefix = timeType == SGTimeTypeLeaveAfter ? NSLocalizedStringFromTable(@"Leave ", @"TripKit", @"Leave field title") : NSLocalizedStringFromTable(@"Arrive ", @"TripKit", @"Arrive field title");
+      NSString *prefix = timeType == SGTimeTypeLeaveAfter ? NSLocalizedStringFromTable(@"Leave", @"TripKit", @"Prefix for selected 'leave after' time") : NSLocalizedStringFromTable(@"Arrive", @"TripKit", @"Prefix for selected 'arrive by' time");
       
       NSMutableString *titleBuilder = [NSMutableString stringWithString:prefix];
+      [titleBuilder appendString:@" "];
       
       NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
       dateFormatter.timeStyle = NSDateFormatterShortStyle;

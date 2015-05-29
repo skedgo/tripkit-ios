@@ -32,8 +32,9 @@
    Time arrival */
 "ArrivalTime" = "Arriveer om %@";
 
-/* Single line instruction to arrive */
-"Arrive" = "Arriveer";
+/* Prefix for selected 'arrive by' time
+   Single line instruction to arrive */
+"Arrive" = "Aankomst";
 
 /* Departure time sorter title */
 "Departure" = "Vertrek";
@@ -47,8 +48,12 @@
 /* Walking time */
 "Duration" = " voor %@";
 
-/* Single line instruction to leave */
+/* Prefix for selected 'leave after' time
+   Single line instruction to leave */
 "Leave" = "Vertrek";
+
+/* No comment provided by engineer. */
+"Leave now" = "Vertrek nu";
 
 /* The place of departure */
 "LeaveLocation" = "Verlaat %@";

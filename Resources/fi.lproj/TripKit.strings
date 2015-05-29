@@ -32,8 +32,9 @@
    Time arrival */
 "ArrivalTime" = "Ssavu klo %@";
 
-/* Single line instruction to arrive */
-"Arrive" = "Saavu";
+/* Prefix for selected 'arrive by' time
+   Single line instruction to arrive */
+"Arrive" = "Saapu";
 
 /* Departure time sorter title */
 "Departure" = "Lähtö";
@@ -47,8 +48,12 @@
 /* Walking time */
 "Duration" = " %@";
 
-/* Single line instruction to leave */
+/* Prefix for selected 'leave after' time
+   Single line instruction to leave */
 "Leave" = "Lähde";
+
+/* No comment provided by engineer. */
+"Leave now" = “Lähde nyt";
 
 /* The place of departure */
 "LeaveLocation" = "Lähde %@:stä";

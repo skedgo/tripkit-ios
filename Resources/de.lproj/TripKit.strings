@@ -32,8 +32,9 @@
    Time arrival */
 "ArrivalTime" = "Ankunft um %@";
 
-/* Single line instruction to arrive */
-"Arrive" = "Ankung";
+/* Prefix for selected 'arrive by' time
+   Single line instruction to arrive */
+"Arrive" = "Ankunft";
 
 /* Departure time sorter title */
 "Departure" = "Abfahrt";
@@ -47,8 +48,12 @@
 /* Walking time */
 "Duration" = " für %@";
 
-/* Single line instruction to leave */
+/* Prefix for selected 'leave after' time
+   Single line instruction to leave */
 "Leave" = "Abfahrt";
+
+/* No comment provided by engineer. */
+"Leave now" = "Jetzt";
 
 /* The place of departure */
 "LeaveLocation" = "Abfahrt von %@";
