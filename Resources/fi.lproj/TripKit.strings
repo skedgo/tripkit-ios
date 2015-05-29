@@ -53,7 +53,7 @@
 "Leave" = "Lähde";
 
 /* No comment provided by engineer. */
-"Leave now" = “Lähde nyt";
+"Leave now" = "Lähde nyt";
 
 /* The place of departure */
 "LeaveLocation" = "Lähde %@:stä";
