@@ -188,7 +188,7 @@
                             atTime:(NSDate *)time
                        forLocation:(nullable CLLocation *)location
 {
-#warning unused(segment, time, location)
+#pragma unused(segment, time, location)
 #warning TODO: implement scoring of generic STKTripSegment objects
   return 0;
 }
