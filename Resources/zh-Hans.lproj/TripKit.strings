@@ -1,14 +1,14 @@
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
-"%1$@ early" = "提早 %1$@";
+"%1$@ early" = "提前 %1$@";
 
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
-"%1$@ early (%2$@ service)" = "提早 %1$@ (%2$@ 路公交)";
+"%1$@ early (%2$@ service)" = "提前 %1$@ (%2$@ 服务)";
 
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min' */
-"%1$@ late" = "延迟 %1$@ late";
+"%1$@ late" = "延迟 %1$@";
 
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
-"%1$@ late (%2$@ service)" = "延迟 %1$@ late (%2$@ 路公交)";
+"%1$@ late (%2$@ service)" = "延迟 %1$@ (%2$@ 服务)";
 
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ 路况良好";
@@ -71,7 +71,7 @@
 "MessageArrivalTime" = "我将于%2$@到达%1$@.";
 
 /* Indicator to show when a service is on time according to real-time data. */
-"On time" = "On time"; // TODO
+"On time" = "准点";
 
 /* Arrival Location */
 "PrimaryLocationEnd" = "目的地: %@";
@@ -84,6 +84,12 @@
 
 /* No comment provided by engineer. */
 "Real-time" = "即时";
+
+/* Indicator for a ride share vehicle such as Uber, Lyft */
+"Ride share" = "专车服务"; 
+
+/* A shuttle which are like big taxis with usually defined operating hours and limited service areas, e.g., an airport shuttle bus that takes you from the airport to your hotel. */
+"Shuttle" = "接驳车";
 
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld站";
