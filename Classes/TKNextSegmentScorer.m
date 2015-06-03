@@ -89,7 +89,7 @@
                                         forLocation:location];
     
     [SGKLog debug:@"NextSegmentScorer" block:^{
-      return [NSString stringWithFormat:@"%@, S: %ld", tripKitSegment.title, score];
+      return [NSString stringWithFormat:@"%@, S: %ld", tripKitSegment.title, (unsigned long)score];
     }];
     return score;
   } else {
