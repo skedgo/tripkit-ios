@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class TKDLSTable, SVKRegion, Service, StopLocation;
 
 typedef void (^SGServiceCompletionBlock)(Service *service, BOOL success);
@@ -30,23 +32,25 @@ enum SGInfoProviderError {
 												 fromDate:(NSDate *)date
 														limit:(NSInteger)limit
 											 completion:(SGDeparturesStopSuccessBlock)completion
-													failure:(void(^)(NSError *error))failure;
+													failure:(void(^ __nullable)(NSError * __nullable error))failure;
 
 - (void)downloadDeparturesForDLSTable:(TKDLSTable *)table
                              fromDate:(NSDate *)date
                                 limit:(NSInteger)limit
                            completion:(SGDeparturesDLSSuccessBlock)completion
-                              failure:(void(^)(NSError *error))failure;
+                              failure:(void(^ __nullable)(NSError * __nullable error))failure;
 
 - (void)downloadContentOfService:(Service *)service
 							forEmbarkationDate:(NSDate *)date
-												inRegion:(SVKRegion *)regionOrNil
+												inRegion:(nullable SVKRegion *)regionOrNil
 											completion:(SGServiceCompletionBlock)completion;
 
 + (void)fillInStop:(StopLocation *)stop
-        completion:(void (^)(BOOL success))completion;
+        completion:(void (^)(NSError * __nullable error))completion;
 
 - (void)addContentToService:(Service *)service
-               fromResponse:(id)responseObject;
+               fromResponse:(NSDictionary *)responseDict;
 
 @end
+
+NS_ASSUME_NONNULL_END

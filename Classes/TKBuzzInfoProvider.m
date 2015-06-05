@@ -24,6 +24,10 @@ typedef enum {
 											 completion:(SGDeparturesStopSuccessBlock)completion
 													failure:(void(^)(NSError *error))failure
 {
+  NSParameterAssert(stop);
+  NSParameterAssert(date);
+  NSParameterAssert(completion);
+  
 	// construct the parameters
   if (! stop.stopCode) {
     // this can happen if the stop got deleted while we were looking at it.
@@ -115,6 +119,9 @@ typedef enum {
                                     fromDate:(NSDate *)date
                                        limit:(NSInteger)limit
 {
+  NSParameterAssert(table);
+  NSParameterAssert(date);
+  
   return @{
            @"region"             : table.region.name,
            @"timeStamp"          : @((NSInteger) [date timeIntervalSince1970]),
@@ -131,6 +138,10 @@ typedef enum {
                            completion:(SGDeparturesDLSSuccessBlock)completion
                               failure:(void(^)(NSError *error))failure
 {
+  NSParameterAssert(table);
+  NSParameterAssert(date);
+  NSParameterAssert(completion);
+  
 	SVKServer *server = [SVKServer sharedInstance];
   [server requireRegions:^(NSError *error) {
     if (error) {
@@ -167,7 +178,7 @@ typedef enum {
          ZAssert([table.tripKitContext save:&saveError], @"Could not save: %@", saveError);
          if (saveError) {
            failure(saveError);
-         } else if (completion) {
+         } else {
            completion(identifiers);
          }
        }];
@@ -187,7 +198,12 @@ typedef enum {
 												inRegion:(SVKRegion *)regionOrNil
 											completion:(SGServiceCompletionBlock)completion
 {
-  ZAssert(service && service.managedObjectContext, @"Service with a context needed.");
+  NSParameterAssert(service);
+  NSParameterAssert(date);
+  NSParameterAssert(completion);
+  
+  ZAssert(service.managedObjectContext, @"Service with a context needed.");
+  
   if (service.isRequestingServiceData) {
     return; // don't send multiple requests
   }
@@ -198,16 +214,13 @@ typedef enum {
    ^(NSError *error) {
      if (error) {
        DLog(@"Error fetching regions: %@", error);
-       if (completion) {
-         completion(service, NO);
-       }
+       completion(service, NO);
        return;
      }
      
      SVKRegion *region = regionOrNil ?: service.region;
      if (! region) {
-       if (completion)
-         completion(service, NO);
+       completion(service, NO);
        return;
      }
      
@@ -275,23 +288,35 @@ typedef enum {
    }];
 }
 
-+ (void)fillInStop:(StopLocation *)stop
-        completion:(void (^)(BOOL success))completion
++ (NSError *)errorForUserForBrokenStop
 {
+  NSDictionary *info = @{
+                         NSLocalizedDescriptionKey: NSLocalizedString(@"Could not find transit stop.", "Error title when server could not find a given transit stop."),
+                         NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Search for this stop again or try again later..", "Error recovery suggestion for when when server could not find a given transit stop."),
+                         };
+  return [NSError errorWithDomain:@"com.buzzhives.TripKit" code:831571 userInfo:info];
+}
+
++ (void)fillInStop:(StopLocation *)stop
+        completion:(void (^)(NSError *))completion
+{
+  NSParameterAssert(stop);
+  NSParameterAssert(completion);
+  
   // now send it off to the server
   SVKServer *server = [SVKServer sharedInstance];
   
   [server requireRegions:^(NSError *error) {
     if (error) {
       DLog(@"Error filling in stop: %@", error.localizedDescription);
-      completion(NO);
+      completion(error);
       return;
     }
     
     SVKRegion *region = stop.region;
     if (! region) {
-      // could be outdated region name
-      completion(NO);
+      // We have regions, but this stop doesn't match any known region
+      completion([TKBuzzInfoProvider errorForUserForBrokenStop]);
       return;
     }
     
@@ -327,7 +352,11 @@ typedef enum {
             success = [temporaryContext save:&privateError];
             ZAssert(success, @"Could not save context: %@", privateError);
           }
-          completion(success);
+          if (success) {
+            completion(nil);
+          } else {
+            completion([TKBuzzInfoProvider errorForUserForBrokenStop]);
+          }
         }];
        
      }
@@ -335,18 +364,21 @@ typedef enum {
      ^(NSURLSessionDataTask *task, NSError *anotherError) {
 #pragma unused(task, anotherError)
        DLog(@"Error response: %@", task.response);
+       completion(anotherError);
      }];
   }];
 }
 
 - (void)addContentToService:(Service *)service
-               fromResponse:(id)responseObject
+               fromResponse:(NSDictionary *)responseDict
 {
-  ZAssert(service, @"Method requires a service object");
+  NSParameterAssert(service);
+  NSParameterAssert(responseDict);
+  
   NSManagedObjectContext *context = service.managedObjectContext;
   
   // real time status
-  NSString *realTimeStatus = responseObject[@"realTimeStatus"];
+  NSString *realTimeStatus = responseDict[@"realTimeStatus"];
   if (realTimeStatus) {
     [TKParserHelper adjustService:service
                  forRealTimeStatusString:realTimeStatus];
@@ -354,18 +386,18 @@ typedef enum {
   
   // real time vehicles
   [TKParserHelper updateVehiclesForService:service
-                                   primaryVehicle:responseObject[@"realtimeVehicle"]
-                              alternativeVehicles:responseObject[@"realtimeVehicleAlternatives"]];
+                                   primaryVehicle:responseDict[@"realtimeVehicle"]
+                              alternativeVehicles:responseDict[@"realtimeVehicleAlternatives"]];
   
   // alert
-  [TKParserHelper updateOrAddAlerts:responseObject[@"alerts"]
+  [TKParserHelper updateOrAddAlerts:responseDict[@"alerts"]
                           inTripKitContext:context];
   
   // mode info
-  ModeInfo *modeInfo = [ModeInfo modeInfoForDictionary:responseObject[@"modeInfo"]];
+  ModeInfo *modeInfo = [ModeInfo modeInfoForDictionary:responseDict[@"modeInfo"]];
   
   // parse the shapes
-  NSArray *shapesArray = responseObject[@"shapes"];
+  NSArray *shapesArray = responseDict[@"shapes"];
   [TKParserHelper insertNewShapes:shapesArray
                               forService:service
                             withModeInfo:modeInfo];
