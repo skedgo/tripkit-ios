@@ -11,7 +11,7 @@
 "%1$@ late (%2$@ service)" = "%1$@ te laat (%2$@ dienst)";
 
 /* Duration without traffic */
-"%@ w/o traffic" = "%@ w/o traffic"; // TODO
+"%@ w/o traffic" = "%@ zonder verkeer";
 
 /* No comment provided by engineer. */
 "1 stop" = "1 station";
@@ -65,13 +65,13 @@
 "LeaveTime" = "Vetrek om %@";
 
 /* No comment provided by engineer. */
-"Live traffic" = "Live traffic"; // TODO
+"Live traffic" = "Live verkeer";
 
 /* ArrivalTime */
 "MessageArrivalTime" = "Ik kom aan op %@ om %@.";
 
 /* Indicator to show when a service is on time according to real-time data. */
-"On time" = "On time"; // TODO
+"On time" = "Op tijd";
 
 /* Arrival Location */
 "PrimaryLocationEnd" = "Naar %@";
@@ -92,7 +92,7 @@
 "TimeFromToShortFormat" = "%@ tot %@";
 
 /* No comment provided by engineer. */
-"Trip" = "Trip";
+"Trip" = "Reis";
 
 /* Vehicle 'x' updated */
 "VehicleCalledUpdated" = "Voertuig %@ bijgewerkt %@ geleden";
