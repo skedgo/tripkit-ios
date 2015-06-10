@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) TKSegment *next;
 
 @property (nonatomic, strong, nullable) SegmentReference *reference;
-@property (nonatomic, weak, nonnull) Trip *trip;
+@property (nonatomic, weak, null_resettable) Trip *trip; // practically nonnull, but can be nulled due to weak reference
 
 - (id)initWithReference:(SegmentReference *)aReference
                 forTrip:(Trip *)aTrip;
