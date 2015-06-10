@@ -188,11 +188,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name In-app and external bookings
 ///-----------------------------------------------------------------------------
 
+@property (nonatomic, assign) BOOL isBookingCompleted;
+
 - (BOOL)bookingIsAvailable;
 - (nullable NSString *)bookingTitle;
 - (nullable NSURL *)bookingInternalURL;
 - (nullable NSArray *)bookingExternalActions; // [NSString]
-
 
 ///-----------------------------------------------------------------------------
 /// @name Watch app temporary storage

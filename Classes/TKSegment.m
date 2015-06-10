@@ -643,7 +643,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 - (NSString *)bookingTitle
 {
   NSDictionary *bookingData = self.reference.bookingData;
-  return bookingData[@"title"];
+  return _isBookingCompleted ? NSLocalizedStringFromTable(@"View booking", @"Shared", @"Action to view a booking") : bookingData[@"title"];
 }
 
 - (NSURL *)bookingInternalURL
