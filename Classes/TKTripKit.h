@@ -47,6 +47,7 @@
 
 // Classification
 #import "TKTripClassifier.h"
+#import "TKPriceTimeTripClassifier.h"
 
 // Routing
 #import "TKSettings.h"

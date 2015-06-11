@@ -8,15 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+@class TripGroup;
+
 /**
  A trip classifier is used to classify TripGroup instances within the same TripRequest.
  */
 @protocol TKTripClassifier <NSObject>
 
 /**
- @param The set of trip groups to classify.
- @return A dictionary of TripGroup to id<NSCoding> where the latter is your classification.
+ Called before starting a classifiction of multiple trip groups.
+ @param The set of trip groups that will be classified.
  */
-- (NSDictionary *)bulkClassifyTripGroups:(NSSet *)tripGroups;
+- (void)prepareForClassifictionOfTripGroups:(nonnull NSSet *)tripGroups;
+
+/**
+ @return The classifiction of that particular trip group.
+ */
+- (nullable id<NSCoding>)classificationOfTripGroup:(nonnull TripGroup *)tripGroup;
 
 @end

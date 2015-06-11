@@ -15,10 +15,9 @@
 - (void)updateTripGroupClassificationsUsingClassifier:(nonnull id<TKTripClassifier>)classifier
 {
   NSSet *tripGroups = [self tripGroups];
-  NSDictionary *classifications = [classifier bulkClassifyTripGroups:tripGroups];
+  [classifier prepareForClassifictionOfTripGroups:tripGroups];
   for (TripGroup *group in tripGroups) {
-    id rawClassification = classifications[group];
-    group.classification = [rawClassification conformsToProtocol:@protocol(NSCoding)] ? rawClassification : nil;
+    group.classification = [classifier classificationOfTripGroup:group];
   }
 }
 
