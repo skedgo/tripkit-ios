@@ -18,7 +18,7 @@
   NSDictionary *classifications = [classifier bulkClassifyTripGroups:tripGroups];
   for (TripGroup *group in tripGroups) {
     id rawClassification = classifications[group];
-//    group.classification = [rawClassification conformsToProtocol:@protocol(NSCoding)] ? rawClassification : nil;
+    group.classification = [rawClassification conformsToProtocol:@protocol(NSCoding)] ? rawClassification : nil;
   }
 }
 
