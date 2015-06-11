@@ -32,7 +32,7 @@
 #import "Vehicle.h"
 #import "Alert.h"
 
-// Helper model classes
+// Non-core data model classes
 #import "TKColoredRoute.h"
 #import "TKDLSTable.h"
 #import "TKSegment.h"
@@ -40,7 +40,7 @@
 #import "SGStopCoordinate.h"
 #import "TKTripFactory.h"
 
-// Other helpers
+// Helpers
 #import "TKNextSegmentScorer.h"
 #import "TKShareHelper.h"
 #import "TKUserProfileHelper.h"

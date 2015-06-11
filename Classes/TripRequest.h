@@ -16,13 +16,6 @@
 
 @class SVKRegion, SGNamedCoordinate, Trip;
 
-enum {
-  SGTripRequestErrorNoOrigin        = 30058301,
-  SGTripRequestErrorNoDestination   = 30058302,
-  SGTripRequestErrorLocationsEqual  = 30058303,
-  SGTripRequestErrorNoTimeSet       = 30058304,
-};
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TripRequest : NSManagedObject <SGURLShareable>
@@ -98,6 +91,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)hasTrips;
 
+/**
+ @return If any trip has pricing information. Also returns `YES` if there are no trips.
+ */
 - (BOOL)priceInformationAvailable;
 
 - (NSArray *)sortDescriptorsAccordingToSelectedOrder;
