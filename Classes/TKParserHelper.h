@@ -12,8 +12,6 @@
 
 @interface TKParserHelper : STKParserHelper
 
-+ (NSMutableDictionary *)defaultDictionary;
-
 #pragma mark - Segments
 
 + (STKTripSegmentVisibility)segmentVisibilityType:(NSString *)string;

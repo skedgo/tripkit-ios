@@ -61,7 +61,7 @@ typedef enum {
                             @"timeStamp"			  : @((NSInteger) [date timeIntervalSince1970]),
                             @"embarkationStops" : stops,
                             @"limit" 						: @(limit),
-                            @"config"           : [TKParserHelper defaultDictionary],
+                            @"config"           : [TKSettings defaultDictionary],
                             };
     
     
@@ -128,7 +128,7 @@ typedef enum {
            @"embarkationStops"   : @[table.startStopCode],
            @"disembarkationStops": @[table.endStopCode],
            @"limit"              : @(limit),
-           @"config"             : [TKParserHelper defaultDictionary],
+           @"config"             : [TKSettings defaultDictionary],
            };
 }
 

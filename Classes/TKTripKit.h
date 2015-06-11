@@ -46,6 +46,7 @@
 #import "TKUserProfileHelper.h"
 
 // Routing
+#import "TKSettings.h"
 #import "TKParserHelper.h"
 #import "TKRoutingParser.h"
 #import "TKRouter.h"
