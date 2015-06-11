@@ -45,6 +45,10 @@
 #import "TKShareHelper.h"
 #import "TKUserProfileHelper.h"
 
+// Classification
+#import "TKTripClassifier.h"
+#import "TKPriceTimeTripClassifier.h"
+
 // Routing
 #import "TKSettings.h"
 #import "TKParserHelper.h"

@@ -24,6 +24,7 @@ typedef enum {
 
 @implementation TripGroup
 
+@dynamic classification;
 @dynamic frequency;
 @dynamic flags;
 @dynamic visibilityRaw;
