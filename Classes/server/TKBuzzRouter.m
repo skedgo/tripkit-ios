@@ -10,6 +10,8 @@
 
 #import "TKTripKit.h"
 
+#import "TripRequest+Classify.h"
+
 #define kBHRoutingTimeOutSecond           30
 
 @interface TKBuzzRouter ()
@@ -39,7 +41,8 @@
 }
 
 - (void)multiFetchTripsForRequest:(TripRequest *)request
-                       completion:(void (^)(TripRequest *, NSError *))completion
+                       classifier:(id<TKTripClassifier>)classifier
+                       completion:(void (^)(TripRequest * __nullable, NSError * __nullable))completion
 {
   [self cancelRequests];
   self.isActive = YES;
@@ -70,6 +73,11 @@
      ^(TripRequest *completedRequest, NSSet *completedIdentifiers) {
        typeof(weakSelf) strongSelf = weakSelf;
        if (strongSelf) {
+         // Updating classifications before making results visible
+         if (classifier) {
+           [completedRequest updateTripGroupClassificationsUsingClassifier:classifier];
+         }
+         
          // We get thet minimized and hidden modes here in the completion block
          // since they might have changed while waiting for results
          NSSet *minimized = [TKUserProfileHelper minimizedModeIdentifiers];
