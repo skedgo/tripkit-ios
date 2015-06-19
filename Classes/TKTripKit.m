@@ -13,6 +13,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 @interface TKTripKit ()
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) NSDate *resetDateFromInitialization;
 
 @end
 
@@ -35,12 +36,22 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   return self;
 }
 
+- (void)reload
+{
+  _tripKitContext = nil;
+  _persistentStoreCoordinator = nil;
+  
+  [self tripKitContext];
+}
+
 - (void)reset
 {
   _tripKitContext = nil;
   _persistentStoreCoordinator = nil;
 
   [self removeLocalFiles];
+  
+  [self tripKitContext];
 }
 
 #pragma mark - Private helpers
@@ -67,7 +78,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 {
   NSURL *directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:[SGKConfig appGroupName]];
   if (nil == directory) {
-    DLog(@"Can't load container directory for app group!");
+    [SGKLog warn:@"TKTripKit" format:@"Can't load container directory for app group (%@)!", [SGKConfig appGroupName]];
     directory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
   }
   return directory;
@@ -94,6 +105,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   // remember last reset
   NSString *currentReset = [self resetStringForToday];
   [[NSUserDefaults sharedDefaults] setObject:currentReset forKey:@"TripKitLastReset"];
+  [[NSUserDefaults sharedDefaults] setObject:[NSDate date] forKey:@"TripKitLastResetDate"];
   
   [[NSNotificationCenter defaultCenter] postNotificationName:TKTripKitDidResetNotification object:self];
 }
@@ -157,6 +169,8 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
     DLog(@"Clearing cache...");
     [self removeLocalFiles];
   }
+  NSDate *lastResetDate = [[NSUserDefaults sharedDefaults] objectForKey:@"TripKitLastResetDate"];
+  self.resetDateFromInitialization = lastResetDate ?: [NSDate date];
   
   _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
   
