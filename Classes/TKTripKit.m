@@ -13,6 +13,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 @interface TKTripKit ()
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) NSDate *resetDateFromInitialization;
 
 @end
 
@@ -35,12 +36,22 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   return self;
 }
 
+- (void)reload
+{
+  _tripKitContext = nil;
+  _persistentStoreCoordinator = nil;
+  
+  [self tripKitContext];
+}
+
 - (void)reset
 {
   _tripKitContext = nil;
   _persistentStoreCoordinator = nil;
 
   [self removeLocalFiles];
+  
+  [self tripKitContext];
 }
 
 #pragma mark - Private helpers
@@ -54,8 +65,8 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 - (BOOL)didResetToday
 {
   NSString *currentReset = [self resetStringForToday];
-  NSString *lastReset = [[NSUserDefaults sharedDefaults] stringForKey:@"TripKitLastReset"];
-  return [lastReset isEqualToString:currentReset];
+  NSString *lastReset = [[NSUserDefaults standardUserDefaults] stringForKey:@"TripKitLastReset"];
+  return lastReset == nil || [lastReset isEqualToString:currentReset];
 }
 
 - (NSString *)resetStringForToday
@@ -67,7 +78,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 {
   NSURL *directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:[SGKConfig appGroupName]];
   if (nil == directory) {
-    DLog(@"Can't load container directory for app group!");
+    [SGKLog warn:@"TKTripKit" format:@"Can't load container directory for app group (%@)!", [SGKConfig appGroupName]];
     directory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
   }
   return directory;
@@ -93,7 +104,8 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   
   // remember last reset
   NSString *currentReset = [self resetStringForToday];
-  [[NSUserDefaults sharedDefaults] setObject:currentReset forKey:@"TripKitLastReset"];
+  [[NSUserDefaults standardUserDefaults] setObject:currentReset forKey:@"TripKitLastReset"];
+  [[NSUserDefaults sharedDefaults] setObject:[NSDate date] forKey:@"TripKitLastResetDate"];
   
   [[NSNotificationCenter defaultCenter] postNotificationName:TKTripKitDidResetNotification object:self];
 }
@@ -152,11 +164,13 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
     return _persistentStoreCoordinator;
   }
   
-  DLog(@"Setting up TripKit store...");
+  [SGKLog debug:@"TKTripKit" text:@"Setting up TripKit store..."];
   if (! [self didResetToday]) {
-    DLog(@"Clearing cache...");
+    [SGKLog info:@"TKTripKit" text:@"Clearing cache as we didn't reset today yet."];
     [self removeLocalFiles];
   }
+  NSDate *lastResetDate = [[NSUserDefaults sharedDefaults] objectForKey:@"TripKitLastResetDate"];
+  self.resetDateFromInitialization = lastResetDate ?: [NSDate date];
   
   _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
   
@@ -168,18 +182,18 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   ZAssert(storeURL, @"Can't initialise without a storeURL!");
   if (! [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
     // if it failed, delete the file
-    DLog(@"Deleting previous persistent store as lightweight migration failed.");
+    [SGKLog warn:@"TKTripKit" text:@"Deleting previous persistent store as lightweight migration failed."];
     [self removeLocalFiles];
     
     // let's try again. this time there's no file. so it has to succeed
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
       // otherwise, kill it
       ZAssert(false, @"That doesn't make sense. There's no file!");
-      DLog(@"Unresolved migration error %@, %@", error, [error userInfo]);
+      [SGKLog error:@"TKTripKit" format:@"Unresolved migration error %@, %@", error, [error userInfo]];
     }
   }
   
-  DLog(@"TripKit store set up.");
+  [SGKLog debug:@"TKTripKit" text:@"TripKit store set up."];
   return _persistentStoreCoordinator;
 }
 

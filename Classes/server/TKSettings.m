@@ -24,7 +24,7 @@
   // distance units
   NSString *unit = nil;
   switch ([sharedDefaults integerForKey:SVKDefaultsKeyProfileDistanceUnit]) {
-    case SGDistanceUnitTypeAuto:
+    case SGDistanceUnitTypeAuto: // default
       unit = @"auto";
       break;
       
@@ -72,6 +72,43 @@
 + (void)setMaximumWalkingDuration:(NSTimeInterval)duration
 {
   [[NSUserDefaults sharedDefaults] setDouble:duration forKey:TKDefaultsKeyProfileTransportWalkMaxDuration];
+}
+
++ (void)setMinimumTransferDuration:(NSTimeInterval)duration
+{
+  NSInteger minutes = (NSInteger) ((duration + 59) / 60);
+  [[NSUserDefaults sharedDefaults] setInteger:minutes forKey:TKDefaultsKeyProfileTransportTransferTime];
+}
+
++ (void)setProfileWeight:(float)weight forComponent:(TKSettingsProfileWeight)component
+{
+  switch (component) {
+    case TKSettingsProfileWeight_Carbon:
+      [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightCarbon];
+      break;
+      
+    case TKSettingsProfileWeight_Hassle:
+      [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightHassle];
+      break;
+      
+    case TKSettingsProfileWeight_Money:
+      [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightMoney];
+      break;
+
+    case TKSettingsProfileWeight_Time:
+      [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightTime];
+      break;
+  }
+}
+
++ (void)setWalkingSpeed:(TKSettingsSpeed)speed
+{
+  [[NSUserDefaults sharedDefaults] setInteger:(NSInteger)speed forKey:TKDefaultsKeyProfileTransportWalkSpeed];
+}
+
++ (void)setCyclingSpeed:(TKSettingsSpeed)speed
+{
+  [[NSUserDefaults sharedDefaults] setInteger:(NSInteger)speed forKey:TKDefaultsKeyProfileTransportCyclingSpeed];
 }
 
 @end
