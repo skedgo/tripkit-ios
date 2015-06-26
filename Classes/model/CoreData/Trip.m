@@ -144,10 +144,38 @@ typedef NSUInteger SGTripFlag;
 
   for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibilityInDetails]) {
     // this is related to SegmentSectionHeaderViews!
-    [text appendString:[dateFormatter stringFromDate:segment.departureTime]];
-    [text appendString:@": "];
+    
+    // insert a new location as soon as we end up there
+    if (segment.order == BHSegmentOrdering_Start) {
+      //
+    } else if (! [segment isStationary]) {
+      id<MKAnnotation> thisStart = segment.start;
+      id<MKAnnotation> thisEnd   = segment.end;
+      if (thisEnd) {
+        if (! [SGLocationHelper coordinate:[thisStart coordinate]
+                                    isNear:[thisEnd coordinate]]) {
+          // simple case: start is far from end: add location
+          [text appendString:[[self class] addressForObject:thisStart]];
+          [text appendString:@", "];
+        } else {
+          // second chance: the next non-stationary section is public transport
+          for (TKSegment *next = segment.next; next != nil; next = next.next) {
+            if ([next isStationary]) {
+              continue; // check next
+            } else if ([next isPublicTransport]) {
+              [text appendString:[[self class] addressForObject:thisStart]];
+              [text appendString:@", "];
+            } else {
+              break; // next is neither stationary nor public
+            }
+          }
+        }
+      }
+    }
+    
     [text appendString:[segment singleLineInstruction]];
     [text appendString:@"\n"];
+
 
     NSString *string = segment.notes;
     if (string.length > 0) { // no empty lines
@@ -155,6 +183,8 @@ typedef NSUInteger SGTripFlag;
       [text appendString:string];
       [text appendString:@"\n"];
     }
+    
+    [text appendString:@"\n"];
   }
 	
   return text;
@@ -765,6 +795,25 @@ typedef NSUInteger SGTripFlag;
     [[self primitiveValueForKey:@"segments"] minusSet:value];
     [self didChangeValueForKey:@"segments" withSetMutation:NSKeyValueMinusSetMutation usingObjects:value];
 }
+
+#pragma mark - Private: Others
+
++ (NSString *)addressForObject:(id<MKAnnotation>)object
+{
+  // we prefer the subtitle over the title
+  NSString *address = nil;
+  
+  if ([object respondsToSelector:@selector(subtitle)]) {
+    address = [object subtitle];
+  }
+  
+  if (! address) {
+    address = [object title];
+  }
+  
+  return address;
+}
+
 
 
 @end

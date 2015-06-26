@@ -10,6 +10,8 @@
 
 #import "TKTripKit.h"
 
+#import "TripRequest+Classify.h"
+
 #define kBHRoutingTimeOutSecond           30
 
 @interface TKBuzzRouter ()
@@ -39,7 +41,8 @@
 }
 
 - (void)multiFetchTripsForRequest:(TripRequest *)request
-                       completion:(void (^)(TripRequest *, NSError *))completion
+                       classifier:(id<TKTripClassifier>)classifier
+                       completion:(void (^)(TripRequest * __nullable, NSError * __nullable))completion
 {
   [self cancelRequests];
   self.isActive = YES;
@@ -53,7 +56,6 @@
   
   // we'll adjust the visibility in the completion block
   request.defaultVisibility = TripGroupVisibilityHidden;
-  
 
   for (NSSet *modeIdentifiers in groupedIdentifiers) {
     TKBuzzRouter *worker = self.workerRouters[modeIdentifiers];
@@ -71,6 +73,11 @@
      ^(TripRequest *completedRequest, NSSet *completedIdentifiers) {
        typeof(weakSelf) strongSelf = weakSelf;
        if (strongSelf) {
+         // Updating classifications before making results visible
+         if (classifier) {
+           [completedRequest updateTripGroupClassificationsUsingClassifier:classifier];
+         }
+         
          // We get thet minimized and hidden modes here in the completion block
          // since they might have changed while waiting for results
          NSSet *minimized = [TKUserProfileHelper minimizedModeIdentifiers];
@@ -308,7 +315,7 @@
   NSURL *baseURL = [NSURL URLWithString:baseURLString];
   
   // use our default parameters and append those from the URL
-  NSMutableDictionary *paras = [TKParserHelper defaultDictionary];
+  NSMutableDictionary *paras = [TKSettings defaultDictionary];
   NSString *query = url.query;
   for (NSString *option in [query componentsSeparatedByString:@"&"]) {
     NSArray *pair = [option componentsSeparatedByString:@"="];
@@ -464,7 +471,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
                                  andModeIdentifiers:(NSSet *)modeIdentifiers
                                            bestOnly:(BOOL)bestOnly
 {
-	NSMutableDictionary *paras = [TKParserHelper defaultDictionary];
+	NSMutableDictionary *paras = [TKSettings defaultDictionary];
 	
 	[paras setValue:[modeIdentifiers allObjects] forKey:@"modes"];
 	

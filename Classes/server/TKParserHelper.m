@@ -12,62 +12,6 @@
 
 @implementation TKParserHelper
 
-+ (NSMutableDictionary *)defaultDictionary
-{
-  NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithCapacity:10];
-  NSUserDefaults *sharedDefaults = [NSUserDefaults sharedDefaults];
-  
-  // JSON version
-  [paras setObject:@(11) forKey:@"v"];
-  [paras setObject:[SGKConfig regionEligibility] forKey:@"app"];
-  
-  // distance units
-  NSString *unit = nil;
-  switch ([sharedDefaults integerForKey:SVKDefaultsKeyProfileDistanceUnit]) {
-    case SGDistanceUnitTypeAuto:
-      unit = @"auto";
-      break;
-      
-    case SGDistanceUnitTypeMetric:
-      unit = @"metric";
-      break;
-      
-    case SGDistanceUnitTypeImperial:
-      unit = @"imperial";
-      break;
-    default:
-      unit = @"auto";
-      break;
-  }
-  [paras setObject:unit forKey:@"unit"];
-  
-  // profile settings
-  float priceWeight   = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightMoney];
-  float carbonWeight  = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightCarbon];
-  float timeWeight    = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightTime];
-  float hassleWeight  = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightHassle];
-  NSString *weightString = [NSString stringWithFormat:@"(%f,%f,%f,%f)", priceWeight, carbonWeight, timeWeight, hassleWeight];
-  [paras setObject:weightString forKey:@"wp"];
-  
-  // transport preferences
-  if ([sharedDefaults boolForKey:TKDefaultsKeyProfileTransportConcessionPricing]) {
-    [paras setObject:@(YES) forKey:@"conc"];
-  }
-  [paras setObject:@([sharedDefaults integerForKey:TKDefaultsKeyProfileTransportWalkSpeed])		forKey:@"ws"];
-  [paras setObject:@([sharedDefaults integerForKey:TKDefaultsKeyProfileTransportTransferTime]) forKey:@"tt"];
-  
-  // beta features
-  if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableFlights]) {
-    [paras setObject:@(YES) forKey:@"ef"];
-  }
-  if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableInterregional]) {
-    [paras setObject:@(YES) forKey:@"ir"];
-  }
-
-  [paras setObject:@(! [sharedDefaults boolForKey:TKDefaultsKeyProfileEnableRealBookings]) forKey:@"bsb"];
-  return paras;
-}
-
 #pragma mark - Segments
 
 + (STKTripSegmentVisibility)segmentVisibilityType:(NSString *)string

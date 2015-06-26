@@ -15,7 +15,8 @@ NSString *const TKDefaultsKeyProfileWeightHassle    = @"weightHassle";
 NSString *const TKDefaultsKeyProfileWeightMoney     = @"weightPrice";
 NSString *const TKDefaultsKeyProfileWeightTime      = @"weightTime";
 NSString *const TKDefaultsKeyProfileTransportWalkSpeed		= @"profileTransportWalkSpeed";
-NSString *const TKDefaultsKeyProfileTransportCycleSpeed		= @"profileTransportCycleSpeed";
+NSString *const TKDefaultsKeyProfileTransportWalkMaxDuration		= @"profileTransportWalkMax";
+NSString *const TKDefaultsKeyProfileTransportCyclingSpeed		= @"profileTransportCycleSpeed";
 NSString *const TKDefaultsKeyProfileTransportTransferTime = @"profileTransportTransferTime";
 NSString *const TKDefaultsKeyProfileTransportConcessionPricing = @"profileTransportConcessionPricing";
 

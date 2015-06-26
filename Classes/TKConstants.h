@@ -15,7 +15,8 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileWeightHassle;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileWeightMoney;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileWeightTime;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportWalkSpeed;
-FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportCycleSpeed;
+FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportWalkMaxDuration;
+FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportCyclingSpeed;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportTransferTime;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportConcessionPricing;
 
