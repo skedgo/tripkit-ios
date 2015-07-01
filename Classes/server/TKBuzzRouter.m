@@ -126,7 +126,7 @@
 
 - (void)downloadTrip:(NSURL *)url
   intoTripKitContext:(NSManagedObjectContext *)tripKitContext
-          completion:(TKTripDownloadBlock)completion
+          completion:(void(^)(Trip * __nullable trip))completion
 {
   [self hitURLForTripDownload:url completion:
    ^(NSURL *requestURL, id JSON, NSError *error) {
@@ -151,7 +151,7 @@
     }];
 }
 
-- (void)updateTrip:(Trip *)trip completion:(TKTripDownloadBlock)completion
+- (void)updateTrip:(Trip *)trip completion:(void(^)(Trip * __nullable trip))completion
 {
   NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
 //  DLog(@"Updating trip from URL: %@", updateURL);
@@ -406,7 +406,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 
 - (void)parseJSON:(id)json
      updatingTrip:(Trip *)trip
-       completion:(TKTripDownloadBlock)completion
+       completion:(void(^)(Trip * __nullable trip))completion
 {
   NSString *error = [json objectForKey:@"error"];
   if (error) {
@@ -438,7 +438,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 
 - (void)parseJSON:(id)json
 forTripKitContext:(NSManagedObjectContext *)tripKitContext
-       completion:(TKTripDownloadBlock)completion
+       completion:(void(^)(Trip * __nullable trip))completion
 {
   NSString *error = [json objectForKey:@"error"];
   if (error) {
