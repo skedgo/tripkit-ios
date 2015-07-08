@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^TKTimetableDownloaderCompletionBlock)(NSArray *__nullable stopVisits, NSError * __nullable error);
 
+/**
+ Downloads timetables for a given stop location or DLS table (i.e., a stop-to-stop timetable).
+ */
 @interface TKTimetableDownloader : NSObject
 
 - (void)downloadTimetableForStop:(StopLocation *)stop
