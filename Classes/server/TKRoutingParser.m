@@ -486,6 +486,7 @@
       trip.temporaryURLString   = tripDict[@"temporaryURL"]         ?: trip.temporaryURLString;
       trip.updateURLString      = tripDict[@"updateURL"]            ?: trip.updateURLString;
       trip.progressURLString    = tripDict[@"progressURL"]          ?: trip.progressURLString;
+      trip.plannedURLString     = tripDict[@"plannedURL"]           ?: trip.plannedURLString;
       
       [trip calculateDuration];
       

@@ -14,3 +14,7 @@ Some documentation can be found in the [Wiki](https://github.com/skedgo/tripkit-
   * RootKit
   * ServerKit
   * TransportKit
+
+## Tracking
+
+Calls to the SkedGo servers typically include an "X-TripGo-UUID" header which allows tracking calls from a single installation across sessions. This behaviour is **opt-out**. Opt-out by adding a Boolean with key `SVKDefaultsKeyProfileTrackUsage` and value `true` to the standard user defaults.

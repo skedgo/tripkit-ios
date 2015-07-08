@@ -126,7 +126,7 @@
 
 - (void)downloadTrip:(NSURL *)url
   intoTripKitContext:(NSManagedObjectContext *)tripKitContext
-          completion:(TKTripDownloadBlock)completion
+          completion:(void(^)(Trip * __nullable trip))completion
 {
   [self hitURLForTripDownload:url completion:
    ^(NSURL *requestURL, id JSON, NSError *error) {
@@ -151,7 +151,7 @@
     }];
 }
 
-- (void)updateTrip:(Trip *)trip completion:(TKTripDownloadBlock)completion
+- (void)updateTrip:(Trip *)trip completion:(void(^)(Trip * __nullable trip))completion
 {
   NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
 //  DLog(@"Updating trip from URL: %@", updateURL);
@@ -406,7 +406,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 
 - (void)parseJSON:(id)json
      updatingTrip:(Trip *)trip
-       completion:(TKTripDownloadBlock)completion
+       completion:(void(^)(Trip * __nullable trip))completion
 {
   NSString *error = [json objectForKey:@"error"];
   if (error) {
@@ -438,7 +438,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 
 - (void)parseJSON:(id)json
 forTripKitContext:(NSManagedObjectContext *)tripKitContext
-       completion:(TKTripDownloadBlock)completion
+       completion:(void(^)(Trip * __nullable trip))completion
 {
   NSString *error = [json objectForKey:@"error"];
   if (error) {
@@ -528,19 +528,10 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   ZAssert(tripKitContext != nil, @"Managed object context required!");
   
   // analyse result
-  NSString* errorMessage = [json objectForKey:@"error"];
-  if (errorMessage) {
-    DLog(@"Encountered error: %@", errorMessage);
-		NSError *error;
-		if (YES == [[json objectForKey:@"usererror"] boolValue]) {
-			error = [NSError errorWithCode:kSVKServerErrorTypeUser
-														 message:errorMessage];
-		} else {
-			error = [NSError errorWithCode:kSVKErrorTypeInternal
-														 message:errorMessage];
-		}
-		
-		[self handleError:error
+  NSError *serverError = [SVKServer serverErrorForJSONErrorDictionary:json];
+  if (serverError) {
+    DLog(@"Encountered error: %@", serverError);
+		[self handleError:serverError
 					forURLQuery:urlQuery
 							failure:failure];
     return;

@@ -13,8 +13,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^TKTripDownloadBlock)(Trip * __nullable trip);
-
 @interface TKBuzzRouter : TKRouter
 
 - (void)multiFetchTripsForRequest:(TripRequest *)request
@@ -31,10 +29,10 @@ typedef void (^TKTripDownloadBlock)(Trip * __nullable trip);
 
 - (void)downloadTrip:(NSURL *)url
   intoTripKitContext:(NSManagedObjectContext *)tripKitContext
-          completion:(TKTripDownloadBlock)completion;
+          completion:(void(^)(Trip * __nullable trip))completion;
 
 - (void)updateTrip:(Trip *)trip
-        completion:(TKTripDownloadBlock)completion;
+        completion:(void(^)(Trip * __nullable trip))completion;
 
 
 @end
