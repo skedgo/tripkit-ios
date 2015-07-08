@@ -34,6 +34,7 @@
 @property (nonatomic, strong, nullable) NSString * saveURLString;
 @property (nonatomic, strong, nullable) NSString * shareURLString;
 @property (nonatomic, strong, nullable) NSString * updateURLString;
+@property (nonatomic, strong, nullable) NSString * plannedURLString;
 @property (nonatomic, strong, nullable) NSString * progressURLString;
 @property (nonatomic, strong, nullable) NSString * temporaryURLString;
 @property (nonatomic, retain, nonnull) NSNumber * totalCarbon;

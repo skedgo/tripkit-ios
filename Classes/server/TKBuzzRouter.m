@@ -528,19 +528,10 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   ZAssert(tripKitContext != nil, @"Managed object context required!");
   
   // analyse result
-  NSString* errorMessage = [json objectForKey:@"error"];
-  if (errorMessage) {
-    DLog(@"Encountered error: %@", errorMessage);
-		NSError *error;
-		if (YES == [[json objectForKey:@"usererror"] boolValue]) {
-			error = [NSError errorWithCode:kSVKServerErrorTypeUser
-														 message:errorMessage];
-		} else {
-			error = [NSError errorWithCode:kSVKErrorTypeInternal
-														 message:errorMessage];
-		}
-		
-		[self handleError:error
+  NSError *serverError = [SVKServer serverErrorForJSONErrorDictionary:json];
+  if (serverError) {
+    DLog(@"Encountered error: %@", serverError);
+		[self handleError:serverError
 					forURLQuery:urlQuery
 							failure:failure];
     return;
