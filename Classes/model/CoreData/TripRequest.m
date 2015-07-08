@@ -32,8 +32,7 @@
 @synthesize replacement;
 @synthesize defaultVisibility;
 
-- (void)remove
-{
+- (void)remove {
   self.toDelete = YES;
 }
 
