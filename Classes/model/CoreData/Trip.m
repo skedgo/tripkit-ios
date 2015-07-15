@@ -282,6 +282,16 @@ typedef NSUInteger SGTripFlag;
   return NO;
 }
 
+- (BOOL)isImpossible
+{
+  for (TKSegment *segment in self.segments) {
+    if ([segment isImpossible]) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
 - (SGTimeType)tripTimeType
 {
   return (SGTimeType) self.request.timeType.integerValue;
