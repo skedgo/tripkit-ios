@@ -330,9 +330,8 @@
   }
   
   // create the request
-  AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[baseURL URLByDeletingLastPathComponent]];
-  [manager.session.configuration setHTTPAdditionalHeaders:@{ @"accept" : @"application/json" }];
-  [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
+  SVKSessionManager *manager = [SVKSessionManager jsonSessionManagerWithBaseURL:[baseURL URLByDeletingLastPathComponent]];
+
   NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:[baseURL absoluteString] parameters:paras error:nil];
   NSURLSessionDataTask *task = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 #pragma unused(response)
