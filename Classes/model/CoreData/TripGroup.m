@@ -68,6 +68,10 @@ typedef enum {
   NSTimeInterval bestDuration = INT32_MAX;
   Trip *bestTrip = nil;
   for (Trip *trip in allTrips) {
+    if ([trip isImpossible]) {
+      continue;
+    }
+    
     NSTimeInterval offset = [trip calculateOffset];
     NSTimeInterval duration = [trip calculateDurationFromQuery];
     if (offset >= 0 && duration < bestDuration) {

@@ -311,7 +311,8 @@
 {
   // de-construct the URL
   NSString *port = nil != url.port ? [NSString stringWithFormat:@":%@", url.port] : @"";
-  NSString *baseURLString = [NSString stringWithFormat:@"http://%@%@%@", url.host, port, url.path];
+  NSString *scheme = [url.scheme hasPrefix:@"http"] ? url.scheme : @"https"; // keep http and https, but replace stuff like $appname://
+  NSString *baseURLString = [NSString stringWithFormat:@"%@://%@%@%@", scheme, url.host, port, url.path];
   NSURL *baseURL = [NSURL URLWithString:baseURLString];
   
   // use our default parameters and append those from the URL

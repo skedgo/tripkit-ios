@@ -150,6 +150,8 @@
 
 #pragma mark - Real-time stuff
 
+- (BOOL)isImpossible;
+
 - (BOOL)timesAreRealTime;
 
 - (nullable Alert *)primaryAlert;
