@@ -44,11 +44,11 @@
          if (newShareURL) {
            success(newShareURL);
          } else if (failure) {
-           failure(object);
+           failure();
          }
        }];
     } else {
-      failure(nil);
+      failure();
     }
   }
 }
