@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) NSError *lastWorkerError;
 @property (nonatomic, strong) NSMutableDictionary *workerRouters;
+@property (nonatomic, assign) NSUInteger finishedWorkers;
 
 @end
 
@@ -40,18 +41,21 @@
   self.isActive = NO;
 }
 
-- (void)multiFetchTripsForRequest:(TripRequest *)request
-                       classifier:(id<TKTripClassifier>)classifier
-                       completion:(void (^)(TripRequest * __nullable, NSError * __nullable))completion
+- (NSUInteger)multiFetchTripsForRequest:(TripRequest *)request
+                             classifier:(nullable id<TKTripClassifier>)classifier
+                               progress:(nullable void (^)(NSUInteger))progress
+                             completion:(void (^)(TripRequest * __nullable, NSError * __nullable))completion
 {
   [self cancelRequests];
   self.isActive = YES;
   
   NSArray *enabledModes       = [request.spanningRegion modeIdentifiers];
   NSSet *groupedIdentifiers   = [SVKTransportModes groupedModeIdentifiers:enabledModes includeGroupForAll:YES];
+  NSUInteger requestCount = [groupedIdentifiers count];
+  self.finishedWorkers = 0;
   
   if (!self.workerRouters) {
-    self.workerRouters = [NSMutableDictionary dictionaryWithCapacity:groupedIdentifiers.count];
+    self.workerRouters = [NSMutableDictionary dictionaryWithCapacity:requestCount];
   }
   
   // we'll adjust the visibility in the completion block
@@ -85,6 +89,11 @@
          [completedRequest adjustVisibilityForMinimizedModeIdentifiers:minimized
                                                  hiddenModeIdentifiers:hidden];
          
+         strongSelf.finishedWorkers++;
+         if (progress) {
+           progress(strongSelf.finishedWorkers);
+         }
+         
          [strongSelf handleMultiFetchResult:completedRequest
                              completedModes:completedIdentifiers
                                       error:nil
@@ -102,6 +111,8 @@
        }
      }];
   }
+  
+  return requestCount;
 }
 
 - (void)handleMultiFetchResult:(TripRequest *)request
