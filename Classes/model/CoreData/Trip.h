@@ -68,6 +68,8 @@
 
 @property (nonatomic, assign) BOOL showNoVehicleUUIDAsLift;
 
+@property (nonatomic, assign) BOOL didUpdateOnBooking;
+
 @property (nonatomic, assign) BOOL departureTimeIsFixed;
 
 @property (nonatomic, assign) BOOL hasReminder;
