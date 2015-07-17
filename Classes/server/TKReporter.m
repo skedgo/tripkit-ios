@@ -20,8 +20,7 @@
     return;
   }
   
-  AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-  manager.requestSerializer = [AFJSONRequestSerializer serializer];
+  SVKSessionManager *manager = [SVKSessionManager jsonSessionManager];
   
   NSDictionary *paras = userInfo;
   NSURLSessionDataTask *task = [manager POST:trip.plannedURLString
@@ -49,8 +48,7 @@
     return;
   }
   
-  AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-  manager.requestSerializer = [AFJSONRequestSerializer serializer];
+  SVKSessionManager *manager = [SVKSessionManager jsonSessionManager];
   
   NSMutableArray *samples = [NSMutableArray arrayWithCapacity:locations.count];
   for (id object in locations) {

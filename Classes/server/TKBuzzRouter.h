@@ -15,9 +15,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TKBuzzRouter : TKRouter
 
-- (void)multiFetchTripsForRequest:(TripRequest *)request
-                       classifier:(nullable id<TKTripClassifier>)classifier
-                       completion:(void (^)(TripRequest * __nullable, NSError * __nullable))completion;
+/**
+ Kicks off the required server requests asynchronously to the servers. As they
+ return `progress` is called and the trips get added to TripKit's database. Also
+ calls `completion` when all are done.
+ 
+ As trips get added, they get flagged with full, minimised or hidden visibility.
+ Which depends on the standard defaults. Check `TKUserProfileHelper` for setting
+ those.
+ 
+ @param request The request specifying the query
+ @param clasifier Optional classifier to assign `TripGroup`'s `classification`
+ @param progress Optional progress callback executed when each request finished,
+        with the number of completed requests passed to the block.
+ @param completion Callback executed when all requests have finished with the
+        original request and, optionally, an error if all failed.
+ @return The number of requests sent. This will match the number of times 
+ `progress` is called.
+ */
+- (NSUInteger)multiFetchTripsForRequest:(TripRequest *)request
+                             classifier:(nullable id<TKTripClassifier>)classifier
+                               progress:(nullable void (^)(NSUInteger))progress
+                             completion:(void (^)(TripRequest * __nonnull, NSError * __nullable))completion;
 
 - (NSDictionary *)createRequestParametersForRequest:(TripRequest *)request
                                  andModeIdentifiers:(NSSet *)modeIdentifiers
