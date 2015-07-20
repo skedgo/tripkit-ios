@@ -775,16 +775,16 @@ NSString *const UninitializedString =  @"UninitializedString";
   switch (self.order) {
     case BHSegmentOrdering_Start:
     case BHSegmentOrdering_End:
-      return [UIImage imageNamed:@"icon-map-location"];
+      return [UIImage imageNamed:@"icon-pin"];
       
     case BHSegmentOrdering_Regular:
-      return [self imageForIconType:SGStyleModeIconTypeMapBubble];
+      return [self imageForIconType:SGStyleModeIconTypeListMainMode];
   }
 }
 
 - (NSURL *)pointImageURL
 {
-  return [self imageURLForType:SGStyleModeIconTypeMapBubble];
+  return [self imageURLForType:SGStyleModeIconTypeListMainMode];
 }
 
 - (BOOL)isTerminal

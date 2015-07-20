@@ -292,12 +292,12 @@
 
 - (UIImage *)pointImage
 {
-  return [self.service modeImageOfType:SGStyleModeIconTypeMapBubble];
+  return [self.service modeImageOfType:SGStyleModeIconTypeListMainMode];
 }
 
 - (NSURL *)pointImageURL
 {
-  return [self.service modeImageURLForType:SGStyleModeIconTypeMapBubble];
+  return [self.service modeImageURLForType:SGStyleModeIconTypeListMainMode];
 }
 
 - (BOOL)canFlipImage
