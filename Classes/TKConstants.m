@@ -24,4 +24,4 @@ NSString *const TKDefaultsKeyProfileSortedModeIdentifiers = @"profileSortedModeI
 NSString *const TKDefaultsKeyProfileMinimizedModeIdentifiers = @"profileMinimizedModeIdentifiers";
 NSString *const TKDefaultsKeyProfileHiddenModeIdentifiers = @"profileHiddenModeIdentifiers";
 
-NSString *const TKDefaultsKeyProfileEnableRealBookings = @"profileEnableRealBookings";
+NSString *const TKDefaultsKeyProfileBookingsUseSandbox = @"profileBookingsUseSandbox";

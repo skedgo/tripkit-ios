@@ -65,7 +65,14 @@
     [paras setValue:@(YES) forKey:@"ir"];
   }
   
-  [paras setValue:@(! [sharedDefaults boolForKey:TKDefaultsKeyProfileEnableRealBookings]) forKey:@"bsb"];
+#ifdef DEBUG
+  [paras setValue:@(YES) forKey:@"bsb"];
+#else
+  if ([sharedDefaults boolForKey:TKDefaultsKeyProfileBookingsUseSandbox]) {
+    [paras setValue:@(YES) forKey:@"bsb"];
+  }
+#endif
+
   return paras;
 }
 
