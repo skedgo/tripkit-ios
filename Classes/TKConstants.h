@@ -24,4 +24,4 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileSortedModeIdentifiers;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileMinimizedModeIdentifiers;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileHiddenModeIdentifiers;
 
-FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileEnableRealBookings; // Beta only
+FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileBookingsUseSandbox;
