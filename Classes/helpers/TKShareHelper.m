@@ -86,12 +86,12 @@
   
   CLLocationCoordinate2D start = CLLocationCoordinate2DMake([params[@"flat"] doubleValue], [params[@"flng"] doubleValue]);
   if (! CLLocationCoordinate2DIsValid(start)) {
-    return;
+//    return;
   }
 
   CLLocationCoordinate2D end = CLLocationCoordinate2DMake([params[@"tlat"] doubleValue], [params[@"tlng"] doubleValue]);
   if (! CLLocationCoordinate2DIsValid(end)) {
-    return;
+//    return;
   }
 
   NSInteger typeInt = [params[@"type"] integerValue];
