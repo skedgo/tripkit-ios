@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits;
+@class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape;
 @class SVKRegion, ModeInfo;
 
 typedef NS_ENUM(NSInteger, BHSegmentOrdering) {
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) TKSegment *next;
 
 @property (nonatomic, strong, nullable) SegmentReference *reference;
-@property (nonatomic, weak, nonnull) Trip *trip;
+@property (nonatomic, weak, null_resettable) Trip *trip; // practically nonnull, but can be nulled due to weak reference
 
 - (id)initWithReference:(SegmentReference *)aReference
                 forTrip:(Trip *)aTrip;
@@ -78,11 +78,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)resetCaches;
 
-/**
- @return A set of `Shape` instances
- */
-- (nullable NSSet *)shapes;
-- (nullable NSArray *)shortedShapes;
+- (nullable NSSet<Shape *> *)shapes;
+- (nullable NSArray<Shape *> *)shortedShapes;
 
 - (nullable NSString *)notes;
 - (NSTimeInterval)duration:(BOOL)includingContinuation;
@@ -99,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isImpossible;
 - (nullable NSNumber *)bearing;
 - (UIColor *)color;
-- (NSArray *)dashPattern;
+- (NSArray<NSNumber *> *)dashPattern;
 - (nullable NSString *)disclaimer;
 - (BOOL)isCanceled;
 - (BOOL)timesAreRealTime;
@@ -109,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @return The used vehicle (if there are any) in SkedGo API-compatible form
  */
-- (NSDictionary *)usedVehicleFromAllVehicles:(NSArray *)allVehicles;
+- (NSDictionary<NSString *, id<NSCoding>> *)usedVehicleFromAllVehicles:(NSArray <id<STKVehicular>> *)allVehicles;
 
 /**
  @return The private vehicle type used by this segment (if any)
@@ -128,12 +125,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable ModeInfo *)modeInfo;
 
 - (BOOL)hasAlerts;
-- (NSArray *)alerts;
-- (NSArray *)alertsWithLocation;
+- (NSArray<Alert *> *)alerts;
+- (NSArray<Alert *> *)alertsWithLocation;
 
 - (TKSegment *)finalSegmentIncludingContinuation;
 
-- (NSArray *)annotationsToZoomToOnMap;
+- (NSArray<id<MKAnnotation>> *)annotationsToZoomToOnMap;
 
 /* 
  Test if this segment has at least the specific length. 
@@ -191,7 +188,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)bookingIsAvailable;
 - (nullable NSString *)bookingTitle;
 - (nullable NSURL *)bookingInternalURL;
-- (nullable NSArray *)bookingExternalActions; // [NSString]
+- (nullable NSArray<NSString *> *)bookingExternalActions;
 
 
 ///-----------------------------------------------------------------------------
