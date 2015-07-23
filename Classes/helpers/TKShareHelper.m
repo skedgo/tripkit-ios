@@ -104,24 +104,81 @@
 }
 
 
-#pragma mark - Stops & Services
+#pragma mark - Stops
+
++ (BOOL)isStopURL:(NSURL *)url {
+  return [[url path] isEqualToString:@"/stop"];
+}
 
 + (NSURL *)stopURLForStopCode:(NSString *)stopCode
                 inRegionNamed:(NSString *)regionName
                        filter:(NSString *)filter
 {
-  NSString *addendum = filter ? [NSString stringWithFormat:@"/%@", [filter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]] : @"";
-  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/stop/%@/%@%@", regionName, [stopCode stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], addendum];
+  NSString *addendum = filter ? [NSString stringWithFormat:@"%@", [filter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]] : @"";
+//  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/stop/%@/%@/%@", regionName, [stopCode stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], addendum];
+  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/stop?regionName=%@&stopCode=%@&filter=%@", regionName, [stopCode stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], addendum];
   return [NSURL URLWithString:urlString];
+}
+
++ (void)stopDetailsForURL:(NSURL *)url
+                  details:(void (^)(NSString *stopCode, NSString *regionName, NSString *filter))detailBlock {
+  // re-construct the parameters
+  NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
+  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:queryComponents.count];
+  for (NSString *param in queryComponents) {
+    NSArray *elements = [param componentsSeparatedByString:@"="];
+    if (elements.count == 2) {
+      params[elements[0]] = elements[1];
+    }
+  }
+  
+  // construct the request
+  if (! params[@"stopCode"] || ! params[@"regionName"])
+    return;
+  
+  NSString *regionName = params[@"regionName"];
+  NSString *stopCode = [params[@"stopCode"] stringByRemovingPercentEncoding];
+  NSString *filter = [params[@"filter"] stringByRemovingPercentEncoding];
+
+  detailBlock(stopCode, regionName, filter);
+}
+
+
+#pragma mark - Services
+
++ (BOOL)isServicesURL:(NSURL *)url {
+  return [[url path] isEqualToString:@"/service"];
 }
 
 + (NSURL *)serviceURLForServiceID:(NSString *)serviceID
                        atStopCode:(NSString *)stopCode
                     inRegionNamed:(NSString *)regionName
 {
-  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/service/%@/%@/%@", regionName, [stopCode stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], [serviceID stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/service?regionName=%@&stopCode=%@&serviceID=%@", regionName, [stopCode stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], [serviceID stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
   return [NSURL URLWithString:urlString];
 }
 
++ (void)serviceDetailsForURL:(NSURL *)url
+                  details:(void (^)(NSString *stopCode, NSString *regionName, NSString *serviceID))detailBlock {
+  // re-construct the parameters
+  NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
+  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:queryComponents.count];
+  for (NSString *param in queryComponents) {
+    NSArray *elements = [param componentsSeparatedByString:@"="];
+    if (elements.count == 2) {
+      params[elements[0]] = elements[1];
+    }
+  }
+  
+  // construct the request
+  if (! params[@"stopCode"] || ! params[@"regionName"] || ! params[@"serviceID"])
+    return;
+  
+  NSString *regionName = params[@"regionName"];
+  NSString *stopCode = [params[@"stopCode"] stringByRemovingPercentEncoding];
+  NSString *servideId = [params[@"serviceID"] stringByRemovingPercentEncoding];
+  
+  detailBlock(stopCode, regionName, servideId);
+}
 
 @end

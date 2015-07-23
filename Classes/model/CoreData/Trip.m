@@ -380,10 +380,10 @@ typedef NSUInteger SGTripFlag;
 {
   for (TKSegment *segment in self.segments) {
     STKVehicleType type = [segment privateVehicleType];
-    if (type != STKVehicleType_None)
+    if (type != STKVehicleTypeNone)
       return type;
   }
-  return STKVehicleType_None;
+  return STKVehicleTypeNone;
 }
 
 - (void)assignVehicle:(id<STKVehicular>)vehicle
