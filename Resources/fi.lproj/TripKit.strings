@@ -80,14 +80,14 @@
 "PrimaryLocationStart" = "%@:stä";
 
 /* Favorite trip 'to' title */
-"To" = "To";
+"To" = "To"; // TODO
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "%@:ssä";
 
 /* For trip titles, e.g., 'To work'
    Format string for going from currently location to this one. Used to name favourite destinations. */
-"To %@" = "To %@";
+"To %@" = "To %@"; // TODO
 
 /* No comment provided by engineer. */
 "Real-time" = "Reaaliaikai";
