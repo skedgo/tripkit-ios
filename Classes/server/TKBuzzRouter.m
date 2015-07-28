@@ -77,10 +77,6 @@
      ^(TripRequest *completedRequest, NSSet *completedIdentifiers) {
        typeof(weakSelf) strongSelf = weakSelf;
        if (strongSelf) {
-         // Updating classifications before making results visible
-         if (classifier) {
-           [completedRequest updateTripGroupClassificationsUsingClassifier:classifier];
-         }
          
          // We get thet minimized and hidden modes here in the completion block
          // since they might have changed while waiting for results
@@ -89,6 +85,11 @@
          [completedRequest adjustVisibilityForMinimizedModeIdentifiers:minimized
                                                  hiddenModeIdentifiers:hidden];
          
+         // Updating classifications before making results visible
+         if (classifier) {
+            [completedRequest updateTripGroupClassificationsUsingClassifier:classifier];
+         }
+           
          strongSelf.finishedWorkers++;
          if (progress) {
            progress(strongSelf.finishedWorkers);
