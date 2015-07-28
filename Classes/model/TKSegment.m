@@ -235,13 +235,13 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
   NSString *modeIdentifier = self.modeIdentifier;
   if ([modeIdentifier isEqualToString:SVKTransportModeIdentifierCar]) {
-    return STKVehicleTypeCar;
+    return STKVehicleType_Car;
   } else if ([modeIdentifier isEqualToString:SVKTransportModeIdentifierBicycle]) {
-    return STKVehicleTypeBicycle;
+    return STKVehicleType_Bicycle;
   } else if ([modeIdentifier isEqualToString:SVKTransportModeIdentifierMotorbike]) {
-    return STKVehicleTypeMotorbike;
+    return STKVehicleType_Motorbike;
   } else {
-    return STKVehicleTypeNone;
+    return STKVehicleType_None;
   }
 }
 
@@ -775,16 +775,16 @@ NSString *const UninitializedString =  @"UninitializedString";
   switch (self.order) {
     case BHSegmentOrdering_Start:
     case BHSegmentOrdering_End:
-      return [UIImage imageNamed:@"icon-map-location"];
+      return [UIImage imageNamed:@"icon-pin"];
       
     case BHSegmentOrdering_Regular:
-      return [self imageForIconType:SGStyleModeIconTypeMapBubble];
+      return [self imageForIconType:SGStyleModeIconTypeListMainMode];
   }
 }
 
 - (NSURL *)pointImageURL
 {
-  return [self imageURLForType:SGStyleModeIconTypeMapBubble];
+  return [self imageURLForType:SGStyleModeIconTypeListMainMode];
 }
 
 - (BOOL)isTerminal
@@ -955,7 +955,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
   NSString *specificImageName = self.template.modeInfo.localImageName;
   if (self.trip.showNoVehicleUUIDAsLift
-      && self.privateVehicleType == STKVehicleTypeCar
+      && self.privateVehicleType == STKVehicleType_Car
       && ! self.reference.vehicleUUID) {
     specificImageName = @"car-pool";
   }

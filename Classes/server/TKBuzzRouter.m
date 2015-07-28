@@ -141,14 +141,14 @@
           completion:(void(^)(Trip * __nullable trip))completion
 {
   [self hitURLForTripDownload:url completion:
-   ^(NSURL *requestURL, id JSON, NSError *error) {
+   ^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
 #pragma unused(requestURL, error)
      if (JSON) {
        DLog(@"Downloaded trip JSON for: %@", requestURL);
        [self parseJSON:JSON
      forTripKitContext:tripKitContext
             completion:^(Trip *trip) {
-         trip.shareURL = url;
+         trip.shareURL = shareURL;
          if (completion) {
            completion(trip);
          }
@@ -168,8 +168,8 @@
   NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
 //  DLog(@"Updating trip from URL: %@", updateURL);
 //  DLog(@"Updating trip (%d): %@", trip.tripGroup.visibility, [trip debugString]);
-  [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, id JSON, NSError *error) {
-#pragma unused(requestURL, error)
+  [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
+#pragma unused(requestURL, shareURL, error)
     if (JSON) {
       [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
         DLog(@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]);
@@ -319,7 +319,7 @@
 
 #pragma mark - Private methods
 
-- (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *requestURL, id JSON, NSError *error))completion
+- (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error))completion
 {
   // de-construct the URL
   NSString *port = nil != url.port ? [NSString stringWithFormat:@":%@", url.port] : @"";
@@ -347,7 +347,7 @@
   NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:[baseURL absoluteString] parameters:paras error:nil];
   NSURLSessionDataTask *task = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 #pragma unused(response)
-    completion(request.URL, responseObject, error);
+    completion(request.URL, baseURL, responseObject, error);
   }];
   
   [task resume];
