@@ -53,6 +53,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateTrip:(Trip *)trip
         completion:(void(^)(Trip * __nullable trip))completion;
 
+- (void)updateTrip:(Trip *)trip
+completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion;
+
 
 @end
 
