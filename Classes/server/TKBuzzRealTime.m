@@ -26,28 +26,49 @@
 }
 
 - (void)updateTrip:(Trip *)trip
+   successWithFlag:(void (^)(Trip *trip, BOOL tripUpdated))success
+           failure:(void (^)(NSError *error))failure {
+    if (trip == nil) {
+        ZAssert(false, @"Don't call this without a trip");
+        return;
+    }
+    
+    if (trip.request == nil) {
+        DLog(@"Not updating trip as it doesn't have a request (anymore): %@", trip);
+        return;
+    }
+    
+    [self.helperRouter updateTrip:trip
+               completionWithFlag:
+     ^(Trip * updatedTrip, BOOL wasUpdated) {
+         if (updatedTrip == trip) {
+             success(trip, wasUpdated);
+         } else {
+             failure(nil);
+         }
+    }];
+    
+    /*
+    [self.helperRouter updateTrip:trip
+                       completion:
+     ^(Trip *updatedTrip) {
+         if (updatedTrip == trip) {
+             success(trip);
+         } else {
+             failure(nil);
+         }
+     }];
+    */
+}
+
+- (void)updateTrip:(Trip *)trip
 					 success:(void (^)(Trip *trip))success
 					 failure:(void (^)(NSError *error))failure
 {
-	if (trip == nil) {
-		ZAssert(false, @"Don't call this without a trip");
-		return;
-	}
-
-  if (trip.request == nil) {
-    DLog(@"Not updating trip as it doesn't have a request (anymore): %@", trip);
-    return;
-  }
-  
-  [self.helperRouter updateTrip:trip
-                     completion:
-   ^(Trip *updatedTrip) {
-     if (updatedTrip == trip) {
-       success(trip);
-     } else {
-       failure(nil);
-     }
-   }];
+    [self updateTrip:trip successWithFlag:
+     ^(Trip *trip, BOOL tripUpdated) {
+         success(trip);
+    } failure:failure];
 }
 
 - (void)updateDLSEntries:(NSSet *)entries

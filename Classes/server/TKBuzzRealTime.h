@@ -18,6 +18,10 @@
 					 success:(void (^)(Trip *trip))success
 					 failure:(void (^)(NSError *error))failure;
 
+- (void)updateTrip:(Trip *)trip
+           successWithFlag:(void (^)(Trip *trip, BOOL tripUpdated))success
+           failure:(void (^)(NSError *error))failure;
+
 - (void)updateDLSEntries:(NSSet *)services
                 inRegion:(SVKRegion *)region
                  success:(void (^)(NSSet *entries))success
