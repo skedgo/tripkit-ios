@@ -107,7 +107,7 @@
 #pragma mark - Stops
 
 + (BOOL)isStopURL:(NSURL *)url {
-  return [[url path] isEqualToString:@"/stop"];
+  return [[url path] containsString:@"/stop"];
 }
 
 + (NSURL *)stopURLForStopCode:(NSString *)stopCode
@@ -115,31 +115,23 @@
                        filter:(NSString *)filter
 {
   NSString *addendum = filter ? [NSString stringWithFormat:@"%@", [filter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]] : @"";
-//  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/stop/%@/%@/%@", regionName, [stopCode stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], addendum];
-  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/stop?regionName=%@&stopCode=%@&filter=%@", regionName, [stopCode stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], addendum];
+  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/stop/%@/%@/%@", regionName, [stopCode stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], addendum];
   return [NSURL URLWithString:urlString];
 }
 
 + (void)stopDetailsForURL:(NSURL *)url
                   details:(void (^)(NSString *stopCode, NSString *regionName, NSString *filter))detailBlock {
   // re-construct the parameters
-  NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
-  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:queryComponents.count];
-  for (NSString *param in queryComponents) {
-    NSArray *elements = [param componentsSeparatedByString:@"="];
-    if (elements.count == 2) {
-      params[elements[0]] = elements[1];
-    }
-  }
+  NSArray *queryComponents = [[url path] componentsSeparatedByString:@"/"];
   
+  NSString *regionName = queryComponents[2];
+  NSString *stopCode = queryComponents[3];
+  NSString *filter = queryComponents.count == 5?queryComponents[4]:nil;
+
   // construct the request
-  if (! params[@"stopCode"] || ! params[@"regionName"])
+  if (! regionName || ! stopCode)
     return;
   
-  NSString *regionName = params[@"regionName"];
-  NSString *stopCode = [params[@"stopCode"] stringByRemovingPercentEncoding];
-  NSString *filter = [params[@"filter"] stringByRemovingPercentEncoding];
-
   detailBlock(stopCode, regionName, filter);
 }
 
