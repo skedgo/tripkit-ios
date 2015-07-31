@@ -62,7 +62,13 @@
                    timeType:(SGTimeType)timeType
                        time:(NSDate *)time
 {
-  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/go?flat=%.5f&flng=%.5f&tlat=%.5f&tlng=%.5f&time=%.0f&type=%ld", start.latitude, start.longitude, end.latitude, end.longitude,  [time timeIntervalSince1970], (long)timeType];
+  NSMutableString *urlString = [NSMutableString stringWithFormat:@"http://tripgo.me/go?tlat=%.5f&tlng=%.5f", end.latitude, end.longitude];
+  if (CLLocationCoordinate2DIsValid(start)) {
+    [urlString appendFormat:@"&flat=%.5f&flng=%.5f", start.latitude, start.longitude];
+  }
+  if (time && timeType != SGTimeTypeLeaveASAP) {
+    [urlString appendFormat:@"&time=%.0f&type=%ld", [time timeIntervalSince1970], (long)timeType];
+  }
   return [NSURL URLWithString:urlString];
 }
 
@@ -80,26 +86,28 @@
   }
   
   // construct the request
-  if (! params[@"flat"] || ! params[@"flng"] || ! params[@"time"]
-      || ! params[@"tlat"] || ! params[@"tlng"] || ! params[@"type"])
+  // mandatory is only 'to'
+  if (! params[@"tlat"] || ! params[@"tlng"])
     return;
   
-  CLLocationCoordinate2D start = CLLocationCoordinate2DMake([params[@"flat"] doubleValue], [params[@"flng"] doubleValue]);
-  if (! CLLocationCoordinate2DIsValid(start)) {
-//    return;
+  CLLocationCoordinate2D start;
+  if (params[@"flat"] && params[@"flng"]) {
+    start = CLLocationCoordinate2DMake([params[@"flat"] doubleValue], [params[@"flng"] doubleValue]);;
+  } else {
+    start = kCLLocationCoordinate2DInvalid;
   }
-
+  
   CLLocationCoordinate2D end = CLLocationCoordinate2DMake([params[@"tlat"] doubleValue], [params[@"tlng"] doubleValue]);
-  if (! CLLocationCoordinate2DIsValid(end)) {
-//    return;
-  }
 
-  NSInteger typeInt = [params[@"type"] integerValue];
-  if (typeInt < 0 || typeInt > 2)
-    return;
-  
-  SGTimeType timeType = (SGTimeType) typeInt;
-  NSDate *time = timeType == SGTimeTypeLeaveASAP ? nil : [NSDate dateWithTimeIntervalSince1970:[params[@"time"] doubleValue]];
+  SGTimeType timeType = SGTimeTypeLeaveASAP;
+  NSDate *time = nil;
+  if (params[@"type"] && params[@"time"]) {
+    NSInteger typeInt = [params[@"type"] integerValue];
+    if (typeInt >= 0 && typeInt <= 2) {
+      timeType = (SGTimeType) typeInt;
+      time = timeType == SGTimeTypeLeaveASAP ? nil : [NSDate dateWithTimeIntervalSince1970:[params[@"time"] doubleValue]];
+    }
+  }
   detailBlock(start, end, timeType, time);
 }
 
