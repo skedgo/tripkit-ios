@@ -77,10 +77,6 @@
      ^(TripRequest *completedRequest, NSSet *completedIdentifiers) {
        typeof(weakSelf) strongSelf = weakSelf;
        if (strongSelf) {
-         // Updating classifications before making results visible
-         if (classifier) {
-           [completedRequest updateTripGroupClassificationsUsingClassifier:classifier];
-         }
          
          // We get thet minimized and hidden modes here in the completion block
          // since they might have changed while waiting for results
@@ -89,6 +85,11 @@
          [completedRequest adjustVisibilityForMinimizedModeIdentifiers:minimized
                                                  hiddenModeIdentifiers:hidden];
          
+         // Updating classifications before making results visible
+         if (classifier) {
+            [completedRequest updateTripGroupClassificationsUsingClassifier:classifier];
+         }
+           
          strongSelf.finishedWorkers++;
          if (progress) {
            progress(strongSelf.finishedWorkers);
@@ -140,14 +141,14 @@
           completion:(void(^)(Trip * __nullable trip))completion
 {
   [self hitURLForTripDownload:url completion:
-   ^(NSURL *requestURL, id JSON, NSError *error) {
+   ^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
 #pragma unused(requestURL, error)
      if (JSON) {
        DLog(@"Downloaded trip JSON for: %@", requestURL);
        [self parseJSON:JSON
      forTripKitContext:tripKitContext
             completion:^(Trip *trip) {
-         trip.shareURL = url;
+         trip.shareURL = shareURL;
          if (completion) {
            completion(trip);
          }
@@ -162,13 +163,42 @@
     }];
 }
 
+- (void)updateTrip:(Trip *)trip completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion
+{
+    NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
+    //  DLog(@"Updating trip from URL: %@", updateURL);
+    //  DLog(@"Updating trip (%d): %@", trip.tripGroup.visibility, [trip debugString]);
+    [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
+#pragma unused(requestURL, shareURL, error)
+        if (JSON) {
+            [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
+                DLog(@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]);
+                if (completion) {
+                    completion(updatedTrip, YES);
+                }
+            }];
+        } else if (! error) {
+            // No new data (but also no error
+            DLog(@"No update for trip (%d): %@", trip.tripGroup.visibility, [trip debugString]);
+            if (completion) {
+                completion(trip, NO);
+            }
+        }
+    }];
+}
+
 - (void)updateTrip:(Trip *)trip completion:(void(^)(Trip * __nullable trip))completion
 {
+    [self updateTrip:trip completionWithFlag:^(Trip * __nullable trip, BOOL tripUpdated) {
+        completion(trip);
+    }];
+    
+    /*
   NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
 //  DLog(@"Updating trip from URL: %@", updateURL);
 //  DLog(@"Updating trip (%d): %@", trip.tripGroup.visibility, [trip debugString]);
-  [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, id JSON, NSError *error) {
-#pragma unused(requestURL, error)
+  [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
+#pragma unused(requestURL, shareURL, error)
     if (JSON) {
       [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
         DLog(@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]);
@@ -184,6 +214,7 @@
       }
     }
   }];
+    */
 }
 
 
@@ -318,7 +349,7 @@
 
 #pragma mark - Private methods
 
-- (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *requestURL, id JSON, NSError *error))completion
+- (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error))completion
 {
   // de-construct the URL
   NSString *port = nil != url.port ? [NSString stringWithFormat:@":%@", url.port] : @"";
@@ -346,7 +377,7 @@
   NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:[baseURL absoluteString] parameters:paras error:nil];
   NSURLSessionDataTask *task = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 #pragma unused(response)
-    completion(request.URL, responseObject, error);
+    completion(request.URL, baseURL, responseObject, error);
   }];
   
   [task resume];
