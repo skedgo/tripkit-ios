@@ -80,6 +80,10 @@
   NSMutableDictionary *objectsLookup = [NSMutableDictionary dictionaryWithCapacity:entries.count];
   for (DLSEntry *entry in entries) {
     Service *service = entry.service;
+    if (! [service wantsRealTimeUpdates]) {
+      continue;
+    }
+
     NSString *operatorName = service.operatorName ?: @"";
     [servicesParamsArray addObject:@{
                                      @"serviceTripID" : service.code,
@@ -89,7 +93,6 @@
                                      }];
     [objectsLookup setValue:entry forKey:service.code];
   }
-  
   __weak typeof(self) weakSelf = self;
   [self fetchUpdatesForServiceParas:servicesParamsArray
                           forRegion:region
@@ -113,6 +116,10 @@
   NSMutableDictionary *objectsLookup = [NSMutableDictionary dictionaryWithCapacity:embarkations.count];
   for (StopVisits *visit in embarkations) {
     Service *service = visit.service;
+    if (! [service wantsRealTimeUpdates]) {
+      continue;
+    }
+    
     NSString *operatorName = service.operatorName ?: @"";
     [servicesParamsArray addObject:@{
                                      @"serviceTripID" : service.code,
@@ -145,6 +152,9 @@
   NSMutableArray *servicesParamsArray     = [NSMutableArray arrayWithCapacity:services.count];
   NSMutableDictionary *servicesLookupDict = [NSMutableDictionary dictionaryWithCapacity:services.count];
   for (Service *service in services) {
+    if (! [service wantsRealTimeUpdates]) {
+      continue;
+    }
     NSString *operatorName = service.operatorName ?: @"";
     [servicesParamsArray addObject:@{
                                      @"serviceTripID" : service.code,
@@ -170,8 +180,8 @@
 
 - (void)fetchUpdatesForServiceParas:(NSArray *)serviceParas
                           forRegion:(SVKRegion *)region
-                            success:(void (^)(id responseObject))success
-                            failure:(void (^)(NSError *error))failure
+                            success:(void (^)(id __nullable responseObject))success
+                            failure:(void (^)(NSError * __nullable error))failure
 {
   if (!region) {
     failure(nil);
@@ -182,6 +192,12 @@
 		failure([NSError errorWithCode:kSVKErrorTypeInternal message:@"Region has no name."]);
 		return;
 	}
+  if (serviceParas.count == 0) {
+    success(nil);
+    return;
+  }
+  
+  
 	
 	// construct the parameters
 	NSDictionary *paras = @{

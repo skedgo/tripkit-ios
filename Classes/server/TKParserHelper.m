@@ -78,8 +78,9 @@
         [service addVehicleAlternativesObject:newAlternative];
       }
     }
+
+    service.realTimeCapable = YES;
   }
-  service.realTimeCapable = YES;
 }
 
 + (Vehicle *)insertNewVehicle:(NSDictionary *)vehicleDict
