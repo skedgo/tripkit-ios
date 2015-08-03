@@ -381,17 +381,17 @@ typedef enum {
   NSString *realTimeStatus = responseDict[@"realTimeStatus"];
   if (realTimeStatus) {
     [TKParserHelper adjustService:service
-                 forRealTimeStatusString:realTimeStatus];
+          forRealTimeStatusString:realTimeStatus];
   }
   
   // real time vehicles
   [TKParserHelper updateVehiclesForService:service
-                                   primaryVehicle:responseDict[@"realtimeVehicle"]
-                              alternativeVehicles:responseDict[@"realtimeVehicleAlternatives"]];
+                            primaryVehicle:responseDict[@"realtimeVehicle"]
+                       alternativeVehicles:responseDict[@"realtimeVehicleAlternatives"]];
   
   // alert
   [TKParserHelper updateOrAddAlerts:responseDict[@"alerts"]
-                          inTripKitContext:context];
+                   inTripKitContext:context];
   
   // mode info
   ModeInfo *modeInfo = [ModeInfo modeInfoForDictionary:responseDict[@"modeInfo"]];
@@ -399,8 +399,8 @@ typedef enum {
   // parse the shapes
   NSArray *shapesArray = responseDict[@"shapes"];
   [TKParserHelper insertNewShapes:shapesArray
-                              forService:service
-                            withModeInfo:modeInfo];
+                       forService:service
+                     withModeInfo:modeInfo];
 }
 
 #pragma mark - Private methods
