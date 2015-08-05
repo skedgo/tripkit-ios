@@ -344,6 +344,17 @@
   }];
 }
 
++ (NSString *)urlForRoutingRequest:(TripRequest *)tripRequest
+               withModeIdentifiers:(NSSet *)modeIdentifiers
+{
+  TKBuzzRouter *router = [[TKBuzzRouter alloc] init];
+  NSDictionary *paras = [router createRequestParametersForRequest:tripRequest andModeIdentifiers:modeIdentifiers bestOnly:NO];
+  NSURL *baseUrl = [SVKServer sharedInstance].sessionManager.baseURL;
+  NSString *fullUrl = [[baseUrl URLByAppendingPathComponent:@"routing.json"] absoluteString];
+  NSURLRequest *request = [[SVKServer sharedInstance].sessionManager.requestSerializer requestWithMethod:@"GET" URLString:fullUrl parameters:paras error:nil];
+  return [[request URL] absoluteString];
+}
+
 
 
 

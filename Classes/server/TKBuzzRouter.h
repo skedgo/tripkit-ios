@@ -38,10 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
                                progress:(nullable void (^)(NSUInteger))progress
                              completion:(void (^)(TripRequest * __nonnull, NSError * __nullable))completion;
 
-- (NSDictionary *)createRequestParametersForRequest:(TripRequest *)request
-                                 andModeIdentifiers:(NSSet *)modeIdentifiers
-                                           bestOnly:(BOOL)bestOnly;
-
 - (void)fetchBestTripForRequest:(TripRequest *)request
                         success:(TKRouterSuccess)success
                         failure:(TKRouterError)failure;
@@ -56,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateTrip:(Trip *)trip
 completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion;
 
++ (NSString *)urlForRoutingRequest:(TripRequest *)tripRequest
+               withModeIdentifiers:(nullable NSSet *)modeIdentifiers;
 
 @end
 
