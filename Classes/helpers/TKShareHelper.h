@@ -38,14 +38,26 @@
                    details:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, SGTimeType timeType, NSDate *time))detailBlock;
 
 
-#pragma mark - Stops & Services
+#pragma mark - Stops
+
++ (BOOL)isStopURL:(NSURL *)url;
 
 + (NSURL *)stopURLForStopCode:(NSString *)stopCode
                 inRegionNamed:(NSString *)regionName
                        filter:(NSString *)filter;
 
++ (void)stopDetailsForURL:(NSURL *)url
+                  details:(void (^)(NSString *stopCode, NSString *regionName, NSString *filter))detailBlock;
+
+#pragma mark - Services
+
++ (BOOL)isServicesURL:(NSURL *)url;
+
 + (NSURL *)serviceURLForServiceID:(NSString *)serviceID
                        atStopCode:(NSString *)stopCode
                     inRegionNamed:(NSString *)regionName;
+
++ (void)serviceDetailsForURL:(NSURL *)url
+                     details:(void (^)(NSString *stopCode, NSString *regionName, NSString *serviceID))detailBlock;
 
 @end
