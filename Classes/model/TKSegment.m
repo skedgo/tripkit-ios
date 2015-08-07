@@ -786,6 +786,11 @@ NSString *const UninitializedString =  @"UninitializedString";
 	return self.departureTime;
 }
 
+- (BOOL)timeIsRealTime
+{
+  return self.timesAreRealTime;
+}
+
 - (void)setTime:(NSDate *)time
 {
   self.departureTime = time;
