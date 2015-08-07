@@ -76,9 +76,9 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 
 - (NSURL *)localDirectory
 {
-  NSURL *directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:[SGKConfig appGroupName]];
+  NSURL *directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:[[SGKConfig sharedInstance] appGroupName]];
   if (nil == directory) {
-    [SGKLog warn:@"TKTripKit" format:@"Can't load container directory for app group (%@)!", [SGKConfig appGroupName]];
+    [SGKLog warn:@"TKTripKit" format:@"Can't load container directory for app group (%@)!", [[SGKConfig sharedInstance] appGroupName]];
     directory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
   }
   return directory;
