@@ -280,6 +280,11 @@
 		return self.arrival;
 }
 
+- (BOOL)timeIsRealTime
+{
+  return [self.service isRealTime];
+}
+
 - (NSTimeZone *)timeZone
 {
 	return self.stop.region.timeZone;

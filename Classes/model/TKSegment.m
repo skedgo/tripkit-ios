@@ -374,19 +374,6 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.template.disclaimer;
 }
 
-- (NSString *)iconLabel
-{
-  if ([self timesAreRealTime]) {
-    if ([self isPublicTransport]) {
-      return NSLocalizedStringFromTable(@"Real-time", @"TripKit", nil);
-    } else {
-      return NSLocalizedStringFromTable(@"Live traffic", @"TripKit", nil);
-    }
-  } else {
-    return nil;
-  }
-}
-
 - (NSArray *)alerts
 {
   if (!_alerts) {
@@ -778,7 +765,7 @@ NSString *const UninitializedString =  @"UninitializedString";
       return [UIImage imageNamed:@"icon-pin"];
       
     case BHSegmentOrdering_Regular:
-      return [self imageForIconType:SGStyleModeIconTypeListMainMode];
+      return [self imageForIconType:SGStyleModeIconTypeListMainMode allowRealTime:NO];
   }
 }
 
@@ -792,11 +779,16 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.order == BHSegmentOrdering_End;
 }
 
-#pragma mark - ASDirectionalTimePoint
+#pragma mark - STKDirectionalTimePoint
 
 - (NSDate *)time
 {
 	return self.departureTime;
+}
+
+- (BOOL)timeIsRealTime
+{
+  return self.timesAreRealTime;
 }
 
 - (void)setTime:(NSDate *)time
@@ -823,7 +815,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (UIImage *)tripSegmentModeImage
 {
-  return [self imageForIconType:SGStyleModeIconTypeListMainMode];
+  return [self imageForIconType:SGStyleModeIconTypeListMainMode allowRealTime:NO];
 }
 
 - (nullable ModeInfo *)tripSegmentModeInfo
@@ -882,6 +874,15 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.timesAreRealTime;
 }
 
+- (NSDate *)tripSegmentFixedDepartureTime
+{
+  if ([self isPublicTransport] && self.frequency.integerValue == 0) {
+    return self.departureTime;
+  } else {
+    return nil;
+  }
+}
+
 - (NSURL *)tripSegmentModeImageURL
 {
   return [self imageURLForType:SGStyleModeIconTypeListMainMode];
@@ -898,7 +899,15 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSString *)tripSegmentModeSubtitle
 {
-  return [self iconLabel];
+  if ([self timesAreRealTime]) {
+    if ([self isPublicTransport]) {
+      return NSLocalizedStringFromTable(@"Real-time", @"TripKit", nil);
+    } else {
+      return NSLocalizedStringFromTable(@"Live traffic", @"TripKit", nil);
+    }
+  } else {
+    return nil;
+  }
 }
 
 - (UIColor *)tripSegmentModeColor
@@ -951,7 +960,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 #pragma mark - Private methods
 
-- (UIImage *)specificImageForIconType:(SGStyleModeIconType)iconType
+- (UIImage *)specificImageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
 {
   NSString *specificImageName = self.template.modeInfo.localImageName;
   if (self.trip.showNoVehicleUUIDAsLift
@@ -961,14 +970,14 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
   
   return [SGStyleManager imageForModeImageName:specificImageName
-                                    isRealTime:[self timesAreRealTime]
+                                    isRealTime:allowRealTime && [self timesAreRealTime]
                                     ofIconType:iconType];
   
 }
 
-- (UIImage *)imageForIconType:(SGStyleModeIconType)iconType
+- (UIImage *)imageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
 {
-  UIImage *specificImage = [self specificImageForIconType:iconType];
+  UIImage *specificImage = [self specificImageForIconType:iconType allowRealTime:allowRealTime];
   if (specificImage) {
     return specificImage;
   }
@@ -977,7 +986,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   if (modeIdentifier) {
     NSString *genericImageName = [SVKTransportModes modeImageNameForModeIdentifier:modeIdentifier];
     UIImage *genericImage = [SGStyleManager imageForModeImageName:genericImageName
-                                                       isRealTime:[self timesAreRealTime]
+                                                       isRealTime:allowRealTime && [self timesAreRealTime]
                                                        ofIconType:iconType];
     if (genericImage) {
       return genericImage;
