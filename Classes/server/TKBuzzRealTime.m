@@ -26,7 +26,7 @@
 }
 
 - (void)updateTrip:(Trip *)trip
-   successWithFlag:(void (^)(Trip *trip, BOOL tripUpdated))success
+           success:(void (^)(Trip *trip, BOOL tripUpdated))success
            failure:(void (^)(NSError *error))failure {
     if (trip == nil) {
         ZAssert(false, @"Don't call this without a trip");
@@ -47,28 +47,6 @@
              failure(nil);
          }
     }];
-    
-    /*
-    [self.helperRouter updateTrip:trip
-                       completion:
-     ^(Trip *updatedTrip) {
-         if (updatedTrip == trip) {
-             success(trip);
-         } else {
-             failure(nil);
-         }
-     }];
-    */
-}
-
-- (void)updateTrip:(Trip *)trip
-					 success:(void (^)(Trip *trip))success
-					 failure:(void (^)(NSError *error))failure
-{
-    [self updateTrip:trip successWithFlag:
-     ^(Trip *trip, BOOL tripUpdated) {
-         success(trip);
-    } failure:failure];
 }
 
 - (void)updateDLSEntries:(NSSet *)entries

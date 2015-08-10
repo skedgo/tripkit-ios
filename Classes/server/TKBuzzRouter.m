@@ -166,8 +166,6 @@
 - (void)updateTrip:(Trip *)trip completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion
 {
     NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
-    //  DLog(@"Updating trip from URL: %@", updateURL);
-    //  DLog(@"Updating trip (%d): %@", trip.tripGroup.visibility, [trip debugString]);
     [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
 #pragma unused(requestURL, shareURL, error)
         if (JSON) {
@@ -189,32 +187,10 @@
 
 - (void)updateTrip:(Trip *)trip completion:(void(^)(Trip * __nullable trip))completion
 {
-    [self updateTrip:trip completionWithFlag:^(Trip * __nullable trip, BOOL tripUpdated) {
-        completion(trip);
+    [self updateTrip:trip completionWithFlag:^(Trip * __nullable updatedRrip, BOOL tripUpdated) {
+#pragma unused(tripUpdated)
+        completion(updatedRrip);
     }];
-    
-    /*
-  NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
-//  DLog(@"Updating trip from URL: %@", updateURL);
-//  DLog(@"Updating trip (%d): %@", trip.tripGroup.visibility, [trip debugString]);
-  [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
-#pragma unused(requestURL, shareURL, error)
-    if (JSON) {
-      [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
-        DLog(@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]);
-        if (completion) {
-          completion(updatedTrip);
-        }
-      }];
-    } else if (! error) {
-      // No new data (but also no error
-      DLog(@"No update for trip (%d): %@", trip.tripGroup.visibility, [trip debugString]);
-      if (completion) {
-        completion(trip);
-      }
-    }
-  }];
-    */
 }
 
 

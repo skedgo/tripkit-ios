@@ -15,12 +15,8 @@
 - (void)cancelRequests;
 
 - (void)updateTrip:(Trip *)trip
-					 success:(void (^)(Trip *trip))success
+					 success:(void (^)(Trip *trip, BOOL tripUpdated))success
 					 failure:(void (^)(NSError *error))failure;
-
-- (void)updateTrip:(Trip *)trip
-           successWithFlag:(void (^)(Trip *trip, BOOL tripUpdated))success
-           failure:(void (^)(NSError *error))failure;
 
 - (void)updateDLSEntries:(NSSet *)services
                 inRegion:(SVKRegion *)region

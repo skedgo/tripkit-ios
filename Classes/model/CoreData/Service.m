@@ -203,7 +203,7 @@ typedef NSUInteger SGServiceFlag;
 {
   if (self.modeInfo) {
     UIImage *specificImage = [SGStyleManager imageForModeImageName:self.modeInfo.localImageName
-                                                        isRealTime:self.isRealTime
+                                                        isRealTime:NO
                                                         ofIconType:type];
     if (specificImage) {
       return specificImage;
