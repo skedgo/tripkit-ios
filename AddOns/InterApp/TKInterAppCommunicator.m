@@ -14,9 +14,6 @@
 
 #import "SGActions.h"
 
-#import <PSAlertView/PSPDFAlertView.h>
-
-
 @implementation TKInterAppCommunicator
 
 #pragma mark - Turn-by-turn directions helpers
@@ -149,6 +146,7 @@
     [TKInterAppCommunicator performExternalAction:action
                                            titled:title
                                        forSegment:segment
+                                forViewController:controller
                                    openURLHandler:openURLHandler
                                  openStoreHandler:openStoreHandler];
     return;
@@ -166,6 +164,7 @@
          [TKInterAppCommunicator performExternalAction:action
                                                 titled:title
                                             forSegment:actionSegment
+                                     forViewController:controller
                                         openURLHandler:openURLHandler
                                       openStoreHandler:openStoreHandler];
        }];
@@ -226,6 +225,7 @@
 + (void)performExternalAction:(NSString *)action
                        titled:(NSString *)title
                    forSegment:(TKSegment *)segment
+            forViewController:(UIViewController * __nonnull)controller
                openURLHandler:(nullable void (^)(NSURL *url, NSString * __nullable title))openURLHandler
              openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
 {
@@ -239,6 +239,7 @@
     
   } else if ([action isEqualToString:@"ingogo"]) {
     [self launchIngogoForSegment:segment
+               forViewController:controller
                 openStoreHandler:openStoreHandler];
     
   } else if ([action isEqualToString:@"lyft"]) {
@@ -373,7 +374,8 @@
 }
 
 + (void)launchIngogoForSegment:(TKSegment *)segment
-              openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
+             forViewController:(UIViewController * __nonnull)controller
+             openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
 {
 #pragma unused(segment) // ingogo doesn't support that yet
   
@@ -385,27 +387,26 @@
   } else {
     NSString *couponCode = [[SGKConfig sharedInstance] ingogoCouponCode];
     if (couponCode) {
-      PSPDFAlertView *alertView = [[PSPDFAlertView alloc] initWithTitle:NSLocalizedString(@"Get ingogo", nil)
-                                                                message:[NSString stringWithFormat:NSLocalizedString(@"CouponCodeIngogoFormat", "Description for how to redeem the coupon code for ingogo. %couponCode is provided."), couponCode]];
+      SGActions *alert = [[SGActions alloc] initWithTitle:NSLocalizedString(@"Get ingogo", nil)];
+      alert.type = UIAlertControllerStyleAlert;
+      alert.hasCancel = YES;
+      alert.message = [NSString stringWithFormat:NSLocalizedString(@"CouponCodeIngogoFormat", "Description for how to redeem the coupon code for ingogo. %couponCode is provided."), couponCode];
       
-      [alertView setCancelButtonWithTitle:NSLocalizedStringFromTable(@"Cancel", @"Shared", @"Cancel - for action sheets") block:nil];
-      [alertView addButtonWithTitle:NSLocalizedString(@"Get ingogo", nil)
-                              block:
-       ^(NSInteger buttonIndex) {
-#pragma unused(buttonIndex)
-         // copy code to paste board
-         UIPasteboard *pasteboard = [UIPasteboard pasteboardWithName:UIPasteboardNameGeneral
-                                                              create:NO];
-         [pasteboard setString:couponCode];
-         
-         if (openStoreHandler) {
-           openStoreHandler(@(463995190));
-         } else {
-           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
-         }
+      [alert addAction:NSLocalizedString(@"Get ingogo", nil) handler:^{
+        // copy code to paste board
+        UIPasteboard *pasteboard = [UIPasteboard pasteboardWithName:UIPasteboardNameGeneral
+                                                             create:NO];
+        [pasteboard setString:couponCode];
+        
+        if (openStoreHandler) {
+          openStoreHandler(@(463995190));
+        } else {
+          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
+        }
+      }];
+      
+      [alert showForSender:nil inController:controller];
 
-       }];
-      [alertView show];
 
     } else {
       if (openStoreHandler) {
