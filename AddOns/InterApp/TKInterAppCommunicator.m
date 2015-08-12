@@ -30,7 +30,9 @@
            forViewController:(UIViewController *)controller
                  initiatedBy:(id)sender
 {
-  if (! [self deviceHasGoogleMaps]) {
+  BOOL hasGoogleMaps = [self deviceHasGoogleMaps];
+  BOOL hasWaze = [self deviceHasWaze];
+  if (!hasGoogleMaps && !hasWaze) {
     // just open apple's
     [self openSegmentInAppleMaps:segment];
     
@@ -44,12 +46,22 @@
        [TKInterAppCommunicator openSegmentInAppleMaps:directionsSegment];
      }];
     
-    [actions addAction:NSLocalizedString(@"Google Maps", @"google maps directions action")
-               handler:
-     ^{
-       [TKInterAppCommunicator openSegmentInGoogleMapsApp:directionsSegment];
-     }];
-    
+    if (hasGoogleMaps) {
+      [actions addAction:NSLocalizedString(@"Google Maps", @"google maps directions action")
+                 handler:
+       ^{
+         [TKInterAppCommunicator openSegmentInGoogleMapsApp:directionsSegment];
+       }];
+    }
+
+    if (hasWaze) {
+      [actions addAction:@"Waze"
+                 handler:
+       ^{
+         [TKInterAppCommunicator openSegmentInWazeApp:directionsSegment];
+       }];
+    }
+
     actions.hasCancel = YES;
     
     [actions showForSender:sender
@@ -116,6 +128,24 @@
   if (callback) {
     [directionsRequest appendFormat:@"x-success=%@", callback];
   }
+  NSURL *directionsURL = [NSURL URLWithString:directionsRequest];
+  [[UIApplication sharedApplication] openURL:directionsURL];
+}
+
++ (BOOL)deviceHasWaze
+{
+  NSURL *testURL = [NSURL URLWithString:@"waze://"];
+  return [[UIApplication sharedApplication] canOpenURL:testURL];
+}
+
++ (void)openSegmentInWazeApp:(TKSegment *)segment
+{
+  // https://www.waze.com/about/dev
+  
+  // Waze will always start at the current location
+  CLLocationCoordinate2D destination = [[segment end] coordinate];
+  NSMutableString *directionsRequest = [NSMutableString stringWithFormat:@"waze://?ll=%f,%f&navigate=yes", destination.latitude, destination.longitude];
+  
   NSURL *directionsURL = [NSURL URLWithString:directionsRequest];
   [[UIApplication sharedApplication] openURL:directionsURL];
 }
