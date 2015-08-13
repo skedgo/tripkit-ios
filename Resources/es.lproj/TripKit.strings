@@ -19,6 +19,9 @@
 /* Indication of an activity */
 "ActivityIndication" = "Voy a tomar un %@ a las %@ desde %@.";
 
+/* apple maps directions action */
+"Apple Maps" = "Mapa de Apple";
+
 /* Arrival time sorter title */
 "Arrival" = "Llegada";
 
@@ -36,6 +39,18 @@
    Single line instruction to arrive */
 "Arrive" = "Llegar";
 
+/* No comment provided by engineer. */
+"Call" = "Llamar";
+
+/* Action title for calling provider of %name */
+"CallTaxiFormat" = "Llamar a %@";
+
+/* Error title when server could not find a given transit stop. */
+"Could not find transit stop." = "Could not find transit stop."; // TODO
+
+/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
+"CouponCodeIngogoFormat" = "Ingrese el código del cupón '%@' al momento de registrarse para obtener sus $5 de crédito gratuitos (sólo válido para nuevos usuarios)";
+
 /* Departure time sorter title */
 "Departure" = "Partida";
 
@@ -47,6 +62,30 @@
 
 /* Walking time */
 "Duration" = " por %@";
+
+/* Action button title for getting turn-by-turn directions */
+"Get directions" = "Get directions"; // TODO
+
+/* No comment provided by engineer. */
+"Get ingogo" = "Obtener ingogo";
+
+/* No comment provided by engineer. */
+"Get Lyft" = "Obtener Lyft";
+
+/* No comment provided by engineer. */
+"Get Sidecar" = "Obtener Sidecar";
+
+/* No comment provided by engineer. */
+"Get Uber" = "Obtener Uber";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch un Taxi";
+
+/* google maps directions action */
+"Google Maps" = "Google Maps";
+
+/* No comment provided by engineer. */
+"ingogo a Taxi" = "ingogo un Taxi";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -73,6 +112,15 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "On time"; // TODO
 
+/* No comment provided by engineer. */
+"Open Lyft" = "Abrir Lyft";
+
+/* No comment provided by engineer. */
+"Open Sidecar" = "Abrir Sidecar";
+
+/* No comment provided by engineer. */
+"Open Uber" = "Abrir Uber";
+
 /* Arrival Location */
 "PrimaryLocationEnd" = "Hacia %@";
 
@@ -85,12 +133,14 @@
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "En %@";
 
-/* For trip titles, e.g., 'To work'
-   Format string for going from currently location to this one. Used to name favourite destinations. */
-"To %@" = "To %@"; // TODO
-
 /* No comment provided by engineer. */
 "Real-time" = "Tiempo Real";
+
+/* Error recovery suggestion for when when server could not find a given transit stop. */
+"Search for this stop again or try again later.." = "Search for this stop again or try again later.."; // TODO
+
+/* Show website action */
+"Show website" = "Ir al Sitio Web";
 
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld paradas";

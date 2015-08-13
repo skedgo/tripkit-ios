@@ -291,8 +291,8 @@ typedef enum {
 + (NSError *)errorForUserForBrokenStop
 {
   NSDictionary *info = @{
-                         NSLocalizedDescriptionKey: NSLocalizedString(@"Could not find transit stop.", "Error title when server could not find a given transit stop."),
-                         NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Search for this stop again or try again later..", "Error recovery suggestion for when when server could not find a given transit stop."),
+                         NSLocalizedDescriptionKey: NSLocalizedStringFromTable(@"Could not find transit stop.", @"TripKit", "Error title when server could not find a given transit stop."),
+                         NSLocalizedRecoverySuggestionErrorKey: NSLocalizedStringFromTable(@"Search for this stop again or try again later..", @"TripKit", "Error recovery suggestion for when when server could not find a given transit stop."),
                          };
   return [NSError errorWithDomain:@"com.buzzhives.TripKit" code:831571 userInfo:info];
 }

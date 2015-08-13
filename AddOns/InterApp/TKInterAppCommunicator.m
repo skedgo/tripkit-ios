@@ -41,23 +41,23 @@
     [self openSegmentInAppleMaps:segment currentLocationHandler:currentLocationHandler];
     
   } else {
-    SGActions *actions = [[SGActions alloc] initWithTitle:NSLocalizedString(@"Get directions", "Action button title for getting turn-by-turn directions")];
+    SGActions *actions = [[SGActions alloc] initWithTitle:NSLocalizedStringFromTable(@"Get directions", @"TripKit", "Action button title for getting turn-by-turn directions")];
     
     __weak TKSegment *directionsSegment = segment;
-    [actions addAction:NSLocalizedString(@"Apple Maps", @"apple maps directions action")
+    [actions addAction:NSLocalizedStringFromTable(@"Apple Maps", @"TripKit", @"apple maps directions action")
                handler:
      ^{
        [TKInterAppCommunicator openSegmentInAppleMaps:directionsSegment currentLocationHandler:currentLocationHandler];
      }];
     
     if (hasGoogleMaps) {
-      [actions addAction:NSLocalizedString(@"Google Maps", @"google maps directions action")
+      [actions addAction:NSLocalizedStringFromTable(@"Google Maps", @"TripKit", @"google maps directions action")
                  handler:
        ^{
          [TKInterAppCommunicator openSegmentInGoogleMapsApp:directionsSegment currentLocationHandler:currentLocationHandler];
        }];
     }
-
+    
     if (hasWaze) {
       [actions addAction:@"Waze"
                  handler:
@@ -65,7 +65,7 @@
          [TKInterAppCommunicator openSegmentInWazeApp:directionsSegment];
        }];
     }
-
+    
     actions.hasCancel = YES;
     
     [actions showForSender:sender
@@ -211,43 +211,43 @@
 + (NSString *)titleForExternalAction:(NSString *)action
 {
   if ([action isEqualToString:@"gocatch"]) {
-    return NSLocalizedString(@"goCatch a Taxi", @"goCatch action");
+    return NSLocalizedStringFromTable(@"goCatch a Taxi", @"TripKit", @"goCatch action");
     
   } else if ([action isEqualToString:@"uber"]) {
     return [self deviceHasUber]
-    ? NSLocalizedString(@"Open Uber", nil)
-    : NSLocalizedString(@"Get Uber", nil);
+    ? NSLocalizedStringFromTable(@"Open Uber", @"TripKit", nil)
+    : NSLocalizedStringFromTable(@"Get Uber", @"TripKit", nil);
     
   } else if ([action isEqualToString:@"ingogo"]) {
     NSString *prompt = [[SGKConfig sharedInstance] ingogoCouponPrompt];
     if ([self deviceHasIngogo] || !prompt) {
-      return NSLocalizedString(@"ingogo a Taxi", nil);
+      return NSLocalizedStringFromTable(@"ingogo a Taxi", @"TripKit", nil);
     } else {
       return prompt;
     }
     
   } else if ([action isEqualToString:@"lyft"]) {
     return [self deviceHasLyft]
-    ? NSLocalizedString(@"Open Lyft", nil)
-    : NSLocalizedString(@"Get Lyft", nil);
+    ? NSLocalizedStringFromTable(@"Open Lyft", @"TripKit", nil)
+    : NSLocalizedStringFromTable(@"Get Lyft", @"TripKit", nil);
     
   } else if ([action isEqualToString:@"sidecar"]) {
     return [self deviceHasSidecar]
-    ? NSLocalizedString(@"Open Sidecar", nil)
-    : NSLocalizedString(@"Get Sidecar", nil);
+    ? NSLocalizedStringFromTable(@"Open Sidecar", @"TripKit", nil)
+    : NSLocalizedStringFromTable(@"Get Sidecar", @"TripKit", nil);
     
   } else if ([action hasPrefix:@"tel:"]) {
     NSRange nameRange = [action rangeOfString:@"name="];
     if (nameRange.location != NSNotFound) {
       NSString *name = [action substringFromIndex:nameRange.location + nameRange.length];
       name = [name stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-      return [NSString stringWithFormat:NSLocalizedString(@"CallTaxiFormat", "Action title for calling provider of %name"), name];
+      return [NSString stringWithFormat:NSLocalizedStringFromTable(@"CallTaxiFormat", @"TripKit", "Action title for calling provider of %name"), name];
     } else {
-      return NSLocalizedString(@"Call", nil);
+      return NSLocalizedStringFromTable(@"Call", @"TripKit", nil);
     }
     
   } else if ([action hasPrefix:@"http:"]) {
-    return NSLocalizedString(@"Show website", @"Show website action");
+    return NSLocalizedStringFromTable(@"Show website", @"TripKit", @"Show website action");
     
   } else {
     return nil;
@@ -419,11 +419,11 @@
   } else {
     NSString *couponCode = [[SGKConfig sharedInstance] ingogoCouponCode];
     if (couponCode) {
-      PSPDFAlertView *alertView = [[PSPDFAlertView alloc] initWithTitle:NSLocalizedString(@"Get ingogo", nil)
-                                                                message:[NSString stringWithFormat:NSLocalizedString(@"CouponCodeIngogoFormat", "Description for how to redeem the coupon code for ingogo. %couponCode is provided."), couponCode]];
+      PSPDFAlertView *alertView = [[PSPDFAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil)
+                                                                message:[NSString stringWithFormat:NSLocalizedStringFromTable(@"CouponCodeIngogoFormat", @"TripKit", "Description for how to redeem the coupon code for ingogo. %couponCode is provided."), couponCode]];
       
       [alertView setCancelButtonWithTitle:NSLocalizedStringFromTable(@"Cancel", @"Shared", @"Cancel - for action sheets") block:nil];
-      [alertView addButtonWithTitle:NSLocalizedString(@"Get ingogo", nil)
+      [alertView addButtonWithTitle:NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil)
                               block:
        ^(NSInteger buttonIndex) {
 #pragma unused(buttonIndex)
@@ -437,10 +437,10 @@
          } else {
            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
          }
-
+         
        }];
       [alertView show];
-
+      
     } else {
       if (openStoreHandler) {
         openStoreHandler(@(463995190));
