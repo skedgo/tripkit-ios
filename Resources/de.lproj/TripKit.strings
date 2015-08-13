@@ -19,6 +19,9 @@
 /* Indication of an activity */
 "ActivityIndication" = "Ich nehme den %@ um %@ von %@.";
 
+/* apple maps directions action */
+"Apple Maps" = "Apple Karten";
+
 /* Arrival time sorter title */
 "Arrival" = "Ankunft";
 
@@ -36,6 +39,18 @@
    Single line instruction to arrive */
 "Arrive" = "Ankunft";
 
+/* No comment provided by engineer. */
+"Call" = "Anrufen";
+
+/* Action title for calling provider of %name */
+"CallTaxiFormat" = "%@ anrufen";
+
+/* Error title when server could not find a given transit stop. */
+"Could not find transit stop." = "Haltestelle konnte nicht gefunden werden.";
+
+/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
+"CouponCodeIngogoFormat" = "Gib Gutscheincode '%@' bei der Anmeldung ein um dein $5 Guthaben zu bekommen (nur für neue Anmeldungen).";
+
 /* Departure time sorter title */
 "Departure" = "Abfahrt";
 
@@ -47,6 +62,30 @@
 
 /* Walking time */
 "Duration" = " für %@";
+
+/* Action button title for getting turn-by-turn directions */
+"Get directions" = "Navigieren";
+
+/* No comment provided by engineer. */
+"Get ingogo" = "ingogo herunterladen";
+
+/* No comment provided by engineer. */
+"Get Lyft" = "Lyft herunterladen";
+
+/* No comment provided by engineer. */
+"Get Sidecar" = "Sidecar herunterladen";
+
+/* No comment provided by engineer. */
+"Get Uber" = "Uber herunterladen";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch nehmen";
+
+/* google maps directions action */
+"Google Maps" = "Google Maps";
+
+/* No comment provided by engineer. */
+"ingogo a Taxi" = "ingogo nehmen";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -73,6 +112,15 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Pünktlich";
 
+/* No comment provided by engineer. */
+"Open Lyft" = "Lyft öffnen";
+
+/* No comment provided by engineer. */
+"Open Sidecar" = "Sidecar öffnen";
+
+/* No comment provided by engineer. */
+"Open Uber" = "Uber öffnen";
+
 /* Arrival Location */
 "PrimaryLocationEnd" = "Nach %@";
 
@@ -80,17 +128,19 @@
 "PrimaryLocationStart" = "Von %@";
 
 /* Favorite trip 'to' title */
-"To" = "To"; // TODO
+"To" = "Nach";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "Bei %@";
 
-/* For trip titles, e.g., 'To work'
-   Format string for going from currently location to this one. Used to name favourite destinations. */
-"To %@" = "To %@"; // TODO
-
 /* No comment provided by engineer. */
 "Real-time" = "Echtzeit";
+
+/* Error recovery suggestion for when when server could not find a given transit stop. */
+"Search for this stop again or try again later.." = "Bitte suche erneut nach dieser Haltestelle oder versuche es später nochmal.";
+
+/* Show website action */
+"Show website" = "Webseite öffnen";
 
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld Stops";

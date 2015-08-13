@@ -19,6 +19,9 @@
 /* Indication of an activity */
 "ActivityIndication" = "我將於%2$@從%3$@搭乘%1$@.";
 
+/* apple maps directions action */
+"Apple Maps" = "蘋果地圖";
+
 /* Arrival time sorter title */
 "Arrival" = "到達";
 
@@ -36,6 +39,18 @@
    Single line instruction to arrive */
 "Arrive" = "到達";
 
+/* No comment provided by engineer. */
+"Call" = "聯繫計程車";
+
+/* Action title for calling provider of %name */
+"CallTaxiFormat" = "聯繫%@";
+
+/* Error title when server could not find a given transit stop. */
+"Could not find transit stop." = "Could not find transit stop."; // TODO
+
+/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
+"CouponCodeIngogoFormat" = "註冊時使用優惠券代碼'%@'可立時折抵$5元 (只適用新註冊使用者)";
+
 /* Departure time sorter title */
 "Departure" = "離站";
 
@@ -47,6 +62,30 @@
 
 /* Walking time */
 "Duration" = " %@";
+
+/* Action button title for getting turn-by-turn directions */
+"Get directions" = "Get directions"; // TODO
+
+/* No comment provided by engineer. */
+"Get ingogo" = "使用Ingogo";
+
+/* No comment provided by engineer. */
+"Get Lyft" = "使用Lyft";
+
+/* No comment provided by engineer. */
+"Get Sidecar" = "使用Sidecar";
+
+/* No comment provided by engineer. */
+"Get Uber" = "使用Uber";
+
+/* goCatch action */
+"goCatch a Taxi" = "使用goCatch";
+
+/* google maps directions action */
+"Google Maps" = "Google地圖";
+
+/* No comment provided by engineer. */
+"ingogo a Taxi" = "Ingogo叫車服務";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -73,6 +112,15 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "準點";
 
+/* No comment provided by engineer. */
+"Open Lyft" = "開啟Lyft";
+
+/* No comment provided by engineer. */
+"Open Sidecar" = "開啟Sidecar";
+
+/* No comment provided by engineer. */
+"Open Uber" = "開啟Uber";
+
 /* Arrival Location */
 "PrimaryLocationEnd" = "目的地: %@";
 
@@ -85,12 +133,14 @@
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "時刻 %@";
 
-/* For trip titles, e.g., 'To work'
-   Format string for going from currently location to this one. Used to name favourite destinations. */
-"To %@" = "前往 %@";
-
 /* No comment provided by engineer. */
 "Real-time" = "即時";
+
+/* Error recovery suggestion for when when server could not find a given transit stop. */
+"Search for this stop again or try again later.." = "Search for this stop again or try again later.."; // TODO
+
+/* Show website action */
+"Show website" = "開啟網站";
 
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld站";
