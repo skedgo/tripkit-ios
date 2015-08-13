@@ -8,7 +8,7 @@
 
 #import "TKInterAppCommunicator.h"
 
-#import "SGRootKit.h"
+#import "TKTripKit.h"
 
 #import "SGKConfig+TKInterAppCommunicator.h"
 
@@ -29,12 +29,13 @@
 + (void)openSegmentInMapsApp:(TKSegment *)segment
            forViewController:(UIViewController *)controller
                  initiatedBy:(id)sender
+      currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
 {
   BOOL hasGoogleMaps = [self deviceHasGoogleMaps];
   BOOL hasWaze = [self deviceHasWaze];
   if (!hasGoogleMaps && !hasWaze) {
     // just open apple's
-    [self openSegmentInAppleMaps:segment];
+    [self openSegmentInAppleMaps:segment currentLocationHandler:currentLocationHandler];
     
   } else {
     SGActions *actions = [[SGActions alloc] initWithTitle:NSLocalizedString(@"Get directions", "Action button title for getting turn-by-turn directions")];
@@ -43,14 +44,14 @@
     [actions addAction:NSLocalizedString(@"Apple Maps", @"apple maps directions action")
                handler:
      ^{
-       [TKInterAppCommunicator openSegmentInAppleMaps:directionsSegment];
+       [TKInterAppCommunicator openSegmentInAppleMaps:directionsSegment currentLocationHandler:currentLocationHandler];
      }];
     
     if (hasGoogleMaps) {
       [actions addAction:NSLocalizedString(@"Google Maps", @"google maps directions action")
                  handler:
        ^{
-         [TKInterAppCommunicator openSegmentInGoogleMapsApp:directionsSegment];
+         [TKInterAppCommunicator openSegmentInGoogleMapsApp:directionsSegment currentLocationHandler:currentLocationHandler];
        }];
     }
 
@@ -80,9 +81,10 @@
 }
 
 + (void)openSegmentInAppleMaps:(TKSegment *)segment
+        currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
 {
   MKMapItem *start;
-  if ([self segmentIsCurrentLocation:segment]) {
+  if (currentLocationHandler == nil || currentLocationHandler(segment)) {
     start = [MKMapItem mapItemForCurrentLocation];
   } else {
     MKPlacemark *startPlace = [[MKPlacemark alloc] initWithCoordinate:[[segment start] coordinate] addressDictionary:nil];
@@ -105,13 +107,14 @@
 }
 
 + (void)openSegmentInGoogleMapsApp:(TKSegment *)segment
+            currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
 {
   // https://developers.google.com/maps/documentation/ios/urlscheme
   
   NSMutableString *directionsRequest = [NSMutableString stringWithString:@"comgooglemaps-x-callback://?"];
   
   // source
-  if ([self segmentIsCurrentLocation:segment]) {
+  if (currentLocationHandler == nil || currentLocationHandler(segment)) {
     // nothing to add
   } else {
     CLLocationCoordinate2D origin = [[segment start] coordinate];
@@ -150,11 +153,6 @@
   [[UIApplication sharedApplication] openURL:directionsURL];
 }
 
-+ (BOOL)segmentIsCurrentLocation:(TKSegment *)segment
-{
-  return [[SGLocationManager sharedInstance] annotationIsCurrentLocation:segment.start orCloseEnough:YES];
-}
-
 #pragma mark - Taxi helpers
 
 + (BOOL)canHandleExternalActions:(TKSegment *)segment
@@ -165,6 +163,7 @@
 + (void)handleExternalActions:(TKSegment * __nonnull)segment
             forViewController:(UIViewController * __nonnull)controller
                   initiatedBy:(nullable id)sender
+       currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
                openURLHandler:(nullable void (^)(NSURL * __nonnull, NSString * __nullable))openURLHandler
              openStoreHandler:(nullable void (^)(NSNumber * __nonnull))openStoreHandler
 {
@@ -177,6 +176,7 @@
                                            titled:title
                                        forSegment:segment
                                 forViewController:controller
+                           currentLocationHandler:currentLocationHandler
                                    openURLHandler:openURLHandler
                                  openStoreHandler:openStoreHandler];
     return;
@@ -195,6 +195,7 @@
                                                 titled:title
                                             forSegment:actionSegment
                                      forViewController:controller
+                                currentLocationHandler:currentLocationHandler
                                         openURLHandler:openURLHandler
                                       openStoreHandler:openStoreHandler];
        }];
@@ -256,6 +257,7 @@
                        titled:(NSString *)title
                    forSegment:(TKSegment *)segment
             forViewController:(UIViewController * __nonnull)controller
+       currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
                openURLHandler:(nullable void (^)(NSURL *url, NSString * __nullable title))openURLHandler
              openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
 {
@@ -265,6 +267,7 @@
     
   } else if ([action isEqualToString:@"uber"]) {
     [self launchUberForSegment:segment
+        currentLocationHandler:currentLocationHandler
                 openURLHandler:openURLHandler];
     
   } else if ([action isEqualToString:@"ingogo"]) {
@@ -278,6 +281,7 @@
     
   } else if ([action isEqualToString:@"sidecar"]) {
     [self launchSidecarForSegment:segment
+           currentLocationHandler:currentLocationHandler
                  openStoreHandler:openStoreHandler];
     
   } else if ([self canCall] && [action hasPrefix:@"tel:"]) {
@@ -449,6 +453,7 @@
 }
 
 + (void)launchUberForSegment:(TKSegment *)segment
+      currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
               openURLHandler:(nullable void (^)(NSURL *url, NSString * __nullable title))openURLHandler
 {
   if ([self deviceHasUber]) {
@@ -457,7 +462,7 @@
     NSMutableString *urlString = [NSMutableString stringWithString:@"uber://?action=setPickup"];
     
     // from
-    if ([self segmentIsCurrentLocation:segment]) {
+    if (currentLocationHandler == nil || currentLocationHandler(segment)) {
       [urlString appendString:@"&pickup=my_location"];
     } else {
       id<MKAnnotation> startAnnotation = [segment start];
@@ -543,6 +548,7 @@
 }
 
 + (void)launchSidecarForSegment:(TKSegment *)segment
+         currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
                openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
 {
   if ([self deviceHasSidecar]) {
@@ -551,7 +557,7 @@
     NSMutableString *urlString = [NSMutableString stringWithString:@"sidecar://"];
     
     // from
-    if ([self segmentIsCurrentLocation:segment]) {
+    if (currentLocationHandler == nil || currentLocationHandler(segment)) {
       [urlString appendString:@"?source=currentlocation"];
     } else {
       id<MKAnnotation> startAnnotation = [segment start];
