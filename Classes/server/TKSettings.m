@@ -61,9 +61,7 @@
   if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableFlights]) {
     [paras setValue:@(YES) forKey:@"ef"];
   }
-  if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableInterregional]) {
-    [paras setValue:@(YES) forKey:@"ir"];
-  }
+  [paras setValue:@(YES) forKey:@"ir"];
   
 #ifdef DEBUG
   [paras setValue:@(YES) forKey:@"bsb"];
