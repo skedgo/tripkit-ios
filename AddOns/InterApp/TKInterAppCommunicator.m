@@ -14,8 +14,12 @@
 
 #import "SGActions.h"
 
+#import <MessageUI/MessageUI.h>
 #import <PSAlertView/PSPDFAlertView.h>
 
+@interface ComposerDelegate : NSObject <MFMessageComposeViewControllerDelegate>
++ (ComposerDelegate *)sharedInstance;
+@end
 
 @implementation TKInterAppCommunicator
 
@@ -178,6 +182,7 @@
     [TKInterAppCommunicator performExternalAction:action
                                            titled:title
                                        forSegment:segment
+                                forViewController:controller
                            currentLocationHandler:currentLocationHandler
                                    openURLHandler:openURLHandler
                                  openStoreHandler:openStoreHandler];
@@ -196,6 +201,7 @@
          [TKInterAppCommunicator performExternalAction:action
                                                 titled:title
                                             forSegment:actionSegment
+                                     forViewController:controller
                                 currentLocationHandler:currentLocationHandler
                                         openURLHandler:openURLHandler
                                       openStoreHandler:openStoreHandler];
@@ -257,6 +263,7 @@
 + (void)performExternalAction:(NSString *)action
                        titled:(NSString *)title
                    forSegment:(TKSegment *)segment
+            forViewController:(UIViewController * __nonnull)controller
        currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
                openURLHandler:(nullable void (^)(NSURL *url, NSString * __nullable title))openURLHandler
              openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
@@ -285,6 +292,9 @@
     
   } else if ([self canCall] && [action hasPrefix:@"tel:"]) {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]];
+    
+  } else if ([self canSendSMS] && [action hasPrefix:@"sms:"]) {
+    [self composeSMS:action forViewController:controller];
     
   } else if ([action hasPrefix:@"http:"] || [action hasPrefix:@"https:"]) {
     NSURL *url = [NSURL URLWithString:action];
@@ -600,11 +610,49 @@
 
 #pragma mark - Helpers
 
-
-
 + (BOOL)canCall
 {
   return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:"]];
 }
 
++ (BOOL)canSendSMS
+{
+  return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"sms:"]];
+}
+
++ (void)composeSMS:(NSString *)SMS
+ forViewController:(UIViewController *)controller
+{
+  NSString *raw = [SMS stringByReplacingOccurrencesOfString:@"sms:" withString:@""];
+  NSArray *brokenUp = [raw componentsSeparatedByString:@"?"];
+  NSString *recipient = [brokenUp firstObject];
+  NSString *message = brokenUp.count > 1 ? [brokenUp lastObject] : nil;
+  
+  MFMessageComposeViewController *messageComposer = [[MFMessageComposeViewController alloc] init];
+  messageComposer.messageComposeDelegate = [ComposerDelegate sharedInstance];
+  messageComposer.recipients = @[recipient];
+  messageComposer.body = message;
+  
+  [controller presentViewController:messageComposer animated:YES completion:nil];
+}
+
 @end
+
+
+@implementation ComposerDelegate
+
++ (ComposerDelegate *)sharedInstance
+{
+  DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
+    return [[self alloc] init];
+  });
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+#pragma unused(result)
+  [controller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+@end
+
