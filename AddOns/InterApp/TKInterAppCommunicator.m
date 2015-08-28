@@ -14,6 +14,12 @@
 
 #import "SGActions.h"
 
+#import <MessageUI/MessageUI.h>
+
+@interface ComposerDelegate : NSObject <MFMessageComposeViewControllerDelegate>
++ (ComposerDelegate *)sharedInstance;
+@end
+
 @implementation TKInterAppCommunicator
 
 #pragma mark - Turn-by-turn directions helpers
@@ -286,6 +292,9 @@
     
   } else if ([self canCall] && [action hasPrefix:@"tel:"]) {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]];
+    
+  } else if ([self canSendSMS] && [action hasPrefix:@"sms:"]) {
+    [self composeSMS:action forViewController:controller];
     
   } else if ([action hasPrefix:@"http:"] || [action hasPrefix:@"https:"]) {
     NSURL *url = [NSURL URLWithString:action];
@@ -601,11 +610,49 @@
 
 #pragma mark - Helpers
 
-
-
 + (BOOL)canCall
 {
   return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:"]];
 }
 
++ (BOOL)canSendSMS
+{
+  return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"sms:"]];
+}
+
++ (void)composeSMS:(NSString *)SMS
+ forViewController:(UIViewController *)controller
+{
+  NSString *raw = [SMS stringByReplacingOccurrencesOfString:@"sms:" withString:@""];
+  NSArray *brokenUp = [raw componentsSeparatedByString:@"?"];
+  NSString *recipient = [brokenUp firstObject];
+  NSString *message = brokenUp.count > 1 ? [brokenUp lastObject] : nil;
+  
+  MFMessageComposeViewController *messageComposer = [[MFMessageComposeViewController alloc] init];
+  messageComposer.messageComposeDelegate = [ComposerDelegate sharedInstance];
+  messageComposer.recipients = @[recipient];
+  messageComposer.body = message;
+  
+  [controller presentViewController:messageComposer animated:YES completion:nil];
+}
+
 @end
+
+
+@implementation ComposerDelegate
+
++ (ComposerDelegate *)sharedInstance
+{
+  DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
+    return [[self alloc] init];
+  });
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+#pragma unused(result)
+  [controller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+@end
+
