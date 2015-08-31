@@ -137,7 +137,7 @@
 "Real-time" = "Real-time";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later..";
+"Search for this stop again or try again later.." = "Search for this stop again or try again later.";
 
 /* Show website action */
 "Show website" = "Show website";
