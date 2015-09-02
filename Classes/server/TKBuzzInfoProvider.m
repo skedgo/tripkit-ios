@@ -298,6 +298,7 @@ typedef enum {
 }
 
 + (void)fillInStop:(StopLocation *)stop
+             named:(nullable NSString *)name
         completion:(void (^)(NSError *))completion
 {
   NSParameterAssert(stop);
@@ -321,14 +322,22 @@ typedef enum {
     }
     
     // construct the parameters
-    NSDictionary *paras = @{
-                            @"app"       : [[SGKConfig sharedInstance] regionEligibility],
-                            @"region"    : region.name,
-                            @"stopCodes" : @[stop.stopCode],
-                            };
+    NSMutableDictionary *paras = [NSMutableDictionary dictionary];
+    paras[@"region"] = stop.regionName;
+    paras[@"code"] = stop.stopCode;
+    paras[@"name"] = stop.name ?: name;
+    paras[@"modeInfo"] = stop.stopModeInfo;
     
-    [server initiateDataTaskWithMethod:@"GET"
-                                  path:@"stops.json"
+    if (stop.location) {
+      CLLocationCoordinate2D coordinate = stop.coordinate;
+      if (CLLocationCoordinate2DIsValid(coordinate)) {
+        paras[@"lat"] = @(coordinate.latitude);
+        paras[@"lng"] = @(coordinate.longitude);
+      }
+    }
+    
+    [server initiateDataTaskWithMethod:@"POST"
+                                  path:@"stopFinder.json"
                             parameters:paras
                                 region:region
                                success:
