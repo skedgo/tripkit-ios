@@ -220,13 +220,13 @@
   
   for (NSDictionary *shapeDict in shapesArray) {
     // is there any content in this shape?
-    NSString *encodedWaypoints = [shapeDict objectForKey:@"encodedWaypoints"];
+    NSString *encodedWaypoints = shapeDict[@"encodedWaypoints"];
     if (encodedWaypoints.length == 0)
       continue;
     
     // get information about the service if there's any in there
-    NSString *serviceCode = [shapeDict objectForKey:@"serviceTripID"];
-    if (nil != serviceCode && NO == [serviceCode isEqualToString:previousService.code]) {
+    NSString *serviceCode = shapeDict[@"serviceTripID"];
+    if (serviceCode && NO == [serviceCode isEqualToString:previousService.code]) {
       // we need a new service
       if ([serviceCode isEqualToString:requestedService.code]) {
         currentService = requestedService;
@@ -256,8 +256,8 @@
     // create the new shape
     Shape *shape = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Shape class]) inManagedObjectContext:context];
     shape.index = @(waypointGroupCount++);
-    shape.travelled = [shapeDict objectForKey:@"travelled"];
-    shape.title = [shapeDict objectForKey:@"name"];
+    shape.travelled = shapeDict[@"travelled"];
+    shape.title = shapeDict[@"name"];
     shape.encodedWaypoints = encodedWaypoints;
     if (nil == shape.travelled)
       shape.travelled = @(YES);
