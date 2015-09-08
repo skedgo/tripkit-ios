@@ -19,7 +19,6 @@
   
   // JSON version
   [paras setValue:@(11) forKey:@"v"];
-  [paras setValue:[[SGKConfig sharedInstance] regionEligibility] forKey:@"app"];
   
   // distance units
   NSString *unit = nil;

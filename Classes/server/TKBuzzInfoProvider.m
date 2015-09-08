@@ -322,7 +322,6 @@ typedef enum {
     
     // construct the parameters
     NSDictionary *paras = @{
-                            @"app"       : [[SGKConfig sharedInstance] regionEligibility],
                             @"region"    : region.name,
                             @"stopCodes" : @[stop.stopCode],
                             };
