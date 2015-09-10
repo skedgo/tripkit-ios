@@ -30,7 +30,7 @@
   if (nil == segment || NO == [segment isKindOfClass:[TKSegment class]])
     return NO;
   
-  return [segment isSelfNavigating];
+  return [segment isSelfNavigating] && [segment duration:YES] > 2 * 60;
 }
 
 + (void)openSegmentInMapsApp:(TKSegment *)segment
@@ -128,10 +128,17 @@
     [directionsRequest appendFormat:@"saddr=%.5f,%.5f&", origin.latitude, origin.longitude];
   }
   
-  
   // destination
   CLLocationCoordinate2D destination = [[segment end] coordinate];
   [directionsRequest appendFormat:@"daddr=%.5f,%.5f&", destination.latitude, destination.longitude];
+  
+  if ([segment isWalking]) {
+    [directionsRequest appendString:@"directionsmode=walking"];
+  } else if ([segment isCycling]) {
+    [directionsRequest appendString:@"directionsmode=bicycling"];
+  } else if ([segment isDriving]) {
+    [directionsRequest appendString:@"directionsmode=driving"];
+  }
   
   // call-back
   NSString *callback = [[SGKConfig sharedInstance] googleMapsCallback];

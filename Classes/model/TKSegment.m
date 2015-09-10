@@ -511,6 +511,14 @@ NSString *const UninitializedString =  @"UninitializedString";
   return [self.template isWalking];
 }
 
+- (BOOL)isCycling {
+  return [self.template isCycling];
+}
+
+- (BOOL)isDriving {
+  return [self.template isDriving];
+}
+
 - (BOOL)isFlight {
   return [self.template isFlight];
 }

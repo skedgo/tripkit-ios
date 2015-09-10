@@ -62,6 +62,8 @@
 
 - (BOOL)isPublicTransport;
 - (BOOL)isWalking;
+- (BOOL)isCycling;
+- (BOOL)isDriving;
 - (BOOL)isStationary;
 - (BOOL)isSelfNavigating;
 - (BOOL)isSharedVehicle;
