@@ -79,6 +79,14 @@ typedef NSUInteger SGSegmentTemplateFlag;
   return [SVKTransportModes modeIdentifierIsWalking:self.modeIdentifier];
 }
 
+- (BOOL)isCycling {
+  return [SVKTransportModes modeIdentifierIsCycling:self.modeIdentifier];
+}
+
+- (BOOL)isDriving {
+  return [SVKTransportModes modeIdentifierIsDriving:self.modeIdentifier];
+}
+
 - (BOOL)isSharedVehicle {
   return [SVKTransportModes modeIdentifierIsSharedVehicle:self.modeIdentifier];
 }

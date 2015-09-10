@@ -89,6 +89,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isPublicTransport;
 - (BOOL)hasTimetable;
 - (BOOL)isWalking;
+- (BOOL)isCycling;
+- (BOOL)isDriving;
 - (BOOL)isStationary;
 - (BOOL)isSelfNavigating;
 - (BOOL)isSharedVehicle;
