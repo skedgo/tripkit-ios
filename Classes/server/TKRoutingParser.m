@@ -539,6 +539,8 @@
           reference.service = service;
           
           reference.ticketWebsiteURLString = refDict[@"ticketWebsiteURL"];
+          reference.serviceStops = refDict[@"stops"];
+          reference.departurePlatform = refDict[@"platform"];
           
           // set the trip status
           if (service.frequency.integerValue == 0) {

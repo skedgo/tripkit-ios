@@ -34,6 +34,8 @@
 @property (nonatomic, copy) NSDictionary *bookingData;
 @property (nonatomic, copy) NSDictionary *sharedVehicleData;
 @property (nonatomic, copy) NSString *ticketWebsiteURLString;
+@property (nonatomic, copy) NSString *departurePlatform;
+@property (nonatomic, copy) NSNumber *serviceStops;
 
 @property (nonatomic, assign) BOOL timesAreRealTime;
 
