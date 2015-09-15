@@ -231,6 +231,11 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
+- (id)payloadForKey:(NSString *)key
+{
+  return [self.reference payloadForKey:key];
+}
+
 - (STKVehicleType)privateVehicleType
 {
   NSString *modeIdentifier = self.modeIdentifier;

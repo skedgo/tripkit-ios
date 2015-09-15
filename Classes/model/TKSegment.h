@@ -106,6 +106,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)usesVehicle;
 
 /**
+ @return The payload passed on by the server for the specified key.
+ */
+- (nullable id)payloadForKey:(NSString *)key;
+
+/**
  @return The used vehicle (if there are any) in SkedGo API-compatible form
  */
 - (NSDictionary<NSString *, id<NSCoding>> *)usedVehicleFromAllVehicles:(NSArray <id<STKVehicular>> *)allVehicles;

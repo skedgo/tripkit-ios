@@ -579,6 +579,15 @@
         
         reference.alertHashCodes = refDict[@"alertHashCodes"];
         
+        // Any segment can have payloads
+        NSDictionary *payloads = refDict[@"payloads"];
+        if (payloads) {
+          [payloads enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+#pragma unused(stop)
+            [reference setPayload:obj forKey:key];
+          }];
+        }
+        
         // now we can add the template, too
         if (unprocessedTemplateDict) {
           [self insertNewSegmentTemplate:unprocessedTemplateDict
