@@ -46,4 +46,7 @@
 - (void)setVehicle:(id<STKVehicular>)vehicle;
 - (id<STKVehicular>)vehicleFromAllVehicles:(NSArray *)allVehicles;
 
+- (void)setPayload:(id)payload forKey:(NSString *)key;
+- (id)payloadForKey:(NSString *)key;
+
 @end

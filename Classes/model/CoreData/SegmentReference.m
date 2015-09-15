@@ -125,6 +125,16 @@ typedef NSUInteger SGSegmentFlag;
   [self setData:ticketWebsiteURLString forKey:@"ticketWebsiteURL"];
 }
 
+- (void)setPayload:(id)payload forKey:(NSString *)key
+{
+  [self setData:payload forKey:key];
+}
+
+- (id)payloadForKey:(NSString *)key
+{
+  return [self dataForKey:key];
+}
+
 - (BOOL)timesAreRealTime
 {
   return [self hasFlag:SGSegmentFlagTimesAreRealtime];
