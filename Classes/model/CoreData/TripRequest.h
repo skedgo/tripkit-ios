@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)priceInformationAvailable;
 
-- (NSArray *)sortDescriptorsAccordingToSelectedOrder;
+- (NSArray<NSSortDescriptor *> *)sortDescriptorsAccordingToSelectedOrder;
 
 - (NSString *)debugString;
 

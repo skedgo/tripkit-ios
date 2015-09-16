@@ -22,12 +22,12 @@
 - (void)parseAndAddResult:(NSDictionary *)json
             intoTripGroup:(TripGroup *)tripGroup
                   merging:(BOOL)mergeWithExistingTrips
-               completion:(void (^)(NSArray *addedTrips))completion;
+               completion:(void (^)(NSArray<Trip *> *addedTrips))completion;
 
 - (void)parseAndAddResult:(NSDictionary *)json
                forRequest:(TripRequest *)request
                   merging:(BOOL)mergeWithExistingTrips
-               completion:(void (^)(NSArray *addedTrips))completion;
+               completion:(void (^)(NSArray<Trip *> *addedTrips))completion;
 
 /**
  Parses the specified content and inserts it into the the parser's context.
@@ -39,9 +39,9 @@
  @param alertJson            Optional alerts JSON.
  @param completion           Called on completion from within the parser's managed object context. Will use the keys from `keyToTripGroups`.
  */
-- (void)parseAndAddResult:(NSDictionary *)keyToTripGroups
-     withSegmentTemplates:(NSArray *)segmentTemplatesJson
-                andAlerts:(NSArray *)alertJson
+- (void)parseAndAddResult:(NSDictionary<id<NSCopying>, NSArray<NSDictionary *> *> *)keyToTripGroups
+     withSegmentTemplates:(NSArray<NSDictionary *> *)segmentTemplatesJson
+                andAlerts:(NSArray<NSDictionary *> *)alertJson
                completion:(void (^)(NSDictionary *keyToAddedTrips))completion;
 
 - (void)parseJSON:(NSDictionary *)json
