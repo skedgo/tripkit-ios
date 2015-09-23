@@ -30,8 +30,8 @@
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain) StopLocation *parent;
 @property (nonatomic, strong) Cell *cell;
-@property (nonatomic, retain) NSSet *children;
-@property (nonatomic, retain) NSSet *visits;
+@property (nonatomic, retain) NSSet<StopLocation *> *children;
+@property (nonatomic, retain) NSSet<StopVisits *> *visits;
 
 @property (nonatomic, strong) NSDate *lastEarliestDate;
 
@@ -70,9 +70,9 @@
 
 - (StopVisits *)lastDeparture;
 
-- (NSArray *)stopsToMatchTo;
+- (NSArray<StopLocation *> *)stopsToMatchTo;
 
-- (NSArray *)alertsIncludingChildren;
+- (NSArray<Alert *> *)alertsIncludingChildren;
 
 - (void)clearVisits;
 

@@ -137,7 +137,7 @@
 "Real-time" = "即时";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later.."; // TODO
+"Search for this stop again or try again later.." = "Search for this stop again or try again later."; // TODO
 
 /* Show website action */
 "Show website" = "开启网站";

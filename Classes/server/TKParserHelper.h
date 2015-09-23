@@ -25,14 +25,14 @@ forRealTimeStatusString:(NSString *)realTimeStatus;
 
 #pragma mark - Shapes
 
-+ (NSArray *)insertNewShapes:(NSArray *)shapesArray
-                  forService:(Service *)service
-                withModeInfo:(ModeInfo *)modeInfo;
++ (NSArray<Shape *> *)insertNewShapes:(NSArray<NSDictionary *> *)shapesArray
+                           forService:(Service *)service
+                         withModeInfo:(ModeInfo *)modeInfo;
 
-+ (NSArray *)insertNewShapes:(NSArray *)shapesArray
-                  forService:(Service *)service
-                withModeInfo:(ModeInfo *)modeInfo
-            orTripKitContext:(NSManagedObjectContext *)context;
++ (NSArray<Shape *> *)insertNewShapes:(NSArray<NSDictionary *> *)shapesArray
+                           forService:(Service *)service
+                         withModeInfo:(ModeInfo *)modeInfo
+                     orTripKitContext:(NSManagedObjectContext *)context;
 
 #pragma mark - Vehicles
 
@@ -57,7 +57,7 @@ forRealTimeStatusString:(NSString *)realTimeStatus;
 
 #pragma mark - Alerts
 
-+ (void)updateOrAddAlerts:(NSArray *)alerts
++ (void)updateOrAddAlerts:(NSArray<NSDictionary *> *)alerts
          inTripKitContext:(NSManagedObjectContext *)context;
 
 

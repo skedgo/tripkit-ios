@@ -266,24 +266,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSString *)scheduledStartPlatform
 {
-  if (_scheduledStartPlatform == UninitializedString) {
-    NSString *stopCode = [self scheduledStartStopCode];
-    if (stopCode.length > 0) {
-      NSManagedObjectContext *context = [self.template managedObjectContext];
-      NSString *platform = [StopLocation platformForStopCode:stopCode
-                                               inRegionNamed:self.localRegion.name
-                                            inTripKitContext:context];
-      if (platform) {
-        _scheduledStartPlatform = platform;
-      } else {
-        // keep uninitialised as we might still be fetching the info
-        return nil;
-      }
-    } else {
-      _scheduledStartPlatform = nil;
-    }
-  }
-  return _scheduledStartPlatform;
+  return self.reference.departurePlatform;
 }
 
 - (StopLocation *)scheduledStartStop
@@ -1023,25 +1006,18 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSUInteger)numberOfStopsIncludingContinuation
 {
-  NSUInteger visited = 0;
+  NSUInteger stops = 0;
   TKSegment *segment = self;
   while (segment) {
-    NSArray *visitIndicators = [segment.segmentVisits allValues];
-    if (! visitIndicators) {
-      return 0; // data still missing
-    }
-    for (NSNumber *indicator in visitIndicators) {
-      if (indicator.boolValue)
-        visited++;
-    }
+    stops += [segment.reference.serviceStops integerValue];
     
     // wrap-over
     segment = [segment next];
     if (! segment.isContinuation)
       break;
   }
-  visited--; // don't count start
-  return visited;
+  
+  return stops;
 }
 
 - (SegmentTemplate *)template
@@ -1096,7 +1072,6 @@ NSString *const UninitializedString =  @"UninitializedString";
       replacement = platform;
     } else {
       replacement = @"";
-      isTimeDependent = YES; // we'll fetch those soon
     }
     [string replaceCharactersInRange:range withString:replacement];
   }
@@ -1107,7 +1082,6 @@ NSString *const UninitializedString =  @"UninitializedString";
     NSInteger visited = [self numberOfStopsIncludingContinuation];
     if (visited <= 0) {
       replacement = @"";
-      isTimeDependent = YES; // we'll fetch those soon
     } else if (visited == 1) {
       replacement = NSLocalizedStringFromTable(@"1 stop", @"TripKit", nil);
     } else {

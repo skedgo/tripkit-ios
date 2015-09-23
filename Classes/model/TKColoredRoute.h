@@ -12,16 +12,16 @@
 
 @interface TKColoredRoute : NSObject <STKDisplayableRoute>
 
-- (id)initWithWaypoints:(NSArray *)waypoints // NSArray <MKAnnotation>
+- (id)initWithWaypoints:(NSArray<id<MKAnnotation>> *)waypoints
 							withColor:(UIColor *)color
-						dashPattern:(NSArray *)dashPattern
+						dashPattern:(NSArray<NSNumber *> *)dashPattern
             isTravelled:(BOOL)isTravelled;
 
-- (id)initWithWaypoints:(NSArray *)waypoints // NSArray <MKAnnotation>
+- (id)initWithWaypoints:(NSArray<id<MKAnnotation>> *)waypoints
 									 from:(NSInteger)start
 										 to:(NSInteger)end
 							withColor:(UIColor *)color
-            dashPattern:(NSArray *)dashPattern
+            dashPattern:(NSArray<NSNumber *> *)dashPattern
             isTravelled:(BOOL)isTravelled;
 
 @end

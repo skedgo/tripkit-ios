@@ -69,7 +69,7 @@
 - (BOOL)isSharedVehicle;
 - (BOOL)isFlight;
 
-- (NSArray *)dashPattern;
+- (NSArray<NSNumber *> *)dashPattern;
 
 @property (nonatomic, strong) NSString *disclaimer;
 

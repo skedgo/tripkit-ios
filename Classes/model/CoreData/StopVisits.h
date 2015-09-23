@@ -45,14 +45,14 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 // KVO
 @property (nonatomic, strong) NSDate *time;
 
-+ (NSArray *)fetchStopVisitsForStopLocation:(StopLocation *)stopLocation
-                           startingFromDate:(NSDate *)earliestDate;
++ (NSArray<StopVisits *> *)fetchStopVisitsForStopLocation:(StopLocation *)stopLocation
+                                         startingFromDate:(NSDate *)earliestDate;
 
 - (void)remove;
 
-+ (NSArray *)defaultSortDescriptors;
++ (NSArray<NSSortDescriptor *> *)defaultSortDescriptors;
 
-+ (NSPredicate *)departuresPredicateForStops:(NSArray *)stops
++ (NSPredicate *)departuresPredicateForStops:(NSArray<StopLocation *> *)stops
                                     fromDate:(NSDate *)date
                                       filter:(NSString *)filter;
 

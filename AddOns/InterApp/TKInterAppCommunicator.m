@@ -15,7 +15,6 @@
 #import "SGActions.h"
 
 #import <MessageUI/MessageUI.h>
-#import <PSAlertView/PSPDFAlertView.h>
 
 @interface ComposerDelegate : NSObject <MFMessageComposeViewControllerDelegate>
 + (ComposerDelegate *)sharedInstance;
@@ -286,6 +285,7 @@
     
   } else if ([action isEqualToString:@"ingogo"]) {
     [self launchIngogoForSegment:segment
+               forViewController:controller
                 openStoreHandler:openStoreHandler];
     
   } else if ([action isEqualToString:@"lyft"]) {
@@ -424,7 +424,8 @@
 }
 
 + (void)launchIngogoForSegment:(TKSegment *)segment
-              openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
+             forViewController:(UIViewController * __nonnull)controller
+             openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
 {
 #pragma unused(segment) // ingogo doesn't support that yet
   
@@ -436,28 +437,27 @@
   } else {
     NSString *couponCode = [[SGKConfig sharedInstance] ingogoCouponCode];
     if (couponCode) {
-      PSPDFAlertView *alertView = [[PSPDFAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil)
-                                                                message:[NSString stringWithFormat:NSLocalizedStringFromTable(@"CouponCodeIngogoFormat", @"TripKit", "Description for how to redeem the coupon code for ingogo. %couponCode is provided."), couponCode]];
+      SGActions *alert = [[SGActions alloc] initWithTitle:NSLocalizedString(@"Get ingogo", nil)];
+      alert.type = UIAlertControllerStyleAlert;
+      alert.hasCancel = YES;
+      alert.message = [NSString stringWithFormat:NSLocalizedString(@"CouponCodeIngogoFormat", "Description for how to redeem the coupon code for ingogo. %couponCode is provided."), couponCode];
       
-      [alertView setCancelButtonWithTitle:NSLocalizedStringFromTable(@"Cancel", @"Shared", @"Cancel - for action sheets") block:nil];
-      [alertView addButtonWithTitle:NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil)
-                              block:
-       ^(NSInteger buttonIndex) {
-#pragma unused(buttonIndex)
-         // copy code to paste board
-         UIPasteboard *pasteboard = [UIPasteboard pasteboardWithName:UIPasteboardNameGeneral
-                                                              create:NO];
-         [pasteboard setString:couponCode];
-         
-         if (openStoreHandler) {
-           openStoreHandler(@(463995190));
-         } else {
-           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
-         }
-         
-       }];
-      [alertView show];
+      [alert addAction:NSLocalizedString(@"Get ingogo", nil) handler:^{
+        // copy code to paste board
+        UIPasteboard *pasteboard = [UIPasteboard pasteboardWithName:UIPasteboardNameGeneral
+                                                             create:NO];
+        [pasteboard setString:couponCode];
+        
+        if (openStoreHandler) {
+          openStoreHandler(@(463995190));
+        } else {
+          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
+        }
+      }];
       
+      [alert showForSender:nil inController:controller];
+
+
     } else {
       if (openStoreHandler) {
         openStoreHandler(@(463995190));

@@ -125,6 +125,26 @@ typedef NSUInteger SGSegmentFlag;
   [self setData:ticketWebsiteURLString forKey:@"ticketWebsiteURL"];
 }
 
+- (NSString *)departurePlatform
+{
+  return [self dataForKey:@"departurePlatform"];
+}
+
+- (void)setDeparturePlatform:(NSString *)departurePlatform
+{
+  [self setData:departurePlatform forKey:@"departurePlatform"];
+}
+
+- (NSNumber *)serviceStops
+{
+  return [self dataForKey:@"serviceStops"];
+}
+
+- (void)setServiceStops:(NSNumber *)serviceStops
+{
+  [self setData:serviceStops forKey:@"serviceStops"];
+}
+
 - (void)setPayload:(id)payload forKey:(NSString *)key
 {
   [self setData:payload forKey:key];
@@ -160,7 +180,8 @@ typedef NSUInteger SGSegmentFlag;
 {
   if ([data isKindOfClass:[NSDictionary class]]
       || [data isKindOfClass:[NSArray class]]
-      || [data isKindOfClass:[NSString class]]) {
+      || [data isKindOfClass:[NSString class]]
+      || [data isKindOfClass:[NSNumber class]]) {
     NSMutableDictionary *mutable;
     if (self.data) {
       mutable = [NSMutableDictionary dictionaryWithDictionary:self.data];

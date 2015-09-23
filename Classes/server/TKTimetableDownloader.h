@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class StopLocation, TKDLSTable;
+@class StopLocation, StopVisits, TKDLSTable;
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^TKTimetableDownloaderCompletionBlock)(NSArray *__nullable stopVisits, NSError * __nullable error);
+typedef void(^TKTimetableDownloaderCompletionBlock)(NSArray<StopVisits *> *__nullable stopVisits, NSError * __nullable error);
 
 /**
  Downloads timetables for a given stop location or DLS table (i.e., a stop-to-stop timetable).

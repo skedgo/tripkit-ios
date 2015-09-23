@@ -298,6 +298,7 @@ typedef enum {
 }
 
 + (void)fillInStop:(StopLocation *)stop
+             named:(nullable NSString *)name
         completion:(void (^)(NSError *))completion
 {
   NSParameterAssert(stop);
@@ -321,13 +322,22 @@ typedef enum {
     }
     
     // construct the parameters
-    NSDictionary *paras = @{
-                            @"region"    : region.name,
-                            @"stopCodes" : @[stop.stopCode],
-                            };
+    NSMutableDictionary *paras = [NSMutableDictionary dictionary];
+    paras[@"region"] = stop.regionName;
+    paras[@"code"] = stop.stopCode;
+    paras[@"name"] = stop.name ?: name;
+    paras[@"modeInfo"] = stop.stopModeInfo;
     
-    [server initiateDataTaskWithMethod:@"GET"
-                                  path:@"stops.json"
+    if (stop.location) {
+      CLLocationCoordinate2D coordinate = stop.coordinate;
+      if (CLLocationCoordinate2DIsValid(coordinate)) {
+        paras[@"lat"] = @(coordinate.latitude);
+        paras[@"lng"] = @(coordinate.longitude);
+      }
+    }
+    
+    [server initiateDataTaskWithMethod:@"POST"
+                                  path:@"stopFinder.json"
                             parameters:paras
                                 region:region
                                success:
@@ -557,34 +567,40 @@ typedef enum {
   NSManagedObjectContext *tripKitContext = stop.managedObjectContext;
   
   NSArray *groups = responseObject[@"groups"];
-  for (NSDictionary *groupDict in groups) {
-    NSString *key = groupDict[@"key"];
-    if (! [key isEqualToString:stop.stopCode])
-      continue;
-    
-    NSArray *stopList = groupDict[@"stops"];
-    for (NSDictionary *stopDict in stopList) {
-      NSString *code = stopDict[@"code"];
+  if (groups) {
+    for (NSDictionary *groupDict in groups) {
+      NSString *key = groupDict[@"key"];
+      if (! [key isEqualToString:stop.stopCode])
+        continue;
       
-      // is this our stop?
-      if ([stop.stopCode isEqualToString:code]) {
-        [TKParserHelper updateStopLocation:stop
-                            fromDictionary:stopDict];
+      NSArray *stopList = groupDict[@"stops"];
+      for (NSDictionary *stopDict in stopList) {
+        NSString *code = stopDict[@"code"];
         
-      } else {
-        // we always add all the stops, because the cell is new
-        StopLocation *newStop = [TKParserHelper insertNewStopLocation:stopDict
-                                                     inTripKitContext:tripKitContext];
-        
-        // make sure we have an ID
-        NSError *error = nil;
-        [tripKitContext obtainPermanentIDsForObjects:@[newStop] error:&error];
-        ZAssert(! error, @"Error obtaining permanent ID for '%@': %@", newStop, error);
+        // is this our stop?
+        if ([stop.stopCode isEqualToString:code]) {
+          [TKParserHelper updateStopLocation:stop
+                              fromDictionary:stopDict];
+          
+        } else {
+          // we always add all the stops, because the cell is new
+          StopLocation *newStop = [TKParserHelper insertNewStopLocation:stopDict
+                                                       inTripKitContext:tripKitContext];
+          
+          // make sure we have an ID
+          NSError *error = nil;
+          [tripKitContext obtainPermanentIDsForObjects:@[newStop] error:&error];
+          ZAssert(! error, @"Error obtaining permanent ID for '%@': %@", newStop, error);
+        }
       }
+      return stopList.count > 0;
     }
-    return stopList.count > 0;
+    return NO;
+  
+  } else {
+    [TKParserHelper updateStopLocation:stop fromDictionary:responseObject];
+    return YES;
   }
-  return NO;
 }
 
 @end

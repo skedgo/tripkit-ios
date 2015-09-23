@@ -126,7 +126,7 @@
 
 /* Returns all associated segment in their correct order.
  */
-- (nonnull NSArray *)segments;
+- (nonnull NSArray<TKSegment *> *)segments;
 
 /* The first major segment of the trip
  */
@@ -138,7 +138,7 @@
 
 /* All public transport segments of the trip
  */
-- (nonnull NSArray *)allPublicTransport;
+- (nonnull NSArray<TKSegment *> *)allPublicTransport;
 
 #pragma mark - Traffic light stuff
 

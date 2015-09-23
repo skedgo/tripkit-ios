@@ -46,6 +46,7 @@ enum SGInfoProviderError {
 											completion:(SGServiceCompletionBlock)completion;
 
 + (void)fillInStop:(StopLocation *)stop
+             named:(nullable NSString *)name
         completion:(void (^)(NSError * __nullable error))completion;
 
 - (void)addContentToService:(Service *)service

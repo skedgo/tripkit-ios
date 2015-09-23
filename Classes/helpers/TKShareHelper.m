@@ -98,7 +98,7 @@
   }
   
   CLLocationCoordinate2D end = CLLocationCoordinate2DMake([params[@"tlat"] doubleValue], [params[@"tlng"] doubleValue]);
-  
+
   SGTimeType timeType = SGTimeTypeLeaveASAP;
   NSDate *time = nil;
   if (params[@"type"] && params[@"time"]) {
@@ -135,7 +135,7 @@
   NSString *regionName = queryComponents[2];
   NSString *stopCode = queryComponents[3];
   NSString *filter = queryComponents.count == 5?queryComponents[4]:nil;
-  
+
   // construct the request
   if (! regionName || ! stopCode)
     return;
@@ -159,7 +159,7 @@
 }
 
 + (void)serviceDetailsForURL:(NSURL *)url
-                     details:(void (^)(NSString *stopCode, NSString *regionName, NSString *serviceID))detailBlock {
+                  details:(void (^)(NSString *stopCode, NSString *regionName, NSString *serviceID))detailBlock {
   // re-construct the parameters
   NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
   NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:queryComponents.count];

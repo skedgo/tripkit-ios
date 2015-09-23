@@ -142,9 +142,8 @@
 {
   [self hitURLForTripDownload:url completion:
    ^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
-#pragma unused(requestURL, error)
      if (JSON) {
-       DLog(@"Downloaded trip JSON for: %@", requestURL);
+       [SGKLog debug:NSStringFromClass([self class]) format:@"Downloaded trip JSON for: %@", requestURL];
        [self parseJSON:JSON
      forTripKitContext:tripKitContext
             completion:^(Trip *trip) {
@@ -155,7 +154,7 @@
        }];
      } else {
        // failure
-       DLog(@"Failed to trip from: %@.\nError: %@", requestURL, error);
+       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip from: %@.\nError: %@", requestURL, error];
        if (completion) {
          completion(nil);
        }
@@ -167,17 +166,17 @@
 {
     NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
     [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
-#pragma unused(requestURL, shareURL, error)
+#pragma unused(requestURL, shareURL)
         if (JSON) {
             [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
-                DLog(@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]);
+              [SGKLog debug:NSStringFromClass([self class]) format:@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
                 if (completion) {
                     completion(updatedTrip, YES);
                 }
             }];
         } else if (! error) {
             // No new data (but also no error
-            DLog(@"No update for trip (%d): %@", trip.tripGroup.visibility, [trip debugString]);
+            [SGKLog debug:NSStringFromClass([self class]) format:@"No update for trip (%d): %@", trip.tripGroup.visibility, [trip debugString]];
             if (completion) {
                 completion(trip, NO);
             }
@@ -187,9 +186,9 @@
 
 - (void)updateTrip:(Trip *)trip completion:(void(^)(Trip * __nullable trip))completion
 {
-    [self updateTrip:trip completionWithFlag:^(Trip * __nullable updatedRrip, BOOL tripUpdated) {
-#pragma unused(tripUpdated)
-        completion(updatedRrip);
+    [self updateTrip:trip completionWithFlag:^(Trip * __nullable updatedTrip, BOOL tripGotUpdated) {
+#pragma unused(tripGotUpdated)
+        completion(updatedTrip);
     }];
 }
 
@@ -299,7 +298,7 @@
          return;
        }
        
-       DLog(@"Request returned JSON: %@", task.currentRequest.URL);
+       [SGKLog debug:NSStringFromClass([self class]) format:@"Request returned JSON: %@", task.currentRequest.URL];
        [strongSelf2 parseJSON:responseObject
                   forURLQuery:task.currentRequest.URL.query
             forTripKitContext:strongSelf2.currentRequest.managedObjectContext
@@ -354,7 +353,7 @@
     } else if (pair.count == 2) {
       [paras setValue:pair[1] forKey:pair[0]];
     } else {
-      DLog(@"Unknown option: %@", option);
+      [SGKLog warn:NSStringFromClass([self class]) format:@"Unknown option: %@", option];
     }
   }
   
@@ -423,7 +422,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 		}
 	}
 
-  DLog(@"Request failed: %@ with error %@ (%@)", urlQuery, error, [error description]);
+  [SGKLog warn:NSStringFromClass([self class]) format:@"Request failed: %@ with error %@ (%@)", urlQuery, error, [error description]];
   self.isActive = NO;
   
   dispatch_async(dispatch_get_main_queue(), ^{
@@ -559,7 +558,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   // analyse result
   NSError *serverError = [SVKServer serverErrorForJSONErrorDictionary:json];
   if (serverError) {
-    DLog(@"Encountered error: %@", serverError);
+    [SGKLog warn:NSStringFromClass([self class]) format:@"Encountered server error: %@", serverError];
 		[self handleError:serverError
 					forURLQuery:urlQuery
 							failure:failure];

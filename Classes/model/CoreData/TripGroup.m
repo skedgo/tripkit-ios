@@ -40,7 +40,7 @@ typedef enum {
 - (void)adjustVisibleTrip
 {
   // default to preferred trip
-  self.visibleTrip = [self closestTripToRequest];
+  self.visibleTrip = [self tripWithBestScore];
 }
 
 - (NSDate *)earliestDeparture
@@ -55,28 +55,26 @@ typedef enum {
 }
 
 /**
- * Returns the trip closest to the specified departure/arrival time,
- * while being on the right side (i.e., not departing too early or arriving too late).
+ * Returns the trip with the lowest score, that's not impossible
  */
-- (Trip *)closestTripToRequest
+- (Trip *)tripWithBestScore
 {
 	NSSet *allTrips = self.trips;
 	if (allTrips.count == 0) {
 		return nil;
 	}
 	
-  NSTimeInterval bestDuration = INT32_MAX;
+  float bestScore = MAXFLOAT;
   Trip *bestTrip = nil;
   for (Trip *trip in allTrips) {
     if ([trip isImpossible]) {
       continue;
     }
     
-    NSTimeInterval offset = [trip calculateOffset];
-    NSTimeInterval duration = [trip calculateDurationFromQuery];
-    if (offset >= 0 && duration < bestDuration) {
+    float score = [[trip totalScore] floatValue];
+    if (score < bestScore) {
       bestTrip = trip;
-      bestDuration = duration;
+      bestScore = score;
     }
   }
   

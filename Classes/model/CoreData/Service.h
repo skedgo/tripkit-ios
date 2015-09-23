@@ -14,6 +14,7 @@
 #import "SGStyleManager.h"
 
 @class Alert, SVKRegion, Shape, StopVisits, SegmentReference, Vehicle;
+@protocol STKDisplayableRoute;
 
 @interface Service : NSManagedObject <TKRealTimeUpdatable>
 
@@ -38,7 +39,7 @@
 @property (nonatomic, assign, getter = isRealTime) BOOL realTime;
 @property (nonatomic, assign, getter = isRealTimeCapable) BOOL realTimeCapable;
 @property (nonatomic, assign, getter = isCancelled) BOOL cancelled;
-@property (nonatomic, strong) NSArray *sortedVisits;
+@property (nonatomic, strong) NSArray<StopVisits *> *sortedVisits;
 @property (nonatomic, copy) NSString *lineName;
 @property (nonatomic, copy) NSString *direction;
 
@@ -62,8 +63,8 @@
 
 - (StopVisits *)visitForStopCode:(NSString *)stopCode;
 
-- (NSArray *)shapesForEmbarkation:(StopVisits *)embarkation
-                   disembarkingAt:(StopVisits *)disembarkation;
+- (NSArray<id<STKDisplayableRoute>> *)shapesForEmbarkation:(StopVisits *)embarkation
+                                            disembarkingAt:(StopVisits *)disembarkation;
 
 - (BOOL)hasServiceData;
 

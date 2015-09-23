@@ -23,7 +23,7 @@
 @property (nonatomic, retain) NSNumber * templateHashCode;
 @property (nonatomic, retain) NSDictionary *data;
 @property (nonatomic, assign) BOOL toDelete;
-@property (nonatomic, retain) NSArray * alertHashCodes;
+@property (nonatomic, retain) NSArray<NSString *> * alertHashCodes;
 @property (nonatomic, retain) SegmentTemplate *segmentTemplate;
 @property (nonatomic, retain) Trip *trip;
 @property (nonatomic, retain) Service *service;
@@ -34,6 +34,8 @@
 @property (nonatomic, copy) NSDictionary *bookingData;
 @property (nonatomic, copy) NSDictionary *sharedVehicleData;
 @property (nonatomic, copy) NSString *ticketWebsiteURLString;
+@property (nonatomic, copy) NSString *departurePlatform;
+@property (nonatomic, copy) NSNumber *serviceStops;
 
 @property (nonatomic, assign) BOOL timesAreRealTime;
 
@@ -44,7 +46,7 @@
 - (SegmentTemplate *)template;
 
 - (void)setVehicle:(id<STKVehicular>)vehicle;
-- (id<STKVehicular>)vehicleFromAllVehicles:(NSArray *)allVehicles;
+- (id<STKVehicular>)vehicleFromAllVehicles:(NSArray<id<STKVehicular>> *)allVehicles;
 
 - (void)setPayload:(id)payload forKey:(NSString *)key;
 - (id)payloadForKey:(NSString *)key;
