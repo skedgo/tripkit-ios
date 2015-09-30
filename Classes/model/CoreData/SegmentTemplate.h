@@ -25,7 +25,7 @@
 
 @property (nonatomic, strong) NSString * action;
 @property (nonatomic, strong) NSNumber * bearing;
-@property (nonatomic, strong) id data;
+@property (nonatomic, strong) id data; // NSData (or NSDictionary)
 @property (nonatomic, strong) NSNumber * flags;
 @property (nonatomic, retain) NSNumber * durationWithoutTraffic;
 @property (nonatomic, strong) id endLocation;
