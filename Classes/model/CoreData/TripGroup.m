@@ -72,8 +72,9 @@ typedef enum {
       continue;
     }
     
+    NSTimeInterval offset = [trip calculateOffset];      
     float score = [[trip totalScore] floatValue];
-    if (score < bestScore) {
+    if (offset >= 0 && score < bestScore) {
       if (bestTrip) self.secondVisibleTrip = bestTrip;
       bestTrip = trip;
       bestScore = score;
