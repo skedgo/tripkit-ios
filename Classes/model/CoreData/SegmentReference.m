@@ -169,8 +169,9 @@ typedef NSUInteger SGSegmentFlag;
 
 - (id)dataForKey:(NSString *)key
 {
-  if ([self.data isKindOfClass:[NSDictionary class]]) {
-    return self.data[key];
+  NSDictionary *dataDictionary = [self mutableDataDictionary];
+  if (dataDictionary) {
+    return dataDictionary[key];
   } else {
     return nil;
   }
@@ -178,29 +179,40 @@ typedef NSUInteger SGSegmentFlag;
 
 - (void)setData:(id)data forKey:(NSString *)key
 {
-  if ([data isKindOfClass:[NSDictionary class]]
-      || [data isKindOfClass:[NSArray class]]
-      || [data isKindOfClass:[NSString class]]
-      || [data isKindOfClass:[NSNumber class]]) {
-    NSMutableDictionary *mutable;
-    if (self.data) {
-      mutable = [NSMutableDictionary dictionaryWithDictionary:self.data];
-    } else {
-      mutable = [NSMutableDictionary dictionaryWithCapacity:1];
-    }
+  if ([data conformsToProtocol:@protocol(NSCoding)]) {
+    NSMutableDictionary *mutable = [self mutableDataDictionary];
     mutable[key] = data;
-    self.data = mutable;
+    [self setMutableDataDictionary:mutable];
 
   } else if (data == nil) {
-    NSMutableDictionary *mutable;
-    if (self.data) {
-      mutable = [NSMutableDictionary dictionaryWithDictionary:self.data];
-    } else {
-      mutable = [NSMutableDictionary dictionaryWithCapacity:1];
-    }
+    NSMutableDictionary *mutable = [self mutableDataDictionary];
     [mutable removeObjectForKey:key];
-    self.data = mutable;
+    [self setMutableDataDictionary:mutable];
   }
+}
+
+- (void)setMutableDataDictionary:(NSMutableDictionary *)mutable
+{
+  self.data = [NSKeyedArchiver archivedDataWithRootObject:mutable];
+}
+
+- (NSMutableDictionary *)mutableDataDictionary
+{
+  if ([self.data isKindOfClass:[NSMutableDictionary class]]) { // Deprecated
+    return self.data;
+  
+  } else if ([self.data isKindOfClass:[NSDictionary class]]) { // Deprecated
+    return [NSMutableDictionary dictionaryWithDictionary:self.data];
+    
+  } else if ([self.data isKindOfClass:[NSData class]]) {
+    id object = [NSKeyedUnarchiver unarchiveObjectWithData:self.data];
+    if ([object isKindOfClass:[NSMutableDictionary class]]) {
+      return object;
+    } else {
+      ZAssert(false, @"Unexpected data: %@", self.data);
+    }
+  }
+  return [NSMutableDictionary dictionaryWithCapacity:1];
 }
 
 #pragma mark - Flags

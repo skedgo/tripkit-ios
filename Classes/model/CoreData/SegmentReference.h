@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSNumber * flags;
 @property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSNumber * templateHashCode;
-@property (nonatomic, retain) NSDictionary *data;
+@property (nonatomic, retain) id data; // NSData (or NSDictionary)
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain) NSArray<NSString *> * alertHashCodes;
 @property (nonatomic, retain) SegmentTemplate *segmentTemplate;
