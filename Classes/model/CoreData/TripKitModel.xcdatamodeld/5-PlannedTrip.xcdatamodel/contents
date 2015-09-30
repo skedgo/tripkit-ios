@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="TripKit" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="TripKit" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Xcode 4.1">
     <entity name="Alert" representedClassName="Alert" syncable="YES">
         <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="hashCode" attributeType="Integer 32" indexed="YES" syncable="YES"/>
@@ -143,6 +143,7 @@
         <attribute name="totalWalking" optional="YES" attributeType="Float" syncable="YES"/>
         <attribute name="updateURLString" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="representedGroup" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="TripGroup" inverseName="visibleTrip" inverseEntity="TripGroup" syncable="YES"/>
+        <relationship name="representedSecondGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TripGroup" inverseName="secondVisibleTrip" inverseEntity="TripGroup" syncable="YES"/>
         <relationship name="segmentReferences" toMany="YES" minCount="1" deletionRule="Cascade" destinationEntity="SegmentReference" inverseName="trip" inverseEntity="SegmentReference" syncable="YES"/>
         <relationship name="tripGroup" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TripGroup" inverseName="trips" inverseEntity="TripGroup" syncable="YES"/>
     </entity>
@@ -154,6 +155,7 @@
         <attribute name="visibilityRaw" attributeType="Integer 16" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <relationship name="preferredFor" optional="YES" toMany="YES" maxCount="2" deletionRule="Nullify" destinationEntity="TripRequest" inverseName="preferredGroup" inverseEntity="TripRequest" syncable="YES"/>
         <relationship name="request" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TripRequest" inverseName="tripGroups" inverseEntity="TripRequest" indexed="YES" syncable="YES"/>
+        <relationship name="secondVisibleTrip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="representedSecondGroup" inverseEntity="Trip" syncable="YES"/>
         <relationship name="trips" toMany="YES" deletionRule="Cascade" destinationEntity="Trip" inverseName="tripGroup" inverseEntity="Trip" indexed="YES" syncable="YES"/>
         <relationship name="visibleTrip" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Trip" inverseName="representedGroup" inverseEntity="Trip" syncable="YES"/>
     </entity>
@@ -192,8 +194,8 @@
         <element name="Shape" positionX="601" positionY="348" width="128" height="163"/>
         <element name="StopLocation" positionX="-101" positionY="369" width="128" height="253"/>
         <element name="StopVisits" positionX="124" positionY="243" width="128" height="238"/>
-        <element name="Trip" positionX="315" positionY="-252" width="128" height="390"/>
-        <element name="TripGroup" positionX="99" positionY="-186" width="128" height="180"/>
+        <element name="Trip" positionX="315" positionY="-252" width="128" height="405"/>
+        <element name="TripGroup" positionX="99" positionY="-186" width="128" height="195"/>
         <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="223"/>
         <element name="Vehicle" positionX="529" positionY="153" width="128" height="178"/>
     </elements>

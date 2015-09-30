@@ -66,6 +66,7 @@ typedef enum {
 	
   float bestScore = MAXFLOAT;
   Trip *bestTrip = nil;
+  self.secondVisibleTrip = nil;
   for (Trip *trip in allTrips) {
     if ([trip isImpossible]) {
       continue;
@@ -73,6 +74,7 @@ typedef enum {
     
     float score = [[trip totalScore] floatValue];
     if (score < bestScore) {
+      if (bestTrip) self.secondVisibleTrip = bestTrip;
       bestTrip = trip;
       bestScore = score;
     }
