@@ -18,7 +18,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 @property (nonatomic, copy) NSString *primaryLocationString;
 @property (nonatomic, copy) NSString *singleLineInstruction;
-@property (nonatomic, copy) NSString *scheduledStartPlatform;
 @property (nonatomic, strong) StopLocation *scheduledStartStop;
 @property (nonatomic, assign) BHSegmentOrdering order;
 @property (nonatomic, strong) NSDictionary *segmentVisits;
@@ -37,7 +36,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 	if (self) {
 		_primaryLocationString = UninitializedString;
 		_singleLineInstruction = UninitializedString;
-    _scheduledStartPlatform = UninitializedString;
     _order = BHSegmentOrdering_Regular;
     _alerts = nil;
 	}
@@ -650,7 +648,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
   _singleLineInstruction = UninitializedString;
   _primaryLocationString = UninitializedString;
-  _scheduledStartPlatform = UninitializedString;
 }
 
 #pragma mark - Accessors
