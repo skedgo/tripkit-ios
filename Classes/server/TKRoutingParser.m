@@ -211,7 +211,7 @@
 - (void)parseAndAddResult:(NSDictionary *)json
             intoTripGroup:(TripGroup *)tripGroup
                   merging:(BOOL)mergeWithExistingTrips
-               completion:(void (^)(NSArray *addedTrips))completion
+               completion:(void (^)(NSArray<Trip *> *addedTrips))completion
 {
   [self.temporaryContext performBlock:^{
     TripGroup *privateGroup = (TripGroup *)[self.temporaryContext objectWithID:tripGroup.objectID];
@@ -237,7 +237,7 @@
 - (void)parseAndAddResult:(NSDictionary *)json
                forRequest:(TripRequest *)request
                   merging:(BOOL)mergeWithExistingTrips
-               completion:(void (^)(NSArray *addedTrips))completion
+               completion:(void (^)(NSArray<Trip *> *addedTrips))completion
 {
   [self.temporaryContext performBlock:^{
     TripRequest *privateRequest = (TripRequest *)[self.temporaryContext objectWithID:request.objectID];
