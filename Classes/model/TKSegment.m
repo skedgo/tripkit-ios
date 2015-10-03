@@ -714,7 +714,8 @@ NSString *const UninitializedString =  @"UninitializedString";
     return [UIColor lightGrayColor];
 }
 
-- (NSArray *)dashPattern {
+- (NSArray *)dashPattern
+{
 	NSArray *dashPattern = [self.template dashPattern];
 	if (dashPattern)
 		return dashPattern;
@@ -905,7 +906,14 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (UIColor *)tripSegmentModeColor
 {
-	return self.service.color; // currently only for public transport services
+  // we prefer color of the service
+  UIColor *color = self.service.color;
+  if (color) {
+    return color;
+  }
+  
+  // then color of the mode
+  return [self.template.modeInfo color];
 }
 
 - (STKInfoIconType)tripSegmentModeInfoIconType
