@@ -75,7 +75,8 @@
 
 + (void)setMaximumWalkingDuration:(NSTimeInterval)duration
 {
-  [[NSUserDefaults sharedDefaults] setDouble:duration forKey:TKDefaultsKeyProfileTransportWalkMaxDuration];
+  NSInteger minutes = (NSInteger) ((duration + 59) / 60);
+  [[NSUserDefaults sharedDefaults] setDouble:minutes forKey:TKDefaultsKeyProfileTransportWalkMaxDuration];
 }
 
 + (void)setMinimumTransferDuration:(NSTimeInterval)duration
