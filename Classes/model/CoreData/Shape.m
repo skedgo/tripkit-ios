@@ -109,9 +109,14 @@
 	
 	Service *service = [self.services anyObject];
 	UIColor *color = service.color;
-	if (color) return color;
+  if (color) {
+    return color;
+  }
+  
 	color = self.segment.color;
-	if (color) return color;
+  if (color) {
+    return color;
+  }
   return [UIColor blackColor];
 }
 

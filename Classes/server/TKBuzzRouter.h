@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
  return `progress` is called and the trips get added to TripKit's database. Also
  calls `completion` when all are done.
  
+ @note Calling this method will lock-in the departure time for "Leave now" queries.
+ 
  As trips get added, they get flagged with full, minimised or hidden visibility.
  Which depends on the standard defaults. Check `TKUserProfileHelper` for setting
  those.

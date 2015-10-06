@@ -272,7 +272,8 @@
 		}
     
     // we are guaranteed to have regions
-    SVKRegion *region = [strongSelf.currentRequest localRegion];
+    TripRequest *request = strongSelf.currentRequest;
+    SVKRegion *region = [request localRegion];
     if (! region) {
       error = [NSError errorWithCode:kSVKServerErrorTypeUser
                              message:@"Unsupported region."];
@@ -283,10 +284,20 @@
     }
     
     // we are good to send requests. create them, then tell the caller.
-    self.isActive = YES;
-    NSDictionary *paras = [strongSelf createRequestParametersForRequest:strongSelf.currentRequest
-                                                     andModeIdentifiers:self.modeIdentifiers
-                                                               bestOnly:bestOnly];
+    strongSelf.isActive = YES;
+    
+    NSDate *ASAPTime = nil;
+    if (request.type == SGTimeTypeLeaveASAP) {
+      ASAPTime = [NSDate dateWithTimeIntervalSinceNow:60];
+      request.departureTime = ASAPTime;
+      request.timeType = @(SGTimeTypeLeaveAfter);
+    }
+    
+
+    NSDictionary *paras = [strongSelf createRequestParametersForRequest:request
+                                                     andModeIdentifiers:strongSelf.modeIdentifiers
+                                                               bestOnly:bestOnly
+                                                           withASAPTime:ASAPTime];
     [server initiateDataTaskWithMethod:@"GET"
                                   path:@"routing.json"
                             parameters:paras
@@ -301,7 +312,7 @@
        [SGKLog debug:NSStringFromClass([self class]) format:@"Request returned JSON: %@", task.currentRequest.URL];
        [strongSelf2 parseJSON:responseObject
                   forURLQuery:task.currentRequest.URL.query
-            forTripKitContext:strongSelf2.currentRequest.managedObjectContext
+            forTripKitContext:request.managedObjectContext
                       success:success
                       failure:failure];
      }
@@ -323,7 +334,7 @@
                withModeIdentifiers:(NSSet *)modeIdentifiers
 {
   TKBuzzRouter *router = [[TKBuzzRouter alloc] init];
-  NSDictionary *paras = [router createRequestParametersForRequest:tripRequest andModeIdentifiers:modeIdentifiers bestOnly:NO];
+  NSDictionary *paras = [router createRequestParametersForRequest:tripRequest andModeIdentifiers:modeIdentifiers bestOnly:NO withASAPTime:nil];
   NSURL *baseUrl = [SVKServer sharedInstance].sessionManager.baseURL;
   NSString *fullUrl = [[baseUrl URLByAppendingPathComponent:@"routing.json"] absoluteString];
   NSURLRequest *request = [[SVKServer sharedInstance].sessionManager.requestSerializer requestWithMethod:@"GET" URLString:fullUrl parameters:paras error:nil];
@@ -498,6 +509,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 - (NSDictionary *)createRequestParametersForRequest:(TripRequest *)request
                                  andModeIdentifiers:(NSSet *)modeIdentifiers
                                            bestOnly:(BOOL)bestOnly
+                                       withASAPTime:(NSDate *)ASAPTime
 {
 	NSMutableDictionary *paras = [TKSettings defaultDictionary];
 	
@@ -523,7 +535,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
       break;
 
     case SGTimeTypeLeaveASAP:
-      departure = [NSDate dateWithTimeIntervalSinceNow:60];
+      departure = ASAPTime;
       break;
   }
   

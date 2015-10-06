@@ -109,6 +109,10 @@ typedef NSUInteger SGSegmentTemplateFlag;
 
 - (NSArray *)dashPattern
 {
+  if (self.modeInfo.color) {
+    return @[@1]; // no dashes if we have a dedicated color
+  }
+  
   STKParserHelperModeGroup group;
   if ([self isWalking]) {
     group = STKParserHelperModeGroupWalking;
