@@ -288,7 +288,7 @@
     
     NSDate *ASAPTime = nil;
     if (request.type == SGTimeTypeLeaveASAP) {
-      ASAPTime = [NSDate dateWithTimeIntervalSinceNow:60];
+      ASAPTime = [NSDate date];
       request.departureTime = ASAPTime;
       request.timeType = @(SGTimeTypeLeaveAfter);
     }
