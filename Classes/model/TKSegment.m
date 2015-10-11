@@ -1044,7 +1044,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 - (BOOL)fillInTemplates:(NSMutableString *)string
                 inTitle:(BOOL)title
 {
-  BOOL isTimeDependent = NO;
+  BOOL isDynamic = NO;
   NSRange range;
   range = [string rangeOfString:@"<NUMBER>"];
   if (range.location != NSNotFound) {
@@ -1101,7 +1101,7 @@ NSString *const UninitializedString =  @"UninitializedString";
                                           forTimeZone:self.timeZone];
     BOOL prepend = range.location > 0 && [string characterAtIndex:range.location - 1] != '\n';
     NSString *replacement = prepend ? [NSString stringWithFormat:NSLocalizedStringFromTable(@"DepartureTime", @"TripKit", "Time of the bus departure"), timeString] : timeString;
-    isTimeDependent = YES;
+    isDynamic = YES;
     [string replaceCharactersInRange:range withString:replacement];
   }
   
@@ -1120,7 +1120,7 @@ NSString *const UninitializedString =  @"UninitializedString";
       }
     }
     
-    isTimeDependent = YES;
+    isDynamic = YES;
     [string replaceCharactersInRange:range withString:replacement];
   }
   
@@ -1134,13 +1134,13 @@ NSString *const UninitializedString =  @"UninitializedString";
       replacement = durationString;
     }
     
-    isTimeDependent = YES; // even though the "duration without traffic" itself isn't time dependent, whether it is visible or not IS time dependent
+    isDynamic = YES; // even though the "duration without traffic" itself isn't time dependent, whether it is visible or not IS time dependent
     [string replaceCharactersInRange:range withString:replacement];
   }
 
   // replace empty lead-in
-  [string replaceOccurrencesOfString:@"^[ ]*⋅[ ]*"
-                          withString:@""
+  [string replaceOccurrencesOfString:@"([\\n^])[ ]*⋅[ ]*"
+                          withString:@"$1"
                              options:NSRegularExpressionSearch
                                range:NSMakeRange(0, string.length)];
 
@@ -1161,6 +1161,12 @@ NSString *const UninitializedString =  @"UninitializedString";
                           withString:@""
                              options:NSRegularExpressionSearch
                                range:NSMakeRange(0, string.length)];
+  
+  [string replaceOccurrencesOfString:@"  "
+                          withString:@" "
+                             options:NSLiteralSearch
+                               range:NSMakeRange(0, string.length)];
+  
   range = [string rangeOfString:@"\n\n"];
   while (range.location != NSNotFound) {
     [string replaceCharactersInRange:range withString:@"\n"];
@@ -1171,7 +1177,7 @@ NSString *const UninitializedString =  @"UninitializedString";
                              options:NSRegularExpressionSearch
                                range:NSMakeRange(0, string.length)];
   
-  return isTimeDependent;
+  return isDynamic;
 }
 
 #pragma mark - Lazy accessors
