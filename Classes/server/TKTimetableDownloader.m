@@ -164,7 +164,9 @@
          return;
        }
        
-       [SGKLog info:@"TimetableDownloader" format:@"Real-time update failed: %@", error];
+       [SGKLog info:@"TimetableDownloader" block:^NSString * _Nonnull{
+         return [NSString stringWithFormat:@"Real-time update failed: %@", error];
+       }];
        NSArray *filtered = [strongSelf filteredVisits:visits
                                          forStartDate:startDate
                                                 limit:limit

@@ -143,7 +143,9 @@
   [self hitURLForTripDownload:url completion:
    ^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
      if (JSON) {
-       [SGKLog debug:NSStringFromClass([self class]) format:@"Downloaded trip JSON for: %@", requestURL];
+       [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+         return [NSString stringWithFormat:@"Downloaded trip JSON for: %@", requestURL];
+       }];
        [self parseJSON:JSON
      forTripKitContext:tripKitContext
             completion:^(Trip *trip) {
@@ -168,18 +170,22 @@
     [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
 #pragma unused(requestURL, shareURL)
         if (JSON) {
-            [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
-              [SGKLog debug:NSStringFromClass([self class]) format:@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
-                if (completion) {
-                    completion(updatedTrip, YES);
-                }
+          [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
+            [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+              return [NSString stringWithFormat:@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
             }];
+            if (completion) {
+                completion(updatedTrip, YES);
+            }
+          }];
         } else if (! error) {
             // No new data (but also no error
-            [SGKLog debug:NSStringFromClass([self class]) format:@"No update for trip (%d): %@", trip.tripGroup.visibility, [trip debugString]];
-            if (completion) {
-                completion(trip, NO);
-            }
+          [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+            return [NSString stringWithFormat:@"No update for trip (%d): %@", trip.tripGroup.visibility, [trip debugString]];
+          }];
+          if (completion) {
+              completion(trip, NO);
+          }
         }
     }];
 }
@@ -309,7 +315,9 @@
          return;
        }
        
-       [SGKLog debug:NSStringFromClass([self class]) format:@"Request returned JSON: %@", task.currentRequest.URL];
+       [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+         return [NSString stringWithFormat:@"Request returned JSON: %@", task.currentRequest.URL];
+       }];
        [strongSelf2 parseJSON:responseObject
                   forURLQuery:task.currentRequest.URL.query
             forTripKitContext:request.managedObjectContext

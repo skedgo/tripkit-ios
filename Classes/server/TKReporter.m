@@ -33,7 +33,9 @@
                                      failure:
                                 ^(NSURLSessionDataTask *theTask, NSError *error) {
 #pragma unused(theTask)
-                                  [SGKLog debug:@"TKReporter" format:@"Planned trip post encountered error: %@", error];
+                                  [SGKLog debug:@"TKReporter" block:^NSString * _Nonnull{
+                                    return [NSString stringWithFormat:@"Planned trip post encountered error: %@", error];
+                                  }];
                                 }];
   
   [task resume];
@@ -79,7 +81,9 @@
                                      failure:
                                 ^(NSURLSessionDataTask *theTask, NSError *error) {
 #pragma unused(theTask)
-                                  [SGKLog debug:@"TKReporter" format:@"Progress post encountered error: %@", error];
+                                  [SGKLog debug:@"TKReporter" block:^NSString * _Nonnull{
+                                    return [NSString stringWithFormat:@"Progress post encountered error: %@", error];
+                                  }];
                                 }];
   
   [task resume];
