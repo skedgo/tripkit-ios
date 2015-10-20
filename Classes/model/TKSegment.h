@@ -192,7 +192,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name In-app and external bookings
 ///-----------------------------------------------------------------------------
 
-- (BOOL)bookingIsAvailable;
 - (nullable NSString *)bookingTitle;
 - (nullable NSURL *)bookingInternalURL;
 - (nullable NSArray<NSString *> *)bookingExternalActions;

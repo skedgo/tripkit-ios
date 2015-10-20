@@ -612,15 +612,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 #pragma mark - Booking
 
-- (BOOL)bookingIsAvailable
-{
-  if (self.reference.bookingData) {
-    return YES;
-  } else {
-    return NO;
-  }
-}
-
 - (NSString *)bookingTitle
 {
   NSDictionary *bookingData = self.reference.bookingData;
