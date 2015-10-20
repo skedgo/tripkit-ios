@@ -576,7 +576,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   ZAssert(tripKitContext != nil, @"Managed object context required!");
   
   // analyse result
-  NSError *serverError = [SVKServer serverErrorForJSONErrorDictionary:json];
+  NSError *serverError = [SVKError errorFromJSONErrorDictionary:json];
   if (serverError) {
     [SGKLog warn:NSStringFromClass([self class]) format:@"Encountered server error: %@", serverError];
 		[self handleError:serverError
