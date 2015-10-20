@@ -170,7 +170,12 @@
 
 + (BOOL)canHandleExternalActions:(TKSegment *)segment
 {
-  return segment.bookingExternalActions.count > 0;
+  for (NSString *action in segment.bookingExternalActions) {
+    if ([self titleForExternalAction:action]) {
+      return true;
+    }
+  }
+  return false;
 }
 
 + (void)handleExternalActions:(TKSegment * __nonnull)segment
