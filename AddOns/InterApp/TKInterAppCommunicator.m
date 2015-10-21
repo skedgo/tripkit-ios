@@ -243,7 +243,7 @@
       return prompt;
     }
     
-  } else if ([action isEqualToString:@"lyft"]) {
+  } else if ([action hasPrefix:@"lyft"]) { // also lyft_line, etc.
     return [self deviceHasLyft]
     ? NSLocalizedStringFromTable(@"Open Lyft", @"TripKit", nil)
     : NSLocalizedStringFromTable(@"Get Lyft", @"TripKit", nil);
