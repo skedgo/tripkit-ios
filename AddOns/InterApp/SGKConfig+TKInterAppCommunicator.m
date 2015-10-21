@@ -35,4 +35,9 @@
   return self.configuration[@"TKInterAppCommunicator"][@"googleMapsCallback"];
 }
 
+- (nullable NSString *)yelpPartnerCompanyName
+{
+  return self.configuration[@"TKInterAppCommunicator"][@"yelpPartnerCompanyName"];
+}
+
 @end

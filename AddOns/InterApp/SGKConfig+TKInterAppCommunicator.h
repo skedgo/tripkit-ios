@@ -35,4 +35,9 @@
  */
 - (nullable NSString *)googleMapsCallback;
 
+/**
+ @return something like 'skedgo'
+ */
+- (nullable NSString *)yelpPartnerCompanyName;
+
 @end

@@ -293,8 +293,9 @@
                forViewController:controller
                 openStoreHandler:openStoreHandler];
     
-  } else if ([action isEqualToString:@"lyft"]) {
+  } else if ([action hasPrefix:@"lyft"]) { // also lyft_line, etc.
     [self launchLyftForSegment:segment
+                      rideType:action
               openStoreHandler:openStoreHandler];
     
   } else if ([action isEqualToString:@"sidecar"]) {
@@ -338,7 +339,7 @@
     if (   ([action isEqualToString:@"gocatch"] && [self deviceHasGoCatch])
         || ([action isEqualToString:@"ingogo"]  && [self deviceHasIngogo])
         || ([action isEqualToString:@"uber"]    && [self deviceHasUber])
-        || ([action isEqualToString:@"lyft"]    && [self deviceHasLyft])
+        || ([action hasPrefix:@"lyft"]          && [self deviceHasLyft]) // also lyft_line, etc.
         || ([action isEqualToString:@"sidecar"] && [self deviceHasSidecar])
         ) {
       [sortedActions insertObject:action atIndex:startIndex++];
@@ -552,17 +553,44 @@
 }
 
 + (void)launchLyftForSegment:(TKSegment *)segment
+                    rideType:(NSString *)rideType
             openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
 {
-#pragma unused(segment) // lyft doesn't support that yet
+  // ride types: lyft, lyft_line, lyft_plus
   
   if ([self deviceHasLyft]) {
-    // just launch it
-    NSString *urlString = @"lyft://";
+    // launch into correct ride type
+    NSMutableString *urlString = [NSMutableString stringWithString:@"lyft://ridetype?id="];
+    [urlString appendString:rideType];
+
+    // from
+    id<MKAnnotation> startAnnotation = [segment start];
+    CLLocationCoordinate2D start = [startAnnotation coordinate];
+    [urlString appendFormat:@"&pickup[latitude]=%.5f&pickup[longitude]=%.5f", start.latitude, start.longitude];
+    
+    // to
+    id<MKAnnotation> endAnnotation = [segment end];
+    CLLocationCoordinate2D end   = [endAnnotation coordinate];
+    [urlString appendFormat:@"&destination[latitude]=%.5f&destination[longitude]=%.5f", end.latitude, end.longitude];
+    if ([endAnnotation respondsToSelector:@selector(title)]) {
+      NSString *title = [endAnnotation title];
+      if (title.length > 0) {
+        NSString *encoded = [title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [urlString appendFormat:@"&dropoff_nickname=%@", encoded];
+      }
+    }
+
+    // partner tracking
+    NSString *partner = [[SGKConfig sharedInstance] yelpPartnerCompanyName];
+    if (partner.length > 0) {
+      [urlString appendFormat:@"&partner=%@", partner];
+    }
+    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
     
   } else if (openStoreHandler) {
     openStoreHandler(@(529379082));
+    
   } else {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/lyft/id529379082?mt=8"]];
   }
