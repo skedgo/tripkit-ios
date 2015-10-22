@@ -184,6 +184,7 @@
        currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
                openURLHandler:(nullable void (^)(NSURL * __nonnull, NSString * __nullable))openURLHandler
              openStoreHandler:(nullable void (^)(NSNumber * __nonnull))openStoreHandler
+            completionHandler:(nullable void (^)(NSString * _Nonnull))completionHandler
 {
   NSArray *externalActions = segment.bookingExternalActions;
   NSArray *sorted = [self sortedExternalActionsForUnsorted:externalActions];
@@ -197,6 +198,9 @@
                            currentLocationHandler:currentLocationHandler
                                    openURLHandler:openURLHandler
                                  openStoreHandler:openStoreHandler];
+    if (completionHandler) {
+      completionHandler(action);
+    }
     return;
   }
   
@@ -216,6 +220,9 @@
                                 currentLocationHandler:currentLocationHandler
                                         openURLHandler:openURLHandler
                                       openStoreHandler:openStoreHandler];
+         if (completionHandler) {
+           completionHandler(action);
+         }
        }];
     }
   }

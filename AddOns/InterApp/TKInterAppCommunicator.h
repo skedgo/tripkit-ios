@@ -42,13 +42,15 @@ NS_ASSUME_NONNULL_BEGIN
  @param currentLocationHandler Will be called to check if the external action should start at the current location or at the segment's start location. If `nil` it will start at the current location.
  @param openURLHandler Will be called if the user selects an action that requires opening a website. If `nil` the webpage will be opened by opening Safari.
  @param openStoreHandler Will be called with an iTunes app ID if the user select an action that requires installing an app. If `nil` the iTunes Store page will be opened via URL.
+ @param completionHandler Called when any action is triggered.
  */
 + (void)handleExternalActions:(TKSegment * __nonnull)segment
             forViewController:(UIViewController * __nonnull)controller
                   initiatedBy:(nullable id)sender
        currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
                openURLHandler:(nullable void (^)(NSURL * __nonnull, NSString * __nullable))openURLHandler
-             openStoreHandler:(nullable void (^)(NSNumber * __nonnull))openStoreHandler;
+             openStoreHandler:(nullable void (^)(NSNumber * __nonnull))openStoreHandler
+            completionHandler:(nullable void (^)(NSString * __nonnull))completionHandler;
 
 @end
 
