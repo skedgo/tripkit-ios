@@ -270,7 +270,7 @@
       return NSLocalizedStringFromTable(@"Call", @"TripKit", nil);
     }
     
-  } else if ([action hasPrefix:@"http:"]) {
+  } else if ([action hasPrefix:@"http:"] || [action hasPrefix:@"https:"]) {
     return NSLocalizedStringFromTable(@"Show website", @"TripKit", @"Show website action");
     
   } else {
