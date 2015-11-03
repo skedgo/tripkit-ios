@@ -171,6 +171,38 @@
                                                     andOther:end];
 }
 
+/**
+ @return The regions that this query is touching
+ */
+- (nonnull NSSet <SVKRegion *> *)touchedRegions
+{
+  NSMutableSet *regions = [NSMutableSet setWithCapacity:5];
+  SVKRegionManager *manager = [SVKRegionManager sharedInstance];
+  [regions unionSet:[manager regionsForCoordinate:self.fromLocation.coordinate]];
+  [regions unionSet:[manager regionsForCoordinate:self.toLocation.coordinate]];
+  
+  if (regions.count >= 2) {
+    [regions addObject:[SVKInternationalRegion sharedInstance]];
+  }
+  return regions;
+}
+
+- (NSArray <NSString *> *)applicableModeIdentifiers
+{
+  NSSet *regions = [self touchedRegions];
+  if (regions.count == 1) {
+    return [[regions anyObject] modeIdentifiers];
+  }
+  
+  NSMutableSet *modes = [NSMutableSet set];
+  for (SVKRegion *region in regions) {
+    [modes addObjectsFromArray:[region modeIdentifiers]];
+  }
+  return [[modes allObjects] sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull obj1, NSString * _Nonnull obj2) {
+    return [obj1 compare:obj2];
+  }];
+}
+
 - (NSTimeZone *)departureTimeZone
 {
   return [[SVKRegionManager sharedInstance] timeZoneForCoordinate:[self.fromLocation coordinate]];

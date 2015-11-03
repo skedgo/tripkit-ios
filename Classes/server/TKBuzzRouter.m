@@ -49,7 +49,7 @@
   [self cancelRequests];
   self.isActive = YES;
   
-  NSArray *enabledModes       = [request.spanningRegion modeIdentifiers];
+  NSArray *enabledModes       = [request applicableModeIdentifiers];
   NSSet *groupedIdentifiers   = [SVKTransportModes groupedModeIdentifiers:enabledModes includeGroupForAll:YES];
   NSUInteger requestCount = [groupedIdentifiers count];
   self.finishedWorkers = 0;

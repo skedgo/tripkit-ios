@@ -31,13 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL expandForFavorite;
 @property (nonatomic, assign) BOOL toDelete;
 
-@property (nonatomic, strong, nullable) NSSet * tripGroups;
+@property (nonatomic, strong, nullable) NSSet <TripGroup *> * tripGroups;
 
 /**
  * Non Core Data property
  */
 
-@property (nonatomic, readonly, nullable) NSSet* trips;
+@property (nonatomic, readonly, nullable) NSSet <Trip *> * trips;
 @property (nonatomic, readonly) SGTimeType type;
 @property (nonatomic, readonly) NSDate *time;
 @property (nonatomic, weak, nullable) TripRequest *replacement;
@@ -77,6 +77,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable SVKRegion *)localRegion;
 
+- (NSArray <NSString *> *)applicableModeIdentifiers;
+
 - (NSTimeZone *)departureTimeZone;
 
 - (NSTimeZone *)arrivalTimeZone;
@@ -111,8 +113,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addRouteObject:(Trip *)value;
 - (void)removeRouteObject:(Trip *)value;
-- (void)addRoutes:(NSSet *)values;
-- (void)removeRoutes:(NSSet *)values;
+- (void)addRoutes:(NSSet <Trip *> *)values;
+- (void)removeRoutes:(NSSet <Trip *> *)values;
 @end
 
 NS_ASSUME_NONNULL_END
