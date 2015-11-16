@@ -252,22 +252,9 @@ typedef enum {
         
         if (! responseObject[@"error"]) {
           ZAssert(service && service.managedObjectContext, @"Service with a context needed.");
-          NSManagedObjectContext *temporaryContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-          temporaryContext.parentContext = service.managedObjectContext;
-          [temporaryContext performBlock:^{
-            Service *privateService = (Service *) [temporaryContext objectWithID:service.objectID];
-            [strongSelf addContentToService:privateService
-                               fromResponse:responseObject];
-            NSError *saveError = nil;
-            [temporaryContext save:&saveError];
-            if (saveError) {
-              DLog(@"Error saving temporary context: %@", saveError);
-            } else {
-              [service.managedObjectContext performBlock:^{
-                completion(service, YES);
-              }];
-            }
-          }];
+          [strongSelf addContentToService:service
+                             fromResponse:responseObject];
+          completion(service, YES);
           
         } else {
           [service.managedObjectContext performBlock:^{
@@ -343,31 +330,11 @@ typedef enum {
                                success:
      ^(NSURLSessionDataTask *task, id responseObject) {
 #pragma unused(task)
-       NSManagedObjectContext *temporaryContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-       temporaryContext.parentContext = stop.managedObjectContext;
-       
-       [temporaryContext performBlock:
-        ^{
-          // get the private equivalent
-          StopLocation *privateStop = (StopLocation *)[temporaryContext objectWithID:stop.objectID];
-          ZAssert([privateStop.stopCode isEqualToString:stop.stopCode], @"Public cell (%@) doesn't match ours (%@)", stop, privateStop);
-          
-          // set the stop properties
-          BOOL success = [self addStop:privateStop fromResponse:responseObject];
-          
-          // save it
-          if (success) {
-            NSError *privateError = nil;
-            success = [temporaryContext save:&privateError];
-            ZAssert(success, @"Could not save context: %@", privateError);
-          }
-          if (success) {
-            completion(nil);
-          } else {
-            completion([TKBuzzInfoProvider errorForUserForBrokenStop]);
-          }
-        }];
-       
+
+        // set the stop properties
+        BOOL success = [self addStop:stop fromResponse:responseObject];
+       ZAssert(success, @"Error processing: %@", responseObject);
+        completion(nil);
      }
                                failure:
      ^(NSURLSessionDataTask *task, NSError *anotherError) {

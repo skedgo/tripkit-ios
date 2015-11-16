@@ -12,7 +12,7 @@
 
 @interface TKRoutingParser ()
 
-@property (nonatomic, strong) NSManagedObjectContext *temporaryContext;
+@property (nonatomic, strong) NSManagedObjectContext *context;
 
 @end
 
@@ -22,16 +22,9 @@
 {
   self = [super init];
   if (self) {
-    _temporaryContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    _temporaryContext.parentContext = context;
+    _context = context;
   }
   return self;
-}
-
-- (void)dealloc
-{
-  // see http://lists.apple.com/archives/cocoa-dev/2012/Apr/msg00071.html
-  [self.temporaryContext reset];
 }
 
 #pragma mark - Results
@@ -45,7 +38,7 @@
     return nil;
   }
   
-  SegmentTemplate *template = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SegmentTemplate class]) inManagedObjectContext:self.temporaryContext];
+  SegmentTemplate *template = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SegmentTemplate class]) inManagedObjectContext:self.context];
   template.action           = dict[@"action"];
   template.visibility       = @(visibility);
   template.segmentType      = [TKParserHelper segmentTypeForString:dict[@"type"]];
@@ -93,7 +86,7 @@
     NSArray *shapes = [TKParserHelper insertNewShapes:shapesArray
                                            forService:service
                                          withModeInfo:template.modeInfo
-                                     orTripKitContext:self.temporaryContext];
+                                     orTripKitContext:self.context];
     for (Shape *shape in shapes) {
       shape.template = template;
       if (YES == shape.travelled.boolValue) {
@@ -130,9 +123,9 @@
 {
   __block TripRequest *result = nil;
   
-  [self.temporaryContext performBlockAndWait:^{
+  [self.context performBlockAndWait:^{
     // create an empty request
-    TripRequest *request = [TripRequest insertRequestIntoTripKitContext:self.temporaryContext];
+    TripRequest *request = [TripRequest insertRequestIntoTripKitContext:self.context];
     
     // parse everything
     NSArray *added = [self parseAndAddResult:json
@@ -152,16 +145,7 @@
     if (! success) {
       return;
     }
-    
-    NSError *error = nil;
-    [self.temporaryContext save:&error];
-    if (! error) {
-      NSManagedObjectContext *publicContext = self.temporaryContext.parentContext;
-      [publicContext performBlockAndWait:^{
-        TripRequest *publicRequest = (TripRequest *) [publicContext objectWithID:request.objectID];
-        result = publicRequest;
-      }];
-    }
+    result = request;
   }];
   return result;
 }
@@ -169,9 +153,9 @@
 - (void)parseAndAddResult:(NSDictionary *)json
                completion:(void (^)(TripRequest *request))completion
 {
-  [self.temporaryContext performBlock:^{
+  [self.context performBlock:^{
     // create an empty request
-    TripRequest *request = [TripRequest insertRequestIntoTripKitContext:self.temporaryContext];
+    TripRequest *request = [TripRequest insertRequestIntoTripKitContext:self.context];
     
     // parse everything
     NSArray *added = [self parseAndAddResult:json
@@ -195,16 +179,7 @@
       DLog(@"Got trip without a segment from JSON: %@", json);
       return;
     }
-    
-    NSError *error = nil;
-    [self.temporaryContext save:&error];
-    if (! error) {
-      NSManagedObjectContext *publicContext = self.temporaryContext.parentContext;
-      [publicContext performBlock:^{
-        TripRequest *publicRequest = (TripRequest *) [publicContext objectWithID:request.objectID];
-        completion(publicRequest);
-      }];
-    }
+    completion(request);
   }];
 }
 
@@ -213,24 +188,15 @@
                   merging:(BOOL)mergeWithExistingTrips
                completion:(void (^)(NSArray<Trip *> *addedTrips))completion
 {
-  [self.temporaryContext performBlock:^{
-    TripGroup *privateGroup = (TripGroup *)[self.temporaryContext objectWithID:tripGroup.objectID];
+  [self.context performBlock:^{
+    TripGroup *group = (TripGroup *)[self.context objectWithID:tripGroup.objectID];
     
-    NSArray *privateResult = [self parseAndAddResult:json
-                                          forRequest:nil
-                                         orTripGroup:privateGroup
-                                        orUpdateTrip:nil
-                        allowDuplicatingExistingTrip:!mergeWithExistingTrips];
-    
-    NSManagedObjectContext *publicContext = self.temporaryContext.parentContext;
-    [publicContext performBlock:^{
-      NSMutableArray *publicResult = [NSMutableArray arrayWithCapacity:privateResult.count];
-      for (Trip *trip in privateResult) {
-        Trip *publicTrip = (Trip *)[publicContext objectWithID:trip.objectID];
-        [publicResult addObject:publicTrip];
-      }
-      completion(publicResult);
-    }];
+    NSArray *result = [self parseAndAddResult:json
+                                   forRequest:nil
+                                  orTripGroup:group
+                                 orUpdateTrip:nil
+                 allowDuplicatingExistingTrip:!mergeWithExistingTrips];
+    completion(result);
   }];
 }
 
@@ -239,25 +205,13 @@
                   merging:(BOOL)mergeWithExistingTrips
                completion:(void (^)(NSArray<Trip *> *addedTrips))completion
 {
-  [self.temporaryContext performBlock:^{
-    TripRequest *privateRequest = (TripRequest *)[self.temporaryContext objectWithID:request.objectID];
-    privateRequest.defaultVisibility = request.defaultVisibility;
-    
-    NSArray *privateResult = [self parseAndAddResult:json
-                                          forRequest:privateRequest
-                                         orTripGroup:nil
-                                        orUpdateTrip:nil
-                        allowDuplicatingExistingTrip:!mergeWithExistingTrips];
-    
-    NSManagedObjectContext *publicContext = self.temporaryContext.parentContext;
-    [publicContext performBlock:^{
-      NSMutableArray *publicResult = [NSMutableArray arrayWithCapacity:privateResult.count];
-      for (Trip *trip in privateResult) {
-        Trip *publicTrip = (Trip *)[publicContext objectWithID:trip.objectID];
-        [publicResult addObject:publicTrip];
-      }
-      completion(publicResult);
-    }];
+  [self.context performBlock:^{
+    NSArray *result = [self parseAndAddResult:json
+                                   forRequest:request
+                                  orTripGroup:nil
+                                 orUpdateTrip:nil
+                 allowDuplicatingExistingTrip:!mergeWithExistingTrips];
+    completion(result);
   }];
 }
 
@@ -266,45 +220,27 @@
                 andAlerts:(NSArray *)alertJson
                completion:(void (^)(NSDictionary *keyToAddedTrips))completion
 {
-  [self.temporaryContext performBlock:^{
+  [self.context performBlock:^{
     // create an empty request
     NSMutableDictionary *keyToTrips = [NSMutableDictionary dictionaryWithCapacity:keyToTripGroups.count];
     
     [keyToTripGroups enumerateKeysAndObjectsUsingBlock:
      ^(id<NSCopying> key, NSArray *tripGroupsArray, BOOL *stop) {
 #pragma unused(stop)
-       TripRequest *request = [TripRequest insertRequestIntoTripKitContext:self.temporaryContext];
+       TripRequest *request = [TripRequest insertRequestIntoTripKitContext:self.context];
        
-       NSArray *newPrivateTrips = [self parseAndAddResultWithTripGroups:tripGroupsArray
-                                                       segmentTemplates:segmentTemplatesJson
-                                                                 alerts:alertJson
-                                                             forRequest:request
-                                                            orTripGroup:nil
-                                                           orUpdateTrip:nil
-                                           allowDuplicatingExistingTrip:YES];
-       if (newPrivateTrips.count > 0) {
-         keyToTrips[key] = newPrivateTrips;
-         NSError *error = nil;
-         [self.temporaryContext save:&error];
-         ZAssert(! error, @"Error saving population of request");
+       NSArray *newTrips = [self parseAndAddResultWithTripGroups:tripGroupsArray
+                                                segmentTemplates:segmentTemplatesJson
+                                                          alerts:alertJson
+                                                      forRequest:request
+                                                     orTripGroup:nil
+                                                    orUpdateTrip:nil
+                                    allowDuplicatingExistingTrip:YES];
+       if (newTrips.count > 0) {
+         keyToTrips[key] = newTrips;
        }
      }];
-    
-    NSManagedObjectContext *publicContext = self.temporaryContext.parentContext;
-    [publicContext performBlock:^{
-      for (id<NSCopying> key in [keyToTripGroups allKeys]) {
-        NSArray *privateTrips = keyToTrips[key];
-        if (privateTrips.count > 0) {
-          NSMutableArray *publicTrips = [NSMutableArray arrayWithCapacity:privateTrips.count];
-          for (Trip *trip in privateTrips) {
-            Trip *publicTrip = (Trip *)[publicContext objectWithID:trip.objectID];
-            [publicTrips addObject:publicTrip];
-          }
-          keyToTrips[key] = publicTrips;
-        }
-      }
-      completion(keyToTrips);
-    }];
+    completion(keyToTrips);
   }];
 }
 
@@ -312,24 +248,13 @@
      updatingTrip:(Trip *)trip
        completion:(void (^)(Trip *updatedTrip))completion
 {
-  [self.temporaryContext performBlock:^{
-    Trip *privateTrip = (Trip *)[self.temporaryContext objectWithID:trip.objectID];
-    
-    NSArray *privateResult = [self parseAndAddResult:json
-                                          forRequest:nil
-                                         orTripGroup:nil
-                                        orUpdateTrip:privateTrip
-                        allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
-    
-    NSManagedObjectContext *publicContext = self.temporaryContext.parentContext;
-    [publicContext performBlock:^{
-      Trip *publicTrip = nil;
-      for (Trip *processedPrivateTrip in privateResult) {
-        publicTrip = (Trip *)[publicContext objectWithID:processedPrivateTrip.objectID];
-        break;
-      }
-      completion(publicTrip);
-    }];
+  [self.context performBlock:^{
+    [self parseAndAddResult:json
+                 forRequest:nil
+                orTripGroup:nil
+               orUpdateTrip:trip
+allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
+    completion(trip);
   }];
 }
 
@@ -417,7 +342,7 @@
                                 orUpdateTrip:(Trip *)tripToUpdate
                 allowDuplicatingExistingTrip:(BOOL)allowDuplicates
 {
-  ZAssert(self.temporaryContext, @"Managed object context required!");
+  ZAssert(self.context, @"Managed object context required!");
   
   // let's check if the request is still alive
   if (! request) {
@@ -438,7 +363,7 @@
     // check if we already have a segment template with that id
     NSNumber *hashCode = segmentTemplateDict[@"hashCode"];
     BOOL hashCodeExists = [SegmentTemplate segmentTemplateHashCode:hashCode
-                                            existsInTripKitContext:self.temporaryContext];
+                                            existsInTripKitContext:self.context];
     if (NO == hashCodeExists) {
       // keep it
       [segmentHashToTemplateDictionaryDict setValue:segmentTemplateDict forKey:[hashCode description]];
@@ -447,7 +372,7 @@
   
   // Next we parse the alerts
   [TKParserHelper updateOrAddAlerts:alertsArray
-                   inTripKitContext:self.temporaryContext];
+                   inTripKitContext:self.context];
   
   // Now parse the groups
   NSSet *previousTrips = [request trips];
@@ -467,7 +392,7 @@
       if (tripToUpdate) {
         trip = tripToUpdate;
       } else {
-        trip = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Trip class]) inManagedObjectContext:self.temporaryContext];
+        trip = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Trip class]) inManagedObjectContext:self.context];
       }
       trip.arrivalTime   = [NSDate dateWithTimeIntervalSince1970:[tripDict[@"arrive"] doubleValue]];
       trip.departureTime = [NSDate dateWithTimeIntervalSince1970:[tripDict[@"depart"] doubleValue]];
@@ -508,8 +433,8 @@
             }
           }
         } else if (unprocessedTemplateDict
-                   || YES == [SegmentTemplate segmentTemplateHashCode:hashCode existsInTripKitContext:self.temporaryContext]) {
-          reference = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SegmentReference class]) inManagedObjectContext:self.temporaryContext];
+                   || YES == [SegmentTemplate segmentTemplateHashCode:hashCode existsInTripKitContext:self.context]) {
+          reference = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SegmentReference class]) inManagedObjectContext:self.context];
         }
         
         if (! reference) {
@@ -523,9 +448,9 @@
           
           // create a service object if necessary
           service = [Service fetchExistingServiceWithCode:serviceCode
-                                         inTripKitContext:self.temporaryContext];
+                                         inTripKitContext:self.context];
           if (nil == service) {
-            service = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Service class]) inManagedObjectContext:self.temporaryContext];;
+            service = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Service class]) inManagedObjectContext:self.context];;
             service.code = serviceCode;
           }
           
@@ -560,7 +485,7 @@
             } else {
               // add the vehicle
               Vehicle *vehicle = [TKParserHelper insertNewVehicle:vehicleDict
-                                                 inTripKitContext:self.temporaryContext];
+                                                 inTripKitContext:self.context];
               vehicle.service = service;
             }
           }
@@ -638,7 +563,7 @@
       if (addedTrips.count > 0) {
         if (nil == tripGroup) {
           // create a new route group
-          tripGroup = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([TripGroup class]) inManagedObjectContext:self.temporaryContext];
+          tripGroup = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([TripGroup class]) inManagedObjectContext:self.context];
           tripGroup.request = request;
         }
         
@@ -664,16 +589,7 @@
   if (tripToUpdate) {
     tripToUpdate.tripGroup.visibility = updateTripVisibility;
   }
-  
-  NSError *saveError = nil;
-  BOOL couldSave = [self.temporaryContext save:&saveError];
-  if (couldSave) {
-    return tripsToReturn;
-  } else {
-    DLog(@"Could not save routing results! %@", saveError);
-    [self.temporaryContext rollback];
-    return nil;
-  }
+  return tripsToReturn;
 }
 
 @end
