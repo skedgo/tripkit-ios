@@ -45,8 +45,10 @@
   float carbonWeight  = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightCarbon];
   float timeWeight    = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightTime];
   float hassleWeight  = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightHassle];
-  NSString *weightString = [NSString stringWithFormat:@"(%f,%f,%f,%f)", priceWeight, carbonWeight, timeWeight, hassleWeight];
-  [paras setValue:weightString forKey:@"wp"];
+  if (priceWeight + carbonWeight + timeWeight + hassleWeight > 0.1) {
+    NSString *weightString = [NSString stringWithFormat:@"(%f,%f,%f,%f)", priceWeight, carbonWeight, timeWeight, hassleWeight];
+    [paras setValue:weightString forKey:@"wp"];
+  }
   
   // transport preferences
   if ([sharedDefaults boolForKey:TKDefaultsKeyProfileTransportConcessionPricing]) {
