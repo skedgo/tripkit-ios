@@ -74,6 +74,10 @@
 
 @property (nonatomic, assign) BOOL hasReminder;
 
+- (void)removeFromRequest;
+
+- (void)moveToRequest:(nonnull TripRequest *)request markAsPreferred:(BOOL)preferred;
+
 /* Returns whether the annotation is one of the segment changes of this trip
  */
 - (BOOL)changesAt:(nonnull id<MKAnnotation>) annotation;

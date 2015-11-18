@@ -92,7 +92,6 @@ typedef NSUInteger SGTripFlag;
   self.toDelete = YES;
 }
 
-
 #pragma mark - NSManagedObject
 
 - (void)dealloc
@@ -110,6 +109,8 @@ typedef NSUInteger SGTripFlag;
 {
 	_sortedSegments = nil;
 }
+
+
 
 #pragma mark - Route properties
 
@@ -423,12 +424,32 @@ typedef NSUInteger SGTripFlag;
 	return 0 != (self.flags.integerValue & SGTripFlagHasFixedDeparture);
 }
 
-#pragma mark - Segment accessors
+#pragma mark - Request
 
 - (TripRequest *)request
 {
   return self.tripGroup.request;
 }
+
+- (void)removeFromRequest
+{
+  if (self.request.preferredGroup == self.tripGroup) {
+    self.request.preferredGroup = nil;
+  }
+  
+  self.tripGroup.request = nil;
+}
+
+- (void)moveToRequest:(TripRequest *)request markAsPreferred:(BOOL)preferred
+{
+  self.tripGroup.request = request;
+  
+  if (preferred) {
+    [self setAsPreferredTrip];
+  }
+}
+
+#pragma mark - Segment accessors
 
 - (void)setAsPreferredTrip
 {
