@@ -24,6 +24,6 @@
 /**
  @return The classifiction of that particular trip group.
  */
-- (nullable id<NSCoding>)classificationOfTripGroup:(nonnull TripGroup *)tripGroup;
+- (nullable id<NSCoding, NSObject>)classificationOfTripGroup:(nonnull TripGroup *)tripGroup;
 
 @end

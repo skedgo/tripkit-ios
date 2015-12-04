@@ -40,7 +40,7 @@
   }
 }
 
-- (id<NSCoding>)classificationOfTripGroup:(TripGroup *)tripGroup
+- (id<NSCoding, NSObject>)classificationOfTripGroup:(TripGroup *)tripGroup
 {
   CGFloat cheapRange = (self.priceMax - self.priceMin) / 3;
   NSTimeInterval fastRange = (self.offsetMax - self.offsetMin) / 3;

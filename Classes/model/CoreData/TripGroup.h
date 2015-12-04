@@ -21,7 +21,7 @@ typedef enum {
 
 @interface TripGroup : NSManagedObject
 
-@property (nonatomic, strong) id<NSCoding> classification;
+@property (nonatomic, strong) id<NSCoding, NSObject> classification;
 @property (nonatomic, strong) NSNumber * frequency;
 @property (nonatomic, strong) NSNumber * flags;
 @property (nonatomic, strong) NSNumber * visibilityRaw;
