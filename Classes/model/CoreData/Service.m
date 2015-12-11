@@ -199,7 +199,7 @@ typedef NSUInteger SGServiceFlag;
 	return nil;
 }
 
-- (UIImage *)modeImageOfType:(SGStyleModeIconType)type
+- (nullable UIImage *)modeImageOfType:(SGStyleModeIconType)type
 {
   if (self.modeInfo) {
     UIImage *specificImage = [SGStyleManager imageForModeImageName:self.modeInfo.localImageName
@@ -220,12 +220,16 @@ typedef NSUInteger SGServiceFlag;
   return nil;
 }
 
-- (NSURL *)modeImageURLForType:(SGStyleModeIconType)type
+- (nullable NSURL *)modeImageURLForType:(SGStyleModeIconType)type
 {
-  return [SVKServer imageURLForIconFileNamePart:self.modeInfo.remoteImageName ofIconType:type];
+  if (self.modeInfo.remoteImageName) {
+    return [SVKServer imageURLForIconFileNamePart:self.modeInfo.remoteImageName ofIconType:type];
+  } else {
+    return nil;
+  }
 }
 
-- (SVKRegion *)region
+- (nullable SVKRegion *)region
 {
 	StopVisits *visit = [self.visits anyObject];
 	if (visit) {
@@ -247,7 +251,7 @@ typedef NSUInteger SGServiceFlag;
 	return title;
 }
 
-- (NSString *)shortIdentifier
+- (nullable NSString *)shortIdentifier
 {
   if (self.number.length > 0) {
     return self.number;
@@ -271,7 +275,7 @@ typedef NSUInteger SGServiceFlag;
   return NO;
 }
 
-- (StopVisits *)visitForStopCode:(NSString *)stopCode
+- (nullable StopVisits *)visitForStopCode:(NSString *)stopCode
 {
   for (StopVisits *visit in self.visits) {
     if ([visit isKindOfClass:[DLSEntry class]])

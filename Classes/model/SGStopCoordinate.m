@@ -76,10 +76,14 @@
                                     ofIconType:SGStyleModeIconTypeMapIcon];
 }
 
-- (NSURL *)pointImageURL
+- (nullable NSURL *)pointImageURL
 {
-  return [SVKServer imageURLForIconFileNamePart:self.stopModeInfo.remoteImageName
-                                     ofIconType:SGStyleModeIconTypeMapIcon];
+  if (self.stopModeInfo.remoteImageName) {
+    return [SVKServer imageURLForIconFileNamePart:self.stopModeInfo.remoteImageName
+                                       ofIconType:SGStyleModeIconTypeMapIcon];
+  } else {
+    return nil;
+  }
 }
 
 @end

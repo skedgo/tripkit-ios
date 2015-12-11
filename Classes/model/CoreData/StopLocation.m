@@ -176,12 +176,16 @@
                                     ofIconType:type];
 }
 
-- (NSURL *)modeImageURLForType:(SGStyleModeIconType)type
+- (nullable NSURL *)modeImageURLForType:(SGStyleModeIconType)type
 {
-  return [SVKServer imageURLForIconFileNamePart:self.stopModeInfo.remoteImageName ofIconType:type];
+  if (self.stopModeInfo.remoteImageName) {
+    return [SVKServer imageURLForIconFileNamePart:self.stopModeInfo.remoteImageName ofIconType:type];
+  } else {
+    return nil;
+  }
 }
 
-- (NSPredicate *)departuresPredicateFromDate:(NSDate *)date
+- (nullable NSPredicate *)departuresPredicateFromDate:(NSDate *)date
 {
   if (!self.stopsToMatchTo || !date) {
     return nil;

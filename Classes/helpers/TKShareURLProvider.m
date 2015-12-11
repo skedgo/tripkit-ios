@@ -30,7 +30,7 @@
                                     allowLongURL:allowLong];
     if (saveURL) {
       [SVKServer hitURL:saveURL
-                completion:
+             completion:
        ^(id object) {
          NSURL *newShareURL;
          if ([object isKindOfClass:[NSDictionary class]]) {
@@ -53,9 +53,9 @@
   }
 }
 
-+ (NSURL *)getShareURLForShareable:(id<SGURLShareable>)shareable
-                      allowLongURL:(BOOL)allowLong
-                     allowBlocking:(BOOL)allowBlocking
++ (nullable NSURL *)getShareURLForShareable:(id<SGURLShareable>)shareable
+                               allowLongURL:(BOOL)allowLong
+                              allowBlocking:(BOOL)allowBlocking
 {
   NSURL *shareURL = [shareable shareURL];
   if (shareURL) {
@@ -67,6 +67,10 @@
     NSURL *rawSaveURL = [shareable saveURL];
     NSURL *saveURL = [self saveURLForBaseSaveURL:rawSaveURL
                                     allowLongURL:allowLong];
+    if (!saveURL) {
+      return nil;
+    }
+    
     id result = [SVKServer syncURL:saveURL timeout:SECONDS_TO_WAIT];
     if ([result isKindOfClass:[NSDictionary class]]) {
       NSString *urlString = result[@"url"];

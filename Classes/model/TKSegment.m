@@ -988,9 +988,9 @@ NSString *const UninitializedString =  @"UninitializedString";
   return nil;
 }
 
-- (NSURL *)imageURLForType:(SGStyleModeIconType)iconType
+- (nullable NSURL *)imageURLForType:(SGStyleModeIconType)iconType
 {
-  if (self.template.modeInfo) {
+  if (self.template.modeInfo.remoteImageName) {
     return [SVKServer imageURLForIconFileNamePart:self.template.modeInfo.remoteImageName
                                        ofIconType:iconType];
     
