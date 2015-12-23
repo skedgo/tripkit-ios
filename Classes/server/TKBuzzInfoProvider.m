@@ -250,27 +250,27 @@ typedef enum {
           return;
         }
         
-        if (! responseObject[@"error"]) {
-          ZAssert(service && service.managedObjectContext, @"Service with a context needed.");
-          [strongSelf addContentToService:service
-                             fromResponse:responseObject];
-          completion(service, YES);
-          
-        } else {
-          [service.managedObjectContext performBlock:^{
+        [service.managedObjectContext performBlock:^{
+          service.isRequestingServiceData = NO;
+          if (! responseObject[@"error"]) {
+            ZAssert(service && service.managedObjectContext, @"Service with a context needed.");
+            [strongSelf addContentToService:service
+                               fromResponse:responseObject];
+            completion(service, YES);
+            
+          } else {
             completion(service, NO);
-          }];
-        }
-        service.isRequestingServiceData = NO;
+          }
+        }];
       }
                                 failure:
       ^(NSURLSessionDataTask *task, NSError *operationError) {
 #pragma unused(task, operationError)
         DLog(@"Error response: %@. %@", task.response, operationError);
         [service.managedObjectContext performBlock:^{
+          service.isRequestingServiceData = NO;
           completion(service, NO);
         }];
-        service.isRequestingServiceData = NO;
       }];
    }];
 }
