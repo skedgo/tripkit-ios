@@ -141,11 +141,8 @@
           completion:(void(^)(Trip * __nullable trip))completion
 {
   [self hitURLForTripDownload:url completion:
-   ^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
+   ^(NSURL *shareURL, id JSON, NSError *error) {
      if (JSON) {
-       [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
-         return [NSString stringWithFormat:@"Downloaded trip JSON for: %@", requestURL];
-       }];
        [self parseJSON:JSON
      forTripKitContext:tripKitContext
             completion:^(Trip *trip) {
@@ -156,7 +153,7 @@
        }];
      } else {
        // failure
-       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip from: %@.\nError: %@", requestURL, error];
+       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip. Error: %@", error];
        if (completion) {
          completion(nil);
        }
@@ -167,8 +164,8 @@
 - (void)updateTrip:(Trip *)trip completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion
 {
     NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
-    [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
-#pragma unused(requestURL, shareURL)
+    [self hitURLForTripDownload:updateURL completion:^(NSURL *shareURL, id JSON, NSError *error) {
+#pragma unused(shareURL)
         if (JSON) {
           [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
             [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
@@ -354,7 +351,7 @@
 
 #pragma mark - Private methods
 
-- (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error))completion
+- (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *shareURL, id JSON, NSError *error))completion
 {
   // de-construct the URL
   NSString *port = nil != url.port ? [NSString stringWithFormat:@":%@", url.port] : @"";
@@ -377,15 +374,10 @@
   }
   
   // create the request
-  SVKSessionManager *manager = [SVKSessionManager jsonSessionManagerWithBaseURL:[baseURL URLByDeletingLastPathComponent]];
-
-  NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:[baseURL absoluteString] parameters:paras error:nil];
-  NSURLSessionDataTask *task = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-#pragma unused(response)
-    completion(request.URL, baseURL, responseObject, error);
-  }];
-  
-  [task resume];
+  [SVKServer GET:baseURL paras:paras completion:
+   ^(id  _Nullable responseObject, NSError * _Nullable error) {
+     completion(baseURL, responseObject, error);
+   }];
 }
 
 - (void)parseJSON:(id)json

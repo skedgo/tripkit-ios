@@ -20,25 +20,18 @@
     return;
   }
   
-  SVKSessionManager *manager = [SVKSessionManager jsonSessionManager];
-  
-  NSDictionary *paras = userInfo;
-  NSURLSessionDataTask *task = [manager POST:trip.plannedURLString
-                                  parameters:paras
-                                     success:
-                                ^(NSURLSessionDataTask *theTask, id responseObject) {
-#pragma unused(theTask, responseObject)
-                                  [SGKLog debug:@"TKReporter" text:@"Planned trip posted successfully"];
-                                }
-                                     failure:
-                                ^(NSURLSessionDataTask *theTask, NSError *error) {
-#pragma unused(theTask)
-                                  [SGKLog debug:@"TKReporter" block:^NSString * _Nonnull{
-                                    return [NSString stringWithFormat:@"Planned trip post encountered error: %@", error];
-                                  }];
-                                }];
-  
-  [task resume];
+  [SVKServer POST:[NSURL URLWithString:trip.plannedURLString]
+            paras:userInfo
+       completion:
+   ^(id  _Nullable responseObject, NSError * _Nullable error) {
+     if (responseObject) {
+       [SGKLog debug:@"TKReporter" text:@"Planned trip posted successfully"];
+     } else {
+       [SGKLog debug:@"TKReporter" block:^NSString * _Nonnull{
+         return [NSString stringWithFormat:@"Planned trip post encountered error: %@", error];
+       }];
+     }
+   }];
 }
 
 + (void)reportProgressForTrip:(Trip *)trip
@@ -49,8 +42,6 @@
   if (!trip.progressURLString) {
     return;
   }
-  
-  SVKSessionManager *manager = [SVKSessionManager jsonSessionManager];
   
   NSMutableArray *samples = [NSMutableArray arrayWithCapacity:locations.count];
   for (id object in locations) {
@@ -71,22 +62,19 @@
   }
   
   NSDictionary *paras = @{@"samples": samples};
-  NSURLSessionDataTask *task = [manager POST:trip.progressURLString
-                                  parameters:paras
-                                     success:
-                                ^(NSURLSessionDataTask *theTask, id responseObject) {
-#pragma unused(theTask, responseObject)
-                                  [SGKLog debug:@"TKReporter" text:@"Progress posted successfully"];
-                                }
-                                     failure:
-                                ^(NSURLSessionDataTask *theTask, NSError *error) {
-#pragma unused(theTask)
-                                  [SGKLog debug:@"TKReporter" block:^NSString * _Nonnull{
-                                    return [NSString stringWithFormat:@"Progress post encountered error: %@", error];
-                                  }];
-                                }];
   
-  [task resume];
+  [SVKServer POST:[NSURL URLWithString:trip.progressURLString]
+            paras:paras
+       completion:
+   ^(id  _Nullable responseObject, NSError * _Nullable error) {
+     if (responseObject) {
+       [SGKLog debug:@"TKReporter" text:@"Progress posted successfully"];
+     } else {
+       [SGKLog debug:@"TKReporter" block:^NSString * _Nonnull{
+         return [NSString stringWithFormat:@"Progress post encountered error: %@", error];
+       }];
+     }
+   }];
 }
 
 @end
