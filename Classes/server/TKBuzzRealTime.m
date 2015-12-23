@@ -191,14 +191,12 @@
                           parameters:paras
                               region:region
                              success:
-   ^(NSURLSessionDataTask *task, id responseObject) {
-#pragma unused(task)
+   ^(id responseObject) {
      success(responseObject);
    }
                              failure:
-   ^(NSURLSessionDataTask *task, NSError *error) {
-#pragma unused(task)
-     DLog(@"Error response: %@", task.response);
+   ^(NSError *error) {
+     DLog(@"Error response: %@", error);
      failure(error);
    }];
 }

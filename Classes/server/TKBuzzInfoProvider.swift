@@ -46,11 +46,11 @@ extension TKBuzzInfoProvider {
       path: "regionInfo.json",
       parameters: paras,
       region: region,
-      success: { _, response in
+      success: { response in
         let paratransit = ParatransitInformation.fromJSONResponse(response)
         completion(paratransit)
       },
-      failure: { _, _ in
+      failure: { _ in
         completion(nil)
       })
   }

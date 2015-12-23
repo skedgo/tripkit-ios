@@ -24,12 +24,13 @@
             paras:userInfo
        completion:
    ^(id  _Nullable responseObject, NSError * _Nullable error) {
-     if (responseObject) {
-       [SGKLog debug:@"TKReporter" text:@"Planned trip posted successfully"];
-     } else {
+#pragma unused(responseObject)
+     if (error) {
        [SGKLog debug:@"TKReporter" block:^NSString * _Nonnull{
          return [NSString stringWithFormat:@"Planned trip post encountered error: %@", error];
        }];
+     } else {
+       [SGKLog debug:@"TKReporter" text:@"Planned trip posted successfully"];
      }
    }];
 }
@@ -67,12 +68,13 @@
             paras:paras
        completion:
    ^(id  _Nullable responseObject, NSError * _Nullable error) {
-     if (responseObject) {
-       [SGKLog debug:@"TKReporter" text:@"Progress posted successfully"];
-     } else {
+#pragma unused(responseObject)
+     if (error) {
        [SGKLog debug:@"TKReporter" block:^NSString * _Nonnull{
          return [NSString stringWithFormat:@"Progress post encountered error: %@", error];
        }];
+     } else {
+       [SGKLog debug:@"TKReporter" text:@"Progress posted successfully"];
      }
    }];
 }
