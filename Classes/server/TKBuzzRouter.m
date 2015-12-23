@@ -141,11 +141,8 @@
           completion:(void(^)(Trip * __nullable trip))completion
 {
   [self hitURLForTripDownload:url completion:
-   ^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
+   ^(NSURL *shareURL, id JSON, NSError *error) {
      if (JSON) {
-       [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
-         return [NSString stringWithFormat:@"Downloaded trip JSON for: %@", requestURL];
-       }];
        [self parseJSON:JSON
      forTripKitContext:tripKitContext
             completion:^(Trip *trip) {
@@ -156,7 +153,7 @@
        }];
      } else {
        // failure
-       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip from: %@.\nError: %@", requestURL, error];
+       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip. Error: %@", error];
        if (completion) {
          completion(nil);
        }
@@ -167,8 +164,8 @@
 - (void)updateTrip:(Trip *)trip completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion
 {
     NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
-    [self hitURLForTripDownload:updateURL completion:^(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error) {
-#pragma unused(requestURL, shareURL)
+    [self hitURLForTripDownload:updateURL completion:^(NSURL *shareURL, id JSON, NSError *error) {
+#pragma unused(shareURL)
         if (JSON) {
           [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
             [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
@@ -231,7 +228,6 @@
 		NSError *error = [NSError errorWithCode:81350
 																		message:@"Bad request."];
 		[self handleError:error
-					forURLQuery:nil
 							failure:failure];
 		return;
 	}
@@ -244,7 +240,6 @@
 																		message:@"Start location could not be determined. Please try again or select manually."];
 		
 		[self handleError:error
-					forURLQuery:nil
 							failure:failure];
 		return;
 	}
@@ -256,7 +251,6 @@
 																		message:@"End location could not be determined. Please try again or select manually."];
 		
 		[self handleError:error
-					forURLQuery:nil
 							failure:failure];
 		return;
 	}
@@ -272,7 +266,6 @@
 		if (error) {
 			// could not get regions
 			[strongSelf handleError:error
-                  forURLQuery:nil
                       failure:failure];
 			return;
 		}
@@ -284,7 +277,6 @@
       error = [NSError errorWithCode:kSVKServerErrorTypeUser
                              message:@"Unsupported region."];
       [strongSelf handleError:error
-                  forURLQuery:nil
                       failure:failure];
       return;
     }
@@ -309,30 +301,25 @@
                             parameters:paras
                                 region:region
                                success:
-     ^(NSURLSessionDataTask *task, id responseObject) {
+     ^(id responseObject) {
        typeof(weakSelf) strongSelf2 = weakSelf;
        if (! strongSelf2) {
          return;
        }
        
-       [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
-         return [NSString stringWithFormat:@"Request returned JSON: %@", task.currentRequest.URL];
-       }];
        [strongSelf2 parseJSON:responseObject
-                  forURLQuery:task.currentRequest.URL.query
             forTripKitContext:request.managedObjectContext
                       success:success
                       failure:failure];
      }
                                failure:
-     ^(NSURLSessionDataTask *task, NSError *error2) {
+     ^(NSError *error2) {
        typeof(weakSelf) strongSelf2 = weakSelf;
        if (! strongSelf2) {
          return;
        }
        
        [strongSelf2 handleError:error2
-                    forURLQuery:task.currentRequest.URL.query
                         failure:failure];
      }];
   }];
@@ -343,9 +330,9 @@
 {
   TKBuzzRouter *router = [[TKBuzzRouter alloc] init];
   NSDictionary *paras = [router createRequestParametersForRequest:tripRequest andModeIdentifiers:modeIdentifiers bestOnly:NO withASAPTime:nil];
-  NSURL *baseUrl = [SVKServer sharedInstance].sessionManager.baseURL;
-  NSString *fullUrl = [[baseUrl URLByAppendingPathComponent:@"routing.json"] absoluteString];
-  NSURLRequest *request = [[SVKServer sharedInstance].sessionManager.requestSerializer requestWithMethod:@"GET" URLString:fullUrl parameters:paras error:nil];
+  NSURL *baseUrl = [[SVKServer sharedInstance] currentBaseURL];
+  NSURL *fullUrl = [baseUrl URLByAppendingPathComponent:@"routing.json"];
+  NSURLRequest *request = [SVKServer GETRequestWithSkedGoHTTPHeadersForURL:fullUrl paras:paras];
   return [[request URL] absoluteString];
 }
 
@@ -354,7 +341,7 @@
 
 #pragma mark - Private methods
 
-- (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *requestURL, NSURL *shareURL, id JSON, NSError *error))completion
+- (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *shareURL, id JSON, NSError *error))completion
 {
   // de-construct the URL
   NSString *port = nil != url.port ? [NSString stringWithFormat:@":%@", url.port] : @"";
@@ -377,19 +364,13 @@
   }
   
   // create the request
-  SVKSessionManager *manager = [SVKSessionManager jsonSessionManagerWithBaseURL:[baseURL URLByDeletingLastPathComponent]];
-
-  NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:[baseURL absoluteString] parameters:paras error:nil];
-  NSURLSessionDataTask *task = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-#pragma unused(response)
-    completion(request.URL, baseURL, responseObject, error);
-  }];
-  
-  [task resume];
+  [SVKServer GET:baseURL paras:paras completion:
+   ^(id  _Nullable responseObject, NSError * _Nullable error) {
+     completion(baseURL, responseObject, error);
+   }];
 }
 
 - (void)parseJSON:(id)json
-			forURLQuery:(NSString *)urlQuery
 forTripKitContext:(NSManagedObjectContext *)tripKitContext
 					success:(TKRouterSuccess)success
 					failure:(TKRouterError)failure
@@ -409,7 +390,6 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
     if (saved) {
       [self parseAndAddResult:json
            intoTripKitContext:tripKitContext
-                  forURLQuery:urlQuery
                       success:
        ^(NSArray *addedTrips) {
          self.isActive = NO;
@@ -431,17 +411,14 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 }
 
 - (void)handleError:(NSError *)error
-				forURLQuery:(NSString *)urlQuery
 						failure:(TKRouterError)failure
 {
-	if (urlQuery) {
-		if (! self.isActive) {
-			// ignore responses from outdated requests
-			return;
-		}
+	if (! self.isActive) {
+    // ignore responses from outdated requests
+    return;
 	}
 
-  [SGKLog warn:NSStringFromClass([self class]) format:@"Request failed: %@ with error %@ (%@)", urlQuery, error, [error description]];
+  [SGKLog warn:NSStringFromClass([self class]) format:@"Request failed with error %@ (%@)", error, [error description]];
   self.isActive = NO;
   
   dispatch_async(dispatch_get_main_queue(), ^{
@@ -568,7 +545,6 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 
 - (void)parseAndAddResult:(id)json
        intoTripKitContext:(NSManagedObjectContext *)tripKitContext
-							forURLQuery:(NSString *)urlQuery
                   success:(void (^)(NSArray *addedTrips))completion
 									failure:(TKRouterError)failure
 {
@@ -580,7 +556,6 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   if (serverError) {
     [SGKLog warn:NSStringFromClass([self class]) format:@"Encountered server error: %@", serverError];
 		[self handleError:serverError
-					forURLQuery:urlQuery
 							failure:failure];
     return;
   }

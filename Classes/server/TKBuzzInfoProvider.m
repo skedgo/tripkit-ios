@@ -71,8 +71,7 @@ typedef enum {
                             parameters:paras
                                 region:region
                                success:
-     ^(NSURLSessionDataTask *task, id responseObject) {
-#pragma unused(task)
+     ^(id responseObject) {
        typeof(self) strongSelf = weakSelf;
        if( !strongSelf) {
          return;
@@ -96,7 +95,7 @@ typedef enum {
            }
            
          } else {
-           DLog(@"Nothing found: %@", task.response);
+           DLog(@"No departures found.");
            if (failure) {
              NSError *anError = [NSError errorWithCode:kSGInfoProviderErrorNothingFound
                                                message:@"Nothing found"];
@@ -106,8 +105,7 @@ typedef enum {
        }];
      }
                                failure:
-     ^(NSURLSessionDataTask *task, NSError *anError) {
-#pragma unused (task)
+     ^(NSError *anError) {
        if (failure) {
          failure(anError);
        }
@@ -161,8 +159,7 @@ typedef enum {
                             parameters:paras
                                 region:table.region
                                success:
-     ^(NSURLSessionDataTask *task, id responseObject) {
-#pragma unused(task)
+     ^(id responseObject) {
        typeof(self) strongSelf = weakSelf;
        if( !strongSelf) {
          return;
@@ -184,8 +181,7 @@ typedef enum {
        }];
      }
                                failure:
-     ^(NSURLSessionDataTask *task, NSError *operationError) {
-#pragma unused(task)
+     ^(NSError *operationError) {
        if (failure) {
          failure(operationError);
        }
@@ -243,8 +239,7 @@ typedef enum {
                              parameters:paras
                                  region:region
                                 success:
-      ^(NSURLSessionDataTask *task, id responseObject) {
-#pragma unused(task)
+      ^(id responseObject) {
         typeof(self) strongSelf = weakSelf;
         if (!strongSelf) {
           return;
@@ -264,9 +259,9 @@ typedef enum {
         }];
       }
                                 failure:
-      ^(NSURLSessionDataTask *task, NSError *operationError) {
-#pragma unused(task, operationError)
-        DLog(@"Error response: %@. %@", task.response, operationError);
+      ^(NSError *operationError) {
+#pragma unused(operationError)
+        DLog(@"Error response: %@", operationError);
         [service.managedObjectContext performBlock:^{
           service.isRequestingServiceData = NO;
           completion(service, NO);
@@ -328,18 +323,16 @@ typedef enum {
                             parameters:paras
                                 region:region
                                success:
-     ^(NSURLSessionDataTask *task, id responseObject) {
-#pragma unused(task)
-
+     ^(id responseObject) {
         // set the stop properties
         BOOL success = [self addStop:stop fromResponse:responseObject];
        ZAssert(success, @"Error processing: %@", responseObject);
         completion(nil);
      }
                                failure:
-     ^(NSURLSessionDataTask *task, NSError *anotherError) {
-#pragma unused(task, anotherError)
-       DLog(@"Error response: %@", task.response);
+     ^(NSError *anotherError) {
+#pragma unused(anotherError)
+       DLog(@"Error response: %@", anotherError);
        completion(anotherError);
      }];
   }];

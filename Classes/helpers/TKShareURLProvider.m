@@ -29,12 +29,14 @@
     NSURL *saveURL = [self saveURLForBaseSaveURL:rawSaveURL
                                     allowLongURL:allowLong];
     if (saveURL) {
-      [SVKServer hitURL:saveURL
-             completion:
-       ^(id object) {
+      [SVKServer GET:saveURL
+               paras:nil
+          completion:
+       ^(id  _Nullable responseObject, NSError * _Nullable error) {
+#pragma unused(error)
          NSURL *newShareURL;
-         if ([object isKindOfClass:[NSDictionary class]]) {
-           NSString *urlString = object[@"url"];
+         if ([responseObject isKindOfClass:[NSDictionary class]]) {
+           NSString *urlString = responseObject[@"url"];
            newShareURL = [NSURL URLWithString:urlString];
            if ([shareable respondsToSelector:@selector(setShareURL:)]) {
              [shareable setShareURL:newShareURL];
