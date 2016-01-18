@@ -169,7 +169,11 @@
         if (JSON) {
           [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
             [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
-              return [NSString stringWithFormat:@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
+              __block NSString *result = nil;
+              [updatedTrip.managedObjectContext performBlockAndWait:^{
+                result = [NSString stringWithFormat:@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
+              }];
+              return result;
             }];
             if (completion) {
                 completion(updatedTrip, YES);
@@ -178,7 +182,11 @@
         } else if (! error) {
             // No new data (but also no error
           [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
-            return [NSString stringWithFormat:@"No update for trip (%d): %@", trip.tripGroup.visibility, [trip debugString]];
+            __block NSString *result = nil;
+            [trip.managedObjectContext performBlockAndWait:^{
+              result = [NSString stringWithFormat:@"No update for trip (%d): %@", trip.tripGroup.visibility, [trip debugString]];
+            }];
+            return result;
           }];
           if (completion) {
               completion(trip, NO);
