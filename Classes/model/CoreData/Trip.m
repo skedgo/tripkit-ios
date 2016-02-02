@@ -811,34 +811,6 @@ typedef NSUInteger SGTripFlag;
 }
 
 
-#pragma mark - Auto-generated methods
-
-- (void)addSegmentsObject:(TKSegment *)value {    
-    NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
-    [self willChangeValueForKey:@"segments" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [[self primitiveValueForKey:@"segments"] addObject:value];
-    [self didChangeValueForKey:@"segments" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-}
-
-- (void)removeSegmentsObject:(TKSegment *)value {
-    NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
-    [self willChangeValueForKey:@"segments" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [[self primitiveValueForKey:@"segments"] removeObject:value];
-    [self didChangeValueForKey:@"segments" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-}
-
-- (void)addSegments:(NSSet *)value {    
-    [self willChangeValueForKey:@"segments" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
-    [[self primitiveValueForKey:@"segments"] unionSet:value];
-    [self didChangeValueForKey:@"segments" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
-}
-
-- (void)removeSegments:(NSSet *)value {
-    [self willChangeValueForKey:@"segments" withSetMutation:NSKeyValueMinusSetMutation usingObjects:value];
-    [[self primitiveValueForKey:@"segments"] minusSet:value];
-    [self didChangeValueForKey:@"segments" withSetMutation:NSKeyValueMinusSetMutation usingObjects:value];
-}
-
 #pragma mark - Private: Others
 
 + (NSString *)addressForObject:(id<MKAnnotation>)object
