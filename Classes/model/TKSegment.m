@@ -990,8 +990,23 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (nullable NSURL *)imageURLForType:(SGStyleModeIconType)iconType
 {
-  if (self.template.modeInfo.remoteImageName) {
-    return [SVKServer imageURLForIconFileNamePart:self.template.modeInfo.remoteImageName
+  NSString *iconFileNamePart = nil;
+  
+  switch (iconType) {
+    case SGStyleModeIconTypeMapIcon:
+    case SGStyleModeIconTypeListMainMode:
+    case SGStyleModeIconTypeResolutionIndependent:
+      iconFileNamePart = self.template.modeInfo.remoteImageName;
+      break;
+      
+    case SGStyleModeIconTypeListMainModeOnDark:
+    case SGStyleModeIconTypeResolutionIndependentOnDark:
+      iconFileNamePart = self.template.modeInfo.remoteDarkImageName;
+      break;
+  }
+
+  if (iconFileNamePart) {
+    return [SVKServer imageURLForIconFileNamePart:iconFileNamePart
                                        ofIconType:iconType];
     
   } else {
