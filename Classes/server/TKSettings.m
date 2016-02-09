@@ -51,6 +51,8 @@
   }
   
   // transport preferences
+  [paras setValue:[TKUserProfileHelper dislikedTransitModes] forKey:@"avoid"];
+  
   if ([sharedDefaults boolForKey:TKDefaultsKeyProfileTransportConcessionPricing]) {
     [paras setValue:@(YES) forKey:@"conc"];
   }
