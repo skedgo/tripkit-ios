@@ -46,7 +46,7 @@
 "CallTaxiFormat" = "Chamar %@";
 
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Não foi possivel encontar parada de trânsito .";
+"Could not find transit stop." = "Não foi possivel encontar parada de trânsito.";
 
 /* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
 "CouponCodeIngogoFormat" = "Digite o código de cupão '%@' quando se inscrever para reivindicar seus $5 de credit grátis (válido somente  para novas inscrições)";
@@ -64,7 +64,7 @@
 "Duration" = " por %@";
 
 /* Action button title for getting turn-by-turn directions */
-"Get directions" = "Obter direções"; // TODO
+"Get directions" = "Obter direções";
 
 /* No comment provided by engineer. */
 "Get ingogo" = "Obter ingogo";
@@ -104,7 +104,7 @@
 "LeaveTime" = "Sair as %@";
 
 /* No comment provided by engineer. */
-"Live traffic" = "trânsito em tempo real";
+"Live traffic" = "Trânsito em tempo real";
 
 /* ArrivalTime */
 "MessageArrivalTime" = "Eu chegarei em %@ as %@.";
@@ -122,22 +122,22 @@
 "Open Uber" = "Abrir Uber";
 
 /* Arrival Location */
-"PrimaryLocationEnd" = "para %@";
+"PrimaryLocationEnd" = "Para %@";
 
 /* Departure Location */
-"PrimaryLocationStart" = "de %@";
+"PrimaryLocationStart" = "De %@";
 
 /* Favorite trip 'to' title */
 "To" = "Para";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "em %@";
+"PrimaryLocationStationary" = "Em %@";
 
 /* No comment provided by engineer. */
 "Real-time" = "Tempo real";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Pesquisar essa parada novamente ou tentar mais tarde.."; // TODO
+"Search for this stop again or try again later.." = "Pesquisar essa parada novamente ou tentar mais tarde.";
 
 /* Show website action */
 "Show website" = "Mostrar website";
