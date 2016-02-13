@@ -1,159 +1,159 @@
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
-"%1$@ early" = "%1$@ early";
+"%1$@ early" = "%1$@ adiantado";
 
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
-"%1$@ early (%2$@ service)" = "%1$@ early (%2$@ service)";
+"%1$@ early (%2$@ service)" = "%1$@ adiantado (%2$@ serviço)";
 
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min' */
-"%1$@ late" = "%1$@ late";
+"%1$@ late" = "%1$@ atrasado";
 
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
-"%1$@ late (%2$@ service)" = "%1$@ late (%2$@ service)";
+"%1$@ late (%2$@ service)" = "%1$@ atrasado (%2$@ serviço)";
 
 /* Duration without traffic */
-"%@ w/o traffic" = "%@ w/o traffic";
+"%@ w/o traffic" = "%@ sem trânsito";
 
 /* No comment provided by engineer. */
-"1 stop" = "1 stop";
+"1 stop" = "1 parada";
 
 /* Indication of an activity */
-"ActivityIndication" = "I'll take a %@ at %@ from %@.";
+"ActivityIndication" = "Eu vou pegar o %@ as %@ de %@.";
 
 /* apple maps directions action */
 "Apple Maps" = "Apple Maps";
 
 /* Arrival time sorter title */
-"Arrival" = "Arrival";
+"Arrival" = "Chegada";
 
 /* The place of arrival */
-"ArrivalLocation" = "Arrive at %@";
+"ArrivalLocation" = "Chegada em %@";
 
 /* The place of arrival with time */
-"ArrivalLocationTime" = "Arrive at %@ at %@";
+"ArrivalLocationTime" = "Chegada em %@ as %@";
 
 /* Arrival %time.
    Time arrival */
-"ArrivalTime" = "Arrive at %@";
+"ArrivalTime" = "Chegada as %@";
 
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
-"Arrive" = "Arrive";
+"Arrive" = "Chegada";
 
 /* No comment provided by engineer. */
-"Call" = "Call";
+"Call" = "Chamada";
 
 /* Action title for calling provider of %name */
-"CallTaxiFormat" = "Call %@";
+"CallTaxiFormat" = "Chamar %@";
 
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Could not find transit stop.";
+"Could not find transit stop." = "Não foi possivel encontar parada de trânsito .";
 
 /* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
-"CouponCodeIngogoFormat" = "Enter coupon code '%@' when registering to claim your free $5 credit (only valid for new registrations)";
+"CouponCodeIngogoFormat" = "Digite o código de cupão '%@' quando se inscrever para reivindicar seus $5 de credit grátis (válido somente  para novas inscrições)";
 
 /* Departure time sorter title */
-"Departure" = "Departure";
+"Departure" = "Partida";
 
 /* Time of the bus departure */
 "DepartureTime" = " at %@";
 
 /* Destination of the bus */
-"Direction" = "Direction: %@";
+"Direction" = "Direção: %@";
 
 /* Walking time */
-"Duration" = " for %@";
+"Duration" = " por %@";
 
 /* Action button title for getting turn-by-turn directions */
-"Get directions" = "Get directions"; // TODO
+"Get directions" = "Obter direções"; // TODO
 
 /* No comment provided by engineer. */
-"Get ingogo" = "Get ingogo";
+"Get ingogo" = "Obter ingogo";
 
 /* No comment provided by engineer. */
-"Get Lyft" = "Get Lyft";
+"Get Lyft" = "Obter Lyft";
 
 /* No comment provided by engineer. */
-"Get Sidecar" = "Get Sidecar";
+"Get Sidecar" = "Obter Sidecar";
 
 /* No comment provided by engineer. */
-"Get Uber" = "Get Uber";
+"Get Uber" = "Obter Uber";
 
 /* goCatch action */
-"goCatch a Taxi" = "goCatch a Taxi";
+"goCatch a Taxi" = "goCatch um Taxi";
 
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
 /* No comment provided by engineer. */
-"ingogo a Taxi" = "ingogo a Taxi";
+"ingogo a Taxi" = "ingogo um Taxi";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
-"Leave" = "Leave";
+"Leave" = "Sair";
 
 /* No comment provided by engineer. */
-"Leave now" = "Leave now";
+"Leave now" = "Sait agora";
 
 /* The place of departure */
-"LeaveLocation" = "Leave %@";
+"LeaveLocation" = "Deixar %@";
 
 /* The place of departure with time */
-"LeaveLocationTime" = "Leave %@ at %@";
+"LeaveLocationTime" = "Deixar %@ as %@";
 
 /* Time departure */
-"LeaveTime" = "Leave at %@";
+"LeaveTime" = "Sair as %@";
 
 /* No comment provided by engineer. */
-"Live traffic" = "Live traffic";
+"Live traffic" = "trânsito em tempo real";
 
 /* ArrivalTime */
-"MessageArrivalTime" = "I'll arrive at %@ at %@.";
+"MessageArrivalTime" = "Eu chegarei em %@ as %@.";
 
 /* Indicator to show when a service is on time according to real-time data. */
-"On time" = "On time";
+"On time" = "Em ponto";
 
 /* No comment provided by engineer. */
-"Open Lyft" = "Open Lyft";
+"Open Lyft" = "Abrir Lyft";
 
 /* No comment provided by engineer. */
-"Open Sidecar" = "Open Sidecar";
+"Open Sidecar" = "Abrir Sidecar";
 
 /* No comment provided by engineer. */
-"Open Uber" = "Open Uber";
+"Open Uber" = "Abrir Uber";
 
 /* Arrival Location */
-"PrimaryLocationEnd" = "To %@";
+"PrimaryLocationEnd" = "para %@";
 
 /* Departure Location */
-"PrimaryLocationStart" = "From %@";
+"PrimaryLocationStart" = "de %@";
 
 /* Favorite trip 'to' title */
-"To" = "To";
+"To" = "Para";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "At %@";
+"PrimaryLocationStationary" = "em %@";
 
 /* No comment provided by engineer. */
-"Real-time" = "Real-time";
+"Real-time" = "Tempo real";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later."; // TODO
+"Search for this stop again or try again later.." = "Pesquisar essa parada novamente ou tentar mais tarde.."; // TODO
 
 /* Show website action */
-"Show website" = "Show website";
+"Show website" = "Mostrar website";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld stops";
+"Stops" = "%ld paradas";
 
 /* From %time1 to %time2 */
-"TimeFromToShortFormat" = "%@ to %@";
+"TimeFromToShortFormat" = "%@ até %@";
 
 /* No comment provided by engineer. */
-"Trip" = "Trip";
+"Trip" = "Trajeto";
 
 /* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "Vehicle %@ updated %@ ago";
+"VehicleCalledUpdated" = "Veículo %@ atualizado %@ atrás";
 
 /* Vehicle updated */
-"VehicleUpdated" = "Updated %@ ago";
+"VehicleUpdated" = "Atualizado %@ atrás";
 
