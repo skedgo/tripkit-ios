@@ -324,6 +324,7 @@
   NSMutableArray *sortedActions = [NSMutableArray arrayWithCapacity:actions.count];
   BOOL startIndex = 0;
   BOOL canCall = [self canCall];
+  BOOL addedLyft = NO;
   for (NSString *action in actions) {
     if (!canCall && [action hasPrefix:@"tel:"]) {
       continue;
@@ -331,6 +332,13 @@
     
     if ([action isKindOfClass:[NSNull class]]) {
       continue;
+    }
+
+    if ([action hasPrefix:@"lyft"]) {
+      if (addedLyft) {
+        continue;
+      }
+      addedLyft = YES;
     }
     
     if (   ([action isEqualToString:@"gocatch"] && [self deviceHasGoCatch])
