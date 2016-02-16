@@ -10,6 +10,14 @@
 
 @class TKSegment;
 
+typedef enum {
+  TKInterAppCommunicatorITunesAppIDGoCatch  = 444439909,
+  TKInterAppCommunicatorITunesAppIDIngogo   = 463995190,
+  TKInterAppCommunicatorITunesAppIDLyft     = 529379082,
+  
+} TKInterAppCommunicatorITunesAppID;
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TKInterAppCommunicator : NSObject

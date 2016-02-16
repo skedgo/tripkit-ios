@@ -419,9 +419,10 @@
        
        // open app store
        if (openStoreHandler) {
-         openStoreHandler(@(444439909));
+         openStoreHandler(@(TKInterAppCommunicatorITunesAppIDGoCatch));
        } else {
-         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/au/app/gocatch/id444439909?mt=8&uo=4"]];
+         NSString *URLString = [NSString stringWithFormat:@"https://itunes.apple.com/au/app/gocatch/id%d?mt=8", TKInterAppCommunicatorITunesAppIDGoCatch];
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
        }
      }
      
@@ -454,7 +455,7 @@
         [pasteboard setString:couponCode];
         
         if (openStoreHandler) {
-          openStoreHandler(@(463995190));
+          openStoreHandler(@(TKInterAppCommunicatorITunesAppIDIngogo));
         } else {
           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
         }
@@ -465,7 +466,7 @@
 
     } else {
       if (openStoreHandler) {
-        openStoreHandler(@(463995190));
+        openStoreHandler(@(TKInterAppCommunicatorITunesAppIDIngogo));
       } else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
       }
@@ -588,10 +589,11 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
     
   } else if (openStoreHandler) {
-    openStoreHandler(@(529379082));
+    openStoreHandler(@(TKInterAppCommunicatorITunesAppIDLyft));
     
   } else {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/lyft/id529379082?mt=8"]];
+    NSString *URLString = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/lyft/id%d?mt=8", TKInterAppCommunicatorITunesAppIDLyft];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
   }
 }
 
