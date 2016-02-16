@@ -73,9 +73,6 @@
 "Get Lyft" = "Lyft herunterladen";
 
 /* No comment provided by engineer. */
-"Get Sidecar" = "Sidecar herunterladen";
-
-/* No comment provided by engineer. */
 "Get Uber" = "Uber herunterladen";
 
 /* goCatch action */
@@ -114,9 +111,6 @@
 
 /* No comment provided by engineer. */
 "Open Lyft" = "Lyft öffnen";
-
-/* No comment provided by engineer. */
-"Open Sidecar" = "Sidecar öffnen";
 
 /* No comment provided by engineer. */
 "Open Uber" = "Uber öffnen";

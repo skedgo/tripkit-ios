@@ -73,9 +73,6 @@
 "Get Lyft" = "Obtenir Lyft";
 
 /* No comment provided by engineer. */
-"Get Sidecar" = "Obtenir Sidecar";
-
-/* No comment provided by engineer. */
 "Get Uber" = "Obtenir Uber";
 
 /* goCatch action */
@@ -114,9 +111,6 @@
 
 /* No comment provided by engineer. */
 "Open Lyft" = "Ouvrir Lyft";
-
-/* No comment provided by engineer. */
-"Open Sidecar" = "Ouvrir Sidecar";
 
 /* No comment provided by engineer. */
 "Open Uber" = "Ouvrir Uber";

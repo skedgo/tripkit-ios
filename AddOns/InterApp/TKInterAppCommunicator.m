@@ -255,11 +255,6 @@
     ? NSLocalizedStringFromTable(@"Open Lyft", @"TripKit", nil)
     : NSLocalizedStringFromTable(@"Get Lyft", @"TripKit", nil);
     
-  } else if ([action isEqualToString:@"sidecar"]) {
-    return [self deviceHasSidecar]
-    ? NSLocalizedStringFromTable(@"Open Sidecar", @"TripKit", nil)
-    : NSLocalizedStringFromTable(@"Get Sidecar", @"TripKit", nil);
-    
   } else if ([action hasPrefix:@"tel:"]) {
     NSRange nameRange = [action rangeOfString:@"name="];
     if (nameRange.location != NSNotFound) {
@@ -305,11 +300,6 @@
                       rideType:action
               openStoreHandler:openStoreHandler];
     
-  } else if ([action isEqualToString:@"sidecar"]) {
-    [self launchSidecarForSegment:segment
-           currentLocationHandler:currentLocationHandler
-                 openStoreHandler:openStoreHandler];
-    
   } else if ([self canCall] && [action hasPrefix:@"tel:"]) {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]];
     
@@ -347,7 +337,6 @@
         || ([action isEqualToString:@"ingogo"]  && [self deviceHasIngogo])
         || ([action isEqualToString:@"uber"]    && [self deviceHasUber])
         || ([action hasPrefix:@"lyft"]          && [self deviceHasLyft]) // also lyft_line, etc.
-        || ([action isEqualToString:@"sidecar"] && [self deviceHasSidecar])
         ) {
       [sortedActions insertObject:action atIndex:startIndex++];
     } else {
@@ -375,11 +364,6 @@
 + (BOOL)deviceHasLyft
 {
   return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"lyft:"]];
-}
-
-+ (BOOL)deviceHasSidecar
-{
-  return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"sidecar:"]];
 }
 
 + (void)launchGoCatchForSegment:(TKSegment *)segment
@@ -602,58 +586,6 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/lyft/id529379082?mt=8"]];
   }
 }
-
-+ (void)launchSidecarForSegment:(TKSegment *)segment
-         currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
-               openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
-{
-  if ([self deviceHasSidecar]) {
-    // See their PDF
-    
-    NSMutableString *urlString = [NSMutableString stringWithString:@"sidecar://"];
-    
-    // from
-    if (currentLocationHandler == nil || currentLocationHandler(segment)) {
-      [urlString appendString:@"?source=currentlocation"];
-    } else {
-      id<MKAnnotation> startAnnotation = [segment start];
-      CLLocationCoordinate2D start = [startAnnotation coordinate];
-      [urlString appendFormat:@"?source=%.5f,%.5f", start.latitude, start.longitude];
-      if ([startAnnotation respondsToSelector:@selector(title)]) {
-        NSString *title = [startAnnotation title];
-        if (title.length > 0) {
-          NSString *encoded = [title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-          [urlString appendFormat:@"&pickuptext=%@", encoded];
-        }
-      }
-    }
-    
-    // to
-    id<MKAnnotation> endAnnotation = [segment end];
-    CLLocationCoordinate2D end   = [endAnnotation coordinate];
-    [urlString appendFormat:@"&destination=%.5f,%.5f", end.latitude, end.longitude];
-    if ([endAnnotation respondsToSelector:@selector(title)]) {
-      NSString *title = [endAnnotation title];
-      if (title.length > 0) {
-        NSString *encoded = [title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [urlString appendFormat:@"&dropofftext=%@", encoded];
-      }
-    }
-    
-    NSString *referralCode = [[SGKConfig sharedInstance] sidecarReferralCode];
-    if (! referralCode) {
-      referralCode = @"";
-    }
-    [urlString appendFormat:@"&referrer=%@", referralCode];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-    
-  } else if (openStoreHandler) {
-    openStoreHandler(@(524617679));
-  } else {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/sidecar-ride/id524617679?mt=8"]];
-  }
-}
-
 
 #pragma mark - Helpers
 

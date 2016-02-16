@@ -26,11 +26,6 @@
 - (nullable NSString *)ingogoCouponCode;
 
 /**
- @return Something like 'TripGo'
- */
-- (nullable NSString *)sidecarReferralCode;
-
-/**
  @return something like 'tripgo://?resume=true&x-source=TripGo'
  */
 - (nullable NSString *)googleMapsCallback;

@@ -73,9 +73,6 @@
 "Get Lyft" = "使用Lyft";
 
 /* No comment provided by engineer. */
-"Get Sidecar" = "使用Sidecar";
-
-/* No comment provided by engineer. */
 "Get Uber" = "使用Uber";
 
 /* goCatch action */
@@ -114,9 +111,6 @@
 
 /* No comment provided by engineer. */
 "Open Lyft" = "開啟Lyft";
-
-/* No comment provided by engineer. */
-"Open Sidecar" = "開啟Sidecar";
 
 /* No comment provided by engineer. */
 "Open Uber" = "開啟Uber";

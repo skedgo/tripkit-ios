@@ -25,11 +25,6 @@
   return self.configuration[@"TKInterAppCommunicator"][@"ingogoCouponCode"];
 }
 
-- (nullable NSString *)sidecarReferralCode
-{
-  return self.configuration[@"TKInterAppCommunicator"][@"sidecarReferralCode"];
-}
-
 - (nullable NSString *)googleMapsCallback
 {
   return self.configuration[@"TKInterAppCommunicator"][@"googleMapsCallback"];
