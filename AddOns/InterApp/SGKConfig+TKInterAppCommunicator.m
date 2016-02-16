@@ -35,9 +35,16 @@
   return self.configuration[@"TKInterAppCommunicator"][@"googleMapsCallback"];
 }
 
-- (nullable NSString *)yelpPartnerCompanyName
+- (nullable NSString *)lyftPartnerCompanyName
 {
+  NSString *proper = self.configuration[@"TKInterAppCommunicator"][@"lyftPartnerCompanyName"];
+  if (proper) {
+    return proper;
+  }
+  
+  // fall-back for old, bad name
   return self.configuration[@"TKInterAppCommunicator"][@"yelpPartnerCompanyName"];
 }
+
 
 @end

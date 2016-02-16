@@ -38,6 +38,6 @@
 /**
  @return something like 'skedgo'
  */
-- (nullable NSString *)yelpPartnerCompanyName;
+- (nullable NSString *)lyftPartnerCompanyName;
 
 @end

@@ -588,7 +588,7 @@
     }
 
     // partner tracking
-    NSString *partner = [[SGKConfig sharedInstance] yelpPartnerCompanyName];
+    NSString *partner = [[SGKConfig sharedInstance] lyftPartnerCompanyName];
     if (partner.length > 0) {
       [urlString appendFormat:@"&partner=%@", partner];
     }
