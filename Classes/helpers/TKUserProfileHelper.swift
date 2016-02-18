@@ -42,13 +42,25 @@ public class TKUserProfileHelper: NSObject {
   }
   
   public class func setModeIdentifier(modeIdentifier: Identifier, toMinimized minimized: Bool) {
-    var modes = minimizedModeIdentifiers
-    if minimized {
+    update(minimizedModeIdentifiers, forKey: .Minimized, modeIdentifier: modeIdentifier, include: minimized)
+  }
+  
+  public class func modeIdentifierIsHidden(modeIdentifier: Identifier) -> Bool {
+    return hiddenModeIdentifiers.contains(modeIdentifier)
+  }
+  
+  public class func setModeIdentifier(modeIdentifier: Identifier, toHidden hidden: Bool) {
+    update(hiddenModeIdentifiers, forKey: .Hidden, modeIdentifier: modeIdentifier, include: hidden)
+  }
+  
+  private class func update(identifiers: Set<Identifier>, forKey key: DefaultsKey, modeIdentifier: Identifier, include: Bool) {
+    var modes = identifiers
+    if include {
       modes.insert(modeIdentifier)
     } else {
       modes.remove(modeIdentifier)
     }
-    NSUserDefaults.sharedDefaults().setObject(Array(modes), forKey: DefaultsKey.Minimized.rawValue)
+    NSUserDefaults.sharedDefaults().setObject(Array(modes), forKey: key.rawValue)
   }
   
   public class func orderedEnabledModeIdentifiersForAvailableModeIdentifiers(available: [Identifier]) -> [Identifier] {
