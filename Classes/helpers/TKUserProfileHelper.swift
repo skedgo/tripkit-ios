@@ -65,11 +65,12 @@ public class TKUserProfileHelper: NSObject {
   
   public class func orderedEnabledModeIdentifiersForAvailableModeIdentifiers(available: [Identifier]) -> [Identifier] {
     let hidden = hiddenModeIdentifiers
-    var ordered = available.filter { !hidden.contains($0) }
+    let ordered = available.filter { !hidden.contains($0) }
     
-    if let sorted = NSUserDefaults.sharedDefaults().objectForKey(DefaultsKey.SortedEnabled.rawValue) as? [Identifier] {
-      ordered.sortInPlace { sorted.indexOf($0) < sorted.indexOf($1) }
-    }
+    // Once we let users sort them again, do something like this:
+//    if let sorted = NSUserDefaults.sharedDefaults().objectForKey(DefaultsKey.SortedEnabled.rawValue) as? [Identifier] {
+//      ordered.sortInPlace { sorted.indexOf($0) < sorted.indexOf($1) }
+//    }
     
     return ordered
   }
