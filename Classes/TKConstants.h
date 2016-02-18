@@ -20,8 +20,4 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportCyclingSpeed;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportTransferTime;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportConcessionPricing;
 
-FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileSortedModeIdentifiers;
-FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileMinimizedModeIdentifiers;
-FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileHiddenModeIdentifiers;
-
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileBookingsUseSandbox;

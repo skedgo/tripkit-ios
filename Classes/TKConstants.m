@@ -20,8 +20,4 @@ NSString *const TKDefaultsKeyProfileTransportCyclingSpeed		= @"profileTransportC
 NSString *const TKDefaultsKeyProfileTransportTransferTime = @"profileTransportTransferTime";
 NSString *const TKDefaultsKeyProfileTransportConcessionPricing = @"profileTransportConcessionPricing";
 
-NSString *const TKDefaultsKeyProfileSortedModeIdentifiers = @"profileSortedModeIdentifiers";
-NSString *const TKDefaultsKeyProfileMinimizedModeIdentifiers = @"profileMinimizedModeIdentifiers";
-NSString *const TKDefaultsKeyProfileHiddenModeIdentifiers = @"profileHiddenModeIdentifiers";
-
 NSString *const TKDefaultsKeyProfileBookingsUseSandbox = @"profileBookingsUseSandbox";
