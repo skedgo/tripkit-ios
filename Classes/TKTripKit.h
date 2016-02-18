@@ -43,7 +43,6 @@
 // Helpers
 #import "TKNextSegmentScorer.h"
 #import "TKShareHelper.h"
-#import "TKUserProfileHelper.h"
 
 // Classification
 #import "TKTripClassifier.h"
