@@ -443,12 +443,12 @@
   } else {
     NSString *couponCode = [[SGKConfig sharedInstance] ingogoCouponCode];
     if (couponCode) {
-      SGActions *alert = [[SGActions alloc] initWithTitle:NSLocalizedString(@"Get ingogo", nil)];
+      SGActions *alert = [[SGActions alloc] initWithTitle:NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil)];
       alert.type = UIAlertControllerStyleAlert;
       alert.hasCancel = YES;
-      alert.message = [NSString stringWithFormat:NSLocalizedString(@"CouponCodeIngogoFormat", "Description for how to redeem the coupon code for ingogo. %couponCode is provided."), couponCode];
+      alert.message = [NSString stringWithFormat:NSLocalizedStringFromTable(@"CouponCodeIngogoFormat", @"TripKit", "Description for how to redeem the coupon code for ingogo. %couponCode is provided."), couponCode];
       
-      [alert addAction:NSLocalizedString(@"Get ingogo", nil) handler:^{
+      [alert addAction:NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil) handler:^{
         // copy code to paste board
         UIPasteboard *pasteboard = [UIPasteboard pasteboardWithName:UIPasteboardNameGeneral
                                                              create:NO];

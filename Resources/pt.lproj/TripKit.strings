@@ -121,8 +121,6 @@
 /* Departure Location */
 "PrimaryLocationStart" = "De %@";
 
-/* Favorite trip 'to' title */
-"To" = "Para";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "Em %@";

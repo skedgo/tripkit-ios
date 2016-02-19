@@ -64,7 +64,7 @@
 "Duration" = " for %@";
 
 /* Action button title for getting turn-by-turn directions */
-"Get directions" = "Get directions"; // TODO
+"Get directions" = "Get directions";
 
 /* No comment provided by engineer. */
 "Get ingogo" = "Get ingogo";
@@ -121,9 +121,6 @@
 /* Departure Location */
 "PrimaryLocationStart" = "From %@";
 
-/* Favorite trip 'to' title */
-"To" = "To";
-
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "At %@";
 
@@ -131,7 +128,7 @@
 "Real-time" = "Real-time";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later."; // TODO
+"Search for this stop again or try again later.." = "Search for this stop again or try again later.";
 
 /* Show website action */
 "Show website" = "Show website";

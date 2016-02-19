@@ -121,8 +121,6 @@
 /* Departure Location */
 "PrimaryLocationStart" = "出發地: %@";
 
-/* Favorite trip 'to' title */
-"To" = "到";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "時刻 %@";
