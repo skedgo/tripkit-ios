@@ -46,7 +46,7 @@
 "CallTaxiFormat" = "Llamar a %@";
 
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Could not find transit stop."; // TODO
+"Could not find transit stop." = "Could not find transit stop.";
 
 /* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
 "CouponCodeIngogoFormat" = "Ingrese el código del cupón '%@' al momento de registrarse para obtener sus $5 de crédito gratuitos (sólo válido para nuevos usuarios)";
@@ -64,7 +64,7 @@
 "Duration" = " por %@";
 
 /* Action button title for getting turn-by-turn directions */
-"Get directions" = "Get directions"; // TODO
+"Get directions" = "Get directions";
 
 /* No comment provided by engineer. */
 "Get ingogo" = "Obtener ingogo";
@@ -107,7 +107,7 @@
 "MessageArrivalTime" = "Voy a llegar a %@ a las %@.";
 
 /* Indicator to show when a service is on time according to real-time data. */
-"On time" = "On time"; // TODO
+"On time" = "On time";
 
 /* No comment provided by engineer. */
 "Open Lyft" = "Abrir Lyft";
@@ -122,7 +122,7 @@
 "PrimaryLocationStart" = "Desde %@";
 
 /* Favorite trip 'to' title */
-"To" = "To"; // TODO
+"To" = "To";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "En %@";
@@ -131,7 +131,7 @@
 "Real-time" = "Tiempo Real";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later."; // TODO
+"Search for this stop again or try again later.." = "Search for this stop again or try again later.";
 
 /* Show website action */
 "Show website" = "Ir al Sitio Web";

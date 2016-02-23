@@ -1,17 +1,17 @@
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
-"%1$@ early" = "%1$@ early"; // TODO
+"%1$@ early" = "%1$@ early";
 
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
-"%1$@ early (%2$@ service)" = "%1$@ early (%2$@ service)"; // TODO
+"%1$@ early (%2$@ service)" = "%1$@ early (%2$@ service)";
 
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min' */
-"%1$@ late" = "%1$@ late"; // TODO
+"%1$@ late" = "%1$@ late";
 
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
-"%1$@ late (%2$@ service)" = "%1$@ late (%2$@ service)"; // TODO
+"%1$@ late (%2$@ service)" = "%1$@ late (%2$@ service)";
 
 /* Duration without traffic */
-"%@ w/o traffic" = "%@ w/o traffic"; // TODO
+"%@ w/o traffic" = "%@ w/o traffic";
 
 /* No comment provided by engineer. */
 "1 stop" = "1 arrêt";
@@ -46,7 +46,7 @@
 "CallTaxiFormat" = "Appeler %@";
 
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Could not find transit stop."; // TODO
+"Could not find transit stop." = "Could not find transit stop.";
 
 /* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
 "CouponCodeIngogoFormat" = "Entrez le code de promotion '%@' lors de l'inscription pour obtenir un crédit de 5$ (seulement valable pour les nouvelles inscriptions).";
@@ -64,7 +64,7 @@
 "Duration" = " pendant %@";
 
 /* Action button title for getting turn-by-turn directions */
-"Get directions" = "Get directions"; // TODO
+"Get directions" = "Get directions";
 
 /* No comment provided by engineer. */
 "Get ingogo" = "Obtenir ingogo";
@@ -101,13 +101,13 @@
 "LeaveTime" = "Partir à %@";
 
 /* No comment provided by engineer. */
-"Live traffic" = "Live traffic"; // TODO
+"Live traffic" = "Live traffic";
 
 /* ArrivalTime */
 "MessageArrivalTime" = "Je vais arriver à %@ à %@.";
 
 /* Indicator to show when a service is on time according to real-time data. */
-"On time" = "On time"; // TODO
+"On time" = "On time";
 
 /* No comment provided by engineer. */
 "Open Lyft" = "Ouvrir Lyft";
@@ -122,7 +122,7 @@
 "PrimaryLocationStart" = "À %@";
 
 /* Favorite trip 'to' title */
-"To" = "To"; // TODO
+"To" = "To";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "À %@";
@@ -131,7 +131,7 @@
 "Real-time" = "Temps-réel";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later."; // TODO
+"Search for this stop again or try again later.." = "Search for this stop again or try again later.";
 
 /* Show website action */
 "Show website" = "Ouvrir le site Web";

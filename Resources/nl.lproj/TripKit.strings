@@ -46,7 +46,7 @@
 "CallTaxiFormat" = "Bel %@";
 
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Could not find transit stop."; // TODO
+"Could not find transit stop." = "Could not find transit stop.";
 
 /* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
 "CouponCodeIngogoFormat" = "Voer deze code in '%@' bij uw registratie. U krijgt AU$5 cadeau (alleen geldig voor nieuwe aanmeldingen)";
@@ -64,7 +64,7 @@
 "Duration" = " voor %@";
 
 /* Action button title for getting turn-by-turn directions */
-"Get directions" = "Get directions"; // TODO
+"Get directions" = "Get directions";
 
 /* No comment provided by engineer. */
 "Get ingogo" = "Ingogo aanvragen";
@@ -122,7 +122,7 @@
 "PrimaryLocationStart" = "Van %@";
 
 /* Favorite trip 'to' title */
-"To" = "To"; // TODO
+"To" = "To";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "Op %@";
@@ -131,7 +131,7 @@
 "Real-time" = "Real-time";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later."; // TODO
+"Search for this stop again or try again later.." = "Search for this stop again or try again later.";
 
 /* Show website action */
 "Show website" = "Open Website";

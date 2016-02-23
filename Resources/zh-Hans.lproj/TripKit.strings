@@ -46,7 +46,7 @@
 "CallTaxiFormat" = "联系%@";
 
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Could not find transit stop."; // TODO
+"Could not find transit stop." = "Could not find transit stop.";
 
 /* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
 "CouponCodeIngogoFormat" = "注册时使用优惠券代码'%@'即可折扣$5元 (只适用新注册用户)";
@@ -64,7 +64,7 @@
 "Duration" = " %@";
 
 /* Action button title for getting turn-by-turn directions */
-"Get directions" = "Get directions"; // TODO
+"Get directions" = "Get directions";
 
 /* No comment provided by engineer. */
 "Get ingogo" = "使用Ingogo";
@@ -122,7 +122,7 @@
 "PrimaryLocationStart" = "出发地: %@";
 
 /* Favorite trip 'to' title */
-"To" = "To"; // TODO
+"To" = "To";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "时刻 %@";
@@ -131,7 +131,7 @@
 "Real-time" = "即时";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later."; // TODO
+"Search for this stop again or try again later.." = "Search for this stop again or try again later.";
 
 /* Show website action */
 "Show website" = "开启网站";
