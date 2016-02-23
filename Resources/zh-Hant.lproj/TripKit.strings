@@ -136,6 +136,9 @@
 "TimeFromToShortFormat" = "%@ ～ %@";
 
 /* No comment provided by engineer. */
+"To %@" = "前往 %@";
+
+/* No comment provided by engineer. */
 "Trip" = "旅程";
 
 /* Vehicle 'x' updated */
