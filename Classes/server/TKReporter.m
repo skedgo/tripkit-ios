@@ -14,6 +14,7 @@
 
 + (void)reportPlannedTrip:(Trip *)trip
                  userInfo:(NSDictionary *)userInfo
+        completionHandler:(void(^)(BOOL success))completeHandler
 {
   NSParameterAssert(trip);
   if (!trip.plannedURLString) {
@@ -25,12 +26,16 @@
        completion:
    ^(id  _Nullable responseObject, NSError * _Nullable error) {
 #pragma unused(responseObject)
-     if (error) {
+     BOOL success = (error != nil);
+     if (completeHandler) {
+       completeHandler(success);
+     }
+     if (success) {
+       [SGKLog debug:@"TKReporter" text:@"Planned trip posted successfully"];
+     } else {
        [SGKLog debug:@"TKReporter" block:^NSString * _Nonnull{
          return [NSString stringWithFormat:@"Planned trip post encountered error: %@", error];
        }];
-     } else {
-       [SGKLog debug:@"TKReporter" text:@"Planned trip posted successfully"];
      }
    }];
 }

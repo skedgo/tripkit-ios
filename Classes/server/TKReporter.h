@@ -23,7 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param userInfo Optional dictionary of arbitrary data which gets POST'ed as JSON
  */
 + (void)reportPlannedTrip:(Trip *)trip
-                 userInfo:(nullable NSDictionary<NSString *,id<NSCoding>> *)userInfo;
+                 userInfo:(nullable NSDictionary<NSString *,id<NSCoding>> *)userInfo
+        completionHandler:(nullable void(^)(BOOL success))completeHandler;
 
 /**
 Reports progress that the user made along the provided trip.
