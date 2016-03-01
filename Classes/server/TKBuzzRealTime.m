@@ -56,10 +56,16 @@
 {
   NSMutableArray *servicesParamsArray     = [NSMutableArray arrayWithCapacity:entries.count];
   NSMutableDictionary *objectsLookup = [NSMutableDictionary dictionaryWithCapacity:entries.count];
+  NSManagedObjectContext *context = nil;
   for (DLSEntry *entry in entries) {
     Service *service = entry.service;
     if (! [service wantsRealTimeUpdates]) {
       continue;
+    }
+    if (context == nil) {
+      context = service.managedObjectContext;
+    } else {
+      ZAssert(context == service.managedObjectContext, @"Context mismatches");
     }
 
     NSString *operatorName = service.operatorName ?: @"";
@@ -76,12 +82,14 @@
                           forRegion:region
                             success:
    ^(id responseObject) {
-     typeof(weakSelf) strongSelf = weakSelf;
-     if (strongSelf) {
-       [strongSelf updateObjects:objectsLookup
-              withResponseObject:responseObject];
-       success(entries);
-     }
+     [context performBlock:^{
+       typeof(weakSelf) strongSelf = weakSelf;
+       if (strongSelf) {
+         [strongSelf updateObjects:objectsLookup
+                withResponseObject:responseObject];
+         success(entries);
+       }
+     }];
    }
                             failure:failure];}
 
@@ -92,10 +100,16 @@
 {
   NSMutableArray *servicesParamsArray     = [NSMutableArray arrayWithCapacity:embarkations.count];
   NSMutableDictionary *objectsLookup = [NSMutableDictionary dictionaryWithCapacity:embarkations.count];
+  NSManagedObjectContext *context = nil;
   for (StopVisits *visit in embarkations) {
     Service *service = visit.service;
     if (! [service wantsRealTimeUpdates]) {
       continue;
+    }
+    if (context == nil) {
+      context = service.managedObjectContext;
+    } else {
+      ZAssert(context == service.managedObjectContext, @"Context mismatches");
     }
     
     NSString *operatorName = service.operatorName ?: @"";
@@ -112,12 +126,14 @@
                           forRegion:region
                             success:
    ^(id responseObject) {
-     typeof(weakSelf) strongSelf = weakSelf;
-     if (strongSelf) {
-       [strongSelf updateObjects:objectsLookup
-              withResponseObject:responseObject];
-       success(embarkations);
-     }
+     [context performBlock:^{
+       typeof(weakSelf) strongSelf = weakSelf;
+       if (strongSelf) {
+         [strongSelf updateObjects:objectsLookup
+                withResponseObject:responseObject];
+         success(embarkations);
+       }
+     }];
    }
                             failure:failure];
 }
@@ -129,9 +145,15 @@
 {
   NSMutableArray *servicesParamsArray     = [NSMutableArray arrayWithCapacity:services.count];
   NSMutableDictionary *servicesLookupDict = [NSMutableDictionary dictionaryWithCapacity:services.count];
+  NSManagedObjectContext *context = nil;
   for (Service *service in services) {
     if (! [service wantsRealTimeUpdates]) {
       continue;
+    }
+    if (context == nil) {
+      context = service.managedObjectContext;
+    } else {
+      ZAssert(context == service.managedObjectContext, @"Context mismatches");
     }
     NSString *operatorName = service.operatorName ?: @"";
     [servicesParamsArray addObject:@{
@@ -146,12 +168,14 @@
                           forRegion:region
                             success:
    ^(id responseObject) {
-     typeof(weakSelf) strongSelf = weakSelf;
-     if (strongSelf) {
-       [strongSelf updateObjects:servicesLookupDict
-              withResponseObject:responseObject];
-       success(services);
-     }
+     [context performBlock:^{
+       typeof(weakSelf) strongSelf = weakSelf;
+       if (strongSelf) {
+         [strongSelf updateObjects:servicesLookupDict
+                withResponseObject:responseObject];
+         success(services);
+       }
+     }];
    }
                             failure:failure];
 }
