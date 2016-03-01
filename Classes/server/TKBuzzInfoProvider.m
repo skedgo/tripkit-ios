@@ -28,6 +28,8 @@ typedef enum {
   NSParameterAssert(date);
   NSParameterAssert(completion);
   
+  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  
 	// construct the parameters
   if (! stop.stopCode) {
     // this can happen if the stop got deleted while we were looking at it.
@@ -140,6 +142,8 @@ typedef enum {
   NSParameterAssert(date);
   NSParameterAssert(completion);
   
+  ZAssert(table.tripKitContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  
 	SVKServer *server = [SVKServer sharedInstance];
   [server requireRegions:^(NSError *error) {
     if (error) {
@@ -198,6 +202,9 @@ typedef enum {
   NSParameterAssert(date);
   NSParameterAssert(completion);
   
+  ZAssert(service.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  
+
   ZAssert(service.managedObjectContext, @"Service with a context needed.");
   
   if (service.isRequestingServiceData) {
@@ -325,9 +332,11 @@ typedef enum {
                                success:
      ^(id responseObject) {
         // set the stop properties
-        BOOL success = [self addStop:stop fromResponse:responseObject];
-       ZAssert(success, @"Error processing: %@", responseObject);
-        completion(nil);
+       [stop.managedObjectContext performBlock:^{
+         BOOL success = [TKBuzzInfoProvider addStop:stop fromResponse:responseObject];
+         ZAssert(success, @"Error processing: %@", responseObject);
+         completion(nil);
+       }];
      }
                                failure:
      ^(NSError *anotherError) {
@@ -343,6 +352,8 @@ typedef enum {
 {
   NSParameterAssert(service);
   NSParameterAssert(responseDict);
+  
+  ZAssert(service.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
   
   NSManagedObjectContext *context = service.managedObjectContext;
   
@@ -382,7 +393,9 @@ typedef enum {
        intoTripKitContext:(NSManagedObjectContext *)context
 
 {
-  BOOL forSingleStop = (stopOrNil != nil);
+  ZAssert(context.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  
+BOOL forSingleStop = (stopOrNil != nil);
   
   NSInteger flags = 0;
   NSMutableSet *pairIdentifiers  = [NSMutableSet set];
@@ -524,6 +537,8 @@ typedef enum {
 + (BOOL)addStop:(StopLocation *)stop
    fromResponse:(id)responseObject
 {
+  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  
   NSManagedObjectContext *tripKitContext = stop.managedObjectContext;
   
   NSArray *groups = responseObject[@"groups"];
