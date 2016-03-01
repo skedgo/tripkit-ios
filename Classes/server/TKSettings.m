@@ -67,7 +67,7 @@
   [paras setValue:@(YES) forKey:@"ir"];
   
 #ifdef DEBUG
-  [paras setValue:@(YES) forKey:@"bsb"];
+  [paras setValue:@([sharedDefaults boolForKey:TKDefaultsKeyProfileBookingsUseSandbox]) forKey:@"bsb"];
 #else
   if ([sharedDefaults boolForKey:TKDefaultsKeyProfileBookingsUseSandbox]) {
     [paras setValue:@(YES) forKey:@"bsb"];
