@@ -255,7 +255,7 @@
     ? NSLocalizedStringFromTable(@"Open Lyft", @"TripKit", nil)
     : NSLocalizedStringFromTable(@"Get Lyft", @"TripKit", nil);
     
-  } else if ([action hasPrefix:@"tel:"]) {
+  } else if ([action hasPrefix:@"tel:"] && [self canCall]) {
     NSRange nameRange = [action rangeOfString:@"name="];
     if (nameRange.location != NSNotFound) {
       NSString *name = [action substringFromIndex:nameRange.location + nameRange.length];
@@ -264,6 +264,9 @@
     } else {
       return NSLocalizedStringFromTable(@"Call", @"TripKit", nil);
     }
+    
+  } else if ([action hasPrefix:@"sms:"] && [self canSendSMS]) {
+    return NSLocalizedStringFromTable(@"Send SMS", @"TripKit", @"Send SMS action");
     
   } else if ([action hasPrefix:@"http:"] || [action hasPrefix:@"https:"]) {
     return NSLocalizedStringFromTable(@"Show website", @"TripKit", @"Show website action");
