@@ -535,7 +535,7 @@
          return;
        }
        Trip *trip = [trips firstObject];
-       TKAgendaTripOutputItem *tripOutput = [[TKAgendaTripOutputItem alloc] initWithTrip:trip forInput:nil];
+       id<TKAgendaTripOutputType> tripOutput = [[TKAgendaTripOutputItem alloc] initWithTrip:trip forInput:nil];
        
        NSDate *leaveAfter = nil, *arriveBy = nil;
        NSDictionary *tripTrackDict = indexToTripTrackDict[key];

@@ -30,8 +30,8 @@ class TKAgendaTripOutputItem: NSObject, TKAgendaTripOutputType {
   let input: TKAgendaTripInputType?
   let trip: Trip
   
-  var fromIdentifier: NSString?
-  var toIdentifier: NSString?
+  var fromIdentifier: String?
+  var toIdentifier: String?
   
   init(trip: Trip, forInput input: TKAgendaTripInputType?) {
     self.input = input

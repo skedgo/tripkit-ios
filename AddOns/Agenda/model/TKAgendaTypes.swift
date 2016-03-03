@@ -84,4 +84,7 @@ protocol TKAgendaEventOutputType: TKAgendaOutputType {
 protocol TKAgendaTripOutputType: TKAgendaOutputType {
   var input: TKAgendaTripInputType? { get }
   var trip: Trip { get }
+
+  var fromIdentifier: String? { get set }
+  var toIdentifier: String? { get set }
 }
