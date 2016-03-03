@@ -1,0 +1,67 @@
+//
+//  SGAgenda.h
+//  TripGo
+//
+//  Created by Adrian Schoenig on 2/04/2014.
+//
+//
+
+#import <Foundation/Foundation.h>
+
+#import "SGTrack.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+/**
+ @param startDate The computed start date for the agenda
+ @param endDate   The computed end date for the agenda
+ @param itemIDs   A sorted list of IDs for the items that should be part of the agenda
+ */
+typedef void(^TKAgendaFactoryTemplate)(NSDate *startDate, NSDate *endDate, NSTimeZone *primaryTimeZone, NSArray *itemIDs);
+
+FOUNDATION_EXPORT NSString *const kTKAgendaFactoryTemplateStay;
+FOUNDATION_EXPORT NSString *const kTKAgendaFactoryTemplateStay;
+FOUNDATION_EXPORT NSString *const kTKAgendaFactoryTemplatePlaceholder;
+FOUNDATION_EXPORT NSString *const kTKAgendaFactoryTemplateCurrentLocation;
+
+@interface TKAgendaFactory : NSObject
+
++ (CLLocationDistance)minimumDistanceToCreateTrips;
+
+
+/**
+ The logic for creating an agenda for a set of source items. It filters out irrelevant entries and inserts stubs for things like 'home', 'work' and so on.
+ 
+ @param items           The list of track items to feed in. Don't need to be ordered but it's faster if they are ordered chronically already.
+ @param dateComponents  The date for which to create the agenda, the factory will turn these in dates.
+ @param currentLocation The last known `CLLocation` object available
+ @param success         Block called on success. This will be called before returning.
+ */
+- (void)buildAgendaTemplateForTrackItems:(NSArray<id<SGTrackItem>> *)items
+                           withStartDate:(NSDate *)startDate
+                             withEndDate:(NSDate *)endDate
+                   limitToDateComponents:(nullable NSDateComponents *)dateComponents
+                          stayCoordinate:(CLLocationCoordinate2D)stayCoordinate
+                            stayTimeZone:(NSTimeZone *)stayTimeZone
+                         currentLocation:(nullable CLLocation *)currentLocation
+                                 success:(TKAgendaFactoryTemplate)success;
+
+/**
+ Inserts the new track item at the correct position in the list of existing track items
+ 
+ @param trackItem Item to insert
+ @param items     A mutable list of `SGTrackItem` objects into which the item will be inserted
+ */
++ (void)insertTrackItem:(id<SGTrackItem>)trackItem
+              intoItems:(NSMutableArray<id<SGTrackItem>> *)items;
+
++ (BOOL)trackItem:(id<SGTrackItem>)trackItem
+ containsLocation:(CLLocation *)location
+           atTime:(NSDate *)time;
+
++ (BOOL)trackItems:(NSArray<id<SGTrackItem>> *)trackItems
+   containLocation:(CLLocation *)location
+            atTime:(NSDate *)time;
+
+@end
+NS_ASSUME_NONNULL_END
