@@ -255,6 +255,9 @@
     ? NSLocalizedStringFromTable(@"Open Lyft", @"TripKit", nil)
     : NSLocalizedStringFromTable(@"Get Lyft", @"TripKit", nil);
     
+  } else if ([action isEqualToString:@"flitways"]) {
+    return NSLocalizedStringFromTable(@"Book with FlitWays", @"TripKit", nil);
+    
   } else if ([action hasPrefix:@"tel:"] && [self canCall]) {
     NSRange nameRange = [action rangeOfString:@"name="];
     if (nameRange.location != NSNotFound) {
@@ -303,6 +306,10 @@
                       rideType:action
               openStoreHandler:openStoreHandler];
     
+  } else if ([action isEqualToString:@"flitways"]) {
+    [self launchFlitWaysForSegment:segment
+                    openURLHandler:openURLHandler];
+    
   } else if ([self canCall] && [action hasPrefix:@"tel:"]) {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]];
     
@@ -344,10 +351,11 @@
       addedLyft = YES;
     }
     
-    if (   ([action isEqualToString:@"gocatch"] && [self deviceHasGoCatch])
-        || ([action isEqualToString:@"ingogo"]  && [self deviceHasIngogo])
-        || ([action isEqualToString:@"uber"]    && [self deviceHasUber])
-        || ([action hasPrefix:@"lyft"]          && [self deviceHasLyft]) // also lyft_line, etc.
+    if (   ([action isEqualToString:@"gocatch"]  && [self deviceHasGoCatch])
+        || ([action isEqualToString:@"ingogo"]   && [self deviceHasIngogo])
+        || ([action isEqualToString:@"uber"]     && [self deviceHasUber])
+        || ([action isEqualToString:@"flitways"] && [self deviceHasFlitWays])
+        || ([action hasPrefix:@"lyft"]           && [self deviceHasLyft]) // also lyft_line, etc.
         ) {
       [sortedActions insertObject:action atIndex:startIndex++];
     } else {
@@ -375,6 +383,11 @@
 + (BOOL)deviceHasLyft
 {
   return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"lyft:"]];
+}
+
++ (BOOL)deviceHasFlitWays
+{
+  return NO;
 }
 
 + (void)launchGoCatchForSegment:(TKSegment *)segment
@@ -599,6 +612,72 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
   }
 }
+
++ (void)launchFlitWaysForSegment:(TKSegment *)segment
+                  openURLHandler:(nullable void (^)(NSURL *url, NSString * __nullable title))openURLHandler
+{
+  NSString *partnerKey = [[SGKConfig sharedInstance] flitWaysPartnerKey];
+  NSString *title = @"FlitWays"; // Not localized on purpose. It's a company name.
+  
+  if ([self deviceHasFlitWays]) {
+    // To add when FlitWays allows deep-link
+    
+  } else if (partnerKey) {
+    // https://flitways.com/api/link?partner_key=PARTNER_KEY&pick=PICKUP_ADDRESS&destination=DESTINATION_ADDRESS&trip_date=PICKUP_DATETIME
+    // Partner Key – Required
+    // Pick Up Address – Optional
+    // Destination – Optional
+    // Pickup DateTime – Optional
+    
+    CLLocationCoordinate2D pickup  = [[segment start] coordinate];
+    CLLocationCoordinate2D dropOff  = [[segment end] coordinate];
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeAddressForCoordinate:pickup
+                                      completion:
+     ^(NSString * _Nullable pickupAddress) {
+       [geocoder reverseGeocodeAddressForCoordinate:dropOff
+                                         completion:
+        ^(NSString * _Nullable dropOffAddress) {
+          NSMutableString *urlString = [NSMutableString stringWithString:@"https://flitways.com/api/link"];
+          
+          [urlString appendFormat:@"?partner_key=%@", partnerKey];
+          
+          if (pickupAddress) {
+            NSString *encoded = [pickupAddress stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [urlString appendFormat:@"&pick=%@", encoded];
+          }
+
+          if (dropOffAddress) {
+            NSString *encoded = [dropOffAddress stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [urlString appendFormat:@"&destination=%@", encoded];
+          }
+
+          NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+          formatter.dateFormat = @"dd/MM/YYYY hh:mm a";
+          formatter.timeZone = [segment timeZone];
+          NSString *dateString = [formatter stringFromDate:segment.departureTime];
+          NSString *encoded = [dateString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+          [urlString appendFormat:@"&trip_date=%@", encoded];
+
+          NSURL *url = [NSURL URLWithString:urlString];
+          if (openURLHandler) {
+            openURLHandler(url, title);
+          } else {
+            [[UIApplication sharedApplication] openURL:url];
+          }
+        }];
+     }];
+  } else {
+    NSURL *url = [NSURL URLWithString:@"https://flitways.com"];
+    if (openURLHandler) {
+      openURLHandler(url, title);
+    } else {
+      [[UIApplication sharedApplication] openURL:url];
+    }
+  }
+}
+
 
 #pragma mark - Helpers
 

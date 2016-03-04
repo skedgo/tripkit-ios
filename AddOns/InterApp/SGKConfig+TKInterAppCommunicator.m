@@ -10,6 +10,11 @@
 
 @implementation SGKConfig (TKInterAppCommunicator)
 
+- (nullable NSString *)flitWaysPartnerKey
+{
+  return self.configuration[@"TKInterAppCommunicator"][@"flitWaysPartnerKey"];
+}
+
 - (nullable NSString *)gocatchReferralCode
 {
   return self.configuration[@"TKInterAppCommunicator"][@"gocatchReferralCode"];
