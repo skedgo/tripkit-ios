@@ -238,9 +238,7 @@
     return NSLocalizedStringFromTable(@"goCatch a Taxi", @"TripKit", @"goCatch action");
     
   } else if ([action isEqualToString:@"uber"]) {
-    return [self deviceHasUber]
-    ? NSLocalizedStringFromTable(@"Open Uber", @"TripKit", nil)
-    : NSLocalizedStringFromTable(@"Get Uber", @"TripKit", nil);
+    return NSLocalizedStringFromTable(@"Book with Uber", @"TripKit", nil);
     
   } else if ([action isEqualToString:@"ingogo"]) {
     NSString *prompt = [[SGKConfig sharedInstance] ingogoCouponPrompt];
