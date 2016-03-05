@@ -253,6 +253,9 @@
   __block NSDate *currentLocationTime = nil;
 	[items enumerateObjectsUsingBlock:^(id<TKAgendaInputType> inputItem, NSUInteger idx, BOOL *stop) {
 #pragma unused(stop)
+    if ([TKAgendaFactory agendaInputShouldBeIgnored:inputItem]) {
+      return;
+    }
     
     NSDictionary *data = nil;
     NSString *itemId = [NSString stringWithFormat:@"%p", inputItem];

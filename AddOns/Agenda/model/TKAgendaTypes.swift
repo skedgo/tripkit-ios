@@ -46,6 +46,8 @@ protocol TKAgendaEventInputType: TKAgendaInputType {
   
   var kind: TKAgendaEventKind { get }
   
+  var includeInRoutes: Bool { get }
+  
   var goHereDirectly: Bool { get }
 }
 

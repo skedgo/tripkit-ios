@@ -30,14 +30,14 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   return MIN_DISTANCE_TO_CREATE_TRIPS;
 }
 
-- (void)buildAgendaTemplateForTrackItems:(NSArray *)items
-                           withStartDate:(NSDate *)startDate
-                             withEndDate:(NSDate *)endDate
-                   limitToDateComponents:(nullable NSDateComponents *)limitToDateComponents
-                          stayCoordinate:(CLLocationCoordinate2D)stayCoordinate
-                            stayTimeZone:(NSTimeZone *)stayTimeZone
-                         currentLocation:(nullable CLLocation *)currentLocation
-                                 success:(TKAgendaFactoryTemplate)success
+- (void)buildAgendaTemplateForItems:(NSArray *)items
+                      withStartDate:(NSDate *)startDate
+                        withEndDate:(NSDate *)endDate
+              limitToDateComponents:(nullable NSDateComponents *)limitToDateComponents
+                     stayCoordinate:(CLLocationCoordinate2D)stayCoordinate
+                       stayTimeZone:(NSTimeZone *)stayTimeZone
+                    currentLocation:(nullable CLLocation *)currentLocation
+                            success:(TKAgendaFactoryTemplate)success
 {
   NSParameterAssert(items);
   NSParameterAssert(stayTimeZone);
@@ -53,7 +53,7 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   }
   
   // 1) we sort the input
-  NSArray *sorted = [culled sortedArrayUsingComparator:^NSComparisonResult(id<SGTrackItem> obj1, id<SGTrackItem> obj2) {
+  NSArray *sorted = [culled sortedArrayUsingComparator:^NSComparisonResult(id<TKAgendaInputType> obj1, id<TKAgendaInputType> obj2) {
     NSDate *start1 = [self startDateForItem:obj1];
     NSDate *start2 = [self startDateForItem:obj2];
     NSComparisonResult result = [start1 compare:start2];
@@ -73,10 +73,10 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   __block NSInteger seedIndex = -1;
   __block NSTimeZone *seedTimeZone = stayTimeZone;
 
-  [sorted enumerateObjectsUsingBlock:^(id<SGTrackItem> trackItem, NSUInteger index, BOOL *stop) {
+  [sorted enumerateObjectsUsingBlock:^(id<TKAgendaInputType> trackItem, NSUInteger index, BOOL *stop) {
     if (!limitToDateComponents || [[self class] trackItem:trackItem matchesDateComponents:limitToDateComponents]) {
       seedIndex = index;
-      seedTimeZone = [SGTrackHelper attendanceTimeZoneForTrackItem:trackItem];
+      seedTimeZone = [TKAgendaFactory attendanceTimeZoneForTrackItem:trackItem];
       *stop = YES;
     }
   }];
@@ -91,17 +91,17 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   NSDate *earliestDate = nil;
   
   for (NSInteger index = seedIndex; index >= 0 && index < (NSInteger)sorted.count; index--) {
-    id<SGTrackItem> item    = sorted[index];
+    id<TKAgendaInputType> item    = sorted[index];
     NSDate *itemEnd         = [self endDateForItem:item];
     if ([itemEnd timeIntervalSinceDate:startDate] < 0) // ends before midnight
       continue; // events that start earlier can still end later!
     
     // good item
     [templateItems insertObject:item atIndex:0];
-    NSTimeZone *itemTimeZone = [SGTrackHelper attendanceTimeZoneForTrackItem:item];
+    NSTimeZone *itemTimeZone = [TKAgendaFactory attendanceTimeZoneForTrackItem:item];
     if (itemTimeZone) {
       // are we attending this potentially?
-      if (! [SGTrackHelper trackItemShouldBeIgnored:item]) {
+      if (! [TKAgendaFactory agendaInputShouldBeIgnored:item]) {
         if (!earliestDate || [itemEnd compare:earliestDate] == NSOrderedAscending) {
           earliestDate = itemEnd;
         }
@@ -124,12 +124,12 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   NSDate *latestDate = nil;
   
   for (NSInteger index = seedIndex + 1; index < (NSInteger)sorted.count; index++) {
-    id<SGTrackItem> item      = sorted[index];
-    NSDate *itemStart         = [self startDateForItem:item];
+    id<TKAgendaInputType> item = sorted[index];
+    NSDate *itemStart          = [self startDateForItem:item];
     if ([itemStart timeIntervalSinceDate:endDate] > 0) { // item starts after midnight
       continue;
     }
-    NSDate *itemEnd           = [self endDateForItem:item];
+    NSDate *itemEnd            = [self endDateForItem:item];
     if ([itemEnd timeIntervalSinceDate:startDate] < 0) { // ends before midnight
       continue; // events that start earlier can still end later!
     }
@@ -137,10 +137,10 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
     
     // good item
     [templateItems addObject:item];
-    NSTimeZone *itemTimeZone = [SGTrackHelper attendanceTimeZoneForTrackItem:item];
+    NSTimeZone *itemTimeZone = [TKAgendaFactory attendanceTimeZoneForTrackItem:item];
     if (itemTimeZone) {
       // are we attending this potentially?
-      if (! [SGTrackHelper trackItemShouldBeIgnored:item]) {
+      if (! [TKAgendaFactory agendaInputShouldBeIgnored:item]) {
         if (!latestDate || [itemStart compare:latestDate] == NSOrderedDescending) {
           latestDate = itemStart;
         }
@@ -156,8 +156,8 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
 
   // an empty day is one without any template items, ignoring current locations
   BOOL isEmptyDay = YES;
-  for (id<SGTrackItem> trackItem in templateItems) {
-    if ([trackItem respondsToSelector:@selector(isBackground)] && [trackItem isBackground]) {
+  for (id<TKAgendaInputType> trackItem in templateItems) {
+    if ([TKAgendaFactory itemIsBackground:trackItem]) {
       continue;
     }
     isEmptyDay = NO;
@@ -173,12 +173,12 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
     NSInteger skipCount = 0;
     for (NSUInteger index = 0; index < templateItems.count; index++) {
       id item = templateItems[index];
-      ZAssert([item conformsToProtocol:@protocol(SGTrackItem)], @"We should only have track items at this stage");
+      ZAssert([item conformsToProtocol:@protocol(TKAgendaInputType)], @"We should only have track items at this stage");
       
-      id<SGTrackItem> trackItem = item;
+      id<TKAgendaInputType> trackItem = item;
       
       // we ignore anything that's excluded
-      if ([SGTrackHelper trackItemShouldBeIgnored:trackItem]) {
+      if ([TKAgendaFactory agendaInputShouldBeIgnored:trackItem]) {
         skipCount++;
         continue;
       }
@@ -233,8 +233,8 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
       insertionSkipCount++;
       continue;
     }
-    if ([templateItem conformsToProtocol:@protocol(SGTrackItem)]) {
-      id<SGTrackItem> trackItem = (id<SGTrackItem>)templateItem;
+    if ([templateItem conformsToProtocol:@protocol(TKAgendaInputType)]) {
+      id<TKAgendaInputType> trackItem = (id<TKAgendaInputType>)templateItem;
       NSDate *itemStart = [self startDateForItem:trackItem];
       NSTimeInterval allowedGap = [dateToCheck isEqualToDate:startDate] ? 0 : MaxGap;
       if ([itemStart timeIntervalSinceDate:dateToCheck] > allowedGap) {
@@ -245,7 +245,7 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
         index++;
       }
       NSDate *itemEnd   = [self endDateForItem:trackItem];
-      BOOL isBackground = [trackItem respondsToSelector:@selector(isBackground)] && [trackItem isBackground];
+      BOOL isBackground = [TKAgendaFactory itemIsBackground:trackItem];
       lastIsBackground = isBackground;
       if (itemEnd == [dateToCheck laterDate:itemEnd]) {
         dateToCheck = itemEnd;
@@ -284,20 +284,26 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   success(startDate, endDate, seedTimeZone, templateItems);
 }
 
-+ (BOOL)trackItem:(id<SGTrackItem>)trackItem matchesDateComponents:(NSDateComponents *)dateComponents
-{
-  NSDate *itemStart = [trackItem startDate];
-  NSDate *itemEnd = nil;
-  if (itemStart && [trackItem duration] >= 0) {
-    itemEnd = [itemStart dateByAddingTimeInterval:[trackItem duration]];
++ (BOOL)agendaInputShouldBeIgnored:(id<TKAgendaInputType>)inputItem {
+  if ([inputItem conformsToProtocol:@protocol(TKAgendaEventInputType)]) {
+    id<TKAgendaEventInputType> eventInput = (id<TKAgendaEventInputType>)inputItem;
+    return !eventInput.includeInRoutes;
   }
+  return NO;
+}
+
++ (BOOL)trackItem:(id<TKAgendaInputType>)trackItem matchesDateComponents:(NSDateComponents *)dateComponents
+{
+  NSDate *itemStart = trackItem.startDate;
+  NSDate *itemEnd = trackItem.endDate;
+
   if (!itemStart && ! itemEnd) {
     // applies every day
     return YES;
   }
 
   // we have a start and/or end => need to check if event overlaps the day in the item's timezone
-  NSTimeZone *itemTimeZone = [SGTrackHelper attendanceTimeZoneForTrackItem:trackItem];
+  NSTimeZone *itemTimeZone = [TKAgendaFactory attendanceTimeZoneForTrackItem:trackItem];
   if (itemTimeZone) {
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.timeZone = itemTimeZone;
@@ -322,15 +328,15 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   return NO;
 }
 
-+ (void)insertTrackItem:(id<SGTrackItem>)trackItem
++ (void)insertTrackItem:(id<TKAgendaInputType>)trackItem
               intoItems:(NSMutableArray *)items
 {
-  NSDate *startTime = [trackItem startDate];
+  NSDate *startTime = trackItem.startDate;
   
   BOOL didInsert = NO;
   for (NSUInteger startIndex = 0; startIndex < items.count; startIndex++) {
     id object = items[startIndex];
-    if ([object conformsToProtocol:@protocol(SGTrackItem)]) {
+    if ([object conformsToProtocol:@protocol(TKAgendaInputType)]) {
       NSDate *existingStart = [object startDate];
       if ([startTime timeIntervalSinceDate:existingStart] < 0) {
         [items insertObject:trackItem atIndex:startIndex];
@@ -346,39 +352,24 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   }
 }
 
-+ (BOOL)trackItem:(id<SGTrackItem>)trackItem
++ (BOOL)trackItem:(id<TKAgendaInputType>)trackItem
  containsLocation:(CLLocation *)location
            atTime:(NSDate *)time
 {
   if (! location) {
     return NO;
   }
-  if ([SGTrackHelper trackItemShouldBeIgnored:trackItem]) {
+  if ([TKAgendaFactory agendaInputShouldBeIgnored:trackItem]) {
     return NO;
   }
   
-  NSDate *startDate = nil;
-  if ([trackItem respondsToSelector:@selector(effectiveStart)]) {
-    startDate = [trackItem effectiveStart];
-  }
-  if (!startDate) {
-    startDate = [trackItem startDate];
-  }
+  NSDate *startDate = trackItem.startDate;
   if (startDate && [startDate timeIntervalSinceDate:time] > 0) {
     // hasn't started yet
     return NO;
   }
   
-  NSDate *endDate = nil;
-  if ([trackItem respondsToSelector:@selector(effectiveEnd)]) {
-    endDate = [trackItem effectiveEnd];
-  }
-  if (!endDate) {
-    NSTimeInterval duration = [trackItem duration];
-    if (duration >= 0) {
-      endDate = [startDate dateByAddingTimeInterval:duration];
-    }
-  }
+  NSDate *endDate = trackItem.endDate;
   if (endDate && [endDate timeIntervalSinceDate:time] < 0) {
     // ended already
     return NO;
@@ -410,11 +401,11 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   return NO;
 }
 
-+ (BOOL)trackItems:(NSArray<id<SGTrackItem>> *)trackItems
-   containLocation:(CLLocation *)location
-            atTime:(NSDate *)time
++ (BOOL)agendaItems:(NSArray<id<TKAgendaInputType>> *)trackItems
+    containLocation:(CLLocation *)location
+             atTime:(NSDate *)time
 {
-  for (id<SGTrackItem> trackItem in trackItems) {
+  for (id<TKAgendaInputType> trackItem in trackItems) {
     if ([self trackItem:trackItem containsLocation:location atTime:time]) {
       return YES;
     }
@@ -435,30 +426,25 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
 
 #pragma mark - Private helpers
 
-+ (NSString *)trackItemsToString:(NSArray *)trackItems
++ (NSString *)trackItemsToString:(NSArray<id<TKAgendaInputType>> *)trackItems
 {
   NSMutableString *string = [NSMutableString string];
-  for (id<SGTrackItem> trackItem in trackItems) {
-    NSString *start = [[trackItem startDate] ISO8601String];
-    double hours = [trackItem duration] / 3600;
-    NSString *title = [trackItem title];
+  for (id<TKAgendaInputType> trackItem in trackItems) {
+    NSString *start = [trackItem.startDate ISO8601String];
+    NSTimeInterval duration = [trackItem.endDate timeIntervalSinceDate:trackItem.startDate];
+    double hours = duration / 3600;
+    NSString *title = [trackItem description];
     [string appendFormat:@"- %@: %.1fh (%@)\n", start, hours, title];
   }
   return string;
 }
 
-- (NSDate *)startDateForItem:(id<SGTrackItem>)trackItem
+- (NSDate *)startDateForItem:(id<TKAgendaInputType>)trackItem
 {
   NSString *key = [NSString stringWithFormat:@"%p", trackItem];
   NSDate *startDate = self.startDateDict[key];
   if (!startDate) {
-    startDate = nil;
-    if ([trackItem respondsToSelector:@selector(effectiveStart)]) {
-      startDate = [trackItem effectiveStart];
-    }
-    if (!startDate) {
-      startDate = [trackItem startDate];
-    }
+    startDate = trackItem.startDate;
     if (startDate) {
       self.startDateDict[key] = startDate;
     }
@@ -466,20 +452,12 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   return startDate;
 }
 
-- (NSDate *)endDateForItem:(id<SGTrackItem>)trackItem
+- (NSDate *)endDateForItem:(id<TKAgendaInputType>)trackItem
 {
   NSString *key = [NSString stringWithFormat:@"%p", trackItem];
   NSDate *endDate = self.endDateDict[key];
   if (!endDate) {
-    if ([trackItem respondsToSelector:@selector(effectiveEnd)]) {
-      endDate = [trackItem effectiveEnd];
-    }
-    if (!endDate) {
-      NSDate *startDate = [self startDateForItem:trackItem];
-      if (startDate && [trackItem duration] >= 0) {
-        endDate = [startDate dateByAddingTimeInterval:[trackItem duration]];
-      }
-    }
+    endDate = trackItem.endDate;
     if (endDate) {
       self.endDateDict[key] = endDate;
     }
@@ -488,18 +466,29 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   
 }
 
-- (void)cullUnnecessaryBackgroundItems:(NSMutableArray *)allItems
++ (BOOL)itemIsBackground:(id<TKAgendaInputType>)item {
+  if ([item conformsToProtocol:@protocol(TKAgendaEventInputType)]) {
+    id<TKAgendaEventInputType> eventItem = (id<TKAgendaEventInputType>)item;
+    switch (eventItem.kind) {
+      case TKAgendaEventKindStay:
+      case TKAgendaEventKindHome:
+        return YES;
+      default:
+        return NO;
+    }
+  }
+  return NO;
+}
+
+- (void)cullUnnecessaryBackgroundItems:(NSMutableArray<id<TKAgendaInputType>> *)allItems
                      forDateComponents:(NSDateComponents *)dateComponents
 {
   NSMutableArray *backgroundItems = [NSMutableArray arrayWithCapacity:allItems.count];
-  for (id item in allItems) { 
-    if ([item conformsToProtocol:@protocol(SGTrackItem)]
-        && [item respondsToSelector:@selector(isBackground)]
-        && [(id<SGTrackItem>) item isBackground]) {
-      
-      if ([[self class] trackItem:item matchesDateComponents:dateComponents]) {
-        [backgroundItems addObject:item];
-      }
+  for (id<TKAgendaInputType> item in allItems) {
+    if ([TKAgendaFactory itemIsBackground:item]
+        && [TKAgendaFactory trackItem:item matchesDateComponents:dateComponents])
+    {
+      [backgroundItems addObject:item];
     }
   }
   
@@ -521,7 +510,7 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
        isDominatedGroupwiseBy:(NSArray *)backgroundItems
             forDateComponents:(NSDateComponents *)dateComponents
 {
-  id<SGTrackItem> item = (id<SGTrackItem>) backgroundItems[index];
+  id<TKAgendaInputType> item = (id<TKAgendaInputType>) backgroundItems[index];
   if (![[self class] trackItem:item matchesDateComponents:dateComponents]) {
     return YES;
   }
@@ -533,14 +522,14 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   components.month = dateComponents.month;
   components.day = dateComponents.day;
   components.hour = 0;
-  NSDate *itemStart = [item startDate];
+  NSDate *itemStart = item.startDate;
   NSDate *prunedStart = [components.calendar dateFromComponents:components];
   prunedStart = itemStart ? [prunedStart laterDate:itemStart] : prunedStart;
   
   components.hour = 24;
   NSDate *prunedEnd = [components.calendar dateFromComponents:components];
-  if (itemStart && [item duration] >= 0) {
-    NSDate *itemEnd = [itemStart dateByAddingTimeInterval:[item duration]];
+  NSDate *itemEnd = item.endDate;
+  if (itemStart && itemEnd) {
     prunedEnd = [prunedEnd earlierDate:itemEnd];
   }
   
@@ -548,13 +537,10 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   // so we subtract any time interval that a later item covers
   // we push back the `prunedStart`
   for (NSUInteger otherIndex = index + 1; otherIndex < backgroundItems.count; otherIndex++) {
-    id<SGTrackItem> other = (id<SGTrackItem>) backgroundItems[otherIndex];
+    id<TKAgendaInputType> other = (id<TKAgendaInputType>) backgroundItems[otherIndex];
     NSDate *otherStart = [other startDate];
     if (otherStart) {
-      NSDate *otherEnd = nil;
-      if ([other duration] >= 0) {
-        otherEnd = [otherStart dateByAddingTimeInterval:[other duration]];
-      }
+      NSDate *otherEnd = other.endDate;
       
       if ([otherStart earlierDate:prunedStart] == otherStart
           && (otherEnd == nil || [otherEnd laterDate:prunedStart] == otherEnd)) {
@@ -590,5 +576,22 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
     return NO;
   }
 }
+
+/**
+ @return Time zone for the track item if it has an annotation or is a 'trip'.
+ */
++ (NSTimeZone *)attendanceTimeZoneForTrackItem:(id<SGTrackItem>)trackItem
+{
+  BOOL affectsTimeZone = [trackItem conformsToProtocol:@protocol(SGTripTrackItem)]
+  || ([trackItem respondsToSelector:@selector(mapAnnotation)] && [trackItem mapAnnotation]);
+  if (affectsTimeZone) {
+    ZAssert([trackItem respondsToSelector:@selector(timeZone)], @"%@ affects time zones, so it should implement the `timeZone` method!", trackItem);
+    return [trackItem timeZone];
+  } else {
+    return nil;
+  }
+}
+
+
 
 @end
