@@ -2,15 +2,12 @@
 
 Some documentation can be found in the [Wiki](https://github.com/skedgo/tripkit-ios/wiki)
 
-## Dependencies
+## Set-up
+
+### Dependencies
 
 TripKit has several required dependencies:
 
-* CocoaPods:
-``` ruby
-  pod 'AFNetworking', '~> 2.5.3'
-  pod 'CocoaLumberjack'
-```
 * Frameworks:
   * CoreData
   * CoreLocation
@@ -19,6 +16,8 @@ TripKit has several required dependencies:
   * RootKit
   * ServerKit
   * TransportKit
+* Add RootKit's `Config.plist.default` as `Config.plist` to your project and include it in your targets.
+  * TODO: what to add
 * Precompiled header macros:
 ``` objective-c
 #pragma mark -
@@ -49,13 +48,38 @@ TripKit has several required dependencies:
 #define ZAssert(condition, ...) do { if (!(condition)) { ALog(__VA_ARGS__); }} while (0)
 ```
 
-## Set-up
+### In your code
 
 * Refresh the cached information at an appropriate time, e.g., when your app finished launching or comes back to the foreground:
 
 ```  objective-c
   [[SVKServer sharedInstance] updateRegionsForced:NO];
 ```
+
+
+
+## Optional dependencies
+
+### Logging
+
+* CocoaPods:
+``` ruby
+  pod 'CocoaLumberjack'
+```
+
+TODO: How to use this
+
+### Booking features
+
+* CocoaPods:
+``` ruby
+  pod 'AFNetworking', '~> 2.5.3'
+  pod 'CocoaLumberjack'
+```
+* Modules from [SkedGo's shared iOS code base](https://github.com/skedgo/shared-ios)
+  * BookingKit
+
+TODO: How to use this
 
 ## Tracking
 
