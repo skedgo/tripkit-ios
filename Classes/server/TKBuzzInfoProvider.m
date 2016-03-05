@@ -395,7 +395,7 @@ typedef enum {
 {
   ZAssert(context.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
   
-BOOL forSingleStop = (stopOrNil != nil);
+  BOOL forSingleStop = (stopOrNil != nil);
   
   NSInteger flags = 0;
   NSMutableSet *pairIdentifiers  = [NSMutableSet set];
