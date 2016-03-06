@@ -50,35 +50,37 @@ struct TKAgendaFaker: TKAgendaBuilderType {
   
   private static func trackWithTrips(items: [TKAgendaInputItem], usePlaceholders: Bool) -> [TKAgendaOutputItem] {
     let (outputs, _) = items.reduce( ([] as [TKAgendaOutputItem], nil as TKAgendaInputItem?) ) { previous, nextInput in
-      guard let next = nextInput.asFakeOutput() else { return previous }
+      // Unexpected state
+      guard let next = nextInput.asFakeOutput() else { fatalError("unexpected Input: \(nextInput)") }
       
+      // The very first
+      guard let lastInput = previous.1 else { return ([next], nextInput) }
+
       let outputs = previous.0
+
+      // Only need trips between events
+      guard case let .Event(lastEvent) = lastInput,
+            case let .Event(nextEvent) = nextInput else {
+        return (outputs + [next], nextInput)
+      }
       
-      if let lastInput = previous.1 {
-        if case let .Event(lastEvent) = lastInput,
-           case let .Event(nextEvent) = nextInput {
-          let tripStart = lastEvent.endDate
-          let tripEnd = nextEvent.startDate
-            
-          if tripStart == nil && tripEnd == nil {
-            return (outputs + [next], nextInput)
-          } else if usePlaceholders {
-            let placeholder = TKAgendaOutputItem.TripPlaceholder(tripStart, tripEnd)
-            return (outputs + [placeholder, next], nextInput)
-          } else {
-            let trip = tripStart != nil
-              ? FakeTrip(forDate: tripStart!, isArriveBefore: true)
-              : FakeTrip(forDate: tripEnd!, isArriveBefore: false)
-            let tripOutput = TKAgendaOutputItem.Trip(TKAgendaTripOutput(input: nil, trip: trip, fromIdentifier: nil, toIdentifier: nil))
-            return (outputs + [tripOutput, next], nextInput)
-          }
-        } else {
-          return (outputs + [next], nextInput)
-        }
+      // Inserting trips in between events
+      let tripStart = lastEvent.endDate
+      let tripEnd = nextEvent.startDate
+      if tripStart == nil && tripEnd == nil {
+        return (outputs + [next], nextInput)
+      } else if usePlaceholders {
+        let placeholder = TKAgendaOutputItem.TripPlaceholder(tripStart, tripEnd)
+        return (outputs + [placeholder, next], nextInput)
       } else {
-        return ([next], nextInput)
+        let trip = tripStart != nil
+          ? FakeTrip(forDate: tripStart!, isArriveBefore: true)
+          : FakeTrip(forDate: tripEnd!, isArriveBefore: false)
+        let tripOutput = TKAgendaOutputItem.Trip(TKAgendaTripOutput(input: nil, trip: trip, fromIdentifier: nil, toIdentifier: nil))
+        return (outputs + [tripOutput, next], nextInput)
       }
     }
+    
     return outputs
   }
 }
@@ -88,8 +90,10 @@ extension TKAgendaInputItem {
     switch self {
     case .Event(let input):
       return .Event(TKAgendaEventOutput(input: input, effectiveStart: input.startDate, effectiveEnd: input.endDate, isContinuation: false))
-    case .Trip:
-      return nil // TODO
+    case .Trip(let input) where input.trip != nil:
+      return .Trip(TKAgendaTripOutput(input: input, trip: input.trip!, fromIdentifier: nil, toIdentifier: nil))
+    default:
+        return nil
     }
   }
 }

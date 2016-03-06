@@ -89,7 +89,7 @@ public protocol TKAgendaTripInputType: TKAgendaInputType {
   /**
    - returns: The trip this trip input item is for. If this is `nil`, make sure to return soemthing from `modes`.
    */
-  var trip: Trip? { get }
+  var trip: STKTrip? { get }
   
   /**
    - returns: The used modes of this trip. Only needs to return something if `trip` returns nil`.
@@ -100,6 +100,10 @@ public protocol TKAgendaTripInputType: TKAgendaInputType {
 public enum TKAgendaOutputItem {
   case Event(TKAgendaEventOutput)
   case Trip(TKAgendaTripOutput)
+  
+  /**
+   Placeholder for where a trip will likely be. First date is predicted start date, second date is predicted end date.
+   */
   case TripPlaceholder(NSDate?, NSDate?)
 }
 
