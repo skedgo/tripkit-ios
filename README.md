@@ -18,7 +18,22 @@ TripKit has several required dependencies:
   * TransportKit
 * Add RootKit's `Config.plist.default` as `Config.plist` to your project and include it in your targets.
   * TODO: what to add
-* Precompiled header macros:
+
+
+### In your project
+
+* If your project is Swift-only so far. Add a prefix header file:
+
+1. Add a new file of type "PCH File" and name it `${AppName}-Prefix.pch`
+2. In your target's settings under Build Settings > Apple LLVM 7.0 - Language:
+ 1. Set "Precompile Prefix Header" to "Yes"
+ 2. Set "Prefix Header" to `${AppName}-Prefix.pch`
+
+### In your code
+
+* In your prefix header:
+  - Add `#import "$ProjectName-Swift.h"`
+  - Add the following precompiled header macros:
 ``` objective-c
 #pragma mark -
 #pragma mark Useful macro methods
@@ -48,7 +63,11 @@ TripKit has several required dependencies:
 #define ZAssert(condition, ...) do { if (!(condition)) { ALog(__VA_ARGS__); }} while (0)
 ```
 
-### In your code
+* In your `$App-Bridging-Header.h` add:
+
+```  objective-c
+  #import "TKTripKit.h"
+```
 
 * Refresh the cached information at an appropriate time, e.g., when your app finished launching or comes back to the foreground:
 
