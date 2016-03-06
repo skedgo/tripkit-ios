@@ -12,9 +12,6 @@
 // dependencies
 #import "TKTripKit.h"
 
-#import "SGTrack.h"
-#import "SGTrackHelper.h"
-
 // agenda building
 #import "TKAgendaFactory.h"
 #import "TKSkedgoifier.h"

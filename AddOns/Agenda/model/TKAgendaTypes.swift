@@ -19,6 +19,9 @@ protocol TKAgendaType: NSObjectProtocol {
 
 @objc
 protocol TKAgendaInputType: NSObjectProtocol {
+  var startDate: NSDate? { get }
+  var endDate: NSDate? { get }
+  var timeZone: NSTimeZone { get }
 }
 
 @objc
@@ -32,8 +35,6 @@ enum TKAgendaEventKind: Int {
 
 @objc
 protocol TKAgendaEventInputType: TKAgendaInputType {
-  var startDate: NSDate? { get }
-  var endDate: NSDate? { get }
   
   /**
    The coordinate where this input item takes place. The agenda will try to route here. Invalid coordinates will be ignored.
@@ -53,9 +54,6 @@ protocol TKAgendaEventInputType: TKAgendaInputType {
 
 @objc
 protocol TKAgendaTripInputType: TKAgendaInputType {
-  var departureTime: NSDate { get }
-  var arrivalTime: NSDate { get }
-  
   var origin: CLLocationCoordinate2D { get }
   var destination: CLLocationCoordinate2D { get }
   

@@ -268,14 +268,25 @@
     if ([inputItem conformsToProtocol:@protocol(TKAgendaTripInputType)]) {
       id<TKAgendaTripInputType> tripInput = (id<TKAgendaTripInputType>)inputItem;
       
+      NSDate *departureTime = inputItem.startDate;
+      if (!departureTime) {
+        ZAssert(false, @"All trips should have a start date.");
+        return;
+      }
+      NSDate *arrivalTime = inputItem.endDate;
+      if (!arrivalTime) {
+        ZAssert(false, @"All trips should have an end date.");
+        return;
+      }
+      
       NSMutableDictionary *dataMutable = [NSMutableDictionary dictionary];
       dataMutable[@"class"]         = @"trip";
       dataMutable[@"id"]            = key;
-      dataMutable[@"startTime"]     = @(floor([tripInput.departureTime timeIntervalSince1970]));
-      dataMutable[@"endTime"]       = @(ceil([tripInput.arrivalTime timeIntervalSince1970]));
+      dataMutable[@"startTime"]     = @(floor([departureTime timeIntervalSince1970]));
+      dataMutable[@"endTime"]       = @(ceil([arrivalTime timeIntervalSince1970]));
 #ifdef DEBUG
-      dataMutable[@"startText"] = [tripInput.departureTime descriptionWithLocale:[NSLocale currentLocale]];
-      dataMutable[@"endText"]		= [tripInput.arrivalTime descriptionWithLocale:[NSLocale currentLocale]];
+      dataMutable[@"startText"] = [departureTime descriptionWithLocale:[NSLocale currentLocale]];
+      dataMutable[@"endText"]		= [arrivalTime descriptionWithLocale:[NSLocale currentLocale]];
 #endif
       dataMutable[@"startLocation"] = [STKParserHelper dictionaryForCoordinate:tripInput.origin];
       dataMutable[@"endLocation"]   = [STKParserHelper dictionaryForCoordinate:tripInput.destination];

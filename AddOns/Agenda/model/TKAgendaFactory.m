@@ -10,7 +10,7 @@
 
 #import "TKTripKit+Agenda.h"
 
-NSString *const kTKAgendaFactoryTemplateStay       = @"kTKAgendaFactoryTemplateStay";
+NSString *const kTKAgendaFactoryTemplateStay            = @"kTKAgendaFactoryTemplateStay";
 NSString *const kTKAgendaFactoryTemplatePlaceholder     = @"kTKAgendaFactoryTemplatePlaceholder";
 NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemplateCurrentLocation";
 
@@ -375,29 +375,29 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
     return NO;
   }
   
-  if ([trackItem conformsToProtocol:@protocol(SGTripTrackItem)]) {
-    id<SGTripTrackItem> tripTrackItem = (id<SGTripTrackItem>)trackItem;
-    if ([tripTrackItem respondsToSelector:@selector(containsLocation:atTime:)]) {
-      return [tripTrackItem containsLocation:location
-                                      atTime:time];
-    }
-    
-    id<STKTrip> trip = [tripTrackItem trip];
-    id<STKTripSegment> nextSegment = [TKNextSegmentScorer nextSegmentOfTrip:trip
-                                                                    forTime:time
-                                                               withLocation:location];
-    return (nextSegment != nil);
-    
-  } else if ([trackItem respondsToSelector:@selector(mapAnnotation)]) {
-    // single-location event
-    id<MKAnnotation> eventAnnotation = [trackItem mapAnnotation];
-    if (eventAnnotation) {
-      CLLocationCoordinate2D coordinate = [eventAnnotation coordinate];
-      if (! location || [self location:location matchesByDistance:coordinate]) {
-        return YES;
-      }
-    }
-  }
+//  if ([trackItem conformsToProtocol:@protocol(SGTripTrackItem)]) {
+//    id<SGTripTrackItem> tripTrackItem = (id<SGTripTrackItem>)trackItem;
+//    if ([tripTrackItem respondsToSelector:@selector(containsLocation:atTime:)]) {
+//      return [tripTrackItem containsLocation:location
+//                                      atTime:time];
+//    }
+//    
+//    id<STKTrip> trip = [tripTrackItem trip];
+//    id<STKTripSegment> nextSegment = [TKNextSegmentScorer nextSegmentOfTrip:trip
+//                                                                    forTime:time
+//                                                               withLocation:location];
+//    return (nextSegment != nil);
+//    
+//  } else if ([trackItem respondsToSelector:@selector(mapAnnotation)]) {
+//    // single-location event
+//    id<MKAnnotation> eventAnnotation = [trackItem mapAnnotation];
+//    if (eventAnnotation) {
+//      CLLocationCoordinate2D coordinate = [eventAnnotation coordinate];
+//      if (! location || [self location:location matchesByDistance:coordinate]) {
+//        return YES;
+//      }
+//    }
+//  }
   return NO;
 }
 
@@ -566,13 +566,14 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
     ZAssert([prunedEnd timeIntervalSinceDate:prunedStart] > 0, @"Unexpected pruning status! Should have aborted before!");
     NSString *key = [NSString stringWithFormat:@"%p", item];
     self.startDateDict[key] = prunedStart;
-    if ([item respondsToSelector:@selector(updateStartDate:)]) {
-      [item updateStartDate:prunedStart];
-    }
+    // TODO: fix
+//    if ([item respondsToSelector:@selector(updateStartDate:)]) {
+//      [item updateStartDate:prunedStart];
+//    }
     self.endDateDict[key] = prunedEnd;
-    if ([item respondsToSelector:@selector(updateEndDate:)]) {
-      [item updateEndDate:prunedEnd];
-    }
+//    if ([item respondsToSelector:@selector(updateEndDate:)]) {
+//      [item updateEndDate:prunedEnd];
+//    }
     return NO;
   }
 }
@@ -580,16 +581,21 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
 /**
  @return Time zone for the track item if it has an annotation or is a 'trip'.
  */
-+ (NSTimeZone *)attendanceTimeZoneForTrackItem:(id<SGTrackItem>)trackItem
++ (NSTimeZone *)attendanceTimeZoneForTrackItem:(id<TKAgendaInputType>)trackItem
 {
-  BOOL affectsTimeZone = [trackItem conformsToProtocol:@protocol(SGTripTrackItem)]
-  || ([trackItem respondsToSelector:@selector(mapAnnotation)] && [trackItem mapAnnotation]);
-  if (affectsTimeZone) {
-    ZAssert([trackItem respondsToSelector:@selector(timeZone)], @"%@ affects time zones, so it should implement the `timeZone` method!", trackItem);
+  if ([trackItem conformsToProtocol:@protocol(TKAgendaTripInputType)]) {
     return [trackItem timeZone];
-  } else {
-    return nil;
   }
+  
+  if ([trackItem conformsToProtocol:@protocol(TKAgendaEventInputType)]) {
+    id<TKAgendaEventInputType> eventInput = (id<TKAgendaEventInputType>)trackItem;
+    CLLocationCoordinate2D coordinate = eventInput.coordinate;
+    if (CLLocationCoordinate2DIsValid(coordinate)) {
+      return [trackItem timeZone];
+    }
+  }
+  
+  return nil;
 }
 
 
