@@ -41,6 +41,9 @@ extension TKSkedgoifier: TKAgendaBuilderType {
     }
     
     return Observable.create { subscriber in
+      
+      subscriber.onNext(TKAgendaFaker.outputPlaceholders(items))
+      
       self.fetchTripsForItems(inputs, startDate: startDate, endDate: endDate, inRegion: region, withPrivateVehicles: privateVehicles, withTripPatterns: tripPatterns) { results, error in
         
         guard error == nil else {

@@ -36,6 +36,11 @@ struct TKAgendaFaker: TKAgendaBuilderType {
     }
   }
   
+  static func outputPlaceholders(items: [TKAgendaInputItem]) -> [TKAgendaOutputItem] {
+    let events = inputsReturningHome(items)
+    return trackWithTrips(events, usePlaceholders: true)
+  }
+  
   private static func inputsReturningHome(items: [TKAgendaInputItem]) -> [TKAgendaInputItem] {
     if let first = items.first,
        let last = items.last,
