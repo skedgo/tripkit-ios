@@ -348,6 +348,11 @@
         } else {
           startDate = [startDate laterDate:agendaStartDate];  // cap at agenda's start
         }
+        if (!endDate) {
+          endDate = [agendaEndDate dateByAddingTimeInterval:12 * 60 * 60];
+        } else {
+          endDate = [endDate earlierDate:agendaEndDate]; // cap at agenda's end
+        }
       }
       if (idx == items.count - 1) {
         if (! endDate) {

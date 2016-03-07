@@ -11,6 +11,9 @@ import Foundation
 import RxSwift
 
 extension TKSkedgoifier: TKAgendaBuilderType {
+  /**
+   - warning: While this implements the `TKAgendaBuilderType`, you can't use it multi-threaded. You're encouraged to use `TKCachedSkedgoifier` instead which is multi-threading safe (and does caching, too).
+   */
   public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]> {
     
     let server = SVKServer.sharedInstance()
