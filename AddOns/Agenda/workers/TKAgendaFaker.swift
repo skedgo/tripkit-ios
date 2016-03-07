@@ -100,7 +100,7 @@ extension TKAgendaInputItem {
 
 
 private class FakeTrip: NSObject, STKTrip {
-  @objc let costValues = [NSNumber(unsignedInt: STKTripCostTypeDuration.rawValue): "30 Minutes"]
+  @objc let costValues = [NSNumber(integer: STKTripCostType.Duration.rawValue): "30 Minutes"]
   @objc let departureTimeZone = NSTimeZone.systemTimeZone()
   @objc let departureTimeIsFixed = true
 

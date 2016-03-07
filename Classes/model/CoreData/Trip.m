@@ -145,7 +145,7 @@ typedef NSUInteger SGTripFlag;
 		[dateFormatter setTimeZone:tz];
   }
 
-  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibilityInDetails]) {
+  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibility_InDetails]) {
     // this is related to SegmentSectionHeaderViews!
     
     // insert a new location as soon as we end up there
@@ -214,7 +214,7 @@ typedef NSUInteger SGTripFlag;
   [output appendString:@"; "];
   
   BOOL first = true;
-  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibilityInDetails]) {
+  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibility_InDetails]) {
     if (first) {
       first = false;
     } else {
@@ -601,11 +601,11 @@ typedef NSUInteger SGTripFlag;
 - (STKTripCostType)primaryCostType
 {
   if (self.departureTimeIsFixed) {
-    return STKTripCostTypeTime;
+    return STKTripCostType_Time;
   } else if ([self isExpensive]) {
-    return STKTripCostTypePrice;
+    return STKTripCostType_Price;
   } else {
-    return STKTripCostTypeDuration;
+    return STKTripCostType_Duration;
   }
 }
 
@@ -635,7 +635,7 @@ typedef NSUInteger SGTripFlag;
   sTripAccessibilityDateFormatter.timeZone = timeZone;
 	
   BOOL separateByComma = NO;
-  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibilityInSummary]) {
+  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibility_InSummary]) {
     if (separateByComma) {
       [accessibleLabel appendString:@", "];
     } else {
@@ -684,12 +684,12 @@ typedef NSUInteger SGTripFlag;
   if (includeTime) {
     NSString *durationString = [self durationString];
     if (durationString) {
-      values[@(STKTripCostTypeDuration)] = durationString;
+      values[@(STKTripCostType_Duration)] = durationString;
     }
   }
-  values[@(STKTripCostTypeCarbon)]   = [self.totalCarbon toCarbonString];
+  values[@(STKTripCostType_Carbon)]   = [self.totalCarbon toCarbonString];
   if (self.totalPrice) {
-    values[@(STKTripCostTypePrice)]  = [self.totalPrice toMoneyString:[self currencySymbol]];
+    values[@(STKTripCostType_Price)]  = [self.totalPrice toMoneyString:[self currencySymbol]];
   }
   return values;
 }

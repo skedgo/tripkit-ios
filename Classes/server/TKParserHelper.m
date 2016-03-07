@@ -17,13 +17,13 @@
 + (STKTripSegmentVisibility)segmentVisibilityType:(NSString *)string
 {
   if ([string isEqualToString:@"in summary"])
-    return STKTripSegmentVisibilityInSummary;
+    return STKTripSegmentVisibility_InSummary;
   else if ([string isEqualToString:@"on map"])
-    return STKTripSegmentVisibilityOnMap;
+    return STKTripSegmentVisibility_OnMap;
   else if ([string isEqualToString:@"in details"])
-    return STKTripSegmentVisibilityInDetails;
+    return STKTripSegmentVisibility_InDetails;
   else
-    return STKTripSegmentVisibilityHidden;
+    return STKTripSegmentVisibility_Hidden;
 }
 
 + (NSNumber *)segmentTypeForString:(NSString *)typeString

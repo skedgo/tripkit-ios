@@ -407,7 +407,7 @@
 	scoreSorter       = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalScore" ascending:YES];
 	
 	switch (sortType) {
-    case STKTripCostTypeTime:
+    case STKTripCostType_Time:
 			// sort by time
 			if (self.timeType.intValue == SGTimeTypeArriveBefore) {
 				first = primaryTimeSorter;
@@ -419,47 +419,47 @@
 			third   = visibilitySorter;
       break;
       
-		case STKTripCostTypeDuration:
+		case STKTripCostType_Duration:
 			first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.minutes" ascending:YES];
       second  = visibilitySorter;
 			third   = primaryTimeSorter;
 			break;
 			
-		case STKTripCostTypePrice:
+		case STKTripCostType_Price:
       first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalPriceUSD" ascending:YES];
       second  = visibilitySorter;
 			third   = primaryTimeSorter;
       break;
 			
-		case STKTripCostTypeCarbon:
+		case STKTripCostType_Carbon:
 			first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalCarbon" ascending:YES];
       second  = visibilitySorter;
 			third   = primaryTimeSorter;
 			break;
       
-    case STKTripCostTypeCalories:
+    case STKTripCostType_Calories:
 			first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalCalories" ascending:YES];
       second  = visibilitySorter;
 			third   = primaryTimeSorter;
 			break;
 
-    case STKTripCostTypeWalking:
+    case STKTripCostType_Walking:
 			first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalWalking" ascending:YES];
       second  = visibilitySorter;
 			third   = primaryTimeSorter;
 			break;
       
-    case STKTripCostTypeHassle:
+    case STKTripCostType_Hassle:
 			first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalHassle" ascending:YES];
       second  = visibilitySorter;
 			third   = primaryTimeSorter;
 			break;
 
-    case STKTripCostTypeCount:
+    case STKTripCostType_Count:
       ZAssert(false, @"Don't sort by this!");
       // fallthrough!
 
-    case STKTripCostTypeScore:
+    case STKTripCostType_Score:
 			first   = visibilitySorter;
       second  = scoreSorter;
       third   = primaryTimeSorter;
