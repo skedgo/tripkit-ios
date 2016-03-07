@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TKAgendaInputType;
-
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -38,33 +36,33 @@ FOUNDATION_EXPORT NSString *const kTKAgendaFactoryTemplateCurrentLocation;
  @param currentLocation The last known `CLLocation` object available
  @param success         Block called on success. This will be called before returning.
  */
-- (void)buildAgendaTemplateForItems:(NSArray<id<TKAgendaInputType>> *)items
-                      withStartDate:(NSDate *)startDate
-                        withEndDate:(NSDate *)endDate
-              limitToDateComponents:(nullable NSDateComponents *)dateComponents
-                     stayCoordinate:(CLLocationCoordinate2D)stayCoordinate
-                       stayTimeZone:(NSTimeZone *)stayTimeZone
-                    currentLocation:(nullable CLLocation *)currentLocation
-                            success:(TKAgendaFactoryTemplate)success;
-
-/**
- Inserts the new track item at the correct position in the list of existing track items
- 
- @param trackItem Item to insert
- @param items     A mutable list of `SGTrackItem` objects into which the item will be inserted
- */
-+ (void)insertTrackItem:(id<TKAgendaInputType>)trackItem
-              intoItems:(NSMutableArray<id<TKAgendaInputType>> *)items;
-
-+ (BOOL)agendaInputShouldBeIgnored:(id<TKAgendaInputType>)trackItem;
-
-+ (BOOL)trackItem:(id<TKAgendaInputType>)trackItem
- containsLocation:(CLLocation *)location
-           atTime:(NSDate *)time;
-
-+ (BOOL)agendaItems:(NSArray<id<TKAgendaInputType>> *)agendaItems
-    containLocation:(CLLocation *)location
-             atTime:(NSDate *)time;
+//- (void)buildAgendaTemplateForItems:(NSArray<id<TKAgendaInputType>> *)items
+//                      withStartDate:(NSDate *)startDate
+//                        withEndDate:(NSDate *)endDate
+//              limitToDateComponents:(nullable NSDateComponents *)dateComponents
+//                     stayCoordinate:(CLLocationCoordinate2D)stayCoordinate
+//                       stayTimeZone:(NSTimeZone *)stayTimeZone
+//                    currentLocation:(nullable CLLocation *)currentLocation
+//                            success:(TKAgendaFactoryTemplate)success;
+//
+///**
+// Inserts the new track item at the correct position in the list of existing track items
+// 
+// @param trackItem Item to insert
+// @param items     A mutable list of `SGTrackItem` objects into which the item will be inserted
+// */
+//+ (void)insertTrackItem:(id<TKAgendaInputType>)trackItem
+//              intoItems:(NSMutableArray<id<TKAgendaInputType>> *)items;
+//
+//+ (BOOL)agendaInputShouldBeIgnored:(id<TKAgendaInputType>)trackItem;
+//
+//+ (BOOL)trackItem:(id<TKAgendaInputType>)trackItem
+// containsLocation:(CLLocation *)location
+//           atTime:(NSDate *)time;
+//
+//+ (BOOL)agendaItems:(NSArray<id<TKAgendaInputType>> *)agendaItems
+//    containLocation:(CLLocation *)location
+//             atTime:(NSDate *)time;
 
 @end
 NS_ASSUME_NONNULL_END

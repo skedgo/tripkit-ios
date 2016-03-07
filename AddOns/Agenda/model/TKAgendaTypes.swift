@@ -22,13 +22,8 @@ public enum TKAgendaInputItem {
   case Trip(TKAgendaTripInputType)
 }
 
-public protocol TKAgendaInputType {
-  var startDate: NSDate? { get }
-  var endDate: NSDate? { get }
-  var timeZone: NSTimeZone { get }
-}
-
-public enum TKAgendaEventKind {
+@objc
+public enum TKAgendaEventKind: Int {
   case CurrentLocation
   case Activity
   case Routine
@@ -36,9 +31,12 @@ public enum TKAgendaEventKind {
   case Home
 }
 
-public protocol TKAgendaEventInputType {
+@objc
+public protocol TKAgendaEventInputType: NSObjectProtocol {
   var startDate: NSDate? { get }
   var endDate: NSDate? { get }
+  
+  var timeZone: NSTimeZone { get }
   
   /**
    The coordinate where this input takes place. The agenda will try to route here. Invalid coordinates will be ignored.
@@ -64,7 +62,7 @@ public protocol TKAgendaEventInputType {
   /**
    - returns: The source model for this item. This won't be used by in any agenda calculations, but this is helpful for you to associate something with your input. Suggested default: nil.
    */
-  var sourceModel: Any? { get }
+  var sourceModel: AnyObject? { get }
 }
 
 extension TKAgendaInputItem {
@@ -79,7 +77,8 @@ extension TKAgendaInputItem {
 }
 
 
-public protocol TKAgendaTripInputType: TKAgendaInputType {
+@objc
+public protocol TKAgendaTripInputType: NSObjectProtocol {
   var departureTime: NSDate { get }
   var arrivalTime: NSDate { get }
   
@@ -107,17 +106,29 @@ public enum TKAgendaOutputItem {
   case TripPlaceholder(NSDate?, NSDate?)
 }
 
-public struct TKAgendaEventOutput {
+public class TKAgendaEventOutput: NSObject {
   let input: TKAgendaEventInputType
   let effectiveStart: NSDate?
   let effectiveEnd: NSDate?
   let isContinuation: Bool
+  
+  init(forInput input: TKAgendaEventInputType, effectiveStart: NSDate?, effectiveEnd: NSDate?, isContinuation: Bool) {
+    self.input = input
+    self.effectiveStart = effectiveStart
+    self.effectiveEnd = effectiveEnd
+    self.isContinuation = isContinuation
+  }
 }
 
-public struct TKAgendaTripOutput {
+public class TKAgendaTripOutput: NSObject {
   let input: TKAgendaTripInputType?
   let trip: STKTrip
-  let fromIdentifier: String?
-  let toIdentifier: String?
+  var fromIdentifier: String?
+  var toIdentifier: String?
+  
+  init(withTrip trip: STKTrip, forInput input: TKAgendaTripInputType?) {
+    self.trip = trip
+    self.input = input
+  }
 }
 

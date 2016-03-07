@@ -18,7 +18,7 @@
 #define kSGPriorityStay             1
 #define kSGPriorityHome             0
 
-@interface TKTripPlaceholder : NSObject <TKAgendaOutputType>
+@interface TKTripPlaceholder : NSObject
 
 @property (nonatomic, strong) NSNumber *key;
 
@@ -41,69 +41,53 @@
   return [NSDictionary dictionaryWithContentsOfURL:url];
 }
 
-- (void)fetchTripsForTrack:(nonnull id<TKAgendaType>)track
+- (void)fetchTripsForItems:(NSArray *)items
+                 startDate:(NSDate *)startDate
+                   endDate:(NSDate *)endDate
+                  inRegion:(SVKRegion *)region
        withPrivateVehicles:(nullable NSArray <id<STKVehicular>> *)privateVehicles
           withTripPatterns:(nullable NSArray *)tripPatterns
-          inTripKitContext:(nonnull NSManagedObjectContext *)tripKitContext
-                completion:(nullable void(^)(NSArray<id<TKAgendaOutputType>> * __nullable updatedItems, NSError * __nullable error))completion
+                completion:(nullable void(^)(NSArray * __nullable outputItems, NSError * __nullable error))completion
 {
-	SVKServer *server = [SVKServer sharedInstance];
-	[server requireRegions:^(NSError *error) {
-
-    // make sure we can connect to our server
-		if (error) {
-			if (completion) {
-				completion(nil, error);
-			}
-			return;
-		}
-		
-		// make sure we have a region
-		SVKRegion *region = [TKSkedgoifier regionForTrack:track];
-		if (! region) {
-			if (completion) {
-        NSError *noRegionError = [NSError errorWithCode:kTKSkedgoifierErrorTypeUser
-                                                message:@"Unsupported region."];
-				completion(nil, noRegionError);
-			}
-			return;
-		}
-	
-		// send query to server
-    NSDictionary *paras = [self queryParameters:track withRegion:region withPrivateVehicles:privateVehicles withTripPatterns:tripPatterns];
-    if (! paras) {
-      if (completion) {
-        // trivial agenda, no update necessary
-        completion(nil, nil);
-      }
-      return;
+  // send query to server
+  NSDictionary *paras = [self queryParametersForItems:items
+                                            startDate:startDate
+                                              endDate:endDate
+                                           withRegion:region
+                                  withPrivateVehicles:privateVehicles
+                                     withTripPatterns:tripPatterns];
+  if (!paras || paras.count <= 1) {
+    if (completion) {
+      // trivial agenda, no update necessary
+      completion(nil, nil);
     }
-    self.lastInputJSON = paras;
-    NSDate *halfWay = [track.startDate dateByAddingTimeInterval:[track.endDate timeIntervalSinceDate:track.startDate] / 2];
-    NSURL *url = [[self class] skedgoifyPathForDate:halfWay];
-    if (url) {
-      [paras writeToURL:url atomically:NO];
-    }
-    
-    [server initiateDataTaskWithMethod:@"POST"
-                                  path:@"skedgoify.json"
-                            parameters:paras
-                                region:region
-                               success:
-     ^(id responseObject) {
-       [self processServerResultFromJSON:responseObject
-                        inTripKitContext:tripKitContext
-                              completion:completion];
+    return;
+  }
+  self.lastInputJSON = paras;
+  NSDate *halfWay = [startDate dateByAddingTimeInterval:[endDate timeIntervalSinceDate:startDate] / 2];
+  NSURL *url = [[self class] skedgoifyPathForDate:halfWay];
+  if (url) {
+    [paras writeToURL:url atomically:NO];
+  }
+  
+  SVKServer *server = [SVKServer sharedInstance];
+  [server initiateDataTaskWithMethod:@"POST"
+                                path:@"skedgoify.json"
+                          parameters:paras
+                              region:region
+                             success:
+   ^(id responseObject) {
+     [self processServerResultFromJSON:responseObject
+                            completion:completion];
 
+   }
+                             failure:
+   ^(NSError *requestError) {
+     [SGKLog warn:NSStringFromClass([self class]) format:@"Skedgoify request failed with error: %@", requestError];
+     if (completion) {
+       completion(nil, requestError);
      }
-                               failure:
-     ^(NSError *requestError) {
-       [SGKLog warn:NSStringFromClass([self class]) format:@"Skedgoify request failed with error: %@", requestError];
-       if (completion) {
-         completion(nil, requestError);
-       }
-     }];
-	}];
+   }];
 }
 
 #pragma mark - Helper: keeping skedgoify.json inputs
@@ -134,38 +118,23 @@
 
 #pragma mark - Helper: building skegdoify.json
 
-- (NSDictionary *)queryParameters:(id<TKAgendaType>)track
-                       withRegion:(SVKRegion *)region
-              withPrivateVehicles:(nullable NSArray <id<STKVehicular>> *)privateVehicles
-                 withTripPatterns:(nullable NSArray *)tripPatterns
+- (NSDictionary *)queryParametersForItems:(NSArray *)items
+                                startDate:(NSDate *)startDate
+                                  endDate:(NSDate *)endDate
+                               withRegion:(SVKRegion *)region
+                      withPrivateVehicles:(nullable NSArray <id<STKVehicular>> *)privateVehicles
+                         withTripPatterns:(nullable NSArray *)tripPatterns
 {
   NSMutableDictionary *keysToItems = [NSMutableDictionary dictionary];
-  NSDictionary *paras =  [[self class] queryParametersForTrack:track
-                                                    withRegion:region
+  NSDictionary *paras =  [[self class] queryParametersForItems:items
+                                                     startDate:startDate
+                                                       endDate:endDate
+                                                      inRegion:region
                                            withPrivateVehicles:privateVehicles
                                               withTripPatterns:tripPatterns
                                               fillInKeysToItems:keysToItems];
   self.keyToItems = keysToItems;
   return paras;
-}
-
-+ (SVKRegion *)regionForTrack:(id<TKAgendaType>)track
-{
-  MKMapRect mapRect = MKMapRectNull;
-  for (id<TKAgendaInputType> trackItem in track.items) {
-    if ([trackItem conformsToProtocol:@protocol(TKAgendaEventInputType)]) {
-      id<TKAgendaEventInputType> event = (id<TKAgendaEventInputType>)trackItem;
-      CLLocationCoordinate2D coordinate = event.coordinate;
-      if (CLLocationCoordinate2DIsValid(coordinate)) {
-        MKMapPoint mapPoint = MKMapPointForCoordinate(coordinate);
-        MKMapRect newRect = MKMapRectMake(mapPoint.x, mapPoint.y, 0.0, 0.0);
-        mapRect = MKMapRectUnion(mapRect, newRect);
-      }
-    }
-  }
-  
-  MKCoordinateRegion coordinateRegion = MKCoordinateRegionForMapRect(mapRect);
-  return [[SVKRegionManager sharedInstance] regionForCoordinateRegion:coordinateRegion];
 }
 
 + (BOOL)coordinate:(CLLocationCoordinate2D)coordinate isCloseTo:(CLLocationCoordinate2D)other
@@ -177,8 +146,10 @@
   return [loc1 distanceFromLocation:loc2] < 250;
 }
 
-+ (NSDictionary *)queryParametersForTrack:(id<TKAgendaType>)track
-                               withRegion:(SVKRegion *)region
++ (NSDictionary *)queryParametersForItems:(NSArray *)items
+                                startDate:(NSDate *)startDate
+                                  endDate:(NSDate *)endDate
+                                 inRegion:(SVKRegion *)region
                       withPrivateVehicles:(nullable NSArray <id<STKVehicular>> *)privateVehicles
                          withTripPatterns:(nullable NSArray *)tripPatterns
                         fillInKeysToItems:(NSMutableDictionary *)keysToItems
@@ -186,7 +157,9 @@
   // this will access the agenda which refers managed object's. we need to make
   // sure we access those on the right thread, hence the wrapper.
   
-  NSArray *itemsPayload = [self payloadForTrack:track
+  NSArray *itemsPayload = [self payloadForItems:items
+                                      startDate:startDate
+                                        endDate:endDate
                             withPrivateVehicles:privateVehicles
                               fillInKeysToItems:keysToItems];
   if (! itemsPayload || itemsPayload.count <= 1) {
@@ -195,11 +168,11 @@
   }
   
   NSDictionary *framePayload = @{
-                                 @"startTime"	: @(floor([track.startDate timeIntervalSince1970])),
-                                 @"endTime"		: @(ceil([track.endDate timeIntervalSince1970])),
+                                 @"startTime"	: @(floor([startDate timeIntervalSince1970])),
+                                 @"endTime"		: @(ceil([endDate timeIntervalSince1970])),
 #ifdef DEBUG
-                                 @"startText"	: [track.startDate descriptionWithLocale:[NSLocale currentLocale]],
-                                 @"endText"		: [track.endDate descriptionWithLocale:[NSLocale currentLocale]],
+                                 @"startText"	: [startDate descriptionWithLocale:[NSLocale currentLocale]],
+                                 @"endText"		: [endDate descriptionWithLocale:[NSLocale currentLocale]],
 #endif
                                  };
   
@@ -216,11 +189,12 @@
           };
 }
 
-+ (NSArray *)payloadForTrack:(id<TKAgendaType>)track
++ (NSArray *)payloadForItems:(NSArray *)items
+                   startDate:(NSDate *)agendaStartDate
+                     endDate:(NSDate *)agendaEndDate
          withPrivateVehicles:(NSArray <id<STKVehicular>> *)privateVehicles
            fillInKeysToItems:(NSMutableDictionary *)keysToItems
 {
-  NSArray<id<TKAgendaInputType>> *items = track.items;
   if (items.count == 0) {
     return nil;
   }
@@ -235,7 +209,7 @@
   NSMutableDictionary *itemIDToKeyDict = [NSMutableDictionary dictionaryWithCapacity:items.count];
   
   // generate key
-	[items enumerateObjectsUsingBlock:^(id<TKAgendaInputType> inputItem, NSUInteger idx, BOOL *stop) {
+	[items enumerateObjectsUsingBlock:^(id inputItem, NSUInteger idx, BOOL *stop) {
 #pragma unused(stop)
     NSString *itemId = [NSString stringWithFormat:@"%p", inputItem];
     NSString *key = [@(idx) stringValue];
@@ -251,11 +225,13 @@
 	NSMutableArray *payload = [NSMutableArray arrayWithCapacity:items.count];
   
   __block NSDate *currentLocationTime = nil;
-	[items enumerateObjectsUsingBlock:^(id<TKAgendaInputType> inputItem, NSUInteger idx, BOOL *stop) {
+	[items enumerateObjectsUsingBlock:^(id inputItem, NSUInteger idx, BOOL *stop) {
 #pragma unused(stop)
-    if ([TKAgendaFactory agendaInputShouldBeIgnored:inputItem]) {
-      return;
-    }
+    
+#warning FIXME: ignore those items again
+//    if ([TKAgendaFactory agendaInputShouldBeIgnored:inputItem]) {
+//      return;
+//    }
     
     NSDictionary *data = nil;
     NSString *itemId = [NSString stringWithFormat:@"%p", inputItem];
@@ -268,16 +244,8 @@
     if ([inputItem conformsToProtocol:@protocol(TKAgendaTripInputType)]) {
       id<TKAgendaTripInputType> tripInput = (id<TKAgendaTripInputType>)inputItem;
       
-      NSDate *departureTime = inputItem.startDate;
-      if (!departureTime) {
-        ZAssert(false, @"All trips should have a start date.");
-        return;
-      }
-      NSDate *arrivalTime = inputItem.endDate;
-      if (!arrivalTime) {
-        ZAssert(false, @"All trips should have an end date.");
-        return;
-      }
+      NSDate *departureTime = tripInput.departureTime;
+      NSDate *arrivalTime = tripInput.arrivalTime;
       
       NSMutableDictionary *dataMutable = [NSMutableDictionary dictionary];
       dataMutable[@"class"]         = @"trip";
@@ -376,16 +344,16 @@
       // special cases
       if (idx == 0) {
         if (! startDate) {
-          startDate = [[track startDate] dateByAddingTimeInterval:-12 * 60 * 60]; // Tim wants extra padding
+          startDate = [agendaStartDate dateByAddingTimeInterval:-12 * 60 * 60]; // Tim wants extra padding
         } else {
-          startDate = [startDate laterDate:[track startDate]];  // cap at agenda's start
+          startDate = [startDate laterDate:agendaStartDate];  // cap at agenda's start
         }
       }
       if (idx == items.count - 1) {
         if (! endDate) {
-          endDate = [[track endDate] dateByAddingTimeInterval:12 * 60 * 60];
+          endDate = [agendaEndDate dateByAddingTimeInterval:12 * 60 * 60];
         } else {
-          endDate = [endDate earlierDate:[track endDate]]; // cap at agenda's end
+          endDate = [endDate earlierDate:agendaEndDate]; // cap at agenda's end
         }
       }
       if ([startDate timeIntervalSinceDate:endDate] > 0) {
@@ -420,8 +388,7 @@
 #pragma mark - Helper: Parsing skedgoify.json output
 
 - (void)processServerResultFromJSON:(id)json
-                   inTripKitContext:(NSManagedObjectContext *)tripKitContext
-                         completion:(nullable void(^)(NSArray<id<TKAgendaOutputType>> * __nullable updatedItems, NSError * __nullable error))completion
+                         completion:(nullable void(^)(NSArray * __nullable outputItems, NSError * __nullable error))completion
 {
   NSDictionary *result = json[@"result"];
   if (! result) {
@@ -440,7 +407,7 @@
   NSArray *track = result[@"track"];
   NSMutableDictionary *indexToTripGroups = [NSMutableDictionary dictionaryWithCapacity:track.count];
   NSMutableDictionary *indexToTripTrackDict = [NSMutableDictionary dictionaryWithCapacity:track.count];
-  NSMutableArray<id<TKAgendaOutputType>> *skedgoifiedItems = [NSMutableArray arrayWithCapacity:track.count];
+  NSMutableArray *skedgoifiedItems = [NSMutableArray arrayWithCapacity:track.count];
   [track enumerateObjectsUsingBlock:^(NSDictionary *trackDict, NSUInteger idx, BOOL *stop) {
 #pragma unused(stop)
     NSString *class = trackDict[@"class"];
@@ -451,7 +418,7 @@
         [SGKLog warn:NSStringFromClass([self class]) format:@"Still need to handle events without IDs!"];
         return; // skip this
       }
-      id<TKAgendaInputType> trackItem = self.keyToItems[itemKey];
+      id trackItem = self.keyToItems[itemKey];
       if (! trackItem) {
         ZAssert(false, @"Could not find track item with key '%@' in: %@", itemKey, self.keyToItems);
         return; // skip this
@@ -466,7 +433,7 @@
       
       if (! [keysSeenBefore containsObject:itemKey]) {
         // this is the time we get info of this item => set effective start + end
-        id<TKAgendaOutputType> outputItem = [[TKAgendaEventOutputItem alloc] initForInput:eventInput effectiveStart:effectiveStart effectiveEnd:effectiveEnd isContinuation:NO];
+        id outputItem = [[TKAgendaEventOutput alloc] initForInput:eventInput effectiveStart:effectiveStart effectiveEnd:effectiveEnd isContinuation:NO];
         [keysSeenBefore addObject:itemKey];
         [skedgoifiedItems addObject:outputItem];
       
@@ -476,7 +443,7 @@
         BOOL previousIsTrip = (idx > 0) && [track[idx - 1][@"class"] isEqualToString:@"trip"];
         if (previousIsTrip) {
           NSDate *continuationEnd = (idx < track.count - 1) ? effectiveEnd : nil;
-          id<TKAgendaOutputType> outputItem = [[TKAgendaEventOutputItem alloc] initForInput:eventInput effectiveStart:effectiveStart effectiveEnd:continuationEnd isContinuation:YES];
+          id outputItem = [[TKAgendaEventOutput alloc] initForInput:eventInput effectiveStart:effectiveStart effectiveEnd:continuationEnd isContinuation:YES];
           [skedgoifiedItems addObject:outputItem];
         }
       }
@@ -484,7 +451,7 @@
     } else if ([class isEqualToString:@"trip"]) {
       if (itemKey) {
         // the old trip is compatible
-        id<TKAgendaInputType> trackItem = self.keyToItems[itemKey];
+        id trackItem = self.keyToItems[itemKey];
         if (! trackItem) {
           [SGKLog warn:NSStringFromClass([self class]) format:@"Unexpected key in result: %@", trackDict];
           return; // skip this
@@ -498,7 +465,7 @@
         id<TKAgendaTripInputType> tripItem = (id<TKAgendaTripInputType>)trackItem;
         Trip *trip = tripItem.trip;
         if (trip) {
-          id<TKAgendaOutputType> outputItem = [[TKAgendaTripOutputItem alloc] initWithTrip:trip forInput:tripItem];
+          id outputItem = [[TKAgendaTripOutput alloc] initWithTrip:trip forInput:tripItem];
           [skedgoifiedItems addObject:outputItem];
         } else {
           // TODO: handle flights getting returned as matching
@@ -510,7 +477,7 @@
         NSNumber *index = @(idx);
         indexToTripGroups[index] = groups;
         indexToTripTrackDict[index] = trackDict;
-        id<TKAgendaOutputType> outputItem = [[TKTripPlaceholder alloc] initWithKey:index];
+        id outputItem = [[TKTripPlaceholder alloc] initWithKey:index];
         [skedgoifiedItems addObject:outputItem];
       }
     }
@@ -520,6 +487,7 @@
   NSArray *segmentTemplates = result[@"segmentTemplates"];
   NSArray *alerts = result[@"alerts"];
 
+  NSManagedObjectContext *tripKitContext = [[TKTripKit sharedInstance] tripKitContext];
   TKRoutingParser *parser = [[TKRoutingParser alloc] initWithTripKitContext:tripKitContext];
   NSDictionary *keyToItems = self.keyToItems;
   [parser parseAndAddResult:indexToTripGroups
@@ -532,7 +500,7 @@
 #pragma unused(stop)
        // Key matches the key that we passed on indexToTripGroups
        
-       NSUInteger index = [skedgoifiedItems indexOfObjectPassingTest:^BOOL(id<TKAgendaOutputType>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop2) {
+       NSUInteger index = [skedgoifiedItems indexOfObjectPassingTest:^BOOL(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop2) {
 #pragma unused(idx)
          if ([obj isKindOfClass:[TKTripPlaceholder class]]) {
            TKTripPlaceholder *placeholder = (TKTripPlaceholder *)obj;
@@ -549,13 +517,13 @@
          return;
        }
        Trip *trip = [trips firstObject];
-       id<TKAgendaTripOutputType> tripOutput = [[TKAgendaTripOutputItem alloc] initWithTrip:trip forInput:nil];
+       TKAgendaTripOutput *tripOutput = [[TKAgendaTripOutput alloc] initWithTrip:trip forInput:nil];
        
        NSDate *leaveAfter = nil, *arriveBy = nil;
        NSDictionary *tripTrackDict = indexToTripTrackDict[key];
        NSString *fromId = tripTrackDict[@"fromId"];
        if (fromId) {
-         id<TKAgendaInputType> fromItem = keyToItems[fromId];
+         id fromItem = keyToItems[fromId];
          if ([fromItem conformsToProtocol:@protocol(TKAgendaEventInputType)]) {
            id<TKAgendaEventInputType> fromEventInput = (id<TKAgendaEventInputType>)fromItem;
            
@@ -569,7 +537,7 @@
        }
        NSString *toId = tripTrackDict[@"toId"];
        if (toId) {
-         id<TKAgendaInputType> toItem = keyToItems[fromId];
+         id toItem = keyToItems[fromId];
          if ([toItem conformsToProtocol:@protocol(TKAgendaEventInputType)]) {
            id<TKAgendaEventInputType> toEventInput = (id<TKAgendaEventInputType>)toItem;
 

@@ -21,7 +21,15 @@ public protocol TKAgendaDataSource {
 }
 
 public protocol TKAgendaBuilderType {
-  func buildTrack(items: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]>
+  func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]>
+}
+
+extension TKAgendaBuilderType {
+  func buildTrack(forItems items: [TKAgendaInputItem], dateComponents: NSDateComponents) -> Observable<[TKAgendaOutputItem]> {
+    let startDate = dateComponents.earliestDate()
+    let endDate = dateComponents.latestDate()
+    return buildTrack(forItems: items, startDate: startDate, endDate: endDate, privateVehicles: [], tripPatterns: [])
+  }
 }
 
 /**
@@ -68,7 +76,10 @@ public class TKAgendaManager {
       fatalError("Data sources shalt not be empty")
     }
     
-    let trackItems = rawItems.flatMap(builder.buildTrack)
+    let trackItems = rawItems.flatMap { data in
+      // If that throws an error, we shouldn't propagate that up!
+      self.builder.buildTrack(forItems: data, dateComponents: dateComponents).asDriver(onErrorJustReturn: [])
+    }
     
     let agenda = TKSimpleAgenda(items: trackItems, dateComponents: dateComponents)
     agendas[dateComponents] = agenda
