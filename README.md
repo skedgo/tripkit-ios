@@ -77,9 +77,11 @@ TripKit has several required dependencies:
 
 
 
-## Optional dependencies
+## Optional features
 
 ### Logging
+
+Dependencies:
 
 * CocoaPods:
 ``` ruby
@@ -90,13 +92,34 @@ TODO: How to use this
 
 ### Booking features
 
+Dependencies:
+
 * CocoaPods:
 ``` ruby
   pod 'AFNetworking', '~> 2.5.3'
-  pod 'CocoaLumberjack'
 ```
 * Modules from [SkedGo's shared iOS code base](https://github.com/skedgo/shared-ios)
   * BookingKit
+
+TODO: How to use this
+
+### Agenda (Swift-only)
+
+Dependencies:
+
+* Cocoapods:
+``` ruby
+  pod 'RxSwift', '~> 2.0'
+```
+
+TODO: How to use this
+
+### Inter-app Communication
+
+Dependencies:
+
+* Modules from [SkedGo's shared iOS code base](https://github.com/skedgo/shared-ios)
+  * Actions
 
 TODO: How to use this
 
