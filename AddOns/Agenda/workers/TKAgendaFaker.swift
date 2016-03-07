@@ -128,6 +128,11 @@ private class FakeTrip: NSObject, STKTrip {
   func segmentsWithVisibility(visibility: STKTripSegmentVisibility) -> [STKTripSegment] {
     return [ FakeBusSegment() ]
   }
+  
+  @objc
+  func mainSegment() -> STKTripSegment {
+    return segmentsWithVisibility(.InSummary).first!
+  }
 }
 
 private class FakeBusSegment: NSObject, STKTripSegment {
