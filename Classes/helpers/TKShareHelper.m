@@ -122,8 +122,15 @@
                 inRegionNamed:(NSString *)regionName
                        filter:(NSString *)filter
 {
-  NSString *addendum = filter ? [NSString stringWithFormat:@"%@", [filter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]] : @"";
-  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/stop/%@/%@/%@", regionName, [stopCode stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], addendum];
+  NSString *addendum;
+  if (filter) {
+    addendum = [filter stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+  } else {
+    addendum = @"";
+  }
+  
+  NSString *escapedStopCode = [stopCode stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/stop/%@/%@/%@", regionName, escapedStopCode, addendum];
   return [NSURL URLWithString:urlString];
 }
 
@@ -154,7 +161,9 @@
                        atStopCode:(NSString *)stopCode
                     inRegionNamed:(NSString *)regionName
 {
-  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/service?regionName=%@&stopCode=%@&serviceID=%@", regionName, [stopCode stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], [serviceID stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+  NSString *escapedStopCode = [stopCode stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+  NSString *escapedServiceID = [serviceID stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/service?regionName=%@&stopCode=%@&serviceID=%@", regionName, escapedStopCode, escapedServiceID];
   return [NSURL URLWithString:urlString];
 }
 
