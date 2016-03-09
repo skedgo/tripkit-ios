@@ -78,7 +78,7 @@ public class TKAgendaManager {
     
     let trackItems = rawItems.flatMap { data in
       // If that throws an error, we shouldn't propagate that up!
-      self.builder.buildTrack(forItems: data, dateComponents: dateComponents).asDriver(onErrorJustReturn: [])
+      self.builder.buildTrack(forItems: data, dateComponents: dateComponents).asDriver(onErrorDriveWith: Observable.empty().asDriver(onErrorJustReturn:[]))
     }
     
     let agenda = TKSimpleAgenda(items: trackItems, dateComponents: dateComponents)
