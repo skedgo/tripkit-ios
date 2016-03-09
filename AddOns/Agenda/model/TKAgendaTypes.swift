@@ -17,6 +17,12 @@ public protocol TKAgendaType {
   var items: Observable<[TKAgendaOutputItem]> { get }
 }
 
+extension TKAgendaType {
+  func applies(forDateComponents components: NSDateComponents) -> Bool {
+    return components.earliestDate() == startDate
+  }
+}
+
 public enum TKAgendaInputItem {
   case Event(TKAgendaEventInputType)
   case Trip(TKAgendaTripInputType)
