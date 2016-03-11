@@ -401,7 +401,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.totalCalories        = tripDict[@"caloriesCost"]         ?: trip.totalCalories;
       trip.totalCarbon          = tripDict[@"carbonCost"]           ?: trip.totalCarbon;
       trip.totalPrice           = tripDict[@"moneyCost"]            ?: trip.totalPrice;
-      trip.totalPriceUSD        = tripDict[@"moneyCostUSD"]         ?: trip.totalPriceUSD;
+      trip.totalPriceUSD        = tripDict[@"moneyUSDCost"]         ?: trip.totalPriceUSD;
       trip.currencySymbol       = tripDict[@"currencySymbol"]       ?: trip.currencySymbol;
       trip.totalHassle          = tripDict[@"hassleCost"]           ?: trip.totalHassle;
       trip.totalScore           = tripDict[@"weightedScore"]        ?: trip.totalScore;
