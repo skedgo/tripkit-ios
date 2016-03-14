@@ -8,18 +8,55 @@
 
 import Foundation
 
+public final class RegionInformation: NSObject {
+  
+  public let publicTransportModes: [ModeInfo]
+  public let allowsBicyclesOnPublicTransport: Bool
+  public let supportsConcessionPricing: Bool
+  public let hasWheelchairInformation: Bool
+  public let paratransitInformation: ParatransitInformation?
+  
+  private init(transitModes: [ModeInfo], allowsBicyclesOnPublicTransport: Bool, hasWheelchairInformation: Bool, supportsConcessionPricing: Bool, paratransitInformation: ParatransitInformation?) {
+    self.publicTransportModes = transitModes
+    self.allowsBicyclesOnPublicTransport = allowsBicyclesOnPublicTransport
+    self.hasWheelchairInformation = hasWheelchairInformation
+    self.supportsConcessionPricing = supportsConcessionPricing
+    self.paratransitInformation = paratransitInformation
+  }
+  
+  private class func fromJSONResponse(response: AnyObject?) -> RegionInformation? {
+    guard let JSON = response as? [String: AnyObject],
+      let regions = JSON["regions"] as? [[String: AnyObject]],
+      let region = regions.first else {
+        return nil
+    }
+    
+    let transitModes = ModeInfo.fromJSONResponse(response)
+    let bicyclesOnTransit = region["allowsBicyclesOnPublicTransport"] as? Bool ?? false
+    let wheelies = region["hasWheelchairInformation"] as? Bool ?? false
+    let concession = region["supportsConcessionPricing"] as? Bool ?? false
+    let para = ParatransitInformation.fromJSONResponse(response)
+    
+    return RegionInformation(transitModes: transitModes,
+      allowsBicyclesOnPublicTransport: bicyclesOnTransit,
+      hasWheelchairInformation: wheelies,
+      supportsConcessionPricing: concession,
+      paratransitInformation: para)
+  }
+}
+
 /**
  Informational class for paratransit information (i.e., transport for people with disabilities).
  Contains name of service, URL with more information and phone number.
  
  - SeeAlso: `TKBuzzInfoProvider`'s `fetchParatransitInformation`
  */
-public class ParatransitInformation: NSObject {
-  let name: String
-  let URL: String
-  let number: String
+public final class ParatransitInformation: NSObject {
+  public let name: String
+  public let URL: String
+  public let number: String
   
-  init(name: String, URL: String, number: String) {
+  private init(name: String, URL: String, number: String) {
     self.name = name
     self.URL = URL
     self.number = number
@@ -54,6 +91,19 @@ extension ModeInfo {
 }
 
 extension TKBuzzInfoProvider {
+
+  /**
+   Asynchronously fetches additional region information for the provided region.
+   */
+  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: RegionInformation? -> Void)
+  {
+    return fetchRegionInfo(
+      region,
+      transformer: RegionInformation.fromJSONResponse,
+      completion: completion
+    )
+  }
+  
   
   /**
    Asynchronously fetches paratransit information for the provided region.
