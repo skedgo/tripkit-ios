@@ -15,6 +15,7 @@ public protocol TKAgendaType {
   var startDate: NSDate { get }
   var endDate: NSDate { get }
   var items: Observable<[TKAgendaOutputItem]> { get }
+  var lastError: Observable<ErrorType?> { get }
 }
 
 extension TKAgendaType {
