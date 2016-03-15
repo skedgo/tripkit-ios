@@ -1,3 +1,4 @@
+
 //
 //  RGAgendaLogic.swift
 //  RioGo
@@ -64,10 +65,11 @@ public class TKAgendaManager {
   private let dataSources: [TKAgendaDataSource]
   private let builder: TKAgendaBuilderType
   
-  private var agendas = [NSDateComponents : TKAgendaType]()
+  private var agendas = [String : TKAgendaType]()
   
   public func agenda(dateComponents: NSDateComponents) -> TKAgendaType {
-    if let agenda = agendas[dateComponents] {
+    let key = "\(dateComponents.year)-\(dateComponents.month)-\(dateComponents.day)"
+    if let agenda = agendas[key] {
       return agenda
     }
     
@@ -76,13 +78,18 @@ public class TKAgendaManager {
       fatalError("Data sources shalt not be empty")
     }
     
+    let lastError = Variable<ErrorType?>(nil)
     let trackItems = rawItems.flatMap { data in
       // If that throws an error, we shouldn't propagate that up!
-      self.builder.buildTrack(forItems: data, dateComponents: dateComponents).asDriver(onErrorDriveWith: Observable.empty().asDriver(onErrorJustReturn:[]))
+      self.builder.buildTrack(forItems: data, dateComponents: dateComponents).asDriver {
+        error in
+        lastError.value = error
+        return Observable.empty().asDriver(onErrorJustReturn: [])
+      }
     }
     
-    let agenda = TKSimpleAgenda(items: trackItems, dateComponents: dateComponents)
-    agendas[dateComponents] = agenda
+    let agenda = TKSimpleAgenda(items: trackItems, lastError: lastError.asObservable(), dateComponents: dateComponents)
+    agendas[key] = agenda
     return agenda
   }
 }
@@ -91,9 +98,11 @@ private struct TKSimpleAgenda: TKAgendaType {
   let startDate: NSDate
   let endDate: NSDate
   let items: Observable<[TKAgendaOutputItem]>
+  let lastError: Observable<ErrorType?>
   
-  init(items: Observable<[TKAgendaOutputItem]>, dateComponents: NSDateComponents) {
+  init(items: Observable<[TKAgendaOutputItem]>, lastError: Observable<ErrorType?>, dateComponents: NSDateComponents) {
     self.items = items
+    self.lastError = lastError
     self.startDate = dateComponents.earliestDate()
     self.endDate = dateComponents.latestDate()
   }
