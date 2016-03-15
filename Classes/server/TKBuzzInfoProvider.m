@@ -28,7 +28,7 @@ typedef enum {
   NSParameterAssert(date);
   NSParameterAssert(completion);
   
-  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
 	// construct the parameters
   if (! stop.stopCode) {
@@ -152,7 +152,7 @@ typedef enum {
   NSParameterAssert(date);
   NSParameterAssert(completion);
   
-  ZAssert(table.tripKitContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(table.tripKitContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
 	SVKServer *server = [SVKServer sharedInstance];
   [server requireRegions:^(NSError *error) {
@@ -216,7 +216,7 @@ typedef enum {
   NSParameterAssert(date);
   NSParameterAssert(completion);
   
-  ZAssert(service.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(service.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
 
   ZAssert(service.managedObjectContext, @"Service with a context needed.");
@@ -367,7 +367,7 @@ typedef enum {
   NSParameterAssert(service);
   NSParameterAssert(responseDict);
   
-  ZAssert(service.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(service.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
   NSManagedObjectContext *context = service.managedObjectContext;
   
@@ -407,7 +407,7 @@ typedef enum {
        intoTripKitContext:(NSManagedObjectContext *)context
 
 {
-  ZAssert(context.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(context.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
   BOOL forSingleStop = (stopOrNil != nil);
   
@@ -551,7 +551,7 @@ typedef enum {
 + (BOOL)addStop:(StopLocation *)stop
    fromResponse:(id)responseObject
 {
-  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
   NSManagedObjectContext *tripKitContext = stop.managedObjectContext;
   
