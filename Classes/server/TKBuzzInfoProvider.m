@@ -34,8 +34,10 @@ typedef enum {
   if (! stop.stopCode) {
     // this can happen if the stop got deleted while we were looking at it.
     if (failure) {
-      failure([NSError errorWithCode:kSGInfoProviderErrorStopWithoutCode
-                             message:@"Provided stop has no code or children."]);
+      dispatch_async(dispatch_get_main_queue(), ^{
+        failure([NSError errorWithCode:kSGInfoProviderErrorStopWithoutCode
+                               message:@"Provided stop has no code or children."]);
+      });
     }
     return;
   }
@@ -44,15 +46,21 @@ typedef enum {
   [server requireRegions:^(NSError *error) {
     if (error) {
       if (failure) {
-        failure(error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          failure(error);
+        });
       }
       return;
     }
     
     SVKRegion *region = stop.region;
     if (! region) {
-      failure([NSError errorWithCode:kSVKErrorTypeInternal
-                             message:@"Region not fetched yet."]);
+      if (failure) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          failure([NSError errorWithCode:kSVKErrorTypeInternal
+                                 message:@"Region not fetched yet."]);
+        });
+      }
       return;
     }
     
@@ -107,10 +115,12 @@ typedef enum {
        }];
      }
                                failure:
-     ^(NSError *anError) {
-       if (failure) {
-         failure(anError);
-       }
+       ^(NSError * _Nullable anError) {
+         if (failure) {
+           dispatch_async(dispatch_get_main_queue(), ^{
+             failure(anError);
+           });
+         }
      }];
   }];
 }
@@ -148,7 +158,9 @@ typedef enum {
   [server requireRegions:^(NSError *error) {
     if (error) {
       if (failure) {
-        failure(error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          failure(error);
+        });
       }
       return;
     }
@@ -187,7 +199,9 @@ typedef enum {
                                failure:
      ^(NSError *operationError) {
        if (failure) {
-         failure(operationError);
+         dispatch_async(dispatch_get_main_queue(), ^{
+           failure(operationError);
+         });
        }
      }];
   }];
