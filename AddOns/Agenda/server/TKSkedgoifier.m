@@ -259,16 +259,18 @@
       dataMutable[@"startLocation"] = [STKParserHelper dictionaryForCoordinate:tripInput.origin];
       dataMutable[@"endLocation"]   = [STKParserHelper dictionaryForCoordinate:tripInput.destination];
       
-      Trip *trip = tripInput.trip;
-      if (trip) {
+      id<STKTrip> trip = tripInput.trip;
+      if ([trip isKindOfClass:[Trip class]]) {
         __block NSArray<NSString *> *modes;
         __block NSArray<NSDictionary <NSString *, id> *> *vehiclesInfo;
         
-        [trip.managedObjectContext performBlockAndWait:^{
-          modes = [[trip usedModeIdentifiers] allObjects];
+        Trip *tripKitTrip = (Trip *)trip;
+        
+        [tripKitTrip.managedObjectContext performBlockAndWait:^{
+          modes = [[tripKitTrip usedModeIdentifiers] allObjects];
 
           // do we use vehicles?
-          NSSet *vehicleSegments = [trip vehicleSegments];
+          NSSet *vehicleSegments = [tripKitTrip vehicleSegments];
           if (vehicleSegments.count > 0) {
             NSMutableArray *vehiclesArray = [NSMutableArray arrayWithCapacity:vehicleSegments.count];
             for (TKSegment *segment in vehicleSegments) {
@@ -468,7 +470,7 @@
         }
         
         id<TKAgendaTripInputType> tripItem = (id<TKAgendaTripInputType>)trackItem;
-        Trip *trip = tripItem.trip;
+        id<STKTrip> trip = tripItem.trip;
         if (trip) {
           id outputItem = [[TKAgendaTripOutput alloc] initWithTrip:trip forInput:tripItem];
           [skedgoifiedItems addObject:outputItem];
