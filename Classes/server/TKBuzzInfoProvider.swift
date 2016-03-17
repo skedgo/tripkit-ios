@@ -196,7 +196,7 @@ extension TKBuzzInfoProvider {
     ]
     
     SVKServer.sharedInstance().initiateDataTaskWithMethod(
-      "POST",
+      "GET",
       path: "locationInfo.json",
       parameters: paras,
       region: region,
