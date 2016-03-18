@@ -56,9 +56,12 @@
   if ([sharedDefaults boolForKey:TKDefaultsKeyProfileTransportConcessionPricing]) {
     [paras setValue:@(YES) forKey:@"conc"];
   }
-  [paras setValue:@([sharedDefaults integerForKey:TKDefaultsKeyProfileTransportWalkSpeed])		forKey:@"ws"];
-  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportWalkMaxDuration]  forKey:@"wm"]; // optional
-  [paras setValue:@([sharedDefaults integerForKey:TKDefaultsKeyProfileTransportTransferTime]) forKey:@"tt"];
+  
+  // All optional
+  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportWalkSpeed] forKey:@"ws"];
+  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportWalkMaxDuration] forKey:@"wm"];
+  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportTransferTime] forKey:@"tt"];
+  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportEmissions] forKey:@"co2"];
   
   // beta features
   if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableFlights]) {
@@ -118,6 +121,20 @@
 + (void)setCyclingSpeed:(TKSettingsSpeed)speed
 {
   [[NSUserDefaults sharedDefaults] setInteger:(NSInteger)speed forKey:TKDefaultsKeyProfileTransportCyclingSpeed];
+}
+
++ (void)setEmissions:(float)gramsCO2PerKm forModeIdentifier:(NSString *)modeIdentifier
+{
+  NSMutableDictionary *mutable = nil;
+  id previous = [[NSUserDefaults sharedDefaults] objectForKey:TKDefaultsKeyProfileTransportEmissions];
+  if ([previous isKindOfClass:[NSDictionary class]]) {
+    mutable = [NSMutableDictionary dictionaryWithDictionary:previous];
+  } else {
+    mutable = [NSMutableDictionary dictionaryWithCapacity:1];
+  }
+  [mutable setObject:@(gramsCO2PerKm) forKey:modeIdentifier];
+  [[NSUserDefaults sharedDefaults] setObject:[NSDictionary dictionaryWithDictionary:mutable]
+                                      forKey:TKDefaultsKeyProfileTransportEmissions];
 }
 
 @end

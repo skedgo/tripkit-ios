@@ -56,4 +56,10 @@ typedef NS_ENUM(NSInteger, TKSettingsSpeed) {
  */
 + (void)setCyclingSpeed:(TKSettingsSpeed)speed;
 
+/**
+ @param gramsCO2PerKm Emissions for supplied mode identifier in grams of CO2 per kilometre
+ @param modeIdentifier Mode identifier for which to apply these emissions
+ */
++ (void)setEmissions:(float)gramsCO2PerKm forModeIdentifier:(NSString *)modeIdentifier;
+
 @end
