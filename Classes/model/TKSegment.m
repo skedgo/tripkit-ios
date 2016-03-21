@@ -629,6 +629,17 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
+- (NSURL *)bookingQuickInternalURL
+{
+  NSDictionary *bookingData = self.reference.bookingData;
+  NSString *URLString = bookingData[@"quickBookingsUrl"];
+  if (URLString) {
+    return [NSURL URLWithString:URLString];
+  } else {
+    return nil;
+  }
+}
+
 - (NSArray *)bookingExternalActions
 {
   NSDictionary *bookingData = self.reference.bookingData;
