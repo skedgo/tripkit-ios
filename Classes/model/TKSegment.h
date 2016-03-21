@@ -37,7 +37,7 @@ typedef enum {
 NS_ASSUME_NONNULL_BEGIN
 @interface TKSegment : NSObject <STKDirectionalTimePoint, SGURLShareable, UIActivityItemSource, STKTripSegment>
 
-@property (nonatomic, strong, nonnull) id<MKAnnotation> start;
+@property (nonatomic, strong, nullable) id<MKAnnotation> start;
 @property (nonatomic, strong, nullable) id<MKAnnotation> end;
 
 @property (nonatomic, weak, nullable) TKSegment *previous;

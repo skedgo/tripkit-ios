@@ -82,7 +82,7 @@
 {
 #pragma unused(previous, next)
   // never break these up. we assume that dls entries to different locations are never displayed together.
-  return SGKGroupingEdgeToEdge;
+  return SGKGrouping_EdgeToEdge;
 }
 
 @end

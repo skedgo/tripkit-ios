@@ -203,13 +203,13 @@
   BOOL sameAsBefore = [previous.searchString isEqualToString:self.searchString];
   BOOL sameAsAfter  = [next.searchString isEqualToString:self.searchString];
   if (sameAsBefore && sameAsAfter) {
-    return SGKGroupingMiddle;
+    return SGKGrouping_Middle;
   } else if (sameAsBefore) {
-    return SGKGroupingEnd;
+    return SGKGrouping_End;
   } else if (sameAsAfter) {
-    return SGKGroupingStart;
+    return SGKGrouping_Start;
   } else {
-    return SGKGroupingIndividual;
+    return SGKGrouping_Individual;
   }
 }
 
