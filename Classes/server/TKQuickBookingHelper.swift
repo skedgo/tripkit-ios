@@ -63,7 +63,7 @@ extension TKQuickBooking {
   private init?(withDictionary dictionary: [NSString: AnyObject]) {
     guard let bookingURLString = dictionary["bookingURL"] as? String,
           let bookingURL = NSURL(string: bookingURLString),
-          let title = dictionary["bookingURL"] as? String
+          let title = dictionary["title"] as? String
       else {
         return nil
     }
