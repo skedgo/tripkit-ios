@@ -9,9 +9,6 @@
 import Foundation
 
 struct TKQuickBookingPrice {
-  /// Localised human-friendly string, e.g., "$10"
-  let string: String
-  
   /// Price in local currency, typically not in smallest unit, but dollars
   let localCost: Float
   
@@ -22,6 +19,9 @@ struct TKQuickBookingPrice {
 struct TKQuickBooking {
   /// Localised identifying this booking option
   let title: String
+
+  /// Localised description
+  let subtitle: String?
   
   /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`.
   let bookingURL: NSURL
@@ -31,7 +31,10 @@ struct TKQuickBooking {
   
   /// Optional price for this option
   let price: TKQuickBookingPrice?
-  
+
+  /// Localised human-friendly string, e.g., "$10"
+  let priceString: String?
+
   /// Optional ETA for this option. This is the expected waiting time.
   let ETA: NSTimeInterval?
 }
@@ -68,6 +71,7 @@ extension TKQuickBooking {
         return nil
     }
     
+    let subtitle = dictionary["subtitle"] as? String
     let imageURL: NSURL?
     if let URLString = dictionary["imageURL"] as? String, URL = NSURL(string: URLString) {
       imageURL = URL
@@ -75,18 +79,18 @@ extension TKQuickBooking {
       imageURL = nil
     }
     
+    let priceString = dictionary["priceString"] as? String
     let price: TKQuickBookingPrice?
-    if let string = dictionary["priceString"] as? String,
-       let local = dictionary["price"] as? Float,
+    if let local = dictionary["price"] as? Float,
        let USD = dictionary["USDPrice"] as? Float {
-        price = TKQuickBookingPrice(string: string, localCost: local, USDCost: USD)
+        price = TKQuickBookingPrice(localCost: local, USDCost: USD)
     } else {
       price = nil
     }
     
     let ETA = dictionary["ETA"] as? NSTimeInterval
     
-    self.init(title: title, bookingURL: bookingURL, imageURL: imageURL, price: price, ETA: ETA)
+    self.init(title: title, subtitle: subtitle, bookingURL: bookingURL, imageURL: imageURL, price: price, priceString: priceString, ETA: ETA)
   }
 }
 
