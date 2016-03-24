@@ -621,7 +621,8 @@
     // To add when FlitWays allows deep-link
     
   } else if (partnerKey) {
-    // https://flitways.com/api/link?partner_key=PARTNER_KEY&pick=PICKUP_ADDRESS&destination=DESTINATION_ADDRESS&trip_date=PICKUP_DATETIME
+    // See https://flitways.com/deeplink
+    // https://flitways.com/api/link?key=PARTNER_KEY&pickup=PICKUP_ADDRESS&destination=DESTINATION_ADDRESS&trip_date=PICKUP_DATETIME
     // Partner Key – Required
     // Pick Up Address – Optional
     // Destination – Optional
@@ -639,11 +640,11 @@
         ^(NSString * _Nullable dropOffAddress) {
           NSMutableString *urlString = [NSMutableString stringWithString:@"https://flitways.com/api/link"];
           
-          [urlString appendFormat:@"?partner_key=%@", partnerKey];
+          [urlString appendFormat:@"?key=%@", partnerKey];
           
           if (pickupAddress) {
             NSString *encoded = [pickupAddress stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            [urlString appendFormat:@"&pick=%@", encoded];
+            [urlString appendFormat:@"&pickup=%@", encoded];
           }
 
           if (dropOffAddress) {
