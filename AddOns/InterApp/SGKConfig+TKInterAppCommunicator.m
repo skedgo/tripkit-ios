@@ -20,16 +20,6 @@
   return self.configuration[@"TKInterAppCommunicator"][@"gocatchReferralCode"];
 }
 
-- (nullable NSString *)ingogoCouponPrompt
-{
-  return self.configuration[@"TKInterAppCommunicator"][@"ingogoCouponPrompt"];
-}
-
-- (nullable NSString *)ingogoCouponCode
-{
-  return self.configuration[@"TKInterAppCommunicator"][@"ingogoCouponCode"];
-}
-
 - (nullable NSString *)googleMapsCallback
 {
   return self.configuration[@"TKInterAppCommunicator"][@"googleMapsCallback"];

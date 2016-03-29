@@ -22,16 +22,6 @@
 - (nullable NSString *)gocatchReferralCode;
 
 /**
- @return Something like 'ingogo a Taxi ($5 credit^)'
- */
-- (nullable NSString *)ingogoCouponPrompt;
-
-/**
- @return Something like 'TGS1'
- */
-- (nullable NSString *)ingogoCouponCode;
-
-/**
  @return something like 'tripgo://?resume=true&x-source=TripGo'
  */
 - (nullable NSString *)googleMapsCallback;
