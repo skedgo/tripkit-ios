@@ -241,12 +241,9 @@
     return NSLocalizedStringFromTable(@"Book with Uber", @"TripKit", nil);
     
   } else if ([action isEqualToString:@"ingogo"]) {
-    NSString *prompt = [[SGKConfig sharedInstance] ingogoCouponPrompt];
-    if ([self deviceHasIngogo] || !prompt) {
-      return NSLocalizedStringFromTable(@"ingogo a Taxi", @"TripKit", nil);
-    } else {
-      return prompt;
-    }
+    return [self deviceHasIngogo]
+    ? NSLocalizedStringFromTable(@"ingogo a Taxi", @"TripKit", nil)
+    : NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil);
     
   } else if ([action hasPrefix:@"lyft"]) { // also lyft_line, etc.
     return [self deviceHasLyft]
@@ -296,7 +293,6 @@
     
   } else if ([action isEqualToString:@"ingogo"]) {
     [self launchIngogoForSegment:segment
-               forViewController:controller
                 openStoreHandler:openStoreHandler];
     
   } else if ([action hasPrefix:@"lyft"]) { // also lyft_line, etc.
@@ -444,7 +440,6 @@
 }
 
 + (void)launchIngogoForSegment:(TKSegment *)segment
-             forViewController:(UIViewController * __nonnull)controller
              openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
 {
 #pragma unused(segment) // ingogo doesn't support that yet
@@ -455,35 +450,10 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
     
   } else {
-    NSString *couponCode = [[SGKConfig sharedInstance] ingogoCouponCode];
-    if (couponCode) {
-      SGActions *alert = [[SGActions alloc] initWithTitle:NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil)];
-      alert.type = UIAlertControllerStyleAlert;
-      alert.hasCancel = YES;
-      alert.message = [NSString stringWithFormat:NSLocalizedStringFromTable(@"CouponCodeIngogoFormat", @"TripKit", "Description for how to redeem the coupon code for ingogo. %couponCode is provided."), couponCode];
-      
-      [alert addAction:NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil) handler:^{
-        // copy code to paste board
-        UIPasteboard *pasteboard = [UIPasteboard pasteboardWithName:UIPasteboardNameGeneral
-                                                             create:NO];
-        [pasteboard setString:couponCode];
-        
-        if (openStoreHandler) {
-          openStoreHandler(@(TKInterAppCommunicatorITunesAppIDIngogo));
-        } else {
-          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
-        }
-      }];
-      
-      [alert showForSender:nil inController:controller];
-
-
+    if (openStoreHandler) {
+      openStoreHandler(@(TKInterAppCommunicatorITunesAppIDIngogo));
     } else {
-      if (openStoreHandler) {
-        openStoreHandler(@(TKInterAppCommunicatorITunesAppIDIngogo));
-      } else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
-      }
+      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
     }
   }
 }
