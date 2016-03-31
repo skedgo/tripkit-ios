@@ -26,6 +26,9 @@ struct TKQuickBooking {
   /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`.
   let bookingURL: NSURL
   
+  /// URL to fetch updated trip that's using this booking options. Only present if there would be a change to the trip.
+  let tripUpdateURL: NSURL?
+  
   /// Optional URL for image identifying this booking option
   let imageURL: NSURL?
   
@@ -90,7 +93,10 @@ extension TKQuickBooking {
     
     let ETA = dictionary["ETA"] as? NSTimeInterval
     
-    self.init(title: title, subtitle: subtitle, bookingURL: bookingURL, imageURL: imageURL, price: price, priceString: priceString, ETA: ETA)
+    let tripUpdateURLString = dictionary["tripUpdateURL"] as? String
+    let tripUpdateURL = tripUpdateURLString != nil ? NSURL(string: tripUpdateURLString!) : nil
+    
+    self.init(title: title, subtitle: subtitle, bookingURL: bookingURL, tripUpdateURL: tripUpdateURL, imageURL: imageURL, price: price, priceString: priceString, ETA: ETA)
   }
 }
 
