@@ -623,7 +623,7 @@
           }
 
           NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-          formatter.dateFormat = @"dd/MM/YYYY hh:mm a";
+          formatter.dateFormat = @"dd/MM/yyyy hh:mm a";
           formatter.timeZone = [segment timeZone];
           NSString *dateString = [formatter stringFromDate:segment.departureTime];
           NSString *encoded = [dateString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
