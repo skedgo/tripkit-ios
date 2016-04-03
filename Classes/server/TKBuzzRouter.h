@@ -54,6 +54,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateTrip:(Trip *)trip
 completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion;
 
+- (void)updateTrip:(Trip *)trip
+           fromURL:(NSURL *)URL
+        completion:(void(^)(NSURL *URL, Trip * __nullable trip, NSError * __nullable error))completion;
+
 + (NSString *)urlForRoutingRequest:(TripRequest *)tripRequest
                withModeIdentifiers:(nullable NSSet *)modeIdentifiers;
 

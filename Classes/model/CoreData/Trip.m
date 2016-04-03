@@ -274,6 +274,11 @@ typedef NSUInteger SGTripFlag;
   return _sortedSegments;
 }
 
+- (void)clearSegmentCaches
+{
+  _sortedSegments = nil;
+}
+
 - (BOOL)timesAreRealTime
 {
   for (TKSegment *segment in self.segments) {

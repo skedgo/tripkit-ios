@@ -432,8 +432,14 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
               break;
             }
           }
-        } else if (unprocessedTemplateDict
-                   || YES == [SegmentTemplate segmentTemplateHashCode:hashCode existsInTripKitContext:self.context]) {
+          if (!reference) {
+            [trip clearSegmentCaches];
+          }
+        }
+        
+        if (!reference
+            && (unprocessedTemplateDict
+                   || YES == [SegmentTemplate segmentTemplateHashCode:hashCode existsInTripKitContext:self.context])) {
           reference = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SegmentReference class]) inManagedObjectContext:self.context];
         }
         

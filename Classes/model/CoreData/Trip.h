@@ -136,6 +136,10 @@
  */
 - (nonnull TKSegment *)mainSegment;
 
+/* Call this before changing the segments of a trip.
+ */
+- (void)clearSegmentCaches;
+
 /* The first public transport segment of the trip
  */
 - (nullable TKSegment *)firstPublicTransport;
