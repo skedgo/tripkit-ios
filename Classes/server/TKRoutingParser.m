@@ -492,7 +492,8 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           
         } else {
           // private transport
-          [reference setBookingData:refDict[@"booking"]];
+          NSDictionary *bookingData = [self mergedNewBookingData:refDict[@"booking"] into:reference.bookingData];
+          [reference setBookingData:bookingData];
           [reference setSharedVehicleData:refDict[@"sharedVehicle"]];
           [reference setVehicleUUID:refDict[@"vehicleUUID"]];
         }
@@ -590,6 +591,23 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
     tripToUpdate.tripGroup.visibility = updateTripVisibility;
   }
   return tripsToReturn;
+}
+
+- (nullable NSDictionary *)mergedNewBookingData:(nullable NSDictionary *)newData into:(nullable NSDictionary *)oldData
+{
+  if (!newData) {
+    return oldData;
+  }
+  if (!oldData) {
+    return newData;
+  }
+  
+  NSMutableDictionary *merged = [oldData mutableCopy];
+  [newData enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+#pragma unused(stop)
+    [merged setObject:obj forKey:key];
+  }];
+  return merged;
 }
 
 @end
