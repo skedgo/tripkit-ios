@@ -47,6 +47,11 @@ class TKQuickBookingHelper {
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
   class func fetchQuickBookings(forSegment segment: TKSegment, completion: [TKQuickBooking] -> Void) {
+    if let stored = segment.storedQuickBookings {
+      completion(stored)
+      return
+    }
+    
     guard let bookingsURL = segment.bookingQuickInternalURL() else {
       completion([])
       return
@@ -59,6 +64,7 @@ class TKQuickBookingHelper {
         return
       }
       
+      segment.storeQuickBookings(fromArray: array)
       let bookings = array.flatMap { TKQuickBooking(withDictionary: $0) }
       completion(bookings)
     }
@@ -100,3 +106,36 @@ extension TKQuickBooking {
   }
 }
 
+extension TKSegment {
+  private static let quickBookingKey = "TKQuickBookings"
+  private static let quickBookingIndexKey = "TKQuickBookingsActiveIndex"
+  
+  var storedQuickBookings: [TKQuickBooking]? {
+    get {
+      if let payloads = payloadForKey(TKSegment.quickBookingKey) as? [[NSString: AnyObject]] {
+        return payloads.flatMap { TKQuickBooking(withDictionary: $0) }
+      } else {
+        return nil
+      }
+    }
+  }
+  
+  var activeIndexQuickBooking: Int? {
+    get {
+      if let bookings = storedQuickBookings,
+         let index = payloadForKey(TKSegment.quickBookingIndexKey) as? Int
+         where index < bookings.count {
+        return index
+      } else {
+        return nil
+      }
+    }
+    set {
+      self.reference?.setPayload(newValue, forKey: TKSegment.quickBookingIndexKey)
+    }
+  }
+  
+  private func storeQuickBookings(fromArray array: [[NSString: AnyObject]]) {
+    self.reference?.setPayload(array, forKey: TKSegment.quickBookingKey)
+  }
+}
