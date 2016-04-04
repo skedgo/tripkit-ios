@@ -418,6 +418,11 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       // updated trip isn't strictly speaking new, but we want to process it as a successful match.
       [newTrips addObject:trip];
       
+      NSMutableArray *unmatchedSegmentReferences = nil;
+      if (tripToUpdate) {
+        unmatchedSegmentReferences = [tripToUpdate.segmentReferences mutableCopy];
+      }
+      
       int segmentCount = 0;
       for (NSDictionary *refDict in tripDict[@"segments"]) {
         // create the reference object
@@ -426,13 +431,15 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         NSDictionary *unprocessedTemplateDict = segmentHashToTemplateDictionaryDict[[hashCode description]];
         
         if (tripToUpdate) {
-          for (SegmentReference *existingReference in tripToUpdate.segmentReferences) {
+          for (SegmentReference *existingReference in unmatchedSegmentReferences) {
             if ([existingReference.templateHashCode isEqualToNumber:hashCode]) {
               reference = existingReference;
               break;
             }
           }
-          if (!reference) {
+          if (reference) {
+            [unmatchedSegmentReferences removeObject:reference];
+          } else {
             [trip clearSegmentCaches];
           }
         }
@@ -529,6 +536,13 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         
         reference.index = @(segmentCount++);
         reference.trip = trip;
+      }
+      
+      // Clean-up unmatched references
+      if (unmatchedSegmentReferences.count > 0) {
+        for (SegmentReference *unmatched in unmatchedSegmentReferences) {
+          [self.context deleteObject:unmatched];
+        }
       }
     }
     
