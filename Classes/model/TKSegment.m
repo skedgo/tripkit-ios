@@ -1232,6 +1232,10 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSString *)singleLineInstruction
 {
+  if (!self.template) {
+    return nil;
+  }
+  
 	if (_singleLineInstruction == UninitializedString) {
     BOOL isTimeDependent = NO;
     NSString *newString = nil;
