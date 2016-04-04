@@ -1232,10 +1232,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSString *)singleLineInstruction
 {
-  if (!self.template) {
-    return nil;
-  }
-  
 	if (_singleLineInstruction == UninitializedString) {
     BOOL isTimeDependent = NO;
     NSString *newString = nil;
@@ -1266,6 +1262,9 @@ NSString *const UninitializedString =  @"UninitializedString";
       }
 
       case BHSegmentOrdering_Regular: {
+        if (!self.template) {
+          return nil;
+        }
         NSMutableString *actionRaw = [NSMutableString stringWithString:self.template.action];
         isTimeDependent = [self fillInTemplates:actionRaw inTitle:YES];
         newString = actionRaw;
