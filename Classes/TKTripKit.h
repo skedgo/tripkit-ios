@@ -91,6 +91,8 @@ FOUNDATION_EXPORT NSString *const TKTripKitDidResetNotification;
  */
 - (nonnull NSDate *)resetDateFromInitialization;
 
+- (NSCache *)inMemoryCache;
+
 @end
 
 NS_ASSUME_NONNULL_END

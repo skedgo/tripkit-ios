@@ -107,13 +107,11 @@ extension TKQuickBooking {
 }
 
 extension TKSegment {
-  private static let quickBookingKey = "TKQuickBookings"
-  private static let quickBookingIndexKey = "TKQuickBookingsActiveIndex"
-  
   var storedQuickBookings: [TKQuickBooking]? {
     get {
-      if let payloads = payloadForKey(TKSegment.quickBookingKey) as? [[NSString: AnyObject]] {
-        return payloads.flatMap { TKQuickBooking(withDictionary: $0) }
+      if let key = cacheKey(),
+         let cached = TKTripKit.sharedInstance().inMemoryCache().objectForKey(key) as? [[NSString: AnyObject]] {
+        return cached.flatMap { TKQuickBooking(withDictionary: $0) }
       } else {
         return nil
       }
@@ -122,8 +120,9 @@ extension TKSegment {
   
   var activeIndexQuickBooking: Int? {
     get {
-      if let bookings = storedQuickBookings,
-         let index = payloadForKey(TKSegment.quickBookingIndexKey) as? Int
+      if let key = indexKey(),
+         let index = TKTripKit.sharedInstance().inMemoryCache().objectForKey(key) as? Int,
+         let bookings = storedQuickBookings
          where index < bookings.count {
         return index
       } else {
@@ -131,11 +130,32 @@ extension TKSegment {
       }
     }
     set {
-      self.reference?.setPayload(newValue, forKey: TKSegment.quickBookingIndexKey)
+      guard let key = indexKey(),
+            let index = newValue else { return }
+      
+      TKTripKit.sharedInstance().inMemoryCache().setObject(index, forKey: key)
+    }
+  }
+
+  private func indexKey() -> String? {
+    if let path = bookingQuickInternalURL()?.path {
+      return "\(path)-index"
+    } else {
+      return nil
+    }
+  }
+
+  private func cacheKey() -> String? {
+    if let path = bookingQuickInternalURL()?.path {
+      return "\(path)-cached"
+    } else {
+      return nil
     }
   }
   
   private func storeQuickBookings(fromArray array: [[NSString: AnyObject]]) {
-    self.reference?.setPayload(array, forKey: TKSegment.quickBookingKey)
+    guard let key = cacheKey() else { return }
+    
+    TKTripKit.sharedInstance().inMemoryCache().setObject(array, forKey: key)
   }
 }

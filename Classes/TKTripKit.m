@@ -14,6 +14,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSDate *resetDateFromInitialization;
+@property (nonatomic, strong) NSCache *inMemoryCache;
 
 @end
 
@@ -30,8 +31,8 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 {
   self = [super init];
   if (self) {
-    // wake up context
-    [self tripKitContext];
+    self.inMemoryCache = [[NSCache alloc] init];
+    [self tripKitContext]; // wake up context
   }
   return self;
 }
@@ -41,17 +42,18 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   _tripKitContext = nil;
   _persistentStoreCoordinator = nil;
   
-  [self tripKitContext];
+  [self tripKitContext]; // wake up
 }
 
 - (void)reset
 {
   _tripKitContext = nil;
   _persistentStoreCoordinator = nil;
-
+  [self.inMemoryCache removeAllObjects];
+  
   [self removeLocalFiles];
   
-  [self tripKitContext];
+  [self tripKitContext]; // wake up
 }
 
 #pragma mark - Private helpers
