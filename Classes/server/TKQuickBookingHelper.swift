@@ -60,7 +60,7 @@ class TKQuickBookingHelper {
     SVKServer.GET(bookingsURL, paras: nil) { response, error in
       guard let array = response as? [[NSString: AnyObject]] where !array.isEmpty else {
         completion([])
-        SGKLog.warn("TKQuickBookingHelper", text: "No reponse. Error: \(error)")
+        SGKLog.warn("TKQuickBookingHelper", text: "Response isn't array.\nResponse: \(response)\nError: \(error)")
         return
       }
       
