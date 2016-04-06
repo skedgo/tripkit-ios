@@ -42,11 +42,11 @@ struct TKQuickBooking {
   let ETA: NSTimeInterval?
 }
 
-class TKQuickBookingHelper {
+enum TKQuickBookingHelper {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
-  class func fetchQuickBookings(forSegment segment: TKSegment, completion: [TKQuickBooking] -> Void) {
+  static func fetchQuickBookings(forSegment segment: TKSegment, completion: [TKQuickBooking] -> Void) {
     if let stored = segment.storedQuickBookings {
       completion(stored)
       return
