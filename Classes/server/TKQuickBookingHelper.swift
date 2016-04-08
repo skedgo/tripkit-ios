@@ -8,15 +8,20 @@
 
 import Foundation
 
-struct TKQuickBookingPrice {
+class TKQuickBookingPrice: NSObject {
   /// Price in local currency, typically not in smallest unit, but dollars
   let localCost: Float
   
   /// Price in USD dollars
   let USDCost: Float
+  
+  private init(localCost: Float, USDCost: Float) {
+    self.localCost = localCost
+    self.USDCost = USDCost
+  }
 }
 
-struct TKQuickBooking {
+class TKQuickBooking: NSObject {
   /// Localised identifying this booking option
   let title: String
 
@@ -40,13 +45,24 @@ struct TKQuickBooking {
 
   /// Optional ETA for this option. This is the expected waiting time.
   let ETA: NSTimeInterval?
+  
+  private init(title: String, subtitle: String?, bookingURL: NSURL, tripUpdateURL: NSURL?, imageURL: NSURL?, price: TKQuickBookingPrice?, priceString: String?, ETA: NSTimeInterval?) {
+    self.title = title
+    self.subtitle = subtitle
+    self.bookingURL = bookingURL
+    self.tripUpdateURL = tripUpdateURL
+    self.imageURL = imageURL
+    self.price = price
+    self.priceString = priceString
+    self.ETA = ETA
+  }
 }
 
-enum TKQuickBookingHelper {
+class TKQuickBookingHelper: NSObject {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
-  static func fetchQuickBookings(forSegment segment: TKSegment, completion: [TKQuickBooking] -> Void) {
+  class func fetchQuickBookings(forSegment segment: TKSegment, completion: [TKQuickBooking] -> Void) {
     if let stored = segment.storedQuickBookings {
       completion(stored)
       return
@@ -69,10 +85,14 @@ enum TKQuickBookingHelper {
       completion(bookings)
     }
   }
+  
+  private override init() {
+    fatalError("Don't instantiate me.")
+  }
 }
 
 extension TKQuickBooking {
-  private init?(withDictionary dictionary: [NSString: AnyObject]) {
+  private convenience init?(withDictionary dictionary: [NSString: AnyObject]) {
     guard let bookingURLString = dictionary["bookingURL"] as? String,
           let bookingURL = NSURL(string: bookingURLString),
           let title = dictionary["title"] as? String
