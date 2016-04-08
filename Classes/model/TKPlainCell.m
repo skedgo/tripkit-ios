@@ -15,6 +15,8 @@
   NSMutableArray *mutableStops;
   if ([self.stops isKindOfClass:[NSMutableArray class]]) {
     mutableStops = (NSMutableArray *)self.stops;
+  } if (self.stops) {
+    mutableStops = [self.stops mutableCopy];
   } else {
     mutableStops = [NSMutableArray arrayWithCapacity:100];
   }
