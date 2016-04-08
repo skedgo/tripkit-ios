@@ -66,13 +66,16 @@ typedef enum {
 	
   float bestScore = MAXFLOAT;
   Trip *bestTrip = nil;
+  self.secondVisibleTrip = nil;
   for (Trip *trip in allTrips) {
     if ([trip isImpossible]) {
       continue;
     }
     
+    NSTimeInterval offset = [trip calculateOffset];      
     float score = [[trip totalScore] floatValue];
-    if (score < bestScore) {
+    if (offset >= 0 && score < bestScore) {
+      if (bestTrip && ![trip isImpossible]) self.secondVisibleTrip = bestTrip;
       bestTrip = trip;
       bestScore = score;
     }

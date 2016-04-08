@@ -29,6 +29,7 @@ typedef enum {
 @property (nonatomic, strong) TripRequest *request;
 @property (nonatomic, strong) NSSet *trips;
 @property (nonatomic, strong) Trip *visibleTrip;
+@property (nonatomic, strong) Trip *secondVisibleTrip; // The second best trip for this TripGroup
 
 @property (nonatomic, assign) TripGroupVisibility visibility;
 
