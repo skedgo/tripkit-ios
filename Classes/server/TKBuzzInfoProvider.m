@@ -76,11 +76,12 @@ typedef enum {
     
     
     __weak typeof(self) weakSelf = self;
-    [server initiateDataTaskWithMethod:@"POST"
-                                  path:@"departures.json"
-                            parameters:paras
-                                region:region
-                               success:
+    [server hitSkedGoWithMethod:@"POST"
+                           path:@"departures.json"
+                     parameters:paras
+                         region:region
+                 callbackOnMain:NO
+                        success:
      ^(id responseObject) {
        typeof(self) strongSelf = weakSelf;
        if( !strongSelf) {
@@ -114,7 +115,7 @@ typedef enum {
          }
        }];
      }
-                               failure:
+                        failure:
        ^(NSError * _Nullable anError) {
          if (failure) {
            dispatch_async(dispatch_get_main_queue(), ^{
@@ -170,11 +171,12 @@ typedef enum {
                                                              limit:limit];
     __weak typeof(self) weakSelf = self;
     // now send it off to the server
-    [server initiateDataTaskWithMethod:@"POST"
-                                  path:@"departures.json"
-                            parameters:paras
-                                region:table.region
-                               success:
+    [server hitSkedGoWithMethod:@"POST"
+                           path:@"departures.json"
+                     parameters:paras
+                         region:table.region
+                 callbackOnMain:NO
+                        success:
      ^(id responseObject) {
        typeof(self) strongSelf = weakSelf;
        if( !strongSelf) {
@@ -196,7 +198,7 @@ typedef enum {
          }
        }];
      }
-                               failure:
+                        failure:
      ^(NSError *operationError) {
        if (failure) {
          dispatch_async(dispatch_get_main_queue(), ^{
@@ -255,11 +257,12 @@ typedef enum {
      
      // now send it off to the server
      __weak typeof(self) weakSelf = self;
-     [server initiateDataTaskWithMethod:@"GET"
-                                   path:@"service.json"
-                             parameters:paras
-                                 region:region
-                                success:
+     [server hitSkedGoWithMethod:@"GET"
+                            path:@"service.json"
+                      parameters:paras
+                          region:region
+                  callbackOnMain:NO
+                         success:
       ^(id responseObject) {
         typeof(self) strongSelf = weakSelf;
         if (!strongSelf) {
@@ -279,7 +282,7 @@ typedef enum {
           }
         }];
       }
-                                failure:
+                         failure:
       ^(NSError *operationError) {
 #pragma unused(operationError)
         DLog(@"Error response: %@", operationError);
@@ -339,11 +342,12 @@ typedef enum {
       }
     }
     
-    [server initiateDataTaskWithMethod:@"POST"
-                                  path:@"stopFinder.json"
-                            parameters:paras
-                                region:region
-                               success:
+    [server hitSkedGoWithMethod:@"POST"
+                           path:@"stopFinder.json"
+                     parameters:paras
+                         region:region
+                 callbackOnMain:NO
+                        success:
      ^(id responseObject) {
         // set the stop properties
        [stop.managedObjectContext performBlock:^{
@@ -354,9 +358,10 @@ typedef enum {
      }
                                failure:
      ^(NSError *anotherError) {
-#pragma unused(anotherError)
-       DLog(@"Error response: %@", anotherError);
-       completion(anotherError);
+       dispatch_async(dispatch_get_main_queue(), ^{
+         DLog(@"Error response: %@", anotherError);
+         completion(anotherError);
+       });
      }];
   }];
 }

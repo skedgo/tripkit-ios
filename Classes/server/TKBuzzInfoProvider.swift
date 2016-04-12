@@ -94,6 +94,8 @@ extension TKBuzzInfoProvider {
 
   /**
    Asynchronously fetches additional region information for the provided region.
+   
+   - Note: Completion block is executed on the main thread.
    */
   public class func fetchRegionInformation(forRegion region: SVKRegion, completion: RegionInformation? -> Void)
   {
@@ -107,6 +109,8 @@ extension TKBuzzInfoProvider {
   
   /**
    Asynchronously fetches paratransit information for the provided region.
+   
+   - Note: Completion block is executed on the main thread.
    */
   public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: ParatransitInformation? -> Void)
   {
@@ -119,6 +123,8 @@ extension TKBuzzInfoProvider {
   
   /**
    Asynchronously fetches all available individual public transport modes for the provided region.
+   
+   - Note: Completion block is executed on the main thread.
    */
   public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: [ModeInfo] -> Void)
   {
@@ -134,7 +140,7 @@ extension TKBuzzInfoProvider {
     let paras = [
       "region": region.name
     ]
-    SVKServer.sharedInstance().initiateDataTaskWithMethod(
+    SVKServer.sharedInstance().hitSkedGoWithMethod(
       "POST",
       path: "regionInfo.json",
       parameters: paras,
@@ -189,13 +195,18 @@ public class LocationInformation : NSObject {
 }
 
 extension TKBuzzInfoProvider {
+  /**
+   Asynchronously fetches additional location information for a specified coordinate.
+   
+   - Note: Completion block is executed on the main thread.
+  */
   public class func fetchLocationInformation(coordinate: CLLocationCoordinate2D, forRegion region: SVKRegion, completion: (LocationInformation?) -> Void) {
     let paras: [String: AnyObject] = [
       "lat": coordinate.latitude,
       "lng": coordinate.longitude
     ]
     
-    SVKServer.sharedInstance().initiateDataTaskWithMethod(
+    SVKServer.sharedInstance().hitSkedGoWithMethod(
       "GET",
       path: "locationInfo.json",
       parameters: paras,

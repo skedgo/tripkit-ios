@@ -210,11 +210,12 @@
 	
 	// now send it off to the server
 	SVKServer *server = [SVKServer sharedInstance];
-  [server initiateDataTaskWithMethod:@"POST"
-                                path:@"latest.json"
-                          parameters:paras
-                              region:region
-                             success:
+  [server hitSkedGoWithMethod:@"POST"
+                         path:@"latest.json"
+                   parameters:paras
+                       region:region
+               callbackOnMain:NO
+                      success:
    ^(id responseObject) {
      success(responseObject);
    }
