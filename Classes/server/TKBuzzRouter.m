@@ -328,11 +328,12 @@
                                                      andModeIdentifiers:strongSelf.modeIdentifiers
                                                                bestOnly:bestOnly
                                                            withASAPTime:ASAPTime];
-    [server initiateDataTaskWithMethod:@"GET"
-                                  path:@"routing.json"
-                            parameters:paras
-                                region:region
-                               success:
+    [server hitSkedGoWithMethod:@"GET"
+                           path:@"routing.json"
+                     parameters:paras
+                         region:region
+                 callbackOnMain:NO
+                        success:
      ^(id responseObject) {
        typeof(weakSelf) strongSelf2 = weakSelf;
        if (! strongSelf2) {
@@ -344,7 +345,7 @@
                       success:success
                       failure:failure];
      }
-                               failure:
+                        failure:
      ^(NSError *error2) {
        typeof(weakSelf) strongSelf2 = weakSelf;
        if (! strongSelf2) {
