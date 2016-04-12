@@ -88,7 +88,7 @@ extension SVKRegion {
       paras = nil
     }
     
-    SVKServer.sharedInstance().initiateDataTaskWithMethod(
+    SVKServer.sharedInstance().hitSkedGoWithMethod(
       "GET",
       path: "auth/\(name)",
       parameters: paras,
