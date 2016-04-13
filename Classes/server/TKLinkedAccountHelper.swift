@@ -56,7 +56,7 @@ extension ProviderAuth.Status {
     switch action {
     case "signin":
       self = .NotConnected(status, actionTitle, actionURL)
-    case "signout":
+    case "logout":
       self = .Connected(status, actionTitle, actionURL)
     default:
       return nil
