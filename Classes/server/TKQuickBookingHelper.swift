@@ -30,7 +30,10 @@ class TKQuickBooking: NSObject {
   
   /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`.
   let bookingURL: NSURL
-  
+
+  // Localised string for doing booking
+  let bookingTitle: String
+
   /// URL to fetch updated trip that's using this booking options. Only present if there would be a change to the trip.
   let tripUpdateURL: NSURL?
   
@@ -46,10 +49,11 @@ class TKQuickBooking: NSObject {
   /// Optional ETA for this option. This is the expected waiting time.
   let ETA: NSTimeInterval?
   
-  private init(title: String, subtitle: String?, bookingURL: NSURL, tripUpdateURL: NSURL?, imageURL: NSURL?, price: TKQuickBookingPrice?, priceString: String?, ETA: NSTimeInterval?) {
+  private init(title: String, subtitle: String?, bookingURL: NSURL, bookingTitle: String, tripUpdateURL: NSURL?, imageURL: NSURL?, price: TKQuickBookingPrice?, priceString: String?, ETA: NSTimeInterval?) {
     self.title = title
     self.subtitle = subtitle
     self.bookingURL = bookingURL
+    self.bookingTitle = bookingTitle
     self.tripUpdateURL = tripUpdateURL
     self.imageURL = imageURL
     self.price = price
@@ -95,6 +99,7 @@ extension TKQuickBooking {
   private convenience init?(withDictionary dictionary: [NSString: AnyObject]) {
     guard let bookingURLString = dictionary["bookingURL"] as? String,
           let bookingURL = NSURL(string: bookingURLString),
+          let bookingTitle = dictionary["bookingTitle"] as? String,
           let title = dictionary["title"] as? String
       else {
         return nil
@@ -122,7 +127,7 @@ extension TKQuickBooking {
     let tripUpdateURLString = dictionary["tripUpdateURL"] as? String
     let tripUpdateURL = tripUpdateURLString != nil ? NSURL(string: tripUpdateURLString!) : nil
     
-    self.init(title: title, subtitle: subtitle, bookingURL: bookingURL, tripUpdateURL: tripUpdateURL, imageURL: imageURL, price: price, priceString: priceString, ETA: ETA)
+    self.init(title: title, subtitle: subtitle, bookingURL: bookingURL, bookingTitle: bookingTitle, tripUpdateURL: tripUpdateURL, imageURL: imageURL, price: price, priceString: priceString, ETA: ETA)
   }
 }
 
