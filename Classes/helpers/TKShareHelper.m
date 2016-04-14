@@ -72,8 +72,9 @@
   return [NSURL URLWithString:urlString];
 }
 
-+ (void)queryDetailsForURL:(NSURL *)url
-                   details:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, SGTimeType timeType, NSDate *time))detailBlock
++ (BOOL)queryDetailsForURL:(NSURL *)url
+             usingGeocoder:(id<SGGeocoder>)geocoder
+                completion:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, NSString *name, SGTimeType timeType, NSDate *time))completion
 {
   // re-construct the parameters
   NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
@@ -87,8 +88,10 @@
   
   // construct the request
   // mandatory is only 'to'
-  if (! params[@"tlat"] || ! params[@"tlng"])
-    return;
+  if ((!params[@"tlat"] || !params[@"tlng"]) && !params[@"tname"])
+    return NO;
+  
+  NSString *name = params[@"tname"];
   
   CLLocationCoordinate2D start;
   if (params[@"flat"] && params[@"flng"]) {
@@ -97,8 +100,13 @@
     start = kCLLocationCoordinate2DInvalid;
   }
   
-  CLLocationCoordinate2D end = CLLocationCoordinate2DMake([params[@"tlat"] doubleValue], [params[@"tlng"] doubleValue]);
-
+  __block CLLocationCoordinate2D end;
+  if (params[@"tlat"] && params[@"tlng"]) {
+    end = CLLocationCoordinate2DMake([params[@"tlat"] doubleValue], [params[@"tlng"] doubleValue]);
+  } else {
+    end = kCLLocationCoordinate2DInvalid;
+  }
+  
   SGTimeType timeType = SGTimeTypeLeaveASAP;
   NSDate *time = nil;
   if (params[@"type"] && params[@"time"]) {
@@ -108,7 +116,23 @@
       time = timeType == SGTimeTypeLeaveASAP ? nil : [NSDate dateWithTimeIntervalSince1970:[params[@"time"] doubleValue]];
     }
   }
-  detailBlock(start, end, timeType, time);
+  
+  __block id <MKAnnotation>to = nil;
+  if (!CLLocationCoordinate2DIsValid(end) && name != nil) {
+      [geocoder geocodeString:name nearRegion:MKMapRectWorld success:^(NSString * _Nonnull query, NSArray<SGNamedCoordinate *> * _Nonnull results) {
+#pragma unused(query)
+        to = [SGBaseGeocoder pickBestFromResults:results];
+        end = [to coordinate];
+        
+        completion(start, end, name, timeType, time);
+      } failure:^(NSString * _Nonnull query, NSError * _Nullable error) {
+#pragma unused(query, error)
+        completion(start, end, name, timeType, time);
+      }];
+  } else {
+    completion(start, end, name, timeType, time);
+  }
+  return YES;
 }
 
 

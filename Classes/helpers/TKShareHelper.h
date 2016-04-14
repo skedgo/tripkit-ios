@@ -12,6 +12,8 @@
 
 #import "SGKEnums.h"
 
+@protocol SGGeocoder;
+
 @interface TKShareHelper : NSObject
 
 #pragma mark - Meet URL
@@ -34,8 +36,9 @@
                    timeType:(SGTimeType)timeType
                        time:(NSDate *)time;
 
-+ (void)queryDetailsForURL:(NSURL *)url
-                   details:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, SGTimeType timeType, NSDate *time))detailBlock;
++ (BOOL)queryDetailsForURL:(NSURL *)url
+             usingGeocoder:(id<SGGeocoder>)geocoder
+                completion:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, NSString *name, SGTimeType timeType, NSDate *time))completion;
 
 
 #pragma mark - Stops
