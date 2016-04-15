@@ -126,7 +126,7 @@
         completion(start, newEnd, name, timeType, time);
       } failure:^(NSString * _Nonnull query, NSError * _Nullable error) {
 #pragma unused(query, error)
-        completion(start, end, name, timeType, time);
+        // Ignore silently
       }];
   } else {
     completion(start, end, name, timeType, time);
