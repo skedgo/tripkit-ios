@@ -100,7 +100,7 @@
     start = kCLLocationCoordinate2DInvalid;
   }
   
-  __block CLLocationCoordinate2D end;
+  CLLocationCoordinate2D end;
   if (params[@"tlat"] && params[@"tlng"]) {
     end = CLLocationCoordinate2DMake([params[@"tlat"] doubleValue], [params[@"tlng"] doubleValue]);
   } else {
@@ -117,14 +117,13 @@
     }
   }
   
-  __block id <MKAnnotation>to = nil;
   if (!CLLocationCoordinate2DIsValid(end) && name != nil) {
       [geocoder geocodeString:name nearRegion:MKMapRectWorld success:^(NSString * _Nonnull query, NSArray<SGNamedCoordinate *> * _Nonnull results) {
 #pragma unused(query)
-        to = [SGBaseGeocoder pickBestFromResults:results];
-        end = [to coordinate];
+        id <MKAnnotation>to = [SGBaseGeocoder pickBestFromResults:results];
+        CLLocationCoordinate2D newEnd = [to coordinate];
         
-        completion(start, end, name, timeType, time);
+        completion(start, newEnd, name, timeType, time);
       } failure:^(NSString * _Nonnull query, NSError * _Nullable error) {
 #pragma unused(query, error)
         completion(start, end, name, timeType, time);
