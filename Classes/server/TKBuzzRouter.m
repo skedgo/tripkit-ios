@@ -396,7 +396,7 @@
     }
   }
   
-  // create the request
+  // Hit it
   [SVKServer GET:baseURL paras:paras completion:
    ^(id  _Nullable responseObject, NSError * _Nullable error) {
      completion(baseURL, responseObject, error);

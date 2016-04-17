@@ -505,12 +505,13 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           
         } else {
           // private transport
-          NSDictionary *bookingData = [self mergedNewBookingData:refDict[@"booking"] into:reference.bookingData];
-          [reference setBookingData:bookingData];
           [reference setSharedVehicleData:refDict[@"sharedVehicle"]];
           [reference setVehicleUUID:refDict[@"vehicleUUID"]];
         }
-        
+
+        NSDictionary *bookingData = [self mergedNewBookingData:refDict[@"booking"] into:reference.bookingData];
+        [reference setBookingData:bookingData];
+
         reference.templateHashCode = hashCode;
         reference.startTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"startTime"] integerValue]];
         reference.endTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"endTime"] integerValue]];
