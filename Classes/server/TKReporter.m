@@ -26,7 +26,7 @@
        completion:
    ^(id  _Nullable responseObject, NSError * _Nullable error) {
 #pragma unused(responseObject)
-     BOOL success = (error != nil);
+     BOOL success = (error == nil);
      if (completeHandler) {
        completeHandler(success);
      }
