@@ -545,6 +545,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           [self.context deleteObject:unmatched];
         }
       }
+      ZAssert(trip.segmentReferences.count > 0, @"Trip has no segments: %@", trip);
     }
     
     if (newTrips.count > 0) {
