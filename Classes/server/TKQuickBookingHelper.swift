@@ -234,15 +234,15 @@ extension TKBookingConfirmation {
         ]
       ],
       "provider": [
-        "imageURL": "4.9",
-        "subtitle": "John",
-        "title": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/driver.jpg"
+        "imageURL": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/driver.jpg",
+        "subtitle": "4.9",
+        "title": "John"
       ],
       "status": "PENDING",
       "vehicle": [
-        "imageURL": "UBER-PLATE",
-        "subtitle": "Prius Toyota",
-        "title": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/prius.jpg"
+        "imageURL": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/prius.jpg",
+        "subtitle": "UBER-PLATE",
+        "title": "Prius Toyota"
       ]
     ]
     return TKBookingConfirmation(withDictionary: fake)
