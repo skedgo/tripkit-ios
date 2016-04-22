@@ -196,6 +196,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSURL *)bookingInternalURL;
 - (nullable NSURL *)bookingQuickInternalURL;
 - (nullable NSArray<NSString *> *)bookingExternalActions;
+- (nullable NSDictionary<NSString*, id> *)bookingConfirmationDictionary;
 
 
 ///-----------------------------------------------------------------------------

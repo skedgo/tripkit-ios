@@ -646,6 +646,12 @@ NSString *const UninitializedString =  @"UninitializedString";
   return bookingData[@"externalActions"];
 }
 
+- (nullable NSDictionary<NSString*, id> *)bookingConfirmationDictionary
+{
+  NSDictionary *bookingData = self.reference.bookingData;
+  return bookingData[@"confirmation"];
+}
+
 - (void)resetCaches
 {
   _singleLineInstruction = UninitializedString;

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Swift-only this would be a struct
 class TKQuickBookingPrice: NSObject {
   /// Price in local currency, typically not in smallest unit, but dollars
   let localCost: Float
@@ -21,6 +22,7 @@ class TKQuickBookingPrice: NSObject {
   }
 }
 
+// Swift-only this would be a struct
 class TKQuickBooking: NSObject {
   /// Localised identifying this booking option
   let title: String
@@ -62,6 +64,26 @@ class TKQuickBooking: NSObject {
   }
 }
 
+// Swift-only this would be a struct
+struct TKBookingConfirmation {
+  enum Status: String {
+    case Pending = "PENDING"
+    case Confirmed = "CONFIRMED"
+    case Canceled = "CANCELED"
+  }
+  
+  struct Detail {
+    let title: String
+    let subtitle: String?
+    let imageURL: NSURL?
+  }
+  
+  let status: Status
+  let provider: Detail?
+  let vehicle: Detail?
+}
+
+// Swift-only this would be an enum
 class TKQuickBookingHelper: NSObject {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
@@ -131,6 +153,58 @@ extension TKQuickBooking {
   }
 }
 
+extension TKBookingConfirmation {
+  private init?(withDictionary dictionary: [NSString: AnyObject]) {
+    guard let statusString = dictionary["status"] as? String,
+          let status = Status(rawValue: statusString) else {
+        return nil
+    }
+    
+    let provider: Detail?
+    if let title = dictionary["providerTitle"] as? String {
+      provider = Detail(title: title,
+                        subtitle: dictionary["providerSubtitle"] as? String,
+                        imageURLString: dictionary["providerImageURL"] as? String)
+    } else {
+      provider = nil
+    }
+
+    let vehicle: Detail?
+    if let title = dictionary["vehicleTitle"] as? String {
+      vehicle = Detail(title: title,
+                        subtitle: dictionary["vehicleSubtitle"] as? String,
+                        imageURLString: dictionary["vehicleImageURL"] as? String)
+    } else {
+      vehicle = nil
+    }
+
+    self.init(status: status, provider: provider, vehicle: vehicle)
+  }
+}
+
+extension TKBookingConfirmation.Detail {
+  private init(title: String, subtitle: String?, imageURLString: String?) {
+    self.title = title
+    self.subtitle = subtitle
+    self.imageURL = imageURLString != nil ? NSURL(string: imageURLString!) : nil
+  }
+}
+
+extension TKBookingConfirmation {
+  private static func fake() -> TKBookingConfirmation? {
+    let fake = [
+      "providerImageURL": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/driver.jpg",
+      "providerSubtitle": "4.9",
+      "providerTitle": "John",
+      "status": "PENDING",
+      "vehicleImageURL": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/prius.jpg",
+      "vehicleSubtitle": "UBER-PLATE",
+      "vehicleTitle": "Prius Toyota"
+    ]
+    return TKBookingConfirmation(withDictionary: fake)
+  }
+}
+
 extension TKSegment {
   var storedQuickBookings: [TKQuickBooking]? {
     get {
@@ -182,5 +256,17 @@ extension TKSegment {
     guard let key = cacheKey() else { return }
     
     TKTripKit.sharedInstance().inMemoryCache().setObject(array, forKey: key)
+  }
+  
+  var bookingConfirmation: TKBookingConfirmation? {
+    if let dictionary = bookingConfirmationDictionary() {
+      return TKBookingConfirmation(withDictionary: dictionary)
+      
+    } else if let mode = modeIdentifier() where !isStationary() && mode.hasPrefix("ps_tnc") { // FIXME: Remove this
+      return TKBookingConfirmation.fake()
+
+    } else {
+      return nil
+    }
   }
 }
