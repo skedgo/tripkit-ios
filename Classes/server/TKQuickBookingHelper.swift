@@ -69,7 +69,7 @@ struct TKBookingConfirmation {
   enum Status: String {
     case Pending = "PENDING"
     case Confirmed = "CONFIRMED"
-    case Canceled = "CANCELED"
+    case Canceled = "CANCELLED"
   }
   
   struct Detail {
@@ -78,9 +78,16 @@ struct TKBookingConfirmation {
     let imageURL: NSURL?
   }
   
+  struct Action {
+    let title: String
+    let internalURL: NSURL?
+    let externalURL: NSURL?
+  }
+  
   let status: Status
   let provider: Detail?
   let vehicle: Detail?
+  let actions: [Action]
 }
 
 // Swift-only this would be an enum
@@ -154,52 +161,89 @@ extension TKQuickBooking {
 }
 
 extension TKBookingConfirmation {
-  private init?(withDictionary dictionary: [NSString: AnyObject]) {
+  private init?(withDictionary dictionary: [String: AnyObject]) {
     guard let statusString = dictionary["status"] as? String,
           let status = Status(rawValue: statusString) else {
         return nil
     }
     
-    let provider: Detail?
-    if let title = dictionary["providerTitle"] as? String {
-      provider = Detail(title: title,
-                        subtitle: dictionary["providerSubtitle"] as? String,
-                        imageURLString: dictionary["providerImageURL"] as? String)
+    let provider = Detail(withDictionary: dictionary["provider"] as? [String: AnyObject])
+    let vehicle = Detail(withDictionary: dictionary["vehicle"] as? [String: AnyObject])
+    
+    let actions: [Action]
+    if let rawActions = dictionary["actions"] as? [[String: AnyObject]] {
+      actions = rawActions.flatMap { Action(withDictionary: $0) }
     } else {
-      provider = nil
+      actions = []
     }
 
-    let vehicle: Detail?
-    if let title = dictionary["vehicleTitle"] as? String {
-      vehicle = Detail(title: title,
-                        subtitle: dictionary["vehicleSubtitle"] as? String,
-                        imageURLString: dictionary["vehicleImageURL"] as? String)
-    } else {
-      vehicle = nil
-    }
-
-    self.init(status: status, provider: provider, vehicle: vehicle)
+    self.init(status: status, provider: provider, vehicle: vehicle, actions: actions)
   }
 }
 
 extension TKBookingConfirmation.Detail {
-  private init(title: String, subtitle: String?, imageURLString: String?) {
+  private init?(withDictionary dictionary: [String: AnyObject]?) {
+    guard let dictionary = dictionary,
+          let title = dictionary["title"] as? String else { return nil }
+    
     self.title = title
-    self.subtitle = subtitle
-    self.imageURL = imageURLString != nil ? NSURL(string: imageURLString!) : nil
+    self.subtitle = dictionary["subtitle"] as? String
+    if let imageURLString = dictionary["imageURL"] as? String,
+       let imageURL = NSURL(string: imageURLString) {
+      self.imageURL = imageURL
+    } else {
+      self.imageURL = nil
+    }
   }
 }
+
+extension TKBookingConfirmation.Action {
+  private init?(withDictionary dictionary: [String: AnyObject]?) {
+    guard let dictionary = dictionary,
+      let title = dictionary["title"] as? String else { return nil }
+    
+    self.title = title
+    if let internalURLString = dictionary["internalURL"] as? String,
+      let internalURL = NSURL(string: internalURLString) {
+      self.internalURL = internalURL
+    } else {
+      self.internalURL = nil
+    }
+
+    if let externalURLString = dictionary["externalURL"] as? String,
+      let externalURL = NSURL(string: externalURLString) {
+      self.externalURL = externalURL
+    } else {
+      self.externalURL = nil
+    }
+}
+}
+
 
 extension TKBookingConfirmation {
   private static func fake() -> TKBookingConfirmation? {
     let fake = [
-      "providerImageURL": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/driver.jpg",
-      "providerSubtitle": "4.9",
-      "providerTitle": "John",
+      "actions": [
+        [
+          "externalURL": "phone:(555)555-5555",
+          "title": "Call driver"
+        ],
+        [
+          "internalURL": "http://deep-thought:8080/satapp-debug/booking/v1/1204f411-eacb-406c-8fd2-3775c8242b02/cancel?bsb=1",
+          "title": "Cancel ride"
+        ]
+      ],
+      "provider": [
+        "imageURL": "4.9",
+        "subtitle": "John",
+        "title": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/driver.jpg"
+      ],
       "status": "PENDING",
-      "vehicleImageURL": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/prius.jpg",
-      "vehicleSubtitle": "UBER-PLATE",
-      "vehicleTitle": "Prius Toyota"
+      "vehicle": [
+        "imageURL": "UBER-PLATE",
+        "subtitle": "Prius Toyota",
+        "title": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/prius.jpg"
+      ]
     ]
     return TKBookingConfirmation(withDictionary: fake)
   }
