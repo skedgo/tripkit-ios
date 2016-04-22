@@ -80,6 +80,7 @@ struct TKBookingConfirmation {
   
   struct Action {
     let title: String
+    let isDestructive: Bool
     let internalURL: NSURL?
     let externalURL: NSURL?
   }
@@ -200,9 +201,12 @@ extension TKBookingConfirmation.Detail {
 extension TKBookingConfirmation.Action {
   private init?(withDictionary dictionary: [String: AnyObject]?) {
     guard let dictionary = dictionary,
-      let title = dictionary["title"] as? String else { return nil }
+      let title = dictionary["title"] as? String,
+      let isDestructive = dictionary["isDestructive"] as? Bool else { return nil }
     
     self.title = title
+    self.isDestructive = isDestructive
+    
     if let internalURLString = dictionary["internalURL"] as? String,
       let internalURL = NSURL(string: internalURLString) {
       self.internalURL = internalURL
@@ -226,10 +230,12 @@ extension TKBookingConfirmation {
       "actions": [
         [
           "externalURL": "phone:(555)555-5555",
+          "isDestructive": false,
           "title": "Call driver"
         ],
         [
           "internalURL": "http://deep-thought:8080/satapp-debug/booking/v1/1204f411-eacb-406c-8fd2-3775c8242b02/cancel?bsb=1",
+          "isDestructive": true,
           "title": "Cancel ride"
         ]
       ],
