@@ -229,7 +229,7 @@ extension TKBookingConfirmation {
     let fake = [
       "actions": [
         [
-          "externalURL": "phone:(555)555-5555",
+          "externalURL": "tel:(555)555-5555",
           "isDestructive": false,
           "title": "Call driver"
         ],

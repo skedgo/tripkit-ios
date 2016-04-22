@@ -304,11 +304,15 @@
     [self launchFlitWaysForSegment:segment
                     openURLHandler:openURLHandler];
     
-  } else if ([self canCall] && [action hasPrefix:@"tel:"]) {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]];
+  } else if ([action hasPrefix:@"tel:"]) {
+    if ([self canCall]) {
+      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]];
+    }
     
-  } else if ([self canSendSMS] && [action hasPrefix:@"sms:"]) {
-    [self composeSMS:action forViewController:controller];
+  } else if ([action hasPrefix:@"sms:"]) {
+    if ([self canSendSMS]) {
+      [self composeSMS:action forViewController:controller];
+    }
     
   } else if ([action hasPrefix:@"http:"] || [action hasPrefix:@"https:"]) {
     NSURL *url = [NSURL URLWithString:action];
