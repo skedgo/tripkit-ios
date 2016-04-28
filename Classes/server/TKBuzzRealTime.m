@@ -73,7 +73,8 @@
                                      @"serviceTripID" : service.code,
                                      @"operator"      : operatorName,
                                      @"startStopCode" : entry.stop.stopCode,
-                                     @"endStopCode" : entry.endStop.stopCode,
+                                     @"startTime"     : @([entry.originalTime timeIntervalSince1970]),
+                                     @"endStopCode"   : entry.endStop.stopCode,
                                      }];
     [objectsLookup setValue:entry forKey:service.code];
   }
@@ -116,7 +117,8 @@
     [servicesParamsArray addObject:@{
                                      @"serviceTripID" : service.code,
                                      @"operator"      : operatorName,
-                                     @"startStopCode" : visit.stop.stopCode
+                                     @"startStopCode" : visit.stop.stopCode,
+                                     @"startTime"     : @([visit.originalTime timeIntervalSince1970]),
                                      }];
     [objectsLookup setValue:visit forKey:service.code];
   }
