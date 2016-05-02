@@ -71,17 +71,17 @@
   }
   
   SVKServer *server = [SVKServer sharedInstance];
-  [server initiateDataTaskWithMethod:@"POST"
-                                path:@"skedgoify.json"
-                          parameters:paras
-                              region:region
-                             success:
+  [server hitSkedGoWithMethod:@"POST"
+                         path:@"skedgoify.json"
+                   parameters:paras
+                       region:region
+                      success:
    ^(id responseObject) {
      [self processServerResultFromJSON:responseObject
                             completion:completion];
 
    }
-                             failure:
+                      failure:
    ^(NSError *requestError) {
      [SGKLog warn:NSStringFromClass([self class]) format:@"Skedgoify request failed with error: %@", requestError];
      if (completion) {
