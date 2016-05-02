@@ -28,14 +28,16 @@ typedef enum {
   NSParameterAssert(date);
   NSParameterAssert(completion);
   
-  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
 	// construct the parameters
   if (! stop.stopCode) {
     // this can happen if the stop got deleted while we were looking at it.
     if (failure) {
-      failure([NSError errorWithCode:kSGInfoProviderErrorStopWithoutCode
-                             message:@"Provided stop has no code or children."]);
+      dispatch_async(dispatch_get_main_queue(), ^{
+        failure([NSError errorWithCode:kSGInfoProviderErrorStopWithoutCode
+                               message:@"Provided stop has no code or children."]);
+      });
     }
     return;
   }
@@ -44,15 +46,21 @@ typedef enum {
   [server requireRegions:^(NSError *error) {
     if (error) {
       if (failure) {
-        failure(error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          failure(error);
+        });
       }
       return;
     }
     
     SVKRegion *region = stop.region;
     if (! region) {
-      failure([NSError errorWithCode:kSVKErrorTypeInternal
-                             message:@"Region not fetched yet."]);
+      if (failure) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          failure([NSError errorWithCode:kSVKErrorTypeInternal
+                                 message:@"Region not fetched yet."]);
+        });
+      }
       return;
     }
     
@@ -68,11 +76,12 @@ typedef enum {
     
     
     __weak typeof(self) weakSelf = self;
-    [server initiateDataTaskWithMethod:@"POST"
-                                  path:@"departures.json"
-                            parameters:paras
-                                region:region
-                               success:
+    [server hitSkedGoWithMethod:@"POST"
+                           path:@"departures.json"
+                     parameters:paras
+                         region:region
+                 callbackOnMain:NO
+                        success:
      ^(id responseObject) {
        typeof(self) strongSelf = weakSelf;
        if( !strongSelf) {
@@ -106,11 +115,13 @@ typedef enum {
          }
        }];
      }
-                               failure:
-     ^(NSError *anError) {
-       if (failure) {
-         failure(anError);
-       }
+                        failure:
+       ^(NSError * _Nullable anError) {
+         if (failure) {
+           dispatch_async(dispatch_get_main_queue(), ^{
+             failure(anError);
+           });
+         }
      }];
   }];
 }
@@ -142,13 +153,15 @@ typedef enum {
   NSParameterAssert(date);
   NSParameterAssert(completion);
   
-  ZAssert(table.tripKitContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(table.tripKitContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
 	SVKServer *server = [SVKServer sharedInstance];
   [server requireRegions:^(NSError *error) {
     if (error) {
       if (failure) {
-        failure(error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          failure(error);
+        });
       }
       return;
     }
@@ -158,11 +171,12 @@ typedef enum {
                                                              limit:limit];
     __weak typeof(self) weakSelf = self;
     // now send it off to the server
-    [server initiateDataTaskWithMethod:@"POST"
-                                  path:@"departures.json"
-                            parameters:paras
-                                region:table.region
-                               success:
+    [server hitSkedGoWithMethod:@"POST"
+                           path:@"departures.json"
+                     parameters:paras
+                         region:table.region
+                 callbackOnMain:NO
+                        success:
      ^(id responseObject) {
        typeof(self) strongSelf = weakSelf;
        if( !strongSelf) {
@@ -184,10 +198,12 @@ typedef enum {
          }
        }];
      }
-                               failure:
+                        failure:
      ^(NSError *operationError) {
        if (failure) {
-         failure(operationError);
+         dispatch_async(dispatch_get_main_queue(), ^{
+           failure(operationError);
+         });
        }
      }];
   }];
@@ -202,7 +218,7 @@ typedef enum {
   NSParameterAssert(date);
   NSParameterAssert(completion);
   
-  ZAssert(service.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(service.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
 
   ZAssert(service.managedObjectContext, @"Service with a context needed.");
@@ -241,11 +257,12 @@ typedef enum {
      
      // now send it off to the server
      __weak typeof(self) weakSelf = self;
-     [server initiateDataTaskWithMethod:@"GET"
-                                   path:@"service.json"
-                             parameters:paras
-                                 region:region
-                                success:
+     [server hitSkedGoWithMethod:@"GET"
+                            path:@"service.json"
+                      parameters:paras
+                          region:region
+                  callbackOnMain:NO
+                         success:
       ^(id responseObject) {
         typeof(self) strongSelf = weakSelf;
         if (!strongSelf) {
@@ -265,7 +282,7 @@ typedef enum {
           }
         }];
       }
-                                failure:
+                         failure:
       ^(NSError *operationError) {
 #pragma unused(operationError)
         DLog(@"Error response: %@", operationError);
@@ -325,11 +342,12 @@ typedef enum {
       }
     }
     
-    [server initiateDataTaskWithMethod:@"POST"
-                                  path:@"stopFinder.json"
-                            parameters:paras
-                                region:region
-                               success:
+    [server hitSkedGoWithMethod:@"POST"
+                           path:@"stopFinder.json"
+                     parameters:paras
+                         region:region
+                 callbackOnMain:NO
+                        success:
      ^(id responseObject) {
         // set the stop properties
        [stop.managedObjectContext performBlock:^{
@@ -340,9 +358,10 @@ typedef enum {
      }
                                failure:
      ^(NSError *anotherError) {
-#pragma unused(anotherError)
-       DLog(@"Error response: %@", anotherError);
-       completion(anotherError);
+       dispatch_async(dispatch_get_main_queue(), ^{
+         DLog(@"Error response: %@", anotherError);
+         completion(anotherError);
+       });
      }];
   }];
 }
@@ -353,7 +372,7 @@ typedef enum {
   NSParameterAssert(service);
   NSParameterAssert(responseDict);
   
-  ZAssert(service.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(service.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
   NSManagedObjectContext *context = service.managedObjectContext;
   
@@ -393,7 +412,7 @@ typedef enum {
        intoTripKitContext:(NSManagedObjectContext *)context
 
 {
-  ZAssert(context.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(context.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
   BOOL forSingleStop = (stopOrNil != nil);
   
@@ -537,7 +556,7 @@ typedef enum {
 + (BOOL)addStop:(StopLocation *)stop
    fromResponse:(id)responseObject
 {
-  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread mainThread], @"Not on the right thread!");
+  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
   NSManagedObjectContext *tripKitContext = stop.managedObjectContext;
   

@@ -19,7 +19,7 @@
 @property (nonatomic, assign) SGCellLevel level;
 @property (nonatomic, strong) NSNumber *hashCode;
 
-@property (nonatomic, strong) NSArray<SGStopCoordinate *> *stops;
+@property (nonatomic, copy) NSArray<SGStopCoordinate *> *stops;
 
 - (void)addStop:(SGStopCoordinate *)stop;
 

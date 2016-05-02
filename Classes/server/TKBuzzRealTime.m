@@ -73,7 +73,8 @@
                                      @"serviceTripID" : service.code,
                                      @"operator"      : operatorName,
                                      @"startStopCode" : entry.stop.stopCode,
-                                     @"endStopCode" : entry.endStop.stopCode,
+                                     @"startTime"     : @([entry.originalTime timeIntervalSince1970]),
+                                     @"endStopCode"   : entry.endStop.stopCode,
                                      }];
     [objectsLookup setValue:entry forKey:service.code];
   }
@@ -116,7 +117,8 @@
     [servicesParamsArray addObject:@{
                                      @"serviceTripID" : service.code,
                                      @"operator"      : operatorName,
-                                     @"startStopCode" : visit.stop.stopCode
+                                     @"startStopCode" : visit.stop.stopCode,
+                                     @"startTime"     : @([visit.originalTime timeIntervalSince1970]),
                                      }];
     [objectsLookup setValue:visit forKey:service.code];
   }
@@ -210,11 +212,12 @@
 	
 	// now send it off to the server
 	SVKServer *server = [SVKServer sharedInstance];
-  [server initiateDataTaskWithMethod:@"POST"
-                                path:@"latest.json"
-                          parameters:paras
-                              region:region
-                             success:
+  [server hitSkedGoWithMethod:@"POST"
+                         path:@"latest.json"
+                   parameters:paras
+                       region:region
+               callbackOnMain:NO
+                      success:
    ^(id responseObject) {
      success(responseObject);
    }
@@ -267,26 +270,9 @@
 		}
 		
 		// Parse the vehicle
-		NSDictionary *vehicleDict = serviceDict[@"realtimeVehicle"];
-		if (vehicleDict) {
-			// which vehicle to update?
-			Vehicle *vehicle = service.vehicle;
-			
-			if (! vehicle) {
-				// create a new one
-				vehicle = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Vehicle class])
-																								inManagedObjectContext:service.managedObjectContext];
-				vehicle.service = service;
-			}
-			
-			// set the vehicle properties
-			vehicle.label = vehicleDict[@"label"];
-			vehicle.lastUpdate = [NSDate dateWithTimeIntervalSince1970:[vehicleDict[@"lastUpdate"] integerValue]];
-			NSDictionary *locationDict = vehicleDict[@"location"];
-			vehicle.latitude = locationDict[@"lat"];
-			vehicle.longitude = locationDict[@"lng"];
-			vehicle.bearing = locationDict[@"bearing"];
-		}
+    NSDictionary *vehicleDict = serviceDict[@"realtimeVehicle"];
+    NSArray *alternativeVehiclesArray = serviceDict[@"realtimeVehicleAlternatives"];
+    [TKParserHelper updateVehiclesForService:service primaryVehicle:vehicleDict alternativeVehicles:alternativeVehiclesArray];
 				
 		if (dls || visit) {
 			// we have supplied a start stop code, so we only want to update that

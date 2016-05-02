@@ -49,7 +49,10 @@
   [self cancelRequests];
   self.isActive = YES;
   
-  NSArray *enabledModes       = [request applicableModeIdentifiers];
+  NSArray *applicableModes = [request applicableModeIdentifiers];
+  NSMutableArray *enabledModes = [NSMutableArray arrayWithArray:applicableModes];
+  [enabledModes removeObjectsInArray:[[TKUserProfileHelper hiddenModeIdentifiers] allObjects]];
+  
   NSSet *groupedIdentifiers   = [SVKTransportModes groupedModeIdentifiers:enabledModes includeGroupForAll:YES];
   NSUInteger requestCount = [groupedIdentifiers count];
   self.finishedWorkers = 0;
@@ -304,11 +307,12 @@
                                                      andModeIdentifiers:strongSelf.modeIdentifiers
                                                                bestOnly:bestOnly
                                                            withASAPTime:ASAPTime];
-    [server initiateDataTaskWithMethod:@"GET"
-                                  path:@"routing.json"
-                            parameters:paras
-                                region:region
-                               success:
+    [server hitSkedGoWithMethod:@"GET"
+                           path:@"routing.json"
+                     parameters:paras
+                         region:region
+                 callbackOnMain:NO
+                        success:
      ^(id responseObject) {
        typeof(weakSelf) strongSelf2 = weakSelf;
        if (! strongSelf2) {
@@ -320,7 +324,7 @@
                       success:success
                       failure:failure];
      }
-                               failure:
+                        failure:
      ^(NSError *error2) {
        typeof(weakSelf) strongSelf2 = weakSelf;
        if (! strongSelf2) {
@@ -500,13 +504,16 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 #pragma mark - Single Requests
 
 - (NSDictionary *)createRequestParametersForRequest:(TripRequest *)request
-                                 andModeIdentifiers:(NSSet *)modeIdentifiers
+                                 andModeIdentifiers:(NSSet<NSString *> *)modeIdentifiers
                                            bestOnly:(BOOL)bestOnly
                                        withASAPTime:(NSDate *)ASAPTime
 {
 	NSMutableDictionary *paras = [TKSettings defaultDictionary];
 	
-	[paras setValue:[modeIdentifiers allObjects] forKey:@"modes"];
+  NSArray *sortedModes = [[modeIdentifiers allObjects] sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull mode1, NSString * _Nonnull mode2) {
+    return [mode1 compare:mode2];
+  }];
+	[paras setValue:sortedModes forKey:@"modes"];
 	
   // locations
   NSString *fromString = [STKParserHelper requestStringForCoordinate:[request.fromLocation coordinate]];
