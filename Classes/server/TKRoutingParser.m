@@ -489,19 +489,10 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           NSString *realTimeStatus = refDict[@"realTimeStatus"];
           [TKParserHelper adjustService:service forRealTimeStatusString:realTimeStatus];
           
-          // keep the vehicle
-          NSDictionary *vehicleDict = refDict[@"realtimeVehicle"];
-          if (vehicleDict) {
-            if (service.vehicle != nil) {
-              // update the vehicle
-              [TKParserHelper updateVehicle:service.vehicle fromDictionary:vehicleDict];
-            } else {
-              // add the vehicle
-              Vehicle *vehicle = [TKParserHelper insertNewVehicle:vehicleDict
-                                                 inTripKitContext:self.context];
-              vehicle.service = service;
-            }
-          }
+          // keep the vehicles
+          [TKParserHelper updateVehiclesForService:service
+                                    primaryVehicle:refDict[@"realtimeVehicle"]
+                               alternativeVehicles:refDict[@"realtimeVehicleAlternatives"]];
           
         } else {
           // private transport

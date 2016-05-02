@@ -270,26 +270,9 @@
 		}
 		
 		// Parse the vehicle
-		NSDictionary *vehicleDict = serviceDict[@"realtimeVehicle"];
-		if (vehicleDict) {
-			// which vehicle to update?
-			Vehicle *vehicle = service.vehicle;
-			
-			if (! vehicle) {
-				// create a new one
-				vehicle = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Vehicle class])
-																								inManagedObjectContext:service.managedObjectContext];
-				vehicle.service = service;
-			}
-			
-			// set the vehicle properties
-			vehicle.label = vehicleDict[@"label"];
-			vehicle.lastUpdate = [NSDate dateWithTimeIntervalSince1970:[vehicleDict[@"lastUpdate"] integerValue]];
-			NSDictionary *locationDict = vehicleDict[@"location"];
-			vehicle.latitude = locationDict[@"lat"];
-			vehicle.longitude = locationDict[@"lng"];
-			vehicle.bearing = locationDict[@"bearing"];
-		}
+    NSDictionary *vehicleDict = serviceDict[@"realtimeVehicle"];
+    NSArray *alternativeVehiclesArray = serviceDict[@"realtimeVehicleAlternatives"];
+    [TKParserHelper updateVehiclesForService:service primaryVehicle:vehicleDict alternativeVehicles:alternativeVehiclesArray];
 				
 		if (dls || visit) {
 			// we have supplied a start stop code, so we only want to update that
