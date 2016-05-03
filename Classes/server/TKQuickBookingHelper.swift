@@ -312,8 +312,9 @@ extension TKSegment {
     if let dictionary = bookingConfirmationDictionary() {
       return TKBookingConfirmation(withDictionary: dictionary)
       
-    } else if let mode = modeIdentifier() where !isStationary() && mode.hasPrefix("ps_tnc") { // FIXME: Remove this
-      return TKBookingConfirmation.fake()
+      // Useful for debugging the confirmation screen
+//    } else if let mode = modeIdentifier() where !isStationary() && mode.hasPrefix("ps_tnc") {
+//      return TKBookingConfirmation.fake()
 
     } else {
       return nil
