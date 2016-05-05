@@ -51,6 +51,9 @@ class TKQuickBooking: NSObject {
   /// Optional ETA for this option. This is the expected waiting time.
   let ETA: NSTimeInterval?
   
+  /// Expected waiting time. Negative if unknown. (For Obj-c compatibility.)
+  let ETARaw: NSTimeInterval
+  
   private init(title: String, subtitle: String?, bookingURL: NSURL, bookingTitle: String, tripUpdateURL: NSURL?, imageURL: NSURL?, price: TKQuickBookingPrice?, priceString: String?, ETA: NSTimeInterval?) {
     self.title = title
     self.subtitle = subtitle
@@ -61,6 +64,11 @@ class TKQuickBooking: NSObject {
     self.price = price
     self.priceString = priceString
     self.ETA = ETA
+    if let ETA = ETA {
+      self.ETARaw = ETA
+    } else {
+      self.ETARaw = -1
+    }
   }
 }
 
