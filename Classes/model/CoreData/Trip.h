@@ -100,6 +100,11 @@
 
 - (BOOL)allowImpossibleSegments;
 
+/** 
+ @return Whether trip mixes multiple modes. Note that multiple different public transport modes don't make a trip mixed-modal, but walking in between does.
+ */
+- (BOOL)isMixedModal;
+
 /**
  @param vehicle The vehicle to assign this trip to. `nil` to reset to a generic vehicle.
  */
