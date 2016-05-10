@@ -146,14 +146,14 @@
   [self hitURLForTripDownload:url completion:
    ^(NSURL *shareURL, id JSON, NSError *error) {
      if (JSON) {
-       [self parseJSON:JSON
-     forTripKitContext:tripKitContext
-            completion:^(Trip *trip) {
-         trip.shareURL = shareURL;
-         if (completion) {
-           completion(trip);
-         }
-       }];
+       [self parseJSON:JSON forTripKitContext:tripKitContext completion:
+        ^(Trip *trip) {
+          trip.shareURL = shareURL;
+          trip.request.expandForFavorite = YES;
+          if (completion) {
+            completion(trip);
+          }
+        }];
      } else {
        // failure
        [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip. Error: %@", error];
