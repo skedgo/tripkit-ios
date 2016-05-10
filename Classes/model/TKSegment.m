@@ -877,8 +877,10 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
   if (self.reference.service) {
 		return self.reference.service.number;
+  } else if (self.template.modeInfo.descriptor.length > 0) {
+    return self.template.modeInfo.descriptor;
   } else {
-    return [self.template.modeInfo descriptor];
+    return nil;
   }
 }
 
@@ -890,6 +892,8 @@ NSString *const UninitializedString =  @"UninitializedString";
     } else {
       return NSLocalizedStringFromTable(@"Live traffic", @"TripKit", nil);
     }
+  } else if ([self.trip isMixedModal] && ![self isPublicTransport]) {
+    return [self stringForDuration:YES];
   } else {
     return nil;
   }

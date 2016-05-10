@@ -614,6 +614,21 @@ typedef NSUInteger SGTripFlag;
   return [SVKTransportModes modeIdentifierIsExpensive:mainSegment.modeIdentifier];
 }
 
+- (BOOL)isMixedModal {
+  NSString *previousModeIdentifier;
+  for (TKSegment *segment in [self segments]) {
+    NSString *modeIdentifier = [segment modeIdentifier];
+    if (modeIdentifier) {
+      if (previousModeIdentifier && ![previousModeIdentifier isEqualToString:modeIdentifier]) {
+        return YES;
+      } else {
+        previousModeIdentifier = modeIdentifier;
+      }
+    }
+  }
+  return NO;
+}
+
 - (NSString *)accessibilityLabel
 {
   // prepare accessibility title
