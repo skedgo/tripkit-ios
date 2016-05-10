@@ -1266,13 +1266,13 @@ NSString *const UninitializedString =  @"UninitializedString";
         if (isTimeDependent) {
           NSString *time = [SGStyleManager timeString:self.arrivalTime
                                           forTimeZone:self.timeZone];
-          if (name) {
+          if (name.length > 0) {
             newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ArrivalLocationTime", @"TripKit", "The place of arrival with time"), name, time];
           } else {
             newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ArrivalTime", @"TripKit", "Time arrival"), time];
           }
         } else {
-          if (name) {
+          if (name.length > 0) {
             newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ArrivalLocation", @"TripKit", "The place of arrival"), name];
           } else {
             newString = NSLocalizedStringFromTable(@"Arrive", @"TripKit", @"Single line instruction to arrive");
