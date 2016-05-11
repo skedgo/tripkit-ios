@@ -11,10 +11,9 @@
 @interface SGKConfig (TKInterAppCommunicator)
 
 /**
- @return Something complex API Key
+ @return Some complex API Key
  */
 - (nullable NSString *)flitWaysPartnerKey;
-
 
 /**
  @return Something like 'tripgo'
