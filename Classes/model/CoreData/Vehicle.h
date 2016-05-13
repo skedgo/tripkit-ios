@@ -11,7 +11,7 @@
 #import <MapKit/MapKit.h>
 #import "STKMapAnnotation.h"
 
-@class Service;
+@class Service, SegmentReference;
 
 @interface Vehicle : NSManagedObject <STKDisplayablePoint>
 
@@ -26,6 +26,8 @@
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain) Service *service;
 @property (nonatomic, retain) NSSet *serviceAlternatives;
+@property (nonatomic, retain) SegmentReference *segment;
+@property (nonatomic, retain) NSSet *segmentAlternatives;
 
 // Non-persistent
 

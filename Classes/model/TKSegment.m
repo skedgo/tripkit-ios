@@ -209,6 +209,25 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.reference.timesAreRealTime;
 }
 
+- (Vehicle *)realTimeVehicle
+{
+  if (self.service) {
+    return self.service.vehicle;
+  } else {
+    return self.reference.realTimeVehicle;
+  }
+}
+
+- (NSArray <Vehicle *> *)realTimeAlternativeVehicles
+{
+  if (self.reference.realTimeVehicleAlternatives) {
+    return [self.reference.realTimeVehicleAlternatives allObjects];
+  } else {
+    return @[]; // Not showing alternatives for public transport
+  }
+}
+
+
 - (BOOL)usesVehicle
 {
   if (self.template.isSharedVehicle) {

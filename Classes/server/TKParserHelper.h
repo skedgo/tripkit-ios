@@ -40,6 +40,10 @@ forRealTimeStatusString:(NSString *)realTimeStatus;
                   primaryVehicle:(NSDictionary *)primaryVehicleDict
              alternativeVehicles:(NSArray *)alternativeVehicleDicts;
 
++ (void)updateVehiclesForSegmentReference:(SegmentReference *)reference
+                           primaryVehicle:(NSDictionary *)primaryVehicleDict
+                      alternativeVehicles:(NSArray *)alternativeVehicleDicts;
+
 #pragma mark - Stops
 
 + (StopLocation *)insertNewStopLocation:(NSDictionary *)stopDict

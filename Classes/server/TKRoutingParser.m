@@ -498,6 +498,9 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           // private transport
           [reference setSharedVehicleData:refDict[@"sharedVehicle"]];
           [reference setVehicleUUID:refDict[@"vehicleUUID"]];
+          [TKParserHelper updateVehiclesForSegmentReference:reference
+                                             primaryVehicle:refDict[@"realtimeVehicle"]
+                                        alternativeVehicles:nil];
         }
 
         NSDictionary *bookingData = [self mergedNewBookingData:refDict[@"booking"] into:reference.bookingData];

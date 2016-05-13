@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="TripKit" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Xcode 4.1">
+    <entity name="Alert" representedClassName="Alert" syncable="YES">
+        <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="hashCode" attributeType="Integer 32" indexed="YES" syncable="YES"/>
+        <attribute name="idService" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="idStopCode" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="severity" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Cell" representedClassName="Cell" syncable="YES">
+        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="hashCode" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="identifier" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="levelRaw" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="regionIdentifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <relationship name="stops" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopLocation" inverseName="cell" inverseEntity="StopLocation" syncable="YES"/>
+    </entity>
+    <entity name="DLSEntry" representedClassName="DLSEntry" parentEntity="StopVisits" syncable="YES">
+        <attribute name="pairIdentifier" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="endStop" maxCount="1" deletionRule="Nullify" destinationEntity="StopLocation" inverseName="endVisits" inverseEntity="StopLocation" syncable="YES"/>
+    </entity>
+    <entity name="SegmentReference" representedClassName="SegmentReference" syncable="YES">
+        <attribute name="alertHashCodes" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="endTime" attributeType="Date" syncable="YES"/>
+        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="startTime" attributeType="Date" syncable="YES"/>
+        <attribute name="templateHashCode" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <relationship name="realTimeVehicle" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Vehicle" inverseName="segment" inverseEntity="Vehicle" syncable="YES"/>
+        <relationship name="realTimeVehicleAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="segmentAlternatives" inverseEntity="Vehicle" syncable="YES"/>
+        <relationship name="segmentTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SegmentTemplate" inverseName="references" inverseEntity="SegmentTemplate" syncable="YES"/>
+        <relationship name="service" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="segments" inverseEntity="Service" syncable="YES"/>
+        <relationship name="trip" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="segmentReferences" inverseEntity="Trip" syncable="YES"/>
+    </entity>
+    <entity name="SegmentTemplate" representedClassName="SegmentTemplate" syncable="YES">
+        <attribute name="action" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bearing" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="durationWithoutTraffic" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="endLocation" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="hashCode" attributeType="Integer 32" indexed="YES" syncable="YES"/>
+        <attribute name="modeIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="modeInfo" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="notesRaw" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="scheduledEndStopCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="scheduledStartStopCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="segmentType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="smsMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="smsNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startLocation" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <attribute name="visibility" attributeType="Integer 16" defaultValueString="1" syncable="YES"/>
+        <relationship name="references" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SegmentReference" inverseName="segmentTemplate" inverseEntity="SegmentReference" syncable="YES"/>
+        <relationship name="shapes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Shape" inverseName="template" inverseEntity="Shape" syncable="YES"/>
+    </entity>
+    <entity name="Service" representedClassName="Service" syncable="YES">
+        <attribute name="code" attributeType="String" defaultValueString="NO_CODE" indexed="YES" syncable="YES"/>
+        <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="frequency" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="modeInfo" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="operatorName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <relationship name="continuation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="progenitor" inverseEntity="Service" syncable="YES"/>
+        <relationship name="progenitor" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="continuation" inverseEntity="Service" syncable="YES"/>
+        <relationship name="segments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SegmentReference" inverseName="service" inverseEntity="SegmentReference" syncable="YES"/>
+        <relationship name="shape" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Shape" inverseName="services" inverseEntity="Shape" syncable="YES"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Vehicle" inverseName="service" inverseEntity="Vehicle" syncable="YES"/>
+        <relationship name="vehicleAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="serviceAlternatives" inverseEntity="Vehicle" syncable="YES"/>
+        <relationship name="visits" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopVisits" inverseName="service" inverseEntity="StopVisits" syncable="YES"/>
+    </entity>
+    <entity name="Shape" representedClassName="Shape" syncable="YES">
+        <attribute name="encodedWaypoints" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <attribute name="travelled" attributeType="Boolean" defaultValueString="YES" indexed="YES" syncable="YES"/>
+        <relationship name="services" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="shape" inverseEntity="Service" syncable="YES"/>
+        <relationship name="template" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SegmentTemplate" inverseName="shapes" inverseEntity="SegmentTemplate" syncable="YES"/>
+        <relationship name="visits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StopVisits" inverseName="shapes" inverseEntity="StopVisits" syncable="YES"/>
+    </entity>
+    <entity name="StopLocation" representedClassName="StopLocation" syncable="YES">
+        <attribute name="filter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="regionName" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sortScore" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="stopCode" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="stopModeInfo" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <relationship name="cell" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cell" inverseName="stops" inverseEntity="Cell" syncable="YES"/>
+        <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopLocation" inverseName="parent" inverseEntity="StopLocation" syncable="YES"/>
+        <relationship name="endVisits" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DLSEntry" inverseName="endStop" inverseEntity="DLSEntry" syncable="YES"/>
+        <relationship name="parent" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="StopLocation" inverseName="children" inverseEntity="StopLocation" syncable="YES"/>
+        <relationship name="visits" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopVisits" inverseName="stop" inverseEntity="StopVisits" syncable="YES"/>
+    </entity>
+    <entity name="StopVisits" representedClassName="StopVisits" syncable="YES">
+        <attribute name="arrival" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="bearing" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="departure" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="-1" syncable="YES"/>
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <attribute name="originalTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="regionDay" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="searchString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <relationship name="service" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="visits" inverseEntity="Service" syncable="YES"/>
+        <relationship name="shapes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Shape" inverseName="visits" inverseEntity="Shape" syncable="YES"/>
+        <relationship name="stop" maxCount="1" deletionRule="Nullify" destinationEntity="StopLocation" inverseName="visits" inverseEntity="StopLocation" syncable="YES"/>
+    </entity>
+    <entity name="Trip" representedClassName="Trip" syncable="YES">
+        <attribute name="arrivalTime" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="currencySymbol" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="departureTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="mainSegmentHashCode" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="minutes" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="plannedURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="progressURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="saveURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shareURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="temporaryURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <attribute name="totalCalories" optional="YES" attributeType="Float" syncable="YES"/>
+        <attribute name="totalCarbon" optional="YES" attributeType="Float" syncable="YES"/>
+        <attribute name="totalHassle" optional="YES" attributeType="Float" syncable="YES"/>
+        <attribute name="totalPrice" optional="YES" attributeType="Float" syncable="YES"/>
+        <attribute name="totalPriceUSD" optional="YES" attributeType="Float" syncable="YES"/>
+        <attribute name="totalScore" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="totalWalking" optional="YES" attributeType="Float" syncable="YES"/>
+        <attribute name="updateURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="representedGroup" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="TripGroup" inverseName="visibleTrip" inverseEntity="TripGroup" syncable="YES"/>
+        <relationship name="segmentReferences" toMany="YES" minCount="1" deletionRule="Cascade" destinationEntity="SegmentReference" inverseName="trip" inverseEntity="SegmentReference" syncable="YES"/>
+        <relationship name="tripGroup" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TripGroup" inverseName="trips" inverseEntity="TripGroup" syncable="YES"/>
+    </entity>
+    <entity name="TripGroup" representedClassName="TripGroup" syncable="YES">
+        <attribute name="classification" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="frequency" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <attribute name="visibilityRaw" attributeType="Integer 16" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <relationship name="preferredFor" optional="YES" toMany="YES" maxCount="2" deletionRule="Nullify" destinationEntity="TripRequest" inverseName="preferredGroup" inverseEntity="TripRequest" syncable="YES"/>
+        <relationship name="request" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TripRequest" inverseName="tripGroups" inverseEntity="TripRequest" indexed="YES" syncable="YES"/>
+        <relationship name="trips" toMany="YES" deletionRule="Cascade" destinationEntity="Trip" inverseName="tripGroup" inverseEntity="Trip" indexed="YES" syncable="YES"/>
+        <relationship name="visibleTrip" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Trip" inverseName="representedGroup" inverseEntity="Trip" syncable="YES"/>
+    </entity>
+    <entity name="TripRequest" representedClassName="TripRequest" syncable="YES">
+        <attribute name="arrivalTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="departureTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="expandForFavorite" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="fromLocation" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="modes" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="purpose" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeCreated" attributeType="Date" syncable="YES"/>
+        <attribute name="timeType" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toLocation" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="preferredGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TripGroup" inverseName="preferredFor" inverseEntity="TripGroup" syncable="YES"/>
+        <relationship name="tripGroups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TripGroup" inverseName="request" inverseEntity="TripGroup" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
+        <attribute name="bearing" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastUpdate" attributeType="Date" syncable="YES"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <relationship name="segment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SegmentReference" inverseName="realTimeVehicle" inverseEntity="SegmentReference" syncable="YES"/>
+        <relationship name="segmentAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SegmentReference" inverseName="realTimeVehicleAlternatives" inverseEntity="SegmentReference" syncable="YES"/>
+        <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="vehicle" inverseEntity="Service" syncable="YES"/>
+        <relationship name="serviceAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="vehicleAlternatives" inverseEntity="Service" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Alert" positionX="765" positionY="297" width="128" height="210"/>
+        <element name="Cell" positionX="-99" positionY="131" width="128" height="165"/>
+        <element name="DLSEntry" positionX="124" positionY="539" width="128" height="73"/>
+        <element name="SegmentReference" positionX="511" positionY="-117" width="128" height="238"/>
+        <element name="SegmentTemplate" positionX="711" positionY="-204" width="128" height="343"/>
+        <element name="Service" positionX="315" positionY="149" width="128" height="283"/>
+        <element name="Shape" positionX="601" positionY="368" width="128" height="163"/>
+        <element name="StopLocation" positionX="-101" positionY="369" width="128" height="253"/>
+        <element name="StopVisits" positionX="124" positionY="243" width="128" height="238"/>
+        <element name="Trip" positionX="315" positionY="-252" width="128" height="390"/>
+        <element name="TripGroup" positionX="99" positionY="-186" width="128" height="180"/>
+        <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="223"/>
+        <element name="Vehicle" positionX="513" positionY="144" width="128" height="208"/>
+    </elements>
+</model>

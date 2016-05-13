@@ -102,6 +102,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)disclaimer;
 - (BOOL)isCanceled;
 - (BOOL)timesAreRealTime;
+- (Vehicle *)realTimeVehicle;
+- (NSArray <Vehicle *> *)realTimeAlternativeVehicles;
 
 - (BOOL)usesVehicle;
 

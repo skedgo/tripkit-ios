@@ -20,6 +20,7 @@
 @dynamic label;
 @dynamic toDelete;
 @dynamic service, serviceAlternatives;
+@dynamic segment, segmentAlternatives;
 
 @synthesize displayAsPrimary;
 
@@ -59,12 +60,20 @@
 
 - (NSString *)serviceNumber
 {
-  return [[self anyService] number];
+  return [[self anyService] number]; // Show nothing for non public transport
 }
 
 - (UIColor *)serviceColor
 {
-  return [[self anyService] color];
+  Service *service = [self anyService];
+  if (service) {
+    return [service color];
+  }
+  SegmentReference *reference = [self anySegmentReference];
+  if (reference) {
+    return reference.template.modeInfo.color;
+  }
+  return nil;
 }
 
 
@@ -72,8 +81,19 @@
 
 - (NSString *)title
 {
+  NSString *modeTitle;
   Service *service = [self anyService];
-  NSString *modeTitle = [[service modeTitle] capitalizedStringWithLocale:[NSLocale currentLocale]];
+  if (service) {
+    modeTitle = [service.modeTitle capitalizedStringWithLocale:[NSLocale currentLocale]];
+  }
+  SegmentReference *reference = [self anySegmentReference];
+  if (reference) {
+    modeTitle = reference.template.modeInfo.descriptor;
+  }
+  if (!modeTitle) {
+    modeTitle = self.label;
+  }
+  
 	if (service.number) {
 		return [NSString stringWithFormat:@"%@ %@", modeTitle, service.number];
 	} else {
@@ -124,6 +144,11 @@
 - (Service *)anyService
 {
   return self.service ?: [self.serviceAlternatives anyObject];
+}
+
+- (SegmentReference *)anySegmentReference
+{
+  return self.segment ?: [self.segmentAlternatives anyObject];
 }
 
 - (BOOL)hasLastUpdate

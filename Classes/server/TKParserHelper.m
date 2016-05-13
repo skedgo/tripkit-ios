@@ -83,6 +83,41 @@
   }
 }
 
++ (void)updateVehiclesForSegmentReference:(SegmentReference *)reference
+                           primaryVehicle:(NSDictionary *)primaryVehicleDict
+                      alternativeVehicles:(NSArray *)alternativeVehicleDicts
+{
+  NSParameterAssert(reference);
+  if (primaryVehicleDict) {
+    if (reference.realTimeVehicle) {
+      [self updateVehicle:reference.realTimeVehicle fromDictionary:primaryVehicleDict];
+    } else {
+      Vehicle *vehicle = [self insertNewVehicle:primaryVehicleDict inTripKitContext:reference.managedObjectContext];
+      reference.realTimeVehicle = vehicle;
+    }
+  }
+  
+  if (alternativeVehicleDicts.count > 0) {
+    for (NSDictionary *alternativeVehicleDict in alternativeVehicleDicts) {
+      Vehicle *existingVehicle = nil;
+      NSString *alternativeIdentifier = alternativeVehicleDict[@"id"];
+      for (Vehicle *existingAlternative in reference.realTimeVehicleAlternatives) {
+        if ([existingAlternative.identifier isEqualToString:alternativeIdentifier]) {
+          existingVehicle = existingAlternative;
+          break;
+        }
+      }
+      if (existingVehicle) {
+        [self updateVehicle:existingVehicle fromDictionary:alternativeVehicleDict];
+      } else {
+        Vehicle *newAlternative = [self insertNewVehicle:alternativeVehicleDict
+                                        inTripKitContext:reference.managedObjectContext];
+        [reference addRealTimeVehicleAlternativesObject:newAlternative];
+      }
+    }
+  }
+}
+
 + (Vehicle *)insertNewVehicle:(NSDictionary *)vehicleDict
              inTripKitContext:(NSManagedObjectContext *)context
 {

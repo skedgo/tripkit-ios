@@ -28,6 +28,7 @@ typedef NSUInteger SGSegmentFlag;
 @dynamic toDelete;
 @dynamic trip;
 @dynamic service;
+@dynamic realTimeVehicle, realTimeVehicleAlternatives;
 
 + (void)removeOrphansFromManagedObjectContext:(NSManagedObjectContext *)context
 {
