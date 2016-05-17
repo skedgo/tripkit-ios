@@ -133,12 +133,16 @@ extension SVKRegion {
   }
 
   private func locallyLinkedAccount(mode: String) -> ProviderAuth? {
-    if let _ = OAuthClient.cachedCredentials(provider: mode) {
-      let status = ProviderAuth.Status.Connected(nil)
-      return ProviderAuth(modeIdentifier: mode, status: status, provider: nil)
-    } else {
-      return nil;
+    if let cached = OAuthClient.cachedCredentials(provider: mode) {
+      if (cached.isValid || cached.hasRefreshToken) {
+        let status = ProviderAuth.Status.Connected(nil)
+        return ProviderAuth(modeIdentifier: mode, status: status, provider: nil)
+      } else {
+        // Remove outdated credentials that we can't renew
+        OAuthClient.removeCredentials(provider: mode)
+      }
     }
+    return nil;
   }
   
   private func remotelyLinkedAccounts(mode: String?, completion: [ProviderAuth]? -> Void) {
