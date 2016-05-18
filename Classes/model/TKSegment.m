@@ -1043,6 +1043,10 @@ NSString *const UninitializedString =  @"UninitializedString";
     case SGStyleModeIconTypeResolutionIndependentOnDark:
       iconFileNamePart = self.template.modeInfo.remoteDarkImageName;
       break;
+      
+    case SGStyleModeIconTypeVehicle:
+      iconFileNamePart = self.realTimeVehicle.icon;
+      break;
   }
 
   if (iconFileNamePart) {

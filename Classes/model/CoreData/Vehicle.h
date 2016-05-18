@@ -23,6 +23,7 @@
 @property (nonatomic, retain) NSNumber * bearing;
 @property (nonatomic, retain) NSString * label;
 @property (nonatomic, retain) NSString * identifier;
+@property (nonatomic, retain) NSString * icon;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain) Service *service;
 @property (nonatomic, retain) NSSet *serviceAlternatives;

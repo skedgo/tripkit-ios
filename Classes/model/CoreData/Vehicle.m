@@ -12,6 +12,7 @@
 
 @implementation Vehicle
 
+@dynamic icon;
 @dynamic identifier;
 @dynamic latitude;
 @dynamic longitude;

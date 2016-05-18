@@ -134,6 +134,7 @@
   vehicle.identifier = vehicleDict[@"id"];
   vehicle.label = vehicleDict[@"label"];
   vehicle.lastUpdate = [NSDate dateWithTimeIntervalSince1970:[vehicleDict[@"lastUpdate"] integerValue]];
+  vehicle.icon = vehicleDict[@"icon"];
   
   NSDictionary *location = vehicleDict[@"location"];
   vehicle.latitude = location[@"lat"];

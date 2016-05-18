@@ -175,6 +175,7 @@
     </entity>
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
         <attribute name="bearing" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUpdate" attributeType="Date" syncable="YES"/>
@@ -199,6 +200,6 @@
         <element name="Trip" positionX="315" positionY="-252" width="128" height="390"/>
         <element name="TripGroup" positionX="99" positionY="-186" width="128" height="180"/>
         <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="223"/>
-        <element name="Vehicle" positionX="513" positionY="144" width="128" height="208"/>
+        <element name="Vehicle" positionX="513" positionY="144" width="128" height="223"/>
     </elements>
 </model>
