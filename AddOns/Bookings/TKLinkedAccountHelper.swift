@@ -10,23 +10,23 @@ import Foundation
 
 public struct ProviderAuth {
 
-  struct RemoteAction {
-    let title: String
-    let URL: NSURL
+  private struct RemoteAction {
+    private let title: String
+    private let URL: NSURL
   }
 
-  enum Status {
+  private enum Status {
     case Connected(RemoteAction?)
     case NotConnected(RemoteAction)
     
-    var remoteURL: NSURL? {
+    private var remoteURL: NSURL? {
       switch self {
       case .Connected(let action): return action?.URL
       case .NotConnected(let action): return action.URL
       }
     }
 
-    var remoteAction: String? {
+    private var remoteAction: String? {
       switch self {
       case .Connected(let action): return action?.title
       case .NotConnected(let action): return action.title
@@ -34,13 +34,24 @@ public struct ProviderAuth {
     }
   }
 
-  let modeIdentifier: String
+  private let status: Status
   
-  let status: Status
+  /// Mode identifier that this authentication is for
+  public let modeIdentifier: String
+  
+  // TODO: Do we need both mode identifier + provider?
+  public let provider: String?
+  
+  /// Current authentication status
+  public var isConnected: Bool {
+    switch status {
+    case .Connected: return true
+    case .NotConnected: return false
+    }
+  }
 
-  let provider: String?
-  
-  var action: String {
+  /// Title  for button to change authentication status
+  public var action: String {
     if let remoteAction = status.remoteAction {
       return remoteAction
     }
@@ -51,12 +62,12 @@ public struct ProviderAuth {
     }
   }
   
-  var isConnected: Bool {
-    switch status {
-    case .Connected: return true
-    case .NotConnected: return false
-    }
+  /// Optional URL to either link or unlink the account. 
+  /// Only available if user has an account.
+  public var actionURL: NSURL? {
+    return status.remoteURL
   }
+
 }
 
 extension ProviderAuth.Status {
@@ -101,8 +112,8 @@ extension SVKRegion {
    
    Authentications can be locally stored (requiring no logins) or associated with the user's account and stored server-side. This method first tries locally and then falls back to remotely.
    
-   - param mode: Mode identifier for which to fetch accounts. If `nil` accounts for all modes will be fetched.
-   - param completion: Block executed on completion with list of accounts that can be linked
+   - parameter mode: Mode identifier for which to fetch accounts. If `nil`, accounts for all modes will be fetched.
+   - parameter completion: Block executed on completion with list of accounts that can be linked.
   */
   public func linkedAccounts(mode: String? = nil, completion: [ProviderAuth]? -> Void) {
     if let mode = mode, account = locallyLinkedAccount(mode) {
@@ -112,8 +123,15 @@ extension SVKRegion {
     }
   }
   
+  /**
+   Unlinkes local and remote authentications for the provided mode.
+   
+   - parameter mode: Mode identifier for which to remove the authentication.
+   - parameter remoteURL: `ProviderAuth.actionURL`, required to remove remote authentications.
+   - parameter completion: Block executed when unlinking has finished. Boolean parameter indicates if any authentications have been removed.
+  */
   public func unlinkAccount(mode: String, remoteURL: NSURL?, completion: Bool -> Void) {
-    let localRemoved = OAuthClient.removeCredentials(provider: mode)
+    let localRemoved = OAuthClient.removeCredentials(mode: mode)
     
     guard let URL = remoteURL else {
       completion(localRemoved)
@@ -133,13 +151,13 @@ extension SVKRegion {
   }
 
   private func locallyLinkedAccount(mode: String) -> ProviderAuth? {
-    if let cached = OAuthClient.cachedCredentials(provider: mode) {
+    if let cached = OAuthClient.cachedCredentials(mode: mode) {
       if (cached.isValid || cached.hasRefreshToken) {
         let status = ProviderAuth.Status.Connected(nil)
-        return ProviderAuth(modeIdentifier: mode, status: status, provider: nil)
+        return ProviderAuth(status: status, modeIdentifier: mode, provider: nil)
       } else {
         // Remove outdated credentials that we can't renew
-        OAuthClient.removeCredentials(provider: mode)
+        OAuthClient.removeCredentials(mode: mode)
       }
     }
     return nil;
