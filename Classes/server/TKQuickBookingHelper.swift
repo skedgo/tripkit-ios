@@ -74,12 +74,6 @@ class TKQuickBooking: NSObject {
 
 // Swift-only this would be a struct
 struct TKBookingConfirmation {
-  enum Status: String {
-    case Pending = "PENDING"
-    case Confirmed = "CONFIRMED"
-    case Canceled = "CANCELLED"
-  }
-  
   struct Detail {
     let title: String
     let subtitle: String?
@@ -93,7 +87,7 @@ struct TKBookingConfirmation {
     let externalURL: NSURL?
   }
   
-  let status: Status
+  let status: Detail
   let provider: Detail?
   let vehicle: Detail?
   let actions: [Action]
@@ -171,8 +165,7 @@ extension TKQuickBooking {
 
 extension TKBookingConfirmation {
   private init?(withDictionary dictionary: [String: AnyObject]) {
-    guard let statusString = dictionary["status"] as? String,
-          let status = Status(rawValue: statusString) else {
+    guard let status = Detail(withDictionary: dictionary["status"] as? [String: AnyObject]) else {
         return nil
     }
     
