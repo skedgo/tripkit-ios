@@ -8,6 +8,9 @@
 
 import Foundation
 
+import RxSwift
+import RxCocoa
+
 public struct ProviderAuth {
 
   private struct RemoteAction {
@@ -108,7 +111,7 @@ extension ProviderAuth {
 
 extension SVKRegion {
   /**
-   Fetches authentications for the provided mode.
+   Fetches authentications for the provided `mode`.
    
    Authentications can be locally stored (requiring no logins) or associated with the user's account and stored server-side. This method first tries locally and then falls back to remotely.
    
@@ -124,7 +127,34 @@ extension SVKRegion {
   }
   
   /**
-   Unlinkes local and remote authentications for the provided mode.
+   Initiates linking of a user's account for the provided `mode`.
+   
+   Fetches the required information from the server to initiate the OAuth process and then starts the OAuth process itself, which usually leads to the user being redirected to a webpage.
+   
+   - warning: Make sure you have configured the OAuthCallback in your Config.plist and that you're handling this when the app gets opened again.
+   
+   - parameter mode: Mode identifier for which to link the user's account.
+   - parameter remoteURL: URL for linking from `ProviderAuth.actionURL`.
+   - returns: Observable indicating success.
+  */
+  public func rx_linkAccount(mode: String, remoteURL: NSURL) -> Observable<Bool> {
+    return OAuthClient.requiresOAuth(remoteURL)
+      .filter { form, isOAuth in
+        if !isOAuth {
+          SGKLog.warn("TKLinkedAccountHelper", text: "Expected OAuth form, got \(form). Will ignore.")
+        }
+        return isOAuth
+      }
+      .flatMap { form, _ in
+        return OAuthClient.performOAuth(mode, form: form)
+      }
+      .map { form in
+        return form == nil // NO further input required
+      }
+  }
+  
+  /**
+   Unlinkes local and remote authentications for the provided `mode`.
    
    - parameter mode: Mode identifier for which to remove the authentication.
    - parameter remoteURL: `ProviderAuth.actionURL`, required to remove remote authentications.
