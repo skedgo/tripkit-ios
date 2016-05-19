@@ -42,9 +42,6 @@ public struct ProviderAuth {
   /// Mode identifier that this authentication is for
   public let modeIdentifier: String
   
-  // TODO: Do we need both mode identifier + provider?
-  public let provider: String?
-  
   /// Current authentication status
   public var isConnected: Bool {
     switch status {
@@ -105,7 +102,6 @@ extension ProviderAuth {
     
     self.modeIdentifier = mode
     self.status = status
-    self.provider = dictionary["provider"] as? String
   }
 }
 
@@ -184,7 +180,7 @@ extension SVKRegion {
     if let cached = OAuthClient.cachedCredentials(mode: mode) {
       if (cached.isValid || cached.hasRefreshToken) {
         let status = ProviderAuth.Status.Connected(nil)
-        return ProviderAuth(status: status, modeIdentifier: mode, provider: nil)
+        return ProviderAuth(status: status, modeIdentifier: mode)
       } else {
         // Remove outdated credentials that we can't renew
         OAuthClient.removeCredentials(mode: mode)
