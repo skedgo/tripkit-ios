@@ -47,6 +47,9 @@ class TKQuickBooking: NSObject {
 
   /// Localised human-friendly string, e.g., "$10"
   let priceString: String?
+  
+  let surgeString: String?
+  let surgeImageURL: NSURL?
 
   /// Optional ETA for this option. This is the expected waiting time.
   let ETA: NSTimeInterval?
@@ -54,7 +57,7 @@ class TKQuickBooking: NSObject {
   /// Expected waiting time. Negative if unknown. (For Obj-c compatibility.)
   let ETARaw: NSTimeInterval
   
-  private init(title: String, subtitle: String?, bookingURL: NSURL, bookingTitle: String, tripUpdateURL: NSURL?, imageURL: NSURL?, price: TKQuickBookingPrice?, priceString: String?, ETA: NSTimeInterval?) {
+  private init(title: String, subtitle: String?, bookingURL: NSURL, bookingTitle: String, tripUpdateURL: NSURL?, imageURL: NSURL?, price: TKQuickBookingPrice?, priceString: String?, surgeText: String?, surgeImageURL: NSURL?, ETA: NSTimeInterval?) {
     self.title = title
     self.subtitle = subtitle
     self.bookingURL = bookingURL
@@ -63,6 +66,8 @@ class TKQuickBooking: NSObject {
     self.imageURL = imageURL
     self.price = price
     self.priceString = priceString
+    self.surgeString = surgeText
+    self.surgeImageURL = surgeImageURL
     self.ETA = ETA
     if let ETA = ETA {
       self.ETARaw = ETA
@@ -154,12 +159,16 @@ extension TKQuickBooking {
       price = nil
     }
     
+    let surgeText = dictionary["surgeString"] as? String
+    let surgeImageURLString = dictionary["surgeImageURL"] as? String
+    let surgeImageURL = surgeImageURLString != nil ? NSURL(string: surgeImageURLString!) : nil
+    
     let ETA = dictionary["ETA"] as? NSTimeInterval
     
     let tripUpdateURLString = dictionary["tripUpdateURL"] as? String
     let tripUpdateURL = tripUpdateURLString != nil ? NSURL(string: tripUpdateURLString!) : nil
     
-    self.init(title: title, subtitle: subtitle, bookingURL: bookingURL, bookingTitle: bookingTitle, tripUpdateURL: tripUpdateURL, imageURL: imageURL, price: price, priceString: priceString, ETA: ETA)
+    self.init(title: title, subtitle: subtitle, bookingURL: bookingURL, bookingTitle: bookingTitle, tripUpdateURL: tripUpdateURL, imageURL: imageURL, price: price, priceString: priceString, surgeText: surgeText, surgeImageURL: surgeImageURL, ETA: ETA)
   }
 }
 
