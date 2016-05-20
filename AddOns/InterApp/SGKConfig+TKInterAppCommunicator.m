@@ -27,14 +27,12 @@
 
 - (nullable NSString *)lyftPartnerCompanyName
 {
-  NSString *proper = self.configuration[@"TKInterAppCommunicator"][@"lyftPartnerCompanyName"];
-  if (proper) {
-    return proper;
-  }
-  
-  // fall-back for old, bad name
-  return self.configuration[@"TKInterAppCommunicator"][@"yelpPartnerCompanyName"];
+  return self.configuration[@"TKInterAppCommunicator"][@"lyftPartnerCompanyName"];
 }
 
+- (nullable NSString *)olaXAPPToken
+{
+  return self.configuration[@"TKInterAppCommunicator"][@"olaXAPPToken"];
+}
 
 @end
