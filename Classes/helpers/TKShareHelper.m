@@ -120,10 +120,11 @@
   if (!CLLocationCoordinate2DIsValid(end) && name != nil) {
       [geocoder geocodeString:name nearRegion:MKMapRectWorld success:^(NSString * _Nonnull query, NSArray<SGNamedCoordinate *> * _Nonnull results) {
 #pragma unused(query)
-        id <MKAnnotation>to = [SGBaseGeocoder pickBestFromResults:results];
-        CLLocationCoordinate2D newEnd = [to coordinate];
-        
-        completion(start, newEnd, name, timeType, time);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          id <MKAnnotation>to = [SGBaseGeocoder pickBestFromResults:results];
+          CLLocationCoordinate2D newEnd = [to coordinate];
+          completion(start, newEnd, name, timeType, time);
+        });
       } failure:^(NSString * _Nonnull query, NSError * _Nullable error) {
 #pragma unused(query, error)
         // Ignore silently
