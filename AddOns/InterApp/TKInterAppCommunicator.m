@@ -293,8 +293,7 @@
 
   } else if ([action isEqualToString:@"ola"]) {
     [self launchOlaForSegment:segment
-       currentLocationHandler:currentLocationHandler
-               openURLHandler:openURLHandler];
+             openStoreHandler:openStoreHandler];
     
   } else if ([action isEqualToString:@"ingogo"]) {
     [self launchIngogoForSegment:segment
