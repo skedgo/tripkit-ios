@@ -877,8 +877,10 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
   if (self.reference.service) {
 		return self.reference.service.number;
+  } else if (self.template.modeInfo.descriptor.length > 0) {
+    return self.template.modeInfo.descriptor;
   } else {
-    return [self.template.modeInfo descriptor];
+    return nil;
   }
 }
 
@@ -890,6 +892,8 @@ NSString *const UninitializedString =  @"UninitializedString";
     } else {
       return NSLocalizedStringFromTable(@"Live traffic", @"TripKit", nil);
     }
+  } else if ([self.trip isMixedModal] && ![self isPublicTransport]) {
+    return [self stringForDuration:YES];
   } else {
     return nil;
   }
@@ -1266,13 +1270,13 @@ NSString *const UninitializedString =  @"UninitializedString";
         if (isTimeDependent) {
           NSString *time = [SGStyleManager timeString:self.arrivalTime
                                           forTimeZone:self.timeZone];
-          if (name) {
+          if (name.length > 0) {
             newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ArrivalLocationTime", @"TripKit", "The place of arrival with time"), name, time];
           } else {
             newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ArrivalTime", @"TripKit", "Time arrival"), time];
           }
         } else {
-          if (name) {
+          if (name.length > 0) {
             newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ArrivalLocation", @"TripKit", "The place of arrival"), name];
           } else {
             newString = NSLocalizedStringFromTable(@"Arrive", @"TripKit", @"Single line instruction to arrive");

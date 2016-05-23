@@ -290,6 +290,10 @@
     [self launchUberForSegment:segment
         currentLocationHandler:currentLocationHandler
                 openURLHandler:openURLHandler];
+
+  } else if ([action isEqualToString:@"ola"]) {
+    [self launchOlaForSegment:segment
+             openStoreHandler:openStoreHandler];
     
   } else if ([action isEqualToString:@"ingogo"]) {
     [self launchIngogoForSegment:segment
@@ -349,6 +353,7 @@
         || ([action isEqualToString:@"ingogo"]   && [self deviceHasIngogo])
         || ([action isEqualToString:@"uber"]     && [self deviceHasUber])
         || ([action isEqualToString:@"flitways"] && [self deviceHasFlitWays])
+        || ([action isEqualToString:@"ola"]      && [self deviceHasOla])
         || ([action hasPrefix:@"lyft"]           && [self deviceHasLyft]) // also lyft_line, etc.
         ) {
       [sortedActions insertObject:action atIndex:startIndex++];
@@ -367,6 +372,11 @@
 + (BOOL)deviceHasGoCatch
 {
   return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"gocatch:"]];
+}
+
++ (BOOL)deviceHasOla
+{
+  return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"olacabs:"]];
 }
 
 + (BOOL)deviceHasUber
@@ -533,6 +543,36 @@
     } else {
       [[UIApplication sharedApplication] openURL:url];
     }
+  }
+}
+
++ (void)launchOlaForSegment:(TKSegment *)segment
+           openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
+{
+  if ([self deviceHasOla]) {
+    // http://developers.olacabs.com/docs/deep-linking
+    
+    NSMutableString *urlString = [NSMutableString stringWithString:@"olacabs://app/launch?landing_page=bk"];
+    
+    // from
+    id<MKAnnotation> startAnnotation = [segment start];
+    CLLocationCoordinate2D start = [startAnnotation coordinate];
+    [urlString appendFormat:@"&lat=%.5f&lng=%.5f", start.latitude, start.longitude];
+    
+    // partner tracking
+    NSString *token = [[SGKConfig sharedInstance] olaXAPPToken];
+    if (token.length > 0) {
+      [urlString appendFormat:@"&utm_source=%@", token];
+    }
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    
+  } else if (openStoreHandler) {
+    openStoreHandler(@(TKInterAppCommunicatorITunesAppIDOla));
+    
+  } else {
+    NSString *URLString = [NSString stringWithFormat:@"https://itunes.apple.com/in/app/olacabs/id%d?mt=8", TKInterAppCommunicatorITunesAppIDOla];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
   }
 }
 

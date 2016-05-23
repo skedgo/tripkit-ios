@@ -15,7 +15,6 @@
  */
 - (nullable NSString *)flitWaysPartnerKey;
 
-
 /**
  @return Something like 'tripgo'
  */
@@ -30,5 +29,10 @@
  @return something like 'skedgo'
  */
 - (nullable NSString *)lyftPartnerCompanyName;
+
+/**
+ @return Ola's XAPP token
+ */
+- (nullable NSString *)olaXAPPToken;
 
 @end

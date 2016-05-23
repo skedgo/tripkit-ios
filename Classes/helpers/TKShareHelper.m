@@ -74,7 +74,8 @@
 
 + (BOOL)queryDetailsForURL:(NSURL *)url
              usingGeocoder:(id<SGGeocoder>)geocoder
-                completion:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, NSString *name, SGTimeType timeType, NSDate *time))completion
+                   success:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, NSString *name, SGTimeType timeType, NSDate *time))success
+                   failure:(void (^)())failure
 {
   // re-construct the parameters
   NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
@@ -120,16 +121,21 @@
 //  if (!CLLocationCoordinate2DIsValid(end) && name != nil) {
 //      [geocoder geocodeString:name nearRegion:MKMapRectWorld success:^(NSString * _Nonnull query, NSArray<SGNamedCoordinate *> * _Nonnull results) {
 //#pragma unused(query)
-//        id <MKAnnotation>to = [SGBaseGeocoder pickBestFromResults:results];
-//        CLLocationCoordinate2D newEnd = [to coordinate];
-//        
-//        completion(start, newEnd, name, timeType, time);
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//          id <MKAnnotation>to = [SGBaseGeocoder pickBestFromResults:results];
+//          if (to) {
+//            CLLocationCoordinate2D newEnd = [to coordinate];
+//            success(start, newEnd, name, timeType, time);
+//          } else {
+//            failure();
+//          }
+//        });
 //      } failure:^(NSString * _Nonnull query, NSError * _Nullable error) {
 //#pragma unused(query, error)
-//        // Ignore silently
+//        failure();
 //      }];
 //  } else {
-    completion(start, end, name, timeType, time);
+    success(start, end, name, timeType, time);
 //  }
   return YES;
 }
