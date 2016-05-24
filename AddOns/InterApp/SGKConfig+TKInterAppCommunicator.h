@@ -30,4 +30,9 @@
  */
 - (nullable NSString *)lyftPartnerCompanyName;
 
+/**
+ @return Ola's XAPP token
+ */
+- (nullable NSString *)olaXAPPToken;
+
 @end

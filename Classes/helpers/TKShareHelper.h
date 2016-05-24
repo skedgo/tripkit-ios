@@ -38,7 +38,8 @@
 
 + (BOOL)queryDetailsForURL:(NSURL *)url
              usingGeocoder:(id<SGGeocoder>)geocoder
-                completion:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, NSString *name, SGTimeType timeType, NSDate *time))completion;
+                   success:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, NSString *name, SGTimeType timeType, NSDate *time))success
+                   failure:(void (^)())failure;
 
 
 #pragma mark - Stops

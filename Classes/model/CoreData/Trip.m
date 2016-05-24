@@ -622,6 +622,10 @@ typedef NSUInteger SGTripFlag;
 - (BOOL)isMixedModal {
   NSString *previousModeIdentifier;
   for (TKSegment *segment in [self segments]) {
+    if ([segment isStationary]
+        || ([segment isWalking] && ![segment hasVisibility:STKTripSegmentVisibilityInSummary])) {
+      continue; // A stationary segment or short walk doesn't make a trip mixed-modal
+    }
     NSString *modeIdentifier = [segment modeIdentifier];
     if (modeIdentifier) {
       if (previousModeIdentifier && ![previousModeIdentifier isEqualToString:modeIdentifier]) {
