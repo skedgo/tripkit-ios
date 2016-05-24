@@ -208,6 +208,7 @@
 
 - (void)updateTrip:(Trip *)trip
            fromURL:(NSURL *)URL
+           aborter:(nullable BOOL(^)(NSURL *URL))aborter
         completion:(void(^)(NSURL *URL, Trip * __nullable trip, NSError * __nullable error))completion
 {
   [self hitURLForTripDownload:URL
@@ -215,6 +216,10 @@
    ^(NSURL *shareURL, id JSON, NSError *error) {
 #pragma unused(shareURL)
     if (JSON) {
+      if (aborter && aborter(URL)) {
+        return;
+      }
+      
       [self parseJSON:JSON
          updatingTrip:trip
            completion:

@@ -343,7 +343,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
                 allowDuplicatingExistingTrip:(BOOL)allowDuplicates
 {
   ZAssert(self.context, @"Managed object context required!");
-  
+    
   // let's check if the request is still alive
   if (! request) {
     request = insertIntoGroup.request;
