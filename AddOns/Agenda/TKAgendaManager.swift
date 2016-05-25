@@ -51,7 +51,7 @@ public class TKAgendaManager {
   
   public class func initialize(builder: TKAgendaBuilderType, dataSources: [TKAgendaDataSource]) {
     guard nil == _singleton else {
-      print("Ignore subsequent call to `initialize`.")
+      assertionFailure("Ignore subsequent call to `initialize`.")
       return
     }
     _singleton = TKAgendaManager(builder: builder, dataSources: dataSources)
