@@ -250,6 +250,11 @@
     ? NSLocalizedStringFromTable(@"Open Lyft", @"TripKit", nil)
     : NSLocalizedStringFromTable(@"Get Lyft", @"TripKit", nil);
     
+  } else if ([action isEqualToString:@"ola"]) {
+    return [self deviceHasOla]
+    ? NSLocalizedStringFromTable(@"Open Ola", @"TripKit", nil)
+    : NSLocalizedStringFromTable(@"Get Ola", @"TripKit", nil);
+
   } else if ([action isEqualToString:@"flitways"]) {
     return NSLocalizedStringFromTable(@"Book with FlitWays", @"TripKit", nil);
     
