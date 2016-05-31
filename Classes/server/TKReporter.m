@@ -22,13 +22,16 @@
     return;
   }
   
-  [[NSUserDefaults standardUserDefaults] setObject:URLString forKey:@"TKReporterLatestPlannedURL"];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *key = @"TKReporterLatestPlannedURL";
+  [defaults setObject:URLString forKey:key];
 
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    NSString *latestURLString = [[NSUserDefaults standardUserDefaults] stringForKey:@"TKReporterLatestPlannedURL"];
+    NSString *latestURLString = [defaults stringForKey:key];
     if (![latestURLString isEqualToString:URLString]) {
       return; // Ignore this one
     }
+    [defaults removeObjectForKey:key];
     
     [SVKServer POST:[NSURL URLWithString:latestURLString]
               paras:userInfo
