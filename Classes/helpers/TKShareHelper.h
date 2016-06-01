@@ -24,7 +24,8 @@
                          atTime:(NSDate *)time;
 
 + (void)meetingDetailsForURL:(NSURL *)url
-                     details:(void (^)(CLLocationCoordinate2D coordinate, NSDate *time))detailBlock;
+               usingGeocoder:(id<SGGeocoder>)geocoder
+                     details:(void (^)(CLLocationCoordinate2D coordinate, NSString *name, NSDate *time))detailBlock;
 
 
 #pragma mark - Query URL
@@ -50,7 +51,7 @@
                 inRegionNamed:(NSString *)regionName
                        filter:(NSString *)filter;
 
-+ (void)stopDetailsForURL:(NSURL *)url
++ (BOOL)stopDetailsForURL:(NSURL *)url
                   details:(void (^)(NSString *stopCode, NSString *regionName, NSString *filter))detailBlock;
 
 #pragma mark - Services
