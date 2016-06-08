@@ -35,6 +35,12 @@ class TKQuickBooking: NSObject {
 
   // Localised string for doing booking
   let bookingTitle: String
+  
+  // URL for secondary booking flow for booking this option. This will typically let you customise the booking or pick from more options, compared to the primary `bookingURL`.
+  let secondaryBookingURL: NSURL?
+
+  // Localised string for secondary booking action
+  let secondaryBookingTitle: String?
 
   /// URL to fetch updated trip that's using this booking options. Only present if there would be a change to the trip.
   let tripUpdateURL: NSURL?
@@ -57,11 +63,13 @@ class TKQuickBooking: NSObject {
   /// Expected waiting time. Negative if unknown. (For Obj-c compatibility.)
   let ETARaw: NSTimeInterval
   
-  private init(title: String, subtitle: String?, bookingURL: NSURL, bookingTitle: String, tripUpdateURL: NSURL?, imageURL: NSURL?, price: TKQuickBookingPrice?, priceString: String?, surgeText: String?, surgeImageURL: NSURL?, ETA: NSTimeInterval?) {
+  private init(title: String, subtitle: String?, bookingURL: NSURL, bookingTitle: String, secondaryBookingURL: NSURL?, secondaryBookingTitle: String?, tripUpdateURL: NSURL?, imageURL: NSURL?, price: TKQuickBookingPrice?, priceString: String?, surgeText: String?, surgeImageURL: NSURL?, ETA: NSTimeInterval?) {
     self.title = title
     self.subtitle = subtitle
     self.bookingURL = bookingURL
     self.bookingTitle = bookingTitle
+    self.secondaryBookingURL = secondaryBookingURL
+    self.secondaryBookingTitle = secondaryBookingTitle
     self.tripUpdateURL = tripUpdateURL
     self.imageURL = imageURL
     self.price = price
@@ -158,7 +166,11 @@ extension TKQuickBooking {
     } else {
       price = nil
     }
-    
+
+    let secondaryBookingTitle = dictionary["secondaryBookingTitle"] as? String
+    let secondaryBookingURLString = dictionary["secondaryBookingURL"] as? String
+    let secondaryBookingURL = secondaryBookingURLString != nil ? NSURL(string: secondaryBookingURLString!) : nil
+
     let surgeText = dictionary["surgeString"] as? String
     let surgeImageURLString = dictionary["surgeImageURL"] as? String
     let surgeImageURL = surgeImageURLString != nil ? NSURL(string: surgeImageURLString!) : nil
@@ -168,7 +180,15 @@ extension TKQuickBooking {
     let tripUpdateURLString = dictionary["tripUpdateURL"] as? String
     let tripUpdateURL = tripUpdateURLString != nil ? NSURL(string: tripUpdateURLString!) : nil
     
-    self.init(title: title, subtitle: subtitle, bookingURL: bookingURL, bookingTitle: bookingTitle, tripUpdateURL: tripUpdateURL, imageURL: imageURL, price: price, priceString: priceString, surgeText: surgeText, surgeImageURL: surgeImageURL, ETA: ETA)
+    self.init(title: title, subtitle: subtitle,
+              bookingURL: bookingURL, bookingTitle: bookingTitle,
+              secondaryBookingURL: secondaryBookingURL, secondaryBookingTitle: secondaryBookingTitle,
+              tripUpdateURL: tripUpdateURL,
+              imageURL: imageURL,
+              price: price, priceString: priceString,
+              surgeText: surgeText, surgeImageURL: surgeImageURL,
+              ETA: ETA
+    )
   }
 }
 
