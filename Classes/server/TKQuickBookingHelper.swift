@@ -255,7 +255,7 @@ extension TKBookingConfirmation.Action {
 
 
 extension TKBookingConfirmation {
-  private static func fake() -> TKBookingConfirmation? {
+  private static func fakeTNC() -> TKBookingConfirmation? {
     let fake = [
       "actions": [
         [
@@ -274,12 +274,32 @@ extension TKBookingConfirmation {
         "subtitle": "4.9",
         "title": "John"
       ],
-      "status": "PENDING",
+      "status": [
+        "title": "Approaching",
+        "subtitle": "Your driver is approaching"
+      ],
       "vehicle": [
         "imageURL": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/prius.jpg",
         "subtitle": "UBER-PLATE",
         "title": "Prius Toyota"
       ]
+    ]
+    return TKBookingConfirmation(withDictionary: fake)
+  }
+
+  private static func fakePublic() -> TKBookingConfirmation? {
+    let fake = [
+      "actions": [
+        [
+          "externalURL": "qrcode:http://www.skedgo.com",
+          "isDestructive": false,
+          "title": "View ticket"
+        ],
+      ],
+      "status": [
+        "title": "30 Minute Ticket",
+        "subtitle": "Valid until 15:30",
+      ],
     ]
     return TKBookingConfirmation(withDictionary: fake)
   }
@@ -344,7 +364,9 @@ extension TKSegment {
       
       // Useful for debugging the confirmation screen
 //    } else if let mode = modeIdentifier() where !isStationary() && mode.hasPrefix("ps_tnc") {
-//      return TKBookingConfirmation.fake()
+//      return TKBookingConfirmation.fakeTNC()
+//    } else if let mode = modeIdentifier() where !isStationary() && mode.hasPrefix("pt_pub") {
+//      return TKBookingConfirmation.fakePublic()
 
     } else {
       return nil
