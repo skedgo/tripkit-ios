@@ -97,7 +97,7 @@ struct TKBookingConfirmation {
     let title: String
     let isDestructive: Bool
     let internalURL: NSURL?
-    let externalURL: NSURL?
+    let externalAction: NSString?
   }
   
   let status: Detail
@@ -244,13 +244,8 @@ extension TKBookingConfirmation.Action {
       self.internalURL = nil
     }
 
-    if let externalURLString = dictionary["externalURL"] as? String,
-      let externalURL = NSURL(string: externalURLString) {
-      self.externalURL = externalURL
-    } else {
-      self.externalURL = nil
-    }
-}
+    self.externalAction = dictionary["externalURL"] as? String
+  }
 }
 
 
