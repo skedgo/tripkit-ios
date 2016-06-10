@@ -133,19 +133,22 @@ extension SVKRegion {
    - parameter remoteURL: URL for linking from `ProviderAuth.actionURL`.
    - returns: Observable indicating success.
   */
-  public func rx_linkAccount(mode: String, remoteURL: NSURL) -> Observable<Bool> {
+  public func rx_linkAccount(mode: String, remoteURL: NSURL, presenter: UIViewController) -> Observable<Bool> {
     return OAuthClient.requiresOAuth(remoteURL)
-      .filter { form, isOAuth in
-        if !isOAuth {
-          SGKLog.warn("TKLinkedAccountHelper", text: "Expected OAuth form, got \(form). Will ignore.")
+      .flatMap { form, isOAuth -> Observable<Bool> in
+        if isOAuth {
+          return OAuthClient.performOAuth(mode, form: form)
+            .map { form in form == nil } // No further input required
+        } else {
+          var manager: MiniBookingManager? = MiniBookingManager(withForm: form)
+          manager!.present(fromViewController: presenter)
+          return Observable.create { subscriber in
+            manager!.asObservable().subscribe(subscriber)
+            return AnonymousDisposable {
+              manager = nil
+            }
+          }
         }
-        return isOAuth
-      }
-      .flatMap { form, _ in
-        return OAuthClient.performOAuth(mode, form: form)
-      }
-      .map { form in
-        return form == nil // NO further input required
       }
   }
   
@@ -214,5 +217,68 @@ extension SVKRegion {
         completion(nil)
       }
     )
+  }
+}
+
+/**
+ A small class that manages a booking form which is not tied to a trip.
+ 
+ It walks through the booking flow and you can use the `asObservable()` method to be notified once the use has either completed or aborted the booking process. This class handles presenting the booking view controller and dismissing it.
+ 
+ Use it as follows:
+ 
+ 1. Initialise it with a form
+ 2. Call it to present from a view controller
+ 3. Subscribe to the `asObservable()` as handle its callbacks
+ 
+ - note: This is a one-off object. Only use it to present exactly once. One the observable sequence has ended, this object is useless. 
+ */
+class MiniBookingManager: NSObject, BPKBookingViewControllerDelegate {
+  
+  private let form: BPKForm
+  private let subject = PublishSubject<Bool>()
+  
+  private weak var presenter: UIViewController?
+  
+  init(withForm form: BPKForm) {
+    self.form = form
+  }
+  
+  func present(fromViewController presenter: UIViewController) {
+    if self.presenter != nil {
+      SGKLog.warn("MiniBookingManager", text: "Is already being presented!")
+      return
+    }
+    
+    let booker = BPKBookingViewController(form: form)
+    booker.delegate = self
+    let navigator = UINavigationController(rootViewController: booker)
+    navigator.modalPresentationStyle = .FormSheet
+    presenter.presentViewController(navigator, animated: true, completion: nil)
+    self.presenter = presenter
+  }
+  
+  func asObservable() -> Observable<Bool> {
+    return subject.asObservable()
+  }
+  
+  func bookingViewController(controller: BPKBookingViewController, didRequestUpdate url: NSURL, handler: () -> Void) {
+    assert(false, "Don't use MiniBM for trips!")
+  }
+  
+  func bookingViewController(controller: BPKBookingViewController, didComplete complete: Bool, withManager manager: BPKManager) {
+    self.presenter?.dismissViewControllerAnimated(true, completion: nil)
+    self.presenter = nil
+    
+    subject.onNext(complete)
+    subject.onCompleted()
+  }
+  
+  func bookingViewControllerDidCancelBooking(controller: BPKBookingViewController) {
+    self.presenter?.dismissViewControllerAnimated(true, completion: nil)
+    self.presenter = nil
+    
+    subject.onNext(false)
+    subject.onCompleted()
   }
 }
