@@ -168,7 +168,7 @@ extension SVKRegion {
     SVKServer.GET(URL, paras: nil) { response, error in
       if let response = response as? [NSObject: AnyObject]
         where response.isEmpty && error == nil {
-        completion(true && localRemoved)
+        completion(true || localRemoved)
       } else {
         completion(false)
       }
