@@ -12,7 +12,7 @@ import CoreLocation
 import RxSwift
 
 enum TKFlexAgendaFaker {
-  static func fakeInsert(locations: Set<TKFlexAgendaVisit>, into: [TKFlexAgendaVisit]) -> Observable<[TKFlexAgendaOutputItem]> {
+  static func fakeInsert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
 
     // Add all at end (TODO: Shuffle?)
     var inserted = into
@@ -41,7 +41,7 @@ enum TKFlexAgendaFaker {
     }
   }
   
-  private static func inputsReturningHome(items: [TKFlexAgendaVisit]) -> [TKFlexAgendaVisit] {
+  private static func inputsReturningHome(items: [TKAgendaInputItem]) -> [TKAgendaInputItem] {
     if let first = items.first {
       return items + [first]
     } else {
@@ -49,19 +49,20 @@ enum TKFlexAgendaFaker {
     }
   }
   
-  private static func trackWithTrips(items: [TKFlexAgendaVisit], usePlaceholders: Bool) -> [TKFlexAgendaOutputItem] {
-    let (outputs, _) = items.reduce( ([] as [TKFlexAgendaOutputItem], nil as TKFlexAgendaVisit?) ) { previous, nextInput in
+  private static func trackWithTrips(items: [TKAgendaInputItem], usePlaceholders: Bool) -> [TKAgendaOutputItem] {
+    let (outputs, _) = items.reduce( ([] as [TKAgendaOutputItem], nil as TKAgendaInputItem?) ) { previous, nextInput in
+
+      guard let next = nextInput.asFakeOutput() else { fatalError("unexpected Input: \(nextInput)") }
 
       let (outputs, previousInput) = previous
-      let next = nextInput.asFakeOutput()
-      
+
       // The very first
       guard previousInput != nil else { return ([next], nextInput) }
       
       // Inserting trips in between events
       let outputItem = usePlaceholders
-        ? TKFlexAgendaOutputItem.TripPlaceholder
-        : TKFlexAgendaOutputItem.TripOptions([FakeTripOption()])
+        ? TKAgendaOutputItem.TripPlaceholder(nil, nil)
+        : TKAgendaOutputItem.TripOptions([FakeTripOption()])
       
       return (outputs + [outputItem, next], nextInput)
     }
@@ -70,13 +71,7 @@ enum TKFlexAgendaFaker {
   }
 }
 
-extension TKFlexAgendaVisit {
-  func asFakeOutput() -> TKFlexAgendaOutputItem {
-    return .Visit(self)
-  }
-}
-
-private struct FakeTripOption: TKFlexAgendaTripOption {
+private struct FakeTripOption: TKAgendaTripOptionType {
   var modes: [ModeIdentifier] = ["pt_pub", "wa_wal"]
   var duration: NSTimeInterval = 30 * 60
   var distance: DistanceUnit = 1_000

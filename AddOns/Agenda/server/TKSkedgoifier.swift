@@ -10,9 +10,9 @@ import Foundation
 
 import RxSwift
 
-extension TKSkedgoifier: TKAgendaBuilderType {
+extension TKSkedgoifier {
   /**
-   - warning: While this implements the `TKAgendaBuilderType`, you can't use it multi-threaded. You're encouraged to use `TKCachedSkedgoifier` instead which is multi-threading safe (and does caching, too).
+   - warning: While this basically implements the `TKAgendaBuilderType`, you can't use it multi-threaded. You're encouraged to use `TKCachedSkedgoifier` instead which is multi-threading safe (and does caching, too).
    */
   public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]> {
     
@@ -55,7 +55,8 @@ extension TKSkedgoifier: TKAgendaBuilderType {
           // Typically when there's just a single item
           if let firstInput = items.first,
              case let .Event(eventInput) = firstInput {
-            let output = TKAgendaOutputItem.Event(TKAgendaEventOutput(forInput: eventInput, effectiveStart: startDate, effectiveEnd: endDate, isContinuation: false))
+            let eventOutput = TKSkedgoifierEventOutput(forInput: eventInput, effectiveStart: startDate, effectiveEnd: endDate, isContinuation: false)
+            let output = TKAgendaOutputItem.Event(eventOutput)
             subscriber.onNext([output])
             subscriber.onCompleted()
             return

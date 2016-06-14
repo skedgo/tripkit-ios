@@ -15,13 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
  @param endDate   The computed end date for the agenda
  @param itemIDs   A sorted list of IDs for the items that should be part of the agenda
  */
-typedef void(^TKAgendaFactoryTemplate)(NSDate *startDate, NSDate *endDate, NSTimeZone *primaryTimeZone, NSArray *itemIDs);
+typedef void(^TKAgendaInputBuilderTemplate)(NSDate *startDate, NSDate *endDate, NSTimeZone *primaryTimeZone, NSArray *itemIDs);
 
-FOUNDATION_EXPORT NSString *const kTKAgendaFactoryTemplateStay;
-FOUNDATION_EXPORT NSString *const kTKAgendaFactoryTemplatePlaceholder;
-FOUNDATION_EXPORT NSString *const kTKAgendaFactoryTemplateCurrentLocation;
+FOUNDATION_EXPORT NSString *const kTKAgendaInputBuilderTemplateStay;
+FOUNDATION_EXPORT NSString *const kTKAgendaInputBuilderTemplatePlaceholder;
+FOUNDATION_EXPORT NSString *const kTKAgendaInputBuilderTemplateCurrentLocation;
 
-@interface TKAgendaFactory : NSObject
+@interface TKAgendaInputBuilder : NSObject
 
 + (CLLocationDistance)minimumDistanceToCreateTrips;
 
@@ -43,7 +43,7 @@ FOUNDATION_EXPORT NSString *const kTKAgendaFactoryTemplateCurrentLocation;
 //                     stayCoordinate:(CLLocationCoordinate2D)stayCoordinate
 //                       stayTimeZone:(NSTimeZone *)stayTimeZone
 //                    currentLocation:(nullable CLLocation *)currentLocation
-//                            success:(TKAgendaFactoryTemplate)success;
+//                            success:(TKAgendaInputBuilderTemplate)success;
 //
 ///**
 // Inserts the new track item at the correct position in the list of existing track items

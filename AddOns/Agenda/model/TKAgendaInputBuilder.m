@@ -6,24 +6,24 @@
 //
 //
 
-#import "TKAgendaFactory.h"
+#import "TKAgendaInputBuilder.h"
 
 #import "TKTripKit+Agenda.h"
 
-NSString *const kTKAgendaFactoryTemplateStay            = @"kTKAgendaFactoryTemplateStay";
-NSString *const kTKAgendaFactoryTemplatePlaceholder     = @"kTKAgendaFactoryTemplatePlaceholder";
-NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemplateCurrentLocation";
+NSString *const kTKAgendaInputBuilderTemplateStay            = @"kTKAgendaInputBuilderTemplateStay";
+NSString *const kTKAgendaInputBuilderTemplatePlaceholder     = @"kTKAgendaInputBuilderTemplatePlaceholder";
+NSString *const kTKAgendaInputBuilderTemplateCurrentLocation = @"kTKAgendaInputBuilderTemplateCurrentLocation";
 
 #define MIN_DISTANCE_TO_CREATE_TRIPS 150
 
-@interface TKAgendaFactory ()
+@interface TKAgendaInputBuilder ()
 
 @property (nonatomic, strong) NSMutableDictionary *startDateDict;
 @property (nonatomic, strong) NSMutableDictionary *endDateDict;
 
 @end
 
-@implementation TKAgendaFactory
+@implementation TKAgendaInputBuilder
 
 + (CLLocationDistance)minimumDistanceToCreateTrips
 {
@@ -37,7 +37,7 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
                      stayCoordinate:(CLLocationCoordinate2D)stayCoordinate
                        stayTimeZone:(NSTimeZone *)stayTimeZone
                     currentLocation:(nullable CLLocation *)currentLocation
-                            success:(TKAgendaFactoryTemplate)success
+                            success:(TKAgendaInputBuilderTemplate)success
 {
   NSParameterAssert(items);
   NSParameterAssert(stayTimeZone);
@@ -76,7 +76,7 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   [sorted enumerateObjectsUsingBlock:^(id<TKAgendaInputType> trackItem, NSUInteger index, BOOL *stop) {
     if (!limitToDateComponents || [[self class] trackItem:trackItem matchesDateComponents:limitToDateComponents]) {
       seedIndex = index;
-      seedTimeZone = [TKAgendaFactory attendanceTimeZoneForTrackItem:trackItem];
+      seedTimeZone = [TKAgendaInputBuilder attendanceTimeZoneForTrackItem:trackItem];
       *stop = YES;
     }
   }];
@@ -98,10 +98,10 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
     
     // good item
     [templateItems insertObject:item atIndex:0];
-    NSTimeZone *itemTimeZone = [TKAgendaFactory attendanceTimeZoneForTrackItem:item];
+    NSTimeZone *itemTimeZone = [TKAgendaInputBuilder attendanceTimeZoneForTrackItem:item];
     if (itemTimeZone) {
       // are we attending this potentially?
-      if (! [TKAgendaFactory agendaInputShouldBeIgnored:item]) {
+      if (! [TKAgendaInputBuilder agendaInputShouldBeIgnored:item]) {
         if (!earliestDate || [itemEnd compare:earliestDate] == NSOrderedAscending) {
           earliestDate = itemEnd;
         }
@@ -137,10 +137,10 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
     
     // good item
     [templateItems addObject:item];
-    NSTimeZone *itemTimeZone = [TKAgendaFactory attendanceTimeZoneForTrackItem:item];
+    NSTimeZone *itemTimeZone = [TKAgendaInputBuilder attendanceTimeZoneForTrackItem:item];
     if (itemTimeZone) {
       // are we attending this potentially?
-      if (! [TKAgendaFactory agendaInputShouldBeIgnored:item]) {
+      if (! [TKAgendaInputBuilder agendaInputShouldBeIgnored:item]) {
         if (!latestDate || [itemStart compare:latestDate] == NSOrderedDescending) {
           latestDate = itemStart;
         }
@@ -157,7 +157,7 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   // an empty day is one without any template items, ignoring current locations
   BOOL isEmptyDay = YES;
   for (id<TKAgendaInputType> trackItem in templateItems) {
-    if ([TKAgendaFactory itemIsBackground:trackItem]) {
+    if ([TKAgendaInputBuilder itemIsBackground:trackItem]) {
       continue;
     }
     isEmptyDay = NO;
@@ -178,7 +178,7 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
       id<TKAgendaInputType> trackItem = item;
       
       // we ignore anything that's excluded
-      if ([TKAgendaFactory agendaInputShouldBeIgnored:trackItem]) {
+      if ([TKAgendaInputBuilder agendaInputShouldBeIgnored:trackItem]) {
         skipCount++;
         continue;
       }
@@ -212,8 +212,8 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
     }
     
     if (currentLocationFit >= 0 && ! [[self class] location:currentLocation matchesByDistance:stayCoordinate]) {
-      [templateItems insertObject:kTKAgendaFactoryTemplateCurrentLocation atIndex:MIN((NSInteger)templateItems.count, currentLocationFit)];
-      [attendedItems insertObject:kTKAgendaFactoryTemplateCurrentLocation atIndex:MIN((NSInteger)attendedItems.count, MAX(currentLocationFit - skipCount, 0))];
+      [templateItems insertObject:kTKAgendaInputBuilderTemplateCurrentLocation atIndex:MIN((NSInteger)templateItems.count, currentLocationFit)];
+      [attendedItems insertObject:kTKAgendaInputBuilderTemplateCurrentLocation atIndex:MIN((NSInteger)attendedItems.count, MAX(currentLocationFit - skipCount, 0))];
     }
   }
   
@@ -239,13 +239,13 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
       NSTimeInterval allowedGap = [dateToCheck isEqualToDate:startDate] ? 0 : MaxGap;
       if ([itemStart timeIntervalSinceDate:dateToCheck] > allowedGap) {
         // there's a gap before => add stay
-        [templateItems insertObject:kTKAgendaFactoryTemplateStay atIndex:index - insertionSkipCount];
-        [attendedItems insertObject:kTKAgendaFactoryTemplateStay atIndex:MAX(index - skipCount, (NSUInteger)0)];
+        [templateItems insertObject:kTKAgendaInputBuilderTemplateStay atIndex:index - insertionSkipCount];
+        [attendedItems insertObject:kTKAgendaInputBuilderTemplateStay atIndex:MAX(index - skipCount, (NSUInteger)0)];
         insertionSkipCount = 0;
         index++;
       }
       NSDate *itemEnd   = [self endDateForItem:trackItem];
-      BOOL isBackground = [TKAgendaFactory itemIsBackground:trackItem];
+      BOOL isBackground = [TKAgendaInputBuilder itemIsBackground:trackItem];
       lastIsBackground = isBackground;
       if (itemEnd == [dateToCheck laterDate:itemEnd]) {
         dateToCheck = itemEnd;
@@ -258,25 +258,25 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
     }
   }
   if (skipCount == templateItems.count) { // didn't add start as all were skipped
-    [templateItems insertObject:kTKAgendaFactoryTemplateStay atIndex:0];
-    [attendedItems insertObject:kTKAgendaFactoryTemplateStay atIndex:0];
+    [templateItems insertObject:kTKAgendaInputBuilderTemplateStay atIndex:0];
+    [attendedItems insertObject:kTKAgendaInputBuilderTemplateStay atIndex:0];
   }
   if ((endIsBackground && !lastIsBackground) // go back to hotel at end of day
       || [endDate timeIntervalSinceDate:dateToCheck] > 0) { // go back home
-    [templateItems addObject:kTKAgendaFactoryTemplateStay];
-    [attendedItems addObject:kTKAgendaFactoryTemplateStay];
+    [templateItems addObject:kTKAgendaInputBuilderTemplateStay];
+    [attendedItems addObject:kTKAgendaInputBuilderTemplateStay];
   }
   
   // add a placeholder in the middle if it's an empty day
   if (isEmptyDay) {
     BOOL justHasStay = attendedItems.count == 1;
     NSUInteger subtractor = justHasStay ? 0 : 1;
-    [templateItems insertObject:kTKAgendaFactoryTemplatePlaceholder atIndex:templateItems.count - subtractor];
-    [attendedItems insertObject:kTKAgendaFactoryTemplatePlaceholder atIndex:attendedItems.count - subtractor];
+    [templateItems insertObject:kTKAgendaInputBuilderTemplatePlaceholder atIndex:templateItems.count - subtractor];
+    [attendedItems insertObject:kTKAgendaInputBuilderTemplatePlaceholder atIndex:attendedItems.count - subtractor];
     
     if (justHasStay) {
-      [templateItems addObject:kTKAgendaFactoryTemplateStay];
-      [attendedItems addObject:kTKAgendaFactoryTemplateStay];
+      [templateItems addObject:kTKAgendaInputBuilderTemplateStay];
+      [attendedItems addObject:kTKAgendaInputBuilderTemplateStay];
     }
   }
 
@@ -303,7 +303,7 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   }
 
   // we have a start and/or end => need to check if event overlaps the day in the item's timezone
-  NSTimeZone *itemTimeZone = [TKAgendaFactory attendanceTimeZoneForTrackItem:trackItem];
+  NSTimeZone *itemTimeZone = [TKAgendaInputBuilder attendanceTimeZoneForTrackItem:trackItem];
   if (itemTimeZone) {
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.timeZone = itemTimeZone;
@@ -359,7 +359,7 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   if (! location) {
     return NO;
   }
-  if ([TKAgendaFactory agendaInputShouldBeIgnored:trackItem]) {
+  if ([TKAgendaInputBuilder agendaInputShouldBeIgnored:trackItem]) {
     return NO;
   }
   
@@ -470,8 +470,8 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
   if ([item conformsToProtocol:@protocol(TKAgendaEventInputType)]) {
     id<TKAgendaEventInputType> eventItem = (id<TKAgendaEventInputType>)item;
     switch (eventItem.kind) {
-      case TKAgendaEventKindStay:
-      case TKAgendaEventKindHome:
+      case TKSkedgoifierEventKindStay:
+      case TKSkedgoifierEventKindHome:
         return YES;
       default:
         return NO;
@@ -485,8 +485,8 @@ NSString *const kTKAgendaFactoryTemplateCurrentLocation = @"kTKAgendaFactoryTemp
 {
   NSMutableArray *backgroundItems = [NSMutableArray arrayWithCapacity:allItems.count];
   for (id<TKAgendaInputType> item in allItems) {
-    if ([TKAgendaFactory itemIsBackground:item]
-        && [TKAgendaFactory trackItem:item matchesDateComponents:dateComponents])
+    if ([TKAgendaInputBuilder itemIsBackground:item]
+        && [TKAgendaInputBuilder trackItem:item matchesDateComponents:dateComponents])
     {
       [backgroundItems addObject:item];
     }

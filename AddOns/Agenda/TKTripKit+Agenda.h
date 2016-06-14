@@ -13,7 +13,7 @@
 #import "TKTripKit.h"
 
 // agenda building
-#import "TKAgendaFactory.h"
+#import "TKAgendaInputBuilder.h"
 #import "TKSkedgoifier.h"
 
 #endif /* TKTripKit_Agenda_h */

@@ -12,7 +12,7 @@ import CoreLocation
 import RxSwift
 
 struct TKAgendaFaker: TKAgendaBuilderType {
-  func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]> {
+  func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]> {
     if items.count <= 1 {
       return Observable.just(items.flatMap { $0.asFakeOutput() } )
     }
@@ -43,10 +43,8 @@ struct TKAgendaFaker: TKAgendaBuilderType {
   
   private static func inputsReturningHome(items: [TKAgendaInputItem]) -> [TKAgendaInputItem] {
     if let first = items.first,
-       let last = items.last,
-       case let .Event(startEvent) = first,
-       case let .Event(lastEvent) = last
-       where startEvent.kind == .Stay && lastEvent.kind != .Stay {
+       let last = items.last
+      where first.isStay && !last.isStay {
       return items + [first]
     } else {
       return items
@@ -94,7 +92,7 @@ extension TKAgendaInputItem {
   func asFakeOutput() -> TKAgendaOutputItem? {
     switch self {
     case .Event(let input):
-      return .Event(TKAgendaEventOutput(forInput: input, effectiveStart: input.startDate, effectiveEnd: input.endDate, isContinuation: false))
+      return .Event(TKAgendaEventOutput(forInput: input))
     case .Trip(let input) where input.trip != nil:
       return .Trip(TKAgendaTripOutput(withTrip: input.trip!, forInput: input))
     default:

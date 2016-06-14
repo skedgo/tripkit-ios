@@ -12,7 +12,16 @@ import RxSwift
 
 struct TKCachedSkedgoifier: TKAgendaBuilderType {
 
-  func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]> {
+  let privateVehicles: [STKVehicular]
+  let tripPatterns: [ [String: AnyObject] ]
+  
+  init(privateVehicles: [STKVehicular] = [], tripPatterns: [ [String: AnyObject] ] = []) {
+    self.privateVehicles = privateVehicles
+    self.tripPatterns = tripPatterns
+  }
+
+  
+  func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]> {
     let skedgoifier = TKSkedgoifier()
     return skedgoifier.buildTrack(forItems: items, startDate: startDate, endDate: endDate, privateVehicles: privateVehicles, tripPatterns: tripPatterns)
   }

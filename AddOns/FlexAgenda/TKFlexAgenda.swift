@@ -11,65 +11,24 @@ import Foundation
 import CoreLocation
 import RxSwift
 
-public struct TKFlexAgendaVisit {
-  var coordinate: CLLocationCoordinate2D
-  var id: String
-}
+public struct TKFlexAgenda : TKAgendaBuilderType {
 
-extension TKFlexAgendaVisit: Hashable, Equatable {
-  public var hashValue: Int {
-    return id.hashValue
+  public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]>
+  {
+    return TKFlexAgendaFaker.fakeInsert(items, into: items)
   }
-}
-
-public func ==(lhs: TKFlexAgendaVisit, rhs: TKFlexAgendaVisit) -> Bool {
-  return abs(lhs.coordinate.latitude - rhs.coordinate.latitude) < 0.0001
-          && abs(lhs.coordinate.longitude - rhs.coordinate.longitude) < 0.0001
-          && lhs.id == rhs.id
-}
-
-public typealias ModeIdentifier = String
-public typealias DistanceUnit = Float
-public typealias PriceUnit = Float
-
-public protocol TKFlexAgendaTripOption {
   
-  var modes: [ModeIdentifier] { get }
-  var duration: NSTimeInterval { get }
-  var distance: DistanceUnit { get }
-  var price: PriceUnit { get }
+  // MARK: TODO: Deal will all those cases properly (probably just do it internally depending on HOW the data has changed)
   
-  var earliestDeparture: NSTimeInterval? { get }
-  var latestDeparture: NSTimeInterval? { get }
-}
-
-extension TKFlexAgendaTripOption {
-  var earliestDeparture: NSTimeInterval? { return nil }
-  var latestDeparture: NSTimeInterval? { return nil }
-  
-}
-
-public enum TKFlexAgendaOutputItem {
-  case Visit(TKFlexAgendaVisit)
-  case TripOptions([TKFlexAgendaTripOption])
-  
-  /**
-   Placeholder for where a trip will likely be.
-   */
-  case TripPlaceholder
-}
-
-public struct TKFlexAgenda {
-
-  public static func suggestOrder(locations: Set<TKFlexAgendaVisit>) -> Observable<[TKFlexAgendaOutputItem]> {
+  public static func suggestOrder(locations: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
     return insert(locations, into: [])
   }
 
-  public static func insert(locations: Set<TKFlexAgendaVisit>, into: [TKFlexAgendaVisit]) -> Observable<[TKFlexAgendaOutputItem]> {
+  public static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
     return TKFlexAgendaFaker.fakeInsert(locations, into: into)
   }
 
-  public static func udpateTrips(visits: [TKFlexAgendaVisit]) -> Observable<[TKFlexAgendaOutputItem]> {
+  public static func udpateTrips(visits: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
     return insert([], into: visits)
   }
 

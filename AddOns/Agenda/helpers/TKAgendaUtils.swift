@@ -18,3 +18,9 @@ extension NSDateComponents {
     return earliestDate().dateByAddingTimeInterval(86400)
   }
 }
+
+extension TKAgendaType {
+  func applies(forDateComponents components: NSDateComponents) -> Bool {
+    return components.earliestDate() == startDate
+  }
+}

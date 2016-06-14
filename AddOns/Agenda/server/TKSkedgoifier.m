@@ -229,7 +229,7 @@
 #pragma unused(stop)
     
 #warning FIXME: ignore those items again
-//    if ([TKAgendaFactory agendaInputShouldBeIgnored:inputItem]) {
+//    if ([TKAgendaInputBuilder agendaInputShouldBeIgnored:inputItem]) {
 //      return;
 //    }
     
@@ -297,8 +297,8 @@
       
       data = dataMutable;
       
-    } else if ([inputItem conformsToProtocol:@protocol(TKAgendaEventInputType)]) {
-      id<TKAgendaEventInputType> eventInput = (id<TKAgendaEventInputType>)inputItem;
+    } else if ([inputItem conformsToProtocol:@protocol(TKSkedgoifierEventInputType)]) {
+      id<TKSkedgoifierEventInputType> eventInput = (id<TKSkedgoifierEventInputType>)inputItem;
       // regular track items
       CLLocationCoordinate2D coordinate = eventInput.coordinate;
       if (!CLLocationCoordinate2DIsValid(coordinate)) {
@@ -314,24 +314,24 @@
       BOOL direct = eventInput.goHereDirectly;
       
       switch (eventInput.kind) {
-        case TKAgendaEventKindActivity:
+        case TKSkedgoifierEventKindActivity:
           priority = kSGPriorityEvents;
           break;
           
-        case TKAgendaEventKindCurrentLocation:
+        case TKSkedgoifierEventKindCurrentLocation:
           priority = kSGPriorityCurrentLocation;
           currentLocationTime = endDate;
           break;
           
-        case TKAgendaEventKindHome:
+        case TKSkedgoifierEventKindHome:
           priority = kSGPriorityHome;
           break;
           
-        case TKAgendaEventKindRoutine:
+        case TKSkedgoifierEventKindRoutine:
           priority = kSGPriorityHabitual;
           break;
           
-        case TKAgendaEventKindStay:
+        case TKSkedgoifierEventKindStay:
           priority = kSGPriorityStay;
           break;
       }
@@ -440,7 +440,7 @@
       
       if (! [keysSeenBefore containsObject:itemKey]) {
         // this is the time we get info of this item => set effective start + end
-        id outputItem = [[TKAgendaEventOutput alloc] initForInput:eventInput effectiveStart:effectiveStart effectiveEnd:effectiveEnd isContinuation:NO];
+        id outputItem = [[TKSkedgoifierEventOutput alloc] initForInput:eventInput effectiveStart:effectiveStart effectiveEnd:effectiveEnd isContinuation:NO];
         [keysSeenBefore addObject:itemKey];
         [skedgoifiedItems addObject:outputItem];
       
@@ -450,7 +450,7 @@
         BOOL previousIsTrip = (idx > 0) && [track[idx - 1][@"class"] isEqualToString:@"trip"];
         if (previousIsTrip) {
           NSDate *continuationEnd = (idx < track.count - 1) ? effectiveEnd : nil;
-          id outputItem = [[TKAgendaEventOutput alloc] initForInput:eventInput effectiveStart:effectiveStart effectiveEnd:continuationEnd isContinuation:YES];
+          id outputItem = [[TKSkedgoifierEventOutput alloc] initForInput:eventInput effectiveStart:effectiveStart effectiveEnd:continuationEnd isContinuation:YES];
           [skedgoifiedItems addObject:outputItem];
         }
       }
@@ -545,15 +545,15 @@
        NSString *toId = tripTrackDict[@"toId"];
        if (toId) {
          id toItem = keyToItems[fromId];
-         if ([toItem conformsToProtocol:@protocol(TKAgendaEventInputType)]) {
-           id<TKAgendaEventInputType> toEventInput = (id<TKAgendaEventInputType>)toItem;
+         if ([toItem conformsToProtocol:@protocol(TKSkedgoifierEventInputType)]) {
+           id<TKSkedgoifierEventInputType> toEventInput = (id<TKSkedgoifierEventInputType>)toItem;
 
            tripOutput.toIdentifier = toEventInput.identifier;
            arriveBy = toEventInput.startDate;
            
            trip.request.purpose = [NSString stringWithFormat:NSLocalizedStringFromTable(@"PrimaryLocationEnd", @"TripKit", @"For trip titles, e.g., 'To work'"), toEventInput.title];
            
-           if (arriveBy && toEventInput.kind == TKAgendaEventKindActivity) {
+           if (arriveBy && toEventInput.kind == TKSkedgoifierEventKindActivity) {
              // When we have an arrival time, mark the departure time as fixed.
              // Reason for this is that we'll then show the time you need to leave,
              // rather than keeping it flexible in the UI.

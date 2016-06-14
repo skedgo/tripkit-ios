@@ -22,14 +22,14 @@ public protocol TKAgendaDataSource {
 }
 
 public protocol TKAgendaBuilderType {
-  func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]>
+  func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]>
 }
 
 extension TKAgendaBuilderType {
   func buildTrack(forItems items: [TKAgendaInputItem], dateComponents: NSDateComponents) -> Observable<[TKAgendaOutputItem]> {
     let startDate = dateComponents.earliestDate()
     let endDate = dateComponents.latestDate()
-    return buildTrack(forItems: items, startDate: startDate, endDate: endDate, privateVehicles: [], tripPatterns: [])
+    return buildTrack(forItems: items, startDate: startDate, endDate: endDate)
   }
 }
 
@@ -79,9 +79,10 @@ public class TKAgendaManager {
     }
     
     let lastError = Variable<ErrorType?>(nil)
+    
     let trackItems = rawItems.flatMap { data in
       // If that throws an error, we shouldn't propagate that up!
-      self.builder.buildTrack(forItems: data, dateComponents: dateComponents).asDriver {
+      return self.builder.buildTrack(forItems: data, dateComponents: dateComponents).asDriver {
         error in
         lastError.value = error
         return Observable.empty().asDriver(onErrorJustReturn: [])

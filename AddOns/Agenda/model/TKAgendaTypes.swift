@@ -10,7 +10,13 @@ import Foundation
 
 import CoreLocation
 import RxSwift
+import RxCocoa
 
+/**
+ An Agenda encapsulates a user's plan for a time range.
+ 
+ It is typically creating from user-specified input and then combined with smarts about travelling between events and suggesting order in which to do things; this plan is encapsulated in the `items` sequence.
+ */
 public protocol TKAgendaType {
   var startDate: NSDate { get }
   var endDate: NSDate { get }
@@ -18,33 +24,24 @@ public protocol TKAgendaType {
   var lastError: Observable<ErrorType?> { get }
 }
 
-extension TKAgendaType {
-  func applies(forDateComponents components: NSDateComponents) -> Bool {
-    return components.earliestDate() == startDate
-  }
-}
-
 public enum TKAgendaInputItem {
   case Event(TKAgendaEventInputType)
   case Trip(TKAgendaTripInputType)
+  
+  var isStay: Bool {
+    if case let .Event(eventInput) = self {
+      return eventInput.isStay
+    } else {
+      return false
+    }
+  }
 }
 
 @objc
-public enum TKAgendaEventKind: Int {
-  case CurrentLocation
-  case Activity
-  case Routine
-  case Stay
-  case Home
-}
-
-@objc
-public protocol TKAgendaEventInputType: NSObjectProtocol {
+public protocol TKAgendaEventInputType {
   var startDate: NSDate? { get }
   var endDate: NSDate? { get }
-  
-  var timeZone: NSTimeZone { get }
-  
+
   /**
    The coordinate where this input takes place. The agenda will try to route here. Invalid coordinates will be ignored.
    */
@@ -52,24 +49,12 @@ public protocol TKAgendaEventInputType: NSObjectProtocol {
   
   var identifier: String? { get }
   
-  var title: String { get }
-  
-  var kind: TKAgendaEventKind { get }
-  
-  /**
-   - returns: Whether this event should be considered when calculating routes for the day. You might want to exclude events that are cancelled or that the user declined. Suggested default: true.
-  */
-  var includeInRoutes: Bool { get }
-  
-  /**
-   - returns: Indicator that the user wants to get to this event directly without returning to a lower-priority event before. Suggested default: false.
-  */
-  var goHereDirectly: Bool { get }
-  
   /**
    - returns: The source model for this item. This won't be used by in any agenda calculations, but this is helpful for you to associate something with your input. Suggested default: nil.
    */
   var sourceModel: AnyObject? { get }
+  
+  var isStay: Bool { get }
 }
 
 extension TKAgendaInputItem {
@@ -106,6 +91,7 @@ public protocol TKAgendaTripInputType: NSObjectProtocol {
 public enum TKAgendaOutputItem {
   case Event(TKAgendaEventOutput)
   case Trip(TKAgendaTripOutput)
+  case TripOptions([TKAgendaTripOptionType])
   
   /**
    Placeholder for where a trip will likely be. First date is predicted start date, second date is predicted end date.
@@ -115,17 +101,15 @@ public enum TKAgendaOutputItem {
 
 public class TKAgendaEventOutput: NSObject {
   let input: TKAgendaEventInputType
-  let effectiveStart: NSDate?
-  let effectiveEnd: NSDate?
-  let isContinuation: Bool
   
-  init(forInput input: TKAgendaEventInputType, effectiveStart: NSDate?, effectiveEnd: NSDate?, isContinuation: Bool) {
+  init(forInput input: TKAgendaEventInputType) {
     self.input = input
-    self.effectiveStart = effectiveStart
-    self.effectiveEnd = effectiveEnd
-    self.isContinuation = isContinuation
   }
 }
+
+public typealias ModeIdentifier = String
+public typealias DistanceUnit = Float
+public typealias PriceUnit = Float
 
 public class TKAgendaTripOutput: NSObject {
   let input: TKAgendaTripInputType?
@@ -138,4 +122,22 @@ public class TKAgendaTripOutput: NSObject {
     self.input = input
   }
 }
+
+public protocol TKAgendaTripOptionType {
+  
+  var modes: [ModeIdentifier] { get }
+  var duration: NSTimeInterval { get }
+  var distance: DistanceUnit { get }
+  var price: PriceUnit { get }
+  
+  var earliestDeparture: NSTimeInterval? { get }
+  var latestDeparture: NSTimeInterval? { get }
+}
+
+extension TKAgendaTripOptionType {
+  var earliestDeparture: NSTimeInterval? { return nil }
+  var latestDeparture: NSTimeInterval? { return nil }
+  
+}
+
 
