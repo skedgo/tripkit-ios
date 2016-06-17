@@ -33,42 +33,88 @@ public struct TKTTPifier : TKAgendaBuilderType {
   
   private static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
     
-    // TODO: Add stay at end, too
-    // TODO: Don't fetch if there's just one or the first is the same as the last
+    precondition(into.count >= 2, "Don't call this unless you have a start and end!")
     
     let placeholders = TKAgendaFaker.outputPlaceholders(into)
     
-    let paras = createInput(locations, into: into)
     // TODO: Create a hash code of the paras, check if we have an ID in the cache already, then hit GET
 
-    let region: SVKRegion? = nil // TODO: Fix
-    
-    return SVKServer.sharedInstance()
-      .rx_hit(.POST, path: "ttp", parameters: paras, region: region)
-      .retry(4)
-      .flatMap { code, json -> Observable<(Int, JSON?)>  in
-        guard let id = json?["id"].string else {
-          // TODO: Log 400 bad input errors
-          // TODO: Treat this as a bigger error
-          return Observable.error(Error.creatingProblemFailedOnServer)
-        }
-        
-        return SVKServer.sharedInstance()
-          .rx_hit(.GET, path: "ttp/\(id)/solution", region: region)
+    return rx_createProblem(locations, into: into)
+      .flatMap { region, id  in
+        return fetchSolution(id, inputItems: into + locations, inRegion: region)
       }
-      .map { code, json -> [TKAgendaOutputItem] in
-        // TODO: Deal with 299 (solution not available yet)
-        // TODO: Deal with 304 (solution still up-to-date)
-        
-        if let json = json,
-           let output = createOutput(into + locations, json: json) {
-          return output
+      .map { result -> [TKAgendaOutputItem] in
+        if let result = result {
+          return result
         } else {
-          return placeholders // TODO: Fix this?
+          return placeholders // TDOO: Fix this?
         }
       }
       .startWith(placeholders)
+      .observeOn(MainScheduler.asyncInstance)
+  }
+  
+  /**
+   Creates the problem and sends it to the server for solving it.
+   
+   - parameter locations: New locations to add (unsorted)
+   - parameter into: Sorted list of locations to add the new ones into. Typically starts and ends at a hotel.
+   - returns: Observable sequence of the region where the problem starts and the id of the problem on the server.
+   */
+  private static func rx_createProblem(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<(SVKRegion, String)> {
+    
+    guard let first = into.first else {
+      preconditionFailure("`into` needs at least one item")
     }
+    
+    let server = SVKServer.sharedInstance()
+    let paras = createInput(locations, into: into)
+    
+    return server
+      .rx_requireRegion(first.start)
+      .flatMap { region in
+        return server
+          .rx_hit(.POST, path: "ttp", parameters: paras, region: region)
+          .retry(4)
+          .map { code, json -> (SVKRegion, String?) in
+            if let id = json?["id"].string {
+              return (region, id)
+            } else {
+              assertionFailure("Unexpected result from server with code \(code): \(json)")
+              return (region, nil)
+            }
+          }
+          .filter { $1 != nil }
+          .map { ($0, $1!) }
+    }
+  }
+  
+  /**
+   Fetches the solution for the problem of the provided id from the server.
+   
+   - parameter id: ID of the solution, as returned by the server
+   - parameter inputItems: Union of all the input items sent to the server
+   - parameter region: Region where the problem starts
+   - returns: Observable sequence with the output items or `nil` if the server couldn't calculate them
+   */
+  private static func fetchSolution(id: String, inputItems: [TKAgendaInputItem], inRegion region: SVKRegion) -> Observable<[TKAgendaOutputItem]?> {
+    
+    return SVKServer.sharedInstance()
+      .rx_hit(.GET, path: "ttp/\(id)/solution", region: region) { code in
+        // 299 means solution is not available yet, so keep trying
+        return code == 299
+      }
+      .map { code, json -> [TKAgendaOutputItem]? in
+        // TODO: Deal with 304 (solution still up-to-date)
+        
+        if let json = json,
+          let output = createOutput(inputItems, json: json) {
+          return output
+        } else {
+          return nil
+        }
+    }
+  }
   
   /**
    Creates the input as required by the `tpp/` endpoint.

@@ -19,7 +19,22 @@ enum HTTPMethod: String {
 }
 
 extension SVKServer {
+  func rx_requireRegion(coordinate: CLLocationCoordinate2D) -> Observable<SVKRegion> {
+    return rx_requireRegion()
+      .map {
+        SVKRegionManager.sharedInstance().regionForCoordinate(coordinate, andOther: coordinate)
+    }
+  }
+  
   func rx_requireRegion(coordinateRegion: MKCoordinateRegion) -> Observable<SVKRegion> {
+    
+    return rx_requireRegion()
+      .map {
+        SVKRegionManager.sharedInstance().regionForCoordinateRegion(coordinateRegion)
+    }
+  }
+  
+  private func rx_requireRegion() -> Observable<Void> {
     return Observable.create { subscriber in
       self.requireRegions { error in
         guard error == nil else {
@@ -27,33 +42,81 @@ extension SVKServer {
           return
         }
         
-        let region = SVKRegionManager.sharedInstance().regionForCoordinateRegion(coordinateRegion)
-        subscriber.onNext(region)
+        subscriber.onNext()
         subscriber.onCompleted()
       }
       
       return NopDisposable.instance
     }
+    
   }
+
   
-  func rx_hit(method: HTTPMethod, path: String, parameters: [String: AnyObject] = [:], region: SVKRegion? = nil) -> Observable<(Int, JSON?)> {
+  func rx_hit(method: HTTPMethod, path: String, parameters: [String: AnyObject] = [:], region: SVKRegion? = nil, repeatHandler: ((Int) -> (Bool))? = nil) -> Observable<(Int, JSON?)> {
     return Observable.create { subscriber in
-      self.hitSkedGoWithMethod(method.rawValue, path: path, parameters: parameters, region: region, success: { response in
-        
-          if let response = response {
-            let json = JSON(response)
-            subscriber.onNext((200, json))
+      
+      self.hitSkedGo(
+        method,
+        path: path,
+        parameters: parameters,
+        region: region,
+        repeatHandler: { code, json in
+          
+          let stop: Bool
+          if let repeatHandler = repeatHandler {
+            stop = repeatHandler(code)
           } else {
-            subscriber.onNext((200, nil))
+            stop = false
           }
-          subscriber.onCompleted()
-        
-        }, failure: { error in
+
+          if !stop {
+            subscriber.onNext(code, json)
+            subscriber.onCompleted()
+          }
+          return stop
+          
+        }, errorHandler: { error in
           subscriber.onError(error)
         }
       )
       
       return NopDisposable.instance
     }
+  }
+  
+  private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: AnyObject] = [:], region: SVKRegion? = nil, repeatHandler: (Int, JSON?) -> (Bool), errorHandler: (ErrorType) -> ()) {
+    
+    hitSkedGoWithMethod(
+      method.rawValue,
+      path: path,
+      parameters: parameters,
+      region: region,
+      callbackOnMain: false,
+      success: { code, response in
+        
+        let json = (response != nil) ? JSON(response!) : nil
+        let hitAgain = repeatHandler(code, json)
+        if hitAgain {
+          
+          let seconds = 2.5
+          let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(seconds * Double(NSEC_PER_SEC)))
+          let queue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)
+
+          dispatch_after(dispatchTime, queue) {
+            self.hitSkedGo(
+              method,
+              path: path,
+              parameters: parameters,
+              region: region,
+              repeatHandler: repeatHandler,
+              errorHandler: errorHandler
+            )
+          }
+          
+        }
+        
+      },
+      failure: errorHandler)
+    
   }
 }

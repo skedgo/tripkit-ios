@@ -82,7 +82,8 @@ typedef enum {
                          region:region
                  callbackOnMain:NO
                         success:
-     ^(id responseObject) {
+     ^(NSInteger status, id responseObject) {
+#pragma unused(status)
        typeof(self) strongSelf = weakSelf;
        if( !strongSelf) {
          return;
@@ -177,7 +178,8 @@ typedef enum {
                          region:table.region
                  callbackOnMain:NO
                         success:
-     ^(id responseObject) {
+     ^(NSInteger status, id responseObject) {
+#pragma unused(status)
        typeof(self) strongSelf = weakSelf;
        if( !strongSelf) {
          return;
@@ -263,7 +265,8 @@ typedef enum {
                           region:region
                   callbackOnMain:NO
                          success:
-      ^(id responseObject) {
+      ^(NSInteger status, id responseObject) {
+#pragma unused(status)
         typeof(self) strongSelf = weakSelf;
         if (!strongSelf) {
           return;
@@ -348,7 +351,8 @@ typedef enum {
                          region:region
                  callbackOnMain:NO
                         success:
-     ^(id responseObject) {
+     ^(NSInteger status, id responseObject) {
+#pragma unused(status)
         // set the stop properties
        [stop.managedObjectContext performBlock:^{
          BOOL success = [TKBuzzInfoProvider addStop:stop fromResponse:responseObject];

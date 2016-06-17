@@ -145,7 +145,7 @@ extension TKBuzzInfoProvider {
       path: "regionInfo.json",
       parameters: paras,
       region: region,
-      success: { response in
+      success: { _, response in
         let result = transformer(response)
         completion(result)
       },
@@ -211,7 +211,7 @@ extension TKBuzzInfoProvider {
       path: "locationInfo.json",
       parameters: paras,
       region: region,
-      success: { response in
+      success: { _, response in
         let result = LocationInformation.fromJSONResponse(response)
         completion(result)
       },

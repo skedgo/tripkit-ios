@@ -36,6 +36,15 @@ public enum TKAgendaInputItem {
     }
   }
   
+  var start: CLLocationCoordinate2D {
+    switch self {
+    case .Event(let eventInput):
+      return eventInput.coordinate
+    case .Trip(let tripInput):
+      return tripInput.origin
+    }
+  }
+  
   func needsTrip(to other: TKAgendaInputItem) -> Bool {
     if case .Trip = self,
       case .Trip = other {

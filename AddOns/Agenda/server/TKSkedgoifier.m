@@ -76,7 +76,8 @@
                    parameters:paras
                        region:region
                       success:
-   ^(id responseObject) {
+   ^(NSInteger status, id responseObject) {
+#pragma unused(status)
      [self processServerResultFromJSON:responseObject
                             completion:completion];
 
