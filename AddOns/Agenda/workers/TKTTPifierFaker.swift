@@ -1,5 +1,5 @@
 //
-//  TKFlexAgendaFaker.swift
+//  TKTTPifierFaker.swift
 //  RioGo
 //
 //  Created by Adrian Schoenig on 14/06/2016.
@@ -11,7 +11,7 @@ import Foundation
 import CoreLocation
 import RxSwift
 
-enum TKFlexAgendaFaker {
+enum TKTTPifierFaker {
   static func fakeInsert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
 
     // Add all at end
@@ -27,11 +27,11 @@ enum TKFlexAgendaFaker {
       let subscription = Observable<Int>.timer(0, period: 1, scheduler: scheduler)
         .observeOn(MainScheduler.instance)
         .subscribeNext {
-          let events = TKFlexAgendaFaker.inputsReturningHome(inserted)
+          let events = TKTTPifierFaker.inputsReturningHome(inserted)
           if $0 < 1 {
-            subscriber.onNext(TKFlexAgendaFaker.trackWithTrips(events, usePlaceholders: true))
+            subscriber.onNext(TKTTPifierFaker.trackWithTrips(events, usePlaceholders: true))
           } else {
-            subscriber.onNext(TKFlexAgendaFaker.trackWithTrips(events, usePlaceholders: false))
+            subscriber.onNext(TKTTPifierFaker.trackWithTrips(events, usePlaceholders: false))
             subscriber.onCompleted()
           }
       }

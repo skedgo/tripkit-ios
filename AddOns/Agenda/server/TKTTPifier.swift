@@ -11,13 +11,27 @@ import Foundation
 import RxSwift
 import SwiftyJSON
 
-enum TKTTPifier {
+public struct TKTTPifier : TKAgendaBuilderType {
   enum Error : ErrorType {
     case creatingProblemFailedOnServer
     case fetchingSolutionFailedOnServer
   }
   
-  static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
+  public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]>
+  {
+    guard let first = items.first else {
+      return Observable.just([])
+    }
+    
+    // TODO: Decide based on data. Typically new events should go into `new` unless at least two elements have times, then we do something new
+    let new = items[1 ..< items.count]
+    let previous = [first, first]
+    
+    //    return TKTTPifierFaker.fakeInsert(new, into: previous)
+    return TKTTPifier.insert(Array(new), into: previous)
+  }
+  
+  private static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
     
     // TODO: Add stay at end, too
     // TODO: Don't fetch if there's just one or the first is the same as the last
