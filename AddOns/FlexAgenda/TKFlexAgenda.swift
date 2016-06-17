@@ -15,21 +15,15 @@ public struct TKFlexAgenda : TKAgendaBuilderType {
 
   public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]>
   {
-    return TKFlexAgendaFaker.fakeInsert(items, into: items)
+    guard let first = items.first else {
+      return Observable.just([])
+    }
+    
+    // TODO: Decide based on data. Typically new events should go into `new` unless at least two elements have times, then we do something new
+    let new = items[1 ..< items.count]
+    let previous = [first, first]
+    
+//    return TKFlexAgendaFaker.fakeInsert(new, into: previous)
+    return TKTTPifier.insert(Array(new), into: previous)
   }
-  
-  // MARK: TODO: Deal will all those cases properly (probably just do it internally depending on HOW the data has changed)
-  
-  public static func suggestOrder(locations: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
-    return insert(locations, into: [])
-  }
-
-  public static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
-    return TKFlexAgendaFaker.fakeInsert(locations, into: into)
-  }
-
-  public static func udpateTrips(visits: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
-    return insert([], into: visits)
-  }
-
 }

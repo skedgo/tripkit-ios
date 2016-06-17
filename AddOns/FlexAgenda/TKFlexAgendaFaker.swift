@@ -14,7 +14,7 @@ import RxSwift
 enum TKFlexAgendaFaker {
   static func fakeInsert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
 
-    // Add all at end (TODO: Shuffle?)
+    // Add all at end
     var inserted = into
     inserted.appendContentsOf(locations)
     
@@ -72,9 +72,10 @@ enum TKFlexAgendaFaker {
 }
 
 private struct FakeTripOption: TKAgendaTripOptionType {
-  var modes: [ModeIdentifier] = ["pt_pub", "wa_wal"]
-  var duration: NSTimeInterval = 30 * 60
-  var distance: DistanceUnit = 1_000
-  var price: PriceUnit = 1.5
+  let modes: [ModeIdentifier] = ["pt_pub", "wa_wal"]
+  let duration: NSTimeInterval = 30 * 60
+  let distance: DistanceUnit = 1_000
+  let price: PriceUnit = 1.5
+  let score: Float = 3
 }
 

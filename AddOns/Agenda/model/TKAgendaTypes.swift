@@ -35,6 +35,15 @@ public enum TKAgendaInputItem {
       return false
     }
   }
+  
+  func needsTrip(to other: TKAgendaInputItem) -> Bool {
+    if case .Trip = self,
+      case .Trip = other {
+      return false
+    } else {
+      return true
+    }
+  }
 }
 
 @objc
@@ -56,18 +65,6 @@ public protocol TKAgendaEventInputType {
   
   var isStay: Bool { get }
 }
-
-extension TKAgendaInputItem {
-  func needsTrip(to other: TKAgendaInputItem) -> Bool {
-    if case .Trip = self,
-       case .Trip = other {
-      return false
-    } else {
-      return true
-    }
-  }
-}
-
 
 @objc
 public protocol TKAgendaTripInputType: NSObjectProtocol {
@@ -127,17 +124,21 @@ public protocol TKAgendaTripOptionType {
   
   var modes: [ModeIdentifier] { get }
   var duration: NSTimeInterval { get }
-  var distance: DistanceUnit { get }
-  var price: PriceUnit { get }
+  var score: Float { get }
+
+  var distance: DistanceUnit? { get }
+  var price: PriceUnit? { get }
   
   var earliestDeparture: NSTimeInterval? { get }
   var latestDeparture: NSTimeInterval? { get }
 }
 
 extension TKAgendaTripOptionType {
+  var distance: DistanceUnit? { return nil }
+  var price: PriceUnit? { return nil }
+  
   var earliestDeparture: NSTimeInterval? { return nil }
   var latestDeparture: NSTimeInterval? { return nil }
-  
 }
 
 

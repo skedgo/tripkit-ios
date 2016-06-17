@@ -16,10 +16,8 @@ extension TKSkedgoifier {
    */
   public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]> {
     
-    let server = SVKServer.sharedInstance()
-    
-    return server
-      .requireRegion(forCoordinateRegion: coordinateRegion(forItems: items))
+    return SVKServer.sharedInstance()
+      .rx_requireRegion(MKCoordinateRegion.forItems(items))
       .flatMap { region in
         return self.fetchTrips(forItems: items, startDate: startDate, endDate: endDate, inRegion: region, privateVehicles: privateVehicles, tripPatterns: tripPatterns)
       }
@@ -83,37 +81,5 @@ extension TKSkedgoifier {
     }
     
   }
-  
-  private func coordinateRegion(forItems items: [TKAgendaInputItem]) -> MKCoordinateRegion {
-    
-    let mapRect = items.reduce(MKMapRectNull) { mapRect, item in
-      if case let .Event(eventInput) = item where CLLocationCoordinate2DIsValid(eventInput.coordinate) {
-        let point = MKMapPointForCoordinate(eventInput.coordinate)
-        let miniRect = MKMapRectMake(point.x, point.y, 0, 0)
-        return MKMapRectUnion(mapRect, miniRect)
-      } else {
-        return mapRect
-      }
-    }
-    return MKCoordinateRegionForMapRect(mapRect)
-  }
 }
 
-extension SVKServer {
-  private func requireRegion(forCoordinateRegion coordinateRegion: MKCoordinateRegion) -> Observable<SVKRegion> {
-    return Observable.create { subscriber in
-      self.requireRegions { error in
-        guard error == nil else {
-          subscriber.onError(error!)
-          return
-        }
-        
-        let region = SVKRegionManager.sharedInstance().regionForCoordinateRegion(coordinateRegion)
-        subscriber.onNext(region)
-        subscriber.onCompleted()
-      }
-      
-      return NopDisposable.instance
-    }
-  }
-}

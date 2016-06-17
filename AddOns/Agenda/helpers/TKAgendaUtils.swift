@@ -24,3 +24,18 @@ extension TKAgendaType {
     return components.earliestDate() == startDate
   }
 }
+
+extension MKCoordinateRegion {
+  static func forItems(items: [TKAgendaInputItem]) -> MKCoordinateRegion {
+    let mapRect = items.reduce(MKMapRectNull) { mapRect, item in
+      if case let .Event(eventInput) = item where CLLocationCoordinate2DIsValid(eventInput.coordinate) {
+        let point = MKMapPointForCoordinate(eventInput.coordinate)
+        let miniRect = MKMapRectMake(point.x, point.y, 0, 0)
+        return MKMapRectUnion(mapRect, miniRect)
+      } else {
+        return mapRect
+      }
+    }
+    return MKCoordinateRegionForMapRect(mapRect)
+  }
+}
