@@ -84,7 +84,7 @@ enum TKTTPifierCache {
       }
     }
     
-    return UInt(hash)
+    return UInt(abs(hash))
   }
   
   private static func cacheURL(directory: String, filename: String) -> NSURL {
