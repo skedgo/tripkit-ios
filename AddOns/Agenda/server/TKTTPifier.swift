@@ -43,10 +43,8 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     let merged = into.prefix(into.count - 1) + locations + into.suffix(1)
     
-    let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged))
+     let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged))
     
-    // TODO: Create a hash code of the paras, check if we have an ID in the cache already, then hit GET
-
     return rx_createProblem(locations, into: into)
       .flatMap { region, id  in
         return fetchSolution(id, inputItems: into + locations, inRegion: region)
@@ -59,7 +57,8 @@ public struct TKTTPifier : TKAgendaBuilderType {
         }
       }
       .startWith(placeholders)
-      .observeOn(MainScheduler.asyncInstance)
+      .throttle(0.5, scheduler: MainScheduler.instance) // To skip placeholder if we have cached result
+      .observeOn(MainScheduler.instance)
   }
   
   /**
@@ -80,12 +79,18 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     return server
       .rx_requireRegion(first.start)
-      .flatMap { region in
+      .flatMap { region -> Observable<(SVKRegion, String)> in
+        
+        if let cachedId = TKTTPifierCache.problemId(forParas: paras) {
+          return Observable.just((region, cachedId))
+        }
+        
         return server
           .rx_hit(.POST, path: "ttp", parameters: paras, region: region)
           .retry(4)
           .map { code, json -> (SVKRegion, String?) in
             if let id = json?["id"].string {
+              TKTTPifierCache.save(problemId: id, forParas: paras)
               return (region, id)
             } else {
               assertionFailure("Unexpected result from server with code \(code): \(json)")
@@ -97,6 +102,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
   }
   
+  
   /**
    Fetches the solution for the problem of the provided id from the server.
    
@@ -107,8 +113,24 @@ public struct TKTTPifier : TKAgendaBuilderType {
    */
   private static func fetchSolution(id: String, inputItems: [TKAgendaInputItem], inRegion region: SVKRegion) -> Observable<[TKAgendaOutputItem]?> {
     
+    let cachedJson = TKTTPifierCache.solutionJson(forId: id)
+    let cachedItems: [TKAgendaOutputItem]?
+    if let json = cachedJson {
+      cachedItems = createOutput(inputItems, json: json)
+    } else {
+      cachedItems = nil
+    }
+    
+    let paras: [String: AnyObject]
+    if let json = cachedJson,
+       let hashCode = json["hashCode"].int {
+      paras = ["hashCode": hashCode]
+    } else {
+      paras = [:]
+    }
+    
     return SVKServer.sharedInstance()
-      .rx_hit(.GET, path: "ttp/\(id)/solution", region: region) { code, json in
+      .rx_hit(.GET, path: "ttp/\(id)/solution", parameters: paras, region: region) { code, json in
         
         // Keep hitting if it's a 299 (solution still bein calculated)
         // or the input indicates that not all trips have been added yet
@@ -123,17 +145,18 @@ public struct TKTTPifier : TKAgendaBuilderType {
         }
       }
       .filter { code, json in
-        // TODO: Deal with 304 (solution still up-to-date)
+        // Swallow 304 in particular (cached solution still up-to-date)
         return code == 200 && json != nil
       }
       .map { code, json -> [TKAgendaOutputItem]? in
         if let json = json,
           let output = createOutput(inputItems, json: json) {
+          TKTTPifierCache.save(solutionJson: json, forId: id)
           return output
         } else {
           return nil
         }
-    }
+      }.startWith(cachedItems)
   }
   
   /**
