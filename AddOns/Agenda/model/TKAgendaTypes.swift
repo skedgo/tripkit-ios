@@ -36,6 +36,15 @@ public enum TKAgendaInputItem {
     }
   }
   
+  var fixedOrder: Int? {
+    if case let .Event(eventInput) = self,
+       let number = eventInput.fixedOrder {
+      return number.integerValue
+    } else {
+      return nil
+    }
+  }
+  
   var start: CLLocationCoordinate2D {
     switch self {
     case .Event(let eventInput):
@@ -66,6 +75,8 @@ public protocol TKAgendaEventInputType {
   var coordinate: CLLocationCoordinate2D { get }
   
   var identifier: String? { get }
+  
+  var fixedOrder: NSNumber? { get }
   
   /**
    - returns: The source model for this item. This won't be used by in any agenda calculations, but this is helpful for you to associate something with your input. Suggested default: nil.

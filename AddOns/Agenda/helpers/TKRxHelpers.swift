@@ -52,7 +52,7 @@ extension SVKServer {
   }
 
   
-  func rx_hit(method: HTTPMethod, path: String, parameters: [String: AnyObject] = [:], region: SVKRegion? = nil, repeatHandler: ((Int) -> (Bool))? = nil) -> Observable<(Int, JSON?)> {
+  func rx_hit(method: HTTPMethod, path: String, parameters: [String: AnyObject] = [:], region: SVKRegion? = nil, repeatHandler: ((Int, JSON?) -> (Bool))? = nil) -> Observable<(Int, JSON?)> {
     return Observable.create { subscriber in
       
       self.hitSkedGo(
@@ -64,13 +64,13 @@ extension SVKServer {
           
           let stop: Bool
           if let repeatHandler = repeatHandler {
-            stop = repeatHandler(code)
+            stop = repeatHandler(code, json)
           } else {
             stop = false
           }
 
+          subscriber.onNext(code, json)
           if !stop {
-            subscriber.onNext(code, json)
             subscriber.onCompleted()
           }
           return stop

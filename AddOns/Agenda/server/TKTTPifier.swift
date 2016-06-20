@@ -23,19 +23,27 @@ public struct TKTTPifier : TKAgendaBuilderType {
       return Observable.just([])
     }
     
-    // TODO: Decide based on data. Typically new events should go into `new` unless at least two elements have times, then we do something new
-    let new = items[1 ..< items.count]
-    let previous = [first, first]
+    // TODO: Handle when at least two elements have times
+    
+    var list = items
+      .filter { $0.fixedOrder != nil }
+      .sort { $0.fixedOrder! < $1.fixedOrder! }
+    list.append(first)
+    
+    let set = items
+      .filter { $0.fixedOrder == nil }
     
     //    return TKTTPifierFaker.fakeInsert(new, into: previous)
-    return TKTTPifier.insert(Array(new), into: previous)
+    return TKTTPifier.insert(set, into: list)
   }
   
   private static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
     
     precondition(into.count >= 2, "Don't call this unless you have a start and end!")
     
-    let placeholders = TKAgendaFaker.outputPlaceholders(into)
+    let merged = into.prefix(into.count - 1) + locations + into.suffix(1)
+    
+    let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged))
     
     // TODO: Create a hash code of the paras, check if we have an ID in the cache already, then hit GET
 
@@ -100,13 +108,25 @@ public struct TKTTPifier : TKAgendaBuilderType {
   private static func fetchSolution(id: String, inputItems: [TKAgendaInputItem], inRegion region: SVKRegion) -> Observable<[TKAgendaOutputItem]?> {
     
     return SVKServer.sharedInstance()
-      .rx_hit(.GET, path: "ttp/\(id)/solution", region: region) { code in
-        // 299 means solution is not available yet, so keep trying
-        return code == 299
+      .rx_hit(.GET, path: "ttp/\(id)/solution", region: region) { code, json in
+        
+        // Keep hitting if it's a 299 (solution still bein calculated)
+        // or the input indicates that not all trips have been added yet
+        if code == 299 {
+          return true;
+
+        } else if let hasAllTrips = json?["hasAllTrips"].bool {
+          return !hasAllTrips
+
+        } else {
+          return false
+        }
+      }
+      .filter { code, json in
+        // TODO: Deal with 304 (solution still up-to-date)
+        return code == 200 && json != nil
       }
       .map { code, json -> [TKAgendaOutputItem]? in
-        // TODO: Deal with 304 (solution still up-to-date)
-        
         if let json = json,
           let output = createOutput(inputItems, json: json) {
           return output
@@ -183,13 +203,13 @@ public struct TKTTPifier : TKAgendaBuilderType {
     let options = array.flatMap { json -> TKAgendaTripOptionType? in
       
       guard let modes = json["modes"].arrayObject as? [String],
-            let mins = json["duration"]["average"].double,
+            let seconds = json["duration"]["average"].double,
             let score = json["score"]["average"].float
         else {
           return nil
       }
       
-      let duration = NSTimeInterval(mins * 60)
+      let duration = NSTimeInterval(seconds)
       let price = json["price"]["average"].float
       return TripOption(modes: modes, duration: duration, price: price, score: score)
     }
