@@ -194,7 +194,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
       return TripOption(modes: modes, duration: duration, price: price, score: score)
     }
     
-    return options.isEmpty ? nil : []
+    return options.isEmpty ? nil : options
   }
   
   private struct TripOption: TKAgendaTripOptionType {
