@@ -788,7 +788,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (BOOL)canFlipImage
 {
-  return [self isSelfNavigating]; // only those point left and right
+  return [self isSelfNavigating] || [self.modeIdentifier isEqualToString:SVKTransportModeIdentifierAutoRickshaw]; // only those point left and right
 }
 
 - (NSNumber *)bearing {

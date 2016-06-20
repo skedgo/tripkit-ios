@@ -25,7 +25,8 @@
 }
 
 + (void)meetingDetailsForURL:(NSURL *)url
-                     details:(void (^)(CLLocationCoordinate2D coordinate, NSDate *time))detailBlock
+               usingGeocoder:(id<SGGeocoder>)geocoder
+                     details:(void (^)(CLLocationCoordinate2D coordinate, NSString *name, NSDate *time))detailBlock
 {
   // re-construct the parameters
   NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
@@ -37,17 +38,30 @@
     }
   }
   
-  // construct the request
-  if (! params[@"lat"] || ! params[@"lng"] || ! params[@"at"])
-    return;
-  
-  CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([params[@"lat"] doubleValue], [params[@"lng"] doubleValue]);
-  if (! CLLocationCoordinate2DIsValid(coordinate)) {
-    return;
+  // Time is required
+  if (! params[@"at"]) {
+    return; // Need nam
   }
-  
   NSDate *time = [NSDate dateWithTimeIntervalSince1970:[params[@"at"] doubleValue]];
-  detailBlock(coordinate, time);
+  
+  // And either need lat+lng or name
+  NSString *name = params[@"name"];
+  if (name) {
+    [self geocodeString:name
+          usingGeocoder:geocoder
+             completion:
+     ^(SGNamedCoordinate *destination) {
+       if (destination) {
+         detailBlock(destination.coordinate, [destination title], time);
+       }
+     }];
+
+  } else if (params[@"lat"] && params[@"lng"]) {
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([params[@"lat"] doubleValue], [params[@"lng"] doubleValue]);
+    if (CLLocationCoordinate2DIsValid(coordinate)) {
+      detailBlock(coordinate, name, time);
+    }
+  }
 }
 
 #pragma mark - Query URL
@@ -118,28 +132,49 @@
     }
   }
   
-//  if (!CLLocationCoordinate2DIsValid(end) && name != nil) {
-//      [geocoder geocodeString:name nearRegion:MKMapRectWorld success:^(NSString * _Nonnull query, NSArray<SGNamedCoordinate *> * _Nonnull results) {
-//#pragma unused(query)
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//          id <MKAnnotation>to = [SGBaseGeocoder pickBestFromResults:results];
-//          if (to) {
-//            CLLocationCoordinate2D newEnd = [to coordinate];
-//            success(start, newEnd, name, timeType, time);
-//          } else {
-//            failure();
-//          }
-//        });
-//      } failure:^(NSString * _Nonnull query, NSError * _Nullable error) {
-//#pragma unused(query, error)
-//        failure();
-//      }];
-//  } else {
+  if (!CLLocationCoordinate2DIsValid(end) && name != nil) {
+    [self geocodeString:name
+          usingGeocoder:geocoder
+             completion:
+     ^(SGNamedCoordinate *coordinate) {
+       if (coordinate) {
+         success(start, coordinate.coordinate, [coordinate title], timeType, time);
+       } else {
+         failure();
+       }
+     }];
+  } else {
     success(start, end, name, timeType, time);
-//  }
+  }
   return YES;
 }
 
++ (void)geocodeString:(NSString *)string
+        usingGeocoder:(id<SGGeocoder>)geocoder
+           completion:(void(^)(SGNamedCoordinate *coordinate))completion
+{
+  [geocoder geocodeString:string
+               nearRegion:MKMapRectWorld
+                  success:
+   ^(NSString * _Nonnull query, NSArray<SGNamedCoordinate *> * _Nonnull results) {
+#pragma unused(query)
+    dispatch_async(dispatch_get_main_queue(), ^{
+      id<MKAnnotation> annotation = [SGBaseGeocoder pickBestFromResults:results];
+      if (annotation) {
+        SGNamedCoordinate *coordinate = [SGNamedCoordinate namedCoordinateForAnnotation:annotation];
+        coordinate.name = string;
+        completion(coordinate);
+      } else {
+        completion(nil);
+      }
+    });
+  } failure:
+   ^(NSString * _Nonnull query, NSError * _Nullable error) {
+#pragma unused(query, error)
+     completion(nil);
+  }];
+  
+}
 
 #pragma mark - Stops
 
@@ -163,20 +198,21 @@
   return [NSURL URLWithString:urlString];
 }
 
-+ (void)stopDetailsForURL:(NSURL *)url
++ (BOOL)stopDetailsForURL:(NSURL *)url
                   details:(void (^)(NSString *stopCode, NSString *regionName, NSString *filter))detailBlock {
   // re-construct the parameters
   NSArray *queryComponents = [[url path] componentsSeparatedByString:@"/"];
   
   NSString *regionName = queryComponents[2];
   NSString *stopCode = queryComponents[3];
-  NSString *filter = queryComponents.count == 5?queryComponents[4]:nil;
+  NSString *filter = queryComponents.count == 5 ? queryComponents[4] : nil;
 
   // construct the request
   if (! regionName || ! stopCode)
-    return;
+    return NO;
   
   detailBlock(stopCode, regionName, filter);
+  return YES;
 }
 
 
