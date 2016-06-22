@@ -8,7 +8,7 @@
 
 #import "Vehicle.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation Vehicle
 

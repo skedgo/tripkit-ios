@@ -10,6 +10,8 @@
 
 #import "TKTripKit.h"
 
+#import <TripKit/TripKit-Swift.h>
+
 #import "SGKConfig+TKInterAppCommunicator.h"
 
 #import "SGActions.h"

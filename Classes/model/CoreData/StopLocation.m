@@ -8,7 +8,7 @@
 
 #import "StopLocation.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @interface StopLocation ()
 

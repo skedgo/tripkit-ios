@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @interface TKParserHelper : STKParserHelper
 
@@ -52,7 +52,7 @@ forRealTimeStatusString:(NSString *)realTimeStatus;
 + (BOOL)updateStopLocation:(StopLocation *)stop
             fromDictionary:(NSDictionary *)stopDict;
 
-+ (SGStopCoordinate *)simpleStopFromDictionary:(NSDictionary *)stopDict;
++ (STKStopCoordinate *)simpleStopFromDictionary:(NSDictionary *)stopDict;
 
 #pragma mark - Alerts
 

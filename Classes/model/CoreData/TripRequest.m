@@ -8,7 +8,7 @@
 
 #import "TripRequest.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 #define BHCostCount 3
 

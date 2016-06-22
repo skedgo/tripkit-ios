@@ -11,6 +11,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import SGBookingKit
+
 public struct ProviderAuth {
 
   private struct RemoteAction {

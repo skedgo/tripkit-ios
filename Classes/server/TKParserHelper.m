@@ -8,7 +8,7 @@
 
 #import "TKParserHelper.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation TKParserHelper
 
@@ -205,9 +205,9 @@
   return addedStop;
 }
 
-+ (SGStopCoordinate *)simpleStopFromDictionary:(NSDictionary *)stopDict
++ (STKStopCoordinate *)simpleStopFromDictionary:(NSDictionary *)stopDict
 {
-  SGStopCoordinate *stop = [[SGStopCoordinate alloc] initWithLatitude:[stopDict[@"lat"] doubleValue]
+  STKStopCoordinate *stop = [[STKStopCoordinate alloc] initWithLatitude:[stopDict[@"lat"] doubleValue]
                                                             longitude:[stopDict[@"lng"] doubleValue]
                                                                  name:stopDict[@"name"]
                                                               address:stopDict[@"services"]];

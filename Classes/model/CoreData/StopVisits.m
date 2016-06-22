@@ -8,7 +8,9 @@
 
 #import "StopVisits.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
+
+#import <SkedGoKit/SkedGoKit-Swift.h>
 
 #import "SGStyleManager.h"
 

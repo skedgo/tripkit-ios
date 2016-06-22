@@ -8,7 +8,7 @@
 
 #import "TKBuzzInfoProvider.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 typedef enum {
 	SGDeparturesResultAddedStops      = 1 << 0,

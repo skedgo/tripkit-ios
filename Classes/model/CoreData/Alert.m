@@ -8,7 +8,7 @@
 
 #import "Alert.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation Alert
 

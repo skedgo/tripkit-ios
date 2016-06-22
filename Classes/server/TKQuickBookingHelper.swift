@@ -9,12 +9,12 @@
 import Foundation
 
 // Swift-only this would be a struct
-class TKQuickBookingPrice: NSObject {
+public class TKQuickBookingPrice: NSObject {
   /// Price in local currency, typically not in smallest unit, but dollars
-  let localCost: Float
+  public let localCost: Float
   
   /// Price in USD dollars
-  let USDCost: Float
+  public let USDCost: Float
   
   private init(localCost: Float, USDCost: Float) {
     self.localCost = localCost
@@ -23,45 +23,45 @@ class TKQuickBookingPrice: NSObject {
 }
 
 // Swift-only this would be a struct
-class TKQuickBooking: NSObject {
+public class TKQuickBooking: NSObject {
   /// Localised identifying this booking option
-  let title: String
+  public let title: String
 
   /// Localised description
-  let subtitle: String?
+  public let subtitle: String?
   
   /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`.
-  let bookingURL: NSURL
+  public let bookingURL: NSURL
 
   // Localised string for doing booking
-  let bookingTitle: String
+  public let bookingTitle: String
   
   // URL for secondary booking flow for booking this option. This will typically let you customise the booking or pick from more options, compared to the primary `bookingURL`.
-  let secondaryBookingURL: NSURL?
+  public let secondaryBookingURL: NSURL?
 
   // Localised string for secondary booking action
-  let secondaryBookingTitle: String?
+  public let secondaryBookingTitle: String?
 
   /// URL to fetch updated trip that's using this booking options. Only present if there would be a change to the trip.
-  let tripUpdateURL: NSURL?
+  public let tripUpdateURL: NSURL?
   
   /// Optional URL for image identifying this booking option
-  let imageURL: NSURL?
+  public let imageURL: NSURL?
   
   /// Optional price for this option
-  let price: TKQuickBookingPrice?
+  public let price: TKQuickBookingPrice?
 
   /// Localised human-friendly string, e.g., "$10"
-  let priceString: String?
+  public let priceString: String?
   
-  let surgeString: String?
-  let surgeImageURL: NSURL?
+  public let surgeString: String?
+  public let surgeImageURL: NSURL?
 
   /// Optional ETA for this option. This is the expected waiting time.
-  let ETA: NSTimeInterval?
+  public let ETA: NSTimeInterval?
   
   /// Expected waiting time. Negative if unknown. (For Obj-c compatibility.)
-  let ETARaw: NSTimeInterval
+  public let ETARaw: NSTimeInterval
   
   private init(title: String, subtitle: String?, bookingURL: NSURL, bookingTitle: String, secondaryBookingURL: NSURL?, secondaryBookingTitle: String?, tripUpdateURL: NSURL?, imageURL: NSURL?, price: TKQuickBookingPrice?, priceString: String?, surgeText: String?, surgeImageURL: NSURL?, ETA: NSTimeInterval?) {
     self.title = title
@@ -86,32 +86,32 @@ class TKQuickBooking: NSObject {
 }
 
 // Swift-only this would be a struct
-struct TKBookingConfirmation {
-  struct Detail {
-    let title: String
-    let subtitle: String?
-    let imageURL: NSURL?
+public struct TKBookingConfirmation {
+  public struct Detail {
+    public let title: String
+    public let subtitle: String?
+    public let imageURL: NSURL?
   }
   
-  struct Action {
-    let title: String
-    let isDestructive: Bool
-    let internalURL: NSURL?
-    let externalAction: NSString?
+  public struct Action {
+    public let title: String
+    public let isDestructive: Bool
+    public let internalURL: NSURL?
+    public let externalAction: NSString?
   }
   
-  let status: Detail
-  let provider: Detail?
-  let vehicle: Detail?
-  let actions: [Action]
+  public let status: Detail
+  public let provider: Detail?
+  public let vehicle: Detail?
+  public let actions: [Action]
 }
 
 // Swift-only this would be an enum
-class TKQuickBookingHelper: NSObject {
+public class TKQuickBookingHelper: NSObject {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
-  class func fetchQuickBookings(forSegment segment: TKSegment, completion: [TKQuickBooking] -> Void) {
+  public class func fetchQuickBookings(forSegment segment: TKSegment, completion: [TKQuickBooking] -> Void) {
     if let stored = segment.storedQuickBookings {
       completion(stored)
       return
@@ -301,7 +301,7 @@ extension TKBookingConfirmation {
 }
 
 extension TKSegment {
-  var storedQuickBookings: [TKQuickBooking]? {
+  public var storedQuickBookings: [TKQuickBooking]? {
     get {
       if let key = cacheKey(),
          let cached = TKTripKit.sharedInstance().inMemoryCache().objectForKey(key) as? [[NSString: AnyObject]] {
@@ -312,7 +312,7 @@ extension TKSegment {
     }
   }
   
-  var activeIndexQuickBooking: Int? {
+  public var activeIndexQuickBooking: Int? {
     get {
       if let key = indexKey(),
          let index = TKTripKit.sharedInstance().inMemoryCache().objectForKey(key) as? Int,
@@ -353,7 +353,7 @@ extension TKSegment {
     TKTripKit.sharedInstance().inMemoryCache().setObject(array, forKey: key)
   }
   
-  var bookingConfirmation: TKBookingConfirmation? {
+  public var bookingConfirmation: TKBookingConfirmation? {
     if let dictionary = bookingConfirmationDictionary() {
       return TKBookingConfirmation(withDictionary: dictionary)
       

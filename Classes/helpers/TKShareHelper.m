@@ -8,6 +8,8 @@
 
 #import "TKShareHelper.h"
 
+#import <TripKit/TKTripKit.h>
+
 @implementation TKShareHelper
 
 #pragma mark - Meet URL

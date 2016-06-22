@@ -8,7 +8,7 @@
 
 #import "TKSegment.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 NSString *const UninitializedString =  @"UninitializedString";
 

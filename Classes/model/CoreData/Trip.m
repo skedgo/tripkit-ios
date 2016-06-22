@@ -8,7 +8,10 @@
 
 #import "Trip.h"
 
-#import "TKTripKit.h"
+@import SkedGoKit;
+
+#import <TripKit/TKTripKit.h>
+
 
 #import "TKRealTimeUpdatableHelper.h"
 
@@ -694,7 +697,7 @@ typedef NSUInteger SGTripFlag;
 
 - (NSString *)durationString
 {
-  return [self.arrivalTime durationStringLongSince:self.departureTime];
+  return [self.arrivalTime durationLongSince:self.departureTime];
 }
 
 - (NSDictionary *)accessibleCostValues

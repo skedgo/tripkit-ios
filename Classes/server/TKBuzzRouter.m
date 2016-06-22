@@ -8,9 +8,11 @@
 
 #import "TKBuzzRouter.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 #import "TripRequest+Classify.h"
+
 
 #define kBHRoutingTimeOutSecond           30
 

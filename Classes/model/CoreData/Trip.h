@@ -6,17 +6,15 @@
 //  Copyright (c) 2011 SkedGo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
+@import SkedGoKit;
 
 #import "TKSegment.h"
 #import "SegmentTemplate.h"
 #import "TKRealTimeUpdatable.h"
 
 #import "TKShareURLProvider.h"
-
-#import "STKTripAndSegments.h"
-#import "STKVehicular.h"
 
 @class Alert, SVKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 
