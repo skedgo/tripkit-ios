@@ -57,26 +57,26 @@ enum TKTTPifierCache {
   }
   
   private static func inputHash(input: [String: AnyObject]) -> UInt {
-    var hash = 1
+    var hash = 5381
     for key in input.keys.sort() {
       let value = input[key]
       if let string = value as? String {
-        hash = hash &+ 31 &* string.hash
+        hash = ((hash << 5) &+ hash) &+ string.hash
         
       } else if let number = value as? Double {
-        hash = hash &+ 31 &* number.hashValue
+        hash = ((hash << 5) &+ hash) &+ number.hashValue
         
       } else if let stringArray = value as? [String] {
         for string in stringArray {
-          hash = hash &+ 31 &* string.hash
+          hash = ((hash << 5) &+ hash) &+ string.hash
         }
         
       } else if let dict = value as? [String: AnyObject] {
-        hash = hash &+ 31 &* Int(inputHash(dict))
+        hash = ((hash << 5) &+ hash) &+ Int(inputHash(dict))
 
       } else if let dictArray = value as? [[String: AnyObject]] {
         for dict in dictArray {
-          hash = hash &+ 31 &* Int(inputHash(dict))
+          hash = ((hash << 5) &+ hash) &+ Int(inputHash(dict))
         }
 
       } else {

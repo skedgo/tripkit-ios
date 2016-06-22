@@ -103,10 +103,14 @@ public class TKAgendaManager {
     
     for pair in zip(previous, new) {
       switch pair {
-      case (.Event, .Event), (.Trip, .Trip), (.TripPlaceholder, .TripPlaceholder):
+      case (.Trip, .Trip), (.TripPlaceholder, .TripPlaceholder):
         // Treat same base type as the same
         // TODO: FIX!
         break
+        
+      case (.Event(let prevEvent), .Event(let newEvent)) where prevEvent.equalsForAgenda(newEvent):
+        break
+        
       case (.TripOptions(let prevItems), .TripOptions(let newItems)) where prevItems.count == newItems.count:
         // Treat same count as the same
         break

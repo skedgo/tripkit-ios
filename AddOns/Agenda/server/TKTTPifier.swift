@@ -43,7 +43,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     let merged = into.prefix(into.count - 1) + locations + into.suffix(1)
     
-     let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged))
+    let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged))
     
     return rx_createProblem(locations, into: into)
       .flatMap { region, id  in
