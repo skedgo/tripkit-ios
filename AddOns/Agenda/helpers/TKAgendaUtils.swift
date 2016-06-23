@@ -8,6 +8,8 @@
 
 import Foundation
 
+import MapKit
+
 extension NSDateComponents {
   func earliestDate() -> NSDate {
     let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)

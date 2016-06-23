@@ -44,6 +44,15 @@ public enum TKAgendaInputItem {
       return nil
     }
   }
+
+  var timesAreFixed: Bool {
+    switch self {
+    case .Event(let eventInput):
+      return eventInput.timesAreFixed
+    case .Trip:
+      return true
+    }
+  }
   
   var start: CLLocationCoordinate2D {
     switch self {
@@ -77,6 +86,11 @@ public protocol TKAgendaEventInputType {
   var identifier: String? { get }
   
   var fixedOrder: NSNumber? { get }
+  
+  /**
+   - returns: Whether start + end date are fixed (e.g., an event with a set time), or if the agenda can move them around arbitrarily (e.g., best time of day to go to a certain attraction).
+   */
+  var timesAreFixed: Bool { get }
   
   /**
    - returns: The source model for this item. This won't be used by in any agenda calculations, but this is helpful for you to associate something with your input. Suggested default: nil.

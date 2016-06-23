@@ -19,22 +19,44 @@ public struct TKTTPifier : TKAgendaBuilderType {
   
   public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]>
   {
-    guard let first = items.first else {
+    guard let _ = items.first else {
       return Observable.just([])
+    }
+    
+    let (list, set) = TKTTPifier.split(items)
+    
+    //    return TKTTPifierFaker.fakeInsert(new, into: previous)
+    return TKTTPifier.insert(set, into: list)
+  }
+  
+  internal static func split(items: [TKAgendaInputItem]) -> (list: [TKAgendaInputItem], set: [TKAgendaInputItem])
+  {
+    guard let first = items.first else {
+      preconditionFailure()
     }
     
     // TODO: Handle when at least two elements have times
     
+    // We start with the list being all the ordered elements...
     var list = items
-      .filter { $0.fixedOrder != nil }
-      .sort { $0.fixedOrder! < $1.fixedOrder! }
+      .filter { $0.fixedOrder != nil /* || $0.timesAreFixed */ }
+      .sort { first, second in
+        // Order:
+        // 1. Stays
+        // 2. Elements with fixed time, sorted by the time
+        // 3. Rest by their fixed order
+        if first.isStay {
+          return true
+        } else {
+          return first.fixedOrder! < second.fixedOrder
+        }
+    }
     list.append(first)
     
     let set = items
       .filter { $0.fixedOrder == nil }
     
-    //    return TKTTPifierFaker.fakeInsert(new, into: previous)
-    return TKTTPifier.insert(set, into: list)
+    return (list, set)
   }
   
   private static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
@@ -43,7 +65,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     let merged = into.prefix(into.count - 1) + locations + into.suffix(1)
     
-     let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged))
+    let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged))
     
     return rx_createProblem(locations, into: into)
       .flatMap { region, id  in
