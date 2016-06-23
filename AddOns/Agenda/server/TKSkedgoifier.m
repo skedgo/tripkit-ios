@@ -8,8 +8,8 @@
 
 #import "TKSkedgoifier.h"
 
-#import "TKTripKit+Agenda.h"
-
+@import TripKit;
+#import <TripKitAgenda/TripKitAgenda-Swift.h>
 
 #define kTKSkedgoifierErrorTypeUser 30051
 #define kSGPriorityCurrentLocation	9

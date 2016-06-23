@@ -10,7 +10,7 @@
 #define TKTripKit_Agenda_h
 
 // dependencies
-#import "TKTripKit.h"
+@import TripKit;
 
 // agenda building
 #import "TKAgendaInputBuilder.h"

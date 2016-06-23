@@ -6,7 +6,10 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+@import CoreLocation;
+
+#ifdef TEMP
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -66,3 +69,5 @@ FOUNDATION_EXPORT NSString *const kTKAgendaInputBuilderTemplateCurrentLocation;
 
 @end
 NS_ASSUME_NONNULL_END
+
+#endif

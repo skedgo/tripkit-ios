@@ -34,6 +34,10 @@ Pod::Spec.new do |s|
 
   s.subspec 'Agenda' do |cs|
     cs.dependency 'TripKit/Core'
+    cs.dependency 'RxSwift'
+    cs.dependency 'RxCocoa'
+    cs.dependency 'SwiftyJSON'
+
     cs.source_files = "AddOns/Agenda/**/*"
   end
 

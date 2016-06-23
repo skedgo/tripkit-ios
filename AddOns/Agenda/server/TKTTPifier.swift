@@ -17,6 +17,10 @@ public struct TKTTPifier : TKAgendaBuilderType {
     case fetchingSolutionFailedOnServer
   }
   
+  public init() {
+    
+  }
+  
   public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]>
   {
     guard let _ = items.first else {

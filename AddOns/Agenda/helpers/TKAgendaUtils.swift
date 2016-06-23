@@ -11,18 +11,18 @@ import Foundation
 import MapKit
 
 extension NSDateComponents {
-  func earliestDate() -> NSDate {
+  public func earliestDate() -> NSDate {
     let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
     return calendar!.dateFromComponents(self)!
   }
 
-  func latestDate() -> NSDate {
+  public func latestDate() -> NSDate {
     return earliestDate().dateByAddingTimeInterval(86400)
   }
 }
 
 extension TKAgendaType {
-  func applies(forDateComponents components: NSDateComponents) -> Bool {
+  public func applies(forDateComponents components: NSDateComponents) -> Bool {
     return components.earliestDate() == startDate
   }
 }

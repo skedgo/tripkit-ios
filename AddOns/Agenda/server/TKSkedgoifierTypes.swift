@@ -47,7 +47,7 @@ public class TKSkedgoifierEventOutput: TKAgendaEventOutput {
   let effectiveEnd: NSDate?
   let isContinuation: Bool
 
-  init(forInput input: TKAgendaEventInputType, effectiveStart: NSDate?, effectiveEnd: NSDate?, isContinuation: Bool) {
+  public init(forInput input: TKAgendaEventInputType, effectiveStart: NSDate?, effectiveEnd: NSDate?, isContinuation: Bool) {
     self.effectiveStart = effectiveStart
     self.effectiveEnd = effectiveEnd
     self.isContinuation = isContinuation

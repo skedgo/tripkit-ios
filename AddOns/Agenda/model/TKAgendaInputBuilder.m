@@ -8,6 +8,8 @@
 
 #import "TKAgendaInputBuilder.h"
 
+#ifdef TEMP
+
 #import "TKTripKit+Agenda.h"
 
 NSString *const kTKAgendaInputBuilderTemplateStay            = @"kTKAgendaInputBuilderTemplateStay";
@@ -598,6 +600,6 @@ NSString *const kTKAgendaInputBuilderTemplateCurrentLocation = @"kTKAgendaInputB
   return nil;
 }
 
-
-
 @end
+
+#endif

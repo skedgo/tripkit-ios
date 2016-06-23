@@ -144,9 +144,9 @@ public enum TKAgendaOutputItem {
 }
 
 public class TKAgendaEventOutput: NSObject {
-  let input: TKAgendaEventInputType
+  public let input: TKAgendaEventInputType
   
-  init(forInput input: TKAgendaEventInputType) {
+  public init(forInput input: TKAgendaEventInputType) {
     self.input = input
   }
 }
@@ -164,12 +164,12 @@ public typealias DistanceUnit = Float
 public typealias PriceUnit = Float
 
 public class TKAgendaTripOutput: NSObject {
-  let input: TKAgendaTripInputType?
-  let trip: STKTrip
-  var fromIdentifier: String?
-  var toIdentifier: String?
+  public let input: TKAgendaTripInputType?
+  public let trip: STKTrip
+  public var fromIdentifier: String?
+  public var toIdentifier: String?
   
-  init(withTrip trip: STKTrip, forInput input: TKAgendaTripInputType?) {
+  public init(withTrip trip: STKTrip, forInput input: TKAgendaTripInputType?) {
     self.trip = trip
     self.input = input
   }
