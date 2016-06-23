@@ -6,7 +6,7 @@
 //
 //
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification";
 
@@ -14,6 +14,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSDate *resetDateFromInitialization;
+@property (nonatomic, strong) NSCache *inMemoryCache;
 
 @end
 
@@ -30,8 +31,8 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 {
   self = [super init];
   if (self) {
-    // wake up context
-    [self tripKitContext];
+    self.inMemoryCache = [[NSCache alloc] init];
+    [self tripKitContext]; // wake up context
   }
   return self;
 }
@@ -41,25 +42,31 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   _tripKitContext = nil;
   _persistentStoreCoordinator = nil;
   
-  [self tripKitContext];
+  [self tripKitContext]; // wake up
 }
 
 - (void)reset
 {
   _tripKitContext = nil;
   _persistentStoreCoordinator = nil;
-
+  [self.inMemoryCache removeAllObjects];
+  
   [self removeLocalFiles];
   
-  [self tripKitContext];
+  [self tripKitContext]; // wake up
 }
 
 #pragma mark - Private helpers
 
-+ (NSManagedObjectModel *)tripKitModelInBundle:(NSBundle *)bundle
++ (NSManagedObjectModel *)tripKitModel
 {
+  NSBundle *bundle = [self bundle];
   NSURL *modelURL = [bundle URLForResource:@"TripKitModel" withExtension:@"momd"];
   return [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+}
+
++ (NSBundle *)bundle {
+  return [NSBundle bundleForClass:[TKTripKit class]];
 }
 
 - (BOOL)didResetToday
@@ -131,7 +138,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   if (_managedObjectModel != nil) {
     return _managedObjectModel;
   }
-  _managedObjectModel = [[self class] tripKitModelInBundle:[NSBundle mainBundle]];
+  _managedObjectModel = [[self class] tripKitModel];
   return _managedObjectModel;
 }
 

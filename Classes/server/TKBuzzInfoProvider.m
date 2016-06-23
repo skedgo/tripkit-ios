@@ -8,7 +8,7 @@
 
 #import "TKBuzzInfoProvider.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 typedef enum {
 	SGDeparturesResultAddedStops      = 1 << 0,
@@ -300,8 +300,8 @@ typedef enum {
 + (NSError *)errorForUserForBrokenStop
 {
   NSDictionary *info = @{
-                         NSLocalizedDescriptionKey: NSLocalizedStringFromTable(@"Could not find transit stop.", @"TripKit", "Error title when server could not find a given transit stop."),
-                         NSLocalizedRecoverySuggestionErrorKey: NSLocalizedStringFromTable(@"Search for this stop again or try again later..", @"TripKit", "Error recovery suggestion for when when server could not find a given transit stop."),
+                         NSLocalizedDescriptionKey: NSLocalizedStringFromTableInBundle(@"Could not find transit stop.", @"TripKit", [TKTripKit bundle], "Error title when server could not find a given transit stop."),
+                         NSLocalizedRecoverySuggestionErrorKey: NSLocalizedStringFromTableInBundle(@"Search for this stop again or try again later..", @"TripKit", [TKTripKit bundle], "Error recovery suggestion for when when server could not find a given transit stop."),
                          };
   return [NSError errorWithDomain:@"com.buzzhives.TripKit" code:831571 userInfo:info];
 }

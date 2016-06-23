@@ -6,13 +6,11 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-
-#import "SGKGrouping.h"
+@import Foundation;
+@import CoreData;
+@import SkedGoKit;
 
 #import "TKRealTimeUpdatable.h"
-#import "STKMapAnnotation.h"
 #import "TKShareURLProvider.h"
 
 typedef NS_ENUM(NSInteger, StopVisitRealTime) {

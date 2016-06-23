@@ -10,7 +10,7 @@
 
 @implementation TKPlainCell
 
-- (void)addStop:(SGStopCoordinate *)stop
+- (void)addStop:(STKStopCoordinate *)stop
 {
   NSMutableArray *mutableStops;
   if ([self.stops isKindOfClass:[NSMutableArray class]]) {

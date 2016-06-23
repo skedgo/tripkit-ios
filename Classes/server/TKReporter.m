@@ -8,7 +8,7 @@
 
 #import "TKReporter.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation TKReporter
 

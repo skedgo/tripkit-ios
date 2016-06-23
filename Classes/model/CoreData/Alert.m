@@ -8,7 +8,7 @@
 
 #import "Alert.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation Alert
 
@@ -129,7 +129,7 @@
 - (UIImage *)pointImage
 {
   NSString *imageName = [STKInfoIcon imageNameForInfoIconType:self.infoIconType usage:STKInfoIconUsageMap];
-  return [UIImage imageNamed:imageName];
+  return [SGStyleManager imageNamed:imageName];
 }
 
 - (BOOL)isDraggable

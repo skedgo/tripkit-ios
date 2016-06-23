@@ -8,10 +8,11 @@
 
 #import "Vehicle.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation Vehicle
 
+@dynamic icon;
 @dynamic identifier;
 @dynamic latitude;
 @dynamic longitude;
@@ -20,6 +21,7 @@
 @dynamic label;
 @dynamic toDelete;
 @dynamic service, serviceAlternatives;
+@dynamic segment, segmentAlternatives;
 
 @synthesize displayAsPrimary;
 
@@ -59,12 +61,20 @@
 
 - (NSString *)serviceNumber
 {
-  return [[self anyService] number];
+  return [[self anyService] number]; // Show nothing for non public transport
 }
 
 - (UIColor *)serviceColor
 {
-  return [[self anyService] color];
+  Service *service = [self anyService];
+  if (service) {
+    return [service color];
+  }
+  SegmentReference *reference = [self anySegmentReference];
+  if (reference) {
+    return reference.template.modeInfo.color;
+  }
+  return nil;
 }
 
 
@@ -72,8 +82,19 @@
 
 - (NSString *)title
 {
+  NSString *modeTitle;
   Service *service = [self anyService];
-  NSString *modeTitle = [[service modeTitle] capitalizedStringWithLocale:[NSLocale currentLocale]];
+  if (service) {
+    modeTitle = [service.modeTitle capitalizedStringWithLocale:[NSLocale currentLocale]];
+  }
+  SegmentReference *reference = [self anySegmentReference];
+  if (reference) {
+    modeTitle = reference.template.modeInfo.descriptor;
+  }
+  if (!modeTitle) {
+    modeTitle = self.label;
+  }
+  
 	if (service.number) {
 		return [NSString stringWithFormat:@"%@ %@", modeTitle, service.number];
 	} else {
@@ -89,9 +110,9 @@
 	NSTimeInterval seconds = [self.lastUpdate timeIntervalSinceNow];
   NSString *durationString = [NSDate durationStringForSeconds:-seconds];
 	if (self.label.length > 0 && self.label.length < 20) {
-		return [NSString stringWithFormat:NSLocalizedStringFromTable(@"VehicleCalledUpdated", @"TripKit", "Vehicle 'x' updated"), self.label, durationString];
+		return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"VehicleCalledUpdated", @"TripKit", [TKTripKit bundle], "Vehicle 'x' updated"), self.label, durationString];
 	} else {
-		return [NSString stringWithFormat:NSLocalizedStringFromTable(@"VehicleUpdated", @"TripKit", "Vehicle updated"), durationString];
+		return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"VehicleUpdated", @"TripKit", [TKTripKit bundle], "Vehicle updated"), durationString];
 	}
 }
 
@@ -124,6 +145,11 @@
 - (Service *)anyService
 {
   return self.service ?: [self.serviceAlternatives anyObject];
+}
+
+- (SegmentReference *)anySegmentReference
+{
+  return self.segment ?: [self.segmentAlternatives anyObject];
 }
 
 - (BOOL)hasLastUpdate

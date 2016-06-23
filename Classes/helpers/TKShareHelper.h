@@ -6,11 +6,9 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
-#import <CoreLocation/CoreLocation.h>
-
-#import "SGKEnums.h"
+@import Foundation;
+@import CoreLocation;
+@import SkedGoKit;
 
 @protocol SGGeocoder;
 

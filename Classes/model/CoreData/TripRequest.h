@@ -6,11 +6,11 @@
 //  Copyright (c) 2011 SkedGo. All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
-#import <MapKit/MapKit.h>
+@import CoreData;
+@import MapKit;
+@import SkedGoKit;
 
 #import "TKShareURLProvider.h"
-#import "SGKEnums.h"
 
 #import "TripGroup.h"
 

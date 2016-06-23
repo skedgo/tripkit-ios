@@ -8,7 +8,7 @@
 
 #import "Shape.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @interface Shape ()
 
