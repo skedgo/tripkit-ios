@@ -62,18 +62,18 @@ extension SVKServer {
         region: region,
         repeatHandler: { code, json in
           
-          let stop: Bool
+          let hitAgain: Bool
           if let repeatHandler = repeatHandler {
-            stop = repeatHandler(code, json)
+            hitAgain = repeatHandler(code, json)
           } else {
-            stop = false
+            hitAgain = false
           }
 
           subscriber.onNext(code, json)
-          if !stop {
+          if !hitAgain {
             subscriber.onCompleted()
           }
-          return stop
+          return hitAgain
           
         }, errorHandler: { error in
           subscriber.onError(error)

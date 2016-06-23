@@ -87,11 +87,39 @@ public class TKAgendaManager {
         lastError.value = error
         return Observable.empty().asDriver(onErrorJustReturn: [])
       }
-    }
+      }.distinctUntilChanged { previous, new in
+        return self.outputItemsEqual(previous, new: new)
+      }
     
     let agenda = TKSimpleAgenda(items: trackItems, lastError: lastError.asObservable(), dateComponents: dateComponents)
     agendas[key] = agenda
     return agenda
+  }
+  
+  private func outputItemsEqual(previous: [TKAgendaOutputItem], new: [TKAgendaOutputItem]) -> Bool {
+    if previous.count != new.count {
+      return false
+    }
+    
+    for pair in zip(previous, new) {
+      switch pair {
+      case (.Trip, .Trip), (.TripPlaceholder, .TripPlaceholder):
+        // Treat same base type as the same
+        // TODO: FIX!
+        break
+        
+      case (.Event(let prevEvent), .Event(let newEvent)) where prevEvent.equalsForAgenda(newEvent):
+        break
+        
+      case (.TripOptions(let prevItems), .TripOptions(let newItems)) where prevItems.count == newItems.count:
+        // Treat same count as the same
+        break
+      default:
+        return false
+      }
+    }
+    
+    return true
   }
 }
 

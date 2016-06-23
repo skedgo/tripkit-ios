@@ -100,6 +100,19 @@ public protocol TKAgendaEventInputType {
   var isStay: Bool { get }
 }
 
+extension TKAgendaEventInputType {
+  func equalsForAgenda(other: TKAgendaEventInputType) -> Bool {
+    return startDate == other.startDate
+      && endDate == other.endDate
+      && abs(coordinate.latitude - other.coordinate.latitude) < 0.0001
+      && abs(coordinate.longitude - other.coordinate.longitude) < 0.0001
+      && identifier == other.identifier
+      && fixedOrder?.integerValue == other.fixedOrder?.integerValue
+  }
+}
+
+
+
 @objc
 public protocol TKAgendaTripInputType: NSObjectProtocol {
   var departureTime: NSDate { get }
@@ -137,6 +150,14 @@ public class TKAgendaEventOutput: NSObject {
     self.input = input
   }
 }
+
+extension TKAgendaEventOutput {
+  func equalsForAgenda(other: TKAgendaEventOutput) -> Bool {
+    return input.equalsForAgenda(other.input)
+  }
+}
+
+
 
 public typealias ModeIdentifier = String
 public typealias DistanceUnit = Float
