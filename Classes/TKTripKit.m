@@ -58,10 +58,15 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 
 #pragma mark - Private helpers
 
-+ (NSManagedObjectModel *)tripKitModelInBundle:(NSBundle *)bundle
++ (NSManagedObjectModel *)tripKitModel
 {
+  NSBundle *bundle = [self bundle];
   NSURL *modelURL = [bundle URLForResource:@"TripKitModel" withExtension:@"momd"];
   return [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+}
+
++ (NSBundle *)bundle {
+  return [NSBundle bundleForClass:[TKTripKit class]];
 }
 
 - (BOOL)didResetToday
@@ -133,7 +138,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   if (_managedObjectModel != nil) {
     return _managedObjectModel;
   }
-  _managedObjectModel = [[self class] tripKitModelInBundle:[NSBundle mainBundle]];
+  _managedObjectModel = [[self class] tripKitModel];
   return _managedObjectModel;
 }
 

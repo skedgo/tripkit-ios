@@ -23,7 +23,13 @@ Pod::Spec.new do |s|
   s.subspec 'Core' do |cs|
     cs.dependency 'SkedGoKit/Core'
     cs.source_files = "Classes/**/*.{h,m,swift}"
-    cs.resources    = ["Resources/*"]
+    cs.resources    = [
+      "Resources/*",
+      "TripKitModel.xcdatamodeld",
+      "TripKitModel.xcdatamodeld/*."
+    ]
+    cs.preserve_paths = 'TripKitModel.xcdatamodeld'
+    cs.frameworks = 'CoreData'
   end
 
   s.subspec 'Agenda' do |cs|

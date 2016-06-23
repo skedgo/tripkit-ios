@@ -46,17 +46,17 @@
     [self openSegmentInAppleMaps:segment currentLocationHandler:currentLocationHandler];
     
   } else {
-    SGActions *actions = [[SGActions alloc] initWithTitle:NSLocalizedStringFromTable(@"Get directions", @"TripKit", "Action button title for getting turn-by-turn directions")];
+    SGActions *actions = [[SGActions alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Get directions", @"TripKit", [TKTripKit bundle], "Action button title for getting turn-by-turn directions")];
     
     __weak TKSegment *directionsSegment = segment;
-    [actions addAction:NSLocalizedStringFromTable(@"Apple Maps", @"TripKit", @"apple maps directions action")
+    [actions addAction:NSLocalizedStringFromTableInBundle(@"Apple Maps", @"TripKit", [TKTripKit bundle], @"apple maps directions action")
                handler:
      ^{
        [TKInterAppCommunicator openSegmentInAppleMaps:directionsSegment currentLocationHandler:currentLocationHandler];
      }];
     
     if (hasGoogleMaps) {
-      [actions addAction:NSLocalizedStringFromTable(@"Google Maps", @"TripKit", @"google maps directions action")
+      [actions addAction:NSLocalizedStringFromTableInBundle(@"Google Maps", @"TripKit", [TKTripKit bundle], @"google maps directions action")
                  handler:
        ^{
          [TKInterAppCommunicator openSegmentInGoogleMapsApp:directionsSegment currentLocationHandler:currentLocationHandler];
@@ -237,44 +237,44 @@
 + (NSString *)titleForExternalAction:(NSString *)action
 {
   if ([action isEqualToString:@"gocatch"]) {
-    return NSLocalizedStringFromTable(@"goCatch a Taxi", @"TripKit", @"goCatch action");
+    return NSLocalizedStringFromTableInBundle(@"goCatch a Taxi", @"TripKit", [TKTripKit bundle], @"goCatch action");
     
   } else if ([action isEqualToString:@"uber"]) {
-    return NSLocalizedStringFromTable(@"Book with Uber", @"TripKit", nil);
+    return NSLocalizedStringFromTableInBundle(@"Book with Uber", @"TripKit", [TKTripKit bundle], nil);
     
   } else if ([action isEqualToString:@"ingogo"]) {
     return [self deviceHasIngogo]
-    ? NSLocalizedStringFromTable(@"ingogo a Taxi", @"TripKit", nil)
-    : NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil);
+    ? NSLocalizedStringFromTableInBundle(@"ingogo a Taxi", @"TripKit", [TKTripKit bundle], nil)
+    : NSLocalizedStringFromTableInBundle(@"Get ingogo", @"TripKit", [TKTripKit bundle], nil);
     
   } else if ([action hasPrefix:@"lyft"]) { // also lyft_line, etc.
     return [self deviceHasLyft]
-    ? NSLocalizedStringFromTable(@"Open Lyft", @"TripKit", nil)
-    : NSLocalizedStringFromTable(@"Get Lyft", @"TripKit", nil);
+    ? NSLocalizedStringFromTableInBundle(@"Open Lyft", @"TripKit", [TKTripKit bundle], nil)
+    : NSLocalizedStringFromTableInBundle(@"Get Lyft", @"TripKit", [TKTripKit bundle], nil);
     
   } else if ([action isEqualToString:@"ola"]) {
     return [self deviceHasOla]
-    ? NSLocalizedStringFromTable(@"Open Ola", @"TripKit", nil)
-    : NSLocalizedStringFromTable(@"Get Ola", @"TripKit", nil);
+    ? NSLocalizedStringFromTableInBundle(@"Open Ola", @"TripKit", [TKTripKit bundle], nil)
+    : NSLocalizedStringFromTableInBundle(@"Get Ola", @"TripKit", [TKTripKit bundle], nil);
 
   } else if ([action isEqualToString:@"flitways"]) {
-    return NSLocalizedStringFromTable(@"Book with FlitWays", @"TripKit", nil);
+    return NSLocalizedStringFromTableInBundle(@"Book with FlitWays", @"TripKit", [TKTripKit bundle], nil);
     
   } else if ([action hasPrefix:@"tel:"] && [self canCall]) {
     NSRange nameRange = [action rangeOfString:@"name="];
     if (nameRange.location != NSNotFound) {
       NSString *name = [action substringFromIndex:nameRange.location + nameRange.length];
       name = [name stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-      return [NSString stringWithFormat:NSLocalizedStringFromTable(@"CallTaxiFormat", @"TripKit", "Action title for calling provider of %name"), name];
+      return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"CallTaxiFormat", @"TripKit", [TKTripKit bundle], "Action title for calling provider of %name"), name];
     } else {
-      return NSLocalizedStringFromTable(@"Call", @"TripKit", nil);
+      return NSLocalizedStringFromTableInBundle(@"Call", @"TripKit", [TKTripKit bundle], nil);
     }
     
   } else if ([action hasPrefix:@"sms:"] && [self canSendSMS]) {
-    return NSLocalizedStringFromTable(@"Send SMS", @"TripKit", @"Send SMS action");
+    return NSLocalizedStringFromTableInBundle(@"Send SMS", @"TripKit", [TKTripKit bundle], @"Send SMS action");
     
   } else if ([action hasPrefix:@"http:"] || [action hasPrefix:@"https:"]) {
-    return NSLocalizedStringFromTable(@"Show website", @"TripKit", @"Show website action");
+    return NSLocalizedStringFromTableInBundle(@"Show website", @"TripKit", [TKTripKit bundle], @"Show website action");
     
   } else {
     return nil;

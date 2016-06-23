@@ -682,12 +682,12 @@ typedef NSUInteger SGTripFlag;
   
   [accessibleLabel appendString:@" - "];
   if ([self departureTimeIsFixed]) {
-    NSString *format = NSLocalizedStringFromTable(@"TimeFromToShortFormat", @"TripKit", "From %time1 to %time2");
+    NSString *format = NSLocalizedStringFromTableInBundle(@"TimeFromToShortFormat", @"TripKit", [TKTripKit bundle], "From %time1 to %time2");
     [accessibleLabel appendFormat:format, [sTripAccessibilityDateFormatter stringFromDate:[self departureTime]], [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]]];
     [accessibleLabel appendFormat:@" - %@", [self durationString]];
   } else {
     [accessibleLabel appendFormat:@"%@ - ", [self durationString]];
-    NSString *format = NSLocalizedStringFromTable(@"ArrivalTime", @"TripKit", "Arrival %time.");
+    NSString *format = NSLocalizedStringFromTableInBundle(@"ArrivalTime", @"TripKit", [TKTripKit bundle], "Arrival %time.");
     [accessibleLabel appendFormat:format, [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]]];
   }
   
@@ -812,7 +812,7 @@ typedef NSUInteger SGTripFlag;
 - (NSString *)activityViewController:(UIActivityViewController *)activityViewController subjectForActivityType:(NSString *)activityType
 {
 #pragma unused(activityViewController, activityType)
-  return NSLocalizedStringFromTable(@"Trip", @"TripKit", nil);
+  return NSLocalizedStringFromTableInBundle(@"Trip", @"TripKit", [TKTripKit bundle], nil);
 }
 
 #pragma mark - Private methods

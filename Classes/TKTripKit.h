@@ -68,7 +68,9 @@ FOUNDATION_EXPORT NSString *const TKTripKitDidResetNotification;
 @property (nonatomic, strong, null_resettable) NSPersistentStoreCoordinator  *persistentStoreCoordinator;
 @property (nonatomic, strong, null_resettable) NSManagedObjectContext        *tripKitContext;
 
-+ (NSManagedObjectModel *)tripKitModelInBundle:(NSBundle *)bundle;
++ (NSManagedObjectModel *)tripKitModel;
+
++ (NSBundle *)bundle;
 
 + (TKTripKit *)sharedInstance;
 

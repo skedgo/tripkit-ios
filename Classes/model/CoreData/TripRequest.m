@@ -91,13 +91,15 @@
   NSString *title = nil;
   switch (timeType) {
     case SGTimeTypeLeaveASAP: {
-      title = NSLocalizedStringFromTable(@"Leave now", @"TripKit", nil);
+      title = NSLocalizedStringFromTableInBundle(@"Leave now", @"TripKit", [TKTripKit bundle], nil);
       break;
     }
       
     case SGTimeTypeLeaveAfter:
     case SGTimeTypeArriveBefore: {
-      NSString *prefix = timeType == SGTimeTypeLeaveAfter ? NSLocalizedStringFromTable(@"Leave", @"TripKit", @"Prefix for selected 'leave after' time") : NSLocalizedStringFromTable(@"Arrive", @"TripKit", @"Prefix for selected 'arrive by' time");
+      NSString *prefix = timeType == SGTimeTypeLeaveAfter
+        ? NSLocalizedStringFromTableInBundle(@"Leave", @"TripKit", [TKTripKit bundle], @"Prefix for selected 'leave after' time")
+        : NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Prefix for selected 'arrive by' time");
       
       NSMutableString *titleBuilder = [NSMutableString stringWithString:prefix];
       [titleBuilder appendString:@" "];
@@ -370,9 +372,9 @@
 - (NSString *)timeSorterTitle
 {
   if (self.timeType.intValue == SGTimeTypeArriveBefore) {
-    return NSLocalizedStringFromTable(@"Departure", @"TripKit", @"Departure time sorter title") ;
+    return NSLocalizedStringFromTableInBundle(@"Departure", @"TripKit", [TKTripKit bundle], @"Departure time sorter title") ;
   } else {
-    return NSLocalizedStringFromTable(@"Arrival", @"TripKit", @"Arrival time sorter title") ;
+    return NSLocalizedStringFromTableInBundle(@"Arrival", @"TripKit", [TKTripKit bundle], @"Arrival time sorter title") ;
   }
 }
 

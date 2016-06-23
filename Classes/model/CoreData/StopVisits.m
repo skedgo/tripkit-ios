@@ -154,16 +154,16 @@
       return nil;
 
     case StopVisitRealTime_OnTime:
-      return NSLocalizedStringFromTable(@"On time", @"TripKit", @"Indicator to show when a service is on time according to real-time data.");
+      return NSLocalizedStringFromTableInBundle(@"On time", @"TripKit", [TKTripKit bundle], @"Indicator to show when a service is on time according to real-time data.");
       
     case StopVisitRealTime_Early: {
       NSString *mins = [self minsForRealTimeInformation];
       if (withOriginalTime) {
         NSTimeZone *timeZone = self.stop.region.timeZone;
         NSString *service = [SGStyleManager timeString:self.originalTime forTimeZone:timeZone];
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%1$@ early (%2$@ service)", @"TripKit", @"Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm')."), mins, service];
+        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%1$@ early (%2$@ service)", @"TripKit", [TKTripKit bundle], @"Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm')."), mins, service];
       } else {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%1$@ early", @"TripKit", @"Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'."), mins];
+        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%1$@ early", @"TripKit", [TKTripKit bundle], @"Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'."), mins];
       }
     }
       
@@ -172,9 +172,9 @@
       if (withOriginalTime) {
         NSTimeZone *timeZone = self.stop.region.timeZone;
         NSString *service = [SGStyleManager timeString:self.originalTime forTimeZone:timeZone];
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%1$@ late (%2$@ service)", @"TripKit", @"Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').") , mins, service];
+        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%1$@ late (%2$@ service)", @"TripKit", [TKTripKit bundle], @"Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').") , mins, service];
       } else {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%1$@ late", @"TripKit", @"Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min'") , mins];
+        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%1$@ late", @"TripKit", [TKTripKit bundle], @"Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min'") , mins];
       }
     }
       
@@ -352,7 +352,7 @@
 - (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
 {
 #pragma unused(activityViewController, activityType)
-  return [NSMutableString stringWithFormat:NSLocalizedStringFromTable(@"ActivityIndication", @"TripKit", "Indication of an activity"), [self.service shortIdentifier], [SGStyleManager timeString:self.time forTimeZone:self.timeZone], [self.stop name]];
+  return [NSMutableString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ActivityIndication", @"TripKit", [TKTripKit bundle], "Indication of an activity"), [self.service shortIdentifier], [SGStyleManager timeString:self.time forTimeZone:self.timeZone], [self.stop name]];
 }
 
 #pragma mark - Helpers

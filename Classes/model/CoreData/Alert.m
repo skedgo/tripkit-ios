@@ -129,7 +129,7 @@
 - (UIImage *)pointImage
 {
   NSString *imageName = [STKInfoIcon imageNameForInfoIconType:self.infoIconType usage:STKInfoIconUsageMap];
-  return [UIImage imageNamed:imageName];
+  return [SGStyleManager imageNamed:imageName];
 }
 
 - (BOOL)isDraggable
