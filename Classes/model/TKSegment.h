@@ -32,10 +32,8 @@ typedef enum {
   BHSegmentTypeUnscheduled,
 } BHSegmentType;
 
-#import "TKShareURLProvider.h"
-
 NS_ASSUME_NONNULL_BEGIN
-@interface TKSegment : NSObject <STKDirectionalTimePoint, SGURLShareable, UIActivityItemSource, STKTripSegment>
+@interface TKSegment : NSObject <STKDirectionalTimePoint, UIActivityItemSource, STKTripSegment>
 
 @property (nonatomic, strong, nullable) id<MKAnnotation> start;
 @property (nonatomic, strong, nullable) id<MKAnnotation> end;

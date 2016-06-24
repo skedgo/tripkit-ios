@@ -10,6 +10,8 @@
 
 #import <TripKit/TKTripKit.h>
 
+@import SGSearch;
+
 @implementation TKShareHelper
 
 #pragma mark - Meet URL
@@ -157,26 +159,26 @@
         usingGeocoder:(id<SGGeocoder>)geocoder
            completion:(void(^)(SGNamedCoordinate *coordinate))completion
 {
-//  [geocoder geocodeString:string
-//               nearRegion:MKMapRectWorld
-//                  success:
-//   ^(NSString * _Nonnull query, NSArray<SGNamedCoordinate *> * _Nonnull results) {
-//#pragma unused(query)
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//      id<MKAnnotation> annotation = [SGBaseGeocoder pickBestFromResults:results];
-//      if (annotation) {
-//        SGNamedCoordinate *coordinate = [SGNamedCoordinate namedCoordinateForAnnotation:annotation];
-//        coordinate.name = string;
-//        completion(coordinate);
-//      } else {
-//        completion(nil);
-//      }
-//    });
-//  } failure:
-//   ^(NSString * _Nonnull query, NSError * _Nullable error) {
-//#pragma unused(query, error)
+  [geocoder geocodeString:string
+               nearRegion:MKMapRectWorld
+                  success:
+   ^(NSString * _Nonnull query, NSArray<SGNamedCoordinate *> * _Nonnull results) {
+#pragma unused(query)
+    dispatch_async(dispatch_get_main_queue(), ^{
+      id<MKAnnotation> annotation = [SGBaseGeocoder pickBestFromResults:results];
+      if (annotation) {
+        SGNamedCoordinate *coordinate = [SGNamedCoordinate namedCoordinateForAnnotation:annotation];
+        coordinate.name = string;
+        completion(coordinate);
+      } else {
+        completion(nil);
+      }
+    });
+  } failure:
+   ^(NSString * _Nonnull query, NSError * _Nullable error) {
+#pragma unused(query, error)
      completion(nil);
-//  }];
+  }];
   
 }
 

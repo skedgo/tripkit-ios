@@ -135,6 +135,11 @@ typedef NSUInteger SGTripFlag;
   }
 }
 
+- (void)setShareUR:(NSURL *)shareURL
+{
+  self.shareURLString = [shareURL absoluteString];
+}
+
 - (NSString *)constructPlainText
 {
   NSMutableString *text = [NSMutableString string];
@@ -781,13 +786,6 @@ typedef NSUInteger SGTripFlag;
 - (SVKRegion *)regionForRealTimeUpdates
 {
   return [self.request localRegion];
-}
-
-#pragma mark - SGURLShareable
-
-- (void)setShareURL:(NSURL *)shareURL
-{
-  self.shareURLString = [shareURL absoluteString];
 }
 
 #pragma mark - UIActivityItemSource

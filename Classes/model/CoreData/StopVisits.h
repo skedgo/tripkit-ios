@@ -11,7 +11,6 @@
 @import SkedGoKit;
 
 #import "TKRealTimeUpdatable.h"
-#import "TKShareURLProvider.h"
 
 typedef NS_ENUM(NSInteger, StopVisitRealTime) {
   StopVisitRealTime_NotApplicable, // We don't have real-time for this kind of service
@@ -24,7 +23,7 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 
 @class Service, Shape, StopLocation;
 
-@interface StopVisits : NSManagedObject <STKDirectionalTimePoint, TKRealTimeUpdatable, SGURLShareable, UIActivityItemSource>
+@interface StopVisits : NSManagedObject <STKDirectionalTimePoint, TKRealTimeUpdatable, UIActivityItemSource>
 
 @property (nonatomic, retain) NSDate * arrival;
 @property (nonatomic, retain) NSNumber * bearing;

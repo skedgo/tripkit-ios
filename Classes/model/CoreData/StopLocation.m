@@ -234,15 +234,6 @@
 	}
 }
 
-#pragma mark - SGURLShareable
-
-- (NSURL *)shareURL
-{
-  return [TKShareHelper stopURLForStopCode:self.stopCode
-                           inRegionNamed:self.region.name
-                                  filter:self.filter];
-}
-
 #pragma mark - UIActivityItemSource
 
 - (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
