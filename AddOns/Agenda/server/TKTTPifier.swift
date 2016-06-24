@@ -33,7 +33,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     return TKTTPifier.insert(set, into: list)
   }
   
-  internal static func split(items: [TKAgendaInputItem]) -> (list: [TKAgendaInputItem], set: [TKAgendaInputItem])
+  public static func split(items: [TKAgendaInputItem]) -> (list: [TKAgendaInputItem], set: [TKAgendaInputItem])
   {
     guard let first = items.first else {
       preconditionFailure()

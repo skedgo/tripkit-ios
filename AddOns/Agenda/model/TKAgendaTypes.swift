@@ -101,16 +101,14 @@ public protocol TKAgendaEventInputType {
 }
 
 extension TKAgendaEventInputType {
-  func equalsForAgenda(other: TKAgendaEventInputType) -> Bool {
+  public func equalsForAgenda(other: TKAgendaEventInputType) -> Bool {
+    // We only care about the ID and user-modifiable fields
     return startDate == other.startDate
       && endDate == other.endDate
-      && abs(coordinate.latitude - other.coordinate.latitude) < 0.0001
-      && abs(coordinate.longitude - other.coordinate.longitude) < 0.0001
       && identifier == other.identifier
       && fixedOrder?.integerValue == other.fixedOrder?.integerValue
   }
 }
-
 
 
 @objc
