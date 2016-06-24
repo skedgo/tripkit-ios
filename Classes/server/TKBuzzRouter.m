@@ -13,7 +13,6 @@
 
 #import "TripRequest+Classify.h"
 
-
 #define kBHRoutingTimeOutSecond           30
 
 @interface TKBuzzRouter ()

@@ -135,7 +135,7 @@ typedef NSUInteger SGTripFlag;
   }
 }
 
-- (void)setShareUR:(NSURL *)shareURL
+- (void)setShareURL:(NSURL *)shareURL
 {
   self.shareURLString = [shareURL absoluteString];
 }
