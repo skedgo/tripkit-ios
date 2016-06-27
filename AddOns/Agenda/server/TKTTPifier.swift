@@ -43,22 +43,13 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     // We start with the list being all the ordered elements...
     var list = items
-      .filter { $0.fixedOrder != nil /* || $0.timesAreFixed */ }
-      .sort { first, second in
-        // Order:
-        // 1. Stays
-        // 2. Elements with fixed time, sorted by the time
-        // 3. Rest by their fixed order
-        if first.isStay {
-          return true
-        } else {
-          return first.fixedOrder! < second.fixedOrder
-        }
+      .filter { $0.fixedOrder != nil || $0.timesAreFixed }
+      .sort { return $0.beforeInList($1)
     }
     list.append(first)
     
     let set = items
-      .filter { $0.fixedOrder == nil }
+      .filter { $0.fixedOrder == nil && !$0.timesAreFixed }
     
     return (list, set)
   }
@@ -275,6 +266,55 @@ public struct TKTTPifier : TKAgendaBuilderType {
 }
 
 extension TKAgendaInputItem {
+  public func beforeInList(other: TKAgendaInputItem) -> Bool {
+    let first = self
+    let second = other
+    
+    let firstOrder = first.fixedOrder
+    let secondOrder = second.fixedOrder
+
+    // The order is this:
+    // 1. Stays
+    // 2. By order if both have an order
+    // 3. By time if either has a fixed time
+    // 4. Item with an order
+    // 5. Arbitrary (by id)
+    
+    if first.isStay {
+      // Stays are always first
+      return true
+    } else if second.isStay {
+      return false
+    
+    } else if first.timesAreFixed && second.timesAreFixed {
+      // If both have fixed times, use those
+      return first.startTime!.compare(second.startTime!) == .OrderedAscending
+      
+    } else if let firstOrder = firstOrder,
+      let secondOrder = secondOrder {
+      // If both have an other, just use that
+      return firstOrder < secondOrder
+      
+    } else if first.timesAreFixed {
+      // If first has a fixed time, but second does not (though it might have a fixed order) then put fixed time event before
+      return true
+
+    } else if second.timesAreFixed {
+      // ... and vice versa
+      return false
+    
+    } else if let _ = firstOrder {
+      return true
+    
+    } else if let _ = secondOrder {
+      return false
+    
+    } else {
+      return true
+    }
+    
+  }
+  
   /**
    Turn a `TKAgendaInputItem` into the input for `tpp/` endpoint.
    */

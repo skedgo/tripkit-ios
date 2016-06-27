@@ -46,11 +46,26 @@ public enum TKAgendaInputItem {
   }
 
   var timesAreFixed: Bool {
+    let timesAreFixed: Bool
+    
     switch self {
     case .Event(let eventInput):
-      return eventInput.timesAreFixed
+      timesAreFixed = eventInput.timesAreFixed
     case .Trip:
-      return true
+      timesAreFixed = true
+    }
+    
+    precondition(!timesAreFixed || startTime != nil, "You need a start, when times are fixed")
+    return timesAreFixed
+
+  }
+  
+  var startTime: NSDate? {
+    switch self {
+    case .Event(let eventInput):
+      return eventInput.startDate
+    case .Trip(let trip):
+      return trip.departureTime
     }
   }
   
