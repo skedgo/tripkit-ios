@@ -124,6 +124,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A37A9A61D20F8EF00A2A3B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C6231D1CD0060089F687 /* TripKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKit.h; sourceTree = "<group>"; };
 		3AB6C6251D1CD0060089F687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -228,7 +229,6 @@
 		3AB6C6A61D1CD08E0089F687 /* TKTripKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTripKit.h; sourceTree = "<group>"; };
 		3AB6C6A71D1CD08E0089F687 /* TKTripKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTripKit.m; sourceTree = "<group>"; };
 		3AB6C6A81D1CD08E0089F687 /* TripKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripKit.h; sourceTree = "<group>"; };
-		3AB6C6AB1D1CD08E0089F687 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AB6C6AC1D1CD08E0089F687 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AB6C6AD1D1CD08E0089F687 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/TripKit.strings"; sourceTree = "<group>"; };
 		3AB6C6AE1D1CD08E0089F687 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/TripKit.strings; sourceTree = "<group>"; };
@@ -876,7 +876,6 @@
 		3AB6C6AA1D1CD08E0089F687 /* TripKit.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3AB6C6AB1D1CD08E0089F687 /* Base */,
 				3AB6C6AC1D1CD08E0089F687 /* de */,
 				3AB6C6AD1D1CD08E0089F687 /* en-US */,
 				3AB6C6AE1D1CD08E0089F687 /* es */,
@@ -887,6 +886,7 @@
 				3AB6C6B31D1CD08E0089F687 /* pt */,
 				3AB6C6B41D1CD08E0089F687 /* zh-Hans */,
 				3AB6C6B51D1CD08E0089F687 /* zh-Hant */,
+				3A37A9A61D20F8EF00A2A3B5 /* en */,
 			);
 			name = TripKit.strings;
 			sourceTree = "<group>";
