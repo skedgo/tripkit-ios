@@ -20,7 +20,9 @@ import RxCocoa
 public protocol TKAgendaType {
   var startDate: NSDate { get }
   var endDate: NSDate { get }
-  var items: Observable<[TKAgendaOutputItem]> { get }
+  var triggerRebuild: Variable<Bool> { get }
+  var inputItems: Observable<[TKAgendaInputItem]> { get }
+  var outputItems: Observable<[TKAgendaOutputItem]> { get }
   var lastError: Observable<ErrorType?> { get }
 }
 

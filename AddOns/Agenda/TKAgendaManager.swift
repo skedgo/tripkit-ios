@@ -74,66 +74,73 @@ public class TKAgendaManager {
     }
     
     // FIXME: For now, we just use the items of the first data source
-    guard let rawItems = dataSources.first?.items(dateComponents) else {
+    guard let inputItems = dataSources.first?.items(dateComponents) else {
       fatalError("Data sources shalt not be empty")
     }
     
-    let lastError = Variable<ErrorType?>(nil)
-    
-    let trackItems = rawItems.flatMap { data in
-      // If that throws an error, we shouldn't propagate that up!
-      return self.builder.buildTrack(forItems: data, dateComponents: dateComponents).asDriver {
-        error in
-        lastError.value = error
-        return Observable.empty().asDriver(onErrorJustReturn: [])
-      }
-      }.distinctUntilChanged { previous, new in
-        return self.outputItemsEqual(previous, new: new)
-      }
-    
-    let agenda = TKSimpleAgenda(items: trackItems, lastError: lastError.asObservable(), dateComponents: dateComponents)
+    let agenda = TKSimpleAgenda(dateComponents: dateComponents, inputs: inputItems, builder: builder)
+    agenda.engage()
     agendas[key] = agenda
     return agenda
-  }
-  
-  private func outputItemsEqual(previous: [TKAgendaOutputItem], new: [TKAgendaOutputItem]) -> Bool {
-    if previous.count != new.count {
-      return false
-    }
-    
-    for pair in zip(previous, new) {
-      switch pair {
-      case (.Trip, .Trip), (.TripPlaceholder, .TripPlaceholder):
-        // Treat same base type as the same
-        // TODO: FIX!
-        break
-        
-      case (.Event(let prevEvent), .Event(let newEvent)) where prevEvent.equalsForAgenda(newEvent):
-        break
-        
-      case (.TripOptions(let prevItems), .TripOptions(let newItems)) where prevItems.count == newItems.count:
-        // Treat same count as the same
-        break
-      default:
-        return false
-      }
-    }
-    
-    return true
   }
 }
 
 private struct TKSimpleAgenda: TKAgendaType {
-  let startDate: NSDate
-  let endDate: NSDate
-  let items: Observable<[TKAgendaOutputItem]>
-  let lastError: Observable<ErrorType?>
+  let dateComponents: NSDateComponents
+  let inputs: Observable<[TKAgendaInputItem]>
+  let builder: TKAgendaBuilderType
+
+  let triggerRebuild = Variable(false)
+  let outputs = Variable<[TKAgendaOutputItem]>([])
+  let outputError = Variable<ErrorType?>(nil)
   
-  init(items: Observable<[TKAgendaOutputItem]>, lastError: Observable<ErrorType?>, dateComponents: NSDateComponents) {
-    self.items = items
-    self.lastError = lastError
-    self.startDate = dateComponents.earliestDate()
-    self.endDate = dateComponents.latestDate()
+  var startDate: NSDate {
+    return dateComponents.earliestDate()
+  }
+  
+  var endDate: NSDate {
+    return dateComponents.latestDate()
+  }
+
+  var inputItems: Observable<[TKAgendaInputItem]> {
+    return inputs.asObservable()
+  }
+
+  var outputItems: Observable<[TKAgendaOutputItem]> {
+    return outputs.asObservable()
+  }
+  
+  var lastError: Observable<ErrorType?> {
+    return outputError.asObservable()
+  }
+  
+  private func engage() {
+    Observable.combineLatest(inputs, triggerRebuild.asObservable()) { items, trigger in
+        return ( items, trigger )
+      }
+      .filter { _, trigger in
+        // Ignore input changes if we aren't allowed to trigger a rebuild
+        return trigger
+      }
+      .map { items, _ in
+        self.triggerRebuild.value = false
+        return items
+      }
+      .flatMap { inputs in
+        // Inputs have changed, so now we trigger a rebuild
+        // If that throws an error, we shouldn't propagate that up!
+        return self.builder
+          .buildTrack(forItems: inputs, dateComponents: self.dateComponents)
+          .map { outputs in
+            self.outputError.value = nil
+            return outputs
+          }
+          .asDriver { error in
+            self.outputError.value = error
+            return Observable.empty().asDriver(onErrorJustReturn: [])
+        }
+      }
+      .bindTo(outputs)
   }
 }
 
