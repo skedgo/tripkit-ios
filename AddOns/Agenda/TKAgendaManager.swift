@@ -93,6 +93,7 @@ private struct TKSimpleAgenda: TKAgendaType {
   let triggerRebuild = Variable(false)
   let outputs = Variable<[TKAgendaOutputItem]>([])
   let outputError = Variable<ErrorType?>(nil)
+  let generationCount = Variable<Int>(0)
   
   var startDate: NSDate {
     return dateComponents.earliestDate()
@@ -124,15 +125,24 @@ private struct TKSimpleAgenda: TKAgendaType {
         // Ignore input changes if we aren't allowed to trigger a rebuild
         return trigger
       }
-      .map { items, _ in
+      .map { items, _ -> ([TKAgendaInputItem], Int)  in
+        // Don't retrigger again
         self.triggerRebuild.value = false
-        return items
+        
+        // Keep generation count, to avoid returning outdated results
+        let newGeneration = self.generationCount.value + 1
+        self.generationCount.value = newGeneration
+        return (items, newGeneration)
       }
-      .flatMap { inputs in
+      .flatMap { inputs, generation in
         // Inputs have changed, so now we trigger a rebuild
         // If that throws an error, we shouldn't propagate that up!
+        // This is also where we ignore outdated generations.
         return self.builder
           .buildTrack(forItems: inputs, dateComponents: self.dateComponents)
+          .filter { _ in
+            self.generationCount.value == generation
+          }
           .map { outputs in
             self.outputError.value = nil
             return outputs
