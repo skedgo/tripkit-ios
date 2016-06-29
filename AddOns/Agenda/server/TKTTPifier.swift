@@ -21,8 +21,23 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
   }
   
-  public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]>
+  public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]> {
+    guard let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian) else {
+      preconditionFailure()
+    }
+    let components = calendar.components(
+      [NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year],
+      fromDate: startDate
+    )
+    return buildTrack(forItems: items, dateComponents: components)
+  }
+  
+  public func buildTrack(forItems items: [TKAgendaInputItem], dateComponents: NSDateComponents) -> Observable<[TKAgendaOutputItem]>
   {
+    guard let _ = items.first else {
+      return Observable.just([])
+    }
+    
     // We need a stay to TTPify
     guard let firstStay = items.indexOf({ $0.isStay })
     else {
@@ -39,7 +54,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     // Got enough data to query server!
     let (list, set) = TKTTPifier.split(items)
     // return TKTTPifierFaker.fakeInsert(new, into: previous)
-    return TKTTPifier.insert(set, into: list)
+    return TKTTPifier.insert(set, into: list, dateComponents: dateComponents)
   }
   
   public static func split(items: [TKAgendaInputItem]) -> (list: [TKAgendaInputItem], set: [TKAgendaInputItem])
@@ -48,9 +63,6 @@ public struct TKTTPifier : TKAgendaBuilderType {
       preconditionFailure()
     }
     
-    // TODO: Handle when at least two elements have times
-    
-    // We start with the list being all the ordered elements...
     var list = items
       .filter { $0.fixedOrder != nil || $0.timesAreFixed }
       .sort { return $0.beforeInList($1)
@@ -63,7 +75,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     return (list, set)
   }
   
-  private static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
+  private static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents) -> Observable<[TKAgendaOutputItem]> {
     
     precondition(into.count >= 2, "Don't call this unless you have a start and end!")
     
@@ -71,7 +83,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged))
     
-    return rx_createProblem(locations, into: into)
+    return rx_createProblem(locations, into: into, dateComponents: dateComponents)
       .flatMap { region, id  in
         return fetchSolution(id, inputItems: into + locations, inRegion: region)
       }
@@ -94,19 +106,18 @@ public struct TKTTPifier : TKAgendaBuilderType {
    - parameter into: Sorted list of locations to add the new ones into. Typically starts and ends at a hotel.
    - returns: Observable sequence of the region where the problem starts and the id of the problem on the server.
    */
-  private static func rx_createProblem(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<(SVKRegion, String)> {
+  private static func rx_createProblem(locations: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents) -> Observable<(SVKRegion, String)> {
     
     guard let first = into.first else {
       preconditionFailure("`into` needs at least one item")
     }
     
     let server = SVKServer.sharedInstance()
-    let paras = createInput(locations, into: into)
     
     return server
       .rx_requireRegion(first.start)
       .flatMap { region -> Observable<(SVKRegion, String)> in
-        
+        let paras = createInput(region, insert: locations, into: into, dateComponents: dateComponents)
         if let cachedId = TKTTPifierCache.problemId(forParas: paras) {
           return Observable.just((region, cachedId))
         }
@@ -188,13 +199,12 @@ public struct TKTTPifier : TKAgendaBuilderType {
   /**
    Creates the input as required by the `tpp/` endpoint.
    */
-  private static func createInput(locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> [String: AnyObject] {
-    
+  private static func createInput(region: SVKRegion, insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents) -> [String: AnyObject] {
     return [
-      "date": "2016-06-30",
-      "modes": ["pt_pub", "ps_tax"],
+      "date": "\(dateComponents.year)-\(dateComponents.month)-\(dateComponents.day)",
+      "modes": region.modeIdentifiers,
       "insertInto": createInput(into),
-      "insert": createInput(locations)
+      "insert": createInput(insert)
     ]
   }
   
