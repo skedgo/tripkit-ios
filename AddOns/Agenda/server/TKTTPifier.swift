@@ -200,9 +200,15 @@ public struct TKTTPifier : TKAgendaBuilderType {
    Creates the input as required by the `tpp/` endpoint.
    */
   private static func createInput(region: SVKRegion, insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents) -> [String: AnyObject] {
+    let publicModes = Set(region.modeIdentifiers).subtract([
+      SVKTransportModeIdentifierCar,
+      SVKTransportModeIdentifierBicycle,
+      SVKTransportModeIdentifierMotorbike,
+    ])
+    
     return [
       "date": "\(dateComponents.year)-\(dateComponents.month)-\(dateComponents.day)",
-      "modes": region.modeIdentifiers,
+      "modes": Array(publicModes).sort(),
       "insertInto": createInput(into),
       "insert": createInput(insert)
     ]
