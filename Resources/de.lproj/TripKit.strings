@@ -66,9 +66,6 @@
 /* No comment provided by engineer. */
 "Get Lyft" = "Lyft herunterladen";
 
-/* No comment provided by engineer. */
-"Get Uber" = "Uber herunterladen";
-
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Navigieren";
 
@@ -105,9 +102,6 @@
 
 /* No comment provided by engineer. */
 "Open Lyft" = "Lyft öffnen";
-
-/* No comment provided by engineer. */
-"Open Uber" = "Uber öffnen";
 
 /* Arrival Location
    For trip titles, e.g., 'To work'
