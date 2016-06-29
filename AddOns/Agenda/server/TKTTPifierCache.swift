@@ -13,8 +13,11 @@ import SwiftyJSON
 enum TKTTPifierCache {
   
   static func problemId(forParas paras: [String: AnyObject]) -> String? {
-    
     let hash = inputHash(paras)
+    return problemId(hash)
+  }
+  
+  private static func problemId(hash: UInt) -> String? {
     let filePath = cacheURL("problems", filename: "\(hash)")
     
     guard let data = NSData(contentsOfURL: filePath),
@@ -33,6 +36,19 @@ enum TKTTPifierCache {
     let data = NSKeyedArchiver.archivedDataWithRootObject(dict)
     data.writeToURL(filePath, atomically: true)
     assert(problemId(forParas: paras) == id)
+  }
+  
+  static func clear(forParas paras: [String: AnyObject]) {
+    let hash = inputHash(paras)
+    
+    if let id = problemId(hash) {
+      let solutionURL = cacheURL("solutions", filename: id)
+      try? NSFileManager.defaultManager().removeItemAtURL(solutionURL)
+    }
+    
+    // Now clear the problem ID
+    let problemURL = cacheURL("problems", filename: "\(hash)")
+    try? NSFileManager.defaultManager().removeItemAtURL(problemURL)
   }
 
   static func solutionJson(forId id: String) -> JSON? {
