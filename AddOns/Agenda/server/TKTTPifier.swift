@@ -27,7 +27,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     guard let firstStay = items.indexOf({ $0.isStay })
     else {
       let outputs = items.flatMap { $0.asFakeOutput() }
-      return Observable.just(outputs)
+      return Observable.just([TKAgendaOutputItem.StayPlaceholder] + outputs + [TKAgendaOutputItem.StayPlaceholder])
     }
     
     // We also need more than a single stay

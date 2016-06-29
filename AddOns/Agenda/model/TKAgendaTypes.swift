@@ -149,6 +149,8 @@ public protocol TKAgendaTripInputType: NSObjectProtocol {
 
 public enum TKAgendaOutputItem {
   case Event(TKAgendaEventOutput)
+  case StayPlaceholder
+
   case Trip(TKAgendaTripOutput)
   case TripOptions([TKAgendaTripOptionType])
   
