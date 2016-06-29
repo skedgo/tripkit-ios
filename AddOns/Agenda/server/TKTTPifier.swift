@@ -23,13 +23,22 @@ public struct TKTTPifier : TKAgendaBuilderType {
   
   public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]>
   {
-    guard let _ = items.first else {
-      return Observable.just([])
+    // We need a stay to TTPify
+    guard let firstStay = items.indexOf({ $0.isStay })
+    else {
+      let outputs = items.flatMap { $0.asFakeOutput() }
+      return Observable.just(outputs)
     }
     
-    let (list, set) = TKTTPifier.split(items)
+    // We also need more than a single stay
+    if items.count == 1 {
+      let outputs = items.flatMap { $0.asFakeOutput() }
+      return Observable.just(outputs)
+    }
     
-    //    return TKTTPifierFaker.fakeInsert(new, into: previous)
+    // Got enough data to query server!
+    let (list, set) = TKTTPifier.split(items)
+    // return TKTTPifierFaker.fakeInsert(new, into: previous)
     return TKTTPifier.insert(set, into: list)
   }
   

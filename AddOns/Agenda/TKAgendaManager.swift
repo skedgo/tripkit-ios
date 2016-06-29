@@ -118,7 +118,7 @@ private struct TKSimpleAgenda: TKAgendaType {
     Observable.combineLatest(inputs, triggerRebuild.asObservable()) { items, trigger in
         return ( items, trigger )
       }
-        // Give CoreData a bit of time to catch up after triggering rebuild 
+        // Give CoreData a bit of time to catch up after triggering rebuild
       .throttle(0.5, scheduler: MainScheduler.instance)
       .filter { _, trigger in
         // Ignore input changes if we aren't allowed to trigger a rebuild
