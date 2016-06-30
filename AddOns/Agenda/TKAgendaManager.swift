@@ -91,7 +91,7 @@ private struct TKSimpleAgenda: TKAgendaType {
   let builder: TKAgendaBuilderType
 
   let triggerRebuild = Variable(false)
-  let outputs = Variable<[TKAgendaOutputItem]>([])
+  let outputs = Variable<[TKAgendaOutputItem]?>(nil)
   let outputError = Variable<ErrorType?>(nil)
   let generationCount = Variable<Int>(0)
   
@@ -107,7 +107,7 @@ private struct TKSimpleAgenda: TKAgendaType {
     return inputs.asObservable()
   }
 
-  var outputItems: Observable<[TKAgendaOutputItem]> {
+  var outputItems: Observable<[TKAgendaOutputItem]?> {
     return outputs.asObservable()
   }
   

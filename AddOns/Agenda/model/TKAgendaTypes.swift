@@ -22,7 +22,7 @@ public protocol TKAgendaType {
   var endDate: NSDate { get }
   var triggerRebuild: Variable<Bool> { get }
   var inputItems: Observable<[TKAgendaInputItem]> { get }
-  var outputItems: Observable<[TKAgendaOutputItem]> { get }
+  var outputItems: Observable<[TKAgendaOutputItem]?> { get }
   var lastError: Observable<ErrorType?> { get }
 }
 
