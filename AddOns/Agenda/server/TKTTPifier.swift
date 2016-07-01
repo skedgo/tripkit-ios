@@ -310,9 +310,12 @@ public struct TKTTPifier : TKAgendaBuilderType {
           return nil
       }
       
-      let duration = NSTimeInterval(seconds)
-      let price = json["price"]["average"].float
-      return TripOption(modes: modes, duration: duration, price: price, score: score)
+      return TripOption(
+        modes: modes,
+        duration: NSTimeInterval(seconds),
+        price: json["price"]["average"].float,
+        score: score
+      )
     }
     
     return options.isEmpty ? nil : options
