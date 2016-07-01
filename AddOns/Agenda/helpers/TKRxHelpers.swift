@@ -11,7 +11,7 @@ import Foundation
 import RxSwift
 import SwiftyJSON
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
   case POST = "POST"
   case GET = "GET"
   case DELETE = "DELETE"
@@ -19,14 +19,14 @@ enum HTTPMethod: String {
 }
 
 extension SVKServer {
-  func rx_requireRegion(coordinate: CLLocationCoordinate2D) -> Observable<SVKRegion> {
+  public func rx_requireRegion(coordinate: CLLocationCoordinate2D) -> Observable<SVKRegion> {
     return rx_requireRegion()
       .map {
         SVKRegionManager.sharedInstance().regionForCoordinate(coordinate, andOther: coordinate)
     }
   }
   
-  func rx_requireRegion(coordinateRegion: MKCoordinateRegion) -> Observable<SVKRegion> {
+  public func rx_requireRegion(coordinateRegion: MKCoordinateRegion) -> Observable<SVKRegion> {
     
     return rx_requireRegion()
       .map {
@@ -52,7 +52,7 @@ extension SVKServer {
   }
 
   
-  func rx_hit(method: HTTPMethod, path: String, parameters: [String: AnyObject] = [:], region: SVKRegion? = nil, repeatHandler: ((Int, JSON?) -> (Bool))? = nil) -> Observable<(Int, JSON?)> {
+  public func rx_hit(method: HTTPMethod, path: String, parameters: [String: AnyObject] = [:], region: SVKRegion? = nil, repeatHandler: ((Int, JSON?) -> (Bool))? = nil) -> Observable<(Int, JSON?)> {
     return Observable.create { subscriber in
       
       self.hitSkedGo(
