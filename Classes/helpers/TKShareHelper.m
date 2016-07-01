@@ -52,7 +52,7 @@
     [self geocodeString:name
           usingGeocoder:geocoder
              completion:
-     ^(SGNamedCoordinate *destination) {
+     ^(SGNamedCoordinate * _Nullable destination) {
        if (destination) {
          detailBlock(destination.coordinate, [destination title], time);
        }
@@ -61,7 +61,7 @@
   } else if (params[@"lat"] && params[@"lng"]) {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([params[@"lat"] doubleValue], [params[@"lng"] doubleValue]);
     if (CLLocationCoordinate2DIsValid(coordinate)) {
-      detailBlock(coordinate, name, time);
+      detailBlock(coordinate, nil, time);
     }
   }
 }
@@ -76,7 +76,7 @@
 + (NSURL *)queryURLForStart:(CLLocationCoordinate2D)start
                         end:(CLLocationCoordinate2D)end
                    timeType:(SGTimeType)timeType
-                       time:(NSDate *)time
+                       time:(nullable NSDate *)time
 {
   NSMutableString *urlString = [NSMutableString stringWithFormat:@"http://tripgo.me/go?tlat=%.5f&tlng=%.5f", end.latitude, end.longitude];
   if (CLLocationCoordinate2DIsValid(start)) {
@@ -138,7 +138,7 @@
     [self geocodeString:name
           usingGeocoder:geocoder
              completion:
-     ^(SGNamedCoordinate *coordinate) {
+     ^(SGNamedCoordinate * _Nullable coordinate) {
        if (coordinate) {
          success(start, coordinate.coordinate, [coordinate title], timeType, time);
        } else {
@@ -155,7 +155,7 @@
 
 + (void)geocodeString:(NSString *)string
         usingGeocoder:(id<SGGeocoder>)geocoder
-           completion:(void(^)(SGNamedCoordinate *coordinate))completion
+           completion:(void(^)( SGNamedCoordinate * _Nullable coordinate))completion
 {
 //  [geocoder geocodeString:string
 //               nearRegion:MKMapRectWorld
