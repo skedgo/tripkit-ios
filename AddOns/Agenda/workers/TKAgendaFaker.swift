@@ -134,9 +134,7 @@ private class FakeTrip: NSObject, STKTrip {
 }
 
 private class FakeBusSegment: NSObject, STKTripSegment {
-  @objc let tripSegmentModeColor: UIColor? = nil
   @objc let tripSegmentModeImage: UIImage? = nil
   @objc let tripSegmentInstruction = "Bus"
   @objc let tripSegmentMainValue: AnyObject = NSDate()
-  @objc let tripSegmentTimeZone = NSTimeZone.systemTimeZone()
 }

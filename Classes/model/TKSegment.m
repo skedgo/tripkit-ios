@@ -873,7 +873,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-- (nonnull NSTimeZone *)tripSegmentTimeZone
+- (nullable NSTimeZone *)tripSegmentTimeZone
 {
   return [self timeZone];
 }

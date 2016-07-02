@@ -311,7 +311,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
       }
       
       return TripOption(
-        modes: modes,
+        usedModes: modes,
         duration: NSTimeInterval(seconds),
         price: json["price"]["average"].float,
         score: score
@@ -322,7 +322,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
   }
   
   private struct TripOption: TKAgendaTripOptionType {
-    let modes: [ModeIdentifier]
+    let usedModes: [ModeIdentifier]
     let duration: NSTimeInterval
     let price: PriceUnit?
     let score: Float

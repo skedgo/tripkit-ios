@@ -193,8 +193,8 @@ public class TKAgendaTripOutput: NSObject {
 }
 
 public protocol TKAgendaTripOptionType {
-  
-  var modes: [ModeIdentifier] { get }
+  var segments: [STKTripSegmentDisplayable] { get }
+  var usedModes: [ModeIdentifier] { get }
   var duration: NSTimeInterval { get }
   var score: Float { get }
 
@@ -211,6 +211,22 @@ extension TKAgendaTripOptionType {
   
   var earliestDeparture: NSTimeInterval? { return nil }
   var latestDeparture: NSTimeInterval? { return nil }
+  
+  var segments: [STKTripSegmentDisplayable] {
+    return usedModes.map { mode -> TKMinimalSegment in
+      let image = SVKTransportModes.imageForModeIdentifier(mode)
+      return TKMinimalSegment(modeImage: image)
+    }
+  }
 }
 
+private class TKMinimalSegment: NSObject, STKTripSegmentDisplayable {
+  @objc let tripSegmentModeImage: UIImage?
+  
+  init(modeImage image: UIImage?) {
+    tripSegmentModeImage = image
+    
+    super.init()
+  }
+}
 
