@@ -958,17 +958,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 
-#pragma mark - SGURLShareable
-
-- (NSURL *)shareURL
-{
-  BOOL isEnd = (self.order == BHSegmentOrdering_End);
-  CLLocationCoordinate2D coordinate = isEnd ? [self.end coordinate] : [self.start coordinate];
-  NSDate *time = isEnd ? self.arrivalTime : self.departureTime;
-  return [TKShareHelper meetURLForCoordinate:coordinate atTime:time];
-}
-
-
 #pragma mark - UIActivityItemSource
 
 - (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController

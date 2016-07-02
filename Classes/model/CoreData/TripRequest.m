@@ -486,16 +486,6 @@
   return output;
 }
 
-#pragma mark - SGURLShareable
-
-- (NSURL *)shareURL
-{
-  return [TKShareHelper queryURLForStart:[self.fromLocation coordinate]
-                                   end:[self.toLocation coordinate]
-                              timeType:self.type
-                                  time:self.time];
-}
-
 #pragma mark - Private methods
 
 - (NSSortDescriptor *)timeSorterForGroups:(BOOL)forGroups

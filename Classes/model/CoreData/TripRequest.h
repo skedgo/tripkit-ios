@@ -10,15 +10,13 @@
 @import MapKit;
 @import SkedGoKit;
 
-#import "TKShareURLProvider.h"
-
 #import "TripGroup.h"
 
 @class SVKRegion, SGNamedCoordinate, Trip;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TripRequest : NSManagedObject <SGURLShareable>
+@interface TripRequest : NSManagedObject
 
 @property (nonatomic, retain) SGNamedCoordinate *fromLocation;
 @property (nonatomic, retain) SGNamedCoordinate *toLocation;

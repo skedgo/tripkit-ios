@@ -55,4 +55,11 @@ Pod::Spec.new do |s|
     cs.source_files = "AddOns/InterApp/**/*"
   end
 
+  s.subspec 'Share' do |cs|
+    cs.dependency 'TripKit/Core'
+    cs.dependency 'SGSearch'
+
+    cs.source_files = "AddOns/Share/**/*"
+  end
+
 end

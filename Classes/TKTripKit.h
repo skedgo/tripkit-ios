@@ -39,7 +39,6 @@
 
 // Helpers
 #import "TKNextSegmentScorer.h"
-#import "TKShareHelper.h"
 #import "NSManagedObject+TKPersistence.h"
 
 // Classification

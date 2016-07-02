@@ -322,18 +322,6 @@
 	return NO;
 }
 
-#pragma mark - SGURLShareable
-
-- (NSURL *)shareURL
-{
-  return [TKShareHelper meetURLForCoordinate:[self.stop coordinate] atTime:self.time];
-
-  // Once the web app supports it: https://redmine.buzzhives.com/issues/2200
-//  return [ShareHelper serviceURLForServiceID:self.service.code
-//                                  atStopCode:self.stop.stopCode
-//                               inRegionNamed:self.stop.region.name];
-}
-
 #pragma mark - UIActivityItemSource
 
 - (NSString *)activityViewController:(UIActivityViewController *)activityViewController

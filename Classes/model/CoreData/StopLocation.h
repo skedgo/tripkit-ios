@@ -11,12 +11,10 @@
 
 #import <TripKit/TKTripKit.h>
 
-#import "TKShareURLProvider.h"
-
 @class ModeInfo;
 @class Cell, SVKRegion, Shape, StopVisits, SGNamedCoordinate;
 
-@interface StopLocation : NSManagedObject <STKStopAnnotation, SGURLShareable, UIActivityItemSource>
+@interface StopLocation : NSManagedObject <STKStopAnnotation, UIActivityItemSource>
 
 @property (nonatomic, retain) SGNamedCoordinate *location;
 
