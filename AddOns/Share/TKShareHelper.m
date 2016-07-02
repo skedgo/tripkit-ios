@@ -239,7 +239,7 @@
 }
 
 + (void)serviceDetailsForURL:(NSURL *)url
-                  details:(void (^)(NSString *stopCode, NSString *regionName, NSString *serviceID))detailBlock {
+                     details:(void (^)(NSString *stopCode, NSString *regionName, NSString *serviceID))detailBlock {
   // re-construct the parameters
   NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
   NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:queryComponents.count];
