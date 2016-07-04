@@ -103,7 +103,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
         if let result = result {
           return result
         } else {
-          assertionFailure()
+          // Can happen on 404
           return placeholders
         }
       }
