@@ -157,7 +157,7 @@ public enum TKAgendaOutputItem {
   /**
    Placeholder for where a trip will likely be. First date is predicted start date, second date is predicted end date.
    */
-  case TripPlaceholder(NSDate?, NSDate?)
+  case TripPlaceholder(NSDate?, NSDate?, String)
 }
 
 public class TKAgendaEventOutput: NSObject {

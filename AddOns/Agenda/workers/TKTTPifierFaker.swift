@@ -49,7 +49,7 @@ enum TKTTPifierFaker {
     }
   }
   
-  private static func trackWithTrips(items: [TKAgendaInputItem], usePlaceholders: Bool) -> [TKAgendaOutputItem] {
+  private static func trackWithTrips(items: [TKAgendaInputItem], usePlaceholders: Bool, placeholderTitle: String? = nil) -> [TKAgendaOutputItem] {
     let (outputs, _) = items.reduce( ([] as [TKAgendaOutputItem], nil as TKAgendaInputItem?) ) { previous, nextInput in
 
       guard let next = nextInput.asFakeOutput() else { fatalError("unexpected Input: \(nextInput)") }
@@ -60,8 +60,9 @@ enum TKTTPifierFaker {
       guard previousInput != nil else { return ([next], nextInput) }
       
       // Inserting trips in between events
+      let title = placeholderTitle ?? NSLocalizedString("Calculating trips...", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Placeholder title while calculating trips")
       let outputItem = usePlaceholders
-        ? TKAgendaOutputItem.TripPlaceholder(nil, nil)
+        ? TKAgendaOutputItem.TripPlaceholder(nil, nil, title)
         : TKAgendaOutputItem.TripOptions([FakeTripOption()])
       
       return (outputs + [outputItem, next], nextInput)

@@ -36,9 +36,9 @@ struct TKAgendaFaker: TKAgendaBuilderType {
     }
   }
   
-  static func outputPlaceholders(items: [TKAgendaInputItem]) -> [TKAgendaOutputItem] {
+  static func outputPlaceholders(items: [TKAgendaInputItem], placeholderTitle title: String? = nil) -> [TKAgendaOutputItem] {
     let events = inputsReturningHome(items)
-    return trackWithTrips(events, usePlaceholders: true)
+    return trackWithTrips(events, usePlaceholders: true, placeholderTitle: title)
   }
   
   private static func inputsReturningHome(items: [TKAgendaInputItem]) -> [TKAgendaInputItem] {
@@ -51,7 +51,7 @@ struct TKAgendaFaker: TKAgendaBuilderType {
     }
   }
   
-  private static func trackWithTrips(items: [TKAgendaInputItem], usePlaceholders: Bool) -> [TKAgendaOutputItem] {
+  private static func trackWithTrips(items: [TKAgendaInputItem], usePlaceholders: Bool, placeholderTitle: String? = nil) -> [TKAgendaOutputItem] {
     let (outputs, _) = items.reduce( ([] as [TKAgendaOutputItem], nil as TKAgendaInputItem?) ) { previous, nextInput in
       // Unexpected state
       guard let next = nextInput.asFakeOutput() else { fatalError("unexpected Input: \(nextInput)") }
@@ -73,7 +73,8 @@ struct TKAgendaFaker: TKAgendaBuilderType {
       if tripStart == nil && tripEnd == nil {
         return (outputs + [next], nextInput)
       } else if usePlaceholders {
-        let placeholder = TKAgendaOutputItem.TripPlaceholder(tripStart, tripEnd)
+        let title = placeholderTitle ?? NSLocalizedString("Calculating trips...", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Placeholder title while calculating trips")
+        let placeholder = TKAgendaOutputItem.TripPlaceholder(tripStart, tripEnd, title)
         return (outputs + [placeholder, next], nextInput)
       } else {
         let trip = tripStart != nil

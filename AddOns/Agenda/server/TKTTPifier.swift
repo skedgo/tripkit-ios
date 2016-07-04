@@ -103,7 +103,18 @@ public struct TKTTPifier : TKAgendaBuilderType {
         if let result = result {
           return result
         } else {
-          return placeholders // TDOO: Fix this?
+          assertionFailure()
+          return placeholders
+        }
+      }
+      .catchError { error in
+        // If user is offline, show placeholders with message in between
+        if (error as NSError).code == -1009 {
+          let title = NSLocalizedString("Connect to Internet to get trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Single line instruction if device is offline and user needs to reconnect to internet to calculate trips")
+          let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged), placeholderTitle: title)
+          return Observable.just(placeholders)
+        } else {
+          throw error
         }
       }
       .startWith(placeholders)
