@@ -11,6 +11,12 @@ import Foundation
 import RxSwift
 import SwiftyJSON
 
+extension ErrorType {
+  private func isNotConnectedError() -> Bool {
+    return (self as NSError).code == -1009
+  }
+}
+
 public struct TKTTPifier : TKAgendaBuilderType {
   enum Error : ErrorType {
     case creatingProblemFailedOnServer
@@ -109,7 +115,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
       }
       .catchError { error in
         // If user is offline, show placeholders with message in between
-        if (error as NSError).code == -1009 {
+        if error.isNotConnectedError() {
           let title = NSLocalizedString("Connect to Internet to get trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Single line instruction if device is offline and user needs to reconnect to internet to calculate trips")
           let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged), placeholderTitle: title)
           return Observable.just(placeholders)
@@ -240,7 +246,15 @@ public struct TKTTPifier : TKAgendaBuilderType {
         } else {
           return nil
         }
-      }.startWith(cachedItems)
+      }
+      .catchError { error in
+        if let cached = cachedItems where error.isNotConnectedError() {
+          return Observable.just(cached)
+        } else {
+          throw error
+        }
+      }
+      .startWith(cachedItems)
   }
   
   /**
