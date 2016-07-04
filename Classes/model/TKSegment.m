@@ -9,6 +9,7 @@
 #import "TKSegment.h"
 
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 NSString *const UninitializedString =  @"UninitializedString";
 
@@ -981,40 +982,20 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 #pragma mark - Private methods
 
-- (UIImage *)specificImageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
+- (UIImage *)imageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
 {
-  NSString *specificImageName = self.template.modeInfo.localImageName;
+  NSString *localImageName = self.template.modeInfo.localImageName;
   if (self.trip.showNoVehicleUUIDAsLift
       && self.privateVehicleType == STKVehicleType_Car
       && ! self.reference.vehicleUUID) {
-    specificImageName = @"car-pool";
+    localImageName = @"car-pool";
   }
   
-  return [SGStyleManager imageForModeImageName:specificImageName
-                                    isRealTime:allowRealTime && [self timesAreRealTime]
-                                    ofIconType:iconType];
-  
-}
-
-- (UIImage *)imageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
-{
-  UIImage *specificImage = [self specificImageForIconType:iconType allowRealTime:allowRealTime];
-  if (specificImage) {
-    return specificImage;
-  }
-  
-  NSString *modeIdentifier = [self modeIdentifier];
-  if (modeIdentifier) {
-    NSString *genericImageName = [SVKTransportModes modeImageNameForModeIdentifier:modeIdentifier];
-    UIImage *genericImage = [SGStyleManager imageForModeImageName:genericImageName
-                                                       isRealTime:allowRealTime && [self timesAreRealTime]
-                                                       ofIconType:iconType];
-    if (genericImage) {
-      return genericImage;
-    }
-  }
-
-  return nil;
+  BOOL realTime = allowRealTime && [self timesAreRealTime];
+  return [TKSegmentHelper segmentImage:iconType
+                        localImageName:localImageName
+                        modeIdentifier:[self modeIdentifier]
+                            isRealTime:realTime];
 }
 
 - (nullable NSURL *)imageURLForType:(SGStyleModeIconType)iconType

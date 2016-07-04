@@ -304,6 +304,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     let options = array.flatMap { json -> TKAgendaTripOptionType? in
       
       guard let modes = json["modes"].arrayObject as? [String],
+            let segments = json["segments"].array,
             let seconds = json["duration"]["average"].double,
             let score = json["score"]["average"].float
         else {
@@ -312,6 +313,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
       
       return TripOption(
         usedModes: modes,
+        segments: segments.flatMap { SegmentOverview(json: $0) },
         duration: NSTimeInterval(seconds),
         price: json["price"]["average"].float,
         score: score
@@ -323,9 +325,63 @@ public struct TKTTPifier : TKAgendaBuilderType {
   
   private struct TripOption: TKAgendaTripOptionType {
     let usedModes: [ModeIdentifier]
+    let segments: [STKTripSegmentDisplayable]
     let duration: NSTimeInterval
     let price: PriceUnit?
     let score: Float
+  }
+  
+  private class SegmentOverview: NSObject, STKTripSegmentDisplayable {
+    private let modeInfo: ModeInfo
+    private let duration: Int
+    private let polyline: String?
+    
+    @objc private var tripSegmentModeImage: UIImage? {
+      return TKSegmentHelper.segmentImage(.ListMainMode, modeInfo: modeInfo, modeIdentifier: nil, isRealTime: false)
+    }
+    
+    @objc private func tripSegmentModeColor() -> UIColor? {
+      return modeInfo.color
+    }
+    
+    @objc private func tripSegmentModeTitle() -> String? {
+      if let description = modeInfo.descriptor where !description.isEmpty {
+        return description
+      } else {
+        return nil
+      }
+    }
+    
+    @objc private func tripSegmentModeSubtitle() -> String? {
+      if SVKTransportModes.modeIdentifierIsPublicTransport(modeInfo.identifier) {
+        return nil
+      } else {
+        return NSDate.durationString(forMinutes: duration / 60)
+      }
+    }
+    
+    init(modeInfo: ModeInfo, duration: Int, polyline: String?) {
+      self.modeInfo = modeInfo
+      self.duration = duration
+      self.polyline = polyline
+      super.init()
+    }
+    
+    private convenience init?(json: JSON) {
+      guard let duration = json["duration"].int,
+            let modeDict = json["modeInfo"].dictionaryObject,
+            let modeInfo = ModeInfo(forDictionary: modeDict)
+        else {
+          return nil
+      }
+      
+      let polyline = json["encodedPolyline"].stringValue
+      self.init(
+        modeInfo: modeInfo,
+        duration: duration,
+        polyline: polyline.isEmpty ? nil : polyline
+      )
+    }
   }
 }
 
