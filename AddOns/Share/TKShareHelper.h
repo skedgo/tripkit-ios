@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSURL *)meetURLForCoordinate:(CLLocationCoordinate2D)coordinate
                          atTime:(NSDate *)time;
 
++ (NSURL *)meetURLForCoordinate:(CLLocationCoordinate2D)coordinate
+                         atTime:(NSDate *)time
+                        baseURL:(NSString *)baseURL;
+
 + (void)meetingDetailsForURL:(NSURL *)url
                usingGeocoder:(id<SGGeocoder>)geocoder
                      details:(void (^)(CLLocationCoordinate2D coordinate, NSString * _Nullable name, NSDate *time))detailBlock;
@@ -36,6 +40,12 @@ NS_ASSUME_NONNULL_BEGIN
                         end:(CLLocationCoordinate2D)end
                    timeType:(SGTimeType)timeType
                        time:(nullable NSDate *)time;
+
++ (NSURL *)queryURLForStart:(CLLocationCoordinate2D)start
+                        end:(CLLocationCoordinate2D)end
+                   timeType:(SGTimeType)timeType
+                       time:(nullable NSDate *)time
+                    baseURL:(NSString *)baseURL;
 
 + (BOOL)queryDetailsForURL:(NSURL *)url
              usingGeocoder:(id<SGGeocoder>)geocoder
@@ -51,6 +61,11 @@ NS_ASSUME_NONNULL_BEGIN
                 inRegionNamed:(NSString *)regionName
                        filter:(nullable NSString *)filter;
 
++ (NSURL *)stopURLForStopCode:(NSString *)stopCode
+                inRegionNamed:(NSString *)regionName
+                       filter:(NSString *)filter
+                      baseURL:(NSString *)baseURL;
+
 + (BOOL)stopDetailsForURL:(NSURL *)url
                   details:(void (^)(NSString *stopCode, NSString *regionName, NSString * _Nullable filter))detailBlock;
 
@@ -61,6 +76,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSURL *)serviceURLForServiceID:(NSString *)serviceID
                        atStopCode:(NSString *)stopCode
                     inRegionNamed:(NSString *)regionName;
+
++ (NSURL *)serviceURLForServiceID:(NSString *)serviceID
+                       atStopCode:(NSString *)stopCode
+                    inRegionNamed:(NSString *)regionName
+                          baseURL:(NSString *)baseURL;
 
 + (void)serviceDetailsForURL:(NSURL *)url
                      details:(void (^)(NSString *stopCode, NSString *regionName, NSString *serviceID))detailBlock;
