@@ -157,7 +157,7 @@
         }];
      } else {
        // failure
-       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip. Error: %@", error];
+       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to download trip. Error: %@", error];
        if (completion) {
          completion(nil);
        }

@@ -142,10 +142,10 @@ extension SVKRegion {
           return OAuthClient.performOAuth(mode, form: form)
             .map { form in form == nil } // No further input required
         } else {
-          var manager: MiniBookingManager? = MiniBookingManager(withForm: form)
-          manager!.present(fromViewController: presenter)
+          var manager: MiniBookingManager! = MiniBookingManager(withForm: form)
+          manager.present(fromViewController: presenter)
           return Observable.create { subscriber in
-            manager!.asObservable().subscribe(subscriber)
+            manager.asObservable().subscribe(subscriber)
             return AnonymousDisposable {
               manager = nil
             }

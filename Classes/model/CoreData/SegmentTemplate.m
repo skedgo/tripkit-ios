@@ -100,7 +100,7 @@ typedef NSUInteger SGSegmentTemplateFlag;
 }
 
 - (BOOL)isSelfNavigating {
-  return [SVKTransportModes modeIdentifierIsSelfNavigating:self.modeIdentifier];
+  return ![self isStationary] && [SVKTransportModes modeIdentifierIsSelfNavigating:self.modeIdentifier];
 }
 
 - (BOOL)isFlight {
