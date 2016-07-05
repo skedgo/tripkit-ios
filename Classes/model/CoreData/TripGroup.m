@@ -8,7 +8,7 @@
 
 #import "TripGroup.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 typedef enum {
   BHTripGroupFlagIsInCalendar = 1<<0,

@@ -6,17 +6,15 @@
 //
 //
 
-#import <CoreData/CoreData.h>
 
 // Dependencies
-#import "SVKServerKit.h"
-#import "STKTransportKit.h"
+@import CoreData;
+@import SkedGoKit;
 
 // Headers
 #import "TKConstants.h"
 
 // Protocol headers
-#import "TKStopAnnotation.h"
 #import "TKRealTimeUpdatable.h"
 
 // Core Data model classes
@@ -37,12 +35,11 @@
 #import "TKDLSTable.h"
 #import "TKSegment.h"
 #import "TKPlainCell.h"
-#import "SGStopCoordinate.h"
 #import "TKTripFactory.h"
 
 // Helpers
 #import "TKNextSegmentScorer.h"
-#import "TKShareHelper.h"
+#import "NSManagedObject+TKPersistence.h"
 
 // Classification
 #import "TKTripClassifier.h"
@@ -70,7 +67,9 @@ FOUNDATION_EXPORT NSString *const TKTripKitDidResetNotification;
 @property (nonatomic, strong, null_resettable) NSPersistentStoreCoordinator  *persistentStoreCoordinator;
 @property (nonatomic, strong, null_resettable) NSManagedObjectContext        *tripKitContext;
 
-+ (NSManagedObjectModel *)tripKitModelInBundle:(NSBundle *)bundle;
++ (NSManagedObjectModel *)tripKitModel;
+
++ (NSBundle *)bundle;
 
 + (TKTripKit *)sharedInstance;
 

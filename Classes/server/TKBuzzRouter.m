@@ -8,7 +8,8 @@
 
 #import "TKBuzzRouter.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 #import "TripRequest+Classify.h"
 
@@ -156,7 +157,7 @@
         }];
      } else {
        // failure
-       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip. Error: %@", error];
+       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to download trip. Error: %@", error];
        if (completion) {
          completion(nil);
        }

@@ -10,7 +10,7 @@
 
 #import <MapKit/MapKit.h>
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 #import "TKRealTimeUpdatableHelper.h"
 

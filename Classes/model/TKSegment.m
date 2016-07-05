@@ -8,7 +8,7 @@
 
 #import "TKSegment.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 NSString *const UninitializedString =  @"UninitializedString";
 
@@ -352,7 +352,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   NSTimeInterval withTraffic = [self duration:NO];
   if (withTraffic > withoutTraffic + 60) {
     NSString *durationString = [NSDate durationStringForMinutes:(NSInteger) (withoutTraffic / 60)];
-    return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%@ w/o traffic", @"TripKit", @"Duration without traffic"), durationString];
+    return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%@ w/o traffic", @"TripKit", [TKTripKit bundle], @"Duration without traffic"), durationString];
   } else {
     return nil;
   }
@@ -783,7 +783,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   switch (self.order) {
     case BHSegmentOrdering_Start:
     case BHSegmentOrdering_End:
-      return [UIImage imageNamed:@"icon-pin"];
+      return [SGStyleManager imageNamed:@"icon-pin"];
       
     case BHSegmentOrdering_Regular:
       return [self imageForIconType:SGStyleModeIconTypeListMainMode allowRealTime:NO];
@@ -924,9 +924,9 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
   if ([self timesAreRealTime]) {
     if ([self isPublicTransport]) {
-      return NSLocalizedStringFromTable(@"Real-time", @"TripKit", nil);
+      return NSLocalizedStringFromTableInBundle(@"Real-time", @"TripKit", [TKTripKit bundle], nil);
     } else {
-      return NSLocalizedStringFromTable(@"Live traffic", @"TripKit", nil);
+      return NSLocalizedStringFromTableInBundle(@"Live traffic", @"TripKit", [TKTripKit bundle], nil);
     }
   } else if ([self.trip isMixedModal] && ![self isPublicTransport]) {
     return [self stringForDuration:YES];
@@ -958,17 +958,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 
-#pragma mark - SGURLShareable
-
-- (NSURL *)shareURL
-{
-  BOOL isEnd = (self.order == BHSegmentOrdering_End);
-  CLLocationCoordinate2D coordinate = isEnd ? [self.end coordinate] : [self.start coordinate];
-  NSDate *time = isEnd ? self.arrivalTime : self.departureTime;
-  return [TKShareHelper meetURLForCoordinate:coordinate atTime:time];
-}
-
-
 #pragma mark - UIActivityItemSource
 
 - (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
@@ -981,7 +970,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
 #pragma unused(activityViewController, activityType)
   if (self.order == BHSegmentOrdering_End) {
-      NSString *messageFormat = NSLocalizedStringFromTable(@"MessageArrivalTime", @"TripKit", @"ArrivalTime");
+      NSString *messageFormat = NSLocalizedStringFromTableInBundle(@"MessageArrivalTime", @"TripKit", [TKTripKit bundle], @"ArrivalTime");
       NSString *message = [NSString stringWithFormat:messageFormat, [self.trip.request.toLocation title], [SGStyleManager timeString:self.arrivalTime forTimeZone:self.timeZone]];
       return message;
   } else {
@@ -1110,7 +1099,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 	range = [string rangeOfString:@"<DIRECTION>"];
   if (range.location != NSNotFound) {
-    NSString *replacement = self.service.direction ? [NSString stringWithFormat:NSLocalizedStringFromTable(@"Direction", @"TripKit", "Destination of the bus"), self.service.direction] : @"";
+    NSString *replacement = self.service.direction ? [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Direction", @"TripKit", [TKTripKit bundle], "Destination of the bus"), self.service.direction] : @"";
     [string replaceCharactersInRange:range withString:replacement];
 	}
 
@@ -1138,9 +1127,9 @@ NSString *const UninitializedString =  @"UninitializedString";
     if (visited <= 0) {
       replacement = @"";
     } else if (visited == 1) {
-      replacement = NSLocalizedStringFromTable(@"1 stop", @"TripKit", nil);
+      replacement = NSLocalizedStringFromTableInBundle(@"1 stop", @"TripKit", [TKTripKit bundle], nil);
     } else {
-      replacement = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Stops", @"TripKit", "Number of stops before you get off a vehicle"), (long)visited];
+      replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Stops", @"TripKit", [TKTripKit bundle], "Number of stops before you get off a vehicle"), (long)visited];
     }
     [string replaceCharactersInRange:range withString:replacement];
   }
@@ -1150,7 +1139,13 @@ NSString *const UninitializedString =  @"UninitializedString";
     NSString *timeString = [SGStyleManager timeString:self.departureTime
                                           forTimeZone:self.timeZone];
     BOOL prepend = range.location > 0 && [string characterAtIndex:range.location - 1] != '\n';
-    NSString *replacement = prepend ? [NSString stringWithFormat:NSLocalizedStringFromTable(@"DepartureTime", @"TripKit", "Time of the bus departure"), timeString] : timeString;
+    NSString *replacement;
+    if (prepend) {
+      replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"DepartureTime", @"TripKit", [TKTripKit bundle], "Time of the bus departure"), timeString];
+      replacement = [NSString stringWithFormat:@" %@", replacement];
+    } else {
+      replacement = timeString;
+    }
     isDynamic = YES;
     [string replaceCharactersInRange:range withString:replacement];
   }
@@ -1164,7 +1159,8 @@ NSString *const UninitializedString =  @"UninitializedString";
     else {
       BOOL prepend = title && range.location > 0;
       if (prepend) {
-        replacement = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Duration", @"TripKit", "Walking time"), durationString];
+        replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Duration", @"TripKit", [TKTripKit bundle], "Walking time"), durationString];
+        replacement = [NSString stringWithFormat:@" %@", replacement];
       } else {
         replacement = durationString;
       }
@@ -1242,17 +1238,17 @@ NSString *const UninitializedString =  @"UninitializedString";
 		} else if ([self isStationary] || [self isContinuation]) {
 			NSString *departure = [self departureLocation];
 			if (departure.length > 0) {
-				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"PrimaryLocationStationary", @"TripKit", "'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park"), departure];
+				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"PrimaryLocationStationary", @"TripKit", [TKTripKit bundle], "'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park"), departure];
 			}
 		} else if ([self isPublicTransport]) {
 			NSString *departure = [self departureLocation];
 			if (departure.length > 0) {
-				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"PrimaryLocationStart", @"TripKit", "Departure Location"), departure];
+				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"PrimaryLocationStart", @"TripKit", [TKTripKit bundle], "Departure Location"), departure];
 			}
 		} else {
 			NSString *destination = [self arrivalLocation:YES];
 			if (destination.length > 0) {
-				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"PrimaryLocationEnd", @"TripKit", "Arrival Location"), destination];
+				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"PrimaryLocationEnd", @"TripKit", [TKTripKit bundle], "Arrival Location"), destination];
 			}
 		}
 
@@ -1280,15 +1276,15 @@ NSString *const UninitializedString =  @"UninitializedString";
           NSString *time = [SGStyleManager timeString:self.departureTime
                                           forTimeZone:self.timeZone];
           if (name) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"LeaveLocationTime", @"TripKit", "The place of departure with time"), name, time];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"LeaveLocationTime", @"TripKit", [TKTripKit bundle], "The place of departure with time"), name, time];
           } else {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"LeaveTime", @"TripKit", "Time departure"), time];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"LeaveTime", @"TripKit", [TKTripKit bundle], "Time departure"), time];
           }
         } else {
           if (name) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"LeaveLocation", @"TripKit", "The place of departure"), name];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"LeaveLocation", @"TripKit", [TKTripKit bundle], "The place of departure"), name];
           } else {
-            newString = NSLocalizedStringFromTable(@"Leave", @"TripKit", @"Single line instruction to leave");
+            newString = NSLocalizedStringFromTableInBundle(@"Leave", @"TripKit", [TKTripKit bundle], @"Single line instruction to leave");
           }
         }
         break;
@@ -1314,15 +1310,15 @@ NSString *const UninitializedString =  @"UninitializedString";
           NSString *time = [SGStyleManager timeString:self.arrivalTime
                                           forTimeZone:self.timeZone];
           if (name.length > 0) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ArrivalLocationTime", @"TripKit", "The place of arrival with time"), name, time];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalLocationTime", @"TripKit", [TKTripKit bundle], "The place of arrival with time"), name, time];
           } else {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ArrivalTime", @"TripKit", "Time arrival"), time];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalTime", @"TripKit", [TKTripKit bundle], "Time arrival"), time];
           }
         } else {
           if (name.length > 0) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ArrivalLocation", @"TripKit", "The place of arrival"), name];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalLocation", @"TripKit", [TKTripKit bundle], "The place of arrival"), name];
           } else {
-            newString = NSLocalizedStringFromTable(@"Arrive", @"TripKit", @"Single line instruction to arrive");
+            newString = NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Single line instruction to arrive");
           }
         }
         break;

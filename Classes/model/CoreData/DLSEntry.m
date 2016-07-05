@@ -8,7 +8,7 @@
 
 #import "DLSEntry.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 #import "TKRealTimeUpdatableHelper.h"
 

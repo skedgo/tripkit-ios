@@ -48,20 +48,17 @@
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Could not find transit stop.";
 
-/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
-"CouponCodeIngogoFormat" = "Enter coupon code '%@' when registering to claim your free $5 credit (only valid for new registrations)";
-
 /* Departure time sorter title */
 "Departure" = "Departure";
 
 /* Time of the bus departure */
-"DepartureTime" = " at %@";
+"DepartureTime" = "at %@";
 
 /* Destination of the bus */
 "Direction" = "Direction: %@";
 
 /* Walking time */
-"Duration" = " for %@";
+"Duration" = "for %@";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Get directions";
@@ -71,9 +68,6 @@
 
 /* No comment provided by engineer. */
 "Get Lyft" = "Get Lyft";
-
-/* No comment provided by engineer. */
-"Get Uber" = "Get Uber";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch a Taxi";
@@ -111,9 +105,6 @@
 
 /* No comment provided by engineer. */
 "Open Lyft" = "Open Lyft";
-
-/* No comment provided by engineer. */
-"Open Uber" = "Open Uber";
 
 /* Arrival Location */
 "PrimaryLocationEnd" = "To %@";

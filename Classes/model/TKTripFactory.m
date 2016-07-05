@@ -8,7 +8,7 @@
 
 #import "TKTripFactory.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation TKTripFactory
 

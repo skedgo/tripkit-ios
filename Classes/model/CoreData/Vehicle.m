@@ -8,7 +8,7 @@
 
 #import "Vehicle.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation Vehicle
 
@@ -110,9 +110,9 @@
 	NSTimeInterval seconds = [self.lastUpdate timeIntervalSinceNow];
   NSString *durationString = [NSDate durationStringForSeconds:-seconds];
 	if (self.label.length > 0 && self.label.length < 20) {
-		return [NSString stringWithFormat:NSLocalizedStringFromTable(@"VehicleCalledUpdated", @"TripKit", "Vehicle 'x' updated"), self.label, durationString];
+		return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"VehicleCalledUpdated", @"TripKit", [TKTripKit bundle], "Vehicle 'x' updated"), self.label, durationString];
 	} else {
-		return [NSString stringWithFormat:NSLocalizedStringFromTable(@"VehicleUpdated", @"TripKit", "Vehicle updated"), durationString];
+		return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"VehicleUpdated", @"TripKit", [TKTripKit bundle], "Vehicle updated"), durationString];
 	}
 }
 

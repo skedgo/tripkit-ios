@@ -6,21 +6,18 @@
 //  Copyright (c) 2011 SkedGo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
+@import SkedGoKit;
 
 #import "TKSegment.h"
 #import "SegmentTemplate.h"
 #import "TKRealTimeUpdatable.h"
 
-#import "TKShareURLProvider.h"
-
-#import "STKTripAndSegments.h"
-#import "STKVehicular.h"
 
 @class Alert, SVKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 
-@interface Trip : NSManagedObject <TKRealTimeUpdatable, SGURLShareable, STKTrip, UIActivityItemSource> {
+@interface Trip : NSManagedObject <TKRealTimeUpdatable, STKTrip, UIActivityItemSource> {
 }
 
 #pragma mark - CoreData elements
@@ -63,6 +60,8 @@
 #pragma mark - Trip properties
 
 @property (nonatomic, readonly, nonnull) TripRequest *request;
+
+@property (nonatomic, strong, nullable) NSURL *shareURL;
 
 - (void)setAsPreferredTrip;
 

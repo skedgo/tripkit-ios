@@ -8,6 +8,10 @@
 
 #import "TKShareHelper.h"
 
+#import <TripKit/TKTripKit.h>
+
+@import SGSearch;
+
 @implementation TKShareHelper
 
 #pragma mark - Meet URL
@@ -148,6 +152,8 @@
   }
   return YES;
 }
+
+#warning FIXME!!!
 
 + (void)geocodeString:(NSString *)string
         usingGeocoder:(id<SGGeocoder>)geocoder

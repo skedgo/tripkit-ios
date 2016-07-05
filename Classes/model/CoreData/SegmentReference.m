@@ -8,7 +8,7 @@
 
 #import "SegmentReference.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 enum {
   SGSegmentFlagTimesAreRealtime = 1 << 0,

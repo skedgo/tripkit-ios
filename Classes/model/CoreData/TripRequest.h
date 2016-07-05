@@ -6,11 +6,9 @@
 //  Copyright (c) 2011 SkedGo. All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
-#import <MapKit/MapKit.h>
-
-#import "TKShareURLProvider.h"
-#import "SGKEnums.h"
+@import CoreData;
+@import MapKit;
+@import SkedGoKit;
 
 #import "TripGroup.h"
 
@@ -18,7 +16,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TripRequest : NSManagedObject <SGURLShareable>
+@interface TripRequest : NSManagedObject
 
 @property (nonatomic, retain) SGNamedCoordinate *fromLocation;
 @property (nonatomic, retain) SGNamedCoordinate *toLocation;

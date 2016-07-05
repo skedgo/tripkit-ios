@@ -6,10 +6,10 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import <MapKit/MapKit.h>
-#import "STKMapAnnotation.h"
+@import Foundation;
+@import CoreData;
+@import MapKit;
+@import SkedGoKit;
 
 @class Service, SegmentReference;
 

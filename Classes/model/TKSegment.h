@@ -6,8 +6,9 @@
 //  Copyright (c) 2011 SkedGo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
+@import SkedGoKit;
 
 @class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape;
 @class SVKRegion, ModeInfo;
@@ -31,11 +32,8 @@ typedef enum {
   BHSegmentTypeUnscheduled,
 } BHSegmentType;
 
-#import "STKTransportKit.h"
-#import "TKShareURLProvider.h"
-
 NS_ASSUME_NONNULL_BEGIN
-@interface TKSegment : NSObject <STKDirectionalTimePoint, SGURLShareable, UIActivityItemSource, STKTripSegment>
+@interface TKSegment : NSObject <STKDirectionalTimePoint, UIActivityItemSource, STKTripSegment>
 
 @property (nonatomic, strong, nullable) id<MKAnnotation> start;
 @property (nonatomic, strong, nullable) id<MKAnnotation> end;

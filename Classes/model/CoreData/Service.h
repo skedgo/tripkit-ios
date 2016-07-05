@@ -6,12 +6,11 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
+@import SkedGoKit;
 
 #import "TKRealTimeUpdatable.h"
-#import "ModeInfo.h"
-#import "SGStyleManager.h"
 
 @class Alert, SVKRegion, Shape, StopVisits, SegmentReference, Vehicle;
 @protocol STKDisplayableRoute;
