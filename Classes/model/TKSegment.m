@@ -1141,7 +1141,7 @@ NSString *const UninitializedString =  @"UninitializedString";
     BOOL prepend = range.location > 0 && [string characterAtIndex:range.location - 1] != '\n';
     NSString *replacement;
     if (prepend) {
-      replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"DepartureTime", @"TripKit", [TKTripKit bundle], "Time of the bus departure"), timeString]
+      replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"DepartureTime", @"TripKit", [TKTripKit bundle], "Time of the bus departure"), timeString];
       replacement = [NSString stringWithFormat:@" %@", replacement];
     } else {
       replacement = timeString;
