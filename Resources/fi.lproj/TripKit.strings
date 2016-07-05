@@ -1,17 +1,17 @@
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
-"%1$@ early" = "%1$@ etuajassa"; 
+"%1$@ early" = "%1$@ etuajassa";
 
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
-"%1$@ early (%2$@ service)" = "%1$@ etuajassa (%2$@ palvelu)"; 
+"%1$@ early (%2$@ service)" = "%1$@ etuajassa (%2$@ yhteys)";
 
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min' */
-"%1$@ late" = "%1$@ myöhässä"; 
+"%1$@ late" = "%1$@ myöhässä";
 
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
-"%1$@ late (%2$@ service)" = "%1$@ myöhässä (%2$@ palvelu)"; 
+"%1$@ late (%2$@ service)" = "%1$@ myöhässä (%2$@ yhteys)";
 
 /* Duration without traffic */
-"%@ w/o traffic" = "%@ Ilman ruuhkaa"; 
+"%@ w/o traffic" = "%@ Ilman ruuhkaa";
 
 /* No comment provided by engineer. */
 "1 stop" = "1 pysäkki";
@@ -23,121 +23,118 @@
 "Apple Maps" = "Apple Maps";
 
 /* Arrival time sorter title */
-"Arrival" = "Saapumis";
+"Arrival" = "Saapumisaika";
 
 /* The place of arrival */
-"ArrivalLocation" = "Saavu klo %@";
+"ArrivalLocation" = "Saapuu kohteeseen %@";
 
 /* The place of arrival with time */
-"ArrivalLocationTime" = "Saavu %@:lla klo %@";
+"ArrivalLocationTime" = "Saapuminen kohteeseen %@ klo %@";
 
 /* Arrival %time.
    Time arrival */
-"ArrivalTime" = "Saavu klo %@";
+"ArrivalTime" = "Saapuu klo %@";
 
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
 "Arrive" = "Saapuu";
 
 /* No comment provided by engineer. */
+"Book with FlitWays" = "Varaa FlitWayn kautta";
+
+/* No comment provided by engineer. */
+"Book with Uber" = "Varaa Uberin kautta";
+
+/* No comment provided by engineer. */
 "Call" = "Soita";
 
 /* Action title for calling provider of %name */
-"CallTaxiFormat" = "Soita %@:lle";
+"CallTaxiFormat" = "Soita firmalle %@";
 
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Could not find transit stop.";
-
-/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
-"CouponCodeIngogoFormat" = "Anna kuponkikoodi %@. Jos olet rekisteröitymätön, lunasta ilmainen 5 dollarin luotto (voimassa: vain uudet rekisteröinnit)";
+"Could not find transit stop." = "Välipysäkkiä ei löytynyt.";
 
 /* Departure time sorter title */
-"Departure" = "Lähtö";
+"Departure" = "Lähtöaika";
 
 /* Time of the bus departure */
-"DepartureTime" = " Klo %@";
+"DepartureTime" = "Lähtee klo %@";
 
 /* Destination of the bus */
-"Direction" = "Suunta: %@";
+"Direction" = "Suunta";
 
 /* Walking time */
 "Duration" = "Kesto %@";
 
+/* No comment provided by engineer. */
+"Get Lyft" = "Hanki Lyft";
+
+/* No comment provided by engineer. */
+"Get Ola" = "Hanki Ola";
+
 /* Action button title for getting turn-by-turn directions */
-"Get directions" = "Get directions";
+"Get directions" = "Hae reittiohjeet";
 
 /* No comment provided by engineer. */
-"Get ingogo" = "Hae Ingogo";
-
-/* No comment provided by engineer. */
-"Get Lyft" = "Hae Lyft";
-
-/* No comment provided by engineer. */
-"Get Uber" = "Hae Uber";
-
-/* goCatch action */
-"goCatch a Taxi" = "goCatch Taksi";
+"Get ingogo" = "Hanki Ingogo";
 
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
-/* No comment provided by engineer. */
-"ingogo a Taxi" = "ingogo Taksi";
-
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
-"Leave" = "Lähde";
+"Leave" = "Lähde matkaan";
 
 /* No comment provided by engineer. */
 "Leave now" = "Lähde nyt";
 
 /* The place of departure */
-"LeaveLocation" = "Lähde %@:stä";
+"LeaveLocation" = "Lähde kohteesta %@";
 
 /* The place of departure with time */
-"LeaveLocationTime" = "Lähde %@:stä klo %@";
+"LeaveLocationTime" = "Lähde kohteesta %@ klo %@";
 
 /* Time departure */
 "LeaveTime" = "Lähde klo %@";
 
 /* No comment provided by engineer. */
-"Live traffic" = "Live-liikenne"; 
+"Live traffic" = "Live-liikenne";
 
 /* ArrivalTime */
-"MessageArrivalTime" = "Saavutaan %@ klo %@.";
+"MessageArrivalTime" = "Saavun kohteeseen %@ klo %@.";
 
 /* Indicator to show when a service is on time according to real-time data. */
-"On time" = "Ajoissa"; 
+"On time" = "Ajoissa";
 
 /* No comment provided by engineer. */
 "Open Lyft" = "Avaa Lyft";
 
 /* No comment provided by engineer. */
-"Open Uber" = "Avaa Uber";
+"Open Ola" = "Avaa Ola";
 
 /* Arrival Location */
-"PrimaryLocationEnd" = "Kohde: %@";
+"PrimaryLocationEnd" = "Kohteeseen %@";
 
 /* Departure Location */
-"PrimaryLocationStart" = "Lähtö: %@";
-
-/* Favorite trip 'to' title */
-"To" = "To";
+"PrimaryLocationStart" = "Kohteesta %@";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "%@:ssä";
+"PrimaryLocationStationary" = "Kohteessa %@";
 
 /* No comment provided by engineer. */
 "Real-time" = "Reaaliaikainen";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later.";
+"Search for this stop again or try again later.." = "Hae tämän pysäkin tietoja uudelleen tai yritä myöhemmin uudestaan..";
+
+/* Send SMS action */
+"Send SMS" = "Lähetä SMS";
 
 /* Show website action */
-"Show website" = "Avaa Website";
+"Show website" = "Avaa nettisivusto";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld  pysäkkiä";
+"Stops" = "%ld pysäkki(ä)";
 
 /* From %time1 to %time2 */
 "TimeFromToShortFormat" = "%@ - %@";
@@ -150,4 +147,10 @@
 
 /* Vehicle updated */
 "VehicleUpdated" = "Päivitetty %@ sitten";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch Taksi";
+
+/* No comment provided by engineer. */
+"ingogo a Taxi" = "ingogo Taksi";
 

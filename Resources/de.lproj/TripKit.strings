@@ -40,6 +40,12 @@
 "Arrive" = "Ankunft";
 
 /* No comment provided by engineer. */
+"Book with FlitWays" = "Mit FlitWays buchen";
+
+/* No comment provided by engineer. */
+"Book with Uber" = "Mit Uber buchen";
+
+/* No comment provided by engineer. */
 "Call" = "Anrufen";
 
 /* Action title for calling provider of %name */
@@ -48,26 +54,23 @@
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Haltestelle konnte nicht gefunden werden.";
 
-/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
-"CouponCodeIngogoFormat" = "Gib Gutscheincode '%@' bei der Anmeldung ein um dein $5 Guthaben zu bekommen (nur für neue Anmeldungen).";
-
 /* Departure time sorter title */
 "Departure" = "Abfahrt";
 
 /* Time of the bus departure */
-"DepartureTime" = " um %@";
+"DepartureTime" = "um %@";
 
 /* Destination of the bus */
 "Direction" = "Richtung: %@";
 
 /* Walking time */
-"Duration" = " für %@";
+"Duration" = "für %@";
 
 /* No comment provided by engineer. */
 "Get Lyft" = "Lyft herunterladen";
 
 /* No comment provided by engineer. */
-"Get Uber" = "Uber herunterladen";
+"Get Ola" = "Ola herunterladen";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Navigieren";
@@ -107,11 +110,9 @@
 "Open Lyft" = "Lyft öffnen";
 
 /* No comment provided by engineer. */
-"Open Uber" = "Uber öffnen";
+"Open Ola" = "Ola öffnen";
 
-/* Arrival Location
-   For trip titles, e.g., 'To work'
-   Format string for going from currently location to this one. Used to name favourite destinations. */
+/* Arrival Location */
 "PrimaryLocationEnd" = "Nach %@";
 
 /* Departure Location */
@@ -126,6 +127,9 @@
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Bitte suche erneut nach dieser Haltestelle oder versuche es später nochmal.";
 
+/* Send SMS action */
+"Send SMS" = "SMS senden";
+
 /* Show website action */
 "Show website" = "Webseite öffnen";
 
@@ -134,9 +138,6 @@
 
 /* From %time1 to %time2 */
 "TimeFromToShortFormat" = "%@ bis %@";
-
-/* No comment provided by engineer. */
-"To %@" = "Nach %@";
 
 /* No comment provided by engineer. */
 "Trip" = "Trip";

@@ -8,7 +8,8 @@
 
 #import "TKBuzzRouter.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 #import "TripRequest+Classify.h"
 
@@ -156,7 +157,7 @@
         }];
      } else {
        // failure
-       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip. Error: %@", error];
+       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to download trip. Error: %@", error];
        if (completion) {
          completion(nil);
        }
@@ -204,6 +205,32 @@
 #pragma unused(tripGotUpdated)
         completion(updatedTrip);
     }];
+}
+
+- (void)updateTrip:(Trip *)trip
+           fromURL:(NSURL *)URL
+           aborter:(nullable BOOL(^)(NSURL *URL))aborter
+        completion:(void(^)(NSURL *URL, Trip * __nullable trip, NSError * __nullable error))completion
+{
+  [self hitURLForTripDownload:URL
+                   completion:
+   ^(NSURL *shareURL, id JSON, NSError *error) {
+#pragma unused(shareURL)
+    if (JSON) {
+      if (aborter && aborter(URL)) {
+        return;
+      }
+      
+      [self parseJSON:JSON
+         updatingTrip:trip
+           completion:
+       ^(Trip *updatedTrip) {
+         completion(URL, updatedTrip, nil);
+      }];
+    } else {
+      completion(URL, nil, error);
+    }
+  }];
 }
 
 
@@ -375,7 +402,7 @@
     }
   }
   
-  // create the request
+  // Hit it
   [SVKServer GET:baseURL paras:paras completion:
    ^(id  _Nullable responseObject, NSError * _Nullable error) {
      completion(baseURL, responseObject, error);

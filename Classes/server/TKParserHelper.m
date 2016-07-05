@@ -8,7 +8,7 @@
 
 #import "TKParserHelper.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation TKParserHelper
 
@@ -83,6 +83,41 @@
   }
 }
 
++ (void)updateVehiclesForSegmentReference:(SegmentReference *)reference
+                           primaryVehicle:(NSDictionary *)primaryVehicleDict
+                      alternativeVehicles:(NSArray *)alternativeVehicleDicts
+{
+  NSParameterAssert(reference);
+  if (primaryVehicleDict) {
+    if (reference.realTimeVehicle) {
+      [self updateVehicle:reference.realTimeVehicle fromDictionary:primaryVehicleDict];
+    } else {
+      Vehicle *vehicle = [self insertNewVehicle:primaryVehicleDict inTripKitContext:reference.managedObjectContext];
+      reference.realTimeVehicle = vehicle;
+    }
+  }
+  
+  if (alternativeVehicleDicts.count > 0) {
+    for (NSDictionary *alternativeVehicleDict in alternativeVehicleDicts) {
+      Vehicle *existingVehicle = nil;
+      NSString *alternativeIdentifier = alternativeVehicleDict[@"id"];
+      for (Vehicle *existingAlternative in reference.realTimeVehicleAlternatives) {
+        if ([existingAlternative.identifier isEqualToString:alternativeIdentifier]) {
+          existingVehicle = existingAlternative;
+          break;
+        }
+      }
+      if (existingVehicle) {
+        [self updateVehicle:existingVehicle fromDictionary:alternativeVehicleDict];
+      } else {
+        Vehicle *newAlternative = [self insertNewVehicle:alternativeVehicleDict
+                                        inTripKitContext:reference.managedObjectContext];
+        [reference addRealTimeVehicleAlternativesObject:newAlternative];
+      }
+    }
+  }
+}
+
 + (Vehicle *)insertNewVehicle:(NSDictionary *)vehicleDict
              inTripKitContext:(NSManagedObjectContext *)context
 {
@@ -99,6 +134,7 @@
   vehicle.identifier = vehicleDict[@"id"];
   vehicle.label = vehicleDict[@"label"];
   vehicle.lastUpdate = [NSDate dateWithTimeIntervalSince1970:[vehicleDict[@"lastUpdate"] integerValue]];
+  vehicle.icon = vehicleDict[@"icon"];
   
   NSDictionary *location = vehicleDict[@"location"];
   vehicle.latitude = location[@"lat"];
@@ -169,9 +205,9 @@
   return addedStop;
 }
 
-+ (SGStopCoordinate *)simpleStopFromDictionary:(NSDictionary *)stopDict
++ (STKStopCoordinate *)simpleStopFromDictionary:(NSDictionary *)stopDict
 {
-  SGStopCoordinate *stop = [[SGStopCoordinate alloc] initWithLatitude:[stopDict[@"lat"] doubleValue]
+  STKStopCoordinate *stop = [[STKStopCoordinate alloc] initWithLatitude:[stopDict[@"lat"] doubleValue]
                                                             longitude:[stopDict[@"lng"] doubleValue]
                                                                  name:stopDict[@"name"]
                                                               address:stopDict[@"services"]];

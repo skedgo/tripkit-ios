@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import CoreLocation;
 
 @class Trip;
 

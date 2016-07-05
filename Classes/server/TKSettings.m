@@ -8,8 +8,12 @@
 
 #import "TKSettings.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 #import "SGKBetaHelper.h"
+
+//#import <TripKit/TripKit-Swift.h>
+
+#import <TripKit/TripKit-Swift.h>
 
 @implementation TKSettings
 

@@ -61,6 +61,15 @@ NS_ASSUME_NONNULL_BEGIN
              openStoreHandler:(nullable void (^)(NSNumber * __nonnull))openStoreHandler
             completionHandler:(nullable void (^)(NSString * __nonnull))completionHandler;
 
++ (void)performExternalAction:(NSString *)action
+                       titled:(NSString *)title
+                   forSegment:(TKSegment *)segment
+            forViewController:(UIViewController * __nonnull)controller
+       currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
+               openURLHandler:(nullable void (^)(NSURL *url, NSString * __nullable title))openURLHandler
+             openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
