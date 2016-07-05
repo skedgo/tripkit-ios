@@ -1139,7 +1139,13 @@ NSString *const UninitializedString =  @"UninitializedString";
     NSString *timeString = [SGStyleManager timeString:self.departureTime
                                           forTimeZone:self.timeZone];
     BOOL prepend = range.location > 0 && [string characterAtIndex:range.location - 1] != '\n';
-    NSString *replacement = prepend ? [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"DepartureTime", @"TripKit", [TKTripKit bundle], "Time of the bus departure"), timeString] : timeString;
+    NSString *replacement;
+    if (prepend) {
+      replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"DepartureTime", @"TripKit", [TKTripKit bundle], "Time of the bus departure"), timeString]
+      replacement = [NSString stringWithFormat:@" %@", replacement];
+    } else {
+      replacement = timeString;
+    }
     isDynamic = YES;
     [string replaceCharactersInRange:range withString:replacement];
   }
@@ -1154,6 +1160,7 @@ NSString *const UninitializedString =  @"UninitializedString";
       BOOL prepend = title && range.location > 0;
       if (prepend) {
         replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Duration", @"TripKit", [TKTripKit bundle], "Walking time"), durationString];
+        replacement = [NSString stringWithFormat:@" %@", replacement];
       } else {
         replacement = durationString;
       }
