@@ -11,6 +11,8 @@ import Foundation
 import SwiftyJSON
 
 enum TKTTPifierCache {
+  // TODO: Re-use TKJSONCache
+
   
   static func problemId(forParas paras: [String: AnyObject]) -> String? {
     let hash = inputHash(paras)
@@ -18,10 +20,11 @@ enum TKTTPifierCache {
   }
   
   private static func problemId(hash: UInt) -> String? {
+    
     let filePath = cacheURL("problems", filename: "\(hash)")
     
     guard let data = NSData(contentsOfURL: filePath),
-    let dict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String: String] else {
+          let dict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String: String] else {
       return nil
     }
 
