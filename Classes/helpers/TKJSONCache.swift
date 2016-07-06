@@ -16,7 +16,11 @@ public enum TKJSONCacheDirectory: Int {
 
 public class TKJSONCache: NSObject {
   public static func read(id: String, directory: TKJSONCacheDirectory) -> [String: AnyObject]? {
-    let fileURL = cacheURL(directory, filename: id)
+    return read(id, directory: directory, subdirectory: nil)
+  }
+
+  public static func read(id: String, directory: TKJSONCacheDirectory, subdirectory: String?) -> [String: AnyObject]? {
+    let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
     
     if let data = NSData(contentsOfURL: fileURL) {
       return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String: AnyObject]
@@ -24,16 +28,24 @@ public class TKJSONCache: NSObject {
       return nil
     }
   }
-  
+
   public static func save(id: String, dictionary: [String: AnyObject], directory: TKJSONCacheDirectory) {
-    let fileURL = cacheURL(directory, filename: id)
+    save(id, dictionary: dictionary, directory: directory, subdirectory: nil)
+  }
+
+  public static func save(id: String, dictionary: [String: AnyObject], directory: TKJSONCacheDirectory, subdirectory: String?) {
+    let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
     let data = NSKeyedArchiver.archivedDataWithRootObject(dictionary)
     data.writeToURL(fileURL, atomically: true)
-    assert(read(id, directory: directory) != nil)
+    assert(read(id, directory: directory, subdirectory: subdirectory) != nil)
   }
-  
+
   public static func remove(id: String, directory: TKJSONCacheDirectory) {
-    let fileURL = cacheURL(directory, filename: id)
+    remove(id, directory: directory, subdirectory: nil)
+  }
+
+  public static func remove(id: String, directory: TKJSONCacheDirectory, subdirectory: String?) {
+    let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
     try? NSFileManager.defaultManager().removeItemAtURL(fileURL)
   }
   
@@ -55,7 +67,7 @@ public class TKJSONCache: NSObject {
       do {
         try fileMan.createDirectoryAtURL(pathURL, withIntermediateDirectories: true, attributes: nil)
       } catch {
-        SGKLog.warn("TKTTPifierCache", text: "Could not create directory \(pathURL), due to: \(error)")
+        SGKLog.warn("TKJSONCache", text: "Could not create directory \(pathURL), due to: \(error)")
       }
     } else {
       pathURL = path
