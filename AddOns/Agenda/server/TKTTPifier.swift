@@ -24,6 +24,14 @@ public struct TKTTPifier : TKAgendaBuilderType {
     case problemNotFoundOnServer
   }
   
+  private static var problemIDs: Set<String> = []
+  
+  public static func debugDictionary() -> [String: AnyObject]? {
+    return [
+      "problemIDs": Array(problemIDs),
+    ]
+  }
+  
   public init() {
     
   }
@@ -199,6 +207,8 @@ public struct TKTTPifier : TKAgendaBuilderType {
    */
   private static func rx_fetchSolution(id: String, inputItems: [TKAgendaInputItem], inRegion region: SVKRegion) -> Observable<[TKAgendaOutputItem]?> {
     
+    problemIDs.insert(id)
+
     let cachedJson = TKTTPifierCache.solutionJson(forId: id)
     let cachedItems: [TKAgendaOutputItem]?
     if let json = cachedJson {
