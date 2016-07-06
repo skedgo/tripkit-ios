@@ -40,49 +40,46 @@
 "Arrive" = "Aankomst";
 
 /* No comment provided by engineer. */
+"Book with FlitWays" = "Boek met FlitWays";
+
+/* No comment provided by engineer. */
+"Book with Uber" = "Boek met Uber";
+
+/* No comment provided by engineer. */
 "Call" = "Bel";
 
 /* Action title for calling provider of %name */
 "CallTaxiFormat" = "Bel %@";
 
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Could not find transit stop.";
-
-/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
-"CouponCodeIngogoFormat" = "Voer deze code in '%@' bij uw registratie. U krijgt AU$5 cadeau (alleen geldig voor nieuwe aanmeldingen)";
+"Could not find transit stop." = "Overstap station kon niet gevonden worden.";
 
 /* Departure time sorter title */
 "Departure" = "Vertrek";
 
 /* Time of the bus departure */
-"DepartureTime" = " om %@";
+"DepartureTime" = "om %@";
 
 /* Destination of the bus */
 "Direction" = "Eindpunt: %@";
 
 /* Walking time */
-"Duration" = " voor %@";
-
-/* Action button title for getting turn-by-turn directions */
-"Get directions" = "Get directions";
-
-/* No comment provided by engineer. */
-"Get ingogo" = "Ingogo aanvragen";
+"Duration" = "voor %@";
 
 /* No comment provided by engineer. */
 "Get Lyft" = "Lyft aanvragen";
 
 /* No comment provided by engineer. */
-"Get Uber" = "Uber aanvragen";
+"Get Ola" = "Ola krijgen";
 
-/* goCatch action */
-"goCatch a Taxi" = "goCatch een Taxi";
+/* Action button title for getting turn-by-turn directions */
+"Get directions" = "Routebeschrijving";
+
+/* No comment provided by engineer. */
+"Get ingogo" = "Ingogo aanvragen";
 
 /* google maps directions action */
 "Google Maps" = "Google Maps";
-
-/* No comment provided by engineer. */
-"ingogo a Taxi" = "ingogo een Taxi";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -113,16 +110,13 @@
 "Open Lyft" = "Lyft openen";
 
 /* No comment provided by engineer. */
-"Open Uber" = "Uber openen";
+"Open Ola" = "Open Ola";
 
 /* Arrival Location */
 "PrimaryLocationEnd" = "Naar %@";
 
 /* Departure Location */
 "PrimaryLocationStart" = "Van %@";
-
-/* Favorite trip 'to' title */
-"To" = "To";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "Op %@";
@@ -132,6 +126,9 @@
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Search for this stop again or try again later.";
+
+/* Send SMS action */
+"Send SMS" = "SMS versturen";
 
 /* Show website action */
 "Show website" = "Open Website";
@@ -150,4 +147,10 @@
 
 /* Vehicle updated */
 "VehicleUpdated" = "Bijgewerkt %@ geleden";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch een Taxi";
+
+/* No comment provided by engineer. */
+"ingogo a Taxi" = "ingogo een Taxi";
 

@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
     cs.dependency 'RxCocoa'
     cs.dependency 'SwiftyJSON'
 
-    cs.source_files = "AddOns/Agenda/**/*"
+    cs.source_files = "AddOns/Agenda/**/*.{h,m,swift}"
   end
 
   s.subspec 'Bookings' do |cs|
@@ -47,12 +47,12 @@ Pod::Spec.new do |s|
     cs.dependency 'RxSwift'
     cs.dependency 'RxCocoa'
 
-    cs.source_files = "AddOns/Bookings/**/*"
+    cs.source_files = "AddOns/Bookings/**/*.{h,m,swift}"
   end
 
   s.subspec 'InterApp' do |cs|
     cs.dependency 'TripKit/Core'
-    cs.source_files = "AddOns/InterApp/**/*"
+    cs.source_files = "AddOns/InterApp/**/*.{h,m,swift}"
   end
 
   s.subspec 'Share' do |cs|

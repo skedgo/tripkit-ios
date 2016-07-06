@@ -144,22 +144,40 @@
   intoTripKitContext:(NSManagedObjectContext *)tripKitContext
           completion:(void(^)(Trip * __nullable trip))completion
 {
+  NSUInteger hash = [[url absoluteString] hash];
+  NSString *identifier = [NSString stringWithFormat:@"%l", hash];
+  TKJSONCacheDirectory directory = TKJSONCacheDirectoryDocuments;
+
+  void (^withJSON)(id, NSURL * _Nullable) = ^void(id JSON, NSURL * _Nullable shareURL) {
+    [self parseJSON:JSON forTripKitContext:tripKitContext completion:
+     ^(Trip *trip) {
+       if (shareURL) {
+         trip.shareURL = shareURL;
+       }
+       trip.request.expandForFavorite = YES;
+       if (completion) {
+         completion(trip);
+       }
+     }];
+  };
+  
   [self hitURLForTripDownload:url completion:
    ^(NSURL *shareURL, id JSON, NSError *error) {
      if (JSON) {
-       [self parseJSON:JSON forTripKitContext:tripKitContext completion:
-        ^(Trip *trip) {
-          trip.shareURL = shareURL;
-          trip.request.expandForFavorite = YES;
-          if (completion) {
-            completion(trip);
-          }
-        }];
+       [TKJSONCache save:identifier dictionary:JSON directory:directory];
+       withJSON(JSON, shareURL);
+       
      } else {
-       // failure
-       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip. Error: %@", error];
-       if (completion) {
-         completion(nil);
+       NSDictionary *JSON = [TKJSONCache read:identifier directory:directory];
+       if (JSON) {
+         withJSON(JSON, nil);
+       } else {
+         
+         // failure
+         [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to download trip, and no copy in cache. Error: %@", error];
+         if (completion) {
+           completion(nil);
+         }
        }
      }
     }];
