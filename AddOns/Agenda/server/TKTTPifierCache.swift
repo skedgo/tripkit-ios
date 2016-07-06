@@ -11,8 +11,8 @@ import Foundation
 import SwiftyJSON
 
 enum TKTTPifierCache {
-  // TODO: Re-use TKJSONCache
-
+  private static let problemsDir = "problems"
+  private static let solutionsDir = "solutions"
   
   static func problemId(forParas paras: [String: AnyObject]) -> String? {
     let hash = inputHash(paras)
@@ -20,24 +20,14 @@ enum TKTTPifierCache {
   }
   
   private static func problemId(hash: UInt) -> String? {
-    
-    let filePath = cacheURL("problems", filename: "\(hash)")
-    
-    guard let data = NSData(contentsOfURL: filePath),
-          let dict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String: String] else {
-      return nil
-    }
-
-    return dict["id"]
+    let dict = TKJSONCache.read("\(hash)", directory: .Cache, subdirectory: problemsDir) as? [String: String]
+    return dict?["id"]
   }
   
   static func save(problemId id: String, forParas paras: [String: AnyObject]) {
     let hash = inputHash(paras)
-    let filePath = cacheURL("problems", filename: "\(hash)")
-    
     let dict = ["id": id]
-    let data = NSKeyedArchiver.archivedDataWithRootObject(dict)
-    data.writeToURL(filePath, atomically: true)
+    TKJSONCache.save("\(hash)", dictionary: dict, directory: .Cache, subdirectory: problemsDir)
     assert(problemId(forParas: paras) == id)
   }
   
@@ -45,34 +35,25 @@ enum TKTTPifierCache {
     let hash = inputHash(paras)
     
     if let id = problemId(hash) {
-      let solutionURL = cacheURL("solutions", filename: id)
-      try? NSFileManager.defaultManager().removeItemAtURL(solutionURL)
+      TKJSONCache.remove(id, directory: .Cache, subdirectory: solutionsDir)
     }
-    
-    // Now clear the problem ID
-    let problemURL = cacheURL("problems", filename: "\(hash)")
-    try? NSFileManager.defaultManager().removeItemAtURL(problemURL)
+    TKJSONCache.remove("\(hash)", directory: .Cache, subdirectory: problemsDir)
   }
 
   static func solutionJson(forId id: String) -> JSON? {
-    let filePath = cacheURL("solutions", filename: id)
-    guard let data = NSData(contentsOfURL: filePath),
-          let dict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String: AnyObject] else {
+    if let dict = TKJSONCache.read(id, directory: .Cache, subdirectory: solutionsDir) {
+      return JSON(dict)
+    } else {
       return nil
     }
-    return JSON(dict)
   }
   
   static func save(solutionJson json: JSON, forId id: String) {
-    let filePath = cacheURL("solutions", filename: id)
-    
     guard let dict = json.dictionaryObject else {
       SGKLog.warn("TKTTPifierCache", text: "Could not turn json into dictionary. JSON: \(json)")
       return
     }
-    
-    let data = NSKeyedArchiver.archivedDataWithRootObject(dict)
-    data.writeToURL(filePath, atomically: true)
+    TKJSONCache.save(id, dictionary: dict, directory: .Cache, subdirectory: solutionsDir)
   }
   
   private static func inputHash(input: [String: AnyObject]) -> UInt {
@@ -104,23 +85,5 @@ enum TKTTPifierCache {
     }
     
     return UInt(abs(hash))
-  }
-  
-  private static func cacheURL(directory: String, filename: String) -> NSURL {
-    let fileMan = NSFileManager.defaultManager()
-    guard let path = fileMan.URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).first else {
-      preconditionFailure()
-    }
-    
-    let fullPath = path.URLByAppendingPathComponent(directory, isDirectory: true)
-    do {
-      try fileMan.createDirectoryAtURL(fullPath, withIntermediateDirectories: true, attributes: nil)
-    } catch {
-      SGKLog.warn("TKTTPifierCache", text: "Could not create directory \(fullPath), due to: \(error)")
-    }
-
-    
-    let file = "\(filename).cache"
-    return fullPath.URLByAppendingPathComponent(file)
   }
 }
