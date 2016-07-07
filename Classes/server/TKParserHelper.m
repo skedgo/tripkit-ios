@@ -205,26 +205,6 @@
   return addedStop;
 }
 
-+ (STKStopCoordinate *)simpleStopFromDictionary:(NSDictionary *)stopDict
-{
-  STKStopCoordinate *stop = [[STKStopCoordinate alloc] initWithLatitude:[stopDict[@"lat"] doubleValue]
-                                                            longitude:[stopDict[@"lng"] doubleValue]
-                                                                 name:stopDict[@"name"]
-                                                              address:stopDict[@"services"]];
-  stop.stopCode = stopDict[@"code"];
-  stop.stopShortName = stopDict[@"shortName"];
-  stop.stopSortScore = stopDict[@"popularity"];
-  
-  NSDictionary *modeInfoDict = stopDict[@"modeInfo"];
-  if (modeInfoDict) {
-    stop.stopModeInfo = [ModeInfo modeInfoForDictionary:modeInfoDict];
-  } else {
-    DLog(@"We got a stop without mode info: %@", stopDict);
-    return nil;
-  }
-  
-  return stop;
-}
 
 + (NSArray *)insertNewShapes:(NSArray *)shapesArray
                   forService:(Service *)service
