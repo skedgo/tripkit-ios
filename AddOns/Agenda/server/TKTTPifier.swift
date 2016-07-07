@@ -476,7 +476,10 @@ extension TKAgendaInputItem {
   private func asInput() -> [String: AnyObject]? {
     switch self {
     case .Event(let input):
-      guard let id = input.identifier else { return nil }
+      guard let id = input.identifier else {
+        assertionFailure("Input event has no identifier: \(input)")
+        return nil
+      }
       return [
         "id": id,
         "lat": input.coordinate.latitude,
