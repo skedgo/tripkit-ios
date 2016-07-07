@@ -74,9 +74,8 @@ enum TKTTPifierFaker {
 
 private struct FakeTripOption: TKAgendaTripOptionType {
   let usedModes: [ModeIdentifier] = ["pt_pub", "wa_wal"]
-  let duration: NSTimeInterval = 30 * 60
-  let distance: DistanceUnit = 1_000
-  let price: PriceUnit = 1.5
-  let score: Float = 3
+  let duration = TKAgendaValue<NSTimeInterval>(average: 30 * 60)
+  let price = TKAgendaValue(average: 1.5)
+  let score = TKAgendaValue(average: 3.0)
 }
 

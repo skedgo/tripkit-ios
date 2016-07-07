@@ -340,8 +340,8 @@ public struct TKTTPifier : TKAgendaBuilderType {
       
       guard let modes = json["modes"].arrayObject as? [String],
             let segments = json["segments"].array,
-            let seconds = json["duration"]["average"].double,
-            let score = json["score"]["average"].float
+            let duration = TKAgendaValue<NSTimeInterval>(json["duration"]),
+            let score = TKAgendaValue<Double>(json["score"])
         else {
           return nil
       }
@@ -349,8 +349,8 @@ public struct TKTTPifier : TKAgendaBuilderType {
       return TripOption(
         usedModes: modes,
         segments: segments.flatMap { SegmentOverview(json: $0) },
-        duration: NSTimeInterval(seconds),
-        price: json["price"]["average"].float,
+        duration: duration,
+        price: TKAgendaValue<PriceUnit>(json["price"]),
         score: score
       )
     }
@@ -361,9 +361,9 @@ public struct TKTTPifier : TKAgendaBuilderType {
   private struct TripOption: TKAgendaTripOptionType {
     let usedModes: [ModeIdentifier]
     let segments: [STKTripSegmentDisplayable]
-    let duration: NSTimeInterval
-    let price: PriceUnit?
-    let score: Float
+    let duration: TKAgendaValue<NSTimeInterval>
+    let price: TKAgendaValue<PriceUnit>?
+    let score: TKAgendaValue<Double>
   }
   
   private class SegmentOverview: NSObject, STKTripSegmentDisplayable {
@@ -491,3 +491,38 @@ extension TKAgendaInputItem {
     }
   }
 }
+
+private protocol JsonValueConvertible {
+  static func fromJSON(json: JSON) -> Self?
+}
+
+extension Float: JsonValueConvertible {
+  static func fromJSON(json: JSON) -> Float? {
+    return json.float
+  }
+}
+extension Double: JsonValueConvertible {
+  static func fromJSON(json: JSON) -> Double? {
+    return json.double
+  }
+}
+extension Int: JsonValueConvertible {
+  static func fromJSON(json: JSON) -> Int? {
+    return json.int
+  }
+}
+
+extension TKAgendaValue where Element : JsonValueConvertible {
+  init?(_ json: JSON?) {
+    guard let json = json,
+      let average = Element.fromJSON(json["average"]) else {
+        return nil
+    }
+    
+    self.average = average
+    self.min = Element.fromJSON(json["min"])
+    self.max = Element.fromJSON(json["max"])
+    self.unit = json["unit"].string
+  }
+}
+

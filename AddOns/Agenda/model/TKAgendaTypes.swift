@@ -192,22 +192,46 @@ public class TKAgendaTripOutput: NSObject {
   }
 }
 
+public struct TKAgendaValue<Element> {
+  public let average: Element
+  public let min: Element?
+  public let max: Element?
+  public let unit: String?
+  
+  init(average: Element, min: Element? = nil, max: Element? = nil, unit: String? = nil) {
+    self.average = average
+    self.min = min
+    self.max = max
+    self.unit = unit
+  }
+}
+
+extension TKAgendaValue {
+  public var lower: Element {
+    if let min = min {
+      return min
+    } else {
+      return average
+    }
+  }
+}
+
 public protocol TKAgendaTripOptionType {
   var segments: [STKTripSegmentDisplayable] { get }
   var usedModes: [ModeIdentifier] { get }
-  var duration: NSTimeInterval { get }
-  var score: Float { get }
+  var duration: TKAgendaValue<NSTimeInterval> { get }
+  var score: TKAgendaValue<Double> { get }
 
+  var price: TKAgendaValue<PriceUnit>? { get }
   var distance: DistanceUnit? { get }
-  var price: PriceUnit? { get }
   
   var earliestDeparture: NSTimeInterval? { get }
   var latestDeparture: NSTimeInterval? { get }
 }
 
 extension TKAgendaTripOptionType {
+  var price: TKAgendaValue<PriceUnit>? { return nil }
   var distance: DistanceUnit? { return nil }
-  var price: PriceUnit? { return nil }
   
   var earliestDeparture: NSTimeInterval? { return nil }
   var latestDeparture: NSTimeInterval? { return nil }
