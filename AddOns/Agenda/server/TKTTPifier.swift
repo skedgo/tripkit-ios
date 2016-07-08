@@ -32,8 +32,10 @@ public struct TKTTPifier : TKAgendaBuilderType {
     ]
   }
   
-  public init() {
-    
+  public let modes: [String]?
+  
+  public init(modes modes: [String]? = nil) {
+    self.modes = modes
   }
   
   public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]> {
@@ -69,7 +71,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     // Got enough data to query server!
     let (list, set) = TKTTPifier.split(items)
     // return TKTTPifierFaker.fakeInsert(new, into: previous)
-    return TKTTPifier.insert(set, into: list, dateComponents: dateComponents)
+    return TKTTPifier.insert(set, into: list, dateComponents: dateComponents, modes: modes)
   }
   
   public static func split(items: [TKAgendaInputItem]) -> (list: [TKAgendaInputItem], set: [TKAgendaInputItem])
@@ -90,7 +92,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     return (list, set)
   }
   
-  private static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents) -> Observable<[TKAgendaOutputItem]> {
+  private static func insert(locations: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents, modes: [String]? = nil) -> Observable<[TKAgendaOutputItem]> {
     
     precondition(into.count >= 2, "Don't call this unless you have a start and end!")
     
@@ -99,14 +101,14 @@ public struct TKTTPifier : TKAgendaBuilderType {
     let placeholders = TKAgendaFaker.outputPlaceholders(Array(merged))
     
     // 1. Create the problem (or the cached ID)
-    return rx_createProblem(locations, into: into, dateComponents: dateComponents)
+    return rx_createProblem(locations, into: into, dateComponents: dateComponents, modes: modes)
       .flatMap { region, id  in
         // 2. Fetch the solution, both partial and full
         return rx_fetchSolution(id, inputItems: into + locations, inRegion: region)
           .catchError { error in
             // 2a. If the solution has expired, clear the cache and create a new one
             if case let Error.problemNotFoundOnServer = error {
-              return rx_clearCacheAndRetry(region, insert: locations, into: into, dateComponents: dateComponents)
+              return rx_clearCacheAndRetry(region, insert: locations, into: into, dateComponents: dateComponents, modes: modes)
             } else {
               throw error
             }
@@ -136,14 +138,14 @@ public struct TKTTPifier : TKAgendaBuilderType {
       .observeOn(MainScheduler.instance)
   }
   
-  private static func rx_clearCacheAndRetry(region: SVKRegion, insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents) -> Observable<[TKAgendaOutputItem]?> {
+  private static func rx_clearCacheAndRetry(region: SVKRegion, insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents, modes: [String]? = nil) -> Observable<[TKAgendaOutputItem]?> {
 
     // Clear the cache of problem ID
-    let paras = createInput(region, insert: insert, into: into, dateComponents: dateComponents)
+    let paras = createInput(insert: insert, into: into, dateComponents: dateComponents, modes: modes, region: region)
     TKTTPifierCache.clear(forParas: paras)
     
     // Create problem and fetch solution again
-    return rx_createProblem(insert, into: into, dateComponents: dateComponents, region: region)
+    return rx_createProblem(insert, into: into, dateComponents: dateComponents, region: region, modes: modes)
       .flatMap { region, id in
         return rx_fetchSolution(id, inputItems: into + insert, inRegion: region)
     }
@@ -156,7 +158,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
    - parameter into: Sorted list of locations to add the new ones into. Typically starts and ends at a hotel.
    - returns: Observable sequence of the region where the problem starts and the id of the problem on the server.
    */
-  private static func rx_createProblem(insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents, region: SVKRegion? = nil) -> Observable<(SVKRegion, String)> {
+  private static func rx_createProblem(insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents, region: SVKRegion? = nil, modes: [String]? = nil) -> Observable<(SVKRegion, String)> {
 
     guard let first = into.first else {
       preconditionFailure("`into` needs at least one item")
@@ -167,11 +169,11 @@ public struct TKTTPifier : TKAgendaBuilderType {
       return SVKServer.sharedInstance()
         .rx_requireRegion(first.start)
         .flatMap { region -> Observable<(SVKRegion, String)> in
-          return self.rx_createProblem(insert, into: into, dateComponents: dateComponents, region: region)
+          return self.rx_createProblem(insert, into: into, dateComponents: dateComponents, region: region, modes: modes)
       }
     }
     
-    let paras = createInput(region, insert: insert, into: into, dateComponents: dateComponents)
+    let paras = createInput(insert: insert, into: into, dateComponents: dateComponents, modes: modes, region: region)
     
     // Re-use the cached ID
     // If it doesn't exist anymore, we handle this in `rx_fetchSolution`
@@ -270,16 +272,25 @@ public struct TKTTPifier : TKAgendaBuilderType {
   /**
    Creates the input as required by the `tpp/` endpoint.
    */
-  private static func createInput(region: SVKRegion, insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents) -> [String: AnyObject] {
-    let publicModes = Set(region.modeIdentifiers).subtract([
-      SVKTransportModeIdentifierCar,
-      SVKTransportModeIdentifierBicycle,
-      SVKTransportModeIdentifierMotorbike,
-    ])
+  private static func createInput(insert insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: NSDateComponents, modes: [String]? = nil, region: SVKRegion? = nil) -> [String: AnyObject] {
+    
+    let identifiers: [String]
+    if let modes = modes {
+      identifiers = modes
+    } else if let region = region {
+      let publicModes = Set(region.modeIdentifiers).subtract([
+        SVKTransportModeIdentifierCar,
+        SVKTransportModeIdentifierBicycle,
+        SVKTransportModeIdentifierMotorbike,
+        ])
+      identifiers = Array(publicModes).sort()
+    } else {
+      preconditionFailure("Need either modes or region")
+    }
     
     return [
       "date": "\(dateComponents.year)-\(dateComponents.month)-\(dateComponents.day)",
-      "modes": Array(publicModes).sort(),
+      "modes": identifiers,
       "insertInto": createInput(into),
       "insert": createInput(insert)
     ]
