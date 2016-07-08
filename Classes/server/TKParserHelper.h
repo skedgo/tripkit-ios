@@ -52,8 +52,6 @@ forRealTimeStatusString:(NSString *)realTimeStatus;
 + (BOOL)updateStopLocation:(StopLocation *)stop
             fromDictionary:(NSDictionary *)stopDict;
 
-+ (STKStopCoordinate *)simpleStopFromDictionary:(NSDictionary *)stopDict;
-
 #pragma mark - Alerts
 
 + (void)updateOrAddAlerts:(NSArray<NSDictionary *> *)alerts
