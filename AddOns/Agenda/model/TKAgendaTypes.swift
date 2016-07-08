@@ -214,6 +214,14 @@ extension TKAgendaValue {
       return average
     }
   }
+
+  public var upper: Element {
+    if let max = max {
+      return max
+    } else {
+      return average
+    }
+  }
 }
 
 public protocol TKAgendaTripOptionType {
