@@ -103,6 +103,10 @@ typedef NSUInteger SGSegmentTemplateFlag;
   return ![self isStationary] && [SVKTransportModes modeIdentifierIsSelfNavigating:self.modeIdentifier];
 }
 
+- (BOOL)isAffectedByTraffic {
+  return ![self isStationary] && [SVKTransportModes modeIdentifierIsAffectedByTraffic:self.modeIdentifier];
+}
+
 - (BOOL)isFlight {
   return [SVKTransportModes modeIdentifierIsFlight:self.modeIdentifier];
 }

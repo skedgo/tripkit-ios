@@ -92,6 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isStationary;
 - (BOOL)isSelfNavigating;
 - (BOOL)isSharedVehicle;
+- (BOOL)isAffectedByTraffic;
 - (BOOL)isFlight;
 - (BOOL)isImpossible;
 - (nullable NSNumber *)bearing;

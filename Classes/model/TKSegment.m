@@ -560,6 +560,10 @@ NSString *const UninitializedString =  @"UninitializedString";
   return [self.template isSelfNavigating];
 }
 
+- (BOOL)isAffectedByTraffic {
+  return [self.template isAffectedByTraffic];
+}
+
 - (BOOL)isSharedVehicle {
   return [self.template isSharedVehicle];
 }
@@ -703,7 +707,7 @@ NSString *const UninitializedString =  @"UninitializedString";
         break;
     }
   }
-  ZAssert(_start != nil, @"Start missing for segment %@ in request %@", self, self.trip.request);
+//  ZAssert(_start != nil, @"Start missing for segment %@ in request %@", self, self.trip.request);
   return _start;
 }
 
@@ -726,7 +730,7 @@ NSString *const UninitializedString =  @"UninitializedString";
       }
     }
   }
-  ZAssert(_end != nil, @"End missing for segment %@ in request %@", self, self.trip.request);
+//  ZAssert(_end != nil, @"End missing for segment %@ in request %@", self, self.trip.request);
   return _end;
 }
 
