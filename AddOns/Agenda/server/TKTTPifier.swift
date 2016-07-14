@@ -371,40 +371,16 @@ public struct TKTTPifier : TKAgendaBuilderType {
   
   private struct TripOption: TKAgendaTripOptionType {
     let usedModes: [ModeIdentifier]
-    let segments: [STKTripSegmentDisplayable]
+    let segments: [TKAgendaTripOptionSegmentType]
     let duration: TKAgendaValue<NSTimeInterval>
     let price: TKAgendaValue<PriceUnit>?
     let score: TKAgendaValue<Double>
   }
   
-  private class SegmentOverview: NSObject, STKTripSegmentDisplayable {
+  private class SegmentOverview: NSObject {
     private let modeInfo: ModeInfo
     private let duration: Int
     private let polyline: String?
-    
-    @objc private var tripSegmentModeImage: UIImage? {
-      return TKSegmentHelper.segmentImage(.ListMainMode, modeInfo: modeInfo, modeIdentifier: nil, isRealTime: false)
-    }
-    
-    @objc private func tripSegmentModeColor() -> UIColor? {
-      return modeInfo.color
-    }
-    
-    @objc private func tripSegmentModeTitle() -> String? {
-      if let description = modeInfo.descriptor where !description.isEmpty {
-        return description
-      } else {
-        return nil
-      }
-    }
-    
-    @objc private func tripSegmentModeSubtitle() -> String? {
-      if SVKTransportModes.modeIdentifierIsPublicTransport(modeInfo.identifier) {
-        return nil
-      } else {
-        return NSDate.durationString(forMinutes: duration / 60)
-      }
-    }
     
     init(modeInfo: ModeInfo, duration: Int, polyline: String?) {
       self.modeInfo = modeInfo
@@ -412,24 +388,68 @@ public struct TKTTPifier : TKAgendaBuilderType {
       self.polyline = polyline
       super.init()
     }
+  }
+}
+
+extension TKTTPifier.SegmentOverview {
+  private convenience init?(json: JSON) {
+    guard let duration = json["duration"].int,
+      let modeDict = json["modeInfo"].dictionaryObject,
+      let modeInfo = ModeInfo(forDictionary: modeDict)
+      else {
+        return nil
+    }
     
-    private convenience init?(json: JSON) {
-      guard let duration = json["duration"].int,
-            let modeDict = json["modeInfo"].dictionaryObject,
-            let modeInfo = ModeInfo(forDictionary: modeDict)
-        else {
-          return nil
-      }
-      
-      let polyline = json["encodedPolyline"].stringValue
-      self.init(
-        modeInfo: modeInfo,
-        duration: duration,
-        polyline: polyline.isEmpty ? nil : polyline
-      )
+    let polyline = json["encodedPolyline"].stringValue
+    self.init(
+      modeInfo: modeInfo,
+      duration: duration,
+      polyline: polyline.isEmpty ? nil : polyline
+    )
+  }
+}
+
+extension TKTTPifier.SegmentOverview: STKTripSegmentDisplayable {
+  
+  @objc private var tripSegmentModeImage: UIImage? {
+    return TKSegmentHelper.segmentImage(.ListMainMode, modeInfo: modeInfo, modeIdentifier: nil, isRealTime: false)
+  }
+  
+  @objc private func tripSegmentModeColor() -> UIColor? {
+    return modeInfo.color
+  }
+  
+  @objc private func tripSegmentModeTitle() -> String? {
+    if let description = modeInfo.descriptor where !description.isEmpty {
+      return description
+    } else {
+      return nil
+    }
+  }
+  
+  @objc private func tripSegmentModeSubtitle() -> String? {
+    if SVKTransportModes.modeIdentifierIsPublicTransport(modeInfo.identifier) {
+      return nil
+    } else {
+      return NSDate.durationString(forMinutes: duration / 60)
     }
   }
 }
+
+extension TKTTPifier.SegmentOverview: STKDisplayableRoute {
+  @objc private func routeColour() -> UIColor? {
+    return tripSegmentModeColor()
+  }
+  
+  @objc private func routePath() -> [AnyObject] {
+    guard let polyline = self.polyline else { return [] }
+    return CLLocation.decodePolyLine(polyline)
+  }
+}
+
+extension TKTTPifier.SegmentOverview: TKAgendaTripOptionSegmentType {
+}
+
 
 extension TKAgendaInputItem {
   public func beforeInList(other: TKAgendaInputItem) -> Bool {

@@ -224,8 +224,11 @@ extension TKAgendaValue {
   }
 }
 
+public protocol TKAgendaTripOptionSegmentType: STKTripSegmentDisplayable, STKDisplayableRoute {
+}
+
 public protocol TKAgendaTripOptionType {
-  var segments: [STKTripSegmentDisplayable] { get }
+  var segments: [TKAgendaTripOptionSegmentType] { get }
   var usedModes: [ModeIdentifier] { get }
   var duration: TKAgendaValue<NSTimeInterval> { get }
   var score: TKAgendaValue<Double> { get }
@@ -244,7 +247,7 @@ extension TKAgendaTripOptionType {
   var earliestDeparture: NSTimeInterval? { return nil }
   var latestDeparture: NSTimeInterval? { return nil }
   
-  var segments: [STKTripSegmentDisplayable] {
+  var segments: [TKAgendaTripOptionSegmentType] {
     return usedModes.map { mode -> TKMinimalSegment in
       let image = SVKTransportModes.imageForModeIdentifier(mode)
       return TKMinimalSegment(modeImage: image)
@@ -252,8 +255,16 @@ extension TKAgendaTripOptionType {
   }
 }
 
-private class TKMinimalSegment: NSObject, STKTripSegmentDisplayable {
+private class TKMinimalSegment: NSObject, TKAgendaTripOptionSegmentType {
   @objc let tripSegmentModeImage: UIImage?
+  
+  @objc private func routePath() -> [AnyObject] {
+    return []
+  }
+  
+  @objc private func routeColour() -> UIColor? {
+    return nil
+  }
   
   init(modeImage image: UIImage?) {
     tripSegmentModeImage = image
