@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		298FFC17CF0F3C7DBE593B3D /* Pods_TripKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB767442569E9895BB82F4 /* Pods_TripKitTests.framework */; };
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
+		3A787EC81D38F70B009F9A18 /* TKBuzzRouterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC71D38F70B009F9A18 /* TKBuzzRouterTest.m */; };
+		3A787ED01D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
+		3A787ED11D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
+		3A787ED41D38F7BF009F9A18 /* routing.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A787ED31D38F7BF009F9A18 /* routing.json */; };
 		3A8D9FA21D2B734600078950 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A8D9FA41D2B734600078950 /* InfoPlist.strings */; };
 		3AB6C6241D1CD0060089F687 /* TripKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6231D1CD0060089F687 /* TripKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
@@ -128,6 +132,15 @@
 /* Begin PBXFileReference section */
 		3A37A9A61D20F8EF00A2A3B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A787EC31D38F646009F9A18 /* TKJSONCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
+		3A787EC61D38F70A009F9A18 /* TripKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TripKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		3A787EC71D38F70B009F9A18 /* TKBuzzRouterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBuzzRouterTest.m; sourceTree = "<group>"; };
+		3A787ECA1D38F78A009F9A18 /* 1-TripKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "1-TripKit.xcdatamodel"; sourceTree = "<group>"; };
+		3A787ECB1D38F78A009F9A18 /* 2-TripUpdates.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "2-TripUpdates.xcdatamodel"; sourceTree = "<group>"; };
+		3A787ECC1D38F78A009F9A18 /* 3-SpringClean.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "3-SpringClean.xcdatamodel"; sourceTree = "<group>"; };
+		3A787ECD1D38F78A009F9A18 /* 4-Classifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "4-Classifications.xcdatamodel"; sourceTree = "<group>"; };
+		3A787ECE1D38F78A009F9A18 /* 5-PlannedTrip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "5-PlannedTrip.xcdatamodel"; sourceTree = "<group>"; };
+		3A787ECF1D38F78A009F9A18 /* 6-SegmentRealTimeVehicle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "6-SegmentRealTimeVehicle.xcdatamodel"; sourceTree = "<group>"; };
+		3A787ED31D38F7BF009F9A18 /* routing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = routing.json; path = Data/routing.json; sourceTree = "<group>"; };
 		3A8D9FA31D2B734600078950 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A8D9FC21D2B7D1D00078950 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A8D9FC41D2B7D2300078950 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -278,6 +291,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A787EC51D38F6F4009F9A18 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				3A787ED21D38F79D009F9A18 /* Data */,
+				3A787EC71D38F70B009F9A18 /* TKBuzzRouterTest.m */,
+				3A787EC61D38F70A009F9A18 /* TripKitTests-Bridging-Header.h */,
+			);
+			name = Routing;
+			sourceTree = "<group>";
+		};
+		3A787ED21D38F79D009F9A18 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3A787ED31D38F7BF009F9A18 /* routing.json */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		3AB6C6161D1CD0060089F687 = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +343,7 @@
 		3AB6C62E1D1CD0060089F687 /* TripKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				3A787EC51D38F6F4009F9A18 /* Routing */,
 				3A8D9FA41D2B734600078950 /* InfoPlist.strings */,
 				3AB6C62F1D1CD0060089F687 /* TripKitTests.swift */,
 				3AB6C6311D1CD0060089F687 /* Info.plist */,
@@ -534,6 +566,7 @@
 		3AFF20981D1CD29E008BCD9F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */,
 				3AB6C6231D1CD0060089F687 /* TripKit.h */,
 				3AB6C6251D1CD0060089F687 /* Info.plist */,
 				3AFF209A1D1CD4F0008BCD9F /* TripKit-Prefix.pch */,
@@ -724,6 +757,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A787ED41D38F7BF009F9A18 /* routing.json in Resources */,
 				3A8D9FA21D2B734600078950 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -842,6 +876,7 @@
 				3AB6C6FC1D1CD08E0089F687 /* TKBuzzInfoProvider.swift in Sources */,
 				3AB6C6BD1D1CD08E0089F687 /* StopLocation+Shareable.m in Sources */,
 				3AB6C7161D1CD08E0089F687 /* TKTripKit.m in Sources */,
+				3A787ED01D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */,
 				3AB6C6DD1D1CD08E0089F687 /* SegmentTemplate.m in Sources */,
 				3AB6C7081D1CD08E0089F687 /* TKRealTimeUpdatableHelper.m in Sources */,
 				3AB6C6C31D1CD08E0089F687 /* Trip+Shareable.m in Sources */,
@@ -871,6 +906,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A787EC81D38F70B009F9A18 /* TKBuzzRouterTest.m in Sources */,
+				3A787ED11D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */,
 				3AB6C6301D1CD0060089F687 /* TripKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1055,10 +1092,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9037756C3C2806A56C241B68 /* Pods-TripKitTests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TripKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.TripKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TripKitTests/TripKitTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1066,10 +1106,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 77FE5E1439CA5ABD3E124145 /* Pods-TripKitTests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TripKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.TripKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TripKitTests/TripKitTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -1104,6 +1146,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3A787ECA1D38F78A009F9A18 /* 1-TripKit.xcdatamodel */,
+				3A787ECB1D38F78A009F9A18 /* 2-TripUpdates.xcdatamodel */,
+				3A787ECC1D38F78A009F9A18 /* 3-SpringClean.xcdatamodel */,
+				3A787ECD1D38F78A009F9A18 /* 4-Classifications.xcdatamodel */,
+				3A787ECE1D38F78A009F9A18 /* 5-PlannedTrip.xcdatamodel */,
+				3A787ECF1D38F78A009F9A18 /* 6-SegmentRealTimeVehicle.xcdatamodel */,
+			);
+			currentVersion = 3A787ECF1D38F78A009F9A18 /* 6-SegmentRealTimeVehicle.xcdatamodel */;
+			name = TripKitModel.xcdatamodeld;
+			path = ../../TripKitModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3AB6C6171D1CD0060089F687 /* Project object */;
 }
