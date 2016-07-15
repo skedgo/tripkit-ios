@@ -7,4 +7,4 @@ xcode_scheme:
 podfile: Project/Podfile
 
 before_install:
-- echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
+- echo -e "machine github.com\n  login SkedGoTravis\n  password $CI_USER_PASSWORD" >> ~/.netrc
