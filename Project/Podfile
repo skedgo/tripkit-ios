@@ -5,9 +5,10 @@ use_frameworks!
 platform :ios, '8.0'
 
 def shared_pods
-  pod 'SkedGoKit/Core', git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/cocoapods'
-  pod 'SGSearch',       git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/cocoapods'
-  pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/cocoapods'
+  pod 'SkedGoKit/Core', git: 'https://github.com/skedgo/shared-ios.git'
+  pod 'SGSearch',       git: 'https://github.com/skedgo/shared-ios.git'
+  pod 'SGSkedGoUI',     git: 'https://github.com/skedgo/shared-ios.git'
+  pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git'
   
   pod 'RxSwift'
   pod 'RxCocoa'
