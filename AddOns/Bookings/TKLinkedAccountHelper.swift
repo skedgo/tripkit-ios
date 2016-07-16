@@ -170,7 +170,7 @@ extension SVKRegion {
     }
     
     // Also unlink remote
-    SVKServer.GET(URL, paras: nil) { response, error in
+    SVKServer.GET(URL, paras: nil) { _, response, error in
       if let response = response as? [NSObject: AnyObject]
         where response.isEmpty && error == nil {
         completion(true || localRemoved)
