@@ -8,7 +8,7 @@
 
 @import CoreData;
 @import MapKit;
-@import SkedGoKit;
+@import SGCoreKit;
 
 #import "TripGroup.h"
 

@@ -6,7 +6,7 @@
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-@import SkedGoKit;
+@import SGCoreKit;
 
 @interface SGKConfig (TKInterAppCommunicator)
 

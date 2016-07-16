@@ -7,7 +7,7 @@
 //
 
 @import Foundation;
-@import SkedGoKit;
+@import SGCoreKit;
 
 #import "TKCellHelper.h"
 

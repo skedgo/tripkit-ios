@@ -8,7 +8,7 @@
 
 @import Foundation;
 @import CoreData;
-@import SkedGoKit;
+@import SGCoreKit;
 
 #import "TKRealTimeUpdatable.h"
 

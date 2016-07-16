@@ -8,7 +8,7 @@
 
 #import "Trip.h"
 
-@import SkedGoKit;
+@import SGCoreKit;
 
 #import <TripKit/TKTripKit.h>
 

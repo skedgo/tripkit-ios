@@ -7,7 +7,7 @@
 //
 
 @import Foundation;
-@import SkedGoKit;
+@import SGCoreKit;
 
 @interface TKColoredRoute : NSObject <STKDisplayableRoute>
 

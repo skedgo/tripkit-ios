@@ -8,7 +8,7 @@
 
 #import "TKShareURLProvider.h"
 
-#import <SkedGoKit/SVKServerKit.h>
+@import SGCoreKit;
 
 #define SECONDS_TO_WAIT 10
 

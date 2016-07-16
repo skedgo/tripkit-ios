@@ -7,7 +7,7 @@
 //
 
 @import CoreData;
-@import SkedGoKit;
+@import SGCoreKit;
 
 @class Service, StopLocation, SGNamedCoordinate;
 
