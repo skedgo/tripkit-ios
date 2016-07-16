@@ -8,7 +8,7 @@
 
 @import Foundation;
 @import CoreLocation;
-@import SkedGoKit;
+@import SGCoreKit;
 
 @class TripRequest, TKTripKit;
 

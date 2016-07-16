@@ -8,7 +8,7 @@
 
 @import Foundation;
 @import CoreData;
-@import SkedGoKit;
+@import SGCoreKit;
 
 @class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape;
 @class SVKRegion, ModeInfo;

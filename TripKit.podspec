@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.prefix_header_file = "prefix.pch"
 
   s.subspec 'Core' do |cs|
-    cs.dependency 'SkedGoKit/Core'
+    cs.dependency 'SGCoreKit/Core'
     cs.source_files = "Classes/**/*.{h,m,swift}"
     cs.resources    = [
       "Resources/*",
@@ -53,7 +53,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Share' do |cs|
     cs.dependency 'TripKit/Core'
-    cs.dependency 'SGSearch'
+    cs.dependency 'SGSearchKit'
 
     cs.source_files = "AddOns/Share/**/*"
   end

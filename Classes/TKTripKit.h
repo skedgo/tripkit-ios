@@ -9,7 +9,7 @@
 
 // Dependencies
 @import CoreData;
-@import SkedGoKit;
+@import SGCoreKit;
 
 // Headers
 #import "TKConstants.h"

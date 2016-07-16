@@ -9,7 +9,7 @@
 @import Foundation;
 @import CoreData;
 @import MapKit;
-@import SkedGoKit;
+@import SGCoreKit;
 
 @class TKSegment, SegmentTemplate, Service, StopVisits;
 

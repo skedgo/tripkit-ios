@@ -8,7 +8,7 @@
 
 @import Foundation;
 @import CoreLocation;
-@import SkedGoKit;
+@import SGCoreKit;
 
 @protocol SGGeocoder;
 

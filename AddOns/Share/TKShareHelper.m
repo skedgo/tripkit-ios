@@ -10,7 +10,7 @@
 
 #import <TripKit/TKTripKit.h>
 
-@import SGSearch;
+@import SGSearchKit;
 
 @implementation TKShareHelper
 

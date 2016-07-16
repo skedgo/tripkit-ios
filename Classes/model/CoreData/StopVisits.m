@@ -10,7 +10,7 @@
 
 #import <TripKit/TKTripKit.h>
 
-#import <SkedGoKit/SkedGoKit-Swift.h>
+@import SGCoreKit;
 
 #import "SGStyleManager.h"
 
