@@ -73,6 +73,15 @@ public enum TKAgendaInputItem {
     }
   }
   
+  var endTime: NSDate? {
+    switch self {
+    case .Event(let eventInput):
+      return eventInput.endDate
+    case .Trip(let trip):
+      return trip.arrivalTime
+    }
+  }
+  
   var start: CLLocationCoordinate2D {
     switch self {
     case .Event(let eventInput):
