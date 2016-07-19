@@ -1,6 +1,6 @@
 # SkedGo's TripKit for iOS
 
-Some documentation can be found in the [TripGo API Wiki](https://github.com/skedgo/tripgo-api/wiki)
+Additional documentation is available on the [TripGo Developer page](http://skedgo.github.io/tripgo-api/site/)
 
 ## Installation
 
