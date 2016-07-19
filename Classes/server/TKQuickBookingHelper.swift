@@ -8,6 +8,8 @@
 
 import Foundation
 
+import SGCoreKit
+
 // Swift-only this would be a struct
 public class TKQuickBookingPrice: NSObject {
   /// Price in local currency, typically not in smallest unit, but dollars

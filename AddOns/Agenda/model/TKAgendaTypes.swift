@@ -12,6 +12,8 @@ import CoreLocation
 import RxSwift
 import RxCocoa
 
+import SGCoreKit
+
 /**
  An Agenda encapsulates a user's plan for a time range.
  

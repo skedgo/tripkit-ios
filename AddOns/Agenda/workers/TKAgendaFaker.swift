@@ -11,6 +11,8 @@ import Foundation
 import CoreLocation
 import RxSwift
 
+import SGCoreKit
+
 struct TKAgendaFaker: TKAgendaBuilderType {
   func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]> {
     if items.count <= 1 {

@@ -11,6 +11,8 @@ import Foundation
 import RxSwift
 import SwiftyJSON
 
+import SGCoreKit
+
 public enum HTTPMethod: String {
   case POST = "POST"
   case GET = "GET"

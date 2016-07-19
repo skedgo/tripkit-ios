@@ -4,12 +4,12 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "CF6BECA8E45CB4745041D6EE34133E0842F561DC" : 0,
+    "F599F9C1A711657A45FDCAC5CCA2AD6F0D0134D6" : 0,
     "98BD04EBE34C58A56E6A3495B5FA6ADD1E674A8E" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "118167B0-B174-48BF-B1DF-FC9437D0F2D0",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "CF6BECA8E45CB4745041D6EE34133E0842F561DC" : "..",
+    "F599F9C1A711657A45FDCAC5CCA2AD6F0D0134D6" : "..",
     "98BD04EBE34C58A56E6A3495B5FA6ADD1E674A8E" : "TripKit\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "TripKit",
@@ -24,7 +24,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:skedgo\/tripgo-ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CF6BECA8E45CB4745041D6EE34133E0842F561DC"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F599F9C1A711657A45FDCAC5CCA2AD6F0D0134D6"
     }
   ]
 }

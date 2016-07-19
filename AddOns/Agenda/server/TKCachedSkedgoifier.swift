@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import SGCoreKit
+
 struct TKCachedSkedgoifier: TKAgendaBuilderType {
 
   let privateVehicles: [STKVehicular]

@@ -7,6 +7,10 @@
 //
 
 import Foundation
+import UIKit
+
+import SGCoreKit
+
 
 public class TKSegmentHelper: NSObject {
   public static func segmentImage(iconType: SGStyleModeIconType, modeInfo: ModeInfo, modeIdentifier: String?, isRealTime: Bool) -> UIImage? {
