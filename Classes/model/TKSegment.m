@@ -9,6 +9,7 @@
 #import "TKSegment.h"
 
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 NSString *const UninitializedString =  @"UninitializedString";
 
@@ -80,13 +81,13 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
   switch (self.order) {
     case BHSegmentOrdering_Start:
-      return type == STKTripSegmentVisibilityInDetails;
+      return type == STKTripSegmentVisibility_InDetails;
       
     case BHSegmentOrdering_Regular:
       return (STKTripSegmentVisibility)self.template.visibility.intValue >= type;
       
     case BHSegmentOrdering_End:
-      return type != STKTripSegmentVisibilityInSummary;
+      return type != STKTripSegmentVisibility_InSummary;
   }
 }
 
@@ -779,7 +780,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (BOOL)pointDisplaysImage {
-  return [self hasVisibility:STKTripSegmentVisibilityOnMap];
+  return [self hasVisibility:STKTripSegmentVisibility_OnMap];
 }
 
 - (UIImage *)pointImage
@@ -877,7 +878,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-- (nonnull NSTimeZone *)tripSegmentTimeZone
+- (nullable NSTimeZone *)tripSegmentTimeZone
 {
   return [self timeZone];
 }
@@ -985,40 +986,20 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 #pragma mark - Private methods
 
-- (UIImage *)specificImageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
+- (UIImage *)imageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
 {
-  NSString *specificImageName = self.template.modeInfo.localImageName;
+  NSString *localImageName = self.template.modeInfo.localImageName;
   if (self.trip.showNoVehicleUUIDAsLift
       && self.privateVehicleType == STKVehicleType_Car
       && ! self.reference.vehicleUUID) {
-    specificImageName = @"car-pool";
+    localImageName = @"car-pool";
   }
   
-  return [SGStyleManager imageForModeImageName:specificImageName
-                                    isRealTime:allowRealTime && [self timesAreRealTime]
-                                    ofIconType:iconType];
-  
-}
-
-- (UIImage *)imageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
-{
-  UIImage *specificImage = [self specificImageForIconType:iconType allowRealTime:allowRealTime];
-  if (specificImage) {
-    return specificImage;
-  }
-  
-  NSString *modeIdentifier = [self modeIdentifier];
-  if (modeIdentifier) {
-    NSString *genericImageName = [SVKTransportModes modeImageNameForModeIdentifier:modeIdentifier];
-    UIImage *genericImage = [SGStyleManager imageForModeImageName:genericImageName
-                                                       isRealTime:allowRealTime && [self timesAreRealTime]
-                                                       ofIconType:iconType];
-    if (genericImage) {
-      return genericImage;
-    }
-  }
-
-  return nil;
+  BOOL realTime = allowRealTime && [self timesAreRealTime];
+  return [TKSegmentHelper segmentImage:iconType
+                        localImageName:localImageName
+                        modeIdentifier:[self modeIdentifier]
+                            isRealTime:realTime];
 }
 
 - (nullable NSURL *)imageURLForType:(SGStyleModeIconType)iconType

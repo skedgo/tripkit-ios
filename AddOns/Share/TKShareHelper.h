@@ -12,6 +12,8 @@
 
 @protocol SGGeocoder;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TKShareHelper : NSObject
 
 #pragma mark - Meet URL
@@ -21,9 +23,13 @@
 + (NSURL *)meetURLForCoordinate:(CLLocationCoordinate2D)coordinate
                          atTime:(NSDate *)time;
 
++ (NSURL *)meetURLForCoordinate:(CLLocationCoordinate2D)coordinate
+                         atTime:(NSDate *)time
+                        baseURL:(NSString *)baseURL;
+
 + (void)meetingDetailsForURL:(NSURL *)url
                usingGeocoder:(id<SGGeocoder>)geocoder
-                     details:(void (^)(CLLocationCoordinate2D coordinate, NSString *name, NSDate *time))detailBlock;
+                     details:(void (^)(CLLocationCoordinate2D coordinate, NSString * _Nullable name, NSDate *time))detailBlock;
 
 
 #pragma mark - Query URL
@@ -33,11 +39,17 @@
 + (NSURL *)queryURLForStart:(CLLocationCoordinate2D)start
                         end:(CLLocationCoordinate2D)end
                    timeType:(SGTimeType)timeType
-                       time:(NSDate *)time;
+                       time:(nullable NSDate *)time;
+
++ (NSURL *)queryURLForStart:(CLLocationCoordinate2D)start
+                        end:(CLLocationCoordinate2D)end
+                   timeType:(SGTimeType)timeType
+                       time:(nullable NSDate *)time
+                    baseURL:(NSString *)baseURL;
 
 + (BOOL)queryDetailsForURL:(NSURL *)url
              usingGeocoder:(id<SGGeocoder>)geocoder
-                   success:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, NSString *name, SGTimeType timeType, NSDate *time))success
+                   success:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, NSString * _Nullable name, SGTimeType timeType, NSDate * _Nullable time))success
                    failure:(void (^)())failure;
 
 
@@ -47,10 +59,15 @@
 
 + (NSURL *)stopURLForStopCode:(NSString *)stopCode
                 inRegionNamed:(NSString *)regionName
-                       filter:(NSString *)filter;
+                       filter:(nullable NSString *)filter;
+
++ (NSURL *)stopURLForStopCode:(NSString *)stopCode
+                inRegionNamed:(NSString *)regionName
+                       filter:(NSString *)filter
+                      baseURL:(NSString *)baseURL;
 
 + (BOOL)stopDetailsForURL:(NSURL *)url
-                  details:(void (^)(NSString *stopCode, NSString *regionName, NSString *filter))detailBlock;
+                  details:(void (^)(NSString *stopCode, NSString *regionName, NSString * _Nullable filter))detailBlock;
 
 #pragma mark - Services
 
@@ -60,7 +77,14 @@
                        atStopCode:(NSString *)stopCode
                     inRegionNamed:(NSString *)regionName;
 
++ (NSURL *)serviceURLForServiceID:(NSString *)serviceID
+                       atStopCode:(NSString *)stopCode
+                    inRegionNamed:(NSString *)regionName
+                          baseURL:(NSString *)baseURL;
+
 + (void)serviceDetailsForURL:(NSURL *)url
                      details:(void (^)(NSString *stopCode, NSString *regionName, NSString *serviceID))detailBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

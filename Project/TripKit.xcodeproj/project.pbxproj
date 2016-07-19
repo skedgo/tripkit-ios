@@ -116,6 +116,7 @@
 		3AB6C7161D1CD08E0089F687 /* TKTripKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6A71D1CD08E0089F687 /* TKTripKit.m */; };
 		3AB6C7171D1CD08E0089F687 /* TripKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6A81D1CD08E0089F687 /* TripKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB6C7181D1CD08E0089F687 /* TripKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AB6C6AA1D1CD08E0089F687 /* TripKit.strings */; };
+		3ADB3A581D39E3830012D04B /* TKSegmentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */; };
 		F8FE40C0F8F106E668B2BDD9 /* Pods_TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D90B11191B5E08C85990BAE4 /* Pods_TripKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -261,6 +262,7 @@
 		3AB6C6B31D1CD08E0089F687 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AB6C6B41D1CD08E0089F687 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TripKit.strings"; sourceTree = "<group>"; };
 		3AB6C6B51D1CD08E0089F687 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/TripKit.strings"; sourceTree = "<group>"; };
+		3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegmentHelper.swift; sourceTree = "<group>"; };
 		3AFF209A1D1CD4F0008BCD9F /* TripKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TripKit-Prefix.pch"; sourceTree = "<group>"; };
 		3D372BAC839297ABF20EADB2 /* Pods-TripKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TripKit/Pods-TripKit.debug.xcconfig"; sourceTree = "<group>"; };
 		77FE5E1439CA5ABD3E124145 /* Pods-TripKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TripKitTests/Pods-TripKitTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				3A787EC31D38F646009F9A18 /* TKJSONCache.swift */,
 				3AB6C65F1D1CD08E0089F687 /* TKNextSegmentScorer.h */,
 				3AB6C6601D1CD08E0089F687 /* TKNextSegmentScorer.m */,
+				3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */,
 				3AB6C6611D1CD08E0089F687 /* TKUserProfileHelper.swift */,
 			);
 			path = helpers;
@@ -868,6 +871,7 @@
 				3AB6C6E51D1CD08E0089F687 /* StopVisits.m in Sources */,
 				3AB6C6BA1D1CD08E0089F687 /* TKInterAppCommunicator.m in Sources */,
 				3AB6C6CE1D1CD08E0089F687 /* TripRequest+Classify.m in Sources */,
+				3ADB3A581D39E3830012D04B /* TKSegmentHelper.swift in Sources */,
 				3AB6C6F71D1CD08E0089F687 /* TKSegment.m in Sources */,
 				3AB6C6ED1D1CD08E0089F687 /* Vehicle.m in Sources */,
 				3AB6C7121D1CD08E0089F687 /* TKTimetableDownloader.m in Sources */,
