@@ -218,7 +218,8 @@
                        region:region
                callbackOnMain:NO
                       success:
-   ^(id responseObject) {
+   ^(NSInteger status, id responseObject) {
+#pragma unused(status)
      success(responseObject);
    }
                              failure:

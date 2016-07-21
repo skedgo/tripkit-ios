@@ -36,8 +36,8 @@
     [SVKServer POST:[NSURL URLWithString:latestURLString]
               paras:userInfo
          completion:
-     ^(id  _Nullable responseObject, NSError * _Nullable error) {
-#pragma unused(responseObject)
+     ^(NSInteger status, id  _Nullable responseObject, NSError * _Nullable error) {
+#pragma unused(status, responseObject)
        BOOL success = (error == nil);
        if (completeHandler) {
          completeHandler(success);
@@ -86,8 +86,8 @@
   [SVKServer POST:[NSURL URLWithString:trip.progressURLString]
             paras:paras
        completion:
-   ^(id  _Nullable responseObject, NSError * _Nullable error) {
-#pragma unused(responseObject)
+   ^(NSInteger status, id  _Nullable responseObject, NSError * _Nullable error) {
+#pragma unused(status, responseObject)
      if (error) {
        [SGKLog debug:@"TKReporter" block:^NSString * _Nonnull{
          return [NSString stringWithFormat:@"Progress post encountered error: %@", error];

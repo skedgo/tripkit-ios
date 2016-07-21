@@ -32,8 +32,8 @@
       [SVKServer GET:saveURL
                paras:nil
           completion:
-       ^(id  _Nullable responseObject, NSError * _Nullable error) {
-#pragma unused(error)
+       ^(NSInteger status, id  _Nullable responseObject, NSError * _Nullable error) {
+#pragma unused(status, error)
          NSURL *newShareURL;
          if ([responseObject isKindOfClass:[NSDictionary class]]) {
            NSString *urlString = responseObject[@"url"];

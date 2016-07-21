@@ -153,8 +153,6 @@
   return YES;
 }
 
-#warning FIXME!!!
-
 + (void)geocodeString:(NSString *)string
         usingGeocoder:(id<SGGeocoder>)geocoder
            completion:(void(^)(SGNamedCoordinate *coordinate))completion
