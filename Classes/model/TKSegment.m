@@ -80,13 +80,13 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
   switch (self.order) {
     case BHSegmentOrdering_Start:
-      return type == STKTripSegmentVisibility_InDetails;
+      return type == STKTripSegmentVisibilityInDetails;
       
     case BHSegmentOrdering_Regular:
       return (STKTripSegmentVisibility)self.template.visibility.intValue >= type;
       
     case BHSegmentOrdering_End:
-      return type != STKTripSegmentVisibility_InSummary;
+      return type != STKTripSegmentVisibilityInSummary;
   }
 }
 
@@ -779,7 +779,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (BOOL)pointDisplaysImage {
-  return [self hasVisibility:STKTripSegmentVisibility_OnMap];
+  return [self hasVisibility:STKTripSegmentVisibilityOnMap];
 }
 
 - (UIImage *)pointImage

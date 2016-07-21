@@ -34,7 +34,7 @@
 {
   // Get the visibility and keep only those templates which are visible
   STKTripSegmentVisibility visibility = [TKParserHelper segmentVisibilityType:dict[@"visibility"]];
-  if (visibility == STKTripSegmentVisibility_Hidden) {
+  if (visibility == STKTripSegmentVisibilityHidden) {
     return nil;
   }
   
@@ -266,7 +266,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
 {
   // fill in the request
   Trip *anyTrip = [request.trips anyObject];
-  NSArray *segments = [anyTrip segmentsWithVisibility:STKTripSegmentVisibility_InDetails];
+  NSArray *segments = [anyTrip segmentsWithVisibility:STKTripSegmentVisibilityInDetails];
   if (segments.count == 0) {
     return NO;
   }

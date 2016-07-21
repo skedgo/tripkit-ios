@@ -61,7 +61,7 @@
   id<STKTripSegment> bestSegment = nil;
   NSUInteger bestScore = 0;
   
-  for (id<STKTripSegment> segment in [trip segmentsWithVisibility:STKTripSegmentVisibility_InDetails]) {
+  for (id<STKTripSegment> segment in [trip segmentsWithVisibility:STKTripSegmentVisibilityInDetails]) {
     NSUInteger score = [self scoreForSegment:segment
                                       atTime:time
                                  forLocation:location];
