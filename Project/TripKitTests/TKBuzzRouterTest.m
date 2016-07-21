@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import <TripKit/TKTripKit.h>
+@import TripKit;
 
 @interface TKBuzzRouterTest : XCTestCase
 
@@ -75,8 +75,6 @@
   [parser parseAndAddResult:self.json
                  completion:
    ^(TripRequest *request) {
-     [expectation fulfill];
-     
      XCTAssertTrue(request, @"Parser didn't succeed");
      
      // accessing the results through the request object
@@ -99,6 +97,8 @@
      
      NSSet *allTemplates = [self.context fetchObjectsForEntityName:@"SegmentTemplate" withPredicate:nil];
      XCTAssertEqual((int)allTemplates.count, 20, @"Each segment that's not hidden should be parsed and added just once.");
+     
+     [expectation fulfill];
    }];
   
   [self waitForExpectationsWithTimeout:10
@@ -116,6 +116,42 @@
     TripRequest *request = [parser parseAndAddResultBlocking:self.json];
     XCTAssertNotNil(request, @"No result returned");
   }];
+}
+
+- (void)testTripCache
+{
+  NSString *identifier = @"Test";
+  TKJSONCacheDirectory directory = TKJSONCacheDirectoryDocuments; // This is where TKBuzzRouter is keeping its trips
+  
+  // 0. Clear
+  [TKJSONCache remove:identifier directory:directory];
+  XCTAssertNil([TKJSONCache read:identifier directory:directory]);
+
+  // 1. Save the trip to the cache
+  [TKJSONCache save:identifier dictionary:self.json directory:directory];
+  XCTAssertNotNil([TKJSONCache read:identifier directory:directory]);
+  
+  // 2. Retrieve it form the cache
+  
+  XCTestExpectation *expectation = [self expectationWithDescription:@"trip cache"];
+  
+  TKBuzzRouter *router = [[TKBuzzRouter alloc] init];
+  [router downloadTrip:[NSURL URLWithString:@"http://www.example.com/"]
+            identifier:identifier
+    intoTripKitContext:self.context
+            completion:
+   ^(Trip * __nullable trip) {
+     XCTAssertNotNil(trip);
+     
+     [expectation fulfill];
+   }];
+  
+  [self waitForExpectationsWithTimeout:10
+                               handler:
+   ^(NSError * _Nullable error) {
+     XCTAssertNil(error, @"Error while fetching trip from cache");
+   }];
+  
 }
 
 @end
