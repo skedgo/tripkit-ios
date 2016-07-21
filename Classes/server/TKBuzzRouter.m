@@ -144,8 +144,19 @@
   intoTripKitContext:(NSManagedObjectContext *)tripKitContext
           completion:(void(^)(Trip * __nullable trip))completion
 {
-  NSUInteger hash = [[url absoluteString] hash];
-  NSString *identifier = [NSString stringWithFormat:@"%l", hash];
+  [self downloadTrip:url identifier:nil intoTripKitContext:tripKitContext completion:completion];
+}
+
+- (void)downloadTrip:(NSURL *)url
+          identifier:(nullable NSString *)identifier
+  intoTripKitContext:(NSManagedObjectContext *)tripKitContext
+          completion:(void(^)(Trip * __nullable trip))completion
+{
+  if (!identifier) {
+    NSUInteger hash = [[url absoluteString] hash];
+    identifier = [NSString stringWithFormat:@"%lu", hash];
+  }
+  
   TKJSONCacheDirectory directory = TKJSONCacheDirectoryDocuments;
 
   void (^withJSON)(id, NSURL * _Nullable) = ^void(id JSON, NSURL * _Nullable shareURL) {

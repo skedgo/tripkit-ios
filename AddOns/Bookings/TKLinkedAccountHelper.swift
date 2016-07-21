@@ -208,7 +208,7 @@ extension SVKRegion {
       path: "auth/\(name)",
       parameters: paras,
       region: self,
-      success: { response in
+      success: { _, response in
         guard let array = response as? [[String: AnyObject]] where !array.isEmpty else {
           completion([])
           return
