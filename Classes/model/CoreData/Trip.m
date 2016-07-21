@@ -153,7 +153,7 @@ typedef NSUInteger SGTripFlag;
 		[dateFormatter setTimeZone:tz];
   }
 
-  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibility_InDetails]) {
+  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibilityInDetails]) {
     // this is related to SegmentSectionHeaderViews!
     
     // insert a new location as soon as we end up there
@@ -222,7 +222,7 @@ typedef NSUInteger SGTripFlag;
   [output appendString:@"; "];
   
   BOOL first = true;
-  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibility_InDetails]) {
+  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibilityInDetails]) {
     if (first) {
       first = false;
     } else {
@@ -614,11 +614,11 @@ typedef NSUInteger SGTripFlag;
 - (STKTripCostType)primaryCostType
 {
   if (self.departureTimeIsFixed) {
-    return STKTripCostType_Time;
+    return STKTripCostTypeTime;
   } else if ([self isExpensive]) {
-    return STKTripCostType_Price;
+    return STKTripCostTypePrice;
   } else {
-    return STKTripCostType_Duration;
+    return STKTripCostTypeDuration;
   }
 }
 
@@ -631,7 +631,7 @@ typedef NSUInteger SGTripFlag;
   NSString *previousModeIdentifier;
   for (TKSegment *segment in [self segments]) {
     if ([segment isStationary]
-        || ([segment isWalking] && ![segment hasVisibility:STKTripSegmentVisibility_InSummary])) {
+        || ([segment isWalking] && ![segment hasVisibility:STKTripSegmentVisibilityInSummary])) {
       continue; // A stationary segment or short walk doesn't make a trip mixed-modal
     }
     NSString *modeIdentifier = [segment modeIdentifier];
@@ -667,7 +667,7 @@ typedef NSUInteger SGTripFlag;
   sTripAccessibilityDateFormatter.timeZone = timeZone;
 	
   BOOL separateByComma = NO;
-  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibility_InSummary]) {
+  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibilityInSummary]) {
     if (separateByComma) {
       [accessibleLabel appendString:@", "];
     } else {
@@ -716,12 +716,12 @@ typedef NSUInteger SGTripFlag;
   if (includeTime) {
     NSString *durationString = [self durationString];
     if (durationString) {
-      values[@(STKTripCostType_Duration)] = durationString;
+      values[@(STKTripCostTypeDuration)] = durationString;
     }
   }
-  values[@(STKTripCostType_Carbon)]   = [self.totalCarbon toCarbonString];
+  values[@(STKTripCostTypeCarbon)]   = [self.totalCarbon toCarbonString];
   if (self.totalPrice) {
-    values[@(STKTripCostType_Price)]  = [self.totalPrice toMoneyString:[self currencySymbol]];
+    values[@(STKTripCostTypePrice)]  = [self.totalPrice toMoneyString:[self currencySymbol]];
   }
   return values;
 }
