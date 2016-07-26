@@ -8,6 +8,8 @@
 
 import Foundation
 
+import SGCoreKit
+
 private enum DefaultsKey: String {
   case SortedEnabled = "profileSortedModeIdentifiers"
   case Minimized = "profileMinimizedModeIdentifiers"

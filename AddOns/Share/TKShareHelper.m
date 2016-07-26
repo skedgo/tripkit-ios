@@ -24,7 +24,14 @@
 + (NSURL *)meetURLForCoordinate:(CLLocationCoordinate2D)coordinate
                          atTime:(NSDate *)time
 {
-  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/meet?lat=%.5f&lng=%.5f&at=%.0f", coordinate.latitude, coordinate.longitude, [time timeIntervalSince1970]];
+  return [self meetURLForCoordinate:coordinate atTime:time baseURL:@"http://tripgo.me"];
+}
+
++ (NSURL *)meetURLForCoordinate:(CLLocationCoordinate2D)coordinate
+                         atTime:(NSDate *)time
+                        baseURL:(NSString *)baseURL
+{
+  NSString *urlString = [NSString stringWithFormat:@"%@/meet?lat=%.5f&lng=%.5f&at=%.0f", baseURL, coordinate.latitude, coordinate.longitude, [time timeIntervalSince1970]];
   return [NSURL URLWithString:urlString];
 }
 
@@ -54,7 +61,7 @@
     [self geocodeString:name
           usingGeocoder:geocoder
              completion:
-     ^(SGNamedCoordinate *destination) {
+     ^(SGNamedCoordinate * _Nullable destination) {
        if (destination) {
          detailBlock(destination.coordinate, [destination title], time);
        }
@@ -63,7 +70,7 @@
   } else if (params[@"lat"] && params[@"lng"]) {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([params[@"lat"] doubleValue], [params[@"lng"] doubleValue]);
     if (CLLocationCoordinate2DIsValid(coordinate)) {
-      detailBlock(coordinate, name, time);
+      detailBlock(coordinate, nil, time);
     }
   }
 }
@@ -78,9 +85,18 @@
 + (NSURL *)queryURLForStart:(CLLocationCoordinate2D)start
                         end:(CLLocationCoordinate2D)end
                    timeType:(SGTimeType)timeType
-                       time:(NSDate *)time
+                       time:(nullable NSDate *)time
 {
-  NSMutableString *urlString = [NSMutableString stringWithFormat:@"http://tripgo.me/go?tlat=%.5f&tlng=%.5f", end.latitude, end.longitude];
+  return [self queryURLForStart:start end:end timeType:timeType time:time baseURL:@"http://tripgo.me"];
+}
+
++ (NSURL *)queryURLForStart:(CLLocationCoordinate2D)start
+                        end:(CLLocationCoordinate2D)end
+                   timeType:(SGTimeType)timeType
+                       time:(nullable NSDate *)time
+                    baseURL:(NSString *)baseURL
+{
+  NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/go?tlat=%.5f&tlng=%.5f", baseURL, end.latitude, end.longitude];
   if (CLLocationCoordinate2DIsValid(start)) {
     [urlString appendFormat:@"&flat=%.5f&flng=%.5f", start.latitude, start.longitude];
   }
@@ -140,7 +156,7 @@
     [self geocodeString:name
           usingGeocoder:geocoder
              completion:
-     ^(SGNamedCoordinate *coordinate) {
+     ^(SGNamedCoordinate * _Nullable coordinate) {
        if (coordinate) {
          success(start, coordinate.coordinate, [coordinate title], timeType, time);
        } else {
@@ -155,7 +171,7 @@
 
 + (void)geocodeString:(NSString *)string
         usingGeocoder:(id<SGGeocoder>)geocoder
-           completion:(void(^)(SGNamedCoordinate *coordinate))completion
+           completion:(void(^)( SGNamedCoordinate * _Nullable coordinate))completion
 {
   [geocoder geocodeString:string
                nearRegion:MKMapRectWorld
@@ -190,6 +206,14 @@
                 inRegionNamed:(NSString *)regionName
                        filter:(NSString *)filter
 {
+  return [self stopURLForStopCode:stopCode inRegionNamed:regionName filter:filter baseURL:@"http://tripgo.me"];
+}
+
++ (NSURL *)stopURLForStopCode:(NSString *)stopCode
+                inRegionNamed:(NSString *)regionName
+                       filter:(NSString *)filter
+                      baseURL:(NSString *)baseURL
+{
   NSString *addendum;
   if (filter) {
     addendum = [filter stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -198,7 +222,7 @@
   }
   
   NSString *escapedStopCode = [stopCode stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/stop/%@/%@/%@", regionName, escapedStopCode, addendum];
+  NSString *urlString = [NSString stringWithFormat:@"%@/stop/%@/%@/%@", baseURL, regionName, escapedStopCode, addendum];
   return [NSURL URLWithString:urlString];
 }
 
@@ -230,14 +254,22 @@
                        atStopCode:(NSString *)stopCode
                     inRegionNamed:(NSString *)regionName
 {
+  return [self serviceURLForServiceID:serviceID atStopCode:stopCode inRegionNamed:regionName baseURL:@"http://tripgo.me"];
+}
+
++ (NSURL *)serviceURLForServiceID:(NSString *)serviceID
+                       atStopCode:(NSString *)stopCode
+                    inRegionNamed:(NSString *)regionName
+                          baseURL:(NSString *)baseURL
+{
   NSString *escapedStopCode = [stopCode stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
   NSString *escapedServiceID = [serviceID stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-  NSString *urlString = [NSString stringWithFormat:@"http://tripgo.me/service?regionName=%@&stopCode=%@&serviceID=%@", regionName, escapedStopCode, escapedServiceID];
+  NSString *urlString = [NSString stringWithFormat:@"%@/service?regionName=%@&stopCode=%@&serviceID=%@", baseURL, regionName, escapedStopCode, escapedServiceID];
   return [NSURL URLWithString:urlString];
 }
 
 + (void)serviceDetailsForURL:(NSURL *)url
-                  details:(void (^)(NSString *stopCode, NSString *regionName, NSString *serviceID))detailBlock {
+                     details:(void (^)(NSString *stopCode, NSString *regionName, NSString *serviceID))detailBlock {
   // re-construct the parameters
   NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
   NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:queryComponents.count];

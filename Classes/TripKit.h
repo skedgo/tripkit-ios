@@ -9,4 +9,6 @@
 #ifndef TripKit_h
 #define TripKit_h
 
+// Empty header, required to build framework
+
 #endif /* TripKit_h */
