@@ -406,7 +406,7 @@
   if (! result) {
     [SGKLog warn:NSStringFromClass([self class]) format:@"Agenda error: %@", json[@"error"]];
     if (completion) {
-      NSError *error = [SVKError errorFromJSONErrorDictionary:json] ?: [NSError errorWithCode:91651 message:@"Could not calculate agenda, but no error from server either."];
+      NSError *error = [SVKError errorFromJSON:json] ?: [NSError errorWithCode:91651 message:@"Could not calculate agenda, but no error from server either."];
       completion(nil, error);
     }
     return;
