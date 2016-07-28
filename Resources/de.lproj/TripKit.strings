@@ -45,11 +45,17 @@
 /* No comment provided by engineer. */
 "Book with Uber" = "Mit Uber buchen";
 
+/* Placeholder title while calculating trips */
+"Calculating trips..." = "Trips berechnen...";
+
 /* No comment provided by engineer. */
 "Call" = "Anrufen";
 
 /* Action title for calling provider of %name */
 "CallTaxiFormat" = "%@ anrufen";
+
+/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
+"Connect to Internet to get trips" = "Gehe online, um Trips zu sehen";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Haltestelle konnte nicht gefunden werden.";
@@ -112,7 +118,8 @@
 /* No comment provided by engineer. */
 "Open Ola" = "Ola öffnen";
 
-/* Arrival Location */
+/* Arrival Location
+   For trip titles, e.g., 'To work' */
 "PrimaryLocationEnd" = "Nach %@";
 
 /* Departure Location */

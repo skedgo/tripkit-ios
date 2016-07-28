@@ -45,11 +45,17 @@
 /* No comment provided by engineer. */
 "Book with Uber" = "Boek met Uber";
 
+/* Placeholder title while calculating trips */
+"Calculating trips..." = "Trips berekenen...";
+
 /* No comment provided by engineer. */
 "Call" = "Bel";
 
 /* Action title for calling provider of %name */
 "CallTaxiFormat" = "Bel %@";
+
+/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
+"Connect to Internet to get trips" = "Maak verbinding met het internet om trips te bekijken";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Overstap station kon niet gevonden worden.";
@@ -112,7 +118,8 @@
 /* No comment provided by engineer. */
 "Open Ola" = "Open Ola";
 
-/* Arrival Location */
+/* Arrival Location
+   For trip titles, e.g., 'To work' */
 "PrimaryLocationEnd" = "Naar %@";
 
 /* Departure Location */

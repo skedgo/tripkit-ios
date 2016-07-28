@@ -45,11 +45,17 @@
 /* No comment provided by engineer. */
 "Book with Uber" = "从Uber预定";
 
+/* Placeholder title while calculating trips */
+"Calculating trips..." = "正在计算行程...";
+
 /* No comment provided by engineer. */
 "Call" = "叫计程车";
 
 /* Action title for calling provider of %name */
 "CallTaxiFormat" = "联系%@";
+
+/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
+"Connect to Internet to get trips" = "连接到网络以便获取行程";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "无法找到公交车站。";
@@ -112,7 +118,8 @@
 /* No comment provided by engineer. */
 "Open Ola" = "打开Ola";
 
-/* Arrival Location */
+/* Arrival Location
+   For trip titles, e.g., 'To work' */
 "PrimaryLocationEnd" = "目的地: %@";
 
 /* Departure Location */

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		298FFC17CF0F3C7DBE593B3D /* Pods_TripKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB767442569E9895BB82F4 /* Pods_TripKitTests.framework */; };
+		3A4255F61D49E0C000271178 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A4255F81D49E0C000271178 /* InfoPlist.strings */; };
 		3A7768FB1D3DE34600AF9EB2 /* TKTTPifierTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7768FA1D3DE34600AF9EB2 /* TKTTPifierTest.swift */; };
 		3A7769121D3DE45800AF9EB2 /* TKAgendaParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7768FD1D3DE45800AF9EB2 /* TKAgendaParserHelper.swift */; };
 		3A7769131D3DE45800AF9EB2 /* TKAgendaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7768FE1D3DE45800AF9EB2 /* TKAgendaUtils.swift */; };
@@ -149,6 +150,10 @@
 
 /* Begin PBXFileReference section */
 		3A37A9A61D20F8EF00A2A3B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
+		3A4255F71D49E0C000271178 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A4255F91D49E0CB00271178 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A4255FA1D49E0D700271178 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3A4255FB1D49E0EA00271178 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A7768FA1D3DE34600AF9EB2 /* TKTTPifierTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTTPifierTest.swift; sourceTree = "<group>"; };
 		3A7768FD1D3DE45800AF9EB2 /* TKAgendaParserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaParserHelper.swift; sourceTree = "<group>"; };
 		3A7768FE1D3DE45800AF9EB2 /* TKAgendaUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaUtils.swift; sourceTree = "<group>"; };
@@ -652,6 +657,7 @@
 		3AFF20981D1CD29E008BCD9F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3A4255F81D49E0C000271178 /* InfoPlist.strings */,
 				3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */,
 				3AB6C6231D1CD0060089F687 /* TripKit.h */,
 				3AB6C6251D1CD0060089F687 /* Info.plist */,
@@ -838,6 +844,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AB6C7181D1CD08E0089F687 /* TripKit.strings in Resources */,
+				3A4255F61D49E0C000271178 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1027,6 +1034,17 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3A4255F81D49E0C000271178 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A4255F71D49E0C000271178 /* de */,
+				3A4255F91D49E0CB00271178 /* nl */,
+				3A4255FA1D49E0D700271178 /* zh-Hans */,
+				3A4255FB1D49E0EA00271178 /* es */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		3A8D9FA41D2B734600078950 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
