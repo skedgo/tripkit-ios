@@ -40,16 +40,25 @@
 "Arrive" = "Chegada";
 
 /* No comment provided by engineer. */
+"Book with FlitWays" = "Reservar com FlitWays";
+
+/* No comment provided by engineer. */
+"Book with Uber" = "Reservar com Uber";
+
+/* Placeholder title while calculating trips */
+"Calculating trips..." = "Calculando viagens...";
+
+/* No comment provided by engineer. */
 "Call" = "Chamada";
 
 /* Action title for calling provider of %name */
 "CallTaxiFormat" = "Chamar %@";
 
+/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
+"Connect to Internet to get trips" = "Conectar a Internet para obter viagens";
+
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Não foi possivel encontar parada de trânsito.";
-
-/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
-"CouponCodeIngogoFormat" = "Digite o código de cupão '%@' quando se inscrever para reivindicar seus $5 de credit grátis (válido somente  para novas inscrições)";
 
 /* Departure time sorter title */
 "Departure" = "Partida";
@@ -63,26 +72,20 @@
 /* Walking time */
 "Duration" = "por %@";
 
+/* No comment provided by engineer. */
+"Get Lyft" = "Obter Lyft";
+
+/* No comment provided by engineer. */
+"Get Ola" = "Obter Ola";
+
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Obter direções";
 
 /* No comment provided by engineer. */
 "Get ingogo" = "Obter ingogo";
 
-/* No comment provided by engineer. */
-"Get Lyft" = "Obter Lyft";
-
-/* No comment provided by engineer. */
-"Get Uber" = "Obter Uber";
-
-/* goCatch action */
-"goCatch a Taxi" = "goCatch um Taxi";
-
 /* google maps directions action */
 "Google Maps" = "Google Maps";
-
-/* No comment provided by engineer. */
-"ingogo a Taxi" = "ingogo um Taxi";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -113,14 +116,14 @@
 "Open Lyft" = "Abrir Lyft";
 
 /* No comment provided by engineer. */
-"Open Uber" = "Abrir Uber";
+"Open Ola" = "Abrir Ola";
 
-/* Arrival Location */
+/* Arrival Location
+   For trip titles, e.g., 'To work' */
 "PrimaryLocationEnd" = "Para %@";
 
 /* Departure Location */
 "PrimaryLocationStart" = "De %@";
-
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "Em %@";
@@ -130,6 +133,9 @@
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Pesquisar essa parada novamente ou tentar mais tarde.";
+
+/* Send SMS action */
+"Send SMS" = "Enviar SMS";
 
 /* Show website action */
 "Show website" = "Mostrar website";
@@ -148,4 +154,10 @@
 
 /* Vehicle updated */
 "VehicleUpdated" = "Atualizado %@ atrás";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch um Taxi";
+
+/* No comment provided by engineer. */
+"ingogo a Taxi" = "ingogo um Taxi";
 

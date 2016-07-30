@@ -188,6 +188,8 @@
 		3A8D9FC61D2B7D2C00078950 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A8D9FC81D2B7D3200078950 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3A8D9FCA1D2B7D3800078950 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3AAE31611D4C500500961C69 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AAE31621D4C500500961C69 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C6231D1CD0060089F687 /* TripKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKit.h; sourceTree = "<group>"; };
 		3AB6C6251D1CD0060089F687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1041,6 +1043,7 @@
 				3A4255F91D49E0CB00271178 /* nl */,
 				3A4255FA1D49E0D700271178 /* zh-Hans */,
 				3A4255FB1D49E0EA00271178 /* es */,
+				3AAE31611D4C500500961C69 /* pt */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1054,6 +1057,7 @@
 				3A8D9FC61D2B7D2C00078950 /* nl */,
 				3A8D9FC81D2B7D3200078950 /* zh-Hans */,
 				3A8D9FCA1D2B7D3800078950 /* zh-Hant */,
+				3AAE31621D4C500500961C69 /* pt */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
