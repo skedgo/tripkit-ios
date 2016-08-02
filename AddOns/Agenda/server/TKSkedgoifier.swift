@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import SGCoreKit
+
 extension TKSkedgoifier {
   /**
    - warning: While this basically implements the `TKAgendaBuilderType`, you can't use it multi-threaded. You're encouraged to use `TKCachedSkedgoifier` instead which is multi-threading safe (and does caching, too).

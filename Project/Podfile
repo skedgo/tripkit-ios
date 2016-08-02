@@ -6,6 +6,7 @@ platform :ios, '8.0'
 
 def shared_pods
   pod 'SGCoreKit/Core', git: 'https://github.com/skedgo/shared-ios.git'
+  pod 'SGCoreKit/Rx',   git: 'https://github.com/skedgo/shared-ios.git'
   pod 'SGSearchKit',    git: 'https://github.com/skedgo/shared-ios.git'
   pod 'SGUIKit',        git: 'https://github.com/skedgo/shared-ios.git'
   pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git'

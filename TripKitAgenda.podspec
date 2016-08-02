@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   
   s.prefix_header_file = "prefix.pch"
 
+  s.dependency 'SGCoreKit/Rx'
   s.dependency 'TripKit/Core'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'
