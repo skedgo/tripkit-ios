@@ -9,23 +9,35 @@
 import Foundation
 
 import RxSwift
+import SwiftyJSON
 
-public protocol RealTimeInfo {
-  var localizedTitle: String { get }
-}
+import SGCoreKit
 
 public enum TKLocationRealTime {
   
-  private struct CarParkInfo : RealTimeInfo {
-    let available: Int
+  public static func rx_fetchRealTime(named: SGNamedCoordinate) -> Observable<LocationInformation> {
     
-    var localizedTitle: String {
-      let format = NSLocalizedString("%@ available", comment: "Availability indicator for a car park")
-      return String(format: format, available.description) // TODO: Use number formatter
-    }
-  }
-  
-  public static func rx_fetchRealTime(locationId: String) -> Observable<RealTimeInfo> {
-    return Observable.just(CarParkInfo(available: 5))
+    return SVKServer.sharedInstance()
+      .rx_requireRegion(named.coordinate)
+      .flatMap { region -> Observable<LocationInformation> in
+        var paras: [String: AnyObject] = [
+          "realtime" : true
+        ]
+        if let identifier = named.locationID {
+          paras["identifier"] = identifier
+        } else {
+          paras["lat"] = named.coordinate.latitude
+          paras["lng"] = named.coordinate.longitude
+        }
+        
+        return SVKServer.sharedInstance().rx_hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { _ in
+          return true // keep hitting ad infinitum
+          }
+          .map { status, json in
+            return LocationInformation(response: json?.dictionaryObject)
+          }
+          .filter { $0 != nil }
+          .map { $0! }
+      }
   }
 }

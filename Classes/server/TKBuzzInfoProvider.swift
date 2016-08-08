@@ -156,32 +156,70 @@ extension TKBuzzInfoProvider {
   }
 }
 
+public struct CarParkInfo {
+  public let identifier: String
+  public let name: String
+  public let availableSpaces: Int?
+  public let totalSpaces: Int?
+  public let lastUpdate: NSDate?
+}
+
 public class LocationInformation : NSObject {
   public let what3word: String?
   public let what3wordInfoURL: NSURL?
   
   public let transitStop: STKStopAnnotation?
   
-  private init(what3word: String?, what3wordInfoURL: String?, transitStop: STKStopAnnotation?) {
+  public let carParkInfo: CarParkInfo?
+  
+  private init(what3word: String?, what3wordInfoURL: String?, transitStop: STKStopAnnotation?, carParkInfo: CarParkInfo?) {
     self.what3word = what3word
     if let URLString = what3wordInfoURL {
       self.what3wordInfoURL = NSURL(string: URLString)
     } else {
       self.what3wordInfoURL = nil
     }
+    
     self.transitStop = transitStop
+    self.carParkInfo = carParkInfo
+  }
+}
+
+extension CarParkInfo {
+  
+  private init?(response: AnyObject?) {
+    guard
+      let JSON = response as? [String: AnyObject],
+    let identifier = JSON["identifier"] as? String,
+      let name = JSON["name"] as? String
+      else {
+        return nil
+    }
+    
+    self.identifier = identifier
+    self.name = name
+    self.availableSpaces = JSON["availableSpaces"] as? Int
+    self.totalSpaces = JSON["totalSpaces"] as? Int
+    if let seconds = JSON["lastUpdate"] as? NSTimeInterval {
+      self.lastUpdate = NSDate(timeIntervalSince1970: seconds)
+    } else {
+      self.lastUpdate = nil
+    }
   }
   
-  private class func fromJSONResponse(response: AnyObject?) -> LocationInformation? {
-    
+}
+
+extension LocationInformation {
+  
+  public convenience init?(response: AnyObject?) {
     guard let JSON = response as? [String: AnyObject] else {
       return nil
     }
-
+    
     let details = JSON["details"] as? [String: AnyObject]
     let what3word = details?["w3w"] as? String
     let what3wordInfoURL = details?["w3wInfoURL"] as? String
-
+    
     let stop: STKStopAnnotation?
     if let stopJSON = JSON["stop"] as? [String: AnyObject] {
       stop = TKParserHelper.simpleStopFromDictionary(stopJSON)
@@ -189,9 +227,10 @@ public class LocationInformation : NSObject {
       stop = nil
     }
     
-    return LocationInformation(what3word: what3word, what3wordInfoURL: what3wordInfoURL, transitStop: stop)
+    let carParkInfo = CarParkInfo(response: JSON["carPark"])
+    
+    self.init(what3word: what3word, what3wordInfoURL: what3wordInfoURL, transitStop: stop, carParkInfo: carParkInfo)
   }
-  
 }
 
 extension TKBuzzInfoProvider {
@@ -212,8 +251,7 @@ extension TKBuzzInfoProvider {
       parameters: paras,
       region: region,
       success: { _, response in
-        let result = LocationInformation.fromJSONResponse(response)
-        completion(result)
+        completion(LocationInformation(response: response))
       },
       failure: { _ in
         completion(nil)
