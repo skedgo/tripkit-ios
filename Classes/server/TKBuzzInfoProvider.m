@@ -556,6 +556,9 @@ typedef enum {
 + (BOOL)addStop:(StopLocation *)stop
    fromResponse:(id)responseObject
 {
+  if ([responseObject count] == 0) {
+    return NO;
+  }
   ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
   NSManagedObjectContext *tripKitContext = stop.managedObjectContext;
