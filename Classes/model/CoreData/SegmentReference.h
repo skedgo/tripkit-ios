@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Trip, SegmentTemplate, Service;
+@class Trip, SegmentTemplate, Service, Vehicle;
 @protocol STKVehicular;
 
 @interface SegmentReference : NSManagedObject
@@ -27,6 +27,8 @@
 @property (nonatomic, retain) SegmentTemplate *segmentTemplate;
 @property (nonatomic, retain) Trip *trip;
 @property (nonatomic, retain) Service *service;
+@property (nonatomic, retain) Vehicle *realTimeVehicle;
+@property (nonatomic, retain) NSSet *realTimeVehicleAlternatives;
 
 #pragma mark Helper
 
@@ -50,5 +52,14 @@
 
 - (void)setPayload:(id)payload forKey:(NSString *)key;
 - (id)payloadForKey:(NSString *)key;
+
+@end
+
+@interface SegmentReference (CoreDataGeneratedAccessors)
+
+- (void)addRealTimeVehicleAlternativesObject:(Vehicle *)value;
+- (void)RealTimeVehicleAlternatives:(Vehicle *)value;
+- (void)addRealTimeVehicleAlternatives:(NSSet *)values;
+- (void)removeRealTimeVehicleAlternatives:(NSSet *)values;
 
 @end

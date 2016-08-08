@@ -8,7 +8,7 @@
 
 #import "SegmentReference.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 enum {
   SGSegmentFlagTimesAreRealtime = 1 << 0,
@@ -28,6 +28,7 @@ typedef NSUInteger SGSegmentFlag;
 @dynamic toDelete;
 @dynamic trip;
 @dynamic service;
+@dynamic realTimeVehicle, realTimeVehicleAlternatives;
 
 + (void)removeOrphansFromManagedObjectContext:(NSManagedObjectContext *)context
 {

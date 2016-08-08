@@ -6,11 +6,10 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import <MapKit/MapKit.h>
-
-#import "STKTransportKit.h"
+@import Foundation;
+@import CoreData;
+@import MapKit;
+@import SGCoreKit;
 
 @class TKSegment, SegmentTemplate, Service, StopVisits;
 

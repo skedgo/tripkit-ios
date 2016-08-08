@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @interface TKParserHelper : STKParserHelper
 
@@ -40,10 +40,9 @@ forRealTimeStatusString:(NSString *)realTimeStatus;
                   primaryVehicle:(NSDictionary *)primaryVehicleDict
              alternativeVehicles:(NSArray *)alternativeVehicleDicts;
 
-+ (Vehicle *)insertNewVehicle:(NSDictionary *)vehicleDict
-             inTripKitContext:(NSManagedObjectContext *)context;
-
-+ (void)updateVehicle:(Vehicle *)vehicle fromDictionary:(NSDictionary *)vehicleDict;
++ (void)updateVehiclesForSegmentReference:(SegmentReference *)reference
+                           primaryVehicle:(NSDictionary *)primaryVehicleDict
+                      alternativeVehicles:(NSArray *)alternativeVehicleDicts;
 
 #pragma mark - Stops
 
@@ -52,8 +51,6 @@ forRealTimeStatusString:(NSString *)realTimeStatus;
 
 + (BOOL)updateStopLocation:(StopLocation *)stop
             fromDictionary:(NSDictionary *)stopDict;
-
-+ (SGStopCoordinate *)simpleStopFromDictionary:(NSDictionary *)stopDict;
 
 #pragma mark - Alerts
 

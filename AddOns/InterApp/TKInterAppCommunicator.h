@@ -14,6 +14,7 @@ typedef enum {
   TKInterAppCommunicatorITunesAppIDGoCatch  = 444439909,
   TKInterAppCommunicatorITunesAppIDIngogo   = 463995190,
   TKInterAppCommunicatorITunesAppIDLyft     = 529379082,
+  TKInterAppCommunicatorITunesAppIDOla      = 539179365,
   
 } TKInterAppCommunicatorITunesAppID;
 
@@ -59,6 +60,15 @@ NS_ASSUME_NONNULL_BEGIN
                openURLHandler:(nullable void (^)(NSURL * __nonnull, NSString * __nullable))openURLHandler
              openStoreHandler:(nullable void (^)(NSNumber * __nonnull))openStoreHandler
             completionHandler:(nullable void (^)(NSString * __nonnull))completionHandler;
+
++ (void)performExternalAction:(NSString *)action
+                       titled:(NSString *)title
+                   forSegment:(TKSegment *)segment
+            forViewController:(UIViewController * __nonnull)controller
+       currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
+               openURLHandler:(nullable void (^)(NSURL *url, NSString * __nullable title))openURLHandler
+             openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler;
+
 
 @end
 

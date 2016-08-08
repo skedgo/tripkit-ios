@@ -6,10 +6,9 @@
 //  Copyright 2011 SkedGo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-
-#import "SVKTransportModes.h"
+@import Foundation;
+@import CoreLocation;
+@import SGCoreKit;
 
 @class TripRequest, TKTripKit;
 

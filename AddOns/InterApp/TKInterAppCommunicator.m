@@ -10,6 +10,8 @@
 
 #import "TKTripKit.h"
 
+#import <TripKit/TripKit-Swift.h>
+
 #import "SGKConfig+TKInterAppCommunicator.h"
 
 #import "SGActions.h"
@@ -44,17 +46,17 @@
     [self openSegmentInAppleMaps:segment currentLocationHandler:currentLocationHandler];
     
   } else {
-    SGActions *actions = [[SGActions alloc] initWithTitle:NSLocalizedStringFromTable(@"Get directions", @"TripKit", "Action button title for getting turn-by-turn directions")];
+    SGActions *actions = [[SGActions alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Get directions", @"TripKit", [TKTripKit bundle], "Action button title for getting turn-by-turn directions")];
     
     __weak TKSegment *directionsSegment = segment;
-    [actions addAction:NSLocalizedStringFromTable(@"Apple Maps", @"TripKit", @"apple maps directions action")
+    [actions addAction:NSLocalizedStringFromTableInBundle(@"Apple Maps", @"TripKit", [TKTripKit bundle], @"apple maps directions action")
                handler:
      ^{
        [TKInterAppCommunicator openSegmentInAppleMaps:directionsSegment currentLocationHandler:currentLocationHandler];
      }];
     
     if (hasGoogleMaps) {
-      [actions addAction:NSLocalizedStringFromTable(@"Google Maps", @"TripKit", @"google maps directions action")
+      [actions addAction:NSLocalizedStringFromTableInBundle(@"Google Maps", @"TripKit", [TKTripKit bundle], @"google maps directions action")
                  handler:
        ^{
          [TKInterAppCommunicator openSegmentInGoogleMapsApp:directionsSegment currentLocationHandler:currentLocationHandler];
@@ -235,39 +237,44 @@
 + (NSString *)titleForExternalAction:(NSString *)action
 {
   if ([action isEqualToString:@"gocatch"]) {
-    return NSLocalizedStringFromTable(@"goCatch a Taxi", @"TripKit", @"goCatch action");
+    return NSLocalizedStringFromTableInBundle(@"goCatch a Taxi", @"TripKit", [TKTripKit bundle], @"goCatch action");
     
   } else if ([action isEqualToString:@"uber"]) {
-    return NSLocalizedStringFromTable(@"Book with Uber", @"TripKit", nil);
+    return NSLocalizedStringFromTableInBundle(@"Book with Uber", @"TripKit", [TKTripKit bundle], nil);
     
   } else if ([action isEqualToString:@"ingogo"]) {
     return [self deviceHasIngogo]
-    ? NSLocalizedStringFromTable(@"ingogo a Taxi", @"TripKit", nil)
-    : NSLocalizedStringFromTable(@"Get ingogo", @"TripKit", nil);
+    ? NSLocalizedStringFromTableInBundle(@"ingogo a Taxi", @"TripKit", [TKTripKit bundle], nil)
+    : NSLocalizedStringFromTableInBundle(@"Get ingogo", @"TripKit", [TKTripKit bundle], nil);
     
   } else if ([action hasPrefix:@"lyft"]) { // also lyft_line, etc.
     return [self deviceHasLyft]
-    ? NSLocalizedStringFromTable(@"Open Lyft", @"TripKit", nil)
-    : NSLocalizedStringFromTable(@"Get Lyft", @"TripKit", nil);
+    ? NSLocalizedStringFromTableInBundle(@"Open Lyft", @"TripKit", [TKTripKit bundle], nil)
+    : NSLocalizedStringFromTableInBundle(@"Get Lyft", @"TripKit", [TKTripKit bundle], nil);
     
+  } else if ([action isEqualToString:@"ola"]) {
+    return [self deviceHasOla]
+    ? NSLocalizedStringFromTableInBundle(@"Open Ola", @"TripKit", [TKTripKit bundle], nil)
+    : NSLocalizedStringFromTableInBundle(@"Get Ola", @"TripKit", [TKTripKit bundle], nil);
+
   } else if ([action isEqualToString:@"flitways"]) {
-    return NSLocalizedStringFromTable(@"Book with FlitWays", @"TripKit", nil);
+    return NSLocalizedStringFromTableInBundle(@"Book with FlitWays", @"TripKit", [TKTripKit bundle], nil);
     
   } else if ([action hasPrefix:@"tel:"] && [self canCall]) {
     NSRange nameRange = [action rangeOfString:@"name="];
     if (nameRange.location != NSNotFound) {
       NSString *name = [action substringFromIndex:nameRange.location + nameRange.length];
       name = [name stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-      return [NSString stringWithFormat:NSLocalizedStringFromTable(@"CallTaxiFormat", @"TripKit", "Action title for calling provider of %name"), name];
+      return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"CallTaxiFormat", @"TripKit", [TKTripKit bundle], "Action title for calling provider of %name"), name];
     } else {
-      return NSLocalizedStringFromTable(@"Call", @"TripKit", nil);
+      return NSLocalizedStringFromTableInBundle(@"Call", @"TripKit", [TKTripKit bundle], nil);
     }
     
   } else if ([action hasPrefix:@"sms:"] && [self canSendSMS]) {
-    return NSLocalizedStringFromTable(@"Send SMS", @"TripKit", @"Send SMS action");
+    return NSLocalizedStringFromTableInBundle(@"Send SMS", @"TripKit", [TKTripKit bundle], @"Send SMS action");
     
   } else if ([action hasPrefix:@"http:"] || [action hasPrefix:@"https:"]) {
-    return NSLocalizedStringFromTable(@"Show website", @"TripKit", @"Show website action");
+    return NSLocalizedStringFromTableInBundle(@"Show website", @"TripKit", [TKTripKit bundle], @"Show website action");
     
   } else {
     return nil;
@@ -290,6 +297,10 @@
     [self launchUberForSegment:segment
         currentLocationHandler:currentLocationHandler
                 openURLHandler:openURLHandler];
+
+  } else if ([action isEqualToString:@"ola"]) {
+    [self launchOlaForSegment:segment
+             openStoreHandler:openStoreHandler];
     
   } else if ([action isEqualToString:@"ingogo"]) {
     [self launchIngogoForSegment:segment
@@ -304,11 +315,15 @@
     [self launchFlitWaysForSegment:segment
                     openURLHandler:openURLHandler];
     
-  } else if ([self canCall] && [action hasPrefix:@"tel:"]) {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]];
+  } else if ([action hasPrefix:@"tel:"]) {
+    if ([self canCall]) {
+      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]];
+    }
     
-  } else if ([self canSendSMS] && [action hasPrefix:@"sms:"]) {
-    [self composeSMS:action forViewController:controller];
+  } else if ([action hasPrefix:@"sms:"]) {
+    if ([self canSendSMS]) {
+      [self composeSMS:action forViewController:controller];
+    }
     
   } else if ([action hasPrefix:@"http:"] || [action hasPrefix:@"https:"]) {
     NSURL *url = [NSURL URLWithString:action];
@@ -349,6 +364,7 @@
         || ([action isEqualToString:@"ingogo"]   && [self deviceHasIngogo])
         || ([action isEqualToString:@"uber"]     && [self deviceHasUber])
         || ([action isEqualToString:@"flitways"] && [self deviceHasFlitWays])
+        || ([action isEqualToString:@"ola"]      && [self deviceHasOla])
         || ([action hasPrefix:@"lyft"]           && [self deviceHasLyft]) // also lyft_line, etc.
         ) {
       [sortedActions insertObject:action atIndex:startIndex++];
@@ -367,6 +383,11 @@
 + (BOOL)deviceHasGoCatch
 {
   return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"gocatch:"]];
+}
+
++ (BOOL)deviceHasOla
+{
+  return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"olacabs:"]];
 }
 
 + (BOOL)deviceHasUber
@@ -533,6 +554,36 @@
     } else {
       [[UIApplication sharedApplication] openURL:url];
     }
+  }
+}
+
++ (void)launchOlaForSegment:(TKSegment *)segment
+           openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
+{
+  if ([self deviceHasOla]) {
+    // http://developers.olacabs.com/docs/deep-linking
+    
+    NSMutableString *urlString = [NSMutableString stringWithString:@"olacabs://app/launch?landing_page=bk"];
+    
+    // from
+    id<MKAnnotation> startAnnotation = [segment start];
+    CLLocationCoordinate2D start = [startAnnotation coordinate];
+    [urlString appendFormat:@"&lat=%.5f&lng=%.5f", start.latitude, start.longitude];
+    
+    // partner tracking
+    NSString *token = [[SGKConfig sharedInstance] olaXAPPToken];
+    if (token.length > 0) {
+      [urlString appendFormat:@"&utm_source=%@", token];
+    }
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    
+  } else if (openStoreHandler) {
+    openStoreHandler(@(TKInterAppCommunicatorITunesAppIDOla));
+    
+  } else {
+    NSString *URLString = [NSString stringWithFormat:@"https://itunes.apple.com/in/app/olacabs/id%d?mt=8", TKInterAppCommunicatorITunesAppIDOla];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
   }
 }
 

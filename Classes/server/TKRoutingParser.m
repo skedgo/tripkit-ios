@@ -8,7 +8,7 @@
 
 #import "TKRoutingParser.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @interface TKRoutingParser ()
 
@@ -343,7 +343,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
                 allowDuplicatingExistingTrip:(BOOL)allowDuplicates
 {
   ZAssert(self.context, @"Managed object context required!");
-  
+    
   // let's check if the request is still alive
   if (! request) {
     request = insertIntoGroup.request;
@@ -418,6 +418,11 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       // updated trip isn't strictly speaking new, but we want to process it as a successful match.
       [newTrips addObject:trip];
       
+      NSMutableArray *unmatchedSegmentReferences = nil;
+      if (tripToUpdate) {
+        unmatchedSegmentReferences = [tripToUpdate.segmentReferences mutableCopy];
+      }
+      
       int segmentCount = 0;
       for (NSDictionary *refDict in tripDict[@"segments"]) {
         // create the reference object
@@ -426,14 +431,22 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         NSDictionary *unprocessedTemplateDict = segmentHashToTemplateDictionaryDict[[hashCode description]];
         
         if (tripToUpdate) {
-          for (SegmentReference *existingReference in tripToUpdate.segmentReferences) {
+          for (SegmentReference *existingReference in unmatchedSegmentReferences) {
             if ([existingReference.templateHashCode isEqualToNumber:hashCode]) {
               reference = existingReference;
               break;
             }
           }
-        } else if (unprocessedTemplateDict
-                   || YES == [SegmentTemplate segmentTemplateHashCode:hashCode existsInTripKitContext:self.context]) {
+          if (reference) {
+            [unmatchedSegmentReferences removeObject:reference];
+          } else {
+            [trip clearSegmentCaches];
+          }
+        }
+        
+        if (!reference
+            && (unprocessedTemplateDict
+                   || YES == [SegmentTemplate segmentTemplateHashCode:hashCode existsInTripKitContext:self.context])) {
           reference = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SegmentReference class]) inManagedObjectContext:self.context];
         }
         
@@ -476,27 +489,23 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           NSString *realTimeStatus = refDict[@"realTimeStatus"];
           [TKParserHelper adjustService:service forRealTimeStatusString:realTimeStatus];
           
-          // keep the vehicle
-          NSDictionary *vehicleDict = refDict[@"realtimeVehicle"];
-          if (vehicleDict) {
-            if (service.vehicle != nil) {
-              // update the vehicle
-              [TKParserHelper updateVehicle:service.vehicle fromDictionary:vehicleDict];
-            } else {
-              // add the vehicle
-              Vehicle *vehicle = [TKParserHelper insertNewVehicle:vehicleDict
-                                                 inTripKitContext:self.context];
-              vehicle.service = service;
-            }
-          }
+          // keep the vehicles
+          [TKParserHelper updateVehiclesForService:service
+                                    primaryVehicle:refDict[@"realtimeVehicle"]
+                               alternativeVehicles:refDict[@"realtimeVehicleAlternatives"]];
           
         } else {
           // private transport
-          [reference setBookingData:refDict[@"booking"]];
           [reference setSharedVehicleData:refDict[@"sharedVehicle"]];
           [reference setVehicleUUID:refDict[@"vehicleUUID"]];
+          [TKParserHelper updateVehiclesForSegmentReference:reference
+                                             primaryVehicle:refDict[@"realtimeVehicle"]
+                                        alternativeVehicles:nil];
         }
-        
+
+        NSDictionary *bookingData = [self mergedNewBookingData:refDict[@"booking"] into:reference.bookingData];
+        [reference setBookingData:bookingData];
+
         reference.templateHashCode = hashCode;
         reference.startTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"startTime"] integerValue]];
         reference.endTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"endTime"] integerValue]];
@@ -523,6 +532,14 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         reference.index = @(segmentCount++);
         reference.trip = trip;
       }
+      
+      // Clean-up unmatched references
+      if (unmatchedSegmentReferences.count > 0) {
+        for (SegmentReference *unmatched in unmatchedSegmentReferences) {
+          [self.context deleteObject:unmatched];
+        }
+      }
+      ZAssert(trip.segmentReferences.count > 0, @"Trip has no segments: %@", trip);
     }
     
     if (newTrips.count > 0) {
@@ -590,6 +607,23 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
     tripToUpdate.tripGroup.visibility = updateTripVisibility;
   }
   return tripsToReturn;
+}
+
+- (nullable NSDictionary *)mergedNewBookingData:(nullable NSDictionary *)newData into:(nullable NSDictionary *)oldData
+{
+  if (!newData) {
+    return oldData;
+  }
+  if (!oldData) {
+    return newData;
+  }
+  
+  NSMutableDictionary *merged = [oldData mutableCopy];
+  [newData enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+#pragma unused(stop)
+    [merged setObject:obj forKey:key];
+  }];
+  return merged;
 }
 
 @end

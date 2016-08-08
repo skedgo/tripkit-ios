@@ -48,11 +48,21 @@ NS_ASSUME_NONNULL_BEGIN
   intoTripKitContext:(NSManagedObjectContext *)tripKitContext
           completion:(void(^)(Trip * __nullable trip))completion;
 
+- (void)downloadTrip:(NSURL *)url
+          identifier:(nullable NSString *)identifier
+  intoTripKitContext:(NSManagedObjectContext *)tripKitContext
+          completion:(void(^)(Trip * __nullable trip))completion;
+
 - (void)updateTrip:(Trip *)trip
         completion:(void(^)(Trip * __nullable trip))completion;
 
 - (void)updateTrip:(Trip *)trip
 completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion;
+
+- (void)updateTrip:(Trip *)trip
+           fromURL:(NSURL *)URL
+           aborter:(nullable BOOL(^)(NSURL *URL))aborter
+        completion:(void(^)(NSURL *URL, Trip * __nullable trip, NSError * __nullable error))completion;
 
 + (NSString *)urlForRoutingRequest:(TripRequest *)tripRequest
                withModeIdentifiers:(nullable NSSet *)modeIdentifiers;

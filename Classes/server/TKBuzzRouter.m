@@ -8,7 +8,8 @@
 
 #import "TKBuzzRouter.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 #import "TripRequest+Classify.h"
 
@@ -143,22 +144,51 @@
   intoTripKitContext:(NSManagedObjectContext *)tripKitContext
           completion:(void(^)(Trip * __nullable trip))completion
 {
+  [self downloadTrip:url identifier:nil intoTripKitContext:tripKitContext completion:completion];
+}
+
+- (void)downloadTrip:(NSURL *)url
+          identifier:(nullable NSString *)identifier
+  intoTripKitContext:(NSManagedObjectContext *)tripKitContext
+          completion:(void(^)(Trip * __nullable trip))completion
+{
+  if (!identifier) {
+    NSUInteger hash = [[url absoluteString] hash];
+    identifier = [NSString stringWithFormat:@"%lu", hash];
+  }
+  
+  TKJSONCacheDirectory directory = TKJSONCacheDirectoryDocuments;
+
+  void (^withJSON)(id, NSURL * _Nullable) = ^void(id JSON, NSURL * _Nullable shareURL) {
+    [self parseJSON:JSON forTripKitContext:tripKitContext completion:
+     ^(Trip *trip) {
+       if (shareURL) {
+         trip.shareURL = shareURL;
+       }
+       trip.request.expandForFavorite = YES;
+       if (completion) {
+         completion(trip);
+       }
+     }];
+  };
+  
   [self hitURLForTripDownload:url completion:
    ^(NSURL *shareURL, id JSON, NSError *error) {
      if (JSON) {
-       [self parseJSON:JSON
-     forTripKitContext:tripKitContext
-            completion:^(Trip *trip) {
-         trip.shareURL = shareURL;
-         if (completion) {
-           completion(trip);
-         }
-       }];
+       [TKJSONCache save:identifier dictionary:JSON directory:directory];
+       withJSON(JSON, shareURL);
+       
      } else {
-       // failure
-       [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to trip. Error: %@", error];
-       if (completion) {
-         completion(nil);
+       NSDictionary *JSON = [TKJSONCache read:identifier directory:directory];
+       if (JSON) {
+         withJSON(JSON, nil);
+       } else {
+         
+         // failure
+         [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to download trip, and no copy in cache. Error: %@", error];
+         if (completion) {
+           completion(nil);
+         }
        }
      }
     }];
@@ -204,6 +234,32 @@
 #pragma unused(tripGotUpdated)
         completion(updatedTrip);
     }];
+}
+
+- (void)updateTrip:(Trip *)trip
+           fromURL:(NSURL *)URL
+           aborter:(nullable BOOL(^)(NSURL *URL))aborter
+        completion:(void(^)(NSURL *URL, Trip * __nullable trip, NSError * __nullable error))completion
+{
+  [self hitURLForTripDownload:URL
+                   completion:
+   ^(NSURL *shareURL, id JSON, NSError *error) {
+#pragma unused(shareURL)
+    if (JSON) {
+      if (aborter && aborter(URL)) {
+        return;
+      }
+      
+      [self parseJSON:JSON
+         updatingTrip:trip
+           completion:
+       ^(Trip *updatedTrip) {
+         completion(URL, updatedTrip, nil);
+      }];
+    } else {
+      completion(URL, nil, error);
+    }
+  }];
 }
 
 
@@ -313,7 +369,8 @@
                          region:region
                  callbackOnMain:NO
                         success:
-     ^(id responseObject) {
+     ^(NSInteger status, id responseObject) {
+#pragma unused(status)
        typeof(weakSelf) strongSelf2 = weakSelf;
        if (! strongSelf2) {
          return;
@@ -375,9 +432,10 @@
     }
   }
   
-  // create the request
+  // Hit it
   [SVKServer GET:baseURL paras:paras completion:
-   ^(id  _Nullable responseObject, NSError * _Nullable error) {
+   ^(NSInteger status, id  _Nullable responseObject, NSError * _Nullable error) {
+#pragma unused(status)
      completion(baseURL, responseObject, error);
    }];
 }
@@ -567,7 +625,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   ZAssert(tripKitContext != nil, @"Managed object context required!");
   
   // analyse result
-  NSError *serverError = [SVKError errorFromJSONErrorDictionary:json];
+  NSError *serverError = [SVKError errorFromJSON:json];
   if (serverError) {
     [SGKLog warn:NSStringFromClass([self class]) format:@"Encountered server error: %@", serverError];
 		[self handleError:serverError

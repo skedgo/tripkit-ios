@@ -40,49 +40,52 @@
 "Arrive" = "Llegar";
 
 /* No comment provided by engineer. */
+"Book with FlitWays" = "Reservar con FlitWays";
+
+/* No comment provided by engineer. */
+"Book with Uber" = "Resevar con Uber";
+
+/* Placeholder title while calculating trips */
+"Calculating trips..." = "Calculando viajes...";
+
+/* No comment provided by engineer. */
 "Call" = "Llamar";
 
 /* Action title for calling provider of %name */
 "CallTaxiFormat" = "Llamar a %@";
 
-/* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Could not find transit stop.";
+/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
+"Connect to Internet to get trips" = "Conéctate a Internet para obtener viajes";
 
-/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
-"CouponCodeIngogoFormat" = "Ingrese el código del cupón '%@' al momento de registrarse para obtener sus $5 de crédito gratuitos (sólo válido para nuevos usuarios)";
+/* Error title when server could not find a given transit stop. */
+"Could not find transit stop." = "No se pudo encontrar la parada.";
 
 /* Departure time sorter title */
 "Departure" = "Partida";
 
 /* Time of the bus departure */
-"DepartureTime" = " a las %@";
+"DepartureTime" = "a las %@";
 
 /* Destination of the bus */
 "Direction" = "Dirección: %@";
 
 /* Walking time */
-"Duration" = " por %@";
-
-/* Action button title for getting turn-by-turn directions */
-"Get directions" = "Get directions";
-
-/* No comment provided by engineer. */
-"Get ingogo" = "Obtener ingogo";
+"Duration" = "por %@";
 
 /* No comment provided by engineer. */
 "Get Lyft" = "Obtener Lyft";
 
 /* No comment provided by engineer. */
-"Get Uber" = "Obtener Uber";
+"Get Ola" = "Obtener Ola";
 
-/* goCatch action */
-"goCatch a Taxi" = "goCatch un Taxi";
+/* Action button title for getting turn-by-turn directions */
+"Get directions" = "Obtener instrucciones";
+
+/* No comment provided by engineer. */
+"Get ingogo" = "Obtener ingogo";
 
 /* google maps directions action */
 "Google Maps" = "Google Maps";
-
-/* No comment provided by engineer. */
-"ingogo a Taxi" = "ingogo un Taxi";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -107,22 +110,20 @@
 "MessageArrivalTime" = "Voy a llegar a %@ a las %@.";
 
 /* Indicator to show when a service is on time according to real-time data. */
-"On time" = "On time";
+"On time" = "A tiempo";
 
 /* No comment provided by engineer. */
 "Open Lyft" = "Abrir Lyft";
 
 /* No comment provided by engineer. */
-"Open Uber" = "Abrir Uber";
+"Open Ola" = "Abrir Ola";
 
-/* Arrival Location */
+/* Arrival Location
+   For trip titles, e.g., 'To work' */
 "PrimaryLocationEnd" = "Hacia %@";
 
 /* Departure Location */
 "PrimaryLocationStart" = "Desde %@";
-
-/* Favorite trip 'to' title */
-"To" = "To";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
 "PrimaryLocationStationary" = "En %@";
@@ -132,6 +133,9 @@
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Search for this stop again or try again later.";
+
+/* Send SMS action */
+"Send SMS" = "Enviar SMS";
 
 /* Show website action */
 "Show website" = "Ir al Sitio Web";
@@ -150,4 +154,10 @@
 
 /* Vehicle updated */
 "VehicleUpdated" = "Actualizado hace %@";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch un Taxi";
+
+/* No comment provided by engineer. */
+"ingogo a Taxi" = "ingogo un Taxi";
 

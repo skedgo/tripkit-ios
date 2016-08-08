@@ -1,0 +1,27 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/skedgo/PodSpecs.git'
+
+use_frameworks!
+platform :ios, '8.0'
+
+def shared_pods
+  pod 'SGCoreKit/Core', git: 'https://github.com/skedgo/shared-ios.git'
+  pod 'SGCoreKit/Rx',   git: 'https://github.com/skedgo/shared-ios.git'
+  pod 'SGSearchKit',    git: 'https://github.com/skedgo/shared-ios.git'
+  pod 'SGUIKit',        git: 'https://github.com/skedgo/shared-ios.git'
+  pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git'
+  
+  pod 'RxSwift'
+  pod 'RxCocoa'
+end
+
+target 'TripKit' do
+  shared_pods
+end
+
+target 'TripKitTests' do
+  shared_pods
+  
+  pod 'RxBlocking', '~> 2.0'
+  pod 'RxTests',    '~> 2.0'
+end

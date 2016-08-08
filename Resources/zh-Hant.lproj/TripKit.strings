@@ -48,29 +48,25 @@
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Could not find transit stop.";
 
-/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
-"CouponCodeIngogoFormat" = "註冊時使用優惠券代碼'%@'可立時折抵$5元 (只適用新註冊使用者)";
-
 /* Departure time sorter title */
 "Departure" = "離站";
 
 /* Time of the bus departure */
-"DepartureTime" = " 於%@";
+"DepartureTime" = "於%@";
 
 /* Destination of the bus */
 "Direction" = "方向: %@";
 
 /* Walking time */
-"Duration" = " %@";
+"Duration" = "%@";
 
 /* No comment provided by engineer. */
 "Get Lyft" = "使用Lyft";
 
 /* No comment provided by engineer. */
-"Get Uber" = "使用Uber";
 
 /* Action button title for getting turn-by-turn directions */
-"Get directions" = "Get directions";
+"Get directions" = "使用導航";
 
 /* No comment provided by engineer. */
 "Get ingogo" = "使用Ingogo";
@@ -107,11 +103,8 @@
 "Open Lyft" = "開啟Lyft";
 
 /* No comment provided by engineer. */
-"Open Uber" = "開啟Uber";
 
-/* Arrival Location
-   For trip titles, e.g., 'To work'
-   Format string for going from currently location to this one. Used to name favourite destinations. */
+/* Arrival Location */
 "PrimaryLocationEnd" = "目的地: %@";
 
 /* Departure Location */
@@ -134,9 +127,6 @@
 
 /* From %time1 to %time2 */
 "TimeFromToShortFormat" = "%@ ～ %@";
-
-/* No comment provided by engineer. */
-"To %@" = "前往 %@";
 
 /* No comment provided by engineer. */
 "Trip" = "旅程";

@@ -8,7 +8,10 @@
 
 #import "Trip.h"
 
-#import "TKTripKit.h"
+@import SGCoreKit;
+
+#import <TripKit/TKTripKit.h>
+
 
 #import "TKRealTimeUpdatableHelper.h"
 
@@ -130,6 +133,11 @@ typedef NSUInteger SGTripFlag;
   } else {
     return nil;
   }
+}
+
+- (void)setShareURL:(NSURL *)shareURL
+{
+  self.shareURLString = [shareURL absoluteString];
 }
 
 - (NSString *)constructPlainText
@@ -272,6 +280,11 @@ typedef NSUInteger SGTripFlag;
   
   _sortedSegments = sorted;
   return _sortedSegments;
+}
+
+- (void)clearSegmentCaches
+{
+  _sortedSegments = nil;
 }
 
 - (BOOL)timesAreRealTime
@@ -614,6 +627,25 @@ typedef NSUInteger SGTripFlag;
   return [SVKTransportModes modeIdentifierIsExpensive:mainSegment.modeIdentifier];
 }
 
+- (BOOL)isMixedModal {
+  NSString *previousModeIdentifier;
+  for (TKSegment *segment in [self segments]) {
+    if ([segment isStationary]
+        || ([segment isWalking] && ![segment hasVisibility:STKTripSegmentVisibilityInSummary])) {
+      continue; // A stationary segment or short walk doesn't make a trip mixed-modal
+    }
+    NSString *modeIdentifier = [segment modeIdentifier];
+    if (modeIdentifier) {
+      if (previousModeIdentifier && ![previousModeIdentifier isEqualToString:modeIdentifier]) {
+        return YES;
+      } else {
+        previousModeIdentifier = modeIdentifier;
+      }
+    }
+  }
+  return NO;
+}
+
 - (NSString *)accessibilityLabel
 {
   // prepare accessibility title
@@ -655,12 +687,12 @@ typedef NSUInteger SGTripFlag;
   
   [accessibleLabel appendString:@" - "];
   if ([self departureTimeIsFixed]) {
-    NSString *format = NSLocalizedStringFromTable(@"TimeFromToShortFormat", @"TripKit", "From %time1 to %time2");
+    NSString *format = NSLocalizedStringFromTableInBundle(@"TimeFromToShortFormat", @"TripKit", [TKTripKit bundle], "From %time1 to %time2");
     [accessibleLabel appendFormat:format, [sTripAccessibilityDateFormatter stringFromDate:[self departureTime]], [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]]];
     [accessibleLabel appendFormat:@" - %@", [self durationString]];
   } else {
     [accessibleLabel appendFormat:@"%@ - ", [self durationString]];
-    NSString *format = NSLocalizedStringFromTable(@"ArrivalTime", @"TripKit", "Arrival %time.");
+    NSString *format = NSLocalizedStringFromTableInBundle(@"ArrivalTime", @"TripKit", [TKTripKit bundle], "Arrival %time.");
     [accessibleLabel appendFormat:format, [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]]];
   }
   
@@ -670,7 +702,7 @@ typedef NSUInteger SGTripFlag;
 
 - (NSString *)durationString
 {
-  return [self.arrivalTime durationStringLongSince:self.departureTime];
+  return [self.arrivalTime durationLongSince:self.departureTime];
 }
 
 - (NSDictionary *)accessibleCostValues
@@ -756,13 +788,6 @@ typedef NSUInteger SGTripFlag;
   return [self.request localRegion];
 }
 
-#pragma mark - SGURLShareable
-
-- (void)setShareURL:(NSURL *)shareURL
-{
-  self.shareURLString = [shareURL absoluteString];
-}
-
 #pragma mark - UIActivityItemSource
 
 - (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
@@ -785,7 +810,7 @@ typedef NSUInteger SGTripFlag;
 - (NSString *)activityViewController:(UIActivityViewController *)activityViewController subjectForActivityType:(NSString *)activityType
 {
 #pragma unused(activityViewController, activityType)
-  return NSLocalizedStringFromTable(@"Trip", @"TripKit", nil);
+  return NSLocalizedStringFromTableInBundle(@"Trip", @"TripKit", [TKTripKit bundle], nil);
 }
 
 #pragma mark - Private methods

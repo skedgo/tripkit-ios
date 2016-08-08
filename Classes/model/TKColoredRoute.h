@@ -6,9 +6,8 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
-#import "STKRoutePolyline.h"
+@import Foundation;
+@import SGCoreKit;
 
 @interface TKColoredRoute : NSObject <STKDisplayableRoute>
 

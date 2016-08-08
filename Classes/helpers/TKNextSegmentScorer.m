@@ -8,7 +8,7 @@
 
 #import "TKNextSegmentScorer.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation Trip (NextSegment)
 
@@ -189,7 +189,8 @@
                        forLocation:(nullable CLLocation *)location
 {
 #pragma unused(segment, time, location)
-#warning TODO: implement scoring of generic STKTripSegment objects
+  // We don't use generic STKTripSegments currently, but once we do
+  // this is where to add a score.
   return 0;
 }
 

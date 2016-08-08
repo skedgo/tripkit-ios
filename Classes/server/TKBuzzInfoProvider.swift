@@ -145,7 +145,7 @@ extension TKBuzzInfoProvider {
       path: "regionInfo.json",
       parameters: paras,
       region: region,
-      success: { response in
+      success: { _, response in
         let result = transformer(response)
         completion(result)
       },
@@ -160,9 +160,9 @@ public class LocationInformation : NSObject {
   public let what3word: String?
   public let what3wordInfoURL: NSURL?
   
-  public let transitStop: TKStopAnnotation?
+  public let transitStop: STKStopAnnotation?
   
-  private init(what3word: String?, what3wordInfoURL: String?, transitStop: TKStopAnnotation?) {
+  private init(what3word: String?, what3wordInfoURL: String?, transitStop: STKStopAnnotation?) {
     self.what3word = what3word
     if let URLString = what3wordInfoURL {
       self.what3wordInfoURL = NSURL(string: URLString)
@@ -182,7 +182,7 @@ public class LocationInformation : NSObject {
     let what3word = details?["w3w"] as? String
     let what3wordInfoURL = details?["w3wInfoURL"] as? String
 
-    let stop: TKStopAnnotation?
+    let stop: STKStopAnnotation?
     if let stopJSON = JSON["stop"] as? [String: AnyObject] {
       stop = TKParserHelper.simpleStopFromDictionary(stopJSON)
     } else {
@@ -211,7 +211,7 @@ extension TKBuzzInfoProvider {
       path: "locationInfo.json",
       parameters: paras,
       region: region,
-      success: { response in
+      success: { _, response in
         let result = LocationInformation.fromJSONResponse(response)
         completion(result)
       },

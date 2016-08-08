@@ -6,8 +6,9 @@
 //  Copyright (c) 2011 SkedGo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
+@import SGCoreKit;
 
 @class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape;
 @class SVKRegion, ModeInfo;
@@ -31,13 +32,10 @@ typedef enum {
   BHSegmentTypeUnscheduled,
 } BHSegmentType;
 
-#import "STKTransportKit.h"
-#import "TKShareURLProvider.h"
-
 NS_ASSUME_NONNULL_BEGIN
-@interface TKSegment : NSObject <STKDirectionalTimePoint, SGURLShareable, UIActivityItemSource, STKTripSegment>
+@interface TKSegment : NSObject <STKDirectionalTimePoint, UIActivityItemSource, STKTripSegment>
 
-@property (nonatomic, strong, nonnull) id<MKAnnotation> start;
+@property (nonatomic, strong, nullable) id<MKAnnotation> start;
 @property (nonatomic, strong, nullable) id<MKAnnotation> end;
 
 @property (nonatomic, weak, nullable) TKSegment *previous;
@@ -94,6 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isStationary;
 - (BOOL)isSelfNavigating;
 - (BOOL)isSharedVehicle;
+- (BOOL)isAffectedByTraffic;
 - (BOOL)isFlight;
 - (BOOL)isImpossible;
 - (nullable NSNumber *)bearing;
@@ -102,6 +101,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)disclaimer;
 - (BOOL)isCanceled;
 - (BOOL)timesAreRealTime;
+- (Vehicle *)realTimeVehicle;
+- (NSArray <Vehicle *> *)realTimeAlternativeVehicles;
 
 - (BOOL)usesVehicle;
 
@@ -194,7 +195,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSString *)bookingTitle;
 - (nullable NSURL *)bookingInternalURL;
+- (nullable NSURL *)bookingQuickInternalURL;
 - (nullable NSArray<NSString *> *)bookingExternalActions;
+- (nullable NSDictionary<NSString*, id> *)bookingConfirmationDictionary;
 
 
 ///-----------------------------------------------------------------------------

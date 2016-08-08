@@ -8,7 +8,10 @@
 
 #import "TKSettings.h"
 
-#import "TKTripKit.h"
+#import "SGKBetaHelper.h"
+
+#import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 @implementation TKSettings
 
@@ -70,9 +73,15 @@
   [paras setValue:@(YES) forKey:@"ir"];
   
 #ifdef DEBUG
-  [paras setValue:@([sharedDefaults boolForKey:TKDefaultsKeyProfileBookingsUseSandbox]) forKey:@"bsb"];
+  NSNumber *bsbRaw = [sharedDefaults objectForKey:TKDefaultsKeyProfileBookingsUseSandbox];
+  if (bsbRaw) {
+    [paras setValue:bsbRaw forKey:@"bsb"];
+  } else {
+    [paras setValue:@(YES) forKey:@"bsb"]; // Default to Sandbox
+  }
 #else
-  if ([sharedDefaults boolForKey:TKDefaultsKeyProfileBookingsUseSandbox]) {
+  if ([SGKBetaHelper isBeta]
+      && [sharedDefaults boolForKey:TKDefaultsKeyProfileBookingsUseSandbox]) {
     [paras setValue:@(YES) forKey:@"bsb"];
   }
 #endif

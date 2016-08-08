@@ -6,12 +6,12 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import <MapKit/MapKit.h>
-#import "STKMapAnnotation.h"
+@import Foundation;
+@import CoreData;
+@import MapKit;
+@import SGCoreKit;
 
-@class Service;
+@class Service, SegmentReference;
 
 @interface Vehicle : NSManagedObject <STKDisplayablePoint>
 
@@ -23,9 +23,12 @@
 @property (nonatomic, retain) NSNumber * bearing;
 @property (nonatomic, retain) NSString * label;
 @property (nonatomic, retain) NSString * identifier;
+@property (nonatomic, retain) NSString * icon;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain) Service *service;
 @property (nonatomic, retain) NSSet *serviceAlternatives;
+@property (nonatomic, retain) SegmentReference *segment;
+@property (nonatomic, retain) NSSet *segmentAlternatives;
 
 // Non-persistent
 

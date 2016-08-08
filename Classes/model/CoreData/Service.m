@@ -10,7 +10,7 @@
 
 #import <MapKit/MapKit.h>
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 #import "TKRealTimeUpdatableHelper.h"
 
@@ -384,9 +384,9 @@ typedef NSUInteger SGServiceFlag;
 	}
 }
 
-+ (NSUInteger)indexForSplittingWaypoints:(NSArray *)waypoints
++ (NSUInteger)indexForSplittingWaypoints:(NSArray <id<MKAnnotation>> *)waypoints
 																 atVisit:(StopVisits *)split
-													 withAllVisits:(NSArray *)visits
+													 withAllVisits:(NSArray <StopVisits *> *)visits
 {
 	// where are we at in the visits array?
 	NSInteger visitIndex    = 0;

@@ -8,7 +8,7 @@
 
 #import "TKRouter.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @implementation TKRouter
 

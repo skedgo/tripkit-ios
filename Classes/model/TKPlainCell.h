@@ -6,9 +6,9 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+@import SGCoreKit;
 
-#import "SGStopCoordinate.h"
 #import "TKCellHelper.h"
 
 @interface TKPlainCell : NSObject
@@ -19,9 +19,9 @@
 @property (nonatomic, assign) SGCellLevel level;
 @property (nonatomic, strong) NSNumber *hashCode;
 
-@property (nonatomic, copy) NSArray<SGStopCoordinate *> *stops;
+@property (nonatomic, copy) NSArray<STKStopCoordinate *> *stops;
 
-- (void)addStop:(SGStopCoordinate *)stop;
+- (void)addStop:(STKStopCoordinate *)stop;
 
 - (void)deleteAllStops;
 

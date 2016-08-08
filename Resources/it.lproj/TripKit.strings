@@ -55,13 +55,13 @@
 "Departure" = "Partenza";
 
 /* Time of the bus departure */
-"DepartureTime" = " alle %@";
+"DepartureTime" = "alle %@";
 
 /* Destination of the bus */
 "Direction" = "Direzione: %@";
 
 /* Walking time */
-"Duration" = " per %@";
+"Duration" = "per %@";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Get directions";

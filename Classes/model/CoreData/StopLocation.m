@@ -8,7 +8,7 @@
 
 #import "StopLocation.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 @interface StopLocation ()
 
@@ -232,15 +232,6 @@
 	for (StopLocation *stop in self.children) {
 		[stop clearVisits];
 	}
-}
-
-#pragma mark - SGURLShareable
-
-- (NSURL *)shareURL
-{
-  return [TKShareHelper stopURLForStopCode:self.stopCode
-                           inRegionNamed:self.region.name
-                                  filter:self.filter];
 }
 
 #pragma mark - UIActivityItemSource

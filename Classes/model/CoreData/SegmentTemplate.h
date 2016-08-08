@@ -66,6 +66,7 @@
 - (BOOL)isDriving;
 - (BOOL)isStationary;
 - (BOOL)isSelfNavigating;
+- (BOOL)isAffectedByTraffic;
 - (BOOL)isSharedVehicle;
 - (BOOL)isFlight;
 

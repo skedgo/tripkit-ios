@@ -6,15 +6,14 @@
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-#import "SGKConfig.h"
+@import SGCoreKit;
 
 @interface SGKConfig (TKInterAppCommunicator)
 
 /**
- @return Something complex API Key
+ @return Some complex API Key
  */
 - (nullable NSString *)flitWaysPartnerKey;
-
 
 /**
  @return Something like 'tripgo'
@@ -30,5 +29,10 @@
  @return something like 'skedgo'
  */
 - (nullable NSString *)lyftPartnerCompanyName;
+
+/**
+ @return Ola's XAPP token
+ */
+- (nullable NSString *)olaXAPPToken;
 
 @end

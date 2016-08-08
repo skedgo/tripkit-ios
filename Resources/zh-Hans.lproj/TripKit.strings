@@ -40,34 +40,43 @@
 "Arrive" = "到达";
 
 /* No comment provided by engineer. */
+"Book with FlitWays" = "从FlitWays预定";
+
+/* No comment provided by engineer. */
+"Book with Uber" = "从Uber预定";
+
+/* Placeholder title while calculating trips */
+"Calculating trips..." = "正在计算行程...";
+
+/* No comment provided by engineer. */
 "Call" = "叫计程车";
 
 /* Action title for calling provider of %name */
 "CallTaxiFormat" = "联系%@";
 
+/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
+"Connect to Internet to get trips" = "连接到网络以便获取行程";
+
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "无法找到公交车站。";
-
-/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
-"CouponCodeIngogoFormat" = "注册时使用优惠券代码'%@'即可折扣$5元 (只适用新注册用户)";
 
 /* Departure time sorter title */
 "Departure" = "离站";
 
 /* Time of the bus departure */
-"DepartureTime" = " 于%@";
+"DepartureTime" = "于%@";
 
 /* Destination of the bus */
 "Direction" = "方向: %@";
 
 /* Walking time */
-"Duration" = " %@";
+"Duration" = "%@";
 
 /* No comment provided by engineer. */
 "Get Lyft" = "使用Lyft";
 
 /* No comment provided by engineer. */
-"Get Uber" = "使用Uber";
+"Get Ola" = "使用Ola";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "开始导航";
@@ -107,11 +116,10 @@
 "Open Lyft" = "开启Lyft";
 
 /* No comment provided by engineer. */
-"Open Uber" = "开启Uber";
+"Open Ola" = "打开Ola";
 
 /* Arrival Location
-   For trip titles, e.g., 'To work'
-   Format string for going from currently location to this one. Used to name favourite destinations. */
+   For trip titles, e.g., 'To work' */
 "PrimaryLocationEnd" = "目的地: %@";
 
 /* Departure Location */
@@ -126,6 +134,9 @@
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "再次搜索车站或者稍后再试。";
 
+/* Send SMS action */
+"Send SMS" = "发送短信";
+
 /* Show website action */
 "Show website" = "开启网站";
 
@@ -134,9 +145,6 @@
 
 /* From %time1 to %time2 */
 "TimeFromToShortFormat" = "%@ ～ %@";
-
-/* No comment provided by engineer. */
-"To %@" = "前往%@ ";
 
 /* No comment provided by engineer. */
 "Trip" = "旅程";

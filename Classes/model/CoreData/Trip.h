@@ -6,21 +6,18 @@
 //  Copyright (c) 2011 SkedGo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
+@import SGCoreKit;
 
 #import "TKSegment.h"
 #import "SegmentTemplate.h"
 #import "TKRealTimeUpdatable.h"
 
-#import "TKShareURLProvider.h"
-
-#import "STKTripAndSegments.h"
-#import "STKVehicular.h"
 
 @class Alert, SVKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 
-@interface Trip : NSManagedObject <TKRealTimeUpdatable, SGURLShareable, STKTrip, UIActivityItemSource> {
+@interface Trip : NSManagedObject <TKRealTimeUpdatable, STKTrip, UIActivityItemSource> {
 }
 
 #pragma mark - CoreData elements
@@ -64,6 +61,8 @@
 
 @property (nonatomic, readonly, nonnull) TripRequest *request;
 
+@property (nonatomic, strong, nullable) NSURL *shareURL;
+
 - (void)setAsPreferredTrip;
 
 @property (nonatomic, assign) BOOL showNoVehicleUUIDAsLift;
@@ -100,6 +99,11 @@
 
 - (BOOL)allowImpossibleSegments;
 
+/** 
+ @return Whether trip mixes multiple modes. Note that multiple different public transport modes don't make a trip mixed-modal, but walking in between does.
+ */
+- (BOOL)isMixedModal;
+
 /**
  @param vehicle The vehicle to assign this trip to. `nil` to reset to a generic vehicle.
  */
@@ -135,6 +139,10 @@
 /* The first major segment of the trip
  */
 - (nonnull TKSegment *)mainSegment;
+
+/* Call this before changing the segments of a trip.
+ */
+- (void)clearSegmentCaches;
 
 /* The first public transport segment of the trip
  */

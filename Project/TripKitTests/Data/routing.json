@@ -1,0 +1,1490 @@
+{
+  "region": "NSW",
+  "realTimeStamp": 1387420072,
+  "segmentTemplates": [
+    {
+      "endStopCode": "20003",
+      "to": {
+        "address": "Circular Quay, No. 2 Wharf",
+        "class": "Location",
+        "lng": 151.21205,
+        "lat": -33.86062
+      },
+      "visibility": "in summary",
+      "hashCode": -1974580840,
+      "from": {
+        "address": "Old Cremorne Ferry Wharf",
+        "class": "Location",
+        "lng": 151.2304,
+        "lat": -33.841
+      },
+      "stopCode": "20902",
+      "type": "scheduled",
+      "serviceOperator": "Sydney Ferries",
+      "travelDirection": 222,
+      "shapes": [
+        {
+          "travelled": true,
+          "encodedWaypoints": "~ppmEwd`z[Le@r@c@vEmEn@}@t@o@nAw@??AJ??x@n@n@V|@FfCIf@Mf@Wd@]rBeB^UZOpCiArCcAdBg@N@nAZTJn@l@Zp@R`ABx@Eh@Mn@cAlBmA|A{@z@o@d@Mh@??GK??Sd@Qt@Er@DjA\\~AfArCnBdDxCnEvBvCrGvHtEhGjCrEj@|AP~@VjCn@d]V`D`@nBf@~Ah@r@lA~@bAb@fCj@tCZ`W|A"
+        }
+      ],
+      "mode": "ferry",
+      "ticket": {
+        "name": "myFerry1",
+        "cost": 6
+      },
+      "action": "Take <NUMBER><TIME>",
+      "modeIdentifier": "pt_pub",
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ myFerry1 ($6.00)",
+      "warnings": "Ticket may vary"
+    },
+    {
+      "to": {
+        "address": "Circular Quay Stand D",
+        "class": "Location",
+        "lng": 151.21155,
+        "lat": -33.86169
+      },
+      "visibility": "in details",
+      "action": "Walk<DURATION>",
+      "hashCode": 1057390283,
+      "streets": [
+        {
+          "encodedWaypoints": "|ktmEir|y[??ODBSvCN??KtB~@FRY??"
+        }
+      ],
+      "from": {
+        "address": "Circular Quay, No. 2 Wharf",
+        "class": "Location",
+        "lng": 151.21205,
+        "lat": -33.86062
+      },
+      "modeIdentifier": "wa_wal",
+      "type": "unscheduled",
+      "metres": 203,
+      "notes": "250m",
+      "travelDirection": 205,
+      "mode": "walk"
+    },
+    {
+      "location": {
+        "address": "Circular Quay Stand D",
+        "class": "Location",
+        "lng": 151.21155,
+        "lat": -33.86169
+      },
+      "visibility": "in details",
+      "action": "Wait<DURATION>",
+      "hashCode": -368637441,
+      "type": "stationary",
+      "mode": "transfer"
+    },
+    {
+      "endStopCode": "201865",
+      "to": {
+        "address": "Florence St near King St",
+        "class": "Location",
+        "lng": 151.21046,
+        "lat": -33.93166
+      },
+      "visibility": "in summary",
+      "smsNumber": "0488898287",
+      "hashCode": -536046011,
+      "from": {
+        "address": "Circular Quay Stand D",
+        "class": "Location",
+        "lng": 151.21155,
+        "lat": -33.86169
+      },
+      "stopCode": "2000147",
+      "type": "scheduled",
+      "serviceOperator": "Sydney Buses",
+      "travelDirection": 180,
+      "shapes": [
+        {
+          "travelled": true,
+          "encodedWaypoints": "prtmEco|y[Ux@v@BbId@TdCFbC??LTIdCdEJ??@BlEd@nBoGbHX~AD??@@tDTzDTnCPtAF??@@zKp@|CP??@@lBJtLl@|AF??@@jEh@HgCFuB????h@_E`F_@d@aB??@@hAcB^yF??@@VgBt@cFr@G??@@~Fn@tD^??@@j@FzHz@fAJ??@BpI~@????jI`AbCX??@@xJxA\\T`@XjCJ??@?fIv@??xO`A??a@r@f@?Eo@h@sE\\[fDjChDpC??@@j@h@|ItInFdF????vEfGp@uBEiA??@DvAeHrC|@??@?nIzD??@B~TfK????vBnAlA[l@mI~A{D|C\\bDtA????nPlEN}B????f@iB`JdB??@@rLbDlGU??@@lHJ^eI???@tA{NhCJ??@BdABa@fC~@TF|B????uAzO??@DWd@tNzA??@@t@Pv@Rh@uJ??@BhAyM???@P[xAf@d@qJ???@TiAjJjF???@`F~C"
+        },
+        {
+          "travelled": false,
+          "encodedWaypoints": "|gbnEkh|y[@@Xd@]bJ??@DcAxM????cBhU??@@{@zL???@G|@o@~H"
+        }
+      ],
+      "mode": "bus",
+      "ticket": {
+        "name": "myBus3",
+        "cost": 4.6
+      },
+      "action": "Take <NUMBER><TIME>",
+      "modeIdentifier": "pt_pub",
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ myBus3 ($4.60)",
+      "smsMessage": "2000147",
+      "warnings": "Ticket may vary"
+    },
+    {
+      "to": {
+        "address": "Southern Cross Drive",
+        "class": "Location",
+        "lng": 151.21222,
+        "lat": -33.93253
+      },
+      "visibility": "in details",
+      "action": "Walk<DURATION>",
+      "hashCode": 1428069310,
+      "streets": [
+        {
+          "encodedWaypoints": "|gbnEkh|y[??KNj@\\XsE??pBwD"
+        }
+      ],
+      "from": {
+        "address": "Florence St near King St",
+        "class": "Location",
+        "lng": 151.21046,
+        "lat": -33.93166
+      },
+      "modeIdentifier": "wa_wal",
+      "type": "unscheduled",
+      "metres": 113,
+      "notes": "150m",
+      "travelDirection": 116,
+      "mode": "walk"
+    },
+    {
+      "endStopCode": "201865",
+      "to": {
+        "address": "Florence St near King St",
+        "class": "Location",
+        "lng": 151.21046,
+        "lat": -33.93166
+      },
+      "visibility": "in summary",
+      "smsNumber": "0488898287",
+      "hashCode": -536878237,
+      "from": {
+        "address": "Circular Quay Stand D",
+        "class": "Location",
+        "lng": 151.21155,
+        "lat": -33.86169
+      },
+      "stopCode": "2000147",
+      "type": "scheduled",
+      "serviceOperator": "Sydney Buses",
+      "travelDirection": 180,
+      "shapes": [
+        {
+          "travelled": true,
+          "encodedWaypoints": "prtmEco|y[Ux@v@BbId@TdCFbC??LTIdCdEJ??@BlEd@nBoGbHX~AD??@@tDTzDTnCPtAF??@@zKp@|CP??@@lBJtLl@|AF??@@jEh@HgCFuB????h@_E`F_@d@aB??@@hAcB^yF??@@VgBt@cFr@G??@@~Fn@tD^??@@j@FzHz@fAJ??@BpI~@????jI`AbCX??@@xJxA\\T`@XjCJ??@?fIv@??xO`A??a@r@f@?Eo@h@sE\\[fDjChDpC??@@j@h@|ItInFdF????vEfGp@uBEiA??@DvAeHrC|@??@?nIzD??@B~TfK????vBnAlA[l@mI~A{D|C\\bDtA????nPlEN}B????f@iB`JdB??@@rLbDlGU??@@lHJ^eI???@tA{NhCJ??@BdABa@fC~@TF|B????uAzO??@DWd@tNzA??@@t@Pv@Rh@uJ??@BhAyM???@P[xAf@d@qJ???@TiAjJjF???@`F~C"
+        },
+        {
+          "travelled": false,
+          "encodedWaypoints": "|gbnEkh|y[@@Xd@]bJ??@DcAxM????cBhU??@@{@zL???@G|@o@~H"
+        }
+      ],
+      "mode": "bus",
+      "ticket": {
+        "name": "myBus3",
+        "cost": 4.6
+      },
+      "action": "Take <NUMBER><TIME>",
+      "modeIdentifier": "pt_pub",
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ myBus3 ($4.60)",
+      "smsMessage": "2000147",
+      "warnings": "Ticket may vary"
+    },
+    {
+      "to": {
+        "address": "Gresham St near Bridge St",
+        "class": "Location",
+        "lng": 151.20943,
+        "lat": -33.86393
+      },
+      "visibility": "in details",
+      "action": "Walk<DURATION>",
+      "hashCode": 1497167010,
+      "streets": [
+        {
+          "encodedWaypoints": "|ktmEir|y[??ODBSvCN??KtBt@rAGrAz@DtBH??v@Dl@FMXv@~@?@xAfB??fAIBT??"
+        }
+      ],
+      "from": {
+        "address": "Circular Quay, No. 2 Wharf",
+        "class": "Location",
+        "lng": 151.21205,
+        "lat": -33.86062
+      },
+      "modeIdentifier": "wa_wal",
+      "type": "unscheduled",
+      "metres": 550,
+      "notes": "550m",
+      "travelDirection": 220,
+      "mode": "walk"
+    },
+    {
+      "location": {
+        "address": "Gresham St near Bridge St",
+        "class": "Location",
+        "lng": 151.20943,
+        "lat": -33.86393
+      },
+      "visibility": "in details",
+      "action": "Wait<DURATION>",
+      "hashCode": -368659234,
+      "type": "stationary",
+      "mode": "transfer"
+    },
+    {
+      "endStopCode": "203231",
+      "to": {
+        "address": "Gardeners Rd near Maitland Av",
+        "class": "Location",
+        "lng": 151.21584,
+        "lat": -33.92454
+      },
+      "visibility": "in summary",
+      "smsNumber": "0488898287",
+      "hashCode": -1402621886,
+      "from": {
+        "address": "Gresham St near Bridge St",
+        "class": "Location",
+        "lng": 151.20943,
+        "lat": -33.86393
+      },
+      "stopCode": "2000150",
+      "type": "scheduled",
+      "serviceOperator": "Sydney Buses",
+      "travelDirection": 173,
+      "shapes": [
+        {
+          "travelled": true,
+          "encodedWaypoints": "r`umE{a|y[cAOHpBdEJ??@BlEd@nBoGbHX~AD??@@tDTzDTnCPtAF??@@zKp@|CP??@@lBJJ}BtLd@`FR??@?rAHnE\\??@?bAJ`C\\hCZ??@BhBV~IhAxBF??@?zC^v@ErFW??NNbAAt@?fMb@??`CRpFd@??@@`Jx@??@@z@JjGv@rD`@??@?`CX|KhA???@j@DnGL????zAVnN|BjEr@????zATdGaF???@~GgF??@@fAu@tMhG????vBnAlA]n@SpFv@???@~IvB????bMvC????vIrB??@@tNxDMdD???@u@xFpI`B??@@l@^`@yH??@?h@kI??@@Dm@dAkO????\\wB^eI???@z@gM??Vs@lBcI~A{Q"
+        },
+        {
+          "travelled": false,
+          "encodedWaypoints": "j{`nE}i}y[Er@Fq@dA_O??Ra@^aJ???@v@cH?uC?kA???BNuF[wBGi@???@{@kI|Bq@jAiCSoD}@j@"
+        }
+      ],
+      "mode": "bus",
+      "ticket": {
+        "name": "myBus3",
+        "cost": 4.6
+      },
+      "action": "Take <NUMBER><TIME>",
+      "modeIdentifier": "pt_pub",
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ myBus3 ($4.60)",
+      "smsMessage": "2000150",
+      "warnings": "Ticket may vary"
+    },
+    {
+      "to": {
+        "address": "Southern Cross Drive",
+        "class": "Location",
+        "lng": 151.21222,
+        "lat": -33.93253
+      },
+      "visibility": "in summary",
+      "action": "Walk<DURATION>",
+      "hashCode": 1737673246,
+      "streets": [
+        {
+          "encodedWaypoints": "j{`nE}i}y[????Av@ZBYxC]~CAHL@THXe@l@k@dA_@v@J??N?hDhAbC`ApAf@V\\p@lBN\\HFh@Tl@Rf@FTOR[N[TkALSNIPBPHhEpCpH~EpBwD"
+        }
+      ],
+      "from": {
+        "address": "Gardeners Rd near Maitland Av",
+        "class": "Location",
+        "lng": 151.21584,
+        "lat": -33.92454
+      },
+      "modeIdentifier": "wa_wal",
+      "type": "unscheduled",
+      "metres": 1225,
+      "notes": "1.3km",
+      "travelDirection": 223,
+      "mode": "walk"
+    },
+    {
+      "to": {
+        "address": "Circular Quay Station Platform 2",
+        "class": "Location",
+        "lng": 151.21029,
+        "lat": -33.86126
+      },
+      "visibility": "in details",
+      "action": "Walk<DURATION>",
+      "hashCode": 1617227987,
+      "streets": [
+        {
+          "encodedWaypoints": "|ktmEir|y[??ODBSvCNVuAQnDADQxD?dA??"
+        }
+      ],
+      "from": {
+        "address": "Circular Quay, No. 2 Wharf",
+        "class": "Location",
+        "lng": 151.21205,
+        "lat": -33.86062
+      },
+      "modeIdentifier": "wa_wal",
+      "type": "unscheduled",
+      "metres": 297,
+      "notes": "300m",
+      "travelDirection": 250,
+      "mode": "walk"
+    },
+    {
+      "location": {
+        "address": "Circular Quay Station Platform 2",
+        "class": "Location",
+        "lng": 151.21029,
+        "lat": -33.86126
+      },
+      "visibility": "in details",
+      "action": "Wait<DURATION>",
+      "hashCode": -368633969,
+      "type": "stationary",
+      "mode": "transfer"
+    },
+    {
+      "endStopCode": "2020112",
+      "to": {
+        "address": "Mascot Station Platform 2",
+        "class": "Location",
+        "lng": 151.18734,
+        "lat": -33.92319
+      },
+      "visibility": "in summary",
+      "hashCode": -2114856675,
+      "from": {
+        "address": "Circular Quay Station Platform 2",
+        "class": "Location",
+        "lng": 151.21029,
+        "lat": -33.86126
+      },
+      "stopCode": "2000352",
+      "type": "scheduled",
+      "serviceOperator": "Sydney Trains",
+      "travelDirection": 200,
+      "shapes": [
+        {
+          "travelled": true,
+          "encodedWaypoints": "zotmEgg|y[z@aR`@qBb@oA|AwBn@]nAUdD?l@D^LpAv@|@pAt@fB\\zAj@jA`@b@lBbAhZnB??[BlGp@t@\\rJdCjLjD??lAfAlBvA~MhAbQpCbB\\GRzD~AnBN??xApCnJzIbDtGRPrDx@di@hGzA?zAOrBk@hYkF`Em@rCKjOJbAJbBdA@lA??zA|EZnDp@tChI|P|{@hv@pDj@nLbAhAZvGV"
+        },
+        {
+          "travelled": false,
+          "encodedWaypoints": "|r`nEywwy[n@n@nNk@lEThHL~O`Dt@j@bDhAnCdBpA|AvAtDv@zHoAnH??YxOg@tKN~DRpBtA`EhE`H`AbCl@lCn@zEBtCGjCQlBS|@mBhH??qAnAc`@hv@QdB{@bAOl@UbDSd@??XVMz@g@tHEpBFpKM`G@Im@`J@fEb@~EfHx[??vJje@`@zEGvEg@zDuAjIs@fHDdDVrCx@pDPn@"
+        }
+      ],
+      "mode": "train",
+      "ticket": {
+        "name": "myTrain1",
+        "cost": 3.8
+      },
+      "action": "Take <NUMBER><TIME>",
+      "modeIdentifier": "pt_pub",
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ myTrain1 ($3.80)",
+      "warnings": "Ticket may vary"
+    },
+    {
+      "to": {
+        "address": "Coward St nr Bourke Rd",
+        "class": "Location",
+        "lng": 151.18768,
+        "lat": -33.92439
+      },
+      "visibility": "in details",
+      "action": "Walk<DURATION>",
+      "hashCode": -451000447,
+      "streets": [
+        {
+          "encodedWaypoints": "|r`nEywwy[??B?CDM`@nALxA@t@IRULiBCJ??"
+        }
+      ],
+      "from": {
+        "address": "Mascot Station Platform 2",
+        "class": "Location",
+        "lng": 151.18734,
+        "lat": -33.92319
+      },
+      "modeIdentifier": "wa_wal",
+      "type": "unscheduled",
+      "metres": 204,
+      "notes": "250m",
+      "travelDirection": 163,
+      "mode": "walk"
+    },
+    {
+      "location": {
+        "address": "Coward St nr Bourke Rd",
+        "class": "Location",
+        "lng": 151.18768,
+        "lat": -33.92439
+      },
+      "visibility": "in details",
+      "action": "Wait<DURATION>",
+      "hashCode": -369247366,
+      "type": "stationary",
+      "mode": "transfer"
+    },
+    {
+      "endStopCode": "202025",
+      "to": {
+        "address": "Botany Rd near Hollingshed St",
+        "class": "Location",
+        "lng": 151.19421,
+        "lat": -33.93207
+      },
+      "visibility": "in summary",
+      "smsNumber": "0488898287",
+      "hashCode": -1812030042,
+      "from": {
+        "address": "Coward St nr Bourke Rd",
+        "class": "Location",
+        "lng": 151.18768,
+        "lat": -33.92439
+      },
+      "stopCode": "2020113",
+      "type": "scheduled",
+      "serviceOperator": "Sydney Buses",
+      "travelDirection": 139,
+      "shapes": [
+        {
+          "travelled": false,
+          "encodedWaypoints": "f~dnEqony[??eGeDnA}EeCkAcWo\\oDqCRkH??@?v@aLsEm@OS}C}FsHmNyFkKwBiI_C{Tm@oAqDmA{@qAt@wEbAaBnHqBvEr@??Z^vBbD|@dB@tCw@jAsRHuC]_DuAmI{Hw@s@mKkSmE__@g@yM{AwObAkMRcC???@bBqFdDiDhCc@nLl@zCmB`E{IJSvCVjCRdAbAx@dHuD~c@kCg@`@cI??@?|C{^c@}BmB]}Ci@kH_AeIeBeBe@mHyBaIlBiAAqCCFeB"
+        },
+        {
+          "travelled": true,
+          "encodedWaypoints": "lz`nE_zwy[dAgNt@}K???BjBqTtL|ApH|@pAZhLvAt@H"
+        },
+        {
+          "travelled": false,
+          "encodedWaypoints": "njbnEybyy[?@`Fn@|C^xAc@XsBgBgQ[aHJ{@\\qCzEmNjBo_@B{@hByFvOk\\fDgE??@?tCcCbHwFbBcDpHkOvFeGJSxAeEVoCHu@U}RwC\\@l@??AGc@c@yCk@ySkEuCkBLkG??@BnAwLG{Ax@aLZm@x@gLz@cMkFdA???Bs@HoK|AkFx@qKxAc@FqHfA{AT"
+        }
+      ],
+      "mode": "bus",
+      "ticket": {
+        "name": "myBus1",
+        "cost": 2.3
+      },
+      "action": "Take <NUMBER><TIME>",
+      "modeIdentifier": "pt_pub",
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ myBus1 ($2.30)",
+      "smsMessage": "2020113",
+      "warnings": "Ticket may vary"
+    },
+    {
+      "to": {
+        "address": "Botany Rd near Elizabeth Av",
+        "class": "Location",
+        "lng": 151.19417,
+        "lat": -33.93125
+      },
+      "visibility": "in details",
+      "action": "Walk<DURATION>",
+      "hashCode": -2098337371,
+      "streets": [
+        {
+          "encodedWaypoints": ""
+        }
+      ],
+      "from": {
+        "address": "Botany Rd near Hollingshed St",
+        "class": "Location",
+        "lng": 151.19421,
+        "lat": -33.93207
+      },
+      "modeIdentifier": "wa_wal",
+      "type": "unscheduled",
+      "metres": 0,
+      "notes": "<100m",
+      "travelDirection": 357,
+      "mode": "walk"
+    },
+    {
+      "location": {
+        "address": "Botany Rd near Elizabeth Av",
+        "class": "Location",
+        "lng": 151.19417,
+        "lat": -33.93125
+      },
+      "visibility": "in details",
+      "action": "Wait<DURATION>",
+      "hashCode": -369311660,
+      "type": "stationary",
+      "mode": "transfer"
+    },
+    {
+      "endStopCode": "201871",
+      "to": {
+        "address": "Florence Av near King St",
+        "class": "Location",
+        "lng": 151.21033,
+        "lat": -33.93158
+      },
+      "visibility": "in summary",
+      "smsNumber": "0488898287",
+      "hashCode": 1461387963,
+      "from": {
+        "address": "Botany Rd near Elizabeth Av",
+        "class": "Location",
+        "lng": 151.19417,
+        "lat": -33.93125
+      },
+      "stopCode": "202017",
+      "type": "scheduled",
+      "serviceOperator": "Sydney Buses",
+      "travelDirection": 91,
+      "shapes": [
+        {
+          "travelled": false,
+          "encodedWaypoints": "fsdnEux~y[@@i@hCbDj@dAnAdDrAuFfGyFjM????kC|EgIhHwDdD??@?eC`CwOp]sAxC[|BYnBm@tV}ArJ????cDpHU~BMhAFjFfA`I??@?^dM_DL}BUwGq@iBS"
+        },
+        {
+          "travelled": true,
+          "encodedWaypoints": "jebnEobyy[@B_IyAC{A????lAaP??@?p@eK???@Fs@t@_K??@?lAyQ??@?dB}U????v@qIm@I"
+        },
+        {
+          "travelled": false,
+          "encodedWaypoints": "jgbnEog|y[@@qFmD??@@}FuD??@B[e@}@N_@hI??@?Ut@yAe@g@pI??@?aBrOy@AaAE"
+        }
+      ],
+      "mode": "bus",
+      "ticket": {
+        "name": "myBus1",
+        "cost": 2.3
+      },
+      "action": "Take <NUMBER><TIME>",
+      "modeIdentifier": "pt_pub",
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ myBus1 ($2.30)",
+      "smsMessage": "202017",
+      "warnings": "Ticket may vary"
+    },
+    {
+      "to": {
+        "address": "Southern Cross Drive",
+        "class": "Location",
+        "lng": 151.21222,
+        "lat": -33.93253
+      },
+      "visibility": "in details",
+      "action": "Walk<DURATION>",
+      "hashCode": 1454851419,
+      "streets": [
+        {
+          "encodedWaypoints": "jgbnEog|y[??DKj@\\XsE??pBwD"
+        }
+      ],
+      "from": {
+        "address": "Florence Av near King St",
+        "class": "Location",
+        "lng": 151.21033,
+        "lat": -33.93158
+      },
+      "modeIdentifier": "wa_wal",
+      "type": "unscheduled",
+      "metres": 113,
+      "notes": "150m",
+      "travelDirection": 116,
+      "mode": "walk"
+    }
+  ],
+  "groups": [
+    {
+      "trips": [
+        {
+          "caloriesCost": 16,
+          "arrive": 1402380403,
+          "carbonCost": 0.1,
+          "hassleCost": 5,
+          "segments": [
+            {
+              "startTime": 1402376220,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "46.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402377300,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402377300,
+              "segmentTemplateHashCode": 1057390283,
+              "endTime": 1402377485
+            },
+            {
+              "startTime": 1402377445,
+              "segmentTemplateHashCode": -368637441,
+              "endTime": 1402377720
+            },
+            {
+              "startTime": 1402377720,
+              "serviceNumber": "301",
+              "segmentTemplateHashCode": -536046011,
+              "serviceTripID": "76640400_20140504_11954",
+              "serviceDirection": "Eastgardens",
+              "realTimeStatus": "IS_REAL_TIME",
+              "endTime": 1402380300,
+              "realtimeVehicle": {
+                "location": {
+                  "bearing": 0,
+                  "lng": 151.19612,
+                  "lat": -33.92236
+                },
+                "lastUpdate": 1402374833
+              },
+              "serviceName": "Quay - Pagewood Via Mascot"
+            },
+            {
+              "startTime": 1402380300,
+              "segmentTemplateHashCode": 1428069310,
+              "endTime": 1402380403
+            }
+          ],
+          "depart": 1402376220,
+          "moneyCost": 10.6,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=2196cb83-2b87-4e2a-a1b7-6fb586334922",
+          "weightedScore": 34.5,
+          "mainSegmentHashCode": -1974580840
+        },
+        {
+          "caloriesCost": 16,
+          "arrive": 1402378783,
+          "carbonCost": 0.1,
+          "hassleCost": 5,
+          "segments": [
+            {
+              "startTime": 1402374420,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "44.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402375500,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402375500,
+              "segmentTemplateHashCode": 1057390283,
+              "endTime": 1402375685
+            },
+            {
+              "startTime": 1402375645,
+              "segmentTemplateHashCode": -368637441,
+              "endTime": 1402376100
+            },
+            {
+              "startTime": 1402376100,
+              "serviceNumber": "301",
+              "segmentTemplateHashCode": -536046011,
+              "serviceTripID": "76640338_20140504_11954",
+              "serviceDirection": "Eastgardens",
+              "realTimeStatus": "IS_REAL_TIME",
+              "endTime": 1402378680,
+              "realtimeVehicle": {
+                "location": {
+                  "bearing": 8,
+                  "lng": 151.2144,
+                  "lat": -33.88363
+                },
+                "lastUpdate": 1402374839
+              },
+              "serviceName": "Quay - Pagewood Via Mascot"
+            },
+            {
+              "startTime": 1402378680,
+              "segmentTemplateHashCode": 1428069310,
+              "endTime": 1402378783
+            }
+          ],
+          "depart": 1402374420,
+          "moneyCost": 10.6,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=619eb66b-ef60-483c-8eb5-30b23f084409",
+          "weightedScore": 32.9,
+          "mainSegmentHashCode": -1974580840
+        },
+        {
+          "caloriesCost": 16,
+          "arrive": 1402384303,
+          "carbonCost": 0.1,
+          "hassleCost": 5,
+          "segments": [
+            {
+              "startTime": 1402379820,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "52.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402380900,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402380900,
+              "segmentTemplateHashCode": 1057390283,
+              "endTime": 1402381085
+            },
+            {
+              "startTime": 1402381045,
+              "segmentTemplateHashCode": -368637441,
+              "endTime": 1402381500
+            },
+            {
+              "startTime": 1402381500,
+              "serviceNumber": "301",
+              "segmentTemplateHashCode": -536878237,
+              "serviceTripID": "88766862_20140504_11954",
+              "serviceDirection": "Mascot",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402384200,
+              "serviceName": "Quay - Pagewood Via Mascot"
+            },
+            {
+              "startTime": 1402384200,
+              "segmentTemplateHashCode": 1428069310,
+              "endTime": 1402384303
+            }
+          ],
+          "depart": 1402379820,
+          "moneyCost": 10.6,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=fd92b92c-13d6-40b6-8f7c-c230de408265",
+          "weightedScore": 39.4,
+          "mainSegmentHashCode": -1974580840
+        },
+        {
+          "caloriesCost": 16,
+          "arrive": 1402383463,
+          "carbonCost": 0.1,
+          "hassleCost": 5,
+          "segments": [
+            {
+              "startTime": 1402378020,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "50.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402379100,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402379100,
+              "segmentTemplateHashCode": 1057390283,
+              "endTime": 1402379285
+            },
+            {
+              "startTime": 1402379245,
+              "segmentTemplateHashCode": -368637441,
+              "endTime": 1402380660
+            },
+            {
+              "startTime": 1402380660,
+              "serviceNumber": "301",
+              "segmentTemplateHashCode": -536878237,
+              "serviceTripID": "76640401_20140504_11954",
+              "serviceDirection": "Mascot",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402383360,
+              "serviceName": "Quay - Pagewood Via Mascot"
+            },
+            {
+              "startTime": 1402383360,
+              "segmentTemplateHashCode": 1428069310,
+              "endTime": 1402383463
+            }
+          ],
+          "depart": 1402378020,
+          "moneyCost": 10.6,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=98e89bcc-6dfe-4f3d-9fb9-3443ce84a2fa",
+          "weightedScore": 39.1,
+          "mainSegmentHashCode": -1974580840
+        }
+      ],
+      "frequency": 30
+    },
+    {
+      "trips": [
+        {
+          "caloriesCost": 97,
+          "arrive": 1402383208,
+          "carbonCost": 0.1,
+          "hassleCost": 5,
+          "segments": [
+            {
+              "startTime": 1402378020,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "50.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402379100,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402379100,
+              "segmentTemplateHashCode": 1497167010,
+              "endTime": 1402379602
+            },
+            {
+              "startTime": 1402379596,
+              "segmentTemplateHashCode": -368659234,
+              "endTime": 1402380060
+            },
+            {
+              "startTime": 1402380060,
+              "serviceNumber": "343",
+              "segmentTemplateHashCode": -1402621886,
+              "serviceTripID": "19838801_20140504_11954",
+              "serviceDirection": "Kingsford",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402382100,
+              "serviceName": "Kingsford - City"
+            },
+            {
+              "startTime": 1402382100,
+              "segmentTemplateHashCode": 1737673246,
+              "endTime": 1402383208
+            }
+          ],
+          "depart": 1402378020,
+          "moneyCost": 10.6,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=d7edfae7-a1bf-4223-afae-ca52ea285c41",
+          "weightedScore": 46.5,
+          "mainSegmentHashCode": -1974580840
+        },
+        {
+          "caloriesCost": 97,
+          "arrive": 1402384948,
+          "carbonCost": 0.1,
+          "hassleCost": 5,
+          "segments": [
+            {
+              "startTime": 1402379820,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "52.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402380900,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402380900,
+              "segmentTemplateHashCode": 1497167010,
+              "endTime": 1402381402
+            },
+            {
+              "startTime": 1402381396,
+              "segmentTemplateHashCode": -368659234,
+              "endTime": 1402381800
+            },
+            {
+              "startTime": 1402381800,
+              "serviceNumber": "343",
+              "segmentTemplateHashCode": -1402621886,
+              "serviceTripID": "60521348_20140504_11954",
+              "serviceDirection": "Kingsford",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402383840,
+              "serviceName": "Kingsford - City"
+            },
+            {
+              "startTime": 1402383840,
+              "segmentTemplateHashCode": 1737673246,
+              "endTime": 1402384948
+            }
+          ],
+          "depart": 1402379820,
+          "moneyCost": 10.6,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=5d72aa5d-c327-43b1-8477-b894aaf2e3b3",
+          "weightedScore": 48.4,
+          "mainSegmentHashCode": -1974580840
+        },
+        {
+          "caloriesCost": 97,
+          "arrive": 1402379368,
+          "carbonCost": 0.1,
+          "hassleCost": 5,
+          "segments": [
+            {
+              "startTime": 1402374420,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "44.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402375500,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402375500,
+              "segmentTemplateHashCode": 1497167010,
+              "endTime": 1402376002
+            },
+            {
+              "startTime": 1402375996,
+              "segmentTemplateHashCode": -368659234,
+              "endTime": 1402376280
+            },
+            {
+              "startTime": 1402376280,
+              "serviceNumber": "343",
+              "segmentTemplateHashCode": -1402621886,
+              "serviceTripID": "20233801_20140504_11954",
+              "serviceDirection": "Kingsford",
+              "realTimeStatus": "IS_REAL_TIME",
+              "endTime": 1402378260,
+              "realtimeVehicle": {
+                "location": {
+                  "bearing": 9,
+                  "lng": 151.20682,
+                  "lat": -33.88605
+                },
+                "lastUpdate": 1402374841
+              },
+              "serviceName": "Kingsford - City"
+            },
+            {
+              "startTime": 1402378260,
+              "segmentTemplateHashCode": 1737673246,
+              "endTime": 1402379368
+            }
+          ],
+          "depart": 1402374420,
+          "moneyCost": 10.6,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=11cd296c-2117-4616-88f1-1f890795e37a",
+          "weightedScore": 41.9,
+          "mainSegmentHashCode": -1974580840
+        },
+        {
+          "caloriesCost": 97,
+          "arrive": 1402381168,
+          "carbonCost": 0.1,
+          "hassleCost": 5,
+          "segments": [
+            {
+              "startTime": 1402376220,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "46.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402377300,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402377300,
+              "segmentTemplateHashCode": 1497167010,
+              "endTime": 1402377802
+            },
+            {
+              "startTime": 1402377796,
+              "segmentTemplateHashCode": -368659234,
+              "endTime": 1402378080
+            },
+            {
+              "startTime": 1402378080,
+              "serviceNumber": "343",
+              "segmentTemplateHashCode": -1402621886,
+              "serviceTripID": "828996_20140504_11954",
+              "serviceDirection": "Kingsford",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402380060,
+              "serviceName": "Kingsford - City"
+            },
+            {
+              "startTime": 1402380060,
+              "segmentTemplateHashCode": 1737673246,
+              "endTime": 1402381168
+            }
+          ],
+          "depart": 1402376220,
+          "moneyCost": 10.6,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=b5484560-fb2d-46bd-84fa-f9143f599249",
+          "weightedScore": 43.9,
+          "mainSegmentHashCode": -1974580840
+        }
+      ],
+      "frequency": 35
+    },
+    {
+      "trips": [
+        {
+          "caloriesCost": 35,
+          "arrive": 1402382143,
+          "carbonCost": 0.1,
+          "hassleCost": 11,
+          "segments": [
+            {
+              "startTime": 1402378020,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "50.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402379100,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402379100,
+              "segmentTemplateHashCode": 1617227987,
+              "endTime": 1402379370
+            },
+            {
+              "startTime": 1402379368,
+              "segmentTemplateHashCode": -368633969,
+              "endTime": 1402379640
+            },
+            {
+              "startTime": 1402379640,
+              "serviceNumber": "T2",
+              "segmentTemplateHashCode": -2114856675,
+              "serviceTripID": "59-M.1287.102.120.A.8",
+              "serviceColor": {
+                "red": 77,
+                "blue": 45,
+                "green": 156
+              },
+              "serviceDirection": "Revesby",
+              "realTimeStatus": "IS_REAL_TIME",
+              "endTime": 1402380540,
+              "serviceName": "T2 Airport, Inner West & South Line"
+            },
+            {
+              "startTime": 1402380540,
+              "segmentTemplateHashCode": -451000447,
+              "endTime": 1402380727
+            },
+            {
+              "startTime": 1402380723,
+              "segmentTemplateHashCode": -369247366,
+              "endTime": 1402381200
+            },
+            {
+              "startTime": 1402381200,
+              "serviceNumber": "400",
+              "segmentTemplateHashCode": -1812030042,
+              "serviceTripID": "75147520_20140504_11954",
+              "serviceDirection": "Bondi Junction",
+              "realTimeStatus": "IS_REAL_TIME",
+              "endTime": 1402381560,
+              "realtimeVehicle": {
+                "location": {
+                  "bearing": 301,
+                  "lng": 151.12495,
+                  "lat": -33.9454
+                },
+                "lastUpdate": 1402374836
+              },
+              "serviceName": "Bondi Junction - Burwood"
+            },
+            {
+              "startTime": 1402381560,
+              "segmentTemplateHashCode": -2098337371,
+              "endTime": 1402381683
+            },
+            {
+              "startTime": 1402381683,
+              "segmentTemplateHashCode": -369311660,
+              "endTime": 1402381800
+            },
+            {
+              "startTime": 1402381800,
+              "serviceNumber": "301",
+              "segmentTemplateHashCode": 1461387963,
+              "serviceTripID": "76640359_20140518_11954",
+              "serviceDirection": "CITY Circular Quay",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402382040,
+              "serviceName": "Quay - Pagewood Via Mascot"
+            },
+            {
+              "startTime": 1402382040,
+              "segmentTemplateHashCode": 1454851419,
+              "endTime": 1402382143
+            }
+          ],
+          "depart": 1402378020,
+          "moneyCost": 14.4,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=7d1d348d-bf21-42f2-b91c-2182f9795b86",
+          "weightedScore": 46.4,
+          "mainSegmentHashCode": -1974580840
+        },
+        {
+          "caloriesCost": 35,
+          "arrive": 1402380343,
+          "carbonCost": 0.1,
+          "hassleCost": 11,
+          "segments": [
+            {
+              "startTime": 1402376220,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "46.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402377300,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402377300,
+              "segmentTemplateHashCode": 1617227987,
+              "endTime": 1402377570
+            },
+            {
+              "startTime": 1402377568,
+              "segmentTemplateHashCode": -368633969,
+              "endTime": 1402377840
+            },
+            {
+              "startTime": 1402377840,
+              "serviceNumber": "T2",
+              "segmentTemplateHashCode": -2114856675,
+              "serviceTripID": "3--K.1287.102.120.M.8",
+              "serviceColor": {
+                "red": 77,
+                "blue": 45,
+                "green": 156
+              },
+              "serviceDirection": "Revesby",
+              "realTimeStatus": "IS_REAL_TIME",
+              "endTime": 1402378740,
+              "serviceName": "T2 Airport, Inner West & South Line"
+            },
+            {
+              "startTime": 1402378740,
+              "segmentTemplateHashCode": -451000447,
+              "endTime": 1402378927
+            },
+            {
+              "startTime": 1402378923,
+              "segmentTemplateHashCode": -369247366,
+              "endTime": 1402379520
+            },
+            {
+              "startTime": 1402379520,
+              "serviceNumber": "410",
+              "segmentTemplateHashCode": -1812030042,
+              "serviceTripID": "81141760_20140504_11954",
+              "serviceDirection": "Bondi Junction",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402379820,
+              "serviceName": "Bondi Junction - Rockdale"
+            },
+            {
+              "startTime": 1402379820,
+              "segmentTemplateHashCode": -2098337371,
+              "endTime": 1402379943
+            },
+            {
+              "startTime": 1402379943,
+              "segmentTemplateHashCode": -369311660,
+              "endTime": 1402380000
+            },
+            {
+              "startTime": 1402380000,
+              "serviceNumber": "301",
+              "segmentTemplateHashCode": 1461387963,
+              "serviceTripID": "76640358_20140518_11954",
+              "serviceDirection": "CITY Circular Quay",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402380240,
+              "serviceName": "Quay - Pagewood Via Mascot"
+            },
+            {
+              "startTime": 1402380240,
+              "segmentTemplateHashCode": 1454851419,
+              "endTime": 1402380343
+            }
+          ],
+          "depart": 1402376220,
+          "moneyCost": 14.4,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=92786317-3410-405c-8e28-4bad162cc47f",
+          "weightedScore": 44,
+          "mainSegmentHashCode": -1974580840
+        },
+        {
+          "caloriesCost": 35,
+          "arrive": 1402383943,
+          "carbonCost": 0.1,
+          "hassleCost": 11,
+          "segments": [
+            {
+              "startTime": 1402379820,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "52.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402380900,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402380900,
+              "segmentTemplateHashCode": 1617227987,
+              "endTime": 1402381170
+            },
+            {
+              "startTime": 1402381168,
+              "segmentTemplateHashCode": -368633969,
+              "endTime": 1402381440
+            },
+            {
+              "startTime": 1402381440,
+              "serviceNumber": "T2",
+              "segmentTemplateHashCode": -2114856675,
+              "serviceTripID": "50-K.1287.102.120.A.8",
+              "serviceColor": {
+                "red": 77,
+                "blue": 45,
+                "green": 156
+              },
+              "serviceDirection": "Revesby",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402382340,
+              "serviceName": "T2 Airport, Inner West & South Line"
+            },
+            {
+              "startTime": 1402382340,
+              "segmentTemplateHashCode": -451000447,
+              "endTime": 1402382527
+            },
+            {
+              "startTime": 1402382523,
+              "segmentTemplateHashCode": -369247366,
+              "endTime": 1402383060
+            },
+            {
+              "startTime": 1402383060,
+              "serviceNumber": "400",
+              "segmentTemplateHashCode": -1812030042,
+              "serviceTripID": "75147521_20140504_11954",
+              "serviceDirection": "Bondi Junction",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402383420,
+              "serviceName": "Bondi Junction - Burwood"
+            },
+            {
+              "startTime": 1402383420,
+              "segmentTemplateHashCode": -2098337371,
+              "endTime": 1402383543
+            },
+            {
+              "startTime": 1402383543,
+              "segmentTemplateHashCode": -369311660,
+              "endTime": 1402383600
+            },
+            {
+              "startTime": 1402383600,
+              "serviceNumber": "301",
+              "segmentTemplateHashCode": 1461387963,
+              "serviceTripID": "76640360_20140518_11954",
+              "serviceDirection": "CITY Circular Quay",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402383840,
+              "serviceName": "Quay - Pagewood Via Mascot"
+            },
+            {
+              "startTime": 1402383840,
+              "segmentTemplateHashCode": 1454851419,
+              "endTime": 1402383943
+            }
+          ],
+          "depart": 1402379820,
+          "moneyCost": 14.4,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=9654e170-50b7-4a2f-8365-687155825767",
+          "weightedScore": 48.2,
+          "mainSegmentHashCode": -1974580840
+        },
+        {
+          "caloriesCost": 35,
+          "arrive": 1402378363,
+          "carbonCost": 0.1,
+          "hassleCost": 11,
+          "segments": [
+            {
+              "startTime": 1402374420,
+              "serviceNumber": "FMB",
+              "segmentTemplateHashCode": -1974580840,
+              "serviceTripID": "44.TA.9-F6-sj2-1.1.R",
+              "serviceColor": {
+                "red": 0,
+                "blue": 77,
+                "green": 147
+              },
+              "alertHashCodes": [
+                -1433819638
+              ],
+              "serviceDirection": "Circular Quay Station",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402375500,
+              "serviceName": "F6 Mosman Bay"
+            },
+            {
+              "startTime": 1402375500,
+              "segmentTemplateHashCode": 1617227987,
+              "endTime": 1402375770
+            },
+            {
+              "startTime": 1402375768,
+              "segmentTemplateHashCode": -368633969,
+              "endTime": 1402376040
+            },
+            {
+              "startTime": 1402376040,
+              "serviceNumber": "T2",
+              "segmentTemplateHashCode": -2114856675,
+              "serviceTripID": "79-M.1287.102.120.A.8",
+              "serviceColor": {
+                "red": 77,
+                "blue": 45,
+                "green": 156
+              },
+              "serviceDirection": "Revesby",
+              "realTimeStatus": "IS_REAL_TIME",
+              "endTime": 1402376940,
+              "serviceName": "T2 Airport, Inner West & South Line"
+            },
+            {
+              "startTime": 1402376940,
+              "segmentTemplateHashCode": -451000447,
+              "endTime": 1402377127
+            },
+            {
+              "startTime": 1402377123,
+              "segmentTemplateHashCode": -369247366,
+              "endTime": 1402377360
+            },
+            {
+              "startTime": 1402377360,
+              "serviceNumber": "410",
+              "segmentTemplateHashCode": -1812030042,
+              "serviceTripID": "76466361_20140504_11954",
+              "serviceDirection": "Bondi Junction",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402377660,
+              "serviceName": "Bondi Junction - Rockdale"
+            },
+            {
+              "startTime": 1402377660,
+              "segmentTemplateHashCode": -2098337371,
+              "endTime": 1402377783
+            },
+            {
+              "startTime": 1402377783,
+              "segmentTemplateHashCode": -369311660,
+              "endTime": 1402378020
+            },
+            {
+              "startTime": 1402378020,
+              "serviceNumber": "301",
+              "segmentTemplateHashCode": 1461387963,
+              "serviceTripID": "76640357_20140518_11954",
+              "serviceDirection": "CITY Circular Quay",
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1402378260,
+              "serviceName": "Quay - Pagewood Via Mascot"
+            },
+            {
+              "startTime": 1402378260,
+              "segmentTemplateHashCode": 1454851419,
+              "endTime": 1402378363
+            }
+          ],
+          "depart": 1402374420,
+          "moneyCost": 14.4,
+          "saveURL": "http://bigbang.buzzhives.com/satapp/persistTrip?ID=84dc37b2-9ca2-4744-bf5d-3cd3eff4c675",
+          "weightedScore": 41.9,
+          "mainSegmentHashCode": -1974580840
+        }
+      ],
+      "frequency": 35
+    }
+  ]
+}

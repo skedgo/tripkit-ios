@@ -6,9 +6,8 @@
 //
 //
 
-#import <CoreData/CoreData.h>
-
-#import "STKTransportKit.h"
+@import CoreData;
+@import SGCoreKit;
 
 @class Service, StopLocation, SGNamedCoordinate;
 

@@ -8,7 +8,7 @@
 
 #import "SegmentTemplate.h"
 
-#import "TKTripKit.h"
+#import <TripKit/TKTripKit.h>
 
 enum {
   SGSegmentTemplateFlagIsContinuation = 1 << 0,
@@ -100,7 +100,11 @@ typedef NSUInteger SGSegmentTemplateFlag;
 }
 
 - (BOOL)isSelfNavigating {
-  return [SVKTransportModes modeIdentifierIsSelfNavigating:self.modeIdentifier];
+  return ![self isStationary] && [SVKTransportModes modeIdentifierIsSelfNavigating:self.modeIdentifier];
+}
+
+- (BOOL)isAffectedByTraffic {
+  return ![self isStationary] && [SVKTransportModes modeIdentifierIsAffectedByTraffic:self.modeIdentifier];
 }
 
 - (BOOL)isFlight {
