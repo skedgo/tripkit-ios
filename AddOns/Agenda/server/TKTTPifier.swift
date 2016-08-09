@@ -34,7 +34,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
   
   public let modes: [String]?
   
-  public init(modes modes: [String]? = nil) {
+  public init(modes: [String]? = nil) {
     self.modes = modes
   }
   
@@ -56,7 +56,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
     
     // We need a stay to TTPify
-    guard let firstStay = items.indexOf({ $0.isStay })
+    guard let _ = items.indexOf({ $0.isStay })
     else {
       let outputs = items.flatMap { $0.asFakeOutput() }
       return Observable.just([TKAgendaOutputItem.StayPlaceholder] + outputs + [TKAgendaOutputItem.StayPlaceholder])
@@ -107,7 +107,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
         return rx_fetchSolution(id, inputItems: into + locations, inRegion: region)
           .catchError { error in
             // 2a. If the solution has expired, clear the cache and create a new one
-            if case let Error.problemNotFoundOnServer = error {
+            if case Error.problemNotFoundOnServer = error {
               return rx_clearCacheAndRetry(region, insert: locations, into: into, dateComponents: dateComponents, modes: modes)
             } else {
               throw error
@@ -233,13 +233,13 @@ public struct TKTTPifier : TKAgendaBuilderType {
         // Keep hitting if it's a 299 (solution still bein calculated)
         // or the input indicates that not all trips have been added yet
         if code == 299 {
-          return true;
+          return 2.5;
 
         } else if let hasAllTrips = json?["hasAllTrips"].bool {
-          return !hasAllTrips
+          return hasAllTrips ? nil : 2.5
 
         } else {
-          return false
+          return nil
         }
       }
       .filter { code, json in
