@@ -183,6 +183,14 @@ public class LocationInformation : NSObject {
     self.transitStop = transitStop
     self.carParkInfo = carParkInfo
   }
+  
+  public var hasRealTime: Bool {
+    if let carParkInfo = carParkInfo {
+      return carParkInfo.availableSpaces != nil
+    } else {
+      return false
+    }
+  }
 }
 
 extension CarParkInfo {

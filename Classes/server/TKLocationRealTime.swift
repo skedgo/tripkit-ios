@@ -30,11 +30,18 @@ public enum TKLocationRealTime {
           paras["lng"] = named.coordinate.longitude
         }
         
-        return SVKServer.sharedInstance().rx_hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, _ in
-            switch status {
-            case 400..<500: return false  // Client-side errors; hitting again won't help
-            default: return true          // Hit again if it's okay, redirection or there was a server-side error
+        return SVKServer.sharedInstance().rx_hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, json in
+          
+            if case 400..<500 = status {
+              return nil // Client-side errors; hitting again won't help
             }
+          
+            if let location = LocationInformation(response: json?.dictionaryObject) {
+              return location.hasRealTime ? 30 : nil
+            } else {
+              return 60 // Try again in a while
+            }
+          
           }
           .map { status, json in
             return LocationInformation(response: json?.dictionaryObject)
