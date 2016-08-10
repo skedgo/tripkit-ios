@@ -19,10 +19,10 @@
 @property (nonatomic, assign) SGCellLevel level;
 @property (nonatomic, strong) NSNumber *hashCode;
 
-@property (nonatomic, copy) NSArray<STKStopCoordinate *> *stops;
+@property (nonatomic, copy) NSArray<STKModeCoordinate *> *locations;
 
-- (void)addStop:(STKStopCoordinate *)stop;
+- (void)addLocation:(STKModeCoordinate *)location;
 
-- (void)deleteAllStops;
+- (void)deleteAllLocations;
 
 @end

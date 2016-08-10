@@ -10,23 +10,23 @@
 
 @implementation TKPlainCell
 
-- (void)addStop:(STKStopCoordinate *)stop
+- (void)addLocation:(STKModeCoordinate *)location
 {
-  NSMutableArray *mutableStops;
-  if ([self.stops isKindOfClass:[NSMutableArray class]]) {
-    mutableStops = (NSMutableArray *)self.stops;
-  } if (self.stops) {
-    mutableStops = [self.stops mutableCopy];
+  NSMutableArray *mutableLocations;
+  if ([self.locations isKindOfClass:[NSMutableArray class]]) {
+    mutableLocations = (NSMutableArray *)self.locations;
+  } if (self.locations) {
+    mutableLocations = [self.locations mutableCopy];
   } else {
-    mutableStops = [NSMutableArray arrayWithCapacity:100];
+    mutableLocations = [NSMutableArray arrayWithCapacity:100];
   }
-  [mutableStops addObject:stop];
-  self.stops = mutableStops;
+  [mutableLocations addObject:location];
+  self.locations = mutableLocations;
 }
 
-- (void)deleteAllStops
+- (void)deleteAllLocations
 {
-  self.stops = nil;
+  self.locations = nil;
 }
 
 @end
