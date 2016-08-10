@@ -76,6 +76,14 @@ public class TKUserProfileHelper: NSObject {
     
     return ordered
   }
+
+  public class func maximizedModeIdentifiers(available: [Identifier]) -> Set<Identifier> {
+    let hidden = hiddenModeIdentifiers
+    let minimized = minimizedModeIdentifiers
+    let ordered = available.filter { !hidden.contains($0) && !minimized.contains($0) }
+    return Set(ordered)
+  }
+  
   
   public class var minimizedModeIdentifiers: Set<Identifier> {
     if let minimized = NSUserDefaults.sharedDefaults().objectForKey(DefaultsKey.Minimized.rawValue) as? [Identifier] {
