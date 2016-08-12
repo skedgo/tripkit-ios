@@ -8,25 +8,24 @@
 
 #import "TKPlainCell.h"
 
+@interface TKPlainCell ()
+
+@property (nonatomic, strong, nullable) NSNumber *hashCode;
+@property (nullable, nonatomic, strong) NSDate *lastUpdate;
+@property (nullable, nonatomic, copy) NSArray<STKModeCoordinate *>* locations;
+@property (nullable, nonatomic, strong) NSArray<STKModeCoordinate *>* previousLocations;
+
+@end
+
 @implementation TKPlainCell
 
-- (void)addLocation:(STKModeCoordinate *)location
+- (void)updateLocations:(nonnull NSArray<STKModeCoordinate *>*)locations
+               hashCode:(nonnull NSNumber *)hashCode
 {
-  NSMutableArray *mutableLocations;
-  if ([self.locations isKindOfClass:[NSMutableArray class]]) {
-    mutableLocations = (NSMutableArray *)self.locations;
-  } if (self.locations) {
-    mutableLocations = [self.locations mutableCopy];
-  } else {
-    mutableLocations = [NSMutableArray arrayWithCapacity:100];
-  }
-  [mutableLocations addObject:location];
-  self.locations = mutableLocations;
-}
-
-- (void)deleteAllLocations
-{
-  self.locations = nil;
+  self.lastUpdate = [NSDate date];
+  self.previousLocations = self.locations;
+  self.locations = locations;
+  self.hashCode = hashCode;
 }
 
 @end

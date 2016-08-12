@@ -11,18 +11,24 @@
 
 #import "TKCellHelper.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TKPlainCell : NSObject
 
 @property (nonatomic, copy)   NSString *identifier;
 @property (nonatomic, copy)   NSString *regionIdentifier;
-@property (nonatomic, strong) NSDate *lastUpdate;
 @property (nonatomic, assign) SGCellLevel level;
-@property (nonatomic, strong) NSNumber *hashCode;
 
-@property (nonatomic, copy) NSArray<STKModeCoordinate *> *locations;
+- (nullable NSNumber*)hashCode;
 
-- (void)addLocation:(STKModeCoordinate *)location;
+- (nullable NSDate*)lastUpdate;
 
-- (void)deleteAllLocations;
+- (nullable NSArray<STKModeCoordinate *>*)locations;
+
+- (nullable NSArray<STKModeCoordinate *>*)previousLocations;
+
+- (void)updateLocations:(NSArray<STKModeCoordinate *>*)locations hashCode:(NSNumber *)hashCode;
 
 @end
+
+NS_ASSUME_NONNULL_END
