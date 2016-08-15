@@ -24,7 +24,7 @@ public final class RegionInformation: NSObject {
     self.paratransitInformation = paratransitInformation
   }
   
-  private class func fromJSONResponse(response: AnyObject?) -> RegionInformation? {
+  private class func fromJSONResponse(_ response: AnyObject?) -> RegionInformation? {
     guard let JSON = response as? [String: AnyObject],
       let regions = JSON["regions"] as? [[String: AnyObject]],
       let region = regions.first else {
@@ -62,7 +62,7 @@ public final class ParatransitInformation: NSObject {
     self.number = number
   }
   
-  private class func fromJSONResponse(response: AnyObject?) -> ParatransitInformation? {
+  private class func fromJSONResponse(_ response: AnyObject?) -> ParatransitInformation? {
     guard let JSON = response as? [String: AnyObject],
           let regions = JSON["regions"] as? [[String: AnyObject]],
           let region = regions.first,
@@ -78,7 +78,7 @@ public final class ParatransitInformation: NSObject {
 }
 
 extension ModeInfo {
-  private class func fromJSONResponse(response: AnyObject?) -> [ModeInfo] {
+  private class func fromJSONResponse(_ response: AnyObject?) -> [ModeInfo] {
     guard let JSON = response as? [String: AnyObject],
           let regions = JSON["regions"] as? [[String: AnyObject]],
           let region = regions.first,
@@ -97,7 +97,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: RegionInformation? -> Void)
+  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: (RegionInformation?) -> Void)
   {
     return fetchRegionInfo(
       region,
@@ -112,7 +112,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: ParatransitInformation? -> Void)
+  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: (ParatransitInformation?) -> Void)
   {
     return fetchRegionInfo(
       region,
@@ -126,7 +126,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: [ModeInfo] -> Void)
+  public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: ([ModeInfo]) -> Void)
   {
     return fetchRegionInfo(
       region,
@@ -135,7 +135,7 @@ extension TKBuzzInfoProvider {
     )
   }
 
-  private class func fetchRegionInfo<E>(region: SVKRegion, transformer: AnyObject? -> E, completion: E -> Void)
+  private class func fetchRegionInfo<E>(_ region: SVKRegion, transformer: (AnyObject?) -> E, completion: (E) -> Void)
   {
     let paras = [
       "region": region.name
@@ -161,12 +161,12 @@ public struct CarParkInfo {
   public let name: String
   public let availableSpaces: Int?
   public let totalSpaces: Int?
-  public let lastUpdate: NSDate?
+  public let lastUpdate: Date?
 }
 
 public class LocationInformation : NSObject {
   public let what3word: String?
-  public let what3wordInfoURL: NSURL?
+  public let what3wordInfoURL: URL?
   
   public let transitStop: STKStopAnnotation?
   
@@ -208,8 +208,8 @@ extension CarParkInfo {
     self.name = name
     self.availableSpaces = JSON["availableSpaces"] as? Int
     self.totalSpaces = JSON["totalSpaces"] as? Int
-    if let seconds = JSON["lastUpdate"] as? NSTimeInterval {
-      self.lastUpdate = NSDate(timeIntervalSince1970: seconds)
+    if let seconds = JSON["lastUpdate"] as? TimeInterval {
+      self.lastUpdate = Date(timeIntervalSince1970: seconds)
     } else {
       self.lastUpdate = nil
     }
@@ -247,7 +247,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
   */
-  public class func fetchLocationInformation(coordinate: CLLocationCoordinate2D, forRegion region: SVKRegion, completion: (LocationInformation?) -> Void) {
+  public class func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, forRegion region: SVKRegion, completion: (LocationInformation?) -> Void) {
     let paras: [String: AnyObject] = [
       "lat": coordinate.latitude,
       "lng": coordinate.longitude

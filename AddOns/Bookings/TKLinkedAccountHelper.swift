@@ -17,24 +17,24 @@ public struct ProviderAuth {
 
   private struct RemoteAction {
     private let title: String
-    private let URL: NSURL
+    private let URL: Foundation.URL
   }
 
   private enum Status {
-    case Connected(RemoteAction?)
-    case NotConnected(RemoteAction)
+    case connected(RemoteAction?)
+    case notConnected(RemoteAction)
     
-    private var remoteURL: NSURL? {
+    private var remoteURL: URL? {
       switch self {
-      case .Connected(let action): return action?.URL
-      case .NotConnected(let action): return action.URL
+      case .connected(let action): return action?.URL
+      case .notConnected(let action): return action.URL
       }
     }
 
     private var remoteAction: String? {
       switch self {
-      case .Connected(let action): return action?.title
-      case .NotConnected(let action): return action.title
+      case .connected(let action): return action?.title
+      case .notConnected(let action): return action.title
       }
     }
   }
@@ -47,8 +47,8 @@ public struct ProviderAuth {
   /// Current authentication status
   public var isConnected: Bool {
     switch status {
-    case .Connected: return true
-    case .NotConnected: return false
+    case .connected: return true
+    case .notConnected: return false
     }
   }
 
@@ -59,14 +59,14 @@ public struct ProviderAuth {
     }
     
     switch status {
-    case .Connected: return "Disconnect"
-    case .NotConnected: return "Setup"
+    case .connected: return "Disconnect"
+    case .notConnected: return "Setup"
     }
   }
   
   /// Optional URL to either link or unlink the account. 
   /// Only available if user has an account.
-  public var actionURL: NSURL? {
+  public var actionURL: URL? {
     return status.remoteURL
   }
 
@@ -77,7 +77,7 @@ extension ProviderAuth.Status {
     guard let action = dictionary["action"] as? String,
           let actionTitle = dictionary["actionTitle"] as? String,
           let URLString = dictionary["url"] as? String,
-          let actionURL = NSURL(string: URLString)
+          let actionURL = URL(string: URLString)
       else {
       return nil
     }
@@ -86,9 +86,9 @@ extension ProviderAuth.Status {
     
     switch action {
     case "signin":
-      self = .NotConnected(remoteAction)
+      self = .notConnected(remoteAction)
     case "logout":
-      self = .Connected(remoteAction)
+      self = .connected(remoteAction)
     default:
       return nil
     }
@@ -116,7 +116,7 @@ extension SVKRegion {
    - parameter mode: Mode identifier for which to fetch accounts. If `nil`, accounts for all modes will be fetched.
    - parameter completion: Block executed on completion with list of accounts that can be linked.
   */
-  public func linkedAccounts(mode: String? = nil, completion: [ProviderAuth]? -> Void) {
+  public func linkedAccounts(_ mode: String? = nil, completion: ([ProviderAuth]?) -> Void) {
     if let mode = mode, account = locallyLinkedAccount(mode) {
       completion([account])
     } else {
@@ -135,7 +135,7 @@ extension SVKRegion {
    - parameter remoteURL: URL for linking from `ProviderAuth.actionURL`.
    - returns: Observable indicating success.
   */
-  public func rx_linkAccount(mode: String, remoteURL: NSURL, presenter: UIViewController) -> Observable<Bool> {
+  public func rx_linkAccount(_ mode: String, remoteURL: NSURL, presenter: UIViewController) -> Observable<Bool> {
     return OAuthClient.requiresOAuth(remoteURL)
       .flatMap { form, isOAuth -> Observable<Bool> in
         if isOAuth {
@@ -161,7 +161,7 @@ extension SVKRegion {
    - parameter remoteURL: `ProviderAuth.actionURL`, required to remove remote authentications.
    - parameter completion: Block executed when unlinking has finished. Boolean parameter indicates if any authentications have been removed.
   */
-  public func unlinkAccount(mode: String, remoteURL: NSURL?, completion: Bool -> Void) {
+  public func unlinkAccount(_ mode: String, remoteURL: NSURL?, completion: (Bool) -> Void) {
     let localRemoved = OAuthClient.removeCredentials(mode: mode)
     
     guard let URL = remoteURL else {
@@ -181,7 +181,7 @@ extension SVKRegion {
     
   }
 
-  private func locallyLinkedAccount(mode: String) -> ProviderAuth? {
+  private func locallyLinkedAccount(_ mode: String) -> ProviderAuth? {
     if let cached = OAuthClient.cachedCredentials(mode: mode) {
       if (cached.isValid || cached.hasRefreshToken) {
         let status = ProviderAuth.Status.Connected(nil)
@@ -194,7 +194,7 @@ extension SVKRegion {
     return nil;
   }
   
-  private func remotelyLinkedAccounts(mode: String?, completion: [ProviderAuth]? -> Void) {
+  private func remotelyLinkedAccounts(_ mode: String?, completion: ([ProviderAuth]?) -> Void) {
     
     let paras: [String: AnyObject]?
     if let mode = mode {
@@ -264,11 +264,11 @@ class MiniBookingManager: NSObject, BPKBookingViewControllerDelegate {
     return subject.asObservable()
   }
   
-  func bookingViewController(controller: BPKBookingViewController, didRequestUpdate url: NSURL, handler: () -> Void) {
+  func bookingViewController(_ controller: BPKBookingViewController, didRequestUpdate url: URL, handler: () -> Void) {
     assert(false, "Don't use MiniBM for trips!")
   }
   
-  func bookingViewController(controller: BPKBookingViewController, didComplete complete: Bool, withManager manager: BPKManager) {
+  func bookingViewController(_ controller: BPKBookingViewController, didComplete complete: Bool, withManager manager: BPKManager) {
     self.presenter?.dismissViewControllerAnimated(true, completion: nil)
     self.presenter = nil
     
@@ -276,7 +276,7 @@ class MiniBookingManager: NSObject, BPKBookingViewControllerDelegate {
     subject.onCompleted()
   }
   
-  func bookingViewControllerDidCancelBooking(controller: BPKBookingViewController) {
+  func bookingViewControllerDidCancelBooking(_ controller: BPKBookingViewController) {
     self.presenter?.dismissViewControllerAnimated(true, completion: nil)
     self.presenter = nil
     

@@ -19,15 +19,15 @@ enum TKTTPifierCache {
     return problemId(hash)
   }
   
-  private static func problemId(hash: UInt) -> String? {
-    let dict = TKJSONCache.read("\(hash)", directory: .Cache, subdirectory: problemsDir) as? [String: String]
+  private static func problemId(_ hash: UInt) -> String? {
+    let dict = TKJSONCache.read("\(hash)", directory: .cache, subdirectory: problemsDir) as? [String: String]
     return dict?["id"]
   }
   
   static func save(problemId id: String, forParas paras: [String: AnyObject]) {
     let hash = inputHash(paras)
     let dict = ["id": id]
-    TKJSONCache.save("\(hash)", dictionary: dict, directory: .Cache, subdirectory: problemsDir)
+    TKJSONCache.save("\(hash)", dictionary: dict, directory: .cache, subdirectory: problemsDir)
     assert(problemId(forParas: paras) == id)
   }
   
@@ -35,9 +35,9 @@ enum TKTTPifierCache {
     let hash = inputHash(paras)
     
     if let id = problemId(hash) {
-      TKJSONCache.remove(id, directory: .Cache, subdirectory: solutionsDir)
+      TKJSONCache.remove(id, directory: .cache, subdirectory: solutionsDir)
     }
-    TKJSONCache.remove("\(hash)", directory: .Cache, subdirectory: problemsDir)
+    TKJSONCache.remove("\(hash)", directory: .cache, subdirectory: problemsDir)
   }
 
   static func solutionJson(forId id: String) -> JSON? {
@@ -56,9 +56,9 @@ enum TKTTPifierCache {
     TKJSONCache.save(id, dictionary: dict, directory: .Cache, subdirectory: solutionsDir)
   }
   
-  private static func inputHash(input: [String: AnyObject]) -> UInt {
+  private static func inputHash(_ input: [String: AnyObject]) -> UInt {
     var hash = 5381
-    for key in input.keys.sort() {
+    for key in input.keys.sorted() {
       let value = input[key]
       if let string = value as? String {
         hash = ((hash << 5) &+ hash) &+ string.hash

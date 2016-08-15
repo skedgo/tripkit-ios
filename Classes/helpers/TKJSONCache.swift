@@ -10,62 +10,62 @@ import Foundation
 
 @objc
 public enum TKJSONCacheDirectory: Int {
-  case Cache
-  case Documents
+  case cache
+  case documents
 }
 
 public class TKJSONCache: NSObject {
-  public static func read(id: String, directory: TKJSONCacheDirectory) -> [String: AnyObject]? {
+  public static func read(_ id: String, directory: TKJSONCacheDirectory) -> [String: AnyObject]? {
     return read(id, directory: directory, subdirectory: nil)
   }
 
-  public static func read(id: String, directory: TKJSONCacheDirectory, subdirectory: String?) -> [String: AnyObject]? {
+  public static func read(_ id: String, directory: TKJSONCacheDirectory, subdirectory: String?) -> [String: AnyObject]? {
     let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
     
-    if let data = NSData(contentsOfURL: fileURL) {
-      return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String: AnyObject]
+    if let data = try? Data(contentsOf: fileURL) {
+      return NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: AnyObject]
     } else {
       return nil
     }
   }
 
-  public static func save(id: String, dictionary: [String: AnyObject], directory: TKJSONCacheDirectory) {
+  public static func save(_ id: String, dictionary: [String: AnyObject], directory: TKJSONCacheDirectory) {
     save(id, dictionary: dictionary, directory: directory, subdirectory: nil)
   }
 
-  public static func save(id: String, dictionary: [String: AnyObject], directory: TKJSONCacheDirectory, subdirectory: String?) {
+  public static func save(_ id: String, dictionary: [String: AnyObject], directory: TKJSONCacheDirectory, subdirectory: String?) {
     let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
-    let data = NSKeyedArchiver.archivedDataWithRootObject(dictionary)
-    data.writeToURL(fileURL, atomically: true)
+    let data = NSKeyedArchiver.archivedData(withRootObject: dictionary)
+    try? data.write(to: fileURL, options: [.dataWritingAtomic])
     assert(read(id, directory: directory, subdirectory: subdirectory) != nil)
   }
 
-  public static func remove(id: String, directory: TKJSONCacheDirectory) {
+  public static func remove(_ id: String, directory: TKJSONCacheDirectory) {
     remove(id, directory: directory, subdirectory: nil)
   }
 
-  public static func remove(id: String, directory: TKJSONCacheDirectory, subdirectory: String?) {
+  public static func remove(_ id: String, directory: TKJSONCacheDirectory, subdirectory: String?) {
     let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
-    let _ = try? NSFileManager.defaultManager().removeItemAtURL(fileURL)
+    let _ = try? FileManager.default.removeItem(at: fileURL)
   }
   
-  private static func cacheURL(destination: TKJSONCacheDirectory, filename: String, subdirectory: String? = nil) -> NSURL {
-    let fileMan = NSFileManager.defaultManager()
-    let searchPath: NSSearchPathDirectory
+  private static func cacheURL(_ destination: TKJSONCacheDirectory, filename: String, subdirectory: String? = nil) -> URL {
+    let fileMan = FileManager.default
+    let searchPath: FileManager.SearchPathDirectory
     switch destination {
-    case .Cache: searchPath = .CachesDirectory
-    case .Documents: searchPath = .DocumentDirectory
+    case .cache: searchPath = .cachesDirectory
+    case .documents: searchPath = .documentDirectory
     }
     
-    guard let path = fileMan.URLsForDirectory(searchPath, inDomains: .UserDomainMask).first else {
+    guard let path = fileMan.urls(for: searchPath, in: .userDomainMask).first else {
       preconditionFailure()
     }
     
-    let pathURL: NSURL
+    let pathURL: URL
     if let subdirectory = subdirectory {
-      pathURL = path.URLByAppendingPathComponent(subdirectory, isDirectory: true)
+      pathURL = path.appendingPathComponent(subdirectory, isDirectory: true)
       do {
-        try fileMan.createDirectoryAtURL(pathURL, withIntermediateDirectories: true, attributes: nil)
+        try fileMan.createDirectory(at: pathURL, withIntermediateDirectories: true, attributes: nil)
       } catch {
         SGKLog.warn("TKJSONCache", text: "Could not create directory \(pathURL), due to: \(error)")
       }
@@ -74,6 +74,6 @@ public class TKJSONCache: NSObject {
     }
     
     let file = "\(filename).cache"
-    return pathURL.URLByAppendingPathComponent(file)
+    return pathURL.appendingPathComponent(file)
   }
 }

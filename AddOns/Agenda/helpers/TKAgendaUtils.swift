@@ -10,27 +10,27 @@ import Foundation
 
 import MapKit
 
-extension NSDateComponents {
-  public func earliestDate() -> NSDate {
-    let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-    return calendar!.dateFromComponents(self)!
+extension DateComponents {
+  public func earliestDate() -> Date {
+    let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)
+    return calendar!.date(from: self)!
   }
 
-  public func latestDate() -> NSDate {
-    return earliestDate().dateByAddingTimeInterval(86400)
+  public func latestDate() -> Date {
+    return earliestDate().addingTimeInterval(86400)
   }
 }
 
 extension TKAgendaType {
-  public func applies(forDateComponents components: NSDateComponents) -> Bool {
+  public func applies(forDateComponents components: DateComponents) -> Bool {
     return components.earliestDate() == startDate
   }
 }
 
 extension MKCoordinateRegion {
-  static func forItems(items: [TKAgendaInputItem]) -> MKCoordinateRegion {
+  static func forItems(_ items: [TKAgendaInputItem]) -> MKCoordinateRegion {
     let mapRect = items.reduce(MKMapRectNull) { mapRect, item in
-      if case let .Event(eventInput) = item where CLLocationCoordinate2DIsValid(eventInput.coordinate) {
+      if case let .event(eventInput) = item where CLLocationCoordinate2DIsValid(eventInput.coordinate) {
         let point = MKMapPointForCoordinate(eventInput.coordinate)
         let miniRect = MKMapRectMake(point.x, point.y, 0, 0)
         return MKMapRectUnion(mapRect, miniRect)

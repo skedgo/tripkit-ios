@@ -33,22 +33,22 @@ public class TKQuickBooking: NSObject {
   public let subtitle: String?
   
   /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`.
-  public let bookingURL: NSURL
+  public let bookingURL: URL
 
   // Localised string for doing booking
   public let bookingTitle: String
   
   // URL for secondary booking flow for booking this option. This will typically let you customise the booking or pick from more options, compared to the primary `bookingURL`.
-  public let secondaryBookingURL: NSURL?
+  public let secondaryBookingURL: URL?
 
   // Localised string for secondary booking action
   public let secondaryBookingTitle: String?
 
   /// URL to fetch updated trip that's using this booking options. Only present if there would be a change to the trip.
-  public let tripUpdateURL: NSURL?
+  public let tripUpdateURL: URL?
   
   /// Optional URL for image identifying this booking option
-  public let imageURL: NSURL?
+  public let imageURL: URL?
   
   /// Optional price for this option
   public let price: TKQuickBookingPrice?
@@ -57,15 +57,15 @@ public class TKQuickBooking: NSObject {
   public let priceString: String?
   
   public let surgeString: String?
-  public let surgeImageURL: NSURL?
+  public let surgeImageURL: URL?
 
   /// Optional ETA for this option. This is the expected waiting time.
-  public let ETA: NSTimeInterval?
+  public let ETA: TimeInterval?
   
   /// Expected waiting time. Negative if unknown. (For Obj-c compatibility.)
-  public let ETARaw: NSTimeInterval
+  public let ETARaw: TimeInterval
   
-  private init(title: String, subtitle: String?, bookingURL: NSURL, bookingTitle: String, secondaryBookingURL: NSURL?, secondaryBookingTitle: String?, tripUpdateURL: NSURL?, imageURL: NSURL?, price: TKQuickBookingPrice?, priceString: String?, surgeText: String?, surgeImageURL: NSURL?, ETA: NSTimeInterval?) {
+  private init(title: String, subtitle: String?, bookingURL: URL, bookingTitle: String, secondaryBookingURL: URL?, secondaryBookingTitle: String?, tripUpdateURL: URL?, imageURL: URL?, price: TKQuickBookingPrice?, priceString: String?, surgeText: String?, surgeImageURL: URL?, ETA: TimeInterval?) {
     self.title = title
     self.subtitle = subtitle
     self.bookingURL = bookingURL
@@ -92,13 +92,13 @@ public struct TKBookingConfirmation {
   public struct Detail {
     public let title: String
     public let subtitle: String?
-    public let imageURL: NSURL?
+    public let imageURL: URL?
   }
   
   public struct Action {
     public let title: String
     public let isDestructive: Bool
-    public let internalURL: NSURL?
+    public let internalURL: URL?
     public let externalAction: NSString?
   }
   
@@ -113,7 +113,7 @@ public class TKQuickBookingHelper: NSObject {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
-  public class func fetchQuickBookings(forSegment segment: TKSegment, completion: [TKQuickBooking] -> Void) {
+  public class func fetchQuickBookings(forSegment segment: TKSegment, completion: ([TKQuickBooking]) -> Void) {
     if let stored = segment.storedQuickBookings {
       completion(stored)
       return
@@ -145,7 +145,7 @@ public class TKQuickBookingHelper: NSObject {
 extension TKQuickBooking {
   private convenience init?(withDictionary dictionary: [NSString: AnyObject]) {
     guard let bookingURLString = dictionary["bookingURL"] as? String,
-          let bookingURL = NSURL(string: bookingURLString),
+          let bookingURL = URL(string: bookingURLString),
           let bookingTitle = dictionary["bookingTitle"] as? String,
           let title = dictionary["title"] as? String
       else {
@@ -153,8 +153,8 @@ extension TKQuickBooking {
     }
     
     let subtitle = dictionary["subtitle"] as? String
-    let imageURL: NSURL?
-    if let URLString = dictionary["imageURL"] as? String, URL = NSURL(string: URLString) {
+    let imageURL: URL?
+    if let URLString = dictionary["imageURL"] as? String, URL = URL(string: URLString) {
       imageURL = URL
     } else {
       imageURL = nil
@@ -171,16 +171,16 @@ extension TKQuickBooking {
 
     let secondaryBookingTitle = dictionary["secondaryBookingTitle"] as? String
     let secondaryBookingURLString = dictionary["secondaryBookingURL"] as? String
-    let secondaryBookingURL = secondaryBookingURLString != nil ? NSURL(string: secondaryBookingURLString!) : nil
+    let secondaryBookingURL = secondaryBookingURLString != nil ? URL(string: secondaryBookingURLString!) : nil
 
     let surgeText = dictionary["surgeString"] as? String
     let surgeImageURLString = dictionary["surgeImageURL"] as? String
-    let surgeImageURL = surgeImageURLString != nil ? NSURL(string: surgeImageURLString!) : nil
+    let surgeImageURL = surgeImageURLString != nil ? URL(string: surgeImageURLString!) : nil
     
-    let ETA = dictionary["ETA"] as? NSTimeInterval
+    let ETA = dictionary["ETA"] as? TimeInterval
     
     let tripUpdateURLString = dictionary["tripUpdateURL"] as? String
-    let tripUpdateURL = tripUpdateURLString != nil ? NSURL(string: tripUpdateURLString!) : nil
+    let tripUpdateURL = tripUpdateURLString != nil ? URL(string: tripUpdateURLString!) : nil
     
     self.init(title: title, subtitle: subtitle,
               bookingURL: bookingURL, bookingTitle: bookingTitle,
@@ -222,7 +222,7 @@ extension TKBookingConfirmation.Detail {
     self.title = title
     self.subtitle = dictionary["subtitle"] as? String
     if let imageURLString = dictionary["imageURL"] as? String,
-       let imageURL = NSURL(string: imageURLString) {
+       let imageURL = URL(string: imageURLString) {
       self.imageURL = imageURL
     } else {
       self.imageURL = nil
@@ -240,7 +240,7 @@ extension TKBookingConfirmation.Action {
     self.isDestructive = isDestructive
     
     if let internalURLString = dictionary["internalURL"] as? String,
-      let internalURL = NSURL(string: internalURLString) {
+      let internalURL = URL(string: internalURLString) {
       self.internalURL = internalURL
     } else {
       self.internalURL = nil
