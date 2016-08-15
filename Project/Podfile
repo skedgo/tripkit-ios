@@ -1,5 +1,4 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://github.com/skedgo/PodSpecs.git'
 
 use_frameworks!
 platform :ios, '8.0'
@@ -13,6 +12,12 @@ def shared_pods
   
   pod 'RxSwift',        branch: 'swift-3.0',  git: 'https://github.com/ReactiveX/RxSwift.git'
   pod 'RxCocoa',        branch: 'swift-3.0',  git: 'https://github.com/ReactiveX/RxSwift.git'
+
+  # These can be removed, once their Swift3 versions are the defaults
+  pod 'SwiftyJSON',     branch: 'swift3',     git: 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+  pod 'KeychainAccess', branch: 'swift-3.0',  git: 'https://github.com/kishikawakatsumi/KeychainAccess.git'
+  pod 'OAuthSwift',     branch: 'swift3.0',   git: 'https://github.com/OAuthSwift/OAuthSwift.git'
+
 end
 
 target 'TripKit' do
