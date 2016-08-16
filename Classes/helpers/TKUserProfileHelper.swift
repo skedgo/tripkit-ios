@@ -27,15 +27,15 @@ public class TKUserProfileHelper: NSObject {
   */
   public class func updateTransportModesWithEnabledOrder(_ enabled: [Identifier]?, minimized: Set<Identifier>?, hidden: Set<Identifier>?)
   {
-    let shared = UserDefaults.sharedDefaults()
+    let shared = UserDefaults.shared()
     if let enabled = enabled {
-      shared.setObject(enabled, forKey: DefaultsKey.SortedEnabled.rawValue)
+      shared.set(enabled, forKey: DefaultsKey.SortedEnabled.rawValue)
     }
     if let minimized = minimized {
-      shared.setObject(Array(minimized), forKey: DefaultsKey.Minimized.rawValue)
+      shared.set(Array(minimized), forKey: DefaultsKey.Minimized.rawValue)
     }
     if let hidden = hidden {
-      shared.setObject(Array(hidden), forKey: DefaultsKey.Hidden.rawValue)
+      shared.set(Array(hidden), forKey: DefaultsKey.Hidden.rawValue)
     }
   }
   
@@ -62,7 +62,7 @@ public class TKUserProfileHelper: NSObject {
     } else {
       modes.remove(modeIdentifier)
     }
-    UserDefaults.sharedDefaults().setObject(Array(modes), forKey: key.rawValue)
+    UserDefaults.shared().set(Array(modes), forKey: key.rawValue)
   }
   
   public class func orderedEnabledModeIdentifiersForAvailableModeIdentifiers(_ available: [Identifier]) -> [Identifier] {
@@ -86,7 +86,7 @@ public class TKUserProfileHelper: NSObject {
   
   
   public class var minimizedModeIdentifiers: Set<Identifier> {
-    if let minimized = UserDefaults.sharedDefaults().objectForKey(DefaultsKey.Minimized.rawValue) as? [Identifier] {
+    if let minimized = UserDefaults.shared().object(forKey: DefaultsKey.Minimized.rawValue) as? [Identifier] {
       return Set(minimized)
     } else {
       return [SVKTransportModeIdentifierMotorbike, SVKTransportModeIdentifierTaxi, SVKTransportModeIdentifierWalking]
@@ -94,7 +94,7 @@ public class TKUserProfileHelper: NSObject {
   }
   
   public class var hiddenModeIdentifiers: Set<Identifier> {
-    if let hidden = UserDefaults.sharedDefaults().objectForKey(DefaultsKey.Hidden.rawValue) as? [Identifier] {
+    if let hidden = UserDefaults.shared().object(forKey: DefaultsKey.Hidden.rawValue) as? [Identifier] {
       return Set(hidden)
     } else {
       return [SVKTransportModeIdentifierSchoolBuses]
@@ -116,11 +116,11 @@ public class TKUserProfileHelper: NSObject {
     } else {
       modes.append(identifier)
     }
-    UserDefaults.sharedDefaults().setObject(modes, forKey: DefaultsKey.Disliked.rawValue)
+    UserDefaults.shared().set(modes, forKey: DefaultsKey.Disliked.rawValue)
   }
 
   public class var dislikedTransitModes: [Identifier] {
-    if let disliked = UserDefaults.sharedDefaults().objectForKey(DefaultsKey.Disliked.rawValue) as? [Identifier] {
+    if let disliked = UserDefaults.shared().object(forKey: DefaultsKey.Disliked.rawValue) as? [Identifier] {
       return disliked
     } else {
       return []

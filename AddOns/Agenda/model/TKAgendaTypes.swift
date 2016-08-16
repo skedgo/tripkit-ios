@@ -25,7 +25,7 @@ public protocol TKAgendaType {
   var triggerRebuild: Variable<Bool> { get }
   var inputItems: Observable<[TKAgendaInputItem]> { get }
   var outputItems: Observable<[TKAgendaOutputItem]?> { get }
-  var lastError: Observable<ErrorType?> { get }
+  var lastError: Observable<Error?> { get }
 }
 
 public enum TKAgendaInputItem {
@@ -260,7 +260,7 @@ extension TKAgendaTripOptionType {
   
   var segments: [TKAgendaTripOptionSegmentType] {
     return usedModes.map { mode -> TKMinimalSegment in
-      let image = SVKTransportModes.imageForModeIdentifier(mode)
+      let image = SVKTransportModes.image(forModeIdentifier: mode)
       return TKMinimalSegment(modeImage: image)
     }
   }

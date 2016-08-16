@@ -36,7 +36,7 @@ public class TKJSONCache: NSObject {
   public static func save(_ id: String, dictionary: [String: AnyObject], directory: TKJSONCacheDirectory, subdirectory: String?) {
     let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
     let data = NSKeyedArchiver.archivedData(withRootObject: dictionary)
-    try? data.write(to: fileURL, options: [.dataWritingAtomic])
+    try? data.write(to: fileURL, options: [.atomic])
     assert(read(id, directory: directory, subdirectory: subdirectory) != nil)
   }
 

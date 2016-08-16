@@ -111,7 +111,7 @@ private struct TKSimpleAgenda: TKAgendaType {
     return outputs.asObservable()
   }
   
-  var lastError: Observable<ErrorType?> {
+  var lastError: Observable<Error?> {
     return outputError.asObservable()
   }
   

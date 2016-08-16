@@ -117,7 +117,7 @@ extension SVKRegion {
    - parameter completion: Block executed on completion with list of accounts that can be linked.
   */
   public func linkedAccounts(_ mode: String? = nil, completion: ([ProviderAuth]?) -> Void) {
-    if let mode = mode, account = locallyLinkedAccount(mode) {
+    if let mode = mode, let account = locallyLinkedAccount(mode) {
       completion([account])
     } else {
       remotelyLinkedAccounts(mode, completion: completion)
@@ -135,7 +135,7 @@ extension SVKRegion {
    - parameter remoteURL: URL for linking from `ProviderAuth.actionURL`.
    - returns: Observable indicating success.
   */
-  public func rx_linkAccount(_ mode: String, remoteURL: NSURL, presenter: UIViewController) -> Observable<Bool> {
+  public func rx_linkAccount(_ mode: String, remoteURL: URL, presenter: UIViewController) -> Observable<Bool> {
     return OAuthClient.requiresOAuth(remoteURL)
       .flatMap { form, isOAuth -> Observable<Bool> in
         if isOAuth {
@@ -161,7 +161,7 @@ extension SVKRegion {
    - parameter remoteURL: `ProviderAuth.actionURL`, required to remove remote authentications.
    - parameter completion: Block executed when unlinking has finished. Boolean parameter indicates if any authentications have been removed.
   */
-  public func unlinkAccount(_ mode: String, remoteURL: NSURL?, completion: (Bool) -> Void) {
+  public func unlinkAccount(_ mode: String, remoteURL: URL?, completion: (Bool) -> Void) {
     let localRemoved = OAuthClient.removeCredentials(mode: mode)
     
     guard let URL = remoteURL else {
@@ -170,9 +170,9 @@ extension SVKRegion {
     }
     
     // Also unlink remote
-    SVKServer.GET(URL, paras: nil) { _, response, error in
-      if let response = response as? [NSObject: AnyObject]
-        where response.isEmpty && error == nil {
+    SVKServer.get(URL, paras: nil) { _, response, error in
+      if let response = response as? [NSObject: AnyObject],
+         response.isEmpty && error == nil {
         completion(true || localRemoved)
       } else {
         completion(false)
@@ -184,11 +184,11 @@ extension SVKRegion {
   private func locallyLinkedAccount(_ mode: String) -> ProviderAuth? {
     if let cached = OAuthClient.cachedCredentials(mode: mode) {
       if (cached.isValid || cached.hasRefreshToken) {
-        let status = ProviderAuth.Status.Connected(nil)
+        let status = ProviderAuth.Status.connected(nil)
         return ProviderAuth(status: status, modeIdentifier: mode)
       } else {
         // Remove outdated credentials that we can't renew
-        OAuthClient.removeCredentials(mode: mode)
+        let _ =  OAuthClient.removeCredentials(mode: mode)
       }
     }
     return nil;
@@ -203,13 +203,13 @@ extension SVKRegion {
       paras = nil
     }
     
-    SVKServer.sharedInstance().hitSkedGoWithMethod(
-      "GET",
+    SVKServer.sharedInstance().hitSkedGo(
+      withMethod: "GET",
       path: "auth/\(name)",
       parameters: paras,
       region: self,
       success: { _, response in
-        guard let array = response as? [[String: AnyObject]] where !array.isEmpty else {
+        guard let array = response as? [[String: AnyObject]], !array.isEmpty else {
           completion([])
           return
         }
@@ -255,8 +255,8 @@ class MiniBookingManager: NSObject, BPKBookingViewControllerDelegate {
     let booker = BPKBookingViewController(form: form)
     booker.delegate = self
     let navigator = UINavigationController(rootViewController: booker)
-    navigator.modalPresentationStyle = .FormSheet
-    presenter.presentViewController(navigator, animated: true, completion: nil)
+    navigator.modalPresentationStyle = .formSheet
+    presenter.present(navigator, animated: true, completion: nil)
     self.presenter = presenter
   }
   
@@ -268,8 +268,8 @@ class MiniBookingManager: NSObject, BPKBookingViewControllerDelegate {
     assert(false, "Don't use MiniBM for trips!")
   }
   
-  func bookingViewController(_ controller: BPKBookingViewController, didComplete complete: Bool, withManager manager: BPKManager) {
-    self.presenter?.dismissViewControllerAnimated(true, completion: nil)
+  func bookingViewController(_ controller: BPKBookingViewController, didComplete complete: Bool, with manager: BPKManager) {
+    self.presenter?.dismiss(animated: true, completion: nil)
     self.presenter = nil
     
     subject.onNext(complete)
@@ -277,7 +277,7 @@ class MiniBookingManager: NSObject, BPKBookingViewControllerDelegate {
   }
   
   func bookingViewControllerDidCancelBooking(_ controller: BPKBookingViewController) {
-    self.presenter?.dismissViewControllerAnimated(true, completion: nil)
+    self.presenter?.dismiss(animated: true, completion: nil)
     self.presenter = nil
     
     subject.onNext(false)

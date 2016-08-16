@@ -124,8 +124,8 @@ public class TKQuickBookingHelper: NSObject {
       return
     }
     
-    SVKServer.GET(bookingsURL, paras: nil) { _, response, error in
-      guard let array = response as? [[NSString: AnyObject]] where !array.isEmpty else {
+    SVKServer.get(bookingsURL, paras: nil) { _, response, error in
+      guard let array = response as? [[NSString: AnyObject]], !array.isEmpty else {
         completion([])
         SGKLog.warn("TKQuickBookingHelper", text: "Response isn't array.\nResponse: \(response)\nError: \(error)")
         return
@@ -154,7 +154,7 @@ extension TKQuickBooking {
     
     let subtitle = dictionary["subtitle"] as? String
     let imageURL: URL?
-    if let URLString = dictionary["imageURL"] as? String, URL = URL(string: URLString) {
+    if let URLString = dictionary["imageURL"] as? String, let URL = URL(string: URLString) {
       imageURL = URL
     } else {
       imageURL = nil
@@ -306,7 +306,7 @@ extension TKSegment {
   public var storedQuickBookings: [TKQuickBooking]? {
     get {
       if let key = cacheKey(),
-         let cached = TKTripKit.sharedInstance().inMemoryCache().objectForKey(key) as? [[NSString: AnyObject]] {
+         let cached = TKTripKit.sharedInstance().inMemoryCache().object(forKey: key) as? [[NSString: AnyObject]] {
         return cached.flatMap { TKQuickBooking(withDictionary: $0) }
       } else {
         return nil
@@ -317,9 +317,9 @@ extension TKSegment {
   public var activeIndexQuickBooking: Int? {
     get {
       if let key = indexKey(),
-         let index = TKTripKit.sharedInstance().inMemoryCache().objectForKey(key) as? Int,
-         let bookings = storedQuickBookings
-         where index < bookings.count {
+         let index = TKTripKit.sharedInstance().inMemoryCache().object(forKey: key) as? Int,
+         let bookings = storedQuickBookings,
+         index < bookings.count {
         return index
       } else {
         return nil

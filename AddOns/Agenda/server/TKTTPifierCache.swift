@@ -41,7 +41,7 @@ enum TKTTPifierCache {
   }
 
   static func solutionJson(forId id: String) -> JSON? {
-    if let dict = TKJSONCache.read(id, directory: .Cache, subdirectory: solutionsDir) {
+    if let dict = TKJSONCache.read(id, directory: .cache, subdirectory: solutionsDir) {
       return JSON(dict)
     } else {
       return nil
@@ -53,7 +53,7 @@ enum TKTTPifierCache {
       SGKLog.warn("TKTTPifierCache", text: "Could not turn json into dictionary. JSON: \(json)")
       return
     }
-    TKJSONCache.save(id, dictionary: dict, directory: .Cache, subdirectory: solutionsDir)
+    TKJSONCache.save(id, dictionary: dict, directory: .cache, subdirectory: solutionsDir)
   }
   
   private static func inputHash(_ input: [String: AnyObject]) -> UInt {

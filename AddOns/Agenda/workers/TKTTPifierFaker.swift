@@ -16,7 +16,7 @@ enum TKTTPifierFaker {
 
     // Add all at end
     var inserted = into
-    inserted.appendContentsOf(locations)
+    inserted.append(contentsOf: locations)
     
     if inserted.count <= 1 {
       return Observable.just(inserted.flatMap { $0.asFakeOutput() } )
@@ -62,8 +62,8 @@ enum TKTTPifierFaker {
       // Inserting trips in between events
       let title = placeholderTitle ?? NSLocalizedString("Calculating trips...", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Placeholder title while calculating trips")
       let outputItem = usePlaceholders
-        ? TKAgendaOutputItem.TripPlaceholder(nil, nil, title)
-        : TKAgendaOutputItem.TripOptions([FakeTripOption()])
+        ? TKAgendaOutputItem.tripPlaceholder(nil, nil, title)
+        : TKAgendaOutputItem.tripOptions([FakeTripOption()])
       
       return (outputs + [outputItem, next], nextInput)
     }

@@ -86,7 +86,7 @@ extension ModeInfo {
       return []
     }
     
-    return array.flatMap { ModeInfo(forDictionary: $0) }
+    return array.flatMap { ModeInfo(for: $0) }
   }
 }
 
@@ -140,8 +140,8 @@ extension TKBuzzInfoProvider {
     let paras = [
       "region": region.name
     ]
-    SVKServer.sharedInstance().hitSkedGoWithMethod(
-      "POST",
+    SVKServer.sharedInstance().hitSkedGo(
+      withMethod: "POST",
       path: "regionInfo.json",
       parameters: paras,
       region: region,
@@ -175,7 +175,7 @@ public class LocationInformation : NSObject {
   private init(what3word: String?, what3wordInfoURL: String?, transitStop: STKStopAnnotation?, carParkInfo: CarParkInfo?) {
     self.what3word = what3word
     if let URLString = what3wordInfoURL {
-      self.what3wordInfoURL = NSURL(string: URLString)
+      self.what3wordInfoURL = URL(string: URLString)
     } else {
       self.what3wordInfoURL = nil
     }
@@ -230,7 +230,7 @@ extension LocationInformation {
     
     let stop: STKStopAnnotation?
     if let stopJSON = JSON["stop"] as? [String: AnyObject] {
-      stop = TKParserHelper.simpleStopFromDictionary(stopJSON)
+      stop = TKParserHelper.simpleStop(from: stopJSON)
     } else {
       stop = nil
     }
@@ -253,8 +253,8 @@ extension TKBuzzInfoProvider {
       "lng": coordinate.longitude
     ]
     
-    SVKServer.sharedInstance().hitSkedGoWithMethod(
-      "GET",
+    SVKServer.sharedInstance().hitSkedGo(
+      withMethod: "GET",
       path: "locationInfo.json",
       parameters: paras,
       region: region,

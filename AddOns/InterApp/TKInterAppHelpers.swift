@@ -25,7 +25,7 @@ extension CLGeocoder {
       for placemark in placemarks {
         if let addressDictionary = placemark.addressDictionary {
           let address = ABCreateStringWithAddressDictionary(addressDictionary, true)
-          let oneLine = address.stringByReplacingOccurrencesOfString("\n", withString: ", ")
+          let oneLine = address.replacingOccurrences(of: "\n", with: ", ")
           completion(oneLine)
           return
         }

@@ -187,7 +187,7 @@
   realTime -= (NSInteger)realTime % 60;
   NSTimeInterval timeTable = [self.originalTime timeIntervalSince1970];
   timeTable -= (NSInteger)timeTable % 60;
-  return [NSDate durationStringForMinutes:(NSInteger) fabs(realTime - timeTable) / 60];
+  return [SGKObjcDateHelper durationStringForMinutes:(NSInteger) fabs(realTime - timeTable) / 60];
 }
 
 - (NSDate *)countdownDate

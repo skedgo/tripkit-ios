@@ -108,7 +108,7 @@
     return nil;
   
 	NSTimeInterval seconds = [self.lastUpdate timeIntervalSinceNow];
-  NSString *durationString = [NSDate durationStringForSeconds:-seconds];
+  NSString *durationString = [SGKObjcDateHelper durationStringForSeconds:-seconds];
 	if (self.label.length > 0 && self.label.length < 20) {
 		return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"VehicleCalledUpdated", @"TripKit", [TKTripKit bundle], "Vehicle 'x' updated"), self.label, durationString];
 	} else {

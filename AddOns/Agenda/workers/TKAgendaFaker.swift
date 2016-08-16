@@ -14,7 +14,7 @@ import RxSwift
 import SGCoreKit
 
 struct TKAgendaFaker: TKAgendaBuilderType {
-  func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]> {
+  func buildTrack(forItems items: [TKAgendaInputItem], startDate: Date, endDate: Date) -> Observable<[TKAgendaOutputItem]> {
     if items.count <= 1 {
       return Observable.just(items.flatMap { $0.asFakeOutput() } )
     }
@@ -45,8 +45,8 @@ struct TKAgendaFaker: TKAgendaBuilderType {
   
   private static func inputsReturningHome(_ items: [TKAgendaInputItem]) -> [TKAgendaInputItem] {
     if let first = items.first,
-       let last = items.last
-      where first.isStay && !last.isStay {
+       let last = items.last,
+       first.isStay && !last.isStay {
       return items + [first]
     } else {
       return items
@@ -76,13 +76,13 @@ struct TKAgendaFaker: TKAgendaBuilderType {
         return (outputs + [next], nextInput)
       } else if usePlaceholders {
         let title = placeholderTitle ?? NSLocalizedString("Calculating trips...", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Placeholder title while calculating trips")
-        let placeholder = TKAgendaOutputItem.TripPlaceholder(tripStart, tripEnd, title)
+        let placeholder = TKAgendaOutputItem.tripPlaceholder(tripStart, tripEnd, title)
         return (outputs + [placeholder, next], nextInput)
       } else {
         let trip = tripStart != nil
           ? FakeTrip(forDate: tripStart!, isArriveBefore: true)
           : FakeTrip(forDate: tripEnd!, isArriveBefore: false)
-        let tripOutput = TKAgendaOutputItem.Trip(TKAgendaTripOutput(withTrip: trip, forInput: nil))
+        let tripOutput = TKAgendaOutputItem.trip(TKAgendaTripOutput(withTrip: trip, forInput: nil))
         return (outputs + [tripOutput, next], nextInput)
       }
     }
@@ -97,7 +97,7 @@ extension TKAgendaInputItem {
     case .event(let input):
       return .event(TKAgendaEventOutput(forInput: input))
     case .trip(let input) where input.trip != nil:
-      return .Trip(TKAgendaTripOutput(withTrip: input.trip!, forInput: input))
+      return .trip(TKAgendaTripOutput(withTrip: input.trip!, forInput: input))
     default:
         return nil
     }
@@ -106,8 +106,8 @@ extension TKAgendaInputItem {
 
 
 private class FakeTrip: NSObject, STKTrip {
-  @objc let costValues = [NSNumber(integer: STKTripCostType.Duration.rawValue): "30 Minutes"]
-  @objc let departureTimeZone = NSTimeZone.current
+  @objc let costValues = [NSNumber(value: STKTripCostType.duration.rawValue): "30 Minutes"]
+  @objc let departureTimeZone = TimeZone.current
   @objc let departureTimeIsFixed = true
 
   @objc let departureTime: Date
@@ -126,13 +126,13 @@ private class FakeTrip: NSObject, STKTrip {
   }
   
   @objc
-  func segmentsWithVisibility(_ visibility: STKTripSegmentVisibility) -> [STKTripSegment] {
+  func segments(with visibility: STKTripSegmentVisibility) -> [STKTripSegment] {
     return [ FakeBusSegment() ]
   }
   
   @objc
   func mainSegment() -> STKTripSegment {
-    return segmentsWithVisibility(.InSummary).first!
+    return segments(with: .inSummary).first!
   }
 }
 

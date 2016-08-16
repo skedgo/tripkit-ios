@@ -18,13 +18,13 @@ public class TKSegmentHelper: NSObject {
   }
 
   public static func segmentImage(_ iconType: SGStyleModeIconType, localImageName: String, modeIdentifier: String?, isRealTime: Bool) -> UIImage? {
-    if let specificImage = SGStyleManager.imageForModeImageName(localImageName, isRealTime: isRealTime, ofIconType: iconType) {
+    if let specificImage = SGStyleManager.image(forModeImageName: localImageName, isRealTime: isRealTime, of: iconType) {
       return specificImage
     }
 
     guard let modeIdentifier = modeIdentifier else { return nil }
-    let genericImageName = SVKTransportModes.modeImageNameForModeIdentifier(modeIdentifier)
-    return SGStyleManager.imageForModeImageName(genericImageName, isRealTime: isRealTime, ofIconType: iconType)
+    let genericImageName = SVKTransportModes.modeImageName(forModeIdentifier: modeIdentifier)
+    return SGStyleManager.image(forModeImageName: genericImageName, isRealTime: isRealTime, of: iconType)
   }
 
 }

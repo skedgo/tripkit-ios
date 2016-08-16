@@ -12,6 +12,6 @@ public class TKAgendaParserHelper: NSObject {
   public static func vehiclesPayload(forVehicles vehicles: [STKVehicular]?) -> [ [String: AnyObject] ]? {
     guard let vehicles = vehicles else { return nil }
     
-    return vehicles.map(STKVehicularHelper.skedGoFullDictionaryForVehicle)
+    return vehicles.map(STKVehicularHelper.skedGoFullDictionary)
   }
 }
