@@ -9,7 +9,6 @@
 import Foundation
 
 import class CoreLocation.CLGeocoder
-//import class Contacts.CNPostalAddressFormatter
 import func AddressBookUI.ABCreateStringWithAddressDictionary
 
 extension CLGeocoder {

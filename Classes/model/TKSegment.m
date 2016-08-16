@@ -352,7 +352,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   NSTimeInterval withoutTraffic = rawWithoutTraffic.doubleValue;
   NSTimeInterval withTraffic = [self duration:NO];
   if (withTraffic > withoutTraffic + 60) {
-    NSString *durationString = [NSDate durationStringForMinutes:(NSInteger) (withoutTraffic / 60)];
+    NSString *durationString = [SGKObjcDateHelper durationStringForMinutes:(NSInteger) (withoutTraffic / 60)];
     return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%@ w/o traffic", @"TripKit", [TKTripKit bundle], @"Duration without traffic"), durationString];
   } else {
     return nil;
@@ -361,7 +361,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSString *)stringForDuration:(BOOL)includingContinuation {
 	TKSegment *segment = includingContinuation ? [self finalSegmentIncludingContinuation] : self;
-	return [segment.arrivalTime durationSince:self.departureTime];
+	return [SGKObjcDateHelper durationStringForStart:self.departureTime end:segment.arrivalTime];
 }
 
 - (NSNumber *)frequency {
