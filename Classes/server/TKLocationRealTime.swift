@@ -19,7 +19,7 @@ public enum TKLocationRealTime {
     return fetchOnlyOn
       .flatMapLatest { fetch -> Observable<LocationInformation> in
         if fetch {
-          return rx_fetchRealTimeFor(location)
+          return rx_fetchRealTimeFor(location: location)
         } else {
           return Observable.empty()
         }
@@ -28,7 +28,7 @@ public enum TKLocationRealTime {
   
   public static func rx_fetchRealTimeFor(location: SGNamedCoordinate) -> Observable<LocationInformation> {
     return SVKServer.sharedInstance()
-      .rx_requireRegion(location.coordinate)
+      .rx_requireRegion(coordinate: location.coordinate)
       .flatMap { region -> Observable<LocationInformation> in
         var paras: [String: AnyObject] = [
           "realtime" : true
@@ -42,7 +42,7 @@ public enum TKLocationRealTime {
         }
         
         return SVKServer.sharedInstance()
-          .rx_hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, json in
+          .rx_hit(method: .GET, path: "locationInfo.json", parameters: paras, region: region) { status, json in
             if case 400..<500 = status {
               return nil // Client-side errors; hitting again won't help
             }

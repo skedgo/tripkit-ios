@@ -8,15 +8,13 @@
 
 #import "TKInterAppCommunicator.h"
 
-#import "TKTripKit.h"
+@import MessageUI;
 
-#import <TripKit/TripKit-Swift.h>
+@import TripKit;
+@import SGCoreKit;
 
+#import <TripKitAddons/TripKitAddons-Swift.h>
 #import "SGKConfig+TKInterAppCommunicator.h"
-
-#import "SGActions.h"
-
-#import <MessageUI/MessageUI.h>
 
 @interface ComposerDelegate : NSObject <MFMessageComposeViewControllerDelegate>
 + (ComposerDelegate *)sharedInstance;

@@ -6,9 +6,8 @@
 //
 //
 
-#import <TripKit/TripKit.h>
+@import TripKit;
 
-#import "TripRequest.h"
 #import "TKShareURLProvider.h"
 
 @interface TripRequest (Shareable) <SGURLShareable>

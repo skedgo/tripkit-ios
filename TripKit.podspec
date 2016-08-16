@@ -20,46 +20,14 @@ Pod::Spec.new do |s|
   
   s.prefix_header_file = "prefix.pch"
 
-  s.subspec 'Core' do |cs|
-    cs.dependency 'SGCoreKit/Core'
-    cs.source_files = "Classes/**/*.{h,m,swift}"
-    cs.resources    = [
-      "Resources/*",
-      "TripKitModel.xcdatamodeld",
-      "TripKitModel.xcdatamodeld/*."
-    ]
-    cs.preserve_paths = 'TripKitModel.xcdatamodeld'
-    cs.frameworks = 'CoreData'
-  end
-
-  s.subspec 'Agenda' do |cs|
-    cs.dependency 'TripKit/Core'
-    cs.dependency 'RxSwift'
-    cs.dependency 'RxCocoa'
-    cs.dependency 'SwiftyJSON'
-
-    cs.source_files = "AddOns/Agenda/**/*.{h,m,swift}"
-  end
-
-  s.subspec 'Bookings' do |cs|
-    cs.dependency 'TripKit/Core'
-    cs.dependency 'SGBookingKit'
-    cs.dependency 'RxSwift'
-    cs.dependency 'RxCocoa'
-
-    cs.source_files = "AddOns/Bookings/**/*.{h,m,swift}"
-  end
-
-  s.subspec 'InterApp' do |cs|
-    cs.dependency 'TripKit/Core'
-    cs.source_files = "AddOns/InterApp/**/*.{h,m,swift}"
-  end
-
-  s.subspec 'Share' do |cs|
-    cs.dependency 'TripKit/Core'
-    cs.dependency 'SGSearchKit'
-
-    cs.source_files = "AddOns/Share/**/*"
-  end
+  s.dependency 'SGCoreKit/Core'
+  s.source_files = "Classes/**/*.{h,m,swift}"
+  s.resources    = [
+    "Resources/*",
+    "TripKitModel.xcdatamodeld",
+    "TripKitModel.xcdatamodeld/*."
+  ]
+  s.preserve_paths = 'TripKitModel.xcdatamodeld'
+  s.frameworks = 'CoreData'
 
 end
