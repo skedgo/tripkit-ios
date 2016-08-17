@@ -16,7 +16,7 @@ public final class RegionInformation: NSObject {
   public let hasWheelchairInformation: Bool
   public let paratransitInformation: ParatransitInformation?
   
-  private init(transitModes: [ModeInfo], allowsBicyclesOnPublicTransport: Bool, hasWheelchairInformation: Bool, supportsConcessionPricing: Bool, paratransitInformation: ParatransitInformation?) {
+  fileprivate init(transitModes: [ModeInfo], allowsBicyclesOnPublicTransport: Bool, hasWheelchairInformation: Bool, supportsConcessionPricing: Bool, paratransitInformation: ParatransitInformation?) {
     self.publicTransportModes = transitModes
     self.allowsBicyclesOnPublicTransport = allowsBicyclesOnPublicTransport
     self.hasWheelchairInformation = hasWheelchairInformation
@@ -24,9 +24,9 @@ public final class RegionInformation: NSObject {
     self.paratransitInformation = paratransitInformation
   }
   
-  private class func fromJSONResponse(_ response: AnyObject?) -> RegionInformation? {
-    guard let JSON = response as? [String: AnyObject],
-      let regions = JSON["regions"] as? [[String: AnyObject]],
+  fileprivate class func fromJSONResponse(_ response: Any?) -> RegionInformation? {
+    guard let JSON = response as? [String: Any],
+      let regions = JSON["regions"] as? [[String: Any]],
       let region = regions.first else {
         return nil
     }
@@ -56,15 +56,15 @@ public final class ParatransitInformation: NSObject {
   public let URL: String
   public let number: String
   
-  private init(name: String, URL: String, number: String) {
+  fileprivate init(name: String, URL: String, number: String) {
     self.name = name
     self.URL = URL
     self.number = number
   }
   
-  private class func fromJSONResponse(_ response: AnyObject?) -> ParatransitInformation? {
-    guard let JSON = response as? [String: AnyObject],
-          let regions = JSON["regions"] as? [[String: AnyObject]],
+  fileprivate class func fromJSONResponse(_ response: Any?) -> ParatransitInformation? {
+    guard let JSON = response as? [String: Any],
+          let regions = JSON["regions"] as? [[String: Any]],
           let region = regions.first,
           let dict = region["paratransit"] as? [String: String],
           let name = dict["name"],
@@ -78,11 +78,11 @@ public final class ParatransitInformation: NSObject {
 }
 
 extension ModeInfo {
-  private class func fromJSONResponse(_ response: AnyObject?) -> [ModeInfo] {
-    guard let JSON = response as? [String: AnyObject],
-          let regions = JSON["regions"] as? [[String: AnyObject]],
+  fileprivate class func fromJSONResponse(_ response: Any?) -> [ModeInfo] {
+    guard let JSON = response as? [String: Any],
+          let regions = JSON["regions"] as? [[String: Any]],
           let region = regions.first,
-          let array = region["transitModes"] as? [[String: AnyObject]] else {
+          let array = region["transitModes"] as? [[String: Any]] else {
       return []
     }
     
@@ -97,7 +97,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: (RegionInformation?) -> Void)
+  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (RegionInformation?) -> Void)
   {
     return fetchRegionInfo(
       region,
@@ -112,7 +112,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: (ParatransitInformation?) -> Void)
+  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (ParatransitInformation?) -> Void)
   {
     return fetchRegionInfo(
       region,
@@ -126,7 +126,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: ([ModeInfo]) -> Void)
+  public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: @escaping ([ModeInfo]) -> Void)
   {
     return fetchRegionInfo(
       region,
@@ -135,7 +135,7 @@ extension TKBuzzInfoProvider {
     )
   }
 
-  private class func fetchRegionInfo<E>(_ region: SVKRegion, transformer: (AnyObject?) -> E, completion: (E) -> Void)
+  fileprivate class func fetchRegionInfo<E>(_ region: SVKRegion, transformer: @escaping (Any?) -> E, completion: @escaping (E) -> Void)
   {
     let paras = [
       "region": region.name
@@ -172,7 +172,7 @@ public class LocationInformation : NSObject {
   
   public let carParkInfo: CarParkInfo?
   
-  private init(what3word: String?, what3wordInfoURL: String?, transitStop: STKStopAnnotation?, carParkInfo: CarParkInfo?) {
+  fileprivate init(what3word: String?, what3wordInfoURL: String?, transitStop: STKStopAnnotation?, carParkInfo: CarParkInfo?) {
     self.what3word = what3word
     if let URLString = what3wordInfoURL {
       self.what3wordInfoURL = URL(string: URLString)
@@ -195,9 +195,9 @@ public class LocationInformation : NSObject {
 
 extension CarParkInfo {
   
-  private init?(response: AnyObject?) {
+  fileprivate init?(response: Any?) {
     guard
-      let JSON = response as? [String: AnyObject],
+      let JSON = response as? [String: Any],
     let identifier = JSON["identifier"] as? String,
       let name = JSON["name"] as? String
       else {
@@ -219,17 +219,17 @@ extension CarParkInfo {
 
 extension LocationInformation {
   
-  public convenience init?(response: AnyObject?) {
-    guard let JSON = response as? [String: AnyObject] else {
+  public convenience init?(response: Any?) {
+    guard let JSON = response as? [String: Any] else {
       return nil
     }
     
-    let details = JSON["details"] as? [String: AnyObject]
+    let details = JSON["details"] as? [String: Any]
     let what3word = details?["w3w"] as? String
     let what3wordInfoURL = details?["w3wInfoURL"] as? String
     
     let stop: STKStopAnnotation?
-    if let stopJSON = JSON["stop"] as? [String: AnyObject] {
+    if let stopJSON = JSON["stop"] as? [String: Any] {
       stop = TKParserHelper.simpleStop(from: stopJSON)
     } else {
       stop = nil
@@ -247,8 +247,8 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
   */
-  public class func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, forRegion region: SVKRegion, completion: (LocationInformation?) -> Void) {
-    let paras: [String: AnyObject] = [
+  public class func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, forRegion region: SVKRegion, completion: @escaping (LocationInformation?) -> Void) {
+    let paras: [String: Any] = [
       "lat": coordinate.latitude,
       "lng": coordinate.longitude
     ]

@@ -6,13 +6,12 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
 
-#import <TripKit/TKTripKit.h>
+@import SGCoreKit;
 
-@class ModeInfo;
-@class Cell, SVKRegion, Shape, StopVisits, SGNamedCoordinate;
+@class Cell, Shape, StopVisits, Alert;
 
 @interface StopLocation : NSManagedObject <STKStopAnnotation, UIActivityItemSource>
 

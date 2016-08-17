@@ -6,7 +6,11 @@
 //
 //
 
+#ifndef TK_NO_FRAMEWORKS
 @import TripKit;
+#else
+#import "StopVisits.h"
+#endif
 
 #import "TKShareURLProvider.h"
 

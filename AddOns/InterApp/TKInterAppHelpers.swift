@@ -12,7 +12,7 @@ import class CoreLocation.CLGeocoder
 import func AddressBookUI.ABCreateStringWithAddressDictionary
 
 extension CLGeocoder {
-  public func reverseGeocodeAddress(forCoordinate coordinate: CLLocationCoordinate2D, completion: (NSString?) -> ()) {
+  public func reverseGeocodeAddress(forCoordinate coordinate: CLLocationCoordinate2D, completion: @escaping (String?) -> ()) {
     
     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     reverseGeocodeLocation(location) { placemarks, error in

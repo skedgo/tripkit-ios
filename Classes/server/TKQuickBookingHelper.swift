@@ -18,7 +18,7 @@ public class TKQuickBookingPrice: NSObject {
   /// Price in USD dollars
   public let USDCost: Float
   
-  private init(localCost: Float, USDCost: Float) {
+  fileprivate init(localCost: Float, USDCost: Float) {
     self.localCost = localCost
     self.USDCost = USDCost
   }
@@ -65,7 +65,7 @@ public class TKQuickBooking: NSObject {
   /// Expected waiting time. Negative if unknown. (For Obj-c compatibility.)
   public let ETARaw: TimeInterval
   
-  private init(title: String, subtitle: String?, bookingURL: URL, bookingTitle: String, secondaryBookingURL: URL?, secondaryBookingTitle: String?, tripUpdateURL: URL?, imageURL: URL?, price: TKQuickBookingPrice?, priceString: String?, surgeText: String?, surgeImageURL: URL?, ETA: TimeInterval?) {
+  fileprivate init(title: String, subtitle: String?, bookingURL: URL, bookingTitle: String, secondaryBookingURL: URL?, secondaryBookingTitle: String?, tripUpdateURL: URL?, imageURL: URL?, price: TKQuickBookingPrice?, priceString: String?, surgeText: String?, surgeImageURL: URL?, ETA: TimeInterval?) {
     self.title = title
     self.subtitle = subtitle
     self.bookingURL = bookingURL
@@ -99,7 +99,7 @@ public struct TKBookingConfirmation {
     public let title: String
     public let isDestructive: Bool
     public let internalURL: URL?
-    public let externalAction: NSString?
+    public let externalAction: String?
   }
   
   public let status: Detail
@@ -113,7 +113,7 @@ public class TKQuickBookingHelper: NSObject {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
-  public class func fetchQuickBookings(forSegment segment: TKSegment, completion: ([TKQuickBooking]) -> Void) {
+  public class func fetchQuickBookings(forSegment segment: TKSegment, completion: @escaping ([TKQuickBooking]) -> Void) {
     if let stored = segment.storedQuickBookings {
       completion(stored)
       return
@@ -125,7 +125,7 @@ public class TKQuickBookingHelper: NSObject {
     }
     
     SVKServer.get(bookingsURL, paras: nil) { _, response, error in
-      guard let array = response as? [[NSString: AnyObject]], !array.isEmpty else {
+      guard let array = response as? [[NSString: Any]], !array.isEmpty else {
         completion([])
         SGKLog.warn("TKQuickBookingHelper", text: "Response isn't array.\nResponse: \(response)\nError: \(error)")
         return
@@ -137,13 +137,13 @@ public class TKQuickBookingHelper: NSObject {
     }
   }
   
-  private override init() {
+  fileprivate override init() {
     fatalError("Don't instantiate me.")
   }
 }
 
 extension TKQuickBooking {
-  private convenience init?(withDictionary dictionary: [NSString: AnyObject]) {
+  fileprivate convenience init?(withDictionary dictionary: [NSString: Any]) {
     guard let bookingURLString = dictionary["bookingURL"] as? String,
           let bookingURL = URL(string: bookingURLString),
           let bookingTitle = dictionary["bookingTitle"] as? String,
@@ -195,16 +195,16 @@ extension TKQuickBooking {
 }
 
 extension TKBookingConfirmation {
-  private init?(withDictionary dictionary: [String: AnyObject]) {
-    guard let status = Detail(withDictionary: dictionary["status"] as? [String: AnyObject]) else {
+  fileprivate init?(withDictionary dictionary: [String: Any]) {
+    guard let status = Detail(withDictionary: dictionary["status"] as? [String: Any]) else {
         return nil
     }
     
-    let provider = Detail(withDictionary: dictionary["provider"] as? [String: AnyObject])
-    let vehicle = Detail(withDictionary: dictionary["vehicle"] as? [String: AnyObject])
+    let provider = Detail(withDictionary: dictionary["provider"] as? [String: Any])
+    let vehicle = Detail(withDictionary: dictionary["vehicle"] as? [String: Any])
     
     let actions: [Action]
-    if let rawActions = dictionary["actions"] as? [[String: AnyObject]] {
+    if let rawActions = dictionary["actions"] as? [[String: Any]] {
       actions = rawActions.flatMap { Action(withDictionary: $0) }
     } else {
       actions = []
@@ -215,7 +215,7 @@ extension TKBookingConfirmation {
 }
 
 extension TKBookingConfirmation.Detail {
-  private init?(withDictionary dictionary: [String: AnyObject]?) {
+  fileprivate init?(withDictionary dictionary: [String: Any]?) {
     guard let dictionary = dictionary,
           let title = dictionary["title"] as? String else { return nil }
     
@@ -231,7 +231,7 @@ extension TKBookingConfirmation.Detail {
 }
 
 extension TKBookingConfirmation.Action {
-  private init?(withDictionary dictionary: [String: AnyObject]?) {
+  fileprivate init?(withDictionary dictionary: [String: Any]?) {
     guard let dictionary = dictionary,
       let title = dictionary["title"] as? String,
       let isDestructive = dictionary["isDestructive"] as? Bool else { return nil }
@@ -252,7 +252,7 @@ extension TKBookingConfirmation.Action {
 
 
 extension TKBookingConfirmation {
-  private static func fakeTNC() -> TKBookingConfirmation? {
+  fileprivate static func fakeTNC() -> TKBookingConfirmation? {
     let fake = [
       "actions": [
         [
@@ -280,11 +280,11 @@ extension TKBookingConfirmation {
         "subtitle": "UBER-PLATE",
         "title": "Prius Toyota"
       ]
-    ]
+    ] as [String : Any]
     return TKBookingConfirmation(withDictionary: fake)
   }
 
-  private static func fakePublic() -> TKBookingConfirmation? {
+  fileprivate static func fakePublic() -> TKBookingConfirmation? {
     let fake = [
       "actions": [
         [
@@ -297,7 +297,7 @@ extension TKBookingConfirmation {
         "title": "30 Minute Ticket",
         "subtitle": "Valid until 15:30",
       ],
-    ]
+    ] as [String : Any]
     return TKBookingConfirmation(withDictionary: fake)
   }
 }
@@ -306,7 +306,7 @@ extension TKSegment {
   public var storedQuickBookings: [TKQuickBooking]? {
     get {
       if let key = cacheKey(),
-         let cached = TKTripKit.sharedInstance().inMemoryCache().object(forKey: key) as? [[NSString: AnyObject]] {
+         let cached = TKTripKit.sharedInstance().inMemoryCache().object(forKey: key as AnyObject) as? [[NSString: Any]] {
         return cached.flatMap { TKQuickBooking(withDictionary: $0) }
       } else {
         return nil
@@ -317,7 +317,7 @@ extension TKSegment {
   public var activeIndexQuickBooking: Int? {
     get {
       if let key = indexKey(),
-         let index = TKTripKit.sharedInstance().inMemoryCache().object(forKey: key) as? Int,
+         let index = TKTripKit.sharedInstance().inMemoryCache().object(forKey: key as AnyObject) as? Int,
          let bookings = storedQuickBookings,
          index < bookings.count {
         return index
@@ -329,11 +329,11 @@ extension TKSegment {
       guard let key = indexKey(),
             let index = newValue else { return }
       
-      TKTripKit.sharedInstance().inMemoryCache().setObject(index, forKey: key)
+      TKTripKit.sharedInstance().inMemoryCache().setObject(index as AnyObject, forKey: key as AnyObject)
     }
   }
 
-  private func indexKey() -> String? {
+  fileprivate func indexKey() -> String? {
     if let path = bookingQuickInternalURL()?.path {
       return "\(path)-index"
     } else {
@@ -341,7 +341,7 @@ extension TKSegment {
     }
   }
 
-  private func cacheKey() -> String? {
+  fileprivate func cacheKey() -> String? {
     if let path = bookingQuickInternalURL()?.path {
       return "\(path)-cached"
     } else {
@@ -349,10 +349,10 @@ extension TKSegment {
     }
   }
   
-  private func storeQuickBookings(fromArray array: [[NSString: AnyObject]]) {
+  fileprivate func storeQuickBookings(fromArray array: [[NSString: Any]]) {
     guard let key = cacheKey() else { return }
     
-    TKTripKit.sharedInstance().inMemoryCache().setObject(array, forKey: key)
+    TKTripKit.sharedInstance().inMemoryCache().setObject(array as AnyObject, forKey: key as AnyObject)
   }
   
   public var bookingConfirmation: TKBookingConfirmation? {

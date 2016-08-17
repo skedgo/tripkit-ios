@@ -9,11 +9,16 @@
 #import "TKInterAppCommunicator.h"
 
 @import MessageUI;
-
-@import TripKit;
 @import SGCoreKit;
 
+#ifndef TK_NO_FRAMEWORKS
+@import TripKit;
 #import <TripKitAddons/TripKitAddons-Swift.h>
+#else
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#endif
+
 #import "SGKConfig+TKInterAppCommunicator.h"
 
 @interface ComposerDelegate : NSObject <MFMessageComposeViewControllerDelegate>

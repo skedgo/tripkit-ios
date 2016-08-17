@@ -15,11 +15,11 @@ public enum TKJSONCacheDirectory: Int {
 }
 
 public class TKJSONCache: NSObject {
-  public static func read(_ id: String, directory: TKJSONCacheDirectory) -> [String: AnyObject]? {
+  public static func read(_ id: String, directory: TKJSONCacheDirectory) -> [String: Any]? {
     return read(id, directory: directory, subdirectory: nil)
   }
 
-  public static func read(_ id: String, directory: TKJSONCacheDirectory, subdirectory: String?) -> [String: AnyObject]? {
+  public static func read(_ id: String, directory: TKJSONCacheDirectory, subdirectory: String?) -> [String: Any]? {
     let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
     
     if let data = try? Data(contentsOf: fileURL) {
@@ -29,11 +29,11 @@ public class TKJSONCache: NSObject {
     }
   }
 
-  public static func save(_ id: String, dictionary: [String: AnyObject], directory: TKJSONCacheDirectory) {
+  public static func save(_ id: String, dictionary: [String: Any], directory: TKJSONCacheDirectory) {
     save(id, dictionary: dictionary, directory: directory, subdirectory: nil)
   }
 
-  public static func save(_ id: String, dictionary: [String: AnyObject], directory: TKJSONCacheDirectory, subdirectory: String?) {
+  public static func save(_ id: String, dictionary: [String: Any], directory: TKJSONCacheDirectory, subdirectory: String?) {
     let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
     let data = NSKeyedArchiver.archivedData(withRootObject: dictionary)
     try? data.write(to: fileURL, options: [.atomic])

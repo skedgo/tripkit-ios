@@ -41,7 +41,7 @@ enum TKTTPifierFaker {
     }
   }
   
-  private static func inputsReturningHome(_ items: [TKAgendaInputItem]) -> [TKAgendaInputItem] {
+  fileprivate static func inputsReturningHome(_ items: [TKAgendaInputItem]) -> [TKAgendaInputItem] {
     if let first = items.first {
       return items + [first]
     } else {
@@ -49,7 +49,7 @@ enum TKTTPifierFaker {
     }
   }
   
-  private static func trackWithTrips(_ items: [TKAgendaInputItem], usePlaceholders: Bool, placeholderTitle: String? = nil) -> [TKAgendaOutputItem] {
+  fileprivate static func trackWithTrips(_ items: [TKAgendaInputItem], usePlaceholders: Bool, placeholderTitle: String? = nil) -> [TKAgendaOutputItem] {
     let (outputs, _) = items.reduce( ([] as [TKAgendaOutputItem], nil as TKAgendaInputItem?) ) { previous, nextInput in
 
       guard let next = nextInput.asFakeOutput() else { fatalError("unexpected Input: \(nextInput)") }

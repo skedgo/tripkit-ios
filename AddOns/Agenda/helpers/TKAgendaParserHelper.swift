@@ -9,7 +9,7 @@
 import Foundation
 
 public class TKAgendaParserHelper: NSObject {
-  public static func vehiclesPayload(forVehicles vehicles: [STKVehicular]?) -> [ [String: AnyObject] ]? {
+  public static func vehiclesPayload(forVehicles vehicles: [STKVehicular]?) -> [ [String: Any] ]? {
     guard let vehicles = vehicles else { return nil }
     
     return vehicles.map(STKVehicularHelper.skedGoFullDictionary)

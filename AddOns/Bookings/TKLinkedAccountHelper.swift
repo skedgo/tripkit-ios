@@ -15,23 +15,23 @@ import SGBookingKit
 
 public struct ProviderAuth {
 
-  private struct RemoteAction {
-    private let title: String
-    private let URL: Foundation.URL
+  fileprivate struct RemoteAction {
+    fileprivate let title: String
+    fileprivate let URL: Foundation.URL
   }
 
-  private enum Status {
+  fileprivate enum Status {
     case connected(RemoteAction?)
     case notConnected(RemoteAction)
     
-    private var remoteURL: URL? {
+    fileprivate var remoteURL: URL? {
       switch self {
       case .connected(let action): return action?.URL
       case .notConnected(let action): return action.URL
       }
     }
 
-    private var remoteAction: String? {
+    fileprivate var remoteAction: String? {
       switch self {
       case .connected(let action): return action?.title
       case .notConnected(let action): return action.title
@@ -39,7 +39,7 @@ public struct ProviderAuth {
     }
   }
 
-  private let status: Status
+  fileprivate let status: Status
   
   /// Mode identifier that this authentication is for
   public let modeIdentifier: String
@@ -73,7 +73,7 @@ public struct ProviderAuth {
 }
 
 extension ProviderAuth.Status {
-  private init?(withDictionary dictionary: [String: AnyObject]) {
+  fileprivate init?(withDictionary dictionary: [String: AnyObject]) {
     guard let action = dictionary["action"] as? String,
           let actionTitle = dictionary["actionTitle"] as? String,
           let URLString = dictionary["url"] as? String,
@@ -96,7 +96,7 @@ extension ProviderAuth.Status {
 }
 
 extension ProviderAuth {
-  private init?(withDictionary dictionary: [String: AnyObject]) {
+  fileprivate init?(withDictionary dictionary: [String: AnyObject]) {
     guard let mode = dictionary["modeIdentifier"] as? String,
           let status = Status.init(withDictionary: dictionary) else {
       return nil
@@ -116,7 +116,7 @@ extension SVKRegion {
    - parameter mode: Mode identifier for which to fetch accounts. If `nil`, accounts for all modes will be fetched.
    - parameter completion: Block executed on completion with list of accounts that can be linked.
   */
-  public func linkedAccounts(_ mode: String? = nil, completion: ([ProviderAuth]?) -> Void) {
+  public func linkedAccounts(_ mode: String? = nil, completion: @escaping ([ProviderAuth]?) -> Void) {
     if let mode = mode, let account = locallyLinkedAccount(mode) {
       completion([account])
     } else {
@@ -161,7 +161,7 @@ extension SVKRegion {
    - parameter remoteURL: `ProviderAuth.actionURL`, required to remove remote authentications.
    - parameter completion: Block executed when unlinking has finished. Boolean parameter indicates if any authentications have been removed.
   */
-  public func unlinkAccount(_ mode: String, remoteURL: URL?, completion: (Bool) -> Void) {
+  public func unlinkAccount(_ mode: String, remoteURL: URL?, completion: @escaping (Bool) -> Void) {
     let localRemoved = OAuthClient.removeCredentials(mode: mode)
     
     guard let URL = remoteURL else {
@@ -181,7 +181,7 @@ extension SVKRegion {
     
   }
 
-  private func locallyLinkedAccount(_ mode: String) -> ProviderAuth? {
+  fileprivate func locallyLinkedAccount(_ mode: String) -> ProviderAuth? {
     if let cached = OAuthClient.cachedCredentials(mode: mode) {
       if (cached.isValid || cached.hasRefreshToken) {
         let status = ProviderAuth.Status.connected(nil)
@@ -194,9 +194,9 @@ extension SVKRegion {
     return nil;
   }
   
-  private func remotelyLinkedAccounts(_ mode: String?, completion: ([ProviderAuth]?) -> Void) {
+  fileprivate func remotelyLinkedAccounts(_ mode: String?, completion: @escaping ([ProviderAuth]?) -> Void) {
     
-    let paras: [String: AnyObject]?
+    let paras: [String: Any]?
     if let mode = mode {
       paras = ["mode": mode]
     } else {
@@ -236,11 +236,10 @@ extension SVKRegion {
  - note: This is a one-off object. Only use it to present exactly once. One the observable sequence has ended, this object is useless. 
  */
 class MiniBookingManager: NSObject, BPKBookingViewControllerDelegate {
+  fileprivate let form: BPKForm
+  fileprivate let subject = PublishSubject<Bool>()
   
-  private let form: BPKForm
-  private let subject = PublishSubject<Bool>()
-  
-  private weak var presenter: UIViewController?
+  fileprivate weak var presenter: UIViewController?
   
   init(withForm form: BPKForm) {
     self.form = form
@@ -264,7 +263,7 @@ class MiniBookingManager: NSObject, BPKBookingViewControllerDelegate {
     return subject.asObservable()
   }
   
-  func bookingViewController(_ controller: BPKBookingViewController, didRequestUpdate url: URL, handler: () -> Void) {
+  func bookingViewController(_ controller: BPKBookingViewController, didRequestUpdate url: URL, handler: @escaping () -> Void) {
     assert(false, "Don't use MiniBM for trips!")
   }
   

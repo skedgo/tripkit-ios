@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
-#import <TripKit/TKTripKit.h>
+@import SGCoreKit;
+
+@class Service, Shape, SegmentReference, StopLocation;
 
 @interface TKParserHelper : STKParserHelper
 

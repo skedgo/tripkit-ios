@@ -12,7 +12,7 @@ import RxSwift
 import SwiftyJSON
 
 extension Error {
-  private func isNotConnectedError() -> Bool {
+  fileprivate func isNotConnectedError() -> Bool {
     return (self as NSError).code == -1009
   }
 }
@@ -24,9 +24,9 @@ public struct TKTTPifier : TKAgendaBuilderType {
     case problemNotFoundOnServer
   }
   
-  private static var problemIDs: Set<String> = []
+  fileprivate static var problemIDs: Set<String> = []
   
-  public static func debugDictionary() -> [String: AnyObject]? {
+  public static func debugDictionary() -> [String: Any]? {
     return [
       "problemIDs": Array(problemIDs),
     ]
@@ -87,7 +87,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     return (list, set)
   }
   
-  private static func insert(_ locations: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil) -> Observable<[TKAgendaOutputItem]> {
+  fileprivate static func insert(_ locations: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil) -> Observable<[TKAgendaOutputItem]> {
     
     precondition(into.count >= 2, "Don't call this unless you have a start and end!")
     
@@ -132,10 +132,10 @@ public struct TKTTPifier : TKAgendaBuilderType {
       .observeOn(MainScheduler.instance)
   }
   
-  private static func rx_clearCacheAndRetry(_ region: SVKRegion, insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil) -> Observable<[TKAgendaOutputItem]?> {
+  fileprivate static func rx_clearCacheAndRetry(_ region: SVKRegion, insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil) -> Observable<[TKAgendaOutputItem]?> {
 
     // Clear the cache of problem ID
-    let paras = createInput(insert: insert, into: into, dateComponents: dateComponents, modes: modes, region: region)
+    let paras = createInput(insert, into: into, dateComponents: dateComponents, modes: modes, region: region)
     TKTTPifierCache.clear(forParas: paras)
     
     // Create problem and fetch solution again
@@ -152,7 +152,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
    - parameter into: Sorted list of locations to add the new ones into. Typically starts and ends at a hotel.
    - returns: Observable sequence of the region where the problem starts and the id of the problem on the server.
    */
-  private static func rx_createProblem(_ insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, region: SVKRegion? = nil, modes: [String]? = nil) -> Observable<(SVKRegion, String)> {
+  fileprivate static func rx_createProblem(_ insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, region: SVKRegion? = nil, modes: [String]? = nil) -> Observable<(SVKRegion, String)> {
 
     guard let first = into.first else {
       preconditionFailure("`into` needs at least one item")
@@ -161,13 +161,13 @@ public struct TKTTPifier : TKAgendaBuilderType {
     // If a region was not supplied, fetch it, and recurse
     guard let region = region else {
       return SVKServer.sharedInstance()
-        .rx_requireRegion(coordinate: first.start)
+        .rx_requireRegion(first.start)
         .flatMap { region -> Observable<(SVKRegion, String)> in
           return self.rx_createProblem(insert, into: into, dateComponents: dateComponents, region: region, modes: modes)
       }
     }
     
-    let paras = createInput(insert: insert, into: into, dateComponents: dateComponents, modes: modes, region: region)
+    let paras = createInput(insert, into: into, dateComponents: dateComponents, modes: modes, region: region)
     
     // Re-use the cached ID
     // If it doesn't exist anymore, we handle this in `rx_fetchSolution`
@@ -177,7 +177,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     // If we don't have a cached ID, create a new problem on the server
     return SVKServer.sharedInstance()
-      .rx_hit(method: .POST, path: "ttp", parameters: paras, region: region)
+      .rx_hit(.POST, path: "ttp", parameters: paras, region: region)
       .retry(4)
       .map { code, json -> (SVKRegion, String?) in
         if let id = json?["id"].string {
@@ -201,7 +201,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
    - parameter region: Region where the problem starts
    - returns: Observable sequence with the output items or `nil` if the server couldn't calculate them
    */
-  private static func rx_fetchSolution(_ id: String, inputItems: [TKAgendaInputItem], inRegion region: SVKRegion) -> Observable<[TKAgendaOutputItem]?> {
+  fileprivate static func rx_fetchSolution(_ id: String, inputItems: [TKAgendaInputItem], inRegion region: SVKRegion) -> Observable<[TKAgendaOutputItem]?> {
     
     problemIDs.insert(id)
 
@@ -213,7 +213,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
       cachedItems = nil
     }
     
-    let paras: [String: AnyObject]
+    let paras: [String: Any]
     if let json = cachedJson,
        let hashCode = json["hashCode"].int {
       paras = ["hashCode": hashCode]
@@ -222,7 +222,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
     
     return SVKServer.sharedInstance()
-      .rx_hit(method: .GET, path: "ttp/\(id)/solution", parameters: paras, region: region) { code, json in
+      .rx_hit(.GET, path: "ttp/\(id)/solution", parameters: paras, region: region) { code, json in
         
         // Keep hitting if it's a 299 (solution still bein calculated)
         // or the input indicates that not all trips have been added yet
@@ -266,7 +266,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
   /**
    Creates the input as required by the `tpp/` endpoint.
    */
-  private static func createInput(insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil, region: SVKRegion? = nil) -> [String: AnyObject] {
+  fileprivate static func createInput(_ insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil, region: SVKRegion? = nil) -> [String: Any] {
     
     let identifiers: [String]
     if let modes = modes {
@@ -294,8 +294,8 @@ public struct TKTTPifier : TKAgendaBuilderType {
   /**
    Turn an array of `TKAgendaInputItem` into the input for `tpp/` endpoint.
    */
-  private static func createInput(_ items: [TKAgendaInputItem])-> [ [String: AnyObject] ] {
-    return items.reduce([] as [[String: AnyObject]]) { acc, input in
+  fileprivate static func createInput(_ items: [TKAgendaInputItem])-> [ [String: Any] ] {
+    return items.reduce([] as [[String: Any]]) { acc, input in
       if let next = input.asInput() {
         return acc + [next]
       } else {
@@ -304,7 +304,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
   }
   
-  private static func createOutput(_ allInputs: [TKAgendaInputItem], json: JSON) -> [TKAgendaOutputItem]?
+  fileprivate static func createOutput(_ allInputs: [TKAgendaInputItem], json: JSON) -> [TKAgendaOutputItem]?
   {
     guard let outputItems = json["items"].array else { return nil }
     
@@ -341,7 +341,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
   }
   
-  private static func parse(_ array: [JSON]) -> [TKAgendaTripOptionType]? {
+  fileprivate static func parse(_ array: [JSON]) -> [TKAgendaTripOptionType]? {
     let options = array.flatMap { json -> TKAgendaTripOptionType? in
       
       guard let modes = json["modes"].arrayObject as? [String],
@@ -364,7 +364,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     return options.isEmpty ? nil : options
   }
   
-  private struct TripOption: TKAgendaTripOptionType {
+  fileprivate struct TripOption: TKAgendaTripOptionType {
     let usedModes: [ModeIdentifier]
     let segments: [TKAgendaTripOptionSegmentType]
     let duration: TKAgendaValue<TimeInterval>
@@ -372,10 +372,10 @@ public struct TKTTPifier : TKAgendaBuilderType {
     let score: TKAgendaValue<Double>
   }
   
-  private class SegmentOverview: NSObject {
-    private let modeInfo: ModeInfo
-    private let duration: Int
-    private let polyline: String?
+  fileprivate class SegmentOverview: NSObject {
+    fileprivate let modeInfo: ModeInfo
+    fileprivate let duration: Int
+    fileprivate let polyline: String?
     
     init(modeInfo: ModeInfo, duration: Int, polyline: String?) {
       self.modeInfo = modeInfo
@@ -387,7 +387,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
 }
 
 extension TKTTPifier.SegmentOverview {
-  private convenience init?(json: JSON) {
+  fileprivate convenience init?(json: JSON) {
     guard let duration = json["duration"].int,
       let modeDict = json["modeInfo"].dictionaryObject,
       let modeInfo = ModeInfo(for: modeDict)
@@ -406,15 +406,15 @@ extension TKTTPifier.SegmentOverview {
 
 extension TKTTPifier.SegmentOverview: STKTripSegmentDisplayable {
   
-  @objc private var tripSegmentModeImage: UIImage? {
+  @objc fileprivate var tripSegmentModeImage: UIImage? {
     return TKSegmentHelper.segmentImage(.listMainMode, modeInfo: modeInfo, modeIdentifier: nil, isRealTime: false)
   }
   
-  @objc private func tripSegmentModeColor() -> UIColor? {
+  @objc fileprivate func tripSegmentModeColor() -> UIColor? {
     return modeInfo.color
   }
   
-  @objc private func tripSegmentModeTitle() -> String? {
+  @objc fileprivate func tripSegmentModeTitle() -> String? {
     if let description = modeInfo.descriptor, !description.isEmpty {
       return description
     } else {
@@ -422,7 +422,7 @@ extension TKTTPifier.SegmentOverview: STKTripSegmentDisplayable {
     }
   }
   
-  @objc private func tripSegmentModeSubtitle() -> String? {
+  @objc fileprivate func tripSegmentModeSubtitle() -> String? {
     if SVKTransportModes.modeIdentifierIsPublicTransport(modeInfo.identifier) {
       return nil
     } else {
@@ -432,11 +432,11 @@ extension TKTTPifier.SegmentOverview: STKTripSegmentDisplayable {
 }
 
 extension TKTTPifier.SegmentOverview: STKDisplayableRoute {
-  @objc private func routeColour() -> UIColor? {
+  @objc fileprivate func routeColour() -> UIColor? {
     return tripSegmentModeColor()
   }
   
-  @objc private func routePath() -> [AnyObject] {
+  @objc fileprivate func routePath() -> [Any] {
     guard let polyline = self.polyline else { return [] }
     return CLLocation.decodePolyLine(polyline)
   }
@@ -499,7 +499,7 @@ extension TKAgendaInputItem {
   /**
    Turn a `TKAgendaInputItem` into the input for `tpp/` endpoint.
    */
-  private func asInput() -> [String: AnyObject]? {
+  fileprivate func asInput() -> [String: Any]? {
     switch self {
     case .event(let input):
       guard let id = input.identifier else {

@@ -115,7 +115,7 @@ private struct TKSimpleAgenda: TKAgendaType {
     return outputError.asObservable()
   }
   
-  private func engage() {
+  fileprivate func engage() {
     Observable.combineLatest(inputs, triggerRebuild.asObservable()) { items, trigger in
         return ( items, trigger )
       }

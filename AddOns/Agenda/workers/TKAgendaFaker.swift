@@ -43,7 +43,7 @@ struct TKAgendaFaker: TKAgendaBuilderType {
     return trackWithTrips(events, usePlaceholders: true, placeholderTitle: title)
   }
   
-  private static func inputsReturningHome(_ items: [TKAgendaInputItem]) -> [TKAgendaInputItem] {
+  fileprivate static func inputsReturningHome(_ items: [TKAgendaInputItem]) -> [TKAgendaInputItem] {
     if let first = items.first,
        let last = items.last,
        first.isStay && !last.isStay {
@@ -53,7 +53,7 @@ struct TKAgendaFaker: TKAgendaBuilderType {
     }
   }
   
-  private static func trackWithTrips(_ items: [TKAgendaInputItem], usePlaceholders: Bool, placeholderTitle: String? = nil) -> [TKAgendaOutputItem] {
+  fileprivate static func trackWithTrips(_ items: [TKAgendaInputItem], usePlaceholders: Bool, placeholderTitle: String? = nil) -> [TKAgendaOutputItem] {
     let (outputs, _) = items.reduce( ([] as [TKAgendaOutputItem], nil as TKAgendaInputItem?) ) { previous, nextInput in
       // Unexpected state
       guard let next = nextInput.asFakeOutput() else { fatalError("unexpected Input: \(nextInput)") }
@@ -139,5 +139,5 @@ private class FakeTrip: NSObject, STKTrip {
 private class FakeBusSegment: NSObject, STKTripSegment {
   @objc let tripSegmentModeImage: UIImage? = nil
   @objc let tripSegmentInstruction = "Bus"
-  @objc let tripSegmentMainValue: AnyObject = Date()
+  @objc let tripSegmentMainValue: Any = Date()
 }

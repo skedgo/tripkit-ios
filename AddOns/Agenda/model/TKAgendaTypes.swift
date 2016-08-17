@@ -269,11 +269,11 @@ extension TKAgendaTripOptionType {
 private class TKMinimalSegment: NSObject, TKAgendaTripOptionSegmentType {
   @objc let tripSegmentModeImage: UIImage?
   
-  @objc private func routePath() -> [AnyObject] {
+  @objc fileprivate func routePath() -> [Any] {
     return []
   }
   
-  @objc private func routeColour() -> UIColor? {
+  @objc fileprivate func routeColour() -> UIColor? {
     return nil
   }
   
