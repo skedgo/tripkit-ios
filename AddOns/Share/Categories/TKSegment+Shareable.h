@@ -6,10 +6,13 @@
 //
 //
 
-#import <TripKit/TripKit.h>
+#ifndef TK_NO_FRAMEWORKS
+@import TripKit;
+#else
+#import "TKSegment.h"
+#endif
 
 #import "TKShareURLProvider.h"
-#import "TKSegment.h"
 
 @interface TKSegment (Shareable) <SGURLShareable>
 
