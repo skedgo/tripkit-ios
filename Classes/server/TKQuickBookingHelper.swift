@@ -102,9 +102,18 @@ public struct TKBookingConfirmation {
     public let externalAction: NSString?
   }
   
+  public struct Purchase {
+    public let price: NSDecimalNumber
+    public let currency: String
+    public let productName: String
+    public let productType: String
+    public let id: String
+  }
+  
   public let status: Detail
   public let provider: Detail?
   public let vehicle: Detail?
+  public let purchase: Purchase?
   public let actions: [Action]
 }
 
@@ -202,6 +211,7 @@ extension TKBookingConfirmation {
     
     let provider = Detail(withDictionary: dictionary["provider"] as? [String: AnyObject])
     let vehicle = Detail(withDictionary: dictionary["vehicle"] as? [String: AnyObject])
+    let purchase = Purchase(withDictionary: dictionary["purchase"] as? [String: AnyObject])
     
     let actions: [Action]
     if let rawActions = dictionary["actions"] as? [[String: AnyObject]] {
@@ -210,7 +220,7 @@ extension TKBookingConfirmation {
       actions = []
     }
 
-    self.init(status: status, provider: provider, vehicle: vehicle, actions: actions)
+    self.init(status: status, provider: provider, vehicle: vehicle, purchase: purchase, actions: actions)
   }
 }
 
@@ -250,6 +260,26 @@ extension TKBookingConfirmation.Action {
   }
 }
 
+extension TKBookingConfirmation.Purchase {
+  private init?(withDictionary dictionary: [String: AnyObject]?) {
+    guard
+      let dictionary = dictionary,
+      let price = dictionary["price"] as? Double,
+      let currency = dictionary["currency"] as? String,
+      let productName = dictionary["productName"] as? String,
+      let productType = dictionary["productType"] as? String,
+      let id = dictionary["id"] as? String
+      else { return nil }
+    
+    self.price = NSDecimalNumber(double: price)
+    self.currency = currency
+    self.productName = productName
+    self.productType = productType
+    self.id = id
+  }
+}
+
+
 
 extension TKBookingConfirmation {
   private static func fakeTNC() -> TKBookingConfirmation? {
@@ -279,6 +309,13 @@ extension TKBookingConfirmation {
         "imageURL": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/prius.jpg",
         "subtitle": "UBER-PLATE",
         "title": "Prius Toyota"
+      ],
+      "purchase": [
+        "price": 15.80,
+        "currency": "AUD",
+        "productName": "uberX",
+        "productType": "ps_tnc",
+        "id": "1204f411-eacb-406c-8fd2-3775c8242b02",
       ]
     ]
     return TKBookingConfirmation(withDictionary: fake)
