@@ -261,7 +261,7 @@ extension TKBookingConfirmation.Action {
 }
 
 extension TKBookingConfirmation.Purchase {
-  private init?(withDictionary dictionary: [String: AnyObject]?) {
+  fileprivate init?(withDictionary dictionary: [String: Any]?) {
     guard
       let dictionary = dictionary,
       let price = dictionary["price"] as? Double,
@@ -271,7 +271,7 @@ extension TKBookingConfirmation.Purchase {
       let id = dictionary["id"] as? String
       else { return nil }
     
-    self.price = NSDecimalNumber(double: price)
+    self.price = NSDecimalNumber(value: price)
     self.currency = currency
     self.productName = productName
     self.productType = productType
