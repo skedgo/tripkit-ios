@@ -95,14 +95,14 @@ public struct TKTTPifier : TKAgendaBuilderType {
     let placeholders = TKAgendaFaker.outputPlaceholders(merged)
     
     // 1. Create the problem (or the cached ID)
-    return rx_createProblem(locations, into: into, dateComponents: dateComponents, modes: modes)
+    return createProblem(locations, into: into, dateComponents: dateComponents, modes: modes)
       .flatMap { region, id  in
         // 2. Fetch the solution, both partial and full
-        return rx_fetchSolution(id, inputItems: into + locations, inRegion: region)
+        return fetchSolution(id, inputItems: into + locations, inRegion: region)
           .catchError { error in
             // 2a. If the solution has expired, clear the cache and create a new one
             if case TTPError.problemNotFoundOnServer = error {
-              return rx_clearCacheAndRetry(region, insert: locations, into: into, dateComponents: dateComponents, modes: modes)
+              return clearCacheAndRetry(region, insert: locations, into: into, dateComponents: dateComponents, modes: modes)
             } else {
               throw error
             }
@@ -132,16 +132,16 @@ public struct TKTTPifier : TKAgendaBuilderType {
       .observeOn(MainScheduler.instance)
   }
   
-  fileprivate static func rx_clearCacheAndRetry(_ region: SVKRegion, insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil) -> Observable<[TKAgendaOutputItem]?> {
+  fileprivate static func clearCacheAndRetry(_ region: SVKRegion, insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil) -> Observable<[TKAgendaOutputItem]?> {
 
     // Clear the cache of problem ID
     let paras = createInput(insert, into: into, dateComponents: dateComponents, modes: modes, region: region)
     TKTTPifierCache.clear(forParas: paras)
     
     // Create problem and fetch solution again
-    return rx_createProblem(insert, into: into, dateComponents: dateComponents, region: region, modes: modes)
+    return createProblem(insert, into: into, dateComponents: dateComponents, region: region, modes: modes)
       .flatMap { region, id in
-        return rx_fetchSolution(id, inputItems: into + insert, inRegion: region)
+        return fetchSolution(id, inputItems: into + insert, inRegion: region)
     }
   }
   
@@ -152,7 +152,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
    - parameter into: Sorted list of locations to add the new ones into. Typically starts and ends at a hotel.
    - returns: Observable sequence of the region where the problem starts and the id of the problem on the server.
    */
-  fileprivate static func rx_createProblem(_ insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, region: SVKRegion? = nil, modes: [String]? = nil) -> Observable<(SVKRegion, String)> {
+  fileprivate static func createProblem(_ insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, region: SVKRegion? = nil, modes: [String]? = nil) -> Observable<(SVKRegion, String)> {
 
     guard let first = into.first else {
       preconditionFailure("`into` needs at least one item")
@@ -160,24 +160,24 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     // If a region was not supplied, fetch it, and recurse
     guard let region = region else {
-      return SVKServer.sharedInstance()
-        .rx_requireRegion(first.start)
+      return SVKServer.sharedInstance().rx
+        .requireRegion(first.start)
         .flatMap { region -> Observable<(SVKRegion, String)> in
-          return self.rx_createProblem(insert, into: into, dateComponents: dateComponents, region: region, modes: modes)
+          return self.createProblem(insert, into: into, dateComponents: dateComponents, region: region, modes: modes)
       }
     }
     
     let paras = createInput(insert, into: into, dateComponents: dateComponents, modes: modes, region: region)
     
     // Re-use the cached ID
-    // If it doesn't exist anymore, we handle this in `rx_fetchSolution`
+    // If it doesn't exist anymore, we handle this in `fetchSolution`
     if let cachedId = TKTTPifierCache.problemId(forParas: paras) {
       return Observable.just((region, cachedId))
     }
     
     // If we don't have a cached ID, create a new problem on the server
-    return SVKServer.sharedInstance()
-      .rx_hit(.POST, path: "ttp", parameters: paras, region: region)
+    return SVKServer.sharedInstance().rx
+      .hit(.POST, path: "ttp", parameters: paras, region: region)
       .retry(4)
       .map { code, json -> (SVKRegion, String?) in
         if let id = json?["id"].string {
@@ -201,7 +201,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
    - parameter region: Region where the problem starts
    - returns: Observable sequence with the output items or `nil` if the server couldn't calculate them
    */
-  fileprivate static func rx_fetchSolution(_ id: String, inputItems: [TKAgendaInputItem], inRegion region: SVKRegion) -> Observable<[TKAgendaOutputItem]?> {
+  fileprivate static func fetchSolution(_ id: String, inputItems: [TKAgendaInputItem], inRegion region: SVKRegion) -> Observable<[TKAgendaOutputItem]?> {
     
     problemIDs.insert(id)
 
@@ -221,8 +221,8 @@ public struct TKTTPifier : TKAgendaBuilderType {
       paras = [:]
     }
     
-    return SVKServer.sharedInstance()
-      .rx_hit(.GET, path: "ttp/\(id)/solution", parameters: paras, region: region) { code, json in
+    return SVKServer.sharedInstance().rx
+      .hit(.GET, path: "ttp/\(id)/solution", parameters: paras, region: region) { code, json in
         
         // Keep hitting if it's a 299 (solution still bein calculated)
         // or the input indicates that not all trips have been added yet

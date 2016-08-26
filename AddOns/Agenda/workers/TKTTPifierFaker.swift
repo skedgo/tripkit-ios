@@ -35,7 +35,7 @@ enum TKTTPifierFaker {
             subscriber.onCompleted()
           }
       }
-      return AnonymousDisposable {
+      return Disposables.create {
         subscription.dispose()
       }
     }

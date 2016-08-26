@@ -18,8 +18,8 @@ extension TKSkedgoifier {
    */
   public func buildTrack(forItems items: [TKAgendaInputItem], startDate: Date, endDate: Date, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]> {
     
-    return SVKServer.sharedInstance()
-      .rx_requireRegion(MKCoordinateRegion.forItems(items))
+    return SVKServer.sharedInstance().rx
+      .requireRegion(MKCoordinateRegion.forItems(items))
       .flatMap { region in
         return self.fetchTrips(forItems: items, startDate: startDate, endDate: endDate, inRegion: region, privateVehicles: privateVehicles, tripPatterns: tripPatterns)
       }
@@ -79,7 +79,7 @@ extension TKSkedgoifier {
         subscriber.onCompleted()
       }
       
-      return NopDisposable.instance
+      return Disposables.create()
     }
     
   }

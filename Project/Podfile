@@ -10,8 +10,8 @@ def shared_pods
   pod 'SGUIKit',        git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
   pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
   
-  pod 'RxSwift',        branch: 'swift-3.0',  git: 'https://github.com/ReactiveX/RxSwift.git'
-  pod 'RxCocoa',        branch: 'swift-3.0',  git: 'https://github.com/ReactiveX/RxSwift.git'
+  pod 'RxSwift',        git: 'https://github.com/ReactiveX/RxSwift.git'
+  pod 'RxCocoa',        git: 'https://github.com/ReactiveX/RxSwift.git'
 
   # These can be removed, once their Swift3 versions are the defaults
   pod 'SwiftyJSON',     branch: 'swift3',     git: 'https://github.com/skedgo/SwiftyJSON.git'
@@ -27,6 +27,6 @@ end
 target 'TripKitTests' do
   shared_pods
   
-  pod 'RxBlocking',    branch: 'swift-3.0',  git: 'https://github.com/ReactiveX/RxSwift.git'
-  pod 'RxTests',       branch: 'swift-3.0',  git: 'https://github.com/ReactiveX/RxSwift.git'
+  pod 'RxBlocking',    git: 'https://github.com/ReactiveX/RxSwift.git'
+  pod 'RxTests',       git: 'https://github.com/ReactiveX/RxSwift.git'
 end

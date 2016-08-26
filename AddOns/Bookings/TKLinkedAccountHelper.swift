@@ -125,36 +125,6 @@ extension SVKRegion {
   }
   
   /**
-   Initiates linking of a user's account for the provided `mode`.
-   
-   Fetches the required information from the server to initiate the OAuth process and then starts the OAuth process itself, which usually leads to the user being redirected to a webpage.
-   
-   - warning: Make sure you have configured the OAuthCallback in your Config.plist and that you're handling this when the app gets opened again.
-   
-   - parameter mode: Mode identifier for which to link the user's account.
-   - parameter remoteURL: URL for linking from `ProviderAuth.actionURL`.
-   - returns: Observable indicating success.
-  */
-  public func rx_linkAccount(_ mode: String, remoteURL: URL, presenter: UIViewController) -> Observable<Bool> {
-    return OAuthClient.requiresOAuth(remoteURL)
-      .flatMap { form, isOAuth -> Observable<Bool> in
-        if isOAuth {
-          return OAuthClient.performOAuth(mode, form: form)
-            .map { form in form == nil } // No further input required
-        } else {
-          var manager: MiniBookingManager! = MiniBookingManager(withForm: form)
-          manager.present(fromViewController: presenter)
-          return Observable.create { subscriber in
-            manager.asObservable().subscribe(subscriber)
-            return AnonymousDisposable {
-              manager = nil
-            }
-          }
-        }
-      }
-  }
-  
-  /**
    Unlinkes local and remote authentications for the provided `mode`.
    
    - parameter mode: Mode identifier for which to remove the authentication.
@@ -220,6 +190,43 @@ extension SVKRegion {
       }
     )
   }
+}
+
+extension Reactive where Base: SVKRegion {
+  /**
+   Initiates linking of a user's account for the provided `mode`.
+   
+   Fetches the required information from the server to initiate the OAuth process and then starts the OAuth process itself, which usually leads to the user being redirected to a webpage.
+   
+   - warning: Make sure you have configured the OAuthCallback in your Config.plist and that you're handling this when the app gets opened again.
+   
+   - parameter mode: Mode identifier for which to link the user's account.
+   - parameter remoteURL: URL for linking from `ProviderAuth.actionURL`.
+   - returns: Observable indicating success.
+   */
+  public func linkAccount(_ mode: String, remoteURL: URL, presenter: UIViewController) -> Observable<Bool> {
+    return OAuthClient.requiresOAuth(remoteURL)
+      .flatMap { form, isOAuth -> Observable<Bool> in
+        if isOAuth {
+          return OAuthClient.performOAuth(mode, form: form)
+            .map { form in form == nil } // No further input required
+        } else {
+          var manager: MiniBookingManager! = MiniBookingManager(withForm: form)
+          var disposeBag: DisposeBag! = DisposeBag()
+          manager.present(fromViewController: presenter)
+          return Observable.create { subscriber in
+            manager.asObservable()
+              .subscribe(subscriber)
+              .addDisposableTo(disposeBag)
+            return Disposables.create {
+              manager = nil
+              disposeBag = nil
+            }
+          }
+        }
+    }
+  }
+  
 }
 
 /**

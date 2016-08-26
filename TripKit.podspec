@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
   s.prefix_header_file = "prefix.pch"
 
   s.dependency 'SGCoreKit/Core'
+  s.dependency 'SGCoreKit/Rx'
   s.source_files = "Classes/**/*.{h,m,swift}"
   s.resources    = [
     "Resources/*",

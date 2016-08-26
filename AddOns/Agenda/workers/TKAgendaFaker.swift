@@ -32,7 +32,7 @@ struct TKAgendaFaker: TKAgendaBuilderType {
             subscriber.onCompleted()
           }
       }
-      return AnonymousDisposable {
+      return Disposables.create {
         subscription.dispose()
       }
     }

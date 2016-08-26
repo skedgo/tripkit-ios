@@ -15,20 +15,20 @@ import SGCoreKit
 
 public enum TKLocationRealTime {
 
-  public static func rx_fetchRealTimeInfo(for location: SGNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<LocationInformation> {
+  public static func fetchRealTimeInfo(for location: SGNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<LocationInformation> {
     return fetchOnlyOn
       .flatMapLatest { fetch -> Observable<LocationInformation> in
         if fetch {
-          return rx_fetchRealTime(for: location)
+          return fetchRealTime(for: location)
         } else {
           return Observable.empty()
         }
       }
   }
   
-  public static func rx_fetchRealTime(for location: SGNamedCoordinate) -> Observable<LocationInformation> {
-    return SVKServer.sharedInstance()
-      .rx_requireRegion(location.coordinate)
+  public static func fetchRealTime(for location: SGNamedCoordinate) -> Observable<LocationInformation> {
+    return SVKServer.sharedInstance().rx
+      .requireRegion(location.coordinate)
       .flatMap { region -> Observable<LocationInformation> in
         var paras: [String: Any] = [
           "realtime" : true
@@ -41,8 +41,8 @@ public enum TKLocationRealTime {
           paras["lng"] = location.coordinate.longitude
         }
         
-        return SVKServer.sharedInstance()
-          .rx_hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, json in
+        return SVKServer.sharedInstance().rx
+          .hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, json in
             if case 400..<500 = status {
               return nil // Client-side errors; hitting again won't help
             }
