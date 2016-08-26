@@ -1276,7 +1276,7 @@ NSString *const UninitializedString =  @"UninitializedString";
       }
 
       case BHSegmentOrdering_Regular: {
-        if (!self.template) {
+        if (!self.template.action) {
           return nil;
         }
         NSMutableString *actionRaw = [NSMutableString stringWithString:self.template.action];

@@ -418,7 +418,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       // updated trip isn't strictly speaking new, but we want to process it as a successful match.
       [newTrips addObject:trip];
       
-      NSMutableArray *unmatchedSegmentReferences = nil;
+      NSMutableSet *unmatchedSegmentReferences = nil;
       if (tripToUpdate) {
         unmatchedSegmentReferences = [tripToUpdate.segmentReferences mutableCopy];
       }

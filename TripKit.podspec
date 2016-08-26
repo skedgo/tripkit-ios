@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   }
   s.source       = { path: "." }
   # s.source       = { git: ".", tag: "v#{s.version}" }
-#  s.source       = { git: "https://github.com/skedgo/shared-ios.git", :tag => "v#{s.version}" }
+  # s.source       = { git: "https://github.com/skedgo/shared-ios.git", :tag => "v#{s.version}" }
   s.platform     = :ios, '8.0'
   s.requires_arc = true
   
