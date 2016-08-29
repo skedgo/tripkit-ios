@@ -58,10 +58,6 @@
   // region name might be missing, just match on stop code which might give you the wrong stop but it's unlikely.
   return [tripKitContext fetchUniqueObjectForEntityClass:self
                                      withPredicateString:@"stopCode = %@ AND toDelete = NO", stopCode];
-
-
-  return [tripKitContext fetchUniqueObjectForEntityClass:self
-                                           withPredicate:predicate];
 }
 
 + (instancetype)fetchOrInsertStopForStopCode:(NSString *)stopCode
