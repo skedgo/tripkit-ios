@@ -55,7 +55,7 @@ class TKTTPifierTest: XCTestCase {
     
     let _ = (1...100).map { _ in
       let shuffled = list.shuffle()
-      let sorted = list.sorted { $0.beforeInList($1) }
+      let sorted = shuffled.sorted { $0.beforeInList($1) }
       XCTAssert(sorted ~= list)
     }
   }

@@ -10,6 +10,7 @@ import Foundation
 
 import RxSwift
 
+import TripKit
 import SGSearchKit
 
 public enum TKSwiftyShareHelper {
@@ -123,8 +124,8 @@ public enum TKSwiftyShareHelper {
     
     // make sure we got a destination
     let named = SGNamedCoordinate(coordinate: to)
-    named.name = name
-    return named.rx_valid
+    named.address = name
+    return named.rx_valid(geocoder: geocoder)
       .map { valid in
         precondition(valid.coordinate.isValid)
         return QueryDetails(
@@ -138,11 +139,11 @@ public enum TKSwiftyShareHelper {
   
   public static func stopDetails(for url: URL) -> Observable<StopDetails> {
     let pathComponents = url.path.components(separatedBy: "/")
-    guard pathComponents.count > 4 else { return Observable.empty() }
+    guard pathComponents.count >= 4 else { return Observable.empty() }
     
     let region = pathComponents[2]
     let code = pathComponents[3]
-    let filter: String? = pathComponents.count > 5 ? pathComponents[4] : nil
+    let filter: String? = pathComponents.count >= 5 ? pathComponents[4] : nil
     
     let result = StopDetails(code: code, region: region, filter: filter)
     return Observable.just(result)
@@ -201,7 +202,7 @@ extension TKSwiftyShareHelper.StopDetails {
 
 extension MKAnnotation {
   /// An Observable passing back `self` if its coordinate is valid or it could get geocoded.
-  public var rx_valid: Observable<MKAnnotation> {
+  public func rx_valid(geocoder: SGGeocoder) -> Observable<MKAnnotation> {
     if coordinate.isValid {
       return Observable.just(self)
     }
@@ -211,16 +212,13 @@ extension MKAnnotation {
     }
     
     return Observable.create() { observer in
-      var worker: SGBaseGeocoder! = SGAppleGeocoder()
-      SGBaseGeocoder.geocodeObject(geocodable, using: worker, nearRegion: MKMapRectNull) { success in
+      SGBaseGeocoder.geocodeObject(geocodable, using: geocoder, nearRegion: MKMapRectNull) { success in
         if success {
           observer.onNext(self)
         }
         observer.onCompleted()
       }
-      return Disposables.create {
-        worker = nil
-      }
+      return Disposables.create()
     }
   }
 }
