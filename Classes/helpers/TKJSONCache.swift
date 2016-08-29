@@ -46,7 +46,7 @@ public class TKJSONCache: NSObject {
 
   public static func remove(_ id: String, directory: TKJSONCacheDirectory, subdirectory: String?) {
     let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
-    let _ = try? FileManager.default.removeItem(at: fileURL)
+    _ = try? FileManager.default.removeItem(at: fileURL)
   }
   
   private static func cacheURL(_ destination: TKJSONCacheDirectory, filename: String, subdirectory: String? = nil) -> URL {

@@ -158,7 +158,7 @@ extension SVKRegion {
         return ProviderAuth(status: status, modeIdentifier: mode)
       } else {
         // Remove outdated credentials that we can't renew
-        let _ =  OAuthClient.removeCredentials(mode: mode)
+        _ = OAuthClient.removeCredentials(mode: mode)
       }
     }
     return nil;
