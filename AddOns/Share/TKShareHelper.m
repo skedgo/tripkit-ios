@@ -35,46 +35,6 @@
   return [NSURL URLWithString:urlString];
 }
 
-+ (void)meetingDetailsForURL:(NSURL *)url
-               usingGeocoder:(id<SGGeocoder>)geocoder
-                     details:(void (^)(CLLocationCoordinate2D coordinate, NSString *name, NSDate *time))detailBlock
-{
-  // re-construct the parameters
-  NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
-  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:queryComponents.count];
-  for (NSString *param in queryComponents) {
-    NSArray *elements = [param componentsSeparatedByString:@"="];
-    if (elements.count == 2) {
-      params[elements[0]] = elements[1];
-    }
-  }
-  
-  // Time is required
-  if (! params[@"at"]) {
-    return; // Need nam
-  }
-  NSDate *time = [NSDate dateWithTimeIntervalSince1970:[params[@"at"] doubleValue]];
-  
-  // And either need lat+lng or name
-  NSString *name = params[@"name"];
-  if (name) {
-    [self geocodeString:name
-          usingGeocoder:geocoder
-             completion:
-     ^(SGNamedCoordinate * _Nullable destination) {
-       if (destination) {
-         detailBlock(destination.coordinate, [destination title], time);
-       }
-     }];
-
-  } else if (params[@"lat"] && params[@"lng"]) {
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([params[@"lat"] doubleValue], [params[@"lng"] doubleValue]);
-    if (CLLocationCoordinate2DIsValid(coordinate)) {
-      detailBlock(coordinate, nil, time);
-    }
-  }
-}
-
 #pragma mark - Query URL
 
 + (BOOL)isQueryURL:(NSURL *)url
@@ -104,69 +64,6 @@
     [urlString appendFormat:@"&time=%.0f&type=%ld", [time timeIntervalSince1970], (long)timeType];
   }
   return [NSURL URLWithString:urlString];
-}
-
-+ (BOOL)queryDetailsForURL:(NSURL *)url
-             usingGeocoder:(id<SGGeocoder>)geocoder
-                   success:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, NSString *name, SGTimeType timeType, NSDate *time))success
-                   failure:(void (^)())failure
-{
-  // re-construct the parameters
-  NSArray *queryComponents = [[url query] componentsSeparatedByString:@"&"];
-  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:queryComponents.count];
-  for (NSString *param in queryComponents) {
-    NSArray *elements = [param componentsSeparatedByString:@"="];
-    if (elements.count == 2) {
-      params[elements[0]] = elements[1];
-    }
-  }
-  
-  // construct the request
-  // mandatory is only 'to'
-  if ((!params[@"tlat"] || !params[@"tlng"]) && !params[@"tname"])
-    return NO;
-  
-  NSString *name = params[@"tname"];
-  
-  CLLocationCoordinate2D start;
-  if (params[@"flat"] && params[@"flng"]) {
-    start = CLLocationCoordinate2DMake([params[@"flat"] doubleValue], [params[@"flng"] doubleValue]);;
-  } else {
-    start = kCLLocationCoordinate2DInvalid;
-  }
-  
-  CLLocationCoordinate2D end;
-  if (params[@"tlat"] && params[@"tlng"]) {
-    end = CLLocationCoordinate2DMake([params[@"tlat"] doubleValue], [params[@"tlng"] doubleValue]);
-  } else {
-    end = kCLLocationCoordinate2DInvalid;
-  }
-  
-  SGTimeType timeType = SGTimeTypeLeaveASAP;
-  NSDate *time = nil;
-  if (params[@"type"] && params[@"time"]) {
-    NSInteger typeInt = [params[@"type"] integerValue];
-    if (typeInt >= 0 && typeInt <= 2) {
-      timeType = (SGTimeType) typeInt;
-      time = timeType == SGTimeTypeLeaveASAP ? nil : [NSDate dateWithTimeIntervalSince1970:[params[@"time"] doubleValue]];
-    }
-  }
-  
-  if (!CLLocationCoordinate2DIsValid(end) && name != nil) {
-    [self geocodeString:name
-          usingGeocoder:geocoder
-             completion:
-     ^(SGNamedCoordinate * _Nullable coordinate) {
-       if (coordinate) {
-         success(start, coordinate.coordinate, [coordinate title], timeType, time);
-       } else {
-         failure();
-       }
-     }];
-  } else {
-    success(start, end, name, timeType, time);
-  }
-  return YES;
 }
 
 + (void)geocodeString:(NSString *)string
@@ -225,24 +122,6 @@
   NSString *urlString = [NSString stringWithFormat:@"%@/stop/%@/%@/%@", baseURL, regionName, escapedStopCode, addendum];
   return [NSURL URLWithString:urlString];
 }
-
-+ (BOOL)stopDetailsForURL:(NSURL *)url
-                  details:(void (^)(NSString *stopCode, NSString *regionName, NSString *filter))detailBlock {
-  // re-construct the parameters
-  NSArray *queryComponents = [[url path] componentsSeparatedByString:@"/"];
-  
-  NSString *regionName = queryComponents[2];
-  NSString *stopCode = queryComponents[3];
-  NSString *filter = queryComponents.count == 5 ? queryComponents[4] : nil;
-
-  // construct the request
-  if (! regionName || ! stopCode)
-    return NO;
-  
-  detailBlock(stopCode, regionName, filter);
-  return YES;
-}
-
 
 #pragma mark - Services
 

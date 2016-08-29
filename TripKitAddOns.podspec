@@ -47,7 +47,7 @@ Pod::Spec.new do |s|
   s.subspec 'Share' do |cs|
     cs.dependency 'TripKit'
     cs.dependency 'SGSearchKit'
-
+    cs.dependency 'RxSwift'
     cs.source_files = "AddOns/Share/**/*"
   end
 
