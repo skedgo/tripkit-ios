@@ -547,6 +547,11 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   [parser parseAndAddResult:json
                  completion:
    ^(TripRequest *request) {
+     if (!request) {
+       completion(nil);
+       return;
+     }
+     
      // make sure we save
      ZAssert(request.managedObjectContext == tripKitContext, @"Context mismatch.");
      NSError *publicError = nil;

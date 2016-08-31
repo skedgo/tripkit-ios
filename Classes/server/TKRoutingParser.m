@@ -9,6 +9,7 @@
 #import "TKRoutingParser.h"
 
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 @interface TKRoutingParser ()
 
@@ -137,11 +138,7 @@
       return;
     }
     
-    BOOL success = [[self class] populateRequestWithTripInformation:request
-                                                       fromLocation:nil
-                                                         toLocation:nil
-                                                         leaveAfter:nil
-                                                           arriveBy:nil];
+    BOOL success = [TKRoutingParser populate:request start:nil end:nil leaveAfter:nil arriveBy:nil];
     if (! success) {
       return;
     }
@@ -151,7 +148,7 @@
 }
 
 - (void)parseAndAddResult:(NSDictionary *)json
-               completion:(void (^)(TripRequest *request))completion
+               completion:(void (^)(TripRequest * _Nullable request))completion
 {
   [self.context performBlock:^{
     // create an empty request
@@ -166,17 +163,15 @@
     if (added.count == 0) {
       [request remove];
       DLog(@"Error parsing request: %@", json);
+      completion(nil);
       return;
     }
     
-    BOOL success = [[self class] populateRequestWithTripInformation:request
-                                                       fromLocation:nil
-                                                         toLocation:nil
-                                                         leaveAfter:nil
-                                                           arriveBy:nil];
+    BOOL success = [TKRoutingParser populate:request start:nil end:nil leaveAfter:nil arriveBy:nil];
     if (! success) {
       [request remove];
       DLog(@"Got trip without a segment from JSON: %@", json);
+      completion(nil);
       return;
     }
     completion(request);
@@ -217,7 +212,7 @@
 
 - (void)parseAndAddResult:(NSDictionary *)keyToTripGroups
      withSegmentTemplates:(NSArray *)segmentTemplatesJson
-                andAlerts:(NSArray *)alertJson
+                andAlerts:(nullable NSArray *)alertJson
                completion:(void (^)(NSDictionary *keyToAddedTrips))completion
 {
   [self.context performBlock:^{
@@ -263,9 +258,9 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
 
 
 - (NSArray *)parseAndAddResult:(NSDictionary *)json
-                    forRequest:(TripRequest *)request
-                   orTripGroup:(TripGroup *)insertIntoGroup
-                  orUpdateTrip:(Trip *)tripToUpdate
+                    forRequest:(nullable TripRequest *)request
+                   orTripGroup:(nullable TripGroup *)insertIntoGroup
+                  orUpdateTrip:(nullable Trip *)tripToUpdate
   allowDuplicatingExistingTrip:(BOOL)allowDuplicates
 
 {
@@ -273,7 +268,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
   NSString *error = json[@"error"];
   if (error) {
     DLog(@"Error while parsing: %@", error);
-    return nil;
+    return @[];
   }
   
   NSArray *segmentTemplatesArray = json[@"segmentTemplates"];
@@ -291,9 +286,9 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
 - (NSArray *)parseAndAddResultWithTripGroups:(NSArray *)tripGroupsArray
                             segmentTemplates:(NSArray *)segmentTemplatesArray
                                       alerts:(NSArray *)alertsArray
-                                  forRequest:(TripRequest *)request
-                                 orTripGroup:(TripGroup *)insertIntoGroup
-                                orUpdateTrip:(Trip *)tripToUpdate
+                                  forRequest:(nullable TripRequest *)request
+                                 orTripGroup:(nullable TripGroup *)insertIntoGroup
+                                orUpdateTrip:(nullable Trip *)tripToUpdate
                 allowDuplicatingExistingTrip:(BOOL)allowDuplicates
 {
   ZAssert(self.context, @"Managed object context required!");
@@ -306,7 +301,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
     request = tripToUpdate.request;
   }
   if (! request.managedObjectContext || [request isDeleted]) {
-    return nil;
+    return @[];
   }
   
   TripGroupVisibility updateTripVisibility = tripToUpdate.tripGroup.visibility;
