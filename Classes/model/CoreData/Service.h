@@ -28,11 +28,11 @@
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain) Service *continuation;
 @property (nonatomic, retain) Service *progenitor;
-@property (nonatomic, retain) NSSet *segments;
+@property (nonatomic, retain) NSSet<SegmentReference*>* segments;
 @property (nonatomic, retain) Shape *shape;
 @property (nonatomic, retain) Vehicle *vehicle;
-@property (nonatomic, retain) NSSet *vehicleAlternatives;
-@property (nonatomic, retain) NSSet *visits;
+@property (nonatomic, retain) NSSet<Vehicle*>* vehicleAlternatives;
+@property (nonatomic, retain) NSSet<StopVisits*>* visits;
 
 // non-core data properties
 @property (nonatomic, assign, getter = isRealTime) BOOL realTime;

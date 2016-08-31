@@ -772,7 +772,11 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (CLLocationCoordinate2D)coordinate {
-  return [self.start coordinate];
+  if (self.start) {
+    return [self.start coordinate];
+  } else {
+    return kCLLocationCoordinate2DInvalid;
+  }
 }
 
 - (BOOL)isDraggable {
@@ -780,7 +784,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (BOOL)pointDisplaysImage {
-  return [self hasVisibility:STKTripSegmentVisibilityOnMap];
+  return CLLocationCoordinate2DIsValid(self.coordinate) && [self hasVisibility:STKTripSegmentVisibilityOnMap];
 }
 
 - (UIImage *)pointImage
