@@ -258,52 +258,6 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
   }];
 }
 
-+ (BOOL)populateRequestWithTripInformation:(TripRequest *)request
-                              fromLocation:(id<MKAnnotation>)fromOrNil
-                                toLocation:(id<MKAnnotation>)toOrNil
-                                leaveAfter:(NSDate *)leaveAfter
-                                  arriveBy:(NSDate *)arriveBy
-{
-  // fill in the request
-  Trip *anyTrip = [request.trips anyObject];
-  NSArray *segments = [anyTrip segmentsWithVisibility:STKTripSegmentVisibilityInDetails];
-  if (segments.count == 0) {
-    return NO;
-  }
-  
-  // from and to
-  TKSegment *firstRegular = nil;
-  TKSegment *lastRegular = nil;
-  for (TKSegment *segment in segments) {
-    if (segment.order == BHSegmentOrdering_Regular) {
-      if (! firstRegular)
-        firstRegular = segment;
-      lastRegular = segment;
-    }
-  }
-  ZAssert(firstRegular, @"Trip doesn't have a regular segment: %@", anyTrip);
-  
-  request.fromLocation = [SGNamedCoordinate namedCoordinateForAnnotation:fromOrNil ?: [firstRegular start]];
-  request.toLocation   = [SGNamedCoordinate namedCoordinateForAnnotation:toOrNil ?: [lastRegular end]];
-  
-  if (leaveAfter) {
-    request.departureTime = leaveAfter;
-    request.timeType    = @(SGTimeTypeLeaveAfter);
-  }
-  
-  if (arriveBy) {
-    request.arrivalTime = arriveBy;
-    request.timeType    = @(SGTimeTypeArriveBefore); // can overwrite leave after
-  }
-  
-  if (! leaveAfter && ! arriveBy) {
-    request.departureTime = [firstRegular departureTime];
-    request.timeType      = @(SGTimeTypeLeaveAfter);
-  }
-  
-  [anyTrip setAsPreferredTrip];
-  return YES;
-}
 
 #pragma mark - Private helpers
 
