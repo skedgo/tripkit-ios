@@ -27,5 +27,6 @@ Pod::Spec.new do |s|
   s.dependency 'SGPulsingAnnotationView'
 
   s.source_files = "TripKitUI/**/*.{h,m,swift}"
+  s.resources = "TripKitUI/**/*.xib
 
 end
