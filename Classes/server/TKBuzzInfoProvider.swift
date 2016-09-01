@@ -45,6 +45,40 @@ public final class RegionInformation: NSObject {
   }
 }
 
+public final class TransitAlertInformation: NSObject {
+  public let title: String
+  public let text: String?
+  public let URL: NSURL?
+  
+  private init(title: String, text: String?, url: String?) {
+    self.title = title
+    self.text = text
+    if let stringURL = url {
+      self.URL = NSURL(string: stringURL)
+    } else {
+      self.URL = nil
+    }
+  }
+  
+  private class func alertsFromJSONResponse(response: AnyObject?) -> [TransitAlertInformation]? {
+    guard
+      let JSON = response as? [String: AnyObject],
+      let array = JSON["alerts"] as? [[String: AnyObject]]
+      else {
+        return nil
+    }
+    
+    let alerts = array.map { alertDict -> TransitAlertInformation in
+      let title = alertDict["title"] as? String ?? ""
+      let text = alertDict["text"] as? String
+      let stringURL = alertDict["url"] as? String
+      return TransitAlertInformation(title: title, text: text, url: stringURL)
+    }
+    
+    return alerts
+  }
+}
+
 /**
  Informational class for paratransit information (i.e., transport for people with disabilities).
  Contains name of service, URL with more information and phone number.
@@ -106,6 +140,30 @@ extension TKBuzzInfoProvider {
     )
   }
   
+  /**
+   Asynchronously fetches transit alerts for the provided region.
+   
+   - Note: Completion block is executed on the main thread.
+   */
+  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: [TransitAlertInformation]? -> Void) {
+    let paras = [
+      "region": region.name
+    ]
+    
+    SVKServer.sharedInstance().hitSkedGoWithMethod(
+      "GET",
+      path: "alerts/transit.json",
+      parameters: paras,
+      region: region,
+      success: { _, response in
+        let result = TransitAlertInformation.alertsFromJSONResponse(response)
+        completion(result)
+      },
+      failure: { _ in
+        let result = TransitAlertInformation.alertsFromJSONResponse(nil)
+        completion(result)
+    })
+  }
   
   /**
    Asynchronously fetches paratransit information for the provided region.
@@ -193,6 +251,8 @@ public class LocationInformation : NSObject {
   }
 }
 
+// MARK: - Extensions
+
 extension CarParkInfo {
   
   private init?(response: AnyObject?) {
@@ -239,6 +299,7 @@ extension LocationInformation {
     
     self.init(what3word: what3word, what3wordInfoURL: what3wordInfoURL, transitStop: stop, carParkInfo: carParkInfo)
   }
+  
 }
 
 extension TKBuzzInfoProvider {
@@ -266,5 +327,6 @@ extension TKBuzzInfoProvider {
       })
     
   }
+  
 }
 
