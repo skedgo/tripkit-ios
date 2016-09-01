@@ -51,6 +51,8 @@
   template.smsMessage       = dict[@"smsMessage"];
   template.smsNumber        = dict[@"smsNumber"];
   template.durationWithoutTraffic = dict[@"durationWithoutTraffic"];
+  template.metres           = dict[@"metres"];
+  template.metresFriendly   = dict[@"metresSafe"];
   
   if (template.segmentType.integerValue == BHSegmentTypeScheduled) {
     template.scheduledStartStopCode = dict[@"stopCode"];

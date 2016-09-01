@@ -275,6 +275,7 @@
     shape.travelled = shapeDict[@"travelled"];
     shape.title = shapeDict[@"name"];
     shape.encodedWaypoints = encodedWaypoints;
+    shape.friendly = shapeDict[@"safe"];
     if (nil == shape.travelled)
       shape.travelled = @(YES);
     

@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * encodedWaypoints;
 @property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSNumber * friendly;
 @property (nonatomic, retain) NSNumber * travelled;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain) SegmentTemplate *template;
