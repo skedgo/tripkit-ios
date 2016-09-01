@@ -12,7 +12,7 @@
 @import AFNetworking; // ImageView category
 
 @import SGCoreKit;
-@import SGCoreUIKit;
+@import SGUIKit;
 @import TripKit;
 
 #import "VehicleView.h"

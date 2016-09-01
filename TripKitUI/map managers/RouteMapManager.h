@@ -8,7 +8,7 @@
 
 @import MapKit;
 
-@import SGCoreUIKit;
+@import SGUIKit;
 @import TripKit;
 
 @interface RouteMapManager : ASMapManager <CLLocationManagerDelegate>
