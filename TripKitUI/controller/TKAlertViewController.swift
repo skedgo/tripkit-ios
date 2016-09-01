@@ -11,15 +11,15 @@ import TripKit
 import SGCoreKit
 import RxSwift
 
-class TKAlertViewController: UITableViewController {
+public class TKAlertViewController: UITableViewController {
   
-  var segment: TKSegment?
-  var alert: Alert?
-  var delegate: TKAlertViewControllerDelegate?
+  public var segment: TKSegment?
+  public var alert: Alert?
+  public var delegate: TKAlertViewControllerDelegate?
   
   private let disposeBag = DisposeBag()
   
-  override func viewDidLoad() {
+  override public func viewDidLoad() {
     super.viewDidLoad()
     
     self.title = NSLocalizedString("Alerts", comment: "")
@@ -41,11 +41,11 @@ class TKAlertViewController: UITableViewController {
   
   // MARK: - Table view data source
   
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
   }
   
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     guard let segment = segment else {
       return 0
     }
@@ -53,7 +53,7 @@ class TKAlertViewController: UITableViewController {
     return segment.alerts().count
   }
   
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     guard let alerts = segment?.alerts() where indexPath.row < alerts.count else {
       preconditionFailure("Either segment has no alerts or index path is pointing to a non-existent alert")
     }
@@ -80,7 +80,7 @@ class TKAlertViewController: UITableViewController {
   
   // MARK: - Table view delegate
   
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     if let alert = segment?.alerts()[indexPath.row] {
       delegate?.alertViewController(self, didSelectAlert: alert)
     }
@@ -95,7 +95,7 @@ class TKAlertViewController: UITableViewController {
   }
 }
 
-@objc protocol TKAlertViewControllerDelegate {
+@objc public protocol TKAlertViewControllerDelegate {
   
   func alertViewController(controller: TKAlertViewController, didSelectAlert alert: Alert)
   func alertViewController(controller: TKAlertViewController, didTapOnURL url: NSURL)
