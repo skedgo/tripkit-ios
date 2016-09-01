@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.prefix_header_file = "prefix.pch"
 
   s.dependency 'TripKit'
-  s.dependency 'SGCoreUIKit'
+  s.dependency 'SGUIKit'
 
   s.dependency 'AFNetworking'
   s.dependency 'SGPulsingAnnotationView'
