@@ -277,11 +277,11 @@
   double heading = newHeading.magneticHeading;
   
   UIInterfaceOrientation orientation;
-  if ([self.delegate respondsToSelector:@selector(mapManagerDeviceOrientation:)]) {
-    orientation = [self.delegate mapManagerDeviceOrientation:self];
-  } else {
-    orientation = UIInterfaceOrientationPortrait; // assume portait
-  }
+//  if ([self.delegate respondsToSelector:@selector(mapManagerDeviceOrientation:)]) {
+//    orientation = [self.delegate mapManagerDeviceOrientation:self];
+//  } else {
+  orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//  }
   
 	if(orientation == UIInterfaceOrientationPortraitUpsideDown)
 		heading += 180;
