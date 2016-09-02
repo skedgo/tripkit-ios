@@ -45,15 +45,19 @@ public final class RegionInformation: NSObject {
   }
 }
 
-public final class TransitAlertInformation: NSObject {
+public final class TransitAlertInformation: NSObject, TKAlert {
   public let title: String
   public let text: String?
   public let URL: String?
+  public let icon: UIImage?
+  public let lastUpdated: NSDate?
   
-  private init(title: String, text: String?, url: String?) {
+  private init(title: String, text: String? = nil, url: String? = nil, icon: UIImage? = nil, lastUpdated: NSDate? = nil) {
     self.title = title
     self.text = text
     self.URL = url
+    self.icon = icon
+    self.lastUpdated = lastUpdated
   }
   
   private class func alertsFromJSONResponse(response: AnyObject?) -> [TransitAlertInformation]? {
@@ -249,6 +253,18 @@ public class LocationInformation : NSObject {
       return false
     }
   }
+}
+
+// MARK: - Protocol
+
+@objc public protocol TKAlert {
+  
+  var URL: String? { get }
+  var title: String { get }
+  var text: String? { get }
+  var icon: UIImage? { get }
+  var lastUpdated: NSDate? { get }
+  
 }
 
 // MARK: - Extensions
