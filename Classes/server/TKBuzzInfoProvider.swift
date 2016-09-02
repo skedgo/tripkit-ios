@@ -48,16 +48,12 @@ public final class RegionInformation: NSObject {
 public final class TransitAlertInformation: NSObject {
   public let title: String
   public let text: String?
-  public let URL: NSURL?
+  public let URL: String?
   
   private init(title: String, text: String?, url: String?) {
     self.title = title
     self.text = text
-    if let stringURL = url {
-      self.URL = NSURL(string: stringURL)
-    } else {
-      self.URL = nil
-    }
+    self.URL = url
   }
   
   private class func alertsFromJSONResponse(response: AnyObject?) -> [TransitAlertInformation]? {
