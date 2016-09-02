@@ -17,9 +17,11 @@
 #import "TKColoredRoute.h"
 
 enum {
-  SGServiceFlagRealTime						= 1 << 0,
-  SGServiceFlagRealTimeCapable    = 1 << 1,
-  SGServiceFlagCancelled          = 1 << 2,
+  SGServiceFlagRealTime               = 1 << 0,
+  SGServiceFlagRealTimeCapable        = 1 << 1,
+  SGServiceFlagCancelled              = 1 << 2,
+  SGServiceFlagBicycleAccessible      = 1 << 3,
+  SGServiceFlagWheelchairAccessible   = 1 << 4,
 };
 typedef NSUInteger SGServiceFlag;
 
@@ -92,9 +94,19 @@ typedef NSUInteger SGServiceFlag;
   return [self.alerts firstObject];
 }
 
+- (BOOL)isRealTime
+{
+  return 0 != (self.flags.integerValue & SGServiceFlagRealTime);
+}
+
 - (void)setRealTime:(BOOL)realTime
 {
 	[self setFlag:SGServiceFlagRealTime to:realTime];
+}
+
+- (BOOL)isRealTimeCapable
+{
+  return 0 != (self.flags.integerValue & SGServiceFlagRealTimeCapable);
 }
 
 - (void)setRealTimeCapable:(BOOL)realTimeCapable
@@ -102,24 +114,34 @@ typedef NSUInteger SGServiceFlag;
 	[self setFlag:SGServiceFlagRealTimeCapable to:realTimeCapable];
 }
 
+- (BOOL)isCancelled
+{
+  return 0 != (self.flags.integerValue & SGServiceFlagCancelled);
+}
+
 - (void)setCancelled:(BOOL)cancelled
 {
 	[self setFlag:SGServiceFlagCancelled to:cancelled];
 }
 
-- (BOOL)isRealTime
+- (BOOL)isBicycleAccessible
 {
-	return 0 != (self.flags.integerValue & SGServiceFlagRealTime);
+  return 0 != (self.flags.integerValue & SGServiceFlagBicycleAccessible);
 }
 
-- (BOOL)isRealTimeCapable
+- (void)setBicycleAccessible:(BOOL)bicycleAccessible
 {
-	return 0 != (self.flags.integerValue & SGServiceFlagRealTimeCapable);
+  [self setFlag:SGServiceFlagBicycleAccessible to:bicycleAccessible];
 }
 
-- (BOOL)isCancelled
+- (BOOL)isWheelchairAccessible
 {
-	return 0 != (self.flags.integerValue & SGServiceFlagCancelled);
+  return 0 != (self.flags.integerValue & SGServiceFlagWheelchairAccessible);
+}
+
+- (void)setWheelchairAccessible:(BOOL)wheelchairAccessible
+{
+  [self setFlag:SGServiceFlagWheelchairAccessible to:wheelchairAccessible];
 }
 
 - (BOOL)hasServiceData
