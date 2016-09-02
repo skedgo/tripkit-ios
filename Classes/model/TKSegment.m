@@ -900,6 +900,11 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.timesAreRealTime;
 }
 
+- (BOOL)tripSegmentIsWheelchairAccessible
+{
+  return self.reference.isWheelchairAccessible;
+}
+
 - (nullable NSDate *)tripSegmentFixedDepartureTime
 {
   if ([self isPublicTransport] && self.frequency.integerValue == 0) {
