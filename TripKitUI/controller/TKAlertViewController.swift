@@ -55,15 +55,20 @@ public class TKAlertViewController: UITableViewController {
   }
   
   override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    guard let alerts = segment?.alerts() where indexPath.row < alerts.count else {
-      preconditionFailure("Either segment has no alerts or index path is pointing to a non-existent alert")
-    }
-    
-    let alert = alerts[indexPath.row]
     let alertCell = tableView.dequeueReusableCellWithIdentifier(String(TKAlertCell), forIndexPath: indexPath) as! TKAlertCell
     
-    // This configures the cell.
-    alertCell.alert = alert
+    var displayModel: TKAlertDisplayModel?
+    
+    if let segment = segment where indexPath.row < segment.alerts().count {
+      let alert = segment.alerts()[indexPath.row]
+      displayModel = TKAlertDisplayModel.fromAlert(alert)
+    } else if let alerts = latestAlerts where indexPath.row < alerts.count {
+      let alertInfo = alerts[indexPath.row]
+      displayModel = TKAlertDisplayModel.fromAlertInformation(alertInfo)
+    }
+    
+    // This configures the cell
+    alertCell.displayModel = displayModel
     
     // This intercepts the tap on the action button.
     alertCell.tappedOnLink
