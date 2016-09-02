@@ -422,14 +422,22 @@
         NSString *address = locDict[@"address"];
         alert.location    = [[SGNamedCoordinate alloc] initWithLatitude:lat longitude:lng name:name address:address];
       }
+      
+      NSString *severity = alertDict[@"severity"];
+      if ([severity isEqualToString:@"alert"]) {
+        alert.alertSeverity = AlertSeverityAlert;
+      } else if ([severity isEqualToString:@"warning"]) {
+        alert.alertSeverity = AlertSeverityWarning;
+      } else {
+        alert.alertSeverity = AlertSeverityInfo;
+      }
+      
+      alert.remoteIcon    = alertDict[@"remoteIcon"];
     }
     
-    
-    alert.severity      = [alertDict[@"severity"] isEqualToString:@"alert"] ? @10 : @0;
-    
     // might have added alert to a new stop code or service
-    alert.idStopCode  = alertDict[@"stopCode"] ?: alert.idStopCode;
-    alert.idService   = alertDict[@"serviceTripID"] ?: alert.idService;
+    alert.idStopCode    = alertDict[@"stopCode"] ?: alert.idStopCode;
+    alert.idService     = alertDict[@"serviceTripID"] ?: alert.idService;
     
     // text is dynamic, so update it
     alert.text					= alertDict[@"text"];

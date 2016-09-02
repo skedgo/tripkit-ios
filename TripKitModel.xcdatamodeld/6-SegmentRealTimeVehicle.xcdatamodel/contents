@@ -6,6 +6,7 @@
         <attribute name="idService" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="idStopCode" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="remoteIcon" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="severity" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
@@ -191,7 +192,7 @@
         <relationship name="serviceAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="vehicleAlternatives" inverseEntity="Service" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Alert" positionX="765" positionY="297" width="128" height="210"/>
+        <element name="Alert" positionX="765" positionY="297" width="128" height="225"/>
         <element name="Cell" positionX="-99" positionY="131" width="128" height="165"/>
         <element name="DLSEntry" positionX="124" positionY="539" width="128" height="73"/>
         <element name="SegmentReference" positionX="511" positionY="-117" width="128" height="238"/>

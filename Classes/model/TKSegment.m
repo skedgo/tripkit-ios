@@ -1042,6 +1042,9 @@ NSString *const UninitializedString =  @"UninitializedString";
     case SGStyleModeIconTypeVehicle:
       iconFileNamePart = self.realTimeVehicle.icon;
       break;
+      
+    case SGStyleModeIconTypeAlert:
+      return nil; // Not supported for segments
   }
 
   if (iconFileNamePart) {

@@ -11,6 +11,12 @@
 
 @class Service, StopLocation, SGNamedCoordinate;
 
+typedef NS_ENUM(NSInteger, AlertSeverity) {
+  AlertSeverityInfo = -1,
+  AlertSeverityWarning = 0,
+  AlertSeverityAlert = 1,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Alert : NSManagedObject <STKDisplayablePoint>
@@ -20,13 +26,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * title;
 @property (nonatomic, retain, nullable) NSString * text;
 @property (nonatomic, retain, nullable) NSString * url;
-@property (nonatomic, retain) NSNumber * severity; // higher the more severe
+@property (nonatomic, retain, nullable) NSString * remoteIcon;
+@property (nonatomic, retain) NSNumber * severity; // Don't access this, use alertSeverity instead
 @property (nonatomic, retain, nullable) NSDate * startTime;
 @property (nonatomic, retain, nullable) NSDate * endTime;
 @property (nonatomic, assign) BOOL toDelete;
 
 @property (nonatomic, retain, nullable) NSString *idService;
 @property (nonatomic, retain, nullable) NSString *idStopCode;
+
+// Non core-data properties
+@property (nonatomic, assign) AlertSeverity alertSeverity;
+@property (nonatomic, readonly, nullable) NSURL *imageURL;
 
 + (instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode
                       inTripKitContext:(NSManagedObjectContext *)tripKitContext;
