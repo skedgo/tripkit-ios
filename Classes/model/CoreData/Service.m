@@ -333,21 +333,22 @@ typedef NSUInteger SGServiceFlag;
 
 	NSMutableArray *shapes = [NSMutableArray arrayWithCapacity:2];
 	if (startSplit > 0 || endSplit != -1) {
-		// untravelled start
+    NSArray *dashPattern = [self.shape respondsToSelector:@selector(routeDashPattern)] ? self.shape.routeDashPattern : nil;
+    // untravelled start
 		TKColoredRoute *u = [[TKColoredRoute alloc] initWithWaypoints:waypoints
-																										 from:0
-																											 to:startSplit + 1 // include it
-																								withColor:[SGKTransportStyler routeDashColorNontravelled]
-																							dashPattern:self.shape.routeDashPattern
-                                              isTravelled:NO];
+                                                             from:0
+                                                               to:startSplit + 1 // include it
+                                                        withColor:[SGKTransportStyler routeDashColorNontravelled]
+                                                      dashPattern:dashPattern
+                                                      isTravelled:NO];
 		[shapes addObject:u];
 
 		TKColoredRoute *t = [[TKColoredRoute alloc] initWithWaypoints:waypoints
-																										 from:startSplit
-																											 to:endSplit
-																								withColor:self.color
-																							dashPattern:self.shape.routeDashPattern
-                                              isTravelled:YES];
+                                                             from:startSplit
+                                                               to:endSplit
+                                                        withColor:self.color
+                                                      dashPattern:dashPattern
+                                                      isTravelled:YES];
 		[shapes addObject:t];
     
     if (endSplit > 0) {
@@ -355,7 +356,7 @@ typedef NSUInteger SGServiceFlag;
                                                from:endSplit + 1
                                                  to:-1
                                           withColor:[SGKTransportStyler routeDashColorNontravelled]
-                                        dashPattern:self.shape.routeDashPattern
+                                        dashPattern:dashPattern
                                         isTravelled:NO];
       [shapes addObject:t];
     }
