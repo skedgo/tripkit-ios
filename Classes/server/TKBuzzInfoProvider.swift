@@ -69,19 +69,23 @@ public final class RegionInformation: NSObject {
   }
 }
 
-public final class TransitAlertInformation: NSObject {
+public final class TransitAlertInformation: NSObject, TKAlert {
   public let title: String
   public let text: String?
-  public let URL: NSURL?
+  public let URL: String?
+  public let icon: UIImage?
+  public let lastUpdated: NSDate?
   
-  private init(title: String, text: String?, url: String?) {
+  public var sourceModel: AnyObject? {
+    return self
+  }
+  
+  private init(title: String, text: String? = nil, url: String? = nil, icon: UIImage? = nil, lastUpdated: NSDate? = nil) {
     self.title = title
     self.text = text
-    if let stringURL = url {
-      self.URL = NSURL(string: stringURL)
-    } else {
-      self.URL = nil
-    }
+    self.URL = url
+    self.icon = icon
+    self.lastUpdated = lastUpdated
   }
   
   private class func alertsFromJSONResponse(response: AnyObject?) -> [TransitAlertInformation]? {
@@ -92,7 +96,11 @@ public final class TransitAlertInformation: NSObject {
         return nil
     }
     
-    let alerts = array.map { alertDict -> TransitAlertInformation in
+    let alerts = array.flatMap { dict -> TransitAlertInformation? in
+      guard let alertDict = dict["alert"] as? [String: AnyObject] else {
+        return nil
+      }
+      
       let title = alertDict["title"] as? String ?? ""
       let text = alertDict["text"] as? String
       let stringURL = alertDict["url"] as? String
@@ -273,6 +281,19 @@ public class LocationInformation : NSObject {
       return false
     }
   }
+}
+
+// MARK: - Protocol
+
+@objc public protocol TKAlert {
+  
+  var icon: UIImage? { get }
+  var title: String { get }
+  var text: String? { get }
+  var URL: String? { get }
+  var lastUpdated: NSDate? { get }
+  var sourceModel: AnyObject? { get }
+  
 }
 
 // MARK: - Extensions
