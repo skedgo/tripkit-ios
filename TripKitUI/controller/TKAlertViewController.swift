@@ -86,15 +86,14 @@ public class TKAlertViewController: UITableViewController {
   
   // MARK: - Table view delegate
   
-//  override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//    if let segment = segment {
-//      let alert = segment.alerts()[indexPath.row]
-//      delegate?.alertViewController?(self, didSelectAlert: alert)
-//    } else if let alerts = latestAlerts {
-//      let alertInfo = alerts[indexPath.row]
-//      delegate?.alertViewController?(self, didSelectAlertInfo: alertInfo)
-//    }
-//  }
+  override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    guard indexPath.row < alerts.count else {
+      return
+    }
+    
+    let alert = alerts[indexPath.row]
+    alertControllerDelegate?.alertViewController?(self, didSelectAlert: alert)
+  }
   
 }
 
@@ -102,8 +101,7 @@ public class TKAlertViewController: UITableViewController {
 
 @objc public protocol TKAlertViewControllerDelegate {
   
-  optional func alertViewController(controller: TKAlertViewController, didSelectAlert alert: Alert)
+  optional func alertViewController(controller: TKAlertViewController, didSelectAlert alert: TKAlert)
   optional func alertViewController(controller: TKAlertViewController, didTapOnURL url: NSURL)
-  optional func alertViewController(controller: TKAlertViewController, didSelectAlertInfo alertInfo: TransitAlertInformation)
   
 }
