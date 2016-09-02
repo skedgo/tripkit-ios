@@ -64,7 +64,11 @@ public final class TransitAlertInformation: NSObject {
         return nil
     }
     
-    let alerts = array.map { alertDict -> TransitAlertInformation in
+    let alerts = array.flatMap { dict -> TransitAlertInformation? in
+      guard let alertDict = dict["alert"] as? [String: AnyObject] else {
+        return nil
+      }
+      
       let title = alertDict["title"] as? String ?? ""
       let text = alertDict["text"] as? String
       let stringURL = alertDict["url"] as? String
