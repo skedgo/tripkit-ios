@@ -16,6 +16,7 @@ public class TKAlertViewController: UITableViewController {
   public var segment: TKSegment?
   public var alert: Alert?
   public var delegate: TKAlertViewControllerDelegate?
+  public weak var delegate: TKAlertViewControllerDelegate?
   
   private let disposeBag = DisposeBag()
   
