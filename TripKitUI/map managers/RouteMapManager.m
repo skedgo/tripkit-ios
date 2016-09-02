@@ -329,9 +329,11 @@
 		
 		SGPolylineRenderer *routeRenderer	= [[SGPolylineRenderer alloc] initWithPolyline:routePolyline];
 		routeRenderer.strokeColor       = [route routeColour];
-		NSArray *lineDashPattern        = [route routeDashPattern];
-    if (lineDashPattern) {
-      routeRenderer.lineDashPattern = lineDashPattern;
+    if ([route respondsToSelector:@selector(routeDashPattern)]) {
+      NSArray *lineDashPattern = [route routeDashPattern];
+      if (lineDashPattern) {
+        routeRenderer.lineDashPattern = lineDashPattern;
+      }
     }
 		return routeRenderer;
   } else {
