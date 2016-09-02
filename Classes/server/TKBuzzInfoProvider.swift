@@ -10,17 +10,29 @@ import Foundation
 
 public final class RegionInformation: NSObject {
   
-  public let publicTransportModes: [ModeInfo]
-  public let allowsBicyclesOnPublicTransport: Bool
-  public let supportsConcessionPricing: Bool
-  public let hasWheelchairInformation: Bool
+  public let streetBikePaths: Bool
+  public let streetWheelchairAccessibility: Bool
+  public let transitModes: [ModeInfo]
+  public let transitBicycleAccessibility: Bool
+  public let transitConcessionPricing: Bool
+  public let transitWheelchairAccessibility: Bool
   public let paratransitInformation: ParatransitInformation?
   
-  private init(transitModes: [ModeInfo], allowsBicyclesOnPublicTransport: Bool, hasWheelchairInformation: Bool, supportsConcessionPricing: Bool, paratransitInformation: ParatransitInformation?) {
-    self.publicTransportModes = transitModes
-    self.allowsBicyclesOnPublicTransport = allowsBicyclesOnPublicTransport
-    self.hasWheelchairInformation = hasWheelchairInformation
-    self.supportsConcessionPricing = supportsConcessionPricing
+  private init(
+    streetBikePaths: Bool,
+    streetWheelchairAccessibility: Bool,
+    transitModes: [ModeInfo],
+    transitBicycleAccessibility: Bool,
+    transitWheelchairAccessibility: Bool,
+    transitConcessionPricing: Bool,
+    paratransitInformation: ParatransitInformation?)
+  {
+    self.streetBikePaths = streetBikePaths
+    self.streetWheelchairAccessibility = streetWheelchairAccessibility
+    self.transitModes = transitModes
+    self.transitBicycleAccessibility = transitBicycleAccessibility
+    self.transitConcessionPricing = transitConcessionPricing
+    self.transitWheelchairAccessibility = transitWheelchairAccessibility
     self.paratransitInformation = paratransitInformation
   }
   
@@ -31,17 +43,29 @@ public final class RegionInformation: NSObject {
         return nil
     }
     
-    let transitModes = ModeInfo.fromJSONResponse(response)
-    let bicyclesOnTransit = region["allowsBicyclesOnPublicTransport"] as? Bool ?? false
-    let wheelies = region["hasWheelchairInformation"] as? Bool ?? false
-    let concession = region["supportsConcessionPricing"] as? Bool ?? false
-    let para = ParatransitInformation.fromJSONResponse(response)
+    // For backwards compatibility. Can get removed, once all SkedGo servers have been updated
+    let transitBicycleAccessibility =
+      region["transitBicycleAccessibility"] as? Bool
+        ?? region["allowsBicyclesOnPublicTransport"] as? Bool
+        ?? false
+    let transitWheelchairAccessibility =
+      region["transitWheelchairAccessibility"] as? Bool
+        ?? region["hasWheelchairInformation"] as? Bool
+        ?? false
+    let transitConcessionPricing =
+      region["transitConcessionPricing"] as? Bool
+        ?? region["supportsConcessionPricing"] as? Bool
+        ?? false
     
-    return RegionInformation(transitModes: transitModes,
-      allowsBicyclesOnPublicTransport: bicyclesOnTransit,
-      hasWheelchairInformation: wheelies,
-      supportsConcessionPricing: concession,
-      paratransitInformation: para)
+    return RegionInformation(
+      streetBikePaths: region["streetBikePaths"] as? Bool ?? false,
+      streetWheelchairAccessibility: region["streetWheelchairAccessibility"] as? Bool ?? false,
+      transitModes: ModeInfo.fromJSONResponse(response),
+      transitBicycleAccessibility: transitBicycleAccessibility,
+      transitWheelchairAccessibility: transitWheelchairAccessibility,
+      transitConcessionPricing: transitConcessionPricing,
+      paratransitInformation: ParatransitInformation.fromJSONResponse(response)
+    )
   }
 }
 
