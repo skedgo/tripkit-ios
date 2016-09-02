@@ -57,7 +57,7 @@ class TKAlertCell: UITableViewCell {
     return UINib(nibName: String(self), bundle: NSBundle(forClass: TKAlertCell.self))
   }
   
-  var displayModel: TKAlertDisplayModel? {
+  var alert: TKAlert? {
     didSet {
       updateUI()
     }
@@ -77,20 +77,20 @@ class TKAlertCell: UITableViewCell {
   // MARK: - Configuration
   
   private func updateUI() {
-    guard let displayModel = displayModel else {
+    guard let alert = alert else {
       return
     }
     
     reset()
     
-    titleLabel.text = displayModel.title
-    iconView.image = displayModel.icon
+    titleLabel.text = alert.title
+    iconView.image = alert.icon
     
-    if let text = displayModel.text {
+    if let text = alert.text {
       textView.text = removeStrongTagFromText(text)
     }
     
-    if let stringURL = displayModel.URL,
+    if let stringURL = alert.URL,
        let URL = NSURL(string: stringURL) {
       actionButton.hidden = false
       actionButton.rx_tap
@@ -102,7 +102,7 @@ class TKAlertCell: UITableViewCell {
       actionButton.hidden = true
     }
     
-    if let lastUpdated = displayModel.lastUpdated {
+    if let lastUpdated = alert.lastUpdated {
       statusLabel.hidden = false
     } else {
       statusLabel.hidden = true
