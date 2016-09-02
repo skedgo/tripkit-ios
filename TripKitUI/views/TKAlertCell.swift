@@ -63,15 +63,25 @@ class TKAlertCell: UITableViewCell {
     
     if let stringURL = alert?.url,
        let URL = NSURL(string: stringURL) {
-      showStatusView = true
+      actionButton.hidden = false
       actionButton.rx_tap
         .subscribeNext { [unowned self] in
           self.tappedOnLink.onNext(URL)
         }
         .addDisposableTo(disposeBag)
     } else {
-      showStatusView = false
+      actionButton.hidden = true
     }
+    
+    if let lastUpdated = displayModel.lastUpdated {
+      statusLabel.hidden = false
+    } else {
+      statusLabel.hidden = true
+    }
+    
+    // Show the status view if both status label & action
+    // button are visible
+    showStatusView = actionButton.hidden == false || statusLabel.hidden == false
   }
   
   private func reset() {
