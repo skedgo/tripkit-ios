@@ -17,9 +17,11 @@
 #import "TKColoredRoute.h"
 
 enum {
-  SGServiceFlagRealTime						= 1 << 0,
-  SGServiceFlagRealTimeCapable    = 1 << 1,
-  SGServiceFlagCancelled          = 1 << 2,
+  SGServiceFlagRealTime               = 1 << 0,
+  SGServiceFlagRealTimeCapable        = 1 << 1,
+  SGServiceFlagCancelled              = 1 << 2,
+  SGServiceFlagBicycleAccessible      = 1 << 3,
+  SGServiceFlagWheelchairAccessible   = 1 << 4,
 };
 typedef NSUInteger SGServiceFlag;
 
@@ -92,9 +94,19 @@ typedef NSUInteger SGServiceFlag;
   return [self.alerts firstObject];
 }
 
+- (BOOL)isRealTime
+{
+  return 0 != (self.flags.integerValue & SGServiceFlagRealTime);
+}
+
 - (void)setRealTime:(BOOL)realTime
 {
 	[self setFlag:SGServiceFlagRealTime to:realTime];
+}
+
+- (BOOL)isRealTimeCapable
+{
+  return 0 != (self.flags.integerValue & SGServiceFlagRealTimeCapable);
 }
 
 - (void)setRealTimeCapable:(BOOL)realTimeCapable
@@ -102,24 +114,34 @@ typedef NSUInteger SGServiceFlag;
 	[self setFlag:SGServiceFlagRealTimeCapable to:realTimeCapable];
 }
 
+- (BOOL)isCancelled
+{
+  return 0 != (self.flags.integerValue & SGServiceFlagCancelled);
+}
+
 - (void)setCancelled:(BOOL)cancelled
 {
 	[self setFlag:SGServiceFlagCancelled to:cancelled];
 }
 
-- (BOOL)isRealTime
+- (BOOL)isBicycleAccessible
 {
-	return 0 != (self.flags.integerValue & SGServiceFlagRealTime);
+  return 0 != (self.flags.integerValue & SGServiceFlagBicycleAccessible);
 }
 
-- (BOOL)isRealTimeCapable
+- (void)setBicycleAccessible:(BOOL)bicycleAccessible
 {
-	return 0 != (self.flags.integerValue & SGServiceFlagRealTimeCapable);
+  [self setFlag:SGServiceFlagBicycleAccessible to:bicycleAccessible];
 }
 
-- (BOOL)isCancelled
+- (BOOL)isWheelchairAccessible
 {
-	return 0 != (self.flags.integerValue & SGServiceFlagCancelled);
+  return 0 != (self.flags.integerValue & SGServiceFlagWheelchairAccessible);
+}
+
+- (void)setWheelchairAccessible:(BOOL)wheelchairAccessible
+{
+  [self setFlag:SGServiceFlagWheelchairAccessible to:wheelchairAccessible];
 }
 
 - (BOOL)hasServiceData
@@ -311,21 +333,22 @@ typedef NSUInteger SGServiceFlag;
 
 	NSMutableArray *shapes = [NSMutableArray arrayWithCapacity:2];
 	if (startSplit > 0 || endSplit != -1) {
-		// untravelled start
+    NSArray *dashPattern = [self.shape respondsToSelector:@selector(routeDashPattern)] ? self.shape.routeDashPattern : nil;
+    // untravelled start
 		TKColoredRoute *u = [[TKColoredRoute alloc] initWithWaypoints:waypoints
-																										 from:0
-																											 to:startSplit + 1 // include it
-																								withColor:[SGKTransportStyler routeDashColorNontravelled]
-																							dashPattern:self.shape.routeDashPattern
-                                              isTravelled:NO];
+                                                             from:0
+                                                               to:startSplit + 1 // include it
+                                                        withColor:[SGKTransportStyler routeDashColorNontravelled]
+                                                      dashPattern:dashPattern
+                                                      isTravelled:NO];
 		[shapes addObject:u];
 
 		TKColoredRoute *t = [[TKColoredRoute alloc] initWithWaypoints:waypoints
-																										 from:startSplit
-																											 to:endSplit
-																								withColor:self.color
-																							dashPattern:self.shape.routeDashPattern
-                                              isTravelled:YES];
+                                                             from:startSplit
+                                                               to:endSplit
+                                                        withColor:self.color
+                                                      dashPattern:dashPattern
+                                                      isTravelled:YES];
 		[shapes addObject:t];
     
     if (endSplit > 0) {
@@ -333,7 +356,7 @@ typedef NSUInteger SGServiceFlag;
                                                from:endSplit + 1
                                                  to:-1
                                           withColor:[SGKTransportStyler routeDashColorNontravelled]
-                                        dashPattern:self.shape.routeDashPattern
+                                        dashPattern:dashPattern
                                         isTravelled:NO];
       [shapes addObject:t];
     }

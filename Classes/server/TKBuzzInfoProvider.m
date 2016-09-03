@@ -399,6 +399,14 @@ typedef enum {
   // mode info
   ModeInfo *modeInfo = [ModeInfo modeInfoForDictionary:responseDict[@"modeInfo"]];
   
+  // accessibility
+  if ([responseDict[@"wheelchairAccessible"] boolValue]) {
+    service.wheelchairAccessible = true;
+  }
+  if ([responseDict[@"bicycleAccessible"] boolValue]) {
+    service.bicycleAccessible = true;
+  }
+  
   // parse the shapes
   NSArray *shapesArray = responseDict[@"shapes"];
   [TKParserHelper insertNewShapes:shapesArray

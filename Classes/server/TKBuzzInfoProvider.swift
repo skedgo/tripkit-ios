@@ -10,17 +10,29 @@ import Foundation
 
 public final class RegionInformation: NSObject {
   
-  public let publicTransportModes: [ModeInfo]
-  public let allowsBicyclesOnPublicTransport: Bool
-  public let supportsConcessionPricing: Bool
-  public let hasWheelchairInformation: Bool
+  public let streetBikePaths: Bool
+  public let streetWheelchairAccessibility: Bool
+  public let transitModes: [ModeInfo]
+  public let transitBicycleAccessibility: Bool
+  public let transitConcessionPricing: Bool
+  public let transitWheelchairAccessibility: Bool
   public let paratransitInformation: ParatransitInformation?
   
-  fileprivate init(transitModes: [ModeInfo], allowsBicyclesOnPublicTransport: Bool, hasWheelchairInformation: Bool, supportsConcessionPricing: Bool, paratransitInformation: ParatransitInformation?) {
-    self.publicTransportModes = transitModes
-    self.allowsBicyclesOnPublicTransport = allowsBicyclesOnPublicTransport
-    self.hasWheelchairInformation = hasWheelchairInformation
-    self.supportsConcessionPricing = supportsConcessionPricing
+  private init(
+    streetBikePaths: Bool,
+    streetWheelchairAccessibility: Bool,
+    transitModes: [ModeInfo],
+    transitBicycleAccessibility: Bool,
+    transitWheelchairAccessibility: Bool,
+    transitConcessionPricing: Bool,
+    paratransitInformation: ParatransitInformation?)
+  {
+    self.streetBikePaths = streetBikePaths
+    self.streetWheelchairAccessibility = streetWheelchairAccessibility
+    self.transitModes = transitModes
+    self.transitBicycleAccessibility = transitBicycleAccessibility
+    self.transitConcessionPricing = transitConcessionPricing
+    self.transitWheelchairAccessibility = transitWheelchairAccessibility
     self.paratransitInformation = paratransitInformation
   }
   
@@ -31,17 +43,71 @@ public final class RegionInformation: NSObject {
         return nil
     }
     
-    let transitModes = ModeInfo.fromJSONResponse(response)
-    let bicyclesOnTransit = region["allowsBicyclesOnPublicTransport"] as? Bool ?? false
-    let wheelies = region["hasWheelchairInformation"] as? Bool ?? false
-    let concession = region["supportsConcessionPricing"] as? Bool ?? false
-    let para = ParatransitInformation.fromJSONResponse(response)
+    // For backwards compatibility. Can get removed, once all SkedGo servers have been updated
+    let transitBicycleAccessibility =
+      region["transitBicycleAccessibility"] as? Bool
+        ?? region["allowsBicyclesOnPublicTransport"] as? Bool
+        ?? false
+    let transitWheelchairAccessibility =
+      region["transitWheelchairAccessibility"] as? Bool
+        ?? region["hasWheelchairInformation"] as? Bool
+        ?? false
+    let transitConcessionPricing =
+      region["transitConcessionPricing"] as? Bool
+        ?? region["supportsConcessionPricing"] as? Bool
+        ?? false
     
-    return RegionInformation(transitModes: transitModes,
-      allowsBicyclesOnPublicTransport: bicyclesOnTransit,
-      hasWheelchairInformation: wheelies,
-      supportsConcessionPricing: concession,
-      paratransitInformation: para)
+    return RegionInformation(
+      streetBikePaths: region["streetBikePaths"] as? Bool ?? false,
+      streetWheelchairAccessibility: region["streetWheelchairAccessibility"] as? Bool ?? false,
+      transitModes: ModeInfo.fromJSONResponse(response),
+      transitBicycleAccessibility: transitBicycleAccessibility,
+      transitWheelchairAccessibility: transitWheelchairAccessibility,
+      transitConcessionPricing: transitConcessionPricing,
+      paratransitInformation: ParatransitInformation.fromJSONResponse(response)
+    )
+  }
+}
+
+public final class TransitAlertInformation: NSObject, TKAlert {
+  public let title: String
+  public let text: String?
+  public let URL: String?
+  public let icon: UIImage?
+  public let lastUpdated: NSDate?
+  
+  public var sourceModel: AnyObject? {
+    return self
+  }
+  
+  private init(title: String, text: String? = nil, url: String? = nil, icon: UIImage? = nil, lastUpdated: NSDate? = nil) {
+    self.title = title
+    self.text = text
+    self.URL = url
+    self.icon = icon
+    self.lastUpdated = lastUpdated
+  }
+  
+  private class func alertsFromJSONResponse(response: AnyObject?) -> [TransitAlertInformation]? {
+    guard
+      let JSON = response as? [String: AnyObject],
+      let array = JSON["alerts"] as? [[String: AnyObject]]
+      else {
+        return nil
+    }
+    
+    let alerts = array.flatMap { dict -> TransitAlertInformation? in
+      guard let alertDict = dict["alert"] as? [String: AnyObject] else {
+        return nil
+      }
+      
+      let title = alertDict["title"] as? String ?? ""
+      let text = alertDict["text"] as? String
+      let stringURL = alertDict["url"] as? String
+      return TransitAlertInformation(title: title, text: text, url: stringURL)
+    }
+    
+    return alerts
   }
 }
 
@@ -106,6 +172,30 @@ extension TKBuzzInfoProvider {
     )
   }
   
+  /**
+   Asynchronously fetches transit alerts for the provided region.
+   
+   - Note: Completion block is executed on the main thread.
+   */
+  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: [TransitAlertInformation]? -> Void) {
+    let paras = [
+      "region": region.name
+    ]
+    
+    SVKServer.sharedInstance().hitSkedGoWithMethod(
+      "GET",
+      path: "alerts/transit.json",
+      parameters: paras,
+      region: region,
+      success: { _, response in
+        let result = TransitAlertInformation.alertsFromJSONResponse(response)
+        completion(result)
+      },
+      failure: { _ in
+        let result = TransitAlertInformation.alertsFromJSONResponse(nil)
+        completion(result)
+    })
+  }
   
   /**
    Asynchronously fetches paratransit information for the provided region.
@@ -193,6 +283,21 @@ public class LocationInformation : NSObject {
   }
 }
 
+// MARK: - Protocol
+
+@objc public protocol TKAlert {
+  
+  var icon: UIImage? { get }
+  var title: String { get }
+  var text: String? { get }
+  var URL: String? { get }
+  var lastUpdated: NSDate? { get }
+  var sourceModel: AnyObject? { get }
+  
+}
+
+// MARK: - Extensions
+
 extension CarParkInfo {
   
   fileprivate init?(response: Any?) {
@@ -239,6 +344,7 @@ extension LocationInformation {
     
     self.init(what3word: what3word, what3wordInfoURL: what3wordInfoURL, transitStop: stop, carParkInfo: carParkInfo)
   }
+  
 }
 
 extension TKBuzzInfoProvider {
@@ -266,5 +372,6 @@ extension TKBuzzInfoProvider {
       })
     
   }
+  
 }
 

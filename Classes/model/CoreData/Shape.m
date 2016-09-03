@@ -19,6 +19,7 @@
 @implementation Shape
 
 @dynamic encodedWaypoints;
+@dynamic friendly;
 @dynamic index;
 @dynamic title;
 @dynamic travelled;
@@ -103,14 +104,23 @@
 
 - (UIColor *)routeColour
 {
+  // Non-travelled always gets a special colour
 	if (NO == self.travelled.boolValue) {
     return [SGKTransportStyler routeDashColorNontravelled];
 	}
 	
+  // If we have a service, use that
 	Service *service = [self.services anyObject];
 	UIColor *color = service.color;
   if (color) {
     return color;
+  }
+  
+  // Next, we prefer the friendly vs unfriendly colours
+  if (self.friendly) {
+    return [self.friendly boolValue]
+      ? [UIColor colorWithRed:73/255.f green:220/255.f blue:99/255.f alpha:1]
+      : [UIColor colorWithRed:255/255.f green:231/255.f blue:73/255.f alpha:1];
   }
   
 	color = self.segment.color;
@@ -118,16 +128,6 @@
     return color;
   }
   return [UIColor blackColor];
-}
-
-- (NSArray *)routeDashPattern
-{
-	if (nil != self.template) {
-		return [self.template dashPattern];
-	} else {
-		// this means, no dashes
-    return @[@1];
-	}
 }
 
 - (BOOL)routeIsTravelled

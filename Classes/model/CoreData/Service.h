@@ -38,6 +38,8 @@
 @property (nonatomic, assign, getter = isRealTime) BOOL realTime;
 @property (nonatomic, assign, getter = isRealTimeCapable) BOOL realTimeCapable;
 @property (nonatomic, assign, getter = isCancelled) BOOL cancelled;
+@property (nonatomic, assign, getter = isBicycleAccessible) BOOL bicycleAccessible;
+@property (nonatomic, assign, getter = isWheelchairAccessible) BOOL wheelchairAccessible;
 @property (nonatomic, strong) NSArray<StopVisits *> *sortedVisits;
 @property (nonatomic, copy) NSString *lineName;
 @property (nonatomic, copy) NSString *direction;

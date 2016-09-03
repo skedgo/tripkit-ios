@@ -904,7 +904,12 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.timesAreRealTime;
 }
 
-- (NSDate *)tripSegmentFixedDepartureTime
+- (BOOL)tripSegmentIsWheelchairAccessible
+{
+  return self.reference.isWheelchairAccessible;
+}
+
+- (nullable NSDate *)tripSegmentFixedDepartureTime
 {
   if ([self isPublicTransport] && self.frequency.integerValue == 0) {
     return self.departureTime;
@@ -913,23 +918,29 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-- (NSURL *)tripSegmentModeImageURL
+- (nullable NSURL *)tripSegmentModeImageURL
 {
   return [self imageURLForType:SGStyleModeIconTypeListMainMode];
 }
 
-- (NSString *)tripSegmentModeTitle
+- (nullable NSString *)tripSegmentModeTitle
 {
   if (self.reference.service) {
 		return self.reference.service.number;
+  
   } else if (self.template.modeInfo.descriptor.length > 0) {
     return self.template.modeInfo.descriptor;
+  
+  } else if ([self isCycling] && self.reference.template.metres) {
+    MKDistanceFormatter *formatter = [[MKDistanceFormatter alloc] init];
+    return [formatter stringFromDistance:self.reference.template.metres.doubleValue];
+    
   } else {
     return nil;
   }
 }
 
-- (NSString *)tripSegmentModeSubtitle
+- (nullable NSString *)tripSegmentModeSubtitle
 {
   if ([self timesAreRealTime]) {
     if ([self isPublicTransport]) {
@@ -937,14 +948,24 @@ NSString *const UninitializedString =  @"UninitializedString";
     } else {
       return NSLocalizedStringFromTableInBundle(@"Live traffic", @"TripKit", [TKTripKit bundle], nil);
     }
+  
   } else if ([self.trip isMixedModal] && ![self isPublicTransport]) {
     return [self stringForDuration:YES];
+  
+  } else if ([self isCycling] && self.reference.template.metresFriendly) {
+    NSString *format = NSLocalizedStringFromTableInBundle(@"%@ cycle friendly", @"TripKit", [TKTripKit bundle], @"Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.");
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterPercentStyle;
+    double value = self.reference.template.metresFriendly.doubleValue / self.reference.template.metres.doubleValue;
+    NSString *percentage = [formatter stringFromNumber:@(value)];
+    return [NSString stringWithFormat:format, percentage];
+  
   } else {
     return nil;
   }
 }
 
-- (UIColor *)tripSegmentModeColor
+- (nullable UIColor *)tripSegmentModeColor
 {
   // we prefer color of the service
   UIColor *color = self.service.color;
@@ -1025,6 +1046,9 @@ NSString *const UninitializedString =  @"UninitializedString";
     case SGStyleModeIconTypeVehicle:
       iconFileNamePart = self.realTimeVehicle.icon;
       break;
+      
+    case SGStyleModeIconTypeAlert:
+      return nil; // Not supported for segments
   }
 
   if (iconFileNamePart) {
