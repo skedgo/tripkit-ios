@@ -153,6 +153,11 @@
   return [SGStyleManager imageNamed:imageName];
 }
 
+- (NSURL *)pointImageURL
+{
+  return self.imageURL;
+}
+
 - (BOOL)isDraggable
 {
   return NO;
