@@ -88,16 +88,16 @@ public final class TransitAlertInformation: NSObject, TKAlert {
     self.lastUpdated = lastUpdated
   }
   
-  private class func alertsFromJSONResponse(response: AnyObject?) -> [TransitAlertInformation]? {
+  fileprivate class func alertsFromJSONResponse(response: Any?) -> [TransitAlertInformation]? {
     guard
-      let JSON = response as? [String: AnyObject],
-      let array = JSON["alerts"] as? [[String: AnyObject]]
+      let JSON = response as? [String: Any],
+      let array = JSON["alerts"] as? [[String: Any]]
       else {
         return nil
     }
     
     let alerts = array.flatMap { dict -> TransitAlertInformation? in
-      guard let alertDict = dict["alert"] as? [String: AnyObject] else {
+      guard let alertDict = dict["alert"] as? [String: Any] else {
         return nil
       }
       
@@ -177,23 +177,22 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: [TransitAlertInformation]? -> Void) {
+  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TransitAlertInformation]?) -> Void) {
     let paras = [
       "region": region.name
     ]
     
-    SVKServer.sharedInstance().hitSkedGoWithMethod(
-      "GET",
+    SVKServer.sharedInstance().hitSkedGo(
+      withMethod: "GET",
       path: "alerts/transit.json",
       parameters: paras,
       region: region,
       success: { _, response in
-        let result = TransitAlertInformation.alertsFromJSONResponse(response)
+        let result = TransitAlertInformation.alertsFromJSONResponse(response: response)
         completion(result)
       },
       failure: { _ in
-        let result = TransitAlertInformation.alertsFromJSONResponse(nil)
-        completion(result)
+        completion(nil)
     })
   }
   

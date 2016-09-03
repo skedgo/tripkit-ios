@@ -15,7 +15,7 @@ extension Alert: TKAlert {
   }
   
   public var icon: UIImage? {
-    return STKInfoIcon.imageForInfoIconType(infoIconType(), usage: STKInfoIconUsageNormal)
+    return STKInfoIcon.image(for: infoIconType(), usage: STKInfoIconUsageNormal)
   }
   
   public var lastUpdated: NSDate? {

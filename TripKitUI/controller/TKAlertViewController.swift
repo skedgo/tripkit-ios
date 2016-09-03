@@ -38,18 +38,18 @@ public class TKAlertViewController: UITableViewController {
     self.title = NSLocalizedString("Alerts", comment: "")
     
     if let navigator = navigationController,
-      let topCtr = navigator.viewControllers.first where topCtr == self {
-      let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: nil, action: nil)
-      doneButton.rx_tap
-        .subscribeNext { self.dismissViewControllerAnimated(true, completion: nil) }
+      let topCtr = navigator.viewControllers.first , topCtr == self {
+      let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
+      doneButton.rx.tap
+        .subscribeNext { self.dismiss(animated: true, completion: nil) }
         .addDisposableTo(disposeBag)
       navigationItem.leftBarButtonItem = doneButton
     }
     
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 150
-    tableView.registerNib(TKAlertCell.nib, forCellReuseIdentifier: String(TKAlertCell))
-    tableView.separatorStyle = .None
+    tableView.register(TKAlertCell.nib, forCellReuseIdentifier: String(describing: TKAlertCell.self))
+    tableView.separatorStyle = .none
     
     transitAlerts?
       .subscribeNext { [weak self] in
@@ -60,22 +60,22 @@ public class TKAlertViewController: UITableViewController {
       .addDisposableTo(disposeBag)
   }
   
-  // MARK: - Table view data source
+  // MARK: - UITableViewDataSource
   
-  override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  override public func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
-  override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return alerts.count
   }
   
-  override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard indexPath.row < alerts.count else {
       preconditionFailure("Index path refers to a non-existent alert")
     }
     
-    let alertCell = tableView.dequeueReusableCellWithIdentifier(String(TKAlertCell), forIndexPath: indexPath) as! TKAlertCell
+    let alertCell = tableView.dequeueReusableCell(withIdentifier: String(describing: TKAlertCell.self), for: indexPath) as! TKAlertCell
     
     let alert = alerts[indexPath.row]
     
@@ -92,7 +92,7 @@ public class TKAlertViewController: UITableViewController {
   
   // MARK: - Table view delegate
   
-  override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard indexPath.row < alerts.count else {
       return
     }
@@ -106,7 +106,7 @@ public class TKAlertViewController: UITableViewController {
   private func insertEmptyAlertsView() {
     let emptyAlertView = TKEmptyAlertView.makeView()
     emptyAlertView.frame.size = view.frame.size
-    emptyAlertView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+    emptyAlertView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     emptyAlertView.textLabel.text = NSLocalizedString("We'd keep you updated with the latest transit alerts here", comment: "")
     
     if let productName = productName() {
@@ -121,7 +121,7 @@ public class TKAlertViewController: UITableViewController {
   
   private func productName() -> String? {
     guard
-      let infoDict = NSBundle.mainBundle().infoDictionary,
+      let infoDict = Bundle.main.infoDictionary,
       let bundleNameKey = kCFBundleNameKey as? String
       else {
         return nil
@@ -136,7 +136,7 @@ public class TKAlertViewController: UITableViewController {
 
 @objc public protocol TKAlertViewControllerDelegate {
   
-  optional func alertViewController(controller: TKAlertViewController, didSelectAlert alert: TKAlert)
-  optional func alertViewController(controller: TKAlertViewController, didTapOnURL url: NSURL)
+  @objc optional func alertViewController(_ controller: TKAlertViewController, didSelectAlert alert: TKAlert)
+  @objc optional func alertViewController(_ controller: TKAlertViewController, didTapOnURL url: URL)
   
 }

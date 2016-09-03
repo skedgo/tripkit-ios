@@ -18,15 +18,15 @@ class TKEmptyAlertView: UIView {
     super.awakeFromNib()
     
     imageView.tintColor = UIColor(red: 218/255, green: 218/255, blue: 218/255, alpha: 1)
-    textLabel.font = SGStyleManager.systemFontWithSize(17)
-    footerLabel.font = SGStyleManager.systemFontWithSize(15)
+    textLabel.font = SGStyleManager.systemFont(withSize: 17)
+    footerLabel.font = SGStyleManager.systemFont(withSize: 15)
   }
   
   // MARK: - Creating view
   
   class func makeView() -> TKEmptyAlertView {
-    let bundle = NSBundle(forClass: TKEmptyAlertView.self)
-    return bundle.loadNibNamed(String(self), owner: self, options: nil).first as! TKEmptyAlertView
+    let bundle = Bundle(for: TKEmptyAlertView.self)
+    return bundle.loadNibNamed(String(describing: self), owner: self, options: nil)!.first as! TKEmptyAlertView
   }
   
 }
