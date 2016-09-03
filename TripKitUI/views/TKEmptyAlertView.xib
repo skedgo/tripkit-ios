@@ -13,11 +13,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGe-oi-P9u">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="viI-cM-UH4">
-                            <rect key="frame" x="120" y="40" width="80" height="80"/>
-                            <color key="backgroundColor" red="0.95389531979999997" green="1" blue="0.5718103457" alpha="1" colorSpace="calibratedRGB"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="80" image="icon-alert-blank" translatesAutoresizingMaskIntoConstraints="NO" id="viI-cM-UH4">
+                            <rect key="frame" x="120" y="32" width="80" height="80"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -27,13 +26,13 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#We'd keep you updated with transit alerts here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llA-ru-t6D">
-                    <rect key="frame" x="30" y="200" width="260" height="41"/>
+                    <rect key="frame" x="30" y="144" width="260" height="41"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Let's keep exploring RioGo and enjoy your trips" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9G-UR-1Jv">
-                    <rect key="frame" x="44" y="261" width="232" height="36"/>
+                    <rect key="frame" x="44" y="205" width="232" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.6705882352941176" green="0.6705882352941176" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -42,9 +41,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="oGe-oi-P9u" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="C46-uN-CMS"/>
-                <constraint firstItem="oGe-oi-P9u" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.333" id="Jfh-W7-g1b"/>
+                <constraint firstItem="oGe-oi-P9u" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="Jfh-W7-g1b"/>
                 <constraint firstAttribute="trailing" secondItem="llA-ru-t6D" secondAttribute="trailing" constant="30" id="Lw3-1v-2dw"/>
-                <constraint firstItem="llA-ru-t6D" firstAttribute="top" secondItem="oGe-oi-P9u" secondAttribute="bottom" constant="40" id="P6T-iM-n5x"/>
+                <constraint firstItem="llA-ru-t6D" firstAttribute="top" secondItem="oGe-oi-P9u" secondAttribute="bottom" id="P6T-iM-n5x"/>
                 <constraint firstAttribute="trailing" secondItem="oGe-oi-P9u" secondAttribute="trailing" id="ZiD-UQ-RKF"/>
                 <constraint firstItem="N9G-UR-1Jv" firstAttribute="top" secondItem="llA-ru-t6D" secondAttribute="bottom" constant="20" id="bAK-MI-LKZ"/>
                 <constraint firstItem="llA-ru-t6D" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="hL4-3a-kry"/>
@@ -62,4 +61,7 @@
             <point key="canvasLocation" x="624" y="552"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon-alert-blank" width="78" height="80"/>
+    </resources>
 </document>

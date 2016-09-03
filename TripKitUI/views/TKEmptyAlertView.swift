@@ -17,6 +17,7 @@ class TKEmptyAlertView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    imageView.tintColor = UIColor(red: 218/255, green: 218/255, blue: 218/255, alpha: 1)
     textLabel.font = SGStyleManager.systemFontWithSize(17)
     footerLabel.font = SGStyleManager.systemFontWithSize(15)
   }
