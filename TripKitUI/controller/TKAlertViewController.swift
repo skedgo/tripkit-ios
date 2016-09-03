@@ -14,10 +14,16 @@ import RxSwift
 public class TKAlertViewController: UITableViewController {
   
   private let disposeBag = DisposeBag()
+  private weak var emptyAlertView: TKEmptyAlertView?
   
   private var alerts: [TKAlert] = [] {
     didSet {
-      tableView.reloadData()
+      if alerts.isEmpty {
+        insertEmptyAlertsView()
+      } else {
+        emptyAlertView?.removeFromSuperview()
+        tableView.reloadData()
+      }
     }
   }
   
@@ -43,7 +49,7 @@ public class TKAlertViewController: UITableViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 150
     tableView.registerNib(TKAlertCell.nib, forCellReuseIdentifier: String(TKAlertCell))
-    SGStyleManager.styleTableViewForTileList(tableView)
+    tableView.separatorStyle = .None
     
     transitAlerts?
       .subscribeNext { [weak self] in
@@ -93,6 +99,35 @@ public class TKAlertViewController: UITableViewController {
     
     let alert = alerts[indexPath.row]
     alertControllerDelegate?.alertViewController?(self, didSelectAlert: alert)
+  }
+  
+  // MARK: - Auxiliary view
+  
+  private func insertEmptyAlertsView() {
+    let emptyAlertView = TKEmptyAlertView.makeView()
+    emptyAlertView.frame.size = view.frame.size
+    emptyAlertView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+    emptyAlertView.textLabel.text = NSLocalizedString("We'd keep you updated with the latest transit alerts here", comment: "")
+    
+    if let productName = productName() {
+      emptyAlertView.footerLabel.text = String(format: NSLocalizedString("In the meantime, let's keep exploring %@ and enjoy your trips", comment: "%@ is replaced with app name"), productName)
+    } else {
+      emptyAlertView.footerLabel.text = NSLocalizedString("In the meantime, let's keep exploring and enjoy your trips", comment: "")
+    }
+    
+    view.insertSubview(emptyAlertView, aboveSubview: tableView)
+    self.emptyAlertView = emptyAlertView
+  }
+  
+  private func productName() -> String? {
+    guard
+      let infoDict = NSBundle.mainBundle().infoDictionary,
+      let bundleNameKey = kCFBundleNameKey as? String
+      else {
+        return nil
+    }
+    
+    return infoDict[bundleNameKey] as? String
   }
   
 }
