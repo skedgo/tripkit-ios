@@ -127,7 +127,7 @@
   if (color) {
     return color;
   }
-  return [UIColor blackColor];
+  return [UIColor colorWithRed:143/255.f green:139/255.f blue:138/255.f alpha:1]; // Dark grey
 }
 
 - (BOOL)routeIsTravelled

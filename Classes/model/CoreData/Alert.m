@@ -18,6 +18,7 @@
 @dynamic text;
 @dynamic url;
 @dynamic severity;
+@dynamic remoteIcon;
 @dynamic startTime;
 @dynamic endTime;
 @dynamic toDelete;
@@ -95,12 +96,32 @@
                                                     andSortDescriptors:@[sorter]];
 }
 
+- (AlertSeverity)alertSeverity {
+  return (AlertSeverity) [self.severity integerValue];
+}
+
+- (void)setAlertSeverity:(AlertSeverity)alertSeverity {
+  self.severity = @(alertSeverity);
+}
+
 - (STKInfoIconType)infoIconType
 {
-  if ([self.severity integerValue] > 0) {
-    return STKInfoIconTypeAlert;
+  switch (self.alertSeverity) {
+    case AlertSeverityInfo:
+      return STKInfoIconTypeNone;
+    case AlertSeverityWarning:
+      return STKInfoIconTypeWarning;
+    case AlertSeverityAlert:
+      return STKInfoIconTypeAlert;
+  }
+}
+
+- (nullable NSURL *)imageURL
+{
+  if (!self.remoteIcon) {
+    return nil;
   } else {
-    return STKInfoIconTypeWarning;
+    return [SVKServer imageURLForIconFileNamePart:self.remoteIcon ofIconType:SGStyleModeIconTypeAlert];
   }
 }
 
@@ -130,6 +151,11 @@
 {
   NSString *imageName = [STKInfoIcon imageNameForInfoIconType:self.infoIconType usage:STKInfoIconUsageMap];
   return [SGStyleManager imageNamed:imageName];
+}
+
+- (NSURL *)pointImageURL
+{
+  return self.imageURL;
 }
 
 - (BOOL)isDraggable

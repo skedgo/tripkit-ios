@@ -40,6 +40,8 @@
 @property (nonatomic, copy) NSNumber *serviceStops;
 
 @property (nonatomic, assign) BOOL timesAreRealTime;
+@property (nonatomic, assign, getter = isBicycleAccessible) BOOL bicycleAccessible;
+@property (nonatomic, assign, getter = isWheelchairAccessible) BOOL wheelchairAccessible;
 
 + (void)removeOrphansFromManagedObjectContext:(NSManagedObjectContext *)context;
 
