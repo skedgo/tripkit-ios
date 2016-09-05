@@ -741,9 +741,9 @@ NSString *const UninitializedString =  @"UninitializedString";
 	if (color)
 		return color;
 	else if ([self isPublicTransport])
-		return [UIColor blackColor];
+		return [UIColor colorWithRed:143/255.f green:139/255.f blue:138/255.f alpha:1]; // Dark grey
   else
-    return [UIColor lightGrayColor];
+    return [UIColor colorWithRed:214/255.f green:214/255.f blue:214/255.f alpha:1]; // Light grey
 }
 
 - (NSArray *)dashPattern
