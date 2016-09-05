@@ -140,7 +140,6 @@ class TKAlertCell: UITableViewCell {
     super.awakeFromNib()
     SGStyleManager.addDefaultOutline(contentWrapper)
     actionButton.setTitle(NSLocalizedString("More info", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title of button to get more details about an alert"), forState: .Normal)
-    textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
   }
   
   override func prepareForReuse() {
