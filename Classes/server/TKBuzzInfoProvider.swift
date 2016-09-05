@@ -253,15 +253,15 @@ extension TKBuzzInfoProvider {
    Asynchronously fetches transit alerts for the provided region using Rx.
    */
   public class func rx_fetchTransitAlerts(forRegion region: SVKRegion) -> Observable<[TKAlert]> {
-    let paras: [String: AnyObject] = [
-      "region": region.name
+    let paras: [String: Any] = [
+      "region": region.name as Any
     ]
     
-    return SVKServer.sharedInstance()
-      .rx_hit(.GET, path: "alerts/transit.json", parameters: paras, region: region, repeatHandler: nil)
+    return SVKServer.sharedInstance().rx
+      .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
       .map { (_, response) -> [TKAlert] in
         if let jsonResponse = response?.dictionaryObject {
-          let alerts = TransitAlertInformation.alertsFromJSONResponse(jsonResponse)
+          let alerts = TransitAlertInformation.alertsFromJSONResponse(response: jsonResponse)
           return alerts ?? []
         } else {
           return []
