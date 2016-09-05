@@ -35,7 +35,7 @@ public class TKAlertViewController: UITableViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    self.title = NSLocalizedString("Alerts", comment: "")
+    self.title = NSLocalizedString("Alerts", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
     
     if let navigator = navigationController,
       let topCtr = navigator.viewControllers.first , topCtr == self {
@@ -52,6 +52,7 @@ public class TKAlertViewController: UITableViewController {
     tableView.separatorStyle = .none
     
     transitAlerts?
+      .observeOn(MainScheduler.instance)
       .subscribeNext { [weak self] in
         if let strongSelf = self {
           strongSelf.alerts = $0
@@ -107,12 +108,12 @@ public class TKAlertViewController: UITableViewController {
     let emptyAlertView = TKEmptyAlertView.makeView()
     emptyAlertView.frame.size = view.frame.size
     emptyAlertView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    emptyAlertView.textLabel.text = NSLocalizedString("We'd keep you updated with the latest transit alerts here", comment: "")
+    emptyAlertView.textLabel.text = NSLocalizedString("We'd keep you updated with the latest transit alerts here", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
     
     if let productName = productName() {
-      emptyAlertView.footerLabel.text = String(format: NSLocalizedString("In the meantime, let's keep exploring %@ and enjoy your trips", comment: "%@ is replaced with app name"), productName)
+      emptyAlertView.footerLabel.text = String(format: NSLocalizedString("In the meantime, let's keep exploring %@ and enjoy your trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "%@ is replaced with app name"), productName)
     } else {
-      emptyAlertView.footerLabel.text = NSLocalizedString("In the meantime, let's keep exploring and enjoy your trips", comment: "")
+      emptyAlertView.footerLabel.text = NSLocalizedString("In the meantime, let's keep exploring and enjoy your trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
     }
     
     view.insertSubview(emptyAlertView, aboveSubview: tableView)
