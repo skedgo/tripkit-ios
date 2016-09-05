@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)reportPlannedTrip:(Trip *)trip
                  userInfo:(nullable NSDictionary<NSString *,id<NSCoding>> *)userInfo
-        completionHandler:(nullable void(^)(BOOL success))completeHandler;
+        completionHandler:(nullable void(^)(BOOL success))completionHandler;
 
 /**
 Reports progress that the user made along the provided trip.

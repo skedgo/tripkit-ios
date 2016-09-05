@@ -31,7 +31,6 @@ typedef void(^TKRouterError)(NSError *error, NSSet *modeIdentifiers);
  The main method to call to have the router calculate trips.
  
  @param request An instance of a `TripRequest` which specifies what kind of trips should get calculated.
- @param minimized 
  */
 - (void)fetchTripsForRequest:(TripRequest *)request
 										 success:(TKRouterSuccess)success
