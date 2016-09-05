@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
+import SwiftyJSON
 
 public final class RegionInformation: NSObject {
   
@@ -197,6 +199,7 @@ extension TKBuzzInfoProvider {
     })
   }
   
+  
   /**
    Asynchronously fetches paratransit information for the provided region.
    
@@ -243,6 +246,28 @@ extension TKBuzzInfoProvider {
         let result = transformer(nil)
         completion(result)
       })
+  }
+  
+  // MARK: - Rx variants.
+  
+  /**
+   Asynchronously fetches transit alerts for the provided region using Rx.
+   */
+  public class func rx_fetchTransitAlerts(forRegion region: SVKRegion) -> Observable<[TKAlert]> {
+    let paras: [String: AnyObject] = [
+      "region": region.name
+    ]
+    
+    return SVKServer.sharedInstance()
+      .rx_hit(.GET, path: "alerts/transit.json", parameters: paras, region: region, repeatHandler: nil)
+      .map { (_, response) -> [TKAlert] in
+        if let jsonResponse = response?.dictionaryObject {
+          let alerts = TransitAlertInformation.alertsFromJSONResponse(jsonResponse)
+          return alerts ?? []
+        } else {
+          return []
+        }
+    }
   }
 }
 

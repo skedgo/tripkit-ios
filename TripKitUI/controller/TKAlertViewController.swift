@@ -52,6 +52,7 @@ public class TKAlertViewController: UITableViewController {
     tableView.separatorStyle = .None
     
     transitAlerts?
+      .observeOn(MainScheduler.instance)
       .subscribeNext { [weak self] in
         if let strongSelf = self {
           strongSelf.alerts = $0
