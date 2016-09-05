@@ -108,7 +108,7 @@ public class TKAlertViewController: UITableViewController {
     let emptyAlertView = TKEmptyAlertView.makeView()
     emptyAlertView.frame.size = view.frame.size
     emptyAlertView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-    emptyAlertView.textLabel.text = NSLocalizedString("We'd keep you updated with the latest transit alerts here", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
+    emptyAlertView.textLabel.text = NSLocalizedString("We'll keep you updated with the latest transit alerts here", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
     
     if let productName = productName() {
       emptyAlertView.footerLabel.text = String(format: NSLocalizedString("In the meantime, let's keep exploring %@ and enjoy your trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "%@ is replaced with app name"), productName)
