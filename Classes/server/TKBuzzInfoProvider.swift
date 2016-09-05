@@ -75,18 +75,33 @@ public final class TransitAlertInformation: NSObject, TKAlert {
   public let title: String
   public let text: String?
   public let URL: String?
-  public let icon: UIImage?
+  public let severity: AlertSeverity
   public let lastUpdated: NSDate?
   
   public var sourceModel: AnyObject? {
     return self
   }
   
-  private init(title: String, text: String? = nil, url: String? = nil, icon: UIImage? = nil, lastUpdated: NSDate? = nil) {
+  public var icon: UIImage? {
+    var iconType: STKInfoIconType = STKInfoIconTypeNone
+    
+    switch severity {
+    case .Info:
+      iconType = STKInfoIconTypeNone
+    case .Warning:
+      iconType = STKInfoIconTypeWarning
+    case .Alert:
+      iconType = STKInfoIconTypeAlert
+    }
+    
+    return STKInfoIcon.imageForInfoIconType(iconType, usage: STKInfoIconUsageNormal)
+  }
+  
+  private init(title: String, text: String? = nil, url: String? = nil, severity: AlertSeverity = .Info, lastUpdated: NSDate? = nil) {
     self.title = title
     self.text = text
     self.URL = url
-    self.icon = icon
+    self.severity = severity
     self.lastUpdated = lastUpdated
   }
   
@@ -106,7 +121,20 @@ public final class TransitAlertInformation: NSObject, TKAlert {
       let title = alertDict["title"] as? String ?? ""
       let text = alertDict["text"] as? String
       let stringURL = alertDict["url"] as? String
-      return TransitAlertInformation(title: title, text: text, url: stringURL)
+      
+      var severity: AlertSeverity = .Info
+      if let alertSeverity = alertDict["severity"] as? String {
+        switch alertSeverity {
+        case "alert":
+          severity = .Alert
+        case "warning":
+          severity = .Warning
+        default:
+          severity = .Info
+        }
+      }
+      
+      return TransitAlertInformation(title: title, text: text, url: stringURL, severity: severity)
     }
     
     return alerts
