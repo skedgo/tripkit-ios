@@ -481,6 +481,8 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           reference.ticketWebsiteURLString = refDict[@"ticketWebsiteURL"];
           reference.serviceStops = refDict[@"stops"];
           reference.departurePlatform = refDict[@"platform"];
+          reference.bicycleAccessible = [refDict[@"bicycleAccessible"] boolValue];
+          reference.wheelchairAccessible = [refDict[@"wheelchairAccessible"] boolValue];
           
           // set the trip status
           if (service.frequency.integerValue == 0) {
@@ -512,7 +514,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         reference.startTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"startTime"] integerValue]];
         reference.endTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"endTime"] integerValue]];
         reference.timesAreRealTime = [refDict[@"realTime"] boolValue];
-        
+
         reference.alertHashCodes = refDict[@"alertHashCodes"];
         
         // Any segment can have payloads

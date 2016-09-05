@@ -11,7 +11,9 @@
 #import <TripKit/TKTripKit.h>
 
 enum {
-  SGSegmentFlagTimesAreRealtime = 1 << 0,
+  SGSegmentFlagTimesAreRealtime     = 1 << 0,
+  SGSegmentFlagBicycleAccessible    = 1 << 1,
+  SGSegmentFlagWheelchairAccessible = 1 << 2,
 };
 typedef NSUInteger SGSegmentFlag;
 
@@ -164,6 +166,26 @@ typedef NSUInteger SGSegmentFlag;
 - (void)setTimesAreRealTime:(BOOL)timesAreRealTime
 {
   [self setFlag:SGSegmentFlagTimesAreRealtime to:timesAreRealTime];
+}
+
+- (BOOL)isBicycleAccessible
+{
+  return [self hasFlag:SGSegmentFlagBicycleAccessible];
+}
+
+- (void)setBicycleAccessible:(BOOL)bicycleAccessible
+{
+  [self setFlag:SGSegmentFlagBicycleAccessible to:bicycleAccessible];
+}
+
+- (BOOL)isWheelchairAccessible
+{
+  return [self hasFlag:SGSegmentFlagWheelchairAccessible];
+}
+
+- (void)setWheelchairAccessible:(BOOL)wheelchairAccessible
+{
+  [self setFlag:SGSegmentFlagWheelchairAccessible to:wheelchairAccessible];
 }
 
 #pragma mark - Data
