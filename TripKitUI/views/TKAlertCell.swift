@@ -10,35 +10,6 @@ import UIKit
 import TripKit
 import RxSwift
 
-struct TKAlertDisplayModel {
-  let title: String
-  let text: String?
-  let URL: String?
-  let icon: UIImage?
-  let lastUpdated: NSDate?
-  
-  init(title: String, text: String? = nil, URL: String? = nil, icon: UIImage? = nil, lastUpdated: NSDate?) {
-    self.title = title
-    self.text = text
-    self.URL = URL
-    self.icon = icon
-    self.lastUpdated = lastUpdated
-  }
-}
-
-extension TKAlertDisplayModel {
-  
-  static func fromAlert(alert: Alert) -> TKAlertDisplayModel {
-    let icon = STKInfoIcon.imageForInfoIconType(alert.infoIconType(), usage: STKInfoIconUsageNormal)
-    return TKAlertDisplayModel(title: alert.title, text: alert.text, URL: alert.url, icon: icon, lastUpdated: nil)
-  }
-  
-  static func fromAlertInformation(info: TransitAlertInformation) -> TKAlertDisplayModel {
-    return TKAlertDisplayModel(title: info.title, text: info.text, URL: info.URL, icon: nil, lastUpdated: nil)
-  }
-  
-}
-
 class TKAlertCell: UITableViewCell {
 
   @IBOutlet weak var contentWrapper: UIView!
