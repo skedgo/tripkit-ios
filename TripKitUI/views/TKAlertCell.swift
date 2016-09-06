@@ -75,6 +75,7 @@ class TKAlertCell: UITableViewCell {
     
     if let lastUpdated = alert.lastUpdated {
       statusLabel.hidden = false
+      statusLabel.text = SGStyleManager.stringForDate(lastUpdated, forTimeZone: NSTimeZone.localTimeZone(), showDate: true, showTime: true)
     } else {
       statusLabel.hidden = true
     }
