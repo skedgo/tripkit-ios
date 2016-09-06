@@ -122,13 +122,12 @@ public class TKAlertViewController: UITableViewController {
   
   private func productName() -> String? {
     guard
-      let infoDict = NSBundle.mainBundle().infoDictionary,
-      let bundleNameKey = kCFBundleNameKey as? String
+      let infoDict = NSBundle.mainBundle().infoDictionary
       else {
         return nil
     }
     
-    return infoDict[bundleNameKey] as? String
+    return infoDict[kCFBundleNameKey as String] as? String
   }
   
 }
