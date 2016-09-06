@@ -85,7 +85,9 @@ public class TKAlertViewController: UITableViewController {
     
     // This intercepts the tap on the action button.
     alertCell.tappedOnLink
-      .subscribeNext { self.alertControllerDelegate?.alertViewController?(self, didTapOnURL: $0) }
+      .subscribeNext { [unowned self] in
+        self.alertControllerDelegate?.alertViewController?(self, didTapOnURL: $0)
+      }
       .addDisposableTo(disposeBag)
     
     return alertCell
