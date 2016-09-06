@@ -49,7 +49,7 @@ public class TKAlertViewController: UITableViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 150
     tableView.registerNib(TKAlertCell.nib, forCellReuseIdentifier: String(TKAlertCell))
-    tableView.separatorStyle = .None
+    SGStyleManager.styleTableViewForTileList(tableView)
     
     transitAlerts?
       .observeOn(MainScheduler.instance)
