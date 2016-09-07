@@ -212,7 +212,7 @@ extension MKAnnotation {
     }
     
     return Observable.create() { observer in
-      SGBaseGeocoder.geocodeObject(geocodable, using: geocoder, nearRegion: MKMapRectNull) { success in
+      SGBaseGeocoder.geocodeObject(geocodable, using: geocoder, nearRegion: MKMapRectWorld) { success in
         if success {
           observer.onNext(self)
         }
