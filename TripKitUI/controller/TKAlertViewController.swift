@@ -41,7 +41,9 @@ public class TKAlertViewController: UITableViewController {
       let topCtr = navigator.viewControllers.first where topCtr == self {
       let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: nil, action: nil)
       doneButton.rx_tap
-        .subscribeNext { self.dismissViewControllerAnimated(true, completion: nil) }
+        .subscribeNext { [unowned self] in
+          self.dismissViewControllerAnimated(true, completion: nil)
+        }
         .addDisposableTo(disposeBag)
       navigationItem.leftBarButtonItem = doneButton
     }
