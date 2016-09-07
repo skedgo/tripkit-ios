@@ -56,7 +56,7 @@
 
 + (NSPredicate *)departuresPredicateForStops:(NSArray *)stops
                                     fromDate:(NSDate *)date
-                                      filter:(NSString *)filter
+                                      filter:(nullable NSString *)filter
 {
 	if (filter.length > 0) {
 		return [NSPredicate predicateWithFormat:@"toDelete = NO AND stop IN %@ AND ((departure != nil AND departure > %@) OR (arrival != nil AND arrival > %@)) AND (service.number CONTAINS[c] %@ OR service.name CONTAINS[c] %@ OR stop.shortName CONTAINS[c] %@ OR searchString CONTAINS[c] %@)", stops, date, date, filter, filter, filter, filter];
@@ -193,7 +193,7 @@
 - (NSDate *)countdownDate
 {
   if (self.service.frequency.integerValue > 0) {
-    return  nil;
+    return nil;
   } else {
     return self.departure;
   }

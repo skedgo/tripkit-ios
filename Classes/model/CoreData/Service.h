@@ -15,24 +15,26 @@
 @class Alert, SVKRegion, Shape, StopVisits, SegmentReference, Vehicle;
 @protocol STKDisplayableRoute;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Service : NSManagedObject <TKRealTimeUpdatable>
 
 @property (nonatomic, retain) NSString * code;
-@property (nonatomic, retain) id color;
+@property (nonatomic, retain, nullable) id color;
 @property (nonatomic, retain) NSNumber * flags;
-@property (nonatomic, retain) ModeInfo * modeInfo;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * number;
-@property (nonatomic, retain) NSString * operatorName;
-@property (nonatomic, retain) NSNumber * frequency;
+@property (nonatomic, retain, nullable) ModeInfo * modeInfo;
+@property (nonatomic, retain, nullable) NSString * name;
+@property (nonatomic, retain, nullable) NSString * number;
+@property (nonatomic, retain, nullable) NSString * operatorName;
+@property (nonatomic, retain, nullable) NSNumber * frequency;
 @property (nonatomic, assign) BOOL toDelete;
-@property (nonatomic, retain) Service *continuation;
-@property (nonatomic, retain) Service *progenitor;
-@property (nonatomic, retain) NSSet<SegmentReference*>* segments;
-@property (nonatomic, retain) Shape *shape;
-@property (nonatomic, retain) Vehicle *vehicle;
-@property (nonatomic, retain) NSSet<Vehicle*>* vehicleAlternatives;
-@property (nonatomic, retain) NSSet<StopVisits*>* visits;
+@property (nonatomic, retain, nullable) Service *continuation;
+@property (nonatomic, retain, nullable) Service *progenitor;
+@property (nonatomic, retain, nullable) NSSet<SegmentReference*>* segments;
+@property (nonatomic, retain, nullable) Shape *shape;
+@property (nonatomic, retain, nullable) Vehicle *vehicle;
+@property (nonatomic, retain, nullable) NSSet<Vehicle*>* vehicleAlternatives;
+@property (nonatomic, retain, nullable) NSSet<StopVisits*>* visits;
 
 // non-core data properties
 @property (nonatomic, assign, getter = isRealTime) BOOL realTime;
@@ -41,31 +43,31 @@
 @property (nonatomic, assign, getter = isBicycleAccessible) BOOL bicycleAccessible;
 @property (nonatomic, assign, getter = isWheelchairAccessible) BOOL wheelchairAccessible;
 @property (nonatomic, strong) NSArray<StopVisits *> *sortedVisits;
-@property (nonatomic, copy) NSString *lineName;
-@property (nonatomic, copy) NSString *direction;
+@property (nonatomic, copy, nullable) NSString *lineName;
+@property (nonatomic, copy, nullable) NSString *direction;
 
-+ (instancetype)fetchExistingServiceWithCode:(NSString *)serviceCode
-                            inTripKitContext:(NSManagedObjectContext *)context;
++ (nullable instancetype)fetchExistingServiceWithCode:(NSString *)serviceCode
+                                     inTripKitContext:(NSManagedObjectContext *)context;
 
 + (void)removeServicesBeforeDate:(NSDate *)date
 				fromManagedObjectContext:(NSManagedObjectContext *)context;
 
 - (void)remove;
 
-- (Alert *)sampleAlert;
-- (NSString *)modeTitle;
-- (UIImage *)modeImageOfType:(SGStyleModeIconType)type;
-- (NSURL *)modeImageURLForType:(SGStyleModeIconType)type;
+- (nullable Alert *)sampleAlert;
+- (nullable NSString *)modeTitle;
+- (nullable UIImage *)modeImageOfType:(SGStyleModeIconType)type;
+- (nullable NSURL *)modeImageURLForType:(SGStyleModeIconType)type;
 
-- (SVKRegion *)region;
+- (nullable SVKRegion *)region;
 - (NSString *)title;
 
-- (NSString *)shortIdentifier;
+- (nullable NSString *)shortIdentifier;
 
-- (StopVisits *)visitForStopCode:(NSString *)stopCode;
+- (nullable StopVisits *)visitForStopCode:(NSString *)stopCode;
 
-- (NSArray<id<STKDisplayableRoute>> *)shapesForEmbarkation:(StopVisits *)embarkation
-                                            disembarkingAt:(StopVisits *)disembarkation;
+- (NSArray<id<STKDisplayableRoute>> *)shapesForEmbarkation:(nullable StopVisits *)embarkation
+                                            disembarkingAt:(nullable StopVisits *)disembarkation;
 
 - (BOOL)hasServiceData;
 
@@ -95,3 +97,5 @@
 - (void)removeVehicleAlternatives:(NSSet *)values;
 
 @end
+
+NS_ASSUME_NONNULL_END

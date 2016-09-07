@@ -40,7 +40,7 @@
  */
 - (void)realTimeUpdateForPrimaryVehicles:(NSArray <Vehicle *> *)primary
                        secondaryVehicles:(NSArray <Vehicle *> *)secondary
-                                   animated:(BOOL)animated;
+                                animated:(BOOL)animated;
 
 - (void)presentRoute;
 

@@ -181,7 +181,7 @@
   }
 }
 
-- (nullable NSPredicate *)departuresPredicateFromDate:(NSDate *)date
+- (nullable NSPredicate *)departuresPredicateFromDate:(nullable NSDate *)date
 {
   if (!self.stopsToMatchTo || !date) {
     return nil;
