@@ -84,7 +84,9 @@ extension TripMapManager {
         // zoom to this segment if we're not in 'zoom to start'
         // mode OR if we're in 'zoom to start' mode and this is
         // near the start
-        if zoom != .addAndZoomToStart || (segment.order() == .regular && addedSegments < 2) {
+        if zoom != .addAndZoomToStart
+          || (segment.order() == .regular && addedSegments < 2)
+          || (segment.order() == .end && addedSegments == 1) {
           zoomTo.append(segment)
           addedSegments += 1
         }
