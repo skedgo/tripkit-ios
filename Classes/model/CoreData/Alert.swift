@@ -18,12 +18,12 @@ extension Alert: TKAlert {
     return STKInfoIcon.image(for: infoIconType(), usage: STKInfoIconUsageNormal)
   }
   
-  public var lastUpdated: NSDate? {
-    return nil
+  public var iconURL: URL? {
+    return pointImageURL()
   }
   
-  public var sourceModel: AnyObject? {
-    return self
+  public var lastUpdated: Date? {
+    return nil
   }
   
 }

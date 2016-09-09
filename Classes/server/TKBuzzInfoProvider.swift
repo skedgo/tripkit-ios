@@ -76,17 +76,15 @@ public final class TransitAlertInformation: NSObject, TKAlert {
   public let text: String?
   public let URL: String?
   public let icon: UIImage?
-  public let lastUpdated: NSDate?
+  public let iconURL: URL?
+  public let lastUpdated: Date?
   
-  public var sourceModel: AnyObject? {
-    return self
-  }
-  
-  private init(title: String, text: String? = nil, url: String? = nil, icon: UIImage? = nil, lastUpdated: NSDate? = nil) {
+  private init(title: String, text: String? = nil, url: String? = nil, icon: UIImage? = nil, iconURL: URL? = nil, lastUpdated: Date? = nil) {
     self.title = title
     self.text = text
     self.URL = url
     self.icon = icon
+    self.iconURL = iconURL
     self.lastUpdated = lastUpdated
   }
   
@@ -312,11 +310,11 @@ public class LocationInformation : NSObject {
 @objc public protocol TKAlert {
   
   var icon: UIImage? { get }
+  var iconURL: URL? { get }
   var title: String { get }
   var text: String? { get }
   var URL: String? { get }
-  var lastUpdated: NSDate? { get }
-  var sourceModel: AnyObject? { get }
+  var lastUpdated: Date? { get }
   
 }
 
