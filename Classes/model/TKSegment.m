@@ -517,6 +517,10 @@ NSString *const UninitializedString =  @"UninitializedString";
   return [self.template isWalking];
 }
 
+- (BOOL)isWheelchair {
+  return [self.template isWheelchair];
+}
+
 - (BOOL)isCycling {
   return [self.template isCycling];
 }
@@ -833,7 +837,8 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (BOOL)canFlipImage
 {
-  return [self isSelfNavigating] || [self.modeIdentifier isEqualToString:SVKTransportModeIdentifierAutoRickshaw]; // only those point left and right
+  // only those pointing left or right
+  return [self isSelfNavigating] || [self.modeIdentifier isEqualToString:SVKTransportModeIdentifierAutoRickshaw];
 }
 
 - (NSNumber *)bearing {
@@ -931,7 +936,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   } else if (self.template.modeInfo.descriptor.length > 0) {
     return self.template.modeInfo.descriptor;
   
-  } else if ([self isCycling] && self.reference.template.metres) {
+  } else if (![self.trip isMixedModal] && self.reference.template.metres) {
     MKDistanceFormatter *formatter = [[MKDistanceFormatter alloc] init];
     return [formatter stringFromDistance:self.reference.template.metres.doubleValue];
     
@@ -952,13 +957,21 @@ NSString *const UninitializedString =  @"UninitializedString";
   } else if ([self.trip isMixedModal] && ![self isPublicTransport]) {
     return [self stringForDuration:YES];
   
-  } else if ([self isCycling] && self.reference.template.metresFriendly) {
-    NSString *format = NSLocalizedStringFromTableInBundle(@"%@ cycle friendly", @"TripKit", [TKTripKit bundle], @"Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.");
+  } else if (self.reference.template.metresFriendly) {
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterPercentStyle;
     double value = self.reference.template.metresFriendly.doubleValue / self.reference.template.metres.doubleValue;
     NSString *percentage = [formatter stringFromNumber:@(value)];
-    return [NSString stringWithFormat:format, percentage];
+
+    if ([self isCycling]) {
+      NSString *format = NSLocalizedStringFromTableInBundle(@"%@ cycle friendly", @"TripKit", [TKTripKit bundle], @"Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.");
+      return [NSString stringWithFormat:format, percentage];
+    } else if ([self isWheelchair]) {
+      NSString *format = NSLocalizedStringFromTableInBundle(@"%@ wheelchair friendly", @"TripKit", [TKTripKit bundle], @"Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'.");
+      return [NSString stringWithFormat:format, percentage];
+    } else {
+      return nil;
+    }
   
   } else {
     return nil;
