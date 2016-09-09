@@ -593,7 +593,7 @@ typedef NSUInteger SGTripFlag;
 - (Alert *)primaryAlert
 {
   for (TKSegment *segment in self.segments) {
-    if ([segment hasAlerts]) {
+    if (segment.alerts.count > 0) {
       return [segment.alerts firstObject];
     }
   }

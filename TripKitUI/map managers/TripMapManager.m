@@ -124,11 +124,9 @@
 - (TKSegment *)segmentForAlert:(Alert *)alert
 {
   for (TKSegment *segment in self.trip.segments) {
-    if ([segment hasAlerts]) {
-      for (Alert *ale in segment.alerts){
-        if ([alert.hashCode isEqualToNumber:ale.hashCode]) {
-          return segment;
-        }
+    for (Alert *ale in segment.alerts){
+      if ([alert.hashCode isEqualToNumber:ale.hashCode]) {
+        return segment;
       }
     }
   }

@@ -397,17 +397,20 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSArray *)alertsWithLocation
 {
-  if ([self hasAlerts]) {
+  if (self.alerts.count > 0) {
     return [[self alerts] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"location != nil"]];
   } else {
     return @[];
   }
 }
 
-
-- (BOOL)hasAlerts
+- (NSArray *)alertsWithContent
 {
-  return self.alerts.count > 0;
+  if (self.alerts.count > 0) {
+    return [[self alerts] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"text != nil OR url != null"]];
+  } else {
+    return @[];
+  }
 }
 
 - (BOOL)usesVisit:(StopVisits *)visit
@@ -992,7 +995,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (STKInfoIconType)tripSegmentModeInfoIconType
 {
-  if ([self hasAlerts]) {
+  if (self.alerts.count > 0) {
     Alert *alert = [self.alerts firstObject];
     return alert.infoIconType;
   } else {
