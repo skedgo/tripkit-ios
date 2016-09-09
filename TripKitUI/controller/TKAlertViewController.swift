@@ -38,10 +38,12 @@ public class TKAlertViewController: UITableViewController {
     self.title = NSLocalizedString("Alerts", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
     
     if let navigator = navigationController,
-      let topCtr = navigator.viewControllers.first , topCtr == self {
+      let topCtr = navigator.viewControllers.first, topCtr == self {
       let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
-      doneButton.rx.tap
-        .subscribeNext { self.dismiss(animated: true, completion: nil) }
+      doneButton.rx_tap
+        .subscribeNext { [unowned self] in
+          self.dismissViewControllerAnimated(true, completion: nil)
+        }
         .addDisposableTo(disposeBag)
       navigationItem.leftBarButtonItem = doneButton
     }
@@ -49,7 +51,7 @@ public class TKAlertViewController: UITableViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 150
     tableView.register(TKAlertCell.nib, forCellReuseIdentifier: String(describing: TKAlertCell.self))
-    tableView.separatorStyle = .none
+    SGStyleManager.styleTableViewForTileList(tableView)
     
     transitAlerts?
       .observeOn(MainScheduler.instance)
@@ -85,7 +87,9 @@ public class TKAlertViewController: UITableViewController {
     
     // This intercepts the tap on the action button.
     alertCell.tappedOnLink
-      .subscribeNext { self.alertControllerDelegate?.alertViewController?(self, didTapOnURL: $0) }
+      .subscribeNext { [unowned self] in
+        self.alertControllerDelegate?.alertViewController?(self, didTapOnURL: $0)
+      }
       .addDisposableTo(disposeBag)
     
     return alertCell
@@ -108,7 +112,7 @@ public class TKAlertViewController: UITableViewController {
     let emptyAlertView = TKEmptyAlertView.makeView()
     emptyAlertView.frame.size = view.frame.size
     emptyAlertView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    emptyAlertView.textLabel.text = NSLocalizedString("We'd keep you updated with the latest transit alerts here", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
+    emptyAlertView.textLabel.text = NSLocalizedString("We'll keep you updated with the latest transit alerts here", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
     
     if let productName = productName() {
       emptyAlertView.footerLabel.text = String(format: NSLocalizedString("In the meantime, let's keep exploring %@ and enjoy your trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "%@ is replaced with app name"), productName)
@@ -122,13 +126,12 @@ public class TKAlertViewController: UITableViewController {
   
   private func productName() -> String? {
     guard
-      let infoDict = Bundle.main.infoDictionary,
-      let bundleNameKey = kCFBundleNameKey as? String
+      let infoDict = NSBundle.mainBundle().infoDictionary
       else {
         return nil
     }
     
-    return infoDict[bundleNameKey] as? String
+    return infoDict[kCFBundleNameKey as String] as? String
   }
   
 }

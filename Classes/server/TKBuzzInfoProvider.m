@@ -495,6 +495,14 @@ typedef enum {
 			service.modeInfo      = [ModeInfo modeInfoForDictionary:departureDict[@"modeInfo"]];
       service.operatorName  = departureDict[@"operator"];
 			
+      // accessibility
+      if ([departureDict[@"wheelchairAccessible"] boolValue]) {
+        service.wheelchairAccessible = true;
+      }
+      if ([departureDict[@"bicycleAccessible"] boolValue]) {
+        service.bicycleAccessible = true;
+      }
+      
 			// the real-time status
 			NSString *realTimeStatus = departureDict[@"realTimeStatus"];
 			[TKParserHelper adjustService:service
