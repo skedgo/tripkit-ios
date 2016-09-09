@@ -40,9 +40,9 @@ public class TKAlertViewController: UITableViewController {
     if let navigator = navigationController,
       let topCtr = navigator.viewControllers.first, topCtr == self {
       let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
-      doneButton.rx_tap
+      doneButton.rx.tap
         .subscribeNext { [unowned self] in
-          self.dismissViewControllerAnimated(true, completion: nil)
+          self.dismiss(animated: true, completion: nil)
         }
         .addDisposableTo(disposeBag)
       navigationItem.leftBarButtonItem = doneButton
@@ -51,7 +51,7 @@ public class TKAlertViewController: UITableViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 150
     tableView.register(TKAlertCell.nib, forCellReuseIdentifier: String(describing: TKAlertCell.self))
-    SGStyleManager.styleTableViewForTileList(tableView)
+    SGStyleManager.styleTableView(forTileList: tableView)
     
     transitAlerts?
       .observeOn(MainScheduler.instance)
@@ -126,7 +126,7 @@ public class TKAlertViewController: UITableViewController {
   
   private func productName() -> String? {
     guard
-      let infoDict = NSBundle.mainBundle().infoDictionary
+      let infoDict = Bundle.main.infoDictionary
       else {
         return nil
     }

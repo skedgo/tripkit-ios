@@ -79,8 +79,8 @@ class TKAlertCell: UITableViewCell {
     }
     
     if let lastUpdated = alert.lastUpdated {
-      statusLabel.hidden = false
-      statusLabel.text = SGStyleManager.stringForDate(lastUpdated, forTimeZone: NSTimeZone.localTimeZone(), showDate: true, showTime: true)
+      statusLabel.isHidden = false
+      statusLabel.text = SGStyleManager.string(for: lastUpdated, for: NSTimeZone.local, showDate: true, showTime: true)
     } else {
       statusLabel.isHidden = true
     }
@@ -115,7 +115,7 @@ class TKAlertCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     SGStyleManager.addDefaultOutline(contentWrapper)
-    actionButton.setTitle(NSLocalizedString("More info", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title of button to get more details about an alert"), forState: .Normal)
+    actionButton.setTitle(NSLocalizedString("More info", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title of button to get more details about an alert"), for: .normal)
   }
   
   override func prepareForReuse() {

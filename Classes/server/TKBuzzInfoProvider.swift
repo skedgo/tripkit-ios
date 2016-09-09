@@ -75,7 +75,6 @@ public final class TransitAlertInformation: NSObject, TKAlert {
   public let title: String
   public let text: String?
   public let URL: String?
-  public let icon: UIImage?
   public let iconURL: URL?
   public let severity: AlertSeverity
   public let lastUpdated: Date?
@@ -88,22 +87,23 @@ public final class TransitAlertInformation: NSObject, TKAlert {
     var iconType: STKInfoIconType = STKInfoIconTypeNone
     
     switch severity {
-    case .Info:
+    case .info:
       iconType = STKInfoIconTypeNone
-    case .Warning:
+    case .warning:
       iconType = STKInfoIconTypeWarning
-    case .Alert:
+    case .alert:
       iconType = STKInfoIconTypeAlert
     }
     
-    return STKInfoIcon.imageForInfoIconType(iconType, usage: STKInfoIconUsageNormal)
+    return STKInfoIcon.image(for: iconType, usage: STKInfoIconUsageNormal)
   }
   
-  private init(title: String, text: String? = nil, url: String? = nil, severity: AlertSeverity = .Info, lastUpdated: NSDate? = nil) {
+  private init(title: String, text: String? = nil, url: String? = nil, severity: AlertSeverity = .info, iconURL: URL? = nil, lastUpdated: Date? = nil) {
     self.title = title
     self.text = text
     self.URL = url
     self.severity = severity
+    self.iconURL = iconURL
     self.lastUpdated = lastUpdated
   }
   
@@ -124,15 +124,15 @@ public final class TransitAlertInformation: NSObject, TKAlert {
       let text = alertDict["text"] as? String
       let stringURL = alertDict["url"] as? String
       
-      var severity: AlertSeverity = .Info
+      var severity: AlertSeverity = .info
       if let alertSeverity = alertDict["severity"] as? String {
         switch alertSeverity {
         case "alert":
-          severity = .Alert
+          severity = .alert
         case "warning":
-          severity = .Warning
+          severity = .warning
         default:
-          severity = .Info
+          severity = .info
         }
       }
       
