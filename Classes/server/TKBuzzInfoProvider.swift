@@ -84,12 +84,9 @@ public final class TransitAlertInformation: NSObject, TKAlert {
   }
   
   public var icon: UIImage? {
-    var iconType: STKInfoIconType = STKInfoIconTypeNone
-    
+    let iconType: STKInfoIconType
     switch severity {
-    case .info:
-      iconType = STKInfoIconTypeNone
-    case .warning:
+    case .info, .warning:
       iconType = STKInfoIconTypeWarning
     case .alert:
       iconType = STKInfoIconTypeAlert
