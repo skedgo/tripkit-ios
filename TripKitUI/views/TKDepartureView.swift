@@ -1,5 +1,5 @@
 //
-//  TKWidgetTripView.swift
+//  TKDepartureView.swift
 //  TripGo
 //
 //  Created by Kuan Lun Huang on 11/09/2016.
@@ -9,7 +9,7 @@
 import UIKit
 import SGCoreUIKit
 
-public class TKAgendaWidgetTripView: UIView {
+public class TKDepartureView: UIView {
 
   @IBOutlet weak var tripSegmentView: SGTripSegmentsView!
   @IBOutlet weak var imageView: UIImageView!
@@ -18,9 +18,9 @@ public class TKAgendaWidgetTripView: UIView {
   @IBOutlet weak var timeToLeaveUnitLabel: UILabel!
   @IBOutlet weak var timeToLeaveNumberLabel: UILabel!
   
-  public static func makeView() -> TKAgendaWidgetTripView {
+  public static func makeView() -> TKDepartureView {
     let bundle = Bundle(for: self)
-    return bundle.loadNibNamed("TKAgendaWidgetTripView", owner: self, options: nil)?.first as! TKAgendaWidgetTripView
+    return bundle.loadNibNamed("TKDepartureView", owner: self, options: nil)?.first as! TKDepartureView
   }
   
   public func configure(for trip: STKTrip, to destination: SGTrackItem) {
