@@ -27,7 +27,7 @@ public class TKDepartureView: UIView {
     let segments = trip.segments(with: .inSummary)
     tripSegmentView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: false)
     
-    imageView.image = destination.trackIcon!()
+    imageView.image = destination.trackIcon?()
     destinationTitle.text = destination.title()
     
     if let start = destination.startDate() {
