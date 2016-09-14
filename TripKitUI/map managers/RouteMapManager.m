@@ -372,7 +372,6 @@
     } else if ([annotation isKindOfClass:[StopVisits class]] && [self showAsSemaphore:(StopVisits *)annotation]) {
 
       // Visits can be drawn as semaphores as they have a direction
-      MKAnnotationView *annotationView;
       
       static NSString *sempahoreIdentifier = @"Semaphore";
       SGSemaphoreView * semaphoreView = (SGSemaphoreView *)[mv dequeueReusableAnnotationViewWithIdentifier:sempahoreIdentifier];
