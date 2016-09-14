@@ -25,7 +25,7 @@ public class TKDepartureView: UIView {
   
   public func configure(for trip: STKTrip, to destination: SGTrackItem) {
     let segments = trip.segments(with: .inSummary)
-    tripSegmentView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: false)
+    tripSegmentView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: true)
     
     imageView.image = destination.trackIcon?()
     destinationTitle.text = destination.title()
@@ -79,17 +79,17 @@ public class TKDepartureView: UIView {
     if absoluteMins < 60 {
       // e.g., 35m
       let rounded = Int(floor(absoluteMins))
-      durationString = SGKObjcDateHelper.durationString(forMinutes: rounded)
+      durationString = Date.durationString(forMinutes: rounded)
       
     } else if absoluteMins < 1440 {
       // e.g., 1h
       let hours = Int(absoluteMins/60)
-      durationString = SGKObjcDateHelper.durationString(forHours: hours)
+      durationString = Date.durationString(forHours: hours)
       
     } else {
       // e.g., 1d
       let days = Int(absoluteMins/1440)
-      durationString = SGKObjcDateHelper.durationString(forDays: days)
+      durationString = Date.durationString(forDays: days)
     }
     
     // extract the decimal parts, e.g., start with 35m
