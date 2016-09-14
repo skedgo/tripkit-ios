@@ -49,7 +49,13 @@
       object = [moc existingObjectWithID:objectID error:&error];
     }
   }];
-  return object;
+  
+  if ([object isKindOfClass:self]) {
+    return object;
+  } else {
+    return nil;
+  }
+  
 }
 
 - (NSString *)persistentId
