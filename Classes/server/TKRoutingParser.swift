@@ -36,13 +36,13 @@ extension TKRoutingParser {
     if let start = start, let named = SGNamedCoordinate(for: start) {
       request.fromLocation = named
     } else {
-      let segment = matchingSegment(in: trip, order: .start, first: true)
+      let segment = matchingSegment(in: trip, order: .regular, first: true)
       request.fromLocation = SGNamedCoordinate(coordinate: segment.coordinate)
     }
     if let end = end, let named = SGNamedCoordinate(for: end) {
       request.toLocation = named
     } else {
-      let segment = matchingSegment(in: trip, order: .end, first: false)
+      let segment = matchingSegment(in: trip, order: .regular, first: false)
       request.toLocation = SGNamedCoordinate(coordinate: segment.coordinate)
     }
     
