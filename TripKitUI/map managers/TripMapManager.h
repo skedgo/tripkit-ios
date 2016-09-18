@@ -10,9 +10,11 @@
 
 @import TripKit;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TripMapManager : RouteMapManager
 
-@property (nonatomic, strong) Trip * trip;
+@property (nonatomic, strong, nullable) Trip * trip;
 @property (nonatomic, strong) NSArray<Alert *>* alerts;
 @property (nonatomic, assign) BOOL enableRealTimeUpdates;
 @property (nonatomic, assign) BOOL forceZoom;
@@ -25,10 +27,16 @@
 
 - (void)selectAlert:(Alert *)alert;
 
-- (TKSegment *)segmentForAlert:(Alert *)alert;
+- (nullable TKSegment *)segmentForAlert:(Alert *)alert;
 
 - (void)kickOffRealTimeUpdates:(BOOL)animated;
 
 - (void)realTimeUpdateForTrip:(Trip *)theTrip animated:(BOOL)animated;
 
+/// For subclasses
+
+@property (readonly) TKBuzzInfoProvider *infoProvider;
+
 @end
+
+NS_ASSUME_NONNULL_END

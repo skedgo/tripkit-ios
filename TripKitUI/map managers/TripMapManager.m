@@ -15,12 +15,22 @@
 @interface TripMapManager ()
 
 @property (nonatomic, strong) NSTimer *realTimeUpdateTimer;
+@property (nonatomic, strong) TKBuzzInfoProvider *infoProvider;
 
 @end
 
 @implementation TripMapManager
 
 #pragma mark - RouteMapManager
+
+- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    self.alerts = @[];
+  }
+  return self;
+}
 
 - (void)takeChargeOfMap:(MKMapView *)mapView
       forViewController:(UIViewController<ASMapManagerDelegate> *)controller
@@ -246,6 +256,15 @@
                                                             selector:@selector(subsequentRealtimeUpdate:)
                                                             userInfo:nil
                                                              repeats:YES];
+}
+
+#pragma mark - Lazy
+
+- (TKBuzzInfoProvider *)infoProvider {
+  if (!_infoProvider) {
+    _infoProvider = [[TKBuzzInfoProvider alloc] init];
+  }
+  return _infoProvider;
 }
 
 

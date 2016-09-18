@@ -161,9 +161,9 @@ extension TripMapManager {
   func requestVisits(for segment: TKSegment, includeShape: Bool) {
     guard segment.isPublicTransport(), let service = segment.service() else { return }
     
-    let provider = TKBuzzInfoProvider()
-    provider.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: segment.localRegion()) { (updatedService, finished) in
+    infoProvider.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: segment.localRegion()) { [weak self] (updatedService, finished) in
       
+      guard let `self` = self else { return }
       guard service == updatedService && finished else { return }
       
       if includeShape, let startCode = segment.scheduledStartStopCode(), let endCode = segment.scheduledEndStopCode() {
