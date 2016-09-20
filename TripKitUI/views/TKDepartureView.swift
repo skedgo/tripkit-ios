@@ -94,17 +94,17 @@ public class TKDepartureView: UIView {
     
     if absoluteMins < 60 {
       // e.g., 35m
-      let rounded = Int(floor(absoluteMins))
+      let rounded = Int(absoluteMins.rounded(.down))
       durationString = Date.durationString(forMinutes: rounded)
       
     } else if absoluteMins < 1440 {
       // e.g., 1h
-      let hours = Int(absoluteMins/60)
+      let hours = Int((absoluteMins/60).rounded(.down))
       durationString = Date.durationString(forHours: hours)
       
     } else {
       // e.g., 1d
-      let days = Int(absoluteMins/1440)
+      let days = Int((absoluteMins/1440).rounded(.down))
       durationString = Date.durationString(forDays: days)
     }
     
