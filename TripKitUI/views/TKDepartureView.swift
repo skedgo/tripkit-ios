@@ -15,8 +15,9 @@ public class TKDepartureView: UIView {
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var destinationTitle: UILabel!
   @IBOutlet weak var destinationTimes: UILabel!
-  @IBOutlet weak var timeToLeaveUnitLabel: UILabel!
-  @IBOutlet weak var timeToLeaveNumberLabel: UILabel!
+  @IBOutlet weak var timeTitleLabel: UILabel!
+  @IBOutlet weak var timeUnitLabel: UILabel!
+  @IBOutlet weak var timeNumberLabel: UILabel!
   
   public static func makeView() -> TKDepartureView {
     let bundle = Bundle(for: self)
@@ -35,8 +36,8 @@ public class TKDepartureView: UIView {
       
       let duration = destination.duration()
       if duration == -1 {
-        let prefix = NSLocalizedString("Arrive at ", comment: "")
-        destinationTimes.text = prefix + SGStyleManager.timeString(start, for: nil)
+        let format = NSLocalizedString("ArrivalTime", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "'Arrive at %@', where '%@' will be replace with the arrival time.")
+        destinationTimes.text = String(format: format, SGStyleManager.timeString(start, for: nil))
       } else {
         let end = start.addingTimeInterval(duration)
         let formatter = DateIntervalFormatter()
@@ -49,10 +50,10 @@ public class TKDepartureView: UIView {
       destinationTimes.isHidden = true
     }
     
-    let timeToDeparture = trip.departureTime.timeIntervalSinceNow
-    let timeToLeave = readableTimeToLeave(from: timeToDeparture)
-    timeToLeaveNumberLabel.text = timeToLeave.number
-    timeToLeaveUnitLabel.text = timeToLeave.unit
+    let time = readableTime(departure: trip.departureTime, arrival: trip.arrivalTime)
+    timeTitleLabel.text = time.title
+    timeNumberLabel.text = time.number
+    timeUnitLabel.text = time.unit
   }
   
   // MARK: -
@@ -69,7 +70,22 @@ public class TKDepartureView: UIView {
   
   // MARK: - Utilities
   
-  private func readableTimeToLeave(from interval: TimeInterval) -> (number: String, unit: String) {
+  private func readableTime(departure: Date, arrival: Date) -> (title: String, number: String, unit: String) {
+    
+    if departure.timeIntervalSinceNow > 0 {
+      let leaveIn = readableTime(from: departure.timeIntervalSinceNow)
+      let title = NSLocalizedString("Leave in", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for when to depart. Countdown to departure will be displayed below.")
+      return (title, leaveIn.number, leaveIn.unit)
+    
+    } else {
+      let arriveIn = readableTime(from: arrival.timeIntervalSinceNow)
+      let title = NSLocalizedString("Arrive in", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below.")
+      return (title, arriveIn.number, arriveIn.unit)
+    }
+    
+  }
+  
+  private func readableTime(from interval: TimeInterval) -> (number: String, unit: String) {
     let mins = interval / 60
     let isFuture = mins >= 0
     let absoluteMins = mins * (isFuture ? 1 : -1)
@@ -93,7 +109,7 @@ public class TKDepartureView: UIView {
     }
     
     // extract the decimal parts, e.g., start with 35m
-    let timeToLeaveNumber = durationString.characters // => ["3", "5", "m"]
+    let number = durationString.characters // => ["3", "5", "m"]
       .flatMap { character -> String? in
         if let _ = Int(String(character)) {
           return String(character)
@@ -104,12 +120,12 @@ public class TKDepartureView: UIView {
       .reduce(isFuture ? "" : "-") { $0 + $1 } // "35"
     
     // extract the unit part, e.g., start with 35m
-    let timeToLeaveUnit = durationString
+    let unit = durationString
       .components(separatedBy: CharacterSet.decimalDigits) // => ["", "", "m"]
       .filter { !$0.isEmpty } // => ["m"]
       .reduce("") { $0 + $1 } // => "m"
     
-    return (timeToLeaveNumber, timeToLeaveUnit) // => ("35", "m")
+    return (number, unit) // => ("35", "m")
   }
 }
 

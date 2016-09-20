@@ -1341,7 +1341,7 @@ NSString *const UninitializedString =  @"UninitializedString";
           if (name.length > 0) {
             newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalLocationTime", @"TripKit", [TKTripKit bundle], "The place of arrival with time"), name, time];
           } else {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalTime", @"TripKit", [TKTripKit bundle], "Time arrival"), time];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalTime", @"TripKit", [TKTripKit bundle], "'Arrive at %@', where '%@' will be replace with the arrival time."), time];
           }
         } else {
           if (name.length > 0) {

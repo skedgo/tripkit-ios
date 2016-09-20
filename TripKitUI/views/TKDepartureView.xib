@@ -105,8 +105,9 @@
                 <outlet property="destinationTimes" destination="xwR-A9-BDs" id="l1N-dA-lVQ"/>
                 <outlet property="destinationTitle" destination="Bol-8X-Tvc" id="Pvs-RS-gLa"/>
                 <outlet property="imageView" destination="bxk-Qg-HdS" id="4Ua-5f-Mai"/>
-                <outlet property="timeToLeaveNumberLabel" destination="dqE-M5-uAI" id="KZI-IK-XIv"/>
-                <outlet property="timeToLeaveUnitLabel" destination="dXq-4I-zCh" id="D3Z-jK-Uij"/>
+                <outlet property="timeNumberLabel" destination="dqE-M5-uAI" id="7TI-zx-LZ7"/>
+                <outlet property="timeTitleLabel" destination="TkM-UO-e1q" id="xBi-Q1-0wb"/>
+                <outlet property="timeUnitLabel" destination="dXq-4I-zCh" id="J5c-fK-oFH"/>
                 <outlet property="tripSegmentView" destination="551-DO-k1w" id="Xki-iS-lsI"/>
             </connections>
         </view>
