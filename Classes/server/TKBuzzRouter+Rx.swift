@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 extension TKBuzzRouter {
-  enum Error: Swift.Error {
+  enum RouterError : Error {
     case downloadFailed
   }
 }
@@ -26,7 +26,7 @@ extension Reactive where Base : TKBuzzRouter {
           observer.onNext(trip)
           observer.onCompleted()
         } else {
-          observer.onError(TKBuzzRouter.Error.downloadFailed)
+          observer.onError(TKBuzzRouter.RouterError.downloadFailed)
         }
       }
       return Disposables.create()
