@@ -98,6 +98,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<NSSortDescriptor *> *)sortDescriptorsAccordingToSelectedOrder;
 
+- (NSArray<NSSortDescriptor *> *)sortDescriptorsWithPrimary:(STKTripCostType)primary;
+
+
 - (NSString *)debugString;
 
 @end

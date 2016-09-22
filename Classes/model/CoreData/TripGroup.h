@@ -12,11 +12,12 @@
 @class Trip, TripRequest;
 @class DLSEntry, TKSegment;
 
-typedef enum {
+
+typedef NS_ENUM(NSInteger, TripGroupVisibility) {
 	TripGroupVisibilityFull = 0,
   TripGroupVisibilityMini = 1,
   TripGroupVisibilityHidden = 2,
-} TripGroupVisibility;
+};
 
 
 @interface TripGroup : NSManagedObject
