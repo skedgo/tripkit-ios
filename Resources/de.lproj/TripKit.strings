@@ -10,8 +10,14 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ spät (%2$@ Service)";
 
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ fahrradfreundlich";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ ohne Verkehr";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ rollstuhlfreundlich";
 
 /* No comment provided by engineer. */
 "1 stop" = "1 Stop";
@@ -31,8 +37,8 @@
 /* The place of arrival with time */
 "ArrivalLocationTime" = "Ankunft bei %@ um %@";
 
-/* Arrival %time.
-   Time arrival */
+/* 'Arrive at %@', where '%@' will be replace with the arrival time.
+   Arrival %time. */
 "ArrivalTime" = "Ankunft um %@";
 
 /* Prefix for selected 'arrive by' time

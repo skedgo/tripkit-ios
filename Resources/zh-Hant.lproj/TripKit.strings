@@ -10,8 +10,14 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "延誤%1$@ (%2$@ 的班次)";
 
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "自行車友善度%@";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ 路況良好下";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "輪椅友善度%@";
 
 /* No comment provided by engineer. */
 "1 stop" = "1站";
@@ -31,8 +37,8 @@
 /* The place of arrival with time */
 "ArrivalLocationTime" = "在%2$@到達%1$@";
 
-/* Arrival %time.
-   Time arrival */
+/* 'Arrive at %@', where '%@' will be replace with the arrival time.
+   Arrival %time. */
 "ArrivalTime" = "在%@到達";
 
 /* Prefix for selected 'arrive by' time
@@ -40,13 +46,25 @@
 "Arrive" = "到達";
 
 /* No comment provided by engineer. */
+"Book with FlitWays" = "預定FlitWays";
+
+/* No comment provided by engineer. */
+"Book with Uber" = "預定優步";
+
+/* Placeholder title while calculating trips */
+"Calculating trips..." = "正在計算最合適的路線";
+
+/* No comment provided by engineer. */
 "Call" = "聯繫計程車";
 
 /* Action title for calling provider of %name */
 "CallTaxiFormat" = "聯繫%@";
 
+/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
+"Connect to Internet to get trips" = "請連接網路以取得路線";
+
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Could not find transit stop.";
+"Could not find transit stop." = "無法找到車站";
 
 /* Departure time sorter title */
 "Departure" = "離站";
@@ -64,6 +82,7 @@
 "Get Lyft" = "使用Lyft";
 
 /* No comment provided by engineer. */
+"Get Ola" = "取得Ola";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "使用導航";
@@ -103,8 +122,10 @@
 "Open Lyft" = "開啟Lyft";
 
 /* No comment provided by engineer. */
+"Open Ola" = "開啟Ola";
 
-/* Arrival Location */
+/* Arrival Location
+   For trip titles, e.g., 'To work' */
 "PrimaryLocationEnd" = "目的地: %@";
 
 /* Departure Location */
@@ -118,6 +139,9 @@
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Search for this stop again or try again later.";
+
+/* Send SMS action */
+"Send SMS" = "傳送簡訊";
 
 /* Show website action */
 "Show website" = "開啟網站";
