@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 + (nullable instancetype)objectFromPersistentId:(NSString *)persistentId
-                         withAppURLSchemeString:(NSString *)scheme
+                         withAppURLSchemeString:(nullable NSString *)scheme
                                       inContext:(NSManagedObjectContext *)moc;
-- (NSString *)persistentIdWithAppURLSchemeString:(NSString *)scheme;
+- (NSString *)persistentIdWithAppURLSchemeString:(nullable NSString *)scheme;
 
 @end
 

@@ -9,7 +9,12 @@
 @import MapKit;
 
 @import SGCoreUIKit;
+
+#ifndef TK_NO_FRAMEWORKS
 @import TripKit;
+#else
+@class StopVisits, Vehicle;
+#endif
 
 @interface RouteMapManager : ASMapManager <CLLocationManagerDelegate>
 

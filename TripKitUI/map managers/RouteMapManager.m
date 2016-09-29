@@ -12,6 +12,10 @@
 
 @import SGCoreKit;
 
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#endif
+
 #import "CircleAnnotationView.h"
 #import "VehicleAnnotationView.h"
 

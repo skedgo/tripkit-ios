@@ -13,7 +13,12 @@
 
 @import SGCoreKit;
 @import SGCoreUIKit;
+
+#ifndef TK_NO_FRAMEWORKS
 @import TripKit;
+#else
+#import "TripKit.h"
+#endif
 
 #import "VehicleView.h"
 

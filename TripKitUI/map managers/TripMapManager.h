@@ -6,11 +6,11 @@
 //
 //
 
-#import <TripKitUI/TripKitUI.h>
-
-@import TripKit;
+#import "RouteMapManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class Trip, Alert, TKSegment, TKBuzzInfoProvider;
 
 @interface TripMapManager : RouteMapManager
 

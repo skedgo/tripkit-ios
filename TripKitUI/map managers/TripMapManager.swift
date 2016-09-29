@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 @objc
 public enum ZoomMode: Int {
@@ -16,7 +17,6 @@ public enum ZoomMode: Int {
 }
 
 extension TripMapManager {
-
 
   public func show(_ trip: Trip, zoom: ZoomMode, animated: Bool = false) {
     guard let mapView = mapView() else { return }
