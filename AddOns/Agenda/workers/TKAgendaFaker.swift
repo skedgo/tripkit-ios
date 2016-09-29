@@ -23,7 +23,7 @@ struct TKAgendaFaker: TKAgendaBuilderType {
       let scheduler = SerialDispatchQueueScheduler(internalSerialQueueName: "Timer")
       let subscription = Observable<Int>.timer(0, period: 1, scheduler: scheduler)
         .observeOn(MainScheduler.instance)
-        .subscribeNext {
+        .subscribe(onNext: {
           let events = TKAgendaFaker.inputsReturningHome(items)
           if $0 < 1 {
             subscriber.onNext(TKAgendaFaker.trackWithTrips(events, usePlaceholders: true))
@@ -31,7 +31,7 @@ struct TKAgendaFaker: TKAgendaBuilderType {
             subscriber.onNext(TKAgendaFaker.trackWithTrips(events, usePlaceholders: false))
             subscriber.onCompleted()
           }
-      }
+        })
       return Disposables.create {
         subscription.dispose()
       }

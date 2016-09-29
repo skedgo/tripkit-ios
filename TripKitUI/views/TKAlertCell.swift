@@ -70,9 +70,9 @@ class TKAlertCell: UITableViewCell {
        let URL = URL(string: stringURL) {
       actionButton.isHidden = false
       actionButton.rx.tap
-        .subscribeNext { [unowned self] in
+        .subscribe(onNext: { [unowned self] in
           self.tappedOnLink.onNext(URL)
-        }
+        })
         .addDisposableTo(disposeBag)
     } else {
       actionButton.isHidden = true

@@ -26,7 +26,7 @@ enum TKTTPifierFaker {
       let scheduler = SerialDispatchQueueScheduler(internalSerialQueueName: "Timer")
       let subscription = Observable<Int>.timer(0, period: 1, scheduler: scheduler)
         .observeOn(MainScheduler.instance)
-        .subscribeNext {
+        .subscribe(onNext: {
           let events = TKTTPifierFaker.inputsReturningHome(inserted)
           if $0 < 1 {
             subscriber.onNext(TKTTPifierFaker.trackWithTrips(events, usePlaceholders: true))
@@ -34,7 +34,7 @@ enum TKTTPifierFaker {
             subscriber.onNext(TKTTPifierFaker.trackWithTrips(events, usePlaceholders: false))
             subscriber.onCompleted()
           }
-      }
+        })
       return Disposables.create {
         subscription.dispose()
       }

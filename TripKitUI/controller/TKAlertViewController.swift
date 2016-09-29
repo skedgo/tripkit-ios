@@ -41,9 +41,9 @@ public class TKAlertViewController: UITableViewController {
       let topCtr = navigator.viewControllers.first, topCtr == self {
       let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
       doneButton.rx.tap
-        .subscribeNext { [unowned self] in
+        .subscribe(onNext: { [unowned self] in
           self.dismiss(animated: true, completion: nil)
-        }
+        })
         .addDisposableTo(disposeBag)
       navigationItem.leftBarButtonItem = doneButton
     }
@@ -55,11 +55,11 @@ public class TKAlertViewController: UITableViewController {
     
     transitAlerts?
       .observeOn(MainScheduler.instance)
-      .subscribeNext { [weak self] in
+      .subscribe(onNext: { [weak self] in
         if let strongSelf = self {
           strongSelf.alerts = $0
         }
-      }
+      })
       .addDisposableTo(disposeBag)
   }
   
@@ -87,9 +87,9 @@ public class TKAlertViewController: UITableViewController {
     
     // This intercepts the tap on the action button.
     alertCell.tappedOnLink
-      .subscribeNext { [unowned self] in
+      .subscribe(onNext: { [unowned self] in
         self.alertControllerDelegate?.alertViewController?(self, didTapOnURL: $0)
-      }
+      })
       .addDisposableTo(disposeBag)
     
     return alertCell

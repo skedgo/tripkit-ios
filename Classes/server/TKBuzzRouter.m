@@ -204,7 +204,7 @@
             [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
               __block NSString *result = nil;
               [updatedTrip.managedObjectContext performBlockAndWait:^{
-                result = [NSString stringWithFormat:@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
+                result = [NSString stringWithFormat:@"Updated trip (%ld): %@", (long)updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
               }];
               return result;
             }];
@@ -217,7 +217,7 @@
           [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
             __block NSString *result = nil;
             [trip.managedObjectContext performBlockAndWait:^{
-              result = [NSString stringWithFormat:@"No update for trip (%d): %@", trip.tripGroup.visibility, [trip debugString]];
+              result = [NSString stringWithFormat:@"No update for trip (%ld): %@", (long)trip.tripGroup.visibility, [trip debugString]];
             }];
             return result;
           }];
