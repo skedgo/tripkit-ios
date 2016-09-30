@@ -5,14 +5,21 @@ use_frameworks!
 platform :ios, '8.0'
 
 def shared_pods
-  pod 'SGCoreKit/Core', git: 'https://github.com/skedgo/shared-ios.git'
-  pod 'SGCoreKit/Rx',   git: 'https://github.com/skedgo/shared-ios.git'
-  pod 'SGSearchKit',    git: 'https://github.com/skedgo/shared-ios.git'
-  pod 'SGUIKit',        git: 'https://github.com/skedgo/shared-ios.git'
-  pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git'
+  pod 'SGCoreKit/Core', git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
+  pod 'SGCoreKit/Rx',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
+  pod 'SGSearchKit',    git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
+  pod 'SGCoreUIKit',    git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
+  pod 'SGUIKit',        git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
+  pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
   
-  pod 'RxSwift'
-  pod 'RxCocoa'
+  pod 'RxSwift',        git: 'https://github.com/ReactiveX/RxSwift.git'
+  pod 'RxCocoa',        git: 'https://github.com/ReactiveX/RxSwift.git'
+
+  pod 'AFNetworking'
+  pod 'SGPulsingAnnotationView'
+
+  # These can be removed, once their Swift3 versions are the defaults
+  pod 'OAuthSwift',     git: 'https://github.com/OAuthSwift/OAuthSwift.git' # '~> 1.0'
 end
 
 target 'TripKit' do
@@ -22,6 +29,6 @@ end
 target 'TripKitTests' do
   shared_pods
   
-  pod 'RxBlocking', '~> 2.0'
-  pod 'RxTests',    '~> 2.0'
+  pod 'RxBlocking',    git: 'https://github.com/ReactiveX/RxSwift.git'
+  pod 'RxTests',       git: 'https://github.com/ReactiveX/RxSwift.git'
 end

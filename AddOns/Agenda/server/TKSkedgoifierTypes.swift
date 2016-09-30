@@ -10,11 +10,11 @@ import Foundation
 
 @objc
 public enum TKSkedgoifierEventKind: Int {
-  case CurrentLocation
-  case Activity
-  case Routine
-  case Stay
-  case Home
+  case currentLocation
+  case activity
+  case routine
+  case stay
+  case home
 }
 
 @objc
@@ -38,16 +38,16 @@ public protocol TKSkedgoifierEventInputType: TKAgendaEventInputType {
 
 extension TKSkedgoifierEventInputType {
   var isStay: Bool {
-    return kind == .Stay
+    return kind == .stay
   }
 }
 
 public class TKSkedgoifierEventOutput: TKAgendaEventOutput {
-  let effectiveStart: NSDate?
-  let effectiveEnd: NSDate?
+  let effectiveStart: Date?
+  let effectiveEnd: Date?
   let isContinuation: Bool
 
-  public init(forInput input: TKAgendaEventInputType, effectiveStart: NSDate?, effectiveEnd: NSDate?, isContinuation: Bool) {
+  public init(forInput input: TKAgendaEventInputType, effectiveStart: Date?, effectiveEnd: Date?, isContinuation: Bool) {
     self.effectiveStart = effectiveStart
     self.effectiveEnd = effectiveEnd
     self.isContinuation = isContinuation

@@ -8,7 +8,7 @@
 
 #import "VehicleView.h"
 
-@import SGUIKit;
+@import SGCoreUIKit;
 
 @interface VehicleView ()
 

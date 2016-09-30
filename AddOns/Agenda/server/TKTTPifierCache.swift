@@ -11,37 +11,37 @@ import Foundation
 import SwiftyJSON
 
 enum TKTTPifierCache {
-  private static let problemsDir = "problems"
-  private static let solutionsDir = "solutions"
+  fileprivate static let problemsDir = "problems"
+  fileprivate static let solutionsDir = "solutions"
   
-  static func problemId(forParas paras: [String: AnyObject]) -> String? {
+  static func problemId(forParas paras: [String: Any]) -> String? {
     let hash = inputHash(paras)
     return problemId(hash)
   }
   
-  private static func problemId(hash: UInt) -> String? {
-    let dict = TKJSONCache.read("\(hash)", directory: .Cache, subdirectory: problemsDir) as? [String: String]
+  fileprivate static func problemId(_ hash: UInt) -> String? {
+    let dict = TKJSONCache.read("\(hash)", directory: .cache, subdirectory: problemsDir) as? [String: String]
     return dict?["id"]
   }
   
-  static func save(problemId id: String, forParas paras: [String: AnyObject]) {
+  static func save(problemId id: String, forParas paras: [String: Any]) {
     let hash = inputHash(paras)
     let dict = ["id": id]
-    TKJSONCache.save("\(hash)", dictionary: dict, directory: .Cache, subdirectory: problemsDir)
+    TKJSONCache.save("\(hash)", dictionary: dict, directory: .cache, subdirectory: problemsDir)
     assert(problemId(forParas: paras) == id)
   }
   
-  static func clear(forParas paras: [String: AnyObject]) {
+  static func clear(forParas paras: [String: Any]) {
     let hash = inputHash(paras)
     
     if let id = problemId(hash) {
-      TKJSONCache.remove(id, directory: .Cache, subdirectory: solutionsDir)
+      TKJSONCache.remove(id, directory: .cache, subdirectory: solutionsDir)
     }
-    TKJSONCache.remove("\(hash)", directory: .Cache, subdirectory: problemsDir)
+    TKJSONCache.remove("\(hash)", directory: .cache, subdirectory: problemsDir)
   }
 
   static func solutionJson(forId id: String) -> JSON? {
-    if let dict = TKJSONCache.read(id, directory: .Cache, subdirectory: solutionsDir) {
+    if let dict = TKJSONCache.read(id, directory: .cache, subdirectory: solutionsDir) {
       return JSON(dict)
     } else {
       return nil
@@ -53,12 +53,12 @@ enum TKTTPifierCache {
       SGKLog.warn("TKTTPifierCache", text: "Could not turn json into dictionary. JSON: \(json)")
       return
     }
-    TKJSONCache.save(id, dictionary: dict, directory: .Cache, subdirectory: solutionsDir)
+    TKJSONCache.save(id, dictionary: dict, directory: .cache, subdirectory: solutionsDir)
   }
   
-  private static func inputHash(input: [String: AnyObject]) -> UInt {
+  fileprivate static func inputHash(_ input: [String: Any]) -> UInt {
     var hash = 5381
-    for key in input.keys.sort() {
+    for key in input.keys.sorted() {
       let value = input[key]
       if let string = value as? String {
         hash = ((hash << 5) &+ hash) &+ string.hash

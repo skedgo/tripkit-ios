@@ -399,10 +399,14 @@
 
 - (NSArray *)sortDescriptorsAccordingToSelectedOrder
 {
+  STKTripCostType sortType = (STKTripCostType) [[NSUserDefaults sharedDefaults] integerForKey:TKDefaultsKeyLastUseSortIndex];
+  return [self sortDescriptorsWithPrimary:sortType];
+}
+
+- (NSArray<NSSortDescriptor *> *)sortDescriptorsWithPrimary:(STKTripCostType)sortType
+{
 	NSArray *sortDescriptors;
 	NSSortDescriptor *first, *second, *third, *primaryTimeSorter, *scoreSorter, *visibilitySorter;
-	
-	STKTripCostType sortType = (STKTripCostType) [[NSUserDefaults sharedDefaults] integerForKey:TKDefaultsKeyLastUseSortIndex];
 	
 	primaryTimeSorter = [self timeSorterForGroups:YES];
 	visibilitySorter  = [[NSSortDescriptor alloc] initWithKey:@"visibilityRaw" ascending:YES];

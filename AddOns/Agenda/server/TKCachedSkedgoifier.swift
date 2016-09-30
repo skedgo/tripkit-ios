@@ -23,7 +23,7 @@ struct TKCachedSkedgoifier: TKAgendaBuilderType {
   }
 
   
-  func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate) -> Observable<[TKAgendaOutputItem]> {
+  func buildTrack(forItems items: [TKAgendaInputItem], startDate: Date, endDate: Date) -> Observable<[TKAgendaOutputItem]> {
     let skedgoifier = TKSkedgoifier()
     return skedgoifier.buildTrack(forItems: items, startDate: startDate, endDate: endDate, privateVehicles: privateVehicles, tripPatterns: tripPatterns)
   }

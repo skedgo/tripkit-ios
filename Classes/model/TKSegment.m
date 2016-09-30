@@ -352,7 +352,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   NSTimeInterval withoutTraffic = rawWithoutTraffic.doubleValue;
   NSTimeInterval withTraffic = [self duration:NO];
   if (withTraffic > withoutTraffic + 60) {
-    NSString *durationString = [NSDate durationStringForMinutes:(NSInteger) (withoutTraffic / 60)];
+    NSString *durationString = [SGKObjcDateHelper durationStringForMinutes:(NSInteger) (withoutTraffic / 60)];
     return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%@ w/o traffic", @"TripKit", [TKTripKit bundle], @"Duration without traffic"), durationString];
   } else {
     return nil;
@@ -361,7 +361,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSString *)stringForDuration:(BOOL)includingContinuation {
 	TKSegment *segment = includingContinuation ? [self finalSegmentIncludingContinuation] : self;
-	return [segment.arrivalTime durationSince:self.departureTime];
+	return [SGKObjcDateHelper durationStringForStart:self.departureTime end:segment.arrivalTime];
 }
 
 - (NSNumber *)frequency {
@@ -397,17 +397,20 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSArray *)alertsWithLocation
 {
-  if ([self hasAlerts]) {
+  if (self.alerts.count > 0) {
     return [[self alerts] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"location != nil"]];
   } else {
     return @[];
   }
 }
 
-
-- (BOOL)hasAlerts
+- (NSArray *)alertsWithContent
 {
-  return self.alerts.count > 0;
+  if (self.alerts.count > 0) {
+    return [[self alerts] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"text != nil OR url != null"]];
+  } else {
+    return @[];
+  }
 }
 
 - (BOOL)usesVisit:(StopVisits *)visit
@@ -515,6 +518,10 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (BOOL)isWalking {
   return [self.template isWalking];
+}
+
+- (BOOL)isWheelchair {
+  return [self.template isWheelchair];
 }
 
 - (BOOL)isCycling {
@@ -772,7 +779,11 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (CLLocationCoordinate2D)coordinate {
-  return [self.start coordinate];
+  if (self.start) {
+    return [self.start coordinate];
+  } else {
+    return kCLLocationCoordinate2DInvalid;
+  }
 }
 
 - (BOOL)isDraggable {
@@ -780,7 +791,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (BOOL)pointDisplaysImage {
-  return [self hasVisibility:STKTripSegmentVisibilityOnMap];
+  return CLLocationCoordinate2DIsValid(self.coordinate) && [self hasVisibility:STKTripSegmentVisibilityOnMap];
 }
 
 - (UIImage *)pointImage
@@ -829,7 +840,8 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (BOOL)canFlipImage
 {
-  return [self isSelfNavigating] || [self.modeIdentifier isEqualToString:SVKTransportModeIdentifierAutoRickshaw]; // only those point left and right
+  // only those pointing left or right
+  return [self isSelfNavigating] || [self.modeIdentifier isEqualToString:SVKTransportModeIdentifierAutoRickshaw];
 }
 
 - (NSNumber *)bearing {
@@ -927,7 +939,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   } else if (self.template.modeInfo.descriptor.length > 0) {
     return self.template.modeInfo.descriptor;
   
-  } else if ([self isCycling] && self.reference.template.metres) {
+  } else if (![self.trip isMixedModal] && self.reference.template.metres) {
     MKDistanceFormatter *formatter = [[MKDistanceFormatter alloc] init];
     return [formatter stringFromDistance:self.reference.template.metres.doubleValue];
     
@@ -948,13 +960,21 @@ NSString *const UninitializedString =  @"UninitializedString";
   } else if ([self.trip isMixedModal] && ![self isPublicTransport]) {
     return [self stringForDuration:YES];
   
-  } else if ([self isCycling] && self.reference.template.metresFriendly) {
-    NSString *format = NSLocalizedStringFromTableInBundle(@"%@ cycle friendly", @"TripKit", [TKTripKit bundle], @"Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.");
+  } else if (self.reference.template.metresFriendly) {
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterPercentStyle;
     double value = self.reference.template.metresFriendly.doubleValue / self.reference.template.metres.doubleValue;
     NSString *percentage = [formatter stringFromNumber:@(value)];
-    return [NSString stringWithFormat:format, percentage];
+
+    if ([self isCycling]) {
+      NSString *format = NSLocalizedStringFromTableInBundle(@"%@ cycle friendly", @"TripKit", [TKTripKit bundle], @"Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.");
+      return [NSString stringWithFormat:format, percentage];
+    } else if ([self isWheelchair]) {
+      NSString *format = NSLocalizedStringFromTableInBundle(@"%@ wheelchair friendly", @"TripKit", [TKTripKit bundle], @"Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'.");
+      return [NSString stringWithFormat:format, percentage];
+    } else {
+      return nil;
+    }
   
   } else {
     return nil;
@@ -975,7 +995,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (STKInfoIconType)tripSegmentModeInfoIconType
 {
-  if ([self hasAlerts]) {
+  if (self.alerts.count > 0) {
     Alert *alert = [self.alerts firstObject];
     return alert.infoIconType;
   } else {
@@ -1321,7 +1341,7 @@ NSString *const UninitializedString =  @"UninitializedString";
           if (name.length > 0) {
             newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalLocationTime", @"TripKit", [TKTripKit bundle], "The place of arrival with time"), name, time];
           } else {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalTime", @"TripKit", [TKTripKit bundle], "Time arrival"), time];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalTime", @"TripKit", [TKTripKit bundle], "'Arrive at %@', where '%@' will be replace with the arrival time."), time];
           }
         } else {
           if (name.length > 0) {

@@ -34,8 +34,9 @@
                              withString:@"x-coredata"];
   }
   
-	NSPersistentStoreCoordinator *coordinator = moc.persistentStoreCoordinator;
-  NSManagedObject *(^onCoordinator)() = ^NSManagedObject *() {
+  __block NSManagedObject *object = nil;
+  NSPersistentStoreCoordinator *coordinator = moc.persistentStoreCoordinator;
+  [coordinator performBlockAndWait:^{
     NSManagedObjectID *objectID;
     @try {
       objectID = [coordinator managedObjectIDForURIRepresentation:[NSURL URLWithString:urlString]];
@@ -43,30 +44,18 @@
     @catch (NSException *exception) {
       // nothing to do
     }
-    if (objectID == nil)
-      return nil;
-    
-    NSError *error;
-    NSManagedObject *managedObject = [moc existingObjectWithID:objectID error:&error];
-    return managedObject;
-  };
+    if (objectID != nil) {
+      NSError *error;
+      object = [moc existingObjectWithID:objectID error:&error];
+    }
+  }];
   
-  if ([coordinator respondsToSelector:@selector(performBlockAndWait:)]) {
-    __block NSManagedObject *object = nil;
-    [coordinator performBlockAndWait:^{
-      object = onCoordinator();
-    }];
+  if ([object isKindOfClass:self]) {
     return object;
   } else {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated"
-    if ([coordinator tryLock]) {
-#pragma GCC diagnostic pop
-      return onCoordinator();
-    } else {
-      return nil;
-    }
+    return nil;
   }
+  
 }
 
 - (NSString *)persistentId

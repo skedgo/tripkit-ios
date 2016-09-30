@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  those.
  
  @param request The request specifying the query
- @param clasifier Optional classifier to assign `TripGroup`'s `classification`
+ @param classifier Optional classifier to assign `TripGroup`'s `classification`
  @param progress Optional progress callback executed when each request finished,
         with the number of completed requests passed to the block.
  @param completion Callback executed when all requests have finished with the

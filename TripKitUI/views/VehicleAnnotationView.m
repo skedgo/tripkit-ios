@@ -12,8 +12,13 @@
 @import AFNetworking; // ImageView category
 
 @import SGCoreKit;
-@import SGUIKit;
+@import SGCoreUIKit;
+
+#ifndef TK_NO_FRAMEWORKS
 @import TripKit;
+#else
+#import "TripKit.h"
+#endif
 
 #import "VehicleView.h"
 

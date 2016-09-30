@@ -12,6 +12,10 @@
 
 @import SGCoreKit;
 
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#endif
+
 #import "CircleAnnotationView.h"
 #import "VehicleAnnotationView.h"
 
@@ -277,11 +281,11 @@
   double heading = newHeading.magneticHeading;
   
   UIInterfaceOrientation orientation;
-//  if ([self.delegate respondsToSelector:@selector(mapManagerDeviceOrientation:)]) {
-//    orientation = [self.delegate mapManagerDeviceOrientation:self];
-//  } else {
-  orientation = [[UIApplication sharedApplication] statusBarOrientation];
-//  }
+  if ([self.delegate respondsToSelector:@selector(mapManagerDeviceOrientation:)]) {
+    orientation = [self.delegate mapManagerDeviceOrientation:self];
+  } else {
+    orientation = UIInterfaceOrientationPortrait; // assume portait
+  }
   
 	if(orientation == UIInterfaceOrientationPortraitUpsideDown)
 		heading += 180;
@@ -329,11 +333,9 @@
 		
 		SGPolylineRenderer *routeRenderer	= [[SGPolylineRenderer alloc] initWithPolyline:routePolyline];
 		routeRenderer.strokeColor       = [route routeColour];
-    if ([route respondsToSelector:@selector(routeDashPattern)]) {
-      NSArray *lineDashPattern = [route routeDashPattern];
-      if (lineDashPattern) {
-        routeRenderer.lineDashPattern = lineDashPattern;
-      }
+    NSArray *lineDashPattern        = [route respondsToSelector:@selector(routeDashPattern)] ? [route routeDashPattern] : nil;
+    if (lineDashPattern) {
+      routeRenderer.lineDashPattern = lineDashPattern;
     }
 		return routeRenderer;
   } else {
@@ -374,7 +376,6 @@
     } else if ([annotation isKindOfClass:[StopVisits class]] && [self showAsSemaphore:(StopVisits *)annotation]) {
 
       // Visits can be drawn as semaphores as they have a direction
-      MKAnnotationView *annotationView;
       
       static NSString *sempahoreIdentifier = @"Semaphore";
       SGSemaphoreView * semaphoreView = (SGSemaphoreView *)[mv dequeueReusableAnnotationViewWithIdentifier:sempahoreIdentifier];

@@ -16,16 +16,16 @@ extension TKSkedgoifier {
   /**
    - warning: While this basically implements the `TKAgendaBuilderType`, you can't use it multi-threaded. You're encouraged to use `TKCachedSkedgoifier` instead which is multi-threading safe (and does caching, too).
    */
-  public func buildTrack(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]> {
+  public func buildTrack(forItems items: [TKAgendaInputItem], startDate: Date, endDate: Date, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]> {
     
-    return SVKServer.sharedInstance()
-      .rx_requireRegion(MKCoordinateRegion.forItems(items))
+    return SVKServer.sharedInstance().rx
+      .requireRegion(MKCoordinateRegion.forItems(items))
       .flatMap { region in
         return self.fetchTrips(forItems: items, startDate: startDate, endDate: endDate, inRegion: region, privateVehicles: privateVehicles, tripPatterns: tripPatterns)
       }
   }
   
-  private func fetchTrips(forItems items: [TKAgendaInputItem], startDate: NSDate, endDate: NSDate, inRegion region: SVKRegion, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]> {
+  fileprivate func fetchTrips(forItems items: [TKAgendaInputItem], startDate: Date, endDate: Date, inRegion region: SVKRegion, privateVehicles: [STKVehicular], tripPatterns: [ [String: AnyObject] ]) -> Observable<[TKAgendaOutputItem]> {
     
     if items.isEmpty {
       return Observable.just([])
@@ -33,9 +33,9 @@ extension TKSkedgoifier {
     
     let inputs = items.reduce([] as [AnyObject]) { inputs, item in
       switch item {
-      case let .Event(eventInput):
+      case let .event(eventInput):
         return inputs + [eventInput]
-      case let .Trip(tripInput):
+      case let .trip(tripInput):
         return inputs + [tripInput]
       }
     }
@@ -44,7 +44,7 @@ extension TKSkedgoifier {
       
       subscriber.onNext(TKAgendaFaker.outputPlaceholders(items))
       
-      self.fetchTripsForItems(inputs, startDate: startDate, endDate: endDate, inRegion: region, withPrivateVehicles: privateVehicles, withTripPatterns: tripPatterns) { results, error in
+      self.fetchTrips(forItems: inputs, start: startDate, end: endDate, in: region, withPrivateVehicles: privateVehicles, withTripPatterns: tripPatterns) { results, error in
         
         guard error == nil else {
           subscriber.onError(error!)
@@ -54,9 +54,9 @@ extension TKSkedgoifier {
         guard let results = results else {
           // Typically when there's just a single item
           if let firstInput = items.first,
-             case let .Event(eventInput) = firstInput {
+             case let .event(eventInput) = firstInput {
             let eventOutput = TKSkedgoifierEventOutput(forInput: eventInput, effectiveStart: startDate, effectiveEnd: endDate, isContinuation: false)
-            let output = TKAgendaOutputItem.Event(eventOutput)
+            let output = TKAgendaOutputItem.event(eventOutput)
             subscriber.onNext([output])
             subscriber.onCompleted()
             return
@@ -67,9 +67,9 @@ extension TKSkedgoifier {
         
         let outputs = results.reduce([] as [TKAgendaOutputItem]) { outputs, result in
           if let eventOutput = result as? TKAgendaEventOutput {
-            return outputs + [ .Event(eventOutput) ]
+            return outputs + [ .event(eventOutput) ]
           } else if let tripOutput = result as? TKAgendaTripOutput {
-            return outputs + [ .Trip(tripOutput) ]
+            return outputs + [ .trip(tripOutput) ]
           } else {
             fatalError("Unexpected item from skedgoifier: \(result)")
           }
@@ -79,7 +79,7 @@ extension TKSkedgoifier {
         subscriber.onCompleted()
       }
       
-      return NopDisposable.instance
+      return Disposables.create()
     }
     
   }

@@ -38,9 +38,9 @@ public final class RegionInformation: NSObject {
     self.paratransitInformation = paratransitInformation
   }
   
-  private class func fromJSONResponse(response: AnyObject?) -> RegionInformation? {
-    guard let JSON = response as? [String: AnyObject],
-      let regions = JSON["regions"] as? [[String: AnyObject]],
+  fileprivate class func fromJSONResponse(_ response: Any?) -> RegionInformation? {
+    guard let JSON = response as? [String: Any],
+      let regions = JSON["regions"] as? [[String: Any]],
       let region = regions.first else {
         return nil
     }
@@ -75,46 +75,45 @@ public final class TransitAlertInformation: NSObject, TKAlert {
   public let title: String
   public let text: String?
   public let URL: String?
+  public let iconURL: URL?
   public let severity: AlertSeverity
-  public let lastUpdated: NSDate?
+  public let lastUpdated: Date?
   
   public var sourceModel: AnyObject? {
     return self
   }
   
   public var icon: UIImage? {
-    var iconType: STKInfoIconType = STKInfoIconTypeNone
-    
+    let iconType: STKInfoIconType
     switch severity {
-    case .Info:
-      iconType = STKInfoIconTypeNone
-    case .Warning:
+    case .info, .warning:
       iconType = STKInfoIconTypeWarning
-    case .Alert:
+    case .alert:
       iconType = STKInfoIconTypeAlert
     }
     
-    return STKInfoIcon.imageForInfoIconType(iconType, usage: STKInfoIconUsageNormal)
+    return STKInfoIcon.image(for: iconType, usage: STKInfoIconUsageNormal)
   }
   
-  private init(title: String, text: String? = nil, url: String? = nil, severity: AlertSeverity = .Info, lastUpdated: NSDate? = nil) {
+  private init(title: String, text: String? = nil, url: String? = nil, severity: AlertSeverity = .info, iconURL: URL? = nil, lastUpdated: Date? = nil) {
     self.title = title
     self.text = text
     self.URL = url
     self.severity = severity
+    self.iconURL = iconURL
     self.lastUpdated = lastUpdated
   }
   
-  private class func alertsFromJSONResponse(response: AnyObject?) -> [TransitAlertInformation]? {
+  fileprivate class func alertsFromJSONResponse(response: Any?) -> [TransitAlertInformation]? {
     guard
-      let JSON = response as? [String: AnyObject],
-      let array = JSON["alerts"] as? [[String: AnyObject]]
+      let JSON = response as? [String: Any],
+      let array = JSON["alerts"] as? [[String: Any]]
       else {
         return nil
     }
     
     let alerts = array.flatMap { dict -> TransitAlertInformation? in
-      guard let alertDict = dict["alert"] as? [String: AnyObject] else {
+      guard let alertDict = dict["alert"] as? [String: Any] else {
         return nil
       }
       
@@ -122,15 +121,15 @@ public final class TransitAlertInformation: NSObject, TKAlert {
       let text = alertDict["text"] as? String
       let stringURL = alertDict["url"] as? String
       
-      var severity: AlertSeverity = .Info
+      var severity: AlertSeverity = .info
       if let alertSeverity = alertDict["severity"] as? String {
         switch alertSeverity {
         case "alert":
-          severity = .Alert
+          severity = .alert
         case "warning":
-          severity = .Warning
+          severity = .warning
         default:
-          severity = .Info
+          severity = .info
         }
       }
       
@@ -152,15 +151,15 @@ public final class ParatransitInformation: NSObject {
   public let URL: String
   public let number: String
   
-  private init(name: String, URL: String, number: String) {
+  fileprivate init(name: String, URL: String, number: String) {
     self.name = name
     self.URL = URL
     self.number = number
   }
   
-  private class func fromJSONResponse(response: AnyObject?) -> ParatransitInformation? {
-    guard let JSON = response as? [String: AnyObject],
-          let regions = JSON["regions"] as? [[String: AnyObject]],
+  fileprivate class func fromJSONResponse(_ response: Any?) -> ParatransitInformation? {
+    guard let JSON = response as? [String: Any],
+          let regions = JSON["regions"] as? [[String: Any]],
           let region = regions.first,
           let dict = region["paratransit"] as? [String: String],
           let name = dict["name"],
@@ -174,15 +173,15 @@ public final class ParatransitInformation: NSObject {
 }
 
 extension ModeInfo {
-  private class func fromJSONResponse(response: AnyObject?) -> [ModeInfo] {
-    guard let JSON = response as? [String: AnyObject],
-          let regions = JSON["regions"] as? [[String: AnyObject]],
+  fileprivate class func fromJSONResponse(_ response: Any?) -> [ModeInfo] {
+    guard let JSON = response as? [String: Any],
+          let regions = JSON["regions"] as? [[String: Any]],
           let region = regions.first,
-          let array = region["transitModes"] as? [[String: AnyObject]] else {
+          let array = region["transitModes"] as? [[String: Any]] else {
       return []
     }
     
-    return array.flatMap { ModeInfo(forDictionary: $0) }
+    return array.flatMap { ModeInfo(for: $0) }
   }
 }
 
@@ -193,7 +192,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: RegionInformation? -> Void)
+  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (RegionInformation?) -> Void)
   {
     return fetchRegionInfo(
       region,
@@ -207,23 +206,22 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: [TransitAlertInformation]? -> Void) {
+  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TransitAlertInformation]?) -> Void) {
     let paras = [
       "region": region.name
     ]
     
-    SVKServer.sharedInstance().hitSkedGoWithMethod(
-      "GET",
+    SVKServer.sharedInstance().hitSkedGo(
+      withMethod: "GET",
       path: "alerts/transit.json",
       parameters: paras,
       region: region,
       success: { _, response in
-        let result = TransitAlertInformation.alertsFromJSONResponse(response)
+        let result = TransitAlertInformation.alertsFromJSONResponse(response: response)
         completion(result)
       },
       failure: { _ in
-        let result = TransitAlertInformation.alertsFromJSONResponse(nil)
-        completion(result)
+        completion(nil)
     })
   }
   
@@ -233,7 +231,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: ParatransitInformation? -> Void)
+  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (ParatransitInformation?) -> Void)
   {
     return fetchRegionInfo(
       region,
@@ -247,7 +245,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: [ModeInfo] -> Void)
+  public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: @escaping ([ModeInfo]) -> Void)
   {
     return fetchRegionInfo(
       region,
@@ -256,13 +254,13 @@ extension TKBuzzInfoProvider {
     )
   }
 
-  private class func fetchRegionInfo<E>(region: SVKRegion, transformer: AnyObject? -> E, completion: E -> Void)
+  fileprivate class func fetchRegionInfo<E>(_ region: SVKRegion, transformer: @escaping (Any?) -> E, completion: @escaping (E) -> Void)
   {
     let paras = [
       "region": region.name
     ]
-    SVKServer.sharedInstance().hitSkedGoWithMethod(
-      "POST",
+    SVKServer.sharedInstance().hitSkedGo(
+      withMethod: "POST",
       path: "regionInfo.json",
       parameters: paras,
       region: region,
@@ -282,15 +280,15 @@ extension TKBuzzInfoProvider {
    Asynchronously fetches transit alerts for the provided region using Rx.
    */
   public class func rx_fetchTransitAlerts(forRegion region: SVKRegion) -> Observable<[TKAlert]> {
-    let paras: [String: AnyObject] = [
-      "region": region.name
+    let paras: [String: Any] = [
+      "region": region.name as Any
     ]
     
-    return SVKServer.sharedInstance()
-      .rx_hit(.GET, path: "alerts/transit.json", parameters: paras, region: region, repeatHandler: nil)
+    return SVKServer.sharedInstance().rx
+      .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
       .map { (_, response) -> [TKAlert] in
         if let jsonResponse = response?.dictionaryObject {
-          let alerts = TransitAlertInformation.alertsFromJSONResponse(jsonResponse)
+          let alerts = TransitAlertInformation.alertsFromJSONResponse(response: jsonResponse)
           return alerts ?? []
         } else {
           return []
@@ -304,21 +302,21 @@ public struct CarParkInfo {
   public let name: String
   public let availableSpaces: Int?
   public let totalSpaces: Int?
-  public let lastUpdate: NSDate?
+  public let lastUpdate: Date?
 }
 
 public class LocationInformation : NSObject {
   public let what3word: String?
-  public let what3wordInfoURL: NSURL?
+  public let what3wordInfoURL: URL?
   
   public let transitStop: STKStopAnnotation?
   
   public let carParkInfo: CarParkInfo?
   
-  private init(what3word: String?, what3wordInfoURL: String?, transitStop: STKStopAnnotation?, carParkInfo: CarParkInfo?) {
+  fileprivate init(what3word: String?, what3wordInfoURL: String?, transitStop: STKStopAnnotation?, carParkInfo: CarParkInfo?) {
     self.what3word = what3word
     if let URLString = what3wordInfoURL {
-      self.what3wordInfoURL = NSURL(string: URLString)
+      self.what3wordInfoURL = URL(string: URLString)
     } else {
       self.what3wordInfoURL = nil
     }
@@ -341,11 +339,11 @@ public class LocationInformation : NSObject {
 @objc public protocol TKAlert {
   
   var icon: UIImage? { get }
+  var iconURL: URL? { get }
   var title: String { get }
   var text: String? { get }
   var URL: String? { get }
-  var lastUpdated: NSDate? { get }
-  var sourceModel: AnyObject? { get }
+  var lastUpdated: Date? { get }
   
 }
 
@@ -353,9 +351,9 @@ public class LocationInformation : NSObject {
 
 extension CarParkInfo {
   
-  private init?(response: AnyObject?) {
+  fileprivate init?(response: Any?) {
     guard
-      let JSON = response as? [String: AnyObject],
+      let JSON = response as? [String: Any],
     let identifier = JSON["identifier"] as? String,
       let name = JSON["name"] as? String
       else {
@@ -366,8 +364,8 @@ extension CarParkInfo {
     self.name = name
     self.availableSpaces = JSON["availableSpaces"] as? Int
     self.totalSpaces = JSON["totalSpaces"] as? Int
-    if let seconds = JSON["lastUpdate"] as? NSTimeInterval {
-      self.lastUpdate = NSDate(timeIntervalSince1970: seconds)
+    if let seconds = JSON["lastUpdate"] as? TimeInterval {
+      self.lastUpdate = Date(timeIntervalSince1970: seconds)
     } else {
       self.lastUpdate = nil
     }
@@ -377,18 +375,18 @@ extension CarParkInfo {
 
 extension LocationInformation {
   
-  public convenience init?(response: AnyObject?) {
-    guard let JSON = response as? [String: AnyObject] else {
+  public convenience init?(response: Any?) {
+    guard let JSON = response as? [String: Any] else {
       return nil
     }
     
-    let details = JSON["details"] as? [String: AnyObject]
+    let details = JSON["details"] as? [String: Any]
     let what3word = details?["w3w"] as? String
     let what3wordInfoURL = details?["w3wInfoURL"] as? String
     
     let stop: STKStopAnnotation?
-    if let stopJSON = JSON["stop"] as? [String: AnyObject] {
-      stop = TKParserHelper.simpleStopFromDictionary(stopJSON)
+    if let stopJSON = JSON["stop"] as? [String: Any] {
+      stop = TKParserHelper.simpleStop(from: stopJSON)
     } else {
       stop = nil
     }
@@ -406,14 +404,14 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
   */
-  public class func fetchLocationInformation(coordinate: CLLocationCoordinate2D, forRegion region: SVKRegion, completion: (LocationInformation?) -> Void) {
-    let paras: [String: AnyObject] = [
+  public class func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, forRegion region: SVKRegion, completion: @escaping (LocationInformation?) -> Void) {
+    let paras: [String: Any] = [
       "lat": coordinate.latitude,
       "lng": coordinate.longitude
     ]
     
-    SVKServer.sharedInstance().hitSkedGoWithMethod(
-      "GET",
+    SVKServer.sharedInstance().hitSkedGo(
+      withMethod: "GET",
       path: "locationInfo.json",
       parameters: paras,
       region: region,

@@ -122,8 +122,11 @@
     startTime = [segment departureTime];
     endTime = [segment arrivalTime];
   
-  } else if ([segment isPublicTransport] && [segment.service hasServiceData]) {
+  } else if (location && [segment isPublicTransport] && [segment.service hasServiceData]) {
     NSTimeInterval allowedOffset = [segment.service isRealTime] ? 1 * 60 : 3 * 60;
+    
+    // TODO: this needs testing; it seems like these times can be out of whack
+    //       which then sets a 0 score on the segments.
     
     NSArray *visits = [segment.service sortedVisits];
     StopVisits *lastStopBeforeOffset = [visits firstObject];

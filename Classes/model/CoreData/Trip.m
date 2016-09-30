@@ -374,7 +374,7 @@ typedef NSUInteger SGTripFlag;
 
 - (NSNumber *)calculateDuration
 {
-  self.minutes = @([self.arrivalTime minutesSince:self.departureTime]);
+  self.minutes = @([SGKObjcDateHelper minutesForStart:self.departureTime end:self.arrivalTime]);
   return self.minutes;
 }
 
@@ -593,7 +593,7 @@ typedef NSUInteger SGTripFlag;
 - (Alert *)primaryAlert
 {
   for (TKSegment *segment in self.segments) {
-    if ([segment hasAlerts]) {
+    if (segment.alerts.count > 0) {
       return [segment.alerts firstObject];
     }
   }
@@ -691,7 +691,7 @@ typedef NSUInteger SGTripFlag;
 
 - (NSString *)durationString
 {
-  return [self.arrivalTime durationLongSince:self.departureTime];
+  return [SGKObjcDateHelper durationStringLongForStart:self.departureTime end:self.arrivalTime];
 }
 
 - (NSDictionary *)accessibleCostValues

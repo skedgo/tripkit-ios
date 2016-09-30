@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="5HB-nD-Iah" userLabel="No plan view" customClass="TKAgendaWidgetInfoView" customModule="TripGo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="MBY-Em-eNT">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="50x-4G-XHS">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="dFN-fH-Mgl"/>
+                                <constraint firstAttribute="width" constant="60" id="hFc-Mg-sZU"/>
+                            </constraints>
+                        </imageView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="H5g-fa-TpK">
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#No planned trip" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6VK-MC-Gkz">
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="180" placeholderIntrinsicHeight="32" text="#The next trip in Agenda will be shown here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fz-IR-uTv">
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="MBY-Em-eNT" secondAttribute="bottom" constant="8" id="7Ua-9c-7m4"/>
+                <constraint firstAttribute="trailing" secondItem="MBY-Em-eNT" secondAttribute="trailing" constant="16" id="YQc-g4-JQZ"/>
+                <constraint firstItem="MBY-Em-eNT" firstAttribute="leading" secondItem="5HB-nD-Iah" secondAttribute="leading" constant="16" id="ejo-di-pIZ"/>
+                <constraint firstItem="MBY-Em-eNT" firstAttribute="top" secondItem="5HB-nD-Iah" secondAttribute="top" constant="8" id="r5j-Ua-e4g"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageView" destination="50x-4G-XHS" id="oxv-0N-Tyr"/>
+                <outlet property="subtitleLabel" destination="3fz-IR-uTv" id="0H9-dn-jak"/>
+                <outlet property="titleLabel" destination="6VK-MC-Gkz" id="EG5-v2-2bG"/>
+            </connections>
+            <point key="canvasLocation" x="-28" y="28"/>
+        </view>
+    </objects>
+</document>

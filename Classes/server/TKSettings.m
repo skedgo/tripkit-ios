@@ -59,6 +59,9 @@
   if ([sharedDefaults boolForKey:TKDefaultsKeyProfileTransportConcessionPricing]) {
     [paras setValue:@(YES) forKey:@"conc"];
   }
+  if ([sharedDefaults boolForKey:TKDefaultsKeyProfileTransportOnWheelchair]) {
+    [paras setValue:@(YES) forKey:@"wheelchair"];
+  }
   
   // All optional
   [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportWalkSpeed] forKey:@"ws"];

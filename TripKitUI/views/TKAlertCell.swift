@@ -7,8 +7,10 @@
 //
 
 import UIKit
+
 import TripKit
 import RxSwift
+import AFNetworking
 
 class TKAlertCell: UITableViewCell {
 
@@ -25,7 +27,7 @@ class TKAlertCell: UITableViewCell {
   // MARK: -
   
   static var nib: UINib {
-    return UINib(nibName: String(self), bundle: NSBundle(forClass: TKAlertCell.self))
+    return UINib(nibName: String(describing: self), bundle: Bundle(for: TKAlertCell.self))
   }
   
   var alert: TKAlert? {
@@ -36,14 +38,14 @@ class TKAlertCell: UITableViewCell {
   
   private var showStatusView: Bool = true {
     didSet {
-      statusView.hidden = !showStatusView
+      statusView.isHidden = !showStatusView
       statusViewHeight.constant = showStatusView ? CGFloat(40) : CGFloat(0)
     }
   }
   
   private var disposeBag = DisposeBag()
   
-  var tappedOnLink = PublishSubject<NSURL>()
+  var tappedOnLink = PublishSubject<URL>()
   
   // MARK: - Configuration
   
@@ -56,54 +58,56 @@ class TKAlertCell: UITableViewCell {
     
     titleLabel.text = alert.title
     iconView.image = alert.icon
+    if let iconURL = alert.iconURL {
+      iconView.setImageWith(iconURL)
+    }
     
     if let text = alert.text {
-      textView.text = removeStrongTagFromText(text)
+      textView.text = removeStrongTag(from: text)
     }
     
     if let stringURL = alert.URL,
-       let URL = NSURL(string: stringURL) {
-      actionButton.hidden = false
-      actionButton.rx_tap
-        .subscribeNext { [unowned self] in
+       let URL = URL(string: stringURL) {
+      actionButton.isHidden = false
+      actionButton.rx.tap
+        .subscribe(onNext: { [unowned self] in
           self.tappedOnLink.onNext(URL)
-        }
+        })
         .addDisposableTo(disposeBag)
     } else {
-      actionButton.hidden = true
+      actionButton.isHidden = true
     }
     
     if let lastUpdated = alert.lastUpdated {
-      statusLabel.hidden = false
-      statusLabel.text = SGStyleManager.stringForDate(lastUpdated, forTimeZone: NSTimeZone.localTimeZone(), showDate: true, showTime: true)
+      statusLabel.isHidden = false
+      statusLabel.text = SGStyleManager.string(for: lastUpdated, for: NSTimeZone.local, showDate: true, showTime: true)
     } else {
-      statusLabel.hidden = true
+      statusLabel.isHidden = true
     }
     
     // Show the status view if both status label & action
     // button are visible
-    showStatusView = actionButton.hidden == false || statusLabel.hidden == false
+    showStatusView = actionButton.isHidden == false || statusLabel.isHidden == false
   }
   
   private func reset() {
     disposeBag = DisposeBag()
-    tappedOnLink = PublishSubject<NSURL>()
+    tappedOnLink = PublishSubject<URL>()
     
     iconView.image = nil
     titleLabel.text = nil
     textView.text = nil
   }
   
-  private func removeStrongTagFromText(text: String) -> String {
+  private func removeStrongTag(from text: String) -> String {
     // remove strong tag.
-    var massaged = text
-    massaged = removeHTMLMarkdown("<strong>", from: text)
-    massaged = removeHTMLMarkdown("</strong>", from: massaged)
+    var massaged = removeHTMLMarkdown(markdown: "<strong>", from: text)
+    massaged = removeHTMLMarkdown(markdown: "</strong>", from: massaged)
     return massaged
   }
   
   private func removeHTMLMarkdown(markdown: String, from text: String) -> String {
-    return text.stringByReplacingOccurrencesOfString(markdown, withString: "")
+    return text.replacingOccurrences(of: markdown, with: "")
   }
   
   // MARK: -
@@ -111,7 +115,7 @@ class TKAlertCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     SGStyleManager.addDefaultOutline(contentWrapper)
-    actionButton.setTitle(NSLocalizedString("More info", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title of button to get more details about an alert"), forState: .Normal)
+    actionButton.setTitle(NSLocalizedString("More info", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title of button to get more details about an alert"), for: .normal)
   }
   
   override func prepareForReuse() {
@@ -119,10 +123,10 @@ class TKAlertCell: UITableViewCell {
     reset()
   }
   
-  override func setHighlighted(highlighted: Bool, animated: Bool) {
+  override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     super.setHighlighted(highlighted, animated: animated)
-    UIView.animateWithDuration(0.25) {
-      self.contentWrapper.backgroundColor = highlighted ? SGStyleManager.cellSelectionBackgroundColor() : UIColor.whiteColor()
+    UIView.animate(withDuration: 0.25) {
+      self.contentWrapper.backgroundColor = highlighted ? SGStyleManager.cellSelectionBackgroundColor() : UIColor.white
     }
   }
 }

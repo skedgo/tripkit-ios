@@ -56,7 +56,7 @@
 
 + (NSPredicate *)departuresPredicateForStops:(NSArray *)stops
                                     fromDate:(NSDate *)date
-                                      filter:(NSString *)filter
+                                      filter:(nullable NSString *)filter
 {
 	if (filter.length > 0) {
 		return [NSPredicate predicateWithFormat:@"toDelete = NO AND stop IN %@ AND ((departure != nil AND departure > %@) OR (arrival != nil AND arrival > %@)) AND (service.number CONTAINS[c] %@ OR service.name CONTAINS[c] %@ OR stop.shortName CONTAINS[c] %@ OR searchString CONTAINS[c] %@)", stops, date, date, filter, filter, filter, filter];
@@ -187,13 +187,13 @@
   realTime -= (NSInteger)realTime % 60;
   NSTimeInterval timeTable = [self.originalTime timeIntervalSince1970];
   timeTable -= (NSInteger)timeTable % 60;
-  return [NSDate durationStringForMinutes:(NSInteger) fabs(realTime - timeTable) / 60];
+  return [SGKObjcDateHelper durationStringForMinutes:(NSInteger) fabs(realTime - timeTable) / 60];
 }
 
 - (NSDate *)countdownDate
 {
   if (self.service.frequency.integerValue > 0) {
-    return  nil;
+    return nil;
   } else {
     return self.departure;
   }

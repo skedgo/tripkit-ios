@@ -8,8 +8,13 @@
 
 @import MapKit;
 
-@import SGUIKit;
+@import SGCoreUIKit;
+
+#ifndef TK_NO_FRAMEWORKS
 @import TripKit;
+#else
+@class StopVisits, Vehicle;
+#endif
 
 @interface RouteMapManager : ASMapManager <CLLocationManagerDelegate>
 
@@ -40,7 +45,7 @@
  */
 - (void)realTimeUpdateForPrimaryVehicles:(NSArray <Vehicle *> *)primary
                        secondaryVehicles:(NSArray <Vehicle *> *)secondary
-                                   animated:(BOOL)animated;
+                                animated:(BOOL)animated;
 
 - (void)presentRoute;
 

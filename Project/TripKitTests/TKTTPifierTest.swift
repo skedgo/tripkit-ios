@@ -37,7 +37,8 @@ class TKTTPifierTest: XCTestCase {
     ]
     
     let _ = (1...100).map { _ in
-      let sorted = list.shuffle().sort { $0.beforeInList($1) }
+      let shuffled = list.shuffle()
+      let sorted = shuffled.sorted { $0.beforeInList($1) }
       XCTAssert(sorted ~= list)
     }
   }
@@ -53,7 +54,8 @@ class TKTTPifierTest: XCTestCase {
     ]
     
     let _ = (1...100).map { _ in
-      let sorted = list.shuffle().sort { $0.beforeInList($1) }
+      let shuffled = list.shuffle()
+      let sorted = shuffled.sorted { $0.beforeInList($1) }
       XCTAssert(sorted ~= list)
     }
   }
@@ -109,60 +111,62 @@ class TKTTPifierTest: XCTestCase {
 
   func testPerformanceExample() {
     // This is an example of a performance test case.
-    self.measureBlock {
+    self.measure {
       // Put the code you want to measure the time of here.
     }
   }
 
-  private func stay() -> TKAgendaInputItem {
-    let input = TestInput(id: 0, start: NSDate(), startFixed: false, order: 0, isStay: true)
-    return .Event(input)
+  fileprivate func stay() -> TKAgendaInputItem {
+    let input = TestInput(id: 0, start: Date(), startFixed: false, order: 0, isStay: true)
+    return .event(input)
   }
 
-  private func place(id: Int, order: Int? = nil) -> TKAgendaInputItem {
-    let input = TestInput(id: id, start: NSDate(), startFixed: false, order: order, isStay: false)
-    return .Event(input)
+  fileprivate func place(_ id: Int, order: Int? = nil) -> TKAgendaInputItem {
+    let input = TestInput(id: id, start: Date(), startFixed: false, order: order, isStay: false)
+    return .event(input)
   }
 
-  private func game(id: Int, hour: Int, order: Int? = nil) -> TKAgendaInputItem {
-    let input = TestInput(id: id, start: NSDate(timeIntervalSinceNow: Double(hour) * 3600), startFixed: true, order: order, isStay: false)
-    return .Event(input)
+  fileprivate func game(_ id: Int, hour: Int, order: Int? = nil) -> TKAgendaInputItem {
+    let input = TestInput(id: id, start: Date(timeIntervalSinceNow: Double(hour) * 3600), startFixed: true, order: order, isStay: false)
+    return .event(input)
   }
   
   
-  private class TestInput: NSObject, TKAgendaEventInputType {
-    @objc let endDate: NSDate? = nil
+  fileprivate class TestInput: NSObject, TKAgendaEventInputType {
+    @objc let endDate: Date? = nil
     @objc let coordinate = CLLocationCoordinate2D(latitude: 5, longitude: 20)
     @objc let sourceModel: AnyObject? = nil
     
-    @objc let startDate: NSDate?
+    @objc let startDate: Date?
     @objc let identifier: String?
     @objc let fixedOrder: NSNumber?
     @objc let timesAreFixed: Bool
     @objc let isStay: Bool
     
-    init(id: Int, start: NSDate?, startFixed: Bool, order: Int?, isStay: Bool) {
+    init(id: Int, start: Date?, startFixed: Bool, order: Int?, isStay: Bool) {
       self.identifier = "\(id)"
       self.startDate = start
       self.timesAreFixed = startFixed
-      self.fixedOrder = (order != nil) ? NSNumber(integer: order!) : nil
+      self.fixedOrder = (order != nil) ? NSNumber(value: order!) : nil
       self.isStay = isStay
     }
   }
 }
 
-extension CollectionType {
+extension Collection {
   /// Return a copy of `self` with its elements shuffled
-  func shuffle() -> [Generator.Element] {
+  func shuffle() -> [Iterator.Element] {
     var list = Array(self)
     list.shuffleInPlace()
     return list
   }
 }
 
-extension MutableCollectionType where Index == Int {
+extension MutableCollection where Index == Int {
   /// Shuffle the elements of `self` in-place.
   mutating func shuffleInPlace() {
+    guard let count = count as? Int else { preconditionFailure() }
+    
     // empty and single-element collections don't shuffle
     if count < 2 { return }
     
@@ -190,9 +194,9 @@ func ~=(lhs: [TKAgendaInputItem], rhs: [TKAgendaInputItem]) -> Bool {
 
 func ~=(lhs: TKAgendaInputItem, rhs: TKAgendaInputItem) -> Bool {
   switch (lhs, rhs) {
-  case (.Event(let left), .Event(let right)):
+  case (.event(let left), .event(let right)):
     return left ~= right
-  case (.Trip, .Trip):
+  case (.trip, .trip):
     return true
   default:
     return false

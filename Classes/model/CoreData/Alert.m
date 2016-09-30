@@ -108,7 +108,6 @@
 {
   switch (self.alertSeverity) {
     case AlertSeverityInfo:
-      return STKInfoIconTypeNone;
     case AlertSeverityWarning:
       return STKInfoIconTypeWarning;
     case AlertSeverityAlert:

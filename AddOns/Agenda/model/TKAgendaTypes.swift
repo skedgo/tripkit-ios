@@ -20,20 +20,20 @@ import SGCoreKit
  It is typically creating from user-specified input and then combined with smarts about travelling between events and suggesting order in which to do things; this plan is encapsulated in the `items` sequence.
  */
 public protocol TKAgendaType {
-  var startDate: NSDate { get }
-  var endDate: NSDate { get }
+  var startDate: Date { get }
+  var endDate: Date { get }
   var triggerRebuild: Variable<Bool> { get }
   var inputItems: Observable<[TKAgendaInputItem]> { get }
   var outputItems: Observable<[TKAgendaOutputItem]?> { get }
-  var lastError: Observable<ErrorType?> { get }
+  var lastError: Observable<Error?> { get }
 }
 
 public enum TKAgendaInputItem {
-  case Event(TKAgendaEventInputType)
-  case Trip(TKAgendaTripInputType)
+  case event(TKAgendaEventInputType)
+  case trip(TKAgendaTripInputType)
   
   var isStay: Bool {
-    if case let .Event(eventInput) = self {
+    if case let .event(eventInput) = self {
       return eventInput.isStay
     } else {
       return false
@@ -41,9 +41,9 @@ public enum TKAgendaInputItem {
   }
   
   var fixedOrder: Int? {
-    if case let .Event(eventInput) = self,
+    if case let .event(eventInput) = self,
        let number = eventInput.fixedOrder {
-      return number.integerValue
+      return number.intValue
     } else {
       return nil
     }
@@ -53,9 +53,9 @@ public enum TKAgendaInputItem {
     let timesAreFixed: Bool
     
     switch self {
-    case .Event(let eventInput):
+    case .event(let eventInput):
       timesAreFixed = eventInput.timesAreFixed
-    case .Trip:
+    case .trip:
       timesAreFixed = true
     }
     
@@ -64,36 +64,36 @@ public enum TKAgendaInputItem {
 
   }
   
-  var startTime: NSDate? {
+  var startTime: Date? {
     switch self {
-    case .Event(let eventInput):
+    case .event(let eventInput):
       return eventInput.startDate
-    case .Trip(let trip):
+    case .trip(let trip):
       return trip.departureTime
     }
   }
   
-  var endTime: NSDate? {
+  var endTime: Date? {
     switch self {
-    case .Event(let eventInput):
+    case .event(let eventInput):
       return eventInput.endDate
-    case .Trip(let trip):
+    case .trip(let trip):
       return trip.arrivalTime
     }
   }
   
   var start: CLLocationCoordinate2D {
     switch self {
-    case .Event(let eventInput):
+    case .event(let eventInput):
       return eventInput.coordinate
-    case .Trip(let tripInput):
+    case .trip(let tripInput):
       return tripInput.origin
     }
   }
   
   func needsTrip(to other: TKAgendaInputItem) -> Bool {
-    if case .Trip = self,
-      case .Trip = other {
+    if case .trip = self,
+      case .trip = other {
       return false
     } else {
       return true
@@ -103,8 +103,8 @@ public enum TKAgendaInputItem {
 
 @objc
 public protocol TKAgendaEventInputType {
-  var startDate: NSDate? { get }
-  var endDate: NSDate? { get }
+  var startDate: Date? { get }
+  var endDate: Date? { get }
 
   /**
    The coordinate where this input takes place. The agenda will try to route here. Invalid coordinates will be ignored.
@@ -129,20 +129,20 @@ public protocol TKAgendaEventInputType {
 }
 
 extension TKAgendaEventInputType {
-  public func equalsForAgenda(other: TKAgendaEventInputType) -> Bool {
+  public func equalsForAgenda(_ other: TKAgendaEventInputType) -> Bool {
     // We only care about the ID and user-modifiable fields
     return startDate == other.startDate
       && endDate == other.endDate
       && identifier == other.identifier
-      && fixedOrder?.integerValue == other.fixedOrder?.integerValue
+      && fixedOrder?.intValue == other.fixedOrder?.intValue
   }
 }
 
 
 @objc
 public protocol TKAgendaTripInputType: NSObjectProtocol {
-  var departureTime: NSDate { get }
-  var arrivalTime: NSDate { get }
+  var departureTime: Date { get }
+  var arrivalTime: Date { get }
   
   var origin: CLLocationCoordinate2D { get }
   var destination: CLLocationCoordinate2D { get }
@@ -159,16 +159,16 @@ public protocol TKAgendaTripInputType: NSObjectProtocol {
 }
 
 public enum TKAgendaOutputItem {
-  case Event(TKAgendaEventOutput)
-  case StayPlaceholder
+  case event(TKAgendaEventOutput)
+  case stayPlaceholder
 
-  case Trip(TKAgendaTripOutput)
-  case TripOptions([TKAgendaTripOptionType])
+  case trip(TKAgendaTripOutput)
+  case tripOptions([TKAgendaTripOptionType])
   
   /**
    Placeholder for where a trip will likely be. First date is predicted start date, second date is predicted end date.
    */
-  case TripPlaceholder(NSDate?, NSDate?, String)
+  case tripPlaceholder(Date?, Date?, String)
 }
 
 public class TKAgendaEventOutput: NSObject {
@@ -180,7 +180,7 @@ public class TKAgendaEventOutput: NSObject {
 }
 
 extension TKAgendaEventOutput {
-  func equalsForAgenda(other: TKAgendaEventOutput) -> Bool {
+  func equalsForAgenda(_ other: TKAgendaEventOutput) -> Bool {
     return input.equalsForAgenda(other.input)
   }
 }
@@ -241,26 +241,26 @@ public protocol TKAgendaTripOptionSegmentType: STKTripSegmentDisplayable, STKDis
 public protocol TKAgendaTripOptionType {
   var segments: [TKAgendaTripOptionSegmentType] { get }
   var usedModes: [ModeIdentifier] { get }
-  var duration: TKAgendaValue<NSTimeInterval> { get }
+  var duration: TKAgendaValue<TimeInterval> { get }
   var score: TKAgendaValue<Double> { get }
 
   var price: TKAgendaValue<PriceUnit>? { get }
   var distance: DistanceUnit? { get }
   
-  var earliestDeparture: NSTimeInterval? { get }
-  var latestDeparture: NSTimeInterval? { get }
+  var earliestDeparture: TimeInterval? { get }
+  var latestDeparture: TimeInterval? { get }
 }
 
 extension TKAgendaTripOptionType {
   var price: TKAgendaValue<PriceUnit>? { return nil }
   var distance: DistanceUnit? { return nil }
   
-  var earliestDeparture: NSTimeInterval? { return nil }
-  var latestDeparture: NSTimeInterval? { return nil }
+  var earliestDeparture: TimeInterval? { return nil }
+  var latestDeparture: TimeInterval? { return nil }
   
   var segments: [TKAgendaTripOptionSegmentType] {
     return usedModes.map { mode -> TKMinimalSegment in
-      let image = SVKTransportModes.imageForModeIdentifier(mode)
+      let image = SVKTransportModes.image(forModeIdentifier: mode)
       return TKMinimalSegment(modeImage: image)
     }
   }
@@ -269,11 +269,11 @@ extension TKAgendaTripOptionType {
 private class TKMinimalSegment: NSObject, TKAgendaTripOptionSegmentType {
   @objc let tripSegmentModeImage: UIImage?
   
-  @objc private func routePath() -> [AnyObject] {
+  @objc fileprivate func routePath() -> [Any] {
     return []
   }
   
-  @objc private func routeColour() -> UIColor? {
+  @objc fileprivate func routeColour() -> UIColor? {
     return nil
   }
   

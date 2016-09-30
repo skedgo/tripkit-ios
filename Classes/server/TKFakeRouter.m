@@ -25,7 +25,9 @@
 
   NSDictionary* json = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
 
-  [self.parser parseAndAddResult:json forRequest:request merging:NO completion:nil];
+  [self.parser parseAndAddResult:json forRequest:request merging:NO completion:^(NSArray<Trip *> * _Nonnull addedTrips) {
+    // nothing to do
+  }];
 }
 
 - (void)fakedRequestTime:(NSTimer *)timer 

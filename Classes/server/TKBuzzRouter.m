@@ -204,7 +204,7 @@
             [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
               __block NSString *result = nil;
               [updatedTrip.managedObjectContext performBlockAndWait:^{
-                result = [NSString stringWithFormat:@"Updated trip (%d): %@", updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
+                result = [NSString stringWithFormat:@"Updated trip (%ld): %@", (long)updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
               }];
               return result;
             }];
@@ -217,7 +217,7 @@
           [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
             __block NSString *result = nil;
             [trip.managedObjectContext performBlockAndWait:^{
-              result = [NSString stringWithFormat:@"No update for trip (%d): %@", trip.tripGroup.visibility, [trip debugString]];
+              result = [NSString stringWithFormat:@"No update for trip (%ld): %@", (long)trip.tripGroup.visibility, [trip debugString]];
             }];
             return result;
           }];
@@ -547,6 +547,11 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   [parser parseAndAddResult:json
                  completion:
    ^(TripRequest *request) {
+     if (!request) {
+       completion(nil);
+       return;
+     }
+     
      // make sure we save
      ZAssert(request.managedObjectContext == tripKitContext, @"Context mismatch.");
      NSError *publicError = nil;
@@ -574,8 +579,8 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 	[paras setValue:sortedModes forKey:@"modes"];
 	
   // locations
-  NSString *fromString = [STKParserHelper requestStringForCoordinate:[request.fromLocation coordinate]];
-  NSString *toString = [STKParserHelper requestStringForCoordinate:[request.toLocation coordinate]];
+  NSString *fromString = [STKParserHelper requestStringForAnnotation:request.fromLocation];
+  NSString *toString = [STKParserHelper requestStringForAnnotation:request.toLocation];
 	[paras setValue:fromString forKey:@"from"];
 	[paras setValue:toString forKey:@"to"];
 

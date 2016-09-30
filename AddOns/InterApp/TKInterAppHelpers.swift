@@ -9,11 +9,10 @@
 import Foundation
 
 import class CoreLocation.CLGeocoder
-//import class Contacts.CNPostalAddressFormatter
 import func AddressBookUI.ABCreateStringWithAddressDictionary
 
 extension CLGeocoder {
-  public func reverseGeocodeAddress(forCoordinate coordinate: CLLocationCoordinate2D, completion: (NSString?) -> ()) {
+  public func reverseGeocodeAddress(forCoordinate coordinate: CLLocationCoordinate2D, completion: @escaping (String?) -> ()) {
     
     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     reverseGeocodeLocation(location) { placemarks, error in
@@ -25,7 +24,7 @@ extension CLGeocoder {
       for placemark in placemarks {
         if let addressDictionary = placemark.addressDictionary {
           let address = ABCreateStringWithAddressDictionary(addressDictionary, true)
-          let oneLine = address.stringByReplacingOccurrencesOfString("\n", withString: ", ")
+          let oneLine = address.replacingOccurrences(of: "\n", with: ", ")
           completion(oneLine)
           return
         }

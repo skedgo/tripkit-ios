@@ -10,14 +10,16 @@
 
 @class TripRequest, TripGroup, Trip;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TKRoutingParser : NSObject
 
 - (id)initWithTripKitContext:(NSManagedObjectContext *)context;
 
-- (TripRequest *)parseAndAddResultBlocking:(NSDictionary *)json;
+- (nullable TripRequest *)parseAndAddResultBlocking:(NSDictionary *)json;
 
 - (void)parseAndAddResult:(NSDictionary *)json
-               completion:(void (^)(TripRequest *request))completion;
+               completion:(void (^)(TripRequest * _Nullable request))completion;
 
 - (void)parseAndAddResult:(NSDictionary *)json
             intoTripGroup:(TripGroup *)tripGroup
@@ -41,21 +43,13 @@
  */
 - (void)parseAndAddResult:(NSDictionary<id<NSCopying>, NSArray<NSDictionary *> *> *)keyToTripGroups
      withSegmentTemplates:(NSArray<NSDictionary *> *)segmentTemplatesJson
-                andAlerts:(NSArray<NSDictionary *> *)alertJson
+                andAlerts:(nullable NSArray<NSDictionary *> *)alertJson
                completion:(void (^)(NSDictionary *keyToAddedTrips))completion;
 
 - (void)parseJSON:(NSDictionary *)json
      updatingTrip:(Trip *)trip
        completion:(void (^)(Trip *updatedTrip))completion;
 
-/**
- Helper method to fill in a request wich the specified location. Typically used on requests that were created as part of a previous call to `parseAndAddResult`. All parameters except `request` are optional.
- 
- @return If the request was populated successfully. This fails if the request has no trips.
- */
-+ (BOOL)populateRequestWithTripInformation:(TripRequest *)request
-                              fromLocation:(id<MKAnnotation>)fromOrNil
-                                toLocation:(id<MKAnnotation>)toOrNil
-                                leaveAfter:(NSDate *)leaveAfter
-                                  arriveBy:(NSDate *)arriveBy;
 @end
+
+NS_ASSUME_NONNULL_END

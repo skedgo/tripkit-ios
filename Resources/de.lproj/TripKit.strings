@@ -10,14 +10,23 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ spät (%2$@ Service)";
 
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ fahrradfreundlich";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ ohne Verkehr";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ rollstuhlfreundlich";
 
 /* No comment provided by engineer. */
 "1 stop" = "1 Stop";
 
 /* Indication of an activity */
 "ActivityIndication" = "Ich nehme den %@ um %@ von %@.";
+
+/* No comment provided by engineer. */
+"Alerts" = "Warnungen";
 
 /* apple maps directions action */
 "Apple Maps" = "Apple Karten";
@@ -31,13 +40,16 @@
 /* The place of arrival with time */
 "ArrivalLocationTime" = "Ankunft bei %@ um %@";
 
-/* Arrival %time.
-   Time arrival */
+/* 'Arrive at %@', where '%@' will be replace with the arrival time.
+   Arrival %time. */
 "ArrivalTime" = "Ankunft um %@";
 
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
 "Arrive" = "Ankunft";
+
+/* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
+"Arrive in" = "Ankunft";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "Mit FlitWays buchen";
@@ -87,9 +99,18 @@
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
+/* %@ is replaced with app name */
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "In the meantime, let's keep exploring %@ and enjoy your trips";
+
+/* No comment provided by engineer. */
+"In the meantime, let's keep exploring and enjoy your trips" = "In the meantime, let's keep exploring and enjoy your trips";
+
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
 "Leave" = "Abfahrt";
+
+/* Title for when to depart. Countdown to departure will be displayed below. */
+"Leave in" = "Abfahrt";
 
 /* No comment provided by engineer. */
 "Leave now" = "Jetzt";
@@ -106,8 +127,17 @@
 /* No comment provided by engineer. */
 "Live traffic" = "Live-Verkehr";
 
+/* Title to show while loading/waiting for results */
+"Loading..." = "Laden...";
+
 /* ArrivalTime */
 "MessageArrivalTime" = "Ich komme bei %@ um %@ an.";
+
+/* Title of button to get more details about an alert */
+"More info" = "Mehr Infos";
+
+/* Indicating no trips have been planned within 24 hrs */
+"No planned trips" = "Keine Routen geplant";
 
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Pünktlich";
@@ -118,8 +148,10 @@
 /* No comment provided by engineer. */
 "Open Ola" = "Ola öffnen";
 
-/* Arrival Location
-   For trip titles, e.g., 'To work' */
+/* No comment provided by engineer. */
+"Plan a trip in TripGo and it will show up here." = "Plan a trip in TripGo and it will show up here.";
+
+/* Arrival Location */
 "PrimaryLocationEnd" = "Nach %@";
 
 /* Departure Location */
@@ -154,6 +186,12 @@
 
 /* Vehicle updated */
 "VehicleUpdated" = "Aktualisiert vor %@";
+
+/* No comment provided by engineer. */
+"We are busy getting your upcoming trip. Please wait..." = "Anstehende Trips werden berechnet. Bitte warten...";
+
+/* No comment provided by engineer. */
+"We'll keep you updated with the latest transit alerts here" = "We'll keep you updated with the latest transit alerts here";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch nehmen";

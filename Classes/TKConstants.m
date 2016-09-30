@@ -14,12 +14,12 @@ NSString *const TKDefaultsKeyProfileWeightCarbon    = @"weightCarbon";
 NSString *const TKDefaultsKeyProfileWeightHassle    = @"weightHassle";
 NSString *const TKDefaultsKeyProfileWeightMoney     = @"weightPrice";
 NSString *const TKDefaultsKeyProfileWeightTime      = @"weightTime";
-NSString *const TKDefaultsKeyProfileTransportWalkSpeed = @"profileTransportWalkSpeed";
+NSString *const TKDefaultsKeyProfileTransportWalkSpeed    = @"profileTransportWalkSpeed";
 NSString *const TKDefaultsKeyProfileTransportWalkMaxDuration = @"profileTransportWalkMax";
 NSString *const TKDefaultsKeyProfileTransportCyclingSpeed	= @"profileTransportCycleSpeed";
 NSString *const TKDefaultsKeyProfileTransportTransferTime = @"profileTransportTransferTime";
 NSString *const TKDefaultsKeyProfileTransportConcessionPricing = @"profileTransportConcessionPricing";
-NSString *const TKDefaultsKeyProfileTransportEmissions = @"profileTransportEmissions";
+NSString *const TKDefaultsKeyProfileTransportEmissions    = @"profileTransportEmissions";
+NSString *const TKDefaultsKeyProfileTransportOnWheelchair          = @"profileOnWheelchair";
 
-
-NSString *const TKDefaultsKeyProfileBookingsUseSandbox = @"profileBookingsUseSandbox";
+NSString *const TKDefaultsKeyProfileBookingsUseSandbox    = @"profileBookingsUseSandbox";

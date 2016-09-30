@@ -23,21 +23,23 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 
 @class Service, Shape, StopLocation;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface StopVisits : NSManagedObject <STKDirectionalTimePoint, TKRealTimeUpdatable, UIActivityItemSource>
 
-@property (nonatomic, retain) NSDate * arrival;
-@property (nonatomic, retain) NSNumber * bearing;
-@property (nonatomic, retain) NSDate * departure;
-@property (nonatomic, retain) NSDate * originalTime;
+@property (nonatomic, retain, nullable) NSDate * arrival;
+@property (nonatomic, retain, nullable) NSNumber * bearing;
+@property (nonatomic, retain, nullable) NSDate * departure;
+@property (nonatomic, retain, nullable) NSDate * originalTime;
 @property (nonatomic, retain) NSNumber * flags;
 @property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSNumber * isActive;
-@property (nonatomic, retain) NSDate * regionDay;
-@property (nonatomic, retain) NSString * searchString;
+@property (nonatomic, retain, nullable) NSDate * regionDay;
+@property (nonatomic, retain, nullable) NSString * searchString;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain) Service *service;
 @property (nonatomic, retain) StopLocation *stop;
-@property (nonatomic, retain) NSSet *shapes;
+@property (nonatomic, retain, nullable) NSSet *shapes;
 
 // KVO
 @property (nonatomic, strong) NSDate *time;
@@ -51,7 +53,7 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 
 + (NSPredicate *)departuresPredicateForStops:(NSArray<StopLocation *> *)stops
                                     fromDate:(NSDate *)date
-                                      filter:(NSString *)filter;
+                                      filter:(nullable NSString *)filter;
 
 - (void)adjustRegionDay;
 
@@ -62,9 +64,9 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 
 - (StopVisitRealTime)realTimeStatus;
 
-- (NSString *)realTimeInformation:(BOOL)withOriginalTime;
+- (nullable NSString *)realTimeInformation:(BOOL)withOriginalTime;
 
-- (NSDate *)countdownDate;
+- (nullable NSDate *)countdownDate;
 
 - (SGKGrouping)groupingWithPrevious:(StopVisits *)previous
                               next:(StopVisits *)next;
@@ -90,3 +92,5 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 - (void)removeShapes:(NSSet *)values;
 
 @end
+
+NS_ASSUME_NONNULL_END

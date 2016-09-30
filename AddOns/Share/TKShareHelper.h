@@ -27,10 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
                          atTime:(NSDate *)time
                         baseURL:(NSString *)baseURL;
 
-+ (void)meetingDetailsForURL:(NSURL *)url
-               usingGeocoder:(id<SGGeocoder>)geocoder
-                     details:(void (^)(CLLocationCoordinate2D coordinate, NSString * _Nullable name, NSDate *time))detailBlock;
-
 
 #pragma mark - Query URL
 
@@ -47,12 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
                        time:(nullable NSDate *)time
                     baseURL:(NSString *)baseURL;
 
-+ (BOOL)queryDetailsForURL:(NSURL *)url
-             usingGeocoder:(id<SGGeocoder>)geocoder
-                   success:(void (^)(CLLocationCoordinate2D start, CLLocationCoordinate2D end, NSString * _Nullable name, SGTimeType timeType, NSDate * _Nullable time))success
-                   failure:(void (^)())failure;
-
-
 #pragma mark - Stops
 
 + (BOOL)isStopURL:(NSURL *)url;
@@ -65,9 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
                 inRegionNamed:(NSString *)regionName
                        filter:(NSString *)filter
                       baseURL:(NSString *)baseURL;
-
-+ (BOOL)stopDetailsForURL:(NSURL *)url
-                  details:(void (^)(NSString *stopCode, NSString *regionName, NSString * _Nullable filter))detailBlock;
 
 #pragma mark - Services
 

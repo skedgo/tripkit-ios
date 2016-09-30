@@ -16,6 +16,6 @@
 
 // agenda building
 #import "TKAgendaInputBuilder.h"
-#import "TKSkedgoifier.h"
+//#import "TKSkedgoifier.h"
 
 #endif /* TripKitAgenda_h */

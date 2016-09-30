@@ -101,7 +101,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)disclaimer;
 - (BOOL)isCanceled;
 - (BOOL)timesAreRealTime;
-- (Vehicle *)realTimeVehicle;
+- (nullable Vehicle *)realTimeVehicle;
 - (NSArray <Vehicle *> *)realTimeAlternativeVehicles;
 
 - (BOOL)usesVehicle;
@@ -132,9 +132,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)modeIdentifier;
 - (nullable ModeInfo *)modeInfo;
 
-- (BOOL)hasAlerts;
+/**
+ @return All alerts for this segment
+ */
 - (NSArray<Alert *> *)alerts;
+
+/**
+ @return Alerts that also have a location associated with them
+ */
 - (NSArray<Alert *> *)alertsWithLocation;
+
+/**
+ @return Alerts that have content, such as a description or URL
+ */
+- (NSArray<Alert *> *)alertsWithContent;
 
 - (TKSegment *)finalSegmentIncludingContinuation;
 

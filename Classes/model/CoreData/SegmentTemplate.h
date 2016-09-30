@@ -64,6 +64,7 @@
 
 - (BOOL)isPublicTransport;
 - (BOOL)isWalking;
+- (BOOL)isWheelchair;
 - (BOOL)isCycling;
 - (BOOL)isDriving;
 - (BOOL)isStationary;
