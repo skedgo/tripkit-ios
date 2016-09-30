@@ -19,4 +19,4 @@ before_install:
   - pod --version
 
 # We use xcodebuild rather than xctool as xctool doesn't play nicely with network requests
-script: set -o pipefail && xcodebuild test -workspace Project/TripKit.xcworkspace -scheme TripKit -sdk iphonesimulator | xcpretty
+script: set -o pipefail && xcodebuild test -workspace Project/TripKit.xcworkspace -scheme TripKit -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7' | xcpretty
