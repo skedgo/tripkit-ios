@@ -11,7 +11,9 @@ cache: cocoapods
 
 before_install:
   - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
-  - gem install xcpretty
+  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+  - gem install cocoapods
+  - pod --version
 
 # We use xcodebuild rather than xctool as xctool doesn't play nicely with network requests
 script: set -o pipefail && xcodebuild test -workspace Project/TripKit.xcworkspace -scheme TripKit -sdk iphonesimulator | xcpretty
