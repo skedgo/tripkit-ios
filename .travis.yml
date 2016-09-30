@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8.0
+osx_image: xcode8
 xcode_sdk: iphonesimulator10.0
 xcode_workspace: Project/TripKit.xcworkspace
 xcode_scheme:
@@ -8,9 +8,12 @@ xcode_scheme:
 # Non-standard Podfile and opt-into caching of pods
 podfile: Project/Podfile
 cache: cocoapods
+rvm:
+  - 2.2.1 # See https://docs.travis-ci.com/user/osx-ci-environment/
 
 before_install:
   - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
+  - brew update
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
   - gem install cocoapods
   - pod --version
