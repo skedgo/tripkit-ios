@@ -26,7 +26,7 @@ class TKEmptyAlertView: UIView {
   
   class func makeView() -> TKEmptyAlertView {
     let bundle = NSBundle(forClass: TKEmptyAlertView.self)
-    return bundle.loadNibNamed(String(self), owner: self, options: nil).first as! TKEmptyAlertView
+    return bundle.loadNibNamed(String(self), owner: self, options: nil)?.first as! TKEmptyAlertView
   }
   
 }

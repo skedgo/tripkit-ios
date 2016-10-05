@@ -62,18 +62,19 @@ public class TKJSONCache: NSObject {
     }
     
     let pathURL: NSURL
-    if let subdirectory = subdirectory {
-      pathURL = path.URLByAppendingPathComponent(subdirectory, isDirectory: true)
+    if let subdirectory = subdirectory,
+       let subdirectoryURL = path.URLByAppendingPathComponent(subdirectory, isDirectory: true) {
       do {
-        try fileMan.createDirectoryAtURL(pathURL, withIntermediateDirectories: true, attributes: nil)
+        pathURL = subdirectoryURL
+        try fileMan.createDirectoryAtURL(subdirectoryURL, withIntermediateDirectories: true, attributes: nil)
       } catch {
-        SGKLog.warn("TKJSONCache", text: "Could not create directory \(pathURL), due to: \(error)")
+        SGKLog.warn("TKJSONCache", text: "Could not create directory \(subdirectoryURL), due to: \(error)")
       }
     } else {
       pathURL = path
     }
     
     let file = "\(filename).cache"
-    return pathURL.URLByAppendingPathComponent(file)
+    return pathURL.URLByAppendingPathComponent(file)!
   }
 }
