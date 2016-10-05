@@ -77,9 +77,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray <NSString *> *)applicableModeIdentifiers;
 
-- (NSTimeZone *)departureTimeZone;
+- (nullable NSTimeZone *)departureTimeZone;
 
-- (NSTimeZone *)arrivalTimeZone;
+- (nullable NSTimeZone *)arrivalTimeZone;
 
 - (NSString *)timeSorterTitle;
 
