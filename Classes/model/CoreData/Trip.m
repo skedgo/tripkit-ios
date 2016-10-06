@@ -744,12 +744,12 @@ typedef NSUInteger SGTripFlag;
 
 - (NSTimeZone *)departureTimeZone
 {
-  return [self.request departureTimeZone];
+  return [self.request departureTimeZone] ?: [NSTimeZone defaultTimeZone];
 }
 
-- (NSTimeZone *)arrivalTimeZone
+- (nullable NSTimeZone *)arrivalTimeZone
 {
-  return [self.request arrivalTimeZone];
+  return [self.request arrivalTimeZone]; // Null is ok
 }
 
 - (NSString *)tripPurpose
