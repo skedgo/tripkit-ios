@@ -204,11 +204,11 @@ extension Reactive where Base: SVKRegion {
    - parameter remoteURL: URL for linking from `ProviderAuth.actionURL`.
    - returns: Observable indicating success.
    */
-  public func linkAccount(_ mode: String, remoteURL: URL, presenter: UIViewController) -> Observable<Bool> {
+  public func linkAccount(_ mode: String, remoteURL: URL, presenter: UIViewController, authenticator: SSOAuthenticator? = nil) -> Observable<Bool> {
     return OAuthClient.requiresOAuth(remoteURL)
       .flatMap { form, isOAuth -> Observable<Bool> in
         if isOAuth {
-          return OAuthClient.performOAuth(mode, form: form)
+          return OAuthClient.performOAuth(mode, form: form, authenticator: authenticator)
             .map { form in form == nil } // No further input required
         } else {
           var manager: MiniBookingManager! = MiniBookingManager(withForm: form)
