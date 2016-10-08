@@ -28,13 +28,13 @@ public class TKDepartureView: UIView {
     let segments = trip.segments(with: .inSummary)
     tripSegmentView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: true)
     
-    imageView.image = destination.trackIcon?()
-    destinationTitle.text = destination.title()
+    imageView.image = destination.trackIcon
+    destinationTitle.text = destination.title
     
-    if let start = destination.startDate() {
+    if let start = destination.startDate {
       destinationTimes.isHidden = false
       
-      let duration = destination.duration()
+      let duration = destination.duration
       if duration == -1 {
         let format = NSLocalizedString("ArrivalTime", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "'Arrive at %@', where '%@' will be replace with the arrival time.")
         destinationTimes.text = String(format: format, SGStyleManager.timeString(start, for: nil))
