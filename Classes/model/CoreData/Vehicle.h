@@ -13,22 +13,23 @@
 
 @class Service, SegmentReference;
 
-@interface Vehicle : NSManagedObject <STKDisplayablePoint>
+@interface Vehicle : NSManagedObject
 
 // Core Data
 
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSDate * lastUpdate;
+@property (nonatomic, retain) NSNumber * occupancyRaw;
+@property (nonatomic, retain, nullable) NSDate * lastUpdate;
 @property (nonatomic, retain) NSNumber * bearing;
-@property (nonatomic, retain) NSString * label;
+@property (nonatomic, retain, nullable) NSString * label;
 @property (nonatomic, retain) NSString * identifier;
 @property (nonatomic, retain) NSString * icon;
 @property (nonatomic, assign) BOOL toDelete;
-@property (nonatomic, retain) Service *service;
-@property (nonatomic, retain) NSSet *serviceAlternatives;
-@property (nonatomic, retain) SegmentReference *segment;
-@property (nonatomic, retain) NSSet *segmentAlternatives;
+@property (nonatomic, retain, nullable) Service *service;
+@property (nonatomic, retain) NSSet<Service *> *serviceAlternatives;
+@property (nonatomic, retain, nullable) SegmentReference *segment;
+@property (nonatomic, retain) NSSet<SegmentReference *> *segmentAlternatives;
 
 // Non-persistent
 
@@ -38,12 +39,6 @@
 
 - (void)remove;
 
-- (NSString *)serviceNumber;
-
-- (UIColor *)serviceColor;
-
 - (void)setSubtitle:(NSString *)title;
-
-- (CGFloat)ageFactor;
 
 @end

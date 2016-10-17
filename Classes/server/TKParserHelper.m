@@ -9,6 +9,7 @@
 #import "TKParserHelper.h"
 
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 @implementation TKParserHelper
 
@@ -116,30 +117,6 @@
       }
     }
   }
-}
-
-+ (Vehicle *)insertNewVehicle:(NSDictionary *)vehicleDict
-             inTripKitContext:(NSManagedObjectContext *)context
-{
-  ZAssert(nil != vehicleDict, @"Empty vehicle dict!");
-  Vehicle *vehicle = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Vehicle class]) inManagedObjectContext:context];
-  
-  [self updateVehicle:vehicle fromDictionary:vehicleDict];
-  
-  return vehicle;
-}
-
-+ (void)updateVehicle:(Vehicle *)vehicle fromDictionary:(NSDictionary *)vehicleDict
-{
-  vehicle.identifier = vehicleDict[@"id"];
-  vehicle.label = vehicleDict[@"label"];
-  vehicle.lastUpdate = [NSDate dateWithTimeIntervalSince1970:[vehicleDict[@"lastUpdate"] integerValue]];
-  vehicle.icon = vehicleDict[@"icon"];
-  
-  NSDictionary *location = vehicleDict[@"location"];
-  vehicle.latitude = location[@"lat"];
-  vehicle.longitude = location[@"lng"];
-  vehicle.bearing = location[@"bearing"];
 }
 
 + (StopLocation *)insertNewStopLocation:(NSDictionary *)stopDict
