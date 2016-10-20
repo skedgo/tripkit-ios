@@ -376,7 +376,7 @@ typedef NSUInteger SGServiceFlag;
 
 	NSArray *sortedVisits = self.sortedVisits;
 	if (sortedVisits.count < 1) {
-		return NO;
+		return YES; // just ask anyway
 	} else {
 		StopVisits *first = [self.sortedVisits objectAtIndex:0];
 		StopVisits *last  = [self.sortedVisits lastObject];

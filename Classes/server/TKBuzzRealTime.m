@@ -293,15 +293,14 @@
         service.realTime = YES;
 
       } else if (dls) {
+        NSTimeInterval previousDuration = [dls.arrival timeIntervalSinceDate:dls.departure];
         dls.departure = departure;
         NSNumber *endTime = serviceDict[@"endTime"];
-        if (! endTime)
-          continue;
-        if (endTime.integerValue <= 0) {
-          ZAssert(false, @"Bad start time '%@' in response object:\n%@", endTime, responseObject);
-          continue;
+        if (endTime && endTime.integerValue > 0) {
+          dls.arrival = [NSDate dateWithTimeIntervalSince1970:endTime.integerValue];
+        } else {
+          dls.arrival = [dls.departure dateByAddingTimeInterval:previousDuration];
         }
-        dls.arrival = [NSDate dateWithTimeIntervalSince1970:endTime.integerValue];
         service.realTime = YES;
       }
 			
