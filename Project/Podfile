@@ -12,8 +12,8 @@ def shared_pods
   pod 'SGUIKit',        git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
   pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
   
-  pod 'RxSwift',        git: 'https://github.com/ReactiveX/RxSwift.git'
-  pod 'RxCocoa',        git: 'https://github.com/ReactiveX/RxSwift.git'
+  pod 'RxSwift',        '~> 3.0'
+  pod 'RxCocoa',        '~> 3.0'
 
   pod 'AFNetworking'
   pod 'SGPulsingAnnotationView'
@@ -29,6 +29,6 @@ end
 target 'TripKitTests' do
   shared_pods
   
-  pod 'RxBlocking',    git: 'https://github.com/ReactiveX/RxSwift.git'
-  pod 'RxTests',       git: 'https://github.com/ReactiveX/RxSwift.git'
+  pod 'RxBlocking',    '~> 3.0'
+  pod 'RxTest',        '~> 3.0'
 end
