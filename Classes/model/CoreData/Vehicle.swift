@@ -66,11 +66,11 @@ extension Vehicle {
   }
   
   fileprivate var anyService: Service? {
-    return service ?? serviceAlternatives?.first
+    return service ?? serviceAlternatives.first
   }
   
   fileprivate var anySegmentReference: SegmentReference? {
-    return segment ?? segmentAlternatives?.first
+    return segment ?? segmentAlternatives.first
   }
 }
 
