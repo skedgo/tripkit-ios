@@ -22,6 +22,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'SGCoreKit/Core'
   s.dependency 'SGCoreKit/Rx'
+  s.dependency 'Marshal'
   s.source_files = "Classes/**/*.{h,m,swift}"
   s.resources    = [
     "Resources/*",

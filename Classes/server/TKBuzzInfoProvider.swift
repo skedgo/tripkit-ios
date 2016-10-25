@@ -8,7 +8,7 @@
 
 import Foundation
 import RxSwift
-import SwiftyJSON
+import Marshal
 
 public final class RegionInformation: NSObject {
   
@@ -287,8 +287,8 @@ extension TKBuzzInfoProvider {
     return SVKServer.sharedInstance().rx
       .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
       .map { (_, response) -> [TKAlert] in
-        if let jsonResponse = response?.dictionaryObject {
-          let alerts = TransitAlertInformation.alertsFromJSONResponse(response: jsonResponse)
+        if let response = response {
+          let alerts = TransitAlertInformation.alertsFromJSONResponse(response: response)
           return alerts ?? []
         } else {
           return []
@@ -349,7 +349,24 @@ public class LocationInformation : NSObject {
 
 // MARK: - Extensions
 
-extension CarParkInfo {
+extension Date: ValueType {
+  public static func value(from object: Any) throws -> Date {
+    guard let seconds = object as? TimeInterval else {
+      throw MarshalError.typeMismatch(expected: TimeInterval.self, actual: type(of: object))
+    }
+    return Date(timeIntervalSince1970: seconds)
+  }
+}
+
+extension CarParkInfo: Unmarshaling {
+  
+  public init(object: MarshaledObject) throws {
+    identifier = try object.value(for: "identifier")
+    name = try object.value(for: "name")
+    availableSpaces = try? object.value(for: "availableSpaces")
+    totalSpaces = try? object.value(for: "totalSpaces")
+    lastUpdate = try? object.value(for: "lastUpdate")
+  }
   
   fileprivate init?(response: Any?) {
     guard
@@ -374,7 +391,7 @@ extension CarParkInfo {
 }
 
 extension LocationInformation {
-  
+
   public convenience init?(response: Any?) {
     guard let JSON = response as? [String: Any] else {
       return nil

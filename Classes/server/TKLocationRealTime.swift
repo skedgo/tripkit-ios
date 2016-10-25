@@ -46,14 +46,14 @@ public enum TKLocationRealTime {
               return nil // Client-side errors; hitting again won't help
             }
           
-            if let location = LocationInformation(response: json?.dictionaryObject) {
+            if let location = LocationInformation(response: json) {
               return location.hasRealTime ? 10 : nil
             } else {
               return 60 // Try again in a while
             }
           }
           .map { status, json in
-            return LocationInformation(response: json?.dictionaryObject)
+            return LocationInformation(response: json)
           }
           .filter { $0 != nil }
           .map { $0! }
