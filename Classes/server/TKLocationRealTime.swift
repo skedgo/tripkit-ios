@@ -9,7 +9,6 @@
 import Foundation
 
 import RxSwift
-import SwiftyJSON
 
 import SGCoreKit
 
