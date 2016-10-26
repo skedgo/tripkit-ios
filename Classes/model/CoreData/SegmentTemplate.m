@@ -8,6 +8,8 @@
 
 #import "SegmentTemplate.h"
 
+@import SGCoreKit;
+
 #import <TripKit/TKTripKit.h>
 
 enum {
@@ -122,15 +124,15 @@ typedef NSUInteger SGSegmentTemplateFlag;
     return @[@1]; // no dashes if we have a dedicated color
   }
   
-  STKParserHelperModeGroup group;
+  SVKParserHelperMode group;
   if ([self isWalking]) {
-    group = STKParserHelperModeGroupWalking;
+    group = SVKParserHelperModeWalking;
   } else if (NO == [self isPublicTransport] && NO == [self isStationary]) {
-    group = STKParserHelperModeGroupTransit;
+    group = SVKParserHelperModeTransit;
   } else {
-    group = STKParserHelperModeGroupVehicle;
+    group = SVKParserHelperModeVehicle;
   }
-  return [STKParserHelper dashPatternForModeGroup:group];
+  return [SVKParserHelper dashPatternForModeGroup:group];
 }
 
 #pragma mark - Convenience accessors

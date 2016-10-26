@@ -579,8 +579,8 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 	[paras setValue:sortedModes forKey:@"modes"];
 	
   // locations
-  NSString *fromString = [STKParserHelper requestStringForAnnotation:request.fromLocation];
-  NSString *toString = [STKParserHelper requestStringForAnnotation:request.toLocation];
+  NSString *fromString = [SVKParserHelper requestStringForAnnotation:request.fromLocation];
+  NSString *toString = [SVKParserHelper requestStringForAnnotation:request.toLocation];
 	[paras setValue:fromString forKey:@"from"];
 	[paras setValue:toString forKey:@"to"];
 

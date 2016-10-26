@@ -491,7 +491,7 @@ typedef enum {
       service.lineName      = departureDict[@"serviceName"];
       service.direction     = departureDict[@"serviceDirection"];
 			service.code          = departureDict[@"serviceTripID"];
-			service.color         = [TKParserHelper colorForDictionary:departureDict[@"serviceColor"]];
+			service.color         = [SVKParserHelper colorForDictionary:departureDict[@"serviceColor"]];
 			service.modeInfo      = [ModeInfo modeInfoForDictionary:departureDict[@"modeInfo"]];
       service.operatorName  = departureDict[@"operator"];
 			

@@ -12,7 +12,7 @@
 
 @class Service, Shape, SegmentReference, StopLocation;
 
-@interface TKParserHelper : STKParserHelper
+@interface TKParserHelper : NSObject
 
 #pragma mark - Segments
 

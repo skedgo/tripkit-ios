@@ -14,7 +14,7 @@ import SGCoreKit
 
 public enum TKLocationRealTime {
 
-  public static func fetchRealTimeInfo(for location: SGNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<LocationInformation> {
+  public static func fetchRealTimeInfo(for location: SGKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<LocationInformation> {
     return fetchOnlyOn
       .flatMapLatest { fetch -> Observable<LocationInformation> in
         if fetch {
@@ -25,7 +25,7 @@ public enum TKLocationRealTime {
       }
   }
   
-  public static func fetchRealTime(for location: SGNamedCoordinate) -> Observable<LocationInformation> {
+  public static func fetchRealTime(for location: SGKNamedCoordinate) -> Observable<LocationInformation> {
     return SVKServer.sharedInstance().rx
       .requireRegion(location.coordinate)
       .flatMap { region -> Observable<LocationInformation> in

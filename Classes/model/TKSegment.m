@@ -305,7 +305,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   if (! _scheduledStartStop) {
     // create it!
     id<MKAnnotation> start = [self start];
-    SGNamedCoordinate *location = [SGNamedCoordinate namedCoordinateForAnnotation:start];
+    SGKNamedCoordinate *location = [SGKNamedCoordinate namedCoordinateForAnnotation:start];
     StopLocation *newStop = [StopLocation fetchOrInsertStopForStopCode:code
                                                               modeInfo:self.modeInfo
                                                             atLocation:location
@@ -816,7 +816,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.order == BHSegmentOrdering_End;
 }
 
-#pragma mark - STKDirectionalTimePoint
+#pragma mark - STKDisplayableTimePoint
 
 - (NSDate *)time
 {

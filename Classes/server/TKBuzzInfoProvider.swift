@@ -10,6 +10,11 @@ import Foundation
 import RxSwift
 import Marshal
 
+fileprivate enum Result<E> {
+  case success(E)
+  case error(Error)
+}
+
 public final class RegionInformation: NSObject {
   
   public let streetBikePaths: Bool
@@ -62,7 +67,7 @@ public final class RegionInformation: NSObject {
     return RegionInformation(
       streetBikePaths: region["streetBikePaths"] as? Bool ?? false,
       streetWheelchairAccessibility: region["streetWheelchairAccessibility"] as? Bool ?? false,
-      transitModes: ModeInfo.fromJSONResponse(response),
+      transitModes: (try? ModeInfo.fromJSONResponse(response)) ?? [],
       transitBicycleAccessibility: transitBicycleAccessibility,
       transitWheelchairAccessibility: transitWheelchairAccessibility,
       transitConcessionPricing: transitConcessionPricing,
@@ -87,12 +92,12 @@ public final class TransitAlertInformation: NSObject, TKAlert {
     let iconType: STKInfoIconType
     switch severity {
     case .info, .warning:
-      iconType = STKInfoIconTypeWarning
+      iconType = .warning
     case .alert:
-      iconType = STKInfoIconTypeAlert
+      iconType = .alert
     }
     
-    return STKInfoIcon.image(for: iconType, usage: STKInfoIconUsageNormal)
+    return STKInfoIcon.image(for: iconType, usage: .normal)
   }
   
   private init(title: String, text: String? = nil, url: String? = nil, severity: AlertSeverity = .info, iconURL: URL? = nil, lastUpdated: Date? = nil) {
@@ -173,15 +178,14 @@ public final class ParatransitInformation: NSObject {
 }
 
 extension ModeInfo {
-  fileprivate class func fromJSONResponse(_ response: Any?) -> [ModeInfo] {
+  fileprivate class func fromJSONResponse(_ response: Any?) throws -> [ModeInfo] {
     guard let JSON = response as? [String: Any],
           let regions = JSON["regions"] as? [[String: Any]],
-          let region = regions.first,
-          let array = region["transitModes"] as? [[String: Any]] else {
+          let region = regions.first else {
       return []
     }
     
-    return array.flatMap { ModeInfo(for: $0) }
+    return try region.value(for: "transitModes")
   }
 }
 
@@ -197,7 +201,12 @@ extension TKBuzzInfoProvider {
     return fetchRegionInfo(
       region,
       transformer: RegionInformation.fromJSONResponse,
-      completion: completion
+      completion: { result in
+        switch result {
+        case .success(let info): completion(info)
+        case .error: completion(nil)
+        }
+      }
     )
   }
   
@@ -236,7 +245,12 @@ extension TKBuzzInfoProvider {
     return fetchRegionInfo(
       region,
       transformer: ParatransitInformation.fromJSONResponse,
-      completion: completion
+      completion: { result in
+        switch result {
+        case .success(let info): completion(info)
+        case .error: completion(nil)
+        }
+      }
     )
   }
   
@@ -250,11 +264,16 @@ extension TKBuzzInfoProvider {
     return fetchRegionInfo(
       region,
       transformer: ModeInfo.fromJSONResponse,
-      completion: completion
+      completion: { result in
+        switch result {
+        case .success(let modes): completion(modes)
+        case .error: completion([])
+        }
+      }
     )
   }
 
-  fileprivate class func fetchRegionInfo<E>(_ region: SVKRegion, transformer: @escaping (Any?) -> E, completion: @escaping (E) -> Void)
+  fileprivate class func fetchRegionInfo<E>(_ region: SVKRegion, transformer: @escaping (Any?) throws -> E, completion: @escaping (Result<E>) -> Void)
   {
     let paras = [
       "region": region.name
@@ -265,12 +284,20 @@ extension TKBuzzInfoProvider {
       parameters: paras,
       region: region,
       success: { _, response in
-        let result = transformer(response)
-        completion(result)
+        do {
+          let result = try transformer(response)
+          completion(.success(result))
+        } catch {
+          completion(.error(error))
+        }
       },
       failure: { _ in
-        let result = transformer(nil)
-        completion(result)
+        do {
+          let result = try transformer(nil)
+          completion(.success(result))
+        } catch {
+          completion(.error(error))
+        }
       })
   }
   
@@ -403,7 +430,7 @@ extension LocationInformation {
     
     let stop: STKStopAnnotation?
     if let stopJSON = JSON["stop"] as? [String: Any] {
-      stop = TKParserHelper.simpleStop(from: stopJSON)
+      stop = SVKParserHelper.stopCoordinate(for: stopJSON)
     } else {
       stop = nil
     }

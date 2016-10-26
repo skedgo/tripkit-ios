@@ -15,11 +15,11 @@ extension Alert: TKAlert {
   }
   
   public var icon: UIImage? {
-    return STKInfoIcon.image(for: infoIconType(), usage: STKInfoIconUsageNormal)
+    return STKInfoIcon.image(for: infoIconType(), usage: .normal)
   }
   
   public var iconURL: URL? {
-    return pointImageURL()
+    return imageURL
   }
   
   public var lastUpdated: Date? {

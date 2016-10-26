@@ -33,7 +33,7 @@ typedef enum {
 } BHSegmentType;
 
 NS_ASSUME_NONNULL_BEGIN
-@interface TKSegment : NSObject <STKDirectionalTimePoint, UIActivityItemSource, STKTripSegment>
+@interface TKSegment : NSObject <STKDisplayableTimePoint, UIActivityItemSource, STKTripSegment>
 
 @property (nonatomic, strong, nullable) id<MKAnnotation> start;
 @property (nonatomic, strong, nullable) id<MKAnnotation> end;

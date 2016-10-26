@@ -154,9 +154,9 @@
 		[vehicleView rotateVehicleForHeading:heading andBearing:vehicle.bearing.floatValue];
     
 	} else if ([annotationView isKindOfClass:[SGSemaphoreView class]]
-					&& [annotationView.annotation conformsToProtocol:@protocol(STKDirectionalTimePoint)]) {
+					&& [annotationView.annotation conformsToProtocol:@protocol(STKDisplayableTimePoint)]) {
 		SGSemaphoreView *semaphore = (SGSemaphoreView *)annotationView;
-		[semaphore updateHeadForMagneticHeading:heading andBearing:[(id<STKDirectionalTimePoint>)annotationView.annotation bearing].floatValue];
+		[semaphore updateHeadForMagneticHeading:heading andBearing:[(id<STKDisplayableTimePoint>)annotationView.annotation bearing].floatValue];
 	
   } else if ([annotationView isKindOfClass:[SGSemaphoreView class]]
               && [annotationView.annotation isKindOfClass:[TKSegment class]]) {

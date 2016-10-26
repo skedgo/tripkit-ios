@@ -76,7 +76,7 @@ extension TripMapManager {
     
     var addedSegments = 0
     for segment in trip.segments() {
-      if segment.pointDisplaysImage() {
+      if (segment as STKDisplayablePoint).pointDisplaysImage {
         if zoom != .zoomOnly {
           add(segment)
         }

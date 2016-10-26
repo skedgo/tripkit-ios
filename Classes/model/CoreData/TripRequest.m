@@ -58,8 +58,8 @@
   
   TripRequest *newTrip = [self insertRequestIntoTripKitContext:context];
 	
-  newTrip.fromLocation   = [SGNamedCoordinate namedCoordinateForAnnotation:fromLocation];
-  newTrip.toLocation     = [SGNamedCoordinate namedCoordinateForAnnotation:toLocation];
+  newTrip.fromLocation   = [SGKNamedCoordinate namedCoordinateForAnnotation:fromLocation];
+  newTrip.toLocation     = [SGKNamedCoordinate namedCoordinateForAnnotation:toLocation];
 	newTrip.timeType       = @(timeType);
 	
 	switch (timeType) {

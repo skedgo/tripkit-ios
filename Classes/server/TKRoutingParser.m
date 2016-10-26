@@ -70,13 +70,13 @@
   
   if (YES == [template isStationary]) {
     // stationary segments just have a single location
-    template.startLocation = [TKParserHelper namedCoordinateForDict:dict[@"location"]];
+    template.startLocation = [SVKParserHelper namedCoordinateForDictionary:dict[@"location"]];
     template.endLocation   = template.startLocation;
     
   } else {
     
-    SGNamedCoordinate *start = nil;
-    SGNamedCoordinate *end = nil;
+    SGKNamedCoordinate *start = nil;
+    SGKNamedCoordinate *end = nil;
     
     // all the waypoints
     // they should ways be in a 'shapes' array now, but also support the old 'streets' and 'line'
@@ -94,18 +94,18 @@
       shape.template = template;
       if (YES == shape.travelled.boolValue) {
         if (start == nil) // only if no previous travelled segment!
-          start = [[SGNamedCoordinate alloc] initWithCoordinate:shape.start.coordinate];
+          start = [[SGKNamedCoordinate alloc] initWithCoordinate:shape.start.coordinate];
         // end ALSO if there's a previous travelled segment
-        end   = [[SGNamedCoordinate alloc] initWithCoordinate:shape.end.coordinate];
+        end   = [[SGKNamedCoordinate alloc] initWithCoordinate:shape.end.coordinate];
       }
     }
     
     // set the start and end
     if (! start) {
-      start = [TKParserHelper namedCoordinateForDict:dict[@"from"]];
+      start = [SVKParserHelper namedCoordinateForDictionary:dict[@"from"]];
     }
     if (! end) {
-      end   = [TKParserHelper namedCoordinateForDict:dict[@"to"]];
+      end   = [SVKParserHelper namedCoordinateForDictionary:dict[@"to"]];
     }
     
     ZAssert(nil != start, @"Got no start waypoint!");
@@ -419,7 +419,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           }
           
           // always update these as those might be new or updated, as long as they didn't get deleted
-          UIColor *newColor = [TKParserHelper colorForDictionary:refDict[@"serviceColor"]];
+          UIColor *newColor = [SVKParserHelper colorForDictionary:refDict[@"serviceColor"]];
           service.color     = newColor                      ?: service.color;
           service.frequency = refDict[@"frequency"]         ?: service.frequency;
           service.lineName  = refDict[@"serviceName"]       ?: service.lineName;

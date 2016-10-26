@@ -14,7 +14,8 @@ import SGCoreKit
 
 public class TKSegmentHelper: NSObject {
   public static func segmentImage(_ iconType: SGStyleModeIconType, modeInfo: ModeInfo, modeIdentifier: String?, isRealTime: Bool) -> UIImage? {
-    return segmentImage(iconType, localImageName: modeInfo.localImageName, modeIdentifier: modeIdentifier, isRealTime: isRealTime)
+    guard let imageName = modeInfo.localImageName else { return nil }
+    return segmentImage(iconType, localImageName: imageName, modeIdentifier: modeIdentifier, isRealTime: isRealTime)
   }
 
   public static func segmentImage(_ iconType: SGStyleModeIconType, localImageName: String, modeIdentifier: String?, isRealTime: Bool) -> UIImage? {
