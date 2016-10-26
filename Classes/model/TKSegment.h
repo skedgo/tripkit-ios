@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong, nonnull) NSDate *departureTime;
 @property (nonatomic, strong, nonnull) NSDate *arrivalTime;
-@property (nonatomic, strong, nonnull) NSDate *time;
+@property (nonatomic, copy, nonnull) NSDate *time;
 
 - (void)setTitle:(NSString *)title; // just for KVO
 

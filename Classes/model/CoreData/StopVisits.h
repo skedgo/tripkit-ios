@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSSet *shapes;
 
 // KVO
-@property (nonatomic, strong) NSDate *time;
+@property (nonatomic, copy) NSDate *time;
 
 + (NSArray<StopVisits *> *)fetchStopVisitsForStopLocation:(StopLocation *)stopLocation
                                          startingFromDate:(NSDate *)earliestDate;
