@@ -75,7 +75,7 @@ public final class TransitAlertInformation: NSObject, Unmarshaling, TKAlert {
  
  - SeeAlso: `TKBuzzInfoProvider`'s `fetchParatransitInformation`
  */
-public final class ParatransitInformation: NSObject, Unmarshaling {
+public class ParatransitInformation: NSObject, Unmarshaling {
   public let name: String
   public let URL: String
   public let number: String
@@ -93,7 +93,7 @@ public struct CarParkInfo : Unmarshaling {
   public let availableSpaces: Int?
   public let totalSpaces: Int?
   public let lastUpdate: Date?
-
+  
   public init(object: MarshaledObject) throws {
     identifier = try object.value(for: "identifier")
     name = try object.value(for: "name")
