@@ -744,13 +744,18 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (UIColor *)color
 {
-	UIColor *color = [self tripSegmentModeColor];
-	if (color)
-		return color;
-	else if ([self isPublicTransport])
+  UIColor *serviceColor = self.service.color;
+  if (serviceColor) {
+    return serviceColor;
+  }
+  UIColor *modeColor = self.modeInfo.color;
+  if (modeColor) {
+		return modeColor;
+  } else if ([self isPublicTransport]) {
 		return [UIColor colorWithRed:143/255.f green:139/255.f blue:138/255.f alpha:1]; // Dark grey
-  else
+  } else {
     return [UIColor colorWithRed:214/255.f green:214/255.f blue:214/255.f alpha:1]; // Light grey
+  }
 }
 
 - (NSArray *)dashPattern
@@ -983,14 +988,19 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (nullable UIColor *)tripSegmentModeColor
 {
-  // we prefer color of the service
+  // These are only used in segment views. We only want to
+  // colour public transport there.
+  if (! [self isPublicTransport]) {
+    return nil;
+  }
+  
+  // Prefer service colour over that of the mode itself.
   UIColor *color = self.service.color;
   if (color) {
     return color;
+  } else {
+    return [self.template.modeInfo color];
   }
-  
-  // then color of the mode
-  return [self.template.modeInfo color];
 }
 
 - (STKInfoIconType)tripSegmentModeInfoIconType
