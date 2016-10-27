@@ -9,6 +9,7 @@
 import Foundation
 
 import RxSwift
+import Marshal
 
 import SGCoreKit
 
@@ -41,19 +42,21 @@ public enum TKLocationRealTime {
         }
         
         return SVKServer.sharedInstance().rx
-          .hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, json in
+          .hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, response in
             if case 400..<500 = status {
               return nil // Client-side errors; hitting again won't help
             }
           
-            if let location = LocationInformation(response: json) {
+            if let json = response as? [String: Any],
+               let location = try? LocationInformation(object: json) {
               return location.hasRealTime ? 10 : nil
             } else {
               return 60 // Try again in a while
             }
           }
-          .map { status, json in
-            return LocationInformation(response: json)
+          .map { status, response in
+            guard let json = response as? [String: Any] else { return nil }
+            return try? LocationInformation(object: json)
           }
           .filter { $0 != nil }
           .map { $0! }

@@ -66,12 +66,11 @@ class TKAlertCell: UITableViewCell {
       textView.text = removeStrongTag(from: text)
     }
     
-    if let stringURL = alert.URL,
-       let URL = URL(string: stringURL) {
+    if let url = alert.infoURL {
       actionButton.isHidden = false
       actionButton.rx.tap
         .subscribe(onNext: { [unowned self] in
-          self.tappedOnLink.onNext(URL)
+          self.tappedOnLink.onNext(url)
         })
         .addDisposableTo(disposeBag)
     } else {
