@@ -81,14 +81,16 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TKSimpleAlert]) -> Void) {
+  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TKAlert]) -> Void) {
     
     SVKServer.fetchArray(TKSimpleAlert.self,
                          path: "alerts/transit.json",
                          parameters: ["region": region.name],
                          region: region,
-                         keyPath: "alerts",
-                         completion: completion)
+                         keyPath: "alerts")
+    { alerts in
+      completion(alerts as [TKAlert])
+    }
   }
   
   /**

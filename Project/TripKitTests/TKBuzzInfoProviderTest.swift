@@ -17,7 +17,7 @@ class TKBuzzInfoProviderTest: TKTestCase {
   func testRegionInformation() {
     guard
       let json = contentFromJSON(named: "regionInfo-Sydney") as? [String: Any],
-      let regions: [RegionInformation] = try? json.value(for: "regions"),
+      let regions: [TKRegionInfo] = try? json.value(for: "regions"),
       let sydney = regions.first else { XCTFail(); return }
 
     XCTAssertEqual(regions.count, 1)
@@ -38,7 +38,7 @@ class TKBuzzInfoProviderTest: TKTestCase {
   func testPublicTransportModes() {
     guard
       let json = contentFromJSON(named: "regionInfo-Sydney") as? [String: Any],
-      let regions: [RegionInformation] = try? json.value(for: "regions"),
+      let regions: [TKRegionInfo] = try? json.value(for: "regions"),
       let sydney = regions.first else { XCTFail(); return }
     
     XCTAssertEqual(regions.count, 1)
@@ -49,7 +49,7 @@ class TKBuzzInfoProviderTest: TKTestCase {
   func testLocationInformationForBikePods() {
     guard
       let json = contentFromJSON(named: "locationInfo-bikePod") as? [String: Any],
-      let info = try? LocationInformation(object: json) else { XCTFail(); return }
+      let info = try? TKLocationInfo(object: json) else { XCTFail(); return }
     
     // Basic info
     XCTAssertEqual(info.what3word, "ruled.item.chart")
@@ -63,7 +63,22 @@ class TKBuzzInfoProviderTest: TKTestCase {
     XCTAssertEqual(info.bikePodInfo?.source?.provider.name, "CityBikes")
   }
   
-  // TODO: Add test
-//  func testTransitAlerts() {
-//  }
+  func testTransitAlerts() {
+    guard
+      let json = contentFromJSON(named: "alertsTransit") as? [String: Any],
+      let wrappers: [TKAlertWrapper] = try? json.value(for: "alerts")
+      else { XCTFail(); return }
+    
+    XCTAssertEqual(wrappers.count, 6)
+    
+    // many checks on first
+    XCTAssertEqual(wrappers[0].alert.title, "Wharf Closed")
+    XCTAssertEqual(wrappers[0].alert.text, "Garden Island Wharf Closed.")
+    XCTAssertEqual((wrappers[0].alert as? TKSimpleAlert)?.severity, .warning)
+    XCTAssertNil(wrappers[0].alert.infoURL)
+    XCTAssertNil(wrappers[0].alert.iconURL)
+
+    // additional checks on others
+    XCTAssertEqual(wrappers[1].alert.infoURL, URL(string: "http://www.transportnsw.info/transport-status"))
+  }
 }

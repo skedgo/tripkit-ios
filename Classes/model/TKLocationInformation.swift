@@ -31,6 +31,10 @@ public struct TKBikePodInfo : Unmarshaling {
     guard let total = totalSpaces, let bikes = availableBikes else { return -1 }
     return total - bikes
   }
+  
+  public var hasRealTime: Bool {
+    return availableBikes != nil
+  }
 }
 
 public struct TKCarParkInfo : Unmarshaling {
@@ -46,6 +50,10 @@ public struct TKCarParkInfo : Unmarshaling {
     availableSpaces = try? object.value(for: "availableSpaces")
     totalSpaces     = try? object.value(for: "totalSpaces")
     lastUpdate      = try? object.value(for: "lastUpdate")
+  }
+  
+  public var hasRealTime: Bool {
+    return availableSpaces != nil
   }
 }
 
@@ -68,10 +76,6 @@ public class TKLocationInfo : NSObject, Unmarshaling {
   }
   
   public var hasRealTime: Bool {
-    if let carParkInfo = carParkInfo {
-      return carParkInfo.availableSpaces != nil
-    } else {
-      return false
-    }
+    return carParkInfo?.hasRealTime ?? bikePodInfo?.hasRealTime ?? false
   }
 }
