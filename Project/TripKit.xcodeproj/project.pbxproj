@@ -19,6 +19,7 @@
 		3A32CD711DC2DC6D003B158B /* TKOccupancy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD701DC2DC6D003B158B /* TKOccupancy.swift */; };
 		3A32CD731DC2DC77003B158B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD721DC2DC77003B158B /* Vehicle.swift */; };
 		3A32CD751DC2DC8D003B158B /* TKParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD741DC2DC8D003B158B /* TKParserHelper.swift */; };
+		3A32CD771DC2E7BC003B158B /* locationInfo-bikePod.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A32CD761DC2E7BC003B158B /* locationInfo-bikePod.json */; };
 		3A4255F61D49E0C000271178 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A4255F81D49E0C000271178 /* InfoPlist.strings */; };
 		3A7768FB1D3DE34600AF9EB2 /* TKTTPifierTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7768FA1D3DE34600AF9EB2 /* TKTTPifierTest.swift */; };
 		3A7769121D3DE45800AF9EB2 /* TKAgendaParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7768FD1D3DE45800AF9EB2 /* TKAgendaParserHelper.swift */; };
@@ -188,6 +189,7 @@
 		3A32CD701DC2DC6D003B158B /* TKOccupancy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKOccupancy.swift; sourceTree = "<group>"; };
 		3A32CD721DC2DC77003B158B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		3A32CD741DC2DC8D003B158B /* TKParserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKParserHelper.swift; sourceTree = "<group>"; };
+		3A32CD761DC2E7BC003B158B /* locationInfo-bikePod.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "locationInfo-bikePod.json"; path = "Data/locationInfo-bikePod.json"; sourceTree = "<group>"; };
 		3A37A9A61D20F8EF00A2A3B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A4255F71D49E0C000271178 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A4255F91D49E0CB00271178 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -414,8 +416,9 @@
 		3A32CD691DC2D15D003B158B /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3A32CD6A1DC2D17D003B158B /* regionInfo-Sydney.json */,
 				3A32CD6E1DC2D5F9003B158B /* alertsTransit.json */,
+				3A32CD761DC2E7BC003B158B /* locationInfo-bikePod.json */,
+				3A32CD6A1DC2D17D003B158B /* regionInfo-Sydney.json */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -1018,6 +1021,7 @@
 				3A32CD6B1DC2D17D003B158B /* regionInfo-Sydney.json in Resources */,
 				3A787ED41D38F7BF009F9A18 /* routing.json in Resources */,
 				3A32CD6F1DC2D5F9003B158B /* alertsTransit.json in Resources */,
+				3A32CD771DC2E7BC003B158B /* locationInfo-bikePod.json in Resources */,
 				3A8D9FA21D2B734600078950 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
