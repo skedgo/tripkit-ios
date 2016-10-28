@@ -7,10 +7,11 @@
 //
 
 import Foundation
-
 import CoreLocation
+
 import RxSwift
 import RxCocoa
+import Marshal
 
 import SGCoreKit
 
@@ -203,7 +204,7 @@ public class TKAgendaTripOutput: NSObject {
   }
 }
 
-public struct TKAgendaValue<Element> {
+public struct TKAgendaValue<Element: ValueType> : Unmarshaling {
   public let average: Element
   public let min: Element?
   public let max: Element?
@@ -215,6 +216,14 @@ public struct TKAgendaValue<Element> {
     self.max = max
     self.unit = unit
   }
+  
+  public init(object: MarshaledObject) throws {
+    average = try  object.value(for: "average")
+    min     = try? object.value(for: "min")
+    max     = try? object.value(for: "max")
+    unit    = try? object.value(for: "unit")
+  }
+  
 }
 
 extension TKAgendaValue {
@@ -267,20 +276,35 @@ extension TKAgendaTripOptionType {
 }
 
 private class TKMinimalSegment: NSObject, TKAgendaTripOptionSegmentType {
-  @objc let tripSegmentModeImage: UIImage?
-  
-  @objc fileprivate func routePath() -> [Any] {
-    return []
-  }
-  
-  @objc fileprivate func routeColour() -> UIColor? {
-    return nil
-  }
   
   init(modeImage image: UIImage?) {
     tripSegmentModeImage = image
     
     super.init()
   }
+  
+  // MARK: STKTripSegmentDisplayable
+  
+  var tripSegmentModeColor: SGKColor? { return nil }
+  var tripSegmentModeImageURL: URL? { return nil }
+  var tripSegmentModeInfoIconType: STKInfoIconType { return .none }
+  var tripSegmentModeTitle: String? { return nil }
+  var tripSegmentModeSubtitle: String? { return nil }
+  var tripSegmentFixedDepartureTime: Date? { return nil }
+  var tripSegmentTimeZone: TimeZone? { return nil }
+  var tripSegmentTimesAreRealTime: Bool { return false }
+  var tripSegmentIsWheelchairAccessible: Bool { return false }
+  let tripSegmentModeImage: UIImage?
+  
+  // MARK: STKDisplayableRoute
+  
+  fileprivate func routePath() -> [Any] {
+    return []
+  }
+  
+  fileprivate func routeColour() -> UIColor? {
+    return nil
+  }
+  
 }
 

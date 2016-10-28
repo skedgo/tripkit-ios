@@ -920,7 +920,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = SkedGo;
 				TargetAttributes = {
 					3AB6C61F1D1CD0060089F687 = {

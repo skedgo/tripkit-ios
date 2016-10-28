@@ -1,6 +1,6 @@
 //
 //  TKTTPifier.swift
-//  RioGo
+//  TripKit - AddOns - Agenda
 //
 //  Created by Adrian Schoenig on 16/06/2016.
 //  Copyright © 2016 SkedGo. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 
 import RxSwift
-import SwiftyJSON
+import Marshal
 
 extension Error {
   fileprivate func isNotConnectedError() -> Bool {
@@ -179,12 +179,13 @@ public struct TKTTPifier : TKAgendaBuilderType {
     return SVKServer.sharedInstance().rx
       .hit(.POST, path: "ttp", parameters: paras, region: region)
       .retry(4)
-      .map { code, json -> (SVKRegion, String?) in
-        if let id = json?["id"].string {
+      .map { code, response -> (SVKRegion, String?) in
+        if let json = response as? [String: Any],
+           let id: String = try? json.value(for: "id") {
           TKTTPifierCache.save(problemId: id, forParas: paras)
           return (region, id)
         } else {
-          assertionFailure("Unexpected result from server with code \(code): \(json)")
+          assertionFailure("Unexpected result from server with code \(code): \(response)")
           return (region, nil)
         }
       }
@@ -205,7 +206,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     problemIDs.insert(id)
 
-    let cachedJson = TKTTPifierCache.solutionJson(forId: id)
+    let cachedJson = TKTTPifierCache.marshaledSolution(forId: id)
     let cachedItems: [TKAgendaOutputItem]?
     if let json = cachedJson {
       cachedItems = createOutput(inputItems, json: json)
@@ -214,22 +215,22 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
     
     let paras: [String: Any]
-    if let json = cachedJson,
-       let hashCode = json["hashCode"].int {
+    if let cached = cachedJson, let hashCode: Int = try? cached.value(for: "hashCode") {
       paras = ["hashCode": hashCode]
     } else {
       paras = [:]
     }
     
     return SVKServer.sharedInstance().rx
-      .hit(.GET, path: "ttp/\(id)/solution", parameters: paras, region: region) { code, json in
+      .hit(.GET, path: "ttp/\(id)/solution", parameters: paras, region: region) { code, response in
         
         // Keep hitting if it's a 299 (solution still bein calculated)
         // or the input indicates that not all trips have been added yet
         if code == 299 {
           return 2.5;
 
-        } else if let hasAllTrips = json?["hasAllTrips"].bool {
+        } else if let json = response as? [String: Any],
+                  let hasAllTrips: Bool = try? json.value(for: "hasAllTrips") {
           return hasAllTrips ? nil : 2.5
 
         } else {
@@ -244,10 +245,10 @@ public struct TKTTPifier : TKAgendaBuilderType {
         // Swallow 304 in particular (cached solution still up-to-date)
         return code == 200 && json != nil
       }
-      .map { code, json -> [TKAgendaOutputItem]? in
-        if let json = json,
+      .map { code, response -> [TKAgendaOutputItem]? in
+        if let json = response as? [String: Any],
           let output = createOutput(inputItems, json: json) {
-          TKTTPifierCache.save(solutionJson: json, forId: id)
+          TKTTPifierCache.save(marshaledSolution: json, forId: id)
           return output
         } else {
           return nil
@@ -304,9 +305,9 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
   }
   
-  fileprivate static func createOutput(_ allInputs: [TKAgendaInputItem], json: JSON) -> [TKAgendaOutputItem]?
+  fileprivate static func createOutput(_ allInputs: [TKAgendaInputItem], json: [String: Any]) -> [TKAgendaOutputItem]?
   {
-    guard let outputItems = json["items"].array else { return nil }
+    guard let outputItems = json["items"] as? [[String: Any]] else { return nil }
     
     // Create look-up map of [identifier => event input]
     let eventInputs = allInputs
@@ -325,14 +326,13 @@ public struct TKTTPifier : TKAgendaBuilderType {
     // Parse output
     return outputItems.flatMap { item -> TKAgendaOutputItem? in
       
-      if let id = item["locationId"].string,
+      if let id: String = try? item.value(for: "locationId"),
          let input = eventInputs[id] {
         let eventOutput = TKAgendaEventOutput(forInput: input)
         return .event(eventOutput)
       
-      } else if let tripOptionsJSON = item["tripOptions"].array,
-                let tripOptions = parse(tripOptionsJSON) {
-        return .tripOptions(tripOptions)
+      } else if let options: [TripOption] = try? item.value(for: "tripOptions") {
+        return .tripOptions(options)
       
       } else {
         SGKLog.debug("TKTTPifier") { "Ignoring \(item)" }
@@ -341,80 +341,51 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
   }
   
-  fileprivate static func parse(_ array: [JSON]) -> [TKAgendaTripOptionType]? {
-    let options = array.flatMap { json -> TKAgendaTripOptionType? in
-      
-      guard let modes = json["modes"].arrayObject as? [String],
-            let segments = json["segments"].array,
-            let duration = TKAgendaValue<TimeInterval>(json["duration"]),
-            let score = TKAgendaValue<Double>(json["score"])
-        else {
-          return nil
-      }
-      
-      return TripOption(
-        usedModes: modes,
-        segments: segments.flatMap { SegmentOverview(json: $0) },
-        duration: duration,
-        price: TKAgendaValue<PriceUnit>(json["price"]),
-        score: score
-      )
-    }
-    
-    return options.isEmpty ? nil : options
-  }
-  
-  fileprivate struct TripOption: TKAgendaTripOptionType {
+  fileprivate struct TripOption: TKAgendaTripOptionType, Unmarshaling {
     let usedModes: [ModeIdentifier]
     let segments: [TKAgendaTripOptionSegmentType]
     let duration: TKAgendaValue<TimeInterval>
     let price: TKAgendaValue<PriceUnit>?
     let score: TKAgendaValue<Double>
+    
+    init(object: MarshaledObject) throws {
+      usedModes = try  object.value(for: "modes")
+      duration  = try  object.value(for: "duration")
+      price     = try? object.value(for: "price")
+      score     = try  object.value(for: "score")
+      
+      let segments: [SegmentOverview] = try object.value(for: "segments")
+      self.segments = segments
+    }
+
   }
   
-  fileprivate class SegmentOverview: NSObject {
-    fileprivate let modeInfo: ModeInfo
-    fileprivate let duration: Int
-    fileprivate let polyline: String?
+  fileprivate class SegmentOverview: NSObject, Unmarshaling {
+    let modeInfo: ModeInfo
+    let duration: Int
+    let polyline: String?
     
-    init(modeInfo: ModeInfo, duration: Int, polyline: String?) {
-      self.modeInfo = modeInfo
-      self.duration = duration
-      self.polyline = polyline
-      super.init()
+    required init(object: MarshaledObject) throws {
+      duration = try  object.value(for: "duration")
+      modeInfo = try  object.value(for: "modeInfo")
+      polyline = try? object.value(for: "encodedPolyline")
     }
   }
 }
 
-extension TKTTPifier.SegmentOverview {
-  fileprivate convenience init?(json: JSON) {
-    guard let duration = json["duration"].int,
-      let modeDict = json["modeInfo"].dictionaryObject,
-      let modeInfo = ModeInfo(for: modeDict)
-      else {
-        return nil
-    }
-    
-    let polyline = json["encodedPolyline"].stringValue
-    self.init(
-      modeInfo: modeInfo,
-      duration: duration,
-      polyline: polyline.isEmpty ? nil : polyline
-    )
-  }
-}
-
-extension TKTTPifier.SegmentOverview: STKTripSegmentDisplayable {
+extension TKTTPifier.SegmentOverview: TKAgendaTripOptionSegmentType {
   
-  @objc fileprivate var tripSegmentModeImage: UIImage? {
+  // MARK: STKTripSegmentDisplayable
+
+  var tripSegmentModeColor: SGKColor? { return modeInfo.color }
+
+  var tripSegmentModeImage: UIImage? {
     return TKSegmentHelper.segmentImage(.listMainMode, modeInfo: modeInfo, modeIdentifier: nil, isRealTime: false)
   }
   
-  @objc fileprivate func tripSegmentModeColor() -> UIColor? {
-    return modeInfo.color
-  }
+  var tripSegmentModeImageURL: URL? { return nil }
   
-  @objc fileprivate func tripSegmentModeTitle() -> String? {
+  var tripSegmentModeTitle: String? {
     if let description = modeInfo.descriptor, !description.isEmpty {
       return description
     } else {
@@ -422,27 +393,32 @@ extension TKTTPifier.SegmentOverview: STKTripSegmentDisplayable {
     }
   }
   
-  @objc fileprivate func tripSegmentModeSubtitle() -> String? {
+  var tripSegmentModeSubtitle: String? {
     if SVKTransportModes.modeIdentifierIsPublicTransport(modeInfo.identifier) {
       return nil
     } else {
       return Date.durationString(forMinutes: duration / 60)
     }
   }
-}
+  
+  var tripSegmentModeInfoIconType: STKInfoIconType { return .none }
+  var tripSegmentFixedDepartureTime: Date? { return nil }
+  var tripSegmentTimeZone: TimeZone? { return nil }
+  var tripSegmentTimesAreRealTime: Bool { return false }
+  var tripSegmentIsWheelchairAccessible: Bool { return false }
+  
+  
+  // MARK: STKDisplayableRoute
 
-extension TKTTPifier.SegmentOverview: STKDisplayableRoute {
-  @objc fileprivate func routeColour() -> UIColor? {
-    return tripSegmentModeColor()
+  func routeColour() -> UIColor? {
+    return tripSegmentModeColor
   }
   
-  @objc fileprivate func routePath() -> [Any] {
+  func routePath() -> [Any] {
     guard let polyline = self.polyline else { return [] }
     return CLLocation.decodePolyLine(polyline)
   }
-}
 
-extension TKTTPifier.SegmentOverview: TKAgendaTripOptionSegmentType {
 }
 
 
@@ -517,38 +493,3 @@ extension TKAgendaInputItem {
     }
   }
 }
-
-private protocol JsonValueConvertible {
-  static func fromJSON(_ json: JSON) -> Self?
-}
-
-extension Float: JsonValueConvertible {
-  static func fromJSON(_ json: JSON) -> Float? {
-    return json.float
-  }
-}
-extension Double: JsonValueConvertible {
-  static func fromJSON(_ json: JSON) -> Double? {
-    return json.double
-  }
-}
-extension Int: JsonValueConvertible {
-  static func fromJSON(_ json: JSON) -> Int? {
-    return json.int
-  }
-}
-
-extension TKAgendaValue where Element : JsonValueConvertible {
-  init?(_ json: JSON?) {
-    guard let json = json,
-      let average = Element.fromJSON(json["average"]) else {
-        return nil
-    }
-    
-    self.average = average
-    self.min = Element.fromJSON(json["min"])
-    self.max = Element.fromJSON(json["max"])
-    self.unit = json["unit"].string
-  }
-}
-

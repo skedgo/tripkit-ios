@@ -106,13 +106,16 @@ extension TKAgendaInputItem {
 
 
 private class FakeTrip: NSObject, STKTrip {
-  @objc let costValues = [NSNumber(value: STKTripCostType.duration.rawValue): "30 Minutes"]
-  @objc let departureTimeZone = TimeZone.current
-  @objc let departureTimeIsFixed = true
+  let costValues = [NSNumber(value: STKTripCostType.duration.rawValue): "30 Minutes"]
+  let departureTimeZone = TimeZone.current
+  let departureTimeIsFixed = true
+  let tripPurpose: String? = nil
+  var hasReminder: Bool = false
+  let arrivalTimeZone: TimeZone? = nil
 
-  @objc let departureTime: Date
-  @objc let arrivalTime: Date
-  @objc let isArriveBefore: Bool
+  let departureTime: Date
+  let arrivalTime: Date
+  let isArriveBefore: Bool
   
   init(forDate date: Date, isArriveBefore: Bool) {
     self.isArriveBefore = isArriveBefore
@@ -125,19 +128,35 @@ private class FakeTrip: NSObject, STKTrip {
     }
   }
   
-  @objc
   func segments(with visibility: STKTripSegmentVisibility) -> [STKTripSegment] {
     return [ FakeBusSegment() ]
   }
   
-  @objc
   func mainSegment() -> STKTripSegment {
     return segments(with: .inSummary).first!
   }
 }
 
 private class FakeBusSegment: NSObject, STKTripSegment {
-  @objc let tripSegmentModeImage: UIImage? = nil
-  @objc let tripSegmentInstruction = "Bus"
-  @objc let tripSegmentMainValue: Any = Date()
+  
+  // MARK: STKTripSegmentDisplayable
+  
+  let tripSegmentModeImage: UIImage? = nil
+  var tripSegmentModeColor: SGKColor? { return nil }
+  var tripSegmentModeImageURL: URL? { return nil }
+  var tripSegmentModeInfoIconType: STKInfoIconType { return .none }
+  var tripSegmentModeTitle: String? { return nil }
+  var tripSegmentModeSubtitle: String? { return nil }
+  var tripSegmentFixedDepartureTime: Date? { return nil }
+  var tripSegmentTimeZone: TimeZone? { return nil }
+  var tripSegmentTimesAreRealTime: Bool { return false }
+  var tripSegmentIsWheelchairAccessible: Bool { return false }
+  
+  // MARK: STKTripSegment
+  
+  let tripSegmentInstruction = "Bus"
+  let tripSegmentMainValue: Any = Date()
+  var tripSegmentModeInfo: ModeInfo? { return nil }
+  var tripSegmentDetail: String? { return nil }
+  
 }

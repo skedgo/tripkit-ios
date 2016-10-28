@@ -215,9 +215,6 @@ extension TKBuzzInfoProvider {
    - Note: Completion block is executed on the main thread.
    */
   public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TransitAlertInformation]) -> Void) {
-    let paras = [
-      "region": region.name
-    ]
     
     SVKServer.fetchArray(TransitAlertInformation.self,
                          path: "alerts/transit.json",
