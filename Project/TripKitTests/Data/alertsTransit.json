@@ -1,0 +1,30 @@
+{
+  "alerts": {
+    "alert": {
+      "title": "string",
+      "hashCode": 0,
+      "severity": "alert",
+      "text": "string",
+      "url": "http://www.something.com",
+      "remoteIcon": "http://www.something.com/image.png",
+      "location": {
+        "lat": 0,
+        "lng": 0,
+        "timezone": "America/Chicago",
+        "address": "string"
+      }
+    },
+    "operators": [
+                  "string"
+                  ],
+    "stopCodes": [
+                  "string"
+                  ],
+    "routeIDs": [
+                 "string"
+                 ],
+    "serviceTripIDs": [
+                       "string"
+                       ]
+  }
+}

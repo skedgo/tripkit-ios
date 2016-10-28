@@ -23,7 +23,7 @@ public class RegionInformation: NSObject, Unmarshaling {
   public let paratransitInformation: ParatransitInformation?
   
   public required init(object: MarshaledObject) throws {
-    streetBikePaths = (try? object.value(for: "streetBikePaths")) ?? false
+    streetBikePaths = (try? object.value(for: "streetBicyclePaths")) ?? false
     streetWheelchairAccessibility = (try? object.value(for: "streetWheelchairAccessibility")) ?? false
     transitModes = (try? object.value(for: "transitModes")) ?? []
     transitBicycleAccessibility = (try? object.value(for: "transitBicycleAccessibility")) ?? false
@@ -152,12 +152,14 @@ extension TKBuzzInfoProvider {
    */
   public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (RegionInformation?) -> Void)
   {
-    SVKServer.fetch(RegionInformation.self,
-                    method: .POST, path: "regionInfo.json",
-                    parameters: ["region": region.name],
-                    region: region,
-                    keyPath: "regions[0]",
-                    completion: completion)
+    SVKServer.fetchArray(RegionInformation.self,
+                         method: .POST, path: "regionInfo.json",
+                         parameters: ["region": region.name],
+                         region: region,
+                         keyPath: "regions")
+    { regions in
+      completion(regions.first)
+    }
   }
   
   /**
@@ -167,12 +169,14 @@ extension TKBuzzInfoProvider {
    */
   public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (ParatransitInformation?) -> Void)
   {
-    SVKServer.fetch(ParatransitInformation.self,
-                    method: .POST, path: "regionInfo.json",
-                    parameters: ["region": region.name],
-                    region: region,
-                    keyPath: "regions[0].transitModes",
-                    completion: completion)
+    SVKServer.fetchArray(RegionInformation.self,
+                         method: .POST, path: "regionInfo.json",
+                         parameters: ["region": region.name],
+                         region: region,
+                         keyPath: "regions")
+    { regions in
+      completion(regions.first?.paratransitInformation)
+    }
   }
   
   /**
@@ -182,12 +186,14 @@ extension TKBuzzInfoProvider {
    */
   public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: @escaping ([ModeInfo]) -> Void)
   {
-    SVKServer.fetchArray(ModeInfo.self,
+    SVKServer.fetchArray(RegionInformation.self,
                          method: .POST, path: "regionInfo.json",
                          parameters: ["region": region.name],
                          region: region,
-                         keyPath: "regions[0].transitModes",
-                         completion: completion)
+                         keyPath: "regions")
+    { regions in
+      completion(regions.first?.transitModes ?? [])
+    }
   }
   
   /**
