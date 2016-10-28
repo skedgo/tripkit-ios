@@ -126,10 +126,10 @@
 {
   // we always add all the stops, because the cell is new
   SGKNamedCoordinate *coordinate = [self locationForStopFromDictionary:stopDict];
-  StopLocation *newStop = [StopLocation fetchOrInsertStopForStopCode:nil
-                                                            modeInfo:nil
-                                                          atLocation:coordinate
-                                                  intoTripKitContext:context];
+  StopLocation *newStop = [StopLocation insertStopForStopCode:stopDict[@"code"]
+                                                     modeInfo:nil
+                                                   atLocation:coordinate
+                                           intoTripKitContext:context];
   [self updateStopLocation:newStop fromDictionary:stopDict];
   
   return newStop;
