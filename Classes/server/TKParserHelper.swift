@@ -11,12 +11,12 @@ import Foundation
 extension TKParserHelper {
 
   @objc(insertNewVehicle:inTripKitContext:)
-  static func insertNewVehicle(from dict: [String: Any], into context: NSManagedObjectContext) -> Vehicle {
+  public static func insertNewVehicle(from dict: [String: Any], into context: NSManagedObjectContext) -> Vehicle {
     return Vehicle(dict: dict, into: context)
   }
   
   @objc(updateVehicle:fromDictionary:)
-  static func update(vehicle: Vehicle, from dict: [String: Any]) {
+  public static func update(vehicle: Vehicle, from dict: [String: Any]) {
     vehicle.update(with: dict)
   }
 
@@ -25,7 +25,7 @@ extension TKParserHelper {
 extension Vehicle {
   
   fileprivate convenience init(dict: [String: Any], into context: NSManagedObjectContext) {
-    if #available(iOSApplicationExtension 10.0, *) {
+    if #available(iOS 10.0, *) {
       self.init(context: context)
     } else {
       self.init(entity: NSEntityDescription.entity(forEntityName: "Vehicle", in: context)!, insertInto: context)

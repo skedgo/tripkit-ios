@@ -74,7 +74,7 @@ extension Vehicle {
   }
 }
 
-extension Vehicle : STKDisplayablePoint {
+extension Vehicle : MKAnnotation {
   
   public var coordinate: CLLocationCoordinate2D {
     guard let lat = latitude?.doubleValue, let lng = longitude?.doubleValue else {
@@ -120,14 +120,6 @@ extension Vehicle : STKDisplayablePoint {
       let format = NSLocalizedString("VehicleUpdated", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle updated")
       return String(format: format, duration)
     }
-  }
-  
-  public func pointDisplaysImage() -> Bool {
-    return false
-  }
-  
-  public func isDraggable() -> Bool {
-    return false
   }
   
 }
