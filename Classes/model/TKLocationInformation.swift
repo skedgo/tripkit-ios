@@ -10,13 +10,13 @@ import Foundation
 
 import Marshal
 
-public struct BikePodInfo : Unmarshaling {
+public struct TKBikePodInfo : Unmarshaling {
   public let identifier: String
-  public let operatorInfo: CompanyInfo
+  public let operatorInfo: TKCompanyInfo
   public let availableBikes: Int?
   public let totalSpaces: Int?
   public let lastUpdate: Date?
-  public let source: DataAttribution?
+  public let source: TKDataAttribution?
   
   public init(object: MarshaledObject) throws {
     identifier      = try  object.value(for: "identifier")
@@ -33,7 +33,7 @@ public struct BikePodInfo : Unmarshaling {
   }
 }
 
-public struct CarParkInfo : Unmarshaling {
+public struct TKCarParkInfo : Unmarshaling {
   public let identifier: String
   public let name: String
   public let availableSpaces: Int?
@@ -49,12 +49,12 @@ public struct CarParkInfo : Unmarshaling {
   }
 }
 
-public class LocationInformation : NSObject, Unmarshaling {
+public class TKLocationInfo : NSObject, Unmarshaling {
   public let what3word: String?
   public let what3wordInfoURL: URL?
   public let transitStop: STKStopAnnotation?
-  public let bikePodInfo: BikePodInfo?
-  public let carParkInfo: CarParkInfo?
+  public let bikePodInfo: TKBikePodInfo?
+  public let carParkInfo: TKCarParkInfo?
   
   public required init(object: MarshaledObject) throws {
     what3word = try? object.value(for: "details.w3w")
@@ -75,4 +75,3 @@ public class LocationInformation : NSObject, Unmarshaling {
     }
   }
 }
-

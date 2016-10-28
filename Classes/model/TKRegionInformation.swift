@@ -10,7 +10,7 @@ import Foundation
 
 import Marshal
 
-public class RegionInformation: NSObject, Unmarshaling {
+public class TKRegionInfo: NSObject, Unmarshaling {
   
   public let streetBikePaths: Bool
   public let streetWheelchairAccessibility: Bool
@@ -18,7 +18,7 @@ public class RegionInformation: NSObject, Unmarshaling {
   public let transitBicycleAccessibility: Bool
   public let transitConcessionPricing: Bool
   public let transitWheelchairAccessibility: Bool
-  public let paratransitInformation: ParatransitInformation?
+  public let paratransitInformation: TKParatransitInfo?
   
   public required init(object: MarshaledObject) throws {
     streetBikePaths = (try? object.value(for: "streetBicyclePaths")) ?? false
@@ -38,7 +38,7 @@ public class RegionInformation: NSObject, Unmarshaling {
  
  - SeeAlso: `TKBuzzInfoProvider`'s `fetchParatransitInformation`
  */
-public class ParatransitInformation: NSObject, Unmarshaling {
+public class TKParatransitInfo: NSObject, Unmarshaling {
   public let name: String
   public let URL: String
   public let number: String

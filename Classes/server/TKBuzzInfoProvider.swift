@@ -21,9 +21,9 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (RegionInformation?) -> Void)
+  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (TKRegionInfo?) -> Void)
   {
-    SVKServer.fetchArray(RegionInformation.self,
+    SVKServer.fetchArray(TKRegionInfo.self,
                          method: .POST, path: "regionInfo.json",
                          parameters: ["region": region.name],
                          region: region,
@@ -38,15 +38,10 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (ParatransitInformation?) -> Void)
+  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (TKParatransitInfo?) -> Void)
   {
-    SVKServer.fetchArray(RegionInformation.self,
-                         method: .POST, path: "regionInfo.json",
-                         parameters: ["region": region.name],
-                         region: region,
-                         keyPath: "regions")
-    { regions in
-      completion(regions.first?.paratransitInformation)
+    fetchRegionInformation(forRegion: region) { info in
+      completion(info?.paratransitInformation)
     }
   }
   
@@ -57,13 +52,8 @@ extension TKBuzzInfoProvider {
    */
   public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: @escaping ([ModeInfo]) -> Void)
   {
-    SVKServer.fetchArray(RegionInformation.self,
-                         method: .POST, path: "regionInfo.json",
-                         parameters: ["region": region.name],
-                         region: region,
-                         keyPath: "regions")
-    { regions in
-      completion(regions.first?.transitModes ?? [])
+    fetchRegionInformation(forRegion: region) { info in
+      completion(info?.transitModes ?? [])
     }
   }
   
@@ -72,14 +62,14 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, forRegion region: SVKRegion, completion: @escaping (LocationInformation?) -> Void) {
+  public class func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, forRegion region: SVKRegion, completion: @escaping (TKLocationInfo?) -> Void) {
     
     let paras: [String: Any] = [
       "lat": coordinate.latitude,
       "lng": coordinate.longitude
     ]
     
-    SVKServer.fetch(LocationInformation.self,
+    SVKServer.fetch(TKLocationInfo.self,
                     path: "locationInfo.json",
                     parameters: paras,
                     region: region,
@@ -91,9 +81,9 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TransitAlertInformation]) -> Void) {
+  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TKSimpleAlert]) -> Void) {
     
-    SVKServer.fetchArray(TransitAlertInformation.self,
+    SVKServer.fetchArray(TKSimpleAlert.self,
                          path: "alerts/transit.json",
                          parameters: ["region": region.name],
                          region: region,
@@ -113,7 +103,7 @@ extension TKBuzzInfoProvider {
       .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
       .map { (_, response) -> [TKAlert] in
         if let json = response as? [String: Any] {
-          let alerts: [TransitAlertInformation]? = try? json.value(for: "alerts")
+          let alerts: [TKSimpleAlert]? = try? json.value(for: "alerts")
           return alerts ?? []
         } else {
           return []

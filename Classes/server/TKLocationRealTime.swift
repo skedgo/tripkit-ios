@@ -15,9 +15,9 @@ import SGCoreKit
 
 public enum TKLocationRealTime {
 
-  public static func fetchRealTimeInfo(for location: SGKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<LocationInformation> {
+  public static func fetchRealTimeInfo(for location: SGKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<TKLocationInfo> {
     return fetchOnlyOn
-      .flatMapLatest { fetch -> Observable<LocationInformation> in
+      .flatMapLatest { fetch -> Observable<TKLocationInfo> in
         if fetch {
           return fetchRealTime(for: location)
         } else {
@@ -26,10 +26,10 @@ public enum TKLocationRealTime {
       }
   }
   
-  public static func fetchRealTime(for location: SGKNamedCoordinate) -> Observable<LocationInformation> {
+  public static func fetchRealTime(for location: SGKNamedCoordinate) -> Observable<TKLocationInfo> {
     return SVKServer.sharedInstance().rx
       .requireRegion(location.coordinate)
-      .flatMap { region -> Observable<LocationInformation> in
+      .flatMap { region -> Observable<TKLocationInfo> in
         var paras: [String: Any] = [
           "realtime" : true
         ]
@@ -48,7 +48,7 @@ public enum TKLocationRealTime {
             }
           
             if let json = response as? [String: Any],
-               let location = try? LocationInformation(object: json) {
+               let location = try? TKLocationInfo(object: json) {
               return location.hasRealTime ? 10 : nil
             } else {
               return 60 // Try again in a while
@@ -56,7 +56,7 @@ public enum TKLocationRealTime {
           }
           .map { status, response in
             guard let json = response as? [String: Any] else { return nil }
-            return try? LocationInformation(object: json)
+            return try? TKLocationInfo(object: json)
           }
           .filter { $0 != nil }
           .map { $0! }

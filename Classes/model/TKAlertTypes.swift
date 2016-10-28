@@ -10,17 +10,13 @@ import Foundation
 
 import Marshal
 
-public class TransitAlertInformation: NSObject, Unmarshaling, TKAlert {
+public class TKSimpleAlert: NSObject, Unmarshaling, TKAlert {
   public let title: String
   public let text: String?
   public let infoURL: URL?
   public let iconURL: URL?
   public let severity: AlertSeverity
   public let lastUpdated: Date?
-  
-  public var sourceModel: AnyObject? {
-    return self
-  }
   
   public var icon: UIImage? {
     let iconType: STKInfoIconType

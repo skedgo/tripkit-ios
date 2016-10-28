@@ -10,7 +10,7 @@ import Foundation
 
 import Marshal
 
-public struct CompanyInfo : Unmarshaling {
+public struct TKCompanyInfo : Unmarshaling {
   public let name: String
   public let website: String?
   public let remoteIcon: String?
@@ -22,8 +22,8 @@ public struct CompanyInfo : Unmarshaling {
   }
 }
 
-public struct DataAttribution : Unmarshaling {
-  public let provider: CompanyInfo
+public struct TKDataAttribution : Unmarshaling {
+  public let provider: TKCompanyInfo
   public let disclaimer: String?
   
   public init(object: MarshaledObject) throws {
