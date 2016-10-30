@@ -18,7 +18,7 @@ public enum TKOccupancy : Int {
   case full
   case notAcceptingPassengers
   
-  var description: String? {
+  public var description: String? {
     switch self {
     case .unknown: return nil
     case .empty: return NSLocalizedString("Empty", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "As in 'this bus/train is empty'")
