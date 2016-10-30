@@ -10,13 +10,13 @@ import Foundation
 
 import Marshal
 
-public struct BikePodInfo : Unmarshaling {
+public struct TKBikePodInfo : Unmarshaling {
   public let identifier: String
-  public let operatorInfo: CompanyInfo
+  public let operatorInfo: TKCompanyInfo
   public let availableBikes: Int?
   public let totalSpaces: Int?
   public let lastUpdate: Date?
-  public let source: DataAttribution?
+  public let source: TKDataAttribution?
   
   public init(object: MarshaledObject) throws {
     identifier      = try  object.value(for: "identifier")
@@ -31,9 +31,13 @@ public struct BikePodInfo : Unmarshaling {
     guard let total = totalSpaces, let bikes = availableBikes else { return -1 }
     return total - bikes
   }
+  
+  public var hasRealTime: Bool {
+    return availableBikes != nil
+  }
 }
 
-public struct CarParkInfo : Unmarshaling {
+public struct TKCarParkInfo : Unmarshaling {
   public let identifier: String
   public let name: String
   public let availableSpaces: Int?
@@ -47,14 +51,18 @@ public struct CarParkInfo : Unmarshaling {
     totalSpaces     = try? object.value(for: "totalSpaces")
     lastUpdate      = try? object.value(for: "lastUpdate")
   }
+  
+  public var hasRealTime: Bool {
+    return availableSpaces != nil
+  }
 }
 
-public class LocationInformation : NSObject, Unmarshaling {
+public class TKLocationInfo : NSObject, Unmarshaling {
   public let what3word: String?
   public let what3wordInfoURL: URL?
   public let transitStop: STKStopAnnotation?
-  public let bikePodInfo: BikePodInfo?
-  public let carParkInfo: CarParkInfo?
+  public let bikePodInfo: TKBikePodInfo?
+  public let carParkInfo: TKCarParkInfo?
   
   public required init(object: MarshaledObject) throws {
     what3word = try? object.value(for: "details.w3w")
@@ -68,11 +76,6 @@ public class LocationInformation : NSObject, Unmarshaling {
   }
   
   public var hasRealTime: Bool {
-    if let carParkInfo = carParkInfo {
-      return carParkInfo.availableSpaces != nil
-    } else {
-      return false
-    }
+    return carParkInfo?.hasRealTime ?? bikePodInfo?.hasRealTime ?? false
   }
 }
-

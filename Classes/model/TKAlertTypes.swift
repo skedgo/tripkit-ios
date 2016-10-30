@@ -10,17 +10,30 @@ import Foundation
 
 import Marshal
 
-public class TransitAlertInformation: NSObject, Unmarshaling, TKAlert {
+public struct TKAlertWrapper: Unmarshaling {
+  public let alert: TKAlert
+  public let operators: [String]?
+  public let serviceTripIDs: [String]?
+  public let stopCodes: [String]?
+  public let routeIDs: [String]?
+
+  public init(object: MarshaledObject) throws {
+    let simpleAlert: TKSimpleAlert = try object.value(for: "alert")
+    alert = simpleAlert
+    routeIDs = try? object.value(for: "routeIDs")
+    stopCodes = try? object.value(for: "stopCodes")
+    serviceTripIDs = try? object.value(for: "serviceTripIDs")
+    operators = try? object.value(for: "operators")
+  }
+}
+
+class TKSimpleAlert: NSObject, Unmarshaling, TKAlert {
   public let title: String
   public let text: String?
   public let infoURL: URL?
   public let iconURL: URL?
   public let severity: AlertSeverity
   public let lastUpdated: Date?
-  
-  public var sourceModel: AnyObject? {
-    return self
-  }
   
   public var icon: UIImage? {
     let iconType: STKInfoIconType
@@ -39,8 +52,11 @@ public class TransitAlertInformation: NSObject, Unmarshaling, TKAlert {
     text = try? object.value(for: "text")
     infoURL = try? object.value(for: "url")
     iconURL = try? object.value(for: "iconURL")
-    severity = try AlertSeverity.value(from: "severity")
     lastUpdated = try? object.value(for: "lastUpdate")
+    
+    // for some reason this doesn't work
+    // severity = object.value(for: "severity")
+    severity = AlertSeverity(rawValue: (try? object.value(for: "severity")) ?? 0) ?? .info
   }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Representation of real-time occupancy information for public transport
 public enum TKOccupancy : Int {
   case unknown = 0
   case empty
