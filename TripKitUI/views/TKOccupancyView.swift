@@ -42,6 +42,13 @@ public struct TKOccupancyInfo {
   public let color: UIColor?
   public let isCritical: Bool?
   
+  public init(text: String, icon: UIImage? = nil, color: UIColor? = nil, isCritical: Bool? = nil) {
+    self.text = text
+    self.icon = icon
+    self.color = color
+    self.isCritical = isCritical
+  }
+  
 }
 
 @available(iOSApplicationExtension 8.2, *)
