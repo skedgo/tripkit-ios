@@ -12,14 +12,19 @@ import SGCoreKit
 
 extension TKOccupancy {
   
-  var color: UIColor? {
+  public var color: UIColor? {
     
     switch self {
-    case .unknown:                                    return nil
-    case .empty, .manySeatsAvailable:                 return .green
-    case .fewSeatsAvailable:                          return .yellow
-    case .standingRoomOnly, .crushedStandingRoomOnly: return .orange
-    case .full, .notAcceptingPassengers:              return .red
+    case .unknown:
+      return nil
+    case .empty, .manySeatsAvailable:
+      return UIColor(red: 23/255.0, green: 177/255.0, blue: 94/255.0, alpha: 1)
+    case .fewSeatsAvailable:
+      return UIColor(red: 255/255.0, green: 181/255.0, blue: 0/255.0, alpha: 1)
+    case .standingRoomOnly, .crushedStandingRoomOnly:
+      return UIColor(red: 255/255.0, green: 150/255.0, blue: 0/255.0, alpha: 1)
+    case .full, .notAcceptingPassengers:
+      return UIColor(red: 255/255.0, green: 75/255.0, blue: 71/255.0, alpha: 1)
     }
     
   }
