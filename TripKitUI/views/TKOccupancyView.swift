@@ -8,26 +8,49 @@
 
 import UIKit
 
+@available(iOSApplicationExtension 8.2, *)
+extension TKOccupancy {
+  
+  public var icon: UIImage? {
+    switch self {
+    case .empty, .manySeatsAvailable, .fewSeatsAvailable:
+      return UIImage(named: "icon-check-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+    case .standingRoomOnly, .crushedStandingRoomOnly:
+      return UIImage(named: "icon-exclamation-mark-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+    case .full, .notAcceptingPassengers:
+      return UIImage(named: "icon-cross-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+    case .unknown:
+      return nil
+    }
+  }
+  
+  public var isCritical: Bool {
+    switch self {
+    case .crushedStandingRoomOnly, .full, .notAcceptingPassengers:
+      return true
+    default:
+      return false
+    }
+  }
+  
+}
+
 public struct TKOccupancyInfo {
+  
   public let text: String
   public let icon: UIImage?
-  public let color: UIColor
-  public let isCritical: Bool
+  public let color: UIColor?
+  public let isCritical: Bool?
   
-  public init(text: String, icon: UIImage?, color: UIColor, isCritical: Bool) {
-    self.text = text
-    self.icon = icon
-    self.color = color
-    self.isCritical = isCritical
-  }
 }
 
 @available(iOSApplicationExtension 8.2, *)
-
 public class TKOccupancyView: UIView {
   
   public weak var icon: UIImageView!
   public weak var label: UILabel!
+  
+  // MARK: - Initialisers
   
   public override init(frame: CGRect) {
     super.init(frame: frame)
@@ -39,21 +62,37 @@ public class TKOccupancyView: UIView {
     didInit()
   }
   
+  // MARK: - Configuration
+  
+  public var occupancy: TKOccupancy? {
+    didSet {
+      guard
+        let available = occupancy,
+        let title = available.description else {
+          return
+      }
+      
+      let info = TKOccupancyInfo(text: title, icon: available.icon, color: available.color, isCritical: available.isCritical)
+      occupancyInfo = info
+    }
+  }
+  
   public var occupancyInfo: TKOccupancyInfo? {
     didSet {
       guard let info = occupancyInfo else { return }
       
-      icon.image = info.icon
-      icon.tintColor = UIColor.white
-      icon.backgroundColor = info.color
       label.text = info.text.uppercased()
       
-      if info.isCritical {
+      icon.image = info.icon
+      icon.backgroundColor = info.icon != nil ? info.color : nil
+      icon.tintColor = icon.backgroundColor != nil ? UIColor.white : nil
+      
+      if let critical = info.isCritical, critical == true {
         layer.cornerRadius = 8
         layer.masksToBounds = true
         backgroundColor = info.color
         icon.layer.cornerRadius = 0
-        label.textColor = UIColor.white
+        label.textColor = backgroundColor != nil ? UIColor.white : nil
       } else {
         icon.layer.cornerRadius = 8
         label.textColor = info.color
@@ -81,7 +120,7 @@ public class TKOccupancyView: UIView {
       icon.heightAnchor.constraint(equalToConstant: 16).isActive = true
       icon.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
       icon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-      icon.topAnchor.constraint(equalTo: topAnchor).isActive = true
+      icon.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
       
       label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 4).isActive = true
       label.centerYAnchor.constraint(equalTo: icon.centerYAnchor).isActive = true
@@ -105,4 +144,13 @@ public class TKOccupancyView: UIView {
     }
   }
 
+}
+
+@available(iOSApplicationExtension 8.2, *)
+extension TKOccupancyView {
+  
+  public static var bundle: Bundle {
+    return Bundle(for: TKOccupancyView.self)
+  }
+  
 }
