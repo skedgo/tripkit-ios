@@ -55,7 +55,7 @@
   template.metres           = dict[@"metres"];
   template.metresFriendly   = dict[@"metresSafe"];
   
-  if (template.segmentType.integerValue == BHSegmentTypeScheduled) {
+  if (template.segmentType.integerValue == TKSegmentTypeScheduled) {
     template.scheduledStartStopCode = dict[@"stopCode"];
     template.scheduledEndStopCode   = dict[@"endStopCode"];
     service.operatorName            = dict[@"serviceOperator"];

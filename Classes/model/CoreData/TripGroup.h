@@ -19,22 +19,25 @@ typedef NS_ENUM(NSInteger, TripGroupVisibility) {
   TripGroupVisibilityHidden = 2,
 };
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface TripGroup : NSManagedObject
 
-@property (nonatomic, strong) id<NSCoding, NSObject> classification;
-@property (nonatomic, strong) NSNumber * frequency;
+@property (nonatomic, strong, nullable) id<NSCoding, NSObject> classification;
+@property (nonatomic, strong, nullable) NSNumber * frequency;
 @property (nonatomic, strong) NSNumber * flags;
 @property (nonatomic, strong) NSNumber * visibilityRaw;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, strong) TripRequest *request;
 @property (nonatomic, strong) NSSet *trips;
-@property (nonatomic, strong) Trip *visibleTrip;
+@property (nonatomic, strong, nullable) Trip *visibleTrip;
+
+// Non-CoreData properties
 
 @property (nonatomic, assign) TripGroupVisibility visibility;
 
 - (void)adjustVisibleTrip;
-- (NSDate *)earliestDeparture;
+- (nullable NSDate *)earliestDeparture;
 
 - (NSSet *)usedModeIdentifiers;
 
@@ -49,7 +52,7 @@ typedef NS_ENUM(NSInteger, TripGroupVisibility) {
  */
 - (void)setPairIdentifiers:(NSSet *)pairIdentifiers forPublicSegment:(TKSegment *)segment;
 
-- (NSSet *)pairIdentifiersForPublicSegment:(TKSegment *)segment;
+- (nullable NSSet *)pairIdentifiersForPublicSegment:(TKSegment *)segment;
 
 #pragma mark - User interaction
 
@@ -64,3 +67,5 @@ typedef NS_ENUM(NSInteger, TripGroupVisibility) {
 - (void)addTrips:(NSSet *)values;
 - (void)removeTrips:(NSSet *)values;
 @end
+
+NS_ASSUME_NONNULL_END

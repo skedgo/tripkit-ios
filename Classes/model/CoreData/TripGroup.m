@@ -18,7 +18,7 @@ typedef enum {
 
 @interface TripGroup ()
 
-@property (nonatomic, strong) NSMutableDictionary *indexToPairIdentifiers;
+@property (nonatomic, strong, nullable) NSMutableDictionary *indexToPairIdentifiers;
 
 @end
 
@@ -57,7 +57,7 @@ typedef enum {
 /**
  * Returns the trip with the lowest score, that's not impossible
  */
-- (Trip *)tripWithBestScore
+- (nullable Trip *)tripWithBestScore
 {
 	NSSet *allTrips = self.trips;
 	if (allTrips.count == 0) {
@@ -87,7 +87,11 @@ typedef enum {
 
 - (NSSet *)usedModeIdentifiers
 {
-  return [self.visibleTrip usedModeIdentifiers];
+  if (self.visibleTrip) {
+    return [self.visibleTrip usedModeIdentifiers];
+  } else {
+    return [[NSSet alloc] init];
+  }
 }
 
 - (TripGroupVisibility)visibility

@@ -14,9 +14,9 @@
 #import <CoreData/CoreData.h>
 #import <MapKit/MapKit.h>
 
-#define kBHSegmentModeContinuation  @"[cont]"
-#define kBHSegmentModeParking				@"parking"
-#define kBHSegmentModePlane         @"aeroplane"
+#define kTKSegmentModeContinuation  @"[cont]"
+#define kTKSegmentModeParking				@"parking"
+#define kTKSegmentModePlane         @"aeroplane"
 
 @class SegmentReference, Shape;
 @class ModeInfo, STKMiniInstruction;

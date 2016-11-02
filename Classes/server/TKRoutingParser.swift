@@ -11,7 +11,7 @@ import Foundation
 import SGCoreKit
 
 extension TKRoutingParser {
-  public static func matchingSegment(in trip: Trip, order: BHSegmentOrdering, first: Bool) -> TKSegment {
+  public static func matchingSegment(in trip: Trip, order: TKSegmentOrdering, first: Bool) -> TKSegment {
     
     var match: TKSegment? = nil
     for segment in (trip as STKTrip).segments(with: .inDetails) {

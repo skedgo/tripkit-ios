@@ -156,7 +156,7 @@ typedef NSUInteger SGTripFlag;
     // this is related to SegmentSectionHeaderViews!
     
     // insert a new location as soon as we end up there
-    if (segment.order == BHSegmentOrdering_Start) {
+    if (segment.order == TKSegmentOrderingStart) {
       //
     } else if (! [segment isStationary]) {
       id<MKAnnotation> thisStart = segment.start;
@@ -255,7 +255,7 @@ typedef NSUInteger SGTripFlag;
   NSArray *sortedReferences = [self.segmentReferences sortedArrayUsingDescriptors:@[sortDescriptor]];
   NSMutableArray *sorted = [NSMutableArray arrayWithCapacity:sortedReferences.count + 2];
   
-  TKSegment *start = [[TKSegment alloc] initAsTerminal:BHSegmentOrdering_Start forTrip:self];
+  TKSegment *start = [[TKSegment alloc] initAsTerminal:TKSegmentOrderingStart forTrip:self];
   [sorted addObject:start];
   
 	TKSegment *previous = start;
@@ -272,7 +272,7 @@ typedef NSUInteger SGTripFlag;
 		previous = seg;
   }
   
-  TKSegment *end = [[TKSegment alloc] initAsTerminal:BHSegmentOrdering_End forTrip:self];
+  TKSegment *end = [[TKSegment alloc] initAsTerminal:TKSegmentOrderingEnd forTrip:self];
   previous.next = end;
   end.previous = previous;
   [sorted addObject:end];

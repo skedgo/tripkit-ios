@@ -32,11 +32,11 @@
 + (NSNumber *)segmentTypeForString:(NSString *)typeString
 {
   if ([typeString isEqualToString:@"scheduled"]) {
-    return @(BHSegmentTypeScheduled);
+    return @(TKSegmentTypeScheduled);
   } else if ([typeString isEqualToString:@"unscheduled"]) {
-    return @(BHSegmentTypeUnscheduled);
+    return @(TKSegmentTypeUnscheduled);
   } else if ([typeString isEqualToString:@"stationary"]) {
-    return @(BHSegmentTypeStationary);
+    return @(TKSegmentTypeStationary);
   } else {
     ZAssert(true, @"Encountered unknown segment type: '%@'", typeString);
     return nil;

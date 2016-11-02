@@ -13,24 +13,24 @@
 @class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape;
 @class SVKRegion, ModeInfo;
 
-typedef NS_ENUM(NSInteger, BHSegmentOrdering) {
-  BHSegmentOrdering_Start   = 1,
-  BHSegmentOrdering_Regular = 2,
-  BHSegmentOrdering_End     = 4
+typedef NS_ENUM(NSInteger, TKSegmentOrdering) {
+  TKSegmentOrderingStart   = 1,
+  TKSegmentOrderingRegular = 2,
+  TKSegmentOrderingEnd     = 4
 };
 
-typedef enum {
-  BHSegmentWaypointUnknown,
-  BHSegmentWaypointGetOn,
-  BHSegmentWaypointGetOff,
-} BHSegmentWaypoint;
+typedef NS_ENUM(NSInteger, TKSegmentWaypoint) {
+  TKSegmentWaypointUnknown,
+  TKSegmentWaypointGetOn,
+  TKSegmentWaypointGetOff
+};
 
-typedef enum {
-  BHSegmentTypeUnknown = 0,
-  BHSegmentTypeStationary,
-  BHSegmentTypeScheduled,
-  BHSegmentTypeUnscheduled,
-} BHSegmentType;
+typedef NS_ENUM(NSInteger, TKSegmentType) {
+  TKSegmentTypeUnknown = 0,
+  TKSegmentTypeStationary,
+  TKSegmentTypeScheduled,
+  TKSegmentTypeUnscheduled,
+};
 
 NS_ASSUME_NONNULL_BEGIN
 @interface TKSegment : NSObject <STKDisplayableTimePoint, UIActivityItemSource, STKTripSegment>
@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)initWithReference:(SegmentReference *)aReference
                 forTrip:(Trip *)aTrip;
 
-- (id)initAsTerminal:(BHSegmentOrdering)order
+- (id)initAsTerminal:(TKSegmentOrdering)order
              forTrip:(Trip *)aTrip;
 
 /* 
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (SVKRegion *)localRegion;
 
-- (BHSegmentOrdering)order;
+- (TKSegmentOrdering)order;
 
 /**
  Call this when segment properties have changed (such as a trip's time)
@@ -197,7 +197,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param visit The stop visit that the user nominates to switch to.
  @return The best guess of what kind of waypoint it would be when the user decided to switch to `visit`. Anything before the start of this segment is getting on, anything after its end is getting off, in between we return `unknown` if it's in the middle third.
  */
-- (BHSegmentWaypoint)guessWaypointTypeForVisit:(StopVisits *)visit;
+- (TKSegmentWaypoint)guessWaypointTypeForVisit:(StopVisits *)visit;
 
 
 ///-----------------------------------------------------------------------------

@@ -20,7 +20,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 @property (nonatomic, copy) NSString *primaryLocationString;
 @property (nonatomic, copy) NSString *singleLineInstruction;
 @property (nonatomic, strong) StopLocation *scheduledStartStop;
-@property (nonatomic, assign) BHSegmentOrdering order;
+@property (nonatomic, assign) TKSegmentOrdering order;
 @property (nonatomic, strong) NSDictionary *segmentVisits;
 @property (nonatomic, strong) SVKRegion *spanningRegion;
 @property (nonatomic, strong) SVKRegion *localRegion;
@@ -37,18 +37,18 @@ NSString *const UninitializedString =  @"UninitializedString";
 	if (self) {
 		_primaryLocationString = UninitializedString;
 		_singleLineInstruction = UninitializedString;
-    _order = BHSegmentOrdering_Regular;
+    _order = TKSegmentOrderingRegular;
     _alerts = nil;
 	}
 	return self;
 }
 
-- (id)initAsTerminal:(BHSegmentOrdering)order
+- (id)initAsTerminal:(TKSegmentOrdering)order
              forTrip:(Trip *)aTrip
 {
   NSParameterAssert(aTrip);
   
-  if (order == BHSegmentOrdering_Regular) {
+  if (order == TKSegmentOrderingRegular) {
     ZAssert(false, @"Terminal can't be of regular order");
     return nil;
   }
@@ -80,13 +80,13 @@ NSString *const UninitializedString =  @"UninitializedString";
 - (BOOL)hasVisibility:(STKTripSegmentVisibility)type
 {
   switch (self.order) {
-    case BHSegmentOrdering_Start:
+    case TKSegmentOrderingStart:
       return type == STKTripSegmentVisibilityInDetails;
       
-    case BHSegmentOrdering_Regular:
+    case TKSegmentOrderingRegular:
       return (STKTripSegmentVisibility)self.template.visibility.intValue >= type;
       
-    case BHSegmentOrdering_End:
+    case TKSegmentOrderingEnd:
       return type != STKTripSegmentVisibilityInSummary;
   }
 }
@@ -157,24 +157,24 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSDate *)departureTime {
   switch (self.order) {
-    case BHSegmentOrdering_Start:
+    case TKSegmentOrderingStart:
       return self.trip.departureTime;
-    case BHSegmentOrdering_Regular:
+    case TKSegmentOrderingRegular:
       return self.reference.startTime;
-    case BHSegmentOrdering_End:
+    case TKSegmentOrderingEnd:
       return self.trip.arrivalTime;
   }
 }
 
 - (void)setDepartureTime:(NSDate *)date {
   switch (self.order) {
-    case BHSegmentOrdering_Start:
+    case TKSegmentOrderingStart:
       self.trip.departureTime = date;
       return;
-    case BHSegmentOrdering_Regular:
+    case TKSegmentOrderingRegular:
       self.reference.startTime = date;
       return;
-    case BHSegmentOrdering_End:
+    case TKSegmentOrderingEnd:
       self.trip.arrivalTime = date;
       return;
   }
@@ -182,13 +182,13 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (void)setArrivalTime:(NSDate *)date {
   switch (self.order) {
-    case BHSegmentOrdering_Start:
+    case TKSegmentOrderingStart:
       self.trip.departureTime = date;
       return;
-    case BHSegmentOrdering_Regular:
+    case TKSegmentOrderingRegular:
       self.reference.endTime = date;
       return;
-    case BHSegmentOrdering_End:
+    case TKSegmentOrderingEnd:
       self.trip.arrivalTime = date;
       return;
   }
@@ -196,11 +196,11 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSDate *)arrivalTime {
   switch (self.order) {
-    case BHSegmentOrdering_Start:
+    case TKSegmentOrderingStart:
       return self.trip.departureTime;
-    case BHSegmentOrdering_Regular:
+    case TKSegmentOrderingRegular:
       return self.reference.endTime;
-    case BHSegmentOrdering_End:
+    case TKSegmentOrderingEnd:
       return self.trip.arrivalTime;
   }
 }
@@ -463,17 +463,17 @@ NSString *const UninitializedString =  @"UninitializedString";
   return NO;
 }
 
-- (BHSegmentWaypoint)guessWaypointTypeForVisit:(StopVisits *)visit
+- (TKSegmentWaypoint)guessWaypointTypeForVisit:(StopVisits *)visit
 {
   NSTimeInterval duration = [self duration:YES];
   NSDate *gettingOnCutOff = [self.departureTime dateByAddingTimeInterval:duration * 0.3333];
   NSDate *gettingOffCutOff = [self.departureTime dateByAddingTimeInterval:duration * 0.6667];
   if ([visit.time earlierDate:gettingOnCutOff] == visit.time) {
-    return BHSegmentWaypointGetOn;
+    return TKSegmentWaypointGetOn;
   } else if ([visit.time laterDate:gettingOffCutOff] == visit.time) {
-    return BHSegmentWaypointGetOff;
+    return TKSegmentWaypointGetOff;
   } else {
-    return BHSegmentWaypointUnknown;
+    return TKSegmentWaypointUnknown;
   }
 }
 
@@ -561,7 +561,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (BOOL)isStationary {
-  return self.order != BHSegmentOrdering_Regular || [self.template isStationary];
+  return self.order != TKSegmentOrderingRegular || [self.template isStationary];
 }
 
 - (BOOL)isSelfNavigating {
@@ -578,7 +578,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (BOOL)isImpossible
 {
-  if (self.order != BHSegmentOrdering_Regular) {
+  if (self.order != TKSegmentOrderingRegular) {
     return NO;
   }
   if ([self duration:NO] < 0) {
@@ -697,11 +697,11 @@ NSString *const UninitializedString =  @"UninitializedString";
     ZAssert(self.trip, @"All segments need a trip");
     
     switch (self.order) {
-      case BHSegmentOrdering_Start:
+      case TKSegmentOrderingStart:
         _start = self.trip.request.fromLocation;
         break;
         
-      case BHSegmentOrdering_Regular: {
+      case TKSegmentOrderingRegular: {
         _start = self.template.startLocation;
         if (_start == nil) {
           // old school
@@ -710,7 +710,7 @@ NSString *const UninitializedString =  @"UninitializedString";
         break;
       }
         
-      case BHSegmentOrdering_End:
+      case TKSegmentOrderingEnd:
         _start = self.trip.request.toLocation;
         break;
     }
@@ -723,12 +723,12 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
   if (nil == _end) {
     switch (self.order) {
-      case BHSegmentOrdering_Start:
-      case BHSegmentOrdering_End:
+      case TKSegmentOrderingStart:
+      case TKSegmentOrderingEnd:
         _end = [self start];
         break;
         
-      case BHSegmentOrdering_Regular: {
+      case TKSegmentOrderingRegular: {
         _end = self.template.endLocation;
         if (_end == nil) {
           // old school
@@ -802,11 +802,11 @@ NSString *const UninitializedString =  @"UninitializedString";
 - (UIImage *)pointImage
 {
   switch (self.order) {
-    case BHSegmentOrdering_Start:
-    case BHSegmentOrdering_End:
+    case TKSegmentOrderingStart:
+    case TKSegmentOrderingEnd:
       return [SGStyleManager imageNamed:@"icon-pin"];
       
-    case BHSegmentOrdering_Regular:
+    case TKSegmentOrderingRegular:
       return [self imageForIconType:SGStyleModeIconTypeListMainMode allowRealTime:NO];
   }
 }
@@ -818,7 +818,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (BOOL)isTerminal
 {
-  return self.order == BHSegmentOrdering_End;
+  return self.order == TKSegmentOrderingEnd;
 }
 
 #pragma mark - STKDisplayableTimePoint
@@ -1025,7 +1025,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 - (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
 {
 #pragma unused(activityViewController, activityType)
-  if (self.order == BHSegmentOrdering_End) {
+  if (self.order == TKSegmentOrderingEnd) {
       NSString *messageFormat = NSLocalizedStringFromTableInBundle(@"MessageArrivalTime", @"TripKit", [TKTripKit bundle], @"ArrivalTime");
       NSString *message = [NSString stringWithFormat:messageFormat, [self.trip.request.toLocation title], [SGStyleManager timeString:self.arrivalTime forTimeZone:self.timeZone]];
       return message;
@@ -1272,7 +1272,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
 	if (_primaryLocationString == UninitializedString) {
 		// build it
-		if (self.order != BHSegmentOrdering_Regular) {
+		if (self.order != TKSegmentOrderingRegular) {
 			// do nothing
 		} else if ([self isStationary] || [self isContinuation]) {
 			NSString *departure = [self departureLocation];
@@ -1305,7 +1305,7 @@ NSString *const UninitializedString =  @"UninitializedString";
     NSString *newString = nil;
     
     switch (self.order) {
-      case BHSegmentOrdering_Start: {
+      case TKSegmentOrderingStart: {
         isTimeDependent = self.trip.departureTimeIsFixed;
         NSString *name = [self.trip.request.fromLocation name];
         if (! name) {
@@ -1329,7 +1329,7 @@ NSString *const UninitializedString =  @"UninitializedString";
         break;
       }
 
-      case BHSegmentOrdering_Regular: {
+      case TKSegmentOrderingRegular: {
         if (!self.template.action) {
           return nil;
         }
@@ -1339,7 +1339,7 @@ NSString *const UninitializedString =  @"UninitializedString";
         break;
       }
         
-      case BHSegmentOrdering_End: {
+      case TKSegmentOrderingEnd: {
         isTimeDependent = self.trip.departureTimeIsFixed;
         NSString *name = [self.trip.request.toLocation name];
         if (! name) {

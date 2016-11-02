@@ -14,7 +14,7 @@
 
 - (NSURL *)shareURL
 {
-  BOOL isEnd = (self.order == BHSegmentOrdering_End);
+  BOOL isEnd = (self.order == TKSegmentOrderingEnd);
   CLLocationCoordinate2D coordinate = isEnd ? [self.end coordinate] : [self.start coordinate];
   NSDate *time = isEnd ? self.arrivalTime : self.departureTime;
   return [TKShareHelper meetURLForCoordinate:coordinate atTime:time];

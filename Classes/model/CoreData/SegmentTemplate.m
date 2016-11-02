@@ -99,11 +99,11 @@ typedef NSUInteger SGSegmentTemplateFlag;
 }
 
 - (BOOL)isPublicTransport {
-  return self.segmentType.integerValue == BHSegmentTypeScheduled;
+  return self.segmentType.integerValue == TKSegmentTypeScheduled;
 }
 
 - (BOOL)isStationary {
-  return self.segmentType.integerValue == BHSegmentTypeStationary;
+  return self.segmentType.integerValue == TKSegmentTypeStationary;
 }
 
 - (BOOL)isSelfNavigating {

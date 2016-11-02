@@ -302,7 +302,7 @@
 + (NSUInteger)basicScoreBetweenStartTime:(NSDate *)startTime
                                  endTime:(NSDate *)endTime
                                 deadline:(NSDate *)deadline
-                            segmentOrder:(BHSegmentOrdering)order
+                            segmentOrder:(TKSegmentOrdering)order
                                  forTime:(NSDate *)time
 {
   // for the time, we prefer being in the middle of the segment, but leaving early (up to tens mins) and leaving late (up to 5 mins) is fine.
@@ -318,7 +318,7 @@
     if (timeToStart > 0) {
       // segment didn't start yet
       offset = timeToStart;
-      minScore = (order == BHSegmentOrdering_Start) ? 10 : 0;
+      minScore = (order == TKSegmentOrderingStart) ? 10 : 0;
       minScoreOffset = 10 * 60;
     } else {
       // segment is over
@@ -329,7 +329,7 @@
       ZAssert(timeSinceEnd > 0, @"Shouldn't end up in the middle!");
       offset = timeSinceEnd;
       minScore = 0;
-      minScoreOffset = (order == BHSegmentOrdering_End ? 1 : 5) * 60;
+      minScoreOffset = (order == TKSegmentOrderingEnd ? 1 : 5) * 60;
       minScoreOffset = MIN(minScoreOffset, [endTime timeIntervalSinceDate:startTime]);
     }
     
@@ -338,7 +338,7 @@
     } else {
       double match = offset / minScoreOffset;
       double proportion = 1.0 - match;
-      NSUInteger max = (order == BHSegmentOrdering_Start) ? 50 : 100;
+      NSUInteger max = (order == TKSegmentOrderingStart) ? 50 : 100;
       return minScore + (NSUInteger) (proportion * (max - minScore));
     }
   }
