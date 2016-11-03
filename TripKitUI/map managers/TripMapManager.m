@@ -19,7 +19,6 @@
 
 @interface TripMapManager ()
 
-@property (nonatomic, strong) NSTimer *realTimeUpdateTimer;
 @property (nonatomic, strong) TKBuzzInfoProvider *infoProvider;
 
 @end
@@ -54,15 +53,6 @@
   if (completion != nil) {
     completion(YES);
   }
-}
-
-- (void)cleanUp:(BOOL)animated completion:(void (^)(BOOL finished))completion
-{
-  // stop updating
-  [self.realTimeUpdateTimer invalidate];
-  self.realTimeUpdateTimer = nil;
-	 
-  [super cleanUp:animated completion:completion];
 }
 
 - (BOOL)drawAsLargeCircle:(id<MKAnnotation>)annotation
@@ -153,28 +143,6 @@
 
 #pragma mark - RealTime
 
-- (void)kickOffRealTimeUpdates:(BOOL)animated
-{
-  [self scheduleRealTimeUpdateTimer];
-  [self updateTripWithRealTimeData:animated];
-}
-
-- (void)setEnableRealTimeUpdates:(BOOL)enableRealTimeUpdates
-{
-  if (_enableRealTimeUpdates == enableRealTimeUpdates) {
-    return;
-  }
-  
-  _enableRealTimeUpdates = enableRealTimeUpdates;
-  
-  if (enableRealTimeUpdates) {
-    [self scheduleRealTimeUpdateTimer];
-  } else {
-    [self.realTimeUpdateTimer invalidate];
-    self.realTimeUpdateTimer = nil;
-  }
-}
-
 - (void)realTimeUpdateForTrip:(Trip *)theTrip animated:(BOOL)animated
 {
   NSMutableArray *newAlerts = [NSMutableArray array];
@@ -214,54 +182,6 @@
    }];
 }
 
-- (void)subsequentRealtimeUpdate:(NSTimer *)timer
-{
-#pragma unused(timer)
-  [self updateTripWithRealTimeData:YES];
-}
-
-- (void)updateTripWithRealTimeData:(BOOL)animated
-{
-  if (!self.enableRealTimeUpdates
-      || nil == self.trip
-      || nil == self.trip.managedObjectContext // this would happen if the user deleted the trip (say, via the favourites)
-      || NO == [self.trip wantsRealTimeUpdates]
-      )
-  {
-    [self.realTimeUpdateTimer invalidate];
-    self.realTimeUpdateTimer = nil;
-    return;
-  }
-  
-  TKBuzzRealTime *realTime = [[TKBuzzRealTime alloc] init];
-  [realTime updateTrip:self.trip
-               success:
-   ^(Trip *updatedTrip, BOOL tripDidUpdate) {
-     if (tripDidUpdate && self.trip == updatedTrip) {
-       // Update map and details
-       [self realTimeUpdateForTrip:updatedTrip animated:animated];
-     }
-   }
-               failure:
-   ^(NSError *error) {
-#pragma unused(error)
-     DLog(@"Error: %@", error);
-
-   }];
-}
-
-- (void)scheduleRealTimeUpdateTimer
-{
-  // Invalidate old if we have one
-  [self.realTimeUpdateTimer invalidate];
-  
-  // Schedule new
-  self.realTimeUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:TIME_BETWEEN_UPDATES
-                                                              target:self
-                                                            selector:@selector(subsequentRealtimeUpdate:)
-                                                            userInfo:nil
-                                                             repeats:YES];
-}
 
 #pragma mark - Lazy
 

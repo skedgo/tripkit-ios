@@ -27,8 +27,6 @@ extension TripMapManager {
     deselectAll()
     self.trip = trip
     
-    kickOffRealTimeUpdates(animated)
-    
     var forzeZoom = self.forceZoom
     if !forzeZoom
       && mapView.visibleMapRect.origin.x >= 0 // might happen if map view is minimized

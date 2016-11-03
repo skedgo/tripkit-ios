@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) Trip * trip;
 @property (nonatomic, strong) NSArray<Alert *>* alerts;
-@property (nonatomic, assign) BOOL enableRealTimeUpdates;
 @property (nonatomic, assign) BOOL forceZoom;
 
 - (void)showSegment:(TKSegment *)segment animated:(BOOL)animated;
@@ -28,8 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)selectAlert:(Alert *)alert;
 
 - (nullable TKSegment *)segmentForAlert:(Alert *)alert;
-
-- (void)kickOffRealTimeUpdates:(BOOL)animated;
 
 - (void)realTimeUpdateForTrip:(Trip *)theTrip animated:(BOOL)animated;
 
