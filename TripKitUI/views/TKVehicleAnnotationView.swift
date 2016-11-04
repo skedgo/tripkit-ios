@@ -39,18 +39,14 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     // Vehicle color needs to change following real-time update.
     if let vehicle = annotation as? Vehicle {
       vehicle.rx.observeWeakly(NSNumber.self, "occupancyRaw")
-        .debug()
-        .subscribe(onNext: { [weak self] rawOccupancy in
-          guard
-            let `self` = self,
-            let rawValue = rawOccupancy,
-            let occupancy = TKOccupancy(rawValue: rawValue.intValue),
-            let color = occupancy.color,
-            let vehicleView = self.vehicleShape else {
-            return
-          }
-          
-          vehicleView.color = color
+        .filter { $0 != nil }
+        .map { rawOccupancy -> UIColor? in
+          let occupancy = TKOccupancy(rawValue: rawOccupancy!.intValue)
+          return occupancy?.color
+        }
+        .subscribe(onNext: { [weak self] color in
+          guard let `self` = self else { return }
+          self.vehicleShape?.color = color
         })
         .addDisposableTo(disposeBag)
     }
@@ -84,7 +80,6 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     }
     
     guard
-      let annotation = annotation,
       let vehicle = annotation as? Vehicle else {
       return // happens on getting removed.
     }
@@ -98,7 +93,7 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     
     // The wrapper
     let wrapper = UIView(frame: frame)
-    wrapper.backgroundColor = UIColor.clear
+    wrapper.backgroundColor = .clear
     wrapper.isOpaque = false
     
     // The vehicle
