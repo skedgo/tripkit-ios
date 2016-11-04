@@ -33,12 +33,8 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
   }
   
   override public var annotation: MKAnnotation? {
-    get {
-      return annotation
-    }
-    set {
-      super.annotation = newValue
-      update(for: newValue)
+    didSet {
+      update(for: annotation)
     }
   }
   
