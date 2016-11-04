@@ -179,26 +179,17 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
   // MARK: - Helpers
   
   private func textColorForBackgroundColor(_ color: UIColor) -> UIColor {
-    let red = UnsafeMutablePointer<CGFloat>.allocate(capacity: 1)
-    let green = UnsafeMutablePointer<CGFloat>.allocate(capacity: 1)
-    let blue = UnsafeMutablePointer<CGFloat>.allocate(capacity: 1)
-    let alpha = UnsafeMutablePointer<CGFloat>.allocate(capacity: 1)
+    var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
     
-    color.getRed(red, green: green, blue: blue, alpha: alpha)
+    color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
     
-    let color: UIColor
-    
-    if (red.pointee + green.pointee + blue.pointee) * alpha.pointee / 3 < 0.5 {
-      color = UIColor.white
+    let textColor: UIColor
+    if (red + green + blue) * alpha / 3 < 0.5 {
+      textColor = .white
     } else {
-      color = UIColor.black
+      textColor = .black
     }
     
-    red.deallocate(capacity: 1)
-    green.deallocate(capacity: 1)
-    blue.deallocate(capacity: 1)
-    alpha.deallocate(capacity: 1)
-    
-    return color
+    return textColor
   }
 }
