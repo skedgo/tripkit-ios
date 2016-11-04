@@ -86,7 +86,7 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
       }
     }
     
-    if vehicleView != nil {
+    if vehicleView == nil {
       let vehicleShape = VehicleView(frame: vehicleRect, color: serviceColor)
       vehicleView = vehicleShape
       self.vehicleShape = vehicleShape
