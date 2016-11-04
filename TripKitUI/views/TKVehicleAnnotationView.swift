@@ -13,8 +13,8 @@ import SGPulsingAnnotationView
 
 public class TKVehicleAnnotationView: SVPulsingAnnotationView {
   
-  private weak var vehicleShape: VehicleView!
-  private weak var vehicleImageView: UIImageView!
+  private weak var vehicleShape: VehicleView?
+  private weak var vehicleImageView: UIImageView?
   private weak var label: UILabel!
   private weak var wrapper: UIView!
   
@@ -123,8 +123,8 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
   }
   
   public func rotateVehicle(bearingAngle: CLLocationDirection) {
-    vehicleShape.setNeedsDisplay()
-    vehicleImageView.setNeedsDisplay()
+    vehicleShape?.setNeedsDisplay()
+    vehicleImageView?.setNeedsDisplay()
     
     // rotate the wrapper
     wrapper.rotate(forBearing: CGFloat(bearingAngle))
