@@ -8,6 +8,7 @@
 
 import Foundation
 
+import RxSwift
 import MapKit
 import SGPulsingAnnotationView
 
@@ -21,26 +22,63 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
   private let vehicleWidth = CGFloat(30)
   private let vehicleHeight = CGFloat(15)
   
-  // MARK: - Initialisers
+  private let disposeBag = DisposeBag()
+  
+  override public var annotation: MKAnnotation? {
+    didSet {
+      updated(with: annotation)
+    }
+  }
+  
+  // MARK: -
   
   public init(with annotation: MKAnnotation?, reuseIdentifier: String?) {
     super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-    update(for: annotation)
+    updated(with: annotation)
+    
+    // Vehicle color needs to change following real-time update.
+    if let vehicle = annotation as? Vehicle {
+      vehicle.rx.observeWeakly(NSNumber.self, "occupancyRaw")
+        .debug()
+        .subscribe(onNext: { [weak self] rawOccupancy in
+          guard
+            let `self` = self,
+            let rawValue = rawOccupancy,
+            let occupancy = TKOccupancy(rawValue: rawValue.intValue),
+            let color = occupancy.color,
+            let vehicleView = self.vehicleShape else {
+            return
+          }
+          
+          vehicleView.color = color
+        })
+        .addDisposableTo(disposeBag)
+    }
   }
   
   required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override public var annotation: MKAnnotation? {
-    didSet {
-      update(for: annotation)
+  // MARK: - UI Update
+  
+  public func aged(by factor: CGFloat) {
+    wrapper.alpha = 1 - factor
+    
+    if factor > 0.9 {
+      if delayBetweenPulseCycles != Double.infinity {
+        delayBetweenPulseCycles = Double.infinity
+        setNeedsLayout()
+      }
+    } else {
+      if delayBetweenPulseCycles == Double.infinity {
+        delayBetweenPulseCycles = 1
+        setNeedsLayout()
+      }
     }
   }
   
-  // MARK: - View drawing.
-  
-  private func update(for annotation: MKAnnotation?) {
+  private func updated(with annotation: MKAnnotation?) {
     subviews.forEach {
       $0.removeFromSuperview()
     }
@@ -88,6 +126,7 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     
     if vehicleView == nil {
       let vehicleShape = VehicleView(frame: vehicleRect, color: serviceColor)
+      
       vehicleView = vehicleShape
       self.vehicleShape = vehicleShape
     }
@@ -119,8 +158,9 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     if let bearing = vehicle.bearing?.floatValue {
       rotateVehicle(bearingAngle: CLLocationDirection(bearing))
     }
-    
   }
+  
+  // MARK: - Orientation.
   
   public func rotateVehicle(bearingAngle: CLLocationDirection) {
     vehicleShape?.setNeedsDisplay()
@@ -141,21 +181,7 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     rotateVehicle(bearingAngle: bearingAngle - headingAngle)
   }
   
-  public func update(for agingFactor: CGFloat) {
-    wrapper.alpha = 1 - agingFactor
-    
-    if agingFactor > 0.9 {
-      if delayBetweenPulseCycles != Double.infinity {
-        delayBetweenPulseCycles = Double.infinity
-        setNeedsLayout()
-      }
-    } else {
-      if delayBetweenPulseCycles == Double.infinity {
-        delayBetweenPulseCycles = 1
-        setNeedsLayout()
-      }
-    }
-  }
+  // MARK: - Helpers
   
   private func textColorForBackgroundColor(_ color: UIColor) -> UIColor {
     let red = UnsafeMutablePointer<CGFloat>.allocate(capacity: 1)
