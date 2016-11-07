@@ -8,24 +8,20 @@
 
 import Foundation
 
+import Marshal
+
 import SGCoreKit
 
-// Swift-only this would be a struct
-public class TKQuickBookingPrice: NSObject {
+public struct TKQuickBookingPrice {
   /// Price in local currency, typically not in smallest unit, but dollars
   public let localCost: Float
   
   /// Price in USD dollars
   public let USDCost: Float
-  
-  fileprivate init(localCost: Float, USDCost: Float) {
-    self.localCost = localCost
-    self.USDCost = USDCost
-  }
+
 }
 
-// Swift-only this would be a struct
-public class TKQuickBooking: NSObject {
+public struct TKQuickBooking : Unmarshaling {
   /// Localised identifying this booking option
   public let title: String
 
@@ -60,54 +56,78 @@ public class TKQuickBooking: NSObject {
   public let surgeImageURL: URL?
 
   /// Optional ETA for this option. This is the expected waiting time.
-  public let ETA: TimeInterval?
-  
-  /// Expected waiting time. Negative if unknown. (For Obj-c compatibility.)
-  public let ETARaw: TimeInterval
-  
-  fileprivate init(title: String, subtitle: String?, bookingURL: URL, bookingTitle: String, secondaryBookingURL: URL?, secondaryBookingTitle: String?, tripUpdateURL: URL?, imageURL: URL?, price: TKQuickBookingPrice?, priceString: String?, surgeText: String?, surgeImageURL: URL?, ETA: TimeInterval?) {
-    self.title = title
-    self.subtitle = subtitle
-    self.bookingURL = bookingURL
-    self.bookingTitle = bookingTitle
-    self.secondaryBookingURL = secondaryBookingURL
-    self.secondaryBookingTitle = secondaryBookingTitle
-    self.tripUpdateURL = tripUpdateURL
-    self.imageURL = imageURL
-    self.price = price
-    self.priceString = priceString
-    self.surgeString = surgeText
-    self.surgeImageURL = surgeImageURL
-    self.ETA = ETA
-    if let ETA = ETA {
-      self.ETARaw = ETA
+  public let eta: TimeInterval?
+
+  public init(object: MarshaledObject) throws {
+    title                 = try  object.value(for: "title")
+    subtitle              = try? object.value(for: "subtitle")
+    imageURL              = try? object.value(for: "imageURL")
+    
+    bookingTitle          = try  object.value(for: "bookingTitle")
+    bookingURL            = try  object.value(for: "bookingURL")
+    secondaryBookingTitle = try? object.value(for: "secondaryBookingTitle")
+    secondaryBookingURL   = try? object.value(for: "secondaryBookingURL")
+    tripUpdateURL         = try? object.value(for: "tripUpdateURL")
+
+    eta                   = try? object.value(for: "ETA")
+    priceString           = try? object.value(for: "priceString")
+    surgeString           = try? object.value(for: "surgeString")
+    surgeImageURL         = try? object.value(for: "surgeImageURL")
+
+    if let local: Float = try? object.value(for: "price"), let usd: Float = try? object.value(for: "USDPrice") {
+      price = TKQuickBookingPrice(localCost: local, USDCost: usd)
     } else {
-      self.ETARaw = -1
+      price = nil
     }
+    
   }
+  
 }
 
-// Swift-only this would be a struct
-public struct TKBookingConfirmation {
-  public struct Detail {
+public struct TKBookingConfirmation : Unmarshaling {
+  
+  public struct Detail : Unmarshaling {
     public let title: String
     public let subtitle: String?
     public let imageURL: URL?
+    
+    public init(object: MarshaledObject) throws {
+      title     = try  object.value(for: "title")
+      subtitle  = try? object.value(for: "subtitle")
+      imageURL  = try? object.value(for: "imageURL")
+    }
   }
   
-  public struct Action {
+  public struct Action : Unmarshaling {
     public let title: String
     public let isDestructive: Bool
     public let internalURL: URL?
     public let externalAction: String?
+
+    public init(object: MarshaledObject) throws {
+      title           = try  object.value(for: "title")
+      isDestructive   = try  object.value(for: "isDestructive")
+      internalURL     = try? object.value(for: "internalURL")
+      externalAction  = try? object.value(for: "externalURL")
+    }
   }
   
-  public struct Purchase {
+  public struct Purchase : Unmarshaling {
     public let price: NSDecimalNumber
     public let currency: String
     public let productName: String
     public let productType: String
     public let id: String
+    
+    public init(object: MarshaledObject) throws {
+      let raw: Double = try object.value(for: "price")
+      price = NSDecimalNumber(value: raw)
+      currency        = try  object.value(for: "currency")
+      productName     = try  object.value(for: "price")
+      productType     = try  object.value(for: "productType")
+      id              = try  object.value(for: "id")
+    }
+    
   }
   
   public let status: Detail
@@ -115,14 +135,21 @@ public struct TKBookingConfirmation {
   public let vehicle: Detail?
   public let purchase: Purchase?
   public let actions: [Action]
+  
+  public init(object: MarshaledObject) throws {
+    status    = try  object.value(for: "status")
+    provider  = try? object.value(for: "provider")
+    vehicle   = try? object.value(for: "vehicle")
+    purchase  = try? object.value(for: "purchase")
+    actions   = (try? object.value(for: "actions")) ?? []
+  }
 }
 
-// Swift-only this would be an enum
-public class TKQuickBookingHelper: NSObject {
+public enum TKQuickBookingHelper {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
-  public class func fetchQuickBookings(forSegment segment: TKSegment, completion: @escaping ([TKQuickBooking]) -> Void) {
+  public static func fetchQuickBookings(forSegment segment: TKSegment, completion: @escaping ([TKQuickBooking]) -> Void) {
     if let stored = segment.storedQuickBookings {
       completion(stored)
       return
@@ -134,151 +161,19 @@ public class TKQuickBookingHelper: NSObject {
     }
     
     SVKServer.get(bookingsURL, paras: nil) { _, response, error in
-      guard let array = response as? [[NSString: Any]], !array.isEmpty else {
+      guard let array = response as? [[String: Any]], !array.isEmpty else {
         completion([])
         SGKLog.warn("TKQuickBookingHelper", text: "Response isn't array.\nResponse: \(response)\nError: \(error)")
         return
       }
       
       segment.storeQuickBookings(fromArray: array)
-      let bookings = array.flatMap { TKQuickBooking(withDictionary: $0) }
+      let bookings = array.flatMap { try? TKQuickBooking(object: $0) }
       completion(bookings)
     }
   }
-  
-  fileprivate override init() {
-    fatalError("Don't instantiate me.")
-  }
+
 }
-
-extension TKQuickBooking {
-  fileprivate convenience init?(withDictionary dictionary: [NSString: Any]) {
-    guard let bookingURLString = dictionary["bookingURL"] as? String,
-          let bookingURL = URL(string: bookingURLString),
-          let bookingTitle = dictionary["bookingTitle"] as? String,
-          let title = dictionary["title"] as? String
-      else {
-        return nil
-    }
-    
-    let subtitle = dictionary["subtitle"] as? String
-    let imageURL: URL?
-    if let URLString = dictionary["imageURL"] as? String, let URL = URL(string: URLString) {
-      imageURL = URL
-    } else {
-      imageURL = nil
-    }
-    
-    let priceString = dictionary["priceString"] as? String
-    let price: TKQuickBookingPrice?
-    if let local = dictionary["price"] as? Float,
-       let USD = dictionary["USDPrice"] as? Float {
-        price = TKQuickBookingPrice(localCost: local, USDCost: USD)
-    } else {
-      price = nil
-    }
-
-    let secondaryBookingTitle = dictionary["secondaryBookingTitle"] as? String
-    let secondaryBookingURLString = dictionary["secondaryBookingURL"] as? String
-    let secondaryBookingURL = secondaryBookingURLString != nil ? URL(string: secondaryBookingURLString!) : nil
-
-    let surgeText = dictionary["surgeString"] as? String
-    let surgeImageURLString = dictionary["surgeImageURL"] as? String
-    let surgeImageURL = surgeImageURLString != nil ? URL(string: surgeImageURLString!) : nil
-    
-    let ETA = dictionary["ETA"] as? TimeInterval
-    
-    let tripUpdateURLString = dictionary["tripUpdateURL"] as? String
-    let tripUpdateURL = tripUpdateURLString != nil ? URL(string: tripUpdateURLString!) : nil
-    
-    self.init(title: title, subtitle: subtitle,
-              bookingURL: bookingURL, bookingTitle: bookingTitle,
-              secondaryBookingURL: secondaryBookingURL, secondaryBookingTitle: secondaryBookingTitle,
-              tripUpdateURL: tripUpdateURL,
-              imageURL: imageURL,
-              price: price, priceString: priceString,
-              surgeText: surgeText, surgeImageURL: surgeImageURL,
-              ETA: ETA
-    )
-  }
-}
-
-extension TKBookingConfirmation {
-  fileprivate init?(withDictionary dictionary: [String: Any]) {
-    guard let status = Detail(withDictionary: dictionary["status"] as? [String: Any]) else {
-        return nil
-    }
-    
-    let provider = Detail(withDictionary: dictionary["provider"] as? [String: Any])
-    let vehicle = Detail(withDictionary: dictionary["vehicle"] as? [String: Any])
-    let purchase = Purchase(withDictionary: dictionary["purchase"] as? [String: Any])
-    
-    let actions: [Action]
-    if let rawActions = dictionary["actions"] as? [[String: Any]] {
-      actions = rawActions.flatMap { Action(withDictionary: $0) }
-    } else {
-      actions = []
-    }
-
-    self.init(status: status, provider: provider, vehicle: vehicle, purchase: purchase, actions: actions)
-  }
-}
-
-extension TKBookingConfirmation.Detail {
-  fileprivate init?(withDictionary dictionary: [String: Any]?) {
-    guard let dictionary = dictionary,
-          let title = dictionary["title"] as? String else { return nil }
-    
-    self.title = title
-    self.subtitle = dictionary["subtitle"] as? String
-    if let imageURLString = dictionary["imageURL"] as? String,
-       let imageURL = URL(string: imageURLString) {
-      self.imageURL = imageURL
-    } else {
-      self.imageURL = nil
-    }
-  }
-}
-
-extension TKBookingConfirmation.Action {
-  fileprivate init?(withDictionary dictionary: [String: Any]?) {
-    guard let dictionary = dictionary,
-      let title = dictionary["title"] as? String,
-      let isDestructive = dictionary["isDestructive"] as? Bool else { return nil }
-    
-    self.title = title
-    self.isDestructive = isDestructive
-    
-    if let internalURLString = dictionary["internalURL"] as? String,
-      let internalURL = URL(string: internalURLString) {
-      self.internalURL = internalURL
-    } else {
-      self.internalURL = nil
-    }
-
-    self.externalAction = dictionary["externalURL"] as? String
-  }
-}
-
-extension TKBookingConfirmation.Purchase {
-  fileprivate init?(withDictionary dictionary: [String: Any]?) {
-    guard
-      let dictionary = dictionary,
-      let price = dictionary["price"] as? Double,
-      let currency = dictionary["currency"] as? String,
-      let productName = dictionary["productName"] as? String,
-      let productType = dictionary["productType"] as? String,
-      let id = dictionary["id"] as? String
-      else { return nil }
-    
-    self.price = NSDecimalNumber(value: price)
-    self.currency = currency
-    self.productName = productName
-    self.productType = productType
-    self.id = id
-  }
-}
-
 
 
 extension TKBookingConfirmation {
@@ -318,7 +213,7 @@ extension TKBookingConfirmation {
         "id": "1204f411-eacb-406c-8fd2-3775c8242b02",
       ]
     ] as [String : Any]
-    return TKBookingConfirmation(withDictionary: fake)
+    return try? TKBookingConfirmation(object: fake)
   }
 
   fileprivate static func fakePublic() -> TKBookingConfirmation? {
@@ -335,7 +230,7 @@ extension TKBookingConfirmation {
         "subtitle": "Valid until 15:30",
       ],
     ] as [String : Any]
-    return TKBookingConfirmation(withDictionary: fake)
+    return try? TKBookingConfirmation(object: fake)
   }
 }
 
@@ -344,7 +239,7 @@ extension TKSegment {
     get {
       if let key = cacheKey(),
          let cached = TKTripKit.sharedInstance().inMemoryCache().object(forKey: key as AnyObject) as? [[NSString: Any]] {
-        return cached.flatMap { TKQuickBooking(withDictionary: $0) }
+        return cached.flatMap { try? TKQuickBooking(object: $0) }
       } else {
         return nil
       }
@@ -386,7 +281,7 @@ extension TKSegment {
     }
   }
   
-  fileprivate func storeQuickBookings(fromArray array: [[NSString: Any]]) {
+  public func storeQuickBookings(fromArray array: [[String: Any]]) {
     guard let key = cacheKey() else { return }
     
     TKTripKit.sharedInstance().inMemoryCache().setObject(array as AnyObject, forKey: key as AnyObject)
@@ -394,7 +289,7 @@ extension TKSegment {
   
   public var bookingConfirmation: TKBookingConfirmation? {
     if let dictionary = bookingConfirmationDictionary() {
-      return TKBookingConfirmation(withDictionary: dictionary)
+      return try? TKBookingConfirmation(object: dictionary)
       
       // Useful for debugging the confirmation screen
 //    } else if let mode = modeIdentifier() where !isStationary() && mode.hasPrefix("ps_tnc") {
