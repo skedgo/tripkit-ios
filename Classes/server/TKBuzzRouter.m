@@ -412,11 +412,17 @@
 
 - (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *shareURL, id JSON, NSError *error))completion
 {
-  // de-construct the URL
-  NSString *port = nil != url.port ? [NSString stringWithFormat:@":%@", url.port] : @"";
-  NSString *scheme = [url.scheme hasPrefix:@"http"] ? url.scheme : @"https"; // keep http and https, but replace stuff like $appname://
-  NSString *baseURLString = [NSString stringWithFormat:@"%@://%@%@%@", scheme, url.host, port, url.path];
-  NSURL *baseURL = [NSURL URLWithString:baseURLString];
+  NSURL *baseURL;
+  if ([url.scheme isEqualToString:@"file"]) {
+    baseURL = url;
+    
+  } else {
+    // de-construct the URL
+    NSString *port = nil != url.port ? [NSString stringWithFormat:@":%@", url.port] : @"";
+    NSString *scheme = [url.scheme hasPrefix:@"http"] ? url.scheme : @"https"; // keep http and https, but replace stuff like $appname://
+    NSString *baseURLString = [NSString stringWithFormat:@"%@://%@%@%@", scheme, url.host, port, url.path];
+    baseURL = [NSURL URLWithString:baseURLString];
+  }
   
   // use our default parameters and append those from the URL
   NSMutableDictionary *paras = [TKSettings defaultDictionary];
