@@ -15,6 +15,8 @@
 #ifdef TK_NO_FRAMEWORKS
 #import "TripKit.h"
 #import <TripKit/TripKit-Swift.h>
+#else
+#import <TripKitUI/TripKitUI-Swift.h>
 #endif
 
 #import "CircleAnnotationView.h"
@@ -105,7 +107,7 @@
        
        // temporary revert to coordinate based on where the view is,
        // so that we can animate properly to the new view
-       VehicleAnnotationView *view = (VehicleAnnotationView *) [self.mapView viewForAnnotation:vehicle];
+       TKVehicleAnnotationView *view = (TKVehicleAnnotationView *) [self.mapView viewForAnnotation:vehicle];
        CLLocationCoordinate2D goodCoordinate = vehicle.coordinate;
        CGPoint center = CGPointMake(CGRectGetMidX(view.frame), CGRectGetMidY(view.frame));
        vehicle.coordinate = [self.mapView convertPoint:center toCoordinateFromView:view.superview];
@@ -117,7 +119,7 @@
           vehicle.coordinate = goodCoordinate;
           
           if (vehicle.bearing) {
-            [view rotateVehicleForBearing:vehicle.bearing.floatValue - self.heading];
+            [view rotateVehicleWithBearingAngle:vehicle.bearing.floatValue - self.heading];
           }
         }];
      
@@ -149,10 +151,10 @@
 
 - (void)updateAnnotationView:(MKAnnotationView *)annotationView withHeading:(CLLocationDirection)heading
 {
-	if ([annotationView isKindOfClass:[VehicleAnnotationView class]]) {
-		VehicleAnnotationView *vehicleView = (VehicleAnnotationView *)annotationView;
+	if ([annotationView isKindOfClass:[TKVehicleAnnotationView class]]) {
+		TKVehicleAnnotationView *vehicleView = (TKVehicleAnnotationView *)annotationView;
 		Vehicle *vehicle = (Vehicle *)annotationView.annotation;
-		[vehicleView rotateVehicleForHeading:heading andBearing:vehicle.bearing.floatValue];
+    [vehicleView rotateVehicleWithHeadingAngle:heading bearingAngle:vehicle.bearing.floatValue];
     
 	} else if ([annotationView isKindOfClass:[SGSemaphoreView class]]
 					&& [annotationView.annotation conformsToProtocol:@protocol(STKDisplayableTimePoint)]) {
@@ -359,16 +361,17 @@
     // vehicles are little arrows
     Vehicle *vehicle = (Vehicle *)annotation;
     
-    VehicleAnnotationView *vehicleView = (VehicleAnnotationView *) [mv dequeueReusableAnnotationViewWithIdentifier:VehicleIdentifier];
+    TKVehicleAnnotationView *vehicleView = (TKVehicleAnnotationView *) [mv dequeueReusableAnnotationViewWithIdentifier:VehicleIdentifier];
     if (nil == vehicleView) {
-      vehicleView = [[VehicleAnnotationView alloc] initWithAnnotation:vehicle reuseIdentifier:VehicleIdentifier];
+      vehicleView = [[TKVehicleAnnotationView alloc] initWith:vehicle reuseIdentifier:VehicleIdentifier];
     }
     
     if (nil != vehicle.bearing) {
-      [vehicleView rotateVehicleForHeading:self.heading andBearing:vehicle.bearing.floatValue];
+      [vehicleView rotateVehicleWithHeadingAngle:self.heading bearingAngle:vehicle.bearing.floatValue];
     }
+    
     vehicleView.annotationColor = [UIColor colorWithRed:.31f green:.64f blue:.22f alpha:1];
-    [vehicleView updateForAge:vehicle.ageFactor];
+    [vehicleView agedBy:vehicle.ageFactor];
     
     annotationView = vehicleView;
     
@@ -619,8 +622,8 @@
 		
 		[vehicle setSubtitle:nil];
 		
-		VehicleAnnotationView *vehicleView = (VehicleAnnotationView *) [self.mapView viewForAnnotation:vehicle];
-    [vehicleView updateForAge:vehicle.ageFactor];
+		TKVehicleAnnotationView *vehicleView = (TKVehicleAnnotationView *) [self.mapView viewForAnnotation:vehicle];    
+    [vehicleView agedBy:vehicle.ageFactor];
 	}
 	
 	// remove the vehicles

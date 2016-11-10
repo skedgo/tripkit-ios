@@ -8,26 +8,40 @@
 
 import UIKit
 
-public struct TKOccupancyInfo {
-  public let text: String
-  public let icon: UIImage?
-  public let color: UIColor
-  public let isCritical: Bool
+@available(iOSApplicationExtension 8.2, *)
+extension TKOccupancy {
   
-  public init(text: String, icon: UIImage?, color: UIColor, isCritical: Bool) {
-    self.text = text
-    self.icon = icon
-    self.color = color
-    self.isCritical = isCritical
+  public var icon: UIImage? {
+    switch self {
+    case .empty, .manySeatsAvailable, .fewSeatsAvailable:
+      return UIImage(named: "icon-check-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+    case .standingRoomOnly, .crushedStandingRoomOnly:
+      return UIImage(named: "icon-exclamation-mark-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+    case .full, .notAcceptingPassengers:
+      return UIImage(named: "icon-cross-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+    case .unknown:
+      return nil
+    }
   }
+  
+  public var isCritical: Bool {
+    switch self {
+    case .crushedStandingRoomOnly, .full, .notAcceptingPassengers:
+      return true
+    default:
+      return false
+    }
+  }
+  
 }
 
 @available(iOSApplicationExtension 8.2, *)
-
 public class TKOccupancyView: UIView {
   
   public weak var icon: UIImageView!
   public weak var label: UILabel!
+  
+  // MARK: - Initialisers
   
   public override init(frame: CGRect) {
     super.init(frame: frame)
@@ -37,28 +51,6 @@ public class TKOccupancyView: UIView {
   public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     didInit()
-  }
-  
-  public var occupancyInfo: TKOccupancyInfo? {
-    didSet {
-      guard let info = occupancyInfo else { return }
-      
-      icon.image = info.icon
-      icon.tintColor = UIColor.white
-      icon.backgroundColor = info.color
-      label.text = info.text.uppercased()
-      
-      if info.isCritical {
-        layer.cornerRadius = 8
-        layer.masksToBounds = true
-        backgroundColor = info.color
-        icon.layer.cornerRadius = 0
-        label.textColor = UIColor.white
-      } else {
-        icon.layer.cornerRadius = 8
-        label.textColor = info.color
-      }
-    }
   }
   
   // Setup
@@ -81,7 +73,7 @@ public class TKOccupancyView: UIView {
       icon.heightAnchor.constraint(equalToConstant: 16).isActive = true
       icon.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
       icon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-      icon.topAnchor.constraint(equalTo: topAnchor).isActive = true
+      icon.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
       
       label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 4).isActive = true
       label.centerYAnchor.constraint(equalTo: icon.centerYAnchor).isActive = true
@@ -105,4 +97,63 @@ public class TKOccupancyView: UIView {
     }
   }
 
+}
+
+@available(iOSApplicationExtension 8.2, *)
+extension TKOccupancyView {
+  
+  public static var bundle: Bundle {
+    return Bundle(for: TKOccupancyView.self)
+  }
+  
+}
+
+@available(iOSApplicationExtension 8.2, *)
+extension TKOccupancyView {
+  
+  public enum Purpose {
+    case occupancy(TKOccupancy)
+    case wheelchair
+  }
+  
+  public convenience init(with purpose: Purpose) {
+    self.init()
+    
+    switch purpose {
+    case .occupancy(let occupancy):
+      guard
+        let title = occupancy.description else {
+          return
+      }
+      
+      label.text = title.uppercased()
+      
+      icon.image = occupancy.icon
+      icon.backgroundColor = occupancy.color
+      icon.tintColor = UIColor.white
+      
+      if occupancy.isCritical {
+        layer.cornerRadius = 8
+        layer.masksToBounds = true
+        backgroundColor = occupancy.color
+        icon.layer.cornerRadius = 0
+        label.textColor = UIColor.white
+      } else {
+        icon.layer.cornerRadius = 8
+        label.textColor = occupancy.color
+      }
+      
+    case .wheelchair:
+      let color = UIColor(red: 0/255.0, green: 155/255.0, blue: 223/255.0, alpha: 1.0)
+      
+      label.text = NSLocalizedString("Wheelchair accessible", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "").uppercased()
+      label.textColor = color
+      
+      icon.image = UIImage(named: "icon-wheelchair-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+      icon.backgroundColor = color
+      icon.tintColor = UIColor.white
+      icon.layer.cornerRadius = 2
+    }
+  }
+  
 }
