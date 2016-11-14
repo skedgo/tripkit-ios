@@ -205,26 +205,30 @@ extension Reactive where Base: SVKRegion {
    - returns: Observable indicating success.
    */
   public func linkAccount(_ mode: String, remoteURL: URL, presenter: UIViewController, authenticator: SSOAuthenticator? = nil) -> Observable<Bool> {
-    return OAuthClient.requiresOAuth(remoteURL)
-      .flatMap { form, isOAuth -> Observable<Bool> in
-        if isOAuth {
-          return OAuthClient.performOAuth(mode, form: form, authenticator: authenticator)
-            .map { form in form == nil } // No further input required
-        } else {
-          var manager: MiniBookingManager! = MiniBookingManager(withForm: form)
-          var disposeBag: DisposeBag! = DisposeBag()
-          manager.present(fromViewController: presenter)
-          return Observable.create { subscriber in
-            manager.asObservable()
-              .subscribe(subscriber)
-              .addDisposableTo(disposeBag)
-            return Disposables.create {
-              manager = nil
-              disposeBag = nil
-            }
-          }
-        }
-    }
+    
+    // TODO: Re-implement this using new OAuthClient (!)
+    return Observable.just(false)
+    
+//    return OAuthClient.requiresOAuth(remoteURL)
+//      .flatMap { form, isOAuth -> Observable<Bool> in
+//        if isOAuth {
+//          return OAuthClient.performOAuth(mode, form: form, authenticator: authenticator)
+//            .map { form in form == nil } // No further input required
+//        } else {
+//          var manager: MiniBookingManager! = MiniBookingManager(withForm: form)
+//          var disposeBag: DisposeBag! = DisposeBag()
+//          manager.present(fromViewController: presenter)
+//          return Observable.create { subscriber in
+//            manager.asObservable()
+//              .subscribe(subscriber)
+//              .addDisposableTo(disposeBag)
+//            return Disposables.create {
+//              manager = nil
+//              disposeBag = nil
+//            }
+//          }
+//        }
+//    }
   }
   
 }
