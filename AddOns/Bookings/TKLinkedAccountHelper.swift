@@ -204,7 +204,7 @@ extension Reactive where Base: SVKRegion {
    - parameter remoteURL: URL for linking from `ProviderAuth.actionURL`.
    - returns: Observable indicating success.
    */
-  public func linkAccount(_ mode: String, remoteURL: URL, presenter: UIViewController, authenticator: SSOAuthenticator? = nil) -> Observable<Bool> {
+  public func linkAccount(_ mode: String, remoteURL: URL, presenter: UIViewController) -> Observable<Bool> {
     
     // TODO: Re-implement this using new OAuthClient (!)
     return Observable.just(false)
