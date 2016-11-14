@@ -364,6 +364,8 @@
     TKVehicleAnnotationView *vehicleView = (TKVehicleAnnotationView *) [mv dequeueReusableAnnotationViewWithIdentifier:VehicleIdentifier];
     if (nil == vehicleView) {
       vehicleView = [[TKVehicleAnnotationView alloc] initWith:vehicle reuseIdentifier:VehicleIdentifier];
+    } else {
+      [vehicleView setAnnotation:vehicle];
     }
     
     if (nil != vehicle.bearing) {

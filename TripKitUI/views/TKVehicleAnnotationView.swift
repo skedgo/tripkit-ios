@@ -45,8 +45,8 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
           return occupancy?.color
         }
         .subscribe(onNext: { [weak self] color in
-          guard let `self` = self else { return }
-          self.vehicleShape?.color = color
+          guard let color = color else { return }
+          self?.vehicleShape?.color = color
         })
         .addDisposableTo(disposeBag)
     }
@@ -99,24 +99,16 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     // The vehicle
     let vehicleRect = CGRect(x: (frame.width - vehicleWidth)/2, y: (frame.height - vehicleHeight)/2, width: vehicleWidth, height: vehicleHeight)
     
-    let serviceColor: UIColor
-    if let color = vehicle.serviceColor {
-      serviceColor = color
-    } else {
-      serviceColor = UIColor.black
-    }
+    let serviceColor = vehicle.serviceColor ?? .black
     
     var vehicleView: UIView?
     
-    if let iconUrlString = vehicle.icon {
-      let URL = SVKServer.imageURL(forIconFileNamePart: iconUrlString, of: .vehicle)
-      if URL != nil {
-        let vehicleImageView = UIImageView(frame: vehicleRect)
-        vehicleImageView.contentMode = .scaleAspectFit
-        vehicleImageView.setImageWith(URL)
-        vehicleView = vehicleImageView
-        self.vehicleImageView = vehicleImageView
-      }
+    if let iconUrlString = vehicle.icon, let URL = SVKServer.imageURL(forIconFileNamePart: iconUrlString, of: .vehicle) {
+      let vehicleImageView = UIImageView(frame: vehicleRect)
+      vehicleImageView.contentMode = .scaleAspectFit
+      vehicleImageView.setImageWith(URL)
+      vehicleView = vehicleImageView
+      self.vehicleImageView = vehicleImageView
     }
     
     if vehicleView == nil {
