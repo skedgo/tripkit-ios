@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.dependency 'Marshal'
   s.source_files = "Classes/**/*.{h,m,swift}"
   s.resources    = [
-    "Resources/*",
+    "Resources/*.lproj",
     "TripKitModel.xcdatamodeld",
     "TripKitModel.xcdatamodeld/*."
   ]
