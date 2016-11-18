@@ -774,7 +774,7 @@ typedef NSUInteger SGTripFlag;
 
 - (SVKRegion *)regionForRealTimeUpdates
 {
-  return [self.request localRegion];
+  return [self.request startRegion];
 }
 
 #pragma mark - UIActivityItemSource

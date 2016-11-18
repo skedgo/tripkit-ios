@@ -154,7 +154,7 @@
 - (SVKRegion *)region
 {
   if (self.regionName) {
-    return [[SVKRegionManager sharedInstance] regionWithName:self.regionName];
+    return [[SVKRegionManager sharedInstance] localRegionWithName:self.regionName];
   } else {
     return [self.location.regions anyObject];
   }

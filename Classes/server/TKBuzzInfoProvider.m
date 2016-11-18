@@ -9,6 +9,7 @@
 #import "TKBuzzInfoProvider.h"
 
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 typedef enum {
 	SGDeparturesResultAddedStops      = 1 << 0,
@@ -135,12 +136,13 @@ typedef enum {
   NSParameterAssert(date);
   
   return @{
-           @"region"             : table.region.name,
-           @"timeStamp"          : @((NSInteger) [date timeIntervalSince1970]),
-           @"embarkationStops"   : @[table.startStopCode],
-           @"disembarkationStops": @[table.endStopCode],
-           @"limit"              : @(limit),
-           @"config"             : [TKSettings defaultDictionary],
+           @"region"                : table.startRegion.name,
+           @"disembarkationRegion"  : table.endRegion.name,
+           @"timeStamp"             : @((NSInteger) [date timeIntervalSince1970]),
+           @"embarkationStops"      : @[table.startStopCode],
+           @"disembarkationStops"   : @[table.endStopCode],
+           @"limit"                 : @(limit),
+           @"config"                : [TKSettings defaultDictionary],
            };
 }
 
@@ -175,7 +177,7 @@ typedef enum {
     [server hitSkedGoWithMethod:@"POST"
                            path:@"departures.json"
                      parameters:paras
-                         region:table.region
+                         region:table.startRegion
                  callbackOnMain:NO
                         success:
      ^(NSInteger status, id responseObject) {
