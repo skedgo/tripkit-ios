@@ -32,7 +32,6 @@
 
 // Non-core data model classes
 #import "TKColoredRoute.h"
-#import "TKDLSTable.h"
 #import "TKSegment.h"
 #import "TKPlainCell.h"
 #import "TKTripFactory.h"

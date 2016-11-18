@@ -22,8 +22,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 @property (nonatomic, strong) StopLocation *scheduledStartStop;
 @property (nonatomic, assign) BHSegmentOrdering order;
 @property (nonatomic, strong) NSDictionary *segmentVisits;
-@property (nonatomic, strong) SVKRegion *spanningRegion;
-@property (nonatomic, strong) SVKRegion *localRegion;
+@property (nonatomic, strong) NSArray<SVKRegion *> *localRegions;
 
 @property (nonatomic, strong) NSArray *alerts;
 
@@ -111,33 +110,20 @@ NSString *const UninitializedString =  @"UninitializedString";
 	return segment;
 }
 
-- (SVKRegion *)spanningRegion
+- (SVKRegion *)startRegion
 {
-  if (! _spanningRegion) {
-    _spanningRegion = [[SVKRegionManager sharedInstance] regionForCoordinate:[self.start coordinate]
-                                                                 andOther:[self.end coordinate]];
+  if (! _localRegions) {
+    _localRegions = [self determineRegions];
   }
-  return _spanningRegion;
+  return [_localRegions firstObject];
 }
 
-- (SVKRegion *)localRegion
+- (SVKRegion *)endRegion
 {
-  if (! _localRegion) {
-    SVKRegionManager *regman =[SVKRegionManager sharedInstance];
-
-    CLLocationCoordinate2D start = [self.start coordinate];
-    NSSet *regions = [regman regionsForCoordinate:start];
-    if (regions.count > 0) {
-      _localRegion = [regions anyObject];
-    }
-    
-    CLLocationCoordinate2D end = [self.end coordinate];
-    regions = [regman regionsForCoordinate:end];
-    if (regions.count > 0) {
-      _localRegion = [regions anyObject];
-    }
+  if (! _localRegions) {
+    _localRegions = [self determineRegions];
   }
-  return _localRegion;
+  return [_localRegions lastObject];
 }
 
 - (NSInteger)templateHashCode {
@@ -298,7 +284,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 		return nil;
   NSManagedObjectContext *context = [self.template managedObjectContext];
 	_scheduledStartStop = [StopLocation fetchStopForStopCode:code
-                                             inRegionNamed:self.localRegion.name
+                                             inRegionNamed:self.startRegion.name
                                          requireCoordinate:YES
                                           inTripKitContext:context];
   

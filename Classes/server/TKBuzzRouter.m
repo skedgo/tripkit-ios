@@ -339,7 +339,7 @@
     
     // we are guaranteed to have regions
     TripRequest *request = strongSelf.currentRequest;
-    SVKRegion *region = [request localRegion];
+    SVKRegion *region = [request startRegion];
     if (! region) {
       error = [NSError errorWithCode:kSVKServerErrorTypeUser
                              message:@"Unsupported region."];

@@ -71,9 +71,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (SVKRegion *)spanningRegion;
 
 /**
- @return The local region this trip takes place in. Cannot be international and thus might be nil.
+ @return The local region this trip starts in. Cannot be international and thus might be nil.
  */
-- (nullable SVKRegion *)localRegion;
+- (nullable SVKRegion *)startRegion;
+
+/**
+ @return The local region this trip ends in. Cannot be international and thus might be nil.
+ */
+- (nullable SVKRegion *)endRegion;
 
 - (NSArray <NSString *> *)applicableModeIdentifiers;
 

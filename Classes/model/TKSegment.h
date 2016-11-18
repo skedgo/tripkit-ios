@@ -60,14 +60,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setTitle:(NSString *)title; // just for KVO
 
 /**
- @return The region the complete segment takes place in. Can be international if it spanning more than one region.
+ @return The local region this segment starts in. Cannot be international and thus might be nil.
  */
-- (SVKRegion *)spanningRegion;
+- (nullable SVKRegion *)startRegion;
 
 /**
- @return The local region this segment takes place in. Cannot be international and thus might be nil.
+ @return The local region this segment ends in. Cannot be international and thus might be nil.
  */
-- (SVKRegion *)localRegion;
+- (nullable SVKRegion *)endRegion;
 
 - (BHSegmentOrdering)order;
 
