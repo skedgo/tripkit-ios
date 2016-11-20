@@ -8,7 +8,10 @@
 
 #import "TKParserHelper.h"
 
+@import SGCoreKit;
+
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 @implementation TKParserHelper
 
@@ -118,47 +121,23 @@
   }
 }
 
-+ (Vehicle *)insertNewVehicle:(NSDictionary *)vehicleDict
-             inTripKitContext:(NSManagedObjectContext *)context
-{
-  ZAssert(nil != vehicleDict, @"Empty vehicle dict!");
-  Vehicle *vehicle = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Vehicle class]) inManagedObjectContext:context];
-  
-  [self updateVehicle:vehicle fromDictionary:vehicleDict];
-  
-  return vehicle;
-}
-
-+ (void)updateVehicle:(Vehicle *)vehicle fromDictionary:(NSDictionary *)vehicleDict
-{
-  vehicle.identifier = vehicleDict[@"id"];
-  vehicle.label = vehicleDict[@"label"];
-  vehicle.lastUpdate = [NSDate dateWithTimeIntervalSince1970:[vehicleDict[@"lastUpdate"] integerValue]];
-  vehicle.icon = vehicleDict[@"icon"];
-  
-  NSDictionary *location = vehicleDict[@"location"];
-  vehicle.latitude = location[@"lat"];
-  vehicle.longitude = location[@"lng"];
-  vehicle.bearing = location[@"bearing"];
-}
-
 + (StopLocation *)insertNewStopLocation:(NSDictionary *)stopDict
                        inTripKitContext:(NSManagedObjectContext *)context
 {
   // we always add all the stops, because the cell is new
-  SGNamedCoordinate *coordinate = [self locationForStopFromDictionary:stopDict];
-  StopLocation *newStop = [StopLocation fetchOrInsertStopForStopCode:nil
-                                                            modeInfo:nil
-                                                          atLocation:coordinate
-                                                  intoTripKitContext:context];
+  SGKNamedCoordinate *coordinate = [self locationForStopFromDictionary:stopDict];
+  StopLocation *newStop = [StopLocation insertStopForStopCode:stopDict[@"code"]
+                                                     modeInfo:nil
+                                                   atLocation:coordinate
+                                           intoTripKitContext:context];
   [self updateStopLocation:newStop fromDictionary:stopDict];
   
   return newStop;
 }
 
-+ (SGNamedCoordinate *)locationForStopFromDictionary:(NSDictionary *)stopDict
++ (SGKNamedCoordinate *)locationForStopFromDictionary:(NSDictionary *)stopDict
 {
-  return [[SGNamedCoordinate alloc] initWithLatitude:[[stopDict objectForKey:@"lat"] doubleValue]
+  return [[SGKNamedCoordinate alloc] initWithLatitude:[[stopDict objectForKey:@"lat"] doubleValue]
                                            longitude:[[stopDict objectForKey:@"lng"] doubleValue]
                                                 name:[stopDict objectForKey:@"name"]
                                              address:[stopDict objectForKey:@"services"]];
@@ -254,7 +233,7 @@
                                                          inManagedObjectContext:context];
           currentService.code = serviceCode;
         }
-        currentService.color = [TKParserHelper colorForDictionary:[shapeDict objectForKey:@"serviceColor"]];
+        currentService.color = [SVKParserHelper colorForDictionary:[shapeDict objectForKey:@"serviceColor"]];
         currentService.frequency  = shapeDict[@"frequency"];
         currentService.lineName   = shapeDict[@"serviceName"];
         currentService.direction  = shapeDict[@"serviceDirection"];
@@ -342,7 +321,7 @@
       
       if (! existingVisit) {
         // we added a new visit
-        SGNamedCoordinate *coordinate = [[SGNamedCoordinate alloc] initWithLatitude:[stopDict[@"lat"] doubleValue]
+        SGKNamedCoordinate *coordinate = [[SGKNamedCoordinate alloc] initWithLatitude:[stopDict[@"lat"] doubleValue]
                                                                           longitude:[stopDict[@"lng"] doubleValue]
                                                                                name:stopDict[@"name"]
                                                                             address:nil];
@@ -420,7 +399,7 @@
         CLLocationDegrees lng = [locDict[@"lng"] doubleValue];
         NSString *name = locDict[@"name"];
         NSString *address = locDict[@"address"];
-        alert.location    = [[SGNamedCoordinate alloc] initWithLatitude:lat longitude:lng name:name address:address];
+        alert.location    = [[SGKNamedCoordinate alloc] initWithLatitude:lat longitude:lng name:name address:address];
       }
       
       NSString *severity = alertDict[@"severity"];

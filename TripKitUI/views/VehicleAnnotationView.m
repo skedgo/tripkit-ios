@@ -18,6 +18,7 @@
 @import TripKit;
 #else
 #import "TripKit.h"
+#import <TripKit/TripKit-Swift.h>
 #endif
 
 #import "VehicleView.h"

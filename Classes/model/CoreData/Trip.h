@@ -22,8 +22,8 @@
 
 #pragma mark - CoreData elements
 
-@property (nonatomic, strong, nonnull) NSDate * arrivalTime;
-@property (nonatomic, strong, nonnull) NSDate * departureTime;
+@property (nonatomic, copy, nonnull) NSDate * arrivalTime;
+@property (nonatomic, copy, nonnull) NSDate * departureTime;
 @property (nonatomic, strong, nonnull) NSNumber * minutes; // cache for sorting
 @property (nonatomic, strong, nonnull) NSNumber * mainSegmentHashCode;
 

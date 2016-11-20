@@ -282,7 +282,7 @@
 			if (! startTime)
 				continue;
 			if (startTime.integerValue <= 0) {
-				ZAssert(false, @"Bad start time '%@' in response object:\n%@", startTime, responseObject);
+        		[SGKLog info:@"TKBuzzRealTime" format:@"Ignoring bad start time '%@' in response object:\n%@", startTime, responseObject];
 				continue;
 			}
 			NSDate *departure = [NSDate dateWithTimeIntervalSince1970:startTime.integerValue];

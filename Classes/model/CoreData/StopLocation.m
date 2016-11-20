@@ -74,7 +74,7 @@
 
 + (instancetype)fetchOrInsertStopForStopCode:(NSString *)stopCode
                                     modeInfo:(ModeInfo *)modeInfo
-                                  atLocation:(SGNamedCoordinate *)location
+                                  atLocation:(SGKNamedCoordinate *)location
                           intoTripKitContext:(NSManagedObjectContext *)tripKitContext
 {
   NSParameterAssert(tripKitContext);
@@ -108,7 +108,7 @@
 
 + (instancetype)insertStopForStopCode:(NSString *)stopCode
                              modeInfo:(ModeInfo *)modeInfo
-                           atLocation:(SGNamedCoordinate *)location
+                           atLocation:(SGKNamedCoordinate *)location
                    intoTripKitContext:(NSManagedObjectContext *)tripKitContext
 {
   NSString *entityName = NSStringFromClass(self);
@@ -154,7 +154,7 @@
 - (SVKRegion *)region
 {
   if (self.regionName) {
-    return [[SVKRegionManager sharedInstance] regionWithName:self.regionName];
+    return [[SVKRegionManager sharedInstance] localRegionWithName:self.regionName];
   } else {
     return [self.location.regions anyObject];
   }

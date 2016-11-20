@@ -40,19 +40,11 @@ enum TKTTPifierCache {
     TKJSONCache.remove("\(hash)", directory: .cache, subdirectory: problemsDir)
   }
 
-  static func solutionJson(forId id: String) -> JSON? {
-    if let dict = TKJSONCache.read(id, directory: .cache, subdirectory: solutionsDir) {
-      return JSON(dict)
-    } else {
-      return nil
-    }
+  static func marshaledSolution(forId id: String) -> [String: Any]? {
+    return TKJSONCache.read(id, directory: .cache, subdirectory: solutionsDir)
   }
   
-  static func save(solutionJson json: JSON, forId id: String) {
-    guard let dict = json.dictionaryObject else {
-      SGKLog.warn("TKTTPifierCache", text: "Could not turn json into dictionary. JSON: \(json)")
-      return
-    }
+  static func save(marshaledSolution dict: [String: Any], forId id: String) {
     TKJSONCache.save(id, dictionary: dict, directory: .cache, subdirectory: solutionsDir)
   }
   

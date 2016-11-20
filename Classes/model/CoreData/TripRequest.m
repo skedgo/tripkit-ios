@@ -9,12 +9,14 @@
 #import "TripRequest.h"
 
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 #define BHCostCount 3
 
 @interface TripRequest ()
 
 @property (nonatomic, strong) NSMutableSet *requestedModes;
+@property (nonatomic, strong) NSArray<SVKRegion *> *localRegions;
 
 @end
 
@@ -31,6 +33,7 @@
 @synthesize requestedModes;
 @synthesize replacement;
 @synthesize defaultVisibility;
+@synthesize localRegions = _localRegions;
 
 - (void)remove {
   self.toDelete = YES;
@@ -58,8 +61,8 @@
   
   TripRequest *newTrip = [self insertRequestIntoTripKitContext:context];
 	
-  newTrip.fromLocation   = [SGNamedCoordinate namedCoordinateForAnnotation:fromLocation];
-  newTrip.toLocation     = [SGNamedCoordinate namedCoordinateForAnnotation:toLocation];
+  newTrip.fromLocation   = [SGKNamedCoordinate namedCoordinateForAnnotation:fromLocation];
+  newTrip.toLocation     = [SGKNamedCoordinate namedCoordinateForAnnotation:toLocation];
 	newTrip.timeType       = @(timeType);
 	
 	switch (timeType) {
@@ -173,6 +176,22 @@
                                                     andOther:end];
 }
 
+- (SVKRegion *)startRegion
+{
+  if (! _localRegions) {
+    _localRegions = [self determineRegions];
+  }
+  return [_localRegions firstObject];
+}
+
+- (SVKRegion *)endRegion
+{
+  if (! _localRegions) {
+    _localRegions = [self determineRegions];
+  }
+  return [_localRegions lastObject];
+}
+
 /**
  @return The regions that this query is touching
  */
@@ -180,8 +199,8 @@
 {
   NSMutableSet *regions = [NSMutableSet setWithCapacity:5];
   SVKRegionManager *manager = [SVKRegionManager sharedInstance];
-  [regions unionSet:[manager regionsForCoordinate:self.fromLocation.coordinate]];
-  [regions unionSet:[manager regionsForCoordinate:self.toLocation.coordinate]];
+  [regions unionSet:[manager localRegionsForCoordinate:self.fromLocation.coordinate]];
+  [regions unionSet:[manager localRegionsForCoordinate:self.toLocation.coordinate]];
   
   if (regions.count >= 2) {
     [regions addObject:[SVKInternationalRegion sharedInstance]];
@@ -220,21 +239,6 @@
   return [TripRequest timeStringForTime:self.time
                              ofTimeType:self.type
                                timeZone:[self departureTimeZone]];
-}
-
-- (SVKRegion *)localRegion
-{
-  SVKRegionManager *regman =[SVKRegionManager sharedInstance];
-  
-  CLLocationCoordinate2D start = [self.fromLocation coordinate];
-  NSSet *regions = [regman regionsForCoordinate:start];
-  if (regions.count > 0) {
-    return [regions anyObject];
-  }
-
-  CLLocationCoordinate2D end = [self.toLocation coordinate];
-  regions = [regman regionsForCoordinate:end];
-  return [regions anyObject];
 }
 
 - (BOOL)resultsInSameQueryAs:(TripRequest *)other

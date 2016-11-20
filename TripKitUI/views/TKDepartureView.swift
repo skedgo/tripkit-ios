@@ -24,7 +24,7 @@ public class TKDepartureView: UIView {
     return bundle.loadNibNamed("TKDepartureView", owner: self, options: nil)?.first as! TKDepartureView
   }
   
-  public func configure(for trip: STKTrip, to destination: SGTrackItem) {
+  public func configure(for trip: STKTrip, to destination: SGTrackItemDisplayable) {
     let segments = trip.segments(with: .inSummary)
     tripSegmentView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: true)
     

@@ -22,8 +22,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 @property (nonatomic, strong) StopLocation *scheduledStartStop;
 @property (nonatomic, assign) BHSegmentOrdering order;
 @property (nonatomic, strong) NSDictionary *segmentVisits;
-@property (nonatomic, strong) SVKRegion *spanningRegion;
-@property (nonatomic, strong) SVKRegion *localRegion;
+@property (nonatomic, strong) NSArray<SVKRegion *> *localRegions;
 
 @property (nonatomic, strong) NSArray *alerts;
 
@@ -111,33 +110,20 @@ NSString *const UninitializedString =  @"UninitializedString";
 	return segment;
 }
 
-- (SVKRegion *)spanningRegion
+- (SVKRegion *)startRegion
 {
-  if (! _spanningRegion) {
-    _spanningRegion = [[SVKRegionManager sharedInstance] regionForCoordinate:[self.start coordinate]
-                                                                 andOther:[self.end coordinate]];
+  if (! _localRegions) {
+    _localRegions = [self determineRegions];
   }
-  return _spanningRegion;
+  return [_localRegions firstObject];
 }
 
-- (SVKRegion *)localRegion
+- (SVKRegion *)endRegion
 {
-  if (! _localRegion) {
-    SVKRegionManager *regman =[SVKRegionManager sharedInstance];
-
-    CLLocationCoordinate2D start = [self.start coordinate];
-    NSSet *regions = [regman regionsForCoordinate:start];
-    if (regions.count > 0) {
-      _localRegion = [regions anyObject];
-    }
-    
-    CLLocationCoordinate2D end = [self.end coordinate];
-    regions = [regman regionsForCoordinate:end];
-    if (regions.count > 0) {
-      _localRegion = [regions anyObject];
-    }
+  if (! _localRegions) {
+    _localRegions = [self determineRegions];
   }
-  return _localRegion;
+  return [_localRegions lastObject];
 }
 
 - (NSInteger)templateHashCode {
@@ -298,14 +284,14 @@ NSString *const UninitializedString =  @"UninitializedString";
 		return nil;
   NSManagedObjectContext *context = [self.template managedObjectContext];
 	_scheduledStartStop = [StopLocation fetchStopForStopCode:code
-                                             inRegionNamed:self.localRegion.name
+                                             inRegionNamed:self.startRegion.name
                                          requireCoordinate:YES
                                           inTripKitContext:context];
   
   if (! _scheduledStartStop) {
     // create it!
     id<MKAnnotation> start = [self start];
-    SGNamedCoordinate *location = [SGNamedCoordinate namedCoordinateForAnnotation:start];
+    SGKNamedCoordinate *location = [SGKNamedCoordinate namedCoordinateForAnnotation:start];
     StopLocation *newStop = [StopLocation fetchOrInsertStopForStopCode:code
                                                               modeInfo:self.modeInfo
                                                             atLocation:location
@@ -744,13 +730,18 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (UIColor *)color
 {
-	UIColor *color = [self tripSegmentModeColor];
-	if (color)
-		return color;
-	else if ([self isPublicTransport])
+  UIColor *serviceColor = self.service.color;
+  if (serviceColor) {
+    return serviceColor;
+  }
+  UIColor *modeColor = self.modeInfo.color;
+  if (modeColor) {
+		return modeColor;
+  } else if ([self isPublicTransport]) {
 		return [UIColor colorWithRed:143/255.f green:139/255.f blue:138/255.f alpha:1]; // Dark grey
-  else
+  } else {
     return [UIColor colorWithRed:214/255.f green:214/255.f blue:214/255.f alpha:1]; // Light grey
+  }
 }
 
 - (NSArray *)dashPattern
@@ -816,7 +807,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.order == BHSegmentOrdering_End;
 }
 
-#pragma mark - STKDirectionalTimePoint
+#pragma mark - STKDisplayableTimePoint
 
 - (NSDate *)time
 {
@@ -983,14 +974,19 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (nullable UIColor *)tripSegmentModeColor
 {
-  // we prefer color of the service
+  // These are only used in segment views. We only want to
+  // colour public transport there.
+  if (! [self isPublicTransport]) {
+    return nil;
+  }
+  
+  // Prefer service colour over that of the mode itself.
   UIColor *color = self.service.color;
   if (color) {
     return color;
+  } else {
+    return [self.template.modeInfo color];
   }
-  
-  // then color of the mode
-  return [self.template.modeInfo color];
 }
 
 - (STKInfoIconType)tripSegmentModeInfoIconType

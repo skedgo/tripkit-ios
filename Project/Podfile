@@ -5,21 +5,19 @@ use_frameworks!
 platform :ios, '8.0'
 
 def shared_pods
-  pod 'SGCoreKit/Core', git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
-  pod 'SGCoreKit/Rx',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
-  pod 'SGSearchKit',    git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
-  pod 'SGCoreUIKit',    git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
-  pod 'SGUIKit',        git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
-  pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/iOS10'
+  pod 'SGCoreKit/Core', git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
+  pod 'SGCoreKit/Rx',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
+  pod 'SGSearchKit',    git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
+  pod 'SGCoreUIKit',    git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
+  pod 'SGUIKit',        git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
+  pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
   
   pod 'RxSwift',        '~> 3.0'
   pod 'RxCocoa',        '~> 3.0'
+  pod 'Marshal'
 
   pod 'AFNetworking'
   pod 'SGPulsingAnnotationView'
-
-  # These can be removed, once their Swift3 versions are the defaults
-  pod 'OAuthSwift',     git: 'https://github.com/OAuthSwift/OAuthSwift.git' # '~> 1.0'
 end
 
 target 'TripKit' do
@@ -29,6 +27,6 @@ end
 target 'TripKitTests' do
   shared_pods
   
-  pod 'RxBlocking',    '~> 3.0'
-  pod 'RxTest',        '~> 3.0'
+  pod 'RxBlocking',     '~> 3.0'
+  pod 'RxTest',         '~> 3.0'
 end

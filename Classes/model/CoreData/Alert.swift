@@ -10,16 +10,20 @@ import Foundation
 
 extension Alert: TKAlert {
   
-  public var URL: String? {
-    return url
+  public var infoURL: URL? {
+    if let url = url {
+      return URL(string: url)
+    } else {
+      return nil
+    }
   }
   
   public var icon: UIImage? {
-    return STKInfoIcon.image(for: infoIconType(), usage: STKInfoIconUsageNormal)
+    return STKInfoIcon.image(for: infoIconType(), usage: .normal)
   }
   
   public var iconURL: URL? {
-    return pointImageURL()
+    return imageURL
   }
   
   public var lastUpdated: Date? {

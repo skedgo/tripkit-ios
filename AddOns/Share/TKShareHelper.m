@@ -68,17 +68,17 @@
 
 + (void)geocodeString:(NSString *)string
         usingGeocoder:(id<SGGeocoder>)geocoder
-           completion:(void(^)( SGNamedCoordinate * _Nullable coordinate))completion
+           completion:(void(^)( SGKNamedCoordinate * _Nullable coordinate))completion
 {
   [geocoder geocodeString:string
                nearRegion:MKMapRectWorld
                   success:
-   ^(NSString * _Nonnull query, NSArray<SGNamedCoordinate *> * _Nonnull results) {
+   ^(NSString * _Nonnull query, NSArray<SGKNamedCoordinate *> * _Nonnull results) {
 #pragma unused(query)
     dispatch_async(dispatch_get_main_queue(), ^{
       id<MKAnnotation> annotation = [SGBaseGeocoder pickBestFromResults:results];
       if (annotation) {
-        SGNamedCoordinate *coordinate = [SGNamedCoordinate namedCoordinateForAnnotation:annotation];
+        SGKNamedCoordinate *coordinate = [SGKNamedCoordinate namedCoordinateForAnnotation:annotation];
         coordinate.name = string;
         completion(coordinate);
       } else {

@@ -17,11 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface StopLocation : NSManagedObject <STKStopAnnotation, UIActivityItemSource>
 
-@property (nonatomic, retain, nullable) SGNamedCoordinate *location;
+@property (nonatomic, retain, nullable) SGKNamedCoordinate *location;
 
 @property (nonatomic, retain, nullable) NSString * name;
 @property (nonatomic, retain, nullable) NSString * shortName;
-@property (nonatomic, retain) NSString * stopCode;
+@property (nonatomic, copy) NSString * stopCode;
 @property (nonatomic, strong) ModeInfo * stopModeInfo;
 @property (nonatomic, retain, nullable) NSNumber * sortScore;
 @property (nonatomic, retain, nullable) NSString * filter;
@@ -47,12 +47,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)fetchOrInsertStopForStopCode:(NSString *)stopCode
                                     modeInfo:(nullable ModeInfo *)modeInfo
-                                  atLocation:(nullable SGNamedCoordinate *)location
+                                  atLocation:(nullable SGKNamedCoordinate *)location
                           intoTripKitContext:(NSManagedObjectContext *)tripKitContext;
 
 + (instancetype)insertStopForStopCode:(NSString *)stopCode
                              modeInfo:(nullable ModeInfo *)modeInfo
-                           atLocation:(nullable SGNamedCoordinate *)location
+                           atLocation:(nullable SGKNamedCoordinate *)location
                    intoTripKitContext:(NSManagedObjectContext *)tripKitContext;
 
 + (nullable NSString *)platformForStopCode:(NSString *)stopCode

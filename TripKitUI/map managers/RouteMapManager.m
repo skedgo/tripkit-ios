@@ -14,6 +14,9 @@
 
 #ifdef TK_NO_FRAMEWORKS
 #import "TripKit.h"
+#import <TripKit/TripKit-Swift.h>
+#else
+#import <TripKitUI/TripKitUI-Swift.h>
 #endif
 
 #import "CircleAnnotationView.h"
@@ -104,7 +107,7 @@
        
        // temporary revert to coordinate based on where the view is,
        // so that we can animate properly to the new view
-       VehicleAnnotationView *view = (VehicleAnnotationView *) [self.mapView viewForAnnotation:vehicle];
+       TKVehicleAnnotationView *view = (TKVehicleAnnotationView *) [self.mapView viewForAnnotation:vehicle];
        CLLocationCoordinate2D goodCoordinate = vehicle.coordinate;
        CGPoint center = CGPointMake(CGRectGetMidX(view.frame), CGRectGetMidY(view.frame));
        vehicle.coordinate = [self.mapView convertPoint:center toCoordinateFromView:view.superview];
@@ -116,7 +119,7 @@
           vehicle.coordinate = goodCoordinate;
           
           if (vehicle.bearing) {
-            [view rotateVehicleForBearing:vehicle.bearing.floatValue - self.heading];
+            [view rotateVehicleWithBearingAngle:vehicle.bearing.floatValue - self.heading];
           }
         }];
      
@@ -148,15 +151,15 @@
 
 - (void)updateAnnotationView:(MKAnnotationView *)annotationView withHeading:(CLLocationDirection)heading
 {
-	if ([annotationView isKindOfClass:[VehicleAnnotationView class]]) {
-		VehicleAnnotationView *vehicleView = (VehicleAnnotationView *)annotationView;
+	if ([annotationView isKindOfClass:[TKVehicleAnnotationView class]]) {
+		TKVehicleAnnotationView *vehicleView = (TKVehicleAnnotationView *)annotationView;
 		Vehicle *vehicle = (Vehicle *)annotationView.annotation;
-		[vehicleView rotateVehicleForHeading:heading andBearing:vehicle.bearing.floatValue];
+    [vehicleView rotateVehicleWithHeadingAngle:heading bearingAngle:vehicle.bearing.floatValue];
     
 	} else if ([annotationView isKindOfClass:[SGSemaphoreView class]]
-					&& [annotationView.annotation conformsToProtocol:@protocol(STKDirectionalTimePoint)]) {
+					&& [annotationView.annotation conformsToProtocol:@protocol(STKDisplayableTimePoint)]) {
 		SGSemaphoreView *semaphore = (SGSemaphoreView *)annotationView;
-		[semaphore updateHeadForMagneticHeading:heading andBearing:[(id<STKDirectionalTimePoint>)annotationView.annotation bearing].floatValue];
+		[semaphore updateHeadForMagneticHeading:heading andBearing:[(id<STKDisplayableTimePoint>)annotationView.annotation bearing].floatValue];
 	
   } else if ([annotationView isKindOfClass:[SGSemaphoreView class]]
               && [annotationView.annotation isKindOfClass:[TKSegment class]]) {
@@ -354,149 +357,150 @@
 	static NSString *LargeCircleIdentifier = @"LargeCircleView";
 	static NSString *VehicleIdentifier = @"VehicleAnnotationView";
   
-  if ([annotation conformsToProtocol:@protocol(STKDisplayablePoint)]) {
-		
-		if ([annotation isKindOfClass:[Vehicle class]]) {
-			// vehicles are little arrows
-			Vehicle *vehicle = (Vehicle *)annotation;
-			
-			VehicleAnnotationView *vehicleView = (VehicleAnnotationView *) [mv dequeueReusableAnnotationViewWithIdentifier:VehicleIdentifier];
-			if (nil == vehicleView) {
-				vehicleView = [[VehicleAnnotationView alloc] initWithAnnotation:vehicle reuseIdentifier:VehicleIdentifier];
-			}
-			
-			if (nil != vehicle.bearing) {
-				[vehicleView rotateVehicleForHeading:self.heading andBearing:vehicle.bearing.floatValue];
-			}
-			vehicleView.annotationColor = [UIColor colorWithRed:.31f green:.64f blue:.22f alpha:1];
-      [vehicleView updateForAge:vehicle.ageFactor];
-			
-			annotationView = vehicleView;
-      
-    } else if ([annotation isKindOfClass:[StopVisits class]] && [self showAsSemaphore:(StopVisits *)annotation]) {
-
-      // Visits can be drawn as semaphores as they have a direction
-      
-      static NSString *sempahoreIdentifier = @"Semaphore";
-      SGSemaphoreView * semaphoreView = (SGSemaphoreView *)[mv dequeueReusableAnnotationViewWithIdentifier:sempahoreIdentifier];
-      
-      StopVisits *visit = (StopVisits *)annotation;
-      if (nil == semaphoreView) {
-        semaphoreView = [[SGSemaphoreView alloc] initWithAnnotation:visit
-                                                    reuseIdentifier:sempahoreIdentifier
-                                                        withHeading:self.heading];
-      } else {
-        [semaphoreView updateForAnnotation:visit
-                               withHeading:self.heading];
-      }
-      
-      // Set the time stamp on the side opposite to the travel direction.
-      CLLocationDirection absoluteBearing = visit.bearing.floatValue - self.heading;
-      SGSemaphoreLabel side = (absoluteBearing > 180 ? SGSemaphoreLabelOnRight : SGSemaphoreLabelOnLeft);
-      
-      [semaphoreView setTime:visit.departure
-                  isRealTime:[visit.service isRealTime]
-                  inTimeZone:visit.stop.region.timeZone
-                      onSide:side];
-
-      annotationView = semaphoreView;
-      annotationView.canShowCallout = YES;
-      
-      
-		} else if ([annotation isKindOfClass:[StopLocation class]]
-               || [annotation isKindOfClass:[StopVisits class]]) {
-			// a circle
-			// we make visits large and changes
-			BOOL isLarge = [self drawAsLargeCircle:annotation];
-			NSString *identifier = isLarge ? LargeCircleIdentifier : SmallCircleIdentifier;
-			
-			CircleAnnotationView* circle = (CircleAnnotationView*)[mv dequeueReusableAnnotationViewWithIdentifier:identifier];
-			if (nil == circle) {
-				circle = [[CircleAnnotationView alloc] initWithAnnotation:annotation
-																												drawLarge:isLarge
-																									reuseIdentifier:identifier];
-			}
-			
-			// determine the faded state
-			BOOL travelled = [self drawCircleAsTravelled:annotation];
-			circle.isFaded = (NO == travelled);
-
-			// determine the colour
-			if ([annotation isKindOfClass:[StopLocation class]]) {
-				StopLocation *stop = (StopLocation *)annotation;
-				circle.circleColor = [SGKTransportStyler routeDashColorNontravelled];
-				if (travelled && stop.name) {
-					circle.circleColor = [self.stopColors valueForKey:stop.name];
-				}
-			} else if ([annotation isKindOfClass:[StopVisits class]])  {
-				StopVisits *visit = (StopVisits *)annotation;
-				circle.circleColor = travelled
-															? visit.service.color
-															: [SGKTransportStyler routeDashColorNontravelled];
-			}
-			
-			circle.alpha = [self alphaForCircleAnnotations:circle.isLarge];
-			[circle setNeedsDisplay];
-			annotationView = circle;
-      
-    } else if ([annotation isKindOfClass:[TKSegment class]]) {
-      // Segments get drawn as semaphores
-      TKSegment *segment = (TKSegment *)annotation;
-      
-      static NSString *sempahoreIdentifier = @"Semaphore";
-      SGSemaphoreView *semaphoreView = (SGSemaphoreView *)[mv dequeueReusableAnnotationViewWithIdentifier:sempahoreIdentifier];
-      
-      if (nil == semaphoreView) {
-        semaphoreView = [[SGSemaphoreView alloc] initWithAnnotation:segment
-                                                    reuseIdentifier:sempahoreIdentifier
-                                                        withHeading:self.heading];
-      } else {
-        [semaphoreView updateForAnnotation:segment
-                               withHeading:self.heading];
-      }
-      
-      // Only public transport get the time stamp. And they get it on the side opposite to the
-      // travel direction.
-      SGSemaphoreLabel side = SGSemaphoreLabelDisabled;
-      
-      CLLocationDirection absoluteBearing = segment.bearing.floatValue - self.heading;
-      if ([segment isPublicTransport]) {
-        side = (absoluteBearing > 180 ? SGSemaphoreLabelOnRight : SGSemaphoreLabelOnLeft);
-      } else if ([segment isTerminal]) {
-        CLLocationCoordinate2D fromCoordinate = [segment.trip.request.fromLocation coordinate];
-        CLLocationCoordinate2D toCoordinate = [segment.trip.request.toLocation coordinate];
-        BOOL isLeft = (fromCoordinate.longitude > toCoordinate.longitude);
-        side = isLeft ? SGSemaphoreLabelOnLeft : SGSemaphoreLabelOnRight;
-      }
-      
-      if (segment.frequency.integerValue > 0) {
-        [semaphoreView setFrequency:segment.frequency
-                             onSide:side];
-      } else {
-        [semaphoreView setTime:segment.departureTime
-                    isRealTime:segment.timeIsRealTime
-                    inTimeZone:segment.timeZone
-                        onSide:side];
-      }
-      
-      annotationView = semaphoreView;
-      
+  if ([annotation isKindOfClass:[Vehicle class]]) {
+    // vehicles are little arrows
+    Vehicle *vehicle = (Vehicle *)annotation;
+    
+    TKVehicleAnnotationView *vehicleView = (TKVehicleAnnotationView *) [mv dequeueReusableAnnotationViewWithIdentifier:VehicleIdentifier];
+    if (nil == vehicleView) {
+      vehicleView = [[TKVehicleAnnotationView alloc] initWith:vehicle reuseIdentifier:VehicleIdentifier];
     } else {
-      static NSString *ImageIdentifier = @"ImageAnnotationIdenfifier";
-      ASImageAnnotationView *imageAnnotationView = (ASImageAnnotationView *) [mv dequeueReusableAnnotationViewWithIdentifier:ImageIdentifier];
-      if (nil == imageAnnotationView) {
-        imageAnnotationView = [[ASImageAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:ImageIdentifier];
-      } else {
-        imageAnnotationView.annotation = annotation;
-      }
-      
-      imageAnnotationView.alpha = 1;
-      imageAnnotationView.leftCalloutAccessoryView = nil;
-      imageAnnotationView.rightCalloutAccessoryView = nil;
-
-      annotationView = imageAnnotationView;
+      [vehicleView setAnnotation:vehicle];
     }
-	}
+    
+    if (nil != vehicle.bearing) {
+      [vehicleView rotateVehicleWithHeadingAngle:self.heading bearingAngle:vehicle.bearing.floatValue];
+    }
+    
+    vehicleView.annotationColor = [UIColor colorWithRed:.31f green:.64f blue:.22f alpha:1];
+    [vehicleView agedBy:vehicle.ageFactor];
+    
+    annotationView = vehicleView;
+    
+  } else if ([annotation isKindOfClass:[StopVisits class]] && [self showAsSemaphore:(StopVisits *)annotation]) {
+
+    // Visits can be drawn as semaphores as they have a direction
+    
+    static NSString *sempahoreIdentifier = @"Semaphore";
+    SGSemaphoreView * semaphoreView = (SGSemaphoreView *)[mv dequeueReusableAnnotationViewWithIdentifier:sempahoreIdentifier];
+    
+    StopVisits *visit = (StopVisits *)annotation;
+    if (nil == semaphoreView) {
+      semaphoreView = [[SGSemaphoreView alloc] initWithAnnotation:visit
+                                                  reuseIdentifier:sempahoreIdentifier
+                                                      withHeading:self.heading];
+    } else {
+      [semaphoreView updateForAnnotation:visit
+                             withHeading:self.heading];
+    }
+    
+    // Set the time stamp on the side opposite to the travel direction.
+    CLLocationDirection absoluteBearing = visit.bearing.floatValue - self.heading;
+    SGSemaphoreLabel side = (absoluteBearing > 180 ? SGSemaphoreLabelOnRight : SGSemaphoreLabelOnLeft);
+    
+    [semaphoreView setTime:visit.departure
+                isRealTime:[visit.service isRealTime]
+                inTimeZone:visit.stop.region.timeZone
+                    onSide:side];
+
+    annotationView = semaphoreView;
+    annotationView.canShowCallout = YES;
+    
+    
+  } else if ([annotation isKindOfClass:[StopLocation class]]
+             || [annotation isKindOfClass:[StopVisits class]]) {
+    // a circle
+    // we make visits large and changes
+    BOOL isLarge = [self drawAsLargeCircle:annotation];
+    NSString *identifier = isLarge ? LargeCircleIdentifier : SmallCircleIdentifier;
+    
+    CircleAnnotationView* circle = (CircleAnnotationView*)[mv dequeueReusableAnnotationViewWithIdentifier:identifier];
+    if (nil == circle) {
+      circle = [[CircleAnnotationView alloc] initWithAnnotation:annotation
+                                                      drawLarge:isLarge
+                                                reuseIdentifier:identifier];
+    }
+    
+    // determine the faded state
+    BOOL travelled = [self drawCircleAsTravelled:annotation];
+    circle.isFaded = (NO == travelled);
+
+    // determine the colour
+    if ([annotation isKindOfClass:[StopLocation class]]) {
+      StopLocation *stop = (StopLocation *)annotation;
+      circle.circleColor = [SGKTransportStyler routeDashColorNontravelled];
+      if (travelled && stop.name) {
+        circle.circleColor = [self.stopColors valueForKey:stop.name];
+      }
+    } else if ([annotation isKindOfClass:[StopVisits class]])  {
+      StopVisits *visit = (StopVisits *)annotation;
+      circle.circleColor = travelled
+                            ? visit.service.color
+                            : [SGKTransportStyler routeDashColorNontravelled];
+    }
+    
+    circle.alpha = [self alphaForCircleAnnotations:circle.isLarge];
+    [circle setNeedsDisplay];
+    annotationView = circle;
+    
+  } else if ([annotation isKindOfClass:[TKSegment class]]) {
+    // Segments get drawn as semaphores
+    TKSegment *segment = (TKSegment *)annotation;
+    
+    static NSString *sempahoreIdentifier = @"Semaphore";
+    SGSemaphoreView *semaphoreView = (SGSemaphoreView *)[mv dequeueReusableAnnotationViewWithIdentifier:sempahoreIdentifier];
+    
+    if (nil == semaphoreView) {
+      semaphoreView = [[SGSemaphoreView alloc] initWithAnnotation:segment
+                                                  reuseIdentifier:sempahoreIdentifier
+                                                      withHeading:self.heading];
+    } else {
+      [semaphoreView updateForAnnotation:segment
+                             withHeading:self.heading];
+    }
+    
+    // Only public transport get the time stamp. And they get it on the side opposite to the
+    // travel direction.
+    SGSemaphoreLabel side = SGSemaphoreLabelDisabled;
+    
+    CLLocationDirection absoluteBearing = segment.bearing.floatValue - self.heading;
+    if ([segment isPublicTransport]) {
+      side = (absoluteBearing > 180 ? SGSemaphoreLabelOnRight : SGSemaphoreLabelOnLeft);
+    } else if ([segment isTerminal]) {
+      CLLocationCoordinate2D fromCoordinate = [segment.trip.request.fromLocation coordinate];
+      CLLocationCoordinate2D toCoordinate = [segment.trip.request.toLocation coordinate];
+      BOOL isLeft = (fromCoordinate.longitude > toCoordinate.longitude);
+      side = isLeft ? SGSemaphoreLabelOnLeft : SGSemaphoreLabelOnRight;
+    }
+    
+    if (segment.frequency.integerValue > 0) {
+      [semaphoreView setFrequency:segment.frequency
+                           onSide:side];
+    } else {
+      [semaphoreView setTime:segment.departureTime
+                  isRealTime:segment.timeIsRealTime
+                  inTimeZone:segment.timeZone
+                      onSide:side];
+    }
+    
+    annotationView = semaphoreView;
+    
+  } else if ([annotation conformsToProtocol:@protocol(STKDisplayablePoint)]) {
+      
+    static NSString *ImageIdentifier = @"ImageAnnotationIdenfifier";
+    ASImageAnnotationView *imageAnnotationView = (ASImageAnnotationView *) [mv dequeueReusableAnnotationViewWithIdentifier:ImageIdentifier];
+    if (nil == imageAnnotationView) {
+      imageAnnotationView = [[ASImageAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:ImageIdentifier];
+    } else {
+      imageAnnotationView.annotation = annotation;
+    }
+    
+    imageAnnotationView.alpha = 1;
+    imageAnnotationView.leftCalloutAccessoryView = nil;
+    imageAnnotationView.rightCalloutAccessoryView = nil;
+
+    annotationView = imageAnnotationView;
+  }
   
   [annotationView setCanShowCallout:[annotation respondsToSelector:@selector(title)]];
   [annotationView setEnabled:YES];
@@ -620,8 +624,8 @@
 		
 		[vehicle setSubtitle:nil];
 		
-		VehicleAnnotationView *vehicleView = (VehicleAnnotationView *) [self.mapView viewForAnnotation:vehicle];
-    [vehicleView updateForAge:vehicle.ageFactor];
+		TKVehicleAnnotationView *vehicleView = (TKVehicleAnnotationView *) [self.mapView viewForAnnotation:vehicle];    
+    [vehicleView agedBy:vehicle.ageFactor];
 	}
 	
 	// remove the vehicles

@@ -8,11 +8,13 @@
 
 import Foundation
 
+import SGCoreKit
+
 extension TKRoutingParser {
   public static func matchingSegment(in trip: Trip, order: BHSegmentOrdering, first: Bool) -> TKSegment {
     
     var match: TKSegment? = nil
-    for segment in trip.segments(with: .inDetails) {
+    for segment in (trip as STKTrip).segments(with: .inDetails) {
       if let tks = segment as? TKSegment, tks.order() == order {
         match = tks
         if first {
@@ -33,17 +35,17 @@ extension TKRoutingParser {
       return false
     }
     
-    if let start = start, let named = SGNamedCoordinate(for: start) {
+    if let start = start, let named = SGKNamedCoordinate.namedCoordinate(for: start) {
       request.fromLocation = named
     } else {
       let segment = matchingSegment(in: trip, order: .regular, first: true)
-      request.fromLocation = SGNamedCoordinate(coordinate: segment.coordinate)
+      request.fromLocation = SGKNamedCoordinate(coordinate: segment.coordinate)
     }
-    if let end = end, let named = SGNamedCoordinate(for: end) {
+    if let end = end, let named = SGKNamedCoordinate.namedCoordinate(for: end) {
       request.toLocation = named
     } else {
       let segment = matchingSegment(in: trip, order: .regular, first: false)
-      request.toLocation = SGNamedCoordinate(coordinate: segment.coordinate)
+      request.toLocation = SGKNamedCoordinate(coordinate: segment.coordinate)
     }
     
     if let leaveAfter = leaveAfter {

@@ -1,0 +1,25 @@
+{
+  "bikePod": {
+    "availableBikes": 9,
+    "identifier": "melbourne-bike-share-3dd783bb687cc00e48813fc079d11b48",
+    "lastUpdate": 1477619651,
+    "operator": {
+      "name": "Melbourne Bike Share",
+      "remoteIcon": "melbournebikeshare",
+      "website": "http://www.melbournebikeshare.com.au"
+    },
+    "source": {
+      "provider": {
+        "name": "CityBikes",
+        "website": "https://citybik.es"
+      }
+    },
+    "totalSpaces": 10
+  },
+  "details": {
+    "w3w": "ruled.item.chart",
+    "w3wInfoURL": "http://what3words.com/about/"
+  },
+  "lat": -37.82447,
+  "lng": 144.94603
+}

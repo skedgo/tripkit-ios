@@ -27,17 +27,19 @@
 	self = [super initWithFrame:frame];
 	if (self) {
 		// Initialization code
-		CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0;
-		[color extractRed:&red green:&green blue:&blue alpha:&alpha];
-		self.red = red;
-		self.green = green;
-		self.blue = blue;
-		self.alpha = alpha;
-		
+    [self breakColorIntoComponents:color];
+    
 		self.opaque = NO;
 		self.backgroundColor = [UIColor clearColor];
 	}
 	return self;
+}
+
+- (void)setColor:(UIColor *)color
+{
+  _color = color;
+  [self breakColorIntoComponents:color];
+  [self setNeedsDisplay];
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -74,5 +76,14 @@
 	CGContextStrokePath(context);
 }
 
+- (void)breakColorIntoComponents:(UIColor *)color
+{
+  CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0;
+  [color extractRed:&red green:&green blue:&blue alpha:&alpha];
+  self.red = red;
+  self.green = green;
+  self.blue = blue;
+  self.alpha = alpha;
+}
 
 @end

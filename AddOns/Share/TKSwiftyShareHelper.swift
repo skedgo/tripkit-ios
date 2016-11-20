@@ -123,7 +123,7 @@ public enum TKSwiftyShareHelper {
     let from = coordinate(lat: flat, lng: flng)
     
     // make sure we got a destination
-    let named = SGNamedCoordinate(coordinate: to)
+    let named = SGKNamedCoordinate(coordinate: to)
     named.address = name
     return named.rx_valid(geocoder: geocoder)
       .map { valid in
@@ -157,13 +157,13 @@ extension TKSwiftyShareHelper.QueryDetails {
   public func toTripRequest(in tripKit: NSManagedObjectContext) -> TripRequest {
     let from, to: MKAnnotation
     if let start = start, start.isValid {
-      from = SGNamedCoordinate(coordinate: start)
+      from = SGKNamedCoordinate(coordinate: start)
     } else {
       from = SGLocationManager.sharedInstance().currentLocationPlaceholder()
     }
     
     if end.isValid {
-      let named = SGNamedCoordinate(coordinate: end)
+      let named = SGKNamedCoordinate(coordinate: end)
       named.name = self.title
       to = named
     } else {
@@ -201,18 +201,19 @@ extension TKSwiftyShareHelper.StopDetails {
 
 
 extension MKAnnotation {
+  
   /// An Observable passing back `self` if its coordinate is valid or it could get geocoded.
   public func rx_valid(geocoder: SGGeocoder) -> Observable<MKAnnotation> {
     if coordinate.isValid {
       return Observable.just(self)
     }
     
-    guard let geocodable = SGNamedCoordinate(for: self) else {
+    guard let geocodable = SGKNamedCoordinate.namedCoordinate(for: self) else {
       return Observable.empty()
     }
     
     return Observable.create() { observer in
-      SGBaseGeocoder.geocodeObject(geocodable, using: geocoder, nearRegion: MKMapRectWorld) { success in
+      SGBaseGeocoder.geocode(geocodable, using: geocoder, near: MKMapRectWorld) { success in
         if success {
           observer.onNext(self)
         }
@@ -221,6 +222,7 @@ extension MKAnnotation {
       return Disposables.create()
     }
   }
+  
 }
 
 extension CLLocationCoordinate2D {

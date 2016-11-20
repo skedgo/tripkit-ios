@@ -10,6 +10,8 @@
 
 @interface VehicleView : UIView
 
+@property (nonatomic, strong) UIColor *color;
+
 - (id)initWithFrame:(CGRect)frame color:(UIColor *)color;
 
 @end

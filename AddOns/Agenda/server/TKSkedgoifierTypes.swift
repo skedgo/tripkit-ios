@@ -19,7 +19,7 @@ public enum TKSkedgoifierEventKind: Int {
 
 @objc
 public protocol TKSkedgoifierEventInputType: TKAgendaEventInputType {
-  var timeZone: NSTimeZone { get }
+  var timeZone: TimeZone { get }
   
   var title: String { get }
   
@@ -34,12 +34,6 @@ public protocol TKSkedgoifierEventInputType: TKAgendaEventInputType {
    - returns: Indicator that the user wants to get to this event directly without returning to a lower-priority event before. Suggested default: false.
    */
   var goHereDirectly: Bool { get }
-}
-
-extension TKSkedgoifierEventInputType {
-  var isStay: Bool {
-    return kind == .stay
-  }
 }
 
 public class TKSkedgoifierEventOutput: TKAgendaEventOutput {

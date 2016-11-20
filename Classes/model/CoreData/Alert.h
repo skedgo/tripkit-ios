@@ -9,7 +9,7 @@
 @import CoreData;
 @import SGCoreKit;
 
-@class Service, StopLocation, SGNamedCoordinate;
+@class Service, StopLocation, SGKNamedCoordinate;
 
 typedef NS_ENUM(NSInteger, AlertSeverity) {
   AlertSeverityInfo = -1,
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Alert : NSManagedObject <STKDisplayablePoint>
 
-@property (nonatomic, retain, nullable) SGNamedCoordinate *location;
+@property (nonatomic, retain, nullable) SGKNamedCoordinate *location;
 @property (nonatomic, retain) NSNumber * hashCode;
 @property (nonatomic, copy) NSString * title;
 @property (nonatomic, retain, nullable) NSString * text;

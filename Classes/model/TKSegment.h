@@ -33,7 +33,7 @@ typedef enum {
 } BHSegmentType;
 
 NS_ASSUME_NONNULL_BEGIN
-@interface TKSegment : NSObject <STKDirectionalTimePoint, UIActivityItemSource, STKTripSegment>
+@interface TKSegment : NSObject <STKDisplayableTimePoint, UIActivityItemSource, STKTripSegment>
 
 @property (nonatomic, strong, nullable) id<MKAnnotation> start;
 @property (nonatomic, strong, nullable) id<MKAnnotation> end;
@@ -55,19 +55,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong, nonnull) NSDate *departureTime;
 @property (nonatomic, strong, nonnull) NSDate *arrivalTime;
-@property (nonatomic, strong, nonnull) NSDate *time;
+@property (nonatomic, copy, nonnull) NSDate *time;
 
 - (void)setTitle:(NSString *)title; // just for KVO
 
 /**
- @return The region the complete segment takes place in. Can be international if it spanning more than one region.
+ @return The local region this segment starts in. Cannot be international and thus might be nil.
  */
-- (SVKRegion *)spanningRegion;
+- (nullable SVKRegion *)startRegion;
 
 /**
- @return The local region this segment takes place in. Cannot be international and thus might be nil.
+ @return The local region this segment ends in. Cannot be international and thus might be nil.
  */
-- (SVKRegion *)localRegion;
+- (nullable SVKRegion *)endRegion;
 
 - (BHSegmentOrdering)order;
 
