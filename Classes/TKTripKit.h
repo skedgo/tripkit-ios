@@ -54,7 +54,6 @@
 #import "TKBuzzRealTime.h"
 #import "TKBuzzInfoProvider.h"
 #import "TKTimetableDownloader.h"
-#import "TKReporter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
