@@ -9,9 +9,9 @@
 #ifndef TripKitUI_h
 #define TripKitUI_h
 
-// Empty header, required to build framework
-
 #import "RouteMapManager.h"
 #import "TripMapManager.h"
+
+#import "VehicleView.h"
 
 #endif /* TripKitUI_h */

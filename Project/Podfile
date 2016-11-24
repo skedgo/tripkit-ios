@@ -5,12 +5,12 @@ use_frameworks!
 platform :ios, '8.0'
 
 def shared_pods
-  pod 'SGCoreKit/Core', git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
-  pod 'SGCoreKit/Rx',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
-  pod 'SGSearchKit',    git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
-  pod 'SGCoreUIKit',    git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
-  pod 'SGUIKit',        git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
-  pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'feature/SwiftyCore'
+  pod 'SGCoreKit/Core', git: 'https://github.com/skedgo/shared-ios.git', branch: 'hotfix/bookingFixes'
+  pod 'SGCoreKit/Rx',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'hotfix/bookingFixes'
+  pod 'SGSearchKit',    git: 'https://github.com/skedgo/shared-ios.git', branch: 'hotfix/bookingFixes'
+  pod 'SGCoreUIKit',    git: 'https://github.com/skedgo/shared-ios.git', branch: 'hotfix/bookingFixes'
+  pod 'SGUIKit',        git: 'https://github.com/skedgo/shared-ios.git', branch: 'hotfix/bookingFixes'
+  pod 'SGBookingKit',   git: 'https://github.com/skedgo/shared-ios.git', branch: 'hotfix/bookingFixes'
   
   pod 'RxSwift',        '~> 3.0'
   pod 'RxCocoa',        '~> 3.0'

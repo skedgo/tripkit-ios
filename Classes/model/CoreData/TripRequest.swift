@@ -10,7 +10,7 @@ import Foundation
 
 extension TripRequest {
  
-  func determineRegions() -> [SVKRegion] {
+  public func determineRegions() -> [SVKRegion] {
     let start = self.fromLocation.coordinate
     let end = self.toLocation.coordinate
     return SVKRegionManager.sharedInstance().localRegions(start: start, end: end)
