@@ -274,7 +274,7 @@ class MiniBookingManager: NSObject, BPKBookingViewControllerDelegate {
     return subject.asObservable()
   }
   
-  func bookingViewController(_ controller: BPKBookingViewController, didRequestUpdate url: URL, handler: @escaping () -> Void) {
+  func bookingViewController(_ controller: BPKBookingViewController, requestsDismissalWithUpdate url: URL) {
     assert(false, "Don't use MiniBM for trips!")
   }
   
