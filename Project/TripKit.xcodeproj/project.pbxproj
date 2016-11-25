@@ -168,8 +168,6 @@
 		3ADD5B751D9CDF0C00A1742F /* TKDepartureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD5B5F1D9CDF0C00A1742F /* TKDepartureView.xib */; };
 		3ADD5B761D9CDF0C00A1742F /* TKEmptyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5B601D9CDF0C00A1742F /* TKEmptyAlertView.swift */; };
 		3ADD5B771D9CDF0C00A1742F /* TKEmptyAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD5B611D9CDF0C00A1742F /* TKEmptyAlertView.xib */; };
-		3ADD5B781D9CDF0C00A1742F /* VehicleAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ADD5B621D9CDF0C00A1742F /* VehicleAnnotationView.h */; };
-		3ADD5B791D9CDF0C00A1742F /* VehicleAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5B631D9CDF0C00A1742F /* VehicleAnnotationView.m */; };
 		3ADD5B7A1D9CDF0C00A1742F /* VehicleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ADD5B641D9CDF0C00A1742F /* VehicleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ADD5B7B1D9CDF0C00A1742F /* VehicleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5B651D9CDF0C00A1742F /* VehicleView.m */; };
 		F8FE40C0F8F106E668B2BDD9 /* Pods_TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D90B11191B5E08C85990BAE4 /* Pods_TripKit.framework */; };
@@ -378,8 +376,6 @@
 		3ADD5B5F1D9CDF0C00A1742F /* TKDepartureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKDepartureView.xib; sourceTree = "<group>"; };
 		3ADD5B601D9CDF0C00A1742F /* TKEmptyAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKEmptyAlertView.swift; sourceTree = "<group>"; };
 		3ADD5B611D9CDF0C00A1742F /* TKEmptyAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKEmptyAlertView.xib; sourceTree = "<group>"; };
-		3ADD5B621D9CDF0C00A1742F /* VehicleAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleAnnotationView.h; sourceTree = "<group>"; };
-		3ADD5B631D9CDF0C00A1742F /* VehicleAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleAnnotationView.m; sourceTree = "<group>"; };
 		3ADD5B641D9CDF0C00A1742F /* VehicleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleView.h; sourceTree = "<group>"; };
 		3ADD5B651D9CDF0C00A1742F /* VehicleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleView.m; sourceTree = "<group>"; };
 		3AFF209A1D1CD4F0008BCD9F /* TripKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TripKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -824,8 +820,6 @@
 				3ADD5B611D9CDF0C00A1742F /* TKEmptyAlertView.xib */,
 				3A9FF6E01DE7A60500DB4647 /* TKOccupancyView.swift */,
 				3A9FF6E11DE7A60500DB4647 /* TKVehicleAnnotationView.swift */,
-				3ADD5B621D9CDF0C00A1742F /* VehicleAnnotationView.h */,
-				3ADD5B631D9CDF0C00A1742F /* VehicleAnnotationView.m */,
 				3ADD5B641D9CDF0C00A1742F /* VehicleView.h */,
 				3ADD5B651D9CDF0C00A1742F /* VehicleView.m */,
 			);
@@ -874,7 +868,6 @@
 				3AB6C6B91D1CD08E0089F687 /* TKInterAppCommunicator.h in Headers */,
 				3AB6C6D11D1CD08E0089F687 /* TKNextSegmentScorer.h in Headers */,
 				3AB6C6E41D1CD08E0089F687 /* StopVisits.h in Headers */,
-				3ADD5B781D9CDF0C00A1742F /* VehicleAnnotationView.h in Headers */,
 				3AB6C7011D1CD08E0089F687 /* TKFakeRouter.h in Headers */,
 				3AB6C6FD1D1CD08E0089F687 /* TKBuzzRealTime.h in Headers */,
 				3AB6C6F81D1CD08E0089F687 /* TKTripFactory.h in Headers */,
@@ -1171,7 +1164,6 @@
 				3AB6C6F71D1CD08E0089F687 /* TKSegment.m in Sources */,
 				3AB6C6ED1D1CD08E0089F687 /* Vehicle.m in Sources */,
 				3AB6C7121D1CD08E0089F687 /* TKTimetableDownloader.m in Sources */,
-				3ADD5B791D9CDF0C00A1742F /* VehicleAnnotationView.m in Sources */,
 				3A9FF6D71DE79FA700DB4647 /* Alert.swift in Sources */,
 				3A32CD711DC2DC6D003B158B /* TKOccupancy.swift in Sources */,
 				3AB6C6EF1D1CD08E0089F687 /* TKCellHelper.m in Sources */,
