@@ -84,6 +84,15 @@
 /* Walking time */
 "Duration" = "für %@";
 
+/* As in 'this bus/train is empty' */
+"Empty" = "Leer";
+
+/* As in 'this bus/train has few seats available' */
+"Few seats available" = "Wenige Plätze verfügbar";
+
+/* As in 'this bus/train is full and likely can't accept further passengers' */
+"Full" = "Voll";
+
 /* No comment provided by engineer. */
 "Get Lyft" = "Lyft herunterladen";
 
@@ -100,10 +109,10 @@
 "Google Maps" = "Google Maps";
 
 /* %@ is replaced with app name */
-"In the meantime, let's keep exploring %@ and enjoy your trips" = "In the meantime, let's keep exploring %@ and enjoy your trips";
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "Bis dahin, erkunde %@ weiter und genieße deine Reise.";
 
 /* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "In the meantime, let's keep exploring and enjoy your trips";
+"In the meantime, let's keep exploring and enjoy your trips" = "Bis dahin, genieße deine Reise.";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -124,11 +133,17 @@
 /* Time departure */
 "LeaveTime" = "Abfahrt um %@";
 
+/* As in 'this bus/train is so full, there's only limited standing room' */
+"Limited standing room only" = "Wenige Stehplätze";
+
 /* No comment provided by engineer. */
 "Live traffic" = "Live-Verkehr";
 
 /* Title to show while loading/waiting for results */
 "Loading..." = "Laden...";
+
+/* As in 'this bus/train has many seats available' */
+"Many seats available" = "Viele Plätze verfügbar";
 
 /* ArrivalTime */
 "MessageArrivalTime" = "Ich komme bei %@ um %@ an.";
@@ -139,6 +154,9 @@
 /* Indicating no trips have been planned within 24 hrs */
 "No planned trips" = "Keine Routen geplant";
 
+/* As in 'this bus/train is full and definitely not accepting further passengers' */
+"Not accepting passengers" = "Akzeptiert keine Passagiere";
+
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Pünktlich";
 
@@ -147,9 +165,6 @@
 
 /* No comment provided by engineer. */
 "Open Ola" = "Ola öffnen";
-
-/* No comment provided by engineer. */
-"Plan a trip in TripGo and it will show up here." = "Plan a trip in TripGo and it will show up here.";
 
 /* Arrival Location */
 "PrimaryLocationEnd" = "Nach %@";
@@ -171,6 +186,9 @@
 
 /* Show website action */
 "Show website" = "Webseite öffnen";
+
+/* As in 'this bus/train is fairly full and has standing room only' */
+"Standing room only" = "Nur noch Stehplätze";
 
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld Stops";
