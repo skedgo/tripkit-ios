@@ -1,0 +1,21 @@
+stages:
+  - build
+
+build_code:
+  stage: build
+  script:
+    - cd Project
+    - export LC_ALL="en_US.UTF-8" # Fixes cocoapods + xcpretty (clean)
+    - pod update
+    - xcodebuild clean -workspace TripKit.xcworkspace -scheme TripKit | xcpretty -c
+    - xcodebuild test -workspace TripKit.xcworkspace -scheme TripKit -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+  cache:
+    key: "$CI_BUILD_REF_NAME" # per-branch caching
+    paths:
+      - Project/Pods
+      - Project/Podfile.lock
+  artifacts:
+    paths:
+    - build/reports/tests.html
+  tags:
+    - ios
