@@ -1,5 +1,5 @@
 //
-//  TKPostBookingCoordinator.swift
+//  TKModeBookingCoordinator.swift
 //  TripGo
 //
 //  Created by Adrian Schoenig on 24/11/16.
@@ -11,18 +11,16 @@ import Foundation
 import RxSwift
 import TripKit
 
-public class TKPostBookingCoordinator {
+public class TKModeBookingCoordinator {
 
-  fileprivate let segment: TKSegment
+  fileprivate let mode: String
   fileprivate let stateMachine: Variable<TKBookingStateMachine>
   fileprivate let disposeBag = DisposeBag()
   
   
-  public init(startAt url: URL, for segment: TKSegment) {
-    self.segment = segment
+  public init(startAt url: URL, forMode mode: String) {
+    self.mode = mode
     stateMachine = Variable(.fetchingBookingForm(url, data: nil))
-    
-    let mode = segment.modeIdentifier() ?? "mode_is_irrelevant_here_anyway"
 
     // This is where we do the actual transitions
     
@@ -43,10 +41,10 @@ public class TKPostBookingCoordinator {
 }
 
 
-extension TKPostBookingCoordinator : TKBookingCoordinator {
+extension TKModeBookingCoordinator : TKBookingCoordinator {
  
-  public var rx_bookingUI: Observable<(TKSegment, TKBookingStateMachine)> {
-    return stateMachine.asObservable().map { (self.segment, $0) }
+  public var rx_bookingUI: Observable<(String, TKBookingStateMachine)> {
+    return stateMachine.asObservable().map { (self.mode, $0) }
   }
   
   public func didBecomeActive() {
@@ -54,14 +52,14 @@ extension TKPostBookingCoordinator : TKBookingCoordinator {
   }
   
   public func didDismiss() {
-    stateMachine.value.appDidBecomeActive()
+    stateMachine.value.userDidDismiss()
   }
   
   public func didVisitDisregardURL() {
     stateMachine.value.userOpenedDisregardURL()
   }
   
-  public func bookingCompleted(with url: URL) {
+  public func bookingCompleted(with url: URL?) {
     stateMachine.value.formCompletedBooking(url: url)
   }
   

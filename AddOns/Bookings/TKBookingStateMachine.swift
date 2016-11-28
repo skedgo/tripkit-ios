@@ -61,7 +61,7 @@ public enum TKBookingStateMachine {
   
   /// Booking completed and trip should be
   /// updated with provided URL.
-  case completed(URL)
+  case completed(URL?)
 
   /// An error occured during the booking
   /// process. Show error and go back to
@@ -71,7 +71,7 @@ public enum TKBookingStateMachine {
   /// User has initiated booking, authorization
   /// is needed and will be triggered.
   /// Show a loading indicator.
-  case authorising(BPKForm)
+  case authorizing(BPKForm)
   
   ///
   case authWaitingForCallback
@@ -84,7 +84,7 @@ public enum TKBookingStateMachine {
   public mutating func appDidRestore(selection: Int, isWaiting: Bool) {
     
     switch self {
-    case .viewingQuickBooking, .authorising, .error:
+    case .viewingQuickBooking, .authorizing, .error:
       if isWaiting {
         self = .authWaitingForCallback
       } else {
@@ -132,7 +132,7 @@ public enum TKBookingStateMachine {
     case .fetchingBookingForm:
       
       switch form {
-      case .auth(let form):           self = .authorising(form)
+      case .auth(let form):           self = .authorizing(form)
       case .error(let error):         self = .error(error)
       case .form(let form):           self = .presentForm(form)
       case .web(let url, let target, let next):
@@ -146,7 +146,7 @@ public enum TKBookingStateMachine {
   }
   
   
-  public mutating func formCompletedBooking(url: URL) {
+  public mutating func formCompletedBooking(url: URL?) {
     
     switch self {
     case .presentForm:
@@ -236,7 +236,7 @@ public func ==(lhs: TKBookingStateMachine, rhs: TKBookingStateMachine) -> Bool {
   switch (lhs, rhs) {
     
   // Simple states
-  case (.authorising, .authorising),
+  case (.authorizing, .authorizing),
        (.authWaitingForCallback, .authWaitingForCallback),
        (.authAppBecameActive, .authAppBecameActive),
        (.authCallbackRetrieved, .authCallbackRetrieved):

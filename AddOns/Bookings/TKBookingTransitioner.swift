@@ -22,7 +22,7 @@ public enum TKBookingTransitioner {
   /// It manages the following transitions:
   /// - `fetchingBookingForm`: Making URL calls and switching the appropriate
   ///    next state.
-  /// - `authorising`: Triggering OAuth.
+  /// - `authorizing`: Triggering OAuth.
   /// - `authCallbackRetrieved` and `authAppBecameActive`: Either transitioning
   ///    to making a follow-up server call, if both states were visited, or
   ///    back to waiting state after a timeout in case that the user cancelled.
@@ -49,7 +49,7 @@ public enum TKBookingTransitioner {
       return requestForm(url, data: dict, advancing: state)
       
     // Triggering authentication
-    case .authorising(let form):
+    case .authorizing(let form):
       return OAuthClient.shared.rx_initiate(forMode: mode, form: form)
         .map { TKBookingTransitioner.handleOAuth($0, advancing: state) }
       

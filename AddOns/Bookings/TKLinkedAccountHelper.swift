@@ -17,7 +17,7 @@ public struct ProviderAuth {
 
   fileprivate struct RemoteAction {
     fileprivate let title: String
-    fileprivate let URL: Foundation.URL
+    fileprivate let url: URL
   }
 
   fileprivate enum Status {
@@ -26,8 +26,8 @@ public struct ProviderAuth {
     
     fileprivate var remoteURL: URL? {
       switch self {
-      case .connected(let action): return action?.URL
-      case .notConnected(let action): return action.URL
+      case .connected(let action): return action?.url
+      case .notConnected(let action): return action.url
       }
     }
 
@@ -59,8 +59,8 @@ public struct ProviderAuth {
     }
     
     switch status {
-    case .connected: return "Disconnect"
-    case .notConnected: return "Setup"
+    case .connected: return "Disconnect" // TODO: Localize
+    case .notConnected: return "Setup"   // TODO: Localize
     }
   }
   
@@ -82,7 +82,7 @@ extension ProviderAuth.Status {
       return nil
     }
     
-    let remoteAction = ProviderAuth.RemoteAction(title: actionTitle, URL: actionURL)
+    let remoteAction = ProviderAuth.RemoteAction(title: actionTitle, url: actionURL)
     
     switch action {
     case "signin":
@@ -193,104 +193,20 @@ extension SVKRegion {
 }
 
 extension Reactive where Base: SVKRegion {
-  /**
-   Initiates linking of a user's account for the provided `mode`.
-   
-   Fetches the required information from the server to initiate the OAuth process and then starts the OAuth process itself, which usually leads to the user being redirected to a webpage.
-   
-   - warning: Make sure you have configured the OAuthCallback in your Config.plist and that you're handling this when the app gets opened again.
-   
-   - parameter mode: Mode identifier for which to link the user's account.
-   - parameter remoteURL: URL for linking from `ProviderAuth.actionURL`.
-   - returns: Observable indicating success.
-   */
-  public func linkAccount(_ mode: String, remoteURL: URL, presenter: UIViewController) -> Observable<Bool> {
+  
+  public func linkedAccounts(mode: String? = nil) -> Observable<[ProviderAuth]?> {
     
-    // TODO: Re-implement this using new OAuthClient (!)
-    return Observable.just(false)
-    
-//    return OAuthClient.requiresOAuth(remoteURL)
-//      .flatMap { form, isOAuth -> Observable<Bool> in
-//        if isOAuth {
-//          return OAuthClient.performOAuth(mode, form: form, authenticator: authenticator)
-//            .map { form in form == nil } // No further input required
-//        } else {
-//          var manager: MiniBookingManager! = MiniBookingManager(withForm: form)
-//          var disposeBag: DisposeBag! = DisposeBag()
-//          manager.present(fromViewController: presenter)
-//          return Observable.create { subscriber in
-//            manager.asObservable()
-//              .subscribe(subscriber)
-//              .addDisposableTo(disposeBag)
-//            return Disposables.create {
-//              manager = nil
-//              disposeBag = nil
-//            }
-//          }
-//        }
-//    }
-  }
-  
-}
-
-/**
- A small class that manages a booking form which is not tied to a trip.
- 
- It walks through the booking flow and you can use the `asObservable()` method to be notified once the use has either completed or aborted the booking process. This class handles presenting the booking view controller and dismissing it.
- 
- Use it as follows:
- 
- 1. Initialise it with a form
- 2. Call it to present from a view controller
- 3. Subscribe to the `asObservable()` as handle its callbacks
- 
- - note: This is a one-off object. Only use it to present exactly once. One the observable sequence has ended, this object is useless. 
- */
-class MiniBookingManager: NSObject, BPKBookingViewControllerDelegate {
-  fileprivate let form: BPKForm
-  fileprivate let subject = PublishSubject<Bool>()
-  
-  fileprivate weak var presenter: UIViewController?
-  
-  init(withForm form: BPKForm) {
-    self.form = form
-  }
-  
-  func present(fromViewController presenter: UIViewController) {
-    if self.presenter != nil {
-      SGKLog.warn("MiniBookingManager", text: "Is already being presented!")
-      return
+    return Observable.create { subscriber in
+      
+      self.base.linkedAccounts(mode) {
+        subscriber.onNext($0)
+        subscriber.onCompleted()
+      }
+      
+      return Disposables.create()
+      
     }
     
-    let booker = BPKBookingViewController(form: form)
-    booker.delegate = self
-    let navigator = UINavigationController(rootViewController: booker)
-    navigator.modalPresentationStyle = .formSheet
-    presenter.present(navigator, animated: true, completion: nil)
-    self.presenter = presenter
   }
   
-  func asObservable() -> Observable<Bool> {
-    return subject.asObservable()
-  }
-  
-  func bookingViewController(_ controller: BPKBookingViewController, requestsDismissalWithUpdate url: URL) {
-    assert(false, "Don't use MiniBM for trips!")
-  }
-  
-  func bookingViewController(_ controller: BPKBookingViewController, didComplete complete: Bool, with manager: BPKManager) {
-    self.presenter?.dismiss(animated: true, completion: nil)
-    self.presenter = nil
-    
-    subject.onNext(complete)
-    subject.onCompleted()
-  }
-  
-  func bookingViewControllerDidCancelBooking(_ controller: BPKBookingViewController) {
-    self.presenter?.dismiss(animated: true, completion: nil)
-    self.presenter = nil
-    
-    subject.onNext(false)
-    subject.onCompleted()
-  }
 }

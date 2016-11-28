@@ -50,7 +50,6 @@ public class TripBookingCoordinator {
       for (segmentIndex, segment) in trip.segments().enumerated() {
         guard segment.bookingQuickInternalURL() != nil else { continue }
         
-        
         // Note: We're not restoring waiting state in here. That's
         //   left as an exercise to whoever is using this class.
         //   E.g., TripViewModel is doing that.
@@ -139,7 +138,7 @@ public class TripBookingCoordinator {
     guard let machine = machine(for: segment) else { return false }
     
     switch machine.value {
-    case .fetchingBookingForm, .authorising, .authCallbackRetrieved, .authAppBecameActive, .authWaitingForCallback:
+    case .fetchingBookingForm, .authorizing, .authCallbackRetrieved, .authAppBecameActive, .authWaitingForCallback:
       return true
     default:
       return false
@@ -194,7 +193,7 @@ extension TripBookingCoordinator : TKBookingCoordinator {
   }
   
   
-  public func bookingCompleted(with url: URL) {
+  public func bookingCompleted(with url: URL?) {
     guard let machines = stateMachines else { return }
     for (_, machineVar) in machines {
       machineVar.value.formCompletedBooking(url: url)

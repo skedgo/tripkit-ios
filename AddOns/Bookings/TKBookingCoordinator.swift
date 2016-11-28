@@ -13,7 +13,9 @@ import TripKit
 
 public protocol TKBookingCoordinator {
   
-  var rx_bookingUI: Observable<(TKSegment, TKBookingStateMachine)> { get }
+  associatedtype Bookable
+  
+  var rx_bookingUI: Observable<(Bookable, TKBookingStateMachine)> { get }
   
   func didBecomeActive()
   
@@ -21,7 +23,7 @@ public protocol TKBookingCoordinator {
   
   func didVisitDisregardURL()
   
-  func bookingCompleted(with url: URL)
+  func bookingCompleted(with url: URL?)
   
   func handle(_ url: URL) -> Bool
 
