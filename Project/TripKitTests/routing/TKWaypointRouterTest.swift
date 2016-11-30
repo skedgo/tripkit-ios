@@ -157,7 +157,7 @@ class TKWaypointRouterTest: TKTestCase {
     guard let firstEndRaw = walkJson["end"].string else { XCTFail(); return }
     guard let firstEnd = SVKParserHelper.coordinate(forRequest: firstEndRaw) else { XCTFail(); return }
     let endLocation = CLLocation(latitude: firstEnd.latitude, longitude: firstEnd.longitude)
-    let tripEndLocation = CLLocation(latitude: trip.request.fromLocation.coordinate.latitude, longitude: trip.request.fromLocation.coordinate.longitude)
+    let tripEndLocation = CLLocation(latitude: trip.request.toLocation.coordinate.latitude, longitude: trip.request.toLocation.coordinate.longitude)
     XCTAssertLessThan(endLocation.distance(from: tripEndLocation), 50)
     
     let trainJson = swifty["segments"][0]
