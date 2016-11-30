@@ -15,9 +15,16 @@ extension TKParserHelper {
     return Vehicle(dict: dict, into: context)
   }
   
+  
   @objc(updateVehicle:fromDictionary:)
   public static func update(vehicle: Vehicle, from dict: [String: Any]) {
     vehicle.update(with: dict)
+  }
+  
+  
+  @objc(vehiclesPayloadForVehicles:)
+  public static func vehiclesPayload(for vehicles: [STKVehicular]) -> [[String: Any]] {
+    return vehicles.map(STKVehicularHelper.skedGoFullDictionary(forVehicle:))
   }
 
 }

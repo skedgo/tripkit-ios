@@ -11,6 +11,7 @@
 
 #import "RouteMapManager.h"
 #import "TripMapManager.h"
+#import "VehicleView.h"
 
 #import "VehicleView.h"
 

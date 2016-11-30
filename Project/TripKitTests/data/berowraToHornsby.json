@@ -1,0 +1,148 @@
+{
+  "groups": [
+    {
+      "frequency": 20,
+      "trips": [
+        {
+          "arrive": 1474443720,
+          "caloriesCost": 1,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1474442941,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -912034213,
+          "moneyCost": 4.2,
+          "moneyUSDCost": 3.29,
+          "plannedURL": "http://deep-thought:8080/satapp-debug/trip/planned/bb7d35bf-d0fa-4171-9d52-6fb2521336fa",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1474441341,
+          "saveURL": "http://deep-thought:8080/satapp-debug/trip/save/bb7d35bf-d0fa-4171-9d52-6fb2521336fa",
+          "segments": [
+            {
+              "durationString": "13 mins",
+              "endTime": 1474443720,
+              "platform": "Platform 2",
+              "segmentTemplateHashCode": -912034213,
+              "serviceColor": {
+                "blue": 0,
+                "green": 167,
+                "red": 247
+              },
+              "serviceDirection": "Central",
+              "serviceName": "T1 North Shore, Northern & Western Line",
+              "serviceNumber": "T1",
+              "serviceTripID": "189R.1461.101.60-20160820.A.8.42424763",
+              "startTime": 1474442941,
+              "stops": 4,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/"
+            }
+          ],
+          "temporaryURL": "http://deep-thought:8080/satapp-debug/trip/bb7d35bf-d0fa-4171-9d52-6fb2521336fa",
+          "updateURL": "http://deep-thought:8080/satapp-debug/trip/update/bb7d35bf-d0fa-4171-9d52-6fb2521336fa?hash=1642048899",
+          "weightedScore": 11.3
+        }
+      ]
+    }
+  ],
+  "realTimeStamp": 0,
+  "region": "AU_NSW_Sydney",
+  "regions": [
+    "AU_NSW_Sydney"
+  ],
+  "segmentTemplates": [
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2077301",
+      "from": {
+        "address": "Berowra Station Platform 2",
+        "class": "Location",
+        "lat": -33.62348,
+        "lng": 151.15324,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -912034213,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Train",
+        "identifier": "pt_pub_train",
+        "localIcon": "train"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($4.20)",
+      "serviceOperator": "Sydney Trains",
+      "shapes": [
+        {
+          "encodedWaypoints": "vaflEwbqy[zMzShE|DbHxAvOcAfDBpCd@dp@n]`HbIfClId@lIlBlFbFlEhDj@fDWtHcDnD[tOzCpHc@jCK??~@RpI`D|EtGbf@n~@vPbMpL`MdOvWdE~D??Xl@tEpCz_AbQfR`FtNhJ??YGbc@pf@|NhKdg@lG",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "htulEemfy[xCdArCIbA[lBqApUyZdEiH??Xi@nVck@rGoNlCoEdJeKdDaD|EgDfX{MhOiJzEuDt\\yY??d@WjGcG`d@q`@pNwMpEsHhDqIbDaN~@cCxAoCrCmC`LoEbJuE~AsAtAkBz@cBj@eBvAqGvAeD|A{BtJoHlBiA??xEcCzu@gj@??xHkFpr@kf@",
+          "travelled": false
+        }
+      ],
+      "stopCode": "208172",
+      "to": {
+        "address": "Hornsby Station Platform 1",
+        "class": "Location",
+        "lat": -33.70324,
+        "lng": 151.0986,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 214,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2077303",
+      "from": {
+        "address": "Berowra Station Platform 1",
+        "class": "Location",
+        "lat": -33.6235,
+        "lng": 151.1532,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -980585226,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Train",
+        "identifier": "pt_pub_train",
+        "localIcon": "train"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($4.20)",
+      "serviceOperator": "NSW TrainLink",
+      "shapes": [
+        {
+          "encodedWaypoints": "dkgkEukqz[pT}A`DiAnCgB~BkCnCkEjB_CzBaBdCqAlCs@|NiA`Ei@p\\OrBNxCn@vAR??KN`CvAvFtF~l@ny@jDnG~BzFxAxEjBtHv@xFl@tGb@zIw@nc@WnEe@|Co@|Bue@jlAaCrImUjm@}ErJaAvC]`BIdACtGM~D_@rDGrBFfBNbBb@fBzA`D`A~@f]~V\\\\nApDtAbCx@r@`C~@??p@p@|@r@x@|@x@xAj@jBf@dDZxZRpAXlAbApBtHtFr@t@d@x@x@nCNfAb@jJP`B`@xAf@lA`@r@n@r@bAt@hAh@vZrGbA`@dBvAtAdCpGlSNpATrIRvAlAbDnBlCxA`AbAb@nCd@jAFtCa@|YmHfBQbE?f_@bEhV|C~ZlM`ALlBPxBBbdA}DlCHpCd@zS~IrAlAtA~@??^xAhA`DZdCjC`h@VzBvCjJRxADrASjFBtCN`AnB|F~@nEhAfDNdAF`E}AzF[|BCt@PxBTpAl@hAvDvEh@fAZlAX|A@`BOnKZpBnAdFlBxDd@j@r@b@x@VrCf@rAKbAY~@e@lDaDdAa@|B]rCPhAb@rDtBrA\\lAFvFKrAP`B|@|CxD|BdBxAd@xBd@~AFhBE`FWfBFdAXnGhCvSxDzSxDfAZ|@d@|@x@x@pAlJzTzJrNdKxNd@lAXvAHtBEz@s@tFApAFpAJx@R|@j@vAb@r@|@|@dAp@t@ThA\\p@Pj@b@jGzHfB|AtBpAvGzBvAv@jDpCzAp@nB\\rAHpIW??`ACtL?bAJ`A\\z@f@nC~Bd@p@Vv@N|AHjACjAc@hDGrAAz@LvARhA\\bAj@`Aj@r@v@n@`Ab@l@Nv@Lz@@rFa@nD@zANbBb@lB`AfZfTdCbAxFxApXdBhQfBbGpBdHnEfIbIlLtQ",
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "`bflE}bqy[tAhCq@iAnBdD`BrClCpErB~B`CdBlChAtB^tCNlP_ApBPjBj@r_@bS|NdIdAl@nBtBhBhCnAxCbAvDl@dIX~Ar@xB|@vAr@t@x@p@xBbAhALdADfA?~@MdBo@|F_CdBMpBDdBZpDlAvA`@v@LdB?tHq@t@@dC`@xAd@hCfAfAr@dB|A~CdFzFbL~J`SvHtOrCfFhA|ApA~AxAlAvA`AlDzB`CfBfCzB~C~CjC~C|BjD~B~DjGbL|@pAlAxAnBlBdC`BdBx@hA^fCl@`OdCnOdCrZrFhHhBnBt@fEnBjDnBlDfCdEnDdExElSxUzClDbAbArB`BzAdAhBdAxBr@nBh@tc@pH",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "btulEclfy[H@jNrCjDn@p@LtEn@jBLvFIxDi@hAUnCcAhNaH`D}@bBOfEO~D\\lElAlE`CvDvDnAfBbBjDjAhEfA`GFbHG|Kr@lI~@pE|ApDdCtD`RpP~UbTbKpJdWxUlOnNhInHpAtAdA|A`AnBlBjIh@nAlAfBhA`ArAv@~A^x@Fx@B|@KzAWt@UxGcElA]bCUnBFjBZvFfBxE@pASdCyArAcBfA}Bf@iB^uCvDej@ZaCx@aE`AgCjCoE`BiB|CcClC{AtFqA`HaB|LwCdFu@|AK|AD`CTv@NjJzClBf@lFb@`E?`AEvE}@pBm@|@c@??vAc@rJ_FhEsAbFk@`EBhLbAlIv@~LpA~TdCxGl@vBJh@[??rERlCSlCg@pQuE`HqBjEaCdAq@xB}CdIqRnAiBbBiBtAeArCqA`Bi@hAIbCKdAFzAJdBf@tIvC`B`@tAVdBNxBJ`DExAQzCSdMu@|D?bDHvDVxRhCbQzBzg@bGfo@vHnAFrD`@vRv@`QL|GEdHQ~U_BrM{AlJ}AfJeBrFsA~By@zP{Df]yHhSqEpDoCrAyBdBgCXwB??jDsChEmGxAuA`D_DbDuCt@cArDcIr@qD`AuK`A_Kx@qEvBkKdAwChCyFrAoBbGeJlJmNhBeDpBoE`CqFjEoKv@uCtC_N~CsNfIsZtAoJJyAb@mK`@iPT{Cv@}EhAoEb@sA`GsUN_AtF}TLgAn@uCHg@b@qDXcGAuHaBoR?{AZqE`A_Gt@sD^wCZyGOsIo@sEa@uGDcHh@aFtDcOpBuGzDqHx@kCpAiFZkDDyAJoE?yPOiFIiAe@eDcBsI}D_PeEePiKea@uD}HwBeDkHiIqEiDe@OcI}FkMiMoF{H",
+          "travelled": false
+        }
+      ],
+      "stopCode": "208171",
+      "to": {
+        "address": "Hornsby Station Platform 3",
+        "class": "Location",
+        "lat": -33.70321,
+        "lng": 151.09843,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 214,
+      "type": "scheduled",
+      "visibility": "in summary"
+    }
+  ]
+}
