@@ -10,14 +10,23 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ tarde (Servicio de las %2$@)";
 
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ bicicleta-amigable";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ sin tráfico";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ silla de ruedas-amigable";
 
 /* No comment provided by engineer. */
 "1 stop" = "1 parada";
 
 /* Indication of an activity */
 "ActivityIndication" = "Voy a tomar un %@ a las %@ desde %@.";
+
+/* No comment provided by engineer. */
+"Alerts" = "Alertas";
 
 /* apple maps directions action */
 "Apple Maps" = "Mapa de Apple";
@@ -31,13 +40,16 @@
 /* The place of arrival with time */
 "ArrivalLocationTime" = "Llegada a %@ a las %@";
 
-/* Arrival %time.
-   Time arrival */
+/* 'Arrive at %@', where '%@' will be replace with the arrival time.
+   Arrival %time. */
 "ArrivalTime" = "Llegada a las %@";
 
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
 "Arrive" = "Llegar";
+
+/* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
+"Arrive in" = "Llegada en";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "Reservar con FlitWays";
@@ -72,6 +84,15 @@
 /* Walking time */
 "Duration" = "por %@";
 
+/* As in 'this bus/train is empty' */
+"Empty" = "Vacío";
+
+/* As in 'this bus/train has few seats available' */
+"Few seats available" = "Pocos asientos disponibles";
+
+/* As in 'this bus/train is full and likely can't accept further passengers' */
+"Full" = "Completo";
+
 /* No comment provided by engineer. */
 "Get Lyft" = "Obtener Lyft";
 
@@ -87,9 +108,18 @@
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
+/* %@ is replaced with app name */
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "Mientras tanto, sigamos explorando %@ y disfrutando de tus viajes";
+
+/* No comment provided by engineer. */
+"In the meantime, let's keep exploring and enjoy your trips" = "Mientras tanto, sigamos explorando y disfrutando de tus viajes";
+
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
 "Leave" = "Partir";
+
+/* Title for when to depart. Countdown to departure will be displayed below. */
+"Leave in" = "Partida en";
 
 /* No comment provided by engineer. */
 "Leave now" = "Partir ahora";
@@ -103,11 +133,29 @@
 /* Time departure */
 "LeaveTime" = "Salir a las %@";
 
+/* As in 'this bus/train is so full, there's only limited standing room' */
+"Limited standing room only" = "Solo espacio de pie limiado";
+
 /* No comment provided by engineer. */
 "Live traffic" = "Tráfico en tiempo real";
 
+/* Title to show while loading/waiting for results */
+"Loading..." = "Cargando...";
+
+/* As in 'this bus/train has many seats available' */
+"Many seats available" = "Varios asientos disponibles";
+
 /* ArrivalTime */
 "MessageArrivalTime" = "Voy a llegar a %@ a las %@.";
+
+/* Title of button to get more details about an alert */
+"More info" = "Más información";
+
+/* Indicating no trips have been planned within 24 hrs */
+"No planned trips" = "Ningún viaje planeado";
+
+/* As in 'this bus/train is full and definitely not accepting further passengers' */
+"Not accepting passengers" = "No se aceptan pasajeros";
 
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "A tiempo";
@@ -117,6 +165,9 @@
 
 /* No comment provided by engineer. */
 "Open Ola" = "Abrir Ola";
+
+/* No comment provided by engineer. */
+"Plan a trip and it will show up here." = "Planifica un viaje y se mostrará aquí.";
 
 /* Arrival Location
    For trip titles, e.g., 'To work' */
@@ -140,13 +191,16 @@
 /* Show website action */
 "Show website" = "Ir al Sitio Web";
 
+/* As in 'this bus/train is fairly full and has standing room only' */
+"Standing room only" = "Espacio de pie solamente";
+
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld paradas";
 
 /* From %time1 to %time2 */
 "TimeFromToShortFormat" = "%@ hasta %@";
 
-/* No comment provided by engineer. */
+/* Title for a trip */
 "Trip" = "Viaje";
 
 /* Vehicle 'x' updated */
@@ -154,6 +208,15 @@
 
 /* Vehicle updated */
 "VehicleUpdated" = "Actualizado hace %@";
+
+/* No comment provided by engineer. */
+"We are busy getting your upcoming trip. Please wait..." = "Estamos ocupados obteniendo tu próximo viaje. Por favor espera...";
+
+/* No comment provided by engineer. */
+"We'll keep you updated with the latest transit alerts here" = "Te mantendremos actualizado con las últimas alertas de tránsito aquí";
+
+/* No comment provided by engineer. */
+"Wheelchair accessible" = "Accesible en silla de ruedas";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch un Taxi";
