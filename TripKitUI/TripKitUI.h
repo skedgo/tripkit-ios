@@ -13,5 +13,6 @@
 
 #import "RouteMapManager.h"
 #import "TripMapManager.h"
+#import "VehicleView.h"
 
 #endif /* TripKitUI_h */

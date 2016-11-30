@@ -25,7 +25,7 @@ extension TKSegment {
   }
   
   
-  func determineRegions() -> [SVKRegion] {
+  public func determineRegions() -> [SVKRegion] {
     guard let start = self.start?.coordinate, let end = self.end?.coordinate else { return [] }
     
     return SVKRegionManager.sharedInstance().localRegions(start: start, end: end)

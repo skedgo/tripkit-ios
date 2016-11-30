@@ -1,0 +1,154 @@
+{
+  "region": "AU_NSW_Sydney",
+  "title": "Train Trip To Cumberland Place & Harrington Street - TripGo",
+  "realTimeStamp": 0,
+  "description": "Walk about 600m to Hornsby Station Platform 1.\nTake the train (Central, then Epping) from Hornsby Station Platform 1 to Wynyard Station Platform 3 18:14 - 18:53.\nWalk about 750m to Cumberland Place & Harrington Street.\n",
+  "segmentTemplates": [
+    {
+      "to": {
+        "address": "Hornsby Station Platform 1",
+        "class": "Location",
+        "lng": 151.0986,
+        "lat": -33.70324
+      },
+      "visibility": "in summary",
+      "action": "Walk<DURATION>",
+      "hashCode": 65289678,
+      "streets": [
+        {
+          "encodedWaypoints": "htulEqley[????{AMd@mH??^iHJcARqCXe@GI@m@BOJ}@SCIAQCC?Da@"
+        }
+      ],
+      "from": {
+        "address": "William Street & Dural Lane",
+        "class": "Location",
+        "lng": 151.09346,
+        "lat": -33.70327
+      },
+      "type": "unscheduled",
+      "metres": 570,
+      "notes": "<LOCATIONS>\n600m",
+      "travelDirection": 88,
+      "modeIdentifier": "wa_wal"
+    },
+    {
+      "to": {
+        "address": "Wynyard Station Platform 3",
+        "class": "Location",
+        "lng": 151.20575,
+        "lat": -33.86596
+      },
+      "endStopCode": "2000403",
+      "visibility": "in summary",
+      "hashCode": -1504808282,
+      "from": {
+        "address": "Hornsby Station Platform 1",
+        "class": "Location",
+        "lng": 151.0986,
+        "lat": -33.70324
+      },
+      "stopCode": "2077301",
+      "type": "scheduled",
+      "serviceOperator": "Sydney Trains",
+      "travelDirection": 146,
+      "shapes": [
+        {
+          "travelled": false,
+          "encodedWaypoints": "vaflEwbqy[zMzShE|DbHxAvOcAfDBpCd@dp@n]`HbIfClId@lIlBlFbFlEhDj@fDWtHcDnD[tOzCpHc@jCK??~@RpI`D|EtGbf@n~@vPbMpL`MdOvWdE~D??Xl@tEpCz_AbQfR`FtNhJ??YGbc@pf@|NhKdg@lG"
+        },
+        {
+          "travelled": true,
+          "encodedWaypoints": "htulEemfy[~Cj@rCI`A[jBqArUwZ`EqG??Xi@nVck@rGoNlCoEdJeKdDaD|EgDfX{MhOiJzEuDt\\yY??d@WjGcG`d@q`@pNwMpEsHhDqIbDaN~@cCxAoCrCmC`LoEbJuE~AsAtAkBz@cBj@eBvAqGvAeD|A{BtJoHlBiA??xEcCzu@gj@??xHkFpr@kf@???NnB{@hCu@jKaAzDsAbDoBdAy@pCaDdAgBvLwY|@kB??tAwBtAgBfCwBtEoCtB}@tBo@xCw@hBWtOKhDb@j[o@??hFb@rTc@zF[pH{AfEiBbGiE`EkEpAqB??fA_BbNu^rBcDnD}DpEkC|CaAdC_@pDK`G?fHg@vQaC??pIa@~Ck@~NqExCQ~@LhBj@t@f@`AhA|@tBhBxH^r@rArAtAj@pARhACVU??jBa@vAwAh@cAh@_CBgCMuEHkAb@sB|@{AjAeA|@a@jAQtGV~BK`DkA??CRxAs@x@q@|@_A|@oAQRbCoHjA_IvEqc@??IAx@aDlBqEnB{BtByApFuCpFeB??PRlIuC~BWnCJ|AX`C|@dAr@d^xQdX`OtDpAnBb@dKb@rC?fJy@hDM"
+        },
+        {
+          "travelled": false,
+          "encodedWaypoints": "fmumE{j{y[nG]|Fk@lFUdEyBpMKhBG??`Bb@hH~A~@YnAuBzBkCbF{Dz@YnAKzHr@xI~AhAJpI|E"
+        },
+        {
+          "travelled": false,
+          "encodedWaypoints": "~~xmEer{y[x[hWtDtFzDvCjHhIe@dD??n@jBvD`InWjcA`BpId@dDVnHBzPOhHa@jDkAhF}@lCyDnHuBtGsDbOi@`FEdH^tGn@pEPtI]xG]tCyBrLUrE?xA|AlR@xHY`Ga@nDiAjGwFxTK`AqJv^u@|EWxCa@lPm@`NwApJeIrZsHt]y@tCaMtYgB~CiUd]gCxFcAzCuDvQc@hE??iBdRw@pDqD`Is@fAcLnK}H~M??kGzHoDlCc_AtT??kCN{Bv@uFpAuUhEqMxAgMdA"
+        }
+      ],
+      "modeIdentifier": "pt_pub",
+      "ticket": {
+        "name": "Opal (train)",
+        "cost": 4.82
+      },
+      "action": "Take <NUMBER><DURATION>",
+      "notes": "<LINE_NAME>\n<LOCATIONS>\nOpal (train) ($4.82)",
+      "warnings": "Ticket may vary"
+    },
+    {
+      "to": {
+        "address": "Cumberland Place & Harrington Street",
+        "class": "Location",
+        "lng": 151.20774,
+        "lat": -33.86012
+      },
+      "visibility": "in summary",
+      "action": "Walk<DURATION>",
+      "hashCode": 84390173,
+      "streets": [
+        {
+          "encodedWaypoints": "fmumE{j{y[??@EAJk@BS?mBL}CN??_@a@_CeCaABcB}@uBcAcDmAsCaAc@Ke@K"
+        }
+      ],
+      "from": {
+        "address": "Wynyard Station Platform 3",
+        "class": "Location",
+        "lng": 151.20575,
+        "lat": -33.86596
+      },
+      "type": "unscheduled",
+      "metres": 716,
+      "notes": "<LOCATIONS>\n750m",
+      "travelDirection": 359,
+      "modeIdentifier": "wa_wal"
+    }
+  ],
+  "groups": [
+    {
+      "trips": [
+        {
+          "caloriesCost": 71,
+          "arrive": 1430816514,
+          "queryIsLeaveAfter": true,
+          "carbonCost": 0.1,
+          "hassleCost": 2,
+          "segments": [
+            {
+              "startTime": 1430813215,
+              "segmentTemplateHashCode": 65289678,
+              "endTime": 1430813640
+            },
+            {
+              "startTime": 1430813640,
+              "serviceNumber": "T1",
+              "segmentTemplateHashCode": -1504808282,
+              "serviceTripID": "163R.923.105.8.A.8.37236400",
+              "serviceColor": {
+                "red": 247,
+                "blue": 0,
+                "green": 167
+              },
+              "realTimeStatus": "CAPABLE",
+              "endTime": 1430815980,
+              "serviceName": "Central, then Epping"
+            },
+            {
+              "startTime": 1430815980,
+              "segmentTemplateHashCode": 84390173,
+              "endTime": 1430816514
+            }
+          ],
+          "moneyUSDCost": 3.78,
+          "depart": 1430813215,
+          "moneyCost": 4.82,
+          "weightedScore": 28.1,
+          "mainSegmentHashCode": -1504808282,
+          "queryTime": 1430813141
+        }
+      ]
+    }
+  ]
+}

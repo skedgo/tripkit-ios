@@ -20,7 +20,6 @@
 #endif
 
 #import "CircleAnnotationView.h"
-#import "VehicleAnnotationView.h"
 
 @interface RouteMapManager ()
 

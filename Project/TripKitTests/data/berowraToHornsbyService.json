@@ -1,0 +1,230 @@
+{
+  "realTimeStatus": "CAPABLE",
+  "shapes": [
+    {
+      "bicycleAccessible": true,
+      "encodedWaypoints": "vaflEwbqy[zMzShE|DbHxAvOcAfDBpCd@dp@n]`HbIfClId@lIlBlFbFlEhDj@fDWtHcDnD[tOzCpHc@jCK??~@RpI`D|EtGbf@n~@vPbMpL`MdOvWdE~D??Xl@tEpCz_AbQfR`FtNhJ??YGbc@pf@|NhKdg@lG??xCdArCIbA[lBqApUyZdEiH??Xi@nVck@rGoNlCoEdJeKdDaD|EgDfX{MhOiJzEuDt\\yY??d@WjGcG`d@q`@pNwMpEsHhDqIbDaN~@cCxAoCrCmC`LoEbJuE~AsAtAkBz@cBj@eBvAqGvAeD|A{BtJoHlBiA??xEcCzu@gj@??xHkFpr@kf@???NnB{@hCu@jKaAzDsAbDoBdAy@pCaDdAgBvLwY|@kB??tAwBtAgBfCwBtEoCtB}@tBo@xCw@hBWtOKhDb@j[o@??hFb@rTc@zF[pH{AfEiBbGiE`EkEpAqB??fA_BbNu^rBcDnD}DpEkC|CaAdC_@pDK`G?fHg@vQaC??pIa@~Ck@~NqExCQ~@LhBj@t@f@`AhA|@tBhBxH^r@rArAtAj@pARhACVU??jBa@vAwAh@cAh@_CBgCMuEHkAb@sB|@{AjAeA|@a@jAQtGV~BK`DkA??CRxAs@x@q@|@_A|@oAQRbCoHjA_IvEqc@??IAx@aDlBqEnB{BtByApFuCpFeB??PRlIuC~BWnCJ|AX`C|@dAr@d^xQdX`OtDpAnBb@dKb@rC?fJy@hDM??nG]|Fk@lFUdEyBpMKhBG??`Bb@hH~A~@YnAuBzBkCbF{Dz@YnAKzHr@xI~AhAJpI|E",
+      "operator": "Sydney Trains",
+      "serviceColor": {
+        "blue": 0,
+        "green": 167,
+        "red": 247
+      },
+      "serviceName": "Central",
+      "serviceNumber": "T1",
+      "serviceTripID": "189R.1461.101.60-20160820.A.8.42424763",
+      "stops": [
+        {
+          "arrival": 1474379999,
+          "bearing": 208,
+          "code": "208172",
+          "departure": 1474442941,
+          "lat": -33.62348,
+          "lng": 151.15324,
+          "name": "Berowra Station Platform 2",
+          "shortName": "Platform 2"
+        },
+        {
+          "arrival": 1474443180,
+          "bearing": 230,
+          "code": "208041",
+          "departure": 1474443210,
+          "lat": -33.65348,
+          "lng": 151.13689,
+          "name": "Mount Kuring-gai Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474443372,
+          "bearing": 201,
+          "code": "2079101",
+          "departure": 1474443402,
+          "lat": -33.67144,
+          "lng": 151.115,
+          "name": "Mount Colah Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474443540,
+          "bearing": 213,
+          "code": "2077291",
+          "departure": 1474443570,
+          "lat": -33.68861,
+          "lng": 151.10821,
+          "name": "Asquith Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474443720,
+          "bearing": 138,
+          "code": "2077301",
+          "departure": 1474443780,
+          "lat": -33.70324,
+          "lng": 151.0986,
+          "name": "Hornsby Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474443900,
+          "bearing": 133,
+          "code": "2077311",
+          "departure": 1474443930,
+          "lat": -33.71024,
+          "lng": 151.10478,
+          "name": "Waitara Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474444140,
+          "bearing": 132,
+          "code": "2074181",
+          "departure": 1474444170,
+          "lat": -33.73245,
+          "lng": 151.12857,
+          "name": "Turramurra Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474444446,
+          "bearing": 142,
+          "code": "207262",
+          "departure": 1474444476,
+          "lat": -33.75571,
+          "lng": 151.15424,
+          "name": "Gordon Station Platform 2",
+          "shortName": "Platform 2"
+        },
+        {
+          "arrival": 1474444572,
+          "bearing": 142,
+          "code": "207191",
+          "departure": 1474444602,
+          "lat": -33.76558,
+          "lng": 151.16181,
+          "name": "Killara Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474444698,
+          "bearing": 137,
+          "code": "2070141",
+          "departure": 1474444728,
+          "lat": -33.77539,
+          "lng": 151.16929,
+          "name": "Lindfield Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474444836,
+          "bearing": 165,
+          "code": "2069131",
+          "departure": 1474444866,
+          "lat": -33.78432,
+          "lng": 151.17753,
+          "name": "Roseville Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474445010,
+          "bearing": 161,
+          "code": "2067141",
+          "departure": 1474445040,
+          "lat": -33.79748,
+          "lng": 151.18105,
+          "name": "Chatswood Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474445142,
+          "bearing": 144,
+          "code": "206451",
+          "departure": 1474445172,
+          "lat": -33.80857,
+          "lng": 151.18478,
+          "name": "Artarmon Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474445298,
+          "bearing": 193,
+          "code": "2065152",
+          "departure": 1474445328,
+          "lat": -33.82198,
+          "lng": 151.19419,
+          "name": "St Leonards Station Platform 2",
+          "shortName": "Platform 2"
+        },
+        {
+          "arrival": 1474445442,
+          "bearing": 135,
+          "code": "2065161",
+          "departure": 1474445472,
+          "lat": -33.832,
+          "lng": 151.19184,
+          "name": "Wollstonecraft Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474445568,
+          "bearing": 108,
+          "code": "2060111",
+          "departure": 1474445598,
+          "lat": -33.83781,
+          "lng": 151.19753,
+          "name": "Waverton Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474445760,
+          "bearing": 136,
+          "code": "2060101",
+          "departure": 1474445820,
+          "lat": -33.84117,
+          "lng": 151.20752,
+          "name": "North Sydney Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474445910,
+          "bearing": 196,
+          "code": "206141",
+          "departure": 1474445940,
+          "lat": -33.84554,
+          "lng": 151.21172,
+          "name": "Milsons Point Station Platform 1",
+          "shortName": "Platform 1"
+        },
+        {
+          "arrival": 1474446162,
+          "bearing": 171,
+          "code": "2000403",
+          "departure": 1474446204,
+          "lat": -33.86596,
+          "lng": 151.20575,
+          "name": "Wynyard Station Platform 3",
+          "shortName": "Platform 3"
+        },
+        {
+          "arrival": 1474446360,
+          "bearing": 180,
+          "code": "2000392",
+          "departure": 1474446420,
+          "lat": -33.87362,
+          "lng": 151.20693,
+          "name": "Town Hall Station Platform 2",
+          "shortName": "Platform 2"
+        },
+        {
+          "arrival": 1474446600,
+          "code": "2000338",
+          "lat": -33.88416,
+          "lng": 151.20692,
+          "name": "Central Station Platform 18",
+          "shortName": "Platform 18"
+        }
+      ],
+      "travelled": true
+    }
+  ],
+  "type": "train"
+}
