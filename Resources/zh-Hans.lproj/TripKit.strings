@@ -25,6 +25,9 @@
 /* Indication of an activity */
 "ActivityIndication" = "我将于%2$@从%3$@搭乘%1$@.";
 
+/* No comment provided by engineer. */
+"Alerts" = "提示";
+
 /* apple maps directions action */
 "Apple Maps" = "苹果地图";
 
@@ -44,6 +47,9 @@
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
 "Arrive" = "到达";
+
+/* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
+"Arrive in" = "Arrive in";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "从FlitWays预定";
@@ -78,6 +84,15 @@
 /* Walking time */
 "Duration" = "%@";
 
+/* As in 'this bus/train is empty' */
+"Empty" = "Empty";
+
+/* As in 'this bus/train has few seats available' */
+"Few seats available" = "Few seats available";
+
+/* As in 'this bus/train is full and likely can't accept further passengers' */
+"Full" = "完全信任";
+
 /* No comment provided by engineer. */
 "Get Lyft" = "使用Lyft";
 
@@ -93,9 +108,18 @@
 /* google maps directions action */
 "Google Maps" = "谷歌地图";
 
+/* %@ is replaced with app name */
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "In the meantime, let's keep exploring %@ and enjoy your trips";
+
+/* No comment provided by engineer. */
+"In the meantime, let's keep exploring and enjoy your trips" = "In the meantime, let's keep exploring and enjoy your trips";
+
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
 "Leave" = "出发";
+
+/* Title for when to depart. Countdown to departure will be displayed below. */
+"Leave in" = "Leave in";
 
 /* No comment provided by engineer. */
 "Leave now" = "现在出发";
@@ -109,11 +133,29 @@
 /* Time departure */
 "LeaveTime" = "于%@离开";
 
+/* As in 'this bus/train is so full, there's only limited standing room' */
+"Limited standing room only" = "Limited standing room only";
+
 /* No comment provided by engineer. */
 "Live traffic" = "实时交通";
 
+/* Title to show while loading/waiting for results */
+"Loading..." = "加载中...";
+
+/* As in 'this bus/train has many seats available' */
+"Many seats available" = "Many seats available";
+
 /* ArrivalTime */
 "MessageArrivalTime" = "我将于%2$@到达%1$@.";
+
+/* Title of button to get more details about an alert */
+"More info" = "增加亮度";
+
+/* Indicating no trips have been planned within 24 hrs */
+"No planned trips" = "没有规划好的行程";
+
+/* As in 'this bus/train is full and definitely not accepting further passengers' */
+"Not accepting passengers" = "Not accepting passengers";
 
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "准点";
@@ -123,6 +165,9 @@
 
 /* No comment provided by engineer. */
 "Open Ola" = "打开Ola";
+
+/* No comment provided by engineer. */
+"Plan a trip and it will show up here." = "Plan a trip and it will show up here.";
 
 /* Arrival Location
    For trip titles, e.g., 'To work' */
@@ -146,13 +191,16 @@
 /* Show website action */
 "Show website" = "开启网站";
 
+/* As in 'this bus/train is fairly full and has standing room only' */
+"Standing room only" = "Standing room only";
+
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld站";
 
 /* From %time1 to %time2 */
 "TimeFromToShortFormat" = "%@ ～ %@";
 
-/* No comment provided by engineer. */
+/* Title for a trip */
 "Trip" = "旅程";
 
 /* Vehicle 'x' updated */
@@ -160,6 +208,15 @@
 
 /* Vehicle updated */
 "VehicleUpdated" = "%@前更新";
+
+/* No comment provided by engineer. */
+"We are busy getting your upcoming trip. Please wait..." = "We are busy getting your upcoming trip. Please wait...";
+
+/* No comment provided by engineer. */
+"We'll keep you updated with the latest transit alerts here" = "We'll keep you updated with the latest transit alerts here";
+
+/* No comment provided by engineer. */
+"Wheelchair accessible" = "轮椅可通行";
 
 /* goCatch action */
 "goCatch a Taxi" = "使用goCatch叫计程车";
