@@ -166,6 +166,9 @@
 /* No comment provided by engineer. */
 "Open Ola" = "Ola öffnen";
 
+/* No comment provided by engineer. */
+"Plan a trip and it will show up here." = "Plane einen Trip und er wird dann hier angezeigt.";
+
 /* Arrival Location */
 "PrimaryLocationEnd" = "Nach %@";
 
@@ -210,6 +213,9 @@
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "We'll keep you updated with the latest transit alerts here";
+
+/* No comment provided by engineer. */
+"Wheelchair accessible" = "Rollstuhlgerecht";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch nehmen";
