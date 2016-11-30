@@ -55,6 +55,7 @@
 #import "TKBuzzInfoProvider.h"
 #import "TKTimetableDownloader.h"
 #import "TKReporter.h"
+#import "TKWaypointRouter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
