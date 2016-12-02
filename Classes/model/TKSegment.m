@@ -927,8 +927,8 @@ NSString *const UninitializedString =  @"UninitializedString";
   if (self.reference.service) {
 		return self.reference.service.number;
   
-  } else if (self.template.modeInfo.descriptor.length > 0) {
-    return self.template.modeInfo.descriptor;
+  } else if (self.modeInfo.descriptor.length > 0) {
+    return self.modeInfo.descriptor;
   
   } else if (![self.trip isMixedModal] && self.reference.template.metres) {
     MKDistanceFormatter *formatter = [[MKDistanceFormatter alloc] init];
