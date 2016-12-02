@@ -116,9 +116,7 @@ public class TripBookingCoordinator {
   fileprivate var disposeBag = DisposeBag()
   
   fileprivate func machine(for segment: TKSegment) -> Variable<TKBookingStateMachine>? {
-    guard let index = trip?.segments().index(of: segment) else {
-      return nil
-    }
+    guard let index = trip?.segments().index(of: segment) else { return nil }
     return stateMachines?[index]
   }
   
@@ -147,15 +145,13 @@ public class TripBookingCoordinator {
 
   
   public func selectedOption(at index: Int, for segment: TKSegment) {
-    guard let machine = machine(for: segment) else { preconditionFailure("Shouldn't be able to select an option for a segment that doesn't have a state machine. Only segments with quick bookings have state machines.") }
-    
+    guard let machine = machine(for: segment) else { return }
     machine.value.userPicked(selection: index)
   }
   
 
   public func requestedBooking(with url: URL, for segment: TKSegment) {
-    guard let machine = machine(for: segment) else { preconditionFailure("Shouldn't be able to request a booking for a segment that doesn't have a state machine. Only segments with quick bookings have state machines.") }
-    
+    guard let machine = machine(for: segment) else { return }
     machine.value.userStartedBooking(url: url)
   }
   
