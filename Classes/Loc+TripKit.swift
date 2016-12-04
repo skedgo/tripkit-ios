@@ -12,7 +12,9 @@ import SGCoreKit
 
 extension Loc {
   
-  public static let Trip = NSLocalizedString("Trip", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for a trip")
+  public static var Trip: String {
+    return NSLocalizedString("Trip", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for a trip")
+  }
   
   
   // MARK: - Format
