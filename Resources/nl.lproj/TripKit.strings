@@ -11,13 +11,13 @@
 "%1$@ late (%2$@ service)" = "%1$@ te laat (%2$@ dienst)";
 
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
-"%@ cycle friendly" = "%@ cycle friendly";
+"%@ cycle friendly" = "%@ fiets vriendelijk";
 
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ zonder verkeer";
 
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
-"%@ wheelchair friendly" = "%@ wheelchair friendly";
+"%@ wheelchair friendly" = "%@ rolstoel vriendelijk";
 
 /* No comment provided by engineer. */
 "1 stop" = "1 station";
@@ -49,7 +49,7 @@
 "Arrive" = "Aankomst";
 
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
-"Arrive in" = "Arrive in";
+"Arrive in" = "Arriveer in";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "Boek met FlitWays";
@@ -85,13 +85,13 @@
 "Duration" = "voor %@";
 
 /* As in 'this bus/train is empty' */
-"Empty" = "Empty";
+"Empty" = "Leeg";
 
 /* As in 'this bus/train has few seats available' */
-"Few seats available" = "Few seats available";
+"Few seats available" = "Beperkte zitplaatsen beschikbaar";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
-"Full" = "Full";
+"Full" = "Vol";
 
 /* No comment provided by engineer. */
 "Get Lyft" = "Lyft aanvragen";
@@ -109,17 +109,17 @@
 "Google Maps" = "Google Maps";
 
 /* %@ is replaced with app name */
-"In the meantime, let's keep exploring %@ and enjoy your trips" = "In the meantime, let's keep exploring %@ and enjoy your trips";
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "Ondertussen, laten we %@ blijven verkennen en geniet van uw reizen";
 
 /* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "In the meantime, let's keep exploring and enjoy your trips";
+"In the meantime, let's keep exploring and enjoy your trips" = "Ondertussen, laten we blijven verkennen en geniet van uw reizen";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
 "Leave" = "Vertrek";
 
 /* Title for when to depart. Countdown to departure will be displayed below. */
-"Leave in" = "Leave in";
+"Leave in" = "Vertrek in";
 
 /* No comment provided by engineer. */
 "Leave now" = "Vertrek nu";
@@ -134,7 +134,7 @@
 "LeaveTime" = "Vetrek om %@";
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
-"Limited standing room only" = "Limited standing room only";
+"Limited standing room only" = "Beperkte staruimte";
 
 /* No comment provided by engineer. */
 "Live traffic" = "Live verkeer";
@@ -143,7 +143,7 @@
 "Loading..." = "Laden...";
 
 /* As in 'this bus/train has many seats available' */
-"Many seats available" = "Many seats available";
+"Many seats available" = "Veel zitplaatsen beschikbaar";
 
 /* ArrivalTime */
 "MessageArrivalTime" = "Ik kom aan op %@ om %@.";
@@ -155,7 +155,7 @@
 "No planned trips" = "Geen geplannde trips";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
-"Not accepting passengers" = "Not accepting passengers";
+"Not accepting passengers" = "Accepteert geen passagiers";
 
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Op tijd";
@@ -167,7 +167,7 @@
 "Open Ola" = "Open Ola";
 
 /* No comment provided by engineer. */
-"Plan a trip and it will show up here." = "Plan a trip and it will show up here.";
+"Plan a trip and it will show up here." = "Plan een reis, en het zal hier verschijnen.";
 
 /* Arrival Location
    For trip titles, e.g., 'To work' */
@@ -192,7 +192,7 @@
 "Show website" = "Open Website";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
-"Standing room only" = "Standing room only";
+"Standing room only" = "Alleen staruimte beschikbaar";
 
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld stations";
@@ -210,10 +210,10 @@
 "VehicleUpdated" = "Bijgewerkt %@ geleden";
 
 /* No comment provided by engineer. */
-"We are busy getting your upcoming trip. Please wait..." = "We are busy getting your upcoming trip. Please wait...";
+"We are busy getting your upcoming trip. Please wait..." = "We zijn bezig om uw reis op te halen. Een ogenblik geduld...";
 
 /* No comment provided by engineer. */
-"We'll keep you updated with the latest transit alerts here" = "We'll keep you updated with the latest transit alerts here";
+"We'll keep you updated with the latest transit alerts here" = "Hier houden we u op de hoogte van de nieuwste transport waarschuwingen";
 
 /* No comment provided by engineer. */
 "Wheelchair accessible" = "Rolstoel toegankelijk";
