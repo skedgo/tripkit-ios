@@ -57,17 +57,21 @@ extension TKBuzzInfoProvider {
     }
   }
   
+
   /**
    Asynchronously fetches additional location information for a specified coordinate.
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, forRegion region: SVKRegion, completion: @escaping (TKLocationInfo?) -> Void) {
+  @objc(fetchLocationInformation:forRegion:completion:)
+  public class func fetchLocationInformation(_ annotation: MKAnnotation, for region: SVKRegion, completion: @escaping (TKLocationInfo?) -> Void) {
     
-    let paras: [String: Any] = [
-      "lat": coordinate.latitude,
-      "lng": coordinate.longitude
-    ]
+    let paras: [String: Any]
+    if let named = annotation as? SGKNamedCoordinate, let identifier = named.locationID {
+      paras = [ "identifier": identifier, "region": region.name ]
+    } else {
+      paras = [ "lat": annotation.coordinate.latitude, "lng": annotation.coordinate.longitude ]
+    }
     
     SVKServer.fetch(TKLocationInfo.self,
                     path: "locationInfo.json",
@@ -75,6 +79,7 @@ extension TKBuzzInfoProvider {
                     region: region,
                     completion: completion)
   }
+  
   
   /**
    Asynchronously fetches transit alerts for the provided region.

@@ -36,6 +36,7 @@ public enum TKLocationRealTime {
         
         if let identifier = location.locationID {
           paras["identifier"] = identifier
+          paras["region"]     = region.name
         } else {
           paras["lat"] = location.coordinate.latitude
           paras["lng"] = location.coordinate.longitude

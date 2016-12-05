@@ -13,6 +13,7 @@ import Marshal
 public struct TKBikePodInfo : Unmarshaling {
   public let identifier: String
   public let operatorInfo: TKCompanyInfo
+  public let inService: Bool
   public let availableBikes: Int?
   public let totalSpaces: Int?
   public let lastUpdate: Date?
@@ -21,6 +22,7 @@ public struct TKBikePodInfo : Unmarshaling {
   public init(object: MarshaledObject) throws {
     identifier      = try  object.value(for: "identifier")
     operatorInfo    = try  object.value(for: "operator")
+    inService       = try  object.value(for: "inService")
     availableBikes  = try? object.value(for: "availableBikes")
     totalSpaces     = try? object.value(for: "totalSpaces")
     lastUpdate      = try? object.value(for: "lastUpdate")
@@ -33,9 +35,10 @@ public struct TKBikePodInfo : Unmarshaling {
   }
   
   public var hasRealTime: Bool {
-    return availableBikes != nil
+    return inService && availableBikes != nil
   }
 }
+
 
 public struct TKCarParkInfo : Unmarshaling {
   public let identifier: String
@@ -56,6 +59,7 @@ public struct TKCarParkInfo : Unmarshaling {
     return availableSpaces != nil
   }
 }
+
 
 public class TKLocationInfo : NSObject, Unmarshaling {
   public let what3word: String?
