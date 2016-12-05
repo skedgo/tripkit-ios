@@ -30,7 +30,7 @@ public struct TKBikePodInfo : Unmarshaling {
   }
   
   public var availableSpaces: Int? {
-    guard let total = totalSpaces, let bikes = availableBikes else { return -1 }
+    guard let total = totalSpaces, let bikes = availableBikes else { return nil }
     return total - bikes
   }
   
