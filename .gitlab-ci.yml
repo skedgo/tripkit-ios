@@ -16,6 +16,6 @@ build_code:
       - Project/Podfile.lock
   artifacts:
     paths:
-    - build/reports/tests.html
+    - Project/build/reports/tests.html
   tags:
     - ios

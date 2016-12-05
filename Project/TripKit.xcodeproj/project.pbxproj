@@ -19,7 +19,6 @@
 		3A32CD7B1DC2EC4F003B158B /* TKRegionInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7A1DC2EC4F003B158B /* TKRegionInformation.swift */; };
 		3A32CD7D1DC2EC9B003B158B /* TKInfoTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7C1DC2EC9B003B158B /* TKInfoTypes.swift */; };
 		3A32CD7F1DC2ECB9003B158B /* TKAlertTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7E1DC2ECB9003B158B /* TKAlertTypes.swift */; };
-		3A4255F61D49E0C000271178 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A4255F81D49E0C000271178 /* InfoPlist.strings */; };
 		3A51402B1DEE62D6002DB39F /* TKVehicleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402A1DEE62D6002DB39F /* TKVehicleAnnotationView.swift */; };
 		3A51402E1DEE62EE002DB39F /* TKDLSTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */; };
 		3A51402F1DEE62EE002DB39F /* TKSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402D1DEE62EE002DB39F /* TKSegment.swift */; };
@@ -205,10 +204,6 @@
 		3A32CD7C1DC2EC9B003B158B /* TKInfoTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKInfoTypes.swift; sourceTree = "<group>"; };
 		3A32CD7E1DC2ECB9003B158B /* TKAlertTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertTypes.swift; sourceTree = "<group>"; };
 		3A37A9A61D20F8EF00A2A3B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
-		3A4255F71D49E0C000271178 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3A4255F91D49E0CB00271178 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3A4255FA1D49E0D700271178 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		3A4255FB1D49E0EA00271178 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A51402A1DEE62D6002DB39F /* TKVehicleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKVehicleAnnotationView.swift; sourceTree = "<group>"; };
 		3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDLSTable.swift; sourceTree = "<group>"; };
 		3A51402D1DEE62EE002DB39F /* TKSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegment.swift; sourceTree = "<group>"; };
@@ -243,7 +238,6 @@
 		3A9FF6DA1DE79FC400DB4647 /* TKReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKReporter.swift; sourceTree = "<group>"; };
 		3A9FF6DC1DE79FD100DB4647 /* TKTripRealTimeUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTripRealTimeUpdater.swift; sourceTree = "<group>"; };
 		3A9FF6E01DE7A60500DB4647 /* TKOccupancyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKOccupancyView.swift; sourceTree = "<group>"; };
-		3AAE31611D4C500500961C69 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C6231D1CD0060089F687 /* TripKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKit.h; sourceTree = "<group>"; };
 		3AB6C6251D1CD0060089F687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -842,7 +836,6 @@
 		3AFF20981D1CD29E008BCD9F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3A4255F81D49E0C000271178 /* InfoPlist.strings */,
 				3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */,
 				3AB6C6231D1CD0060089F687 /* TripKit.h */,
 				3AB6C6251D1CD0060089F687 /* Info.plist */,
@@ -1039,7 +1032,6 @@
 				3ADD5B751D9CDF0C00A1742F /* TKDepartureView.xib in Resources */,
 				3ADD5B711D9CDF0C00A1742F /* TKAgendaWidgetInfoView.xib in Resources */,
 				3AB6C7181D1CD08E0089F687 /* TripKit.strings in Resources */,
-				3A4255F61D49E0C000271178 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1265,18 +1257,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3A4255F81D49E0C000271178 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A4255F71D49E0C000271178 /* de */,
-				3A4255F91D49E0CB00271178 /* nl */,
-				3A4255FA1D49E0D700271178 /* zh-Hans */,
-				3A4255FB1D49E0EA00271178 /* es */,
-				3AAE31611D4C500500961C69 /* pt */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		3AB6C6AA1D1CD08E0089F687 /* TripKit.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
