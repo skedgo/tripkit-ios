@@ -10,14 +10,23 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ myöhässä (%2$@ yhteys)";
 
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ Suotuisa pyöräilyyn";
+
 /* Duration without traffic */
-"%@ w/o traffic" = "%@ Ilman ruuhkaa";
+"%@ w/o traffic" = "%@ ilman ruuhkaa";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ Pyörätuolille suotuisa";
 
 /* No comment provided by engineer. */
-"1 stop" = "1 pysäkki";
+"1 stop" = "1 pysähdys";
 
 /* Indication of an activity */
-"ActivityIndication" = "Vien %@ klo %@ %@:stä.";
+"ActivityIndication" = "Merkki aktiivisuudesta";
+
+/* No comment provided by engineer. */
+"Alerts" = "Ilmoitukset";
 
 /* apple maps directions action */
 "Apple Maps" = "Apple Maps";
@@ -26,18 +35,21 @@
 "Arrival" = "Saapumisaika";
 
 /* The place of arrival */
-"ArrivalLocation" = "Saapuu kohteeseen %@";
+"ArrivalLocation" = "Saapumispaikka";
 
 /* The place of arrival with time */
 "ArrivalLocationTime" = "Saapuminen kohteeseen %@ klo %@";
 
-/* Arrival %time.
-   Time arrival */
+/* 'Arrive at %@', where '%@' will be replace with the arrival time.
+   Arrival %time. */
 "ArrivalTime" = "Saapuu klo %@";
 
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
 "Arrive" = "Saapuu";
+
+/* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
+"Arrive in" = "Saapuu";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "Varaa FlitWayn kautta";
@@ -45,11 +57,17 @@
 /* No comment provided by engineer. */
 "Book with Uber" = "Varaa Uberin kautta";
 
+/* Placeholder title while calculating trips */
+"Calculating trips..." = "Lasketaan matkoja...";
+
 /* No comment provided by engineer. */
 "Call" = "Soita";
 
 /* Action title for calling provider of %name */
 "CallTaxiFormat" = "Soita firmalle %@";
+
+/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
+"Connect to Internet to get trips" = "Yhdistä nettiin hakeaksesi matkoja";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Välipysäkkiä ei löytynyt.";
@@ -66,6 +84,15 @@
 /* Walking time */
 "Duration" = "Kesto %@";
 
+/* As in 'this bus/train is empty' */
+"Empty" = "Tyhjä";
+
+/* As in 'this bus/train has few seats available' */
+"Few seats available" = "Muutamia paikkoja vapaana";
+
+/* As in 'this bus/train is full and likely can't accept further passengers' */
+"Full" = "Kaikki";
+
 /* No comment provided by engineer. */
 "Get Lyft" = "Hanki Lyft";
 
@@ -81,9 +108,18 @@
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
+/* %@ is replaced with app name */
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "Sillä välin, jatketaan selailua %@ ja nautitaan saatavilla olevista matkoista";
+
+/* No comment provided by engineer. */
+"In the meantime, let's keep exploring and enjoy your trips" = "Sillä välin, jatketaan selailua ja nautitaan matkoistasi";
+
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
 "Leave" = "Lähde matkaan";
+
+/* Title for when to depart. Countdown to departure will be displayed below. */
+"Leave in" = "Lähtöaika";
 
 /* No comment provided by engineer. */
 "Leave now" = "Lähde nyt";
@@ -97,11 +133,29 @@
 /* Time departure */
 "LeaveTime" = "Lähde klo %@";
 
+/* As in 'this bus/train is so full, there's only limited standing room' */
+"Limited standing room only" = "Vain seisomapaikkoja saatavilla";
+
 /* No comment provided by engineer. */
 "Live traffic" = "Live-liikenne";
 
+/* Title to show while loading/waiting for results */
+"Loading..." = "Ladataan...";
+
+/* As in 'this bus/train has many seats available' */
+"Many seats available" = "Paljon istumapaikkoja jäljellä";
+
 /* ArrivalTime */
-"MessageArrivalTime" = "Saavun kohteeseen %@ klo %@.";
+"MessageArrivalTime" = "Saapuminen kohteeseen %@ klo %@";
+
+/* Title of button to get more details about an alert */
+"More info" = "Lisätietoja";
+
+/* Indicating no trips have been planned within 24 hrs */
+"No planned trips" = "Ei suunniteltuja matkoja";
+
+/* As in 'this bus/train is full and definitely not accepting further passengers' */
+"Not accepting passengers" = "Ei tilaa lisämatkustajille";
 
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Ajoissa";
@@ -112,7 +166,11 @@
 /* No comment provided by engineer. */
 "Open Ola" = "Avaa Ola";
 
-/* Arrival Location */
+/* No comment provided by engineer. */
+"Plan a trip and it will show up here." = "Suunniteltuasi reitin löydät sen täältä.";
+
+/* Arrival Location
+   For trip titles, e.g., 'To work' */
 "PrimaryLocationEnd" = "Kohteeseen %@";
 
 /* Departure Location */
@@ -125,7 +183,7 @@
 "Real-time" = "Reaaliaikainen";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Hae tämän pysäkin tietoja uudelleen tai yritä myöhemmin uudestaan..";
+"Search for this stop again or try again later.." = "Hae tämän pysäkin tietoja uudelleen tai yritä myöhemmin uudelleen..";
 
 /* Send SMS action */
 "Send SMS" = "Lähetä SMS";
@@ -133,13 +191,16 @@
 /* Show website action */
 "Show website" = "Avaa nettisivusto";
 
+/* As in 'this bus/train is fairly full and has standing room only' */
+"Standing room only" = "Vain seisomapaikkoja";
+
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld pysäkki(ä)";
 
 /* From %time1 to %time2 */
 "TimeFromToShortFormat" = "%@ - %@";
 
-/* No comment provided by engineer. */
+/* Title for a trip */
 "Trip" = "Matka";
 
 /* Vehicle 'x' updated */
@@ -147,6 +208,15 @@
 
 /* Vehicle updated */
 "VehicleUpdated" = "Päivitetty %@ sitten";
+
+/* No comment provided by engineer. */
+"We are busy getting your upcoming trip. Please wait..." = "Matkan tietojen latauksessa viivettä. Ole hyvä, odota...";
+
+/* No comment provided by engineer. */
+"We'll keep you updated with the latest transit alerts here" = "Täältä löydät viimeisimmät matkaasi liittyvät ilmoitukset";
+
+/* No comment provided by engineer. */
+"Wheelchair accessible" = "Pyörätuolilla liikkuminen huomioitu";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch Taksi";
