@@ -40,6 +40,42 @@ public struct TKBikePodInfo : Unmarshaling {
 }
 
 
+public struct TKCarPodInfo : Unmarshaling {
+  
+  public struct Vehicle : Unmarshaling {
+    public let name: String?
+    public let description: String?
+    public let licensePlate: String?
+    public let engineType: String?
+    public let fuelType: String?
+    public let fuel: Int?
+
+    public init(object: MarshaledObject) throws {
+      name          = try? object.value(for: "name")
+      description   = try? object.value(for: "description")
+      licensePlate  = try? object.value(for: "licensePlate")
+      engineType    = try? object.value(for: "engine")
+      fuelType      = try? object.value(for: "fuelType")
+      fuel          = try? object.value(for: "fuel")
+    }
+  }
+  
+  
+  public let identifier: String
+  public let operatorInfo: TKCompanyInfo
+  public let vehicles: [Vehicle]
+  
+  public init(object: MarshaledObject) throws {
+    identifier      = try  object.value(for: "identifier")
+    operatorInfo    = try  object.value(for: "operator")
+    vehicles        = try  object.value(for: "vehicles")
+  }
+  public var hasRealTime: Bool {
+    return false // not yet
+  }
+}
+
+
 public struct TKCarParkInfo : Unmarshaling {
   public let identifier: String
   public let name: String
@@ -66,6 +102,7 @@ public class TKLocationInfo : NSObject, Unmarshaling {
   public let what3wordInfoURL: URL?
   public let transitStop: STKStopAnnotation?
   public let bikePodInfo: TKBikePodInfo?
+  public let carPodInfo:  TKCarPodInfo?
   public let carParkInfo: TKCarParkInfo?
   
   public required init(object: MarshaledObject) throws {
@@ -76,10 +113,14 @@ public class TKLocationInfo : NSObject, Unmarshaling {
     transitStop = stop
     
     bikePodInfo = try? object.value(for: "bikePod")
+    carPodInfo  = try? object.value(for: "carPod")
     carParkInfo = try? object.value(for: "carPark")
   }
   
   public var hasRealTime: Bool {
-    return carParkInfo?.hasRealTime ?? bikePodInfo?.hasRealTime ?? false
+    return carParkInfo?.hasRealTime
+        ?? bikePodInfo?.hasRealTime
+        ?? carPodInfo?.hasRealTime
+        ?? false
   }
 }
