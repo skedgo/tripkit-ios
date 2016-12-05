@@ -2,6 +2,7 @@
   "bikePod": {
     "availableBikes": 9,
     "identifier": "melbourne-bike-share-3dd783bb687cc00e48813fc079d11b48",
+    "inService": true,
     "lastUpdate": 1477619651,
     "operator": {
       "name": "Melbourne Bike Share",
