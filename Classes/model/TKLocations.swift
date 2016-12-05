@@ -11,7 +11,15 @@ import Foundation
 import Marshal
 import SGCoreKit
 
-public class TKBikePodLocation: STKModeCoordinate {
+
+public protocol TKRealTimeLocation {
+  
+  var hasRealTime: Bool { get }
+  
+}
+
+
+public class TKBikePodLocation: STKModeCoordinate, TKRealTimeLocation {
   
   public let bikePod: TKBikePodInfo
   
@@ -26,10 +34,30 @@ public class TKBikePodLocation: STKModeCoordinate {
     super.init(coder: aDecoder)
   }
   
+  public var hasRealTime: Bool { return bikePod.hasRealTime }
 }
 
 
-public class TKCarParkLocation: STKModeCoordinate {
+public class TKCarPodLocation: STKModeCoordinate, TKRealTimeLocation {
+  
+  public let carPod: TKCarPodInfo
+  
+  public required init(object: MarshaledObject) throws {
+    carPod = try object.value(for: "carPod")
+    try super.init(object: object)
+  }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    guard let info = aDecoder.decodeObject(forKey: "carPod") as? TKCarPodInfo else { return nil }
+    carPod = info
+    super.init(coder: aDecoder)
+  }
+  
+  public var hasRealTime: Bool { return carPod.hasRealTime }
+}
+
+
+public class TKCarParkLocation: STKModeCoordinate, TKRealTimeLocation {
   
   public let carPark: TKCarParkInfo
   
@@ -44,4 +72,5 @@ public class TKCarParkLocation: STKModeCoordinate {
     super.init(coder: aDecoder)
   }
 
+  public var hasRealTime: Bool { return carPark.hasRealTime }
 }
