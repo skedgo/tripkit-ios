@@ -74,3 +74,22 @@ public class TKCarParkLocation: STKModeCoordinate, TKRealTimeLocation {
 
   public var hasRealTime: Bool { return carPark.hasRealTime }
 }
+
+
+public class TKCarRentalLocation: STKModeCoordinate, TKRealTimeLocation {
+  
+  public let carRental: TKCarRentalInfo
+  
+  public required init(object: MarshaledObject) throws {
+    carRental = try object.value(for: "carRental")
+    try super.init(object: object)
+  }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    guard let info = aDecoder.decodeObject(forKey: "carRental") as? TKCarRentalInfo else { return nil }
+    carRental = info
+    super.init(coder: aDecoder)
+  }
+  
+  public var hasRealTime: Bool { return false }
+}

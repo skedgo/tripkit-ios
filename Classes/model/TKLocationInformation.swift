@@ -79,13 +79,21 @@ public struct TKCarPodInfo : Unmarshaling {
 public struct TKCarParkInfo : Unmarshaling {
   public let identifier: String
   public let name: String
+  public let operatorInfo: TKCompanyInfo?
+  public let openingHours: TKOpeningHours?
+  public let source: TKDataAttribution?
   public let availableSpaces: Int?
   public let totalSpaces: Int?
   public let lastUpdate: Date?
   
+  // TODO: Add pricing table
+  
   public init(object: MarshaledObject) throws {
     identifier      = try  object.value(for: "identifier")
     name            = try  object.value(for: "name")
+    operatorInfo    = try? object.value(for: "operator")
+    openingHours    = try? object.value(for: "openingHours")
+    source          = try? object.value(for: "source")
     availableSpaces = try? object.value(for: "availableSpaces")
     totalSpaces     = try? object.value(for: "totalSpaces")
     lastUpdate      = try? object.value(for: "lastUpdate")
@@ -97,6 +105,21 @@ public struct TKCarParkInfo : Unmarshaling {
 }
 
 
+public struct TKCarRentalInfo : Unmarshaling {
+  public let identifier: String
+  public let company: TKCompanyInfo
+  public let openingHours: TKOpeningHours?
+  public let source: TKDataAttribution?
+  
+  public init(object: MarshaledObject) throws {
+    identifier      = try  object.value(for: "identifier")
+    company         = try  object.value(for: "company")
+    source          = try? object.value(for: "source")
+    openingHours    = try? object.value(for: "openingHours")
+  }
+}
+
+
 public class TKLocationInfo : NSObject, Unmarshaling {
   public let what3word: String?
   public let what3wordInfoURL: URL?
@@ -104,6 +127,7 @@ public class TKLocationInfo : NSObject, Unmarshaling {
   public let bikePodInfo: TKBikePodInfo?
   public let carPodInfo:  TKCarPodInfo?
   public let carParkInfo: TKCarParkInfo?
+  public let carRentalInfo: TKCarRentalInfo?
   
   public required init(object: MarshaledObject) throws {
     what3word = try? object.value(for: "details.w3w")
@@ -112,9 +136,10 @@ public class TKLocationInfo : NSObject, Unmarshaling {
     let stop: STKStopCoordinate? = try? object.value(for: "stop")
     transitStop = stop
     
-    bikePodInfo = try? object.value(for: "bikePod")
-    carPodInfo  = try? object.value(for: "carPod")
-    carParkInfo = try? object.value(for: "carPark")
+    bikePodInfo   = try? object.value(for: "bikePod")
+    carPodInfo    = try? object.value(for: "carPod")
+    carParkInfo   = try? object.value(for: "carPark")
+    carRentalInfo = try? object.value(for: "carRental")
   }
   
   public var hasRealTime: Bool {
@@ -124,3 +149,7 @@ public class TKLocationInfo : NSObject, Unmarshaling {
         ?? false
   }
 }
+
+
+
+
