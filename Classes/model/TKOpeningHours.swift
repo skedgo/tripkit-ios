@@ -30,8 +30,8 @@ public struct TKOpeningHours : Unmarshaling {
     
     public struct Time: Unmarshaling {
       
-      fileprivate let opens: TimeInterval
-      fileprivate let closes: TimeInterval
+      public let opens: TimeInterval
+      public let closes: TimeInterval
       
       
       public init(object: MarshaledObject) throws {
