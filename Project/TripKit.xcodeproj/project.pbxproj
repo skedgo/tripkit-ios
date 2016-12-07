@@ -44,6 +44,9 @@
 		3A9FF6DB1DE79FC400DB4647 /* TKReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6DA1DE79FC400DB4647 /* TKReporter.swift */; };
 		3A9FF6DD1DE79FD100DB4647 /* TKTripRealTimeUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6DC1DE79FD100DB4647 /* TKTripRealTimeUpdater.swift */; };
 		3A9FF6E21DE7A60500DB4647 /* TKOccupancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6E01DE7A60500DB4647 /* TKOccupancyView.swift */; };
+		3AABDD9B1DF7C2040044A05B /* TKLocationInfoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */; };
+		3AABDD9D1DF7C22F0044A05B /* locationInfo-carRental.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AABDD9C1DF7C22F0044A05B /* locationInfo-carRental.json */; };
+		3AABDD9F1DF7D2E30044A05B /* TKOpeningHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABDD9E1DF7D2E30044A05B /* TKOpeningHours.swift */; };
 		3AB6C6241D1CD0060089F687 /* TripKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6231D1CD0060089F687 /* TripKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3AB6C6B61D1CD08E0089F687 /* TKLinkedAccountHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C63E1D1CD08E0089F687 /* TKLinkedAccountHelper.swift */; };
@@ -238,6 +241,9 @@
 		3A9FF6DA1DE79FC400DB4647 /* TKReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKReporter.swift; sourceTree = "<group>"; };
 		3A9FF6DC1DE79FD100DB4647 /* TKTripRealTimeUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTripRealTimeUpdater.swift; sourceTree = "<group>"; };
 		3A9FF6E01DE7A60500DB4647 /* TKOccupancyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKOccupancyView.swift; sourceTree = "<group>"; };
+		3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationInfoTest.swift; sourceTree = "<group>"; };
+		3AABDD9C1DF7C22F0044A05B /* locationInfo-carRental.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental.json"; sourceTree = "<group>"; };
+		3AABDD9E1DF7D2E30044A05B /* TKOpeningHours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKOpeningHours.swift; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C6231D1CD0060089F687 /* TripKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKit.h; sourceTree = "<group>"; };
 		3AB6C6251D1CD0060089F687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -634,6 +640,7 @@
 				3A32CD7C1DC2EC9B003B158B /* TKInfoTypes.swift */,
 				3A32CD781DC2EBC4003B158B /* TKLocationInformation.swift */,
 				3A32CD701DC2DC6D003B158B /* TKOccupancy.swift */,
+				3AABDD9E1DF7D2E30044A05B /* TKOpeningHours.swift */,
 				3AB6C6841D1CD08E0089F687 /* TKPlainCell.h */,
 				3AB6C6851D1CD08E0089F687 /* TKPlainCell.m */,
 				3A32CD7A1DC2EC4F003B158B /* TKRegionInformation.swift */,
@@ -740,6 +747,7 @@
 				3AFF6C071DEE411300E7DFCB /* hornsbyToSkedGo.json */,
 				3AFF6C081DEE411300E7DFCB /* hornsbyToSkedGoService.json */,
 				3AC4DCF91DEE32B80026B238 /* locationInfo-bikePod.json */,
+				3AABDD9C1DF7C22F0044A05B /* locationInfo-carRental.json */,
 				3AC4DCFA1DEE32B80026B238 /* regionInfo-Sydney.json */,
 				3AC4DCFB1DEE32B80026B238 /* routing.json */,
 			);
@@ -750,6 +758,7 @@
 			isa = PBXGroup;
 			children = (
 				3AC4DCFD1DEE32B80026B238 /* TKBuzzInfoProviderTest.swift */,
+				3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */,
 			);
 			path = parsing;
 			sourceTree = "<group>";
@@ -1047,6 +1056,7 @@
 				3AFF6C051DEE40D200E7DFCB /* berowraToHornsby.json in Resources */,
 				3AC4DD061DEE32B80026B238 /* locationInfo-bikePod.json in Resources */,
 				3AFF6C091DEE411300E7DFCB /* hornsbyToSkedGo.json in Resources */,
+				3AABDD9D1DF7C22F0044A05B /* locationInfo-carRental.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1219,6 +1229,7 @@
 				3AB6C7141D1CD08E0089F687 /* TKConstants.m in Sources */,
 				3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */,
 				3A9FF6E21DE7A60500DB4647 /* TKOccupancyView.swift in Sources */,
+				3AABDD9F1DF7D2E30044A05B /* TKOpeningHours.swift in Sources */,
 				3ADD5B6B1D9CDF0C00A1742F /* TripMapManager.swift in Sources */,
 				3AB6C7041D1CD08E0089F687 /* TKParserHelper.m in Sources */,
 				3A32CD7F1DC2ECB9003B158B /* TKAlertTypes.swift in Sources */,
@@ -1243,6 +1254,7 @@
 				3AC4DD091DEE32B80026B238 /* TKBuzzInfoProviderTest.swift in Sources */,
 				3A787ED11D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */,
 				3AC4DD0B1DEE32B80026B238 /* TKWaypointRouterTest.swift in Sources */,
+				3AABDD9B1DF7C2040044A05B /* TKLocationInfoTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

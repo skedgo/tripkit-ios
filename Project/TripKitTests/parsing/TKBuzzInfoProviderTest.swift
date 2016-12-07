@@ -46,23 +46,6 @@ class TKBuzzInfoProviderTest: TKTestCase {
     XCTAssertEqual(sydney.transitModes.count, 4)
   }
   
-  func testLocationInformationForBikePods() {
-    guard
-      let json = contentFromJSON(named: "locationInfo-bikePod") as? [String: Any],
-      let info = try? TKLocationInfo(object: json) else { XCTFail(); return }
-    
-    // Basic info
-    XCTAssertEqual(info.what3word, "ruled.item.chart")
-    
-    // Bike pod info
-    XCTAssertNotNil(info.bikePodInfo)
-    XCTAssertEqual(info.bikePodInfo?.availableBikes, 9)
-    XCTAssertEqual(info.bikePodInfo?.availableSpaces, 1)
-    XCTAssertEqual(info.bikePodInfo?.operatorInfo.name, "Melbourne Bike Share")
-    XCTAssertNotNil(info.bikePodInfo?.source)
-    XCTAssertEqual(info.bikePodInfo?.source?.provider.name, "CityBikes")
-  }
-  
   func testTransitAlerts() {
     guard
       let json = contentFromJSON(named: "alertsTransit") as? [String: Any],
