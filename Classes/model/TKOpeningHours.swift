@@ -123,6 +123,24 @@ public struct TKOpeningHours : Unmarshaling {
       return weekday == day.weekday
     }
     
+    
+    /// Checks if opening hour specify that the provided that is open.
+    ///
+    /// - warning: This does not cover public holidays. If `date`
+    ///     is on a public holiday, the day of the week will be used.
+    ///
+    /// - Parameter date: Date to check
+    /// - Returns: Whether open on provided date
+    public func isOpen(at date: Date, in timeZone: TimeZone) -> Bool {
+      let seconds = date.timeIntervalSince(date.midnight(in: timeZone))
+      for time in times {
+        if time.isOpen(atSecondsSince12HoursToNoon: seconds) {
+          return true
+        }
+      }
+      return false
+    }
+    
   }
   
   
@@ -141,14 +159,8 @@ public struct TKOpeningHours : Unmarshaling {
   /// - Returns: Whether open on provided date
   public func isOpen(at date: Date) -> Bool {
     for day in days {
-      if day.contains(date, in: timeZone) {
-        let seconds = date.timeIntervalSince(date.midnight(in: timeZone))
-        for time in day.times {
-          if time.isOpen(atSecondsSince12HoursToNoon: seconds) {
-            return true
-          }
-        }
-        return false
+      if day.isOpen(at:date, in: timeZone) {
+        return true
       }
     }
     return false
