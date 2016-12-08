@@ -16,6 +16,11 @@ extension Loc {
     return NSLocalizedString("Trip", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for a trip")
   }
   
+  public static var OpeningHours: String {
+    return NSLocalizedString("Opening Hours", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for opening hours")
+  }
+  
+  
   
   // MARK: - Format
   

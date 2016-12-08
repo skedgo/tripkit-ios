@@ -12,7 +12,7 @@ import Marshal
 
 public struct TKCompanyInfo : Unmarshaling {
   public let name: String
-  public let website: String?
+  public let website: URL?
   public let remoteIcon: String?
   
   public init(object: MarshaledObject) throws {
