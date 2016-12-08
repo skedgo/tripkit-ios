@@ -48,15 +48,15 @@ public struct TKCarPodInfo : Unmarshaling {
     public let licensePlate: String?
     public let engineType: String?
     public let fuelType: String?
-    public let fuel: Int?
+    public let fuelLevel: Int?
 
     public init(object: MarshaledObject) throws {
       name          = try? object.value(for: "name")
       description   = try? object.value(for: "description")
       licensePlate  = try? object.value(for: "licensePlate")
-      engineType    = try? object.value(for: "engine")
+      engineType    = try? object.value(for: "engineType")
       fuelType      = try? object.value(for: "fuelType")
-      fuel          = try? object.value(for: "fuel")
+      fuelLevel     = try? object.value(for: "fuelLevel")
     }
   }
   
