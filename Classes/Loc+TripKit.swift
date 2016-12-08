@@ -20,6 +20,9 @@ extension Loc {
     return NSLocalizedString("Opening Hours", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for opening hours")
   }
   
+  public static var PublicHoliday: String {
+    return NSLocalizedString("Public holiday", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
+  }
   
   
   // MARK: - Format

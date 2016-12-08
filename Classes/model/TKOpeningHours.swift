@@ -73,6 +73,14 @@ public struct TKOpeningHours : Unmarshaling {
       case publicHoliday  = "PUBLIC_HOLIDAY"
       
       
+      public var localizedString: String {
+        if let weekday = weekday {
+          return SGCustomEventRecurrenceRule.longString(forWeekday: weekday)
+        } else {
+          return Loc.PublicHoliday
+        }
+      }
+      
       /// Integer matching `NSDateComponents.weekday` or
       /// `nil` in case of public holiday.
       fileprivate var weekday: Int? {
