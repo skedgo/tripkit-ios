@@ -691,6 +691,10 @@ typedef NSUInteger SGTripFlag;
 
 - (NSString *)durationString
 {
+  if (!self.departureTime || !self.arrivalTime) {
+    return @"";
+  }
+  
   return [SGKObjcDateHelper durationStringLongForStart:self.departureTime end:self.arrivalTime];
 }
 
