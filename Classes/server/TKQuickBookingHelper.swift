@@ -84,67 +84,6 @@ public struct TKQuickBooking : Unmarshaling {
   
 }
 
-public struct TKBookingConfirmation : Unmarshaling {
-  
-  public struct Detail : Unmarshaling {
-    public let title: String
-    public let subtitle: String?
-    public let imageURL: URL?
-    
-    public init(object: MarshaledObject) throws {
-      title     = try  object.value(for: "title")
-      subtitle  = try? object.value(for: "subtitle")
-      imageURL  = try? object.value(for: "imageURL")
-    }
-  }
-  
-  public struct Action : Unmarshaling {
-    public let title: String
-    public let isDestructive: Bool
-    public let internalURL: URL?
-    public let externalAction: String?
-
-    public init(object: MarshaledObject) throws {
-      title           = try  object.value(for: "title")
-      isDestructive   = try  object.value(for: "isDestructive")
-      internalURL     = try? object.value(for: "internalURL")
-      externalAction  = try? object.value(for: "externalURL")
-    }
-  }
-  
-  public struct Purchase : Unmarshaling {
-    public let price: NSDecimalNumber
-    public let currency: String
-    public let productName: String
-    public let productType: String
-    public let id: String
-    
-    public init(object: MarshaledObject) throws {
-      let raw: Double = try object.value(for: "price")
-      price = NSDecimalNumber(value: raw)
-      currency        = try  object.value(for: "currency")
-      productName     = try  object.value(for: "price")
-      productType     = try  object.value(for: "productType")
-      id              = try  object.value(for: "id")
-    }
-    
-  }
-  
-  public let status: Detail
-  public let provider: Detail?
-  public let vehicle: Detail?
-  public let purchase: Purchase?
-  public let actions: [Action]
-  
-  public init(object: MarshaledObject) throws {
-    status    = try  object.value(for: "status")
-    provider  = try? object.value(for: "provider")
-    vehicle   = try? object.value(for: "vehicle")
-    purchase  = try? object.value(for: "purchase")
-    actions   = (try? object.value(for: "actions")) ?? []
-  }
-}
-
 public enum TKQuickBookingHelper {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
@@ -175,64 +114,6 @@ public enum TKQuickBookingHelper {
 
 }
 
-
-extension TKBookingConfirmation {
-  fileprivate static func fakeTNC() -> TKBookingConfirmation? {
-    let fake = [
-      "actions": [
-        [
-          "externalURL": "tel:(555)555-5555",
-          "isDestructive": false,
-          "title": "Call driver"
-        ],
-        [
-          "internalURL": "http://deep-thought:8080/satapp-debug/booking/v1/1204f411-eacb-406c-8fd2-3775c8242b02/cancel?bsb=1",
-          "isDestructive": true,
-          "title": "Cancel ride"
-        ]
-      ],
-      "provider": [
-        "imageURL": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/driver.jpg",
-        "subtitle": "4.9",
-        "title": "John"
-      ],
-      "status": [
-        "title": "Approaching",
-        "subtitle": "Your driver is approaching"
-      ],
-      "vehicle": [
-        "imageURL": "https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/prius.jpg",
-        "subtitle": "UBER-PLATE",
-        "title": "Prius Toyota"
-      ],
-      "purchase": [
-        "price": 15.80,
-        "currency": "AUD",
-        "productName": "uberX",
-        "productType": "ps_tnc",
-        "id": "1204f411-eacb-406c-8fd2-3775c8242b02",
-      ]
-    ] as [String : Any]
-    return try? TKBookingConfirmation(object: fake)
-  }
-
-  fileprivate static func fakePublic() -> TKBookingConfirmation? {
-    let fake = [
-      "actions": [
-        [
-          "externalURL": "qrcode:http://www.skedgo.com",
-          "isDestructive": false,
-          "title": "View ticket"
-        ],
-      ],
-      "status": [
-        "title": "30 Minute Ticket",
-        "subtitle": "Valid until 15:30",
-      ],
-    ] as [String : Any]
-    return try? TKBookingConfirmation(object: fake)
-  }
-}
 
 extension TKSegment {
   public var storedQuickBookings: [TKQuickBooking]? {
@@ -287,9 +168,9 @@ extension TKSegment {
     TKTripKit.sharedInstance().inMemoryCache().setObject(array as AnyObject, forKey: key as AnyObject)
   }
   
-  public var bookingConfirmation: TKBookingConfirmation? {
+  public var bookingConfirmation: TKBooking.Confirmation? {
     if let dictionary = bookingConfirmationDictionary() {
-      return try? TKBookingConfirmation(object: dictionary)
+      return try? TKBooking.Confirmation(object: dictionary)
       
       // Useful for debugging the confirmation screen
 //    } else if let mode = modeIdentifier() where !isStationary() && mode.hasPrefix("ps_tnc") {
