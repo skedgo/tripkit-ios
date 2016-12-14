@@ -9,6 +9,7 @@
 import Foundation
 
 import Marshal
+import SGCoreKit
 
 public enum TKBooking {
   
@@ -40,24 +41,55 @@ public enum TKBooking {
   }
   
 
-  public struct Purchase : Unmarshaling {
-    public let price: NSDecimalNumber
-    public let currency: String
-    public let productName: String
-    public let productType: String
-    public let id: String
+  public struct TSPBranding: Unmarshaling {
+    public let color: SGKColor?
+    public let logoImageName: String?
     
     public init(object: MarshaledObject) throws {
+      color         = try? object.value(for: "color")
+      logoImageName = try? object.value(for: "imageURL")
+    }
+    
+    public var downloadableLogoURL: URL? {
+      guard let fileNamePart = logoImageName else {
+        return nil
+      }
+      
+      return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+    }
+  }
+  
+  
+  public struct Purchase : Unmarshaling {
+    public let id:          String
+    public let price:       NSDecimalNumber
+    public let currency:    String
+    public let productName: String
+    public let productType: String
+    public let validFor:    TimeInterval?
+    public let validFrom:   Date?
+    public let branding:    TSPBranding?
+    
+    public init(object: MarshaledObject) throws {
+      id              = try  object.value(for: "id")
       let raw: Double = try object.value(for: "price")
       price = NSDecimalNumber(value: raw)
       currency        = try  object.value(for: "currency")
       productName     = try  object.value(for: "productName")
       productType     = try  object.value(for: "productType")
-      id              = try  object.value(for: "id")
+      validFor        = try? object.value(for: "validFor")
+      validFrom       = try? object.value(for: "validFrom")
+      branding        = try? object.value(for: "brand")
+    }
+    
+    public var validTo: Date? {
+      guard let from = validFrom, let duration = validFor else { return nil }
+      return from.addingTimeInterval(duration)
     }
     
   }
 
+  
   public struct Confirmation : Unmarshaling {
     
     public let status: Detail
@@ -74,7 +106,6 @@ public enum TKBooking {
       actions   = (try? object.value(for: "actions")) ?? []
     }
   }
-  
   
 }
 
