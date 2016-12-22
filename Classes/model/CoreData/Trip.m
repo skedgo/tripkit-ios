@@ -681,8 +681,9 @@ typedef NSUInteger SGTripFlag;
     [accessibleLabel appendFormat:@" - %@", [self durationString]];
   } else {
     [accessibleLabel appendFormat:@"%@ - ", [self durationString]];
-    NSString *format = NSLocalizedStringFromTableInBundle(@"ArrivalTime", @"TripKit", [TKTripKit bundle], "Arrival %time.");
-    [accessibleLabel appendFormat:format, [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]]];
+
+    NSString *arrival = [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]];
+    [accessibleLabel appendString:[Loc ArriveAtDate:arrival]];
   }
   
   return accessibleLabel;

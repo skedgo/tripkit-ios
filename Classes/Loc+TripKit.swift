@@ -26,6 +26,12 @@ extension Loc {
   
   
   // MARK: - Format
+
+  @objc(ArriveAtDate:)
+  public static func ArriveAt(date: String) -> String {
+    let format = NSLocalizedString("Arrive at %@", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "'%@' will be replaced with the arrival time. (old key: ArrivalTime)")
+    return String(format: format, date)
+  }
   
   @objc(From:)
   public static func From(_ from: String) -> String {

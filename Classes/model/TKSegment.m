@@ -1337,14 +1337,10 @@ NSString *const UninitializedString =  @"UninitializedString";
           if (name.length > 0) {
             newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Arrive at %@ at %@", @"TripKit", [TKTripKit bundle], "The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime)"), name, time];
           } else {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Arrive destination at %@", @"TripKit", [TKTripKit bundle], "'%@' will be replaced with the arrival time. (old key: ArrivalTime)"), time];
+            newString = [Loc ArriveAtDate:time];
           }
         } else {
-          if (name.length > 0) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Arrive at %@", @"TripKit", [TKTripKit bundle], "'%@' will be replaced with the place of arrival. (old key: ArrivalLocation)"), name];
-          } else {
-            newString = NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Single line instruction to arrive");
-          }
+          newString = NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Single line instruction to arrive");
         }
         break;
       }
