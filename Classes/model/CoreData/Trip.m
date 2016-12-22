@@ -676,7 +676,7 @@ typedef NSUInteger SGTripFlag;
   
   [accessibleLabel appendString:@" - "];
   if ([self departureTimeIsFixed]) {
-    NSString *format = NSLocalizedStringFromTableInBundle(@"TimeFromToShortFormat", @"TripKit", [TKTripKit bundle], "From %time1 to %time2");
+    NSString *format = NSLocalizedStringFromTableInBundle(@"%@ to %@", @"TripKit", [TKTripKit bundle], "From %time1 to %time2. (old key: TimeFromToShortFormat)");
     [accessibleLabel appendFormat:format, [sTripAccessibilityDateFormatter stringFromDate:[self departureTime]], [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]]];
     [accessibleLabel appendFormat:@" - %@", [self durationString]];
   } else {

@@ -29,13 +29,13 @@ extension Loc {
   
   @objc(From:)
   public static func From(_ from: String) -> String {
-    let format = NSLocalizedString("PrimaryLocationStart", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
+    let format = NSLocalizedString("From %@", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Departure location. (old key: PrimaryLocationStart)")
     return String(format: format, from)
   }
 
   @objc(To:)
   public static func To(_ to: String) -> String {
-    let format = NSLocalizedString("PrimaryLocationEnd", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "For trip titles, e.g., 'To work'")
+    let format = NSLocalizedString("To %@", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd)")
     return String(format: format, to)
   }
   
