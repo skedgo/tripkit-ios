@@ -36,7 +36,7 @@ public class TKDepartureView: UIView {
       
       let duration = destination.duration
       if duration == -1 {
-        destinationTimes.text = [Loc ArriveAtDate:SGStyleManager.timeString(start, for: nil)];
+        destinationTimes.text = Loc.ArriveAt(date: SGStyleManager.timeString(start, for: nil))
       } else {
         let end = start.addingTimeInterval(duration)
         let formatter = DateIntervalFormatter()
