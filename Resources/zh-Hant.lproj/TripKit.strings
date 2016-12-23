@@ -22,9 +22,6 @@
 /* No comment provided by engineer. */
 "1 stop" = "1站";
 
-/* Indication of an activity */
-"ActivityIndication" = "我將於%2$@從%3$@搭乘%1$@.";
-
 /* No comment provided by engineer. */
 "Alerts" = "提示";
 
@@ -33,16 +30,6 @@
 
 /* Arrival time sorter title */
 "Arrival" = "到達";
-
-/* The place of arrival */
-"ArrivalLocation" = "到達%@";
-
-/* The place of arrival with time */
-"ArrivalLocationTime" = "在%2$@到達%1$@";
-
-/* 'Arrive at %@', where '%@' will be replace with the arrival time.
-   Arrival %time. */
-"ArrivalTime" = "在%@到達";
 
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
@@ -63,9 +50,6 @@
 /* No comment provided by engineer. */
 "Call" = "聯繫計程車";
 
-/* Action title for calling provider of %name */
-"CallTaxiFormat" = "聯繫%@";
-
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "請連接網路以取得路線";
 
@@ -74,9 +58,6 @@
 
 /* Departure time sorter title */
 "Departure" = "離站";
-
-/* Time of the bus departure */
-"DepartureTime" = "於%@";
 
 /* Destination of the bus */
 "Direction" = "方向: %@";
@@ -124,15 +105,6 @@
 /* No comment provided by engineer. */
 "Leave now" = "現在出發";
 
-/* The place of departure */
-"LeaveLocation" = "離開%@";
-
-/* The place of departure with time */
-"LeaveLocationTime" = "在%2$@離開%1$@";
-
-/* Time departure */
-"LeaveTime" = "於%@離開";
-
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "站位數量有限";
 
@@ -144,9 +116,6 @@
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "尚有很多座位";
-
-/* ArrivalTime */
-"MessageArrivalTime" = "我將於%2$@到達%1$@.";
 
 /* Title of button to get more details about an alert */
 "More info" = "更多資訊";
@@ -169,16 +138,6 @@
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "您在TripGo中所規劃的路線將會顯示在這裡．";
 
-/* Arrival Location
-   For trip titles, e.g., 'To work' */
-"PrimaryLocationEnd" = "目的地: %@";
-
-/* Departure Location */
-"PrimaryLocationStart" = "出發地: %@";
-
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "時刻 %@";
-
 /* No comment provided by engineer. */
 "Real-time" = "即時";
 
@@ -197,17 +156,8 @@
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld站";
 
-/* From %time1 to %time2 */
-"TimeFromToShortFormat" = "%@ ～ %@";
-
 /* Title for a trip */
 "Trip" = "旅程";
-
-/* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "車輛%@的位置在%@前更新";
-
-/* Vehicle updated */
-"VehicleUpdated" = "%@前更新";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "我們正忙著規劃您的路線．請稍候．．．";
