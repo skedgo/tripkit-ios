@@ -36,6 +36,8 @@
 		3A7769211D3DE45800AF9EB2 /* TripKitAgenda.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A77690E1D3DE45800AF9EB2 /* TripKitAgenda.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A7769221D3DE45800AF9EB2 /* TKAgendaFaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7769101D3DE45800AF9EB2 /* TKAgendaFaker.swift */; };
 		3A7769231D3DE45800AF9EB2 /* TKTTPifierFaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7769111D3DE45800AF9EB2 /* TKTTPifierFaker.swift */; };
+		3A78020B1E0CBBE8006DF2A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A78020D1E0CBBE8006DF2A9 /* InfoPlist.strings */; };
+		3A7802101E0CBBE9006DF2A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A7802121E0CBBE9006DF2A9 /* InfoPlist.strings */; };
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
 		3A787ED01D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
 		3A787ED11D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
@@ -230,6 +232,8 @@
 		3A77690E1D3DE45800AF9EB2 /* TripKitAgenda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripKitAgenda.h; sourceTree = "<group>"; };
 		3A7769101D3DE45800AF9EB2 /* TKAgendaFaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaFaker.swift; sourceTree = "<group>"; };
 		3A7769111D3DE45800AF9EB2 /* TKTTPifierFaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTTPifierFaker.swift; sourceTree = "<group>"; };
+		3A78020C1E0CBBE8006DF2A9 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A7802111E0CBBE9006DF2A9 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A787EC31D38F646009F9A18 /* TKJSONCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
 		3A787EC61D38F70A009F9A18 /* TripKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TripKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		3A787ECA1D38F78A009F9A18 /* 1-TripKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "1-TripKit.xcdatamodel"; sourceTree = "<group>"; };
@@ -501,6 +505,7 @@
 		3AB6C62E1D1CD0060089F687 /* TripKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				3A7802121E0CBBE9006DF2A9 /* InfoPlist.strings */,
 				3AC4DCF71DEE32B80026B238 /* data */,
 				3AC4DCFC1DEE32B80026B238 /* parsing */,
 				3AC4DCFE1DEE32B80026B238 /* routing */,
@@ -851,6 +856,7 @@
 		3AFF20981D1CD29E008BCD9F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3A78020D1E0CBBE8006DF2A9 /* InfoPlist.strings */,
 				3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */,
 				3AB6C6231D1CD0060089F687 /* TripKit.h */,
 				3AB6C6251D1CD0060089F687 /* Info.plist */,
@@ -1042,6 +1048,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ADD5B6D1D9CDF0C00A1742F /* TripKitUI.xcassets in Resources */,
+				3A78020B1E0CBBE8006DF2A9 /* InfoPlist.strings in Resources */,
 				3ADD5B771D9CDF0C00A1742F /* TKEmptyAlertView.xib in Resources */,
 				3ADD5B731D9CDF0C00A1742F /* TKAlertCell.xib in Resources */,
 				3ADD5B751D9CDF0C00A1742F /* TKDepartureView.xib in Resources */,
@@ -1063,6 +1070,7 @@
 				3AC4DD061DEE32B80026B238 /* locationInfo-bikePod.json in Resources */,
 				3AFF6C091DEE411300E7DFCB /* hornsbyToSkedGo.json in Resources */,
 				3AABDD9D1DF7C22F0044A05B /* locationInfo-carRental.json in Resources */,
+				3A7802101E0CBBE9006DF2A9 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1277,6 +1285,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3A78020D1E0CBBE8006DF2A9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A78020C1E0CBBE8006DF2A9 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3A7802121E0CBBE9006DF2A9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A7802111E0CBBE9006DF2A9 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		3AB6C6AA1D1CD08E0089F687 /* TripKit.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
