@@ -16,8 +16,6 @@
 /* No comment provided by engineer. */
 "1 stop" = "1 arrêt";
 
-/* Indication of an activity */
-"ActivityIndication" = "Je vais prendre un %@ à %@ depuis %@.";
 
 /* apple maps directions action */
 "Apple Maps" = "Apple Maps";
@@ -25,25 +23,12 @@
 /* Arrival time sorter title */
 "Arrival" = "Arrivée";
 
-/* The place of arrival */
-"ArrivalLocation" = "Arrivée à %@";
-
-/* The place of arrival with time */
-"ArrivalLocationTime" = "Arrivée à %@ à %@";
-
-/* Arrival %time.
-   Time arrival */
-"ArrivalTime" = "Arrivée à %@";
-
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
 "Arrive" = "Arrivée";
 
 /* No comment provided by engineer. */
 "Call" = "Appeler";
-
-/* Action title for calling provider of %name */
-"CallTaxiFormat" = "Appeler %@";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Could not find transit stop.";
@@ -53,9 +38,6 @@
 
 /* Departure time sorter title */
 "Departure" = "Départ";
-
-/* Time of the bus departure */
-"DepartureTime" = "à %@";
 
 /* Destination of the bus */
 "Direction" = "Direction : %@";
@@ -91,20 +73,8 @@
 /* No comment provided by engineer. */
 "Leave now" = "Partir maintenant";
 
-/* The place of departure */
-"LeaveLocation" = "Partir de %@";
-
-/* The place of departure with time */
-"LeaveLocationTime" = "Partir de %@ à %@";
-
-/* Time departure */
-"LeaveTime" = "Partir à %@";
-
 /* No comment provided by engineer. */
 "Live traffic" = "Live traffic";
-
-/* ArrivalTime */
-"MessageArrivalTime" = "Je vais arriver à %@ à %@.";
 
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "On time";
@@ -115,17 +85,8 @@
 /* No comment provided by engineer. */
 "Open Uber" = "Ouvrir Uber";
 
-/* Arrival Location */
-"PrimaryLocationEnd" = "Jusqu'à %@";
-
-/* Departure Location */
-"PrimaryLocationStart" = "À %@";
-
 /* Favorite trip 'to' title */
 "To" = "To";
-
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "À %@";
 
 /* No comment provided by engineer. */
 "Real-time" = "Temps-réel";
@@ -139,14 +100,5 @@
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld arrêts";
 
-/* From %time1 to %time2 */
-"TimeFromToShortFormat" = "%@ à %@";
-
 /* No comment provided by engineer. */
 "Trip" = "Trajet";
-
-/* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "Véhicule %@ mis à jour il y a %@";
-
-/* Vehicle updated */
-"VehicleUpdated" = "Mis à jour il y a %@";

@@ -22,9 +22,6 @@
 /* No comment provided by engineer. */
 "1 stop" = "1 station";
 
-/* Indication of an activity */
-"ActivityIndication" = "Ik neem de %@ om %@ vanuit %@.";
-
 /* No comment provided by engineer. */
 "Alerts" = "Alarm";
 
@@ -33,16 +30,6 @@
 
 /* Arrival time sorter title */
 "Arrival" = "Aankomst";
-
-/* The place of arrival */
-"ArrivalLocation" = "Arriveer op %@";
-
-/* The place of arrival with time */
-"ArrivalLocationTime" = "Arriveer op %@ om %@";
-
-/* 'Arrive at %@', where '%@' will be replace with the arrival time.
-   Arrival %time. */
-"ArrivalTime" = "Arriveer om %@";
 
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
@@ -63,9 +50,6 @@
 /* No comment provided by engineer. */
 "Call" = "Bel";
 
-/* Action title for calling provider of %name */
-"CallTaxiFormat" = "Bel %@";
-
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "Maak verbinding met het internet om trips te bekijken";
 
@@ -74,9 +58,6 @@
 
 /* Departure time sorter title */
 "Departure" = "Vertrek";
-
-/* Time of the bus departure */
-"DepartureTime" = "om %@";
 
 /* Destination of the bus */
 "Direction" = "Eindpunt: %@";
@@ -124,15 +105,6 @@
 /* No comment provided by engineer. */
 "Leave now" = "Vertrek nu";
 
-/* The place of departure */
-"LeaveLocation" = "Verlaat %@";
-
-/* The place of departure with time */
-"LeaveLocationTime" = "Verlaat %@ om %@";
-
-/* Time departure */
-"LeaveTime" = "Vetrek om %@";
-
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Beperkte staruimte";
 
@@ -144,9 +116,6 @@
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Veel zitplaatsen beschikbaar";
-
-/* ArrivalTime */
-"MessageArrivalTime" = "Ik kom aan op %@ om %@.";
 
 /* Title of button to get more details about an alert */
 "More info" = "Meer info";
@@ -176,9 +145,6 @@
 /* Departure Location */
 "PrimaryLocationStart" = "Van %@";
 
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "Op %@";
-
 /* No comment provided by engineer. */
 "Real-time" = "Real-time";
 
@@ -202,12 +168,6 @@
 
 /* Title for a trip */
 "Trip" = "Reis";
-
-/* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "Voertuig %@ bijgewerkt %@ geleden";
-
-/* Vehicle updated */
-"VehicleUpdated" = "Bijgewerkt %@ geleden";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "We zijn bezig om uw reis op te halen. Een ogenblik geduld...";

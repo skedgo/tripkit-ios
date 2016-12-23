@@ -22,9 +22,6 @@
 /* No comment provided by engineer. */
 "1 stop" = "1 parada";
 
-/* Indication of an activity */
-"ActivityIndication" = "Eu vou pegar o %@ as %@ de %@.";
-
 /* No comment provided by engineer. */
 "Alerts" = "Alertas";
 
@@ -33,16 +30,6 @@
 
 /* Arrival time sorter title */
 "Arrival" = "Chegada";
-
-/* The place of arrival */
-"ArrivalLocation" = "Chegada em %@";
-
-/* The place of arrival with time */
-"ArrivalLocationTime" = "Chegada em %@ as %@";
-
-/* 'Arrive at %@', where '%@' will be replace with the arrival time.
-   Arrival %time. */
-"ArrivalTime" = "Chegada as %@";
 
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
@@ -63,9 +50,6 @@
 /* No comment provided by engineer. */
 "Call" = "Chamada";
 
-/* Action title for calling provider of %name */
-"CallTaxiFormat" = "Chamar %@";
-
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "Conectar a Internet para obter viagens";
 
@@ -74,9 +58,6 @@
 
 /* Departure time sorter title */
 "Departure" = "Partida";
-
-/* Time of the bus departure */
-"DepartureTime" = "at %@";
 
 /* Destination of the bus */
 "Direction" = "Direção: %@";
@@ -124,15 +105,6 @@
 /* No comment provided by engineer. */
 "Leave now" = "Sait agora";
 
-/* The place of departure */
-"LeaveLocation" = "Deixar %@";
-
-/* The place of departure with time */
-"LeaveLocationTime" = "Deixar %@ as %@";
-
-/* Time departure */
-"LeaveTime" = "Sair as %@";
-
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Somente espaço de pé limitado";
 
@@ -144,9 +116,6 @@
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Muitos lugares disponíveis";
-
-/* ArrivalTime */
-"MessageArrivalTime" = "Eu chegarei em %@ as %@.";
 
 /* Title of button to get more details about an alert */
 "More info" = "Mais informação";
@@ -169,16 +138,6 @@
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Planejar uma viagem e ele aparecerá aqui.";
 
-/* Arrival Location
-   For trip titles, e.g., 'To work' */
-"PrimaryLocationEnd" = "Para %@";
-
-/* Departure Location */
-"PrimaryLocationStart" = "De %@";
-
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "Em %@";
-
 /* No comment provided by engineer. */
 "Real-time" = "Tempo real";
 
@@ -197,17 +156,8 @@
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld paradas";
 
-/* From %time1 to %time2 */
-"TimeFromToShortFormat" = "%@ até %@";
-
 /* Title for a trip */
 "Trip" = "Trajeto";
-
-/* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "Veículo %@ atualizado %@ atrás";
-
-/* Vehicle updated */
-"VehicleUpdated" = "Atualizado %@ atrás";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "Estamos ocupados recibiendo su próximo viaje. Por favor espera...";

@@ -22,9 +22,6 @@
 /* No comment provided by engineer. */
 "1 stop" = "1 Stop";
 
-/* Indication of an activity */
-"ActivityIndication" = "Ich nehme den %@ um %@ von %@.";
-
 /* No comment provided by engineer. */
 "Alerts" = "Warnungen";
 
@@ -33,16 +30,6 @@
 
 /* Arrival time sorter title */
 "Arrival" = "Ankunft";
-
-/* The place of arrival */
-"ArrivalLocation" = "Ankunft bei %@";
-
-/* The place of arrival with time */
-"ArrivalLocationTime" = "Ankunft bei %@ um %@";
-
-/* 'Arrive at %@', where '%@' will be replace with the arrival time.
-   Arrival %time. */
-"ArrivalTime" = "Ankunft um %@";
 
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
@@ -63,9 +50,6 @@
 /* No comment provided by engineer. */
 "Call" = "Anrufen";
 
-/* Action title for calling provider of %name */
-"CallTaxiFormat" = "%@ anrufen";
-
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "Gehe online, um Trips zu sehen";
 
@@ -74,9 +58,6 @@
 
 /* Departure time sorter title */
 "Departure" = "Abfahrt";
-
-/* Time of the bus departure */
-"DepartureTime" = "um %@";
 
 /* Destination of the bus */
 "Direction" = "Richtung: %@";
@@ -124,15 +105,6 @@
 /* No comment provided by engineer. */
 "Leave now" = "Jetzt";
 
-/* The place of departure */
-"LeaveLocation" = "Abfahrt von %@";
-
-/* The place of departure with time */
-"LeaveLocationTime" = "Abfahrt von %@ um %@";
-
-/* Time departure */
-"LeaveTime" = "Abfahrt um %@";
-
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Wenige Stehplätze";
 
@@ -144,9 +116,6 @@
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Viele Plätze verfügbar";
-
-/* ArrivalTime */
-"MessageArrivalTime" = "Ich komme bei %@ um %@ an.";
 
 /* Title of button to get more details about an alert */
 "More info" = "Mehr Infos";
@@ -173,12 +142,6 @@
    For trip titles, e.g., 'To work' */
 "PrimaryLocationEnd" = "Nach %@";
 
-/* Departure Location */
-"PrimaryLocationStart" = "Von %@";
-
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "Bei %@";
-
 /* No comment provided by engineer. */
 "Real-time" = "Echtzeit";
 
@@ -202,12 +165,6 @@
 
 /* Title for a trip */
 "Trip" = "Trip";
-
-/* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "Fahrzeug %@, aktualisiert vor %@";
-
-/* Vehicle updated */
-"VehicleUpdated" = "Aktualisiert vor %@";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "Anstehende Trips werden berechnet. Bitte warten...";
