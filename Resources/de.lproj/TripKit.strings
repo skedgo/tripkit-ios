@@ -13,6 +13,9 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ fahrradfreundlich";
 
+/* From %time1 to %time2. (old key: TimeFromToShortFormat) */
+"%@ to %@" = "%@ bis %@";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ ohne Verkehr";
 
@@ -21,9 +24,6 @@
 
 /* No comment provided by engineer. */
 "1 stop" = "1 Stop";
-
-/* Indication of an activity */
-"ActivityIndication" = "Ich nehme den %@ um %@ von %@.";
 
 /* No comment provided by engineer. */
 "Alerts" = "Warnungen";
@@ -34,22 +34,21 @@
 /* Arrival time sorter title */
 "Arrival" = "Ankunft";
 
-/* The place of arrival */
-"ArrivalLocation" = "Ankunft bei %@";
-
-/* The place of arrival with time */
-"ArrivalLocationTime" = "Ankunft bei %@ um %@";
-
-/* 'Arrive at %@', where '%@' will be replace with the arrival time.
-   Arrival %time. */
-"ArrivalTime" = "Ankunft um %@";
-
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
 "Arrive" = "Ankunft";
 
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "Ankunft um %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "Ankunft bei %@ um %@";
+
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Ankunft";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+"At %@" = "Bei %@";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "Mit FlitWays buchen";
@@ -63,8 +62,8 @@
 /* No comment provided by engineer. */
 "Call" = "Anrufen";
 
-/* Action title for calling provider of %name */
-"CallTaxiFormat" = "%@ anrufen";
+/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+"Call %@" = "%@ anrufen";
 
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "Gehe online, um Trips zu sehen";
@@ -74,9 +73,6 @@
 
 /* Departure time sorter title */
 "Departure" = "Abfahrt";
-
-/* Time of the bus departure */
-"DepartureTime" = "um %@";
 
 /* Destination of the bus */
 "Direction" = "Richtung: %@";
@@ -89,6 +85,9 @@
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Wenige Plätze verfügbar";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "Von %@";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Voll";
@@ -108,6 +107,12 @@
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "Ich komme bei %@ um %@ an.";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "Ich nehme den %@ um %@ von %@.";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Bis dahin, erkunde %@ weiter und genieße deine Reise.";
 
@@ -118,20 +123,20 @@
    Single line instruction to leave */
 "Leave" = "Abfahrt";
 
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "Abfahrt von %@";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "Abfahrt von %@ um %@";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "Abfahrt um %@";
+
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "Abfahrt";
 
 /* No comment provided by engineer. */
 "Leave now" = "Jetzt";
-
-/* The place of departure */
-"LeaveLocation" = "Abfahrt von %@";
-
-/* The place of departure with time */
-"LeaveLocationTime" = "Abfahrt von %@ um %@";
-
-/* Time departure */
-"LeaveTime" = "Abfahrt um %@";
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Wenige Stehplätze";
@@ -144,9 +149,6 @@
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Viele Plätze verfügbar";
-
-/* ArrivalTime */
-"MessageArrivalTime" = "Ich komme bei %@ um %@ an.";
 
 /* Title of button to get more details about an alert */
 "More info" = "Mehr Infos";
@@ -166,18 +168,14 @@
 /* No comment provided by engineer. */
 "Open Ola" = "Ola öffnen";
 
+/* Title for opening hours */
+"Opening Hours" = "Öffnungszeiten";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Plane einen Trip und er wird dann hier angezeigt.";
 
-/* Arrival Location
-   For trip titles, e.g., 'To work' */
-"PrimaryLocationEnd" = "Nach %@";
-
-/* Departure Location */
-"PrimaryLocationStart" = "Von %@";
-
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "Bei %@";
+/* No comment provided by engineer. */
+"Public holiday" = "Feiertags";
 
 /* No comment provided by engineer. */
 "Real-time" = "Echtzeit";
@@ -197,26 +195,29 @@
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld Stops";
 
-/* From %time1 to %time2 */
-"TimeFromToShortFormat" = "%@ bis %@";
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "Nach %@";
 
 /* Title for a trip */
 "Trip" = "Trip";
 
-/* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "Fahrzeug %@, aktualisiert vor %@";
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "Aktualisiert vor %@";
 
-/* Vehicle updated */
-"VehicleUpdated" = "Aktualisiert vor %@";
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "Fahrzeug %@, aktualisiert vor %@";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "Anstehende Trips werden berechnet. Bitte warten...";
 
 /* No comment provided by engineer. */
-"We'll keep you updated with the latest transit alerts here" = "We'll keep you updated with the latest transit alerts here";
+"We'll keep you updated with the latest transit alerts here" = "Wir halten dich hier mit den neuesten Warnungen auf dem Laufenden";
 
 /* No comment provided by engineer. */
 "Wheelchair accessible" = "Rollstuhlgerecht";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "um %@";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch nehmen";

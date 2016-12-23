@@ -13,6 +13,9 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ Suotuisa pyöräilyyn";
 
+/* From %time1 to %time2. (old key: TimeFromToShortFormat) */
+"%@ to %@" = "%@ -> %@";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ ilman ruuhkaa";
 
@@ -21,9 +24,6 @@
 
 /* No comment provided by engineer. */
 "1 stop" = "1 pysähdys";
-
-/* Indication of an activity */
-"ActivityIndication" = "Merkki aktiivisuudesta";
 
 /* No comment provided by engineer. */
 "Alerts" = "Ilmoitukset";
@@ -34,22 +34,21 @@
 /* Arrival time sorter title */
 "Arrival" = "Saapumisaika";
 
-/* The place of arrival */
-"ArrivalLocation" = "Saapumispaikka";
-
-/* The place of arrival with time */
-"ArrivalLocationTime" = "Saapuminen kohteeseen %@ klo %@";
-
-/* 'Arrive at %@', where '%@' will be replace with the arrival time.
-   Arrival %time. */
-"ArrivalTime" = "Saapuu klo %@";
-
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
 "Arrive" = "Saapuu";
 
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "Saapuu klo %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "Saapuminen kohteeseen %@ klo %@";
+
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Saapuu";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+"At %@" = "Kohteessa %@";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "Varaa FlitWayn kautta";
@@ -63,8 +62,8 @@
 /* No comment provided by engineer. */
 "Call" = "Soita";
 
-/* Action title for calling provider of %name */
-"CallTaxiFormat" = "Soita firmalle %@";
+/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+"Call %@" = "Soita firmalle %@";
 
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "Yhdistä nettiin hakeaksesi matkoja";
@@ -74,9 +73,6 @@
 
 /* Departure time sorter title */
 "Departure" = "Lähtöaika";
-
-/* Time of the bus departure */
-"DepartureTime" = "Lähtee klo %@";
 
 /* Destination of the bus */
 "Direction" = "Suunta";
@@ -89,6 +85,9 @@
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Muutamia paikkoja vapaana";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "Kohteesta %@";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Kaikki";
@@ -108,6 +107,12 @@
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "Saapuminen kohteeseen %@ klo %@";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "Otan %@ paikasta %@";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Sillä välin, jatketaan selailua %@ ja nautitaan saatavilla olevista matkoista";
 
@@ -118,20 +123,20 @@
    Single line instruction to leave */
 "Leave" = "Lähde matkaan";
 
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "Lähde kohteesta %@";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "Lähde kohteesta %@ klo %@";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "Lähde klo %@";
+
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "Lähtöaika";
 
 /* No comment provided by engineer. */
 "Leave now" = "Lähde nyt";
-
-/* The place of departure */
-"LeaveLocation" = "Lähde kohteesta %@";
-
-/* The place of departure with time */
-"LeaveLocationTime" = "Lähde kohteesta %@ klo %@";
-
-/* Time departure */
-"LeaveTime" = "Lähde klo %@";
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Vain seisomapaikkoja saatavilla";
@@ -144,9 +149,6 @@
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Paljon istumapaikkoja jäljellä";
-
-/* ArrivalTime */
-"MessageArrivalTime" = "Saapuminen kohteeseen %@ klo %@";
 
 /* Title of button to get more details about an alert */
 "More info" = "Lisätietoja";
@@ -166,18 +168,14 @@
 /* No comment provided by engineer. */
 "Open Ola" = "Avaa Ola";
 
+/* Title for opening hours */
+"Opening Hours" = "Avoinna lähtien";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Suunniteltuasi reitin löydät sen täältä.";
 
-/* Arrival Location
-   For trip titles, e.g., 'To work' */
-"PrimaryLocationEnd" = "Kohteeseen %@";
-
-/* Departure Location */
-"PrimaryLocationStart" = "Kohteesta %@";
-
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "Kohteessa %@";
+/* No comment provided by engineer. */
+"Public holiday" = "Yleinen vapaapäivä";
 
 /* No comment provided by engineer. */
 "Real-time" = "Reaaliaikainen";
@@ -197,17 +195,17 @@
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld pysäkki(ä)";
 
-/* From %time1 to %time2 */
-"TimeFromToShortFormat" = "%@ - %@";
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "Kohteeseen %@";
 
 /* Title for a trip */
 "Trip" = "Matka";
 
-/* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "Ajoneuvo %@ päivitetty %@ sitten";
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "Päivitetty %@ sitten";
 
-/* Vehicle updated */
-"VehicleUpdated" = "Päivitetty %@ sitten";
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "Ajoneuvo %@ päivitetty %@ sitten";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "Matkan tietojen latauksessa viivettä. Ole hyvä, odota...";
@@ -217,6 +215,9 @@
 
 /* No comment provided by engineer. */
 "Wheelchair accessible" = "Pyörätuolilla liikkuminen huomioitu";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "Lähtee klo %@";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch Taksi";

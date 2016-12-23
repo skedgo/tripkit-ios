@@ -13,6 +13,9 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "自行車友善度%@";
 
+/* From %time1 to %time2. (old key: TimeFromToShortFormat) */
+"%@ to %@" = "%@ ～ %@";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ 路況良好下";
 
@@ -21,9 +24,6 @@
 
 /* No comment provided by engineer. */
 "1 stop" = "1站";
-
-/* Indication of an activity */
-"ActivityIndication" = "我將於%2$@從%3$@搭乘%1$@.";
 
 /* No comment provided by engineer. */
 "Alerts" = "提示";
@@ -34,22 +34,21 @@
 /* Arrival time sorter title */
 "Arrival" = "到達";
 
-/* The place of arrival */
-"ArrivalLocation" = "到達%@";
-
-/* The place of arrival with time */
-"ArrivalLocationTime" = "在%2$@到達%1$@";
-
-/* 'Arrive at %@', where '%@' will be replace with the arrival time.
-   Arrival %time. */
-"ArrivalTime" = "在%@到達";
-
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
 "Arrive" = "到達";
 
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "在%@到達";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "在%2$@到達%1$@";
+
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "離到達";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+"At %@" = "時刻 %@";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "預定FlitWays";
@@ -63,8 +62,8 @@
 /* No comment provided by engineer. */
 "Call" = "聯繫計程車";
 
-/* Action title for calling provider of %name */
-"CallTaxiFormat" = "聯繫%@";
+/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+"Call %@" = "聯繫%@";
 
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "請連接網路以取得路線";
@@ -74,9 +73,6 @@
 
 /* Departure time sorter title */
 "Departure" = "離站";
-
-/* Time of the bus departure */
-"DepartureTime" = "於%@";
 
 /* Destination of the bus */
 "Direction" = "方向: %@";
@@ -89,6 +85,9 @@
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "只有幾個座位";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "出發地: %@";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "車已滿";
@@ -108,6 +107,12 @@
 /* google maps directions action */
 "Google Maps" = "Google地圖";
 
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "我將於%2$@到達%1$@.";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "我將於%2$@從%3$@搭乘%1$@.";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "在此同時，讓我們繼續使用 %@，享受你的旅行";
 
@@ -118,20 +123,20 @@
    Single line instruction to leave */
 "Leave" = "出發";
 
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "離開%@";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "在%2$@離開%1$@";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "於%@離開";
+
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "離出發";
 
 /* No comment provided by engineer. */
 "Leave now" = "現在出發";
-
-/* The place of departure */
-"LeaveLocation" = "離開%@";
-
-/* The place of departure with time */
-"LeaveLocationTime" = "在%2$@離開%1$@";
-
-/* Time departure */
-"LeaveTime" = "於%@離開";
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "站位數量有限";
@@ -144,9 +149,6 @@
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "尚有很多座位";
-
-/* ArrivalTime */
-"MessageArrivalTime" = "我將於%2$@到達%1$@.";
 
 /* Title of button to get more details about an alert */
 "More info" = "更多資訊";
@@ -166,18 +168,14 @@
 /* No comment provided by engineer. */
 "Open Ola" = "開啟Ola";
 
+/* Title for opening hours */
+"Opening Hours" = "營業時間";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "您在TripGo中所規劃的路線將會顯示在這裡．";
 
-/* Arrival Location
-   For trip titles, e.g., 'To work' */
-"PrimaryLocationEnd" = "目的地: %@";
-
-/* Departure Location */
-"PrimaryLocationStart" = "出發地: %@";
-
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "時刻 %@";
+/* No comment provided by engineer. */
+"Public holiday" = "公共假期";
 
 /* No comment provided by engineer. */
 "Real-time" = "即時";
@@ -197,17 +195,17 @@
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld站";
 
-/* From %time1 to %time2 */
-"TimeFromToShortFormat" = "%@ ～ %@";
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "目的地: %@";
 
 /* Title for a trip */
 "Trip" = "旅程";
 
-/* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "車輛%@的位置在%@前更新";
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "%@前更新";
 
-/* Vehicle updated */
-"VehicleUpdated" = "%@前更新";
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "車輛%@的位置在%@前更新";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "我們正忙著規劃您的路線．請稍候．．．";
@@ -217,6 +215,9 @@
 
 /* No comment provided by engineer. */
 "Wheelchair accessible" = "無障礙通道";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "於%@";
 
 /* goCatch action */
 "goCatch a Taxi" = "使用goCatch";

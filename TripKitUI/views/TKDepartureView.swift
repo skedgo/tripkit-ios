@@ -36,8 +36,7 @@ public class TKDepartureView: UIView {
       
       let duration = destination.duration
       if duration == -1 {
-        let format = NSLocalizedString("ArrivalTime", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "'Arrive at %@', where '%@' will be replace with the arrival time.")
-        destinationTimes.text = String(format: format, SGStyleManager.timeString(start, for: nil))
+        destinationTimes.text = Loc.ArriveAt(date: SGStyleManager.timeString(start, for: nil))
       } else {
         let end = start.addingTimeInterval(duration)
         let formatter = DateIntervalFormatter()

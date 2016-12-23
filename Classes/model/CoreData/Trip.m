@@ -11,6 +11,7 @@
 @import SGCoreKit;
 
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 
 #import "TKRealTimeUpdatableHelper.h"
@@ -676,13 +677,14 @@ typedef NSUInteger SGTripFlag;
   
   [accessibleLabel appendString:@" - "];
   if ([self departureTimeIsFixed]) {
-    NSString *format = NSLocalizedStringFromTableInBundle(@"TimeFromToShortFormat", @"TripKit", [TKTripKit bundle], "From %time1 to %time2");
+    NSString *format = NSLocalizedStringFromTableInBundle(@"%@ to %@", @"TripKit", [TKTripKit bundle], "From %time1 to %time2. (old key: TimeFromToShortFormat)");
     [accessibleLabel appendFormat:format, [sTripAccessibilityDateFormatter stringFromDate:[self departureTime]], [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]]];
     [accessibleLabel appendFormat:@" - %@", [self durationString]];
   } else {
     [accessibleLabel appendFormat:@"%@ - ", [self durationString]];
-    NSString *format = NSLocalizedStringFromTableInBundle(@"ArrivalTime", @"TripKit", [TKTripKit bundle], "Arrival %time.");
-    [accessibleLabel appendFormat:format, [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]]];
+
+    NSString *arrival = [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]];
+    [accessibleLabel appendString:[Loc ArriveAtDate:arrival]];
   }
   
   return accessibleLabel;

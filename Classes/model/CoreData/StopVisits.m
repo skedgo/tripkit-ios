@@ -340,7 +340,7 @@
 - (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
 {
 #pragma unused(activityViewController, activityType)
-  return [NSMutableString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ActivityIndication", @"TripKit", [TKTripKit bundle], "Indication of an activity"), [self.service shortIdentifier], [SGStyleManager timeString:self.time forTimeZone:self.timeZone], [self.stop name]];
+  return [NSMutableString stringWithFormat:NSLocalizedStringFromTableInBundle(@"I'll take a %@ at %@ from %@.", @"TripKit", [TKTripKit bundle], "Indication of an activity. (old key: ActivityIndication)"), [self.service shortIdentifier], [SGStyleManager timeString:self.time forTimeZone:self.timeZone], [self.stop name]];
 }
 
 #pragma mark - Helpers

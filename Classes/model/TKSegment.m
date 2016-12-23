@@ -1012,7 +1012,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
 #pragma unused(activityViewController, activityType)
   if (self.order == TKSegmentOrderingEnd) {
-      NSString *messageFormat = NSLocalizedStringFromTableInBundle(@"MessageArrivalTime", @"TripKit", [TKTripKit bundle], @"ArrivalTime");
+      NSString *messageFormat = NSLocalizedStringFromTableInBundle(@"I'll arrive at %@ at %@", @"TripKit", [TKTripKit bundle], @"First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime)");
       NSString *message = [NSString stringWithFormat:messageFormat, [self.trip.request.toLocation title], [SGStyleManager timeString:self.arrivalTime forTimeZone:self.timeZone]];
       return message;
   } else {
@@ -1166,7 +1166,7 @@ NSString *const UninitializedString =  @"UninitializedString";
     BOOL prepend = range.location > 0 && [string characterAtIndex:range.location - 1] != '\n';
     NSString *replacement;
     if (prepend) {
-      replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"DepartureTime", @"TripKit", [TKTripKit bundle], "Time of the bus departure"), timeString];
+      replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"at %@", @"TripKit", [TKTripKit bundle], "Time of the bus departure. (old key: DepartureTime)"), timeString];
       replacement = [NSString stringWithFormat:@" %@", replacement];
     } else {
       replacement = timeString;
@@ -1263,17 +1263,17 @@ NSString *const UninitializedString =  @"UninitializedString";
 		} else if ([self isStationary] || [self isContinuation]) {
 			NSString *departure = [self departureLocation];
 			if (departure.length > 0) {
-				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"PrimaryLocationStationary", @"TripKit", [TKTripKit bundle], "'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park"), departure];
+				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"At %@", @"TripKit", [TKTripKit bundle], "'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary)"), departure];
 			}
 		} else if ([self isPublicTransport]) {
 			NSString *departure = [self departureLocation];
 			if (departure.length > 0) {
-				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"PrimaryLocationStart", @"TripKit", [TKTripKit bundle], "Departure Location"), departure];
+				_primaryLocationString = [Loc From:departure];
 			}
 		} else {
 			NSString *destination = [self arrivalLocation:YES];
 			if (destination.length > 0) {
-				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"PrimaryLocationEnd", @"TripKit", [TKTripKit bundle], "Arrival Location"), destination];
+        _primaryLocationString = [Loc To: destination];
 			}
 		}
 
@@ -1301,13 +1301,13 @@ NSString *const UninitializedString =  @"UninitializedString";
           NSString *time = [SGStyleManager timeString:self.departureTime
                                           forTimeZone:self.timeZone];
           if (name) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"LeaveLocationTime", @"TripKit", [TKTripKit bundle], "The place of departure with time"), name, time];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@ at %@", @"TripKit", [TKTripKit bundle], "The place of departure with time. (old key: LeaveLocationTime)"), name, time];
           } else {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"LeaveTime", @"TripKit", [TKTripKit bundle], "Time departure"), time];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave at %@", @"TripKit", [TKTripKit bundle], "Time departure. (old key: LeaveTime)"), time];
           }
         } else {
           if (name) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"LeaveLocation", @"TripKit", [TKTripKit bundle], "The place of departure"), name];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@", @"TripKit", [TKTripKit bundle], "The place of departure. (old key: LeaveLocation)"), name];
           } else {
             newString = NSLocalizedStringFromTableInBundle(@"Leave", @"TripKit", [TKTripKit bundle], @"Single line instruction to leave");
           }
@@ -1335,16 +1335,12 @@ NSString *const UninitializedString =  @"UninitializedString";
           NSString *time = [SGStyleManager timeString:self.arrivalTime
                                           forTimeZone:self.timeZone];
           if (name.length > 0) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalLocationTime", @"TripKit", [TKTripKit bundle], "The place of arrival with time"), name, time];
+            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Arrive at %@ at %@", @"TripKit", [TKTripKit bundle], "The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime)"), name, time];
           } else {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalTime", @"TripKit", [TKTripKit bundle], "'Arrive at %@', where '%@' will be replace with the arrival time."), time];
+            newString = [Loc ArriveAtDate:time];
           }
         } else {
-          if (name.length > 0) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"ArrivalLocation", @"TripKit", [TKTripKit bundle], "The place of arrival"), name];
-          } else {
-            newString = NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Single line instruction to arrive");
-          }
+          newString = NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Single line instruction to arrive");
         }
         break;
       }

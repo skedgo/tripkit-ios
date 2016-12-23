@@ -268,7 +268,7 @@
     if (nameRange.location != NSNotFound) {
       NSString *name = [action substringFromIndex:nameRange.location + nameRange.length];
       name = [name stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-      return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"CallTaxiFormat", @"TripKit", [TKTripKit bundle], "Action title for calling provider of %name"), name];
+      return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Call %@", @"TripKit", [TKTripKit bundle], "Action title for calling provider of name. (old key: CallTaxiFormat)"), name];
     } else {
       return NSLocalizedStringFromTableInBundle(@"Call", @"TripKit", [TKTripKit bundle], nil);
     }

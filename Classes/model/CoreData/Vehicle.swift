@@ -119,10 +119,10 @@ extension Vehicle : MKAnnotation {
     
     let duration = Date.durationString(forSeconds: -seconds)
     if let label = self.label, (1...20).contains(label.utf16.count) {
-      let format = NSLocalizedString("VehicleCalledUpdated", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle 'x' updated")
+      let format = NSLocalizedString("Vehicle %@ updated %@ ago", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle 'x' updated. (old key: VehicleCalledUpdated)")
       return String(format: format, label, duration)
     } else {
-      let format = NSLocalizedString("VehicleUpdated", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle updated")
+      let format = NSLocalizedString("Updated %@ ago", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle updated. (old key: VehicleUpdated)")
       return String(format: format, duration)
     }
   }

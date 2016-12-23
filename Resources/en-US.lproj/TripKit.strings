@@ -25,16 +25,6 @@
 /* Arrival time sorter title */
 "Arrival" = "Arrival";
 
-/* The place of arrival */
-"ArrivalLocation" = "Arrive at %@";
-
-/* The place of arrival with time */
-"ArrivalLocationTime" = "Arrive at %@ at %@";
-
-/* Arrival %time.
-   Time arrival */
-"ArrivalTime" = "Arrive at %@";
-
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
 "Arrive" = "Arrive";
@@ -43,7 +33,7 @@
 "Call" = "Call";
 
 /* Action title for calling provider of %name */
-"CallTaxiFormat" = "Call %@";
+"" = "Call %@";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Could not find transit stop.";
@@ -115,17 +105,8 @@
 /* No comment provided by engineer. */
 "Open Uber" = "Open Uber";
 
-/* Arrival Location */
-"PrimaryLocationEnd" = "To %@";
-
-/* Departure Location */
-"PrimaryLocationStart" = "From %@";
-
 /* Favorite trip 'to' title */
 "To" = "To";
-
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "At %@";
 
 /* No comment provided by engineer. */
 "Real-time" = "Real-time";

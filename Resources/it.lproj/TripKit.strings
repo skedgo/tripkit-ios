@@ -16,24 +16,11 @@
 /* No comment provided by engineer. */
 "1 stop" = "Una fermata";
 
-/* Indication of an activity */
-"ActivityIndication" = "Prendo il %@ alle %@ da %@.";
-
 /* apple maps directions action */
 "Apple Maps" = "Mappe di Apple";
 
 /* Arrival time sorter title */
 "Arrival" = "Arrivo";
-
-/* The place of arrival */
-"ArrivalLocation" = "Arriva a %@";
-
-/* The place of arrival with time */
-"ArrivalLocationTime" = "Arriva a %@ alle %@";
-
-/* Arrival %time.
-   Time arrival */
-"ArrivalTime" = "Arriva alle %@";
 
 /* Prefix for selected 'arrive by' time
    Single line instruction to arrive */
@@ -41,9 +28,6 @@
 
 /* No comment provided by engineer. */
 "Call" = "Chiama";
-
-/* Action title for calling provider of %name */
-"CallTaxiFormat" = "Chiama %@";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Could not find transit stop.";
@@ -53,9 +37,6 @@
 
 /* Departure time sorter title */
 "Departure" = "Partenza";
-
-/* Time of the bus departure */
-"DepartureTime" = "alle %@";
 
 /* Destination of the bus */
 "Direction" = "Direzione: %@";
@@ -91,20 +72,8 @@
 /* No comment provided by engineer. */
 "Leave now" = "Parti adesso";
 
-/* The place of departure */
-"LeaveLocation" = "Parte da %@";
-
-/* The place of departure with time */
-"LeaveLocationTime" = "Parte da %@ alle %@";
-
-/* Time departure */
-"LeaveTime" = "Parte alle %@";
-
 /* No comment provided by engineer. */
 "Live traffic" = "traffico in tempo reale";
-
-/* ArrivalTime */
-"MessageArrivalTime" = "Arrivo a %@ alle %@.";
 
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "On time";
@@ -114,18 +83,6 @@
 
 /* No comment provided by engineer. */
 "Open Uber" = "Apri Uber";
-
-/* Arrival Location */
-"PrimaryLocationEnd" = "A %@";
-
-/* Departure Location */
-"PrimaryLocationStart" = "Da %@";
-
-/* Favorite trip 'to' title */
-"To" = "To";
-
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park */
-"PrimaryLocationStationary" = "A %@";
 
 /* No comment provided by engineer. */
 "Real-time" = "Tempo reale";
@@ -139,15 +96,6 @@
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld Fermate";
 
-/* From %time1 to %time2 */
-"TimeFromToShortFormat" = "%@ a %@";
-
 /* No comment provided by engineer. */
 "Trip" = "Viaggio";
-
-/* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "Veicolo %@ aggiornato dal %@ ";
-
-/* Vehicle updated */
-"VehicleUpdated" = "Aggiornato dal %@ ";
 
