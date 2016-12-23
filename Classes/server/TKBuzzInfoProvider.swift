@@ -141,7 +141,9 @@ extension SVKServer {
       region: region,
       success: { _, response in
         guard let json = response as? [String: Any] else {
-          preconditionFailure() // FIXME
+          SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters)" }
+          completion(nil)
+          return
         }
         do {
           let result: E
@@ -179,7 +181,9 @@ extension SVKServer {
       region: region,
       success: { _, response in
         guard let json = response as? [String: Any] else {
-          preconditionFailure() // FIXME
+          SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters)" }
+          completion([])
+          return
         }
         do {
           let result: [E]
