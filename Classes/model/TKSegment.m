@@ -1124,7 +1124,10 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 	range = [string rangeOfString:@"<DIRECTION>"];
   if (range.location != NSNotFound) {
-    NSString *replacement = self.service.direction ? [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Direction", @"TripKit", [TKTripKit bundle], "Destination of the bus"), self.service.direction] : @"";
+    NSString *replacement = @"";
+    if (self.service.direction) {
+      replacement = [NSString stringWithFormat:@"%@: %@", NSLocalizedStringFromTableInBundle(@"Direction", @"TripKit", [TKTripKit bundle], "Destination of the bus"), self.service.direction];
+    }
     [string replaceCharactersInRange:range withString:replacement];
 	}
 
@@ -1184,7 +1187,7 @@ NSString *const UninitializedString =  @"UninitializedString";
     else {
       BOOL prepend = title && range.location > 0;
       if (prepend) {
-        replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Duration", @"TripKit", [TKTripKit bundle], "Walking time"), durationString];
+        replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"for %@", @"TripKit", [TKTripKit bundle], "Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'."), durationString];
         replacement = [NSString stringWithFormat:@" %@", replacement];
       } else {
         replacement = durationString;

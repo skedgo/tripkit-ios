@@ -78,7 +78,7 @@
 "Direction" = "Suunta";
 
 /* Walking time */
-"Duration" = "Kesto %@";
+"for %@" = "Kesto %@";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Tyhjä";

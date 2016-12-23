@@ -60,10 +60,10 @@
 "Departure" = "Partida";
 
 /* Destination of the bus */
-"Direction" = "Dirección: %@";
+"Direction" = "Dirección";
 
 /* Walking time */
-"Duration" = "por %@";
+"for %@" = "por %@";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Vacío";

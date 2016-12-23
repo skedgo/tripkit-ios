@@ -40,10 +40,10 @@
 "Departure" = "Départ";
 
 /* Destination of the bus */
-"Direction" = "Direction : %@";
+"Direction" = "Direction";
 
 /* Walking time */
-"Duration" = "pendant %@";
+"for %@" = "pendant %@";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Get directions";

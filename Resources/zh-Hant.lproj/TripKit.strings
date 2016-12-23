@@ -75,10 +75,10 @@
 "Departure" = "離站";
 
 /* Destination of the bus */
-"Direction" = "方向: %@";
+"Direction" = "方向";
 
 /* Walking time */
-"Duration" = "%@";
+"for %@" = "%@";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "空車";

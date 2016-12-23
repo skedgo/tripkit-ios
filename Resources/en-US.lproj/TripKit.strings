@@ -32,9 +32,6 @@
 /* No comment provided by engineer. */
 "Call" = "Call";
 
-/* Action title for calling provider of %name */
-"" = "Call %@";
-
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Could not find transit stop.";
 
@@ -48,10 +45,10 @@
 "DepartureTime" = "at %@";
 
 /* Destination of the bus */
-"Direction" = "Direction: %@";
+"Direction" = "Direction";
 
 /* Walking time */
-"Duration" = "for %@";
+"for %@" = "for %@";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Get directions";

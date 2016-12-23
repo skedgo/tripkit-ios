@@ -60,10 +60,10 @@
 "Departure" = "Vertrek";
 
 /* Destination of the bus */
-"Direction" = "Eindpunt: %@";
+"Direction" = "Eindpunt";
 
 /* Walking time */
-"Duration" = "voor %@";
+"for %@" = "voor %@";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Leeg";
