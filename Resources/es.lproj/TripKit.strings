@@ -13,6 +13,9 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ bicicleta-amigable";
 
+/* From %time1 to %time2. (old key: TimeFromToShortFormat) */
+"%@ to %@" = "%@ hasta %@";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ sin tráfico";
 
@@ -35,8 +38,17 @@
    Single line instruction to arrive */
 "Arrive" = "Llegar";
 
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "Llegada a las %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "Llegada a %@ a las %@";
+
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Llegada en";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+"At %@" = "En %@";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "Reservar con FlitWays";
@@ -50,6 +62,9 @@
 /* No comment provided by engineer. */
 "Call" = "Llamar";
 
+/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+"Call %@" = "Llamar a %@";
+
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "Conéctate a Internet para obtener viajes";
 
@@ -62,14 +77,14 @@
 /* Destination of the bus */
 "Direction" = "Dirección";
 
-/* Walking time */
-"for %@" = "por %@";
-
 /* As in 'this bus/train is empty' */
 "Empty" = "Vacío";
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Pocos asientos disponibles";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "Desde %@";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Completo";
@@ -89,6 +104,12 @@
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "Voy a llegar a %@ a las %@.";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "Voy a tomar un %@ a las %@ desde %@.";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Mientras tanto, sigamos explorando %@ y disfrutando de tus viajes";
 
@@ -98,6 +119,15 @@
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
 "Leave" = "Partir";
+
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "Salir de %@";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "Salir de %@ a las %@";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "Salir a las %@";
 
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "Partida en";
@@ -135,8 +165,14 @@
 /* No comment provided by engineer. */
 "Open Ola" = "Abrir Ola";
 
+/* Title for opening hours */
+"Opening Hours" = "Opening Hours";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Planifica un viaje y se mostrará aquí.";
+
+/* No comment provided by engineer. */
+"Public holiday" = "Public holiday";
 
 /* No comment provided by engineer. */
 "Real-time" = "Tiempo Real";
@@ -156,8 +192,17 @@
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld paradas";
 
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "Hacia %@";
+
 /* Title for a trip */
 "Trip" = "Viaje";
+
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "Actualizado hace %@";
+
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "Vehículo %@ actualizado hace %@";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "Estamos ocupados obteniendo tu próximo viaje. Por favor espera...";
@@ -167,6 +212,12 @@
 
 /* No comment provided by engineer. */
 "Wheelchair accessible" = "Accesible en silla de ruedas";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "a las %@";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "por %@";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch un Taxi";
