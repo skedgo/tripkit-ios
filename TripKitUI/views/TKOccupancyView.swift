@@ -69,20 +69,24 @@ public class TKOccupancyView: UIView {
     self.label = label
     
     if #available(iOSApplicationExtension 9.0, *) {
+      let height = icon.heightAnchor.constraint(equalToConstant: 16)
+      height.priority = 999
+      height.isActive = true
+      
       icon.widthAnchor.constraint(equalToConstant: 16).isActive = true
-      icon.heightAnchor.constraint(equalToConstant: 16).isActive = true
       icon.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
       icon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-      icon.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
       
       label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 4).isActive = true
-      label.centerYAnchor.constraint(equalTo: icon.centerYAnchor).isActive = true
+      label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
       label.heightAnchor.constraint(equalTo: icon.heightAnchor).isActive = true
+      label.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
       trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 8).isActive = true
     } else {
       // Constraints on icon
       let widthConstraint = NSLayoutConstraint(item: icon, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16)
       let heightConstraint = NSLayoutConstraint(item: icon, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16)
+      heightConstraint.priority = 999
       let iconLeadingSpace = NSLayoutConstraint(item: icon, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
       let iconCenterY = NSLayoutConstraint(item: icon, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
       let topSpace = NSLayoutConstraint(item: icon, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)
