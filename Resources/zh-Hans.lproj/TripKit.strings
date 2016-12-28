@@ -13,6 +13,9 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ 适宜骑自行车";
 
+/* From %time1 to %time2. (old key: TimeFromToShortFormat) */
+"%@ to %@" = "%@ ～ %@";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ 路况良好";
 
@@ -35,8 +38,17 @@
    Single line instruction to arrive */
 "Arrive" = "到达";
 
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "在%@到达";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "在%2$@到达%1$@";
+
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
-"Arrive in" = "Arrive in";
+"Arrive in" = "到达";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+"At %@" = "时刻 %@";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "从FlitWays预定";
@@ -50,6 +62,9 @@
 /* No comment provided by engineer. */
 "Call" = "叫计程车";
 
+/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+"Call %@" = "联系%@";
+
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "连接到网络以便获取行程";
 
@@ -62,14 +77,14 @@
 /* Destination of the bus */
 "Direction" = "方向";
 
-/* Walking time */
-"for %@" = "%@";
-
 /* As in 'this bus/train is empty' */
-"Empty" = "Empty";
+"Empty" = "空的";
 
 /* As in 'this bus/train has few seats available' */
-"Few seats available" = "Few seats available";
+"Few seats available" = "几个座位空余";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "出发地: %@";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "完全信任";
@@ -89,24 +104,39 @@
 /* google maps directions action */
 "Google Maps" = "谷歌地图";
 
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "我将于%2$@到达%1$@.";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "我将于%2$@从%3$@搭乘%1$@.";
+
 /* %@ is replaced with app name */
-"In the meantime, let's keep exploring %@ and enjoy your trips" = "In the meantime, let's keep exploring %@ and enjoy your trips";
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "与此同时，让我们一起探索%@，享受你的旅行吧";
 
 /* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "In the meantime, let's keep exploring and enjoy your trips";
+"In the meantime, let's keep exploring and enjoy your trips" = "与此同时，让我们一起探索并享受你的旅行吧";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
 "Leave" = "出发";
 
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "离开%@";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "在%2$@离开%1$@";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "于%@离开";
+
 /* Title for when to depart. Countdown to departure will be displayed below. */
-"Leave in" = "Leave in";
+"Leave in" = "离开";
 
 /* No comment provided by engineer. */
 "Leave now" = "现在出发";
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
-"Limited standing room only" = "Limited standing room only";
+"Limited standing room only" = "只有有限的站立区域";
 
 /* No comment provided by engineer. */
 "Live traffic" = "实时交通";
@@ -115,7 +145,7 @@
 "Loading..." = "加载中...";
 
 /* As in 'this bus/train has many seats available' */
-"Many seats available" = "Many seats available";
+"Many seats available" = "很多座位空余";
 
 /* Title of button to get more details about an alert */
 "More info" = "增加亮度";
@@ -124,7 +154,7 @@
 "No planned trips" = "没有规划好的行程";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
-"Not accepting passengers" = "Not accepting passengers";
+"Not accepting passengers" = "不载客";
 
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "准点";
@@ -135,8 +165,14 @@
 /* No comment provided by engineer. */
 "Open Ola" = "打开Ola";
 
+/* Title for opening hours */
+"Opening Hours" = "开放时间";
+
 /* No comment provided by engineer. */
-"Plan a trip and it will show up here." = "Plan a trip and it will show up here.";
+"Plan a trip and it will show up here." = "规划一次旅行，它会显示在这里";
+
+/* No comment provided by engineer. */
+"Public holiday" = "公共假期";
 
 /* No comment provided by engineer. */
 "Real-time" = "即时";
@@ -151,22 +187,37 @@
 "Show website" = "开启网站";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
-"Standing room only" = "Standing room only";
+"Standing room only" = "仅有站立的空间";
 
 /* Number of stops before you get off a vehicle */
 "Stops" = "%ld站";
 
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "目的地: %@";
+
 /* Title for a trip */
 "Trip" = "旅程";
 
-/* No comment provided by engineer. */
-"We are busy getting your upcoming trip. Please wait..." = "We are busy getting your upcoming trip. Please wait...";
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "%@前更新";
+
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "车辆%@的位置在%@前更新";
 
 /* No comment provided by engineer. */
-"We'll keep you updated with the latest transit alerts here" = "We'll keep you updated with the latest transit alerts here";
+"We are busy getting your upcoming trip. Please wait..." = "我们正忙着做你即将到来的旅行。请稍候。。。";
+
+/* No comment provided by engineer. */
+"We'll keep you updated with the latest transit alerts here" = "我们会在这里更新关于最新交通信息的提醒";
 
 /* No comment provided by engineer. */
 "Wheelchair accessible" = "轮椅可通行";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "于%@";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "%@";
 
 /* goCatch action */
 "goCatch a Taxi" = "使用goCatch叫计程车";
