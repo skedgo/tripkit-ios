@@ -35,7 +35,7 @@ public class TKAgendaWidgetInfoView: UIView {
   
   public func configureForNoUpcomingTrip() {
     imageView.image = UIImage(named: "icon-agenda", in: bundle(), compatibleWith: nil)
-    titleLabel.text = NSLocalizedString("No planned trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indicating no trips have been planned within 24 hrs")
+    titleLabel.text = Loc.NoPlannedTrips
     subtitleLabel.text = NSLocalizedString("Plan a trip and it will show up here.", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
   }
   

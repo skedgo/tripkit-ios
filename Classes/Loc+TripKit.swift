@@ -15,6 +15,10 @@ extension Loc {
   public static var Trip: String {
     return NSLocalizedString("Trip", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for a trip")
   }
+
+  public static var NoPlannedTrips: String {
+    return NSLocalizedString("No planned trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indicating no trips have been planned within the next 24 hrs")
+  }
   
   public static var OpeningHours: String {
     return NSLocalizedString("Opening Hours", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for opening hours")
@@ -53,7 +57,7 @@ extension Loc {
     case 1: return NSLocalizedString("1 stop", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Number of stops before you get off a stop, if there's just 1 stop.")
       
     default:
-      let format = NSLocalizedString("%@ stops", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Number of stops before you get off a vehicle, e.g., '10 stops'. (old key: Stops)")
+      let format = NSLocalizedString("%@ stops", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops)")
       return String(format: format, NSNumber(value: count))
     }
   }
