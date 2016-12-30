@@ -85,7 +85,7 @@
 "Show website" = "Show website";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld stops";
+"%@ stops" = "%@ stops";
 
 /* No comment provided by engineer. */
 "Trip" = "Trip";

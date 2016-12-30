@@ -161,7 +161,7 @@
 "Standing room only" = "Alleen staruimte beschikbaar";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld stations";
+"%@ stops" = "%@ stations";
 
 /* From %time1 to %time2 */
 "TimeFromToShortFormat" = "%@ tot %@";

@@ -193,7 +193,7 @@
 "Standing room only" = "Nur noch Stehplätze";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld Stops";
+"%@ stops" = "%@ Stops";
 
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "Nach %@";

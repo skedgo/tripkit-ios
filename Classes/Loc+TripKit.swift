@@ -45,4 +45,18 @@ extension Loc {
     return String(format: format, to)
   }
   
+  @objc(Stops:)
+  public static func Stops(_ count: Int) -> String {
+    switch count {
+    case 0: return ""
+      
+    case 1: return NSLocalizedString("1 stop", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Number of stops before you get off a stop, if there's just 1 stop.")
+      
+    default:
+      let format = NSLocalizedString("%@ stops", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Number of stops before you get off a vehicle, e.g., '10 stops'. (old key: Stops)")
+      return String(format: format, NSNumber(value: count))
+    }
+  }
+
+  
 }

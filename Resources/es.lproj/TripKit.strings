@@ -190,7 +190,7 @@
 "Standing room only" = "Espacio de pie solamente";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld paradas";
+"%@ stops" = "%@ paradas";
 
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "Hacia %@";

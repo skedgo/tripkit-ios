@@ -189,15 +189,11 @@
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "설자리만 남아있습니다.";
 
-/* Number of stops before you get off a vehicle */
-"Stops" = "정거장";
-
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "%@에";
 
 /* Title for a trip */
-"Trip" = "
-경로";
+"Trip" = "경로";
 
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "%s 전에 업데이트 됨";

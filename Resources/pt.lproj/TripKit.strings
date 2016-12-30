@@ -154,7 +154,7 @@
 "Standing room only" = "Sala de pé só";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld paradas";
+"%@ stops" = "%@ paradas";
 
 /* Title for a trip */
 "Trip" = "Trajeto";

@@ -1150,15 +1150,8 @@ NSString *const UninitializedString =  @"UninitializedString";
 
   range = [string rangeOfString:@"<STOPS>"];
   if (range.location != NSNotFound) {
-    NSString *replacement;
     NSInteger visited = [self numberOfStopsIncludingContinuation];
-    if (visited <= 0) {
-      replacement = @"";
-    } else if (visited == 1) {
-      replacement = NSLocalizedStringFromTableInBundle(@"1 stop", @"TripKit", [TKTripKit bundle], nil);
-    } else {
-      replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Stops", @"TripKit", [TKTripKit bundle], "Number of stops before you get off a vehicle"), (long)visited];
-    }
+    NSString *replacement = [Loc Stops:visited];
     [string replaceCharactersInRange:range withString:replacement];
   }
   

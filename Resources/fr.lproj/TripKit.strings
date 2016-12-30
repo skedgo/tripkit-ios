@@ -98,7 +98,7 @@
 "Show website" = "Ouvrir le site Web";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld arrêts";
+"%@ stops" = "%@ arrêts";
 
 /* No comment provided by engineer. */
 "Trip" = "Trajet";

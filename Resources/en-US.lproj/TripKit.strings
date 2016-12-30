@@ -115,7 +115,7 @@
 "Show website" = "Show website";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld stops";
+"%@ stops" = "%@ stops";
 
 /* From %time1 to %time2 */
 "TimeFromToShortFormat" = "%@ to %@";

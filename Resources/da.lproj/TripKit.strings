@@ -190,7 +190,7 @@
 "Standing room only" = "Kun Ståpladser";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "Stopper";
+"%@ stops" = "%@ stopper";
 
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "To %@";

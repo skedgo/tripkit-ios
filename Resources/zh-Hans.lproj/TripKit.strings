@@ -190,7 +190,7 @@
 "Standing room only" = "仅有站立的空间";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld站";
+"%@ stops" = "%@站";
 
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "目的地: %@";

@@ -193,7 +193,7 @@
 "Standing room only" = "Vain seisomapaikkoja";
 
 /* Number of stops before you get off a vehicle */
-"Stops" = "%ld pysäkki(ä)";
+"%@ stops" = "%@ pysäkki(ä)";
 
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "Kohteeseen %@";
