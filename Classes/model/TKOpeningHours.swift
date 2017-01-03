@@ -194,19 +194,6 @@ public struct TKOpeningHours : Unmarshaling {
 }
 
 fileprivate enum TKOpeningHoursParserError: Error {
-  case badTimeZoneIdentifier(String)
   case badTimeOfDay(String)
-}
-
-extension TimeZone: ValueType {
-  public static func value(from object: Any) throws -> TimeZone {
-    guard let identifier = object as? String else {
-      throw MarshalError.typeMismatch(expected: String.self, actual: type(of: object))
-    }
-    guard let timeZone = TimeZone(identifier: identifier) else {
-      throw TKOpeningHoursParserError.badTimeZoneIdentifier(identifier)
-    }
-    return timeZone
-  }
 }
 
