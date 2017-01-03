@@ -203,7 +203,7 @@
   [regions unionSet:[manager localRegionsForCoordinate:self.toLocation.coordinate]];
   
   if (regions.count >= 2) {
-    [regions addObject:[SVKInternationalRegion sharedInstance]];
+    [regions addObject:[SVKInternationalRegion shared]];
   }
   return regions;
 }

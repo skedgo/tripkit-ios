@@ -225,6 +225,3 @@ extension MKAnnotation {
   
 }
 
-extension CLLocationCoordinate2D {
-  public var isValid: Bool { return CLLocationCoordinate2DIsValid(self) }
-}
