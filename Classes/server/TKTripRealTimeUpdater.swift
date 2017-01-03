@@ -27,7 +27,9 @@ public class TKTripRealTimeUpdater {
         return enabled && trip.managedObjectContext != nil && trip.wantsRealTimeUpdates()
       }
       .map { _ in }
-      .subscribe(onNext: update)
+      .subscribe(onNext: { [unowned self] in
+        self.update()
+      })
       .addDisposableTo(disposeBag)
   }
   
