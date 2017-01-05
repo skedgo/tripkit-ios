@@ -8,6 +8,8 @@
 
 #import "TripRequest.h"
 
+@import SGCoreKit;
+
 #import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
 
@@ -266,11 +268,11 @@
   for (TripGroup *group in allGroups) {
     NSSet *groupModeIdentifiers = [group usedModeIdentifiers];
     
-    if ([groupModeIdentifiers intersectsSet:hidden]) {
+    if ([STKModeHelper modes:hidden contain:groupModeIdentifiers]) {
       // if any mode is hidden, hide the whole group
       group.visibility = TripGroupVisibilityHidden;
       
-    } else if ([groupModeIdentifiers intersectsSet:minimized]) {
+    } else if ([STKModeHelper modes:minimized contain:groupModeIdentifiers]) {
       id key = groupModeIdentifiers;
       NSMutableArray *groups = [minimizedModeIdentifierSetToTripGroups objectForKey:key];
       if (! groups) {
