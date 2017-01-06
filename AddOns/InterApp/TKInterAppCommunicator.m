@@ -286,35 +286,35 @@
 
 + (void)performExternalAction:(NSString *)action
                        titled:(NSString *)title
-                   forSegment:(TKSegment *)segment
+                   forSegment:(nullable TKSegment *)segment
             forViewController:(UIViewController * __nonnull)controller
        currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
                openURLHandler:(nullable void (^)(NSURL *url, NSString * __nullable title))openURLHandler
              openStoreHandler:(nullable void (^)(NSNumber *appID))openStoreHandler
 {
-  if ([action isEqualToString:@"gocatch"]) {
+  if ([action isEqualToString:@"gocatch"] && segment) {
     [self launchGoCatchForSegment:segment
                  openStoreHandler:openStoreHandler];
     
-  } else if ([action isEqualToString:@"uber"]) {
+  } else if ([action isEqualToString:@"uber"] && segment) {
     [self launchUberForSegment:segment
         currentLocationHandler:currentLocationHandler
                 openURLHandler:openURLHandler];
 
-  } else if ([action isEqualToString:@"ola"]) {
+  } else if ([action isEqualToString:@"ola"] && segment) {
     [self launchOlaForSegment:segment
              openStoreHandler:openStoreHandler];
     
-  } else if ([action isEqualToString:@"ingogo"]) {
+  } else if ([action isEqualToString:@"ingogo"] && segment) {
     [self launchIngogoForSegment:segment
                 openStoreHandler:openStoreHandler];
     
-  } else if ([action hasPrefix:@"lyft"]) { // also lyft_line, etc.
+  } else if ([action hasPrefix:@"lyft"] && segment) { // also lyft_line, etc.
     [self launchLyftForSegment:segment
                       rideType:action
               openStoreHandler:openStoreHandler];
     
-  } else if ([action isEqualToString:@"flitways"]) {
+  } else if ([action isEqualToString:@"flitways"] && segment) {
     [self launchFlitWaysForSegment:segment
                     openURLHandler:openURLHandler];
     

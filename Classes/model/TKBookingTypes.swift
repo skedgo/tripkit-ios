@@ -11,6 +11,7 @@ import Foundation
 import Marshal
 import SGCoreKit
 
+/// Case-less enum just to create a namespace
 public enum TKBooking {
   
   public struct Detail : Unmarshaling {
@@ -99,10 +100,10 @@ public enum TKBooking {
     public let actions: [Action]
     
     public init(object: MarshaledObject) throws {
-      status    = try  object.value(for: "status")
-      provider  = try? object.value(for: "provider")
-      vehicle   = try? object.value(for: "vehicle")
-      purchase  = try? object.value(for: "purchase")
+      status    =  try  object.value(for: "status")
+      provider  =  try? object.value(for: "provider")
+      vehicle   =  try? object.value(for: "vehicle")
+      purchase  =  try? object.value(for: "purchase")
       actions   = (try? object.value(for: "actions")) ?? []
     }
   }

@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)performExternalAction:(NSString *)action
                        titled:(NSString *)title
-                   forSegment:(TKSegment *)segment
+                   forSegment:(nullable TKSegment *)segment
             forViewController:(UIViewController * __nonnull)controller
        currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
                openURLHandler:(nullable void (^)(NSURL *url, NSString * __nullable title))openURLHandler
