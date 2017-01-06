@@ -64,8 +64,8 @@ completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion
            aborter:(nullable BOOL(^)(NSURL *URL))aborter
         completion:(void(^)(NSURL *URL, Trip * __nullable trip, NSError * __nullable error))completion;
 
-+ (NSString *)urlForRoutingRequest:(TripRequest *)tripRequest
-               withModeIdentifiers:(nullable NSSet *)modeIdentifiers;
++ (nullable NSString *)urlForRoutingRequest:(TripRequest *)tripRequest
+                        withModeIdentifiers:(nullable NSSet *)modeIdentifiers;
 
 @end
 

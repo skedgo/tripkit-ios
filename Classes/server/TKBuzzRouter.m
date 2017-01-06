@@ -400,6 +400,9 @@
   TKBuzzRouter *router = [[TKBuzzRouter alloc] init];
   NSDictionary *paras = [router createRequestParametersForRequest:tripRequest andModeIdentifiers:modeIdentifiers bestOnly:NO withASAPTime:nil];
   NSURL *baseUrl = [[SVKServer sharedInstance] currentBaseURL];
+  if (!baseUrl) {
+    return nil;
+  }
   NSURL *fullUrl = [baseUrl URLByAppendingPathComponent:@"routing.json"];
   NSURLRequest *request = [SVKServer GETRequestWithSkedGoHTTPHeadersForURL:fullUrl paras:paras];
   return [[request URL] absoluteString];
