@@ -13,11 +13,13 @@ import Marshal
 public struct TKCompanyInfo : Unmarshaling {
   public let name: String
   public let website: URL?
+  public let phone: String?
   public let remoteIcon: String?
   
   public init(object: MarshaledObject) throws {
     name        = try  object.value(for: "name")
     website     = try? object.value(for: "website")
+    phone       = try? object.value(for: "phone")
     remoteIcon  = try? object.value(for: "remoteIcon")
   }
 }
