@@ -9,8 +9,9 @@
 import Foundation
 
 import Marshal
-import SGCoreKit
+import RxSwift
 
+import SGCoreKit
 
 public protocol TKRealTimeLocation {
   
@@ -21,58 +22,106 @@ public protocol TKRealTimeLocation {
 
 public class TKBikePodLocation: STKModeCoordinate, TKRealTimeLocation {
   
-  public let bikePod: TKBikePodInfo
+  fileprivate let rx_bikePodVar: Variable<TKBikePodInfo>
+  
+  /// Detailed bike-pod related information.
+  ///
+  /// - Note: Can change if real-time data is available. Recommended to use
+  ///         `rx.bikePod` instead.
+  public var bikePod: TKBikePodInfo {
+    get { return rx_bikePodVar.value }
+    set { rx_bikePodVar.value = newValue }
+  }
   
   public required init(object: MarshaledObject) throws {
-    bikePod = try object.value(for: "bikePod")
+    let info: TKBikePodInfo = try object.value(for: "bikePod")
+    rx_bikePodVar = Variable(info)
     try super.init(object: object)
   }
   
   public required init?(coder aDecoder: NSCoder) {
     guard let info = aDecoder.decodeObject(forKey: "bikePod") as? TKBikePodInfo else { return nil }
-    bikePod = info
+    rx_bikePodVar = Variable(info)
     super.init(coder: aDecoder)
   }
   
   public var hasRealTime: Bool { return bikePod.hasRealTime }
 }
 
+extension Reactive where Base : TKBikePodLocation {
+  public var bikePod: Observable<TKBikePodInfo> {
+    return base.rx_bikePodVar.asObservable()
+  }
+}
+
 
 public class TKCarPodLocation: STKModeCoordinate, TKRealTimeLocation {
   
-  public let carPod: TKCarPodInfo
+  fileprivate let rx_carPodVar: Variable<TKCarPodInfo>
+  
+  /// Detailed car-pod related information.
+  ///
+  /// - Note: Can change if real-time data is available. Recommended to use
+  ///         `rx.carPod` instead.
+  public var carPod: TKCarPodInfo {
+    get { return rx_carPodVar.value }
+    set { rx_carPodVar.value = newValue }
+  }
   
   public required init(object: MarshaledObject) throws {
-    carPod = try object.value(for: "carPod")
+    let info: TKCarPodInfo = try object.value(for: "carPod")
+    rx_carPodVar = Variable(info)
     try super.init(object: object)
   }
   
   public required init?(coder aDecoder: NSCoder) {
     guard let info = aDecoder.decodeObject(forKey: "carPod") as? TKCarPodInfo else { return nil }
-    carPod = info
+    rx_carPodVar = Variable(info)
     super.init(coder: aDecoder)
   }
   
   public var hasRealTime: Bool { return carPod.hasRealTime }
 }
 
+extension Reactive where Base : TKCarPodLocation {
+  public var carPod: Observable<TKCarPodInfo> {
+    return base.rx_carPodVar.asObservable()
+  }
+}
+
 
 public class TKCarParkLocation: STKModeCoordinate, TKRealTimeLocation {
   
-  public let carPark: TKCarParkInfo
+  fileprivate let rx_carParkVar: Variable<TKCarParkInfo>
+  
+  /// Detailed car-park related information.
+  ///
+  /// - Note: Can change if real-time data is available. Recommended to use
+  ///         `rx.carPark` instead.
+  public var carPark: TKCarParkInfo {
+    get { return rx_carParkVar.value }
+    set { rx_carParkVar.value = newValue }
+  }
   
   public required init(object: MarshaledObject) throws {
-    carPark = try object.value(for: "carPark")
+    let info: TKCarParkInfo = try object.value(for: "carPark")
+    rx_carParkVar = Variable(info)
     try super.init(object: object)
   }
-
+  
   public required init?(coder aDecoder: NSCoder) {
     guard let info = aDecoder.decodeObject(forKey: "carPark") as? TKCarParkInfo else { return nil }
-    carPark = info
+    rx_carParkVar = Variable(info)
     super.init(coder: aDecoder)
   }
 
   public var hasRealTime: Bool { return carPark.hasRealTime }
+}
+
+extension Reactive where Base : TKCarParkLocation {
+  public var carPark: Observable<TKCarParkInfo> {
+    return base.rx_carParkVar.asObservable()
+  }
 }
 
 
