@@ -30,16 +30,18 @@ public enum TKLocationRealTime {
     return SVKServer.sharedInstance().rx
       .requireRegion(location.coordinate)
       .flatMap { region -> Observable<TKLocationInfo> in
-        var paras: [String: Any] = [
-          "realtime" : true
-        ]
+        let paras: [String: Any]
         
         if let identifier = location.locationID {
-          paras["identifier"] = identifier
-          paras["region"]     = region.name
+          paras = [
+            "region": region.name,
+            "identifier": identifier,
+          ]
         } else {
-          paras["lat"] = location.coordinate.latitude
-          paras["lng"] = location.coordinate.longitude
+          paras = [
+            "lat": location.coordinate.latitude,
+            "lng": location.coordinate.longitude,
+          ]
         }
         
         return SVKServer.sharedInstance().rx
