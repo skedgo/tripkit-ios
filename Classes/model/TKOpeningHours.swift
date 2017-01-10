@@ -12,7 +12,7 @@ import Marshal
 
 
 /// Flexible representation of opening hours
-public struct TKOpeningHours : Unmarshaling {
+public struct TKOpeningHours : Unmarshaling, Marshaling {
   
   /// Time zone in which the opening hours are defined
   public let timeZone: TimeZone
@@ -22,13 +22,13 @@ public struct TKOpeningHours : Unmarshaling {
   
   /// Opening hours on a particular day of the week (with
   /// a special case for public holidays).
-  public struct Day: Unmarshaling {
+  public struct Day: Unmarshaling, Marshaling {
     
     public let day: DayOfWeek
     public let times: [Time]
     
     
-    public struct Time: Unmarshaling {
+    public struct Time: Unmarshaling, Marshaling {
       
       public let opens: TimeInterval
       public let closes: TimeInterval
@@ -39,8 +39,22 @@ public struct TKOpeningHours : Unmarshaling {
         closes  = try Time.time(from: object, key: "closes")
       }
       
+      public typealias MarshalType = [String: Any]
+      
+      public func marshaled() -> MarshalType {
+        return [
+          "opens": opens,
+          "closes": closes,
+        ]
+      }
       
       fileprivate static func time(from object: MarshaledObject, key: String) throws -> TimeInterval {
+        // TimeInterval (from marshaled)
+        if let interval: TimeInterval = try? object.value(for: key) {
+          return interval
+        }
+        
+        // HH:MM string (from backend)
         let string: String = try object.value(for: key)
         let split = string.components(separatedBy: ":")
         guard
@@ -114,6 +128,16 @@ public struct TKOpeningHours : Unmarshaling {
     }
     
     
+    public typealias MarshalType = [String: Any]
+    
+    public func marshaled() -> MarshalType {
+      return [
+        "name": day.rawValue,
+        "times": times.map { $0.marshaled() }
+      ]
+    }
+    
+    
     /// Checks if provided date is covered by this particular day
     ///
     /// - warning: This does not cover public holidays. If this
@@ -155,6 +179,16 @@ public struct TKOpeningHours : Unmarshaling {
   public init(object: MarshaledObject) throws {
     timeZone = try object.value(for: "timeZone")
     days     = try object.value(for: "days")
+  }
+  
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    return [
+      "timeZone": timeZone.identifier,
+      "days": days.map { $0.marshaled() },
+    ]
   }
   
   

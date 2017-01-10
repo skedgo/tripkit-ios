@@ -10,7 +10,7 @@ import Foundation
 
 import Marshal
 
-public struct TKBikePodInfo : Unmarshaling {
+public struct TKBikePodInfo : Unmarshaling, Marshaling {
   public let identifier: String
   public let operatorInfo: TKCompanyInfo
   public let inService: Bool
@@ -29,6 +29,23 @@ public struct TKBikePodInfo : Unmarshaling {
     source          = try? object.value(for: "source")
   }
   
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    var marshaled : MarshalType =  [
+      "identifier": identifier,
+      "operator": operatorInfo.marshaled(),
+      "inService": inService,
+    ]
+    
+    marshaled["availableBikes"] = availableBikes
+    marshaled["totalSpaces"] = totalSpaces
+    marshaled["lastUpdate"] = lastUpdate
+    marshaled["source"] = source?.marshaled()
+    return marshaled
+  }
+  
+  
   public var availableSpaces: Int? {
     guard let total = totalSpaces, let bikes = availableBikes else { return nil }
     return total - bikes
@@ -40,9 +57,9 @@ public struct TKBikePodInfo : Unmarshaling {
 }
 
 
-public struct TKCarPodInfo : Unmarshaling {
+public struct TKCarPodInfo : Unmarshaling, Marshaling {
   
-  public struct Vehicle : Unmarshaling {
+  public struct Vehicle : Unmarshaling, Marshaling {
     public let name: String?
     public let description: String?
     public let licensePlate: String?
@@ -58,6 +75,20 @@ public struct TKCarPodInfo : Unmarshaling {
       fuelType      = try? object.value(for: "fuelType")
       fuelLevel     = try? object.value(for: "fuelLevel")
     }
+    
+    public typealias MarshalType = [String: Any]
+    
+    public func marshaled() -> MarshalType {
+      var marshaled = MarshalType()
+      marshaled["name"] = name
+      marshaled["description"] = description
+      marshaled["licensePlate"] = licensePlate
+      marshaled["engineType"] = engineType
+      marshaled["fuelType"] = fuelType
+      marshaled["fuelLevel"] = fuelLevel
+      return marshaled
+    }
+    
   }
   
   
@@ -70,13 +101,26 @@ public struct TKCarPodInfo : Unmarshaling {
     operatorInfo    = try  object.value(for: "operator")
     vehicles        = try  object.value(for: "vehicles")
   }
+  
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    return [
+      "identifier": identifier,
+      "operatorInfo": operatorInfo.marshaled(),
+      "vehicles": vehicles.map { $0.marshaled() }
+    ]
+  }
+
+  
   public var hasRealTime: Bool {
     return false // not yet
   }
 }
 
 
-public struct TKCarParkInfo : Unmarshaling {
+public struct TKCarParkInfo : Unmarshaling, Marshaling {
   public let identifier: String
   public let name: String
   public let operatorInfo: TKCompanyInfo?
@@ -99,13 +143,32 @@ public struct TKCarParkInfo : Unmarshaling {
     lastUpdate      = try? object.value(for: "lastUpdate")
   }
   
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    var marshaled : MarshalType =  [
+      "identifier": identifier,
+      "name": name,
+      ]
+    
+    marshaled["operator"] = operatorInfo?.marshaled()
+    marshaled["openingHours"] = openingHours?.marshaled()
+    marshaled["source"] = source?.marshaled()
+    marshaled["availableSpaces"] = availableSpaces
+    marshaled["totalSpaces"] = totalSpaces
+    marshaled["lastUpdate"] = lastUpdate
+    return marshaled
+  }
+  
+  
   public var hasRealTime: Bool {
     return availableSpaces != nil
   }
 }
 
 
-public struct TKCarRentalInfo : Unmarshaling {
+public struct TKCarRentalInfo : Unmarshaling, Marshaling {
   public let identifier: String
   public let company: TKCompanyInfo
   public let openingHours: TKOpeningHours?
@@ -116,6 +179,20 @@ public struct TKCarRentalInfo : Unmarshaling {
     company         = try  object.value(for: "company")
     source          = try? object.value(for: "source")
     openingHours    = try? object.value(for: "openingHours")
+  }
+  
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    var marshaled : MarshalType =  [
+      "identifier": identifier,
+      "company": company.marshaled(),
+    ]
+    
+    marshaled["source"] = source?.marshaled()
+    marshaled["openingHours"] = openingHours?.marshaled()
+    return marshaled
   }
 }
 

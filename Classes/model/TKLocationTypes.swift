@@ -13,14 +13,7 @@ import RxSwift
 
 import SGCoreKit
 
-public protocol TKRealTimeLocation {
-  
-  var hasRealTime: Bool { get }
-  
-}
-
-
-public class TKBikePodLocation: STKModeCoordinate, TKRealTimeLocation {
+public class TKBikePodLocation: STKModeCoordinate {
   
   fileprivate let rx_bikePodVar: Variable<TKBikePodInfo>
   
@@ -40,12 +33,15 @@ public class TKBikePodLocation: STKModeCoordinate, TKRealTimeLocation {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = aDecoder.decodeObject(forKey: "bikePod") as? TKBikePodInfo else { return nil }
+    guard let info: TKBikePodInfo = aDecoder.decodeOrUnmarshal(forKey: "bikePod") else { return nil }
     rx_bikePodVar = Variable(info)
     super.init(coder: aDecoder)
   }
   
-  public var hasRealTime: Bool { return bikePod.hasRealTime }
+  override public func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    aCoder.encode(bikePod.marshaled(), forKey: "bikePod")
+  }
 }
 
 extension Reactive where Base : TKBikePodLocation {
@@ -55,7 +51,7 @@ extension Reactive where Base : TKBikePodLocation {
 }
 
 
-public class TKCarPodLocation: STKModeCoordinate, TKRealTimeLocation {
+public class TKCarPodLocation: STKModeCoordinate {
   
   fileprivate let rx_carPodVar: Variable<TKCarPodInfo>
   
@@ -75,12 +71,15 @@ public class TKCarPodLocation: STKModeCoordinate, TKRealTimeLocation {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = aDecoder.decodeObject(forKey: "carPod") as? TKCarPodInfo else { return nil }
+    guard let info: TKCarPodInfo = aDecoder.decodeOrUnmarshal(forKey: "carPod") else { return nil }
     rx_carPodVar = Variable(info)
     super.init(coder: aDecoder)
   }
   
-  public var hasRealTime: Bool { return carPod.hasRealTime }
+  override public func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    aCoder.encode(carPod.marshaled(), forKey: "carPod")
+  }
 }
 
 extension Reactive where Base : TKCarPodLocation {
@@ -90,7 +89,7 @@ extension Reactive where Base : TKCarPodLocation {
 }
 
 
-public class TKCarParkLocation: STKModeCoordinate, TKRealTimeLocation {
+public class TKCarParkLocation: STKModeCoordinate {
   
   fileprivate let rx_carParkVar: Variable<TKCarParkInfo>
   
@@ -110,12 +109,15 @@ public class TKCarParkLocation: STKModeCoordinate, TKRealTimeLocation {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = aDecoder.decodeObject(forKey: "carPark") as? TKCarParkInfo else { return nil }
+    guard let info: TKCarParkInfo = aDecoder.decodeOrUnmarshal(forKey: "carPark") else { return nil }
     rx_carParkVar = Variable(info)
     super.init(coder: aDecoder)
   }
 
-  public var hasRealTime: Bool { return carPark.hasRealTime }
+  override public func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    aCoder.encode(carPark.marshaled(), forKey: "carPark")
+  }
 }
 
 extension Reactive where Base : TKCarParkLocation {
@@ -125,7 +127,7 @@ extension Reactive where Base : TKCarParkLocation {
 }
 
 
-public class TKCarRentalLocation: STKModeCoordinate, TKRealTimeLocation {
+public class TKCarRentalLocation: STKModeCoordinate {
   
   public let carRental: TKCarRentalInfo
   
@@ -135,10 +137,13 @@ public class TKCarRentalLocation: STKModeCoordinate, TKRealTimeLocation {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = aDecoder.decodeObject(forKey: "carRental") as? TKCarRentalInfo else { return nil }
+    guard let info: TKCarRentalInfo = aDecoder.decodeOrUnmarshal(forKey: "carRental") else { return nil }
     carRental = info
     super.init(coder: aDecoder)
   }
   
-  public var hasRealTime: Bool { return false }
+  override public func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    aCoder.encode(carRental.marshaled(), forKey: "carRental")
+  }
 }

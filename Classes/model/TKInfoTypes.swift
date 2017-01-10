@@ -10,7 +10,7 @@ import Foundation
 
 import Marshal
 
-public struct TKCompanyInfo : Unmarshaling {
+public struct TKCompanyInfo : Unmarshaling, Marshaling {
   public let name: String
   public let website: URL?
   public let phone: String?
@@ -22,16 +22,40 @@ public struct TKCompanyInfo : Unmarshaling {
     phone       = try? object.value(for: "phone")
     remoteIcon  = try? object.value(for: "remoteIcon")
   }
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    var marshaled : MarshalType =  [
+      "name": name,
+    ]
+    
+    marshaled["website"] = website
+    marshaled["phone"] = phone
+    marshaled["remoteIcon"] = remoteIcon
+    return marshaled
+  }
 }
 
 
-public struct TKDataAttribution : Unmarshaling {
+public struct TKDataAttribution : Unmarshaling, Marshaling {
   public let provider: TKCompanyInfo
   public let disclaimer: String?
   
   public init(object: MarshaledObject) throws {
     provider    = try  object.value(for: "provider")
     disclaimer  = try? object.value(for: "disclaimer")
+  }
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    var marshaled : MarshalType =  [
+      "provider": provider.marshaled(),
+      ]
+    
+    marshaled["disclaimer"] = disclaimer
+    return marshaled
   }
 }
 
