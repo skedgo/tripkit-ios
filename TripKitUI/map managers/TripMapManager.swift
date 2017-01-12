@@ -156,7 +156,7 @@ extension TripMapManager {
     // Note: this does not select, but the caller might want to select the main segment
   }
   
-  func requestVisits(for segment: TKSegment, includeShape: Bool) {
+  private func requestVisits(for segment: TKSegment, includeShape: Bool) {
     guard segment.isPublicTransport(), let service = segment.service(), let region = segment.startRegion() else { return }
     
     infoProvider.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: region) { [weak self] (updatedService, finished) in
