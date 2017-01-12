@@ -155,6 +155,7 @@
 		3AC4DD111DEE32C80026B238 /* TKWaypointRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AC4DD121DEE32C80026B238 /* TKWaypointRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */; };
 		3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */; };
+		3AD5ED051E27398B00B1B0E8 /* RouteMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD5ED041E27398B00B1B0E8 /* RouteMapManager.swift */; };
 		3ADB3A581D39E3830012D04B /* TKSegmentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */; };
 		3ADD5B661D9CDF0C00A1742F /* TKAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5B4E1D9CDF0C00A1742F /* TKAlertViewController.swift */; };
 		3ADD5B671D9CDF0C00A1742F /* RouteMapManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ADD5B501D9CDF0C00A1742F /* RouteMapManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -367,6 +368,7 @@
 		3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWaypointRouter.h; sourceTree = "<group>"; };
 		3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWaypointRouter.m; sourceTree = "<group>"; };
 		3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKWaypointRouter.swift; sourceTree = "<group>"; };
+		3AD5ED041E27398B00B1B0E8 /* RouteMapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapManager.swift; sourceTree = "<group>"; };
 		3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegmentHelper.swift; sourceTree = "<group>"; };
 		3ADD218F1E135F7700F6EBE8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3ADD5B4E1D9CDF0C00A1742F /* TKAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertViewController.swift; sourceTree = "<group>"; };
@@ -822,6 +824,7 @@
 			children = (
 				3ADD5B501D9CDF0C00A1742F /* RouteMapManager.h */,
 				3ADD5B511D9CDF0C00A1742F /* RouteMapManager.m */,
+				3AD5ED041E27398B00B1B0E8 /* RouteMapManager.swift */,
 				3ADD5B521D9CDF0C00A1742F /* TripMapManager.h */,
 				3ADD5B531D9CDF0C00A1742F /* TripMapManager.m */,
 				3ADD5B541D9CDF0C00A1742F /* TripMapManager.swift */,
@@ -1173,6 +1176,7 @@
 				3AB6C70C1D1CD08E0089F687 /* TKRouter.m in Sources */,
 				3AB6C70E1D1CD08E0089F687 /* TKRoutingParser.m in Sources */,
 				3AB6C6FE1D1CD08E0089F687 /* TKBuzzRealTime.m in Sources */,
+				3AD5ED051E27398B00B1B0E8 /* RouteMapManager.swift in Sources */,
 				3AB6C6FB1D1CD08E0089F687 /* TKBuzzInfoProvider.m in Sources */,
 				3AB6C6D51D1CD08E0089F687 /* Alert.m in Sources */,
 				3AB6C6DB1D1CD08E0089F687 /* SegmentReference.m in Sources */,
