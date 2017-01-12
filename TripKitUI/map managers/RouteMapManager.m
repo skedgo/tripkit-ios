@@ -12,11 +12,11 @@
 
 @import SGCoreKit;
 
-#ifdef TK_NO_FRAMEWORKS
+#ifndef TK_NO_FRAMEWORKS
+#import <TripKitUI/TripKitUI-Swift.h>
+#else
 #import "TripKit.h"
 #import <TripKit/TripKit-Swift.h>
-#else
-#import <TripKitUI/TripKitUI-Swift.h>
 #endif
 
 #import "CircleAnnotationView.h"
@@ -205,20 +205,6 @@
 	if (routePolyline) {
 		[self.routeOverlays addObject:routePolyline];
 	}
-  
-  [self.routeOverlays sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-    STKRoutePolyline *routePolyline_one = (STKRoutePolyline *)obj1;
-    STKRoutePolyline *routePolyline_two = (STKRoutePolyline *)obj2;
-    BOOL travelled_one = [routePolyline_one.route routeIsTravelled];
-    BOOL travelled_two = [routePolyline_two.route routeIsTravelled];
-    if (!travelled_one && travelled_two) {
-      return NSOrderedAscending;
-    } else if (travelled_one && !travelled_two){
-      return NSOrderedDescending;
-    } else {
-      return NSOrderedSame;
-    }
-  }];
 }
 
 - (void)addGeodesicShape:(NSArray *)annotations
@@ -241,7 +227,7 @@
 	[self prepareForVehicles];
   
   // add what we found
-  [self.mapView addOverlays:self.routeOverlays level:MKOverlayLevelAboveRoads];
+  [self.mapView addOverlays:[self sort:self.routeOverlays] level:MKOverlayLevelAboveRoads];
   [self.mapView addAnnotations:self.routeAnnotations];
 	[self.mapView addAnnotations:self.vehicleAnnotations];
 }
