@@ -67,6 +67,7 @@ public enum TKBooking {
     public let currency:    String
     public let productName: String
     public let productType: String
+    private let _isValid:   Bool?
     public let validFor:    TimeInterval?
     public let validFrom:   Date?
     public let branding:    TSPBranding?
@@ -78,9 +79,26 @@ public enum TKBooking {
       currency        = try  object.value(for: "currency")
       productName     = try  object.value(for: "productName")
       productType     = try  object.value(for: "productType")
+      _isValid        = try? object.value(for: "valid")
       validFor        = try? object.value(for: "validFor")
       validFrom       = try? object.value(for: "validFrom")
       branding        = try? object.value(for: "brand")
+    }
+    
+    public var isValid: Bool {
+      if let valid = _isValid {
+        return valid
+      }
+      
+      // If we don't have an expiry date for the ticket, treat it as valid.
+      guard let ticketExpiryDate = validTo else {
+        assertionFailure("Purchase has neither valid nor validFrom + validFor")
+        return true
+      }
+      
+      // Expiring in the future
+      return ticketExpiryDate.timeIntervalSinceNow > 0
+      
     }
     
     public var validTo: Date? {
