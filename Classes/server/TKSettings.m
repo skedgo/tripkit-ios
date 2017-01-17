@@ -64,6 +64,7 @@
   }
   
   // All optional
+  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportCyclingSpeed] forKey:@"cs"];
   [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportWalkSpeed] forKey:@"ws"];
   [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportWalkMaxDuration] forKey:@"wm"];
   [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportTransferTime] forKey:@"tt"];
