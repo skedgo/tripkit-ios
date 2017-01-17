@@ -35,7 +35,6 @@
     
     NSDictionary *paras = [[self class] waypointParasForReplacing:segment
                                                      withDLSEntry:dlsEntry
-                                                         inRegion:region
                                              usingPrivateVehicles:privateVehicles];
     [self fetchTripUsingWaypointParas:paras
                              inRegion:region
@@ -87,7 +86,6 @@
 
 + (NSDictionary *)waypointParasForReplacing:(TKSegment *)prototype
                                withDLSEntry:(DLSEntry *)entry
-                                   inRegion:(SVKRegion *)region
                        usingPrivateVehicles:(NSArray *)privateVehicles
 {
   NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithCapacity:2];
@@ -111,7 +109,8 @@
          @"endTime": @([entry.arrival timeIntervalSince1970]),
          @"serviceTripID": entry.service.code,
          @"operator": entry.service.operatorName,
-         @"region": region.name
+         @"region": entry.stop.region.name,
+         @"disembarkationRegion": entry.endStop.region.name
          }
        ];
     } else if (! [segment isStationary]) {
