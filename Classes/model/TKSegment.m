@@ -543,7 +543,8 @@ NSString *const UninitializedString =  @"UninitializedString";
   return [self isPublicTransport]
           && self.service.frequency == 0
           && ! [self isContinuation]
-          && ! [self isPlane];
+          && ! [self isPlane]
+          && [[TKDLSTable alloc] initFor:self] != nil;
 }
 
 - (BOOL)isStationary {
