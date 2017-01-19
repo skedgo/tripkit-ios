@@ -73,7 +73,14 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 {
   NSString *currentReset = [self resetStringForToday];
   NSString *lastReset = [[NSUserDefaults standardUserDefaults] stringForKey:@"TripKitLastReset"];
-  return lastReset == nil || [lastReset isEqualToString:currentReset];
+  if (lastReset == nil) {
+    // Never reset yet, remember today so that we'll reset tomorrow, but
+    // pretent we already reset today to not reset right at the start.
+    [[NSUserDefaults standardUserDefaults] setObject:currentReset forKey:@"TripKitLastReset"];
+    return true;
+  } else {
+    return [lastReset isEqualToString:currentReset];
+  }
 }
 
 - (NSString *)resetStringForToday
