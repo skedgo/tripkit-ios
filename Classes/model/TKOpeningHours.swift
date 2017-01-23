@@ -12,6 +12,8 @@ import Marshal
 
 
 /// Flexible representation of opening hours
+///
+/// Matches OpeningHours from the tripgo-api
 public struct TKOpeningHours : Unmarshaling, Marshaling {
   
   /// Time zone in which the opening hours are defined

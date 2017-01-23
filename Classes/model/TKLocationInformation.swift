@@ -125,18 +125,18 @@ public struct TKCarParkInfo : Unmarshaling, Marshaling {
   public let name: String
   public let operatorInfo: TKCompanyInfo?
   public let openingHours: TKOpeningHours?
+  public let pricingTable: TKPricingTable?
   public let source: TKDataAttribution?
   public let availableSpaces: Int?
   public let totalSpaces: Int?
   public let lastUpdate: Date?
-  
-  // TODO: Add pricing table
   
   public init(object: MarshaledObject) throws {
     identifier      = try  object.value(for: "identifier")
     name            = try  object.value(for: "name")
     operatorInfo    = try? object.value(for: "operator")
     openingHours    = try? object.value(for: "openingHours")
+    pricingTable    = try? object.value(for: "pricingTable")
     source          = try? object.value(for: "source")
     availableSpaces = try? object.value(for: "availableSpaces")
     totalSpaces     = try? object.value(for: "totalSpaces")
@@ -154,6 +154,7 @@ public struct TKCarParkInfo : Unmarshaling, Marshaling {
     
     marshaled["operator"] = operatorInfo?.marshaled()
     marshaled["openingHours"] = openingHours?.marshaled()
+    marshaled["pricingTable"] = pricingTable?.marshaled()
     marshaled["source"] = source?.marshaled()
     marshaled["availableSpaces"] = availableSpaces
     marshaled["totalSpaces"] = totalSpaces
