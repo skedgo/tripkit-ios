@@ -48,7 +48,7 @@ public enum TKBooking {
     
     public init(object: MarshaledObject) throws {
       color         = try? object.value(for: "color")
-      logoImageName = try? object.value(for: "imageURL")
+      logoImageName = try? object.value(for: "remoteIcon")
     }
     
     public var downloadableLogoURL: URL? {
