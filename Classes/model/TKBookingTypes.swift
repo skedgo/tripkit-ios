@@ -71,6 +71,7 @@ public enum TKBooking {
     public let validFor:    TimeInterval?
     public let validFrom:   Date?
     public let branding:    TSPBranding?
+    public let attribution: TKDataAttribution?
     
     public init(object: MarshaledObject) throws {
       id              = try  object.value(for: "id")
@@ -83,6 +84,7 @@ public enum TKBooking {
       validFor        = try? object.value(for: "validFor")
       validFrom       = try? object.value(for: "validFrom")
       branding        = try? object.value(for: "brand")
+      attribution     = try? object.value(for: "source")
     }
     
     public var isValid: Bool {
