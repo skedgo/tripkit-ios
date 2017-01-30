@@ -23,6 +23,9 @@ public class TKReporter {
     let key = "TKReporterLatestPlannedURL"
     UserDefaults.standard.set(url, forKey: key)
     
+    var paras = userInfo
+    paras["choiceSet"] = trip.request.choiceSet
+    
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
       
       // Only report if url is still the last one planned
@@ -31,7 +34,7 @@ public class TKReporter {
       
       UserDefaults.standard.removeObject(forKey: key)
       
-      SVKServer.post(url, paras: userInfo) { _, _, error in
+      SVKServer.post(url, paras: paras) { _, _, error in
         if let error = error {
           SGKLog.debug("TKReporter", text: "Planned trip encountered error: \(error)")
           completion?(false)
@@ -78,8 +81,94 @@ extension CLLocation {
     ]
     
     sample["speed"]   = speed  >= 0 ? speed : nil
-    sample["beraing"] = course >= 0 ? course : nil
+    sample["bearing"] = course >= 0 ? course : nil
     return sample
+  }
+  
+}
+
+extension TripRequest {
+  
+  
+  /// Choice set information for this request
+  ///
+  /// What's in it:
+  /// - List of maximised or minimised trips, sorted by using user's selected sort order
+  /// - If trip is maximised or minimised
+  /// - If trip is the selected one
+  /// - Total score, total cost, total time, etc. of trip
+  /// - Overview of segments
+  ///   - mode
+  ///   - duration
+  fileprivate var choiceSet: [[String: Any]]? {
+    
+    let sorters = sortDescriptorsAccordingToSelectedOrder()
+    guard let set = tripGroups as? NSSet,
+          let groups = set.sortedArray(using: sorters) as? [TripGroup] else {
+      return nil
+    }
+    
+    return groups
+      .filter { $0.visibility != .hidden }
+      .flatMap { $0.visibleTrip?.choiceSetEntry }
+  }
+  
+}
+
+extension Trip {
+  
+  fileprivate var choiceSetEntry: [String: Any] {
+    
+    var entry: [String: Any] = [
+      "selected": tripGroup == request.preferredGroup,
+      "visibility": tripGroup.visibility.apiString,
+      "score": totalScore.floatValue,
+      "hassle": totalHassle.floatValue,
+      "carbon": totalCarbon.floatValue,
+      "calories": totalCalories.floatValue,
+      "arrivalTime": arrivalTime.timeIntervalSince1970,
+      "departureTime": departureTime.timeIntervalSince1970,
+      "segments": (self as STKTrip).segments(with: .inDetails).flatMap { ($0 as? TKSegment)?.choiceSetEntry }
+    ]
+
+    entry["price"] = totalPrice?.floatValue
+    return entry
+    
+  }
+  
+}
+
+extension TripGroupVisibility {
+  
+  fileprivate var apiString: String {
+    switch self {
+    case .full: return "full"
+    case .mini: return "minimized"
+    case .hidden: return "hidden"
+    }
+  }
+  
+}
+
+extension TKSegment {
+  
+  fileprivate var choiceSetEntry: [String: Any]? {
+    guard order() == .regular, !isContinuation() else { return nil }
+
+    let mode: String
+    if isStationary() {
+      mode = modeInfo()?.localImageName ?? "wait"
+    } else if let identifier = modeInfo()?.identifier ?? modeIdentifier() {
+      mode = identifier
+    } else {
+      return nil
+    }
+    
+    return [
+      "mode": mode,
+      "duration": duration(true)
+    ]
+    
   }
   
 }
