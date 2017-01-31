@@ -64,7 +64,7 @@ public enum TKBooking {
   public struct Purchase : Unmarshaling {
     public let id:          String
     public let price:       NSDecimalNumber
-    public let currency:    String
+    public let currency:    String?
     public let productName: String
     public let productType: String
     private let _isValid:   Bool?
@@ -75,9 +75,9 @@ public enum TKBooking {
     
     public init(object: MarshaledObject) throws {
       id              = try  object.value(for: "id")
-      let raw: Double = try object.value(for: "price")
+      let raw: Double = try  object.value(for: "price")
       price = NSDecimalNumber(value: raw)
-      currency        = try  object.value(for: "currency")
+      currency        = try? object.value(for: "currency")
       productName     = try  object.value(for: "productName")
       productType     = try  object.value(for: "productType")
       _isValid        = try? object.value(for: "valid")
