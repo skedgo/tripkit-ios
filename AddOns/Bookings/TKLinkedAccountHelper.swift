@@ -111,14 +111,14 @@ extension ProviderAuth.Status {
 extension ProviderAuth {
   fileprivate init?(withDictionary dictionary: [String: AnyObject]) {
     guard let mode = dictionary["modeIdentifier"] as? String,
-          let status = Status.init(withDictionary: dictionary),
-          let company: TKCompanyInfo = try? dictionary.value(for: "companyInfo") else {
-      return nil
+          let status = Status.init(withDictionary: dictionary)
+      else {
+        return nil
     }
     
     self.modeIdentifier = mode
     self.status = status
-    self.companyInfo = company
+    self.companyInfo = try? dictionary.value(for: "companyInfo")
   }
 }
 
