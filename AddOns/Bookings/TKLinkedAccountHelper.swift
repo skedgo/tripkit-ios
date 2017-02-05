@@ -10,6 +10,7 @@ import Foundation
 
 import RxSwift
 import RxCocoa
+import Marshal
 
 import SGBookingKit
 
@@ -41,8 +42,20 @@ public struct ProviderAuth {
 
   fileprivate let status: Status
   
+  fileprivate var companyInfo: TKCompanyInfo?
+  
   /// Mode identifier that this authentication is for
   public let modeIdentifier: String
+  
+  /// Name of the company that provides that auth.
+  public var name: String? {
+    return companyInfo?.name
+  }
+  
+  /// URL that points to the "About" page of the provider.
+  public var aboutURL: URL? {
+    return companyInfo?.website
+  }
   
   /// Current authentication status
   public var isConnected: Bool {
@@ -98,12 +111,14 @@ extension ProviderAuth.Status {
 extension ProviderAuth {
   fileprivate init?(withDictionary dictionary: [String: AnyObject]) {
     guard let mode = dictionary["modeIdentifier"] as? String,
-          let status = Status.init(withDictionary: dictionary) else {
+          let status = Status.init(withDictionary: dictionary),
+          let company: TKCompanyInfo = try? dictionary.value(for: "companyInfo") else {
       return nil
     }
     
     self.modeIdentifier = mode
     self.status = status
+    self.companyInfo = company
   }
 }
 
@@ -155,7 +170,7 @@ extension SVKRegion {
     if let cached = OAuthClient.cachedCredentials(mode: mode) {
       if (cached.isValid || cached.hasRefreshToken) {
         let status = ProviderAuth.Status.connected(nil)
-        return ProviderAuth(status: status, modeIdentifier: mode)
+        return ProviderAuth(status: status, companyInfo: nil, modeIdentifier: mode)
       } else {
         // Remove outdated credentials that we can't renew
         _ = OAuthClient.removeCredentials(mode: mode)
