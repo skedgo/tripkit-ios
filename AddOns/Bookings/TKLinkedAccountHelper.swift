@@ -27,14 +27,14 @@ public struct ProviderAuth {
     
     fileprivate var remoteURL: URL? {
       switch self {
-      case .connected(let action): return action?.url
+      case .connected(let action):    return action?.url
       case .notConnected(let action): return action.url
       }
     }
 
     fileprivate var remoteAction: String? {
       switch self {
-      case .connected(let action): return action?.title
+      case .connected(let action):    return action?.title
       case .notConnected(let action): return action.title
       }
     }
@@ -42,7 +42,7 @@ public struct ProviderAuth {
 
   fileprivate let status: Status
   
-  fileprivate var companyInfo: TKCompanyInfo?
+  fileprivate let companyInfo: TKCompanyInfo?
   
   /// Mode identifier that this authentication is for
   public let modeIdentifier: String
@@ -60,7 +60,7 @@ public struct ProviderAuth {
   /// Current authentication status
   public var isConnected: Bool {
     switch status {
-    case .connected: return true
+    case .connected:    return true
     case .notConnected: return false
     }
   }
@@ -71,9 +71,10 @@ public struct ProviderAuth {
       return remoteAction
     }
     
+    // Normally, the action title comes from our backend.
     switch status {
-    case .connected: return "Disconnect" // TODO: Localize
-    case .notConnected: return "Setup"   // TODO: Localize
+    case .connected:    return Loc.Disconnect
+    case .notConnected: return Loc.Setup
     }
   }
   
@@ -87,9 +88,9 @@ public struct ProviderAuth {
 
 extension ProviderAuth.Status {
   fileprivate init?(withDictionary dictionary: [String: AnyObject]) {
-    guard let action = dictionary["action"] as? String,
-          let actionTitle = dictionary["actionTitle"] as? String,
-          let URLString = dictionary["url"] as? String,
+    guard let action: String = try? dictionary.value(for: "action"),
+          let actionTitle: String = try? dictionary.value(for: "actionTitle"),
+          let URLString: String = try? dictionary.value(for: "url"),
           let actionURL = URL(string: URLString)
       else {
       return nil
@@ -110,7 +111,7 @@ extension ProviderAuth.Status {
 
 extension ProviderAuth {
   fileprivate init?(withDictionary dictionary: [String: AnyObject]) {
-    guard let mode = dictionary["modeIdentifier"] as? String,
+    guard let mode: String = try? dictionary.value(for: "modeIdentifier"),
           let status = Status.init(withDictionary: dictionary)
       else {
         return nil
