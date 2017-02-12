@@ -184,6 +184,8 @@
 		3AFF6C061DEE40D200E7DFCB /* berowraToHornsbyService.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF6C041DEE40D200E7DFCB /* berowraToHornsbyService.json */; };
 		3AFF6C091DEE411300E7DFCB /* hornsbyToSkedGo.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF6C071DEE411300E7DFCB /* hornsbyToSkedGo.json */; };
 		3AFF6C0A1DEE411300E7DFCB /* hornsbyToSkedGoService.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF6C081DEE411300E7DFCB /* hornsbyToSkedGoService.json */; };
+		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
+		D38F2D391E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D3B1E5046DD003D1CE2 /* InfoPlist.strings */; };
 		F8FE40C0F8F106E668B2BDD9 /* Pods_TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D90B11191B5E08C85990BAE4 /* Pods_TripKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -404,6 +406,8 @@
 		8A87B9987976E8220E11F5C5 /* Pods-TripKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-TripKit/Pods-TripKit.release.xcconfig"; sourceTree = "<group>"; };
 		9037756C3C2806A56C241B68 /* Pods-TripKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TripKitTests/Pods-TripKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BDDB767442569E9895BB82F4 /* Pods_TripKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		D38F2D3A1E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D90B11191B5E08C85990BAE4 /* Pods_TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -505,6 +509,7 @@
 		3AB6C62E1D1CD0060089F687 /* TripKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				D38F2D3B1E5046DD003D1CE2 /* InfoPlist.strings */,
 				3AC4DCF71DEE32B80026B238 /* data */,
 				3AC4DCFC1DEE32B80026B238 /* parsing */,
 				3AC4DCFE1DEE32B80026B238 /* routing */,
@@ -856,6 +861,7 @@
 		3AFF20981D1CD29E008BCD9F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */,
 				3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */,
 				3AB6C6231D1CD0060089F687 /* TripKit.h */,
 				3AB6C6251D1CD0060089F687 /* Info.plist */,
@@ -1049,6 +1055,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ADD5B6D1D9CDF0C00A1742F /* TripKitUI.xcassets in Resources */,
+				D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */,
 				3ADD5B771D9CDF0C00A1742F /* TKEmptyAlertView.xib in Resources */,
 				3ADD5B731D9CDF0C00A1742F /* TKAlertCell.xib in Resources */,
 				3ADD5B751D9CDF0C00A1742F /* TKDepartureView.xib in Resources */,
@@ -1070,6 +1077,7 @@
 				3AC4DD061DEE32B80026B238 /* locationInfo-bikePod.json in Resources */,
 				3AFF6C091DEE411300E7DFCB /* hornsbyToSkedGo.json in Resources */,
 				3AABDD9D1DF7C22F0044A05B /* locationInfo-carRental.json in Resources */,
+				D38F2D391E5046DD003D1CE2 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1303,6 +1311,22 @@
 				3A97ED101E15DF8E00BB1324 /* da */,
 			);
 			name = TripKit.strings;
+			sourceTree = "<group>";
+		};
+		D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D38F2D351E5046DD003D1CE2 /* zh-Hant */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D38F2D3B1E5046DD003D1CE2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D38F2D3A1E5046DD003D1CE2 /* zh-Hant */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
