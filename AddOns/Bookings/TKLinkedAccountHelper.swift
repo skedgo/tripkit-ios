@@ -10,6 +10,7 @@ import Foundation
 
 import RxSwift
 import RxCocoa
+import Marshal
 
 import SGBookingKit
 
@@ -26,14 +27,14 @@ public struct ProviderAuth {
     
     fileprivate var remoteURL: URL? {
       switch self {
-      case .connected(let action): return action?.url
+      case .connected(let action):    return action?.url
       case .notConnected(let action): return action.url
       }
     }
 
     fileprivate var remoteAction: String? {
       switch self {
-      case .connected(let action): return action?.title
+      case .connected(let action):    return action?.title
       case .notConnected(let action): return action.title
       }
     }
@@ -41,13 +42,25 @@ public struct ProviderAuth {
 
   fileprivate let status: Status
   
+  fileprivate let companyInfo: TKCompanyInfo?
+  
   /// Mode identifier that this authentication is for
   public let modeIdentifier: String
+  
+  /// Name of the company that provides that auth.
+  public var name: String? {
+    return companyInfo?.name
+  }
+  
+  /// URL that points to the "About" page of the provider.
+  public var aboutURL: URL? {
+    return companyInfo?.website
+  }
   
   /// Current authentication status
   public var isConnected: Bool {
     switch status {
-    case .connected: return true
+    case .connected:    return true
     case .notConnected: return false
     }
   }
@@ -58,9 +71,10 @@ public struct ProviderAuth {
       return remoteAction
     }
     
+    // Normally, the action title comes from our backend.
     switch status {
-    case .connected: return "Disconnect" // TODO: Localize
-    case .notConnected: return "Setup"   // TODO: Localize
+    case .connected:    return Loc.Disconnect
+    case .notConnected: return Loc.Setup
     }
   }
   
@@ -74,9 +88,9 @@ public struct ProviderAuth {
 
 extension ProviderAuth.Status {
   fileprivate init?(withDictionary dictionary: [String: AnyObject]) {
-    guard let action = dictionary["action"] as? String,
-          let actionTitle = dictionary["actionTitle"] as? String,
-          let URLString = dictionary["url"] as? String,
+    guard let action: String = try? dictionary.value(for: "action"),
+          let actionTitle: String = try? dictionary.value(for: "actionTitle"),
+          let URLString: String = try? dictionary.value(for: "url"),
           let actionURL = URL(string: URLString)
       else {
       return nil
@@ -97,13 +111,15 @@ extension ProviderAuth.Status {
 
 extension ProviderAuth {
   fileprivate init?(withDictionary dictionary: [String: AnyObject]) {
-    guard let mode = dictionary["modeIdentifier"] as? String,
-          let status = Status.init(withDictionary: dictionary) else {
-      return nil
+    guard let mode: String = try? dictionary.value(for: "modeIdentifier"),
+          let status = Status.init(withDictionary: dictionary)
+      else {
+        return nil
     }
     
     self.modeIdentifier = mode
     self.status = status
+    self.companyInfo = try? dictionary.value(for: "companyInfo")
   }
 }
 
@@ -155,7 +171,7 @@ extension SVKRegion {
     if let cached = OAuthClient.cachedCredentials(mode: mode) {
       if (cached.isValid || cached.hasRefreshToken) {
         let status = ProviderAuth.Status.connected(nil)
-        return ProviderAuth(status: status, modeIdentifier: mode)
+        return ProviderAuth(status: status, companyInfo: nil, modeIdentifier: mode)
       } else {
         // Remove outdated credentials that we can't renew
         _ = OAuthClient.removeCredentials(mode: mode)

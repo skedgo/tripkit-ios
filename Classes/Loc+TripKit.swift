@@ -28,6 +28,16 @@ extension Loc {
     return NSLocalizedString("Public holiday", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
   }
   
+  // MARK: - Linking to TSP
+  
+  public static var Disconnect: String {
+    return NSLocalizedString("Disconnect", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "To disconnect/unlink from a service provider, e.g., Uber")
+  }
+  
+  public static var Setup: String {
+    return NSLocalizedString("Setup", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Set up to connect/link to a service provider, e.g., Uber")
+  }
+  
   
   // MARK: - Format
 

@@ -13,6 +13,9 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ Suotuisa pyöräilyyn";
 
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ pysäkki(ä)";
+
 /* From %time1 to %time2. (old key: TimeFromToShortFormat) */
 "%@ to %@" = "%@ -> %@";
 
@@ -22,7 +25,7 @@
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
 "%@ wheelchair friendly" = "%@ Pyörätuolille suotuisa";
 
-/* No comment provided by engineer. */
+/* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 pysähdys";
 
 /* No comment provided by engineer. */
@@ -77,8 +80,8 @@
 /* Destination of the bus */
 "Direction" = "Suunta";
 
-/* Walking time */
-"for %@" = "Kesto %@";
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "Katkaise yhteys";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Tyhjä";
@@ -153,7 +156,7 @@
 /* Title of button to get more details about an alert */
 "More info" = "Lisätietoja";
 
-/* Indicating no trips have been planned within 24 hrs */
+/* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Ei suunniteltuja matkoja";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
@@ -186,14 +189,14 @@
 /* Send SMS action */
 "Send SMS" = "Lähetä SMS";
 
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "Asetukset";
+
 /* Show website action */
 "Show website" = "Avaa nettisivusto";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Vain seisomapaikkoja";
-
-/* Number of stops before you get off a vehicle */
-"%@ stops" = "%@ pysäkki(ä)";
 
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "Kohteeseen %@";
@@ -218,6 +221,9 @@
 
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "Lähtee klo %@";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "kesto %@";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch Taksi";
