@@ -364,6 +364,10 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.progressURLString    = tripDict[@"progressURL"]          ?: trip.progressURLString;
       trip.plannedURLString     = tripDict[@"plannedURL"]           ?: trip.plannedURLString;
       
+      if ([tripDict[@"availability"] isKindOfClass:[NSString class]]) {
+        trip.missedBookingWindow  = [@"MISSED_PREBOOKING_WINDOW" isEqualToString:tripDict[@"availability"]];
+      }
+      
       [trip calculateDuration];
       
       // updated trip isn't strictly speaking new, but we want to process it as a successful match.

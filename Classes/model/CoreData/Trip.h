@@ -71,6 +71,9 @@
 
 @property (nonatomic, assign) BOOL hasReminder;
 
+@property (nonatomic, assign) BOOL missedBookingWindow;
+
+
 - (void)removeFromRequest;
 
 - (void)moveToRequest:(nonnull TripRequest *)request markAsPreferred:(BOOL)preferred;
