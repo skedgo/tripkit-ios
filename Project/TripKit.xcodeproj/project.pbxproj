@@ -408,6 +408,8 @@
 		BDDB767442569E9895BB82F4 /* Pods_TripKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D38F2D3A1E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		D3A779281E513C5000BBAF6C /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D3A779291E513C5000BBAF6C /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D90B11191B5E08C85990BAE4 /* Pods_TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1317,6 +1319,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D38F2D351E5046DD003D1CE2 /* zh-Hant */,
+				D3A779281E513C5000BBAF6C /* fi */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1325,6 +1328,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D38F2D3A1E5046DD003D1CE2 /* zh-Hant */,
+				D3A779291E513C5000BBAF6C /* fi */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
