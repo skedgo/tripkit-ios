@@ -182,11 +182,12 @@ extension SVKRegion {
   
   fileprivate func remotelyLinkedAccounts(_ mode: String?, completion: @escaping ([ProviderAuth]?) -> Void) {
     
-    let paras: [String: Any]?
+    var paras = [String: Any]()
     if let mode = mode {
-      paras = ["mode": mode]
-    } else {
-      paras = nil
+      paras["mode"] = mode
+    }
+    if UserDefaults.shared().bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
+      paras["bsb"] = true
     }
     
     SVKServer.sharedInstance().hitSkedGo(
