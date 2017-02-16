@@ -180,6 +180,7 @@
 		3AE04BE61DEE392800462CB3 /* TKTripPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */; };
 		3AF3F2621E04CA7C00A2EEC6 /* TKBookingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */; };
 		3AF3F2641E04CA8C00A2EEC6 /* TKLocationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */; };
+		3AFD70BD1E558BC800F6B06F /* TKPricingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD70BC1E558BC800F6B06F /* TKPricingTable.swift */; };
 		3AFF6C051DEE40D200E7DFCB /* berowraToHornsby.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF6C031DEE40D200E7DFCB /* berowraToHornsby.json */; };
 		3AFF6C061DEE40D200E7DFCB /* berowraToHornsbyService.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF6C041DEE40D200E7DFCB /* berowraToHornsbyService.json */; };
 		3AFF6C091DEE411300E7DFCB /* hornsbyToSkedGo.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF6C071DEE411300E7DFCB /* hornsbyToSkedGo.json */; };
@@ -396,6 +397,7 @@
 		3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTripPattern.swift; sourceTree = "<group>"; };
 		3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingTypes.swift; sourceTree = "<group>"; };
 		3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationTypes.swift; sourceTree = "<group>"; };
+		3AFD70BC1E558BC800F6B06F /* TKPricingTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKPricingTable.swift; sourceTree = "<group>"; };
 		3AFF209A1D1CD4F0008BCD9F /* TripKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TripKit-Prefix.pch"; sourceTree = "<group>"; };
 		3AFF6C031DEE40D200E7DFCB /* berowraToHornsby.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = berowraToHornsby.json; sourceTree = "<group>"; };
 		3AFF6C041DEE40D200E7DFCB /* berowraToHornsbyService.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = berowraToHornsbyService.json; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 				3AABDD9E1DF7D2E30044A05B /* TKOpeningHours.swift */,
 				3AB6C6841D1CD08E0089F687 /* TKPlainCell.h */,
 				3AB6C6851D1CD08E0089F687 /* TKPlainCell.m */,
+				3AFD70BC1E558BC800F6B06F /* TKPricingTable.swift */,
 				3A32CD7A1DC2EC4F003B158B /* TKRegionInformation.swift */,
 				3AB6C6861D1CD08E0089F687 /* TKSegment.h */,
 				3AB6C6871D1CD08E0089F687 /* TKSegment.m */,
@@ -1206,6 +1209,7 @@
 				3A7769131D3DE45800AF9EB2 /* TKAgendaUtils.swift in Sources */,
 				3ADB3A581D39E3830012D04B /* TKSegmentHelper.swift in Sources */,
 				3A7769221D3DE45800AF9EB2 /* TKAgendaFaker.swift in Sources */,
+				3AFD70BD1E558BC800F6B06F /* TKPricingTable.swift in Sources */,
 				3A51402B1DEE62D6002DB39F /* TKVehicleAnnotationView.swift in Sources */,
 				3ADD5B701D9CDF0C00A1742F /* TKAgendaWidgetInfoView.swift in Sources */,
 				3AB6C6F71D1CD08E0089F687 /* TKSegment.m in Sources */,
