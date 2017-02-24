@@ -13,6 +13,9 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ fahrradfreundlich";
 
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ Stops";
+
 /* From %time1 to %time2. (old key: TimeFromToShortFormat) */
 "%@ to %@" = "%@ bis %@";
 
@@ -22,7 +25,7 @@
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
 "%@ wheelchair friendly" = "%@ rollstuhlfreundlich";
 
-/* No comment provided by engineer. */
+/* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 Stop";
 
 /* No comment provided by engineer. */
@@ -77,8 +80,8 @@
 /* Destination of the bus */
 "Direction" = "Richtung";
 
-/* Walking time */
-"for %@" = "für %@";
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "Abmelden";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Leer";
@@ -153,7 +156,7 @@
 /* Title of button to get more details about an alert */
 "More info" = "Mehr Infos";
 
-/* Indicating no trips have been planned within 24 hrs */
+/* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Keine Routen geplant";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
@@ -186,14 +189,14 @@
 /* Send SMS action */
 "Send SMS" = "SMS senden";
 
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "Setup";
+
 /* Show website action */
 "Show website" = "Webseite öffnen";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Nur noch Stehplätze";
-
-/* Number of stops before you get off a vehicle */
-"%@ stops" = "%@ Stops";
 
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "Nach %@";
@@ -218,6 +221,9 @@
 
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "um %@";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "für %@";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch nehmen";
