@@ -13,8 +13,11 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ cykle venlig";
 
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ stopper";
+
 /* From %time1 to %time2. (old key: TimeFromToShortFormat) */
-"%@ to %@" = "%@ to %@";
+"%@ to %@" = "%@ til %@";
 
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ uden trafik";
@@ -22,7 +25,7 @@
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
 "%@ wheelchair friendly" = "%@ kørestol venlig";
 
-/* No comment provided by engineer. */
+/* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 stop";
 
 /* No comment provided by engineer. */
@@ -39,16 +42,16 @@
 "Arrive" = "Ankommer";
 
 /* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
-"Arrive at %@" = "Arrive at %@";
+"Arrive at %@" = "Ankom kl. %@";
 
 /* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
-"Arrive at %@ at %@" = "Arrive at %@ at %@";
+"Arrive at %@ at %@" = "Ankomme til %@ kl %@";
 
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Ankommer i";
 
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
-"At %@" = "At %@";
+"At %@" = "På %@";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "Bestil med FlitWays";
@@ -63,7 +66,7 @@
 "Call" = "Ring";
 
 /* Action title for calling provider of name. (old key: CallTaxiFormat) */
-"Call %@" = "Call %@";
+"Call %@" = "Opkald %@";
 
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "Opret forbindelse til internettet for at få ture";
@@ -77,6 +80,9 @@
 /* Destination of the bus */
 "Direction" = "Retning";
 
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "Afbryd";
+
 /* As in 'this bus/train is empty' */
 "Empty" = "Tom";
 
@@ -84,7 +90,7 @@
 "Few seats available" = "Få pladser tilbage";
 
 /* Departure location. (old key: PrimaryLocationStart) */
-"From %@" = "From %@";
+"From %@" = "Fra %@";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Fuld";
@@ -105,10 +111,10 @@
 "Google Maps" = "Google Maps";
 
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
-"I'll arrive at %@ at %@" = "I'll arrive at %@ at %@";
+"I'll arrive at %@ at %@" = "Ankommer til %@ kl %@";
 
 /* Indication of an activity. (old key: ActivityIndication) */
-"I'll take a %@ at %@ from %@." = "I'll take a %@ at %@ from %@.";
+"I'll take a %@ at %@ from %@." = "Jeg vil gerne tage en %@ kl %@ fra %@.";
 
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "I mellemtiden, lad os fortsat udforske %@ og nyde dine ture";
@@ -121,13 +127,13 @@
 "Leave" = "Forlad";
 
 /* The place of departure. (old key: LeaveLocation) */
-"Leave %@" = "Leave %@";
+"Leave %@" = "Afgang fra %@";
 
 /* The place of departure with time. (old key: LeaveLocationTime) */
-"Leave %@ at %@" = "Leave %@ at %@";
+"Leave %@ at %@" = "Afgang fra %@ kl %@";
 
 /* Time departure. (old key: LeaveTime) */
-"Leave at %@" = "Leave at %@";
+"Leave at %@" = "Afgang kl %@";
 
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "Forlad om";
@@ -150,7 +156,7 @@
 /* Title of button to get more details about an alert */
 "More info" = "Mere Information";
 
-/* Indicating no trips have been planned within 24 hrs */
+/* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Ingen planlagte ture";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
@@ -166,13 +172,13 @@
 "Open Ola" = "Åbn Ola";
 
 /* Title for opening hours */
-"Opening Hours" = "Opening Hours";
+"Opening Hours" = "Åbningstider";
 
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Planlæg en tur og det vil dukke op her.";
 
 /* No comment provided by engineer. */
-"Public holiday" = "Public holiday";
+"Public holiday" = "Helligdag";
 
 /* No comment provided by engineer. */
 "Real-time" = "Rigtig Tid";
@@ -183,26 +189,26 @@
 /* Send SMS action */
 "Send SMS" = "Send SMS";
 
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "Konfigurer";
+
 /* Show website action */
 "Show website" = "Vis hjemmeside";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Kun Ståpladser";
 
-/* Number of stops before you get off a vehicle */
-"%@ stops" = "%@ stopper";
-
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
-"To %@" = "To %@";
+"To %@" = "Til %@";
 
 /* Title for a trip */
 "Trip" = "Tur";
 
 /* Vehicle updated. (old key: VehicleUpdated) */
-"Updated %@ ago" = "Updated %@ ago";
+"Updated %@ ago" = "Opdateret for %@ siden";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
-"Vehicle %@ updated %@ ago" = "Vehicle %@ updated %@ ago";
+"Vehicle %@ updated %@ ago" = "Køretøj %@ opdateret for %@ siden";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "Vi har travlt med at få din kommende rejse. Vent venligst...";
@@ -214,7 +220,7 @@
 "Wheelchair accessible" = "Tilgængelig med kørestol";
 
 /* Time of the bus departure. (old key: DepartureTime) */
-"at %@" = "at %@";
+"at %@" = "kl. %@";
 
 /* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
 "for %@" = "for %@";
