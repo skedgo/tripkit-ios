@@ -223,6 +223,8 @@
 		3A551D6C1E60D62D00332942 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A551D7C1E60D6F900332942 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A551D7D1E60D6F900332942 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A551D871E60D79500332942 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A551D881E60D79500332942 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loc+TripKit.swift"; sourceTree = "<group>"; };
 		3A7768FD1D3DE45800AF9EB2 /* TKAgendaParserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaParserHelper.swift; sourceTree = "<group>"; };
 		3A7768FE1D3DE45800AF9EB2 /* TKAgendaUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaUtils.swift; sourceTree = "<group>"; };
@@ -1333,6 +1335,7 @@
 				3A551D601E60D2A000332942 /* de */,
 				3A551D6B1E60D62D00332942 /* fr */,
 				3A551D7C1E60D6F900332942 /* da */,
+				3A551D871E60D79500332942 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1345,6 +1348,7 @@
 				3A551D611E60D2A000332942 /* de */,
 				3A551D6C1E60D62D00332942 /* fr */,
 				3A551D7D1E60D6F900332942 /* da */,
+				3A551D881E60D79500332942 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

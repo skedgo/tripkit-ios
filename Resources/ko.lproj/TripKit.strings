@@ -13,6 +13,9 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ 자전거 이용 가능";
 
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ 정거장";
+
 /* From %time1 to %time2. (old key: TimeFromToShortFormat) */
 "%@ to %@" = "%@부터 %@까지";
 
@@ -22,7 +25,7 @@
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
 "%@ wheelchair friendly" = "%@ 휠체어 이용 가능";
 
-/* No comment provided by engineer. */
+/* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "한 정거장";
 
 /* No comment provided by engineer. */
@@ -76,6 +79,9 @@
 
 /* Destination of the bus */
 "Direction" = "방향";
+
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "접속끊기";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "비어 있음";
@@ -150,7 +156,7 @@
 /* Title of button to get more details about an alert */
 "More info" = "더 많은 정보";
 
-/* Indicating no trips have been planned within 24 hrs */
+/* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "예정된 경로가 없습니다.";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
@@ -182,6 +188,9 @@
 
 /* Send SMS action */
 "Send SMS" = "SMS 보내기";
+
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "설정";
 
 /* Show website action */
 "Show website" = "웹사이트 보기";
