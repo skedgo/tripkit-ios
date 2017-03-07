@@ -44,11 +44,11 @@ public enum TKBookingStateMachine {
   /// booking coordinator is still working
   /// out the details.
   /// Show a loading indicator.
-  case fetchingBookingForm(URL, data: Any?)
+  case fetchingBookingForm(URL, data: Any?, sender: Any?)
 
   /// User needs to go through a booking form
   /// before the booking can be completed.
-  case presentForm(BPKForm)
+  case presentForm(BPKForm, sender: Any?)
 
   /// User needs to go through a web form
   /// before the booking can be completed.
@@ -57,7 +57,7 @@ public enum TKBookingStateMachine {
   ///
   /// The `next` information is then for
   /// deciding the following transition.
-  case presentWeb(URL, disregardOn: URL, next: URL)
+  case presentWeb(URL, disregardOn: URL, next: URL, sender: Any?)
   
   /// Booking completed and trip should be
   /// updated with provided URL.
@@ -110,9 +110,9 @@ public enum TKBookingStateMachine {
   public mutating func appHandleCallback(_ url: URL) {
     
     switch self {
-    case .presentWeb(_, let disregard, let next):
+    case .presentWeb(_, let disregard, let next, _):
       if url.absoluteString.hasPrefix(disregard.absoluteString) {
-        self = .fetchingBookingForm(next, data: nil)
+        self = .fetchingBookingForm(next, data: nil, sender: nil)
       }
       
     case .authWaitingForCallback:
@@ -129,14 +129,14 @@ public enum TKBookingStateMachine {
   public mutating func serverDidLoad(form: TKBookingFormType) {
     
     switch self {
-    case .fetchingBookingForm:
+    case .fetchingBookingForm(_, _, let sender):
       
       switch form {
       case .auth(let form):           self = .authorizing(form)
       case .error(let error):         self = .error(error)
-      case .form(let form):           self = .presentForm(form)
+      case .form(let form):           self = .presentForm(form, sender: sender)
       case .web(let url, let target, let next):
-        self = .presentWeb(url, disregardOn: target, next: next)
+        self = .presentWeb(url, disregardOn: target, next: next, sender: sender)
       case .trip(let url):            self = .completed(url)
       }
       
@@ -163,7 +163,7 @@ public enum TKBookingStateMachine {
 
     switch result {
     case .waiting:                    self = .authWaitingForCallback
-    case .success(let url, let data): self = .fetchingBookingForm(url, data: data)
+    case .success(let url, let data): self = .fetchingBookingForm(url, data: data, sender: nil)
     case .error(let error):           self =  .error(error)
     }
     
@@ -187,11 +187,11 @@ public enum TKBookingStateMachine {
   }
   
   
-  public mutating func userStartedBooking(url: URL) {
+  public mutating func userStartedBooking(url: URL, sender: Any?) {
     
     switch self {
     case .viewingQuickBooking, .error:
-      self = .fetchingBookingForm(url, data: nil)
+      self = .fetchingBookingForm(url, data: nil, sender: sender)
     default: print("Uh-oh. Ignoring userStartBooking as we're in state \(self)")
     }
     
@@ -202,7 +202,7 @@ public enum TKBookingStateMachine {
     
     switch self {
     case .presentForm:
-      self = .fetchingBookingForm(nextURL, data: nil)
+      self = .fetchingBookingForm(nextURL, data: nil, sender: nil)
     default: print("Uh-oh. Ignoring userAccepted as we're in state \(self)")
     }
     
@@ -212,8 +212,8 @@ public enum TKBookingStateMachine {
   public mutating func userOpenedDisregardURL() {
     
     switch self {
-    case .presentWeb(_, _, let next):
-      self = .fetchingBookingForm(next, data: nil)
+    case .presentWeb(_, _, let next, let sender):
+      self = .fetchingBookingForm(next, data: nil, sender: sender)
     default: print("Uh-oh. Ignoring userOpenedDisregardURL as we're in state \(self)")
     }
     

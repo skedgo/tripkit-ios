@@ -44,7 +44,7 @@ public enum TKBookingTransitioner {
       return Observable.empty()
       
     // Server state where we kick of requests
-    case .fetchingBookingForm(let url, let data):
+    case .fetchingBookingForm(let url, let data, _):
       let dict = data as? [AnyHashable: Any]
       return requestForm(url, data: dict, advancing: state)
       

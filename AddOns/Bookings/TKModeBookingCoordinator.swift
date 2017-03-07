@@ -20,7 +20,7 @@ public class TKModeBookingCoordinator {
   
   public init(startAt url: URL, forMode mode: String) {
     self.mode = mode
-    stateMachine = Variable(.fetchingBookingForm(url, data: nil))
+    stateMachine = Variable(.fetchingBookingForm(url, data: nil, sender: nil))
 
     // This is where we do the actual transitions
     

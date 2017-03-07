@@ -150,9 +150,9 @@ public class TripBookingCoordinator {
   }
   
 
-  public func requestedBooking(with url: URL, for segment: TKSegment) {
+  public func requestedBooking(with url: URL, for segment: TKSegment, sender: Any?) {
     guard let machine = machine(for: segment) else { return }
-    machine.value.userStartedBooking(url: url)
+    machine.value.userStartedBooking(url: url, sender: sender)
   }
   
 }
