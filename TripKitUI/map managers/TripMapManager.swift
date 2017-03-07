@@ -50,7 +50,7 @@ extension TripMapManager {
     guard let mapView = mapView(), let trip = self.trip else { return }
     
     if UIDevice.current.userInterfaceIdiom == .phone {
-      assert(mapView.delegate === self, "We are not the map view's delegate, but \(mapView.delegate) is.")
+      assert(mapView.delegate === self, "We are not the map view's delegate, but \(String(describing: mapView.delegate)) is.")
     }
     
     if force {

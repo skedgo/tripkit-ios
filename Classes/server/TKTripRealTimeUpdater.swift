@@ -68,7 +68,7 @@ public class TKTripRealTimeUpdater {
         self?.updated.onNext(updated)
       },
       failure: { error in
-        SGKLog.info("TKTripRealTimeUpdater", text: "Error: \(error)")
+        SGKLog.info("TKTripRealTimeUpdater", text: "Error: \(String(describing: error))")
       })
   }
   

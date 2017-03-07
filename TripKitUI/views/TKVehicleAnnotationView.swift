@@ -158,7 +158,7 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     
     // flip the label
     if bearingAngle > 180 {
-      label.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
+      label.transform = CGAffineTransform(rotationAngle: .pi)
     } else {
       label.transform = CGAffineTransform.identity
     }

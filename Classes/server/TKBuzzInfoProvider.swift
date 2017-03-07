@@ -141,7 +141,7 @@ extension SVKServer {
       region: region,
       success: { _, response in
         guard let json = response as? [String: Any] else {
-          SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters)" }
+          SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters ?? [:])" }
           completion(nil)
           return
         }
@@ -154,12 +154,12 @@ extension SVKServer {
           }
           completion(result)
         } catch {
-          SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters)" }
+          SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
           completion(nil)
         }
     },
       failure: { error in
-        SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters)" }
+        SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
         completion(nil)
     })
   }
@@ -181,7 +181,7 @@ extension SVKServer {
       region: region,
       success: { _, response in
         guard let json = response as? [String: Any] else {
-          SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters)" }
+          SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters ?? [:])" }
           completion([])
           return
         }
@@ -194,12 +194,12 @@ extension SVKServer {
           }
           completion(result)
         } catch {
-          SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters)" }
+          SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
           completion([])
         }
     },
       failure: { error in
-        SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters)" }
+        SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
         completion([])
     })
   }

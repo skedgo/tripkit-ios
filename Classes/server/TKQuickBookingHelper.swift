@@ -102,7 +102,7 @@ public enum TKQuickBookingHelper {
     SVKServer.get(bookingsURL, paras: nil) { _, response, error in
       guard let array = response as? [[String: Any]], !array.isEmpty else {
         completion([])
-        SGKLog.warn("TKQuickBookingHelper", text: "Response isn't array.\nResponse: \(response)\nError: \(error)")
+        SGKLog.warn("TKQuickBookingHelper", text: "Response isn't array.\nResponse: \(String(describing: response))\nError: \(String(describing: error))")
         return
       }
       
