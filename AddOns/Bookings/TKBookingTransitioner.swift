@@ -15,7 +15,7 @@ import SGBookingKit
 public enum TKBookingTransitioner {
 
   /// Performs the transition for `state` for the provided `mode`. This method
-  /// should be calld whenever the state maching is entering a new state, and the
+  /// should be called whenever the state maching is entering a new state, and the
   /// method will then do the work on any further transition until it gets into
   /// a new waiting state.
   ///
@@ -46,7 +46,7 @@ public enum TKBookingTransitioner {
     // Server state where we kick of requests
     case .fetchingBookingForm(let url, let data, _):
       let dict = data as? [AnyHashable: Any]
-      return requestForm(url, data: dict, advancing: state)
+      return requestForm(url, data: dict, forMode: mode, advancing: state)
       
     // Triggering authentication
     case .authorizing(let form):
@@ -69,15 +69,31 @@ public enum TKBookingTransitioner {
   }
   
   
-  private static func requestForm(_ url: URL, data: [AnyHashable: Any]? = nil, advancing state: TKBookingStateMachine) -> Observable<TKBookingStateMachine> {
+  private static func requestForm(_ url: URL, data: [AnyHashable: Any]? = nil, forMode mode: String, advancing state: TKBookingStateMachine) -> Observable<TKBookingStateMachine> {
     
     return BPKServerUtil.rx
-      .requestForm(forBooking: url, postData: data)
-      .map { form in
-        let result = TKBookingFormType.from(form)
-        var newState = state
-        newState.serverDidLoad(form: result)
-        return newState
+      .requestForm(forBooking: url, postData: data, forMode: mode)
+      .map { response in
+        
+        switch response {
+        case .completed:
+          var newState = state
+          newState.serverDidLoad(form: .emptyResponse)
+          return newState
+          
+        case .followUpForm(let form):
+          let result = TKBookingFormType.from(form)
+          var newState = state
+          newState.serverDidLoad(form: result)
+          return newState
+          
+        case .retryFetchingForm(let url):
+          var newState = state
+          newState.serverRequestsRetry(url)
+          return newState
+          
+        }
+        
       }
       .catchError { error in
         return Observable.just(.error(error))
@@ -94,19 +110,32 @@ public enum TKBookingTransitioner {
   
 }
 
+fileprivate enum TKBookingResponse {
+  case followUpForm(BPKForm)
+  case retryFetchingForm(URL)
+  case completed
+}
+
+
 extension Reactive where Base : BPKServerUtil {
   
   /// Send a form-response for a booking URL to the backend, retrieving either a
-  // follow-up form or `nil`, if no further action is required.
-  static func requestForm(forBooking url: URL, postData: [AnyHashable: Any]? = nil) -> Observable<BPKForm?> {
+  /// follow-up form or, if no further action is required, just `nil`.
+  fileprivate static func requestForm(forBooking url: URL, postData: [AnyHashable: Any]? = nil, forMode mode: String) -> Observable<TKBookingResponse> {
+    
     return Observable.create { observer in
       
-      BPKServerUtil.requestForm(forBooking: url, postData: postData) { _, response, error in
+      BPKServerUtil.requestForm(forBooking: url, postData: postData) { status, response, error in
         if let response = response as? [NSObject: AnyObject] {
           // Further action required or a success-form was provided.
           // This is the case where OAuth was initiated as part of booking
           let form = BPKForm(json: response)
-          observer.onNext(form)
+          observer.onNext(.followUpForm(form))
+          observer.onCompleted()
+          
+        } else if let invalidThenRetry = BPKServerUtil.invalidateAndRetry(status: status, error: error) {
+          OAuthClient.removeCredentials(mode: mode)
+          observer.onNext(.retryFetchingForm(invalidThenRetry))
           observer.onCompleted()
           
         } else if let error = error {
@@ -117,7 +146,7 @@ extension Reactive where Base : BPKServerUtil {
           // further form is required.
           // This is the case where OAuth was initiated as part of linking
           // with an external provider and the linking was successful.
-          observer.onNext(nil)
+          observer.onNext(.completed)
           observer.onCompleted()
         }
       }
@@ -129,14 +158,26 @@ extension Reactive where Base : BPKServerUtil {
   
 }
 
-extension TKBookingFormType {
+
+extension BPKServerUtil {
   
-  /// Turns the booking form into the helper enum
-  static func from(_ form: BPKForm?) -> TKBookingFormType {
+  fileprivate static func invalidateAndRetry(status: Int, error: Error?) -> URL? {
     
-    guard let form = form else {
-      return .emptyResponse
-    }
+    guard
+      let error = error as? SVKError,
+      (status == 460 || error.code == 460)
+      else { return nil }
+
+    return error.recovery?.url
+  }
+  
+}
+
+
+extension TKBookingFormType {
+
+  /// Turns the booking form into the helper enum
+  static func from(_ form: BPKForm) -> TKBookingFormType {
     
     if form.isClientSideOAuth {
       return .auth(form)
