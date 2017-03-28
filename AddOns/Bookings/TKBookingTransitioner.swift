@@ -74,25 +74,16 @@ public enum TKBookingTransitioner {
     return BPKServerUtil.rx
       .requestForm(forBooking: url, postData: data, forMode: mode)
       .map { response in
-        
+
+        let result: TKBookingFormType
         switch response {
-        case .completed:
-          var newState = state
-          newState.serverDidLoad(form: .emptyResponse)
-          return newState
-          
-        case .followUpForm(let form):
-          let result = TKBookingFormType.from(form)
-          var newState = state
-          newState.serverDidLoad(form: result)
-          return newState
-          
-        case .retryFetchingForm(let url):
-          var newState = state
-          newState.serverRequestsRetry(url)
-          return newState
-          
+        case .completed:                result = .emptyResponse
+        case .followUpForm(let form):   result = TKBookingFormType.from(form)
         }
+
+        var newState = state
+        newState.serverDidLoad(form: result)
+        return newState
         
       }
       .catchError { error in
@@ -112,7 +103,6 @@ public enum TKBookingTransitioner {
 
 fileprivate enum TKBookingResponse {
   case followUpForm(BPKForm)
-  case retryFetchingForm(URL)
   case completed
 }
 
@@ -133,11 +123,6 @@ extension Reactive where Base : BPKServerUtil {
           observer.onNext(.followUpForm(form))
           observer.onCompleted()
           
-        } else if let invalidThenRetry = BPKServerUtil.invalidateAndRetry(status: status, error: error) {
-          OAuthClient.removeCredentials(mode: mode)
-          observer.onNext(.retryFetchingForm(invalidThenRetry))
-          observer.onCompleted()
-          
         } else if let error = error {
           observer.onError(error)
           
@@ -154,21 +139,6 @@ extension Reactive where Base : BPKServerUtil {
       return Disposables.create()
       
     }
-  }
-  
-}
-
-
-extension BPKServerUtil {
-  
-  fileprivate static func invalidateAndRetry(status: Int, error: Error?) -> URL? {
-    
-    guard
-      let error = error as? SVKError,
-      (status == 460 || error.code == 460)
-      else { return nil }
-
-    return error.recovery?.url
   }
   
 }
