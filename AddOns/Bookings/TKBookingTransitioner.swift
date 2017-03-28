@@ -46,7 +46,7 @@ public enum TKBookingTransitioner {
     // Server state where we kick of requests
     case .fetchingBookingForm(let url, let data, _):
       let dict = data as? [AnyHashable: Any]
-      return requestForm(url, data: dict, forMode: mode, advancing: state)
+      return requestForm(url, data: dict, advancing: state)
       
     // Triggering authentication
     case .authorizing(let form):
@@ -69,10 +69,10 @@ public enum TKBookingTransitioner {
   }
   
   
-  private static func requestForm(_ url: URL, data: [AnyHashable: Any]? = nil, forMode mode: String, advancing state: TKBookingStateMachine) -> Observable<TKBookingStateMachine> {
+  private static func requestForm(_ url: URL, data: [AnyHashable: Any]? = nil, advancing state: TKBookingStateMachine) -> Observable<TKBookingStateMachine> {
     
     return BPKServerUtil.rx
-      .requestForm(forBooking: url, postData: data, forMode: mode)
+      .requestForm(forBooking: url, postData: data)
       .map { response in
 
         let result: TKBookingFormType
@@ -111,7 +111,7 @@ extension Reactive where Base : BPKServerUtil {
   
   /// Send a form-response for a booking URL to the backend, retrieving either a
   /// follow-up form or, if no further action is required, just `nil`.
-  fileprivate static func requestForm(forBooking url: URL, postData: [AnyHashable: Any]? = nil, forMode mode: String) -> Observable<TKBookingResponse> {
+  fileprivate static func requestForm(forBooking url: URL, postData: [AnyHashable: Any]? = nil) -> Observable<TKBookingResponse> {
     
     return Observable.create { observer in
       
