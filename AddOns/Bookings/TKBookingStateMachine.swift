@@ -146,18 +146,6 @@ public enum TKBookingStateMachine {
   }
 
   
-  public mutating func serverRequestsRetry(_ url: URL) {
-    
-    switch self {
-    case .fetchingBookingForm(_, _, let sender):
-      self = .fetchingBookingForm(url, data: nil, sender: sender)
-      
-    default: print("Uh-oh. Ignoring serverDidLoad as we're in state \(self)")
-    }
-    
-  }
-  
-  
   public mutating func formCompletedBooking(url: URL?) {
     
     switch self {
