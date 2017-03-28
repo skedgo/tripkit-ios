@@ -133,11 +133,11 @@ public enum TKBookingStateMachine {
       
       switch form {
       case .auth(let form):           self = .authorizing(form)
-      case .error(let error):         self = .error(error)
       case .form(let form):           self = .presentForm(form, sender: sender)
       case .web(let url, let target, let next):
         self = .presentWeb(url, disregardOn: target, next: next, sender: sender)
       case .trip(let url):            self = .completed(url)
+      case .emptyResponse:            self = .completed(nil)
       }
       
     default: print("Uh-oh. Ignoring serverDidLoad as we're in state \(self)")

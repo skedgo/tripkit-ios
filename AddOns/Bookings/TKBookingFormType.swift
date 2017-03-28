@@ -16,6 +16,6 @@ public enum TKBookingFormType {
   case web(URL, disregardOn: URL, next: URL)
   case form(BPKForm)
   case trip(URL)
-  case error(Error)
+  case emptyResponse
   
 }

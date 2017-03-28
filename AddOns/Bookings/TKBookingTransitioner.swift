@@ -135,7 +135,7 @@ extension TKBookingFormType {
   static func from(_ form: BPKForm?) -> TKBookingFormType {
     
     guard let form = form else {
-      return .error(BookingError.missingServerResponse)
+      return .emptyResponse
     }
     
     if form.isClientSideOAuth {
