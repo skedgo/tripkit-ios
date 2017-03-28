@@ -127,39 +127,29 @@ extension SVKRegion {
   /**
    Fetches authentications for the provided `mode`.
    
-   Authentications can be locally stored (requiring no logins) or associated with the user's account and stored server-side. This method first tries locally and then falls back to remotely.
+   Authentications are associated with the user's account and stored server-side.
    
    - parameter mode: Mode identifier for which to fetch accounts. If `nil`, accounts for all modes will be fetched.
    - parameter completion: Block executed on completion with list of accounts that can be linked.
   */
   public func linkedAccounts(_ mode: String? = nil, completion: @escaping ([ProviderAuth]?) -> Void) {
-    if let mode = mode, let account = locallyLinkedAccount(mode) {
-      completion([account])
-    } else {
-      remotelyLinkedAccounts(mode, completion: completion)
-    }
+    remotelyLinkedAccounts(mode, completion: completion)
   }
   
   /**
-   Unlinkes local and remote authentications for the provided `mode`.
+   Unlinkes remote authentications for the provided `mode`.
    
    - parameter mode: Mode identifier for which to remove the authentication.
    - parameter remoteURL: `ProviderAuth.actionURL`, required to remove remote authentications.
    - parameter completion: Block executed when unlinking has finished. Boolean parameter indicates if any authentications have been removed.
   */
-  public func unlinkAccount(_ mode: String, remoteURL: URL?, completion: @escaping (Bool) -> Void) {
-    let localRemoved = OAuthClient.removeCredentials(mode: mode)
-    
-    guard let URL = remoteURL else {
-      completion(localRemoved)
-      return
-    }
+  public func unlinkAccount(_ mode: String, remoteURL: URL, completion: @escaping (Bool) -> Void) {
     
     // Also unlink remote
-    SVKServer.get(URL, paras: nil) { _, response, error in
+    SVKServer.get(remoteURL, paras: nil) { _, response, error in
       if let response = response as? [NSObject: AnyObject],
          response.isEmpty && error == nil {
-        completion(true || localRemoved)
+        completion(true)
       } else {
         completion(false)
       }
@@ -167,19 +157,6 @@ extension SVKRegion {
     
   }
 
-  fileprivate func locallyLinkedAccount(_ mode: String) -> ProviderAuth? {
-    if let cached = OAuthClient.cachedCredentials(mode: mode) {
-      if (cached.isValid || cached.hasRefreshToken) {
-        let status = ProviderAuth.Status.connected(nil)
-        return ProviderAuth(status: status, companyInfo: nil, modeIdentifier: mode)
-      } else {
-        // Remove outdated credentials that we can't renew
-        _ = OAuthClient.removeCredentials(mode: mode)
-      }
-    }
-    return nil;
-  }
-  
   fileprivate func remotelyLinkedAccounts(_ mode: String?, completion: @escaping ([ProviderAuth]?) -> Void) {
     
     var paras = [String: Any]()
