@@ -28,6 +28,7 @@ public class TKDepartureView: UIView {
     let segments = trip.segments(with: .inSummary)
     tripSegmentView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: true)
     
+    imageView.isHidden = false
     imageView.image = destination.trackIcon
     destinationTitle.text = destination.title
     
@@ -60,11 +61,20 @@ public class TKDepartureView: UIView {
   override public func awakeFromNib() {
     super.awakeFromNib()
     
+    // Style
     imageView.backgroundColor = SGStyleManager.globalTintColor()
     imageView.tintColor = UIColor.white
     imageView.layer.cornerRadius = 20
     imageView.layer.masksToBounds = true
     imageView.contentMode = .center
+    
+    // Hide placeholders
+    imageView.isHidden = true
+    destinationTitle.text = nil
+    destinationTimes.text = nil
+    timeTitleLabel.text = nil
+    timeUnitLabel.text = nil
+    timeNumberLabel.text = nil
   }
   
   // MARK: - Utilities
