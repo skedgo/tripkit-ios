@@ -103,7 +103,7 @@ extension TripRequest {
   fileprivate var choiceSet: [[String: Any]]? {
     
     let sorters = sortDescriptorsAccordingToSelectedOrder()
-    guard let set = tripGroups as? NSSet,
+    guard let set = tripGroups as NSSet?,
           let groups = set.sortedArray(using: sorters) as? [TripGroup] else {
       return nil
     }
