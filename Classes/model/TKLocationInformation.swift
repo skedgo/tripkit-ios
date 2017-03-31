@@ -48,7 +48,9 @@ public struct TKBikePodInfo : Unmarshaling, Marshaling {
   
   public var availableSpaces: Int? {
     guard let total = totalSpaces, let bikes = availableBikes else { return nil }
-    return total - bikes
+    
+    // available bikes can exceed number of spaces!
+    return max(0, total - bikes)
   }
   
   public var hasRealTime: Bool {
