@@ -365,7 +365,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.plannedURLString     = tripDict[@"plannedURL"]           ?: trip.plannedURLString;
       
       if ([tripDict[@"availability"] isKindOfClass:[NSString class]]) {
-        trip.missedBookingWindow  = [@"MISSED_PREBOOKING_WINDOW" isEqualToString:tripDict[@"availability"]];
+        trip.missedBookingWindow  = [@"MISSED_PREBOOKING_WINDOW" isEqualToString:tripDict[@"availabilitxy"]];
       }
       
       [trip calculateDuration];
@@ -544,8 +544,9 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         // always update the visiblity
         tripGroup.visibility = request.defaultVisibility;
         
-        // always update frequency (if there's one)
+        // always update frequency + sources (if there are any)
         tripGroup.frequency = tripGroupDict[@"frequency"] ?: tripGroup.frequency;
+        tripGroup.sourcesRaw = tripGroupDict[@"sources"] ?: tripGroup.sourcesRaw;
         
         for (Trip *trip in newTrips) {
           if (trip.managedObjectContext != nil) {

@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) id<NSCoding, NSObject> classification;
 @property (nonatomic, strong, nullable) NSNumber * frequency;
 @property (nonatomic, strong) NSNumber * flags;
+@property (nonatomic, strong, nullable) NSArray<id<NSCoding, NSObject>> *sourcesRaw;
 @property (nonatomic, strong) NSNumber * visibilityRaw;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, strong) TripRequest *request;
