@@ -157,16 +157,6 @@ typedef NSUInteger SGSegmentTemplateFlag;
   return [self dataForKey:@"miniInstruction"];
 }
 
-- (void)setDisclaimer:(NSString *)disclaimer
-{
-  [self setData:disclaimer forKey:@"disclaimer"];
-}
-
-- (NSString *)disclaimer
-{
-  return [self dataForKey:@"disclaimer"];
-}
-
 - (void)setContinuation:(BOOL)continuation
 {
   [self setFlag:SGSegmentTemplateFlagIsContinuation to:continuation];

@@ -27,6 +27,7 @@ typedef enum {
 @dynamic classification;
 @dynamic frequency;
 @dynamic flags;
+@dynamic sourcesRaw;
 @dynamic visibilityRaw;
 @dynamic toDelete;
 @dynamic request;

@@ -64,7 +64,6 @@
   // additional info
   template.continuation   = [dict[@"isContinuation"] boolValue];
   template.hasCarParks    = [dict[@"hasCarParks"] boolValue];
-  template.disclaimer     = dict[@"disclaimer"];
   
   // set start, intermediary waypoints and end
   
@@ -544,8 +543,9 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         // always update the visiblity
         tripGroup.visibility = request.defaultVisibility;
         
-        // always update frequency (if there's one)
+        // always update frequency + sources (if there are any)
         tripGroup.frequency = tripGroupDict[@"frequency"] ?: tripGroup.frequency;
+        tripGroup.sourcesRaw = tripGroupDict[@"sources"] ?: tripGroup.sourcesRaw;
         
         for (Trip *trip in newTrips) {
           if (trip.managedObjectContext != nil) {
