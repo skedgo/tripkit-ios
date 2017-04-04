@@ -47,6 +47,9 @@ extension Vehicle {
 
     if let seconds = dict["lastUpdate"] as? TimeInterval {
       lastUpdate = Date(timeIntervalSince1970: seconds)
+    } else {
+      assertionFailure("Vehicle is missing last update. Falling back to now.")
+      lastUpdate = Date()
     }
     
     if let occupancyString = dict["occupancy"] as? String {
