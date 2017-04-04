@@ -362,10 +362,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 	return self.template.smsNumber;
 }
 
-- (NSString *)disclaimer {
-  return self.template.disclaimer;
-}
-
 - (NSArray *)alerts
 {
   if (!_alerts) {

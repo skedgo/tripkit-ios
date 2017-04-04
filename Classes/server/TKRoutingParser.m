@@ -64,7 +64,6 @@
   // additional info
   template.continuation   = [dict[@"isContinuation"] boolValue];
   template.hasCarParks    = [dict[@"hasCarParks"] boolValue];
-  template.disclaimer     = dict[@"disclaimer"];
   
   // set start, intermediary waypoints and end
   
