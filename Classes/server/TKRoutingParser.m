@@ -364,7 +364,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.plannedURLString     = tripDict[@"plannedURL"]           ?: trip.plannedURLString;
       
       if ([tripDict[@"availability"] isKindOfClass:[NSString class]]) {
-        trip.missedBookingWindow  = [@"MISSED_PREBOOKING_WINDOW" isEqualToString:tripDict[@"availabilitxy"]];
+        trip.missedBookingWindow  = [@"MISSED_PREBOOKING_WINDOW" isEqualToString:tripDict[@"availability"]];
       }
       
       [trip calculateDuration];
