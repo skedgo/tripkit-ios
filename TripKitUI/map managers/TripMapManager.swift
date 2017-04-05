@@ -139,7 +139,7 @@ extension TripMapManager {
     zoomTo += primaries.map { $0 as MKAnnotation }
     addPrimaryVehicles(primaries, secondaryVehicles: alternatives)
     
-    if #available(iOSApplicationExtension 9.0, *) {
+    if #available(iOS 9.0, *) {
       mapView.showsTraffic = affectedByTraffic
     }
     

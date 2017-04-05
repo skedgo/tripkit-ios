@@ -8,7 +8,7 @@
 
 import UIKit
 
-@available(iOSApplicationExtension 8.2, *)
+@available(iOS 8.2, *)
 extension TKOccupancy {
   
   public var icon: UIImage? {
@@ -35,7 +35,7 @@ extension TKOccupancy {
   
 }
 
-@available(iOSApplicationExtension 8.2, *)
+@available(iOS 8.2, *)
 public class TKOccupancyView: UIView {
   
   public weak var icon: UIImageView!
@@ -68,7 +68,7 @@ public class TKOccupancyView: UIView {
     addSubview(label)
     self.label = label
     
-    if #available(iOSApplicationExtension 9.0, *) {
+    if #available(iOS 9.0, *) {
       let height = icon.heightAnchor.constraint(equalToConstant: 16)
       height.priority = 999
       height.isActive = true
@@ -103,7 +103,7 @@ public class TKOccupancyView: UIView {
 
 }
 
-@available(iOSApplicationExtension 8.2, *)
+@available(iOS 8.2, *)
 extension TKOccupancyView {
   
   public static var bundle: Bundle {
@@ -112,7 +112,7 @@ extension TKOccupancyView {
   
 }
 
-@available(iOSApplicationExtension 8.2, *)
+@available(iOS 8.2, *)
 extension TKOccupancyView {
   
   public enum Purpose {
