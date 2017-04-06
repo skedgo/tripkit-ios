@@ -91,10 +91,16 @@ public class TripBookingCoordinator {
           }
           return (fsm, mode, index)
         }
+        
+        // Get the next state
         .flatMap { fsm, mode, index -> Observable<(TKBookingStateMachine, Int)> in
           return TKBookingTransitioner.transition(state: fsm, forMode: mode)
             .map { ($0, index) }
         }
+        
+        // We switch to the next step on the main scheduler as otherwise we can hit
+        // re-entrancy issues in RxSwift.
+        .observeOn(MainScheduler.asyncInstance)
         .subscribe(
           onNext: { [weak self] newState, index in
             guard let machine = self?.stateMachines?[index] else { preconditionFailure() }
