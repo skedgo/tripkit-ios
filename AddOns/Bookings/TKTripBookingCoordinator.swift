@@ -61,7 +61,7 @@ public class TripBookingCoordinator {
         variable.asObservable()
           .distinctUntilChanged() // Otherwise staying in the same state would trigger again
           .map { (segmentIndex, $0) }
-          .bindTo(fsmPublisher)
+          .bind(to: fsmPublisher)
           .addDisposableTo(disposeBag)
       }
       
@@ -77,7 +77,7 @@ public class TripBookingCoordinator {
           return (segment, fsm)
         }
         .filter { $0 != nil }.map { $0! }
-        .bindTo(publisher)
+        .bind(to: publisher)
         .addDisposableTo(disposeBag)
       
       // This is where we do the actual transitions

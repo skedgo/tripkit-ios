@@ -75,8 +75,6 @@
 
 - (NSArray<NSNumber *> *)dashPattern;
 
-@property (nonatomic, strong) NSString *disclaimer;
-
 @property (nonatomic, strong) ModeInfo *modeInfo;
 
 @property (nonatomic, strong) STKMiniInstruction *miniInstruction;
