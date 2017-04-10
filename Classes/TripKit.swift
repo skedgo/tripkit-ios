@@ -20,9 +20,16 @@ public enum TripKit {
   }
   
   
-  public static func start() {
+  /// Prepares TripKit to be used
+  ///
+  /// Should be called from the application delegate, typically from
+  /// `application:didFinishLaunchingWithOptions` and
+  /// `applicationWillEnterForeground`.
+  public static func prepareForNewSession() {
     // Give the main class a nudge to wake up
     TKTripKit.sharedInstance()
+    
+    SVKServer.sharedInstance().updateRegionsForced(false)
   }
   
 }
