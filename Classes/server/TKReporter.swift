@@ -100,17 +100,8 @@ extension TripRequest {
   /// - Overview of segments
   ///   - mode
   ///   - duration
-  fileprivate var choiceSet: [[String: Any]]? {
-    
-    let sorters = sortDescriptorsAccordingToSelectedOrder()
-    guard let set = tripGroups as NSSet?,
-          let groups = set.sortedArray(using: sorters) as? [TripGroup] else {
-      return nil
-    }
-    
-    return groups
-      .filter { $0.visibility != .hidden }
-      .flatMap { $0.visibleTrip?.choiceSetEntry }
+  fileprivate var choiceSet: [[String: Any]] {
+    return sortedVisibleTrips().map { $0.choiceSetEntry }
   }
   
 }
