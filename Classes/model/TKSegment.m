@@ -1109,7 +1109,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   NSRange range;
   range = [string rangeOfString:@"<NUMBER>"];
   if (range.location != NSNotFound) {
-    NSString *replacement = [self scheduledServiceNumberOrMode];
+    NSString *replacement = [self scheduledServiceNumberOrMode]?: @"";
     [string replaceCharactersInRange:range withString:replacement];
   }
 
