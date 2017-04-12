@@ -98,7 +98,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSNumber *)bearing;
 - (UIColor *)color;
 - (NSArray<NSNumber *> *)dashPattern;
-- (nullable NSString *)disclaimer;
 - (BOOL)isCanceled;
 - (BOOL)timesAreRealTime;
 - (nullable Vehicle *)realTimeVehicle;
