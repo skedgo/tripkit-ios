@@ -53,11 +53,9 @@
 	// prepare
   [super takeChargeOfMap:mapView forViewController:controller animated:animated completion:nil];
 
-  if ([MKMapCamera class]) {
-    // pitch won't help much, but rotation could be useful
-    self.mapView.pitchEnabled  = NO;
-    self.mapView.rotateEnabled = YES;
-  }
+  // pitch won't help much, but rotation could be useful
+  self.mapView.pitchEnabled  = NO;
+  self.mapView.rotateEnabled = YES;
 
 	if (completion != nil) {
 		completion(YES);
