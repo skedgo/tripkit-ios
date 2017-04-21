@@ -89,36 +89,12 @@ extension TripMapManager {
           addedSegments += 1
         }
         
-        guard !segment.isStationary() && zoom != .zoomOnly else { continue }
-        if segment.isFlight() {
-          if let start = segment.start, let end = segment.end {
-            addGeodesicShape([start, end])
-          }
-          
-        } else {
-          let allEmpty = segment.isPublicTransport() && segment.shapes()?.count == 0
-          var requestsVisits = allEmpty
-          
-          segment.shapes()?.forEach { shape in
-            // add the shape itself
-            shape.segment = segment
-            addShape(shape)
-            
-            // add the visits
-            if let service = segment.service() {
-              if service.hasServiceData() {
-                for visit in service.visits ?? [] where segment.shouldShowVisit(visit) {
-                  add(visit)
-                }
-              } else {
-                requestsVisits = true
-              }
-            }
-          }
-          
-          if requestsVisits {
-            self.requestVisits(for: segment, includeShape: allEmpty)
-          }
+        guard zoom != .zoomOnly, let toAdd = MapManagerHelper.shapeAnnotations(for: segment) else { continue }
+
+        add(toAdd.points)
+        add(toAdd.overlays)
+        if toAdd.requestVisits {
+          self.requestVisits(for: segment, includeShape: toAdd.overlays.isEmpty)
         }
         
         // vehicles

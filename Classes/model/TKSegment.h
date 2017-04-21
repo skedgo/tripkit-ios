@@ -95,6 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isAffectedByTraffic;
 - (BOOL)isFlight;
 - (BOOL)isImpossible;
+- (BOOL)isTerminal;
 - (nullable NSNumber *)bearing;
 - (UIColor *)color;
 - (NSArray<NSNumber *> *)dashPattern;

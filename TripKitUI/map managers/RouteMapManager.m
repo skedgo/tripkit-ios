@@ -189,26 +189,41 @@
 	[self.mapView addAnnotation:annotation];
 }
 
-- (void)addShape:(id <STKDisplayableRoute>)shape
+- (void)addOverlays:(NSArray<id<MKOverlay>> *)overlays
 {
-  for (MKPolyline *existing in self.routeOverlays) {
-    if ([existing isKindOfClass:[STKRoutePolyline class]]) {
-      STKRoutePolyline *routeAnnotation = (STKRoutePolyline *)existing;
-      if (routeAnnotation.route == shape)
-        return; // added already
+  for (id<MKOverlay> overlay in overlays) {
+    [self addOverlay:overlay];
+  }
+}
+
+- (void)addOverlay:(nullable id<MKOverlay>)overlay
+{
+  if (overlay == nil) {
+    return;
+  }
+  
+  if ([overlay isKindOfClass:[STKRoutePolyline class]]) {
+    STKRoutePolyline *newOverlay = (STKRoutePolyline *)overlay;
+    for (MKPolyline *existing in self.routeOverlays) {
+      if ([existing isKindOfClass:[STKRoutePolyline class]]) {
+        STKRoutePolyline *routeAnnotation = (STKRoutePolyline *)existing;
+        if (routeAnnotation.route == newOverlay.route)
+          return; // added already
+      }
     }
   }
   
-	STKRoutePolyline *routePolyline = [STKRoutePolyline routePolylineForRoute:shape];
-	if (routePolyline) {
-		[self.routeOverlays addObject:routePolyline];
-	}
+  [self.routeOverlays addObject:overlay];
+}
+
+- (void)addShape:(id <STKDisplayableRoute>)shape
+{
+  [self addOverlay:[STKRoutePolyline routePolylineForRoute:shape]];
 }
 
 - (void)addGeodesicShape:(NSArray *)annotations
 {
-  MKGeodesicPolyline *geodesicPolyline = [STKRoutePolyline geodesicPolylineForAnnotations:annotations];
-  [self.routeOverlays addObject:geodesicPolyline];
+  [self addOverlay:[STKRoutePolyline geodesicPolylineForAnnotations:annotations]];
 }
 
 - (void)addPrimaryVehicles:(NSArray<Vehicle *> *)primary
@@ -225,7 +240,7 @@
 	[self prepareForVehicles];
   
   // add what we found
-  [self.mapView addOverlays:[self sort:self.routeOverlays] level:MKOverlayLevelAboveRoads];
+  [self.mapView addOverlays:[MapManagerHelper sort:self.routeOverlays] level:MKOverlayLevelAboveRoads];
   [self.mapView addAnnotations:self.routeAnnotations];
 	[self.mapView addAnnotations:self.vehicleAnnotations];
 }
@@ -334,161 +349,13 @@
 {
   if ([annotation isKindOfClass:[MKUserLocation class]])
     return nil;
-	
-	MKAnnotationView* annotationView = nil;
-	static NSString *SmallCircleIdentifier = @"SmallCircleView";
-	static NSString *LargeCircleIdentifier = @"LargeCircleView";
-	static NSString *VehicleIdentifier = @"VehicleAnnotationView";
   
-  if ([annotation isKindOfClass:[Vehicle class]]) {
-    // vehicles are little arrows
-    Vehicle *vehicle = (Vehicle *)annotation;
-    
-    TKVehicleAnnotationView *vehicleView = (TKVehicleAnnotationView *) [mv dequeueReusableAnnotationViewWithIdentifier:VehicleIdentifier];
-    if (nil == vehicleView) {
-      vehicleView = [[TKVehicleAnnotationView alloc] initWith:vehicle reuseIdentifier:VehicleIdentifier];
-    } else {
-      [vehicleView setAnnotation:vehicle];
-    }
-    
-    if (nil != vehicle.bearing) {
-      [vehicleView rotateVehicleWithHeadingAngle:self.heading bearingAngle:vehicle.bearing.floatValue];
-    }
-    
-    vehicleView.annotationColor = [UIColor colorWithRed:.31f green:.64f blue:.22f alpha:1];
-    [vehicleView agedBy:vehicle.ageFactor];
-    
-    annotationView = vehicleView;
-    
-  } else if ([annotation isKindOfClass:[StopVisits class]] && [self showAsSemaphore:(StopVisits *)annotation]) {
-
-    // Visits can be drawn as semaphores as they have a direction
-    
-    static NSString *sempahoreIdentifier = @"Semaphore";
-    SGSemaphoreView * semaphoreView = (SGSemaphoreView *)[mv dequeueReusableAnnotationViewWithIdentifier:sempahoreIdentifier];
-    
-    StopVisits *visit = (StopVisits *)annotation;
-    if (nil == semaphoreView) {
-      semaphoreView = [[SGSemaphoreView alloc] initWithAnnotation:visit
-                                                  reuseIdentifier:sempahoreIdentifier
-                                                      withHeading:self.heading];
-    } else {
-      [semaphoreView updateForAnnotation:visit
-                             withHeading:self.heading];
-    }
-    
-    // Set the time stamp on the side opposite to the travel direction.
-    CLLocationDirection absoluteBearing = visit.bearing.floatValue - self.heading;
-    SGSemaphoreLabel side = (absoluteBearing > 180 ? SGSemaphoreLabelOnRight : SGSemaphoreLabelOnLeft);
-    
-    [semaphoreView setTime:visit.departure
-                isRealTime:[visit.service isRealTime]
-                inTimeZone:visit.stop.region.timeZone
-                    onSide:side];
-
-    annotationView = semaphoreView;
-    annotationView.canShowCallout = YES;
-    
-    
-  } else if ([annotation isKindOfClass:[StopLocation class]]
-             || [annotation isKindOfClass:[StopVisits class]]) {
-    // a circle
-    // we make visits large and changes
-    BOOL isLarge = [self drawAsLargeCircle:annotation];
-    NSString *identifier = isLarge ? LargeCircleIdentifier : SmallCircleIdentifier;
-    
-    CircleAnnotationView* circle = (CircleAnnotationView*)[mv dequeueReusableAnnotationViewWithIdentifier:identifier];
-    if (nil == circle) {
-      circle = [[CircleAnnotationView alloc] initWithAnnotation:annotation
-                                                      drawLarge:isLarge
-                                                reuseIdentifier:identifier];
-    }
-    
-    // determine the faded state
-    BOOL travelled = [self drawCircleAsTravelled:annotation];
-    circle.isFaded = (NO == travelled);
-
-    // determine the colour
-    if ([annotation isKindOfClass:[StopLocation class]]) {
-      StopLocation *stop = (StopLocation *)annotation;
-      circle.circleColor = [SGKTransportStyler routeDashColorNontravelled];
-      if (travelled && stop.name) {
-        circle.circleColor = [self.stopColors valueForKey:stop.name];
-      }
-    } else if ([annotation isKindOfClass:[StopVisits class]])  {
-      StopVisits *visit = (StopVisits *)annotation;
-      circle.circleColor = travelled
-                            ? visit.service.color
-                            : [SGKTransportStyler routeDashColorNontravelled];
-    }
-    
-    circle.alpha = [self alphaForCircleAnnotations:circle.isLarge];
-    [circle setNeedsDisplay];
-    annotationView = circle;
-    
-  } else if ([annotation isKindOfClass:[TKSegment class]]) {
-    // Segments get drawn as semaphores
-    TKSegment *segment = (TKSegment *)annotation;
-    
-    static NSString *sempahoreIdentifier = @"Semaphore";
-    SGSemaphoreView *semaphoreView = (SGSemaphoreView *)[mv dequeueReusableAnnotationViewWithIdentifier:sempahoreIdentifier];
-    
-    if (nil == semaphoreView) {
-      semaphoreView = [[SGSemaphoreView alloc] initWithAnnotation:segment
-                                                  reuseIdentifier:sempahoreIdentifier
-                                                      withHeading:self.heading];
-    } else {
-      [semaphoreView updateForAnnotation:segment
-                             withHeading:self.heading];
-    }
-    
-    // Only public transport get the time stamp. And they get it on the side opposite to the
-    // travel direction.
-    SGSemaphoreLabel side = SGSemaphoreLabelDisabled;
-    
-    CLLocationDirection absoluteBearing = segment.bearing.floatValue - self.heading;
-    if ([segment isPublicTransport]) {
-      side = (absoluteBearing > 180 ? SGSemaphoreLabelOnRight : SGSemaphoreLabelOnLeft);
-    } else if ([segment isTerminal]) {
-      CLLocationCoordinate2D fromCoordinate = [segment.trip.request.fromLocation coordinate];
-      CLLocationCoordinate2D toCoordinate = [segment.trip.request.toLocation coordinate];
-      BOOL isLeft = (fromCoordinate.longitude > toCoordinate.longitude);
-      side = isLeft ? SGSemaphoreLabelOnLeft : SGSemaphoreLabelOnRight;
-    }
-    
-    if (segment.frequency.integerValue > 0) {
-      [semaphoreView setFrequency:segment.frequency
-                           onSide:side];
-    } else {
-      [semaphoreView setTime:segment.departureTime
-                  isRealTime:segment.timeIsRealTime
-                  inTimeZone:segment.timeZone
-                      onSide:side];
-    }
-    
-    annotationView = semaphoreView;
-    
-  } else if ([annotation conformsToProtocol:@protocol(STKDisplayablePoint)]) {
-      
-    static NSString *ImageIdentifier = @"ImageAnnotationIdenfifier";
-    ASImageAnnotationView *imageAnnotationView = (ASImageAnnotationView *) [mv dequeueReusableAnnotationViewWithIdentifier:ImageIdentifier];
-    if (nil == imageAnnotationView) {
-      imageAnnotationView = [[ASImageAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:ImageIdentifier];
-    } else {
-      imageAnnotationView.annotation = annotation;
-    }
-    
-    imageAnnotationView.alpha = 1;
-    imageAnnotationView.leftCalloutAccessoryView = nil;
-    imageAnnotationView.rightCalloutAccessoryView = nil;
-
-    annotationView = imageAnnotationView;
-  }
-  
-  [annotationView setCanShowCallout:[annotation respondsToSelector:@selector(title)]];
-  [annotationView setEnabled:YES];
-	
-	return annotationView;
+  AnnotationViewBuilder *builder = [[AnnotationViewBuilder alloc] initForAnnotation:annotation inMapView:mv];
+  [builder drawCircleAsTravelled:[self drawCircleAsTravelled:annotation]];
+  [builder drawCircleAsLarge:[self drawAsLargeCircle:annotation]];
+  [builder withHeading:self.heading];
+  [builder preferSemaphore:[annotation isKindOfClass:[StopVisits class]] && [self showAsSemaphore:(StopVisits *)annotation]];
+  return [builder build];
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
