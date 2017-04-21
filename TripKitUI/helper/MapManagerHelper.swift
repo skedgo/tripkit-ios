@@ -12,7 +12,7 @@ import CoreLocation
 
 public class MapManagerHelper: NSObject {
   
-  @objc
+  @objc(sortOverlays:)
   public static func sort(_ overlays: [MKOverlay]) -> [MKOverlay] {
     
     return overlays.sorted { one, two -> Bool in
@@ -30,6 +30,29 @@ public class MapManagerHelper: NSObject {
       
     }
     
+  }
+  
+  @objc(adjustZOrderOfAnnotationsViews:)
+  public static func adjustZOrder(_ annotationsViews: [MKAnnotationView]) {
+    
+    let sorted = annotationsViews.sorted { one, two -> Bool in
+      
+      guard
+        let segmentOne = one.annotation as? TKSegment,
+        let segmentTwo = two.annotation as? TKSegment
+        else { return true }
+      
+      switch (segmentOne.isTerminal(), segmentTwo.isTerminal()) {
+      case (true , true ): return false
+      case (false, true ): return true
+      case (true , false): return false
+      case (false, false): break
+      }
+      
+      return segmentOne.duration(true) < segmentTwo.duration(true)
+    }
+    
+    sorted.forEach { $0.superview?.bringSubview(toFront: $0) }
   }
   
   public static func shapeAnnotations(for segment: TKSegment)

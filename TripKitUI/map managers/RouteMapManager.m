@@ -240,7 +240,7 @@
 	[self prepareForVehicles];
   
   // add what we found
-  [self.mapView addOverlays:[MapManagerHelper sort:self.routeOverlays] level:MKOverlayLevelAboveRoads];
+  [self.mapView addOverlays:[MapManagerHelper sortOverlays:self.routeOverlays] level:MKOverlayLevelAboveRoads];
   [self.mapView addAnnotations:self.routeAnnotations];
 	[self.mapView addAnnotations:self.vehicleAnnotations];
 }
