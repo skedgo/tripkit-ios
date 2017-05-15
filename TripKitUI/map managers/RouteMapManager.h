@@ -16,6 +16,8 @@
 @class StopVisits, Vehicle;
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RouteMapManager : ASMapManager <CLLocationManagerDelegate>
 
 @property (assign, nonatomic) CLLocationDirection heading;
@@ -30,7 +32,7 @@
  */
 - (void)removeLastRouteFromMap;
 
-- (void)addAnnotation:(id <MKAnnotation>)annotation;
+- (void)addAnnotation:(nullable id <MKAnnotation>)annotation;
 - (void)addAnnotations:(NSArray <id <MKAnnotation>> *)annotations;
 
 - (void)addOverlay:(nullable id<MKOverlay>)overlay;
@@ -46,8 +48,8 @@
 /**
  * React to real-time updates for vehicles
  */
-- (void)realTimeUpdateForPrimaryVehicles:(NSArray <Vehicle *> *)primary
-                       secondaryVehicles:(NSArray <Vehicle *> *)secondary
+- (void)realTimeUpdateForPrimaryVehicles:(nullable NSArray <Vehicle *> *)primary
+                       secondaryVehicles:(nullable NSArray <Vehicle *> *)secondary
                                 animated:(BOOL)animated;
 
 - (void)presentRoute;
@@ -72,3 +74,5 @@
 - (BOOL)showAsSemaphore:(StopVisits *)visit;
 
 @end
+
+NS_ASSUME_NONNULL_END

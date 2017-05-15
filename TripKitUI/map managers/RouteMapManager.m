@@ -91,8 +91,8 @@
   }
 }
 
-- (void)realTimeUpdateForPrimaryVehicles:(NSArray <Vehicle *> *)primary
-                       secondaryVehicles:(NSArray <Vehicle *> *)secondary
+- (void)realTimeUpdateForPrimaryVehicles:(nullable NSArray <Vehicle *> *)primary
+                       secondaryVehicles:(nullable NSArray <Vehicle *> *)secondary
                                 animated:(BOOL)animated
 {
    NSMutableArray *previousVehicles = [NSMutableArray arrayWithArray:self.vehicleAnnotations];
@@ -175,7 +175,11 @@
 
 - (void)addAnnotation:(id<MKAnnotation>)annotation
 {
-	[self.routeAnnotations addObject:annotation];
+  if (annotation == nil) {
+    return;
+  }
+
+  [self.routeAnnotations addObject:annotation];
 }
 
 - (void)addAnnotations:(NSArray *)annotations
@@ -441,8 +445,8 @@
 	}
 }
 
-- (NSArray *)adjustedVehiclesForPrimaries:(NSArray <Vehicle *> *)primaries
-                             alternatives:(NSArray <Vehicle *> *)secondaries
+- (NSArray *)adjustedVehiclesForPrimaries:(nullable NSArray <Vehicle *> *)primaries
+                             alternatives:(nullable NSArray <Vehicle *> *)secondaries
 {
   NSMutableArray *vehicles = [NSMutableArray array];
   if (primaries) {
