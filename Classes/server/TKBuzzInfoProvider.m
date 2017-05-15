@@ -548,6 +548,8 @@ typedef enum {
         StopLocation *end = stopsDict[endStopCode];
         ZAssert(end, @"We need an end stop!");
         entry.endStop = end;
+        
+        // TODO: This could come back with a new stop, e.g., if we're going to a parent location and this is to a specific platform
       }
 			
 			// connect visit to stop
