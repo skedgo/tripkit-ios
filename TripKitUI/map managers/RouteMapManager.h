@@ -33,6 +33,9 @@
 - (void)addAnnotation:(id <MKAnnotation>)annotation;
 - (void)addAnnotations:(NSArray <id <MKAnnotation>> *)annotations;
 
+- (void)addOverlay:(nullable id<MKOverlay>)overlay;
+- (void)addOverlays:(NSArray<id<MKOverlay>> *)overlays;
+
 - (void)addShape:(id <STKDisplayableRoute>)shape;
 
 - (void)addGeodesicShape:(NSArray <id <MKAnnotation>> *)annotations;
