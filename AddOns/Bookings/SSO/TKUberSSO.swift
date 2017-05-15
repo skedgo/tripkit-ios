@@ -50,12 +50,15 @@ public enum TKUberSSO : SSOCompatible {
   public static func start() {
     guard !pretendUberIsInstalled else { return }
     
+    let urlScheme = SGKConfig.sharedInstance().appURLScheme()
+    let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? "TripGo"
+    
     var components = URLComponents()
     components.scheme = "uberauth"
     components.host   = "connect"
     components.queryItems = [
-      URLQueryItem(name: "third_party_app_name",  value: "TripGo"),
-      URLQueryItem(name: "callback_uri_string",   value: "tripgo://sso-uber"),
+      URLQueryItem(name: "third_party_app_name",  value: appName),
+      URLQueryItem(name: "callback_uri_string",   value: urlScheme + "://sso-uber"),
       URLQueryItem(name: "client_id",             value: "hBzl1hd9ihxKNnB7baQdp8y8iImTOfOF"),
       URLQueryItem(name: "login_type",            value: "default"),
       URLQueryItem(name: "scope",                 value: "request"),
