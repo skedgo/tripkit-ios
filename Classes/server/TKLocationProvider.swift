@@ -12,7 +12,13 @@ import CoreLocation
 import Marshal
 import RxSwift
 
+
+
 public enum TKLocationProvider {
+  
+  enum Error: Swift.Error {
+    case serverReturnedBadFormat
+  }
   
   /// Fetches locations that are within the provided circle
   ///
@@ -25,7 +31,7 @@ public enum TKLocationProvider {
   ///   - radius: Radius of circle in metres
   ///   - modes: Modes for which to fetch locations. If not provided, will use user profile.
   /// - Returns: Observable of fetched locations; can error out
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil) -> Observable<[STKModeCoordinate]?> {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil) -> Observable<[STKModeCoordinate]> {
     
     return SVKServer.sharedInstance().rx
       .requireRegion(center)
@@ -34,7 +40,7 @@ public enum TKLocationProvider {
       }
   }
   
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil, in region: SVKRegion) -> Observable<[STKModeCoordinate]?> {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil, in region: SVKRegion) -> Observable<[STKModeCoordinate]> {
 
     var paras: [String: Any] = [
       "lat": center.latitude,
@@ -51,11 +57,13 @@ public enum TKLocationProvider {
     
     return SVKServer.sharedInstance().rx
       .hit(.GET, path: "locations.json", parameters: paras, region: region)
-      .map { _, response -> [STKModeCoordinate]? in
+      .map { _, response -> [STKModeCoordinate] in
         guard
           let marshaled = response as? MarshaledObject,
           let groups: [GroupedLocations] = try? marshaled.value(for: "groups")
-          else { return nil }
+        else {
+          throw Error.serverReturnedBadFormat
+        }
         
         return groups.reduce(mutating: []) { $0.append(contentsOf: $1.all) }
       }
