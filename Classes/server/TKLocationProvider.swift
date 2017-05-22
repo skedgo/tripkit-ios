@@ -29,7 +29,7 @@ public enum TKLocationProvider {
   /// - Parameters:
   ///   - center: Centre coordinate of circle
   ///   - radius: Radius of circle in metres
-  ///   - modes: Modes for which to fetch locations. If not provided, will use user profile.
+  ///   - modes: Modes for which to fetch locations. If not provided, will use all.
   /// - Returns: Observable of fetched locations; can error out
   public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil) -> Observable<[STKModeCoordinate]> {
     
@@ -47,13 +47,7 @@ public enum TKLocationProvider {
       "lng": center.longitude,
       "radius": radius,
     ]
-    
-    if let modes = modes {
-      paras["modes"] = modes
-    } else {
-      let regionModes = region.modeIdentifiers
-      paras["modes"] = Array(TKUserProfileHelper.maximizedModeIdentifiers(regionModes))
-    }
+    paras["modes"] = modes
     
     return SVKServer.sharedInstance().rx
       .hit(.GET, path: "locations.json", parameters: paras, region: region)
