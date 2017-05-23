@@ -11,8 +11,8 @@
 
 #import "RouteMapManager.h"
 #import "TripMapManager.h"
-#import "VehicleView.h"
 
 #import "VehicleView.h"
+#import "CircleAnnotationView.h"
 
 #endif /* TripKitUI_h */

@@ -155,7 +155,8 @@
 		3AC4DD111DEE32C80026B238 /* TKWaypointRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AC4DD121DEE32C80026B238 /* TKWaypointRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */; };
 		3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */; };
-		3AD5ED051E27398B00B1B0E8 /* RouteMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD5ED041E27398B00B1B0E8 /* RouteMapManager.swift */; };
+		3AD390E31ED42805004689D4 /* AnnotationViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD390E11ED42805004689D4 /* AnnotationViewBuilder.swift */; };
+		3AD390E41ED42805004689D4 /* MapManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD390E21ED42805004689D4 /* MapManagerHelper.swift */; };
 		3ADB3A581D39E3830012D04B /* TKSegmentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */; };
 		3ADD5B661D9CDF0C00A1742F /* TKAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5B4E1D9CDF0C00A1742F /* TKAlertViewController.swift */; };
 		3ADD5B671D9CDF0C00A1742F /* RouteMapManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ADD5B501D9CDF0C00A1742F /* RouteMapManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -165,7 +166,7 @@
 		3ADD5B6B1D9CDF0C00A1742F /* TripMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5B541D9CDF0C00A1742F /* TripMapManager.swift */; };
 		3ADD5B6C1D9CDF0C00A1742F /* TripKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ADD5B551D9CDF0C00A1742F /* TripKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ADD5B6D1D9CDF0C00A1742F /* TripKitUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD5B561D9CDF0C00A1742F /* TripKitUI.xcassets */; };
-		3ADD5B6E1D9CDF0C00A1742F /* CircleAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ADD5B581D9CDF0C00A1742F /* CircleAnnotationView.h */; };
+		3ADD5B6E1D9CDF0C00A1742F /* CircleAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ADD5B581D9CDF0C00A1742F /* CircleAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ADD5B6F1D9CDF0C00A1742F /* CircleAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5B591D9CDF0C00A1742F /* CircleAnnotationView.m */; };
 		3ADD5B701D9CDF0C00A1742F /* TKAgendaWidgetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5B5A1D9CDF0C00A1742F /* TKAgendaWidgetInfoView.swift */; };
 		3ADD5B711D9CDF0C00A1742F /* TKAgendaWidgetInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD5B5B1D9CDF0C00A1742F /* TKAgendaWidgetInfoView.xib */; };
@@ -381,7 +382,8 @@
 		3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWaypointRouter.h; sourceTree = "<group>"; };
 		3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWaypointRouter.m; sourceTree = "<group>"; };
 		3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKWaypointRouter.swift; sourceTree = "<group>"; };
-		3AD5ED041E27398B00B1B0E8 /* RouteMapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapManager.swift; sourceTree = "<group>"; };
+		3AD390E11ED42805004689D4 /* AnnotationViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewBuilder.swift; sourceTree = "<group>"; };
+		3AD390E21ED42805004689D4 /* MapManagerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManagerHelper.swift; sourceTree = "<group>"; };
 		3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegmentHelper.swift; sourceTree = "<group>"; };
 		3ADD218F1E135F7700F6EBE8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3ADD5B4E1D9CDF0C00A1742F /* TKAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertViewController.swift; sourceTree = "<group>"; };
@@ -818,10 +820,20 @@
 			path = ttp;
 			sourceTree = "<group>";
 		};
+		3AD390E01ED42805004689D4 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				3AD390E11ED42805004689D4 /* AnnotationViewBuilder.swift */,
+				3AD390E21ED42805004689D4 /* MapManagerHelper.swift */,
+			);
+			path = helper;
+			sourceTree = "<group>";
+		};
 		3ADD5B4C1D9CDF0C00A1742F /* TripKitUI */ = {
 			isa = PBXGroup;
 			children = (
 				3ADD5B4D1D9CDF0C00A1742F /* controller */,
+				3AD390E01ED42805004689D4 /* helper */,
 				3ADD5B4F1D9CDF0C00A1742F /* map managers */,
 				3ADD5B551D9CDF0C00A1742F /* TripKitUI.h */,
 				3ADD5B561D9CDF0C00A1742F /* TripKitUI.xcassets */,
@@ -844,7 +856,6 @@
 			children = (
 				3ADD5B501D9CDF0C00A1742F /* RouteMapManager.h */,
 				3ADD5B511D9CDF0C00A1742F /* RouteMapManager.m */,
-				3AD5ED041E27398B00B1B0E8 /* RouteMapManager.swift */,
 				3ADD5B521D9CDF0C00A1742F /* TripMapManager.h */,
 				3ADD5B531D9CDF0C00A1742F /* TripMapManager.m */,
 				3ADD5B541D9CDF0C00A1742F /* TripMapManager.swift */,
@@ -1126,7 +1137,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B8BA181B154B651D1C4EC250 /* [CP] Copy Pods Resources */ = {
@@ -1171,7 +1182,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1199,7 +1210,6 @@
 				3AB6C70C1D1CD08E0089F687 /* TKRouter.m in Sources */,
 				3AB6C70E1D1CD08E0089F687 /* TKRoutingParser.m in Sources */,
 				3AB6C6FE1D1CD08E0089F687 /* TKBuzzRealTime.m in Sources */,
-				3AD5ED051E27398B00B1B0E8 /* RouteMapManager.swift in Sources */,
 				3AB6C6FB1D1CD08E0089F687 /* TKBuzzInfoProvider.m in Sources */,
 				3AB6C6D51D1CD08E0089F687 /* Alert.m in Sources */,
 				3AB6C6DB1D1CD08E0089F687 /* SegmentReference.m in Sources */,
@@ -1212,6 +1222,7 @@
 				3A9FF6DB1DE79FC400DB4647 /* TKReporter.swift in Sources */,
 				3AB6C6E51D1CD08E0089F687 /* StopVisits.m in Sources */,
 				3AB6C6BA1D1CD08E0089F687 /* TKInterAppCommunicator.m in Sources */,
+				3AD390E41ED42805004689D4 /* MapManagerHelper.swift in Sources */,
 				3AB6C6CE1D1CD08E0089F687 /* TripRequest+Classify.m in Sources */,
 				3ADD5B7B1D9CDF0C00A1742F /* VehicleView.m in Sources */,
 				3ADD5B661D9CDF0C00A1742F /* TKAlertViewController.swift in Sources */,
@@ -1260,6 +1271,7 @@
 				3A7769121D3DE45800AF9EB2 /* TKAgendaParserHelper.swift in Sources */,
 				3AB6C7001D1CD08E0089F687 /* TKBuzzRouter.m in Sources */,
 				3AB6C7021D1CD08E0089F687 /* TKFakeRouter.m in Sources */,
+				3AD390E31ED42805004689D4 /* AnnotationViewBuilder.swift in Sources */,
 				3A15D8D91D9CE08100BADBEA /* TKBuzzRouter+Rx.swift in Sources */,
 				3AB6C6E91D1CD08E0089F687 /* TripGroup.m in Sources */,
 				3A7769231D3DE45800AF9EB2 /* TKTTPifierFaker.swift in Sources */,
