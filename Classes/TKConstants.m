@@ -20,6 +20,5 @@ NSString *const TKDefaultsKeyProfileTransportCyclingSpeed	= @"profileTransportCy
 NSString *const TKDefaultsKeyProfileTransportTransferTime = @"profileTransportTransferTime";
 NSString *const TKDefaultsKeyProfileTransportConcessionPricing = @"profileTransportConcessionPricing";
 NSString *const TKDefaultsKeyProfileTransportEmissions    = @"profileTransportEmissions";
-NSString *const TKDefaultsKeyProfileTransportOnWheelchair          = @"profileOnWheelchair";
 
 NSString *const TKDefaultsKeyProfileBookingsUseSandbox    = @"profileBookingsUseSandbox";
