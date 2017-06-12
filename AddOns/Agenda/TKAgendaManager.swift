@@ -156,3 +156,17 @@ private struct TKSimpleAgenda: TKAgendaType {
   }
 }
 
+// MARK: - Helpers
+
+extension DateComponents {
+  public func earliestDate() -> Date {
+    let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)
+    return calendar!.date(from: self)!
+  }
+  
+  public func latestDate() -> Date {
+    return earliestDate().addingTimeInterval(86400)
+  }
+}
+
+
