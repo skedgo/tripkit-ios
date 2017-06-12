@@ -8,8 +8,6 @@
 
 import Foundation
 
-import SwiftyJSON
-
 enum TKTTPifierCache {
   fileprivate static let problemsDir = "problems"
   fileprivate static let solutionsDir = "solutions"
