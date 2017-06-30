@@ -10,8 +10,10 @@
 
 #ifdef TK_NO_FRAMEWORKS
 #import "TripKit.h"
-#import "TripKit/TripKit-Swift.h"
 #endif
+
+#import "SVKServerKit.h"
+#import "TripKit/TripKit-Swift.h"
 
 @implementation TKRouter
 

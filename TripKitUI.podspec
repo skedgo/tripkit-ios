@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   s.dependency 'MAKVONotificationCenter'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'
-  s.dependency 'SGPulsingAnnotationView'
+  s.dependency 'SVPulsingAnnotationView'
 
   s.source_files = "TripKitUI/**/*.{h,m,swift}"
   s.resources    = [

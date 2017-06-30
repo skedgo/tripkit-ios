@@ -31,6 +31,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Bookings' do |cs|
     cs.dependency 'TripKit'
+    cs.dependency 'TripKitUI'
     cs.dependency 'AFNetworking'  
     cs.dependency 'KVNProgress'
 

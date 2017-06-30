@@ -128,7 +128,11 @@ extension TripRequest {
       var timeString = formatter.string(from: time)
       timeString = timeString.replacingOccurrences(of: " pm", with: "pm")
       timeString = timeString.replacingOccurrences(of: " am", with: "am")
-      string.append(timeString.localizedLowercase)
+      if #available(iOS 9.0, *) {
+        string.append(timeString.localizedLowercase)
+      } else {
+        string.append(timeString.lowercased(with: SGStyleManager.applicationLocale()))
+      }
     }
     
     if let offset = timeZone?.secondsFromGMT(), let short = timeZone?.abbreviation(), offset != TimeZone.current.secondsFromGMT() {

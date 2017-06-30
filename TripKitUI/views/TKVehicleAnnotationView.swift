@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 import MapKit
-import SGPulsingAnnotationView
+import SVPulsingAnnotationView
 
 public class TKVehicleAnnotationView: SVPulsingAnnotationView {
   
@@ -89,7 +89,8 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     backgroundColor = UIColor.clear
     isOpaque = false
     
-    showDot = false
+    // TODO: Fix this
+//    showDot = false
     
     // The wrapper
     let wrapper = UIView(frame: frame)

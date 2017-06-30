@@ -12,7 +12,7 @@ def shared_pods
   pod 'AFNetworking'
   pod 'ASPolygonKit'
   pod 'ASPolylineView'
-  pod 'SGPulsingAnnotationView'
+  pod 'SVPulsingAnnotationView'
   pod 'KeychainAccess'
   pod 'KVNProgress'
   pod 'MAKVONotificationCenter'

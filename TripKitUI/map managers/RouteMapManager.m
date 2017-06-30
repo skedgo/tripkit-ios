@@ -12,11 +12,11 @@
 
 
 
-#ifndef TK_NO_FRAMEWORKS
-#import <TripKitUI/TripKitUI-Swift.h>
-#else
+#ifdef TK_NO_FRAMEWORKS
 #import "TripKit.h"
 #import <TripKit/TripKit-Swift.h>
+#else
+#import <TripKitUI/TripKitUI-Swift.h>
 #endif
 
 #import "CircleAnnotationView.h"

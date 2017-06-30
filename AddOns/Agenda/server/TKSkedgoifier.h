@@ -8,6 +8,7 @@
 
 @import CoreData;
 
+@import TripKit;
 
 @interface TKSkedgoifier : NSObject
 

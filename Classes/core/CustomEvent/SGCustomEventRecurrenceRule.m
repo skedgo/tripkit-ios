@@ -10,9 +10,9 @@
 
 #ifdef TK_NO_FRAMEWORKS
 #import "TripKit.h"
-#import "TripKit/TripKit-Swift.h"
 #endif
 
+#import "TripKit/TripKit-Swift.h"
 
 #import "SGRootKit.h"
 

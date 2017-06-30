@@ -8,11 +8,10 @@
 
 @import UIKit;
 
-#ifndef TK_NO_FRAMEWORKS
-@import SGCoreUIKit;
-@import SGUIKit;
-#else
+#ifdef TK_NO_FRAMEWORKS
 #import "SGButton.h"
+#else
+@import TripKitUI;
 #endif
 
 @interface BPKActionOverlay : UIView

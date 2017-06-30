@@ -15,6 +15,7 @@
 #import "TripKit/TripKit-Swift.h"
 #else
 @import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
 

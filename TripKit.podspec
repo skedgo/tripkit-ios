@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
 
   s.resources    = [
     "Resources/*.lproj",
-    "Resources/TripKit.*"
+    "Resources/TripKit.*",
     "TripKitModel.xcdatamodeld",
     "TripKitModel.xcdatamodeld/*."
   ]

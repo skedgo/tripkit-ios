@@ -8,11 +8,11 @@
 
 #import "TKSkedgoifier.h"
 
-#ifndef TK_NO_FRAMEWORKS
-@import TripKit;
-#import <TripKitAgenda/TripKitAgenda-Swift.h>
-#else
+#ifdef TK_NO_FRAMEWORKS
 #import <TripKit/TripKit-Swift.h>
+#else
+@import TripKit;
+#import <TripKitAddOns/TripKitAddOns-Swift.h>
 #endif
 
 #define kTKSkedgoifierErrorTypeUser 30051

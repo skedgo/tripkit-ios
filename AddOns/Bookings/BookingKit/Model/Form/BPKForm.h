@@ -12,10 +12,10 @@
 
 @interface BPKForm : NSObject
 
-@property (nonatomic, strong, readonly) NSDictionary *rawForm;
+@property (nonnull, nonatomic, strong, readonly) NSDictionary *rawForm;
 
-@property (nonatomic, copy, readonly) NSString *title;
-@property (nonatomic, copy, readonly) NSString *subtitle;
+@property (nullable, nonatomic, copy, readonly) NSString *title;
+@property (nullable, nonatomic, copy, readonly) NSString *subtitle;
 
 @property (nonatomic, copy, readonly) NSArray *invalidItems;
 @property (nonatomic, copy, readonly) NSArray *invalidIndexPaths;

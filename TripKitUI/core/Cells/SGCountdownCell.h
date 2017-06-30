@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-#ifndef TK_NO_FRAMEWORKS
-
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
 #else
-#import "SGRootKit.h"
+@import TripKit;
 #endif
+
 
 #import "SGLabel.h"
 
