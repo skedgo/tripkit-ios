@@ -42,17 +42,17 @@ typedef NS_ENUM(NSInteger, SGKLogLevel) {
 
 @implementation SGKLog
 
-+ (void)info:(NSString *)identifier block:(NSString *(^)())block
++ (void)info:(NSString *)identifier block:(NSString * _Nonnull (^)(void))block
 {
   [self log:identifier level:SGKLogLevel_Info block:block];
 }
 
-+ (void)debug:(NSString *)identifier block:(NSString *(^)())block
++ (void)debug:(NSString *)identifier block:(NSString * _Nonnull (^)(void))block
 {
   [self log:identifier level:SGKLogLevel_Debug block:block];
 }
 
-+ (void)verbose:(NSString *)identifier block:(NSString *(^)())block
++ (void)verbose:(NSString *)identifier block:(NSString * _Nonnull (^)(void))block
 {
   [self log:identifier level:SGKLogLevel_Verbose block:block];
 }

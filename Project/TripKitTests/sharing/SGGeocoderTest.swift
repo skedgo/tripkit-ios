@@ -209,7 +209,7 @@ extension SGGeocoder {
         
       },
       failure: { query, error in
-        handler("Error: \(error)")
+        handler("Error: \(String(describing: error))")
     })
   }
   
@@ -243,11 +243,11 @@ extension SGGeocoder {
             return
           }
         }
-        handler("Best match '\(best?.title)' does not have good title.")
+        handler("Best match '\(String(describing: best?.title))' does not have good title.")
         
     },
     failure: { query, error in
-        handler("Error: \(error)")
+        handler("Error: \(String(describing: error))")
     })
   }
 }
