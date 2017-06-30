@@ -101,7 +101,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isImpossible;
 - (BOOL)isTerminal;
 - (nullable NSNumber *)bearing;
-- (UIColor *)color;
+- (SGKColor *)color;
 - (NSArray<NSNumber *> *)dashPattern;
 - (BOOL)isCanceled;
 - (BOOL)timesAreRealTime;
@@ -200,7 +200,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Temporary storage for the semaphore image that we want to display on the map for the start of this segment. Used by watch app.
  */
-@property (nullable, nonatomic, strong) UIImage *mapImage;
+@property (nullable, nonatomic, strong) SGKImage *mapImage;
 
 /**
  Temporary storage to mark the active segment, i.e., the segment that the user is on (presumably) and which should be shown immediately to the user.

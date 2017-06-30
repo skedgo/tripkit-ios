@@ -102,7 +102,7 @@
 	return self.sortedWaypoints;
 }
 
-- (UIColor *)routeColour
+- (SGKColor *)routeColour
 {
   // Non-travelled always gets a special colour
 	if (NO == self.travelled.boolValue) {
@@ -111,7 +111,7 @@
 	
   // If we have a service, use that
 	Service *service = [self.services anyObject];
-	UIColor *color = service.color;
+	SGKColor *color = service.color;
   if (color) {
     return color;
   }
@@ -119,15 +119,15 @@
   // Next, we prefer the friendly vs unfriendly colours
   if (self.friendly) {
     return [self.friendly boolValue]
-      ? [UIColor colorWithRed:73/255.f green:220/255.f blue:99/255.f alpha:1]
-      : [UIColor colorWithRed:255/255.f green:231/255.f blue:73/255.f alpha:1];
+      ? [SGKColor colorWithRed:73/255.f green:220/255.f blue:99/255.f alpha:1]
+      : [SGKColor colorWithRed:255/255.f green:231/255.f blue:73/255.f alpha:1];
   }
   
 	color = self.segment.color;
   if (color) {
     return color;
   }
-  return [UIColor colorWithRed:143/255.f green:139/255.f blue:138/255.f alpha:1]; // Dark grey
+  return [SGKColor colorWithRed:143/255.f green:139/255.f blue:138/255.f alpha:1]; // Dark grey
 }
 
 - (BOOL)routeIsTravelled

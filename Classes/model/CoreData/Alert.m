@@ -136,7 +136,7 @@
   return (self.location != nil);
 }
 
-- (UIImage *)pointImage
+- (SGKImage *)pointImage
 {
   NSString *imageName = [STKInfoIcon imageNameForInfoIconType:self.infoIconType usage:STKInfoIconUsageMap];
   return [SGStyleManager imageNamed:imageName];

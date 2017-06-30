@@ -29,7 +29,7 @@ extension Alert: TKAlert {
     }
   }
   
-  public var icon: UIImage? {
+  public var icon: SGKImage? {
     return STKInfoIcon.image(for: infoIconType, usage: .normal)
   }
   

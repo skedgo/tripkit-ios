@@ -666,19 +666,19 @@ NSString *const UninitializedString =  @"UninitializedString";
   return _end;
 }
 
-- (UIColor *)color
+- (SGKColor *)color
 {
-  UIColor *serviceColor = self.service.color;
+  SGKColor *serviceColor = self.service.color;
   if (serviceColor) {
     return serviceColor;
   }
-  UIColor *modeColor = self.modeInfo.color;
+  SGKColor *modeColor = self.modeInfo.color;
   if (modeColor) {
 		return modeColor;
   } else if ([self isPublicTransport]) {
-		return [UIColor colorWithRed:143/255.f green:139/255.f blue:138/255.f alpha:1]; // Dark grey
+		return [SGKColor colorWithRed:143/255.f green:139/255.f blue:138/255.f alpha:1]; // Dark grey
   } else {
-    return [UIColor colorWithRed:214/255.f green:214/255.f blue:214/255.f alpha:1]; // Light grey
+    return [SGKColor colorWithRed:214/255.f green:214/255.f blue:214/255.f alpha:1]; // Light grey
   }
 }
 
@@ -723,7 +723,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   return CLLocationCoordinate2DIsValid(self.coordinate) && [self hasVisibility:STKTripSegmentVisibilityOnMap];
 }
 
-- (UIImage *)pointImage
+- (SGKImage *)pointImage
 {
   switch (self.order) {
     case TKSegmentOrderingStart:
@@ -780,7 +780,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 #pragma mark - STKTripSegment
 
-- (UIImage *)tripSegmentModeImage
+- (SGKImage *)tripSegmentModeImage
 {
   return [self imageForIconType:SGStyleModeIconTypeListMainMode allowRealTime:NO];
 }
@@ -910,7 +910,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-- (nullable UIColor *)tripSegmentModeColor
+- (nullable SGKColor *)tripSegmentModeColor
 {
   // These are only used in segment views. We only want to
   // colour public transport there.
@@ -919,7 +919,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
   
   // Prefer service colour over that of the mode itself.
-  UIColor *color = self.service.color;
+  SGKColor *color = self.service.color;
   if (color) {
     return color;
   } else {
@@ -961,7 +961,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 #pragma mark - Private methods
 
-- (UIImage *)imageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
+- (SGKImage *)imageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
 {
   NSString *localImageName = self.template.modeInfo.localImageName;
   if (self.trip.showNoVehicleUUIDAsLift

@@ -282,7 +282,7 @@
 	return YES;
 }
 
-- (UIImage *)pointImage
+- (SGKImage *)pointImage
 {
   return [self.service modeImageFor:SGStyleModeIconTypeListMainMode];
 }

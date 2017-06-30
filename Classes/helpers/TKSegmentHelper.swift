@@ -13,12 +13,12 @@ import UIKit
 
 
 public class TKSegmentHelper: NSObject {
-  public static func segmentImage(_ iconType: SGStyleModeIconType, modeInfo: ModeInfo, modeIdentifier: String?, isRealTime: Bool) -> UIImage? {
+  public static func segmentImage(_ iconType: SGStyleModeIconType, modeInfo: ModeInfo, modeIdentifier: String?, isRealTime: Bool) -> SGKImage? {
     guard let imageName = modeInfo.localImageName else { return nil }
     return segmentImage(iconType, localImageName: imageName, modeIdentifier: modeIdentifier, isRealTime: isRealTime)
   }
 
-  public static func segmentImage(_ iconType: SGStyleModeIconType, localImageName: String, modeIdentifier: String?, isRealTime: Bool) -> UIImage? {
+  public static func segmentImage(_ iconType: SGStyleModeIconType, localImageName: String, modeIdentifier: String?, isRealTime: Bool) -> SGKImage? {
     if let specificImage = SGStyleManager.image(forModeImageName: localImageName, isRealTime: isRealTime, of: iconType) {
       return specificImage
     }

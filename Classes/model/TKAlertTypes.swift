@@ -35,7 +35,7 @@ class TKSimpleAlert: NSObject, Unmarshaling, TKAlert {
   public let severity: AlertSeverity
   public let lastUpdated: Date?
   
-  public var icon: UIImage? {
+  public var icon: SGKImage? {
     let iconType: STKInfoIconType
     switch severity {
     case .info, .warning:
@@ -64,7 +64,7 @@ class TKSimpleAlert: NSObject, Unmarshaling, TKAlert {
 
 @objc public protocol TKAlert {
   
-  var icon: UIImage? { get }
+  var icon: SGKImage? { get }
   var iconURL: URL? { get }
   var title: String { get }
   var text: String? { get }

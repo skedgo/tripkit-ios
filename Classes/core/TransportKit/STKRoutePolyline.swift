@@ -25,7 +25,7 @@ extension MKGeodesicPolyline : STKDisplayableRoute {
     return coordinates.map { WrappedCoordinate($0) }
   }
   
-  public func routeColour() -> UIColor? {
+  public func routeColour() -> SGKColor? {
     return nil
   }
   

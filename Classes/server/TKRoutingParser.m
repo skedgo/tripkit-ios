@@ -422,7 +422,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           }
           
           // always update these as those might be new or updated, as long as they didn't get deleted
-          UIColor *newColor = [SVKParserHelper colorForDictionary:refDict[@"serviceColor"]];
+          SGKColor *newColor = [SVKParserHelper colorForDictionary:refDict[@"serviceColor"]];
           service.color     = newColor                      ?: service.color;
           service.frequency = refDict[@"frequency"]         ?: service.frequency;
           service.lineName  = refDict[@"serviceName"]       ?: service.lineName;
