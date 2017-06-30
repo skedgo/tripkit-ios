@@ -10,7 +10,7 @@
 
 @import CoreLocation;
 
-@import SGCoreKit;
+
 
 #ifndef TK_NO_FRAMEWORKS
 #import <TripKitUI/TripKitUI-Swift.h>

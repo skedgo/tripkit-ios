@@ -9,7 +9,7 @@
 import Foundation
 
 import Marshal
-import SGCoreKit
+
 
 /// Case-less enum just to create a namespace
 public enum TKBooking {

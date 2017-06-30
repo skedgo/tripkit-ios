@@ -8,7 +8,7 @@
 
 #import "TKParserHelper.h"
 
-@import SGCoreKit;
+
 
 #import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
@@ -16,18 +16,6 @@
 @implementation TKParserHelper
 
 #pragma mark - Segments
-
-+ (STKTripSegmentVisibility)segmentVisibilityType:(NSString *)string
-{
-  if ([string isEqualToString:@"in summary"])
-    return STKTripSegmentVisibilityInSummary;
-  else if ([string isEqualToString:@"on map"])
-    return STKTripSegmentVisibilityOnMap;
-  else if ([string isEqualToString:@"in details"])
-    return STKTripSegmentVisibilityInDetails;
-  else
-    return STKTripSegmentVisibilityHidden;
-}
 
 + (NSNumber *)segmentTypeForString:(NSString *)typeString
 {

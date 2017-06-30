@@ -10,7 +10,7 @@ import Foundation
 
 import Marshal
 
-import SGCoreKit
+
 
 public struct TKQuickBookingPrice {
   /// Price in local currency, typically not in smallest unit, but dollars

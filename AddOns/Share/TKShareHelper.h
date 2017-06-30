@@ -8,7 +8,7 @@
 
 @import Foundation;
 @import CoreLocation;
-@import SGCoreKit;
+
 
 @protocol SGGeocoder;
 
@@ -26,22 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSURL *)meetURLForCoordinate:(CLLocationCoordinate2D)coordinate
                          atTime:(NSDate *)time
                         baseURL:(NSString *)baseURL;
-
-
-#pragma mark - Query URL
-
-+ (BOOL)isQueryURL:(NSURL *)url;
-
-+ (NSURL *)queryURLForStart:(CLLocationCoordinate2D)start
-                        end:(CLLocationCoordinate2D)end
-                   timeType:(SGTimeType)timeType
-                       time:(nullable NSDate *)time;
-
-+ (NSURL *)queryURLForStart:(CLLocationCoordinate2D)start
-                        end:(CLLocationCoordinate2D)end
-                   timeType:(SGTimeType)timeType
-                       time:(nullable NSDate *)time
-                    baseURL:(NSString *)baseURL;
 
 #pragma mark - Stops
 

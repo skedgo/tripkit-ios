@@ -7,16 +7,14 @@
 //
 
 @import Foundation;
+@import CoreData;
 
-@import SGCoreKit;
 
-@class Service, Shape, SegmentReference, StopLocation;
+@class Service, Shape, SegmentReference, StopLocation, ModeInfo;
 
 @interface TKParserHelper : NSObject
 
 #pragma mark - Segments
-
-+ (STKTripSegmentVisibility)segmentVisibilityType:(NSString *)string;
 
 + (NSNumber *)segmentTypeForString:(NSString *)typeString;
 

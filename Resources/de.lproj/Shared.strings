@@ -1,0 +1,380 @@
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@s";
+
+/* No comment provided by engineer. */
+"%@'s Home" = "%@s Zuhause";
+
+/* No comment provided by engineer. */
+"%@'s Work" = "%@s Arbeit";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu Wiederholungen";
+
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "Wir konnten ‘%@' nicht finden.";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Zugriff zu diesem Feature wurde eingeschränkt. Bitte überprüfe die Einstellungen-App unter Allgemein > Einschränkungen.";
+
+/* Accessibility label for action button */
+"Action" = "Aktion";
+
+/* Default title for alert view */
+"Alert" = "Warnung";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "Hast du bereits einen Account? Einloggen...";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "Authentifizierung";
+
+/* Authorisation needed title */
+"Authorisation needed" = "Autorisierung benötigt";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "Fahrrad";
+
+/* Credit card CVC */
+"CVC" = "CVC";
+
+/* No comment provided by engineer. */
+"Can't find your current city" = "Ortung fehlgeschlagen";
+
+/* Cancel action */
+"Cancel" = "Abbrechen";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "Abgesagt";
+
+/* No comment provided by engineer. */
+"Cannot proceed without a valid email address" = "E-Mailadresse ist ungültig";
+
+/* Type of vehicle : car */
+"Car" = "Auto";
+
+/* Credit card number */
+"Card No." = "Karten-Nr.";
+
+/* Instruction for changing password */
+"Change" = "Ändern";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "Ortungsoptionen";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "Haken";
+
+/* Close action */
+"Close" = "Schließen";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "Bestätigen";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "Ortung fehlgeschlagen.";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "TripGo konnte die Liste der verfügbaren Städte nicht herunterladen. Bitte versuche es später noch einmal.";
+
+/* Message that indicates the app is creating accounts for users */
+"Creating account" = "Account wird erstellt...";
+
+/* Section title for credit card payment */
+"Credit card" = "Kreditkarte";
+
+/* Current city */
+"Current City" = "Aktuelle Stadt";
+
+/* Title for user's current location */
+"Current Location" = "Aktueller Ort";
+
+/* Delete action */
+"Delete" = "Löschen";
+
+/* Sort by distance */
+"Distance" = "Entfernung";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "Du hast noch keinen Account? Anmelden...";
+
+/* Done action */
+"Done" = "Fertig";
+
+/* Drop new pin */
+"Drop new pin" = "Stecknadel";
+
+/* Email address where receipt is sent
+   Email used as Facebook username */
+"Email" = "E-Mail";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "Jeden %@";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "Jeden Tag";
+
+/* Credit card expiry date */
+"Expiry Date" = "Ablaufdatum";
+
+/* Option that allows users to indicate whether reminder is needed
+   Reminder to leave preference */
+"For when to leave" = "Wenn ich gehen muss";
+
+/* Free as in beer */
+"Free" = "Kostenlos";
+
+/* No comment provided by engineer. */
+"Full name" = "Name";
+
+/* No comment provided by engineer. */
+"Getting a lift" = "Mitfahrgelegenheit";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "Erinnerung aktiv";
+
+/* Include contacts. */
+"Include contacts" = "Kontakte durchsuchen";
+
+/* Include events. */
+"Include events" = "Kalendar durchsuchen";
+
+/* Instant results proposal */
+"Instant results" = "Autovervollständigung";
+
+/* Title for alert that indicates the user account has become invalid */
+"Invalid account" = "Account ungültig";
+
+/* Name placeholder text */
+"John Appleseed" = "Otto Appleseed";
+
+/* Used when user signs in using Facebook */
+"Linking Facebook" = "Facebook wird kontaktiert...";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "Laden";
+
+/* Title for unnamed location */
+"Location" = "Ort";
+
+/* Location iOS6+ authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Ortungsdienste sind für dieses Feature benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Ortungsdiesten > TripGo.";
+
+/* Indicating a payment is in progress */
+"Making payment" = "Bezahlung erfolgt...";
+
+/* Option that allows users to indicate how eary to show trip reminder
+   Reminder to leave preference */
+"Minutes before trip" = "Minuten vor Abfahrt";
+
+/* More results proposal */
+"More results" = "Mehr Ergebnisse";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "Motorrad";
+
+/* Title for view that shows the summary of a user's account information */
+"My account" = "Mein Account";
+
+/* Name to which receipt is sent
+   Name used in Facebook
+   Sort by name
+   Title for name of something (or someone) */
+"Name" = "Name";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "Niemals";
+
+/* Title for sign in view when user does not have an account */
+"New account" = "Neuer Account";
+
+/* Next action */
+"Next" = "Weiter";
+
+/* No comment provided by engineer. */
+"No CO₂" = "Kein CO₂";
+
+/* Countdown cell 'now' indicator */
+"Now" = "Jetzt";
+
+/* Authorisation ok button
+   Default title for button that dismisses alert view
+   Error alert cancel
+   Ok action */
+"OK" = "OK";
+
+/* Button to open Settings app section for this app */
+"Open Settings" = "Einstellungen öffnen";
+
+/* Open in Safari action */
+"Open in Safari" = "In Safari öffnen";
+
+/* No comment provided by engineer. */
+"Password" = "Passwort";
+
+/* Indicating a payment is successful */
+"Payment successful" = "Zahlung erfolgreich";
+
+/* Section title for Paypal payment */
+"Paypal" = "PayPal";
+
+/* Please select a location prompt */
+"Please select a location" = "Bitte wähle einen Ort aus";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "Bitte erneut versuchen oder Ort manuell auswählen.";
+
+/* Please verify the location prompt */
+"Please verify the location" = "Bitte Ort bestätigen";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more..." = "'Suche' für mehr drücken...";
+
+/* No comment provided by engineer. */
+"Read more..." = "Mehr lesen...";
+
+/* Indicator for real-time information */
+"Real-time" = "Echtzeit";
+
+/* Title for section that asks users where payment receipt should be sent */
+"Receipt" = "Bestätigung";
+
+/* Action title to add/remove reminder
+   Section title at the end of a booking that allows users to set reminders */
+"Reminder" = "Erinnerung";
+
+/* Repeats daily */
+"Repeats daily" = "Täglich";
+
+/* Repeats monthly */
+"Repeats monthly" = "Monatlich";
+
+/* Repeats weekly */
+"Repeats weekly" = "Wöchentlich";
+
+/* Repeats yearly */
+"Repeats yearly" = "Jährlich";
+
+/* Button title to report a problem */
+"Report Problem" = "Problem melden";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "Nochmal versuchen";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "Jeep";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "Allgemein";
+
+/* Empty search bar placeholder */
+"Search" = "Suche";
+
+/* No comment provided by engineer. */
+"Search Results" = "Suchergebnisse";
+
+/* No comment provided by engineer. */
+"Search for a city" = "Stadt suchen";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'..." = "'%@' suchen...";
+
+/* Button that goes to the Setting's app */
+"Settings" = "Einstellungen";
+
+/* No comment provided by engineer. */
+"Sign in" = "Einloggen";
+
+/* Instruction for signing out user account */
+"Sign out" = "Abmelden";
+
+/* No comment provided by engineer. */
+"Sign up" = "Anmelden";
+
+/* No comment provided by engineer. */
+"Sign up cannot be completed without a valid password" = "Passwort ungültig";
+
+/* Message that indicates the app is signing users into their user accounts */
+"Signing in" = "Einloggen...";
+
+/* Message that indicates the app has successfully completed signing out
+   Message that indicates the app is signing users out of their accounts */
+"Signing out" = "Ausloggen...";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "Ab %@";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "Ort auswählen";
+
+/* Message that indicates the app is about to sign users out of their user accounts */
+"The app will now sign out" = "Ausloggen...";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "Ortung - aus";
+
+/* user location button - follow */
+"Tracking - on" = "Ortung - ein";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "Ortung - ein, inklusive Richtung";
+
+/* No comment provided by engineer. */
+"Unknown error" = "Unbekannter Fehler";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "bis %@";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "Trip wird aktualisiert...";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "Erfolderliche Felder sind nicht alle ausgefüllt.";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "Wochentags";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "Wochenende";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "Rollstuhlgerecht";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "Möchtest du einen Fehler melden?";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "Den AGBs muss für die Buchung zugestimmt werden.";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "Den Versicherungsbedingungen muss zugestimmt werden.";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Kalenderzugriffsautorisierung benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Kalender > TripGo.";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Addressbuchzugriffsautorisierung benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Kontakte > TripGo.";
+
+/* Indicator that an event is all-day */
+"all-day" = "ganztägig";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "Ankunft %@";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "Abfahrt %@";
+
+/* Short indicator of end-time */
+"ends at %@" = "endet um %@";
+
+/* Email placeholder text */
+"example@example.com" = "name@firma.de";
+
+/* Credit card expiry date placeholder, mm/yy */
+"mm/yy" = "MM/JJ";
+
+/* Short indicator of start-time */
+"starts at %@" = "beginnt um %@";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "bis %@";
+

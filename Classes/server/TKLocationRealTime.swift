@@ -11,7 +11,7 @@ import Foundation
 import RxSwift
 import Marshal
 
-import SGCoreKit
+
 
 public enum TKLocationRealTime {
 

@@ -8,7 +8,10 @@
 
 #import "TKRouter.h"
 
-#import <TripKit/TKTripKit.h>
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#endif
 
 @implementation TKRouter
 

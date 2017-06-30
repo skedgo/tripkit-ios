@@ -8,6 +8,17 @@
 
 import Foundation
 
+extension Alert {
+  
+  public var infoIconType: STKInfoIconType {
+    switch alertSeverity {
+    case .info, .warning: return .warning
+    case .alert: return .alert
+    }
+  }
+  
+}
+
 extension Alert: TKAlert {
   
   public var infoURL: URL? {
@@ -19,7 +30,7 @@ extension Alert: TKAlert {
   }
   
   public var icon: UIImage? {
-    return STKInfoIcon.image(for: infoIconType(), usage: .normal)
+    return STKInfoIcon.image(for: infoIconType, usage: .normal)
   }
   
   public var iconURL: URL? {

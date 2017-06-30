@@ -7,9 +7,10 @@
 //
 
 @import CoreData;
-@import SGCoreKit;
+@import CoreLocation;
 
 @class Service, StopLocation, SGKNamedCoordinate;
+@protocol STKDisplayablePoint;
 
 typedef NS_ENUM(NSInteger, AlertSeverity) {
   AlertSeverityInfo = -1,
@@ -49,8 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray *)fetchAlertsForService:(Service *)service;
 
 + (NSArray *)fetchAlertsForStopLocation:(StopLocation *)stopLocation;
-
-- (STKInfoIconType)infoIconType;
 
 - (void)remove;
 

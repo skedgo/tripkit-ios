@@ -8,7 +8,7 @@
 
 #import "TripRequest.h"
 
-@import SGCoreKit;
+
 
 #import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
@@ -42,117 +42,6 @@
 }
 
 #pragma mark - Public methods
-
-+ (TripRequest *)insertRequestIntoTripKitContext:(NSManagedObjectContext *)context
-{
-  NSString *entityName = NSStringFromClass([self class]);
-  TripRequest *newTrip = [NSEntityDescription insertNewObjectForEntityForName:entityName
-                                                       inManagedObjectContext:context];
-  newTrip.timeCreated = [NSDate date];
-  return newTrip;
-}
-
-+ (TripRequest *)insertRequestFrom:(id<MKAnnotation>)fromLocation
-                                to:(id<MKAnnotation>)toLocation
-													 forTime:(NSDate *)time
-                        ofTimeType:(SGTimeType)timeType
-                intoTripKitContext:(NSManagedObjectContext *)context
-{
-	ZAssert(fromLocation, @"We need a from location");
-	ZAssert(toLocation, @"We need a to location");
-  
-  TripRequest *newTrip = [self insertRequestIntoTripKitContext:context];
-	
-  newTrip.fromLocation   = [SGKNamedCoordinate namedCoordinateForAnnotation:fromLocation];
-  newTrip.toLocation     = [SGKNamedCoordinate namedCoordinateForAnnotation:toLocation];
-	newTrip.timeType       = @(timeType);
-	
-	switch (timeType) {
-		case SGTimeTypeArriveBefore:
-			ZAssert(time, @"We need a time!");
-			newTrip.arrivalTime   = time;
-			newTrip.departureTime = nil;
-			break;
-		
-		case SGTimeTypeLeaveAfter:
-			ZAssert(time, @"We need a time!");
-			newTrip.arrivalTime   = nil;
-			newTrip.departureTime = time;
-			break;
-			
-    case SGTimeTypeNone:
-		case SGTimeTypeLeaveASAP:
-			newTrip.arrivalTime   = nil;
-			newTrip.departureTime = nil;
-			break;
-	}
-  return newTrip;
-}
-
-+ (NSString *)timeStringForTime:(nullable NSDate *)time
-                     ofTimeType:(SGTimeType)timeType
-                       timeZone:(NSTimeZone *)timeZone
-{
-  NSString *title = nil;
-  switch (timeType) {
-    case SGTimeTypeLeaveASAP: {
-      title = NSLocalizedStringFromTableInBundle(@"Leave now", @"TripKit", [TKTripKit bundle], nil);
-      break;
-    }
-      
-    case SGTimeTypeLeaveAfter:
-    case SGTimeTypeArriveBefore: {
-      NSString *prefix = timeType == SGTimeTypeLeaveAfter
-        ? NSLocalizedStringFromTableInBundle(@"Leave", @"TripKit", [TKTripKit bundle], @"Prefix for selected 'leave after' time")
-        : NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Prefix for selected 'arrive by' time");
-      
-      NSMutableString *titleBuilder = [NSMutableString stringWithString:prefix];
-      [titleBuilder appendString:@" "];
-      
-      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-      dateFormatter.timeStyle = NSDateFormatterShortStyle;
-      dateFormatter.dateStyle = NSDateFormatterShortStyle;
-      dateFormatter.locale = [SGStyleManager applicationLocale];
-      dateFormatter.doesRelativeDateFormatting = YES;
-      
-      dateFormatter.timeZone = timeZone;
-      NSString *timeString = [dateFormatter stringFromDate:time];
-      if (timeString) {
-        timeString = [timeString stringByReplacingOccurrencesOfString:@" pm" withString:@"pm"];
-        timeString = [timeString stringByReplacingOccurrencesOfString:@" am" withString:@"am"];
-        timeString = [timeString lowercaseStringWithLocale:[NSLocale systemLocale]];
-        [titleBuilder appendString:timeString];
-      }
-      
-      if (timeZone && ![timeZone isEqualToTimeZone:[NSTimeZone defaultTimeZone]]) {
-        [titleBuilder appendFormat:@" %@", timeZone.abbreviation];
-      }
-      title = titleBuilder;
-      break;
-    }
-      
-    default:
-      break;
-  }
-  
-  return title;
-}
-
-- (TripRequest *)insertedEmptyCopy
-{
-  if (! self.managedObjectContext) {
-    ZAssert(false, @"Don't create a copy of a request which doesn't have a MOC.");
-    return nil;
-  }
-  
-  TripRequest *newTrip = [[self class] insertRequestIntoTripKitContext:self.managedObjectContext];
-  newTrip.fromLocation   = self.fromLocation;
-  newTrip.toLocation     = self.toLocation;
-  newTrip.arrivalTime    = self.arrivalTime;
-  newTrip.departureTime  = self.departureTime;
-  newTrip.timeType       = self.timeType;
-  return newTrip;
-}
 
 - (void)dealloc
 {
@@ -236,13 +125,6 @@
   return [[SVKRegionManager sharedInstance] timeZoneForCoordinate:[self.toLocation coordinate]];
 }
 
-- (NSString *)timeString
-{
-  return [TripRequest timeStringForTime:self.time
-                             ofTimeType:self.type
-                               timeZone:[self departureTimeZone]];
-}
-
 - (BOOL)resultsInSameQueryAs:(TripRequest *)other
 {
   if (other == nil)
@@ -314,65 +196,6 @@
 - (void)setPreferredTrip:(Trip *)preferredTrip
 {
   [preferredTrip setAsPreferredTrip];
-}
-
-- (NSSet *)trips
-{
-  NSMutableSet *trips = [NSMutableSet set];
-  for (TripGroup *group in self.tripGroups) {
-    for (Trip *trip in group.trips) {
-      [trips addObject:trip];
-    }
-  }
-  return trips;
-}
-
-- (SGTimeType)type
-{
-  return (SGTimeType) self.timeType.integerValue;
-}
-
-- (NSDate *)time
-{
-  SGTimeType type = [self type];
-	switch (type) {
-    case SGTimeTypeNone: // default to now
-		case SGTimeTypeLeaveASAP:
-			return [NSDate date];
-			
-		case SGTimeTypeLeaveAfter:
-			return [self departureTime];
-			
-		case SGTimeTypeArriveBefore:
-			return [self arrivalTime];
-	}
-}
-
-- (void)setTime:(NSDate *)time forType:(SGTimeType)type
-{
-  self.timeType = @(type);
-	
-	switch (type) {
-		case SGTimeTypeLeaveASAP:
-			self.departureTime = [NSDate date];
-			self.arrivalTime = nil;
-			break;
-			
-		case SGTimeTypeLeaveAfter:
-			self.departureTime = time;
-			self.arrivalTime = nil;
-			break;
-			
-		case SGTimeTypeArriveBefore:
-			self.departureTime = nil;
-			self.arrivalTime = time;
-			break;
-      
-    case SGTimeTypeNone:
-      self.departureTime = nil;
-      self.arrivalTime   = nil;
-      break;
-	}
 }
 
 - (NSString *)timeSorterTitle

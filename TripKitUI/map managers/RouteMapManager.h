@@ -8,12 +8,13 @@
 
 @import MapKit;
 
-@import SGCoreUIKit;
+#import "ASMapManager.h"
 
 #ifndef TK_NO_FRAMEWORKS
 @import TripKit;
 #else
 @class StopVisits, Vehicle;
+@protocol STKDisplayableRoute;
 #endif
 
 NS_ASSUME_NONNULL_BEGIN

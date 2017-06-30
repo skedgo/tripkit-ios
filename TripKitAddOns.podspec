@@ -22,7 +22,6 @@ Pod::Spec.new do |s|
   s.prefix_header_file = "prefix.pch"
 
   s.subspec 'Agenda' do |cs|
-    cs.dependency 'SGCoreKit/Rx'
     cs.dependency 'TripKit'
     cs.dependency 'RxSwift'
     cs.dependency 'RxCocoa'
@@ -32,11 +31,18 @@ Pod::Spec.new do |s|
 
   s.subspec 'Bookings' do |cs|
     cs.dependency 'TripKit'
-    cs.dependency 'SGBookingKit'
+    cs.dependency 'AFNetworking'  
+    cs.dependency 'KVNProgress'
+
     cs.dependency 'RxSwift'
     cs.dependency 'RxCocoa'
+    cs.dependency 'SwiftyJSON'
+    cs.dependency 'KeychainAccess'
+    cs.dependency 'OAuthSwift'
 
     cs.source_files = "AddOns/Bookings/**/*.{h,m,swift}"
+    cs.resources = "AddOns/Bookings/**/*.{xib}"
+
   end
 
   s.subspec 'InterApp' do |cs|
@@ -46,7 +52,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Share' do |cs|
     cs.dependency 'TripKit'
-    cs.dependency 'SGSearchKit'
+    cs.dependency 'AFNetworking'
     cs.dependency 'RxSwift'
     cs.source_files = "AddOns/Share/**/*"
   end

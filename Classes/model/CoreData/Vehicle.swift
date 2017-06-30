@@ -8,7 +8,7 @@
 
 import Foundation
 
-import SGCoreKit
+
 
 extension TKOccupancy {
   
@@ -96,7 +96,7 @@ extension Vehicle : MKAnnotation {
   
   public var title: String? {
     guard let modeTitle =
-      anyService?.modeTitle()?.capitalized(with: Locale.current)
+      anyService?.modeTitle?.capitalized(with: Locale.current)
       ?? anySegmentReference?.template()?.modeInfo?.descriptor
       ?? label
       else { return nil }

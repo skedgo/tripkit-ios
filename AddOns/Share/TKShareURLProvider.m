@@ -8,7 +8,13 @@
 
 #import "TKShareURLProvider.h"
 
-@import SGCoreKit;
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#else
+@import TripKit;
+#endif
+
 
 #define SECONDS_TO_WAIT 10
 

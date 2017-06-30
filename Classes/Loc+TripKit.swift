@@ -8,8 +8,6 @@
 
 import Foundation
 
-import SGCoreKit
-
 extension Loc {
   
   public static var Trip: String {

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-import SGCoreKit
+
 
 
 public class TKSegmentHelper: NSObject {

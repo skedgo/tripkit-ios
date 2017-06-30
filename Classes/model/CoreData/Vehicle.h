@@ -9,7 +9,7 @@
 @import Foundation;
 @import CoreData;
 @import MapKit;
-@import SGCoreKit;
+
 
 @class Service, SegmentReference;
 

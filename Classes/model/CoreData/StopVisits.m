@@ -8,9 +8,10 @@
 
 #import "StopVisits.h"
 
-#import <TripKit/TKTripKit.h>
-
-@import SGCoreKit;
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#endif
 
 #import "SGStyleManager.h"
 
@@ -199,22 +200,6 @@
   }
 }
 
-- (SGKGrouping)groupingWithPrevious:(StopVisits *)previous
-                              next:(StopVisits *)next
-{
-  BOOL sameAsBefore = [previous.searchString isEqualToString:self.searchString];
-  BOOL sameAsAfter  = [next.searchString isEqualToString:self.searchString];
-  if (sameAsBefore && sameAsAfter) {
-    return SGKGrouping_Middle;
-  } else if (sameAsBefore) {
-    return SGKGrouping_End;
-  } else if (sameAsAfter) {
-    return SGKGrouping_Start;
-  } else {
-    return SGKGrouping_Individual;
-  }
-}
-
 - (NSComparisonResult)compare:(StopVisits *)other
 {
   if (self.index && [self.service isEqual:other.service]) {
@@ -299,12 +284,12 @@
 
 - (UIImage *)pointImage
 {
-  return [self.service modeImageOfType:SGStyleModeIconTypeListMainMode];
+  return [self.service modeImageFor:SGStyleModeIconTypeListMainMode];
 }
 
 - (NSURL *)pointImageURL
 {
-  return [self.service modeImageURLForType:SGStyleModeIconTypeListMainMode];
+  return [self.service modeImageURLFor:SGStyleModeIconTypeListMainMode];
 }
 
 - (BOOL)canFlipImage

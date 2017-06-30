@@ -8,11 +8,8 @@
 
 #import "Trip.h"
 
-@import SGCoreKit;
-
 #import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
-
 
 #import "TKRealTimeUpdatableHelper.h"
 
@@ -380,34 +377,6 @@ typedef NSUInteger SGTripFlag;
   return self.minutes;
 }
 
-- (NSSet *)vehicleSegments
-{
-  NSMutableSet *set = [NSMutableSet setWithCapacity:self.segments.count];
-  for (TKSegment *segment in self.segments) {
-    if (![segment isStationary] && [segment usesVehicle]) {
-      [set addObject:segment];
-    }
-  }
-  return set;
-}
-
-- (STKVehicleType)usedPrivateVehicleType
-{
-  for (TKSegment *segment in self.segments) {
-    STKVehicleType type = [segment privateVehicleType];
-    if (type != STKVehicleType_None)
-      return type;
-  }
-  return STKVehicleType_None;
-}
-
-- (void)assignVehicle:(id<STKVehicular>)vehicle
-{
-  for (TKSegment *segment in self.segments) {
-    [segment assignVehicle:vehicle];
-  }
-}
-
 - (void)setShowNoVehicleUUIDAsLift:(BOOL)showNoVehicleUUIDAsLift
 {
 	[self setFlag:SGTripFlagShowNoVehicleUUIDAsLift to:showNoVehicleUUIDAsLift];
@@ -611,22 +580,6 @@ typedef NSUInteger SGTripFlag;
     }
   }
   return nil;
-}
-
-- (STKTripCostType)primaryCostType
-{
-  if (self.departureTimeIsFixed) {
-    return STKTripCostTypeTime;
-  } else if ([self isExpensive]) {
-    return STKTripCostTypePrice;
-  } else {
-    return STKTripCostTypeDuration;
-  }
-}
-
-- (BOOL)isExpensive {
-  TKSegment *mainSegment = [self mainSegment];
-  return [SVKTransportModes modeIdentifierIsExpensive:mainSegment.modeIdentifier];
 }
 
 - (BOOL)isMixedModal {

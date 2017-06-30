@@ -11,7 +11,7 @@ import Foundation
 import CoreLocation
 import RxSwift
 
-import SGCoreKit
+
 
 struct TKAgendaFaker: TKAgendaBuilderType {
   func buildTrack(forItems items: [TKAgendaInputItem], startDate: Date, endDate: Date) -> Observable<[TKAgendaOutputItem]> {

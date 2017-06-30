@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol SGURLShareable <NSObject>
-- (NSURL *)shareURL;
+@property (nullable, readonly) NSURL *shareURL;
 @optional
-- (NSURL *)saveURL;
+- (nullable NSURL *)saveURL;
 - (void)setShareURL:(NSURL *)shareURL;
 @end
 
@@ -20,10 +22,12 @@
 + (void)getShareURLForShareable:(id<SGURLShareable>)shareable
                    allowLongURL:(BOOL)longURL
                         success:(void (^)(NSURL *url))success
-                        failure:(void (^)())failure;
+                        failure:(nullable void (^)())failure;
 
-+ (NSURL *)getShareURLForShareable:(id<SGURLShareable>)shareable
++ (nullable NSURL *)getShareURLForShareable:(id<SGURLShareable>)shareable
                       allowLongURL:(BOOL)longURL
                      allowBlocking:(BOOL)allowBlocking;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -9,7 +9,20 @@
 
 // Dependencies
 @import CoreData;
-@import SGCoreKit;
+
+// Kits
+#import "SGRootKit.h"
+#import "SVKServerKit.h"
+#import "STKTransportKit.h"
+
+// Helpers
+#if TARGET_OS_IPHONE
+#import "SGActions.h"
+#import "SGAlert.h"
+#endif
+#import "SGCustomEvent.h"
+#import "SGCustomEventRecurrenceRule.h"
+
 
 // Headers
 #import "TKConstants.h"

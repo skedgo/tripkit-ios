@@ -11,7 +11,7 @@ import Foundation
 import Marshal
 import RxSwift
 
-import SGCoreKit
+
 
 public class TKBikePodLocation: STKModeCoordinate {
   

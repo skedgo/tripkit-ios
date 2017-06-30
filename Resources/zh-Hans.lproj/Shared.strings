@@ -1,0 +1,373 @@
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@'的";
+
+/* No comment provided by engineer. */
+"%@'s Home" = "%@的住家";
+
+/* No comment provided by engineer. */
+"%@'s Work" = "%@的公司";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "重复%lu次";
+
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "无法找到'%@'.";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "您的设备没有使用该功能的权限。请到设定 > 一般 > 使用限制检查您的设定或询问您的裝置提供商.";
+
+/* Accessibility label for action button */
+"Action" = "动作";
+
+/* Default title for alert view */
+"Alert" = "提示";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "已经有账户了？登录";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "验证";
+
+/* Authorisation needed title */
+"Authorisation needed" = "需要用户授权";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "自行车";
+
+/* Credit card CVC */
+"CVC" = "卡背面3位数";
+
+/* No comment provided by engineer. */
+"Can't find your current city" = "找不到您当前所在的城市";
+
+/* Cancel action */
+"Cancel" = "取消";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "已取消";
+
+/* No comment provided by engineer. */
+"Cannot proceed without a valid email address" = "无法用一个无效的邮箱地址进行之后的步骤";
+
+/* Type of vehicle : car */
+"Car" = "轿车";
+
+/* Credit card number */
+"Card No." = "卡号";
+
+/* Instruction for changing password */
+"Change" = "更改密码";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "变更追踪选项";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "选取标记";
+
+/* Close action */
+"Close" = "关闭";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "确认";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "无法定位您的当前位置。";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "无法从我们的服务器下载所覆盖地区的列表．请稍后再试一次。";
+
+/* Message that indicates the app is creating accounts for users */
+"Creating account" = "创建账户";
+
+/* Section title for credit card payment */
+"Credit card" = "信用卡";
+
+/* Current city */
+"Current City" = "当前城市";
+
+/* Title for user's current location */
+"Current Location" = "当前位置";
+
+/* Delete action */
+"Delete" = "刪除";
+
+/* Sort by distance */
+"Distance" = "距离";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "还没有账户？注册";
+
+/* Done action */
+"Done" = "完成";
+
+/* Drop new pin */
+"Drop new pin" = "放置新的大头针";
+
+/* Email address where receipt is sent
+   Email used as Facebook username */
+"Email" = "邮箱";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "每%@分钟一趟";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "每天";
+
+/* Credit card expiry date */
+"Expiry Date" = "到期时间";
+
+/* Option that allows users to indicate whether reminder is needed
+   Reminder to leave preference */
+"For when to leave" = "出发时间";
+
+/* Free as in beer */
+"Free" = "免费";
+
+/* No comment provided by engineer. */
+"Full name" = "全名";
+
+/* No comment provided by engineer. */
+"Getting a lift" = "与人共乘";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "提醒已设置";
+
+/* Include contacts. */
+"Include contacts" = "包含联络人";
+
+/* Include events. */
+"Include events" = "包含事件";
+
+/* Instant results proposal */
+"Instant results" = "快速搜寻结果";
+
+/* Title for alert that indicates the user account has become invalid */
+"Invalid account" = "无效账户";
+
+/* Name placeholder text */
+"John Appleseed" = "约翰 · 阿普尔西德";
+
+/* Used when user signs in using Facebook */
+"Linking Facebook" = "连接到Facebook";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "加载中";
+
+/* Title for unnamed location */
+"Location" = "位置";
+
+/* Location iOS6+ authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "本功能需要使用定位服务. 请到设定 > 隐私 > 定位服务确认服务是开启的，同时也请确认您已授权本App使用定位服务.";
+
+/* Indicating a payment is in progress */
+"Making payment" = "正在付款";
+
+/* Option that allows users to indicate how eary to show trip reminder
+   Reminder to leave preference */
+"Minutes before trip" = "提前多久开始行程";
+
+/* More results proposal */
+"More results" = "更多搜索结果";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "摩托车";
+
+/* Title for view that shows the summary of a user's account information */
+"My account" = "我的帐户";
+
+/* Name to which receipt is sent
+   Name used in Facebook
+   Sort by name
+   Title for name of something (or someone) */
+"Name" = "名称";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "永不重复";
+
+/* Title for sign in view when user does not have an account */
+"New account" = "新账户";
+
+/* Next action */
+"Next" = "下一步";
+
+/* No comment provided by engineer. */
+"No CO₂" = "无二氧化碳排放";
+
+/* Countdown cell 'now' indicator */
+"Now" = "现在";
+
+/* Authorisation ok button
+   Default title for button that dismisses alert view
+   Error alert cancel */
+"OK" = "好";
+
+/* Button to open Settings app section for this app */
+"Open Settings" = "打开设置";
+
+/* Open in Safari action */
+"Open in Safari" = "在Safari中开启";
+
+/* No comment provided by engineer. */
+"Password" = "密码";
+
+/* Indicating a payment is successful */
+"Payment successful" = "支付成功";
+
+/* Section title for Paypal payment */
+"Paypal" = "Paypal";
+
+/* Please select a location prompt */
+"Please select a location" = "请选择一个位置";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "请再试一遍或者手动设置您的位置。";
+
+/* Please verify the location prompt */
+"Please verify the location" = "请确认位置信息";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more..." = "点击'搜寻'来取得更多结果...";
+
+/* Indicator for real-time information */
+"Real-time" = "实时";
+
+/* Title for section that asks users where payment receipt should be sent */
+"Receipt" = "收据";
+
+/* Action title to add/remove reminder
+   Section title at the end of a booking that allows users to set reminders */
+"Reminder" = "提醒";
+
+/* Repeats daily */
+"Repeats daily" = "每天重复";
+
+/* Repeats monthly */
+"Repeats monthly" = "每月重复";
+
+/* Repeats weekly */
+"Repeats weekly" = "每周重复";
+
+/* Repeats yearly */
+"Repeats yearly" = "每年重复";
+
+/* Button title to report a problem */
+"Report Problem" = "反馈问题";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "越野车";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "评分";
+
+/* Empty search bar placeholder */
+"Search" = "搜索";
+
+/* No comment provided by engineer. */
+"Search Results" = "搜索结果";
+
+/* No comment provided by engineer. */
+"Search for a city" = "搜寻您的城市";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'..." = "搜索 '%@'...";
+
+/* Button that goes to the Setting's app */
+"Settings" = "设定";
+
+/* No comment provided by engineer. */
+"Sign in" = "登录";
+
+/* Instruction for signing out user account */
+"Sign out" = "退出";
+
+/* No comment provided by engineer. */
+"Sign up" = "注册";
+
+/* No comment provided by engineer. */
+"Sign up cannot be completed without a valid password" = "无效的密码导致无法注册完成";
+
+/* Message that indicates the app is signing users into their user accounts */
+"Signing in" = "正在登录";
+
+/* Message that indicates the app has successfully completed signing out
+   Message that indicates the app is signing users out of their accounts */
+"Signing out" = "正在登出";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "到%@";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "点击来选取地点";
+
+/* Message that indicates the app is about to sign users out of their user accounts */
+"The app will now sign out" = "该App现在将要退出";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "关闭使用者位置追踪功能";
+
+/* user location button - follow */
+"Tracking - on" = "开启使用者位置追踪功能";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "开启使用者位置与航向追踪功能";
+
+/* No comment provided by engineer. */
+"Unknown error" = "未知错误";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "到%@";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "更新行程";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "必要的参数缺失。";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "平日";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "周末";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "轮椅可通行";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "你想要反馈问题吗？";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "您需要同意订阅条款和规定。";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "您需要同意保险条款和规定。";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "您之前拒绝了App使用您的日历．如想要使用本功能，请到设定 > 隐私 > 日历中更新您的授权.";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "您之前拒绝了App使用您的通讯录．如想要使用本功能，请到设定 > 隐私 > 通讯录中更新您的授权.";
+
+/* Indicator that an event is all-day */
+"all-day" = "整天";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "%@到达";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "%@出发";
+
+/* Short indicator of end-time */
+"ends at %@" = "在%@结束";
+
+/* Email placeholder text */
+"example@example.com" = "example@example.com";
+
+/* Credit card expiry date placeholder, mm/yy */
+"mm/yy" = "月份/年份";
+
+/* Short indicator of start-time */
+"starts at %@" = "从%@开始";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "到 %@";
+

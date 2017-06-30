@@ -8,9 +8,7 @@
 
 #import "SegmentTemplate.h"
 
-@import SGCoreKit;
-
-#import <TripKit/TKTripKit.h>
+#import "TripKit/TripKit-Swift.h"
 
 enum {
   SGSegmentTemplateFlagIsContinuation = 1 << 0,

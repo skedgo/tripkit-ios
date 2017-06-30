@@ -8,10 +8,12 @@
 
 #import "TKColoredRoute.h"
 
+#import "SGKCrossPlatform.h"
+
 @interface TKColoredRoute ()
 
 @property (nonatomic, strong) NSArray *routePath;
-@property (nonatomic, strong) UIColor *routeColour;
+@property (nonatomic, strong) SGKColor *routeColour;
 @property (nonatomic, strong) NSArray *routeDashPattern;
 @property (nonatomic, assign) BOOL routeIsTravelled;
 
@@ -20,7 +22,7 @@
 @implementation TKColoredRoute
 
 - (id)initWithWaypoints:(NSArray *)waypoints
-							withColor:(UIColor *)color
+							withColor:(SGKColor *)color
 						dashPattern:(NSArray *)dashPattern
             isTravelled:(BOOL)isTravelled
 {
@@ -37,7 +39,7 @@
 - (id)initWithWaypoints:(NSArray *)waypoints
 									 from:(NSInteger)start
 										 to:(NSInteger)end
-							withColor:(UIColor *)color
+							withColor:(SGKColor *)color
 						dashPattern:(NSArray *)dashPattern
             isTravelled:(BOOL)isTravelled
 {

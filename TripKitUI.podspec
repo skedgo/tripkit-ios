@@ -6,11 +6,12 @@ Pod::Spec.new do |s|
   s.license      = { 
     type: 'Proprietary',
     text: <<-LICENSE
-      Copyright 2012-2016, SkedGo Pty Ltd.
+      Copyright 2012-2017, SkedGo Pty Ltd.
     LICENSE
   }
   s.authors      = {
-    "Adrian Schoenig" => "adrian@skedgo.com"
+    "Adrian Schoenig" => "adrian@skedgo.com",
+    "Brian Huang" => "brian@skedgo.com"
   }
   s.source       = { path: "." }
   # s.source       = { git: ".", tag: "v#{s.version}" }
@@ -21,10 +22,15 @@ Pod::Spec.new do |s|
   
   s.prefix_header_file = "prefix.pch"
 
+  s.frameworks = ['UIKit', 'MapKit']
+
   s.dependency 'TripKit'
-  s.dependency 'SGCoreUIKit'
 
   s.dependency 'AFNetworking'
+  s.dependency 'ASPolylineView'
+  s.dependency 'MAKVONotificationCenter'
+  s.dependency 'RxSwift'
+  s.dependency 'RxCocoa'
   s.dependency 'SGPulsingAnnotationView'
 
   s.source_files = "TripKitUI/**/*.{h,m,swift}"

@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-import SGBookingKit
+
 
 public enum TKBookingTransitioner {
 

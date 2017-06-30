@@ -6,6 +6,8 @@
 //  Copyright 2011 SkedGo. All rights reserved.
 //
 
+@import CoreData;
+
 #import "TKRouter.h"
 
 @class Trip;

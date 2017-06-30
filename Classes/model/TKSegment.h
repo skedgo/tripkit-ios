@@ -8,10 +8,12 @@
 
 @import Foundation;
 @import CoreData;
-@import SGCoreKit;
+@import MapKit;
 
-@class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape;
+@class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape, SegmentTemplate;
 @class SVKRegion, ModeInfo;
+@protocol STKDisplayableTimePoint, STKTripSegment;
+
 
 typedef NS_ENUM(NSInteger, TKSegmentOrdering) {
   TKSegmentOrderingStart   = 1,
@@ -43,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) SegmentReference *reference;
 @property (nonatomic, weak, null_resettable) Trip *trip; // practically nonnull, but can be nulled due to weak reference
+
+- (SegmentTemplate *)template;
 
 - (id)initWithReference:(SegmentReference *)aReference
                 forTrip:(Trip *)aTrip;
@@ -104,27 +108,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable Vehicle *)realTimeVehicle;
 - (NSArray <Vehicle *> *)realTimeAlternativeVehicles;
 
-- (BOOL)usesVehicle;
-
 /**
  @return The payload passed on by the server for the specified key.
  */
 - (nullable id)payloadForKey:(NSString *)key;
 
-/**
- @return The used vehicle (if there are any) in SkedGo API-compatible form
- */
-- (NSDictionary<NSString *, id<NSCoding>> *)usedVehicleFromAllVehicles:(NSArray <id<STKVehicular>> *)allVehicles;
-
-/**
- @return The private vehicle type used by this segment (if any)
- */
-- (STKVehicleType)privateVehicleType;
-
-/**
- @param vehicle Vehicle to assign to this segment. Only takes affect if its of a compatible type.
- */
-- (void)assignVehicle:(nullable id<STKVehicular>)vehicle;
 
 /**
  @return the transport mode identifier that this segment is using (if any). Can return `nil` for stationary segments such as "leave your house" or "wait between two buses" or "park your car"
@@ -150,12 +138,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (TKSegment *)finalSegmentIncludingContinuation;
 
 - (NSArray<id<MKAnnotation>> *)annotationsToZoomToOnMap;
-
-/* 
- Test if this segment has at least the specific length. 
- Note: public transport will always return YES to this.
- */
-- (BOOL)hasVisibility:(STKTripSegmentVisibility)type;
 
 /*
  A singe line instruction which is used on the map screen.

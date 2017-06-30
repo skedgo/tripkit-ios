@@ -11,7 +11,6 @@ import Foundation
 import RxSwift
 
 import TripKit
-import SGSearchKit
 
 public enum TKSwiftyShareHelper {
 
@@ -184,7 +183,7 @@ extension TKSwiftyShareHelper.QueryDetails {
       date = time
     }
     
-    return TripRequest.insert(from: from, to: to, forTime: date, of: timeType, intoTripKitContext: tripKit)
+    return TripRequest.insert(from: from, to: to, for: date, timeType: timeType, into: tripKit)
   }
 }
 

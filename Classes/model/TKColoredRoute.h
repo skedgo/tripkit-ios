@@ -7,19 +7,23 @@
 //
 
 @import Foundation;
-@import SGCoreKit;
+@import MapKit;
+
+#import "SGKCrossPlatform.h"
+
+@protocol STKDisplayableRoute;
 
 @interface TKColoredRoute : NSObject <STKDisplayableRoute>
 
 - (id)initWithWaypoints:(NSArray<id<MKAnnotation>> *)waypoints
-							withColor:(UIColor *)color
+							withColor:(SGKColor *)color
 						dashPattern:(NSArray<NSNumber *> *)dashPattern
             isTravelled:(BOOL)isTravelled;
 
 - (id)initWithWaypoints:(NSArray<id<MKAnnotation>> *)waypoints
 									 from:(NSInteger)start
 										 to:(NSInteger)end
-							withColor:(UIColor *)color
+							withColor:(SGKColor *)color
             dashPattern:(NSArray<NSNumber *> *)dashPattern
             isTravelled:(BOOL)isTravelled;
 

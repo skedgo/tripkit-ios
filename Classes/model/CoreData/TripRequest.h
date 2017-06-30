@@ -8,7 +8,6 @@
 
 @import CoreData;
 @import MapKit;
-@import SGCoreKit;
 
 #import "TripGroup.h"
 
@@ -35,25 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
  * Non Core Data property
  */
 
-@property (nonatomic, readonly, nullable) NSSet <Trip *> * trips;
-@property (nonatomic, readonly) SGTimeType type;
-@property (nonatomic, readonly) NSDate *time;
 @property (nonatomic, weak, nullable) TripRequest *replacement;
 @property (nonatomic, assign) TripGroupVisibility defaultVisibility;
-
-+ (TripRequest *)insertRequestIntoTripKitContext:(NSManagedObjectContext *)context;
-
-+ (TripRequest *)insertRequestFrom:(id<MKAnnotation>)fromLocation
-                                to:(id<MKAnnotation>)toLocation
-													 forTime:(nullable NSDate *)time
-                        ofTimeType:(SGTimeType)timeType
-                intoTripKitContext:(NSManagedObjectContext *)context;
-
-+ (NSString *)timeStringForTime:(nullable NSDate *)time
-                     ofTimeType:(SGTimeType)timeType
-                       timeZone:(NSTimeZone *)timeZone;
-
-- (TripRequest *)insertedEmptyCopy;
 
 - (void)remove;
 
@@ -88,12 +70,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)timeSorterTitle;
 
-- (NSString *)timeString;
-
-/* Set the time and type for this request.
- */
-- (void)setTime:(NSDate *)time forType:(SGTimeType)type;
-
 - (BOOL)hasTrips;
 
 /**
@@ -102,9 +78,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)priceInformationAvailable;
 
 - (NSArray<NSSortDescriptor *> *)sortDescriptorsAccordingToSelectedOrder;
-
-- (NSArray<NSSortDescriptor *> *)sortDescriptorsWithPrimary:(STKTripCostType)primary;
-
 
 - (NSString *)debugString;
 

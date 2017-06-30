@@ -154,7 +154,7 @@ extension TKWaypointRouter {
       into: context,
       parserHandler: { (json, parser) in
         parser.parseAndAddResult(json) { request in
-          completion(request?.trips?.first, nil)
+          completion(request?.trips.first, nil)
         }
       },
       errorHandler: { error in

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-import SGCoreKit
+
 
 // In Swift-land this would be a struct
 public class TKDLSTable: NSObject {

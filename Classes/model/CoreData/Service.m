@@ -8,9 +8,9 @@
 
 #import "Service.h"
 
-#import <MapKit/MapKit.h>
+@import MapKit;
 
-#import <TripKit/TKTripKit.h>
+#import "TripKit/TripKit-Swift.h"
 
 #import "TKRealTimeUpdatableHelper.h"
 
@@ -198,68 +198,6 @@ typedef NSUInteger SGServiceFlag;
   } else {
     return [self.name substringFromIndex:range.location + 1];
   }
-}
-
-- (NSString *)modeTitle
-{
-	if (self.modeInfo.alt)
-		return self.modeInfo.alt;
-	
-	// check the segment reference, i.e., for trips
-	SegmentReference *reference = [self.segments anyObject];
-	if (reference) {
-		return [reference.template.modeInfo alt];
-	}
-	
-	// check a stop
-	StopVisits *visit = [self.visits anyObject];
-	if (visit) {
-		return [visit.stop modeTitle];
-	}
-	
-	ZAssert(false, @"Got no mode, visits or segments!");
-	return nil;
-}
-
-- (nullable UIImage *)modeImageOfType:(SGStyleModeIconType)type
-{
-  if (self.modeInfo) {
-    UIImage *specificImage = [SGStyleManager imageForModeImageName:self.modeInfo.localImageName
-                                                        isRealTime:NO
-                                                        ofIconType:type];
-    if (specificImage) {
-      return specificImage;
-    }
-  }
-
-  // check a stop
-  StopVisits *visit = [self.visits anyObject];
-  if (visit) {
-    return [visit.stop modeImageOfType:type];
-  }
-  
-  ZAssert(false, @"Got no mode info nor any visits!");
-  return nil;
-}
-
-- (nullable NSURL *)modeImageURLForType:(SGStyleModeIconType)type
-{
-  if (self.modeInfo.remoteImageName) {
-    return [SVKServer imageURLForIconFileNamePart:self.modeInfo.remoteImageName ofIconType:type];
-  } else {
-    return nil;
-  }
-}
-
-- (nullable SVKRegion *)region
-{
-	StopVisits *visit = [self.visits anyObject];
-	if (visit) {
-		return visit.stop.region;
-	}
-
-  // we might not have visits if they got deleted in the mean-time
-	return nil;
 }
 
 - (NSString *)title

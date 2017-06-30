@@ -9,7 +9,7 @@
 #import "TKInterAppCommunicator.h"
 
 @import MessageUI;
-@import SGCoreKit;
+
 
 #ifndef TK_NO_FRAMEWORKS
 @import TripKit;

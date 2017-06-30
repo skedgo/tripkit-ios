@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="mIg-BN-AbU" customClass="AKSignUpHeader">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="111"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWr-fp-xsk">
+                    <rect key="frame" x="0.0" y="20" width="600" height="30"/>
+                    <color key="backgroundColor" red="0.21568627450980393" green="0.29019607843137257" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Facebook">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="signupWithFacebook:" destination="mIg-BN-AbU" eventType="touchUpInside" id="Wv7-z0-lWk"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9O-o7-ah6">
+                    <rect key="frame" x="600" y="20" width="0.0" height="30"/>
+                    <color key="backgroundColor" red="0.30588235294117649" green="0.61176470588235299" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="yg0-BF-OpB"/>
+                    </constraints>
+                    <state key="normal" title="Twitter">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="signupWithTwitter:" destination="mIg-BN-AbU" eventType="touchUpInside" id="ReB-5I-2Kj"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0u-sq-YKN">
+                    <rect key="frame" x="288" y="70" width="24" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMO-RU-2l4">
+                    <rect key="frame" x="0.0" y="80" width="280" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="4P1-Nq-Xkh"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inI-d7-IWE">
+                    <rect key="frame" x="320" y="80" width="280" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="t8k-Bs-U89"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="zWr-fp-xsk" firstAttribute="leading" secondItem="mIg-BN-AbU" secondAttribute="leading" id="15s-uF-81o"/>
+                <constraint firstItem="H0u-sq-YKN" firstAttribute="top" secondItem="zWr-fp-xsk" secondAttribute="bottom" constant="20" id="6VX-Kt-VpA"/>
+                <constraint firstItem="zWr-fp-xsk" firstAttribute="centerY" secondItem="O9O-o7-ah6" secondAttribute="centerY" id="7z1-0P-GgV"/>
+                <constraint firstItem="zWr-fp-xsk" firstAttribute="top" secondItem="mIg-BN-AbU" secondAttribute="top" constant="20" id="Gh3-i3-oXB"/>
+                <constraint firstItem="zWr-fp-xsk" firstAttribute="width" secondItem="O9O-o7-ah6" secondAttribute="width" id="HFK-YO-ejI"/>
+                <constraint firstItem="H0u-sq-YKN" firstAttribute="centerY" secondItem="aMO-RU-2l4" secondAttribute="centerY" id="JTc-ra-ips"/>
+                <constraint firstItem="H0u-sq-YKN" firstAttribute="centerY" secondItem="inI-d7-IWE" secondAttribute="centerY" id="MnK-DN-xDs"/>
+                <constraint firstItem="aMO-RU-2l4" firstAttribute="leading" secondItem="mIg-BN-AbU" secondAttribute="leading" id="PXm-e4-k6i"/>
+                <constraint firstItem="inI-d7-IWE" firstAttribute="leading" secondItem="H0u-sq-YKN" secondAttribute="trailing" constant="8" id="QzW-Vs-Op8"/>
+                <constraint firstItem="H0u-sq-YKN" firstAttribute="leading" secondItem="aMO-RU-2l4" secondAttribute="trailing" constant="8" id="YMF-30-k4v"/>
+                <constraint firstItem="O9O-o7-ah6" firstAttribute="leading" secondItem="zWr-fp-xsk" secondAttribute="trailing" id="ZED-Gj-Gwe"/>
+                <constraint firstAttribute="centerX" secondItem="H0u-sq-YKN" secondAttribute="centerX" id="c6g-9X-aE9"/>
+                <constraint firstAttribute="trailing" secondItem="O9O-o7-ah6" secondAttribute="trailing" id="euT-uR-Ygb"/>
+                <constraint firstAttribute="bottom" secondItem="H0u-sq-YKN" secondAttribute="bottom" constant="20" id="mgX-wV-eAY"/>
+                <constraint firstItem="zWr-fp-xsk" firstAttribute="height" secondItem="O9O-o7-ah6" secondAttribute="height" id="qen-Rd-4Xq"/>
+                <constraint firstAttribute="trailing" secondItem="inI-d7-IWE" secondAttribute="trailing" id="tKb-8r-bgQ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="HFK-YO-ejI"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="facebook" destination="zWr-fp-xsk" id="UV8-Kp-ZzG"/>
+                <outlet property="twitter" destination="O9O-o7-ah6" id="8vS-mO-Ijp"/>
+            </connections>
+            <point key="canvasLocation" x="513" y="418.5"/>
+        </view>
+    </objects>
+</document>

@@ -9,9 +9,10 @@
 @import Foundation;
 @import CoreData;
 @import MapKit;
-@import SGCoreKit;
+
 
 @class TKSegment, SegmentTemplate, Service, StopVisits;
+@protocol STKDisplayableRoute;
 
 @interface Shape : NSManagedObject <STKDisplayableRoute>
 

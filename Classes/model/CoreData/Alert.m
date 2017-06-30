@@ -9,6 +9,7 @@
 #import "Alert.h"
 
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 @implementation Alert
 
@@ -102,17 +103,6 @@
 
 - (void)setAlertSeverity:(AlertSeverity)alertSeverity {
   self.severity = @(alertSeverity);
-}
-
-- (STKInfoIconType)infoIconType
-{
-  switch (self.alertSeverity) {
-    case AlertSeverityInfo:
-    case AlertSeverityWarning:
-      return STKInfoIconTypeWarning;
-    case AlertSeverityAlert:
-      return STKInfoIconTypeAlert;
-  }
 }
 
 - (nullable NSURL *)imageURL

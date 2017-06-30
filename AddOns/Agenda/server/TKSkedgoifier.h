@@ -7,7 +7,7 @@
 //
 
 @import CoreData;
-@import SGCoreKit;
+
 
 @interface TKSkedgoifier : NSObject
 

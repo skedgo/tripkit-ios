@@ -76,20 +76,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 #pragma mark -
 
-- (BOOL)hasVisibility:(STKTripSegmentVisibility)type
-{
-  switch (self.order) {
-    case TKSegmentOrderingStart:
-      return type == STKTripSegmentVisibilityInDetails;
-      
-    case TKSegmentOrderingRegular:
-      return (STKTripSegmentVisibility)self.template.visibility.intValue >= type;
-      
-    case TKSegmentOrderingEnd:
-      return type != STKTripSegmentVisibilityInSummary;
-  }
-}
-
 - (TKSegment *)finalSegmentIncludingContinuation
 {
 	TKSegment *segment = self;
@@ -214,54 +200,9 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-
-- (BOOL)usesVehicle
-{
-  if (self.template.isSharedVehicle) {
-    return YES;
-  } else if (self.reference.vehicleUUID) {
-    return YES;
-  } else {
-    return NO;
-  }
-}
-
-- (NSDictionary *)usedVehicleFromAllVehicles:(NSArray *)allVehicles {
-  if (self.template.isSharedVehicle) {
-    return [self.reference sharedVehicleData];
-  } else {
-    id<STKVehicular> vehicle = [self.reference vehicleFromAllVehicles:allVehicles];
-    return [STKVehicularHelper skedGoReferenceDictionaryForVehicle:vehicle];
-  }
-}
-
 - (id)payloadForKey:(NSString *)key
 {
   return [self.reference payloadForKey:key];
-}
-
-- (STKVehicleType)privateVehicleType
-{
-  NSString *modeIdentifier = self.modeIdentifier;
-  if ([modeIdentifier isEqualToString:SVKTransportModeIdentifierCar]) {
-    return STKVehicleType_Car;
-  } else if ([modeIdentifier isEqualToString:SVKTransportModeIdentifierBicycle]) {
-    return STKVehicleType_Bicycle;
-  } else if ([modeIdentifier isEqualToString:SVKTransportModeIdentifierMotorbike]) {
-    return STKVehicleType_Motorbike;
-  } else {
-    return STKVehicleType_None;
-  }
-}
-
-- (void)assignVehicle:(id<STKVehicular>)vehicle
-{
-  STKVehicleType myType = [self privateVehicleType];
-  if (myType != [vehicle vehicleType]) {
-    return;
-  }
-  
-  self.reference.vehicle = vehicle;
 }
 
 - (NSString *)scheduledStartStopCode {

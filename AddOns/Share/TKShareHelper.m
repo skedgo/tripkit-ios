@@ -8,9 +8,14 @@
 
 #import "TKShareHelper.h"
 
-#import <TripKit/TKTripKit.h>
+#import "SGBaseGeocoder.h"
 
-@import SGSearchKit;
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#else
+@import TripKit;
+#endif
 
 @implementation TKShareHelper
 
@@ -36,35 +41,6 @@
 }
 
 #pragma mark - Query URL
-
-+ (BOOL)isQueryURL:(NSURL *)url
-{
-  return [[url path] isEqualToString:@"/go"];
-}
-
-+ (NSURL *)queryURLForStart:(CLLocationCoordinate2D)start
-                        end:(CLLocationCoordinate2D)end
-                   timeType:(SGTimeType)timeType
-                       time:(nullable NSDate *)time
-{
-  return [self queryURLForStart:start end:end timeType:timeType time:time baseURL:@"http://tripgo.me"];
-}
-
-+ (NSURL *)queryURLForStart:(CLLocationCoordinate2D)start
-                        end:(CLLocationCoordinate2D)end
-                   timeType:(SGTimeType)timeType
-                       time:(nullable NSDate *)time
-                    baseURL:(NSString *)baseURL
-{
-  NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/go?tlat=%.5f&tlng=%.5f", baseURL, end.latitude, end.longitude];
-  if (CLLocationCoordinate2DIsValid(start)) {
-    [urlString appendFormat:@"&flat=%.5f&flng=%.5f", start.latitude, start.longitude];
-  }
-  if (time && timeType != SGTimeTypeLeaveASAP) {
-    [urlString appendFormat:@"&time=%.0f&type=%ld", [time timeIntervalSince1970], (long)timeType];
-  }
-  return [NSURL URLWithString:urlString];
-}
 
 + (void)geocodeString:(NSString *)string
         usingGeocoder:(id<SGGeocoder>)geocoder

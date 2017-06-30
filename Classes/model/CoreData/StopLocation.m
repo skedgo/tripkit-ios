@@ -8,7 +8,13 @@
 
 #import "StopLocation.h"
 
-#import <TripKit/TKTripKit.h>
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#else
+@import TripKit;
+#endif
+
 
 @interface StopLocation ()
 
@@ -151,36 +157,6 @@
   self.toDelete = YES;
 }
 
-- (SVKRegion *)region
-{
-  if (self.regionName) {
-    return [[SVKRegionManager sharedInstance] localRegionWithName:self.regionName];
-  } else {
-    return [self.location.regions anyObject];
-  }
-}
-
-- (NSString *)modeTitle
-{
-  return self.stopModeInfo.alt;
-}
-
-- (UIImage *)modeImageOfType:(SGStyleModeIconType)type
-{
-  return [SGStyleManager imageForModeImageName:self.stopModeInfo.localImageName
-                                    isRealTime:NO
-                                    ofIconType:type];
-}
-
-- (nullable NSURL *)modeImageURLForType:(SGStyleModeIconType)type
-{
-  if (self.stopModeInfo.remoteImageName) {
-    return [SVKServer imageURLForIconFileNamePart:self.stopModeInfo.remoteImageName ofIconType:type];
-  } else {
-    return nil;
-  }
-}
-
 - (nullable NSPredicate *)departuresPredicateFromDate:(nullable NSDate *)date
 {
   if (!self.stopsToMatchTo || !date) {
@@ -228,93 +204,6 @@
 	for (StopLocation *stop in self.children) {
 		[stop clearVisits];
 	}
-}
-
-#pragma mark - UIActivityItemSource
-
-- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
-{
-#pragma unused(activityViewController)
-  
-  if (self.lastTopVisit) {
-    return @"";
-  } else {
-    return nil;
-  }
-}
-
-- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
-{
-#pragma unused(activityViewController, activityType)
-  
-  if (self.lastTopVisit) {
-    NSString *title = [self title];
-    NSMutableString *output = [NSMutableString stringWithString:title ?: @""];
-    if (self.filter.length > 0) {
-      [output appendFormat:@" (filter: \"%@\")", self.filter];
-    }
-    NSPredicate *predicate = [self departuresPredicateFromDate:self.lastTopVisit.departure];
-    NSArray *visits = [self.managedObjectContext fetchObjectsForEntityClass:[StopVisits class]
-                                                           withFetchRequest:
-                       ^(NSFetchRequest *request) {
-                         request.predicate = predicate;
-                         NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"departure"
-                                                                                  ascending:YES];
-                         request.sortDescriptors = @[sorter];
-                         request.fetchLimit = 10;
-                       }];
-    
-    for (StopVisits *visit in visits) {
-      [output appendString:@"\n"];
-      [output appendString:[visit smsString]];
-    }
-    if ([output rangeOfString:@"*"].location != NSNotFound) {
-      [output appendString:@"\n* real-time"];
-    }
-    return output;
-    
-  } else {
-    return nil;
-  }
-}
-
-
-#pragma mark - SGStopLocation : ASDisplayablePoint : MKAnnotation protocol
-
-- (NSString *)title
-{
-  return self.name;
-}
-
-- (NSString *)subtitle
-{
-  return self.location.subtitle;
-}
-
-- (CLLocationCoordinate2D)coordinate
-{
-  ZAssert(self.location, @"Asking a stop for a coordinate which doesn't have a location!");
-  return [self.location coordinate];
-}
-
-- (BOOL)isDraggable
-{
-	return NO;
-}
-
-- (BOOL)pointDisplaysImage
-{
-	return (self.pointImage != nil);
-}
-
-- (UIImage *)pointImage
-{
-  return [self modeImageOfType:SGStyleModeIconTypeMapIcon];
-}
-
-- (NSURL *)pointImageURL
-{
-  return [self modeImageURLForType:SGStyleModeIconTypeMapIcon];
 }
 
 #pragma mark - Lazy accessors

@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 import Marshal
 
-import SGCoreKit
+
 
 /**
  An Agenda encapsulates a user's plan for a time range.

@@ -148,7 +148,7 @@ fileprivate extension AnnotationViewBuilder {
     
     // Set time stamp on the side opposite to direction of travel
     let side = semaphoreLabel(for: visit.bearing?.doubleValue)
-    semaphoreView.setTime(visit.departure, isRealTime: visit.service.isRealTime, in: visit.stop.region().timeZone, onSide: side)
+    semaphoreView.setTime(visit.departure, isRealTime: visit.service.isRealTime, in: visit.stop.region?.timeZone, onSide: side)
 
     semaphoreView.canShowCallout = annotation.title != nil
     semaphoreView.isEnabled = true
