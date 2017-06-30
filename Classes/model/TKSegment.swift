@@ -94,3 +94,178 @@ extension TKSegment {
   
 }
 
+
+// MARK: - STKDisplayablePoint
+
+extension TKSegment: STKDisplayablePoint {
+
+  public var pointDisplaysImage: Bool {
+    return coordinate.isValid && hasVisibility(.onMap)
+  }
+  
+  public var isDraggable: Bool {
+    return false
+  }
+  
+  public var pointImage: SGKImage? {
+    switch order() {
+    case .start, .end:
+      return SGStyleManager.imageNamed("icon-pin")
+      
+    case .regular:
+      return image(for: .listMainMode, allowRealTime: false)
+    }
+  }
+  
+  public var pointImageURL: URL? {
+    return imageURL(for: .listMainMode)
+  }
+
+  fileprivate func image(for iconType: SGStyleModeIconType, allowRealTime: Bool) -> SGKImage? {
+    var localImageName = modeInfo()?.localImageName
+    
+    if trip.showNoVehicleUUIDAsLift && privateVehicleType == .car && reference?.vehicleUUID == nil {
+      localImageName = "car-pool"
+    }
+    guard let imageName = localImageName else { return nil }
+    
+    let realTime = allowRealTime && timesAreRealTime()
+    return TKSegmentHelper.segmentImage(iconType, localImageName: imageName, modeIdentifier: modeIdentifier(), isRealTime: realTime)
+  }
+
+  fileprivate func imageURL(for iconType: SGStyleModeIconType) -> URL? {
+    var iconFileNamePart: String? = nil
+    
+    switch iconType {
+    case .mapIcon, .listMainMode, .resolutionIndependent:
+      iconFileNamePart = modeInfo()?.remoteImageName
+      
+    case .listMainModeOnDark, .resolutionIndependentOnDark:
+      iconFileNamePart = modeInfo()?.remoteDarkImageName
+      
+    case .vehicle:
+      iconFileNamePart = realTimeVehicle()?.icon
+      
+    case .alert:
+      return nil // not supported for segments
+    }
+    
+    if let part = iconFileNamePart {
+      return SVKServer.imageURL(forIconFileNamePart: part, of: iconType)
+    } else {
+      return SVKRegionManager.sharedInstance().imageURL(forModeIdentifier: modeIdentifier(), of: iconType)
+    }
+  }
+}
+
+
+// MARK: - STKDisplayableTimePoint
+
+extension TKSegment: STKDisplayableTimePoint {
+  
+  public var time: Date {
+    get {
+      return departureTime
+    }
+    set {
+      self.departureTime = newValue
+    }
+  }
+  
+  public var timeZone: TimeZone {
+    guard let coordinate = start?.coordinate else { return .current }
+    return SVKRegionManager.sharedInstance().timeZone(for: coordinate) ?? .current
+  }
+  
+  public var timeIsRealTime: Bool {
+    return self.timesAreRealTime()
+  }
+
+  public var bearing: NSNumber? {
+    return template().bearing
+  }
+  
+  public var canFlipImage: Bool {
+    // only those pointing left or right
+    return isSelfNavigating() || self.modeIdentifier() == SVKTransportModeIdentifierAutoRickshaw
+  }
+  
+  public var isTerminal: Bool {
+    return order() == .end
+  }
+  
+}
+
+
+// MARK: - STKTripSegment
+
+extension TKSegment: STKTripSegment {
+  
+  public var tripSegmentTimeZone: TimeZone? {
+    return timeZone
+  }
+  
+  public var tripSegmentModeImage: SGKImage? {
+    return image(for: .listMainMode, allowRealTime: false)
+  }
+  
+  public var tripSegmentModeInfo: ModeInfo? {
+    return modeInfo()
+  }
+  
+  public var tripSegmentInstruction: String {
+    let rawString = template().miniInstruction.instruction
+    let mutable = NSMutableString(string: rawString)
+    fill(inTemplates: mutable, inTitle: true)
+    return mutable as String
+  }
+  
+  public var tripSegmentMainValue: Any {
+    if let rawString = template().miniInstruction.mainValue {
+      let mutable = NSMutableString(string: rawString)
+      fill(inTemplates: mutable, inTitle: true)
+      return mutable as String
+    } else {
+      return self.departureTime
+    }
+  }
+  
+  public var tripSegmentDetail: String? {
+    if let rawString = template().miniInstruction.detail {
+      let mutable = NSMutableString(string: rawString)
+      fill(inTemplates: mutable, inTitle: true)
+      return mutable as String
+    } else {
+      return nil
+    }
+  }
+  
+  public var tripSegmentTimesAreRealTime: Bool {
+    return timesAreRealTime()
+  }
+  
+  public var tripSegmentIsWheelchairAccessible: Bool {
+    return reference?.isWheelchairAccessible ?? true
+  }
+  
+  public var tripSegmentFixedDepartureTime: Date? {
+    if isPublicTransport() {
+      if let frequency = frequency()?.intValue, frequency > 0 {
+        return nil
+      } else {
+        return departureTime
+      }
+    } else {
+      return nil
+    }
+  }
+  
+  public var tripSegmentModeImageURL: URL? {
+    return imageURL(for: .listMainMode)
+  }
+  
+  public var tripSegmentModeInfoIconType: STKInfoIconType {
+    return alerts().first?.infoIconType ?? .none
+  }
+  
+}

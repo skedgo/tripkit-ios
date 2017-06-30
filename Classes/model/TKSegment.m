@@ -691,7 +691,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 		return @[@1];
 }
 
-#pragma mark - ASDisplayablePoint protocol
+#pragma mark - MKAnnotation protocol
 
 - (NSString *)title {
   return [self singleLineInstruction];
@@ -715,150 +715,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-- (BOOL)isDraggable {
-  return NO;
-}
-
-- (BOOL)pointDisplaysImage {
-  return CLLocationCoordinate2DIsValid(self.coordinate) && [self hasVisibility:STKTripSegmentVisibilityOnMap];
-}
-
-- (SGKImage *)pointImage
-{
-  switch (self.order) {
-    case TKSegmentOrderingStart:
-    case TKSegmentOrderingEnd:
-      return [SGStyleManager imageNamed:@"icon-pin"];
-      
-    case TKSegmentOrderingRegular:
-      return [self imageForIconType:SGStyleModeIconTypeListMainMode allowRealTime:NO];
-  }
-}
-
-- (NSURL *)pointImageURL
-{
-  return [self imageURLForType:SGStyleModeIconTypeListMainMode];
-}
-
-- (BOOL)isTerminal
-{
-  return self.order == TKSegmentOrderingEnd;
-}
-
 #pragma mark - STKDisplayableTimePoint
-
-- (NSDate *)time
-{
-	return self.departureTime;
-}
-
-- (BOOL)timeIsRealTime
-{
-  return self.timesAreRealTime;
-}
-
-- (void)setTime:(NSDate *)time
-{
-  self.departureTime = time;
-}
-
-- (NSTimeZone *)timeZone
-{
-  return [[SVKRegionManager sharedInstance] timeZoneForCoordinate:[self.start coordinate]];
-}
-
-- (BOOL)canFlipImage
-{
-  // only those pointing left or right
-  return [self isSelfNavigating] || [self.modeIdentifier isEqualToString:SVKTransportModeIdentifierAutoRickshaw];
-}
-
-- (NSNumber *)bearing {
-  return self.template.bearing;
-}
-
-
-#pragma mark - STKTripSegment
-
-- (SGKImage *)tripSegmentModeImage
-{
-  return [self imageForIconType:SGStyleModeIconTypeListMainMode allowRealTime:NO];
-}
-
-- (nullable ModeInfo *)tripSegmentModeInfo
-{
-  return [self modeInfo];
-}
-
-- (nonnull NSString *)tripSegmentInstruction
-{
-  NSString *rawString = self.template.miniInstruction.instruction;
-  if (rawString) {
-    NSMutableString *mutable = [NSMutableString stringWithString:rawString];
-    [self fillInTemplates:mutable inTitle:YES];
-    return mutable;
-  } else {
-    return [self title];
-  }
-}
-
-- (nonnull id)tripSegmentMainValue
-{
-  NSString *rawString = self.template.miniInstruction.mainValue;
-  if (rawString) {
-    NSMutableString *mutable = [NSMutableString stringWithString:rawString];
-    [self fillInTemplates:mutable inTitle:YES];
-    return mutable;
-
-    // TODO: this is for when we have get off segments
-//  } else if ([self isPublicTransport] && ! [self isContinuation] && ! [self isStationary])  {
-//    return self.arrivalTime;
-
-  } else {
-    return self.departureTime;
-  }
-}
-
-- (nullable NSTimeZone *)tripSegmentTimeZone
-{
-  return [self timeZone];
-}
-
--(nullable NSString *)tripSegmentDetail
-{
-  NSString *rawString = self.template.miniInstruction.detail;
-  if (rawString) {
-    NSMutableString *mutable = [NSMutableString stringWithString:rawString];
-    [self fillInTemplates:mutable inTitle:YES];
-    return mutable;
-  } else {
-    return nil;
-  }
-}
-
-- (BOOL)tripSegmentTimesAreRealTime
-{
-  return self.timesAreRealTime;
-}
-
-- (BOOL)tripSegmentIsWheelchairAccessible
-{
-  return self.reference.isWheelchairAccessible;
-}
-
-- (nullable NSDate *)tripSegmentFixedDepartureTime
-{
-  if ([self isPublicTransport] && self.frequency.integerValue == 0) {
-    return self.departureTime;
-  } else {
-    return nil;
-  }
-}
-
-- (nullable NSURL *)tripSegmentModeImageURL
-{
-  return [self imageURLForType:SGStyleModeIconTypeListMainMode];
-}
 
 - (nullable NSString *)tripSegmentModeTitle
 {
@@ -927,17 +784,6 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-- (STKInfoIconType)tripSegmentModeInfoIconType
-{
-  if (self.alerts.count > 0) {
-    Alert *alert = [self.alerts firstObject];
-    return alert.infoIconType;
-  } else {
-    return STKInfoIconTypeNone;
-  }
-}
-
-
 #pragma mark - UIActivityItemSource
 
 - (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
@@ -960,56 +806,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 
 #pragma mark - Private methods
-
-- (SGKImage *)imageForIconType:(SGStyleModeIconType)iconType allowRealTime:(BOOL)allowRealTime
-{
-  NSString *localImageName = self.template.modeInfo.localImageName;
-  if (self.trip.showNoVehicleUUIDAsLift
-      && self.privateVehicleType == STKVehicleType_Car
-      && ! self.reference.vehicleUUID) {
-    localImageName = @"car-pool";
-  }
-  
-  BOOL realTime = allowRealTime && [self timesAreRealTime];
-  return [TKSegmentHelper segmentImage:iconType
-                        localImageName:localImageName
-                        modeIdentifier:[self modeIdentifier]
-                            isRealTime:realTime];
-}
-
-- (nullable NSURL *)imageURLForType:(SGStyleModeIconType)iconType
-{
-  NSString *iconFileNamePart = nil;
-  
-  switch (iconType) {
-    case SGStyleModeIconTypeMapIcon:
-    case SGStyleModeIconTypeListMainMode:
-    case SGStyleModeIconTypeResolutionIndependent:
-      iconFileNamePart = self.template.modeInfo.remoteImageName;
-      break;
-      
-    case SGStyleModeIconTypeListMainModeOnDark:
-    case SGStyleModeIconTypeResolutionIndependentOnDark:
-      iconFileNamePart = self.template.modeInfo.remoteDarkImageName;
-      break;
-      
-    case SGStyleModeIconTypeVehicle:
-      iconFileNamePart = self.realTimeVehicle.icon;
-      break;
-      
-    case SGStyleModeIconTypeAlert:
-      return nil; // Not supported for segments
-  }
-
-  if (iconFileNamePart) {
-    return [SVKServer imageURLForIconFileNamePart:iconFileNamePart
-                                       ofIconType:iconType];
-    
-  } else {
-    return [[SVKRegionManager sharedInstance] imageURLForModeIdentifier:[self modeIdentifier]
-                                                             ofIconType:iconType];
-  }
-}
 
 - (NSUInteger)numberOfStopsIncludingContinuation
 {

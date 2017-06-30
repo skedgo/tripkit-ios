@@ -6,11 +6,7 @@
 //
 //
 
-#ifdef TK_NO_FRAMEWORKS
 #import "SGWebViewController.h"
-#else
-@import TripKitUI;
-#endif
 
 @protocol BPKWebViewControllerDelegate <SGWebViewControllerDelegate>
 

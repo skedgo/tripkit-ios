@@ -42,7 +42,7 @@ public class MapManagerHelper: NSObject {
         let segmentTwo = two.annotation as? TKSegment
         else { return true }
       
-      switch (segmentOne.isTerminal(), segmentTwo.isTerminal()) {
+      switch (segmentOne.isTerminal, segmentTwo.isTerminal) {
       case (true , true ): return false
       case (false, true ): return true
       case (true , false): return false

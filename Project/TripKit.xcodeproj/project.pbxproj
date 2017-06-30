@@ -311,8 +311,6 @@
 		3AFFAC4A1F06855F00147990 /* SGMapHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAC0E1F06855F00147990 /* SGMapHelper.m */; };
 		3AFFAC4B1F06855F00147990 /* ASImageAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAC101F06855F00147990 /* ASImageAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFAC4C1F06855F00147990 /* ASImageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAC111F06855F00147990 /* ASImageAnnotationView.m */; };
-		3AFFAC4D1F06855F00147990 /* SGCountdownCell+STKVehicular.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAC121F06855F00147990 /* SGCountdownCell+STKVehicular.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFFAC4E1F06855F00147990 /* SGCountdownCell+STKVehicular.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAC131F06855F00147990 /* SGCountdownCell+STKVehicular.m */; };
 		3AFFAC4F1F06855F00147990 /* SGPolylineRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAC141F06855F00147990 /* SGPolylineRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFAC501F06855F00147990 /* SGPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAC151F06855F00147990 /* SGPolylineRenderer.m */; };
 		3AFFAC511F06855F00147990 /* SGSemaphoreView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAC161F06855F00147990 /* SGSemaphoreView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -513,8 +511,6 @@
 		3AFFADEC1F068E8C00147990 /* TKModeBookingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAD521F068E8B00147990 /* TKModeBookingCoordinator.swift */; };
 		3AFFADED1F068E8C00147990 /* TKTripBookingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAD531F068E8B00147990 /* TKTripBookingCoordinator.swift */; };
 		3AFFADEE1F068E8C00147990 /* TripKitBookings.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAD541F068E8B00147990 /* TripKitBookings.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFFADF21F06916500147990 /* SGWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFADF01F06916500147990 /* SGWebViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFFADF31F06916500147990 /* SGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFADF11F06916500147990 /* SGWebViewController.m */; };
 		3AFFADF81F0692AA00147990 /* SGTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFADF51F0692AA00147990 /* SGTrack.swift */; };
 		3AFFADF91F0692AA00147990 /* SGTrackHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFADF61F0692AA00147990 /* SGTrackHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFADFA1F0692AA00147990 /* SGTrackHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFADF71F0692AA00147990 /* SGTrackHelper.m */; };
@@ -532,6 +528,9 @@
 		3AFFAE131F06D17000147990 /* SGCustomEventRecurrenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE121F06D17000147990 /* SGCustomEventRecurrenceTest.swift */; };
 		3AFFAE161F06D18700147990 /* SGAutocompletionResultTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE141F06D18700147990 /* SGAutocompletionResultTest.m */; };
 		3AFFAE171F06D18700147990 /* SGGeocoderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE151F06D18700147990 /* SGGeocoderTest.swift */; };
+		3AFFAE1D1F06E23C00147990 /* SGWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAE1B1F06E23C00147990 /* SGWebViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AFFAE1E1F06E23C00147990 /* SGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE1C1F06E23C00147990 /* SGWebViewController.m */; };
+		3AFFAE201F06E44900147990 /* SGCountdownCell+STKVehicular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE1F1F06E44900147990 /* SGCountdownCell+STKVehicular.swift */; };
 		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
 		F8FE40C0F8F106E668B2BDD9 /* Pods_TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D90B11191B5E08C85990BAE4 /* Pods_TripKit.framework */; };
 /* End PBXBuildFile section */
@@ -892,8 +891,6 @@
 		3AFFAC0E1F06855F00147990 /* SGMapHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMapHelper.m; sourceTree = "<group>"; };
 		3AFFAC101F06855F00147990 /* ASImageAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASImageAnnotationView.h; sourceTree = "<group>"; };
 		3AFFAC111F06855F00147990 /* ASImageAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASImageAnnotationView.m; sourceTree = "<group>"; };
-		3AFFAC121F06855F00147990 /* SGCountdownCell+STKVehicular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SGCountdownCell+STKVehicular.h"; sourceTree = "<group>"; };
-		3AFFAC131F06855F00147990 /* SGCountdownCell+STKVehicular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SGCountdownCell+STKVehicular.m"; sourceTree = "<group>"; };
 		3AFFAC141F06855F00147990 /* SGPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPolylineRenderer.h; sourceTree = "<group>"; };
 		3AFFAC151F06855F00147990 /* SGPolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPolylineRenderer.m; sourceTree = "<group>"; };
 		3AFFAC161F06855F00147990 /* SGSemaphoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSemaphoreView.h; sourceTree = "<group>"; };
@@ -1097,8 +1094,6 @@
 		3AFFAD521F068E8B00147990 /* TKModeBookingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKModeBookingCoordinator.swift; sourceTree = "<group>"; };
 		3AFFAD531F068E8B00147990 /* TKTripBookingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTripBookingCoordinator.swift; sourceTree = "<group>"; };
 		3AFFAD541F068E8B00147990 /* TripKitBookings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripKitBookings.h; sourceTree = "<group>"; };
-		3AFFADF01F06916500147990 /* SGWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWebViewController.h; sourceTree = "<group>"; };
-		3AFFADF11F06916500147990 /* SGWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWebViewController.m; sourceTree = "<group>"; };
 		3AFFADF51F0692AA00147990 /* SGTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGTrack.swift; sourceTree = "<group>"; };
 		3AFFADF61F0692AA00147990 /* SGTrackHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTrackHelper.h; sourceTree = "<group>"; };
 		3AFFADF71F0692AA00147990 /* SGTrackHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTrackHelper.m; sourceTree = "<group>"; };
@@ -1116,6 +1111,9 @@
 		3AFFAE121F06D17000147990 /* SGCustomEventRecurrenceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGCustomEventRecurrenceTest.swift; sourceTree = "<group>"; };
 		3AFFAE141F06D18700147990 /* SGAutocompletionResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAutocompletionResultTest.m; sourceTree = "<group>"; };
 		3AFFAE151F06D18700147990 /* SGGeocoderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGGeocoderTest.swift; sourceTree = "<group>"; };
+		3AFFAE1B1F06E23C00147990 /* SGWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWebViewController.h; sourceTree = "<group>"; };
+		3AFFAE1C1F06E23C00147990 /* SGWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWebViewController.m; sourceTree = "<group>"; };
+		3AFFAE1F1F06E44900147990 /* SGCountdownCell+STKVehicular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SGCountdownCell+STKVehicular.swift"; sourceTree = "<group>"; };
 		3D372BAC839297ABF20EADB2 /* Pods-TripKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TripKit/Pods-TripKit.debug.xcconfig"; sourceTree = "<group>"; };
 		77FE5E1439CA5ABD3E124145 /* Pods-TripKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TripKitTests/Pods-TripKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		8A87B9987976E8220E11F5C5 /* Pods-TripKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-TripKit/Pods-TripKit.release.xcconfig"; sourceTree = "<group>"; };
@@ -1268,6 +1266,7 @@
 				3AFFACA71F068E8B00147990 /* AccountKit */,
 				3AFFACEC1F068E8B00147990 /* BookingKit */,
 				3AFFAD4C1F068E8B00147990 /* SSO */,
+				3AFFAE1A1F06E23C00147990 /* WebView */,
 				3AFFAD4E1F068E8B00147990 /* TKBookingCoordinator.swift */,
 				3AFFAD4F1F068E8B00147990 /* TKBookingFormType.swift */,
 				3AFFAD501F068E8B00147990 /* TKBookingStateMachine.swift */,
@@ -1786,7 +1785,6 @@
 				3AFFABFA1F06855F00147990 /* Cells */,
 				3AFFAC041F06855F00147990 /* Map */,
 				3AFFAC0F1F06855F00147990 /* TransportKitUI */,
-				3AFFADEF1F06916500147990 /* WebView */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1866,8 +1864,7 @@
 			children = (
 				3AFFAC101F06855F00147990 /* ASImageAnnotationView.h */,
 				3AFFAC111F06855F00147990 /* ASImageAnnotationView.m */,
-				3AFFAC121F06855F00147990 /* SGCountdownCell+STKVehicular.h */,
-				3AFFAC131F06855F00147990 /* SGCountdownCell+STKVehicular.m */,
+				3AFFAE1F1F06E44900147990 /* SGCountdownCell+STKVehicular.swift */,
 				3AFFAC141F06855F00147990 /* SGPolylineRenderer.h */,
 				3AFFAC151F06855F00147990 /* SGPolylineRenderer.m */,
 				3AFFAC161F06855F00147990 /* SGSemaphoreView.h */,
@@ -2244,15 +2241,6 @@
 			path = SSO;
 			sourceTree = "<group>";
 		};
-		3AFFADEF1F06916500147990 /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-				3AFFADF01F06916500147990 /* SGWebViewController.h */,
-				3AFFADF11F06916500147990 /* SGWebViewController.m */,
-			);
-			path = WebView;
-			sourceTree = "<group>";
-		};
 		3AFFADF41F0692AA00147990 /* Track */ = {
 			isa = PBXGroup;
 			children = (
@@ -2271,6 +2259,15 @@
 			name = event;
 			path = TripKitTests/event;
 			sourceTree = SOURCE_ROOT;
+		};
+		3AFFAE1A1F06E23C00147990 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				3AFFAE1B1F06E23C00147990 /* SGWebViewController.h */,
+				3AFFAE1C1F06E23C00147990 /* SGWebViewController.m */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
 		};
 		BD670DF24915CD5B092E26D3 /* Pods */ = {
 			isa = PBXGroup;
@@ -2355,7 +2352,6 @@
 				3AFFAD631F068E8B00147990 /* AKBaseTableViewController.h in Headers */,
 				3AFFAC271F06855F00147990 /* SGStyleManager+SGCoreUI.h in Headers */,
 				3AB6C6E21D1CD08E0089F687 /* StopLocation.h in Headers */,
-				3AFFADF21F06916500147990 /* SGWebViewController.h in Headers */,
 				3AFFABCE1F06854F00147990 /* SVKServerKit.h in Headers */,
 				3AB6C7031D1CD08E0089F687 /* TKParserHelper.h in Headers */,
 				3AB6C6EC1D1CD08E0089F687 /* Vehicle.h in Headers */,
@@ -2415,7 +2411,6 @@
 				3AB6C7071D1CD08E0089F687 /* TKRealTimeUpdatableHelper.h in Headers */,
 				3AFFABBC1F06854F00147990 /* SGNotifications.h in Headers */,
 				3AFFAD6A1F068E8B00147990 /* AKResendEmailViewController.h in Headers */,
-				3AFFAC4D1F06855F00147990 /* SGCountdownCell+STKVehicular.h in Headers */,
 				3AB6C6E61D1CD08E0089F687 /* Trip.h in Headers */,
 				3AB6C70F1D1CD08E0089F687 /* TKSettings.h in Headers */,
 				3AFFAD811F068E8B00147990 /* AMKCommunicator.h in Headers */,
@@ -2463,6 +2458,7 @@
 				3AFFAB9B1F06854F00147990 /* NSManagedObjectContext+SimpleFetch.h in Headers */,
 				3AFFADB71F068E8B00147990 /* BPKServerUtil.h in Headers */,
 				3AFFAC511F06855F00147990 /* SGSemaphoreView.h in Headers */,
+				3AFFAE1D1F06E23C00147990 /* SGWebViewController.h in Headers */,
 				3AFFADA91F068E8B00147990 /* BPKHelpers.h in Headers */,
 				3AB6C70D1D1CD08E0089F687 /* TKRoutingParser.h in Headers */,
 				3AFFABC91F06854F00147990 /* SVKRegionManager.h in Headers */,
@@ -2739,6 +2735,7 @@
 				3AFFAB881F06854F00147990 /* SGActions.m in Sources */,
 				3AFFADC21F068E8B00147990 /* SSOAuthenticator.swift in Sources */,
 				3AFFAD8C1F068E8B00147990 /* AKSignUpHeader.m in Sources */,
+				3AFFAE1E1F06E23C00147990 /* SGWebViewController.m in Sources */,
 				3AFFAD641F068E8B00147990 /* AKBaseTableViewController.m in Sources */,
 				3AFFADE81F068E8C00147990 /* TKBookingCoordinator.swift in Sources */,
 				3AFFABBD1F06854F00147990 /* SGNotifications.m in Sources */,
@@ -2756,7 +2753,6 @@
 				3AFFABB91F06854F00147990 /* SGKObjcDateHelper.swift in Sources */,
 				3AFFADD31F068E8B00147990 /* BPKLabelCell.m in Sources */,
 				3AFFABAF1F06854F00147990 /* SGKBetaHelper.m in Sources */,
-				3AFFAC4E1F06855F00147990 /* SGCountdownCell+STKVehicular.m in Sources */,
 				3AFFAC461F06855F00147990 /* MKMapView+ZoomToAnnotations.m in Sources */,
 				3AFFAC291F06855F00147990 /* UIButton+TitleAndImage.swift in Sources */,
 				3AB6C6EB1D1CD08E0089F687 /* TripRequest.m in Sources */,
@@ -2774,7 +2770,6 @@
 				3AFFAE061F06B97300147990 /* TKSegment+Shareable.swift in Sources */,
 				3AB6C70C1D1CD08E0089F687 /* TKRouter.m in Sources */,
 				3AB6C70E1D1CD08E0089F687 /* TKRoutingParser.m in Sources */,
-				3AFFADF31F06916500147990 /* SGWebViewController.m in Sources */,
 				3AFFADDF1F068E8B00147990 /* BPKTableHeader.m in Sources */,
 				3AB6C6FE1D1CD08E0089F687 /* TKBuzzRealTime.m in Sources */,
 				3AB6C6FB1D1CD08E0089F687 /* TKBuzzInfoProvider.m in Sources */,
@@ -2931,6 +2926,7 @@
 				3AB6C6E11D1CD08E0089F687 /* Shape.m in Sources */,
 				3AFFAB951F06854F00147990 /* NSCoder+Marshal.swift in Sources */,
 				3AFFABC41F06854F00147990 /* SGKConfig+SVKServerKit.m in Sources */,
+				3AFFAE201F06E44900147990 /* SGCountdownCell+STKVehicular.swift in Sources */,
 				3AFFAC5D1F0685F000147990 /* TripKitUIBundle.swift in Sources */,
 				3AF3F2641E04CA8C00A2EEC6 /* TKLocationTypes.swift in Sources */,
 				3AFFABD21F06854F00147990 /* STKAnnotations.swift in Sources */,

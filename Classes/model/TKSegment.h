@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, TKSegmentType) {
 };
 
 NS_ASSUME_NONNULL_BEGIN
-@interface TKSegment : NSObject <STKDisplayableTimePoint, UIActivityItemSource, STKTripSegment>
+@interface TKSegment : NSObject <UIActivityItemSource, MKAnnotation>
 
 @property (nonatomic, strong, nullable) id<MKAnnotation> start;
 @property (nonatomic, strong, nullable) id<MKAnnotation> end;
@@ -61,7 +61,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong, nonnull) NSDate *departureTime;
 @property (nonatomic, strong, nonnull) NSDate *arrivalTime;
-@property (nonatomic, copy, nonnull) NSDate *time;
 
 - (void)setTitle:(NSString *)title; // just for KVO
 
@@ -101,8 +100,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isAffectedByTraffic;
 - (BOOL)isFlight;
 - (BOOL)isImpossible;
-- (BOOL)isTerminal;
-- (nullable NSNumber *)bearing;
 - (SGKColor *)color;
 - (NSArray<NSNumber *> *)dashPattern;
 - (BOOL)isCanceled;
@@ -183,6 +180,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (TKSegmentWaypoint)guessWaypointTypeForVisit:(StopVisits *)visit;
 
+- (BOOL)fillInTemplates:(NSMutableString *)string
+                inTitle:(BOOL)title;
 
 ///-----------------------------------------------------------------------------
 /// @name In-app and external bookings
@@ -208,6 +207,12 @@ NS_ASSUME_NONNULL_BEGIN
  Temporary storage to mark the active segment, i.e., the segment that the user is on (presumably) and which should be shown immediately to the user.
  */
 @property (nonatomic, assign) BOOL isActiveSegment;
+
+///
+
+@property (nullable, readonly) NSString *tripSegmentModeTitle;
+@property (nullable, readonly) NSString *tripSegmentModeSubtitle;
+@property (nullable, readonly) SGKColor *tripSegmentModeColor;
 
 @end
 NS_ASSUME_NONNULL_END

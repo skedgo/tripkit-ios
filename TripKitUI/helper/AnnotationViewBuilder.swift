@@ -163,9 +163,9 @@ fileprivate extension AnnotationViewBuilder {
     // travel direction.
     let side: SGSemaphoreLabel
     if segment.isPublicTransport() {
-      side = semaphoreLabel(for: segment.bearing()?.doubleValue)
+      side = semaphoreLabel(for: segment.bearing?.doubleValue)
       
-    } else if segment.isTerminal() {
+    } else if segment.isTerminal {
       let fromCoordinate = segment.trip.request.fromLocation.coordinate
       let toCoordinate = segment.trip.request.toLocation.coordinate
       let isLeft = fromCoordinate.longitude > toCoordinate.longitude
@@ -293,7 +293,7 @@ public extension AnnotationViewBuilder {
       
       let bearing: CLLocationDirection
       if let segment = annotationView.annotation as? TKSegment {
-        bearing = segment.bearing()?.doubleValue ?? 0
+        bearing = segment.bearing?.doubleValue ?? 0
         
       } else if let timePoint = annotationView.annotation as? STKDisplayableTimePoint {
         bearing = timePoint.bearing?.doubleValue ?? 0

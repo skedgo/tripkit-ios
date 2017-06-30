@@ -31,12 +31,9 @@
 
 // TransportKitUI
 #import "ASImageAnnotationView.h"
-#import "SGCountdownCell+STKVehicular.h"
 #import "SGPolylineRenderer.h"
 #import "SGSemaphoreView.h"
 #import "SGTripSegmentsView.h"
-
-#import "SGWebViewController.h"
 
 // TripKit UI
 
