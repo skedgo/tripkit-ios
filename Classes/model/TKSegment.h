@@ -10,6 +10,8 @@
 @import CoreData;
 @import MapKit;
 
+#import "SGKCrossPlatform.h"
+
 @class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape, SegmentTemplate;
 @class SVKRegion, ModeInfo;
 @protocol STKDisplayableTimePoint, STKTripSegment;
