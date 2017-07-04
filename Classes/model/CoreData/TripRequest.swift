@@ -251,7 +251,7 @@ extension TripRequest {
     if type == .arriveBefore {
       return NSSortDescriptor(key: base + "departureTime", ascending: false)
     } else {
-      return NSSortDescriptor(key: "base" + "arrivalTime", ascending: true)
+      return NSSortDescriptor(key: base + "arrivalTime", ascending: true)
     }
   }
   
