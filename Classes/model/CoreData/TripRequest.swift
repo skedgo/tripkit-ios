@@ -36,6 +36,7 @@ extension TripRequest {
   }
 
   /// Set the time and type for this request.
+  @objc(setTime:forType:)
   public func setTime(_ time: Date?, for type: SGTimeType) {
     self.timeType = NSNumber(value: type.rawValue)
     
@@ -79,6 +80,7 @@ extension TripRequest {
     return request
   }
   
+  @objc(insertRequestFrom:to:forTime:ofType:intoContext:)
   public static func insert(from start: MKAnnotation, to end: MKAnnotation, for time: Date?, timeType: SGTimeType, into context: NSManagedObjectContext) -> TripRequest {
     
     let request = insertEmpty(into: context)
@@ -92,6 +94,7 @@ extension TripRequest {
     return request
   }
   
+  @objc(timeStringForTime:ofType:timeZone:)
   public static func timeString(for time: Date?, timeType: SGTimeType, in timeZone: TimeZone?) -> String {
     
     switch timeType {

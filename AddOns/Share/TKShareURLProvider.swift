@@ -11,10 +11,12 @@ import UIKit
 
 import TripKit
 
+@objc
 public protocol TKURLShareable {
   var shareURL: URL? { get }
 }
 
+@objc
 public protocol TKURLSavable: class, TKURLShareable {
   var shareURL: URL? { get set }
   var saveURL: URL? { get }
@@ -22,6 +24,7 @@ public protocol TKURLSavable: class, TKURLShareable {
 
 public class TKShareURLProvider: UIActivityItemProvider {
   
+  @objc(getShareURLForShareable:allowLongURL:success:failure:)
   public class func getShareURL(for shareable: TKURLShareable, allowLongURL: Bool, success: @escaping (URL) -> Void, failure: (() -> Void)?) {
     
     if let shareURL = shareable.shareURL {
@@ -55,6 +58,7 @@ public class TKShareURLProvider: UIActivityItemProvider {
     
   }
   
+  @objc(getShareURLForShareable:allowLongURL:allowBlocking:)
   public class func getShareURL(for shareable: TKURLShareable, allowLongURL: Bool, allowBlocking: Bool) -> URL? {
     
     if let shareURL = shareable.shareURL {

@@ -12,7 +12,7 @@ extension StopVisits: TKURLShareable {
   
   public var shareURL: URL? {
     guard let regionName = stop.region?.name else { return nil }
-    return TKShareHelper.serviceURL(forServiceID: service.code, atStopCode: stop.stopCode, inRegionNamed: regionName)
+    return TKShareHelper.createServiceURL(serviceID: service.code, atStopCode: stop.stopCode, inRegionNamed: regionName)
   }
   
 }

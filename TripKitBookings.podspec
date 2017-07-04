@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-  s.name         = "TripKitAddOns"
+  s.name         = "TripKitBookings"
   s.version      = "1.0-beta"
-  s.summary      = "Add ons to SkedGo's TripKit"
+  s.summary      = "Booking integration for SkedGo's TripKit"
   s.homepage     = "http://www.skedgo.com/"
   s.license      = { 
     type: 'Proprietary',
@@ -10,7 +10,8 @@ Pod::Spec.new do |s|
     LICENSE
   }
   s.authors      = {
-    "Adrian Schoenig" => "adrian@skedgo.com"
+    "Adrian Schoenig" => "adrian@skedgo.com",
+    "Brian Huang" => "brian@skedgo.com"
   }
   s.source       = { path: "." }
   # s.source       = { git: ".", tag: "v#{s.version}" }
@@ -21,23 +22,19 @@ Pod::Spec.new do |s|
   
   s.prefix_header_file = "prefix.pch"
 
-  s.subspec 'Agenda' do |cs|
-    cs.dependency 'TripKit'
-    cs.dependency 'RxSwift'
-    cs.dependency 'RxCocoa'
+  s.dependency 'TripKit'
+  s.dependency 'TripKitUI'
 
-    cs.source_files = "AddOns/Agenda/**/*.{h,m,swift}"
-  end
+  s.dependency 'AFNetworking'  
+  s.dependency 'KVNProgress'
 
-  s.subspec 'InterApp' do |cs|
-    cs.dependency 'TripKit'
-    cs.source_files = "AddOns/InterApp/**/*.{h,m,swift}"
-  end
+  s.dependency 'RxSwift'
+  s.dependency 'RxCocoa'
+  s.dependency 'SwiftyJSON'
+  s.dependency 'KeychainAccess'
+  s.dependency 'OAuthSwift'
 
-  s.subspec 'Share' do |cs|
-    cs.dependency 'TripKit'
-    cs.dependency 'RxSwift'
-    cs.source_files = "AddOns/Share/**/*"
-  end
+  s.source_files = "AddOns/Bookings/**/*.{h,m,swift}"
+  s.resources = "AddOns/Bookings/**/*.{xib}"
 
 end

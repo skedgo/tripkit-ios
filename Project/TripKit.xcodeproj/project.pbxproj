@@ -79,8 +79,6 @@
 		3AB6C6B91D1CD08E0089F687 /* TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6421D1CD08E0089F687 /* TKInterAppCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB6C6BA1D1CD08E0089F687 /* TKInterAppCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6431D1CD08E0089F687 /* TKInterAppCommunicator.m */; };
 		3AB6C6BB1D1CD08E0089F687 /* TKInterAppHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6441D1CD08E0089F687 /* TKInterAppHelpers.swift */; };
-		3AB6C6C61D1CD08E0089F687 /* TKShareHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6511D1CD08E0089F687 /* TKShareHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6C71D1CD08E0089F687 /* TKShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6521D1CD08E0089F687 /* TKShareHelper.m */; };
 		3AB6C6CA1D1CD08E0089F687 /* TKPriceTimeTripClassifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6581D1CD08E0089F687 /* TKPriceTimeTripClassifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB6C6CB1D1CD08E0089F687 /* TKPriceTimeTripClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6591D1CD08E0089F687 /* TKPriceTimeTripClassifier.m */; };
 		3AB6C6CC1D1CD08E0089F687 /* TKTripClassifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C65A1D1CD08E0089F687 /* TKTripClassifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -636,8 +634,6 @@
 		3AB6C6421D1CD08E0089F687 /* TKInterAppCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKInterAppCommunicator.h; sourceTree = "<group>"; };
 		3AB6C6431D1CD08E0089F687 /* TKInterAppCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKInterAppCommunicator.m; sourceTree = "<group>"; };
 		3AB6C6441D1CD08E0089F687 /* TKInterAppHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKInterAppHelpers.swift; sourceTree = "<group>"; };
-		3AB6C6511D1CD08E0089F687 /* TKShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TKShareHelper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		3AB6C6521D1CD08E0089F687 /* TKShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKShareHelper.m; sourceTree = "<group>"; };
 		3AB6C6581D1CD08E0089F687 /* TKPriceTimeTripClassifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPriceTimeTripClassifier.h; sourceTree = "<group>"; };
 		3AB6C6591D1CD08E0089F687 /* TKPriceTimeTripClassifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPriceTimeTripClassifier.m; sourceTree = "<group>"; };
 		3AB6C65A1D1CD08E0089F687 /* TKTripClassifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTripClassifier.h; sourceTree = "<group>"; };
@@ -1326,8 +1322,6 @@
 			children = (
 				3AB6C6461D1CD08E0089F687 /* Categories */,
 				3AFFAC621F068E3900147990 /* Permissions */,
-				3AB6C6511D1CD08E0089F687 /* TKShareHelper.h */,
-				3AB6C6521D1CD08E0089F687 /* TKShareHelper.m */,
 				3AFFADFD1F06AFDD00147990 /* TKShareHelper.swift */,
 				3AA03D8A1F0B79D400C6B337 /* TKShareURLProvider.swift */,
 				3A266C561D744B9300438024 /* TKSwiftyShareHelper.swift */,
@@ -2459,7 +2453,6 @@
 				3AB6C6D81D1CD08E0089F687 /* DLSEntry.h in Headers */,
 				3AFFABD51F06854F00147990 /* STKMiniInstruction.h in Headers */,
 				3AFFABBF1F06854F00147990 /* SGStyleManager.h in Headers */,
-				3AB6C6C61D1CD08E0089F687 /* TKShareHelper.h in Headers */,
 				3AFFADA51F068E8B00147990 /* BPKDataValidator.h in Headers */,
 				3AFFABD81F06854F00147990 /* STKRoutePolyline.h in Headers */,
 				3AFFADB11F068E8B00147990 /* BPKEmail.h in Headers */,
@@ -2781,7 +2774,6 @@
 				3A77691F1D3DE45800AF9EB2 /* TKAgendaManager.swift in Sources */,
 				3AC4DD121DEE32C80026B238 /* TKWaypointRouter.m in Sources */,
 				3AFFAD711F068E8B00147990 /* AMKEmail.m in Sources */,
-				3AB6C6C71D1CD08E0089F687 /* TKShareHelper.m in Sources */,
 				3A9FF6DB1DE79FC400DB4647 /* TKReporter.swift in Sources */,
 				3AFFAD9A1F068E8B00147990 /* BPKBookingViewController.m in Sources */,
 				3AB6C6E51D1CD08E0089F687 /* StopVisits.m in Sources */,

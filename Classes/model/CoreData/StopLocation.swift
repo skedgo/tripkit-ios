@@ -21,10 +21,12 @@ extension StopLocation {
     return stopModeInfo.alt
   }
   
+  @objc(modeImageForIconType:)
   public func modeImage(for type: SGStyleModeIconType) -> SGKImage? {
     return SGStyleManager.image(forModeImageName: stopModeInfo.localImageName, isRealTime: false, of: type)
   }
   
+  @objc(modeImageURLForIconType:)
   public func modeImageURL(for type: SGStyleModeIconType) -> URL? {
     guard let remoteName = stopModeInfo.remoteImageName else { return nil }
     return SVKServer.imageURL(forIconFileNamePart: remoteName, of: type)

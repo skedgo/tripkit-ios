@@ -8,13 +8,8 @@
 
 #import "SGAddressBookManager.h"
 
-#ifdef TK_NO_FRAMEWORKS
-#import "TripKit.h"
+#import "TKTripKit.h"
 #import "TripKit/TripKit-Swift.h"
-#else
-@import TripKit;
-#endif
-
 
 #import "SGAutocompletionResult.h"
 

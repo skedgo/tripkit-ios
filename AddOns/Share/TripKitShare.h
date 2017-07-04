@@ -14,15 +14,4 @@
 
 #endif
 
-// Objective-C Headers
-#import "SGAddressBookManager.h"
-#import "SGCalendarManager.h"
-#import "SGLocationManager.h"
-
-//
-
-#import "TKShareHelper.h"
-
-
-
 #endif /* SGSearchKit_h */

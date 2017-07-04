@@ -80,6 +80,11 @@
 #import "SGRegionAutocompleter.h"
 #import "SGSearchDataSource.h"
 
+// Permissions
+#import "SGAddressBookManager.h"
+#import "SGCalendarManager.h"
+#import "SGLocationManager.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 

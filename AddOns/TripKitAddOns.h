@@ -9,8 +9,4 @@
 #ifndef TripKitAddOns_h
 #define TripKitAddOns_h
 
-#import "TripKitAgenda.h"
-#import "TripKitBookings.h"
-#import "TripKitShare.h"
-
 #endif /* TripKitAddOns_h */

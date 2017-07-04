@@ -10,6 +10,7 @@ import Foundation
 
 extension SGCountdownCell {
   
+  @objc(configureForVehicle:includeSubtitle:)
   public func configure(for vehicle: STKVehicular, includeSubtitle: Bool) {
     let icon = STKVehicularHelper.icon(forVehicle: vehicle)
     

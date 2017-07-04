@@ -14,7 +14,7 @@
 #else
 @import TripKit;
 @import TripKitUI;
-#import "TripKitAddOns/TripKitAddOns-Swift.h"
+#import <TripKitBookings/TripKitBookings-Swift.h>
 #endif
 
 #import "AMKAccountKit.h"

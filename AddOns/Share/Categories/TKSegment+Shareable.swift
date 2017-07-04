@@ -14,7 +14,7 @@ extension TKSegment: TKURLShareable {
       let isEnd = self.order() == .end
       guard let coordinate = isEnd ? end?.coordinate : start?.coordinate else { return nil }
       let time = isEnd ? arrivalTime : departureTime
-      return TKShareHelper.meetURL(for: coordinate, atTime: time)
+      return TKShareHelper.createMeetURL(coordinate: coordinate, at: time)
     }
   }
   
