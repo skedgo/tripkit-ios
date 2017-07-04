@@ -14,8 +14,6 @@
 
 #import "TKRealTimeUpdatableHelper.h"
 
-#import "TKColoredRoute.h"
-
 enum {
   SGServiceFlagRealTime               = 1 << 0,
   SGServiceFlagRealTimeCapable        = 1 << 1,
@@ -271,12 +269,12 @@ typedef NSUInteger SGServiceFlag;
 
 	NSMutableArray *shapes = [NSMutableArray arrayWithCapacity:2];
 	if (startSplit > 0 || endSplit != -1) {
-    NSArray *dashPattern = [self.shape respondsToSelector:@selector(routeDashPattern)] ? self.shape.routeDashPattern : nil;
+    NSArray *dashPattern = self.shape.routeDashPattern;
     // untravelled start
 		TKColoredRoute *u = [[TKColoredRoute alloc] initWithWaypoints:waypoints
                                                              from:0
                                                                to:startSplit + 1 // include it
-                                                        withColor:[SGKTransportStyler routeDashColorNontravelled]
+                                                        withColor:SGKColor.routeDashColorNonTravelled
                                                       dashPattern:dashPattern
                                                       isTravelled:NO];
 		[shapes addObject:u];
@@ -293,7 +291,7 @@ typedef NSUInteger SGServiceFlag;
       t = [[TKColoredRoute alloc] initWithWaypoints:waypoints
                                                from:endSplit + 1
                                                  to:-1
-                                          withColor:[SGKTransportStyler routeDashColorNontravelled]
+                                          withColor:SGKColor.routeDashColorNonTravelled
                                         dashPattern:dashPattern
                                         isTravelled:NO];
       [shapes addObject:t];

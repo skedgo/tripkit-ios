@@ -263,8 +263,7 @@
     }
     
     for (id<STKDisplayableRoute> route in shapes) {
-      if ([route respondsToSelector:@selector(routeIsTravelled)]
-          && ! [route routeIsTravelled]) {
+      if (! [route routeIsTravelled]) {
         continue;
       }
       

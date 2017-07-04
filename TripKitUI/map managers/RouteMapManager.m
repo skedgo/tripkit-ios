@@ -337,8 +337,8 @@
     id<STKDisplayableRoute> route = [routePolyline route];
 		
 		SGPolylineRenderer *routeRenderer	= [[SGPolylineRenderer alloc] initWithPolyline:routePolyline];
-		routeRenderer.strokeColor       = [route routeColour];
-    NSArray *lineDashPattern        = [route respondsToSelector:@selector(routeDashPattern)] ? [route routeDashPattern] : nil;
+		routeRenderer.strokeColor       = [route routeColor];
+    NSArray *lineDashPattern        = [route routeDashPattern];
     if (lineDashPattern) {
       routeRenderer.lineDashPattern = lineDashPattern;
     }

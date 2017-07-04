@@ -63,7 +63,8 @@ typedef NSUInteger SGSegmentTemplateFlag;
 - (id<MKAnnotation>)endWaypoint:(BOOL)atStart
 {
 	// get the first or last travelled shape
-  Shape *shape = [Shape fetchTravelledShapeForTemplate:self
+  Shape *shape = [Shape
+                  fetchTravelledShapeForTemplate:self
                                                atStart:atStart];
   if (shape) {
     if (atStart) {

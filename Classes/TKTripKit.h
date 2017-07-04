@@ -38,13 +38,11 @@
 #import "SegmentTemplate.h"
 #import "SegmentReference.h"
 #import "Service.h"
-#import "Shape.h"
 #import "StopLocation.h"
 #import "Vehicle.h"
 #import "Alert.h"
 
 // Non-core data model classes
-#import "TKColoredRoute.h"
 #import "TKSegment.h"
 #import "TKPlainCell.h"
 #import "TKTripFactory.h"

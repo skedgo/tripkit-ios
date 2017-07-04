@@ -13,15 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol STKDisplayableRoute <NSObject>
-- (NSArray *)routePath; // NSArray of objects that have a coordinate, e.g., <MKAnnotation> or CLLocation
-- (nullable SGKColor *)routeColour;
-@optional
-- (BOOL)showRoute;
-- (BOOL)routeIsTravelled;
-- (nullable NSArray<NSNumber *> *)routeDashPattern;
-
-@end
+@protocol STKDisplayableRoute;
 
 @interface STKRoutePolyline : MKPolyline
 

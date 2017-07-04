@@ -240,7 +240,7 @@ fileprivate extension AnnotationViewBuilder {
     }
     
     circleView.isFaded = !asTravelled
-    circleView.circleColor = color ?? SGKTransportStyler.routeDashColorNontravelled()
+    circleView.circleColor = color ?? .routeDashColorNonTravelled
     circleView.alpha = alpha
     circleView.setNeedsDisplay()
 

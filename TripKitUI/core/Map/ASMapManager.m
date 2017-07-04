@@ -147,17 +147,15 @@
     
   } else if ([overlay isKindOfClass:[STKRoutePolyline class]]) {
     STKRoutePolyline * routeAnnotation = (STKRoutePolyline *) overlay;
-    UIColor *routeColor = [[routeAnnotation route] routeColour];
+    UIColor *routeColor = [[routeAnnotation route] routeColor];
     
     SGPolylineRenderer *routeRenderer	= [[SGPolylineRenderer alloc] initWithPolyline:routeAnnotation];
     routeRenderer.strokeColor       = routeColor;
     
     id<STKDisplayableRoute> route = [routeAnnotation route];
-    if ([route respondsToSelector:@selector(routeDashPattern)]) {
-      NSArray *lineDashPattern = [route routeDashPattern];
-      if (nil != lineDashPattern) {
-        routeRenderer.lineDashPattern = lineDashPattern;
-      }
+    NSArray *lineDashPattern = [route routeDashPattern];
+    if (nil != lineDashPattern) {
+      routeRenderer.lineDashPattern = lineDashPattern;
     }
     return routeRenderer;
   

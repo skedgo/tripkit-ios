@@ -298,13 +298,11 @@ private class TKMinimalSegment: NSObject, TKAgendaTripOptionSegmentType {
   
   // MARK: STKDisplayableRoute
   
-  fileprivate func routePath() -> [Any] {
-    return []
-  }
-  
-  fileprivate func routeColour() -> UIColor? {
-    return nil
-  }
+  var routePath: [Any] = []
+  var routeIsTravelled: Bool = true
+  var routeDashPattern: [NSNumber]? = nil
+  var showRoute: Bool = true
+  var routeColor: SGKColor? = nil
   
 }
 

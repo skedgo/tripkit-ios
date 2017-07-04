@@ -8,6 +8,8 @@
 
 #import "STKRoutePolyline.h"
 
+#import <TripKit/TripKit-Swift.h>
+
 @implementation STKRoutePolyline
 
 + (nullable instancetype)routePolylineForRoute:(id <STKDisplayableRoute>)originRoute pointsPerTrip:(NSInteger)pointsPerTrip {

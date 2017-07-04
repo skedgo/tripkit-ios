@@ -410,13 +410,25 @@ extension TKTTPifier.SegmentOverview: TKAgendaTripOptionSegmentType {
   
   // MARK: STKDisplayableRoute
 
-  func routeColour() -> UIColor? {
+  var routeColor: UIColor? {
     return tripSegmentModeColor
   }
   
-  func routePath() -> [Any] {
+  var routePath: [Any] {
     guard let polyline = self.polyline else { return [] }
     return CLLocation.decodePolyLine(polyline)
+  }
+  
+  var routeDashPattern: [NSNumber]? {
+    return nil
+  }
+  
+  var showRoute: Bool {
+    return true
+  }
+  
+  var routeIsTravelled: Bool {
+    return true
   }
 
 }
