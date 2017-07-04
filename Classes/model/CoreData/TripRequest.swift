@@ -193,12 +193,66 @@ extension TripRequest {
   }
   
   
+  public func sortDescriptorsAccordingToSelectedOrder() -> [NSSortDescriptor] {
+    return sortDescriptors(withPrimary: TKSettings.sortOrder)
+  }
+  
+  
   public func sortDescriptors(withPrimary primary: STKTripCostType) -> [NSSortDescriptor] {
     
-    // TODO: Convert
+    let primaryTimeSorter = TripRequest.timeSorter(for: type)
+    let visibilitySorter = NSSortDescriptor(key: "visibilityRaw", ascending: true)
+    let scoreSorter = NSSortDescriptor(key: "visibleTrip.totalScore", ascending: true)
     
-    return []
+    let first: NSSortDescriptor
+    var second = visibilitySorter
+    var third  = primaryTimeSorter
     
+    switch (primary, type) {
+    case (.time, .arriveBefore):
+      first  = primaryTimeSorter
+      second = TripRequest.timeSorter(for: .leaveAfter)
+      third  = visibilitySorter
+      
+    case (.time, _):
+      first  = primaryTimeSorter
+      second = TripRequest.timeSorter(for: .arriveBefore)
+      third  = visibilitySorter
+      
+    case (.duration, _):
+      first = NSSortDescriptor(key: "visibleTrip.minutes", ascending: true)
+
+    case (.price, _):
+      first = NSSortDescriptor(key: "visibleTrip.totalPriceUSD", ascending: true)
+
+    case (.carbon, _):
+      first = NSSortDescriptor(key: "visibleTrip.totalCarbon", ascending: true)
+
+    case (.calories, _):
+      first = NSSortDescriptor(key: "visibleTrip.totalCalories", ascending: true)
+      
+    case (.walking, _):
+      first = NSSortDescriptor(key: "visibleTrip.totalWalking", ascending: true)
+
+    case (.hassle, _):
+      first = NSSortDescriptor(key: "visibleTrip.totalHassle", ascending: true)
+
+    case (.count, _), (.score, _):
+      first = visibilitySorter
+      second = scoreSorter
+      third = primaryTimeSorter
+    }
+    
+    return [first, second, third]
+  }
+  
+  private static func timeSorter(for type: SGTimeType, forGroups: Bool = true) -> NSSortDescriptor {
+    let base = forGroups ? "visibleTrip." : ""
+    if type == .arriveBefore {
+      return NSSortDescriptor(key: base + "departureTime", ascending: false)
+    } else {
+      return NSSortDescriptor(key: "base" + "arrivalTime", ascending: true)
+    }
   }
   
 }

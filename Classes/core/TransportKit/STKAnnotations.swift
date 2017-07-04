@@ -52,7 +52,7 @@ extension STKDisplayableTimePoint {
 @objc
 public protocol STKModeAnnotation: STKDisplayablePoint {
   
-  var stopModeInfo: ModeInfo { get }
+  var stopModeInfo: ModeInfo! { get }
   
 }
 

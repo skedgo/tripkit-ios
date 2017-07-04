@@ -226,85 +226,6 @@
   return NO;
 }
 
-- (NSArray *)sortDescriptorsAccordingToSelectedOrder
-{
-  STKTripCostType sortType = (STKTripCostType) [[NSUserDefaults sharedDefaults] integerForKey:TKDefaultsKeyLastUseSortIndex];
-  return [self sortDescriptorsWithPrimary:sortType];
-}
-
-- (NSArray<NSSortDescriptor *> *)sortDescriptorsWithPrimary:(STKTripCostType)sortType
-{
-	NSArray *sortDescriptors;
-	NSSortDescriptor *first, *second, *third, *primaryTimeSorter, *scoreSorter, *visibilitySorter;
-	
-	primaryTimeSorter = [self timeSorterForGroups:YES];
-	visibilitySorter  = [[NSSortDescriptor alloc] initWithKey:@"visibilityRaw" ascending:YES];
-	scoreSorter       = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalScore" ascending:YES];
-	
-	switch (sortType) {
-    case STKTripCostTypeTime:
-			// sort by time
-			if (self.timeType.intValue == SGTimeTypeArriveBefore) {
-				first = primaryTimeSorter;
-				second = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.arrivalTime" ascending:YES];
-			} else {
-				first = primaryTimeSorter;
-				second = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.departureTime" ascending:NO];
-			}
-			third   = visibilitySorter;
-      break;
-      
-		case STKTripCostTypeDuration:
-			first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.minutes" ascending:YES];
-      second  = visibilitySorter;
-			third   = primaryTimeSorter;
-			break;
-			
-		case STKTripCostTypePrice:
-      first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalPriceUSD" ascending:YES];
-      second  = visibilitySorter;
-			third   = primaryTimeSorter;
-      break;
-			
-		case STKTripCostTypeCarbon:
-			first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalCarbon" ascending:YES];
-      second  = visibilitySorter;
-			third   = primaryTimeSorter;
-			break;
-      
-    case STKTripCostTypeCalories:
-			first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalCalories" ascending:YES];
-      second  = visibilitySorter;
-			third   = primaryTimeSorter;
-			break;
-
-    case STKTripCostTypeWalking:
-			first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalWalking" ascending:YES];
-      second  = visibilitySorter;
-			third   = primaryTimeSorter;
-			break;
-      
-    case STKTripCostTypeHassle:
-			first   = [[NSSortDescriptor alloc] initWithKey:@"visibleTrip.totalHassle" ascending:YES];
-      second  = visibilitySorter;
-			third   = primaryTimeSorter;
-			break;
-
-    case STKTripCostTypeCount:
-      ZAssert(false, @"Don't sort by this!");
-      // fallthrough!
-
-    case STKTripCostTypeScore:
-			first   = visibilitySorter;
-      second  = scoreSorter;
-      third   = primaryTimeSorter;
-			break;
-	}
-	
-	sortDescriptors = @[first, second, third];
-	return sortDescriptors;
-}
-
 - (NSString *)debugString
 {
   NSArray *sortedGroups = [self.tripGroups sortedArrayUsingDescriptors:[self sortDescriptorsAccordingToSelectedOrder]];
@@ -317,19 +238,6 @@
   }
   
   return output;
-}
-
-#pragma mark - Private methods
-
-- (NSSortDescriptor *)timeSorterForGroups:(BOOL)forGroups
-{
-  NSString *base = forGroups ? @"visibleTrip." : @"";
-  
-  if (self.timeType.intValue == SGTimeTypeArriveBefore) {
-    return [[NSSortDescriptor alloc] initWithKey:[NSString stringWithFormat:@"%@departureTime", base] ascending:NO];
-  } else {
-    return [[NSSortDescriptor alloc] initWithKey:[NSString stringWithFormat:@"%@arrivalTime", base] ascending:YES];
-  }
 }
 
 

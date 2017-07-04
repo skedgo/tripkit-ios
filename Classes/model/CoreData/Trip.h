@@ -17,7 +17,7 @@
 @class Alert, SVKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 @protocol STKTrip;
 
-@interface Trip : NSManagedObject <TKRealTimeUpdatable, STKTrip, UIActivityItemSource> {
+@interface Trip : NSManagedObject <TKRealTimeUpdatable, UIActivityItemSource, STKTrip> {
 }
 
 #pragma mark - CoreData elements
@@ -63,7 +63,7 @@
 
 @property (nonatomic, strong, nullable) NSURL *shareURL;
 
-@property (nonatomic, strong, nullable) NSURL *saveURL;
+@property (nonatomic, strong, nullable, readonly) NSURL *saveURL;
 
 
 - (void)setAsPreferredTrip;
