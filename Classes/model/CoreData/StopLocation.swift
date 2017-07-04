@@ -23,12 +23,13 @@ extension StopLocation {
   
   @objc(modeImageForIconType:)
   public func modeImage(for type: SGStyleModeIconType) -> SGKImage? {
-    return SGStyleManager.image(forModeImageName: stopModeInfo.localImageName, isRealTime: false, of: type)
+    guard let localName = stopModeInfo?.localImageName else { return nil }
+    return SGStyleManager.image(forModeImageName: localName, isRealTime: false, of: type)
   }
   
   @objc(modeImageURLForIconType:)
   public func modeImageURL(for type: SGStyleModeIconType) -> URL? {
-    guard let remoteName = stopModeInfo.remoteImageName else { return nil }
+    guard let remoteName = stopModeInfo?.remoteImageName else { return nil }
     return SVKServer.imageURL(forIconFileNamePart: remoteName, of: type)
   }
 }

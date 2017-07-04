@@ -38,7 +38,7 @@ extension TKSegment {
   public func hasVisibility(_ type: STKTripSegmentVisibility) -> Bool {
     switch self.order() {
     case .start: return type == .inDetails
-    case .regular: return self.template().visibility.intValue > type.rawValue
+    case .regular: return self.template().visibility.intValue >= type.rawValue
     case .end: return type != .inSummary
     }
   }
