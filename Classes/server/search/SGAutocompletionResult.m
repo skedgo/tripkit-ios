@@ -8,11 +8,9 @@
 
 #import "SGAutocompletionResult.h"
 
-#ifdef TK_NO_FRAMEWORKS
-#import "TripKit.h"
-#else
-@import TripKit;
-#endif
+#import "SGRootKit.h"
+#import "TKTripKit.h"
+#import "TripKit/TripKit-Swift.h"
 
 @implementation NSString (Matches)
 

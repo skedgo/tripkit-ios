@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension TKSegment: SGURLShareable {
+extension TKSegment: TKURLShareable {
   public var shareURL: URL? {
     get {
       let isEnd = self.order() == .end

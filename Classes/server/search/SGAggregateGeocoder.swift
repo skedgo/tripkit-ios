@@ -18,7 +18,7 @@ public class SGAggregateGeocoder: SGBaseGeocoder {
     self.geocoders = geocoders
     
     queue = OperationQueue()
-    queue.name = "com.buzzhives.TripGo.aggregategeocoder"
+    queue.name = "com.buzzhives.TripKit.aggregategeocoder"
     queue.qualityOfService = .userInitiated
   }
   

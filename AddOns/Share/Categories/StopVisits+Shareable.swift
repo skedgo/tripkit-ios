@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension StopVisits: SGURLShareable {
+extension StopVisits: TKURLShareable {
   
   public var shareURL: URL? {
     guard let regionName = stop.region?.name else { return nil }

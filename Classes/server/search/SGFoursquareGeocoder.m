@@ -8,16 +8,8 @@
 
 #import "SGFoursquareGeocoder.h"
 
-@import AFNetworking;
-
-#ifdef TK_NO_FRAMEWORKS
-#import "TripKit.h"
+#import "TKTripKit.h"
 #import "TripKit/TripKit-Swift.h"
-#else
-@import TripKit;
-#import "TripKitAddOns/TripKitAddOns-Swift.h"
-#endif
-
 
 #import "SGAutocompletionResult.h"
 
@@ -30,8 +22,6 @@
 @property (nonatomic, strong) NSCache *resultCache;
 
 @property (nonatomic, copy) NSString *latestQuery;
-
-@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
 
@@ -72,29 +62,26 @@
                           @"v": @"20140526"};
   
   __weak typeof (self) weakSelf = self;
-  [self.sessionManager GET:@"search"
-                parameters:paras
-                   success:
-   ^(NSURLSessionDataTask *task, id responseObject) {
-#pragma unused(task)
-     typeof (weakSelf) strongSelf = weakSelf;
-     if (strongSelf) {
-       NSArray *venues = responseObject[@"response"][@"venues"];
-       NSArray *results = [strongSelf resultsForResultArray:venues
-                                              forSearchTerm:inputString
-                                                 nearRegion:coordinateRegion
-                                     asAutocompletionResult:NO];
-       success(inputString, results);
-     }
+  
+  [self hit:@"search"
+      paras:paras
+ completion:^(NSDictionary<NSString *,id> * _Nullable response, NSError * _Nullable error) {
+   typeof (weakSelf) strongSelf = weakSelf;
+   if (!strongSelf) {
+     return;
    }
-                   failure:
-   ^(NSURLSessionDataTask *task, NSError *error) {
-#pragma unused(task, error)
+   if (response) {
+     NSArray *venues = response[@"response"][@"venues"];
+     NSArray *results = [strongSelf resultsForResultArray:venues
+                                            forSearchTerm:inputString
+                                               nearRegion:coordinateRegion
+                                   asAutocompletionResult:NO];
+     success(inputString, results);
+   } else if (failure) {
      DLog(@"Foursquare failed with error: %@", error);
-     if (failure) {
-       failure(inputString, nil); // fail without showing error as this might be an internal issue, e.g., quota exceeded
-     }
-   }];
+     failure(inputString, nil); // fail without showing error as this might be an internal issue, e.g., quota exceeded
+   }
+ }];
 }
 
 #pragma mark - SGAutocompletionDataProvider
@@ -313,37 +300,37 @@
   
   __weak typeof (self) weakSelf = self;
 
-  [self.sessionManager GET:@"suggestcompletion"
-                parameters:paras
-                   success:
-   ^(NSURLSessionDataTask *task, id responseObject) {
-#pragma unused(task)
-     __strong typeof (weakSelf) strongSelf = weakSelf;
-     if (strongSelf) {
-       NSArray *results = nil;
-       if ([inputString isEqualToString:strongSelf.latestQuery]) {
-         NSArray *minivenues = responseObject[@"response"][@"minivenues"];
-         results = [strongSelf resultsForResultArray:minivenues
-                                       forSearchTerm:inputString
-                                          nearRegion:coordinateRegion
-                              asAutocompletionResult:YES];
-       }
-       if (results.count > 0) {
-         completion(results);
-       } else {
-         [self exploreAutocompletionResultForString:self.latestQuery
-                                         nearRegion:coordinateRegion
-                                         completion:completion];
-       }
-     }
+  [self hit:@"suggestcompletion"
+      paras:paras
+ completion:^(NSDictionary<NSString *,id> * _Nullable response, NSError * _Nullable error) {
+   typeof (weakSelf) strongSelf = weakSelf;
+   if (!strongSelf) {
+     return;
    }
-                   failure:
-   ^(NSURLSessionDataTask *task, NSError *error) {
-#pragma unused(task, error)
+   if (response) {
+     NSArray *results = nil;
+     if ([inputString isEqualToString:strongSelf.latestQuery]) {
+       NSArray *minivenues = response[@"response"][@"minivenues"];
+       results = [strongSelf resultsForResultArray:minivenues
+                                     forSearchTerm:inputString
+                                        nearRegion:coordinateRegion
+                            asAutocompletionResult:YES];
+     }
+     if (results.count > 0) {
+       completion(results);
+     } else {
+       [self exploreAutocompletionResultForString:self.latestQuery
+                                       nearRegion:coordinateRegion
+                                       completion:completion];
+     }
+     
+   } else {
      [self exploreAutocompletionResultForString:self.latestQuery
                                      nearRegion:coordinateRegion
                                      completion:completion];
-   }];
+   }
+ }];
+  
 }
 
 - (void)exploreAutocompletionResultForString:(NSString *)inputString
@@ -360,49 +347,36 @@
                           @"v": @"20140526"};
   
   __weak typeof (self) weakSelf = self;
-
-  [self.sessionManager GET:@"explore"
-                parameters:paras
-                   success:
-   ^(NSURLSessionDataTask *task, id responseObject) {
-#pragma unused(task)
-     __strong typeof (weakSelf) strongSelf = weakSelf;
-     if (strongSelf) {
-       NSArray *results = nil;
-       if ([inputString isEqualToString:strongSelf.latestQuery]) {
-         NSArray *groups = responseObject[@"response"][@"groups"];
-         NSMutableArray *venues = [[NSMutableArray alloc] init];
-         for (NSDictionary *dict in groups) {
-           for (NSDictionary *item in dict[@"items"]) {
-             [venues addObject:item[@"venue"]];
-           }
-         }
-         results = [strongSelf resultsForResultArray:venues
-                                       forSearchTerm:inputString
-                                          nearRegion:coordinateRegion
-                              asAutocompletionResult:YES];
-       }
-        completion(results);
-     }
-   }
-                   failure:
-   ^(NSURLSessionDataTask *task, NSError *error) {
-#pragma unused(task, error)
-      completion(nil);
-   }];
-}
-
-#pragma mark - Lazy accessors
-
-- (AFHTTPSessionManager *)sessionManager
-{
-  if (! _sessionManager) {
-    _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.foursquare.com/v2/venues/"]];
-    _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-    _sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
-  }
   
-  return _sessionManager;
+  [self hit:@"explore"
+      paras:paras
+ completion:^(NSDictionary<NSString *,id> * _Nullable response, NSError * _Nullable error) {
+   typeof (weakSelf) strongSelf = weakSelf;
+   if (!strongSelf) {
+     return;
+   }
+   if (response) {
+     NSArray *results = nil;
+     if ([inputString isEqualToString:strongSelf.latestQuery]) {
+       NSArray *groups = response[@"response"][@"groups"];
+       NSMutableArray *venues = [[NSMutableArray alloc] init];
+       for (NSDictionary *dict in groups) {
+         for (NSDictionary *item in dict[@"items"]) {
+           [venues addObject:item[@"venue"]];
+         }
+       }
+       results = [strongSelf resultsForResultArray:venues
+                                     forSearchTerm:inputString
+                                        nearRegion:coordinateRegion
+                            asAutocompletionResult:YES];
+     }
+     completion(results);
+     
+   } else {
+     completion(nil);
+   }
+ }];
+
 }
 
 @end

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension TripRequest: SGURLShareable {
+extension TripRequest: TKURLShareable {
   
   public var shareURL: URL? {
     return TKShareHelper.createQueryURL(start: fromLocation.coordinate, end: toLocation.coordinate, timeType: type, time: time)

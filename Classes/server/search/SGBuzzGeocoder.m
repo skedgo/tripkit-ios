@@ -8,16 +8,8 @@
 
 #import "SGBuzzGeocoder.h"
 
-#ifdef TK_NO_FRAMEWORKS
-#import "TripKit.h"
+#import "TKTripKit.h"
 #import "TripKit/TripKit-Swift.h"
-#else
-@import TripKit;
-#import "TripKitAddOns/TripKitAddOns-Swift.h"
-#endif
-
-
-#import "SGLocationManager.h"
 
 #import "SGImageCacher.h"
 
@@ -78,12 +70,7 @@
       MKCoordinateRegion coordinateRegion = MKCoordinateRegionForMapRect(mapRect);
       region = [[SVKRegionManager sharedInstance] regionForCoordinateRegion:coordinateRegion];
       if (! region) {
-        // fall-back to user's location
-        DLog(@"Falling back to user's location to get region for geocoding...");
-        CLLocation *userLocation = [[SGLocationManager sharedInstance] lastKnownUserLocation];
-        if (userLocation) {
-          region = [[[SVKRegionManager sharedInstance] localRegionsForCoordinate:[userLocation coordinate]] anyObject];
-        }
+        region = self.fallbackRegion;
       }
     }
     if (! region) {

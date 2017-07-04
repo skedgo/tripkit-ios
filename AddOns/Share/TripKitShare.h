@@ -19,20 +19,9 @@
 #import "SGCalendarManager.h"
 #import "SGLocationManager.h"
 
-#import "SGAppleGeocoder.h"
-#import "SGAutocompletionDataProvider.h"
-#import "SGAutocompletionDataSource.h"
-#import "SGAutocompletionResult.h"
-#import "SGBaseGeocoder.h"
-#import "SGBuzzGeocoder.h"
-#import "SGFoursquareGeocoder.h"
-#import "SGRegionAutocompleter.h"
-#import "SGSearchDataSource.h"
-
 //
 
 #import "TKShareHelper.h"
-#import "TKShareURLProvider.h"
 
 
 

@@ -63,6 +63,9 @@
 
 @property (nonatomic, strong, nullable) NSURL *shareURL;
 
+@property (nonatomic, strong, nullable) NSURL *saveURL;
+
+
 - (void)setAsPreferredTrip;
 
 @property (nonatomic, assign) BOOL showNoVehicleUUIDAsLift;

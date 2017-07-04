@@ -12,8 +12,10 @@
 
 #import "SGAutocompletionDataProvider.h"
 
-@class TKTripKit;
+@class TKTripKit, SVKRegion;
 
 @interface SGBuzzGeocoder : SGBaseGeocoder <SGAutocompletionDataProvider>
+
+@property (nonatomic, strong, nullable) SVKRegion *fallbackRegion;
 
 @end

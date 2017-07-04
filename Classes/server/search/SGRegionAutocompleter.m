@@ -8,12 +8,8 @@
 
 #import "SGRegionAutocompleter.h"
 
-#ifdef TK_NO_FRAMEWORKS
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
-#else
-@import TripKit;
-#endif
 
 
 #import "SGAutocompletionResult.h"

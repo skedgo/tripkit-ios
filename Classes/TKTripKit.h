@@ -69,6 +69,18 @@
 #import "TKTimetableDownloader.h"
 #import "TKWaypointRouter.h"
 
+// Search
+#import "SGAppleGeocoder.h"
+#import "SGAutocompletionDataProvider.h"
+#import "SGAutocompletionDataSource.h"
+#import "SGAutocompletionResult.h"
+#import "SGBaseGeocoder.h"
+#import "SGBuzzGeocoder.h"
+#import "SGFoursquareGeocoder.h"
+#import "SGRegionAutocompleter.h"
+#import "SGSearchDataSource.h"
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSString *const TKTripKitDidResetNotification;

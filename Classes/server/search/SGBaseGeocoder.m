@@ -8,14 +8,8 @@
 
 #import "SGBaseGeocoder.h"
 
-#ifdef TK_NO_FRAMEWORKS
-#import "TripKit.h"
+#import "TKTripKit.h"
 #import "TripKit/TripKit-Swift.h"
-#else
-@import TripKit;
-#import "TripKitAddOns/TripKitAddOns-Swift.h"
-#endif
-
 
 #import "SGAutocompletionResult.h"
 #import "SGAutocompletionDataProvider.h"

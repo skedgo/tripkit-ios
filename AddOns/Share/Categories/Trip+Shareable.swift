@@ -8,5 +8,5 @@
 
 import Foundation
 
-extension Trip: SGURLShareable {
+extension Trip: TKURLShareable, TKURLSavable {
 }
