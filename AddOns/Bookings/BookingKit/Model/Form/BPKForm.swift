@@ -30,8 +30,8 @@ extension BPKForm {
   
   var bookingURL: URL? {
     if !isActionBooking() { return nil }
-    if actionURL() == nil { return nil }
-    return URL(string: actionURL().absoluteString)
+    guard let urlString = actionURL()?.absoluteString else { return nil }
+    return URL(string: urlString)
   }
   
   // MARK: - OAuth related -

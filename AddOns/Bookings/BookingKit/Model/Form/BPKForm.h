@@ -17,45 +17,42 @@
 @property (nullable, nonatomic, copy, readonly) NSString *title;
 @property (nullable, nonatomic, copy, readonly) NSString *subtitle;
 
-@property (nonatomic, copy, readonly) NSArray *invalidItems;
-@property (nonatomic, copy, readonly) NSArray *invalidIndexPaths;
-
 @property (nonatomic, assign, readonly) BOOL isBookingForm;
 @property (nonatomic, assign, readonly) BOOL isPaymentForm;
 @property (nonatomic, assign, readonly) BOOL isLast;
 @property (nonatomic, assign, readonly) BOOL isValid;
 @property (nonatomic, assign, readonly) BOOL isCancelled;
 
-+ (BOOL)canBuildFormFromRawObject:(NSDictionary *)rawForm;
++ (BOOL)canBuildFormFromRawObject:(nonnull NSDictionary *)rawForm;
 
 - (nonnull instancetype)initWithJSON:(nonnull NSDictionary *)json;
 
 // Getting form items
-- (BPKSectionItem *)updateBookingItem;
+- (nullable BPKSectionItem *)updateBookingItem;
 
 // Action
 - (BOOL)hasAction;
 - (BOOL)isActionEnabled;
 - (BOOL)isActionBooking;
-- (NSString *)actionTitle;
-- (NSURL *)actionURL;
-- (NSString *)actionText;
+- (nullable NSString *)actionTitle;
+- (nullable NSURL *)actionURL;
+- (nullable NSString *)actionText;
 
 // Refreshing form
 - (BOOL)isRefreshable;
-- (NSURL *)refreshURL;
+- (nullable NSURL *)refreshURL;
 
 // External URL
 - (BOOL)shoudLoadExternalLinkAutomatically;
-- (BPKSectionItem *)externalItem;
+- (nullable BPKSectionItem *)externalItem;
 
 // Refreshing source object (think: trip)
-- (NSURL *)refreshURLForSourceObject;
+- (nullable NSURL *)refreshURLForSourceObject;
 
 @end
 
 @interface BPKForm (Payment)
 
-- (NSDictionary *)paymentJSON;
+- (nullable NSDictionary *)paymentJSON;
 
 @end

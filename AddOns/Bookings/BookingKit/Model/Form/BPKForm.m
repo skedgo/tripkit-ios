@@ -21,6 +21,9 @@
 @property (nonatomic, copy) NSArray *sections;
 @property (nonatomic, copy) NSArray *items;
 
+@property (nonatomic, copy, readonly) NSArray *invalidItems;
+
+
 @end
 
 @implementation BPKForm
@@ -99,24 +102,6 @@
   }
   
   return mInvalidItems;
-}
-
-- (NSArray *)invalidIndexPaths
-{
-  NSMutableArray *mInvalidIndexPaths;
-  
-  for (NSUInteger sectionIndex = 0; sectionIndex < self.sections.count; sectionIndex++) {
-    BPKSection *section = self.sections[sectionIndex];
-    for (NSUInteger itemIndex = 0; itemIndex < section.items.count; itemIndex++) {
-      BPKSectionItem *item = section.items[itemIndex];
-      BOOL valid = [BPKDataValidator validateItem:item];
-      if (! valid) {
-        [mInvalidIndexPaths addObject:[NSIndexPath indexPathForRow:itemIndex inSection:sectionIndex]];
-      }
-    }
-  }
-  
-  return mInvalidIndexPaths;
 }
 
 - (BOOL)isBookingForm
