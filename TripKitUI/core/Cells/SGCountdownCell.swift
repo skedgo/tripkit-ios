@@ -69,7 +69,7 @@ extension SGCountdownCell {
   ///   - alertIconType: Alert icon to display next to alert text
   public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, parkingAvailable: String?, position: SGKGrouping, stripColor: SGKColor?, alert: String?, alertIconType: STKInfoIconType) {
     
-    resetContents()
+    _resetContents()
     
     if alert?.isEmpty ?? true {
       alertLabel.text = nil
@@ -81,8 +81,7 @@ extension SGCountdownCell {
       seperator.isHidden = false
     }
     
-    configure(withTitle: title, subtitle: subtitle, subsubtitle: subsubtitle, icon: icon, iconImageURL: iconImageURL, timeToCountdownTo: timeToCountdownTo, parkingAvailable: parkingAvailable, position: position, strip: stripColor)
-    
+    _configure(withTitle: title, subtitle: subtitle, subsubtitle: subsubtitle, icon: icon, iconImageURL: iconImageURL, timeToCountdownTo: timeToCountdownTo, parkingAvailable: parkingAvailable, position: position, strip: stripColor)
   }
   
   

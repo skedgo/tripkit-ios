@@ -29,7 +29,6 @@ Pod::Spec.new do |s|
 
   s.dependency 'ASPolylineView'
   s.dependency 'Kingfisher'
-  s.dependency 'MAKVONotificationCenter'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'
 

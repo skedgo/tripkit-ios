@@ -162,7 +162,7 @@ typedef enum {
 - (void)prepareForReuse
 {
   [super prepareForReuse];  
-  [self resetContents];
+  [self _resetContents];
   [self restoreStoryboardDimensions];
 }
 
@@ -229,15 +229,15 @@ typedef enum {
 
 #pragma mark - Private: Configuration
 
-- (void)configureWithTitle:(NSAttributedString *)title
-                  subtitle:(NSString *)subtitle
-               subsubtitle:(NSString *)subsubtitle
-                      icon:(UIImage *)icon
-              iconImageURL:(NSURL *)iconImageURL
-         timeToCountdownTo:(NSDate *)time
-          parkingAvailable:(NSString *)parking
-                  position:(SGKGrouping)position
-                stripColor:(UIColor *)stripColor
+- (void)_configureWithTitle:(NSAttributedString *)title
+                   subtitle:(NSString *)subtitle
+                subsubtitle:(NSString *)subsubtitle
+                       icon:(UIImage *)icon
+               iconImageURL:(NSURL *)iconImageURL
+          timeToCountdownTo:(NSDate *)time
+           parkingAvailable:(NSString *)parking
+                   position:(SGKGrouping)position
+                 stripColor:(UIColor *)stripColor
 {
   self.time = time;
   self.parking = parking;
@@ -545,7 +545,7 @@ typedef enum {
 
 #pragma mark - Private: Content reset
 
-- (void)resetContents
+- (void)_resetContents
 {
   self.objcDisposeBag = [[SGObjCDisposeBag alloc] init];
   

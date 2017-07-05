@@ -61,16 +61,16 @@
 
 - (void)updateContentAlpha:(CGFloat)alpha;
 
-- (void)resetContents DEPRECATED_ATTRIBUTE;
-
-- (void)configureWithTitle:(NSAttributedString *)title
-                  subtitle:(NSString *)subtitle
-               subsubtitle:(NSString *)subsubtitle
-                      icon:(UIImage *)icon
-              iconImageURL:(NSURL *)iconImageURL
-         timeToCountdownTo:(NSDate *)time
-          parkingAvailable:(NSString *)parking
-                  position:(SGKGrouping)position
-                stripColor:(UIColor *)stripColor DEPRECATED_ATTRIBUTE;
+// Internals
+- (void)_resetContents;
+- (void)_configureWithTitle:(NSAttributedString *)title
+                   subtitle:(NSString *)subtitle
+                subsubtitle:(NSString *)subsubtitle
+                       icon:(UIImage *)icon
+               iconImageURL:(NSURL *)iconImageURL
+          timeToCountdownTo:(NSDate *)time
+           parkingAvailable:(NSString *)parking
+                   position:(SGKGrouping)position
+                 stripColor:(UIColor *)stripColor;
 
 @end

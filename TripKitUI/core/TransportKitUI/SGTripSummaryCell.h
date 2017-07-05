@@ -16,11 +16,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol STKTrip;
-
 typedef void(^SGTripSummaryCellActionBlock)(UIControl *sender);
 
-@class SGTripSegmentsView, SGLabel, SGButton;
+@class SGTripSegmentsView, SGLabel, SGButton, SGObjCDisposeBag;
+@protocol STKTrip;
 
 @interface SGTripSummaryCell : UITableViewCell
 
@@ -45,28 +44,27 @@ typedef void(^SGTripSummaryCellActionBlock)(UIControl *sender);
 + (UINib *)nib;
 + (UINib *)nanoNib;
 
-- (void)configureForTrip:(id<STKTrip>)trip;
-
-- (void)configureForTrip:(id<STKTrip>)trip
-               highlight:(/*STKTripCostType*/ NSInteger)costType
-             actionTitle:(nullable NSString *)actionTitle
-             actionBlock:(nullable SGTripSummaryCellActionBlock)actionBlock;
-
-
-- (void)configureForTrip:(id<STKTrip>)trip
-               highlight:(/*STKTripCostType*/ NSInteger)costType
-                   faded:(BOOL)faded
-             actionTitle:(nullable NSString *)actionTitle
-             actionBlock:(nullable SGTripSummaryCellActionBlock)actionBlock;
-
-- (void)configureForNanoTrip:(id<STKTrip>)trip
-                   highlight:(/*STKTripCostType*/ NSInteger)costType;
-
-- (void)updateForTrip:(id<STKTrip>)trip
-            highlight:(/*STKTripCostType*/ NSInteger)costType;
 
 - (void)adjustToFillContentView;
 - (void)adjustToFillContentViewWidth;
+
+// Internals
+@property (nullable, nonatomic, copy) SGTripSummaryCellActionBlock _actionBlock;
+@property (nullable, nonatomic, copy) NSString *_tripAccessibilityLabel;
+@property (null_resettable, nonatomic, weak) id<STKTrip> _trip;
+@property (nonatomic, strong) SGObjCDisposeBag *_objcDisposeBag;
+
+- (void)_addTimeStringForDeparture:(NSDate *)departure
+                           arrival:(NSDate *)arrival
+                 departureTimeZone:(NSTimeZone *)departureTimeZone
+                   arrivalTimeZone:(NSTimeZone *)arrivalTimeZone
+                   focusOnDuration:(BOOL)durationFirst
+               queryIsArriveBefore:(BOOL)arriveBefore;
+
+- (void)_updateTimeStringForDeparture:(NSDate *)departure
+                              arrival:(NSDate *)arrival;
+
+- (void)_addCosts:(NSDictionary *)costDict;
 
 @end
 

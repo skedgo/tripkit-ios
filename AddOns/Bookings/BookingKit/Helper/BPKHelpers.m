@@ -12,16 +12,9 @@
 
 + (void)presentAlertFromController:(UIViewController *)controller withMessage:(NSString *)message
 {
-  if ([UIAlertController class] != nil) {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-    [controller presentViewController:alert animated:YES completion:nil];
-    
-  } else {
-    // iOS 7 and below
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
-  }
+  UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+  [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+  [controller presentViewController:alert animated:YES completion:nil];
 }
 
 + (BOOL)isControllerPresentedModally:(UIViewController *)controller

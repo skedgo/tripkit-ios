@@ -69,8 +69,10 @@
     // the frame information of this view is most likely not yet what it'll
     // be before this view will be visible, so we'll delay configuring this view
     // until after `layoutSubviews` was called.
+    __weak typeof(self) weakSelf = self;
     self.onLayoutSubviews = ^(){
-      [self configureForSegments:segments allowTitles:allowTitles allowSubtitles:allowSubtitles allowInfoIcons:allowInfoIcons];
+      __strong typeof(weakSelf) strongSelf = weakSelf;
+      [strongSelf configureForSegments:segments allowTitles:allowTitles allowSubtitles:allowSubtitles allowInfoIcons:allowInfoIcons];
     };
     return;
   }

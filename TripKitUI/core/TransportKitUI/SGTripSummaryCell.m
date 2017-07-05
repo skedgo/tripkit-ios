@@ -8,8 +8,6 @@
 
 #import "SGTripSummaryCell.h"
 
-@import MAKVONotificationCenter;
-
 #ifdef TK_NO_FRAMEWORKS
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
@@ -25,15 +23,11 @@
 
 @interface SGTripSummaryCell ()
 
-@property (nonatomic, weak) id<STKTrip> trip;
 
 @property (nonatomic, strong) NSTimeZone *departureTimeZone;
 @property (nonatomic, strong) NSTimeZone *arrivalTimeZone;
 @property (nonatomic, assign) BOOL durationFirst;
 @property (nonatomic, assign) BOOL arriveBefore;
-
-@property (nonatomic, copy) SGTripSummaryCellActionBlock actionBlock;
-@property (nonatomic, copy) NSString *tripAccessibilityLabel;
 
 @property (nonatomic, assign) UIEdgeInsets xibContentMargins;
 
@@ -91,8 +85,7 @@
   
   self.wrapper.backgroundColor = [UIColor whiteColor];
   
-  [self stopObservingAllTargets];
-  self.trip = nil;
+  self._trip = nil;
   
   self.departureTimeZone = nil;
   self.arrivalTimeZone = nil;
@@ -109,11 +102,6 @@
   }
   
   [super updateConstraints];
-}
-
-- (void)dealloc
-{
-  [self stopObservingAllTargets];
 }
 
 #pragma mark - Public methods
@@ -133,59 +121,6 @@
 }
 
 
-- (void)configureForTrip:(id<STKTrip>)trip
-{
-  [self configureForTrip:trip
-               highlight:STKTripCostTypeCount
-                   faded:NO
-             actionTitle:nil
-             actionBlock:nil];
-}
-
-- (void)configureForTrip:(id<STKTrip>)trip
-               highlight:(STKTripCostType)costType
-             actionTitle:(NSString *)actionTitle
-             actionBlock:(SGTripSummaryCellActionBlock)actionBlock
-{
-  [self configureForTrip:trip
-                 forNano:NO
-                   faded:NO
-               highlight:costType
-             actionTitle:actionTitle
-             actionBlock:actionBlock];
-}
-
-
-- (void)configureForTrip:(id<STKTrip>)trip
-               highlight:(STKTripCostType)costType
-                   faded:(BOOL)faded
-             actionTitle:(NSString *)actionTitle
-             actionBlock:(SGTripSummaryCellActionBlock)actionBlock
-{
-  [self configureForTrip:trip
-                 forNano:NO
-                   faded:faded
-               highlight:costType
-             actionTitle:actionTitle
-             actionBlock:actionBlock];
-}
-
-- (void)configureForNanoTrip:(id<STKTrip>)trip
-                   highlight:(STKTripCostType)costType
-{
-  [self configureForTrip:trip
-                 forNano:YES
-                   faded:YES
-               highlight:costType
-             actionTitle:nil
-             actionBlock:nil];
-}
-
-- (void)updateForTrip:(id<STKTrip>)trip
-            highlight:(STKTripCostType)costType
-{
-  [self updateForTrip:trip forNano:NO highlight:costType];
-}
 
 - (void)adjustToFillContentView
 {
@@ -195,120 +130,6 @@
 - (void)adjustToFillContentViewWidth
 {
   self.contentView.layoutMargins = UIEdgeInsetsMake(self.xibContentMargins.top, 0, self.xibContentMargins.bottom, 0);
-}
-
-#pragma mark - Private: configuration
-
-- (void)configureForTrip:(id<STKTrip>)trip
-                 forNano:(BOOL)nano
-                   faded:(BOOL)faded
-               highlight:(STKTripCostType)costType
-             actionTitle:(NSString *)actionTitle
-             actionBlock:(SGTripSummaryCellActionBlock)actionBlock
-{
-  if (actionTitle) {
-    self.actionBlock = actionBlock;
-    [self.actionButton setTitle:actionTitle forState:UIControlStateNormal];
-    self.actionButton.hidden = NO;
-  } else {
-    self.actionButton.hidden = YES;
-  }
-  
-  if ([trip respondsToSelector:@selector(accessibilityLabel)]) {
-    self.tripAccessibilityLabel = [(id)trip accessibilityLabel];
-  }
-  
-  // updating colours, adds all the text
-  [self updateForTrip:trip forNano:nano highlight:costType];
-  
-  // segments
-  self.segmentView.allowWheelchairIcon = self.allowWheelchairIcon;
-  [self.segmentView configureForSegments:[trip segmentsWithVisibility:STKTripSegmentVisibilityInSummary]
-                          allowSubtitles:!nano
-                          allowInfoIcons:!nano];
-
-  CGFloat alpha = faded ? 0.2f : 1.0f;
-  self.mainLabel.alpha    = alpha;
-  self.segmentView.alpha  = alpha;
-  self.costsLabel.alpha   = alpha;
-  self.actionButton.alpha = alpha;
-  
-  if (nano) {
-    return;
-  }
-  
-  // ticks
-  self.showTickIcon  = NO;
-  
-  // subscript to time notifications
-  self.trip = trip;
-  [self updateAlertStatus];
-  
-  [self stopObservingAllTargets];
-  if ([trip isKindOfClass:[NSObject class]]) {
-    __weak typeof(self) weakSelf = self;
-    [(NSObject *)trip addObservationKeyPath:@[@"departureTime", @"arrivalTime"]
-                                    options:NSKeyValueObservingOptionNew
-                                      block:
-     ^(MAKVONotification *notification) {
-       typeof(self) strongSelf = weakSelf;
-       if (strongSelf && [strongSelf trip] == [notification target]) {
-         dispatch_async(dispatch_get_main_queue(), ^{
-           [strongSelf updateTimeStrings];
-           
-           // Inefficient, but let's just redraw the images as their real-time and warning status might have changed
-           NSArray *segments = [[strongSelf trip] segmentsWithVisibility:STKTripSegmentVisibilityInSummary];
-           strongSelf.segmentView.allowWheelchairIcon = strongSelf.allowWheelchairIcon;
-           [strongSelf.segmentView configureForSegments:segments
-                                         allowSubtitles:!nano
-                                         allowInfoIcons:!nano];
-         });
-       }
-     }];
-    
-    [(NSObject *)trip addObservationKeyPath:@[@"hasReminder"]
-                                    options:NSKeyValueObservingOptionNew
-                                      block:
-     ^(MAKVONotification *notification) {
-       typeof(self) strongSelf = weakSelf;
-       if (strongSelf && [strongSelf trip] == [notification target]) {
-         dispatch_async(dispatch_get_main_queue(), ^{
-           [strongSelf updateAlertStatus];
-         });
-       }
-     }];
-  }
-}
-
-- (void)updateForTrip:(id<STKTrip>)trip
-              forNano:(BOOL)nano
-            highlight:(STKTripCostType)costType
-{
-  if (nano) {
-    if (costType == STKTripCostTypeTime) {
-      NSString *start = [SGStyleManager timeString:[trip departureTime] forTimeZone:self.departureTimeZone];
-      NSString *end = [SGStyleManager timeString:[trip arrivalTime] forTimeZone:self.arrivalTimeZone];
-      self.mainLabel.text = [NSString stringWithFormat:@"%@ to %@", start, end];
-      
-    } else {
-      NSDictionary *costValues = [trip costValues];
-      self.mainLabel.text = costValues[@(costType)];
-    }
-    return;
-  }
-  
-  // time and duration
-  [self addTimeStringForDeparture:trip.departureTime
-                          arrival:trip.arrivalTime
-                departureTimeZone:trip.departureTimeZone
-                  arrivalTimeZone:[trip respondsToSelector:@selector(arrivalTimeZone)] ? [trip arrivalTimeZone] : [trip departureTimeZone]
-                  focusOnDuration:! [trip departureTimeIsFixed]
-              queryIsArriveBefore:[trip isArriveBefore]];
-  
-  // costs
-  if (self.showCosts) {
-    [self addCosts:[trip costValues]];
-  }
 }
 
 #pragma mark - Custom accessors
@@ -343,8 +164,8 @@
 
 - (IBAction)actionButtonPressed:(id)sender
 {
-  if (self.actionBlock) {
-    self.actionBlock(sender);
+  if (self._actionBlock) {
+    self._actionBlock(sender);
   }
 }
 
@@ -353,23 +174,10 @@
 - (NSString *)accessibilityLabel
 {
   if (self.showAlertIcon) {
-    return [NSString stringWithFormat:@"%@ - %@", self.tripAccessibilityLabel, NSLocalizedStringFromTableInBundle(@"Has reminder", @"Shared", [SGStyleManager bundle], @"Accessibility annotation for trips which have a reminder set.")];
+    return [NSString stringWithFormat:@"%@ - %@", self._tripAccessibilityLabel, NSLocalizedStringFromTableInBundle(@"Has reminder", @"Shared", [SGStyleManager bundle], @"Accessibility annotation for trips which have a reminder set.")];
   } else {
-    return self.tripAccessibilityLabel;
+    return self._tripAccessibilityLabel;
   }
-}
-
-#pragma mark - Private: notifications
-
-- (void)updateAlertStatus
-{
-  self.showAlertIcon = [self.trip respondsToSelector:@selector(hasReminder)] && [self.trip hasReminder];
-}
-
-- (void)updateTimeStrings
-{
-  [self updateTimeStringForDeparture:[self.trip departureTime]
-                             arrival:[self.trip arrivalTime]];
 }
 
 #pragma mark - Private: Others
@@ -379,6 +187,7 @@
   [SGStyleManager addDefaultOutline:self.wrapper];
 
   self.showCosts = YES;
+  self._objcDisposeBag = [[SGObjCDisposeBag alloc] init];
   
   [self.actionButton addTarget:self
                         action:@selector(actionButtonPressed:)
@@ -389,23 +198,23 @@
   _preferredTintColor = self.tintColor;
 }
 
-- (void)addTimeStringForDeparture:(NSDate *)departure
-                          arrival:(NSDate *)arrival
-                departureTimeZone:(NSTimeZone *)departureTimeZone
-                  arrivalTimeZone:(NSTimeZone *)arrivalTimeZone
-                  focusOnDuration:(BOOL)durationFirst
-              queryIsArriveBefore:(BOOL)arriveBefore
+- (void)_addTimeStringForDeparture:(NSDate *)departure
+                           arrival:(NSDate *)arrival
+                 departureTimeZone:(NSTimeZone *)departureTimeZone
+                   arrivalTimeZone:(NSTimeZone *)arrivalTimeZone
+                   focusOnDuration:(BOOL)durationFirst
+               queryIsArriveBefore:(BOOL)arriveBefore
 {
   self.departureTimeZone = departureTimeZone;
   self.arrivalTimeZone = arrivalTimeZone;
   self.durationFirst  = durationFirst;
   self.arriveBefore   = arriveBefore;
   
-  [self updateTimeStringForDeparture:departure arrival:arrival];
+  [self _updateTimeStringForDeparture:departure arrival:arrival];
 }
 
-- (void)updateTimeStringForDeparture:(NSDate *)departure
-                             arrival:(NSDate *)arrival
+- (void)_updateTimeStringForDeparture:(NSDate *)departure
+                              arrival:(NSDate *)arrival
 {
   if (departure == nil || arrival == nil) {
     // can happen if trip just got deleted. in that case, ignore it.
@@ -503,7 +312,7 @@
   self.mainLabel.attributedText = attributed;
 }
 
-- (void)addCosts:(NSDictionary *)costDict
+- (void)_addCosts:(NSDictionary *)costDict
 {
   NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] init];
   
