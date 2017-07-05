@@ -9,7 +9,7 @@ def shared_pods
   pod 'RxCocoa',        '~> 3.0'
   pod 'Marshal'
 
-  pod 'AFNetworking'
+  pod 'Kingfisher'
   pod 'ASPolygonKit'
   pod 'ASPolylineView'
   pod 'SGPulsingAnnotationView'

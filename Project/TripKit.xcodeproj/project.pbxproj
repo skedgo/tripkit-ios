@@ -172,6 +172,7 @@
 		3AC4DD111DEE32C80026B238 /* TKWaypointRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AC4DD121DEE32C80026B238 /* TKWaypointRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */; };
 		3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */; };
+		3AD159761F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD159751F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift */; };
 		3AD390E31ED42805004689D4 /* AnnotationViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD390E11ED42805004689D4 /* AnnotationViewBuilder.swift */; };
 		3AD390E41ED42805004689D4 /* MapManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD390E21ED42805004689D4 /* MapManagerHelper.swift */; };
 		3ADB3A581D39E3830012D04B /* TKSegmentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */; };
@@ -736,6 +737,7 @@
 		3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWaypointRouter.h; sourceTree = "<group>"; };
 		3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWaypointRouter.m; sourceTree = "<group>"; };
 		3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKWaypointRouter.swift; sourceTree = "<group>"; };
+		3AD159751F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		3AD390E11ED42805004689D4 /* AnnotationViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewBuilder.swift; sourceTree = "<group>"; };
 		3AD390E21ED42805004689D4 /* MapManagerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManagerHelper.swift; sourceTree = "<group>"; };
 		3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TKSegmentHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -1851,6 +1853,7 @@
 				3AFFABED1F06855F00147990 /* UIColor+Variations.m */,
 				3AFFABEE1F06855F00147990 /* UIFont+CustomFonts.h */,
 				3AFFABEF1F06855F00147990 /* UIFont+CustomFonts.m */,
+				3AD159751F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift */,
 				3AFFABF01F06855F00147990 /* UISearchBar+Customizable.h */,
 				3AFFABF11F06855F00147990 /* UISearchBar+Customizable.m */,
 				3AFFABF21F06855F00147990 /* UITableView+SafeReload.h */,
@@ -2963,6 +2966,7 @@
 				3AFFADEB1F068E8C00147990 /* TKBookingTransitioner.swift in Sources */,
 				3A9FF6E21DE7A60500DB4647 /* TKOccupancyView.swift in Sources */,
 				3AABDD9F1DF7D2E30044A05B /* TKOpeningHours.swift in Sources */,
+				3AD159761F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift in Sources */,
 				3ADD5B6B1D9CDF0C00A1742F /* TripMapManager.swift in Sources */,
 				3AB6C7041D1CD08E0089F687 /* TKParserHelper.m in Sources */,
 				3A32CD7F1DC2ECB9003B158B /* TKAlertTypes.swift in Sources */,

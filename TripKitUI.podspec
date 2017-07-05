@@ -27,8 +27,8 @@ Pod::Spec.new do |s|
   s.dependency 'TripKit'
   s.dependency 'SGPulsingAnnotationView'
 
-  s.dependency 'AFNetworking'
   s.dependency 'ASPolylineView'
+  s.dependency 'Kingfisher'
   s.dependency 'MAKVONotificationCenter'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'

@@ -12,9 +12,13 @@
 
 #import "BPKConstants.h"
 
-#import "SGStyleManager.h"
-
-@import AFNetworking;
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#else
+@import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
+#endif
 
 @interface BPKLabelCell ()
 

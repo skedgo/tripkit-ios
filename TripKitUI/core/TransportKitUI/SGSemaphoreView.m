@@ -8,8 +8,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@import AFNetworking; // ImageView category
-
 #ifdef TK_NO_FRAMEWORKS
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"

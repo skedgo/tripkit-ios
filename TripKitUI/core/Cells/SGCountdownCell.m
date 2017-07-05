@@ -8,13 +8,12 @@
 
 #import "SGCountdownCell.h"
 
-@import AFNetworking; // ImageView category
-
 #ifdef TK_NO_FRAMEWORKS
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
 #else
 @import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
 

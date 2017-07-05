@@ -25,7 +25,6 @@ Pod::Spec.new do |s|
   s.dependency 'TripKit'
   s.dependency 'TripKitUI'
 
-  s.dependency 'AFNetworking'  
   s.dependency 'KVNProgress'
 
   s.dependency 'RxSwift'
