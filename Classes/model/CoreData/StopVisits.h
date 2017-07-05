@@ -22,11 +22,10 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 
 
 @class Service, Shape, StopLocation;
-@protocol STKDisplayableTimePoint;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StopVisits : NSManagedObject <STKDisplayableTimePoint, TKRealTimeUpdatable, UIActivityItemSource>
+@interface StopVisits : NSManagedObject <TKRealTimeUpdatable, UIActivityItemSource>
 
 @property (nonatomic, retain, nullable) NSDate * arrival;
 @property (nonatomic, retain, nullable) NSNumber * bearing;
@@ -41,9 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain) Service *service;
 @property (nonatomic, retain) StopLocation *stop;
 @property (nonatomic, retain, nullable) NSSet *shapes;
-
-// KVO
-@property (nonatomic, copy) NSDate *time;
 
 + (NSArray<StopVisits *> *)fetchStopVisitsForStopLocation:(StopLocation *)stopLocation
                                          startingFromDate:(NSDate *)earliestDate;

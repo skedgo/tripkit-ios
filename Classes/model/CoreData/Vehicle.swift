@@ -79,6 +79,8 @@ extension Vehicle {
   }
 }
 
+// MARK: - MKAnnotation
+
 extension Vehicle : MKAnnotation {
   
   public var coordinate: CLLocationCoordinate2D {
