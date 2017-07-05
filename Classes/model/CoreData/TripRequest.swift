@@ -171,7 +171,7 @@ extension TripRequest {
     let end = self.toLocation.coordinate
     return SVKRegionManager.sharedInstance().localRegions(start: start, end: end)
   }
-  
+    
   /// The primary alternatives for this request, which is constructed by
   /// taking the trip groups, sorting them by the user's selected sort
   /// orders, and then taking each group's visible trip.

@@ -21,11 +21,15 @@ extension Trip {
   }
   
   private var isExpensive: Bool {
-    guard let identifier = mainSegment().modeIdentifier() else { return false }
+    guard
+      let segment = mainSegment() as? TKSegment,
+      let identifier = segment.modeIdentifier()
+      else { return false }
     return SVKTransportModes.modeIdentifierIsExpensive(identifier)
   }
   
 }
+
 
 // MARK: - Vehicles
 
@@ -54,6 +58,50 @@ extension Trip {
   /// - Parameter vehicle: The vehicle to assign this trip to. `nil` to reset to a generic vehicle.
   public func assignVehicle(_ vehicle: STKVehicular?) {
     segments().forEach { $0.assignVehicle(vehicle) }
+  }
+  
+}
+
+
+// MARK: - STKTrip
+
+extension Trip: STKTrip {
+  
+  public func mainSegment() -> STKTripSegment {
+    let hash = mainSegmentHashCode.intValue
+    if hash > 0 {
+      for segment in segments() where segment.templateHashCode() == hash {
+        return segment
+      }
+      SGKLog.warn("Trip", text: "Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: \(hash)")
+    }
+    
+    return inferMainSegment()
+  }
+  
+  public func segments(with type: STKTripSegmentVisibility) -> [STKTripSegment] {
+    let filtered = segments().filter { $0.hasVisibility(type) }
+    return filtered.isEmpty ? segments() : filtered
+  }
+  
+  public var costValues: [NSNumber : String] {
+    return accessibleCostValues()
+  }
+  
+  public var isArriveBefore: Bool {
+    return request.type == .arriveBefore
+  }
+  
+  public var departureTimeZone: TimeZone {
+    return request.departureTimeZone() ?? .current
+  }
+  
+  public var arrivalTimeZone: TimeZone? {
+    return request.arrivalTimeZone()
+  }
+  
+  public var tripPurpose: String? {
+    return request.purpose
   }
   
 }

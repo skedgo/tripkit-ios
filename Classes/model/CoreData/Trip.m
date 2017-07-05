@@ -465,17 +465,8 @@ typedef NSUInteger SGTripFlag;
 	return NO;
 }
 
-- (TKSegment *)mainSegment 
+- (TKSegment *)inferMainSegment
 {
-  if (self.mainSegmentHashCode.integerValue != 0) {
-    for (TKSegment *segment in [self segments]) {
-      if ([segment templateHashCode] == self.mainSegmentHashCode.integerValue) {
-        return segment;
-      }
-    }
-    DLog(@"Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: %@", self.mainSegmentHashCode);
-  }
-
   // Deprecated. Shouldn't be used anymore.
   TKSegment *mainSegment = nil;
   for (TKSegment * segment in self.segments) {
@@ -686,47 +677,6 @@ typedef NSUInteger SGTripFlag;
   return values;
 }
 
-#pragma mark - STKTrip
-
-- (NSDictionary *)costValues
-{
-  return [self accessibleCostValues];
-}
-
-- (BOOL)isArriveBefore
-{
-  return SGTimeTypeArriveBefore == self.tripGroup.request.type;
-}
-
-- (NSArray *)segmentsWithVisibility:(STKTripSegmentVisibility)type
-{
-  NSArray *sortedSegments = [self segments];
-  NSMutableArray *result = [NSMutableArray arrayWithCapacity:sortedSegments.count];
-  for (TKSegment *segment in sortedSegments) {
-    if (NO == [segment hasVisibility:type])
-      continue;
-    [result addObject:segment];
-  }
-  if (result.count > 0)
-    return result;
-  else
-    return sortedSegments;
-}
-
-- (NSTimeZone *)departureTimeZone
-{
-  return [self.request departureTimeZone] ?: [NSTimeZone defaultTimeZone];
-}
-
-- (nullable NSTimeZone *)arrivalTimeZone
-{
-  return [self.request arrivalTimeZone]; // Null is ok
-}
-
-- (NSString *)tripPurpose
-{
-  return self.request.purpose;
-}
 
 #pragma mark - TKRealTimeUpdatable
 

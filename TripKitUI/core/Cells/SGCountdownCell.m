@@ -91,40 +91,6 @@ typedef enum {
   self.alertIcon.alpha = alpha;
 }
 
-- (void)configureWithTitle:(NSAttributedString *)title
-                  subtitle:(NSString *)subtitle
-               subsubtitle:(NSString *)subsubtitle
-                      icon:(UIImage *)icon
-              iconImageURL:(NSURL *)iconImageURL
-         timeToCountdownTo:(NSDate *)time
-          parkingAvailable:(NSString *)parking
-                  position:(SGKGrouping)position
-                stripColor:(UIColor *)stripColor
-                     alert:(NSString *)alert
-             alertIconType:(STKInfoIconType)alertIconType
-{
-  [self resetContents];
-  
-  if (alert.length == 0) {
-    self.alertLabel.text = nil;
-    self.alertSymbol.image = nil;
-    self.seperator.hidden = YES;
-  } else {
-    self.alertLabel.text = alert;
-    self.alertSymbol.image = [STKInfoIcon imageForInfoIconType:alertIconType usage:STKInfoIconUsageNormal];
-    self.seperator.hidden = NO;
-  }
-  
-  [self configureWithTitle:title
-                  subtitle:subtitle
-               subsubtitle:subsubtitle
-                      icon:icon
-              iconImageURL:iconImageURL
-         timeToCountdownTo:time
-          parkingAvailable:parking
-                  position:position
-                stripColor:stripColor];
-}
 
 #pragma mark - Custom accessors
 

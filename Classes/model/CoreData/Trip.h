@@ -15,9 +15,8 @@
 
 
 @class Alert, SVKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
-@protocol STKTrip;
 
-@interface Trip : NSManagedObject <TKRealTimeUpdatable, UIActivityItemSource, STKTrip> {
+@interface Trip : NSManagedObject <TKRealTimeUpdatable, UIActivityItemSource> {
 }
 
 #pragma mark - CoreData elements
@@ -117,6 +116,8 @@
 
 - (nonnull NSString *)constructPlainText;
 
+- (nonnull NSDictionary<NSNumber *, NSString *> *)accessibleCostValues;
+
 - (nonnull NSString *)debugString;
 
 #pragma mark - Segment accessors
@@ -125,9 +126,9 @@
  */
 - (nonnull NSArray<TKSegment *> *)segments;
 
-/* The first major segment of the trip
+/* The first major segment of the trip, according to segment properties (use mainSegment() instead)
  */
-- (nonnull TKSegment *)mainSegment;
+- (nonnull TKSegment *)inferMainSegment;
 
 /* Call this before changing the segments of a trip.
  */

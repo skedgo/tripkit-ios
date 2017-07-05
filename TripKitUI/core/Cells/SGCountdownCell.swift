@@ -20,12 +20,12 @@ public struct SGCountdownCellModel {
   public var position: SGKGrouping
   public var color: UIColor?
   public var alertText: String?
-  public var alertIconType: Int
+  public var alertIconType: STKInfoIconType
   public var isCancelled: Bool = false
   public var wheelChairEnabled: Bool = false
   public var wheelChairAccessible: Bool = false
   
-  public init(title: NSAttributedString, position: SGKGrouping = .edgeToEdge, alertIconType: Int = 0) {
+  public init(title: NSAttributedString, position: SGKGrouping = .edgeToEdge, alertIconType: STKInfoIconType = .none) {
     self.title = title
     self.position = position
     self.alertIconType = alertIconType
@@ -39,7 +39,7 @@ extension SGCountdownCell {
     showAsCanceled = model.isCancelled
     showWheelchair = model.wheelChairEnabled && model.wheelChairAccessible
     
-    self.configure(withTitle: model.title
+    self.configure(title: model.title
       , subtitle: model.subtitle
       , subsubtitle: model.subsubtitle
       , icon: model.icon
@@ -47,10 +47,44 @@ extension SGCountdownCell {
       , timeToCountdownTo: model.time
       , parkingAvailable: model.parking
       , position: model.position
-      , strip: model.color
+      , stripColor: model.color
       , alert: model.alertText
       , alertIconType: model.alertIconType)
   }
+  
+  
+  /// Configures the cell with the defined content.
+  ///
+  /// - Parameters:
+  ///   - title: The title to be displayed in the first line. Doesn't need to wrap.
+  ///   - subtitle: The subtitle to be displayed below. Can be long and should wrap.
+  ///   - subsubtitle: An even smaller title displayed below subtitle.
+  ///   - icon: Image to be displayed on the left.
+  ///   - iconImageURL: URL to remote image to replace icon
+  ///   - timeToCountdownTo: Optional time to countdown to/from. If this is in the past, the cell should appear faded.
+  ///   - parkingAvailable: Amount of parking to display
+  ///   - position: Position of this cell relative to the cells around it.
+  ///   - stripColor: Optional color to display a coloured strip under the icon.
+  ///   - alert: Alert text
+  ///   - alertIconType: Alert icon to display next to alert text
+  public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, parkingAvailable: String?, position: SGKGrouping, stripColor: SGKColor?, alert: String?, alertIconType: STKInfoIconType?) {
+    
+    resetContents()
+    
+    if alert?.isEmpty ?? true {
+      alertLabel.text = nil
+      alertSymbol.image = nil
+      seperator.isHidden = true
+    } else {
+      alertLabel.text = alert
+      alertSymbol.image = STKInfoIcon.image(for: alertIconType ?? .none, usage: .normal)
+      seperator.isHidden = false
+    }
+    
+    configure(withTitle: title, subtitle: subtitle, subsubtitle: subsubtitle, icon: icon, iconImageURL: iconImageURL, timeToCountdownTo: timeToCountdownTo, parkingAvailable: parkingAvailable, position: position, strip: stripColor)
+    
+  }
+  
   
   public func addViewToFootnote(_ view: UIView) {
     // Make sure we start clean.

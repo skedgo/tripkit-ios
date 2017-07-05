@@ -61,16 +61,8 @@
 
 - (void)updateContentAlpha:(CGFloat)alpha;
 
-/**
- Configures the cell with the defined content.
- 
- @param title       The title to be displayed in the first line. Doesn't need to wrap.
- @param subtitle    The subitle to be displayed below. Can be long and should wrap.
- @param icon        Image to be displayed on the left.
- @param time        Optional time to countdown to/from. If this is in the past, the cell should appear faded.
- @param position    Position of this cell relative to the cells around it.
- @param stripColor  Optional color to display a coloured strip under the icon.
- */
+- (void)resetContents DEPRECATED_ATTRIBUTE;
+
 - (void)configureWithTitle:(NSAttributedString *)title
                   subtitle:(NSString *)subtitle
                subsubtitle:(NSString *)subsubtitle
@@ -79,8 +71,6 @@
          timeToCountdownTo:(NSDate *)time
           parkingAvailable:(NSString *)parking
                   position:(SGKGrouping)position
-                stripColor:(UIColor *)stripColor
-                     alert:(NSString *)alert
-             alertIconType:(/*STKInfoIconType*/NSInteger)alertIconType;
+                stripColor:(UIColor *)stripColor DEPRECATED_ATTRIBUTE;
 
 @end
