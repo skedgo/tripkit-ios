@@ -71,8 +71,7 @@ extension Alert: STKDisplayablePoint {
   }
   
   public var pointImage: SGKImage? {
-    guard let imageName = STKInfoIcon.imageName(for: infoIconType, usage: .map) else { return nil }
-    return SGStyleManager.imageNamed(imageName)
+    return STKInfoIcon.image(for: infoIconType, usage: .map)
   }
   
   public var pointImageURL: URL? {

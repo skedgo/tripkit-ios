@@ -197,12 +197,10 @@ public class OAuthClient {
     
     // INFO: This is here for updating the testing data.
     // Uncomment, get the file, and update OAuthClientTest.
-    if false {
-      let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-      let pathURL = path.appendingPathComponent("oauthclient.data")
-      try! data.write(to: pathURL)
-      print(pathURL)
-    }
+//      let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//      let pathURL = path.appendingPathComponent("oauthclient.data")
+//      try! data.write(to: pathURL)
+//      print(pathURL)
     
     keychain[data: "OAuthClientState"] = data
   }

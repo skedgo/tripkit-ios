@@ -30,6 +30,8 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 @implementation TKSegment
 
+@synthesize trip = _trip;
+
 - (id)init
 {
 	self = [super init];
@@ -75,6 +77,10 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 #pragma mark -
+
+- (void)setTrip:(Trip *)trip {
+  _trip = trip;
+}
 
 - (TKSegment *)finalSegmentIncludingContinuation
 {

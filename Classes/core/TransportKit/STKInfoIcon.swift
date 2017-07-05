@@ -29,9 +29,14 @@ public class STKInfoIcon : NSObject {
   private override init() {
   }
   
+  @available(*, deprecated, message: "Use `image(for:usage:) instead")
   @objc(imageNameForInfoIconType:usage:)
   public static func imageName(for type: STKInfoIconType, usage: STKInfoIconUsage) -> String? {
-    
+    return _imageName(for:type, usage:usage)
+  }
+  
+  private static func _imageName(for type: STKInfoIconType, usage: STKInfoIconUsage) -> String? {
+  
     switch type {
 
     case .none:
@@ -54,7 +59,7 @@ public class STKInfoIcon : NSObject {
   @objc(imageForInfoIconType:usage:)
   public static func image(for type: STKInfoIconType, usage: STKInfoIconUsage) -> SGKImage? {
     guard
-      let fileName = imageName(for: type, usage: usage)
+      let fileName = _imageName(for: type, usage: usage)
       else { return nil }
     return SGStyleManager.imageNamed(fileName)
   }

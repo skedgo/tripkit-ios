@@ -37,6 +37,8 @@
 
 @implementation SGTripSummaryCell
 
+@synthesize _trip = __trip;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -53,6 +55,10 @@
   [super awakeFromNib];
   
   [self didInitialize];
+}
+
+- (void)set_trip:(id<STKTrip>)_trip {
+  __trip = _trip;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
