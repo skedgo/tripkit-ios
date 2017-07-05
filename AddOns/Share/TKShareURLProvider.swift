@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 
-import TripKit
+#if TK_NO_FRAMEWORKS
+#else
+  import TripKit
+#endif
+
 
 @objc
 public protocol TKURLShareable {

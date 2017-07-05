@@ -3222,6 +3222,7 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework/Headers\"",
 					"-DTK_NO_FRAMEWORKS",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DTK_NO_FRAMEWORKS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.TripKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3273,6 +3274,7 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework/Headers\"",
 					"-DTK_NO_FRAMEWORKS",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DTK_NO_FRAMEWORKS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.TripKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -17,6 +17,7 @@
 #import "UITableView+SafeReload.h"
 #import "SGStyleManager+SGCoreUI.h"
 #import "UIFont+CustomFonts.h"
+#import "UISearchBar+Customizable.h"
 
 // Cells
 #import "SGCountdownCell.h"
@@ -34,12 +35,14 @@
 #import "SGPolylineRenderer.h"
 #import "SGSemaphoreView.h"
 #import "SGTripSegmentsView.h"
+#import "SGTripSummaryCell.h"
 
 // TripKit UI
 
 #import "RouteMapManager.h"
 #import "TripMapManager.h"
 
+#import "SGImageButton.h"
 #import "VehicleView.h"
 #import "CircleAnnotationView.h"
 

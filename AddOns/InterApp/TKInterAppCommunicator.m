@@ -267,7 +267,7 @@
     NSRange nameRange = [action rangeOfString:@"name="];
     if (nameRange.location != NSNotFound) {
       NSString *name = [action substringFromIndex:nameRange.location + nameRange.length];
-      name = [name stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+      name = [name stringByRemovingPercentEncoding];
       return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Call %@", @"TripKit", [TKTripKit bundle], "Action title for calling provider of name. (old key: CallTaxiFormat)"), name];
     } else {
       return NSLocalizedStringFromTableInBundle(@"Call", @"TripKit", [TKTripKit bundle], nil);
@@ -437,7 +437,7 @@
      
      NSString *urlString = [NSString stringWithFormat:@"gocatch://referral?code=%@&destination=%@&pickup=%@&lat=%f&lng=%f",
                             referralCode,
-                            [destinationSuburb stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                            [destinationSuburb stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]],
                             @"", // pickup address
                             pickup.latitude,
                             pickup.longitude];
@@ -501,7 +501,7 @@
       if ([startAnnotation respondsToSelector:@selector(title)]) {
         NSString *title = [startAnnotation title];
         if (title.length > 0) {
-          NSString *encoded = [title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+          NSString *encoded = [title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
           [urlString appendFormat:@"&pickup[nickname]=%@", encoded];
         }
       }
@@ -514,7 +514,7 @@
     if ([endAnnotation respondsToSelector:@selector(title)]) {
       NSString *title = [endAnnotation title];
       if (title.length > 0) {
-        NSString *encoded = [title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *encoded = [title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [urlString appendFormat:@"&dropoff[nickname]=%@", encoded];
       }
     }
@@ -533,7 +533,7 @@
     if ([startAnnotation respondsToSelector:@selector(title)]) {
       NSString *title = [startAnnotation title];
       if (title.length > 0) {
-        NSString *encoded = [title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *encoded = [title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [urlString appendFormat:@"&pickup_nickname=%@", encoded];
       }
     }
@@ -545,7 +545,7 @@
     if ([endAnnotation respondsToSelector:@selector(title)]) {
       NSString *title = [endAnnotation title];
       if (title.length > 0) {
-        NSString *encoded = [title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *encoded = [title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [urlString appendFormat:@"&dropoff_nickname=%@", encoded];
       }
     }
@@ -613,7 +613,7 @@
     if ([endAnnotation respondsToSelector:@selector(title)]) {
       NSString *title = [endAnnotation title];
       if (title.length > 0) {
-        NSString *encoded = [title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *encoded = [title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [urlString appendFormat:@"&dropoff_nickname=%@", encoded];
       }
     }
@@ -667,12 +667,12 @@
           [urlString appendFormat:@"?key=%@", partnerKey];
           
           if (pickupAddress) {
-            NSString *encoded = [pickupAddress stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *encoded = [pickupAddress stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
             [urlString appendFormat:@"&pickup=%@", encoded];
           }
 
           if (dropOffAddress) {
-            NSString *encoded = [dropOffAddress stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *encoded = [dropOffAddress stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
             [urlString appendFormat:@"&destination=%@", encoded];
           }
 
@@ -680,7 +680,7 @@
           formatter.dateFormat = @"dd/MM/yyyy hh:mm a";
           formatter.timeZone = [segment timeZone];
           NSString *dateString = [formatter stringFromDate:segment.departureTime];
-          NSString *encoded = [dateString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+          NSString *encoded = [dateString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
           [urlString appendFormat:@"&trip_date=%@", encoded];
 
           NSURL *url = [NSURL URLWithString:urlString];

@@ -10,7 +10,11 @@ import Foundation
 
 import RxSwift
 
-import TripKit
+#if TK_NO_FRAMEWORKS
+#else
+  import TripKit
+#endif
+
 
 public enum TKSwiftyShareHelper {
 

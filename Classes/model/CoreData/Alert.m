@@ -120,36 +120,4 @@
 }
 
 
-#pragma mark - ASDisplayablePoint
-
-- (CLLocationCoordinate2D)coordinate
-{
-  if (self.location) {
-    return [self.location coordinate];
-  } else {
-    return kCLLocationCoordinate2DInvalid;
-  }
-}
-
-- (BOOL)pointDisplaysImage
-{
-  return (self.location != nil);
-}
-
-- (SGKImage *)pointImage
-{
-  NSString *imageName = [STKInfoIcon imageNameForInfoIconType:self.infoIconType usage:STKInfoIconUsageMap];
-  return [SGStyleManager imageNamed:imageName];
-}
-
-- (NSURL *)pointImageURL
-{
-  return self.imageURL;
-}
-
-- (BOOL)isDraggable
-{
-  return NO;
-}
-
 @end

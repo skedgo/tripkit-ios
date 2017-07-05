@@ -8,9 +8,14 @@
 
 import UIKit
 
-import TripKit
 import RxSwift
 import AFNetworking
+
+#if TK_NO_FRAMEWORKS
+#else
+  import TripKit
+#endif
+
 
 class TKAlertCell: UITableViewCell {
 

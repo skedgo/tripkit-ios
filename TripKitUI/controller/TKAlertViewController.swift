@@ -7,9 +7,13 @@
 //
 
 import UIKit
-import TripKit
 
 import RxSwift
+
+#if TK_NO_FRAMEWORKS
+#else
+  import TripKit
+#endif
 
 public class TKAlertViewController: UITableViewController {
   

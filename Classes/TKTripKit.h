@@ -41,6 +41,7 @@
 #import "StopLocation.h"
 #import "Vehicle.h"
 #import "Alert.h"
+#import "Cell.h"
 
 // Non-core data model classes
 #import "TKSegment.h"
@@ -50,6 +51,7 @@
 // Helpers
 #import "TKNextSegmentScorer.h"
 #import "NSManagedObject+TKPersistence.h"
+#import "TripRequest+Classify.h"
 
 // Classification
 #import "TKTripClassifier.h"
@@ -66,6 +68,10 @@
 #import "TKBuzzInfoProvider.h"
 #import "TKTimetableDownloader.h"
 #import "TKWaypointRouter.h"
+#import "TKRealTimeUpdatableHelper.h"
+
+// Track
+#import "SGTrackHelper.h"
 
 // Search
 #import "SGAppleGeocoder.h"
@@ -77,6 +83,7 @@
 #import "SGFoursquareGeocoder.h"
 #import "SGRegionAutocompleter.h"
 #import "SGSearchDataSource.h"
+#import "SGImageCacher.h"
 
 // Permissions
 #import "SGAddressBookManager.h"

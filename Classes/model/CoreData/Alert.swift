@@ -19,6 +19,9 @@ extension Alert {
   
 }
 
+
+// MARK: - TKAlert
+
 extension Alert: TKAlert {
   
   public var infoURL: URL? {
@@ -39,6 +42,45 @@ extension Alert: TKAlert {
   
   public var lastUpdated: Date? {
     return nil
+  }
+  
+}
+
+
+// MARK: - MKAnnotation
+
+extension Alert: MKAnnotation {
+  
+  public var coordinate: CLLocationCoordinate2D {
+    if let location = location {
+      return location.coordinate
+    } else {
+      return kCLLocationCoordinate2DInvalid
+    }
+  }
+  
+}
+
+
+// MARK: - STKDisplayablePoint
+
+extension Alert: STKDisplayablePoint {
+  
+  public var pointDisplaysImage: Bool {
+    return location != nil
+  }
+  
+  public var pointImage: SGKImage? {
+    guard let imageName = STKInfoIcon.imageName(for: infoIconType, usage: .map) else { return nil }
+    return SGStyleManager.imageNamed(imageName)
+  }
+  
+  public var pointImageURL: URL? {
+    return imageURL
+  }
+  
+  public var isDraggable: Bool {
+    return false
   }
   
 }

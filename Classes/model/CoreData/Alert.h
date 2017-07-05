@@ -10,7 +10,6 @@
 @import CoreLocation;
 
 @class Service, StopLocation, SGKNamedCoordinate;
-@protocol STKDisplayablePoint;
 
 typedef NS_ENUM(NSInteger, AlertSeverity) {
   AlertSeverityInfo = -1,
@@ -20,11 +19,11 @@ typedef NS_ENUM(NSInteger, AlertSeverity) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Alert : NSManagedObject <STKDisplayablePoint>
+@interface Alert : NSManagedObject
 
 @property (nonatomic, retain, nullable) SGKNamedCoordinate *location;
 @property (nonatomic, retain) NSNumber * hashCode;
-@property (nonatomic, copy) NSString * title;
+@property (nonatomic, copy, nullable) NSString * title;
 @property (nonatomic, retain, nullable) NSString * text;
 @property (nonatomic, retain, nullable) NSString * url;
 @property (nonatomic, retain, nullable) NSString * remoteIcon;
