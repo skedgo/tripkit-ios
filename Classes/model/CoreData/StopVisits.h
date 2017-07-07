@@ -8,7 +8,6 @@
 
 @import Foundation;
 @import CoreData;
-@import UIKit;
 
 #import "TKRealTimeUpdatable.h"
 
@@ -25,7 +24,7 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StopVisits : NSManagedObject <TKRealTimeUpdatable, UIActivityItemSource>
+@interface StopVisits : NSManagedObject <TKRealTimeUpdatable>
 
 @property (nonatomic, retain, nullable) NSDate * arrival;
 @property (nonatomic, retain, nullable) NSNumber * bearing;

@@ -105,3 +105,28 @@ extension Trip: STKTrip {
   }
   
 }
+
+
+// MARK: - UIActivityItemSource
+
+#if os(iOS)
+  
+  extension Trip: UIActivityItemSource {
+    
+    public func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+      return ""
+    }
+    
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+      guard activityType == .mail else { return nil }
+      
+      return constructPlainText()
+    }
+    
+    public func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivityType?) -> String {
+      return Loc.Trip
+    }
+    
+  }
+
+#endif

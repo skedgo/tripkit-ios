@@ -37,7 +37,8 @@ typedef NS_ENUM(NSInteger, TKSegmentType) {
 };
 
 NS_ASSUME_NONNULL_BEGIN
-@interface TKSegment : NSObject <UIActivityItemSource, MKAnnotation>
+
+@interface TKSegment : NSObject <MKAnnotation>
 
 @property (nonatomic, strong, nullable) id<MKAnnotation> start;
 @property (nonatomic, strong, nullable) id<MKAnnotation> end;

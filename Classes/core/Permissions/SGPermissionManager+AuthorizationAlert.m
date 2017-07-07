@@ -11,6 +11,8 @@
 #import "SGActions.h"
 #import "SGStylemanager.h"
 
+#if TARGET_OS_IPHONE
+
 @implementation SGPermissionManager (AuthorizationAlert)
 
 - (void)tryAuthorizationForSender:(id)sender
@@ -90,3 +92,5 @@
 }
 
 @end
+
+#endif

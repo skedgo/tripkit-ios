@@ -21,6 +21,8 @@ Pod::Spec.new do |s|
   
   s.prefix_header_file = "prefix.pch"
 
+  s.source_files = "AddOns/TripKitAddOns.h"
+
   s.subspec 'Agenda' do |cs|
     cs.dependency 'TripKit'
     cs.dependency 'RxSwift'

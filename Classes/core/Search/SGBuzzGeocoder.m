@@ -271,10 +271,16 @@
 
 #pragma mark - Private helpers
 
-+ (UIImage *)imageForStopType:(NSString *)stopType
++ (SGKImage *)imageForStopType:(NSString *)stopType
 {
   NSParameterAssert(stopType);
-  return [[SGImageCacher sharedInstance] monochromeImageForName:[NSString stringWithFormat:@"icon-map-info-%@", stopType]];
+  
+  NSString *imageName = [NSString stringWithFormat:@"icon-map-info-%@", stopType];
+#if TARGET_OS_IPHONE
+  return [[SGImageCacher sharedInstance] monochromeImageForName:imageName];
+#else
+  return [SGStyleManager imageNamed:imageName];
+#endif
 }
 
 

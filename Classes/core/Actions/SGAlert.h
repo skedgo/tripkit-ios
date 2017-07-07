@@ -6,7 +6,9 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "SGKCrossPlatform.h"
+
+#if TARGET_OS_IPHONE
 
 @interface SGAlert : NSObject
 
@@ -15,3 +17,5 @@
 - (void)showWithTitle:(NSString *)title message:(NSString *)message inController:(UIViewController *)controller dismiss:(void(^)())dismiss;
 
 @end
+
+#endif

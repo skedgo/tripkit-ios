@@ -11,6 +11,8 @@
 #import "TKTripKit.h"
 #import "TripKit/TripKit-Swift.h"
 
+#if TARGET_OS_IPHONE
+
 #import "SGAutocompletionResult.h"
 
 #define kBHAddressBookValueForAddress 5
@@ -326,3 +328,5 @@
 }
 
 @end
+
+#endif

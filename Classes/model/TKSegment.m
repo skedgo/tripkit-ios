@@ -790,27 +790,6 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-#pragma mark - UIActivityItemSource
-
-- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
-{
-#pragma unused(activityViewController)
-  return nil;
-}
-
-- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
-{
-#pragma unused(activityViewController, activityType)
-  if (self.order == TKSegmentOrderingEnd) {
-      NSString *messageFormat = NSLocalizedStringFromTableInBundle(@"I'll arrive at %@ at %@", @"TripKit", [TKTripKit bundle], @"First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime)");
-      NSString *message = [NSString stringWithFormat:messageFormat, [self.trip.request.toLocation title], [SGStyleManager timeString:self.arrivalTime forTimeZone:self.timeZone]];
-      return message;
-  } else {
-    return nil;
-  }
-}
-
-
 #pragma mark - Private methods
 
 - (NSUInteger)numberOfStopsIncludingContinuation

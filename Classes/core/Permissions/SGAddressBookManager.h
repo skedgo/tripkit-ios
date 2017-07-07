@@ -10,6 +10,8 @@
 
 #import <AddressBook/AddressBook.h>
 
+#if TARGET_OS_IPHONE
+
 //#import "SGPermissionManager.h"
 #import "SGPermissionManager+AuthorizationAlert.h"
 #import "SGBaseGeocoder.h"
@@ -46,3 +48,5 @@ NS_CLASS_DEPRECATED_IOS(2_0, 9_0, "Use SGContactsManager instead")
                     completion:(SGAddressBookManagerCompletionBlock)block;
 
 @end
+
+#endif

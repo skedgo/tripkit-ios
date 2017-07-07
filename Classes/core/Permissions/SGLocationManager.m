@@ -62,8 +62,10 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
     self.distanceFilter   = 250; // metres
 		self.subscriberBlocks = [NSMutableDictionary dictionaryWithCapacity:5];
 		self.fetchTimers      = [NSMutableSet setWithCapacity:5];
-		
-		NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+
+#if TARGET_OS_IPHONE
 		[center addObserver:self
 							 selector:@selector(appWillResignActive:)
 									 name:UIApplicationWillResignActiveNotification
@@ -72,6 +74,7 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
 							 selector:@selector(appWillEnterForeground:)
 									 name:UIApplicationWillEnterForegroundNotification
 								 object:nil];
+#endif
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [center addObserver:self
@@ -126,13 +129,13 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
   }
 }
 
-- (UIImage *)imageForAnnotation:(id<MKAnnotation>)annotation
+- (SGKImage *)imageForAnnotation:(id<MKAnnotation>)annotation
 {
 #pragma unused(annotation)
   return [SGAutocompletionResult imageForType:SGAutocompletionSearchIconPin];
 }
 
-- (UIImage *)accessoryImageForAnnotation:(id<MKAnnotation>)annotation
+- (SGKImage *)accessoryImageForAnnotation:(id<MKAnnotation>)annotation
 {
 #pragma unused(annotation)
   return nil;
@@ -159,7 +162,9 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
   if ([self authorizationRestrictionsApply]) {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     switch (status) {
+#if TARGET_OS_IPHONE
       case kCLAuthorizationStatusAuthorizedWhenInUse:
+#endif
       case kCLAuthorizationStatusAuthorizedAlways:
         return SGAuthorizationStatusAuthorized;
       case kCLAuthorizationStatusDenied:
@@ -177,11 +182,11 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
 
 - (void)askForPermission:(void (^)(BOOL enabled))completion
 {
-  if ([self.coreLocationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-    [self.coreLocationManager requestWhenInUseAuthorization];
-  } else {
-    [self.coreLocationManager startUpdatingLocation];
-  }
+#if TARGET_OS_IPHONE
+  [self.coreLocationManager requestWhenInUseAuthorization];
+#else
+  [self.coreLocationManager startUpdatingLocation];
+#endif
   
   self.completionBlock = completion;
 }
@@ -428,9 +433,11 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
 - (void)userDefaultsDidChange:(NSNotification *)notification
 {
 #pragma unused(notification)
+#if TARGET_OS_IPHONE
   if ([[NSUserDefaults standardUserDefaults] boolForKey:SGLocationManagerBackgroundUpdatesEnabled]) {
     [self.coreLocationManager requestAlwaysAuthorization];
   }
+#endif
 }
 
 #pragma mark - CLLocationManagerDelegate methods
@@ -444,8 +451,10 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
     
     BOOL enabled;
     switch (status) {
-      case kCLAuthorizationStatusAuthorizedAlways:
+#if TARGET_OS_IPHONE
       case kCLAuthorizationStatusAuthorizedWhenInUse:
+#endif
+      case kCLAuthorizationStatusAuthorizedAlways:
         enabled = YES;
         break;
         

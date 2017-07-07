@@ -6,7 +6,9 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "SGKCrossPlatform.h"
+
+#if TARGET_OS_IPHONE
 
 @interface SGImageCacher : NSObject
 
@@ -15,3 +17,5 @@
 - (UIImage *)monochromeImageForName:(NSString *)imageName;
 
 @end
+
+#endif

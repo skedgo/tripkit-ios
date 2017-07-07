@@ -176,8 +176,8 @@ typedef enum {
     }
       
     case SGSearchSectionAutocompletion: {
-      if (indexPath.row < (NSInteger)self.filteredPreviousResults.count) {
-        SGAutocompletionResult *result = [self.filteredPreviousResults objectAtIndex:indexPath.row];
+      if (indexPath.item < (NSInteger)self.filteredPreviousResults.count) {
+        SGAutocompletionResult *result = [self.filteredPreviousResults objectAtIndex:indexPath.item];
         resultBlock(SGAutocompletionResultObject, result);
       } else {
         [SGKLog warn:@"SGAutocompletionDataSource" format:@"Invalid index path: %@", indexPath];
@@ -194,7 +194,7 @@ typedef enum {
         }
           
         case SGSearchExtraRowProvider: {
-          NSInteger additionRowIndex = indexPath.row - 1; // substract 'press search for more row'
+          NSInteger additionRowIndex = indexPath.item - 1; // substract 'press search for more row'
           if (additionRowIndex < 0 || additionRowIndex >= (NSInteger)self.additionalProviderRows.count) {
             ZAssert(false, @"Selected %@ but there's not enough content: %@", indexPath, self.additionalProviderRows);
             return;
@@ -211,6 +211,9 @@ typedef enum {
     }
   }
 }
+
+#if TARGET_OS_IPHONE
+
 
 #pragma mark - SGSearchDataSource / UITableViewDataSource
 
@@ -301,7 +304,7 @@ typedef enum {
     }
   }
   
-  cell.backgroundColor = [UIColor clearColor];
+  cell.backgroundColor = [SGKColor clearColor];
 	return cell;
 }
 
@@ -328,7 +331,7 @@ typedef enum {
 - (void)configureCell:(UITableViewCell *)cell forResult:(SGAutocompletionResult *)result
 {
   cell.imageView.image      = result.image;
-  cell.imageView.tintColor  = [UIColor colorWithWhite:216/255.f alpha:1]; // From SkedGo default icons
+  cell.imageView.tintColor  = [SGKColor colorWithWhite:216/255.f alpha:1]; // From SkedGo default icons
   cell.textLabel.text       = result.title;
   cell.textLabel.textColor  = [SGStyleManager darkTextColor];
   cell.detailTextLabel.text = ! [result.subtitle isEqualToString:result.title] ? result.subtitle : nil;
@@ -382,6 +385,7 @@ typedef enum {
   }
 }
 
+#endif
 
 #pragma mark - Helpers
 
@@ -432,7 +436,7 @@ typedef enum {
 
 - (SGSearchExtraRow)extraRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (self.showSearchOptions && 0 == indexPath.row) {
+  if (self.showSearchOptions && 0 == indexPath.item) {
     return SGSearchExtraRowSearchForMore;
   } else {
     return SGSearchExtraRowProvider;
@@ -453,14 +457,14 @@ typedef enum {
 
 - (SGSearchSticky)stickyOptionAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.row == 0
+  if (indexPath.item == 0
       && self.showStickyForCurrentLocation) {
     return SGSearchStickyCurrentLocation;
   }
   return SGSearchStickyDroppedPin;
 }
 
-+ (UIImage *)imageForSticky:(SGSearchSticky)sticky
++ (SGKImage *)imageForSticky:(SGSearchSticky)sticky
 {
 	switch (sticky) {
 		case SGSearchStickyCurrentLocation:
@@ -476,6 +480,8 @@ typedef enum {
 			return nil;
 	}
 }
+
+#if TARGET_OS_IPHONE
 
 - (void)accessoryButtonTapped:(UIControl *)button withEvent:(UIEvent *)event
 {
@@ -499,6 +505,8 @@ typedef enum {
   
   [tableView.delegate tableView:tableView accessoryButtonTappedForRowWithIndexPath:indexPath];
 }
+
+#endif
 
 
 #pragma mark - Private methods for populating and filtering search results

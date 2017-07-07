@@ -6,9 +6,13 @@
 //
 //
 
+#if TARGET_OS_IPHONE
+
 @protocol SGSearchDataSource <UITableViewDataSource>
 
 @optional
 - (BOOL)searchShouldShowAccessoryButtons;
 
 @end
+
+#endif

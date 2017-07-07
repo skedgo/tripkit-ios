@@ -12,6 +12,8 @@
 
 #import "SGStyleManager.h"
 
+#if TARGET_OS_IPHONE
+
 @interface SGAction : NSObject
 
 @property (nonatomic, copy) NSString *title;
@@ -129,3 +131,5 @@
 }
 
 @end
+
+#endif

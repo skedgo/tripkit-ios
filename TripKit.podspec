@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKit"
-  s.version      = "1.0-beta"
+  s.version      = "2.0-beta1"
   s.summary      = "SkedGo's TripKit"
   s.homepage     = "http://www.skedgo.com/"
   s.license      = { 
@@ -13,9 +13,9 @@ Pod::Spec.new do |s|
     "Adrian Schoenig" => "adrian@skedgo.com",
     "Brian Huang" => "brian@skedgo.com"
   }
-  s.source       = { path: "." }
-  # s.source       = { git: ".", tag: "v#{s.version}" }
-  # s.source       = { git: "https://github.com/skedgo/shared-ios.git", :tag => "v#{s.version}" }
+  # s.source       = { path: "." }
+  # s.source       = { git: "https://github.com/skedgo/tripkit-ios.git", tag: "v#{s.version}" }
+  s.source       = { git: "." }
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.11'
   s.requires_arc = true

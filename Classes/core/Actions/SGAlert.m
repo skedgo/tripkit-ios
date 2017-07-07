@@ -10,6 +10,8 @@
 
 #import "SGStyleManager.h"
 
+#if TARGET_OS_IPHONE
+
 @interface SGAlert ()
 
 @property (nonatomic, copy) void (^dismissBlock)();
@@ -69,3 +71,5 @@
 }
 
 @end
+
+#endif

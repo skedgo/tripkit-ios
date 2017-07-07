@@ -6,8 +6,6 @@
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-import UIKit
-
 public class SGAggregateGeocoder: SGBaseGeocoder {
 
   public let geocoders: [SGGeocoder]

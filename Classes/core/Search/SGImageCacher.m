@@ -11,6 +11,7 @@
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
 
+#if TARGET_OS_IPHONE
 
 @interface SGImageCacher ()
 
@@ -59,3 +60,5 @@
 }
 
 @end
+
+#endif

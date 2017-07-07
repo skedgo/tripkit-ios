@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
+#import "SGKCrossPlatform.h"
+
 typedef enum {
 	SGAutocompletionSearchIconCalendar,
 	SGAutocompletionSearchIconCity,
@@ -23,7 +25,7 @@ typedef enum {
 
 @interface SGAutocompletionResult : NSObject
 
-+ (UIImage *)imageForType:(SGAutocompletionSearchIcon)type;
++ (SGKImage *)imageForType:(SGAutocompletionSearchIcon)type;
 
 + (NSUInteger)scoreBasedOnDistanceFromCoordinate:(CLLocationCoordinate2D)coordinate
                                         toRegion:(MKCoordinateRegion)coordinateRegion
@@ -53,8 +55,8 @@ typedef enum {
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic, strong) UIImage *accessoryButtonImage;
+@property (nonatomic, strong) SGKImage *image;
+@property (nonatomic, strong) SGKImage *accessoryButtonImage;
 
 /**
  A score of how this result should be ranked between 0 and 100

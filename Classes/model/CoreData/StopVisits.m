@@ -230,27 +230,6 @@
   return [self.stop region];
 }
 
-#pragma mark - UIActivityItemSource
-
-- (NSString *)activityViewController:(UIActivityViewController *)activityViewController
-              subjectForActivityType:(NSString *)activityType
-{
-#pragma unused(activityViewController, activityType)
-  return [self.service modeTitle];
-}
-
-- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
-{
-#pragma unused(activityViewController)
-  return @"";
-}
-
-- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
-{
-#pragma unused(activityViewController, activityType)
-  return [NSMutableString stringWithFormat:NSLocalizedStringFromTableInBundle(@"I'll take a %@ at %@ from %@.", @"TripKit", [TKTripKit bundle], "Indication of an activity. (old key: ActivityIndication)"), [self.service shortIdentifier], [SGStyleManager timeString:self.time forTimeZone:self.timeZone], [self.stop name]];
-}
-
 #pragma mark - Helpers
 
 //- (void)setFlag:(SGVisitFlag)flag to:(BOOL)value

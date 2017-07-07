@@ -16,7 +16,7 @@
 
 @class Alert, SVKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 
-@interface Trip : NSManagedObject <TKRealTimeUpdatable, UIActivityItemSource> {
+@interface Trip : NSManagedObject <TKRealTimeUpdatable> {
 }
 
 #pragma mark - CoreData elements

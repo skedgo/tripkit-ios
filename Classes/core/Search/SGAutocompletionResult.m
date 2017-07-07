@@ -56,7 +56,7 @@
 
 @implementation SGAutocompletionResult
 
-+ (UIImage *)imageForType:(SGAutocompletionSearchIcon)type
++ (SGKImage *)imageForType:(SGAutocompletionSearchIcon)type
 {
 	switch (type) {
     case SGAutocompletionSearchIconCity:

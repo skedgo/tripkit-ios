@@ -19,7 +19,9 @@
 #if TARGET_OS_IPHONE
 #import "SGActions.h"
 #import "SGAlert.h"
+#import "SGImageCacher.h"
 #endif
+
 #import "SGCustomEvent.h"
 #import "SGCustomEventRecurrenceRule.h"
 
@@ -83,7 +85,6 @@
 #import "SGFoursquareGeocoder.h"
 #import "SGRegionAutocompleter.h"
 #import "SGSearchDataSource.h"
-#import "SGImageCacher.h"
 
 // Permissions
 #import "SGAddressBookManager.h"

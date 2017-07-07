@@ -6,8 +6,6 @@
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-import UIKit
-
 extension SGBaseGeocoder {
 
   public class func filteredMergedAndPruned(_ input:[SGKNamedCoordinate], limitedToRegion coordinateRegion: MKCoordinateRegion, withMaximum max: Int) -> [SGKNamedCoordinate]

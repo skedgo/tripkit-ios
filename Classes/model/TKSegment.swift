@@ -269,3 +269,29 @@ extension TKSegment: STKTripSegment {
   }
   
 }
+
+
+// MARK: - UIActivityItemSource
+
+#if os(iOS)
+
+  extension TKSegment: UIActivityItemSource {
+  
+    public func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+      return ""
+    }
+    
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+      
+      guard order() == .end else { return nil }
+      let format = NSLocalizedString("I'll arrive at %@ at %@", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime)")
+      return String(format: format,
+                    trip.request.toLocation.title ?? "",
+                    SGStyleManager.timeString(arrivalTime, for: timeZone)
+      )
+      
+    }
+    
+  }
+  
+#endif

@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+
 #import "SGPermissionManager.h"
+#import "SGKCrossPlatform.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -31,9 +33,9 @@ FOUNDATION_EXPORT NSString *const SGLocationManagerBackgroundUpdatesEnabled;
 - (BOOL)annotationIsCurrentLocation:(id<MKAnnotation>)currentLocation
                       orCloseEnough:(BOOL)closeEnough;
 
-- (UIImage *)imageForAnnotation:(id<MKAnnotation>)annotation;
+- (SGKImage *)imageForAnnotation:(id<MKAnnotation>)annotation;
 
-- (nullable UIImage *)accessoryImageForAnnotation:(id<MKAnnotation>)annotation;
+- (nullable SGKImage *)accessoryImageForAnnotation:(id<MKAnnotation>)annotation;
 
 #pragma mark - Fetching locations
 

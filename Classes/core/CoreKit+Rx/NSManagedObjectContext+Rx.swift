@@ -12,55 +12,59 @@ import CoreData
 import RxSwift
 import RxCocoa
 
-fileprivate class FetchedResultsControllerDelegateProxy<E: NSManagedObject>: NSObject, NSFetchedResultsControllerDelegate {
-  
-  fileprivate let observer: AnyObserver<[E]>
-  
-  fileprivate init(_ observer: AnyObserver<[E]>) {
-    self.observer = observer
-  }
-  
-  fileprivate func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    guard let objects = controller.fetchedObjects else { return }
-    let converted = objects.flatMap { $0 as? E }
-    observer.onNext(converted)
-  }
-}
+#if os(iOS)
 
-extension Reactive where Base: NSManagedObjectContext {
-  public func fetchObjects<E: NSManagedObject>(_ entity: E.Type, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, relationshipKeyPathsForPrefetching: [String]? = nil) -> Observable<[E]> {
+  fileprivate class FetchedResultsControllerDelegateProxy<E: NSManagedObject>: NSObject, NSFetchedResultsControllerDelegate {
     
-    return Observable.create { observer in
-      
-      // configure the request
-      let request = NSFetchRequest<E>(entityName: String(describing: E.self))
-      request.predicate  = predicate
-      request.sortDescriptors = sortDescriptors
-      request.relationshipKeyPathsForPrefetching = relationshipKeyPathsForPrefetching
-      request.resultType = NSFetchRequestResultType.managedObjectResultType
+    fileprivate let observer: AnyObserver<[E]>
+    
+    fileprivate init(_ observer: AnyObserver<[E]>) {
+      self.observer = observer
+    }
+    
+    fileprivate func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+      guard let objects = controller.fetchedObjects else { return }
+      let converted = objects.flatMap { $0 as? E }
+      observer.onNext(converted)
+    }
+  }
 
-      // hang on to these, so that we can release them in the disposable
-      var controller: NSFetchedResultsController<E>?
-      var delegate: FetchedResultsControllerDelegateProxy<E>?
+  extension Reactive where Base: NSManagedObjectContext {
+    public func fetchObjects<E: NSManagedObject>(_ entity: E.Type, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, relationshipKeyPathsForPrefetching: [String]? = nil) -> Observable<[E]> {
       
-      // set up the work and delegate forwarding messages to the delegate proxy
-      controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.base, sectionNameKeyPath: nil, cacheName: nil)
-      delegate = FetchedResultsControllerDelegateProxy<E>(observer)
-      controller!.delegate = delegate
-      do {
-        try controller!.performFetch()
-      } catch {
-        observer.onError(error)
-      }
-      
-      // we start with the current objects or an empty list
-      observer.onNext(controller!.fetchedObjects ?? [])
-      
-      // clean-up
-      return Disposables.create() {
-        delegate = nil
-        controller = nil
+      return Observable.create { observer in
+        
+        // configure the request
+        let request = NSFetchRequest<E>(entityName: String(describing: E.self))
+        request.predicate  = predicate
+        request.sortDescriptors = sortDescriptors
+        request.relationshipKeyPathsForPrefetching = relationshipKeyPathsForPrefetching
+        request.resultType = NSFetchRequestResultType.managedObjectResultType
+
+        // hang on to these, so that we can release them in the disposable
+        var controller: NSFetchedResultsController<E>?
+        var delegate: FetchedResultsControllerDelegateProxy<E>?
+        
+        // set up the work and delegate forwarding messages to the delegate proxy
+        controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.base, sectionNameKeyPath: nil, cacheName: nil)
+        delegate = FetchedResultsControllerDelegateProxy<E>(observer)
+        controller!.delegate = delegate
+        do {
+          try controller!.performFetch()
+        } catch {
+          observer.onError(error)
+        }
+        
+        // we start with the current objects or an empty list
+        observer.onNext(controller!.fetchedObjects ?? [])
+        
+        // clean-up
+        return Disposables.create() {
+          delegate = nil
+          controller = nil
+        }
       }
     }
   }
-}
+
+#endif

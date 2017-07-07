@@ -44,7 +44,7 @@ extension TKParserHelper {
 extension Vehicle {
   
   fileprivate convenience init(dict: [String: Any], into context: NSManagedObjectContext) {
-    if #available(iOS 10.0, *) {
+    if #available(iOS 10.0, macOS 10.12, *) {
       self.init(context: context)
     } else {
       self.init(entity: NSEntityDescription.entity(forEntityName: "Vehicle", in: context)!, insertInto: context)

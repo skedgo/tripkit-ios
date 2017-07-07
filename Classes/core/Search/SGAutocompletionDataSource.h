@@ -25,7 +25,10 @@ typedef enum {
 typedef void(^SGSearchAutocompletionActionBlock)(BOOL refreshRequired);
 typedef void(^SGSearchAutocompletionResultBlock)(SGAutocompletionResultType resultType, SGAutocompletionResult *result);
 
-@interface SGAutocompletionDataSource : NSObject <SGSearchDataSource>
+@interface SGAutocompletionDataSource : NSObject
+#if TARGET_OS_IPHONE
+  <SGSearchDataSource>
+#endif
 
 - (instancetype)initWithDataProviders:(NSArray<id<SGAutocompletionDataProvider>> *)dataProviders;
 

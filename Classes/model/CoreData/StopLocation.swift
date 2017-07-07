@@ -68,33 +68,36 @@ extension StopLocation: STKStopAnnotation {
 
 // MARK: - UIActivityItemSource
 
-extension StopLocation: UIActivityItemSource {
-  public func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-    // Note: We used to return 'nil' if we don't have `lastTopVisit`, but the protocol doesn't allow that
-    return ""
+#if os(iOS)
+
+  extension StopLocation: UIActivityItemSource {
+    public func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+      // Note: We used to return 'nil' if we don't have `lastTopVisit`, but the protocol doesn't allow that
+      return ""
+    }
+    
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+      guard let last = lastTopVisit else { return nil }
+      
+      var output: String = self.title ?? ""
+      
+      if let filter = filter, filter.characters.count > 0 {
+        output.append(" (filter: \(filter)")
+      }
+      
+      let predicate = departuresPredicate(from: last.departure)
+      let visits = managedObjectContext?.fetchObjects(StopVisits.self, sortDescriptors: [NSSortDescriptor(key: "departures", ascending: true)], predicate: predicate, relationshipKeyPathsForPrefetching: nil, fetchLimit: 10) ?? []
+      for visit in visits {
+        output.append("\n")
+        output.append(visit.smsString())
+      }
+      if output.contains("*") {
+        output.append("\n* real-time")
+      }
+      
+      return output
+    }
+    
   }
-  
-  public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
-    guard let last = lastTopVisit else { return nil }
-    
-    var output: String = self.title ?? ""
-    
-    if let filter = filter, filter.characters.count > 0 {
-      output.append(" (filter: \(filter)")
-    }
-    
-    let predicate = departuresPredicate(from: last.departure)
-    let visits = managedObjectContext?.fetchObjects(StopVisits.self, sortDescriptors: [NSSortDescriptor(key: "departures", ascending: true)], predicate: predicate, relationshipKeyPathsForPrefetching: nil, fetchLimit: 10) ?? []
-    for visit in visits {
-      output.append("\n")
-      output.append(visit.smsString())
-    }
-    if output.contains("*") {
-      output.append("\n* real-time")
-    }
-    
-    return output
-  }
-  
-  
-}
+
+#endif

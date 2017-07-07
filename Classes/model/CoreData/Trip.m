@@ -698,31 +698,6 @@ typedef NSUInteger SGTripFlag;
   return [self.request startRegion];
 }
 
-#pragma mark - UIActivityItemSource
-
-- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
-{
-#pragma unused(activityViewController)
-  return nil;
-}
-
-- (id)activityViewController:(UIActivityViewController *)activityViewController
-         itemForActivityType:(NSString *)activityType
-{
-#pragma unused(activityViewController, activityType)
-  if (activityType == UIActivityTypeMail) {
-    return [self constructPlainText];
-  } else {
-    return nil;
-  }
-}
-
-- (NSString *)activityViewController:(UIActivityViewController *)activityViewController subjectForActivityType:(NSString *)activityType
-{
-#pragma unused(activityViewController, activityType)
-  return NSLocalizedStringFromTableInBundle(@"Trip", @"TripKit", [TKTripKit bundle], nil);
-}
-
 #pragma mark - Private methods
 
 - (void)setFlag:(SGTripFlag)flag to:(BOOL)value

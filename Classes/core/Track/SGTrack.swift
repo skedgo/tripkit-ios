@@ -201,10 +201,12 @@ public protocol SGTrackItemUserCustomizable: SGTrackItem {
    */
   func assign(_ mapAnnotation: MKAnnotation)
 
-  /**
-   The editing style for how to display this track item in the list.
-   */
-  var editingStyle: UITableViewCellEditingStyle { get }
+  #if os(iOS)
+    /**
+     The editing style for how to display this track item in the list.
+     */
+    var editingStyle: UITableViewCellEditingStyle { get }
+  #endif
 
   /**
    Called when the user removes a "Back to X" entry before this track item, which means they want to go this item directly.

@@ -248,20 +248,26 @@ typedef void (^SGCalendarResultsBlock)(NSString *string, NSArray *results);
 
 - (NSString *)additionalActionString
 {
+#if TARGET_OS_IPHONE
   if ([self isAuthorized]) {
     return nil;
   } else {
     return NSLocalizedStringFromTableInBundle(@"Include events", @"Shared", [SGStyleManager bundle], @"Include events.");
   }
+#else
+  return nil;
+#endif
 }
 
 - (void)additionalAction:(SGAutocompletionDataActionBlock)actionBlock
 {
+#if TARGET_OS_IPHONE
   [self tryAuthorizationForSender:nil
                  inViewController:nil
                        completion:^(BOOL enabled) {
     actionBlock(enabled);
   }];
+#endif
 }
 
 @end

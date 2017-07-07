@@ -104,7 +104,33 @@ extension StopVisits: STKDisplayableTimePoint {
     return false
   }
   
-  
-  
-  
 }
+
+// MARK: - UIActivityItemSource
+
+#if os(iOS)
+  
+  extension StopVisits: UIActivityItemSource {
+    
+    public func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivityType?) -> String {
+      return service.modeTitle ?? ""
+    }
+    
+    public func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+      return ""
+    }
+    
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+      
+      let format = NSLocalizedString("I'll take a %@ at %@ from %@.", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indication of an activity. (old key: ActivityIndication)")
+      return String(format: format,
+                    service.shortIdentifier() ?? "",
+                    SGStyleManager.timeString(time, for: timeZone),
+                    stop.name ?? stop.stopCode
+      )
+      
+    }
+    
+  }
+  
+#endif

@@ -78,8 +78,11 @@
   if (! _allAutocompletionResults) {
     NSArray *allRegions = [[SVKRegionManager sharedInstance] regions];
     
-    UIImage *image = [SGAutocompletionResult imageForType:SGAutocompletionSearchIconCity];
-    UIImage *accessoryImage = [[SGStyleManager imageNamed:@"icon-map-info-city"] monochromeImage];
+    SGKImage *image = [SGAutocompletionResult imageForType:SGAutocompletionSearchIconCity];
+    SGKImage *accessoryImage = [SGStyleManager imageNamed:@"icon-map-info-city"];
+#if TARGET_OS_IPHONE
+    accessoryImage = [accessoryImage monochromeImage];
+#endif
 
     NSMutableArray *autocompletionResults = [NSMutableArray arrayWithCapacity:allRegions.count];
     for (SVKRegion *region in allRegions) {
