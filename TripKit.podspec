@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKit"
-  s.version      = "2.0-beta1"
+  s.version      = "2.0-beta2"
   s.summary      = "SkedGo's TripKit"
   s.homepage     = "http://www.skedgo.com/"
   s.license      = { 
