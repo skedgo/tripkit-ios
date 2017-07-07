@@ -130,7 +130,7 @@ extension TKOccupancyView {
       }
       
     case .wheelchair:
-      let color = UIColor(red: 0/255.0, green: 155/255.0, blue: 223/255.0, alpha: 1.0)
+      let color = #colorLiteral(red: 0, green: 0.6078431373, blue: 0.8745098039, alpha: 1)
       
       label.text = NSLocalizedString("Wheelchair accessible", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "").uppercased()
       label.textColor = color

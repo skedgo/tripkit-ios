@@ -96,7 +96,7 @@ fileprivate extension AnnotationViewBuilder {
     }
     
     vehicleView.rotateVehicle(heading: heading, bearing: vehicle.bearing?.doubleValue)
-    vehicleView.annotationColor = UIColor(red: 0.31, green: 0.64, blue: 0.22, alpha: 1)
+    vehicleView.annotationColor = #colorLiteral(red: 0.3696880937, green: 0.6858631968, blue: 0.2820466757, alpha: 1)
     vehicleView.aged(by: CGFloat(vehicle.ageFactor))
     
     vehicleView.canShowCallout = annotation.title != nil
