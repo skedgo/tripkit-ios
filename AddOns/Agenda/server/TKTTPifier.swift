@@ -379,7 +379,7 @@ extension TKTTPifier.SegmentOverview: TKAgendaTripOptionSegmentType {
 
   var tripSegmentModeColor: SGKColor? { return modeInfo.color }
 
-  var tripSegmentModeImage: UIImage? {
+  var tripSegmentModeImage: SGKImage? {
     return TKSegmentHelper.segmentImage(.listMainMode, modeInfo: modeInfo, modeIdentifier: nil, isRealTime: false)
   }
   
@@ -410,7 +410,7 @@ extension TKTTPifier.SegmentOverview: TKAgendaTripOptionSegmentType {
   
   // MARK: STKDisplayableRoute
 
-  var routeColor: UIColor? {
+  var routeColor: SGKColor? {
     return tripSegmentModeColor
   }
   

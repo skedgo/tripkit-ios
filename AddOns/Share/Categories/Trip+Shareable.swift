@@ -8,5 +8,10 @@
 
 import Foundation
 
+#if TK_NO_FRAMEWORKS
+#else
+  import TripKit
+#endif
+
 extension Trip: TKURLShareable, TKURLSavable {
 }

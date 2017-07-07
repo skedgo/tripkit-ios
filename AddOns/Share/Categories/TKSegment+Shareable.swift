@@ -8,6 +8,11 @@
 
 import Foundation
 
+#if TK_NO_FRAMEWORKS
+#else
+  import TripKit
+#endif
+
 extension TKSegment: TKURLShareable {
   public var shareURL: URL? {
     get {

@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import CoreLocation
+
+#if TK_NO_FRAMEWORKS
+#else
+  import TripKit
+#endif
 
 public class TKShareHelper: NSObject {
   private override init() {

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 #if TK_NO_FRAMEWORKS
 #else
@@ -26,98 +25,102 @@ public protocol TKURLSavable: class, TKURLShareable {
   var saveURL: URL? { get }
 }
 
-public class TKShareURLProvider: UIActivityItemProvider {
+#if os(iOS)
   
-  @objc(getShareURLForShareable:allowLongURL:success:failure:)
-  public class func getShareURL(for shareable: TKURLShareable, allowLongURL: Bool, success: @escaping (URL) -> Void, failure: (() -> Void)?) {
+  public class TKShareURLProvider: UIActivityItemProvider {
     
-    if let shareURL = shareable.shareURL {
-      success(shareURL)
-      return
-    }
-    
-    guard
-      let saveable = shareable as? TKURLSavable,
-      let baseSaveURL = saveable.saveURL
-    else {
-      failure?()
-      return
-    }
-
-    let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
-    
-    SVKServer.get(saveURL, paras: nil) { _, response, _ in
+    @objc(getShareURLForShareable:allowLongURL:success:failure:)
+    public class func getShareURL(for shareable: TKURLShareable, allowLongURL: Bool, success: @escaping (URL) -> Void, failure: (() -> Void)?) {
+      
+      if let shareURL = shareable.shareURL {
+        success(shareURL)
+        return
+      }
+      
       guard
-        let dict = response as? [String: Any],
-        let urlString = dict["url"] as? String,
-        let shareURL = URL(string: urlString)
+        let saveable = shareable as? TKURLSavable,
+        let baseSaveURL = saveable.saveURL
       else {
         failure?()
         return
       }
+
+      let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
       
-      saveable.shareURL = shareURL
-      success(shareURL)
+      SVKServer.get(saveURL, paras: nil) { _, response, _ in
+        guard
+          let dict = response as? [String: Any],
+          let urlString = dict["url"] as? String,
+          let shareURL = URL(string: urlString)
+        else {
+          failure?()
+          return
+        }
+        
+        saveable.shareURL = shareURL
+        success(shareURL)
+      }
+      
     }
     
-  }
-  
-  @objc(getShareURLForShareable:allowLongURL:allowBlocking:)
-  public class func getShareURL(for shareable: TKURLShareable, allowLongURL: Bool, allowBlocking: Bool) -> URL? {
-    
-    if let shareURL = shareable.shareURL {
-      return shareURL
-    }
+    @objc(getShareURLForShareable:allowLongURL:allowBlocking:)
+    public class func getShareURL(for shareable: TKURLShareable, allowLongURL: Bool, allowBlocking: Bool) -> URL? {
+      
+      if let shareURL = shareable.shareURL {
+        return shareURL
+      }
 
-    guard
-      allowBlocking,
-      let saveable = shareable as? TKURLSavable,
-      let baseSaveURL = saveable.saveURL
-    else {
-      return nil
-    }
+      guard
+        allowBlocking,
+        let saveable = shareable as? TKURLSavable,
+        let baseSaveURL = saveable.saveURL
+      else {
+        return nil
+      }
 
-    let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
-    let response = SVKServer.syncURL(saveURL, timeout: 10)
-    
-    if let dict = response as? [String: Any],
-      let urlString = dict["url"] as? String,
-      let shareURL = URL(string: urlString) {
-      return shareURL
-    } else {
-      return nil
+      let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
+      let response = SVKServer.syncURL(saveURL, timeout: 10)
+      
+      if let dict = response as? [String: Any],
+        let urlString = dict["url"] as? String,
+        let shareURL = URL(string: urlString) {
+        return shareURL
+      } else {
+        return nil
+      }
     }
-  }
-  
-  private class func saveURL(forBase url: URL, allowLongURL: Bool) -> URL {
-    guard allowLongURL else { return url }
     
-    var absolute = url.absoluteString
-    if absolute.contains("?") {
-      absolute.append("&long=1")
-    } else {
-      absolute.append("?long=1")
+    private class func saveURL(forBase url: URL, allowLongURL: Bool) -> URL {
+      guard allowLongURL else { return url }
+      
+      var absolute = url.absoluteString
+      if absolute.contains("?") {
+        absolute.append("&long=1")
+      } else {
+        absolute.append("?long=1")
+      }
+      return URL(string: absolute)!
     }
-    return URL(string: absolute)!
-  }
-  
-  
-  // MARK: - UIActivityItemProvider
-  
-  public override var item: Any {
-//    if ([[self activityType] rangeOfString:@"kSGAction"].location != NSNotFound)
-//    return nil; // don't do this for app action activities
+    
+    
+    // MARK: - UIActivityItemProvider
+    
+    public override var item: Any {
+  //    if ([[self activityType] rangeOfString:@"kSGAction"].location != NSNotFound)
+  //    return nil; // don't do this for app action activities
 
-    if let shareable = placeholderItem as? TKURLShareable, let url = TKShareURLProvider.getShareURL(for: shareable, allowLongURL: false, allowBlocking: true) {
-      return url
-    } else {
+      if let shareable = placeholderItem as? TKURLShareable, let url = TKShareURLProvider.getShareURL(for: shareable, allowLongURL: false, allowBlocking: true) {
+        return url
+      } else {
+        return URL(string: "https://tripgo.com")!
+      }
+      
+    }
+    
+    public override func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
       return URL(string: "https://tripgo.com")!
     }
-    
   }
-  
-  public override func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-    return URL(string: "https://tripgo.com")!
-  }
-}
+
+#endif
 

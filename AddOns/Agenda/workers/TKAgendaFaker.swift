@@ -141,7 +141,7 @@ private class FakeBusSegment: NSObject, STKTripSegment {
   
   // MARK: STKTripSegmentDisplayable
   
-  let tripSegmentModeImage: UIImage? = nil
+  let tripSegmentModeImage: SGKImage? = nil
   var tripSegmentModeColor: SGKColor? { return nil }
   var tripSegmentModeImageURL: URL? { return nil }
   var tripSegmentModeInfoIconType: STKInfoIconType { return .none }

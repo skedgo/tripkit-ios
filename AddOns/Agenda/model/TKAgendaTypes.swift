@@ -277,7 +277,7 @@ extension TKAgendaTripOptionType {
 
 private class TKMinimalSegment: NSObject, TKAgendaTripOptionSegmentType {
   
-  init(modeImage image: UIImage?) {
+  init(modeImage image: SGKImage?) {
     tripSegmentModeImage = image
     
     super.init()
@@ -294,7 +294,7 @@ private class TKMinimalSegment: NSObject, TKAgendaTripOptionSegmentType {
   var tripSegmentTimeZone: TimeZone? { return nil }
   var tripSegmentTimesAreRealTime: Bool { return false }
   var tripSegmentIsWheelchairAccessible: Bool { return false }
-  let tripSegmentModeImage: UIImage?
+  let tripSegmentModeImage: SGKImage?
   
   // MARK: STKDisplayableRoute
   

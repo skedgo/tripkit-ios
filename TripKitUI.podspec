@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitUI"
-  s.version      = "1.0-beta"
+  s.version      = "2.0-beta1"
   s.summary      = "SkedGo's TripKitUI"
   s.homepage     = "http://www.skedgo.com/"
   s.license      = { 
@@ -13,10 +13,9 @@ Pod::Spec.new do |s|
     "Adrian Schoenig" => "adrian@skedgo.com",
     "Brian Huang" => "brian@skedgo.com"
   }
-  s.source       = { path: "." }
-  # s.source       = { git: ".", tag: "v#{s.version}" }
-  # s.source       = { git: "https://github.com/skedgo/shared-ios.git", :tag => "v#{s.version}" }
-  s.platform     = :ios, '8.0'
+  # s.source       = { path: "." }
+  # s.source       = { git: "." }
+  s.source       = { git: "https://github.com/skedgo/tripkit-ios.git", tag: "v#{s.version}" }
   s.ios.deployment_target = '8.0'
   s.requires_arc = true
   
@@ -24,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.frameworks = ['UIKit', 'MapKit']
 
-  s.dependency 'TripKit'
+  s.dependency 'TripKit', '~> 2.0-beta1'
   s.dependency 'SGPulsingAnnotationView'
 
   s.dependency 'ASPolylineView'
