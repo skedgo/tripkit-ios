@@ -2,81 +2,56 @@
 
 Additional documentation is available on the [TripGo Developer page](http://skedgo.github.io/tripgo-api/site/)
 
+## Components
+
+- TripKit (iOS, iOS extension, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
+- TripKitUI (iOS): UI elements for displaying trips on a map and TripGo-styled table cells.
+- TripKitBookings (iOS): User accounts and in-app booking functionality.
+- ~~TripKitAddOns/Agenda (iOS, iOS extension, macOS)~~: coming soon
+- TripKitAddOns/InterApp (iOS): Helpers for deep linking into other apps, such as FlitWays, GoCatch, Ingogo, Lyft, Ola and Uber.
+- TripKitAddOns/Share (iOS, iOS extensions, macOS): Helpers for creating shareable links to trips, services, transit stops, and meeting locations, that open in TripGo's web app.
+
 ## Installation
 
-TripKit should be installed via cocoapods:
+### Cocoapods (recommended)
 
-Either install the lot:
+At the top of your Podfile, make sure you include SkedGo's private pods:
 
-```
-pod 'TripKit'
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/skedgo/PodSpecs.git'
 ```
 
-Or cherry-pick the modules that you like:
+And then add desired Pods:
 
+```ruby
+  pod 'TripKit',                '~> 2.0beta2'
+  pod 'TripKitUI',              '~> 2.0beta2'
+  pod 'TripKitBookings',        '~> 2.0beta2'
+  pod 'TripKitAddOns/InterApp', '~> 2.0beta2'
+  pod 'TripKitAddOns/Share',    '~> 2.0beta2'
 ```
-pod 'TripKit/Core'
-pod 'TripKit/Agenda'
-pod 'TripKit/Bookings'
-pod 'TripKit/InterApp'
-```
+
+### Manually
+
+- Drag the files into your project.
+- Add dependencies (see [TripKit.podspec](TripKit.podspec))
+- Specify `TK_NO_FRAMEWORKS` in both your target's `Other C Flags` *and* `Other Swift Flags`
+
+If there's any trouble with that, see the example under [Project](Project).
 
 ## Set-up
 
-* Refresh the cached information at an appropriate time, e.g., when your app finished launching or comes back to the foreground:
+- In your app delegate, provide your API key and start a new session:
 
-```  objective-c
-  [[SVKServer sharedInstance] updateRegionsForced:NO];
+```swift
+  func applicationDidFinishLaunching(_ aNotification: Notification) {
+    
+    TripKit.apiKey = "MY_API_KEY"
+    TripKit.prepareForNewSession()
+
+    // ...
+  }
 ```
 
-
-
-## Optional features
-
-### Logging
-
-Dependencies:
-
-* CocoaPods:
-``` ruby
-  pod 'CocoaLumberjack'
-```
-
-TODO: How to use this
-
-### Booking features
-
-Dependencies:
-
-* CocoaPods:
-``` ruby
-  pod 'AFNetworking', '~> 2.5.3'
-```
-* Modules from [SkedGo's shared iOS code base](https://github.com/skedgo/shared-ios)
-  * BookingKit
-
-TODO: How to use this
-
-### Agenda (Swift-only)
-
-Dependencies:
-
-* Cocoapods:
-``` ruby
-  pod 'RxSwift', '~> 2.0'
-```
-
-TODO: How to use this
-
-### Inter-app Communication
-
-Dependencies:
-
-* Modules from [SkedGo's shared iOS code base](https://github.com/skedgo/shared-ios)
-  * Actions
-
-TODO: How to use this
-
-## Tracking
-
-Calls to the SkedGo servers typically include an "X-TripGo-UUID" header which allows tracking calls from a single installation across sessions. This behaviour is **opt-out**. Opt-out by adding a Boolean with key `SVKDefaultsKeyProfileTrackUsage` and value `true` to the standard user defaults.
+- By default, calls to SkedGo's servers include an identifier that tracks calls from a single installation across session. This behaviour is **opt-out**. You can overwrite this by setting `TripKit.allowTracking`.
