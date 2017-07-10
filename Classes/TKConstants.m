@@ -8,8 +8,6 @@
 
 #import "TKConstants.h"
 
-NSString *const TKDefaultsKeyLastUseSortIndex       = @"internalSortIndex";
-
 NSString *const TKDefaultsKeyProfileWeightCarbon    = @"weightCarbon";
 NSString *const TKDefaultsKeyProfileWeightHassle    = @"weightHassle";
 NSString *const TKDefaultsKeyProfileWeightMoney     = @"weightPrice";

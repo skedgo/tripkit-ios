@@ -96,7 +96,7 @@ fileprivate extension AnnotationViewBuilder {
     }
     
     vehicleView.rotateVehicle(heading: heading, bearing: vehicle.bearing?.doubleValue)
-    vehicleView.annotationColor = UIColor(red: 0.31, green: 0.64, blue: 0.22, alpha: 1)
+    vehicleView.annotationColor = #colorLiteral(red: 0.3696880937, green: 0.6858631968, blue: 0.2820466757, alpha: 1)
     vehicleView.aged(by: CGFloat(vehicle.ageFactor))
     
     vehicleView.canShowCallout = annotation.title != nil
@@ -148,7 +148,7 @@ fileprivate extension AnnotationViewBuilder {
     
     // Set time stamp on the side opposite to direction of travel
     let side = semaphoreLabel(for: visit.bearing?.doubleValue)
-    semaphoreView.setTime(visit.departure, isRealTime: visit.service.isRealTime, in: visit.stop.region().timeZone, onSide: side)
+    semaphoreView.setTime(visit.departure, isRealTime: visit.service.isRealTime, in: visit.stop.region?.timeZone, onSide: side)
 
     semaphoreView.canShowCallout = annotation.title != nil
     semaphoreView.isEnabled = true
@@ -163,9 +163,9 @@ fileprivate extension AnnotationViewBuilder {
     // travel direction.
     let side: SGSemaphoreLabel
     if segment.isPublicTransport() {
-      side = semaphoreLabel(for: segment.bearing()?.doubleValue)
+      side = semaphoreLabel(for: segment.bearing?.doubleValue)
       
-    } else if segment.isTerminal() {
+    } else if segment.isTerminal {
       let fromCoordinate = segment.trip.request.fromLocation.coordinate
       let toCoordinate = segment.trip.request.toLocation.coordinate
       let isLeft = fromCoordinate.longitude > toCoordinate.longitude
@@ -240,7 +240,7 @@ fileprivate extension AnnotationViewBuilder {
     }
     
     circleView.isFaded = !asTravelled
-    circleView.circleColor = color ?? SGKTransportStyler.routeDashColorNontravelled()
+    circleView.circleColor = color ?? .routeDashColorNonTravelled
     circleView.alpha = alpha
     circleView.setNeedsDisplay()
 
@@ -293,7 +293,7 @@ public extension AnnotationViewBuilder {
       
       let bearing: CLLocationDirection
       if let segment = annotationView.annotation as? TKSegment {
-        bearing = segment.bearing()?.doubleValue ?? 0
+        bearing = segment.bearing?.doubleValue ?? 0
         
       } else if let timePoint = annotationView.annotation as? STKDisplayableTimePoint {
         bearing = timePoint.bearing?.doubleValue ?? 0

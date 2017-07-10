@@ -7,11 +7,13 @@
 //
 
 @import Foundation;
-@import SGCoreKit;
+
 
 #import "TKCellHelper.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class STKModeCoordinate;
 
 @interface TKPlainCell : NSObject
 

@@ -18,5 +18,7 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 #import "TKTripKit.h"
 
-#import "TripKitAgenda.h"
 #import "TripKitUI.h"
+#import "TripKitAgenda.h"
+#import "TripKitBookings.h"
+#import "TripKitShare.h"

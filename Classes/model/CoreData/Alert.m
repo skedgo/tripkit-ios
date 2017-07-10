@@ -9,6 +9,7 @@
 #import "Alert.h"
 
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 @implementation Alert
 
@@ -104,17 +105,6 @@
   self.severity = @(alertSeverity);
 }
 
-- (STKInfoIconType)infoIconType
-{
-  switch (self.alertSeverity) {
-    case AlertSeverityInfo:
-    case AlertSeverityWarning:
-      return STKInfoIconTypeWarning;
-    case AlertSeverityAlert:
-      return STKInfoIconTypeAlert;
-  }
-}
-
 - (nullable NSURL *)imageURL
 {
   if (!self.remoteIcon) {
@@ -129,37 +119,5 @@
   self.toDelete = YES;
 }
 
-
-#pragma mark - ASDisplayablePoint
-
-- (CLLocationCoordinate2D)coordinate
-{
-  if (self.location) {
-    return [self.location coordinate];
-  } else {
-    return kCLLocationCoordinate2DInvalid;
-  }
-}
-
-- (BOOL)pointDisplaysImage
-{
-  return (self.location != nil);
-}
-
-- (UIImage *)pointImage
-{
-  NSString *imageName = [STKInfoIcon imageNameForInfoIconType:self.infoIconType usage:STKInfoIconUsageMap];
-  return [SGStyleManager imageNamed:imageName];
-}
-
-- (NSURL *)pointImageURL
-{
-  return self.imageURL;
-}
-
-- (BOOL)isDraggable
-{
-  return NO;
-}
 
 @end

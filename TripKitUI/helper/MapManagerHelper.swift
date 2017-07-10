@@ -18,8 +18,8 @@ public class MapManagerHelper: NSObject {
     return overlays.sorted { one, two -> Bool in
       
       guard
-        let travelledOne = (one as? STKRoutePolyline)?.route.routeIsTravelled?(),
-        let travelledTwo = (two as? STKRoutePolyline)?.route.routeIsTravelled?()
+        let travelledOne = (one as? STKRoutePolyline)?.route.routeIsTravelled,
+        let travelledTwo = (two as? STKRoutePolyline)?.route.routeIsTravelled
         else { return true }
       
       if !travelledOne && travelledTwo {
@@ -42,7 +42,7 @@ public class MapManagerHelper: NSObject {
         let segmentTwo = two.annotation as? TKSegment
         else { return true }
       
-      switch (segmentOne.isTerminal(), segmentTwo.isTerminal()) {
+      switch (segmentOne.isTerminal, segmentTwo.isTerminal) {
       case (true , true ): return false
       case (false, true ): return true
       case (true , false): return false

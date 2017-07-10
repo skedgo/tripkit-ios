@@ -8,7 +8,7 @@
 
 import Foundation
 
-import SGBookingKit
+
 
 public enum TKBookingFormType {
   

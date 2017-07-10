@@ -28,14 +28,14 @@ public struct TKAlertWrapper: Unmarshaling {
 }
 
 class TKSimpleAlert: NSObject, Unmarshaling, TKAlert {
-  public let title: String
+  public let title: String?
   public let text: String?
   public let infoURL: URL?
   public let iconURL: URL?
   public let severity: AlertSeverity
   public let lastUpdated: Date?
   
-  public var icon: UIImage? {
+  public var icon: SGKImage? {
     let iconType: STKInfoIconType
     switch severity {
     case .info, .warning:
@@ -64,9 +64,9 @@ class TKSimpleAlert: NSObject, Unmarshaling, TKAlert {
 
 @objc public protocol TKAlert {
   
-  var icon: UIImage? { get }
+  var icon: SGKImage? { get }
   var iconURL: URL? { get }
-  var title: String { get }
+  var title: String? { get } // really not optional, but for compatibility with MKAnnotation
   var text: String? { get }
   var infoURL: URL? { get }
   var lastUpdated: Date? { get }

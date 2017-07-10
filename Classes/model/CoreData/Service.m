@@ -8,13 +8,11 @@
 
 #import "Service.h"
 
-#import <MapKit/MapKit.h>
+@import MapKit;
 
-#import <TripKit/TKTripKit.h>
+#import "TripKit/TripKit-Swift.h"
 
 #import "TKRealTimeUpdatableHelper.h"
-
-#import "TKColoredRoute.h"
 
 enum {
   SGServiceFlagRealTime               = 1 << 0,
@@ -200,68 +198,6 @@ typedef NSUInteger SGServiceFlag;
   }
 }
 
-- (NSString *)modeTitle
-{
-	if (self.modeInfo.alt)
-		return self.modeInfo.alt;
-	
-	// check the segment reference, i.e., for trips
-	SegmentReference *reference = [self.segments anyObject];
-	if (reference) {
-		return [reference.template.modeInfo alt];
-	}
-	
-	// check a stop
-	StopVisits *visit = [self.visits anyObject];
-	if (visit) {
-		return [visit.stop modeTitle];
-	}
-	
-	ZAssert(false, @"Got no mode, visits or segments!");
-	return nil;
-}
-
-- (nullable UIImage *)modeImageOfType:(SGStyleModeIconType)type
-{
-  if (self.modeInfo) {
-    UIImage *specificImage = [SGStyleManager imageForModeImageName:self.modeInfo.localImageName
-                                                        isRealTime:NO
-                                                        ofIconType:type];
-    if (specificImage) {
-      return specificImage;
-    }
-  }
-
-  // check a stop
-  StopVisits *visit = [self.visits anyObject];
-  if (visit) {
-    return [visit.stop modeImageOfType:type];
-  }
-  
-  ZAssert(false, @"Got no mode info nor any visits!");
-  return nil;
-}
-
-- (nullable NSURL *)modeImageURLForType:(SGStyleModeIconType)type
-{
-  if (self.modeInfo.remoteImageName) {
-    return [SVKServer imageURLForIconFileNamePart:self.modeInfo.remoteImageName ofIconType:type];
-  } else {
-    return nil;
-  }
-}
-
-- (nullable SVKRegion *)region
-{
-	StopVisits *visit = [self.visits anyObject];
-	if (visit) {
-		return visit.stop.region;
-	}
-
-  // we might not have visits if they got deleted in the mean-time
-	return nil;
-}
-
 - (NSString *)title
 {
 	NSMutableString *title = [NSMutableString stringWithCapacity:30];
@@ -333,12 +269,12 @@ typedef NSUInteger SGServiceFlag;
 
 	NSMutableArray *shapes = [NSMutableArray arrayWithCapacity:2];
 	if (startSplit > 0 || endSplit != -1) {
-    NSArray *dashPattern = [self.shape respondsToSelector:@selector(routeDashPattern)] ? self.shape.routeDashPattern : nil;
+    NSArray *dashPattern = self.shape.routeDashPattern;
     // untravelled start
 		TKColoredRoute *u = [[TKColoredRoute alloc] initWithWaypoints:waypoints
                                                              from:0
                                                                to:startSplit + 1 // include it
-                                                        withColor:[SGKTransportStyler routeDashColorNontravelled]
+                                                        withColor:SGKColor.routeDashColorNonTravelled
                                                       dashPattern:dashPattern
                                                       isTravelled:NO];
 		[shapes addObject:u];
@@ -355,7 +291,7 @@ typedef NSUInteger SGServiceFlag;
       t = [[TKColoredRoute alloc] initWithWaypoints:waypoints
                                                from:endSplit + 1
                                                  to:-1
-                                          withColor:[SGKTransportStyler routeDashColorNontravelled]
+                                          withColor:SGKColor.routeDashColorNonTravelled
                                         dashPattern:dashPattern
                                         isTravelled:NO];
       [shapes addObject:t];

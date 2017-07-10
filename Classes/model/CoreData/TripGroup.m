@@ -8,7 +8,8 @@
 
 #import "TripGroup.h"
 
-#import <TripKit/TKTripKit.h>
+#import "TripKit/TripKit-Swift.h"
+
 
 typedef enum {
   BHTripGroupFlagIsInCalendar = 1<<0,
@@ -163,10 +164,13 @@ typedef enum {
 - (NSString *)accessibilityLabel
 {
   NSMutableString *accessibleLabel = [NSMutableString string];
-	NSString *baseLabel = self.visibleTrip.accessibilityLabel;
+  
+#if TARGET_OS_IPHONE
+  NSString *baseLabel = self.visibleTrip.accessibilityLabel;
 	if (baseLabel) {
 		[accessibleLabel appendString:baseLabel];
 	}
+#endif
 	
   NSDictionary *dict = [self.visibleTrip costValues];
   [dict enumerateKeysAndObjectsUsingBlock:^(id key, NSString *string, BOOL *stop) {

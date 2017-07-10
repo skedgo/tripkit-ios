@@ -8,7 +8,11 @@
 
 #import "TKNextSegmentScorer.h"
 
-#import <TripKit/TKTripKit.h>
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#endif
+
+#import "TripKit/TripKit-Swift.h"
 
 @implementation Trip (NextSegment)
 
@@ -259,8 +263,7 @@
     }
     
     for (id<STKDisplayableRoute> route in shapes) {
-      if ([route respondsToSelector:@selector(routeIsTravelled)]
-          && ! [route routeIsTravelled]) {
+      if (! [route routeIsTravelled]) {
         continue;
       }
       

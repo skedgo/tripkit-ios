@@ -14,6 +14,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol STKTrip;
+
 @interface Trip (NextSegment)
 
 - (nullable TKSegment *)nextSegmentAtTime:(NSDate *)time

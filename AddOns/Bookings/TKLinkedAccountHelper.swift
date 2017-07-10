@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import Marshal
 
-import SGBookingKit
+
 
 public struct ProviderAuth {
 

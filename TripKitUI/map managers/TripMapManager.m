@@ -8,11 +8,11 @@
 
 #import "TripMapManager.h"
 
-#ifndef TK_NO_FRAMEWORKS
-#import <TripKitUI/TripKitUI-Swift.h>
-#else
+#ifdef TK_NO_FRAMEWORKS
 #import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
+#else
+#import <TripKitUI/TripKitUI-Swift.h>
 #endif
 
 #define TIME_BETWEEN_UPDATES 10

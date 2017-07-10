@@ -8,7 +8,7 @@
 
 #import "CircleAnnotationView.h"
 
-@import SGCoreUIKit;
+#import "UIColor+Variations.h"
 
 #define kBHCircleSize   12.0
 #define kBHSmallFactor    .8 // percentage

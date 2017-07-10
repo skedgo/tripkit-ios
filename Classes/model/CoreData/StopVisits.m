@@ -8,9 +8,14 @@
 
 #import "StopVisits.h"
 
-#import <TripKit/TKTripKit.h>
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#endif
 
-@import SGCoreKit;
+#import "TripKit/TripKit-Swift.h"
+
+#import "SGRootKit.h"
+#import "StopLocation.h"
 
 #import "SGStyleManager.h"
 
@@ -199,22 +204,6 @@
   }
 }
 
-- (SGKGrouping)groupingWithPrevious:(StopVisits *)previous
-                              next:(StopVisits *)next
-{
-  BOOL sameAsBefore = [previous.searchString isEqualToString:self.searchString];
-  BOOL sameAsAfter  = [next.searchString isEqualToString:self.searchString];
-  if (sameAsBefore && sameAsAfter) {
-    return SGKGrouping_Middle;
-  } else if (sameAsBefore) {
-    return SGKGrouping_End;
-  } else if (sameAsAfter) {
-    return SGKGrouping_Start;
-  } else {
-    return SGKGrouping_Individual;
-  }
-}
-
 - (NSComparisonResult)compare:(StopVisits *)other
 {
   if (self.index && [self.service isEqual:other.service]) {
@@ -239,108 +228,6 @@
 - (SVKRegion *)regionForRealTimeUpdates
 {
   return [self.stop region];
-}
-
-#pragma mark ASDirectionalTimePoint
-
-- (NSString *)title
-{
-	NSTimeZone *timeZone = self.stop.region.timeZone;
-	if (self.departure) {
-		return [SGStyleManager timeString:self.departure forTimeZone:timeZone];
-	} else if (self.arrival) {
-		return [SGStyleManager timeString:self.arrival forTimeZone:timeZone];
-	} else {
-    return self.stop.title;
-  }
-}
-
-- (NSString *)subtitle
-{
-  if (self.departure || self.arrival)
-    return self.stop.title;
-  else
-    return nil;
-}
-
-- (CLLocationCoordinate2D)coordinate
-{
-	return self.stop.coordinate;
-}
-
-- (void)setTime:(NSDate *)time
-{
-	ZAssert([time timeIntervalSince1970] > 0, @"Bad time: %@", time);
-	self.departure = time;
-}
-
-- (NSDate *)time
-{
-	if (self.departure)
-		return self.departure;
-	else
-		return self.arrival;
-}
-
-- (BOOL)timeIsRealTime
-{
-  return [self.service isRealTime];
-}
-
-- (NSTimeZone *)timeZone
-{
-	return self.stop.region.timeZone;
-}
-
-- (BOOL)pointDisplaysImage
-{
-	return YES;
-}
-
-- (UIImage *)pointImage
-{
-  return [self.service modeImageOfType:SGStyleModeIconTypeListMainMode];
-}
-
-- (NSURL *)pointImageURL
-{
-  return [self.service modeImageURLForType:SGStyleModeIconTypeListMainMode];
-}
-
-- (BOOL)canFlipImage
-{
-	return YES;
-}
-
-- (BOOL)isTerminal
-{
-	return NO;
-}
-
-- (BOOL)isDraggable
-{
-	return NO;
-}
-
-#pragma mark - UIActivityItemSource
-
-- (NSString *)activityViewController:(UIActivityViewController *)activityViewController
-              subjectForActivityType:(NSString *)activityType
-{
-#pragma unused(activityViewController, activityType)
-  return [self.service modeTitle];
-}
-
-- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
-{
-#pragma unused(activityViewController)
-  return @"";
-}
-
-- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
-{
-#pragma unused(activityViewController, activityType)
-  return [NSMutableString stringWithFormat:NSLocalizedStringFromTableInBundle(@"I'll take a %@ at %@ from %@.", @"TripKit", [TKTripKit bundle], "Indication of an activity. (old key: ActivityIndication)"), [self.service shortIdentifier], [SGStyleManager timeString:self.time forTimeZone:self.timeZone], [self.stop name]];
 }
 
 #pragma mark - Helpers

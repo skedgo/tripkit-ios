@@ -8,7 +8,7 @@
 
 import Foundation
 
-import SGBookingKit
+
 
 /// A state machine for booking a trip.
 ///

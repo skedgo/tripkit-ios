@@ -8,9 +8,14 @@
 
 import UIKit
 
-import TripKit
 import RxSwift
-import AFNetworking
+import Kingfisher
+
+#if TK_NO_FRAMEWORKS
+#else
+  import TripKit
+#endif
+
 
 class TKAlertCell: UITableViewCell {
 
@@ -59,7 +64,7 @@ class TKAlertCell: UITableViewCell {
     titleLabel.text = alert.title
     iconView.image = alert.icon
     if let iconURL = alert.iconURL {
-      iconView.setImageWith(iconURL)
+      iconView.kf.setImage(with: iconURL)
     }
     
     if let text = alert.text {

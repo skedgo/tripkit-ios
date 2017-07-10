@@ -8,8 +8,6 @@
 
 import Foundation
 
-import SGCoreKit
-
 extension Loc {
   
   public static var Trip: String {
@@ -58,6 +56,12 @@ extension Loc {
     let format = NSLocalizedString("To %@", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd)")
     return String(format: format, to)
   }
+
+  public static func To(from: String, to: String) -> String {
+    let format = NSLocalizedString("%@ to %@", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "For describing a time interval, e.g., '8:30 to 8:43'")
+    return String(format: format, from, to)
+  }
+  
   
   @objc(Stops:)
   public static func Stops(_ count: Int) -> String {

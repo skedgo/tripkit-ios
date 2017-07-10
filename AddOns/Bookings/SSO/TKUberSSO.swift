@@ -8,7 +8,7 @@
 
 import Foundation
 
-import SGBookingKit
+
 
 fileprivate struct SSOResult : OAuthData {
   let accessToken: String?

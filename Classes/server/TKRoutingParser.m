@@ -127,7 +127,7 @@
   
   [self.context performBlockAndWait:^{
     // create an empty request
-    TripRequest *request = [TripRequest insertRequestIntoTripKitContext:self.context];
+    TripRequest *request = [TripRequest insertEmptyIntoContext:self.context];
     
     // parse everything
     NSArray *added = [self parseAndAddResult:json
@@ -153,7 +153,7 @@
 {
   [self.context performBlock:^{
     // create an empty request
-    TripRequest *request = [TripRequest insertRequestIntoTripKitContext:self.context];
+    TripRequest *request = [TripRequest insertEmptyIntoContext:self.context];
     
     // parse everything
     NSArray *added = [self parseAndAddResult:json
@@ -223,7 +223,7 @@
     [keyToTripGroups enumerateKeysAndObjectsUsingBlock:
      ^(id<NSCopying> key, NSArray *tripGroupsArray, BOOL *stop) {
 #pragma unused(stop)
-       TripRequest *request = [TripRequest insertRequestIntoTripKitContext:self.context];
+       TripRequest *request = [TripRequest insertEmptyIntoContext:self.context];
        
        NSArray *newTrips = [self parseAndAddResultWithTripGroups:tripGroupsArray
                                                 segmentTemplates:segmentTemplatesJson
@@ -422,7 +422,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           }
           
           // always update these as those might be new or updated, as long as they didn't get deleted
-          UIColor *newColor = [SVKParserHelper colorForDictionary:refDict[@"serviceColor"]];
+          SGKColor *newColor = [SVKParserHelper colorForDictionary:refDict[@"serviceColor"]];
           service.color     = newColor                      ?: service.color;
           service.frequency = refDict[@"frequency"]         ?: service.frequency;
           service.lineName  = refDict[@"serviceName"]       ?: service.lineName;

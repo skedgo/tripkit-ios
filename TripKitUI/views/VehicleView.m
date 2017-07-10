@@ -8,7 +8,8 @@
 
 #import "VehicleView.h"
 
-@import SGCoreUIKit;
+#import "UIColor+Variations.h"
+
 
 @interface VehicleView ()
 

@@ -5,19 +5,19 @@ use_frameworks!
 platform :ios, '9.3'
 
 def shared_pods
-  pod 'SGCoreKit/Core', git: 'git@github.com:skedgo/shared-ios.git'
-  pod 'SGCoreKit/Rx',   git: 'git@github.com:skedgo/shared-ios.git'
-  pod 'SGSearchKit',    git: 'git@github.com:skedgo/shared-ios.git'
-  pod 'SGCoreUIKit',    git: 'git@github.com:skedgo/shared-ios.git'
-  pod 'SGUIKit',        git: 'git@github.com:skedgo/shared-ios.git'
-  pod 'SGBookingKit',   git: 'git@github.com:skedgo/shared-ios.git'
-  
   pod 'RxSwift',        '~> 3.0'
   pod 'RxCocoa',        '~> 3.0'
   pod 'Marshal'
 
-  pod 'AFNetworking'
+  pod 'Kingfisher'
+  pod 'ASPolygonKit'
+  pod 'ASPolylineView'
   pod 'SGPulsingAnnotationView'
+  pod 'KeychainAccess'
+  pod 'KVNProgress'
+  pod 'MAKVONotificationCenter'
+  pod 'SwiftyJSON'
+  pod 'OAuthSwift'
 end
 
 target 'TripKit' do

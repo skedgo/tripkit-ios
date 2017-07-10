@@ -23,6 +23,7 @@ extension CLGeocoder {
       
       for placemark in placemarks {
         if let addressDictionary = placemark.addressDictionary {
+          // TODO: This is available in Contacts on iOS 11
           let address = ABCreateStringWithAddressDictionary(addressDictionary, true)
           let oneLine = address.replacingOccurrences(of: "\n", with: ", ")
           completion(oneLine)

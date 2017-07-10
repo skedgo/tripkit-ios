@@ -9,6 +9,6 @@
 #ifndef TripKit_h
 #define TripKit_h
 
-// Empty header, required to build framework
+#import "TKTripKit.h"
 
 #endif /* TripKit_h */

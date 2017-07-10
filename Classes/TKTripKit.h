@@ -9,7 +9,22 @@
 
 // Dependencies
 @import CoreData;
-@import SGCoreKit;
+
+// Kits
+#import "SGRootKit.h"
+#import "SVKServerKit.h"
+#import "STKTransportKit.h"
+
+// Helpers
+#if TARGET_OS_IPHONE
+#import "SGActions.h"
+#import "SGAlert.h"
+#import "SGImageCacher.h"
+#endif
+
+#import "SGCustomEvent.h"
+#import "SGCustomEventRecurrenceRule.h"
+
 
 // Headers
 #import "TKConstants.h"
@@ -25,13 +40,12 @@
 #import "SegmentTemplate.h"
 #import "SegmentReference.h"
 #import "Service.h"
-#import "Shape.h"
 #import "StopLocation.h"
 #import "Vehicle.h"
 #import "Alert.h"
+#import "Cell.h"
 
 // Non-core data model classes
-#import "TKColoredRoute.h"
 #import "TKSegment.h"
 #import "TKPlainCell.h"
 #import "TKTripFactory.h"
@@ -39,6 +53,7 @@
 // Helpers
 #import "TKNextSegmentScorer.h"
 #import "NSManagedObject+TKPersistence.h"
+#import "TripRequest+Classify.h"
 
 // Classification
 #import "TKTripClassifier.h"
@@ -55,6 +70,27 @@
 #import "TKBuzzInfoProvider.h"
 #import "TKTimetableDownloader.h"
 #import "TKWaypointRouter.h"
+#import "TKRealTimeUpdatableHelper.h"
+
+// Track
+#import "SGTrackHelper.h"
+
+// Search
+#import "SGAppleGeocoder.h"
+#import "SGAutocompletionDataProvider.h"
+#import "SGAutocompletionDataSource.h"
+#import "SGAutocompletionResult.h"
+#import "SGBaseGeocoder.h"
+#import "SGBuzzGeocoder.h"
+#import "SGFoursquareGeocoder.h"
+#import "SGRegionAutocompleter.h"
+#import "SGSearchDataSource.h"
+
+// Permissions
+#import "SGAddressBookManager.h"
+#import "SGCalendarManager.h"
+#import "SGLocationManager.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 

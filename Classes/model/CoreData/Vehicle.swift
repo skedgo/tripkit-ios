@@ -8,23 +8,23 @@
 
 import Foundation
 
-import SGCoreKit
+
 
 extension TKOccupancy {
   
-  public var color: UIColor? {
+  public var color: SGKColor? {
     
     switch self {
     case .unknown:
       return nil
     case .empty, .manySeatsAvailable:
-      return UIColor(red: 23/255.0, green: 177/255.0, blue: 94/255.0, alpha: 1)
+      return SGKColor(red: 23/255.0, green: 177/255.0, blue: 94/255.0, alpha: 1)
     case .fewSeatsAvailable:
-      return UIColor(red: 255/255.0, green: 181/255.0, blue: 0/255.0, alpha: 1)
+      return SGKColor(red: 255/255.0, green: 181/255.0, blue: 0/255.0, alpha: 1)
     case .standingRoomOnly, .crushedStandingRoomOnly:
-      return UIColor(red: 255/255.0, green: 150/255.0, blue: 0/255.0, alpha: 1)
+      return SGKColor(red: 255/255.0, green: 150/255.0, blue: 0/255.0, alpha: 1)
     case .full, .notAcceptingPassengers:
-      return UIColor(red: 255/255.0, green: 75/255.0, blue: 71/255.0, alpha: 1)
+      return SGKColor(red: 255/255.0, green: 75/255.0, blue: 71/255.0, alpha: 1)
     }
     
   }
@@ -54,9 +54,9 @@ extension Vehicle {
     return anyService?.number
   }
   
-  public var serviceColor: UIColor? {
+  public var serviceColor: SGKColor? {
     return occupancy?.color
-//    if let color = anyService?.color as? UIColor {
+//    if let color = anyService?.color as? SGKColor {
 //      return color
 //    } else {
 //      return anySegmentReference?.template().modeInfo?.color
@@ -79,6 +79,8 @@ extension Vehicle {
   }
 }
 
+// MARK: - MKAnnotation
+
 extension Vehicle : MKAnnotation {
   
   public var coordinate: CLLocationCoordinate2D {
@@ -96,7 +98,7 @@ extension Vehicle : MKAnnotation {
   
   public var title: String? {
     guard let modeTitle =
-      anyService?.modeTitle()?.capitalized(with: Locale.current)
+      anyService?.modeTitle?.capitalized(with: Locale.current)
       ?? anySegmentReference?.template()?.modeInfo?.descriptor
       ?? label
       else { return nil }
