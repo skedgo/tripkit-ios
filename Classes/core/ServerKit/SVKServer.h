@@ -66,7 +66,14 @@ FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileDistanceUnit;
 
 - (nullable NSURL *)currentBaseURL;
 
-- (void)updateRegionsForced:(BOOL)forceUpdate;
+/**
+ Fetched the list of regions and updates `SVKRegionManager`'s cache
+ 
+ Recommended to call from the application delegate.
+
+ @param forceUpdate Set true to force overwriting the internal cache
+ */
+- (void)updateRegionsForced:(BOOL)forceUpdate NS_SWIFT_NAME(updateRegions(forced:));
 
 - (void)requireRegions:(void(^)(NSError * _Nullable error))completion;
 

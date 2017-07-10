@@ -29,7 +29,7 @@ public enum TripKit {
     // Give the main class a nudge to wake up
     TKTripKit.sharedInstance()
     
-    SVKServer.sharedInstance().updateRegionsForced(false)
+    SVKServer.sharedInstance().updateRegions(forced: false)
   }
   
 }

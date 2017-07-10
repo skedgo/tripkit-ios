@@ -42,7 +42,7 @@
 										 success:(TKRouterSuccess)success
 										 failure:(TKRouterError)failure
 {
-  ZAssert(success && failure, @"Success and failure blocks are required");
+  ZAssert(success, @"Success block is required");
   
   if ([request isDeleted]) {
     NSError *error = [NSError errorWithCode:kSVKErrorTypeInternal
