@@ -39,6 +39,7 @@
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
 		3A787ED01D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
 		3A787ED11D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
+		3A9361C41F140F6100E4E206 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9361C61F140F6100E4E206 /* InfoPlist.strings */; };
 		3A94672B1D62B08400EEB667 /* TKLocationRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A94672A1D62B08400EEB667 /* TKLocationRealTime.swift */; };
 		3A9FF6D71DE79FA700DB4647 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6D61DE79FA700DB4647 /* Alert.swift */; };
 		3A9FF6DB1DE79FC400DB4647 /* TKReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6DA1DE79FC400DB4647 /* TKReporter.swift */; };
@@ -592,6 +593,7 @@
 		3A787ECD1D38F78A009F9A18 /* 4-Classifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "4-Classifications.xcdatamodel"; sourceTree = "<group>"; };
 		3A787ECE1D38F78A009F9A18 /* 5-PlannedTrip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "5-PlannedTrip.xcdatamodel"; sourceTree = "<group>"; };
 		3A787ECF1D38F78A009F9A18 /* 6-SegmentRealTimeVehicle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "6-SegmentRealTimeVehicle.xcdatamodel"; sourceTree = "<group>"; };
+		3A9361C51F140F6100E4E206 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A94672A1D62B08400EEB667 /* TKLocationRealTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationRealTime.swift; sourceTree = "<group>"; };
 		3A97ED101E15DF8E00BB1324 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A9FF6D61DE79FA700DB4647 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Alert.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -1269,6 +1271,7 @@
 		3AB6C62E1D1CD0060089F687 /* TripKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				3A9361C61F140F6100E4E206 /* InfoPlist.strings */,
 				3AC4DCF71DEE32B80026B238 /* data */,
 				3AFFAE111F06D17000147990 /* event */,
 				3AC4DCFC1DEE32B80026B238 /* parsing */,
@@ -2617,6 +2620,7 @@
 				3AC4DD061DEE32B80026B238 /* locationInfo-bikePod.json in Resources */,
 				3AFF6C091DEE411300E7DFCB /* hornsbyToSkedGo.json in Resources */,
 				3AABDD9D1DF7C22F0044A05B /* locationInfo-carRental.json in Resources */,
+				3A9361C41F140F6100E4E206 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3028,6 +3032,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3A9361C61F140F6100E4E206 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A9361C51F140F6100E4E206 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		3AB6C6AA1D1CD08E0089F687 /* TripKit.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

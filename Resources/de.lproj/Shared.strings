@@ -70,6 +70,9 @@
 /* Title on the button that asks users to confirm if they want to proceed with booking */
 "Confirm" = "Bestätigen";
 
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Support kontaktieren";
+
 /* Error title when GPS failed. */
 "Could not determine your current location." = "Ortung fehlgeschlagen.";
 
@@ -177,7 +180,6 @@
 
 /* Name to which receipt is sent
    Name used in Facebook
-   Sort by name
    Title for name of something (or someone) */
 "Name" = "Name";
 
@@ -198,7 +200,6 @@
 
 /* Authorisation ok button
    Default title for button that dismisses alert view
-   Error alert cancel
    Ok action */
 "OK" = "OK";
 
