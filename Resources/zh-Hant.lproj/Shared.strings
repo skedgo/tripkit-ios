@@ -342,7 +342,7 @@
 "Would you like to report a problem?" = "你想要回報問題嗎？";
 
 /* Message that informs users that T&C must be agreed before booking can be made. */
-"You need to agree to the booking terms and conditions." = "您必須同意關於訂票的相關服務條款";
+"You need to agree to the booking terms and conditions." = "您必須同意關於預訂的相關服務條款";
 
 /* Message that informs users that T&C for insurance must be agreed before booking can be made. */
 "You need to agree to the insurance terms and conditions." = "您必須同意關於附加保險的相關服務條款";
