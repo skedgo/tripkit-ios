@@ -115,7 +115,7 @@ public class Loc : NSObject {
     return NSLocalizedString("Current Location", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Title for user's current location")
   }
   
-  public static var CantFindCurrentLocation: String {
+  public static var CantFindCurrentCity: String {
     return NSLocalizedString("Can't find your current city", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "")
   }
   
@@ -153,10 +153,6 @@ public class Loc : NSObject {
   
   public static var Score: String {
     return NSLocalizedString("Score", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Sort by overall score, like a ranking.")
-  }
-  
-  public static var Name: String {
-    return NSLocalizedString("Name", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Sort by name")
   }
   
   public static var Distance: String {
