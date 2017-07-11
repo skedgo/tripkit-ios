@@ -70,6 +70,9 @@
 /* Title on the button that asks users to confirm if they want to proceed with booking */
 "Confirm" = "確認";
 
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "聯繫支援";
+
 /* Error title when GPS failed. */
 "Could not determine your current location." = "無法確認您的當前位置";
 
@@ -177,7 +180,6 @@
 
 /* Name to which receipt is sent
    Name used in Facebook
-   Sort by name
    Title for name of something (or someone) */
 "Name" = "名稱";
 
@@ -198,7 +200,7 @@
 
 /* Authorisation ok button
    Default title for button that dismisses alert view
-   Error alert cancel */
+   Ok action */
 "OK" = "好";
 
 /* Button to open Settings app section for this app */
