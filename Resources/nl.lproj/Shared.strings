@@ -1,3 +1,18 @@
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@'s";
+
+/* No comment provided by engineer. */
+"%@'s Home" = "%@'s thuis";
+
+/* No comment provided by engineer. */
+"%@'s Work" = "%@'s werk";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu herhalingen";
+
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "'%@' niet gevonden.";
+
 /* Authorization restricted alert message */
 "Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Toegang tot deze functie is niet toegestaan op uw apparaat. Check Instellingen app > Algemeen > Beperkingen of vraag uw aanbieder voor meer informatie.";
 
@@ -55,8 +70,14 @@
 /* Title on the button that asks users to confirm if they want to proceed with booking */
 "Confirm" = "Bevestigen";
 
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Support contacteren";
+
 /* Error title when GPS failed. */
 "Could not determine your current location." = "Uw huidige locatie kon niet worden bepaald.";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "Er konden geen ondersteunde gebieden worden gedownload. Probeer het later opnieuw.";
 
 /* Message that indicates the app is creating accounts for users */
 "Creating account" = "Account aanmaken";
@@ -67,8 +88,7 @@
 /* Current city */
 "Current City" = "Huidige stad";
 
-/* Current location
-   Title for user's current location */
+/* Title for user's current location */
 "Current Location" = "Huidige locatie";
 
 /* Delete action */
@@ -80,20 +100,18 @@
 /* Option for users if they don't yet have a SkedGo account */
 "Don't have an account? Sign up" = "Nog geen account? Aanmelden";
 
-/* Done action
-   Keyboard accessory button title */
+/* Done action */
 "Done" = "Klaar";
 
 /* Drop new pin */
-"DropNewPin" = "Nieuwe spelt plaatsen";
+"Drop new pin" = "Nieuwe pin neerzetten";
 
 /* Email address where receipt is sent
    Email used as Facebook username */
 "Email" = "E-mail";
 
-/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'
-   Every %day, e.g., 'Every Monday' */
-"EveryDayFormat" = "Elke %@";
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "Elke %@";
 
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "Elke dag";
@@ -162,7 +180,6 @@
 
 /* Name to which receipt is sent
    Name used in Facebook
-   Sort by name
    Title for name of something (or someone) */
 "Name" = "Naam";
 
@@ -172,8 +189,7 @@
 /* Title for sign in view when user does not have an account */
 "New account" = "Nieuwe account";
 
-/* Keyboard accessory button title to complete this step and advance to next
-   Next action */
+/* Next action */
 "Next" = "Volgende";
 
 /* No comment provided by engineer. */
@@ -184,7 +200,7 @@
 
 /* Authorisation ok button
    Default title for button that dismisses alert view
-   Error alert cancel */
+   Ok action */
 "OK" = "OK";
 
 /* Button to open Settings app section for this app */
@@ -239,6 +255,9 @@
 /* Button title to report a problem */
 "Report Problem" = "Meld probleem";
 
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "Opnieuw";
+
 /* Sports utility vehicle abbreviation */
 "SUV" = "SUV";
 
@@ -282,6 +301,9 @@
    Message that indicates the app is signing users out of their accounts */
 "Signing out" = "Afmelden";
 
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "Vanaf %@";
+
 /* Message that indicates the app is about to sign users out of their user accounts */
 "The app will now sign out" = "De app zal u nu afmelden";
 
@@ -296,6 +318,9 @@
 
 /* No comment provided by engineer. */
 "Unknown error" = "Onbekende fout";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "tot %@";
 
 /* Message that shows app is updating trip after user finalised bookings */
 "Updating trip" = "Reis wordt bijgewerkt";
@@ -347,4 +372,7 @@
 
 /* Short indicator of start-time */
 "starts at %@" = "begint om %@";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "tot %@";
 

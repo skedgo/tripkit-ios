@@ -641,6 +641,14 @@
 		3AA31F971F14CE4D00D6B8EF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3AA31F981F14CE4E00D6B8EF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3AA31F991F14CEAD00D6B8EF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3AA31FE11F14D11200D6B8EF /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AA31FE21F14D11E00D6B8EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AA31FE31F14D13000D6B8EF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AA31FE41F14D13F00D6B8EF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AA31FE51F14D14900D6B8EF /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AA31FE61F14D14900D6B8EF /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AA31FE71F14D15700D6B8EF /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AA31FE81F14D15700D6B8EF /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationInfoTest.swift; sourceTree = "<group>"; };
 		3AABDD9C1DF7C22F0044A05B /* locationInfo-carRental.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental.json"; sourceTree = "<group>"; };
 		3AABDD9E1DF7D2E30044A05B /* TKOpeningHours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKOpeningHours.swift; sourceTree = "<group>"; };
@@ -3046,6 +3054,12 @@
 				3AA31F7F1F14CD4900D6B8EF /* es */,
 				3AA31F971F14CE4D00D6B8EF /* zh-Hans */,
 				3AA31F991F14CEAD00D6B8EF /* zh-Hant */,
+				3AA31FE11F14D11200D6B8EF /* da */,
+				3AA31FE21F14D11E00D6B8EF /* fr */,
+				3AA31FE31F14D13000D6B8EF /* it */,
+				3AA31FE41F14D13F00D6B8EF /* ko */,
+				3AA31FE51F14D14900D6B8EF /* nl */,
+				3AA31FE71F14D15700D6B8EF /* pt */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -3102,6 +3116,8 @@
 				3A551D931E60D8C700332942 /* it */,
 				3AA31F801F14CD4A00D6B8EF /* es */,
 				3AA31F981F14CE4E00D6B8EF /* zh-Hans */,
+				3AA31FE61F14D14900D6B8EF /* nl */,
+				3AA31FE81F14D15700D6B8EF /* pt */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

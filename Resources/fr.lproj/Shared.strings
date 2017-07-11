@@ -180,7 +180,6 @@
 
 /* Name to which receipt is sent
    Name used in Facebook
-   Sort by name
    Title for name of something (or someone) */
 "Name" = "Nom";
 
@@ -201,7 +200,6 @@
 
 /* Authorisation ok button
    Default title for button that dismisses alert view
-   Error alert cancel
    Ok action */
 "OK" = "OK";
 

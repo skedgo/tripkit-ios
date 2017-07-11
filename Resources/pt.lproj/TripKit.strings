@@ -13,13 +13,20 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ ciclo amigável";
 
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ paradas";
+
+/* For describing a time interval, e.g., '8:30 to 8:43'
+   From %time1 to %time2. (old key: TimeFromToShortFormat) */
+"%@ to %@" = "%@ até %@";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ sem trânsito";
 
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
 "%@ wheelchair friendly" = "%@ cadeira de rodas amigável";
 
-/* No comment provided by engineer. */
+/* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 parada";
 
 /* No comment provided by engineer. */
@@ -35,8 +42,17 @@
    Single line instruction to arrive */
 "Arrive" = "Chegada";
 
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "Chegada as %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "Chegada em %@ as %@";
+
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Chega em";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+"At %@" = "Em %@";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "Reservar com FlitWays";
@@ -50,6 +66,9 @@
 /* No comment provided by engineer. */
 "Call" = "Chamada";
 
+/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+"Call %@" = "Chamar %@";
+
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "Conectar a Internet para obter viagens";
 
@@ -62,14 +81,17 @@
 /* Destination of the bus */
 "Direction" = "Direção";
 
-/* Walking time */
-"for %@" = "por %@";
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "Disconnect";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Vazio";
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Poucos lugares disponíveis";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "De %@";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Cheio";
@@ -89,6 +111,12 @@
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "Eu chegarei em %@ as %@.";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "Eu vou pegar o %@ as %@ de %@.";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Entretanto, vamos explorar %@ e aproveitar suas viagens";
 
@@ -98,6 +126,15 @@
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
 "Leave" = "Sair";
+
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "Deixar %@";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "Deixar %@ as %@";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "Sair as %@";
 
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "Sair em";
@@ -120,7 +157,7 @@
 /* Title of button to get more details about an alert */
 "More info" = "Mais informação";
 
-/* Indicating no trips have been planned within 24 hrs */
+/* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Nenhum trajeto planejado";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
@@ -135,8 +172,14 @@
 /* No comment provided by engineer. */
 "Open Ola" = "Abrir Ola";
 
+/* Title for opening hours */
+"Opening Hours" = "Opening Hours";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Planejar uma viagem e ele aparecerá aqui.";
+
+/* No comment provided by engineer. */
+"Public holiday" = "Public holiday";
 
 /* No comment provided by engineer. */
 "Real-time" = "Tempo real";
@@ -147,17 +190,26 @@
 /* Send SMS action */
 "Send SMS" = "Enviar SMS";
 
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "Setup";
+
 /* Show website action */
 "Show website" = "Mostrar website";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Sala de pé só";
 
-/* Number of stops before you get off a vehicle */
-"%@ stops" = "%@ paradas";
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "Para %@";
 
 /* Title for a trip */
 "Trip" = "Trajeto";
+
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "Atualizado %@ atrás";
+
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "Veículo %@ atualizado %@ atrás";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "Estamos ocupados recibiendo su próximo viaje. Por favor espera...";
@@ -167,6 +219,12 @@
 
 /* No comment provided by engineer. */
 "Wheelchair accessible" = "Acesso a cadeiras de rodas";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "at %@";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "por %@";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch um Taxi";
