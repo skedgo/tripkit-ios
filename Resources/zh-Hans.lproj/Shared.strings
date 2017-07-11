@@ -70,6 +70,9 @@
 /* Title on the button that asks users to confirm if they want to proceed with booking */
 "Confirm" = "确认";
 
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "联系技术支持";
+
 /* Error title when GPS failed. */
 "Could not determine your current location." = "无法定位您的当前位置。";
 
@@ -177,7 +180,6 @@
 
 /* Name to which receipt is sent
    Name used in Facebook
-   Sort by name
    Title for name of something (or someone) */
 "Name" = "名称";
 
@@ -198,7 +200,7 @@
 
 /* Authorisation ok button
    Default title for button that dismisses alert view
-   Error alert cancel */
+   Ok action */
 "OK" = "好";
 
 /* Button to open Settings app section for this app */
@@ -228,6 +230,9 @@
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
 "Press 'search' for more..." = "点击'搜寻'来取得更多结果...";
 
+/* No comment provided by engineer. */
+"Read more..." = "了解更多...";
+
 /* Indicator for real-time information */
 "Real-time" = "实时";
 
@@ -252,6 +257,9 @@
 
 /* Button title to report a problem */
 "Report Problem" = "反馈问题";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "重新尝试";
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "越野车";
