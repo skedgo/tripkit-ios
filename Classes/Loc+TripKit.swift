@@ -45,14 +45,14 @@ extension Loc {
     return String(format: format, date)
   }
   
-  @objc(From:)
-  public static func From(_ from: String) -> String {
+  @objc(FromLocation:)
+  public static func From(location from: String) -> String {
     let format = NSLocalizedString("From %@", tableName: "TripKit", bundle: .tripKit, comment: "Departure location. (old key: PrimaryLocationStart)")
     return String(format: format, from)
   }
 
-  @objc(To:)
-  public static func To(_ to: String) -> String {
+  @objc(ToLocation:)
+  public static func To(location to: String) -> String {
     let format = NSLocalizedString("To %@", tableName: "TripKit", bundle: .tripKit, comment: "Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd)")
     return String(format: format, to)
   }
@@ -80,7 +80,7 @@ extension Loc {
 
 extension Bundle {
   
-  public static let tripKit: Bundle = .tripKit
+  public static let tripKit: Bundle = TKTripKit.bundle()
   
 }
 

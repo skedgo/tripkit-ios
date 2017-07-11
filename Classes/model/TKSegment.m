@@ -983,12 +983,12 @@ NSString *const UninitializedString =  @"UninitializedString";
 		} else if ([self isPublicTransport]) {
 			NSString *departure = [self departureLocation];
 			if (departure.length > 0) {
-				_primaryLocationString = [Loc From:departure];
+				_primaryLocationString = [Loc FromLocation:departure];
 			}
 		} else {
 			NSString *destination = [self arrivalLocation:YES];
 			if (destination.length > 0) {
-        _primaryLocationString = [Loc To: destination];
+        _primaryLocationString = [Loc ToLocation: destination];
 			}
 		}
 
