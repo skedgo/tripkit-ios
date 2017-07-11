@@ -62,7 +62,6 @@ extension Loc {
     return String(format: format, from, to)
   }
   
-  
   @objc(Stops:)
   public static func Stops(_ count: Int) -> String {
     switch count {

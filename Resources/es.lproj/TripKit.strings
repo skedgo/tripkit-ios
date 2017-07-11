@@ -13,7 +13,11 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ bicicleta-amigable";
 
-/* From %time1 to %time2. (old key: TimeFromToShortFormat) */
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ paradas";
+
+/* For describing a time interval, e.g., '8:30 to 8:43'
+   From %time1 to %time2. (old key: TimeFromToShortFormat) */
 "%@ to %@" = "%@ hasta %@";
 
 /* Duration without traffic */
@@ -22,7 +26,7 @@
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
 "%@ wheelchair friendly" = "%@ silla de ruedas-amigable";
 
-/* No comment provided by engineer. */
+/* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 parada";
 
 /* No comment provided by engineer. */
@@ -76,6 +80,9 @@
 
 /* Destination of the bus */
 "Direction" = "Dirección";
+
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "Desconectar";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Vacío";
@@ -150,7 +157,7 @@
 /* Title of button to get more details about an alert */
 "More info" = "Más información";
 
-/* Indicating no trips have been planned within 24 hrs */
+/* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Ningún viaje planeado";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
@@ -166,13 +173,13 @@
 "Open Ola" = "Abrir Ola";
 
 /* Title for opening hours */
-"Opening Hours" = "Opening Hours";
+"Opening Hours" = "Horario";
 
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Planifica un viaje y se mostrará aquí.";
 
 /* No comment provided by engineer. */
-"Public holiday" = "Public holiday";
+"Public holiday" = "Día festivo";
 
 /* No comment provided by engineer. */
 "Real-time" = "Tiempo Real";
@@ -183,14 +190,14 @@
 /* Send SMS action */
 "Send SMS" = "Enviar SMS";
 
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "Establecer";
+
 /* Show website action */
 "Show website" = "Ir al Sitio Web";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Espacio de pie solamente";
-
-/* Number of stops before you get off a vehicle */
-"%@ stops" = "%@ paradas";
 
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "Hacia %@";

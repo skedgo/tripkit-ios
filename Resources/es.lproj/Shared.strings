@@ -8,7 +8,7 @@
 "%@'s Work" = "Trabajo de %@";
 
 /* Number of repeats. (old key: NumberRecurrences) */
-"%lu recurrences" = "%lu recurrences";
+"%lu recurrences" = "%lu repeticiones";
 
 /* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
 "'%@' not found." = "'%@' no encontrado.";
@@ -69,6 +69,9 @@
 
 /* Title on the button that asks users to confirm if they want to proceed with booking */
 "Confirm" = "Confirmar";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Contactar soporte";
 
 /* Error title when GPS failed. */
 "Could not determine your current location." = "No se pudo determinar su ubicación actual.";
@@ -177,7 +180,6 @@
 
 /* Name to which receipt is sent
    Name used in Facebook
-   Sort by name
    Title for name of something (or someone) */
 "Name" = "Nombre";
 
@@ -198,7 +200,7 @@
 
 /* Authorisation ok button
    Default title for button that dismisses alert view
-   Error alert cancel */
+   Ok action */
 "OK" = "Aceptar";
 
 /* Button to open Settings app section for this app */
@@ -228,6 +230,9 @@
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
 "Press 'search' for more..." = "Pulse 'Buscar' para obtener más...";
 
+/* No comment provided by engineer. */
+"Read more..." = "Leer más...";
+
 /* Indicator for real-time information */
 "Real-time" = "Tiempo Real";
 
@@ -252,6 +257,9 @@
 
 /* Button title to report a problem */
 "Report Problem" = "Reportar Problema";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "Reintentar";
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "SUV";

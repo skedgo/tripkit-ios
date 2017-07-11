@@ -636,6 +636,8 @@
 		3AA03E551F0BC9DB00C6B337 /* SGRegionAutocompleter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SGRegionAutocompleter.m; sourceTree = "<group>"; };
 		3AA03E561F0BC9DB00C6B337 /* SGSearchDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSearchDataSource.h; sourceTree = "<group>"; };
 		3AA31F731F14126C00D6B8EF /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AA31F7F1F14CD4900D6B8EF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AA31F801F14CD4A00D6B8EF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationInfoTest.swift; sourceTree = "<group>"; };
 		3AABDD9C1DF7C22F0044A05B /* locationInfo-carRental.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental.json"; sourceTree = "<group>"; };
 		3AABDD9E1DF7D2E30044A05B /* TKOpeningHours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKOpeningHours.swift; sourceTree = "<group>"; };
@@ -3038,6 +3040,7 @@
 			children = (
 				3A9361C51F140F6100E4E206 /* de */,
 				3AA31F731F14126C00D6B8EF /* fi */,
+				3AA31F7F1F14CD4900D6B8EF /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -3092,6 +3095,7 @@
 				3A551D7C1E60D6F900332942 /* da */,
 				3A551D871E60D79500332942 /* ko */,
 				3A551D931E60D8C700332942 /* it */,
+				3AA31F801F14CD4A00D6B8EF /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
