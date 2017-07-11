@@ -70,6 +70,9 @@
 /* Title on the button that asks users to confirm if they want to proceed with booking */
 "Confirm" = "Confirmar";
 
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Contactar o suporte";
+
 /* Error title when GPS failed. */
 "Could not determine your current location." = "Não foi possível determinar a sua localização actual.";
 
@@ -227,6 +230,9 @@
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
 "Press 'search' for more..." = "Apertar 'pesquisa' para mais...";
 
+/* No comment provided by engineer. */
+"Read more..." = "Saiba mais...";
+
 /* Indicator for real-time information */
 "Real-time" = "Tempo real";
 
@@ -273,15 +279,6 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'..." = "Procurando por '%@'...";
 
-/* Label on location with action to select it, e.g., 'Select Hilton, Paris' */
-"Select %@" = "Selecione %@";
-
-/* Label to select location which doesn't have a title */
-"Select location" = "Set Localização";
-
-/* Tap to set location */
-"SetLocation" = "Toque para definir a localização";
-
 /* Button that goes to the Setting's app */
 "Settings" = "Configurações";
 
@@ -306,6 +303,9 @@
 
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "De %@";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "Toque para definir a localização";
 
 /* Message that indicates the app is about to sign users out of their user accounts */
 "The app will now sign out" = "O aplicativo vai agora fechar";

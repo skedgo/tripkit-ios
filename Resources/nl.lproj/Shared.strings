@@ -230,6 +230,9 @@
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
 "Press 'search' for more..." = "Druk op 'zoeken' voor meer...";
 
+/* No comment provided by engineer. */
+"Read more..." = "Lees meer...";
+
 /* Indicator for real-time information */
 "Real-time" = "Real-time";
 
@@ -276,9 +279,6 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'..." = "Op zoek naar '%@'...";
 
-/* Tap to set location */
-"SetLocation" = "Tik om de locatie in te stellen";
-
 /* Button that goes to the Setting's app */
 "Settings" = "Instellingen";
 
@@ -303,6 +303,9 @@
 
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Vanaf %@";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "Tik om een locatie in te stellen";
 
 /* Message that indicates the app is about to sign users out of their user accounts */
 "The app will now sign out" = "De app zal u nu afmelden";
