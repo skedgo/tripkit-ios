@@ -90,20 +90,16 @@
   return [[gregorian dateFromComponents:components] dateByAddingTimeInterval:3600];
 }
 
-- (NSDate *)dateAtSameTimeInTimeZone:(NSTimeZone *)timeZone afterAddingDays:(NSInteger)days
+- (NSDate *)dateAtSameTimeInTimeZone:(NSTimeZone *)timeZoneOrNil afterAddingDays:(NSInteger)days
 {
-  if (! timeZone) {
-    timeZone = [NSTimeZone defaultTimeZone];
-  }
+  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+  gregorian.timeZone = timeZoneOrNil ?: [NSTimeZone defaultTimeZone];
   
-  CFTimeZoneRef tz = (__bridge CFTimeZoneRef)(timeZone);
-  
-  CFAbsoluteTime startTime = CFDateGetAbsoluteTime((__bridge CFDateRef)(self));
-  CFGregorianDate gregorianStartDate = CFAbsoluteTimeGetGregorianDate(startTime, tz);
-  gregorianStartDate.day = gregorianStartDate.day + (SInt8) days;
-  return [NSDate dateWithTimeIntervalSinceReferenceDate:CFGregorianDateGetAbsoluteTime(gregorianStartDate, tz)];
+  NSCalendarUnit units = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+  NSDateComponents *components = [gregorian components:units fromDate:self];
+  components.day += days;
+  return [gregorian dateFromComponents:components];
 }
-
 
 + (NSDate *)dateFromISO8601String:(NSString *)value
 {
