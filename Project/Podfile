@@ -15,7 +15,6 @@ def shared_pods
   pod 'SGPulsingAnnotationView'
   pod 'KeychainAccess'
   pod 'KVNProgress'
-  pod 'MAKVONotificationCenter'
   pod 'SwiftyJSON'
   pod 'OAuthSwift'
 end
