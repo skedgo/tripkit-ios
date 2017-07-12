@@ -82,7 +82,7 @@
 "Direction" = "Direção";
 
 /* To disconnect/unlink from a service provider, e.g., Uber */
-"Disconnect" = "Disconnect";
+"Disconnect" = "Desconectar";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Vazio";
@@ -173,13 +173,13 @@
 "Open Ola" = "Abrir Ola";
 
 /* Title for opening hours */
-"Opening Hours" = "Opening Hours";
+"Opening Hours" = "Horas de Abertura";
 
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Planejar uma viagem e ele aparecerá aqui.";
 
 /* No comment provided by engineer. */
-"Public holiday" = "Public holiday";
+"Public holiday" = "Feriado";
 
 /* No comment provided by engineer. */
 "Real-time" = "Tempo real";
@@ -191,7 +191,7 @@
 "Send SMS" = "Enviar SMS";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
-"Setup" = "Setup";
+"Setup" = "Configuração";
 
 /* Show website action */
 "Show website" = "Mostrar website";
