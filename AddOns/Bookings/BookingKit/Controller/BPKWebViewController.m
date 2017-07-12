@@ -8,6 +8,15 @@
 
 #import "BPKWebViewController.h"
 
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#else
+@import TripKit;
+@import TripKitUI;
+#endif
+
+
 @interface BPKWebViewController ()
 
 @end
@@ -29,7 +38,7 @@
       if (isOAuth) {
         [self.delegate webControllerDidFinishOauthWithSuccess:YES];
       } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"An unexpected error occurred. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"An unexpected error occurred. Please try again later." delegate:nil cancelButtonTitle:Loc.OK otherButtonTitles:nil];
         [alertView show];
       }
     }

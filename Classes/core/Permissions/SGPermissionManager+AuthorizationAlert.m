@@ -11,6 +11,8 @@
 #import "SGActions.h"
 #import "SGStylemanager.h"
 
+#import "TripKit/TripKit-Swift.h"
+
 #if TARGET_OS_IPHONE
 
 @implementation SGPermissionManager (AuthorizationAlert)
@@ -82,7 +84,7 @@
     [alert addAction:NSLocalizedStringFromTableInBundle(@"Open Settings", @"Shared", [SGStyleManager bundle], @"Button to open Settings app section for this app") handler:self.openSettingsHandler];
   } else {
     alert.hasCancel = NO;
-    [alert addAction:NSLocalizedStringFromTableInBundle(@"OK", @"Shared", [SGStyleManager bundle], @"Authorisation ok button") handler:nil];
+    [alert addAction:Loc.OK handler:nil];
   }
   
   // make sure to to show this on the main thread

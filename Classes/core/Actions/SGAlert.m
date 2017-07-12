@@ -10,6 +10,8 @@
 
 #import "SGStyleManager.h"
 
+#import "TripKit/TripKit-Swift.h"
+
 #if TARGET_OS_IPHONE
 
 @interface SGAlert ()
@@ -67,7 +69,7 @@
 
 + (NSString *)cancelTitle
 {
-  return NSLocalizedStringFromTableInBundle(@"OK", @"Shared", [SGStyleManager bundle], @"Default title for button that dismisses alert view");
+  return Loc.OK;
 }
 
 @end

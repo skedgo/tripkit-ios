@@ -373,7 +373,7 @@
   
   // All alert has "OK" button
   NSBundle *bundle = [SGStyleManager bundle];
-  [alert addAction:NSLocalizedStringFromTableInBundle(@"OK", @"Shared", bundle, nil) handler:nil];
+  [alert addAction:Loc.OK handler:nil];
   
   // Add a Settings button if needed.
   if (error != nil && [self _shouldOpenSettingsFromError:error]) {

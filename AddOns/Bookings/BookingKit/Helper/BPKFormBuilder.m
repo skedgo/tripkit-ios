@@ -148,7 +148,7 @@
   NSMutableArray *sections = [NSMutableArray array];
   
   BPKSection *reminder = [[BPKSection alloc] init];
-  reminder.title = NSLocalizedStringFromTableInBundle(@"Reminder", @"Shared", [SGStyleManager bundle], @"Section title at the end of a booking that allows users to set reminders");
+  reminder.title = Loc.Reminder;
   
   // Add reminder item
   [reminder addItem:[self reminderItemWithManager:manager]];
@@ -166,7 +166,7 @@
 + (BPKSectionItem *)reminderItemWithManager:(BPKManager *)manager
 {
   return [[BPKSectionItem alloc] initWithJson:[self jsonForId:kBPKFormIdReminder
-                                                        title:NSLocalizedStringFromTableInBundle(@"For when to leave", @"Shared", [SGStyleManager bundle], @"Option that allows users to indicate whether reminder is needed")
+                                                        title:Loc.ForWhenToLeave
                                                          type:kBPKFormTypeSwitch
                                                   placeholder:nil
                                                         value:@(manager.wantsReminder) // default is want reminder
@@ -177,7 +177,7 @@
 + (BPKSectionItem *)reminderHeadwayItemWithManager:(BPKManager *)manager
 {
   return [[BPKSectionItem alloc] initWithJson:[self jsonForId:kBPKFormIdHeadway
-                                                        title:NSLocalizedStringFromTableInBundle(@"Minutes before trip", @"Shared", [SGStyleManager bundle], @"Option that allows users to indicate how eary to show trip reminder")
+                                                        title:Loc.MinutesBeforeTrip
                                                          type:kBPKFormTypeStepper
                                                   placeholder:nil
                                                         value:@(manager.reminderHeadway) // default is 3 minutes
