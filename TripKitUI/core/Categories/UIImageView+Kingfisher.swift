@@ -14,13 +14,22 @@ extension UIImageView {
   
   @objc(setImageWithURL:)
   public func kf_setImage(with url: URL?) {
-    kf.setImage(with: url)
+    kf_setImage(with: url, placeholder: nil)
   }
 
   @objc(setImageWithURL:placeholderImage:)
-  public func kf_setImage(with url: URL?, placeholder: SGKImage) {
-    kf.setImage(with: url, placeholder: placeholder)
+  public func kf_setImage(with url: URL?, placeholder: SGKImage?) {
+    
+    let options: KingfisherOptionsInfo?
+    if let url = url, url.path.contains("@2x") {
+      options = [.scaleFactor(2)]
+    } else if let url = url, url.path.contains("@3x") {
+      options = [.scaleFactor(3)]
+    } else {
+      options = nil
+    }
+    
+    kf.setImage(with: url, placeholder: placeholder, options: options)
   }
-  
   
 }

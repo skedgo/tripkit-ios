@@ -35,6 +35,8 @@ extension SGTripSummaryCell {
       _tripAccessibilityLabel = tkTrip.accessibilityLabel
     }
     
+    self._trip = trip
+
     // updating colours, adds all the text
     update(for: trip, nano: nano, highlight: highlight)
     
@@ -51,12 +53,10 @@ extension SGTripSummaryCell {
     
     showTickIcon = false
     
-    // subscript to time notifcations
-    self._trip = trip
     updateAlertStatus()
     
+    // subscript to time notifcations
     guard let object = trip as? NSObject else { return }
-    
     let departure = object.rx.observe(Date.self, "departureTime")
     let arrival = object.rx.observe(Date.self, "arrivalTime")
     Observable.merge([departure, arrival])
