@@ -119,8 +119,7 @@
 /* Credit card expiry date */
 "Expiry Date" = "Ablaufdatum";
 
-/* Option that allows users to indicate whether reminder is needed
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "For when to leave" = "Wenn ich gehen muss";
 
 /* Free as in beer */
@@ -165,8 +164,7 @@
 /* Indicating a payment is in progress */
 "Making payment" = "Bezahlung erfolgt...";
 
-/* Option that allows users to indicate how eary to show trip reminder
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "Minutes before trip" = "Minuten vor Abfahrt";
 
 /* More results proposal */
@@ -198,9 +196,7 @@
 /* Countdown cell 'now' indicator */
 "Now" = "Jetzt";
 
-/* Authorisation ok button
-   Default title for button that dismisses alert view
-   Ok action */
+/* Ok action */
 "OK" = "OK";
 
 /* Button to open Settings app section for this app */
@@ -239,8 +235,7 @@
 /* Title for section that asks users where payment receipt should be sent */
 "Receipt" = "Bestätigung";
 
-/* Action title to add/remove reminder
-   Section title at the end of a booking that allows users to set reminders */
+/* Action title to add/remove reminder */
 "Reminder" = "Erinnerung";
 
 /* Repeats daily */
