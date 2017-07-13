@@ -43,7 +43,7 @@ extension SGTripSummaryCell {
     // segments
     updateSegments(nano: nano)
     
-    let alpha: CGFloat = faded ? 0.2 : 0.1
+    let alpha: CGFloat = faded || nano ? 0.2 : 1
     mainLabel?.alpha = alpha
     segmentView?.alpha = alpha
     costsLabel?.alpha = alpha
