@@ -8,8 +8,13 @@
 
 import Foundation
 
+#if TK_NO_FRAMEWORKS
+#else
+  import TripKit
+#endif
+
+
 import class CoreLocation.CLGeocoder
-import func AddressBookUI.ABCreateStringWithAddressDictionary
 
 extension CLGeocoder {
   public func reverseGeocodeAddress(forCoordinate coordinate: CLLocationCoordinate2D, completion: @escaping (String?) -> ()) {
@@ -22,11 +27,8 @@ extension CLGeocoder {
       }
       
       for placemark in placemarks {
-        if let addressDictionary = placemark.addressDictionary {
-          // TODO: This is available in Contacts on iOS 11
-          let address = ABCreateStringWithAddressDictionary(addressDictionary, true)
-          let oneLine = address.replacingOccurrences(of: "\n", with: ", ")
-          completion(oneLine)
+        if let postalAddress = SGLocationHelper.postalAddress(for: placemark) {
+          completion(postalAddress)
           return
         }
       }

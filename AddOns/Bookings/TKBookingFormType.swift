@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 public enum TKBookingFormType {
   
   case auth(BPKForm)
