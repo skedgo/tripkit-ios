@@ -162,9 +162,9 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
   if ([self authorizationRestrictionsApply]) {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     switch (status) {
-#if TARGET_OS_IPHONE
+//#if TARGET_OS_IPHONE
       case kCLAuthorizationStatusAuthorizedWhenInUse:
-#endif
+//#endif
       case kCLAuthorizationStatusAuthorizedAlways:
         return SGAuthorizationStatusAuthorized;
       case kCLAuthorizationStatusDenied:
