@@ -40,6 +40,7 @@
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
 		3A787ED01D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
 		3A787ED11D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
+		3A8F61211F190CE80017ACDA /* SGLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F61201F190CE80017ACDA /* SGLocationManager.swift */; };
 		3A9361C41F140F6100E4E206 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9361C61F140F6100E4E206 /* InfoPlist.strings */; };
 		3A94672B1D62B08400EEB667 /* TKLocationRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A94672A1D62B08400EEB667 /* TKLocationRealTime.swift */; };
 		3A9FF6D71DE79FA700DB4647 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6D61DE79FA700DB4647 /* Alert.swift */; };
@@ -593,6 +594,7 @@
 		3A787ECD1D38F78A009F9A18 /* 4-Classifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "4-Classifications.xcdatamodel"; sourceTree = "<group>"; };
 		3A787ECE1D38F78A009F9A18 /* 5-PlannedTrip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "5-PlannedTrip.xcdatamodel"; sourceTree = "<group>"; };
 		3A787ECF1D38F78A009F9A18 /* 6-SegmentRealTimeVehicle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "6-SegmentRealTimeVehicle.xcdatamodel"; sourceTree = "<group>"; };
+		3A8F61201F190CE80017ACDA /* SGLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGLocationManager.swift; sourceTree = "<group>"; };
 		3A9361C51F140F6100E4E206 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A94672A1D62B08400EEB667 /* TKLocationRealTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationRealTime.swift; sourceTree = "<group>"; };
 		3A97ED101E15DF8E00BB1324 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/TripKit.strings; sourceTree = "<group>"; };
@@ -1210,6 +1212,7 @@
 				3AA03E381F0BC9DB00C6B337 /* SGCalendarManager.m */,
 				3AA03E391F0BC9DB00C6B337 /* SGLocationManager.h */,
 				3AA03E3A1F0BC9DB00C6B337 /* SGLocationManager.m */,
+				3A8F61201F190CE80017ACDA /* SGLocationManager.swift */,
 				3AA03E3B1F0BC9DB00C6B337 /* SGPermissionManager+AuthorizationAlert.h */,
 				3AA03E3C1F0BC9DB00C6B337 /* SGPermissionManager+AuthorizationAlert.m */,
 				3AA03E3D1F0BC9DB00C6B337 /* SGPermissionManager.h */,
@@ -3005,6 +3008,7 @@
 				3AFFADC41F068E8B00147990 /* BPKBTHelper.m in Sources */,
 				3AFFAD5D1F068E8B00147990 /* UIView+Keyboard.m in Sources */,
 				3ADD5B6A1D9CDF0C00A1742F /* TripMapManager.m in Sources */,
+				3A8F61211F190CE80017ACDA /* SGLocationManager.swift in Sources */,
 				3AFFADC61F068E8B00147990 /* BPKCost.m in Sources */,
 				3AFFAE0A1F06BA3700147990 /* TripRequest+Shareable.swift in Sources */,
 				3AB6C7101D1CD08E0089F687 /* TKSettings.m in Sources */,

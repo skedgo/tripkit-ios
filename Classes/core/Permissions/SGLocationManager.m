@@ -143,43 +143,6 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
 
 #pragma mark - SGPermissionManager implementations
 
-- (BOOL)featureIsAvailable
-{
-  return YES;
-}
-
-- (BOOL)authorizationRestrictionsApply
-{
-  return YES;
-}
-
-- (SGAuthorizationStatus)authorizationStatus
-{
-  if (! [CLLocationManager locationServicesEnabled]) {
-    return SGAuthorizationStatusDenied;
-  }
-  
-  if ([self authorizationRestrictionsApply]) {
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    switch (status) {
-//#if TARGET_OS_IPHONE
-      case kCLAuthorizationStatusAuthorizedWhenInUse:
-//#endif
-      case kCLAuthorizationStatusAuthorizedAlways:
-        return SGAuthorizationStatusAuthorized;
-      case kCLAuthorizationStatusDenied:
-        return SGAuthorizationStatusDenied;
-      case kCLAuthorizationStatusRestricted:
-        return SGAuthorizationStatusRestricted;
-      case kCLAuthorizationStatusNotDetermined:
-        return SGAuthorizationStatusNotDetermined;
-    }
-  }
-  
-  // authorized by default otherwise
-  return SGAuthorizationStatusAuthorized;
-}
-
 - (void)askForPermission:(void (^)(BOOL enabled))completion
 {
 #if TARGET_OS_IPHONE
@@ -189,11 +152,6 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
 #endif
   
   self.completionBlock = completion;
-}
-
-- (NSString *)authorizationAlertText
-{
-  return NSLocalizedStringFromTableInBundle(@"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app.", @"Shared", [SGStyleManager bundle], @"Location iOS6+ authorisation needed text");
 }
 
 #pragma mark - Public methods
