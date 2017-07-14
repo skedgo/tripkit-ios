@@ -303,8 +303,6 @@
 		3AFFABDF1F06854F00147990 /* STKVehicular.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB861F06854F00147990 /* STKVehicular.m */; };
 		3AFFAC211F06855F00147990 /* SGButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFABE21F06855F00147990 /* SGButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFAC221F06855F00147990 /* SGButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFABE31F06855F00147990 /* SGButton.m */; };
-		3AFFAC231F06855F00147990 /* SGImageButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFABE41F06855F00147990 /* SGImageButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFFAC241F06855F00147990 /* SGImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFABE51F06855F00147990 /* SGImageButton.m */; };
 		3AFFAC251F06855F00147990 /* SGLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFABE61F06855F00147990 /* SGLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFAC261F06855F00147990 /* SGLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFABE71F06855F00147990 /* SGLabel.m */; };
 		3AFFAC271F06855F00147990 /* SGStyleManager+SGCoreUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFABE91F06855F00147990 /* SGStyleManager+SGCoreUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -899,8 +897,6 @@
 		3AFFAB861F06854F00147990 /* STKVehicular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKVehicular.m; sourceTree = "<group>"; };
 		3AFFABE21F06855F00147990 /* SGButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGButton.h; sourceTree = "<group>"; };
 		3AFFABE31F06855F00147990 /* SGButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGButton.m; sourceTree = "<group>"; };
-		3AFFABE41F06855F00147990 /* SGImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageButton.h; sourceTree = "<group>"; };
-		3AFFABE51F06855F00147990 /* SGImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageButton.m; sourceTree = "<group>"; };
 		3AFFABE61F06855F00147990 /* SGLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGLabel.h; sourceTree = "<group>"; };
 		3AFFABE71F06855F00147990 /* SGLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGLabel.m; sourceTree = "<group>"; };
 		3AFFABE91F06855F00147990 /* SGStyleManager+SGCoreUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SGStyleManager+SGCoreUI.h"; sourceTree = "<group>"; };
@@ -1857,8 +1853,6 @@
 			children = (
 				3AFFABE21F06855F00147990 /* SGButton.h */,
 				3AFFABE31F06855F00147990 /* SGButton.m */,
-				3AFFABE41F06855F00147990 /* SGImageButton.h */,
-				3AFFABE51F06855F00147990 /* SGImageButton.m */,
 				3AFFABE61F06855F00147990 /* SGLabel.h */,
 				3AFFABE71F06855F00147990 /* SGLabel.m */,
 			);
@@ -2428,7 +2422,6 @@
 				3AA03E681F0BC9DB00C6B337 /* SGAutocompletionResult.h in Headers */,
 				3AFFAD811F068E8B00147990 /* AMKCommunicator.h in Headers */,
 				3AFFAB971F06854F00147990 /* NSDate+Helpers.h in Headers */,
-				3AFFAC231F06855F00147990 /* SGImageButton.h in Headers */,
 				3AB6C6241D1CD0060089F687 /* TripKit.h in Headers */,
 				3AFFADC31F068E8B00147990 /* BPKBTHelper.h in Headers */,
 				3AA03E601F0BC9DB00C6B337 /* SGPermissionManager.h in Headers */,
@@ -2751,7 +2744,6 @@
 				3AFFAB941F06854F00147990 /* MKMapView+ZoomLevel.m in Sources */,
 				3A32CD7B1DC2EC4F003B158B /* TKRegionInformation.swift in Sources */,
 				3AFFAD621F068E8B00147990 /* AKAccountViewController.swift in Sources */,
-				3AFFAC241F06855F00147990 /* SGImageButton.m in Sources */,
 				3AFFAE001F06B1D000147990 /* StopLocation.swift in Sources */,
 				3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */,
 				3AB6C6D21D1CD08E0089F687 /* TKNextSegmentScorer.m in Sources */,
