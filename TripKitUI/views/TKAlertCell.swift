@@ -64,7 +64,7 @@ class TKAlertCell: UITableViewCell {
     titleLabel.text = alert.title
     iconView.image = alert.icon
     if let iconURL = alert.iconURL {
-      iconView.kf.setImage(with: iconURL)
+      iconView.setImage(with: iconURL)
     }
     
     if let text = alert.text {

@@ -13,12 +13,12 @@ import Kingfisher
 extension UIImageView {
   
   @objc(setImageWithURL:)
-  public func kf_setImage(with url: URL?) {
-    kf_setImage(with: url, placeholder: nil)
+  public func setImage(with url: URL?) {
+    setImage(with: url, placeholder: nil)
   }
 
   @objc(setImageWithURL:placeholderImage:)
-  public func kf_setImage(with url: URL?, placeholder: SGKImage?) {
+  public func setImage(with url: URL?, placeholder: SGKImage?) {
     
     let options: KingfisherOptionsInfo?
     if let url = url, url.path.contains("@2x") {
