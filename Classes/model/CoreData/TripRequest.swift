@@ -169,7 +169,7 @@ extension TripRequest {
   public func determineRegions() -> [SVKRegion] {
     let start = self.fromLocation.coordinate
     let end = self.toLocation.coordinate
-    return SVKRegionManager.sharedInstance().localRegions(start: start, end: end)
+    return SVKRegionManager.shared.localRegions(start: start, end: end)
   }
     
   /// The primary alternatives for this request, which is constructed by

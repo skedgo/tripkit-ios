@@ -107,13 +107,13 @@ extension Array {
   ///            coordinate regions
   fileprivate func limitedToRegion(_ region: MKCoordinateRegion, coordinateForElement handler: (Element) -> CLLocationCoordinate2D) -> [Element] {
     
-    if SVKRegionManager.sharedInstance().hasRegions() {
+    if SVKRegionManager.shared.hasRegions {
       return filter { element in
         let coordinate = handler(element)
         if !CLLocationCoordinate2DIsValid(coordinate) {
           return true
         } else {
-          return SVKRegionManager.sharedInstance().regions(for: region, include: coordinate)
+          return SVKRegionManager.shared.regions(for: region, include: coordinate)
         }
       }
       

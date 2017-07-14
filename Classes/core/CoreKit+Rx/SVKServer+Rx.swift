@@ -21,13 +21,13 @@ public enum HTTPMethod: String {
 extension Reactive where Base: SVKServer {
   public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Observable<SVKRegion> {
     return requireRegions().map {
-        SVKRegionManager.sharedInstance().region(coordinate, coordinate)
+        SVKRegionManager.shared.region(coordinate, coordinate)
     }
   }
   
   public func requireRegion(_ coordinateRegion: MKCoordinateRegion) -> Observable<SVKRegion> {
     return requireRegions().map {
-        SVKRegionManager.sharedInstance().region(for: coordinateRegion)
+        SVKRegionManager.shared.region(for: coordinateRegion)
     }
   }
 

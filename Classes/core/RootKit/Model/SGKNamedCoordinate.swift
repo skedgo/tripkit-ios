@@ -238,9 +238,15 @@ extension SGKNamedCoordinate: SGKGeocodable {
 
 extension CLLocationCoordinate2D {
   public var isValid: Bool {
-    
     let suspicious = (abs(latitude) < 0.01 && abs(longitude) < 0.01)
     assert(!suspicious, "Suspicious coordinate: \(self)")
     return CLLocationCoordinate2DIsValid(self) && !suspicious
+  }
+  
+  public func distance(from other: CLLocationCoordinate2D) -> CLLocationDistance? {
+    guard isValid && other.isValid else { return nil }
+    let me = CLLocation(latitude: latitude, longitude: longitude)
+    let you = CLLocation(latitude: other.latitude, longitude: other.longitude)
+    return me.distance(from: you)
   }
 }

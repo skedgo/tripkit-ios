@@ -11,7 +11,7 @@ import Foundation
 extension SGKNamedCoordinate {
   
   public var regions: Set<SVKRegion> {
-    return SVKRegionManager.sharedInstance().localRegions(for: self.coordinate)
+    return SVKRegionManager.shared.localRegions(for: self.coordinate)
   }
   
 }

@@ -37,6 +37,7 @@ public class SVKRegion : NSObject, NSCoding, Unmarshaling {
     public let pointDisplaysImage: Bool = true
     public let pointImage: SGKImage? = SGStyleManager.imageNamed("icon-map-info-city")
     public var pointImageURL: URL? = nil
+    public weak var region: SVKRegion? = nil
     
     public required init(object: MarshaledObject) throws {
       title = try object.value(for: "title")
@@ -104,6 +105,10 @@ public class SVKRegion : NSObject, NSCoding, Unmarshaling {
     if encodedPolygon.characters.count == 0 {
       throw SVKRegionParserError.emptyPolygon
     }
+    
+    super.init()
+    
+    cities.forEach { $0.region = self }
   }
   
   

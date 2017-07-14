@@ -18,20 +18,20 @@ FOUNDATION_EXPORT NSString *const RegionManagerRegionsUpdatedNotification;
 
 @interface SVKRegionManager : NSObject
 
-+ (SVKRegionManager *)sharedInstance;
++ (SVKRegionManager *)sharedInstance NS_REFINED_FOR_SWIFT;
 
-- (BOOL)hasRegions;
-
-- (void)updateRegions:(NSArray<SVKRegion *> *)regions
-          modeDetails:(NSDictionary<NSString *, id>*)modeDetails
-             hashCode:(NSInteger)hashCode;
+@property (readonly) BOOL hasRegions;
 
 /**
  @returns Array of `SVKRegion` instances if regions are fetched already, `nil` otherwise.
  */
-- (nullable NSArray<SVKRegion *> *)regions;
+@property (readonly, nullable) NSArray<SVKRegion *> *regions;
 
-- (nullable NSNumber *)regionsHash;
+@property (readonly, nullable) NSNumber *regionsHash;
+
+- (void)updateRegions:(NSArray<SVKRegion *> *)regions
+          modeDetails:(NSDictionary<NSString *, id>*)modeDetails
+             hashCode:(NSInteger)hashCode;
 
 - (BOOL)coordinateIsPartOfAnyRegion:(CLLocationCoordinate2D)coordinate;
 

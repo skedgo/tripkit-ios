@@ -11,7 +11,7 @@ import Foundation
 extension StopLocation {
   public var region: SVKRegion? {
     if let name = regionName {
-      return SVKRegionManager.sharedInstance().localRegion(named: name)
+      return SVKRegionManager.shared.localRegion(named: name)
     } else {
       return location?.regions.first
     }

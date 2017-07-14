@@ -11,6 +11,8 @@ import CoreLocation
 
 extension SVKRegionManager {
   
+  public static let shared = SVKRegionManager.__sharedInstance()
+  
   /// Determines the local (non-international) regions for the coordinate pair
   ///
   /// - Parameters:
@@ -41,7 +43,7 @@ extension SVKRegionManager {
   ///     provided coordinate
   @objc(localRegionsForCoordinate:)
   public func localRegions(for coordinate: CLLocationCoordinate2D) -> Set<SVKRegion> {
-    guard coordinate.isValid, let regions = regions() else { return [] }
+    guard coordinate.isValid, let regions = regions else { return [] }
     
     let containing = regions.filter { $0.contains(coordinate) }
     return Set(containing)
@@ -52,7 +54,7 @@ extension SVKRegionManager {
   /// - Returns: The local (non-international) region matching the provided code
   @objc(localRegionWithName:)
   public func localRegion(named name: String) -> SVKRegion? {
-    return regions()?.first { $0.name == name }
+    return regions?.first { $0.name == name }
   }
   
   
@@ -75,6 +77,30 @@ extension SVKRegionManager {
   @objc(timeZoneForCoordinate:)
   public func timeZone(for coordinate: CLLocationCoordinate2D) -> TimeZone? {
     return localRegions(for: coordinate).first?.timeZone
+  }
+  
+  
+  /// Find city closest to provided coordinate, in same region
+  ///
+  /// - Parameter target: Coordinate for which to find closest city
+  /// - Returns: Nearest City
+  public func city(nearestTo target: CLLocationCoordinate2D) -> SVKRegion.City? {
+    typealias Match = (SVKRegion.City, CLLocationDistance)
+    
+    let cities = localRegions(for: target).reduce(mutating: []) {
+      $0.append(contentsOf: $1.cities)
+    }
+    let best = cities.reduce(nil) { acc, city -> Match? in
+      guard let distance = target.distance(from: city.coordinate) else { return acc }
+      
+      if let existing = acc?.1, existing < distance {
+        return acc
+      } else {
+        return (city, distance)
+      }
+    }
+    
+    return best?.0
   }
   
   
