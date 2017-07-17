@@ -25,7 +25,7 @@ extension SGLocationManager {
       return .denied
     }
     
-    guard !authorizationRestrictionsApply() else {
+    guard authorizationRestrictionsApply() else {
       return .authorized
     }
     
