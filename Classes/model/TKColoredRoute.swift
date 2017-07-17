@@ -24,7 +24,9 @@ public class TKColoredRoute: NSObject {
 
   @objc(initWithWaypoints:from:to:withColor:dashPattern:isTravelled:)
   public init(path: [MKAnnotation], from: Int, to: Int, color: SGKColor?, dashPattern: [NSNumber]?, isTravelled: Bool) {
-    self.path = Array(path[from...to])
+    let first = from > to ? 0 : from
+    let last  = to < from ? path.count - 1 : to
+    self.path = Array(path[first...last])
     routeColor = color
     routeDashPattern = dashPattern
     routeIsTravelled = isTravelled
