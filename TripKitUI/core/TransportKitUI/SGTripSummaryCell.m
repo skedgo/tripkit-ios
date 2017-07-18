@@ -334,6 +334,17 @@
                   font:nil
        foregroundColor:self.costsLabel.textColor];
   }
+
+  // calories
+  [self appendString:costDict[@(STKTripCostTypeCalories)]
+        toAttributed:attributed
+                font:nil
+     foregroundColor:nil];
+
+  [self appendString:@" ⋅ "
+        toAttributed:attributed
+                font:nil
+     foregroundColor:self.costsLabel.textColor];
   
   // carbon
   [self appendString:costDict[@(STKTripCostTypeCarbon)]

@@ -670,6 +670,7 @@ typedef NSUInteger SGTripFlag;
       values[@(STKTripCostTypeDuration)] = durationString;
     }
   }
+  values[@(STKTripCostTypeCalories)] = [SGStyleManager exerciseStringForCalories: self.totalCalories.doubleValue];
   values[@(STKTripCostTypeCarbon)]   = [self.totalCarbon toCarbonString];
   if (self.totalPrice) {
     values[@(STKTripCostTypePrice)]  = [self.totalPrice toMoneyString:[self currencySymbol]];

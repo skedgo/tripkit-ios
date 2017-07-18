@@ -15,3 +15,20 @@ extension SGKColor {
   }
   
 }
+
+// MARK: - Formatting
+
+extension SGStyleManager {
+
+  private static var exerciseFormatter: EnergyFormatter = {
+    let formatter = EnergyFormatter()
+    formatter.isForFoodEnergyUse = false // For exercise
+    return formatter
+  }()
+
+  @objc(exerciseStringForCalories:)
+  public static func exerciseString(calories: Double) -> String {
+    return exerciseFormatter.string(fromValue: calories, unit: .kilocalorie)
+  }
+  
+}
