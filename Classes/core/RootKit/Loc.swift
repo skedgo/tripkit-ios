@@ -11,6 +11,10 @@ import Foundation
 public class Loc : NSObject {
   
   fileprivate override init() { super.init() }
+
+  public static var Back: String {
+    return NSLocalizedString("Back", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Accessibility label for 'back' or 'previous' button")
+  }
   
   public static var Cancel: String {
     return NSLocalizedString("Cancel", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Cancel action")
