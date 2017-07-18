@@ -196,11 +196,11 @@ public class OAuthClient {
     let data = NSKeyedArchiver.archivedData(withRootObject: toStore)
     
     // INFO: This is here for updating the testing data.
-    // Uncomment, get the file, and update OAuthClientTest.
-//      let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//      let pathURL = path.appendingPathComponent("oauthclient.data")
-//      try! data.write(to: pathURL)
-//      print(pathURL)
+    // Uncomment, run tests, get the file, and update OAuthClientTest.
+//    let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//    let pathURL = path.appendingPathComponent("oauthclient.data")
+//    try! data.write(to: pathURL)
+//    print(pathURL)
     
     keychain[data: "OAuthClientState"] = data
   }

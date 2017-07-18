@@ -31,6 +31,9 @@
 /* Authorisation needed title */
 "Authorisation needed" = "需要用户授权";
 
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "返回";
+
 /* Type of vehicle : bicycle */
 "Bicycle" = "自行车";
 
@@ -119,8 +122,7 @@
 /* Credit card expiry date */
 "Expiry Date" = "到期时间";
 
-/* Option that allows users to indicate whether reminder is needed
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "For when to leave" = "出发时间";
 
 /* Free as in beer */
@@ -159,14 +161,13 @@
 /* Title for unnamed location */
 "Location" = "位置";
 
-/* Location iOS6+ authorisation needed text */
+/* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "本功能需要使用定位服务. 请到设定 > 隐私 > 定位服务确认服务是开启的，同时也请确认您已授权本App使用定位服务.";
 
 /* Indicating a payment is in progress */
 "Making payment" = "正在付款";
 
-/* Option that allows users to indicate how eary to show trip reminder
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "Minutes before trip" = "提前多久开始行程";
 
 /* More results proposal */
@@ -198,9 +199,7 @@
 /* Countdown cell 'now' indicator */
 "Now" = "现在";
 
-/* Authorisation ok button
-   Default title for button that dismisses alert view
-   Ok action */
+/* Ok action */
 "OK" = "好";
 
 /* Button to open Settings app section for this app */
@@ -239,8 +238,7 @@
 /* Title for section that asks users where payment receipt should be sent */
 "Receipt" = "收据";
 
-/* Action title to add/remove reminder
-   Section title at the end of a booking that allows users to set reminders */
+/* Action title to add/remove reminder */
 "Reminder" = "提醒";
 
 /* Repeats daily */
