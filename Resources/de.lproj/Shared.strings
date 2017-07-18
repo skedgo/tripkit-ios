@@ -31,6 +31,9 @@
 /* Authorisation needed title */
 "Authorisation needed" = "Autorisierung benötigt";
 
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Zurück";
+
 /* Type of vehicle : bicycle */
 "Bicycle" = "Fahrrad";
 
@@ -158,7 +161,7 @@
 /* Title for unnamed location */
 "Location" = "Ort";
 
-/* Location iOS6+ authorisation needed text */
+/* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Ortungsdienste sind für dieses Feature benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Ortungsdiesten > TripGo.";
 
 /* Indicating a payment is in progress */
