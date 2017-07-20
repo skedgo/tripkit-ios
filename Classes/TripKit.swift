@@ -48,7 +48,7 @@ public enum TripKit {
   /// `applicationWillEnterForeground`.
   public static func prepareForNewSession() {
     // Give the main class a nudge to wake up
-    TripKit.shared
+    let _ = TripKit.shared
     
     SVKServer.shared.updateRegions(forced: false)
   }

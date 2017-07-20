@@ -16,11 +16,11 @@ extension TKSettings {
   
   public static var sortOrder: STKTripCostType {
     get {
-      let index = UserDefaults.shared().integer(forKey: DefaultsKey.sortIndex.rawValue)
+      let index = UserDefaults.shared.integer(forKey: DefaultsKey.sortIndex.rawValue)
       return STKTripCostType(rawValue: index) ?? .score
     }
     set {
-      UserDefaults.shared().set(newValue.rawValue, forKey: DefaultsKey.sortIndex.rawValue)
+      UserDefaults.shared.set(newValue.rawValue, forKey: DefaultsKey.sortIndex.rawValue)
     }
   }
   

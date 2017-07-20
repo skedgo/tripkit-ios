@@ -29,7 +29,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
 @property (nonatomic, copy)   NSArray<NSBundle *>* fileBundles;
 @property (nonatomic, assign) NSUInteger serverIndex;
 
-@property (nonatomic, assign) SGServerType lastServerType;
+@property (nonatomic, assign) SVKServerType lastServerType;
 @property (nonatomic, strong) NSString* lastDevelopmentServer;
 
 @end
@@ -60,16 +60,16 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
                             ofIconType:(SGStyleModeIconType)type
 {
   NSString *regionsURLString;
-  switch ([self selectedServerType]) {
-    case SGServerTypeProduction:
+  switch ([self serverType]) {
+    case SVKServerTypeProduction:
       regionsURLString = @"https://tripgo.skedgo.com/satapp";
       break;
       
-    case SGServerTypeBeta:
+    case SVKServerTypeBeta:
       regionsURLString = @"https://bigbang.buzzhives.com/satapp-beta";
       break;
 
-    case SGServerTypeLocal:
+    case SVKServerTypeLocal:
       regionsURLString = [SVKServer developmentServer];
       break;
   }
@@ -378,13 +378,13 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
  */
 - (void)updateFromSettings
 {
-  SGServerType currentType = [[NSUserDefaults sharedDefaults] integerForKey:SVKDefaultsKeyServerType];
+  SVKServerType currentType = [[NSUserDefaults sharedDefaults] integerForKey:SVKDefaultsKeyServerType];
   NSString *developmentServer = [SVKServer developmentServer];
 
   // This method gets called tons of times, but we only want to clear existing
   // regions if and only if user has changed server type in the Beta build.
   if (currentType != self.lastServerType
-      || (currentType == SGServerTypeLocal && ![developmentServer isEqualToString:self.lastDevelopmentServer])) {
+      || (currentType == SVKServerTypeLocal && ![developmentServer isEqualToString:self.lastDevelopmentServer])) {
     
     // Clearing regions below will trigger a user defaults update, so we make sure we ignore it
     self.lastServerType = currentType;
@@ -409,16 +409,16 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
                 completion:(nullable void (^)(BOOL success, NSError *error))completion
 {
   NSString *regionsURLString;
-  switch ([SVKServer selectedServerType]) {
-    case SGServerTypeProduction:
+  switch ([SVKServer serverType]) {
+    case SVKServerTypeProduction:
       regionsURLString = @"https://tripgo.skedgo.com/satapp/regions.json";
       break;
       
-    case SGServerTypeBeta:
+    case SVKServerTypeBeta:
       regionsURLString = @"https://bigbang.buzzhives.com/satapp-beta/regions.json";
       break;
 
-    case SGServerTypeLocal:
+    case SVKServerTypeLocal:
       regionsURLString = [[SVKServer developmentServer] stringByAppendingString:@"regions.json"];
       break;
   }
@@ -883,15 +883,6 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   }
 }
 
-+ (SGServerType)selectedServerType
-{
-  if ([SGKBetaHelper isBeta]) {
-    return (SGServerType) [[NSUserDefaults sharedDefaults] integerForKey:SVKDefaultsKeyServerType];
-  } else {
-    return SGServerTypeProduction;
-  }
-}
-
 #pragma mark - Lazy accessors
 
 - (NSArray<NSURL *> *)regionServers
@@ -900,18 +891,18 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
     return _regionServers;
   }
   
-  switch ([SVKServer selectedServerType]) {
-    case SGServerTypeLocal: {
+  switch ([SVKServer serverType]) {
+    case SVKServerTypeLocal: {
       _regionServers = @[ [NSURL URLWithString:[SVKServer developmentServer] ] ];
       break;
     }
       
-    case SGServerTypeBeta: {
+    case SVKServerTypeBeta: {
       _regionServers = @[ [NSURL URLWithString:@"https://bigbang.buzzhives.com/satapp-beta/"] ];
       break;
     }
 
-    case SGServerTypeProduction: {
+    case SVKServerTypeProduction: {
       _regionServers = [self productionServers];
       break;
     }

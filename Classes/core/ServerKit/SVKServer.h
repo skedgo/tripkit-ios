@@ -19,10 +19,10 @@ typedef void (^SGServerSuccessBlock)(NSInteger status, id _Nullable responseObje
 typedef void (^SGServerFailureBlock)(NSError *error);
 typedef void (^SGServerGenericBlock)(NSInteger status, id _Nullable responseObject, NSError * _Nullable error);
 
-typedef NS_ENUM(NSInteger, SGServerType) {
-  SGServerTypeProduction = 0,
-  SGServerTypeBeta,
-  SGServerTypeLocal
+typedef NS_ENUM(NSInteger, SVKServerType) {
+  SVKServerTypeProduction = 0,
+  SVKServerTypeBeta,
+  SVKServerTypeLocal
 };
 
 FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileTrackUsage;

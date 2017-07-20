@@ -21,6 +21,10 @@ extension Date {
     self = date as Date
   }
   
+  public var iso8601: String {
+    return (self as NSDate).iso8601String()
+  }
+  
   public func midnight(in timeZone: TimeZone) -> Date {
     var calendar = Calendar.autoupdatingCurrent
     calendar.timeZone = timeZone
