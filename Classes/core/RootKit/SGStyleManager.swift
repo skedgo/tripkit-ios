@@ -23,6 +23,8 @@ extension SGStyleManager {
   private static var exerciseFormatter: EnergyFormatter = {
     let formatter = EnergyFormatter()
     formatter.isForFoodEnergyUse = false // For exercise
+    formatter.numberFormatter.maximumSignificantDigits = 2
+    formatter.numberFormatter.usesSignificantDigits = true
     return formatter
   }()
 
