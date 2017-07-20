@@ -1,0 +1,381 @@
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@의";
+
+/* No comment provided by engineer. */
+"%@'s Home" = "%@의 집";
+
+/* No comment provided by engineer. */
+"%@'s Work" = "%@의 직장";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu번  반복";
+
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "'%@'을 찾을 수 없습니다.";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "기기에서 이 기능이 제한되어 있습니다. 설정 > , 일반  > 에서 차단 세팅을 확인하거나 통신사에 문의하세요.";
+
+/* Accessibility label for action button */
+"Action" = "동작";
+
+/* Default title for alert view */
+"Alert" = "알림";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "이미 계정을 가지고 계시나요? 로그인하세요!";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "인증";
+
+/* Authorisation needed title */
+"Authorisation needed" = "인증이 필요합니다.";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "자전거";
+
+/* Credit card CVC */
+"CVC" = "CVC";
+
+/* No comment provided by engineer. */
+"Can't find your current city" = "현재 도시를 찾을 수 없습니다.";
+
+/* Cancel action */
+"Cancel" = "취소";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "취소됨";
+
+/* No comment provided by engineer. */
+"Cannot proceed without a valid email address" = "유효한 이메일 주소 없이 계속할 수 없습니다.";
+
+/* Type of vehicle : car */
+"Car" = "자동차";
+
+/* Credit card number */
+"Card No." = "카드 번호";
+
+/* Instruction for changing password */
+"Change" = "변경";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "조회 옵션 변경";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "체크마크";
+
+/* Close action */
+"Close" = "닫기";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "확인";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Contact support";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "회원님의 위치를 파악 할 수 없습니다.";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "TripGo 서버에서 지원되는 지역이 다운로드 되지 않았습니다. 나중에 다시 시도해 주세요.";
+
+/* Message that indicates the app is creating accounts for users */
+"Creating account" = "계정을 만들고 있습니다.";
+
+/* Section title for credit card payment */
+"Credit card" = "신용카드";
+
+/* Current city */
+"Current City" = "현재 도시";
+
+/* Title for user's current location */
+"Current Location" = "현재 위치";
+
+/* Delete action */
+"Delete" = "삭제";
+
+/* Sort by distance */
+"Distance" = "거리";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "계정이 없으신가요? 가입하기";
+
+/* Done action */
+"Done" = "완료";
+
+/* Drop new pin */
+"Drop new pin" = "지도에 새 위치를 표시합니다.";
+
+/* Email address where receipt is sent
+   Email used as Facebook username */
+"Email" = "이메일";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "매 %@";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "매일";
+
+/* Credit card expiry date */
+"Expiry Date" = "유효기간";
+
+/* Option that allows users to indicate whether reminder is needed
+   Reminder to leave preference */
+"For when to leave" = "출발 시간";
+
+/* Free as in beer */
+"Free" = "무료";
+
+/* No comment provided by engineer. */
+"Full name" = "성명";
+
+/* No comment provided by engineer. */
+"Getting a lift" = "차 얻어타기";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "알림이 설정되어 있습니다.";
+
+/* Include contacts. */
+"Include contacts" = "연락처에 포함";
+
+/* Include events. */
+"Include events" = "일정 포함";
+
+/* Instant results proposal */
+"Instant results" = "즉각적인 결과";
+
+/* Title for alert that indicates the user account has become invalid */
+"Invalid account" = "계정이 존재하지 않습니다.";
+
+/* Name placeholder text */
+"John Appleseed" = "John Appleseed";
+
+/* Used when user signs in using Facebook */
+"Linking Facebook" = "페이스북에 연결";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "로딩";
+
+/* Title for unnamed location */
+"Location" = "위치";
+
+/* Location iOS6+ authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "위치 서비스는 이 기능을 요구합니다.  설정으로 가서 어플리케이션  > 개인 정보 > 위치 서비스를 켜주세요. ";
+
+/* Indicating a payment is in progress */
+"Making payment" = "결제하기";
+
+/* Option that allows users to indicate how eary to show trip reminder
+   Reminder to leave preference */
+"Minutes before trip" = "출발하기 몇분 전입니다.";
+
+/* More results proposal */
+"More results" = "더 많은 결과 보기";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "오토바이";
+
+/* Title for view that shows the summary of a user's account information */
+"My account" = "내 계정";
+
+/* Name to which receipt is sent
+   Name used in Facebook
+   Title for name of something (or someone) */
+"Name" = "이름";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "사용 안 함";
+
+/* Title for sign in view when user does not have an account */
+"New account" = "새 계정";
+
+/* Next action */
+"Next" = "다음";
+
+/* No comment provided by engineer. */
+"No CO₂" = "No CO₂";
+
+/* Countdown cell 'now' indicator */
+"Now" = "지금";
+
+/* Authorisation ok button
+   Default title for button that dismisses alert view
+   Ok action */
+"OK" = "확인";
+
+/* Button to open Settings app section for this app */
+"Open Settings" = "설정 열기";
+
+/* Open in Safari action */
+"Open in Safari" = "사파리에서 열기";
+
+/* No comment provided by engineer. */
+"Password" = "비밀번호";
+
+/* Indicating a payment is successful */
+"Payment successful" = "결제 성공";
+
+/* Section title for Paypal payment */
+"Paypal" = "페이팔";
+
+/* Please select a location prompt */
+"Please select a location" = "위치를 선택하십시오.";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "다시 시도하시거나 위치를 직접 지정하세요.";
+
+/* Please verify the location prompt */
+"Please verify the location" = "위치를 확인 하십시오";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more..." = "더 자세한 정보를 원하시면 검색을 눌러주세요.";
+
+/* No comment provided by engineer. */
+"Read more..." = "Read more...";
+
+/* Indicator for real-time information */
+"Real-time" = "실시간";
+
+/* Title for section that asks users where payment receipt should be sent */
+"Receipt" = "영수증";
+
+/* Action title to add/remove reminder
+   Section title at the end of a booking that allows users to set reminders */
+"Reminder" = "미리 알림";
+
+/* Repeats daily */
+"Repeats daily" = "매일 반복";
+
+/* Repeats monthly */
+"Repeats monthly" = "월간 반복";
+
+/* Repeats weekly */
+"Repeats weekly" = "매주 반복";
+
+/* Repeats yearly */
+"Repeats yearly" = "매년 반복";
+
+/* Button title to report a problem */
+"Report Problem" = "문제점 보고";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "재시도";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "점수";
+
+/* Empty search bar placeholder */
+"Search" = "검색";
+
+/* No comment provided by engineer. */
+"Search Results" = "검색 결과";
+
+/* No comment provided by engineer. */
+"Search for a city" = "도시 검색";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'..." = "%@ 검색 중...";
+
+/* Button that goes to the Setting's app */
+"Settings" = "설정";
+
+/* No comment provided by engineer. */
+"Sign in" = "로그인";
+
+/* Instruction for signing out user account */
+"Sign out" = "로그아웃";
+
+/* No comment provided by engineer. */
+"Sign up" = "회원가입";
+
+/* No comment provided by engineer. */
+"Sign up cannot be completed without a valid password" = "유효한 비밀 번호 없이 가입을 완료할 수 없습니다.";
+
+/* Message that indicates the app is signing users into their user accounts */
+"Signing in" = "로그인 중...";
+
+/* Message that indicates the app has successfully completed signing out
+   Message that indicates the app is signing users out of their accounts */
+"Signing out" = "로그아웃 중...";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "%@에 시작..";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "위치를 설정 하려면 여기를 누르세요.";
+
+/* Message that indicates the app is about to sign users out of their user accounts */
+"The app will now sign out" = "지금 로그아웃 합니다.";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "추적-  끄기";
+
+/* user location button - follow */
+"Tracking - on" = "추적-  켜기";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "제목으로 추척하기";
+
+/* No comment provided by engineer. */
+"Unknown error" = "알수없는 오류";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "%@까지";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "경로 업데이트";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "필수 필드에서 누락 된 값입니다.";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "주중";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "주말";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "휠체어 사용가능";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "문제를 보고하시겠습니까?";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "예약 약관에 동의해야 합니다.";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "보험 계약 조건에 동의해야 합니다.";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "캘린더 엑세스가 거부되어 있습니다. > 설정으로 가서  > 캘린더 개인 정보 사용을 허용해 주세요.";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "주소록 엑세스가 거부되어 있습니다. > 설정으로 가서  > 주소록 개인 정보 사용을 허용해 주세요.";
+
+/* Indicator that an event is all-day */
+"all-day" = "종일";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "%@ 도착";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "%@ 출발";
+
+/* Short indicator of end-time */
+"ends at %@" = "%@에 끝";
+
+/* Email placeholder text */
+"example@example.com" = "예: name@example.com";
+
+/* Credit card expiry date placeholder, mm/yy */
+"mm/yy" = "월/연도";
+
+/* Short indicator of start-time */
+"starts at %@" = "%@에 시작";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "%@에";
+

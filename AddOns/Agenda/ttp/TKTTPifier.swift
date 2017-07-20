@@ -379,7 +379,7 @@ extension TKTTPifier.SegmentOverview: TKTTPifierTripOptionSegmentType {
 
   var tripSegmentModeColor: SGKColor? { return modeInfo.color }
 
-  var tripSegmentModeImage: UIImage? {
+  var tripSegmentModeImage: SGKImage? {
     return TKSegmentHelper.segmentImage(.listMainMode, modeInfo: modeInfo, modeIdentifier: nil, isRealTime: false)
   }
   
@@ -410,13 +410,25 @@ extension TKTTPifier.SegmentOverview: TKTTPifierTripOptionSegmentType {
   
   // MARK: STKDisplayableRoute
 
-  func routeColour() -> UIColor? {
+  var routeColor: SGKColor? {
     return tripSegmentModeColor
   }
   
-  func routePath() -> [Any] {
+  var routePath: [Any] {
     guard let polyline = self.polyline else { return [] }
     return CLLocation.decodePolyLine(polyline)
+  }
+  
+  var routeDashPattern: [NSNumber]? {
+    return nil
+  }
+  
+  var showRoute: Bool {
+    return true
+  }
+  
+  var routeIsTravelled: Bool {
+    return true
   }
 
 }

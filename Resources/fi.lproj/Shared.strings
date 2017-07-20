@@ -1,0 +1,379 @@
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "Käyttäjän %@";
+
+/* No comment provided by engineer. */
+"%@'s Home" = "Käyttäjän %@ Koti";
+
+/* No comment provided by engineer. */
+"%@'s Work" = "Käyttäjän %@ Työ";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu kerta(a)";
+
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "Sijaintia '%@' ei löytynyt";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Tämän ominaisuuden käyttöoikeutta on rajoitettu laitteessasi. Tarkista laitteesi Asetukset > Yleiset > Rajoitukset tai kysy neuvoa laitteen toimittajalta.";
+
+/* Accessibility label for action button */
+"Action" = "Toiminta";
+
+/* Default title for alert view */
+"Alert" = "Ilmoitus";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "Sinulla on jo tili? Kirjaudu sisään";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "Todennus";
+
+/* Authorisation needed title */
+"Authorisation needed" = "Lupa tarvitaan";
+
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Takaisin";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "Pyörä";
+
+/* Credit card CVC */
+"CVC" = "CVC";
+
+/* No comment provided by engineer. */
+"Can't find your current city" = "Tämänhetkistä kaupunkiasi ei löydy";
+
+/* Cancel action */
+"Cancel" = "Peruuta";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "Peruttu";
+
+/* No comment provided by engineer. */
+"Cannot proceed without a valid email address" = "Et voi jatkaa ilman voimassa olevaa sähköpostiosoitetta";
+
+/* Type of vehicle : car */
+"Car" = "Auto";
+
+/* Credit card number */
+"Card No." = "Kortin nro";
+
+/* Instruction for changing password */
+"Change" = "Muuta";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "Muuta seurantavaihtoehtoja";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "Valintamerkki";
+
+/* Close action */
+"Close" = "Sulje";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "Vahvista";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Ota yhteys tukeen";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "Tämänhetkistä sijaintiasi ei voitu määrittää.";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "Tuettuja alueita ei voitu ladata TripGo:n palvelimelle. Yritä myöhemmin uudelleen";
+
+/* Message that indicates the app is creating accounts for users */
+"Creating account" = "Luodaan tiliä";
+
+/* Section title for credit card payment */
+"Credit card" = "Luottokortti";
+
+/* Current city */
+"Current City" = "Tämänhetkinen kaupunki";
+
+/* Title for user's current location */
+"Current Location" = "Tämänhetkinen sijainti";
+
+/* Delete action */
+"Delete" = "Poista";
+
+/* Sort by distance */
+"Distance" = "Etäisyys";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "Sinulla ei ole vielä tiliä? Rekisteröidy";
+
+/* Done action */
+"Done" = "Valmis";
+
+/* Drop new pin */
+"Drop new pin" = "Sijoita uusi piste";
+
+/* Email address where receipt is sent
+   Email used as Facebook username */
+"Email" = "Sähköposti";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "Joka %@";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "Päivittäin";
+
+/* Credit card expiry date */
+"Expiry Date" = "Viim. voimassaolopv.";
+
+/* Reminder to leave preference */
+"For when to leave" = "Kun pitää lähteä";
+
+/* Free as in beer */
+"Free" = "Ilmainen";
+
+/* No comment provided by engineer. */
+"Full name" = "Koko nimi";
+
+/* No comment provided by engineer. */
+"Getting a lift" = "Hanki kyyti";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "Muistutus asetettu";
+
+/* Include contacts. */
+"Include contacts" = "Sisällytä yhteystiedot";
+
+/* Include events. */
+"Include events" = "Sisällytä tapahtumat";
+
+/* Instant results proposal */
+"Instant results" = "Pikahaun tulokset";
+
+/* Title for alert that indicates the user account has become invalid */
+"Invalid account" = "Virheellinen tili";
+
+/* Name placeholder text */
+"John Appleseed" = "Milla Matkaaja";
+
+/* Used when user signs in using Facebook */
+"Linking Facebook" = "Yhdistetään Facebookin kautta";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "Ladataan";
+
+/* Title for unnamed location */
+"Location" = "Sijainti";
+
+/* Location iOS authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Käyttääksesi tätä ominaisuutta tulee sinun sallia sijaintipalvelujen käyttö. Mene asetuksissa kohtaan Tietosuoja > Sijaintipalvelut. Varmista, että sijaintipalvelut on kytketty päälle ja anna TripGolle lupa käyttää niitä.";
+
+/* Indicating a payment is in progress */
+"Making payment" = "Maksua käsitellään";
+
+/* Reminder to leave preference */
+"Minutes before trip" = "Minuuttia ennen lähtöä";
+
+/* More results proposal */
+"More results" = "Lisää tuloksia";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "Moottoripyörä";
+
+/* Title for view that shows the summary of a user's account information */
+"My account" = "Oma tili";
+
+/* Name to which receipt is sent
+   Name used in Facebook
+   Title for name of something (or someone) */
+"Name" = "Nimi";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "Ei koskaan";
+
+/* Title for sign in view when user does not have an account */
+"New account" = "Uusi tili";
+
+/* Next action */
+"Next" = "Seuraava";
+
+/* No comment provided by engineer. */
+"No CO₂" = "Ei CO₂";
+
+/* Countdown cell 'now' indicator */
+"Now" = "Nyt";
+
+/* Ok action */
+"OK" = "Ok";
+
+/* Button to open Settings app section for this app */
+"Open Settings" = "Avaa Asetukset";
+
+/* Open in Safari action */
+"Open in Safari" = "Avaa Safarissa";
+
+/* No comment provided by engineer. */
+"Password" = "Salasana";
+
+/* Indicating a payment is successful */
+"Payment successful" = "Maksu onnistui";
+
+/* Section title for Paypal payment */
+"Paypal" = "PayPal";
+
+/* Please select a location prompt */
+"Please select a location" = "Ole hyvä ja valitse sijainti";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "Yritä uudelleen tai syötä sijainti manuaalisesti.";
+
+/* Please verify the location prompt */
+"Please verify the location" = "Ole hyvä ja vahvista sijainti";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more..." = "Paina 'Etsi' saadaksesi lisätuloksia...";
+
+/* No comment provided by engineer. */
+"Read more..." = "Lisätiedot...";
+
+/* Indicator for real-time information */
+"Real-time" = "Reaaliaikainen";
+
+/* Title for section that asks users where payment receipt should be sent */
+"Receipt" = "Kuitti";
+
+/* Action title to add/remove reminder */
+"Reminder" = "Muistutus";
+
+/* Repeats daily */
+"Repeats daily" = "Toistuu päivittäin";
+
+/* Repeats monthly */
+"Repeats monthly" = "Toistuu kuukausittain";
+
+/* Repeats weekly */
+"Repeats weekly" = "Toistuu viikoittain";
+
+/* Repeats yearly */
+"Repeats yearly" = "Toistuu vuosittain";
+
+/* Button title to report a problem */
+"Report Problem" = "Ilmoita ongelmasta";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "Yritä uudelleen";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "Pisteytys";
+
+/* Empty search bar placeholder */
+"Search" = "Hae";
+
+/* No comment provided by engineer. */
+"Search Results" = "Hakutulokset";
+
+/* No comment provided by engineer. */
+"Search for a city" = "Hae kaupunkia";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'..." = "Haetaan sijaintia '%@'...";
+
+/* Button that goes to the Setting's app */
+"Settings" = "Asetukset";
+
+/* No comment provided by engineer. */
+"Sign in" = "Kirjaudu sisään";
+
+/* Instruction for signing out user account */
+"Sign out" = "Kirjaudu ulos";
+
+/* No comment provided by engineer. */
+"Sign up" = "Rekisteröidy";
+
+/* No comment provided by engineer. */
+"Sign up cannot be completed without a valid password" = "Rekisteröinti ei onnistu ilman voimassa olevaa salasanaa";
+
+/* Message that indicates the app is signing users into their user accounts */
+"Signing in" = "Kirjaudutaan sisään";
+
+/* Message that indicates the app has successfully completed signing out
+   Message that indicates the app is signing users out of their accounts */
+"Signing out" = "Kirjaudutaan ulos";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "%@ lähtien";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "Napauta asettaaksesi sijainnin";
+
+/* Message that indicates the app is about to sign users out of their user accounts */
+"The app will now sign out" = "Sovellus sulkeutuu";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "Seuranta - pois päältä";
+
+/* user location button - follow */
+"Tracking - on" = "Seuranta - päällä";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "Seuranta - päällä (sis. kulkusuunta)";
+
+/* No comment provided by engineer. */
+"Unknown error" = "Tuntematon virhe";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "%@ asti";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "Matkaa päivitetään";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "Osa pakollisista tiedoista puuttuu.";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "Arkisin";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "Viikonloppuisin";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "Pyörätuolilla liikkuminen huomioitu";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "Haluaisitko ilmoittaa ongelmasta?";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "Sinun tulee hyväksyä varauksen käyttöehdot.";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "Sinun tulee hyväksyä vakuutuksen käyttöehdot.";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Et aiemmin sallinut tämän sovelluksen pääsyä kalenteriisi. Ole hyvä, mene kohtaan Asetukset > Yksityisyys > Kalenteri ja salli tämän sovelluksen käyttää kyseistä ominaisuutta.";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Et aiemmin sallinut tämän sovelluksen pääsyä yhteystietoihisi. Mene kohtaan Asetukset > Tietosuoja > Yhteystiedot ja salli tämän sovelluksen käyttää tätä ominaisuutta.";
+
+/* Indicator that an event is all-day */
+"all-day" = "koko päivä";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "saapuu klo %@";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "lähtee klo %@";
+
+/* Short indicator of end-time */
+"ends at %@" = "päättyy klo %@";
+
+/* Email placeholder text */
+"example@example.com" = "example@example.com";
+
+/* Credit card expiry date placeholder, mm/yy */
+"mm/yy" = "kk/vv";
+
+/* Short indicator of start-time */
+"starts at %@" = "alkaa klo %@";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "%@ asti";
+

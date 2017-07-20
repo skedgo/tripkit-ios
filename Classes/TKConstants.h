@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-FOUNDATION_EXPORT NSString *const TKDefaultsKeyLastUseSortIndex;
-
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileWeightCarbon;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileWeightHassle;
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileWeightMoney;

@@ -11,7 +11,6 @@ import XCTest
 import RxBlocking
 
 @testable import TripKit
-@testable import SGSearchKit
 
 class TKShareHelperTest: XCTestCase {
   

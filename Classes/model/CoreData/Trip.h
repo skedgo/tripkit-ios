@@ -8,7 +8,6 @@
 
 @import Foundation;
 @import CoreData;
-@import SGCoreKit;
 
 #import "TKSegment.h"
 #import "SegmentTemplate.h"
@@ -17,7 +16,7 @@
 
 @class Alert, SVKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 
-@interface Trip : NSManagedObject <TKRealTimeUpdatable, STKTrip, UIActivityItemSource> {
+@interface Trip : NSManagedObject <TKRealTimeUpdatable> {
 }
 
 #pragma mark - CoreData elements
@@ -63,6 +62,9 @@
 
 @property (nonatomic, strong, nullable) NSURL *shareURL;
 
+@property (nonatomic, strong, nullable, readonly) NSURL *saveURL;
+
+
 - (void)setAsPreferredTrip;
 
 @property (nonatomic, assign) BOOL showNoVehicleUUIDAsLift;
@@ -88,27 +90,12 @@
  */
 - (nonnull NSSet *)usedModeIdentifiers;
 
-/**
- @return Segments of this trip which do use a private (or shared) vehicle, i.e., those who return something from `usedVehicle`.
- */
-- (nonnull NSSet *)vehicleSegments;
-
-/**
- @return if the trip uses a personal vehicle (non shared) which the user might want to assign to one of their vehicles
- */
-- (STKVehicleType)usedPrivateVehicleType;
-
 - (BOOL)allowImpossibleSegments;
 
 /** 
  @return Whether trip mixes multiple modes. Note that multiple different public transport modes don't make a trip mixed-modal, but walking in between does.
  */
 - (BOOL)isMixedModal;
-
-/**
- @param vehicle The vehicle to assign this trip to. `nil` to reset to a generic vehicle.
- */
-- (void)assignVehicle:(nullable id<STKVehicular>)vehicle;
 
 /* Offset in minutes from the specified departure/arrival time.
  * E.g., if you asked for arrive-by, it'll use the arrival time.
@@ -129,6 +116,8 @@
 
 - (nonnull NSString *)constructPlainText;
 
+- (nonnull NSDictionary<NSNumber *, NSString *> *)accessibleCostValues;
+
 - (nonnull NSString *)debugString;
 
 #pragma mark - Segment accessors
@@ -137,9 +126,9 @@
  */
 - (nonnull NSArray<TKSegment *> *)segments;
 
-/* The first major segment of the trip
+/* The first major segment of the trip, according to segment properties (use mainSegment() instead)
  */
-- (nonnull TKSegment *)mainSegment;
+- (nonnull TKSegment *)inferMainSegment;
 
 /* Call this before changing the segments of a trip.
  */
@@ -152,10 +141,6 @@
 /* All public transport segments of the trip
  */
 - (nonnull NSArray<TKSegment *> *)allPublicTransport;
-
-#pragma mark - Traffic light stuff
-
-- (STKTripCostType)primaryCostType;
 
 #pragma mark - Visualising trips on the map
 

@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) NSArray<id<NSCoding, NSObject>> *sourcesRaw;
 @property (nonatomic, strong) NSNumber * visibilityRaw;
 @property (nonatomic, assign) BOOL toDelete;
-@property (nonatomic, strong) TripRequest *request;
+@property (nonatomic, strong, null_resettable) TripRequest *request;
 @property (nonatomic, strong) NSSet *trips;
 @property (nonatomic, strong, nullable) Trip *visibleTrip;
 

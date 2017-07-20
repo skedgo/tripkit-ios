@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 import Marshal
 
-import SGCoreKit
+
 
 public enum TKTTPifierInputItem {
   case event(TKTTPifierEventInputType)
@@ -220,7 +220,7 @@ extension TKTTPifierTripOptionType {
 
 private class TKMinimalSegment: NSObject, TKTTPifierTripOptionSegmentType {
   
-  init(modeImage image: UIImage?) {
+  init(modeImage image: SGKImage?) {
     tripSegmentModeImage = image
     
     super.init()
@@ -237,17 +237,15 @@ private class TKMinimalSegment: NSObject, TKTTPifierTripOptionSegmentType {
   var tripSegmentTimeZone: TimeZone? { return nil }
   var tripSegmentTimesAreRealTime: Bool { return false }
   var tripSegmentIsWheelchairAccessible: Bool { return false }
-  let tripSegmentModeImage: UIImage?
+  let tripSegmentModeImage: SGKImage?
   
   // MARK: STKDisplayableRoute
   
-  fileprivate func routePath() -> [Any] {
-    return []
-  }
-  
-  fileprivate func routeColour() -> UIColor? {
-    return nil
-  }
+  var routePath: [Any] = []
+  var routeIsTravelled: Bool = true
+  var routeDashPattern: [NSNumber]? = nil
+  var showRoute: Bool = true
+  var routeColor: SGKColor? = nil
   
 }
 

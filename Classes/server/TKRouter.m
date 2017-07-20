@@ -8,7 +8,12 @@
 
 #import "TKRouter.h"
 
-#import <TripKit/TKTripKit.h>
+#ifdef TK_NO_FRAMEWORKS
+#import "TripKit.h"
+#endif
+
+#import "SVKServerKit.h"
+#import "TripKit/TripKit-Swift.h"
 
 @implementation TKRouter
 
@@ -37,7 +42,7 @@
 										 success:(TKRouterSuccess)success
 										 failure:(TKRouterError)failure
 {
-  ZAssert(success && failure, @"Success and failure blocks are required");
+  ZAssert(success, @"Success block is required");
   
   if ([request isDeleted]) {
     NSError *error = [NSError errorWithCode:kSVKErrorTypeInternal

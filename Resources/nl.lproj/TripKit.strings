@@ -13,13 +13,20 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ fiets vriendelijk";
 
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ stations";
+
+/* For describing a time interval, e.g., '8:30 to 8:43'
+   From %time1 to %time2. (old key: TimeFromToShortFormat) */
+"%@ to %@" = "%1$@ naar %2$@";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ zonder verkeer";
 
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
 "%@ wheelchair friendly" = "%@ rolstoel vriendelijk";
 
-/* No comment provided by engineer. */
+/* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 station";
 
 /* No comment provided by engineer. */
@@ -35,8 +42,17 @@
    Single line instruction to arrive */
 "Arrive" = "Aankomst";
 
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "Arriveer om %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "Arriveer op %@ om %@";
+
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Arriveer in";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+"At %@" = "Op %@";
 
 /* No comment provided by engineer. */
 "Book with FlitWays" = "Boek met FlitWays";
@@ -50,6 +66,9 @@
 /* No comment provided by engineer. */
 "Call" = "Bel";
 
+/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+"Call %@" = "Bel %@";
+
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
 "Connect to Internet to get trips" = "Maak verbinding met het internet om trips te bekijken";
 
@@ -62,14 +81,17 @@
 /* Destination of the bus */
 "Direction" = "Eindpunt";
 
-/* Walking time */
-"for %@" = "voor %@";
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "Verbinding verbreken";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Leeg";
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Beperkte zitplaatsen beschikbaar";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "Van %@";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Vol";
@@ -89,6 +111,12 @@
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "Ik kom aan op %@ om %@.";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "Ik neem de %@ om %@ vanuit %@.";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Ondertussen, laten we %@ blijven verkennen en geniet van uw reizen";
 
@@ -98,6 +126,15 @@
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
 "Leave" = "Vertrek";
+
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "Verlaat %@";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "Verlaat %@ om %@";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "Vetrek om %@";
 
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "Vertrek in";
@@ -120,7 +157,7 @@
 /* Title of button to get more details about an alert */
 "More info" = "Meer info";
 
-/* Indicating no trips have been planned within 24 hrs */
+/* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Geen geplannde trips";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
@@ -135,15 +172,14 @@
 /* No comment provided by engineer. */
 "Open Ola" = "Open Ola";
 
+/* Title for opening hours */
+"Opening Hours" = "Openingstijden";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Plan een reis, en het zal hier verschijnen.";
 
-/* Arrival Location
-   For trip titles, e.g., 'To work' */
-"PrimaryLocationEnd" = "Naar %@";
-
-/* Departure Location */
-"PrimaryLocationStart" = "Van %@";
+/* No comment provided by engineer. */
+"Public holiday" = "Officiële feestdag";
 
 /* No comment provided by engineer. */
 "Real-time" = "Real-time";
@@ -154,20 +190,26 @@
 /* Send SMS action */
 "Send SMS" = "SMS versturen";
 
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "Setup";
+
 /* Show website action */
 "Show website" = "Open Website";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Alleen staruimte beschikbaar";
 
-/* Number of stops before you get off a vehicle */
-"%@ stops" = "%@ stations";
-
-/* From %time1 to %time2 */
-"TimeFromToShortFormat" = "%@ tot %@";
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "Naar %@";
 
 /* Title for a trip */
 "Trip" = "Reis";
+
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "Bijgewerkt %@ geleden";
+
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "Voertuig %@ bijgewerkt %@ geleden";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "We zijn bezig om uw reis op te halen. Een ogenblik geduld...";
@@ -177,6 +219,12 @@
 
 /* No comment provided by engineer. */
 "Wheelchair accessible" = "Rolstoel toegankelijk";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "om %@";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "voor %@";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch een Taxi";

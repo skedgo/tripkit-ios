@@ -20,6 +20,25 @@ public enum TripKit {
   }
   
   
+  /// Whether a per-installation identifier should be passed
+  /// along with server calls to track usage from an installation
+  /// across sessions.
+  ///
+  /// Default is to allow tracking.
+  public static var allowTracking: Bool {
+    get {
+      if let raw = UserDefaults.standard.object(forKey: SVKDefaultsKeyProfileTrackUsage) as? NSNumber {
+        return raw.boolValue
+      } else {
+        return true
+      }
+    }
+    set {
+      UserDefaults.standard.set(newValue, forKey: SVKDefaultsKeyProfileTrackUsage)
+    }
+  }
+  
+  
   /// Prepares TripKit to be used
   ///
   /// Should be called from the application delegate, typically from
@@ -29,7 +48,7 @@ public enum TripKit {
     // Give the main class a nudge to wake up
     TKTripKit.sharedInstance()
     
-    SVKServer.sharedInstance().updateRegionsForced(false)
+    SVKServer.sharedInstance().updateRegions(forced: false)
   }
   
 }

@@ -9,20 +9,19 @@
 @import Foundation;
 @import CoreData;
 
-@import SGCoreKit;
 
-@class Cell, Shape, StopVisits, Alert;
+@class Cell, Shape, StopVisits, Alert, SGKNamedCoordinate, ModeInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StopLocation : NSManagedObject <STKStopAnnotation, UIActivityItemSource>
+@interface StopLocation : NSManagedObject
 
 @property (nonatomic, retain, nullable) SGKNamedCoordinate *location;
 
 @property (nonatomic, retain, nullable) NSString * name;
 @property (nonatomic, retain, nullable) NSString * shortName;
 @property (nonatomic, copy) NSString * stopCode;
-@property (nonatomic, strong) ModeInfo * stopModeInfo;
+@property (nonatomic, strong, null_resettable) ModeInfo * stopModeInfo;
 @property (nonatomic, retain, nullable) NSNumber * sortScore;
 @property (nonatomic, retain, nullable) NSString * filter;
 @property (nonatomic, retain, nullable) NSString * regionName;
@@ -59,10 +58,6 @@ NS_ASSUME_NONNULL_BEGIN
                              inRegionNamed:(NSString *)regionName
                           inTripKitContext:(NSManagedObjectContext *)tripKitContext;
 
-- (NSString *)modeTitle;
-- (nullable UIImage *)modeImageOfType:(SGStyleModeIconType)type;
-- (nullable NSURL *)modeImageURLForType:(SGStyleModeIconType)type;
-
 - (void)remove;
 
 - (nullable NSPredicate *)departuresPredicateFromDate:(nullable NSDate *)date;
@@ -76,8 +71,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)clearVisits;
 
 - (void)setSortScore:(NSNumber *)sortScore;
-
-- (SVKRegion *)region;
 
 @end
 

@@ -70,6 +70,18 @@
             ReferencedContainer = "container:TripKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "FOURSQUARE_CLIENT_ID"
+            value = "$(FOURSQUARE_CLIENT_ID)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "FOURSQUARE_CLIENT_SECRET"
+            value = "$(FOURSQUARE_CLIENT_SECRET)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

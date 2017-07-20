@@ -8,7 +8,7 @@
 
 import Foundation
 
-import SGCoreKit
+
 
 public class TKUserProfileHelper: NSObject {
   

@@ -154,7 +154,7 @@
 {
   if (!identifier) {
     NSUInteger hash = [[url absoluteString] hash];
-    identifier = [NSString stringWithFormat:@"%lu", hash];
+    identifier = [NSString stringWithFormat:@"%lu", (unsigned long) hash];
   }
   
   TKJSONCacheDirectory directory = TKJSONCacheDirectoryDocuments;

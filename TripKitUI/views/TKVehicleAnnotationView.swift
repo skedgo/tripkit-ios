@@ -103,10 +103,10 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     
     var vehicleView: UIView?
     
-    if let iconUrlString = vehicle.icon, let URL = SVKServer.imageURL(forIconFileNamePart: iconUrlString, of: .vehicle) {
+    if let iconUrlString = vehicle.icon, let url = SVKServer.imageURL(forIconFileNamePart: iconUrlString, of: .vehicle) {
       let vehicleImageView = UIImageView(frame: vehicleRect)
       vehicleImageView.contentMode = .scaleAspectFit
-      vehicleImageView.setImageWith(URL)
+      vehicleImageView.setImage(with: url)
       vehicleView = vehicleImageView
       self.vehicleImageView = vehicleImageView
     }

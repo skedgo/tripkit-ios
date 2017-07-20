@@ -8,9 +8,7 @@
 
 #import "SegmentTemplate.h"
 
-@import SGCoreKit;
-
-#import <TripKit/TKTripKit.h>
+#import "TripKit/TripKit-Swift.h"
 
 enum {
   SGSegmentTemplateFlagIsContinuation = 1 << 0,
@@ -65,7 +63,8 @@ typedef NSUInteger SGSegmentTemplateFlag;
 - (id<MKAnnotation>)endWaypoint:(BOOL)atStart
 {
 	// get the first or last travelled shape
-  Shape *shape = [Shape fetchTravelledShapeForTemplate:self
+  Shape *shape = [Shape
+                  fetchTravelledShapeForTemplate:self
                                                atStart:atStart];
   if (shape) {
     if (atStart) {

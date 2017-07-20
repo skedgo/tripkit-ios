@@ -8,11 +8,10 @@
 
 @import Foundation;
 @import CoreData;
-@import SGCoreKit;
 
 #import "TKRealTimeUpdatable.h"
 
-@class Alert, SVKRegion, Shape, StopVisits, SegmentReference, Vehicle;
+@class Alert, SVKRegion, Shape, StopVisits, SegmentReference, Vehicle, ModeInfo;
 @protocol STKDisplayableRoute;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -55,11 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)remove;
 
 - (nullable Alert *)sampleAlert;
-- (nullable NSString *)modeTitle;
-- (nullable UIImage *)modeImageOfType:(SGStyleModeIconType)type;
-- (nullable NSURL *)modeImageURLForType:(SGStyleModeIconType)type;
 
-- (nullable SVKRegion *)region;
 - (NSString *)title;
 
 - (nullable NSString *)shortIdentifier;

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SGCoreUIKit
 
 public class TKDepartureView: UIView {
 

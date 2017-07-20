@@ -13,7 +13,11 @@
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ 适宜骑自行车";
 
-/* From %time1 to %time2. (old key: TimeFromToShortFormat) */
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@站";
+
+/* For describing a time interval, e.g., '8:30 to 8:43'
+   From %time1 to %time2. (old key: TimeFromToShortFormat) */
 "%@ to %@" = "%@ ～ %@";
 
 /* Duration without traffic */
@@ -22,7 +26,7 @@
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
 "%@ wheelchair friendly" = "%@ 适宜使用轮椅";
 
-/* No comment provided by engineer. */
+/* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1站";
 
 /* No comment provided by engineer. */
@@ -76,6 +80,9 @@
 
 /* Destination of the bus */
 "Direction" = "方向";
+
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "断开连接";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "空的";
@@ -150,7 +157,7 @@
 /* Title of button to get more details about an alert */
 "More info" = "增加亮度";
 
-/* Indicating no trips have been planned within 24 hrs */
+/* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "没有规划好的行程";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
@@ -183,14 +190,14 @@
 /* Send SMS action */
 "Send SMS" = "发送短信";
 
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "设置";
+
 /* Show website action */
 "Show website" = "开启网站";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "仅有站立的空间";
-
-/* Number of stops before you get off a vehicle */
-"%@ stops" = "%@站";
 
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "目的地: %@";

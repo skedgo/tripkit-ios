@@ -8,7 +8,6 @@
 
 @import Foundation;
 @import CoreData;
-@import SGCoreKit;
 
 #import "TKRealTimeUpdatable.h"
 
@@ -25,7 +24,7 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StopVisits : NSManagedObject <STKDisplayableTimePoint, TKRealTimeUpdatable, UIActivityItemSource>
+@interface StopVisits : NSManagedObject <TKRealTimeUpdatable>
 
 @property (nonatomic, retain, nullable) NSDate * arrival;
 @property (nonatomic, retain, nullable) NSNumber * bearing;
@@ -40,9 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain) Service *service;
 @property (nonatomic, retain) StopLocation *stop;
 @property (nonatomic, retain, nullable) NSSet *shapes;
-
-// KVO
-@property (nonatomic, copy) NSDate *time;
 
 + (NSArray<StopVisits *> *)fetchStopVisitsForStopLocation:(StopLocation *)stopLocation
                                          startingFromDate:(NSDate *)earliestDate;
@@ -67,9 +63,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)realTimeInformation:(BOOL)withOriginalTime;
 
 - (nullable NSDate *)countdownDate;
-
-- (SGKGrouping)groupingWithPrevious:(StopVisits *)previous
-                              next:(StopVisits *)next;
 
 /**
  Compares two visits based on which one comes before another in the same service.

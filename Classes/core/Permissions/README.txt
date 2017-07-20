@@ -1,0 +1,7 @@
+PERMISSIONS
+===========
+
+Dependencies:
+
+- Base
+- SGAction

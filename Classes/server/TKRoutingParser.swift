@@ -8,7 +8,7 @@
 
 import Foundation
 
-import SGCoreKit
+
 
 extension TKRoutingParser {
   public static func matchingSegment(in trip: Trip, order: TKSegmentOrdering, first: Bool) -> TKSegment {
@@ -31,7 +31,7 @@ extension TKRoutingParser {
   /// `parseAndAddResult`. All parameters except `request` are optional.
   public static func populate(_ request: TripRequest, start: MKAnnotation?, end: MKAnnotation?, leaveAfter: Date?, arriveBy: Date?) -> Bool {
     
-    guard let trip = request.trips?.first else {
+    guard let trip = request.trips.first else {
       return false
     }
     
@@ -61,7 +61,7 @@ extension TKRoutingParser {
     }
     
     if arriveBy == nil && leaveAfter == nil {
-      if let trip = request.trips?.first {
+      if let trip = request.trips.first {
         let firstRegular = matchingSegment(in: trip, order: .regular, first: true)
         request.departureTime = firstRegular.departureTime
         request.timeType = NSNumber(value: SGTimeType.leaveAfter.rawValue)
@@ -70,9 +70,10 @@ extension TKRoutingParser {
       }
     }
     
-    if let trip = request.trips?.first {
+    if let trip = request.trips.first {
       trip.setAsPreferredTrip()
     }
     return true
   }
+  
 }

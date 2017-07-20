@@ -8,9 +8,11 @@
 
 @import Foundation;
 @import CoreLocation;
-@import SGCoreKit;
+
 
 @class TripRequest, TKTripKit;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^TKRouterSuccess)(TripRequest *request, NSSet *modeIdentifiers);
 typedef void(^TKRouterError)(NSError *error, NSSet *modeIdentifiers);
@@ -24,8 +26,8 @@ typedef void(^TKRouterError)(NSError *error, NSSet *modeIdentifiers);
  */
 @interface TKRouter : NSObject
 
-@property (nonatomic, strong) TripRequest *currentRequest;
-@property (nonatomic, copy) NSSet *modeIdentifiers;
+@property (nonatomic, strong, nullable) TripRequest *currentRequest;
+@property (nonatomic, copy, nullable) NSSet *modeIdentifiers;
 
 /**
  The main method to call to have the router calculate trips.
@@ -47,3 +49,5 @@ typedef void(^TKRouterError)(NSError *error, NSSet *modeIdentifiers);
                                    failure:(TKRouterError)failure;
 
 @end
+
+NS_ASSUME_NONNULL_END
