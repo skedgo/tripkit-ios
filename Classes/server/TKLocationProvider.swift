@@ -33,7 +33,7 @@ public enum TKLocationProvider {
   /// - Returns: Observable of fetched locations; can error out
   public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil) -> Observable<[STKModeCoordinate]> {
     
-    return SVKServer.sharedInstance().rx
+    return SVKServer.shared.rx
       .requireRegion(center)
       .flatMap { region in
         TKLocationProvider.fetchLocations(center: center, radius: radius, modes: modes, in: region)
@@ -49,7 +49,7 @@ public enum TKLocationProvider {
     ]
     paras["modes"] = modes
     
-    return SVKServer.sharedInstance().rx
+    return SVKServer.shared.rx
       .hit(.GET, path: "locations.json", parameters: paras, region: region)
       .map { _, response -> [STKModeCoordinate] in
         guard

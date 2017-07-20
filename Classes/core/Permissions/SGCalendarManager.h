@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SGCalendarManager : SGPermissionManager <SGAutocompletionDataProvider>
 
-+ (SGCalendarManager *)sharedInstance;
++ (SGCalendarManager *)sharedInstance NS_REFINED_FOR_SWIFT;
 
 @property (nonatomic, strong, nullable) EKEventStore *eventStore;
 

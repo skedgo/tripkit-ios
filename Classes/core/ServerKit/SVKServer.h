@@ -37,7 +37,7 @@ FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileDistanceUnit;
 
 @interface SVKServer : NSObject
 
-+ (SVKServer *)sharedInstance;
++ (SVKServer *)sharedInstance NS_REFINED_FOR_SWIFT;
 
 + (nullable id)syncURL:(NSURL *)url timeout:(NSTimeInterval)seconds;
 

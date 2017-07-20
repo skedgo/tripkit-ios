@@ -162,7 +162,7 @@ extension TKSwiftyShareHelper.QueryDetails {
     if let start = start, start.isValid {
       from = SGKNamedCoordinate(coordinate: start)
     } else {
-      from = SGLocationManager.sharedInstance().currentLocationPlaceholder()
+      from = SGLocationManager.shared.currentLocation
     }
     
     if end.isValid {
@@ -170,7 +170,7 @@ extension TKSwiftyShareHelper.QueryDetails {
       named.name = self.title
       to = named
     } else {
-      to = SGLocationManager.sharedInstance().currentLocationPlaceholder()
+      to = SGLocationManager.shared.currentLocation
     }
     
     let timeType: SGTimeType

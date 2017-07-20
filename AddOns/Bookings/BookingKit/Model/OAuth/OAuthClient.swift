@@ -50,7 +50,7 @@ public class OAuthClient {
   
   private static func canHandle(_ url: URL) -> Bool {
     
-    if let callback = SGKConfig.sharedInstance().oauthCallbackURL(), url.absoluteString.hasPrefix(callback.absoluteString) {
+    if let callback = SGKConfig.shared.oauthCallbackURL(), url.absoluteString.hasPrefix(callback.absoluteString) {
       return true
       
     }
@@ -75,7 +75,7 @@ public class OAuthClient {
     }
     
     // This is getting the authentication data in the first place, either using SSO or regular OAuth
-    guard let callbackURL = SGKConfig.sharedInstance().oauthCallbackURL() else {
+    guard let callbackURL = SGKConfig.shared.oauthCallbackURL() else {
       preconditionFailure("OAuth callback URL missing in Config.plist")
     }
     guard let oauthParas = form.oauthParameters else {
@@ -128,7 +128,7 @@ public class OAuthClient {
       return nil
     }
     
-    if let callbackURL = SGKConfig.sharedInstance().oauthCallbackURL(), url.absoluteString.hasPrefix(callbackURL.absoluteString) {
+    if let callbackURL = SGKConfig.shared.oauthCallbackURL(), url.absoluteString.hasPrefix(callbackURL.absoluteString) {
       return try handleUsingOAuth(url)
     
     } else {

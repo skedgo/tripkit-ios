@@ -167,7 +167,7 @@ extension SVKRegion {
       paras["bsb"] = true
     }
     
-    SVKServer.sharedInstance().hitSkedGo(
+    SVKServer.shared.hitSkedGo(
       withMethod: "GET",
       path: "auth/\(name)",
       parameters: paras,

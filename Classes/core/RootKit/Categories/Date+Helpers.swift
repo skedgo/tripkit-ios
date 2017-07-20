@@ -10,6 +10,17 @@ import Foundation
 
 extension Date {
   
+  public enum DateConversionError: Error {
+    case invalidISO8601(String)
+  }
+  
+  public init(iso8601: String) throws {
+    guard let date = NSDate(fromISO8601String: iso8601) else {
+      throw DateConversionError.invalidISO8601(iso8601)
+    }
+    self = date as Date
+  }
+  
   public func midnight(in timeZone: TimeZone) -> Date {
     var calendar = Calendar.autoupdatingCurrent
     calendar.timeZone = timeZone
