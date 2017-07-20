@@ -32,6 +32,13 @@ class TKAgendaTest: XCTestCase {
     input = try? TKAgendaInput.testInput()
     components = DateComponents(year: 2017, month: 5, day: 20)
     
+    // for now we have to run against the local server
+    // TODO: Fix this (should be production ideally)
+    SVKServer.serverType = .local
+    
+    // these tests need a fake token
+    SVKServer.updateUserToken("user-token")
+    
     // rx test boilderplate
     disposeBag = DisposeBag()
     scheduler = TestScheduler(initialClock: 0)
@@ -48,12 +55,40 @@ class TKAgendaTest: XCTestCase {
     XCTAssertNotNil(components)
   }
   
+  
+  /// Tests receiving a proper error when trying to upload an agenda
+  /// without a user token being set.
+  func testMissingUserToken() {
+    let token = SVKServer.userToken()
+    defer { SVKServer.updateUserToken(token) }
+    
+    SVKServer.updateUserToken(nil)
+    let testee = SVKServer.shared.rx.uploadAgenda(input, for: components)
+    
+    do {
+      let _ = try testee.toBlocking().single()
+      XCTFail("Observable should error out")
+    } catch {
+      switch error {
+      case TKAgendaUploadError.userIsNotLoggedIn: return // all good
+      default: XCTFail("Unexpected error: \(error)")
+      }
+    }
+    
+  }
+  
   func testUploadingInput() throws {
     let testee = SVKServer.shared.rx.uploadAgenda(input, for: components)
     
     let result = try testee.toBlocking(timeout: 2).toArray()
     
     XCTAssertEqual(result, [TKAgendaUploadResult.success])
+  }
+  
+  /// Tests uploading an input and then downloading again, making
+  /// sure that it parses correctly both ways.
+  func testUploadingThenDownloadingInput() throws {
+    XCTFail("Not implemented yet")
   }
   
   /// Mirrors Juptyer notebook Flow 1

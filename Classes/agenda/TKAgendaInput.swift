@@ -7,6 +7,8 @@
 
 import Foundation
 
+import Marshal
+
 public struct TKAgendaInput {
 
   public struct Location {
@@ -120,3 +122,149 @@ public struct TKAgendaInput {
   }
   
 }
+
+// MARK: - Marshaling
+
+extension TKAgendaInput: Marshaling {
+
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    var marshaled: MarshalType =  [
+      "items": items.map { $0.marshaled() },
+      "config": config,
+      "patterns": patterns,
+      "modes": modes,
+      "vehicles": vehicles,
+    ]
+    
+    marshaled["installationId"] = installationId
+    marshaled["confirmToOverwriteId"] = confirmToOverwriteId
+    
+    return marshaled
+  }
+  
+}
+
+extension TKAgendaInput.Item: Marshaling {
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    var marshaled: MarshalType
+    
+    switch self {
+    case .home(let input):  marshaled = input.marshaled()
+    case .event(let input): marshaled = input.marshaled()
+    case .trip(let input):  marshaled = input.marshaled()
+    }
+    
+    marshaled["type"] = type
+    return marshaled
+  }
+  
+}
+
+extension TKAgendaInput.Location: Marshaling {
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    var marshaled = MarshalType()
+    marshaled["what3word"] = what3word
+    marshaled["title"] = title
+    marshaled["address"] = address
+    
+    if let coordinate = coordinate {
+      marshaled["lat"] = coordinate.latitude
+      marshaled["lng"] = coordinate.longitude
+    }
+    
+    return marshaled
+  }
+  
+}
+
+extension TKAgendaInput.HomeInput: Marshaling {
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    var marshaled: MarshalType =  [
+      "location": location.marshaled(),
+    ]
+    
+    marshaled["title"] = title
+    return marshaled
+  }
+  
+}
+
+extension TKAgendaInput.EventInput: Marshaling {
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    var marshaled: MarshalType =  [
+      "id": id,
+      "title": title,
+      "location": location.marshaled(),
+      "startTime": startTime.iso8601,
+      "endTime": endTime.iso8601,
+      "priority": priority.rawValue,
+    ]
+    
+    marshaled["color"] = color?.marshaled()
+    marshaled["description"] = description
+    marshaled["url"] = url?.absoluteString
+    
+    if excluded { marshaled["excluded"] = true }
+    if direct   { marshaled["direct"]   = true }
+    
+    return marshaled
+  }
+  
+}
+
+extension TKAgendaInput.TripInput: Marshaling {
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    let marshaled: MarshalType =  [
+      "url": url.absoluteString,
+    ]
+    
+    return marshaled
+  }
+  
+}
+
+extension SGKColor {
+  
+  public var RGBA: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+    var r: CGFloat = 0.0
+    var g: CGFloat = 0.0
+    var b: CGFloat = 0.0
+    var a: CGFloat = 0.0
+    getRed(&r, green: &g, blue: &b, alpha: &a)
+    return (red: r, green: g, blue: b, alpha: a)
+  }
+  
+}
+
+extension SGKColor: Marshaling {
+  
+  public typealias MarshalType = [String: Any]
+  
+  public func marshaled() -> MarshalType {
+    let components = RGBA
+    return [
+      "red": components.red * 256,
+      "green": components.green * 256,
+      "blue": components.green * 256,
+    ]
+  }
+  
+}
+

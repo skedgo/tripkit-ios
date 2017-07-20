@@ -25,6 +25,7 @@ public enum TKAgendaFetchResult<T> {
 }
 
 public enum TKAgendaUploadError: Error {
+  case userIsNotLoggedIn
   case unexpectedResponse(StatusCode, Any?)
 }
 
@@ -41,18 +42,21 @@ extension Reactive where Base: SVKServer {
       preconditionFailure("Bad components!")
     }
     
-    // TODO: convert to JSON
-    let paras: [String: Any] = [:]
+    guard let _ = SVKServer.userToken() else {
+      return Observable.error(TKAgendaUploadError.userIsNotLoggedIn)
+    }
     
     let result = requireRegions()
       .flatMapLatest { Void -> Observable<(Int, Any?)> in
-        // TODO: fix region
+        // TODO: fix region, should use last use region / home region / nil
         let region: SVKRegion? = nil
+        
+        let dateString = String(format: "%04d-%02d-%02d", year, month, day)
         
         return SVKServer.shared.rx.hit(
           .POST,
-          path: "agenda/\(year)-\(month)-\(day)",
-          parameters: paras,
+          path: "agenda/\(dateString)/input",
+          parameters: input.marshaled(),
           region: region)
       }
       return result.map { status, body -> TKAgendaUploadResult in
