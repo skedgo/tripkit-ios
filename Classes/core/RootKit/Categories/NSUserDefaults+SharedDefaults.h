@@ -10,6 +10,6 @@
 
 @interface NSUserDefaults (SharedDefaults)
 
-+ (nonnull NSUserDefaults *)sharedDefaults;
++ (nonnull NSUserDefaults *)sharedDefaults NS_REFINED_FOR_SWIFT;
 
 @end

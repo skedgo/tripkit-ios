@@ -157,7 +157,7 @@ public class SVKInternationalRegion : SVKRegion {
       SVKTransportModeIdentifierCar,
       SVKTransportModeIdentifierMotorbike,
     ]
-    if UserDefaults.shared().bool(forKey: SVKDefaultsKeyProfileEnableFlights) {
+    if UserDefaults.shared.bool(forKey: SVKDefaultsKeyProfileEnableFlights) {
       modes = [SVKTransportModeIdentifierFlight] + modes
     }
     super.init(asInternationalNamed: "International", modes: modes)

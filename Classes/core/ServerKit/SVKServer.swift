@@ -12,4 +12,17 @@ extension SVKServer {
   
   public static let shared = SVKServer.__sharedInstance()
   
+  public class var serverType: SVKServerType {
+    get {
+      if SGKBetaHelper.isBeta() {
+        return SVKServerType(rawValue:  UserDefaults.shared.integer(forKey: SVKDefaultsKeyServerType)) ?? .production
+      } else {
+        return .production
+      }
+    }
+    set {
+      UserDefaults.shared.set(newValue.rawValue, forKey: SVKDefaultsKeyServerType)
+    }
+  }
+  
 }

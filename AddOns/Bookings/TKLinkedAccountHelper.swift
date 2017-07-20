@@ -163,7 +163,7 @@ extension SVKRegion {
     if let mode = mode {
       paras["mode"] = mode
     }
-    if UserDefaults.shared().bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
+    if UserDefaults.shared.bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
       paras["bsb"] = true
     }
     
