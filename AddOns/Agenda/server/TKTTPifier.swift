@@ -160,7 +160,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     // If a region was not supplied, fetch it, and recurse
     guard let region = region else {
-      return SVKServer.sharedInstance().rx
+      return SVKServer.shared.rx
         .requireRegion(first.start)
         .flatMap { region -> Observable<(SVKRegion, String)> in
           return self.createProblem(insert, into: into, dateComponents: dateComponents, region: region, modes: modes)
@@ -176,7 +176,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
     
     // If we don't have a cached ID, create a new problem on the server
-    return SVKServer.sharedInstance().rx
+    return SVKServer.shared.rx
       .hit(.POST, path: "ttp", parameters: paras, region: region)
       .retry(4)
       .map { code, response -> (SVKRegion, String?) in
@@ -221,7 +221,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
       paras = [:]
     }
     
-    return SVKServer.sharedInstance().rx
+    return SVKServer.shared.rx
       .hit(.GET, path: "ttp/\(id)/solution", parameters: paras, region: region) { code, response in
         
         // Keep hitting if it's a 299 (solution still bein calculated)

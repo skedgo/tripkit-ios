@@ -119,7 +119,7 @@ extension TKSegment {
   public var storedQuickBookings: [TKQuickBooking]? {
     get {
       if let key = cacheKey(),
-         let cached = TKTripKit.sharedInstance().inMemoryCache().object(forKey: key as AnyObject) as? [[NSString: Any]] {
+         let cached = TripKit.shared.inMemoryCache().object(forKey: key as AnyObject) as? [[NSString: Any]] {
         return cached.flatMap { try? TKQuickBooking(object: $0) }
       } else {
         return nil
@@ -130,7 +130,7 @@ extension TKSegment {
   public var activeIndexQuickBooking: Int? {
     get {
       if let key = indexKey(),
-         let index = TKTripKit.sharedInstance().inMemoryCache().object(forKey: key as AnyObject) as? Int,
+         let index = TripKit.shared.inMemoryCache().object(forKey: key as AnyObject) as? Int,
          let bookings = storedQuickBookings,
          index < bookings.count {
         return index
@@ -142,7 +142,7 @@ extension TKSegment {
       guard let key = indexKey(),
             let index = newValue else { return }
       
-      TKTripKit.sharedInstance().inMemoryCache().setObject(index as AnyObject, forKey: key as AnyObject)
+      TripKit.shared.inMemoryCache().setObject(index as AnyObject, forKey: key as AnyObject)
     }
   }
 
@@ -165,7 +165,7 @@ extension TKSegment {
   public func storeQuickBookings(fromArray array: [[String: Any]]) {
     guard let key = cacheKey() else { return }
     
-    TKTripKit.sharedInstance().inMemoryCache().setObject(array as AnyObject, forKey: key as AnyObject)
+    TripKit.shared.inMemoryCache().setObject(array as AnyObject, forKey: key as AnyObject)
   }
   
   public var bookingConfirmation: TKBooking.Confirmation? {

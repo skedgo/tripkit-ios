@@ -24,7 +24,7 @@ FOUNDATION_EXPORT NSString *const SGLocationManagerBackgroundUpdatesEnabled;
 
 @interface SGLocationManager : SGPermissionManager <CLLocationManagerDelegate>
 
-+ (SGLocationManager *)sharedInstance;
++ (SGLocationManager *)sharedInstance NS_REFINED_FOR_SWIFT;
 
 - (BOOL)showBackgroundTrackingOption;
 
@@ -39,7 +39,7 @@ FOUNDATION_EXPORT NSString *const SGLocationManagerBackgroundUpdatesEnabled;
 
 #pragma mark - Fetching locations
 
-- (id<MKAnnotation>)currentLocationPlaceholder;
+- (id<MKAnnotation>)currentLocationPlaceholder NS_REFINED_FOR_SWIFT;
 
 - (nullable CLLocation *)lastKnownUserLocation;
 
