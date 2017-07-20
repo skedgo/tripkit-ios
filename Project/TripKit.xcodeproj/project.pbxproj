@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		298FFC17CF0F3C7DBE593B3D /* Pods_TripKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB767442569E9895BB82F4 /* Pods_TripKitTests.framework */; };
+		3A096E171F20BBDA00666E59 /* SVKServer+Agenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E141F20BBDA00666E59 /* SVKServer+Agenda.swift */; };
+		3A096E181F20BBDA00666E59 /* TKAgendaInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E151F20BBDA00666E59 /* TKAgendaInput.swift */; };
+		3A096E191F20BBDA00666E59 /* TKAgendaOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E161F20BBDA00666E59 /* TKAgendaOutput.swift */; };
 		3A15D8D91D9CE08100BADBEA /* TKBuzzRouter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */; };
 		3A15D8DB1D9CE08D00BADBEA /* TKRoutingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */; };
 		3A266C571D744B9300438024 /* TKSwiftyShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A266C561D744B9300438024 /* TKSwiftyShareHelper.swift */; };
@@ -25,18 +28,6 @@
 		3A5140311DEE62FA002DB39F /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5140301DEE62FA002DB39F /* TripRequest.swift */; };
 		3A57DB5D1F17A58800946553 /* SGLocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A57DB5C1F17A58800946553 /* SGLocationHelper.swift */; };
 		3A69C4031DEEB43700872FD1 /* Loc+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */; };
-		3A7769121D3DE45800AF9EB2 /* TKAgendaParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7768FD1D3DE45800AF9EB2 /* TKAgendaParserHelper.swift */; };
-		3A7769131D3DE45800AF9EB2 /* TKAgendaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7768FE1D3DE45800AF9EB2 /* TKAgendaUtils.swift */; };
-		3A7769151D3DE45800AF9EB2 /* TKAgendaInputBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A7769011D3DE45800AF9EB2 /* TKAgendaInputBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A7769161D3DE45800AF9EB2 /* TKAgendaInputBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7769021D3DE45800AF9EB2 /* TKAgendaInputBuilder.m */; };
-		3A7769171D3DE45800AF9EB2 /* TKAgendaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7769031D3DE45800AF9EB2 /* TKAgendaTypes.swift */; };
-		3A77691C1D3DE45800AF9EB2 /* TKSkedgoifierTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7769091D3DE45800AF9EB2 /* TKSkedgoifierTypes.swift */; };
-		3A77691D1D3DE45800AF9EB2 /* TKTTPifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A77690A1D3DE45800AF9EB2 /* TKTTPifier.swift */; };
-		3A77691E1D3DE45800AF9EB2 /* TKTTPifierCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A77690B1D3DE45800AF9EB2 /* TKTTPifierCache.swift */; };
-		3A77691F1D3DE45800AF9EB2 /* TKAgendaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A77690C1D3DE45800AF9EB2 /* TKAgendaManager.swift */; };
-		3A7769211D3DE45800AF9EB2 /* TripKitAgenda.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A77690E1D3DE45800AF9EB2 /* TripKitAgenda.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A7769221D3DE45800AF9EB2 /* TKAgendaFaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7769101D3DE45800AF9EB2 /* TKAgendaFaker.swift */; };
-		3A7769231D3DE45800AF9EB2 /* TKTTPifierFaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7769111D3DE45800AF9EB2 /* TKTTPifierFaker.swift */; };
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
 		3A787ED01D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
 		3A787ED11D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
@@ -171,7 +162,6 @@
 		3AC4DD0A1DEE32B80026B238 /* TKBuzzRouterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DCFF1DEE32B80026B238 /* TKBuzzRouterTest.m */; };
 		3AC4DD0B1DEE32B80026B238 /* TKWaypointRouterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD001DEE32B80026B238 /* TKWaypointRouterTest.swift */; };
 		3AC4DD0C1DEE32B80026B238 /* TKShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD021DEE32B80026B238 /* TKShareHelperTest.swift */; };
-		3AC4DD0D1DEE32B80026B238 /* TKTTPifierTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD041DEE32B80026B238 /* TKTTPifierTest.swift */; };
 		3AC4DD111DEE32C80026B238 /* TKWaypointRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AC4DD121DEE32C80026B238 /* TKWaypointRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */; };
 		3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */; };
@@ -547,6 +537,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A096E141F20BBDA00666E59 /* SVKServer+Agenda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SVKServer+Agenda.swift"; sourceTree = "<group>"; };
+		3A096E151F20BBDA00666E59 /* TKAgendaInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaInput.swift; sourceTree = "<group>"; };
+		3A096E161F20BBDA00666E59 /* TKAgendaOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaOutput.swift; sourceTree = "<group>"; };
 		3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKBuzzRouter+Rx.swift"; sourceTree = "<group>"; };
 		3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRoutingParser.swift; sourceTree = "<group>"; };
 		3A266C561D744B9300438024 /* TKSwiftyShareHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSwiftyShareHelper.swift; sourceTree = "<group>"; };
@@ -570,22 +563,6 @@
 		3A551D931E60D8C700332942 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A57DB5C1F17A58800946553 /* SGLocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGLocationHelper.swift; sourceTree = "<group>"; };
 		3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loc+TripKit.swift"; sourceTree = "<group>"; };
-		3A7768FD1D3DE45800AF9EB2 /* TKAgendaParserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaParserHelper.swift; sourceTree = "<group>"; };
-		3A7768FE1D3DE45800AF9EB2 /* TKAgendaUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaUtils.swift; sourceTree = "<group>"; };
-		3A7769011D3DE45800AF9EB2 /* TKAgendaInputBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAgendaInputBuilder.h; sourceTree = "<group>"; };
-		3A7769021D3DE45800AF9EB2 /* TKAgendaInputBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAgendaInputBuilder.m; sourceTree = "<group>"; };
-		3A7769031D3DE45800AF9EB2 /* TKAgendaTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaTypes.swift; sourceTree = "<group>"; };
-		3A7769051D3DE45800AF9EB2 /* TKCachedSkedgoifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKCachedSkedgoifier.swift; sourceTree = "<group>"; };
-		3A7769061D3DE45800AF9EB2 /* TKSkedgoifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSkedgoifier.h; sourceTree = "<group>"; };
-		3A7769071D3DE45800AF9EB2 /* TKSkedgoifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSkedgoifier.m; sourceTree = "<group>"; };
-		3A7769081D3DE45800AF9EB2 /* TKSkedgoifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSkedgoifier.swift; sourceTree = "<group>"; };
-		3A7769091D3DE45800AF9EB2 /* TKSkedgoifierTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSkedgoifierTypes.swift; sourceTree = "<group>"; };
-		3A77690A1D3DE45800AF9EB2 /* TKTTPifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTTPifier.swift; sourceTree = "<group>"; };
-		3A77690B1D3DE45800AF9EB2 /* TKTTPifierCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTTPifierCache.swift; sourceTree = "<group>"; };
-		3A77690C1D3DE45800AF9EB2 /* TKAgendaManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaManager.swift; sourceTree = "<group>"; };
-		3A77690E1D3DE45800AF9EB2 /* TripKitAgenda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripKitAgenda.h; sourceTree = "<group>"; };
-		3A7769101D3DE45800AF9EB2 /* TKAgendaFaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaFaker.swift; sourceTree = "<group>"; };
-		3A7769111D3DE45800AF9EB2 /* TKTTPifierFaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTTPifierFaker.swift; sourceTree = "<group>"; };
 		3A787EC31D38F646009F9A18 /* TKJSONCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
 		3A787EC61D38F70A009F9A18 /* TripKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TripKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		3A787ECA1D38F78A009F9A18 /* 1-TripKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "1-TripKit.xcdatamodel"; sourceTree = "<group>"; };
@@ -1160,46 +1137,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3A7768FC1D3DE45800AF9EB2 /* helpers */ = {
+		3A096E131F20BBDA00666E59 /* agenda */ = {
 			isa = PBXGroup;
 			children = (
-				3A7768FD1D3DE45800AF9EB2 /* TKAgendaParserHelper.swift */,
-				3A7768FE1D3DE45800AF9EB2 /* TKAgendaUtils.swift */,
+				3A096E141F20BBDA00666E59 /* SVKServer+Agenda.swift */,
+				3A096E151F20BBDA00666E59 /* TKAgendaInput.swift */,
+				3A096E161F20BBDA00666E59 /* TKAgendaOutput.swift */,
 			);
-			path = helpers;
-			sourceTree = "<group>";
-		};
-		3A7769001D3DE45800AF9EB2 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				3A7769011D3DE45800AF9EB2 /* TKAgendaInputBuilder.h */,
-				3A7769021D3DE45800AF9EB2 /* TKAgendaInputBuilder.m */,
-				3A7769031D3DE45800AF9EB2 /* TKAgendaTypes.swift */,
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
-		3A7769041D3DE45800AF9EB2 /* server */ = {
-			isa = PBXGroup;
-			children = (
-				3A7769051D3DE45800AF9EB2 /* TKCachedSkedgoifier.swift */,
-				3A7769061D3DE45800AF9EB2 /* TKSkedgoifier.h */,
-				3A7769071D3DE45800AF9EB2 /* TKSkedgoifier.m */,
-				3A7769081D3DE45800AF9EB2 /* TKSkedgoifier.swift */,
-				3A7769091D3DE45800AF9EB2 /* TKSkedgoifierTypes.swift */,
-				3A77690A1D3DE45800AF9EB2 /* TKTTPifier.swift */,
-				3A77690B1D3DE45800AF9EB2 /* TKTTPifierCache.swift */,
-			);
-			path = server;
-			sourceTree = "<group>";
-		};
-		3A77690F1D3DE45800AF9EB2 /* workers */ = {
-			isa = PBXGroup;
-			children = (
-				3A7769101D3DE45800AF9EB2 /* TKAgendaFaker.swift */,
-				3A7769111D3DE45800AF9EB2 /* TKTTPifierFaker.swift */,
-			);
-			path = workers;
+			path = agenda;
 			sourceTree = "<group>";
 		};
 		3AA03E331F0BC9DB00C6B337 /* Permissions */ = {
@@ -1303,26 +1248,12 @@
 		3AB6C63A1D1CD08E0089F687 /* AddOns */ = {
 			isa = PBXGroup;
 			children = (
-				3AB6C63B1D1CD08E0089F687 /* Agenda */,
 				3AB6C63D1D1CD08E0089F687 /* Bookings */,
 				3AB6C63F1D1CD08E0089F687 /* InterApp */,
 				3AB6C6451D1CD08E0089F687 /* Share */,
 			);
 			name = AddOns;
 			path = ../../AddOns;
-			sourceTree = "<group>";
-		};
-		3AB6C63B1D1CD08E0089F687 /* Agenda */ = {
-			isa = PBXGroup;
-			children = (
-				3A7768FC1D3DE45800AF9EB2 /* helpers */,
-				3A7769001D3DE45800AF9EB2 /* model */,
-				3A7769041D3DE45800AF9EB2 /* server */,
-				3A77690C1D3DE45800AF9EB2 /* TKAgendaManager.swift */,
-				3A77690E1D3DE45800AF9EB2 /* TripKitAgenda.h */,
-				3A77690F1D3DE45800AF9EB2 /* workers */,
-			);
-			path = Agenda;
 			sourceTree = "<group>";
 		};
 		3AB6C63D1D1CD08E0089F687 /* Bookings */ = {
@@ -1383,6 +1314,7 @@
 		3AB6C6551D1CD08E0089F687 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3A096E131F20BBDA00666E59 /* agenda */,
 				3AFFAB251F06854F00147990 /* core */,
 				3AB6C6561D1CD08E0089F687 /* helpers */,
 				3AB6C6621D1CD08E0089F687 /* model */,
@@ -2377,7 +2309,6 @@
 				3AFFAD701F068E8B00147990 /* AMKEmail.h in Headers */,
 				3AFFADB91F068E8B00147990 /* BPKForm.h in Headers */,
 				3AFFAC251F06855F00147990 /* SGLabel.h in Headers */,
-				3A7769151D3DE45800AF9EB2 /* TKAgendaInputBuilder.h in Headers */,
 				3ADD5B6E1D9CDF0C00A1742F /* CircleAnnotationView.h in Headers */,
 				3AFFADB51F068E8B00147990 /* BPKUser.h in Headers */,
 				3AB6C6CD1D1CD08E0089F687 /* TripRequest+Classify.h in Headers */,
@@ -2412,7 +2343,6 @@
 				3AB6C6EE1D1CD08E0089F687 /* TKCellHelper.h in Headers */,
 				3AFFABCF1F06854F00147990 /* SVKTransportModes.h in Headers */,
 				3AFFAC2E1F06855F00147990 /* UISearchBar+Customizable.h in Headers */,
-				3A7769211D3DE45800AF9EB2 /* TripKitAgenda.h in Headers */,
 				3AFFADD81F068E8B00147990 /* BPKStepperCell.h in Headers */,
 				3AFFADE11F068E8B00147990 /* BPKTextCell.h in Headers */,
 				3AB6C7071D1CD08E0089F687 /* TKRealTimeUpdatableHelper.h in Headers */,
@@ -2732,7 +2662,6 @@
 				3AFFAC5F1F068B6100147990 /* Trip.swift in Sources */,
 				3A69C4031DEEB43700872FD1 /* Loc+TripKit.swift in Sources */,
 				3AFFAC4A1F06855F00147990 /* SGMapHelper.m in Sources */,
-				3A7769161D3DE45800AF9EB2 /* TKAgendaInputBuilder.m in Sources */,
 				3AB6C7051D1CD08E0089F687 /* TKQuickBookingHelper.swift in Sources */,
 				3AFFAD6D1F068E8B00147990 /* AKSignUpViewController.m in Sources */,
 				3AFFAD731F068E8B00147990 /* AMKUser.m in Sources */,
@@ -2792,7 +2721,6 @@
 				3AFFAB8D1F06854F00147990 /* SVKServer+Rx.swift in Sources */,
 				3AFFAD9C1F068E8B00147990 /* BPKMapViewController.swift in Sources */,
 				3AB6C6E31D1CD08E0089F687 /* StopLocation.m in Sources */,
-				3A77691F1D3DE45800AF9EB2 /* TKAgendaManager.swift in Sources */,
 				3AC4DD121DEE32C80026B238 /* TKWaypointRouter.m in Sources */,
 				3AFFAD711F068E8B00147990 /* AMKEmail.m in Sources */,
 				3AA03E701F0BC9DB00C6B337 /* SGFoursquareGeocoder.m in Sources */,
@@ -2802,6 +2730,7 @@
 				3AA03E691F0BC9DB00C6B337 /* SGAutocompletionResult.m in Sources */,
 				3AB6C6BA1D1CD08E0089F687 /* TKInterAppCommunicator.m in Sources */,
 				3AFFAD941F068E8B00147990 /* NSString+BookingKit.m in Sources */,
+				3A096E171F20BBDA00666E59 /* SVKServer+Agenda.swift in Sources */,
 				3AFFABD91F06854F00147990 /* STKRoutePolyline.m in Sources */,
 				3AFFAD5F1F068E8B00147990 /* UIViewController+modalController.m in Sources */,
 				3AA03E6B1F0BC9DB00C6B337 /* SGBaseGeocoder.m in Sources */,
@@ -2819,6 +2748,7 @@
 				3AFFAC3D1F06855F00147990 /* SGTableCell.m in Sources */,
 				3AB6C6CE1D1CD08E0089F687 /* TripRequest+Classify.m in Sources */,
 				3AA03E771F0BC9DB00C6B337 /* SGRegionAutocompleter.m in Sources */,
+				3A096E181F20BBDA00666E59 /* TKAgendaInput.swift in Sources */,
 				3AFFAC521F06855F00147990 /* SGSemaphoreView.m in Sources */,
 				3ADD5B7B1D9CDF0C00A1742F /* VehicleView.m in Sources */,
 				3AFFADE71F068E8C00147990 /* TKUberSSO.swift in Sources */,
@@ -2845,11 +2775,9 @@
 				3AFFAD5B1F068E8B00147990 /* UIView+FindFirstResponder.m in Sources */,
 				3A266C571D744B9300438024 /* TKSwiftyShareHelper.swift in Sources */,
 				3AFFABD01F06854F00147990 /* SVKTransportModes.m in Sources */,
-				3A7769131D3DE45800AF9EB2 /* TKAgendaUtils.swift in Sources */,
 				3AFFAD891F068E8B00147990 /* AKLabelCell.swift in Sources */,
 				3ADB3A581D39E3830012D04B /* TKSegmentHelper.swift in Sources */,
 				3AFFABC51F06854F00147990 /* SGKNamedCoordinate+SVKRegion.swift in Sources */,
-				3A7769221D3DE45800AF9EB2 /* TKAgendaFaker.swift in Sources */,
 				3AFFADB61F068E8B00147990 /* BPKUser.m in Sources */,
 				3AFFAD7C1F068E8B00147990 /* AMKItem.swift in Sources */,
 				3AFFADAF1F068E8B00147990 /* BPKTextPrefiller.m in Sources */,
@@ -2897,7 +2825,6 @@
 				3AD159781F0D527D008B63E2 /* SGTripSummaryCell.swift in Sources */,
 				3A57DB5D1F17A58800946553 /* SGLocationHelper.swift in Sources */,
 				3AFFAB911F06854F00147990 /* SGCustomEventRecurrenceRule.swift in Sources */,
-				3A77691D1D3DE45800AF9EB2 /* TKTTPifier.swift in Sources */,
 				3AB6C7161D1CD08E0089F687 /* TKTripKit.m in Sources */,
 				3A5140311DEE62FA002DB39F /* TripRequest.swift in Sources */,
 				3AFFADC01F068E8B00147990 /* OAuthClient.swift in Sources */,
@@ -2911,6 +2838,7 @@
 				3AA03E6C1F0BC9DB00C6B337 /* SGBaseGeocoder.swift in Sources */,
 				3AFFADED1F068E8C00147990 /* TKTripBookingCoordinator.swift in Sources */,
 				3AFFAB901F06854F00147990 /* SGCustomEventRecurrenceRule.m in Sources */,
+				3A096E191F20BBDA00666E59 /* TKAgendaOutput.swift in Sources */,
 				3ADD5B741D9CDF0C00A1742F /* TKDepartureView.swift in Sources */,
 				3AB6C7081D1CD08E0089F687 /* TKRealTimeUpdatableHelper.m in Sources */,
 				3AFFADCE1F068E8B00147990 /* BPKCell.m in Sources */,
@@ -2932,7 +2860,6 @@
 				3A32CD791DC2EBC4003B158B /* TKLocationInformation.swift in Sources */,
 				3AFFADA31F068E8B00147990 /* BPKWebViewController.m in Sources */,
 				3AFFADF81F0692AA00147990 /* SGTrack.swift in Sources */,
-				3A77691E1D3DE45800AF9EB2 /* TKTTPifierCache.swift in Sources */,
 				3AA03D8B1F0B79D400C6B337 /* TKShareURLProvider.swift in Sources */,
 				3AFFAD6B1F068E8B00147990 /* AKResendEmailViewController.m in Sources */,
 				3AFFAB951F06854F00147990 /* NSCoder+Marshal.swift in Sources */,
@@ -2949,14 +2876,11 @@
 				3AFFADBA1F068E8B00147990 /* BPKForm.m in Sources */,
 				3AB6C6DF1D1CD08E0089F687 /* Service.m in Sources */,
 				3AFFABB11F06854F00147990 /* SGKConfig.m in Sources */,
-				3A77691C1D3DE45800AF9EB2 /* TKSkedgoifierTypes.swift in Sources */,
 				3AFFAD981F068E8B00147990 /* BPKBaseTableViewController.m in Sources */,
-				3A7769171D3DE45800AF9EB2 /* TKAgendaTypes.swift in Sources */,
 				3AFFAD611F068E8B00147990 /* AKAccountViewController.m in Sources */,
 				3AFFABA81F06854F00147990 /* Loc.swift in Sources */,
 				3AFFAC261F06855F00147990 /* SGLabel.m in Sources */,
 				3AFFABCA1F06854F00147990 /* SVKRegionManager.m in Sources */,
-				3A7769121D3DE45800AF9EB2 /* TKAgendaParserHelper.swift in Sources */,
 				3AFFABCD1F06854F00147990 /* SVKServer.m in Sources */,
 				3AB6C7001D1CD08E0089F687 /* TKBuzzRouter.m in Sources */,
 				3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */,
@@ -2973,7 +2897,6 @@
 				3AA03E5F1F0BC9DB00C6B337 /* SGPermissionManager+AuthorizationAlert.m in Sources */,
 				3A15D8D91D9CE08100BADBEA /* TKBuzzRouter+Rx.swift in Sources */,
 				3AB6C6E91D1CD08E0089F687 /* TripGroup.m in Sources */,
-				3A7769231D3DE45800AF9EB2 /* TKTTPifierFaker.swift in Sources */,
 				3AFFADA01F068E8B00147990 /* BPKPaymentTestViewController.m in Sources */,
 				3AFFAB9E1F06854F00147990 /* NSNumber+Formatter.m in Sources */,
 				3AFFADDC1F068E8B00147990 /* BPKSwitchCell.m in Sources */,
@@ -3021,7 +2944,6 @@
 			files = (
 				3AC4DD0A1DEE32B80026B238 /* TKBuzzRouterTest.m in Sources */,
 				3A32CD6D1DC2D1DA003B158B /* TKTestCase.swift in Sources */,
-				3AC4DD0D1DEE32B80026B238 /* TKTTPifierTest.swift in Sources */,
 				3AFFAE161F06D18700147990 /* SGAutocompletionResultTest.m in Sources */,
 				3AC4DD0C1DEE32B80026B238 /* TKShareHelperTest.swift in Sources */,
 				3AFFAE171F06D18700147990 /* SGGeocoderTest.swift in Sources */,
