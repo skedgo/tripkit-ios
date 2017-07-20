@@ -30,14 +30,14 @@ class TKAgendaTest: XCTestCase {
     
     // test input
     input = try? TKAgendaInput.testInput()
-    components = DateComponents(year: 2017, month: 5, day: 20)
+    components = DateComponents(year: 2017, month: 5, day: 30)
     
     // for now we have to run against the local server
     // TODO: Fix this (should be production ideally)
     SVKServer.serverType = .local
     
     // these tests need a fake token
-    SVKServer.updateUserToken("user-token")
+    SVKServer.updateUserToken("tripkit-ios-tester-token")
     
     // rx test boilderplate
     disposeBag = DisposeBag()
@@ -70,7 +70,7 @@ class TKAgendaTest: XCTestCase {
       XCTFail("Observable should error out")
     } catch {
       switch error {
-      case TKAgendaUploadError.userIsNotLoggedIn: return // all good
+      case TKAgendaError.userIsNotLoggedIn: return // all good
       default: XCTFail("Unexpected error: \(error)")
       }
     }
@@ -78,11 +78,14 @@ class TKAgendaTest: XCTestCase {
   }
   
   func testUploadingInput() throws {
-    let testee = SVKServer.shared.rx.uploadAgenda(input, for: components)
+    let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
+    let result1 = try upload.toBlocking(timeout: 2).toArray()
+    XCTAssertEqual(result1, [TKAgendaUploadResult.success])
     
-    let result = try testee.toBlocking(timeout: 2).toArray()
     
-    XCTAssertEqual(result, [TKAgendaUploadResult.success])
+    let delete = SVKServer.shared.rx.deleteAgenda(for: components)
+    let result2 = try delete.toBlocking(timeout: 2).toArray()
+    XCTAssertEqual(result2, [true])
   }
   
   /// Tests uploading an input and then downloading again, making
@@ -91,17 +94,42 @@ class TKAgendaTest: XCTestCase {
     XCTFail("Not implemented yet")
   }
   
-  /// Mirrors Juptyer notebook Flow 1
-  func testCreateOnDemandFlow() {
-    XCTFail("Not implemented yet")
+  /// Similar to Juptyer notebook Flow 1
+  func testCreateOnDemandFlow() throws {
+    let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
+    let result1 = try upload.toBlocking(timeout: 2).toArray()
+    XCTAssertEqual(result1, [TKAgendaUploadResult.success])
+    
+    let fetch = SVKServer.shared.rx.fetchAgenda(for: components)
+    let result2 = try fetch.toBlocking(timeout: 120).toArray()
+    if let first = result2.first {
+      switch first {
+      case .success, .calculating: XCTAssert(true)
+      default: XCTFail("Observable didn't start with calculating or success, but: \(first)")
+      }
+    } else {
+      XCTFail("Observable didn't fire at all")
+    }
+    if let last = result2.last {
+      switch last {
+      case .success: XCTAssert(true)
+      default: XCTFail("Observable didn't end with success, but: \(last)")
+      }
+    } else {
+      XCTFail("Observable didn't fire at all")
+    }
+    
+    let delete = SVKServer.shared.rx.deleteAgenda(for: components)
+    let result3 = try delete.toBlocking(timeout: 2).toArray()
+    XCTAssertEqual(result3, [true])
   }
   
-  /// Mirrors Juptyer notebook Flow 2
+  /// Similar to Juptyer notebook Flow 2
   func testCachingResult() {
     XCTFail("Not implemented yet")
   }
   
-  /// Mirrors Juptyer notebook Flow 3
+  /// Similar to Juptyer notebook Flow 3
   func testPostingFromNonOwningDevice() {
     XCTFail("Not implemented yet")
   }
@@ -114,16 +142,6 @@ class TKAgendaTest: XCTestCase {
   }
     
 }
-
-public func ==(lhs: TKAgendaUploadResult, rhs: TKAgendaUploadResult) -> Bool {
-  switch (lhs, rhs) {
-  case (.success, .success): return true
-  case (.noChange, .noChange): return true
-  case (.denied(let ldenial), .denied(let rdenial)): return ldenial == rdenial
-  default: return false
-  }
-}
-extension TKAgendaUploadResult: Equatable {}
 
 fileprivate extension TKAgendaInput {
   

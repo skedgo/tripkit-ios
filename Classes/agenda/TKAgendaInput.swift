@@ -98,9 +98,6 @@ public struct TKAgendaInput {
 
   }
   
-  public let installationId: String?
-  public let confirmToOverwriteId: String?
-  
   public let config: [String: Any]
   
   public let items: [Item]
@@ -111,14 +108,12 @@ public struct TKAgendaInput {
   
   public let vehicles: [String: Any]
 
-  public init(items: [Item], modes: [String] = [], config: [String:Any] = [:], patterns: [TKSegmentPattern] = [], vehicles: [String: Any] = [:], installationId: String? = nil, overwritingId: String? = nil) {
+  public init(items: [Item], modes: [String] = [], config: [String:Any] = [:], patterns: [TKSegmentPattern] = [], vehicles: [String: Any] = [:]) {
     self.items = items
     self.modes = modes
     self.config = config
     self.patterns = patterns
     self.vehicles = vehicles
-    self.installationId = installationId
-    self.confirmToOverwriteId = overwritingId
   }
   
 }
@@ -130,18 +125,13 @@ extension TKAgendaInput: Marshaling {
   public typealias MarshalType = [String: Any]
   
   public func marshaled() -> MarshalType {
-    var marshaled: MarshalType =  [
+    return [
       "items": items.map { $0.marshaled() },
       "config": config,
       "patterns": patterns,
       "modes": modes,
       "vehicles": vehicles,
     ]
-    
-    marshaled["installationId"] = installationId
-    marshaled["confirmToOverwriteId"] = confirmToOverwriteId
-    
-    return marshaled
   }
   
 }
