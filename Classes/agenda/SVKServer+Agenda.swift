@@ -49,7 +49,7 @@ extension Reactive where Base: SVKServer {
         // TODO: fix region
         let region: SVKRegion? = nil
         
-        return SVKServer.sharedInstance().rx.hit(
+        return SVKServer.shared.rx.hit(
           .POST,
           path: "agenda/\(year)-\(month)-\(day)",
           parameters: paras,

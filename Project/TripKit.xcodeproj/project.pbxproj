@@ -11,6 +11,7 @@
 		3A096E171F20BBDA00666E59 /* SVKServer+Agenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E141F20BBDA00666E59 /* SVKServer+Agenda.swift */; };
 		3A096E181F20BBDA00666E59 /* TKAgendaInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E151F20BBDA00666E59 /* TKAgendaInput.swift */; };
 		3A096E191F20BBDA00666E59 /* TKAgendaOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E161F20BBDA00666E59 /* TKAgendaOutput.swift */; };
+		3A096E1C1F20CB5400666E59 /* TKAgendaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E1B1F20CB5400666E59 /* TKAgendaTest.swift */; };
 		3A15D8D91D9CE08100BADBEA /* TKBuzzRouter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */; };
 		3A15D8DB1D9CE08D00BADBEA /* TKRoutingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */; };
 		3A266C571D744B9300438024 /* TKSwiftyShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A266C561D744B9300438024 /* TKSwiftyShareHelper.swift */; };
@@ -540,6 +541,7 @@
 		3A096E141F20BBDA00666E59 /* SVKServer+Agenda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SVKServer+Agenda.swift"; sourceTree = "<group>"; };
 		3A096E151F20BBDA00666E59 /* TKAgendaInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaInput.swift; sourceTree = "<group>"; };
 		3A096E161F20BBDA00666E59 /* TKAgendaOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaOutput.swift; sourceTree = "<group>"; };
+		3A096E1B1F20CB5400666E59 /* TKAgendaTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TKAgendaTest.swift; path = agenda/TKAgendaTest.swift; sourceTree = "<group>"; };
 		3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKBuzzRouter+Rx.swift"; sourceTree = "<group>"; };
 		3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRoutingParser.swift; sourceTree = "<group>"; };
 		3A266C561D744B9300438024 /* TKSwiftyShareHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSwiftyShareHelper.swift; sourceTree = "<group>"; };
@@ -1147,6 +1149,14 @@
 			path = agenda;
 			sourceTree = "<group>";
 		};
+		3A096E1A1F20C56F00666E59 /* agenda */ = {
+			isa = PBXGroup;
+			children = (
+				3A096E1B1F20CB5400666E59 /* TKAgendaTest.swift */,
+			);
+			name = agenda;
+			sourceTree = "<group>";
+		};
 		3AA03E331F0BC9DB00C6B337 /* Permissions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1232,6 +1242,7 @@
 			isa = PBXGroup;
 			children = (
 				3A9361C61F140F6100E4E206 /* InfoPlist.strings */,
+				3A096E1A1F20C56F00666E59 /* agenda */,
 				3AC4DCF71DEE32B80026B238 /* data */,
 				3AFFAE111F06D17000147990 /* event */,
 				3AC4DCFC1DEE32B80026B238 /* parsing */,
@@ -2946,6 +2957,7 @@
 				3A32CD6D1DC2D1DA003B158B /* TKTestCase.swift in Sources */,
 				3AFFAE161F06D18700147990 /* SGAutocompletionResultTest.m in Sources */,
 				3AC4DD0C1DEE32B80026B238 /* TKShareHelperTest.swift in Sources */,
+				3A096E1C1F20CB5400666E59 /* TKAgendaTest.swift in Sources */,
 				3AFFAE171F06D18700147990 /* SGGeocoderTest.swift in Sources */,
 				3AC4DD091DEE32B80026B238 /* TKBuzzInfoProviderTest.swift in Sources */,
 				3A787ED11D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */,
