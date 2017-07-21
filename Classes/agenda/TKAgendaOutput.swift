@@ -22,7 +22,7 @@ public struct TKAgendaOutput {
   
   public let track: [TrackItem]
   
-//  public let inputs: [String: TKAgendaInput.Item]
+  public let inputs: [String: TKAgendaInput.Item]
   
   /// Map of a trip's ID to the trip. A trip's ID here
   /// is the trip's departure string from the output.
@@ -38,7 +38,7 @@ extension TKAgendaOutput: Unmarshaling {
     
     hashCode = try object.value(for: "hashCode")
     track = try object.value(for: "track")
-//    inputs = try object.value(for: "inputs")
+    inputs = try object.value(for: "input")
     
   }
   

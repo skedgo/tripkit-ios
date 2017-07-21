@@ -258,3 +258,87 @@ extension SGKColor: Marshaling {
   
 }
 
+// MARK: Unmarshaling
+
+extension TKAgendaInput: Unmarshaling {
+  
+  public init(object: MarshaledObject) throws {
+
+    items = try object.value(for: "items")
+    modes = (try? object.value(for: "modes")) ?? []
+    config = (try? object.value(for: "config")) ?? [:]
+    patterns = (try? object.value(for: "patterns")) ?? []
+    vehicles = (try? object.value(for: "vehicles")) ?? [:]
+    
+  }
+  
+}
+
+extension TKAgendaInput.Item: Unmarshaling {
+  
+  public init(object: MarshaledObject) throws {
+    let type: String = try object.value(for: "type")
+    
+    switch type {
+    case "home":
+      self = .home(TKAgendaInput.HomeInput(
+        title: try? object.value(for: "title"),
+        location: try object.value(for: "location")
+      ))
+      
+    case "event":
+      self = .event(TKAgendaInput.EventInput(
+        id: try object.value(for: "id"),
+        title: try object.value(for: "title"),
+        location: try object.value(for: "location"),
+        startTime: try object.value(for: "startTime"),
+        endTime: try object.value(for: "startTime"),
+        priority: try object.value(for: "priority"),
+        color: try? object.value(for: "color"),
+        description: try? object.value(for: "description"),
+        url: try? object.value(for: "url"),
+        excluded: (try? object.value(for: "excluded")) ?? false,
+        direct: (try? object.value(for: "direct")) ?? false
+      ))
+      
+      
+    case "trip":
+      self = .trip(TKAgendaInput.TripInput(
+        url: try object.value(for: "url")
+        
+        // TODO: Fill in rest
+      ))
+      
+    default:
+      throw MarshalError.keyNotFound(key: "type")
+    }
+    
+  }
+  
+}
+
+
+extension TKAgendaInput.Location: Unmarshaling {
+  
+  public init(object: MarshaledObject) throws {
+    
+    what3word = try? object.value(for: "what3word")
+    title = try? object.value(for: "title")
+    address = try? object.value(for: "address")
+    
+    if let lat: CLLocationDegrees = try? object.value(for: "lat"),
+      let lng: CLLocationDegrees = try? object.value(for: "lng") {
+      let candidate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+      if candidate.isValid {
+        coordinate = candidate
+      } else {
+        coordinate = nil
+      }
+    } else {
+      coordinate = nil
+    }
+    
+  }
+  
+}
+

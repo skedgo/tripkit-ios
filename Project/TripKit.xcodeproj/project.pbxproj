@@ -692,7 +692,7 @@
 		3AB6C6791D1CD08E0089F687 /* TripGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripGroup.m; sourceTree = "<group>"; };
 		3AB6C67A1D1CD08E0089F687 /* TripRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TripRequest.h; sourceTree = "<group>"; };
 		3AB6C67B1D1CD08E0089F687 /* TripRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripRequest.m; sourceTree = "<group>"; };
-		3AB6C67C1D1CD08E0089F687 /* Vehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Vehicle.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		3AB6C67C1D1CD08E0089F687 /* Vehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Vehicle.h; sourceTree = "<group>"; };
 		3AB6C67D1D1CD08E0089F687 /* Vehicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vehicle.m; sourceTree = "<group>"; };
 		3AB6C67E1D1CD08E0089F687 /* TKCellHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCellHelper.h; sourceTree = "<group>"; };
 		3AB6C67F1D1CD08E0089F687 /* TKCellHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCellHelper.m; sourceTree = "<group>"; };
