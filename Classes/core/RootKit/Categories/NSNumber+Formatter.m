@@ -45,17 +45,6 @@
   }
 }
 
-- (NSString *)toCaloriesString
-{
-//TODO: Use NSEnergyFormatter in iOS 8 - http://nshipster.com/nsformatter/
-  
-  NSNumberFormatter *formatter = [[self class] numberFormatter];
-  formatter.numberStyle = NSNumberFormatterDecimalStyle;
-  formatter.currencySymbol = nil;
-  formatter.roundingIncrement = @(1);
-  return [NSString stringWithFormat:@"%@ Cal", [formatter stringFromNumber:self]];
-}
-
 #pragma mark - Helpers
 
 + (NSNumberFormatter *)numberFormatter {

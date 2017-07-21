@@ -12,7 +12,6 @@
 
 - (NSString *)toMoneyString:(NSString *)currencySymbol;
 - (NSString *)toCarbonString;
-- (NSString *)toCaloriesString;
 
 
 @end
