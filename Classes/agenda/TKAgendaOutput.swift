@@ -38,7 +38,7 @@ extension TKAgendaOutput: Unmarshaling {
     
     hashCode = try object.value(for: "hashCode")
     track = try object.value(for: "track")
-    inputs = try object.value(for: "input")
+    inputs = try object.value(for: "inputs")
     
   }
   
