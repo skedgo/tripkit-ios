@@ -1,6 +1,6 @@
 //
 //  SGBuzzGeocoder.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 24/02/11.
 //  Copyright 2011 SkedGo. All rights reserved.

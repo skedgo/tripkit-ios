@@ -1,6 +1,6 @@
 //
 //  TKWaypointRouter.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 31/08/2016.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.

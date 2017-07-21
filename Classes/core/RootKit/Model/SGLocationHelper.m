@@ -1,6 +1,6 @@
 //
 //  SGLocationHelper.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 21/10/2013.
 //

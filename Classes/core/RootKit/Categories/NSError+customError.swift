@@ -1,6 +1,6 @@
 //
 //  NSError+customError.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 25/11/16.
 //

@@ -1,6 +1,6 @@
 //
 //  TripRequest.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 18/11/16.
 //

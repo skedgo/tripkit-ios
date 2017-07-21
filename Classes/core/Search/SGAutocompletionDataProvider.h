@@ -1,6 +1,6 @@
 //
 //  SGAutocompletionDataProvider.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 23/10/2013.
 //

@@ -1,6 +1,6 @@
 //
 //  TKBuzzInfoProvider.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 11/12/2015.
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.

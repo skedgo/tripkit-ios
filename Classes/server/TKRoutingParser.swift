@@ -1,6 +1,6 @@
 //
 //  TKRoutingParser.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 31/08/2016.
 //

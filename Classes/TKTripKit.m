@@ -1,6 +1,6 @@
 //
 //  TripKit.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 17/06/2014.
 //

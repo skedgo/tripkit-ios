@@ -1,6 +1,6 @@
 //
 //  TKSegmentHelper.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 4/07/2016.
 //

@@ -1,6 +1,6 @@
 //
 //  SGKServer.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 17/02/2015.
 //

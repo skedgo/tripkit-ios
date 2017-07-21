@@ -1,6 +1,6 @@
 //
 //  SGRealTimeUpdatableHelper.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 16/01/2015.
 //

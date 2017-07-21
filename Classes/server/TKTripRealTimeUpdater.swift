@@ -1,6 +1,6 @@
 //
 //  TKTripRealTimeUpdater.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 3/11/16.
 //

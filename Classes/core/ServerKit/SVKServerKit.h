@@ -1,6 +1,6 @@
 //
 //  SVKServerKit.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 6/03/2015.
 //

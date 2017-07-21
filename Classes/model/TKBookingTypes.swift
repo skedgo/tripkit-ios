@@ -1,6 +1,6 @@
 //
 //  TKBookingTypes.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 14/12/16.
 //

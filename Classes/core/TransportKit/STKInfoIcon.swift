@@ -1,6 +1,6 @@
 //
 //  STKInfoIcon.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 27/9/16.
 //

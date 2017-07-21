@@ -1,6 +1,6 @@
 //
 //  NSNumber+Formatter.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 18/01/12.
 //  Copyright (c) 2012 SkedGo. All rights reserved.
