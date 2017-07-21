@@ -112,7 +112,10 @@ class TKAgendaTest: XCTestCase {
     }
     if let last = result2.last {
       switch last {
-      case .success: XCTAssert(true)
+      case .success(let result):
+        XCTAssertEqual(4, result.trips.count)
+        XCTAssertEqual(10, result.track.count)
+        
       default: XCTFail("Observable didn't end with success, but: \(last)")
       }
     } else {
