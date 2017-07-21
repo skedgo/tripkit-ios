@@ -1,6 +1,6 @@
 //
 //  SGTrackHelper.m
-//  WotGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 20/01/2014.
 //  Copyright (c) 2014 Adrian Schoenig. All rights reserved.
@@ -25,7 +25,7 @@
 
 + (NSTimeZone *)attendanceTimeZoneForTrackItem:(id<SGTrackItem>)trackItem
 {
-  BOOL affectsTimeZone = [trackItem conformsToProtocol:@protocol(SGTripTrackItem)]
+  BOOL affectsTimeZone = [self trackItemIsTrip:trackItem]
                       || CLLocationCoordinate2DIsValid([[trackItem mapAnnotation] coordinate]);
   if (affectsTimeZone) {
     return [trackItem timeZone];
@@ -201,50 +201,6 @@
   return [[NSAttributedString alloc] initWithString:nonBreaking];
 }
 
-
-+ (NSString *)timeStringForTrack:(id<SGTrack>)track
-{
-  NSTimeZone *timeZone = [NSTimeZone defaultTimeZone];
-  for (id<SGTrackItem> trackItem in [track items]) {
-    NSTimeZone *itemTimeZone = [self timeZoneForTrackItem:trackItem];
-    if (itemTimeZone) {
-      timeZone = itemTimeZone;
-      break;
-    }
-  }
-  
-  NSString *startString = [SGStyleManager dateString:[track startDate] forTimeZone:timeZone];
-  if ([track endDate]) {
-    NSString *endString   = [SGStyleManager dateString:[track endDate] forTimeZone:timeZone];
-    if ([startString isEqualToString:endString]) {
-      return startString;
-    } else {
-      return [NSString stringWithFormat:@"%@ - %@", startString, endString];
-    }
-  } else {
-    return startString;
-  }
-}
-
-+ (id<MKAnnotation>)originOfTrackItem:(id<SGTrackItem>)trackItem
-{
-  if ([trackItem conformsToProtocol:@protocol(SGTripTrackItem)]) {
-    id<SGTripTrackItem> tripTrackItem = (id<SGTripTrackItem>)trackItem;
-    return [tripTrackItem routeStart];
-  } else  {
-    return [trackItem mapAnnotation];
-  }
-}
-
-+ (id<MKAnnotation>)destinationOfTrackItem:(id<SGTrackItem>)trackItem
-{
-  if ([trackItem conformsToProtocol:@protocol(SGTripTrackItem)]) {
-    id<SGTripTrackItem> tripTrackItem = (id<SGTripTrackItem>)trackItem;
-    return [tripTrackItem routeEnd];
-  } else {
-    return [trackItem mapAnnotation];
-  }
-}
 
 + (BOOL)trackItemShouldBeIgnored:(id<SGTrackItem>)trackItem
 {
