@@ -537,7 +537,12 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   }
   
   // Create the request
-  NSURL *fullURL = [baseURL URLByAppendingPathComponent:path];
+  // Using the diversion over string rather than just calling
+  // `URLByAppendingPathComponent` to handle `POST`-paths that
+  // include a query-string components
+  NSString *urlString = [[baseURL absoluteString] stringByAppendingPathComponent:path];
+  NSURL *fullURL = [NSURL URLWithString: urlString];
+  
   NSURLRequest *request = nil;
   if ([method isEqualToString:@"GET"]) {
     request = [SVKServer GETRequestWithSkedGoHTTPHeadersForURL:fullURL paras:parameters];

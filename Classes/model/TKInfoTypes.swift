@@ -88,9 +88,16 @@ extension TKCompanyInfo {
 
 extension Date: ValueType {
   public static func value(from object: Any) throws -> Date {
-    guard let seconds = object as? TimeInterval else {
-      throw MarshalError.typeMismatch(expected: TimeInterval.self, actual: type(of: object))
+    
+    if let seconds = object as? TimeInterval {
+      return Date(timeIntervalSince1970: seconds)
+    
+    } else if let iso8601 = object as? String,
+      let date = try? Date(iso8601: iso8601) {
+      return date
+    
+    } else {
+      throw MarshalError.typeMismatch(expected: String.self, actual: type(of: object))
     }
-    return Date(timeIntervalSince1970: seconds)
   }
 }

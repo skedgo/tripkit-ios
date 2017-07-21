@@ -21,7 +21,7 @@
   NSUserDefaults *sharedDefaults = [NSUserDefaults sharedDefaults];
   
   // JSON version
-  [paras setValue:@(11) forKey:@"v"];
+  [paras setValue:@(TKSettings.parserJsonVersion) forKey:@"v"];
   
   // distance units
   NSString *unit = nil;

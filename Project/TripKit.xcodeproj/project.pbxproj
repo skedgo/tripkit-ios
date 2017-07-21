@@ -19,6 +19,7 @@
 		3A096E281F20DF6600666E59 /* TKLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E271F20DF6600666E59 /* TKLocationProvider.swift */; };
 		3A096E2C1F20E0C500666E59 /* SGLocationManager+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E2B1F20E0C500666E59 /* SGLocationManager+rx.swift */; };
 		3A096E2E1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */; };
+		3A096E301F21E6EE00666E59 /* TKAgendaOutput+Trips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E2F1F21E6EE00666E59 /* TKAgendaOutput+Trips.swift */; };
 		3A15D8D91D9CE08100BADBEA /* TKBuzzRouter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */; };
 		3A15D8DB1D9CE08D00BADBEA /* TKRoutingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */; };
 		3A266C571D744B9300438024 /* TKSwiftyShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A266C561D744B9300438024 /* TKSwiftyShareHelper.swift */; };
@@ -556,6 +557,7 @@
 		3A096E271F20DF6600666E59 /* TKLocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationProvider.swift; sourceTree = "<group>"; };
 		3A096E2B1F20E0C500666E59 /* SGLocationManager+rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SGLocationManager+rx.swift"; sourceTree = "<group>"; };
 		3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+SharedDefaults.swift"; sourceTree = "<group>"; };
+		3A096E2F1F21E6EE00666E59 /* TKAgendaOutput+Trips.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKAgendaOutput+Trips.swift"; sourceTree = "<group>"; };
 		3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKBuzzRouter+Rx.swift"; sourceTree = "<group>"; };
 		3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRoutingParser.swift; sourceTree = "<group>"; };
 		3A266C561D744B9300438024 /* TKSwiftyShareHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSwiftyShareHelper.swift; sourceTree = "<group>"; };
@@ -718,7 +720,7 @@
 		3AB6C69C1D1CD08E0089F687 /* TKRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TKRouter.h; sourceTree = "<group>"; };
 		3AB6C69D1D1CD08E0089F687 /* TKRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRouter.m; sourceTree = "<group>"; };
 		3AB6C69E1D1CD08E0089F687 /* TKRoutingParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRoutingParser.h; sourceTree = "<group>"; };
-		3AB6C69F1D1CD08E0089F687 /* TKRoutingParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TKRoutingParser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		3AB6C69F1D1CD08E0089F687 /* TKRoutingParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TKRoutingParser.m; sourceTree = "<group>"; };
 		3AB6C6A01D1CD08E0089F687 /* TKSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSettings.h; sourceTree = "<group>"; };
 		3AB6C6A11D1CD08E0089F687 /* TKSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSettings.m; sourceTree = "<group>"; };
 		3AB6C6A21D1CD08E0089F687 /* TKTimetableDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTimetableDownloader.h; sourceTree = "<group>"; };
@@ -1159,6 +1161,7 @@
 				3A096E141F20BBDA00666E59 /* SVKServer+Agenda.swift */,
 				3A096E151F20BBDA00666E59 /* TKAgendaInput.swift */,
 				3A096E161F20BBDA00666E59 /* TKAgendaOutput.swift */,
+				3A096E2F1F21E6EE00666E59 /* TKAgendaOutput+Trips.swift */,
 			);
 			path = agenda;
 			sourceTree = "<group>";
@@ -2813,6 +2816,7 @@
 				3AFFABD01F06854F00147990 /* SVKTransportModes.m in Sources */,
 				3AFFAD891F068E8B00147990 /* AKLabelCell.swift in Sources */,
 				3ADB3A581D39E3830012D04B /* TKSegmentHelper.swift in Sources */,
+				3A096E301F21E6EE00666E59 /* TKAgendaOutput+Trips.swift in Sources */,
 				3AFFABC51F06854F00147990 /* SGKNamedCoordinate+SVKRegion.swift in Sources */,
 				3AFFADB61F068E8B00147990 /* BPKUser.m in Sources */,
 				3AFFAD7C1F068E8B00147990 /* AMKItem.swift in Sources */,

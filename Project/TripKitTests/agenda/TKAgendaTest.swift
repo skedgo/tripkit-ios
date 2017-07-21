@@ -79,12 +79,12 @@ class TKAgendaTest: XCTestCase {
   
   func testUploadingInput() throws {
     let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
-    let result1 = try upload.toBlocking(timeout: 2).toArray()
+    let result1 = try upload.toBlocking().toArray()
     XCTAssertEqual(result1, [TKAgendaUploadResult.success])
     
     
     let delete = SVKServer.shared.rx.deleteAgenda(for: components)
-    let result2 = try delete.toBlocking(timeout: 2).toArray()
+    let result2 = try delete.toBlocking().toArray()
     XCTAssertEqual(result2, [true])
   }
   
@@ -97,7 +97,7 @@ class TKAgendaTest: XCTestCase {
   /// Similar to Juptyer notebook Flow 1
   func testCreateOnDemandFlow() throws {
     let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
-    let result1 = try upload.toBlocking(timeout: 2).toArray()
+    let result1 = try upload.toBlocking().toArray()
     XCTAssertEqual(result1, [TKAgendaUploadResult.success])
     
     let fetch = SVKServer.shared.rx.fetchAgenda(for: components)
@@ -120,7 +120,7 @@ class TKAgendaTest: XCTestCase {
     }
     
     let delete = SVKServer.shared.rx.deleteAgenda(for: components)
-    let result3 = try delete.toBlocking(timeout: 2).toArray()
+    let result3 = try delete.toBlocking().toArray()
     XCTAssertEqual(result3, [true])
   }
   

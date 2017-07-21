@@ -10,6 +10,8 @@ import Foundation
 
 extension TKSettings {
   
+  public static let parserJsonVersion: Int = 13
+  
   private enum DefaultsKey: String {
     case sortIndex = "internalSortIndex"
   }

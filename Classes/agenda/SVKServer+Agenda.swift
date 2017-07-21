@@ -168,9 +168,9 @@ extension Reactive where Base: SVKServer {
         // TODO: fix region, should use last use region / home region / nil
         let region: SVKRegion? = nil
         
-        var path = "agenda/\(dateString)"
+        var path = "agenda/\(dateString)?v=\(TKSettings.parserJsonVersion)"
         if let hashCode = hashCode {
-          path.append("?hashCode=\(hashCode)")
+          path.append("&hashCode=\(hashCode)")
         }
         
         return SVKServer.shared.rx.hit(
@@ -186,7 +186,7 @@ extension Reactive where Base: SVKServer {
         )
     }
     
-    return result.map { status, body -> TKAgendaFetchResult<TKAgendaOutput> in
+    return result.flatMapLatest { status, body -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
       switch status {
       case 200:
         guard
@@ -194,10 +194,11 @@ extension Reactive where Base: SVKServer {
           let output = try? TKAgendaOutput(object: marshaled) else {
           throw TKAgendaError.unexpectedResponse(status, body)
         }
-        return .success(output)
         
-      case 299: return .calculating
-      case 304: return .noChange
+        return try output.addTrips(fromServerBody: marshaled).map { .success($0) }
+        
+      case 299: return Observable.just(.calculating)
+      case 304: return Observable.just(.noChange)
       case 401: throw TKAgendaError.userTokenIsInvalid
       case 404: throw TKAgendaError.agendaInputNotAvailable(components)
       default:  throw TKAgendaError.unexpectedResponse(status, body)
