@@ -1,5 +1,7 @@
 # SkedGo's TripKit for iOS
 
+![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20watchOS-333333.svg)
+
 Additional documentation is available on the [TripGo Developer page](http://skedgo.github.io/tripgo-api/site/)
 
 ## Components
