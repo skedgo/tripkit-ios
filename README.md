@@ -25,11 +25,11 @@ source 'https://github.com/skedgo/PodSpecs.git'
 And then add desired Pods:
 
 ```ruby
-  pod 'TripKit',                '~> 2.0beta2'
-  pod 'TripKitUI',              '~> 2.0beta2'
-  pod 'TripKitBookings',        '~> 2.0beta2'
-  pod 'TripKitAddOns/InterApp', '~> 2.0beta2'
-  pod 'TripKitAddOns/Share',    '~> 2.0beta2'
+  pod 'TripKit',                '~> 2.0beta4'
+  pod 'TripKitUI',              '~> 2.0beta4'
+  pod 'TripKitBookings',        '~> 2.0beta4'
+  pod 'TripKitAddOns/InterApp', '~> 2.0beta4'
+  pod 'TripKitAddOns/Share',    '~> 2.0beta4'
 ```
 
 ### Manually
