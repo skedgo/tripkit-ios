@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G16b" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
     <entity name="Alert" representedClassName="Alert" syncable="YES">
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="hashCode" attributeType="Integer 32" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
@@ -106,6 +106,7 @@
         <attribute name="stopCode" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="stopModeInfo" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="wheelchairAccessible" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="cell" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cell" inverseName="stops" inverseEntity="Cell" syncable="YES"/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopLocation" inverseName="parent" inverseEntity="StopLocation" syncable="YES"/>
         <relationship name="endVisits" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DLSEntry" inverseName="endStop" inverseEntity="DLSEntry" syncable="YES"/>
@@ -201,7 +202,7 @@
         <element name="SegmentTemplate" positionX="711" positionY="-204" width="128" height="375"/>
         <element name="Service" positionX="315" positionY="149" width="128" height="283"/>
         <element name="Shape" positionX="601" positionY="368" width="128" height="180"/>
-        <element name="StopLocation" positionX="-101" positionY="369" width="128" height="253"/>
+        <element name="StopLocation" positionX="-101" positionY="369" width="128" height="270"/>
         <element name="StopVisits" positionX="124" positionY="243" width="128" height="238"/>
         <element name="Trip" positionX="315" positionY="-252" width="128" height="390"/>
         <element name="TripGroup" positionX="99" positionY="-186" width="128" height="195"/>

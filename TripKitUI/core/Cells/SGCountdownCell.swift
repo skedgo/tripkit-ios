@@ -23,7 +23,7 @@ public struct SGCountdownCellModel {
   public var alertIconType: STKInfoIconType
   public var isCancelled: Bool = false
   public var wheelChairEnabled: Bool = false
-  public var wheelChairAccessible: Bool = false
+  public var wheelChairAccessible: NSInteger?
   
   public init(title: NSAttributedString, position: SGKGrouping = .edgeToEdge, alertIconType: STKInfoIconType = .none) {
     self.title = title
@@ -37,11 +37,27 @@ extension SGCountdownCell {
   
   public func configure(with model: SGCountdownCellModel) {
     showAsCanceled = model.isCancelled
-    showWheelchair = model.wheelChairEnabled && model.wheelChairAccessible
+    showWheelchair = NSInteger(model.wheelChairAccessible!)
+    var subsubtitle: String?
+    if (model.wheelChairEnabled) {
+      switch showWheelchair {
+      case 0:
+        subsubtitle = Loc.WheelchairAccessible
+
+      case 1:
+        subsubtitle = Loc.WheelchairNotAccessible
+
+      case 2:
+        subsubtitle = Loc.UnkonwWheelchairAccessible
+        
+      default:
+        break
+      }
+    }
     
     self.configure(title: model.title
       , subtitle: model.subtitle
-      , subsubtitle: model.subsubtitle
+      , subsubtitle: subsubtitle
       , icon: model.icon
       , iconImageURL: model.iconImageURL
       , timeToCountdownTo: model.time

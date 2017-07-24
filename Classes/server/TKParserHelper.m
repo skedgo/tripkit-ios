@@ -138,6 +138,7 @@
   stop.stopCode  = stopDict[@"code"];
   stop.shortName = stopDict[@"shortName"];
   stop.sortScore = stopDict[@"popularity"];
+  stop.wheelchairAccessible = stopDict[@"wheelchairAccessible"];
   stop.location  = [self locationForStopFromDictionary:stopDict];
   
   NSDictionary *modeInfoDict = stopDict[@"modeInfo"];

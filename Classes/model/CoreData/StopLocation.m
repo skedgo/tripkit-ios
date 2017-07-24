@@ -26,6 +26,7 @@
 @dynamic name;
 @dynamic location;
 @dynamic stopCode;
+@dynamic wheelchairAccessible;
 @dynamic stopModeInfo;
 @dynamic shortName;
 @dynamic filter;

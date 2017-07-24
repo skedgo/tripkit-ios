@@ -119,16 +119,17 @@ typedef enum {
   self.alertIcon.hidden = ! showAlertIcon;
 }
 
-- (void)setShowWheelchair:(BOOL)showWheelchair
+- (void)setShowWheelchair:(int)showWheelchair
 {
   _showWheelchair = showWheelchair;
   
-  if (showWheelchair) {
-    self.modeAccessoryIcon.hidden = NO;
-    self.modeAccessoryIcon.image = [SGStyleManager imageNamed:@"icon-wheelchair-white-outline"];
+  self.modeAccessoryIcon.hidden = NO;
+  if (showWheelchair == 0) {
+    self.modeAccessoryIcon.image = [SGStyleManager imageNamed:@"icon-wheelchair-accessible"];
+  } else if (showWheelchair == 1) {
+    self.modeAccessoryIcon.image = [SGStyleManager imageNamed:@"icon-wheelchair-not-accessible"];
   } else {
-    self.modeAccessoryIcon.hidden = YES;
-    self.modeAccessoryIcon.image = nil;
+    self.modeAccessoryIcon.image = [SGStyleManager imageNamed:@"icon-wheelchair-unknow"];
   }
 }
 
@@ -154,7 +155,7 @@ typedef enum {
   }
   
   // Don't show wheelchair by default.
-  self.showWheelchair = NO;
+  self.modeAccessoryIcon.hidden = YES;
   
   [self readDefaultDimensionsFromStoryboard];
 }

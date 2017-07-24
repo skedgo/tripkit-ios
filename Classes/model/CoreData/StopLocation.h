@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSString * shortName;
 @property (nonatomic, copy) NSString * stopCode;
 @property (nonatomic, strong, null_resettable) ModeInfo * stopModeInfo;
+@property (nonatomic, strong, nullable) NSNumber * wheelchairAccessible;
 @property (nonatomic, retain, nullable) NSNumber * sortScore;
 @property (nonatomic, retain, nullable) NSString * filter;
 @property (nonatomic, retain, nullable) NSString * regionName;
