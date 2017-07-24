@@ -13,20 +13,20 @@ public struct TKAgendaInput {
 
   public struct Location {
     public let what3word: String?
-    public let title: String?
+    public let name: String?
     public let address: String?
     public let coordinate: CLLocationCoordinate2D?
     
-    public init(title: String? = nil, what3word: String) {
+    public init(name: String? = nil, what3word: String) {
       self.what3word = what3word
-      self.title = title
+      self.name = name
       self.address = nil
       self.coordinate = nil
     }
     
-    public init(title: String? = nil, coordinate: CLLocationCoordinate2D, address: String? = nil) {
+    public init(name: String? = nil, coordinate: CLLocationCoordinate2D, address: String? = nil) {
       self.what3word = nil
-      self.title = title
+      self.name = name
       self.address = address
       self.coordinate = coordinate
     }
@@ -162,7 +162,7 @@ extension TKAgendaInput.Location: Marshaling {
   public func marshaled() -> MarshalType {
     var marshaled = MarshalType()
     marshaled["what3word"] = what3word
-    marshaled["title"] = title
+    marshaled["name"] = name
     marshaled["address"] = address
     
     if let coordinate = coordinate {
@@ -323,7 +323,7 @@ extension TKAgendaInput.Location: Unmarshaling {
   public init(object: MarshaledObject) throws {
     
     what3word = try? object.value(for: "what3word")
-    title = try? object.value(for: "title")
+    name = try? object.value(for: "name")
     address = try? object.value(for: "address")
     
     if let lat: CLLocationDegrees = try? object.value(for: "lat"),
@@ -348,6 +348,6 @@ extension SGKNamedCoordinate {
   public convenience init?(_ inputLocation: TKAgendaInput.Location?) {
     guard let inputLocation = inputLocation, let coordinate = inputLocation.coordinate else { return nil }
     
-    self.init(latitude: coordinate.latitude, longitude: coordinate.longitude, name: inputLocation.title, address: inputLocation.address)
+    self.init(latitude: coordinate.latitude, longitude: coordinate.longitude, name: inputLocation.name, address: inputLocation.address)
   }
 }

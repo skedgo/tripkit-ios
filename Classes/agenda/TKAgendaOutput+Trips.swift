@@ -97,7 +97,7 @@ extension TKAgendaOutput {
         leaveAfter = fromItem?.endTime
         arriveBy = toItem?.startTime
         
-        if let destination = toItem?.title ?? toItem?.location?.title {
+        if let destination = toItem?.title ?? toItem?.location?.name {
           trip.request.purpose = Loc.To(location: destination)
         }
       }
