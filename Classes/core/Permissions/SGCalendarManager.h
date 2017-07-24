@@ -1,6 +1,6 @@
 //
 //  CalendarManager.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 28/10/11.
 //  Copyright (c) 2011 SkedGo. All rights reserved.

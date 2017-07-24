@@ -1,6 +1,6 @@
 //
 //  NSUserDefaults+SharedDefaults.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 30/12/2014.
 //

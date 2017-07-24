@@ -1,6 +1,6 @@
 //
 //  BHBuzzRouter.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 2/03/11.
 //  Copyright 2011 SkedGo. All rights reserved.

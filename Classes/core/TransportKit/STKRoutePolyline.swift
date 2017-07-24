@@ -1,6 +1,6 @@
 //
 //  STKRoutePolyline.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 27/10/16.
 //

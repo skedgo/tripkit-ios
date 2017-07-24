@@ -1,6 +1,6 @@
 //
 //  RegionManager.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 24/05/12.
 //  Copyright (c) 2012 SkedGo. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  SVKRegion.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 3/1/17.
 //

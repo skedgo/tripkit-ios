@@ -1,6 +1,6 @@
 //
 //  SGFoursquareGeocoder.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 4/7/17.
 //

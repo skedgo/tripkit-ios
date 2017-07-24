@@ -1,6 +1,6 @@
 //
 //  TKLocationRealTime.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 8/08/2016.
 //

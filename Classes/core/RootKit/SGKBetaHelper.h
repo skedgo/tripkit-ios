@@ -1,6 +1,6 @@
 //
 //  SGBetaHelper.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 28/01/2015.
 //

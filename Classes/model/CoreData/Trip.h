@@ -1,6 +1,6 @@
 //
 //  Trip.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 3/03/11.
 //  Copyright (c) 2011 SkedGo. All rights reserved.

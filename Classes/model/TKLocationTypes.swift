@@ -1,6 +1,6 @@
 //
 //  TKLocations.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 5/12/16.
 //

@@ -1,6 +1,6 @@
 //
 //  SGImageCacher.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 29/11/2013.
 //

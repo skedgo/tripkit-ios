@@ -1,6 +1,6 @@
 //
 //  AddressBookManager.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 15/03/11.
 //  Copyright 2011 SkedGo. All rights reserved.

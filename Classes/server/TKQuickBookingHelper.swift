@@ -1,6 +1,6 @@
 //
 //  TKQuickBookingHelper.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 21/03/2016.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.

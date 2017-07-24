@@ -1,6 +1,6 @@
 //
 //  SGLocationManager.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 14/7/17.
 //

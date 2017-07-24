@@ -1,6 +1,6 @@
 //
 //  STKVehicleType.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 8/04/2014.
 //

@@ -1,6 +1,6 @@
 //
 //  SGObjCDisposeBag.swift
-//  Pods
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 2/11/2016.
 //

@@ -1,6 +1,6 @@
 //
 //  SGKGrouping.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 20/02/2014.
 //

@@ -1,6 +1,6 @@
 //
 //  SGActions.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 10/12/2014.
 //

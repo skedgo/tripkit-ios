@@ -1,6 +1,6 @@
 //
 //  TripFactory.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 29/01/2014.
 //

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitBookings"
-  s.version      = "2.0-beta3"
+  s.version      = "2.0-beta4"
   s.summary      = "Booking integration for SkedGo's TripKit"
   s.homepage     = "http://www.skedgo.com/"
   s.license      = { 
@@ -21,8 +21,8 @@ Pod::Spec.new do |s|
   
   s.prefix_header_file = "prefix.pch"
 
-  s.dependency 'TripKit', '~> 2.0-beta3'
-  s.dependency 'TripKitUI', '~> 2.0-beta3'
+  s.dependency 'TripKit', '~> 2.0-beta4'
+  s.dependency 'TripKitUI', '~> 2.0-beta4'
 
   s.dependency 'KVNProgress'
 

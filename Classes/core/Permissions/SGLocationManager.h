@@ -1,6 +1,6 @@
 //
 //  LocationManager.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 30/08/12.
 //

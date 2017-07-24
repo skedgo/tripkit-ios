@@ -1,6 +1,6 @@
 //
 //  SGKAlert.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 12/02/2015.
 //

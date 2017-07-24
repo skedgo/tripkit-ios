@@ -1,6 +1,6 @@
 //
 //  Loc+TripKit.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 30/11/16.
 //

@@ -1,6 +1,6 @@
 //
 //  SGKConfig.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 20/03/2015.
 //
