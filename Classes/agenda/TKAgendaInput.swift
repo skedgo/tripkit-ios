@@ -51,7 +51,7 @@ public struct TKAgendaInput {
     
     public let id: String
     public let title: String
-    public let location: Location
+    public let location: Location?
     public let startTime: Date
     public let endTime: Date
     public let priority: Priority
@@ -62,7 +62,7 @@ public struct TKAgendaInput {
     public let excluded: Bool
     public let direct: Bool
     
-    public init(id: String, title: String, location: Location, startTime: Date, endTime: Date, priority: Priority, color: SGKColor? = nil, description: String? = nil, url: URL? = nil, excluded: Bool = false, direct: Bool = false) {
+    public init(id: String, title: String, location: Location?, startTime: Date, endTime: Date, priority: Priority, color: SGKColor? = nil, description: String? = nil, url: URL? = nil, excluded: Bool = false, direct: Bool = false) {
       self.id = id
       self.title = title
       self.location = location
@@ -198,12 +198,12 @@ extension TKAgendaInput.EventInput: Marshaling {
     var marshaled: MarshalType =  [
       "id": id,
       "title": title,
-      "location": location.marshaled(),
       "startTime": startTime.iso8601,
       "endTime": endTime.iso8601,
       "priority": priority.rawValue,
     ]
     
+    marshaled["location"] = location?.marshaled()
     marshaled["color"] = color?.marshaled()
     marshaled["description"] = description
     marshaled["url"] = url?.absoluteString
@@ -290,9 +290,9 @@ extension TKAgendaInput.Item: Unmarshaling {
       self = .event(TKAgendaInput.EventInput(
         id: try object.value(for: "id"),
         title: try object.value(for: "title"),
-        location: try object.value(for: "location"),
+        location: try? object.value(for: "location"),
         startTime: try object.value(for: "startTime"),
-        endTime: try object.value(for: "startTime"),
+        endTime: try object.value(for: "endTime"),
         priority: try object.value(for: "priority"),
         color: try? object.value(for: "color"),
         description: try? object.value(for: "description"),
@@ -342,3 +342,12 @@ extension TKAgendaInput.Location: Unmarshaling {
   
 }
 
+// MARK: - Useful helpers
+
+extension SGKNamedCoordinate {
+  public convenience init?(_ inputLocation: TKAgendaInput.Location?) {
+    guard let inputLocation = inputLocation, let coordinate = inputLocation.coordinate else { return nil }
+    
+    self.init(latitude: coordinate.latitude, longitude: coordinate.longitude, name: inputLocation.title, address: inputLocation.address)
+  }
+}

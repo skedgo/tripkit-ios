@@ -28,7 +28,19 @@ extension TKRoutingParser {
   /// Helper method to fill in a request wich the specified location.
   ///
   /// Typically used on requests that were created as part of a previous call to
-  /// `parseAndAddResult`. All parameters except `request` are optional.
+  /// `parseAndAddResult`.
+  ///
+  /// Also sets time type depending on whether `leaveAfter` and/or `arriveBy` are
+  /// provided. If both a provided, `arriveBy` takes precedence.
+  ///
+  /// - Parameters:
+  ///   - request: The request to populate it's from/to/time information
+  ///   - start: New `fromLocation`. If not supplied, will be inferred from a random trip
+  ///   - end: New `toLocation`. If not supplied, will be inferred from a random trip
+  ///   - leaveAfter: Preferred departure time from `start`
+  ///   - arriveBy: Preffered arrive-by time at `end`
+  /// - Returns: If the request did get updated successfully
+  @discardableResult
   public static func populate(_ request: TripRequest, start: MKAnnotation?, end: MKAnnotation?, leaveAfter: Date?, arriveBy: Date?) -> Bool {
     
     guard let trip = request.trips.first else {
@@ -52,27 +64,21 @@ extension TKRoutingParser {
     
     if let leaveAfter = leaveAfter {
       request.departureTime = leaveAfter
-      request.timeType = NSNumber(value: SGTimeType.leaveAfter.rawValue)
+      request.type = .leaveAfter
     }
     
     if let arriveBy = arriveBy {
       request.arrivalTime = arriveBy
-      request.timeType = NSNumber(value: SGTimeType.arriveBefore.rawValue) // can overwrite leave after
+      request.type = .arriveBefore // can overwrite leave after
     }
     
     if arriveBy == nil && leaveAfter == nil {
-      if let trip = request.trips.first {
-        let firstRegular = matchingSegment(in: trip, order: .regular, first: true)
-        request.departureTime = firstRegular.departureTime
-        request.timeType = NSNumber(value: SGTimeType.leaveAfter.rawValue)
-      } else {
-        request.timeType = NSNumber(value: SGTimeType.leaveASAP.rawValue)
-      }
+      let firstRegular = matchingSegment(in: trip, order: .regular, first: true)
+      request.departureTime = firstRegular.departureTime
+      request.type = .leaveAfter
     }
     
-    if let trip = request.trips.first {
-      trip.setAsPreferredTrip()
-    }
+    trip.setAsPreferredTrip()
     return true
   }
   

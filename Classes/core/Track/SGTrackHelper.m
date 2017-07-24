@@ -149,17 +149,25 @@
 
   unsigned dateFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
   NSCalendar *calendar = dayComponents.calendar;
-  if (displayTimeZone) {
-    calendar.timeZone = displayTimeZone;
+  calendar.timeZone = displayTimeZone;
+  
+  NSDateComponents *normalisedDayComponents = nil;
+  if (dayComponents) {
+    normalisedDayComponents = [[NSDateComponents alloc] init];
+    normalisedDayComponents.calendar = dayComponents.calendar;
+    normalisedDayComponents.timeZone = dayComponents.timeZone;
+    normalisedDayComponents.year = dayComponents.year;
+    normalisedDayComponents.month = dayComponents.month;
+    normalisedDayComponents.day = dayComponents.day;
   }
   
   BOOL includeStart = YES;
-  if (dayComponents && timeZoneMatchesDevice) {
+  if (normalisedDayComponents && timeZoneMatchesDevice) {
     NSDateComponents *startComponents = [calendar components:dateFlags fromDate:startDate];
     // normalise for comparison
-    startComponents.calendar = dayComponents.calendar;
-    startComponents.timeZone = dayComponents.timeZone;
-    includeStart = [startComponents isEqual:dayComponents];
+    startComponents.calendar = normalisedDayComponents.calendar;
+    startComponents.timeZone = normalisedDayComponents.timeZone;
+    includeStart = [startComponents isEqual:normalisedDayComponents];
   }
   if (includeStart) {
     startTimeString = [SGStyleManager timeString:startDate forTimeZone:displayTimeZone relativeToTimeZone:relativeTimeZone];
@@ -169,12 +177,12 @@
   if (duration > 0) {
     NSDate *endDate = [startDate dateByAddingTimeInterval:duration];
     BOOL includeEnd = YES;
-    if (dayComponents && timeZoneMatchesDevice) {
+    if (normalisedDayComponents && timeZoneMatchesDevice) {
       NSDateComponents *endComponents = [calendar components:dateFlags
                                                     fromDate:endDate];
-      endComponents.calendar = dayComponents.calendar;
-      endComponents.timeZone = dayComponents.timeZone;
-      includeEnd = [endComponents isEqual:dayComponents];
+      endComponents.calendar = normalisedDayComponents.calendar;
+      endComponents.timeZone = normalisedDayComponents.timeZone;
+      includeEnd = [endComponents isEqual:normalisedDayComponents];
     }
     if (includeEnd) {
       endTimeString = [SGStyleManager timeString:endDate forTimeZone:displayTimeZone];
