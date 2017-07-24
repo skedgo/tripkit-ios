@@ -266,12 +266,13 @@
     return nil;
   }
   
-  NSNumber *epochTime = [item.json objectForKey:kBPKFormValue];
-  if (! epochTime) {
+  
+  id rawTime = [item.json objectForKey:kBPKFormValue];
+  if (! rawTime) {
     return @"unavailable";
   }
   
-  NSDate *date = [NSDate dateWithTimeIntervalSince1970:epochTime.doubleValue];
+  NSDate *date = [TKParserHelper parseDate:rawTime];
   return [SGStyleManager stringForDate:date forTimeZone:[NSTimeZone localTimeZone] showDate:YES showTime:YES];
 }
 

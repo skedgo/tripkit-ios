@@ -285,16 +285,16 @@
       if (bearing)
         visit.bearing   = bearing;
       
-      NSNumber *arrivalRaw = [stopDict objectForKey:@"arrival"];
-      NSNumber *departureRaw = [stopDict objectForKey:@"departure"];
+      id arrivalRaw = [stopDict objectForKey:@"arrival"];
+      id departureRaw = [stopDict objectForKey:@"departure"];
       if (arrivalRaw || departureRaw) {
         if (arrivalRaw) {
-          visit.arrival = [NSDate dateWithTimeIntervalSince1970:arrivalRaw.longValue];
+          visit.arrival = [TKParserHelper parseDate:arrivalRaw];
           
         }
         if (departureRaw) {
           // we use 'time' to allow KVO
-          visit.time = [NSDate dateWithTimeIntervalSince1970:departureRaw.longValue];
+          visit.time = [TKParserHelper parseDate:departureRaw];
         }
         
         // keep original time before we touch it with real-time data
@@ -373,14 +373,8 @@
       alert = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Alert class]) inManagedObjectContext:context];
       alert.hashCode			= hashCode;
       alert.title					= alertDict[@"title"];
-      NSNumber *startTime = alertDict[@"startTime"];
-      if (startTime) {
-        alert.startTime		= [NSDate dateWithTimeIntervalSince1970:startTime.doubleValue];
-      }
-      NSNumber *endTime		= alertDict[@"endTime"];
-      if (endTime) {
-        alert.endTime			= [NSDate dateWithTimeIntervalSince1970:endTime.doubleValue];
-      }
+      alert.startTime     = [self parseDate:alertDict[@"startTime"]];
+      alert.endTime       = [self parseDate:alertDict[@"endTime"]];
       NSDictionary *locDict = alertDict[@"location"];
       if (locDict) {
         CLLocationDegrees lat = [locDict[@"lat"] doubleValue];

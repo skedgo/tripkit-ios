@@ -344,8 +344,8 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       } else {
         trip = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Trip class]) inManagedObjectContext:self.context];
       }
-      trip.arrivalTime   = [NSDate dateWithTimeIntervalSince1970:[tripDict[@"arrive"] doubleValue]];
-      trip.departureTime = [NSDate dateWithTimeIntervalSince1970:[tripDict[@"depart"] doubleValue]];
+      trip.arrivalTime   = [TKParserHelper parseDate:tripDict[@"arrive"]];
+      trip.departureTime = [TKParserHelper parseDate:tripDict[@"depart"]];
       
       // update values if we received them, otherwise keep old
       trip.totalCalories        = tripDict[@"caloriesCost"]         ?: trip.totalCalories;
@@ -463,8 +463,8 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         [reference setBookingData:bookingData];
 
         reference.templateHashCode = hashCode;
-        reference.startTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"startTime"] integerValue]];
-        reference.endTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"endTime"] integerValue]];
+        reference.startTime = [TKParserHelper parseDate:refDict[@"startTime"]];
+        reference.endTime =[TKParserHelper parseDate:refDict[@"endTime"]];
         reference.timesAreRealTime = [refDict[@"realTime"] boolValue];
 
         reference.alertHashCodes = refDict[@"alertHashCodes"];

@@ -40,9 +40,9 @@
     return;
   }
   
-  NSNumber *epochTime = [item value];
-  if (epochTime != nil) {
-    date = [NSDate dateWithTimeIntervalSince1970:epochTime.integerValue];
+  id rawDate = [item value];
+  if (rawDate != nil) {
+    date = [TKParserHelper parseDate:rawDate];
   }
   
   [self configureForDate:date];

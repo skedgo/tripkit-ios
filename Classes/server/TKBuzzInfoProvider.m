@@ -522,16 +522,9 @@ typedef enum {
 			// add the visit information
 			StopVisits *visit = [NSEntityDescription insertNewObjectForEntityForName:entityName
 																												inManagedObjectContext:context];
-			NSNumber *startTimeRaw = departureDict[@"startTime"];
-			if (nil != startTimeRaw) {
-				// we use 'time' to allow KVO
-				visit.time = [NSDate dateWithTimeIntervalSince1970:[startTimeRaw longValue]];
-			}
-			NSNumber *endTimeRaw = departureDict[@"endTime"];
-			if (nil != endTimeRaw) {
-				visit.arrival = [NSDate dateWithTimeIntervalSince1970:[endTimeRaw longValue]];
-			}
-      
+      // we use 'time' to allow KVO
+      visit.time = [TKParserHelper parseDate:departureDict[@"startTime"]];
+      visit.arrival = [TKParserHelper parseDate:departureDict[@"endTime"]];
       visit.originalTime = [visit time];
 			
 			visit.searchString = departureDict[@"searchString"];
