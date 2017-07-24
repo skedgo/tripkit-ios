@@ -67,8 +67,8 @@ extension Vehicle {
     label = dict["label"] as? String
     icon = dict["icon"] as? String
 
-    if let seconds = dict["lastUpdate"] as? TimeInterval {
-      lastUpdate = Date(timeIntervalSince1970: seconds)
+    if let date = TKParserHelper.parseDate(dict["lastUpdate"]) {
+      lastUpdate = date
     } else {
       assertionFailure("Vehicle is missing last update. Falling back to now.")
       lastUpdate = Date()
