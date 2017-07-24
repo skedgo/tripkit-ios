@@ -1,12 +1,30 @@
 //
 //  SGLocationManager.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 14/7/17.
 //
 //
 
 import Foundation
+
+public extension SGLocationManager {
+  
+  public enum LocalizationError: Error {
+    
+    case featureNotAvailable
+    case authorizationDenied
+    
+  }
+  
+  public static let shared = SGLocationManager.__sharedInstance()
+
+  public var currentLocation: MKAnnotation {
+    return __currentLocationPlaceholder()
+  }
+  
+}
+
 
 // SGPermissionManager overrides
 

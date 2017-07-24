@@ -1,6 +1,6 @@
 //
 //  TKLocationRealTime.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 8/08/2016.
 //
@@ -27,7 +27,7 @@ public enum TKLocationRealTime {
   }
   
   public static func fetchRealTime(for location: SGKNamedCoordinate) -> Observable<TKLocationInfo> {
-    return SVKServer.sharedInstance().rx
+    return SVKServer.shared.rx
       .requireRegion(location.coordinate)
       .flatMap { region -> Observable<TKLocationInfo> in
         let paras: [String: Any]
@@ -44,7 +44,7 @@ public enum TKLocationRealTime {
           ]
         }
         
-        return SVKServer.sharedInstance().rx
+        return SVKServer.shared.rx
           .hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, response in
             if case 400..<500 = status {
               return nil // Client-side errors; hitting again won't help

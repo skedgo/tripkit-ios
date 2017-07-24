@@ -1,6 +1,6 @@
 //
 //  SGFoursquareGeocoder.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 26/05/2014.
 //

@@ -30,7 +30,7 @@ public struct TKCompanyInfo : Unmarshaling, Marshaling {
   public typealias MarshalType = [String: Any]
   
   public func marshaled() -> MarshalType {
-    var marshaled : MarshalType =  [
+    var marshaled: MarshalType =  [
       "name": name,
     ]
     

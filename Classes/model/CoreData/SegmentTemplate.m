@@ -1,6 +1,6 @@
 //
 //  BaseSegment.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 9/05/12.
 //  Copyright (c) 2012 SkedGo. All rights reserved.

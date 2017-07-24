@@ -1,6 +1,6 @@
 //
 //  SGPermissionManager+AuthorizationAlert.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 5/01/2015.
 //

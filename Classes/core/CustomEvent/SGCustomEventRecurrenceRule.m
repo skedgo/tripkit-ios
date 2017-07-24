@@ -1,6 +1,6 @@
 //
 //  SGCustomEventRecurrenceRule.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 26/02/2014.
 //

@@ -1,6 +1,6 @@
 //
 //  SGKConfig.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 20/03/2015.
 //
@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface SGKConfig : NSObject
 
-+ (SGKConfig *)sharedInstance;
++ (SGKConfig *)sharedInstance NS_REFINED_FOR_SWIFT;
 
 - (NSString *)appGroupName;
 - (NSString *)appURLScheme;

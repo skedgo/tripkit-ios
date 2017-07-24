@@ -1,6 +1,6 @@
 //
 //  SGNotifications.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 10/06/2014.
 //

@@ -1,6 +1,6 @@
 //
 //  CalendarManager.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 28/10/11.
 //  Copyright (c) 2011 SkedGo. All rights reserved.
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SGCalendarManager : SGPermissionManager <SGAutocompletionDataProvider>
 
-+ (SGCalendarManager *)sharedInstance;
++ (SGCalendarManager *)sharedInstance NS_REFINED_FOR_SWIFT;
 
 @property (nonatomic, strong, nullable) EKEventStore *eventStore;
 

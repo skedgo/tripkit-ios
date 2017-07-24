@@ -1,6 +1,6 @@
 //
 //  TKBuzzInfoProvider.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 11/12/2015.
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
@@ -106,7 +106,7 @@ extension TKBuzzInfoProvider {
       "region": region.name as Any
     ]
     
-    return SVKServer.sharedInstance().rx
+    return SVKServer.shared.rx
       .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
       .map { (_, response) -> [TKAlert] in
         if let json = response as? [String: Any] {
@@ -134,7 +134,7 @@ extension SVKServer {
     completion: @escaping (E?) -> Void
   )
   {
-    SVKServer.sharedInstance().hitSkedGo(
+    SVKServer.shared.hitSkedGo(
       withMethod: method.rawValue,
       path: path,
       parameters: parameters,
@@ -174,7 +174,7 @@ extension SVKServer {
     completion: @escaping ([E]) -> Void
     )
   {
-    SVKServer.sharedInstance().hitSkedGo(
+    SVKServer.shared.hitSkedGo(
       withMethod: method.rawValue,
       path: path,
       parameters: parameters,

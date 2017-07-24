@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		298FFC17CF0F3C7DBE593B3D /* Pods_TripKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB767442569E9895BB82F4 /* Pods_TripKitTests.framework */; };
+		3A096E1E1F20DAD500666E59 /* SVKServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E1D1F20DAD500666E59 /* SVKServer.swift */; };
+		3A096E221F20DC5D00666E59 /* SGKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E211F20DC5D00666E59 /* SGKConfig.swift */; };
+		3A096E241F20DD5300666E59 /* TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E231F20DD5300666E59 /* TripKit.swift */; };
+		3A096E261F20DDFB00666E59 /* SGCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E251F20DDFB00666E59 /* SGCalendarManager.swift */; };
+		3A096E281F20DF6600666E59 /* TKLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E271F20DF6600666E59 /* TKLocationProvider.swift */; };
+		3A096E2C1F20E0C500666E59 /* SGLocationManager+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E2B1F20E0C500666E59 /* SGLocationManager+rx.swift */; };
+		3A096E2E1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */; };
 		3A15D8D91D9CE08100BADBEA /* TKBuzzRouter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */; };
 		3A15D8DB1D9CE08D00BADBEA /* TKRoutingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */; };
 		3A266C571D744B9300438024 /* TKSwiftyShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A266C561D744B9300438024 /* TKSwiftyShareHelper.swift */; };
@@ -547,6 +554,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A096E1D1F20DAD500666E59 /* SVKServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVKServer.swift; sourceTree = "<group>"; };
+		3A096E211F20DC5D00666E59 /* SGKConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGKConfig.swift; sourceTree = "<group>"; };
+		3A096E231F20DD5300666E59 /* TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripKit.swift; sourceTree = "<group>"; };
+		3A096E251F20DDFB00666E59 /* SGCalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGCalendarManager.swift; sourceTree = "<group>"; };
+		3A096E271F20DF6600666E59 /* TKLocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationProvider.swift; sourceTree = "<group>"; };
+		3A096E2B1F20E0C500666E59 /* SGLocationManager+rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SGLocationManager+rx.swift"; sourceTree = "<group>"; };
+		3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+SharedDefaults.swift"; sourceTree = "<group>"; };
 		3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKBuzzRouter+Rx.swift"; sourceTree = "<group>"; };
 		3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRoutingParser.swift; sourceTree = "<group>"; };
 		3A266C561D744B9300438024 /* TKSwiftyShareHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSwiftyShareHelper.swift; sourceTree = "<group>"; };
@@ -1210,6 +1224,7 @@
 				3AA03E361F0BC9DB00C6B337 /* SGAddressBookManager.m */,
 				3AA03E371F0BC9DB00C6B337 /* SGCalendarManager.h */,
 				3AA03E381F0BC9DB00C6B337 /* SGCalendarManager.m */,
+				3A096E251F20DDFB00666E59 /* SGCalendarManager.swift */,
 				3AA03E391F0BC9DB00C6B337 /* SGLocationManager.h */,
 				3AA03E3A1F0BC9DB00C6B337 /* SGLocationManager.m */,
 				3A8F61201F190CE80017ACDA /* SGLocationManager.swift */,
@@ -1392,6 +1407,7 @@
 				3AB6C6A51D1CD08E0089F687 /* TKConstants.m */,
 				3AB6C6A61D1CD08E0089F687 /* TKTripKit.h */,
 				3AB6C6A71D1CD08E0089F687 /* TKTripKit.m */,
+				3A096E231F20DD5300666E59 /* TripKit.swift */,
 			);
 			name = Classes;
 			path = ../../Classes;
@@ -1506,6 +1522,7 @@
 				3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */,
 				3AB6C6921D1CD08E0089F687 /* TKFakeRouter.h */,
 				3AB6C6931D1CD08E0089F687 /* TKFakeRouter.m */,
+				3A096E271F20DF6600666E59 /* TKLocationProvider.swift */,
 				3A94672A1D62B08400EEB667 /* TKLocationRealTime.swift */,
 				3AB6C6941D1CD08E0089F687 /* TKParserHelper.h */,
 				3AB6C6951D1CD08E0089F687 /* TKParserHelper.m */,
@@ -1707,6 +1724,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFFAB2C1F06854F00147990 /* NSManagedObjectContext+Rx.swift */,
+				3A096E2B1F20E0C500666E59 /* SGLocationManager+rx.swift */,
 				3AFFAB2D1F06854F00147990 /* SGObjCDisposeBag.swift */,
 				3AFFAB2E1F06854F00147990 /* SVKServer+Rx.swift */,
 			);
@@ -1734,6 +1752,7 @@
 				3AFFAB541F06854F00147990 /* SGKBetaHelper.m */,
 				3AFFAB551F06854F00147990 /* SGKConfig.h */,
 				3AFFAB561F06854F00147990 /* SGKConfig.m */,
+				3A096E211F20DC5D00666E59 /* SGKConfig.swift */,
 				3AFFAB571F06854F00147990 /* SGKConstants.h */,
 				3AFFAB581F06854F00147990 /* SGKCrossPlatform.h */,
 				3AFFAB591F06854F00147990 /* SGKCrossPlatform.swift */,
@@ -1774,6 +1793,7 @@
 				3AFFAB461F06854F00147990 /* NSString+Sizing.m */,
 				3AFFAB471F06854F00147990 /* NSUserDefaults+SharedDefaults.h */,
 				3AFFAB481F06854F00147990 /* NSUserDefaults+SharedDefaults.m */,
+				3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */,
 				3AFFAB491F06854F00147990 /* Swift+Future.swift */,
 				3AFFAB4A1F06854F00147990 /* UIImage+Variations.h */,
 				3AFFAB4B1F06854F00147990 /* UIImage+Variations.m */,
@@ -1810,6 +1830,7 @@
 				3AFFAB711F06854F00147990 /* SVKRegionManager.swift */,
 				3AFFAB721F06854F00147990 /* SVKServer.h */,
 				3AFFAB731F06854F00147990 /* SVKServer.m */,
+				3A096E1D1F20DAD500666E59 /* SVKServer.swift */,
 				3AFFAB741F06854F00147990 /* SVKServerKit.h */,
 				3AFFAB751F06854F00147990 /* SVKTransportModes.h */,
 				3AFFAB761F06854F00147990 /* SVKTransportModes.m */,
@@ -2754,6 +2775,7 @@
 				3AF94B221F0BFDEF00500940 /* SGStyleManager.swift in Sources */,
 				3AFFAD6F1F068E8B00147990 /* AKFbkProfile.m in Sources */,
 				3AFFABB91F06854F00147990 /* SGKObjcDateHelper.swift in Sources */,
+				3A096E2C1F20E0C500666E59 /* SGLocationManager+rx.swift in Sources */,
 				3AA03E6E1F0BC9DB00C6B337 /* SGBuzzGeocoder.m in Sources */,
 				3AFFADD31F068E8B00147990 /* BPKLabelCell.m in Sources */,
 				3AFFABAF1F06854F00147990 /* SGKBetaHelper.m in Sources */,
@@ -2775,6 +2797,8 @@
 				3AB6C70E1D1CD08E0089F687 /* TKRoutingParser.m in Sources */,
 				3AFFADDF1F068E8B00147990 /* BPKTableHeader.m in Sources */,
 				3AB6C6FE1D1CD08E0089F687 /* TKBuzzRealTime.m in Sources */,
+				3A096E281F20DF6600666E59 /* TKLocationProvider.swift in Sources */,
+				3A096E2E1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift in Sources */,
 				3AB6C6FB1D1CD08E0089F687 /* TKBuzzInfoProvider.m in Sources */,
 				3AFFAC331F06855F00147990 /* UIView+BearingRotation.m in Sources */,
 				3AFFAC501F06855F00147990 /* SGPolylineRenderer.m in Sources */,
@@ -2788,6 +2812,7 @@
 				3AA03E751F0BC9DB00C6B337 /* SGKNamedCoordinate+BuzzData.swift in Sources */,
 				3AFFAB9A1F06854F00147990 /* NSManagedObjectContext+Fetch.swift in Sources */,
 				3A51402E1DEE62EE002DB39F /* TKDLSTable.swift in Sources */,
+				3A096E1E1F20DAD500666E59 /* SVKServer.swift in Sources */,
 				3AFFABD31F06854F00147990 /* STKCoordinates.swift in Sources */,
 				3AFFAB8D1F06854F00147990 /* SVKServer+Rx.swift in Sources */,
 				3AFFAD9C1F068E8B00147990 /* BPKMapViewController.swift in Sources */,
@@ -2870,7 +2895,9 @@
 				3AFFABB41F06854F00147990 /* SGKCrossPlatform.swift in Sources */,
 				3AB6C7121D1CD08E0089F687 /* TKTimetableDownloader.m in Sources */,
 				3A9FF6D71DE79FA700DB4647 /* Alert.swift in Sources */,
+				3A096E221F20DC5D00666E59 /* SGKConfig.swift in Sources */,
 				3AFFADEA1F068E8C00147990 /* TKBookingStateMachine.swift in Sources */,
+				3A096E241F20DD5300666E59 /* TripKit.swift in Sources */,
 				3AF3F2621E04CA7C00A2EEC6 /* TKBookingTypes.swift in Sources */,
 				3A32CD711DC2DC6D003B158B /* TKOccupancy.swift in Sources */,
 				3AB6C6EF1D1CD08E0089F687 /* TKCellHelper.m in Sources */,
@@ -2880,6 +2907,7 @@
 				3ADD5B761D9CDF0C00A1742F /* TKEmptyAlertView.swift in Sources */,
 				3AFFADE51F068E8C00147990 /* BPKTextFieldCell.m in Sources */,
 				3AFFADD01F068E8B00147990 /* BPKDatePickerCell.m in Sources */,
+				3A096E261F20DDFB00666E59 /* SGCalendarManager.swift in Sources */,
 				3AFFAC3A1F06855F00147990 /* SGCountdownCell.swift in Sources */,
 				3AFFADAA1F068E8B00147990 /* BPKHelpers.m in Sources */,
 				3AA03E711F0BC9DB00C6B337 /* SGFoursquareGeocoder.swift in Sources */,

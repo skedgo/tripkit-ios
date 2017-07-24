@@ -50,7 +50,7 @@ public class OAuthClient {
   
   private static func canHandle(_ url: URL) -> Bool {
     
-    if let callback = SGKConfig.sharedInstance().oauthCallbackURL(), url.absoluteString.hasPrefix(callback.absoluteString) {
+    if let callback = SGKConfig.shared.oauthCallbackURL(), url.absoluteString.hasPrefix(callback.absoluteString) {
       return true
       
     }
@@ -75,7 +75,7 @@ public class OAuthClient {
     }
     
     // This is getting the authentication data in the first place, either using SSO or regular OAuth
-    guard let callbackURL = SGKConfig.sharedInstance().oauthCallbackURL() else {
+    guard let callbackURL = SGKConfig.shared.oauthCallbackURL() else {
       preconditionFailure("OAuth callback URL missing in Config.plist")
     }
     guard let oauthParas = form.oauthParameters else {
@@ -128,7 +128,7 @@ public class OAuthClient {
       return nil
     }
     
-    if let callbackURL = SGKConfig.sharedInstance().oauthCallbackURL(), url.absoluteString.hasPrefix(callbackURL.absoluteString) {
+    if let callbackURL = SGKConfig.shared.oauthCallbackURL(), url.absoluteString.hasPrefix(callbackURL.absoluteString) {
       return try handleUsingOAuth(url)
     
     } else {
@@ -196,11 +196,11 @@ public class OAuthClient {
     let data = NSKeyedArchiver.archivedData(withRootObject: toStore)
     
     // INFO: This is here for updating the testing data.
-    // Uncomment, get the file, and update OAuthClientTest.
-//      let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//      let pathURL = path.appendingPathComponent("oauthclient.data")
-//      try! data.write(to: pathURL)
-//      print(pathURL)
+    // Uncomment, run tests, get the file, and update OAuthClientTest.
+//    let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//    let pathURL = path.appendingPathComponent("oauthclient.data")
+//    try! data.write(to: pathURL)
+//    print(pathURL)
     
     keychain[data: "OAuthClientState"] = data
   }

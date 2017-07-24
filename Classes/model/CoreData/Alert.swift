@@ -1,6 +1,6 @@
 //
 //  Alert.swift
-//  Pods
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 2/09/2016.
 //

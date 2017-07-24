@@ -1,6 +1,6 @@
 //
 //  TripKit.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 17/06/2014.
 //
@@ -106,7 +106,7 @@ FOUNDATION_EXPORT NSString *const TKTripKitDidResetNotification;
 
 + (NSBundle *)bundle;
 
-+ (TKTripKit *)sharedInstance;
++ (TKTripKit *)sharedInstance NS_REFINED_FOR_SWIFT;
 
 /**
  Reloads the coordinator and context, which will be set to new instances. Call this when using multiple TripKit instances in different processes and they went out of sync.

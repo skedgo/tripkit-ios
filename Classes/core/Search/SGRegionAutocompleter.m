@@ -1,6 +1,6 @@
 //
 //  SGRegionAutocompleter.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 25/02/2015.
 //

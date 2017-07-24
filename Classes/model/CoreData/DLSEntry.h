@@ -1,6 +1,6 @@
 //
 //  DLSEntry.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 26/01/2014.
 //

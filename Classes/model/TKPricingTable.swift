@@ -1,6 +1,6 @@
 //
 //  TKPricingTable.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 23/1/17.
 //

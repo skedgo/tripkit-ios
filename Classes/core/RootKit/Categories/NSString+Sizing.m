@@ -1,6 +1,6 @@
 //
 //  NSString+Sizing.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 20/09/13.
 //

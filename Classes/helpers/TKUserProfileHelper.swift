@@ -1,6 +1,6 @@
 //
 //  TKUserProfileHelper.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 9/02/2016.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.
@@ -31,10 +31,10 @@ public class TKUserProfileHelper: NSObject {
   /// on a wheelchair. This will set TripKit's settings
   public class var showWheelchairInformation: Bool {
     get {
-      return UserDefaults.shared().bool(forKey: DefaultsKey.onWheelchair.rawValue)
+      return UserDefaults.shared.bool(forKey: DefaultsKey.onWheelchair.rawValue)
     }
     set {
-      UserDefaults.shared().set(newValue, forKey: DefaultsKey.onWheelchair.rawValue)
+      UserDefaults.shared.set(newValue, forKey: DefaultsKey.onWheelchair.rawValue)
     }
   }
   
@@ -44,7 +44,7 @@ public class TKUserProfileHelper: NSObject {
   /// Overwrites user preferences for each non-nil value.
   public class func updateTransportModesWithEnabledOrder(_ enabled: [Identifier]?, minimized: Set<Identifier>?, hidden: Set<Identifier>?)
   {
-    let shared = UserDefaults.shared()
+    let shared = UserDefaults.shared
     if let enabled = enabled {
       shared.set(enabled, forKey: DefaultsKey.sortedEnabled.rawValue)
     }
@@ -79,7 +79,7 @@ public class TKUserProfileHelper: NSObject {
     } else {
       modes.remove(modeIdentifier)
     }
-    UserDefaults.shared().set(Array(modes), forKey: key.rawValue)
+    UserDefaults.shared.set(Array(modes), forKey: key.rawValue)
   }
   
   public class func orderedEnabledModeIdentifiersForAvailableModeIdentifiers(_ available: [Identifier]) -> [Identifier] {
@@ -103,7 +103,7 @@ public class TKUserProfileHelper: NSObject {
   
   
   public class var minimizedModeIdentifiers: Set<Identifier> {
-    if let minimized = UserDefaults.shared().object(forKey: DefaultsKey.minimized.rawValue) as? [Identifier] {
+    if let minimized = UserDefaults.shared.object(forKey: DefaultsKey.minimized.rawValue) as? [Identifier] {
       return Set(minimized)
     } else {
       return [SVKTransportModeIdentifierMotorbike, SVKTransportModeIdentifierTaxi, SVKTransportModeIdentifierWalking]
@@ -111,7 +111,7 @@ public class TKUserProfileHelper: NSObject {
   }
   
   public class var hiddenModeIdentifiers: Set<Identifier> {
-    if let hidden = UserDefaults.shared().object(forKey: DefaultsKey.hidden.rawValue) as? [Identifier] {
+    if let hidden = UserDefaults.shared.object(forKey: DefaultsKey.hidden.rawValue) as? [Identifier] {
       return Set(hidden)
     } else {
       return [SVKTransportModeIdentifierSchoolBuses]
@@ -133,11 +133,11 @@ public class TKUserProfileHelper: NSObject {
     } else {
       modes.append(identifier)
     }
-    UserDefaults.shared().set(modes, forKey: DefaultsKey.disliked.rawValue)
+    UserDefaults.shared.set(modes, forKey: DefaultsKey.disliked.rawValue)
   }
 
   public class var dislikedTransitModes: [Identifier] {
-    if let disliked = UserDefaults.shared().object(forKey: DefaultsKey.disliked.rawValue) as? [Identifier] {
+    if let disliked = UserDefaults.shared.object(forKey: DefaultsKey.disliked.rawValue) as? [Identifier] {
       return disliked
     } else {
       return []

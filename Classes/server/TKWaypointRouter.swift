@@ -1,6 +1,6 @@
 //
 //  TKWaypointRouter.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 31/08/2016.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.
@@ -22,7 +22,7 @@ extension TKWaypointRouter {
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
   public func fetchNextTrip(after trip: Trip, using vehicles: [STKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
     
-    SVKServer.sharedInstance().requireRegions { error in
+    SVKServer.shared.requireRegions { error in
       guard let region = trip.request.startRegion() else {
         
         completion(nil, error)
@@ -72,7 +72,7 @@ extension TKWaypointRouter {
   
   public func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [STKVehicular], completion: @escaping (Trip?, Error?) -> Void) {
     
-    SVKServer.sharedInstance().requireRegions { error in
+    SVKServer.shared.requireRegions { error in
       let request = segment.trip.request
       guard let region = request.startRegion(), error == nil else {
         completion(nil, error)
@@ -165,7 +165,7 @@ extension TKWaypointRouter {
 
   private func fetchTrip(waypointParas: [String: Any], region: SVKRegion, into context: NSManagedObjectContext, parserHandler: @escaping ([AnyHashable: Any], TKRoutingParser) -> Void, errorHandler: @escaping (Error?) -> Void) {
     
-    let server = SVKServer.sharedInstance()
+    let server = SVKServer.shared
     server.hitSkedGo(
       withMethod: "POST",
       path: "waypoint.json",

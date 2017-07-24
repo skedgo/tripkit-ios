@@ -31,6 +31,9 @@
 /* Authorisation needed title */
 "Authorisation needed" = "Godkendelse nødvendig";
 
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Tilbage";
+
 /* Type of vehicle : bicycle */
 "Bicycle" = "Cykel";
 
@@ -119,8 +122,7 @@
 /* Credit card expiry date */
 "Expiry Date" = "Udløbsdato";
 
-/* Option that allows users to indicate whether reminder is needed
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "For when to leave" = "For hvornår at forlade";
 
 /* Free as in beer */
@@ -159,14 +161,13 @@
 /* Title for unnamed location */
 "Location" = "Placering";
 
-/* Location iOS6+ authorisation needed text */
+/* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Placeringstjenester er forpligtet til at bruge denne funktion. Gå Venligst til appens indstillinger > privatliv > placeringstjenester, Sørg for de er tændt og godkend denne app.";
 
 /* Indicating a payment is in progress */
 "Making payment" = "Foretager betaling";
 
-/* Option that allows users to indicate how eary to show trip reminder
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "Minutes before trip" = "Minutter før turen";
 
 /* More results proposal */
@@ -198,9 +199,7 @@
 /* Countdown cell 'now' indicator */
 "Now" = "Nu";
 
-/* Authorisation ok button
-   Default title for button that dismisses alert view
-   Ok action */
+/* Ok action */
 "OK" = "OK";
 
 /* Button to open Settings app section for this app */
@@ -231,7 +230,7 @@
 "Press 'search' for more..." = "Tryk for 'Søg' for mere...";
 
 /* No comment provided by engineer. */
-"Read more..." = "Read more...";
+"Read more..." = "Læs mere...";
 
 /* Indicator for real-time information */
 "Real-time" = "Virkelig Tid";
@@ -239,8 +238,7 @@
 /* Title for section that asks users where payment receipt should be sent */
 "Receipt" = "Kvittering";
 
-/* Action title to add/remove reminder
-   Section title at the end of a booking that allows users to set reminders */
+/* Action title to add/remove reminder */
 "Reminder" = "Påmindelse";
 
 /* Repeats daily */

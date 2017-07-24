@@ -15,7 +15,7 @@ extension AMKCommunicator {
   public static func signIn(withCloudKitID cloudKitID: String) -> Observable<String> {
     return Observable.create { subscriber in
       let urlFriendly = cloudKitID.replacingOccurrences(of: "_", with: "")
-      SVKServer.sharedInstance().hitSkedGo(withMethod: "POST",
+      SVKServer.shared.hitSkedGo(withMethod: "POST",
         path: "account/apple/\(urlFriendly)",
         parameters: [:],
         region: nil,

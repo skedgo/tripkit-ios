@@ -163,11 +163,11 @@ extension SVKRegion {
     if let mode = mode {
       paras["mode"] = mode
     }
-    if UserDefaults.shared().bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
+    if UserDefaults.shared.bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
       paras["bsb"] = true
     }
     
-    SVKServer.sharedInstance().hitSkedGo(
+    SVKServer.shared.hitSkedGo(
       withMethod: "GET",
       path: "auth/\(name)",
       parameters: paras,

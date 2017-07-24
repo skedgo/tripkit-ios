@@ -1,6 +1,6 @@
 //
 //  SGKConfig+SVKServerKit.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 14/07/2015.
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.

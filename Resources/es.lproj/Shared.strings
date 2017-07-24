@@ -31,6 +31,9 @@
 /* Authorisation needed title */
 "Authorisation needed" = "Autorización requerida";
 
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Atrás";
+
 /* Type of vehicle : bicycle */
 "Bicycle" = "Bicicleta";
 
@@ -119,8 +122,7 @@
 /* Credit card expiry date */
 "Expiry Date" = "Fecha de caducidad";
 
-/* Option that allows users to indicate whether reminder is needed
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "For when to leave" = "Para el momento de salir";
 
 /* Free as in beer */
@@ -159,14 +161,13 @@
 /* Title for unnamed location */
 "Location" = "Ubicación";
 
-/* Location iOS6+ authorisation needed text */
+/* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Servicios de localización son requeridos para esta funcionalidad. Por favor, vaya a Ajustes > Privacidad > Localización, asegúrese de que estén habilitados y autorize esta aplicación.";
 
 /* Indicating a payment is in progress */
 "Making payment" = "Realizando el pago";
 
-/* Option that allows users to indicate how eary to show trip reminder
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "Minutes before trip" = "Minutos antes del viaje";
 
 /* More results proposal */
@@ -198,9 +199,7 @@
 /* Countdown cell 'now' indicator */
 "Now" = "Ahora";
 
-/* Authorisation ok button
-   Default title for button that dismisses alert view
-   Ok action */
+/* Ok action */
 "OK" = "Aceptar";
 
 /* Button to open Settings app section for this app */
@@ -239,8 +238,7 @@
 /* Title for section that asks users where payment receipt should be sent */
 "Receipt" = "Recibo";
 
-/* Action title to add/remove reminder
-   Section title at the end of a booking that allows users to set reminders */
+/* Action title to add/remove reminder */
 "Reminder" = "Recordatorio";
 
 /* Repeats daily */

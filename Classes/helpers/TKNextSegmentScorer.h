@@ -1,6 +1,6 @@
 //
 //  TKNextSegmentScorer.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 5/05/2015.
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.

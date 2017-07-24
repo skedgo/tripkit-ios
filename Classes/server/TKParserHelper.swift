@@ -1,6 +1,6 @@
 //
 //  TKParserHelper.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 17/10/16.
 //

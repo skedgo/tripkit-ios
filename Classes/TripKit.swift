@@ -1,6 +1,6 @@
 //
 //  TripKit.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 6/4/17.
 //
@@ -10,12 +10,14 @@ import Foundation
 
 public enum TripKit {
   
+  public static let shared = TKTripKit.__sharedInstance()
+  
   public static var apiKey: String {
     get {
-      return SVKServer.sharedInstance().apiKey
+      return SVKServer.shared.apiKey
     }
     set {
-      SVKServer.sharedInstance().apiKey = newValue
+      SVKServer.shared.apiKey = newValue
     }
   }
   
@@ -46,9 +48,9 @@ public enum TripKit {
   /// `applicationWillEnterForeground`.
   public static func prepareForNewSession() {
     // Give the main class a nudge to wake up
-    TKTripKit.sharedInstance()
+    let _ = TripKit.shared
     
-    SVKServer.sharedInstance().updateRegions(forced: false)
+    SVKServer.shared.updateRegions(forced: false)
   }
   
 }

@@ -1,6 +1,6 @@
 //
 //  Sequence+Reduce.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 20/1/17.
 //

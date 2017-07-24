@@ -1,6 +1,6 @@
 //
 //  SGKServer.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 17/02/2015.
 //
@@ -19,10 +19,10 @@ typedef void (^SGServerSuccessBlock)(NSInteger status, id _Nullable responseObje
 typedef void (^SGServerFailureBlock)(NSError *error);
 typedef void (^SGServerGenericBlock)(NSInteger status, id _Nullable responseObject, NSError * _Nullable error);
 
-typedef NS_ENUM(NSInteger, SGServerType) {
-  SGServerTypeProduction = 0,
-  SGServerTypeBeta,
-  SGServerTypeLocal
+typedef NS_ENUM(NSInteger, SVKServerType) {
+  SVKServerTypeProduction = 0,
+  SVKServerTypeBeta,
+  SVKServerTypeLocal
 };
 
 FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileTrackUsage;
@@ -37,7 +37,7 @@ FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileDistanceUnit;
 
 @interface SVKServer : NSObject
 
-+ (SVKServer *)sharedInstance;
++ (SVKServer *)sharedInstance NS_REFINED_FOR_SWIFT;
 
 + (nullable id)syncURL:(NSURL *)url timeout:(NSTimeInterval)seconds;
 

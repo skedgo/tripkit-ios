@@ -1,6 +1,6 @@
 //
 //  SGStyleManager.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 24/10/2013.
 //

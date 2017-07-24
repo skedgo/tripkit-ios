@@ -1,6 +1,6 @@
 //
 //  SVKRegion.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 3/1/17.
 //
@@ -157,7 +157,7 @@ public class SVKInternationalRegion : SVKRegion {
       SVKTransportModeIdentifierCar,
       SVKTransportModeIdentifierMotorbike,
     ]
-    if UserDefaults.shared().bool(forKey: SVKDefaultsKeyProfileEnableFlights) {
+    if UserDefaults.shared.bool(forKey: SVKDefaultsKeyProfileEnableFlights) {
       modes = [SVKTransportModeIdentifierFlight] + modes
     }
     super.init(asInternationalNamed: "International", modes: modes)
