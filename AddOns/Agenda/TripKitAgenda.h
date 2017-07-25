@@ -10,7 +10,7 @@
 #define TripKitAgenda_h
 
 // dependencies
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 @import TripKit;
 #endif
 

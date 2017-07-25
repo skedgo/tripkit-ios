@@ -6,7 +6,7 @@
 //
 //
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #else
 @import TripKit;

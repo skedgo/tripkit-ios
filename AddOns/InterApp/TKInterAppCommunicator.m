@@ -11,7 +11,7 @@
 @import MessageUI;
 
 
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 @import TripKit;
 #import <TripKitAddons/TripKitAddons-Swift.h>
 #else

@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 @import TripKitUI;
 #else
 #import "SGTableCell.h"

@@ -8,7 +8,7 @@
 
 #import "AKBaseTableViewController.h"
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "SGKLog.h"
 #import <TripKit/TripKit-Swift.h>
 #else

@@ -10,7 +10,7 @@ import UIKit
 
 import RxSwift
 
-#if TK_NO_FRAMEWORKS
+#if TK_NO_MODULE
 #else
   import TripKit
 #endif

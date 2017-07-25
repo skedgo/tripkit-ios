@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "SGLabel.h"
 #else
 @import TripKitUI;

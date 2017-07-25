@@ -6,7 +6,7 @@
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "SGKConfig.h"
 #else
 @import TripKit;

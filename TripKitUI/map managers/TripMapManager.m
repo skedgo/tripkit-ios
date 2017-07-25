@@ -8,7 +8,7 @@
 
 #import "TripMapManager.h"
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
 #else

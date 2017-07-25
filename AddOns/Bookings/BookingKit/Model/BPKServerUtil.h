@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "SVKServer.h"
 #else
 @import TripKit;

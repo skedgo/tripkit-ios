@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "SGKEnums.h"
 #import "SGKCrossPlatform.h"
 #else

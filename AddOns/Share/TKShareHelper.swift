@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-#if TK_NO_FRAMEWORKS
+#if TK_NO_MODULE
 #else
   import TripKit
 #endif
