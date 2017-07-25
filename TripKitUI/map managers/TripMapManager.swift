@@ -1,6 +1,6 @@
 //
 //  RouteMapManager+Server.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 7/09/2016.
 //

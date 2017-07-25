@@ -1,6 +1,6 @@
 //
 //  TKVehicleAnnotationView.swift
-//  Pods
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 3/11/2016.
 //

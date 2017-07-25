@@ -1,6 +1,6 @@
 //
 //  SGSearch.h
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 22/06/2016.
 //

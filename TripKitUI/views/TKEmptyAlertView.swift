@@ -1,6 +1,6 @@
 //
 //  TKEmptyAlertView.swift
-//  Pods
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 3/09/2016.
 //

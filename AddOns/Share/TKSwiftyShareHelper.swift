@@ -1,6 +1,6 @@
 //
 //  TKShareHelper+Rx.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 29/08/2016.
 //

@@ -1,6 +1,6 @@
 //
 //  TKOccupancyView.swift
-//  Pods
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 31/10/2016.
 //

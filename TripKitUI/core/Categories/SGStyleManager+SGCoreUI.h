@@ -1,6 +1,6 @@
 //
 //  SGStyleManager+SGCoreUI.h
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 6/07/2016.
 //
