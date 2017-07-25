@@ -1,6 +1,6 @@
 //
 //  BPKSectionItem+Address.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 16/03/2015.
 //

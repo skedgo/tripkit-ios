@@ -1,6 +1,6 @@
 //
 //  SGSkedgoifier.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 31/07/13.
 //

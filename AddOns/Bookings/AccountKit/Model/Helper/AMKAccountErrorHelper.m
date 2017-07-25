@@ -1,6 +1,6 @@
 //
 //  AMKErrorHelper.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 17/03/2015.
 //

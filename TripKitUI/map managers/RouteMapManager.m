@@ -1,6 +1,6 @@
 //
 //  RouteMapManager.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 28/02/11.
 //  Copyright 2011 SkedGo. All rights reserved.

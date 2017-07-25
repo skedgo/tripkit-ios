@@ -1,6 +1,6 @@
 //
 //  BPKUser.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 9/02/2015.
 //

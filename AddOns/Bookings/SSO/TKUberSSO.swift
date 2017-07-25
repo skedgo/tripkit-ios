@@ -1,6 +1,6 @@
 //
 //  TKUberSSO.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 7/10/16.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.

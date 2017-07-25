@@ -1,6 +1,6 @@
 //
 //  SGCountdownCell.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 19/02/2014.
 //

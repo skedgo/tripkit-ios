@@ -1,6 +1,6 @@
 //
 //  SGSemaphoreView.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 6/07/12.
 //  Copyright (c) 2012 SkedGo. All rights reserved.

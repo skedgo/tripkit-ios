@@ -1,6 +1,6 @@
 //
 //  AMKCommunicator.m
-//  TripGo
+//  TripKit
 //
 //  Created by Brian Huang on 24/02/2015.
 //

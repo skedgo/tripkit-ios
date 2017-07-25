@@ -1,6 +1,6 @@
 //
 //  SGBPStepperCell.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 2/02/2015.
 //

@@ -1,6 +1,6 @@
 //
 //  AMKSimpleAccountViewController.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 27/02/2015.
 //

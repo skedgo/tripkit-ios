@@ -1,6 +1,6 @@
 //
 //  SGBPFormParser.h
-//  TripGo
+//  TripKit
 //
 //  Created by Brian Huang on 30/01/2015.
 //

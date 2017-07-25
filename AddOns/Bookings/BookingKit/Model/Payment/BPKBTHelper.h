@@ -1,6 +1,6 @@
 //
 //  BPKBTHelper.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 12/11/2015.
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.

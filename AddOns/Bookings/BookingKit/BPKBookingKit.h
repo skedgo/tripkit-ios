@@ -1,13 +1,13 @@
 //
 //  BPKBookingKit.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 16/06/2015.
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-#ifndef TripGo_BPKBookingKit_h
-#define TripGo_BPKBookingKit_h
+#ifndef TripKit_BPKBookingKit_h
+#define TripKit_BPKBookingKit_h
 
 #import "AMKAccountKit.h"
 

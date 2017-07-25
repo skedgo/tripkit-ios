@@ -1,6 +1,6 @@
 //
 //  TKBookingStateMachine.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 31/10/16.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.

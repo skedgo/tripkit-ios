@@ -1,13 +1,13 @@
 //
 //  AMKAccountKit.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 15/06/2015.
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-#ifndef TripGo_AMKAccountKit_h
-#define TripGo_AMKAccountKit_h
+#ifndef TripKit_AMKAccountKit_h
+#define TripKit_AMKAccountKit_h
 
 @import KVNProgress;
 

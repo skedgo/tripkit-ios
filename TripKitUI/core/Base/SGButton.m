@@ -1,6 +1,6 @@
 //
 //  SGButton.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 30/03/2015.
 //

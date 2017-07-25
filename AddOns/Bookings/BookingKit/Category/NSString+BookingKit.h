@@ -1,6 +1,6 @@
 //
 //  NSString+BookingKit.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 9/06/2015.
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.

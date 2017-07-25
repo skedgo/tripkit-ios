@@ -1,6 +1,6 @@
 //
 //  SGPayLabelCell.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 28/01/2015.
 //

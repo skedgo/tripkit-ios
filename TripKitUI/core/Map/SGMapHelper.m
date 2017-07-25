@@ -1,6 +1,6 @@
 //
 //  SGMapHelper.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 13/02/2015.
 //
