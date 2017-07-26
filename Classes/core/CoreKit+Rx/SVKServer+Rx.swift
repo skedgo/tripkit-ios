@@ -64,6 +64,7 @@ extension Reactive where Base: SVKServer {
     repeatHandler: ((Int, Any?) -> (TimeInterval?))? = nil
   ) -> Observable<(Int, Any?)>
   {
+    // TODO: If `region == nil` region by: last used, user's home, nil
     
     return Observable.create { subscriber in
       let stopper = Stopper()

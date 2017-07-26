@@ -60,18 +60,8 @@ extension Reactive where Base: SVKServer {
       return Observable.error(TKAgendaError.userIsNotLoggedIn)
     }
     
-    let result = requireRegions()
-      .flatMapLatest { Void -> Observable<(Int, Any?)> in
-        // TODO: fix region, should use last use region / home region / nil
-        let region: SVKRegion? = nil
-        
-        return SVKServer.shared.rx.hit(
-          .POST,
-          path: "agenda/\(dateString)/input",
-          parameters: input.marshaled(),
-          region: region)
-      }
-      return result.map { status, body -> TKAgendaUploadResult in
+    return hit(.POST, path: "agenda/\(dateString)/input", parameters: input.marshaled())
+      .map { status, body -> TKAgendaUploadResult in
         switch status {
         case 200: return .success
         case 401: throw TKAgendaError.userTokenIsInvalid
@@ -79,8 +69,8 @@ extension Reactive where Base: SVKServer {
         case 403:
           // TODO: Fix owningDeviceId
           throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: "header.owningDeviceId")
-        default:
-          throw TKAgendaError.unexpectedResponse(status, body)
+        
+        default: throw TKAgendaError.unexpectedResponse(status, body)
         }
       }
   }
@@ -110,30 +100,19 @@ extension Reactive where Base: SVKServer {
       return Observable.error(TKAgendaError.userIsNotLoggedIn)
     }
     
-    let result = requireRegions()
-      .flatMapLatest { Void -> Observable<(Int, Any?)> in
-        // TODO: fix region, should use last use region / home region / nil
-        let region: SVKRegion? = nil
-        
-        return SVKServer.shared.rx.hit(
-          .DELETE,
-          path: "agenda/\(dateString)/input",
-          region: region)
-    }
-    return result.map { status, body -> Bool in
-      switch status {
-      case 200: return true
-      
-      case 403:
-        // TODO: Fix owningDeviceId
-        throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: "header.owningDeviceId")
-        
-      case 404: return false
-        
-      default:
-        throw TKAgendaError.unexpectedResponse(status, body)
+    return hit(.DELETE, path: "agenda/\(dateString)/input")
+      .map { status, body -> Bool in
+        switch status {
+        case 200: return true
+        case 404: return false
+
+        case 403:
+          // TODO: Fix owningDeviceId
+          throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: "header.owningDeviceId")
+          
+        default: throw TKAgendaError.unexpectedResponse(status, body)
+        }
       }
-    }
     
   }
   
@@ -162,51 +141,61 @@ extension Reactive where Base: SVKServer {
     guard let _ = SVKServer.userToken() else {
       return Observable.error(TKAgendaError.userIsNotLoggedIn)
     }
-    
-    let result = requireRegions()
-      .flatMapLatest { Void -> Observable<(Int, Any?)> in
-        // TODO: fix region, should use last use region / home region / nil
-        let region: SVKRegion? = nil
-        
-        var path = "agenda/\(dateString)?v=\(TKSettings.parserJsonVersion)"
-        if let hashCode = hashCode {
-          path.append("&hashCode=\(hashCode)")
-        }
-        
-        return SVKServer.shared.rx.hit(
-          .GET,
-          path: path,
-          region: region,
-          repeatHandler: { status, body -> TimeInterval? in
-            switch status {
-            case 299: return 1
-            default: return nil
-            }
-          }
-        )
+
+    var path = "agenda/\(dateString)?v=\(TKSettings.parserJsonVersion)"
+    if let hashCode = hashCode {
+      path.append("&hashCode=\(hashCode)")
     }
-    
-    return result.flatMapLatest { status, body -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
-      switch status {
-      case 200:
-        guard
-          let marshaled = body as? MarshaledObject,
-          let output = try? TKAgendaOutput(object: marshaled) else {
-          throw TKAgendaError.unexpectedResponse(status, body)
+
+    return hit(.GET, path: path) { status, body -> TimeInterval? in
+        switch status {
+        case 299: return 1
+        default: return nil
         }
-        
-        return try output.addTrips(fromServerBody: marshaled).map { .success($0) }
-        
-      case 299: return Observable.just(.calculating)
-      case 304: return Observable.just(.noChange)
-      case 401: throw TKAgendaError.userTokenIsInvalid
-      case 404: throw TKAgendaError.agendaInputNotAvailable(components)
-      default:  throw TKAgendaError.unexpectedResponse(status, body)
       }
+      .flatMapLatest { status, body -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
+        switch status {
+        case 200:
+          guard
+            let marshaled = body as? MarshaledObject,
+            let output = try? TKAgendaOutput(object: marshaled) else {
+            throw TKAgendaError.unexpectedResponse(status, body)
+          }
+          return try output.addTrips(fromServerBody: marshaled).map { .success($0) }
+          
+        case 299: return Observable.just(.calculating)
+        case 304: return Observable.just(.noChange)
+        case 401: throw TKAgendaError.userTokenIsInvalid
+        case 404: throw TKAgendaError.agendaInputNotAvailable(components)
+        default:  throw TKAgendaError.unexpectedResponse(status, body)
+        }
+      }
+  }
+  
+  
+  public func fetchAgendaSummary() -> Observable<TKAgendaSummary> {
+
+    guard let _ = SVKServer.userToken() else {
+      return Observable.error(TKAgendaError.userIsNotLoggedIn)
     }
+    
+    return hit(.GET, path: "agenda/summary")
+      .map { status, body -> TKAgendaSummary in
+        switch status {
+        case 200:
+          guard let marshaled = body as? MarshaledObject else {
+              throw TKAgendaError.unexpectedResponse(status, body)
+          }
+          return try TKAgendaSummary(object: marshaled)
+        case 401: throw TKAgendaError.userTokenIsInvalid
+        default:  throw TKAgendaError.unexpectedResponse(status, body)
+        }
+      }
+
   }
   
 }
+
 
 fileprivate extension DateComponents {
   
