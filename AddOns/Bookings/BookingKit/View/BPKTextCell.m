@@ -1,6 +1,6 @@
 //
 //  BPKTextCell.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 13/05/2015.
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "BPKTextCell.h"
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
 #else

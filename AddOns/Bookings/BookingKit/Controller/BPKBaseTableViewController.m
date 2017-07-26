@@ -1,6 +1,6 @@
 //
 //  SGBPBaseTableViewController.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 4/02/2015.
 //
@@ -8,7 +8,7 @@
 
 #import "BPKBaseTableViewController.h"
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
 #else

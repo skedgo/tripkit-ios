@@ -1,6 +1,6 @@
 //
 //  BPKForm.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 3/06/2015.
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.

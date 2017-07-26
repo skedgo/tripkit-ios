@@ -1,6 +1,6 @@
 //
 //  AKFbkProfile.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 15/09/2015.
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.

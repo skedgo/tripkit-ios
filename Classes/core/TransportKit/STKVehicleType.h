@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef TripGo_STKVehicleType_h
-#define TripGo_STKVehicleType_h
+#ifndef TripKit_STKVehicleType_h
+#define TripKit_STKVehicleType_h
 
 typedef NS_ENUM(NSInteger, STKVehicleType) {
   STKVehicleType_None = 0,

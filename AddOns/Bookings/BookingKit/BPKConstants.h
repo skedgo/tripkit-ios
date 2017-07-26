@@ -1,13 +1,13 @@
 //
 //  BPKConstants.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 2/02/2015.
 //
 //
 
-#ifndef TripGo_BPKConstants_h
-#define TripGo_BPKConstants_h
+#ifndef TripKit_BPKConstants_h
+#define TripKit_BPKConstants_h
 
 // ---------------- Booking JSON ----------------
 

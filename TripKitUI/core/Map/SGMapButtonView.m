@@ -1,6 +1,6 @@
 //
 //  SGMapButtonView.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 26/09/13.
 //

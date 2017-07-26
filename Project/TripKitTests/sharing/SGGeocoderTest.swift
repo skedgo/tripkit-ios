@@ -1,6 +1,6 @@
 //
 //  SGAutocompletionTest.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 24/11/2015.
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.

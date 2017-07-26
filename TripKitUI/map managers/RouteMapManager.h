@@ -1,6 +1,6 @@
 //
 //  RouteViewController.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 28/02/11.
 //  Copyright 2011 SkedGo. All rights reserved.
@@ -10,7 +10,7 @@
 
 #import "ASMapManager.h"
 
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 @import TripKit;
 #else
 @class StopVisits, Vehicle;

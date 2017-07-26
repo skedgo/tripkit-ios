@@ -1,6 +1,6 @@
 //
 //  RouteMapManager.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 28/02/11.
 //  Copyright 2011 SkedGo. All rights reserved.
@@ -12,7 +12,7 @@
 
 
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #import <TripKit/TripKit-Swift.h>
 #else

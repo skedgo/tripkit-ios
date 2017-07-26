@@ -1,6 +1,6 @@
 //
 //  SGTripSummaryCell.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 20/01/2014.
 //
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 
 #else
 #import "STKTransportKit.h"

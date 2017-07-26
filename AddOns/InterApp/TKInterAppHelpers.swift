@@ -1,6 +1,6 @@
 //
 //  TKInterAppHelpers.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 4/03/2016.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if TK_NO_FRAMEWORKS
+#if TK_NO_MODULE
 #else
   import TripKit
 #endif

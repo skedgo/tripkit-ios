@@ -1,6 +1,6 @@
 //
 //  BPKWebViewController.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 18/03/2015.
 //

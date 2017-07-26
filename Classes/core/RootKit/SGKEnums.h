@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef TripGo_SGKEnums_h
-#define TripGo_SGKEnums_h
+#ifndef TripKit_SGKEnums_h
+#define TripKit_SGKEnums_h
 
 #import <Foundation/Foundation.h>
 

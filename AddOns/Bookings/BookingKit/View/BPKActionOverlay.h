@@ -1,6 +1,6 @@
 //
 //  BPKActionOverlay.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 16/03/2015.
 //
@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "SGButton.h"
 #else
 @import TripKitUI;

@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef TripGo_SVKServerKit_h
-#define TripGo_SVKServerKit_h
+#ifndef TripKit_SVKServerKit_h
+#define TripKit_SVKServerKit_h
 
 #import "SGRootKit.h"
 

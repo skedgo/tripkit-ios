@@ -1,6 +1,6 @@
 //
 //  TKShareHelper+Rx.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 29/08/2016.
 //
@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-#if TK_NO_FRAMEWORKS
+#if TK_NO_MODULE
 #else
   import TripKit
 #endif

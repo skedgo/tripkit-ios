@@ -1,6 +1,6 @@
 //
 //  CircleAnnotationView.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 16/06/11.
 //  Copyright 2011 SkedGo. All rights reserved.

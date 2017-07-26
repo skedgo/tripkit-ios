@@ -1,6 +1,6 @@
 //
 //  SGBPOptionViewController.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 3/02/2015.
 //

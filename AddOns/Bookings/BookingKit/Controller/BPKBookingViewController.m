@@ -1,6 +1,6 @@
 //
 //  SGBPBookingViewController.m
-//  TripGo
+//  TripKit
 //
 //  Created by Brian Huang on 30/01/2015.
 //
@@ -10,7 +10,7 @@
 
 @import KVNProgress;
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
 #else

@@ -1,6 +1,6 @@
 //
 //  SSOAuthenticator.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 7/10/16.
 //

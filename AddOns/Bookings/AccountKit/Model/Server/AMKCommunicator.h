@@ -1,6 +1,6 @@
 //
 //  AMKCommunicator.h
-//  TripGo
+//  TripKit
 //
 //  Created by Brian Huang on 24/02/2015.
 //
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "SGKEnums.h"
 #import "SGKCrossPlatform.h"
 #else

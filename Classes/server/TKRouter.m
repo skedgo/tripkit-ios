@@ -8,7 +8,7 @@
 
 #import "TKRouter.h"
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #endif
 
