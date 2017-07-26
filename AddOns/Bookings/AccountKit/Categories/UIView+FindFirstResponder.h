@@ -1,6 +1,6 @@
 //
 //  UIView+FindFirstResponder.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 9/02/11.
 //  Copyright 2011 SkedGo. All rights reserved.

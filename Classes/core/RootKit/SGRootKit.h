@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef TripGo_SGRootKit_h
-#define TripGo_SGRootKit_h
+#ifndef TripKit_SGRootKit_h
+#define TripKit_SGRootKit_h
 
 #import "SGKConstants.h"
 #import "SGKEnums.h"

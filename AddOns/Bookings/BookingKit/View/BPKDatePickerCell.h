@@ -1,6 +1,6 @@
 //
 //  SGPayPickerCell.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 29/01/2015.
 //

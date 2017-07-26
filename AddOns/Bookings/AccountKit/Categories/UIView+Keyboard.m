@@ -1,6 +1,6 @@
 //
 //  UIView+Keyboard.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 16/02/2015.
 //

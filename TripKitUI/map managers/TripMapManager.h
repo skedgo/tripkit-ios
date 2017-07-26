@@ -1,6 +1,6 @@
 //
 //  TripMapManager.h
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 7/09/2016.
 //

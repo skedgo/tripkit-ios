@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-#ifndef TripGo_STKTransportKit_h
-#define TripGo_STKTransportKit_h
+#ifndef TripKit_STKTransportKit_h
+#define TripKit_STKTransportKit_h
 
 #import "SVKServerKit.h"
 

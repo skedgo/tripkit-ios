@@ -1,6 +1,6 @@
 //
 //  TripMapManager.m
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 7/09/2016.
 //
@@ -8,7 +8,7 @@
 
 #import "TripMapManager.h"
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
 #else

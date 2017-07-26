@@ -1,6 +1,6 @@
 //
 //  SGPaymentTextFieldCell.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 27/01/2015.
 //
@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 
 #endif
 

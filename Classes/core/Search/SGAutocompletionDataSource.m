@@ -670,7 +670,7 @@ typedef enum {
 {
   if (!_slowQueue) {
     _slowQueue = [[NSOperationQueue alloc] init];
-    _slowQueue.name = @"com.buzzhives.TripGo.autocompletion.remote";
+    _slowQueue.name = @"com.skedgo.TripKit.autocompletion.remote";
     _slowQueue.qualityOfService = NSQualityOfServiceUserInitiated;
   }
   return _slowQueue;
@@ -680,7 +680,7 @@ typedef enum {
 {
   if (!_fastQueue) {
     _fastQueue = [[NSOperationQueue alloc] init];
-    _fastQueue.name = @"com.buzzhives.TripGo.autocompletion.local";
+    _fastQueue.name = @"com.skedgo.TripKit.autocompletion.local";
     _fastQueue.qualityOfService = NSQualityOfServiceUserInitiated;
   }
   return _fastQueue;

@@ -1,12 +1,12 @@
 //
 //  SGStyleManager+SGCoreUI.h
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 6/07/2016.
 //
 //
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #else
 @import TripKit;

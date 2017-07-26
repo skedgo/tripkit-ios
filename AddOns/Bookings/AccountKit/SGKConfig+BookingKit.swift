@@ -1,6 +1,6 @@
 //
 //  SGKConfig+BookingKit.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 21/11/16.
 //

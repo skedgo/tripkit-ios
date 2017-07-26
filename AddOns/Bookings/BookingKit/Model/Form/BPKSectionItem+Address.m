@@ -1,6 +1,6 @@
 //
 //  BPKSectionItem+Address.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 16/03/2015.
 //
@@ -8,7 +8,7 @@
 
 #import "BPKSectionItem+Address.h"
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
 #else

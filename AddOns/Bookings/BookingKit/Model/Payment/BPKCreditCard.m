@@ -1,6 +1,6 @@
 //
 //  SGBPCreditCard.m
-//  TripGo
+//  TripKit
 //
 //  Created by Brian Huang on 5/02/2015.
 //

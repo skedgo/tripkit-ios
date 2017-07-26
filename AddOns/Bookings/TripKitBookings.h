@@ -1,6 +1,6 @@
 //
 //  SGBookingKit.h
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 22/06/2016.
 //
@@ -10,7 +10,7 @@
 #define SGBookingKit_h
 
 // Dependencies
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 
 #endif
 

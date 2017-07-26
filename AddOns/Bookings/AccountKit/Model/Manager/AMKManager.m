@@ -1,6 +1,6 @@
 //
 //  SGUserAccountManager.m
-//  WotGo
+//  TripKit
 //
 //  Created by Brian Huang on 11/12/2014.
 //  Copyright (c) 2014 Adrian Schoenig. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "AMKManager.h"
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
 #else

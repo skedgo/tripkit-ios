@@ -51,7 +51,7 @@ Then run `carthage update` and add the framework to your project as described in
 
 - Drag the files into your project.
 - Add dependencies (see [TripKit.podspec](TripKit.podspec))
-- Specify `TK_NO_FRAMEWORKS` in both your target's `Other C Flags` *and* `Other Swift Flags`
+- Specify `TK_NO_MODULE` in both your target's `Other C Flags` *and* `Other Swift Flags`
 
 If there's any trouble with that, see the example under [Project](Project).
 

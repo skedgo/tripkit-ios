@@ -1,13 +1,13 @@
 //
 //  BPKTextFieldBlock.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 12/02/2015.
 //
 //
 
-#ifndef TripGo_BPKTextFieldBlock_h
-#define TripGo_BPKTextFieldBlock_h
+#ifndef TripKit_BPKTextFieldBlock_h
+#define TripKit_BPKTextFieldBlock_h
 
 typedef void (^BPKTextFieldNilReturnBlock)(UITextField *textField);
 typedef BOOL (^BPKTextFieldBoolReturnBlock)(UITextField *textField);

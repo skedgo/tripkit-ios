@@ -1,6 +1,6 @@
 //
 //  TKBookingCoordinator.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 24/11/16.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.
@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-#if TK_NO_FRAMEWORKS
+#if TK_NO_MODULE
 #else
   import TripKit
 #endif
