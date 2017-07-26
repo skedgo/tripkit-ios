@@ -100,11 +100,6 @@ public protocol SGTrackItem: NSObjectProtocol {
 public protocol SGTrackItemDisplayable: SGTrackItem {
 
   /**
-   If the item should be considered as content, e.g., having any item with a content will mark a date on the calendar
-   */
-  var considerAsContent: Bool { get }
-  
-  /**
    If the start/end times for this item should usually be hidden (e.g., for "home" or where you're staying).
    */
   var hideTimes: Bool { get }
