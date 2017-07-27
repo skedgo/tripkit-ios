@@ -16,6 +16,15 @@ public struct TKAgendaOutput {
     case includedEvent(id: String, arrival: Date, departure: Date)
     case excludedEvent(id: String)
     case trip(fromId: String, tripId: String, toId: String)
+    
+    public var id: String {
+      switch self {
+      case .home(let id, _, _): return id
+      case .includedEvent(let id, _, _): return id
+      case .excludedEvent(let id): return id
+      case .trip(_, let id, _): return id
+      }
+    }
   }
   
   public let hashCode: Int
