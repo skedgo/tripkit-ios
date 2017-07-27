@@ -13,6 +13,7 @@ import RxSwift
 
 public typealias StatusCode = Int
 
+// TODO: Add a .noChange here, too?
 public enum TKAgendaUploadResult {
   case success
 }
@@ -26,6 +27,7 @@ public enum TKAgendaFetchResult<T> {
 public enum TKAgendaError: Error {
   case userIsNotLoggedIn
   case userTokenIsInvalid
+  case invalidDateComponents(DateComponents)
   case agendaInputNotAvailable(DateComponents)
   case agendaLockedByOtherDevice(owningDeviceId: String)
   case unexpectedResponse(StatusCode, Any?)
@@ -197,9 +199,9 @@ extension Reactive where Base: SVKServer {
 }
 
 
-fileprivate extension DateComponents {
+extension DateComponents {
   
-  var dateString: String? {
+  public var dateString: String? {
     guard
       let year = self.year,
       let month = self.month,
