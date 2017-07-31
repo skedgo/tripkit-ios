@@ -37,9 +37,10 @@ extension SGCountdownCell {
   
   public func configure(with model: SGCountdownCellModel) {
     showAsCanceled = model.isCancelled
-    showWheelchair = NSInteger(model.wheelChairAccessible!)
     var subsubtitle: String?
     if (model.wheelChairEnabled) {
+      showWheelchair = NSInteger(model.wheelChairAccessible!)
+
       switch showWheelchair {
       case 0:
         subsubtitle = Loc.WheelchairAccessible
