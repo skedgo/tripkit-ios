@@ -1,6 +1,6 @@
 //
 //  BPKAlertHelper.swift
-//  Pods
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 16/2/17.
 //

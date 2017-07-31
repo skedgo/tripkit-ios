@@ -1,6 +1,6 @@
 //
 //  AMKSignUpHeader.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 26/02/2015.
 //

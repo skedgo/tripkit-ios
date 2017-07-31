@@ -1,6 +1,6 @@
 //
 //  TGTestCase.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 22/07/2015.
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.

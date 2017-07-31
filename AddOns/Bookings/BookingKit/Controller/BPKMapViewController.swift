@@ -1,6 +1,6 @@
 //
 //  BPKMapViewController.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 12/08/2015.
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.

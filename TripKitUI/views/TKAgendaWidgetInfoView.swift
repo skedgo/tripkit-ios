@@ -1,6 +1,6 @@
 //
 //  TGAgendaWidgetInfoView.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 11/09/2016.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.

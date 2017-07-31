@@ -1,6 +1,6 @@
 //
 //  AKTextFieldItem.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 16/02/2015.
 //

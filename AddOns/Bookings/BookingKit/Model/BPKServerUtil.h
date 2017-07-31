@@ -1,6 +1,6 @@
 //
 //  BPKSever.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 16/11/2015.
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "SVKServer.h"
 #else
 @import TripKit;

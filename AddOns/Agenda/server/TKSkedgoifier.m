@@ -1,6 +1,6 @@
 //
 //  SGSkedgoifier.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 31/07/13.
 //
@@ -8,7 +8,7 @@
 
 #import "TKSkedgoifier.h"
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import <TripKit/TripKit-Swift.h>
 #else
 @import TripKit;

@@ -1,6 +1,6 @@
 //
 //  SGCustomEvent.h
-//  WotGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 25/02/2014.
 //  Copyright (c) 2014 Adrian Schoenig. All rights reserved.

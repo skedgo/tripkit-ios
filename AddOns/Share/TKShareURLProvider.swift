@@ -1,6 +1,6 @@
 //
 //  TKShareURLProvider.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 4/7/17.
 //
@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if TK_NO_FRAMEWORKS
+#if TK_NO_MODULE
 #else
   import TripKit
 #endif

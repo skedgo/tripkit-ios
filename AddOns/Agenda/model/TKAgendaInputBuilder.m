@@ -1,6 +1,6 @@
 //
 //  SGAgenda.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 2/04/2014.
 //

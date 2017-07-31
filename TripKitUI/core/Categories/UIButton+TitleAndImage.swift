@@ -1,6 +1,6 @@
 //
 //  UIButton+CenterImage.swift
-//  Pods
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 30/11/2016.
 //

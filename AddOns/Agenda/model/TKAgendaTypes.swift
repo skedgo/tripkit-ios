@@ -1,6 +1,6 @@
 //
 //  TKAgendaInputType.swift
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 3/03/2016.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.

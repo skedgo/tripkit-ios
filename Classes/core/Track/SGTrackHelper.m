@@ -1,6 +1,6 @@
 //
 //  SGTrackHelper.m
-//  WotGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 20/01/2014.
 //  Copyright (c) 2014 Adrian Schoenig. All rights reserved.

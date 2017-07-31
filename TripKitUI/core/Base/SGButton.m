@@ -1,6 +1,6 @@
 //
 //  SGButton.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 30/03/2015.
 //
@@ -8,7 +8,7 @@
 
 #import "SGButton.h"
 
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 
 #endif
 

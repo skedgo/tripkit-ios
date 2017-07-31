@@ -1,6 +1,6 @@
 //
 //  TripKitUIBundle.swift
-//  Pods
+//  TripKit
 //
 //  Created by Adrian Schoenig on 23/06/2016.
 //

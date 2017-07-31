@@ -1,6 +1,6 @@
 //
 //  TKAgendaUtils.swift
-//  RioGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 6/03/2016.
 //  Copyright © 2016 SkedGo. All rights reserved.

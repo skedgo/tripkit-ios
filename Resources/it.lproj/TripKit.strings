@@ -85,7 +85,7 @@
 "Disconnect" = "Disconnettere";
 
 /* As in 'this bus/train is empty' */
-"Empty" = "Empty";
+"Empty" = "Vuoto";
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Few seats available";

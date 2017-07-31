@@ -1,6 +1,6 @@
 //
 //  TKInterAppCommunicator.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 11/08/2015.
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
@@ -11,7 +11,7 @@
 @import MessageUI;
 
 
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 @import TripKit;
 #import <TripKitAddons/TripKitAddons-Swift.h>
 #else

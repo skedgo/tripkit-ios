@@ -1,6 +1,6 @@
 //
 //  SGSemaphoreView.m
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schönig on 6/07/12.
 //  Copyright (c) 2012 SkedGo. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
 #else

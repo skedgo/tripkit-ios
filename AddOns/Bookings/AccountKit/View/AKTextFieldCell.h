@@ -1,6 +1,6 @@
 //
 //  AKTextFieldCell.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 12/12/2014.
 //  Copyright (c) 2014 Adrian Schoenig. All rights reserved.
@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "SGTableCell.h"
 #import "SGLabel.h"
 #else

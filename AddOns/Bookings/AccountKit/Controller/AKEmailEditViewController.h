@@ -1,6 +1,6 @@
 //
 //  SGUserAccountNewEmailViewController.h
-//  WotGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 15/12/2014.
 //  Copyright (c) 2014 Adrian Schoenig. All rights reserved.

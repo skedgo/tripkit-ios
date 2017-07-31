@@ -1,6 +1,6 @@
 //
 //  AMKFacebookHelper.h
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 13/03/2015.
 //
@@ -8,7 +8,7 @@
 
 @import Accounts;
 
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 
 #endif
 

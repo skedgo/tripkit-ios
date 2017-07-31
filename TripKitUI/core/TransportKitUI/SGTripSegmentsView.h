@@ -1,6 +1,6 @@
 //
 //  SGTripSegmentsView.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 20/01/2014.
 //
@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-#ifndef TK_NO_FRAMEWORKS
+#ifndef TK_NO_MODULE
 
 #endif
 

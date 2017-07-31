@@ -1,6 +1,6 @@
 //
 //  SGCountdownCell.h
-//  TripGo
+//  TripKit
 //
 //  Created by Adrian Schoenig on 19/02/2014.
 //
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#ifdef TK_NO_FRAMEWORKS
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #else
 @import TripKit;

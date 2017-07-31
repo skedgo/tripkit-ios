@@ -1,6 +1,6 @@
 //
 //  UIViewController+RootPresenter.m
-//  TripGo
+//  TripKit
 //
 //  Created by Kuan Lun Huang on 4/02/2015.
 //
