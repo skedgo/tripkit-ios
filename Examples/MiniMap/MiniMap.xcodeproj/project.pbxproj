@@ -1,0 +1,380 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A1498DA1F0FD33F0061A0D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1498D91F0FD33F0061A0D0 /* AppDelegate.swift */; };
+		3A1498DC1F0FD33F0061A0D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1498DB1F0FD33F0061A0D0 /* ViewController.swift */; };
+		3A1498DE1F0FD33F0061A0D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1498DD1F0FD33F0061A0D0 /* Assets.xcassets */; };
+		3A1498E11F0FD33F0061A0D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A1498DF1F0FD33F0061A0D0 /* Main.storyboard */; };
+		3A1498E91F0FD8C10061A0D0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1498E81F0FD8C10061A0D0 /* MapKit.framework */; };
+		AA5F9A5925FA1E0AAC738413 /* Pods_MiniMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B7968378BFF5200B046B2A /* Pods_MiniMap.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		15B7968378BFF5200B046B2A /* Pods_MiniMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A1498D61F0FD33F0061A0D0 /* MiniMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A1498D91F0FD33F0061A0D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3A1498DB1F0FD33F0061A0D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3A1498DD1F0FD33F0061A0D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A1498E01F0FD33F0061A0D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3A1498E21F0FD33F0061A0D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A1498E81F0FD8C10061A0D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		693FF9E30D332167BEF4BA22 /* Pods-MiniMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniMap/Pods-MiniMap.release.xcconfig"; sourceTree = "<group>"; };
+		BF0A0E7D914AE57785D3A0C8 /* Pods-MiniMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MiniMap/Pods-MiniMap.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A1498D31F0FD33F0061A0D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A1498E91F0FD8C10061A0D0 /* MapKit.framework in Frameworks */,
+				AA5F9A5925FA1E0AAC738413 /* Pods_MiniMap.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A1498CD1F0FD33F0061A0D0 = {
+			isa = PBXGroup;
+			children = (
+				3A1498D81F0FD33F0061A0D0 /* MiniMap */,
+				3A1498D71F0FD33F0061A0D0 /* Products */,
+				DBCD3F5F79BF7285085DC91B /* Pods */,
+				AE0D81F6839E3DDD114DADE8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3A1498D71F0FD33F0061A0D0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A1498D61F0FD33F0061A0D0 /* MiniMap.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A1498D81F0FD33F0061A0D0 /* MiniMap */ = {
+			isa = PBXGroup;
+			children = (
+				3A1498D91F0FD33F0061A0D0 /* AppDelegate.swift */,
+				3A1498DB1F0FD33F0061A0D0 /* ViewController.swift */,
+				3A1498DD1F0FD33F0061A0D0 /* Assets.xcassets */,
+				3A1498DF1F0FD33F0061A0D0 /* Main.storyboard */,
+				3A1498E21F0FD33F0061A0D0 /* Info.plist */,
+			);
+			path = MiniMap;
+			sourceTree = "<group>";
+		};
+		AE0D81F6839E3DDD114DADE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A1498E81F0FD8C10061A0D0 /* MapKit.framework */,
+				15B7968378BFF5200B046B2A /* Pods_MiniMap.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DBCD3F5F79BF7285085DC91B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BF0A0E7D914AE57785D3A0C8 /* Pods-MiniMap.debug.xcconfig */,
+				693FF9E30D332167BEF4BA22 /* Pods-MiniMap.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3A1498D51F0FD33F0061A0D0 /* MiniMap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A1498E51F0FD33F0061A0D0 /* Build configuration list for PBXNativeTarget "MiniMap" */;
+			buildPhases = (
+				3C8610ECE169AFCB8043B0E2 /* [CP] Check Pods Manifest.lock */,
+				3A1498D21F0FD33F0061A0D0 /* Sources */,
+				3A1498D31F0FD33F0061A0D0 /* Frameworks */,
+				3A1498D41F0FD33F0061A0D0 /* Resources */,
+				5B7F98C96188245BC2E076BE /* [CP] Embed Pods Frameworks */,
+				484C22E5BC3D7F97C2EBFFD3 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MiniMap;
+			productName = MiniMap;
+			productReference = 3A1498D61F0FD33F0061A0D0 /* MiniMap.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A1498CE1F0FD33F0061A0D0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "SkedGo Pty Ltd";
+				TargetAttributes = {
+					3A1498D51F0FD33F0061A0D0 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = JFT62W5LA3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3A1498D11F0FD33F0061A0D0 /* Build configuration list for PBXProject "MiniMap" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A1498CD1F0FD33F0061A0D0;
+			productRefGroup = 3A1498D71F0FD33F0061A0D0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A1498D51F0FD33F0061A0D0 /* MiniMap */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3A1498D41F0FD33F0061A0D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A1498DE1F0FD33F0061A0D0 /* Assets.xcassets in Resources */,
+				3A1498E11F0FD33F0061A0D0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3C8610ECE169AFCB8043B0E2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		484C22E5BC3D7F97C2EBFFD3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MiniMap/Pods-MiniMap-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B7F98C96188245BC2E076BE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MiniMap/Pods-MiniMap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A1498D21F0FD33F0061A0D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A1498DC1F0FD33F0061A0D0 /* ViewController.swift in Sources */,
+				3A1498DA1F0FD33F0061A0D0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3A1498DF1F0FD33F0061A0D0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A1498E01F0FD33F0061A0D0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3A1498E31F0FD33F0061A0D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3A1498E41F0FD33F0061A0D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		3A1498E61F0FD33F0061A0D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF0A0E7D914AE57785D3A0C8 /* Pods-MiniMap.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JFT62W5LA3;
+				INFOPLIST_FILE = MiniMap/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.MiniMap;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		3A1498E71F0FD33F0061A0D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 693FF9E30D332167BEF4BA22 /* Pods-MiniMap.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JFT62W5LA3;
+				INFOPLIST_FILE = MiniMap/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.MiniMap;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A1498D11F0FD33F0061A0D0 /* Build configuration list for PBXProject "MiniMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A1498E31F0FD33F0061A0D0 /* Debug */,
+				3A1498E41F0FD33F0061A0D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A1498E51F0FD33F0061A0D0 /* Build configuration list for PBXNativeTarget "MiniMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A1498E61F0FD33F0061A0D0 /* Debug */,
+				3A1498E71F0FD33F0061A0D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A1498CE1F0FD33F0061A0D0 /* Project object */;
+}
