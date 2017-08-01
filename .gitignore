@@ -26,3 +26,4 @@ DerivedData
 #Pods/
 Project/Podfile.lock
 Project/Pods
+/Project/TripKit.framework.zip
