@@ -70,10 +70,10 @@
 "Call %@" = "Chiama %@";
 
 /* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
-"Connect to Internet to get trips" = "Connect to Internet to get trips";
+"Connect to Internet to get trips" = "Connettiti a Internet per fare viaggi";
 
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Could not find transit stop.";
+"Could not find transit stop." = "Impossibile trovare la fermata di transito.";
 
 /* Departure time sorter title */
 "Departure" = "Partenza";
@@ -88,19 +88,19 @@
 "Empty" = "Vuoto";
 
 /* As in 'this bus/train has few seats available' */
-"Few seats available" = "Few seats available";
+"Few seats available" = "Pochi posti disponibili";
 
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Da %@";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
-"Full" = "Full";
+"Full" = "Completo";
 
 /* No comment provided by engineer. */
 "Get Lyft" = "Prendere Lyft";
 
 /* No comment provided by engineer. */
-"Get Ola" = "Get Ola";
+"Get Ola" = "Prendi Ola";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Ottieni indicazioni";
@@ -118,10 +118,10 @@
 "I'll take a %@ at %@ from %@." = "Prendo il %@ alle %@ da %@.";
 
 /* %@ is replaced with app name */
-"In the meantime, let's keep exploring %@ and enjoy your trips" = "In the meantime, let's keep exploring %@ and enjoy your trips";
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "Nel frattempo, continuiamo a esplorare %@ e godetevi i tuoi viaggi";
 
 /* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "In the meantime, let's keep exploring and enjoy your trips";
+"In the meantime, let's keep exploring and enjoy your trips" = "Nel frattempo, continuiamo a esplorare e godetevi i tuoi viaggi";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -137,7 +137,7 @@
 "Leave at %@" = "Parte alle %@";
 
 /* Title for when to depart. Countdown to departure will be displayed below. */
-"Leave in" = "Leave in";
+"Leave in" = "Lasciare in";
 
 /* No comment provided by engineer. */
 "Leave now" = "Parti adesso";
