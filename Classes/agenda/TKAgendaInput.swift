@@ -24,7 +24,7 @@ public struct TKAgendaInput {
       self.coordinate = nil
     }
     
-    public init(name: String? = nil, coordinate: CLLocationCoordinate2D, address: String? = nil) {
+    public init(name: String? = nil, coordinate: CLLocationCoordinate2D?, address: String? = nil) {
       self.what3word = nil
       self.name = name
       self.address = address
@@ -329,11 +329,7 @@ extension TKAgendaInput.Location: Unmarshaling {
     if let lat: CLLocationDegrees = try? object.value(for: "lat"),
       let lng: CLLocationDegrees = try? object.value(for: "lng") {
       let candidate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-      if candidate.isValid {
-        coordinate = candidate
-      } else {
-        coordinate = nil
-      }
+      coordinate = candidate.isValid ? candidate : nil
     } else {
       coordinate = nil
     }
