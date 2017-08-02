@@ -153,7 +153,7 @@
 "John Appleseed" = "John Appleseed";
 
 /* Used when user signs in using Facebook */
-"Linking Facebook" = "Linking Facebook";
+"Linking Facebook" = "Collegati con Facebook";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Caricamento";
@@ -224,13 +224,13 @@
 "Please try again or set your location manually." = "Please try again or set your location manually.";
 
 /* Please verify the location prompt */
-"Please verify the location" = "Please verify the location";
+"Please verify the location" = "Verifica la posizione";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
 "Press 'search' for more..." = "Premere 'cerca' per altro...";
 
 /* No comment provided by engineer. */
-"Read more..." = "Read more...";
+"Read more..." = "Leggi di più...";
 
 /* Indicator for real-time information */
 "Real-time" = "Tempo reale";
@@ -300,7 +300,7 @@
 "Signing out" = "Signing out";
 
 /* Starting %date. (old key: DateFromFormat) */
-"Starting %@" = "Starting %@";
+"Starting %@" = "A partire %@";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Seleziona un luogo";
@@ -321,7 +321,7 @@
 "Unknown error" = "Errore sconosciuto";
 
 /* Up to %date. (old key: DateToFormat) */
-"Up to %@" = "Up to %@";
+"Up to %@" = "Fino a %@";
 
 /* Message that shows app is updating trip after user finalised bookings */
 "Updating trip" = "Updating trip";
