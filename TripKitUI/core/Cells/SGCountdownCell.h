@@ -48,7 +48,6 @@
 @property (nonatomic, assign) BOOL showTickIcon;
 @property (nonatomic, assign) BOOL showAlertIcon;
 @property (nonatomic, assign) BOOL showAsCanceled;
-@property (nonatomic, assign) NSInteger showWheelchair;
 
 // UI customizations
 @property (nonatomic, strong) UIColor *preferredTintColor UI_APPEARANCE_SELECTOR;

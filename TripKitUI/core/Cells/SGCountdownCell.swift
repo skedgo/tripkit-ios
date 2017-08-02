@@ -22,8 +22,8 @@ public struct SGCountdownCellModel {
   public var alertText: String?
   public var alertIconType: STKInfoIconType
   public var isCancelled: Bool = false
-  public var wheelChairEnabled: Bool = false
-  public var wheelChairAccessible: NSInteger?
+  public var isWheelchairEnabled: Bool = false
+  public var isAccessible: Bool?
   
   public init(title: NSAttributedString, position: SGKGrouping = .edgeToEdge, alertIconType: STKInfoIconType = .none) {
     self.title = title
@@ -35,30 +35,43 @@ public struct SGCountdownCellModel {
 
 extension SGCountdownCell {
   
+  public func updateAccessibleInfo(to accessible: Bool?) {
+    modeAccessoryIcon.isHidden = false
+    
+    guard let isAccessible = accessible else {
+      modeAccessoryIcon.image = SGStyleManager.imageNamed("icon-wheelchair-unknow")
+      return
+    }
+    
+    let iconName = isAccessible ? "icon-wheelchair-accessible" : "icon-wheelchair-not-accessible"
+    modeAccessoryIcon.image = SGStyleManager.imageNamed(iconName)
+  }
+  
   public func configure(with model: SGCountdownCellModel) {
     showAsCanceled = model.isCancelled
-    var subsubtitle: String?
-    if (model.wheelChairEnabled) {
-      showWheelchair = NSInteger(model.wheelChairAccessible!)
-
-      switch showWheelchair {
-      case 0:
-        subsubtitle = Loc.WheelchairAccessible
-
-      case 1:
-        subsubtitle = Loc.WheelchairNotAccessible
-
-      case 2:
-        subsubtitle = Loc.UnkonwWheelchairAccessible
-        
-      default:
-        break
-      }
-    }
+//    var subsubtitle: String?
+//    
+//    if (model.wheelChairEnabled) {
+//      showWheelchair = NSInteger(model.wheelChairAccessible!)
+//
+//      switch showWheelchair {
+//      case 0:
+//        subsubtitle = Loc.WheelchairAccessible
+//
+//      case 1:
+//        subsubtitle = Loc.WheelchairNotAccessible
+//
+//      case 2:
+//        subsubtitle = Loc.UnkonwWheelchairAccessible
+//        
+//      default:
+//        break
+//      }
+//    }
     
     self.configure(title: model.title
       , subtitle: model.subtitle
-      , subsubtitle: subsubtitle
+      , subsubtitle: nil
       , icon: model.icon
       , iconImageURL: model.iconImageURL
       , timeToCountdownTo: model.time
@@ -67,6 +80,10 @@ extension SGCountdownCell {
       , stripColor: model.color
       , alert: model.alertText
       , alertIconType: model.alertIconType)
+    
+    if model.isWheelchairEnabled {
+      updateAccessibleInfo(to: model.isAccessible)
+    }
   }
   
   

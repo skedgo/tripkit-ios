@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G16b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -113,31 +113,31 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="233" height="65.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="E84 at 3:35pm" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krt-q8-T1x" userLabel="Title" customClass="SGLabel">
-                                                        <rect key="frame" x="0.0" y="0.0" width="233" height="36"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="233" height="20.5"/>
                                                         <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <color key="textColor" red="0.097280979156494141" green="0.090294875204563141" blue="0.23543129861354828" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Stand C, Mona vale Junction" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vek-XX-gM0" userLabel="Subtitle" customClass="SGLabel">
-                                                        <rect key="frame" x="0.0" y="36" width="233" height="14.5"/>
+                                                        <rect key="frame" x="0.0" y="20.5" width="233" height="14.5"/>
                                                         <color key="backgroundColor" red="0.36089224079999999" green="0.96862745100000003" blue="0.94678446390000004" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                         <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="W8F-eQ-L1D">
-                                                        <rect key="frame" x="0.0" y="50.5" width="233" height="15"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="W8F-eQ-L1D">
+                                                        <rect key="frame" x="0.0" y="35" width="233" height="30.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UIo-F6-S6Q" userLabel="ModeAccessoryIcon">
-                                                                <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                                <rect key="frame" x="0.0" y="7.5" width="16" height="16"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="15" id="1ul-v4-an0"/>
+                                                                    <constraint firstAttribute="width" constant="16" id="1ul-v4-an0"/>
                                                                     <constraint firstAttribute="width" secondItem="UIo-F6-S6Q" secondAttribute="height" multiplier="1:1" id="Z45-eA-r3h"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 mins late (3:32pm service)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50f-gv-AW4" userLabel="Subsubtitle" customClass="SGLabel">
-                                                                <rect key="frame" x="18" y="0.0" width="215" height="15"/>
+                                                                <rect key="frame" x="19" y="15.5" width="214" height="0.0"/>
                                                                 <color key="backgroundColor" red="0.97712953629999999" green="0.92543472780000002" blue="0.072895665319999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                                 <color key="textColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
