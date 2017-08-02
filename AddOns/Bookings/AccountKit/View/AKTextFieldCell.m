@@ -52,6 +52,7 @@
 
 - (void)prepareForReuse
 {
+  [super prepareForReuse];
   self.promptLabel.text = nil;
   self.textField.text = nil;
   self.shouldReturnHandler = nil;

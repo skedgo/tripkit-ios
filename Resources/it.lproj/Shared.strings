@@ -31,6 +31,9 @@
 /* Authorisation needed title */
 "Authorisation needed" = "Autorizzazione necessaria";
 
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Dietro";
+
 /* Type of vehicle : bicycle */
 "Bicycle" = "Bicicletta";
 
@@ -86,7 +89,7 @@
 "Credit card" = "Carta di pagamento";
 
 /* Current city */
-"Current City" = "Current City";
+"Current City" = "Città attuale";
 
 /* Title for user's current location */
 "Current Location" = "Posizione attuale";
@@ -119,8 +122,7 @@
 /* Credit card expiry date */
 "Expiry Date" = "Data di scadenza";
 
-/* Option that allows users to indicate whether reminder is needed
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "For when to leave" = "Entro che ora vuoi partire";
 
 /* Free as in beer */
@@ -151,7 +153,7 @@
 "John Appleseed" = "John Appleseed";
 
 /* Used when user signs in using Facebook */
-"Linking Facebook" = "Linking Facebook";
+"Linking Facebook" = "Collegati con Facebook";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Caricamento";
@@ -159,14 +161,13 @@
 /* Title for unnamed location */
 "Location" = "Posizione";
 
-/* Location iOS6+ authorisation needed text */
+/* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Per utilizzare questa funzione è necessario abilitare i servizi di localizzazione. Vai su Impostazioni> Privacy> servizi di localizzazione, assicurati che siano abilitati e autorizza questa app.";
 
 /* Indicating a payment is in progress */
 "Making payment" = "Making payment";
 
-/* Option that allows users to indicate how eary to show trip reminder
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "Minutes before trip" = "Minuti prima del viaggio";
 
 /* More results proposal */
@@ -198,9 +199,7 @@
 /* Countdown cell 'now' indicator */
 "Now" = "Adesso";
 
-/* Authorisation ok button
-   Default title for button that dismisses alert view
-   Ok action */
+/* Ok action */
 "OK" = "Ok";
 
 /* Button to open Settings app section for this app */
@@ -225,13 +224,13 @@
 "Please try again or set your location manually." = "Please try again or set your location manually.";
 
 /* Please verify the location prompt */
-"Please verify the location" = "Please verify the location";
+"Please verify the location" = "Verifica la posizione";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
 "Press 'search' for more..." = "Premere 'cerca' per altro...";
 
 /* No comment provided by engineer. */
-"Read more..." = "Read more...";
+"Read more..." = "Leggi di più...";
 
 /* Indicator for real-time information */
 "Real-time" = "Tempo reale";
@@ -239,8 +238,7 @@
 /* Title for section that asks users where payment receipt should be sent */
 "Receipt" = "Ricevuta";
 
-/* Action title to add/remove reminder
-   Section title at the end of a booking that allows users to set reminders */
+/* Action title to add/remove reminder */
 "Reminder" = "Promemoria";
 
 /* Repeats daily */
@@ -302,7 +300,7 @@
 "Signing out" = "Signing out";
 
 /* Starting %date. (old key: DateFromFormat) */
-"Starting %@" = "Starting %@";
+"Starting %@" = "A partire %@";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Seleziona un luogo";
@@ -323,7 +321,7 @@
 "Unknown error" = "Errore sconosciuto";
 
 /* Up to %date. (old key: DateToFormat) */
-"Up to %@" = "Up to %@";
+"Up to %@" = "Fino a %@";
 
 /* Message that shows app is updating trip after user finalised bookings */
 "Updating trip" = "Updating trip";
@@ -347,7 +345,7 @@
 "You need to agree to the booking terms and conditions." = "You need to agree to the booking terms and conditions.";
 
 /* Message that informs users that T&C for insurance must be agreed before booking can be made. */
-"You need to agree to the insurance terms and conditions." = "You need to agree to the insurance terms and conditions.";
+"You need to agree to the insurance terms and conditions." = "Devi accettare i termini e le condizioni di assicurazione.";
 
 /* Calendar authorisation needed text */
 "You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "A questa applicazione è stato negato l'accesso al tuo calendario. Per favore, vai su Impostazioni > Privacy > Calendario e autorizza questa applicazione ad utilizzare questa funzione.";
