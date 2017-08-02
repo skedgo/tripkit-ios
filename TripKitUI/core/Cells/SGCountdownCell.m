@@ -119,20 +119,6 @@ typedef enum {
   self.alertIcon.hidden = ! showAlertIcon;
 }
 
-//- (void)setShowWheelchair:(int)showWheelchair
-//{
-//  _showWheelchair = showWheelchair;
-//  
-//  self.modeAccessoryIcon.hidden = NO;
-//  if (showWheelchair == 0) {
-//    self.modeAccessoryIcon.image = [SGStyleManager imageNamed:@"icon-wheelchair-accessible"];
-//  } else if (showWheelchair == 1) {
-//    self.modeAccessoryIcon.image = [SGStyleManager imageNamed:@"icon-wheelchair-not-accessible"];
-//  } else {
-//    self.modeAccessoryIcon.image = [SGStyleManager imageNamed:@"icon-wheelchair-unknow"];
-//  }
-//}
-
 #pragma mark - UITableViewCell
 
 - (void)awakeFromNib

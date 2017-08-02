@@ -38,36 +38,26 @@ extension SGCountdownCell {
   public func updateAccessibleInfo(to accessible: Bool?) {
     modeAccessoryIcon.isHidden = false
     
-    guard let isAccessible = accessible else {
-      modeAccessoryIcon.image = SGStyleManager.imageNamed("icon-wheelchair-unknow")
-      return
+    var info: (icon: UIImage, text: String)
+    
+    switch accessible {
+    case true?:
+      info.icon = SGStyleManager.imageNamed("icon-wheelchair-accessible")
+      info.text = Loc.WheelchairAccessible
+    case false?:
+      info.icon = SGStyleManager.imageNamed("icon-wheelchair-not-accessible")
+      info.text = Loc.WheelchairNotAccessible
+    default:
+      info.icon = SGStyleManager.imageNamed("icon-wheelchair-unknow")
+      info.text = Loc.UnkonwWheelchairAccessible
     }
     
-    let iconName = isAccessible ? "icon-wheelchair-accessible" : "icon-wheelchair-not-accessible"
-    modeAccessoryIcon.image = SGStyleManager.imageNamed(iconName)
+    modeAccessoryIcon.image = info.icon
+    subSubTitle.text = info.text
   }
   
   public func configure(with model: SGCountdownCellModel) {
     showAsCanceled = model.isCancelled
-//    var subsubtitle: String?
-//    
-//    if (model.wheelChairEnabled) {
-//      showWheelchair = NSInteger(model.wheelChairAccessible!)
-//
-//      switch showWheelchair {
-//      case 0:
-//        subsubtitle = Loc.WheelchairAccessible
-//
-//      case 1:
-//        subsubtitle = Loc.WheelchairNotAccessible
-//
-//      case 2:
-//        subsubtitle = Loc.UnkonwWheelchairAccessible
-//        
-//      default:
-//        break
-//      }
-//    }
     
     self.configure(title: model.title
       , subtitle: model.subtitle
@@ -81,6 +71,7 @@ extension SGCountdownCell {
       , alert: model.alertText
       , alertIconType: model.alertIconType)
     
+    // Only update accessible info if option is enabled.
     if model.isWheelchairEnabled {
       updateAccessibleInfo(to: model.isAccessible)
     }
