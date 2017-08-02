@@ -286,11 +286,12 @@ NSString *const RegionManagerRegionsUpdatedNotification =  @"SVKRegionManagerReg
   NSURL *cacheFile = [self cacheURL];
   NSData *data = [NSData dataWithContentsOfURL:cacheFile];
   if (data) {
-    // For backwards comaptibility with old files
+    // For backwards comaptibility with old versions of TripKit
     [NSKeyedUnarchiver setClass:[SVKRegion class] forClassName:@"Region"];
     [NSKeyedUnarchiver setClass:[SVKRegion class] forClassName:@"SGRegion"];
     [NSKeyedUnarchiver setClass:[SVKRegion class] forClassName:@"SVKRegion"];
-    
+    [NSKeyedUnarchiver setClass:[SVKRegion class] forClassName:@"SGCoreKit.SVKRegion"];
+
     @try {
       id unarchived = [NSKeyedUnarchiver unarchiveObjectWithData:data];
       if ([unarchived isKindOfClass:[NSDictionary class]]) {

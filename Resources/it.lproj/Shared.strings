@@ -89,7 +89,7 @@
 "Credit card" = "Carta di pagamento";
 
 /* Current city */
-"Current City" = "Current City";
+"Current City" = "Città attuale";
 
 /* Title for user's current location */
 "Current Location" = "Posizione attuale";
@@ -345,7 +345,7 @@
 "You need to agree to the booking terms and conditions." = "You need to agree to the booking terms and conditions.";
 
 /* Message that informs users that T&C for insurance must be agreed before booking can be made. */
-"You need to agree to the insurance terms and conditions." = "You need to agree to the insurance terms and conditions.";
+"You need to agree to the insurance terms and conditions." = "Devi accettare i termini e le condizioni di assicurazione.";
 
 /* Calendar authorisation needed text */
 "You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "A questa applicazione è stato negato l'accesso al tuo calendario. Per favore, vai su Impostazioni > Privacy > Calendario e autorizza questa applicazione ad utilizzare questa funzione.";

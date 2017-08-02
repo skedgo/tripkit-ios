@@ -96,15 +96,15 @@ extension SGKColor : ValueType {
   
   public static func value(from object: Any) throws -> SGKColor {
     guard
-      let dict = object as? [String: Float],
+      let dict = object as? [String: CGFloat],
       let red = dict["red"] ,
       let green = dict["green"],
       let blue = dict["blue"]
       else {
-        throw MarshalError.typeMismatch(expected: [String: Float].self, actual: type(of: object))
+        throw MarshalError.typeMismatch(expected: [String: CGFloat].self, actual: type(of: object))
     }
     
-    return SGKColor(colorLiteralRed: red / 255, green: green / 255, blue: blue / 255, alpha: 1)
+    return SGKColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: 1)
   }
   
 }
