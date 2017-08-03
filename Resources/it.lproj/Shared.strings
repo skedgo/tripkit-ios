@@ -153,7 +153,7 @@
 "John Appleseed" = "John Appleseed";
 
 /* Used when user signs in using Facebook */
-"Linking Facebook" = "Linking Facebook";
+"Linking Facebook" = "Collegati con Facebook";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Caricamento";
@@ -165,7 +165,7 @@
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Per utilizzare questa funzione è necessario abilitare i servizi di localizzazione. Vai su Impostazioni> Privacy> servizi di localizzazione, assicurati che siano abilitati e autorizza questa app.";
 
 /* Indicating a payment is in progress */
-"Making payment" = "Making payment";
+"Making payment" = "Fare il pagamento";
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minuti prima del viaggio";
@@ -221,16 +221,16 @@
 "Please select a location" = "Seleziona una posizione";
 
 /* Error recovery suggestion when GPS fails. */
-"Please try again or set your location manually." = "Please try again or set your location manually.";
+"Please try again or set your location manually." = "Riprovare o impostare la tua posizione manualmente.";
 
 /* Please verify the location prompt */
-"Please verify the location" = "Please verify the location";
+"Please verify the location" = "Verifica la posizione";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
 "Press 'search' for more..." = "Premere 'cerca' per altro...";
 
 /* No comment provided by engineer. */
-"Read more..." = "Read more...";
+"Read more..." = "Leggi di più...";
 
 /* Indicator for real-time information */
 "Real-time" = "Tempo reale";
@@ -284,29 +284,29 @@
 "Sign in" = "Accedi";
 
 /* Instruction for signing out user account */
-"Sign out" = "Sign out";
+"Sign out" = "Esegui il logout";
 
 /* No comment provided by engineer. */
-"Sign up" = "Sign up";
+"Sign up" = "Registrazione";
 
 /* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Sign up cannot be completed without a valid password";
+"Sign up cannot be completed without a valid password" = "L'iscrizione non può essere completata senza una password valida";
 
 /* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Signing in";
+"Signing in" = "Accesso in corso";
 
 /* Message that indicates the app has successfully completed signing out
    Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Signing out";
+"Signing out" = "Logout in corso";
 
 /* Starting %date. (old key: DateFromFormat) */
-"Starting %@" = "Starting %@";
+"Starting %@" = "A partire %@";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Seleziona un luogo";
 
 /* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "The app will now sign out";
+"The app will now sign out" = "L'applicazione verrà disconnesso";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Ricerca posizione - spento";
@@ -321,13 +321,13 @@
 "Unknown error" = "Errore sconosciuto";
 
 /* Up to %date. (old key: DateToFormat) */
-"Up to %@" = "Up to %@";
+"Up to %@" = "Fino a %@";
 
 /* Message that shows app is updating trip after user finalised bookings */
-"Updating trip" = "Updating trip";
+"Updating trip" = "Aggiornamento del viaggio";
 
 /* Message that informs users that some values are missing from the required fields in a booking form. */
-"Values missing from required fields." = "Values missing from required fields.";
+"Values missing from required fields." = "Valori mancanti dai campi obbligatori.";
 
 /* Every weekday in context of repetitions (especially recurring events) */
 "Weekdays" = "Giorni feriali";
@@ -342,7 +342,7 @@
 "Would you like to report a problem?" = "Vuoi segnalare un problema?";
 
 /* Message that informs users that T&C must be agreed before booking can be made. */
-"You need to agree to the booking terms and conditions." = "You need to agree to the booking terms and conditions.";
+"You need to agree to the booking terms and conditions." = "Devi accettare i termini e le condizioni di prenotazione.";
 
 /* Message that informs users that T&C for insurance must be agreed before booking can be made. */
 "You need to agree to the insurance terms and conditions." = "Devi accettare i termini e le condizioni di assicurazione.";
