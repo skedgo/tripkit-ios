@@ -106,9 +106,9 @@ public struct TKAgendaInput {
   
   public let modes: [String]
   
-  public let vehicles: [String: Any]
+  public let vehicles: [[String: Any]]
 
-  public init(items: [Item], modes: [String] = [], config: [String:Any] = [:], patterns: [TKSegmentPattern] = [], vehicles: [String: Any] = [:]) {
+  public init(items: [Item], modes: [String] = [], config: [String:Any] = [:], patterns: [TKSegmentPattern] = [], vehicles: [[String: Any]] = []) {
     self.items = items
     self.modes = modes
     self.config = config
@@ -258,18 +258,16 @@ extension SGKColor: Marshaling {
   
 }
 
-// MARK: Unmarshaling
+// MARK: - Unmarshaling
 
 extension TKAgendaInput: Unmarshaling {
   
   public init(object: MarshaledObject) throws {
-
     items = try object.value(for: "items")
     modes = (try? object.value(for: "modes")) ?? []
     config = (try? object.value(for: "config")) ?? [:]
     patterns = (try? object.value(for: "patterns")) ?? []
-    vehicles = (try? object.value(for: "vehicles")) ?? [:]
-    
+    vehicles = (try? object.value(for: "vehicles")) ?? []
   }
   
 }
