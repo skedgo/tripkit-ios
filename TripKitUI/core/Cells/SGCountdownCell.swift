@@ -35,33 +35,12 @@ public struct SGCountdownCellModel {
 
 extension SGCountdownCell {
   
-  public func updateAccessibleInfo(to accessible: Bool?) {
-    modeAccessoryIcon.isHidden = false
-    
-    var info: (icon: UIImage, text: String)
-    
-    switch accessible {
-    case true?:
-      info.icon = SGStyleManager.imageNamed("icon-wheelchair-accessible")
-      info.text = Loc.WheelchairAccessible
-    case false?:
-      info.icon = SGStyleManager.imageNamed("icon-wheelchair-not-accessible")
-      info.text = Loc.WheelchairNotAccessible
-    default:
-      info.icon = SGStyleManager.imageNamed("icon-wheelchair-unknow")
-      info.text = Loc.UnkonwWheelchairAccessible
-    }
-    
-    modeAccessoryIcon.image = info.icon
-    subSubTitle.text = info.text
-  }
-  
   public func configure(with model: SGCountdownCellModel) {
     showAsCanceled = model.isCancelled
     
     self.configure(title: model.title
       , subtitle: model.subtitle
-      , subsubtitle: nil
+      , subsubtitle: model.subsubtitle
       , icon: model.icon
       , iconImageURL: model.iconImageURL
       , timeToCountdownTo: model.time
@@ -70,11 +49,6 @@ extension SGCountdownCell {
       , stripColor: model.color
       , alert: model.alertText
       , alertIconType: model.alertIconType)
-    
-    // Only update accessible info if option is enabled.
-    if model.isWheelchairEnabled {
-      updateAccessibleInfo(to: model.isAccessible)
-    }
   }
   
   
@@ -99,11 +73,9 @@ extension SGCountdownCell {
     if alert?.isEmpty ?? true {
       alertLabel.text = nil
       alertSymbol.image = nil
-      seperator.isHidden = true
     } else {
       alertLabel.text = alert
       alertSymbol.image = STKInfoIcon.image(for: alertIconType, usage: .normal)
-      seperator.isHidden = false
     }
     
     _configure(withTitle: title, subtitle: subtitle, subsubtitle: subsubtitle, icon: icon, iconImageURL: iconImageURL, timeToCountdownTo: timeToCountdownTo, parkingAvailable: parkingAvailable, position: position, strip: stripColor)
