@@ -35,6 +35,7 @@ public struct SGCountdownCellModel {
 
 extension SGCountdownCell {
   
+  
   public func configure(with model: SGCountdownCellModel) {
     showAsCanceled = model.isCancelled
     
@@ -46,9 +47,13 @@ extension SGCountdownCell {
       , timeToCountdownTo: model.time
       , parkingAvailable: model.parking
       , position: model.position
-      , stripColor: model.color
-      , alert: model.alertText
-      , alertIconType: model.alertIconType)
+      , stripColor: model.color)
+    
+    // We may have alert.
+    configureAlertView(withText: model.alertText, andType: model.alertIconType)
+    
+    // We may need to show accessibility info.
+    configureAccessibleView(asEnabled: model.isWheelchairEnabled, isAccessible: model.isAccessible)
   }
   
   
@@ -66,19 +71,55 @@ extension SGCountdownCell {
   ///   - stripColor: Optional color to display a coloured strip under the icon.
   ///   - alert: Alert text
   ///   - alertIconType: Alert icon to display next to alert text
-  public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, parkingAvailable: String?, position: SGKGrouping, stripColor: SGKColor?, alert: String?, alertIconType: STKInfoIconType) {
+  public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, parkingAvailable: String?, position: SGKGrouping, stripColor: SGKColor?) {
     
     _resetContents()
     
-    if alert?.isEmpty ?? true {
+    _configure(withTitle: title
+      , subtitle: subtitle
+      , subsubtitle: subsubtitle
+      , icon: icon
+      , iconImageURL: iconImageURL
+      , timeToCountdownTo: timeToCountdownTo
+      , parkingAvailable: parkingAvailable
+      , position: position
+      , strip: stripColor)
+  }
+  
+  
+  public func configureAlertView(withText alertText: String?, andType alertType: STKInfoIconType) {
+    if alertText?.isEmpty ?? true {
       alertLabel.text = nil
       alertSymbol.image = nil
     } else {
-      alertLabel.text = alert
-      alertSymbol.image = STKInfoIcon.image(for: alertIconType, usage: .normal)
+      alertLabel.text = alertText
+      alertSymbol.image = STKInfoIcon.image(for: alertType, usage: .normal)
+    }
+  }
+  
+  
+  public func configureAccessibleView(asEnabled isEnabled: Bool, isAccessible: Bool?) {
+    accessibleIcon.isHidden = !isEnabled
+    accessibleSeparator.isHidden = !isEnabled
+    
+    guard isEnabled else { return }
+    
+    var info: (icon: UIImage, text: String)
+    
+    switch isAccessible {
+    case true?:
+      info.icon = SGStyleManager.imageNamed("icon-wheelchair-accessible")
+      info.text = Loc.WheelchairAccessible
+    case false?:
+      info.icon = SGStyleManager.imageNamed("icon-wheelchair-not-accessible")
+      info.text = Loc.WheelchairNotAccessible
+    default:
+      info.icon = SGStyleManager.imageNamed("icon-wheelchair-unknow")
+      info.text = Loc.UnkonwWheelchairAccessible
     }
     
-    _configure(withTitle: title, subtitle: subtitle, subsubtitle: subsubtitle, icon: icon, iconImageURL: iconImageURL, timeToCountdownTo: timeToCountdownTo, parkingAvailable: parkingAvailable, position: position, strip: stripColor)
+    accessibleIcon.image = info.icon
+    accessibleLabel.text = info.text
   }
   
   
