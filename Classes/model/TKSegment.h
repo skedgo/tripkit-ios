@@ -60,8 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 /* 
  Various helper methods for quickly getting values and nice strings for various values.
  */
-@property (nonatomic, strong, nonnull) NSDate *departureTime;
-@property (nonatomic, strong, nonnull) NSDate *arrivalTime;
+@property (nonatomic, strong, null_unspecified) NSDate *departureTime;
+@property (nonatomic, strong, null_unspecified) NSDate *arrivalTime;
 
 - (void)setTitle:(NSString *)title; // just for KVO
 

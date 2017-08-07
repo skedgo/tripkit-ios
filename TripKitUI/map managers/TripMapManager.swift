@@ -133,9 +133,14 @@ extension TripMapManager {
   }
   
   private func requestVisits(for segment: TKSegment, includeShape: Bool) {
-    guard segment.isPublicTransport(), let service = segment.service(), let region = segment.startRegion() else { return }
+    guard
+      segment.isPublicTransport(),
+      let service = segment.service(),
+      let region = segment.startRegion(),
+      let departure = segment.departureTime
+      else { return }
     
-    infoProvider.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: region) { [weak self] (updatedService, finished) in
+    infoProvider.downloadContent(of: service, forEmbarkationDate: departure, in: region) { [weak self] (updatedService, finished) in
       
       guard let `self` = self else { return }
       guard service == updatedService && finished else { return }

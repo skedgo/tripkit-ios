@@ -177,8 +177,8 @@ fileprivate extension AnnotationViewBuilder {
     
     if let frequency = segment.frequency() {
       semaphoreView.setFrequency(frequency, onSide: side)
-    } else {
-      semaphoreView.setTime(segment.departureTime, isRealTime: segment.timesAreRealTime(), in: (segment as STKDisplayableTimePoint).timeZone, onSide: side)
+    } else if let departure = segment.departureTime {
+      semaphoreView.setTime(departure, isRealTime: segment.timesAreRealTime(), in: (segment as STKDisplayableTimePoint).timeZone, onSide: side)
     }
     
     semaphoreView.canShowCallout = annotation.title != nil
