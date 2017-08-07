@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) SegmentReference *reference;
 @property (nonatomic, weak, null_resettable) Trip *trip; // practically nonnull, but can be nulled due to weak reference
 
-- (SegmentTemplate *)template;
+@property (nonatomic, weak, null_unspecified) SegmentTemplate *template;
 
 - (id)initWithReference:(SegmentReference *)aReference
                 forTrip:(Trip *)aTrip;
