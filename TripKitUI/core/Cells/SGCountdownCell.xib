@@ -154,14 +154,14 @@
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert-red" translatesAutoresizingMaskIntoConstraints="NO" id="t7j-3e-hk3">
-                                                <rect key="frame" x="8" y="15.5" width="20" height="20"/>
+                                                <rect key="frame" x="13" y="15.5" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="maA-Sz-4Yn"/>
                                                     <constraint firstAttribute="width" secondItem="t7j-3e-hk3" secondAttribute="height" multiplier="1:1" id="yos-lx-sMt"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Accessible text." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoU-qi-Pd9" userLabel="accessibleLabel" customClass="SGLabel">
-                                                <rect key="frame" x="36" y="8" width="315" height="34"/>
+                                                <rect key="frame" x="41" y="8" width="310" height="34"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" red="0.58531379699999997" green="0.58529627319999999" blue="0.58530616759999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -178,6 +178,11 @@
                                             <constraint firstAttribute="bottom" secondItem="KoU-qi-Pd9" secondAttribute="bottom" constant="8" id="ZLP-z4-Ggd"/>
                                             <constraint firstAttribute="trailing" secondItem="rpP-hr-cRy" secondAttribute="trailing" constant="8" id="tz0-gw-hfK"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="J3O-Pk-mrr"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qz6-aE-4gB" userLabel="alertView">
                                         <rect key="frame" x="0.0" y="152.5" width="359" height="43"/>
@@ -190,14 +195,14 @@
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert-red" translatesAutoresizingMaskIntoConstraints="NO" id="Fxg-Wu-PIR">
-                                                <rect key="frame" x="8" y="12" width="20" height="20"/>
+                                                <rect key="frame" x="13" y="12" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="o5L-HF-JWf"/>
                                                     <constraint firstAttribute="width" secondItem="Fxg-Wu-PIR" secondAttribute="height" multiplier="1:1" id="w9T-tX-9hk"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Alert text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBT-R2-Twf" customClass="SGLabel">
-                                                <rect key="frame" x="36" y="8" width="315" height="27"/>
+                                                <rect key="frame" x="41" y="8" width="310" height="27"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" red="0.58531379699707031" green="0.58529627323150635" blue="0.58530616760253906" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -214,8 +219,17 @@
                                             <constraint firstItem="Fxg-Wu-PIR" firstAttribute="centerY" secondItem="Qz6-aE-4gB" secondAttribute="centerY" id="jxW-qd-mvW"/>
                                             <constraint firstAttribute="bottom" secondItem="WBT-R2-Twf" secondAttribute="bottom" constant="8" id="p0O-Pa-qoO"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="1yP-pB-5GL"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="t7j-3e-hk3" firstAttribute="centerX" secondItem="k5Q-eE-bDo" secondAttribute="centerX" id="5nA-fG-o6h"/>
+                                    <constraint firstItem="Fxg-Wu-PIR" firstAttribute="centerX" secondItem="k5Q-eE-bDo" secondAttribute="centerX" id="CP3-eA-oD7"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
