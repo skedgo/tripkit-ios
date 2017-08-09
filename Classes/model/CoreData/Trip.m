@@ -93,6 +93,11 @@ typedef NSUInteger SGTripFlag;
   self.toDelete = YES;
 }
 
+- (BOOL)isValid
+{
+  return self.departureTime != nil && self.arrivalTime != nil;
+}
+
 #pragma mark - NSManagedObject
 
 - (void)dealloc
