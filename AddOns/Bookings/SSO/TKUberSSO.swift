@@ -51,7 +51,7 @@ public enum TKUberSSO : SSOCompatible {
     guard !pretendUberIsInstalled else { return }
     
     let urlScheme = SGKConfig.shared.appURLScheme()
-    let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? "TripGo"
+    let appName = Bundle.main.productName ?? "TripGo"
     
     var components = URLComponents()
     components.scheme = "uberauth"
