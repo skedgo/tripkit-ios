@@ -108,13 +108,13 @@ extension SGCountdownCell {
     
     switch isAccessible {
     case true?:
-      info.icon = SGStyleManager.imageNamed("icon-wheelchair-accessible")
+      info.icon = TripKitUIBundle.imageNamed("icon-wheelchair-accessible")
       info.text = Loc.WheelchairAccessible
     case false?:
-      info.icon = SGStyleManager.imageNamed("icon-wheelchair-not-accessible")
+      info.icon = TripKitUIBundle.imageNamed("icon-wheelchair-not-accessible")
       info.text = Loc.WheelchairNotAccessible
     default:
-      info.icon = SGStyleManager.imageNamed("icon-wheelchair-unknow")
+      info.icon = TripKitUIBundle.imageNamed("icon-wheelchair-unknow")
       info.text = Loc.WheelchairAccessibilityUnknown
     }
     
