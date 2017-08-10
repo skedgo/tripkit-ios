@@ -26,7 +26,6 @@
 @dynamic name;
 @dynamic location;
 @dynamic stopCode;
-@dynamic wheelchairAccessible;
 @dynamic stopModeInfo;
 @dynamic shortName;
 @dynamic filter;
@@ -42,6 +41,7 @@
 @synthesize lastTopVisit = _lastTopVisit;
 @synthesize lastEarliestDate = _lastEarliestDate;
 @synthesize alertsIncludingChildren = _alertsIncludingChildren;
+@synthesize wheelchairAccessible = _wheelchairAccessible;
 
 + (instancetype)fetchStopForStopCode:(NSString *)stopCode
                        inRegionNamed:(NSString *)regionName

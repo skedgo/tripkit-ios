@@ -17,12 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface StopLocation : NSManagedObject
 
 @property (nonatomic, retain, nullable) SGKNamedCoordinate *location;
-
 @property (nonatomic, retain, nullable) NSString * name;
 @property (nonatomic, retain, nullable) NSString * shortName;
 @property (nonatomic, copy) NSString * stopCode;
 @property (nonatomic, strong, null_resettable) ModeInfo * stopModeInfo;
-@property (nonatomic, strong, nullable) NSNumber * wheelchairAccessible;
 @property (nonatomic, retain, nullable) NSNumber * sortScore;
 @property (nonatomic, retain, nullable) NSString * filter;
 @property (nonatomic, retain, nullable) NSString * regionName;
@@ -32,9 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSSet<StopLocation *> *children;
 @property (nonatomic, retain, nullable) NSSet<StopVisits *> *visits;
 
+// Non core data properties
 @property (nonatomic, strong, nullable) NSDate *lastEarliestDate;
-
 @property (nonatomic, weak, nullable) StopVisits *lastTopVisit;
+@property (nonatomic, strong, nullable) NSNumber * wheelchairAccessible;
 
 + (nullable instancetype)fetchStopForStopCode:(NSString *)stopCode
                                 inRegionNamed:(nullable NSString *)regionName
