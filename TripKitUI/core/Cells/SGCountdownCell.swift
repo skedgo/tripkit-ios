@@ -115,7 +115,7 @@ extension SGCountdownCell {
       info.text = Loc.WheelchairNotAccessible
     default:
       info.icon = SGStyleManager.imageNamed("icon-wheelchair-unknow")
-      info.text = Loc.UnkonwWheelchairAccessible
+      info.text = Loc.WheelchairAccessibilityUnknown
     }
     
     accessibleIcon.image = info.icon

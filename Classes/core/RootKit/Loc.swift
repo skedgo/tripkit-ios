@@ -73,11 +73,11 @@ public class Loc : NSObject {
   }
   
   public static var WheelchairNotAccessible: String {
-    return NSLocalizedString("Not accessible", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Indicator for wheelchair not accessible services")
+    return NSLocalizedString("Not wheelchair accessible", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Indicator for wheelchair not accessible services")
   }
 
-  public static var UnkonwWheelchairAccessible: String {
-    return NSLocalizedString("Unknow", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Indicator for unknow if service or station is wheelchair accessible or not")
+  public static var WheelchairAccessibilityUnknown: String {
+    return NSLocalizedString("Wheelchair accessibility unknown", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Indicator for unknow if service or station is wheelchair accessible or not")
   }
 
   public static var ContactSupport: String {
