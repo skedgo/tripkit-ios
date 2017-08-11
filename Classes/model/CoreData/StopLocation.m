@@ -32,6 +32,7 @@
 @dynamic sortScore;
 @dynamic regionName;
 @dynamic toDelete;
+@dynamic wheelchairAccessible;
 
 @dynamic cell;
 @dynamic parent;

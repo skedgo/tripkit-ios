@@ -21,6 +21,10 @@ extension StopLocation {
     return stopModeInfo.alt
   }
   
+  public var isWheelchairAccessible: Bool? {
+    return wheelchairAccessible?.boolValue
+  }
+  
   @objc(modeImageForIconType:)
   public func modeImage(for type: SGStyleModeIconType) -> SGKImage? {
     guard let localName = stopModeInfo?.localImageName else { return nil }
