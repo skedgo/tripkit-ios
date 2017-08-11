@@ -138,6 +138,7 @@
   stop.stopCode  = stopDict[@"code"];
   stop.shortName = stopDict[@"shortName"];
   stop.sortScore = stopDict[@"popularity"];
+  stop.wheelchairAccessible = stopDict[@"wheelchairAccessible"];
   stop.location  = [self locationForStopFromDictionary:stopDict];
   
   NSDictionary *modeInfoDict = stopDict[@"modeInfo"];
@@ -320,6 +321,7 @@
                                                       atLocation:coordinate
                                               intoTripKitContext:context];
         stop.shortName = stopDict[@"shortName"];
+        stop.wheelchairAccessible = stopDict[@"wheelchairAccessible"];
         
         ZAssert(! visit.stop || visit.stop == stop, @"We shouldn't have a stop already! %@", visit.stop);
         visit.stop = stop;

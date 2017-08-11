@@ -118,10 +118,10 @@
 "I'll take a %@ at %@ from %@." = "%@에서 부터 %@에 가는 %@를 타겠습니다.";
 
 /* %@ is replaced with app name */
-"In the meantime, let's keep exploring %@ and enjoy your trips" = "In the meantime, let's keep exploring %@ and enjoy your trips";
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "그동안 %@을 계속 둘러보시고 즐거운 여행 되세요.";
 
 /* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "In the meantime, let's keep exploring and enjoy your trips";
+"In the meantime, let's keep exploring and enjoy your trips" = "그동안 계속 둘러보시고 즐거운 여행 되세요.";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */

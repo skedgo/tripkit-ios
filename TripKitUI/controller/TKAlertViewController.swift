@@ -118,7 +118,7 @@ public class TKAlertViewController: UITableViewController {
     emptyAlertView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     emptyAlertView.textLabel.text = NSLocalizedString("We'll keep you updated with the latest transit alerts here", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
     
-    if let productName = productName() {
+    if let productName = Bundle.main.productName {
       emptyAlertView.footerLabel.text = String(format: NSLocalizedString("In the meantime, let's keep exploring %@ and enjoy your trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "%@ is replaced with app name"), productName)
     } else {
       emptyAlertView.footerLabel.text = NSLocalizedString("In the meantime, let's keep exploring and enjoy your trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
@@ -126,16 +126,6 @@ public class TKAlertViewController: UITableViewController {
     
     view.insertSubview(emptyAlertView, aboveSubview: tableView)
     self.emptyAlertView = emptyAlertView
-  }
-  
-  private func productName() -> String? {
-    guard
-      let infoDict = Bundle.main.infoDictionary
-      else {
-        return nil
-    }
-    
-    return infoDict[kCFBundleNameKey as String] as? String
   }
   
 }

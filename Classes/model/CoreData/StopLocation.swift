@@ -21,6 +21,10 @@ extension StopLocation {
     return stopModeInfo.alt
   }
   
+  public var isWheelchairAccessible: Bool? {
+    return wheelchairAccessible?.boolValue
+  }
+  
   @objc(modeImageForIconType:)
   public func modeImage(for type: SGStyleModeIconType) -> SGKImage? {
     guard let localName = stopModeInfo?.localImageName else { return nil }
@@ -86,7 +90,7 @@ extension StopLocation: STKStopAnnotation {
       }
       
       let predicate = departuresPredicate(from: last.departure)
-      let visits = managedObjectContext?.fetchObjects(StopVisits.self, sortDescriptors: [NSSortDescriptor(key: "departures", ascending: true)], predicate: predicate, relationshipKeyPathsForPrefetching: nil, fetchLimit: 10) ?? []
+      let visits = managedObjectContext?.fetchObjects(StopVisits.self, sortDescriptors: [NSSortDescriptor(key: "departure", ascending: true)], predicate: predicate, relationshipKeyPathsForPrefetching: nil, fetchLimit: 10) ?? []
       for visit in visits {
         output.append("\n")
         output.append(visit.smsString())

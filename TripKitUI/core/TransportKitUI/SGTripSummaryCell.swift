@@ -100,7 +100,8 @@ extension SGTripSummaryCell {
   }
   
   private func updateTimeStrings() {
-    _updateTimeString(forDeparture: _trip.departureTime, arrival: _trip.arrivalTime)
+    guard let trip = _trip as? Trip, trip.isValid else { return }
+    _updateTimeString(forDeparture: trip.departureTime, arrival: trip.arrivalTime)
   }
   
   private func updateAlertStatus() {

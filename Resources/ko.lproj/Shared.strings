@@ -31,6 +31,9 @@
 /* Authorisation needed title */
 "Authorisation needed" = "인증이 필요합니다.";
 
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "돌아가기";
+
 /* Type of vehicle : bicycle */
 "Bicycle" = "자전거";
 
@@ -71,7 +74,7 @@
 "Confirm" = "확인";
 
 /* Title for button that allows users to contact our support team to help resolve some error in the app. */
-"Contact support" = "Contact support";
+"Contact support" = "고객지원센터 연락하기";
 
 /* Error title when GPS failed. */
 "Could not determine your current location." = "회원님의 위치를 파악 할 수 없습니다.";
@@ -119,8 +122,7 @@
 /* Credit card expiry date */
 "Expiry Date" = "유효기간";
 
-/* Option that allows users to indicate whether reminder is needed
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "For when to leave" = "출발 시간";
 
 /* Free as in beer */
@@ -159,14 +161,13 @@
 /* Title for unnamed location */
 "Location" = "위치";
 
-/* Location iOS6+ authorisation needed text */
+/* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "위치 서비스는 이 기능을 요구합니다.  설정으로 가서 어플리케이션  > 개인 정보 > 위치 서비스를 켜주세요. ";
 
 /* Indicating a payment is in progress */
 "Making payment" = "결제하기";
 
-/* Option that allows users to indicate how eary to show trip reminder
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "Minutes before trip" = "출발하기 몇분 전입니다.";
 
 /* More results proposal */
@@ -198,9 +199,7 @@
 /* Countdown cell 'now' indicator */
 "Now" = "지금";
 
-/* Authorisation ok button
-   Default title for button that dismisses alert view
-   Ok action */
+/* Ok action */
 "OK" = "확인";
 
 /* Button to open Settings app section for this app */
@@ -231,7 +230,7 @@
 "Press 'search' for more..." = "더 자세한 정보를 원하시면 검색을 눌러주세요.";
 
 /* No comment provided by engineer. */
-"Read more..." = "Read more...";
+"Read more..." = "더 보기";
 
 /* Indicator for real-time information */
 "Real-time" = "실시간";
@@ -239,8 +238,7 @@
 /* Title for section that asks users where payment receipt should be sent */
 "Receipt" = "영수증";
 
-/* Action title to add/remove reminder
-   Section title at the end of a booking that allows users to set reminders */
+/* Action title to add/remove reminder */
 "Reminder" = "미리 알림";
 
 /* Repeats daily */
