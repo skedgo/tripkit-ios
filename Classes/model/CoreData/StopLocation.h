@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSString * regionName;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain, nullable) StopLocation *parent;
+@property (nonatomic, strong, nullable) NSNumber * wheelchairAccessible;
 @property (nonatomic, strong, nullable) Cell *cell;
 @property (nonatomic, retain, nullable) NSSet<StopLocation *> *children;
 @property (nonatomic, retain, nullable) NSSet<StopVisits *> *visits;
@@ -33,7 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 // Non core data properties
 @property (nonatomic, strong, nullable) NSDate *lastEarliestDate;
 @property (nonatomic, weak, nullable) StopVisits *lastTopVisit;
-@property (nonatomic, strong, nullable) NSNumber * wheelchairAccessible;
 
 + (nullable instancetype)fetchStopForStopCode:(NSString *)stopCode
                                 inRegionNamed:(nullable NSString *)regionName

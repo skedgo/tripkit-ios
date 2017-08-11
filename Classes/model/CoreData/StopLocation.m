@@ -32,6 +32,7 @@
 @dynamic sortScore;
 @dynamic regionName;
 @dynamic toDelete;
+@dynamic wheelchairAccessible;
 
 @dynamic cell;
 @dynamic parent;
@@ -41,7 +42,6 @@
 @synthesize lastTopVisit = _lastTopVisit;
 @synthesize lastEarliestDate = _lastEarliestDate;
 @synthesize alertsIncludingChildren = _alertsIncludingChildren;
-@synthesize wheelchairAccessible = _wheelchairAccessible;
 
 + (instancetype)fetchStopForStopCode:(NSString *)stopCode
                        inRegionNamed:(NSString *)regionName
