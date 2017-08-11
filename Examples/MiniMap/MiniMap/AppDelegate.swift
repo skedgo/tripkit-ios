@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     
-    TripKit.apiKey = "MY_API_KEY"
+    TripKit.apiKey = ProcessInfo.processInfo.environment["TRIPGO_API_KEY"] ?? "MY_API_KEY"
     TripKit.prepareForNewSession()
     
 //    let start: MKAnnotation = ...
@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //    let request = TripRequest.insert(
 //      from: start, to: end,
 //      for: nil, timeType: .leaveASAP,
-//      into: TKTripKit.sharedInstance().tripKitContext
+//      into: TripKit.shared.tripKitContext
 //    )
 //    
 //    let router = TKBuzzRouter()
@@ -44,7 +44,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationWillTerminate(_ aNotification: Notification) {
     // Insert code here to tear down your application
   }
-
-
+  
 }
 

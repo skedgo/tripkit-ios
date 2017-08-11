@@ -907,7 +907,7 @@
 		3AFFAB7E1F06854F00147990 /* STKModeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STKModeHelper.swift; sourceTree = "<group>"; };
 		3AFFAB7F1F06854F00147990 /* STKRoutePolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKRoutePolyline.h; sourceTree = "<group>"; };
 		3AFFAB801F06854F00147990 /* STKRoutePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKRoutePolyline.m; sourceTree = "<group>"; };
-		3AFFAB811F06854F00147990 /* STKRoutePolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = STKRoutePolyline.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		3AFFAB811F06854F00147990 /* STKRoutePolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = STKRoutePolyline.swift; sourceTree = "<group>"; };
 		3AFFAB821F06854F00147990 /* STKTransportKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKTransportKit.h; sourceTree = "<group>"; };
 		3AFFAB831F06854F00147990 /* STKTripAndSegments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STKTripAndSegments.swift; sourceTree = "<group>"; };
 		3AFFAB841F06854F00147990 /* STKVehicleType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKVehicleType.h; sourceTree = "<group>"; };
