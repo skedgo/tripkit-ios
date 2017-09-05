@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
     <entity name="Alert" representedClassName="Alert" syncable="YES">
+        <attribute name="action" optional="YES" attributeType="Transformable" customClassName="NSDictionary" syncable="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="hashCode" attributeType="Integer 32" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="idService" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
@@ -195,7 +196,7 @@
         <relationship name="serviceAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="vehicleAlternatives" inverseEntity="Service" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Alert" positionX="765" positionY="297" width="128" height="225"/>
+        <element name="Alert" positionX="765" positionY="297" width="128" height="238"/>
         <element name="Cell" positionX="-99" positionY="131" width="128" height="165"/>
         <element name="DLSEntry" positionX="124" positionY="539" width="128" height="73"/>
         <element name="SegmentReference" positionX="511" positionY="-117" width="128" height="238"/>

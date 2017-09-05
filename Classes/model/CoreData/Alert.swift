@@ -10,11 +10,29 @@ import Foundation
 
 extension Alert {
   
+  public enum ActionType {
+    case reroute([String])
+  }
+  
   public var infoIconType: STKInfoIconType {
     switch alertSeverity {
     case .info, .warning: return .warning
     case .alert: return .alert
+    } 
+  }
+  
+  public var actionType: ActionType? {
+    guard
+      let action = action,
+      let type = action["type"] as? String
+      else { return nil }
+    
+    if type.contains("reroute") {
+      let excludedStops = action["excludedStopCodes"] as? [String] ?? []
+      return ActionType.reroute(excludedStops)
     }
+    
+    return nil
   }
   
 }
