@@ -44,6 +44,24 @@ extension TKSegment {
     case .end: return type != .inSummary
     }
   }
+  
+  
+  public var requiresReroute: Bool {
+    let firstReroutable = alertsWithAction().first { (alert) -> Bool in
+      guard let type = alert.actionType else {
+        return false
+      }
+      
+      if case .reroute = type {
+        return true
+      } else {
+        return false
+      }
+    }
+    
+    return firstReroutable != nil
+  }
+  
 }
 
 // MARK: - Vehicles
