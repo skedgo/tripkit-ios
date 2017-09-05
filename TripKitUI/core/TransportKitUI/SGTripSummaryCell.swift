@@ -60,10 +60,12 @@ extension SGTripSummaryCell {
     let departure = object.rx.observe(Date.self, "departureTime")
     let arrival = object.rx.observe(Date.self, "arrivalTime")
     Observable.merge([departure, arrival])
+      .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in self?.updateForNewTimes(nano: nano) } )
       .addDisposableTo(_objcDisposeBag.disposeBag)
     
     object.rx.observe(Bool.self, "hasReminder")
+      .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in self?.updateAlertStatus() } )
       .addDisposableTo(_objcDisposeBag.disposeBag)
   }
