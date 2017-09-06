@@ -57,7 +57,7 @@ extension TKShareHelper {
   }
 
   public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: SGTimeType, time: Date?) -> URL {
-    return createQueryURL(start: start, end: end, timeType: timeType, time: time, baseURL: "https://tripgo.me")
+    return createQueryURL(start: start, end: end, timeType: timeType, time: time, baseURL: "https://tripgo.com")
   }
   
   
@@ -88,7 +88,7 @@ extension TKShareHelper {
     return url.path.hasPrefix("/meet")
   }
   
-  public static func createMeetURL(coordinate: CLLocationCoordinate2D, at time: Date, baseURL: String = "https://tripgo.me") -> URL {
+  public static func createMeetURL(coordinate: CLLocationCoordinate2D, at time: Date, baseURL: String = "https://tripgo.com") -> URL {
     let urlString = "\(baseURL)/meet?lat=\(coordinate.latitude)&lng=\(coordinate.longitude)&at=\(Int(time.timeIntervalSince1970))"
     return URL(string: urlString)!
   }
@@ -104,7 +104,7 @@ extension TKShareHelper {
   }
 
   public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?) -> URL {
-    return createStopURL(stopCode: stopCode, inRegionNamed: regionName, filter: filter, baseURL: "https://tripgo.me")
+    return createStopURL(stopCode: stopCode, inRegionNamed: regionName, filter: filter, baseURL: "https://tripgo.com")
   }
   
   public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?, baseURL: String) -> URL {
@@ -132,7 +132,7 @@ extension TKShareHelper {
     return url.path.hasPrefix("/service")
   }
   
-  public static func createServiceURL(serviceID: String, atStopCode stopCode: String, inRegionNamed regionName: String, baseURL: String = "https://tripgo.me") -> URL {
+  public static func createServiceURL(serviceID: String, atStopCode stopCode: String, inRegionNamed regionName: String, baseURL: String = "https://tripgo.com") -> URL {
 
     let escapedID = (serviceID as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     
