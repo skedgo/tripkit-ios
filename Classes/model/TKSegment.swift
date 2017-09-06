@@ -46,20 +46,9 @@ extension TKSegment {
   }
   
   
-  public var requiresReroute: Bool {
-    let firstReroutable = alertsWithAction().first { (alert) -> Bool in
-      guard let type = alert.actionType else {
-        return false
-      }
-      
-      if case .reroute = type {
-        return true
-      } else {
-        return false
-      }
-    }
-    
-    return firstReroutable != nil
+  /// Gets the first alert that requires reroute
+  public var reroutingAlert: Alert? {
+    return alertsWithAction().first { !$0.excludedStops.isEmpty }
   }
   
 }
