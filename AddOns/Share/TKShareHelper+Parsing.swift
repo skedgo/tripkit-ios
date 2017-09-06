@@ -15,8 +15,9 @@ import RxSwift
   import TripKit
 #endif
 
+// MARK: - Query URLs
 
-public enum TKSwiftyShareHelper {
+public extension TKShareHelper {
 
   public struct QueryDetails {
     public enum Time {
@@ -29,40 +30,6 @@ public enum TKSwiftyShareHelper {
     public let end: CLLocationCoordinate2D
     public let title: String?
     public let timeType: Time
-  }
-  
-  public struct StopDetails {
-    public let code: String
-    public let region: String
-    public let filter: String?
-  }
-  
-  public static func meetingDetails(for url: URL, using geocoder: SGGeocoder) -> Observable<QueryDetails> {
-    guard
-      let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
-      let items = components.queryItems
-      else { return Observable.empty() }
-    
-    var adjusted = items.flatMap { item -> URLQueryItem? in
-      guard let value = item.value, !value.isEmpty else { return nil }
-      switch item.name {
-      case "lat":   return URLQueryItem(name: "tlat",  value: value)
-      case "lng":   return URLQueryItem(name: "tlng",  value: value)
-      case "at":    return URLQueryItem(name: "time",  value: value)
-      case "name":  return URLQueryItem(name: "tname", value: value)
-      default:      return nil
-      }
-    }
-    
-    adjusted.append(URLQueryItem(name: "type", value: "2"))
-    
-    components.queryItems = adjusted
-    guard let newUrl = components.url else {
-      assertionFailure()
-      return Observable.empty()
-    }
-    
-    return queryDetails(for: newUrl, using: geocoder)
   }
   
   /// Extracts the query details from a TripGo API-compatible deep link
@@ -140,20 +107,9 @@ public enum TKSwiftyShareHelper {
     }
   }
   
-  public static func stopDetails(for url: URL) -> Observable<StopDetails> {
-    let pathComponents = url.path.components(separatedBy: "/")
-    guard pathComponents.count >= 4 else { return Observable.empty() }
-    
-    let region = pathComponents[2]
-    let code = pathComponents[3]
-    let filter: String? = pathComponents.count >= 5 ? pathComponents[4] : nil
-    
-    let result = StopDetails(code: code, region: region, filter: filter)
-    return Observable.just(result)
-  }
 }
 
-extension TKSwiftyShareHelper.QueryDetails {
+extension TKShareHelper.QueryDetails {
   /// Converts the query details into a TripRequest
   /// - parameter tripKit: TripKit's managed object context into which
   ///                      to insert the request
@@ -191,7 +147,63 @@ extension TKSwiftyShareHelper.QueryDetails {
   }
 }
 
-extension TKSwiftyShareHelper.StopDetails {
+// MARK: - Meet URLs
+
+public extension TKShareHelper {
+
+  public static func meetingDetails(for url: URL, using geocoder: SGGeocoder) -> Observable<QueryDetails> {
+    guard
+      let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
+      let items = components.queryItems
+      else { return Observable.empty() }
+    
+    var adjusted = items.flatMap { item -> URLQueryItem? in
+      guard let value = item.value, !value.isEmpty else { return nil }
+      switch item.name {
+      case "lat":   return URLQueryItem(name: "tlat",  value: value)
+      case "lng":   return URLQueryItem(name: "tlng",  value: value)
+      case "at":    return URLQueryItem(name: "time",  value: value)
+      case "name":  return URLQueryItem(name: "tname", value: value)
+      default:      return nil
+      }
+    }
+    
+    adjusted.append(URLQueryItem(name: "type", value: "2"))
+    
+    components.queryItems = adjusted
+    guard let newUrl = components.url else {
+      assertionFailure()
+      return Observable.empty()
+    }
+    
+    return queryDetails(for: newUrl, using: geocoder)
+  }
+}
+
+// MARK: - Stop URLs
+
+public extension TKShareHelper {
+  
+  public struct StopDetails {
+    public let code: String
+    public let region: String
+    public let filter: String?
+  }
+  
+  public static func stopDetails(for url: URL) -> Observable<StopDetails> {
+    let pathComponents = url.path.components(separatedBy: "/")
+    guard pathComponents.count >= 4 else { return Observable.empty() }
+    
+    let region = pathComponents[2]
+    let code = pathComponents[3]
+    let filter: String? = pathComponents.count >= 5 ? pathComponents[4] : nil
+    
+    let result = StopDetails(code: code, region: region, filter: filter)
+    return Observable.just(result)
+  }
+}
+
+extension TKShareHelper.StopDetails {
   /// Converts the stop details into a StopLocation
   /// - parameter tripKit: TripKit's managed object context into which
   ///                      to insert the stop location
@@ -202,6 +214,7 @@ extension TKSwiftyShareHelper.StopDetails {
   }
 }
 
+// MARK: - Helpers
 
 extension MKAnnotation {
   
