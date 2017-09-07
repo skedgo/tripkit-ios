@@ -2670,9 +2670,36 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TripKitTests/Pods-TripKitTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ASPolygonKit/ASPolygonKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ASPolylineView/ASPolylineView.framework",
+				"${BUILT_PRODUCTS_DIR}/KVNProgress/KVNProgress.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Marshal/Marshal.framework",
+				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SGPulsingAnnotationView/SGPulsingAnnotationView.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
+				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ASPolygonKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ASPolylineView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KVNProgress.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Marshal.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGPulsingAnnotationView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2685,13 +2712,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TripKitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B8BA181B154B651D1C4EC250 /* [CP] Copy Pods Resources */ = {
@@ -2730,13 +2760,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TripKit-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3189,9 +3222,9 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
-					"TK_NO_FRAMEWORKS=1",
+					"DEBUG=1",
+					"TK_NO_MODULE=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -3240,7 +3273,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "TK_NO_FRAMEWORKS=1";
+				GCC_PREPROCESSOR_DEFINITIONS = "TK_NO_MODULE=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -3274,35 +3307,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking/AFNetworking.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/ASPolylineView/ASPolylineView.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/KVNProgress/KVNProgress.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/KeychainAccess/KeychainAccess.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/MAKVONotificationCenter/MAKVONotificationCenter.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/OAuthSwift/OAuthSwift.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/RxCocoa/RxCocoa.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/RxSwift/RxSwift.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SGBookingKit/SGBookingKit.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SGCoreKit/SGCoreKit.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SGSearchKit/SGSearchKit.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SGUIKit/SGUIKit.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework/Headers\"",
-					"-DTK_NO_FRAMEWORKS",
+					"-DTK_NO_MODULE",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DTK_NO_FRAMEWORKS";
+				OTHER_SWIFT_FLAGS = "$(inherited) -DTK_NO_MODULE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.TripKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3326,35 +3333,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking/AFNetworking.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/ASPolylineView/ASPolylineView.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/KVNProgress/KVNProgress.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/KeychainAccess/KeychainAccess.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/MAKVONotificationCenter/MAKVONotificationCenter.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/OAuthSwift/OAuthSwift.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/RxCocoa/RxCocoa.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/RxSwift/RxSwift.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SGBookingKit/SGBookingKit.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SGCoreKit/SGCoreKit.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SGSearchKit/SGSearchKit.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SGUIKit/SGUIKit.framework/Headers\"",
-					"-iquote",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework/Headers\"",
-					"-DTK_NO_FRAMEWORKS",
+					"-DTK_NO_MODULE",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DTK_NO_FRAMEWORKS";
+				OTHER_SWIFT_FLAGS = "$(inherited) -DTK_NO_MODULE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.TripKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3371,6 +3352,37 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TripKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/ASPolygonKit/ASPolygonKit.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/ASPolylineView/ASPolylineView.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/KVNProgress/KVNProgress.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/KeychainAccess/KeychainAccess.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Kingfisher/Kingfisher.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Marshal/Marshal.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/OAuthSwift/OAuthSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxBlocking/RxBlocking.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxCocoa/RxCocoa.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxSwift/RxSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxTest/RxTest.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SGPulsingAnnotationView/SGPulsingAnnotationView.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework/Headers\"",
+					"-DTK_NO_MODULE=1",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-D\" \"TK_NO_MODULE1\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.TripKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TripKitTests/TripKitTests-Bridging-Header.h";
@@ -3387,6 +3399,37 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TripKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"-DTK_NO_MODULE",
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/ASPolygonKit/ASPolygonKit.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/ASPolylineView/ASPolylineView.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/KVNProgress/KVNProgress.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/KeychainAccess/KeychainAccess.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Kingfisher/Kingfisher.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Marshal/Marshal.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/OAuthSwift/OAuthSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxBlocking/RxBlocking.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxCocoa/RxCocoa.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxSwift/RxSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxTest/RxTest.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SGPulsingAnnotationView/SGPulsingAnnotationView.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework/Headers\"",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-D\" \"TK_NO_MODULE1\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.TripKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TripKitTests/TripKitTests-Bridging-Header.h";
