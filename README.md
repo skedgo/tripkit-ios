@@ -1,4 +1,4 @@
-<img src="api-mark-logo.svg" alt="TripGo API" width="36" height="36">  SkedGo's TripKit for iOS
+<img src="api-mark-logo.png" alt="TripGo API" width="30" height="30">  SkedGo's TripKit for iOS
 ======================================
 
 ![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20watchOS-333333.svg) [![CocoaPods](https://img.shields.io/cocoapods/v/TripKit.svg)]() [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
