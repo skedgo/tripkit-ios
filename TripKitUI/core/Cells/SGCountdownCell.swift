@@ -69,8 +69,6 @@ extension SGCountdownCell {
   ///   - parkingAvailable: Amount of parking to display
   ///   - position: Position of this cell relative to the cells around it.
   ///   - stripColor: Optional color to display a coloured strip under the icon.
-  ///   - alert: Alert text
-  ///   - alertIconType: Alert icon to display next to alert text
   public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, parkingAvailable: String?, position: SGKGrouping, stripColor: SGKColor?) {
     
     _resetContents()
