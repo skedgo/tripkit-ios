@@ -18,7 +18,7 @@ class TKShareHelperTest: XCTestCase {
     let geocoder = SGBuzzGeocoder()
     let url = URL(string: "tripgo:///go?tname=dragon.letter.spoke")!
     
-    guard let w = try? TKSwiftyShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first(), let result = w else { XCTFail(); return }
+    guard let w = try? TKShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first(), let result = w else { XCTFail(); return }
     
     XCTAssertNil(result.start)
     XCTAssertTrue(result.end.isValid)
@@ -35,7 +35,7 @@ class TKShareHelperTest: XCTestCase {
     let geocoder = SGBuzzGeocoder()
     let url = URL(string: "tripgo:///go?tlat=-33.94501&tlng=151.25807&type=1&time=1385535734")!
     
-    guard let w = try? TKSwiftyShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first(), let result = w else { XCTFail(); return }
+    guard let w = try? TKShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first(), let result = w else { XCTFail(); return }
     
     XCTAssertNil(result.start)
     XCTAssertTrue(result.end.isValid)
@@ -54,7 +54,7 @@ class TKShareHelperTest: XCTestCase {
     let geocoder = SGAppleGeocoder()
     let url = URL(string: "tripgo:///meet?lat=-33.94501&lng=151.25807&at=1385535734")!
     
-    guard let w = try? TKSwiftyShareHelper.meetingDetails(for: url, using: geocoder).toBlocking().first(), let result = w else { XCTFail(); return }
+    guard let w = try? TKShareHelper.meetingDetails(for: url, using: geocoder).toBlocking().first(), let result = w else { XCTFail(); return }
     
     XCTAssertNil(result.start)
     XCTAssertTrue(result.end.isValid)
@@ -71,7 +71,7 @@ class TKShareHelperTest: XCTestCase {
   func testStopUrl() {
     let url = URL(string: "tripgo:///stop/AU_NSW_Sydney/2035143")!
     
-    guard let w = try? TKSwiftyShareHelper.stopDetails(for: url).toBlocking().first(), let result = w else { XCTFail(); return }
+    guard let w = try? TKShareHelper.stopDetails(for: url).toBlocking().first(), let result = w else { XCTFail(); return }
     
     XCTAssertEqual(result.region, "AU_NSW_Sydney")
     XCTAssertEqual(result.code, "2035143")
