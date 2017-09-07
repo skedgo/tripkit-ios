@@ -106,7 +106,7 @@
 //  self.navigationItem.leftBarButtonItem = [self isPresentedModally] ? [self closeButton] : nil;
 }
 
-- (void)showSaveButton:(BOOL)show animated:(BOOL)animated handler:(void (^)())handler
+- (void)showSaveButton:(BOOL)show animated:(BOOL)animated handler:(void (^)(void))handler
 {
   self.saveButton = show ? [UIBarButtonItem saveButtonWithSelector:@selector(saveButtonPressed:) forController:self] : nil;
   
