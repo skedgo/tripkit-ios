@@ -28,6 +28,6 @@
 
 - (void)configureTableView;
 - (void)configureController;
-- (void)showSaveButton:(BOOL)show animated:(BOOL)animated handler:(void (^)())handler;
+- (void)showSaveButton:(BOOL)show animated:(BOOL)animated handler:(void (^)(void))handler;
 
 @end
