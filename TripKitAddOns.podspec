@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitAddOns"
-  s.version      = "2.0-beta4"
+  s.version      = "2.0"
   s.summary      = "Add-ons to SkedGo's TripKit"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = 'Apache License, Version 2.0'
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.subspec 'InterApp' do |cs|
     s.ios.deployment_target = '9.0'
 
-    cs.dependency 'TripKit', '~> 2.0-beta4'
+    cs.dependency 'TripKit', "~> #{s.version}"
     cs.source_files = "AddOns/InterApp/**/*.{h,m,swift}"
   end
 
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
     cs.ios.deployment_target = '9.0'
     cs.osx.deployment_target = '10.11'
 
-    cs.dependency 'TripKit', '~> 2.0-beta4'
+    cs.dependency 'TripKit', "~> #{s.version}"
     cs.dependency 'RxSwift'
     cs.source_files = "AddOns/Share/**/*"
   end

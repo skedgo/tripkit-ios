@@ -1,6 +1,6 @@
 # SkedGo's TripKit for iOS
 
-![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20watchOS-333333.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20watchOS-333333.svg) [![CocoaPods](https://img.shields.io/cocoapods/v/TripKit.svg)]() [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Additional documentation is available on the [TripGo Developer page](http://skedgo.github.io/tripgo-api/site/)
 
@@ -16,24 +16,17 @@ Additional documentation is available on the [TripGo Developer page](http://sked
 
 ### Cocoapods (recommended)
 
-At the top of your `Podfile`, make sure you include SkedGo's private pods:
+Add desired pods:
 
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-source 'https://github.com/skedgo/PodSpecs.git'
+  pod 'TripKit',                '~> 2.0'
+  pod 'TripKitUI',              '~> 2.0'
+  pod 'TripKitBookings',        '~> 2.0'
+  pod 'TripKitAddOns/InterApp', '~> 2.0'
+  pod 'TripKitAddOns/Share',    '~> 2.0'
 ```
 
-And then add desired pods:
-
-```ruby
-  pod 'TripKit',                '~> 2.0beta4'
-  pod 'TripKitUI',              '~> 2.0beta4'
-  pod 'TripKitBookings',        '~> 2.0beta4'
-  pod 'TripKitAddOns/InterApp', '~> 2.0beta4'
-  pod 'TripKitAddOns/Share',    '~> 2.0beta4'
-```
-
-This is the recommended way as it let's you cherry-pick the desired components and if you use any of TripKit's sdependencies, such as [RxSwift](https://github.com/ReactiveX/RxSwift), you'll end up with only a single copy of that.
+This is the recommended way as it let's you cherry-pick the desired components and if you use any of TripKit's dependencies, such as [RxSwift](https://github.com/ReactiveX/RxSwift), you'll end up with only a single copy of that.
 
 ### Carthage
 
@@ -42,7 +35,7 @@ TripKit with all its components is also available through Carthage. Note that th
 Add this to your `Cartfile`:
 
 ```
-github "skedgo/tripkit-ios" "v2.0-beta4"
+github "skedgo/tripkit-ios" "v2.0"
 ```
 
 Then run `carthage update` and add the framework to your project as described in [the Carthage docs](https://github.com/Carthage/Carthage).
@@ -51,7 +44,8 @@ Then run `carthage update` and add the framework to your project as described in
 
 - Drag the files into your project.
 - Add dependencies (see [TripKit.podspec](TripKit.podspec))
-- Specify `TK_NO_MODULE` in both your target's `Other C Flags` *and* `Other Swift Flags`
+- Add `-DTK_NO_MODULE` to your target's `Other C Flags` and `Other Swift Flags`
+- Add `TK_NO_MODULE=1` to your target's `Preprocessor Macros`
 
 If there's any trouble with that, see the example under [Project](Project).
 
