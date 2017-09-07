@@ -98,11 +98,6 @@
 
 - (BOOL)allowImpossibleSegments;
 
-/** 
- @return Whether trip mixes multiple modes. Note that multiple different public transport modes don't make a trip mixed-modal, but walking in between does.
- */
-- (BOOL)isMixedModal;
-
 /* Offset in minutes from the specified departure/arrival time.
  * E.g., if you asked for arrive-by, it'll use the arrival time.
  *

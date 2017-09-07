@@ -20,6 +20,31 @@ extension Trip {
     }
   }
   
+  /// Checks for intermodality. Ignores very short walks and, optionally, all walks.
+  ///
+  /// - Parameter ignoreWalking: If walks should be ignored completely
+  /// - Returns: If trip is mixed modal (aka intermodmal)
+  @objc(isMixedModalIgnoringWalking:)
+  public func isMixedModal(ignoreWalking: Bool) -> Bool {
+    var previousMode: String? = nil
+    for segment in segments() {
+      if segment.isStationary() {
+        continue // always ignore stationary segments
+      }
+      if segment.isWalking(), ignoreWalking || !segment.hasVisibility(.inSummary) {
+        continue // we always ignore short walks that don't make it into the summary
+      }
+      if let mode = segment.modeIdentifier() {
+        if let previous = previousMode, previous != mode {
+          return true
+        } else {
+          previousMode = mode
+        }
+      }
+    }
+    return false
+  }
+  
   private var isExpensive: Bool {
     guard
       let segment = mainSegment() as? TKSegment,

@@ -731,7 +731,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   } else if (self.modeInfo.descriptor.length > 0) {
     return self.modeInfo.descriptor;
   
-  } else if (![self.trip isMixedModal] && self.reference.template.metres) {
+  } else if (![self.trip isMixedModalIgnoringWalking:NO] && self.reference.template.metres) {
     MKDistanceFormatter *formatter = [[MKDistanceFormatter alloc] init];
     return [formatter stringFromDistance:self.reference.template.metres.doubleValue];
     
@@ -749,7 +749,7 @@ NSString *const UninitializedString =  @"UninitializedString";
       return NSLocalizedStringFromTableInBundle(@"Live traffic", @"TripKit", [TKTripKit bundle], nil);
     }
   
-  } else if ([self.trip isMixedModal] && ![self isPublicTransport]) {
+  } else if ([self.trip isMixedModalIgnoringWalking:NO] && ![self isPublicTransport]) {
     return [self stringForDuration:YES];
   
   } else if (self.reference.template.metresFriendly) {
