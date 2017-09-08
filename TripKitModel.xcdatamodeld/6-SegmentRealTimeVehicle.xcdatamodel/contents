@@ -169,6 +169,7 @@
     <entity name="TripRequest" representedClassName="TripRequest" syncable="YES">
         <attribute name="arrivalTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="departureTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="excludedStops" optional="YES" attributeType="Transformable" customClassName="NSArray" syncable="YES"/>
         <attribute name="expandForFavorite" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="fromLocation" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="modes" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -207,7 +208,7 @@
         <element name="StopVisits" positionX="124" positionY="243" width="128" height="238"/>
         <element name="Trip" positionX="315" positionY="-252" width="128" height="390"/>
         <element name="TripGroup" positionX="99" positionY="-186" width="128" height="195"/>
-        <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="223"/>
+        <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="238"/>
         <element name="Vehicle" positionX="513" positionY="144" width="128" height="240"/>
     </elements>
 </model>

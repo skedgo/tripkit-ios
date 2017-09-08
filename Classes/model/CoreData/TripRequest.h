@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDate * timeCreated;
 @property (nonatomic, strong) NSNumber * timeType;
 @property (nonatomic, assign) BOOL expandForFavorite;
+@property (nonatomic, retain) NSArray<NSString *> *excludedStops;
 @property (nonatomic, assign) BOOL toDelete;
 
 @property (nonatomic, strong, nullable) NSSet <TripGroup *> * tripGroups;
