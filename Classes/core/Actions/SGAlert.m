@@ -40,7 +40,7 @@
 - (void)showWithTitle:(NSString *)title
               message:(NSString *)message
          inController:(UIViewController *)controller
-              dismiss:(void (^)())dismiss
+              dismiss:(void (^)(void))dismiss
 {
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                  message:message

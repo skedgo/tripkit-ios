@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if TARGET_OS_IPHONE
 
-typedef void(^SGActionBlock)();
+typedef void(^SGActionBlock)(void);
 typedef void(^SGActionTextfieldBlock)(NSString *value);
 
 @interface SGActions : NSObject

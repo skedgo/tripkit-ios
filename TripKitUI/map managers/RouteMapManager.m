@@ -414,8 +414,6 @@
 
 - (CGFloat)alphaForCircleAnnotations:(BOOL)isLarge
 {
-  TG_ASSERT_MAIN_THREAD;
-  
 	NSUInteger zoomLevel = [self.mapView zoomLevel];
 	if (isLarge) {
 		return zoomLevel > 10 ? 0 : 1;

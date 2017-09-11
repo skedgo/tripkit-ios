@@ -18,9 +18,9 @@
 
 @property (weak, nonatomic) IBOutlet SGButton *button;
 
-+ (void)showWithTitle:(NSString *)title inView:(UIView *)view onAction:(void(^)())actionBlock completion:(void(^)(BOOL))completion;
++ (void)showWithTitle:(NSString *)title inView:(UIView *)view onAction:(void(^)(void))actionBlock completion:(void(^)(BOOL))completion;
 
-- (instancetype)initWithTitle:(NSString *)title actionBlock:(void(^)())actionBlock;
+- (instancetype)initWithTitle:(NSString *)title actionBlock:(void(^)(void))actionBlock;
 - (void)showInView:(UIView *)view completion:(void(^)(BOOL))completion;
 
 @end
