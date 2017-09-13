@@ -17,6 +17,7 @@
 		3A096E2E1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */; };
 		3A15D8D91D9CE08100BADBEA /* TKBuzzRouter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */; };
 		3A15D8DB1D9CE08D00BADBEA /* TKRoutingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */; };
+		3A2F25D41F699C32007D3767 /* TKGeocodingResultScorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */; };
 		3A32CD6D1DC2D1DA003B158B /* TKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD6C1DC2D1DA003B158B /* TKTestCase.swift */; };
 		3A32CD711DC2DC6D003B158B /* TKOccupancy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD701DC2DC6D003B158B /* TKOccupancy.swift */; };
 		3A32CD731DC2DC77003B158B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD721DC2DC77003B158B /* Vehicle.swift */; };
@@ -183,6 +184,10 @@
 		3AC4DD111DEE32C80026B238 /* TKWaypointRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AC4DD121DEE32C80026B238 /* TKWaypointRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */; };
 		3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */; };
+		3AC9A0AE1F682B6E0050217E /* TKMapZenGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0AC1F682B6E0050217E /* TKMapZenGeocoder.swift */; };
+		3AC9A0AF1F682B6E0050217E /* TKGeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */; };
+		3AC9A0B11F683F070050217E /* geojson-nuremberg.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AC9A0B01F683F070050217E /* geojson-nuremberg.json */; };
+		3AC9A0B31F683F530050217E /* TKGeoJSONTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0B21F683F530050217E /* TKGeoJSONTest.swift */; };
 		3AD159761F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD159751F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift */; };
 		3AD159781F0D527D008B63E2 /* SGTripSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD159771F0D527D008B63E2 /* SGTripSummaryCell.swift */; };
 		3AD390E31ED42805004689D4 /* AnnotationViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD390E11ED42805004689D4 /* AnnotationViewBuilder.swift */; };
@@ -564,6 +569,7 @@
 		3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+SharedDefaults.swift"; sourceTree = "<group>"; };
 		3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKBuzzRouter+Rx.swift"; sourceTree = "<group>"; };
 		3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRoutingParser.swift; sourceTree = "<group>"; };
+		3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocodingResultScorer.swift; sourceTree = "<group>"; };
 		3A32CD6C1DC2D1DA003B158B /* TKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTestCase.swift; sourceTree = "<group>"; };
 		3A32CD701DC2DC6D003B158B /* TKOccupancy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKOccupancy.swift; sourceTree = "<group>"; };
 		3A32CD721DC2DC77003B158B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Vehicle.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -770,6 +776,10 @@
 		3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWaypointRouter.h; sourceTree = "<group>"; };
 		3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWaypointRouter.m; sourceTree = "<group>"; };
 		3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKWaypointRouter.swift; sourceTree = "<group>"; };
+		3AC9A0AC1F682B6E0050217E /* TKMapZenGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKMapZenGeocoder.swift; sourceTree = "<group>"; };
+		3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeoJSON.swift; sourceTree = "<group>"; };
+		3AC9A0B01F683F070050217E /* geojson-nuremberg.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "geojson-nuremberg.json"; path = "TripKitTests/Data/geojson-nuremberg.json"; sourceTree = SOURCE_ROOT; };
+		3AC9A0B21F683F530050217E /* TKGeoJSONTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeoJSONTest.swift; sourceTree = "<group>"; };
 		3AD159751F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		3AD159771F0D527D008B63E2 /* SGTripSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGTripSummaryCell.swift; sourceTree = "<group>"; };
 		3AD390E11ED42805004689D4 /* AnnotationViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewBuilder.swift; sourceTree = "<group>"; };
@@ -1262,6 +1272,9 @@
 				3AA03E541F0BC9DB00C6B337 /* SGRegionAutocompleter.h */,
 				3AA03E551F0BC9DB00C6B337 /* SGRegionAutocompleter.m */,
 				3AA03E561F0BC9DB00C6B337 /* SGSearchDataSource.h */,
+				3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */,
+				3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */,
+				3AC9A0AC1F682B6E0050217E /* TKMapZenGeocoder.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1569,6 +1582,7 @@
 				3AC4DCF81DEE32B80026B238 /* alertsTransit.json */,
 				3AFF6C031DEE40D200E7DFCB /* berowraToHornsby.json */,
 				3AFF6C041DEE40D200E7DFCB /* berowraToHornsbyService.json */,
+				3AC9A0B01F683F070050217E /* geojson-nuremberg.json */,
 				3AFF6C071DEE411300E7DFCB /* hornsbyToSkedGo.json */,
 				3AFF6C081DEE411300E7DFCB /* hornsbyToSkedGoService.json */,
 				3AC4DCF91DEE32B80026B238 /* locationInfo-bikePod.json */,
@@ -1605,6 +1619,7 @@
 				3AFFAE141F06D18700147990 /* SGAutocompletionResultTest.m */,
 				3AFFAE151F06D18700147990 /* SGGeocoderTest.swift */,
 				3AC4DD021DEE32B80026B238 /* TKShareHelperTest.swift */,
+				3AC9A0B21F683F530050217E /* TKGeoJSONTest.swift */,
 			);
 			path = sharing;
 			sourceTree = "<group>";
@@ -2566,11 +2581,11 @@
 				TargetAttributes = {
 					3AB6C61F1D1CD0060089F687 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					3AB6C6291D1CD0060089F687 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -2648,6 +2663,7 @@
 			files = (
 				3AC4DD081DEE32B80026B238 /* routing.json in Resources */,
 				3AFF6C0A1DEE411300E7DFCB /* hornsbyToSkedGoService.json in Resources */,
+				3AC9A0B11F683F070050217E /* geojson-nuremberg.json in Resources */,
 				3AFF6C061DEE40D200E7DFCB /* berowraToHornsbyService.json in Resources */,
 				3AC4DD071DEE32B80026B238 /* regionInfo-Sydney.json in Resources */,
 				3AC4DD051DEE32B80026B238 /* alertsTransit.json in Resources */,
@@ -2911,6 +2927,7 @@
 				3A7769221D3DE45800AF9EB2 /* TKAgendaFaker.swift in Sources */,
 				3AFFADB61F068E8B00147990 /* BPKUser.m in Sources */,
 				3AFFAD7C1F068E8B00147990 /* AMKItem.swift in Sources */,
+				3AC9A0AF1F682B6E0050217E /* TKGeoJSON.swift in Sources */,
 				3AFFADAF1F068E8B00147990 /* BPKTextPrefiller.m in Sources */,
 				3AFD70BD1E558BC800F6B06F /* TKPricingTable.swift in Sources */,
 				3AFFADCB1F068E8B00147990 /* BPKActionOverlay.m in Sources */,
@@ -2986,6 +3003,7 @@
 				3AFFAD9B1F068E8B00147990 /* BPKBookingViewController.swift in Sources */,
 				3ADD5B681D9CDF0C00A1742F /* RouteMapManager.m in Sources */,
 				3AE04BE61DEE392800462CB3 /* TKTripPattern.swift in Sources */,
+				3A2F25D41F699C32007D3767 /* TKGeocodingResultScorer.swift in Sources */,
 				3AFFAC371F06855F00147990 /* UIView+Hop.m in Sources */,
 				3AF94B1F1F0BFB9E00500940 /* Shape+CoreDataClass.swift in Sources */,
 				3AFFADB41F068E8B00147990 /* BPKManager.m in Sources */,
@@ -3031,6 +3049,7 @@
 				3AFFAD831F068E8B00147990 /* AMKCommunicator.swift in Sources */,
 				3AFFAD571F068E8B00147990 /* NSString+ValidateEmailAddress.m in Sources */,
 				3AFFAC5B1F06855F00147990 /* STKTransportKitHelper.swift in Sources */,
+				3AC9A0AE1F682B6E0050217E /* TKMapZenGeocoder.swift in Sources */,
 				3AFFADFE1F06AFDD00147990 /* TKShareHelper.swift in Sources */,
 				3AFFAD751F068E8B00147990 /* AKFbkHelper.m in Sources */,
 				3AA03E5F1F0BC9DB00C6B337 /* SGPermissionManager+AuthorizationAlert.m in Sources */,
@@ -3082,6 +3101,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AC9A0B31F683F530050217E /* TKGeoJSONTest.swift in Sources */,
 				3AC4DD0A1DEE32B80026B238 /* TKBuzzRouterTest.m in Sources */,
 				3A32CD6D1DC2D1DA003B158B /* TKTestCase.swift in Sources */,
 				3AC4DD0D1DEE32B80026B238 /* TKTTPifierTest.swift in Sources */,
@@ -3309,7 +3329,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.buzzhives.TripKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -3336,7 +3356,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -3383,7 +3403,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TripKitTests/TripKitTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -3430,7 +3450,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TripKitTests/TripKitTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

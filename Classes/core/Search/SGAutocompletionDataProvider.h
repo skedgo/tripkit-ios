@@ -10,17 +10,18 @@
 
 #import <MapKit/MapKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class SGAutocompletionResult;
 @protocol SGAutocompletionDataProvider;
 
-typedef void(^SGAutocompletionDataResultBlock)(NSArray <SGAutocompletionResult*> *results);
+typedef void(^SGAutocompletionDataResultBlock)(NSArray <SGAutocompletionResult*> * _Nullable results);
 typedef void(^SGAutocompletionDataActionBlock)(BOOL refreshRequired);
 
-typedef enum {
+typedef NS_ENUM(NSInteger, SGAutocompletionDataProviderResultType) {
   SGAutocompletionDataProviderResultTypeLocation = 1,
   SGAutocompletionDataProviderResultTypeRegion   = 2,
-} SGAutocompletionDataProviderResultType;
-
+};
 
 @protocol SGAutocompletionDataProvider <NSObject>
 
@@ -51,7 +52,7 @@ typedef enum {
 /**
  @return Optional text to display as part of the provider rows.
  */
-- (NSString *)additionalActionString;
+- (nullable NSString *)additionalActionString;
 
 /**
  Called when the provider row is tapped. Do your thing and execute the block when done, indicating if the autocompletion list should update itself.
@@ -64,8 +65,10 @@ typedef enum {
  @param result The object previously returned from `autocomplete:`.
  @return The annotation for the object that you previously provided.
  */
-- (id<MKAnnotation>)annotationForAutocompletionResult:(SGAutocompletionResult *)result;
+- (nullable id<MKAnnotation>)annotationForAutocompletionResult:(SGAutocompletionResult *)result;
 
 - (void)setMapView:(MKMapView *)mapView;
 
 @end
+
+NS_ASSUME_NONNULL_END
