@@ -5,15 +5,15 @@ use_frameworks!
 platform :ios, '9.3'
 
 def shared_pods
-  pod 'RxSwift',        '~> 3.0'
-  pod 'RxCocoa',        '~> 3.0'
+  pod 'RxSwift', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'swift4.0' #       '~> 3.0'
+  pod 'RxCocoa', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'swift4.0' #       '~> 3.0'
   pod 'Marshal'
 
-  pod 'Kingfisher'
+  pod 'Kingfisher', git: 'https://github.com/onevcat/Kingfisher.git', branch: 'swift4'
   pod 'ASPolygonKit'
   pod 'ASPolylineView'
   pod 'SGPulsingAnnotationView'
-  pod 'KeychainAccess'
+  pod 'KeychainAccess', git: 'https://github.com/kishikawakatsumi/KeychainAccess.git', branch: 'xcode9'
   pod 'KVNProgress'
   pod 'SwiftyJSON'
   pod 'OAuthSwift'
@@ -26,6 +26,6 @@ end
 target 'TripKitTests' do
   shared_pods
   
-  pod 'RxBlocking',     '~> 3.0'
-  pod 'RxTest',         '~> 3.0'
+  pod 'RxBlocking', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'swift4.0' #       '~> 3.0'
+  pod 'RxTest', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'swift4.0' #       '~> 3.0'
 end

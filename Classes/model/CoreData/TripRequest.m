@@ -70,7 +70,7 @@
 - (SVKRegion *)startRegion
 {
   if (! _localRegions) {
-    _localRegions = [self determineRegions];
+    _localRegions = [self _determineRegions];
   }
   return [_localRegions firstObject];
 }
@@ -78,7 +78,7 @@
 - (SVKRegion *)endRegion
 {
   if (! _localRegions) {
-    _localRegions = [self determineRegions];
+    _localRegions = [self _determineRegions];
   }
   return [_localRegions lastObject];
 }

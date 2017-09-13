@@ -37,7 +37,7 @@ public class SVKRegion : NSObject, NSCoding, Unmarshaling {
     public let pointDisplaysImage: Bool = true
     public let pointImage: SGKImage? = SGStyleManager.imageNamed("icon-map-info-city")
     public var pointImageURL: URL? = nil
-    public weak var region: SVKRegion? = nil
+    @objc public weak var region: SVKRegion? = nil
     
     public required init(object: MarshaledObject) throws {
       title = try object.value(for: "title")
@@ -47,7 +47,7 @@ public class SVKRegion : NSObject, NSCoding, Unmarshaling {
       coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-    public func centerBiasedMapRect() -> MKMapRect {
+    @objc public func centerBiasedMapRect() -> MKMapRect {
       // centre it on the region's coordinate
       let size = MKMapSize(width: 300_000, height: 400_00)
       var center = MKMapPointForCoordinate(coordinate)
@@ -56,7 +56,7 @@ public class SVKRegion : NSObject, NSCoding, Unmarshaling {
       return MKMapRect(origin: center, size: size)
     }
     
-    func encoded() -> [String: Any] {
+    @objc func encoded() -> [String: Any] {
       return [
         "title": title ?? "",
         "lat": coordinate.latitude,
@@ -65,17 +65,17 @@ public class SVKRegion : NSObject, NSCoding, Unmarshaling {
     }
   }
   
-  public let timeZone: TimeZone
-  public let name: String
-  public let cities: [City]
+  @objc public let timeZone: TimeZone
+  @objc public let name: String
+  @objc public let cities: [City]
   
   /// A list of all the mode identifiers this region supports. This is sorted as defined by the server, as the server groups and sorts them in a sensible manner and we want to preserve this sorting.
-  public let modeIdentifiers: [String]
+  @objc public let modeIdentifiers: [String]
 
-  public let urls: [URL]
-  let encodedPolygon: String
+  @objc public let urls: [URL]
+  @objc let encodedPolygon: String
   
-  lazy var polygon: MKPolygon = {
+  @objc lazy var polygon: MKPolygon = {
     let corners = CLLocation.decodePolyLine(self.encodedPolygon)
     let coordinates = corners.map { $0.coordinate }
     return MKPolygon(coordinates: coordinates, count: coordinates.count)
@@ -149,7 +149,7 @@ public class SVKRegion : NSObject, NSCoding, Unmarshaling {
 
 public class SVKInternationalRegion : SVKRegion {
   
-  public static let shared: SVKRegion = SVKInternationalRegion()
+  @objc public static let shared: SVKRegion = SVKInternationalRegion()
   
   private init() {
     var modes = [

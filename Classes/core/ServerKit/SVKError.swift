@@ -50,19 +50,19 @@ public struct SVKErrorRecovery: Unmarshaling {
 }
 
 public class SVKError: NSError {
-  public var title: String?
+  @objc public var title: String?
   public var recovery: SVKErrorRecovery?
   
-  public class func error(withCode code: Int, userInfo dict: [String: Any]?) -> SVKError {
+  @objc public class func error(withCode code: Int, userInfo dict: [String: Any]?) -> SVKError {
     return SVKError(domain: "com.skedgo.serverkit", code: code, userInfo: dict)
   }
   
-  public class func error(fromJSON json: Any?) -> SVKError? {
+  @objc public class func error(fromJSON json: Any?) -> SVKError? {
     guard let dict = json as? [String: Any] else { return nil }
     return SVKError.error(fromJSON: dict, domain: "com.skedgo.serverkit")
   }
   
-  class func error(fromJSON dictionary: [String: Any], domain: String) -> SVKError? {
+  @objc class func error(fromJSON dictionary: [String: Any], domain: String) -> SVKError? {
     guard let errorInfo = dictionary["error"] as? String,
       let isUserError = dictionary["usererror"] as? Bool
       else {
@@ -90,7 +90,7 @@ public class SVKError: NSError {
     return error
   }
   
-  public var isUserError: Bool {
+  @objc public var isUserError: Bool {
     return false
   }
   

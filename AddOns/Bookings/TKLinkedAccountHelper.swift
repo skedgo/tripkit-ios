@@ -143,7 +143,7 @@ extension SVKRegion {
    - parameter remoteURL: `ProviderAuth.actionURL`, required to remove remote authentications.
    - parameter completion: Block executed when unlinking has finished. Boolean parameter indicates if any authentications have been removed.
   */
-  public func unlinkAccount(_ mode: String, remoteURL: URL, completion: @escaping (Bool) -> Void) {
+  @objc public func unlinkAccount(_ mode: String, remoteURL: URL, completion: @escaping (Bool) -> Void) {
     
     // Also unlink remote
     SVKServer.get(remoteURL, paras: nil) { _, response, error in

@@ -64,7 +64,7 @@ public class STKStopCoordinate: STKModeCoordinate, STKStopAnnotation {
     set { data["sg_stopCode"] = newValue }
   }
   
-  var stopShortName: String? {
+  @objc var stopShortName: String? {
     get { return data["sg_stopShortName"] as? String }
     set { data["sg_stopShortName"] = newValue }
   }

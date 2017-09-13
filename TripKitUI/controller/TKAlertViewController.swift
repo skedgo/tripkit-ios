@@ -32,7 +32,7 @@ public class TKAlertViewController: UITableViewController {
   }
   
   public var transitAlerts: Observable<[TKAlert]>?
-  public weak var alertControllerDelegate: TKAlertViewControllerDelegate?
+  @objc public weak var alertControllerDelegate: TKAlertViewControllerDelegate?
   
   // MARK: - View lifecycle
   

@@ -12,13 +12,13 @@ import Marshal
 
 public class TKRegionInfo: NSObject, Unmarshaling {
   
-  public let streetBikePaths: Bool
-  public let streetWheelchairAccessibility: Bool
-  public let transitModes: [ModeInfo]
-  public let transitBicycleAccessibility: Bool
-  public let transitConcessionPricing: Bool
-  public let transitWheelchairAccessibility: Bool
-  public let paratransitInformation: TKParatransitInfo?
+  @objc public let streetBikePaths: Bool
+  @objc public let streetWheelchairAccessibility: Bool
+  @objc public let transitModes: [ModeInfo]
+  @objc public let transitBicycleAccessibility: Bool
+  @objc public let transitConcessionPricing: Bool
+  @objc public let transitWheelchairAccessibility: Bool
+  @objc public let paratransitInformation: TKParatransitInfo?
   
   public required init(object: MarshaledObject) throws {
     streetBikePaths = (try? object.value(for: "streetBicyclePaths")) ?? false
@@ -39,9 +39,9 @@ public class TKRegionInfo: NSObject, Unmarshaling {
  - SeeAlso: `TKBuzzInfoProvider`'s `fetchParatransitInformation`
  */
 public class TKParatransitInfo: NSObject, Unmarshaling {
-  public let name: String
-  public let URL: String
-  public let number: String
+  @objc public let name: String
+  @objc public let URL: String
+  @objc public let number: String
   
   public required init(object: MarshaledObject) throws {
     name   = try object.value(for: "name")

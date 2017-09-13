@@ -19,7 +19,7 @@ extension SGCustomEventRecurrenceRule {
   /// - parameter latest: Latest date that any recurrence can start
   /// - parameter timeZone: The time zone for which to enumarete the recurrences
   /// - parameter handler: Block call on same thread for every recurrence, providing both start date and end date of each recurrence.
-  public class func enumerateRecurrences(
+  @objc public class func enumerateRecurrences(
     ofRule rule: String, startTime: TimeInterval, duration: TimeInterval,
     earliest: Date, latest: Date, for timeZone: TimeZone,
     handler: (_ start: Date, _ end: Date) -> Void)

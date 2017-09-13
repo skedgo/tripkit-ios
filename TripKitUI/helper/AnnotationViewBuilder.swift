@@ -18,8 +18,8 @@ public class AnnotationViewBuilder: NSObject {
   fileprivate var alpha: CGFloat = 1
   fileprivate var preferSemaphore: Bool = false
   
-  let annotation: MKAnnotation
-  let mapView: MKMapView
+  @objc let annotation: MKAnnotation
+  @objc let mapView: MKMapView
   
   @objc(initForAnnotation:inMapView:)
   public init(for annotation: MKAnnotation, in mapView: MKMapView) {
@@ -33,37 +33,37 @@ public class AnnotationViewBuilder: NSObject {
     super.init()
   }
   
-  @discardableResult
+  @objc @discardableResult
   public func drawCircleAsTravelled(_ travelled: Bool) -> AnnotationViewBuilder {
     self.asTravelled = travelled
     return self
   }
 
-  @discardableResult
+  @objc @discardableResult
   public func drawCircleAsLarge(_ asLarge: Bool) -> AnnotationViewBuilder {
     self.asLarge = asLarge
     return self
   }
 
-  @discardableResult
+  @objc @discardableResult
   public func withAlpha(_ alpha: CGFloat) -> AnnotationViewBuilder {
     self.alpha = alpha
     return self
   }
   
-  @discardableResult
+  @objc @discardableResult
   public func withHeading(_ heading: CLLocationDirection) -> AnnotationViewBuilder {
     self.heading = heading
     return self
   }
   
-  @discardableResult
+  @objc @discardableResult
   public func preferSemaphore(_ prefer: Bool) -> AnnotationViewBuilder {
     self.preferSemaphore = prefer
     return self
   }
   
-  public func build() -> MKAnnotationView? {
+  @objc public func build() -> MKAnnotationView? {
     if let vehicle = annotation as? Vehicle {
       return build(for: vehicle)
     } else if let visit = annotation as? StopVisits {
@@ -284,7 +284,7 @@ fileprivate extension AnnotationViewBuilder {
 
 public extension AnnotationViewBuilder {
   
-  public static func update(annotationView: MKAnnotationView, forHeading heading: CLLocationDirection) {
+  @objc public static func update(annotationView: MKAnnotationView, forHeading heading: CLLocationDirection) {
     
     if let vehicleView = annotationView as? TKVehicleAnnotationView, let vehicle = vehicleView.annotation as? Vehicle {
       vehicleView.rotateVehicle(heading: heading, bearing: vehicle.bearing?.doubleValue)

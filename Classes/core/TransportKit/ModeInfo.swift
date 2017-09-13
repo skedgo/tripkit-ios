@@ -13,19 +13,19 @@ import Marshal
 /// Information to identify and display a mode. Kind of like the
 /// big sibling of a mode identifier string.
 public class ModeInfo: NSObject, NSSecureCoding, Unmarshaling {
-  public let identifier: String?
+  @objc public let identifier: String?
 
   /// Text representation of the image
-  public let alt: String
+  @objc public let alt: String
 
-  public let localImageName: String?
-  public let remoteImageName: String?
-  public let remoteDarkImageName: String?
+  @objc public let localImageName: String?
+  @objc public let remoteImageName: String?
+  @objc public let remoteDarkImageName: String?
   
   /// Additional descriptor for image, e.g., "GoGet", "Shuttle"
-  public let descriptor: String?
+  @objc public let descriptor: String?
   
-  public let color: SGKColor?
+  @objc public let color: SGKColor?
   
   @objc(modeInfoForDictionary:)
   public class func modeInfo(for json: [String: Any]) -> ModeInfo? {

@@ -185,7 +185,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
           TKTTPifierCache.save(problemId: id, forParas: paras)
           return (region, id)
         } else {
-          assertionFailure("Unexpected result from server with code \(code): \(response)")
+          assertionFailure("Unexpected result from server with code \(code): \(String(describing: response))")
           return (region, nil)
         }
       }
@@ -269,6 +269,10 @@ public struct TKTTPifier : TKAgendaBuilderType {
    */
   fileprivate static func createInput(_ insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil, region: SVKRegion? = nil) -> [String: Any] {
     
+    guard let year = dateComponents.year, let month = dateComponents.month, let day = dateComponents.day else {
+      preconditionFailure("Provided bad date components")
+    }
+    
     let identifiers: [String]
     if let modes = modes {
       identifiers = modes
@@ -285,7 +289,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
     
     return [
-      "date": "\(dateComponents.year)-\(dateComponents.month)-\(dateComponents.day)",
+      "date": "\(year)-\(month)-\(day)",
       "modes": identifiers,
       "insertInto": createInput(into),
       "insert": createInput(insert)

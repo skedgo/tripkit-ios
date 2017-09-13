@@ -10,7 +10,7 @@ import Foundation
 
 extension Alert {
   
-  public var infoIconType: STKInfoIconType {
+  @objc public var infoIconType: STKInfoIconType {
     switch alertSeverity {
     case .info, .warning: return .warning
     case .alert: return .alert

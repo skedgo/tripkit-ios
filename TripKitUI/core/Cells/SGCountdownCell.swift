@@ -69,7 +69,7 @@ extension SGCountdownCell {
   ///   - parkingAvailable: Amount of parking to display
   ///   - position: Position of this cell relative to the cells around it.
   ///   - stripColor: Optional color to display a coloured strip under the icon.
-  public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, parkingAvailable: String?, position: SGKGrouping, stripColor: SGKColor?) {
+  @objc public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, parkingAvailable: String?, position: SGKGrouping, stripColor: SGKColor?) {
     
     _resetContents()
     
@@ -85,7 +85,7 @@ extension SGCountdownCell {
   }
   
   
-  public func configureAlertView(withText alertText: String?, andType alertType: STKInfoIconType) {
+  @objc public func configureAlertView(withText alertText: String?, andType alertType: STKInfoIconType) {
     if alertText?.isEmpty ?? true {
       alertLabel.text = nil
       alertSymbol.image = nil
@@ -121,7 +121,7 @@ extension SGCountdownCell {
   }
   
   
-  public func addViewToFootnote(_ view: UIView) {
+  @objc public func addViewToFootnote(_ view: UIView) {
     // Make sure we start clean.
     for subview in footnoteView.subviews {
       subview.removeFromSuperview()
