@@ -20,6 +20,7 @@
 @dynamic bearing;
 @dynamic occupancyRaw;
 @dynamic label;
+@dynamic wifi;
 @dynamic toDelete;
 @dynamic service, serviceAlternatives;
 @dynamic segment, segmentAlternatives;

@@ -191,24 +191,25 @@
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="occupancyRaw" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="wifi" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="segment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SegmentReference" inverseName="realTimeVehicle" inverseEntity="SegmentReference" syncable="YES"/>
         <relationship name="segmentAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SegmentReference" inverseName="realTimeVehicleAlternatives" inverseEntity="SegmentReference" syncable="YES"/>
         <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="vehicle" inverseEntity="Service" syncable="YES"/>
         <relationship name="serviceAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="vehicleAlternatives" inverseEntity="Service" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Alert" positionX="765" positionY="297" width="128" height="238"/>
+        <element name="Alert" positionX="952" positionY="324" width="128" height="238"/>
         <element name="Cell" positionX="-99" positionY="131" width="128" height="165"/>
         <element name="DLSEntry" positionX="124" positionY="539" width="128" height="73"/>
         <element name="SegmentReference" positionX="511" positionY="-117" width="128" height="238"/>
-        <element name="SegmentTemplate" positionX="711" positionY="-204" width="128" height="375"/>
+        <element name="SegmentTemplate" positionX="952" positionY="-234" width="128" height="375"/>
         <element name="Service" positionX="315" positionY="149" width="128" height="283"/>
-        <element name="Shape" positionX="601" positionY="368" width="128" height="180"/>
+        <element name="Shape" positionX="637" positionY="531" width="128" height="180"/>
         <element name="StopLocation" positionX="-101" positionY="369" width="128" height="268"/>
         <element name="StopVisits" positionX="124" positionY="243" width="128" height="238"/>
         <element name="Trip" positionX="315" positionY="-252" width="128" height="390"/>
         <element name="TripGroup" positionX="99" positionY="-186" width="128" height="195"/>
         <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="238"/>
-        <element name="Vehicle" positionX="513" positionY="144" width="128" height="240"/>
+        <element name="Vehicle" positionX="700" positionY="165" width="128" height="253"/>
     </elements>
 </model>
