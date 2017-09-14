@@ -66,6 +66,12 @@ public class TKMapZenGeocoder: NSObject {
 extension TKMapZenGeocoder: SGGeocoder {
   
   public func geocodeString(_ inputString: String, nearRegion mapRect: MKMapRect, success: @escaping SGGeocoderSuccessBlock, failure: SGGeocoderFailureBlock? = nil) {
+    
+    guard inputString.count > 0 else {
+      success(inputString, [])
+      return
+    }
+    
     let region = MKCoordinateRegionForMapRect(mapRect)
     var components = URLComponents(string: "https://search.mapzen.com/v1/search")
     components?.queryItems = [
@@ -94,6 +100,12 @@ extension TKMapZenGeocoder: SGAutocompletionDataProvider {
   public var resultType: SGAutocompletionDataProviderResultType { return .location }
   
   public func autocompleteSlowly(_ string: String, for mapRect: MKMapRect, completion: @escaping SGAutocompletionDataResultBlock) {
+    
+    guard string.count > 0 else {
+      completion([])
+      return
+    }
+
     let region = MKCoordinateRegionForMapRect(mapRect)
     var components = URLComponents(string: "https://search.mapzen.com/v1/autocomplete")
     components?.queryItems = [
