@@ -215,8 +215,7 @@
 
 - (void)presentAlertWithTitle:(NSString *)title message:(NSString *)message onDismiss:(void(^)())dismiss
 {
-  SGAlert *alert = [[SGAlert alloc] init];
-  [alert showWithTitle:title message:message inController:self dismiss:dismiss];
+  [SGAlert showWithTitle:title message:message inController:self dismiss:dismiss];
 }
 
 #pragma mark - Private: App flow
