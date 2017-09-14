@@ -138,7 +138,7 @@ extension TKGeoJSON.Geometry: Decodable {
     case .point:
       guard coordinates.count >= 2 else { throw TKGeoJSON.DecodingError.missingCoordinates }
       let altitude = coordinates.count >= 3 ? coordinates[2] : nil
-      let position = TKGeoJSON.Position(latitude: coordinates[0], longitude: coordinates[1], altitude: altitude)
+      let position = TKGeoJSON.Position(latitude: coordinates[1], longitude: coordinates[0], altitude: altitude)
       self = .point(position)
       
     default:
