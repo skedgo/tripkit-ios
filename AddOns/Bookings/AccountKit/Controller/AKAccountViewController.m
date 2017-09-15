@@ -213,7 +213,7 @@
 
 #pragma mark - Private: Alerts
 
-- (void)presentAlertWithTitle:(NSString *)title message:(NSString *)message onDismiss:(void(^)())dismiss
+- (void)presentAlertWithTitle:(NSString *)title message:(NSString *)message onDismiss:(void(^)(void))dismiss
 {
   [SGAlert showWithTitle:title message:message inController:self dismiss:dismiss];
 }

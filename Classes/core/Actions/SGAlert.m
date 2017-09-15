@@ -16,7 +16,7 @@
 
 @interface SGAlert ()
 
-@property (nonatomic, copy) void (^dismissBlock)();
+@property (nonatomic, copy) void (^dismissBlock)(void);
 
 @end
 

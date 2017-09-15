@@ -23,7 +23,7 @@
 
 @interface AKBaseTableViewController ()
 
-@property (nonatomic, copy) void (^saveButtonHandler)();
+@property (nonatomic, copy) void (^saveButtonHandler)(void);
 @property (nonatomic, strong) UIBarButtonItem *saveButton;
 
 @end
