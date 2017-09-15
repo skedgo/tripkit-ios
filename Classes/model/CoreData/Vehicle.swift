@@ -48,7 +48,7 @@ extension Vehicle {
     }
   }
   
-  @objc public var isWifiEnabled: Bool? {
+  public var isWifiEnabled: Bool? {
     return wifi?.boolValue
   }
   
