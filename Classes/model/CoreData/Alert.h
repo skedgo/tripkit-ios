@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSDate * startTime;
 @property (nonatomic, retain, nullable) NSDate * endTime;
 @property (nonatomic, assign) BOOL toDelete;
-@property (nonatomic, retain, nullable) NSDictionary *action;
+@property (nonatomic, retain, nullable) NSDictionary<NSString *, id> *action;
 
 @property (nonatomic, retain, nullable) NSString *idService;
 @property (nonatomic, retain, nullable) NSString *idStopCode;
