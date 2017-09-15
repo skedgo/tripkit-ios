@@ -407,6 +407,7 @@
     // might have added alert to a new stop code or service
     alert.idStopCode    = alertDict[@"stopCode"] ?: alert.idStopCode;
     alert.idService     = alertDict[@"serviceTripID"] ?: alert.idService;
+    alert.action        = alertDict[@"action"] ?: alert.action;
     
     // text is dynamic, so update it
     alert.text					= alertDict[@"text"];

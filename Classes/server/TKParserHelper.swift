@@ -37,7 +37,6 @@ extension TKParserHelper {
     default: return .hidden
     }
   }
-  
 
 }
 
@@ -56,6 +55,7 @@ extension Vehicle {
     identifier = dict["id"] as? String
     label = dict["label"] as? String
     icon = dict["icon"] as? String
+    wifi = dict["wifi"] as? NSNumber
 
     if let seconds = dict["lastUpdate"] as? TimeInterval {
       lastUpdate = Date(timeIntervalSince1970: seconds)
@@ -78,7 +78,6 @@ extension Vehicle {
         bearing = NSNumber(value: degrees)
       }
     }
-    
   }
   
 }

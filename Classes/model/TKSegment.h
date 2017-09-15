@@ -135,6 +135,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSArray<Alert *> *)alertsWithContent;
 
+/**
+ @return Alerts that also have an action associated with them
+ */
+- (NSArray<Alert *> *)alertsWithAction;
+
 - (TKSegment *)finalSegmentIncludingContinuation;
 
 - (NSArray<id<MKAnnotation>> *)annotationsToZoomToOnMap;

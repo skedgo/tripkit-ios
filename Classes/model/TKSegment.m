@@ -342,6 +342,15 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
+- (NSArray *)alertsWithAction
+{
+  if (self.alerts.count > 0) {
+    return [[self alerts] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"action != nil"]];
+  } else {
+    return @[];
+  }
+}
+
 - (BOOL)usesVisit:(StopVisits *)visit
 {
   if (self.segmentVisits) {
