@@ -32,6 +32,7 @@
 @dynamic toDelete;
 @dynamic tripGroups;
 @dynamic expandForFavorite;
+@dynamic excludedStops;
 @synthesize requestedModes;
 @synthesize replacement;
 @synthesize defaultVisibility;

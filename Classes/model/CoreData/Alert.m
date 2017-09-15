@@ -23,6 +23,7 @@
 @dynamic startTime;
 @dynamic endTime;
 @dynamic toDelete;
+@dynamic action;
 @dynamic idService, idStopCode;
 
 + (instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode

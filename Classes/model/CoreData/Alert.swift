@@ -14,7 +14,14 @@ extension Alert {
     switch alertSeverity {
     case .info, .warning: return .warning
     case .alert: return .alert
-    }
+    } 
+  }
+  
+  /// This is an array of `stopCode`. A non-empty value indicates the alert requires a 
+  /// reroute action because, e.g., the stops have become inaccessible. This property
+  /// is typically passed to a routing request as stops to avoid during routing.
+  public var excludedStops: [String] {
+    return action?["excludedStopCodes"] as? [String] ?? []
   }
   
 }

@@ -625,6 +625,10 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
     paras[@"bestOnly"] = @(YES);
   }
   
+  if (request.excludedStops.count > 0) {
+    paras[@"avoidStops"] = request.excludedStops;
+  }
+  
   return paras;
 }
 

@@ -158,6 +158,7 @@ extension TripRequest {
     newRequest.arrivalTime = arrivalTime
     newRequest.departureTime = departureTime
     newRequest.timeType = timeType
+    newRequest.excludedStops = excludedStops
     return newRequest
   }
 }

@@ -44,6 +44,13 @@ extension TKSegment {
     case .end: return type != .inSummary
     }
   }
+  
+  
+  /// Gets the first alert that requires reroute
+  public var reroutingAlert: Alert? {
+    return alertsWithAction().first { !$0.excludedStops.isEmpty }
+  }
+  
 }
 
 // MARK: - Vehicles

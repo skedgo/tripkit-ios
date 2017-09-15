@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 extension TKOccupancy {
   
   public var color: SGKColor? {
@@ -50,17 +48,16 @@ extension Vehicle {
     }
   }
   
+  @objc public var isWifiEnabled: Bool? {
+    return wifi?.boolValue
+  }
+  
   @objc public var serviceNumber: String? {
     return anyService?.number
   }
   
   @objc public var serviceColor: SGKColor? {
     return occupancy?.color
-//    if let color = anyService?.color as? SGKColor {
-//      return color
-//    } else {
-//      return anySegmentReference?.template().modeInfo?.color
-//    }
   }
   
   @objc public var ageFactor: Double {
@@ -77,6 +74,7 @@ extension Vehicle {
   fileprivate var anySegmentReference: SegmentReference? {
     return segment ?? segmentAlternatives.first
   }
+  
 }
 
 // MARK: - MKAnnotation
