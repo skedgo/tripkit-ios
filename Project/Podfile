@@ -16,7 +16,7 @@ def shared_pods
   pod 'KeychainAccess', git: 'https://github.com/kishikawakatsumi/KeychainAccess.git', branch: 'xcode9'
   pod 'KVNProgress'
   pod 'SwiftyJSON'
-  pod 'OAuthSwift'
+  pod 'OAuthSwift', git: 'https://github.com/skedgo/OAuthSwift.git', branch: 'master'
 end
 
 target 'TripKit' do
