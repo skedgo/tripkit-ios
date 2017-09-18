@@ -47,7 +47,7 @@ extension TKSegment {
   
   
   /// Gets the first alert that requires reroute
-  public var reroutingAlert: Alert? {
+  @objc public var reroutingAlert: Alert? {
     return alertsWithAction().first { !$0.excludedStops.isEmpty }
   }
   
