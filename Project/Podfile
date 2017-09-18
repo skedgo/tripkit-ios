@@ -9,14 +9,14 @@ def shared_pods
   pod 'RxCocoa', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'swift4.0' #       '~> 3.0'
   pod 'Marshal'
 
-  pod 'Kingfisher', git: 'https://github.com/onevcat/Kingfisher.git', branch: 'swift4'
+  pod 'Kingfisher'
   pod 'ASPolygonKit'
   pod 'ASPolylineView'
   pod 'SGPulsingAnnotationView'
   pod 'KeychainAccess', git: 'https://github.com/kishikawakatsumi/KeychainAccess.git', branch: 'xcode9'
   pod 'KVNProgress'
   pod 'SwiftyJSON'
-  pod 'OAuthSwift', git: 'https://github.com/skedgo/OAuthSwift.git', branch: 'master'
+  pod 'OAuthSwift'
 end
 
 target 'TripKit' do
