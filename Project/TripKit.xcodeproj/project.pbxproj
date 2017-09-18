@@ -27,6 +27,7 @@
 		3A32CD7D1DC2EC9B003B158B /* TKInfoTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7C1DC2EC9B003B158B /* TKInfoTypes.swift */; };
 		3A32CD7F1DC2ECB9003B158B /* TKAlertTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7E1DC2ECB9003B158B /* TKAlertTypes.swift */; };
 		3A37D5DC1F6FB7AF0019D4A2 /* SGPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37D5DA1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.m */; };
+		3A37D5DD1F6FBAFA0019D4A2 /* SGPulsingAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A37D5DB1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A51402B1DEE62D6002DB39F /* TKVehicleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402A1DEE62D6002DB39F /* TKVehicleAnnotationView.swift */; };
 		3A51402E1DEE62EE002DB39F /* TKDLSTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */; };
 		3A51402F1DEE62EE002DB39F /* TKSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402D1DEE62EE002DB39F /* TKSegment.swift */; };
@@ -2389,6 +2390,7 @@
 				3AFFAD561F068E8B00147990 /* NSString+ValidateEmailAddress.h in Headers */,
 				3AFFABA61F06854F00147990 /* UIImage+Variations.h in Headers */,
 				3AFFADEE1F068E8C00147990 /* TripKitBookings.h in Headers */,
+				3A37D5DD1F6FBAFA0019D4A2 /* SGPulsingAnnotationView.h in Headers */,
 				3AB6C6DA1D1CD08E0089F687 /* SegmentReference.h in Headers */,
 				3AFFADBE1F068E8B00147990 /* BPKSectionItem+Address.h in Headers */,
 				3AFFAD921F068E8B00147990 /* BPKConstants.h in Headers */,

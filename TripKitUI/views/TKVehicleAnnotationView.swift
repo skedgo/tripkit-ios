@@ -10,7 +10,6 @@ import Foundation
 
 import RxSwift
 import MapKit
-import SGPulsingAnnotationView
 
 public class TKVehicleAnnotationView: SGPulsingAnnotationView {
   
