@@ -19,6 +19,7 @@ before_install:
 - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 - pod --version
+- pod repo update
 
 # We use xcodebuild rather than xctool as xctool doesn't play nicely with network requests
 script:

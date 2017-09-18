@@ -1,5 +1,4 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://github.com/skedgo/PodSpecs.git'
 
 use_frameworks!
 platform :ios, '9.3'
@@ -9,13 +8,14 @@ def shared_pods
   pod 'RxCocoa', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'swift4.0' #       '~> 3.0'
   pod 'Marshal'
 
-  pod 'Kingfisher'
   pod 'ASPolygonKit'
   pod 'ASPolylineView'
   pod 'KeychainAccess', git: 'https://github.com/kishikawakatsumi/KeychainAccess.git', branch: 'master'
+  pod 'Kingfisher',     '~> 4.0'
+  pod 'OAuthSwift',     '~> 1.2'
+
   pod 'KVNProgress'
   pod 'SwiftyJSON'
-  pod 'OAuthSwift'
 end
 
 target 'TripKit' do
