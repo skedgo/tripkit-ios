@@ -44,7 +44,7 @@ class SGCustomEventRecurrenceTest: XCTestCase {
         ends.append(endDate)
       }
       
-      XCTAssertEqual(starts.count, 5, "In \(timeZone)")
+      XCTAssertEqual(starts.count, 5, "In \(timeZone) (local time zone is \(TimeZone.current))")
       
       XCTAssertEqual(starts, [
         Date.from("2016-05-30 9:00", timeZone: timeZone),
