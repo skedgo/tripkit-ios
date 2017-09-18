@@ -19,7 +19,6 @@ Pod::Spec.new do |s|
   s.frameworks = ['UIKit', 'MapKit']
 
   s.dependency 'TripKit', "~> #{s.version}"
-  s.dependency 'SGPulsingAnnotationView'
 
   s.dependency 'ASPolylineView'
   s.dependency 'Kingfisher'
