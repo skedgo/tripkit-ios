@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitUI"
-  s.version      = "2.0"
+  s.version      = "2.0.1"
   s.summary      = "SkedGo's TripKitUI"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = 'Apache License, Version 2.0'
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.dependency 'SGPulsingAnnotationView'
 
   s.dependency 'ASPolylineView'
-  s.dependency 'Kingfisher'
+  s.dependency 'Kingfisher', '~> 3.0'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'
 
