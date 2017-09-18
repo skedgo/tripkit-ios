@@ -1,23 +1,28 @@
 language: objective-c
 osx_image: xcode9
-xcode_workspace: Project/TripKit.xcworkspace
-xcode_scheme: TripKit
 podfile: Project/Podfile
 cache: cocoapods
-rvm:
-- 2.2.1 # See https://docs.travis-ci.com/user/osx-ci-environment/
+
+env:
+  global:
+    - LC_CTYPE=en_US.UTF-8
+    - LANG=en_US.UTF-8
+    - IOS_FRAMEWORK_SCHEME="TripKit"
+    - IOS_SDK=iphonesimulator11.0
+  matrix:
+    - DESTINATION="OS=11.0,name=iPhone 8" SCHEME="$IOS_FRAMEWORK_SCHEME" SDK="$IOS_SDK"
 
 before_install:
 - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
-- brew update
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-- gem install cocoapods
 - pod --version
 
 # We use xcodebuild rather than xctool as xctool doesn't play nicely with network requests
-script: set -o pipefail && xcodebuild test -workspace Project/TripKit.xcworkspace
-  -scheme TripKit -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone
-  7' | xcpretty
+script:
+  - set -o pipefail 
+  - xcodebuild -showsdks
+  - xcodebuild test -workspace Project/TripKit.xcworkspace
+  -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" | xcpretty
 
 env:
   global:
