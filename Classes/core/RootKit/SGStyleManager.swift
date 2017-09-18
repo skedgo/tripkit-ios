@@ -10,7 +10,7 @@ import Foundation
 
 extension SGKColor {
   
-  public static var routeDashColorNonTravelled: SGKColor {
+  @objc public static var routeDashColorNonTravelled: SGKColor {
     return SGKColor.lightGray.withAlphaComponent(0.25)
   }
   

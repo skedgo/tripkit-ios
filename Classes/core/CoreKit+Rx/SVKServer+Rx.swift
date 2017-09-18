@@ -39,7 +39,7 @@ extension Reactive where Base: SVKServer {
           return
         }
         
-        subscriber.onNext()
+        subscriber.onNext(())
         subscriber.onCompleted()
       }
       
@@ -86,7 +86,7 @@ extension Reactive where Base: SVKServer {
             hitAgain = nil
           }
           
-          subscriber.onNext(code, json)
+          subscriber.onNext((code, json))
           if hitAgain == nil {
             subscriber.onCompleted()
           }

@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, SGKLogLevel) {
 
 #pragma mark - Private
 
-+ (void)log:(NSString *)identifier level:(SGKLogLevel)level block:(NSString *(^)())block
++ (void)log:(NSString *)identifier level:(SGKLogLevel)level block:(NSString *(^)(void))block
 {
   if (SGK_DEBUG_LEVEL < level || ![SGKBetaHelper isDev]) {
     return;

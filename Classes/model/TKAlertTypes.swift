@@ -32,7 +32,7 @@ class TKSimpleAlert: NSObject, Unmarshaling, TKAlert {
   public let text: String?
   public let infoURL: URL?
   public let iconURL: URL?
-  public let severity: AlertSeverity
+  @objc public let severity: AlertSeverity
   public let lastUpdated: Date?
   
   public var icon: SGKImage? {

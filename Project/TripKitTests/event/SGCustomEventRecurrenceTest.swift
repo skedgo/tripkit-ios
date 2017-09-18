@@ -52,7 +52,7 @@ class SGCustomEventRecurrenceTest: XCTestCase {
         Date.from("2016-06-01 9:00", timeZone: timeZone),
         Date.from("2016-06-02 9:00", timeZone: timeZone),
         Date.from("2016-06-03 9:00", timeZone: timeZone),
-        ], "In \(timeZone)")
+        ], "In \(timeZone) (local time zone is \(TimeZone.current))")
       
       XCTAssertEqual(ends, [
         Date.from("2016-05-30 17:00", timeZone: timeZone),
@@ -60,7 +60,7 @@ class SGCustomEventRecurrenceTest: XCTestCase {
         Date.from("2016-06-01 17:00", timeZone: timeZone),
         Date.from("2016-06-02 17:00", timeZone: timeZone),
         Date.from("2016-06-03 17:00", timeZone: timeZone),
-        ], "In \(timeZone)")
+        ], "In \(timeZone) (local time zone is \(TimeZone.current))")
 
     }
     

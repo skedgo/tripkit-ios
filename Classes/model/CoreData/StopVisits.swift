@@ -10,7 +10,7 @@ import Foundation
 
 extension StopVisits {
   
-  public func grouping(previous: StopVisits?, next: StopVisits?) -> SGKGrouping {
+  @objc public func grouping(previous: StopVisits?, next: StopVisits?) -> SGKGrouping {
     let sameAsBefore = previous?.searchString == searchString
     let sameAsAfter = next?.searchString == searchString
     
@@ -120,7 +120,7 @@ extension StopVisits: STKDisplayableTimePoint {
       return ""
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
       
       let format = NSLocalizedString("I'll take a %@ at %@ from %@.", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indication of an activity. (old key: ActivityIndication)")
       return String(format: format,

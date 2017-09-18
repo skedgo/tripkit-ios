@@ -14,7 +14,7 @@
 
 + (void)showWithText:(NSString *)text inController:(UIViewController *)controller;
 
-- (void)showWithTitle:(NSString *)title message:(NSString *)message inController:(UIViewController *)controller dismiss:(void(^)(void))dismiss;
++ (void)showWithTitle:(NSString *)title message:(NSString *)message inController:(UIViewController *)controller dismiss:(void(^)(void))dismiss;
 
 @end
 

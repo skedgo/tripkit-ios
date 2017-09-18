@@ -8,11 +8,11 @@
 
 public class SGAggregateGeocoder: SGBaseGeocoder {
 
-  public let geocoders: [SGGeocoder]
+  @objc public let geocoders: [SGGeocoder]
   
   private let queue: OperationQueue
   
-  public init(geocoders: [SGGeocoder]) {
+  @objc public init(geocoders: [SGGeocoder]) {
     self.geocoders = geocoders
     
     queue = OperationQueue()

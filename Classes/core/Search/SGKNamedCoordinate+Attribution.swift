@@ -10,7 +10,7 @@ import Foundation
 
 public extension SGKNamedCoordinate {
   
-  func setAttribution(actionTitle: String, website: String, appActionTitle: String, appLink: String, isVerified: NSNumber?) {
+  @objc func setAttribution(actionTitle: String, website: String, appActionTitle: String, appLink: String, isVerified: NSNumber?) {
     data["websiteAction"] = actionTitle
     data["websiteLink"] = website
     data["appAction"] = appActionTitle
@@ -18,23 +18,23 @@ public extension SGKNamedCoordinate {
     data["isVerified"] = isVerified
   }
   
-  var attributionWebsiteActionTitle: String? {
+  @objc var attributionWebsiteActionTitle: String? {
     return data["websiteAction"] as? String
   }
   
-  var attributionWebsiteLink: String? {
+  @objc var attributionWebsiteLink: String? {
     return data["websiteLink"] as? String
   }
 
-  var attributionAppActionTitle: String? {
+  @objc var attributionAppActionTitle: String? {
     return data["appAction"] as? String
   }
 
-  var attributionAppLink: String? {
+  @objc var attributionAppLink: String? {
     return data["appLink"] as? String
   }
 
-  var attributionIsVerified: NSNumber? {
+  @objc var attributionIsVerified: NSNumber? {
     return data["isVerified"] as? NSNumber
   }
 }

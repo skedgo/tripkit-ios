@@ -21,7 +21,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (TKRegionInfo?) -> Void)
+  @objc public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (TKRegionInfo?) -> Void)
   {
     SVKServer.fetchArray(TKRegionInfo.self,
                          method: .POST, path: "regionInfo.json",
@@ -38,7 +38,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (TKParatransitInfo?) -> Void)
+  @objc public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (TKParatransitInfo?) -> Void)
   {
     fetchRegionInformation(forRegion: region) { info in
       completion(info?.paratransitInformation)
@@ -50,7 +50,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: @escaping ([ModeInfo]) -> Void)
+  @objc public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: @escaping ([ModeInfo]) -> Void)
   {
     fetchRegionInformation(forRegion: region) { info in
       completion(info?.transitModes ?? [])
@@ -86,7 +86,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TKAlert]) -> Void) {
+  @objc public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TKAlert]) -> Void) {
     
     SVKServer.fetchArray(TKSimpleAlert.self,
                          path: "alerts/transit.json",

@@ -33,10 +33,15 @@ class TKTestCase: XCTestCase {
     tripKitContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     tripKitContext.persistentStoreCoordinator = tripKitCoordinator
   }
+
+  func dataFromJSON(named name: String) -> Data? {
+    let filePath = bundle.path(forResource: name, ofType: "json")
+    return try? Data(contentsOf: URL(fileURLWithPath: filePath!))
+  }
+
   
   func contentFromJSON(named name: String) -> Any {
-    let filePath = bundle.path(forResource: name, ofType: "json")
-    let data = try? Data(contentsOf: URL(fileURLWithPath: filePath!))
+    let data = dataFromJSON(named: name)
     let object: Any? = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions(rawValue: 0))
     return object!
   }

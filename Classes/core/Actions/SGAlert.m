@@ -16,7 +16,7 @@
 
 @interface SGAlert ()
 
-@property (nonatomic, copy) void (^dismissBlock)();
+@property (nonatomic, copy) void (^dismissBlock)(void);
 
 @end
 
@@ -37,7 +37,7 @@
   [controller presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)showWithTitle:(NSString *)title
++ (void)showWithTitle:(NSString *)title
               message:(NSString *)message
          inController:(UIViewController *)controller
               dismiss:(void (^)(void))dismiss

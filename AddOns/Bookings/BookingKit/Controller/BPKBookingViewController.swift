@@ -12,7 +12,7 @@ extension BPKBookingViewController {
   
   // MARK: - Error alert
   
-  public func handle(_ error: Error) {
+  @objc public func handle(_ error: Error) {
     guard let serverKitError = error as? SVKError else {
       BPKAlert.present(in: self, title: nil, message: error.localizedDescription)
       return
@@ -52,12 +52,12 @@ extension BPKBookingViewController {
   
   // MARK: - Loading forms
   
-  public func load(_ url: URL, data: [String : AnyObject]? = nil) {
+  @objc public func load(_ url: URL, data: [String : AnyObject]? = nil) {
     let nextFormCtr = BPKBookingViewController(booking: url, postData: data)
     load(nextFormCtr)
   }
   
-  public func load(_ rawForm: [String : AnyObject]) {
+  @objc public func load(_ rawForm: [String : AnyObject]) {
     guard
       BPKForm.canBuild(fromRawObject: rawForm)
       else {
@@ -77,7 +77,7 @@ extension BPKBookingViewController {
     navigationController?.pushViewController(nextFormCtr, animated: true)
   }
   
-  public func replace(with url: URL) {
+  @objc public func replace(with url: URL) {
     guard var currentStack = navigationController?.viewControllers else {
       assertionFailure("Booking forms are expected to be presented inside a navigation controller")
       return

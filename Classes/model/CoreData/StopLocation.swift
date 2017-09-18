@@ -9,7 +9,7 @@
 import Foundation
 
 extension StopLocation {
-  public var region: SVKRegion? {
+  @objc public var region: SVKRegion? {
     if let name = regionName {
       return SVKRegionManager.shared.localRegion(named: name)
     } else {
@@ -17,7 +17,7 @@ extension StopLocation {
     }
   }
   
-  public var modeTitle: String {
+  @objc public var modeTitle: String {
     return stopModeInfo.alt
   }
   
@@ -80,7 +80,7 @@ extension StopLocation: STKStopAnnotation {
       return ""
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
       guard let last = lastTopVisit else { return nil }
       
       var output: String = self.title ?? ""

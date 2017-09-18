@@ -49,7 +49,7 @@ class TKWaypointRouterTest: TKTestCase {
     XCTAssertEqual(trainJson["modes"][0].string, "pt_pub")
     XCTAssertEqual(trainJson["serviceTripID"].string, service.code)
     XCTAssertEqual(trainJson["start"].string, waitara.stop.stopCode)
-    XCTAssertEqualWithAccuracy(trainJson["startTime"].doubleValue, waitara.departure!.timeIntervalSince1970, accuracy: 0.1)
+    XCTAssertEqual(trainJson["startTime"].doubleValue, waitara.departure!.timeIntervalSince1970, accuracy: 0.1)
   }
   
   func testGettingOffEarly() {
@@ -84,7 +84,7 @@ class TKWaypointRouterTest: TKTestCase {
     XCTAssertEqual(trainJson["modes"][0].string, "pt_pub")
     XCTAssertEqual(trainJson["serviceTripID"].string, service.code)
     XCTAssertEqual(trainJson["end"].string, milsons.stop.stopCode)
-    XCTAssertEqualWithAccuracy(trainJson["endTime"].doubleValue, milsons.arrival!.timeIntervalSince1970, accuracy: 0.1)
+    XCTAssertEqual(trainJson["endTime"].doubleValue, milsons.arrival!.timeIntervalSince1970, accuracy: 0.1)
   }
   
   func testAddingWalkAtStart() {
@@ -124,7 +124,7 @@ class TKWaypointRouterTest: TKTestCase {
     XCTAssertEqual(trainJson["modes"][0].string, "pt_pub")
     XCTAssertEqual(trainJson["serviceTripID"].string, service.code)
     XCTAssertEqual(trainJson["start"].string, kuring.stop.stopCode)
-    XCTAssertEqualWithAccuracy(trainJson["startTime"].doubleValue, kuring.departure!.timeIntervalSince1970, accuracy: 0.1)
+    XCTAssertEqual(trainJson["startTime"].doubleValue, kuring.departure!.timeIntervalSince1970, accuracy: 0.1)
   }
   
   func testAddingWalkAtEnd() {
@@ -164,7 +164,7 @@ class TKWaypointRouterTest: TKTestCase {
     XCTAssertEqual(trainJson["modes"][0].string, "pt_pub")
     XCTAssertEqual(trainJson["serviceTripID"].string, service.code)
     XCTAssertEqual(trainJson["end"].string, asquith.stop.stopCode)
-    XCTAssertEqualWithAccuracy(trainJson["endTime"].doubleValue, asquith.arrival!.timeIntervalSince1970, accuracy: 0.1)
+    XCTAssertEqual(trainJson["endTime"].doubleValue, asquith.arrival!.timeIntervalSince1970, accuracy: 0.1)
   }
 
 //  func testChangeTripWithTwoService() {

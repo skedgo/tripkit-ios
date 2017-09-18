@@ -10,7 +10,7 @@ import Foundation
 
 extension Trip {
   
-  public var primaryCostType: STKTripCostType {
+  @objc public var primaryCostType: STKTripCostType {
     if departureTimeIsFixed {
       return .time
     } else if isExpensive {
@@ -61,7 +61,7 @@ extension Trip {
 extension Trip {
   
   /// If the trip uses a personal vehicle (non shared) which the user might want to assign to one of their vehicles
-  public var usedPrivateVehicleType: STKVehicleType {
+  @objc public var usedPrivateVehicleType: STKVehicleType {
     for segment in segments() {
       let vehicleType = segment.privateVehicleType
       if vehicleType != .none {
@@ -72,7 +72,7 @@ extension Trip {
   }
   
   /// Segments of this trip which do use a private (or shared) vehicle, i.e., those who return something from `usedVehicle`.
-  public var vehicleSegments: Set<TKSegment> {
+  @objc public var vehicleSegments: Set<TKSegment> {
     return segments().reduce(mutating: Set()) { acc, segment in
       if !segment.isStationary() && segment.usesVehicle {
         acc.insert(segment)
@@ -81,7 +81,7 @@ extension Trip {
   }
   
   /// - Parameter vehicle: The vehicle to assign this trip to. `nil` to reset to a generic vehicle.
-  public func assignVehicle(_ vehicle: STKVehicular?) {
+  @objc public func assignVehicle(_ vehicle: STKVehicular?) {
     segments().forEach { $0.assignVehicle(vehicle) }
   }
   
@@ -92,7 +92,7 @@ extension Trip {
 
 extension Trip: STKTrip {
   
-  public func mainSegment() -> STKTripSegment {
+  @objc public func mainSegment() -> STKTripSegment {
     let hash = mainSegmentHashCode.intValue
     if hash > 0 {
       for segment in segments() where segment.templateHashCode() == hash {
@@ -142,7 +142,7 @@ extension Trip: STKTrip {
       return ""
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
       guard activityType == .mail else { return nil }
       
       return constructPlainText()

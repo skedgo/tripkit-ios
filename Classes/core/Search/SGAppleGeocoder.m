@@ -204,22 +204,7 @@
                    forSearchTerm:(NSString *)inputString
                       nearRegion:(MKCoordinateRegion)coordinateRegion
 {
-  NSString *subtitle = [annotation respondsToSelector:@selector(subtitle)] ? [annotation subtitle] : nil;
-  NSUInteger titleScore = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:inputString
-                                                                               candidate:annotation.title];
-  NSUInteger addressScore = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:inputString
-                                                                                 candidate:subtitle];
-  
-  NSUInteger stringScore = MAX(titleScore, addressScore);
-  
-  NSUInteger distanceScore = [SGAutocompletionResult scoreBasedOnDistanceFromCoordinate:[annotation coordinate]
-                                                                               toRegion:coordinateRegion
-                                                                           longDistance:NO];
-  
-  NSUInteger rawScore = (stringScore * 3 + distanceScore) / 4;
-  return [SGAutocompletionResult rangedScoreForScore:rawScore
-                                      betweenMinimum:15
-                                          andMaximum:75];
+  return [TKGeocodingResultScorer calculateScoreForAnnotation:annotation searchTerm:inputString nearRegion:coordinateRegion allowLongDistance:NO minimum:15 maximum:75];
 }
 
 - (void)fetchLocalSearchObjectsForString:(NSString *)inputString

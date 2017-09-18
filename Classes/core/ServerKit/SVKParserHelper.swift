@@ -67,7 +67,7 @@ public class SVKParserHelper: NSObject {
     return try? SGKNamedCoordinate(object: dictionary)
   }
   
-  public class func modeCoordinate(for dictionary: [AnyHashable: Any]) -> STKModeCoordinate? {
+  @objc public class func modeCoordinate(for dictionary: [AnyHashable: Any]) -> STKModeCoordinate? {
     
     if let stop = try? STKStopCoordinate(object: dictionary) {
       return stop
@@ -76,7 +76,7 @@ public class SVKParserHelper: NSObject {
     }
   }
   
-  public class func stopCoordinate(for dictionary: [AnyHashable: Any]) -> STKStopCoordinate? {
+  @objc public class func stopCoordinate(for dictionary: [AnyHashable: Any]) -> STKStopCoordinate? {
     return try? STKStopCoordinate(object: dictionary)
   }
   
@@ -94,7 +94,7 @@ public class SVKParserHelper: NSObject {
 
 extension SGKColor : ValueType {
   
-  public static func value(from object: Any) throws -> SGKColor {
+  @objc public static func value(from object: Any) throws -> SGKColor {
     guard
       let dict = object as? [String: CGFloat],
       let red = dict["red"] ,

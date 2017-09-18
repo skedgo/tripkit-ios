@@ -334,7 +334,7 @@
 
 #pragma mark - Private: Forms
 
-- (void)requestForm:(void(^)())completion
+- (void)requestForm:(void(^)(void))completion
 {
   __weak typeof(self) weakSelf = self;
   
@@ -477,7 +477,7 @@
     self.nextBookingURL = url;
     
     __weak typeof(self) weakSelf = self;
-    void (^actionBlock)() = ^{
+    void (^actionBlock)(void) = ^{
       __strong typeof(weakSelf) strongSelf = weakSelf;
       if (strongSelf) {
         [strongSelf nextButtonPressed:nil];

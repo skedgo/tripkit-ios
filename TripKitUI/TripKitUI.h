@@ -44,5 +44,6 @@
 
 #import "VehicleView.h"
 #import "CircleAnnotationView.h"
+#import "SGPulsingAnnotationView.h"
 
 #endif /* TripKitUI_h */

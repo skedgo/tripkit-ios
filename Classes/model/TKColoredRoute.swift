@@ -10,12 +10,12 @@ import Foundation
 
 public class TKColoredRoute: NSObject {
   
-  public let path: [MKAnnotation]
+  @objc public let path: [MKAnnotation]
   public let routeColor: SGKColor?
   public let routeDashPattern: [NSNumber]?
   public let routeIsTravelled: Bool
   
-  public init(path: [MKAnnotation], color: SGKColor?, dashPattern: [NSNumber]?, isTravelled: Bool) {
+  @objc public init(path: [MKAnnotation], color: SGKColor?, dashPattern: [NSNumber]?, isTravelled: Bool) {
     self.path = path
     routeColor = color
     routeDashPattern = dashPattern

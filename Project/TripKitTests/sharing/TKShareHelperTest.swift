@@ -40,10 +40,10 @@ class TKShareHelperTest: XCTestCase {
     XCTAssertNil(result.start)
     XCTAssertTrue(result.end.isValid)
     XCTAssertNil(result.title)
-    XCTAssertEqualWithAccuracy(result.end.latitude,  -33.94501, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(result.end.longitude, 151.25807, accuracy: 0.001)
+    XCTAssertEqual(result.end.latitude,  -33.94501, accuracy: 0.001)
+    XCTAssertEqual(result.end.longitude, 151.25807, accuracy: 0.001)
     if case .leaveAfter(let time) = result.timeType {
-      XCTAssertEqualWithAccuracy(time.timeIntervalSince1970, 1385535734, accuracy: 1)
+      XCTAssertEqual(time.timeIntervalSince1970, 1385535734, accuracy: 1)
     } else {
       XCTFail()
     }
@@ -58,11 +58,11 @@ class TKShareHelperTest: XCTestCase {
     
     XCTAssertNil(result.start)
     XCTAssertTrue(result.end.isValid)
-    XCTAssertEqualWithAccuracy(result.end.latitude,  -33.94501, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(result.end.longitude, 151.25807, accuracy: 0.001)
+    XCTAssertEqual(result.end.latitude,  -33.94501, accuracy: 0.001)
+    XCTAssertEqual(result.end.longitude, 151.25807, accuracy: 0.001)
     
     if case .arriveBy(let time) = result.timeType {
-      XCTAssertEqualWithAccuracy(time.timeIntervalSince1970, 1385535734, accuracy: 1)
+      XCTAssertEqual(time.timeIntervalSince1970, 1385535734, accuracy: 1)
     } else {
       XCTFail()
     }

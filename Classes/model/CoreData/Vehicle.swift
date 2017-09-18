@@ -52,15 +52,15 @@ extension Vehicle {
     return wifi?.boolValue
   }
   
-  public var serviceNumber: String? {
+  @objc public var serviceNumber: String? {
     return anyService?.number
   }
   
-  public var serviceColor: SGKColor? {
+  @objc public var serviceColor: SGKColor? {
     return occupancy?.color
   }
   
-  public var ageFactor: Double {
+  @objc public var ageFactor: Double {
     guard let age = lastUpdate?.timeIntervalSinceNow, age < -120 else { return 0 }
     
     // vehicle is more than 2 minutes old. start fading it out
@@ -89,7 +89,7 @@ extension Vehicle : MKAnnotation {
     return CLLocationCoordinate2D(latitude: lat, longitude: lng)
   }
   
-  public func setCoordinate(_ newValue: CLLocationCoordinate2D) {
+  @objc public func setCoordinate(_ newValue: CLLocationCoordinate2D) {
     latitude = NSNumber(value: newValue.latitude)
     longitude = NSNumber(value: newValue.longitude)
   }

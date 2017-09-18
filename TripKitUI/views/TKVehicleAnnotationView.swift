@@ -10,9 +10,8 @@ import Foundation
 
 import RxSwift
 import MapKit
-import SGPulsingAnnotationView
 
-public class TKVehicleAnnotationView: SVPulsingAnnotationView {
+public class TKVehicleAnnotationView: SGPulsingAnnotationView {
   
   private weak var vehicleShape: VehicleView?
   private weak var vehicleImageView: UIImageView?
@@ -32,7 +31,7 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
   
   // MARK: -
   
-  public init(with annotation: MKAnnotation?, reuseIdentifier: String?) {
+  @objc public init(with annotation: MKAnnotation?, reuseIdentifier: String?) {
     super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
     updated(with: annotation)
     
@@ -58,7 +57,7 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
   
   // MARK: - UI Update
   
-  public func aged(by factor: CGFloat) {
+  @objc public func aged(by factor: CGFloat) {
     wrapper.alpha = 1 - factor
     
     if factor > 0.9 {
@@ -149,7 +148,7 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
   
   // MARK: - Orientation.
   
-  public func rotateVehicle(bearingAngle: CLLocationDirection) {
+  @objc public func rotateVehicle(bearingAngle: CLLocationDirection) {
     vehicleShape?.setNeedsDisplay()
     vehicleImageView?.setNeedsDisplay()
     
@@ -164,7 +163,7 @@ public class TKVehicleAnnotationView: SVPulsingAnnotationView {
     }
   }
   
-  public func rotateVehicle(headingAngle: CLLocationDirection, bearingAngle: CLLocationDirection) {
+  @objc public func rotateVehicle(headingAngle: CLLocationDirection, bearingAngle: CLLocationDirection) {
     rotateVehicle(bearingAngle: bearingAngle - headingAngle)
   }
   

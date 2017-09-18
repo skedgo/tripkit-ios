@@ -10,7 +10,7 @@ import Foundation
 
 extension SGKNamedCoordinate {
   
-  public var regions: Set<SVKRegion> {
+  @objc public var regions: Set<SVKRegion> {
     return SVKRegionManager.shared.localRegions(for: self.coordinate)
   }
   

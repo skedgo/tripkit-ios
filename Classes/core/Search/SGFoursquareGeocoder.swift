@@ -10,7 +10,7 @@ import Foundation
 
 extension SGFoursquareGeocoder {
   
-  public func hit(_ endpoint: String, paras: [String: Any], completion: @escaping ([String: Any]?, Error?) -> Void) {
+  @objc public func hit(_ endpoint: String, paras: [String: Any], completion: @escaping ([String: Any]?, Error?) -> Void) {
     
     let session = URLSession.shared
     

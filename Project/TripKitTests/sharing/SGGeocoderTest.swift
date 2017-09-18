@@ -87,23 +87,28 @@ class SGGeocoderTest: XCTestCase {
     geocoderPasses(geocoder, input: "Sydney International Airport", near: sydney, allWithin: 10_000, of: SYD)
   }
   
-  
   //MARK: - Private helpers
   
   fileprivate func aggregateGeocoder() -> SGAggregateGeocoder {
-    var geocoders = [SGAppleGeocoder(), SGBuzzGeocoder()]
+    var geocoders: [SGGeocoder] = [SGAppleGeocoder(), SGBuzzGeocoder()]
     
     let env = ProcessInfo.processInfo.environment
-    if let clientID = env["FOURSQUARE_CLIENT_ID"],
-       let clientSecret = env["FOURSQUARE_CLIENT_SECRET"]
-       , !clientID.isEmpty && !clientSecret.isEmpty {
+    if let clientID = env["FOURSQUARE_CLIENT_ID"], !clientID.isEmpty,
+       let clientSecret = env["FOURSQUARE_CLIENT_SECRET"], !clientSecret.isEmpty {
       let foursquare = SGFoursquareGeocoder(
         clientID: clientID,
         clientSecret: clientSecret
       )
       geocoders.append(foursquare)
     } else {
-      XCTFail("Could not construct Foursquare. Check environment variables.")
+      XCTFail("Could not construct Foursquare geocoder. Check environment variables.")
+    }
+
+    if let apiKey = env["MAPZEN_API_KEY"], !apiKey.isEmpty {
+      let mapZen = TKMapZenGeocoder(apiKey: apiKey)
+      geocoders.append(mapZen)
+    } else {
+      XCTFail("Could not construct MapZen geocoder. Check environment variables.")
     }
     
     return SGAggregateGeocoder(geocoders: geocoders)

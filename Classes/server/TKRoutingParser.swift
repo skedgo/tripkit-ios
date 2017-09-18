@@ -11,7 +11,7 @@ import Foundation
 
 
 extension TKRoutingParser {
-  public static func matchingSegment(in trip: Trip, order: TKSegmentOrdering, first: Bool) -> TKSegment {
+  @objc public static func matchingSegment(in trip: Trip, order: TKSegmentOrdering, first: Bool) -> TKSegment {
     
     var match: TKSegment? = nil
     for segment in (trip as STKTrip).segments(with: .inDetails) {
@@ -29,7 +29,7 @@ extension TKRoutingParser {
   ///
   /// Typically used on requests that were created as part of a previous call to
   /// `parseAndAddResult`. All parameters except `request` are optional.
-  public static func populate(_ request: TripRequest, start: MKAnnotation?, end: MKAnnotation?, leaveAfter: Date?, arriveBy: Date?) -> Bool {
+  @objc public static func populate(_ request: TripRequest, start: MKAnnotation?, end: MKAnnotation?, leaveAfter: Date?, arriveBy: Date?) -> Bool {
     
     guard let trip = request.trips.first else {
       return false

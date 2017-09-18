@@ -10,11 +10,11 @@ import UIKit
 
 extension AKLabelCell {
   
-  public func shouldCenterTitle() -> Bool {
+  @objc public func shouldCenterTitle() -> Bool {
     return self.primaryLabel?.text != nil && self.secondaryLabel?.text == nil;
   }
   
-  public func adjustLayoutForCenteredTitle() {
+  @objc public func adjustLayoutForCenteredTitle() {
     self.primaryLabel?.textAlignment = shouldCenterTitle() ? .center : .left
   }
   

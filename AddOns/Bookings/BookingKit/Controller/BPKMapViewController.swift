@@ -11,9 +11,9 @@ import MapKit
 
 public class BPKMapViewController: UIViewController {
   
-  weak var mapView: MKMapView!
+  @objc weak var mapView: MKMapView!
   
-  public var annotation: MKAnnotation? {
+  @objc public var annotation: MKAnnotation? {
     didSet {
       showAnnotation(true)
     }

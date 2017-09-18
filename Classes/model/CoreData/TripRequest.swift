@@ -12,7 +12,7 @@ import Foundation
 
 extension TripRequest {
   
-  public var trips: Set<Trip> {
+  @objc public var trips: Set<Trip> {
     guard let tripGroups = self.tripGroups else { return Set() }
     
     return tripGroups.reduce(mutating: Set()) { acc, group in
@@ -23,11 +23,11 @@ extension TripRequest {
     }
   }
   
-  public var type: SGTimeType {
+  @objc public var type: SGTimeType {
     return SGTimeType(rawValue: self.timeType.intValue) ?? .leaveASAP
   }
   
-  public var time: Date? {
+  @objc public var time: Date? {
     switch type {
     case .none, .leaveASAP: return Date()
     case .leaveAfter: return departureTime
@@ -61,7 +61,7 @@ extension TripRequest {
     }
   }
   
-  public var timeString: String {
+  @objc public var timeString: String {
     let timeZone = type == .arriveBefore ? arrivalTimeZone() : departureTimeZone()
     return TripRequest.timeString(for: time, timeType: type, in: timeZone)
   }
@@ -146,7 +146,7 @@ extension TripRequest {
     return string
   }
   
-  public func insertCopyWithoutTrips() -> TripRequest {
+  @objc public func insertCopyWithoutTrips() -> TripRequest {
     guard let context = self.managedObjectContext else {
       assertionFailure()
       return self
@@ -167,7 +167,8 @@ extension TripRequest {
 
 extension TripRequest {
  
-  public func determineRegions() -> [SVKRegion] {
+  @objc
+  public func _determineRegions() -> [SVKRegion] {
     let start = self.fromLocation.coordinate
     let end = self.toLocation.coordinate
     return SVKRegionManager.shared.localRegions(start: start, end: end)
@@ -180,7 +181,7 @@ extension TripRequest {
   /// - SeeAlso: `sortDescriptorsAccordingToSelectedOrder`
   ///
   /// - Returns: Visible trip for each trip group sorted by user's preferences
-  public func sortedVisibleTrips() -> [Trip] {
+  @objc public func sortedVisibleTrips() -> [Trip] {
     guard let set = self.tripGroups as NSSet? else { return [] }
     
     let sorters = sortDescriptorsAccordingToSelectedOrder()
@@ -194,12 +195,12 @@ extension TripRequest {
   }
   
   
-  public func sortDescriptorsAccordingToSelectedOrder() -> [NSSortDescriptor] {
+  @objc public func sortDescriptorsAccordingToSelectedOrder() -> [NSSortDescriptor] {
     return sortDescriptors(withPrimary: TKSettings.sortOrder)
   }
   
   
-  public func sortDescriptors(withPrimary primary: STKTripCostType) -> [NSSortDescriptor] {
+  @objc public func sortDescriptors(withPrimary primary: STKTripCostType) -> [NSSortDescriptor] {
     
     let primaryTimeSorter = TripRequest.timeSorter(for: type)
     let visibilitySorter = NSSortDescriptor(key: "visibilityRaw", ascending: true)

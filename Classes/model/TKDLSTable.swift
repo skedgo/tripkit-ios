@@ -14,14 +14,14 @@ import CoreData
 // In Swift-land this would be a struct
 public class TKDLSTable: NSObject {
   
-  public let startStopCode: String
-  public let endStopCode: String
-  public let previousPairs: Set<AnyHashable>?
-  public let startRegion: SVKRegion
-  public let endRegion: SVKRegion
-  public let tripKitContext: NSManagedObjectContext
+  @objc public let startStopCode: String
+  @objc public let endStopCode: String
+  @objc public let previousPairs: Set<AnyHashable>?
+  @objc public let startRegion: SVKRegion
+  @objc public let endRegion: SVKRegion
+  @objc public let tripKitContext: NSManagedObjectContext
   
-  public init?(for segment: TKSegment) {
+  @objc public init?(for segment: TKSegment) {
     guard
       let request = segment.trip?.request,
       let moc = request.managedObjectContext,

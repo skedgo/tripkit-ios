@@ -63,13 +63,13 @@ public class TKOccupancyView: UIView {
     self.icon = icon
     
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightSemibold)
+    label.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     addSubview(label)
     self.label = label
     
     let height = icon.heightAnchor.constraint(equalToConstant: 16)
-    height.priority = 999
+    height.priority = .required
     height.isActive = true
     
     icon.widthAnchor.constraint(equalToConstant: 16).isActive = true

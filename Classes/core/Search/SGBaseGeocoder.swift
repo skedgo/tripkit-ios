@@ -8,14 +8,14 @@
 
 extension SGBaseGeocoder {
 
-  public class func filteredMergedAndPruned(_ input:[SGKNamedCoordinate], limitedToRegion coordinateRegion: MKCoordinateRegion, withMaximum max: Int) -> [SGKNamedCoordinate]
+  @objc public class func filteredMergedAndPruned(_ input:[SGKNamedCoordinate], limitedToRegion coordinateRegion: MKCoordinateRegion, withMaximum max: Int) -> [SGKNamedCoordinate]
   {
     let filtered = input.limitedToRegion(region: coordinateRegion)
     let deduplicated  = filtered.deduplicated()
     return deduplicated.pruned(maximum: max)
   }
   
-  public class func filteredAndPruned(_ input:[SGAutocompletionResult], limitedToRegion coordinateRegion: MKCoordinateRegion, withMaximum max: Int, coordinateForElement handler: (SGAutocompletionResult) -> CLLocationCoordinate2D) -> [SGAutocompletionResult]
+  @objc public class func filteredAndPruned(_ input:[SGAutocompletionResult], limitedToRegion coordinateRegion: MKCoordinateRegion, withMaximum max: Int, coordinateForElement handler: (SGAutocompletionResult) -> CLLocationCoordinate2D) -> [SGAutocompletionResult]
   {
     let filtered = input.limitedToRegion(coordinateRegion, coordinateForElement: handler)
     return filtered.pruned(maximum: max) { $0.score }

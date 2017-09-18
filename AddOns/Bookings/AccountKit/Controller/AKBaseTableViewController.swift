@@ -10,10 +10,12 @@ import Foundation
 
 extension AKBaseTableViewController {
   
+  @objc
   public func configureTextFieldCell(_ textFieldCell: AKTextFieldCell, withItem item: AMKItem) {
     textFieldCell.configure(for: item)
   }
   
+  @objc
   public func configureLabelCell(_ labelCell: AKLabelCell, withItem item: AMKItem) {
     labelCell.configure(for: item)
     labelCell.accessoryType = item.isReadOnly || (item.primaryText != nil && item.secondaryText == nil) ? .none : .disclosureIndicator;

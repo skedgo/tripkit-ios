@@ -18,6 +18,7 @@ public enum ZoomMode: Int {
 
 extension TripMapManager {
 
+  @objc
   public func show(_ trip: Trip, zoom: ZoomMode, animated: Bool = false) {
     guard let mapView = mapView() else { return }
     
@@ -46,6 +47,7 @@ extension TripMapManager {
     refreshRoute(animated: animated, forceRebuild: true, zoom: zoomMode)
   }
   
+  @objc
   public func refreshRoute(animated: Bool, forceRebuild force: Bool, zoom: ZoomMode) {
     guard let mapView = mapView(), let trip = self.trip else { return }
     
@@ -120,7 +122,7 @@ extension TripMapManager {
     }
     
     if zoomTo.count > 0 {
-      mapView.zoom(to: zoomTo, edgePadding: (delegate() as? ASMapManagerDelegate)?.mapManagerEdgePadding(self) ?? UIEdgeInsets.zero, animated: animated)
+      mapView.zoom(to: zoomTo, edgePadding: delegate()?.mapManagerEdgePadding(self) ?? UIEdgeInsets.zero, animated: animated)
     }
     
     self.alerts = alerts

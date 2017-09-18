@@ -1,0 +1,389 @@
+{
+  "geocoding": {
+    "version": "0.2",
+    "attribution": "http://pelias.mapzen.com/v1/attribution",
+    "query": {
+      "text": "nuremberg",
+      "parser": "addressit",
+      "tokens": [
+                 "nuremberg"
+                 ],
+      "size": 10,
+      "private": false,
+      "focus.point.lat": 40.725925340669626,
+      "focus.point.lon": -73.98073196411134,
+      "lang": {
+        "name": "English",
+        "iso6391": "en",
+        "iso6393": "eng",
+        "defaulted": false
+      }
+    },
+    "engine": {
+      "name": "Pelias",
+      "author": "Mapzen",
+      "version": "1.0"
+    },
+    "timestamp": 1505232719417
+  },
+  "type": "FeatureCollection",
+  "features": [
+               {
+               "type": "Feature",
+               "geometry": {
+               "type": "Point",
+               "coordinates": [
+                               -76.16105,
+                               40.93286
+                               ]
+               },
+               "properties": {
+               "id": "5204007",
+               "gid": "geonames:venue:5204007",
+               "layer": "venue",
+               "source": "geonames",
+               "source_id": "5204007",
+               "name": "Nuremberg Cemetery",
+               "distance": 185.339,
+               "accuracy": "point",
+               "country": "United States",
+               "country_gid": "whosonfirst:country:85633793",
+               "country_a": "USA",
+               "region": "Pennsylvania",
+               "region_gid": "whosonfirst:region:85688481",
+               "region_a": "PA",
+               "county": "Schuylkill County",
+               "county_gid": "whosonfirst:county:102081271",
+               "localadmin": "North Union",
+               "localadmin_gid": "whosonfirst:localadmin:404487241",
+               "label": "Nuremberg Cemetery, North Union, PA, USA"
+               }
+               },
+               {
+               "type": "Feature",
+               "geometry": {
+               "type": "Point",
+               "coordinates": [
+                               -76.16324,
+                               40.94148
+                               ]
+               },
+               "properties": {
+               "id": "8497079",
+               "gid": "geonames:venue:8497079",
+               "layer": "venue",
+               "source": "geonames",
+               "source_id": "8497079",
+               "name": "Nuremberg Community Ambulance",
+               "distance": 185.631,
+               "accuracy": "point",
+               "country": "United States",
+               "country_gid": "whosonfirst:country:85633793",
+               "country_a": "USA",
+               "region": "Pennsylvania",
+               "region_gid": "whosonfirst:region:85688481",
+               "region_a": "PA",
+               "county": "Luzerne County",
+               "county_gid": "whosonfirst:county:102081351",
+               "localadmin": "Black Creek",
+               "localadmin_gid": "whosonfirst:localadmin:404486099",
+               "locality": "Nuremberg",
+               "locality_gid": "whosonfirst:locality:101719295",
+               "neighbourhood": "Gowen",
+               "neighbourhood_gid": "whosonfirst:neighbourhood:420538945",
+               "label": "Nuremberg Community Ambulance, Nuremberg, PA, USA"
+               }
+               },
+               {
+               "type": "Feature",
+               "geometry": {
+               "type": "Point",
+               "coordinates": [
+                               -76.17048,
+                               40.93843
+                               ]
+               },
+               "properties": {
+               "id": "11388594",
+               "gid": "geonames:venue:11388594",
+               "layer": "venue",
+               "source": "geonames",
+               "source_id": "11388594",
+               "name": "Nuremberg Post Office",
+               "distance": 186.198,
+               "accuracy": "point",
+               "country": "United States",
+               "country_gid": "whosonfirst:country:85633793",
+               "country_a": "USA",
+               "region": "Pennsylvania",
+               "region_gid": "whosonfirst:region:85688481",
+               "region_a": "PA",
+               "county": "Schuylkill County",
+               "county_gid": "whosonfirst:county:102081271",
+               "localadmin": "North Union",
+               "localadmin_gid": "whosonfirst:localadmin:404487241",
+               "locality": "Nuremberg",
+               "locality_gid": "whosonfirst:locality:101719295",
+               "label": "Nuremberg Post Office, Nuremberg, PA, USA"
+               }
+               },
+               {
+               "type": "Feature",
+               "geometry": {
+               "type": "Point",
+               "coordinates": [
+                               -76.17012,
+                               40.937575
+                               ]
+               },
+               "properties": {
+               "id": "101719295",
+               "gid": "whosonfirst:locality:101719295",
+               "layer": "locality",
+               "source": "whosonfirst",
+               "source_id": "101719295",
+               "name": "Nuremberg",
+               "distance": 186.157,
+               "accuracy": "centroid",
+               "country": "United States",
+               "country_gid": "whosonfirst:country:85633793",
+               "country_a": "USA",
+               "region": "Pennsylvania",
+               "region_gid": "whosonfirst:region:85688481",
+               "region_a": "PA",
+               "county": "Schuylkill County",
+               "county_gid": "whosonfirst:county:102081271",
+               "localadmin": "North Union",
+               "localadmin_gid": "whosonfirst:localadmin:404487241",
+               "locality": "Nuremberg",
+               "locality_gid": "whosonfirst:locality:101719295",
+               "label": "Nuremberg, PA, USA"
+               },
+               "bbox": [
+                        -76.17769,
+                        40.927871,
+                        -76.157653,
+                        40.943879
+                        ]
+               },
+               {
+               "type": "Feature",
+               "geometry": {
+               "type": "Point",
+               "coordinates": [
+                               11.06963,
+                               49.44846
+                               ]
+               },
+               "properties": {
+               "id": "9252639",
+               "gid": "geonames:venue:9252639",
+               "layer": "venue",
+               "source": "geonames",
+               "source_id": "9252639",
+               "name": "Holiday Inn Nuremberg City Centre",
+               "distance": 6403.804,
+               "accuracy": "point",
+               "country": "Germany",
+               "country_gid": "whosonfirst:country:85633111",
+               "country_a": "DEU",
+               "region": "Bayern",
+               "region_gid": "whosonfirst:region:85682571",
+               "macrocounty": "Mittelfranken",
+               "macrocounty_gid": "whosonfirst:macrocounty:404227565",
+               "county": "Nürnberg",
+               "county_gid": "whosonfirst:county:102063461",
+               "locality": "Nürnberg",
+               "locality_gid": "whosonfirst:locality:101748543",
+               "label": "Holiday Inn Nuremberg City Centre, Nürnberg, Germany"
+               }
+               },
+               {
+               "type": "Feature",
+               "geometry": {
+               "type": "Point",
+               "coordinates": [
+                               -49.345993,
+                               -28.690672
+                               ]
+               },
+               "properties": {
+               "id": "br/sc/statewide:9fd848a430a4d9af",
+               "gid": "openaddresses:address:br/sc/statewide:9fd848a430a4d9af",
+               "layer": "address",
+               "source": "openaddresses",
+               "source_id": "br/sc/statewide:9fd848a430a4d9af",
+               "name": "120 Rua Conselheiro Oliverio Nuremberg",
+               "housenumber": "120",
+               "street": "Rua Conselheiro Oliverio Nuremberg",
+               "postalcode": "88815-215",
+               "distance": 8095.184,
+               "accuracy": "point",
+               "country": "Brazil",
+               "country_gid": "whosonfirst:country:85633009",
+               "country_a": "BRA",
+               "region": "Santa Catarina",
+               "region_gid": "whosonfirst:region:85682021",
+               "region_a": "SC",
+               "county": "CRICIÃMA",
+               "county_gid": "whosonfirst:county:102060355",
+               "localadmin": "Criciúma",
+               "localadmin_gid": "whosonfirst:localadmin:404565349",
+               "locality": "Criciúma",
+               "locality_gid": "whosonfirst:locality:101957909",
+               "label": "120 Rua Conselheiro Oliverio Nuremberg, Criciúma, Brazil"
+               }
+               },
+               {
+               "type": "Feature",
+               "geometry": {
+               "type": "Point",
+               "coordinates": [
+                               -49.345993,
+                               -28.690672
+                               ]
+               },
+               "properties": {
+               "id": "br/sc/statewide:f5adfbe3ec1a2ab8",
+               "gid": "openaddresses:address:br/sc/statewide:f5adfbe3ec1a2ab8",
+               "layer": "address",
+               "source": "openaddresses",
+               "source_id": "br/sc/statewide:f5adfbe3ec1a2ab8",
+               "name": "134 Rua Conselheiro Oliverio Nuremberg",
+               "housenumber": "134",
+               "street": "Rua Conselheiro Oliverio Nuremberg",
+               "postalcode": "88815-215",
+               "distance": 8095.184,
+               "accuracy": "point",
+               "country": "Brazil",
+               "country_gid": "whosonfirst:country:85633009",
+               "country_a": "BRA",
+               "region": "Santa Catarina",
+               "region_gid": "whosonfirst:region:85682021",
+               "region_a": "SC",
+               "county": "CRICIÃMA",
+               "county_gid": "whosonfirst:county:102060355",
+               "localadmin": "Criciúma",
+               "localadmin_gid": "whosonfirst:localadmin:404565349",
+               "locality": "Criciúma",
+               "locality_gid": "whosonfirst:locality:101957909",
+               "label": "134 Rua Conselheiro Oliverio Nuremberg, Criciúma, Brazil"
+               }
+               },
+               {
+               "type": "Feature",
+               "geometry": {
+               "type": "Point",
+               "coordinates": [
+                               -49.345901,
+                               -28.690669
+                               ]
+               },
+               "properties": {
+               "id": "br/sc/statewide:4e6e8ff82c74ec85",
+               "gid": "openaddresses:address:br/sc/statewide:4e6e8ff82c74ec85",
+               "layer": "address",
+               "source": "openaddresses",
+               "source_id": "br/sc/statewide:4e6e8ff82c74ec85",
+               "name": "453 Rua Conselheiro Oliverio Nuremberg",
+               "housenumber": "453",
+               "street": "Rua Conselheiro Oliverio Nuremberg",
+               "postalcode": "88815-215",
+               "distance": 8095.187,
+               "accuracy": "point",
+               "country": "Brazil",
+               "country_gid": "whosonfirst:country:85633009",
+               "country_a": "BRA",
+               "region": "Santa Catarina",
+               "region_gid": "whosonfirst:region:85682021",
+               "region_a": "SC",
+               "county": "CRICIÃMA",
+               "county_gid": "whosonfirst:county:102060355",
+               "localadmin": "Criciúma",
+               "localadmin_gid": "whosonfirst:localadmin:404565349",
+               "locality": "Criciúma",
+               "locality_gid": "whosonfirst:locality:101957909",
+               "label": "453 Rua Conselheiro Oliverio Nuremberg, Criciúma, Brazil"
+               }
+               },
+               {
+               "type": "Feature",
+               "geometry": {
+               "type": "Point",
+               "coordinates": [
+                               -49.281733,
+                               -25.52667
+                               ]
+               },
+               "properties": {
+               "id": "br/pr/statewide:59ba7e77209f930e",
+               "gid": "openaddresses:address:br/pr/statewide:59ba7e77209f930e",
+               "layer": "address",
+               "source": "openaddresses",
+               "source_id": "br/pr/statewide:59ba7e77209f930e",
+               "name": "122 Rua Bernardo Nuremberg",
+               "housenumber": "122",
+               "street": "Rua Bernardo Nuremberg",
+               "postalcode": "81825-170",
+               "distance": 7766.992,
+               "accuracy": "point",
+               "country": "Brazil",
+               "country_gid": "whosonfirst:country:85633009",
+               "country_a": "BRA",
+               "region": "PARANÁ",
+               "region_gid": "whosonfirst:region:85681983",
+               "region_a": "PR",
+               "county": "Curitiba",
+               "county_gid": "whosonfirst:county:102057617",
+               "localadmin": "Curitiba",
+               "localadmin_gid": "whosonfirst:localadmin:404561111",
+               "locality": "Curitiba",
+               "locality_gid": "whosonfirst:locality:101957995",
+               "neighbourhood": "Alto Boqueirão",
+               "neighbourhood_gid": "whosonfirst:neighbourhood:85766433",
+               "label": "122 Rua Bernardo Nuremberg, Curitiba, Brazil"
+               }
+               },
+               {
+               "type": "Feature",
+               "geometry": {
+               "type": "Point",
+               "coordinates": [
+                               -70.640344,
+                               -33.497238
+                               ]
+               },
+               "properties": {
+               "id": "cl/countrywide:ca36717508f03c29",
+               "gid": "openaddresses:address:cl/countrywide:ca36717508f03c29",
+               "layer": "address",
+               "source": "openaddresses",
+               "source_id": "cl/countrywide:ca36717508f03c29",
+               "name": "532 Nuremberg",
+               "housenumber": "532",
+               "street": "Nuremberg",
+               "distance": 8225.193,
+               "accuracy": "point",
+               "country": "Chile",
+               "country_gid": "whosonfirst:country:85633057",
+               "country_a": "CHL",
+               "region": "Metropolitana",
+               "region_gid": "whosonfirst:region:85682207",
+               "county": "Santiago",
+               "county_gid": "whosonfirst:county:102063117",
+               "locality": "Santiago",
+               "locality_gid": "whosonfirst:locality:102016915",
+               "locality_a": "Stgo.",
+               "neighbourhood": "La Legua de Macul",
+               "neighbourhood_gid": "whosonfirst:neighbourhood:85764419",
+               "label": "532 Nuremberg, Santiago, Chile"
+               }
+               }
+               ],
+  "bbox": [
+           -76.17769,
+           -33.497238,
+           11.06963,
+           49.44846
+           ]
+}

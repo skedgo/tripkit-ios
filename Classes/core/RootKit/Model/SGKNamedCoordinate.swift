@@ -20,10 +20,10 @@ open class SGKNamedCoordinate : NSObject, NSSecureCoding, Unmarshaling {
     }
   }
   
-  public var name: String? = nil
+  @objc public var name: String? = nil
   
-  public var _address: String? = nil
-  public var address: String? {
+  @objc public var _address: String? = nil
+  @objc public var address: String? {
     get {
       // this will call the lazy placemark getter, which will set the address
       guard _address == nil, let placemark = self.placemark else { return _address }
@@ -36,10 +36,10 @@ open class SGKNamedCoordinate : NSObject, NSSecureCoding, Unmarshaling {
     }
   }
   
-  public var data: [String: Any] = [:]
+  @objc public var data: [String: Any] = [:]
   
   private var _placemark: CLPlacemark? = nil
-  public var placemark: CLPlacemark? {
+  @objc public var placemark: CLPlacemark? {
     if let placemark = _placemark { return placemark }
     guard coordinate.isValid else { return nil }
     
@@ -64,11 +64,11 @@ open class SGKNamedCoordinate : NSObject, NSSecureCoding, Unmarshaling {
     return _placemark
   }
   
-  public var locationID: String? = nil
+  @objc public var locationID: String? = nil
   
-  public var isDraggable: Bool = false
+  @objc public var isDraggable: Bool = false
   
-  public var isSuburb: Bool = false
+  @objc public var isSuburb: Bool = false
   
   /// - note: Fails if annotation does not have a valid coordinate.
   @objc(namedCoordinateForAnnotation:)
@@ -90,24 +90,24 @@ open class SGKNamedCoordinate : NSObject, NSSecureCoding, Unmarshaling {
     }
   }
   
-  public init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String?, address: String?) {
+  @objc public init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String?, address: String?) {
     coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     self.name = name
     _address = address
   }
   
-  public init(placemark: CLPlacemark) {
+  @objc public init(placemark: CLPlacemark) {
     coordinate = placemark.location?.coordinate ?? kCLLocationCoordinate2DInvalid
     name = SGLocationHelper.name(from: placemark)
     _address = SGLocationHelper.address(for: placemark)
     _placemark = placemark
   }
   
-  public init(coordinate: CLLocationCoordinate2D) {
+  @objc public init(coordinate: CLLocationCoordinate2D) {
     self.coordinate = coordinate
   }
   
-  
+  @objc
   public init(name: String?, address: String?) {
     self.coordinate = kCLLocationCoordinate2DInvalid
     self.name = name
@@ -161,17 +161,17 @@ open class SGKNamedCoordinate : NSObject, NSSecureCoding, Unmarshaling {
 
 extension SGKNamedCoordinate {
   
-  public var phone: String? {
+  @objc public var phone: String? {
     get { return data["phone"] as? String }
     set { data["phone"] = newValue }
   }
   
-  public var url: URL? {
+  @objc public var url: URL? {
     get { return data["url"] as? URL }
     set { data["url"] = newValue }
   }
   
-  public var isDropped: Bool {
+  @objc public var isDropped: Bool {
     get { return (data["dropped"] as? Bool) ?? false }
     set { data["dropped"] = newValue }
   }

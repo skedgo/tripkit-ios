@@ -11,7 +11,7 @@
 
 #import "SGKCrossPlatform.h"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, SGAutocompletionSearchIcon) {
 	SGAutocompletionSearchIconCalendar,
 	SGAutocompletionSearchIconCity,
 	SGAutocompletionSearchIconContact,
@@ -19,7 +19,9 @@ typedef enum {
 	SGAutocompletionSearchIconFavourite,
 	SGAutocompletionSearchIconHistory,
 	SGAutocompletionSearchIconPin,
-} SGAutocompletionSearchIcon;
+};
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol SGAutocompletionDataProvider;
 
@@ -54,9 +56,9 @@ typedef enum {
 @property (nonatomic, strong) id object;
 
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *subtitle;
+@property (nonatomic, copy, nullable) NSString *subtitle;
 @property (nonatomic, strong) SGKImage *image;
-@property (nonatomic, strong) SGKImage *accessoryButtonImage;
+@property (nonatomic, strong, nullable) SGKImage *accessoryButtonImage;
 
 /**
  A score of how this result should be ranked between 0 and 100
@@ -72,3 +74,5 @@ typedef enum {
 - (NSComparisonResult)compare:(SGAutocompletionResult *)other;
 
 @end
+
+NS_ASSUME_NONNULL_END

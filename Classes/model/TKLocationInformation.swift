@@ -201,9 +201,9 @@ public struct TKCarRentalInfo : Unmarshaling, Marshaling {
 
 
 public class TKLocationInfo : NSObject, Unmarshaling {
-  public let what3word: String?
-  public let what3wordInfoURL: URL?
-  public let transitStop: STKStopAnnotation?
+  @objc public let what3word: String?
+  @objc public let what3wordInfoURL: URL?
+  @objc public let transitStop: STKStopAnnotation?
   public let bikePodInfo: TKBikePodInfo?
   public let carPodInfo:  TKCarPodInfo?
   public let carParkInfo: TKCarParkInfo?
@@ -222,7 +222,7 @@ public class TKLocationInfo : NSObject, Unmarshaling {
     carRentalInfo = try? object.value(for: "carRental")
   }
   
-  public var hasRealTime: Bool {
+  @objc public var hasRealTime: Bool {
     return carParkInfo?.hasRealTime
         ?? bikePodInfo?.hasRealTime
         ?? carPodInfo?.hasRealTime
