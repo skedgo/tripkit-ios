@@ -12,7 +12,7 @@ import RxSwift
 import MapKit
 import SGPulsingAnnotationView
 
-public class TKVehicleAnnotationView: SVPulsingAnnotationView {
+public class TKVehicleAnnotationView: SGPulsingAnnotationView {
   
   private weak var vehicleShape: VehicleView?
   private weak var vehicleImageView: UIImageView?

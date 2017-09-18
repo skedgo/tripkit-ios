@@ -12,7 +12,6 @@ def shared_pods
   pod 'Kingfisher'
   pod 'ASPolygonKit'
   pod 'ASPolylineView'
-  pod 'SGPulsingAnnotationView'
   pod 'KeychainAccess', git: 'https://github.com/kishikawakatsumi/KeychainAccess.git', branch: 'xcode9'
   pod 'KVNProgress'
   pod 'SwiftyJSON'

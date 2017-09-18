@@ -26,6 +26,7 @@
 		3A32CD7B1DC2EC4F003B158B /* TKRegionInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7A1DC2EC4F003B158B /* TKRegionInformation.swift */; };
 		3A32CD7D1DC2EC9B003B158B /* TKInfoTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7C1DC2EC9B003B158B /* TKInfoTypes.swift */; };
 		3A32CD7F1DC2ECB9003B158B /* TKAlertTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7E1DC2ECB9003B158B /* TKAlertTypes.swift */; };
+		3A37D5DC1F6FB7AF0019D4A2 /* SGPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37D5DA1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.m */; };
 		3A51402B1DEE62D6002DB39F /* TKVehicleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402A1DEE62D6002DB39F /* TKVehicleAnnotationView.swift */; };
 		3A51402E1DEE62EE002DB39F /* TKDLSTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */; };
 		3A51402F1DEE62EE002DB39F /* TKSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402D1DEE62EE002DB39F /* TKSegment.swift */; };
@@ -579,6 +580,8 @@
 		3A32CD7C1DC2EC9B003B158B /* TKInfoTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKInfoTypes.swift; sourceTree = "<group>"; };
 		3A32CD7E1DC2ECB9003B158B /* TKAlertTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TKAlertTypes.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3A37A9A61D20F8EF00A2A3B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
+		3A37D5DA1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPulsingAnnotationView.m; sourceTree = "<group>"; };
+		3A37D5DB1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPulsingAnnotationView.h; sourceTree = "<group>"; };
 		3A51402A1DEE62D6002DB39F /* TKVehicleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKVehicleAnnotationView.swift; sourceTree = "<group>"; };
 		3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDLSTable.swift; sourceTree = "<group>"; };
 		3A51402D1DEE62EE002DB39F /* TKSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegment.swift; sourceTree = "<group>"; };
@@ -1681,6 +1684,8 @@
 			children = (
 				3ADD5B581D9CDF0C00A1742F /* CircleAnnotationView.h */,
 				3ADD5B591D9CDF0C00A1742F /* CircleAnnotationView.m */,
+				3A37D5DB1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.h */,
+				3A37D5DA1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.m */,
 				3ADD5B5A1D9CDF0C00A1742F /* TKAgendaWidgetInfoView.swift */,
 				3ADD5B5B1D9CDF0C00A1742F /* TKAgendaWidgetInfoView.xib */,
 				3ADD5B5C1D9CDF0C00A1742F /* TKAlertCell.swift */,
@@ -2694,7 +2699,6 @@
 				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SGPulsingAnnotationView/SGPulsingAnnotationView.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
 				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
@@ -2710,7 +2714,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGPulsingAnnotationView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
@@ -2793,6 +2796,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A37D5DC1F6FB7AF0019D4A2 /* SGPulsingAnnotationView.m in Sources */,
 				3AB6C6E71D1CD08E0089F687 /* Trip.m in Sources */,
 				3AA03E591F0BC9DB00C6B337 /* SGAddressBookManager.m in Sources */,
 				3AB6C6B81D1CD08E0089F687 /* SGKConfig+TKInterAppCommunicator.m in Sources */,
