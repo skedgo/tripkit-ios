@@ -26,3 +26,17 @@ script:
   - set -o pipefail 
   - xcodebuild -showsdks
   - xcodebuild test -workspace "Project/TripKit.xcworkspace" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" | xcpretty
+
+before_deploy:
+- carthage build --no-skip-current
+- carthage archive $SCHEME
+
+deploy:
+  provider: releases
+  api_key:
+    secure: uYV8aLd31oqbq+1CL11rJoumjNF4X7TWLXawcA95w2u11zWdQpl7IyeKLV9wSqu5zdvKgyuV4UppYNIEAhxgQLNM+CenH7Vk/Lk7cT5d/QOrbsj6iUlTrpR1azxKE1ivYRV6gXUx/vGAKAVy9u20XCBZ8Y6lJx/PZq0V10rp5+akJP6PNwGbOxQkFXOwgIoZFN6W4NJWdkCCO/JQ1DCMGu2jNyywy/GYzLfhDOYQXZhRf7uxEJvwMHboq9MssIWYp8mb6wpe779uY8D4CLB3hGAW9q9OYvf/e9Zxl8NkyPkcRBdcEA9Aze74A3RWTIu7DZYjadRM/JPcn28PJ117vhFwDp+AyeedRMg+ApsOd1aZFthsamdAlfg+Ol+IHDQzvlSfvLL8qwTDxIJhJ0ZdazkWdLDfvzlEOZ0OQEqhTxEizl7koEtr98J7RpP217VeJTt9CNAxl2EGQ7BKzsM8GcxxzwOQENZRLVmff+zmBQWJI2n0bgAVKdV4/sVkyJVoSMf8v2TLtU+1cpNXcWkGJkOFHAR2WbOYwtBbIlK4cUwqQ51aoVWWzZukCubPGYcmONNi/1KFkrtnCqdIOnjGHaZdF1eb/XCoeAHtugCMbya+wk/GBc63YEAOaxE5nLM9m3UqQ2vAV6xGNQv4cIajOobB8/zXpNOyoFG/Ne/AZEc=
+  file: "$SCHEME.framework.zip"
+  skip_cleanup: true
+  on:
+    repo: skedgo/tripkit-ios
+    tags: true
