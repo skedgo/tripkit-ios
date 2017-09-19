@@ -10,7 +10,7 @@ def shared_pods
 
   pod 'ASPolygonKit'
   pod 'ASPolylineView'
-  pod 'KeychainAccess', git: 'https://github.com/kishikawakatsumi/KeychainAccess.git', branch: 'master'
+  pod 'KeychainAccess', '~> 3.1'
   pod 'Kingfisher',     '~> 4.0'
   pod 'OAuthSwift',     '~> 1.2'
 
