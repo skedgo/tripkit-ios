@@ -1,11 +1,9 @@
-source 'https://github.com/CocoaPods/Specs.git'
-
 use_frameworks!
 platform :ios, '9.3'
 
 def shared_pods
-  pod 'RxSwift', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'swift4.0' #       '~> 3.0'
-  pod 'RxCocoa', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'swift4.0' #       '~> 3.0'
+  pod 'RxSwift', '~> 4.0.0-beta.0'
+  pod 'RxCocoa', '~> 4.0.0-beta.0'
   pod 'Marshal'
 
   pod 'ASPolygonKit'
@@ -25,6 +23,6 @@ end
 target 'TripKitTests' do
   shared_pods
   
-  pod 'RxBlocking', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'swift4.0' #       '~> 3.0'
-  pod 'RxTest', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'swift4.0' #       '~> 3.0'
+  pod 'RxBlocking', '~> 4.0.0-beta.0'
+  pod 'RxTest', '~> 4.0.0-beta.0'
 end
