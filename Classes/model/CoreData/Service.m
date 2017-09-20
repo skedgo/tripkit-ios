@@ -92,6 +92,11 @@ typedef NSUInteger SGServiceFlag;
   return [self.alerts firstObject];
 }
 
+- (NSArray<Alert *> *)allAlerts
+{
+  return self.alerts;
+}
+
 - (BOOL)isRealTime
 {
   return 0 != (self.flags.integerValue & SGServiceFlagRealTime);

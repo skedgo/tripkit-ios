@@ -8,6 +8,9 @@
 
 import Foundation
 
+import RxSwift
+import RxCocoa
+
 public struct SGCountdownCellModel {
   
   public var title: NSAttributedString
@@ -18,22 +21,19 @@ public struct SGCountdownCellModel {
   public var time: Date?
   public var position: SGKGrouping
   public var color: UIColor?
-  public var alertText: String?
-  public var alertIconType: STKInfoIconType
   public var isCancelled: Bool = false
   public var isWheelchairEnabled: Bool = false
   public var isAccessible: Bool?
+  public var alerts: [Alert] = []
   
-  public init(title: NSAttributedString, position: SGKGrouping = .edgeToEdge, alertIconType: STKInfoIconType = .none) {
+  public init(title: NSAttributedString, position: SGKGrouping = .edgeToEdge) {
     self.title = title
     self.position = position
-    self.alertIconType = alertIconType
   }
   
 }
 
 extension SGCountdownCell {
-  
   
   public func configure(with model: SGCountdownCellModel) {
     showAsCanceled = model.isCancelled
@@ -48,7 +48,7 @@ extension SGCountdownCell {
       , stripColor: model.color)
     
     // We may have alert.
-    configureAlertView(withText: model.alertText, andType: model.alertIconType)
+    configureAlertView(with: model.alerts)
     
     // We may need to show accessibility info.
     configureAccessibleView(asEnabled: model.isWheelchairEnabled, isAccessible: model.isAccessible)
@@ -81,14 +81,30 @@ extension SGCountdownCell {
   }
   
   
-  public func configureAlertView(withText alertText: String?, andType alertType: STKInfoIconType) {
-    if alertText?.isEmpty ?? true {
-      alertLabel.text = nil
-      alertSymbol.image = nil
-    } else {
-      alertLabel.text = alertText
-      alertSymbol.image = STKInfoIcon.image(for: alertType, usage: .normal)
+  public func configureAlertView(with alerts: [Alert]) {
+    alertIconWidth.constant = alerts.isEmpty ? 0 : 20
+    alertViewTopConstraint.constant = alerts.isEmpty ? 0 : 8
+    alertViewBottomConstraint.constant = alerts.isEmpty ? 0 : 8
+    
+    alertSymbol.isHidden = alerts.isEmpty
+    alertLabel.isHidden = alerts.isEmpty
+    showButton.isHidden = alerts.isEmpty
+    
+    guard let mostSevere = alerts.first else {
+      return
     }
+    
+    alertSymbol.image = STKInfoIcon.image(for: mostSevere.infoIconType, usage: .normal)
+    alertLabel.text = alerts.count == 1 ? mostSevere.text : Loc.Alerts(alerts.count)
+    showButton.setTitle(Loc.Show, for: .normal)
+    
+    let disposeBag = objcDisposeBag.disposeBag    
+    showButton.rx.tap
+      .subscribe(onNext: { [unowned self] in
+        guard self.alertPresentationHandler != nil else { return }
+        self.alertPresentationHandler(alerts)
+      })
+      .addDisposableTo(disposeBag)
   }
   
   

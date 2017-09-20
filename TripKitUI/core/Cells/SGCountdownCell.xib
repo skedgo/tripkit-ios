@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eah-tb-9dt" id="PeC-yM-p2T">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="211.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eMU-bx-QBB" userLabel="wrapperView">
@@ -144,7 +144,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EDk-ZG-iiR" userLabel="accessible">
-                                        <rect key="frame" x="0.0" y="102.5" width="359" height="50"/>
+                                        <rect key="frame" x="0.0" y="102.5" width="359" height="43"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rpP-hr-cRy" userLabel="separator">
                                                 <rect key="frame" x="8" y="0.0" width="343" height="1"/>
@@ -154,14 +154,14 @@
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert-red" translatesAutoresizingMaskIntoConstraints="NO" id="t7j-3e-hk3">
-                                                <rect key="frame" x="13" y="15.5" width="20" height="20"/>
+                                                <rect key="frame" x="13" y="12" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="maA-Sz-4Yn"/>
                                                     <constraint firstAttribute="width" secondItem="t7j-3e-hk3" secondAttribute="height" multiplier="1:1" id="yos-lx-sMt"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Accessible text." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoU-qi-Pd9" userLabel="accessibleLabel" customClass="SGLabel">
-                                                <rect key="frame" x="41" y="8" width="310" height="34"/>
+                                                <rect key="frame" x="46" y="8" width="305" height="27"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" red="0.58531379699999997" green="0.58529627319999999" blue="0.58530616759999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -172,20 +172,13 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="KoU-qi-Pd9" secondAttribute="trailing" id="FBe-bR-sfH"/>
                                             <constraint firstItem="rpP-hr-cRy" firstAttribute="leading" secondItem="EDk-ZG-iiR" secondAttribute="leading" constant="8" id="FtI-Ld-77c"/>
                                             <constraint firstItem="KoU-qi-Pd9" firstAttribute="top" secondItem="EDk-ZG-iiR" secondAttribute="top" constant="8" id="H0y-NK-bb4"/>
-                                            <constraint firstItem="t7j-3e-hk3" firstAttribute="leading" secondItem="EDk-ZG-iiR" secondAttribute="leading" constant="8" id="J3O-Pk-mrr"/>
-                                            <constraint firstItem="KoU-qi-Pd9" firstAttribute="leading" secondItem="t7j-3e-hk3" secondAttribute="trailing" constant="8" symbolic="YES" id="VI2-7a-Yk1"/>
                                             <constraint firstItem="rpP-hr-cRy" firstAttribute="top" secondItem="EDk-ZG-iiR" secondAttribute="top" id="Z3T-TT-Tb1"/>
                                             <constraint firstAttribute="bottom" secondItem="KoU-qi-Pd9" secondAttribute="bottom" constant="8" id="ZLP-z4-Ggd"/>
                                             <constraint firstAttribute="trailing" secondItem="rpP-hr-cRy" secondAttribute="trailing" constant="8" id="tz0-gw-hfK"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="J3O-Pk-mrr"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qz6-aE-4gB" userLabel="alertView">
-                                        <rect key="frame" x="0.0" y="152.5" width="359" height="43"/>
+                                        <rect key="frame" x="0.0" y="145.5" width="359" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZv-66-QWg" userLabel="separator">
                                                 <rect key="frame" x="8" y="0.0" width="343" height="1"/>
@@ -195,40 +188,46 @@
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert-red" translatesAutoresizingMaskIntoConstraints="NO" id="Fxg-Wu-PIR">
-                                                <rect key="frame" x="13" y="12" width="20" height="20"/>
+                                                <rect key="frame" x="13" y="15.5" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="o5L-HF-JWf"/>
                                                     <constraint firstAttribute="width" secondItem="Fxg-Wu-PIR" secondAttribute="height" multiplier="1:1" id="w9T-tX-9hk"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Alert text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBT-R2-Twf" customClass="SGLabel">
-                                                <rect key="frame" x="41" y="8" width="310" height="27"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                <color key="textColor" red="0.58531379699707031" green="0.58529627323150635" blue="0.58530616760253906" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3sA-Vs-nH1">
+                                                <rect key="frame" x="46" y="8" width="305" height="34"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Alert text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBT-R2-Twf" customClass="SGLabel">
+                                                        <rect key="frame" x="0.0" y="10" width="258" height="14.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                        <color key="textColor" red="0.58531379699707031" green="0.58529627323150635" blue="0.58530616760253906" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h29-2s-E68">
+                                                        <rect key="frame" x="266" y="8.5" width="39" height="17"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                        <inset key="contentEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="1"/>
+                                                        <state key="normal" title="#Show"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="Fxg-Wu-PIR" firstAttribute="leading" secondItem="Qz6-aE-4gB" secondAttribute="leading" constant="8" id="1yP-pB-5GL"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="WBT-R2-Twf" secondAttribute="trailing" id="Cmq-jB-Uia"/>
-                                            <constraint firstItem="WBT-R2-Twf" firstAttribute="leading" secondItem="Fxg-Wu-PIR" secondAttribute="trailing" constant="8" symbolic="YES" id="HHr-uh-4CY"/>
+                                            <constraint firstItem="3sA-Vs-nH1" firstAttribute="top" secondItem="Qz6-aE-4gB" secondAttribute="top" constant="8" id="AbZ-Fu-RFW"/>
+                                            <constraint firstAttribute="bottom" secondItem="3sA-Vs-nH1" secondAttribute="bottom" constant="8" id="FbB-Nf-0S0"/>
                                             <constraint firstItem="PZv-66-QWg" firstAttribute="top" secondItem="Qz6-aE-4gB" secondAttribute="top" id="JFp-H5-UPS"/>
-                                            <constraint firstItem="WBT-R2-Twf" firstAttribute="top" secondItem="Qz6-aE-4gB" secondAttribute="top" constant="8" id="Pha-u1-7dV"/>
                                             <constraint firstAttribute="trailing" secondItem="PZv-66-QWg" secondAttribute="trailing" constant="8" id="g3i-XL-g6i"/>
                                             <constraint firstItem="PZv-66-QWg" firstAttribute="leading" secondItem="Qz6-aE-4gB" secondAttribute="leading" constant="8" id="gFu-se-PJm"/>
+                                            <constraint firstAttribute="trailing" secondItem="3sA-Vs-nH1" secondAttribute="trailing" constant="8" id="jkV-dI-PMd"/>
                                             <constraint firstItem="Fxg-Wu-PIR" firstAttribute="centerY" secondItem="Qz6-aE-4gB" secondAttribute="centerY" id="jxW-qd-mvW"/>
-                                            <constraint firstAttribute="bottom" secondItem="WBT-R2-Twf" secondAttribute="bottom" constant="8" id="p0O-Pa-qoO"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="1yP-pB-5GL"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="t7j-3e-hk3" firstAttribute="centerX" secondItem="k5Q-eE-bDo" secondAttribute="centerX" id="5nA-fG-o6h"/>
+                                    <constraint firstItem="KoU-qi-Pd9" firstAttribute="leading" secondItem="ynG-xY-33m" secondAttribute="leading" id="7he-T0-ZbT"/>
                                     <constraint firstItem="Fxg-Wu-PIR" firstAttribute="centerX" secondItem="k5Q-eE-bDo" secondAttribute="centerX" id="CP3-eA-oD7"/>
+                                    <constraint firstItem="3sA-Vs-nH1" firstAttribute="leading" secondItem="ynG-xY-33m" secondAttribute="leading" id="qk3-d3-YSB"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -263,8 +262,8 @@
                 <outlet property="alertLabel" destination="WBT-R2-Twf" id="2mL-lN-CxF"/>
                 <outlet property="alertSymbol" destination="Fxg-Wu-PIR" id="rMM-Sy-kfM"/>
                 <outlet property="alertView" destination="Qz6-aE-4gB" id="c0w-tf-r6s"/>
-                <outlet property="alertViewBottomConstraint" destination="p0O-Pa-qoO" id="2U0-x8-Coh"/>
-                <outlet property="alertViewTopConstraint" destination="Pha-u1-7dV" id="tfm-QH-F8R"/>
+                <outlet property="alertViewBottomConstraint" destination="FbB-Nf-0S0" id="izh-E7-9E6"/>
+                <outlet property="alertViewTopConstraint" destination="AbZ-Fu-RFW" id="qOb-Ss-Kes"/>
                 <outlet property="centerMainStack" destination="ynG-xY-33m" id="HyG-wz-ZU2"/>
                 <outlet property="coloredStrip" destination="GT7-lR-8Eu" id="iTH-JF-rg3"/>
                 <outlet property="contentWrapper" destination="eMU-bx-QBB" id="Sqi-OC-TMm"/>
@@ -272,6 +271,7 @@
                 <outlet property="iconWidth" destination="SF5-5s-xSJ" id="S5l-VB-gcW"/>
                 <outlet property="mainView" destination="Zf5-Fn-5RS" id="WCO-d3-O8T"/>
                 <outlet property="modeIcon" destination="k5Q-eE-bDo" id="32C-8x-GB1"/>
+                <outlet property="showButton" destination="h29-2s-E68" id="cGy-Vq-dow"/>
                 <outlet property="subsubTitle" destination="lOE-A1-J8N" id="6w5-d7-Lnw"/>
                 <outlet property="subtitle" destination="Vek-XX-gM0" id="rGO-vd-Hms"/>
                 <outlet property="tickView" destination="Ixf-hA-RTa" id="EA2-wG-z5F"/>
@@ -283,7 +283,7 @@
                 <outlet property="title" destination="krt-q8-T1x" id="H4B-UJ-CBW"/>
                 <outlet property="titleLeadingSpace" destination="ZaN-pM-aHs" id="ryx-8j-Q5Y"/>
             </connections>
-            <point key="canvasLocation" x="360.5" y="628"/>
+            <point key="canvasLocation" x="190" y="585"/>
         </tableViewCell>
     </objects>
     <resources>

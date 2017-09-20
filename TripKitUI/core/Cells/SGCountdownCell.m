@@ -154,12 +154,7 @@ typedef enum {
 }
 
 - (void)updateConstraints
-{
-  BOOL hasAlert = self.alertLabel.text.length != 0;
-  self.alertIconWidth.constant = hasAlert ? 20 : 0;
-  self.alertViewTopConstraint.constant = hasAlert ? 8 : 0;
-  self.alertViewBottomConstraint.constant = hasAlert ? 8 : 0;
-  
+{  
   BOOL requireAccessibility = self.accessibleLabel.text.length != 0;
   self.accessibleIconWidth.constant = requireAccessibility ? 20 : 0;
   self.accessibleTopConstraint.constant = requireAccessibility ? 8 : 0;

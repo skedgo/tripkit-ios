@@ -55,6 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable Alert *)sampleAlert;
 
+- (NSArray<Alert *> *)allAlerts;
+
 - (NSString *)title;
 
 - (nullable NSString *)shortIdentifier;
