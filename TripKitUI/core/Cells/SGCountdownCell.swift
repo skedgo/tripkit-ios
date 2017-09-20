@@ -16,7 +16,6 @@ public struct SGCountdownCellModel {
   public var icon: UIImage?
   public var iconImageURL: URL?
   public var time: Date?
-  public var parking: String?
   public var position: SGKGrouping
   public var color: UIColor?
   public var alertText: String?
@@ -45,7 +44,6 @@ extension SGCountdownCell {
       , icon: model.icon
       , iconImageURL: model.iconImageURL
       , timeToCountdownTo: model.time
-      , parkingAvailable: model.parking
       , position: model.position
       , stripColor: model.color)
     
@@ -66,10 +64,9 @@ extension SGCountdownCell {
   ///   - icon: Image to be displayed on the left.
   ///   - iconImageURL: URL to remote image to replace icon
   ///   - timeToCountdownTo: Optional time to countdown to/from. If this is in the past, the cell should appear faded.
-  ///   - parkingAvailable: Amount of parking to display
   ///   - position: Position of this cell relative to the cells around it.
   ///   - stripColor: Optional color to display a coloured strip under the icon.
-  public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, parkingAvailable: String?, position: SGKGrouping, stripColor: SGKColor?) {
+  public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, position: SGKGrouping, stripColor: SGKColor?) {
     
     _resetContents()
     
@@ -79,7 +76,6 @@ extension SGCountdownCell {
       , icon: icon
       , iconImageURL: iconImageURL
       , timeToCountdownTo: timeToCountdownTo
-      , parkingAvailable: parkingAvailable
       , position: position
       , strip: stripColor)
   }

@@ -82,7 +82,6 @@
                        icon:(UIImage *)icon
                iconImageURL:(NSURL *)iconImageURL
           timeToCountdownTo:(NSDate *)time
-           parkingAvailable:(NSString *)parking
                    position:(SGKGrouping)position
                  stripColor:(UIColor *)stripColor;
 
