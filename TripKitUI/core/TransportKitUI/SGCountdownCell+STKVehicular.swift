@@ -14,7 +14,14 @@ extension SGCountdownCell {
   public func configure(for vehicle: STKVehicular, includeSubtitle: Bool) {
     let icon = STKVehicularHelper.icon(forVehicle: vehicle)
     
-    configure(title: vehicle.title, subtitle: vehicle.subtitle, subsubtitle: nil, icon: icon, iconImageURL: nil, timeToCountdownTo: nil, position: .edgeToEdge, stripColor: nil)
+    configure(title: vehicle.title
+      , subtitle: vehicle.subtitle
+      , subsubtitle: nil
+      , icon: icon
+      , iconImageURL: nil
+      , timeToCountdownTo: nil
+      , position: .edgeToEdge
+      , stripColor: nil)
   }
   
 }

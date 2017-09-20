@@ -55,7 +55,9 @@ extension SGCountdownCell {
   }
   
   
-  /// Configures the cell with the defined content.
+  /// Configures the cell with the defined content. Note that, this configure the main
+  /// part of the cell only. In order to configure the alert and accessibility parts
+  /// of the cell, separate method calls are required.
   ///
   /// - Parameters:
   ///   - title: The title to be displayed in the first line. Doesn't need to wrap.
@@ -78,6 +80,9 @@ extension SGCountdownCell {
       , timeToCountdownTo: timeToCountdownTo
       , position: position
       , strip: stripColor)
+    
+    // The cell doesn't show alert by default.
+    configureAlertView(with: [])
   }
   
   
