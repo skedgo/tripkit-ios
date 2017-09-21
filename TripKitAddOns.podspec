@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
     cs.osx.deployment_target = '10.11'
 
     cs.dependency 'TripKit', "~> #{s.version}"
-    cs.dependency 'RxSwift'
+    cs.dependency 'RxSwift', '~> 4.0.0-beta.0'
     cs.source_files = "AddOns/Share/**/*"
   end
 

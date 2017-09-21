@@ -19,13 +19,13 @@ Pod::Spec.new do |s|
   s.dependency 'TripKit', "~> #{s.version}"
   s.dependency 'TripKitUI', "~> #{s.version}"
 
-  s.dependency 'KVNProgress'
-
-  s.dependency 'RxSwift'
-  s.dependency 'RxCocoa'
-  s.dependency 'SwiftyJSON'
+  s.dependency 'RxSwift', '~> 4.0.0-beta.0'
+  s.dependency 'RxCocoa', '~> 4.0.0-beta.0'
   s.dependency 'KeychainAccess'
   s.dependency 'OAuthSwift'
+
+  s.dependency 'SwiftyJSON'
+  s.dependency 'KVNProgress'
 
   s.source_files = "AddOns/Bookings/**/*.{h,m,swift}"
   s.resources = "AddOns/Bookings/**/*.{xib}"
