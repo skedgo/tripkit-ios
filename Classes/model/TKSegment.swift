@@ -108,12 +108,16 @@ extension TKSegment {
 
 extension TKSegment: STKDisplayablePoint {
 
-  public var pointDisplaysImage: Bool {
-    return coordinate.isValid && hasVisibility(.onMap)
-  }
-  
   public var isDraggable: Bool {
     return false
+  }
+  
+  public var pointClusterIdentifier: String? {
+    return nil
+  }
+  
+  public var pointDisplaysImage: Bool {
+    return coordinate.isValid && hasVisibility(.onMap)
   }
   
   public var pointImage: SGKImage? {

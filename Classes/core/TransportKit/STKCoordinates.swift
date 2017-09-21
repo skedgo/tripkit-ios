@@ -28,6 +28,10 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation {
     set { data["sg_modeInfo"] = newValue }
   }
   
+  public var pointClusterIdentifier: String? {
+    return stopModeInfo.identifier ?? "STKModeCoordinate"
+  }
+  
   public var pointDisplaysImage: Bool { return stopModeInfo.localImageName != nil }
   
   public var pointImage: SGKImage? {

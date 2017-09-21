@@ -64,6 +64,10 @@ extension StopVisits: STKDisplayablePoint {
   public var isDraggable: Bool {
     return false
   }
+
+  public var pointClusterIdentifier: String? {
+    return service.modeInfo?.identifier ?? "StopVisits"
+  }
   
   public var pointImage: SGKImage? {
     return service.modeImage(for: .listMainMode)

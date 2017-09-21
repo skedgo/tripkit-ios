@@ -37,6 +37,7 @@ public class SVKRegion : NSObject, NSCoding, Unmarshaling {
     public let pointDisplaysImage: Bool = true
     public let pointImage: SGKImage? = SGStyleManager.imageNamed("icon-map-info-city")
     public var pointImageURL: URL? = nil
+    public var pointClusterIdentifier: String? = "SVKRegion.City"
     @objc public weak var region: SVKRegion? = nil
     
     public required init(object: MarshaledObject) throws {

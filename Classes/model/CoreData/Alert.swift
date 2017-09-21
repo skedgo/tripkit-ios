@@ -72,6 +72,10 @@ extension Alert: MKAnnotation {
 // MARK: - STKDisplayablePoint
 
 extension Alert: STKDisplayablePoint {
+
+  public var pointClusterIdentifier: String? {
+    return nil
+  }
   
   public var pointDisplaysImage: Bool {
     return location != nil
