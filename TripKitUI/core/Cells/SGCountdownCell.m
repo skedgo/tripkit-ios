@@ -519,6 +519,7 @@ typedef enum {
   [self resetConstraints];
   
   self.accessibleSeparator.hidden = YES;
+  self.alertSeparator.hidden = YES;
   
   [self.timer invalidate];
   self.timer = nil;

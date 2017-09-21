@@ -90,10 +90,12 @@ extension SGCountdownCell {
     alertIconWidth.constant = alerts.isEmpty ? 0 : 20
     alertViewTopConstraint.constant = alerts.isEmpty ? 0 : 8
     alertViewBottomConstraint.constant = alerts.isEmpty ? 0 : 8
+    showButtonHeightConstraint.constant = alerts.isEmpty ? 0 : showButton.intrinsicContentSize.height
     
-    alertSymbol.isHidden = alerts.isEmpty
-    alertLabel.isHidden = alerts.isEmpty
     showButton.isHidden = alerts.isEmpty
+    alertSymbol.isHidden = alerts.isEmpty
+    alertLabel.isHidden = alerts.isEmpty    
+    alertSeparator.isHidden = alerts.isEmpty
     
     guard let mostSevere = alerts.first else {
       return

@@ -54,10 +54,12 @@
 @property (nonatomic, weak) IBOutlet UIView *alertView;
 @property (nonatomic, weak) IBOutlet SGLabel *alertLabel;
 @property (weak, nonatomic) IBOutlet UIButton *showButton;
+@property (weak, nonatomic) IBOutlet UIView *alertSeparator;
 @property (nonatomic, weak) IBOutlet UIImageView *alertSymbol;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *alertIconWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *alertViewBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *alertViewTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *showButtonHeightConstraint;
 
 @property (nonatomic, assign) BOOL showTickIcon;
 @property (nonatomic, assign) BOOL showAlertIcon;
