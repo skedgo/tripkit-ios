@@ -82,7 +82,7 @@
 
 + (NSArray *)fetchAlertsForService:(Service *)service
 {
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toDelete = NO AND idService = %@", service.code];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toDelete = NO AND hashCode in %@", service.alertHashCodes];
   NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"severity" ascending:NO];
   return [service.managedObjectContext fetchObjectsForEntityClass:self
                                                     withPredicate:predicate

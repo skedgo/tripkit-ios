@@ -394,7 +394,7 @@ typedef enum {
                             primaryVehicle:responseDict[@"realtimeVehicle"]
                        alternativeVehicles:responseDict[@"realtimeVehicleAlternatives"]];
   
-  // alert
+  // alert  
   [TKParserHelper updateOrAddAlerts:responseDict[@"alerts"]
                    inTripKitContext:context];
   
@@ -516,8 +516,7 @@ typedef enum {
                            alternativeVehicles:departureDict[@"realtimeVehicleAlternatives"]];
 			
 			// the alerts
-			[TKParserHelper updateOrAddAlerts:departureDict[@"alerts"]
-                       inTripKitContext:context];
+      service.alertHashCodes = departureDict[@"alertHashCodes"];
 			
 			// add the visit information
 			StopVisits *visit = [NSEntityDescription insertNewObjectForEntityForName:entityName

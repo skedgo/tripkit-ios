@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) Vehicle *vehicle;
 @property (nonatomic, retain, nullable) NSSet<Vehicle*>* vehicleAlternatives;
 @property (nonatomic, retain, nullable) NSSet<StopVisits*>* visits;
+@property (nonatomic, retain, nullable) NSArray<NSString *> *alertHashCodes;
 
 // non-core data properties
 @property (nonatomic, assign, getter = isRealTime) BOOL realTime;

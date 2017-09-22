@@ -45,6 +45,8 @@ typedef NSUInteger SGServiceFlag;
 @dynamic shape;
 @dynamic vehicle, vehicleAlternatives;
 @dynamic visits;
+@dynamic alertHashCodes;
+
 @synthesize sortedVisits = _sortedVisits;
 @synthesize alerts = _alerts;
 @synthesize isRequestingServiceData;
@@ -397,7 +399,12 @@ typedef NSUInteger SGServiceFlag;
 - (NSArray *)alerts
 {
   if (!_alerts) {
-    _alerts = [Alert fetchAlertsForService:self];
+    NSArray *hasCodes = self.alertHashCodes;
+    if (hasCodes.count == 0) {
+      _alerts = @[];
+    } else {
+      _alerts = [Alert fetchAlertsForService:self];
+    }
   }
   return _alerts;
 }
