@@ -33,6 +33,7 @@
 @dynamic regionName;
 @dynamic toDelete;
 @dynamic wheelchairAccessible;
+@dynamic alertHashCodes;
 
 @dynamic cell;
 @dynamic parent;
@@ -211,11 +212,15 @@
 - (NSArray *)alertsIncludingChildren
 {
   if (!_alertsIncludingChildren) {
-    NSMutableArray *alerts = [NSMutableArray array];
-    [alerts addObjectsFromArray:[Alert fetchAlertsForStopLocation:self]];
+    NSMutableArray *alerts = [NSMutableArray array];    
+    if (self.alertHashCodes.count != 0) {
+      [alerts addObjectsFromArray:[Alert fetchAlertsForStopLocation:self]];
+    }
     
     for (StopLocation *child in self.children) {
-      [alerts arrayByAddingObjectsFromArray:child.alertsIncludingChildren];
+      if (child.alertHashCodes.count != 0) {
+        [alerts arrayByAddingObjectsFromArray:child.alertsIncludingChildren];
+      }
     }
     _alertsIncludingChildren = alerts;
   }
