@@ -194,6 +194,15 @@
 	}
 }
 
+- (void)clearAlerts
+{
+  _alertsIncludingChildren = nil;
+  
+  for (StopLocation *stop in self.children) {
+    [stop clearAlerts];
+  }
+}
+
 - (void)clearVisits
 {
 	for (StopVisits *visit in self.visits) {

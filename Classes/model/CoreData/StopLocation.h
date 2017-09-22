@@ -69,6 +69,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<Alert *> *)alertsIncludingChildren;
 
+/**
+ This method is used to reset any alerts that are currently associated
+ with the StopLocation. This is usually called after alerts are altered
+ in core data, e.g., as a result of parsing alerts in a server response.
+ */
+- (void)clearAlerts;
+
 - (void)clearVisits;
 
 - (void)setSortScore:(NSNumber *)sortScore;
