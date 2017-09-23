@@ -194,12 +194,12 @@
 	}
 }
 
-- (void)clearAlerts
+- (void)resetAlertCache
 {
   _alertsIncludingChildren = nil;
   
   for (StopLocation *stop in self.children) {
-    [stop clearAlerts];
+    [stop resetAlertCache];
   }
 }
 
@@ -221,15 +221,11 @@
 - (NSArray *)alertsIncludingChildren
 {
   if (!_alertsIncludingChildren) {
-    NSMutableArray *alerts = [NSMutableArray array];    
-    if (self.alertHashCodes.count != 0) {
-      [alerts addObjectsFromArray:[Alert fetchAlertsForStopLocation:self]];
-    }
+    NSMutableArray *alerts = [NSMutableArray array];
+    [alerts addObjectsFromArray:[Alert fetchAlertsForStopLocation:self]];
     
     for (StopLocation *child in self.children) {
-      if (child.alertHashCodes.count != 0) {
-        [alerts arrayByAddingObjectsFromArray:child.alertsIncludingChildren];
-      }
+      [alerts arrayByAddingObjectsFromArray:child.alertsIncludingChildren];
     }
     _alertsIncludingChildren = alerts;
   }

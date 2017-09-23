@@ -79,16 +79,13 @@ extension Loc {
     }
   }
   
-  public static func Alerts(_ count: Int) -> String {
-    switch count {
-    case 0: return NSLocalizedString("No alert", tableName: "TripKit", bundle: .tripKit, comment: "Number of alerts, in this case, there is none")
-      
-    case 1: return NSLocalizedString("1 alert", tableName: "TripKit", bundle: .tripKit, comment: "Number of alerts, in this case, there is only 1 (singular)")
-      
-    default:
-      let format = NSLocalizedString("%@ alerts", tableName: "TripKit", bundle: .tripKit, comment: "Number of alerts, in this case, there are multiple (plural")
-      return String(format: format, NSNumber(value: count))
+  public static func Alerts(_ count: Int) -> String? {
+    guard count > 1 else {
+      return nil
     }
+    
+    let format = NSLocalizedString("%@ alerts", tableName: "TripKit", bundle: .tripKit, comment: "Number of alerts, in this case, there are multiple (plural")
+    return String(format: format, NSNumber(value: count))
   }
 
 }

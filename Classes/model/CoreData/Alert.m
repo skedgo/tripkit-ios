@@ -91,11 +91,15 @@
 
 + (NSArray *)fetchAlertsForStopLocation:(StopLocation *)stopLocation
 {
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toDelete = NO AND hashCode in %@", stopLocation.alertHashCodes];
-  NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"severity" ascending:NO];
-  return [stopLocation.managedObjectContext fetchObjectsForEntityClass:self
-                                                         withPredicate:predicate
-                                                    andSortDescriptors:@[sorter]];
+  if (stopLocation.alertHashCodes.count == 0) {
+    return @[];
+  } else {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toDelete = NO AND hashCode in %@", stopLocation.alertHashCodes];
+    NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"severity" ascending:NO];
+    return [stopLocation.managedObjectContext fetchObjectsForEntityClass:self
+                                                           withPredicate:predicate
+                                                      andSortDescriptors:@[sorter]];
+  }
 }
 
 - (AlertSeverity)alertSeverity {

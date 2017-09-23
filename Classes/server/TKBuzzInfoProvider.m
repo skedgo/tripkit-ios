@@ -574,7 +574,7 @@ typedef enum {
     // have been either added or updated in core data. So let's
     // reset the alerts such that the new ones are used in the next
     // fetch.
-    [stopOrNil clearAlerts];
+    [stopOrNil resetAlertCache];
     return @(flags);
   } else {
     return pairIdentifiers;

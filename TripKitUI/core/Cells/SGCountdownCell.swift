@@ -102,7 +102,7 @@ extension SGCountdownCell {
     }
     
     alertSymbol.image = STKInfoIcon.image(for: mostSevere.infoIconType, usage: .normal)
-    alertLabel.text = alerts.count == 1 ? mostSevere.text : Loc.Alerts(alerts.count)
+    alertLabel.text = alerts.count == 1 ? mostSevere.text : Loc.Alerts(alerts.count) ?? ""
     showButton.setTitle(Loc.Show, for: .normal)
     
     let disposeBag = objcDisposeBag.disposeBag    
