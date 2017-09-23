@@ -14,7 +14,7 @@ extension API {
   public struct RegionInfo: Codable {
     public let streetBicyclePaths: Bool
     public let streetWheelchairAccessibility: Bool
-    public let transitModes: [API.ModeInfo]
+    public let transitModes: [ModeInfo]
     public let transitBicycleAccessibility: Bool
     public let transitConcessionPricing: Bool
     public let transitWheelchairAccessibility: Bool

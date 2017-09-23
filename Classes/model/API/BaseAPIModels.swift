@@ -73,16 +73,6 @@ extension API {
     let address: String?
   }
   
-  public struct ModeInfo: Codable {
-    let alt: String
-    let identifier: String?
-    let localIcon: String?
-    let remoteIcon: String?
-    let remoteDarkIcon: String?
-    let descriptor: String?
-    let color: RGBColor?
-  }
-  
   public enum RealTimeStatus: String, Codable {
     case capable    = "CAPABLE"
     case incapable  = "INCAPABLE"

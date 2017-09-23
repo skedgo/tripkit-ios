@@ -371,8 +371,11 @@ public struct TKTTPifier : TKAgendaBuilderType {
     
     required init(object: MarshaledObject) throws {
       duration = try  object.value(for: "duration")
-      modeInfo = try  object.value(for: "modeInfo")
       polyline = try? object.value(for: "encodedPolyline")
+      
+      let dict: [String: Any] = try object.value(for: "modeInfo")
+      let decoder = JSONDecoder()
+      modeInfo = try decoder.decode(ModeInfo.self, withJSONObject: dict)
     }
   }
 }

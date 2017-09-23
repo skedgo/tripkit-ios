@@ -9,10 +9,7 @@
 import Foundation
 import CoreLocation
 
-import Marshal
 import RxSwift
-
-
 
 public enum TKLocationProvider {
   
@@ -51,22 +48,27 @@ public enum TKLocationProvider {
     
     return SVKServer.shared.rx
       .hit(.GET, path: "locations.json", parameters: paras, region: region)
-      .map { _, response, _ -> [STKModeCoordinate] in
+      .map { _, _, data -> [STKModeCoordinate] in
+        let decoder = JSONDecoder()
         guard
-          let marshaled = response as? MarshaledObject,
-          let groups: [GroupedLocations] = try? marshaled.value(for: "groups")
+          let data = data,
+          let response = try? decoder.decode(LocationsResponse.self, from: data)
         else {
           throw Error.serverReturnedBadFormat
         }
         
-        return groups.reduce(mutating: []) { $0.append(contentsOf: $1.all) }
+        return response.groups.reduce(mutating: []) { $0.append(contentsOf: $1.all) }
       }
     
   }
   
 }
 
-fileprivate struct GroupedLocations: Unmarshaling {
+fileprivate struct LocationsResponse: Codable {
+  let groups: [GroupedLocations]
+}
+
+fileprivate struct GroupedLocations: Codable {
   let group: String
   let hashCode: Int
   let stops:      [STKStopCoordinate]
@@ -83,15 +85,4 @@ fileprivate struct GroupedLocations: Unmarshaling {
       + carRentals  as [STKModeCoordinate]
   }
   
-  // MARK: Unmarshaling
-  
-  init(object: MarshaledObject) throws {
-    group       = try object.value(for: "key")
-    hashCode    = try object.value(for: "hashCode")
-    stops       = (try? object.value(for: "stops"))      ?? []
-    bikePods    = (try? object.value(for: "bikePods"))   ?? []
-    carPods     = (try? object.value(for: "carPods"))    ?? []
-    carParks    = (try? object.value(for: "carParks"))   ?? []
-    carRentals  = (try? object.value(for: "carRentals")) ?? []
-  }
 }

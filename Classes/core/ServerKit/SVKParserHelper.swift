@@ -58,26 +58,28 @@ public class SVKParserHelper: NSObject {
   }
   
   @objc(colorForDictionary:)
-  public class func color(for dictionary: [AnyHashable: Any]) -> SGKColor? {
+  public class func color(for dictionary: [String: Any]) -> SGKColor? {
     return try? SGKColor.value(from: dictionary)
   }
   
   @objc(namedCoordinateForDictionary:)
-  public class func namedCoordinate(for dictionary: [AnyHashable: Any]) -> SGKNamedCoordinate? {
-    return try? SGKNamedCoordinate(object: dictionary)
+  public class func namedCoordinate(for dictionary: [String: Any]) -> SGKNamedCoordinate? {
+    let decoder = JSONDecoder()
+    return try? decoder.decode(SGKNamedCoordinate.self, withJSONObject: dictionary)
   }
   
-  @objc public class func modeCoordinate(for dictionary: [AnyHashable: Any]) -> STKModeCoordinate? {
-    
-    if let stop = try? STKStopCoordinate(object: dictionary) {
+  @objc public class func modeCoordinate(for dictionary: [String: Any]) -> STKModeCoordinate? {
+    let decoder = JSONDecoder()
+    if let stop = try? decoder.decode(STKStopCoordinate.self, withJSONObject: dictionary) {
       return stop
     } else {
-      return try? STKModeCoordinate(object: dictionary)
+      return try? decoder.decode(STKModeCoordinate.self, withJSONObject: dictionary)
     }
   }
   
-  @objc public class func stopCoordinate(for dictionary: [AnyHashable: Any]) -> STKStopCoordinate? {
-    return try? STKStopCoordinate(object: dictionary)
+  @objc public class func stopCoordinate(for dictionary: [String: Any]) -> STKStopCoordinate? {
+    let decoder = JSONDecoder()
+    return try? decoder.decode(STKStopCoordinate.self, withJSONObject: dictionary)
   }
   
   @objc(dashPatternForModeGroup:)

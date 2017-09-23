@@ -51,9 +51,7 @@ extension TKBuzzInfoProvider {
   public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: @escaping ([ModeInfo]) -> Void)
   {
     fetchRegionInformation(forRegion: region) { info in
-      let model = info?.transitModes ?? []
-      let result = model.map { ModeInfo(from: $0) }
-      completion(result)
+      completion(info?.transitModes ?? [])
     }
   }
   

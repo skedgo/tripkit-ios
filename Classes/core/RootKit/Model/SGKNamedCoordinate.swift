@@ -9,9 +9,7 @@
 import Foundation
 import MapKit
 
-import Marshal
-
-open class SGKNamedCoordinate : NSObject, NSSecureCoding, Unmarshaling {
+open class SGKNamedCoordinate : NSObject, Codable {
   
   public fileprivate(set) var coordinate: CLLocationCoordinate2D {
     didSet {
@@ -118,47 +116,61 @@ open class SGKNamedCoordinate : NSObject, NSSecureCoding, Unmarshaling {
     self.init(latitude: from.lat, longitude: from.lng, name: from.name, address: from.address)
   }
 
-  // MARK: - NSSecureCoding
+  // MARK: - Codable
   
-  public static var supportsSecureCoding: Bool { return true }
-  
-  open func encode(with aCoder: NSCoder) {
-    aCoder.encode(coordinate.latitude, forKey: "latitude")
-    aCoder.encode(coordinate.longitude, forKey: "longitude")
-    aCoder.encode(name, forKey: "name")
-    aCoder.encode(address, forKey: "address")
-    aCoder.encode(locationID, forKey: "locationID")
-    aCoder.encode(data, forKey: "data")
-    aCoder.encode(_placemark, forKey: "placemark")
-    aCoder.encode(isDraggable, forKey: "isDraggable")
-    aCoder.encode(isSuburb, forKey: "isSuburb")
+  private enum CodingKeys: String, CodingKey {
+    case latitude
+    case longitude
+    case lat
+    case lng
+    case name
+    case address
+    case locationID
+    case data
+    case placemark
+    case isDraggable
+    case isSuburb
   }
+  
+  public required init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
 
-  public required init?(coder aDecoder: NSCoder) {
-    coordinate = CLLocationCoordinate2D(latitude: aDecoder.decodeDouble(forKey: "latitude"), longitude: aDecoder.decodeDouble(forKey: "longitude"))
-    name = aDecoder.decodeObject(forKey: "name") as? String
-    _address = aDecoder.decodeObject(forKey: "address") as? String
-    locationID = aDecoder.decodeObject(forKey: "locationID") as? String
-    data = aDecoder.decodeObject(forKey: "data") as? [String: Any] ?? [:]
-    _placemark = aDecoder.decodeObject(forKey: "placemark") as? CLPlacemark
-    isDraggable = aDecoder.decodeBool(forKey: "isDraggable")
-    isSuburb = aDecoder.decodeBool(forKey: "isSuburb")
-  }
-  
-  // MARK: - Unmarshaling
-  
-  public required init(object: MarshaledObject) throws {
-    let lat: Double = try object.value(for: "lat")
-    let lng: Double = try object.value(for: "lng")
-    coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+    // We support both lat/lng and latitude/longitude spellings, making this ugly
+    let latitude: CLLocationDegrees
+    if let degrees = try? container.decode(CLLocationDegrees.self, forKey: .latitude) {
+      latitude = degrees
+    } else {
+      latitude = try container.decode(CLLocationDegrees.self, forKey: .lat)
+    }
+    let longitude: CLLocationDegrees
+    if let degrees = try? container.decode(CLLocationDegrees.self, forKey: .longitude) {
+      longitude = degrees
+    } else {
+      longitude = try container.decode(CLLocationDegrees.self, forKey: .lng)
+    }
+    coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+
+    // All of these are often not provide, hence `try?` everywhere
+    name = try? container.decode(String.self, forKey: .name)
+    _address = try? container.decode(String.self, forKey: .address)
+    locationID = try? container.decode(String.self, forKey: .locationID)
+    data = (try? container.decode([String: Any].self, forKey: .data)) ?? [:]
+    isDraggable = (try? container.decode(Bool.self, forKey: .isDraggable)) ?? false
+    isSuburb = (try? container.decode(Bool.self, forKey: .isSuburb)) ?? false
     
-    locationID  = try? object.value(for: "id")
-    name        = try? object.value(for: "name")
-    _address    = try? object.value(for: "address")
-    super.init()
-
-    phone       = try? object.value(for: "phone")
-    url         = try? object.value(for: "URL")
+    // TODO: Should we include placemark here? What happens if we don't?
+  }
+  
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(coordinate.latitude, forKey: .latitude)
+    try container.encode(coordinate.longitude, forKey: .longitude)
+    try container.encode(name, forKey: .name)
+    try container.encode(address, forKey: .address)
+    try container.encode(locationID, forKey: .locationID)
+    try container.encode(data, forKey: .data)
+    try container.encode(isDraggable, forKey: .isDraggable)
+    try container.encode(isSuburb, forKey: .isSuburb)
   }
 
 }

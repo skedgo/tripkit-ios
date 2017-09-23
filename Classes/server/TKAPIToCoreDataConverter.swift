@@ -46,7 +46,7 @@ extension StopLocation {
       wheelchairAccessible = NSNumber(value: isAccessible)
     }
     location = SGKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
-    stopModeInfo = ModeInfo(from: model.modeInfo)
+    stopModeInfo = model.modeInfo
     
     var addedStop = false
     if let newChildren = model.children {
@@ -115,7 +115,7 @@ extension Service {
     direction = model.direction
     code = model.serviceTripID
     color = model.color?.color
-    modeInfo = ModeInfo(from: model.modeInfo)
+    modeInfo = model.modeInfo
     operatorName = model.operatorName
     isWheelchairAccessible = model.wheelchairAccessible ?? false // FIXME: Should be optional
     isBicycleAccessible = model.bicycleAccessible ?? false

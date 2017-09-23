@@ -8,10 +8,7 @@
 
 import Foundation
 
-import Marshal
 import RxSwift
-
-
 
 public class TKBikePodLocation: STKModeCoordinate {
   
@@ -26,23 +23,20 @@ public class TKBikePodLocation: STKModeCoordinate {
     set { rx_bikePodVar.value = newValue }
   }
   
-  public required init(object: MarshaledObject) throws {
-    throw NSError()
-//    let info: API.BikePodInfo = try object.value(for: "bikePod")
-//    rx_bikePodVar = Variable(info)
-//    try super.init(object: object)
+  private enum CodingKeys: String, CodingKey {
+    case bikePod
   }
   
-  public required init?(coder aDecoder: NSCoder) {
-    return nil
-//    guard let info: API.BikePodInfo = aDecoder.decodeOrUnmarshal(forKey: "bikePod") else { return nil }
-//    rx_bikePodVar = Variable(info)
-//    super.init(coder: aDecoder)
+  public required init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    let info = try values.decode(API.BikePodInfo.self, forKey: .bikePod)
+    rx_bikePodVar = Variable(info)
+    try super.init(from: decoder)
   }
   
-  override public func encode(with aCoder: NSCoder) {
-    super.encode(with: aCoder)
-//    aCoder.encode(bikePod.marshaled(), forKey: "bikePod")
+  public override func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(bikePod, forKey: .bikePod)
   }
 }
 
@@ -66,23 +60,20 @@ public class TKCarPodLocation: STKModeCoordinate {
     set { rx_carPodVar.value = newValue }
   }
   
-  public required init(object: MarshaledObject) throws {
-    throw NSError()
-//    let info: API.CarPodInfo = try object.value(for: "carPod")
-//    rx_carPodVar = Variable(info)
-//    try super.init(object: object)
+  private enum CodingKeys: String, CodingKey {
+    case carPod
   }
   
-  public required init?(coder aDecoder: NSCoder) {
-    return nil
-//    guard let info: API.CarPodInfo = aDecoder.decodeOrUnmarshal(forKey: "carPod") else { return nil }
-//    rx_carPodVar = Variable(info)
-//    super.init(coder: aDecoder)
+  public required init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    let info = try values.decode(API.CarPodInfo.self, forKey: .carPod)
+    rx_carPodVar = Variable(info)
+    try super.init(from: decoder)
   }
   
-  override public func encode(with aCoder: NSCoder) {
-    super.encode(with: aCoder)
-//    aCoder.encode(carPod.marshaled(), forKey: "carPod")
+  public override func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(carPod, forKey: .carPod)
   }
 }
 
@@ -106,23 +97,20 @@ public class TKCarParkLocation: STKModeCoordinate {
     set { rx_carParkVar.value = newValue }
   }
   
-  public required init(object: MarshaledObject) throws {
-    throw NSError()
-//    let info: API.CarParkInfo = try object.value(for: "carPark")
-//    rx_carParkVar = Variable(info)
-//    try super.init(object: object)
+  private enum CodingKeys: String, CodingKey {
+    case carPark
   }
   
-  public required init?(coder aDecoder: NSCoder) {
-    return nil
-//    guard let info: API.CarParkInfo = aDecoder.decodeOrUnmarshal(forKey: "carPark") else { return nil }
-//    rx_carParkVar = Variable(info)
-//    super.init(coder: aDecoder)
+  public required init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    let info = try values.decode(API.CarParkInfo.self, forKey: .carPark)
+    rx_carParkVar = Variable(info)
+    try super.init(from: decoder)
   }
-
-  override public func encode(with aCoder: NSCoder) {
-    super.encode(with: aCoder)
-//    aCoder.encode(carPark.marshaled(), forKey: "carPark")
+  
+  public override func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(carPark, forKey: .carPark)
   }
 }
 
@@ -137,21 +125,18 @@ public class TKCarRentalLocation: STKModeCoordinate {
   
   public let carRental: API.CarRentalInfo
   
-  public required init(object: MarshaledObject) throws {
-    throw NSError()
-//    carRental = try object.value(for: "carRental")
-//    try super.init(object: object)
+  private enum CodingKeys: String, CodingKey {
+    case carRental
   }
   
-  public required init?(coder aDecoder: NSCoder) {
-    return nil
-//    guard let info: API.CarRentalInfo = aDecoder.decodeOrUnmarshal(forKey: "carRental") else { return nil }
-//    carRental = info
-//    super.init(coder: aDecoder)
+  public required init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    carRental = try values.decode(API.CarRentalInfo.self, forKey: .carRental)
+    try super.init(from: decoder)
   }
   
-  override public func encode(with aCoder: NSCoder) {
-    super.encode(with: aCoder)
-//    aCoder.encode(carRental.marshaled(), forKey: "carRental")
+  public override func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(carRental, forKey: .carRental)
   }
 }
