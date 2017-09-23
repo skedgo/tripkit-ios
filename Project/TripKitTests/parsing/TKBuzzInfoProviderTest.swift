@@ -21,10 +21,10 @@ class TKBuzzInfoProviderTest: TKTestCase {
     }
     
     do {
-      let result = try decoder.decode(API.RegionsInfo.self, from: data)
-      let sydney = result.regions.first
+      let response = try decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
+      let sydney = response.regions.first
 
-      XCTAssertEqual(result.regions.count, 1)
+      XCTAssertEqual(response.regions.count, 1)
       
       XCTAssertNil(sydney?.paratransit)
       XCTAssertEqual(sydney?.streetBicyclePaths, true)
@@ -45,10 +45,10 @@ class TKBuzzInfoProviderTest: TKTestCase {
     }
     
     do {
-      let result = try decoder.decode(API.RegionsInfo.self, from: data)
-      let sydney = result.regions.first
+      let response = try decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
+      let sydney = response.regions.first
 
-      XCTAssertEqual(result.regions.count, 1)
+      XCTAssertEqual(response.regions.count, 1)
       XCTAssertEqual(sydney?.transitModes.count, 4)
     } catch {
       XCTFail("Failed with: \(error)")
@@ -56,21 +56,30 @@ class TKBuzzInfoProviderTest: TKTestCase {
   }
   
   func testTransitAlerts() {
-    guard
-      let json = contentFromJSON(named: "alertsTransit") as? [String: Any],
-      let wrappers: [TKAlertWrapper] = try? json.value(for: "alerts")
-      else { XCTFail(); return }
+    let decoder = JSONDecoder()
+    guard let data = dataFromJSON(named: "alertsTransit") else {
+      XCTFail(); return
+    }
     
-    XCTAssertEqual(wrappers.count, 6)
-    
-    // many checks on first
-    XCTAssertEqual(wrappers[0].alert.title, "Wharf Closed")
-    XCTAssertEqual(wrappers[0].alert.text, "Garden Island Wharf Closed.")
-    XCTAssertEqual((wrappers[0].alert as? TKSimpleAlert)?.severity, .warning)
-    XCTAssertNil(wrappers[0].alert.infoURL)
-    XCTAssertNil(wrappers[0].alert.iconURL)
+    do {
+      let response = try decoder.decode(TKBuzzInfoProvider.AlertsTransitResponse.self, from: data)
+      let wrappers = response.alerts
+      
+      XCTAssertEqual(wrappers.count, 6)
+      
+      // many checks on first
+      XCTAssertEqual(wrappers[0].alert.title, "Wharf Closed")
+      XCTAssertEqual(wrappers[0].alert.text, "Garden Island Wharf Closed.")
+      XCTAssertEqual(wrappers[0].alert.severity, .warning)
+      XCTAssertNil(wrappers[0].alert.remoteIcon)
+      XCTAssertNil(wrappers[0].alert.url)
+      
+      // additional checks on others
+      XCTAssertEqual(wrappers[1].alert.url, URL(string: "http://www.transportnsw.info/transport-status"))
 
-    // additional checks on others
-    XCTAssertEqual(wrappers[1].alert.infoURL, URL(string: "http://www.transportnsw.info/transport-status"))
+      
+    } catch {
+      XCTFail("Failed with: \(error)")
+    }
   }
 }

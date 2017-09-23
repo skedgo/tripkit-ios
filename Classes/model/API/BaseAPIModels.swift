@@ -10,28 +10,6 @@ import Foundation
 
 extension API {
   
-  public struct Alert: Codable {
-    
-    public enum Severity: String, Codable {
-      case info = "info"
-      case warning = "warning"
-      case alert = "alert"
-    }
-    
-    let hashCode: Int
-    let severity: Severity
-    let title: String
-    let text: String?
-    let url: URL?
-    
-    let remoteIcon: URL?
-    let location: Location?
-    let startTime: TimeInterval?
-    let endTime: TimeInterval?
-    
-    // FIXME: Add action again
-  }
-  
   public struct Location: Codable {
     let lat: CLLocationDegrees
     let lng: CLLocationDegrees

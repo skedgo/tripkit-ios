@@ -10,11 +10,6 @@ import Foundation
 
 extension API {
   
-  public struct RegionsInfo: Codable {
-    let regions: [RegionInfo]
-    let server: String?
-  }
-
   /// Formerly known as `TKRegionInfo`
   public struct RegionInfo: Codable {
     public let streetBicyclePaths: Bool
