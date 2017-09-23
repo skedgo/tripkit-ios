@@ -7,17 +7,16 @@
 //
 
 import Foundation
-import Marshal
 
 extension TripGroup {
 
-  public var sources: [TKDataAttribution] {
+  public var sources: [API.DataAttribution] {
     get {
       guard let sourcesRaw = sourcesRaw else { return [] }
       
-      return sourcesRaw.flatMap { rawSource -> TKDataAttribution? in
-        guard let marshaled = rawSource as? MarshaledObject else { return nil }
-        return try? TKDataAttribution(object: marshaled)
+      return sourcesRaw.flatMap { rawSource -> API.DataAttribution? in
+        let decoder = JSONDecoder()
+        return try? decoder.decode(API.DataAttribution.self, withJSONObject: rawSource)
       }
     }
   }
