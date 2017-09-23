@@ -87,6 +87,7 @@ extension TKAPIToCoreDataConverter {
   }
   
   @objc(updateStopLocation:fromDictionary:)
+  @discardableResult
   public static func update(_ stop: StopLocation, from dict: [String: Any]) -> Bool {
     let decoder = JSONDecoder()
     guard let model = try? decoder.decode(API.Stop.self, withJSONObject: dict) else {
