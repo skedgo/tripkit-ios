@@ -74,6 +74,8 @@ public class ModeInfo: NSObject, NSSecureCoding, Unmarshaling {
     color = try? object.value(for: "color")
   }
   
+  // MARK: Init from Codable
+  
   init(from model: API.ModeInfo) {
     identifier = model.identifier
     alt = model.alt

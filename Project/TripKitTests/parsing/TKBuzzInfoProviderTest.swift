@@ -15,35 +15,44 @@ import Marshal
 class TKBuzzInfoProviderTest: TKTestCase {
     
   func testRegionInformation() {
-    guard
-      let json = contentFromJSON(named: "regionInfo-Sydney") as? [String: Any],
-      let regions: [TKRegionInfo] = try? json.value(for: "regions"),
-      let sydney = regions.first else { XCTFail(); return }
-
-    XCTAssertEqual(regions.count, 1)
+    let decoder = JSONDecoder()
+    guard let data = dataFromJSON(named: "regionInfo-Sydney") else {
+      XCTFail(); return
+    }
     
-    XCTAssertNil(sydney.paratransitInformation)
-    XCTAssertEqual(sydney.streetBikePaths, true)
-    XCTAssertEqual(sydney.streetWheelchairAccessibility, true)
-    XCTAssertEqual(sydney.transitModes.count, 4)
-    XCTAssertEqual(sydney.transitBicycleAccessibility, true)
-    XCTAssertEqual(sydney.transitConcessionPricing, true)
-    XCTAssertEqual(sydney.transitWheelchairAccessibility, true)
+    do {
+      let result = try decoder.decode(API.RegionsInfo.self, from: data)
+      let sydney = result.regions.first
+
+      XCTAssertEqual(result.regions.count, 1)
+      
+      XCTAssertNil(sydney?.paratransit)
+      XCTAssertEqual(sydney?.streetBicyclePaths, true)
+      XCTAssertEqual(sydney?.streetWheelchairAccessibility, true)
+      XCTAssertEqual(sydney?.transitModes.count, 4)
+      XCTAssertEqual(sydney?.transitBicycleAccessibility, true)
+      XCTAssertEqual(sydney?.transitConcessionPricing, true)
+      XCTAssertEqual(sydney?.transitWheelchairAccessibility, true)
+    } catch {
+      XCTFail("Failed with: \(error)")
+    }
   }
   
-  // TODO: Add test
-//  func testParatransitInformation() {
-//  }
-  
   func testPublicTransportModes() {
-    guard
-      let json = contentFromJSON(named: "regionInfo-Sydney") as? [String: Any],
-      let regions: [TKRegionInfo] = try? json.value(for: "regions"),
-      let sydney = regions.first else { XCTFail(); return }
+    let decoder = JSONDecoder()
+    guard let data = dataFromJSON(named: "regionInfo-Sydney") else {
+      XCTFail(); return
+    }
     
-    XCTAssertEqual(regions.count, 1)
-    
-    XCTAssertEqual(sydney.transitModes.count, 4)
+    do {
+      let result = try decoder.decode(API.RegionsInfo.self, from: data)
+      let sydney = result.regions.first
+
+      XCTAssertEqual(result.regions.count, 1)
+      XCTAssertEqual(sydney?.transitModes.count, 4)
+    } catch {
+      XCTFail("Failed with: \(error)")
+    }
   }
   
   func testTransitAlerts() {

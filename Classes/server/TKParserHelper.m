@@ -40,9 +40,10 @@
   NSParameterAssert(reference);
   if (primaryVehicleDict) {
     if (reference.realTimeVehicle) {
-      [self updateVehicle:reference.realTimeVehicle fromDictionary:primaryVehicleDict];
+      [TKAPIToCoreDataConverter updateVehicle:reference.realTimeVehicle fromDictionary:primaryVehicleDict];
     } else {
-      Vehicle *vehicle = [self insertNewVehicle:primaryVehicleDict inTripKitContext:reference.managedObjectContext];
+      Vehicle *vehicle = [TKAPIToCoreDataConverter insertNewVehicle:primaryVehicleDict
+                                                   inTripKitContext:reference.managedObjectContext];
       reference.realTimeVehicle = vehicle;
     }
   }
@@ -58,10 +59,10 @@
         }
       }
       if (existingVehicle) {
-        [self updateVehicle:existingVehicle fromDictionary:alternativeVehicleDict];
+        [TKAPIToCoreDataConverter updateVehicle:existingVehicle fromDictionary:alternativeVehicleDict];
       } else {
-        Vehicle *newAlternative = [self insertNewVehicle:alternativeVehicleDict
-                                        inTripKitContext:reference.managedObjectContext];
+        Vehicle *newAlternative = [TKAPIToCoreDataConverter insertNewVehicle:alternativeVehicleDict
+                                                            inTripKitContext:reference.managedObjectContext];
         [reference addRealTimeVehicleAlternativesObject:newAlternative];
       }
     }

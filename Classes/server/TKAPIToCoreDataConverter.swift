@@ -1,5 +1,5 @@
 //
-//  TKParserHelper.swift
+//  TKAPIToCoreDataConverter.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 17/10/16.
@@ -7,6 +7,24 @@
 //
 
 import Foundation
+
+@objc
+public class TKAPIToCoreDataConverter: NSObject {
+  override private init() {
+    super.init()
+  }
+  
+  @objc(segmentVisibilityType:)
+  public static func segmentVisibilityType(for string: String) -> STKTripSegmentVisibility {
+    switch string {
+    case "in summary": return .inSummary
+    case "on map": return .onMap
+    case "in details": return .inDetails
+    default: return .hidden
+    }
+  }
+
+}
 
 // MARK: - Stops
 
@@ -39,7 +57,7 @@ extension StopLocation {
         if let oldChild = lookup[newChild.code]?.first {
           addedStop = oldChild.update(from: newChild) || addedStop
         } else {
-          let child = TKParserHelper.insertNewStopLocation(from: newChild, into: context)
+          let child = TKAPIToCoreDataConverter.insertNewStopLocation(from: newChild, into: context)
           addedStop = true
           child.parent = self
         }
@@ -50,7 +68,7 @@ extension StopLocation {
   
 }
 
-extension TKParserHelper {
+extension TKAPIToCoreDataConverter {
   
   static func insertNewStopLocation(from model: API.Stop, into context: NSManagedObjectContext) -> StopLocation {
     let coordinate = SGKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
@@ -60,7 +78,7 @@ extension TKParserHelper {
   }
   
   @objc(insertNewStopLocation:inTripKitContext:)
-  static func insertNewStopLocation(from dict: [String: Any], into context: NSManagedObjectContext) -> StopLocation? {
+  public static func insertNewStopLocation(from dict: [String: Any], into context: NSManagedObjectContext) -> StopLocation? {
     let decoder = JSONDecoder()
     guard let model = try? decoder.decode(API.Stop.self, withJSONObject: dict) else {
       return nil
@@ -69,7 +87,7 @@ extension TKParserHelper {
   }
   
   @objc(updateStopLocation:fromDictionary:)
-  static func update(_ stop: StopLocation, from dict: [String: Any]) -> Bool {
+  public static func update(_ stop: StopLocation, from dict: [String: Any]) -> Bool {
     let decoder = JSONDecoder()
     guard let model = try? decoder.decode(API.Stop.self, withJSONObject: dict) else {
       return false
@@ -185,10 +203,9 @@ extension Service {
   }
 }
 
-extension TKParserHelper {
-  
+extension TKAPIToCoreDataConverter {
   @objc(updateVehiclesForService:primaryVehicle:alternativeVehicles:)
-  static func updateVehicles(for service: Service, primaryVehicle: [String: Any]?, alternativeVehicles: [[String: Any]]?) {
+  public static func updateVehicles(for service: Service, primaryVehicle: [String: Any]?, alternativeVehicles: [[String: Any]]?) {
     let decoder = JSONDecoder()
     
     var primary: API.Vehicle? = nil
@@ -245,7 +262,7 @@ extension Alert {
 
 }
 
-extension TKParserHelper {
+extension TKAPIToCoreDataConverter {
   
   static func updateOrAddAlerts(_ alerts: [API.Alert]?, in context: NSManagedObjectContext) {
     guard let alerts = alerts else { return }
@@ -261,7 +278,7 @@ extension TKParserHelper {
   }
   
   @objc(updateOrAddAlerts:inTripKitContext:)
-  static func updateOrAddAlerts(from array: [[String: Any]]?, in context: NSManagedObjectContext) {
+  public static func updateOrAddAlerts(from array: [[String: Any]]?, in context: NSManagedObjectContext) {
     guard let array = array else { return }
     let decoder = JSONDecoder()
     let model = try? decoder.decode([API.Alert].self, withJSONObject: array)
@@ -318,7 +335,7 @@ extension Vehicle {
   
 }
 
-extension TKParserHelper {
+extension TKAPIToCoreDataConverter {
 
   @objc(insertNewVehicle:inTripKitContext:)
   public static func insertNewVehicle(from dict: [String: Any], into context: NSManagedObjectContext) -> Vehicle? {
@@ -336,17 +353,6 @@ extension TKParserHelper {
     return vehicles.map(STKVehicularHelper.skedGoFullDictionary(forVehicle:))
   }
   
-  
-  @objc(segmentVisibilityType:)
-  public static func segmentVisibilityType(for string: String) -> STKTripSegmentVisibility {
-    switch string {
-    case "in summary": return .inSummary
-    case "on map": return .onMap
-    case "in details": return .inDetails
-    default: return .hidden
-    }
-  }
-
 }
 
 

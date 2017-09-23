@@ -21,15 +21,14 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  @objc public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (TKRegionInfo?) -> Void)
+  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (API.RegionInfo?) -> Void)
   {
-    SVKServer.shared.fetchArray(TKRegionInfo.self,
-                                method: .POST, path: "regionInfo.json",
-                                parameters: ["region": region.name],
-                                region: region,
-                                keyPath: "regions")
-    { regions in
-      completion(regions.first)
+    SVKServer.shared.fetch(API.RegionsInfo.self,
+                           method: .POST, path: "regionInfo.json",
+                           parameters: ["region": region.name],
+                           region: region)
+    { result in
+      completion(result?.regions.first)
     }
   }
   
@@ -38,10 +37,10 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  @objc public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (TKParatransitInfo?) -> Void)
+  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (API.Paratransit?) -> Void)
   {
     fetchRegionInformation(forRegion: region) { info in
-      completion(info?.paratransitInformation)
+      completion(info?.paratransit)
     }
   }
   
@@ -50,10 +49,13 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  @objc public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: @escaping ([ModeInfo]) -> Void)
+  @objc
+  public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: @escaping ([ModeInfo]) -> Void)
   {
     fetchRegionInformation(forRegion: region) { info in
-      completion(info?.transitModes ?? [])
+      let model = info?.transitModes ?? []
+      let result = model.map { ModeInfo(from: $0) }
+      completion(result)
     }
   }
   
@@ -120,8 +122,50 @@ extension TKBuzzInfoProvider {
 }
 
 
+// MARK: - Codable helper Extensions -
 
-// MARK: - Helper Extensions -
+extension SVKServer {
+  
+  fileprivate func fetch<E: Decodable>(
+    _ type: E.Type,
+    method: HTTPMethod = .GET,
+    path: String,
+    parameters: [String: Any]? = nil,
+    region: SVKRegion,
+    completion: @escaping (E?) -> Void
+    )
+  {
+    hitSkedGo(
+      withMethod: method.rawValue,
+      path: path,
+      parameters: parameters,
+      region: region,
+      success: { _, _, data in
+        guard let data = data else {
+          SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters ?? [:])" }
+          completion(nil)
+          return
+        }
+
+        do {
+          let decoder = JSONDecoder()
+          let result = try decoder.decode(type, from: data)
+          completion(result)
+        } catch {
+          SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
+          completion(nil)
+        }
+    },
+      failure: { error in
+        SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
+        completion(nil)
+    })
+  }
+  
+}
+
+
+// MARK: - Marshal helper Extensions -
 
 extension SVKServer {
 

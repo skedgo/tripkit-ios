@@ -191,13 +191,13 @@
   }
   
   // real time vehicles
-  [TKParserHelper updateVehiclesForService:service
-                            primaryVehicle:responseDict[@"realtimeVehicle"]
-                       alternativeVehicles:responseDict[@"realtimeVehicleAlternatives"]];
+  [TKAPIToCoreDataConverter updateVehiclesForService:service
+                                      primaryVehicle:responseDict[@"realtimeVehicle"]
+                                 alternativeVehicles:responseDict[@"realtimeVehicleAlternatives"]];
   
   // alert
-  [TKParserHelper updateOrAddAlerts:responseDict[@"alerts"]
-                   inTripKitContext:context];
+  [TKAPIToCoreDataConverter updateOrAddAlerts:responseDict[@"alerts"]
+                             inTripKitContext:context];
   
   // mode info
   ModeInfo *modeInfo = [ModeInfo modeInfoForDictionary:responseDict[@"modeInfo"]];
@@ -242,13 +242,13 @@
         
         // is this our stop?
         if ([stop.stopCode isEqualToString:code]) {
-          [TKParserHelper updateStopLocation:stop
-                              fromDictionary:stopDict];
+          [TKAPIToCoreDataConverter updateStopLocation:stop
+                                        fromDictionary:stopDict];
           
         } else {
           // we always add all the stops, because the cell is new
-          StopLocation *newStop = [TKParserHelper insertNewStopLocation:stopDict
-                                                       inTripKitContext:tripKitContext];
+          StopLocation *newStop = [TKAPIToCoreDataConverter insertNewStopLocation:stopDict
+                                                                 inTripKitContext:tripKitContext];
           
           // make sure we have an ID
           NSError *error = nil;
@@ -261,7 +261,7 @@
     return NO;
   
   } else {
-    [TKParserHelper updateStopLocation:stop fromDictionary:responseObject];
+    [TKAPIToCoreDataConverter updateStopLocation:stop fromDictionary:responseObject];
     return YES;
   }
 }

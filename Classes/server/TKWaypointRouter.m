@@ -90,7 +90,7 @@
 {
   NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithCapacity:2];
   paras[@"config"] = [TKSettings defaultDictionary];
-  paras[@"vehicles"] = [TKParserHelper vehiclesPayloadForVehicles:privateVehicles];
+  paras[@"vehicles"] = [TKAPIToCoreDataConverter vehiclesPayloadForVehicles:privateVehicles];
   
   NSArray *segments = prototype.trip.segments;
   NSMutableArray *arrayParas = [NSMutableArray arrayWithCapacity:segments.count];

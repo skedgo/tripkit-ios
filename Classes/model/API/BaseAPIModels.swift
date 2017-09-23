@@ -131,6 +131,12 @@ extension API.Vehicle.Occupancy {
   public init(intValue: Int) {
     switch intValue {
     case 1: self = .empty
+    case 2: self = .manySeatsAvailable
+    case 3: self = .fewSeatsAvailable
+    case 4: self = .standingRoomOnly
+    case 5: self = .crushedStandingRoomOnly
+    case 6: self = .full
+    case 7: self = .notAcceptingPassengers
     default: self = .unknown
     }
   }
@@ -138,8 +144,14 @@ extension API.Vehicle.Occupancy {
   var intValue: Int {
     get {
       switch self {
+      case .unknown: return 0
       case .empty: return 1
-      default: return 0
+      case .manySeatsAvailable: return 2
+      case .fewSeatsAvailable: return 3
+      case .standingRoomOnly: return 4
+      case .crushedStandingRoomOnly: return 5
+      case .full: return 6
+      case .notAcceptingPassengers: return 7
       }
     }
   }

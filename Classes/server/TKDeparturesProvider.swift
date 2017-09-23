@@ -118,7 +118,7 @@ extension TKDeparturesProvider {
     }
     assert(addedCount > 0, "No embarkations in \(departures)")
     
-    TKParserHelper.updateOrAddAlerts(departures.alerts, in: context)
+    TKAPIToCoreDataConverter.updateOrAddAlerts(departures.alerts, in: context)
     
     return addedStops
   }
@@ -175,7 +175,7 @@ extension TKDeparturesProvider {
     
     // First, we make sure we have all the stops
     let stops = (departures.stops ?? [])
-      .map { TKParserHelper.insertNewStopLocation(from: $0, into: context) }
+      .map { TKAPIToCoreDataConverter.insertNewStopLocation(from: $0, into: context) }
     
     // Next, we collect the existing stops to add content to
     let flattened = stops.flatMap {
@@ -209,7 +209,7 @@ extension TKDeparturesProvider {
     }
     assert(pairIdentifieres.count > 0, "No embarkations in \(departures)")
     
-    TKParserHelper.updateOrAddAlerts(departures.alerts, in: context)
+    TKAPIToCoreDataConverter.updateOrAddAlerts(departures.alerts, in: context)
     
     return pairIdentifieres
   }
