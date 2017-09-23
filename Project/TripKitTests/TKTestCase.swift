@@ -34,22 +34,21 @@ class TKTestCase: XCTestCase {
     tripKitContext.persistentStoreCoordinator = tripKitCoordinator
   }
 
-  func dataFromJSON(named name: String) -> Data? {
+  func dataFromJSON(named name: String) throws -> Data {
     let filePath = bundle.path(forResource: name, ofType: "json")
-    return try? Data(contentsOf: URL(fileURLWithPath: filePath!))
+    return try Data(contentsOf: URL(fileURLWithPath: filePath!))
   }
 
   
-  func contentFromJSON(named name: String) -> Any {
-    let data = dataFromJSON(named: name)
-    let object: Any? = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions(rawValue: 0))
-    return object!
+  func contentFromJSON(named name: String) throws -> Any {
+    let data = try dataFromJSON(named: name)
+    return try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0))
   }
   
   func trip(fromFilename filename: String, serviceFilename: String? = nil) -> Trip {
     
     let observable = Observable<Trip>.create { observer in
-      let tripJson = self.contentFromJSON(named: filename)
+      let tripJson = try! self.contentFromJSON(named: filename)
       let parser = TKRoutingParser(tripKitContext: self.tripKitContext)
       parser.parseAndAddResult(tripJson as! [AnyHashable : Any]) { request in
         guard let trip = request?.tripGroups?.first?.visibleTrip else { preconditionFailure() }
@@ -57,7 +56,7 @@ class TKTestCase: XCTestCase {
         if let serviceFilename = serviceFilename {
           for segment in trip.segments() {
             if let service = segment.service() {
-              let serviceJson = self.contentFromJSON(named: serviceFilename)
+              let serviceJson = try! self.contentFromJSON(named: serviceFilename)
               let provider = TKBuzzInfoProvider()
               provider.addContent(to: service, fromResponse: serviceJson as! [AnyHashable : Any])
               break

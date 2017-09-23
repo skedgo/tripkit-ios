@@ -9,15 +9,12 @@
 import Foundation
 
 import RxSwift
-import Marshal
-
-
 
 public enum TKLocationRealTime {
 
-  public static func fetchRealTimeInfo(for location: SGKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<TKLocationInfo> {
+  public static func fetchRealTimeInfo(for location: SGKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<API.LocationInfo> {
     return fetchOnlyOn
-      .flatMapLatest { fetch -> Observable<TKLocationInfo> in
+      .flatMapLatest { fetch -> Observable<API.LocationInfo> in
         if fetch {
           return fetchRealTime(for: location)
         } else {
@@ -26,12 +23,12 @@ public enum TKLocationRealTime {
       }
   }
   
-  public static func fetchRealTime(for location: SGKNamedCoordinate) -> Observable<TKLocationInfo> {
+  public static func fetchRealTime(for location: SGKNamedCoordinate) -> Observable<API.LocationInfo> {
     return SVKServer.shared.rx
       .requireRegion(location.coordinate)
-      .flatMap { region -> Observable<TKLocationInfo> in
+      .flatMap { region -> Observable<API.LocationInfo> in
+
         let paras: [String: Any]
-        
         if let identifier = location.locationID {
           paras = [
             "region": region.name,
@@ -45,21 +42,20 @@ public enum TKLocationRealTime {
         }
         
         return SVKServer.shared.rx
-          .hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, response, _ in
+          .hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, _, data in
             if case 400..<500 = status {
               return nil // Client-side errors; hitting again won't help
             }
-          
-            if let json = response as? [String: Any],
-               let location = try? TKLocationInfo(object: json) {
-              return location.hasRealTime ? 10 : nil
+            if let data = data,
+               let info = try? JSONDecoder().decode(API.LocationInfo.self, from: data) {
+              return info.hasRealTime ? 10 : nil
             } else {
               return 60 // Try again in a while
             }
           }
-          .map { status, response, _ in
-            guard let json = response as? [String: Any] else { return nil }
-            return try? TKLocationInfo(object: json)
+          .map { status, _, data in
+            guard let data = data else { return nil }
+            return try? JSONDecoder().decode(API.LocationInfo.self, from: data)
           }
           .filter { $0 != nil }
           .map { $0! }

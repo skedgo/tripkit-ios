@@ -13,18 +13,12 @@ import XCTest
 
 class TKDeparturesModelTest: TKTestCase {
   
-  
-  func testParsingParentStopDepartures() {
-    let data = self.dataFromJSON(named: "departures-parentStop")!
+  func testParsingParentStopDepartures() throws {
     let decoder = JSONDecoder()
-    
-    do {
-      let departures = try decoder.decode(API.Departures.self, from: data)
-      XCTAssertNotNil(departures)
-    
-    } catch {
-      XCTFail("Conversion failed with \(error)")
-    }
+    let data = try self.dataFromJSON(named: "departures-parentStop")
+    let departures = try decoder.decode(API.Departures.self, from: data)
+
+    XCTAssertNotNil(departures)
   }
 
 }

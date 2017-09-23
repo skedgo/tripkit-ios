@@ -8,78 +8,53 @@
 
 import XCTest
 
-import Marshal
-
 @testable import TripKit
 
 class TKBuzzInfoProviderTest: TKTestCase {
     
-  func testRegionInformation() {
+  func testRegionInformation() throws {
     let decoder = JSONDecoder()
-    guard let data = dataFromJSON(named: "regionInfo-Sydney") else {
-      XCTFail(); return
-    }
-    
-    do {
-      let response = try decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
-      let sydney = response.regions.first
+    let data = try dataFromJSON(named: "regionInfo-Sydney")
+    let response = try decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
+    let sydney = response.regions.first
 
-      XCTAssertEqual(response.regions.count, 1)
-      
-      XCTAssertNil(sydney?.paratransit)
-      XCTAssertEqual(sydney?.streetBicyclePaths, true)
-      XCTAssertEqual(sydney?.streetWheelchairAccessibility, true)
-      XCTAssertEqual(sydney?.transitModes.count, 4)
-      XCTAssertEqual(sydney?.transitBicycleAccessibility, true)
-      XCTAssertEqual(sydney?.transitConcessionPricing, true)
-      XCTAssertEqual(sydney?.transitWheelchairAccessibility, true)
-    } catch {
-      XCTFail("Failed with: \(error)")
-    }
+    XCTAssertEqual(response.regions.count, 1)
+    
+    XCTAssertNil(sydney?.paratransit)
+    XCTAssertEqual(sydney?.streetBicyclePaths, true)
+    XCTAssertEqual(sydney?.streetWheelchairAccessibility, true)
+    XCTAssertEqual(sydney?.transitModes.count, 4)
+    XCTAssertEqual(sydney?.transitBicycleAccessibility, true)
+    XCTAssertEqual(sydney?.transitConcessionPricing, true)
+    XCTAssertEqual(sydney?.transitWheelchairAccessibility, true)
   }
   
-  func testPublicTransportModes() {
+  func testPublicTransportModes() throws {
     let decoder = JSONDecoder()
-    guard let data = dataFromJSON(named: "regionInfo-Sydney") else {
-      XCTFail(); return
-    }
-    
-    do {
-      let response = try decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
-      let sydney = response.regions.first
+    let data = try dataFromJSON(named: "regionInfo-Sydney")
+    let response = try decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
+    let sydney = response.regions.first
 
-      XCTAssertEqual(response.regions.count, 1)
-      XCTAssertEqual(sydney?.transitModes.count, 4)
-    } catch {
-      XCTFail("Failed with: \(error)")
-    }
+    XCTAssertEqual(response.regions.count, 1)
+    XCTAssertEqual(sydney?.transitModes.count, 4)
   }
   
-  func testTransitAlerts() {
+  func testTransitAlerts() throws {
     let decoder = JSONDecoder()
-    guard let data = dataFromJSON(named: "alertsTransit") else {
-      XCTFail(); return
-    }
+    let data = try dataFromJSON(named: "alertsTransit")
+    let response = try decoder.decode(TKBuzzInfoProvider.AlertsTransitResponse.self, from: data)
+    let wrappers = response.alerts
     
-    do {
-      let response = try decoder.decode(TKBuzzInfoProvider.AlertsTransitResponse.self, from: data)
-      let wrappers = response.alerts
-      
-      XCTAssertEqual(wrappers.count, 6)
-      
-      // many checks on first
-      XCTAssertEqual(wrappers[0].alert.title, "Wharf Closed")
-      XCTAssertEqual(wrappers[0].alert.text, "Garden Island Wharf Closed.")
-      XCTAssertEqual(wrappers[0].alert.severity, .warning)
-      XCTAssertNil(wrappers[0].alert.remoteIcon)
-      XCTAssertNil(wrappers[0].alert.url)
-      
-      // additional checks on others
-      XCTAssertEqual(wrappers[1].alert.url, URL(string: "http://www.transportnsw.info/transport-status"))
-
-      
-    } catch {
-      XCTFail("Failed with: \(error)")
-    }
+    XCTAssertEqual(wrappers.count, 6)
+    
+    // many checks on first
+    XCTAssertEqual(wrappers[0].alert.title, "Wharf Closed")
+    XCTAssertEqual(wrappers[0].alert.text, "Garden Island Wharf Closed.")
+    XCTAssertEqual(wrappers[0].alert.severity, .warning)
+    XCTAssertNil(wrappers[0].alert.remoteIcon)
+    XCTAssertNil(wrappers[0].alert.url)
+    
+    // additional checks on others
+    XCTAssertEqual(wrappers[1].alert.url, URL(string: "http://www.transportnsw.info/transport-status"))
   }
 }

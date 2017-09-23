@@ -306,7 +306,7 @@ extension Vehicle {
     icon = model.icon?.absoluteString
     isWifiEnabled = model.wifi
     
-    if let lastUpdated = model.lastUpdated {
+    if let lastUpdated = model.lastUpdate {
       lastUpdate = Date(timeIntervalSince1970: lastUpdated)
     } else {
       assertionFailure("Vehicle is missing last update. Falling back to now.")

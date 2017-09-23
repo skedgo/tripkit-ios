@@ -12,29 +12,23 @@ import XCTest
 
 class TKGeoJSONTest: TKTestCase {
   
-  
-  func testParsing() {
+  func testParsing() throws {
     
-    let data = self.dataFromJSON(named: "geojson-nuremberg")!
     let decoder = JSONDecoder()
-    do {
-      let nuremberg = try decoder.decode(TKGeoJSON.self, from: data)
-      XCTAssertNotNil(nuremberg)
+    let data = try self.dataFromJSON(named: "geojson-nuremberg")
+    let nuremberg = try decoder.decode(TKGeoJSON.self, from: data)
+    XCTAssertNotNil(nuremberg)
+    
+    if case .collection(let features) = nuremberg {
+      XCTAssertEqual(10, features.count)
       
-      if case .collection(let features) = nuremberg {
-        XCTAssertEqual(10, features.count)
-        
-        for feature in features {
-          XCTAssertNotNil(feature.properties, "Missing properties for \(feature.geometry)")
-          XCTAssert(feature.properties is TKMapZenProperties)
-        }
-        
-      } else {
-        XCTFail("Didn't capture collection")
+      for feature in features {
+        XCTAssertNotNil(feature.properties, "Missing properties for \(feature.geometry)")
+        XCTAssert(feature.properties is TKMapZenProperties)
       }
       
-    } catch {
-      XCTFail("Conversion failed with \(error)")
+    } else {
+      XCTFail("Didn't capture collection")
     }
   }
   

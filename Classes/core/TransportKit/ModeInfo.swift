@@ -80,8 +80,8 @@ public class ModeInfo: NSObject, NSSecureCoding, Unmarshaling {
     identifier = model.identifier
     alt = model.alt
     localImageName = model.localIcon
-    remoteImageName = model.remoteIconURL?.absoluteString
-    remoteDarkImageName = model.remoteDarkIconURL?.absoluteString
+    remoteImageName = model.remoteIcon
+    remoteDarkImageName = model.remoteDarkIcon
     descriptor = model.descriptor
     color = model.color?.color
   }

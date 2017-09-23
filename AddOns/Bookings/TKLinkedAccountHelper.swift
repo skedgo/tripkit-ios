@@ -42,7 +42,7 @@ public struct ProviderAuth {
 
   fileprivate let status: Status
   
-  fileprivate let companyInfo: TKCompanyInfo?
+  fileprivate let companyInfo: API.CompanyInfo?
   
   /// Mode identifier that this authentication is for
   public let modeIdentifier: String

@@ -8,23 +8,9 @@
 
 import Foundation
 
-import Marshal
 import RxSwift
 
-extension TKBuzzInfoProvider {
-  
-  struct RegionInfoResponse: Codable {
-    let regions: [API.RegionInfo]
-    let server: String?
-  }
-  
-  struct AlertsTransitResponse: Codable {
-    let alerts: [API.AlertMapping]
-  }
-  
-}
-
-// MARK: - Fetcher methods -
+// MARK: - Fetcher methods
 
 extension TKBuzzInfoProvider {
   
@@ -77,8 +63,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  @objc(fetchLocationInformation:forRegion:completion:)
-  public class func fetchLocationInformation(_ annotation: MKAnnotation, for region: SVKRegion, completion: @escaping (TKLocationInfo?) -> Void) {
+  public class func fetchLocationInformation(_ annotation: MKAnnotation, for region: SVKRegion, completion: @escaping (API.LocationInfo?) -> Void) {
     
     let paras: [String: Any]
     if let named = annotation as? SGKNamedCoordinate, let identifier = named.locationID {
@@ -87,7 +72,7 @@ extension TKBuzzInfoProvider {
       paras = [ "lat": annotation.coordinate.latitude, "lng": annotation.coordinate.longitude ]
     }
     
-    SVKServer.shared.fetch(TKLocationInfo.self,
+    SVKServer.shared.fetch(API.LocationInfo.self,
                            path: "locationInfo.json",
                            parameters: paras,
                            region: region,
@@ -130,11 +115,23 @@ extension TKBuzzInfoProvider {
   }
 }
 
+// MARK: - Response data model
+
+extension TKBuzzInfoProvider {
+  
+  struct RegionInfoResponse: Codable {
+    let regions: [API.RegionInfo]
+    let server: String?
+  }
+  
+  struct AlertsTransitResponse: Codable {
+    let alerts: [API.AlertMapping]
+  }
+  
+}
 
 
-
-
-// MARK: - Codable helper Extensions -
+// MARK: - Codable helper Extensions
 
 extension SVKServer {
   
@@ -162,53 +159,6 @@ extension SVKServer {
         do {
           let decoder = JSONDecoder()
           let result = try decoder.decode(type, from: data)
-          completion(result)
-        } catch {
-          SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
-          completion(nil)
-        }
-    },
-      failure: { error in
-        SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
-        completion(nil)
-    })
-  }
-  
-}
-
-
-// MARK: - Marshal helper Extensions -
-
-extension SVKServer {
-
-  fileprivate func fetch<E: Unmarshaling>(
-    _ type: E.Type,
-    method: HTTPMethod = .GET,
-    path: String,
-    parameters: [String: Any]? = nil,
-    region: SVKRegion,
-    keyPath: String? = nil,
-    completion: @escaping (E?) -> Void
-  )
-  {
-    hitSkedGo(
-      withMethod: method.rawValue,
-      path: path,
-      parameters: parameters,
-      region: region,
-      success: { _, response, _ in
-        guard let json = response as? [String: Any] else {
-          SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters ?? [:])" }
-          completion(nil)
-          return
-        }
-        do {
-          let result: E
-          if let keyPath = keyPath {
-            result = try json.value(for: keyPath)
-          } else {
-            result = try E(object: json)
-          }
           completion(result)
         } catch {
           SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }

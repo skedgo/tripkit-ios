@@ -8,7 +8,62 @@
 
 import Foundation
 
+import Marshal // Deprecated, but still in use
+
 extension API {
+  
+  public struct CompanyInfo : Codable, Unmarshaling, Marshaling {
+    public let name: String
+    public let website: URL?
+    public let phone: String?
+    public let remoteIcon: String?
+    public let remoteDarkIcon: String?
+    public let color: RGBColor?
+    
+    public init(object: MarshaledObject) throws {
+      name            = try  object.value(for: "name")
+      website         = try? object.value(for: "website")
+      phone           = try? object.value(for: "phone")
+      remoteIcon      = try? object.value(for: "remoteIcon")
+      remoteDarkIcon  = try? object.value(for: "remoteDarkIcon")
+      color           = try? object.value(for: "color")
+    }
+    
+    public typealias MarshalType = [String: Any]
+    
+    public func marshaled() -> MarshalType {
+      var marshaled: MarshalType =  [
+        "name": name,
+        ]
+      
+      marshaled["website"] = website
+      marshaled["phone"] = phone
+      marshaled["remoteIcon"] = remoteIcon
+      marshaled["remoteDarkIcon"] = remoteDarkIcon
+      marshaled["color"] = color
+      return marshaled
+    }
+  }
+  
+  public struct DataAttribution : Codable, Unmarshaling, Marshaling {
+    public let provider: CompanyInfo
+    public let disclaimer: String?
+    
+    public init(object: MarshaledObject) throws {
+      provider    = try  object.value(for: "provider")
+      disclaimer  = try? object.value(for: "disclaimer")
+    }
+    
+    public typealias MarshalType = [String: Any]
+    
+    public func marshaled() -> MarshalType {
+      var marshaled : MarshalType =  [
+        "provider": provider.marshaled(),
+      ]
+      marshaled["disclaimer"] = disclaimer
+      return marshaled
+    }
+  }
   
   public struct Location: Codable {
     let lat: CLLocationDegrees
@@ -22,8 +77,8 @@ extension API {
     let alt: String
     let identifier: String?
     let localIcon: String?
-    let remoteIconURL: URL? // removeIcon
-    let remoteDarkIconURL: URL? // removeDarkIcon
+    let remoteIcon: String?
+    let remoteDarkIcon: String?
     let descriptor: String?
     let color: RGBColor?
   }
@@ -36,13 +91,29 @@ extension API {
     case canceled   = "CANCELLED"
   }
 
-  public struct RGBColor: Codable {
+  public struct RGBColor: Codable, Unmarshaling, Marshaling {
     let red: Int
     let green: Int
     let blue: Int
     
     var color: SGKColor {
       return SGKColor(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: 1)
+    }
+    
+    public init(object: MarshaledObject) throws {
+      red   = try  object.value(for: "red")
+      green = try  object.value(for: "green")
+      blue  = try  object.value(for: "blue")
+    }
+    
+    public typealias MarshalType = [String: Any]
+    
+    public func marshaled() -> MarshalType {
+      return [
+        "red": red,
+        "green": green,
+        "blue": blue,
+      ]
     }
   }
   
@@ -65,7 +136,7 @@ extension API {
     let id: String?
     let label: String?
     let icon: URL?
-    let lastUpdated: TimeInterval?
+    let lastUpdate: TimeInterval?
     let occupancy: Occupancy?
     let wifi: Bool?
   }
@@ -133,6 +204,36 @@ extension API.Vehicle.Occupancy {
       }
     }
   }
-
   
+}
+
+extension API.CompanyInfo {
+  
+  public var remoteIconURL: URL? {
+    guard let fileNamePart = remoteIcon else {
+      return nil
+    }
+    
+    return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+  }
+  
+  public var remoteDarkIconURL: URL? {
+    guard let fileNamePart = remoteDarkIcon else {
+      return nil
+    }
+    
+    return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+  }
+  
+}
+
+// MARK: - Marshal helper
+
+extension Date: ValueType {
+  public static func value(from object: Any) throws -> Date {
+    guard let seconds = object as? TimeInterval else {
+      throw MarshalError.typeMismatch(expected: TimeInterval.self, actual: type(of: object))
+    }
+    return Date(timeIntervalSince1970: seconds)
+  }
 }
