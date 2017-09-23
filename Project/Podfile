@@ -9,14 +9,14 @@ def shared_pods
   pod 'RxCocoa',        '~> 3.0'
   pod 'Marshal'
 
-  pod 'Kingfisher'
+  pod 'Kingfisher',     '~> 3.0'
   pod 'ASPolygonKit'
   pod 'ASPolylineView'
   pod 'SGPulsingAnnotationView'
   pod 'KeychainAccess'
   pod 'KVNProgress'
   pod 'SwiftyJSON'
-  pod 'OAuthSwift'
+  pod 'OAuthSwift',     '~> 1.1.2'
 end
 
 target 'TripKit' do

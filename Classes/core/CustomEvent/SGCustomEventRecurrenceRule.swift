@@ -27,7 +27,9 @@ extension SGCustomEventRecurrenceRule {
     assert(startTime >= 0)
     assert(duration >= 0)
     
-    let gregorian = Calendar(identifier: .gregorian)
+    var gregorian = Calendar(identifier: .gregorian)
+    gregorian.timeZone = timeZone
+    
     var components = gregorian.dateComponents(in: timeZone, from: earliest)
     components.hour = 0
     components.minute = 0
