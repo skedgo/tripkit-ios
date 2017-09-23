@@ -172,7 +172,7 @@ extension TKWaypointRouter {
       parameters: waypointParas,
       region: region,
       callbackOnMain: false,
-      success: { status, response in
+      success: { status, response, _ in
         guard let json = response as? [AnyHashable: Any] else {
           errorHandler(nil)
           return

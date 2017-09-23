@@ -113,6 +113,10 @@ open class SGKNamedCoordinate : NSObject, NSSecureCoding, Unmarshaling {
     self.name = name
     _address = address
   }
+  
+  convenience init(from: API.Location) {
+    self.init(latitude: from.lat, longitude: from.lng, name: from.name, address: from.address)
+  }
 
   // MARK: - NSSecureCoding
   

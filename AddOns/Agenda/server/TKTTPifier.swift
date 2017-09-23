@@ -179,7 +179,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     return SVKServer.shared.rx
       .hit(.POST, path: "ttp", parameters: paras, region: region)
       .retry(4)
-      .map { code, response -> (SVKRegion, String?) in
+      .map { code, response, _ -> (SVKRegion, String?) in
         if let json = response as? [String: Any],
            let id: String = try? json.value(for: "id") {
           TKTTPifierCache.save(problemId: id, forParas: paras)
@@ -222,7 +222,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
     
     return SVKServer.shared.rx
-      .hit(.GET, path: "ttp/\(id)/solution", parameters: paras, region: region) { code, response in
+      .hit(.GET, path: "ttp/\(id)/solution", parameters: paras, region: region) { code, response, _ in
         
         // Keep hitting if it's a 299 (solution still bein calculated)
         // or the input indicates that not all trips have been added yet
@@ -237,7 +237,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
           return nil
         }
       }
-      .filter { code, json in
+      .filter { code, json, _ in
         if (code == 404 || code == 410) {
           throw TTPError.problemNotFoundOnServer
         }
@@ -245,7 +245,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
         // Swallow 304 in particular (cached solution still up-to-date)
         return code == 200 && json != nil
       }
-      .map { code, response -> [TKAgendaOutputItem]? in
+      .map { code, response, _ -> [TKAgendaOutputItem]? in
         if let json = response as? [String: Any],
           let output = createOutput(inputItems, json: json) {
           TKTTPifierCache.save(marshaledSolution: json, forId: id)

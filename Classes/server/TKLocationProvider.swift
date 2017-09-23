@@ -51,7 +51,7 @@ public enum TKLocationProvider {
     
     return SVKServer.shared.rx
       .hit(.GET, path: "locations.json", parameters: paras, region: region)
-      .map { _, response -> [STKModeCoordinate] in
+      .map { _, response, _ -> [STKModeCoordinate] in
         guard
           let marshaled = response as? MarshaledObject,
           let groups: [GroupedLocations] = try? marshaled.value(for: "groups")

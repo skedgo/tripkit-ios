@@ -84,8 +84,8 @@
                          region:region
                  callbackOnMain:NO
                         success:
-     ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+     ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
        typeof(weakSelf) strongSelf = weakSelf;
        if (! strongSelf) return;
        
@@ -228,7 +228,7 @@
                        region:region
                callbackOnMain:NO
                       success:
-   ^(NSInteger status, id responseObject) {
+   ^(NSInteger status, id responseObject, NSData *data) {
 #pragma unused(status)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      NSArray *autocompletionResults = nil;

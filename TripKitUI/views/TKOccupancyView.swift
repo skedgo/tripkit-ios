@@ -8,10 +8,15 @@
 
 import UIKit
 
+#if TK_NO_MODULE
+#else
+  import TripKit
+#endif
+
 @available(iOS 9.0, *)
-extension TKOccupancy {
+extension API.Vehicle.Occupancy {
   
-  public var icon: UIImage? {
+  var icon: UIImage? {
     switch self {
     case .empty, .manySeatsAvailable, .fewSeatsAvailable:
       return UIImage(named: "icon-check-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
@@ -24,7 +29,7 @@ extension TKOccupancy {
     }
   }
   
-  public var isCritical: Bool {
+  var isCritical: Bool {
     switch self {
     case .crushedStandingRoomOnly, .full, .notAcceptingPassengers:
       return true
@@ -98,7 +103,7 @@ extension TKOccupancyView {
 extension TKOccupancyView {
   
   public enum Purpose {
-    case occupancy(TKOccupancy)
+    case occupancy(API.Vehicle.Occupancy)
     case wheelchair
   }
   

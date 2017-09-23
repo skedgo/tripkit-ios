@@ -369,8 +369,8 @@
                          region:region
                  callbackOnMain:NO
                         success:
-     ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+     ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
        typeof(weakSelf) strongSelf2 = weakSelf;
        if (! strongSelf2) {
          return;
@@ -443,8 +443,8 @@
   
   // Hit it
   [SVKServer GET:baseURL paras:paras completion:
-   ^(NSInteger status, id  _Nullable responseObject, NSError * _Nullable error) {
-#pragma unused(status)
+   ^(NSInteger status, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
+#pragma unused(status, data)
      completion(baseURL, responseObject, error);
    }];
 }

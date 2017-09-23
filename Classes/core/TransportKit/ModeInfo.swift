@@ -74,4 +74,14 @@ public class ModeInfo: NSObject, NSSecureCoding, Unmarshaling {
     color = try? object.value(for: "color")
   }
   
+  init(from model: API.ModeInfo) {
+    identifier = model.identifier
+    alt = model.alt
+    localImageName = model.localIcon
+    remoteImageName = model.remoteIconURL?.absoluteString
+    remoteDarkImageName = model.remoteDarkIconURL?.absoluteString
+    descriptor = model.descriptor
+    color = model.color?.color
+  }
+  
 }

@@ -65,8 +65,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:params
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      DLog(@"%@", responseObject);
      [AMKCommunicator findTokenInResponse:responseObject
                                completion:
@@ -97,8 +97,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      DLog(@"%@", responseObject);
      [AMKCommunicator findTokenInResponse:responseObject
                                completion:
@@ -135,8 +135,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      DLog(@"%@", responseObject);
      [AMKCommunicator findTokenInResponse:responseObject
                                completion:
@@ -168,8 +168,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:params
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      DLog(@"%@", responseObject);
      [AMKCommunicator findTokenInResponse:responseObject
                                completion:
@@ -197,8 +197,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused (status, responseObject)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"Ignoring response: %@", responseObject);
@@ -224,8 +224,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{@"name": name}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"response: %@", responseObject);
@@ -249,8 +249,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:nil
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"response: %@", responseObject);
@@ -277,8 +277,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{@"surname": surname}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"response: %@", responseObject);
@@ -302,8 +302,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:nil
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"response: %@", responseObject);
@@ -330,8 +330,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{@"givenName": givenName}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"response: %@", responseObject);
@@ -355,8 +355,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:nil
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"response: %@", responseObject);
@@ -383,8 +383,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{@"surname": surname,@"givenName":givenName}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"response: %@", responseObject);
@@ -410,8 +410,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"%@", responseObject);
@@ -447,8 +447,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused (status, responseObject)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"Ignoring response: %@", responseObject);
@@ -542,8 +542,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:params
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"%@", responseObject);
@@ -583,8 +583,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:params
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"%@", responseObject);
@@ -620,8 +620,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:nil
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"%@", responseObject);
@@ -660,8 +660,8 @@ static NSString *const kPathImage     = @"api/user/image";
                                   region:nil
                           callbackOnMain:YES
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      if (handler != nil) {
@@ -687,8 +687,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:nil
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      if (handler != nil) {
@@ -721,8 +721,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:params
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused (status, responseObject)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"Ignoring response: %@", responseObject);
@@ -749,8 +749,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"%@", responseObject);
@@ -778,8 +778,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:params
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"response: %@", responseObject);
@@ -830,8 +830,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:params
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused (status, responseObject)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"Ignoring response: %@", responseObject);
@@ -859,8 +859,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused (status, responseObject)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"Ignoring response: %@", responseObject);
@@ -888,8 +888,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused (status, responseObject)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"Ignoring response: %@", responseObject);
@@ -917,8 +917,8 @@ static NSString *const kPathImage     = @"api/user/image";
                               parameters:@{}
                                   region:nil
                                  success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused (status, responseObject)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      DLog(@"Ignoring response: %@", responseObject);

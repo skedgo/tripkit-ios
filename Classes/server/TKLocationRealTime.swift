@@ -45,7 +45,7 @@ public enum TKLocationRealTime {
         }
         
         return SVKServer.shared.rx
-          .hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, response in
+          .hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, response, _ in
             if case 400..<500 = status {
               return nil // Client-side errors; hitting again won't help
             }
@@ -57,7 +57,7 @@ public enum TKLocationRealTime {
               return 60 // Try again in a while
             }
           }
-          .map { status, response in
+          .map { status, response, _ in
             guard let json = response as? [String: Any] else { return nil }
             return try? TKLocationInfo(object: json)
           }

@@ -23,11 +23,11 @@ extension TKBuzzInfoProvider {
    */
   @objc public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (TKRegionInfo?) -> Void)
   {
-    SVKServer.fetchArray(TKRegionInfo.self,
-                         method: .POST, path: "regionInfo.json",
-                         parameters: ["region": region.name],
-                         region: region,
-                         keyPath: "regions")
+    SVKServer.shared.fetchArray(TKRegionInfo.self,
+                                method: .POST, path: "regionInfo.json",
+                                parameters: ["region": region.name],
+                                region: region,
+                                keyPath: "regions")
     { regions in
       completion(regions.first)
     }
@@ -73,11 +73,11 @@ extension TKBuzzInfoProvider {
       paras = [ "lat": annotation.coordinate.latitude, "lng": annotation.coordinate.longitude ]
     }
     
-    SVKServer.fetch(TKLocationInfo.self,
-                    path: "locationInfo.json",
-                    parameters: paras,
-                    region: region,
-                    completion: completion)
+    SVKServer.shared.fetch(TKLocationInfo.self,
+                           path: "locationInfo.json",
+                           parameters: paras,
+                           region: region,
+                           completion: completion)
   }
   
   
@@ -88,11 +88,11 @@ extension TKBuzzInfoProvider {
    */
   @objc public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TKAlert]) -> Void) {
     
-    SVKServer.fetchArray(TKSimpleAlert.self,
-                         path: "alerts/transit.json",
-                         parameters: ["region": region.name],
-                         region: region,
-                         keyPath: "alerts")
+    SVKServer.shared.fetchArray(TKSimpleAlert.self,
+                                path: "alerts/transit.json",
+                                parameters: ["region": region.name],
+                                region: region,
+                                keyPath: "alerts")
     { alerts in
       completion(alerts as [TKAlert])
     }
@@ -108,7 +108,7 @@ extension TKBuzzInfoProvider {
     
     return SVKServer.shared.rx
       .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
-      .map { (_, response) -> [TKAlert] in
+      .map { (_, response, _) -> [TKAlert] in
         if let json = response as? [String: Any] {
           let alerts: [TKSimpleAlert]? = try? json.value(for: "alerts")
           return alerts ?? []
@@ -120,11 +120,12 @@ extension TKBuzzInfoProvider {
 }
 
 
+
 // MARK: - Helper Extensions -
 
 extension SVKServer {
-  
-  fileprivate class func fetch<E: Unmarshaling>(
+
+  fileprivate func fetch<E: Unmarshaling>(
     _ type: E.Type,
     method: HTTPMethod = .GET,
     path: String,
@@ -134,12 +135,12 @@ extension SVKServer {
     completion: @escaping (E?) -> Void
   )
   {
-    SVKServer.shared.hitSkedGo(
+    hitSkedGo(
       withMethod: method.rawValue,
       path: path,
       parameters: parameters,
       region: region,
-      success: { _, response in
+      success: { _, response, _ in
         guard let json = response as? [String: Any] else {
           SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters ?? [:])" }
           completion(nil)
@@ -164,7 +165,7 @@ extension SVKServer {
     })
   }
   
-  fileprivate class func fetchArray<E: Unmarshaling>(
+  fileprivate func fetchArray<E: Unmarshaling>(
     _ type: E.Type,
     method: HTTPMethod = .GET,
     path: String,
@@ -174,12 +175,12 @@ extension SVKServer {
     completion: @escaping ([E]) -> Void
     )
   {
-    SVKServer.shared.hitSkedGo(
+    hitSkedGo(
       withMethod: method.rawValue,
       path: path,
       parameters: parameters,
       region: region,
-      success: { _, response in
+      success: { _, response, _ in
         guard let json = response as? [String: Any] else {
           SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters ?? [:])" }
           completion([])

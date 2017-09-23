@@ -17,9 +17,9 @@
   DLog(@"requesting form from: %@ with data %@", bookingURL, postData);
   
   // We'll call back on the main thread
-  void (^handler)(NSInteger, id, NSError *) = ^(NSInteger status, id response, NSError *error) {
+  void (^handler)(NSInteger, id, NSData *, NSError *) = ^(NSInteger status, id response, NSData *data, NSError *error) {
     dispatch_async(dispatch_get_main_queue(), ^{
-      completion(status, response, error);
+      completion(status, response, data, error);
     });
   };
 

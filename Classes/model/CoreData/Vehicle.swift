@@ -8,40 +8,19 @@
 
 import Foundation
 
-extension TKOccupancy {
-  
-  public var color: SGKColor? {
-    
-    switch self {
-    case .unknown:
-      return nil
-    case .empty, .manySeatsAvailable:
-      return SGKColor(red: 23/255.0, green: 177/255.0, blue: 94/255.0, alpha: 1)
-    case .fewSeatsAvailable:
-      return SGKColor(red: 255/255.0, green: 181/255.0, blue: 0/255.0, alpha: 1)
-    case .standingRoomOnly, .crushedStandingRoomOnly:
-      return SGKColor(red: 255/255.0, green: 150/255.0, blue: 0/255.0, alpha: 1)
-    case .full, .notAcceptingPassengers:
-      return SGKColor(red: 255/255.0, green: 75/255.0, blue: 71/255.0, alpha: 1)
-    }
-    
-  }
-  
-}
-
 extension Vehicle {
   
-  public var occupancy: TKOccupancy? {
+  public var occupancy: API.Vehicle.Occupancy? {
     get {
-      if let raw = occupancyRaw?.intValue, let converted = TKOccupancy(rawValue: raw) {
-        return converted
+      if let raw = occupancyRaw?.intValue {
+        return API.Vehicle.Occupancy(intValue: raw)
       } else {
         return nil
       }
     }
     set {
       if let occupancy = newValue {
-        occupancyRaw = NSNumber(value: occupancy.rawValue)
+        occupancyRaw = NSNumber(value: occupancy.intValue)
       } else {
         occupancyRaw = nil
       }
@@ -49,7 +28,16 @@ extension Vehicle {
   }
   
   public var isWifiEnabled: Bool? {
-    return wifi?.boolValue
+    get {
+      return wifi?.boolValue
+    }
+    set {
+      if let value = newValue {
+        wifi = NSNumber(value: value)
+      } else {
+        wifi = nil
+      }
+    }
   }
   
   @objc public var serviceNumber: String? {

@@ -146,7 +146,7 @@ extension SVKRegion {
   @objc public func unlinkAccount(_ mode: String, remoteURL: URL, completion: @escaping (Bool) -> Void) {
     
     // Also unlink remote
-    SVKServer.get(remoteURL, paras: nil) { _, response, error in
+    SVKServer.get(remoteURL, paras: nil) { _, response, _, error in
       if let response = response as? [NSObject: AnyObject],
          response.isEmpty && error == nil {
         completion(true)
@@ -172,7 +172,7 @@ extension SVKRegion {
       path: "auth/\(name)",
       parameters: paras,
       region: self,
-      success: { _, response in
+      success: { _, response, _ in
         guard let array = response as? [[String: AnyObject]], !array.isEmpty else {
           completion([])
           return

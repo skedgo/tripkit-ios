@@ -47,7 +47,7 @@ public protocol TKURLSavable: class, TKURLShareable {
 
       let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
       
-      SVKServer.get(saveURL, paras: nil) { _, response, _ in
+      SVKServer.get(saveURL, paras: nil) { _, response, _, _ in
         guard
           let dict = response as? [String: Any],
           let urlString = dict["url"] as? String,

@@ -343,8 +343,8 @@
   [BPKServerUtil requestFormForBookingURL:self.bookingURL
                                  postData:self.postData
                                completion:
-   ^(NSInteger status, NSDictionary *rawForm, NSError *error) {
-#pragma unused(status)
+   ^(NSInteger status, NSDictionary *rawForm, NSData *data, NSError *error) {
+#pragma unused(status, data)
      DLog(@"%@", rawForm);
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;

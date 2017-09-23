@@ -40,8 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) AlertSeverity alertSeverity;
 @property (nonatomic, readonly, nullable) NSURL *imageURL;
 
-+ (instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode
-                      inTripKitContext:(NSManagedObjectContext *)tripKitContext;
++ (nullable instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode
+                               inTripKitContext:(NSManagedObjectContext *)tripKitContext;
 
 + (NSArray *)fetchAlertsWithHashCodes:(NSArray *)hashCodes
                      inTripKitContext:(NSManagedObjectContext *)tripKitContext

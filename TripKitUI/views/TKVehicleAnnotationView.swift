@@ -40,8 +40,8 @@ public class TKVehicleAnnotationView: SGPulsingAnnotationView {
       vehicle.rx.observeWeakly(NSNumber.self, "occupancyRaw")
         .filter { $0 != nil }
         .map { rawOccupancy -> UIColor? in
-          let occupancy = TKOccupancy(rawValue: rawOccupancy!.intValue)
-          return occupancy?.color
+          let occupancy = API.Vehicle.Occupancy(intValue: rawOccupancy!.intValue)
+          return occupancy.color
         }
         .subscribe(onNext: { [weak self] color in
           guard let color = color else { return }
