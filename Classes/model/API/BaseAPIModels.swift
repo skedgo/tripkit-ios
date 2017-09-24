@@ -90,6 +90,19 @@ extension API {
       return SGKColor(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: 1)
     }
     
+    public init?(for color: SGKColor) {
+      var red: CGFloat = 0
+      var green: CGFloat = 0
+      var blue: CGFloat = 0
+      if color.getRed(&red, green: &green, blue: &blue, alpha: nil) {
+        self.red = Int(red * 255)
+        self.green = Int(green * 255)
+        self.blue = Int(blue * 255)
+      } else {
+        return nil
+      }
+    }
+    
     public init(object: MarshaledObject) throws {
       red   = try  object.value(for: "red")
       green = try  object.value(for: "green")

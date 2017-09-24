@@ -10,7 +10,7 @@ import Foundation
 
 /// Information to identify and display a mode. Kind of like the
 /// big sibling of a mode identifier string.
-public class ModeInfo: NSObject, Codable {
+public class ModeInfo: NSObject, Codable, NSSecureCoding {
   @objc public let identifier: String?
 
   /// Text representation of the image
@@ -35,17 +35,6 @@ public class ModeInfo: NSObject, Codable {
     return try? decoder.decode(ModeInfo.self, withJSONObject: json)
   }
   
-  override private init() {
-    identifier = nil
-    alt = ""
-    localImageName = nil
-    remoteImageName = nil
-    remoteDarkImageName = nil
-    descriptor = nil
-    rgbColor = nil
-    super.init()
-  }
-  
   // MARK: Codable
   
   private enum CodingKeys: String, CodingKey {
@@ -58,4 +47,48 @@ public class ModeInfo: NSObject, Codable {
     case rgbColor = "color"
   }
   
+  // MARK: NSSecure coding
+  
+  @objc
+  public static var supportsSecureCoding: Bool { return true }
+
+  @objc(encodeWithCoder:)
+  public func encode(with aCoder: NSCoder) {
+    guard let data = try? JSONEncoder().encode(self) else { return }
+    aCoder.encode(data)
+  }
+  
+  @objc
+  public required init?(coder aDecoder: NSCoder) {
+    if let data = aDecoder.decodeData() {
+      // The new way
+      do {
+        let decoded = try JSONDecoder().decode(ModeInfo.self, from: data)
+        identifier = decoded.identifier
+        alt = decoded.alt
+        localImageName = decoded.localImageName
+        remoteImageName = decoded.remoteImageName
+        remoteDarkImageName = decoded.remoteDarkImageName
+        descriptor = decoded.descriptor
+        rgbColor = decoded.rgbColor
+      } catch {
+        assertionFailure("Couldn't decode due to: \(error)")
+        return nil
+      }
+      
+    } else {
+      // For backwards compatibility
+      alt = (aDecoder.decodeObject(forKey: "alt") as? String) ?? ""
+      identifier = aDecoder.decodeObject(forKey: "identifier") as? String
+      localImageName = aDecoder.decodeObject(forKey: "localIcon") as? String
+      remoteImageName = aDecoder.decodeObject(forKey: "remoteIcon") as? String
+      remoteDarkImageName = aDecoder.decodeObject(forKey: "remoteDarkIcon") as? String
+      descriptor = aDecoder.decodeObject(forKey: "description") as? String
+      if let color = aDecoder.decodeObject(forKey: "color") as? SGKColor {
+        rgbColor = API.RGBColor(for: color)
+      } else {
+        rgbColor = nil
+      }
+    }
+  }
 }
