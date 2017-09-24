@@ -112,7 +112,7 @@ extension API {
     }
     
     public let details: Details?
-//    @objc public let transitStop: STKStopAnnotation? => in "stop"
+    public let stop: STKStopCoordinate?
     public let bikePod: API.BikePodInfo?
     public let carPod:  API.CarPodInfo?
     public let carPark: API.CarParkInfo?

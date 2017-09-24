@@ -17,8 +17,8 @@ import RxSwift
 
 @objc
 public protocol TKAlertModel {
-  var title: String { get }
-  var icon: SGKImage { get }
+  var title: String? { get }
+  var icon: SGKImage? { get }
   var iconURL: URL? { get }
   var text: String? { get }
   var infoURL: URL? { get }

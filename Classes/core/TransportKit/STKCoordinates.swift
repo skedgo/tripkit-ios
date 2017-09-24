@@ -27,6 +27,11 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation {
     }
   }
   
+  public required init?(coder aDecoder: NSCoder) {
+//    FIXME: Implement
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   public var stopModeInfo: ModeInfo {
     get { return data["sg_modeInfo"] as! ModeInfo }
     set { data["sg_modeInfo"] = newValue }
@@ -72,6 +77,11 @@ public class STKStopCoordinate: STKModeCoordinate, STKStopAnnotation {
     stopSortScore = try values.decode(Int?.self, forKey: .popularity)
   }
   
+  public required init?(coder aDecoder: NSCoder) {
+    //    FIXME: Implement
+    fatalError("init(coder:) has not been implemented")
+  }
+
   public var stopCode: String {
     get { return data["sg_stopCode"] as! String }
     set { data["sg_stopCode"] = newValue }
