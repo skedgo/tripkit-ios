@@ -894,7 +894,7 @@
 		3AFFAB561F06854F00147990 /* SGKConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGKConfig.m; sourceTree = "<group>"; };
 		3AFFAB571F06854F00147990 /* SGKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SGKConstants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3AFFAB581F06854F00147990 /* SGKCrossPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SGKCrossPlatform.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		3AFFAB591F06854F00147990 /* SGKCrossPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SGKCrossPlatform.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		3AFFAB591F06854F00147990 /* SGKCrossPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SGKCrossPlatform.swift; sourceTree = "<group>"; };
 		3AFFAB5A1F06854F00147990 /* SGKEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGKEnums.h; sourceTree = "<group>"; };
 		3AFFAB5B1F06854F00147990 /* SGKGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGKGrouping.h; sourceTree = "<group>"; };
 		3AFFAB5C1F06854F00147990 /* SGKLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGKLog.h; sourceTree = "<group>"; };

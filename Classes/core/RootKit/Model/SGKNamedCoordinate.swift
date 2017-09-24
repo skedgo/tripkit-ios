@@ -154,9 +154,14 @@ open class SGKNamedCoordinate : NSObject, Codable {
     name = try? container.decode(String.self, forKey: .name)
     _address = try? container.decode(String.self, forKey: .address)
     locationID = try? container.decode(String.self, forKey: .locationID)
-    data = (try? container.decode([String: Any].self, forKey: .data)) ?? [:]
     isDraggable = (try? container.decode(Bool.self, forKey: .isDraggable)) ?? false
     isSuburb = (try? container.decode(Bool.self, forKey: .isSuburb)) ?? false
+
+    if let encodedData = try? container.decode(Data.self, forKey: .data), let data = try JSONSerialization.jsonObject(with: encodedData, options: []) as? [String: Any] {
+      self.data = data
+    } else {
+      self.data = [:]
+    }
     
     // TODO: Should we include placemark here? What happens if we don't?
   }
@@ -168,9 +173,11 @@ open class SGKNamedCoordinate : NSObject, Codable {
     try container.encode(name, forKey: .name)
     try container.encode(address, forKey: .address)
     try container.encode(locationID, forKey: .locationID)
-    try container.encode(data, forKey: .data)
     try container.encode(isDraggable, forKey: .isDraggable)
     try container.encode(isSuburb, forKey: .isSuburb)
+
+    let encodedData = try JSONSerialization.data(withJSONObject: data, options: [])
+    try container.encode(encodedData, forKey: .data)
   }
   
   // MARK: - NSSecureCoding
@@ -209,7 +216,7 @@ open class SGKNamedCoordinate : NSObject, Codable {
     }
   }
   
-  @objc
+  @objc(encodeWithCoder:)
   open func encode(with aCoder: NSCoder) {
     guard let data = try? JSONEncoder().encode(self) else { return }
     aCoder.encode(data)
