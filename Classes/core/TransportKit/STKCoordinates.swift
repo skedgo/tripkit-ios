@@ -72,9 +72,9 @@ public class STKStopCoordinate: STKModeCoordinate, STKStopAnnotation {
     // Sometimes these comes in the decoder rather than in the "data" field
     guard let values = try? decoder.container(keyedBy: CodingKeys.self) else { return }
     stopCode = try values.decode(String.self, forKey: .code)
-    address = try values.decode(String?.self, forKey: .services)
-    stopShortName = try values.decode(String?.self, forKey: .shortName)
-    stopSortScore = try values.decode(Int?.self, forKey: .popularity)
+    address = try? values.decode(String.self, forKey: .services)
+    stopShortName = try? values.decode(String.self, forKey: .shortName)
+    stopSortScore = try? values.decode(Int.self, forKey: .popularity)
   }
   
   public required init?(coder aDecoder: NSCoder) {
