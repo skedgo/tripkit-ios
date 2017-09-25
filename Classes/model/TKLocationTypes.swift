@@ -34,15 +34,22 @@ public class TKBikePodLocation: STKModeCoordinate {
     try super.init(from: decoder)
   }
   
-  public required init?(coder aDecoder: NSCoder) {
-    //    FIXME: Implement
-    fatalError("init(coder:) has not been implemented")
-  }
-
   public override func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(bikePod, forKey: .bikePod)
   }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    guard let info = try? aDecoder.decode(API.BikePodInfo.self, forKey: "bikePod") else { return nil }
+    rx_bikePodVar = Variable(info)
+    super.init(coder: aDecoder)
+  }
+  
+  public override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    try? aCoder.encode(encodable: bikePod, forKey: "bikePod")
+  }
+
 }
 
 extension Reactive where Base : TKBikePodLocation {
@@ -76,15 +83,23 @@ public class TKCarPodLocation: STKModeCoordinate {
     try super.init(from: decoder)
   }
   
-  public required init?(coder aDecoder: NSCoder) {
-    //    FIXME: Implement
-    fatalError("init(coder:) has not been implemented")
-  }
-
   public override func encode(to encoder: Encoder) throws {
+    try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(carPod, forKey: .carPod)
   }
+
+  public required init?(coder aDecoder: NSCoder) {
+    guard let info = try? aDecoder.decode(API.CarPodInfo.self, forKey: "carPod") else { return nil }
+    rx_carPodVar = Variable(info)
+    super.init(coder: aDecoder)
+  }
+  
+  public override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    try? aCoder.encode(encodable: carPod, forKey: "carPod")
+  }
+  
 }
 
 extension Reactive where Base : TKCarPodLocation {
@@ -118,15 +133,22 @@ public class TKCarParkLocation: STKModeCoordinate {
     try super.init(from: decoder)
   }
   
-  public required init?(coder aDecoder: NSCoder) {
-    //    FIXME: Implement
-    fatalError("init(coder:) has not been implemented")
-  }
-
   public override func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(carPark, forKey: .carPark)
   }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    guard let info = try? aDecoder.decode(API.CarParkInfo.self, forKey: "carPark") else { return nil }
+    rx_carParkVar = Variable(info)
+    super.init(coder: aDecoder)
+  }
+  
+  public override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    try? aCoder.encode(encodable: carPark, forKey: "carPark")
+  }
+
 }
 
 extension Reactive where Base : TKCarParkLocation {
@@ -150,13 +172,39 @@ public class TKCarRentalLocation: STKModeCoordinate {
     try super.init(from: decoder)
   }
   
-  public required init?(coder aDecoder: NSCoder) {
-    //    FIXME: Implement
-    fatalError("init(coder:) has not been implemented")
-  }
-
   public override func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(carRental, forKey: .carRental)
   }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    guard let info = try? aDecoder.decode(API.CarRentalInfo.self, forKey: "carRental") else { return nil }
+    carRental = info
+    super.init(coder: aDecoder)
+  }
+  
+  public override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    try? aCoder.encode(encodable: carRental, forKey: "carRental")
+  }
+
+}
+
+extension NSCoder {
+  
+  enum CoderError: Error {
+    case keyIsNotData(String)
+  }
+  
+  func decode<T: Decodable>(_ type: T.Type, forKey key: String) throws -> T {
+    guard let data = decodeObject(forKey: key) as? Data
+      else { throw CoderError.keyIsNotData(key) }
+    return try JSONDecoder().decode(type, from: data)
+  }
+
+  func encode<T: Encodable>(encodable value: T, forKey key: String) throws {
+    let data = try JSONEncoder().encode(value)
+    encode(data, forKey: key)
+  }
+
 }

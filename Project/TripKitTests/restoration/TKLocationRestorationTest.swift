@@ -68,4 +68,61 @@ class TKLocationRestorationTest: XCTestCase {
     XCTAssertEqual(restored?.stopCode, stop.stopCode)
     XCTAssertEqual(restored?.stopModeInfo.identifier, stop.stopModeInfo.identifier)
   }
+  
+  func testRestoringCarPod() throws {
+    let pod = try JSONDecoder().decode(TKCarPodLocation.self, withJSONObject: [
+      "address": "Mullens Street, Balmain",
+      "carPod": [
+        "identifier": "CND-AU_NSW_Sydney-418",
+        "operator": [
+          "color": [
+            "blue": 134,
+            "green": 82,
+            "red": 253
+          ],
+          "name": "Car Next Door",
+          "remoteIcon": "carnextdoor",
+          "website": "http://www.carnextdoor.com.au"
+        ],
+        "vehicles": [
+          [
+            "description": "Volkswagen Golf\n2006 Grey Volkswagen Golf MANUAL",
+            "name": "Car Next Door"
+          ]
+        ]
+      ],
+      "class": "CarPodLocation",
+      "id": "CND-AU_NSW_Sydney-418",
+      "lat": -33.86199,
+      "lng": 151.17608,
+      "modeInfo": [
+        "alt": "Car Next Door",
+        "color": [
+          "blue": 134,
+          "green": 82,
+          "red": 253
+        ],
+        "description": "Car Next Door",
+        "identifier": "me_car-s_CND",
+        "localIcon": "car-share",
+        "remoteIcon": "carnextdoor"
+      ],
+      "name": "Car Next Door",
+      "timezone": "Australia/Sydney"
+      ]
+    )
+    
+    let archiver = NSKeyedArchiver()
+    archiver.encode(pod)
+    
+    let unarchiver = NSKeyedUnarchiver(forReadingWith: archiver.encodedData)
+    let restored = unarchiver.decodeObject() as? TKCarPodLocation
+    XCTAssertNotNil(restored)
+    XCTAssertEqual(restored?.coordinate.latitude, pod.coordinate.latitude)
+    XCTAssertEqual(restored?.coordinate.longitude, pod.coordinate.longitude)
+    XCTAssertEqual(restored?.name, pod.name)
+    XCTAssertEqual(restored?.address, pod.address)
+    XCTAssertEqual(restored?.stopModeInfo.identifier, pod.stopModeInfo.identifier)
+    XCTAssertEqual(restored?.carPod.operatorInfo.name, pod.carPod.operatorInfo.name)
+  }
 }
