@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Marshal
-
 open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation {
   
   private enum CodingKeys: String, CodingKey {

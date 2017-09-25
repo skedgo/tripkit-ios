@@ -74,7 +74,7 @@ extension API {
     public let name: String
     public let operatorInfo: API.CompanyInfo?
     public let openingHours: API.OpeningHours?
-    public let pricingTable: API.PricingTable?
+    public let pricingTables: [API.PricingTable]?
     public let availableSpaces: Int?
     public let totalSpaces: Int?
     public let lastUpdate: TimeInterval?
@@ -85,7 +85,7 @@ extension API {
       case name
       case operatorInfo = "operator"
       case openingHours
-      case pricingTable
+      case pricingTables
       case availableSpaces
       case totalSpaces
       case lastUpdate

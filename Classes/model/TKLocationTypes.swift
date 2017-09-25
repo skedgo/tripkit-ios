@@ -35,6 +35,7 @@ public class TKBikePodLocation: STKModeCoordinate {
   }
   
   public override func encode(to encoder: Encoder) throws {
+    try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(bikePod, forKey: .bikePod)
   }
@@ -134,6 +135,7 @@ public class TKCarParkLocation: STKModeCoordinate {
   }
   
   public override func encode(to encoder: Encoder) throws {
+    try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(carPark, forKey: .carPark)
   }
@@ -173,6 +175,7 @@ public class TKCarRentalLocation: STKModeCoordinate {
   }
   
   public override func encode(to encoder: Encoder) throws {
+    try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(carRental, forKey: .carRental)
   }

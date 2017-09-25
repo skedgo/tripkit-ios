@@ -14,6 +14,10 @@ import Foundation
 
 extension API {
   
+  enum DecoderError: Error {
+    case notValidTimeZoneIdentifier(String)
+  }
+  
   public struct OpeningHours : Codable {
     
     /// Time zone in which the opening hours are defined
@@ -28,15 +32,23 @@ extension API {
     public init(from decoder: Decoder) throws {
       let values = try decoder.container(keyedBy: CodingKeys.self)
       days = try values.decode([Day].self, forKey: .days)
-      
-      if let timeZone = try? values.decode(TimeZone.self, forKey: .timeZone) {
-        self.timeZone = timeZone
-      } else if let identifier = try? values.decode(String.self, forKey: .timeZone), let timeZone = TimeZone(identifier: identifier) {
+
+      // Originally, we tried decoding `TimeZone.self`, but that leads
+      // to a strange issue in Swift 4.0: https://bugs.swift.org/browse/SR-5981
+      // If we can switch back to that, we could delete the `encode(to:)`
+      // method below.
+      let identifier = try values.decode(String.self, forKey: .timeZone)
+      if let timeZone = TimeZone(identifier: identifier) {
         self.timeZone = timeZone
       } else {
-        assertionFailure("Invalid time zone. Falling back to current.")
-        self.timeZone = .current
+        throw DecoderError.notValidTimeZoneIdentifier(identifier)
       }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(timeZone.identifier, forKey: .timeZone)
+      try container.encode(days, forKey: .days)
     }
 
     
@@ -159,11 +171,11 @@ extension API.OpeningHours {
   /// - Parameter date: Date to check
   /// - Returns: Whether open on provided date
   public func isOpen(at date: Date) -> Bool {
-    for day in days {
-      if day.isOpen(at:date, in: timeZone) {
-        return true
-      }
-    }
+//    for day in days {
+//      if day.isOpen(at:date, in: timeZone) {
+//        return true
+//      }
+//    }
     return false
   }
   
@@ -173,15 +185,16 @@ extension API.OpeningHours {
   /// - Parameter starting: First day of the week
   /// - Returns: Sorted days
   public func days(starting: WeekdayIndex = .monday) -> [Day] {
-    return days.sorted { firstDay, secondDay in
-      guard let first = firstDay.day.relativeWeekday(to: starting) else {
-        return false
-      }
-      guard let second = secondDay.day.relativeWeekday(to: starting) else {
-        return true
-      }
-      return first < second
-    }
+    return []
+//    return days.sorted { firstDay, secondDay in
+//      guard let first = firstDay.day.relativeWeekday(to: starting) else {
+//        return false
+//      }
+//      guard let second = secondDay.day.relativeWeekday(to: starting) else {
+//        return true
+//      }
+//      return first < second
+//    }
   }
   
 }
