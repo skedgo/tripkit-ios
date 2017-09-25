@@ -171,11 +171,11 @@ extension API.OpeningHours {
   /// - Parameter date: Date to check
   /// - Returns: Whether open on provided date
   public func isOpen(at date: Date) -> Bool {
-//    for day in days {
-//      if day.isOpen(at:date, in: timeZone) {
-//        return true
-//      }
-//    }
+    for day in days {
+      if day.isOpen(at:date, in: timeZone) {
+        return true
+      }
+    }
     return false
   }
   
@@ -185,16 +185,15 @@ extension API.OpeningHours {
   /// - Parameter starting: First day of the week
   /// - Returns: Sorted days
   public func days(starting: WeekdayIndex = .monday) -> [Day] {
-    return []
-//    return days.sorted { firstDay, secondDay in
-//      guard let first = firstDay.day.relativeWeekday(to: starting) else {
-//        return false
-//      }
-//      guard let second = secondDay.day.relativeWeekday(to: starting) else {
-//        return true
-//      }
-//      return first < second
-//    }
+    return days.sorted { firstDay, secondDay in
+      guard let first = firstDay.day.relativeWeekday(to: starting) else {
+        return false
+      }
+      guard let second = secondDay.day.relativeWeekday(to: starting) else {
+        return true
+      }
+      return first < second
+    }
   }
   
 }
