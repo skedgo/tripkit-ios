@@ -25,16 +25,30 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation {
     if let values = try? decoder.container(keyedBy: CodingKeys.self), let modeInfo = try? values.decode(ModeInfo.self, forKey: .modeInfo) {
       stopModeInfo = modeInfo
     }
+    assert(stopModeInfo.alt.count > 0)
   }
   
   public required init?(coder aDecoder: NSCoder) {
-//    FIXME: Implement
-    fatalError("init(coder:) has not been implemented")
+    super.init(coder: aDecoder)
   }
   
+  private var _stopModeInfo: ModeInfo? = nil
   public var stopModeInfo: ModeInfo {
-    get { return data["sg_modeInfo"] as! ModeInfo }
-    set { data["sg_modeInfo"] = newValue }
+    get {
+      if let decoded = _stopModeInfo {
+        return decoded
+      } else {
+        let json = data["sg_modeInfo"] as Any
+        let decoded = try! JSONDecoder().decode(ModeInfo.self, withJSONObject: json)
+        _stopModeInfo = decoded
+        return decoded
+      }
+      
+    }
+    set {
+      _stopModeInfo = newValue
+      data["sg_modeInfo"] = try! JSONEncoder().encodeJSONObject(newValue)
+    }
   }
   
   public var pointClusterIdentifier: String? {
@@ -78,8 +92,7 @@ public class STKStopCoordinate: STKModeCoordinate, STKStopAnnotation {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    //    FIXME: Implement
-    fatalError("init(coder:) has not been implemented")
+    super.init(coder: aDecoder)
   }
 
   public var stopCode: String {
