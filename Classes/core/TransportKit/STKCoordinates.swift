@@ -73,7 +73,7 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation {
 public class STKStopCoordinate: STKModeCoordinate, STKStopAnnotation {
   
   private enum CodingKeys: String, CodingKey {
-    case code
+    case stopCode
     case services
     case shortName
     case popularity
@@ -83,10 +83,10 @@ public class STKStopCoordinate: STKModeCoordinate, STKStopAnnotation {
     try super.init(from: decoder)
     isDraggable = false
     
-    // Sometimes these comes in the decoder rather than in the "data" field
+    // From the API these comes in the decoder rather than in the "data" field
     guard let values = try? decoder.container(keyedBy: CodingKeys.self) else { return }
-    stopCode = try values.decode(String.self, forKey: .code)
-    address = try? values.decode(String.self, forKey: .services)
+    stopCode = try values.decode(String.self, forKey: .stopCode)
+    services = try? values.decode(String.self, forKey: .services)
     stopShortName = try? values.decode(String.self, forKey: .shortName)
     stopSortScore = try? values.decode(Int.self, forKey: .popularity)
   }
@@ -94,7 +94,21 @@ public class STKStopCoordinate: STKModeCoordinate, STKStopAnnotation {
   public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
+  
+  public override var subtitle: String? {
+    get {
+      return services // subtitle is services list rather than address
+    }
+    set {
+      // do nothing
+    }
+  }
 
+  public var services: String? {
+    get { return data["sg_services"] as? String }
+    set { data["sg_services"] = newValue }
+  }
+  
   public var stopCode: String {
     get { return data["sg_stopCode"] as! String }
     set { data["sg_stopCode"] = newValue }
