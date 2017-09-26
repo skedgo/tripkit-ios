@@ -60,6 +60,8 @@ FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileDistanceUnit;
 
 + (void)updateUserToken:(nullable NSString *)userToken;
 
+@property (nonatomic, assign) SVKServerType _serverType;
+
 @property (nonatomic, copy) NSString *APIKey;
 
 - (void)registerFileBundle:(NSBundle *)bundle;
