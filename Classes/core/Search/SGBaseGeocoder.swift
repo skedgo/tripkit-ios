@@ -78,7 +78,7 @@ extension SGKNamedCoordinate {
 
 
 extension MKCoordinateRegion {
-  fileprivate static func region(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> MKCoordinateRegion {
+  static func region(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> MKCoordinateRegion {
     let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
     return MKCoordinateRegion(center: coordinate, span: span)
