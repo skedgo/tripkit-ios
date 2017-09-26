@@ -27,7 +27,6 @@ public class AnnotationViewBuilder: NSObject {
     self.mapView = mapView
     self.asLarge = annotation is StopVisits
     
-    // TODO: Also set alpha. As RouteMapManager.alphaForCircleAnnotations
     // TODO: Then also handle `regionDidChangeAnimated` as in RMM
     
     super.init()
@@ -246,6 +245,10 @@ fileprivate extension AnnotationViewBuilder {
 
     circleView.canShowCallout = annotation.title != nil
     circleView.isEnabled = true
+    
+    if #available(iOSApplicationExtension 11.0, *) {
+      circleView.displayPriority = asLarge ? .defaultHigh : .defaultLow
+    }
     
     return circleView
   }
