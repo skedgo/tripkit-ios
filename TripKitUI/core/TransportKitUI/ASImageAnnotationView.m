@@ -64,7 +64,6 @@
   } else {
     self.imageView.image = image;
   }
-  self.imageView.transform = CGAffineTransformIdentity;
   
   if ([displayable respondsToSelector:@selector(pointImageURL)]) {
     NSURL *imageURL = [displayable pointImageURL];
@@ -75,15 +74,6 @@
 - (void)rotateImageForBearing:(CGFloat)bearing
 {
 	[self.imageView rotateForBearing:bearing];
-}
-
-- (void)scaleImageWithFactor:(CGFloat)factor
-{
-  if (factor > 0.99) {
-    self.imageView.transform = CGAffineTransformIdentity;
-  } else {
-    self.imageView.transform = CGAffineTransformMakeScale(factor, factor);
-  }
 }
 
 - (void)setDragState:(MKAnnotationViewDragState)newState animated:(BOOL)animated

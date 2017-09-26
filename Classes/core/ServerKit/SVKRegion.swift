@@ -33,6 +33,7 @@ public class SVKRegion : NSObject, Codable {
     public let coordinate: CLLocationCoordinate2D
 
     @objc public weak var region: SVKRegion? = nil
+    public var orderInRegion: Int? = nil
 
     public let isDraggable: Bool = false
     public let pointDisplaysImage: Bool = true
@@ -142,7 +143,10 @@ public class SVKRegion : NSObject, Codable {
     
     super.init()
     
-    cities.forEach { $0.region = self }
+    for (index, city) in cities.enumerated() {
+      city.region = self
+      city.orderInRegion = index
+    }
   }
   
   public func encode(to encoder: Encoder) throws {

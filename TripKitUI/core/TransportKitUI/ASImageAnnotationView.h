@@ -13,6 +13,4 @@
 
 - (void)rotateImageForBearing:(CGFloat)bearing;
 
-- (void)scaleImageWithFactor:(CGFloat)factor;
-
 @end
