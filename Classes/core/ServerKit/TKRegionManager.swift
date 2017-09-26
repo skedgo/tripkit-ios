@@ -250,28 +250,7 @@ extension TKRegionManager {
 
 // MARK: - Getting regions by coordinates, etc.
 
-extension MKCoordinateRegion {
-  var topLeft: CLLocationCoordinate2D {
-    return validCoordinate(latitude: center.latitude - span.latitudeDelta / 2, longitude: center.longitude - span.longitudeDelta / 2)
-  }
-  
-  var bottomRight: CLLocationCoordinate2D {
-    return validCoordinate(latitude: center.latitude + span.latitudeDelta / 2, longitude: center.longitude + span.longitudeDelta / 2)
-  }
-  
-  private func validCoordinate(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> CLLocationCoordinate2D {
-    let lat = max(-90, min(90, latitude))
-    var lng = longitude
-    while lng < -180 {
-      lng += 360
-    }
-    while lng > 180 {
-      lng -= 360
-    }
-    return CLLocationCoordinate2D(latitude: lat, longitude: lng)
-  }
 
-}
 
 extension TKRegionManager {
   
@@ -280,7 +259,6 @@ extension TKRegionManager {
   public func region(for region: MKCoordinateRegion) -> SVKRegion {
     return self.region(region.topLeft, region.bottomRight)
   }
-  
 
   /// Determines the local (non-international) regions for the coordinate pair
   ///

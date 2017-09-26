@@ -100,6 +100,7 @@
 		3AA39AC51F7A35B60066CC94 /* Codable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39AC41F7A35B60066CC94 /* Codable+Helpers.swift */; };
 		3AA39AC71F7A3FDC0066CC94 /* regions.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AA39AC61F7A3FDC0066CC94 /* regions.json */; };
 		3AA39AC91F7A40ED0066CC94 /* TKRegionManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39AC81F7A40ED0066CC94 /* TKRegionManagerTest.swift */; };
+		3AA39ACF1F7A63BB0066CC94 /* MapKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39ACE1F7A63BA0066CC94 /* MapKit+Extensions.swift */; };
 		3AA77F621F76A913001D412D /* AlertAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA77F611F76A913001D412D /* AlertAPIModels.swift */; };
 		3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */; };
 		3AABDD9B1DF7C2040044A05B /* TKLocationInfoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */; };
@@ -689,6 +690,7 @@
 		3AA39AC41F7A35B60066CC94 /* Codable+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Helpers.swift"; sourceTree = "<group>"; };
 		3AA39AC61F7A3FDC0066CC94 /* regions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = regions.json; path = TripKitTests/Data/regions.json; sourceTree = SOURCE_ROOT; };
 		3AA39AC81F7A40ED0066CC94 /* TKRegionManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRegionManagerTest.swift; sourceTree = "<group>"; };
+		3AA39ACE1F7A63BA0066CC94 /* MapKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extensions.swift"; sourceTree = "<group>"; };
 		3AA77F611F76A913001D412D /* AlertAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAPIModels.swift; sourceTree = "<group>"; };
 		3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+ProductName.swift"; sourceTree = "<group>"; };
 		3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationInfoTest.swift; sourceTree = "<group>"; };
@@ -1836,6 +1838,7 @@
 			children = (
 				3AA39AC41F7A35B60066CC94 /* Codable+Helpers.swift */,
 				3AFFAB361F06854F00147990 /* Date+Helpers.swift */,
+				3AA39ACE1F7A63BA0066CC94 /* MapKit+Extensions.swift */,
 				3AFFAB371F06854F00147990 /* MKMapView+ZoomLevel.h */,
 				3AFFAB381F06854F00147990 /* MKMapView+ZoomLevel.m */,
 				3AFFAB3A1F06854F00147990 /* NSDate+Formatting.swift */,
@@ -3067,6 +3070,7 @@
 				3AFFAE201F06E44900147990 /* SGCountdownCell+STKVehicular.swift in Sources */,
 				3AFFAC5D1F0685F000147990 /* TripKitUIBundle.swift in Sources */,
 				3AF3F2641E04CA8C00A2EEC6 /* TKLocationTypes.swift in Sources */,
+				3AA39ACF1F7A63BB0066CC94 /* MapKit+Extensions.swift in Sources */,
 				3AA03E621F0BC9DB00C6B337 /* SGAggregateGeocoder.swift in Sources */,
 				3AFFABD21F06854F00147990 /* STKAnnotations.swift in Sources */,
 				3AFFADBB1F068E8B00147990 /* BPKForm.swift in Sources */,

@@ -9,6 +9,12 @@
 import Foundation
 import MapKit
 
+#if TK_NO_MODULE
+#else
+  import TripKit
+#endif
+
+
 @objc
 public enum ZoomMode: Int {
   case zoomOnly
@@ -32,11 +38,7 @@ extension TripMapManager {
     if !forzeZoom
       && mapView.visibleMapRect.origin.x >= 0 // might happen if map view is minimized
     {
-      let fromToRect = [trip.request.fromLocation, trip.request.toLocation].reduce(MKMapRectNull) { acc, annotation in
-        let point = MKMapPointForCoordinate(annotation.coordinate)
-        let newRect = MKMapRectMake(point.x, point.y, 1, 1)
-        return MKMapRectUnion(acc, newRect)
-      }
+      let fromToRect = [trip.request.fromLocation, trip.request.toLocation].mapRect
       forzeZoom = (!MKMapRectIntersectsRect(mapView.visibleMapRect, fromToRect))
     }
     

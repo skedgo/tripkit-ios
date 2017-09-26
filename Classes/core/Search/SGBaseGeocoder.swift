@@ -75,22 +75,10 @@ extension SGKNamedCoordinate {
   }
 }
 
-extension MKMapRect {
-  public static func forCoordinateRegion(_ region: MKCoordinateRegion) -> MKMapRect
-  {
-    let a = MKMapPointForCoordinate(CLLocationCoordinate2D(
-      latitude: region.center.latitude + region.span.latitudeDelta / 2,
-      longitude: region.center.longitude - region.span.longitudeDelta / 2))
-    let b = MKMapPointForCoordinate(CLLocationCoordinate2D(
-      latitude: region.center.latitude - region.span.latitudeDelta / 2,
-      longitude: region.center.longitude + region.span.longitudeDelta / 2))
-    
-    return MKMapRectMake(min(a.x,b.x), min(a.y,b.y), abs(a.x-b.x), abs(a.y-b.y))
-  }
-}
+
 
 extension MKCoordinateRegion {
-  public static func region(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> MKCoordinateRegion {
+  fileprivate static func region(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> MKCoordinateRegion {
     let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
     return MKCoordinateRegion(center: coordinate, span: span)
