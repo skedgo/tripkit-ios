@@ -427,18 +427,18 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithCapacity:2];
   paras[@"v"] = @2;
   if (!forced) {
-    [paras setValue:[[SVKRegionManager sharedInstance] regionsHash] forKey:@"hashCode"];
+    [paras setValue:[TKRegionManager.shared regionsHash] forKey:@"hashCode"];
   }
   
   [SVKServer POST:[NSURL URLWithString:regionsURLString]
             paras:paras
        completion:
-   ^(NSInteger status, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
-#pragma unused(status)
-     if (responseObject) {
-       [[SVKRegionManager sharedInstance] updateRegionsFromJSON:responseObject];
+   ^(NSInteger status, id _Nullable responseObject, NSData *data, NSError * _Nullable error) {
+#pragma unused(status, responseObject)
+     if (data) {
+       [TKRegionManager.shared updateRegionsFromData:data];
        
-       if ([[SVKRegionManager sharedInstance] hasRegions]) {
+       if ([TKRegionManager.shared hasRegions]) {
          if (completion) {
            completion(YES, nil);
          }
@@ -653,7 +653,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
     return;
   }
   
-  if ([[SVKRegionManager sharedInstance] hasRegions]) {
+  if ([TKRegionManager.shared hasRegions]) {
     // we have regions
     completion(nil);
     

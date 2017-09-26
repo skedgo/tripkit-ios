@@ -31,7 +31,7 @@
 
 - (NSArray *)autocompleteFast:(NSString *)string forMapRect:(MKMapRect)mapRect
 {
-  NSArray *allRegions = [[SVKRegionManager sharedInstance] regions];
+  NSArray *allRegions = [TKRegionManager.shared regions];
   
   NSMutableArray *array = [NSMutableArray arrayWithCapacity:allRegions.count];
   for (SGAutocompletionResult *result in self.allAutocompletionResults) {
@@ -76,7 +76,7 @@
 - (NSArray *)allAutocompletionResults
 {
   if (! _allAutocompletionResults) {
-    NSArray *allRegions = [[SVKRegionManager sharedInstance] regions];
+    NSArray *allRegions = [TKRegionManager.shared regions];
     
     SGKImage *image = [SGAutocompletionResult imageForType:SGAutocompletionSearchIconCity];
     SGKImage *accessoryImage = [SGStyleManager imageNamed:@"icon-map-info-city"];

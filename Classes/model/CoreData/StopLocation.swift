@@ -11,7 +11,7 @@ import Foundation
 extension StopLocation {
   @objc public var region: SVKRegion? {
     if let name = regionName {
-      return SVKRegionManager.shared.localRegion(named: name)
+      return TKRegionManager.shared.localRegion(named: name)
     } else {
       return location?.regions.first
     }

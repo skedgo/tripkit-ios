@@ -28,7 +28,7 @@ extension TKSegment {
   @objc public func determineRegions() -> [SVKRegion] {
     guard let start = self.start?.coordinate, let end = self.end?.coordinate else { return [] }
     
-    return SVKRegionManager.shared.localRegions(start: start, end: end)
+    return TKRegionManager.shared.localRegions(start: start, end: end)
   }
   
   
@@ -166,7 +166,7 @@ extension TKSegment: STKDisplayablePoint {
     if let part = iconFileNamePart {
       return SVKServer.imageURL(forIconFileNamePart: part, of: iconType)
     } else {
-      return SVKRegionManager.shared.imageURL(forModeIdentifier: modeIdentifier(), of: iconType)
+      return TKRegionManager.shared.imageURL(forModeIdentifier: modeIdentifier(), iconType: iconType)
     }
   }
 }
@@ -187,7 +187,7 @@ extension TKSegment: STKDisplayableTimePoint {
   
   public var timeZone: TimeZone {
     guard let coordinate = start?.coordinate else { return .current }
-    return SVKRegionManager.shared.timeZone(for: coordinate) ?? .current
+    return TKRegionManager.shared.timeZone(for: coordinate) ?? .current
   }
   
   public var timeIsRealTime: Bool {

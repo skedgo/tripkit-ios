@@ -97,6 +97,9 @@
 		3AA03E771F0BC9DB00C6B337 /* SGRegionAutocompleter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E551F0BC9DB00C6B337 /* SGRegionAutocompleter.m */; };
 		3AA03E781F0BC9DB00C6B337 /* SGSearchDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E561F0BC9DB00C6B337 /* SGSearchDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA39AC31F7923290066CC94 /* TKLocationRestorationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39AC21F7923290066CC94 /* TKLocationRestorationTest.swift */; };
+		3AA39AC51F7A35B60066CC94 /* Codable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39AC41F7A35B60066CC94 /* Codable+Helpers.swift */; };
+		3AA39AC71F7A3FDC0066CC94 /* regions.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AA39AC61F7A3FDC0066CC94 /* regions.json */; };
+		3AA39AC91F7A40ED0066CC94 /* TKRegionManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39AC81F7A40ED0066CC94 /* TKRegionManagerTest.swift */; };
 		3AA77F621F76A913001D412D /* AlertAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA77F611F76A913001D412D /* AlertAPIModels.swift */; };
 		3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */; };
 		3AABDD9B1DF7C2040044A05B /* TKLocationInfoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */; };
@@ -250,7 +253,6 @@
 		3AFFAB921F06854F00147990 /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB361F06854F00147990 /* Date+Helpers.swift */; };
 		3AFFAB931F06854F00147990 /* MKMapView+ZoomLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB371F06854F00147990 /* MKMapView+ZoomLevel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFAB941F06854F00147990 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB381F06854F00147990 /* MKMapView+ZoomLevel.m */; };
-		3AFFAB951F06854F00147990 /* NSCoder+Marshal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB391F06854F00147990 /* NSCoder+Marshal.swift */; };
 		3AFFAB961F06854F00147990 /* NSDate+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB3A1F06854F00147990 /* NSDate+Formatting.swift */; };
 		3AFFAB971F06854F00147990 /* NSDate+Helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB3B1F06854F00147990 /* NSDate+Helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFAB981F06854F00147990 /* NSDate+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB3C1F06854F00147990 /* NSDate+Helpers.m */; };
@@ -300,9 +302,7 @@
 		3AFFABC61F06854F00147990 /* SVKError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB6C1F06854F00147990 /* SVKError.swift */; };
 		3AFFABC71F06854F00147990 /* SVKParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB6D1F06854F00147990 /* SVKParserHelper.swift */; };
 		3AFFABC81F06854F00147990 /* SVKRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB6E1F06854F00147990 /* SVKRegion.swift */; };
-		3AFFABC91F06854F00147990 /* SVKRegionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB6F1F06854F00147990 /* SVKRegionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFFABCA1F06854F00147990 /* SVKRegionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB701F06854F00147990 /* SVKRegionManager.m */; };
-		3AFFABCB1F06854F00147990 /* SVKRegionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB711F06854F00147990 /* SVKRegionManager.swift */; };
+		3AFFABCB1F06854F00147990 /* TKRegionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB711F06854F00147990 /* TKRegionManager.swift */; };
 		3AFFABCC1F06854F00147990 /* SVKServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB721F06854F00147990 /* SVKServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABCD1F06854F00147990 /* SVKServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB731F06854F00147990 /* SVKServer.m */; };
 		3AFFABCE1F06854F00147990 /* SVKServerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB741F06854F00147990 /* SVKServerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -686,6 +686,9 @@
 		3AA31FE71F14D15700D6B8EF /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AA31FE81F14D15700D6B8EF /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AA39AC21F7923290066CC94 /* TKLocationRestorationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLocationRestorationTest.swift; sourceTree = "<group>"; };
+		3AA39AC41F7A35B60066CC94 /* Codable+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Helpers.swift"; sourceTree = "<group>"; };
+		3AA39AC61F7A3FDC0066CC94 /* regions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = regions.json; path = TripKitTests/Data/regions.json; sourceTree = SOURCE_ROOT; };
+		3AA39AC81F7A40ED0066CC94 /* TKRegionManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRegionManagerTest.swift; sourceTree = "<group>"; };
 		3AA77F611F76A913001D412D /* AlertAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAPIModels.swift; sourceTree = "<group>"; };
 		3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+ProductName.swift"; sourceTree = "<group>"; };
 		3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationInfoTest.swift; sourceTree = "<group>"; };
@@ -865,7 +868,6 @@
 		3AFFAB361F06854F00147990 /* Date+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
 		3AFFAB371F06854F00147990 /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
 		3AFFAB381F06854F00147990 /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
-		3AFFAB391F06854F00147990 /* NSCoder+Marshal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCoder+Marshal.swift"; sourceTree = "<group>"; };
 		3AFFAB3A1F06854F00147990 /* NSDate+Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Formatting.swift"; sourceTree = "<group>"; };
 		3AFFAB3B1F06854F00147990 /* NSDate+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helpers.h"; sourceTree = "<group>"; };
 		3AFFAB3C1F06854F00147990 /* NSDate+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helpers.m"; sourceTree = "<group>"; };
@@ -915,9 +917,7 @@
 		3AFFAB6C1F06854F00147990 /* SVKError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVKError.swift; sourceTree = "<group>"; };
 		3AFFAB6D1F06854F00147990 /* SVKParserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVKParserHelper.swift; sourceTree = "<group>"; };
 		3AFFAB6E1F06854F00147990 /* SVKRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVKRegion.swift; sourceTree = "<group>"; };
-		3AFFAB6F1F06854F00147990 /* SVKRegionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVKRegionManager.h; sourceTree = "<group>"; };
-		3AFFAB701F06854F00147990 /* SVKRegionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVKRegionManager.m; sourceTree = "<group>"; };
-		3AFFAB711F06854F00147990 /* SVKRegionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVKRegionManager.swift; sourceTree = "<group>"; };
+		3AFFAB711F06854F00147990 /* TKRegionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRegionManager.swift; sourceTree = "<group>"; };
 		3AFFAB721F06854F00147990 /* SVKServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVKServer.h; sourceTree = "<group>"; };
 		3AFFAB731F06854F00147990 /* SVKServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVKServer.m; sourceTree = "<group>"; };
 		3AFFAB741F06854F00147990 /* SVKServerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVKServerKit.h; sourceTree = "<group>"; };
@@ -1626,6 +1626,7 @@
 				3AC4DCF91DEE32B80026B238 /* locationInfo-bikePod.json */,
 				3AABDD9C1DF7C22F0044A05B /* locationInfo-carRental.json */,
 				3AC4DCFA1DEE32B80026B238 /* regionInfo-Sydney.json */,
+				3AA39AC61F7A3FDC0066CC94 /* regions.json */,
 				3AEC3A731F77A9E7009769D0 /* routing-goget.json */,
 				3AC4DCFB1DEE32B80026B238 /* routing-pt-oldish.json */,
 			);
@@ -1640,6 +1641,7 @@
 				3AC4DCFD1DEE32B80026B238 /* TKBuzzInfoProviderTest.swift */,
 				3A3C9BAF1F75219500C8D476 /* TKDeparturesModelTest.swift */,
 				3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */,
+				3AA39AC81F7A40ED0066CC94 /* TKRegionManagerTest.swift */,
 			);
 			path = parsing;
 			sourceTree = "<group>";
@@ -1832,10 +1834,10 @@
 		3AFFAB351F06854F00147990 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				3AA39AC41F7A35B60066CC94 /* Codable+Helpers.swift */,
 				3AFFAB361F06854F00147990 /* Date+Helpers.swift */,
 				3AFFAB371F06854F00147990 /* MKMapView+ZoomLevel.h */,
 				3AFFAB381F06854F00147990 /* MKMapView+ZoomLevel.m */,
-				3AFFAB391F06854F00147990 /* NSCoder+Marshal.swift */,
 				3AFFAB3A1F06854F00147990 /* NSDate+Formatting.swift */,
 				3AFFAB3B1F06854F00147990 /* NSDate+Helpers.h */,
 				3AFFAB3C1F06854F00147990 /* NSDate+Helpers.m */,
@@ -1883,15 +1885,13 @@
 				3AFFAB6C1F06854F00147990 /* SVKError.swift */,
 				3AFFAB6D1F06854F00147990 /* SVKParserHelper.swift */,
 				3AFFAB6E1F06854F00147990 /* SVKRegion.swift */,
-				3AFFAB6F1F06854F00147990 /* SVKRegionManager.h */,
-				3AFFAB701F06854F00147990 /* SVKRegionManager.m */,
-				3AFFAB711F06854F00147990 /* SVKRegionManager.swift */,
 				3AFFAB721F06854F00147990 /* SVKServer.h */,
 				3AFFAB731F06854F00147990 /* SVKServer.m */,
 				3A096E1D1F20DAD500666E59 /* SVKServer.swift */,
 				3AFFAB741F06854F00147990 /* SVKServerKit.h */,
 				3AFFAB751F06854F00147990 /* SVKTransportModes.h */,
 				3AFFAB761F06854F00147990 /* SVKTransportModes.m */,
+				3AFFAB711F06854F00147990 /* TKRegionManager.swift */,
 			);
 			path = ServerKit;
 			sourceTree = "<group>";
@@ -2544,7 +2544,6 @@
 				3AFFAE1D1F06E23C00147990 /* SGWebViewController.h in Headers */,
 				3AFFADA91F068E8B00147990 /* BPKHelpers.h in Headers */,
 				3AB6C70D1D1CD08E0089F687 /* TKRoutingParser.h in Headers */,
-				3AFFABC91F06854F00147990 /* SVKRegionManager.h in Headers */,
 				3AFFABC31F06854F00147990 /* SGKConfig+SVKServerKit.h in Headers */,
 				3AA03E581F0BC9DB00C6B337 /* SGAddressBookManager.h in Headers */,
 				3AFFABBE1F06854F00147990 /* SGRootKit.h in Headers */,
@@ -2712,6 +2711,7 @@
 				3A3C9BB21F75229B00C8D476 /* departures-parentStop.json in Resources */,
 				3AEC3A741F77A9E7009769D0 /* routing-goget.json in Resources */,
 				3AFF6C051DEE40D200E7DFCB /* berowraToHornsby.json in Resources */,
+				3AA39AC71F7A3FDC0066CC94 /* regions.json in Resources */,
 				3AC4DD061DEE32B80026B238 /* locationInfo-bikePod.json in Resources */,
 				3AFF6C091DEE411300E7DFCB /* hornsbyToSkedGo.json in Resources */,
 				3AABDD9D1DF7C22F0044A05B /* locationInfo-carRental.json in Resources */,
@@ -2902,7 +2902,7 @@
 				3AB6C6DB1D1CD08E0089F687 /* SegmentReference.m in Sources */,
 				3AFFABC01F06854F00147990 /* SGStyleManager.m in Sources */,
 				3AFFAD691F068E8B00147990 /* AKPasswordEditViewController.m in Sources */,
-				3AFFABCB1F06854F00147990 /* SVKRegionManager.swift in Sources */,
+				3AFFABCB1F06854F00147990 /* TKRegionManager.swift in Sources */,
 				3AFFAD8F1F068E8B00147990 /* AKTextFieldCell.m in Sources */,
 				3AA03E751F0BC9DB00C6B337 /* SGKNamedCoordinate+BuzzData.swift in Sources */,
 				3AFFAB9A1F06854F00147990 /* NSManagedObjectContext+Fetch.swift in Sources */,
@@ -3063,7 +3063,6 @@
 				3A77691E1D3DE45800AF9EB2 /* TKTTPifierCache.swift in Sources */,
 				3AA03D8B1F0B79D400C6B337 /* TKShareURLProvider.swift in Sources */,
 				3AFFAD6B1F068E8B00147990 /* AKResendEmailViewController.m in Sources */,
-				3AFFAB951F06854F00147990 /* NSCoder+Marshal.swift in Sources */,
 				3AFFABC41F06854F00147990 /* SGKConfig+SVKServerKit.m in Sources */,
 				3AFFAE201F06E44900147990 /* SGCountdownCell+STKVehicular.swift in Sources */,
 				3AFFAC5D1F0685F000147990 /* TripKitUIBundle.swift in Sources */,
@@ -3083,7 +3082,6 @@
 				3AFFAD611F068E8B00147990 /* AKAccountViewController.m in Sources */,
 				3AFFABA81F06854F00147990 /* Loc.swift in Sources */,
 				3AFFAC261F06855F00147990 /* SGLabel.m in Sources */,
-				3AFFABCA1F06854F00147990 /* SVKRegionManager.m in Sources */,
 				3A7769121D3DE45800AF9EB2 /* TKAgendaParserHelper.swift in Sources */,
 				3AFFABCD1F06854F00147990 /* SVKServer.m in Sources */,
 				3AB6C7001D1CD08E0089F687 /* TKBuzzRouter.m in Sources */,
@@ -3134,6 +3132,7 @@
 				3AFFADAD1F068E8B00147990 /* BPKTextFieldHelper.m in Sources */,
 				3A3C9BB81F75346400C8D476 /* BaseAPIModels.swift in Sources */,
 				3AFFADC41F068E8B00147990 /* BPKBTHelper.m in Sources */,
+				3AA39AC51F7A35B60066CC94 /* Codable+Helpers.swift in Sources */,
 				3AFFAD5D1F068E8B00147990 /* UIView+Keyboard.m in Sources */,
 				3ADD5B6A1D9CDF0C00A1742F /* TripMapManager.m in Sources */,
 				3A8F61211F190CE80017ACDA /* SGLocationManager.swift in Sources */,
@@ -3148,6 +3147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AC9A0B31F683F530050217E /* TKGeoJSONTest.swift in Sources */,
+				3AA39AC91F7A40ED0066CC94 /* TKRegionManagerTest.swift in Sources */,
 				3A32CD6D1DC2D1DA003B158B /* TKTestCase.swift in Sources */,
 				3AC4DD0D1DEE32B80026B238 /* TKTTPifierTest.swift in Sources */,
 				3AFFAE161F06D18700147990 /* SGAutocompletionResultTest.m in Sources */,

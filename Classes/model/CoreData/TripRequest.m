@@ -64,7 +64,7 @@
 {
   CLLocationCoordinate2D start = [self.fromLocation coordinate];
   CLLocationCoordinate2D end = [self.toLocation coordinate];
-  return [[SVKRegionManager sharedInstance] regionForCoordinate:start
+  return [TKRegionManager.shared regionForCoordinate:start
                                                     andOther:end];
 }
 
@@ -90,7 +90,7 @@
 - (nonnull NSSet <SVKRegion *> *)touchedRegions
 {
   NSMutableSet *regions = [NSMutableSet setWithCapacity:5];
-  SVKRegionManager *manager = [SVKRegionManager sharedInstance];
+  TKRegionManager *manager = TKRegionManager.shared;
   [regions unionSet:[manager localRegionsForCoordinate:self.fromLocation.coordinate]];
   [regions unionSet:[manager localRegionsForCoordinate:self.toLocation.coordinate]];
   
@@ -118,12 +118,12 @@
 
 - (NSTimeZone *)departureTimeZone
 {
-  return [[SVKRegionManager sharedInstance] timeZoneForCoordinate:[self.fromLocation coordinate]];
+  return [TKRegionManager.shared timeZoneForCoordinate:[self.fromLocation coordinate]];
 }
 
 - (NSTimeZone *)arrivalTimeZone
 {
-  return [[SVKRegionManager sharedInstance] timeZoneForCoordinate:[self.toLocation coordinate]];
+  return [TKRegionManager.shared timeZoneForCoordinate:[self.toLocation coordinate]];
 }
 
 - (BOOL)resultsInSameQueryAs:(TripRequest *)other
