@@ -246,7 +246,7 @@ fileprivate extension AnnotationViewBuilder {
     circleView.canShowCallout = annotation.title != nil
     circleView.isEnabled = true
     
-    if #available(iOSApplicationExtension 11.0, *) {
+    if #available(iOS 11.0, *) {
       circleView.displayPriority = asLarge ? .defaultHigh : .defaultLow
     }
     
