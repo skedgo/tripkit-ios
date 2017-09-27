@@ -95,17 +95,25 @@ extension StopLocation: STKStopAnnotation {
       
       let predicate = departuresPredicate(from: last.departure)
       let visits = managedObjectContext?.fetchObjects(StopVisits.self, sortDescriptors: [NSSortDescriptor(key: "departure", ascending: true)], predicate: predicate, relationshipKeyPathsForPrefetching: nil, fetchLimit: 10) ?? []
-      for visit in visits {
-        output.append("\n")
-        output.append(visit.smsString())
-      }
-      if output.contains("*") {
-        output.append("\n* real-time")
-      }
-      
+      output.append("\n")
+      output.append(visits.localizedShareString)
       return output
     }
     
+  }
+  
+  extension Array where Element: StopVisits {
+    public var localizedShareString: String {
+      var output = ""
+      for visit in self {
+        output.append(visit.smsString())
+        output.append("\n")
+      }
+      if output.contains("*") {
+        output.append("* real-time")
+      }
+      return output
+    }
   }
 
 #endif
