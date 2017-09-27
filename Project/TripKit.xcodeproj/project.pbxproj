@@ -1726,8 +1726,6 @@
 		3ADD5B571D9CDF0C00A1742F /* views */ = {
 			isa = PBXGroup;
 			children = (
-				D3051F5A1F7B6F0400EC8278 /* TKAlertInfoView.swift */,
-				D3051F5B1F7B6F0400EC8278 /* TKAlertInfoView.xib */,
 				3ADD5B581D9CDF0C00A1742F /* CircleAnnotationView.h */,
 				3ADD5B591D9CDF0C00A1742F /* CircleAnnotationView.m */,
 				3A37D5DB1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.h */,
@@ -1736,6 +1734,8 @@
 				3ADD5B5B1D9CDF0C00A1742F /* TKAgendaWidgetInfoView.xib */,
 				3ADD5B5C1D9CDF0C00A1742F /* TKAlertCell.swift */,
 				3ADD5B5D1D9CDF0C00A1742F /* TKAlertCell.xib */,
+				D3051F5A1F7B6F0400EC8278 /* TKAlertInfoView.swift */,
+				D3051F5B1F7B6F0400EC8278 /* TKAlertInfoView.xib */,
 				3ADD5B5E1D9CDF0C00A1742F /* TKDepartureView.swift */,
 				3ADD5B5F1D9CDF0C00A1742F /* TKDepartureView.xib */,
 				3ADD5B601D9CDF0C00A1742F /* TKEmptyAlertView.swift */,
