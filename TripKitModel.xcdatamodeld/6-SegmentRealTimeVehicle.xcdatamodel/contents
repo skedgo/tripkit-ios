@@ -1,33 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
     <entity name="Alert" representedClassName="Alert" syncable="YES">
         <attribute name="action" optional="YES" attributeType="Transformable" customClassName="NSDictionary" syncable="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="hashCode" attributeType="Integer 32" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
-        <attribute name="idService" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="idStopCode" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="hashCode" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="idService" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idStopCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="remoteIcon" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="severity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <fetchIndex name="byHashCodeIndex">
+            <fetchIndexElement property="hashCode" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byIdServiceIndex">
+            <fetchIndexElement property="idService" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byIdStopCodeIndex">
+            <fetchIndexElement property="idStopCode" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Cell" representedClassName="Cell" syncable="YES">
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="hashCode" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="identifier" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="identifier" attributeType="String" syncable="YES"/>
         <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="levelRaw" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="regionIdentifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="regionIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="stops" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopLocation" inverseName="cell" inverseEntity="StopLocation" syncable="YES"/>
+        <fetchIndex name="byIdentifierIndex">
+            <fetchIndexElement property="identifier" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byRegionIdentifierIndex">
+            <fetchIndexElement property="regionIdentifier" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="DLSEntry" representedClassName="DLSEntry" parentEntity="StopVisits" syncable="YES">
-        <attribute name="pairIdentifier" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="pairIdentifier" attributeType="String" syncable="YES"/>
         <relationship name="endStop" maxCount="1" deletionRule="Nullify" destinationEntity="StopLocation" inverseName="endVisits" inverseEntity="StopLocation" syncable="YES"/>
+        <fetchIndex name="byPairIdentifierIndex">
+            <fetchIndexElement property="pairIdentifier" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="SegmentReference" representedClassName="SegmentReference" syncable="YES">
         <attribute name="alertHashCodes" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -37,12 +61,15 @@
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="startTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="templateHashCode" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="realTimeVehicle" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Vehicle" inverseName="segment" inverseEntity="Vehicle" syncable="YES"/>
         <relationship name="realTimeVehicleAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="segmentAlternatives" inverseEntity="Vehicle" syncable="YES"/>
         <relationship name="segmentTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SegmentTemplate" inverseName="references" inverseEntity="SegmentTemplate" syncable="YES"/>
         <relationship name="service" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="segments" inverseEntity="Service" syncable="YES"/>
         <relationship name="trip" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="segmentReferences" inverseEntity="Trip" syncable="YES"/>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="SegmentTemplate" representedClassName="SegmentTemplate" syncable="YES">
         <attribute name="action" optional="YES" attributeType="String" syncable="YES"/>
@@ -51,9 +78,10 @@
         <attribute name="durationWithoutTraffic" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="endLocation" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="hashCode" attributeType="Integer 32" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="hashCode" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="metres" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="metresFriendly" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="metresUnfriendly" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="modeIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="modeInfo" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="notesRaw" optional="YES" attributeType="String" syncable="YES"/>
@@ -63,21 +91,27 @@
         <attribute name="smsMessage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="smsNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startLocation" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="visibility" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="references" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SegmentReference" inverseName="segmentTemplate" inverseEntity="SegmentReference" syncable="YES"/>
         <relationship name="shapes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Shape" inverseName="template" inverseEntity="Shape" syncable="YES"/>
+        <fetchIndex name="byHashCodeIndex">
+            <fetchIndexElement property="hashCode" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Service" representedClassName="Service" syncable="YES">
-        <attribute name="code" attributeType="String" defaultValueString="NO_CODE" indexed="YES" syncable="YES"/>
+        <attribute name="code" attributeType="String" defaultValueString="NO_CODE" syncable="YES"/>
         <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="frequency" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="modeInfo" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="operatorName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="continuation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="progenitor" inverseEntity="Service" syncable="YES"/>
         <relationship name="progenitor" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="continuation" inverseEntity="Service" syncable="YES"/>
         <relationship name="segments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SegmentReference" inverseName="service" inverseEntity="SegmentReference" syncable="YES"/>
@@ -85,52 +119,94 @@
         <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Vehicle" inverseName="service" inverseEntity="Vehicle" syncable="YES"/>
         <relationship name="vehicleAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="serviceAlternatives" inverseEntity="Vehicle" syncable="YES"/>
         <relationship name="visits" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopVisits" inverseName="service" inverseEntity="StopVisits" syncable="YES"/>
+        <fetchIndex name="byCodeIndex">
+            <fetchIndexElement property="code" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byNameIndex">
+            <fetchIndexElement property="name" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byNumberIndex">
+            <fetchIndexElement property="number" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Shape" representedClassName="Shape" syncable="YES">
         <attribute name="encodedWaypoints" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="friendly" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="index" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
-        <attribute name="travelled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="travelled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="services" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="shape" inverseEntity="Service" syncable="YES"/>
         <relationship name="template" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SegmentTemplate" inverseName="shapes" inverseEntity="SegmentTemplate" syncable="YES"/>
         <relationship name="visits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StopVisits" inverseName="shapes" inverseEntity="StopVisits" syncable="YES"/>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byTravelledIndex">
+            <fetchIndexElement property="travelled" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="StopLocation" representedClassName="StopLocation" syncable="YES">
         <attribute name="filter" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="regionName" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="regionName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sortScore" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="stopCode" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="stopCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stopModeInfo" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="wheelchairAccessible" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="cell" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cell" inverseName="stops" inverseEntity="Cell" syncable="YES"/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopLocation" inverseName="parent" inverseEntity="StopLocation" syncable="YES"/>
         <relationship name="endVisits" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DLSEntry" inverseName="endStop" inverseEntity="DLSEntry" syncable="YES"/>
         <relationship name="parent" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="StopLocation" inverseName="children" inverseEntity="StopLocation" syncable="YES"/>
         <relationship name="visits" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopVisits" inverseName="stop" inverseEntity="StopVisits" syncable="YES"/>
+        <fetchIndex name="byNameIndex">
+            <fetchIndexElement property="name" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byRegionNameIndex">
+            <fetchIndexElement property="regionName" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byStopCodeIndex">
+            <fetchIndexElement property="stopCode" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="StopVisits" representedClassName="StopVisits" syncable="YES">
-        <attribute name="arrival" optional="YES" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="arrival" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="bearing" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="departure" optional="YES" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="departure" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="originalTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="regionDay" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="searchString" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="service" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="visits" inverseEntity="Service" syncable="YES"/>
         <relationship name="shapes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Shape" inverseName="visits" inverseEntity="Shape" syncable="YES"/>
         <relationship name="stop" maxCount="1" deletionRule="Nullify" destinationEntity="StopLocation" inverseName="visits" inverseEntity="StopLocation" syncable="YES"/>
+        <fetchIndex name="byArrivalIndex">
+            <fetchIndexElement property="arrival" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byDepartureIndex">
+            <fetchIndexElement property="departure" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byIsActiveIndex">
+            <fetchIndexElement property="isActive" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES">
-        <attribute name="arrivalTime" optional="YES" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="arrivalTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="currencySymbol" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="departureTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -141,7 +217,7 @@
         <attribute name="saveURLString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shareURLString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="temporaryURLString" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="totalCalories" optional="YES" attributeType="Float" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="totalCarbon" optional="YES" attributeType="Float" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="totalHassle" optional="YES" attributeType="Float" usesScalarValueType="NO" syncable="YES"/>
@@ -153,18 +229,36 @@
         <relationship name="representedGroup" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="TripGroup" inverseName="visibleTrip" inverseEntity="TripGroup" syncable="YES"/>
         <relationship name="segmentReferences" toMany="YES" minCount="1" deletionRule="Cascade" destinationEntity="SegmentReference" inverseName="trip" inverseEntity="SegmentReference" syncable="YES"/>
         <relationship name="tripGroup" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TripGroup" inverseName="trips" inverseEntity="TripGroup" syncable="YES"/>
+        <fetchIndex name="byArrivalTimeIndex">
+            <fetchIndexElement property="arrivalTime" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="TripGroup" representedClassName="TripGroup" syncable="YES">
         <attribute name="classification" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="frequency" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="sourcesRaw" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
-        <attribute name="visibilityRaw" attributeType="Integer 16" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="visibilityRaw" attributeType="Integer 16" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="preferredFor" optional="YES" toMany="YES" maxCount="2" deletionRule="Nullify" destinationEntity="TripRequest" inverseName="preferredGroup" inverseEntity="TripRequest" syncable="YES"/>
-        <relationship name="request" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TripRequest" inverseName="tripGroups" inverseEntity="TripRequest" indexed="YES" syncable="YES"/>
-        <relationship name="trips" toMany="YES" deletionRule="Cascade" destinationEntity="Trip" inverseName="tripGroup" inverseEntity="Trip" indexed="YES" syncable="YES"/>
+        <relationship name="request" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TripRequest" inverseName="tripGroups" inverseEntity="TripRequest" syncable="YES"/>
+        <relationship name="trips" toMany="YES" deletionRule="Cascade" destinationEntity="Trip" inverseName="tripGroup" inverseEntity="Trip" syncable="YES"/>
         <relationship name="visibleTrip" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Trip" inverseName="representedGroup" inverseEntity="Trip" syncable="YES"/>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byVisibilityRawIndex">
+            <fetchIndexElement property="visibilityRaw" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byRequestIndex">
+            <fetchIndexElement property="request" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byTripsIndex">
+            <fetchIndexElement property="trips" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="TripRequest" representedClassName="TripRequest" syncable="YES">
         <attribute name="arrivalTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -176,33 +270,45 @@
         <attribute name="purpose" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeCreated" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="timeType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="toLocation" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="preferredGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TripGroup" inverseName="preferredFor" inverseEntity="TripGroup" syncable="YES"/>
-        <relationship name="tripGroups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TripGroup" inverseName="request" inverseEntity="TripGroup" indexed="YES" syncable="YES"/>
+        <relationship name="tripGroups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TripGroup" inverseName="request" inverseEntity="TripGroup" syncable="YES"/>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byTripGroupsIndex">
+            <fetchIndexElement property="tripGroups" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
         <attribute name="bearing" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUpdate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="occupancyRaw" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="wifi" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="segment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SegmentReference" inverseName="realTimeVehicle" inverseEntity="SegmentReference" syncable="YES"/>
         <relationship name="segmentAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SegmentReference" inverseName="realTimeVehicleAlternatives" inverseEntity="SegmentReference" syncable="YES"/>
         <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="vehicle" inverseEntity="Service" syncable="YES"/>
         <relationship name="serviceAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="vehicleAlternatives" inverseEntity="Service" syncable="YES"/>
+        <fetchIndex name="byIdentifierIndex">
+            <fetchIndexElement property="identifier" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byToDeleteIndex">
+            <fetchIndexElement property="toDelete" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <elements>
         <element name="Alert" positionX="952" positionY="324" width="128" height="238"/>
         <element name="Cell" positionX="-99" positionY="131" width="128" height="165"/>
         <element name="DLSEntry" positionX="124" positionY="539" width="128" height="73"/>
         <element name="SegmentReference" positionX="511" positionY="-117" width="128" height="238"/>
-        <element name="SegmentTemplate" positionX="952" positionY="-234" width="128" height="375"/>
+        <element name="SegmentTemplate" positionX="952" positionY="-234" width="128" height="388"/>
         <element name="Service" positionX="315" positionY="149" width="128" height="283"/>
         <element name="Shape" positionX="637" positionY="531" width="128" height="180"/>
         <element name="StopLocation" positionX="-101" positionY="369" width="128" height="268"/>
