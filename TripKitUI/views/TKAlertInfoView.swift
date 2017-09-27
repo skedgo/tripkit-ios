@@ -13,6 +13,7 @@ import UIKit
   import TripKit
 #endif
 
+@objc
 public class TKAlertInfoView: UIView {
   
   @IBOutlet weak var titleLabel: UILabel!
@@ -28,7 +29,7 @@ public class TKAlertInfoView: UIView {
   /// `title` and `text` properties will be used by the titleLabel and
   /// instructionLabel respectively.
   ///
-  public var alert: TKAlertModel? {
+  @objc public var alert: TKAlertModel? {
     didSet {
       guard let alert = alert else { return }
       titleLabel.text = alert.title
@@ -41,7 +42,7 @@ public class TKAlertInfoView: UIView {
   /// set to default texts.
   ///
   /// - Returns: An instance of TKAlertInfoView.
-  public class func newInstance() -> TKAlertInfoView {
+  @objc public class func newInstance() -> TKAlertInfoView {
     return Bundle.tripKitUI.loadNibNamed("TKAlertInfoView", owner: self, options: nil)!.first as! TKAlertInfoView
   }
   
@@ -52,7 +53,7 @@ public class TKAlertInfoView: UIView {
   ///
   /// - Parameter alert: An alert instance used to configure title and instruction labels.
   /// - Returns: An instance of TKAlertInfoView
-  public class func newInstance(with alert: TKAlertModel) -> TKAlertInfoView {
+  @objc public class func newInstance(with alert: TKAlertModel) -> TKAlertInfoView {
     let view = newInstance()
     view.alert = alert
     return view
@@ -61,7 +62,7 @@ public class TKAlertInfoView: UIView {
   
   /// Asks the alert info view to show only its title, i.e., hide the instruction
   /// portion of the view.
-  public func showTitleOnly() {
+  @objc public func showTitleOnly() {
     guard superview != nil, isShowingFullContent else { return }
     frame.origin.y += frame.size.height - instructionLabel.frame.origin.y
     isShowingFullContent = false
@@ -70,7 +71,7 @@ public class TKAlertInfoView: UIView {
   
   /// Ask the alert info view to show its entire content, including both title
   /// and instruction.
-  public func showFullContent() {
+  @objc public func showFullContent() {
     guard superview != nil, !isShowingFullContent else { return }
     frame.origin.y -= frame.size.height - instructionLabel.frame.origin.y
     isShowingFullContent = true
@@ -78,7 +79,7 @@ public class TKAlertInfoView: UIView {
   
   
   /// Toggles the alert info view betwen showing title only or full content.
-  public func toggle() {
+  @objc public func toggle() {
     isShowingFullContent ? showTitleOnly() : showFullContent()
   }
   
@@ -89,7 +90,7 @@ public class TKAlertInfoView: UIView {
   /// so when the containing view isn't implemented using auto layout.
   ///
   /// - Parameter containingView: The view in which the alert info view will appear.
-  public func sizeToFitContent(within containingView: UIView) {
+  @objc public func sizeToFitContent(within containingView: UIView) {
     guard containingView.frame.width > 0 else {
       // If the containing view has zero width, a sign that layout is still in
       // progess, continuing on will produce a bunch of auto layout warnings.
