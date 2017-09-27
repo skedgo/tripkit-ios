@@ -120,7 +120,7 @@ extension Service {
     operatorName = model.operatorName
     isWheelchairAccessible = model.wheelchairAccessible ?? false // FIXME: Should be optional
     isBicycleAccessible = model.bicycleAccessible ?? false
-    // FIXME: alertHashCodes = model.alertHashCodes
+    alertHashCodes = model.alertHashCodes?.map { NSNumber(value: $0) }
     
     adjustRealTimeStatus(for: model.realTimeStatus ?? .incapable)
     addVehicles(primary: model.primaryVehicle, alternatives: model.alternativeVehicles)

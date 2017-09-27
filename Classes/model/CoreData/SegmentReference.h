@@ -23,7 +23,7 @@
 @property (nonatomic, retain) NSNumber * templateHashCode;
 @property (nonatomic, retain) id data; // NSData (or NSDictionary)
 @property (nonatomic, assign) BOOL toDelete;
-@property (nonatomic, retain) NSArray<NSString *> * alertHashCodes;
+@property (nonatomic, retain) NSArray<NSNumber *> * alertHashCodes;
 @property (nonatomic, retain) SegmentTemplate *segmentTemplate;
 @property (nonatomic, retain) Trip *trip;
 @property (nonatomic, retain) Service *service;

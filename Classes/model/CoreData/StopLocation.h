@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) Cell *cell;
 @property (nonatomic, retain, nullable) NSSet<StopLocation *> *children;
 @property (nonatomic, retain, nullable) NSSet<StopVisits *> *visits;
-@property (nonatomic, retain, nullable) NSArray<NSString *> *alertHashCodes;
+@property (nonatomic, retain, nullable) NSArray<NSNumber *> *alertHashCodes;
 
 // Non core data properties
 @property (nonatomic, strong, nullable) NSDate *lastEarliestDate;

@@ -120,6 +120,7 @@ extension TKDeparturesProvider {
     
     TKAPIToCoreDataConverter.updateOrAddAlerts(departures.alerts, in: context)
     
+    stops.forEach { $0.resetAlertCache() }
     return addedStops
   }
 }

@@ -8,7 +8,10 @@
 
 import UIKit
 
-import TripKit
+#if TK_NO_MODULE
+#else
+  import TripKit
+#endif
 
 public class TKAlertInfoView: UIView {
   
@@ -25,7 +28,7 @@ public class TKAlertInfoView: UIView {
   /// `title` and `text` properties will be used by the titleLabel and
   /// instructionLabel respectively.
   ///
-  public var alert: TKAlert? {
+  public var alert: TKAlertModel? {
     didSet {
       guard let alert = alert else { return }
       titleLabel.text = alert.title
@@ -49,7 +52,7 @@ public class TKAlertInfoView: UIView {
   ///
   /// - Parameter alert: An alert instance used to configure title and instruction labels.
   /// - Returns: An instance of TKAlertInfoView
-  public class func newInstance(with alert: TKAlert) -> TKAlertInfoView {
+  public class func newInstance(with alert: TKAlertModel) -> TKAlertInfoView {
     let view = newInstance()
     view.alert = alert
     return view
