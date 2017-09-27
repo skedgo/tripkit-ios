@@ -31,7 +31,6 @@
 @property (nonatomic, strong) id endLocation;
 @property (nonatomic, retain) NSNumber * metres;
 @property (nonatomic, retain) NSNumber * metresFriendly;
-@property (nonatomic, retain) NSNumber * metresUnfriendly;
 @property (nonatomic, strong) NSString * modeIdentifier;
 @property (nonatomic, strong) NSString * notesRaw;
 @property (nonatomic, strong) NSString * scheduledStartStopCode;

@@ -54,7 +54,6 @@
   template.durationWithoutTraffic = dict[@"durationWithoutTraffic"];
   template.metres           = dict[@"metres"];
   template.metresFriendly   = dict[@"metresSafe"];
-  template.metresUnfriendly = dict[@"metresUnsafe"];
   
   if (template.segmentType.integerValue == TKSegmentTypeScheduled) {
     template.scheduledStartStopCode = dict[@"stopCode"];

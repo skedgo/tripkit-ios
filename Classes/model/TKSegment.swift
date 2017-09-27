@@ -53,16 +53,6 @@ extension TKSegment {
   
 }
 
-// MARK: - Path info
-
-extension TKSegment {
-  
-  public var canShowPathFriendliness: Bool {
-    return self.template != nil && self.template.metresFriendly != nil
-  }
-  
-}
-
 // MARK: - Vehicles
 
 extension TKSegment {
