@@ -254,12 +254,12 @@ extension TKRegionManager {
 
 extension TKRegionManager {
   
-  /// - Returns: A matching local region or the shared instance of `SVKInternationalRegion` if coordinate region falls outside local regions.
-  @objc(regionForCoordinateRegion:)
-  public func region(for region: MKCoordinateRegion) -> SVKRegion {
-    return self.region(region.topLeft, region.bottomRight)
+  /// - Returns: A matching local region or the shared instance of `SVKInternationalRegion` if no local region contains this coordinate region.
+  @objc(regionContainingCoordinateRegion:)
+  public func region(containing region: MKCoordinateRegion) -> SVKRegion {
+    return self.region(containing: region.topLeft, region.bottomRight)
   }
-
+  
   /// Determines the local (non-international) regions for the coordinate pair
   ///
   /// - Parameters:
@@ -272,8 +272,8 @@ extension TKRegionManager {
   @objc(localRegionsForStart:andEnd:)
   public func localRegions(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D) -> [SVKRegion] {
     
-    let startRegions  = localRegions(for: start)
-    let endRegions    = localRegions(for: end)
+    let startRegions  = localRegions(containing: start)
+    let endRegions    = localRegions(containing: end)
     
     if let intersectingRegion = startRegions.intersection(endRegions).first {
       return [intersectingRegion]
@@ -285,11 +285,19 @@ extension TKRegionManager {
   }
   
   
+  /// - Returns: Local regions that overlap with the provided coordinate region. Can be empty.
+  @objc(localRegionsOverlappingCoordinateRegion:)
+  public func localRegions(overlapping region: MKCoordinateRegion) -> [SVKRegion] {
+    let mapRect = MKMapRect.forCoordinateRegion(region)
+    return regions.filter { $0.intersects(mapRect) }
+  }
+  
+
   /// - Parameter coordinate: A coordinate
   /// - Returns: The local (non-international) regions intersecting with the 
   ///     provided coordinate
-  @objc(localRegionsForCoordinate:)
-  public func localRegions(for coordinate: CLLocationCoordinate2D) -> Set<SVKRegion> {
+  @objc(localRegionsContainingCoordinate:)
+  public func localRegions(containing coordinate: CLLocationCoordinate2D) -> Set<SVKRegion> {
     guard coordinate.isValid else { return [] }
     
     let containing = regions.filter { $0.contains(coordinate) }
@@ -312,9 +320,14 @@ extension TKRegionManager {
   ///   - second: Another valid coordinate
   /// - Returns: A local region if both lie within the same or the shared
   ///     international region instance.
-  @objc(regionForCoordinate:andOther:)
-  public func region(_ first: CLLocationCoordinate2D, _ second: CLLocationCoordinate2D) -> SVKRegion {
-    return localRegions(start: first, end: second).first ?? SVKInternationalRegion.shared
+  @objc(regionContainingCoordinate:andOther:)
+  public func region(containing first: CLLocationCoordinate2D, _ second: CLLocationCoordinate2D) -> SVKRegion {
+    let local = localRegions(start: first, end: second)
+    if local.count == 1 {
+      return local.first!
+    } else {
+      return SVKInternationalRegion.shared
+    }
   }
   
   
@@ -323,7 +336,7 @@ extension TKRegionManager {
   ///     return `nil` if the coordinate falls outside any supported region.
   @objc(timeZoneForCoordinate:)
   public func timeZone(for coordinate: CLLocationCoordinate2D) -> TimeZone? {
-    return localRegions(for: coordinate).first?.timeZone
+    return localRegions(containing: coordinate).first?.timeZone
   }
   
   
@@ -334,8 +347,8 @@ extension TKRegionManager {
   public func city(nearestTo target: CLLocationCoordinate2D) -> SVKRegion.City? {
     typealias Match = (SVKRegion.City, CLLocationDistance)
     
-    let cities = localRegions(for: target).reduce(mutating: []) {
-      $0.append(contentsOf: $1.cities)
+    let cities = localRegions(containing: target).reduce(mutating: [SVKRegion.City]()) { cities, region in
+      cities.append(contentsOf: region.cities)
     }
     let best = cities.reduce(nil) { acc, city -> Match? in
       guard let distance = target.distance(from: city.coordinate) else { return acc }

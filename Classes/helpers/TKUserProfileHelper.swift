@@ -117,6 +117,11 @@ public class TKUserProfileHelper: NSObject {
       return [SVKTransportModeIdentifierSchoolBuses]
     }
   }
+
+  @objc public class var hiddenAndMinimizedModeIdentifiers: Set<Identifier> {
+    return minimizedModeIdentifiers.union(hiddenModeIdentifiers)
+  }
+
   
   //MARK: - Preferred transit modes
   

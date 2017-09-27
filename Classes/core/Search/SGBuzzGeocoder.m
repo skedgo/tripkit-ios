@@ -68,7 +68,7 @@
     SVKRegion *region = nil;
     if (!MKMapRectEqualToRect(mapRect, MKMapRectWorld) && !MKMapRectIsNull(mapRect)) {
       MKCoordinateRegion coordinateRegion = MKCoordinateRegionForMapRect(mapRect);
-      region = [TKRegionManager.shared regionForCoordinateRegion:coordinateRegion];
+      region = [TKRegionManager.shared regionContainingCoordinateRegion:coordinateRegion];
       if (! region) {
         region = self.fallbackRegion;
       }
@@ -214,7 +214,7 @@
   }
 	
   MKCoordinateRegion coordinateRegion = MKCoordinateRegionForMapRect(mapRect);
-  SVKRegion *region = [TKRegionManager.shared regionForCoordinateRegion:coordinateRegion];
+  SVKRegion *region = [TKRegionManager.shared regionContainingCoordinateRegion:coordinateRegion];
   if (! region) {
     completion(nil);
     return;

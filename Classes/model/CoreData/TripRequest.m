@@ -64,8 +64,7 @@
 {
   CLLocationCoordinate2D start = [self.fromLocation coordinate];
   CLLocationCoordinate2D end = [self.toLocation coordinate];
-  return [TKRegionManager.shared regionForCoordinate:start
-                                                    andOther:end];
+  return [TKRegionManager.shared regionContainingCoordinate:start andOther:end];
 }
 
 - (SVKRegion *)startRegion
@@ -91,8 +90,8 @@
 {
   NSMutableSet *regions = [NSMutableSet setWithCapacity:5];
   TKRegionManager *manager = TKRegionManager.shared;
-  [regions unionSet:[manager localRegionsForCoordinate:self.fromLocation.coordinate]];
-  [regions unionSet:[manager localRegionsForCoordinate:self.toLocation.coordinate]];
+  [regions unionSet:[manager localRegionsContainingCoordinate:self.fromLocation.coordinate]];
+  [regions unionSet:[manager localRegionsContainingCoordinate:self.toLocation.coordinate]];
   
   if (regions.count >= 2) {
     [regions addObject:[SVKInternationalRegion shared]];

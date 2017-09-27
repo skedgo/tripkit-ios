@@ -11,7 +11,7 @@ import Foundation
 extension SGKNamedCoordinate {
   
   @objc public var regions: Set<SVKRegion> {
-    return TKRegionManager.shared.localRegions(for: self.coordinate)
+    return TKRegionManager.shared.localRegions(containing: self.coordinate)
   }
   
 }
