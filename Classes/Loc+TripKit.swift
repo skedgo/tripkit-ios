@@ -26,6 +26,10 @@ extension Loc {
     return NSLocalizedString("Public holiday", tableName: "TripKit", bundle: .tripKit, comment: "")
   }
   
+  public static var Show: String {
+    return NSLocalizedString("Show", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that, when tapped, shows something, e.g., a list of alert")
+  }
+  
   // MARK: - Linking to TSP
   
   @objc public static var Disconnect: String {
@@ -73,6 +77,15 @@ extension Loc {
       let format = NSLocalizedString("%@ stops", tableName: "TripKit", bundle: .tripKit, comment: "Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops)")
       return String(format: format, NSNumber(value: count))
     }
+  }
+  
+  public static func Alerts(_ count: Int) -> String? {
+    guard count > 1 else {
+      return nil
+    }
+    
+    let format = NSLocalizedString("%@ alerts", tableName: "TripKit", bundle: .tripKit, comment: "Number of alerts, in this case, there are multiple (plural")
+    return String(format: format, NSNumber(value: count))
   }
 
 }

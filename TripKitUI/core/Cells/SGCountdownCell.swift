@@ -8,6 +8,9 @@
 
 import Foundation
 
+import RxSwift
+import RxCocoa
+
 public struct SGCountdownCellModel {
   
   public var title: NSAttributedString
@@ -16,25 +19,21 @@ public struct SGCountdownCellModel {
   public var icon: UIImage?
   public var iconImageURL: URL?
   public var time: Date?
-  public var parking: String?
   public var position: SGKGrouping
   public var color: UIColor?
-  public var alertText: String?
-  public var alertIconType: STKInfoIconType
   public var isCancelled: Bool = false
   public var isWheelchairEnabled: Bool = false
   public var isAccessible: Bool?
+  public var alerts: [Alert] = []
   
-  public init(title: NSAttributedString, position: SGKGrouping = .edgeToEdge, alertIconType: STKInfoIconType = .none) {
+  public init(title: NSAttributedString, position: SGKGrouping = .edgeToEdge) {
     self.title = title
     self.position = position
-    self.alertIconType = alertIconType
   }
   
 }
 
 extension SGCountdownCell {
-  
   
   public func configure(with model: SGCountdownCellModel) {
     showAsCanceled = model.isCancelled
@@ -45,19 +44,20 @@ extension SGCountdownCell {
       , icon: model.icon
       , iconImageURL: model.iconImageURL
       , timeToCountdownTo: model.time
-      , parkingAvailable: model.parking
       , position: model.position
       , stripColor: model.color)
     
     // We may have alert.
-    configureAlertView(withText: model.alertText, andType: model.alertIconType)
+    configureAlertView(with: model.alerts)
     
     // We may need to show accessibility info.
     configureAccessibleView(asEnabled: model.isWheelchairEnabled, isAccessible: model.isAccessible)
   }
   
   
-  /// Configures the cell with the defined content.
+  /// Configures the cell with the defined content. Note that, this configure the main
+  /// part of the cell only. In order to configure the alert and accessibility parts
+  /// of the cell, separate method calls are required.
   ///
   /// - Parameters:
   ///   - title: The title to be displayed in the first line. Doesn't need to wrap.
@@ -66,10 +66,9 @@ extension SGCountdownCell {
   ///   - icon: Image to be displayed on the left.
   ///   - iconImageURL: URL to remote image to replace icon
   ///   - timeToCountdownTo: Optional time to countdown to/from. If this is in the past, the cell should appear faded.
-  ///   - parkingAvailable: Amount of parking to display
   ///   - position: Position of this cell relative to the cells around it.
   ///   - stripColor: Optional color to display a coloured strip under the icon.
-  @objc public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, parkingAvailable: String?, position: SGKGrouping, stripColor: SGKColor?) {
+  @objc public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, position: SGKGrouping, stripColor: SGKColor?) {
     
     _resetContents()
     
@@ -79,20 +78,40 @@ extension SGCountdownCell {
       , icon: icon
       , iconImageURL: iconImageURL
       , timeToCountdownTo: timeToCountdownTo
-      , parkingAvailable: parkingAvailable
       , position: position
       , strip: stripColor)
+    
+    // The cell doesn't show alert by default.
+    configureAlertView(with: [])
   }
   
   
-  @objc public func configureAlertView(withText alertText: String?, andType alertType: STKInfoIconType) {
-    if alertText?.isEmpty ?? true {
-      alertLabel.text = nil
-      alertSymbol.image = nil
-    } else {
-      alertLabel.text = alertText
-      alertSymbol.image = STKInfoIcon.image(for: alertType, usage: .normal)
+  @objc public func configureAlertView(with alerts: [Alert]) {
+    alertIconWidth.constant = alerts.isEmpty ? 0 : 20
+    alertViewTopConstraint.constant = alerts.isEmpty ? 0 : 8
+    alertViewBottomConstraint.constant = alerts.isEmpty ? 0 : 8
+    showButtonHeightConstraint.constant = alerts.isEmpty ? 0 : showButton.intrinsicContentSize.height
+    
+    showButton.isHidden = alerts.isEmpty
+    alertSymbol.isHidden = alerts.isEmpty
+    alertLabel.isHidden = alerts.isEmpty    
+    alertSeparator.isHidden = alerts.isEmpty
+    
+    guard let mostSevere = alerts.first else {
+      return
     }
+    
+    alertSymbol.image = STKInfoIcon.image(for: mostSevere.infoIconType, usage: .normal)
+    alertLabel.text = alerts.count == 1 ? mostSevere.text : Loc.Alerts(alerts.count) ?? ""
+    showButton.setTitle(Loc.Show, for: .normal)
+    
+    let disposeBag = objcDisposeBag.disposeBag    
+    showButton.rx.tap
+      .subscribe(onNext: { [unowned self] in
+        guard self.alertPresentationHandler != nil else { return }
+        self.alertPresentationHandler(alerts)
+      })
+      .addDisposableTo(disposeBag)
   }
   
   
