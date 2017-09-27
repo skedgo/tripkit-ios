@@ -26,3 +26,9 @@ public class TripKitUIBundle: NSObject {
   }
   
 }
+
+extension Bundle {
+  
+  public static let tripKitUI: Bundle = TripKitUIBundle.bundle()
+  
+}
