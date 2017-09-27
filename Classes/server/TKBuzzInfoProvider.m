@@ -394,7 +394,7 @@ typedef enum {
                             primaryVehicle:responseDict[@"realtimeVehicle"]
                        alternativeVehicles:responseDict[@"realtimeVehicleAlternatives"]];
   
-  // alert
+  // alert  
   [TKParserHelper updateOrAddAlerts:responseDict[@"alerts"]
                    inTripKitContext:context];
   
@@ -516,8 +516,7 @@ typedef enum {
                            alternativeVehicles:departureDict[@"realtimeVehicleAlternatives"]];
 			
 			// the alerts
-			[TKParserHelper updateOrAddAlerts:departureDict[@"alerts"]
-                       inTripKitContext:context];
+      service.alertHashCodes = departureDict[@"alertHashCodes"];
 			
 			// add the visit information
 			StopVisits *visit = [NSEntityDescription insertNewObjectForEntityForName:entityName
@@ -571,6 +570,11 @@ typedef enum {
                    inTripKitContext:context];
 	
   if (forSingleStop) {
+    // Here, we know we have a non-nil stopLocation and that alerts
+    // have been either added or updated in core data. So let's
+    // reset the alerts such that the new ones are used in the next
+    // fetch.
+    [stopOrNil resetAlertCache];
     return @(flags);
   } else {
     return pairIdentifiers;
