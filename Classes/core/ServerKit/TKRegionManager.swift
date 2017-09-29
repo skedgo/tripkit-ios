@@ -344,6 +344,7 @@ extension TKRegionManager {
   ///
   /// - Parameter target: Coordinate for which to find closest city
   /// - Returns: Nearest City
+  @objc(cityNearestToCoordinate:)
   public func city(nearestTo target: CLLocationCoordinate2D) -> SVKRegion.City? {
     typealias Match = (SVKRegion.City, CLLocationDistance)
     

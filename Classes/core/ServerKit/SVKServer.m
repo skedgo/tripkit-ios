@@ -392,6 +392,9 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
     self.lastDevelopmentServer = developmentServer;
     self.region = nil;
     
+    // We're caching the server, so override the cache
+    SVKServer.serverType = currentType;
+    
     // User tokens are bound to servers, so clear those, too.
     [SVKServer updateUserToken:nil];
     
