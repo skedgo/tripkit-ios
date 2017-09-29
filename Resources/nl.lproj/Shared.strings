@@ -40,9 +40,6 @@
 /* Credit card CVC */
 "CVC" = "CVV";
 
-/* No comment provided by engineer. */
-"Can't find your current city" = "Huidige locatie kan niet gevonden worden";
-
 /* Cancel action */
 "Cancel" = "Annuleer";
 

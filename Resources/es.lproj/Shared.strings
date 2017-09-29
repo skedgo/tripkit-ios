@@ -40,9 +40,6 @@
 /* Credit card CVC */
 "CVC" = "CVC";
 
-/* No comment provided by engineer. */
-"Can't find your current city" = "No se pudo detectar su ciudad actual";
-
 /* Cancel action */
 "Cancel" = "Cancelar";
 

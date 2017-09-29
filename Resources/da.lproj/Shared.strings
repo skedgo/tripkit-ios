@@ -40,9 +40,6 @@
 /* Credit card CVC */
 "CVC" = "CVC";
 
-/* No comment provided by engineer. */
-"Can't find your current city" = "Kan ikke finde din nuværende by";
-
 /* Cancel action */
 "Cancel" = "Fortryd";
 

@@ -155,11 +155,6 @@ public class Loc : NSObject {
   }
   
   @objc
-  public static var CantFindCurrentCity: String {
-    return NSLocalizedString("Can't find your current city", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "")
-  }
-  
-  @objc
   public static var ChangeTrackingOptions: String {
     return NSLocalizedString("Change tracking options", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Accessibility - user location button - hint")
   }

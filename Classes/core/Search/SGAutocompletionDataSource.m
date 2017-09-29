@@ -114,23 +114,6 @@ typedef enum {
   self.startedTyping = NO;
 }
 
-- (void)prepareForNewScopeSearchShowStickyForCurrentLocation:(BOOL)stickyForGPS
-{
-  // config for what to include in autocompletion
-  self.showStickyForCurrentLocation = stickyForGPS;
-  self.showTextForCurrentCity = YES;
-  self.showStickyForDropPin = NO;
-  self.showSearchOptions = NO;
-  
-  // local variable set-up
-  self.lastSearch = nil;
-  self.filteredPreviousResults = nil;
-  self.additionalProviderRows = nil;
-  self.fastResults = @[];
-  self.slowResults = @[];
-  self.startedTyping = NO;
-}
-
 - (void)autocomplete:(NSString *)string
           forMapRect:(MKMapRect)mapRect
           completion:(SGSearchAutocompletionActionBlock)completion
