@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.source_files = "AddOns/TripKitAddOns.h"
 
   s.subspec 'InterApp' do |cs|
-    s.ios.deployment_target = '9.0'
+    cs.ios.deployment_target = '9.0'
 
     cs.dependency 'TripKit', "~> #{s.version}"
     cs.source_files = "AddOns/InterApp/**/*.{h,m,swift}"
