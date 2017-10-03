@@ -77,7 +77,7 @@ class TKAlertCell: UITableViewCell {
         .subscribe(onNext: { [unowned self] in
           self.tappedOnLink.onNext(url)
         })
-        .addDisposableTo(disposeBag)
+        .disposed(by: disposeBag)
     } else {
       actionButton.isHidden = true
     }

@@ -101,7 +101,7 @@ extension BPKForm {
     let hiddenNilValueFields = formFields.filter { field in
       let isHidden = field["hidden"].boolValue
       let value = field["value"].string ?? ""
-      let isEmpty = value.characters.count == 0
+      let isEmpty = value.count == 0
       return isHidden && isEmpty
     }
     

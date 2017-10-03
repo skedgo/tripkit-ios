@@ -130,7 +130,7 @@ public class SVKRegion : NSObject, Codable {
     urls = try container.decode([URL].self, forKey: .urls)
     
     encodedPolygon = try container.decode(String.self, forKey: .encodedPolygon)
-    if encodedPolygon.characters.count == 0 {
+    if encodedPolygon.count == 0 {
       throw SVKRegionParserError.emptyPolygon
     }
 

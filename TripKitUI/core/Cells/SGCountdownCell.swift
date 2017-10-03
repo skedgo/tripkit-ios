@@ -111,7 +111,7 @@ extension SGCountdownCell {
         guard self.alertPresentationHandler != nil else { return }
         self.alertPresentationHandler(alerts)
       })
-      .addDisposableTo(disposeBag)
+      .disposed(by: disposeBag)
   }
   
   

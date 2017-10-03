@@ -38,7 +38,7 @@ public class STKModeHelper : NSObject {
       for shortie in primary {
         if let range = longie.range(of: shortie) {
           let remainder = longie.replacingCharacters(in: range, with: "")
-          if let first = remainder.characters.first, first == "_" {
+          if let first = remainder.first, first == "_" {
             return true
           }
         }

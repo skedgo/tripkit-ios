@@ -41,12 +41,12 @@ extension SGCustomEventRecurrenceRule {
         preconditionFailure()
       }
       
-      if rule.characters.first == "W" {
+      if rule.first == "W" {
         let weekday = gregorian.component(.weekday, from: start)
         
         // 1 == sunday, 7 == saturday
-        let index = rule.characters.index(rule.characters.startIndex, offsetBy: weekday)
-        applies = (rule.characters[index] == "1")
+        let index = rule.index(rule.startIndex, offsetBy: weekday)
+        applies = (rule[index] == "1")
         
       } else {
         assertionFailure("Unexpected recurrence: \(rule)")

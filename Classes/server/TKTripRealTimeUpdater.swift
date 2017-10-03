@@ -30,7 +30,7 @@ public class TKTripRealTimeUpdater {
       .subscribe(onNext: { [unowned self] in
         self.update()
       })
-      .addDisposableTo(disposeBag)
+      .disposed(by: disposeBag)
   }
   
   private let realTime = TKBuzzRealTime()

@@ -47,7 +47,7 @@ public class TKVehicleAnnotationView: SGPulsingAnnotationView {
           guard let color = color else { return }
           self?.vehicleShape?.color = color
         })
-        .addDisposableTo(disposeBag)
+        .disposed(by: disposeBag)
     }
   }
   

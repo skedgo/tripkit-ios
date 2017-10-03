@@ -58,7 +58,7 @@ public class TKAlertViewController: UITableViewController {
         .subscribe(onNext: { [unowned self] in
           self.dismiss(animated: true, completion: nil)
         })
-        .addDisposableTo(disposeBag)
+        .disposed(by: disposeBag)
       navigationItem.leftBarButtonItem = doneButton
     }
     
@@ -74,7 +74,7 @@ public class TKAlertViewController: UITableViewController {
           strongSelf.alerts = $0
         }
       })
-      .addDisposableTo(disposeBag)
+      .disposed(by: disposeBag)
   }
   
   // MARK: - UITableViewDataSource
@@ -104,7 +104,7 @@ public class TKAlertViewController: UITableViewController {
       .subscribe(onNext: { [unowned self] in
         self.alertControllerDelegate?.alertViewController?(self, didTapOnURL: $0)
       })
-      .addDisposableTo(disposeBag)
+      .disposed(by: disposeBag)
     
     return alertCell
   }

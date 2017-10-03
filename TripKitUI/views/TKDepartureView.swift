@@ -117,7 +117,7 @@ public class TKDepartureView: UIView {
     }
     
     // extract the decimal parts, e.g., start with 35m
-    let number = durationString.characters // => ["3", "5", "m"]
+    let number = durationString // => ["3", "5", "m"]
       .flatMap { character -> String? in
         if let _ = Int(String(character)) {
           return String(character)
