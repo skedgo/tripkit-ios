@@ -119,7 +119,8 @@ extension TKMapZenGeocoder: SGAutocompletionDataProvider {
       switch result {
       case .success(let coordinates):
         coordinates.forEach { $0.setScore(searchTerm: string, near: region) }
-        completion(coordinates.map(SGAutocompletionResult.init))
+        let pruned = SGBaseGeocoder.filteredMergedAndPruned(coordinates, limitedToRegion: region, withMaximum: 10)
+        completion(pruned.map(SGAutocompletionResult.init))
       case .failure(_):
         completion(nil)
       }

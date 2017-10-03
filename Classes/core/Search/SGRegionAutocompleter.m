@@ -79,10 +79,6 @@
     NSArray *allRegions = [TKRegionManager.shared regions];
     
     SGKImage *image = [SGAutocompletionResult imageForType:SGAutocompletionSearchIconCity];
-    SGKImage *accessoryImage = [SGStyleManager imageNamed:@"icon-map-info-city"];
-#if TARGET_OS_IPHONE
-    accessoryImage = [accessoryImage monochromeImage];
-#endif
 
     NSMutableArray *autocompletionResults = [NSMutableArray arrayWithCapacity:allRegions.count];
     for (SVKRegion *region in allRegions) {
@@ -91,7 +87,6 @@
         result.object = centerAnnotation;
         result.title  = centerAnnotation.title;
         result.image  = image;
-        result.accessoryButtonImage = accessoryImage;
         result.provider = self;
         [autocompletionResults addObject:result];
       }
