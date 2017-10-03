@@ -45,20 +45,10 @@ public class TKMapZenGeocoder: NSObject {
   }
   
   private static func parse(data: Data) throws -> [SGKNamedCoordinate] {
-    // Useful for debugging: po JSONSerialization.jsonObject(with: data, options: .allowFragments)
+    // Useful for debugging: po JSONSerialization.jsonObject(with: data, options: .allowFragments) OR po String(data: data, encoding: .utf8)
     let decoder = JSONDecoder()
     let collection = try decoder.decode(TKGeoJSON.self, from: data)
-    
-    switch collection {
-    case .collection(let features):
-      return features.flatMap(SGKNamedCoordinate.init(from:))
-    case .feature(let feature):
-      if let coordinate = SGKNamedCoordinate(from: feature) {
-        return [coordinate]
-      } else {
-        return []
-      }
-    }
+    return collection.toNamedCoordinates()
   }
   
 }
@@ -119,7 +109,13 @@ extension TKMapZenGeocoder: SGAutocompletionDataProvider {
       switch result {
       case .success(let coordinates):
         coordinates.forEach { $0.setScore(searchTerm: string, near: region) }
-        let pruned = SGBaseGeocoder.filteredMergedAndPruned(coordinates, limitedToRegion: region, withMaximum: 10)
+        
+        // MapZen likes coming back with similar locations near each
+        // other, so we cluster them.
+        let clusters = TKAnnotationClusterer.cluster(coordinates)
+        let unique = clusters.flatMap(SGKNamedCoordinate.namedCoordinate(for:))
+        
+        let pruned = SGBaseGeocoder.filteredMergedAndPruned(unique, limitedToRegion: region, withMaximum: 10)
         completion(pruned.map(SGAutocompletionResult.init))
       case .failure(_):
         completion(nil)
@@ -134,18 +130,6 @@ extension TKMapZenGeocoder: SGAutocompletionDataProvider {
 }
 
 extension SGKNamedCoordinate {
-  fileprivate convenience init?(from geojson: TKGeoJSON.Feature) {
-    switch geojson.geometry {
-    case .point(let position):
-      let mapZen = geojson.properties as? TKMapZenProperties
-      
-      self.init(latitude: position.latitude, longitude: position.longitude, name: mapZen?.name, address: mapZen?.label)
-      
-    default:
-      return nil
-      
-    }
-  }
   
   fileprivate func setScore(searchTerm: String, near region: MKCoordinateRegion) {
     self.sortScore = Int(TKGeocodingResultScorer.calculateScore(for: self, searchTerm: searchTerm, near: region, allowLongDistance: false, minimum: 25, maximum: 80))
@@ -154,6 +138,7 @@ extension SGKNamedCoordinate {
 }
 
 extension SGAutocompletionResult {
+  
   fileprivate convenience init(from coordinate: SGKNamedCoordinate) {
     self.init()
     

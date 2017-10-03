@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-open class SGKNamedCoordinate : NSObject, Codable {
+open class SGKNamedCoordinate : NSObject, Codable, TKClusterable {
   
   public fileprivate(set) var coordinate: CLLocationCoordinate2D {
     didSet {
@@ -17,6 +17,8 @@ open class SGKNamedCoordinate : NSObject, Codable {
       _placemark = nil
     }
   }
+  
+  public var clusterIdentifier: String? = nil
   
   @objc public var name: String? = nil
   
@@ -130,6 +132,7 @@ open class SGKNamedCoordinate : NSObject, Codable {
     case placemark
     case isDraggable
     case isSuburb
+    case clusterIdentifier
   }
   
   public required init(from decoder: Decoder) throws {
@@ -154,6 +157,7 @@ open class SGKNamedCoordinate : NSObject, Codable {
     name = try? container.decode(String.self, forKey: .name)
     _address = try? container.decode(String.self, forKey: .address)
     locationID = try? container.decode(String.self, forKey: .locationID)
+    clusterIdentifier = try? container.decode(String.self, forKey: .clusterIdentifier)
     isDraggable = (try? container.decode(Bool.self, forKey: .isDraggable)) ?? false
     isSuburb = (try? container.decode(Bool.self, forKey: .isSuburb)) ?? false
 
@@ -173,6 +177,7 @@ open class SGKNamedCoordinate : NSObject, Codable {
     try container.encode(name, forKey: .name)
     try container.encode(address, forKey: .address)
     try container.encode(locationID, forKey: .locationID)
+    try container.encode(clusterIdentifier, forKey: .clusterIdentifier)
     try container.encode(isDraggable, forKey: .isDraggable)
     try container.encode(isSuburb, forKey: .isSuburb)
 
@@ -195,6 +200,7 @@ open class SGKNamedCoordinate : NSObject, Codable {
         self.name = decoded.name
         self._address = decoded.address
         self.locationID = decoded.locationID
+        self.clusterIdentifier = decoded.clusterIdentifier
         self.data = decoded.data
         self.isSuburb = decoded.isSuburb
         self.isDraggable = decoded.isDraggable

@@ -365,7 +365,7 @@ extension Reactive where Base : OAuth2Swift {
       
       return Disposables.create()
     
-      }.share(replay: 1) // Multiple observers should not trigger multiple `authorize` calls!
+    }.share(replay: 1, scope: .forever) // Multiple observers should not trigger multiple `authorize` calls!
     
   }
   

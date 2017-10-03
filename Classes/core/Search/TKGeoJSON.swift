@@ -15,6 +15,8 @@ import CoreLocation
 ///
 /// For specs see https://tools.ietf.org/html/rfc7946
 ///
+/// - warning: Only implements a subset of GeoJSON
+///
 /// - collection: GeoJSON's "FeatureCollection" type
 /// - feature: GeoJSON's "Feature" type
 public enum TKGeoJSON {

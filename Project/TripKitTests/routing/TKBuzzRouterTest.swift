@@ -41,7 +41,7 @@ class TKBuzzRouterTest: TKTestCase {
       expectation.fulfill()
     }
     
-    waitForExpectations(timeout: 3) { error in
+    waitForExpectations(timeout: 5) { error in
       XCTAssertNil(error)
     }
   }
