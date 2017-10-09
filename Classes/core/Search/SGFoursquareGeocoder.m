@@ -151,6 +151,7 @@
   result.subtitle = [address isEqualToString:@"(null)"]?nil:address;
   result.image = [SGStyleManager imageNamed:@"icon-search-poweredByFoursquare_36x36"];
   result.score    = [SGFoursquareGeocoder scoreForAnnotation:annotation forSearchTerm:inputString nearRegion:coordinateRegion];
+  result.isInSupportedRegion = @([TKRegionManager.shared coordinateIsPartOfAnyRegion:annotation.coordinate]);
 
   return result;
 }

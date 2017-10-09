@@ -314,7 +314,8 @@
       result.image = [SGAutocompletionResult imageForType:SGAutocompletionSearchIconPin];
     }
   }
-  
+
+  result.isInSupportedRegion = @(YES);
   result.score = [SGBuzzGeocoder scoreForDictionary:json forSearchTerm:inputString];
   return result;
 }

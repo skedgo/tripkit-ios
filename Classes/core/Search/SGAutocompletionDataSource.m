@@ -319,6 +319,13 @@ typedef enum {
   cell.textLabel.textColor  = [SGStyleManager darkTextColor];
   cell.detailTextLabel.text = ! [result.subtitle isEqualToString:result.title] ? result.subtitle : nil;
   cell.detailTextLabel.textColor  = [SGStyleManager lightTextColor];
+  
+  if (result.isInSupportedRegion) {
+    cell.contentView.alpha = result.isInSupportedRegion.boolValue ? 1.0f : 0.33f;
+  } else {
+    cell.contentView.alpha = 1.0f;
+  }
+  
   if (self.showAccessoryButtons && result.accessoryButtonImage) {
     cell.accessoryView = [SGStyleManager cellAccessoryButtonWithImage:result.accessoryButtonImage
                                                                target:self

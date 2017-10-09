@@ -192,6 +192,7 @@
   result.title    = [annotation title];
   result.subtitle = [annotation respondsToSelector:@selector(subtitle)] ? [annotation subtitle] : nil;
   result.image    = [SGAutocompletionResult imageForType:SGAutocompletionSearchIconPin];
+  result.isInSupportedRegion = @([TKRegionManager.shared coordinateIsPartOfAnyRegion:annotation.coordinate]);
 
   result.score = [SGAppleGeocoder scoreForAnnotation:annotation forSearchTerm:inputString nearRegion:coordinateRegion];
 

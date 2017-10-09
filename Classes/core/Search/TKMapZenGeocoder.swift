@@ -147,6 +147,7 @@ extension SGAutocompletionResult {
     object = coordinate
     score = coordinate.sortScore
     image = SGAutocompletionResult.image(forType: .pin)
+    isInSupportedRegion = NSNumber(value: TKRegionManager.shared.coordinateIsPartOfAnyRegion(coordinate.coordinate))
   }
 
 }

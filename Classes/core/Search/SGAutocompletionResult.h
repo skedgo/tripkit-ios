@@ -60,6 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) SGKImage *image;
 @property (nonatomic, strong, nullable) SGKImage *accessoryButtonImage;
 
+@property (nonatomic, strong, nullable) NSNumber *isInSupportedRegion;
+
 /**
  A score of how this result should be ranked between 0 and 100
  

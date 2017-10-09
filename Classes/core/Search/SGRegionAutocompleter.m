@@ -88,6 +88,7 @@
         result.title  = centerAnnotation.title;
         result.image  = image;
         result.provider = self;
+        result.isInSupportedRegion = @(YES);
         [autocompletionResults addObject:result];
       }
     }
