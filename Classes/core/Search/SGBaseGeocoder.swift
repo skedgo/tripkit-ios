@@ -64,17 +64,11 @@ extension SGBaseGeocoder {
 extension SGKNamedCoordinate {
   fileprivate func merge(_ other: SGKNamedCoordinate) {
     sortScore = sortScore + min(10, other.sortScore)
-    
-    if let websiteTitle = other.attributionWebsiteActionTitle,
-       let websiteLink = other.attributionWebsiteLink,
-       let appTitle = other.attributionAppActionTitle,
-       let appLink = other.attributionAppLink,
-       attributionWebsiteLink == nil { // enough to check one
-      setAttribution(actionTitle: websiteTitle, website: websiteLink, appActionTitle: appTitle, appLink: appLink, isVerified: other.attributionIsVerified)
-    }
+
+    var providers = Set<String>()
+    dataSources = (dataSources + other.dataSources).filter { providers.insert($0.provider.name).inserted }
   }
 }
-
 
 
 extension MKCoordinateRegion {
@@ -235,9 +229,9 @@ extension Array where Element : SGKNamedCoordinate {
         first.attributionIsVerified == nil {
       return first
         
-    } else if first.attributionAppLink != nil, second.attributionAppLink == nil {
+    } else if !first.dataSources.isEmpty, second.dataSources.isEmpty {
       return first
-    } else if first.attributionAppLink == nil, second.attributionAppLink != nil {
+    } else if first.dataSources.isEmpty, !second.dataSources.isEmpty {
       return second
       
     } else if first.sortScore >= second.sortScore {
