@@ -225,7 +225,6 @@
 	if (CLLocationCoordinate2DIsValid(coordinateRegion.center)) {
 		request.region = coordinateRegion;
 	}
-  CLLocation *centerLocation = [[CLLocation alloc] initWithLatitude:coordinateRegion.center.latitude longitude:coordinateRegion.center.longitude];
 	
 	// Now instantiate a local search object.
 	MKLocalSearch *localSearch = [[MKLocalSearch alloc] initWithRequest:request];
