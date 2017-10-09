@@ -146,6 +146,7 @@ extension SGAutocompletionResult {
     subtitle = coordinate.subtitle
     object = coordinate
     score = coordinate.sortScore
+    image = SGAutocompletionResult.image(forType: .pin)
   }
 
 }
