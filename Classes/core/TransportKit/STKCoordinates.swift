@@ -23,7 +23,7 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation {
     if let values = try? decoder.container(keyedBy: CodingKeys.self), let modeInfo = try? values.decode(ModeInfo.self, forKey: .modeInfo) {
       stopModeInfo = modeInfo
     }
-    assert(stopModeInfo.alt.count > 0)
+    assert(!stopModeInfo.alt.isEmpty)
   }
   
   public required init?(coder aDecoder: NSCoder) {

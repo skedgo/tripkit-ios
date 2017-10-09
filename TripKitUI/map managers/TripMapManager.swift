@@ -123,7 +123,7 @@ extension TripMapManager {
       mapView.showsTraffic = affectedByTraffic
     }
     
-    if zoomTo.count > 0 {
+    if !zoomTo.isEmpty {
       mapView.zoom(to: zoomTo, edgePadding: delegate()?.mapManagerEdgePadding(self) ?? UIEdgeInsets.zero, animated: animated)
     }
     

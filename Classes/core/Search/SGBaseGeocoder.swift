@@ -24,7 +24,7 @@ extension SGBaseGeocoder {
   @objc(geocodeObject:usingGeocoder:nearRegion:completion:)
   public class func geocode(_ object: SGKGeocodable, using geocoder: SGGeocoder, near region: MKMapRect, completion: @escaping (Bool) -> Void) {
     
-    guard let address = object.addressForGeocoding, address.utf16.count > 0 else {
+    guard let address = object.addressForGeocoding, !address.isEmpty else {
       completion(false)
       return
     }
@@ -32,7 +32,7 @@ extension SGBaseGeocoder {
     geocoder.geocodeString(address, nearRegion: region,
                            success:
       { query, results in
-        guard results.count > 0 else {
+        guard !results.isEmpty else {
           completion(false)
           return
         }

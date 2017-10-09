@@ -208,7 +208,7 @@ extension TKDeparturesProvider {
         }
       }
     }
-    assert(pairIdentifieres.count > 0, "No embarkations in \(departures)")
+    assert(!pairIdentifieres.isEmpty, "No embarkations in \(departures)")
     
     TKAPIToCoreDataConverter.updateOrAddAlerts(departures.alerts, in: context)
     

@@ -255,9 +255,9 @@ extension SGKNamedCoordinate: SGKSortableAnnotation {
   
   public var title: String? {
     get {
-      if let name = self.name, name.utf16.count > 0 {
+      if let name = self.name, !name.isEmpty {
         return name
-      } else if let address = self.address, address.utf16.count > 0 {
+      } else if let address = self.address, !address.isEmpty {
         return address
       } else {
         return Loc.Location
@@ -270,7 +270,7 @@ extension SGKNamedCoordinate: SGKSortableAnnotation {
   
   public var subtitle: String? {
     get {
-      if let name = self.name, name.utf16.count > 0 {
+      if let name = self.name, !name.isEmpty {
         return address // otherwise the address would be in the title already
       } else {
         return nil

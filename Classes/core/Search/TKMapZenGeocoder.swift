@@ -65,7 +65,7 @@ extension TKMapZenGeocoder: SGGeocoder {
   
   public func geocodeString(_ inputString: String, nearRegion mapRect: MKMapRect, success: @escaping SGGeocoderSuccessBlock, failure: SGGeocoderFailureBlock? = nil) {
     
-    guard inputString.count > 0 else {
+    guard !inputString.isEmpty else {
       success(inputString, [])
       return
     }
@@ -99,7 +99,7 @@ extension TKMapZenGeocoder: SGAutocompletionDataProvider {
   
   public func autocompleteSlowly(_ string: String, for mapRect: MKMapRect, completion: @escaping SGAutocompletionDataResultBlock) {
     
-    guard string.count > 0 else {
+    guard !string.isEmpty else {
       completion([])
       return
     }

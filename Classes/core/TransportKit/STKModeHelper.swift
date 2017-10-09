@@ -29,7 +29,7 @@ public class STKModeHelper : NSObject {
   public static func modesContain(_ primary: Set<String>, _ secondary: Set<String>) -> Bool {
     
     // quick full matches
-    if primary.intersection(secondary).count > 0 {
+    if !primary.intersection(secondary).isEmpty {
       return true
     }
     

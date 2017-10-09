@@ -173,7 +173,7 @@ extension TKRegionManager {
       
       var result = [String: [String]]()
       for (mode, detail) in details {
-        guard let implies = detail.implies, implies.count > 0 else { continue }
+        guard let implies = detail.implies, !implies.isEmpty else { continue }
         for impliedMode in implies {
           result[impliedMode] = (result[impliedMode] ?? []) + [mode]
         }

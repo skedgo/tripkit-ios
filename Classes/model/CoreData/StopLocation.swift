@@ -89,7 +89,7 @@ extension StopLocation: STKStopAnnotation {
       
       var output: String = self.title ?? ""
       
-      if let filter = filter, filter.count > 0 {
+      if let filter = filter, !filter.isEmpty {
         output.append(" (filter: \(filter)")
       }
       
