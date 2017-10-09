@@ -213,18 +213,6 @@ extension TKRegionManager {
 
 extension TKRegionManager {
  
-  @objc(regionsForCoordinateRegion:includeCoordinate:)
-  /// - Returns: If set of matching regions for the coordinate region include the provided coordinate.
-  public func anyRegion(intersecting region: MKCoordinateRegion, includes coordinate: CLLocationCoordinate2D) -> Bool {
-    let rect = MKMapRect.forCoordinateRegion(region)
-    for region in regions {
-      if region.intersects(rect), region.contains(coordinate) {
-        return true
-      }
-    }
-    return false
-  }
-  
   @objc(coordinateIsPartOfAnyRegion:)
   public func coordinateIsPartOfAnyRegion(_ coordinate: CLLocationCoordinate2D) -> Bool {
     for region in regions {

@@ -8,17 +8,12 @@
 
 extension SGBaseGeocoder {
 
-  @objc public class func filteredMergedAndPruned(_ input:[SGKNamedCoordinate], limitedToRegion coordinateRegion: MKCoordinateRegion, withMaximum max: Int) -> [SGKNamedCoordinate]
-  {
-    let filtered = input.limitedToRegion(region: coordinateRegion)
-    let deduplicated  = filtered.deduplicated()
-    return deduplicated.pruned(maximum: max)
+  @objc public class func mergedAndPruned(_ input:[SGKNamedCoordinate], withMaximum max: Int) -> [SGKNamedCoordinate] {
+    return input.deduplicated().pruned(maximum: max)
   }
   
-  @objc public class func filteredAndPruned(_ input:[SGAutocompletionResult], limitedToRegion coordinateRegion: MKCoordinateRegion, withMaximum max: Int, coordinateForElement handler: (SGAutocompletionResult) -> CLLocationCoordinate2D) -> [SGAutocompletionResult]
-  {
-    let filtered = input.limitedToRegion(coordinateRegion, coordinateForElement: handler)
-    return filtered.pruned(maximum: max) { $0.score }
+  @objc public class func pruned(_ input:[SGAutocompletionResult], withMaximum max: Int) -> [SGAutocompletionResult] {
+    return input.pruned(maximum: max) { $0.score }
   }
   
   @objc(geocodeObject:usingGeocoder:nearRegion:completion:)
@@ -81,43 +76,6 @@ extension MKCoordinateRegion {
 
 extension Array {
 
-  /// - parameter region:  A coordinate region on which the limits will be based
-  /// - parameter handler: Block called on every element which should return the coordinate
-  ///                      for the provided element if it can be filtered or an invalid
-  ///                      coordinate if the element should not get filtered
-  /// - returns: A new array limited to `SVKRegions` which intersect with the provided
-  ///            coordinate regions
-  fileprivate func limitedToRegion(_ region: MKCoordinateRegion, coordinateForElement handler: (Element) -> CLLocationCoordinate2D) -> [Element] {
-    
-    if TKRegionManager.shared.hasRegions {
-      return filter { element in
-        let coordinate = handler(element)
-        if !CLLocationCoordinate2DIsValid(coordinate) {
-          return true
-        } else {
-          return TKRegionManager.shared.anyRegion(intersecting: region, includes: coordinate)
-        }
-      }
-      
-    } else {
-      // This is just meant for running tests
-      var largerRegion = region
-      largerRegion.span.latitudeDelta *= 2
-      largerRegion.span.longitudeDelta *= 2
-      let mapRect = MKMapRect.forCoordinateRegion(largerRegion)
-      return filter { element in
-        let coordinate = handler(element)
-        if !CLLocationCoordinate2DIsValid(coordinate) {
-          return true
-        } else {
-          let point = MKMapPointForCoordinate(coordinate)
-          return MKMapRectContainsPoint(mapRect, point)
-        }
-      }
-    }
-    
-  }
-
   fileprivate func pruned(maximum max: Int, scoreForElement handler: (Element) -> Int) -> [Element] {
     if self.count < max {
       return self
@@ -130,10 +88,6 @@ extension Array {
 }
 
 extension Array where Element : SGKNamedCoordinate {
-
-  fileprivate func limitedToRegion(region coordinateRegion: MKCoordinateRegion) -> [Element] {
-    return limitedToRegion(coordinateRegion) { $0.coordinate }
-  }
 
   fileprivate func deduplicated() -> [Element] {
     return reduce([]) { $0.mergeWithPreferences([$1]) }

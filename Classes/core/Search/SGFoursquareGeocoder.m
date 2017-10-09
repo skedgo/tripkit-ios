@@ -250,9 +250,8 @@
   }
   
   NSUInteger max = asAutocompletionResult ? 5 : 10;
-  NSArray *filtered = [SGBaseGeocoder filteredMergedAndPruned:coordinates
-                                              limitedToRegion:coordinateRegion
-                                                  withMaximum:max];
+  NSArray *filtered = [SGBaseGeocoder mergedAndPruned:coordinates
+                                          withMaximum:max];
   
   if (asAutocompletionResult) {
     NSMutableArray *results = [NSMutableArray arrayWithCapacity:filtered.count];

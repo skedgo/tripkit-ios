@@ -75,7 +75,7 @@ extension TKMapZenGeocoder: SGGeocoder {
       switch result {
       case .success(let coordinates):
         coordinates.forEach { $0.setScore(searchTerm: inputString, near: region) }
-        let pruned = SGBaseGeocoder.filteredMergedAndPruned(coordinates, limitedToRegion: region, withMaximum: 10)
+        let pruned = SGBaseGeocoder.mergedAndPruned(coordinates, withMaximum: 10)
         success(inputString, pruned)
       case .failure(let error):
         failure?(inputString, error)
@@ -115,7 +115,7 @@ extension TKMapZenGeocoder: SGAutocompletionDataProvider {
         let clusters = TKAnnotationClusterer.cluster(coordinates)
         let unique = clusters.flatMap(SGKNamedCoordinate.namedCoordinate(for:))
         
-        let pruned = SGBaseGeocoder.filteredMergedAndPruned(unique, limitedToRegion: region, withMaximum: 10)
+        let pruned = SGBaseGeocoder.mergedAndPruned(unique, withMaximum: 10)
         completion(pruned.map(SGAutocompletionResult.init))
       case .failure(_):
         completion(nil)

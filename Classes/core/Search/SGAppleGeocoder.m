@@ -51,7 +51,6 @@
   MKCoordinateRegion coordinateRegion = MKCoordinateRegionForMapRect(mapRect);
   [self fetchLocalSearchObjectsForString:inputString
                               nearRegion:coordinateRegion
-                           limitToNearby:NO
                        forAutocompletion:NO
                                  success:success
                                  failure:failure];
@@ -99,7 +98,6 @@
   __weak typeof (self) weakSelf = self;
  [self fetchLocalSearchObjectsForString:string
                              nearRegion:MKCoordinateRegionForMapRect(self.lastRect)
-                          limitToNearby:!isWorld
                       forAutocompletion:YES
                                 success:
    ^(NSString *query, NSArray *results) {
@@ -209,7 +207,6 @@
 
 - (void)fetchLocalSearchObjectsForString:(NSString *)inputString
 															nearRegion:(MKCoordinateRegion)coordinateRegion
-                           limitToNearby:(BOOL)limit
                        forAutocompletion:(BOOL)forAutocompletion
                                  success:(SGGeocoderSuccessBlock)success
                                  failure:(nullable SGGeocoderFailureBlock)failure
@@ -250,10 +247,6 @@
       // Local search has successfully returned results.
       NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[response.mapItems count]];
       for (MKMapItem *mapItem in response.mapItems) {
-        if (limit && [centerLocation distanceFromLocation:mapItem.placemark.location] > 100000) {
-          continue;
-        }
-        
         SGKNamedCoordinate *singleResult = [self resultFromMapItem:mapItem];
         if (singleResult) {
           singleResult.sortScore = [SGAppleGeocoder scoreForAnnotation:singleResult
@@ -265,9 +258,8 @@
       }
 
       NSUInteger max = forAutocompletion ? 5 : 10;
-      NSArray *filtered = [SGBaseGeocoder filteredMergedAndPruned:results
-                                                  limitedToRegion:coordinateRegion
-                                                      withMaximum:max];
+      NSArray *filtered = [SGBaseGeocoder mergedAndPruned:results
+                                              withMaximum:max];
       success(inputString, filtered);
 		}
 	}];
@@ -324,9 +316,8 @@
           }
         }
 
-        NSArray *filtered = [SGBaseGeocoder filteredMergedAndPruned:results
-                                                    limitedToRegion:coordinateRegion
-                                                        withMaximum:10];
+        NSArray *filtered = [SGBaseGeocoder mergedAndPruned:results
+                                                withMaximum:10];
 
         dispatch_async(dispatch_get_main_queue(), ^{
           success(inputString, filtered);
