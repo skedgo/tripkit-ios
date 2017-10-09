@@ -10,6 +10,11 @@ import MapKit
 
 public class TKMapZenGeocoder: NSObject {
   
+  public static let attributions = [
+    API.DataAttribution(provider: API.CompanyInfo(name: "MapZen", website: URL(string: "https://mapzen.com"))),
+    API.DataAttribution(provider: API.CompanyInfo(name: "OpenStreetMap", website: URL(string: "https://openstreetmap.org"))),
+  ]
+  
   private let apiKey: String
   
   public init(apiKey: String) {
@@ -48,7 +53,10 @@ public class TKMapZenGeocoder: NSObject {
     // Useful for debugging: po JSONSerialization.jsonObject(with: data, options: .allowFragments) OR po String(data: data, encoding: .utf8)
     let decoder = JSONDecoder()
     let collection = try decoder.decode(TKGeoJSON.self, from: data)
-    return collection.toNamedCoordinates()
+    return collection.toNamedCoordinates().map {
+      $0.dataSources = TKMapZenGeocoder.attributions
+      return $0
+    }
   }
   
 }

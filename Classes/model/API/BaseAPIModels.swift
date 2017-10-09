@@ -20,6 +20,15 @@ extension API {
     public let remoteDarkIcon: String?
     public let color: RGBColor?
     
+    public init(name: String, website: URL? = nil, phone: String? = nil, remoteIcon: String? = nil, remoteDarkIcon: String? = nil, color: RGBColor? = nil) {
+      self.name = name
+      self.website = website
+      self.phone = phone
+      self.remoteIcon = remoteIcon
+      self.remoteDarkIcon = remoteDarkIcon
+      self.color = color
+    }
+    
     public init(object: MarshaledObject) throws {
       name            = try  object.value(for: "name")
       website         = try? object.value(for: "website")
@@ -48,6 +57,11 @@ extension API {
   public struct DataAttribution : Codable, Unmarshaling, Marshaling {
     public let provider: CompanyInfo
     public let disclaimer: String?
+    
+    public init(provider: CompanyInfo, disclaimer: String? = nil) {
+      self.provider = provider
+      self.disclaimer = disclaimer
+    }
     
     public init(object: MarshaledObject) throws {
       provider    = try  object.value(for: "provider")

@@ -37,4 +37,14 @@ public extension SGKNamedCoordinate {
   @objc var attributionIsVerified: NSNumber? {
     return data["isVerified"] as? NSNumber
   }
+  
+  public var dataSources: [API.DataAttribution] {
+    get {
+      guard let json = data["dataSources"] as Any? else { return [] }
+      return (try? JSONDecoder().decode([API.DataAttribution].self, withJSONObject: json)) ?? []
+    }
+    set {
+      data["dataSources"] = try? JSONEncoder().encodeJSONObject(newValue)
+    }
+  }
 }
