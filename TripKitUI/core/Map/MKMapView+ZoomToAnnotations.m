@@ -18,11 +18,16 @@
 {
   MKMapRect mapRect = [SGMapHelper mapRectForAnnotations:annos];
   
-  // Extra padping to not have annotations at edge
+  // Extra padding to not have annotations at edge
   insets.left   = insets.left + 80;
   insets.right  = insets.right + 80;
   insets.top    = insets.top + 80;
   insets.bottom = insets.bottom + 80;
+  
+  // Zoom out a fair bit to show neighbourhood by default
+  if (mapRect.size.height < 10000 || mapRect.size.width < 10000) {
+    mapRect = MKMapRectInset(mapRect, -5000, -5000);
+  }
   
   [self setVisibleMapRect:mapRect edgePadding:insets animated:animated];
 }
