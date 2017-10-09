@@ -35,10 +35,46 @@ extension SGKNamedCoordinate {
       self.init(latitude: position.latitude, longitude: position.longitude, name: mapZen?.name, address: mapZen?.label)
       
       clusterIdentifier = mapZen?.layer
+      dataSources = mapZen?.dataSources ?? []
       
     default:
       return nil
     }
   }
 
+}
+
+extension TKMapZenProperties {
+  
+  private static let mapZenAttribution = API.DataAttribution(provider: API.CompanyInfo(name: "MapZen", website: URL(string: "https://mapzen.com")))
+  
+  private var specificSource: API.DataAttribution? {
+    guard let source = source else { return nil }
+    switch source {
+    case "openaddresses", "oa":
+      return API.DataAttribution(provider: API.CompanyInfo(name: "OpenAddresses", website: URL(string: "http://openaddresses.io/")))
+      
+    case "whosonfirst", "wof":
+      return API.DataAttribution(provider: API.CompanyInfo(name: "Who's on First", website: URL(string: "https://whosonfirst.mapzen.com/")), disclaimer: "License available at http://whosonfirst.mapzen.com#License")
+
+    case "openstreetmap", "osm":
+      return API.DataAttribution(provider: API.CompanyInfo(name: "OpenStreetMap", website: URL(string: "https://openstreetmap.org")))
+
+    case "geonames", "gn":
+      return API.DataAttribution(provider: API.CompanyInfo(name: "GeoNames", website: URL(string: "http://www.geonames.org/")))
+      
+    default:
+      assertionFailure("Attribution not handled: \(source)")
+      return nil
+    }
+  }
+  
+  var dataSources: [API.DataAttribution] {
+    var attributions = [TKMapZenProperties.mapZenAttribution]
+    if let specificSource = self.specificSource {
+      attributions.append(specificSource)
+    }
+    return attributions
+  }
+  
 }
