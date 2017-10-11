@@ -37,11 +37,6 @@ class SGGeocoderTest: XCTestCase {
     geocoderPasses(geocoder, input: "George St, Sydney", near: sydney, resultsInAny: ["George Street"], noneOf: ["Tesla Loading Dock", "333 George", "345 George", "261 George"])
   }
   
-  func testNoMatchesFarAway() {
-    // We want no result for "Brandon, IL"
-    geocoderPasses(geocoder, input: "Brandon Ave", near: sydney)
-  }
-  
   func testGeorgeSt2554() {
     // We want to result first which starts with a house number
     geocoderPasses(geocoder, input: "George St", near: sydney, bestStartsWithAny: ["George St"])
@@ -84,7 +79,7 @@ class SGGeocoderTest: XCTestCase {
   func testWrongSydneyAirport7838() {
     // We want no garbage matches from Foursquare
     let SYD = CLLocationCoordinate2D(latitude: -33.939932, longitude: 151.175212)
-    geocoderPasses(geocoder, input: "Sydney International Airport", near: sydney, allWithin: 10_000, of: SYD)
+    geocoderPasses(geocoder, input: "Sydney International Airport", near: sydney, of: SYD)
   }
   
   //MARK: - Private helpers
@@ -120,12 +115,11 @@ class SGGeocoderTest: XCTestCase {
     near region: MKCoordinateRegion,
     resultsInAny any: [String] = [],
     noneOf none: [String] = [],
-    allWithin maxDistance: CLLocationDistance = 100_000,
     of coordinate: CLLocationCoordinate2D? = nil)
   {
     let expectation = self.expectation(description: "expectation-\(input)")
     
-    geocoder.passes(input, near:region, resultsInAny:any, noneOf:none, allWithin:maxDistance, of:coordinate) { passed in
+    geocoder.passes(input, near:region, resultsInAny:any, noneOf:none, of:coordinate) { passed in
       XCTAssertNil(passed)
       expectation.fulfill()
     }
@@ -170,7 +164,6 @@ extension SGGeocoder {
     near region: MKCoordinateRegion,
     resultsInAny any: [String] = [],
     noneOf none: [String] = [],
-    allWithin maxDistance: CLLocationDistance = 100_000,
     of coordinate: CLLocationCoordinate2D? = nil,
     completion handler: @escaping (String?) -> Void)
   {
@@ -189,14 +182,6 @@ extension SGGeocoder {
         for result in results {
           // ignore results without a title
           guard let title = result.title else { continue }
-          
-          // none should be too far
-          let location = CLLocation(latitude: result.coordinate.latitude, longitude: result.coordinate.longitude)
-          let distance = location.distance(from: target)
-          if distance > maxDistance {
-            handler("Result '\(title)' is too far from center. Distance: \(distance)")
-            return
-          }
           
           // check if we found a good result
           for good in any where title.contains(good) {
