@@ -94,7 +94,7 @@ public class TKPathFriendlinessView: UIView {
     
     // Lower the priority of the width constraint because floating point arithmetic may produce
     // ratios that don't add up to precisely 1 should one of the bar views has zero width.
-    widthConstraints.forEach { $0.priority = 999 }
+    widthConstraints.forEach { $0.priority = .defaultHigh }
     NSLayoutConstraint.activate(widthConstraints)
     
     let distanceFormatter = MKDistanceFormatter()
