@@ -40,6 +40,19 @@ extension Loc {
     return NSLocalizedString("Setup", tableName: "TripKit", bundle: .tripKit, comment: "Set up to connect/link to a service provider, e.g., Uber")
   }
   
+  // MARK: - Accessibility
+  
+  public static var FriendlyPath: String {
+    return NSLocalizedString("Friendly", tableName: "TripKit", bundle: .tripKit, comment: "Indicating a path is wheelchair/cycyling friendly")
+  }
+  
+  public static var UnfriendlyPath: String {
+    return NSLocalizedString("Unfriendly", tableName: "TripKit", bundle: .tripKit, comment: "Indicating a path is wheelchair/cycyling unfriendly")
+  }
+  
+  public static var UnknownPathFriendliness: String {
+    return NSLocalizedString("Unknown", tableName: "TripKit", bundle: .tripKit, comment: "Indicating the wheelchair/cycling friendliness of a path is unknown")
+  }
   
   // MARK: - Format
 

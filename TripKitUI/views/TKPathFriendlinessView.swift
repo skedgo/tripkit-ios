@@ -21,6 +21,13 @@ public class TKPathFriendlinessView: UIView {
   @IBOutlet weak var unfriendlyMetreLabel: UILabel!
   @IBOutlet weak var unknownMetreLabel: UILabel!
   
+  // Legend
+  @IBOutlet var friendlyLegendLabel: UILabel!
+  @IBOutlet var unfriendlyLegendLabel: UILabel!
+  @IBOutlet var unknownLegendLabel: UILabel!
+  
+  @IBOutlet weak var friendlyToUnfriendlySpacing: NSLayoutConstraint!
+  
   public var segment: TKSegment? {
     didSet {
       update()
@@ -37,12 +44,12 @@ public class TKPathFriendlinessView: UIView {
     super.init(coder: aDecoder)
   }
   
-  public override func layoutSubviews() {
-    super.layoutSubviews()
+  public override func awakeFromNib() {
+    super.awakeFromNib()
     
-    friendlyMetreLabel.isHidden = friendlyMetreLabel.frame.width < friendlyMetreLabel.intrinsicContentSize.width
-    unfriendlyMetreLabel.isHidden = unfriendlyMetreLabel.frame.width < unfriendlyMetreLabel.intrinsicContentSize.width
-    unknownMetreLabel.isHidden = unknownMetreLabel.frame.width < unknownMetreLabel.intrinsicContentSize.width
+    friendlyLegendLabel.text = Loc.FriendlyPath
+    unfriendlyLegendLabel.text = Loc.UnfriendlyPath
+    unknownLegendLabel.text = Loc.UnknownPathFriendliness
   }
   
   fileprivate func update() {
@@ -73,6 +80,11 @@ public class TKPathFriendlinessView: UIView {
     }
     titleLabel.text = String(format: format, formatter.string(from: NSNumber(value: friendlyRatio))!)
     
+    // Legend
+    friendlyLegendLabel.text = Loc.FriendlyPath
+    unfriendlyLegendLabel.text = Loc.UnfriendlyPath
+    unknownLegendLabel.text = Loc.UnknownPathFriendliness
+    
     // Update bar chart.
     let widthConstraints = [
         friendlyBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(friendlyRatio)),
@@ -80,8 +92,9 @@ public class TKPathFriendlinessView: UIView {
         unknownBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(unknownRatio))
       ]
     
+    // Lower the priority of the width constraint because floating point arithmetic may produce
+    // ratios that don't add up to precisely 1 should one of the bar views has zero width.
     widthConstraints.forEach { $0.priority = 999 }
-    
     NSLayoutConstraint.activate(widthConstraints)
     
     let distanceFormatter = MKDistanceFormatter()
@@ -91,11 +104,21 @@ public class TKPathFriendlinessView: UIView {
     unfriendlyMetreLabel.text = distanceFormatter.string(fromDistance: unfriendlyMetres)
     unknownMetreLabel.text = distanceFormatter.string(fromDistance: unknownMetres)
     
-    NSLayoutConstraint.activate([
-        friendlyMetreLabel.widthAnchor.constraint(equalTo: friendlyBarView.widthAnchor, multiplier: 1),
-        unfriendlyMetreLabel.widthAnchor.constraint(equalTo: unfriendlyBarView.widthAnchor, multiplier: 1),
-        unknownMetreLabel.widthAnchor.constraint(equalTo: unknownBarView.widthAnchor, multiplier: 1)
-      ])
+    // Hide labels if required
+    friendlyMetreLabel.isHidden = friendlyMetres == 0
+    unfriendlyMetreLabel.isHidden = unfriendlyMetres == 0
+    unknownMetreLabel.isHidden = unknownMetres == 0
+    
+    // Account for non-zero width of hidden labels
+    let friendlyLabelWidth = friendlyMetreLabel.widthAnchor.constraint(equalToConstant: 0)
+    let unfriendlyLabelWidthConstraint = unfriendlyMetreLabel.widthAnchor.constraint(equalToConstant: 0)
+    let unknownLabelWidthConstraint = unknownMetreLabel.widthAnchor.constraint(equalToConstant: 0)
+    
+    friendlyLabelWidth.isActive = friendlyMetreLabel.isHidden
+    unfriendlyLabelWidthConstraint.isActive = unfriendlyMetreLabel.isHidden
+    unknownLabelWidthConstraint.isActive = unknownMetreLabel.isHidden
+    
+    friendlyToUnfriendlySpacing.constant = friendlyMetres == 0 ? 0 : 8
   }
   
 }
@@ -107,4 +130,3 @@ extension TKPathFriendlinessView {
   }
   
 }
-
