@@ -167,13 +167,6 @@ extension SGGeocoder {
     of coordinate: CLLocationCoordinate2D? = nil,
     completion handler: @escaping (String?) -> Void)
   {
-    let target: CLLocation
-    if let coordinate = coordinate {
-      target = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    } else {
-      target = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
-    }
-    
     let mapRect = MKMapRect.forCoordinateRegion(region)
     self.geocodeString(input, nearRegion: mapRect,
       success: { query, results in
