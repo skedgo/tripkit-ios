@@ -541,6 +541,7 @@
 		3AFFAE1E1F06E23C00147990 /* SGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE1C1F06E23C00147990 /* SGWebViewController.m */; };
 		3AFFAE201F06E44900147990 /* SGCountdownCell+STKVehicular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE1F1F06E44900147990 /* SGCountdownCell+STKVehicular.swift */; };
 		D3051F5C1F7B6F0500EC8278 /* TKAlertInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3051F5A1F7B6F0400EC8278 /* TKAlertInfoView.swift */; };
+		D37D871D1F8E477A0096EDA7 /* TKPathFriendlinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37D871B1F8E477A0096EDA7 /* TKPathFriendlinessView.swift */; };
 		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
 		F8FE40C0F8F106E668B2BDD9 /* Pods_TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D90B11191B5E08C85990BAE4 /* Pods_TripKit.framework */; };
 /* End PBXBuildFile section */
@@ -1151,6 +1152,8 @@
 		BDDB767442569E9895BB82F4 /* Pods_TripKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3051F5A1F7B6F0400EC8278 /* TKAlertInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAlertInfoView.swift; sourceTree = "<group>"; };
 		D3051F5B1F7B6F0400EC8278 /* TKAlertInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKAlertInfoView.xib; sourceTree = "<group>"; };
+		D37D871B1F8E477A0096EDA7 /* TKPathFriendlinessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKPathFriendlinessView.swift; sourceTree = "<group>"; };
+		D37D871C1F8E477A0096EDA7 /* TKPathFriendlinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKPathFriendlinessView.xib; sourceTree = "<group>"; };
 		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D3A779281E513C5000BBAF6C /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D90B11191B5E08C85990BAE4 /* Pods_TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1667,18 +1670,20 @@
 		3ADD5B571D9CDF0C00A1742F /* views */ = {
 			isa = PBXGroup;
 			children = (
-				D3051F5A1F7B6F0400EC8278 /* TKAlertInfoView.swift */,
-				D3051F5B1F7B6F0400EC8278 /* TKAlertInfoView.xib */,
 				3ADD5B581D9CDF0C00A1742F /* CircleAnnotationView.h */,
 				3ADD5B591D9CDF0C00A1742F /* CircleAnnotationView.m */,
 				3ADD5B5A1D9CDF0C00A1742F /* TKAgendaWidgetInfoView.swift */,
 				3ADD5B5B1D9CDF0C00A1742F /* TKAgendaWidgetInfoView.xib */,
 				3ADD5B5C1D9CDF0C00A1742F /* TKAlertCell.swift */,
 				3ADD5B5D1D9CDF0C00A1742F /* TKAlertCell.xib */,
+				D3051F5A1F7B6F0400EC8278 /* TKAlertInfoView.swift */,
+				D3051F5B1F7B6F0400EC8278 /* TKAlertInfoView.xib */,
 				3ADD5B5E1D9CDF0C00A1742F /* TKDepartureView.swift */,
 				3ADD5B5F1D9CDF0C00A1742F /* TKDepartureView.xib */,
 				3ADD5B601D9CDF0C00A1742F /* TKEmptyAlertView.swift */,
 				3ADD5B611D9CDF0C00A1742F /* TKEmptyAlertView.xib */,
+				D37D871B1F8E477A0096EDA7 /* TKPathFriendlinessView.swift */,
+				D37D871C1F8E477A0096EDA7 /* TKPathFriendlinessView.xib */,
 				3A9FF6E01DE7A60500DB4647 /* TKOccupancyView.swift */,
 				3A51402A1DEE62D6002DB39F /* TKVehicleAnnotationView.swift */,
 				3ADD5B641D9CDF0C00A1742F /* VehicleView.h */,
@@ -2922,6 +2927,7 @@
 				3AFFADCB1F068E8B00147990 /* BPKActionOverlay.m in Sources */,
 				3AFFABD11F06854F00147990 /* ModeInfo.swift in Sources */,
 				3A51402B1DEE62D6002DB39F /* TKVehicleAnnotationView.swift in Sources */,
+				D37D871D1F8E477A0096EDA7 /* TKPathFriendlinessView.swift in Sources */,
 				3ADD5B701D9CDF0C00A1742F /* TKAgendaWidgetInfoView.swift in Sources */,
 				3AFFAC561F06855F00147990 /* SGTripSummaryCell.m in Sources */,
 				3AA03E5D1F0BC9DB00C6B337 /* SGLocationManager.m in Sources */,
