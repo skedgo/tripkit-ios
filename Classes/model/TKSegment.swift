@@ -58,7 +58,7 @@ extension TKSegment {
 extension TKSegment {
   
   public var canShowPathFriendliness: Bool {
-    return self.template != nil && self.template.metresFriendly != nil
+    return self.template?.metresFriendly != nil
   }
   
 }

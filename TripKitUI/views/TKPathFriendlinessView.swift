@@ -59,10 +59,10 @@ public class TKPathFriendlinessView: UIView {
       let metres = segment.template.metres
       else { return }
     
-    let friendlyMetres = segment.template.metresFriendly != nil ? segment.template.metresFriendly.doubleValue : Double(0)
+    let friendlyMetres = segment.template?.metresFriendly?.doubleValue ?? Double(0)
     let friendlyRatio = friendlyMetres / metres.doubleValue
     
-    let unfriendlyMetres = segment.template.metresUnfriendly != nil ? segment.template.metresUnfriendly.doubleValue : Double(0)
+    let unfriendlyMetres = segment.template?.metresUnfriendly?.doubleValue ?? Double(0)
     let unfriendlyRatio = unfriendlyMetres / metres.doubleValue
     
     let unknownMetres = metres.doubleValue - friendlyMetres - unfriendlyMetres
