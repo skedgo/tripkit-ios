@@ -28,7 +28,7 @@ typedef NSUInteger SGSegmentTemplateFlag;
 @dynamic data;
 @dynamic flags;
 @dynamic durationWithoutTraffic;
-@dynamic metres, metresFriendly;
+@dynamic metres, metresFriendly, metresUnfriendly;
 @dynamic hashCode;
 @dynamic modeIdentifier;
 @dynamic scheduledStartStopCode, scheduledEndStopCode;
