@@ -15,7 +15,6 @@
 
 #import "SVKTransportModes.h"
 
-#import "SGKConfig+SVKServerKit.h"
 #import "CLLocation+DecodePolylineString.h"
 
 #endif

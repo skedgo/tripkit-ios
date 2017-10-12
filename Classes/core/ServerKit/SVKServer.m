@@ -713,7 +713,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   if (APIKey.length > 0) {
     headers[@"X-TripGo-Key"] = APIKey;
   } else {
-    ZAssert(false, @"API key not specified!"];
+    ZAssert(false, @"API key not specified!");
   }
   
   // Optional
