@@ -4,16 +4,17 @@ platform :ios, '9.3'
 def shared_pods
   pod 'RxSwift', '~> 4.0.0-beta.0'
   pod 'RxCocoa', '~> 4.0.0-beta.0'
-  pod 'Marshal'
-
+  
   pod 'ASPolygonKit'
   pod 'ASPolylineView'
   pod 'KeychainAccess', '~> 3.1'
   pod 'Kingfisher',     '~> 4.0'
   pod 'OAuthSwift',     '~> 1.2'
 
-  pod 'KVNProgress'
-  pod 'SwiftyJSON'
+  pod 'KVNProgress' # For Bookings
+  pod 'SwiftyJSON'  # For Bookings
+  
+  pod 'Marshal'     # For Agenda
 end
 
 target 'TripKit' do

@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Marshal
-
 @objc
 public enum SVKParserHelperMode : Int {
   case walking
@@ -59,13 +57,12 @@ public class SVKParserHelper: NSObject {
   
   @objc(colorForDictionary:)
   public class func color(for dictionary: [String: Any]) -> SGKColor? {
-    return try? SGKColor.value(from: dictionary)
+    return (try? JSONDecoder().decode(API.RGBColor.self, withJSONObject: dictionary))?.color
   }
   
   @objc(namedCoordinateForDictionary:)
   public class func namedCoordinate(for dictionary: [String: Any]) -> SGKNamedCoordinate? {
-    let decoder = JSONDecoder()
-    return try? decoder.decode(SGKNamedCoordinate.self, withJSONObject: dictionary)
+    return try? JSONDecoder().decode(SGKNamedCoordinate.self, withJSONObject: dictionary)
   }
   
   @objc public class func modeCoordinate(for dictionary: [String: Any]) -> STKModeCoordinate? {
@@ -78,8 +75,7 @@ public class SVKParserHelper: NSObject {
   }
   
   @objc public class func stopCoordinate(for dictionary: [String: Any]) -> STKStopCoordinate? {
-    let decoder = JSONDecoder()
-    return try? decoder.decode(STKStopCoordinate.self, withJSONObject: dictionary)
+    return try? JSONDecoder().decode(STKStopCoordinate.self, withJSONObject: dictionary)
   }
   
   @objc(dashPatternForModeGroup:)
@@ -92,21 +88,4 @@ public class SVKParserHelper: NSObject {
     }
   }
 
-}
-
-extension SGKColor : ValueType {
-  
-  @objc public static func value(from object: Any) throws -> SGKColor {
-    guard
-      let dict = object as? [String: CGFloat],
-      let red = dict["red"] ,
-      let green = dict["green"],
-      let blue = dict["blue"]
-      else {
-        throw MarshalError.typeMismatch(expected: [String: CGFloat].self, actual: type(of: object))
-    }
-    
-    return SGKColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: 1)
-  }
-  
 }

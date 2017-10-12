@@ -10,29 +10,30 @@ import Foundation
 
 import RxSwift
 import RxCocoa
-import Marshal
 
-
-
-public struct ProviderAuth {
-
-  fileprivate struct RemoteAction {
-    fileprivate let title: String
-    fileprivate let url: URL
+public struct ProviderAuth: Decodable {
+  
+  private enum DecodingError: Error {
+    case unknownAction(String)
   }
 
-  fileprivate enum Status {
+  struct RemoteAction {
+    let title: String
+    let url: URL
+  }
+
+  enum Status {
     case connected(RemoteAction?)
     case notConnected(RemoteAction)
     
-    fileprivate var remoteURL: URL? {
+    var remoteURL: URL? {
       switch self {
       case .connected(let action):    return action?.url
       case .notConnected(let action): return action.url
       }
     }
 
-    fileprivate var remoteAction: String? {
+    var remoteAction: String? {
       switch self {
       case .connected(let action):    return action?.title
       case .notConnected(let action): return action.title
@@ -40,9 +41,9 @@ public struct ProviderAuth {
     }
   }
 
-  fileprivate let status: Status
+  let status: Status
   
-  fileprivate let companyInfo: API.CompanyInfo?
+  let companyInfo: API.CompanyInfo?
   
   /// Mode identifier that this authentication is for
   public let modeIdentifier: String
@@ -83,44 +84,40 @@ public struct ProviderAuth {
   public var actionURL: URL? {
     return status.remoteURL
   }
-
-}
-
-extension ProviderAuth.Status {
-  fileprivate init?(withDictionary dictionary: [String: AnyObject]) {
-    guard let action: String = try? dictionary.value(for: "action"),
-          let actionTitle: String = try? dictionary.value(for: "actionTitle"),
-          let URLString: String = try? dictionary.value(for: "url"),
-          let actionURL = URL(string: URLString)
-      else {
-      return nil
-    }
+  
+  // MARK: Decodable
+  
+  private enum CodingKeys: String, CodingKey {
+    // These go into status
+    case action
     
-    let remoteAction = ProviderAuth.RemoteAction(title: actionTitle, url: actionURL)
+    // These go into status' actions
+    case actionTitle
+    case url
     
+    // These go into the top level
+    case modeIdentifier
+    case companyInfo
+  }
+  
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    
+    let actionTitle = try container.decode(String.self, forKey: .actionTitle)
+    let actionUrl = try container.decode(URL.self, forKey: .url)
+    let remoteAction = RemoteAction(title: actionTitle, url: actionUrl)
+    
+    let action = try container.decode(String.self, forKey: .action)
     switch action {
-    case "signin":
-      self = .notConnected(remoteAction)
-    case "logout":
-      self = .connected(remoteAction)
-    default:
-      return nil
-    }
-  }
-}
-
-extension ProviderAuth {
-  fileprivate init?(withDictionary dictionary: [String: AnyObject]) {
-    guard let mode: String = try? dictionary.value(for: "modeIdentifier"),
-          let status = Status.init(withDictionary: dictionary)
-      else {
-        return nil
+    case "signin": status = .notConnected(remoteAction)
+    case "logout": status = .connected(remoteAction)
+    default: throw DecodingError.unknownAction(action)
     }
     
-    self.modeIdentifier = mode
-    self.status = status
-    self.companyInfo = try? dictionary.value(for: "companyInfo")
+    modeIdentifier = try container.decode(String.self, forKey: .modeIdentifier)
+    companyInfo = try? container.decode(API.CompanyInfo.self, forKey: .companyInfo)
   }
+  
 }
 
 extension SVKRegion {
@@ -157,7 +154,7 @@ extension SVKRegion {
     
   }
 
-  fileprivate func remotelyLinkedAccounts(_ mode: String?, completion: @escaping ([ProviderAuth]?) -> Void) {
+  func remotelyLinkedAccounts(_ mode: String?, completion: @escaping ([ProviderAuth]?) -> Void) {
     
     var paras = [String: Any]()
     if let mode = mode {
@@ -172,13 +169,12 @@ extension SVKRegion {
       path: "auth/\(name)",
       parameters: paras,
       region: self,
-      success: { _, response, _ in
-        guard let array = response as? [[String: AnyObject]], !array.isEmpty else {
+      success: { _, _, data in
+        if let data = data, let auths = try? JSONDecoder().decode([ProviderAuth].self, from: data) {
+          completion(auths)
+        } else {
           completion([])
-          return
         }
-        
-        completion( array.flatMap { ProviderAuth(withDictionary: $0) } )
       }, failure: { error in
         completion(nil)
       }

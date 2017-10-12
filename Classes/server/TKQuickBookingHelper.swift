@@ -8,20 +8,15 @@
 
 import Foundation
 
-import Marshal
-
-
-
 public struct TKQuickBookingPrice {
   /// Price in local currency, typically not in smallest unit, but dollars
   public let localCost: Float
   
   /// Price in USD dollars
   public let USDCost: Float
-
 }
 
-public struct TKQuickBooking : Unmarshaling {
+public struct TKQuickBooking : Codable {
   /// Localised identifying this booking option
   public let title: String
 
@@ -47,7 +42,15 @@ public struct TKQuickBooking : Unmarshaling {
   public let imageURL: URL?
   
   /// Optional price for this option
-  public let price: TKQuickBookingPrice?
+  private let localPrice: Float?
+  private let usdPrice: Float?
+  public var price: TKQuickBookingPrice? {
+    if let local = localPrice, let usd = usdPrice {
+      return TKQuickBookingPrice(localCost: local, USDCost: usd)
+    } else {
+      return nil
+    }
+  }
 
   /// Localised human-friendly string, e.g., "$10"
   public let priceString: String?
@@ -57,29 +60,22 @@ public struct TKQuickBooking : Unmarshaling {
 
   /// Optional ETA for this option. This is the expected waiting time.
   public let eta: TimeInterval?
-
-  public init(object: MarshaledObject) throws {
-    title                 = try  object.value(for: "title")
-    subtitle              = try? object.value(for: "subtitle")
-    imageURL              = try? object.value(for: "imageURL")
-    
-    bookingTitle          = try  object.value(for: "bookingTitle")
-    bookingURL            = try  object.value(for: "bookingURL")
-    secondaryBookingTitle = try? object.value(for: "secondaryBookingTitle")
-    secondaryBookingURL   = try? object.value(for: "secondaryBookingURL")
-    tripUpdateURL         = try? object.value(for: "tripUpdateURL")
-
-    eta                   = try? object.value(for: "ETA")
-    priceString           = try? object.value(for: "priceString")
-    surgeString           = try? object.value(for: "surgeString")
-    surgeImageURL         = try? object.value(for: "surgeImageURL")
-
-    if let local: Float = try? object.value(for: "price"), let usd: Float = try? object.value(for: "USDPrice") {
-      price = TKQuickBookingPrice(localCost: local, USDCost: usd)
-    } else {
-      price = nil
-    }
-    
+  
+  private enum CodingKeys: String, CodingKey {
+    case title
+    case subtitle
+    case imageURL
+    case bookingTitle
+    case bookingURL
+    case secondaryBookingTitle
+    case secondaryBookingURL
+    case tripUpdateURL
+    case eta = "ETA"
+    case priceString
+    case localPrice = "price"
+    case usdPrice = "USDPrice"
+    case surgeString
+    case surgeImageURL
   }
   
 }
@@ -107,8 +103,8 @@ public enum TKQuickBookingHelper {
       }
       
       segment.storeQuickBookings(fromArray: array)
-      let bookings = array.flatMap { try? TKQuickBooking(object: $0) }
-      completion(bookings)
+      let bookings = try? JSONDecoder().decode([TKQuickBooking].self, withJSONObject: array)
+      completion(bookings ?? [])
     }
   }
 
@@ -119,8 +115,8 @@ extension TKSegment {
   public var storedQuickBookings: [TKQuickBooking]? {
     get {
       if let key = cacheKey(),
-         let cached = TripKit.shared.inMemoryCache().object(forKey: key as AnyObject) as? [[NSString: Any]] {
-        return cached.flatMap { try? TKQuickBooking(object: $0) }
+         let cached = TripKit.shared.inMemoryCache().object(forKey: key as AnyObject) {
+        return try? JSONDecoder().decode([TKQuickBooking].self, withJSONObject: cached)
       } else {
         return nil
       }
@@ -170,7 +166,7 @@ extension TKSegment {
   
   public var bookingConfirmation: TKBooking.Confirmation? {
     if let dictionary = bookingConfirmationDictionary() {
-      return try? TKBooking.Confirmation(object: dictionary)
+      return try? JSONDecoder().decode(TKBooking.Confirmation.self, withJSONObject: dictionary)
       
       // Useful for debugging the confirmation screen
 //    } else if let mode = modeIdentifier() where !isStationary() && mode.hasPrefix("ps_tnc") {

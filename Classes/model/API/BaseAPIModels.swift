@@ -8,11 +8,9 @@
 
 import Foundation
 
-import Marshal // Deprecated, but still in use
-
 extension API {
   
-  public struct CompanyInfo : Codable, Unmarshaling, Marshaling {
+  public struct CompanyInfo : Codable {
     public let name: String
     public let website: URL?
     public let phone: String?
@@ -28,54 +26,15 @@ extension API {
       self.remoteDarkIcon = remoteDarkIcon
       self.color = color
     }
-    
-    public init(object: MarshaledObject) throws {
-      name            = try  object.value(for: "name")
-      website         = try? object.value(for: "website")
-      phone           = try? object.value(for: "phone")
-      remoteIcon      = try? object.value(for: "remoteIcon")
-      remoteDarkIcon  = try? object.value(for: "remoteDarkIcon")
-      color           = try? object.value(for: "color")
-    }
-    
-    public typealias MarshalType = [String: Any]
-    
-    public func marshaled() -> MarshalType {
-      var marshaled: MarshalType =  [
-        "name": name,
-        ]
-      
-      marshaled["website"] = website
-      marshaled["phone"] = phone
-      marshaled["remoteIcon"] = remoteIcon
-      marshaled["remoteDarkIcon"] = remoteDarkIcon
-      marshaled["color"] = color
-      return marshaled
-    }
   }
   
-  public struct DataAttribution : Codable, Unmarshaling, Marshaling {
+  public struct DataAttribution : Codable {
     public let provider: CompanyInfo
     public let disclaimer: String?
     
     public init(provider: CompanyInfo, disclaimer: String? = nil) {
       self.provider = provider
       self.disclaimer = disclaimer
-    }
-    
-    public init(object: MarshaledObject) throws {
-      provider    = try  object.value(for: "provider")
-      disclaimer  = try? object.value(for: "disclaimer")
-    }
-    
-    public typealias MarshalType = [String: Any]
-    
-    public func marshaled() -> MarshalType {
-      var marshaled : MarshalType =  [
-        "provider": provider.marshaled(),
-      ]
-      marshaled["disclaimer"] = disclaimer
-      return marshaled
     }
   }
   
@@ -95,7 +54,7 @@ extension API {
     case canceled   = "CANCELLED"
   }
 
-  public struct RGBColor: Codable, Unmarshaling, Marshaling {
+  public struct RGBColor: Codable {
     let red: Int
     let green: Int
     let blue: Int
@@ -115,22 +74,6 @@ extension API {
       } else {
         return nil
       }
-    }
-    
-    public init(object: MarshaledObject) throws {
-      red   = try  object.value(for: "red")
-      green = try  object.value(for: "green")
-      blue  = try  object.value(for: "blue")
-    }
-    
-    public typealias MarshalType = [String: Any]
-    
-    public func marshaled() -> MarshalType {
-      return [
-        "red": red,
-        "green": green,
-        "blue": blue,
-      ]
     }
   }
   
@@ -242,15 +185,4 @@ extension API.CompanyInfo {
     return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
   }
   
-}
-
-// MARK: - Marshal helper
-
-extension Date: ValueType {
-  public static func value(from object: Any) throws -> Date {
-    guard let seconds = object as? TimeInterval else {
-      throw MarshalError.typeMismatch(expected: TimeInterval.self, actual: type(of: object))
-    }
-    return Date(timeIntervalSince1970: seconds)
-  }
 }
