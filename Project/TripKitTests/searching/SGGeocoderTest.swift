@@ -85,9 +85,16 @@ class SGGeocoderTest: XCTestCase {
   //MARK: - Private helpers
   
   fileprivate func aggregateGeocoder() -> SGAggregateGeocoder {
-    var geocoders: [SGGeocoder] = [SGAppleGeocoder(), SGBuzzGeocoder()]
+    var geocoders: [SGGeocoder] = [SGAppleGeocoder()]
     
     let env = ProcessInfo.processInfo.environment
+    if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
+      TripKit.apiKey = apiKey
+      geocoders.append(SGBuzzGeocoder())
+    } else {
+      XCTFail("Could not construct SGBuzzGeocoder. Check environment variables.")
+    }
+    
     if let clientID = env["FOURSQUARE_CLIENT_ID"], !clientID.isEmpty,
        let clientSecret = env["FOURSQUARE_CLIENT_SECRET"], !clientSecret.isEmpty {
       let foursquare = SGFoursquareGeocoder(
