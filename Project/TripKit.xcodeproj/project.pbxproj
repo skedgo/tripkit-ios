@@ -303,8 +303,6 @@
 		3AFFABC01F06854F00147990 /* SGStyleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB651F06854F00147990 /* SGStyleManager.m */; };
 		3AFFABC11F06854F00147990 /* CLLocation+DecodePolylineString.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB671F06854F00147990 /* CLLocation+DecodePolylineString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABC21F06854F00147990 /* CLLocation+DecodePolylineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB681F06854F00147990 /* CLLocation+DecodePolylineString.m */; };
-		3AFFABC31F06854F00147990 /* SGKConfig+SVKServerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB691F06854F00147990 /* SGKConfig+SVKServerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFFABC41F06854F00147990 /* SGKConfig+SVKServerKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB6A1F06854F00147990 /* SGKConfig+SVKServerKit.m */; };
 		3AFFABC51F06854F00147990 /* SGKNamedCoordinate+SVKRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB6B1F06854F00147990 /* SGKNamedCoordinate+SVKRegion.swift */; };
 		3AFFABC61F06854F00147990 /* SVKError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB6C1F06854F00147990 /* SVKError.swift */; };
 		3AFFABC71F06854F00147990 /* SVKParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB6D1F06854F00147990 /* SVKParserHelper.swift */; };
@@ -927,8 +925,6 @@
 		3AFFAB651F06854F00147990 /* SGStyleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SGStyleManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3AFFAB671F06854F00147990 /* CLLocation+DecodePolylineString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+DecodePolylineString.h"; sourceTree = "<group>"; };
 		3AFFAB681F06854F00147990 /* CLLocation+DecodePolylineString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+DecodePolylineString.m"; sourceTree = "<group>"; };
-		3AFFAB691F06854F00147990 /* SGKConfig+SVKServerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SGKConfig+SVKServerKit.h"; sourceTree = "<group>"; };
-		3AFFAB6A1F06854F00147990 /* SGKConfig+SVKServerKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SGKConfig+SVKServerKit.m"; sourceTree = "<group>"; };
 		3AFFAB6B1F06854F00147990 /* SGKNamedCoordinate+SVKRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SGKNamedCoordinate+SVKRegion.swift"; sourceTree = "<group>"; };
 		3AFFAB6C1F06854F00147990 /* SVKError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVKError.swift; sourceTree = "<group>"; };
 		3AFFAB6D1F06854F00147990 /* SVKParserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVKParserHelper.swift; sourceTree = "<group>"; };
@@ -1918,8 +1914,6 @@
 			children = (
 				3AFFAB671F06854F00147990 /* CLLocation+DecodePolylineString.h */,
 				3AFFAB681F06854F00147990 /* CLLocation+DecodePolylineString.m */,
-				3AFFAB691F06854F00147990 /* SGKConfig+SVKServerKit.h */,
-				3AFFAB6A1F06854F00147990 /* SGKConfig+SVKServerKit.m */,
 				3AFFAB6B1F06854F00147990 /* SGKNamedCoordinate+SVKRegion.swift */,
 				3AFFAB6C1F06854F00147990 /* SVKError.swift */,
 				3AFFAB6D1F06854F00147990 /* SVKParserHelper.swift */,
@@ -2583,7 +2577,6 @@
 				3AFFAE1D1F06E23C00147990 /* SGWebViewController.h in Headers */,
 				3AFFADA91F068E8B00147990 /* BPKHelpers.h in Headers */,
 				3AB6C70D1D1CD08E0089F687 /* TKRoutingParser.h in Headers */,
-				3AFFABC31F06854F00147990 /* SGKConfig+SVKServerKit.h in Headers */,
 				3AA03E581F0BC9DB00C6B337 /* SGAddressBookManager.h in Headers */,
 				3AFFABBE1F06854F00147990 /* SGRootKit.h in Headers */,
 				3AFFAC381F06855F00147990 /* SGCountdownCell.h in Headers */,
@@ -3105,7 +3098,6 @@
 				3A77691E1D3DE45800AF9EB2 /* TKTTPifierCache.swift in Sources */,
 				3AA03D8B1F0B79D400C6B337 /* TKShareURLProvider.swift in Sources */,
 				3AFFAD6B1F068E8B00147990 /* AKResendEmailViewController.m in Sources */,
-				3AFFABC41F06854F00147990 /* SGKConfig+SVKServerKit.m in Sources */,
 				3AFFAE201F06E44900147990 /* SGCountdownCell+STKVehicular.swift in Sources */,
 				3AFFAC5D1F0685F000147990 /* TripKitUIBundle.swift in Sources */,
 				3AF3F2641E04CA8C00A2EEC6 /* TKLocationTypes.swift in Sources */,

@@ -636,15 +636,8 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
 
 + (nullable NSString *)xTripGoVersion
 {
-  NSString *eligibility = [[SGKConfig sharedInstance] regionEligibility];
-  if (eligibility == nil) {
-    return nil;
-  }
-  
-  NSString *app = eligibility.length > 0 ? [@"-" stringByAppendingString:eligibility] : eligibility;
-
   NSNumber *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-  return [NSString stringWithFormat:@"i%@%@", app, version];
+  return [NSString stringWithFormat:@"i%@", version];
 }
 
 #pragma mark - Regions
@@ -720,9 +713,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   if (APIKey.length > 0) {
     headers[@"X-TripGo-Key"] = APIKey;
   } else {
-    // Deprecated
-    [SGKLog warn:@"SVKServer" text:@"API key not specified! Check your Config.plist for TripGoAPIKey."];
-    headers[@"X-TripGo-RegionEligibility"] = [[SGKConfig sharedInstance] regionEligibility];
+    ZAssert(false, @"API key not specified!"];
   }
   
   // Optional
