@@ -304,10 +304,12 @@
     return MKMapRectNull;
   }
   
-  NSDate *date = [defaults objectForKey:dateKey];
-  if (date != nil && [date timeIntervalSinceNow] < -30 * 60) {
-    // Older than 30 mins old. Don't restore
-    return MKMapRectNull;
+  if (dateKey) {
+    NSDate *date = [defaults objectForKey:dateKey];
+    if (date != nil && [date timeIntervalSinceNow] < -30 * 60) {
+      // Older than 30 mins old. Don't restore
+      return MKMapRectNull;
+    }
   }
 
   return MKMapRectMake([rectArray[0] doubleValue],
