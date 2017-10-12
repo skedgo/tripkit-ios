@@ -135,7 +135,7 @@ extension TKOccupancyView {
     case .wheelchair:
       let color = #colorLiteral(red: 0, green: 0.6078431373, blue: 0.8745098039, alpha: 1)
       
-      label.text = NSLocalizedString("Wheelchair accessible", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "").uppercased()
+      label.text = Loc.WheelchairAccessible.uppercased()
       label.textColor = color
       
       icon.image = UIImage(named: "icon-wheelchair-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
