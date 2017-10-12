@@ -74,9 +74,9 @@ public class TKPathFriendlinessView: UIView {
     // Update title
     let format: String
     if segment.isCycling() {
-      format = NSLocalizedString("%@ cycle friendly", tableName: "TripKit", bundle: .tripKitUI, comment: "Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.")
+      format = NSLocalizedString("%@ cycle friendly", tableName: "TripKit", bundle: .tripKit, comment: "Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.")
     } else {
-      format = NSLocalizedString("%@ wheelchair friendly", tableName: "TripKit", bundle: .tripKitUI, comment: "Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'.")
+      format = NSLocalizedString("%@ wheelchair friendly", tableName: "TripKit", bundle: .tripKit, comment: "Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'.")
     }
     titleLabel.text = String(format: format, formatter.string(from: NSNumber(value: friendlyRatio))!)
     
