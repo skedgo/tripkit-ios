@@ -20,7 +20,7 @@
 "Action" = "動作";
 
 /* Default title for alert view */
-"Alert" = "提示";
+"Alert" = "警示";
 
 /* Option for users if they already owned a SkedGo account */
 "Already have an account? Sign in" = "已經註冊？立即登錄！";
@@ -196,6 +196,9 @@
 /* No comment provided by engineer. */
 "No CO₂" = "無碳足跡";
 
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "沒有無障礙通道";
+
 /* Countdown cell 'now' indicator */
 "Now" = "現在";
 
@@ -334,6 +337,9 @@
 
 /* Every weekend day in context of repetitions (especially recurring events) */
 "Weekends" = "週末";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "無法取得無障礙通道資訊";
 
 /* Indicator for wheelchair accessible services */
 "Wheelchair accessible" = "無障礙通道";
