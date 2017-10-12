@@ -102,7 +102,8 @@ extension TKRegionManager {
       NotificationCenter.default.post(name: .TKRegionManagerUpdatedRegions, object: self)
       NotificationCenter.default.post(name: .SGMapShouldRefreshOverlay, object: self)
     } catch {
-      SGKLog.info("TKRegionManager", text: "Failed to parse regions: \(error)")
+      // Fail silently as this routinely happens if the regions didn't change.
+      SGKLog.verbose("TKRegionManager", text: "Failed to parse regions: \(error)")
     }
   }
   
