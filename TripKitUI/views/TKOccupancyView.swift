@@ -68,19 +68,22 @@ public class TKOccupancyView: UIView {
     addSubview(label)
     self.label = label
     
-    let height = icon.heightAnchor.constraint(equalToConstant: 16)
-    height.priority = 999
-    height.isActive = true
+    let heightConstraint = icon.heightAnchor.constraint(equalToConstant: 16)
+    heightConstraint.priority = 999
     
-    icon.widthAnchor.constraint(equalToConstant: 16).isActive = true
-    icon.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-    icon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    NSLayoutConstraint.activate([
+        heightConstraint,
+        icon.widthAnchor.constraint(equalToConstant: 16),
+        icon.leadingAnchor.constraint(equalTo: leadingAnchor),
+        icon.centerYAnchor.constraint(equalTo: centerYAnchor)
+      ])
     
-    label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 4).isActive = true
-    label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    label.heightAnchor.constraint(equalTo: icon.heightAnchor).isActive = true
-    label.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-    trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 8).isActive = true
+    NSLayoutConstraint.activate([
+      label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 8),
+      label.topAnchor.constraint(equalTo: topAnchor, constant: 2),
+      bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 2),
+      trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 0)
+      ])
   }
 
 }
