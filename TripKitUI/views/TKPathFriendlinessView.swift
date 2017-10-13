@@ -27,6 +27,7 @@ public class TKPathFriendlinessView: UIView {
   @IBOutlet var unknownLegendLabel: UILabel!
   
   @IBOutlet weak var friendlyToUnfriendlySpacing: NSLayoutConstraint!
+  @IBOutlet weak var unfriendlyToUnknownSpacing: NSLayoutConstraint!
   
   public var segment: TKSegment? {
     didSet {
@@ -119,6 +120,7 @@ public class TKPathFriendlinessView: UIView {
     unknownLabelWidthConstraint.isActive = unknownMetreLabel.isHidden
     
     friendlyToUnfriendlySpacing.constant = friendlyMetres == 0 ? 0 : 8
+    unfriendlyToUnknownSpacing.constant = unknownMetres == 0 ? 0 : 8
   }
   
 }

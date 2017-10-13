@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -140,7 +141,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#75m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTx-Fx-qGq" userLabel="#186m (Unfriendly)">
-                    <rect key="frame" x="125" y="82.5" width="32.5" height="14.5"/>
+                    <rect key="frame" x="125" y="82.5" width="125" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="1" green="0.71372549019607845" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -154,7 +155,6 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="U0R-7C-Vbc" secondAttribute="bottom" id="0Df-cM-wDH"/>
                 <constraint firstItem="ovk-wO-7Wo" firstAttribute="leading" secondItem="pE2-0a-GuL" secondAttribute="leading" id="80v-n4-IXY"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ovk-wO-7Wo" secondAttribute="bottom" id="9Gw-Fb-n6Q"/>
                 <constraint firstItem="U0R-7C-Vbc" firstAttribute="top" secondItem="6a0-Cz-EtD" secondAttribute="bottom" constant="8" id="BH2-UO-3xa"/>
@@ -167,6 +167,7 @@
                 <constraint firstItem="RF5-uO-3dB" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="aoj-NQ-FVm"/>
                 <constraint firstItem="RF5-uO-3dB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bcH-R6-2I0"/>
                 <constraint firstItem="ovk-wO-7Wo" firstAttribute="top" secondItem="U0R-7C-Vbc" secondAttribute="bottom" constant="4" id="cXl-H8-vhY"/>
+                <constraint firstItem="zTx-Fx-qGq" firstAttribute="trailing" secondItem="I7L-ZV-BRP" secondAttribute="trailing" priority="748" id="eKr-Vc-A3h"/>
                 <constraint firstItem="zTx-Fx-qGq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ovk-wO-7Wo" secondAttribute="trailing" constant="8" id="gW0-5W-1Ee"/>
                 <constraint firstItem="6a0-Cz-EtD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="kAL-JW-mkM"/>
                 <constraint firstItem="LCm-DB-pzD" firstAttribute="centerY" secondItem="ovk-wO-7Wo" secondAttribute="centerY" id="qBj-1C-OS8"/>
@@ -174,11 +175,6 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="0Df-cM-wDH"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="friendlyBarView" destination="pE2-0a-GuL" id="dyy-OG-0wZ"/>
                 <outlet property="friendlyLegendLabel" destination="iXP-5z-5RP" id="bs5-cL-G1n"/>
@@ -188,6 +184,7 @@
                 <outlet property="unfriendlyBarView" destination="I7L-ZV-BRP" id="wyb-vK-wMN"/>
                 <outlet property="unfriendlyLegendLabel" destination="sOL-qe-m0p" id="lbJ-uL-9ec"/>
                 <outlet property="unfriendlyMetreLabel" destination="zTx-Fx-qGq" id="Cf3-SS-NYm"/>
+                <outlet property="unfriendlyToUnknownSpacing" destination="Ro2-9K-rOn" id="i5n-bc-RAC"/>
                 <outlet property="unknownBarView" destination="oU9-U2-5m6" id="gy6-zm-01y"/>
                 <outlet property="unknownLegendLabel" destination="ErG-er-iIm" id="52h-xe-RTt"/>
                 <outlet property="unknownMetreLabel" destination="LCm-DB-pzD" id="xPf-hs-icw"/>
