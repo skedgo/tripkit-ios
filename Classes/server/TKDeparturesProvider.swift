@@ -43,7 +43,7 @@ extension TKDeparturesProvider {
       "embarkationStops": stopCodes,
       "timeStamp": fromDate.timeIntervalSince1970,
       "limit": limit,
-      "config": TKSettings.defaultDictionary()
+      "config": TKSettings.Config().paras
     ]
     
     return SVKServer.shared.rx
@@ -138,7 +138,7 @@ extension TKDeparturesProvider {
       "embarkationStops": [table.startStopCode],
       "disembarkationStops": [table.endStopCode],
       "limit": limit,
-      "config": TKSettings.defaultDictionary()
+      "config": TKSettings.Config().paras
     ]
   }
   

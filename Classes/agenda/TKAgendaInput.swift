@@ -152,17 +152,17 @@ public struct TKAgendaInput: Codable {
     }
   }
   
-  public let config: [String: Any]
-  
   public let items: [Item]
-  
-  public let patterns: [TKSegmentPattern]
   
   public let modes: [String]
   
+  public let config: TKSettings.Config?
+  
+  public let patterns: [TKSegmentPattern]
+  
   public let vehicles: [[String: Any]]
 
-  public init(items: [Item], modes: [String] = [], config: [String:Any] = [:], patterns: [TKSegmentPattern] = [], vehicles: [[String: Any]] = []) {
+  public init(items: [Item], modes: [String] = [], config: TKSettings.Config? = nil, patterns: [TKSegmentPattern] = [], vehicles: [[String: Any]] = []) {
     self.items = items
     self.modes = modes
     self.config = config
@@ -182,20 +182,20 @@ public struct TKAgendaInput: Codable {
   
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    config =   (try? container.decode([String: Any].self, forKey: .config)) ?? [:]
     items =     try  container.decode([Item].self, forKey: .items)
-    patterns = (try? container.decode([TKSegmentPattern].self, forKey: .patterns)) ?? []
     modes =    (try? container.decode([String].self, forKey: .modes)) ?? []
-    vehicles = (try? container.decode([[String: Any]].self, forKey: .vehicles)) ?? []
+    config =    try? container.decode(TKSettings.Config.self, forKey: .config)
+    patterns = /* (try? container.decode([TKSegmentPattern].self, forKey: .patterns)) ?? */ []
+    vehicles = /* (try? container.decode([[String: Any]].self, forKey: .vehicles)) ?? */ []
   }
   
   public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(config, forKey: .config)
     try container.encode(items, forKey: .items)
-    try container.encode(patterns, forKey: .patterns)
     try container.encode(modes, forKey: .modes)
-    try container.encode(vehicles, forKey: .vehicles)
+    try container.encode(config, forKey: .config)
+//    try container.encode(patterns, forKey: .patterns)
+//    try container.encode(vehicles, forKey: .vehicles)
   }
   
 }

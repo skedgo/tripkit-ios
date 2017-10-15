@@ -11,9 +11,6 @@ import CoreLocation
 
 import RxSwift
 import RxCocoa
-import Marshal
-
-
 
 public enum TKTTPifierInputItem {
   case event(TKTTPifierEventInputType)
@@ -147,7 +144,7 @@ public typealias ModeIdentifier = String
 public typealias DistanceUnit = Float
 public typealias PriceUnit = Float
 
-public struct TKTTPifierValue<Element: ValueType> : Unmarshaling {
+public struct TKTTPifierValue<Element: Codable> : Codable {
   public let average: Element
   public let min: Element?
   public let max: Element?
@@ -159,14 +156,6 @@ public struct TKTTPifierValue<Element: ValueType> : Unmarshaling {
     self.max = max
     self.unit = unit
   }
-  
-  public init(object: MarshaledObject) throws {
-    average = try  object.value(for: "average")
-    min     = try? object.value(for: "min")
-    max     = try? object.value(for: "max")
-    unit    = try? object.value(for: "unit")
-  }
-  
 }
 
 extension TKTTPifierValue {

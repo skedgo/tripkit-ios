@@ -33,6 +33,7 @@ public enum TKAgendaError: Error {
   case unexpectedResponse(StatusCode, Any?)
 }
 
+@available(iOS 10.0, *)
 extension Reactive where Base: SVKServer {
   
   /// `POST`-ing new agenda
@@ -63,11 +64,7 @@ extension Reactive where Base: SVKServer {
     }
     
     let encoder = JSONEncoder()
-    if #available(iOS 10.0, *) {
-      encoder.dateEncodingStrategy = .iso8601
-    } else {
-      encoder.dateEncodingStrategy = .secondsSince1970
-    }
+    encoder.dateEncodingStrategy = .iso8601
     
     let paras: [String: Any]?
     do {
@@ -172,11 +169,11 @@ extension Reactive where Base: SVKServer {
       .flatMapLatest { status, body, data -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
         switch status {
         case 200:
-          guard let data = data else { throw TKAgendaError.unexpectedResponse(status, body) }
+          guard let data = data, let response = body as? [String: Any] else { throw TKAgendaError.unexpectedResponse(status, body) }
           let decoder = JSONDecoder()
+          decoder.dateDecodingStrategy = .iso8601
           let output = try decoder.decode(TKAgendaOutput.self, from: data)
-          let response = try decoder.decode(TKAgendaOutput.Response.self, from: data)
-          return try output.addTrips(from: response).map { .success($0) }
+          return try output.addTrips(fromResponse: response).map { .success($0) }
           
         case 299: return Observable.just(.calculating)
         case 304: return Observable.just(.noChange)

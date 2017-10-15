@@ -9,7 +9,6 @@
 import Foundation
 
 import RxSwift
-import Marshal
 
 extension Error {
   fileprivate func isNotConnectedError() -> Bool {

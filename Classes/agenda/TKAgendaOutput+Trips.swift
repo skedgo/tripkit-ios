@@ -12,35 +12,24 @@ import RxSwift
 
 extension TKAgendaOutput {
   
-  struct Response: Decodable {
+  func addTrips(fromResponse response: [String: Any]) throws -> Observable<TKAgendaOutput> {
+    
     typealias DictList = [[String: Any]]
-    let track: DictList // TODO: This has two things we care about, an "id: String", and a "groups: DictList"
-    let segmentTemplates: DictList
-    let alerts: DictList
-    
-    // MARK: Decodable
-    private enum CodingKeys: String, CodingKey {
-      case track
-      case segmentTemplates
-      case alerts
+    guard
+      let track = response["track"] as? DictList,
+      let segmentTemplates = response["segmentTemplates"] as? DictList
+      else {
+        return Observable.just(self) // no trips to add
     }
     
-    init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: CodingKeys.self)
-      track = try container.decode(DictList.self, forKey: .track)
-      segmentTemplates = try container.decode(DictList.self, forKey: .segmentTemplates)
-      alerts = try container.decode(DictList.self, forKey: .alerts)
-    }
-  }
-  
-  func addTrips(from response: Response) throws -> Observable<TKAgendaOutput> {
-    
+    let alerts = response["alerts"] as? DictList
+
     // The parser requires a map of some ID to the raw 'groups' array.
     // We use the ID as defined by `TKAgendaOutput.tripId`.
-    let keyToRawGroups: [String: Response.DictList] 
-    keyToRawGroups = response.track.reduce(mutating: [:]) { acc, item in
+    let keyToRawGroups: [String: DictList]
+    keyToRawGroups = track.reduce(mutating: [:]) { acc, item in
       if let tripId = item["id"] as? String,
-         let groups = item["groups"] as? Response.DictList  {
+         let groups = item["groups"] as? DictList  {
         acc[tripId] = groups
       }
     }
@@ -49,7 +38,7 @@ extension TKAgendaOutput {
     // IDs we used above, to a trip list.
     let parser = TKRoutingParser(tripKitContext: TripKit.shared.tripKitContext)
     return parser.rx
-      .parseAndAdd(keyToGroups: keyToRawGroups, segmentTemplates: response.segmentTemplates, alerts: response.alerts)
+      .parseAndAdd(keyToGroups: keyToRawGroups, segmentTemplates: segmentTemplates, alerts: alerts)
       .map { keyToTrip in
         var withTrips = self
         withTrips.trips = keyToTrip

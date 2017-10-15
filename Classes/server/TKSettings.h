@@ -24,8 +24,6 @@ typedef NS_ENUM(NSInteger, TKSettingsSpeed) {
 
 @interface TKSettings : NSObject
 
-+ (NSMutableDictionary *)defaultDictionary;
-
 /**
  The maximum walking duration is a per-segment limit for mixed results, i.e., it does not apply to walking-only trips.
  

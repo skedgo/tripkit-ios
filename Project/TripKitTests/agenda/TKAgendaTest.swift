@@ -14,6 +14,7 @@ import RxBlocking
 
 import TripKit
 
+@available(iOS 10.0, *)
 class TKAgendaTest: XCTestCase {
   
   var input: TKAgendaInput!
@@ -31,6 +32,9 @@ class TKAgendaTest: XCTestCase {
     // test input
     input = try? TKAgendaInput.testInput()
     components = DateComponents(year: 2017, month: 5, day: 30)
+
+    let env = ProcessInfo.processInfo.environment
+    TripKit.apiKey = env["TRIPGO_API_KEY"]!
     
     // for now we have to run against the local server
     // TODO: Fix this (should be production ideally)
@@ -81,7 +85,6 @@ class TKAgendaTest: XCTestCase {
     let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
     let result1 = try upload.toBlocking().toArray()
     XCTAssertEqual(result1, [TKAgendaUploadResult.success])
-    
     
     let delete = SVKServer.shared.rx.deleteAgenda(for: components)
     let result2 = try delete.toBlocking().toArray()

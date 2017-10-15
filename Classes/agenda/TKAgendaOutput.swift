@@ -74,8 +74,7 @@ public struct TKAgendaOutput: Decodable {
   
   public let inputs: [String: TKAgendaInput.Item]
   
-  /// Map of a trip's ID to the trip. A trip's ID here
-  /// is the trip's departure string from the output.
+  /// Map of a trip's ID to the trip
   public var trips: [String: Trip] = [:]
   
   
