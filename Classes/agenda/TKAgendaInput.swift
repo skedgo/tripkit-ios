@@ -185,6 +185,7 @@ public struct TKAgendaInput: Codable {
     items =     try  container.decode([Item].self, forKey: .items)
     modes =    (try? container.decode([String].self, forKey: .modes)) ?? []
     config =    try? container.decode(TKSettings.Config.self, forKey: .config)
+    // FIXME: Add those again
     patterns = /* (try? container.decode([TKSegmentPattern].self, forKey: .patterns)) ?? */ []
     vehicles = /* (try? container.decode([[String: Any]].self, forKey: .vehicles)) ?? */ []
   }
@@ -194,6 +195,7 @@ public struct TKAgendaInput: Codable {
     try container.encode(items, forKey: .items)
     try container.encode(modes, forKey: .modes)
     try container.encode(config, forKey: .config)
+    // FIXME: Add those again
 //    try container.encode(patterns, forKey: .patterns)
 //    try container.encode(vehicles, forKey: .vehicles)
   }

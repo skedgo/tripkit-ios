@@ -8,7 +8,6 @@
 
 import Foundation
 
-import Marshal
 import RxSwift
 
 public typealias StatusCode = Int
@@ -195,10 +194,12 @@ extension Reactive where Base: SVKServer {
       .map { status, body, data -> TKAgendaSummary in
         switch status {
         case 200:
-          guard let marshaled = body as? MarshaledObject else {
-              throw TKAgendaError.unexpectedResponse(status, body)
+          guard let data = data else {
+            throw TKAgendaError.unexpectedResponse(status, body)
           }
-          return try TKAgendaSummary(object: marshaled)
+          let decoder = JSONDecoder()
+          decoder.dateDecodingStrategy = .iso8601
+          return try decoder.decode(TKAgendaSummary.self, from: data)
         case 401: throw TKAgendaError.userTokenIsInvalid
         default:  throw TKAgendaError.unexpectedResponse(status, body)
         }
