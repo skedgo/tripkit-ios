@@ -34,7 +34,7 @@
                                    forService:(Service *)service
 {
   // Get the visibility and keep only those templates which are visible
-  STKTripSegmentVisibility visibility = [TKParserHelper segmentVisibilityType:dict[@"visibility"]];
+  STKTripSegmentVisibility visibility = [TKAPIToCoreDataConverter segmentVisibilityType:dict[@"visibility"]];
   if (visibility == STKTripSegmentVisibilityHidden) {
     return nil;
   }
@@ -54,6 +54,7 @@
   template.durationWithoutTraffic = dict[@"durationWithoutTraffic"];
   template.metres           = dict[@"metres"];
   template.metresFriendly   = dict[@"metresSafe"];
+  template.metresUnfriendly = dict[@"metresUnsafe"];
   
   if (template.segmentType.integerValue == TKSegmentTypeScheduled) {
     template.scheduledStartStopCode = dict[@"stopCode"];
@@ -321,8 +322,8 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
   }
   
   // Next we parse the alerts
-  [TKParserHelper updateOrAddAlerts:alertsArray
-                   inTripKitContext:self.context];
+  [TKAPIToCoreDataConverter updateOrAddAlerts:alertsArray
+                             inTripKitContext:self.context];
   
   // Now parse the groups
   NSSet *previousTrips = [request trips];
@@ -446,9 +447,9 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           [TKParserHelper adjustService:service forRealTimeStatusString:realTimeStatus];
           
           // keep the vehicles
-          [TKParserHelper updateVehiclesForService:service
-                                    primaryVehicle:refDict[@"realtimeVehicle"]
-                               alternativeVehicles:refDict[@"realtimeVehicleAlternatives"]];
+          [TKAPIToCoreDataConverter updateVehiclesForService:service
+                                              primaryVehicle:refDict[@"realtimeVehicle"]
+                                         alternativeVehicles:refDict[@"realtimeVehicleAlternatives"]];
           
         } else {
           // private transport

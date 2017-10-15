@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^AMKDidSelectItemHandler)();
+typedef void (^AMKDidSelectItemHandler)(void);
 
 typedef NS_ENUM(NSUInteger, AMKItemActionType) {
   AMKItemActionType_None,

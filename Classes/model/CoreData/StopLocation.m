@@ -32,6 +32,8 @@
 @dynamic sortScore;
 @dynamic regionName;
 @dynamic toDelete;
+@dynamic wheelchairAccessible;
+@dynamic alertHashCodes;
 
 @dynamic cell;
 @dynamic parent;
@@ -190,6 +192,15 @@
 	} else {
 		return @[self];
 	}
+}
+
+- (void)resetAlertCache
+{
+  _alertsIncludingChildren = nil;
+  
+  for (StopLocation *stop in self.children) {
+    [stop resetAlertCache];
+  }
 }
 
 - (void)clearVisits

@@ -27,3 +27,5 @@ DerivedData
 Project/Podfile.lock
 Project/Pods
 /Project/TripKit.framework.zip
+/Examples/MiniMap/Podfile.lock
+/Examples/MiniMap/Pods

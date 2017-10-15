@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface StopLocation : NSManagedObject
 
 @property (nonatomic, retain, nullable) SGKNamedCoordinate *location;
-
 @property (nonatomic, retain, nullable) NSString * name;
 @property (nonatomic, retain, nullable) NSString * shortName;
 @property (nonatomic, copy) NSString * stopCode;
@@ -27,12 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSString * regionName;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain, nullable) StopLocation *parent;
+@property (nonatomic, strong, nullable) NSNumber * wheelchairAccessible;
 @property (nonatomic, strong, nullable) Cell *cell;
 @property (nonatomic, retain, nullable) NSSet<StopLocation *> *children;
 @property (nonatomic, retain, nullable) NSSet<StopVisits *> *visits;
+@property (nonatomic, retain, nullable) NSArray<NSNumber *> *alertHashCodes;
 
+// Non core data properties
 @property (nonatomic, strong, nullable) NSDate *lastEarliestDate;
-
 @property (nonatomic, weak, nullable) StopVisits *lastTopVisit;
 
 + (nullable instancetype)fetchStopForStopCode:(NSString *)stopCode
@@ -67,6 +68,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray<StopLocation *> *)stopsToMatchTo;
 
 - (NSArray<Alert *> *)alertsIncludingChildren;
+
+/**
+ This method is used to reset any alerts that are currently associated
+ with the StopLocation. This is usually called after alerts are altered
+ in core data, e.g., as a result of parsing alerts in a server response.
+ */
+- (void)resetAlertCache;
 
 - (void)clearVisits;
 

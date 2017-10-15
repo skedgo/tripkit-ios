@@ -29,40 +29,28 @@ typedef enum {
 
 @property (nonatomic, strong) NSDate *time;
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, strong) NSString *parking;
 
 @property (weak, nonatomic) IBOutlet UIView *contentWrapper;
 
 // Interface outlets - Main view
-
 @property (nonatomic, weak) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLeadingSpace;
 
 // Main view: counting down
-
 @property (nonatomic, weak) IBOutlet UIView *timeWrapper;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *timeWrapperWidth;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *timeWrapperLeadingSpace;
-
-// Main view: parking
-@property (weak, nonatomic) IBOutlet UIView *parkingWrapper;
-
-
-// Interface outlets - Alert view
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *alertIconWidth;
 
 // Some default values from storyboard
 @property (nonatomic, assign) UIEdgeInsets alertViewLayoutMargins;
 @property (nonatomic, assign) UIEdgeInsets contentViewLayoutMargins;
 @property (nonatomic, assign) UIEdgeInsets timeWrapperLayoutMargins;
-@property (nonatomic, assign) UIEdgeInsets parkingWrapperLayoutMargins;
 
 @property (nonatomic, assign) CGFloat titleLeadingSpaceValue;
 @property (nonatomic, assign) CGFloat iconWidthValue;
 @property (nonatomic, assign) CGFloat timeWrapperWidthValue;
 @property (nonatomic, assign) CGFloat timeWrapperLeadingSpaceValue;
-@property (nonatomic, assign) CGFloat parkingWrapperLeadingSpaceValue;
 @property (nonatomic, assign) CGFloat alertIconWidthValue;
 
 @end
@@ -85,11 +73,12 @@ typedef enum {
   self.modeIcon.alpha = alpha;
   self.title.alpha = alpha;
   self.subtitle.alpha = alpha;
-  self.subSubTitle.alpha = alpha;
+  self.subsubTitle.alpha = alpha;
   self.alertLabel.alpha = alpha;
   self.alertIcon.alpha = alpha;
+  self.accessibleLabel.alpha = alpha;
+  self.accessibleIcon.alpha = alpha;
 }
-
 
 #pragma mark - Custom accessors
 
@@ -119,19 +108,6 @@ typedef enum {
   self.alertIcon.hidden = ! showAlertIcon;
 }
 
-- (void)setShowWheelchair:(BOOL)showWheelchair
-{
-  _showWheelchair = showWheelchair;
-  
-  if (showWheelchair) {
-    self.modeAccessoryIcon.hidden = NO;
-    self.modeAccessoryIcon.image = [SGStyleManager imageNamed:@"icon-wheelchair-white-outline"];
-  } else {
-    self.modeAccessoryIcon.hidden = YES;
-    self.modeAccessoryIcon.image = nil;
-  }
-}
-
 #pragma mark - UITableViewCell
 
 - (void)awakeFromNib
@@ -149,12 +125,9 @@ typedef enum {
   if (! useColorOnLabel) {
     self.title.backgroundColor = [UIColor clearColor];
     self.subtitle.backgroundColor = [UIColor clearColor];
-    self.subSubTitle.backgroundColor = [UIColor clearColor];
+    self.subsubTitle.backgroundColor = [UIColor clearColor];
     self.alertLabel.backgroundColor = [UIColor clearColor];
   }
-  
-  // Don't show wheelchair by default.
-  self.showWheelchair = NO;
   
   [self readDefaultDimensionsFromStoryboard];
 }
@@ -182,14 +155,10 @@ typedef enum {
 
 - (void)updateConstraints
 {  
-  if (self.alertLabel.text.length == 0) {
-    // there is no alert.
-    self.alertIconWidth.constant = 0.0f;
-    self.alertView.layoutMargins = UIEdgeInsetsZero;
-  } else {
-    self.alertIconWidth.constant = self.alertIconWidthValue;
-    self.alertView.layoutMargins = self.alertViewLayoutMargins;
-  }
+  BOOL requireAccessibility = self.accessibleLabel.text.length != 0;
+  self.accessibleIconWidth.constant = requireAccessibility ? 20 : 0;
+  self.accessibleTopConstraint.constant = requireAccessibility ? 8 : 0;
+  self.accessibleBottomConstraint.constant = requireAccessibility ? 8 : 0;
 
   if (! self.modeIcon.image) {
     self.iconWidth.constant = 0.0f;
@@ -199,12 +168,14 @@ typedef enum {
     self.titleLeadingSpace.constant = self.titleLeadingSpaceValue;
   }
   
-  if (self.time == nil && self.parking == nil) {
+  if (self.time == nil) {
     self.timeWrapperWidth.constant = 0.0f;
     self.timeWrapperLeadingSpace.constant = 0.0f;
+    self.timeWrapper.layoutMargins = UIEdgeInsetsZero;
   } else {
     self.timeWrapperWidth.constant = self.timeWrapperWidthValue;
     self.timeWrapperLeadingSpace.constant = self.timeWrapperLeadingSpaceValue;
+    self.timeWrapper.layoutMargins = self.timeWrapperLayoutMargins;
   }
   
   [super updateConstraints];
@@ -221,7 +192,7 @@ typedef enum {
   // as this will allow the text to wrap correctly, and as a result allow the label to take on the correct height.
   self.title.preferredMaxLayoutWidth = CGRectGetWidth(self.title.bounds);
   self.subtitle.preferredMaxLayoutWidth = CGRectGetWidth(self.subtitle.bounds);
-  self.subSubTitle.preferredMaxLayoutWidth = CGRectGetWidth(self.subSubTitle.bounds);
+  self.subsubTitle.preferredMaxLayoutWidth = CGRectGetWidth(self.subsubTitle.bounds);
   self.alertLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.alertLabel.bounds);
   
   [super layoutSubviews];
@@ -235,19 +206,17 @@ typedef enum {
                        icon:(UIImage *)icon
                iconImageURL:(NSURL *)iconImageURL
           timeToCountdownTo:(NSDate *)time
-           parkingAvailable:(NSString *)parking
                    position:(SGKGrouping)position
                  stripColor:(UIColor *)stripColor
 {
   self.time = time;
-  self.parking = parking;
   
   [self.modeIcon setImageWithURL:iconImageURL placeholderImage:icon];
   self.modeIcon.tintColor = [SGStyleManager darkTextColor];
   
   self.title.attributedText = title;
   self.subtitle.text = subtitle;
-  self.subSubTitle.text = subsubtitle;
+  self.subsubTitle.text = subsubtitle;
   
   self.coloredStrip.backgroundColor = stripColor;
   
@@ -256,22 +225,10 @@ typedef enum {
     self.timeLetterLabel.text = nil;
     self.timeNumberLabel.text = nil;
     self.timeWrapper.hidden = YES;
-    self.timeWrapper.layoutMargins = UIEdgeInsetsZero;
   } else {
     self.timeWrapper.hidden = NO;
     self.timeWrapper.layer.cornerRadius = 3.0f;
-    self.timeWrapper.layoutMargins = self.timeWrapperLayoutMargins;
     [self updateTimeView:YES];
-  }
-  
-  if (parking == nil) {
-    self.parkingLabel.text = nil;
-    self.parkingWrapper.hidden = YES;
-    self.parkingWrapper.layoutMargins = UIEdgeInsetsZero;
-  } else {
-    self.parkingLabel.text = parking;
-    self.parkingWrapper.hidden = NO;
-    self.parkingWrapper.layoutMargins = self.parkingWrapperLayoutMargins;
   }
 
   if (position == SGKGrouping_EdgeToEdge) {
@@ -549,7 +506,6 @@ typedef enum {
 {
   self.objcDisposeBag = [[SGObjCDisposeBag alloc] init];
   
-  self.seperator.hidden = YES;
   self.coloredStrip.backgroundColor = nil;
   
   self.footnoteView.hidden = YES;
@@ -561,6 +517,9 @@ typedef enum {
   [self resetLabels];
   [self resetImageViews];
   [self resetConstraints];
+  
+  self.accessibleSeparator.hidden = YES;
+  self.alertSeparator.hidden = YES;
   
   [self.timer invalidate];
   self.timer = nil;
@@ -583,11 +542,11 @@ typedef enum {
 {
   [self resetLabel:self.title];
   [self resetLabel:self.subtitle];
-  [self resetLabel:self.subSubTitle];
+  [self resetLabel:self.subsubTitle];
   [self resetLabel:self.alertLabel];
   [self resetLabel:self.timeLetterLabel];
   [self resetLabel:self.timeNumberLabel];
-  [self resetLabel:self.parkingLabel];
+  [self resetLabel:self.accessibleLabel];
 }
 
 - (void)resetImageViews
@@ -596,6 +555,7 @@ typedef enum {
   [self resetImageView:self.alertSymbol];
   [self resetImageView:self.alertIcon];
   [self resetImageView:self.tickView];
+  [self resetImageView:self.accessibleIcon];
 }
 
 - (void)resetLabel:(UILabel *)label
@@ -613,7 +573,6 @@ typedef enum {
   self.alertView.layoutMargins = self.alertViewLayoutMargins;
   self.contentView.layoutMargins = self.contentViewLayoutMargins;
   self.timeWrapper.layoutMargins = self.timeWrapperLayoutMargins;
-  self.parkingWrapper.layoutMargins = self.parkingWrapperLayoutMargins;
   
   self.titleLeadingSpace.constant = self.titleLeadingSpaceValue;
   self.iconWidth.constant = self.iconWidthValue;
@@ -627,7 +586,6 @@ typedef enum {
   self.alertViewLayoutMargins = self.alertView.layoutMargins;
   self.contentViewLayoutMargins = self.contentView.layoutMargins;
   self.timeWrapperLayoutMargins = self.timeWrapper.layoutMargins;
-  self.parkingWrapperLayoutMargins = self.parkingWrapper.layoutMargins;
   
   self.titleLeadingSpaceValue = self.titleLeadingSpace.constant;
   self.iconWidthValue = self.iconWidth.constant;

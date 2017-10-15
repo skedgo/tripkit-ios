@@ -143,7 +143,7 @@
 "Leave now" = "Parti adesso";
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
-"Limited standing room only" = "Limited standing room only";
+"Limited standing room only" = "Limitato: in piedi";
 
 /* No comment provided by engineer. */
 "Live traffic" = "traffico in tempo reale";
@@ -176,7 +176,7 @@
 "Opening Hours" = "Orari d'apertura";
 
 /* No comment provided by engineer. */
-"Plan a trip and it will show up here." = "Plan a trip and it will show up here.";
+"Plan a trip and it will show up here." = "Pianificare un viaggio e verrà visualizzato qui.";
 
 /* No comment provided by engineer. */
 "Public holiday" = "Giorno festivo";
@@ -212,10 +212,10 @@
 "Vehicle %@ updated %@ ago" = "Veicolo %@ aggiornato dal %@";
 
 /* No comment provided by engineer. */
-"We are busy getting your upcoming trip. Please wait..." = "We are busy getting your upcoming trip. Please wait...";
+"We are busy getting your upcoming trip. Please wait..." = "Siamo impegnati ad ottenere il tuo prossimo viaggio. Attendere prego...";
 
 /* No comment provided by engineer. */
-"We'll keep you updated with the latest transit alerts here" = "We'll keep you updated with the latest transit alerts here";
+"We'll keep you updated with the latest transit alerts here" = "Vi terremo aggiornati con gli ultimi avvisi di transito qui";
 
 /* No comment provided by engineer. */
 "Wheelchair accessible" = "Accessibile con sedia a rotelle";

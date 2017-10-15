@@ -9,16 +9,20 @@
 import Foundation
 
 extension StopLocation {
-  public var region: SVKRegion? {
+  @objc public var region: SVKRegion? {
     if let name = regionName {
-      return SVKRegionManager.shared.localRegion(named: name)
+      return TKRegionManager.shared.localRegion(named: name)
     } else {
       return location?.regions.first
     }
   }
   
-  public var modeTitle: String {
+  @objc public var modeTitle: String {
     return stopModeInfo.alt
+  }
+  
+  public var isWheelchairAccessible: Bool? {
+    return wheelchairAccessible?.boolValue
   }
   
   @objc(modeImageForIconType:)
@@ -53,6 +57,10 @@ extension StopLocation: STKStopAnnotation {
     return false
   }
   
+  public var pointClusterIdentifier: String? {
+    return stopModeInfo.identifier ?? "StopLocation"
+  }
+  
   public var pointDisplaysImage: Bool {
     return pointImage != nil
   }
@@ -76,28 +84,36 @@ extension StopLocation: STKStopAnnotation {
       return ""
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
       guard let last = lastTopVisit else { return nil }
       
       var output: String = self.title ?? ""
       
-      if let filter = filter, filter.characters.count > 0 {
+      if let filter = filter, !filter.isEmpty {
         output.append(" (filter: \(filter)")
       }
       
       let predicate = departuresPredicate(from: last.departure)
-      let visits = managedObjectContext?.fetchObjects(StopVisits.self, sortDescriptors: [NSSortDescriptor(key: "departures", ascending: true)], predicate: predicate, relationshipKeyPathsForPrefetching: nil, fetchLimit: 10) ?? []
-      for visit in visits {
-        output.append("\n")
-        output.append(visit.smsString())
-      }
-      if output.contains("*") {
-        output.append("\n* real-time")
-      }
-      
+      let visits = managedObjectContext?.fetchObjects(StopVisits.self, sortDescriptors: [NSSortDescriptor(key: "departure", ascending: true)], predicate: predicate, relationshipKeyPathsForPrefetching: nil, fetchLimit: 10) ?? []
+      output.append("\n")
+      output.append(visits.localizedShareString)
       return output
     }
     
+  }
+  
+  extension Array where Element: StopVisits {
+    public var localizedShareString: String {
+      var output = ""
+      for visit in self {
+        output.append(visit.smsString())
+        output.append("\n")
+      }
+      if output.contains("*") {
+        output.append("* real-time")
+      }
+      return output
+    }
   }
 
 #endif

@@ -10,18 +10,6 @@
 
 #import "SGKBetaHelper.h"
 
-#ifdef ENABLE_SGKLOG
-@import CocoaLumberjack;
-
-// See https://github.com/CocoaLumberjack/CocoaLumberjack/issues/542
-#ifdef DEBUG
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
-#else
-static const DDLogLevel ddLogLevel = DDLogLevelWarning;
-#endif
-
-#endif
-
 typedef NS_ENUM(NSInteger, SGKLogLevel) {
   SGKLogLevel_Error    = 0,
   SGKLogLevel_Warn     = 1,
@@ -127,23 +115,9 @@ typedef NS_ENUM(NSInteger, SGKLogLevel) {
   [self log:identifier level:SGKLogLevel_Verbose text:fullMessage];
 }
 
-+ (NSArray *)logFilePaths
-{
-#ifdef ENABLE_SGKLOG
-  for (id<DDLogger> logger in [DDLog allLoggers]) {
-    if ([logger isKindOfClass:[DDFileLogger class]]) {
-      DDFileLogger *fileLogger = (DDFileLogger *)logger;
-      return [fileLogger.logFileManager sortedLogFilePaths];
-    }
-  }
-#endif
-  return nil;
-}
-
-
 #pragma mark - Private
 
-+ (void)log:(NSString *)identifier level:(SGKLogLevel)level block:(NSString *(^)())block
++ (void)log:(NSString *)identifier level:(SGKLogLevel)level block:(NSString *(^)(void))block
 {
   if (SGK_DEBUG_LEVEL < level || ![SGKBetaHelper isDev]) {
     return;
@@ -159,41 +133,7 @@ typedef NS_ENUM(NSInteger, SGKLogLevel) {
     return;
   }
   
-#ifdef ENABLE_SGKLOG
-
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
-    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
-    [DDLog addLogger:fileLogger];
-  });
-  
-  switch (level) {
-    case SGKLogLevel_Error:
-      DDLogError(@"E %@: %@", identifier, message);
-      break;
-      
-    case SGKLogLevel_Warn:
-      DDLogWarn(@"W %@: %@", identifier, message);
-      break;
-
-    case SGKLogLevel_Info:
-      DDLogInfo(@"i %@: %@", identifier, message);
-      break;
-
-    case SGKLogLevel_Debug:
-      DDLogDebug(@"d %@: %@", identifier, message);
-      break;
-
-    case SGKLogLevel_Verbose:
-      DDLogVerbose(@"v %@: %@", identifier, message);
-      break;
-  }
-  
-#elif DEBUG
+#ifdef DEBUG
   DLog(@"%@: %@", identifier, message);
 #endif
 }

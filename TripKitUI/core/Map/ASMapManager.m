@@ -291,25 +291,36 @@
 	}
 }
 
-+ (MKMapRect)mapRectForUserDefaultsKey:(NSString *)key
++ (MKMapRect)mapRectForUserDefaultsKey:(nullable NSString *)mapKey
+                               dateKey:(nullable NSString *)dateKey
 {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSArray *rectArray = [defaults objectForKey:key];
-  if (rectArray.count == 4) {
-		return MKMapRectMake([rectArray[0] doubleValue],
-                         [rectArray[1] doubleValue],
-                         [rectArray[2] doubleValue],
-												 [rectArray[3] doubleValue]);
-    
-  } else {
-    // set to null, don't change the map
-		return MKMapRectNull;
+  if (mapKey == nil) {
+    return MKMapRectNull;
   }
+  
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSArray *rectArray = [defaults objectForKey:mapKey];
+  if (rectArray.count != 4) {
+    return MKMapRectNull;
+  }
+  
+  if (dateKey) {
+    NSDate *date = [defaults objectForKey:dateKey];
+    if (date != nil && [date timeIntervalSinceNow] < -30 * 60) {
+      // Older than 30 mins old. Don't restore
+      return MKMapRectNull;
+    }
+  }
+
+  return MKMapRectMake([rectArray[0] doubleValue],
+                       [rectArray[1] doubleValue],
+                       [rectArray[2] doubleValue],
+                       [rectArray[3] doubleValue]);
 }
 
 - (void)showLastUsedMapRect:(BOOL)animated
 {
-  MKMapRect mapRect = [[self class] mapRectForUserDefaultsKey:self.lastMapRectUserDefaultsKey];
+  MKMapRect mapRect = [[self class] mapRectForUserDefaultsKey:self.lastMapRectUserDefaultsKey dateKey:self.lastUseUserDefaultsKey];
   if (! MKMapRectIsNull(mapRect)) {
     [self.mapView setVisibleMapRect:mapRect animated:animated];
   }
@@ -338,6 +349,10 @@
 		
 		[[NSUserDefaults standardUserDefaults] setObject:rectArray
                                               forKey:key];
+    
+    if (self.lastUseUserDefaultsKey != nil) {
+      [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:self.lastUseUserDefaultsKey];
+    }
 	}
 }
 

@@ -64,6 +64,12 @@
 
 @property (nonatomic, strong, nullable, readonly) NSURL *saveURL;
 
+/**
+ Checks if trip is in a usable state for CoreData. Bit of an ugly check to use
+ in rare cases before accessing nonnull fields on a Trip object that might have
+ seen disappeared from CoreData (and would then crash when using from Swift).
+ */
+@property (nonatomic, readonly) BOOL isValid;
 
 - (void)setAsPreferredTrip;
 
@@ -91,11 +97,6 @@
 - (nonnull NSSet *)usedModeIdentifiers;
 
 - (BOOL)allowImpossibleSegments;
-
-/** 
- @return Whether trip mixes multiple modes. Note that multiple different public transport modes don't make a trip mixed-modal, but walking in between does.
- */
-- (BOOL)isMixedModal;
 
 /* Offset in minutes from the specified departure/arrival time.
  * E.g., if you asked for arrive-by, it'll use the arrival time.

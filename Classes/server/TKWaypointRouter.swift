@@ -20,7 +20,7 @@ extension TKWaypointRouter {
   ///   - trip: The trip for which to get the next departure
   ///   - vehicles: Optional vehicles that should be for private vehicles segments
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  public func fetchNextTrip(after trip: Trip, using vehicles: [STKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
+  @objc public func fetchNextTrip(after trip: Trip, using vehicles: [STKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
     
     SVKServer.shared.requireRegions { error in
       guard let region = trip.request.startRegion() else {
@@ -46,7 +46,7 @@ extension TKWaypointRouter {
   ///   - tripKit: TripKit instance into which the new trip will be inserted
   ///   - region: The region where the trip starts
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  public func fetchTrip(pattern: [TKSegmentPattern], departure: Date, using vehicles: [STKVehicular] = [], into tripKit: TKTripKit, in region: SVKRegion, completion: @escaping (Trip?, Error?) -> Void) {
+  @objc public func fetchTrip(pattern: [TKSegmentPattern], departure: Date, using vehicles: [STKVehicular] = [], into tripKit: TKTripKit, in region: SVKRegion, completion: @escaping (Trip?, Error?) -> Void) {
     
     let paras = TKWaypointRouter.nextTripParas(pattern: pattern, departure: departure, using: vehicles)
     
@@ -61,7 +61,7 @@ extension TKWaypointRouter {
     
     var paras = [String: Any]()
     paras["config"]   = TKSettings.defaultDictionary()
-    paras["vehicles"] = TKParserHelper.vehiclesPayload(for: vehicles)
+    paras["vehicles"] = TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     paras["segments"] = pattern
     paras["leaveAt"]  = leaveAt.timeIntervalSince1970 + 60
     return paras
@@ -70,7 +70,7 @@ extension TKWaypointRouter {
   
   // MARK: - Tuning public transport trips
   
-  public func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [STKVehicular], completion: @escaping (Trip?, Error?) -> Void) {
+  @objc public func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [STKVehicular], completion: @escaping (Trip?, Error?) -> Void) {
     
     SVKServer.shared.requireRegions { error in
       let request = segment.trip.request
@@ -172,7 +172,7 @@ extension TKWaypointRouter {
       parameters: waypointParas,
       region: region,
       callbackOnMain: false,
-      success: { status, response in
+      success: { status, response, _ in
         guard let json = response as? [AnyHashable: Any] else {
           errorHandler(nil)
           return
@@ -211,7 +211,7 @@ class WaypointParasBuilder {
     var paras: [String: Any]
     paras = [
       "config": TKSettings.defaultDictionary(),
-      "vehicles": TKParserHelper.vehiclesPayload(for: vehicles)
+      "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
     
     // First we construct the paras on a segment by segment basis

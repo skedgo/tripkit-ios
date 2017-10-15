@@ -115,7 +115,7 @@ extension Reactive where Base : BPKServerUtil {
     
     return Observable.create { observer in
       
-      BPKServerUtil.requestForm(forBooking: url, postData: postData) { status, response, error in
+      BPKServerUtil.requestForm(forBooking: url, postData: postData) { status, response, _, error in
         if let response = response as? [NSObject: AnyObject] {
           // Further action required or a success-form was provided.
           // This is the case where OAuth was initiated as part of booking

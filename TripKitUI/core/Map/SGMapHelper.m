@@ -15,7 +15,7 @@
   MKMapRect mapRect = MKMapRectNull;
   for (id <MKAnnotation> annotation in annos) {
     MKMapPoint mapPoint = MKMapPointForCoordinate([annotation coordinate]);
-    MKMapRect newRect = MKMapRectMake(mapPoint.x, mapPoint.y, 0.0, 0.0);
+    MKMapRect newRect = MKMapRectMake(mapPoint.x, mapPoint.y, 1.0, 1.0);
     
     mapRect = MKMapRectUnion(mapRect, newRect);
   }

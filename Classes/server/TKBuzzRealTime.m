@@ -219,8 +219,8 @@
                        region:region
                callbackOnMain:NO
                       success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      success(responseObject);
    }
                              failure:
@@ -274,7 +274,7 @@
 		// Parse the vehicle
     NSDictionary *vehicleDict = serviceDict[@"realtimeVehicle"];
     NSArray *alternativeVehiclesArray = serviceDict[@"realtimeVehicleAlternatives"];
-    [TKParserHelper updateVehiclesForService:service primaryVehicle:vehicleDict alternativeVehicles:alternativeVehiclesArray];
+    [TKAPIToCoreDataConverter updateVehiclesForService:service primaryVehicle:vehicleDict alternativeVehicles:alternativeVehiclesArray];
 				
 		if (dls || visit) {
 			// we have supplied a start stop code, so we only want to update that

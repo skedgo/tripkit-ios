@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Marshal
-
 @objc
 public enum SVKParserHelperMode : Int {
   case walking
@@ -58,26 +56,26 @@ public class SVKParserHelper: NSObject {
   }
   
   @objc(colorForDictionary:)
-  public class func color(for dictionary: [AnyHashable: Any]) -> SGKColor? {
-    return try? SGKColor.value(from: dictionary)
+  public class func color(for dictionary: [String: Any]) -> SGKColor? {
+    return (try? JSONDecoder().decode(API.RGBColor.self, withJSONObject: dictionary))?.color
   }
   
   @objc(namedCoordinateForDictionary:)
-  public class func namedCoordinate(for dictionary: [AnyHashable: Any]) -> SGKNamedCoordinate? {
-    return try? SGKNamedCoordinate(object: dictionary)
+  public class func namedCoordinate(for dictionary: [String: Any]) -> SGKNamedCoordinate? {
+    return try? JSONDecoder().decode(SGKNamedCoordinate.self, withJSONObject: dictionary)
   }
   
-  public class func modeCoordinate(for dictionary: [AnyHashable: Any]) -> STKModeCoordinate? {
-    
-    if let stop = try? STKStopCoordinate(object: dictionary) {
+  @objc public class func modeCoordinate(for dictionary: [String: Any]) -> STKModeCoordinate? {
+    let decoder = JSONDecoder()
+    if let stop = try? decoder.decode(STKStopCoordinate.self, withJSONObject: dictionary) {
       return stop
     } else {
-      return try? STKModeCoordinate(object: dictionary)
+      return try? decoder.decode(STKModeCoordinate.self, withJSONObject: dictionary)
     }
   }
   
-  public class func stopCoordinate(for dictionary: [AnyHashable: Any]) -> STKStopCoordinate? {
-    return try? STKStopCoordinate(object: dictionary)
+  @objc public class func stopCoordinate(for dictionary: [String: Any]) -> STKStopCoordinate? {
+    return try? JSONDecoder().decode(STKStopCoordinate.self, withJSONObject: dictionary)
   }
   
   @objc(dashPatternForModeGroup:)
@@ -90,21 +88,4 @@ public class SVKParserHelper: NSObject {
     }
   }
 
-}
-
-extension SGKColor : ValueType {
-  
-  public static func value(from object: Any) throws -> SGKColor {
-    guard
-      let dict = object as? [String: CGFloat],
-      let red = dict["red"] ,
-      let green = dict["green"],
-      let blue = dict["blue"]
-      else {
-        throw MarshalError.typeMismatch(expected: [String: CGFloat].self, actual: type(of: object))
-    }
-    
-    return SGKColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: 1)
-  }
-  
 }

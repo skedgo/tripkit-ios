@@ -17,8 +17,11 @@ extension TKSegment: TKURLShareable {
   public var shareURL: URL? {
     get {
       let isEnd = self.order() == .end
-      guard let coordinate = isEnd ? end?.coordinate : start?.coordinate else { return nil }
-      let time = isEnd ? arrivalTime : departureTime
+      guard
+        let coordinate = isEnd ? end?.coordinate : start?.coordinate,
+        let time = isEnd ? arrivalTime : departureTime
+        else { return nil }
+      
       return TKShareHelper.createMeetURL(coordinate: coordinate, at: time)
     }
   }

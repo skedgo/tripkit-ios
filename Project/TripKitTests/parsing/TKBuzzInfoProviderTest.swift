@@ -8,60 +8,53 @@
 
 import XCTest
 
-import Marshal
-
 @testable import TripKit
 
 class TKBuzzInfoProviderTest: TKTestCase {
     
-  func testRegionInformation() {
-    guard
-      let json = contentFromJSON(named: "regionInfo-Sydney") as? [String: Any],
-      let regions: [TKRegionInfo] = try? json.value(for: "regions"),
-      let sydney = regions.first else { XCTFail(); return }
+  func testRegionInformation() throws {
+    let decoder = JSONDecoder()
+    let data = try dataFromJSON(named: "regionInfo-Sydney")
+    let response = try decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
+    let sydney = response.regions.first
 
-    XCTAssertEqual(regions.count, 1)
+    XCTAssertEqual(response.regions.count, 1)
     
-    XCTAssertNil(sydney.paratransitInformation)
-    XCTAssertEqual(sydney.streetBikePaths, true)
-    XCTAssertEqual(sydney.streetWheelchairAccessibility, true)
-    XCTAssertEqual(sydney.transitModes.count, 4)
-    XCTAssertEqual(sydney.transitBicycleAccessibility, true)
-    XCTAssertEqual(sydney.transitConcessionPricing, true)
-    XCTAssertEqual(sydney.transitWheelchairAccessibility, true)
+    XCTAssertNil(sydney?.paratransit)
+    XCTAssertEqual(sydney?.streetBicyclePaths, true)
+    XCTAssertEqual(sydney?.streetWheelchairAccessibility, true)
+    XCTAssertEqual(sydney?.transitModes.count, 4)
+    XCTAssertEqual(sydney?.transitBicycleAccessibility, true)
+    XCTAssertEqual(sydney?.transitConcessionPricing, true)
+    XCTAssertEqual(sydney?.transitWheelchairAccessibility, true)
   }
   
-  // TODO: Add test
-//  func testParatransitInformation() {
-//  }
-  
-  func testPublicTransportModes() {
-    guard
-      let json = contentFromJSON(named: "regionInfo-Sydney") as? [String: Any],
-      let regions: [TKRegionInfo] = try? json.value(for: "regions"),
-      let sydney = regions.first else { XCTFail(); return }
-    
-    XCTAssertEqual(regions.count, 1)
-    
-    XCTAssertEqual(sydney.transitModes.count, 4)
+  func testPublicTransportModes() throws {
+    let decoder = JSONDecoder()
+    let data = try dataFromJSON(named: "regionInfo-Sydney")
+    let response = try decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
+    let sydney = response.regions.first
+
+    XCTAssertEqual(response.regions.count, 1)
+    XCTAssertEqual(sydney?.transitModes.count, 4)
   }
   
-  func testTransitAlerts() {
-    guard
-      let json = contentFromJSON(named: "alertsTransit") as? [String: Any],
-      let wrappers: [TKAlertWrapper] = try? json.value(for: "alerts")
-      else { XCTFail(); return }
+  func testTransitAlerts() throws {
+    let decoder = JSONDecoder()
+    let data = try dataFromJSON(named: "alertsTransit")
+    let response = try decoder.decode(TKBuzzInfoProvider.AlertsTransitResponse.self, from: data)
+    let wrappers = response.alerts
     
     XCTAssertEqual(wrappers.count, 6)
     
     // many checks on first
     XCTAssertEqual(wrappers[0].alert.title, "Wharf Closed")
     XCTAssertEqual(wrappers[0].alert.text, "Garden Island Wharf Closed.")
-    XCTAssertEqual((wrappers[0].alert as? TKSimpleAlert)?.severity, .warning)
-    XCTAssertNil(wrappers[0].alert.infoURL)
-    XCTAssertNil(wrappers[0].alert.iconURL)
-
+    XCTAssertEqual(wrappers[0].alert.severity, .warning)
+    XCTAssertNil(wrappers[0].alert.remoteIcon)
+    XCTAssertNil(wrappers[0].alert.url)
+    
     // additional checks on others
-    XCTAssertEqual(wrappers[1].alert.infoURL, URL(string: "http://www.transportnsw.info/transport-status"))
+    XCTAssertEqual(wrappers[1].alert.url, URL(string: "http://www.transportnsw.info/transport-status"))
   }
 }

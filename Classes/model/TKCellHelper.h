@@ -8,11 +8,11 @@
 
 #import <MapKit/MapKit.h>
 
-typedef enum {
+typedef NS_ENUM(NSInteger, SGCellLevel) {
   SGCellLevelUnknown = 0,
   SGCellLevelRegion  = 1,
   SGCellLevelLocal   = 50,
-} SGCellLevel;
+};
 
 FOUNDATION_EXPORT NSString *const SGCellsClearedNotification;
 

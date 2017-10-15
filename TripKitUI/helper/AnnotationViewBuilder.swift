@@ -18,8 +18,8 @@ public class AnnotationViewBuilder: NSObject {
   fileprivate var alpha: CGFloat = 1
   fileprivate var preferSemaphore: Bool = false
   
-  let annotation: MKAnnotation
-  let mapView: MKMapView
+  @objc let annotation: MKAnnotation
+  @objc let mapView: MKMapView
   
   @objc(initForAnnotation:inMapView:)
   public init(for annotation: MKAnnotation, in mapView: MKMapView) {
@@ -27,43 +27,42 @@ public class AnnotationViewBuilder: NSObject {
     self.mapView = mapView
     self.asLarge = annotation is StopVisits
     
-    // TODO: Also set alpha. As RouteMapManager.alphaForCircleAnnotations
     // TODO: Then also handle `regionDidChangeAnimated` as in RMM
     
     super.init()
   }
   
-  @discardableResult
+  @objc @discardableResult
   public func drawCircleAsTravelled(_ travelled: Bool) -> AnnotationViewBuilder {
     self.asTravelled = travelled
     return self
   }
 
-  @discardableResult
+  @objc @discardableResult
   public func drawCircleAsLarge(_ asLarge: Bool) -> AnnotationViewBuilder {
     self.asLarge = asLarge
     return self
   }
 
-  @discardableResult
+  @objc @discardableResult
   public func withAlpha(_ alpha: CGFloat) -> AnnotationViewBuilder {
     self.alpha = alpha
     return self
   }
   
-  @discardableResult
+  @objc @discardableResult
   public func withHeading(_ heading: CLLocationDirection) -> AnnotationViewBuilder {
     self.heading = heading
     return self
   }
   
-  @discardableResult
+  @objc @discardableResult
   public func preferSemaphore(_ prefer: Bool) -> AnnotationViewBuilder {
     self.preferSemaphore = prefer
     return self
   }
   
-  public func build() -> MKAnnotationView? {
+  @objc public func build() -> MKAnnotationView? {
     if let vehicle = annotation as? Vehicle {
       return build(for: vehicle)
     } else if let visit = annotation as? StopVisits {
@@ -177,8 +176,8 @@ fileprivate extension AnnotationViewBuilder {
     
     if let frequency = segment.frequency() {
       semaphoreView.setFrequency(frequency, onSide: side)
-    } else {
-      semaphoreView.setTime(segment.departureTime, isRealTime: segment.timesAreRealTime(), in: (segment as STKDisplayableTimePoint).timeZone, onSide: side)
+    } else if let departure = segment.departureTime {
+      semaphoreView.setTime(departure, isRealTime: segment.timesAreRealTime(), in: (segment as STKDisplayableTimePoint).timeZone, onSide: side)
     }
     
     semaphoreView.canShowCallout = annotation.title != nil
@@ -247,6 +246,10 @@ fileprivate extension AnnotationViewBuilder {
     circleView.canShowCallout = annotation.title != nil
     circleView.isEnabled = true
     
+    if #available(iOS 11.0, *) {
+      circleView.displayPriority = asLarge ? .defaultHigh : .defaultLow
+    }
+    
     return circleView
   }
   
@@ -284,7 +287,7 @@ fileprivate extension AnnotationViewBuilder {
 
 public extension AnnotationViewBuilder {
   
-  public static func update(annotationView: MKAnnotationView, forHeading heading: CLLocationDirection) {
+  @objc public static func update(annotationView: MKAnnotationView, forHeading heading: CLLocationDirection) {
     
     if let vehicleView = annotationView as? TKVehicleAnnotationView, let vehicle = vehicleView.annotation as? Vehicle {
       vehicleView.rotateVehicle(heading: heading, bearing: vehicle.bearing?.doubleValue)

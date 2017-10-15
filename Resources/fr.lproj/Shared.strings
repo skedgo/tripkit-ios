@@ -37,9 +37,6 @@
 /* Credit card CVC */
 "CVC" = "Code CVC";
 
-/* No comment provided by engineer. */
-"Can't find your current city" = "Nous ne trouvons pas votre ville";
-
 /* Cancel action */
 "Cancel" = "Annuler";
 

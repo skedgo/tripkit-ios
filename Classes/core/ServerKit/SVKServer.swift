@@ -12,15 +12,22 @@ extension SVKServer {
   
   public static let shared = SVKServer.__sharedInstance()
   
-  public class var serverType: SVKServerType {
+  private static var _serverType: SVKServerType?
+  
+  @objc public class var serverType: SVKServerType {
     get {
-      if SGKBetaHelper.isBeta() {
-        return SVKServerType(rawValue:  UserDefaults.shared.integer(forKey: SVKDefaultsKeyServerType)) ?? .production
+      if let serverType = _serverType {
+        return serverType
+      } else if SGKBetaHelper.isBeta() {
+        _serverType = SVKServerType(rawValue:  UserDefaults.shared.integer(forKey: SVKDefaultsKeyServerType)) ?? .production
+        return _serverType!
       } else {
-        return .production
+        _serverType = .production
+        return _serverType!
       }
     }
     set {
+      _serverType = newValue
       UserDefaults.shared.set(newValue.rawValue, forKey: SVKDefaultsKeyServerType)
     }
   }

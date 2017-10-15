@@ -10,31 +10,22 @@ import Foundation
 
 public extension SGKNamedCoordinate {
   
-  func setAttribution(actionTitle: String, website: String, appActionTitle: String, appLink: String, isVerified: NSNumber?) {
-    data["websiteAction"] = actionTitle
-    data["websiteLink"] = website
-    data["appAction"] = appActionTitle
-    data["appLink"] = appLink
-    data["isVerified"] = isVerified
+  @objc var attributionIsVerified: NSNumber? {
+    get {
+      return data["isVerified"] as? NSNumber
+    }
+    set {
+      data["isVerified"] = newValue
+    }
   }
   
-  var attributionWebsiteActionTitle: String? {
-    return data["websiteAction"] as? String
-  }
-  
-  var attributionWebsiteLink: String? {
-    return data["websiteLink"] as? String
-  }
-
-  var attributionAppActionTitle: String? {
-    return data["appAction"] as? String
-  }
-
-  var attributionAppLink: String? {
-    return data["appLink"] as? String
-  }
-
-  var attributionIsVerified: NSNumber? {
-    return data["isVerified"] as? NSNumber
+  public var dataSources: [API.DataAttribution] {
+    get {
+      guard let json = data["dataSources"] as Any? else { return [] }
+      return (try? JSONDecoder().decode([API.DataAttribution].self, withJSONObject: json)) ?? []
+    }
+    set {
+      data["dataSources"] = try? JSONEncoder().encodeJSONObject(newValue)
+    }
   }
 }

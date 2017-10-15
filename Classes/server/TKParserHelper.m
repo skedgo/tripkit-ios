@@ -33,47 +33,6 @@
 
 #pragma mark - Creating our classes
 
-+ (void)updateVehiclesForService:(Service *)service
-                  primaryVehicle:(NSDictionary *)primaryVehicleDict
-             alternativeVehicles:(NSArray *)alternativeVehicleDicts
-{
-  NSParameterAssert(service);
-  
-  if (primaryVehicleDict) {
-    if (service.vehicle) {
-      [self updateVehicle:service.vehicle fromDictionary:primaryVehicleDict];
-    } else {
-      Vehicle *vehicle = [self insertNewVehicle:primaryVehicleDict
-                               inTripKitContext:service.managedObjectContext];
-      service.vehicle = vehicle;
-    }
-    service.realTimeCapable = YES;
-    service.cancelled = NO;
-  }
-  
-  if (alternativeVehicleDicts.count > 0) {
-    for (NSDictionary *alternativeVehicleDict in alternativeVehicleDicts) {
-      Vehicle *existingVehicle = nil;
-      NSString *alternativeIdentifier = alternativeVehicleDict[@"id"];
-      for (Vehicle *existingAlternative in service.vehicleAlternatives) {
-        if ([existingAlternative.identifier isEqualToString:alternativeIdentifier]) {
-          existingVehicle = existingAlternative;
-          break;
-        }
-      }
-      if (existingVehicle) {
-        [self updateVehicle:existingVehicle fromDictionary:alternativeVehicleDict];
-      } else {
-        Vehicle *newAlternative = [self insertNewVehicle:alternativeVehicleDict
-                                        inTripKitContext:service.managedObjectContext];
-        [service addVehicleAlternativesObject:newAlternative];
-      }
-    }
-
-    service.realTimeCapable = YES;
-  }
-}
-
 + (void)updateVehiclesForSegmentReference:(SegmentReference *)reference
                            primaryVehicle:(NSDictionary *)primaryVehicleDict
                       alternativeVehicles:(NSArray *)alternativeVehicleDicts
@@ -81,9 +40,10 @@
   NSParameterAssert(reference);
   if (primaryVehicleDict) {
     if (reference.realTimeVehicle) {
-      [self updateVehicle:reference.realTimeVehicle fromDictionary:primaryVehicleDict];
+      [TKAPIToCoreDataConverter updateVehicle:reference.realTimeVehicle fromDictionary:primaryVehicleDict];
     } else {
-      Vehicle *vehicle = [self insertNewVehicle:primaryVehicleDict inTripKitContext:reference.managedObjectContext];
+      Vehicle *vehicle = [TKAPIToCoreDataConverter insertNewVehicle:primaryVehicleDict
+                                                   inTripKitContext:reference.managedObjectContext];
       reference.realTimeVehicle = vehicle;
     }
   }
@@ -99,79 +59,15 @@
         }
       }
       if (existingVehicle) {
-        [self updateVehicle:existingVehicle fromDictionary:alternativeVehicleDict];
+        [TKAPIToCoreDataConverter updateVehicle:existingVehicle fromDictionary:alternativeVehicleDict];
       } else {
-        Vehicle *newAlternative = [self insertNewVehicle:alternativeVehicleDict
-                                        inTripKitContext:reference.managedObjectContext];
+        Vehicle *newAlternative = [TKAPIToCoreDataConverter insertNewVehicle:alternativeVehicleDict
+                                                            inTripKitContext:reference.managedObjectContext];
         [reference addRealTimeVehicleAlternativesObject:newAlternative];
       }
     }
   }
 }
-
-+ (StopLocation *)insertNewStopLocation:(NSDictionary *)stopDict
-                       inTripKitContext:(NSManagedObjectContext *)context
-{
-  // we always add all the stops, because the cell is new
-  SGKNamedCoordinate *coordinate = [self locationForStopFromDictionary:stopDict];
-  StopLocation *newStop = [StopLocation insertStopForStopCode:stopDict[@"code"]
-                                                     modeInfo:nil
-                                                   atLocation:coordinate
-                                           intoTripKitContext:context];
-  [self updateStopLocation:newStop fromDictionary:stopDict];
-  
-  return newStop;
-}
-
-+ (SGKNamedCoordinate *)locationForStopFromDictionary:(NSDictionary *)stopDict
-{
-  return [[SGKNamedCoordinate alloc] initWithLatitude:[[stopDict objectForKey:@"lat"] doubleValue]
-                                           longitude:[[stopDict objectForKey:@"lng"] doubleValue]
-                                                name:[stopDict objectForKey:@"name"]
-                                             address:[stopDict objectForKey:@"services"]];
-}
-
-
-+ (BOOL)updateStopLocation:(StopLocation *)stop
-            fromDictionary:(NSDictionary *)stopDict
-{
-  stop.stopCode  = stopDict[@"code"];
-  stop.shortName = stopDict[@"shortName"];
-  stop.sortScore = stopDict[@"popularity"];
-  stop.location  = [self locationForStopFromDictionary:stopDict];
-  
-  NSDictionary *modeInfoDict = stopDict[@"modeInfo"];
-  if (modeInfoDict) {
-    stop.stopModeInfo = [ModeInfo modeInfoForDictionary:modeInfoDict];
-  } else {
-    DLog(@"We got a stop without mode info: %@", stopDict);
-    return NO;
-  }
-  
-  // add children
-  BOOL addedStop = NO;
-  NSArray *childrenList = stopDict[@"children"];
-  if (childrenList) {
-    NSMutableDictionary *childrenLookup = [NSMutableDictionary dictionaryWithCapacity:stop.children.count];
-    for (StopLocation *child in stop.children) {
-      childrenLookup[child.stopCode] = child;
-    }
-    
-    for (NSDictionary *childDict in childrenList) {
-      NSString *childCode = childDict[@"code"];
-      StopLocation *child = childrenLookup[childCode];
-      if (child ) {
-        [self updateStopLocation:child fromDictionary:childDict];
-      } else  {
-        child = [self insertNewStopLocation:childDict inTripKitContext:stop.managedObjectContext];
-        addedStop = YES;
-      }
-      child.parent = stop;
-    }
-  }
-  return addedStop;
-}
-
 
 + (NSArray *)insertNewShapes:(NSArray *)shapesArray
                   forService:(Service *)service
@@ -320,6 +216,7 @@
                                                       atLocation:coordinate
                                               intoTripKitContext:context];
         stop.shortName = stopDict[@"shortName"];
+        stop.wheelchairAccessible = stopDict[@"wheelchairAccessible"];
         
         ZAssert(! visit.stop || visit.stop == stop, @"We shouldn't have a stop already! %@", visit.stop);
         visit.stop = stop;
@@ -354,6 +251,7 @@
   }
 }
 
+<<<<<<< HEAD
 #pragma mark - Alerts
 
 + (void)updateOrAddAlerts:(NSArray *)alerts
@@ -404,6 +302,8 @@
     alert.text					= alertDict[@"text"];
   }
 }
+=======
+>>>>>>> swift4.0
 
 
 @end

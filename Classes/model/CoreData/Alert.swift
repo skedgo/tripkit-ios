@@ -10,38 +10,18 @@ import Foundation
 
 extension Alert {
   
-  public var infoIconType: STKInfoIconType {
+  @objc public var infoIconType: STKInfoIconType {
     switch alertSeverity {
     case .info, .warning: return .warning
     case .alert: return .alert
-    }
+    } 
   }
   
-}
-
-
-// MARK: - TKAlert
-
-extension Alert: TKAlert {
-  
-  public var infoURL: URL? {
-    if let url = url {
-      return URL(string: url)
-    } else {
-      return nil
-    }
-  }
-  
-  public var icon: SGKImage? {
-    return STKInfoIcon.image(for: infoIconType, usage: .normal)
-  }
-  
-  public var iconURL: URL? {
-    return imageURL
-  }
-  
-  public var lastUpdated: Date? {
-    return nil
+  /// This is an array of `stopCode`. A non-empty value indicates the alert requires a 
+  /// reroute action because, e.g., the stops have become inaccessible. This property
+  /// is typically passed to a routing request as stops to avoid during routing.
+  public var excludedStops: [String] {
+    return action?["excludedStopCodes"] as? [String] ?? []
   }
   
 }
@@ -65,6 +45,10 @@ extension Alert: MKAnnotation {
 // MARK: - STKDisplayablePoint
 
 extension Alert: STKDisplayablePoint {
+
+  public var pointClusterIdentifier: String? {
+    return nil
+  }
   
   public var pointDisplaysImage: Bool {
     return location != nil

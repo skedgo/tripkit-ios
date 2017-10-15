@@ -12,7 +12,7 @@ import UIKit
 
 public class BPKAlert: NSObject {
   
-  public class func present(in vc: UIViewController, title: String?, message: String, actions: [UIAlertAction]? = nil) {
+  @objc public class func present(in vc: UIViewController, title: String?, message: String, actions: [UIAlertAction]? = nil) {
     let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
     
     if let provided = actions {

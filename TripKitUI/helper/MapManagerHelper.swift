@@ -105,7 +105,7 @@ public class MapManagerHelper: NSObject {
   }
   
   
-  public static func annotationView(for annotation: MKAnnotation, header: CLLocationDirection) -> MKAnnotationView? {
+  @objc public static func annotationView(for annotation: MKAnnotation, header: CLLocationDirection) -> MKAnnotationView? {
     
     return nil
     

@@ -19,7 +19,7 @@ extension AMKCommunicator {
         path: "account/apple/\(urlFriendly)",
         parameters: [:],
         region: nil,
-        success: { _, responseObject in
+        success: { _, responseObject, _ in
           findToken(inResponse: responseObject) { userToken, error in
             if let userToken = userToken {
               subscriber.onNext(userToken)

@@ -16,8 +16,6 @@
 #pragma mark -
 #pragma mark Useful macro methods
 
-#define TG_ASSERT_MAIN_THREAD ZAssert([NSThread isMainThread], @"This method must be called on the main thread")
-
 // thanks to https://gist.github.com/1057420
 #define DEFINE_SHARED_INSTANCE_USING_BLOCK(block) \
 static dispatch_once_t pred = 0; \

@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSDate * startTime;
 @property (nonatomic, retain, nullable) NSDate * endTime;
 @property (nonatomic, assign) BOOL toDelete;
+@property (nonatomic, retain, nullable) NSDictionary<NSString *, id> *action;
 
 @property (nonatomic, retain, nullable) NSString *idService;
 @property (nonatomic, retain, nullable) NSString *idStopCode;
@@ -39,8 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) AlertSeverity alertSeverity;
 @property (nonatomic, readonly, nullable) NSURL *imageURL;
 
-+ (instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode
-                      inTripKitContext:(NSManagedObjectContext *)tripKitContext;
++ (nullable instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode
+                               inTripKitContext:(NSManagedObjectContext *)tripKitContext;
 
 + (NSArray *)fetchAlertsWithHashCodes:(NSArray *)hashCodes
                      inTripKitContext:(NSManagedObjectContext *)tripKitContext

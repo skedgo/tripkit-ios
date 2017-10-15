@@ -14,7 +14,7 @@ extension SGKConfig {
   ///
   /// Value comes from `SGBookingKit.facebookAppPermissions`
   /// in `Config.plist`
-  public var facebookAppID: String? {
+  @objc public var facebookAppID: String? {
     return bookingSettings["facebookAppID"] as? String
   }
   
@@ -24,7 +24,7 @@ extension SGKConfig {
   ///
   /// Value comes from `SGBookingKit.facebookAppPermissions` 
   /// in `Config.plist`
-  public var facebookAppPermissions: [String]? {
+  @objc public var facebookAppPermissions: [String]? {
     return bookingSettings["facebookAppPermissions"] as? [String]
   }
   

@@ -14,13 +14,13 @@
 
 @interface BPKActionOverlay ()
 
-@property (nonatomic, copy) void (^actionBlock)();
+@property (nonatomic, copy) void (^actionBlock)(void);
 
 @end
 
 @implementation BPKActionOverlay
 
-+ (void)showWithTitle:(NSString *)title inView:(UIView *)view onAction:(void (^)())actionBlock completion:(void (^)(BOOL))completion
++ (void)showWithTitle:(NSString *)title inView:(UIView *)view onAction:(void (^)(void))actionBlock completion:(void (^)(BOOL))completion
 {
   BPKActionOverlay *overlay = [[self alloc] initWithTitle:title actionBlock:actionBlock];
   
@@ -31,7 +31,7 @@
   }
 }
 
-- (instancetype)initWithTitle:(NSString *)title actionBlock:(void(^)())actionBlock
+- (instancetype)initWithTitle:(NSString *)title actionBlock:(void(^)(void))actionBlock
 {
   UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class])
                               bundle:[NSBundle bundleForClass:[self class]]];

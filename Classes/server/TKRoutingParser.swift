@@ -11,7 +11,7 @@ import Foundation
 
 
 extension TKRoutingParser {
-  public static func matchingSegment(in trip: Trip, order: TKSegmentOrdering, first: Bool) -> TKSegment {
+  @objc public static func matchingSegment(in trip: Trip, order: TKSegmentOrdering, first: Bool) -> TKSegment {
     
     var match: TKSegment? = nil
     for segment in (trip as STKTrip).segments(with: .inDetails) {
@@ -40,6 +40,7 @@ extension TKRoutingParser {
   ///   - leaveAfter: Preferred departure time from `start`
   ///   - arriveBy: Preffered arrive-by time at `end`
   /// - Returns: If the request did get updated successfully
+  @objc
   @discardableResult
   public static func populate(_ request: TripRequest, start: MKAnnotation?, end: MKAnnotation?, leaveAfter: Date?, arriveBy: Date?) -> Bool {
     

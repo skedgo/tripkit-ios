@@ -37,10 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Image names
 
-+ (nullable SGKImage *)imageForModeImageName:(nullable NSString *)tripSegmentModeImageName
-                                  isRealTime:(BOOL)isRealTime
-                                  ofIconType:(SGStyleModeIconType)type;
-
 + (SGKImage *)activityImage:(NSString *)partial;
 
 + (SGKImage *)imageNamed:(NSString *)name;

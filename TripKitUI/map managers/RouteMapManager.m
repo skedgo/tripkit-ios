@@ -369,21 +369,6 @@
 	// see if the user manually rotated the map
   MKMapCamera *camera = [mapView camera];
   self.heading = camera.heading;
-	
-	// fade stuff in and out
-	CGFloat alphaSmall = [self alphaForCircleAnnotations:NO];
-	CGFloat alphaLarge = [self alphaForCircleAnnotations:YES];
-	for (id<MKAnnotation> visibleAnnotation in [mapView annotationsInMapRect:mapView.visibleMapRect]) {
-		MKAnnotationView *view = [mapView viewForAnnotation:visibleAnnotation];
-		if ([view isKindOfClass:[CircleAnnotationView class]]) {
-			CircleAnnotationView *circleView = (CircleAnnotationView *)view;
-			if (circleView.isLarge) {
-				view.alpha = alphaLarge;
-			} else {
-				view.alpha = alphaSmall;
-			}
-		}
-	}
 }
 
 - (BOOL)drawAsLargeCircle:(id<MKAnnotation>)annotation
@@ -411,26 +396,6 @@
 
 
 #pragma mark - Private methods
-
-- (CGFloat)alphaForCircleAnnotations:(BOOL)isLarge
-{
-  TG_ASSERT_MAIN_THREAD;
-  
-	NSUInteger zoomLevel = [self.mapView zoomLevel];
-	if (isLarge) {
-		return zoomLevel > 10 ? 0 : 1;
-	} else {
-		return zoomLevel > 7 ? 0 : 1;
-	}
-//	int min = 7.5, max = 10;
-//	if (zoomLevel >= max)
-//		return 0;
-//	else if (zoomLevel <= min)
-//		return 1;
-//	else
-//		return 1 - (zoomLevel - min) / (max - min);
-}
-
 
 - (void)prepareForVehicles
 {

@@ -26,15 +26,15 @@ public class Shape: NSManagedObject {
     }
   }
   
-  public weak var segment: TKSegment? = nil
+  @objc public weak var segment: TKSegment? = nil
   
-  public var start: MKAnnotation? {
+  @objc public var start: MKAnnotation? {
     guard let first = sortedCoordinates?.first else { return nil }
     
     return first
   }
 
-  public var end: MKAnnotation? {
+  @objc public var end: MKAnnotation? {
     guard let last = sortedCoordinates?.last else { return nil }
     
     return last

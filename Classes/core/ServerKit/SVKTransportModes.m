@@ -8,7 +8,9 @@
 
 #import "SVKTransportModes.h"
 
-#import "SVKRegionManager.h"
+#import "SGRootKit.h"
+
+#import <TripKit/TripKit-Swift.h>
 
 // all of these need to be unique
 static NSString* const kSGTransportModeTypeIdentifierFlight         = @"air";
@@ -141,7 +143,7 @@ NSString *const SVKTransportModeIdentifierWheelchair                = @"wa_whe";
 {
   // first we group the identifiers
   NSMutableSet *groupedModes = [NSMutableSet setWithCapacity:modeIdentifiers.count + 1];
-  SVKRegionManager *regionMan = [SVKRegionManager sharedInstance];
+  TKRegionManager *regionMan = TKRegionManager.shared;
   NSMutableSet *processedModes = [NSMutableSet setWithCapacity:modeIdentifiers.count];
   for (NSString *identifier in modeIdentifiers) {
     if ([processedModes containsObject:identifier])

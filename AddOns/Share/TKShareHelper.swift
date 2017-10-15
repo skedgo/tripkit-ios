@@ -52,16 +52,16 @@ public class TKShareHelper: NSObject {
 
 extension TKShareHelper {
   
-  public static func isQueryURL(_ url: URL) -> Bool {
+  @objc public static func isQueryURL(_ url: URL) -> Bool {
     return url.path.hasPrefix("/go")
   }
 
-  public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: SGTimeType, time: Date?) -> URL {
-    return createQueryURL(start: start, end: end, timeType: timeType, time: time, baseURL: "https://tripgo.me")
+  @objc public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: SGTimeType, time: Date?) -> URL {
+    return createQueryURL(start: start, end: end, timeType: timeType, time: time, baseURL: "https://tripgo.com")
   }
   
   
-  public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: SGTimeType, time: Date?, baseURL: String) -> URL {
+  @objc public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: SGTimeType, time: Date?, baseURL: String) -> URL {
     
     // TODO: use format string and truncate lat/lng after 5 decimals
     var urlString = "\(baseURL)/go?tlat=\(end.latitude)&tlng=\(end.longitude)"
@@ -84,11 +84,11 @@ extension TKShareHelper {
 
 extension TKShareHelper {
 
-  public static func isMeetURL(_ url: URL) -> Bool {
+  @objc public static func isMeetURL(_ url: URL) -> Bool {
     return url.path.hasPrefix("/meet")
   }
   
-  public static func createMeetURL(coordinate: CLLocationCoordinate2D, at time: Date, baseURL: String = "https://tripgo.me") -> URL {
+  @objc public static func createMeetURL(coordinate: CLLocationCoordinate2D, at time: Date, baseURL: String = "https://tripgo.com") -> URL {
     let urlString = "\(baseURL)/meet?lat=\(coordinate.latitude)&lng=\(coordinate.longitude)&at=\(Int(time.timeIntervalSince1970))"
     return URL(string: urlString)!
   }
@@ -99,15 +99,15 @@ extension TKShareHelper {
 
 extension TKShareHelper {
 
-  public static func isStopURL(_ url: URL) -> Bool {
+  @objc public static func isStopURL(_ url: URL) -> Bool {
     return url.path.hasPrefix("/stop")
   }
 
-  public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?) -> URL {
-    return createStopURL(stopCode: stopCode, inRegionNamed: regionName, filter: filter, baseURL: "https://tripgo.me")
+  @objc public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?) -> URL {
+    return createStopURL(stopCode: stopCode, inRegionNamed: regionName, filter: filter, baseURL: "https://tripgo.com")
   }
   
-  public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?, baseURL: String) -> URL {
+  @objc public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?, baseURL: String) -> URL {
 
     let escapedCode = (stopCode as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     
@@ -128,11 +128,11 @@ extension TKShareHelper {
 
 extension TKShareHelper {
   
-  public static func isServiceURL(_ url: URL) -> Bool {
+  @objc public static func isServiceURL(_ url: URL) -> Bool {
     return url.path.hasPrefix("/service")
   }
   
-  public static func createServiceURL(serviceID: String, atStopCode stopCode: String, inRegionNamed regionName: String, baseURL: String = "https://tripgo.me") -> URL {
+  @objc public static func createServiceURL(serviceID: String, atStopCode stopCode: String, inRegionNamed regionName: String, baseURL: String = "https://tripgo.com") -> URL {
 
     let escapedID = (serviceID as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     

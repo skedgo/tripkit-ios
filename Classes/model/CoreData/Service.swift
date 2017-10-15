@@ -10,7 +10,7 @@ import Foundation
 
 extension Service {
   
-  public var region: SVKRegion? {
+  @objc public var region: SVKRegion? {
     if let visit = visits?.first {
       return visit.stop.region
     } else {
@@ -19,7 +19,7 @@ extension Service {
     }
   }
   
-  public var modeTitle: String? {
+  @objc public var modeTitle: String? {
     if let alt = modeInfo?.alt {
       return alt
     }
@@ -36,7 +36,7 @@ extension Service {
     return nil;
   }
   
-  public func modeImage(for type: SGStyleModeIconType) -> SGKImage? {
+  @objc public func modeImage(for type: SGStyleModeIconType) -> SGKImage? {
     if let modeInfo = modeInfo, let specificImage = SGStyleManager.image(forModeImageName: modeInfo.localImageName, isRealTime: false, of: type) {
       return specificImage
     }
@@ -49,7 +49,7 @@ extension Service {
     return nil;
   }
   
-  public func modeImageURL(for type: SGStyleModeIconType) -> URL? {
+  @objc public func modeImageURL(for type: SGStyleModeIconType) -> URL? {
     guard let remoteImage = modeInfo?.remoteImageName else { return nil }
     return SVKServer.imageURL(forIconFileNamePart: remoteImage, of: type)
   }

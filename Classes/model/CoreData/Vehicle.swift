@@ -8,62 +8,47 @@
 
 import Foundation
 
-
-
-extension TKOccupancy {
-  
-  public var color: SGKColor? {
-    
-    switch self {
-    case .unknown:
-      return nil
-    case .empty, .manySeatsAvailable:
-      return SGKColor(red: 23/255.0, green: 177/255.0, blue: 94/255.0, alpha: 1)
-    case .fewSeatsAvailable:
-      return SGKColor(red: 255/255.0, green: 181/255.0, blue: 0/255.0, alpha: 1)
-    case .standingRoomOnly, .crushedStandingRoomOnly:
-      return SGKColor(red: 255/255.0, green: 150/255.0, blue: 0/255.0, alpha: 1)
-    case .full, .notAcceptingPassengers:
-      return SGKColor(red: 255/255.0, green: 75/255.0, blue: 71/255.0, alpha: 1)
-    }
-    
-  }
-  
-}
-
 extension Vehicle {
   
-  public var occupancy: TKOccupancy? {
+  public var occupancy: API.Vehicle.Occupancy? {
     get {
-      if let raw = occupancyRaw?.intValue, let converted = TKOccupancy(rawValue: raw) {
-        return converted
+      if let raw = occupancyRaw?.intValue {
+        return API.Vehicle.Occupancy(intValue: raw)
       } else {
         return nil
       }
     }
     set {
       if let occupancy = newValue {
-        occupancyRaw = NSNumber(value: occupancy.rawValue)
+        occupancyRaw = NSNumber(value: occupancy.intValue)
       } else {
         occupancyRaw = nil
       }
     }
   }
   
-  public var serviceNumber: String? {
+  public var isWifiEnabled: Bool? {
+    get {
+      return wifi?.boolValue
+    }
+    set {
+      if let value = newValue {
+        wifi = NSNumber(value: value)
+      } else {
+        wifi = nil
+      }
+    }
+  }
+  
+  @objc public var serviceNumber: String? {
     return anyService?.number
   }
   
-  public var serviceColor: SGKColor? {
+  @objc public var serviceColor: SGKColor? {
     return occupancy?.color
-//    if let color = anyService?.color as? SGKColor {
-//      return color
-//    } else {
-//      return anySegmentReference?.template().modeInfo?.color
-//    }
   }
   
-  public var ageFactor: Double {
+  @objc public var ageFactor: Double {
     guard let age = lastUpdate?.timeIntervalSinceNow, age < -120 else { return 0 }
     
     // vehicle is more than 2 minutes old. start fading it out
@@ -77,6 +62,7 @@ extension Vehicle {
   fileprivate var anySegmentReference: SegmentReference? {
     return segment ?? segmentAlternatives.first
   }
+  
 }
 
 // MARK: - MKAnnotation
@@ -91,7 +77,7 @@ extension Vehicle : MKAnnotation {
     return CLLocationCoordinate2D(latitude: lat, longitude: lng)
   }
   
-  public func setCoordinate(_ newValue: CLLocationCoordinate2D) {
+  @objc public func setCoordinate(_ newValue: CLLocationCoordinate2D) {
     latitude = NSNumber(value: newValue.latitude)
     longitude = NSNumber(value: newValue.longitude)
   }

@@ -17,7 +17,7 @@ import Foundation
 import class CoreLocation.CLGeocoder
 
 extension CLGeocoder {
-  public func reverseGeocodeAddress(forCoordinate coordinate: CLLocationCoordinate2D, completion: @escaping (String?) -> ()) {
+  @objc public func reverseGeocodeAddress(forCoordinate coordinate: CLLocationCoordinate2D, completion: @escaping (String?) -> ()) {
     
     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     reverseGeocodeLocation(location) { placemarks, error in

@@ -151,6 +151,7 @@
   result.subtitle = [address isEqualToString:@"(null)"]?nil:address;
   result.image = [SGStyleManager imageNamed:@"icon-search-poweredByFoursquare_36x36"];
   result.score    = [SGFoursquareGeocoder scoreForAnnotation:annotation forSearchTerm:inputString nearRegion:coordinateRegion];
+  result.isInSupportedRegion = @([TKRegionManager.shared coordinateIsPartOfAnyRegion:annotation.coordinate]);
 
   return result;
 }
@@ -235,12 +236,8 @@
                                                                              address:addressString];
     namedCoordinate.isSuburb = isSuburb;
     
-    NSString *venueID = venueDict[@"id"];
-    [namedCoordinate setAttributionWithActionTitle:@"Show on Foursquare"
-                                           website:[NSString stringWithFormat:@"http://foursquare.com/venue/%@", venueID]
-                                    appActionTitle:@"Open in Foursquare app"
-                                           appLink:[NSString stringWithFormat:@"foursquare://venues/%@", venueID]
-                                        isVerified:venueDict[@"verified"]];
+    [self addDataSourcesToCoordinate:namedCoordinate fromJSON:venueDict];
+    namedCoordinate.attributionIsVerified = venueDict[@"verified"];
     
     NSUInteger score = [SGFoursquareGeocoder scoreForAnnotation:namedCoordinate
                                                   forSearchTerm:inputString
@@ -254,9 +251,8 @@
   }
   
   NSUInteger max = asAutocompletionResult ? 5 : 10;
-  NSArray *filtered = [SGBaseGeocoder filteredMergedAndPruned:coordinates
-                                              limitedToRegion:coordinateRegion
-                                                  withMaximum:max];
+  NSArray *filtered = [SGBaseGeocoder mergedAndPruned:coordinates
+                                          withMaximum:max];
   
   if (asAutocompletionResult) {
     NSMutableArray *results = [NSMutableArray arrayWithCapacity:filtered.count];

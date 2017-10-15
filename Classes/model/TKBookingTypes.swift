@@ -8,89 +8,82 @@
 
 import Foundation
 
-import Marshal
-
-
 /// Case-less enum just to create a namespace
 public enum TKBooking {
   
-  public struct Detail : Unmarshaling {
+  public struct Detail : Codable {
     public let title: String
     public let subtitle: String?
     public let imageURL: URL?
-    
-    public init(object: MarshaledObject) throws {
-      title     = try  object.value(for: "title")
-      subtitle  = try? object.value(for: "subtitle")
-      imageURL  = try? object.value(for: "imageURL")
-    }
   }
   
 
-  public struct Action : Unmarshaling {
+  public struct Action : Codable {
     public let title: String
     public let isDestructive: Bool
     public let internalURL: URL?
     public let externalAction: String?
     
-    public init(object: MarshaledObject) throws {
-      title           = try  object.value(for: "title")
-      isDestructive   = try  object.value(for: "isDestructive")
-      internalURL     = try? object.value(for: "internalURL")
-      externalAction  = try? object.value(for: "externalURL")
+    private enum CodingKeys: String, CodingKey {
+      case title
+      case isDestructive
+      case internalURL
+      case externalAction = "externalURL"
     }
   }
   
 
-  public struct TSPBranding: Unmarshaling {
-    public let color: SGKColor?
-    public let logoImageName: String?
+  public struct TSPBranding: Codable {
+    private let rgbColor: API.RGBColor?
+    private let logoImageName: String?
     
-    public init(object: MarshaledObject) throws {
-      color         = try? object.value(for: "color")
-      logoImageName = try? object.value(for: "remoteIcon")
+    private enum CodingKeys: String, CodingKey {
+      case rgbColor = "color"
+      case logoImageName = "remoteIcon"
+    }
+    
+    public var color: SGKColor? {
+      return rgbColor?.color
     }
     
     public var downloadableLogoURL: URL? {
-      guard let fileNamePart = logoImageName else {
-        return nil
-      }
-      
+      guard let fileNamePart = logoImageName else { return nil }
       return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
     }
   }
   
   
-  public struct Purchase : Unmarshaling {
+  public struct Purchase : Codable {
     public let id:          String
-    public let price:       NSDecimalNumber
+    private let rawPrice:   Double
     public let currency:    String?
     public let productName: String
     public let productType: String
-    private let _isValid:   Bool?
+    private let explicitValidity:   Bool?
     public let validFor:    TimeInterval?
     public let validFrom:   Date?
     public let branding:    TSPBranding?
-    public let attribution: TKDataAttribution?
+    public let attribution: API.DataAttribution?
     
-    public init(object: MarshaledObject) throws {
-      id              = try  object.value(for: "id")
-      let raw: Double = try  object.value(for: "price")
-      price = NSDecimalNumber(value: raw)
-      currency        = try? object.value(for: "currency")
-      productName     = try  object.value(for: "productName")
-      productType     = try  object.value(for: "productType")
-      _isValid        = try? object.value(for: "valid")
-      validFor        = try? object.value(for: "validFor")
-      validFrom       = try? object.value(for: "validFrom")
-      branding        = try? object.value(for: "brand")
-      attribution     = try? object.value(for: "source")
+    private enum CodingKeys: String, CodingKey {
+      case id
+      case rawPrice = "price"
+      case currency
+      case productName
+      case productType
+      case explicitValidity = "valid"
+      case validFor
+      case validFrom
+      case branding = "brand"
+      case attribution = "source"
+    }
+    
+    public var price: NSDecimalNumber {
+      return NSDecimalNumber(value: rawPrice)
     }
     
     public var isValid: Bool {
-      if let valid = _isValid {
-        return valid
-      }
+      if let valid = explicitValidity { return valid }
       
       // If we don't have an expiry date for the ticket, treat it as valid.
       guard let ticketExpiryDate = validTo else {
@@ -100,7 +93,6 @@ public enum TKBooking {
       
       // Expiring in the future
       return ticketExpiryDate.timeIntervalSinceNow > 0
-      
     }
     
     public var validTo: Date? {
@@ -111,21 +103,13 @@ public enum TKBooking {
   }
 
   
-  public struct Confirmation : Unmarshaling {
+  public struct Confirmation : Codable {
     
     public let status: Detail
     public let provider: Detail?
     public let vehicle: Detail?
     public let purchase: Purchase?
-    public let actions: [Action]
-    
-    public init(object: MarshaledObject) throws {
-      status    =  try  object.value(for: "status")
-      provider  =  try? object.value(for: "provider")
-      vehicle   =  try? object.value(for: "vehicle")
-      purchase  =  try? object.value(for: "purchase")
-      actions   = (try? object.value(for: "actions")) ?? []
-    }
+    public let actions: [Action]?
   }
   
 }

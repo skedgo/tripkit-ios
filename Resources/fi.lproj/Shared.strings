@@ -40,9 +40,6 @@
 /* Credit card CVC */
 "CVC" = "CVC";
 
-/* No comment provided by engineer. */
-"Can't find your current city" = "Tämänhetkistä kaupunkiasi ei löydy";
-
 /* Cancel action */
 "Cancel" = "Peruuta";
 

@@ -1,22 +1,43 @@
 language: objective-c
-osx_image: xcode8
-xcode_sdk: iphonesimulator10.0
-xcode_workspace: Project/TripKit.xcworkspace
-xcode_scheme:
-    - TripKit
-
-# Non-standard Podfile and opt-into caching of pods
+osx_image: xcode9
 podfile: Project/Podfile
 cache: cocoapods
-rvm:
-  - 2.2.1 # See https://docs.travis-ci.com/user/osx-ci-environment/
+
+env:
+  global:
+    - LC_CTYPE=en_US.UTF-8
+    - LANG=en_US.UTF-8
+    - IOS_FRAMEWORK_SCHEME="TripKit"
+    - IOS_SDK=iphonesimulator11.0
+    - secure: "whkK++h4Y+ciX+W/9o96SQoSvkfi2+dtlkeWeCj5emMe2Uk67FTjNK0REaueEkvBvEpGxPnbbLLiEWJAS561Gh2XSKtKgABGVWtrvjk6j2/44ezt689D1/mAf6bDOaHK6N3kwA2qdFAec4JmknCikpLg6WiC7GT1/2oYXgoBz6wA1ai35MnnlLWvopAQq98T0a2B5P3foB4AW7oKtNGNKvvWGXj0+c8ZPcsk6LJNmjrVReAdplg3NFagDWEK2VNd8D79//cvvt5sdmE5a6Dkh83zAgpHewzqe7vtIfLqTUUChgIlOaDGZpWn8boMn0lku6QCH4Rs1szsSII4FuCwEeZWrthUtQiqw8If8cwIrLCKqaItFSJ+MNL2sNe/jDdTmbhnwWjxx8yAqivrwOC86xG/iCGbCX16zpjfwG5CxPWDFjiuJ1mvlFQmRbz02IVYmWyms58zL2RaHXTjewCRrwzxiWZhpoLfLt/zbX6ISDKiuY+TXtc+5DLS1Qgs7gsKxLolCteVqDE++3hsmImMtP/Gf/ojeTaVoHin+WNJV/WQn29xcCFN6erCDp5lQwyY68ygqVpqUwNdTugjw/1iNbd3Oo3/klrXXcOya6ErFlPUQHx5An2VlcpEI/CqcjRAoNQSKRgrFdv0NsQIPAjPGX4PdKWEFpcZ/kLggIUbAiU="
+    - secure: "r4alEXz4O0nJeiEqxF7dM1OHqDILk/cq1VlBe6kOOEr/hj9boC6bkQdJK9+rsKJnWg7Q5WFo6EigI7orKDrN1rLPePtwwCDlK4vfoWQHNfx3ch5cHK2nDYnTFDYAGT+KAndw3b21NJGGb08XHlKgFuDCR6HLCq6iSYDsMmaCZkFenbeq1E6BqYJAMMMSb6ohx95kJ1nGRms7LGdezqqzPGVG3MwI3Ro6CkXoisqkOUpjMRte4FtKOGwJEXjzEuk/TZjhUBhTOB+2kR2EDsN3VKncJPwdN/l3V//Rh0jF+g93glENPJK9VSGIEnmA24HdVvTaDdOb2ovL5gD3HIY8tsBI4gELkblGaOHcICw1AyN/MdEX/6LizQek5R2KN3QRU7elw/CB2JTTHWAS9teZf1f8seFfSkHuAH5z9oQDyXvZhCsb1g1IXBkHahfqvTXkYdZo7Fz6Y1nmneErfD8fmMPYYOovm0gPqVfDZTQLYW+cEhSTfx5Hn8y9o1sYL0IAibIOFityQ4s8phm99pEES3Qa+XFasSceETyyMpW23dUHyPuExJ7hpggrZb9IEYmgD3SOfGPks9F40CKOVYG2CKiXntAjMiIIH8fGro/OCb26XXFdgK6vRqqm2Yyk7DZpst3B89EcfGVg5e5DODVlC/WDS+T1eaUb55U86xTHbiI="
+    - secure: "cjEEjCaVS6ZiEkLdGzQ22yZ0yRPSNDpIlZhKmHMVnJc8x9QB+EZALZ7hPLEmSJL+rqQ6DVK23zkXDlLwFHsDrrQHavXsO5NIsPhPpUTPyrVTGuBsR18Pk1TbClyh/vCJ1N6FzskCIIQd7ZbQ/J5PjQ6OC7W7KHyXnozYuS7ruSTmNjX9C3052yY7RpKJsMjDR570f/TPRjFRegrnOpvJ1Q/t0mfFSESGB000/gxPW1O61A5zJXuX9H30kK97bz2fPO8LJhQ+NFkQqAbs3BirNf3iHOYCk+pO5Uv8Mtupg6FfPi2+1fhghpM1eVXqstkf86r/0em8fqqCHK+vUlscy54Ow44gs8oGmE/3zGWCkvFZ76NUQ87wisHDFwA3iJo5EygZU6uocVcBKo9TqN3tg5dU7McFcdczqRlOSpcIP8nMpz/fo4PMqeMwjP8DKcrRqk8XnBPVCthQ9D9oiVOxoicK/kf6JlPAK9OEcuZDXFV0/qP7pKjVqf6J/mbkv6ORe6CcDdq7QgUmu7lavplwyfEY7pTJzqGlVo2p8ZBblILnXXFoqi13dmDtcngvDg3zA/d3Cyp+4HYouFXmyh2z9mEvdgs3gNPGrWVOi5IMfuLd3VyyAKcGPoM1PDl9ib394QljAfrBcQtampw48UdmPVZySnQVYlNxCwo/XPx6KFw="
+    - secure: "Cm2f7+Z2Gdj2ZroiaH3i28WknaBlr7BGEpTSL/240ahLiE/MiUinPHd8tBT3+J0V5HiHor5+TMC9AfrDuXbaGLb9b3SaK83QowEj+ukQtEj1Z1CIqjv40a5z0shaUgqsDLUui4GMW2SX7yCHHu/NAx8ijwR/JTzdA5oSBeYuYcAURkYWDC+NxuBpqBxLMpZ44r0Gt+TvWSSKtKOsf0i+F+HJLLOLJWPodiHiQZdjS/cSgfeDRjN0zoHVoYwKMXdpJ5WaqVWcJJNFLz8aL5HsSQTgRYtENovo3z+oZfSwcEoUllURZ3UjLxi1mVhg2+AZCAF+G1AJUqwUuD6NFcyphBBQWDU9dGAcv8K5u9G8Qqd3BOGYzVkfGCDxjHcNjU2FvB9LF0gnQ6IFX9CeA+W01sYQ9IzztpQXiPHrEPkJeA0FrE48RfKigAz2UQ4aN9/taRnThnuLqxp3YdadJHHnOzQ+YIvkGbcxfqp/JmNWz48ZvxJwtKYNF0t12eONr4Rugt02UfjYLBQBdHk2BYwfgXrhiM6ylc3rihjp0UPawQ2D5ctdkLFDlVFb2QtJPn1Zyc4eeRfT3GU0cwatd+OAEGpU/ZW+l+PGGBZyh8ElfrmBKE8uEqx4zmEOOVosuQum2HQTUPgjgTL8EwFZaJpKoynbvGfwcWa637WKPNJfQNY="
+  matrix:
+    - DESTINATION="OS=11.0,name=iPhone 8" SCHEME="$IOS_FRAMEWORK_SCHEME" SDK="$IOS_SDK"
 
 before_install:
-  - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
-  - brew update
-  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-  - gem install cocoapods
-  - pod --version
+- echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
+- gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+- pod --version
+- pod repo update
 
 # We use xcodebuild rather than xctool as xctool doesn't play nicely with network requests
-script: set -o pipefail && xcodebuild test -workspace Project/TripKit.xcworkspace -scheme TripKit -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7' | xcpretty
+script:
+  - set -o pipefail 
+  - xcodebuild -showsdks
+  - xcodebuild test -workspace "Project/TripKit.xcworkspace" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" | xcpretty
+
+before_deploy:
+- carthage build --no-skip-current
+- carthage archive $SCHEME
+
+deploy:
+  provider: releases
+  api_key:
+    secure: uYV8aLd31oqbq+1CL11rJoumjNF4X7TWLXawcA95w2u11zWdQpl7IyeKLV9wSqu5zdvKgyuV4UppYNIEAhxgQLNM+CenH7Vk/Lk7cT5d/QOrbsj6iUlTrpR1azxKE1ivYRV6gXUx/vGAKAVy9u20XCBZ8Y6lJx/PZq0V10rp5+akJP6PNwGbOxQkFXOwgIoZFN6W4NJWdkCCO/JQ1DCMGu2jNyywy/GYzLfhDOYQXZhRf7uxEJvwMHboq9MssIWYp8mb6wpe779uY8D4CLB3hGAW9q9OYvf/e9Zxl8NkyPkcRBdcEA9Aze74A3RWTIu7DZYjadRM/JPcn28PJ117vhFwDp+AyeedRMg+ApsOd1aZFthsamdAlfg+Ol+IHDQzvlSfvLL8qwTDxIJhJ0ZdazkWdLDfvzlEOZ0OQEqhTxEizl7koEtr98J7RpP217VeJTt9CNAxl2EGQ7BKzsM8GcxxzwOQENZRLVmff+zmBQWJI2n0bgAVKdV4/sVkyJVoSMf8v2TLtU+1cpNXcWkGJkOFHAR2WbOYwtBbIlK4cUwqQ51aoVWWzZukCubPGYcmONNi/1KFkrtnCqdIOnjGHaZdF1eb/XCoeAHtugCMbya+wk/GBc63YEAOaxE5nLM9m3UqQ2vAV6xGNQv4cIajOobB8/zXpNOyoFG/Ne/AZEc=
+  file: "$SCHEME.framework.zip"
+  skip_cleanup: true
+  on:
+    repo: skedgo/tripkit-ios
+    tags: true

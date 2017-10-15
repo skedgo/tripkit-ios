@@ -68,7 +68,6 @@
 #import "TKFakeRouter.h"
 #import "TKBuzzRealTime.h"
 #import "TKBuzzInfoProvider.h"
-#import "TKTimetableDownloader.h"
 #import "TKWaypointRouter.h"
 #import "TKRealTimeUpdatableHelper.h"
 

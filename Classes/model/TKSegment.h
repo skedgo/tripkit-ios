@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) SegmentReference *reference;
 @property (nonatomic, weak, null_resettable) Trip *trip; // practically nonnull, but can be nulled due to weak reference
 
-- (SegmentTemplate *)template;
+@property (nonatomic, weak, null_unspecified) SegmentTemplate *template;
 
 - (id)initWithReference:(SegmentReference *)aReference
                 forTrip:(Trip *)aTrip;
@@ -60,8 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 /* 
  Various helper methods for quickly getting values and nice strings for various values.
  */
-@property (nonatomic, strong, nonnull) NSDate *departureTime;
-@property (nonatomic, strong, nonnull) NSDate *arrivalTime;
+@property (nonatomic, strong, null_unspecified) NSDate *departureTime;
+@property (nonatomic, strong, null_unspecified) NSDate *arrivalTime;
 
 - (void)setTitle:(NSString *)title; // just for KVO
 
@@ -134,6 +134,11 @@ NS_ASSUME_NONNULL_BEGIN
  @return Alerts that have content, such as a description or URL
  */
 - (NSArray<Alert *> *)alertsWithContent;
+
+/**
+ @return Alerts that also have an action associated with them
+ */
+- (NSArray<Alert *> *)alertsWithAction;
 
 - (TKSegment *)finalSegmentIncludingContinuation;
 

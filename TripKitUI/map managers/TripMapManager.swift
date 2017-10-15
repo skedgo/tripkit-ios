@@ -9,6 +9,12 @@
 import Foundation
 import MapKit
 
+#if TK_NO_MODULE
+#else
+  import TripKit
+#endif
+
+
 @objc
 public enum ZoomMode: Int {
   case zoomOnly
@@ -18,6 +24,7 @@ public enum ZoomMode: Int {
 
 extension TripMapManager {
 
+  @objc
   public func show(_ trip: Trip, zoom: ZoomMode, animated: Bool = false) {
     guard let mapView = mapView() else { return }
     
@@ -31,11 +38,7 @@ extension TripMapManager {
     if !forzeZoom
       && mapView.visibleMapRect.origin.x >= 0 // might happen if map view is minimized
     {
-      let fromToRect = [trip.request.fromLocation, trip.request.toLocation].reduce(MKMapRectNull) { acc, annotation in
-        let point = MKMapPointForCoordinate(annotation.coordinate)
-        let newRect = MKMapRectMake(point.x, point.y, 1, 1)
-        return MKMapRectUnion(acc, newRect)
-      }
+      let fromToRect = [trip.request.fromLocation, trip.request.toLocation].mapRect
       forzeZoom = (!MKMapRectIntersectsRect(mapView.visibleMapRect, fromToRect))
     }
     
@@ -46,6 +49,7 @@ extension TripMapManager {
     refreshRoute(animated: animated, forceRebuild: true, zoom: zoomMode)
   }
   
+  @objc
   public func refreshRoute(animated: Bool, forceRebuild force: Bool, zoom: ZoomMode) {
     guard let mapView = mapView(), let trip = self.trip else { return }
     
@@ -119,8 +123,8 @@ extension TripMapManager {
       mapView.showsTraffic = affectedByTraffic
     }
     
-    if zoomTo.count > 0 {
-      mapView.zoom(to: zoomTo, edgePadding: (delegate() as? ASMapManagerDelegate)?.mapManagerEdgePadding(self) ?? UIEdgeInsets.zero, animated: animated)
+    if !zoomTo.isEmpty {
+      mapView.zoom(to: zoomTo, edgePadding: delegate()?.mapManagerEdgePadding(self) ?? UIEdgeInsets.zero, animated: animated)
     }
     
     self.alerts = alerts
@@ -133,9 +137,14 @@ extension TripMapManager {
   }
   
   private func requestVisits(for segment: TKSegment, includeShape: Bool) {
-    guard segment.isPublicTransport(), let service = segment.service(), let region = segment.startRegion() else { return }
+    guard
+      segment.isPublicTransport(),
+      let service = segment.service(),
+      let region = segment.startRegion(),
+      let departure = segment.departureTime
+      else { return }
     
-    infoProvider.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: region) { [weak self] (updatedService, finished) in
+    infoProvider.downloadContent(of: service, forEmbarkationDate: departure, in: region) { [weak self] (updatedService, finished) in
       
       guard let `self` = self else { return }
       guard service == updatedService && finished else { return }

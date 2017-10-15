@@ -1,14 +1,9 @@
 Pod::Spec.new do |s|
   s.name         = "TripKit"
-  s.version      = "2.0-beta4"
+  s.version      = "3.0-beta0"
   s.summary      = "SkedGo's TripKit"
-  s.homepage     = "http://www.skedgo.com/"
-  s.license      = { 
-    type: 'Proprietary',
-    text: <<-LICENSE
-      Copyright 2012-2017, SkedGo Pty Ltd.
-    LICENSE
-  }
+  s.homepage     = "https://github.com/skedgo/tripkit-ios"
+  s.license      = 'Apache License, Version 2.0'
   s.authors      = {
     "Adrian Schoenig" => "adrian@skedgo.com",
     "Brian Huang" => "brian@skedgo.com"
@@ -23,9 +18,8 @@ Pod::Spec.new do |s|
   s.prefix_header_file = "prefix.pch"
 
   s.dependency 'ASPolygonKit'
-  s.dependency 'Marshal'
-  s.dependency 'RxSwift'
-  s.dependency 'RxCocoa'
+  s.dependency 'RxSwift', '~> 4.0.0-beta.0'
+  s.dependency 'RxCocoa', '~> 4.0.0-beta.0'
 
   s.source_files = "Classes/**/*.{h,m,swift}"
 

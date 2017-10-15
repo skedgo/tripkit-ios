@@ -47,7 +47,7 @@ public protocol TKURLSavable: class, TKURLShareable {
 
       let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
       
-      SVKServer.get(saveURL, paras: nil) { _, response, _ in
+      SVKServer.get(saveURL, paras: nil) { _, response, _, _ in
         guard
           let dict = response as? [String: Any],
           let urlString = dict["url"] as? String,
@@ -63,7 +63,18 @@ public protocol TKURLSavable: class, TKURLShareable {
       
     }
     
+    /// Gets and optionally fetches the share URL for the provided object.
+    ///
+    /// If the object didn't yet have a share URL, it is fetched and the object
+    /// conforms to `TKURLSavable`, the URL is also persisted in the object's `shareURL`.
+    ///
+    /// - Parameters:
+    ///   - shareable: Object for which to get a URL for sharing
+    ///   - allowLongURL: If long URL is allowed (e.g., long UUID rather than a short identifier)
+    ///   - allowBlocking: If method call is allowed to block and fetch the URL from a server
+    /// - Returns: The URL for sharing. Is discardable as for `TKURLSavable` you can get it from the object's `shareURL`
     @objc(getShareURLForShareable:allowLongURL:allowBlocking:)
+    @discardableResult
     public class func getShareURL(for shareable: TKURLShareable, allowLongURL: Bool, allowBlocking: Bool) -> URL? {
       
       if let shareURL = shareable.shareURL {
@@ -84,6 +95,7 @@ public protocol TKURLSavable: class, TKURLShareable {
       if let dict = response as? [String: Any],
         let urlString = dict["url"] as? String,
         let shareURL = URL(string: urlString) {
+        saveable.shareURL = shareURL
         return shareURL
       } else {
         return nil

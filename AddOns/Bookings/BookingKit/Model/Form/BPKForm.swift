@@ -13,22 +13,22 @@ extension BPKForm {
   
   // MARK: - Uber stuff -
   
-  public var surgePricingInEffect: Bool {
+  @objc public var surgePricingInEffect: Bool {
     return hasFieldWithID("disregardURL")
   }
   
-  public var surgePricingURL: URL? {
+  @objc public var surgePricingURL: URL? {
     guard surgePricingInEffect == true else { return nil }
     guard let urlString = stringValueForFormFieldWithID("auth") else { return nil }
     return URL(string: urlString)
   }
   
-  public var disregardURL: URL? {
+  @objc public var disregardURL: URL? {
     guard let urlString = stringValueForFormFieldWithID("disregardURL") else { return nil }
     return URL(string: urlString)
   }
   
-  var bookingURL: URL? {
+  @objc var bookingURL: URL? {
     if !isActionBooking() { return nil }
     guard let urlString = actionURL()?.absoluteString else { return nil }
     return URL(string: urlString)
@@ -36,18 +36,18 @@ extension BPKForm {
   
   // MARK: - OAuth related -
   
-  public var isOAuthForm: Bool {
+  @objc public var isOAuthForm: Bool {
     if let type = self.rawForm["type"] as? String, type == "authForm" {
       return true
     }
     return false
   }
   
-  public var isClientSideOAuth: Bool {
+  @objc public var isClientSideOAuth: Bool {
     return isOAuthForm && oauthParameters != nil
   }
   
-  public var requiresOAuth: Bool {
+  @objc public var requiresOAuth: Bool {
     return isOAuthForm
   }
   
@@ -94,14 +94,14 @@ extension BPKForm {
     return OAuthParameter(provider: provider, clientID: id, clientSecret: secret, oauthURL: authURL, tokenURL: tokenURL, scope: scope, postURL: postURL, accessTokenBasicAuth: accessTokenBasicAuth)
   }
   
-  func buildOAuthForm(_ accessToken: String, refreshToken: String?, expiration: TimeInterval) -> BPKForm? {
+  @objc func buildOAuthForm(_ accessToken: String, refreshToken: String?, expiration: TimeInterval) -> BPKForm? {
     guard let formFields = formFields() else { return nil }
     
     // Get the fields that are to be used to transport OAuth data
     let hiddenNilValueFields = formFields.filter { field in
       let isHidden = field["hidden"].boolValue
       let value = field["value"].string ?? ""
-      let isEmpty = value.characters.count == 0
+      let isEmpty = value.count == 0
       return isHidden && isEmpty
     }
     
@@ -151,7 +151,7 @@ extension BPKForm {
     return mf["value"].string
   }
   
-  public var tripUpdateURL: URL? {
+  @objc public var tripUpdateURL: URL? {
     return self.refreshURLForSourceObject()
   }
   
