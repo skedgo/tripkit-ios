@@ -62,8 +62,22 @@ extension Reactive where Base: SVKServer {
       return Observable.error(TKAgendaError.userIsNotLoggedIn)
     }
     
-    return hit(.POST, path: "agenda/\(dateString)/input", parameters: input.marshaled())
-      .map { status, body -> TKAgendaUploadResult in
+    let encoder = JSONEncoder()
+    if #available(iOS 10.0, *) {
+      encoder.dateEncodingStrategy = .iso8601
+    } else {
+      encoder.dateEncodingStrategy = .secondsSince1970
+    }
+    
+    let paras: [String: Any]?
+    do {
+      paras = (try encoder.encodeJSONObject(input)) as? [String: Any]
+    } catch {
+      return Observable.error(error)
+    }
+    
+    return hit(.POST, path: "agenda/\(dateString)/input", parameters: paras ?? [:])
+      .map { status, body, data -> TKAgendaUploadResult in
         switch status {
         case 200: return .success
         case 401: throw TKAgendaError.userTokenIsInvalid
@@ -103,7 +117,7 @@ extension Reactive where Base: SVKServer {
     }
     
     return hit(.DELETE, path: "agenda/\(dateString)/input")
-      .map { status, body -> Bool in
+      .map { status, body, data -> Bool in
         switch status {
         case 200: return true
         case 404: return false
@@ -149,21 +163,20 @@ extension Reactive where Base: SVKServer {
       path.append("&hashCode=\(hashCode)")
     }
 
-    return hit(.GET, path: path) { status, body -> TimeInterval? in
+    return hit(.GET, path: path) { status, body, data -> TimeInterval? in
         switch status {
         case 299: return 1
         default: return nil
         }
       }
-      .flatMapLatest { status, body -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
+      .flatMapLatest { status, body, data -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
         switch status {
         case 200:
-          guard
-            let marshaled = body as? MarshaledObject,
-            let output = try? TKAgendaOutput(object: marshaled) else {
-            throw TKAgendaError.unexpectedResponse(status, body)
-          }
-          return try output.addTrips(fromServerBody: marshaled).map { .success($0) }
+          guard let data = data else { throw TKAgendaError.unexpectedResponse(status, body) }
+          let decoder = JSONDecoder()
+          let output = try decoder.decode(TKAgendaOutput.self, from: data)
+          let response = try decoder.decode(TKAgendaOutput.Response.self, from: data)
+          return try output.addTrips(from: response).map { .success($0) }
           
         case 299: return Observable.just(.calculating)
         case 304: return Observable.just(.noChange)
@@ -182,7 +195,7 @@ extension Reactive where Base: SVKServer {
     }
     
     return hit(.GET, path: "agenda/summary")
-      .map { status, body -> TKAgendaSummary in
+      .map { status, body, data -> TKAgendaSummary in
         switch status {
         case 200:
           guard let marshaled = body as? MarshaledObject else {

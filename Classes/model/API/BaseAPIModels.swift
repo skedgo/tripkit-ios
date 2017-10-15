@@ -63,7 +63,9 @@ extension API {
       return SGKColor(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: 1)
     }
     
-    public init?(for color: SGKColor) {
+    public init?(for color: SGKColor?) {
+      guard let color = color else { return nil }
+      
       var red: CGFloat = 0
       var green: CGFloat = 0
       var blue: CGFloat = 0

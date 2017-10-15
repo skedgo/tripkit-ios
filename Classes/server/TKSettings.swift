@@ -10,6 +10,7 @@ import Foundation
 
 extension TKSettings {
   
+  @objc
   public static let parserJsonVersion: Int = 13
   
   private enum DefaultsKey: String {

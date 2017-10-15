@@ -10,6 +10,7 @@ import Foundation
 
 extension SGTrackHelper {
   
+  @objc
   public static func trackItemIsTrip(_ trackItem: SGTrackItem) -> Bool {
     return trackItem is SGTripTrackItem
   }

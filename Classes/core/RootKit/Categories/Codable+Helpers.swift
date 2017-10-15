@@ -23,4 +23,3 @@ extension JSONDecoder {
     return try decode(T.self, from: data)
   }
 }
-

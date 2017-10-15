@@ -7,11 +7,9 @@
 
 import Foundation
 
-import Marshal
-
-public struct TKAgendaOutput {
+public struct TKAgendaOutput: Decodable {
   
-  public enum TrackItem {
+  public enum TrackItem: Decodable {
     case home(id: String, arrival: Date?, departure: Date?)
     case includedEvent(id: String, arrival: Date, departure: Date)
     case excludedEvent(id: String)
@@ -23,6 +21,49 @@ public struct TKAgendaOutput {
       case .includedEvent(let id, _, _): return id
       case .excludedEvent(let id): return id
       case .trip(_, let id, _): return id
+      }
+    }
+    
+    // MARK: Decodable
+    
+    private enum DecodingError: Error {
+      case unexpectedType(String)
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+      case klass = "class"
+      case id
+      case effectiveStart
+      case effectiveEnd
+      case fromId
+      case toId
+    }
+    
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      
+      let klass = try container.decode(String.self, forKey: .klass)
+      let id = try container.decode(String.self, forKey: .id)
+      switch klass {
+      case "event":
+        let start = try? container.decode(Date.self, forKey: .effectiveStart)
+        let end = try? container.decode(Date.self, forKey: .effectiveEnd)
+        
+        if id == "home" {
+          self = .home(id: id, arrival: start, departure: end)
+        } else if let start = start, let end = end {
+          self = .includedEvent(id: id, arrival: start, departure: end)
+        } else {
+          self = .excludedEvent(id: id)
+        }
+      
+      case "trip":
+        let fromId = try container.decode(String.self, forKey: .fromId)
+        let toId = try container.decode(String.self, forKey: .toId)
+        self = .trip(fromId: fromId, tripId: id, toId: toId)
+        
+      default:
+        throw DecodingError.unexpectedType(klass)
       }
     }
   }
@@ -37,76 +78,20 @@ public struct TKAgendaOutput {
   /// is the trip's departure string from the output.
   public var trips: [String: Trip] = [:]
   
-}
-
-// MARK: Unmarshaling
-
-extension TKAgendaOutput: Unmarshaling {
   
-  public init(object: MarshaledObject) throws {
-    
-    hashCode = try object.value(for: "hashCode")
-    track = try object.value(for: "track")
-    inputs = try object.value(for: "inputs")
-    
+  // MARK: Decodable
+  
+  private enum CodingKeys: String, CodingKey {
+    case hashCode
+    case track
+    case inputs
   }
   
-}
-
-extension TKAgendaOutput.TrackItem: Unmarshaling {
-
-  public init(object: MarshaledObject) throws {
-    
-    let klass: String = try object.value(for: "class")
-    let id: String? = try? object.value(for: "id")
-    
-    switch klass {
-    case "event":
-      guard let id = id else { throw MarshalError.nullValue(key: "event.id") }
-      let effectiveStart: Date? = try? object.value(for: "effectiveStart")
-      let effectiveEnd: Date? = try? object.value(for: "effectiveEnd")
-      
-      if id == "home" {
-        self = .home(id: id, arrival: effectiveStart, departure: effectiveEnd)
-      } else if let start = effectiveStart, let end = effectiveEnd {
-        self = .includedEvent(id: id, arrival: start, departure: end)
-      } else {
-        self = .excludedEvent(id: id)
-      }
-      
-    case "trip":
-      let fromId: String = try object.value(for: "fromId")
-      let toId: String = try object.value(for: "toId")
-
-      if let id = id {
-        self = .trip(fromId: fromId, tripId: id, toId: toId)
-      } else {
-        
-        let tripId = try TKAgendaOutput.tripId(forTrackItem: object)
-        self = .trip(fromId: fromId, tripId: tripId, toId: toId)
-      }
-      
-    default:
-      throw MarshalError.keyNotFound(key: "class")
-      
-    }
-    
-  }
-}
-
-extension TKAgendaOutput {
-
-  static func tripId(forTrackItem object: MarshaledObject) throws -> String {
-    guard
-      let groups: [[String: Any]] = try object.value(for: "groups"),
-      let group = groups.first,
-      let trips: [[String: Any]] = try group.value(for: "trips"),
-      let departureId = trips.first?["depart"] as? String
-      else {
-        throw MarshalError.keyNotFound(key: "groups[0].trips[0].depart")
-    }
-    
-    return departureId
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    hashCode = try container.decode(Int.self, forKey: .hashCode)
+    track = try container.decode([TrackItem].self, forKey: .track)
+    inputs = try container.decode([String: TKAgendaInput.Item].self, forKey: .inputs)
   }
   
 }
