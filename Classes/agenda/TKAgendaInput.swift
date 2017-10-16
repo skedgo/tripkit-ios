@@ -21,7 +21,11 @@ public struct TKAgendaInput: Codable {
       return CLLocationCoordinate2D(latitude: lat, longitude: lng)
     }
     
-    public init(name: String? = nil, what3word: String) {
+    public init?(name: String? = nil, what3word: String) {
+      if name == nil, what3word.isEmpty {
+        return nil
+      }
+      
       self.what3word = what3word
       self.name = name
       self.address = nil
@@ -29,7 +33,11 @@ public struct TKAgendaInput: Codable {
       self.lng = nil
     }
     
-    public init(name: String? = nil, coordinate: CLLocationCoordinate2D?, address: String? = nil) {
+    public init?(name: String? = nil, coordinate: CLLocationCoordinate2D?, address: String? = nil) {
+      if name == nil, coordinate == nil, address == nil {
+        return nil
+      }
+      
       self.what3word = nil
       self.name = name
       self.address = address
@@ -62,16 +70,19 @@ public struct TKAgendaInput: Codable {
     public let endTime: Date
     public let priority: Priority
 
+    public let endLocation: Location?
+    
     private let rgbColor: API.RGBColor?
     public let description: String?
     public let url: URL?
     public let excluded: Bool?
     public let direct: Bool?
     
-    public init(id: String, title: String, location: Location?, startTime: Date, endTime: Date, priority: Priority, color: SGKColor? = nil, description: String? = nil, url: URL? = nil, excluded: Bool = false, direct: Bool = false) {
+    public init(id: String, title: String, location: Location?, endLocation: Location? = nil, startTime: Date, endTime: Date, priority: Priority, color: SGKColor? = nil, description: String? = nil, url: URL? = nil, excluded: Bool = false, direct: Bool = false) {
       self.id = id
       self.title = title
       self.location = location
+      self.endLocation = endLocation
       self.startTime = startTime
       self.endTime = endTime
       self.priority = priority
@@ -90,6 +101,7 @@ public struct TKAgendaInput: Codable {
       case id
       case title
       case location
+      case endLocation
       case startTime
       case endTime
       case priority
