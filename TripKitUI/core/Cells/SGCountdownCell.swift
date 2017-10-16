@@ -33,6 +33,8 @@ public struct SGCountdownCellModel {
   
 }
 
+// MARK: - Configuration
+
 extension SGCountdownCell {
   
   public func configure(with model: SGCountdownCellModel) {
@@ -140,6 +142,24 @@ extension SGCountdownCell {
   }
   
   
+  public func adjustContentWrapper(basedOn position: SGKGrouping) {
+    switch position {
+    case .start:
+      contentWrapperTopConstraint.constant = 0
+      contentWrapperBottomConstraint.constant = -8
+    case .end:
+      contentWrapperTopConstraint.constant = -8
+      contentWrapperBottomConstraint.constant = 0
+    case .middle:
+      contentWrapperTopConstraint.constant = -8
+      contentWrapperBottomConstraint.constant = -8
+    case .individual, .edgeToEdge:
+      contentWrapperTopConstraint.constant = 0
+      contentWrapperBottomConstraint.constant = 0
+    }
+  }
+  
+  
   public func addViewToFootnote(_ view: UIView) {
     // Make sure we start clean.
     for subview in footnoteView.subviews {
@@ -168,4 +188,17 @@ extension SGCountdownCell {
       footnoteView.addConstraints([leadingSpace, topSpace, trailingSpace, bottomSpace])
     }
   }
+  
+}
+
+extension SGCountdownCell {
+  
+  public class func reuseId() -> String {
+    return "SGCountdownCell"
+  }
+  
+  public class func nib() -> UINib {
+    return UINib(nibName: "SGCountdownCell", bundle: Bundle(for: SGCountdownCell.self))
+  }
+  
 }
