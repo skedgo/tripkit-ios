@@ -110,6 +110,21 @@ extension TKSettings {
   
 }
 
+// MARK: - Equality
+
+public func ==(lhs: TKSettings.Config.Speed, rhs: TKSettings.Config.Speed) -> Bool {
+  switch (lhs, rhs) {
+  case (.impaired, .impaired): return true
+  case (.slow, .slow): return true
+  case (.medium, .medium): return true
+  case (.fast, .fast): return true
+  case (.custom(let speed1), .custom(let speed2)): return fabs(speed1 - speed2) < 0.1
+  default: return false
+  }
+}
+extension TKSettings.Config.Speed: Equatable { }
+
+
 // MARK: - API Values
 
 extension SGDistanceUnitType {

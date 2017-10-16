@@ -102,9 +102,21 @@ public struct TKAgendaInput: Codable {
   }
   
   public struct TripInput: Codable {
-    public let url: URL
+    public let id: String
+    public let title: String?
+    public let start: Location
+    public let end: Location
+    public let url: URL?
     
-    // TODO: Fill in
+    // TODO: What else? Modes?
+    
+    public init(id: String, title: String?, start: Location, end: Location, url: URL?) {
+      self.id = id
+      self.title = title
+      self.start = start
+      self.end = end
+      self.url = url
+    }
   }
   
   public enum Item: Codable {

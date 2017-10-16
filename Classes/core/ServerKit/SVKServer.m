@@ -453,7 +453,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
          }
        }
        
-     } else {
+     } else if (error) {
        [SGKLog warn:@"SVKServer" format:@"Couldn't fetch regions. Error: %@", error];
        if (completion) {
          completion(NO, error);

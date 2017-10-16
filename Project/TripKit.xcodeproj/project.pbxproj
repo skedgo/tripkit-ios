@@ -191,6 +191,7 @@
 		3AC9A0B11F683F070050217E /* geojson-nuremberg.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AC9A0B01F683F070050217E /* geojson-nuremberg.json */; };
 		3AC9A0B31F683F530050217E /* TKGeoJSONTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0B21F683F530050217E /* TKGeoJSONTest.swift */; };
 		3AD05D811F93BC3300549DF9 /* TKAgendaDecodingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD05D801F93BC3300549DF9 /* TKAgendaDecodingTest.swift */; };
+		3AD05D981F9498FE00549DF9 /* TKSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD05D971F9498FE00549DF9 /* TKSettingsTest.swift */; };
 		3AD159761F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD159751F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift */; };
 		3AD159781F0D527D008B63E2 /* SGTripSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD159771F0D527D008B63E2 /* SGTripSummaryCell.swift */; };
 		3AD1DEA61F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */; };
@@ -792,6 +793,7 @@
 		3AC9A0B01F683F070050217E /* geojson-nuremberg.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "geojson-nuremberg.json"; path = "TripKitTests/Data/geojson-nuremberg.json"; sourceTree = SOURCE_ROOT; };
 		3AC9A0B21F683F530050217E /* TKGeoJSONTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeoJSONTest.swift; sourceTree = "<group>"; };
 		3AD05D801F93BC3300549DF9 /* TKAgendaDecodingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAgendaDecodingTest.swift; sourceTree = "<group>"; };
+		3AD05D971F9498FE00549DF9 /* TKSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSettingsTest.swift; sourceTree = "<group>"; };
 		3AD159751F0D4BF6008B63E2 /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		3AD159771F0D527D008B63E2 /* SGTripSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGTripSummaryCell.swift; sourceTree = "<group>"; };
 		3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKGeoJSON+NamedCoordinate.swift"; sourceTree = "<group>"; };
@@ -1625,6 +1627,7 @@
 			isa = PBXGroup;
 			children = (
 				3A076BDD1F77D76700F5122A /* TKBuzzRouterTest.swift */,
+				3AD05D971F9498FE00549DF9 /* TKSettingsTest.swift */,
 				3AC4DD001DEE32B80026B238 /* TKWaypointRouterTest.swift */,
 			);
 			path = routing;
@@ -3183,6 +3186,7 @@
 				3AC4DD0B1DEE32B80026B238 /* TKWaypointRouterTest.swift in Sources */,
 				3AFFAE131F06D17000147990 /* SGCustomEventRecurrenceTest.swift in Sources */,
 				3AABDD9B1DF7C2040044A05B /* TKLocationInfoTest.swift in Sources */,
+				3AD05D981F9498FE00549DF9 /* TKSettingsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
