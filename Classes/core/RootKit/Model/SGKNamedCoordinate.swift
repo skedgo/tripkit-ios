@@ -238,8 +238,11 @@ extension SGKNamedCoordinate {
   }
   
   @objc public var url: URL? {
-    get { return data["url"] as? URL }
-    set { data["url"] = newValue }
+    get {
+      guard let urlString = data["url"] as? String else { return nil }
+      return URL(string: urlString)
+    }
+    set { data["url"] = newValue?.absoluteString }
   }
   
   @objc public var isDropped: Bool {
