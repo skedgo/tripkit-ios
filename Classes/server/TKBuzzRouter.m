@@ -580,7 +580,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
                                            bestOnly:(BOOL)bestOnly
                                        withASAPTime:(NSDate *)ASAPTime
 {
-	NSMutableDictionary *paras = [TKSettings defaultDictionary];
+	NSMutableDictionary *paras = [[TKSettings defaultDictionary] mutableCopy];
 	
   NSArray *sortedModes = [[modeIdentifiers allObjects] sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull mode1, NSString * _Nonnull mode2) {
     return [mode1 compare:mode2];
