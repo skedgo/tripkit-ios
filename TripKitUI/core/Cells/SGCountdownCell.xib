@@ -154,8 +154,8 @@
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert-red" translatesAutoresizingMaskIntoConstraints="NO" id="t7j-3e-hk3">
                                                 <rect key="frame" x="13" y="15.5" width="20" height="20"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" priority="999" constant="20" id="mDQ-pZ-HET"/>
                                                     <constraint firstAttribute="width" constant="20" id="maA-Sz-4Yn"/>
-                                                    <constraint firstAttribute="width" secondItem="t7j-3e-hk3" secondAttribute="height" multiplier="1:1" id="yos-lx-sMt"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Accessible text." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoU-qi-Pd9" userLabel="accessibleLabel" customClass="SGLabel">
@@ -188,8 +188,8 @@
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert-red" translatesAutoresizingMaskIntoConstraints="NO" id="Fxg-Wu-PIR">
                                                 <rect key="frame" x="13" y="9.5" width="20" height="20"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" priority="999" constant="20" id="gtt-Ps-mK0"/>
                                                     <constraint firstAttribute="width" constant="20" id="o5L-HF-JWf"/>
-                                                    <constraint firstAttribute="width" secondItem="Fxg-Wu-PIR" secondAttribute="height" multiplier="1:1" id="w9T-tX-9hk"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Alert text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBT-R2-Twf" customClass="SGLabel">
