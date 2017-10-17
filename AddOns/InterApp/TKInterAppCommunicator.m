@@ -88,7 +88,7 @@
   NSString* url = [NSString stringWithFormat: @"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
                    start.latitude, start.longitude,
                    end.latitude, end.longitude];
-  [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+  [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url] options:@{} completionHandler:nil];
 }
 
 + (void)openSegmentInAppleMaps:(TKSegment *)segment
@@ -150,7 +150,7 @@
     [directionsRequest appendFormat:@"x-success=%@", callback];
   }
   NSURL *directionsURL = [NSURL URLWithString:directionsRequest];
-  [[UIApplication sharedApplication] openURL:directionsURL];
+  [[UIApplication sharedApplication] openURL:directionsURL options:@{} completionHandler:nil];
 }
 
 + (BOOL)deviceHasWaze
@@ -168,7 +168,7 @@
   NSMutableString *directionsRequest = [NSMutableString stringWithFormat:@"waze://?ll=%f,%f&navigate=yes", destination.latitude, destination.longitude];
   
   NSURL *directionsURL = [NSURL URLWithString:directionsRequest];
-  [[UIApplication sharedApplication] openURL:directionsURL];
+  [[UIApplication sharedApplication] openURL:directionsURL options:@{} completionHandler:nil];
 }
 
 #pragma mark - Taxi helpers
@@ -320,7 +320,7 @@
     
   } else if ([action hasPrefix:@"tel:"]) {
     if ([self canCall]) {
-      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]];
+      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action] options:@{} completionHandler:nil];
     }
     
   } else if ([action hasPrefix:@"sms:"]) {
@@ -333,7 +333,7 @@
     if (openURLHandler) {
       openURLHandler(url, title);
     } else {
-      [[UIApplication sharedApplication] openURL:url];
+      [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }
     
   } else {
@@ -435,28 +435,22 @@
        referralCode = @"";
      }
      
-     NSString *urlString = [NSString stringWithFormat:@"gocatch://referral?code=%@&destination=%@&pickup=%@&lat=%f&lng=%f",
-                            referralCode,
-                            [destinationSuburb stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]],
-                            @"", // pickup address
-                            pickup.latitude,
-                            pickup.longitude];
-     
      if ([self deviceHasGoCatch]) {
        // open app directly
-       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+       NSString *urlString = [NSString stringWithFormat:@"gocatch://referral?code=%@&destination=%@&pickup=%@&lat=%f&lng=%f",
+                              referralCode,
+                              [destinationSuburb stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]],
+                              @"", // pickup address
+                              pickup.latitude,
+                              pickup.longitude];
+       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
      } else {
-       // copy URL to paste board
-       UIPasteboard *pasteboard = [UIPasteboard pasteboardWithName:UIPasteboardNameFind
-                                                            create:NO];
-       [pasteboard setURL:[NSURL URLWithString:urlString]];
-       
        // open app store
        if (openStoreHandler) {
          openStoreHandler(@(TKInterAppCommunicatorITunesAppIDGoCatch));
        } else {
          NSString *URLString = [NSString stringWithFormat:@"https://itunes.apple.com/au/app/gocatch/id%d?mt=8", TKInterAppCommunicatorITunesAppIDGoCatch];
-         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString] options:@{} completionHandler:nil];
        }
      }
      
@@ -471,13 +465,13 @@
   if ([self deviceHasIngogo]) {
     // just launch it
     NSString *urlString = @"ingogo://";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
     
   } else {
     if (openStoreHandler) {
       openStoreHandler(@(TKInterAppCommunicatorITunesAppIDIngogo));
     } else {
-      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"]];
+      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ingogo.mobi"] options:@{} completionHandler:nil];
     }
   }
 }
@@ -519,7 +513,7 @@
       }
     }
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
     
   } else {
     // https://developer.uber.com/v1/deep-linking/#mobile-web
@@ -555,7 +549,7 @@
     if (openURLHandler) {
       openURLHandler(url, title);
     } else {
-      [[UIApplication sharedApplication] openURL:url];
+      [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }
   }
 }
@@ -579,14 +573,14 @@
       [urlString appendFormat:@"&utm_source=%@", token];
     }
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
     
   } else if (openStoreHandler) {
     openStoreHandler(@(TKInterAppCommunicatorITunesAppIDOla));
     
   } else {
     NSString *URLString = [NSString stringWithFormat:@"https://itunes.apple.com/in/app/olacabs/id%d?mt=8", TKInterAppCommunicatorITunesAppIDOla];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString] options:@{} completionHandler:nil];
   }
 }
 
@@ -624,14 +618,14 @@
       [urlString appendFormat:@"&partner=%@", partner];
     }
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
     
   } else if (openStoreHandler) {
     openStoreHandler(@(TKInterAppCommunicatorITunesAppIDLyft));
     
   } else {
     NSString *URLString = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/lyft/id%d?mt=8", TKInterAppCommunicatorITunesAppIDLyft];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString] options:@{} completionHandler:nil];
   }
 }
 
@@ -687,7 +681,7 @@
           if (openURLHandler) {
             openURLHandler(url, title);
           } else {
-            [[UIApplication sharedApplication] openURL:url];
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
           }
         }];
      }];
@@ -696,7 +690,7 @@
     if (openURLHandler) {
       openURLHandler(url, title);
     } else {
-      [[UIApplication sharedApplication] openURL:url];
+      [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }
   }
 }

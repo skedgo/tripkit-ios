@@ -90,6 +90,12 @@
   return self;
 }
 
+- (void)setTimePicker:(UIDatePicker *)timePicker {
+  if (timePicker != nil) {
+    _timePicker = timePicker;
+  }
+}
+
 - (NSDate *)selectedDate
 {
   return self.timePicker.date;
