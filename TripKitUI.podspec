@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   # s.source       = { path: "." }
   # s.source       = { git: "." }
   s.source       = { git: "https://github.com/skedgo/tripkit-ios.git", tag: "v#{s.version}" }
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
   s.requires_arc = true
   
   s.prefix_header_file = "prefix.pch"
@@ -22,8 +22,11 @@ Pod::Spec.new do |s|
 
   s.dependency 'ASPolylineView'
   s.dependency 'Kingfisher'
-  s.dependency 'RxSwift', '~> 4.0.0-beta.0'
-  s.dependency 'RxCocoa', '~> 4.0.0-beta.0'
+  s.dependency 'RxSwift', '~> 4.0.0-rc.0'
+  s.dependency 'RxCocoa', '~> 4.0.0-rc.0'
+
+  s.dependency 'TGCardViewController'
+  s.dependency 'RxDataSources', '~> 3.0.0-rc.0'
 
   s.source_files = "TripKitUI/**/*.{h,m,swift}"
   s.resources    = [

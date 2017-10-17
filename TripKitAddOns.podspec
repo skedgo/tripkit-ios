@@ -17,14 +17,14 @@ Pod::Spec.new do |s|
   s.source_files = "AddOns/TripKitAddOns.h"
 
   s.subspec 'InterApp' do |cs|
-    cs.ios.deployment_target = '9.0'
+    cs.ios.deployment_target = '10.0'
 
     cs.dependency 'TripKit', "~> #{s.version}"
     cs.source_files = "AddOns/InterApp/**/*.{h,m,swift}"
   end
 
   s.subspec 'Share' do |cs|
-    cs.ios.deployment_target = '9.0'
+    cs.ios.deployment_target = '10.0'
     cs.osx.deployment_target = '10.11'
 
     cs.dependency 'TripKit', "~> #{s.version}"
