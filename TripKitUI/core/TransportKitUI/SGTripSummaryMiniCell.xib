@@ -21,30 +21,30 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBy-JO-UKB" userLabel="wrapper">
-                        <rect key="frame" x="12" y="11" width="395" height="86"/>
+                        <rect key="frame" x="20" y="11" width="379" height="86"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zv-rJ-xZN" customClass="SGLabel">
-                                <rect key="frame" x="8" y="8" width="354" height="26"/>
+                                <rect key="frame" x="8" y="8" width="338" height="26"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" red="0.23577216267585754" green="0.23576508462429047" blue="0.23576909303665161" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-marker-tick" translatesAutoresizingMaskIntoConstraints="NO" id="NkC-IH-a39">
-                                <rect key="frame" x="370" y="0.0" width="25" height="25"/>
+                                <rect key="frame" x="354" y="0.0" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="SfW-x6-GyB"/>
                                     <constraint firstAttribute="width" secondItem="NkC-IH-a39" secondAttribute="height" multiplier="1:1" id="rvX-97-kXg"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-marker-alert" translatesAutoresizingMaskIntoConstraints="NO" id="7ex-PD-l5f">
-                                <rect key="frame" x="370" y="0.0" width="25" height="25"/>
+                                <rect key="frame" x="354" y="0.0" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="Ruy-oQ-Lla"/>
                                     <constraint firstAttribute="width" secondItem="7ex-PD-l5f" secondAttribute="height" multiplier="1:1" id="qg8-AD-0EE"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="atZ-93-Zgn" customClass="SGTripSegmentsView">
-                                <rect key="frame" x="0.0" y="38" width="395" height="40"/>
+                                <rect key="frame" x="0.0" y="38" width="379" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="999" constant="40" id="B6B-3b-eXY"/>
                                 </constraints>
@@ -68,9 +68,9 @@
                 </subviews>
                 <color key="backgroundColor" red="0.91188269853591919" green="0.91604721546173096" blue="0.93601572513580322" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="UBy-JO-UKB" secondAttribute="trailing" constant="-8" id="8IL-xD-0TV"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="UBy-JO-UKB" secondAttribute="trailing" id="8IL-xD-0TV"/>
                     <constraint firstItem="UBy-JO-UKB" firstAttribute="top" secondItem="a6J-4w-bRF" secondAttribute="topMargin" id="RHh-oq-kAS"/>
-                    <constraint firstItem="UBy-JO-UKB" firstAttribute="leading" secondItem="a6J-4w-bRF" secondAttribute="leadingMargin" constant="-8" id="byo-OO-6cW"/>
+                    <constraint firstItem="UBy-JO-UKB" firstAttribute="leading" secondItem="a6J-4w-bRF" secondAttribute="leadingMargin" id="byo-OO-6cW"/>
                     <constraint firstAttribute="bottomMargin" secondItem="UBy-JO-UKB" secondAttribute="bottom" id="cqy-O8-k1r"/>
                 </constraints>
             </tableViewCellContentView>
