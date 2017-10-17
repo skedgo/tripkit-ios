@@ -35,7 +35,7 @@ public class TKUIResultsCard: TGTableCard {
   fileprivate let accessoryView = TKUIResultsAccessoryView.instantiate()
 
   
-  public init(destination: MKAnnotation) {
+  public init(destination: MKAnnotation, initialPosition: TGCardPosition? = nil /* keep same as before (so that user can drop another pin */) {
     cardModel = TKUIResultsCardModel(destination: destination)
     let mapManager = TKUIResultsMapManager(model: cardModel)
     
@@ -50,12 +50,12 @@ public class TKUIResultsCard: TGTableCard {
     super.init(
       title: title,
       dataSource: dataSource, accessoryView: accessoryView, mapManager: mapManager,
-      initialPosition: nil // keep same as before (so that user can drop another pin)
+      initialPosition: initialPosition
     )
   }
   
   
-  public init(request: TripRequest) {
+  public init(request: TripRequest, initialPosition: TGCardPosition? = .extended /* show fully as we'll have routes shortly */) {
     cardModel = TKUIResultsCardModel(request: request)
     let mapManager = TKUIResultsMapManager(model: cardModel)
     
@@ -63,7 +63,7 @@ public class TKUIResultsCard: TGTableCard {
       // TODO: Localise
       title: "Routes",
       dataSource: dataSource, accessoryView: accessoryView, mapManager: mapManager,
-      initialPosition: .extended // show fully as we'll have routes shortly
+      initialPosition: initialPosition
     )
   }
   
