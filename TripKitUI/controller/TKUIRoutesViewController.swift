@@ -9,28 +9,41 @@ import UIKit
 
 import TGCardViewController
 
-open class TKUIRoutesViewController: TGCardViewController {
+public protocol TKUIRoutesViewControllerDelegate: TGCardViewControllerDelegate {
+  
+}
 
-  override open func viewDidLoad() {
-    super.viewDidLoad()
-
-    // Do any additional setup after loading the view.
+public class TKUIRoutesViewController: TGCardViewController {
+  
+  private let topCard: TGCard
+  
+  public init(destination: MKAnnotation) {
+    topCard = TKUIResultsCard(destination: destination)
+    
+    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
   }
 
-  override open func didReceiveMemoryWarning() {
+  public init(request: TripRequest) {
+    topCard = TKUIResultsCard(request: request)
+    
+    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+  }
+
+  
+  required public init(coder aDecoder: NSCoder) {
+    fatalError("Use the `init(destination:)` or `init(request:) methods instead.")
+  }
+  
+  override public func viewDidLoad() {
+    super.viewDidLoad()
+
+    push(topCard)
+    
+    // TODO: We should make sure that the top card, still has a close button, so that you can get back to the previous screen when this is presented in an app.
+  }
+
+  override public func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
-
-  /*
-  // MARK: - Navigation
-
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      // Get the new view controller using segue.destinationViewController.
-      // Pass the selected object to the new view controller.
-  }
-  */
-
 }
