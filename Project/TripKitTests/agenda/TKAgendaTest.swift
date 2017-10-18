@@ -147,13 +147,13 @@ fileprivate extension TKAgendaInput {
   
   static func testInput() throws -> TKAgendaInput {
     let home = TKAgendaInput.HomeInput(
-      location: TKAgendaInput.Location(what3word: "schwärme.glaubt.wirkung")
+      location: TKAgendaInput.Location(what3word: "schwärme.glaubt.wirkung")!
     )
     
     let work = TKAgendaInput.EventInput(
       id: "work",
       title: "Work",
-      location: TKAgendaInput.Location(what3word: "eintopf.kleid.flache"),
+      location: TKAgendaInput.Location(what3word: "eintopf.kleid.flache")!,
       startTime: try Date(iso8601: "2017-05-30T09:00:00+02:00"),
       endTime: try Date(iso8601: "2017-05-30T16:30:00+02:00"),
       priority: .routine
@@ -162,7 +162,7 @@ fileprivate extension TKAgendaInput {
     let meeting = TKAgendaInput.EventInput(
       id: "event",
       title: "Meeting",
-      location: TKAgendaInput.Location(what3word: "taschen.ehrenvolle.erfinden"),
+      location: TKAgendaInput.Location(what3word: "taschen.ehrenvolle.erfinden")!,
       startTime: try Date(iso8601: "2017-05-30T12:00:00+02:00"),
       endTime: try Date(iso8601: "2017-05-30T13:00:00+02:00"),
       priority: .calendarEvent
@@ -171,7 +171,7 @@ fileprivate extension TKAgendaInput {
     let excludedEvent = TKAgendaInput.EventInput(
       id: "event2",
       title: "Excluded Event",
-      location: TKAgendaInput.Location(what3word: "taschen.ehrenvolle.erfinden"),
+      location: TKAgendaInput.Location(what3word: "taschen.ehrenvolle.erfinden")!,
       startTime: try Date(iso8601: "2017-05-30T12:30:00+02:00"),
       endTime: try Date(iso8601: "2017-05-30T13:30:00+02:00"),
       priority: .calendarEvent,
