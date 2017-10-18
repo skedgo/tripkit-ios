@@ -16,7 +16,6 @@
 #import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
-
 #import "SGStyleManager+SGCoreUI.h"
 
 typedef enum {
@@ -29,6 +28,7 @@ typedef enum {
 
 @property (nonatomic, strong) NSDate *time;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) SGKGrouping position;
 
 @property (weak, nonatomic) IBOutlet UIView *contentWrapper;
 
@@ -42,43 +42,9 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *timeWrapperWidth;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *timeWrapperLeadingSpace;
 
-// Some default values from storyboard
-@property (nonatomic, assign) UIEdgeInsets alertViewLayoutMargins;
-@property (nonatomic, assign) UIEdgeInsets contentViewLayoutMargins;
-@property (nonatomic, assign) UIEdgeInsets timeWrapperLayoutMargins;
-
-@property (nonatomic, assign) CGFloat titleLeadingSpaceValue;
-@property (nonatomic, assign) CGFloat iconWidthValue;
-@property (nonatomic, assign) CGFloat timeWrapperWidthValue;
-@property (nonatomic, assign) CGFloat timeWrapperLeadingSpaceValue;
-@property (nonatomic, assign) CGFloat alertIconWidthValue;
-
 @end
 
 @implementation SGCountdownCell
-
-+ (NSString *)reuseId
-{
-  return NSStringFromClass([self class]);
-}
-
-+ (UINib *)nib
-{
-  return [UINib nibWithNibName:NSStringFromClass([self class])
-                        bundle:[NSBundle bundleForClass:[self class]]];
-}
-
-- (void)updateContentAlpha:(CGFloat)alpha
-{
-  self.modeIcon.alpha = alpha;
-  self.title.alpha = alpha;
-  self.subtitle.alpha = alpha;
-  self.subsubTitle.alpha = alpha;
-  self.alertLabel.alpha = alpha;
-  self.alertIcon.alpha = alpha;
-  self.accessibleLabel.alpha = alpha;
-  self.accessibleIcon.alpha = alpha;
-}
 
 #pragma mark - Custom accessors
 
@@ -119,24 +85,16 @@ typedef enum {
   // This property can be set via appearance proxy. If not set, we'd use
   // the root tint color.
   _preferredTintColor = self.tintColor;
-  
-  BOOL useColorOnLabel = NO;
-  
-  if (! useColorOnLabel) {
-    self.title.backgroundColor = [UIColor clearColor];
-    self.subtitle.backgroundColor = [UIColor clearColor];
-    self.subsubTitle.backgroundColor = [UIColor clearColor];
-    self.alertLabel.backgroundColor = [UIColor clearColor];
-  }
-  
-  [self readDefaultDimensionsFromStoryboard];
 }
 
 - (void)prepareForReuse
 {
-  [super prepareForReuse];  
+  [super prepareForReuse];
+  
   [self _resetContents];
-  [self restoreStoryboardDimensions];
+  
+  self.contentWrapperTopConstraint.constant = 0;
+  self.contentWrapperBottomConstraint.constant = 0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -164,8 +122,8 @@ typedef enum {
     self.iconWidth.constant = 0.0f;
     self.titleLeadingSpace.constant = 0.0f;
   } else {
-    self.iconWidth.constant = self.iconWidthValue;
-    self.titleLeadingSpace.constant = self.titleLeadingSpaceValue;
+    self.iconWidth.constant = 30.0f;
+    self.titleLeadingSpace.constant = 8.0f;
   }
   
   if (self.time == nil) {
@@ -173,29 +131,14 @@ typedef enum {
     self.timeWrapperLeadingSpace.constant = 0.0f;
     self.timeWrapper.layoutMargins = UIEdgeInsetsZero;
   } else {
-    self.timeWrapperWidth.constant = self.timeWrapperWidthValue;
-    self.timeWrapperLeadingSpace.constant = self.timeWrapperLeadingSpaceValue;
-    self.timeWrapper.layoutMargins = self.timeWrapperLayoutMargins;
+    self.timeWrapperWidth.constant = 64.0f;
+    self.timeWrapperLeadingSpace.constant = 8.0f;
+    self.timeWrapper.layoutMargins = UIEdgeInsetsMake(8, 8, 8, 8);
   }
   
+  [self adjustContentWrapperWithBasedOn:self.position];
+  
   [super updateConstraints];
-}
-
-- (void)layoutSubviews
-{
-  // Make sure the contentView does a layout pass here so that its subviews have their frames set, which we
-  // need to use to set the preferredMaxLayoutWidth below.
-  [self.contentView setNeedsLayout];
-  [self.contentView layoutIfNeeded];
-  
-  // Set the preferredMaxLayoutWidth of the mutli-line bodyLabel based on the evaluated width of the label's frame,
-  // as this will allow the text to wrap correctly, and as a result allow the label to take on the correct height.
-  self.title.preferredMaxLayoutWidth = CGRectGetWidth(self.title.bounds);
-  self.subtitle.preferredMaxLayoutWidth = CGRectGetWidth(self.subtitle.bounds);
-  self.subsubTitle.preferredMaxLayoutWidth = CGRectGetWidth(self.subsubTitle.bounds);
-  self.alertLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.alertLabel.bounds);
-  
-  [super layoutSubviews];
 }
 
 #pragma mark - Private: Configuration
@@ -209,7 +152,11 @@ typedef enum {
                    position:(SGKGrouping)position
                  stripColor:(UIColor *)stripColor
 {
+  self.preservesSuperviewLayoutMargins = NO;
+  self.contentView.preservesSuperviewLayoutMargins = NO;
+  
   self.time = time;
+  self.position = position;
   
   [self.modeIcon setImageWithURL:iconImageURL placeholderImage:icon];
   self.modeIcon.tintColor = [SGStyleManager darkTextColor];
@@ -237,35 +184,6 @@ typedef enum {
   
   if (position != SGKGrouping_EdgeToEdge) {
     [SGStyleManager addDefaultOutline:self.contentWrapper];
-  }
-  
-  [self adjustLayoutMarginsForPosition:position];
-  
-  [self setNeedsUpdateConstraints];
-}
-
-- (void)adjustLayoutMarginsForPosition:(SGKGrouping)position
-{
-  switch (position) {
-    case SGKGrouping_Start:
-      self.contentView.layoutMargins = UIEdgeInsetsMake(self.contentViewLayoutMargins.top, 0, 0, 0);
-      break;
-      
-    case SGKGrouping_End:
-      self.contentView.layoutMargins = UIEdgeInsetsMake(0, 0, self.contentViewLayoutMargins.bottom, 0);
-      break;
-      
-    case SGKGrouping_Middle:
-      self.contentView.layoutMargins = UIEdgeInsetsZero;
-      break;
-      
-    case SGKGrouping_Individual:
-    case SGKGrouping_EdgeToEdge:
-      self.contentView.layoutMargins = self.contentViewLayoutMargins;
-      break;
-      
-    default:
-      break;
   }
 }
 
@@ -510,32 +428,16 @@ typedef enum {
   
   self.footnoteView.hidden = YES;
   self.centerMainStack.spacing = 0.0f;
-  for (UIView *subview in self.footnoteView.subviews) {
-    [subview removeFromSuperview];
-  }
+  [self.footnoteView removeAllSubviews];
   
   [self resetLabels];
   [self resetImageViews];
-  [self resetConstraints];
   
   self.accessibleSeparator.hidden = YES;
   self.alertSeparator.hidden = YES;
   
   [self.timer invalidate];
   self.timer = nil;
-}
-
-- (void)resetConstraints
-{
-//  // Default is not showing occupany. Note that, the sequence of activation
-//  // and deactivation is important. In this case, we must first deactivate.
-//  for (NSLayoutConstraint *constraint in self.showFootnoteConstraints) {
-//    constraint.active = NO;
-//  }
-//  
-//  for (NSLayoutConstraint *constraint in self.hideFootnoteConstraints) {
-//    constraint.active = YES;
-//  }
 }
 
 - (void)resetLabels
@@ -566,32 +468,6 @@ typedef enum {
 - (void)resetImageView:(UIImageView *)imageView
 {
   imageView.image = nil;
-}
-
-- (void)restoreStoryboardDimensions
-{
-  self.alertView.layoutMargins = self.alertViewLayoutMargins;
-  self.contentView.layoutMargins = self.contentViewLayoutMargins;
-  self.timeWrapper.layoutMargins = self.timeWrapperLayoutMargins;
-  
-  self.titleLeadingSpace.constant = self.titleLeadingSpaceValue;
-  self.iconWidth.constant = self.iconWidthValue;
-  self.timeWrapperWidth.constant = self.timeWrapperWidthValue;
-  self.timeWrapperLeadingSpace.constant = self.timeWrapperLeadingSpaceValue;
-  self.alertIconWidth.constant = self.alertIconWidthValue;
-}
-
-- (void)readDefaultDimensionsFromStoryboard
-{
-  self.alertViewLayoutMargins = self.alertView.layoutMargins;
-  self.contentViewLayoutMargins = self.contentView.layoutMargins;
-  self.timeWrapperLayoutMargins = self.timeWrapper.layoutMargins;
-  
-  self.titleLeadingSpaceValue = self.titleLeadingSpace.constant;
-  self.iconWidthValue = self.iconWidth.constant;
-  self.timeWrapperWidthValue = self.timeWrapperWidth.constant;
-  self.timeWrapperLeadingSpaceValue = self.timeWrapperLeadingSpace.constant;
-  self.alertIconWidthValue = self.alertIconWidth.constant;
 }
 
 @end

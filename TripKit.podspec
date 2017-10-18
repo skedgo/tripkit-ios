@@ -18,8 +18,8 @@ Pod::Spec.new do |s|
   s.prefix_header_file = "prefix.pch"
 
   s.dependency 'ASPolygonKit'
-  s.dependency 'RxSwift', '~> 4.0.0-beta.0'
-  s.dependency 'RxCocoa', '~> 4.0.0-beta.0'
+  s.dependency 'RxSwift', '~> 4.0.0'
+  s.dependency 'RxCocoa', '~> 4.0.0'
 
   s.source_files = "Classes/**/*.{h,m,swift}"
 

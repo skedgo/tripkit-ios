@@ -10,6 +10,9 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "延誤%1$@ (%2$@ 的班次)";
 
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@ 提示";
+
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "自行車友善度%@";
 
@@ -24,13 +27,13 @@
 "%@ w/o traffic" = "%@ 路況良好下";
 
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
-"%@ wheelchair friendly" = "輪椅友善度%@";
+"%@ wheelchair friendly" = "無障礙通道比例 %@";
 
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1站";
 
 /* No comment provided by engineer. */
-"Alerts" = "提示";
+"Alerts" = "警示";
 
 /* apple maps directions action */
 "Apple Maps" = "蘋果地圖";
@@ -89,6 +92,9 @@
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "只有幾個座位";
+
+/* Indicating a path is wheelchair/cycyling friendly */
+"Friendly" = "友善";
 
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "出發地: %@";
@@ -193,6 +199,9 @@
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "設定";
 
+/* Title for button that, when tapped, shows something, e.g., a list of alert */
+"Show" = "顯示";
+
 /* Show website action */
 "Show website" = "開啟網站";
 
@@ -205,6 +214,12 @@
 /* Title for a trip */
 "Trip" = "旅程";
 
+/* Indicating a path is wheelchair/cycyling unfriendly */
+"Unfriendly" = "不友善";
+
+/* Indicating the wheelchair/cycling friendliness of a path is unknown */
+"Unknown" = "未知";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "%@前更新";
 
@@ -215,10 +230,7 @@
 "We are busy getting your upcoming trip. Please wait..." = "我們正忙著規劃您的路線．請稍候．．．";
 
 /* No comment provided by engineer. */
-"We'll keep you updated with the latest transit alerts here" = "我們將在這裡提供您最新的交通提示";
-
-/* No comment provided by engineer. */
-"Wheelchair accessible" = "無障礙通道";
+"We'll keep you updated with the latest transit alerts here" = "我們將在這裡提供您最新的交通警示";
 
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "於%@";
