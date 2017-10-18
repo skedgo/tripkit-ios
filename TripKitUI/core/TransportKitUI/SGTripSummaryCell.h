@@ -37,6 +37,8 @@ typedef void(^SGTripSummaryCellActionBlock)(UIControl *sender);
 @property (nonatomic, assign) BOOL showCosts;
 @property (nonatomic, assign) BOOL allowWheelchairIcon;
 @property (nonatomic, assign) BOOL simpleTimes;
+@property (nonatomic, assign) BOOL preferNoPaddings;
+
 @property (nullable, nonatomic, strong) NSTimeZone *relativeTimeZone;
 
 @property (nullable, nonatomic, strong) UIColor *preferredTintColor UI_APPEARANCE_SELECTOR;
@@ -44,9 +46,6 @@ typedef void(^SGTripSummaryCellActionBlock)(UIControl *sender);
 + (UINib *)nib;
 + (UINib *)edgeToEdgeNib;
 + (UINib *)nanoNib;
-
-- (void)adjustToFillContentView;
-- (void)adjustToFillContentViewWidth;
 
 // Internals
 @property (nullable, nonatomic, copy) SGTripSummaryCellActionBlock _actionBlock;

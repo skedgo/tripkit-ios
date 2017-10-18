@@ -21,6 +21,9 @@
 
 @interface SGCountdownCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentWrapperTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentWrapperBottomConstraint;
+
 @property (nonatomic, weak) IBOutlet UIView *coloredStrip;
 @property (nonatomic, weak) IBOutlet UIImageView *modeIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *tickView;
@@ -73,11 +76,6 @@
 
 // Tap actions
 @property (nonatomic, copy) void (^alertPresentationHandler)(NSArray<Alert *> *alerts);
-
-+ (UINib *)nib;
-+ (NSString *)reuseId;
-
-- (void)updateContentAlpha:(CGFloat)alpha;
 
 // Internals
 - (void)_resetContents;

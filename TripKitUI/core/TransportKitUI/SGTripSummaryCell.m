@@ -29,8 +29,6 @@
 @property (nonatomic, assign) BOOL durationFirst;
 @property (nonatomic, assign) BOOL arriveBefore;
 
-@property (nonatomic, assign) UIEdgeInsets xibContentMargins;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainLabelTrailingConstraint;
 
 @end
@@ -90,6 +88,7 @@
   [super prepareForReuse];
   
   self.wrapper.backgroundColor = [UIColor whiteColor];
+  self.contentView.layoutMargins = UIEdgeInsetsMake(8, 8, 8, 8);
   
   self._trip = nil;
   
@@ -133,14 +132,10 @@
                         bundle:[NSBundle bundleForClass:aClass]];
 }
 
-- (void)adjustToFillContentView
+- (void)setPreferNoPaddings:(BOOL)preferNoPaddings
 {
-  self.contentView.layoutMargins = UIEdgeInsetsZero;
-}
-
-- (void)adjustToFillContentViewWidth
-{
-  self.contentView.layoutMargins = UIEdgeInsetsMake(self.xibContentMargins.top, 0, self.xibContentMargins.bottom, 0);
+  _preferNoPaddings = preferNoPaddings;
+  self.contentView.layoutMargins = preferNoPaddings ? UIEdgeInsetsZero : UIEdgeInsetsMake(8, 8, 8, 8);
 }
 
 #pragma mark - Custom accessors
@@ -196,15 +191,18 @@
 - (void)didInitialize
 {
   [SGStyleManager addDefaultOutline:self.wrapper];
-
+  
+  self.preservesSuperviewLayoutMargins = NO;
+  self.contentView.preservesSuperviewLayoutMargins = NO;
+  
+  self.wrapper.layer.cornerRadius = 4.0f;
+  
   self.showCosts = YES;
   self._objcDisposeBag = [[SGObjCDisposeBag alloc] init];
   
   [self.actionButton addTarget:self
                         action:@selector(actionButtonPressed:)
               forControlEvents:UIControlEventTouchUpInside];
-  
-  _xibContentMargins = self.contentView.layoutMargins;
   
   _preferredTintColor = self.tintColor;
 }
