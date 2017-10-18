@@ -193,11 +193,11 @@ extension SGCountdownCell {
 
 extension SGCountdownCell {
   
-  public class func reuseId() -> String {
+  @objc public class func reuseId() -> String {
     return "SGCountdownCell"
   }
   
-  public class func nib() -> UINib {
+  @objc public class func nib() -> UINib {
     return UINib(nibName: "SGCountdownCell", bundle: Bundle(for: SGCountdownCell.self))
   }
   

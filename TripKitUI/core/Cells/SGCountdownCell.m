@@ -428,7 +428,7 @@ typedef enum {
   
   self.footnoteView.hidden = YES;
   self.centerMainStack.spacing = 0.0f;
-  self.footnoteView.removeAllSubviews;
+  [self.footnoteView removeAllSubviews];
   
   [self resetLabels];
   [self resetImageViews];
