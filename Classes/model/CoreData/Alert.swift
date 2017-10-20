@@ -10,6 +10,10 @@ import Foundation
 
 extension Alert {
   
+  public enum ActionIdentifier {
+    static let excludingStopsFromRouting: String = "excludedStopCodes"
+  }
+  
   @objc public var infoIconType: STKInfoIconType {
     switch alertSeverity {
     case .info, .warning: return .warning
@@ -20,8 +24,8 @@ extension Alert {
   /// This is an array of `stopCode`. A non-empty value indicates the alert requires a 
   /// reroute action because, e.g., the stops have become inaccessible. This property
   /// is typically passed to a routing request as stops to avoid during routing.
-  public var excludedStops: [String] {
-    return action?["excludedStopCodes"] as? [String] ?? []
+  public var stopsExcludedFromRouting: [String] {
+    return action?[ActionIdentifier.excludingStopsFromRouting] as? [String] ?? []
   }
   
 }

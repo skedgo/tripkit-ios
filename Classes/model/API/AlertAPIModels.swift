@@ -11,11 +11,16 @@ import Foundation
 extension API {
   
   public struct Alert: Codable {
-    
     public enum Severity: String, Codable {
       case info = "info"
       case warning = "warning"
       case alert = "alert"
+    }
+    
+    public struct Action: Codable {
+      let text: String
+      let type: String
+      let excludedStopCodes: [String]?
     }
     
     let hashCode: Int
@@ -23,15 +28,13 @@ extension API {
     let title: String
     let text: String?
     let url: URL?
+    let action: Action?
     
     let remoteIcon: URL?
     let location: API.Location?
     let lastUpdate: TimeInterval?
     let startTime: TimeInterval?
     let endTime: TimeInterval?
-    
-    // FIXME: Add action again
-    
   }
   
   /// Replaces the previous `TKAlertWrapper`

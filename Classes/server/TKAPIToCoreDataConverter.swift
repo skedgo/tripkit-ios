@@ -227,6 +227,7 @@ extension TKAPIToCoreDataConverter {
 // MARK: - Alerts
 
 extension Alert {
+  
   convenience init(from model: API.Alert, into context: NSManagedObjectContext) {
     if #available(iOS 10.0, macOS 10.12, *) {
       self.init(context: context)
@@ -257,20 +258,23 @@ extension Alert {
 
   func update(from model: API.Alert) {
     // only takes things we deem dynamic
-    // FIXME: Add action
-    text   = model.text
+    text = model.text
+    
+    if let avoidedInRouting = model.action?.excludedStopCodes {
+      action = [ActionIdentifier.excludingStopsFromRouting: avoidedInRouting]
+    }
   }
-
+  
 }
 
 extension TKAPIToCoreDataConverter {
   
   static func updateOrAddAlerts(_ alerts: [API.Alert]?, in context: NSManagedObjectContext) {
     guard let alerts = alerts else { return }
-    
     for alertModel in alerts {
       // first we check if have the alert already
       if let existing = Alert.fetch(withHashCode: NSNumber(value: alertModel.hashCode), inTripKitContext: context) {
+    
         existing.update(from: alertModel)
       } else {
         _ = Alert(from: alertModel, into: context)
