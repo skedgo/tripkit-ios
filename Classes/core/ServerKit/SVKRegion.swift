@@ -50,6 +50,11 @@ public class SVKRegion : NSObject, Codable {
       return MKMapRect(origin: center, size: size)
     }
     
+    init(title: String, coordinate: CLLocationCoordinate2D) {
+      self.title = title
+      self.coordinate = coordinate
+    }
+    
     // MARK: Codable
     
     private enum CodingKeys: String, CodingKey {
@@ -90,6 +95,14 @@ public class SVKRegion : NSObject, Codable {
     return MKPolygon(coordinates: coordinates, count: coordinates.count)
   }()
   
+  init(name: String, modes: [String], cities: [City]) {
+    self.name = name
+    self.modeIdentifiers = modes
+    self.cities = cities
+    self.urls = []
+    self.encodedPolygon = ""
+    self.timeZone = .current
+  }
   
   fileprivate init(asInternationalNamed name: String, modes: [String]) {
     encodedPolygon        = ""
