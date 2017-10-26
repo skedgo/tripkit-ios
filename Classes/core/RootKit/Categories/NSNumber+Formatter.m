@@ -31,9 +31,7 @@
 }
 
 - (NSString *)toCarbonString
-{
-//TODO: Use NSMassFormatter in iOS 8 - http://nshipster.com/nsformatter/
-  
+{  
   if ([self floatValue] == 0.0) {
     return NSLocalizedStringFromTableInBundle(@"No CO₂", @"Shared", [SGStyleManager bundle], nil);
   } else {
