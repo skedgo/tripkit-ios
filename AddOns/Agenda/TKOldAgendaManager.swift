@@ -73,7 +73,7 @@ public class TKOldAgendaManager {
       return agenda
     }
     
-    // FIXME: For now, we just use the items of the first data source
+    // TODO: For now, we just use the items of the first data source. Ideally we'd merge them.
     guard let inputItems = dataSources.first?.items(dateComponents) else {
       fatalError("Data sources shalt not be empty")
     }

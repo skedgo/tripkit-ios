@@ -56,7 +56,7 @@ extension TKWaypointRouter {
   
   private static func nextTripParas(pattern: [TKSegmentPattern], departure: Date, using vehicles: [STKVehicular]) -> [String: Any] {
     
-    let now = Date() // TODO: Add 60 seconds here
+    let now = Date()
     let leaveAt = departure > now ? departure : now
     
     var paras = [String: Any]()
