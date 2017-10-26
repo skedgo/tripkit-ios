@@ -9,9 +9,7 @@ import UIKit
 
 public class TKPathFriendlinessView: UIView {
   
-  @IBOutlet weak var titleLabel: UILabel!
-  
-  // Bar chart  
+  // Bar chart
   @IBOutlet weak var friendlyBarView: UIView!
   @IBOutlet weak var unfriendlyBarView: UIView!
   @IBOutlet weak var unknownBarView: UIView!
@@ -25,6 +23,9 @@ public class TKPathFriendlinessView: UIView {
   @IBOutlet var friendlyLegendLabel: UILabel!
   @IBOutlet var unfriendlyLegendLabel: UILabel!
   @IBOutlet var unknownLegendLabel: UILabel!
+  @IBOutlet weak var friendlyLegendDot: UIView!
+  @IBOutlet weak var unfriendlyLegendDot: UIView!
+  @IBOutlet weak var unknownLegendDot: UIView!
   
   @IBOutlet weak var friendlyToUnfriendlySpacing: NSLayoutConstraint!
   @IBOutlet weak var unfriendlyToUnknownSpacing: NSLayoutConstraint!
@@ -72,15 +73,6 @@ public class TKPathFriendlinessView: UIView {
     let formatter = NumberFormatter()
     formatter.numberStyle = .percent
     
-    // Update title
-    let format: String
-    if segment.isCycling() {
-      format = NSLocalizedString("%@ cycle friendly", tableName: "TripKit", bundle: .tripKit, comment: "Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.")
-    } else {
-      format = NSLocalizedString("%@ wheelchair friendly", tableName: "TripKit", bundle: .tripKit, comment: "Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'.")
-    }
-    titleLabel.text = String(format: format, formatter.string(from: NSNumber(value: friendlyRatio))!)
-    
     // Legend
     friendlyLegendLabel.text = Loc.FriendlyPath
     unfriendlyLegendLabel.text = Loc.UnfriendlyPath
@@ -106,10 +98,16 @@ public class TKPathFriendlinessView: UIView {
     unknownMetreLabel.text = distanceFormatter.string(fromDistance: unknownMetres)
     
     // Hide labels if required
-    friendlyMetreLabel.isHidden = friendlyMetres == 0
-    unfriendlyMetreLabel.isHidden = unfriendlyMetres == 0
-    unknownMetreLabel.isHidden = unknownMetres == 0
-    
+    friendlyMetreLabel.isHidden = friendlyMetres < 0.5
+    unfriendlyMetreLabel.isHidden = unfriendlyMetres < 0.5
+    unknownMetreLabel.isHidden = unknownMetres < 0.5
+    friendlyLegendLabel.isHidden = friendlyMetreLabel.isHidden
+    unfriendlyLegendLabel.isHidden = unfriendlyMetreLabel.isHidden
+    unknownLegendLabel.isHidden = unknownMetreLabel.isHidden
+    friendlyLegendDot.isHidden = friendlyMetreLabel.isHidden
+    unfriendlyLegendDot.isHidden = unfriendlyMetreLabel.isHidden
+    unknownLegendDot.isHidden = unknownMetreLabel.isHidden
+
     // Account for non-zero width of hidden labels
     let friendlyLabelWidth = friendlyMetreLabel.widthAnchor.constraint(equalToConstant: 0)
     let unfriendlyLabelWidthConstraint = unfriendlyMetreLabel.widthAnchor.constraint(equalToConstant: 0)
@@ -119,8 +117,8 @@ public class TKPathFriendlinessView: UIView {
     unfriendlyLabelWidthConstraint.isActive = unfriendlyMetreLabel.isHidden
     unknownLabelWidthConstraint.isActive = unknownMetreLabel.isHidden
     
-    friendlyToUnfriendlySpacing.constant = friendlyMetres == 0 ? 0 : 8
-    unfriendlyToUnknownSpacing.constant = unknownMetres == 0 ? 0 : 8
+    friendlyToUnfriendlySpacing.constant = friendlyMetres < 0.5 ? 0 : 8
+    unfriendlyToUnknownSpacing.constant = unknownMetres < 0.5 ? 0 : 8
   }
   
 }
