@@ -428,7 +428,7 @@
   }
   
   // use our default parameters and append those from the URL
-  NSMutableDictionary *paras = [TKSettings defaultDictionary];
+  NSMutableDictionary *paras = [[TKSettings defaultDictionary] mutableCopy];
   NSString *query = url.query;
   for (NSString *option in [query componentsSeparatedByString:@"&"]) {
     NSArray *pair = [option componentsSeparatedByString:@"="];
