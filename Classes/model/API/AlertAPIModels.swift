@@ -99,5 +99,5 @@ extension API.Alert.Action: Codable {
       try container.encode("excludedStopCodes", forKey: .type)
       try container.encode(excludedStops, forKey: .excludedStopCodes)
     }
-  }  
+  }
 }
