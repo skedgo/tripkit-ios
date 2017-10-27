@@ -561,6 +561,7 @@
 		D3051F5C1F7B6F0500EC8278 /* TKAlertInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3051F5A1F7B6F0400EC8278 /* TKAlertInfoView.swift */; };
 		D37D871D1F8E477A0096EDA7 /* TKPathFriendlinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37D871B1F8E477A0096EDA7 /* TKPathFriendlinessView.swift */; };
 		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
+		D3EAAE331FA2EED30038C82F /* TKAlertModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EAAE321FA2EED30038C82F /* TKAlertModelTest.swift */; };
 		F8FE40C0F8F106E668B2BDD9 /* Pods_TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D90B11191B5E08C85990BAE4 /* Pods_TripKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -1192,6 +1193,7 @@
 		D37D871C1F8E477A0096EDA7 /* TKPathFriendlinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKPathFriendlinessView.xib; sourceTree = "<group>"; };
 		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D3A779281E513C5000BBAF6C /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D3EAAE321FA2EED30038C82F /* TKAlertModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertModelTest.swift; sourceTree = "<group>"; };
 		D90B11191B5E08C85990BAE4 /* Pods_TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1668,6 +1670,7 @@
 			children = (
 				3AFFAE0D1F06D16700147990 /* PolylineDecoderTest.swift */,
 				3AFFAE0E1F06D16700147990 /* STKModeHelperTest.swift */,
+				D3EAAE321FA2EED30038C82F /* TKAlertModelTest.swift */,
 				3A14BE2D1F8F8165008B1B54 /* TKBookingDecodingTest.swift */,
 				3AC4DCFD1DEE32B80026B238 /* TKBuzzInfoProviderTest.swift */,
 				3A3C9BAF1F75219500C8D476 /* TKDeparturesModelTest.swift */,
@@ -3199,6 +3202,7 @@
 				3A076BDE1F77D76700F5122A /* TKBuzzRouterTest.swift in Sources */,
 				3AA39AC31F7923290066CC94 /* TKLocationRestorationTest.swift in Sources */,
 				3A14BE2A1F8E7103008B1B54 /* TKLinkedAccountTest.swift in Sources */,
+				D3EAAE331FA2EED30038C82F /* TKAlertModelTest.swift in Sources */,
 				3AC4DD0B1DEE32B80026B238 /* TKWaypointRouterTest.swift in Sources */,
 				3AFFAE131F06D17000147990 /* SGCustomEventRecurrenceTest.swift in Sources */,
 				3AABDD9B1DF7C2040044A05B /* TKLocationInfoTest.swift in Sources */,
