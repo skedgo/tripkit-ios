@@ -96,7 +96,7 @@ extension API.Alert.Action: Codable {
     
     switch type {
     case .reroute(let excludedStops):
-      try container.encode("excludedStopCodes", forKey: .type)
+      try container.encode("rerouteExcludingStops", forKey: .type)
       try container.encode(excludedStops, forKey: .excludedStopCodes)
     }
   }
