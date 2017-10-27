@@ -10,7 +10,8 @@ import Foundation
 
 extension Alert {
   
-  public enum ActionIdentifier {
+  // Constants
+  public enum ActionTypeIdentifier {
     static let excludingStopsFromRouting: String = "excludedStopCodes"
   }
   
@@ -25,11 +26,10 @@ extension Alert {
   /// reroute action because, e.g., the stops have become inaccessible. This property
   /// is typically passed to a routing request as stops to avoid during routing.
   public var stopsExcludedFromRouting: [String] {
-    return action?[ActionIdentifier.excludingStopsFromRouting] as? [String] ?? []
+    return action?[ActionTypeIdentifier.excludingStopsFromRouting] as? [String] ?? []
   }
   
 }
-
 
 // MARK: - MKAnnotation
 
@@ -44,7 +44,6 @@ extension Alert: MKAnnotation {
   }
   
 }
-
 
 // MARK: - STKDisplayablePoint
 

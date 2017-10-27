@@ -260,8 +260,11 @@ extension Alert {
     // only takes things we deem dynamic
     text = model.text
     
-    if let avoidedInRouting = model.action?.excludedStopCodes {
-      action = [ActionIdentifier.excludingStopsFromRouting: avoidedInRouting]
+    if let actionType = model.action?.type {
+      switch actionType {
+      case .reroute(let stopsToAvoid):
+        self.action = [ActionTypeIdentifier.excludingStopsFromRouting: stopsToAvoid]
+      }
     }
   }
   
