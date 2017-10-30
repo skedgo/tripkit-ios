@@ -83,6 +83,7 @@ extension SGTripSummaryCell {
     }
     
     // time and duration
+    _addTimeString(forDeparture: trip.departureTime, arrival: trip.arrivalTime, departureTimeZone: trip.departureTimeZone, arrivalTimeZone: trip.arrivalTimeZone ?? trip.departureTimeZone, focusOnDuration: !trip.departureTimeIsFixed, queryIsArriveBefore: trip.isArriveBefore)
     
     if showCosts {
       _addCosts(trip.costValues)
