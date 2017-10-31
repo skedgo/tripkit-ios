@@ -360,8 +360,6 @@
 		3AFFAC401F06855F00147990 /* SGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFFAC031F06855F00147990 /* SGTableViewCell.xib */; };
 		3AFFAC411F06855F00147990 /* ASMapManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAC051F06855F00147990 /* ASMapManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFAC421F06855F00147990 /* ASMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAC061F06855F00147990 /* ASMapManager.m */; };
-		3AFFAC431F06855F00147990 /* MKMapView+AttributionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAC071F06855F00147990 /* MKMapView+AttributionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFFAC441F06855F00147990 /* MKMapView+AttributionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAC081F06855F00147990 /* MKMapView+AttributionView.m */; };
 		3AFFAC451F06855F00147990 /* MKMapView+ZoomToAnnotations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAC091F06855F00147990 /* MKMapView+ZoomToAnnotations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFAC461F06855F00147990 /* MKMapView+ZoomToAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAC0A1F06855F00147990 /* MKMapView+ZoomToAnnotations.m */; };
 		3AFFAC471F06855F00147990 /* SGMapButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAC0B1F06855F00147990 /* SGMapButtonView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -982,8 +980,6 @@
 		3AFFAC031F06855F00147990 /* SGTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGTableViewCell.xib; sourceTree = "<group>"; };
 		3AFFAC051F06855F00147990 /* ASMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASMapManager.h; sourceTree = "<group>"; };
 		3AFFAC061F06855F00147990 /* ASMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASMapManager.m; sourceTree = "<group>"; };
-		3AFFAC071F06855F00147990 /* MKMapView+AttributionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+AttributionView.h"; sourceTree = "<group>"; };
-		3AFFAC081F06855F00147990 /* MKMapView+AttributionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+AttributionView.m"; sourceTree = "<group>"; };
 		3AFFAC091F06855F00147990 /* MKMapView+ZoomToAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomToAnnotations.h"; sourceTree = "<group>"; };
 		3AFFAC0A1F06855F00147990 /* MKMapView+ZoomToAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomToAnnotations.m"; sourceTree = "<group>"; };
 		3AFFAC0B1F06855F00147990 /* SGMapButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMapButtonView.h; sourceTree = "<group>"; };
@@ -2022,8 +2018,6 @@
 			children = (
 				3AFFAC051F06855F00147990 /* ASMapManager.h */,
 				3AFFAC061F06855F00147990 /* ASMapManager.m */,
-				3AFFAC071F06855F00147990 /* MKMapView+AttributionView.h */,
-				3AFFAC081F06855F00147990 /* MKMapView+AttributionView.m */,
 				3AFFAC091F06855F00147990 /* MKMapView+ZoomToAnnotations.h */,
 				3AFFAC0A1F06855F00147990 /* MKMapView+ZoomToAnnotations.m */,
 				3AFFAC0B1F06855F00147990 /* SGMapButtonView.h */,
@@ -2479,7 +2473,6 @@
 				3AB6C7031D1CD08E0089F687 /* TKParserHelper.h in Headers */,
 				3AB6C6EC1D1CD08E0089F687 /* Vehicle.h in Headers */,
 				3AA03E721F0BC9DB00C6B337 /* SGImageCacher.h in Headers */,
-				3AFFAC431F06855F00147990 /* MKMapView+AttributionView.h in Headers */,
 				3AFFABB31F06854F00147990 /* SGKCrossPlatform.h in Headers */,
 				3AFFAC2C1F06855F00147990 /* UIFont+CustomFonts.h in Headers */,
 				3AB6C6E81D1CD08E0089F687 /* TripGroup.h in Headers */,
@@ -2933,7 +2926,6 @@
 				3AB6C6FB1D1CD08E0089F687 /* TKBuzzInfoProvider.m in Sources */,
 				3AFFAC331F06855F00147990 /* UIView+BearingRotation.m in Sources */,
 				3AFFAC501F06855F00147990 /* SGPolylineRenderer.m in Sources */,
-				3AFFAC441F06855F00147990 /* MKMapView+AttributionView.m in Sources */,
 				3AB6C6D51D1CD08E0089F687 /* Alert.m in Sources */,
 				3AB6C6DB1D1CD08E0089F687 /* SegmentReference.m in Sources */,
 				3AFFABC01F06854F00147990 /* SGStyleManager.m in Sources */,
