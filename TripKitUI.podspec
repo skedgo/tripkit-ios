@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitUI"
-  s.version      = "3.0-beta0"
+  s.version      = "3.0"
   s.summary      = "SkedGo's TripKitUI"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = 'Apache License, Version 2.0'
