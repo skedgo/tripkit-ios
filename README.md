@@ -20,11 +20,11 @@ Additional documentation is available on the [TripGo Developer page](http://sked
 Add desired pods:
 
 ```ruby
-  pod 'TripKit',                '~> 2.0'
-  pod 'TripKitUI',              '~> 2.0'
-  pod 'TripKitBookings',        '~> 2.0'
-  pod 'TripKitAddOns/InterApp', '~> 2.0'
-  pod 'TripKitAddOns/Share',    '~> 2.0'
+  pod 'TripKit',                '~> 3.0'
+  pod 'TripKitUI',              '~> 3.0'
+  pod 'TripKitBookings',        '~> 3.0'
+  pod 'TripKitAddOns/InterApp', '~> 3.0'
+  pod 'TripKitAddOns/Share',    '~> 3.0'
 ```
 
 This is the recommended way as it let's you cherry-pick the desired components and if you use any of TripKit's dependencies, such as [RxSwift](https://github.com/ReactiveX/RxSwift), you'll end up with only a single copy of that.
@@ -36,7 +36,7 @@ TripKit with all its components is also available through Carthage. Note that th
 Add this to your `Cartfile`:
 
 ```
-github "skedgo/tripkit-ios" "v2.0"
+github "skedgo/tripkit-ios" "v3.0"
 ```
 
 Then run `carthage update` and add the framework to your project as described in [the Carthage docs](https://github.com/Carthage/Carthage).
