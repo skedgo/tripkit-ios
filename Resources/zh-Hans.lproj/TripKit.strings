@@ -10,6 +10,9 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "延迟 %1$@ (%2$@ 服务)";
 
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@提示";
+
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ 适宜骑自行车";
 
@@ -89,6 +92,9 @@
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "几个座位空余";
+
+/* Indicating a path is wheelchair/cycyling friendly */
+"Friendly" = "友好";
 
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "出发地: %@";
@@ -193,6 +199,9 @@
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "设置";
 
+/* Title for button that, when tapped, shows something, e.g., a list of alert */
+"Show" = "查看";
+
 /* Show website action */
 "Show website" = "开启网站";
 
@@ -205,6 +214,12 @@
 /* Title for a trip */
 "Trip" = "旅程";
 
+/* Indicating a path is wheelchair/cycyling unfriendly */
+"Unfriendly" = "不友好";
+
+/* Indicating the wheelchair/cycling friendliness of a path is unknown */
+"Unknown" = "未知";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "%@前更新";
 
@@ -216,9 +231,6 @@
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "我们会在这里更新关于最新交通信息的提醒";
-
-/* No comment provided by engineer. */
-"Wheelchair accessible" = "轮椅可通行";
 
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "于%@";

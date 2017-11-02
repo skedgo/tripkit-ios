@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitUI"
-  s.version      = "2.0.1"
+  s.version      = "3.0-beta0"
   s.summary      = "SkedGo's TripKitUI"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = 'Apache License, Version 2.0'
@@ -19,12 +19,11 @@ Pod::Spec.new do |s|
   s.frameworks = ['UIKit', 'MapKit']
 
   s.dependency 'TripKit', "~> #{s.version}"
-  s.dependency 'SGPulsingAnnotationView'
 
   s.dependency 'ASPolylineView'
-  s.dependency 'Kingfisher', '~> 3.0'
-  s.dependency 'RxSwift'
-  s.dependency 'RxCocoa'
+  s.dependency 'Kingfisher'
+  s.dependency 'RxSwift', '~> 4.0.0'
+  s.dependency 'RxCocoa', '~> 4.0.0'
 
   s.source_files = "TripKitUI/**/*.{h,m,swift}"
   s.resources    = [

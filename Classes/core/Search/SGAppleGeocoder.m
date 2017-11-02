@@ -51,7 +51,6 @@
   MKCoordinateRegion coordinateRegion = MKCoordinateRegionForMapRect(mapRect);
   [self fetchLocalSearchObjectsForString:inputString
                               nearRegion:coordinateRegion
-                           limitToNearby:NO
                        forAutocompletion:NO
                                  success:success
                                  failure:failure];
@@ -99,7 +98,6 @@
   __weak typeof (self) weakSelf = self;
  [self fetchLocalSearchObjectsForString:string
                              nearRegion:MKCoordinateRegionForMapRect(self.lastRect)
-                          limitToNearby:!isWorld
                       forAutocompletion:YES
                                 success:
    ^(NSString *query, NSArray *results) {
@@ -194,6 +192,7 @@
   result.title    = [annotation title];
   result.subtitle = [annotation respondsToSelector:@selector(subtitle)] ? [annotation subtitle] : nil;
   result.image    = [SGAutocompletionResult imageForType:SGAutocompletionSearchIconPin];
+  result.isInSupportedRegion = @([TKRegionManager.shared coordinateIsPartOfAnyRegion:annotation.coordinate]);
 
   result.score = [SGAppleGeocoder scoreForAnnotation:annotation forSearchTerm:inputString nearRegion:coordinateRegion];
 
@@ -204,27 +203,11 @@
                    forSearchTerm:(NSString *)inputString
                       nearRegion:(MKCoordinateRegion)coordinateRegion
 {
-  NSString *subtitle = [annotation respondsToSelector:@selector(subtitle)] ? [annotation subtitle] : nil;
-  NSUInteger titleScore = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:inputString
-                                                                               candidate:annotation.title];
-  NSUInteger addressScore = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:inputString
-                                                                                 candidate:subtitle];
-  
-  NSUInteger stringScore = MAX(titleScore, addressScore);
-  
-  NSUInteger distanceScore = [SGAutocompletionResult scoreBasedOnDistanceFromCoordinate:[annotation coordinate]
-                                                                               toRegion:coordinateRegion
-                                                                           longDistance:NO];
-  
-  NSUInteger rawScore = (stringScore * 3 + distanceScore) / 4;
-  return [SGAutocompletionResult rangedScoreForScore:rawScore
-                                      betweenMinimum:15
-                                          andMaximum:75];
+  return [TKGeocodingResultScorer calculateScoreForAnnotation:annotation searchTerm:inputString nearRegion:coordinateRegion allowLongDistance:NO minimum:15 maximum:75];
 }
 
 - (void)fetchLocalSearchObjectsForString:(NSString *)inputString
 															nearRegion:(MKCoordinateRegion)coordinateRegion
-                           limitToNearby:(BOOL)limit
                        forAutocompletion:(BOOL)forAutocompletion
                                  success:(SGGeocoderSuccessBlock)success
                                  failure:(nullable SGGeocoderFailureBlock)failure
@@ -242,7 +225,6 @@
 	if (CLLocationCoordinate2DIsValid(coordinateRegion.center)) {
 		request.region = coordinateRegion;
 	}
-  CLLocation *centerLocation = [[CLLocation alloc] initWithLatitude:coordinateRegion.center.latitude longitude:coordinateRegion.center.longitude];
 	
 	// Now instantiate a local search object.
 	MKLocalSearch *localSearch = [[MKLocalSearch alloc] initWithRequest:request];
@@ -265,10 +247,6 @@
       // Local search has successfully returned results.
       NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[response.mapItems count]];
       for (MKMapItem *mapItem in response.mapItems) {
-        if (limit && [centerLocation distanceFromLocation:mapItem.placemark.location] > 100000) {
-          continue;
-        }
-        
         SGKNamedCoordinate *singleResult = [self resultFromMapItem:mapItem];
         if (singleResult) {
           singleResult.sortScore = [SGAppleGeocoder scoreForAnnotation:singleResult
@@ -280,9 +258,8 @@
       }
 
       NSUInteger max = forAutocompletion ? 5 : 10;
-      NSArray *filtered = [SGBaseGeocoder filteredMergedAndPruned:results
-                                                  limitedToRegion:coordinateRegion
-                                                      withMaximum:max];
+      NSArray *filtered = [SGBaseGeocoder mergedAndPruned:results
+                                              withMaximum:max];
       success(inputString, filtered);
 		}
 	}];
@@ -339,9 +316,8 @@
           }
         }
 
-        NSArray *filtered = [SGBaseGeocoder filteredMergedAndPruned:results
-                                                    limitedToRegion:coordinateRegion
-                                                        withMaximum:10];
+        NSArray *filtered = [SGBaseGeocoder mergedAndPruned:results
+                                                withMaximum:10];
 
         dispatch_async(dispatch_get_main_queue(), ^{
           success(inputString, filtered);

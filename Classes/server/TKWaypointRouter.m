@@ -59,8 +59,8 @@
                        region:region
                callbackOnMain:NO
                       success:
-   ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+   ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
      NSManagedObjectContext *publicContext = tripGroup.managedObjectContext;
      [publicContext performBlock:^{
        TKRoutingParser *parser = [[TKRoutingParser alloc] initWithTripKitContext:publicContext];
@@ -90,7 +90,7 @@
 {
   NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithCapacity:2];
   paras[@"config"] = [TKSettings defaultDictionary];
-  paras[@"vehicles"] = [TKParserHelper vehiclesPayloadForVehicles:privateVehicles];
+  paras[@"vehicles"] = [TKAPIToCoreDataConverter vehiclesPayloadForVehicles:privateVehicles];
   
   NSArray *segments = prototype.trip.segments;
   NSMutableArray *arrayParas = [NSMutableArray arrayWithCapacity:segments.count];

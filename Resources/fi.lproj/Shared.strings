@@ -40,9 +40,6 @@
 /* Credit card CVC */
 "CVC" = "CVC";
 
-/* No comment provided by engineer. */
-"Can't find your current city" = "Tämänhetkistä kaupunkiasi ei löydy";
-
 /* Cancel action */
 "Cancel" = "Peruuta";
 
@@ -196,6 +193,9 @@
 /* No comment provided by engineer. */
 "No CO₂" = "Ei CO₂";
 
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Not wheelchair accessible";
+
 /* Countdown cell 'now' indicator */
 "Now" = "Nyt";
 
@@ -334,6 +334,9 @@
 
 /* Every weekend day in context of repetitions (especially recurring events) */
 "Weekends" = "Viikonloppuisin";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Wheelchair accessibility unknown";
 
 /* Indicator for wheelchair accessible services */
 "Wheelchair accessible" = "Pyörätuolilla liikkuminen huomioitu";

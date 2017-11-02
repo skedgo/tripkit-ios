@@ -40,9 +40,6 @@
 /* Credit card CVC */
 "CVC" = "卡背面3位数";
 
-/* No comment provided by engineer. */
-"Can't find your current city" = "找不到您当前所在的城市";
-
 /* Cancel action */
 "Cancel" = "取消";
 
@@ -196,6 +193,9 @@
 /* No comment provided by engineer. */
 "No CO₂" = "无二氧化碳排放";
 
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "轮椅无法通行";
+
 /* Countdown cell 'now' indicator */
 "Now" = "现在";
 
@@ -257,7 +257,7 @@
 "Report Problem" = "反馈问题";
 
 /* Retry action, e.g., in case something didn't load */
-"Retry" = "重新尝试";
+"Retry" = "再试一次";
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "越野车";
@@ -334,6 +334,9 @@
 
 /* Every weekend day in context of repetitions (especially recurring events) */
 "Weekends" = "周末";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "轮椅是否可通行未知";
 
 /* Indicator for wheelchair accessible services */
 "Wheelchair accessible" = "轮椅可通行";

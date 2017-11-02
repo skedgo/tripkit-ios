@@ -114,23 +114,6 @@ typedef enum {
   self.startedTyping = NO;
 }
 
-- (void)prepareForNewScopeSearchShowStickyForCurrentLocation:(BOOL)stickyForGPS
-{
-  // config for what to include in autocompletion
-  self.showStickyForCurrentLocation = stickyForGPS;
-  self.showTextForCurrentCity = YES;
-  self.showStickyForDropPin = NO;
-  self.showSearchOptions = NO;
-  
-  // local variable set-up
-  self.lastSearch = nil;
-  self.filteredPreviousResults = nil;
-  self.additionalProviderRows = nil;
-  self.fastResults = @[];
-  self.slowResults = @[];
-  self.startedTyping = NO;
-}
-
 - (void)autocomplete:(NSString *)string
           forMapRect:(MKMapRect)mapRect
           completion:(SGSearchAutocompletionActionBlock)completion
@@ -336,6 +319,13 @@ typedef enum {
   cell.textLabel.textColor  = [SGStyleManager darkTextColor];
   cell.detailTextLabel.text = ! [result.subtitle isEqualToString:result.title] ? result.subtitle : nil;
   cell.detailTextLabel.textColor  = [SGStyleManager lightTextColor];
+  
+  if (result.isInSupportedRegion) {
+    cell.contentView.alpha = result.isInSupportedRegion.boolValue ? 1.0f : 0.33f;
+  } else {
+    cell.contentView.alpha = 1.0f;
+  }
+  
   if (self.showAccessoryButtons && result.accessoryButtonImage) {
     cell.accessoryView = [SGStyleManager cellAccessoryButtonWithImage:result.accessoryButtonImage
                                                                target:self

@@ -40,9 +40,6 @@
 /* Credit card CVC */
 "CVC" = "CVV";
 
-/* No comment provided by engineer. */
-"Can't find your current city" = "Huidige locatie kan niet gevonden worden";
-
 /* Cancel action */
 "Cancel" = "Annuleer";
 
@@ -196,6 +193,9 @@
 /* No comment provided by engineer. */
 "No CO₂" = "Geen CO₂";
 
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Not wheelchair accessible";
+
 /* Countdown cell 'now' indicator */
 "Now" = "Nu";
 
@@ -334,6 +334,9 @@
 
 /* Every weekend day in context of repetitions (especially recurring events) */
 "Weekends" = "Weekeinden";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Wheelchair accessibility unknown";
 
 /* Indicator for wheelchair accessible services */
 "Wheelchair accessible" = "Rolstoel toegankelijk";

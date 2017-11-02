@@ -15,12 +15,22 @@ import RxSwift
   import TripKit
 #endif
 
+@objc
+public protocol TKAlertModel {
+  var title: String? { get }
+  var icon: SGKImage? { get }
+  var iconURL: URL? { get }
+  var text: String? { get }
+  var infoURL: URL? { get }
+  var lastUpdated: Date? { get }
+}
+
 public class TKAlertViewController: UITableViewController {
   
   private let disposeBag = DisposeBag()
   private weak var emptyAlertView: TKEmptyAlertView?
   
-  private var alerts: [TKAlert] = [] {
+  private var alerts: [TKAlertModel] = [] {
     didSet {
       if alerts.isEmpty {
         insertEmptyAlertsView()
@@ -31,8 +41,8 @@ public class TKAlertViewController: UITableViewController {
     }
   }
   
-  public var transitAlerts: Observable<[TKAlert]>?
-  public weak var alertControllerDelegate: TKAlertViewControllerDelegate?
+  public var transitAlerts: Observable<[TKAlertModel]>?
+  @objc public weak var alertControllerDelegate: TKAlertViewControllerDelegate?
   
   // MARK: - View lifecycle
   
@@ -48,7 +58,7 @@ public class TKAlertViewController: UITableViewController {
         .subscribe(onNext: { [unowned self] in
           self.dismiss(animated: true, completion: nil)
         })
-        .addDisposableTo(disposeBag)
+        .disposed(by: disposeBag)
       navigationItem.leftBarButtonItem = doneButton
     }
     
@@ -64,7 +74,7 @@ public class TKAlertViewController: UITableViewController {
           strongSelf.alerts = $0
         }
       })
-      .addDisposableTo(disposeBag)
+      .disposed(by: disposeBag)
   }
   
   // MARK: - UITableViewDataSource
@@ -94,7 +104,7 @@ public class TKAlertViewController: UITableViewController {
       .subscribe(onNext: { [unowned self] in
         self.alertControllerDelegate?.alertViewController?(self, didTapOnURL: $0)
       })
-      .addDisposableTo(disposeBag)
+      .disposed(by: disposeBag)
     
     return alertCell
   }
@@ -134,7 +144,7 @@ public class TKAlertViewController: UITableViewController {
 
 @objc public protocol TKAlertViewControllerDelegate {
   
-  @objc optional func alertViewController(_ controller: TKAlertViewController, didSelectAlert alert: TKAlert)
+  @objc optional func alertViewController(_ controller: TKAlertViewController, didSelectAlert alert: TKAlertModel)
   @objc optional func alertViewController(_ controller: TKAlertViewController, didTapOnURL url: URL)
   
 }

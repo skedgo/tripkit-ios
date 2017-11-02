@@ -29,7 +29,7 @@ public class STKModeHelper : NSObject {
   public static func modesContain(_ primary: Set<String>, _ secondary: Set<String>) -> Bool {
     
     // quick full matches
-    if primary.intersection(secondary).count > 0 {
+    if !primary.intersection(secondary).isEmpty {
       return true
     }
     
@@ -38,7 +38,7 @@ public class STKModeHelper : NSObject {
       for shortie in primary {
         if let range = longie.range(of: shortie) {
           let remainder = longie.replacingCharacters(in: range, with: "")
-          if let first = remainder.characters.first, first == "_" {
+          if let first = remainder.first, first == "_" {
             return true
           }
         }

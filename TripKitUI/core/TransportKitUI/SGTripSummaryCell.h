@@ -44,6 +44,7 @@ typedef void(^SGTripSummaryCellActionBlock)(UIControl *sender);
 @property (nullable, nonatomic, strong) UIColor *preferredTintColor UI_APPEARANCE_SELECTOR;
 
 + (UINib *)nib;
++ (UINib *)edgeToEdgeNib;
 + (UINib *)nanoNib;
 
 // Internals

@@ -68,12 +68,12 @@ public class TKAgendaManager {
   private var agendas = [String : TKAgendaType]()
   
   public func agenda(_ dateComponents: DateComponents) -> TKAgendaType {
-    let key = "\(dateComponents.year)-\(dateComponents.month)-\(dateComponents.day)"
+    let key = "\(dateComponents.year ?? 0000)-\(dateComponents.month ?? 00)-\(dateComponents.day ?? 00)"
     if let agenda = agendas[key] {
       return agenda
     }
     
-    // FIXME: For now, we just use the items of the first data source
+    // TODO: For now, we just use the items of the first data source. Ideally we'd merge them.
     guard let inputItems = dataSources.first?.items(dateComponents) else {
       fatalError("Data sources shalt not be empty")
     }
@@ -152,7 +152,7 @@ private struct TKSimpleAgenda: TKAgendaType {
             return Observable.empty().asDriver(onErrorJustReturn: [])
         }
       }
-      .bindTo(outputs)
+      .bind(to: outputs)
   }
 }
 

@@ -69,6 +69,11 @@
   NSManagedObjectID *objectID = [self objectID];
   if ([objectID isTemporaryID]) {
     [self.managedObjectContext obtainPermanentIDsForObjects:@[self] error:NULL];
+    
+    NSError *error;
+    [self.managedObjectContext save:&error];
+    ZAssert(error == nil, @"Error while saving: %@", error);
+    
 		objectID = [self objectID];
   }
   

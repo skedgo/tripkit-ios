@@ -26,8 +26,8 @@
 @dynamic action;
 @dynamic idService, idStopCode;
 
-+ (instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode
-                      inTripKitContext:(NSManagedObjectContext *)tripKitContext
++ (nullable instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode
+                               inTripKitContext:(NSManagedObjectContext *)tripKitContext
 {
   NSSet *existingAlerts = [tripKitContext fetchObjectsForEntityClass:self
                                                  withPredicateString:@"toDelete = NO AND hashCode = %@", hashCode];

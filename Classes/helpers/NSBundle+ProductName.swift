@@ -10,7 +10,7 @@ import Foundation
 
 extension Bundle {
   
-  public var productName: String? {
+  @objc public var productName: String? {
     
     if let localizedDict = localizedInfoDictionary {
       if let candidate = localizedDict[kCFBundleNameKey as String] as? String, !candidate.hasPrefix("${") {

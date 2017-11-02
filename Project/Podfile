@@ -1,22 +1,20 @@
-source 'https://github.com/CocoaPods/Specs.git'
-source 'https://github.com/skedgo/PodSpecs.git'
-
 use_frameworks!
 platform :ios, '9.3'
 
 def shared_pods
-  pod 'RxSwift',        '~> 3.0'
-  pod 'RxCocoa',        '~> 3.0'
-  pod 'Marshal'
-
-  pod 'Kingfisher',     '~> 3.0'
+  pod 'RxSwift', '~> 4.0.0'
+  pod 'RxCocoa', '~> 4.0.0'
+  
   pod 'ASPolygonKit'
   pod 'ASPolylineView'
-  pod 'SGPulsingAnnotationView'
-  pod 'KeychainAccess'
-  pod 'KVNProgress'
-  pod 'SwiftyJSON'
-  pod 'OAuthSwift',     '~> 1.1.2'
+  pod 'KeychainAccess', '~> 3.1'
+  pod 'Kingfisher',     '~> 4.0'
+  pod 'OAuthSwift',     '~> 1.2'
+
+  pod 'KVNProgress' # For Bookings
+  pod 'SwiftyJSON'  # For Bookings
+  
+  pod 'Marshal'     # For Agenda
 end
 
 target 'TripKit' do
@@ -26,6 +24,6 @@ end
 target 'TripKitTests' do
   shared_pods
   
-  pod 'RxBlocking',     '~> 3.0'
-  pod 'RxTest',         '~> 3.0'
+  pod 'RxBlocking', '~> 4.0.0'
+  pod 'RxTest', '~> 4.0.0'
 end

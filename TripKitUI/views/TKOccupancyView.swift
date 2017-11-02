@@ -8,10 +8,15 @@
 
 import UIKit
 
+#if TK_NO_MODULE
+#else
+  import TripKit
+#endif
+
 @available(iOS 9.0, *)
-extension TKOccupancy {
+extension API.Vehicle.Occupancy {
   
-  public var icon: UIImage? {
+  var icon: UIImage? {
     switch self {
     case .empty, .manySeatsAvailable, .fewSeatsAvailable:
       return UIImage(named: "icon-check-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
@@ -24,7 +29,7 @@ extension TKOccupancy {
     }
   }
   
-  public var isCritical: Bool {
+  var isCritical: Bool {
     switch self {
     case .crushedStandingRoomOnly, .full, .notAcceptingPassengers:
       return true
@@ -63,13 +68,13 @@ public class TKOccupancyView: UIView {
     self.icon = icon
     
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightSemibold)
+    label.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     addSubview(label)
     self.label = label
     
     let heightConstraint = icon.heightAnchor.constraint(equalToConstant: 16)
-    heightConstraint.priority = 999
+    heightConstraint.priority = .defaultHigh
     
     NSLayoutConstraint.activate([
         heightConstraint,
@@ -101,7 +106,7 @@ extension TKOccupancyView {
 extension TKOccupancyView {
   
   public enum Purpose {
-    case occupancy(TKOccupancy)
+    case occupancy(API.Vehicle.Occupancy)
     case wheelchair
   }
   

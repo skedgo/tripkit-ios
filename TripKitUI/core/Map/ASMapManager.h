@@ -43,14 +43,28 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL willHotSwap;
 
 /**
- * The key paths to where the last visible map rect is stored in the user
+ * The key path to where the last visible map rect is stored in the user
  * defaults.
  *
  * @default nil, i.e., not stored
  */
-@property (nonatomic, copy) NSString *lastMapRectUserDefaultsKey;
+@property (nonatomic, copy, nullable) NSString *lastMapRectUserDefaultsKey;
 
-+ (MKMapRect)mapRectForUserDefaultsKey:(NSString *)key;
+/**
+ * The key path to where the last `NSDate` is stored when this map manager
+ * was last used in the user defaults.
+ *
+ * @default nil, i.e., not stored
+ */
+@property (nonatomic, copy, nullable) NSString *lastUseUserDefaultsKey;
+
+
++ (MKMapRect)mapRectForUserDefaultsKey:(nullable NSString *)mapKey
+                               dateKey:(nullable NSString *)dateKey;
+
++ (void)saveMapRect:(MKMapRect)rect
+ forUserDefaultsKey:(NSString *)mapKey
+            dateKey:(nullable NSString *)dateKey;
 
 - (BOOL)isActive;
 

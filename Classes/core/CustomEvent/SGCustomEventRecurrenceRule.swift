@@ -19,7 +19,7 @@ extension SGCustomEventRecurrenceRule {
   /// - parameter latest: Latest date that any recurrence can start
   /// - parameter timeZone: The time zone for which to enumarete the recurrences
   /// - parameter handler: Block call on same thread for every recurrence, providing both start date and end date of each recurrence.
-  public class func enumerateRecurrences(
+  @objc public class func enumerateRecurrences(
     ofRule rule: String, startTime: TimeInterval, duration: TimeInterval,
     earliest: Date, latest: Date, for timeZone: TimeZone,
     handler: (_ start: Date, _ end: Date) -> Void)
@@ -41,12 +41,12 @@ extension SGCustomEventRecurrenceRule {
         preconditionFailure()
       }
       
-      if rule.characters.first == "W" {
+      if rule.first == "W" {
         let weekday = gregorian.component(.weekday, from: start)
         
         // 1 == sunday, 7 == saturday
-        let index = rule.characters.index(rule.characters.startIndex, offsetBy: weekday)
-        applies = (rule.characters[index] == "1")
+        let index = rule.index(rule.startIndex, offsetBy: weekday)
+        applies = (rule[index] == "1")
         
       } else {
         assertionFailure("Unexpected recurrence: \(rule)")

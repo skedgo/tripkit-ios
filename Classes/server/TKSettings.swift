@@ -14,7 +14,7 @@ extension TKSettings {
     case sortIndex = "internalSortIndex"
   }
   
-  public static var sortOrder: STKTripCostType {
+  @objc public static var sortOrder: STKTripCostType {
     get {
       let index = UserDefaults.shared.integer(forKey: DefaultsKey.sortIndex.rawValue)
       return STKTripCostType(rawValue: index) ?? .score

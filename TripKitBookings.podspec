@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitBookings"
-  s.version      = "2.0.1"
+  s.version      = "3.0-beta0"
   s.summary      = "Booking integration for SkedGo's TripKit"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = 'Apache License, Version 2.0'
@@ -19,13 +19,13 @@ Pod::Spec.new do |s|
   s.dependency 'TripKit', "~> #{s.version}"
   s.dependency 'TripKitUI', "~> #{s.version}"
 
-  s.dependency 'KVNProgress'
-
-  s.dependency 'RxSwift'
-  s.dependency 'RxCocoa'
-  s.dependency 'SwiftyJSON'
+  s.dependency 'RxSwift', '~> 4.0.0'
+  s.dependency 'RxCocoa', '~> 4.0.0'
   s.dependency 'KeychainAccess'
-  s.dependency 'OAuthSwift', '~> 1.1.2'
+  s.dependency 'OAuthSwift'
+
+  s.dependency 'SwiftyJSON'
+  s.dependency 'KVNProgress'
 
   s.source_files = "AddOns/Bookings/**/*.{h,m,swift}"
   s.resources = "AddOns/Bookings/**/*.{xib}"

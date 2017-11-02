@@ -31,7 +31,7 @@
 @property (nonatomic, assign) BOOL centerSegments;
 
 @property (nonatomic, assign) BOOL didLayoutSubviews;
-@property (nonatomic, nullable, strong) void (^onLayoutSubviews)();
+@property (nonatomic, nullable, strong) void (^onLayoutSubviews)(void);
 
 @end
 

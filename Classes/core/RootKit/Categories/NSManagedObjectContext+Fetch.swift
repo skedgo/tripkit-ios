@@ -36,14 +36,14 @@ extension NSManagedObjectContext {
     }
   }
   
-  public func fetchObjects<E: NSManagedObject>(_ entity: E.Type, predicate: NSPredicate? = nil) -> Set<E> {
+  public func fetchObjects<E: NSManagedObject>(_ entity: E.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [E] {
     
     let request = NSFetchRequest<NSManagedObject>(entityName: String(describing: E.self))
     request.predicate = predicate
+    request.sortDescriptors = sortDescriptors
     
     do {
-      let array = try self.fetch(request).flatMap { $0 as? E }
-      return Set(array)
+      return try self.fetch(request).flatMap { $0 as? E }
     } catch {
       SGKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error)")
       return []

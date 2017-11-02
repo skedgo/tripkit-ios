@@ -25,7 +25,6 @@
 #import "SGLabel.h"
 
 // Map
-#import "MKMapView+AttributionView.h"
 #import "MKMapView+ZoomToAnnotations.h"
 #import "SGMapButtonView.h"
 #import "SGMapHelper.h"
@@ -44,5 +43,6 @@
 
 #import "VehicleView.h"
 #import "CircleAnnotationView.h"
+#import "SGPulsingAnnotationView.h"
 
 #endif /* TripKitUI_h */

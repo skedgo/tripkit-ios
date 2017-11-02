@@ -40,9 +40,6 @@
 /* Credit card CVC */
 "CVC" = "CVC";
 
-/* No comment provided by engineer. */
-"Can't find your current city" = "Non riesci a trovare tua città attuale";
-
 /* Cancel action */
 "Cancel" = "Cancella";
 
@@ -196,6 +193,9 @@
 /* No comment provided by engineer. */
 "No CO₂" = "Nessun CO₂";
 
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Non Accessibile con sedia a rotelle";
+
 /* Countdown cell 'now' indicator */
 "Now" = "Adesso";
 
@@ -334,6 +334,9 @@
 
 /* Every weekend day in context of repetitions (especially recurring events) */
 "Weekends" = "Fine settimana";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Accessibilità su sedia a rotelle sconosciuta";
 
 /* Indicator for wheelchair accessible services */
 "Wheelchair accessible" = "Accessibile con sedia a rotelle";

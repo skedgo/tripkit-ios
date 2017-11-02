@@ -68,7 +68,7 @@
     SVKRegion *region = nil;
     if (!MKMapRectEqualToRect(mapRect, MKMapRectWorld) && !MKMapRectIsNull(mapRect)) {
       MKCoordinateRegion coordinateRegion = MKCoordinateRegionForMapRect(mapRect);
-      region = [[SVKRegionManager sharedInstance] regionForCoordinateRegion:coordinateRegion];
+      region = [TKRegionManager.shared regionContainingCoordinateRegion:coordinateRegion];
       if (! region) {
         region = self.fallbackRegion;
       }
@@ -84,8 +84,8 @@
                          region:region
                  callbackOnMain:NO
                         success:
-     ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+     ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
        typeof(weakSelf) strongSelf = weakSelf;
        if (! strongSelf) return;
        
@@ -214,7 +214,7 @@
   }
 	
   MKCoordinateRegion coordinateRegion = MKCoordinateRegionForMapRect(mapRect);
-  SVKRegion *region = [[SVKRegionManager sharedInstance] regionForCoordinateRegion:coordinateRegion];
+  SVKRegion *region = [TKRegionManager.shared regionContainingCoordinateRegion:coordinateRegion];
   if (! region) {
     completion(nil);
     return;
@@ -228,7 +228,7 @@
                        region:region
                callbackOnMain:NO
                       success:
-   ^(NSInteger status, id responseObject) {
+   ^(NSInteger status, id responseObject, NSData *data) {
 #pragma unused(status)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      NSArray *autocompletionResults = nil;
@@ -314,7 +314,8 @@
       result.image = [SGAutocompletionResult imageForType:SGAutocompletionSearchIconPin];
     }
   }
-  
+
+  result.isInSupportedRegion = @(YES);
   result.score = [SGBuzzGeocoder scoreForDictionary:json forSearchTerm:inputString];
   return result;
 }

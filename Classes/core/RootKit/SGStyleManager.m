@@ -47,52 +47,6 @@
 }
 #endif
 
-#pragma mark - Image names
-
-+ (SGKImage *)imageForModeImageName:(NSString *)tripSegmentModeImageName
-                        isRealTime:(BOOL)isRealTime
-                        ofIconType:(SGStyleModeIconType)type
-{
-  if (!tripSegmentModeImageName) {
-    return nil;
-  }
-  
-  NSString *partName = [tripSegmentModeImageName lowercaseString];
-  NSString *fullName = nil;
-	switch (type) {
-    case SGStyleModeIconTypeResolutionIndependent:
-    case SGStyleModeIconTypeListMainModeOnDark:
-    case SGStyleModeIconTypeResolutionIndependentOnDark:
-      ; // fall through, as not supported locally
-		case SGStyleModeIconTypeListMainMode:
-			if (isRealTime) {
-				fullName = [NSString stringWithFormat:@"icon-mode-%@-realtime", partName];
-			} else {
-				fullName = [NSString stringWithFormat:@"icon-mode-%@", partName];
-			}
-      break;
-      
-    case SGStyleModeIconTypeMapIcon:
-      isRealTime = NO;
-      fullName = [NSString stringWithFormat:@"icon-map-info-%@", partName];
-      break;
-    
-    case SGStyleModeIconTypeVehicle:
-      return nil; // No local variant of these icons. Instead use `VehicleView`.
-      
-    case SGStyleModeIconTypeAlert:
-      fullName = @"icon-alert-yellow-map";
-	}
-  
-  SGKImage *image = [self optionalImageNamed:fullName];
-  if (isRealTime && !image) {
-    // Maybe we have the non-real-time image!
-    return [self imageForModeImageName:tripSegmentModeImageName isRealTime:NO ofIconType:type];
-  } else {
-    return image;
-  }
-}
-
 + (SGKImage *)activityImage:(NSString *)partial
 {
 #if TARGET_OS_IPHONE

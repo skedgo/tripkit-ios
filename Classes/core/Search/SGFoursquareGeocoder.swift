@@ -10,7 +10,7 @@ import Foundation
 
 extension SGFoursquareGeocoder {
   
-  public func hit(_ endpoint: String, paras: [String: Any], completion: @escaping ([String: Any]?, Error?) -> Void) {
+  @objc public func hit(_ endpoint: String, paras: [String: Any], completion: @escaping ([String: Any]?, Error?) -> Void) {
     
     let session = URLSession.shared
     
@@ -36,6 +36,16 @@ extension SGFoursquareGeocoder {
     }
     
     task.resume()
+  }
+  
+  @objc(addDataSourcesToCoordinate:fromJSON:)
+  public func addDataSources(to coordinate: SGKNamedCoordinate, from json: [String: Any]) {
+    guard let id = json["id"] as? String else { return }
+    let website = API.DataAttribution(
+      provider: API.CompanyInfo(name: "Foursquare", website: URL(string: "http://foursquare.com/venue/\(id)")))
+    let app = API.DataAttribution(
+      provider: API.CompanyInfo(name: "Foursquare app", website: URL(string: "foursquare://venues/\(id)")))
+    coordinate.dataSources = [website, app]
   }
   
 }

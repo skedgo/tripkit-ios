@@ -11,207 +11,8 @@
 #import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
 
-typedef enum {
-	SGDeparturesResultAddedStops      = 1 << 0,
-  SGDeparturesResultAddedDepartures = 1 << 1
-} SGDepartures;
-
-
 @implementation TKBuzzInfoProvider
 
-- (void)downloadDeparturesForStop:(StopLocation *)stop
-												 fromDate:(NSDate *)date
-														limit:(NSInteger)limit
-											 completion:(SGDeparturesStopSuccessBlock)completion
-													failure:(void(^)(NSError *error))failure
-{
-  NSParameterAssert(stop);
-  NSParameterAssert(date);
-  NSParameterAssert(completion);
-  
-  ZAssert(stop.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
-  
-	// construct the parameters
-  if (! stop.stopCode) {
-    // this can happen if the stop got deleted while we were looking at it.
-    if (failure) {
-      dispatch_async(dispatch_get_main_queue(), ^{
-        failure([NSError errorWithCode:kSGInfoProviderErrorStopWithoutCode
-                               message:@"Provided stop has no code or children."]);
-      });
-    }
-    return;
-  }
-  
-	SVKServer *server = [SVKServer sharedInstance];
-  [server requireRegions:^(NSError *error) {
-    if (error) {
-      if (failure) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-          failure(error);
-        });
-      }
-      return;
-    }
-    
-    SVKRegion *region = stop.region;
-    if (! region) {
-      if (failure) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-          failure([NSError errorWithCode:kSVKErrorTypeInternal
-                                 message:@"Region not fetched yet."]);
-        });
-      }
-      return;
-    }
-    
-    NSArray *stops = @[stop.stopCode];
-    
-    NSDictionary *paras = @{
-                            @"region"						: region.name,
-                            @"timeStamp"			  : @((NSInteger) [date timeIntervalSince1970]),
-                            @"embarkationStops" : stops,
-                            @"limit" 						: @(limit),
-                            @"config"           : [TKSettings defaultDictionary],
-                            };
-    
-    
-    __weak typeof(self) weakSelf = self;
-    [server hitSkedGoWithMethod:@"POST"
-                           path:@"departures.json"
-                     parameters:paras
-                         region:region
-                 callbackOnMain:NO
-                        success:
-     ^(NSInteger status, id responseObject) {
-#pragma unused(status)
-       typeof(self) strongSelf = weakSelf;
-       if( !strongSelf) {
-         return;
-       }
-       
-       [stop.managedObjectContext performBlock:^{
-         NSNumber *rawFlags = [strongSelf addDeparturesToStop:stop
-                                                 fromResponse:responseObject
-                                           intoTripKitContext:stop.managedObjectContext];
-         
-         NSInteger flags = [rawFlags integerValue];
-         if ((flags & SGDeparturesResultAddedDepartures) != 0) {
-           // save it
-           NSError *anError = nil;
-           ZAssert([stop.managedObjectContext save:&anError], @"Could not save: %@", anError);
-           
-           if (anError) {
-             failure(anError);
-           } else if (completion) {
-             completion((flags & SGDeparturesResultAddedStops) != 0);
-           }
-           
-         } else {
-           DLog(@"No departures found.");
-           if (failure) {
-             NSError *anError = [NSError errorWithCode:kSGInfoProviderErrorNothingFound
-                                               message:@"Nothing found"];
-             failure(anError);
-           }
-         }
-       }];
-     }
-                        failure:
-       ^(NSError * _Nullable anError) {
-         if (failure) {
-           dispatch_async(dispatch_get_main_queue(), ^{
-             failure(anError);
-           });
-         }
-     }];
-  }];
-}
-
-+ (NSDictionary *)queryParametersForDLSTable:(TKDLSTable *)table
-                                    fromDate:(NSDate *)date
-                                       limit:(NSInteger)limit
-{
-  NSParameterAssert(table);
-  NSParameterAssert(date);
-  
-  return @{
-           @"region"                : table.startRegion.name,
-           @"disembarkationRegion"  : table.endRegion.name,
-           @"timeStamp"             : @((NSInteger) [date timeIntervalSince1970]),
-           @"embarkationStops"      : @[table.startStopCode],
-           @"disembarkationStops"   : @[table.endStopCode],
-           @"limit"                 : @(limit),
-           @"config"                : [TKSettings defaultDictionary],
-           };
-}
-
-- (void)downloadDeparturesForDLSTable:(TKDLSTable *)table
-                             fromDate:(NSDate *)date
-                                limit:(NSInteger)limit
-                           completion:(SGDeparturesDLSSuccessBlock)completion
-                              failure:(void(^)(NSError *error))failure
-{
-  NSParameterAssert(table);
-  NSParameterAssert(date);
-  NSParameterAssert(completion);
-  
-  ZAssert(table.tripKitContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
-  
-	SVKServer *server = [SVKServer sharedInstance];
-  [server requireRegions:^(NSError *error) {
-    if (error) {
-      if (failure) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-          failure(error);
-        });
-      }
-      return;
-    }
-    
-    NSDictionary *paras = [[self class] queryParametersForDLSTable:table
-                                                          fromDate:date
-                                                             limit:limit];
-    __weak typeof(self) weakSelf = self;
-    // now send it off to the server
-    [server hitSkedGoWithMethod:@"POST"
-                           path:@"departures.json"
-                     parameters:paras
-                         region:table.startRegion
-                 callbackOnMain:NO
-                        success:
-     ^(NSInteger status, id responseObject) {
-#pragma unused(status)
-       typeof(self) strongSelf = weakSelf;
-       if( !strongSelf) {
-         return;
-       }
-       
-       [table.tripKitContext performBlock:^{
-         NSSet *identifiers = [strongSelf addDeparturesToStop:nil
-                                                 fromResponse:responseObject
-                                           intoTripKitContext:table.tripKitContext];
-         
-         // save it
-         NSError *saveError = nil;
-         ZAssert([table.tripKitContext save:&saveError], @"Could not save: %@", saveError);
-         if (saveError) {
-           failure(saveError);
-         } else {
-           completion(identifiers);
-         }
-       }];
-     }
-                        failure:
-     ^(NSError *operationError) {
-       if (failure) {
-         dispatch_async(dispatch_get_main_queue(), ^{
-           failure(operationError);
-         });
-       }
-     }];
-  }];
-}
 
 - (void)downloadContentOfService:(Service *)service
 							forEmbarkationDate:(NSDate *)date
@@ -267,8 +68,8 @@ typedef enum {
                           region:region
                   callbackOnMain:NO
                          success:
-      ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+      ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
         typeof(self) strongSelf = weakSelf;
         if (!strongSelf) {
           return;
@@ -353,8 +154,8 @@ typedef enum {
                          region:region
                  callbackOnMain:NO
                         success:
-     ^(NSInteger status, id responseObject) {
-#pragma unused(status)
+     ^(NSInteger status, id responseObject, NSData *data) {
+#pragma unused(status, data)
         // set the stop properties
        [stop.managedObjectContext performBlock:^{
          BOOL success = [TKBuzzInfoProvider addStop:stop fromResponse:responseObject];
@@ -390,13 +191,13 @@ typedef enum {
   }
   
   // real time vehicles
-  [TKParserHelper updateVehiclesForService:service
-                            primaryVehicle:responseDict[@"realtimeVehicle"]
-                       alternativeVehicles:responseDict[@"realtimeVehicleAlternatives"]];
+  [TKAPIToCoreDataConverter updateVehiclesForService:service
+                                      primaryVehicle:responseDict[@"realtimeVehicle"]
+                                 alternativeVehicles:responseDict[@"realtimeVehicleAlternatives"]];
   
-  // alert  
-  [TKParserHelper updateOrAddAlerts:responseDict[@"alerts"]
-                   inTripKitContext:context];
+  // alert
+  [TKAPIToCoreDataConverter updateOrAddAlerts:responseDict[@"alerts"]
+                             inTripKitContext:context];
   
   // mode info
   ModeInfo *modeInfo = [ModeInfo modeInfoForDictionary:responseDict[@"modeInfo"]];
@@ -417,169 +218,6 @@ typedef enum {
 }
 
 #pragma mark - Private methods
-
-/**
- @return If `stop`: a NSNumber for the flags. If `stop == nil`: a set of `pairIdentifiers`.
- */
-- (id)addDeparturesToStop:(StopLocation *)stopOrNil
-             fromResponse:(id)responseObject
-       intoTripKitContext:(NSManagedObjectContext *)context
-
-{
-  ZAssert(context.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
-  
-  BOOL forSingleStop = (stopOrNil != nil);
-  
-  NSInteger flags = 0;
-  NSMutableSet *pairIdentifiers  = [NSMutableSet set];
-
-  NSMutableSet *processedStops   = [NSMutableSet set];
-  if (forSingleStop) {
-    // fill in parents with additional information (optional)
-    NSDictionary *parentDict = responseObject[@"parentInfo"];
-    if (parentDict) {
-      BOOL addedStops = [TKParserHelper updateStopLocation:stopOrNil
-                                            fromDictionary:parentDict];
-      if (addedStops) {
-        flags |= SGDeparturesResultAddedStops;
-      }
-    }
-    [processedStops addObject:stopOrNil];
-
-  } else {
-    // DLS
-    NSArray *stops = responseObject[@"stops"];
-    for (NSDictionary *stopDict in stops) {
-      StopLocation *stopLocation = [TKParserHelper insertNewStopLocation:stopDict
-                                                        inTripKitContext:context];
-      [processedStops addObject:stopLocation];
-    }
-  }
-  
-  // get the potential stops to add the embarkations to
-  NSMutableDictionary *stopsDict = [NSMutableDictionary dictionary];
-  for (StopLocation *stop in processedStops) {
-    if (stop.children.count > 0) {
-      for (StopLocation *child in stop.children) {
-        if (child.stopCode) {
-          stopsDict[child.stopCode] = child;
-        }
-      }
-    } else if (stop.stopCode) {
-      stopsDict[stop.stopCode] = stop;
-    }
-  }
-	
-	// add the embarkations
-	NSArray *stops = responseObject[@"embarkationStops"];
-	NSInteger addedCount = 0;
-  NSString *entityName = NSStringFromClass(forSingleStop ? [StopVisits class] : [DLSEntry class]);
-	for (NSDictionary *stopDict in stops) {
-		NSString *stopCode = stopDict[@"stopCode"];
-		StopLocation *stopToAddTo = stopsDict[stopCode];
-		if (! stopToAddTo)
-			continue;
-		
-		NSArray *departureList = stopDict[@"services"];
-		
-		for (NSDictionary *departureDict in departureList) {
-			addedCount++;
-
-			// add the service
-			Service *service = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Service class])
-																											 inManagedObjectContext:context];
-			service.frequency     = departureDict[@"frequency"];
-			service.number        = departureDict[@"serviceNumber"];
-      service.lineName      = departureDict[@"serviceName"];
-      service.direction     = departureDict[@"serviceDirection"];
-			service.code          = departureDict[@"serviceTripID"];
-			service.color         = [SVKParserHelper colorForDictionary:departureDict[@"serviceColor"]];
-			service.modeInfo      = [ModeInfo modeInfoForDictionary:departureDict[@"modeInfo"]];
-      service.operatorName  = departureDict[@"operator"];
-			
-      // accessibility
-      if ([departureDict[@"wheelchairAccessible"] boolValue]) {
-        service.wheelchairAccessible = true;
-      }
-      if ([departureDict[@"bicycleAccessible"] boolValue]) {
-        service.bicycleAccessible = true;
-      }
-      
-			// the real-time status
-			NSString *realTimeStatus = departureDict[@"realTimeStatus"];
-			[TKParserHelper adjustService:service
-            forRealTimeStatusString:realTimeStatus];
-			
-			// the real-time vehicles
-      [TKParserHelper updateVehiclesForService:service
-                                primaryVehicle:departureDict[@"realtimeVehicle"]
-                           alternativeVehicles:departureDict[@"realtimeVehicleAlternatives"]];
-			
-			// the alerts
-      service.alertHashCodes = departureDict[@"alertHashCodes"];
-			
-			// add the visit information
-			StopVisits *visit = [NSEntityDescription insertNewObjectForEntityForName:entityName
-																												inManagedObjectContext:context];
-			NSNumber *startTimeRaw = departureDict[@"startTime"];
-			if (nil != startTimeRaw) {
-				// we use 'time' to allow KVO
-				visit.time = [NSDate dateWithTimeIntervalSince1970:[startTimeRaw longValue]];
-			}
-			NSNumber *endTimeRaw = departureDict[@"endTime"];
-			if (nil != endTimeRaw) {
-				visit.arrival = [NSDate dateWithTimeIntervalSince1970:[endTimeRaw longValue]];
-			}
-      
-      visit.originalTime = [visit time];
-			
-			visit.searchString = departureDict[@"searchString"];
-      
-      // dls info
-      if (! forSingleStop) {
-        NSString *endStopCode = departureDict[@"endStopCode"];
-        NSString *pairIdentifier = [NSString stringWithFormat:@"%@-%@", stopCode, endStopCode];
-        [pairIdentifiers addObject:pairIdentifier];
-
-        DLSEntry *entry = (DLSEntry *)visit;
-        entry.pairIdentifier = pairIdentifier;
-        
-        StopLocation *end = stopsDict[endStopCode];
-        ZAssert(end, @"We need an end stop!");
-        entry.endStop = end;
-        
-        // TODO: This could come back with a new stop, e.g., if we're going to a parent location and this is to a specific platform
-      }
-			
-			// connect visit to stop
-			visit.service = service;
-			ZAssert(visit.stop == nil || visit.stop == stopToAddTo, @"We shouldn't have a stop already! %@", visit.stop);
-			visit.stop = stopToAddTo;
-			ZAssert(visit.stop != nil, @"Visit needs a stop!");
-
-			// do this last to make sure it has a stop
-			[visit adjustRegionDay];
-		}
-	}
-  if (addedCount > 0) {
-    flags |= SGDeparturesResultAddedDepartures;
-  }
-	
-	// add the alerts for the stop itself
-	[TKParserHelper updateOrAddAlerts:responseObject[@"alerts"]
-                   inTripKitContext:context];
-	
-  if (forSingleStop) {
-    // Here, we know we have a non-nil stopLocation and that alerts
-    // have been either added or updated in core data. So let's
-    // reset the alerts such that the new ones are used in the next
-    // fetch.
-    [stopOrNil resetAlertCache];
-    return @(flags);
-  } else {
-    return pairIdentifiers;
-  }
-}
 
 + (BOOL)addStop:(StopLocation *)stop
    fromResponse:(id)responseObject
@@ -604,13 +242,13 @@ typedef enum {
         
         // is this our stop?
         if ([stop.stopCode isEqualToString:code]) {
-          [TKParserHelper updateStopLocation:stop
-                              fromDictionary:stopDict];
+          [TKAPIToCoreDataConverter updateStopLocation:stop
+                                        fromDictionary:stopDict];
           
         } else {
           // we always add all the stops, because the cell is new
-          StopLocation *newStop = [TKParserHelper insertNewStopLocation:stopDict
-                                                       inTripKitContext:tripKitContext];
+          StopLocation *newStop = [TKAPIToCoreDataConverter insertNewStopLocation:stopDict
+                                                                 inTripKitContext:tripKitContext];
           
           // make sure we have an ID
           NSError *error = nil;
@@ -623,7 +261,7 @@ typedef enum {
     return NO;
   
   } else {
-    [TKParserHelper updateStopLocation:stop fromDictionary:responseObject];
+    [TKAPIToCoreDataConverter updateStopLocation:stop fromDictionary:responseObject];
     return YES;
   }
 }

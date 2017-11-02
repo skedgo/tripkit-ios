@@ -40,9 +40,6 @@
 /* Credit card CVC */
 "CVC" = "安全碼";
 
-/* No comment provided by engineer. */
-"Can't find your current city" = "無法取得您當前的城市";
-
 /* Cancel action */
 "Cancel" = "取消";
 

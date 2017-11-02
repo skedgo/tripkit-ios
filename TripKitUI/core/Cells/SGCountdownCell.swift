@@ -70,7 +70,7 @@ extension SGCountdownCell {
   ///   - timeToCountdownTo: Optional time to countdown to/from. If this is in the past, the cell should appear faded.
   ///   - position: Position of this cell relative to the cells around it.
   ///   - stripColor: Optional color to display a coloured strip under the icon.
-  public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, position: SGKGrouping, stripColor: SGKColor?) {
+  @objc public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, position: SGKGrouping, stripColor: SGKColor?) {
     
     _resetContents()
     
@@ -88,7 +88,7 @@ extension SGCountdownCell {
   }
   
   
-  public func configureAlertView(with alerts: [Alert]) {
+  @objc public func configureAlertView(with alerts: [Alert]) {
     alertIconWidth.constant = alerts.isEmpty ? 0 : 20
     alertViewTopConstraint.constant = alerts.isEmpty ? 0 : 8
     alertViewBottomConstraint.constant = alerts.isEmpty ? 0 : 8
@@ -113,7 +113,7 @@ extension SGCountdownCell {
         guard self.alertPresentationHandler != nil else { return }
         self.alertPresentationHandler(alerts)
       })
-      .addDisposableTo(disposeBag)
+      .disposed(by: disposeBag)
   }
   
   
@@ -142,7 +142,7 @@ extension SGCountdownCell {
   }
   
   
-  public func adjustContentWrapper(basedOn position: SGKGrouping) {
+  @objc public func adjustContentWrapper(basedOn position: SGKGrouping) {
     switch position {
     case .start:
       contentWrapperTopConstraint.constant = 0
@@ -160,7 +160,7 @@ extension SGCountdownCell {
   }
   
   
-  public func addViewToFootnote(_ view: UIView) {
+  @objc public func addViewToFootnote(_ view: UIView) {
     // Make sure we start clean.
     for subview in footnoteView.subviews {
       subview.removeFromSuperview()
@@ -193,11 +193,11 @@ extension SGCountdownCell {
 
 extension SGCountdownCell {
   
-  public class func reuseId() -> String {
+  @objc public class func reuseId() -> String {
     return "SGCountdownCell"
   }
   
-  public class func nib() -> UINib {
+  @objc public class func nib() -> UINib {
     return UINib(nibName: "SGCountdownCell", bundle: Bundle(for: SGCountdownCell.self))
   }
   

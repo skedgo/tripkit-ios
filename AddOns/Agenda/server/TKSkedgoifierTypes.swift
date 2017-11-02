@@ -37,11 +37,11 @@ public protocol TKSkedgoifierEventInputType: TKAgendaEventInputType {
 }
 
 public class TKSkedgoifierEventOutput: TKAgendaEventOutput {
-  let effectiveStart: Date?
-  let effectiveEnd: Date?
-  let isContinuation: Bool
+  @objc let effectiveStart: Date?
+  @objc let effectiveEnd: Date?
+  @objc let isContinuation: Bool
 
-  public init(forInput input: TKAgendaEventInputType, effectiveStart: Date?, effectiveEnd: Date?, isContinuation: Bool) {
+  @objc public init(forInput input: TKAgendaEventInputType, effectiveStart: Date?, effectiveEnd: Date?, isContinuation: Bool) {
     self.effectiveStart = effectiveStart
     self.effectiveEnd = effectiveEnd
     self.isContinuation = isContinuation

@@ -8,11 +8,9 @@
 
 import Foundation
 
-import Marshal
 import RxSwift
 
-
-// MARK: - Fetcher methods -
+// MARK: - Fetcher methods
 
 extension TKBuzzInfoProvider {
   
@@ -21,15 +19,14 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (TKRegionInfo?) -> Void)
+  public class func fetchRegionInformation(forRegion region: SVKRegion, completion: @escaping (API.RegionInfo?) -> Void)
   {
-    SVKServer.fetchArray(TKRegionInfo.self,
-                         method: .POST, path: "regionInfo.json",
-                         parameters: ["region": region.name],
-                         region: region,
-                         keyPath: "regions")
-    { regions in
-      completion(regions.first)
+    SVKServer.shared.fetch(RegionInfoResponse.self,
+                           method: .POST, path: "regionInfo.json",
+                           parameters: ["region": region.name],
+                           region: region)
+    { result in
+      completion(result?.regions.first)
     }
   }
   
@@ -38,10 +35,10 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (TKParatransitInfo?) -> Void)
+  public class func fetchParatransitInformation(forRegion region: SVKRegion, completion: @escaping (API.Paratransit?) -> Void)
   {
     fetchRegionInformation(forRegion: region) { info in
-      completion(info?.paratransitInformation)
+      completion(info?.paratransit)
     }
   }
   
@@ -50,6 +47,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
+  @objc
   public class func fetchPublicTransportModes(forRegion region: SVKRegion, completion: @escaping ([ModeInfo]) -> Void)
   {
     fetchRegionInformation(forRegion: region) { info in
@@ -63,8 +61,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  @objc(fetchLocationInformation:forRegion:completion:)
-  public class func fetchLocationInformation(_ annotation: MKAnnotation, for region: SVKRegion, completion: @escaping (TKLocationInfo?) -> Void) {
+  public class func fetchLocationInformation(_ annotation: MKAnnotation, for region: SVKRegion, completion: @escaping (API.LocationInfo?) -> Void) {
     
     let paras: [String: Any]
     if let named = annotation as? SGKNamedCoordinate, let identifier = named.locationID {
@@ -73,11 +70,11 @@ extension TKBuzzInfoProvider {
       paras = [ "lat": annotation.coordinate.latitude, "lng": annotation.coordinate.longitude ]
     }
     
-    SVKServer.fetch(TKLocationInfo.self,
-                    path: "locationInfo.json",
-                    parameters: paras,
-                    region: region,
-                    completion: completion)
+    SVKServer.shared.fetch(API.LocationInfo.self,
+                           path: "locationInfo.json",
+                           parameters: paras,
+                           region: region,
+                           completion: completion)
   }
   
   
@@ -86,72 +83,80 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([TKAlert]) -> Void) {
+  public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([API.Alert]) -> Void) {
     
-    SVKServer.fetchArray(TKSimpleAlert.self,
-                         path: "alerts/transit.json",
-                         parameters: ["region": region.name],
-                         region: region,
-                         keyPath: "alerts")
-    { alerts in
-      completion(alerts as [TKAlert])
+    SVKServer.shared.fetch(AlertsTransitResponse.self,
+                           path: "alerts/transit.json",
+                           parameters: ["region": region.name],
+                           region: region)
+    { response in
+      let mappings = response?.alerts ?? []
+      completion(mappings.map { $0.alert })
     }
   }
   
   /**
    Asynchronously fetches transit alerts for the provided region using Rx.
    */
-  public class func rx_fetchTransitAlerts(forRegion region: SVKRegion) -> Observable<[TKAlert]> {
+  public class func rx_fetchTransitAlerts(forRegion region: SVKRegion) -> Observable<[API.Alert]> {
     let paras: [String: Any] = [
       "region": region.name as Any
     ]
     
     return SVKServer.shared.rx
       .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
-      .map { (_, response) -> [TKAlert] in
-        if let json = response as? [String: Any] {
-          let alerts: [TKSimpleAlert]? = try? json.value(for: "alerts")
-          return alerts ?? []
-        } else {
-          return []
-        }
+      .map { (_, _, data) -> [API.Alert] in
+        let decoder = JSONDecoder()
+        guard let data = data, let response = try? decoder.decode(AlertsTransitResponse.self, from: data) else { return [] }
+        return response.alerts.map { $0.alert }
     }
   }
 }
 
+// MARK: - Response data model
 
-// MARK: - Helper Extensions -
+extension TKBuzzInfoProvider {
+  
+  struct RegionInfoResponse: Codable {
+    let regions: [API.RegionInfo]
+    let server: String?
+  }
+  
+  struct AlertsTransitResponse: Codable {
+    let alerts: [API.AlertMapping]
+  }
+  
+}
+
+
+// MARK: - Codable helper Extensions
 
 extension SVKServer {
   
-  fileprivate class func fetch<E: Unmarshaling>(
+  fileprivate func fetch<E: Decodable>(
     _ type: E.Type,
     method: HTTPMethod = .GET,
     path: String,
     parameters: [String: Any]? = nil,
     region: SVKRegion,
-    keyPath: String? = nil,
     completion: @escaping (E?) -> Void
-  )
+    )
   {
-    SVKServer.shared.hitSkedGo(
+    hitSkedGo(
       withMethod: method.rawValue,
       path: path,
       parameters: parameters,
       region: region,
-      success: { _, response in
-        guard let json = response as? [String: Any] else {
+      success: { _, _, data in
+        guard let data = data else {
           SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters ?? [:])" }
           completion(nil)
           return
         }
+
         do {
-          let result: E
-          if let keyPath = keyPath {
-            result = try json.value(for: keyPath)
-          } else {
-            result = try E(object: json)
-          }
+          let decoder = JSONDecoder()
+          let result = try decoder.decode(type, from: data)
           completion(result)
         } catch {
           SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
@@ -161,46 +166,6 @@ extension SVKServer {
       failure: { error in
         SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
         completion(nil)
-    })
-  }
-  
-  fileprivate class func fetchArray<E: Unmarshaling>(
-    _ type: E.Type,
-    method: HTTPMethod = .GET,
-    path: String,
-    parameters: [String: Any]? = nil,
-    region: SVKRegion,
-    keyPath: String? = nil,
-    completion: @escaping ([E]) -> Void
-    )
-  {
-    SVKServer.shared.hitSkedGo(
-      withMethod: method.rawValue,
-      path: path,
-      parameters: parameters,
-      region: region,
-      success: { _, response in
-        guard let json = response as? [String: Any] else {
-          SGKLog.debug("TKBuzzInfoProvider") { "Empty response when fetching \(path), paras: \(parameters ?? [:])" }
-          completion([])
-          return
-        }
-        do {
-          let result: [E]
-          if let keyPath = keyPath {
-            result = try json.value(for: keyPath)
-          } else {
-            result = try Array<E>.value(from: json)
-          }
-          completion(result)
-        } catch {
-          SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
-          completion([])
-        }
-    },
-      failure: { error in
-        SGKLog.debug("TKBuzzInfoProvider") { "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])" }
-        completion([])
     })
   }
   

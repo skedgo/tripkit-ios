@@ -39,7 +39,7 @@ public class TKModeBookingCoordinator {
           assertionFailure("It should never error out but did with: \(error). Instead, you should use the `.error` case of `TKBookingStateMachine`")
         }
       )
-      .addDisposableTo(disposeBag)
+      .disposed(by: disposeBag)
   }
 
 }

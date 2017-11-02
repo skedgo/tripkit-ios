@@ -44,11 +44,6 @@ typedef void(^SGSearchAutocompletionResultBlock)(SGAutocompletionResultType resu
                                       showSearchOptions:(BOOL)showSearchOptions;
 
 /**
- * Main method required to configure the autocompleter for a new scope search.
- */
-- (void)prepareForNewScopeSearchShowStickyForCurrentLocation:(BOOL)stickyForGPS;
-
-/**
  * Method that kicks of autocompletion. If it found something interesting
  * it'll call the completion/action block which tells the caller to trigger
  * a refresh of whatever thingy this data source provides data for.

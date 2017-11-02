@@ -19,6 +19,13 @@ public protocol STKDisplayablePoint: MKAnnotation {
   
   var pointImage: SGKImage? { get }
   var pointImageURL: URL? { get }
+  
+  /// Identifier for this point for clustering on a map. Typical use
+  /// is to cluster nearby annotations with same identifier.
+  ///
+  /// Return `nil` to not allow clustering this annotation.
+  var pointClusterIdentifier: String? { get }
+  
   @objc optional func setCoordinate(coordinate: CLLocationCoordinate2D)
   
 }

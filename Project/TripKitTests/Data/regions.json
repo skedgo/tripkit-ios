@@ -1,0 +1,4556 @@
+{
+  "hashCode": 1655272037,
+  "modes": {
+    "cy_bic": {
+      "color": {
+        "blue": 99,
+        "green": 180,
+        "red": 0
+      },
+      "title": "Bicycle"
+    },
+    "cy_bic-s": {
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "Bike share"
+    },
+    "cy_bic-s_SoBi11": {
+      "URL": "http://coast.socialbicycles.com",
+      "color": {
+        "blue": 192,
+        "green": 157,
+        "red": 24
+      },
+      "title": "Coast Bike Share"
+    },
+    "cy_bic-s_SoBi124": {
+      "URL": "https://bikethetower.com/",
+      "color": {
+        "blue": 50,
+        "green": 32,
+        "red": 195
+      },
+      "title": "Tower Bridge Bike Share Preview"
+    },
+    "cy_bic-s_SoBi126": {
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "BTN BikeShare"
+    },
+    "cy_bic-s_SoBi20": {
+      "URL": "http://grid.socialbicycles.com",
+      "color": {
+        "blue": 39,
+        "green": 214,
+        "red": 67
+      },
+      "title": "Grid Bike Share"
+    },
+    "cy_bic-s_SoBi23": {
+      "URL": "https://juicebikeshare.com/",
+      "color": {
+        "blue": 23,
+        "green": 93,
+        "red": 231
+      },
+      "title": "Juice Bike Share"
+    },
+    "cy_bic-s_SoBi31": {
+      "URL": "http://relaybikeshare.com/",
+      "color": {
+        "blue": 128,
+        "green": 186,
+        "red": 75
+      },
+      "title": "Relay Bike Share"
+    },
+    "cy_bic-s_SoBi41": {
+      "URL": "https://velogo.ca/",
+      "color": {
+        "blue": 69,
+        "green": 152,
+        "red": 63
+      },
+      "title": "VeloGo"
+    },
+    "cy_bic-s_SoBi78": {
+      "URL": "https://reddybikeshare.socialbicycles.com",
+      "color": {
+        "blue": 50,
+        "green": 32,
+        "red": 195
+      },
+      "title": "Reddy bikeshare"
+    },
+    "cy_bic-s_SoBi92": {
+      "URL": "https://www.biketownpdx.com/",
+      "color": {
+        "blue": 2,
+        "green": 76,
+        "red": 252
+      },
+      "icon": "biketown",
+      "title": "BIKETOWNpdx"
+    },
+    "cy_bic-s_SoBi93": {
+      "URL": "http://uhbikes.com/",
+      "color": {
+        "blue": 0,
+        "green": 0,
+        "red": 255
+      },
+      "title": "UHBikes"
+    },
+    "cy_bic-s_arborbike": {
+      "URL": "http://arborbike.org/",
+      "color": {
+        "blue": 120,
+        "green": 36,
+        "red": 34
+      },
+      "title": "ArborBike"
+    },
+    "cy_bic-s_belfastbikes-belfast": {
+      "URL": "http://www.belfastbikes.co.uk/en/belfast/",
+      "color": {
+        "blue": 210,
+        "green": 208,
+        "red": 197
+      },
+      "title": "BelfastBikes"
+    },
+    "cy_bic-s_bergen-bysykkel": {
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "Bysykkel"
+    },
+    "cy_bic-s_bicing": {
+      "URL": "https://www.bicing.cat",
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "Bicing"
+    },
+    "cy_bic-s_bicloo": {
+      "URL": "http://www.bicloo.nantesmetropole.fr",
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "Bicloo"
+    },
+    "cy_bic-s_bikepoa": {
+      "URL": "https://www.mobilicidade.com.br/bikepoa.asp",
+      "color": {
+        "blue": 0,
+        "green": 153,
+        "red": 255
+      },
+      "title": "BikePOA"
+    },
+    "cy_bic-s_bixi-montreal": {
+      "URL": "http://montreal.bixi.com",
+      "color": {
+        "blue": 37,
+        "green": 49,
+        "red": 238
+      },
+      "icon": "bixi",
+      "title": "Bixi"
+    },
+    "cy_bic-s_bubi": {
+      "URL": "http://molbubi.bkk.hu",
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "MOL Bubi"
+    },
+    "cy_bic-s_bublr-bikes": {
+      "URL": "http://bublrbikes.com/",
+      "color": {
+        "blue": 234,
+        "green": 183,
+        "red": 26
+      },
+      "title": "Bublr Bikes"
+    },
+    "cy_bic-s_bycyklen": {
+      "URL": "https://bycyklen.dk/",
+      "color": {
+        "blue": 49,
+        "green": 102,
+        "red": 242
+      },
+      "title": "Bycyklen"
+    },
+    "cy_bic-s_bysykkelen": {
+      "URL": "http://bysykkelen.no/",
+      "color": {
+        "blue": 200,
+        "green": 11,
+        "red": 0
+      },
+      "title": "Bysykkelen"
+    },
+    "cy_bic-s_citybikes-helsinki": {
+      "URL": "https://www.hsl.fi/en/citybikes",
+      "color": {
+        "blue": 52,
+        "green": 188,
+        "red": 251
+      },
+      "title": "City bikes"
+    },
+    "cy_bic-s_citycycle": {
+      "URL": "http://www.citycycle.com.au",
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "CityCycle"
+    },
+    "cy_bic-s_cogo": {
+      "URL": "https://www.cogobikeshare.com/",
+      "color": {
+        "blue": 255,
+        "green": 255,
+        "red": 255
+      },
+      "title": "CoGo"
+    },
+    "cy_bic-s_decobike-san-diego": {
+      "URL": "http://www.decobike.com/sandiego/",
+      "color": {
+        "blue": 255,
+        "green": 255,
+        "red": 255
+      },
+      "title": "Decobike San Diego"
+    },
+    "cy_bic-s_divvy": {
+      "URL": "http://divvybikes.com",
+      "color": {
+        "blue": 240,
+        "green": 194,
+        "red": 81
+      },
+      "icon": "divvy",
+      "title": "Divvy"
+    },
+    "cy_bic-s_dublinbikes": {
+      "URL": "http://www.dublinbikes.ie",
+      "color": {
+        "blue": 210,
+        "green": 208,
+        "red": 197
+      },
+      "title": "dublinbikes"
+    },
+    "cy_bic-s_ecobici": {
+      "URL": "https://www.ecobici.df.gob.mx",
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "EcoBici"
+    },
+    "cy_bic-s_fortworth": {
+      "URL": "http://fortworthbikesharing.org",
+      "color": {
+        "blue": 170,
+        "green": 93,
+        "red": 0
+      },
+      "darkIcon": "bcycle-dark",
+      "icon": "bcycle",
+      "title": "Fort Worth Bike Sharing"
+    },
+    "cy_bic-s_goeteborg": {
+      "URL": "http://www.goteborgbikes.se/",
+      "color": {
+        "blue": 195,
+        "green": 144,
+        "red": 59
+      },
+      "title": "Styr & Ställ"
+    },
+    "cy_bic-s_greenbikeslc": {
+      "URL": "https://greenbikeslc.org/",
+      "color": {
+        "blue": 170,
+        "green": 93,
+        "red": 0
+      },
+      "darkIcon": "bcycle-dark",
+      "icon": "bcycle",
+      "title": "GREENbike"
+    },
+    "cy_bic-s_healthy-ride-pittsburgh-pittsburgh": {
+      "URL": "https://healthyridepgh.com/",
+      "color": {
+        "blue": 224,
+        "green": 171,
+        "red": 0
+      },
+      "title": "Healthy Ride"
+    },
+    "cy_bic-s_houston": {
+      "URL": "http://houston.bcycle.com/",
+      "color": {
+        "blue": 170,
+        "green": 93,
+        "red": 0
+      },
+      "darkIcon": "bcycle-dark",
+      "icon": "bcycle",
+      "title": "Houston B-cycle"
+    },
+    "cy_bic-s_hubway": {
+      "URL": "http://www.thehubway.com/",
+      "color": {
+        "blue": 66,
+        "green": 180,
+        "red": 70
+      },
+      "icon": "hubway",
+      "title": "Hubway"
+    },
+    "cy_bic-s_indego": {
+      "URL": "https://www.rideindego.com/",
+      "color": {
+        "blue": 203,
+        "green": 130,
+        "red": 0
+      },
+      "title": "Indego"
+    },
+    "cy_bic-s_indiana-pacers-bikeshare": {
+      "URL": "https://www.pacersbikeshare.org/",
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "Indiana Pacers Bikeshare"
+    },
+    "cy_bic-s_kansascity": {
+      "URL": "https://kansascity.bcycle.com/",
+      "color": {
+        "blue": 170,
+        "green": 93,
+        "red": 0
+      },
+      "darkIcon": "bcycle-dark",
+      "icon": "bcycle",
+      "title": "B-cycle"
+    },
+    "cy_bic-s_li-bia-velo": {
+      "URL": "http://www.libiavelo.be/",
+      "color": {
+        "blue": 221,
+        "green": 166,
+        "red": 0
+      },
+      "title": "Li bia velo"
+    },
+    "cy_bic-s_madison": {
+      "URL": "https://madison.bcycle.com/",
+      "color": {
+        "blue": 170,
+        "green": 93,
+        "red": 0
+      },
+      "darkIcon": "bcycle-dark",
+      "icon": "bcycle",
+      "title": "B-cycle"
+    },
+    "cy_bic-s_mobibikes": {
+      "URL": "https://www.mobibikes.ca/",
+      "color": {
+        "blue": 223,
+        "green": 171,
+        "red": 0
+      },
+      "title": "Mobi"
+    },
+    "cy_bic-s_nederland-maastricht": {
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "Nederland"
+    },
+    "cy_bic-s_nextbike-christchurch": {
+      "URL": "https://www.nextbike.co.nz/en/christchurch/",
+      "color": {
+        "blue": 166,
+        "green": 103,
+        "red": 30
+      },
+      "title": "Nextbike"
+    },
+    "cy_bic-s_nextbike-flensburg": {
+      "URL": "https://www.nextbike.de/flensburg/",
+      "color": {
+        "blue": 166,
+        "green": 103,
+        "red": 30
+      },
+      "title": "Nextbike"
+    },
+    "cy_bic-s_nextbike-university-of-warwick": {
+      "URL": "http://www.nextbike.co.uk/en/university-of-warwick/",
+      "color": {
+        "blue": 166,
+        "green": 103,
+        "red": 30
+      },
+      "title": "Nextbike"
+    },
+    "cy_bic-s_nextbike-victoria": {
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "Nextbike"
+    },
+    "cy_bic-s_nice-ride": {
+      "URL": "http://www.niceridemn.org",
+      "color": {
+        "blue": 56,
+        "green": 213,
+        "red": 187
+      },
+      "icon": "niceride",
+      "title": "Nice Ride"
+    },
+    "cy_bic-s_pronto-cycle-share": {
+      "URL": "http://www.prontocycleshare.com/",
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "Pronto Cycle Share"
+    },
+    "cy_bic-s_santiago": {
+      "URL": "http://www.bikesantiago.cl/",
+      "color": {
+        "blue": 25,
+        "green": 154,
+        "red": 255
+      },
+      "title": "Bike Santiago"
+    },
+    "cy_bic-s_sixt-jalgrattarent-tallinn": {
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "SIXT jalgrattarent"
+    },
+    "cy_bic-s_sixt-riga": {
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "SiXT"
+    },
+    "cy_bic-s_telofun": {
+      "URL": "https://www.tel-o-fun.co.il/",
+      "color": {
+        "blue": 65,
+        "green": 194,
+        "red": 137
+      },
+      "title": "Tel-O-Fun"
+    },
+    "cy_bic-s_velo": {
+      "URL": "http://www.velo.toulouse.fr",
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "title": "Vélô"
+    },
+    "in_air": {
+      "color": {
+        "blue": 99,
+        "green": 180,
+        "red": 0
+      },
+      "title": "Flight"
+    },
+    "me_car": {
+      "color": {
+        "blue": 240,
+        "green": 149,
+        "red": 66
+      },
+      "title": "Car"
+    },
+    "me_car-s_Carrot": {
+      "URL": "http://www.carrot.mx/",
+      "color": {
+        "blue": 33,
+        "green": 155,
+        "red": 246
+      },
+      "icon": "carrot",
+      "title": "Carrot"
+    },
+    "me_mot": {
+      "color": {
+        "blue": 199,
+        "green": 196,
+        "red": 46
+      },
+      "title": "Motorbike"
+    },
+    "ps_shu": {
+      "URL": "http://www.jayride.com.au/",
+      "color": {
+        "blue": 60,
+        "green": 123,
+        "red": 233
+      },
+      "implies": [
+                  "ps_tax"
+                  ],
+      "title": "Shuttle"
+    },
+    "ps_tax": {
+      "color": {
+        "blue": 62,
+        "green": 202,
+        "red": 221
+      },
+      "title": "Taxi"
+    },
+    "pt_ltd_SCHOOLBUS": {
+      "color": {
+        "blue": 104,
+        "green": 197,
+        "red": 45
+      },
+      "icon": "school-bus",
+      "implies": [
+                  "pt_pub"
+                  ],
+      "title": "School bus"
+    },
+    "pt_pub": {
+      "color": {
+        "blue": 104,
+        "green": 197,
+        "red": 45
+      },
+      "title": "Public transport"
+    },
+    "wa_wal": {
+      "color": {
+        "blue": 99,
+        "green": 199,
+        "red": 30
+      },
+      "required": true,
+      "title": "Walking"
+    },
+    "wa_whe": {
+      "color": {
+        "blue": 240,
+        "green": 149,
+        "red": 66
+      },
+      "title": "Wheelchair"
+    }
+  },
+  "regions": [
+              {
+              "cities": [
+                         {
+                         "lat": 49.916,
+                         "lng": -97.13,
+                         "timezone": "America/Winnipeg",
+                         "title": "Winnipeg, MB, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "CA_MB_Winnipeg",
+              "polygon": "_`jnH~lnqQ_ry@??_t`B~qy@?",
+              "timezone": "America/Winnipeg",
+              "urls": [
+                       "https://baryogenesis-ca-mb-winnipeg-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-mb-winnipeg-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 37.77952,
+                         "lng": -122.41379,
+                         "timezone": "America/Los_Angeles",
+                         "title": "San Francisco, CA, USA"
+                         },
+                         {
+                         "lat": 37.33661,
+                         "lng": -121.88573,
+                         "timezone": "America/Los_Angeles",
+                         "title": "San Jose, CA, USA"
+                         },
+                         {
+                         "lat": 37.80302,
+                         "lng": -122.27025,
+                         "timezone": "America/Los_Angeles",
+                         "title": "Oakland, CA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "US_CA_SanFrancisco",
+              "polygon": "og|_F~}inVotfG??_owHntfG?",
+              "timezone": "America/Los_Angeles",
+              "urls": [
+                       "https://baryogenesis-us-ca-sanfrancisco-tripgo.skedgo.com/satapp",
+                       "https://stars-us-ca-sanfrancisco-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 42.33693,
+                         "lng": -83.0507,
+                         "timezone": "US/Eastern",
+                         "title": "Detroit, MI, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_MI_Detroit",
+              "polygon": "ixvaGz~u{NonJ{wF}iDqqRb{@}j_At~Szv@r}Obyd@ncG~aOkbWrne@",
+              "timezone": "US/Eastern",
+              "urls": [
+                       "https://inflationary-us-mi-detroit-tripgo.skedgo.com/satapp",
+                       "https://matter-us-mi-detroit-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 55.67577,
+                         "lng": 12.57073,
+                         "timezone": "Europe/Copenhagen",
+                         "title": "Copenhagen, Denmark"
+                         },
+                         {
+                         "lat": 55.40378,
+                         "lng": 10.40354,
+                         "timezone": "Europe/Copenhagen",
+                         "title": "Odense, Denmark"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_bycyklen",
+                        "wa_wal"
+                        ],
+              "name": "DK_Islands",
+              "polygon": "ozboImvf{@owsA|`f@o{K?_`qAo_eD_ieA_nbJ~wq@ovs@ndkA_xq@nu~A~iZ_{m@_{dL~kaA_hpBn`zBn}zF~eiA~whLoxzA~axBoqP~qvD",
+              "timezone": "Europe/Copenhagen",
+              "urls": [
+                       "https://matter-dk-islands-tripgo.skedgo.com/satapp",
+                       "https://granduni-dk-islands-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 51.81317,
+                         "lng": 5.83541,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Nijmegen, Netherlands"
+                         },
+                         {
+                         "lat": 52.21003,
+                         "lng": 5.96798,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Apeldoorn, Netherlands"
+                         },
+                         {
+                         "lat": 51.98436,
+                         "lng": 5.90104,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Arnhem, Netherlands"
+                         },
+                         {
+                         "lat": 52.22096,
+                         "lng": 6.89548,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Enschede, Netherlands"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "NL_Gelderland",
+              "polygon": "okb`Io_p_@?sapGh{BhJt`DqmH|~@zi@{d@rsFr{Att@qRnwDbuCq}BzdF~k@xjC}|JhQ_oPflC}lPaeDgbEej@chB~~KybHnZqhDnkGg{A`bHfbE`jCl{BfeEycBliB}pCro@|Zv~@xgF{HrgEh@?~|G~gGvT|zE~{BxjE~`Dfn@naAllBpK~eB_CdvNvdEpe@vnAhyBtZ|hFxoDrt@}BasCfhAoqFrwE}cNr`EwXhc@ruEpyDzZpaE||JzNxtAwbClpFt_BdhHbxB|fMprDhrPmg@zwF{eAvuFbd@lS|w@khC|}D`@cf@~xFmhBj`LqzBvn@ki@|qCvh@r{@pF|rHio@v_C}aAn~Aae@kw@{z@~lBnSbWuk@du@jh@neE{Phh@jd@~r@`n@urDhcB}i@~s@}iCnkClE_v@n_Mc~A|dE|gA`l@||@jzBzqAbqG{TnjCqOdn@h|@ppAneF_yF`mC{a@i@vaaC",
+              "timezone": "Europe/Amsterdam",
+              "urls": [
+                       "https://hadron-nl-gelderland-tripgo.skedgo.com/satapp",
+                       "https://darkages-nl-gelderland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 42.84634,
+                         "lng": -2.67251,
+                         "timezone": "Europe/Madrid",
+                         "title": "Vitoria Gasteiz, Spain"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "ES_PV_VitoriaGasteiz",
+              "polygon": "o}idGbezOsgO??w_ZrgO?",
+              "timezone": "Europe/Madrid",
+              "urls": [
+                       "https://matter-es-pv-vitoriagasteiz-tripgo.skedgo.com/satapp",
+                       "https://granduni-es-pv-vitoriagasteiz-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 60.173,
+                         "lng": 24.941,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Helsinki, Finland"
+                         },
+                         {
+                         "lat": 60.98266,
+                         "lng": 25.66113,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Lahti, Finland"
+                         },
+                         {
+                         "lat": 60.86823,
+                         "lng": 26.70358,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Kouvola, Finland"
+                         },
+                         {
+                         "lat": 60.99305,
+                         "lng": 24.46072,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Hämeenlinna, Finland"
+                         },
+                         {
+                         "lat": 61.05548,
+                         "lng": 28.1892,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Lappeenranta, Finland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_citybikes-helsinki",
+                        "wa_wal"
+                        ],
+              "name": "FI_SouthFinland",
+              "polygon": "_~rkJoyfiC_uu@_mVotLoaoAnzD_`qA_{m@ovs@_}tAnu~AokXoqmC_xq@oqPoh\\_ry@o|k@_xnD_~i@oyo@nxzAo~oE_yFop{@nqPojcA_xq@n_h@ozDoe`@~oR_ieAoggAou{EnkX_ieA_jZ_vJoqP_uu@_mVojcAn|k@_ieA~lpG~zdL~yxA~olG",
+              "timezone": "Europe/Helsinki",
+              "urls": [
+                       "https://matter-fi-southfinland-tripgo.skedgo.com/satapp",
+                       "https://granduni-fi-southfinland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 53.21946,
+                         "lng": 6.56684,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Groningen, Netherlands"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "NL_NorthNetherlands",
+              "polygon": "sv_fIulo_@r]ue{E|wCikSh{HqzbAvs[kcKxfCgpKbqCuaYziHcvHrvN}pCt~KxlDtpScyA~vJfsDv~YleV~k_@bjAv|AzaCykAf_Lhk@rkIcmAnyChMbhYpdB~dH~cAurAleBlc@?nxoG",
+              "timezone": "Europe/Amsterdam",
+              "urls": [
+                       "https://hadron-nl-northnetherlands-tripgo.skedgo.com/satapp",
+                       "https://darkages-nl-northnetherlands-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 19.4284,
+                         "lng": -99.1276,
+                         "timezone": "America/Mexico_City",
+                         "title": "Mexico City, Mexico"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_car-s_Carrot",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_ecobici",
+                        "wa_wal"
+                        ],
+              "name": "MX_DIF_MexicoCity",
+              "polygon": "wdntBnk{}QcdnA??_r_CbdnA?",
+              "timezone": "America/Mexico_City",
+              "urls": [
+                       "https://inflationary-mx-dif-mexicocity-tripgo.skedgo.com/satapp",
+                       "https://granduni-mx-dif-mexicocity-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 48.8545,
+                         "lng": 2.33686,
+                         "timezone": "Europe/Paris",
+                         "title": "Paris, France"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "FR_J_Paris",
+              "polygon": "ogpjHeoaKakFgtcArwJ}uu@jq_@}nr@xnm@z~eButGlpz@",
+              "timezone": "Europe/Paris",
+              "urls": [
+                       "https://matter-fr-j-paris-tripgo.skedgo.com/satapp",
+                       "https://darkages-fr-j-paris-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 50.41203,
+                         "lng": 4.44362,
+                         "timezone": "Europe/Brussels",
+                         "title": "Charleroi, Belgium"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "BE_SouthWestBelgium",
+              "polygon": "w|xtHugo\\byrB?rxPl}XzqNf`@xiHzla@hlAvtL}}Ap`SwyA~jFhlAbcUm~CtjJo}Fnc@y{D}_DexBwfL{mFdaEmmCgBzPxsGqg@bcDuvNeuCerGakL}|AzyEj`B~eBjKpxDsoI|mJieGxnI`fDr`YyaCj~FnDxgFuLprLldFvu@bu@vnCehDrsFw_GvbBawOtWyzErbG`_@nyTyyApV{}Bm{BsfAdmFf}ClgD~cBpoMgfEdeOecA|dBk_Ol{BeqHlxCmwAu~BqzDnr@_PvuF_zAn~Ak}AtW{vBz|A",
+              "timezone": "Europe/Brussels",
+              "urls": [
+                       "https://hadron-be-southwestbelgium-tripgo.skedgo.com/satapp",
+                       "https://darkages-be-southwestbelgium-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 59.9233,
+                         "lng": 10.79249,
+                         "timezone": "Europe/Oslo",
+                         "title": "Oslo, Norway"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "NO_Oslo",
+              "polygon": "q|plJe~dv@}oEqccDwpaEehN_Wo`sMdbw@c|_Ab_`BxpNhst@ftcAbzCntm@l~\\ka@djPrwg@pkbAmnMx{hAl_d@ft@rlq@exc@rtW~qWllgAhcM~agEdqSnvlB",
+              "timezone": "Europe/Oslo",
+              "urls": [
+                       "https://matter-no-oslo-tripgo.skedgo.com/satapp",
+                       "https://darkages-no-oslo-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 42.36071,
+                         "lng": -71.0577,
+                         "timezone": "America/New_York",
+                         "title": "Boston, MA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_hubway",
+                        "wa_wal"
+                        ],
+              "name": "US_MA_Boston",
+              "polygon": "ovg|Ft}aqLab\\zcB}oZxkg@icQ{KotB_Ud^bjGoi|C?sle@{sdAi[qbaFdvcI??`diF",
+              "timezone": "America/New_York",
+              "urls": [
+                       "https://inflationary-us-ma-boston-tripgo.skedgo.com/satapp",
+                       "https://matter-us-ma-boston-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 57.70723,
+                         "lng": 11.96702,
+                         "timezone": "Europe/Stockholm",
+                         "title": "Gothenburg, Sweden"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_goeteborg",
+                        "wa_wal"
+                        ],
+              "name": "SE_Gothenburg",
+              "polygon": "uzrbJqjfwBrhfGjvI?`r}p@shfG|nr@",
+              "timezone": "Europe/Stockholm",
+              "urls": [
+                       "https://matter-se-gothenburg-tripgo.skedgo.com/satapp",
+                       "https://darkages-se-gothenburg-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 39.953,
+                         "lng": -75.164,
+                         "timezone": "America/New_York",
+                         "title": "Philadelphia, PA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_indego",
+                        "wa_wal"
+                        ],
+              "name": "US_PA_Philadelphia",
+              "polygon": "oiwpFnhzlMotiC??o~oEntiC?",
+              "timezone": "America/New_York",
+              "urls": [
+                       "https://inflationary-us-pa-philadelphia-tripgo.skedgo.com/satapp",
+                       "https://darkages-us-pa-philadelphia-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 30.263,
+                         "lng": -97.741,
+                         "timezone": "America/Chicago",
+                         "title": "Austin, TX, USA"
+                         },
+                         {
+                         "lat": 29.425,
+                         "lng": -98.495,
+                         "timezone": "America/Chicago",
+                         "title": "San Antonio, TX, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "US_TX_Austin",
+              "polygon": "ohuoD~|f{Q_brJ??_brJ~arJ?",
+              "timezone": "America/Chicago",
+              "urls": [
+                       "https://inflationary-us-tx-austin-tripgo.skedgo.com/satapp",
+                       "https://darkages-us-tx-austin-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 41.87811,
+                         "lng": -87.6298,
+                         "timezone": "America/Chicago",
+                         "title": "Chicago, IL, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_divvy",
+                        "wa_wal"
+                        ],
+              "name": "US_IL_Chicago",
+              "polygon": "}ka{F~ek|OakiF??_kiF`kiF?",
+              "timezone": "America/Chicago",
+              "urls": [
+                       "https://baryogenesis-us-il-chicago-tripgo.skedgo.com/satapp",
+                       "https://hadron-us-il-chicago-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 42.26816,
+                         "lng": -83.73123,
+                         "timezone": "US/Eastern",
+                         "title": "Ann Arbor, MI, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_arborbike",
+                        "wa_wal"
+                        ],
+              "name": "US_MI_AnnArbor",
+              "polygon": "wdmaGrp~}NkEm{p@f~M_fBjEurXvnNgCdB~c_BuqO?aRrlq@yhJ{K",
+              "timezone": "US/Eastern",
+              "urls": [
+                       "https://inflationary-us-mi-annarbor-tripgo.skedgo.com/satapp",
+                       "https://matter-us-mi-annarbor-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 41.877,
+                         "lng": 12.481,
+                         "timezone": "Europe/Rome",
+                         "title": "Rome, Italy"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "IT_Rome",
+              "polygon": "o_hzFokbfAoalE??o|eHnalE?",
+              "timezone": "Europe/Rome",
+              "urls": [
+                       "https://matter-it-rome-tripgo.skedgo.com/satapp",
+                       "https://darkages-it-rome-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 46.814,
+                         "lng": -71.241,
+                         "timezone": "Canada/Eastern",
+                         "title": "Quebec City, QC, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "CA_QC_QuebecCity",
+              "polygon": "_`yzG~j_tL_t`B??}ugC~s`B?",
+              "timezone": "Canada/Eastern",
+              "urls": [
+                       "https://baryogenesis-ca-qc-quebeccity-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-qc-quebeccity-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 47.616,
+                         "lng": -122.327,
+                         "timezone": "US/Pacific",
+                         "title": "Seattle, WA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_pronto-cycle-share",
+                        "wa_wal"
+                        ],
+              "name": "US_WA_Seattle",
+              "polygon": "_b`|G~n}nV_~cH??_owH~}cH?",
+              "timezone": "US/Pacific",
+              "urls": [
+                       "https://baryogenesis-us-wa-seattle-tripgo.skedgo.com/satapp",
+                       "https://hadron-us-wa-seattle-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 45.525,
+                         "lng": -122.676,
+                         "timezone": "US/Pacific",
+                         "title": "Portland, OR, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_SoBi92",
+                        "wa_wal"
+                        ],
+              "name": "US_OR_Portland",
+              "polygon": "_ur~F~~uxVootY??_pcSnotY?",
+              "timezone": "US/Pacific",
+              "urls": [
+                       "https://inflationary-us-or-portland-tripgo.skedgo.com/satapp",
+                       "https://matter-us-or-portland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 51.519,
+                         "lng": -0.118,
+                         "timezone": "Europe/London",
+                         "title": "London, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "UK_London",
+              "polygon": "owxwH~dtB_t`B??_ibE~s`B?",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://hadron-uk-london-tripgo.skedgo.com/satapp",
+                       "https://stars-uk-london-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 53.8,
+                         "lng": -1.54,
+                         "timezone": "Europe/London",
+                         "title": "Leeds, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "UK_Leeds",
+              "polygon": "_{qhI~cyK?o`qNnljB??n`qN",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://stars-uk-leeds-tripgo.skedgo.com/satapp",
+                       "https://inflationary-uk-leeds-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 42.10101,
+                         "lng": -72.58701,
+                         "timezone": "America/New_York",
+                         "title": "Springfield, MA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_MA_Springfield",
+              "polygon": "y`{_Gpbt_Mwm`C}`o@l|H}knJ`{cCkCd`AtrpA{qAiC_G``zC{qAfrPq@dnMxkEbx@`b@x_IieFoUedBpkvBbFpaM",
+              "timezone": "America/New_York",
+              "urls": [
+                       "https://inflationary-us-ma-springfield-tripgo.skedgo.com/satapp",
+                       "https://matter-us-ma-springfield-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 38.20143,
+                         "lng": -85.73394,
+                         "timezone": "America/Kentucky/Louisville",
+                         "title": "Louisville, KY, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_KY_Louisville",
+              "polygon": "ahpfFd}}kO}zaB??qbeC|zaB?",
+              "timezone": "America/Kentucky/Louisville",
+              "urls": [
+                       "https://baryogenesis-us-ky-louisville-tripgo.skedgo.com/satapp",
+                       "https://inflationary-us-ky-louisville-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 50.91059,
+                         "lng": -1.40095,
+                         "timezone": "Europe/London",
+                         "title": "Southampton, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_SoBi126",
+                        "wa_wal"
+                        ],
+              "name": "UK_SouthEastEngland",
+              "polygon": "_pbxH~_kI?__pR~f{C??~~oR",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://hadron-uk-southeastengland-tripgo.skedgo.com/satapp",
+                       "https://stars-uk-southeastengland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 28.54212,
+                         "lng": -81.37905,
+                         "timezone": "US/Eastern",
+                         "title": "Orlando, FL, USA"
+                         },
+                         {
+                         "lat": 28.40383,
+                         "lng": -80.59868,
+                         "timezone": "US/Eastern",
+                         "title": "Space Coast, FL, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_SoBi23",
+                        "wa_wal"
+                        ],
+              "name": "US_FL_Orlando",
+              "polygon": "}e~hD|adrNy_iE??qoyFx_iE?",
+              "timezone": "US/Eastern",
+              "urls": [
+                       "https://inflationary-us-fl-orlando-tripgo.skedgo.com/satapp",
+                       "https://matter-us-fl-orlando-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 51.45545,
+                         "lng": -2.59159,
+                         "timezone": "Europe/London",
+                         "title": "Bristol, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "UK_Bristol",
+              "polygon": "oro~H~kuP?_||F~yuE??~{|F",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://stars-uk-bristol-tripgo.skedgo.com/satapp",
+                       "https://inflationary-uk-bristol-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -37.81137,
+                         "lng": 144.97183,
+                         "timezone": "Australia/Melbourne",
+                         "title": "Melbourne, VIC, Australia"
+                         },
+                         {
+                         "lat": -38.1489,
+                         "lng": 144.36103,
+                         "timezone": "Australia/Melbourne",
+                         "title": "Geelong, VIC, Australia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "ps_shu",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "AU_VIC_Melbourne",
+              "polygon": "hfcnEgrj{Y`qd@eeqBctKww\\eMkb_AlpPq~j@rn^o_d@z_k@q|H~ab@_bOaoh@iyYbMirVpeTapJlrGwvn@vcVqpo@|vc@hhCj~d@apJd~@}re@daYewB`zi@mhtAzil@wr{@xkZghNttc@yn}@w_m@mu[{oJ}oUuo@a{|AzzXuyiArbMykx@sbM_`~@~aW}xeAaf[{byAk`Bi{fA~a\\}j_AxgvB_og@f}WzlPrzjCmkmJtvyIbcJ?npav@",
+              "timezone": "Australia/Melbourne",
+              "urls": [
+                       "https://granduni-au-vic-melbourne-tripgo.skedgo.com/satapp",
+                       "https://darkages-au-vic-melbourne-tripgo.skedgo.com/satapp",
+                       "https://inflationary-au-vic-melbourne-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 48.392,
+                         "lng": -89.249,
+                         "timezone": "America/Thunder_Bay",
+                         "title": "Thunder Bay, ON, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "CA_ON_ThunderBay",
+              "polygon": "osveH~xbbPop{@??oweCnp{@?",
+              "timezone": "America/Thunder_Bay",
+              "urls": [
+                       "https://baryogenesis-ca-on-thunderbay-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-on-thunderbay-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -41.27845,
+                         "lng": 174.7791,
+                         "timezone": "NZ",
+                         "title": "Wellington, New Zealand"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "NZ_N_Wellington",
+              "polygon": "~~auF_}dh`@?~_nE_nbJ??_m~^~ocS??~koX",
+              "timezone": "NZ",
+              "urls": [
+                       "https://darkages-nz-n-wellington-tripgo.skedgo.com/satapp",
+                       "https://granduni-nz-n-wellington-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 52.63098,
+                         "lng": 1.29705,
+                         "timezone": "Europe/London",
+                         "title": "Norwich, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "UK_Norwich",
+              "polygon": "_tpzH_ry@?~qy@_||F??_seKnxtI??~_kI",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://hadron-uk-norwich-tripgo.skedgo.com/satapp",
+                       "https://stars-uk-norwich-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 47.36856,
+                         "lng": 8.54044,
+                         "timezone": "Europe/Zurich",
+                         "title": "Zurich, Switzerland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "CH_Zurich",
+              "polygon": "wttaHegcn@qyl@snlDj~cAoquE|kr@~[nlD~cbK",
+              "timezone": "Europe/Zurich",
+              "urls": [
+                       "https://matter-ch-zurich-tripgo.skedgo.com/satapp",
+                       "https://darkages-ch-zurich-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 52.48603,
+                         "lng": -1.89261,
+                         "timezone": "Europe/London",
+                         "title": "Birmingham, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_nextbike-university-of-warwick",
+                        "wa_wal"
+                        ],
+              "name": "UK_Birmingham",
+              "polygon": "_qnbI~kuP?_~cH~ugC??~}cH",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://stars-uk-birmingham-tripgo.skedgo.com/satapp",
+                       "https://inflationary-uk-birmingham-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 44.977,
+                         "lng": -93.2746,
+                         "timezone": "America/Chicago",
+                         "title": "Minneapolis, MN, USA"
+                         },
+                         {
+                         "lat": 44.954,
+                         "lng": -93.0901,
+                         "timezone": "America/Chicago",
+                         "title": "St Paul, MN, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_nice-ride",
+                        "wa_wal"
+                        ],
+              "name": "US_MN_Minneapolis",
+              "polygon": "_{~mG~nd_Q_mpG??oihJ~lpG?",
+              "timezone": "America/Chicago",
+              "urls": [
+                       "https://inflationary-us-mn-minneapolis-tripgo.skedgo.com/satapp",
+                       "https://matter-us-mn-minneapolis-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -33.44863,
+                         "lng": -70.66269,
+                         "timezone": "America/Santiago",
+                         "title": "Santiago, Chile"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_santiago",
+                        "wa_wal"
+                        ],
+              "name": "CL_SA_Santiago",
+              "polygon": "`~plErwuoLogiA??_hrAngiA?",
+              "timezone": "America/Santiago",
+              "urls": [
+                       "https://inflationary-cl-sa-santiago-tripgo.skedgo.com/satapp",
+                       "https://granduni-cl-sa-santiago-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 41.82399,
+                         "lng": -71.41283,
+                         "timezone": "US/Eastern",
+                         "title": "Providence, RI, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_RI_Providence",
+              "polygon": "odg{FpixuLm_AguI_zMvu@kf@cgHctqBvIceAyfqAtoWcAws@ezG|oRchBndZcyc@pe`@weAfkbArgpAdcB~aOih`@~qw@",
+              "timezone": "US/Eastern",
+              "urls": [
+                       "https://baryogenesis-us-ri-providence-tripgo.skedgo.com/satapp",
+                       "https://inflationary-us-ri-providence-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 40.415,
+                         "lng": -3.707,
+                         "timezone": "Europe/Madrid",
+                         "title": "Madrid, Spain"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "ES_MD_Madrid",
+              "polygon": "oittFntzV_o}@??_cmA~n}@?",
+              "timezone": "Europe/Madrid",
+              "urls": [
+                       "https://matter-es-md-madrid-tripgo.skedgo.com/satapp",
+                       "https://granduni-es-md-madrid-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 51.44128,
+                         "lng": 5.47564,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Eindhoven, Netherlands"
+                         },
+                         {
+                         "lat": 51.56101,
+                         "lng": 5.09225,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Tilburg, Netherlands"
+                         },
+                         {
+                         "lat": 51.58912,
+                         "lng": 4.77579,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Breda, Netherlands"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "pt_ltd_SCHOOLBUS",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_nederland-maastricht",
+                        "wa_wal"
+                        ],
+              "name": "NL_SouthNetherlands",
+              "polygon": "wh_{HohmS?sjbO`y@ok@rfBvfFbl@mEhDk~FzkC{`It_GtrAleC_`PtfHzpC|zF}mJziG}dHfrH}pC`cMv_ClT{aCvvFhCpnDlsElLzpCx_Jn`GxqEdeIzoB_hAneHja@edCgwNfbAwpBnkE~Md_HdaVdnDjaL~eGbqDnk@b`EywDv}C~sAnqF|uFe~EbaDdPsfAgiHng@}tMjjHl`A`aB{bNlaG`]rfFl}Acq@feDdu@vzDxvCknA|zC`nElgBeaEn`Dha@hO|bTq_@|~`@~@b}KsfI{tAybA`zFw|D~eBemC{K}yPypNabMquE_ePwmImmBmdEujBppAzt@liIc~DtcAcOpqR_qF~fSy{Gnr@chDvmIbsEh}L`Gptb@{lApnBwuEor@abAfuCj_AtfF}q@vfFqyNvtLgmFy{DirEtaBiDvfF~eN~hR}aA~{\\o_CxbHuzImwO}yB~zKpgM|mPlZ~qZahJlTvdDncWh~No~GbbBliIwQdcJgzB|i@jL|zK~fNnuPz{HzsS~cHrd]ez@f}WgaHlTw`Ghg`@nzB~_Pj`EucA|a@roSicFfaKcgFdfCaeK{H",
+              "timezone": "Europe/Amsterdam",
+              "urls": [
+                       "https://hadron-nl-southnetherlands-tripgo.skedgo.com/satapp",
+                       "https://darkages-nl-southnetherlands-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -42.88571,
+                         "lng": 147.32887,
+                         "timezone": "Australia/Sydney",
+                         "title": "Hobart, TAS, Australia"
+                         },
+                         {
+                         "lat": -41.43731,
+                         "lng": 147.14126,
+                         "timezone": "Australia/Sydney",
+                         "title": "Launceston, TAS, Australia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "ps_shu",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "AU_TAS",
+              "polygon": "~cviGolgqZourQ??o_vWnurQ?",
+              "timezone": "Australia/Sydney",
+              "urls": [
+                       "https://granduni-au-tas-tripgo.skedgo.com/satapp",
+                       "https://darkages-au-tas-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 52.52115,
+                         "lng": 13.41035,
+                         "timezone": "Europe/Berlin",
+                         "title": "Berlin, Germany"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "DE_BE_Berlin",
+              "polygon": "ohxaIg|ulA?gj|Gndr@_zxAnkX_nD~}Pn|R~`f@_`_@?vwgK",
+              "timezone": "Europe/Berlin",
+              "urls": [
+                       "https://hadron-de-be-berlin-tripgo.skedgo.com/satapp",
+                       "https://baryogenesis-de-be-berlin-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 52.63624,
+                         "lng": -1.14009,
+                         "timezone": "Europe/London",
+                         "title": "Leicester, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "UK_Leicester",
+              "polygon": "_qnbI~}cH?_owH~{|F??~ugC_etB??~wnD",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://stars-uk-leicester-tripgo.skedgo.com/satapp",
+                       "https://inflationary-uk-leicester-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -35.28161,
+                         "lng": 149.12863,
+                         "timezone": "Australia/Sydney",
+                         "title": "Canberra, ACT, Australia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "AU_ACT_Canberra",
+              "polygon": "vjqzEa{lj[w~jD??{xaDv~jD?",
+              "timezone": "Australia/Sydney",
+              "urls": [
+                       "https://darkages-au-act-canberra-tripgo.skedgo.com/satapp",
+                       "https://granduni-au-act-canberra-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 38.7138,
+                         "lng": -9.13936,
+                         "timezone": "Portugal",
+                         "title": "Lisbon, Portugal"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "PT_Lisbon",
+              "polygon": "}rwmF~jby@?opxD|rkC??npxD",
+              "timezone": "Portugal",
+              "urls": [
+                       "https://matter-pt-lisbon-tripgo.skedgo.com/satapp",
+                       "https://granduni-pt-lisbon-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 56.16295,
+                         "lng": 10.20312,
+                         "timezone": "Europe/Copenhagen",
+                         "title": "Aarhus, Denmark"
+                         },
+                         {
+                         "lat": 57.04881,
+                         "lng": 9.9216,
+                         "timezone": "Europe/Copenhagen",
+                         "title": "Aalborg, Denmark"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_nextbike-flensburg",
+                        "wa_wal"
+                        ],
+              "name": "DK_Continental",
+              "polygon": "ovntIowdn@oikF~`f@onqC__pR~wkHoihJnggAngaI~zm@~zm@nnT`poCn|k@l|k@~heA_fiAnrbBmbd@~{B|lmK",
+              "timezone": "Europe/Copenhagen",
+              "urls": [
+                       "https://matter-dk-continental-tripgo.skedgo.com/satapp",
+                       "https://granduni-dk-continental-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 62.3921,
+                         "lng": 17.30989,
+                         "timezone": "Europe/Stockholm",
+                         "title": "Sundsvall, Sweden"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "SE_Sundsvall",
+              "polygon": "igpsJuyfiAyvD{luAuao@_se@aqnApihCudiByl[mwbAjqh@wejB??o{|l@bkqO?pOtv}i@",
+              "timezone": "Europe/Stockholm",
+              "urls": [
+                       "https://matter-se-sundsvall-tripgo.skedgo.com/satapp",
+                       "https://darkages-se-sundsvall-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 29.766,
+                         "lng": -95.368,
+                         "timezone": "America/Chicago",
+                         "title": "Houston, TX, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_houston",
+                        "wa_wal"
+                        ],
+              "name": "US_TX_Houston",
+              "polygon": "o{oqDnwfiQoalE??otfGnalE?",
+              "timezone": "America/Chicago",
+              "urls": [
+                       "https://inflationary-us-tx-houston-tripgo.skedgo.com/satapp",
+                       "https://darkages-us-tx-houston-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 51.47789,
+                         "lng": -3.17829,
+                         "timezone": "Europe/London",
+                         "title": "Cardiff, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "UK_Wales",
+              "polygon": "_fpeI~eq`@?_f`M~s`B??_cmAnxtI??~inO",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://hadron-uk-wales-tripgo.skedgo.com/satapp",
+                       "https://stars-uk-wales-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 47.21852,
+                         "lng": -1.55451,
+                         "timezone": "Europe/Paris",
+                         "title": "Nantes, France"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_bicloo",
+                        "wa_wal"
+                        ],
+              "name": "FR_R_Nantes",
+              "polygon": "mip~G~t{Iqdm@??izxApdm@?",
+              "timezone": "Europe/Paris",
+              "urls": [
+                       "https://matter-fr-r-nantes-tripgo.skedgo.com/satapp",
+                       "https://darkages-fr-r-nantes-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 57.15,
+                         "lng": -2.09,
+                         "timezone": "Europe/London",
+                         "title": "Aberdeen, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "UK_NorthScotland",
+              "polygon": "_aisJ~nyo@?_oyo@~nh\\??~nyo@",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://hadron-uk-northscotland-tripgo.skedgo.com/satapp",
+                       "https://stars-uk-northscotland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 39.99329,
+                         "lng": -83.06924,
+                         "timezone": "America/New_York",
+                         "title": "Columbus, OH, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_cogo",
+                        "wa_wal"
+                        ],
+              "name": "US_OH_Columbus",
+              "polygon": "aezqFvwzzN_omA??gzcB~nmA?",
+              "timezone": "America/New_York",
+              "urls": [
+                       "https://inflationary-us-oh-columbus-tripgo.skedgo.com/satapp",
+                       "https://matter-us-oh-columbus-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 40.72559,
+                         "lng": -112.07068,
+                         "timezone": "US/Mountain",
+                         "title": "Salt Lake City, UT, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_greenbikeslc",
+                        "wa_wal"
+                        ],
+              "name": "US_UT_SaltLakeCity",
+              "polygon": "efbrFrtbnTslmJ??ksbGrlmJ?",
+              "timezone": "US/Mountain",
+              "urls": [
+                       "https://baryogenesis-us-ut-saltlakecity-tripgo.skedgo.com/satapp",
+                       "https://inflationary-us-ut-saltlakecity-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 41.72822,
+                         "lng": -72.66819,
+                         "timezone": "America/New_York",
+                         "title": "Hartford, CT, USA"
+                         },
+                         {
+                         "lat": 41.04685,
+                         "lng": -73.56502,
+                         "timezone": "America/New_York",
+                         "title": "Stamford, CT, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_CT_Hartford",
+              "polygon": "ypzyF~u`aMupNys^{qiDulOxiB_d{D`lAgjmClivBej@zd@fzG|wKagB|oFzsMdycA|zmIohOnva@",
+              "timezone": "America/New_York",
+              "urls": [
+                       "https://baryogenesis-us-ct-hartford-tripgo.skedgo.com/satapp",
+                       "https://stars-us-ct-hartford-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 46.52183,
+                         "lng": 6.6327,
+                         "timezone": "Europe/Zurich",
+                         "title": "Lausanne, Switzerland"
+                         },
+                         {
+                         "lat": 46.20333,
+                         "lng": 6.14093,
+                         "timezone": "Europe/Zurich",
+                         "title": "Geneva, Switzerland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "CH_SouthWestSwitzerland",
+              "polygon": "ynvuG{iul@{iv@htlIu{sChhC?s}pI",
+              "timezone": "Europe/Zurich",
+              "urls": [
+                       "https://matter-ch-southwestswitzerland-tripgo.skedgo.com/satapp",
+                       "https://darkages-ch-southwestswitzerland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 33.45106,
+                         "lng": -112.08928,
+                         "timezone": "America/Phoenix",
+                         "title": "Phoenix, AZ, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_SoBi20",
+                        "wa_wal"
+                        ],
+              "name": "US_AZ_Phoenix",
+              "polygon": "ejqjErwrnTk|qAsa{@cFm{lChpfBq|Hl`m@dp{A",
+              "timezone": "America/Phoenix",
+              "urls": [
+                       "https://inflationary-us-az-phoenix-tripgo.skedgo.com/satapp",
+                       "https://baryogenesis-us-az-phoenix-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 39.7809,
+                         "lng": -89.64767,
+                         "timezone": "America/Chicago",
+                         "title": "Springfield, IL, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_IL_Springfield",
+              "polygon": "_|hqFnktbPm_eD??_owHl_eD?",
+              "timezone": "America/Chicago",
+              "urls": [
+                       "https://baryogenesis-us-il-springfield-tripgo.skedgo.com/satapp",
+                       "https://hadron-us-il-springfield-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 45.4234,
+                         "lng": -75.6968,
+                         "timezone": "America/Montreal",
+                         "title": "Ottawa, ON, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_SoBi41",
+                        "wa_wal"
+                        ],
+              "name": "CA_ON_Ottawa",
+              "polygon": "_p`qG~iupM_xnD??_kiF~wnD?",
+              "timezone": "America/Montreal",
+              "urls": [
+                       "https://baryogenesis-ca-on-ottawa-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-on-ottawa-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 50.64514,
+                         "lng": 5.57342,
+                         "timezone": "Europe/Brussels",
+                         "title": "Liege, Belgium"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "pt_ltd_SCHOOLBUS",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_li-bia-velo",
+                        "wa_wal"
+                        ],
+              "name": "BE_SouthEastBelgium",
+              "polygon": "}qcpH_zj\\oyLa]{}DayBy_G}jG_kAfh@}RjvFiUlpAkytB??ayiDw_@c}AuPmdDecCk}EvdD{~F_pA}fMllBqfEmk@akFf`@uvKtv@ihCnxBgQra@_gM|gJ}bInBgfDlbBe_AxDe|HhqAecC`nM`sFrqD`}Et|Dw_CmQotKvjA_lKhbExXpXabDbwDgn@|gIxlD~eDmzHvhDwv@heChdIytB|eFfzExcFvq@eb@pnAptA~n@nmIf}B`fDle@l~Bv~Cgy@vfDoYbfAhlGvgDem@tuAxnCkx@piDuiD_\\_\\`pDxqAb^|UnoGizCroBf]hlGnaG|Z`wAfaKnaFf`BreBrbCbnDu[`fDjrGdoB_xBf~CrvDhnA`jF|}EzpBr_BfvBbtCq~GzrBx}Cb_Kvv@an@ujD~nIqmHbmC_NmImdEnqB{pCd~DleBppActFbpDjSzgDfsDjiFd_@~eC|lEpo@h}CzXv_Fde@~qMak@~uLrvFrbD_tBjmGngDnoR{wCt|CknLdpBmoEfzJnjAt{IcpCdaByrCi~CqbDllHo~@lqWyfJnvJeoGdgTb{@dgKqd@jyKw{FqcBwtEhsC_~CevDw`Deb@wdDncFe|AdeIs{C_N",
+              "timezone": "Europe/Brussels",
+              "urls": [
+                       "https://hadron-be-southeastbelgium-tripgo.skedgo.com/satapp",
+                       "https://darkages-be-southeastbelgium-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 38.44047,
+                         "lng": -122.71443,
+                         "timezone": "America/Los_Angeles",
+                         "title": "Santa Rosa, CA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_CA_SantaRosa",
+              "polygon": "w_}iFzqjnVw}{@ydG{lDgbEfjAuoHdrfAsioAhhL}tMfvOmiIfiK`]h}@rcA{Tz`IbiApf\\g~i@zdxA",
+              "timezone": "America/Los_Angeles",
+              "urls": [
+                       "https://baryogenesis-us-ca-santarosa-tripgo.skedgo.com/satapp",
+                       "https://stars-us-ca-santarosa-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 52.24663,
+                         "lng": 21.0145,
+                         "timezone": "Europe/Warsaw",
+                         "title": "Warsaw, Poland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "PL_Warsaw",
+              "polygon": "mt~bIsejcC`rmBeclIvlyDzsgHhozA~agEg~yEtwpHkijEe_aD",
+              "timezone": "Europe/Warsaw",
+              "urls": [
+                       "https://matter-pl-warsaw-tripgo.skedgo.com/satapp",
+                       "https://darkages-pl-warsaw-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 39.1048,
+                         "lng": -84.5114,
+                         "timezone": "America/New_York",
+                         "title": "Cincinnati, OH, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "US_OH_Cincinnati",
+              "polygon": "ujsnFjz_eO{sVieoAmm@{km@ddy@pGnqj@|zV`}Fdj{@",
+              "timezone": "America/New_York",
+              "urls": [
+                       "https://inflationary-us-oh-cincinnati-tripgo.skedgo.com/satapp",
+                       "https://matter-us-oh-cincinnati-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 36.16727,
+                         "lng": -115.1361,
+                         "timezone": "America/Los_Angeles",
+                         "title": "Las Vegas, NV, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_NV_LasVegas",
+              "polygon": "okv|Edod_UuZmedAh}iAcpm@xuAdqlB",
+              "timezone": "America/Los_Angeles",
+              "urls": [
+                       "https://baryogenesis-us-nv-lasvegas-tripgo.skedgo.com/satapp",
+                       "https://hadron-us-nv-lasvegas-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 39.745,
+                         "lng": -104.994,
+                         "timezone": "America/Denver",
+                         "title": "Denver, CO, USA"
+                         },
+                         {
+                         "lat": 40.016,
+                         "lng": -105.265,
+                         "timezone": "America/Denver",
+                         "title": "Boulder, CO, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "US_CO_Denver",
+              "polygon": "oaxoF~~ocS}iwC??_qaF|iwC?",
+              "timezone": "America/Denver",
+              "urls": [
+                       "https://lepton-us-co-denver-tripgo.skedgo.com/satapp",
+                       "https://baryogenesis-us-co-denver-tripgo.skedgo.com/satapp",
+                       "https://stars-us-co-denver-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 46.0706,
+                         "lng": 11.1196,
+                         "timezone": "Europe/Rome",
+                         "title": "Trento, Italy"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "IT_Trentino",
+              "polygon": "_{xuG_pb~@oe}C??oezGne}C?",
+              "timezone": "Europe/Rome",
+              "urls": [
+                       "https://matter-it-trentino-tripgo.skedgo.com/satapp",
+                       "https://darkages-it-trentino-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 43.03499,
+                         "lng": -87.9225,
+                         "timezone": "US/Central",
+                         "title": "Milwaukee, WI, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_bublr-bikes",
+                        "wa_wal"
+                        ],
+              "name": "US_WI_Milwaukee",
+              "polygon": "gsibG~`h{Oc}fE??{raDb}fE?",
+              "timezone": "US/Central",
+              "urls": [
+                       "https://baryogenesis-us-wi-milwaukee-tripgo.skedgo.com/satapp",
+                       "https://hadron-us-wi-milwaukee-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 45.465,
+                         "lng": 9.187,
+                         "timezone": "Europe/Rome",
+                         "title": "Milan, Italy"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "IT_Milano",
+              "polygon": "s`prGyhjs@{|wC??crdFz|wC?",
+              "timezone": "Europe/Rome",
+              "urls": [
+                       "https://matter-it-milano-tripgo.skedgo.com/satapp",
+                       "https://darkages-it-milano-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 65.01175,
+                         "lng": 25.47462,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Oulu, Finland"
+                         },
+                         {
+                         "lat": 62.89325,
+                         "lng": 27.67825,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Kuopio, Finland"
+                         },
+                         {
+                         "lat": 66.49717,
+                         "lng": 25.72326,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Rovaniemi, Finland"
+                         },
+                         {
+                         "lat": 62.60052,
+                         "lng": 29.76201,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Joensuu, Finland"
+                         },
+                         {
+                         "lat": 68.41972,
+                         "lng": 27.41074,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Saariselkä, Finland"
+                         },
+                         {
+                         "lat": 67.33187,
+                         "lng": 23.78911,
+                         "timezone": "Europe/Stockholm",
+                         "title": "Kolari, Finland"
+                         },
+                         {
+                         "lat": 64.07229,
+                         "lng": 24.53387,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Ylivieska, Finland"
+                         },
+                         {
+                         "lat": 64.12877,
+                         "lng": 29.52018,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Kuhmo, Finland"
+                         },
+                         {
+                         "lat": 65.96445,
+                         "lng": 29.1887,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Kuusamo, Finland"
+                         },
+                         {
+                         "lat": 67.29246,
+                         "lng": 28.15847,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Savukoski, Finland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "FI_NorthFinland",
+              "polygon": "opioK_`brC_ycC~dtBoinB_ieA_ieA~|tAovs@nqPoofBotL_qdB~bgIszkBby}Fioi@alsBwiGsooB`hlBmmtDxyK{o|Bam^eumC`ze@csgEwgp@s}gAbiAqh~@yjTirV_nh@lgJyytAc}b@cxu@eomBuz^k|rHrnjAckaF`vp@wvn@zypAzmoAz`nG}|pF|lq[cngJn`wFncpJo_h@~mhBoljB~pdBnwH~yuE_xq@~c_DokXn{sEobd@~~{B_`qA~~{B_g^n_eD_g^n{vAoe`@?owH~``H",
+              "timezone": "Europe/Helsinki",
+              "urls": [
+                       "https://matter-fi-northfinland-tripgo.skedgo.com/satapp",
+                       "https://granduni-fi-northfinland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 34.044,
+                         "lng": -118.248,
+                         "timezone": "America/Los_Angeles",
+                         "title": "Los Angeles, CA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "US_CA_LosAngeles",
+              "polygon": "otpjEnl_uU_ibE??o|bL~hbE?",
+              "timezone": "America/Los_Angeles",
+              "urls": [
+                       "https://lepton-us-ca-losangeles-tripgo.skedgo.com/satapp",
+                       "https://baryogenesis-us-ca-losangeles-tripgo.skedgo.com/satapp",
+                       "https://stars-us-ca-losangeles-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 44.49434,
+                         "lng": 11.34314,
+                         "timezone": "Europe/Rome",
+                         "title": "Bologna, Italy"
+                         },
+                         {
+                         "lat": 44.83563,
+                         "lng": 11.62035,
+                         "timezone": "Europe/Rome",
+                         "title": "Ferrera, Italy"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "IT_Bologna",
+              "polygon": "ogurG_wl`A?_kfJ~vyE??~jfJ",
+              "timezone": "Europe/Rome",
+              "urls": [
+                       "https://matter-it-bologna-tripgo.skedgo.com/satapp",
+                       "https://darkages-it-bologna-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 38.11127,
+                         "lng": 13.35344,
+                         "timezone": "Europe/Rome",
+                         "title": "Palermo, Italy"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "IT_Palermo",
+              "polygon": "ybigF}k|oAaoJbwByfQ`dCisCcaV~eG}eMdoPygLtmKdn@rVl_d@",
+              "timezone": "Europe/Rome",
+              "urls": [
+                       "https://matter-it-palermo-tripgo.skedgo.com/satapp",
+                       "https://darkages-it-palermo-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 31.77743,
+                         "lng": 35.22472,
+                         "timezone": "Israel",
+                         "title": "Jerusalem, Israel"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_telofun",
+                        "wa_wal"
+                        ],
+              "name": "Israel",
+              "polygon": "gwj~Dg}qoE_at@mtm@ukmAijp@c{uAqxUqsjA{sSm{u@w~_@yjBsnsAg_WglA{wKa~PreJggk@vgo@krKlcd@`mE|_X|sHruOnq]ddeAlyCtdmAnyCzwjAxpNlqmBn`GlifDrst@zi_B|}[|iVmr@{\\f|i@qoaJzrlC",
+              "timezone": "Israel",
+              "urls": [
+                       "https://granduni-israel-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 56.9494,
+                         "lng": 24.10518,
+                         "timezone": "Europe/Riga",
+                         "title": "Riga, Latvia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_sixt-riga",
+                        "wa_wal"
+                        ],
+              "name": "LV_Riga",
+              "polygon": "wdyyIsxrpCwku@??y~pBvku@?",
+              "timezone": "Europe/Riga",
+              "urls": [
+                       "https://hadron-lv-riga-tripgo.skedgo.com/satapp",
+                       "https://granduni-lv-riga-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 50.37545,
+                         "lng": -4.14256,
+                         "timezone": "Europe/London",
+                         "title": "Plymouth, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "UK_SouthWestEngland",
+              "polygon": "_pbxH~xkb@?_isXnezG??~hsX",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://hadron-uk-southwestengland-tripgo.skedgo.com/satapp",
+                       "https://stars-uk-southwestengland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 46.94828,
+                         "lng": 7.4515,
+                         "timezone": "Europe/Zurich",
+                         "title": "Bern, Switzerland"
+                         },
+                         {
+                         "lat": 47.55922,
+                         "lng": 7.58825,
+                         "timezone": "Europe/Zurich",
+                         "title": "Basel, Switzerland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "CH_NorthWestSwitzerland",
+              "polygon": "wwdaHu}yh@eiXoy{Dp{mE??|krK",
+              "timezone": "Europe/Zurich",
+              "urls": [
+                       "https://matter-ch-northwestswitzerland-tripgo.skedgo.com/satapp",
+                       "https://darkages-ch-northwestswitzerland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 38.57797,
+                         "lng": -121.498,
+                         "timezone": "America/Los_Angeles",
+                         "title": "Sacramento, CA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_SoBi124",
+                        "wa_wal"
+                        ],
+              "name": "US_CA_Sacramento",
+              "polygon": "qlznFj}qfV~{p@uurDjf~Cp_YftCriyE",
+              "timezone": "America/Los_Angeles",
+              "urls": [
+                       "https://baryogenesis-us-ca-sacramento-tripgo.skedgo.com/satapp",
+                       "https://stars-us-ca-sacramento-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 59.43722,
+                         "lng": 24.74537,
+                         "timezone": "Europe/Tallinn",
+                         "title": "Tallin, Estonia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_sixt-jalgrattarent-tallinn",
+                        "wa_wal"
+                        ],
+              "name": "Estonia",
+              "polygon": "gst|I{xpaCwouM??s{sj@vouM?",
+              "timezone": "Europe/Tallinn",
+              "urls": [
+                       "https://matter-estonia-tripgo.skedgo.com/satapp",
+                       "https://darkages-estonia-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 39.15195,
+                         "lng": -94.53121,
+                         "timezone": "US/Central",
+                         "title": "Kansas City, MO, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_kansascity",
+                        "wa_wal"
+                        ],
+              "name": "US_MO_KansasCity",
+              "polygon": "m_dlFvw`bQie`B??we_Che`B?",
+              "timezone": "US/Central",
+              "urls": [
+                       "https://inflationary-us-mo-kansascity-tripgo.skedgo.com/satapp",
+                       "https://matter-us-mo-kansascity-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 54.6,
+                         "lng": -5.93,
+                         "timezone": "Europe/Dublin",
+                         "title": "Belfast, Northern Ireland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_belfastbikes-belfast",
+                        "wa_wal"
+                        ],
+              "name": "IE_NorthIreland",
+              "polygon": "_ckqI~lcbA?of}]~qvDoofBnfrB??n{mMn{vA??nzuR",
+              "timezone": "Europe/Dublin",
+              "urls": [
+                       "https://matter-ie-northireland-tripgo.skedgo.com/satapp",
+                       "https://darkages-ie-northireland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 45.9565,
+                         "lng": 8.93397,
+                         "timezone": "Europe/Zurich",
+                         "title": "Lugano, Switzerland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "CH_SouthEastSwitzerland",
+              "polygon": "kvb|G{xal@cecAg~cMjVoheDb{xCucAjqlBtpmHo`^`zyBtrAlvzAtmLfhgB",
+              "timezone": "Europe/Zurich",
+              "urls": [
+                       "https://matter-ch-southeastswitzerland-tripgo.skedgo.com/satapp",
+                       "https://darkages-ch-southeastswitzerland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 63.43658,
+                         "lng": 10.39894,
+                         "timezone": "Europe/Oslo",
+                         "title": "Trondheim, Norway"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "NO_MiddleNorway",
+              "polygon": "ak_`L}ionAhjoBcxeUf`i@j_d@faOx}q@zmm@kmj@ll_@vbHx~gBthfDjo~@|vAndKd|{CbabDdoQngiCvxwDpdR{dxAnlw@y`Flyc@b`e@{rIzk`Db`zAhdqDfedGiuOqecDtqqc@",
+              "timezone": "Europe/Oslo",
+              "urls": [
+                       "https://matter-no-middlenorway-tripgo.skedgo.com/satapp",
+                       "https://darkages-no-middlenorway-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -43.531,
+                         "lng": 172.637,
+                         "timezone": "NZ",
+                         "title": "Christchurch, New Zealand"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_nextbike-christchurch",
+                        "wa_wal"
+                        ],
+              "name": "NZ_S_Christchurch",
+              "polygon": "~dztF_i|t^?onmr@~luj@??nnmr@",
+              "timezone": "NZ",
+              "urls": [
+                       "https://darkages-nz-s-christchurch-tripgo.skedgo.com/satapp",
+                       "https://granduni-nz-s-christchurch-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 38.8976,
+                         "lng": -77.0365,
+                         "timezone": "America/New_York",
+                         "title": "Washington, DC, USA"
+                         },
+                         {
+                         "lat": 39.2907,
+                         "lng": -76.6093,
+                         "timezone": "America/New_York",
+                         "title": "Baltimore, MD, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "US_DC_Washington",
+              "polygon": "oq|iFnbyxMoalE??_buFnalE?",
+              "timezone": "America/New_York",
+              "urls": [
+                       "https://baryogenesis-us-dc-washington-tripgo.skedgo.com/satapp",
+                       "https://inflationary-us-dc-washington-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 41.38741,
+                         "lng": 2.16861,
+                         "timezone": "Europe/Madrid",
+                         "title": "Barcelona, Spain"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_bicing",
+                        "wa_wal"
+                        ],
+              "name": "ES_CT_Barcelona",
+              "polygon": "oswzF_rsHorbB??o|hDnrbB?",
+              "timezone": "Europe/Madrid",
+              "urls": [
+                       "https://matter-es-ct-barcelona-tripgo.skedgo.com/satapp",
+                       "https://granduni-es-ct-barcelona-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 40.71669,
+                         "lng": -74.00614,
+                         "timezone": "America/New_York",
+                         "title": "New York City, NY, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "US_NY_NewYorkCity",
+              "polygon": "oecvFnzhdM_}tA??o~oE~|tA?",
+              "timezone": "America/New_York",
+              "urls": [
+                       "https://baryogenesis-us-ny-newyorkcity-tripgo.skedgo.com/satapp",
+                       "https://hadron-us-ny-newyorkcity-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 47.05055,
+                         "lng": 8.30547,
+                         "timezone": "Europe/Zurich",
+                         "title": "Lucerne, Switzerland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "CH_Lucerne",
+              "polygon": "{xk_H{icn@ymE}hbKvr}@taB`xu@|h_K",
+              "timezone": "Europe/Zurich",
+              "urls": [
+                       "https://matter-ch-lucerne-tripgo.skedgo.com/satapp",
+                       "https://darkages-ch-lucerne-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 41.50132,
+                         "lng": -81.69516,
+                         "timezone": "America/New_York",
+                         "title": "Cleveland, OH, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_SoBi93",
+                        "wa_wal"
+                        ],
+              "name": "US_OH_Cleveland",
+              "polygon": "kpk}FdngpNjqYidP~kf@taB|eZhsuAk`^ngx@gg\\rG",
+              "timezone": "America/New_York",
+              "urls": [
+                       "https://inflationary-us-oh-cleveland-tripgo.skedgo.com/satapp",
+                       "https://matter-us-oh-cleveland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 60.38568,
+                         "lng": 5.33622,
+                         "timezone": "Europe/Oslo",
+                         "title": "Bergen, Norway"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_bergen-bysykkel",
+                        "wa_wal"
+                        ],
+              "name": "NO_Bergen",
+              "polygon": "snyrJctcX?}rub@r`cEhoFn~DbbkDuqMbxc[",
+              "timezone": "Europe/Oslo",
+              "urls": [
+                       "https://matter-no-bergen-tripgo.skedgo.com/satapp",
+                       "https://darkages-no-bergen-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 45.072,
+                         "lng": 7.689,
+                         "timezone": "Europe/Rome",
+                         "title": "Turin, Italy"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "IT_Torino",
+              "polygon": "opojGo_jg@o}wJ??m}wJn}wJ?",
+              "timezone": "Europe/Rome",
+              "urls": [
+                       "https://matter-it-torino-tripgo.skedgo.com/satapp",
+                       "https://darkages-it-torino-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -12.4542,
+                         "lng": 130.8391,
+                         "timezone": "Australia/Darwin",
+                         "title": "Darwin, NT, Australia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "ps_shu",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "AU_NT_Darwin",
+              "polygon": "~ovmA_ho{W_g{C??_xnD~f{C?",
+              "timezone": "Australia/Darwin",
+              "urls": [
+                       "https://darkages-au-nt-darwin-tripgo.skedgo.com/satapp",
+                       "https://granduni-au-nt-darwin-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -34.92861,
+                         "lng": 138.59996,
+                         "timezone": "Australia/Adelaide",
+                         "title": "Adelaide, SA, Australia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "ps_shu",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "AU_SA_Adelaide",
+              "polygon": "~{vvEwa}kYooxC??_pvBnoxC?",
+              "timezone": "Australia/Adelaide",
+              "urls": [
+                       "https://granduni-au-sa-adelaide-tripgo.skedgo.com/satapp",
+                       "https://darkages-au-sa-adelaide-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 42.95859,
+                         "lng": -78.88581,
+                         "timezone": "US/Eastern",
+                         "title": "Buffalo, NY, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_SoBi78",
+                        "wa_wal"
+                        ],
+              "name": "US_NY_Buffalo",
+              "polygon": "kejdG~eo`N_qHc@elDbuAmaEz@s~A~j@g_B`jA{XxlDihLt`HshFgQoqAnxLkf@tSm}A_hAsqAzNodAqRgfA_xAce@yEayAzK{|Aps@q[wJkhDu~B?cxlAhdf@e`h@z|c@nr@ftb@tlf@`sTt~xAe~PhiTw`d@eew@",
+              "timezone": "US/Eastern",
+              "urls": [
+                       "https://baryogenesis-us-ny-buffalo-tripgo.skedgo.com/satapp",
+                       "https://hadron-us-ny-buffalo-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 39.76865,
+                         "lng": -86.15792,
+                         "timezone": "America/Indianapolis",
+                         "title": "Indianapolis, IN, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_indiana-pacers-bikeshare",
+                        "wa_wal"
+                        ],
+              "name": "US_IN_Indianapolis",
+              "polygon": "olspF~dbnO_ieA??_`qA~heA?",
+              "timezone": "America/Indianapolis",
+              "urls": [
+                       "https://baryogenesis-us-in-indianapolis-tripgo.skedgo.com/satapp",
+                       "https://hadron-us-in-indianapolis-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 59.32512,
+                         "lng": 18.07109,
+                         "timezone": "Europe/Stockholm",
+                         "title": "Stockholm, Sweden"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "SE_Stockholm",
+              "polygon": "s}opJapiqBzwnEkaiG`z_G??h`c_@}roM?",
+              "timezone": "Europe/Stockholm",
+              "urls": [
+                       "https://matter-se-stockholm-tripgo.skedgo.com/satapp",
+                       "https://darkages-se-stockholm-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -31.95299,
+                         "lng": 115.85747,
+                         "timezone": "Australia/Perth",
+                         "title": "Perth, WA, Australia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "ps_shu",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "AU_WA_Perth",
+              "polygon": "~qtwE_sxvT_zwl@??_oyo@~ywl@?",
+              "timezone": "Australia/Perth",
+              "urls": [
+                       "https://granduni-au-wa-perth-tripgo.skedgo.com/satapp",
+                       "https://darkages-au-wa-perth-tripgo.skedgo.com/satapp",
+                       "https://baryogenesis-au-wa-perth-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 61.499,
+                         "lng": 23.762,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Tampere, Finland"
+                         },
+                         {
+                         "lat": 60.45262,
+                         "lng": 22.26139,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Turku, Finland"
+                         },
+                         {
+                         "lat": 62.24482,
+                         "lng": 25.74709,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Jyväskylä, Finland"
+                         },
+                         {
+                         "lat": 61.4851,
+                         "lng": 21.79743,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Pori, Finland"
+                         },
+                         {
+                         "lat": 63.09505,
+                         "lng": 21.61719,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Vaasa, Finland"
+                         },
+                         {
+                         "lat": 61.68887,
+                         "lng": 27.27285,
+                         "timezone": "Europe/Helsinki",
+                         "title": "Mikkeli, Finland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "FI_MiddleFinland",
+              "polygon": "_fopJoeiqBocmN_ycCopxD_dvO_pRo}zF~s`BocvBnwHohyCnu~A_~fD~`f@onqC~f^__yFnnT_o}@nzD_vdGnsw@_yF~`f@_g^nkX_laA~`f@~gpBne`@~iZokX~eiAnggA~efE_vJn{vAnyo@onT_pRn~rAnwHnjcAoxzA~bjEne`@~lVne`@~qy@~oR~xcC~_qA~bmA~lV~jlB~kaAoaoAnjcA~bmA_yFndkAnwHndkA~wq@nkX_yF~r_S",
+              "timezone": "Europe/Helsinki",
+              "urls": [
+                       "https://matter-fi-middlefinland-tripgo.skedgo.com/satapp",
+                       "https://granduni-fi-middlefinland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 54.9769,
+                         "lng": -1.61078,
+                         "timezone": "Europe/London",
+                         "title": "Newcastle, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "UK_NorthEngland",
+              "polygon": "_pskI~uxV?~lpG_g{C~`f@_vgC_rjTnkoK_yzN?~{mZ",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://hadron-uk-northengland-tripgo.skedgo.com/satapp",
+                       "https://stars-uk-northengland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -36.84448,
+                         "lng": 174.76771,
+                         "timezone": "Pacific/Auckland",
+                         "title": "Auckland, New Zealand"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "NZ_N_Auckland",
+              "polygon": "nhhjFodd|_@_nvY??odpd@~mvY?",
+              "timezone": "Pacific/Auckland",
+              "urls": [
+                       "https://darkages-nz-n-auckland-tripgo.skedgo.com/satapp",
+                       "https://granduni-nz-n-auckland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 51.89657,
+                         "lng": -8.48548,
+                         "timezone": "Europe/Dublin",
+                         "title": "Cork, Ireland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "IE_SouthIreland",
+              "polygon": "_fpeI~lcbA?ozuR~wnD??ohsKn{vAnljBnpxDnl{U?~hbE",
+              "timezone": "Europe/Dublin",
+              "urls": [
+                       "https://matter-ie-southireland-tripgo.skedgo.com/satapp",
+                       "https://darkages-ie-southireland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 47.502,
+                         "lng": 19.047,
+                         "timezone": "Europe/Budapest",
+                         "title": "Budapest, Hungary"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_bubi",
+                        "wa_wal"
+                        ],
+              "name": "HU_Budapest",
+              "polygon": "_lf~GoeiqBoweC??_vgCnweC?",
+              "timezone": "Europe/Budapest",
+              "urls": [
+                       "https://hadron-hu-budapest-tripgo.skedgo.com/satapp",
+                       "https://darkages-hu-budapest-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 43.603,
+                         "lng": 1.442,
+                         "timezone": "Europe/Paris",
+                         "title": "Toulouse, France"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_velo",
+                        "wa_wal"
+                        ],
+              "name": "FR_N_Toulouse",
+              "polygon": "oo}gG_kiFodkA??_w|AndkA?",
+              "timezone": "Europe/Paris",
+              "urls": [
+                       "https://matter-fr-n-toulouse-tripgo.skedgo.com/satapp",
+                       "https://darkages-fr-n-toulouse-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 55.95392,
+                         "lng": -3.18553,
+                         "timezone": "Europe/London",
+                         "title": "Edinburgh, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "UK_SouthScotland",
+              "polygon": "oiivI~nyo@?_oyo@~qy@nihJ~iwC~r|V",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://hadron-uk-southscotland-tripgo.skedgo.com/satapp",
+                       "https://stars-uk-southscotland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 69.64882,
+                         "lng": 18.95598,
+                         "timezone": "Europe/Oslo",
+                         "title": "Tromsø , Norway"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "NO_NorthNorway",
+              "polygon": "{yn|K{dtdBopnB`daUoavR{kkv@zizB}w|z@lxrGr|uD~eqBpiqKqtl@ftcAslkA{llBoqhAlaiG`h`@jooGdoiDfzcBdmkAb~}Dsu`@x}rNehsApihCtv]x~lElj_Ctwg@kf`@hsiJlfbBdomBk|YfdwB",
+              "timezone": "Europe/Oslo",
+              "urls": [
+                       "https://matter-no-northnorway-tripgo.skedgo.com/satapp",
+                       "https://darkages-no-northnorway-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 53.48,
+                         "lng": -2.241,
+                         "timezone": "Europe/London",
+                         "title": "Manchester, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "UK_GM_Manchester",
+              "polygon": "_{qhI~ocS?_||FnalE??~{|F",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://stars-uk-gm-manchester-tripgo.skedgo.com/satapp",
+                       "https://inflationary-uk-gm-manchester-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 43.667,
+                         "lng": -79.379,
+                         "timezone": "America/Toronto",
+                         "title": "Toronto, ON, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "CA_ON_Toronto",
+              "polygon": "_lrnG~d}jN?o~iM~ooC?fpz@fi|Dvud@ku[fn@s|Adb@uIry@lH`cB{N`rA~Thd@c_@vXqTfaB|V`aAzCnf@oNn_@m\\n_@wHh^{BfQcI`a@mBf_@jG~Svb@zb@t[nLvPhBtN`g@bdAxHeR`O{YpMwPnQyGrHiBnMk@vh@dUtAr~|H",
+              "timezone": "America/Toronto",
+              "urls": [
+                       "https://baryogenesis-ca-on-toronto-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-on-toronto-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 51.0458,
+                         "lng": -114.0581,
+                         "timezone": "America/Edmonton",
+                         "title": "Calgary, AB, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "CA_AB_Calgary",
+              "polygon": "_yysH~gzyT_vgC??o_eD~ugC?",
+              "timezone": "America/Edmonton",
+              "urls": [
+                       "https://baryogenesis-ca-ab-calgary-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-ab-calgary-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 51.75253,
+                         "lng": -1.25384,
+                         "timezone": "Europe/London",
+                         "title": "Oxford, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "UK_Oxford",
+              "polygon": "oro~H~_kI?_kiF~yuE??~jiF",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://hadron-uk-oxford-tripgo.skedgo.com/satapp",
+                       "https://stars-uk-oxford-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 21.30455,
+                         "lng": -157.85568,
+                         "timezone": "US/Hawaii",
+                         "title": "Honolulu, HI, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_HI_Honolulu",
+              "polygon": "kq~_Cvbie]sx`C??gtjDrx`C?",
+              "timezone": "US/Hawaii",
+              "urls": [
+                       "https://inflationary-us-hi-honolulu-tripgo.skedgo.com/satapp",
+                       "https://baryogenesis-us-hi-honolulu-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 52.37115,
+                         "lng": 4.89793,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Amsterdam, Netherlands"
+                         },
+                         {
+                         "lat": 52.07049,
+                         "lng": 4.30626,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "The Hague, Netherlands"
+                         },
+                         {
+                         "lat": 51.92321,
+                         "lng": 4.47479,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Rotterdam, Netherlands"
+                         },
+                         {
+                         "lat": 52.09125,
+                         "lng": 5.1194,
+                         "timezone": "Europe/Amsterdam",
+                         "title": "Utrecht, Netherlands"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "NL_W_Randstad",
+              "polygon": "op}zH_eeV__dI??ovmH~~cI?",
+              "timezone": "Europe/Amsterdam",
+              "urls": [
+                       "https://hadron-nl-w-randstad-tripgo.skedgo.com/satapp",
+                       "https://darkages-nl-w-randstad-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -27.4651,
+                         "lng": 153.0175,
+                         "timezone": "Australia/Brisbane",
+                         "title": "Brisbane, QLD, Australia"
+                         },
+                         {
+                         "lat": -28.0142,
+                         "lng": 153.4191,
+                         "timezone": "Australia/Brisbane",
+                         "title": "Gold Coast, QLD, Australia"
+                         },
+                         {
+                         "lat": -26.6527,
+                         "lng": 153.0744,
+                         "timezone": "Australia/Brisbane",
+                         "title": "Sunshine Coast, QLD, Australia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "ps_shu",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_citycycle",
+                        "wa_wal"
+                        ],
+              "name": "AU_QLD_Southern",
+              "polygon": "~k}lD_lcs[_hxa@??}b~T~gxa@?",
+              "timezone": "Australia/Brisbane",
+              "urls": [
+                       "https://darkages-au-qld-southern-tripgo.skedgo.com/satapp",
+                       "https://granduni-au-qld-southern-tripgo.skedgo.com/satapp",
+                       "https://baryogenesis-au-qld-southern-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 27.965,
+                         "lng": -82.458,
+                         "timezone": "US/Eastern",
+                         "title": "Tampa, FL, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_SoBi11",
+                        "wa_wal"
+                        ],
+              "name": "US_FL_Tampa",
+              "polygon": "_|dcD`l~xN_mpG??ag{C~lpG?",
+              "timezone": "US/Eastern",
+              "urls": [
+                       "https://inflationary-us-fl-tampa-tripgo.skedgo.com/satapp",
+                       "https://matter-us-fl-tampa-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 44.654,
+                         "lng": -63.573,
+                         "timezone": "America/Halifax",
+                         "title": "Halifax, NS, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "CA_NS_Halifax",
+              "polygon": "_{~mG~m_eK_etB??_vgC~dtB?",
+              "timezone": "America/Halifax",
+              "urls": [
+                       "https://baryogenesis-ca-ns-halifax-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-ns-halifax-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 45.529,
+                         "lng": -73.541,
+                         "timezone": "America/Montreal",
+                         "title": "Montreal, QC, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_bixi-montreal",
+                        "wa_wal"
+                        ],
+              "name": "CA_QC_Montreal",
+              "polygon": "_atqG`gbeM_`kI??_~cH~_kI?",
+              "timezone": "America/Montreal",
+              "urls": [
+                       "https://baryogenesis-ca-qc-montreal-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-qc-montreal-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 38.62934,
+                         "lng": -90.19565,
+                         "timezone": "US/Central",
+                         "title": "Saint Louis, MO, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_MO_SaintLouis",
+              "polygon": "_lijFjy}jP{oyAmwyCtzsA_rsCroqBvqtD",
+              "timezone": "US/Central",
+              "urls": [
+                       "https://inflationary-us-mo-saintlouis-tripgo.skedgo.com/satapp",
+                       "https://matter-us-mo-saintlouis-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 49.26123,
+                         "lng": -123.1139,
+                         "timezone": "America/Vancouver",
+                         "title": "Vancouver, BC, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_mobibikes",
+                        "wa_wal"
+                        ],
+              "name": "CA_BC_Vancouver",
+              "polygon": "_iajH~bd{VotfG??_vxVntfG?",
+              "timezone": "America/Vancouver",
+              "urls": [
+                       "https://baryogenesis-ca-bc-vancouver-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-bc-vancouver-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 46.25463,
+                         "lng": 20.1486,
+                         "timezone": "Europe/Budapest",
+                         "title": "Szeged, Hungary"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "HU_Szeged",
+              "polygon": "md|xG_zbyBy`Y??_al@x`Y?",
+              "timezone": "Europe/Budapest",
+              "urls": [
+                       "https://hadron-hu-szeged-tripgo.skedgo.com/satapp",
+                       "https://darkages-hu-szeged-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 32.782,
+                         "lng": -96.8,
+                         "timezone": "America/Chicago",
+                         "title": "Dallas, TX, USA"
+                         },
+                         {
+                         "lat": 32.755,
+                         "lng": -97.325,
+                         "timezone": "America/Chicago",
+                         "title": "Fort Worth, TX, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_fortworth",
+                        "wa_wal"
+                        ],
+              "name": "US_TX_Dallas",
+              "polygon": "}qcdEnxrsQqalE??_~cHpalE?",
+              "timezone": "America/Chicago",
+              "urls": [
+                       "https://inflationary-us-tx-dallas-tripgo.skedgo.com/satapp",
+                       "https://darkages-us-tx-dallas-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 44.839,
+                         "lng": -0.58,
+                         "timezone": "Europe/Paris",
+                         "title": "Bordeaux, France"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "FR_B_Bordeaux",
+              "polygon": "udbmG`{tGq`cH??s`aJp`cH?",
+              "timezone": "Europe/Paris",
+              "urls": [
+                       "https://matter-fr-b-bordeaux-tripgo.skedgo.com/satapp",
+                       "https://darkages-fr-b-bordeaux-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 48.116,
+                         "lng": -1.679,
+                         "timezone": "Europe/Paris",
+                         "title": "Rennes, France"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "FR_E_Rennes",
+              "polygon": "_tbcH~reKorbB??_|_CnrbB?",
+              "timezone": "Europe/Paris",
+              "urls": [
+                       "https://matter-fr-e-rennes-tripgo.skedgo.com/satapp",
+                       "https://darkages-fr-e-rennes-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "SE_NorthSweden",
+              "polygon": "ogbiKabzqAwkpCex}CsuaDs_No~[y{|Dite@~hRge{BeldEae_ArdkAwphCmteFpxRq~qCwfnBgnc@lk^sdtI{rvB}d_@ugFqjkBvieEyyfR|veM{zrBny_HhpuC?`u_y@",
+              "timezone": "Europe/Stockholm",
+              "urls": [
+                       "https://matter-se-northsweden-tripgo.skedgo.com/satapp",
+                       "https://darkages-se-northsweden-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 51.05383,
+                         "lng": 3.72501,
+                         "timezone": "Europe/Brussels",
+                         "title": "Ghent, Belgium"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "BE_NorthWestBelgium",
+              "polygon": "_{nxHa`{QoiBcmt@raGe~B|yJjKh|Dq|HwCshPiqF`{@m|BkmMp~De~Yh}AguLdgH_Ne`AygPbIw`Gtl@y}@ouBgsGmfAo~DdEclFwlHoiU|wiB??dz_EyiFt{InuAxnFnXh{JvtCh{Ln{Dr~A~rC`cEm{A|aC|LxcBwnBliC|^jfD_gAjdEi}NfwNq_@n}MitFh`FoiAopAoyIfyBkkDyyEslGfgCgSvqBo}A~eBecAe_@{mHtrA{iCdwB",
+              "timezone": "Europe/Brussels",
+              "urls": [
+                       "https://hadron-be-northwestbelgium-tripgo.skedgo.com/satapp",
+                       "https://darkages-be-northwestbelgium-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 53.558,
+                         "lng": -113.49,
+                         "timezone": "America/Edmonton",
+                         "title": "Edmonton, AB, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "CA_AB_Edmonton",
+              "polygon": "_sucI~rxvT_etB??_xnD~dtB?",
+              "timezone": "America/Edmonton",
+              "urls": [
+                       "https://baryogenesis-ca-ab-edmonton-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-ab-edmonton-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 29.94138,
+                         "lng": -90.08237,
+                         "timezone": "US/Central",
+                         "title": "New Orleans, LA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_LA_NewOrleans",
+              "polygon": "c{duDduhfPm_eA??glkCl_eA?",
+              "timezone": "US/Central",
+              "urls": [
+                       "https://inflationary-us-la-neworleans-tripgo.skedgo.com/satapp",
+                       "https://baryogenesis-us-la-neworleans-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 25.795,
+                         "lng": -80.225,
+                         "timezone": "US/Eastern",
+                         "title": "Miami, FL, USA"
+                         },
+                         {
+                         "lat": 26.122,
+                         "lng": -80.137,
+                         "timezone": "US/Eastern",
+                         "title": "Fort Lauderdale, FL, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "US_FL_Miami",
+              "polygon": "_fwuC~y~mN_ulL??_zuE~tlL?",
+              "timezone": "US/Eastern",
+              "urls": [
+                       "https://inflationary-us-fl-miami-tripgo.skedgo.com/satapp",
+                       "https://matter-us-fl-miami-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 55.60529,
+                         "lng": 13.00016,
+                         "timezone": "Europe/Stockholm",
+                         "title": "Malmö, Sweden"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "SE_SouthSweden",
+              "polygon": "_|}rI_vnmAodkA~wq@_{m@~tu@oweC~pdB?olli@~f{Cnj}HnkuCnsqHnyo@~tiP",
+              "timezone": "Europe/Stockholm",
+              "urls": [
+                       "https://matter-se-southsweden-tripgo.skedgo.com/satapp",
+                       "https://darkages-se-southsweden-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 59.93425,
+                         "lng": 30.32312,
+                         "timezone": "Europe/Moscow",
+                         "title": "Saint Petersburg, Russia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "RU_NW_SaintPetersburg",
+              "polygon": "uj|iJiqhnDowgE??}i}OnwgE?",
+              "timezone": "Europe/Moscow",
+              "urls": [
+                       "https://matter-ru-nw-saintpetersburg-tripgo.skedgo.com/satapp",
+                       "https://darkages-ru-nw-saintpetersburg-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 40.44073,
+                         "lng": -80.00042,
+                         "timezone": "America/New_York",
+                         "title": "Pittsburgh, PA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_healthy-ride-pittsburgh-pittsburgh",
+                        "wa_wal"
+                        ],
+              "name": "US_PA_Pittsburgh",
+              "polygon": "_huuFpg`iN}qh@ewBurKkqyB~`n@vXple@zaZdtAjtx@",
+              "timezone": "America/New_York",
+              "urls": [
+                       "https://inflationary-us-pa-pittsburgh-tripgo.skedgo.com/satapp",
+                       "https://darkages-us-pa-pittsburgh-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -23.55392,
+                         "lng": -46.62735,
+                         "timezone": "America/Sao_Paulo",
+                         "title": "São Paulo, Brazil"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "BR_SP_SaoPaulo",
+              "polygon": "n||pCntq|G_o}@nwH_yF~cb@onT_db@oqPowH_|B_xq@nqP_|Bn}@obd@nnTozDnm_A~kaA~uJnnT",
+              "timezone": "America/Sao_Paulo",
+              "urls": [
+                       "https://inflationary-br-sp-saopaulo-tripgo.skedgo.com/satapp",
+                       "https://darkages-br-sp-saopaulo-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -30.02932,
+                         "lng": -51.21725,
+                         "timezone": "America/Sao_Paulo",
+                         "title": "Porto Alegre, Brazil"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_bikepoa",
+                        "wa_wal"
+                        ],
+              "name": "BR_PortoAlegre",
+              "polygon": "|uuwDp|jxHirkA??mqkAhrkA?",
+              "timezone": "America/Sao_Paulo",
+              "urls": [
+                       "https://inflationary-br-portoalegre-tripgo.skedgo.com/satapp",
+                       "https://darkages-br-portoalegre-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 50.84656,
+                         "lng": 4.3517,
+                         "timezone": "Europe/Brussels",
+                         "title": "Brussels, Belgium"
+                         },
+                         {
+                         "lat": 51.22111,
+                         "lng": 4.39971,
+                         "timezone": "Europe/Brussels",
+                         "title": "Antwerp, Belgium"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s",
+                        "wa_wal"
+                        ],
+              "name": "BE_NorthEastBelgium",
+              "polygon": "sjaxHiuiXklJauNygDzpCwKmqW|xBwkJuvRv_CwdDo`^zvAgvChqFnpAzs@wyP}~Ns`YphC{_OleKpd@glDuqM_|B{zPegBkiCdaBkyHvcGsxDzqFruEhxGqhJvfEqs@qp@_`JrqBijHdiFdiBbQ}bTehAkb@neAwcM_dBasCatBkmGx[yiEdvDimGhlGe_@r{CaoPriA_\\eSecP|[krEtxDyJmrAaiG|oD{vFp|C`uHfuAoyCl}GxdG}YxqBtoDxcBj_@ikBv{EzuAtyC`}E~{@qnEjuGjkEbpEr}Hzk@d}DhpHm|@piAutF|kDwg@jfFrlC?hdjH",
+              "timezone": "Europe/Brussels",
+              "urls": [
+                       "https://hadron-be-northeastbelgium-tripgo.skedgo.com/satapp",
+                       "https://darkages-be-northeastbelgium-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 58.96633,
+                         "lng": 5.73138,
+                         "timezone": "Europe/Oslo",
+                         "title": "Stavanger, Norway"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_bysykkelen",
+                        "wa_wal"
+                        ],
+              "name": "NO_Rogaland",
+              "polygon": "gcqlJqbgv@fe}E}c|@f`|Cr_NlbLlxx\\{ftK_mE",
+              "timezone": "Europe/Oslo",
+              "urls": [
+                       "https://matter-no-rogaland-tripgo.skedgo.com/satapp",
+                       "https://darkages-no-rogaland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 33.75563,
+                         "lng": -84.38884,
+                         "timezone": "US/Eastern",
+                         "title": "Atlanta, GA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_SoBi31",
+                        "wa_wal"
+                        ],
+              "name": "US_GA_Atlanta",
+              "polygon": "gjdjEhldeOgjmE??i`uEfjmE?",
+              "timezone": "US/Eastern",
+              "urls": [
+                       "https://inflationary-us-ga-atlanta-tripgo.skedgo.com/satapp",
+                       "https://baryogenesis-us-ga-atlanta-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 53.37988,
+                         "lng": -1.46952,
+                         "timezone": "Europe/London",
+                         "title": "Sheffield, UK"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "UK_Sheffield",
+              "polygon": "_fpeI~cyK?o`qNnljB??n`qN",
+              "timezone": "Europe/London",
+              "urls": [
+                       "https://hadron-uk-sheffield-tripgo.skedgo.com/satapp",
+                       "https://stars-uk-sheffield-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 63.82566,
+                         "lng": 20.26307,
+                         "timezone": "Europe/Stockholm",
+                         "title": "Umea, Sweden"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "SE_Umea",
+              "polygon": "oadaK{`}gAgy~@ahd@osmAizxA{vYgwsAjpIyxlDcx|@ocW?ezxx@bgdG~puU?nrgn@",
+              "timezone": "Europe/Stockholm",
+              "urls": [
+                       "https://matter-se-umea-tripgo.skedgo.com/satapp",
+                       "https://darkages-se-umea-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 62.47181,
+                         "lng": 6.14873,
+                         "timezone": "Europe/Oslo",
+                         "title": "Alesund, Norway"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "NO_Oppland",
+              "polygon": "}eurJyzdXy~_G{m}BempDyloHlgfDazpc@x~iBfb\\vpYqdkAp`h@i{fAp`{@ria@~hZ~flA",
+              "timezone": "Europe/Oslo",
+              "urls": [
+                       "https://matter-no-oppland-tripgo.skedgo.com/satapp",
+                       "https://darkages-no-oppland-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 53.34845,
+                         "lng": -6.25954,
+                         "timezone": "Europe/Dublin",
+                         "title": "Dublin, Ireland"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_dublinbikes",
+                        "wa_wal"
+                        ],
+              "name": "IE_Dublin",
+              "polygon": "_sx_Inktn@onnG??ob{KnnnG?",
+              "timezone": "Europe/Dublin",
+              "urls": [
+                       "https://matter-ie-dublin-tripgo.skedgo.com/satapp",
+                       "https://darkages-ie-dublin-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 43.07476,
+                         "lng": -89.38376,
+                         "timezone": "US/Central",
+                         "title": "Madison, WI, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_madison",
+                        "wa_wal"
+                        ],
+              "name": "US_WI_Madison",
+              "polygon": "gsibGzkzaPg}gC??khsEf}gC?",
+              "timezone": "US/Central",
+              "urls": [
+                       "https://baryogenesis-us-wi-madison-tripgo.skedgo.com/satapp",
+                       "https://hadron-us-wi-madison-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 48.427,
+                         "lng": -123.364,
+                         "timezone": "America/Vancouver",
+                         "title": "Victoria, BC, Canada"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_nextbike-victoria",
+                        "wa_wal"
+                        ],
+              "name": "CA_BC_Victoria",
+              "polygon": "oyneH~jitV_w|A??_acD~v|A?",
+              "timezone": "America/Vancouver",
+              "urls": [
+                       "https://baryogenesis-ca-bc-victoria-tripgo.skedgo.com/satapp",
+                       "https://matter-ca-bc-victoria-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 42.96336,
+                         "lng": -85.66809,
+                         "timezone": "US/Eastern",
+                         "title": "Grand Rapids, MI, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "US_MI_GrandRapids",
+              "polygon": "{eidGjrqkOchtA??a{|AbhtA?",
+              "timezone": "US/Eastern",
+              "urls": [
+                       "https://inflationary-us-mi-grandrapids-tripgo.skedgo.com/satapp",
+                       "https://matter-us-mi-grandrapids-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 59.37991,
+                         "lng": 13.50295,
+                         "timezone": "Europe/Stockholm",
+                         "title": "Karlstad, Sweden"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "SE_Karlstad",
+              "polygon": "s}opJcbczA|roM?d|AberW_osCkFiq`@a}m@mrGmvl@vdi@{f^gfb@g`h@wu_@ybHicgAxl[owMakt@ayZ|sSikKgk^|K}yh@i`x@_`~@srW`bD}vi@goK",
+              "timezone": "Europe/Stockholm",
+              "urls": [
+                       "https://matter-se-karlstad-tripgo.skedgo.com/satapp",
+                       "https://darkages-se-karlstad-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": 32.71463,
+                         "lng": -117.16377,
+                         "timezone": "US/Pacific",
+                         "title": "San Diego, CA, USA"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "cy_bic-s_decobike-san-diego",
+                        "wa_wal"
+                        ],
+              "name": "US_CA_SanDiego",
+              "polygon": "_rbkEh`qmUu`Gqa{@hga@cd~E~cgCoq]hqSpbaF",
+              "timezone": "US/Pacific",
+              "urls": [
+                       "https://baryogenesis-us-ca-sandiego-tripgo.skedgo.com/satapp",
+                       "https://stars-us-ca-sandiego-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -16.9204,
+                         "lng": 145.771,
+                         "timezone": "Australia/Brisbane",
+                         "title": "Cairns, QLD, Australia"
+                         },
+                         {
+                         "lat": -19.2593,
+                         "lng": 146.822,
+                         "timezone": "Australia/Brisbane",
+                         "title": "Townsville, QLD, Australia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "ps_tax",
+                        "ps_shu",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "AU_QLD_Northern",
+              "polygon": "~gmcC_mmvZ_sv^??_x_X~rv^?",
+              "timezone": "Australia/Brisbane",
+              "urls": [
+                       "https://darkages-au-qld-northern-tripgo.skedgo.com/satapp",
+                       "https://granduni-au-qld-northern-tripgo.skedgo.com/satapp"
+                       ]
+              },
+              {
+              "cities": [
+                         {
+                         "lat": -33.86749,
+                         "lng": 151.20699,
+                         "timezone": "Australia/Sydney",
+                         "title": "Sydney, NSW, Australia"
+                         },
+                         {
+                         "lat": -32.92676,
+                         "lng": 151.77358,
+                         "timezone": "Australia/Sydney",
+                         "title": "Newcastle, NSW, Australia"
+                         },
+                         {
+                         "lat": -34.42573,
+                         "lng": 150.90462,
+                         "timezone": "Australia/Sydney",
+                         "title": "Wollongong, NSW, Australia"
+                         }
+                         ],
+              "modes": [
+                        "pt_pub",
+                        "pt_ltd_SCHOOLBUS",
+                        "ps_tax",
+                        "ps_shu",
+                        "me_car",
+                        "me_mot",
+                        "cy_bic",
+                        "wa_wal"
+                        ],
+              "name": "AU_NSW_Sydney",
+              "polygon": "nwcvE_fno[owyR??mcjRnwyR?",
+              "timezone": "Australia/Sydney",
+              "urls": [
+                       "https://granduni-au-nsw-sydney-tripgo.skedgo.com/satapp",
+                       "https://darkages-au-nsw-sydney-tripgo.skedgo.com/satapp",
+                       "https://inflationary-au-nsw-sydney-tripgo.skedgo.com/satapp"
+                       ]
+              }
+              ]
+}

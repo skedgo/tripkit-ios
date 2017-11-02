@@ -31,11 +31,11 @@ class TKAlertCell: UITableViewCell {
   
   // MARK: -
   
-  static var nib: UINib {
+  @objc static var nib: UINib {
     return UINib(nibName: String(describing: self), bundle: Bundle(for: TKAlertCell.self))
   }
   
-  var alert: TKAlert? {
+  @objc var alert: TKAlertModel? {
     didSet {
       updateUI()
     }
@@ -77,7 +77,7 @@ class TKAlertCell: UITableViewCell {
         .subscribe(onNext: { [unowned self] in
           self.tappedOnLink.onNext(url)
         })
-        .addDisposableTo(disposeBag)
+        .disposed(by: disposeBag)
     } else {
       actionButton.isHidden = true
     }

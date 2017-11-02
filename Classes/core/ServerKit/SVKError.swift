@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Marshal
-
 enum SVKErrorCode: Int {
   case unsupportedRegionCombination  = 1001
   case unsupportedOriginRegion       = 1002
@@ -31,38 +29,38 @@ class SVKUserError: SVKError {
 class SVKServerError: SVKError {
 }
 
-public struct SVKErrorRecovery: Unmarshaling {
-  public enum Option: String {
+public struct SVKErrorRecovery: Codable {
+  public enum Option: String, Codable {
     case back   = "BACK"
     case retry  = "RETRY"
     case abort  = "ABORT"
   }
   
+  private enum CodingKeys: String, CodingKey {
+    case title = "recoveryTitle"
+    case url
+    case option = "recovery"
+  }
+  
   public let title: String?
   public let url: URL?
   public let option: Option?
-  
-  public init(object: MarshaledObject) throws {
-    self.title  = try object.value(for: "recoveryTitle")
-    self.url    = try object.value(for: "url")
-    self.option = try object.value(for: "recovery")
-  }
 }
 
 public class SVKError: NSError {
-  public var title: String?
+  @objc public var title: String?
   public var recovery: SVKErrorRecovery?
   
-  public class func error(withCode code: Int, userInfo dict: [String: Any]?) -> SVKError {
+  @objc public class func error(withCode code: Int, userInfo dict: [String: Any]?) -> SVKError {
     return SVKError(domain: "com.skedgo.serverkit", code: code, userInfo: dict)
   }
   
-  public class func error(fromJSON json: Any?) -> SVKError? {
+  @objc public class func error(fromJSON json: Any?) -> SVKError? {
     guard let dict = json as? [String: Any] else { return nil }
     return SVKError.error(fromJSON: dict, domain: "com.skedgo.serverkit")
   }
   
-  class func error(fromJSON dictionary: [String: Any], domain: String) -> SVKError? {
+  @objc class func error(fromJSON dictionary: [String: Any], domain: String) -> SVKError? {
     guard let errorInfo = dictionary["error"] as? String,
       let isUserError = dictionary["usererror"] as? Bool
       else {
@@ -85,12 +83,12 @@ public class SVKError: NSError {
     }
     
     error.title = dictionary["title"] as? String
-    error.recovery = try? SVKErrorRecovery(object: dictionary)
+    error.recovery = try? JSONDecoder().decode(SVKErrorRecovery.self, withJSONObject: dictionary)
     
     return error
   }
   
-  public var isUserError: Bool {
+  @objc public var isUserError: Bool {
     return false
   }
   

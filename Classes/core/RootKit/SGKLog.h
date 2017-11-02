@@ -26,8 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)error:(NSString *)identifier format:(NSString *)message, ...;
 + (void)warn:(NSString *)identifier format:(NSString *)message, ...;
 
-+ (nullable NSArray *)logFilePaths;
-
 @end
 
 NS_ASSUME_NONNULL_END

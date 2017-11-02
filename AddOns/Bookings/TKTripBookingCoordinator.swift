@@ -62,7 +62,7 @@ public class TripBookingCoordinator {
           .distinctUntilChanged() // Otherwise staying in the same state would trigger again
           .map { (segmentIndex, $0) }
           .bind(to: fsmPublisher)
-          .addDisposableTo(disposeBag)
+          .disposed(by: disposeBag)
       }
       
       guard !machines.isEmpty else { return }
@@ -78,7 +78,7 @@ public class TripBookingCoordinator {
         }
         .filter { $0 != nil }.map { $0! }
         .bind(to: publisher)
-        .addDisposableTo(disposeBag)
+        .disposed(by: disposeBag)
       
       // This is where we do the actual transitions
       fsmPublisher
@@ -109,7 +109,7 @@ public class TripBookingCoordinator {
             assertionFailure("It should never error out but did with: \(error). Instead, you should use the `.error` case of `TKBookingStateMachine`")
           }
         )
-        .addDisposableTo(disposeBag)
+        .disposed(by: disposeBag)
     }
     
   }

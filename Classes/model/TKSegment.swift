@@ -13,7 +13,7 @@ extension TKSegment {
   /// Validates the segment, to make sure it's in a consistent state.
   /// If it's in an inconsistent state, many things can go wrong. You might
   /// want to add calls to this method to assertions and precondition checks.
-  public func validate() -> Bool {
+  @objc public func validate() -> Bool {
     // Segments need a trip
     guard let trip = trip else { return false }
     
@@ -25,17 +25,17 @@ extension TKSegment {
   }
   
   
-  public func determineRegions() -> [SVKRegion] {
+  @objc public func determineRegions() -> [SVKRegion] {
     guard let start = self.start?.coordinate, let end = self.end?.coordinate else { return [] }
     
-    return SVKRegionManager.shared.localRegions(start: start, end: end)
+    return TKRegionManager.shared.localRegions(start: start, end: end)
   }
   
   
   /// Test if this segment has at least the specific length.
   ///
   /// - note: public transport will always return `true` to this.
-  public func hasVisibility(_ type: STKTripSegmentVisibility) -> Bool {
+  @objc public func hasVisibility(_ type: STKTripSegmentVisibility) -> Bool {
     switch self.order() {
     case .start: return type == .inDetails
     case .regular:
@@ -47,8 +47,8 @@ extension TKSegment {
   
   
   /// Gets the first alert that requires reroute
-  public var reroutingAlert: Alert? {
-    return alertsWithAction().first { !$0.excludedStops.isEmpty }
+  @objc public var reroutingAlert: Alert? {
+    return alertsWithAction().first { !$0.stopsExcludedFromRouting.isEmpty }
   }
   
 }
@@ -67,7 +67,7 @@ extension TKSegment {
 
 extension TKSegment {
   
-  public var usesVehicle: Bool {
+  @objc public var usesVehicle: Bool {
     if template?.isSharedVehicle() ?? false {
       return true
     } else if reference?.vehicleUUID != nil {
@@ -79,7 +79,7 @@ extension TKSegment {
   
   /// - Parameter vehicles: List of the user's vehicles
   /// - Returns: The used vehicle (if there are any) in SkedGo API-compatible form
-  public func usedVehicle(fromAll vehicles: [STKVehicular]) -> [AnyHashable: Any]? {
+  @objc public func usedVehicle(fromAll vehicles: [STKVehicular]) -> [AnyHashable: Any]? {
     if template?.isSharedVehicle() ?? false {
       return reference?.sharedVehicleData
     }
@@ -93,7 +93,7 @@ extension TKSegment {
   
   
   /// The private vehicle type used by this segment (if any)
-  public var privateVehicleType: STKVehicleType {
+  @objc public var privateVehicleType: STKVehicleType {
     guard let identifier = modeIdentifier() else { return .none }
     
     switch identifier {
@@ -105,7 +105,7 @@ extension TKSegment {
   }
   
   /// - Parameter vehicle: Vehicle to assign to this segment. Only takes affect if its of a compatible type.
-  public func assignVehicle(_ vehicle: STKVehicular?) {
+  @objc public func assignVehicle(_ vehicle: STKVehicular?) {
     guard privateVehicleType == vehicle?.vehicleType() else { return }
     
     reference?.setVehicle(vehicle)
@@ -118,12 +118,16 @@ extension TKSegment {
 
 extension TKSegment: STKDisplayablePoint {
 
-  public var pointDisplaysImage: Bool {
-    return coordinate.isValid && hasVisibility(.onMap)
-  }
-  
   public var isDraggable: Bool {
     return false
+  }
+  
+  public var pointClusterIdentifier: String? {
+    return nil
+  }
+  
+  public var pointDisplaysImage: Bool {
+    return coordinate.isValid && hasVisibility(.onMap)
   }
   
   public var pointImage: SGKImage? {
@@ -172,7 +176,7 @@ extension TKSegment: STKDisplayablePoint {
     if let part = iconFileNamePart {
       return SVKServer.imageURL(forIconFileNamePart: part, of: iconType)
     } else {
-      return SVKRegionManager.shared.imageURL(forModeIdentifier: modeIdentifier(), of: iconType)
+      return TKRegionManager.shared.imageURL(forModeIdentifier: modeIdentifier(), iconType: iconType)
     }
   }
 }
@@ -193,7 +197,7 @@ extension TKSegment: STKDisplayableTimePoint {
   
   public var timeZone: TimeZone {
     guard let coordinate = start?.coordinate else { return .current }
-    return SVKRegionManager.shared.timeZone(for: coordinate) ?? .current
+    return TKRegionManager.shared.timeZone(for: coordinate) ?? .current
   }
   
   public var timeIsRealTime: Bool {
@@ -300,7 +304,7 @@ extension TKSegment: STKTripSegment {
       return ""
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
       
       guard order() == .end else { return nil }
       let format = NSLocalizedString("I'll arrive at %@ at %@", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime)")

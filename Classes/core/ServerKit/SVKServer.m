@@ -193,8 +193,8 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   
   __block id object;
   [self GET:url paras:nil completion:
-   ^(NSInteger status, id  _Nullable responseObject, NSError * _Nullable error) {
-#pragma unused(status)
+   ^(NSInteger status, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
+#pragma unused(status, data)
      if (! error) {
        // success
        if (semaphore != NULL) {
@@ -249,7 +249,6 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   NSURLSessionDataTask *task = [defaultSession dataTaskWithRequest:request
                                                  completionHandler:
                                 ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-#pragma unused(response)
                                   NSInteger status = 0;
                                   if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                                     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
@@ -261,11 +260,11 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
                                   }
                                   
                                   if (error) {
-                                    completion(status, nil, error);
+                                    completion(status, nil, nil, error);
                                     
                                   } else if (data.length == 0) {
                                     // empty response is not an error
-                                    completion(status, nil, nil);
+                                    completion(status, nil, nil, nil);
                                     
                                   } else {
                                     [SGKLog verbose:@"SVKServer" block:^NSString * _Nonnull{
@@ -279,13 +278,13 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
                                     if (responseObject) {
                                       SVKError *serverError = [SVKError errorFromJSON:responseObject];
                                       if (serverError != nil) {
-                                        completion(status, nil, serverError);
+                                        completion(status, nil, nil,  serverError);
                                       } else {
-                                        completion(status, responseObject, nil);
+                                        completion(status, responseObject, data, nil);
                                       }
                                     } else {
                                       [SGKLog error:@"SVKError" format:@"Could not parse: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
-                                      completion(status, nil, parserError);
+                                      completion(status, nil, nil, parserError);
                                     }
                                   }
                                 }];
@@ -347,6 +346,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
                            failure:failure
                     previousStatus:0
                   previousResponse:nil
+                      previousData:nil
                      previousError:nil];
 }
 
@@ -367,6 +367,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
                                   failure:nil
                            previousStatus:0
                          previousResponse:nil
+                             previousData:nil
                             previousError:nil];
 }
 
@@ -390,6 +391,9 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
     self.lastServerType = currentType;
     self.lastDevelopmentServer = developmentServer;
     self.region = nil;
+    
+    // We're caching the server, so override the cache
+    SVKServer.serverType = currentType;
     
     // User tokens are bound to servers, so clear those, too.
     [SVKServer updateUserToken:nil];
@@ -426,18 +430,18 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithCapacity:2];
   paras[@"v"] = @2;
   if (!forced) {
-    [paras setValue:[[SVKRegionManager sharedInstance] regionsHash] forKey:@"hashCode"];
+    [paras setValue:[TKRegionManager.shared regionsHash] forKey:@"hashCode"];
   }
   
   [SVKServer POST:[NSURL URLWithString:regionsURLString]
             paras:paras
        completion:
-   ^(NSInteger status, id  _Nullable responseObject, NSError * _Nullable error) {
-#pragma unused(status)
-     if (responseObject) {
-       [[SVKRegionManager sharedInstance] updateRegionsFromJSON:responseObject];
+   ^(NSInteger status, id _Nullable responseObject, NSData *data, NSError * _Nullable error) {
+#pragma unused(status, responseObject)
+     if (data) {
+       [TKRegionManager.shared updateRegionsFromData:data];
        
-       if ([[SVKRegionManager sharedInstance] hasRegions]) {
+       if ([TKRegionManager.shared hasRegions]) {
          if (completion) {
            completion(YES, nil);
          }
@@ -494,6 +498,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
                                   failure:(nullable SGServerFailureBlock)failure
                            previousStatus:(NSInteger)previousStatus
                          previousResponse:(nullable id)previousResponse
+                             previousData:(nullable NSData *)previousData
                             previousError:(nullable NSError *)previousError
 {
 #ifdef DEBUG
@@ -514,10 +519,10 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
       if (success) {
         if (callbackOnMain) {
           dispatch_async(dispatch_get_main_queue(), ^{
-            success(previousStatus, previousResponse);
+            success(previousStatus, previousResponse, previousData);
           });
         } else {
-          success(previousStatus, previousResponse);
+          success(previousStatus, previousResponse, previousData);
         }
       }
     } else {
@@ -549,7 +554,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   }
   
   // Backup handler
-  void (^failOverBlock)(NSInteger, id, NSError *) = ^(NSInteger status, id responseObject, NSError *error) {
+  void (^failOverBlock)(NSInteger, id, NSData *, NSError *) = ^(NSInteger status, id responseObject, NSData *data, NSError *error) {
     [self initiateDataTaskWithMethod:method
                                 path:path
                           parameters:parameters
@@ -562,6 +567,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
                              failure:failure
                       previousStatus:status
                     previousResponse:responseObject
+                        previousData:data
                        previousError:error];
   };
   
@@ -572,7 +578,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   
   [SVKServer hitRequest:request
              completion:
-   ^(NSInteger status, id  _Nullable responseObject, NSError * _Nullable error) {
+   ^(NSInteger status, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
      NSError *serverError = error ?: [SVKError errorFromJSON:responseObject];
      if (serverError) {
        BOOL isUserError = NO;
@@ -594,7 +600,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
          // not failing over as that messes with semaphores!
          dispatch_semaphore_signal(semaphore);
        } else if (! isUserError) {
-         failOverBlock(status, responseObject, error);
+         failOverBlock(status, responseObject, data, error);
        }
        
      } else {
@@ -602,10 +608,10 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
        if (success) {
          if (callbackOnMain) {
            dispatch_async(dispatch_get_main_queue(), ^{
-             success(status, successResponse);
+             success(status, successResponse, data);
            });
          } else {
-           success(status, successResponse);
+           success(status, successResponse, data);
          }
        }
        if (wait && semaphore != NULL) {
@@ -630,15 +636,8 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
 
 + (nullable NSString *)xTripGoVersion
 {
-  NSString *eligibility = [[SGKConfig sharedInstance] regionEligibility];
-  if (eligibility == nil) {
-    return nil;
-  }
-  
-  NSString *app = eligibility.length > 0 ? [@"-" stringByAppendingString:eligibility] : eligibility;
-
   NSNumber *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-  return [NSString stringWithFormat:@"i%@%@", app, version];
+  return [NSString stringWithFormat:@"i%@", version];
 }
 
 #pragma mark - Regions
@@ -650,7 +649,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
     return;
   }
   
-  if ([[SVKRegionManager sharedInstance] hasRegions]) {
+  if ([TKRegionManager.shared hasRegions]) {
     // we have regions
     completion(nil);
     
@@ -714,9 +713,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   if (APIKey.length > 0) {
     headers[@"X-TripGo-Key"] = APIKey;
   } else {
-    // Deprecated
-    [SGKLog warn:@"SVKServer" text:@"API key not specified! Check your Config.plist for TripGoAPIKey."];
-    headers[@"X-TripGo-RegionEligibility"] = [[SGKConfig sharedInstance] regionEligibility];
+    ZAssert(false, @"API key not specified!");
   }
   
   // Optional

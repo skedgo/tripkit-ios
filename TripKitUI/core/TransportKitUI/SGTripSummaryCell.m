@@ -118,6 +118,13 @@
                         bundle:[NSBundle bundleForClass:aClass]];
 }
 
++ (UINib *)edgeToEdgeNib
+{
+  Class aClass = [self class];
+  return [UINib nibWithNibName:@"SGTripSummaryEdgeToEdgeCell"
+                        bundle:[NSBundle bundleForClass:aClass]];
+}
+
 + (UINib *)nanoNib
 {
   Class aClass = [self class];

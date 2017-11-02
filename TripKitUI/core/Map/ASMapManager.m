@@ -291,25 +291,57 @@
 	}
 }
 
-+ (MKMapRect)mapRectForUserDefaultsKey:(NSString *)key
++ (MKMapRect)mapRectForUserDefaultsKey:(nullable NSString *)mapKey
+                               dateKey:(nullable NSString *)dateKey
 {
+  if (mapKey == nil) {
+    return MKMapRectNull;
+  }
+  
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSArray *rectArray = [defaults objectForKey:key];
-  if (rectArray.count == 4) {
-		return MKMapRectMake([rectArray[0] doubleValue],
-                         [rectArray[1] doubleValue],
-                         [rectArray[2] doubleValue],
-												 [rectArray[3] doubleValue]);
+  NSArray *rectArray = [defaults objectForKey:mapKey];
+  if (rectArray.count != 4) {
+    return MKMapRectNull;
+  }
+  
+  if (dateKey) {
+    NSDate *date = [defaults objectForKey:dateKey];
+    if (date != nil && [date timeIntervalSinceNow] < -30 * 60) {
+      // Older than 30 mins old. Don't restore
+      return MKMapRectNull;
+    }
+  }
+
+  return MKMapRectMake([rectArray[0] doubleValue],
+                       [rectArray[1] doubleValue],
+                       [rectArray[2] doubleValue],
+                       [rectArray[3] doubleValue]);
+}
+
++ (void)saveMapRect:(MKMapRect)rect
+ forUserDefaultsKey:(NSString *)mapKey
+            dateKey:(nullable NSString *)dateKey
+{
+  if (rect.origin.x > 0 && rect.origin.y > 0 && rect.size.height > 0) {
+    NSArray *rectArray = @[
+                           @(rect.origin.x),
+                           @(rect.origin.y),
+                           @(rect.size.width),
+                           @(rect.size.height)
+                           ];
     
-  } else {
-    // set to null, don't change the map
-		return MKMapRectNull;
+    [[NSUserDefaults standardUserDefaults] setObject:rectArray
+                                              forKey:mapKey];
+    
+    if (dateKey != nil) {
+      [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:dateKey];
+    }
   }
 }
 
 - (void)showLastUsedMapRect:(BOOL)animated
 {
-  MKMapRect mapRect = [[self class] mapRectForUserDefaultsKey:self.lastMapRectUserDefaultsKey];
+  MKMapRect mapRect = [[self class] mapRectForUserDefaultsKey:self.lastMapRectUserDefaultsKey dateKey:self.lastUseUserDefaultsKey];
   if (! MKMapRectIsNull(mapRect)) {
     [self.mapView setVisibleMapRect:mapRect animated:animated];
   }
@@ -328,17 +360,9 @@
 	
 	// keep it for later if it's a valid rect
 	MKMapRect rect = self.mapView.visibleMapRect;
-	if (rect.origin.x > 0 && rect.origin.y > 0 && rect.size.height > 0) {
-		NSArray *rectArray = @[
-                           @(rect.origin.x),
-                           @(rect.origin.y),
-                           @(rect.size.width),
-                           @(rect.size.height)
-                           ];
-		
-		[[NSUserDefaults standardUserDefaults] setObject:rectArray
-                                              forKey:key];
-	}
+  [ASMapManager saveMapRect:rect
+         forUserDefaultsKey:key
+                    dateKey:self.lastUseUserDefaultsKey];
 }
 
 - (void)addDoubleTapZoomGestureRecognizer

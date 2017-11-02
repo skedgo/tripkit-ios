@@ -13,10 +13,8 @@
 
 #import "SVKServer.h"
 
-#import "SVKRegionManager.h"
 #import "SVKTransportModes.h"
 
-#import "SGKConfig+SVKServerKit.h"
 #import "CLLocation+DecodePolylineString.h"
 
 #endif

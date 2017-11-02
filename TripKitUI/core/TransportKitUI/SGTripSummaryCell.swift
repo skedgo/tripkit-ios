@@ -62,12 +62,12 @@ extension SGTripSummaryCell {
     Observable.merge([departure, arrival])
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in self?.updateForNewTimes(nano: nano) } )
-      .addDisposableTo(_objcDisposeBag.disposeBag)
+      .disposed(by: _objcDisposeBag.disposeBag)
     
     object.rx.observe(Bool.self, "hasReminder")
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in self?.updateAlertStatus() } )
-      .addDisposableTo(_objcDisposeBag.disposeBag)
+      .disposed(by: _objcDisposeBag.disposeBag)
   }
   
   public func update(for trip: STKTrip, nano: Bool = false, highlight: STKTripCostType = .count) {
@@ -83,6 +83,7 @@ extension SGTripSummaryCell {
     }
     
     // time and duration
+    _addTimeString(forDeparture: trip.departureTime, arrival: trip.arrivalTime, departureTimeZone: trip.departureTimeZone, arrivalTimeZone: trip.arrivalTimeZone ?? trip.departureTimeZone, focusOnDuration: !trip.departureTimeIsFixed, queryIsArriveBefore: trip.isArriveBefore)
     
     if showCosts {
       _addCosts(trip.costValues)

@@ -14,7 +14,7 @@
 
 @interface BPKActionOverlay ()
 
-@property (nonatomic, copy) void (^actionBlock)();
+@property (nonatomic, copy) void (^actionBlock)(void);
 
 @end
 

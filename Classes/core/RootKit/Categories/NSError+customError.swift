@@ -15,7 +15,7 @@ extension NSError {
     return NSError(code: code, message: message)
   }
   
-  public convenience init(code: Int, message: String) {
+  @objc public convenience init(code: Int, message: String) {
     let dict = [
       NSLocalizedDescriptionKey: message
     ]

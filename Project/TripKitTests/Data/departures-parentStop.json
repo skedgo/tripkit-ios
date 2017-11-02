@@ -1,0 +1,1933 @@
+{
+  "alerts": [
+             {
+             "hashCode": -1789190743,
+             "serviceTripID": "54-R.1495.101.64.A.8.45516700",
+             "severity": "warning",
+             "text": "KCON Sydney 2017 - Qudos Bank Arena, Olympic Park\n8pm - 10:30pm\n- Lidcombe to Olympic Park shuttle trains run every 10 minutes until 12:30am.\n- Route 525 buses run between Parramatta and Burwood via Sydney Olympic Park.\n- Route 526 buses run from the Sydney Olympic Park Ferry Wharf to Olympic Park.\n- Route X25 buses run regularly to Sydney Olympic Park from Strathfield Station during the afternoon peak period on weekdays.\n- The F3 Parramatta River Ferry service stop is approximately 40 minutes walk (3.6km) from Qudos Bank Arena. There is also connecting 526 bus to the precinct.",
+             "title": "Special Events - Friday 22/09/17",
+             "url": "http://www.sydneytrains.info/service_updates/service_interruptions/"
+             }
+             ],
+  "embarkationStops": [
+                       {
+                       "services": [
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Central",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "135F.1495.101.124.K.8.45514224",
+                                    "startTime": 1506069810,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Central, then Hornsby",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "182L.1495.101.124.A.8.45515429",
+                                    "startTime": 1506069990,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Central",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "168R.1495.101.124.A.8.45514989",
+                                    "startTime": 1506070230,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Central",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "108E.1495.101.124.T.8.45514078",
+                                    "startTime": 1506070710,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Central",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "162U.1495.101.124.A.8.45514760",
+                                    "startTime": 1506070890,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Central, then Berowra",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "186R.1495.101.124.A.8.45515553",
+                                    "startTime": 1506071130,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Central, then Hornsby",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "185L.1495.101.64.A.8.45515508",
+                                    "startTime": 1506071790,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Central, then Hornsby",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "153T.1495.101.64.A.8.45514423",
+                                    "startTime": 1506072030,
+                                    "wheelchairAccessible": true
+                                    }
+                                    ],
+                       "stopCode": "2015133"
+                       },
+                       {
+                       "services": [
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "NSW TrainLink",
+                                    "operatorID": "NSWTrainLink",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Wolli Creek Station; Hurstville Station; Sutherland Station; Helensburgh Station; Thirroul Station; North Wollongong Station; Wollongong Station; Coniston Station; Unanderra Station; Dapto Station; Albion Park Station; Oak Flats Station; Shellharbour Junction Station; Minnamurra Station; Bombo Station; Kiama Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Kiama",
+                                    "serviceName": "South Coast Line",
+                                    "serviceNumber": "SCO",
+                                    "serviceTripID": "C481.1495.101.64.H.4.45518924",
+                                    "startTime": 1506069870,
+                                    "wheelchairAccessible": true
+                                    }
+                                    ],
+                       "stopCode": "2015132"
+                       },
+                       {
+                       "services": [
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Sydenham Station; Tempe Station; Wolli Creek Station; Arncliffe Station; Banksia Station; Rockdale Station; Kogarah Station; Carlton Station; Allawah Station; Hurstville Station; Penshurst Station; Mortdale Station; Sutherland Station; Loftus Station; Engadine Station; Heathcote Station; Waterfall Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Waterfall",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "610M.1495.101.124.T.8.45517439",
+                                    "startTime": 1506069846,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Wolli Creek Station; Hurstville Station; Oatley Station; Jannali Station; Sutherland Station; Kirrawee Station; Gymea Station; Miranda Station; Caringbah Station; Woolooware Station; Cronulla Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Cronulla",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "626L.1495.101.124.T.8.45517803",
+                                    "startTime": 1506070266,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Sydenham Station; Tempe Station; Wolli Creek Station; Arncliffe Station; Banksia Station; Rockdale Station; Kogarah Station; Carlton Station; Allawah Station; Hurstville Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Hurstville",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "602M.1495.101.124.T.8.45517126",
+                                    "startTime": 1506070446,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Wolli Creek Station; Hurstville Station; Penshurst Station; Mortdale Station; Oatley Station; Como Station; Jannali Station; Sutherland Station; Kirrawee Station; Gymea Station; Miranda Station; Caringbah Station; Woolooware Station; Cronulla Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Cronulla",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "619M.1495.101.124.T.8.45517659",
+                                    "startTime": 1506070866,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Sydenham Station; Tempe Station; Wolli Creek Station; Arncliffe Station; Banksia Station; Rockdale Station; Kogarah Station; Carlton Station; Allawah Station; Hurstville Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Hurstville",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "611K.1495.101.124.T.8.45517469",
+                                    "startTime": 1506071046,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Wolli Creek Station; Hurstville Station; Penshurst Station; Mortdale Station; Sutherland Station; Loftus Station; Engadine Station; Heathcote Station; Waterfall Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Waterfall",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "614K.1495.101.124.T.8.45517540",
+                                    "startTime": 1506071466,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Sydenham Station; Tempe Station; Wolli Creek Station; Arncliffe Station; Banksia Station; Rockdale Station; Kogarah Station; Carlton Station; Allawah Station; Hurstville Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Hurstville",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "600M.1495.101.124.T.8.45517072",
+                                    "startTime": 1506071646,
+                                    "wheelchairAccessible": true
+                                    }
+                                    ],
+                       "stopCode": "2015142"
+                       },
+                       {
+                       "services": [
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station; Town Hall Station; Martin Place Station; Kings Cross Station; Edgecliff Station; Bondi Junction Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Bondi Junction",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "621L.1495.101.124.T.8.45517729",
+                                    "startTime": 1506069846,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station; Town Hall Station; Martin Place Station; Kings Cross Station; Edgecliff Station; Bondi Junction Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Bondi Junction",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "618J.1495.101.124.T.8.45517646",
+                                    "startTime": 1506070026,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station; Town Hall Station; Martin Place Station; Kings Cross Station; Edgecliff Station; Bondi Junction Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Bondi Junction",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "615J.1495.101.124.T.8.45517574",
+                                    "startTime": 1506070446,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station; Town Hall Station; Martin Place Station; Kings Cross Station; Edgecliff Station; Bondi Junction Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Bondi Junction",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "608J.1495.101.64.T.8.45517324",
+                                    "startTime": 1506070626,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station; Town Hall Station; Martin Place Station; Kings Cross Station; Edgecliff Station; Bondi Junction Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Bondi Junction",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "601N.1495.101.124.T.8.45517100",
+                                    "startTime": 1506071046,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station; Town Hall Station; Martin Place Station; Kings Cross Station; Edgecliff Station; Bondi Junction Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Bondi Junction",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "617L.1495.101.64.T.8.45517629",
+                                    "startTime": 1506071226,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station; Town Hall Station; Martin Place Station; Kings Cross Station; Edgecliff Station; Bondi Junction Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Bondi Junction",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "606G.1495.101.124.T.8.45517252",
+                                    "startTime": 1506071646,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station; Town Hall Station; Martin Place Station; Kings Cross Station; Edgecliff Station; Bondi Junction Station",
+                                    "serviceColor": {
+                                    "blue": 190,
+                                    "green": 130,
+                                    "red": 0
+                                    },
+                                    "serviceDirection": "Bondi Junction",
+                                    "serviceName": "T4 Eastern Suburbs & Illawarra Line",
+                                    "serviceNumber": "T4",
+                                    "serviceTripID": "609J.1495.101.124.T.8.45517356",
+                                    "startTime": 1506071826,
+                                    "wheelchairAccessible": true
+                                    }
+                                    ],
+                       "stopCode": "2015141"
+                       },
+                       {
+                       "services": [
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 42,
+                                    "green": 103,
+                                    "red": 242
+                                    },
+                                    "serviceDirection": "Central, then Birrong",
+                                    "serviceName": "T3 Bankstown Line",
+                                    "serviceNumber": "T3",
+                                    "serviceTripID": "69-N.1495.101.64.A.8.45518126",
+                                    "startTime": 1506070062,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 42,
+                                    "green": 103,
+                                    "red": 242
+                                    },
+                                    "serviceDirection": "Central, then Liverpool",
+                                    "serviceName": "T3 Bankstown Line",
+                                    "serviceNumber": "T3",
+                                    "serviceTripID": "33-P.1495.101.124.K.8.45516153",
+                                    "startTime": 1506070962,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 42,
+                                    "green": 103,
+                                    "red": 242
+                                    },
+                                    "serviceDirection": "Central, then Central",
+                                    "serviceName": "T3 Bankstown Line",
+                                    "serviceNumber": "T3",
+                                    "serviceTripID": "7--R.1495.101.124.M.8.45518166",
+                                    "startTime": 1506071322,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 42,
+                                    "green": 103,
+                                    "red": 242
+                                    },
+                                    "serviceDirection": "Central",
+                                    "serviceName": "T3 Bankstown Line",
+                                    "serviceNumber": "T3",
+                                    "serviceTripID": "18-R.1495.101.64.M.8.45515367",
+                                    "startTime": 1506071862,
+                                    "wheelchairAccessible": true
+                                    }
+                                    ],
+                       "stopCode": "2015137"
+                       },
+                       {
+                       "services": [
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Ashfield Station; Strathfield Station; Flemington Station; Lidcombe Station; Auburn Station; Granville Station; Merrylands Station; Guildford Station; Yennora Station; Fairfield Station; Canley Vale Station; Cabramatta Station; Warwick Farm Station; Liverpool Station; Casula Station; Glenfield Station; Macquarie Fields Station; Ingleburn Station; Minto Station; Leumeah Station; Campbelltown Station",
+                                    "serviceColor": {
+                                    "blue": 45,
+                                    "green": 156,
+                                    "red": 77
+                                    },
+                                    "serviceDirection": "Campbelltown",
+                                    "serviceName": "T2 Airport, Inner West & South Line",
+                                    "serviceNumber": "T2",
+                                    "serviceTripID": "22-S.1495.101.64.C.8.45515811",
+                                    "startTime": 1506069876,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Macdonaldtown Station; Newtown Station; Stanmore Station; Petersham Station; Lewisham Station; Summer Hill Station; Ashfield Station; Croydon Station; Burwood Station; Strathfield Station; Homebush Station",
+                                    "serviceColor": {
+                                    "blue": 45,
+                                    "green": 156,
+                                    "red": 77
+                                    },
+                                    "serviceDirection": "Homebush",
+                                    "serviceName": "T2 Airport, Inner West & South Line",
+                                    "serviceNumber": "T2",
+                                    "serviceTripID": "64-T.1495.101.124.A.8.45517895",
+                                    "startTime": 1506070236,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Ashfield Station; Strathfield Station; Flemington Station; Lidcombe Station; Auburn Station; Granville Station; Merrylands Station; Guildford Station; Yennora Station; Fairfield Station; Canley Vale Station; Cabramatta Station; Warwick Farm Station; Liverpool Station; Casula Station; Glenfield Station; Edmondson Park Station; Leppington Station",
+                                    "serviceColor": {
+                                    "blue": 45,
+                                    "green": 156,
+                                    "red": 77
+                                    },
+                                    "serviceDirection": "Leppington",
+                                    "serviceName": "Inner West & South Line",
+                                    "serviceNumber": "T2",
+                                    "serviceTripID": "50-P.1495.101.124.A.8.45516514",
+                                    "startTime": 1506070776,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Macdonaldtown Station; Newtown Station; Stanmore Station; Petersham Station; Lewisham Station; Summer Hill Station; Ashfield Station; Croydon Station; Burwood Station; Strathfield Station; Homebush Station",
+                                    "serviceColor": {
+                                    "blue": 45,
+                                    "green": 156,
+                                    "red": 77
+                                    },
+                                    "serviceDirection": "Homebush",
+                                    "serviceName": "T2 Airport, Inner West & South Line",
+                                    "serviceNumber": "T2",
+                                    "serviceTripID": "17-S.1495.101.120.M.8.45515029",
+                                    "startTime": 1506071136,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Ashfield Station; Strathfield Station; Flemington Station; Lidcombe Station; Auburn Station; Granville Station; Merrylands Station; Guildford Station; Yennora Station; Fairfield Station; Canley Vale Station; Cabramatta Station; Warwick Farm Station; Liverpool Station; Casula Station; Glenfield Station; Macquarie Fields Station; Ingleburn Station; Minto Station; Leumeah Station; Campbelltown Station",
+                                    "serviceColor": {
+                                    "blue": 45,
+                                    "green": 156,
+                                    "red": 77
+                                    },
+                                    "serviceDirection": "Campbelltown",
+                                    "serviceName": "T2 Airport, Inner West & South Line",
+                                    "serviceNumber": "T2",
+                                    "serviceTripID": "14-T.1495.101.64.M.8.45514252",
+                                    "startTime": 1506071676,
+                                    "wheelchairAccessible": true
+                                    }
+                                    ],
+                       "stopCode": "2015136"
+                       },
+                       {
+                       "services": [
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 45,
+                                    "green": 156,
+                                    "red": 77
+                                    },
+                                    "serviceDirection": "Central, then Revesby",
+                                    "serviceName": "Inner West & South Line",
+                                    "serviceNumber": "T2",
+                                    "serviceTripID": "57-T.1495.101.124.A.8.45516838",
+                                    "startTime": 1506069702,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 45,
+                                    "green": 156,
+                                    "red": 77
+                                    },
+                                    "serviceDirection": "Central",
+                                    "serviceName": "T2 Airport, Inner West & South Line",
+                                    "serviceNumber": "T2",
+                                    "serviceTripID": "60-N.1495.101.124.A.8.45517030",
+                                    "startTime": 1506070242,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 45,
+                                    "green": 156,
+                                    "red": 77
+                                    },
+                                    "serviceDirection": "Central",
+                                    "serviceName": "Inner West & South Line",
+                                    "serviceNumber": "T2",
+                                    "serviceTripID": "54-R.1495.101.64.A.8.45516700",
+                                    "startTime": 1506070602,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 45,
+                                    "green": 156,
+                                    "red": 77
+                                    },
+                                    "serviceDirection": "Central, then Macarthur",
+                                    "serviceName": "T2 Airport, Inner West & South Line",
+                                    "serviceNumber": "T2",
+                                    "serviceTripID": "59-W.1495.101.124.A.8.45516943",
+                                    "startTime": 1506071142,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Central Station",
+                                    "serviceColor": {
+                                    "blue": 45,
+                                    "green": 156,
+                                    "red": 77
+                                    },
+                                    "serviceDirection": "Central, then Revesby",
+                                    "serviceName": "Inner West & South Line",
+                                    "serviceNumber": "T2",
+                                    "serviceTripID": "55-N.1495.101.64.A.8.45516741",
+                                    "startTime": 1506071502,
+                                    "wheelchairAccessible": true
+                                    }
+                                    ],
+                       "stopCode": "2015135"
+                       },
+                       {
+                       "services": [
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Strathfield Station; Granville Station; Parramatta Station; Westmead Station; Seven Hills Station; Blacktown Station; Doonside Station; Rooty Hill Station; Mount Druitt Station; St Marys Station; Werrington Station; Kingswood Station; Penrith Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Penrith",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "176M.1495.101.124.A.8.45515247",
+                                    "startTime": 1506069750,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Burwood Station; Strathfield Station; Lidcombe Station; Auburn Station; Clyde Station; Granville Station; Harris Park Station; Parramatta Station; Westmead Station; Wentworthville Station; Pendle Hill Station; Toongabbie Station; Seven Hills Station; Blacktown Station; Doonside Station; Rooty Hill Station; Mount Druitt Station; St Marys Station; Werrington Station; Kingswood Station; Penrith Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Penrith",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "130M.1495.101.124.K.8.45514216",
+                                    "startTime": 1506069930,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Burwood Station; Strathfield Station; North Strathfield Station; Concord West Station; Rhodes Station; Meadowbank Station; West Ryde Station; Denistone Station; Eastwood Station; Epping Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Epping",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "164T.1495.101.124.A.8.45514837",
+                                    "startTime": 1506070170,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Strathfield Station; Granville Station; Parramatta Station; Westmead Station; Seven Hills Station; Blacktown Station; Marayong Station; Quakers Hill Station; Schofields Station; Riverstone Station; Vineyard Station; Mulgrave Station; Windsor Station; Clarendon Station; East Richmond Station; Richmond Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Richmond",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "169M.1495.101.124.A.8.45515008",
+                                    "startTime": 1506070650,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Burwood Station; Strathfield Station; Lidcombe Station; Auburn Station; Clyde Station; Granville Station; Harris Park Station; Parramatta Station; Westmead Station; Wentworthville Station; Pendle Hill Station; Toongabbie Station; Seven Hills Station; Blacktown Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Blacktown",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "150J.1495.101.124.A.8.45514304",
+                                    "startTime": 1506070830,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Burwood Station; Strathfield Station; North Strathfield Station; Concord West Station; Rhodes Station; Meadowbank Station; West Ryde Station; Denistone Station; Eastwood Station; Epping Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Epping",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "163S.1495.101.64.A.8.45514797",
+                                    "startTime": 1506071070,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Strathfield Station; Granville Station; Parramatta Station; Westmead Station; Seven Hills Station; Blacktown Station; Doonside Station; Rooty Hill Station; Mount Druitt Station; St Marys Station; Werrington Station; Kingswood Station; Penrith Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Penrith",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "187N.1495.101.64.A.8.45515570",
+                                    "startTime": 1506071550,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Burwood Station; Strathfield Station; Lidcombe Station; Auburn Station; Clyde Station; Granville Station; Harris Park Station; Parramatta Station; Westmead Station; Wentworthville Station; Pendle Hill Station; Toongabbie Station; Seven Hills Station; Blacktown Station; Doonside Station; Rooty Hill Station; Mount Druitt Station; St Marys Station; Werrington Station; Kingswood Station; Penrith Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Penrith",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "188U.1495.101.64.A.8.45515595",
+                                    "startTime": 1506071730,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Burwood Station; Strathfield Station; North Strathfield Station; Concord West Station; Rhodes Station; Meadowbank Station; West Ryde Station; Denistone Station; Eastwood Station; Epping Station",
+                                    "serviceColor": {
+                                    "blue": 0,
+                                    "green": 167,
+                                    "red": 247
+                                    },
+                                    "serviceDirection": "Epping",
+                                    "serviceName": "T1 North Shore, Northern & Western Line",
+                                    "serviceNumber": "T1",
+                                    "serviceTripID": "177S.1495.101.124.A.8.45515282",
+                                    "startTime": 1506071970,
+                                    "wheelchairAccessible": true
+                                    }
+                                    ],
+                       "stopCode": "2015134"
+                       },
+                       {
+                       "services": [
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Erskineville Station; St Peters Station; Sydenham Station; Marrickville Station; Dulwich Hill Station; Hurlstone Park Station; Canterbury Station; Campsie Station; Belmore Station; Lakemba Station; Wiley Park Station; Punchbowl Station; Bankstown Station; Yagoona Station; Birrong Station",
+                                    "serviceColor": {
+                                    "blue": 42,
+                                    "green": 103,
+                                    "red": 242
+                                    },
+                                    "serviceDirection": "Birrong",
+                                    "serviceName": "T3 Bankstown Line",
+                                    "serviceNumber": "T3",
+                                    "serviceTripID": "4--M.1495.101.64.M.8.45516313",
+                                    "startTime": 1506069696,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Erskineville Station; St Peters Station; Sydenham Station; Marrickville Station; Dulwich Hill Station; Hurlstone Park Station; Canterbury Station; Campsie Station; Belmore Station; Lakemba Station; Wiley Park Station; Punchbowl Station; Bankstown Station; Yagoona Station; Birrong Station; Sefton Station; Chester Hill Station; Leightonfield Station; Villawood Station; Carramar Station; Cabramatta Station; Warwick Farm Station; Liverpool Station",
+                                    "serviceColor": {
+                                    "blue": 42,
+                                    "green": 103,
+                                    "red": 242
+                                    },
+                                    "serviceDirection": "Liverpool",
+                                    "serviceName": "T3 Bankstown Line",
+                                    "serviceNumber": "T3",
+                                    "serviceTripID": "78-S.1495.101.120.A.8.45518459",
+                                    "startTime": 1506070596,
+                                    "wheelchairAccessible": true
+                                    },
+                                    {
+                                    "alertHashCodes": [
+                                                       -1789190743
+                                                       ],
+                                    "bicycleAccessible": true,
+                                    "mode": "train",
+                                    "modeInfo": {
+                                    "alt": "train",
+                                    "identifier": "pt_pub_train",
+                                    "localIcon": "train"
+                                    },
+                                    "operator": "Sydney Trains",
+                                    "operatorID": "SydneyTrains",
+                                    "realTimeStatus": "CAPABLE",
+                                    "searchString": "Erskineville Station; St Peters Station; Sydenham Station; Marrickville Station; Dulwich Hill Station; Hurlstone Park Station; Canterbury Station; Campsie Station; Belmore Station; Lakemba Station; Wiley Park Station; Punchbowl Station; Bankstown Station; Yagoona Station; Birrong Station",
+                                    "serviceColor": {
+                                    "blue": 42,
+                                    "green": 103,
+                                    "red": 242
+                                    },
+                                    "serviceDirection": "Birrong",
+                                    "serviceName": "T3 Bankstown Line",
+                                    "serviceNumber": "T3",
+                                    "serviceTripID": "69-P.1495.101.64.A.8.45518127",
+                                    "startTime": 1506071496,
+                                    "wheelchairAccessible": true
+                                    }
+                                    ],
+                       "stopCode": "2015138"
+                       }
+                       ],
+  "parentInfo": {
+    "address": "Redfern Station",
+    "children": [
+                 {
+                 "address": "Redfern Station Platform 6",
+                 "class": "StopLocation",
+                 "code": "2015136",
+                 "id": "2015136",
+                 "lat": -33.89197,
+                 "lng": 151.19875,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 6",
+                 "popularity": 8195,
+                 "services": "T2, T1",
+                 "shortName": "Platform 6",
+                 "stopCode": "2015136",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 11",
+                 "class": "StopLocation",
+                 "code": "2015141",
+                 "id": "2015141",
+                 "lat": -33.8924,
+                 "lng": 151.19923,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 11",
+                 "popularity": 8560,
+                 "services": "T4, SCO",
+                 "shortName": "Platform 11",
+                 "stopCode": "2015141",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 1",
+                 "class": "StopLocation",
+                 "code": "2015131",
+                 "id": "2015131",
+                 "lat": -33.89177,
+                 "lng": 151.19835,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 1",
+                 "popularity": 1660,
+                 "services": "T7, CCN, BMT, T6, T1,...",
+                 "shortName": "Platform 1",
+                 "stopCode": "2015131",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 3",
+                 "class": "StopLocation",
+                 "code": "2015133",
+                 "id": "2015133",
+                 "lat": -33.89188,
+                 "lng": 151.19845,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 3",
+                 "popularity": 9715,
+                 "services": "T1, CCN, T3",
+                 "shortName": "Platform 3",
+                 "stopCode": "2015133",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 12",
+                 "class": "StopLocation",
+                 "code": "2015142",
+                 "id": "2015142",
+                 "lat": -33.89242,
+                 "lng": 151.19928,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 12",
+                 "popularity": 8830,
+                 "services": "T4, SCO",
+                 "shortName": "Platform 12",
+                 "stopCode": "2015142",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 10",
+                 "class": "StopLocation",
+                 "code": "2015140",
+                 "id": "2015140",
+                 "lat": -33.89215,
+                 "lng": 151.19904,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 10",
+                 "popularity": 70,
+                 "services": "T2",
+                 "shortName": "Platform 10",
+                 "stopCode": "2015140",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 7",
+                 "class": "StopLocation",
+                 "code": "2015137",
+                 "id": "2015137",
+                 "lat": -33.892,
+                 "lng": 151.19877,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 7",
+                 "popularity": 4590,
+                 "services": "T3, T2",
+                 "shortName": "Platform 7",
+                 "stopCode": "2015137",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 5",
+                 "class": "StopLocation",
+                 "code": "2015135",
+                 "id": "2015135",
+                 "lat": -33.89195,
+                 "lng": 151.19859,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 5",
+                 "popularity": 8125,
+                 "services": "T2, SCO, T3, T1",
+                 "shortName": "Platform 5",
+                 "stopCode": "2015135",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 8",
+                 "class": "StopLocation",
+                 "code": "2015138",
+                 "id": "2015138",
+                 "lat": -33.89206,
+                 "lng": 151.19888,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 8",
+                 "popularity": 4335,
+                 "services": "T2, T3",
+                 "shortName": "Platform 8",
+                 "stopCode": "2015138",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 2",
+                 "class": "StopLocation",
+                 "code": "2015132",
+                 "id": "2015132",
+                 "lat": -33.89185,
+                 "lng": 151.19843,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 2",
+                 "popularity": 1210,
+                 "services": "SCO, BMT, T1, CCN",
+                 "shortName": "Platform 2",
+                 "stopCode": "2015132",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 4",
+                 "class": "StopLocation",
+                 "code": "2015134",
+                 "id": "2015134",
+                 "lat": -33.89192,
+                 "lng": 151.19856,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 4",
+                 "popularity": 9210,
+                 "services": "T1, BMT",
+                 "shortName": "Platform 4",
+                 "stopCode": "2015134",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 },
+                 {
+                 "address": "Redfern Station Platform 9",
+                 "class": "StopLocation",
+                 "code": "2015139",
+                 "id": "2015139",
+                 "lat": -33.8921,
+                 "lng": 151.19892,
+                 "modeInfo": {
+                 "alt": "train",
+                 "identifier": "pt_pub_train",
+                 "localIcon": "train"
+                 },
+                 "name": "Redfern Station Platform 9",
+                 "popularity": 305,
+                 "services": "T3",
+                 "shortName": "Platform 9",
+                 "stopCode": "2015139",
+                 "stopType": "train",
+                 "timezone": "Australia/Sydney"
+                 }
+                 ],
+    "class": "StopLocation",
+    "code": "201510",
+    "id": "201510",
+    "lat": -33.8921,
+    "lng": 151.1988,
+    "modeInfo": {
+      "alt": "train",
+      "identifier": "pt_pub_train",
+      "localIcon": "train"
+    },
+    "name": "Redfern Station",
+    "popularity": 64805,
+    "services": "T2, T1",
+    "stopCode": "201510",
+    "stopType": "train",
+    "timezone": "Australia/Sydney"
+  },
+  "parentStops": [
+                  {
+                  "address": "Redfern Station",
+                  "children": [
+                               {
+                               "address": "Redfern Station Platform 6",
+                               "class": "StopLocation",
+                               "code": "2015136",
+                               "id": "2015136",
+                               "lat": -33.89197,
+                               "lng": 151.19875,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 6",
+                               "popularity": 8195,
+                               "services": "T2, T1",
+                               "shortName": "Platform 6",
+                               "stopCode": "2015136",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 11",
+                               "class": "StopLocation",
+                               "code": "2015141",
+                               "id": "2015141",
+                               "lat": -33.8924,
+                               "lng": 151.19923,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 11",
+                               "popularity": 8560,
+                               "services": "T4, SCO",
+                               "shortName": "Platform 11",
+                               "stopCode": "2015141",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 1",
+                               "class": "StopLocation",
+                               "code": "2015131",
+                               "id": "2015131",
+                               "lat": -33.89177,
+                               "lng": 151.19835,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 1",
+                               "popularity": 1660,
+                               "services": "T7, CCN, BMT, T6, T1,...",
+                               "shortName": "Platform 1",
+                               "stopCode": "2015131",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 3",
+                               "class": "StopLocation",
+                               "code": "2015133",
+                               "id": "2015133",
+                               "lat": -33.89188,
+                               "lng": 151.19845,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 3",
+                               "popularity": 9715,
+                               "services": "T1, CCN, T3",
+                               "shortName": "Platform 3",
+                               "stopCode": "2015133",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 12",
+                               "class": "StopLocation",
+                               "code": "2015142",
+                               "id": "2015142",
+                               "lat": -33.89242,
+                               "lng": 151.19928,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 12",
+                               "popularity": 8830,
+                               "services": "T4, SCO",
+                               "shortName": "Platform 12",
+                               "stopCode": "2015142",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 10",
+                               "class": "StopLocation",
+                               "code": "2015140",
+                               "id": "2015140",
+                               "lat": -33.89215,
+                               "lng": 151.19904,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 10",
+                               "popularity": 70,
+                               "services": "T2",
+                               "shortName": "Platform 10",
+                               "stopCode": "2015140",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 7",
+                               "class": "StopLocation",
+                               "code": "2015137",
+                               "id": "2015137",
+                               "lat": -33.892,
+                               "lng": 151.19877,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 7",
+                               "popularity": 4590,
+                               "services": "T3, T2",
+                               "shortName": "Platform 7",
+                               "stopCode": "2015137",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 5",
+                               "class": "StopLocation",
+                               "code": "2015135",
+                               "id": "2015135",
+                               "lat": -33.89195,
+                               "lng": 151.19859,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 5",
+                               "popularity": 8125,
+                               "services": "T2, SCO, T3, T1",
+                               "shortName": "Platform 5",
+                               "stopCode": "2015135",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 8",
+                               "class": "StopLocation",
+                               "code": "2015138",
+                               "id": "2015138",
+                               "lat": -33.89206,
+                               "lng": 151.19888,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 8",
+                               "popularity": 4335,
+                               "services": "T2, T3",
+                               "shortName": "Platform 8",
+                               "stopCode": "2015138",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 2",
+                               "class": "StopLocation",
+                               "code": "2015132",
+                               "id": "2015132",
+                               "lat": -33.89185,
+                               "lng": 151.19843,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 2",
+                               "popularity": 1210,
+                               "services": "SCO, BMT, T1, CCN",
+                               "shortName": "Platform 2",
+                               "stopCode": "2015132",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 4",
+                               "class": "StopLocation",
+                               "code": "2015134",
+                               "id": "2015134",
+                               "lat": -33.89192,
+                               "lng": 151.19856,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 4",
+                               "popularity": 9210,
+                               "services": "T1, BMT",
+                               "shortName": "Platform 4",
+                               "stopCode": "2015134",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               },
+                               {
+                               "address": "Redfern Station Platform 9",
+                               "class": "StopLocation",
+                               "code": "2015139",
+                               "id": "2015139",
+                               "lat": -33.8921,
+                               "lng": 151.19892,
+                               "modeInfo": {
+                               "alt": "train",
+                               "identifier": "pt_pub_train",
+                               "localIcon": "train"
+                               },
+                               "name": "Redfern Station Platform 9",
+                               "popularity": 305,
+                               "services": "T3",
+                               "shortName": "Platform 9",
+                               "stopCode": "2015139",
+                               "stopType": "train",
+                               "timezone": "Australia/Sydney"
+                               }
+                               ],
+                  "class": "StopLocation",
+                  "code": "201510",
+                  "id": "201510",
+                  "lat": -33.8921,
+                  "lng": 151.1988,
+                  "modeInfo": {
+                  "alt": "train",
+                  "identifier": "pt_pub_train",
+                  "localIcon": "train"
+                  },
+                  "name": "Redfern Station",
+                  "popularity": 64805,
+                  "services": "T2, T1",
+                  "stopCode": "201510",
+                  "stopType": "train",
+                  "timezone": "Australia/Sydney"
+                  }
+                  ]
+}

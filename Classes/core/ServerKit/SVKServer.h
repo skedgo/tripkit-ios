@@ -15,9 +15,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^SGServerSuccessBlock)(NSInteger status, id _Nullable responseObject);
+typedef void (^SGServerSuccessBlock)(NSInteger status, id _Nullable responseObject, NSData * _Nullable data);
 typedef void (^SGServerFailureBlock)(NSError *error);
-typedef void (^SGServerGenericBlock)(NSInteger status, id _Nullable responseObject, NSError * _Nullable error);
+typedef void (^SGServerGenericBlock)(NSInteger status, id _Nullable responseObject, NSData * _Nullable data, NSError * _Nullable error);
 
 typedef NS_ENUM(NSInteger, SVKServerType) {
   SVKServerTypeProduction = 0,
@@ -59,6 +59,8 @@ FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileDistanceUnit;
 + (nullable NSString *)userToken;
 
 + (void)updateUserToken:(nullable NSString *)userToken;
+
+@property (nonatomic, assign) SVKServerType _serverType;
 
 @property (nonatomic, copy) NSString *APIKey;
 

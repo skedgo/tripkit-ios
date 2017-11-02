@@ -10,18 +10,18 @@ import Foundation
 import UIKit
 
 public class TripKitUIBundle: NSObject {
-  public class func optionalImageNamed(_ name: String) -> UIImage? {
+  @objc public class func optionalImageNamed(_ name: String) -> UIImage? {
     return UIImage(named: name, in: bundle(), compatibleWith: nil)
   }
 
-  public class func imageNamed(_ name: String) -> UIImage {
+  @objc public class func imageNamed(_ name: String) -> UIImage {
     guard let image = optionalImageNamed(name) else {
       preconditionFailure()
     }
     return image
   }
   
-  public class func bundle() -> Bundle {
+  @objc public class func bundle() -> Bundle {
     return Bundle(for: self)
   }
   

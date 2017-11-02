@@ -320,7 +320,7 @@
     
   } else if ([action hasPrefix:@"tel:"]) {
     if ([self canCall]) {
-      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]];
+      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[action stringByReplacingOccurrencesOfString:@" " withString:@"-"]]];
     }
     
   } else if ([action hasPrefix:@"sms:"]) {
