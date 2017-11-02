@@ -31,6 +31,9 @@
 /* Authorisation needed title */
 "Authorisation needed" = "Autorisation nécessaire";
 
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Back";
+
 /* Type of vehicle : bicycle */
 "Bicycle" = "Vélo";
 
@@ -116,8 +119,7 @@
 /* Credit card expiry date */
 "Expiry Date" = "Date d'expiration";
 
-/* Option that allows users to indicate whether reminder is needed
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "For when to leave" = "Pour le départ";
 
 /* Free as in beer */
@@ -156,14 +158,13 @@
 /* Title for unnamed location */
 "Location" = "Position";
 
-/* Location iOS6+ authorisation needed text */
+/* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "La géolocalisation est requise pour utiliser cette fonctionnalité. Veuillez vérifier que ce service est activé dans Réglages > Confidentialité > Localisation et autorisez cette application.";
 
 /* Indicating a payment is in progress */
 "Making payment" = "Effectuer le paiement";
 
-/* Option that allows users to indicate how eary to show trip reminder
-   Reminder to leave preference */
+/* Reminder to leave preference */
 "Minutes before trip" = "Minutes avant le trajet";
 
 /* More results proposal */
@@ -192,12 +193,13 @@
 /* No comment provided by engineer. */
 "No CO₂" = "Pas de CO₂";
 
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Not wheelchair accessible";
+
 /* Countdown cell 'now' indicator */
 "Now" = "Immédiat.";
 
-/* Authorisation ok button
-   Default title for button that dismisses alert view
-   Ok action */
+/* Ok action */
 "OK" = "OK";
 
 /* Button to open Settings app section for this app */
@@ -236,8 +238,7 @@
 /* Title for section that asks users where payment receipt should be sent */
 "Receipt" = "Accusé de réception";
 
-/* Action title to add/remove reminder
-   Section title at the end of a booking that allows users to set reminders */
+/* Action title to add/remove reminder */
 "Reminder" = "Rappel";
 
 /* Repeats daily */
@@ -333,6 +334,9 @@
 
 /* Every weekend day in context of repetitions (especially recurring events) */
 "Weekends" = "Chaque jour du week-end";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Wheelchair accessibility unknown";
 
 /* Indicator for wheelchair accessible services */
 "Wheelchair accessible" = "Accessible en fauteuil roulant";

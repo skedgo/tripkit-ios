@@ -193,6 +193,9 @@
 /* No comment provided by engineer. */
 "No CO₂" = "Kein CO₂";
 
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Nicht rollstuhlgerecht";
+
 /* Countdown cell 'now' indicator */
 "Now" = "Jetzt";
 
@@ -254,7 +257,7 @@
 "Report Problem" = "Problem melden";
 
 /* Retry action, e.g., in case something didn't load */
-"Retry" = "Nochmal versuchen";
+"Retry" = "Erneut versuchen";
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "Jeep";
@@ -331,6 +334,9 @@
 
 /* Every weekend day in context of repetitions (especially recurring events) */
 "Weekends" = "Wochenende";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Rollstuhlgerechtigkeit unbekannt";
 
 /* Indicator for wheelchair accessible services */
 "Wheelchair accessible" = "Rollstuhlgerecht";

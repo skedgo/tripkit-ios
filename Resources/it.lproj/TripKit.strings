@@ -10,8 +10,11 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ tardi (%2$@ servizio)";
 
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@ avvisi";
+
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
-"%@ cycle friendly" = "%@ ciclo amichevole";
+"%@ cycle friendly" = "%@ cycle friendly";
 
 /* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
 "%@ stops" = "%@ fermate";
@@ -89,6 +92,9 @@
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Pochi posti disponibili";
+
+/* Indicating a path is wheelchair/cycyling friendly */
+"Friendly" = "Ideale";
 
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Da %@";
@@ -193,6 +199,9 @@
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Configura";
 
+/* Title for button that, when tapped, shows something, e.g., a list of alert */
+"Show" = "Mostra";
+
 /* Show website action */
 "Show website" = "Apri Sito";
 
@@ -205,6 +214,12 @@
 /* Title for a trip */
 "Trip" = "Viaggio";
 
+/* Indicating a path is wheelchair/cycyling unfriendly */
+"Unfriendly" = "Inadatto";
+
+/* Indicating the wheelchair/cycling friendliness of a path is unknown */
+"Unknown" = "Sconosciuto";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Aggiornato dal %@";
 
@@ -216,9 +231,6 @@
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Vi terremo aggiornati con gli ultimi avvisi di transito qui";
-
-/* No comment provided by engineer. */
-"Wheelchair accessible" = "Accessibile con sedia a rotelle";
 
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "alle %@";
