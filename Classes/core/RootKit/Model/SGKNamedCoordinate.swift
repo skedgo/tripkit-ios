@@ -181,8 +181,10 @@ open class SGKNamedCoordinate : NSObject, Codable, TKClusterable {
     try container.encode(isDraggable, forKey: .isDraggable)
     try container.encode(isSuburb, forKey: .isSuburb)
 
-    let encodedData = try JSONSerialization.data(withJSONObject: data, options: [])
-    try container.encode(encodedData, forKey: .data)
+    if let sanitized = TKJSONSanitizer.sanitize(data) {
+      let encodedData = try JSONSerialization.data(withJSONObject: sanitized, options: [])
+      try container.encode(encodedData, forKey: .data)
+    }
   }
   
   // MARK: - NSSecureCoding

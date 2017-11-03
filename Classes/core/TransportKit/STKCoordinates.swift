@@ -37,15 +37,18 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation {
         return decoded
       } else {
         let json = data["sg_modeInfo"] as Any
-        let decoded = try! JSONDecoder().decode(ModeInfo.self, withJSONObject: json)
-        _stopModeInfo = decoded
-        return decoded
+        if let sanitized = TKJSONSanitizer.sanitize(json), let decoded = try? JSONDecoder().decode(ModeInfo.self, withJSONObject: sanitized) {
+          _stopModeInfo = decoded
+        } else {
+          _stopModeInfo = ModeInfo.unknown
+        }
+        return _stopModeInfo!
       }
       
     }
     set {
       _stopModeInfo = newValue
-      data["sg_modeInfo"] = try! JSONEncoder().encodeJSONObject(newValue)
+      data["sg_modeInfo"] = try? JSONEncoder().encodeJSONObject(newValue)
     }
   }
   
