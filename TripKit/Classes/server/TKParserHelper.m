@@ -134,11 +134,14 @@
     
     // create the new shape
     Shape *shape = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Shape class]) inManagedObjectContext:context];
-    shape.index = @(waypointGroupCount++);
+    shape.index = waypointGroupCount++;
     shape.travelled = shapeDict[@"travelled"];
     shape.title = shapeDict[@"name"];
     shape.encodedWaypoints = encodedWaypoints;
-    shape.friendly = shapeDict[@"safe"];
+    shape.isDismount = [shapeDict[@"dismount"] boolValue];
+    shape.isHop = [shapeDict[@"hop"] boolValue];
+    shape.metres = shapeDict[@"metres"];
+    [shape setSafety: shapeDict[@"safe"]];
     if (nil == shape.travelled)
       shape.travelled = @(YES);
     
