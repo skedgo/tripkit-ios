@@ -41,9 +41,10 @@ public class TKMapButtonView: UIView {
       
       items.forEach {
         $0.setContentHuggingPriority(.required, for: .horizontal)
+        $0.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview($0)
       }
-      
+
       if items.count == 1 {
         switch singleItemAlignment {
         case .leading:
