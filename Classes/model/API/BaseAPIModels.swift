@@ -65,7 +65,7 @@ extension API {
     
     #if os(iOS) || os(tvOS)
       public init?(for color: SGKColor?) {
-          guard let color = color else { return nil }
+        guard let color = color else { return nil }
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
@@ -79,7 +79,7 @@ extension API {
       }
     #elseif os(OSX)
     public init?(for color: SGKColor?) {
-        guard let color = color else { return nil }
+      guard let color = color else { return nil }
       var red: CGFloat = 0
       var green: CGFloat = 0
       var blue: CGFloat = 0
