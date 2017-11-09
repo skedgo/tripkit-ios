@@ -62,6 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (MKMapRect)mapRectForUserDefaultsKey:(nullable NSString *)mapKey
                                dateKey:(nullable NSString *)dateKey;
 
++ (void)saveMapRect:(MKMapRect)rect
+ forUserDefaultsKey:(NSString *)mapKey
+            dateKey:(nullable NSString *)dateKey;
+
 - (BOOL)isActive;
 
 /**

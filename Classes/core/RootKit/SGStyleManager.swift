@@ -20,8 +20,8 @@ extension SGKColor {
 
 extension SGStyleManager {
   
-  private static let dummyImage = UIImage()
-  private static let imageCache = NSCache<NSString, UIImage>()
+  private static let dummyImage = SGKImage()
+  private static let imageCache = NSCache<NSString, SGKImage>()
 
   
   @objc(imageForModeImageName:isRealTime:ofIconType:)

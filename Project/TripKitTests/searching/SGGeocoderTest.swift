@@ -62,7 +62,7 @@ class SGGeocoderTest: XCTestCase {
 
     // Shouldn't just find it but also rank it first
     let third = aggregateGeocoder()
-    geocoderPasses(third, input: "moma", near: newYork, bestStartsWithAny: ["Museum of Modern Art"])
+    geocoderPasses(third, input: "moma", near: newYork, bestStartsWithAny: ["Museum of Modern Art", "The Museom of Modern Art", "MoMA"])
   }
   
   func testRPATypo6294() {
@@ -228,7 +228,7 @@ extension SGGeocoder {
         
         // check if we found a good result
         if let title = best?.title {
-          for good in starts where title.hasPrefix(good) {
+          for good in starts where title.lowercased().hasPrefix(good.lowercased()) {
             handler(nil)
             return
           }

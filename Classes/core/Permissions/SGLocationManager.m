@@ -408,18 +408,30 @@ NSString *const SGLocationManagerFoundLocationNotification =  @"kSGLocationManag
       && self.completionBlock) {
     
     BOOL enabled;
-    switch (status) {
 #if TARGET_OS_IPHONE
+    switch (status) {
       case kCLAuthorizationStatusAuthorizedWhenInUse:
-#endif
       case kCLAuthorizationStatusAuthorizedAlways:
         enabled = YES;
         break;
-        
       default:
         enabled = NO;
         break;
     }
+#else
+    if (@available(macOS 10.12, *)) {
+      switch (status) {
+        case kCLAuthorizationStatusAuthorizedAlways:
+          enabled = YES;
+          break;
+        default:
+          enabled = NO;
+          break;
+      }
+    } else {
+      enabled = NO;
+    }
+#endif
     
     if (enabled) {
       [self.coreLocationManager startUpdatingLocation];

@@ -25,7 +25,6 @@
 #import "SGLabel.h"
 
 // Map
-#import "MKMapView+AttributionView.h"
 #import "MKMapView+ZoomToAnnotations.h"
 #import "SGMapButtonView.h"
 #import "SGMapHelper.h"

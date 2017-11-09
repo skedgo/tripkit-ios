@@ -9,7 +9,6 @@
 #import "SGMapButtonView.h"
 
 #import "UIView+Helpers.h"
-#import "MKMapView+AttributionView.h"
 
 static const CGFloat ExtraPadding = 5;
 
@@ -162,8 +161,6 @@ static const CGFloat ExtraPadding = 5;
       x += [space floatValue];
     }
   }
-  
-  [self adjustAttributionLabel];
 }
 
 #pragma mark - Private helpers
@@ -177,28 +174,6 @@ static const CGFloat ExtraPadding = 5;
     }
   }
   return NO;
-}
-
-- (void)adjustAttributionLabel
-{
-  UIView *attributionLabel = [self.mapView attributionView];
-  if (! attributionLabel)
-    return;
-  
-  self.mapView.layoutMargins = self.defaultMapLayoutMargins;
-  
-  // We want the attribution label to appear on the right of the
-  // leftmost button.
-  UIView *leftmostItem = [self.items firstObject];
-  CGFloat leftMargin = 0.0f;
-  if (leftmostItem) {
-    leftMargin = leftmostItem.frame.origin.x + leftmostItem.frame.size.width;
-    leftMargin += 8.0f; // for horizontal spacing.
-    UIEdgeInsets mapLayoutMargins = self.mapView.layoutMargins;
-    mapLayoutMargins.left = leftMargin;
-    mapLayoutMargins.bottom += self.mapViewBottomLayoutMarginOffset;
-    self.mapView.layoutMargins = mapLayoutMargins;
-  }
 }
 
 @end

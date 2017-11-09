@@ -10,6 +10,9 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ spät (%2$@ Service)";
 
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@ Warnungen";
+
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ fahrradfreundlich";
 
@@ -89,6 +92,9 @@
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Wenige Plätze verfügbar";
+
+/* Indicating a path is wheelchair/cycyling friendly */
+"Friendly" = "Freundlich";
 
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Von %@";
@@ -193,6 +199,9 @@
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Setup";
 
+/* Title for button that, when tapped, shows something, e.g., a list of alert */
+"Show" = "Anzeigen";
+
 /* Show website action */
 "Show website" = "Webseite öffnen";
 
@@ -205,6 +214,12 @@
 /* Title for a trip */
 "Trip" = "Trip";
 
+/* Indicating a path is wheelchair/cycyling unfriendly */
+"Unfriendly" = "Unfreundlich";
+
+/* Indicating the wheelchair/cycling friendliness of a path is unknown */
+"Unknown" = "Unbekannt";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Aktualisiert vor %@";
 
@@ -216,9 +231,6 @@
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Wir halten dich hier mit den neuesten Warnungen auf dem Laufenden";
-
-/* No comment provided by engineer. */
-"Wheelchair accessible" = "Rollstuhlgerecht";
 
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "um %@";

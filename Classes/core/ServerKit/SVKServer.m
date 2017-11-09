@@ -671,10 +671,14 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
 
 - (NSURL *)currentBaseURL
 {
-  if (self.regionServers.count <= _serverIndex)
-    return nil;
+  NSArray<NSURL *> *servers = self.regionServers;
+  NSUInteger serverIndex = _serverIndex;
   
-  NSURL *url = [self.regionServers objectAtIndex:_serverIndex];
+  if (servers.count <= serverIndex) {
+    return nil;
+  }
+  
+  NSURL *url = [servers objectAtIndex:serverIndex];
   NSString *urlString = url.absoluteString;
   
   if (urlString.length > 0 && [urlString characterAtIndex:urlString.length - 1] != '/') {

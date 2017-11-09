@@ -10,6 +10,9 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ tarde (Servicio de las %2$@)";
 
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@ alertas";
+
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ bicicleta-amigable";
 
@@ -89,6 +92,9 @@
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Pocos asientos disponibles";
+
+/* Indicating a path is wheelchair/cycyling friendly */
+"Friendly" = "Amigable";
 
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Desde %@";
@@ -193,6 +199,9 @@
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Establecer";
 
+/* Title for button that, when tapped, shows something, e.g., a list of alert */
+"Show" = "Mostrar";
+
 /* Show website action */
 "Show website" = "Ir al Sitio Web";
 
@@ -205,6 +214,12 @@
 /* Title for a trip */
 "Trip" = "Viaje";
 
+/* Indicating a path is wheelchair/cycyling unfriendly */
+"Unfriendly" = "Poco amistoso";
+
+/* Indicating the wheelchair/cycling friendliness of a path is unknown */
+"Unknown" = "Desconocido";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Actualizado hace %@";
 
@@ -216,9 +231,6 @@
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Te mantendremos actualizado con las últimas alertas de tránsito aquí";
-
-/* No comment provided by engineer. */
-"Wheelchair accessible" = "Accesible en silla de ruedas";
 
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "a las %@";

@@ -10,6 +10,9 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ 지연 (%2$@ 서비스)";
 
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@ alerts";
+
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ 자전거 이용 가능";
 
@@ -89,6 +92,9 @@
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "자리가 몇 개 안 남았습니다.";
+
+/* Indicating a path is wheelchair/cycyling friendly */
+"Friendly" = "Friendly";
 
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "%@부터";
@@ -193,6 +199,9 @@
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "설정";
 
+/* Title for button that, when tapped, shows something, e.g., a list of alert */
+"Show" = "Show";
+
 /* Show website action */
 "Show website" = "웹사이트 보기";
 
@@ -205,6 +214,12 @@
 /* Title for a trip */
 "Trip" = "경로";
 
+/* Indicating a path is wheelchair/cycyling unfriendly */
+"Unfriendly" = "Unfriendly";
+
+/* Indicating the wheelchair/cycling friendliness of a path is unknown */
+"Unknown" = "Unknown";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "%s 전에 업데이트 됨";
 
@@ -216,9 +231,6 @@
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "최신 교통상황을 계속 업데이트 하겠습니다.";
-
-/* No comment provided by engineer. */
-"Wheelchair accessible" = "휠체어 사용가능";
 
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "%@에";

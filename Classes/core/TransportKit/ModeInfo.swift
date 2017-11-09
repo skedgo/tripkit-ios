@@ -35,6 +35,8 @@ public class ModeInfo: NSObject, Codable, NSSecureCoding {
     return try? decoder.decode(ModeInfo.self, withJSONObject: json)
   }
   
+  public static let unknown: ModeInfo = modeInfo(for: ["alt": "unknown"])!
+  
   // MARK: Codable
   
   private enum CodingKeys: String, CodingKey {

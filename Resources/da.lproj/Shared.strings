@@ -193,6 +193,9 @@
 /* No comment provided by engineer. */
 "No CO₂" = "Ingen CO₂";
 
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Not wheelchair accessible";
+
 /* Countdown cell 'now' indicator */
 "Now" = "Nu";
 
@@ -331,6 +334,9 @@
 
 /* Every weekend day in context of repetitions (especially recurring events) */
 "Weekends" = "Weekender";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Wheelchair accessibility unknown";
 
 /* Indicator for wheelchair accessible services */
 "Wheelchair accessible" = "Tilgængelig med kørestol";
