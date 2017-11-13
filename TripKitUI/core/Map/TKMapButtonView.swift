@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class TKMapButtonView: UIView {
+@objc public class TKMapButtonView: UIView {
   
   public enum Alignment {
     case leading
@@ -16,7 +16,7 @@ public class TKMapButtonView: UIView {
   
   private weak var stackView: UIStackView!
   
-  public var singleItemAlignment = Alignment.leading {
+  public var singleItemAlignment = Alignment.trailing {
     didSet {
       guard items.count == 1 else { return }
       
@@ -33,7 +33,7 @@ public class TKMapButtonView: UIView {
     }
   }
   
-  public var items: [UIView] = [] {
+  @objc public var items: [UIView] = [] {
     didSet {
       guard stackView != nil else { preconditionFailure() }
       

@@ -13,9 +13,9 @@
 #import "TripKit/TripKit-Swift.h"
 #else
 @import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
-#import "SGMapButtonView.h"
 #import "SGPolylineRenderer.h"
 
 @interface ASMapManager ()
@@ -36,7 +36,7 @@
 
 @implementation ASMapManager
 
-- (void)setMapButtonView:(SGMapButtonView *)mapButtonView
+- (void)setMapButtonView:(TKMapButtonView *)mapButtonView
 {
   _mapButtonView = mapButtonView;
   self.originalButtons = [mapButtonView items];
@@ -279,14 +279,14 @@
 	if (self.mapButtonView) {
 		if (! buttons || buttons.count == 0) {
 			// restore
-			[self.mapButtonView setItems:self.originalButtons animated:animated];
+			[self.mapButtonView setItems:self.originalButtons];
 		} else {
 			NSMutableArray *items = [NSMutableArray array];
 			if (includeOriginal) {
 				[items addObjectsFromArray:self.originalButtons];
 			}
 			[items addObjectsFromArray:buttons];
-			[self.mapButtonView setItems:items animated:animated];
+			[self.mapButtonView setItems:items];
 		}
 	}
 }
