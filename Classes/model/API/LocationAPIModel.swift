@@ -55,16 +55,31 @@ extension API {
     
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
-    public let vehicles: [API.CarPodInfo.Vehicle]
+    public let vehicles: [API.CarPodInfo.Vehicle]?
+    public let inService: Bool = true
+
+    public let availableVehicles: Int?
+    public let availableChargingSpaces: Int?
+    public let totalSpaces: Int?
     
     private enum CodingKeys: String, CodingKey {
       case identifier
       case operatorInfo = "operator"
       case vehicles
+      case availableVehicles
+      case availableChargingSpaces
+      case totalSpaces
     }
     
+    public var availableSpaces: Int? {
+      guard let total = totalSpaces, let vehicles = availableVehicles else { return nil }
+      
+      // available vehicles can exceed number of spaces!
+      return max(0, total - vehicles)
+    }
+
     public var hasRealTime: Bool {
-      return false // not yet
+      return inService && availableVehicles != nil
     }
   }
   
