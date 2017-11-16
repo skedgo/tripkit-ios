@@ -57,7 +57,7 @@ extension API {
     public let operatorInfo: API.CompanyInfo
     public let vehicles: [API.CarPodInfo.Vehicle]?
 
-    public let inService: Bool
+    public let inService: Bool?
     public let availableVehicles: Int?
     public let availableChargingSpaces: Int?
     public let totalSpaces: Int?
@@ -82,7 +82,7 @@ extension API {
     }
 
     public var hasRealTime: Bool {
-      return inService && availableVehicles != nil
+      return inService != false && availableVehicles != nil
     }
   }
   
