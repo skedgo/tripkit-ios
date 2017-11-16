@@ -32,6 +32,7 @@ public class TKBikePodLocation: STKModeCoordinate {
     let info = try values.decode(API.BikePodInfo.self, forKey: .bikePod)
     rx_bikePodVar = Variable(info)
     try super.init(from: decoder)
+    locationID = info.identifier
   }
   
   public override func encode(to encoder: Encoder) throws {
@@ -44,6 +45,7 @@ public class TKBikePodLocation: STKModeCoordinate {
     guard let info = try? aDecoder.decode(API.BikePodInfo.self, forKey: "bikePod") else { return nil }
     rx_bikePodVar = Variable(info)
     super.init(coder: aDecoder)
+    locationID = info.identifier
   }
   
   public override func encode(with aCoder: NSCoder) {
@@ -82,6 +84,7 @@ public class TKCarPodLocation: STKModeCoordinate {
     let info = try values.decode(API.CarPodInfo.self, forKey: .carPod)
     rx_carPodVar = Variable(info)
     try super.init(from: decoder)
+    locationID = info.identifier
   }
   
   public override func encode(to encoder: Encoder) throws {
@@ -94,6 +97,7 @@ public class TKCarPodLocation: STKModeCoordinate {
     guard let info = try? aDecoder.decode(API.CarPodInfo.self, forKey: "carPod") else { return nil }
     rx_carPodVar = Variable(info)
     super.init(coder: aDecoder)
+    locationID = info.identifier
   }
   
   public override func encode(with aCoder: NSCoder) {
@@ -132,6 +136,7 @@ public class TKCarParkLocation: STKModeCoordinate {
     let info = try values.decode(API.CarParkInfo.self, forKey: .carPark)
     rx_carParkVar = Variable(info)
     try super.init(from: decoder)
+    locationID = info.identifier
   }
   
   public override func encode(to encoder: Encoder) throws {
@@ -144,6 +149,7 @@ public class TKCarParkLocation: STKModeCoordinate {
     guard let info = try? aDecoder.decode(API.CarParkInfo.self, forKey: "carPark") else { return nil }
     rx_carParkVar = Variable(info)
     super.init(coder: aDecoder)
+    locationID = info.identifier
   }
   
   public override func encode(with aCoder: NSCoder) {
@@ -178,6 +184,7 @@ public class TKCarRentalLocation: STKModeCoordinate {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(carRental, forKey: .carRental)
+    locationID = carRental.identifier
   }
   
   public required init?(coder aDecoder: NSCoder) {
@@ -189,6 +196,7 @@ public class TKCarRentalLocation: STKModeCoordinate {
   public override func encode(with aCoder: NSCoder) {
     super.encode(with: aCoder)
     try? aCoder.encode(encodable: carRental, forKey: "carRental")
+    locationID = carRental.identifier
   }
 
 }
