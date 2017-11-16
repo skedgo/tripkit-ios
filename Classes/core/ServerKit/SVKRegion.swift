@@ -12,13 +12,6 @@ import MapKit
 
 import ASPolygonKit
 
-@objc
-public enum SGDistanceUnitType : Int {
-  case auto = 0
-  case metric
-  case imperial
-}
-
 enum SVKRegionParserError : Error {
   case emptyPolygon
   case badTimeZoneIdentifier(String)

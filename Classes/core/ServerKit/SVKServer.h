@@ -31,7 +31,6 @@ FOUNDATION_EXPORT NSString *const SVKDefaultsKeyUserToken;
 FOUNDATION_EXPORT NSString *const SVKDefaultsKeyServerType;
 FOUNDATION_EXPORT NSString *const SVKDefaultsKeyDevelopmentServer;
 FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileEnableFlights;
-FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileDistanceUnit;
 
 @class SVKRegion;
 

@@ -19,7 +19,6 @@ NSString *const SVKDefaultsKeyProfileTrackUsage       = @"track_usage";
 NSString *const SVKDefaultsKeyUUID										= @"UUID";
 NSString *const SVKDefaultsKeyUserToken               = @"userToken";
 NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
-NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
 
 
 @interface SVKServer ()
