@@ -24,22 +24,11 @@
   [paras setValue:@(11) forKey:@"v"];
   
   // distance units
-  NSString *unit = nil;
-  switch ([sharedDefaults integerForKey:SVKDefaultsKeyProfileDistanceUnit]) {
-    case SGDistanceUnitTypeAuto: // default
-      unit = @"auto";
-      break;
-      
-    case SGDistanceUnitTypeMetric:
-      unit = @"metric";
-      break;
-      
-    case SGDistanceUnitTypeImperial:
-      unit = @"imperial";
-      break;
-    default:
-      unit = @"auto";
-      break;
+  NSString *unit;
+  if (@available(iOS 10.0, *)) {
+    unit = [NSLocale currentLocale].usesMetricSystem ? @"metric" : @"imperial";
+  } else {
+    unit = @"auto";
   }
   [paras setValue:unit forKey:@"unit"];
   

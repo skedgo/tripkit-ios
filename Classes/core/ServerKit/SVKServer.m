@@ -19,7 +19,6 @@ NSString *const SVKDefaultsKeyProfileTrackUsage       = @"track_usage";
 NSString *const SVKDefaultsKeyUUID										= @"UUID";
 NSString *const SVKDefaultsKeyUserToken               = @"userToken";
 NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
-NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
 
 
 @interface SVKServer ()
@@ -62,7 +61,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   NSString *regionsURLString;
   switch ([self serverType]) {
     case SVKServerTypeProduction:
-      regionsURLString = @"https://tripgo.skedgo.com/satapp";
+      regionsURLString = @"https://api.tripgo.com/v1";
       break;
       
     case SVKServerTypeBeta:
@@ -415,7 +414,7 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
   NSString *regionsURLString;
   switch ([SVKServer serverType]) {
     case SVKServerTypeProduction:
-      regionsURLString = @"https://tripgo.skedgo.com/satapp/regions.json";
+      regionsURLString = @"https://api.tripgo.com/v1/regions.json";
       break;
       
     case SVKServerTypeBeta:
@@ -691,10 +690,10 @@ NSString *const SVKDefaultsKeyProfileDistanceUnit     = @"displayDistanceUnit";
     if ([_region.urls count] > 0) {
       return _region.urls;
     } else {
-      return @[ [NSURL URLWithString:@"https://tripgo.skedgo.com/satapp/"] ];
+      return @[ [NSURL URLWithString:@"https://api.tripgo.com/v1/"] ];
     }
   } else {
-    return @[ [NSURL URLWithString:@"https://tripgo.skedgo.com/satapp/"] ];
+    return @[ [NSURL URLWithString:@"https://api.tripgo.com/v1/"] ];
   }
 }
 

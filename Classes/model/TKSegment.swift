@@ -188,7 +188,12 @@ extension TKSegment: STKDisplayableTimePoint {
   
   public var time: Date {
     get {
-      return departureTime
+      if let time = departureTime {
+        return time
+      } else {
+        assertionFailure("Segment has no time: \(self)")
+        return Date()
+      }
     }
     set {
       self.departureTime = newValue
