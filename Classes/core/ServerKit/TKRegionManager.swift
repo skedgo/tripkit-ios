@@ -30,10 +30,12 @@ public class TKRegionManager: NSObject {
 
   private override init() {
     super.init()
-    
-    if let data = TKRegionManager.readLocalCache() {
-      updateRegions(from: data)
-    }
+    loadRegionsFromCache()
+  }
+  
+  public func loadRegionsFromCache() {
+    guard let data = TKRegionManager.readLocalCache() else { return }
+    updateRegions(from: data)
   }
   
   @objc public var hasRegions: Bool {
