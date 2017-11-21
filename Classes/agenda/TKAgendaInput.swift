@@ -119,16 +119,25 @@ public struct TKAgendaInput: Codable {
     public let start: Location
     public let end: Location
     public let url: URL?
+    public let vehicles: [VehicleUsage]?
+
+    // TODO: Modes?
     
-    // TODO: What else? Modes?
-    
-    public init(id: String, title: String?, start: Location, end: Location, url: URL?) {
+    public init(id: String, title: String?, start: Location, end: Location, url: URL?, vehicles: [VehicleUsage]? = nil) {
       self.id = id
       self.title = title
       self.start = start
       self.end = end
       self.url = url
+      self.vehicles = vehicles
     }
+  }
+  
+  public struct VehicleUsage: Codable {
+    // TODO: Allow specifying shared vehicle here, too? See SegmentReference.sharedVehicleData
+    public let vehicle: API.PrivateVehicle
+    public let pickupLocation: Location?
+    public let parkingLocation: Location?
   }
   
   public enum Item: Codable {
@@ -184,9 +193,9 @@ public struct TKAgendaInput: Codable {
   
   public let patterns: [TKSegmentPattern]
   
-  public let vehicles: [[String: Any]]
+  public let vehicles: [API.PrivateVehicle]
 
-  public init(items: [Item], modes: [String] = [], config: TKSettings.Config? = nil, patterns: [TKSegmentPattern] = [], vehicles: [[String: Any]] = []) {
+  public init(items: [Item], modes: [String] = [], config: TKSettings.Config? = nil, patterns: [TKSegmentPattern] = [], vehicles: [API.PrivateVehicle] = []) {
     self.items = items
     self.modes = modes
     self.config = config
@@ -209,9 +218,10 @@ public struct TKAgendaInput: Codable {
     items =     try  container.decode([Item].self, forKey: .items)
     modes =    (try? container.decode([String].self, forKey: .modes)) ?? []
     config =    try? container.decode(TKSettings.Config.self, forKey: .config)
+    vehicles = (try? container.decode([API.PrivateVehicle].self, forKey: .vehicles)) ?? []
+
     // FIXME: Add those again
     patterns = /* (try? container.decode([TKSegmentPattern].self, forKey: .patterns)) ?? */ []
-    vehicles = /* (try? container.decode([[String: Any]].self, forKey: .vehicles)) ?? */ []
   }
   
   public func encode(to encoder: Encoder) throws {
@@ -219,9 +229,10 @@ public struct TKAgendaInput: Codable {
     try container.encode(items, forKey: .items)
     try container.encode(modes, forKey: .modes)
     try container.encode(config, forKey: .config)
+    try container.encode(vehicles, forKey: .vehicles)
+
     // FIXME: Add those again
 //    try container.encode(patterns, forKey: .patterns)
-//    try container.encode(vehicles, forKey: .vehicles)
   }
   
 }

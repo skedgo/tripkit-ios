@@ -77,6 +77,7 @@ extension TKSegment {
     }
   }
   
+  
   /// - Parameter vehicles: List of the user's vehicles
   /// - Returns: The used vehicle (if there are any) in SkedGo API-compatible form
   @objc public func usedVehicle(fromAll vehicles: [STKVehicular]) -> [AnyHashable: Any]? {
@@ -85,7 +86,8 @@ extension TKSegment {
     }
     
     if let vehicle = reference?.vehicle(fromAllVehicles: vehicles) {
-      return STKVehicularHelper.skedGoReferenceDictionary(forVehicle: vehicle)
+      let model = vehicle.toModel()
+      return (try? JSONEncoder().encodeJSONObject(model)) as? [AnyHashable: Any]
     } else {
       return nil
     }
