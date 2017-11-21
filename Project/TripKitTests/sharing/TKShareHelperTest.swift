@@ -14,8 +14,22 @@ import RxBlocking
 
 class TKShareHelperTest: XCTestCase {
   
+  let geocoder: SGBuzzGeocoder? = {
+    let env = ProcessInfo.processInfo.environment
+    if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
+      TripKit.apiKey = apiKey
+      return SGBuzzGeocoder()
+    } else {
+      return nil
+    }
+  }()
+  
   func testQueryUrlWithW3W() {
-    let geocoder = SGBuzzGeocoder()
+    guard let geocoder = geocoder else {
+      XCTFail("Could not construct SGBuzzGeocoder. Check environment variables.")
+      return
+    }
+
     let url = URL(string: "tripgo:///go?tname=dragon.letter.spoke")!
     
     guard let w = try? TKShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first(), let result = w else { XCTFail(); return }
@@ -32,7 +46,7 @@ class TKShareHelperTest: XCTestCase {
   }
 
   func testW3WQueryUrlWithLatLng() {
-    let geocoder = SGBuzzGeocoder()
+    let geocoder = SGAppleGeocoder()
     let url = URL(string: "tripgo:///go?tlat=-33.94501&tlng=151.25807&type=1&time=1385535734")!
     
     guard let w = try? TKShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first(), let result = w else { XCTFail(); return }
