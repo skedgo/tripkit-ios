@@ -47,6 +47,22 @@ extension TKSettings {
       case custom(CLLocationSpeed)
     }
     
+    private enum CodingKeys: String, CodingKey {
+      case version = "v"
+      case distanceUnit = "unit"
+      case weights
+      case avoidModes = "avoid"
+      case walkingSpeed
+      case cyclingSpeed
+      case concession = "conc"
+      case wheelchair
+      case maximumWalkingDuration = "wm"
+      case minimumTransferTime = "tt"
+      case emissions = "co2"
+      case bookingSandbox = "bsb"
+      case enableFlights = "ef"
+    }
+    
     public init() {
       let shared = UserDefaults.shared
       version = TKSettings.parserJsonVersion
@@ -61,11 +77,13 @@ extension TKSettings {
       concession = shared.bool(forKey: TKDefaultsKeyProfileTransportConcessionPricing)
       wheelchair = TKUserProfileHelper.showWheelchairInformation
       
+      cyclingSpeed = Speed(apiValue: shared.object(forKey: TKDefaultsKeyProfileTransportCyclingSpeed)) ?? .medium
+      walkingSpeed = Speed(apiValue: shared.object(forKey: TKDefaultsKeyProfileTransportWalkSpeed)) ?? .medium
+
       // FIXME: FIX UP!
-      cyclingSpeed = .medium // shared.TKDefaultsKeyProfileTransportCyclingSpeed
-      walkingSpeed = .medium // shared.TKDefaultsKeyProfileTransportWalkSpeed
       maximumWalkingDuration = nil // shared.TKDefaultsKeyProfileTransportWalkMaxDuration
       minimumTransferTime = nil // shared.TKDefaultsKeyProfileTransportTransferTime
+
       emissions = (shared.object(forKey: TKDefaultsKeyProfileTransportEmissions) as? [String: Float]) ?? [:]
       
       bookingSandbox = false // if (DEBUG: setting OR true) else (setting OR false)
@@ -134,13 +152,32 @@ extension TKSettings.Config.Speed: Equatable { }
 // MARK: - API Values
 
 extension TKSettings.Config.Speed {
-  var apiValue: Any {
+  public var apiValue: Any {
     switch self {
     case .impaired:          return -1
     case .slow:              return 0
     case .medium:            return 1
     case .fast:              return 2
     case .custom(let speed): return "(\(speed)m/s"
+    }
+  }
+  
+  init?(apiValue: Any?) {
+    if let int = apiValue as? Int {
+      switch int {
+      case -1: self = .impaired
+      case 0: self = .slow
+      case 1: self = .medium
+      case 2: self = .fast
+      default: return nil
+      }
+    }
+    
+    if let string = apiValue as? String,
+      let speed = CLLocationSpeed(string.replacingOccurrences(of: "m/s", with: "")) {
+      self = .custom(speed)
+    } else {
+      return nil
     }
   }
 }
