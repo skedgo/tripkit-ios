@@ -11,8 +11,14 @@ import Foundation
 extension TKSettings {
   
   public struct Config: Codable {
+    public enum DistanceUnit: String, Codable {
+      case auto
+      case metric
+      case imperial
+    }
+    
     public let version: Int
-    public let distanceUnit: SGDistanceUnitType
+    public let distanceUnit: DistanceUnit
     public let weights: [Weight: Float]
     public let avoidModes: [String]
     public let concession: Bool
@@ -44,7 +50,7 @@ extension TKSettings {
     public init() {
       let shared = UserDefaults.shared
       version = TKSettings.parserJsonVersion
-      distanceUnit = SGDistanceUnitType(rawValue: shared.integer(forKey: SVKDefaultsKeyProfileDistanceUnit)) ?? .auto
+      distanceUnit = Locale.current.usesMetricSystem ? .metric : .imperial
       weights = [
         .money:  shared.float(forKey: TKDefaultsKeyProfileWeightMoney),
         .carbon: shared.float(forKey: TKDefaultsKeyProfileWeightCarbon),
@@ -69,7 +75,7 @@ extension TKSettings {
     public var paras: [String: Any] {
       var paras: [String: Any] = [
         "v": version,
-        "unit": distanceUnit.apiValue,
+        "unit": distanceUnit.rawValue,
         "wp": "(\(weights[.money] ?? 1.0),\(weights[.carbon] ?? 1.0),\(weights[.time] ?? 1.0),\(weights[.hassle] ?? 1.0))",
         "cs": cyclingSpeed.apiValue,
         "ws": walkingSpeed.apiValue,
@@ -127,16 +133,6 @@ extension TKSettings.Config.Speed: Equatable { }
 
 // MARK: - API Values
 
-extension SGDistanceUnitType {
-  var apiValue: String {
-    switch self {
-    case .auto: return "auto"
-    case .metric: return "metric"
-    case .imperial: return "imperial"
-    }
-  }
-}
-
 extension TKSettings.Config.Speed {
   var apiValue: Any {
     switch self {
@@ -154,22 +150,6 @@ extension TKSettings.Config.Speed {
 extension TKSettings {
   fileprivate enum DecodingError: Error {
     case unknownType(String)
-  }
-}
-
-extension SGDistanceUnitType: Codable {
-  public init(from decoder: Decoder) throws {
-    switch try decoder.singleValueContainer().decode(String.self) {
-    case "auto": self = .auto
-    case "metric": self = .metric
-    case "imperial": self = .imperial
-    default: self = .auto
-    }
-  }
-  
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
-    try container.encode(apiValue)
   }
 }
 
