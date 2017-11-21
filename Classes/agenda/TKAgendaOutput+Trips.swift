@@ -107,6 +107,8 @@ extension TKAgendaOutput {
       }
 
       TKRoutingParser.populate(trip.request, start: from, end: to, leaveAfter: leaveAfter, arriveBy: arriveBy)
+
+      trip.request.expandForFavorite = true
     }
   }
   
