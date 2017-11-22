@@ -232,14 +232,14 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 + (void)hitRequest:(NSURLRequest *)request completion:(SGServerGenericBlock)completion
 {
 #ifdef DEBUG
-  [SGKLog info:@"SVKServer" block:^NSString * _Nonnull{
-    return [NSString stringWithFormat:@"Sending request: %@", [request.URL absoluteString]];
+  [SGKLog info:@"SVKServer" block:^NSString * _Nonnull {
+    return [NSString stringWithFormat:@"Sending %@ %@", request.HTTPMethod, request.URL.absoluteString];
   }];
   NSMutableString *output = [NSMutableString stringWithFormat:@"Headers: %@", request.allHTTPHeaderFields];
   if ([[request HTTPBody] length] > 0) {
     [output appendFormat:@"\nData: %@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]];
   }
-  [SGKLog verbose:@"SVKServer" block:^NSString * _Nonnull{
+  [SGKLog verbose:@"SVKServer" block:^NSString * _Nonnull {
     return [NSString stringWithFormat:@"%@", output];
   }];
 #endif
@@ -254,7 +254,9 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                                     status = httpResponse.statusCode;
 
                                     [SGKLog verbose:@"SVKServer" block:^NSString * _Nonnull{
-                                      return [NSString stringWithFormat:@"Received %@ from %@.\nHeaders: %@", @(status), [httpResponse.URL absoluteString], httpResponse.allHeaderFields];
+                                      return [NSString stringWithFormat:@"Received %@ from %@.\nHeaders: %@", @(status),
+                                              httpResponse.URL.absoluteString,
+                                              httpResponse.allHeaderFields];
                                     }];
                                   }
                                   
