@@ -30,10 +30,12 @@ public class TKRegionManager: NSObject {
 
   private override init() {
     super.init()
-    
-    if let data = TKRegionManager.readLocalCache() {
-      updateRegions(from: data)
-    }
+    loadRegionsFromCache()
+  }
+  
+  public func loadRegionsFromCache() {
+    guard let data = TKRegionManager.readLocalCache() else { return }
+    updateRegions(from: data)
   }
   
   @objc public var hasRegions: Bool {
@@ -58,8 +60,8 @@ public class TKRegionManager: NSObject {
 // MARK: - Parsing {
 
 struct RegionsResponse: Codable {
-  let modes: [String: ModeDetails]
-  let regions: [SVKRegion]
+  let modes: [String: ModeDetails]?
+  let regions: [SVKRegion]?
   let hashCode: Int
 }
 
@@ -96,14 +98,22 @@ extension TKRegionManager {
   @objc(updateRegionsFromData:)
   public func updateRegions(from data: Data) {
     do {
-      response = try JSONDecoder().decode(RegionsResponse.self, from: data)
+      let response = try JSONDecoder().decode(RegionsResponse.self, from: data)
+      
+      // Silently ignore if region didn't change
+      guard response.modes != nil, response.regions != nil else {
+        assert(self.response?.hashCode == response.hashCode)
+        return
+      }
+      
+      self.response = response
       TKRegionManager.saveToCache(data)
       
       NotificationCenter.default.post(name: .TKRegionManagerUpdatedRegions, object: self)
       NotificationCenter.default.post(name: .SGMapShouldRefreshOverlay, object: self)
+
     } catch {
-      // Fail silently as this routinely happens if the regions didn't change.
-      SGKLog.verbose("TKRegionManager", text: "Failed to parse regions: \(error)")
+      SGKLog.warn("TKRegionManager", text: "Failed to parse regions: \(error)")
     }
   }
   
@@ -130,33 +140,33 @@ extension TKRegionManager {
   /// - Returns: The localized title as defined by the server
   @objc
   public func title(forModeIdentifier mode: String) -> String? {
-    return response?.modes[mode]?.title
+    return response?.modes?[mode]?.title
   }
   
   /// - Parameter mode: The mode identifier for which you want the official website URL
   /// - Returns: The URL as defined by the server
   @objc
   public func websiteURL(forModeIdentifier mode: String) -> URL? {
-    return response?.modes[mode]?.websiteURL
+    return response?.modes?[mode]?.websiteURL
   }
   
   /// - Parameter mode: The mode identifier for which you want the official color
   /// - Returns: The color as defined by the server
   @objc
   public func color(forModeIdentifier mode: String) -> SGKColor? {
-    return response?.modes[mode]?.color
+    return response?.modes?[mode]?.color
   }
   
   /// - Returns: If specified mode identifier is required and can't get disabled.
   @objc
   public func modeIdentifierIsRequired(_ mode: String) -> Bool {
-    return response?.modes[mode]?.required ?? false
+    return response?.modes?[mode]?.required ?? false
   }
   
   /// - Returns: List of modes that this mode implies, i.e., enabling the specified modes should also enable all the returned modes.
   @objc(impliedModeIdentifiers:)
   public func impliedModes(byModeIdentifer mode: String) -> [String] {
-    return response?.modes[mode]?.implies ?? []
+    return response?.modes?[mode]?.implies ?? []
   }
   
   /// - Returns: List of modes that are dependent on this mode, i.e., disabling this mode should also disable all the returned modes.
@@ -190,7 +200,7 @@ extension TKRegionManager {
   public func imageURL(forModeIdentifier mode: String?, iconType: SGStyleModeIconType) -> URL? {
     guard
       let mode = mode,
-      let details = response?.modes[mode]
+      let details = response?.modes?[mode]
       else { return nil }
     
     var part: String?
