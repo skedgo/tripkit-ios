@@ -40,6 +40,7 @@
 		3A3C9BB21F75229B00C8D476 /* departures-parentStop.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A3C9BB11F75229B00C8D476 /* departures-parentStop.json */; };
 		3A3C9BB61F752F9900C8D476 /* StopAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */; };
 		3A3C9BB81F75346400C8D476 /* BaseAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BB71F75346400C8D476 /* BaseAPIModels.swift */; };
+		3A48F0B71FD171FB0094528B /* TKMapButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A48F0B61FD171FB0094528B /* TKMapButtonView.swift */; };
 		3A51402B1DEE62D6002DB39F /* TKVehicleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402A1DEE62D6002DB39F /* TKVehicleAnnotationView.swift */; };
 		3A51402E1DEE62EE002DB39F /* TKDLSTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */; };
 		3A51402F1DEE62EE002DB39F /* TKSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402D1DEE62EE002DB39F /* TKSegment.swift */; };
@@ -608,6 +609,7 @@
 		3A3C9BB11F75229B00C8D476 /* departures-parentStop.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "departures-parentStop.json"; path = "TripKitTests/Data/departures-parentStop.json"; sourceTree = SOURCE_ROOT; };
 		3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopAPIModel.swift; sourceTree = "<group>"; };
 		3A3C9BB71F75346400C8D476 /* BaseAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIModels.swift; sourceTree = "<group>"; };
+		3A48F0B61FD171FB0094528B /* TKMapButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKMapButtonView.swift; sourceTree = "<group>"; };
 		3A51402A1DEE62D6002DB39F /* TKVehicleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKVehicleAnnotationView.swift; sourceTree = "<group>"; };
 		3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDLSTable.swift; sourceTree = "<group>"; };
 		3A51402D1DEE62EE002DB39F /* TKSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegment.swift; sourceTree = "<group>"; };
@@ -2020,6 +2022,7 @@
 				3AFFAC0C1F06855F00147990 /* SGMapButtonView.m */,
 				3AFFAC0D1F06855F00147990 /* SGMapHelper.h */,
 				3AFFAC0E1F06855F00147990 /* SGMapHelper.m */,
+				3A48F0B61FD171FB0094528B /* TKMapButtonView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -3107,6 +3110,7 @@
 				3A2D06EC1F83DE4B002DA194 /* TKAnnotationClusterer.swift in Sources */,
 				3AFFAD611F068E8B00147990 /* AKAccountViewController.m in Sources */,
 				3AFFABA81F06854F00147990 /* Loc.swift in Sources */,
+				3A48F0B71FD171FB0094528B /* TKMapButtonView.swift in Sources */,
 				3AFFAC261F06855F00147990 /* SGLabel.m in Sources */,
 				3A7769121D3DE45800AF9EB2 /* TKAgendaParserHelper.swift in Sources */,
 				3AFFABCD1F06854F00147990 /* SVKServer.m in Sources */,
