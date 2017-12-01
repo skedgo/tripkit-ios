@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitAddOns"
-  s.version      = "3.0"
+  s.version      = "3.0.1"
   s.summary      = "Add-ons to SkedGo's TripKit"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = 'Apache License, Version 2.0'
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.source       = { git: "https://github.com/skedgo/tripkit-ios.git", tag: "v#{s.version}" }
 
   s.ios.deployment_target = '9.0'
-  s.osx.deployment_target = '10.11'
+  s.osx.deployment_target = '10.12'
   s.requires_arc = true
   
   s.prefix_header_file = "prefix.pch"
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Share' do |cs|
     cs.ios.deployment_target = '9.0'
-    cs.osx.deployment_target = '10.11'
+    cs.osx.deployment_target = '10.12'
 
     cs.dependency 'TripKit', "~> #{s.version}"
     cs.dependency 'RxSwift', '~> 4.0.0'
