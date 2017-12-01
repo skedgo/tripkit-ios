@@ -7,6 +7,17 @@
 //
 
 extension SGBaseGeocoder {
+  
+  public enum GeocodingError: Error {
+    case missingAddress
+    case serverFoundNoMatch(String)
+    case unknownServerError(String)
+  }
+  
+  public enum Result {
+    case success
+    case error(Swift.Error)
+  }
 
   @objc public class func mergedAndPruned(_ input:[SGKNamedCoordinate], withMaximum max: Int) -> [SGKNamedCoordinate] {
     return input.deduplicated().pruned(maximum: max)
@@ -18,9 +29,19 @@ extension SGBaseGeocoder {
   
   @objc(geocodeObject:usingGeocoder:nearRegion:completion:)
   public class func geocode(_ object: SGKGeocodable, using geocoder: SGGeocoder, near region: MKMapRect, completion: @escaping (Bool) -> Void) {
+    return geocode(object, using: geocoder, near: region) { (result: Result) -> Void in
+      switch result {
+      case .success: completion(true)
+      case .error: completion(false)
+      }
+    }
+  }
+
+  
+  public class func geocode(_ object: SGKGeocodable, using geocoder: SGGeocoder, near region: MKMapRect, completion: @escaping (Result) -> Void) {
     
     guard let address = object.addressForGeocoding, !address.isEmpty else {
-      completion(false)
+      completion(.error(GeocodingError.missingAddress))
       return
     }
     
@@ -28,7 +49,7 @@ extension SGBaseGeocoder {
                            success:
       { query, results in
         guard !results.isEmpty else {
-          completion(false)
+          completion(.error(GeocodingError.serverFoundNoMatch(query)))
           return
         }
         
@@ -44,12 +65,16 @@ extension SGBaseGeocoder {
         // the reverse geocoding returns the updated address matching
         // the coordinate.
         object.assign(best.coordinate, forAddress: address)
-        completion(true)
+        completion(.success)
         
       },
                            failure:
-      { _query, _error in
-        completion(false)
+      { query, error in
+        if let error = error {
+          completion(.error(error))
+        } else {
+          completion(.error(GeocodingError.unknownServerError(query)))
+        }
       })
     
   }

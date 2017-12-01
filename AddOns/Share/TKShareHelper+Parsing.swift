@@ -235,11 +235,14 @@ extension MKAnnotation {
     }
     
     return Observable.create() { observer in
-      SGBaseGeocoder.geocode(geocodable, using: geocoder, near: MKMapRectWorld) { success in
-        if success {
+      SGBaseGeocoder.geocode(geocodable, using: geocoder, near: MKMapRectWorld) { (result: SGBaseGeocoder.Result) -> Void in
+        switch result {
+        case .success:
           observer.onNext(self)
+          observer.onCompleted()
+        case .error(let error):
+          observer.onError(error)
         }
-        observer.onCompleted()
       }
       return Disposables.create()
     }
