@@ -18,7 +18,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@class SGMapButtonView;
+@class TKMapButtonView;
 @protocol ASMapManagerDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
-@property (nonatomic, weak, nullable) SGMapButtonView *mapButtonView;
+@property (nonatomic, weak, nullable) TKMapButtonView *mapButtonView;
 @property (nonatomic, assign) CGFloat topOverlap;
 @property (nonatomic, assign) CGFloat bottomOverlap;
 
