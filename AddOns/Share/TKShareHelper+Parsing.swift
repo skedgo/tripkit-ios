@@ -18,6 +18,12 @@ import RxSwift
 // MARK: - Query URLs
 
 public extension TKShareHelper {
+  
+  public enum ExtractionError: String, Error {
+    case invalidURL
+    case invalidCoordinate
+    case missingNecessaryInformation
+  }
 
   public struct QueryDetails {
     public enum Time {
@@ -40,7 +46,7 @@ public extension TKShareHelper {
     guard
       let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
       let items = components.queryItems
-      else { return Observable.empty() }
+      else { return Observable.error(ExtractionError.invalidURL) }
     
     // get the input from the query
     var tlat, tlng: Double?
@@ -76,7 +82,7 @@ public extension TKShareHelper {
     // we need a to coordinate OR a name
     let to = coordinate(lat: tlat, lng: tlng)
     guard to.isValid || name != nil else {
-      return Observable.empty()
+      return Observable.error(ExtractionError.missingNecessaryInformation)
     }
     
     // we're good to go, construct the time and from info
@@ -225,15 +231,18 @@ extension MKAnnotation {
     }
     
     guard let geocodable = SGKNamedCoordinate.namedCoordinate(for: self) else {
-      return Observable.empty()
+      return Observable.error(TKShareHelper.ExtractionError.invalidCoordinate)
     }
     
     return Observable.create() { observer in
-      SGBaseGeocoder.geocode(geocodable, using: geocoder, near: MKMapRectWorld) { success in
-        if success {
+      SGBaseGeocoder.geocode(geocodable, using: geocoder, near: MKMapRectWorld) { (result: SGBaseGeocoder.Result) -> Void in
+        switch result {
+        case .success:
           observer.onNext(self)
+          observer.onCompleted()
+        case .error(let error):
+          observer.onError(error)
         }
-        observer.onCompleted()
       }
       return Disposables.create()
     }
