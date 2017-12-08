@@ -8,10 +8,5 @@
 
 import Foundation
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
-
 extension Trip: TKURLShareable, TKURLSavable {
 }

@@ -118,18 +118,35 @@ public struct TKAgendaInput: Codable {
     public let title: String?
     public let start: Location
     public let end: Location
+    public let departure: Date
+    public let arrival: Date
     public let url: URL?
     public let vehicles: [VehicleUsage]?
 
     // TODO: Modes?
     
-    public init(id: String, title: String?, start: Location, end: Location, url: URL?, vehicles: [VehicleUsage]? = nil) {
+    public init(id: String, title: String?, start: Location, end: Location, departure: Date, arrival: Date, url: URL?, vehicles: [VehicleUsage]? = nil) {
       self.id = id
       self.title = title
       self.start = start
       self.end = end
+      self.departure = departure
+      self.arrival = arrival
       self.url = url
       self.vehicles = vehicles
+    }
+    
+    // MARK: Codable
+    
+    private enum CodingKeys: String, CodingKey {
+      case id
+      case title
+      case start = "location"
+      case end = "endLocation"
+      case departure = "startTime"
+      case arrival = "endTime"
+      case url
+      case vehicles
     }
   }
   

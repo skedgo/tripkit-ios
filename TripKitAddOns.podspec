@@ -26,13 +26,4 @@ Pod::Spec.new do |s|
     cs.source_files = "AddOns/InterApp/**/*.{h,m,swift}"
   end
 
-  s.subspec 'Share' do |cs|
-    cs.ios.deployment_target = '9.0'
-    cs.osx.deployment_target = '10.12'
-
-    cs.dependency 'TripKit', "~> #{s.version}"
-    cs.dependency 'RxSwift', '~> 4.0.0'
-    cs.source_files = "AddOns/Share/**/*"
-  end
-
 end

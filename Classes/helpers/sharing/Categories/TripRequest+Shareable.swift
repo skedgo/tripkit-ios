@@ -8,11 +8,6 @@
 
 import Foundation
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
-
 extension TripRequest: TKURLShareable {
   
   public var shareURL: URL? {

@@ -9,15 +9,21 @@
 import Foundation
 import CoreLocation
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
-
 public class TKShareHelper: NSObject {
   private override init() {
     super.init()
   }
+}
+
+// MARK: - Trip URLs
+
+extension TKShareHelper {
+  
+  @objc public static func isTripURL(_ url: URL) -> Bool {
+    return url.lastPathComponent == "trip.json" || url.path.range(of: "/trip/") != nil
+  }
+
+  
 }
 
 // MARK: - Query URLs

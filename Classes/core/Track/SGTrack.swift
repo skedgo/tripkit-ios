@@ -187,6 +187,7 @@ public protocol SGTrackItemUserCustomizable: SGTrackItem {
  A track item for which the algorithm can determine the start and end times.
  */
 @objc
+@available(*, deprecated, message: "Not needed with online agenda anymore")
 public protocol SGTrackItemAlgorithmOptimizable: SGTrackItem {
 
   /**
