@@ -16,7 +16,6 @@
 #import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
-
 #import "SGSemaphoreView.h"
 
 #import "SGStyleManager+SGCoreUI.h"
@@ -400,7 +399,7 @@
       headImage = [TripKitUIBundle imageNamed:@"map-pin-head-red"];
       headTintColor = [UIColor whiteColor];
     } else {
-      headImage =[SGSemaphoreView headImage];
+      headImage = SGSemaphoreView.headImage;
       headTintColor = SGSemaphoreView.headTintColor;
     }
   }

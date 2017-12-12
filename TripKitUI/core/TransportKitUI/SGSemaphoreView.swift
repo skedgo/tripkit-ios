@@ -14,7 +14,7 @@ extension SGSemaphoreView {
   @objc public static var customPointerImage: UIImage? = nil
 
   @objc
-  static var headTintColor: UIColor {
+  public static var headTintColor: UIColor {
     if let custom = customHeadTintColor {
       return custom
     } else {
@@ -24,7 +24,7 @@ extension SGSemaphoreView {
 
   
   @objc
-  static var headImage: UIImage {
+  public static var headImage: UIImage {
     if let custom = customHeadImage {
       return custom
     } else {
@@ -33,7 +33,7 @@ extension SGSemaphoreView {
   }
 
   @objc
-  static var pointerImage: UIImage {
+  public static var pointerImage: UIImage {
     if let custom = customPointerImage {
       return custom
     } else {
