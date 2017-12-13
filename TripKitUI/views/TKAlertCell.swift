@@ -26,8 +26,11 @@ class TKAlertCell: UITableViewCell {
   @IBOutlet weak var statusLabel: UILabel!
   @IBOutlet weak var actionButton: UIButton!
   @IBOutlet weak var statusView: UIView!
-  @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
   @IBOutlet weak var statusIconView: UIImageView!
+  @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
+  @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
+  
+  private var textViewHeightConstraint: NSLayoutConstraint!
   
   // MARK: -
   
@@ -44,7 +47,7 @@ class TKAlertCell: UITableViewCell {
   private var showStatusView: Bool = true {
     didSet {
       statusView.isHidden = !showStatusView
-      statusViewHeight.constant = showStatusView ? CGFloat(40) : CGFloat(0)
+      statusViewHeight.constant = showStatusView ? CGFloat(44) : CGFloat(0)
     }
   }
   
@@ -70,6 +73,9 @@ class TKAlertCell: UITableViewCell {
     if let text = alert.text {
       textView.text = removeStrongTag(from: text)
     }
+    
+    textViewHeightConstraint.isActive = textView.text.isEmpty
+    textViewBottomConstraint.constant = textView.text.isEmpty ? 0 : 8
     
     if let url = alert.infoURL {
       actionButton.isHidden = false
@@ -101,6 +107,9 @@ class TKAlertCell: UITableViewCell {
     iconView.image = nil
     titleLabel.text = nil
     textView.text = nil
+    
+    textViewHeightConstraint.isActive = false
+    textViewBottomConstraint.constant = 8
   }
   
   private func removeStrongTag(from text: String) -> String {
@@ -119,6 +128,7 @@ class TKAlertCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     SGStyleManager.addDefaultOutline(contentWrapper)
+    textViewHeightConstraint = textView.heightAnchor.constraint(equalToConstant: 0)
     actionButton.setTitle(NSLocalizedString("More info", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title of button to get more details about an alert"), for: .normal)
   }
   
