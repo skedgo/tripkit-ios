@@ -16,7 +16,6 @@
 #import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
-
 #import "SGSemaphoreView.h"
 
 #import "SGStyleManager+SGCoreUI.h"
@@ -393,15 +392,15 @@
   UIImage *headImage;
   UIColor *headTintColor;
   if (nil != bearing) {
-    headImage = [TripKitUIBundle imageNamed:@"map-pin-pointer"];
-    headTintColor = [SGStyleManager darkTextColor];
+    headImage = SGSemaphoreView.pointerImage;
+    headTintColor = SGSemaphoreView.headTintColor;
   } else {
     if (red) {
       headImage = [TripKitUIBundle imageNamed:@"map-pin-head-red"];
       headTintColor = [UIColor whiteColor];
     } else {
-      headImage = [TripKitUIBundle imageNamed:@"map-pin-head"];
-      headTintColor = [SGStyleManager darkTextColor];
+      headImage = SGSemaphoreView.headImage;
+      headTintColor = SGSemaphoreView.headTintColor;
     }
   }
   

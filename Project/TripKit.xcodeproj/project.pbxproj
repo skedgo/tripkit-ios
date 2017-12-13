@@ -33,6 +33,7 @@
 		3A32CD7B1DC2EC4F003B158B /* RegionAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7A1DC2EC4F003B158B /* RegionAPIModel.swift */; };
 		3A37D5DC1F6FB7AF0019D4A2 /* SGPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37D5DA1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.m */; };
 		3A37D5DD1F6FBAFA0019D4A2 /* SGPulsingAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A37D5DB1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A38BC5C1FDFD305002DECE6 /* SGSemaphoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38BC5B1FDFD304002DECE6 /* SGSemaphoreView.swift */; };
 		3A3C9BA61F751FC300C8D476 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BA51F751FC300C8D476 /* API.swift */; };
 		3A3C9BA91F751FF300C8D476 /* DeparturesAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BA71F751FF200C8D476 /* DeparturesAPIModel.swift */; };
 		3A3C9BAA1F751FF300C8D476 /* ServiceAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */; };
@@ -602,6 +603,7 @@
 		3A37A9A61D20F8EF00A2A3B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A37D5DA1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPulsingAnnotationView.m; sourceTree = "<group>"; };
 		3A37D5DB1F6FB7AE0019D4A2 /* SGPulsingAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPulsingAnnotationView.h; sourceTree = "<group>"; };
+		3A38BC5B1FDFD304002DECE6 /* SGSemaphoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGSemaphoreView.swift; sourceTree = "<group>"; };
 		3A3C9BA51F751FC300C8D476 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3A3C9BA71F751FF200C8D476 /* DeparturesAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesAPIModel.swift; sourceTree = "<group>"; };
 		3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPIModel.swift; sourceTree = "<group>"; };
@@ -2037,6 +2039,7 @@
 				3AFFAC151F06855F00147990 /* SGPolylineRenderer.m */,
 				3AFFAC161F06855F00147990 /* SGSemaphoreView.h */,
 				3AFFAC171F06855F00147990 /* SGSemaphoreView.m */,
+				3A38BC5B1FDFD304002DECE6 /* SGSemaphoreView.swift */,
 				3AFFAC181F06855F00147990 /* SGTripSegmentsView.h */,
 				3AFFAC191F06855F00147990 /* SGTripSegmentsView.m */,
 				3AFFAC1A1F06855F00147990 /* SGTripSummaryCell.h */,
@@ -3163,6 +3166,7 @@
 				3AFFADAD1F068E8B00147990 /* BPKTextFieldHelper.m in Sources */,
 				3A3C9BB81F75346400C8D476 /* BaseAPIModels.swift in Sources */,
 				3AFFADC41F068E8B00147990 /* BPKBTHelper.m in Sources */,
+				3A38BC5C1FDFD305002DECE6 /* SGSemaphoreView.swift in Sources */,
 				3AA39AC51F7A35B60066CC94 /* Codable+Helpers.swift in Sources */,
 				3AFFAD5D1F068E8B00147990 /* UIView+Keyboard.m in Sources */,
 				3ADD5B6A1D9CDF0C00A1742F /* TripMapManager.m in Sources */,
