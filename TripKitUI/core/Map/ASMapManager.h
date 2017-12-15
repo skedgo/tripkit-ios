@@ -28,9 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
 @property (nonatomic, weak, nullable) TKMapButtonView *mapButtonView;
-@property (nonatomic, assign) CGFloat topOverlap;
-@property (nonatomic, assign) CGFloat bottomOverlap;
-
 
 /**
  * A polygon which will be shown as a greyed out overlay. Use this to mark
@@ -113,7 +110,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)mapManagerIsVisible:(ASMapManager *)mapMan;
 
-- (CGFloat)topOverlap;
 - (void)dismissPopoverAnimated:(BOOL)animated;
 
 @end
