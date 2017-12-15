@@ -82,9 +82,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)cleanUp:(BOOL)animated
      completion:(nullable void (^)(BOOL finished))completion;
 
-- (CGFloat)topLayoutGuideLength;
-- (CGFloat)bottomLayoutGuideLength;
-
 @end
 
 @protocol ASMapManagerDelegate <NSObject>
