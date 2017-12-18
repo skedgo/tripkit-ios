@@ -108,16 +108,6 @@
   _tap.delegate = nil;
 }
 
-- (CGFloat)topLayoutGuideLength
-{
-  return self.topOverlap;
-}
-
-- (CGFloat)bottomLayoutGuideLength
-{
-  return self.bottomOverlap;
-}
-
 - (void)setOverlayPolygon:(MKPolygon *)overlayPolygon
 {
   if (_overlayPolygon == overlayPolygon) {
