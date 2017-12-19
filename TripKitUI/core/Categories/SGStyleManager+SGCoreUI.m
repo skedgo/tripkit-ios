@@ -133,7 +133,7 @@
   if (!includeBackground) {
     navBarBg = [[UIImage alloc] init]; // blank
   }
-  searchBar.tintColor = [self globalTintColor];
+  searchBar.tintColor = [self globalAccentColor];
   searchBar.backgroundImage = navBarBg;
   
   // style the text field
