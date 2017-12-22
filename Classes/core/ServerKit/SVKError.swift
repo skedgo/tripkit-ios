@@ -51,16 +51,31 @@ public class SVKError: NSError {
   @objc public var title: String?
   public var recovery: SVKErrorRecovery?
   
-  @objc public class func error(withCode code: Int, userInfo dict: [String: Any]?) -> SVKError {
+  @objc
+  public class func error(withCode code: Int, userInfo dict: [String: Any]?) -> SVKError {
     return SVKError(domain: "com.skedgo.serverkit", code: code, userInfo: dict)
   }
   
-  @objc public class func error(fromJSON json: Any?) -> SVKError? {
-    guard let dict = json as? [String: Any] else { return nil }
-    return SVKError.error(fromJSON: dict, domain: "com.skedgo.serverkit")
+  @objc
+  public class func error(fromJSON json: Any?, statusCode: Int) -> SVKError? {
+    if let dict = json as? [String: Any] {
+      // If there was a response body, we used that to see if it's an error
+      // returned from the API.
+      return SVKError.error(fromJSON: dict, domain: "com.skedgo.serverkit")
+      
+    } else {
+      // Otherwise we check if the status code is indicating an error
+      switch statusCode {
+      case 404, 500...599:
+        return SVKError.error(withCode: statusCode, userInfo: nil)
+      default:
+        return nil
+      }
+    }
   }
   
-  @objc class func error(fromJSON dictionary: [String: Any], domain: String) -> SVKError? {
+  @objc
+  class func error(fromJSON dictionary: [String: Any], domain: String) -> SVKError? {
     guard let errorInfo = dictionary["error"] as? String,
       let isUserError = dictionary["usererror"] as? Bool
       else {
@@ -88,7 +103,8 @@ public class SVKError: NSError {
     return error
   }
   
-  @objc public var isUserError: Bool {
+  @objc
+  public var isUserError: Bool {
     return false
   }
   

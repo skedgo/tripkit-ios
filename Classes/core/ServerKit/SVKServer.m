@@ -275,7 +275,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                                                                                         options:0
                                                                                           error:&parserError];
                                     if (responseObject) {
-                                      SVKError *serverError = [SVKError errorFromJSON:responseObject];
+                                      SVKError *serverError = [SVKError errorFromJSON:responseObject statusCode:status];
                                       if (serverError != nil) {
                                         completion(status, nil, nil,  serverError);
                                       } else {
@@ -578,7 +578,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   [SVKServer hitRequest:request
              completion:
    ^(NSInteger status, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
-     NSError *serverError = error ?: [SVKError errorFromJSON:responseObject];
+     NSError *serverError = error ?: [SVKError errorFromJSON:responseObject statusCode:status];
      if (serverError) {
        BOOL isUserError = NO;
        if ([serverError isKindOfClass:[SVKError class]]) {
