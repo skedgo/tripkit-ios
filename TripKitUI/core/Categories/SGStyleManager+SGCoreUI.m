@@ -32,15 +32,21 @@
 
 + (void)addLightStatusBarGradientLayerToView:(UIView *)view height:(CGFloat)height
 {
-  CAGradientLayer *gradient = [CAGradientLayer layer];
-  
   CGFloat width = MAX(CGRectGetWidth(view.frame), CGRectGetHeight(view.frame)) * 1.5f; // bigger to account for resizes
-  gradient.frame = CGRectMake(0, 0, width, height);
-  
-  UIColor *c1 = [UIColor colorWithRed:52/255.0f green:78/255.0f blue:109/255.0f alpha:0.7f];
-  gradient.colors = @[(id)c1.CGColor, (id)c1.CGColor];
-  
+  CAGradientLayer *gradient = [self lightGradientLayerWithWidth:width height:height];
   [view.layer addSublayer:gradient];
+}
+
++ (void)addLightStatusBarGradientLayerToView:(UIView *)view belowView:(UIView *)anotherView height:(CGFloat)height
+{
+  CGFloat width = MAX(CGRectGetWidth(view.frame), CGRectGetHeight(view.frame)) * 1.5f; // bigger to account for resizes
+  CAGradientLayer *gradient = [self lightGradientLayerWithWidth:width height:height];
+  
+  if (anotherView != nil) {
+    [view.layer insertSublayer:gradient below:anotherView.layer];
+  } else {
+    [view.layer addSublayer:gradient];
+  }
 }
 
 + (void)removeGradientLayerFromView:(UIView *)view
@@ -109,6 +115,19 @@
 {
   //  return [UIColor colorWithWhite:250/255.f alpha:1];
   return [UIColor colorWithWhite:247/255.f alpha:1];
+}
+
+#pragma mark - Helpers
+
++ (CAGradientLayer *)lightGradientLayerWithWidth:(CGFloat)width height:(CGFloat)height
+{
+  CAGradientLayer *gradient = [CAGradientLayer layer];
+  gradient.frame = CGRectMake(0, 0, width, height);
+  
+  UIColor *c1 = [UIColor colorWithRed:52/255.0f green:78/255.0f blue:109/255.0f alpha:0.7f];
+  gradient.colors = @[(id)c1.CGColor, (id)c1.CGColor];
+  
+  return gradient;
 }
 
 #pragma mark - Styling bars
