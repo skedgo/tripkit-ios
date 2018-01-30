@@ -60,6 +60,11 @@
   return [self.configuration[@"BookingAvailable"] boolValue];
 }
 
+- (BOOL)prefilledDatabaseAvailable
+{
+  return [self.configuration[@"PrefilledDatabaseAvailable"] boolValue];
+}
+
 - (NSDictionary *)configuration
 {
   if (!_configuration) {
