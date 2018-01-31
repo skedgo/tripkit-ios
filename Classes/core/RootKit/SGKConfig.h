@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)betaFeaturesAvailable;
 - (BOOL)accountsAvailable;
 - (BOOL)bookingAvailable;
-- (BOOL)prefilledDatabaseAvailable;
 
 // Colors
 - (NSDictionary *)globalTintColor;
