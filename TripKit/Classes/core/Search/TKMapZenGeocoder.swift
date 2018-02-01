@@ -10,10 +10,8 @@ import MapKit
 
 public class TKMapZenGeocoder: NSObject {
   
-  private let apiKey: String
-  
-  public init(apiKey: String) {
-    self.apiKey = apiKey
+  public override init() {
+    super.init()
   }
   
   private enum Result {
@@ -63,12 +61,11 @@ extension TKMapZenGeocoder: SGGeocoder {
     }
     
     let region = MKCoordinateRegionForMapRect(mapRect)
-    var components = URLComponents(string: "https://search.mapzen.com/v1/search")
+    var components = URLComponents(string: "https://pelias.tripgo.com/v1/search")
     components?.queryItems = [
       URLQueryItem(name: "text", value: inputString),
       URLQueryItem(name: "focus.point.lat", value: String(region.center.latitude)),
       URLQueryItem(name: "focus.point.lon", value: String(region.center.longitude)),
-      URLQueryItem(name: "api_key", value: apiKey),
     ]
     
     hitSearch(components) { result in
@@ -102,7 +99,6 @@ extension TKMapZenGeocoder: SGAutocompletionDataProvider {
       URLQueryItem(name: "text", value: string),
       URLQueryItem(name: "focus.point.lat", value: String(region.center.latitude)),
       URLQueryItem(name: "focus.point.lon", value: String(region.center.longitude)),
-      URLQueryItem(name: "api_key", value: apiKey),
     ]
     
     hitSearch(components) { result in

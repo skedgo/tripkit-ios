@@ -91,6 +91,7 @@ class SGGeocoderTest: XCTestCase {
     if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
       TripKit.apiKey = apiKey
       geocoders.append(SGBuzzGeocoder())
+      geocoders.append(TKMapZenGeocoder())
     } else {
       XCTFail("Could not construct SGBuzzGeocoder. Check environment variables.")
     }
@@ -106,12 +107,6 @@ class SGGeocoderTest: XCTestCase {
       XCTFail("Could not construct Foursquare geocoder. Check environment variables.")
     }
 
-    if let apiKey = env["MAPZEN_API_KEY"], !apiKey.isEmpty {
-      let mapZen = TKMapZenGeocoder(apiKey: apiKey)
-      geocoders.append(mapZen)
-    } else {
-      XCTFail("Could not construct MapZen geocoder. Check environment variables.")
-    }
     
     return SGAggregateGeocoder(geocoders: geocoders)
   }
