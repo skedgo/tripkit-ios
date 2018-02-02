@@ -945,7 +945,7 @@ static NSString *const kPathImage     = @"api/user/image";
 
   } else {
     // We may have user errors, so let's check that.
-    SVKError *error = [SVKError errorFromJSON:response];
+    SVKError *error = [SVKError errorFromJSON:response statusCode:200];
     if (error) {
       handler(nil, error);
 

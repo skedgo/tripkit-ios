@@ -20,7 +20,7 @@ extension Bundle {
       }
     }
 
-    if let infoDict = localizedInfoDictionary {
+    if let infoDict = infoDictionary {
       if let candidate = infoDict[kCFBundleNameKey as String] as? String, !candidate.hasPrefix("${") {
         return candidate
       } else if let candidate = infoDict["CFBundleDisplayName"] as? String, !candidate.hasPrefix("${") {

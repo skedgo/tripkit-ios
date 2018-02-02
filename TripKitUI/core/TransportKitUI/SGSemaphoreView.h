@@ -8,8 +8,10 @@
 
 @import MapKit;
 
-#ifndef TK_NO_MODULE
-
+#ifdef TK_NO_MODULE
+#import "TripKit.h"
+#else
+@import TripKit;
 #endif
 
 typedef NS_ENUM(NSInteger, SGSemaphoreLabel) {

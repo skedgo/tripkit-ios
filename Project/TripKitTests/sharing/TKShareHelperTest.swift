@@ -32,7 +32,7 @@ class TKShareHelperTest: XCTestCase {
 
     let url = URL(string: "tripgo:///go?tname=dragon.letter.spoke")!
     
-    guard let result = try! TKShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first() else { XCTFail(); return }
+    guard let result = try TKShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first() else { XCTFail(); return }
     
     XCTAssertNil(result.start)
     XCTAssertTrue(result.end.isValid)
