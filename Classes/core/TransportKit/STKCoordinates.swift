@@ -89,8 +89,7 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation, TKGlyphable
   
   public var pointImage: SGKImage? {
     guard let imageName = stopModeInfo.localImageName else { return nil }
-    let image = SGStyleManager.image(forModeImageName: imageName, isRealTime: false, of: .mapIcon)
-    return image?.withRenderingMode(.alwaysTemplate)
+    return SGStyleManager.image(forModeImageName: imageName, isRealTime: false, of: .mapIcon)
   }
   
   public var pointImageURL: URL? {
