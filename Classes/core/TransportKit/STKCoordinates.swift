@@ -108,7 +108,7 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation, TKGlyphable
   }
   
   public var glyphImageURL: URL? {
-    // TODO: Add something for this
+    // TODO: When the new images on the backend are prepared for this, adopt them here, too.
     return nil
   }
   
