@@ -11,6 +11,14 @@ import Foundation
 import CoreLocation
 import MapKit
 
+public protocol TKGlyphableAnnotation: MKAnnotation {
+
+  var glyphColor: SGKColor? { get }
+  var glyphImage: SGKImage? { get }
+  var glyphImageURL: URL? { get }
+  
+}
+
 @objc
 public protocol STKDisplayablePoint: MKAnnotation {
   
@@ -28,11 +36,6 @@ public protocol STKDisplayablePoint: MKAnnotation {
   
   @objc optional func setCoordinate(coordinate: CLLocationCoordinate2D)
   
-}
-
-extension STKDisplayablePoint {
-  var pointImage: SGKImage? { return nil }
-  var pointImageURL: URL? { return nil }
 }
 
 @objc
