@@ -22,13 +22,13 @@ Pod::Spec.new do |s|
   s.dependency 'RxCocoa', '~> 4.0.0'
 
   s.source_files = [
-    "Classes/**/*.{h,m,swift}",
-    "AddOns/Share/**/*"
+    "TripKit/Classes/**/*.{h,m,swift}",
+    "TripKit/AddOns/Share/**/*"
   ]
 
   s.resources    = [
-    "Resources/*.lproj",
-    "Resources/TripKit.*",
+    "TripKit/Resources/*.lproj",
+    "TripKit/Resources/TripKit.*",
     "TripKitModel.xcdatamodeld",
     "TripKitModel.xcdatamodeld/*."
   ]
