@@ -6,7 +6,11 @@
 //  Copyright © 2016 SkedGo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#if TARGET_OS_IPHONE
+@import UIKit;
+#else
+@import AppKit;
+#endif
 
 //! Project version number for TripKit.
 FOUNDATION_EXPORT double TripKitVersionNumber;
@@ -17,8 +21,4 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <TripKit/PublicHeader.h>
 
 #import "TKTripKit.h"
-
-#import "TripKitUI.h"
-#import "TripKitAgenda.h"
-#import "TripKitBookings.h"
 #import "TripKitShare.h"

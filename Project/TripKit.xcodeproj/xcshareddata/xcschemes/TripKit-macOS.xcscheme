@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0900"
+   LastUpgradeVersion = "0920"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3AB6C61F1D1CD0060089F687"
+               BlueprintIdentifier = "3A6DF06F202C8C6E0084CB2C"
                BuildableName = "TripKit.framework"
-               BlueprintName = "TripKit"
+               BlueprintName = "TripKit-macOS"
                ReferencedContainer = "container:TripKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,26 +29,7 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3AB6C6291D1CD0060089F687"
-               BuildableName = "TripKitTests.xctest"
-               BlueprintName = "TripKitTests"
-               ReferencedContainer = "container:TripKit.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3AB6C61F1D1CD0060089F687"
-            BuildableName = "TripKit.framework"
-            BlueprintName = "TripKit"
-            ReferencedContainer = "container:TripKit.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -66,34 +47,12 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3AB6C61F1D1CD0060089F687"
+            BlueprintIdentifier = "3A6DF06F202C8C6E0084CB2C"
             BuildableName = "TripKit.framework"
-            BlueprintName = "TripKit"
+            BlueprintName = "TripKit-macOS"
             ReferencedContainer = "container:TripKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "FOURSQUARE_CLIENT_ID"
-            value = "$(FOURSQUARE_CLIENT_ID)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "FOURSQUARE_CLIENT_SECRET"
-            value = "$(FOURSQUARE_CLIENT_SECRET)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "MAPZEN_API_KEY"
-            value = "$(MAPZEN_API_KEY)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "TRIPGO_API_KEY"
-            value = "$(TRIPGO_API_KEY)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -106,9 +65,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3AB6C61F1D1CD0060089F687"
+            BlueprintIdentifier = "3A6DF06F202C8C6E0084CB2C"
             BuildableName = "TripKit.framework"
-            BlueprintName = "TripKit"
+            BlueprintName = "TripKit-macOS"
             ReferencedContainer = "container:TripKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

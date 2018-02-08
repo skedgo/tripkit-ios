@@ -23,6 +23,8 @@
 #import "SGCountdownCell.h"
 #import "SGTableViewCell.h"
 #import "SGLabel.h"
+#import "SGButton.h"
+#import "SGTableCell.h"
 
 // Map
 #import "MKMapView+ZoomToAnnotations.h"

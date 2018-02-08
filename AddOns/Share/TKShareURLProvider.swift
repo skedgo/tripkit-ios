@@ -8,12 +8,6 @@
 
 import Foundation
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
-
-
 @objc
 public protocol TKURLShareable {
   var shareURL: URL? { get }

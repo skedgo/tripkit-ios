@@ -10,11 +10,6 @@ import Foundation
 
 import RxSwift
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
-
 // MARK: - Query URLs
 
 public extension TKShareHelper {

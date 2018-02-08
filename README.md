@@ -10,8 +10,7 @@ Additional documentation is available on the [TripGo Developer page](http://sked
 - TripKit (iOS, iOS extension, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
 - TripKitUI (iOS): UI elements for displaying trips on a map and TripGo-styled table cells.
 - TripKitBookings (iOS): User accounts and in-app booking functionality.
-- TripKitAddOns/InterApp (iOS): Helpers for deep linking into other apps, such as FlitWays, GoCatch, Ingogo, Lyft, Ola and Uber.
-- TripKitAddOns/Share (iOS, iOS extensions, macOS): Helpers for creating shareable links to trips, services, transit stops, and meeting locations, that open in TripGo's web app.
+- TripKitInterApp (iOS): Helpers for deep linking into other apps, such as FlitWays, GoCatch, Ingogo, Lyft, Ola and Uber.
 
 ## Installation
 
