@@ -10,4 +10,4 @@ github "nighthawk/ASPolylineView"
 github "kishikawakatsumi/KeychainAccess"
 github "OAuthSwift/OAuthSwift" ~> 1.2.0
 github "SwiftyJSON/SwiftyJSON"
-# github "KVNProgress" // not supported
+github "skedgo/KVNProgress"
