@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3A6DF166202C97F60084CB2C"
-               BuildableName = "TripKitInterApp_iOS.framework"
+               BuildableName = "TripKitInterApp.framework"
                BlueprintName = "TripKitInterApp-iOS"
                ReferencedContainer = "container:TripKit.xcodeproj">
             </BuildableReference>
@@ -48,7 +48,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3A6DF166202C97F60084CB2C"
-            BuildableName = "TripKitInterApp_iOS.framework"
+            BuildableName = "TripKitInterApp.framework"
             BlueprintName = "TripKitInterApp-iOS"
             ReferencedContainer = "container:TripKit.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3A6DF166202C97F60084CB2C"
-            BuildableName = "TripKitInterApp_iOS.framework"
+            BuildableName = "TripKitInterApp.framework"
             BlueprintName = "TripKitInterApp-iOS"
             ReferencedContainer = "container:TripKit.xcodeproj">
          </BuildableReference>
