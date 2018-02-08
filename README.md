@@ -7,8 +7,8 @@ Additional documentation is available on the [TripGo Developer page](http://sked
 
 ## Components
 
-- TripKit (iOS, iOS extension, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
-- TripKitUI (iOS): UI elements for displaying trips on a map and TripGo-styled table cells.
+- TripKit (iOS, iOS extensions, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
+- TripKitUI (iOS, iOS extensions): UI elements for displaying trips on a map and TripGo-styled table cells.
 - TripKitBookings (iOS): User accounts and in-app booking functionality.
 - TripKitInterApp (iOS): Helpers for deep linking into other apps, such as FlitWays, GoCatch, Ingogo, Lyft, Ola and Uber.
 
@@ -30,7 +30,7 @@ Add desired pods:
 Add this to your `Cartfile`:
 
 ```
-github "skedgo/tripkit-ios" "~> 3.1"
+github "skedgo/tripkit-ios" ~> 3.1
 ```
 
 Then run `carthage update` and add the desired framework to your project as described in [the Carthage docs](https://github.com/Carthage/Carthage).

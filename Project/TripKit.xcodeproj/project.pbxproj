@@ -51,7 +51,6 @@
 		3A6DF07C202C8C9A0084CB2C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF079202C8C990084CB2C /* RxSwift.framework */; };
 		3A6DF07D202C8C9A0084CB2C /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF07A202C8C990084CB2C /* ASPolygonKit.framework */; };
 		3A6DF088202C8DA30084CB2C /* TripKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF086202C8DA30084CB2C /* TripKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF08C202C8DEE0084CB2C /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3A6DF08D202C8E280084CB2C /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */; };
 		3A6DF08E202C8E280084CB2C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF062202C89180084CB2C /* RxCocoa.framework */; };
 		3A6DF08F202C8E280084CB2C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05E202C88E90084CB2C /* RxSwift.framework */; };
@@ -151,7 +150,6 @@
 		3A6DF16F202C98510084CB2C /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */; };
 		3A6DF170202C98510084CB2C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF062202C89180084CB2C /* RxCocoa.framework */; };
 		3A6DF171202C98510084CB2C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05E202C88E90084CB2C /* RxSwift.framework */; };
-		3A6DF174202C98630084CB2C /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3A6DF17B202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF176202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF17C202C98AF0084CB2C /* TKInterAppHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF177202C98AF0084CB2C /* TKInterAppHelpers.swift */; };
 		3A6DF17D202C98AF0084CB2C /* TKInterAppCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */; };
@@ -315,8 +313,6 @@
 		3A6DF2DB202C9AA00084CB2C /* UIViewController+modalController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF23E202C9AA00084CB2C /* UIViewController+modalController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2DC202C9AA00084CB2C /* UIView+Keyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF23F202C9AA00084CB2C /* UIView+Keyboard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2DD202C9AA00084CB2C /* UIView+FindFirstResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF240202C9AA00084CB2C /* UIView+FindFirstResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF2DE202C9AB40084CB2C /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
-		3A6DF2DF202C9AB40084CB2C /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
 		3A6DF2E4202C9B200084CB2C /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */; };
 		3A6DF2E5202C9B200084CB2C /* ASPolylineView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF090202C8E280084CB2C /* ASPolylineView.framework */; };
 		3A6DF2E6202C9B200084CB2C /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF091202C8E280084CB2C /* Kingfisher.framework */; };
@@ -672,7 +668,6 @@
 		3A6DF05E202C88E90084CB2C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = Carthage/Build/iOS/ASPolygonKit.framework; sourceTree = "<group>"; };
 		3A6DF062202C89180084CB2C /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		3A6DF066202C8C340084CB2C /* TripKitAddOns.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = TripKitAddOns.podspec; path = ../TripKitAddOns.podspec; sourceTree = "<group>"; };
 		3A6DF067202C8C340084CB2C /* TripKitBookings.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = TripKitBookings.podspec; path = ../TripKitBookings.podspec; sourceTree = "<group>"; };
 		3A6DF068202C8C340084CB2C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		3A6DF069202C8C340084CB2C /* TripKitUI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = TripKitUI.podspec; path = ../TripKitUI.podspec; sourceTree = "<group>"; };
@@ -1009,6 +1004,7 @@
 		3AA39AC61F7A3FDC0066CC94 /* regions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = regions.json; path = TripKitTests/Data/regions.json; sourceTree = SOURCE_ROOT; };
 		3AA39AC81F7A40ED0066CC94 /* TKRegionManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRegionManagerTest.swift; sourceTree = "<group>"; };
 		3AA39ACE1F7A63BA0066CC94 /* MapKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extensions.swift"; sourceTree = "<group>"; };
+		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = TripKitInterApp.podspec; path = ../TripKitInterApp.podspec; sourceTree = "<group>"; };
 		3AA77F611F76A913001D412D /* AlertAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAPIModels.swift; sourceTree = "<group>"; };
 		3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+ProductName.swift"; sourceTree = "<group>"; };
 		3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationInfoTest.swift; sourceTree = "<group>"; };
@@ -1267,7 +1263,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF08C202C8DEE0084CB2C /* TripKit.framework in Frameworks */,
 				3A6DF092202C8E280084CB2C /* ASPolylineView.framework in Frameworks */,
 				3A6DF093202C8E280084CB2C /* Kingfisher.framework in Frameworks */,
 				3A6DF08D202C8E280084CB2C /* ASPolygonKit.framework in Frameworks */,
@@ -1280,7 +1275,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF174202C98630084CB2C /* TripKit.framework in Frameworks */,
 				3A6DF16F202C98510084CB2C /* ASPolygonKit.framework in Frameworks */,
 				3A6DF171202C98510084CB2C /* RxSwift.framework in Frameworks */,
 				3A6DF170202C98510084CB2C /* RxCocoa.framework in Frameworks */,
@@ -1291,8 +1285,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF2DE202C9AB40084CB2C /* TripKit.framework in Frameworks */,
-				3A6DF2DF202C9AB40084CB2C /* TripKitUI.framework in Frameworks */,
 				3A6DF2E4202C9B200084CB2C /* ASPolygonKit.framework in Frameworks */,
 				3A6DF2E5202C9B200084CB2C /* ASPolylineView.framework in Frameworks */,
 				3A6DF2EE202C9B210084CB2C /* KeychainAccess.framework in Frameworks */,
@@ -1361,8 +1353,8 @@
 				3A6DF05D202C85350084CB2C /* Cartfile */,
 				3A6DF068202C8C340084CB2C /* README.md */,
 				3A6DF06A202C8C340084CB2C /* TripKit.podspec */,
-				3A6DF066202C8C340084CB2C /* TripKitAddOns.podspec */,
 				3A6DF067202C8C340084CB2C /* TripKitBookings.podspec */,
+				3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */,
 				3A6DF069202C8C340084CB2C /* TripKitUI.podspec */,
 			);
 			name = Metadata;
@@ -2870,7 +2862,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = SkedGo;
 				TargetAttributes = {
 					3A6DF06F202C8C6E0084CB2C = {
@@ -3680,7 +3672,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -3719,7 +3711,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -3749,11 +3741,13 @@
 		3A6DF08A202C8DA30084CB2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3789,11 +3783,13 @@
 		3A6DF08B202C8DA30084CB2C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3830,6 +3826,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3869,6 +3866,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3905,7 +3903,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3945,7 +3943,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
