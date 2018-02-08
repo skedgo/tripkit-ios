@@ -13,7 +13,7 @@
 
 #ifndef TK_NO_MODULE
 @import TripKit;
-#import <TripKitAddons/TripKitAddons-Swift.h>
+#import <TripKitInterApp/TripKitInterApp-Swift.h>
 #else
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
