@@ -43,19 +43,8 @@
 		3A5140311DEE62FA002DB39F /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5140301DEE62FA002DB39F /* TripRequest.swift */; };
 		3A57DB5D1F17A58800946553 /* SGLocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A57DB5C1F17A58800946553 /* SGLocationHelper.swift */; };
 		3A69C4031DEEB43700872FD1 /* Loc+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */; };
-		3A6DF060202C88EA0084CB2C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05E202C88E90084CB2C /* RxSwift.framework */; };
-		3A6DF061202C88EA0084CB2C /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */; };
-		3A6DF063202C89190084CB2C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF062202C89180084CB2C /* RxCocoa.framework */; };
 		3A6DF074202C8C6E0084CB2C /* TripKit_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF072202C8C6E0084CB2C /* TripKit_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF07B202C8C9A0084CB2C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF078202C8C990084CB2C /* RxCocoa.framework */; };
-		3A6DF07C202C8C9A0084CB2C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF079202C8C990084CB2C /* RxSwift.framework */; };
-		3A6DF07D202C8C9A0084CB2C /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF07A202C8C990084CB2C /* ASPolygonKit.framework */; };
 		3A6DF088202C8DA30084CB2C /* TripKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF086202C8DA30084CB2C /* TripKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF08D202C8E280084CB2C /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */; };
-		3A6DF08E202C8E280084CB2C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF062202C89180084CB2C /* RxCocoa.framework */; };
-		3A6DF08F202C8E280084CB2C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05E202C88E90084CB2C /* RxSwift.framework */; };
-		3A6DF092202C8E280084CB2C /* ASPolylineView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF090202C8E280084CB2C /* ASPolylineView.framework */; };
-		3A6DF093202C8E280084CB2C /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF091202C8E280084CB2C /* Kingfisher.framework */; };
 		3A6DF0F8202C8EB80084CB2C /* SGTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF097202C8EB80084CB2C /* SGTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF0F9202C8EB80084CB2C /* SGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF098202C8EB80084CB2C /* SGTableViewCell.m */; };
 		3A6DF0FA202C8EB80084CB2C /* SGCountdownCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF099202C8EB80084CB2C /* SGCountdownCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -147,9 +136,6 @@
 		3A6DF150202C8EB80084CB2C /* MapManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F7202C8EB80084CB2C /* MapManagerHelper.swift */; };
 		3A6DF152202C8F9A0084CB2C /* TripKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6231D1CD0060089F687 /* TripKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF16B202C97F70084CB2C /* TripKitInterApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF169202C97F70084CB2C /* TripKitInterApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF16F202C98510084CB2C /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */; };
-		3A6DF170202C98510084CB2C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF062202C89180084CB2C /* RxCocoa.framework */; };
-		3A6DF171202C98510084CB2C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05E202C88E90084CB2C /* RxSwift.framework */; };
 		3A6DF17B202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF176202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF17C202C98AF0084CB2C /* TKInterAppHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF177202C98AF0084CB2C /* TKInterAppHelpers.swift */; };
 		3A6DF17D202C98AF0084CB2C /* TKInterAppCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */; };
@@ -313,15 +299,6 @@
 		3A6DF2DB202C9AA00084CB2C /* UIViewController+modalController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF23E202C9AA00084CB2C /* UIViewController+modalController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2DC202C9AA00084CB2C /* UIView+Keyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF23F202C9AA00084CB2C /* UIView+Keyboard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2DD202C9AA00084CB2C /* UIView+FindFirstResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF240202C9AA00084CB2C /* UIView+FindFirstResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF2E4202C9B200084CB2C /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */; };
-		3A6DF2E5202C9B200084CB2C /* ASPolylineView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF090202C8E280084CB2C /* ASPolylineView.framework */; };
-		3A6DF2E6202C9B200084CB2C /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF091202C8E280084CB2C /* Kingfisher.framework */; };
-		3A6DF2E7202C9B200084CB2C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF062202C89180084CB2C /* RxCocoa.framework */; };
-		3A6DF2E8202C9B200084CB2C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF05E202C88E90084CB2C /* RxSwift.framework */; };
-		3A6DF2EC202C9B210084CB2C /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF2E9202C9B210084CB2C /* OAuthSwift.framework */; };
-		3A6DF2ED202C9B210084CB2C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF2EA202C9B210084CB2C /* SwiftyJSON.framework */; };
-		3A6DF2EE202C9B210084CB2C /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF2EB202C9B210084CB2C /* KeychainAccess.framework */; };
-		3A6DF2F3202C9EA90084CB2C /* KVNProgress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF2F2202C9EA90084CB2C /* KVNProgress.framework */; };
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
 		3A787ED01D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
 		3A787ED11D38F78A009F9A18 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC91D38F78A009F9A18 /* TripKitModel.xcdatamodeld */; };
@@ -371,6 +348,29 @@
 		3AA39AC71F7A3FDC0066CC94 /* regions.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AA39AC61F7A3FDC0066CC94 /* regions.json */; };
 		3AA39AC91F7A40ED0066CC94 /* TKRegionManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39AC81F7A40ED0066CC94 /* TKRegionManagerTest.swift */; };
 		3AA39ACF1F7A63BB0066CC94 /* MapKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39ACE1F7A63BA0066CC94 /* MapKit+Extensions.swift */; };
+		3AA3CE60202CD22F00E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
+		3AA3CE61202CD22F00E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
+		3AA3CE62202CD22F00E54859 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5F202CD22F00E54859 /* RxSwift.framework */; };
+		3AA3CE66202CD24100E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE63202CD24100E54859 /* ASPolygonKit.framework */; };
+		3AA3CE67202CD24100E54859 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE64202CD24100E54859 /* RxSwift.framework */; };
+		3AA3CE68202CD24100E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE65202CD24100E54859 /* RxCocoa.framework */; };
+		3AA3CE69202CD25700E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
+		3AA3CE6A202CD25700E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
+		3AA3CE6B202CD25700E54859 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5F202CD22F00E54859 /* RxSwift.framework */; };
+		3AA3CE6E202CD25700E54859 /* ASPolylineView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE6C202CD25700E54859 /* ASPolylineView.framework */; };
+		3AA3CE6F202CD25700E54859 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE6D202CD25700E54859 /* Kingfisher.framework */; };
+		3AA3CE70202CD26800E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
+		3AA3CE71202CD26800E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
+		3AA3CE72202CD26800E54859 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5F202CD22F00E54859 /* RxSwift.framework */; };
+		3AA3CE73202CD28500E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
+		3AA3CE74202CD28500E54859 /* ASPolylineView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE6C202CD25700E54859 /* ASPolylineView.framework */; };
+		3AA3CE75202CD28500E54859 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE6D202CD25700E54859 /* Kingfisher.framework */; };
+		3AA3CE76202CD28500E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
+		3AA3CE77202CD28500E54859 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5F202CD22F00E54859 /* RxSwift.framework */; };
+		3AA3CE7C202CD28600E54859 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE78202CD28600E54859 /* SwiftyJSON.framework */; };
+		3AA3CE7D202CD28600E54859 /* KVNProgress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE79202CD28600E54859 /* KVNProgress.framework */; };
+		3AA3CE7E202CD28600E54859 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE7A202CD28600E54859 /* KeychainAccess.framework */; };
+		3AA3CE7F202CD28600E54859 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE7B202CD28600E54859 /* OAuthSwift.framework */; };
 		3AA77F621F76A913001D412D /* AlertAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA77F611F76A913001D412D /* AlertAPIModels.swift */; };
 		3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */; };
 		3AABDD9B1DF7C2040044A05B /* TKLocationInfoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */; };
@@ -664,7 +664,6 @@
 		3A551D931E60D8C700332942 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A57DB5C1F17A58800946553 /* SGLocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGLocationHelper.swift; sourceTree = "<group>"; };
 		3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loc+TripKit.swift"; sourceTree = "<group>"; };
-		3A6DF05D202C85350084CB2C /* Cartfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Cartfile; sourceTree = "<group>"; };
 		3A6DF05E202C88E90084CB2C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = Carthage/Build/iOS/ASPolygonKit.framework; sourceTree = "<group>"; };
 		3A6DF062202C89180084CB2C /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -1005,6 +1004,19 @@
 		3AA39AC81F7A40ED0066CC94 /* TKRegionManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRegionManagerTest.swift; sourceTree = "<group>"; };
 		3AA39ACE1F7A63BA0066CC94 /* MapKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extensions.swift"; sourceTree = "<group>"; };
 		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = TripKitInterApp.podspec; path = ../TripKitInterApp.podspec; sourceTree = "<group>"; };
+		3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = ../Carthage/Build/iOS/ASPolygonKit.framework; sourceTree = "<group>"; };
+		3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = ../Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		3AA3CE5F202CD22F00E54859 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = ../Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		3AA3CE63202CD24100E54859 /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = ../Carthage/Build/Mac/ASPolygonKit.framework; sourceTree = "<group>"; };
+		3AA3CE64202CD24100E54859 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = ../Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
+		3AA3CE65202CD24100E54859 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = ../Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
+		3AA3CE6C202CD25700E54859 /* ASPolylineView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolylineView.framework; path = ../Carthage/Build/iOS/ASPolylineView.framework; sourceTree = "<group>"; };
+		3AA3CE6D202CD25700E54859 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = ../Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		3AA3CE78202CD28600E54859 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = ../Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		3AA3CE79202CD28600E54859 /* KVNProgress.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KVNProgress.framework; path = ../Carthage/Build/iOS/KVNProgress.framework; sourceTree = "<group>"; };
+		3AA3CE7A202CD28600E54859 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = ../Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
+		3AA3CE7B202CD28600E54859 /* OAuthSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuthSwift.framework; path = ../Carthage/Build/iOS/OAuthSwift.framework; sourceTree = "<group>"; };
+		3AA3CE80202CD2A700E54859 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		3AA77F611F76A913001D412D /* AlertAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAPIModels.swift; sourceTree = "<group>"; };
 		3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+ProductName.swift"; sourceTree = "<group>"; };
 		3AABDD9A1DF7C2040044A05B /* TKLocationInfoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationInfoTest.swift; sourceTree = "<group>"; };
@@ -1253,9 +1265,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF07D202C8C9A0084CB2C /* ASPolygonKit.framework in Frameworks */,
-				3A6DF07C202C8C9A0084CB2C /* RxSwift.framework in Frameworks */,
-				3A6DF07B202C8C9A0084CB2C /* RxCocoa.framework in Frameworks */,
+				3AA3CE66202CD24100E54859 /* ASPolygonKit.framework in Frameworks */,
+				3AA3CE67202CD24100E54859 /* RxSwift.framework in Frameworks */,
+				3AA3CE68202CD24100E54859 /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1263,11 +1275,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF092202C8E280084CB2C /* ASPolylineView.framework in Frameworks */,
-				3A6DF093202C8E280084CB2C /* Kingfisher.framework in Frameworks */,
-				3A6DF08D202C8E280084CB2C /* ASPolygonKit.framework in Frameworks */,
-				3A6DF08E202C8E280084CB2C /* RxCocoa.framework in Frameworks */,
-				3A6DF08F202C8E280084CB2C /* RxSwift.framework in Frameworks */,
+				3AA3CE69202CD25700E54859 /* ASPolygonKit.framework in Frameworks */,
+				3AA3CE6E202CD25700E54859 /* ASPolylineView.framework in Frameworks */,
+				3AA3CE6F202CD25700E54859 /* Kingfisher.framework in Frameworks */,
+				3AA3CE6B202CD25700E54859 /* RxSwift.framework in Frameworks */,
+				3AA3CE6A202CD25700E54859 /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,9 +1287,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF16F202C98510084CB2C /* ASPolygonKit.framework in Frameworks */,
-				3A6DF171202C98510084CB2C /* RxSwift.framework in Frameworks */,
-				3A6DF170202C98510084CB2C /* RxCocoa.framework in Frameworks */,
+				3AA3CE70202CD26800E54859 /* ASPolygonKit.framework in Frameworks */,
+				3AA3CE72202CD26800E54859 /* RxSwift.framework in Frameworks */,
+				3AA3CE71202CD26800E54859 /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1285,15 +1297,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF2E4202C9B200084CB2C /* ASPolygonKit.framework in Frameworks */,
-				3A6DF2E5202C9B200084CB2C /* ASPolylineView.framework in Frameworks */,
-				3A6DF2EE202C9B210084CB2C /* KeychainAccess.framework in Frameworks */,
-				3A6DF2E6202C9B200084CB2C /* Kingfisher.framework in Frameworks */,
-				3A6DF2F3202C9EA90084CB2C /* KVNProgress.framework in Frameworks */,
-				3A6DF2EC202C9B210084CB2C /* OAuthSwift.framework in Frameworks */,
-				3A6DF2E7202C9B200084CB2C /* RxCocoa.framework in Frameworks */,
-				3A6DF2E8202C9B200084CB2C /* RxSwift.framework in Frameworks */,
-				3A6DF2ED202C9B210084CB2C /* SwiftyJSON.framework in Frameworks */,
+				3AA3CE73202CD28500E54859 /* ASPolygonKit.framework in Frameworks */,
+				3AA3CE74202CD28500E54859 /* ASPolylineView.framework in Frameworks */,
+				3AA3CE7E202CD28600E54859 /* KeychainAccess.framework in Frameworks */,
+				3AA3CE75202CD28500E54859 /* Kingfisher.framework in Frameworks */,
+				3AA3CE7D202CD28600E54859 /* KVNProgress.framework in Frameworks */,
+				3AA3CE7F202CD28600E54859 /* OAuthSwift.framework in Frameworks */,
+				3AA3CE77202CD28500E54859 /* RxSwift.framework in Frameworks */,
+				3AA3CE76202CD28500E54859 /* RxCocoa.framework in Frameworks */,
+				3AA3CE7C202CD28600E54859 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1301,9 +1313,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF061202C88EA0084CB2C /* ASPolygonKit.framework in Frameworks */,
-				3A6DF060202C88EA0084CB2C /* RxSwift.framework in Frameworks */,
-				3A6DF063202C89190084CB2C /* RxCocoa.framework in Frameworks */,
+				3AA3CE60202CD22F00E54859 /* ASPolygonKit.framework in Frameworks */,
+				3AA3CE62202CD22F00E54859 /* RxSwift.framework in Frameworks */,
+				3AA3CE61202CD22F00E54859 /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1350,7 +1362,7 @@
 		3A6DF065202C8C1F0084CB2C /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF05D202C85350084CB2C /* Cartfile */,
+				3AA3CE80202CD2A700E54859 /* Cartfile */,
 				3A6DF068202C8C340084CB2C /* README.md */,
 				3A6DF06A202C8C340084CB2C /* TripKit.podspec */,
 				3A6DF067202C8C340084CB2C /* TripKitBookings.podspec */,
@@ -2495,6 +2507,18 @@
 		BF0D12F3CE39D82551585DB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AA3CE7A202CD28600E54859 /* KeychainAccess.framework */,
+				3AA3CE79202CD28600E54859 /* KVNProgress.framework */,
+				3AA3CE7B202CD28600E54859 /* OAuthSwift.framework */,
+				3AA3CE78202CD28600E54859 /* SwiftyJSON.framework */,
+				3AA3CE6C202CD25700E54859 /* ASPolylineView.framework */,
+				3AA3CE6D202CD25700E54859 /* Kingfisher.framework */,
+				3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */,
+				3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */,
+				3AA3CE65202CD24100E54859 /* RxCocoa.framework */,
+				3AA3CE5F202CD22F00E54859 /* RxSwift.framework */,
+				3AA3CE63202CD24100E54859 /* ASPolygonKit.framework */,
+				3AA3CE64202CD24100E54859 /* RxSwift.framework */,
 				3A6DF2F2202C9EA90084CB2C /* KVNProgress.framework */,
 				3A6DF2EF202C9CA70084CB2C /* KVNProgressKit.framework */,
 				3A6DF2EB202C9B210084CB2C /* KeychainAccess.framework */,
