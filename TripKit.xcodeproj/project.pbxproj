@@ -128,7 +128,7 @@
 		3A6DF150202C8EB80084CB2C /* MapManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F7202C8EB80084CB2C /* MapManagerHelper.swift */; };
 		3A6DF152202C8F9A0084CB2C /* TripKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6231D1CD0060089F687 /* TripKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF16B202C97F70084CB2C /* TripKitInterApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF169202C97F70084CB2C /* TripKitInterApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF17B202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF176202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A6DF17B202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF176202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h */; };
 		3A6DF17C202C98AF0084CB2C /* TKInterAppHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF177202C98AF0084CB2C /* TKInterAppHelpers.swift */; };
 		3A6DF17D202C98AF0084CB2C /* TKInterAppCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */; };
 		3A6DF17E202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF179202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.m */; };
@@ -2763,7 +2763,6 @@
 				3A6DF06C202C8C6E0084CB2C /* Frameworks */,
 				3A6DF06D202C8C6E0084CB2C /* Headers */,
 				3A6DF06E202C8C6E0084CB2C /* Resources */,
-				3A6DF07E202C8CCE0084CB2C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2782,7 +2781,6 @@
 				3A6DF080202C8DA30084CB2C /* Frameworks */,
 				3A6DF081202C8DA30084CB2C /* Headers */,
 				3A6DF082202C8DA30084CB2C /* Resources */,
-				3A6DF151202C8EEF0084CB2C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2802,7 +2800,6 @@
 				3A6DF163202C97F60084CB2C /* Frameworks */,
 				3A6DF164202C97F60084CB2C /* Headers */,
 				3A6DF165202C97F60084CB2C /* Resources */,
-				3A6DF180202C99000084CB2C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2822,7 +2819,6 @@
 				3A6DF182202C99D40084CB2C /* Frameworks */,
 				3A6DF183202C99D40084CB2C /* Headers */,
 				3A6DF184202C99D40084CB2C /* Resources */,
-				3A6DF2F1202C9CB40084CB2C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2843,7 +2839,6 @@
 				3AB6C61C1D1CD0060089F687 /* Frameworks */,
 				3AB6C61D1D1CD0060089F687 /* Headers */,
 				3AB6C61E1D1CD0060089F687 /* Resources */,
-				3A6DF064202C893A0084CB2C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3040,117 +3035,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A6DF064202C893A0084CB2C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ASPolygonKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolygonKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		3A6DF07E202C8CCE0084CB2C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ASPolygonKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolygonKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		3A6DF151202C8EEF0084CB2C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ASPolygonKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ASPolylineView.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolygonKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolylineView.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		3A6DF180202C99000084CB2C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ASPolygonKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolygonKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		3A6DF2F1202C9CB40084CB2C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ASPolygonKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ASPolylineView.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/KVNProgress.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/OAuthSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolygonKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolylineView.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainAccess.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KVNProgress.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OAuthSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 		6F8F5217DF2CB09427ED46EA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
