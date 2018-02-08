@@ -28,9 +28,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3A6DF083202C8DA30084CB2C"
-               BuildableName = "TripKitUI.framework"
-               BlueprintName = "TripKitUI-iOS"
+               BlueprintIdentifier = "3A6DF166202C97F60084CB2C"
+               BuildableName = "TripKitInterApp.framework"
+               BlueprintName = "TripKitInterApp-iOS"
+               ReferencedContainer = "container:TripKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3A6DF185202C99D40084CB2C"
+               BuildableName = "TripKitBookings.framework"
+               BlueprintName = "TripKitBookings-iOS"
                ReferencedContainer = "container:TripKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +61,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A6DF083202C8DA30084CB2C"
-            BuildableName = "TripKitUI.framework"
-            BlueprintName = "TripKitUI-iOS"
+            BlueprintIdentifier = "3A6DF185202C99D40084CB2C"
+            BuildableName = "TripKitBookings.framework"
+            BlueprintName = "TripKitBookings-iOS"
             ReferencedContainer = "container:TripKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -70,9 +84,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A6DF083202C8DA30084CB2C"
-            BuildableName = "TripKitUI.framework"
-            BlueprintName = "TripKitUI-iOS"
+            BlueprintIdentifier = "3A6DF185202C99D40084CB2C"
+            BuildableName = "TripKitBookings.framework"
+            BlueprintName = "TripKitBookings-iOS"
             ReferencedContainer = "container:TripKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -88,9 +102,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A6DF083202C8DA30084CB2C"
-            BuildableName = "TripKitUI.framework"
-            BlueprintName = "TripKitUI-iOS"
+            BlueprintIdentifier = "3A6DF185202C99D40084CB2C"
+            BuildableName = "TripKitBookings.framework"
+            BlueprintName = "TripKitBookings-iOS"
             ReferencedContainer = "container:TripKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
