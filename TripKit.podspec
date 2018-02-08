@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKit"
-  s.version      = "3.0.1"
+  s.version      = "3.1"
   s.summary      = "SkedGo's TripKit"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = 'Apache License, Version 2.0'
@@ -21,7 +21,10 @@ Pod::Spec.new do |s|
   s.dependency 'RxSwift', '~> 4.0.0'
   s.dependency 'RxCocoa', '~> 4.0.0'
 
-  s.source_files = "Classes/**/*.{h,m,swift}"
+  s.source_files = [
+    "Classes/**/*.{h,m,swift}",
+    "AddOns/Share/**/*"
+  ]
 
   s.resources    = [
     "Resources/*.lproj",
