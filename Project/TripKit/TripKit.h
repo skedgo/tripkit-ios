@@ -6,11 +6,7 @@
 //  Copyright © 2016 SkedGo. All rights reserved.
 //
 
-#if TARGET_OS_IPHONE
-@import UIKit;
-#else
-@import AppKit;
-#endif
+#import <Foundation/Foundation.h>
 
 //! Project version number for TripKit.
 FOUNDATION_EXPORT double TripKitVersionNumber;
