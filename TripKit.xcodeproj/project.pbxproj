@@ -155,7 +155,6 @@
 		3A6DF253202C9AA00084CB2C /* BPKBookingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1A4202C9AA00084CB2C /* BPKBookingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF254202C9AA00084CB2C /* BPKMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1A5202C9AA00084CB2C /* BPKMapViewController.swift */; };
 		3A6DF255202C9AA00084CB2C /* BPKOptionsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1A6202C9AA00084CB2C /* BPKOptionsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF256202C9AA00084CB2C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF1A7202C9AA00084CB2C /* README.md */; };
 		3A6DF257202C9AA00084CB2C /* BPKServerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1A9202C9AA00084CB2C /* BPKServerUtil.m */; };
 		3A6DF258202C9AA00084CB2C /* BPKSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1AB202C9AA00084CB2C /* BPKSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF259202C9AA00084CB2C /* BPKForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1AC202C9AA00084CB2C /* BPKForm.swift */; };
@@ -246,7 +245,6 @@
 		3A6DF2AE202C9AA00084CB2C /* AKBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF20A202C9AA00084CB2C /* AKBaseTableViewController.swift */; };
 		3A6DF2AF202C9AA00084CB2C /* AKSignUpViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF20B202C9AA00084CB2C /* AKSignUpViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2B0202C9AA00084CB2C /* AKAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF20C202C9AA00084CB2C /* AKAccountViewController.m */; };
-		3A6DF2B1202C9AA00084CB2C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF20D202C9AA00084CB2C /* README.md */; };
 		3A6DF2B2202C9AA00084CB2C /* AMKEmail.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF20F202C9AA00084CB2C /* AMKEmail.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2B3202C9AA00084CB2C /* AKFbkProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF210202C9AA00084CB2C /* AKFbkProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2B4202C9AA00084CB2C /* AMKCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF212202C9AA00084CB2C /* AMKCommunicator.m */; };
@@ -2987,10 +2985,8 @@
 				3A6DF27E202C9AA00084CB2C /* BPKDatePickerCell.xib in Resources */,
 				3A6DF2C9202C9AA00084CB2C /* AKSignUpHeader.xib in Resources */,
 				3A6DF2CE202C9AA00084CB2C /* AKTextFieldCell.xib in Resources */,
-				3A6DF256202C9AA00084CB2C /* README.md in Resources */,
 				3A6DF24F202C9AA00084CB2C /* BPKPaymentTestViewController.xib in Resources */,
 				3A6DF2D2202C9AA00084CB2C /* AKLabelCell.xib in Resources */,
-				3A6DF2B1202C9AA00084CB2C /* README.md in Resources */,
 				3A6DF28C202C9AA00084CB2C /* BPKActionOverlay.xib in Resources */,
 				3A6DF272202C9AA00084CB2C /* BPKTextFieldCell.xib in Resources */,
 				3A6DF286202C9AA00084CB2C /* BPKMessageCell.xib in Resources */,
