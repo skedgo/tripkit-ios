@@ -1,7 +1,8 @@
 language: objective-c
 osx_image: xcode9
-podfile: Project/Podfile
-cache: cocoapods
+cache:
+  directories:
+    - Carthage
 
 env:
   global:
