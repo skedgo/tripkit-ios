@@ -9,6 +9,7 @@
 import XCTest
 
 @testable import TripKit
+@testable import TripKitBookings
 
 class TKLinkedAccountTest: XCTestCase {
     
