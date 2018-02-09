@@ -205,7 +205,7 @@ typedef void (^SGCalendarResultsBlock)(NSString *string, NSArray *results);
 - (NSArray *)autocompleteFast:(NSString *)string forMapRect:(MKMapRect)mapRect
 {
 #pragma unused(mapRect) // no filtering based on map rect for events
-  if (! string) {
+  if (string.length == 0) {
     return nil;
   }
 

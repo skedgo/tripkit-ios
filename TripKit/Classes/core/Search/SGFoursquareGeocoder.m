@@ -95,7 +95,7 @@
                 forMapRect:(MKMapRect)mapRect
                 completion:(SGAutocompletionDataResultBlock)completion
 {
-  if (! string || string.length == 0) {
+  if (string.length == 0) {
     completion(nil);
     return;
   }
