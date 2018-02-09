@@ -128,7 +128,7 @@
 		3A6DF150202C8EB80084CB2C /* MapManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F7202C8EB80084CB2C /* MapManagerHelper.swift */; };
 		3A6DF152202C8F9A0084CB2C /* TripKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6231D1CD0060089F687 /* TripKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF16B202C97F70084CB2C /* TripKitInterApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF169202C97F70084CB2C /* TripKitInterApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF17B202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF176202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h */; };
+		3A6DF17B202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF176202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF17C202C98AF0084CB2C /* TKInterAppHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF177202C98AF0084CB2C /* TKInterAppHelpers.swift */; };
 		3A6DF17D202C98AF0084CB2C /* TKInterAppCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */; };
 		3A6DF17E202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF179202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.m */; };
@@ -1569,10 +1569,10 @@
 			isa = PBXGroup;
 			children = (
 				3A6DF176202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h */,
-				3A6DF177202C98AF0084CB2C /* TKInterAppHelpers.swift */,
-				3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */,
 				3A6DF179202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.m */,
 				3A6DF17A202C98AF0084CB2C /* TKInterAppCommunicator.h */,
+				3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */,
+				3A6DF177202C98AF0084CB2C /* TKInterAppHelpers.swift */,
 			);
 			path = InterApp;
 			sourceTree = "<group>";
@@ -4152,7 +4152,7 @@
 				3AA3CEE0202CD70400E54859 /* 6-SegmentRealTimeVehicle.xcdatamodel */,
 				3AA3CEE1202CD70400E54859 /* 5-PlannedTrip.xcdatamodel */,
 			);
-			currentVersion = 3AA3CEDC202CD70400E54859 /* 4-Classifications.xcdatamodel */;
+			currentVersion = 3AA3CEE0202CD70400E54859 /* 6-SegmentRealTimeVehicle.xcdatamodel */;
 			path = TripKitModel.xcdatamodeld;
 			sourceTree = SOURCE_ROOT;
 			versionGroupType = wrapper.xcdatamodel;
