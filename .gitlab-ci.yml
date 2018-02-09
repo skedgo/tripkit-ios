@@ -4,16 +4,15 @@ stages:
 build_code:
   stage: build
   script:
-    - cd Project
     - export LC_ALL="en_US.UTF-8" # Fixes cocoapods + xcpretty (clean)
-    - pod update
+    - carthage update --cache-builds
     - xcodebuild clean -workspace TripKit.xcworkspace -scheme TripKit | xcpretty -c
     - xcodebuild test -workspace TripKit.xcworkspace -scheme TripKit -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
-      - Project/Pods
-      - Project/Podfile.lock
+      - Carthage/Build
+      - Carthage/Checkouts
   artifacts:
     paths:
     - Project/build/reports/tests.html
