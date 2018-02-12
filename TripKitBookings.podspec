@@ -27,7 +27,10 @@ Pod::Spec.new do |s|
   s.dependency 'SwiftyJSON'
   s.dependency 'KVNProgress'
 
-  s.source_files = "AddOns/Bookings/**/*.{h,m,swift}"
-  s.resources = "AddOns/Bookings/**/*.{xib}"
+  s.source_files = [
+    "TripKitBookings-iOS/*.h",
+    "TripKit/AddOns/Bookings/**/*.{h,m,swift}"
+  ]
+  s.resources = "TripKit/AddOns/Bookings/**/*.{xib}"
 
 end

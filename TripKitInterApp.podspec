@@ -17,5 +17,5 @@ Pod::Spec.new do |s|
   s.prefix_header_file = "prefix.pch"
 
   s.dependency 'TripKit', "~> #{s.version}"
-  s.source_files = "AddOns/InterApp/**/*.{h,m,swift}"
+  s.source_files = "TripKit/AddOns/InterApp/**/*.{h,m,swift}"
 end

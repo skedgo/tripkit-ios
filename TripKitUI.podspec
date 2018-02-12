@@ -25,7 +25,10 @@ Pod::Spec.new do |s|
   s.dependency 'RxSwift', '~> 4.0.0'
   s.dependency 'RxCocoa', '~> 4.0.0'
 
-  s.source_files = "TripKitUI/**/*.{h,m,swift}"
+  s.source_files = [
+    "TripKitUI-iOS/*.h",
+    "TripKitUI/**/*.{h,m,swift}"
+  ]
   s.resources    = [
     "Resources/TripKitUI.*",
     "TripKitUI/**/*.xib"
