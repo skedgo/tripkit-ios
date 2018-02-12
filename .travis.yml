@@ -31,7 +31,7 @@ script:
 
 before_deploy:
 - carthage build --no-skip-current
-- carthage archive TripKit
+- carthage archive TripKit TripKitUI TripKitBookings TripKitInterApp
 
 deploy:
   provider: releases
