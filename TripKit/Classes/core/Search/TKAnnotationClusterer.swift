@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 protocol TKClusterable: MKAnnotation {
   var clusterIdentifier: String? { get }

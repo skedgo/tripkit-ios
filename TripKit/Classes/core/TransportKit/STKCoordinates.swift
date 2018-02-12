@@ -104,7 +104,12 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation, TKGlyphable
   public var glyphImage: SGKImage? {
     guard let imageName = stopModeInfo.localImageName else { return nil }
     let image = SGStyleManager.image(forModeImageName: imageName, isRealTime: false, of: .listMainMode)
-    return image?.withRenderingMode(.alwaysTemplate)
+    #if os(iOS) || os(tvOS)
+      return image?.withRenderingMode(.alwaysTemplate)
+    #else
+      return image
+    #endif
+
   }
   
   public var glyphImageURL: URL? {
