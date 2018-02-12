@@ -7,39 +7,50 @@ Additional documentation is available on the [TripGo Developer page](http://sked
 
 ## Components
 
-- TripKit (iOS, iOS extension, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
-- TripKitUI (iOS): UI elements for displaying trips on a map and TripGo-styled table cells.
+- TripKit (iOS, iOS extensions, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
+- TripKitUI (iOS, iOS extensions): UI elements for displaying trips on a map and TripGo-styled table cells.
 - TripKitBookings (iOS): User accounts and in-app booking functionality.
-- TripKitAddOns/InterApp (iOS): Helpers for deep linking into other apps, such as FlitWays, GoCatch, Ingogo, Lyft, Ola and Uber.
-- TripKitAddOns/Share (iOS, iOS extensions, macOS): Helpers for creating shareable links to trips, services, transit stops, and meeting locations, that open in TripGo's web app.
+- TripKitInterApp (iOS): Helpers for deep linking into other apps, such as FlitWays, GoCatch, Ingogo, Lyft, Ola and Uber.
 
 ## Installation
 
-### Cocoapods (recommended)
+### Cocoapods
 
 Add desired pods:
 
 ```ruby
-  pod 'TripKit',                '~> 3.0.1'
-  pod 'TripKitUI',              '~> 3.0.1'
-  pod 'TripKitBookings',        '~> 3.0.1'
-  pod 'TripKitAddOns/InterApp', '~> 3.0.1'
-  pod 'TripKitAddOns/Share',    '~> 3.0.1'
+  pod 'TripKit',                '~> 3.1'
+  pod 'TripKitUI',              '~> 3.1'
+  pod 'TripKitBookings',        '~> 3.1'
+  pod 'TripKitInterApp',        '~> 3.1'
 ```
 
-This is the recommended way as it let's you cherry-pick the desired components and if you use any of TripKit's dependencies, such as [RxSwift](https://github.com/ReactiveX/RxSwift), you'll end up with only a single copy of that.
-
 ### Carthage
-
-TripKit with all its components is also available through Carthage. Note that this means that it's currently supprting iOS only.
 
 Add this to your `Cartfile`:
 
 ```
-github "skedgo/tripkit-ios" "v3.0.1"
+github "skedgo/tripkit-ios" ~> 3.1
 ```
 
-Then run `carthage update` and add the framework to your project as described in [the Carthage docs](https://github.com/Carthage/Carthage).
+Then run `carthage update` and add the desired framework to your project as described in [the Carthage docs](https://github.com/Carthage/Carthage).
+
+When doing so, you'll need to add the respective dependencies:
+
+- TripKit / TripKitInterApp:
+  - ASPolygonKit
+  - RxSwift
+  - RxCocoa
+- TripKitUI:
+  - Those of TripKit, plus:
+  - ASPolylineView
+  - Kingfisher
+- TripKitBookings:
+  - Those of TripKitUI, plus:
+  - KeychainAccess
+  - OAuthSwift
+  - KVNProgress
+  - SwiftyJSON
 
 ### Manually
 

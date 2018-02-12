@@ -1,21 +1,84 @@
 stages:
   - build
 
-build_code:
+variables:
+  LC_ALL: "en_US.UTF-8"
+  LANG: "en_US.UTF-8"
+
+before_script:
+  - carthage bootstrap --cache-builds
+
+build_ios_base:
   stage: build
   script:
-    - cd Project
-    - export LC_ALL="en_US.UTF-8" # Fixes cocoapods + xcpretty (clean)
-    - pod update
-    - xcodebuild clean -workspace TripKit.xcworkspace -scheme TripKit | xcpretty -c
-    - xcodebuild test -workspace TripKit.xcworkspace -scheme TripKit -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+    - xcodebuild test -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
-      - Project/Pods
-      - Project/Podfile.lock
+      - Carthage/Build
+      - Carthage/Checkouts
   artifacts:
     paths:
-    - Project/build/reports/tests.html
+    - build/reports/tests_ios.html
+  tags:
+    - ios
+
+build_ios_ui:
+  stage: build
+  script:
+    - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+  cache:
+    key: "$CI_BUILD_REF_NAME" # per-branch caching
+    paths:
+      - Carthage/Build
+      - Carthage/Checkouts
+  artifacts:
+    paths:
+    - build/reports/build_ios_ui.html
+  tags:
+    - ios
+
+build_ios_interapp:
+  stage: build
+  script:
+    - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+  cache:
+    key: "$CI_BUILD_REF_NAME" # per-branch caching
+    paths:
+      - Carthage/Build
+      - Carthage/Checkouts
+  artifacts:
+    paths:
+    - build/reports/build_ios_interapp.html
+  tags:
+    - ios
+
+build_ios_bookings:
+  stage: build
+  script:
+    - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitBookings-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+  cache:
+    key: "$CI_BUILD_REF_NAME" # per-branch caching
+    paths:
+      - Carthage/Build
+      - Carthage/Checkouts
+  artifacts:
+    paths:
+    - build/reports/build_ios_bookings.html
+  tags:
+    - ios
+
+build_mac_base:
+  stage: build
+  script:
+    - xcodebuild build -project TripKit.xcodeproj -scheme "TripKit-macOS" | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+  cache:
+    key: "$CI_BUILD_REF_NAME" # per-branch caching
+    paths:
+      - Carthage/Build
+      - Carthage/Checkouts
+  artifacts:
+    paths:
+    - build/reports/build_macos.html
   tags:
     - ios

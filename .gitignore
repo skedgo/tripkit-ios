@@ -29,3 +29,5 @@ Project/Pods
 /Project/TripKit.framework.zip
 /Examples/MiniMap/Podfile.lock
 /Examples/MiniMap/Pods
+/Project/Carthage
+/Carthage
