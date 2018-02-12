@@ -43,7 +43,7 @@ public class SVKRegion : NSObject, Codable {
       return MKMapRect(origin: center, size: size)
     }
     
-    init(title: String, coordinate: CLLocationCoordinate2D) {
+    public init(title: String, coordinate: CLLocationCoordinate2D) {
       self.title = title
       self.coordinate = coordinate
     }
@@ -88,7 +88,12 @@ public class SVKRegion : NSObject, Codable {
     return MKPolygon(coordinates: coordinates, count: coordinates.count)
   }()
   
-  init(name: String, modes: [String], cities: [City]) {
+  /// - warning: Only use this for testing purposes, do not pass
+  ///     instances created this way to methods that needs
+  ///     a region. Instead use the various helpers in
+  ///     `TKRegionManager` instead.
+  ///
+  public init(forTestingWithName name: String, modes: [String], cities: [City]) {
     self.name = name
     self.modeIdentifiers = modes
     self.cities = cities

@@ -209,12 +209,12 @@ public class OAuthClient {
   /// Saves the state of a client and its authorisation parameters from the
   /// file at the provided URL to the keychain.
   ///
-  /// - note: This should **only** be called from tests.
+  /// - warning: Not meant to be called directly, except for testing purposes.
   ///
   /// - parameter url: URL To file from which to restore state.
   /// - returns: If credentials could be read from the provided URL.
   @discardableResult
-  static func saveState(fromFile url: URL) -> Bool {
+  public static func saveState(fromFile url: URL) -> Bool {
     
     // Unwrap and package up, to make sure that the contents of the file
     // are what we expect. If we just saved it to the keychain, we could
@@ -234,9 +234,8 @@ public class OAuthClient {
   
   /// Restores a client and the parameters sent to its `authorize` method.
   ///
-  /// - note: This is not private, so that it can be tested. Outside of
-  ///     tests it should not be called externally.
-  static func restore() -> (AuthorizeParameters, OAuth2Swift?)? {
+  /// - warning: Not meant to be called directly, except for testing purposes.
+  public static func restore() -> (AuthorizeParameters, OAuth2Swift?)? {
     guard
       let data = keychain[data: "OAuthClientState"],
       let state = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any],
@@ -250,16 +249,18 @@ public class OAuthClient {
   }
 
   
-  /// Clears in-memory caches. Useful for testing to simulate
-  /// the app getting killed.
-  static func clearMemoryCaches() {
+  /// Clears in-memory caches.
+  ///
+  /// - warning: Not meant to be called directly, except for testing purposes to simulate that the app got killed.
+  public static func clearMemoryCaches() {
     shared.client = nil
   }
 
   
-  /// Clears persistent caches. Useful for troubleshooting and
-  /// for testing from a clean slate.
-  static func clearFileCaches() {
+  /// Clears persistent caches.
+  ///
+  /// - warning: Not meant to be called directly, except for testing purposes and troubleshooting.
+  public static func clearFileCaches() {
     do {
       try keychain.removeAll()
     } catch {
@@ -290,7 +291,7 @@ extension String {
 }
 
 
-class AuthorizeParameters : NSObject, NSCoding {
+public class AuthorizeParameters : NSObject, NSCoding {
   let mode: String
   let form: BPKForm
   let callbackURL: URL
@@ -307,7 +308,7 @@ class AuthorizeParameters : NSObject, NSCoding {
     super.init()
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     guard
       let mode = aDecoder.decodeObject(forKey: "mode") as? String,
       let rawForm = aDecoder.decodeObject(forKey: "rawForm") as? [AnyHashable: Any],
@@ -324,7 +325,7 @@ class AuthorizeParameters : NSObject, NSCoding {
     self.state = state
   }
   
-  func encode(with aCoder: NSCoder) {
+  public func encode(with aCoder: NSCoder) {
     aCoder.encode(mode, forKey: "mode")
     aCoder.encode(form.rawForm, forKey: "rawForm")
     aCoder.encode(callbackURL.absoluteString, forKey: "callbackURL")
