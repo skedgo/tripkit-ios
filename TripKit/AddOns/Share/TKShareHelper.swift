@@ -15,6 +15,17 @@ public class TKShareHelper: NSObject {
   }
 }
 
+// MARK: - Trip URLs
+
+extension TKShareHelper {
+
+  @objc public static func isTripURL(_ url: URL) -> Bool {
+    return url.lastPathComponent == "trip.json" || url.path.range(of: "/trip/") != nil
+  }
+
+}
+
+
 // MARK: - Query URLs
 
 //+ (void)geocodeString:(NSString *)string
