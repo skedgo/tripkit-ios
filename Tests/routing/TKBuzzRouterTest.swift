@@ -96,7 +96,7 @@ class TKBuzzRouterTest: TKTestCase {
   
   func testTripCache() throws {
     let identifier = "Test"
-    let directory = TKJSONCacheDirectory.documents // where TKBuzzRouter keeps its trips
+    let directory = TKFileCacheDirectory.documents // where TKBuzzRouter keeps its trips
     let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
 
     // 0. Clear

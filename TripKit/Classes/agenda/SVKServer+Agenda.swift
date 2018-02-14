@@ -18,9 +18,10 @@ public enum TKAgendaUploadResult {
 }
 
 public enum TKAgendaFetchResult<T> {
-  case success(T)
-  case calculating
-  case noChange
+  case cached(T)    // Cached result, might be followed by .success(T) if it changed
+  case success(T)   // Newly calculated result
+  case noChange     // Cached result still valid
+  case calculating  // New agenda still being calculated
 }
 
 public enum TKAgendaError: Error {
@@ -72,6 +73,8 @@ extension Reactive where Base: SVKServer {
       return Observable.error(error)
     }
     
+    TKFileCache.clearAgenda(forDateString: dateString)
+    
     return hit(.POST, path: "agenda/\(dateString)/input", parameters: paras ?? [:])
       .map { status, body, data -> TKAgendaUploadResult in
         switch status {
@@ -112,6 +115,8 @@ extension Reactive where Base: SVKServer {
       return Observable.error(TKAgendaError.userIsNotLoggedIn)
     }
     
+    TKFileCache.clearAgenda(forDateString: dateString)
+
     return hit(.DELETE, path: "agenda/\(dateString)/input")
       .map { status, body, data -> Bool in
         switch status {
@@ -137,23 +142,36 @@ extension Reactive where Base: SVKServer {
   /// repeated `.calculating` callbacks every second or so.
   ///
   /// If the agenda content for the day was previously fetched
-  /// and cached on the device, you can provide the hash code. In that
-  /// case you'll only get a `.noChange` if there was no change.
+  /// and cached on the device, you'll first get a `.cached` and then
+  /// either a `.noChange` or `.success` depending on whether the
+  /// the cached copy is still valid or a new agenda is available.
   ///
   /// - Parameters:
   ///   - components: The day for which to fetch the agenda
-  ///   - hashCode: Optional hash code of previously returned agend
   /// - Returns: Observable as described in notes
-  public func fetchAgenda(for components: DateComponents, hashCode: Int? = nil) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
+  public func fetchAgenda(for components: DateComponents) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
     
     guard let dateString = components.dateString else {
       preconditionFailure("Bad components!")
     }
     
+    return TKFileCache.readAgenda(forDateString: dateString)
+      .flatMapLatest { cached -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
+        let fetch = SVKServer.shared.rx.fetchAgenda(for: components, dateString: dateString, hashCode: cached?.hashCode)
+        if let cached = cached {
+          return fetch.startWith(.cached(cached))
+        } else {
+          return fetch
+        }
+      }
+  }
+
+  private func fetchAgenda(for components: DateComponents, dateString: String, hashCode: Int?) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
+
     guard let _ = SVKServer.userToken() else {
       return Observable.error(TKAgendaError.userIsNotLoggedIn)
     }
-
+    
     var path = "agenda/\(dateString)?v=\(TKSettings.parserJsonVersion)"
     if let hashCode = hashCode {
       path.append("&hashCode=\(hashCode)")
@@ -169,10 +187,9 @@ extension Reactive where Base: SVKServer {
         switch status {
         case 200:
           guard let data = data, let response = body as? [String: Any] else { throw TKAgendaError.unexpectedResponse(status, body) }
-          let decoder = JSONDecoder()
-          decoder.dateDecodingStrategy = .iso8601
-          let output = try decoder.decode(TKAgendaOutput.self, from: data)
-          return try output.addTrips(fromResponse: response).map { .success($0) }
+          let result = try TKAgendaOutput.parse(from: data, body: response)
+          TKFileCache.saveAgenda(data, forDateString: dateString)
+          return result.map { .success($0) }
           
         case 299: return Observable.just(.calculating)
         case 304: return Observable.just(.noChange)
@@ -189,6 +206,8 @@ extension Reactive where Base: SVKServer {
     guard let _ = SVKServer.userToken() else {
       return Observable.error(TKAgendaError.userIsNotLoggedIn)
     }
+    
+    // TODO: Cache this, too!
     
     return hit(.GET, path: "agenda/summary")
       .map { status, body, data -> TKAgendaSummary in
@@ -209,6 +228,21 @@ extension Reactive where Base: SVKServer {
   
 }
 
+@available(iOS 10.0, *)
+extension TKAgendaOutput {
+  
+  static func parse(from data: Data, body: [String: Any]? = nil) throws -> Observable<TKAgendaOutput> {
+    guard let response = try (body ?? (try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any])) else {
+      throw TKAgendaError.unexpectedResponse(0, body)
+    }
+    
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    let output = try decoder.decode(TKAgendaOutput.self, from: data)
+    return try output.addTrips(fromResponse: response)
+  }
+  
+}
 
 extension DateComponents {
   

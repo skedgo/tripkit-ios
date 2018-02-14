@@ -744,6 +744,8 @@
 		3AE194E5202DE32E0007B49B /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE194E3202DE32D0007B49B /* RxBlocking.framework */; };
 		3AE194E6202DE32E0007B49B /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE194E4202DE32E0007B49B /* RxTest.framework */; };
 		3AEB43EC1F757C1F00FA3289 /* TKDeparturesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB43EB1F757C1E00FA3289 /* TKDeparturesProvider.swift */; };
+		3AEBC26B20348E000017CFA4 /* TKFileCache+Agenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEBC26A20348E000017CFA4 /* TKFileCache+Agenda.swift */; };
+		3AEBC26C20348E000017CFA4 /* TKFileCache+Agenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEBC26A20348E000017CFA4 /* TKFileCache+Agenda.swift */; };
 		3AF3F2621E04CA7C00A2EEC6 /* TKBookingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */; };
 		3AF3F2641E04CA8C00A2EEC6 /* TKLocationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */; };
 		3AF94B121F0BF79800500940 /* TKSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B111F0BF79800500940 /* TKSettings.swift */; };
@@ -1420,6 +1422,7 @@
 		3AE194E3202DE32D0007B49B /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		3AE194E4202DE32E0007B49B /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		3AEB43EB1F757C1E00FA3289 /* TKDeparturesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKDeparturesProvider.swift; sourceTree = "<group>"; };
+		3AEBC26A20348E000017CFA4 /* TKFileCache+Agenda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKFileCache+Agenda.swift"; sourceTree = "<group>"; };
 		3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingTypes.swift; sourceTree = "<group>"; };
 		3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationTypes.swift; sourceTree = "<group>"; };
 		3AF94B111F0BF79800500940 /* TKSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSettings.swift; sourceTree = "<group>"; };
@@ -2196,11 +2199,12 @@
 		3A79C740203342CC00748DD1 /* agenda */ = {
 			isa = PBXGroup;
 			children = (
-				3A79C741203342CC00748DD1 /* TKAgendaOutput+Trips.swift */,
-				3A79C742203342CC00748DD1 /* TKAgendaInput.swift */,
 				3A79C743203342CC00748DD1 /* SVKServer+Agenda.swift */,
-				3A79C744203342CC00748DD1 /* TKAgendaSummary.swift */,
+				3AEBC26A20348E000017CFA4 /* TKFileCache+Agenda.swift */,
+				3A79C742203342CC00748DD1 /* TKAgendaInput.swift */,
 				3A79C745203342CC00748DD1 /* TKAgendaOutput.swift */,
+				3A79C741203342CC00748DD1 /* TKAgendaOutput+Trips.swift */,
+				3A79C744203342CC00748DD1 /* TKAgendaSummary.swift */,
 			);
 			path = agenda;
 			sourceTree = "<group>";
@@ -3505,6 +3509,7 @@
 				3ABBDA212032132400205042 /* TKDeparturesProvider.swift in Sources */,
 				3ABBDA342032132400205042 /* TKSettings.m in Sources */,
 				3ABBDACD2032135400205042 /* SGKLog.m in Sources */,
+				3AEBC26C20348E000017CFA4 /* TKFileCache+Agenda.swift in Sources */,
 				3ABBDA902032134400205042 /* SGTrack.swift in Sources */,
 				3ABBDA8C2032134000205042 /* STKTripAndSegments.swift in Sources */,
 				3ABBDAD72032135A00205042 /* MapKit+Extensions.swift in Sources */,
@@ -3916,6 +3921,7 @@
 				3AFFABA71F06854F00147990 /* UIImage+Variations.m in Sources */,
 				3A79C74C203342CC00748DD1 /* TKAgendaSummary.swift in Sources */,
 				3AFFAB9C1F06854F00147990 /* NSManagedObjectContext+SimpleFetch.m in Sources */,
+				3AEBC26B20348E000017CFA4 /* TKFileCache+Agenda.swift in Sources */,
 				3AA77F621F76A913001D412D /* AlertAPIModels.swift in Sources */,
 				3AB6C6CB1D1CD08E0089F687 /* TKPriceTimeTripClassifier.m in Sources */,
 				3AE04BE61DEE392800462CB3 /* TKTripPattern.swift in Sources */,

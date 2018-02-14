@@ -12,7 +12,7 @@ import RxSwift
 import RxTest
 import RxBlocking
 
-import TripKit
+@testable import TripKit
 
 @available(iOS 10.0, *)
 class TKAgendaTest: XCTestCase {
@@ -36,12 +36,15 @@ class TKAgendaTest: XCTestCase {
     let env = ProcessInfo.processInfo.environment
     TripKit.apiKey = env["TRIPGO_API_KEY"]!
     
-    // for now we have to run against the local server
+    // for now we have to run against the local or beta server
     // TODO: Fix this (should be production ideally)
-    SVKServer.serverType = .local
+    SVKServer.serverType = .beta
     
     // these tests need a fake token
     SVKServer.updateUserToken("tripkit-ios-tester-token")
+    
+    // Always start with a clear cache
+    TKFileCache.clearAllAgendas()
     
     // rx test boilderplate
     disposeBag = DisposeBag()
@@ -132,8 +135,24 @@ class TKAgendaTest: XCTestCase {
   }
   
   /// Similar to Juptyer notebook Flow 2
-  func testCachingResult() {
-    XCTFail("Not implemented yet")
+  /// 1. POST
+  /// 2. GET results
+  /// 3. Cache results and pretend app died
+  /// 4. GET results again, passing hash code, should get 304 not modified
+  func testCachingResult() throws {
+    let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
+    let result1 = try upload.toBlocking().toArray()
+    XCTAssertEqual(result1, [TKAgendaUploadResult.success])
+    
+    let fetch = SVKServer.shared.rx.fetchAgenda(for: components)
+    let result2 = try fetch.toBlocking(timeout: 120).toArray()
+    guard case .success(let output)? = result2.last else { XCTFail(); return }
+
+    let fetch2 = SVKServer.shared.rx.fetchAgenda(for: components)
+    let result3 = try fetch2.toBlocking(timeout: 120).toArray()
+    guard case .cached(let cached)? = result3.first else { XCTFail(); return }
+    guard case .noChange? = result3.last else { XCTFail(); return }
+    XCTAssertEqual(cached.hashCode, output.hashCode)
   }
   
   /// Similar to Juptyer notebook Flow 3
