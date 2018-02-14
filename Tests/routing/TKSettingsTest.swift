@@ -19,7 +19,7 @@ class TKSettingsTest: XCTestCase {
   func testDefaultValues() {
     let config = TKSettings.Config()
     XCTAssertEqual(config.version, TKSettings.parserJsonVersion)
-    XCTAssertEqual(config.distanceUnit, .auto)
+    XCTAssertEqual(config.distanceUnit, Locale.current.usesMetricSystem ? .metric : .imperial)
     XCTAssertEqual(config.weights, [.money: 1.0, .carbon: 1.0, .time: 1.0, .hassle: 1.0])
     XCTAssertEqual(config.avoidModes, [])
     XCTAssertEqual(config.concession, false)

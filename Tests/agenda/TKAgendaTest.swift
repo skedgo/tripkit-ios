@@ -94,12 +94,6 @@ class TKAgendaTest: XCTestCase {
     XCTAssertEqual(result2, [true])
   }
   
-  /// Tests uploading an input and then downloading again, making
-  /// sure that it parses correctly both ways.
-  func testUploadingThenDownloadingInput() throws {
-    XCTFail("Not implemented yet")
-  }
-  
   /// Similar to Juptyer notebook Flow 1
   func testCreateOnDemandFlow() throws {
     let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
