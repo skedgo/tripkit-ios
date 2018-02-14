@@ -8,7 +8,18 @@
 
 
 // Dependencies
+@import Contacts;
 @import CoreData;
+@import CoreLocation;
+@import MapKit;
+
+#if TARGET_OS_IPHONE
+@import QuartzCore;
+@import CoreImage;
+@import UIKit;
+#else
+@import AppKit;
+#endif
 
 // Kits
 #import "SGRootKit.h"
