@@ -1704,13 +1704,13 @@
 		3A6DF0A0202C8EB80084CB2C /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF0A1202C8EB80084CB2C /* SGMapButtonView.h */,
 				3A6DF0A2202C8EB80084CB2C /* ASMapManager.h */,
-				3A6DF0A3202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h */,
-				3A6DF0A4202C8EB80084CB2C /* SGMapHelper.h */,
-				3A6DF0A5202C8EB80084CB2C /* SGMapButtonView.m */,
 				3A6DF0A6202C8EB80084CB2C /* ASMapManager.m */,
+				3A6DF0A3202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h */,
 				3A6DF0A7202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m */,
+				3A6DF0A1202C8EB80084CB2C /* SGMapButtonView.h */,
+				3A6DF0A5202C8EB80084CB2C /* SGMapButtonView.m */,
+				3A6DF0A4202C8EB80084CB2C /* SGMapHelper.h */,
 				3A6DF0A8202C8EB80084CB2C /* SGMapHelper.m */,
 				3A6DF0A9202C8EB80084CB2C /* TKMapButtonView.swift */,
 			);

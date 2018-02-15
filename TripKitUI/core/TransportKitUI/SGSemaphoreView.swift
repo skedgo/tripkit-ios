@@ -28,7 +28,7 @@ extension SGSemaphoreView {
     if let custom = customHeadImage {
       return custom
     } else {
-      return TripKitUIBundle.imageNamed("map-pin-base")
+      return TripKitUIBundle.imageNamed("map-pin-head")
     }
   }
 
