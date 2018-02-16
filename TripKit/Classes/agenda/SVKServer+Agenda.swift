@@ -146,6 +146,15 @@ extension Reactive where Base: SVKServer {
   /// either a `.noChange` or `.success` depending on whether the
   /// the cached copy is still valid or a new agenda is available.
   ///
+  ///         .─.
+  ///  ──────(   )                            readCache
+  ///         `┬'
+  ///          │
+  ///         .┴.      .─.      .─.      .─.
+  ///        (███)────(   )────(   )────(   ) fetchAgenda
+  ///         `─'      `─'      `─'      `─'
+  ///      .cached      .calculating   .success
+  ///
   /// - Parameters:
   ///   - components: The day for which to fetch the agenda
   /// - Returns: Observable as described in notes
@@ -156,8 +165,9 @@ extension Reactive where Base: SVKServer {
     }
     
     return TKFileCache.readAgenda(forDateString: dateString)
-      .flatMapLatest { cached -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
-        let fetch = SVKServer.shared.rx.fetchAgenda(for: components, dateString: dateString, hashCode: cached?.hashCode)
+      .flatMapLatest { [weak base] cached -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
+        guard let base = base else { return Observable.never() }
+        let fetch = base.rx.fetchAgenda(for: components, dateString: dateString, hashCode: cached?.hashCode)
         if let cached = cached {
           return fetch.startWith(.cached(cached))
         } else {
@@ -165,7 +175,7 @@ extension Reactive where Base: SVKServer {
         }
       }
   }
-
+  
   private func fetchAgenda(for components: DateComponents, dateString: String, hashCode: Int?) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
 
     guard let _ = SVKServer.userToken() else {
@@ -198,6 +208,72 @@ extension Reactive where Base: SVKServer {
         default:  throw TKAgendaError.unexpectedResponse(status, body)
         }
       }
+  }
+  
+  
+  /// Helper method which reads from the cache, then does an upload and finally fetches the new agenda
+  ///
+  ///         .─.
+  ///  ──────(   )                            readCache
+  ///         `┬'
+  ///          │
+  ///          │       .─.
+  ///          ┣──────(   )                   upload
+  ///          ┃       `┬'
+  ///          ┃        │
+  ///         .┻.       │       .─.      .─.
+  ///        (███)━━━━━━┻──────(   )────(   ) fetchAgenda
+  ///         `─'               `─'      `─'
+  ///      .cached         .calculating .success
+  ///
+  /// - Parameters:
+  ///   - input: Agenda input for that day
+  ///   - components: Day for which that input applies
+  ///   - overwritingDeviceId: If the agenda for that day is locked by
+  ///       another device, it can be switched to this device by providing
+  ///       the owners device ID as a confirmation.
+  /// - Returns: Observable as describes in notes.
+  public func updateAgenda(_ input: TKAgendaInput, for components: DateComponents, overwritingDeviceId: String? = nil) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
+    
+    guard let dateString = components.dateString else {
+      preconditionFailure("Bad components!")
+    }
+    
+    // This starts with (1) reading the cache...
+    return TKFileCache.readAgenda(forDateString: dateString)
+      .flatMapLatest { [weak base] cached -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
+        guard let base = base else { return Observable.never() }
+
+        // Then we do the (2) upload...
+        let uploadThenFetch = base.rx
+          .uploadAgenda(input, for: components, overwritingDeviceId: overwritingDeviceId)
+          .flatMapLatest { [weak base] result -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
+            guard let base = base else { return Observable.never() }
+            
+            // ... and (3) fetching for results if upload was successful,
+            // making sure we call the method that doesn't do the caching,
+            // and not POST'ing a hash code as we just uploaded.
+            switch result {
+            case .success: return base.rx.fetchAgenda(for: components, dateString: dateString, hashCode: nil)
+            }
+          }.map { fetched -> TKAgendaFetchResult<TKAgendaOutput> in
+            // ... ignoring anything where the result stayed the same
+            // as what we had cached even though we uploaded again.
+            if case .success(let new) = fetched, new.hashCode == cached?.hashCode {
+              return .noChange
+            } else {
+              return fetched
+            }
+          }
+
+        // ... and finally, we make sure the whole sequence starts
+        // with the cached result
+        if let cached = cached {
+          return uploadThenFetch.startWith(.cached(cached))
+        } else {
+          return uploadThenFetch
+        }
+    }
   }
   
   

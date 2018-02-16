@@ -141,12 +141,33 @@ class TKAgendaTest: XCTestCase {
     let fetch = SVKServer.shared.rx.fetchAgenda(for: components)
     let result2 = try fetch.toBlocking(timeout: 120).toArray()
     guard case .success(let output)? = result2.last else { XCTFail(); return }
+    XCTAssertNotNil(output)
 
     let fetch2 = SVKServer.shared.rx.fetchAgenda(for: components)
     let result3 = try fetch2.toBlocking(timeout: 120).toArray()
     guard case .cached(let cached)? = result3.first else { XCTFail(); return }
     guard case .noChange? = result3.last else { XCTFail(); return }
     XCTAssertEqual(cached.hashCode, output.hashCode)
+  }
+  
+  /// Similar to Juptyer notebook Flow 2, but using helper
+  func testCachingResult2() throws {
+    // Update first input
+    let update1 = SVKServer.shared.rx.updateAgenda(input, for: components)
+    let result1 = try update1.toBlocking().toArray()
+    guard case .calculating? = result1.first else { XCTFail(); return }
+    guard case .success(let uploaded1)? = result1.last else { XCTFail(); return }
+    XCTAssertNotNil(uploaded1)
+
+    // Update with second input
+    let newInput = try TKAgendaInput.testInput(excludingSecondEvent: false)
+    let update2 = SVKServer.shared.rx.updateAgenda(newInput, for: components)
+    let result2 = try update2.toBlocking().toArray()
+    guard case .cached(let cached)? = result2.first else { XCTFail(); return }
+    guard case .success(let uploaded2)? = result2.last else { XCTFail(); return }
+    XCTAssertNotNil(uploaded2)
+    XCTAssertEqual(uploaded1.hashCode, cached.hashCode)
+    XCTAssertNotEqual(uploaded1.hashCode, uploaded2.hashCode)
   }
   
   /// Similar to Juptyer notebook Flow 3
@@ -158,7 +179,7 @@ class TKAgendaTest: XCTestCase {
 
 fileprivate extension TKAgendaInput {
   
-  static func testInput() throws -> TKAgendaInput {
+  static func testInput(excludingSecondEvent: Bool = true) throws -> TKAgendaInput {
     let home = TKAgendaInput.HomeInput(
       location: TKAgendaInput.Location(what3word: "schwärme.glaubt.wirkung")!
     )
@@ -188,7 +209,7 @@ fileprivate extension TKAgendaInput {
       startTime: try Date(iso8601: "2017-05-30T12:30:00+02:00"),
       endTime: try Date(iso8601: "2017-05-30T13:30:00+02:00"),
       priority: .calendarEvent,
-      excluded: true
+      excluded: excludingSecondEvent
     )
 
     return TKAgendaInput(
