@@ -7,6 +7,23 @@
 
 import UIKit
 
+/// This is a subclass of UIStackView that allows touch events to be
+/// ignored if they were originating from one of its subviews.
+class TKPassthroughStackView: UIStackView {
+  
+  // We return true if the given point is within one of the stackview's
+  // subviews. This allows the subview to receive touch event.
+  override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    for subview in subviews {
+      if subview.point(inside: convert(point, to: subview), with: event) {
+        return true
+      }
+    }
+    return false
+  }
+  
+}
+
 @objc public class TKMapButtonView: UIView {
   
   public enum Alignment {
@@ -59,7 +76,7 @@ import UIKit
   private func stretchingView() -> UIView {
     let stretchingView = UIView()
     stretchingView.setContentHuggingPriority(.defaultLow, for: .horizontal)
-    stretchingView.backgroundColor = .blue
+    stretchingView.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
     stretchingView.translatesAutoresizingMaskIntoConstraints = false
     return stretchingView
   }
@@ -75,7 +92,7 @@ import UIKit
   }
   
   private func prepareWrapper() {
-    let wrapper = UIStackView()
+    let wrapper = TKPassthroughStackView()
     wrapper.axis = .horizontal
     wrapper.alignment = .center
     wrapper.distribution = .equalSpacing
@@ -97,5 +114,14 @@ import UIKit
       $0.removeFromSuperview()
     }
   }
-
+  
+  public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    for subview in subviews {
+      if subview.point(inside: convert(point, to: subview), with: event) {
+        return true
+      }
+    }
+    return false
+  }
+  
 }
