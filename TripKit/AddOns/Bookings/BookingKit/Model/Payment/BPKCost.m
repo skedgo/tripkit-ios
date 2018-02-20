@@ -66,11 +66,6 @@ typedef NS_ENUM(NSInteger, PaymentTypes) {
   return _paymentTypes;
 }
 
-- (BOOL)acceptCreditCard
-{
-  return [self.paymentTypes indexOfObject:@(PaymentTypeCreditCard)] != NSNotFound;
-}
-
 - (BOOL)acceptPaypal
 {
   return [self.paymentTypes indexOfObject:@(PaymentTypePaypal)] != NSNotFound;

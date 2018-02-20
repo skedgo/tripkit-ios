@@ -67,13 +67,6 @@
 
 // --------------- Test using id ---------------
 
-// Credit card
-- (BOOL)isCardNoItem;
-- (BOOL)isExpiryDateItem;
-- (BOOL)isCVCItem;
-- (BOOL)isCCFirstNameItem;
-- (BOOL)isCCLastNameItem;
-
 // Confirmation message
 - (BOOL)isMessageItem;
 - (BOOL)isReminderItem;

@@ -10,7 +10,7 @@
 
 #import "BPKSection.h"
 
-@class BPKCreditCard, BPKEmail;
+@class BPKEmail;
 
 @interface BPKUser : AMKUser
 
@@ -24,12 +24,5 @@
 - (void)updateEmailFromItem:(BPKSectionItem *)item;
 
 - (NSDictionary *)emailFormField; // can be nil
-
-// Payment stuff
-@property (nonatomic, copy) NSString *cardNo;
-@property (nonatomic, copy) NSString *cvc;
-@property (nonatomic, copy) NSString *expiryDate;
-
-- (BPKCreditCard *)selectedCard;
 
 @end

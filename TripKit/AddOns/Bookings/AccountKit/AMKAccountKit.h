@@ -29,7 +29,6 @@
 #import "UIViewController+modalController.h"
 #import "UIBarButtonItem+NavigationBar.h"
 #import "UIView+Keyboard.h"
-#import "UIViewController+RootPresenter.h"
 #import "UIView+FindFirstResponder.h"
 #import "NSString+ValidateEmailAddress.h"
 

@@ -51,17 +51,6 @@ static NSString *const kBPKFormTypeBookingForm  = @"bookingForm";
 static NSString *const kBPKFormTypePaymentForm  = @"paymentForm";
 
 // Field ids
-static NSString *const kBPKFormIdCardNo       = @"cardNo";
-static NSString *const kBPKFormIdExpiryDate   = @"expiryDate";
-static NSString *const kBPKFormIdCVC          = @"cvc";
-static NSString *const kBPKFormIdCCFirstName  = @"cardHolders_firstname";
-static NSString *const kBPKFormIdCCLastName   = @"cardHolders_surname";
-static NSString *const kBPKFormIdCCNumber     = @"creditcard_number";
-static NSString *const kBPKFormIdCCCVN        = @"creditcard_cvn";
-static NSString *const kBPKFormIdCCType       = @"creditcard_type";
-static NSString *const kBPKFormIdCCExpMonth   = @"expiry_date_month";
-static NSString *const kBPKFormIdCCExpYear    = @"expiry_date_year";
-
 static NSString *const kBPKFormIdMessage        = @"message";
 static NSString *const kBPKFormIdReminder       = @"reminder";
 static NSString *const kBPKFormIdHeadway        = @"headway";

@@ -17,9 +17,6 @@
 // user info
 #import "BPKUser.h"
 
-// payment stuff
-#import "BPKCreditCard.h"
-
 @interface BPKTextFieldHelper ()
 
 @property (nonatomic, weak) BPKBookingViewController *form;
@@ -41,28 +38,6 @@
 
 #pragma mark - Public methods
 
-- (void (^)(UITextField *))isEditingBlockForIndexPath:(NSIndexPath *)indexPath
-{
-  return ^(UITextField *textField) {
-    BPKTextFieldCell *textCell = [self textFieldCellAtIndexPath:indexPath];
-    if (! textCell) {
-      return;
-    }
-    
-    BPKSectionItem *item = [self.form itemForIndexPath:indexPath];
-    if ([item isCardNoItem]) {
-      NSString *cardNo = textField.text;
-      [textCell updateText:[BPKCreditCard formattedCardNo:cardNo] withAttributes:nil];
-    } else if ([item isExpiryDateItem]) {
-      NSString *expirydate = textField.text;
-      [textCell updateText:[BPKCreditCard formattedExpiryDate:expirydate] withAttributes:nil];
-    } else if ([item isCVCItem]) {
-      NSString *cvc = textField.text;
-      [textCell updateText:cvc withAttributes:nil];
-    }
-  };
-}
-
 - (BOOL (^)(UITextField *))shouldReturnBlockForIndexPath:(NSIndexPath *)indexPath
 {
   return ^BOOL(UITextField *textField) {
@@ -81,42 +56,12 @@
   
   return ^(UITextField *textField) {
     BOOL valid = YES;
-    NSDictionary *attributes;
-    
-    BPKUser *user = [BPKUser sharedUser];
     BPKTextFieldCell *textCell = [self textFieldCellAtIndexPath:indexPath];
     
     BPKSectionItem *item = [self.form itemForIndexPath:indexPath];
     NSIndexPath *next = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
     
-    if ([item isCardNoItem]) {
-      NSString *cardNo = textField.text;
-      valid = [BPKCreditCard isValidCardNo:cardNo];
-      attributes = [self attributesForInvalidString:!valid];
-      [textCell updateText:[BPKCreditCard formattedCardNo:cardNo] withAttributes:attributes];
-      
-      if (valid) {
-        user.cardNo = textField.text;
-      }
-    } else if ([item isExpiryDateItem]) {
-      NSString *expiry = textField.text;
-      valid = [BPKCreditCard isValidExpiryDate:expiry];
-      attributes = [self attributesForInvalidString:!valid];
-      [textCell updateText:[BPKCreditCard formattedExpiryDate:expiry] withAttributes:attributes];
-      
-      if (valid) {
-        user.expiryDate = textField.text;
-      }
-    } else if ([item isCVCItem]) {
-      NSString *cvc = textField.text;
-      valid = [BPKCreditCard isValidCVC:cvc];
-      attributes = [self attributesForInvalidString:!valid];
-      [textCell updateText:cvc withAttributes:attributes];
-      
-      if (valid) {
-        user.cvc = textField.text;
-      }
-    }
+    // Validation checks go here
     
     if (valid) {
       [item updateValue:textField.text];

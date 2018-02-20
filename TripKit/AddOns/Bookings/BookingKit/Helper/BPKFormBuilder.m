@@ -124,14 +124,6 @@
 {
   NSMutableArray *sections = [NSMutableArray array];
   
-  if ([cost acceptCreditCard]) {
-    [sections addObject:[self sectionForCreditCardPayment]];
-    
-    // Receipt section.
-    BPKSection *receipt = [self sectionForPaymentReceipt];
-    [sections addObject:receipt];
-  }
-  
   if ([cost acceptPaypal]) {
     [sections addObject:[self sectionForPaypalPayment]];
   }
@@ -325,59 +317,12 @@
 
 #pragma mark - Sections
 
-+ (BPKSection *)sectionForCreditCardPayment
-{
-  BPKSection *section = [[BPKSection alloc] init];
-  section.title = NSLocalizedStringFromTableInBundle(@"Credit card", @"Shared", [SGStyleManager bundle], @"Section title for credit card payment");
-  
-  // Card number
-  NSDictionary *cardNumberJSON = [self jsonForId:kBPKFormIdCardNo
-                                           title:NSLocalizedStringFromTableInBundle(@"Card No.", @"Shared", [SGStyleManager bundle], @"Credit card number")
-                                            type:kBPKFormTypeString
-                                     placeholder:@""
-                                           value:@""
-                                          kbType:kBPKKeyboardTypeNumber];
-  BPKSectionItem *cardNumberItem = [[BPKSectionItem alloc] initWithJson:cardNumberJSON];
-  [section addItem:cardNumberItem];
-  
-  // Expiry date.
-  NSDictionary *expiryDateJSON = [self jsonForId:kBPKFormIdExpiryDate
-                                           title:NSLocalizedStringFromTableInBundle(@"Expiry Date", @"Shared", [SGStyleManager bundle], @"Credit card expiry date")
-                                            type:kBPKFormTypeString
-                                     placeholder:NSLocalizedStringFromTableInBundle(@"mm/yy", @"Shared", [SGStyleManager bundle], "Credit card expiry date placeholder, mm/yy")
-                                           value:@""
-                                          kbType:kBPKKeyboardTypeNumber];
-  BPKSectionItem *expiryDateItem = [[BPKSectionItem alloc] initWithJson:expiryDateJSON];
-  [section addItem:expiryDateItem];
-  
-  // CVV.
-  NSDictionary *cvvJSON = [self jsonForId:kBPKFormIdCVC
-                                    title:NSLocalizedStringFromTableInBundle(@"CVC", @"Shared", [SGStyleManager bundle], @"Credit card CVC")
-                                     type:kBPKFormTypeString
-                              placeholder:@""
-                                    value:@""
-                                   kbType:kBPKKeyboardTypeNumber];
-  BPKSectionItem *cvvItem = [[BPKSectionItem alloc] initWithJson:cvvJSON];
-  [section addItem:cvvItem];
-  
-  return section;
-}
-
 + (BPKSection *)sectionForPaypalPayment
 {
   BPKSection *section = [[BPKSection alloc] init];
   [section setTitle:NSLocalizedStringFromTableInBundle(@"Paypal", @"Shared", [SGStyleManager bundle], @"Section title for Paypal payment")];
   [section addItem:[self commonEmailItem]];
   [section addItem:[self commonPasswordItem]];
-  return section;
-}
-
-+ (BPKSection *)sectionForPaymentReceipt
-{
-  BPKSection *section = [[BPKSection alloc] init];
-  [section setTitle:NSLocalizedStringFromTableInBundle(@"Receipt", @"Shared", [SGStyleManager bundle], @"Title for section that asks users where payment receipt should be sent")];
-  [section addItem:[self commonNameItem]];
-  [section addItem:[self commonEmailItem]];
   return section;
 }
 

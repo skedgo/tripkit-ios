@@ -10,13 +10,9 @@
 
 @interface UIBarButtonItem (NavigationBar)
 
-+ (UIBarButtonItem *)nextButtonWithSelector:(SEL)selector forController:(UIViewController *)controller;
-
 + (UIBarButtonItem *)closeButtonWithSelector:(SEL)selector forController:(UIViewController *)controller;
 
 + (UIBarButtonItem *)cancelButtonWithSelector:(SEL)selector forController:(UIViewController *)controller;
-
-+ (UIBarButtonItem *)doneButtonWithSelector:(SEL)selector forController:(UIViewController *)controller;
 
 + (UIBarButtonItem *)saveButtonWithSelector:(SEL)selector forController:(UIViewController *)controller;
 

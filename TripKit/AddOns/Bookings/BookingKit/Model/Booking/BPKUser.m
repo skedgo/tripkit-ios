@@ -19,13 +19,6 @@
 
 #import "BPKEmail.h"
 #import "BPKConstants.h"
-#import "BPKCreditCard.h"
-
-@interface BPKUser ()
-
-@property (nonatomic, strong) BPKCreditCard *adHocCard;
-
-@end
 
 @implementation BPKUser
 
@@ -94,24 +87,6 @@
 
 #pragma mark - Custom accessors
 
-- (void)setCardNo:(NSString *)cardNo
-{
-  _cardNo = cardNo;
-  self.adHocCard.cardNo = cardNo;
-}
-
-- (void)setExpiryDate:(NSString *)expiryDate
-{
-  _expiryDate = expiryDate;
-  self.adHocCard.expiryDate = expiryDate;
-}
-
-- (void)setCvc:(NSString *)cvc
-{
-  _cvc = cvc;
-  self.adHocCard.cvc = cvc;
-}
-
 - (BPKEmail *)receiptEmail
 {
   for (BPKEmail *anEmail in self.emails) {
@@ -121,19 +96,6 @@
   }
   
   return nil;
-}
-
-#pragma mark - Lazy accessors
-
-- (BPKCreditCard *)adHocCard
-{
-  if (! _adHocCard) {
-    _adHocCard = [[BPKCreditCard alloc] init];
-    _adHocCard.isAdHoc = YES;
-    _adHocCard.isSelected = YES;
-  }
-  
-  return _adHocCard;
 }
 
 #pragma mark - Overrides
@@ -164,14 +126,6 @@
   [field setObject:self.receiptEmail.address forKey:kBPKFormValue];
   
   return field;
-}
-
-#pragma mark - Payment stuff
-
-- (BPKCreditCard *)selectedCard
-{
-  // We only support once only card at the moment.
-  return self.adHocCard;
 }
 
 @end
