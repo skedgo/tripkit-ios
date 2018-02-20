@@ -3177,7 +3177,7 @@
 				3AB6C6261D1CD0060089F687 /* Sources */,
 				3AB6C6271D1CD0060089F687 /* Frameworks */,
 				3AB6C6281D1CD0060089F687 /* Resources */,
-				3AE194E7202DE35E0007B49B /* ShellScript */,
+				3AE194E7202DE35E0007B49B /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3355,7 +3355,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3AE194E7202DE35E0007B49B /* ShellScript */ = {
+		3AE194E7202DE35E0007B49B /* Copy Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3373,6 +3373,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/OAuthSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
+			name = "Copy Carthage Frameworks";
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxTest.framework",
@@ -3387,7 +3388,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "Copy Carthage Frameworks";
+			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
