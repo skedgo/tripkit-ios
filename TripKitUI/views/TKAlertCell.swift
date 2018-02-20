@@ -129,7 +129,7 @@ class TKAlertCell: UITableViewCell {
     super.awakeFromNib()
     SGStyleManager.addDefaultOutline(contentWrapper)
     textViewHeightConstraint = textView.heightAnchor.constraint(equalToConstant: 0)
-    actionButton.setTitle(NSLocalizedString("More info", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title of button to get more details about an alert"), for: .normal)
+    actionButton.setTitle(Loc.MoreInfo, for: .normal)
   }
   
   override func prepareForReuse() {

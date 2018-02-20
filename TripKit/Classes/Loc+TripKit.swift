@@ -92,6 +92,30 @@ extension Loc {
     }
   }
   
+}
+
+// MARK: - Alerts
+
+extension Loc {
+  
+  public static var Alerts: String {
+    return NSLocalizedString("Alerts", tableName: "TripKit", bundle: .tripKit, comment: "")
+  }
+
+  public static var MoreInfo: String {
+    return NSLocalizedString("More info", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title of button to get more details about an alert")
+  }
+  
+  public static var WeWillKeepYouUpdated: String {
+    return NSLocalizedString("We'll keep you updated with the latest transit alerts here", tableName: "TripKit", bundle: .tripKit, comment: "")
+  }
+  
+  public static func InTheMeantimeKeepExploring(appName: String) -> String {
+    let format = NSLocalizedString("In the meantime, let's keep exploring %@ and enjoy your trips", tableName: "TripKit", bundle: .tripKit, comment: "%@ is replaced with app name")
+    return String(format: format, appName)
+  }
+
+  
   public static func Alerts(_ count: Int) -> String? {
     guard count > 1 else {
       return nil
@@ -100,8 +124,12 @@ extension Loc {
     let format = NSLocalizedString("%@ alerts", tableName: "TripKit", bundle: .tripKit, comment: "Number of alerts, in this case, there are multiple (plural")
     return String(format: format, NSNumber(value: count))
   }
+  
 
+  
 }
+
+// MARK: - Helpers
 
 extension Bundle {
   

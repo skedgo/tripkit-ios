@@ -49,7 +49,7 @@ public class TKAlertViewController: UITableViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    self.title = NSLocalizedString("Alerts", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
+    self.title = Loc.Alerts
     
     if let navigator = navigationController,
       let topCtr = navigator.viewControllers.first, topCtr == self {
@@ -126,12 +126,10 @@ public class TKAlertViewController: UITableViewController {
     let emptyAlertView = TKEmptyAlertView.makeView()
     emptyAlertView.frame.size = view.frame.size
     emptyAlertView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    emptyAlertView.textLabel.text = NSLocalizedString("We'll keep you updated with the latest transit alerts here", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
+    emptyAlertView.textLabel.text = Loc.WeWillKeepYouUpdated
     
     if let productName = Bundle.main.productName {
-      emptyAlertView.footerLabel.text = String(format: NSLocalizedString("In the meantime, let's keep exploring %@ and enjoy your trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "%@ is replaced with app name"), productName)
-    } else {
-      emptyAlertView.footerLabel.text = NSLocalizedString("In the meantime, let's keep exploring and enjoy your trips", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
+      emptyAlertView.footerLabel.text = Loc.InTheMeantimeKeepExploring(appName: productName)
     }
     
     view.insertSubview(emptyAlertView, aboveSubview: tableView)
