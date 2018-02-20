@@ -33,6 +33,11 @@ public class Loc : NSObject {
   }
   
   @objc
+  public static var Later: String {
+    return NSLocalizedString("Later", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Title of button to perform some action at a later time")
+  }
+  
+  @objc
   public static var Confirm: String {
     return NSLocalizedString("Confirm", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Title on the button that asks users to confirm if they want to proceed with booking")
   }
