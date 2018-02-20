@@ -19,14 +19,6 @@
 
 @implementation UIBarButtonItem (NavigationBar)
 
-+ (UIBarButtonItem *)nextButtonWithSelector:(SEL)selector forController:(UIViewController *)controller
-{
-  return [[UIBarButtonItem alloc] initWithTitle:Loc.Next
-                                          style:UIBarButtonItemStylePlain
-                                         target:controller
-                                         action:selector];
-}
-
 + (UIBarButtonItem *)closeButtonWithSelector:(SEL)selector forController:(UIViewController *)controller
 {
   return [[UIBarButtonItem alloc] initWithTitle:Loc.Close
@@ -38,13 +30,6 @@
 + (UIBarButtonItem *)cancelButtonWithSelector:(SEL)selector forController:(UIViewController *)controller
 {
   return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                       target:controller
-                                                       action:selector];
-}
-
-+ (UIBarButtonItem *)doneButtonWithSelector:(SEL)selector forController:(UIViewController *)controller
-{
-  return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                        target:controller
                                                        action:selector];
 }

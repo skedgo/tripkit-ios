@@ -137,19 +137,14 @@
 		3A6DF243202C9AA00084CB2C /* TKBookingTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF191202C9AA00084CB2C /* TKBookingTransitioner.swift */; };
 		3A6DF244202C9AA00084CB2C /* BPKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF193202C9AA00084CB2C /* BPKConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF245202C9AA00084CB2C /* NSString+BookingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF195202C9AA00084CB2C /* NSString+BookingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF246202C9AA00084CB2C /* UIViewController+RootPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF196202C9AA00084CB2C /* UIViewController+RootPresenter.m */; };
 		3A6DF247202C9AA00084CB2C /* NSString+BookingKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF197202C9AA00084CB2C /* NSString+BookingKit.m */; };
-		3A6DF248202C9AA00084CB2C /* UIViewController+RootPresenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF198202C9AA00084CB2C /* UIViewController+RootPresenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF249202C9AA00084CB2C /* BPKBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF19A202C9AA00084CB2C /* BPKBookingViewController.swift */; };
 		3A6DF24A202C9AA00084CB2C /* BPKWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF19B202C9AA00084CB2C /* BPKWebViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF24B202C9AA00084CB2C /* BPKBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF19C202C9AA00084CB2C /* BPKBaseTableViewController.m */; };
 		3A6DF24C202C9AA00084CB2C /* BPKBookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF19D202C9AA00084CB2C /* BPKBookingViewController.m */; };
-		3A6DF24D202C9AA00084CB2C /* BPKPaymentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF19E202C9AA00084CB2C /* BPKPaymentTestViewController.m */; };
 		3A6DF24E202C9AA00084CB2C /* BPKOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF19F202C9AA00084CB2C /* BPKOptionsViewController.m */; };
-		3A6DF24F202C9AA00084CB2C /* BPKPaymentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF1A0202C9AA00084CB2C /* BPKPaymentTestViewController.xib */; };
 		3A6DF250202C9AA00084CB2C /* BPKBaseTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1A1202C9AA00084CB2C /* BPKBaseTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF251202C9AA00084CB2C /* BPKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1A2202C9AA00084CB2C /* BPKWebViewController.m */; };
-		3A6DF252202C9AA00084CB2C /* BPKPaymentTestViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1A3202C9AA00084CB2C /* BPKPaymentTestViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF253202C9AA00084CB2C /* BPKBookingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1A4202C9AA00084CB2C /* BPKBookingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF254202C9AA00084CB2C /* BPKMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1A5202C9AA00084CB2C /* BPKMapViewController.swift */; };
 		3A6DF255202C9AA00084CB2C /* BPKOptionsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1A6202C9AA00084CB2C /* BPKOptionsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -172,11 +167,7 @@
 		3A6DF267202C9AA00084CB2C /* BookingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1BC202C9AA00084CB2C /* BookingError.swift */; };
 		3A6DF268202C9AA00084CB2C /* BPKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1BD202C9AA00084CB2C /* BPKUser.m */; };
 		3A6DF269202C9AA00084CB2C /* BPKCost.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1BF202C9AA00084CB2C /* BPKCost.m */; };
-		3A6DF26A202C9AA00084CB2C /* BPKBTHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1C0202C9AA00084CB2C /* BPKBTHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF26B202C9AA00084CB2C /* BPKCreditCard.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1C1202C9AA00084CB2C /* BPKCreditCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF26C202C9AA00084CB2C /* BPKCost.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1C2202C9AA00084CB2C /* BPKCost.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF26D202C9AA00084CB2C /* BPKCreditCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1C3202C9AA00084CB2C /* BPKCreditCard.m */; };
-		3A6DF26E202C9AA00084CB2C /* BPKBTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1C4202C9AA00084CB2C /* BPKBTHelper.m */; };
 		3A6DF26F202C9AA00084CB2C /* BPKServerUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1C5202C9AA00084CB2C /* BPKServerUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF270202C9AA00084CB2C /* BPKSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1C7202C9AA00084CB2C /* BPKSwitchCell.m */; };
 		3A6DF271202C9AA00084CB2C /* BPKSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF1C8202C9AA00084CB2C /* BPKSwitchCell.xib */; };
@@ -209,13 +200,11 @@
 		3A6DF28C202C9AA00084CB2C /* BPKActionOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF1E3202C9AA00084CB2C /* BPKActionOverlay.xib */; };
 		3A6DF28D202C9AA00084CB2C /* BPKDataValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1E5202C9AA00084CB2C /* BPKDataValidator.m */; };
 		3A6DF28E202C9AA00084CB2C /* BPKHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1E6202C9AA00084CB2C /* BPKHelpers.m */; };
-		3A6DF28F202C9AA00084CB2C /* BPKTextPrefiller.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1E7202C9AA00084CB2C /* BPKTextPrefiller.m */; };
 		3A6DF290202C9AA00084CB2C /* BPKFormBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1E8202C9AA00084CB2C /* BPKFormBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF291202C9AA00084CB2C /* BPKTextFieldBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1E9202C9AA00084CB2C /* BPKTextFieldBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF292202C9AA00084CB2C /* BPKTextFieldHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1EA202C9AA00084CB2C /* BPKTextFieldHelper.m */; };
 		3A6DF293202C9AA00084CB2C /* BPKAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1EB202C9AA00084CB2C /* BPKAlert.swift */; };
 		3A6DF294202C9AA00084CB2C /* BPKDataValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1EC202C9AA00084CB2C /* BPKDataValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF295202C9AA00084CB2C /* BPKTextPrefiller.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1ED202C9AA00084CB2C /* BPKTextPrefiller.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF296202C9AA00084CB2C /* BPKHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1EE202C9AA00084CB2C /* BPKHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF297202C9AA00084CB2C /* BPKTextFieldHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF1EF202C9AA00084CB2C /* BPKTextFieldHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF298202C9AA00084CB2C /* BPKFormBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF1F0202C9AA00084CB2C /* BPKFormBuilder.m */; };
@@ -1034,19 +1023,14 @@
 		3A6DF191202C9AA00084CB2C /* TKBookingTransitioner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingTransitioner.swift; sourceTree = "<group>"; };
 		3A6DF193202C9AA00084CB2C /* BPKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKConstants.h; sourceTree = "<group>"; };
 		3A6DF195202C9AA00084CB2C /* NSString+BookingKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BookingKit.h"; sourceTree = "<group>"; };
-		3A6DF196202C9AA00084CB2C /* UIViewController+RootPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RootPresenter.m"; sourceTree = "<group>"; };
 		3A6DF197202C9AA00084CB2C /* NSString+BookingKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BookingKit.m"; sourceTree = "<group>"; };
-		3A6DF198202C9AA00084CB2C /* UIViewController+RootPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RootPresenter.h"; sourceTree = "<group>"; };
 		3A6DF19A202C9AA00084CB2C /* BPKBookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPKBookingViewController.swift; sourceTree = "<group>"; };
 		3A6DF19B202C9AA00084CB2C /* BPKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKWebViewController.h; sourceTree = "<group>"; };
 		3A6DF19C202C9AA00084CB2C /* BPKBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKBaseTableViewController.m; sourceTree = "<group>"; };
 		3A6DF19D202C9AA00084CB2C /* BPKBookingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKBookingViewController.m; sourceTree = "<group>"; };
-		3A6DF19E202C9AA00084CB2C /* BPKPaymentTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKPaymentTestViewController.m; sourceTree = "<group>"; };
 		3A6DF19F202C9AA00084CB2C /* BPKOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKOptionsViewController.m; sourceTree = "<group>"; };
-		3A6DF1A0202C9AA00084CB2C /* BPKPaymentTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPKPaymentTestViewController.xib; sourceTree = "<group>"; };
 		3A6DF1A1202C9AA00084CB2C /* BPKBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKBaseTableViewController.h; sourceTree = "<group>"; };
 		3A6DF1A2202C9AA00084CB2C /* BPKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKWebViewController.m; sourceTree = "<group>"; };
-		3A6DF1A3202C9AA00084CB2C /* BPKPaymentTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKPaymentTestViewController.h; sourceTree = "<group>"; };
 		3A6DF1A4202C9AA00084CB2C /* BPKBookingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKBookingViewController.h; sourceTree = "<group>"; };
 		3A6DF1A5202C9AA00084CB2C /* BPKMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPKMapViewController.swift; sourceTree = "<group>"; };
 		3A6DF1A6202C9AA00084CB2C /* BPKOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKOptionsViewController.h; sourceTree = "<group>"; };
@@ -1070,11 +1054,7 @@
 		3A6DF1BC202C9AA00084CB2C /* BookingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingError.swift; sourceTree = "<group>"; };
 		3A6DF1BD202C9AA00084CB2C /* BPKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKUser.m; sourceTree = "<group>"; };
 		3A6DF1BF202C9AA00084CB2C /* BPKCost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKCost.m; sourceTree = "<group>"; };
-		3A6DF1C0202C9AA00084CB2C /* BPKBTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKBTHelper.h; sourceTree = "<group>"; };
-		3A6DF1C1202C9AA00084CB2C /* BPKCreditCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKCreditCard.h; sourceTree = "<group>"; };
 		3A6DF1C2202C9AA00084CB2C /* BPKCost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKCost.h; sourceTree = "<group>"; };
-		3A6DF1C3202C9AA00084CB2C /* BPKCreditCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKCreditCard.m; sourceTree = "<group>"; };
-		3A6DF1C4202C9AA00084CB2C /* BPKBTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKBTHelper.m; sourceTree = "<group>"; };
 		3A6DF1C5202C9AA00084CB2C /* BPKServerUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKServerUtil.h; sourceTree = "<group>"; };
 		3A6DF1C7202C9AA00084CB2C /* BPKSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKSwitchCell.m; sourceTree = "<group>"; };
 		3A6DF1C8202C9AA00084CB2C /* BPKSwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPKSwitchCell.xib; sourceTree = "<group>"; };
@@ -1107,13 +1087,11 @@
 		3A6DF1E3202C9AA00084CB2C /* BPKActionOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPKActionOverlay.xib; sourceTree = "<group>"; };
 		3A6DF1E5202C9AA00084CB2C /* BPKDataValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKDataValidator.m; sourceTree = "<group>"; };
 		3A6DF1E6202C9AA00084CB2C /* BPKHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKHelpers.m; sourceTree = "<group>"; };
-		3A6DF1E7202C9AA00084CB2C /* BPKTextPrefiller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKTextPrefiller.m; sourceTree = "<group>"; };
 		3A6DF1E8202C9AA00084CB2C /* BPKFormBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKFormBuilder.h; sourceTree = "<group>"; };
 		3A6DF1E9202C9AA00084CB2C /* BPKTextFieldBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKTextFieldBlock.h; sourceTree = "<group>"; };
 		3A6DF1EA202C9AA00084CB2C /* BPKTextFieldHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKTextFieldHelper.m; sourceTree = "<group>"; };
 		3A6DF1EB202C9AA00084CB2C /* BPKAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPKAlert.swift; sourceTree = "<group>"; };
 		3A6DF1EC202C9AA00084CB2C /* BPKDataValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKDataValidator.h; sourceTree = "<group>"; };
-		3A6DF1ED202C9AA00084CB2C /* BPKTextPrefiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKTextPrefiller.h; sourceTree = "<group>"; };
 		3A6DF1EE202C9AA00084CB2C /* BPKHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKHelpers.h; sourceTree = "<group>"; };
 		3A6DF1EF202C9AA00084CB2C /* BPKTextFieldHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPKTextFieldHelper.h; sourceTree = "<group>"; };
 		3A6DF1F0202C9AA00084CB2C /* BPKFormBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPKFormBuilder.m; sourceTree = "<group>"; };
@@ -1853,14 +1831,14 @@
 		3A6DF192202C9AA00084CB2C /* BookingKit */ = {
 			isa = PBXGroup;
 			children = (
+				3A6DF1F1202C9AA00084CB2C /* BPKBookingKit.h */,
 				3A6DF193202C9AA00084CB2C /* BPKConstants.h */,
 				3A6DF194202C9AA00084CB2C /* Category */,
 				3A6DF199202C9AA00084CB2C /* Controller */,
-				3A6DF1A7202C9AA00084CB2C /* README.md */,
-				3A6DF1A8202C9AA00084CB2C /* Model */,
-				3A6DF1C6202C9AA00084CB2C /* View */,
 				3A6DF1E4202C9AA00084CB2C /* Helper */,
-				3A6DF1F1202C9AA00084CB2C /* BPKBookingKit.h */,
+				3A6DF1A8202C9AA00084CB2C /* Model */,
+				3A6DF1A7202C9AA00084CB2C /* README.md */,
+				3A6DF1C6202C9AA00084CB2C /* View */,
 			);
 			path = BookingKit;
 			sourceTree = "<group>";
@@ -1869,9 +1847,7 @@
 			isa = PBXGroup;
 			children = (
 				3A6DF195202C9AA00084CB2C /* NSString+BookingKit.h */,
-				3A6DF196202C9AA00084CB2C /* UIViewController+RootPresenter.m */,
 				3A6DF197202C9AA00084CB2C /* NSString+BookingKit.m */,
-				3A6DF198202C9AA00084CB2C /* UIViewController+RootPresenter.h */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1879,19 +1855,16 @@
 		3A6DF199202C9AA00084CB2C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF19A202C9AA00084CB2C /* BPKBookingViewController.swift */,
-				3A6DF19B202C9AA00084CB2C /* BPKWebViewController.h */,
-				3A6DF19C202C9AA00084CB2C /* BPKBaseTableViewController.m */,
-				3A6DF19D202C9AA00084CB2C /* BPKBookingViewController.m */,
-				3A6DF19E202C9AA00084CB2C /* BPKPaymentTestViewController.m */,
-				3A6DF19F202C9AA00084CB2C /* BPKOptionsViewController.m */,
-				3A6DF1A0202C9AA00084CB2C /* BPKPaymentTestViewController.xib */,
 				3A6DF1A1202C9AA00084CB2C /* BPKBaseTableViewController.h */,
-				3A6DF1A2202C9AA00084CB2C /* BPKWebViewController.m */,
-				3A6DF1A3202C9AA00084CB2C /* BPKPaymentTestViewController.h */,
+				3A6DF19C202C9AA00084CB2C /* BPKBaseTableViewController.m */,
 				3A6DF1A4202C9AA00084CB2C /* BPKBookingViewController.h */,
+				3A6DF19D202C9AA00084CB2C /* BPKBookingViewController.m */,
+				3A6DF19A202C9AA00084CB2C /* BPKBookingViewController.swift */,
 				3A6DF1A5202C9AA00084CB2C /* BPKMapViewController.swift */,
 				3A6DF1A6202C9AA00084CB2C /* BPKOptionsViewController.h */,
+				3A6DF19F202C9AA00084CB2C /* BPKOptionsViewController.m */,
+				3A6DF19B202C9AA00084CB2C /* BPKWebViewController.h */,
+				3A6DF1A2202C9AA00084CB2C /* BPKWebViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1899,12 +1872,12 @@
 		3A6DF1A8202C9AA00084CB2C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3A6DF1B6202C9AA00084CB2C /* Booking */,
+				3A6DF1C5202C9AA00084CB2C /* BPKServerUtil.h */,
 				3A6DF1A9202C9AA00084CB2C /* BPKServerUtil.m */,
 				3A6DF1AA202C9AA00084CB2C /* Form */,
 				3A6DF1B2202C9AA00084CB2C /* OAuth */,
-				3A6DF1B6202C9AA00084CB2C /* Booking */,
 				3A6DF1BE202C9AA00084CB2C /* Payment */,
-				3A6DF1C5202C9AA00084CB2C /* BPKServerUtil.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1950,12 +1923,8 @@
 		3A6DF1BE202C9AA00084CB2C /* Payment */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF1BF202C9AA00084CB2C /* BPKCost.m */,
-				3A6DF1C0202C9AA00084CB2C /* BPKBTHelper.h */,
-				3A6DF1C1202C9AA00084CB2C /* BPKCreditCard.h */,
 				3A6DF1C2202C9AA00084CB2C /* BPKCost.h */,
-				3A6DF1C3202C9AA00084CB2C /* BPKCreditCard.m */,
-				3A6DF1C4202C9AA00084CB2C /* BPKBTHelper.m */,
+				3A6DF1BF202C9AA00084CB2C /* BPKCost.m */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -1999,18 +1968,16 @@
 		3A6DF1E4202C9AA00084CB2C /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF1E5202C9AA00084CB2C /* BPKDataValidator.m */,
-				3A6DF1E6202C9AA00084CB2C /* BPKHelpers.m */,
-				3A6DF1E7202C9AA00084CB2C /* BPKTextPrefiller.m */,
-				3A6DF1E8202C9AA00084CB2C /* BPKFormBuilder.h */,
-				3A6DF1E9202C9AA00084CB2C /* BPKTextFieldBlock.h */,
-				3A6DF1EA202C9AA00084CB2C /* BPKTextFieldHelper.m */,
 				3A6DF1EB202C9AA00084CB2C /* BPKAlert.swift */,
 				3A6DF1EC202C9AA00084CB2C /* BPKDataValidator.h */,
-				3A6DF1ED202C9AA00084CB2C /* BPKTextPrefiller.h */,
-				3A6DF1EE202C9AA00084CB2C /* BPKHelpers.h */,
-				3A6DF1EF202C9AA00084CB2C /* BPKTextFieldHelper.h */,
+				3A6DF1E5202C9AA00084CB2C /* BPKDataValidator.m */,
+				3A6DF1E8202C9AA00084CB2C /* BPKFormBuilder.h */,
 				3A6DF1F0202C9AA00084CB2C /* BPKFormBuilder.m */,
+				3A6DF1EE202C9AA00084CB2C /* BPKHelpers.h */,
+				3A6DF1E6202C9AA00084CB2C /* BPKHelpers.m */,
+				3A6DF1E9202C9AA00084CB2C /* BPKTextFieldBlock.h */,
+				3A6DF1EF202C9AA00084CB2C /* BPKTextFieldHelper.h */,
+				3A6DF1EA202C9AA00084CB2C /* BPKTextFieldHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2036,12 +2003,12 @@
 			isa = PBXGroup;
 			children = (
 				3A6DF1FD202C9AA00084CB2C /* AMKAccountKit.h */,
-				3A6DF1FE202C9AA00084CB2C /* Controller */,
-				3A6DF20D202C9AA00084CB2C /* README.md */,
-				3A6DF20E202C9AA00084CB2C /* Model */,
-				3A6DF229202C9AA00084CB2C /* View */,
-				3A6DF235202C9AA00084CB2C /* SGKConfig+BookingKit.swift */,
 				3A6DF236202C9AA00084CB2C /* Categories */,
+				3A6DF1FE202C9AA00084CB2C /* Controller */,
+				3A6DF20E202C9AA00084CB2C /* Model */,
+				3A6DF20D202C9AA00084CB2C /* README.md */,
+				3A6DF235202C9AA00084CB2C /* SGKConfig+BookingKit.swift */,
+				3A6DF229202C9AA00084CB2C /* View */,
 			);
 			path = AccountKit;
 			sourceTree = "<group>";
@@ -2049,20 +2016,20 @@
 		3A6DF1FE202C9AA00084CB2C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF1FF202C9AA00084CB2C /* AKPasswordEditViewController.h */,
-				3A6DF200202C9AA00084CB2C /* AKResendEmailViewController.m */,
-				3A6DF201202C9AA00084CB2C /* AKEmailEditViewController.m */,
-				3A6DF202202C9AA00084CB2C /* AKBaseTableViewController.m */,
 				3A6DF203202C9AA00084CB2C /* AKAccountViewController.h */,
-				3A6DF204202C9AA00084CB2C /* AKSignUpViewController.m */,
+				3A6DF20C202C9AA00084CB2C /* AKAccountViewController.m */,
+				3A6DF209202C9AA00084CB2C /* AKAccountViewController.swift */,
+				3A6DF207202C9AA00084CB2C /* AKBaseTableViewController.h */,
+				3A6DF202202C9AA00084CB2C /* AKBaseTableViewController.m */,
+				3A6DF20A202C9AA00084CB2C /* AKBaseTableViewController.swift */,
+				3A6DF208202C9AA00084CB2C /* AKEmailEditViewController.h */,
+				3A6DF201202C9AA00084CB2C /* AKEmailEditViewController.m */,
+				3A6DF1FF202C9AA00084CB2C /* AKPasswordEditViewController.h */,
 				3A6DF205202C9AA00084CB2C /* AKPasswordEditViewController.m */,
 				3A6DF206202C9AA00084CB2C /* AKResendEmailViewController.h */,
-				3A6DF207202C9AA00084CB2C /* AKBaseTableViewController.h */,
-				3A6DF208202C9AA00084CB2C /* AKEmailEditViewController.h */,
-				3A6DF209202C9AA00084CB2C /* AKAccountViewController.swift */,
-				3A6DF20A202C9AA00084CB2C /* AKBaseTableViewController.swift */,
+				3A6DF200202C9AA00084CB2C /* AKResendEmailViewController.m */,
 				3A6DF20B202C9AA00084CB2C /* AKSignUpViewController.h */,
-				3A6DF20C202C9AA00084CB2C /* AKAccountViewController.m */,
+				3A6DF204202C9AA00084CB2C /* AKSignUpViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2070,16 +2037,16 @@
 		3A6DF20E202C9AA00084CB2C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF20F202C9AA00084CB2C /* AMKEmail.h */,
 				3A6DF210202C9AA00084CB2C /* AKFbkProfile.h */,
-				3A6DF211202C9AA00084CB2C /* Server */,
-				3A6DF215202C9AA00084CB2C /* AMKUser.m */,
-				3A6DF216202C9AA00084CB2C /* AMKEmail.m */,
-				3A6DF217202C9AA00084CB2C /* Manager */,
 				3A6DF21A202C9AA00084CB2C /* AKFbkProfile.m */,
-				3A6DF21B202C9AA00084CB2C /* Items */,
-				3A6DF223202C9AA00084CB2C /* Helper */,
+				3A6DF20F202C9AA00084CB2C /* AMKEmail.h */,
+				3A6DF216202C9AA00084CB2C /* AMKEmail.m */,
 				3A6DF228202C9AA00084CB2C /* AMKUser.h */,
+				3A6DF215202C9AA00084CB2C /* AMKUser.m */,
+				3A6DF223202C9AA00084CB2C /* Helper */,
+				3A6DF21B202C9AA00084CB2C /* Items */,
+				3A6DF217202C9AA00084CB2C /* Manager */,
+				3A6DF211202C9AA00084CB2C /* Server */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2131,17 +2098,17 @@
 		3A6DF229202C9AA00084CB2C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF22A202C9AA00084CB2C /* AKTextFieldCell.m */,
-				3A6DF22B202C9AA00084CB2C /* AKSignUpHeader.xib */,
-				3A6DF22C202C9AA00084CB2C /* AKLabelCell.h */,
-				3A6DF22D202C9AA00084CB2C /* AKSignUpHeader.h */,
 				3A6DF22E202C9AA00084CB2C /* AKItemCell.h */,
-				3A6DF22F202C9AA00084CB2C /* AKTextFieldCell.h */,
-				3A6DF230202C9AA00084CB2C /* AKTextFieldCell.xib */,
-				3A6DF231202C9AA00084CB2C /* AKLabelCell.swift */,
-				3A6DF232202C9AA00084CB2C /* AKSignUpHeader.m */,
+				3A6DF22C202C9AA00084CB2C /* AKLabelCell.h */,
 				3A6DF233202C9AA00084CB2C /* AKLabelCell.m */,
+				3A6DF231202C9AA00084CB2C /* AKLabelCell.swift */,
 				3A6DF234202C9AA00084CB2C /* AKLabelCell.xib */,
+				3A6DF22D202C9AA00084CB2C /* AKSignUpHeader.h */,
+				3A6DF232202C9AA00084CB2C /* AKSignUpHeader.m */,
+				3A6DF22B202C9AA00084CB2C /* AKSignUpHeader.xib */,
+				3A6DF22F202C9AA00084CB2C /* AKTextFieldCell.h */,
+				3A6DF22A202C9AA00084CB2C /* AKTextFieldCell.m */,
+				3A6DF230202C9AA00084CB2C /* AKTextFieldCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2149,16 +2116,16 @@
 		3A6DF236202C9AA00084CB2C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF237202C9AA00084CB2C /* UIBarButtonItem+NavigationBar.m */,
-				3A6DF238202C9AA00084CB2C /* NSString+ValidateEmailAddress.m */,
-				3A6DF239202C9AA00084CB2C /* UIViewController+modalController.m */,
-				3A6DF23A202C9AA00084CB2C /* UIView+FindFirstResponder.m */,
-				3A6DF23B202C9AA00084CB2C /* UIView+Keyboard.m */,
 				3A6DF23C202C9AA00084CB2C /* NSString+ValidateEmailAddress.h */,
+				3A6DF238202C9AA00084CB2C /* NSString+ValidateEmailAddress.m */,
 				3A6DF23D202C9AA00084CB2C /* UIBarButtonItem+NavigationBar.h */,
-				3A6DF23E202C9AA00084CB2C /* UIViewController+modalController.h */,
-				3A6DF23F202C9AA00084CB2C /* UIView+Keyboard.h */,
+				3A6DF237202C9AA00084CB2C /* UIBarButtonItem+NavigationBar.m */,
 				3A6DF240202C9AA00084CB2C /* UIView+FindFirstResponder.h */,
+				3A6DF23A202C9AA00084CB2C /* UIView+FindFirstResponder.m */,
+				3A6DF23F202C9AA00084CB2C /* UIView+Keyboard.h */,
+				3A6DF23B202C9AA00084CB2C /* UIView+Keyboard.m */,
+				3A6DF23E202C9AA00084CB2C /* UIViewController+modalController.h */,
+				3A6DF239202C9AA00084CB2C /* UIViewController+modalController.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -2919,13 +2886,11 @@
 				3A6DF2CD202C9AA00084CB2C /* AKTextFieldCell.h in Headers */,
 				3A6DF283202C9AA00084CB2C /* BPKCell.h in Headers */,
 				3A6DF2DC202C9AA00084CB2C /* UIView+Keyboard.h in Headers */,
-				3A6DF252202C9AA00084CB2C /* BPKPaymentTestViewController.h in Headers */,
 				3A6DF264202C9AA00084CB2C /* BPKUser.h in Headers */,
 				3A6DF277202C9AA00084CB2C /* BPKStepperCell.h in Headers */,
 				3A6DF29D202C9AA00084CB2C /* TripKitBookingsIncludes.h in Headers */,
 				3A6DF2C5202C9AA00084CB2C /* AMKAccountErrorHelper.h in Headers */,
 				3A6DF2B3202C9AA00084CB2C /* AKFbkProfile.h in Headers */,
-				3A6DF295202C9AA00084CB2C /* BPKTextPrefiller.h in Headers */,
 				3A6DF24A202C9AA00084CB2C /* BPKWebViewController.h in Headers */,
 				3A6DF2AA202C9AA00084CB2C /* AKResendEmailViewController.h in Headers */,
 				3A6DF294202C9AA00084CB2C /* BPKDataValidator.h in Headers */,
@@ -2935,17 +2900,14 @@
 				3A6DF2DD202C9AA00084CB2C /* UIView+FindFirstResponder.h in Headers */,
 				3A6DF290202C9AA00084CB2C /* BPKFormBuilder.h in Headers */,
 				3A6DF250202C9AA00084CB2C /* BPKBaseTableViewController.h in Headers */,
-				3A6DF248202C9AA00084CB2C /* UIViewController+RootPresenter.h in Headers */,
 				3A6DF25E202C9AA00084CB2C /* BPKForm.h in Headers */,
 				3A6DF297202C9AA00084CB2C /* BPKTextFieldHelper.h in Headers */,
-				3A6DF26A202C9AA00084CB2C /* BPKBTHelper.h in Headers */,
 				3A6DF26C202C9AA00084CB2C /* BPKCost.h in Headers */,
 				3A6DF244202C9AA00084CB2C /* BPKConstants.h in Headers */,
 				3A6DF25A202C9AA00084CB2C /* BPKSectionItem+Address.h in Headers */,
 				3A6DF253202C9AA00084CB2C /* BPKBookingViewController.h in Headers */,
 				3A6DF27B202C9AA00084CB2C /* BPKTextFieldCell.h in Headers */,
 				3A6DF245202C9AA00084CB2C /* NSString+BookingKit.h in Headers */,
-				3A6DF26B202C9AA00084CB2C /* BPKCreditCard.h in Headers */,
 				3A6DF296202C9AA00084CB2C /* BPKHelpers.h in Headers */,
 				3A6DF2A3202C9AA00084CB2C /* AKPasswordEditViewController.h in Headers */,
 				3A6DF2A7202C9AA00084CB2C /* AKAccountViewController.h in Headers */,
@@ -3310,7 +3272,6 @@
 				3A6DF27E202C9AA00084CB2C /* BPKDatePickerCell.xib in Resources */,
 				3A6DF2C9202C9AA00084CB2C /* AKSignUpHeader.xib in Resources */,
 				3A6DF2CE202C9AA00084CB2C /* AKTextFieldCell.xib in Resources */,
-				3A6DF24F202C9AA00084CB2C /* BPKPaymentTestViewController.xib in Resources */,
 				3A6DF2D2202C9AA00084CB2C /* AKLabelCell.xib in Resources */,
 				3A6DF28C202C9AA00084CB2C /* BPKActionOverlay.xib in Resources */,
 				3A6DF272202C9AA00084CB2C /* BPKTextFieldCell.xib in Resources */,
@@ -3654,7 +3615,6 @@
 				3A6DF2C2202C9AA00084CB2C /* AMKSection.m in Sources */,
 				3A6DF2A4202C9AA00084CB2C /* AKResendEmailViewController.m in Sources */,
 				3A6DF263202C9AA00084CB2C /* BPKEmail.m in Sources */,
-				3A6DF24D202C9AA00084CB2C /* BPKPaymentTestViewController.m in Sources */,
 				3A6DF275202C9AA00084CB2C /* BPKDatePickerCell.m in Sources */,
 				3A6DF289202C9AA00084CB2C /* BPKTextFieldCell.m in Sources */,
 				3A6DF298202C9AA00084CB2C /* BPKFormBuilder.m in Sources */,
@@ -3663,14 +3623,12 @@
 				3A6DF259202C9AA00084CB2C /* BPKForm.swift in Sources */,
 				3A6DF25B202C9AA00084CB2C /* BPKForm.m in Sources */,
 				3A6DF2A9202C9AA00084CB2C /* AKPasswordEditViewController.m in Sources */,
-				3A6DF28F202C9AA00084CB2C /* BPKTextPrefiller.m in Sources */,
 				3A6DF261202C9AA00084CB2C /* SSOAuthenticator.swift in Sources */,
 				3A6DF2BB202C9AA00084CB2C /* AKFbkProfile.m in Sources */,
 				3A6DF276202C9AA00084CB2C /* BPKCell.m in Sources */,
 				3A6DF25C202C9AA00084CB2C /* BPKSectionItem+Address.m in Sources */,
 				3A6DF260202C9AA00084CB2C /* OAuthClient.swift in Sources */,
 				3A6DF2D4202C9AA00084CB2C /* UIBarButtonItem+NavigationBar.m in Sources */,
-				3A6DF26D202C9AA00084CB2C /* BPKCreditCard.m in Sources */,
 				3A6DF278202C9AA00084CB2C /* BPKMessageCell.m in Sources */,
 				3A6DF2D6202C9AA00084CB2C /* UIViewController+modalController.m in Sources */,
 				3A6DF2B5202C9AA00084CB2C /* AMKCommunicator.swift in Sources */,
@@ -3694,11 +3652,9 @@
 				3A6DF2BA202C9AA00084CB2C /* AMKManager.m in Sources */,
 				3A6DF2A8202C9AA00084CB2C /* AKSignUpViewController.m in Sources */,
 				3A6DF266202C9AA00084CB2C /* BPKManager.m in Sources */,
-				3A6DF26E202C9AA00084CB2C /* BPKBTHelper.m in Sources */,
 				3A6DF2AD202C9AA00084CB2C /* AKAccountViewController.swift in Sources */,
 				3A6DF27A202C9AA00084CB2C /* BPKActionOverlay.m in Sources */,
 				3A6DF243202C9AA00084CB2C /* TKBookingTransitioner.swift in Sources */,
-				3A6DF246202C9AA00084CB2C /* UIViewController+RootPresenter.m in Sources */,
 				3A6DF274202C9AA00084CB2C /* BPKLabelCell.m in Sources */,
 				3A6DF29B202C9AA00084CB2C /* SGWebViewController.m in Sources */,
 				3A6DF2D5202C9AA00084CB2C /* NSString+ValidateEmailAddress.m in Sources */,

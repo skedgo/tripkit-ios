@@ -1,18 +1,5 @@
 # AccountKit
 
-## Dependencies
-
-Dependencies:
-
-- [`shared-ios`](https://github.com/skedgo/shared-ios):
-  - [`ServerKit`](https://github.com/skedgo/shared-ios/tree/master/Classes/ServerKit)
-  - [`SGAlert`](https://github.com/skedgo/shared-ios/tree/master/Classes/Actions)
-- Cocoapods
-  - [`KVNProgress`](https://github.com/kevin-hirsch/KVNProgress)
-- Swiftify your project
-  - Add `#import "AMKAccountKit.h"` to your `$ProjectName-Bridging-Header.h`
-  - Add `#import "$ProjectName-Swift.h"` to your prefix header
-
 ## Usage
 
 During your application initialisation call:

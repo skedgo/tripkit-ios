@@ -19,7 +19,6 @@
 
 - (BOOL)requiresTextFieldCellAtIndexPath:(NSIndexPath *)indexPath;
 
-- (void(^)(UITextField *))isEditingBlockForIndexPath:(NSIndexPath *)indexPath;
 - (void(^)(UITextField *))didEndEditingBlockForIndexPath:(NSIndexPath *)indexPath;
 - (BOOL(^)(UITextField *))shouldReturnBlockForIndexPath:(NSIndexPath *)indexPath;
 

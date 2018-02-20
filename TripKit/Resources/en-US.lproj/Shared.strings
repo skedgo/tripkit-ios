@@ -117,9 +117,6 @@
 /* No comment provided by engineer. */
 "Getting a lift" = "Getting a lift";
 
-/* Indicating that we are contacting Stripe for payment token */
-"Getting stripe token" = "Getting stripe token";
-
 /* Accessibility annotation for trips which have a reminder set. */
 "Has reminder" = "Has reminder";
 

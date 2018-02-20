@@ -259,10 +259,6 @@
   if ([cell respondsToSelector:@selector(setTextFieldDidEndEditingBlock:)]) {
     [cell setTextFieldDidEndEditingBlock:[self.textFieldHelper didEndEditingBlockForIndexPath:indexPath]];
   }
-  
-  if ([cell respondsToSelector:@selector(setTextFieldIsEditingBlock:)]) {
-    [cell setTextFieldIsEditingBlock:[self.textFieldHelper isEditingBlockForIndexPath:indexPath]];
-  }
 }
 
 - (void)configureTextCell:(BPKTextCell *)cell atIndexPath:(NSIndexPath *)indexPath forItem:(BPKSectionItem *)item
@@ -616,7 +612,7 @@
     [self processCancellationItemWithURL:url];
     
   } else if ([item isPayBookingItem]) {
-    [self processPaymentItemWithURL:url];
+    ZAssert(false, @"Not implemented.");
     
   } else {
     BPKWebViewController *webCtr = [[BPKWebViewController alloc] initWithTitle:[item title] startURL:url trackURL:disregardURL];
@@ -642,25 +638,6 @@
   
   self.nextBookingURL = item.nextURL;
   self.progressText = item.nextHUD;
-}
-
-- (void)processPaymentItemWithURL:(NSURL *)url
-{
-#ifdef BRAINTREE
-  [self.manager requestPaymentWithInitiatingURL:url
-                                 fromController:self
-                                     completion:
-   ^(BPKForm *statusForm, NSError *error) {
-     if (error != nil) {
-       [BPKHelpers presentAlertFromController:self withMessage:error.localizedDescription];
-     } else {
-       self.form = statusForm;
-       [self loadForm];
-     }
-   }];
-#else
-  ZAssert(false, @"Re-enable BRAINTREE!");
-#endif
 }
 
 - (void)processCancellationItemWithURL:(NSURL *)url

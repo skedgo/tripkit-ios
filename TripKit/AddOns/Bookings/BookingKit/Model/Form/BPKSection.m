@@ -291,31 +291,6 @@
   return [self idType] != nil && [[self idType] caseInsensitiveCompare:comparisonType] == NSOrderedSame;
 }
 
-- (BOOL)isCardNoItem
-{
-  return [self isIdTypeEqualTo:kBPKFormIdCardNo];
-}
-
-- (BOOL)isExpiryDateItem
-{
-  return [self isIdTypeEqualTo:kBPKFormIdExpiryDate];
-}
-
-- (BOOL)isCVCItem
-{
-  return [self isIdTypeEqualTo:kBPKFormIdCVC];
-}
-
-- (BOOL)isCCFirstNameItem
-{
-  return [self isIdTypeEqualTo:kBPKFormIdCCFirstName];
-}
-
-- (BOOL)isCCLastNameItem
-{
-  return [self isIdTypeEqualTo:kBPKFormIdCCLastName];
-}
-
 - (BOOL)isMessageItem
 {
   return [self isIdTypeEqualTo:kBPKFormIdMessage];

@@ -16,10 +16,7 @@
 @import TripKitUI;
 #endif
 
-
-
 #import "BPKUser.h"
-#import "BPKTextPrefiller.h"
 
 @interface BPKTextFieldCell () <UITextFieldDelegate>
 
@@ -29,7 +26,6 @@
 
 // Textfield delegate blocks
 @property (nonatomic, copy) BPKTextFieldNilReturnBlock textFieldDidEndEditingBlock;
-@property (nonatomic, copy) BPKTextFieldNilReturnBlock textFieldIsEditingBlock;
 @property (nonatomic, copy) BPKTextFieldBoolReturnBlock textFieldShouldReturnBlock;
 @property (nonatomic, copy) BPKTextFieldBoolReturnBlock textFieldShouldBeginEditingBlock;
 
@@ -87,11 +83,6 @@
 - (void)setTextFieldShouldBeginEditingBlock:(BPKTextFieldBoolReturnBlock)block
 {
   _textFieldShouldBeginEditingBlock = block;
-}
-
-- (void)setTextFieldIsEditingBlock:(BPKTextFieldNilReturnBlock)block
-{
-  _textFieldIsEditingBlock = block;
 }
 
 - (void)setTextFieldShouldReturnBlock:(BPKTextFieldBoolReturnBlock)block
@@ -225,10 +216,6 @@
   }
 #endif
   
-  if (prefillText == nil) {
-    prefillText = [BPKTextPrefiller prefillTextForItem:item];
-  }
-  
   if (prefillText != nil) {
     [item updateValue:prefillText];
     [[BPKUser sharedUser] updateInfoFromItem:item];
@@ -317,16 +304,6 @@
   } else {
     return YES;
   }
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-#pragma unused (range, string)
-  if (_textFieldIsEditingBlock != nil) {
-    _textFieldIsEditingBlock(textField);
-  }
-  
-  return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField

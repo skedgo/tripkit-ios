@@ -17,7 +17,6 @@
 
 - (instancetype)initWithJSON:(NSDictionary *)json;
 
-- (BOOL)acceptCreditCard;
 - (BOOL)acceptPaypal;
 
 @end

@@ -20,7 +20,6 @@ typedef BOOL (^BPKTextFieldBoolReturnBlock)(UITextField *textField);
 - (void)setTextFieldDidEndEditingBlock:(BPKTextFieldNilReturnBlock)block;
 - (void)setTextFieldDidBeginEditingBlock:(BPKTextFieldNilReturnBlock)block;
 - (void)setTextFieldShouldBeginEditingBlock:(BPKTextFieldBoolReturnBlock)block;
-- (void)setTextFieldIsEditingBlock:(BPKTextFieldNilReturnBlock)block;
 - (void)setTextFieldShouldReturnBlock:(BPKTextFieldBoolReturnBlock)block;
 
 @end
