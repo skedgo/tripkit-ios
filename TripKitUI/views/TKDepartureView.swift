@@ -23,18 +23,21 @@ public class TKDepartureView: UIView {
     return bundle.loadNibNamed("TKDepartureView", owner: self, options: nil)?.first as! TKDepartureView
   }
   
-  public func configure(for trip: STKTrip, to destination: SGTrackItemDisplayable) {
+  public func configure(for trip: STKTrip, to destination: SGTrackItemDisplayable?) {
     let segments = trip.segments(with: .inSummary)
     tripSegmentView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: true)
     
     imageView.isHidden = false
-    imageView.image = destination.trackIcon
-    destinationTitle.text = destination.title
+    imageView.image = destination?.trackIcon
+    destinationTitle.text = destination?.title
+      ?? trip.tripPurpose
+      ?? (trip as? Trip)?.request.toLocation.title
+      ?? Loc.Location
     
-    if let start = destination.startDate {
+    if let start = destination?.startDate {
       destinationTimes.isHidden = false
       
-      let duration = destination.duration
+      let duration = destination?.duration ?? -1
       if duration == -1 {
         destinationTimes.text = Loc.ArriveAt(date: SGStyleManager.timeString(start, for: nil))
       } else {
