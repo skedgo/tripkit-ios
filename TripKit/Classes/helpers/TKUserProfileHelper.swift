@@ -47,12 +47,18 @@ public class TKUserProfileHelper: NSObject {
     let shared = UserDefaults.shared
     if let enabled = enabled {
       shared.set(enabled, forKey: DefaultsKey.sortedEnabled.rawValue)
+      if enabled.contains(SVKTransportModeIdentifierWheelchair) {
+        showWheelchairInformation = true
+      }
     }
     if let minimized = minimized {
       shared.set(Array(minimized), forKey: DefaultsKey.minimized.rawValue)
     }
     if let hidden = hidden {
       shared.set(Array(hidden), forKey: DefaultsKey.hidden.rawValue)
+      if hidden.contains(SVKTransportModeIdentifierWheelchair) {
+        showWheelchairInformation = false
+      }
     }
   }
   
