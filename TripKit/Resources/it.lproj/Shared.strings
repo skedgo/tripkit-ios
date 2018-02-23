@@ -37,9 +37,6 @@
 /* Type of vehicle : bicycle */
 "Bicycle" = "Bicicletta";
 
-/* Credit card CVC */
-"CVC" = "CVC";
-
 /* Cancel action */
 "Cancel" = "Cancella";
 
@@ -51,9 +48,6 @@
 
 /* Type of vehicle : car */
 "Car" = "Auto";
-
-/* Credit card number */
-"Card No." = "Carta n.";
 
 /* Instruction for changing password */
 "Change" = "Modifica";
@@ -82,9 +76,6 @@
 /* Message that indicates the app is creating accounts for users */
 "Creating account" = "Creazione conto";
 
-/* Section title for credit card payment */
-"Credit card" = "Carta di pagamento";
-
 /* Current city */
 "Current City" = "Città attuale";
 
@@ -106,8 +97,7 @@
 /* Drop new pin */
 "Drop new pin" = "Inserisci nuovo punto";
 
-/* Email address where receipt is sent
-   Email used as Facebook username */
+/* For email address */
 "Email" = "Email";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
@@ -116,17 +106,11 @@
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "Tutti i giorni";
 
-/* Credit card expiry date */
-"Expiry Date" = "Data di scadenza";
-
 /* Reminder to leave preference */
 "For when to leave" = "Entro che ora vuoi partire";
 
 /* Free as in beer */
 "Free" = "Gratis";
-
-/* No comment provided by engineer. */
-"Full name" = "Nome Completo";
 
 /* No comment provided by engineer. */
 "Getting a lift" = "Prendere Carpool";
@@ -149,8 +133,8 @@
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
 
-/* Used when user signs in using Facebook */
-"Linking Facebook" = "Collegati con Facebook";
+/* Title of button to perform some action at a later time */
+"Later" = "Later";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Caricamento";
@@ -160,9 +144,6 @@
 
 /* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Per utilizzare questa funzione è necessario abilitare i servizi di localizzazione. Vai su Impostazioni> Privacy> servizi di localizzazione, assicurati che siano abilitati e autorizza questa app.";
-
-/* Indicating a payment is in progress */
-"Making payment" = "Fare il pagamento";
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minuti prima del viaggio";
@@ -176,15 +157,13 @@
 /* Title for view that shows the summary of a user's account information */
 "My account" = "Il mio account";
 
-/* Name to which receipt is sent
-   Name used in Facebook
-   Title for name of something (or someone) */
+/* Title for name of something (or someone) */
 "Name" = "Nome";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Mai";
 
-/* Title for sign in view when user does not have an account */
+/* Title of page to create new account */
 "New account" = "Nuovo account";
 
 /* Next action */
@@ -202,7 +181,7 @@
 /* Ok action */
 "OK" = "Ok";
 
-/* Button to open Settings app section for this app */
+/* Button that goes to the Setting's app */
 "Open Settings" = "Apri Impostazioni";
 
 /* Open in Safari action */
@@ -210,12 +189,6 @@
 
 /* No comment provided by engineer. */
 "Password" = "Password";
-
-/* Indicating a payment is successful */
-"Payment successful" = "Pagamento riuscito";
-
-/* Section title for Paypal payment */
-"Paypal" = "PayPal";
 
 /* Please select a location prompt */
 "Please select a location" = "Seleziona una posizione";
@@ -234,9 +207,6 @@
 
 /* Indicator for real-time information */
 "Real-time" = "Tempo reale";
-
-/* Title for section that asks users where payment receipt should be sent */
-"Receipt" = "Ricevuta";
 
 /* Action title to add/remove reminder */
 "Reminder" = "Promemoria";
@@ -277,16 +247,13 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'..." = "Cercando '%@'...";
 
-/* Button that goes to the Setting's app */
-"Settings" = "Impostazioni";
-
-/* No comment provided by engineer. */
+/* Title of page or button to sign in */
 "Sign in" = "Accedi";
 
 /* Instruction for signing out user account */
 "Sign out" = "Esegui il logout";
 
-/* No comment provided by engineer. */
+/* Title of page or button to sign up */
 "Sign up" = "Registrazione";
 
 /* No comment provided by engineer. */
@@ -295,8 +262,7 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Accesso in corso";
 
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
+/* Message that indicates the app is signing users out of their accounts */
 "Signing out" = "Logout in corso";
 
 /* Starting %date. (old key: DateFromFormat) */
@@ -370,9 +336,6 @@
 
 /* Email placeholder text */
 "example@example.com" = "example@example.com";
-
-/* Credit card expiry date placeholder, mm/yy */
-"mm/yy" = "mm/aa";
 
 /* Short indicator of start-time */
 "starts at %@" = "inizia alle %@";

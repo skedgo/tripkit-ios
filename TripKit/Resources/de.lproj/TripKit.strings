@@ -10,6 +10,9 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ spät (%2$@ Service)";
 
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "vor %@";
+
 /* Number of alerts, in this case, there are multiple (plural */
 "%@ alerts" = "%@ Warnungen";
 
@@ -57,23 +60,14 @@
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "Bei %@";
 
-/* No comment provided by engineer. */
-"Book with FlitWays" = "Mit FlitWays buchen";
-
-/* No comment provided by engineer. */
-"Book with Uber" = "Mit Uber buchen";
-
-/* Placeholder title while calculating trips */
-"Calculating trips..." = "Trips berechnen...";
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "Mit %@ buchen";
 
 /* No comment provided by engineer. */
 "Call" = "Anrufen";
 
-/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+/* Action title to make a call to service/company named '@%' */
 "Call %@" = "%@ anrufen";
-
-/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
-"Connect to Internet to get trips" = "Gehe online, um Trips zu sehen";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Haltestelle konnte nicht gefunden werden.";
@@ -102,11 +96,8 @@
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Voll";
 
-/* No comment provided by engineer. */
-"Get Lyft" = "Lyft herunterladen";
-
-/* No comment provided by engineer. */
-"Get Ola" = "Ola herunterladen";
+/* Action title get/download app of name '@%' */
+"Get %@" = "%@ herunterladen";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Navigieren";
@@ -120,11 +111,11 @@
 /* Indication of an activity. (old key: ActivityIndication) */
 "I'll take a %@ at %@ from %@." = "Ich nehme den %@ um %@ von %@.";
 
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "In %@";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Bis dahin, erkunde %@ weiter und genieße deine Reise.";
-
-/* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "Bis dahin, genieße deine Reise.";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -151,7 +142,7 @@
 /* No comment provided by engineer. */
 "Live traffic" = "Live-Verkehr";
 
-/* Title to show while loading/waiting for results */
+/* Indicating when something is loading */
 "Loading..." = "Laden...";
 
 /* As in 'this bus/train has many seats available' */
@@ -169,11 +160,8 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Pünktlich";
 
-/* No comment provided by engineer. */
-"Open Lyft" = "Lyft öffnen";
-
-/* No comment provided by engineer. */
-"Open Ola" = "Ola öffnen";
+/* Action title open app of name '@%' */
+"Open %@" = "%@ öffnen";
 
 /* Title for opening hours */
 "Opening Hours" = "Öffnungszeiten";
@@ -190,7 +178,7 @@
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Bitte suche erneut nach dieser Haltestelle oder versuche es später nochmal.";
 
-/* Send SMS action */
+/* Send SMS action button */
 "Send SMS" = "SMS senden";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
@@ -199,7 +187,7 @@
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
 "Show" = "Anzeigen";
 
-/* Show website action */
+/* Show website action button */
 "Show website" = "Webseite öffnen";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
@@ -238,6 +226,6 @@
 /* goCatch action */
 "goCatch a Taxi" = "goCatch nehmen";
 
-/* No comment provided by engineer. */
+/* inGogo taxi booking action */
 "ingogo a Taxi" = "ingogo nehmen";
 

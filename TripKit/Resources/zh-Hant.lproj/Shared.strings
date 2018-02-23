@@ -37,9 +37,6 @@
 /* Type of vehicle : bicycle */
 "Bicycle" = "自行車";
 
-/* Credit card CVC */
-"CVC" = "安全碼";
-
 /* Cancel action */
 "Cancel" = "取消";
 
@@ -51,9 +48,6 @@
 
 /* Type of vehicle : car */
 "Car" = "轎車";
-
-/* Credit card number */
-"Card No." = "卡號";
 
 /* Instruction for changing password */
 "Change" = "更改";
@@ -82,9 +76,6 @@
 /* Message that indicates the app is creating accounts for users */
 "Creating account" = "註冊帳戶";
 
-/* Section title for credit card payment */
-"Credit card" = "信用卡";
-
 /* Current city */
 "Current City" = "當前城市";
 
@@ -106,8 +97,7 @@
 /* Drop new pin */
 "Drop new pin" = "放置新的大頭針";
 
-/* Email address where receipt is sent
-   Email used as Facebook username */
+/* For email address */
 "Email" = "電子信箱";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
@@ -116,17 +106,11 @@
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "每天";
 
-/* Credit card expiry date */
-"Expiry Date" = "到期日";
-
 /* Reminder to leave preference */
 "For when to leave" = "出發時間";
 
 /* Free as in beer */
 "Free" = "免費";
-
-/* No comment provided by engineer. */
-"Full name" = "全名";
 
 /* No comment provided by engineer. */
 "Getting a lift" = "與人共乘";
@@ -149,8 +133,8 @@
 /* Name placeholder text */
 "John Appleseed" = "您的姓名";
 
-/* Used when user signs in using Facebook */
-"Linking Facebook" = "正在連結Facebook";
+/* Title of button to perform some action at a later time */
+"Later" = "Later";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "載入中";
@@ -160,9 +144,6 @@
 
 /* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "本功能需要使用定位服務. 請到設定 > 隱私 > 定位服務確認服務是開啟的，同時也請確認您已授權本App使用定位服務.";
-
-/* Indicating a payment is in progress */
-"Making payment" = "正在進行付款手續";
 
 /* Reminder to leave preference */
 "Minutes before trip" = "多久前提醒";
@@ -176,15 +157,13 @@
 /* Title for view that shows the summary of a user's account information */
 "My account" = "我的帳戶";
 
-/* Name to which receipt is sent
-   Name used in Facebook
-   Title for name of something (or someone) */
+/* Title for name of something (or someone) */
 "Name" = "名稱";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "永不重複";
 
-/* Title for sign in view when user does not have an account */
+/* Title of page to create new account */
 "New account" = "設定新帳戶";
 
 /* Next action */
@@ -202,7 +181,7 @@
 /* Ok action */
 "OK" = "好";
 
-/* Button to open Settings app section for this app */
+/* Button that goes to the Setting's app */
 "Open Settings" = "開啟設定";
 
 /* Open in Safari action */
@@ -210,12 +189,6 @@
 
 /* No comment provided by engineer. */
 "Password" = "密碼";
-
-/* Indicating a payment is successful */
-"Payment successful" = "付款成功";
-
-/* Section title for Paypal payment */
-"Paypal" = "Paypal";
 
 /* Please select a location prompt */
 "Please select a location" = "請選擇一個地點";
@@ -234,9 +207,6 @@
 
 /* Indicator for real-time information */
 "Real-time" = "即時";
-
-/* Title for section that asks users where payment receipt should be sent */
-"Receipt" = "確認信";
 
 /* Action title to add/remove reminder */
 "Reminder" = "提醒";
@@ -277,16 +247,13 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'..." = "正在搜尋%@…";
 
-/* Button that goes to the Setting's app */
-"Settings" = "設定";
-
-/* No comment provided by engineer. */
+/* Title of page or button to sign in */
 "Sign in" = "登入";
 
 /* Instruction for signing out user account */
 "Sign out" = "登出";
 
-/* No comment provided by engineer. */
+/* Title of page or button to sign up */
 "Sign up" = "註冊";
 
 /* No comment provided by engineer. */
@@ -295,8 +262,7 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "登入中...";
 
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
+/* Message that indicates the app is signing users out of their accounts */
 "Signing out" = "登出中...";
 
 /* Starting %date. (old key: DateFromFormat) */
@@ -370,9 +336,6 @@
 
 /* Email placeholder text */
 "example@example.com" = "example@example.com";
-
-/* Credit card expiry date placeholder, mm/yy */
-"mm/yy" = "月份/年份";
 
 /* Short indicator of start-time */
 "starts at %@" = "從%@開始";

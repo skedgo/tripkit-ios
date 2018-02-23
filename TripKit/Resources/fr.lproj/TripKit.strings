@@ -8,13 +8,16 @@
 "%1$@ late" = "%1$@ en retard";
 
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
-"%1$@ late (%2$@ service)" = "%1$@ en retard (Service de %2$@)";
+"%1$@ late (%2$@ service)" = "%1$@ en retard (service de %2$@)";
+
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ ago";
 
 /* Number of alerts, in this case, there are multiple (plural */
-"%@ alerts" = "%@ alerts";
+"%@ alerts" = "%@ alertes";
 
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
-"%@ cycle friendly" = "%@ accessible aux vélos";
+"%@ cycle friendly" = "%@ accessible en vélo";
 
 /* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
 "%@ stops" = "%@ arrêts";
@@ -27,7 +30,7 @@
 "%@ w/o traffic" = "%@ sans trafic";
 
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
-"%@ wheelchair friendly" = "%@ accessible au fauteuil roulant";
+"%@ wheelchair friendly" = "%@ accessible en fauteuil roulant";
 
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 arrêt";
@@ -57,23 +60,14 @@
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "À %@";
 
-/* No comment provided by engineer. */
-"Book with FlitWays" = "Réserver avec FlitWays";
-
-/* No comment provided by engineer. */
-"Book with Uber" = "Réserver avec Uber";
-
-/* Placeholder title while calculating trips */
-"Calculating trips..." = "Calcul de voyages...";
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "Réserver avec %@";
 
 /* No comment provided by engineer. */
 "Call" = "Appeler";
 
-/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+/* Action title to make a call to service/company named '@%' */
 "Call %@" = "Appeler %@";
-
-/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
-"Connect to Internet to get trips" = "Se connecter à Internet pour accéder aux trajets";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Impossible de trouver l'arrêt intermédiaire.";
@@ -94,40 +88,34 @@
 "Few seats available" = "Quelques places disponibles";
 
 /* Indicating a path is wheelchair/cycyling friendly */
-"Friendly" = "Friendly";
+"Friendly" = "Accès en vélo et fauteuil roulant";
 
 /* Departure location. (old key: PrimaryLocationStart) */
-"From %@" = "À %@";
+"From %@" = "De %@";
 
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Complet";
 
-/* No comment provided by engineer. */
-"Get Lyft" = "Obtenir Lyft";
-
-/* No comment provided by engineer. */
-"Get Ola" = "Obtenir Ola";
+/* Action title get/download app of name '@%' */
+"Get %@" = "Obtenir %@";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Obtenir les itinéraires";
-
-/* No comment provided by engineer. */
-"Get ingogo" = "Obtenir ingogo";
 
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
-"I'll arrive at %@ at %@" = "Je vais arriver à %@ à %@.";
+"I'll arrive at %@ at %@" = "J'arriverai à %@ à %@";
 
 /* Indication of an activity. (old key: ActivityIndication) */
 "I'll take a %@ at %@ from %@." = "Je vais prendre un %@ à %@ depuis %@.";
 
-/* %@ is replaced with app name */
-"In the meantime, let's keep exploring %@ and enjoy your trips" = "En attendant, continuons à explorer %@ et profitez de vos voyages";
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "In %@";
 
-/* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "En attendant, continuons à explorer %@ et profitez de vos voyages";
+/* %@ is replaced with app name */
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "En attendant, continuons d'explorer %@ et profiter de vos voyages";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -154,11 +142,11 @@
 /* No comment provided by engineer. */
 "Live traffic" = "Trafic en direct";
 
-/* Title to show while loading/waiting for results */
+/* Indicating when something is loading */
 "Loading..." = "Chargement...";
 
 /* As in 'this bus/train has many seats available' */
-"Many seats available" = "Plusieurs places disponibles";
+"Many seats available" = "De nombreux sièges disponibles";
 
 /* Title of button to get more details about an alert */
 "More info" = "Plus d'information";
@@ -172,53 +160,50 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "À l'heure";
 
-/* No comment provided by engineer. */
-"Open Lyft" = "Ouvrir Lyft";
-
-/* No comment provided by engineer. */
-"Open Ola" = "Ouvrez Ola";
+/* Action title open app of name '@%' */
+"Open %@" = "Ouvrir %@";
 
 /* Title for opening hours */
 "Opening Hours" = "Heures d’ouverture";
 
 /* No comment provided by engineer. */
-"Plan a trip and it will show up here." = "Planifier un voyage et il sera affiché ici.";
+"Plan a trip and it will show up here." = "Planifier un trajet pour qu'il s'affiche ici.";
 
 /* No comment provided by engineer. */
 "Public holiday" = "Jour férié";
 
 /* No comment provided by engineer. */
-"Real-time" = "Temps-réel";
+"Real-time" = "En temps réel";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later.";
+"Search for this stop again or try again later.." = "Rechercher cet arrêt ou réessayer plus tard ..";
 
-/* Send SMS action */
+/* Send SMS action button */
 "Send SMS" = "Envoyer un SMS";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Configurer";
 
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
-"Show" = "Show";
+"Show" = "Afficher";
 
-/* Show website action */
-"Show website" = "Ouvrir le site Web";
+/* Show website action button */
+"Show website" = "Afficher le site web";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
-"Standing room only" = "Places debout";
+"Standing room only" = "Places debout uniquement";
 
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
-"To %@" = "Jusqu'à %@";
+"To %@" = "À %@";
 
 /* Title for a trip */
 "Trip" = "Trajet";
 
 /* Indicating a path is wheelchair/cycyling unfriendly */
-"Unfriendly" = "Unfriendly";
+"Unfriendly" = "Pas d'accès en fauteuil roulant ni vélo";
 
 /* Indicating the wheelchair/cycling friendliness of a path is unknown */
-"Unknown" = "Unknown";
+"Unknown" = "À déterminer";
 
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Mis à jour il y a %@";
@@ -230,7 +215,7 @@
 "We are busy getting your upcoming trip. Please wait..." = "Nous recherchons votre prochain voyage. Veuillez patienter...";
 
 /* No comment provided by engineer. */
-"We'll keep you updated with the latest transit alerts here" = "Nous vous tiendrons à jour avec les dernières alertes de transit ici";
+"We'll keep you updated with the latest transit alerts here" = "Nous vous tiendrons informés des dernières alertes du service des transports";
 
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "à %@";
@@ -241,6 +226,6 @@
 /* goCatch action */
 "goCatch a Taxi" = "goCatch un Taxi";
 
-/* No comment provided by engineer. */
+/* inGogo taxi booking action */
 "ingogo a Taxi" = "ingogo un Taxi";
 

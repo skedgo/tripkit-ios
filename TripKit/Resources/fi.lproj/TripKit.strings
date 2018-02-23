@@ -10,6 +10,9 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ myöhässä (%2$@ yhteys)";
 
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ ago";
+
 /* Number of alerts, in this case, there are multiple (plural */
 "%@ alerts" = "%@ hälytykset";
 
@@ -57,23 +60,14 @@
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "Kohteessa %@";
 
-/* No comment provided by engineer. */
-"Book with FlitWays" = "Varaa FlitWayn kautta";
-
-/* No comment provided by engineer. */
-"Book with Uber" = "Varaa Uberin kautta";
-
-/* Placeholder title while calculating trips */
-"Calculating trips..." = "Lasketaan matkoja...";
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "Book with %@";
 
 /* No comment provided by engineer. */
 "Call" = "Soita";
 
-/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+/* Action title to make a call to service/company named '@%' */
 "Call %@" = "Soita firmalle %@";
-
-/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
-"Connect to Internet to get trips" = "Yhdistä nettiin hakeaksesi matkoja";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Välipysäkkiä ei löytynyt.";
@@ -94,7 +88,7 @@
 "Few seats available" = "Muutamia paikkoja vapaana";
 
 /* Indicating a path is wheelchair/cycyling friendly */
-"Friendly" = "Friendly";
+"Friendly" = "Ystävällinen";
 
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Kohteesta %@";
@@ -102,17 +96,11 @@
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Kaikki";
 
-/* No comment provided by engineer. */
-"Get Lyft" = "Hanki Lyft";
-
-/* No comment provided by engineer. */
-"Get Ola" = "Hanki Ola";
+/* Action title get/download app of name '@%' */
+"Get %@" = "Get %@";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Hae reittiohjeet";
-
-/* No comment provided by engineer. */
-"Get ingogo" = "Hanki Ingogo";
 
 /* google maps directions action */
 "Google Maps" = "Google Maps";
@@ -123,11 +111,11 @@
 /* Indication of an activity. (old key: ActivityIndication) */
 "I'll take a %@ at %@ from %@." = "Otan %@ paikasta %@";
 
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "In %@";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Sillä välin, jatketaan selailua %@ ja nautitaan saatavilla olevista matkoista";
-
-/* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "Sillä välin, jatketaan selailua ja nautitaan matkoistasi";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -154,7 +142,7 @@
 /* No comment provided by engineer. */
 "Live traffic" = "Live-liikenne";
 
-/* Title to show while loading/waiting for results */
+/* Indicating when something is loading */
 "Loading..." = "Ladataan...";
 
 /* As in 'this bus/train has many seats available' */
@@ -172,11 +160,8 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Ajoissa";
 
-/* No comment provided by engineer. */
-"Open Lyft" = "Avaa Lyft";
-
-/* No comment provided by engineer. */
-"Open Ola" = "Avaa Ola";
+/* Action title open app of name '@%' */
+"Open %@" = "Open %@";
 
 /* Title for opening hours */
 "Opening Hours" = "Avoinna lähtien";
@@ -193,16 +178,16 @@
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Hae tämän pysäkin tietoja uudelleen tai yritä myöhemmin uudelleen..";
 
-/* Send SMS action */
+/* Send SMS action button */
 "Send SMS" = "Lähetä SMS";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Asetukset";
 
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
-"Show" = "Show";
+"Show" = "Näytä";
 
-/* Show website action */
+/* Show website action button */
 "Show website" = "Avaa nettisivusto";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
@@ -215,10 +200,10 @@
 "Trip" = "Matka";
 
 /* Indicating a path is wheelchair/cycyling unfriendly */
-"Unfriendly" = "Unfriendly";
+"Unfriendly" = "Sopimaton";
 
 /* Indicating the wheelchair/cycling friendliness of a path is unknown */
-"Unknown" = "Unknown";
+"Unknown" = "Ei tiedossa";
 
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Päivitetty %@ sitten";
@@ -241,6 +226,6 @@
 /* goCatch action */
 "goCatch a Taxi" = "goCatch Taksi";
 
-/* No comment provided by engineer. */
+/* inGogo taxi booking action */
 "ingogo a Taxi" = "ingogo Taksi";
 
