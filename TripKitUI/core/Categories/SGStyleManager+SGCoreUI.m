@@ -172,7 +172,7 @@
   UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
   UIImage *image = selected ? [self imageNamed:@"icon-callout-tick-filled"] : [self imageNamed:@"icon-callout-tick"];
   [button setImage:image forState:UIControlStateNormal];
-  button.accessibilityLabel = NSLocalizedStringFromTableInBundle(@"Checkmark", @"Shared", [SGStyleManager bundle], "Accessibility title for a checkmark/tick button");
+  button.accessibilityLabel = Loc.Checkmark;
   button.tintColor = [self globalTintColor];
   return button;
 }

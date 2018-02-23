@@ -388,7 +388,7 @@
     if ([self.form isLast]) {
       NSURL *updatingURL = self.form.refreshURLForSourceObject;
       if (updatingURL != nil) {
-        NSString *message = NSLocalizedStringFromTableInBundle(@"Updating trip", @"Shared", [SGStyleManager bundle], @"Message that shows app is updating trip after user finalised bookings");
+        NSString *message = Loc.UpdatingTrip;
         [KVNProgress showWithStatus:message onView:self.view];
         
         [self.delegate bookingViewController:self
@@ -677,13 +677,13 @@
   }
   
   if (missingValue) {
-    [BPKHelpers presentAlertFromController:self withMessage:NSLocalizedStringFromTableInBundle(@"Values missing from required fields.", @"Shared", [SGStyleManager bundle], @"Message that informs users that some values are missing from the required fields in a booking form.")];
+    [BPKHelpers presentAlertFromController:self withMessage:Loc.ValuesMissing];
     
   } else if (missingTC) {
-    [BPKHelpers presentAlertFromController:self withMessage:NSLocalizedStringFromTableInBundle(@"You need to agree to the booking terms and conditions.", @"Shared", [SGStyleManager bundle], @"Message that informs users that T&C must be agreed before booking can be made.")];
+    [BPKHelpers presentAlertFromController:self withMessage:Loc.YouNeedToAgreeToTheBookingTerms];
     
   } else if (missingInsuranceTC) {
-    [BPKHelpers presentAlertFromController:self withMessage:NSLocalizedStringFromTableInBundle(@"You need to agree to the insurance terms and conditions.", @"Shared", [SGStyleManager bundle], @"Message that informs users that T&C for insurance must be agreed before booking can be made.")];
+    [BPKHelpers presentAlertFromController:self withMessage:Loc.YouNeedToAgreeToTheInsuranceTerms];
 
   }
 }

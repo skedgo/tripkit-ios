@@ -111,9 +111,6 @@
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Navigieren";
 
-/* No comment provided by engineer. */
-"Get ingogo" = "ingogo herunterladen";
-
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 

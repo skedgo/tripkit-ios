@@ -94,29 +94,4 @@ static NSString *const kBPKPaymentType        = @"paymentTypes";
 static NSString *const kBPKPaymentTypeCC      = @"creditcard";
 static NSString *const kBPKPaymentTypePaypal  = @"paypal";
 
-// Make payment
-static NSString *const kBPKPaymentAmount      = @"amount";
-static NSString *const kBPKPaymentCurrency    = @"currency";
-static NSString *const kBPKPaymentDescription = @"description";
-static NSString *const kBPKPaymentToken       = @"token";
-static NSString *const kBPKPaymentIdempotency = @"idempotencyKey";
-static NSString *const kBPKPaymentEmail       = @"email";
-
-// ---------------- Server Constants ----------------
-
-// Base URLs
-static NSString *const kBaseURLDebug = @"http://planck.buzzhives.com/satapp-debug/";
-
-// API endpoints
-static NSString *const kBookingApiShuttle = @"booking/shuttle";
-
-// HTTP request methods
-static NSString *const kRequestMethodGet  = @"GET";
-static NSString *const kRequestMethodPost = @"POST";
-
-// Headers
-static NSString *const kHttpHeadersKeyAppVersion  = @"X-Version";
-static NSString *const kHttpHeadersKeyContentType = @"Accept";
-static NSString *const kInfoPlistKeyAppVersion    = @"CFBundleShortVersionString";
-
 #endif

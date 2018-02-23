@@ -85,12 +85,12 @@ public class TKDepartureView: UIView {
     
     if departure.timeIntervalSinceNow > 0 {
       let leaveIn = readableTime(from: departure.timeIntervalSinceNow)
-      let title = NSLocalizedString("Leave in", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for when to depart. Countdown to departure will be displayed below.")
+      let title = Loc.LeaveIn
       return (title, leaveIn.number, leaveIn.unit)
     
     } else {
       let arriveIn = readableTime(from: arrival.timeIntervalSinceNow)
-      let title = NSLocalizedString("Arrive in", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below.")
+      let title = Loc.ArriveIn
       return (title, arriveIn.number, arriveIn.unit)
     }
     

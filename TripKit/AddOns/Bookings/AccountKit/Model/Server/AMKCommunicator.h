@@ -26,8 +26,6 @@ typedef void (^AMKCompletionBlock)(NSError * _Nullable error);
 
 - (void)signupWithName:(NSString *)name email:(NSString *)email password:(NSString *)password completion:(AMKServerBlock)handler;
 - (void)signInWithEmail:(NSString *)email password:(NSString *)password completion:(AMKServerBlock)handler;
-- (void)signInWithFacebook:(NSString *)token completion:(AMKServerBlock)handler;
-- (void)signInWithTwitter:(NSString *)token app:(SGAppIds)appId completion:(AMKServerBlock)handler;
 - (void)logout:(AMKCompletionBlock)handler;
 
 - (void)updateName:(NSString *)name completion:(AMKServerBlock)handler;

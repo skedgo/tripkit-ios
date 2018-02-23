@@ -34,6 +34,12 @@
 		3A5140311DEE62FA002DB39F /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5140301DEE62FA002DB39F /* TripRequest.swift */; };
 		3A57DB5D1F17A58800946553 /* SGLocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A57DB5C1F17A58800946553 /* SGLocationHelper.swift */; };
 		3A69C4031DEEB43700872FD1 /* Loc+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */; };
+		3A6DAECF20402622009282FE /* Loc+TripKitBookings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */; };
+		3A6DAED120402686009282FE /* Loc+TripKitInterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */; };
+		3A6DAED220403CF7009282FE /* Loc+TripKitInterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */; };
+		3A6DAED320403CFD009282FE /* Loc+TripKitBookings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */; };
+		3A6DAED5204040B2009282FE /* Loc+TripKitUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */; };
+		3A6DAED620404374009282FE /* Loc+TripKitUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */; };
 		3A6DF088202C8DA30084CB2C /* TripKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF086202C8DA30084CB2C /* TripKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF0F8202C8EB80084CB2C /* SGTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF097202C8EB80084CB2C /* SGTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF0F9202C8EB80084CB2C /* SGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF098202C8EB80084CB2C /* SGTableViewCell.m */; };
@@ -233,7 +239,6 @@
 		3A6DF2AF202C9AA00084CB2C /* AKSignUpViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF20B202C9AA00084CB2C /* AKSignUpViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2B0202C9AA00084CB2C /* AKAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF20C202C9AA00084CB2C /* AKAccountViewController.m */; };
 		3A6DF2B2202C9AA00084CB2C /* AMKEmail.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF20F202C9AA00084CB2C /* AMKEmail.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF2B3202C9AA00084CB2C /* AKFbkProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF210202C9AA00084CB2C /* AKFbkProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2B4202C9AA00084CB2C /* AMKCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF212202C9AA00084CB2C /* AMKCommunicator.m */; };
 		3A6DF2B5202C9AA00084CB2C /* AMKCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF213202C9AA00084CB2C /* AMKCommunicator.swift */; };
 		3A6DF2B6202C9AA00084CB2C /* AMKCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF214202C9AA00084CB2C /* AMKCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -241,7 +246,6 @@
 		3A6DF2B8202C9AA00084CB2C /* AMKEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF216202C9AA00084CB2C /* AMKEmail.m */; };
 		3A6DF2B9202C9AA00084CB2C /* AMKManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF218202C9AA00084CB2C /* AMKManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2BA202C9AA00084CB2C /* AMKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF219202C9AA00084CB2C /* AMKManager.m */; };
-		3A6DF2BB202C9AA00084CB2C /* AKFbkProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF21A202C9AA00084CB2C /* AKFbkProfile.m */; };
 		3A6DF2BC202C9AA00084CB2C /* AMKItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF21C202C9AA00084CB2C /* AMKItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2BD202C9AA00084CB2C /* AMKSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF21D202C9AA00084CB2C /* AMKSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2BE202C9AA00084CB2C /* AKTextFieldItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF21E202C9AA00084CB2C /* AKTextFieldItem.m */; };
@@ -249,20 +253,13 @@
 		3A6DF2C0202C9AA00084CB2C /* AMKItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF220202C9AA00084CB2C /* AMKItem.m */; };
 		3A6DF2C1202C9AA00084CB2C /* AKTextFieldItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF221202C9AA00084CB2C /* AKTextFieldItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2C2202C9AA00084CB2C /* AMKSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF222202C9AA00084CB2C /* AMKSection.m */; };
-		3A6DF2C3202C9AA00084CB2C /* AMKAccountErrorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF224202C9AA00084CB2C /* AMKAccountErrorHelper.m */; };
-		3A6DF2C4202C9AA00084CB2C /* AKFbkHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF225202C9AA00084CB2C /* AKFbkHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF2C5202C9AA00084CB2C /* AMKAccountErrorHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF226202C9AA00084CB2C /* AMKAccountErrorHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF2C6202C9AA00084CB2C /* AKFbkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF227202C9AA00084CB2C /* AKFbkHelper.m */; };
 		3A6DF2C7202C9AA00084CB2C /* AMKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF228202C9AA00084CB2C /* AMKUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2C8202C9AA00084CB2C /* AKTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF22A202C9AA00084CB2C /* AKTextFieldCell.m */; };
-		3A6DF2C9202C9AA00084CB2C /* AKSignUpHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF22B202C9AA00084CB2C /* AKSignUpHeader.xib */; };
 		3A6DF2CA202C9AA00084CB2C /* AKLabelCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF22C202C9AA00084CB2C /* AKLabelCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF2CB202C9AA00084CB2C /* AKSignUpHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF22D202C9AA00084CB2C /* AKSignUpHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2CC202C9AA00084CB2C /* AKItemCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF22E202C9AA00084CB2C /* AKItemCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2CD202C9AA00084CB2C /* AKTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF22F202C9AA00084CB2C /* AKTextFieldCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2CE202C9AA00084CB2C /* AKTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF230202C9AA00084CB2C /* AKTextFieldCell.xib */; };
 		3A6DF2CF202C9AA00084CB2C /* AKLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF231202C9AA00084CB2C /* AKLabelCell.swift */; };
-		3A6DF2D0202C9AA00084CB2C /* AKSignUpHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF232202C9AA00084CB2C /* AKSignUpHeader.m */; };
 		3A6DF2D1202C9AA00084CB2C /* AKLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF233202C9AA00084CB2C /* AKLabelCell.m */; };
 		3A6DF2D2202C9AA00084CB2C /* AKLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF234202C9AA00084CB2C /* AKLabelCell.xib */; };
 		3A6DF2D3202C9AA00084CB2C /* SGKConfig+BookingKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF235202C9AA00084CB2C /* SGKConfig+BookingKit.swift */; };
@@ -902,6 +899,9 @@
 		3A551D931E60D8C700332942 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A57DB5C1F17A58800946553 /* SGLocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGLocationHelper.swift; sourceTree = "<group>"; };
 		3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loc+TripKit.swift"; sourceTree = "<group>"; };
+		3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loc+TripKitBookings.swift"; sourceTree = "<group>"; };
+		3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loc+TripKitInterApp.swift"; sourceTree = "<group>"; };
+		3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loc+TripKitUI.swift"; sourceTree = "<group>"; };
 		3A6DF05E202C88E90084CB2C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = Carthage/Build/iOS/ASPolygonKit.framework; sourceTree = "<group>"; };
 		3A6DF062202C89180084CB2C /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -1121,7 +1121,6 @@
 		3A6DF20C202C9AA00084CB2C /* AKAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKAccountViewController.m; sourceTree = "<group>"; };
 		3A6DF20D202C9AA00084CB2C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A6DF20F202C9AA00084CB2C /* AMKEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKEmail.h; sourceTree = "<group>"; };
-		3A6DF210202C9AA00084CB2C /* AKFbkProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFbkProfile.h; sourceTree = "<group>"; };
 		3A6DF212202C9AA00084CB2C /* AMKCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKCommunicator.m; sourceTree = "<group>"; };
 		3A6DF213202C9AA00084CB2C /* AMKCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMKCommunicator.swift; sourceTree = "<group>"; };
 		3A6DF214202C9AA00084CB2C /* AMKCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKCommunicator.h; sourceTree = "<group>"; };
@@ -1129,7 +1128,6 @@
 		3A6DF216202C9AA00084CB2C /* AMKEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKEmail.m; sourceTree = "<group>"; };
 		3A6DF218202C9AA00084CB2C /* AMKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKManager.h; sourceTree = "<group>"; };
 		3A6DF219202C9AA00084CB2C /* AMKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKManager.m; sourceTree = "<group>"; };
-		3A6DF21A202C9AA00084CB2C /* AKFbkProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFbkProfile.m; sourceTree = "<group>"; };
 		3A6DF21C202C9AA00084CB2C /* AMKItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKItem.h; sourceTree = "<group>"; };
 		3A6DF21D202C9AA00084CB2C /* AMKSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKSection.h; sourceTree = "<group>"; };
 		3A6DF21E202C9AA00084CB2C /* AKTextFieldItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKTextFieldItem.m; sourceTree = "<group>"; };
@@ -1137,20 +1135,13 @@
 		3A6DF220202C9AA00084CB2C /* AMKItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKItem.m; sourceTree = "<group>"; };
 		3A6DF221202C9AA00084CB2C /* AKTextFieldItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKTextFieldItem.h; sourceTree = "<group>"; };
 		3A6DF222202C9AA00084CB2C /* AMKSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKSection.m; sourceTree = "<group>"; };
-		3A6DF224202C9AA00084CB2C /* AMKAccountErrorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKAccountErrorHelper.m; sourceTree = "<group>"; };
-		3A6DF225202C9AA00084CB2C /* AKFbkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFbkHelper.h; sourceTree = "<group>"; };
-		3A6DF226202C9AA00084CB2C /* AMKAccountErrorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKAccountErrorHelper.h; sourceTree = "<group>"; };
-		3A6DF227202C9AA00084CB2C /* AKFbkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFbkHelper.m; sourceTree = "<group>"; };
 		3A6DF228202C9AA00084CB2C /* AMKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKUser.h; sourceTree = "<group>"; };
 		3A6DF22A202C9AA00084CB2C /* AKTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKTextFieldCell.m; sourceTree = "<group>"; };
-		3A6DF22B202C9AA00084CB2C /* AKSignUpHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSignUpHeader.xib; sourceTree = "<group>"; };
 		3A6DF22C202C9AA00084CB2C /* AKLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKLabelCell.h; sourceTree = "<group>"; };
-		3A6DF22D202C9AA00084CB2C /* AKSignUpHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSignUpHeader.h; sourceTree = "<group>"; };
 		3A6DF22E202C9AA00084CB2C /* AKItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKItemCell.h; sourceTree = "<group>"; };
 		3A6DF22F202C9AA00084CB2C /* AKTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKTextFieldCell.h; sourceTree = "<group>"; };
 		3A6DF230202C9AA00084CB2C /* AKTextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKTextFieldCell.xib; sourceTree = "<group>"; };
 		3A6DF231202C9AA00084CB2C /* AKLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKLabelCell.swift; sourceTree = "<group>"; };
-		3A6DF232202C9AA00084CB2C /* AKSignUpHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSignUpHeader.m; sourceTree = "<group>"; };
 		3A6DF233202C9AA00084CB2C /* AKLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKLabelCell.m; sourceTree = "<group>"; };
 		3A6DF234202C9AA00084CB2C /* AKLabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKLabelCell.xib; sourceTree = "<group>"; };
 		3A6DF235202C9AA00084CB2C /* SGKConfig+BookingKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SGKConfig+BookingKit.swift"; sourceTree = "<group>"; };
@@ -2006,9 +1997,9 @@
 				3A6DF236202C9AA00084CB2C /* Categories */,
 				3A6DF1FE202C9AA00084CB2C /* Controller */,
 				3A6DF20E202C9AA00084CB2C /* Model */,
+				3A6DF229202C9AA00084CB2C /* View */,
 				3A6DF20D202C9AA00084CB2C /* README.md */,
 				3A6DF235202C9AA00084CB2C /* SGKConfig+BookingKit.swift */,
-				3A6DF229202C9AA00084CB2C /* View */,
 			);
 			path = AccountKit;
 			sourceTree = "<group>";
@@ -2037,13 +2028,10 @@
 		3A6DF20E202C9AA00084CB2C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF210202C9AA00084CB2C /* AKFbkProfile.h */,
-				3A6DF21A202C9AA00084CB2C /* AKFbkProfile.m */,
 				3A6DF20F202C9AA00084CB2C /* AMKEmail.h */,
 				3A6DF216202C9AA00084CB2C /* AMKEmail.m */,
 				3A6DF228202C9AA00084CB2C /* AMKUser.h */,
 				3A6DF215202C9AA00084CB2C /* AMKUser.m */,
-				3A6DF223202C9AA00084CB2C /* Helper */,
 				3A6DF21B202C9AA00084CB2C /* Items */,
 				3A6DF217202C9AA00084CB2C /* Manager */,
 				3A6DF211202C9AA00084CB2C /* Server */,
@@ -2073,26 +2061,15 @@
 		3A6DF21B202C9AA00084CB2C /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF21C202C9AA00084CB2C /* AMKItem.h */,
-				3A6DF21D202C9AA00084CB2C /* AMKSection.h */,
-				3A6DF21E202C9AA00084CB2C /* AKTextFieldItem.m */,
-				3A6DF21F202C9AA00084CB2C /* AMKItem.swift */,
-				3A6DF220202C9AA00084CB2C /* AMKItem.m */,
 				3A6DF221202C9AA00084CB2C /* AKTextFieldItem.h */,
+				3A6DF21E202C9AA00084CB2C /* AKTextFieldItem.m */,
+				3A6DF21C202C9AA00084CB2C /* AMKItem.h */,
+				3A6DF220202C9AA00084CB2C /* AMKItem.m */,
+				3A6DF21F202C9AA00084CB2C /* AMKItem.swift */,
+				3A6DF21D202C9AA00084CB2C /* AMKSection.h */,
 				3A6DF222202C9AA00084CB2C /* AMKSection.m */,
 			);
 			path = Items;
-			sourceTree = "<group>";
-		};
-		3A6DF223202C9AA00084CB2C /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				3A6DF224202C9AA00084CB2C /* AMKAccountErrorHelper.m */,
-				3A6DF225202C9AA00084CB2C /* AKFbkHelper.h */,
-				3A6DF226202C9AA00084CB2C /* AMKAccountErrorHelper.h */,
-				3A6DF227202C9AA00084CB2C /* AKFbkHelper.m */,
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 		3A6DF229202C9AA00084CB2C /* View */ = {
@@ -2103,9 +2080,6 @@
 				3A6DF233202C9AA00084CB2C /* AKLabelCell.m */,
 				3A6DF231202C9AA00084CB2C /* AKLabelCell.swift */,
 				3A6DF234202C9AA00084CB2C /* AKLabelCell.xib */,
-				3A6DF22D202C9AA00084CB2C /* AKSignUpHeader.h */,
-				3A6DF232202C9AA00084CB2C /* AKSignUpHeader.m */,
-				3A6DF22B202C9AA00084CB2C /* AKSignUpHeader.xib */,
 				3A6DF22F202C9AA00084CB2C /* AKTextFieldCell.h */,
 				3A6DF22A202C9AA00084CB2C /* AKTextFieldCell.m */,
 				3A6DF230202C9AA00084CB2C /* AKTextFieldCell.xib */,
@@ -2371,6 +2345,9 @@
 				3AB6C6621D1CD08E0089F687 /* model */,
 				3AB6C68A1D1CD08E0089F687 /* server */,
 				3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */,
+				3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */,
+				3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */,
+				3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */,
 				3AB6C6A41D1CD08E0089F687 /* TKConstants.h */,
 				3AB6C6A51D1CD08E0089F687 /* TKConstants.m */,
 				3AB6C6A61D1CD08E0089F687 /* TKTripKit.h */,
@@ -2589,8 +2566,8 @@
 			isa = PBXGroup;
 			children = (
 				3AFFAB351F06854F00147990 /* Categories */,
-				3AFFAB4C1F06854F00147990 /* Loc.swift */,
 				3AFFAB4D1F06854F00147990 /* Model */,
+				3AFFAB4C1F06854F00147990 /* Loc.swift */,
 				3AFFAB531F06854F00147990 /* SGKBetaHelper.h */,
 				3AFFAB541F06854F00147990 /* SGKBetaHelper.m */,
 				3AFFAB551F06854F00147990 /* SGKConfig.h */,
@@ -2889,12 +2866,9 @@
 				3A6DF264202C9AA00084CB2C /* BPKUser.h in Headers */,
 				3A6DF277202C9AA00084CB2C /* BPKStepperCell.h in Headers */,
 				3A6DF29D202C9AA00084CB2C /* TripKitBookingsIncludes.h in Headers */,
-				3A6DF2C5202C9AA00084CB2C /* AMKAccountErrorHelper.h in Headers */,
-				3A6DF2B3202C9AA00084CB2C /* AKFbkProfile.h in Headers */,
 				3A6DF24A202C9AA00084CB2C /* BPKWebViewController.h in Headers */,
 				3A6DF2AA202C9AA00084CB2C /* AKResendEmailViewController.h in Headers */,
 				3A6DF294202C9AA00084CB2C /* BPKDataValidator.h in Headers */,
-				3A6DF2C4202C9AA00084CB2C /* AKFbkHelper.h in Headers */,
 				3A6DF280202C9AA00084CB2C /* BPKSwitchCell.h in Headers */,
 				3A6DF2BC202C9AA00084CB2C /* AMKItem.h in Headers */,
 				3A6DF2DD202C9AA00084CB2C /* UIView+FindFirstResponder.h in Headers */,
@@ -2911,7 +2885,6 @@
 				3A6DF296202C9AA00084CB2C /* BPKHelpers.h in Headers */,
 				3A6DF2A3202C9AA00084CB2C /* AKPasswordEditViewController.h in Headers */,
 				3A6DF2A7202C9AA00084CB2C /* AKAccountViewController.h in Headers */,
-				3A6DF2CB202C9AA00084CB2C /* AKSignUpHeader.h in Headers */,
 				3A6DF2AB202C9AA00084CB2C /* AKBaseTableViewController.h in Headers */,
 				3A6DF258202C9AA00084CB2C /* BPKSection.h in Headers */,
 				3A6DF255202C9AA00084CB2C /* BPKOptionsViewController.h in Headers */,
@@ -3270,7 +3243,6 @@
 				3A6DF27F202C9AA00084CB2C /* BPKTableHeader.xib in Resources */,
 				3A6DF288202C9AA00084CB2C /* BPKLabelCell.xib in Resources */,
 				3A6DF27E202C9AA00084CB2C /* BPKDatePickerCell.xib in Resources */,
-				3A6DF2C9202C9AA00084CB2C /* AKSignUpHeader.xib in Resources */,
 				3A6DF2CE202C9AA00084CB2C /* AKTextFieldCell.xib in Resources */,
 				3A6DF2D2202C9AA00084CB2C /* AKLabelCell.xib in Resources */,
 				3A6DF28C202C9AA00084CB2C /* BPKActionOverlay.xib in Resources */,
@@ -3406,6 +3378,7 @@
 				3ABBDA202032132400205042 /* TKBuzzRouter+Rx.swift in Sources */,
 				3ABBDA582032132D00205042 /* TripRequest.swift in Sources */,
 				3ABBDADA2032135A00205042 /* NSDate+Formatting.swift in Sources */,
+				3A6DAED220403CF7009282FE /* Loc+TripKitInterApp.swift in Sources */,
 				3ABBDA652032132D00205042 /* TKSegment.m in Sources */,
 				3ABBDA212032132400205042 /* TKDeparturesProvider.swift in Sources */,
 				3ABBDA342032132400205042 /* TKSettings.m in Sources */,
@@ -3456,6 +3429,7 @@
 				3ABBDAA02032134D00205042 /* SGAggregateGeocoder.swift in Sources */,
 				3ABBDA7F2032133900205042 /* TKNextSegmentScorer.m in Sources */,
 				3ABBDA6E2032133300205042 /* LocationAPIModel.swift in Sources */,
+				3A6DAED320403CFD009282FE /* Loc+TripKitBookings.swift in Sources */,
 				3ABBDA272032132400205042 /* TKParserHelper.m in Sources */,
 				3ABBDAC62032135400205042 /* SGKConfig.swift in Sources */,
 				3ABBDA4C2032132D00205042 /* StopLocation.swift in Sources */,
@@ -3473,6 +3447,7 @@
 				3ABBDB092032137600205042 /* Trip+Shareable.swift in Sources */,
 				3ABBDA812032133900205042 /* TKUserProfileHelper.swift in Sources */,
 				3ABBDADC2032135A00205042 /* NSDate+Helpers.m in Sources */,
+				3A6DAED620404374009282FE /* Loc+TripKitUI.swift in Sources */,
 				3ABBDA522032132D00205042 /* Trip.swift in Sources */,
 				3ABBDAF52032136100205042 /* SGLocationManager.swift in Sources */,
 				3ABBDA122032131E00205042 /* Loc+TripKit.swift in Sources */,
@@ -3602,7 +3577,6 @@
 			files = (
 				3A6DF2A6202C9AA00084CB2C /* AKBaseTableViewController.m in Sources */,
 				3A6DF29E202C9AA00084CB2C /* TKBookingFormType.swift in Sources */,
-				3A6DF2C3202C9AA00084CB2C /* AMKAccountErrorHelper.m in Sources */,
 				3A6DF2B4202C9AA00084CB2C /* AMKCommunicator.m in Sources */,
 				3A6DF29F202C9AA00084CB2C /* TKUberSSO.swift in Sources */,
 				3A6DF28E202C9AA00084CB2C /* BPKHelpers.m in Sources */,
@@ -3624,7 +3598,6 @@
 				3A6DF25B202C9AA00084CB2C /* BPKForm.m in Sources */,
 				3A6DF2A9202C9AA00084CB2C /* AKPasswordEditViewController.m in Sources */,
 				3A6DF261202C9AA00084CB2C /* SSOAuthenticator.swift in Sources */,
-				3A6DF2BB202C9AA00084CB2C /* AKFbkProfile.m in Sources */,
 				3A6DF276202C9AA00084CB2C /* BPKCell.m in Sources */,
 				3A6DF25C202C9AA00084CB2C /* BPKSectionItem+Address.m in Sources */,
 				3A6DF260202C9AA00084CB2C /* OAuthClient.swift in Sources */,
@@ -3662,7 +3635,6 @@
 				3A6DF2D8202C9AA00084CB2C /* UIView+Keyboard.m in Sources */,
 				3A6DF242202C9AA00084CB2C /* TKBookingCoordinator.swift in Sources */,
 				3A6DF2AE202C9AA00084CB2C /* AKBaseTableViewController.swift in Sources */,
-				3A6DF2D0202C9AA00084CB2C /* AKSignUpHeader.m in Sources */,
 				3A6DF25F202C9AA00084CB2C /* OAuthStatus.swift in Sources */,
 				3A6DF293202C9AA00084CB2C /* BPKAlert.swift in Sources */,
 				3A6DF292202C9AA00084CB2C /* BPKTextFieldHelper.m in Sources */,
@@ -3672,7 +3644,6 @@
 				3A6DF2D7202C9AA00084CB2C /* UIView+FindFirstResponder.m in Sources */,
 				3A6DF2D3202C9AA00084CB2C /* SGKConfig+BookingKit.swift in Sources */,
 				3A6DF24B202C9AA00084CB2C /* BPKBaseTableViewController.m in Sources */,
-				3A6DF2C6202C9AA00084CB2C /* AKFbkHelper.m in Sources */,
 				3A6DF254202C9AA00084CB2C /* BPKMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3694,6 +3665,7 @@
 				3AFFAB941F06854F00147990 /* MKMapView+ZoomLevel.m in Sources */,
 				3A32CD7B1DC2EC4F003B158B /* RegionAPIModel.swift in Sources */,
 				3AFFAE001F06B1D000147990 /* StopLocation.swift in Sources */,
+				3A6DAED120402686009282FE /* Loc+TripKitInterApp.swift in Sources */,
 				3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */,
 				3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */,
 				3AB6C6D21D1CD08E0089F687 /* TKNextSegmentScorer.m in Sources */,
@@ -3829,6 +3801,7 @@
 				3AA03E5F1F0BC9DB00C6B337 /* SGPermissionManager+AuthorizationAlert.m in Sources */,
 				3A15D8D91D9CE08100BADBEA /* TKBuzzRouter+Rx.swift in Sources */,
 				3AB6C6E91D1CD08E0089F687 /* TripGroup.m in Sources */,
+				3A6DAED5204040B2009282FE /* Loc+TripKitUI.swift in Sources */,
 				3AFFAB9E1F06854F00147990 /* NSNumber+Formatter.m in Sources */,
 				3AB6C6D91D1CD08E0089F687 /* DLSEntry.m in Sources */,
 				3AFFABC61F06854F00147990 /* SVKError.swift in Sources */,
@@ -3851,6 +3824,7 @@
 				3A3C9BB81F75346400C8D476 /* BaseAPIModels.swift in Sources */,
 				3AA39AC51F7A35B60066CC94 /* Codable+Helpers.swift in Sources */,
 				3A8F61211F190CE80017ACDA /* SGLocationManager.swift in Sources */,
+				3A6DAECF20402622009282FE /* Loc+TripKitBookings.swift in Sources */,
 				3AFFAE0A1F06BA3700147990 /* TripRequest+Shareable.swift in Sources */,
 				3AB6C7101D1CD08E0089F687 /* TKSettings.m in Sources */,
 			);

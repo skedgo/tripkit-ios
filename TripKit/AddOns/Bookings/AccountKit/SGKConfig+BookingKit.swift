@@ -9,15 +9,6 @@
 import Foundation
 
 extension SGKConfig {
-  /// The app ID of your app on Facebook. Required for using
-  /// facebook login.
-  ///
-  /// Value comes from `SGBookingKit.facebookAppPermissions`
-  /// in `Config.plist`
-  @objc public var facebookAppID: String? {
-    return bookingSettings["facebookAppID"] as? String
-  }
-  
   /// Which permissions you want to use.
   ///
   /// For a list of possible values, see: https://developers.facebook.com/docs/facebook-login/permissions/v2.0

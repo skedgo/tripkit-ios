@@ -115,7 +115,6 @@ extension Loc {
     return String(format: format, appName)
   }
 
-  
   public static func Alerts(_ count: Int) -> String? {
     guard count > 1 else {
       return nil
@@ -124,8 +123,6 @@ extension Loc {
     let format = NSLocalizedString("%@ alerts", tableName: "TripKit", bundle: .tripKit, comment: "Number of alerts, in this case, there are multiple (plural")
     return String(format: format, NSNumber(value: count))
   }
-  
-
   
 }
 

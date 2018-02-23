@@ -37,8 +37,6 @@ static NSString *const kPathLogin     = @"account/login";
 static NSString *const kPathLogout    = @"account/logout";
 static NSString *const kPathReset     = @"account/reset";
 static NSString *const kPathPassword  = @"account/password";
-static NSString *const kPathFacebook  = @"account/facebook";
-static NSString *const kPathTwitter   = @"account/twitter";
 static NSString *const kPathUser      = @"api/user";
 static NSString *const kPathPhone     = @"api/user/phone";
 static NSString *const kPathImage     = @"api/user/image";
@@ -82,76 +80,6 @@ static NSString *const kPathImage     = @"api/user/image";
    ^(NSError *error) {
      if (handler != nil) {
        handler(email, error);
-     }
-   }];
-}
-
-- (void)signInWithFacebook:(NSString *)token completion:(AMKServerBlock)handler
-{ 
-  // Get path.
-  NSString *base = kPathFacebook;
-  NSString *path = [NSString stringWithFormat:@"%@/%@", base, token];
-  
-  [self.sharedServer hitSkedGoWithMethod:@"POST"
-                                    path:path
-                              parameters:@{}
-                                  region:nil
-                                 success:
-   ^(NSInteger status, id responseObject, NSData *data) {
-#pragma unused(status, data)
-     DLog(@"%@", responseObject);
-     [AMKCommunicator findTokenInResponse:responseObject
-                               completion:
-      ^(NSString * _Nullable userToken, NSError * _Nullable error) {
-        if (userToken) {
-          handler(userToken, nil);
-        } else {
-          handler(nil, error);
-        }
-      }];
-   }
-                                 failure:
-   ^(NSError *error) {
-     if (handler) {
-       handler(nil, error);
-     }
-   }];
-}
-
-- (void)signInWithTwitter:(NSString *)token app:(SGAppIds)appId completion:(AMKServerBlock)handler
-{
-  NSString *providerId = [self providerIdForAppId:appId];
-  
-  if (providerId.length == 0) {
-    ZAssert(false, @"Invalid appId for Twitter endpoint");
-  }
-  
-  // Get path.
-  NSString *base = kPathTwitter;
-  NSString *path = [NSString stringWithFormat:@"%@/%@/%@/%@", base, providerId, token, @""];
-  
-  [self.sharedServer hitSkedGoWithMethod:@"POST"
-                                    path:path
-                              parameters:@{}
-                                  region:nil
-                                 success:
-   ^(NSInteger status, id responseObject, NSData *data) {
-#pragma unused(status, data)
-     DLog(@"%@", responseObject);
-     [AMKCommunicator findTokenInResponse:responseObject
-                               completion:
-      ^(NSString * _Nullable userToken, NSError * _Nullable error) {
-        if (userToken) {
-          handler(userToken, nil);
-        } else {
-          handler(nil, error);
-        }
-      }];
-   }
-                                 failure:
-   ^(NSError *error) {
-     if (handler) {
-       handler(nil, error);
      }
    }];
 }

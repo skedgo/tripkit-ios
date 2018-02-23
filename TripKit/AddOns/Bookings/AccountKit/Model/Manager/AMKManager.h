@@ -17,12 +17,9 @@
 FOUNDATION_EXPORT NSString *const AMKAccountErrorKey;
 FOUNDATION_EXPORT NSString *const AMKRenewalFailureNotification;
 
-@interface AMKManager : NSObject <AMKUserDataSource>
+@interface AMKManager : NSObject
 
 + (AMKManager *)sharedInstance;
-
-// Setup
-- (void)setupWithManagedStore:(ACAccountStore *)store;
 
 // Sign up and sign in
 - (void)signupWithName:(NSString *)name email:(NSString *)email password:(NSString *)password completion:(AMKServerBlock)handler;
@@ -59,11 +56,6 @@ FOUNDATION_EXPORT NSString *const AMKRenewalFailureNotification;
 // Password
 - (void)changePasswordFrom:(NSString *)from to:(NSString *)to completion:(AMKServerBlock)handler;
 - (void)resetPassword:(AMKServerBlock)handler;
-
-// Social accounts
-- (void)linkWithFacebook:(AMKServerBlock)handler;
-- (void)validateSigninWithAutoRenew:(BOOL)autoRenew completion:(AMKCompletionBlock)completion;
-
 
 // Update AMKUser
 

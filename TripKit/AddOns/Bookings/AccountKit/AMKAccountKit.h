@@ -12,19 +12,15 @@
 @import KVNProgress;
 
 #import "AMKManager.h"
-#import "AKSignUpHeader.h"
 
 #import "AMKUser.h"
 #import "AMKEmail.h"
-#import "AKFbkProfile.h"
-#import "AKFbkHelper.h"
 
 #import "AKAccountViewController.h"
 #import "AKEmailEditViewController.h"
 #import "AKPasswordEditViewController.h"
 #import "AKSignUpViewController.h"
 #import "AKResendEmailViewController.h"
-#import "AMKAccountErrorHelper.h"
 
 #import "UIViewController+modalController.h"
 #import "UIBarButtonItem+NavigationBar.h"
