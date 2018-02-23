@@ -1,0 +1,278 @@
+{
+  "regions": [
+    {
+      "allowsBicyclesOnPublicTransport": true,
+      "bikeShare": [
+        {
+          "URL": "http://www.norisbike.de",
+          "color": {
+            "blue": 56,
+            "green": 22,
+            "red": 236
+          },
+          "integrations": [
+            "real_time",
+            "routing"
+          ],
+          "modeIdentifier": "cy_bic-s_norisbike-nurnberg",
+          "title": "NorisBike"
+        }
+      ],
+      "code": "DE_BV_Nuremberg",
+      "extraModes": [
+        {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax",
+          "title": "Taxi"
+        },
+        {
+          "URL": "https://mydriver.com",
+          "color": {
+            "blue": 0,
+            "green": 0,
+            "red": 0
+          },
+          "icon": "mydriver",
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax_MYDRIVER",
+          "title": "myDriver"
+        },
+        {
+          "URL": "http://www.norisbike.de",
+          "color": {
+            "blue": 56,
+            "green": 22,
+            "red": 236
+          },
+          "integrations": [
+            "real_time",
+            "routing"
+          ],
+          "modeIdentifier": "cy_bic-s_norisbike-nurnberg",
+          "title": "NorisBike"
+        }
+      ],
+      "hasSchoolServices": false,
+      "hasWheelchairInformation": true,
+      "modes": {
+        "cy_bic-s": {
+          "color": {
+            "blue": 99,
+            "green": 199,
+            "red": 30
+          },
+          "identifier": "cy_bic-s",
+          "specificModes": [
+            {
+              "color": {
+                "blue": 56,
+                "green": 22,
+                "red": 236
+              },
+              "identifier": "cy_bic-s_norisbike-nurnberg",
+              "integrations": [
+                "real_time",
+                "routing"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "title": "NorisBike",
+              "url": "http://www.norisbike.de"
+            }
+          ],
+          "title": "Bike share"
+        },
+        "ps_tax": {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "identifier": "ps_tax",
+          "lockedModes": [
+            {
+              "color": {
+                "blue": 0,
+                "green": 0,
+                "red": 0
+              },
+              "identifier": "ps_tax_MYDRIVER",
+              "integrations": [
+                "routing"
+              ],
+              "remoteIcon": "mydriver",
+              "title": "myDriver",
+              "url": "https://mydriver.com"
+            }
+          ],
+          "title": "Taxi"
+        },
+        "pt_pub": {
+          "color": {
+            "blue": 104,
+            "green": 197,
+            "red": 45
+          },
+          "identifier": "pt_pub",
+          "specificModes": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train",
+              "operators": [
+                "VGN",
+                "DPN"
+              ]
+            },
+            {
+              "alt": "subway",
+              "color": {
+                "blue": 165,
+                "green": 103,
+                "red": 0
+              },
+              "identifier": "pt_pub_subway",
+              "localIcon": "subway",
+              "operators": [
+                "VGN"
+              ],
+              "remoteIcon": "subway-germany"
+            },
+            {
+              "alt": "tram",
+              "identifier": "pt_pub_tram",
+              "localIcon": "tram",
+              "operators": [
+                "VGN"
+              ]
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus",
+              "operators": [
+                "VGN",
+                "FlixBus"
+              ]
+            }
+          ],
+          "title": "Public transport"
+        }
+      },
+      "operators": [
+        {
+          "modes": [
+            "pt_pub_train",
+            "pt_pub_tram",
+            "pt_pub_bus",
+            "pt_pub_subway"
+          ],
+          "name": "VGN",
+          "numberOfServices": 50056,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            },
+            {
+              "alt": "tram",
+              "identifier": "pt_pub_tram",
+              "localIcon": "tram"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "subway",
+              "color": {
+                "blue": 165,
+                "green": 103,
+                "red": 0
+              },
+              "identifier": "pt_pub_subway",
+              "localIcon": "subway",
+              "remoteIcon": "subway-germany"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "FlixBus",
+          "numberOfServices": 1597,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "DPN",
+          "numberOfServices": 201,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        }
+      ],
+      "streetBicyclePaths": true,
+      "streetWheelchairAccessibility": true,
+      "supportsConcessionPricing": false,
+      "transitBicycleAccessibility": true,
+      "transitConcessionPricing": false,
+      "transitModes": [
+        {
+          "alt": "train",
+          "identifier": "pt_pub_train",
+          "localIcon": "train"
+        },
+        {
+          "alt": "subway",
+          "color": {
+            "blue": 165,
+            "green": 103,
+            "red": 0
+          },
+          "identifier": "pt_pub_subway",
+          "localIcon": "subway",
+          "remoteIcon": "subway-germany"
+        },
+        {
+          "alt": "tram",
+          "identifier": "pt_pub_tram",
+          "localIcon": "tram"
+        },
+        {
+          "alt": "bus",
+          "identifier": "pt_pub_bus",
+          "localIcon": "bus"
+        }
+      ],
+      "transitWheelchairAccessibility": true
+    }
+  ],
+  "server": "104.28.7.61"
+}

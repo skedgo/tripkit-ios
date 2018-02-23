@@ -138,6 +138,16 @@ NSString *const SVKTransportModeIdentifierWheelchair                = @"wa_whe";
   }
 }
 
++ (NSString *)genericModeIdentifierForModeIdentifier:(NSString *)modeIdentifier
+{
+  NSArray *components = [modeIdentifier componentsSeparatedByString:@"_"];
+  if (components.count > 1) {
+    return [NSString stringWithFormat:@"%@_%@", components[0], components[1]];
+  } else {
+    return modeIdentifier;
+  }
+}
+
 + (NSSet *)groupedModeIdentifiers:(NSArray *)modeIdentifiers
                includeGroupForAll:(BOOL)addAllGroup
 {

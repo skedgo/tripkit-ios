@@ -1,0 +1,386 @@
+{
+  "regions": [
+    {
+      "allowsBicyclesOnPublicTransport": true,
+      "bikeShare": [
+        {
+          "URL": "https://www.mobibikes.ca/",
+          "color": {
+            "blue": 223,
+            "green": 171,
+            "red": 0
+          },
+          "integrations": [
+            "real_time",
+            "routing"
+          ],
+          "modeIdentifier": "cy_bic-s_mobibikes",
+          "title": "Mobi"
+        }
+      ],
+      "code": "CA_BC_Vancouver",
+      "extraModes": [
+        {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax",
+          "title": "Taxi"
+        },
+        {
+          "URL": "https://modo.coop/",
+          "color": {
+            "blue": 54,
+            "green": 62,
+            "red": 239
+          },
+          "icon": "modo",
+          "integrations": [
+            "real_time",
+            "routing"
+          ],
+          "modeIdentifier": "me_car-s_MODO",
+          "title": "Modo"
+        },
+        {
+          "URL": "https://www.mobibikes.ca/",
+          "color": {
+            "blue": 223,
+            "green": 171,
+            "red": 0
+          },
+          "integrations": [
+            "real_time",
+            "routing"
+          ],
+          "modeIdentifier": "cy_bic-s_mobibikes",
+          "title": "Mobi"
+        }
+      ],
+      "hasSchoolServices": false,
+      "hasWheelchairInformation": false,
+      "modes": {
+        "cy_bic-s": {
+          "color": {
+            "blue": 99,
+            "green": 199,
+            "red": 30
+          },
+          "identifier": "cy_bic-s",
+          "specificModes": [
+            {
+              "color": {
+                "blue": 223,
+                "green": 171,
+                "red": 0
+              },
+              "identifier": "cy_bic-s_mobibikes",
+              "integrations": [
+                "real_time",
+                "routing"
+              ],
+              "minimumLocalCostForMembership": 9.75,
+              "title": "Mobi",
+              "url": "https://www.mobibikes.ca/"
+            }
+          ],
+          "title": "Bike share"
+        },
+        "me_car-s": {
+          "color": {
+            "blue": 243,
+            "green": 169,
+            "red": 115
+          },
+          "identifier": "me_car-s",
+          "specificModes": [
+            {
+              "color": {
+                "blue": 54,
+                "green": 62,
+                "red": 239
+              },
+              "identifier": "me_car-s_MODO",
+              "integrations": [
+                "real_time",
+                "routing"
+              ],
+              "minimumLocalCostForMembership": 1,
+              "remoteIcon": "modo",
+              "title": "Modo",
+              "url": "https://modo.coop/"
+            }
+          ],
+          "title": "Car share"
+        },
+        "ps_tax": {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "identifier": "ps_tax",
+          "title": "Taxi"
+        },
+        "pt_pub": {
+          "color": {
+            "blue": 104,
+            "green": 197,
+            "red": 45
+          },
+          "identifier": "pt_pub",
+          "specificModes": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train",
+              "operators": [
+                "West Coast Express"
+              ]
+            },
+            {
+              "alt": "subway",
+              "identifier": "pt_pub_subway",
+              "localIcon": "subway",
+              "operators": [
+                "British Columbia Rapid Transit Company"
+              ]
+            },
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry",
+              "operators": [
+                "TransLink"
+              ]
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus",
+              "operators": [
+                "TransLink",
+                "BC Transit - Central Fraser Valley Transit System",
+                "BC Transit - Whistler Transit System",
+                "BC Transit - RDN Transit System",
+                "BC Transit - Chilliwack Transit System",
+                "BC Transit - Comox Valley Transit System",
+                "BC Transit - Sunshine Coast Transit System",
+                "BC Transit - Squamish Transit System",
+                "BC Transit - Fraser Valley Express"
+              ]
+            }
+          ],
+          "title": "Public transport"
+        }
+      },
+      "operators": [
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_pub_ferry"
+          ],
+          "name": "TransLink",
+          "numberOfServices": 70927,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_subway"
+          ],
+          "name": "British Columbia Rapid Transit Company",
+          "numberOfServices": 7052,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "subway",
+              "identifier": "pt_pub_subway",
+              "localIcon": "subway"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Central Fraser Valley Transit System",
+          "numberOfServices": 1554,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Whistler Transit System",
+          "numberOfServices": 1398,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - RDN Transit System",
+          "numberOfServices": 1128,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Chilliwack Transit System",
+          "numberOfServices": 536,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Comox Valley Transit System",
+          "numberOfServices": 417,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Sunshine Coast Transit System",
+          "numberOfServices": 282,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Squamish Transit System",
+          "numberOfServices": 241,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Fraser Valley Express",
+          "numberOfServices": 50,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "West Coast Express",
+          "numberOfServices": 18,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        }
+      ],
+      "streetBicyclePaths": true,
+      "streetWheelchairAccessibility": true,
+      "supportsConcessionPricing": true,
+      "transitBicycleAccessibility": true,
+      "transitConcessionPricing": true,
+      "transitModes": [
+        {
+          "alt": "train",
+          "identifier": "pt_pub_train",
+          "localIcon": "train"
+        },
+        {
+          "alt": "subway",
+          "identifier": "pt_pub_subway",
+          "localIcon": "subway"
+        },
+        {
+          "alt": "ferry",
+          "identifier": "pt_pub_ferry",
+          "localIcon": "ferry"
+        },
+        {
+          "alt": "bus",
+          "identifier": "pt_pub_bus",
+          "localIcon": "bus"
+        }
+      ],
+      "transitWheelchairAccessibility": false
+    }
+  ],
+  "server": "104.28.7.61"
+}

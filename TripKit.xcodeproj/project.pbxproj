@@ -43,6 +43,8 @@
 		3A6DAED320403CFD009282FE /* Loc+TripKitBookings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */; };
 		3A6DAED5204040B2009282FE /* Loc+TripKitUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */; };
 		3A6DAED620404374009282FE /* Loc+TripKitUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */; };
+		3A6DAED92040985B009282FE /* regionInfo-Nuremberg.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */; };
+		3A6DAEDA2040985B009282FE /* regionInfo-Vancouver.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */; };
 		3A6DF088202C8DA30084CB2C /* TripKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF086202C8DA30084CB2C /* TripKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF0F8202C8EB80084CB2C /* SGTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF097202C8EB80084CB2C /* SGTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF0F9202C8EB80084CB2C /* SGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF098202C8EB80084CB2C /* SGTableViewCell.m */; };
@@ -375,7 +377,6 @@
 		3AA3CECE202CD4D100E54859 /* departures-parentStop.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3CEAA202CD4D100E54859 /* departures-parentStop.json */; };
 		3AA3CECF202CD4D100E54859 /* alertsTransit.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3CEAB202CD4D100E54859 /* alertsTransit.json */; };
 		3AA3CED0202CD4D100E54859 /* SGCustomEventRecurrenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3CEAD202CD4D100E54859 /* SGCustomEventRecurrenceTest.swift */; };
-		3AA3CED1202CD4D100E54859 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3CEAE202CD4D100E54859 /* Info.plist */; };
 		3AA3CEE2202CD70400E54859 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3CEDB202CD70400E54859 /* TripKitModel.xcdatamodeld */; };
 		3AA3CEE3202CD70400E54859 /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3CEDB202CD70400E54859 /* TripKitModel.xcdatamodeld */; };
 		3AA77F621F76A913001D412D /* AlertAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA77F611F76A913001D412D /* AlertAPIModels.swift */; };
@@ -920,6 +921,8 @@
 		3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loc+TripKitBookings.swift"; sourceTree = "<group>"; };
 		3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loc+TripKitInterApp.swift"; sourceTree = "<group>"; };
 		3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loc+TripKitUI.swift"; sourceTree = "<group>"; };
+		3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-Nuremberg.json"; sourceTree = "<group>"; };
+		3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-Vancouver.json"; sourceTree = "<group>"; };
 		3A6DF05E202C88E90084CB2C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = Carthage/Build/iOS/ASPolygonKit.framework; sourceTree = "<group>"; };
 		3A6DF062202C89180084CB2C /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -2194,16 +2197,16 @@
 		3AA3CE82202CD4D100E54859 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				3AA3CE83202CD4D100E54859 /* ttp */,
-				3AA3CE85202CD4D100E54859 /* sharing */,
-				3AA3CE87202CD4D100E54859 /* restoration */,
-				3AA3CE89202CD4D100E54859 /* searching */,
-				3AA3CE8E202CD4D100E54859 /* TKTestCase.swift */,
-				3AA3CE8F202CD4D100E54859 /* Tests-Bridging-Header.h */,
-				3AA3CE90202CD4D100E54859 /* routing */,
-				3AA3CE93202CD4D100E54859 /* parsing */,
 				3AA3CE9E202CD4D100E54859 /* Data */,
 				3AA3CEAC202CD4D100E54859 /* event */,
+				3AA3CE93202CD4D100E54859 /* parsing */,
+				3AA3CE87202CD4D100E54859 /* restoration */,
+				3AA3CE90202CD4D100E54859 /* routing */,
+				3AA3CE89202CD4D100E54859 /* searching */,
+				3AA3CE85202CD4D100E54859 /* sharing */,
+				3AA3CE83202CD4D100E54859 /* ttp */,
+				3AA3CE8F202CD4D100E54859 /* Tests-Bridging-Header.h */,
+				3AA3CE8E202CD4D100E54859 /* TKTestCase.swift */,
 				3AA3CEAE202CD4D100E54859 /* Info.plist */,
 			);
 			path = Tests;
@@ -2256,16 +2259,16 @@
 		3AA3CE93202CD4D100E54859 /* parsing */ = {
 			isa = PBXGroup;
 			children = (
-				3AA3CE94202CD4D100E54859 /* TKAlertModelTest.swift */,
-				3AA3CE95202CD4D100E54859 /* STKModeHelperTest.swift */,
-				3AA3CE96202CD4D100E54859 /* TKBookingDecodingTest.swift */,
-				3AA3CE97202CD4D100E54859 /* TKJSONSanitizerTest.swift */,
 				3AA3CE98202CD4D100E54859 /* PolylineDecoderTest.swift */,
+				3AA3CE95202CD4D100E54859 /* STKModeHelperTest.swift */,
+				3AA3CE94202CD4D100E54859 /* TKAlertModelTest.swift */,
+				3AA3CE96202CD4D100E54859 /* TKBookingDecodingTest.swift */,
+				3AA3CE9B202CD4D100E54859 /* TKBuzzInfoProviderTest.swift */,
+				3AA3CE9D202CD4D100E54859 /* TKDeparturesModelTest.swift */,
+				3AA3CE97202CD4D100E54859 /* TKJSONSanitizerTest.swift */,
+				3AA3CE9C202CD4D100E54859 /* TKLinkedAccountTest.swift */,
 				3AA3CE99202CD4D100E54859 /* TKLocationInfoTest.swift */,
 				3AA3CE9A202CD4D100E54859 /* TKRegionManagerTest.swift */,
-				3AA3CE9B202CD4D100E54859 /* TKBuzzInfoProviderTest.swift */,
-				3AA3CE9C202CD4D100E54859 /* TKLinkedAccountTest.swift */,
-				3AA3CE9D202CD4D100E54859 /* TKDeparturesModelTest.swift */,
 			);
 			path = parsing;
 			sourceTree = "<group>";
@@ -2273,19 +2276,21 @@
 		3AA3CE9E202CD4D100E54859 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3AA3CE9F202CD4D100E54859 /* hornsbyToSkedGoService.json */,
-				3AA3CEA0202CD4D100E54859 /* locationInfo-carRental.json */,
-				3AA3CEA1202CD4D100E54859 /* regionInfo-Sydney.json */,
-				3AA3CEA2202CD4D100E54859 /* hornsbyToSkedGo.json */,
-				3AA3CEA3202CD4D100E54859 /* berowraToHornsbyService.json */,
-				3AA3CEA4202CD4D100E54859 /* geojson-nuremberg.json */,
-				3AA3CEA5202CD4D100E54859 /* routing-goget.json */,
-				3AA3CEA6202CD4D100E54859 /* regions.json */,
-				3AA3CEA7202CD4D100E54859 /* berowraToHornsby.json */,
-				3AA3CEA8202CD4D100E54859 /* locationInfo-bikePod.json */,
-				3AA3CEA9202CD4D100E54859 /* routing-pt-oldish.json */,
-				3AA3CEAA202CD4D100E54859 /* departures-parentStop.json */,
 				3AA3CEAB202CD4D100E54859 /* alertsTransit.json */,
+				3AA3CEA7202CD4D100E54859 /* berowraToHornsby.json */,
+				3AA3CEA3202CD4D100E54859 /* berowraToHornsbyService.json */,
+				3AA3CEAA202CD4D100E54859 /* departures-parentStop.json */,
+				3AA3CEA4202CD4D100E54859 /* geojson-nuremberg.json */,
+				3AA3CEA2202CD4D100E54859 /* hornsbyToSkedGo.json */,
+				3AA3CE9F202CD4D100E54859 /* hornsbyToSkedGoService.json */,
+				3AA3CEA8202CD4D100E54859 /* locationInfo-bikePod.json */,
+				3AA3CEA0202CD4D100E54859 /* locationInfo-carRental.json */,
+				3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */,
+				3AA3CEA1202CD4D100E54859 /* regionInfo-Sydney.json */,
+				3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */,
+				3AA3CEA6202CD4D100E54859 /* regions.json */,
+				3AA3CEA5202CD4D100E54859 /* routing-goget.json */,
+				3AA3CEA9202CD4D100E54859 /* routing-pt-oldish.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -3310,9 +3315,10 @@
 				3AA3CECB202CD4D100E54859 /* berowraToHornsby.json in Resources */,
 				3AA3CECC202CD4D100E54859 /* locationInfo-bikePod.json in Resources */,
 				3AA3CEC3202CD4D100E54859 /* hornsbyToSkedGoService.json in Resources */,
-				3AA3CED1202CD4D100E54859 /* Info.plist in Resources */,
+				3A6DAEDA2040985B009282FE /* regionInfo-Vancouver.json in Resources */,
 				3AA3CECD202CD4D100E54859 /* routing-pt-oldish.json in Resources */,
 				3AA3CECE202CD4D100E54859 /* departures-parentStop.json in Resources */,
+				3A6DAED92040985B009282FE /* regionInfo-Nuremberg.json in Resources */,
 				3AA3CECA202CD4D100E54859 /* regions.json in Resources */,
 				3AA3CEC8202CD4D100E54859 /* geojson-nuremberg.json in Resources */,
 				3AA3CEC7202CD4D100E54859 /* berowraToHornsbyService.json in Resources */,
