@@ -821,7 +821,6 @@
 		3AFFAE0A1F06BA3700147990 /* TripRequest+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE091F06BA3700147990 /* TripRequest+Shareable.swift */; };
 		3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE0B1F06BCF200147990 /* Service.swift */; };
 		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
-		D3EF25BA203E541500C618D6 /* TKAccessibilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF25B9203E541500C618D6 /* TKAccessibilityHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1490,7 +1489,6 @@
 		3AFFAE0B1F06BCF200147990 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D3A779281E513C5000BBAF6C /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D3EF25B9203E541500C618D6 /* TKAccessibilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAccessibilityHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2395,7 +2393,6 @@
 				3AB6C6601D1CD08E0089F687 /* TKNextSegmentScorer.m */,
 				3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */,
 				3AB6C6611D1CD08E0089F687 /* TKUserProfileHelper.swift */,
-				D3EF25B9203E541500C618D6 /* TKAccessibilityHelper.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -3749,7 +3746,6 @@
 				3AFFABD61F06854F00147990 /* STKMiniInstruction.m in Sources */,
 				3AFFABA41F06854F00147990 /* NSUserDefaults+SharedDefaults.m in Sources */,
 				3AB6C6CE1D1CD08E0089F687 /* TripRequest+Classify.m in Sources */,
-				D3EF25BA203E541500C618D6 /* TKAccessibilityHelper.swift in Sources */,
 				3AA03E771F0BC9DB00C6B337 /* SGRegionAutocompleter.m in Sources */,
 				3A84F00E1F77021200B2F9A0 /* TripGroup.swift in Sources */,
 				3AFFAB8B1F06854F00147990 /* NSManagedObjectContext+Rx.swift in Sources */,
