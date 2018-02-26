@@ -82,7 +82,7 @@ public class TKUserProfileHelper: NSObject {
     // calls for toggle.
     let isModifyingWalking = modeIdentifier == SVKTransportModeIdentifierWalking
     let walkingIsCurrentlyIncluded = !modeIdentifierIsHidden(SVKTransportModeIdentifierWalking)
-    let isModifyingWheelchair = modeIdentifier == SVKTransportModeIdentifierWheelchair
+    let isModifyingWheelchair = SVKTransportModes.modeIdentifierIsWheelchair(modeIdentifier)
     let wheelchairIsCurrentlyIncluded = !modeIdentifierIsHidden(SVKTransportModeIdentifierWheelchair)
     
     if isModifyingWalking && wheelchairIsCurrentlyIncluded {
