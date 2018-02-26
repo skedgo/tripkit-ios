@@ -59,7 +59,7 @@ extension API {
     public let title: String
     
     /// Additional info about the mode group
-    public let modeInfo: ModeInfo?
+    public let modeInfo: ModeInfo
     
     /// The specific modes of this group that are
     /// available for your API key.
@@ -80,14 +80,11 @@ extension API {
   /// provider, such as a car-sharing provider, bike-sharing
   /// provider, limousine company, or TNC.
   public struct SpecificModeDetails: Codable {
-    /// The specific identifier
-    public let identifier: String
-    
     /// Name of thise mode
     public let title: String?
     
     /// Additional info about the mode
-    public let modeInfo: ModeInfo?
+    public let modeInfo: ModeInfo
     
     /// Available integrations for this mode that are available
     /// through the TripGo API.
@@ -104,6 +101,15 @@ extension API {
     /// List of public transport operator names servicing
     /// this mode. (Public transport modes only)
     public let operators: [String]?
+    
+    public var identifier: String {
+      if let id = modeInfo.identifier {
+        return id
+      } else {
+        assertionFailure("Specific mode details should always have an identifier. Missing for '\(String(describing:self))'.")
+        return ""
+      }
+    }
   }
   
 }

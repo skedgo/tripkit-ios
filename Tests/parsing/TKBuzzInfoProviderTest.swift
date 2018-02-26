@@ -29,6 +29,14 @@ class TKBuzzInfoProviderTest: TKTestCase {
     XCTAssertEqual(sydney?.transitWheelchairAccessibility, true)
   }
   
+  func testRegionInformationList() throws {
+    let decoder = JSONDecoder()
+    let data = try dataFromJSON(named: "regionInfo-multi")
+    let response = try! decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
+    
+    XCTAssertEqual(response.regions.count, 6)
+  }
+  
   func testRegionInformationVancouver() throws {
     let decoder = JSONDecoder()
     let data = try dataFromJSON(named: "regionInfo-Vancouver")
@@ -37,7 +45,7 @@ class TKBuzzInfoProviderTest: TKTestCase {
     
     XCTAssertEqual(response.regions.count, 1)
     
-    XCTAssertEqual(vancouver?.modes.count, 4)
+    XCTAssertEqual(vancouver?.modes.count, 5)
     XCTAssertEqual(vancouver?.modes["me_car-s"]?.specificModes?.count, 1)
     XCTAssertEqual(vancouver?.specificModeDetails(for: "me_car-s_MODO")?.minimumLocalCostForMembership, 1)
 
@@ -54,10 +62,10 @@ class TKBuzzInfoProviderTest: TKTestCase {
     
     XCTAssertEqual(response.regions.count, 1)
     
-    XCTAssertEqual(nuremberg?.modes.count, 3)
+    XCTAssertEqual(nuremberg?.modes.count, 6)
     XCTAssertEqual(nuremberg?.modes["ps_tax"]?.lockedModes?.count, 1)
     XCTAssertEqual(nuremberg?.modes["ps_tax"]?.lockedModes?.first?.identifier, "ps_tax_MYDRIVER")
-
+    
     let norisbike = nuremberg?.specificModeDetails(for: "cy_bic-s_norisbike-nurnberg")
     XCTAssertEqual(norisbike?.url, URL(string: "http://www.norisbike.de"))
     XCTAssertEqual(norisbike?.title, "NorisBike")

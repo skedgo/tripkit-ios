@@ -11,8 +11,8 @@
             "red": 0
           },
           "integrations": [
-            "real_time",
-            "routing"
+            "routing",
+            "real_time"
           ],
           "modeIdentifier": "cy_bic-s_mobibikes",
           "title": "Mobi"
@@ -41,11 +41,23 @@
           },
           "icon": "modo",
           "integrations": [
-            "real_time",
-            "routing"
+            "routing",
+            "real_time"
           ],
           "modeIdentifier": "me_car-s_MODO",
           "title": "Modo"
+        },
+        {
+          "color": {
+            "blue": 243,
+            "green": 169,
+            "red": 115
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-r_SwiftFleet",
+          "title": "Car rental"
         },
         {
           "URL": "https://www.mobibikes.ca/",
@@ -55,8 +67,8 @@
             "red": 0
           },
           "integrations": [
-            "real_time",
-            "routing"
+            "routing",
+            "real_time"
           ],
           "modeIdentifier": "cy_bic-s_mobibikes",
           "title": "Mobi"
@@ -66,52 +78,102 @@
       "hasWheelchairInformation": false,
       "modes": {
         "cy_bic-s": {
-          "color": {
-            "blue": 99,
-            "green": 199,
-            "red": 30
+          "modeInfo": {
+            "alt": "Bike share",
+            "color": {
+              "blue": 99,
+              "green": 199,
+              "red": 30
+            },
+            "identifier": "cy_bic-s",
+            "localIcon": "bicycle-share"
           },
-          "identifier": "cy_bic-s",
           "specificModes": [
             {
-              "color": {
-                "blue": 223,
-                "green": 171,
-                "red": 0
-              },
-              "identifier": "cy_bic-s_mobibikes",
               "integrations": [
-                "real_time",
-                "routing"
+                "routing",
+                "real_time"
               ],
               "minimumLocalCostForMembership": 9.75,
+              "modeInfo": {
+                "alt": "Mobi",
+                "color": {
+                  "blue": 223,
+                  "green": 171,
+                  "red": 0
+                },
+                "description": "Mobi",
+                "identifier": "cy_bic-s_mobibikes",
+                "localIcon": "bicycle-share"
+              },
               "title": "Mobi",
               "url": "https://www.mobibikes.ca/"
             }
           ],
           "title": "Bike share"
         },
-        "me_car-s": {
-          "color": {
-            "blue": 243,
-            "green": 169,
-            "red": 115
-          },
-          "identifier": "me_car-s",
-          "specificModes": [
+        "me_car-r": {
+          "lockedModes": [
             {
-              "color": {
-                "blue": 54,
-                "green": 62,
-                "red": 239
-              },
-              "identifier": "me_car-s_MODO",
               "integrations": [
-                "real_time",
                 "routing"
               ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Car rental",
+                "color": {
+                  "blue": 243,
+                  "green": 169,
+                  "red": 115
+                },
+                "identifier": "me_car-r_SwiftFleet",
+                "localIcon": "car-share"
+              },
+              "title": "Car rental"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car rental",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-r",
+            "localIcon": "car-share"
+          },
+          "title": "Car rental"
+        },
+        "me_car-s": {
+          "modeInfo": {
+            "alt": "Car share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-s",
+            "localIcon": "car-share"
+          },
+          "specificModes": [
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
               "minimumLocalCostForMembership": 1,
-              "remoteIcon": "modo",
+              "modeInfo": {
+                "alt": "Modo",
+                "color": {
+                  "blue": 54,
+                  "green": 62,
+                  "red": 239
+                },
+                "description": "Modo",
+                "identifier": "me_car-s_MODO",
+                "localIcon": "car-share",
+                "remoteIcon": "modo"
+              },
               "title": "Modo",
               "url": "https://modo.coop/"
             }
@@ -119,50 +181,57 @@
           "title": "Car share"
         },
         "ps_tax": {
-          "color": {
-            "blue": 62,
-            "green": 202,
-            "red": 221
+          "modeInfo": {
+            "alt": "Taxi",
+            "color": {
+              "blue": 62,
+              "green": 202,
+              "red": 221
+            },
+            "identifier": "ps_tax",
+            "localIcon": "taxi"
           },
-          "identifier": "ps_tax",
           "title": "Taxi"
         },
         "pt_pub": {
-          "color": {
-            "blue": 104,
-            "green": 197,
-            "red": 45
+          "modeInfo": {
+            "alt": "Public transport",
+            "color": {
+              "blue": 104,
+              "green": 197,
+              "red": 45
+            },
+            "identifier": "pt_pub",
+            "localIcon": "public"
           },
-          "identifier": "pt_pub",
           "specificModes": [
             {
-              "alt": "train",
-              "identifier": "pt_pub_train",
-              "localIcon": "train",
+              "modeInfo": {
+                "alt": "train",
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+              },
               "operators": [
+                "British Columbia Rapid Transit Company",
                 "West Coast Express"
               ]
             },
             {
-              "alt": "subway",
-              "identifier": "pt_pub_subway",
-              "localIcon": "subway",
-              "operators": [
-                "British Columbia Rapid Transit Company"
-              ]
-            },
-            {
-              "alt": "ferry",
-              "identifier": "pt_pub_ferry",
-              "localIcon": "ferry",
+              "modeInfo": {
+                "alt": "ferry",
+                "identifier": "pt_pub_ferry",
+                "localIcon": "ferry"
+              },
               "operators": [
                 "TransLink"
               ]
             },
             {
-              "alt": "bus",
-              "identifier": "pt_pub_bus",
-              "localIcon": "bus",
+              "modeInfo": {
+                "alt": "bus",
+                "identifier": "pt_pub_bus",
+                "localIcon": "bus"
+              },
               "operators": [
                 "TransLink",
                 "BC Transit - Central Fraser Valley Transit System",
@@ -182,37 +251,37 @@
       "operators": [
         {
           "modes": [
-            "pt_pub_bus",
-            "pt_pub_ferry"
+            "pt_pub_ferry",
+            "pt_pub_bus"
           ],
           "name": "TransLink",
           "numberOfServices": 70927,
           "realTimeStatus": "CAPABLE",
           "types": [
             {
-              "alt": "bus",
-              "identifier": "pt_pub_bus",
-              "localIcon": "bus"
-            },
-            {
               "alt": "ferry",
               "identifier": "pt_pub_ferry",
               "localIcon": "ferry"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
             }
           ]
         },
         {
           "modes": [
-            "pt_pub_subway"
+            "pt_pub_train"
           ],
           "name": "British Columbia Rapid Transit Company",
           "numberOfServices": 7052,
           "realTimeStatus": "CAPABLE",
           "types": [
             {
-              "alt": "subway",
-              "identifier": "pt_pub_subway",
-              "localIcon": "subway"
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
             }
           ]
         },
@@ -362,11 +431,6 @@
           "alt": "train",
           "identifier": "pt_pub_train",
           "localIcon": "train"
-        },
-        {
-          "alt": "subway",
-          "identifier": "pt_pub_subway",
-          "localIcon": "subway"
         },
         {
           "alt": "ferry",
