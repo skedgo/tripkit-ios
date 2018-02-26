@@ -9,17 +9,20 @@
 import Foundation
 import RxSwift
 
+/// This class provides information about what accessibility features we support.
+/// in a given region. It currently only supports wheelchair. You can ask whether
+/// wheelchair information is available, for instance.
 @objc public class TKAccessibilityHelper: NSObject {
   
   let region: SVKRegion
   
-  @objc public var isWheelchairAvailable: Bool {
-    return rx_wheelchairAvailable.value
+  @objc public var isWheelchairInfoAvailable = false {
+    didSet {
+      rx_wheelchairInformationUpdated.onNext(())
+    }
   }
   
-  private let rx_regionInfo: Variable<API.RegionInfo?> = Variable(nil)
-  private let rx_wheelchairAvailable = Variable(false)
-  public let rx_wheelchairAvailabilityUpdated = PublishSubject<Bool>()
+  public let rx_wheelchairInformationUpdated = PublishSubject<Void>()
   
   private let disposeBag = DisposeBag()
   
@@ -27,20 +30,16 @@ import RxSwift
   
   @objc public init(region: SVKRegion) {
     self.region = region
-    
     super.init()
-    
-    rx_regionInfo.asObservable()
-      .map { $0?.transitWheelchairAccessibility ?? $0?.streetWheelchairAccessibility ?? false }
-      .subscribe(onNext: { [weak self] in
-        self?.rx_wheelchairAvailable.value = $0
-        self?.rx_wheelchairAvailabilityUpdated.onNext(true)
-      })
-      .disposed(by: disposeBag)
+  }
+  
+  @objc public func fetchWheelchairSupportInformation() {
     
     TKBuzzInfoProvider.fetchRegionInformation(forRegion: region) { [weak self] info in
-      self?.rx_regionInfo.value = info
+      let isAvailable = info?.transitWheelchairAccessibility ?? info?.streetWheelchairAccessibility ?? false
+      self?.isWheelchairInfoAvailable = isAvailable
     }
+    
   }
   
 }
