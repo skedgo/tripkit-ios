@@ -77,18 +77,20 @@ public class TKUserProfileHelper: NSObject {
   @objc public class func setModeIdentifier(_ modeIdentifier: Identifier, toHidden hidden: Bool) {
     update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: modeIdentifier, include: hidden)
     
-    // We give special consideration when modifying walking or wheelchair mode since we may
-    // need to perform toggle, e.g., adding walking while wheelchair is already included
-    // calls for toggle.
-    let isModifyingWalking = modeIdentifier == SVKTransportModeIdentifierWalking
-    let walkingIsCurrentlyIncluded = !modeIdentifierIsHidden(SVKTransportModeIdentifierWalking)
-    let isModifyingWheelchair = SVKTransportModes.modeIdentifierIsWheelchair(modeIdentifier)
-    let wheelchairIsCurrentlyIncluded = !modeIdentifierIsHidden(SVKTransportModeIdentifierWheelchair)
-    
-    if isModifyingWalking && wheelchairIsCurrentlyIncluded {
-      update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: SVKTransportModeIdentifierWheelchair, include: !hidden)
-    } else if isModifyingWheelchair && walkingIsCurrentlyIncluded {
-      update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: SVKTransportModeIdentifierWalking, include: !hidden)
+    switch (modeIdentifier, hidden) {
+    case (SVKTransportModeIdentifierWalking, true):
+      update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: SVKTransportModeIdentifierWheelchair, include: false)
+      showWheelchairInformation = true
+    case (SVKTransportModeIdentifierWalking, false):
+      update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: SVKTransportModeIdentifierWheelchair, include: true)
+      showWheelchairInformation = false
+    case (SVKTransportModeIdentifierWheelchair, true):
+      update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: SVKTransportModeIdentifierWalking, include: false)
+      showWheelchairInformation = false
+    case (SVKTransportModeIdentifierWheelchair, false):
+      update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: SVKTransportModeIdentifierWalking, include: true)
+      showWheelchairInformation = true
+    default: break
     }
   }
   
@@ -102,13 +104,6 @@ public class TKUserProfileHelper: NSObject {
     }
     
     UserDefaults.shared.set(Array(modes), forKey: key.rawValue)
-    
-    // Whenever we update the list of hidden modes, we need to consider if
-    // we are modifying wheelchair mode as it impacts whether we show
-    // wheelchair info.
-    if key == .hidden && modeIdentifier == SVKTransportModeIdentifierWheelchair {
-      showWheelchairInformation = !include
-    }
   }
   
   @objc public class func orderedEnabledModeIdentifiersForAvailableModeIdentifiers(_ available: [Identifier]) -> [Identifier] {
