@@ -11,8 +11,8 @@
             "red": 236
           },
           "integrations": [
-            "routing",
-            "real_time"
+            "real_time",
+            "routing"
           ],
           "modeIdentifier": "cy_bic-s_norisbike-nurnberg",
           "title": "NorisBike"
@@ -33,60 +33,6 @@
           "title": "Taxi"
         },
         {
-          "URL": "https://mydriver.com",
-          "color": {
-            "blue": 0,
-            "green": 0,
-            "red": 0
-          },
-          "icon": "mydriver",
-          "integrations": [
-            "routing"
-          ],
-          "modeIdentifier": "ps_tax_MYDRIVER",
-          "title": "myDriver"
-        },
-        {
-          "URL": "https://www.flinkster.de",
-          "color": {
-            "blue": 27,
-            "green": 13,
-            "red": 252
-          },
-          "integrations": [
-            "routing",
-            "real_time"
-          ],
-          "modeIdentifier": "me_car-s_FLINK",
-          "title": "Flinkster"
-        },
-        {
-          "color": {
-            "blue": 243,
-            "green": 169,
-            "red": 115
-          },
-          "integrations": [
-            "routing"
-          ],
-          "modeIdentifier": "me_car-r_SwiftFleet",
-          "title": "Car rental"
-        },
-        {
-          "URL": "https://www.blablacar.com",
-          "color": {
-            "blue": 184,
-            "green": 132,
-            "red": 19
-          },
-          "icon": "blablacar",
-          "integrations": [
-            "routing"
-          ],
-          "modeIdentifier": "me_car-p_BlaBlaCar",
-          "title": "BlaBlaCar"
-        },
-        {
           "URL": "http://www.norisbike.de",
           "color": {
             "blue": 56,
@@ -94,8 +40,8 @@
             "red": 236
           },
           "integrations": [
-            "routing",
-            "real_time"
+            "real_time",
+            "routing"
           ],
           "modeIdentifier": "cy_bic-s_norisbike-nurnberg",
           "title": "NorisBike"
@@ -118,8 +64,8 @@
           "specificModes": [
             {
               "integrations": [
-                "routing",
-                "real_time"
+                "real_time",
+                "routing"
               ],
               "minimumLocalCostForMembership": 0,
               "modeInfo": {
@@ -209,8 +155,8 @@
           "lockedModes": [
             {
               "integrations": [
-                "routing",
-                "real_time"
+                "real_time",
+                "routing"
               ],
               "modeInfo": {
                 "alt": "Flinkster",
@@ -282,7 +228,7 @@
               "red": 45
             },
             "identifier": "pt_pub",
-            "localIcon": "public"
+            "localIcon": "public-transport"
           },
           "specificModes": [
             {
@@ -340,19 +286,19 @@
       "operators": [
         {
           "modes": [
-            "pt_pub_train",
+            "pt_pub_bus",
             "pt_pub_tram",
             "pt_pub_subway",
-            "pt_pub_bus"
+            "pt_pub_train"
           ],
           "name": "VGN",
           "numberOfServices": 50056,
           "realTimeStatus": "INCAPABLE",
           "types": [
             {
-              "alt": "train",
-              "identifier": "pt_pub_train",
-              "localIcon": "train"
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
             },
             {
               "alt": "tram",
@@ -371,9 +317,9 @@
               "remoteIcon": "subway-germany"
             },
             {
-              "alt": "bus",
-              "identifier": "pt_pub_bus",
-              "localIcon": "bus"
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
             }
           ]
         },

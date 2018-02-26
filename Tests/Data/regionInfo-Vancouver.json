@@ -48,18 +48,6 @@
           "title": "Modo"
         },
         {
-          "color": {
-            "blue": 243,
-            "green": 169,
-            "red": 115
-          },
-          "integrations": [
-            "routing"
-          ],
-          "modeIdentifier": "me_car-r_SwiftFleet",
-          "title": "Car rental"
-        },
-        {
           "URL": "https://www.mobibikes.ca/",
           "color": {
             "blue": 223,
@@ -145,6 +133,28 @@
           "title": "Car rental"
         },
         "me_car-s": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "Zipcar",
+                "color": {
+                  "blue": 28,
+                  "green": 164,
+                  "red": 84
+                },
+                "description": "Zipcar",
+                "identifier": "me_car-s_ZIP",
+                "localIcon": "car-share",
+                "remoteDarkIcon": "zipcar-dark",
+                "remoteIcon": "zipcar"
+              },
+              "title": "Zipcar",
+              "url": "http://www.zipcar.com/"
+            }
+          ],
           "modeInfo": {
             "alt": "Car share",
             "color": {
@@ -202,7 +212,7 @@
               "red": 45
             },
             "identifier": "pt_pub",
-            "localIcon": "public"
+            "localIcon": "public-transport"
           },
           "specificModes": [
             {
@@ -212,8 +222,17 @@
                 "localIcon": "train"
               },
               "operators": [
-                "British Columbia Rapid Transit Company",
                 "West Coast Express"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "subway",
+                "identifier": "pt_pub_subway",
+                "localIcon": "subway"
+              },
+              "operators": [
+                "British Columbia Rapid Transit Company"
               ]
             },
             {
@@ -251,37 +270,37 @@
       "operators": [
         {
           "modes": [
-            "pt_pub_ferry",
-            "pt_pub_bus"
+            "pt_pub_bus",
+            "pt_pub_ferry"
           ],
           "name": "TransLink",
           "numberOfServices": 70927,
           "realTimeStatus": "CAPABLE",
           "types": [
             {
-              "alt": "ferry",
-              "identifier": "pt_pub_ferry",
-              "localIcon": "ferry"
-            },
-            {
               "alt": "bus",
               "identifier": "pt_pub_bus",
               "localIcon": "bus"
+            },
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
             }
           ]
         },
         {
           "modes": [
-            "pt_pub_train"
+            "pt_pub_subway"
           ],
           "name": "British Columbia Rapid Transit Company",
           "numberOfServices": 7052,
           "realTimeStatus": "CAPABLE",
           "types": [
             {
-              "alt": "train",
-              "identifier": "pt_pub_train",
-              "localIcon": "train"
+              "alt": "subway",
+              "identifier": "pt_pub_subway",
+              "localIcon": "subway"
             }
           ]
         },
@@ -433,6 +452,11 @@
           "localIcon": "train"
         },
         {
+          "alt": "subway",
+          "identifier": "pt_pub_subway",
+          "localIcon": "subway"
+        },
+        {
           "alt": "ferry",
           "identifier": "pt_pub_ferry",
           "localIcon": "ferry"
@@ -446,5 +470,5 @@
       "transitWheelchairAccessibility": false
     }
   ],
-  "server": "104.28.7.61"
+  "server": "104.28.6.61"
 }
