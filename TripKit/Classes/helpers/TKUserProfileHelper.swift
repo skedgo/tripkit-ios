@@ -76,22 +76,6 @@ public class TKUserProfileHelper: NSObject {
   
   @objc public class func setModeIdentifier(_ modeIdentifier: Identifier, toHidden hidden: Bool) {
     update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: modeIdentifier, include: hidden)
-    
-    switch (modeIdentifier, hidden) {
-    case (SVKTransportModeIdentifierWalking, true):
-      update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: SVKTransportModeIdentifierWheelchair, include: false)
-      showWheelchairInformation = true
-    case (SVKTransportModeIdentifierWalking, false):
-      update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: SVKTransportModeIdentifierWheelchair, include: true)
-      showWheelchairInformation = false
-    case (SVKTransportModeIdentifierWheelchair, true):
-      update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: SVKTransportModeIdentifierWalking, include: false)
-      showWheelchairInformation = false
-    case (SVKTransportModeIdentifierWheelchair, false):
-      update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: SVKTransportModeIdentifierWalking, include: true)
-      showWheelchairInformation = true
-    default: break
-    }
   }
   
   private class func update(_ identifiers: Set<Identifier>, forKey key: DefaultsKey, modeIdentifier: Identifier, include: Bool) {
