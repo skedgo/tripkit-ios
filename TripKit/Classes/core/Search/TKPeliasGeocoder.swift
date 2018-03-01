@@ -1,5 +1,5 @@
 //
-//  TKMapZenGeocoder.swift
+//  TKPeliasGeocoder.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 12.09.17.
@@ -8,12 +8,10 @@
 import Foundation
 import MapKit
 
-public class TKMapZenGeocoder: NSObject {
+public class TKPeliasGeocoder: NSObject {
   
-  private let apiKey: String
-  
-  public init(apiKey: String) {
-    self.apiKey = apiKey
+  public override init() {
+    super.init()
   }
   
   private enum Result {
@@ -28,11 +26,13 @@ public class TKMapZenGeocoder: NSObject {
       return
     }
     
-    let task = URLSession.shared.dataTask(with: url) { data, response, error in
+    var request = URLRequest(url: url)
+    request.addValue(SVKServer.shared.apiKey, forHTTPHeaderField: "X-TripGo-Key")
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
       
       if let data = data {
         do {
-          let coordinates = try TKMapZenGeocoder.parse(data: data)
+          let coordinates = try TKPeliasGeocoder.parse(data: data)
           completion(.success(coordinates))
         } catch {
           completion(.failure(error))
@@ -53,7 +53,7 @@ public class TKMapZenGeocoder: NSObject {
   
 }
 
-extension TKMapZenGeocoder: SGGeocoder {
+extension TKPeliasGeocoder: SGGeocoder {
   
   public func geocodeString(_ inputString: String, nearRegion mapRect: MKMapRect, success: @escaping SGGeocoderSuccessBlock, failure: SGGeocoderFailureBlock? = nil) {
     
@@ -63,12 +63,11 @@ extension TKMapZenGeocoder: SGGeocoder {
     }
     
     let region = MKCoordinateRegionForMapRect(mapRect)
-    var components = URLComponents(string: "https://search.mapzen.com/v1/search")
+    var components = URLComponents(string: "https://pelias.tripgo.com/v1/search")
     components?.queryItems = [
       URLQueryItem(name: "text", value: inputString),
       URLQueryItem(name: "focus.point.lat", value: String(region.center.latitude)),
       URLQueryItem(name: "focus.point.lon", value: String(region.center.longitude)),
-      URLQueryItem(name: "api_key", value: apiKey),
     ]
     
     hitSearch(components) { result in
@@ -85,7 +84,7 @@ extension TKMapZenGeocoder: SGGeocoder {
   
 }
 
-extension TKMapZenGeocoder: SGAutocompletionDataProvider {
+extension TKPeliasGeocoder: SGAutocompletionDataProvider {
   
   public var resultType: SGAutocompletionDataProviderResultType { return .location }
   
@@ -97,12 +96,11 @@ extension TKMapZenGeocoder: SGAutocompletionDataProvider {
     }
 
     let region = MKCoordinateRegionForMapRect(mapRect)
-    var components = URLComponents(string: "https://search.mapzen.com/v1/autocomplete")
+    var components = URLComponents(string: "https://pelias.tripgo.com/v1/autocomplete")
     components?.queryItems = [
       URLQueryItem(name: "text", value: string),
       URLQueryItem(name: "focus.point.lat", value: String(region.center.latitude)),
       URLQueryItem(name: "focus.point.lon", value: String(region.center.longitude)),
-      URLQueryItem(name: "api_key", value: apiKey),
     ]
     
     hitSearch(components) { result in
@@ -151,4 +149,3 @@ extension SGAutocompletionResult {
   }
 
 }
-

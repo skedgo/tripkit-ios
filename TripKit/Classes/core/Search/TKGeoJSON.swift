@@ -44,8 +44,8 @@ public enum TKGeoJSON {
   
 }
 
-/// Properties used by MapZen's geocoding
-public struct TKMapZenProperties: Decodable {
+/// Properties used by Pelias geocoders
+public struct TKPeliasProperties: Decodable {
   let gid: String?
   let source: String?
   
@@ -108,7 +108,7 @@ extension TKGeoJSON.Feature: Decodable {
     
     self.geometry = try values.decode(TKGeoJSON.Geometry.self, forKey: .geometry)
     
-    if let mapZen = try? values.decode(TKMapZenProperties.self, forKey: .properties) {
+    if let mapZen = try? values.decode(TKPeliasProperties.self, forKey: .properties) {
       self.properties = mapZen
     } else {
       self.properties = nil
