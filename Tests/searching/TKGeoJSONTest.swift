@@ -24,7 +24,7 @@ class TKGeoJSONTest: TKTestCase {
       
       for feature in features {
         XCTAssertNotNil(feature.properties, "Missing properties for \(feature.geometry)")
-        XCTAssert(feature.properties is TKMapZenProperties)
+        XCTAssert(feature.properties is TKPeliasProperties)
       }
       
     } else {

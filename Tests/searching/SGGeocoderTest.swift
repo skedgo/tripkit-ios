@@ -91,7 +91,7 @@ class SGGeocoderTest: XCTestCase {
     if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
       TripKit.apiKey = apiKey
       geocoders.append(SGBuzzGeocoder())
-      geocoders.append(TKMapZenGeocoder())
+      geocoders.append(TKPeliasGeocoder())
     } else {
       XCTFail("Could not construct SGBuzzGeocoder. Check environment variables.")
     }

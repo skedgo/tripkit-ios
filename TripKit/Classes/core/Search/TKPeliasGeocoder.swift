@@ -1,5 +1,5 @@
 //
-//  TKMapZenGeocoder.swift
+//  TKPeliasGeocoder.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 12.09.17.
@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-public class TKMapZenGeocoder: NSObject {
+public class TKPeliasGeocoder: NSObject {
   
   public override init() {
     super.init()
@@ -30,7 +30,7 @@ public class TKMapZenGeocoder: NSObject {
       
       if let data = data {
         do {
-          let coordinates = try TKMapZenGeocoder.parse(data: data)
+          let coordinates = try TKPeliasGeocoder.parse(data: data)
           completion(.success(coordinates))
         } catch {
           completion(.failure(error))
@@ -51,7 +51,7 @@ public class TKMapZenGeocoder: NSObject {
   
 }
 
-extension TKMapZenGeocoder: SGGeocoder {
+extension TKPeliasGeocoder: SGGeocoder {
   
   public func geocodeString(_ inputString: String, nearRegion mapRect: MKMapRect, success: @escaping SGGeocoderSuccessBlock, failure: SGGeocoderFailureBlock? = nil) {
     
@@ -82,7 +82,7 @@ extension TKMapZenGeocoder: SGGeocoder {
   
 }
 
-extension TKMapZenGeocoder: SGAutocompletionDataProvider {
+extension TKPeliasGeocoder: SGAutocompletionDataProvider {
   
   public var resultType: SGAutocompletionDataProviderResultType { return .location }
   
@@ -94,7 +94,7 @@ extension TKMapZenGeocoder: SGAutocompletionDataProvider {
     }
 
     let region = MKCoordinateRegionForMapRect(mapRect)
-    var components = URLComponents(string: "https://search.mapzen.com/v1/autocomplete")
+    var components = URLComponents(string: "https://pelias.tripgo.com/v1/autocomplete")
     components?.queryItems = [
       URLQueryItem(name: "text", value: string),
       URLQueryItem(name: "focus.point.lat", value: String(region.center.latitude)),
@@ -147,4 +147,3 @@ extension SGAutocompletionResult {
   }
 
 }
-
