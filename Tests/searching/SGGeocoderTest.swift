@@ -19,6 +19,8 @@ class SGGeocoderTest: XCTestCase {
   let newYork = MKCoordinateRegion.region(latitude: 40.716688, longitude: -74.006138)
   
   override func setUp() {
+    SVKServer.serverType = .production
+    
     geocoder = aggregateGeocoder()
   }
   
