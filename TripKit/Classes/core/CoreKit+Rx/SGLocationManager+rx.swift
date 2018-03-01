@@ -76,6 +76,7 @@ public extension Reactive where Base : SGLocationManager {
   }
   
   
+#if os(iOS)
   /// Observes the device's heading
   ///
   /// The observable does not error out and not terminate
@@ -105,6 +106,7 @@ public extension Reactive where Base : SGLocationManager {
     }
     
   }
+#endif
 
   
   public func tryAuthorization() -> Observable<Bool> {
@@ -136,6 +138,7 @@ public extension Reactive where Base : SGLocationManager {
 }
 
 
+#if os(iOS)
 fileprivate class Delegate: NSObject, CLLocationManagerDelegate {
   
   var onNewHeading: ((CLHeading) -> ())? = nil
@@ -149,3 +152,4 @@ fileprivate class Delegate: NSObject, CLLocationManagerDelegate {
   }
   
 }
+#endif
