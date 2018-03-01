@@ -93,7 +93,7 @@ class SGGeocoderTest: XCTestCase {
       geocoders.append(SGBuzzGeocoder())
       geocoders.append(TKPeliasGeocoder())
     } else {
-      XCTFail("Could not construct SGBuzzGeocoder. Check environment variables.")
+      XCTFail("TripGo API key missing. Check environment variable 'TRIPGO_API_KEY'.")
     }
     
     if let clientID = env["FOURSQUARE_CLIENT_ID"], !clientID.isEmpty,
@@ -104,7 +104,7 @@ class SGGeocoderTest: XCTestCase {
       )
       geocoders.append(foursquare)
     } else {
-      XCTFail("Could not construct Foursquare geocoder. Check environment variables.")
+      XCTFail("Could not construct Foursquare geocoder. Check environment variables 'FOURSQUARE_CLIENT_ID' and 'FOURSQUARE_CLIENT_SECRET'.")
     }
 
     

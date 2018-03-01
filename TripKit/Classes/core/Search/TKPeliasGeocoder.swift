@@ -26,7 +26,9 @@ public class TKPeliasGeocoder: NSObject {
       return
     }
     
-    let task = URLSession.shared.dataTask(with: url) { data, response, error in
+    var request = URLRequest(url: url)
+    request.addValue(SVKServer.shared.apiKey, forHTTPHeaderField: "X-TripGo-Key")
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
       
       if let data = data {
         do {
