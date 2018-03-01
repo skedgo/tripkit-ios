@@ -9,7 +9,6 @@
 import UIKit
 
 import RxSwift
-import Kingfisher
 
 #if TK_NO_MODULE
 #else
