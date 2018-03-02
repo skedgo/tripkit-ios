@@ -158,10 +158,14 @@ extension Reactive where Base: SVKServer {
   /// - Parameters:
   ///   - components: The day for which to fetch the agenda
   /// - Returns: Observable as described in notes
-  public func fetchAgenda(for components: DateComponents) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
+  public func fetchAgenda(for components: DateComponents, allowCache: Bool = true) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
     
     guard let dateString = components.dateString else {
       preconditionFailure("Bad components!")
+    }
+    
+    guard allowCache else {
+      return base.rx.fetchAgenda(for: components, dateString: dateString, hashCode: nil)
     }
     
     return TKFileCache.readAgenda(forDateString: dateString)
