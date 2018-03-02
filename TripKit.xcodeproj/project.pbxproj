@@ -243,7 +243,6 @@
 		3A6DF2B0202C9AA00084CB2C /* AKAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF20C202C9AA00084CB2C /* AKAccountViewController.m */; };
 		3A6DF2B2202C9AA00084CB2C /* AMKEmail.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF20F202C9AA00084CB2C /* AMKEmail.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2B4202C9AA00084CB2C /* AMKCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF212202C9AA00084CB2C /* AMKCommunicator.m */; };
-		3A6DF2B5202C9AA00084CB2C /* AMKCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF213202C9AA00084CB2C /* AMKCommunicator.swift */; };
 		3A6DF2B6202C9AA00084CB2C /* AMKCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF214202C9AA00084CB2C /* AMKCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2B7202C9AA00084CB2C /* AMKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF215202C9AA00084CB2C /* AMKUser.m */; };
 		3A6DF2B8202C9AA00084CB2C /* AMKEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF216202C9AA00084CB2C /* AMKEmail.m */; };
@@ -469,6 +468,8 @@
 		3AB6C7161D1CD08E0089F687 /* TKTripKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6A71D1CD08E0089F687 /* TKTripKit.m */; };
 		3AB6C7181D1CD08E0089F687 /* TripKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AB6C6AA1D1CD08E0089F687 /* TripKit.strings */; };
 		3ABA055D1F604551009D0FE9 /* TKShareHelper+Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA055C1F604551009D0FE9 /* TKShareHelper+Parsing.swift */; };
+		3ABA80A320499D9300E67BC7 /* SVKServer+UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA80A220499D9300E67BC7 /* SVKServer+UserAccount.swift */; };
+		3ABA80A420499D9300E67BC7 /* SVKServer+UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA80A220499D9300E67BC7 /* SVKServer+UserAccount.swift */; };
 		3ABBDA0D2032119300205042 /* STKCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7A1F06854F00147990 /* STKCoordinates.swift */; };
 		3ABBDA0E2032130500205042 /* Shared.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AFFAB141F06849500147990 /* Shared.strings */; };
 		3ABBDA0F2032130500205042 /* TripKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AB6C6AA1D1CD08E0089F687 /* TripKit.strings */; };
@@ -1161,7 +1162,6 @@
 		3A6DF20D202C9AA00084CB2C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A6DF20F202C9AA00084CB2C /* AMKEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKEmail.h; sourceTree = "<group>"; };
 		3A6DF212202C9AA00084CB2C /* AMKCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKCommunicator.m; sourceTree = "<group>"; };
-		3A6DF213202C9AA00084CB2C /* AMKCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMKCommunicator.swift; sourceTree = "<group>"; };
 		3A6DF214202C9AA00084CB2C /* AMKCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKCommunicator.h; sourceTree = "<group>"; };
 		3A6DF215202C9AA00084CB2C /* AMKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKUser.m; sourceTree = "<group>"; };
 		3A6DF216202C9AA00084CB2C /* AMKEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKEmail.m; sourceTree = "<group>"; };
@@ -1401,6 +1401,7 @@
 		3AB6C6B41D1CD08E0089F687 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TripKit.strings"; sourceTree = "<group>"; };
 		3AB6C6B51D1CD08E0089F687 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/TripKit.strings"; sourceTree = "<group>"; };
 		3ABA055C1F604551009D0FE9 /* TKShareHelper+Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKShareHelper+Parsing.swift"; sourceTree = "<group>"; };
+		3ABA80A220499D9300E67BC7 /* SVKServer+UserAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVKServer+UserAccount.swift"; sourceTree = "<group>"; };
 		3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWaypointRouter.h; sourceTree = "<group>"; };
 		3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWaypointRouter.m; sourceTree = "<group>"; };
 		3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKWaypointRouter.swift; sourceTree = "<group>"; };
@@ -2109,7 +2110,6 @@
 			isa = PBXGroup;
 			children = (
 				3A6DF212202C9AA00084CB2C /* AMKCommunicator.m */,
-				3A6DF213202C9AA00084CB2C /* AMKCommunicator.swift */,
 				3A6DF214202C9AA00084CB2C /* AMKCommunicator.h */,
 			);
 			path = Server;
@@ -2742,6 +2742,7 @@
 				3AFFAB721F06854F00147990 /* SVKServer.h */,
 				3AFFAB731F06854F00147990 /* SVKServer.m */,
 				3A096E1D1F20DAD500666E59 /* SVKServer.swift */,
+				3ABA80A220499D9300E67BC7 /* SVKServer+UserAccount.swift */,
 				3AFFAB741F06854F00147990 /* SVKServerKit.h */,
 				3AFFAB751F06854F00147990 /* SVKTransportModes.h */,
 				3AFFAB761F06854F00147990 /* SVKTransportModes.m */,
@@ -3459,6 +3460,7 @@
 				3ABBDAD52032135A00205042 /* Codable+Helpers.swift in Sources */,
 				3ABBDAFF2032136900205042 /* SGLocationManager+rx.swift in Sources */,
 				3ABBDA292032132400205042 /* TKQuickBookingHelper+Fake.swift in Sources */,
+				3ABA80A420499D9300E67BC7 /* SVKServer+UserAccount.swift in Sources */,
 				3ABBDA382032132400205042 /* TKWaypointRouter.m in Sources */,
 				3ABBDA392032132400205042 /* TKWaypointRouter.swift in Sources */,
 				3A79C74D203342CC00748DD1 /* TKAgendaSummary.swift in Sources */,
@@ -3712,7 +3714,6 @@
 				3A6DF2D4202C9AA00084CB2C /* UIBarButtonItem+NavigationBar.m in Sources */,
 				3A6DF278202C9AA00084CB2C /* BPKMessageCell.m in Sources */,
 				3A6DF2D6202C9AA00084CB2C /* UIViewController+modalController.m in Sources */,
-				3A6DF2B5202C9AA00084CB2C /* AMKCommunicator.swift in Sources */,
 				3A6DF241202C9AA00084CB2C /* TKLinkedAccountHelper.swift in Sources */,
 				3A6DF2B7202C9AA00084CB2C /* AMKUser.m in Sources */,
 				3A6DF28D202C9AA00084CB2C /* BPKDataValidator.m in Sources */,
@@ -3799,6 +3800,7 @@
 				3AB6C70E1D1CD08E0089F687 /* TKRoutingParser.m in Sources */,
 				3A14BE2C1F8F8047008B1B54 /* TKQuickBookingHelper+Fake.swift in Sources */,
 				3AB6C6FE1D1CD08E0089F687 /* TKBuzzRealTime.m in Sources */,
+				3ABA80A320499D9300E67BC7 /* SVKServer+UserAccount.swift in Sources */,
 				3A096E281F20DF6600666E59 /* TKLocationProvider.swift in Sources */,
 				3A096E2E1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift in Sources */,
 				3AB6C6FB1D1CD08E0089F687 /* TKBuzzInfoProvider.m in Sources */,
