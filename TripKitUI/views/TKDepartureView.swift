@@ -8,6 +8,20 @@
 
 import UIKit
 
+public struct TKDepartureViewDestination {
+  public let title: String
+  public let icon: SGKImage?
+  public let startTime: Date?
+  public let endTime: Date?
+  
+  public init(title: String, icon: SGKImage? = nil, startTime: Date? = nil, endTime: Date? = nil) {
+    self.title = title
+    self.icon = icon
+    self.startTime = startTime
+    self.endTime = endTime
+  }
+}
+
 public class TKDepartureView: UIView {
 
   @IBOutlet weak var tripSegmentView: SGTripSegmentsView!
@@ -22,30 +36,47 @@ public class TKDepartureView: UIView {
     let bundle = Bundle(for: self)
     return bundle.loadNibNamed("TKDepartureView", owner: self, options: nil)?.first as! TKDepartureView
   }
-  
+
   public func configure(for trip: STKTrip, to destination: SGTrackItemDisplayable?) {
+    
+    let endTime: Date?
+    if let start = destination?.startDate, let duration = destination?.duration, duration > 0 {
+      endTime = start.addingTimeInterval(duration)
+    } else {
+      endTime = nil
+    }
+    
+    let destinationInfo = TKDepartureViewDestination(
+      title: destination?.title
+        ?? trip.tripPurpose
+        ?? (trip as? Trip)?.request.toLocation.title
+        ?? Loc.Location,
+      icon: destination?.trackIcon,
+      startTime: destination?.startDate,
+      endTime: endTime
+    )
+    
+    configure(for: trip, to: destinationInfo)
+  }
+  
+  public func configure(for trip: STKTrip, to destination: TKDepartureViewDestination) {
     let segments = trip.segments(with: .inSummary)
     tripSegmentView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: true)
     
     imageView.isHidden = false
-    imageView.image = destination?.trackIcon
-    destinationTitle.text = destination?.title
-      ?? trip.tripPurpose
-      ?? (trip as? Trip)?.request.toLocation.title
-      ?? Loc.Location
+    imageView.image = destination.icon
+    destinationTitle.text = destination.title
     
-    if let start = destination?.startDate {
+    if let start = destination.startTime {
       destinationTimes.isHidden = false
       
-      let duration = destination?.duration ?? -1
-      if duration == -1 {
-        destinationTimes.text = Loc.ArriveAt(date: SGStyleManager.timeString(start, for: nil))
-      } else {
-        let end = start.addingTimeInterval(duration)
+      if let end = destination.endTime {
         let formatter = DateIntervalFormatter()
         formatter.dateStyle = .none
         formatter.timeStyle = .short
         destinationTimes.text = formatter.string(from: start, to: end)
+      } else {
+        destinationTimes.text = Loc.ArriveAt(date: SGStyleManager.timeString(start, for: nil))
       }
     } else {
       destinationTimes.text = nil
