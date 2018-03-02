@@ -115,7 +115,6 @@
 		3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0DF202C8EB80084CB2C /* TripKitUIBundle.swift */; };
 		3A6DF13B202C8EB80084CB2C /* TKEmptyAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */; };
 		3A6DF13C202C8EB80084CB2C /* TKAlertInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */; };
-		3A6DF13D202C8EB80084CB2C /* TKAgendaWidgetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E3202C8EB80084CB2C /* TKAgendaWidgetInfoView.swift */; };
 		3A6DF13E202C8EB80084CB2C /* TKPathFriendlinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E4202C8EB80084CB2C /* TKPathFriendlinessView.swift */; };
 		3A6DF13F202C8EB80084CB2C /* CircleAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0E5202C8EB80084CB2C /* CircleAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF140202C8EB80084CB2C /* TKDepartureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */; };
@@ -124,7 +123,6 @@
 		3A6DF143202C8EB80084CB2C /* VehicleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0E9202C8EB80084CB2C /* VehicleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF144202C8EB80084CB2C /* SGPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */; };
 		3A6DF145202C8EB80084CB2C /* TKAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EB202C8EB80084CB2C /* TKAlertCell.swift */; };
-		3A6DF146202C8EB80084CB2C /* TKAgendaWidgetInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EC202C8EB80084CB2C /* TKAgendaWidgetInfoView.xib */; };
 		3A6DF147202C8EB80084CB2C /* TKEmptyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */; };
 		3A6DF148202C8EB80084CB2C /* TKVehicleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */; };
 		3A6DF149202C8EB80084CB2C /* CircleAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */; };
@@ -1009,7 +1007,6 @@
 		3A6DF0DF202C8EB80084CB2C /* TripKitUIBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripKitUIBundle.swift; sourceTree = "<group>"; };
 		3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKEmptyAlertView.xib; sourceTree = "<group>"; };
 		3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKAlertInfoView.xib; sourceTree = "<group>"; };
-		3A6DF0E3202C8EB80084CB2C /* TKAgendaWidgetInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAgendaWidgetInfoView.swift; sourceTree = "<group>"; };
 		3A6DF0E4202C8EB80084CB2C /* TKPathFriendlinessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKPathFriendlinessView.swift; sourceTree = "<group>"; };
 		3A6DF0E5202C8EB80084CB2C /* CircleAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleAnnotationView.h; sourceTree = "<group>"; };
 		3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDepartureView.swift; sourceTree = "<group>"; };
@@ -1018,7 +1015,6 @@
 		3A6DF0E9202C8EB80084CB2C /* VehicleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleView.h; sourceTree = "<group>"; };
 		3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPulsingAnnotationView.m; sourceTree = "<group>"; };
 		3A6DF0EB202C8EB80084CB2C /* TKAlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertCell.swift; sourceTree = "<group>"; };
-		3A6DF0EC202C8EB80084CB2C /* TKAgendaWidgetInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKAgendaWidgetInfoView.xib; sourceTree = "<group>"; };
 		3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKEmptyAlertView.swift; sourceTree = "<group>"; };
 		3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKVehicleAnnotationView.swift; sourceTree = "<group>"; };
 		3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleAnnotationView.m; sourceTree = "<group>"; };
@@ -1773,26 +1769,24 @@
 		3A6DF0E0202C8EB80084CB2C /* views */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */,
-				3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */,
-				3A6DF0E3202C8EB80084CB2C /* TKAgendaWidgetInfoView.swift */,
-				3A6DF0E4202C8EB80084CB2C /* TKPathFriendlinessView.swift */,
 				3A6DF0E5202C8EB80084CB2C /* CircleAnnotationView.h */,
-				3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */,
-				3A6DF0E7202C8EB80084CB2C /* TKAlertCell.xib */,
-				3A6DF0E8202C8EB80084CB2C /* TKOccupancyView.swift */,
-				3A6DF0E9202C8EB80084CB2C /* VehicleView.h */,
+				3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */,
+				3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */,
 				3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */,
 				3A6DF0EB202C8EB80084CB2C /* TKAlertCell.swift */,
-				3A6DF0EC202C8EB80084CB2C /* TKAgendaWidgetInfoView.xib */,
-				3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */,
-				3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */,
-				3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */,
-				3A6DF0F0202C8EB80084CB2C /* TKDepartureView.xib */,
-				3A6DF0F1202C8EB80084CB2C /* TKPathFriendlinessView.xib */,
-				3A6DF0F2202C8EB80084CB2C /* VehicleView.m */,
+				3A6DF0E7202C8EB80084CB2C /* TKAlertCell.xib */,
 				3A6DF0F3202C8EB80084CB2C /* TKAlertInfoView.swift */,
-				3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */,
+				3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */,
+				3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */,
+				3A6DF0F0202C8EB80084CB2C /* TKDepartureView.xib */,
+				3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */,
+				3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */,
+				3A6DF0E8202C8EB80084CB2C /* TKOccupancyView.swift */,
+				3A6DF0E4202C8EB80084CB2C /* TKPathFriendlinessView.swift */,
+				3A6DF0F1202C8EB80084CB2C /* TKPathFriendlinessView.xib */,
+				3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */,
+				3A6DF0E9202C8EB80084CB2C /* VehicleView.h */,
+				3A6DF0F2202C8EB80084CB2C /* VehicleView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3263,7 +3257,6 @@
 				3A6DF0FC202C8EB80084CB2C /* SGTableViewCell.xib in Resources */,
 				3A6DF114202C8EB80084CB2C /* SGTripSummaryCell.xib in Resources */,
 				3A6DF0FD202C8EB80084CB2C /* SGCountdownCell.xib in Resources */,
-				3A6DF146202C8EB80084CB2C /* TKAgendaWidgetInfoView.xib in Resources */,
 				3A6DF10C202C8EB80084CB2C /* SGTripSummaryNanoCell.xib in Resources */,
 				3A6DF13B202C8EB80084CB2C /* TKEmptyAlertView.xib in Resources */,
 				3A6DF115202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib in Resources */,
@@ -3577,7 +3570,6 @@
 				3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */,
 				3A6DF120202C8EB80084CB2C /* UIImageView+Kingfisher.swift in Sources */,
 				3A6DF106202C8EB80084CB2C /* ASMapManager.m in Sources */,
-				3A6DF13D202C8EB80084CB2C /* TKAgendaWidgetInfoView.swift in Sources */,
 				3A6DF13E202C8EB80084CB2C /* TKPathFriendlinessView.swift in Sources */,
 				3A6DF10E202C8EB80084CB2C /* SGTripSummaryCell.m in Sources */,
 				3A6DF0FE202C8EB80084CB2C /* SGTableCell.m in Sources */,
