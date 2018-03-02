@@ -13,6 +13,11 @@ public class Loc : NSObject {
   fileprivate override init() { super.init() }
 
   @objc
+  public static var Alert: String {
+    return NSLocalizedString("Alert", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Default title for alert view")
+  }
+
+  @objc
   public static var Back: String {
     return NSLocalizedString("Back", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Accessibility label for 'back' or 'previous' button")
   }

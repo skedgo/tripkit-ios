@@ -29,17 +29,6 @@
   return self;
 }
 
-- (AMKItem *)initForExternalAccount
-{
-  self = [self init];
-  
-  if (self) {
-    self.readOnly = YES;
-  }
-  
-  return self;
-}
-
 #pragma mark - Public methods
 
 - (void)addDidSelectHandler:(AMKDidSelectItemHandler)handler forActionType:(AMKItemActionType)type

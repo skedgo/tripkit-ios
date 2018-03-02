@@ -111,6 +111,22 @@ extension TKBuzzInfoProvider {
         return response.alerts.map { $0.alert }
     }
   }
+  
+  /**
+   Asynchronously fetches information about whether the provided region supports
+   wheelchair.
+   
+   - Note: Completion block is executed on the main thread.
+   */
+  @objc
+  public class func fetchWheelchairSupportInformation(forRegion region: SVKRegion, completiton: @escaping (Bool) -> Void)
+  {
+    fetchRegionInformation(forRegion: region) { info in
+      let isSupoorted = info?.transitWheelchairAccessibility ?? info?.streetWheelchairAccessibility ?? false
+      completiton(isSupoorted)
+    }
+  }
+  
 }
 
 // MARK: - Response data model

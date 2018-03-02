@@ -33,3 +33,26 @@ extension UIImageView {
   }
   
 }
+
+extension UIButton {
+  
+  public func setImage(with url: URL?, for state: UIControlState) {
+    setImage(with: url, for: state, placeholder: nil)
+  }
+  
+  @objc(setImageWithURL:forState:placeholderImage:)
+  public func setImage(with url: URL?, for state: UIControlState, placeholder: SGKImage?) {
+    
+    let options: KingfisherOptionsInfo?
+    if let url = url, url.path.contains("@2x") {
+      options = [.scaleFactor(2)]
+    } else if let url = url, url.path.contains("@3x") {
+      options = [.scaleFactor(3)]
+    } else {
+      options = nil
+    }
+    
+    kf.setImage(with: url, for: state, placeholder: placeholder, options: options)
+  }
+  
+}

@@ -34,6 +34,17 @@
 		3A5140311DEE62FA002DB39F /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5140301DEE62FA002DB39F /* TripRequest.swift */; };
 		3A57DB5D1F17A58800946553 /* SGLocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A57DB5C1F17A58800946553 /* SGLocationHelper.swift */; };
 		3A69C4031DEEB43700872FD1 /* Loc+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */; };
+		3A6ABE64204050BC00645B93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6ABE66204050BC00645B93 /* InfoPlist.strings */; };
+		3A6ABE69204050BC00645B93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6ABE6B204050BC00645B93 /* InfoPlist.strings */; };
+		3A6ABE6E204050BC00645B93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6ABE70204050BC00645B93 /* InfoPlist.strings */; };
+		3A6DAECF20402622009282FE /* Loc+TripKitBookings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */; };
+		3A6DAED120402686009282FE /* Loc+TripKitInterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */; };
+		3A6DAED220403CF7009282FE /* Loc+TripKitInterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */; };
+		3A6DAED320403CFD009282FE /* Loc+TripKitBookings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */; };
+		3A6DAED5204040B2009282FE /* Loc+TripKitUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */; };
+		3A6DAED620404374009282FE /* Loc+TripKitUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */; };
+		3A6DAED92040985B009282FE /* regionInfo-Nuremberg.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */; };
+		3A6DAEDA2040985B009282FE /* regionInfo-Vancouver.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */; };
 		3A6DF088202C8DA30084CB2C /* TripKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF086202C8DA30084CB2C /* TripKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF0F8202C8EB80084CB2C /* SGTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF097202C8EB80084CB2C /* SGTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF0F9202C8EB80084CB2C /* SGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF098202C8EB80084CB2C /* SGTableViewCell.m */; };
@@ -233,7 +244,6 @@
 		3A6DF2AF202C9AA00084CB2C /* AKSignUpViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF20B202C9AA00084CB2C /* AKSignUpViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2B0202C9AA00084CB2C /* AKAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF20C202C9AA00084CB2C /* AKAccountViewController.m */; };
 		3A6DF2B2202C9AA00084CB2C /* AMKEmail.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF20F202C9AA00084CB2C /* AMKEmail.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF2B3202C9AA00084CB2C /* AKFbkProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF210202C9AA00084CB2C /* AKFbkProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2B4202C9AA00084CB2C /* AMKCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF212202C9AA00084CB2C /* AMKCommunicator.m */; };
 		3A6DF2B5202C9AA00084CB2C /* AMKCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF213202C9AA00084CB2C /* AMKCommunicator.swift */; };
 		3A6DF2B6202C9AA00084CB2C /* AMKCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF214202C9AA00084CB2C /* AMKCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -241,7 +251,6 @@
 		3A6DF2B8202C9AA00084CB2C /* AMKEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF216202C9AA00084CB2C /* AMKEmail.m */; };
 		3A6DF2B9202C9AA00084CB2C /* AMKManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF218202C9AA00084CB2C /* AMKManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2BA202C9AA00084CB2C /* AMKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF219202C9AA00084CB2C /* AMKManager.m */; };
-		3A6DF2BB202C9AA00084CB2C /* AKFbkProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF21A202C9AA00084CB2C /* AKFbkProfile.m */; };
 		3A6DF2BC202C9AA00084CB2C /* AMKItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF21C202C9AA00084CB2C /* AMKItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2BD202C9AA00084CB2C /* AMKSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF21D202C9AA00084CB2C /* AMKSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2BE202C9AA00084CB2C /* AKTextFieldItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF21E202C9AA00084CB2C /* AKTextFieldItem.m */; };
@@ -249,20 +258,13 @@
 		3A6DF2C0202C9AA00084CB2C /* AMKItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF220202C9AA00084CB2C /* AMKItem.m */; };
 		3A6DF2C1202C9AA00084CB2C /* AKTextFieldItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF221202C9AA00084CB2C /* AKTextFieldItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2C2202C9AA00084CB2C /* AMKSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF222202C9AA00084CB2C /* AMKSection.m */; };
-		3A6DF2C3202C9AA00084CB2C /* AMKAccountErrorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF224202C9AA00084CB2C /* AMKAccountErrorHelper.m */; };
-		3A6DF2C4202C9AA00084CB2C /* AKFbkHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF225202C9AA00084CB2C /* AKFbkHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF2C5202C9AA00084CB2C /* AMKAccountErrorHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF226202C9AA00084CB2C /* AMKAccountErrorHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF2C6202C9AA00084CB2C /* AKFbkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF227202C9AA00084CB2C /* AKFbkHelper.m */; };
 		3A6DF2C7202C9AA00084CB2C /* AMKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF228202C9AA00084CB2C /* AMKUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2C8202C9AA00084CB2C /* AKTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF22A202C9AA00084CB2C /* AKTextFieldCell.m */; };
-		3A6DF2C9202C9AA00084CB2C /* AKSignUpHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF22B202C9AA00084CB2C /* AKSignUpHeader.xib */; };
 		3A6DF2CA202C9AA00084CB2C /* AKLabelCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF22C202C9AA00084CB2C /* AKLabelCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF2CB202C9AA00084CB2C /* AKSignUpHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF22D202C9AA00084CB2C /* AKSignUpHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2CC202C9AA00084CB2C /* AKItemCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF22E202C9AA00084CB2C /* AKItemCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2CD202C9AA00084CB2C /* AKTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF22F202C9AA00084CB2C /* AKTextFieldCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2CE202C9AA00084CB2C /* AKTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF230202C9AA00084CB2C /* AKTextFieldCell.xib */; };
 		3A6DF2CF202C9AA00084CB2C /* AKLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF231202C9AA00084CB2C /* AKLabelCell.swift */; };
-		3A6DF2D0202C9AA00084CB2C /* AKSignUpHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF232202C9AA00084CB2C /* AKSignUpHeader.m */; };
 		3A6DF2D1202C9AA00084CB2C /* AKLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF233202C9AA00084CB2C /* AKLabelCell.m */; };
 		3A6DF2D2202C9AA00084CB2C /* AKLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF234202C9AA00084CB2C /* AKLabelCell.xib */; };
 		3A6DF2D3202C9AA00084CB2C /* SGKConfig+BookingKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF235202C9AA00084CB2C /* SGKConfig+BookingKit.swift */; };
@@ -641,7 +643,7 @@
 		3ABBDAB82032134D00205042 /* TKGeocodingResultScorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */; };
 		3ABBDAB92032134D00205042 /* TKGeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */; };
 		3ABBDABA2032134D00205042 /* TKGeoJSON+NamedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */; };
-		3ABBDABB2032134D00205042 /* TKMapZenGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0AC1F682B6E0050217E /* TKMapZenGeocoder.swift */; };
+		3ABBDABB2032134D00205042 /* TKPeliasGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0AC1F682B6E0050217E /* TKPeliasGeocoder.swift */; };
 		3ABBDABC2032135400205042 /* SGKGeocodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB4E1F06854F00147990 /* SGKGeocodable.swift */; };
 		3ABBDABD2032135400205042 /* SGKNamedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB4F1F06854F00147990 /* SGKNamedCoordinate.swift */; };
 		3ABBDABE2032135400205042 /* SGKSortableAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB501F06854F00147990 /* SGKSortableAnnotation.swift */; };
@@ -724,7 +726,7 @@
 		3AC4DD111DEE32C80026B238 /* TKWaypointRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AC4DD121DEE32C80026B238 /* TKWaypointRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */; };
 		3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */; };
-		3AC9A0AE1F682B6E0050217E /* TKMapZenGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0AC1F682B6E0050217E /* TKMapZenGeocoder.swift */; };
+		3AC9A0AE1F682B6E0050217E /* TKPeliasGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0AC1F682B6E0050217E /* TKPeliasGeocoder.swift */; };
 		3AC9A0AF1F682B6E0050217E /* TKGeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */; };
 		3AD1DEA61F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */; };
 		3ADB3A581D39E3830012D04B /* TKSegmentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */; };
@@ -737,6 +739,7 @@
 		3AEBC26C20348E000017CFA4 /* TKFileCache+Agenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEBC26A20348E000017CFA4 /* TKFileCache+Agenda.swift */; };
 		3AF3F2621E04CA7C00A2EEC6 /* TKBookingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */; };
 		3AF3F2641E04CA8C00A2EEC6 /* TKLocationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */; };
+		3AF6FDF0204436D4003BA786 /* regionInfo-multi.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AF6FDEF204436D3003BA786 /* regionInfo-multi.json */; };
 		3AF94B121F0BF79800500940 /* TKSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B111F0BF79800500940 /* TKSettings.swift */; };
 		3AF94B1F1F0BFB9E00500940 /* Shape+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */; };
 		3AF94B201F0BFB9E00500940 /* Shape+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */; };
@@ -906,12 +909,18 @@
 		3A32CD741DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAPIToCoreDataConverter.swift; sourceTree = "<group>"; };
 		3A32CD781DC2EBC4003B158B /* LocationAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAPIModel.swift; sourceTree = "<group>"; };
 		3A32CD7A1DC2EC4F003B158B /* RegionAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionAPIModel.swift; sourceTree = "<group>"; };
+		3A360EF4204052D800FE0A90 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A360EF5204052D800FE0A90 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A360EF6204052D800FE0A90 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A37A9A61D20F8EF00A2A3B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A3C9BA51F751FC300C8D476 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3A3C9BA71F751FF200C8D476 /* DeparturesAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesAPIModel.swift; sourceTree = "<group>"; };
 		3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPIModel.swift; sourceTree = "<group>"; };
 		3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopAPIModel.swift; sourceTree = "<group>"; };
 		3A3C9BB71F75346400C8D476 /* BaseAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIModels.swift; sourceTree = "<group>"; };
+		3A511BD72040522900CA26DD /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A511BD82040522900CA26DD /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A511BD92040522900CA26DD /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDLSTable.swift; sourceTree = "<group>"; };
 		3A51402D1DEE62EE002DB39F /* TKSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegment.swift; sourceTree = "<group>"; };
 		3A5140301DEE62FA002DB39F /* TripRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequest.swift; sourceTree = "<group>"; };
@@ -921,7 +930,21 @@
 		3A551D871E60D79500332942 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A551D931E60D8C700332942 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A57DB5C1F17A58800946553 /* SGLocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGLocationHelper.swift; sourceTree = "<group>"; };
+		3A67BCC4204052A500D5B940 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3A67BCC5204052A500D5B940 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3A67BCC6204052A500D5B940 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loc+TripKit.swift"; sourceTree = "<group>"; };
+		3A6A3E0E20405257002690C6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A6A3E0F20405257002690C6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A6A3E1020405257002690C6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A6ABE65204050BC00645B93 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A6ABE6A204050BC00645B93 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A6ABE6F204050BC00645B93 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loc+TripKitBookings.swift"; sourceTree = "<group>"; };
+		3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loc+TripKitInterApp.swift"; sourceTree = "<group>"; };
+		3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loc+TripKitUI.swift"; sourceTree = "<group>"; };
+		3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-Nuremberg.json"; sourceTree = "<group>"; };
+		3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-Vancouver.json"; sourceTree = "<group>"; };
 		3A6DF05E202C88E90084CB2C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = Carthage/Build/iOS/ASPolygonKit.framework; sourceTree = "<group>"; };
 		3A6DF062202C89180084CB2C /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -1141,7 +1164,6 @@
 		3A6DF20C202C9AA00084CB2C /* AKAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKAccountViewController.m; sourceTree = "<group>"; };
 		3A6DF20D202C9AA00084CB2C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A6DF20F202C9AA00084CB2C /* AMKEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKEmail.h; sourceTree = "<group>"; };
-		3A6DF210202C9AA00084CB2C /* AKFbkProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFbkProfile.h; sourceTree = "<group>"; };
 		3A6DF212202C9AA00084CB2C /* AMKCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKCommunicator.m; sourceTree = "<group>"; };
 		3A6DF213202C9AA00084CB2C /* AMKCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMKCommunicator.swift; sourceTree = "<group>"; };
 		3A6DF214202C9AA00084CB2C /* AMKCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKCommunicator.h; sourceTree = "<group>"; };
@@ -1149,7 +1171,6 @@
 		3A6DF216202C9AA00084CB2C /* AMKEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKEmail.m; sourceTree = "<group>"; };
 		3A6DF218202C9AA00084CB2C /* AMKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKManager.h; sourceTree = "<group>"; };
 		3A6DF219202C9AA00084CB2C /* AMKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKManager.m; sourceTree = "<group>"; };
-		3A6DF21A202C9AA00084CB2C /* AKFbkProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFbkProfile.m; sourceTree = "<group>"; };
 		3A6DF21C202C9AA00084CB2C /* AMKItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKItem.h; sourceTree = "<group>"; };
 		3A6DF21D202C9AA00084CB2C /* AMKSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKSection.h; sourceTree = "<group>"; };
 		3A6DF21E202C9AA00084CB2C /* AKTextFieldItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKTextFieldItem.m; sourceTree = "<group>"; };
@@ -1157,20 +1178,13 @@
 		3A6DF220202C9AA00084CB2C /* AMKItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKItem.m; sourceTree = "<group>"; };
 		3A6DF221202C9AA00084CB2C /* AKTextFieldItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKTextFieldItem.h; sourceTree = "<group>"; };
 		3A6DF222202C9AA00084CB2C /* AMKSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKSection.m; sourceTree = "<group>"; };
-		3A6DF224202C9AA00084CB2C /* AMKAccountErrorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKAccountErrorHelper.m; sourceTree = "<group>"; };
-		3A6DF225202C9AA00084CB2C /* AKFbkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFbkHelper.h; sourceTree = "<group>"; };
-		3A6DF226202C9AA00084CB2C /* AMKAccountErrorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKAccountErrorHelper.h; sourceTree = "<group>"; };
-		3A6DF227202C9AA00084CB2C /* AKFbkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFbkHelper.m; sourceTree = "<group>"; };
 		3A6DF228202C9AA00084CB2C /* AMKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKUser.h; sourceTree = "<group>"; };
 		3A6DF22A202C9AA00084CB2C /* AKTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKTextFieldCell.m; sourceTree = "<group>"; };
-		3A6DF22B202C9AA00084CB2C /* AKSignUpHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSignUpHeader.xib; sourceTree = "<group>"; };
 		3A6DF22C202C9AA00084CB2C /* AKLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKLabelCell.h; sourceTree = "<group>"; };
-		3A6DF22D202C9AA00084CB2C /* AKSignUpHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSignUpHeader.h; sourceTree = "<group>"; };
 		3A6DF22E202C9AA00084CB2C /* AKItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKItemCell.h; sourceTree = "<group>"; };
 		3A6DF22F202C9AA00084CB2C /* AKTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKTextFieldCell.h; sourceTree = "<group>"; };
 		3A6DF230202C9AA00084CB2C /* AKTextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKTextFieldCell.xib; sourceTree = "<group>"; };
 		3A6DF231202C9AA00084CB2C /* AKLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKLabelCell.swift; sourceTree = "<group>"; };
-		3A6DF232202C9AA00084CB2C /* AKSignUpHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSignUpHeader.m; sourceTree = "<group>"; };
 		3A6DF233202C9AA00084CB2C /* AKLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKLabelCell.m; sourceTree = "<group>"; };
 		3A6DF234202C9AA00084CB2C /* AKLabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKLabelCell.xib; sourceTree = "<group>"; };
 		3A6DF235202C9AA00084CB2C /* SGKConfig+BookingKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SGKConfig+BookingKit.swift"; sourceTree = "<group>"; };
@@ -1306,6 +1320,9 @@
 		3AA77F611F76A913001D412D /* AlertAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAPIModels.swift; sourceTree = "<group>"; };
 		3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+ProductName.swift"; sourceTree = "<group>"; };
 		3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningHoursAPIModel.swift; sourceTree = "<group>"; };
+		3AB1CE7A20405240006123FE /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AB1CE7B20405240006123FE /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AB1CE7C20405240006123FE /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C6231D1CD0060089F687 /* TripKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKit.h; sourceTree = "<group>"; };
 		3AB6C6251D1CD0060089F687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1391,18 +1408,25 @@
 		3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWaypointRouter.h; sourceTree = "<group>"; };
 		3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWaypointRouter.m; sourceTree = "<group>"; };
 		3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKWaypointRouter.swift; sourceTree = "<group>"; };
-		3AC9A0AC1F682B6E0050217E /* TKMapZenGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKMapZenGeocoder.swift; sourceTree = "<group>"; };
+		3AC9A0AC1F682B6E0050217E /* TKPeliasGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKPeliasGeocoder.swift; sourceTree = "<group>"; };
 		3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeoJSON.swift; sourceTree = "<group>"; };
+		3ACDFCFC204052BC00CFD006 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3ACDFCFD204052BC00CFD006 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3ACDFCFE204052BC00CFD006 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKGeoJSON+NamedCoordinate.swift"; sourceTree = "<group>"; };
 		3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TKSegmentHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3ADD218F1E135F7700F6EBE8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTripPattern.swift; sourceTree = "<group>"; };
+		3AE06A0A20405212001834E0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AE06A0B20405212001834E0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AE06A0C20405212001834E0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AE194E3202DE32D0007B49B /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		3AE194E4202DE32E0007B49B /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		3AEB43EB1F757C1E00FA3289 /* TKDeparturesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKDeparturesProvider.swift; sourceTree = "<group>"; };
 		3AEBC26A20348E000017CFA4 /* TKFileCache+Agenda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKFileCache+Agenda.swift"; sourceTree = "<group>"; };
 		3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingTypes.swift; sourceTree = "<group>"; };
 		3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationTypes.swift; sourceTree = "<group>"; };
+		3AF6FDEF204436D3003BA786 /* regionInfo-multi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-multi.json"; sourceTree = "<group>"; };
 		3AF94B111F0BF79800500940 /* TKSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSettings.swift; sourceTree = "<group>"; };
 		3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -1410,6 +1434,9 @@
 		3AF94B231F0C061500500940 /* TKColoredRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKColoredRoute.swift; sourceTree = "<group>"; };
 		3AFD70BC1E558BC800F6B06F /* PricingTableAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricingTableAPIModel.swift; sourceTree = "<group>"; };
 		3AFF209A1D1CD4F0008BCD9F /* TripKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TripKit-Prefix.pch"; sourceTree = "<group>"; };
+		3AFF5E0D2040528D00739DC1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AFF5E0E2040528D00739DC1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AFF5E0F2040528D00739DC1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AFFAB151F06849500147990 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Shared.strings; sourceTree = "<group>"; };
 		3AFFAB171F06849D00147990 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Shared.strings; sourceTree = "<group>"; };
 		3AFFAB181F0684A400147990 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Shared.strings"; sourceTree = "<group>"; };
@@ -1630,6 +1657,7 @@
 		3A6DF085202C8DA30084CB2C /* TripKitUI-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				3A6ABE70204050BC00645B93 /* InfoPlist.strings */,
 				3A6DF086202C8DA30084CB2C /* TripKitUI.h */,
 				3A6DF087202C8DA30084CB2C /* Info.plist */,
 			);
@@ -1815,6 +1843,7 @@
 		3A6DF168202C97F60084CB2C /* TripKitInterApp-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				3A6ABE66204050BC00645B93 /* InfoPlist.strings */,
 				3A6DF169202C97F70084CB2C /* TripKitInterApp.h */,
 				3A6DF16A202C97F70084CB2C /* Info.plist */,
 			);
@@ -1836,6 +1865,7 @@
 		3A6DF187202C99D40084CB2C /* TripKitBookings-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				3A6ABE6B204050BC00645B93 /* InfoPlist.strings */,
 				3A6DF188202C99D40084CB2C /* TripKitBookings.h */,
 				3A6DF189202C99D40084CB2C /* Info.plist */,
 			);
@@ -2039,9 +2069,9 @@
 				3A6DF236202C9AA00084CB2C /* Categories */,
 				3A6DF1FE202C9AA00084CB2C /* Controller */,
 				3A6DF20E202C9AA00084CB2C /* Model */,
+				3A6DF229202C9AA00084CB2C /* View */,
 				3A6DF20D202C9AA00084CB2C /* README.md */,
 				3A6DF235202C9AA00084CB2C /* SGKConfig+BookingKit.swift */,
-				3A6DF229202C9AA00084CB2C /* View */,
 			);
 			path = AccountKit;
 			sourceTree = "<group>";
@@ -2070,13 +2100,10 @@
 		3A6DF20E202C9AA00084CB2C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF210202C9AA00084CB2C /* AKFbkProfile.h */,
-				3A6DF21A202C9AA00084CB2C /* AKFbkProfile.m */,
 				3A6DF20F202C9AA00084CB2C /* AMKEmail.h */,
 				3A6DF216202C9AA00084CB2C /* AMKEmail.m */,
 				3A6DF228202C9AA00084CB2C /* AMKUser.h */,
 				3A6DF215202C9AA00084CB2C /* AMKUser.m */,
-				3A6DF223202C9AA00084CB2C /* Helper */,
 				3A6DF21B202C9AA00084CB2C /* Items */,
 				3A6DF217202C9AA00084CB2C /* Manager */,
 				3A6DF211202C9AA00084CB2C /* Server */,
@@ -2106,26 +2133,15 @@
 		3A6DF21B202C9AA00084CB2C /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF21C202C9AA00084CB2C /* AMKItem.h */,
-				3A6DF21D202C9AA00084CB2C /* AMKSection.h */,
-				3A6DF21E202C9AA00084CB2C /* AKTextFieldItem.m */,
-				3A6DF21F202C9AA00084CB2C /* AMKItem.swift */,
-				3A6DF220202C9AA00084CB2C /* AMKItem.m */,
 				3A6DF221202C9AA00084CB2C /* AKTextFieldItem.h */,
+				3A6DF21E202C9AA00084CB2C /* AKTextFieldItem.m */,
+				3A6DF21C202C9AA00084CB2C /* AMKItem.h */,
+				3A6DF220202C9AA00084CB2C /* AMKItem.m */,
+				3A6DF21F202C9AA00084CB2C /* AMKItem.swift */,
+				3A6DF21D202C9AA00084CB2C /* AMKSection.h */,
 				3A6DF222202C9AA00084CB2C /* AMKSection.m */,
 			);
 			path = Items;
-			sourceTree = "<group>";
-		};
-		3A6DF223202C9AA00084CB2C /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				3A6DF224202C9AA00084CB2C /* AMKAccountErrorHelper.m */,
-				3A6DF225202C9AA00084CB2C /* AKFbkHelper.h */,
-				3A6DF226202C9AA00084CB2C /* AMKAccountErrorHelper.h */,
-				3A6DF227202C9AA00084CB2C /* AKFbkHelper.m */,
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 		3A6DF229202C9AA00084CB2C /* View */ = {
@@ -2136,9 +2152,6 @@
 				3A6DF233202C9AA00084CB2C /* AKLabelCell.m */,
 				3A6DF231202C9AA00084CB2C /* AKLabelCell.swift */,
 				3A6DF234202C9AA00084CB2C /* AKLabelCell.xib */,
-				3A6DF22D202C9AA00084CB2C /* AKSignUpHeader.h */,
-				3A6DF232202C9AA00084CB2C /* AKSignUpHeader.m */,
-				3A6DF22B202C9AA00084CB2C /* AKSignUpHeader.xib */,
 				3A6DF22F202C9AA00084CB2C /* AKTextFieldCell.h */,
 				3A6DF22A202C9AA00084CB2C /* AKTextFieldCell.m */,
 				3A6DF230202C9AA00084CB2C /* AKTextFieldCell.xib */,
@@ -2234,7 +2247,7 @@
 				3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */,
 				3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */,
 				3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */,
-				3AC9A0AC1F682B6E0050217E /* TKMapZenGeocoder.swift */,
+				3AC9A0AC1F682B6E0050217E /* TKPeliasGeocoder.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -2306,16 +2319,16 @@
 		3AA3CE93202CD4D100E54859 /* parsing */ = {
 			isa = PBXGroup;
 			children = (
-				3AA3CE94202CD4D100E54859 /* TKAlertModelTest.swift */,
-				3AA3CE95202CD4D100E54859 /* STKModeHelperTest.swift */,
-				3AA3CE96202CD4D100E54859 /* TKBookingDecodingTest.swift */,
-				3AA3CE97202CD4D100E54859 /* TKJSONSanitizerTest.swift */,
 				3AA3CE98202CD4D100E54859 /* PolylineDecoderTest.swift */,
+				3AA3CE95202CD4D100E54859 /* STKModeHelperTest.swift */,
+				3AA3CE94202CD4D100E54859 /* TKAlertModelTest.swift */,
+				3AA3CE96202CD4D100E54859 /* TKBookingDecodingTest.swift */,
+				3AA3CE9B202CD4D100E54859 /* TKBuzzInfoProviderTest.swift */,
+				3AA3CE9D202CD4D100E54859 /* TKDeparturesModelTest.swift */,
+				3AA3CE97202CD4D100E54859 /* TKJSONSanitizerTest.swift */,
+				3AA3CE9C202CD4D100E54859 /* TKLinkedAccountTest.swift */,
 				3AA3CE99202CD4D100E54859 /* TKLocationInfoTest.swift */,
 				3AA3CE9A202CD4D100E54859 /* TKRegionManagerTest.swift */,
-				3AA3CE9B202CD4D100E54859 /* TKBuzzInfoProviderTest.swift */,
-				3AA3CE9C202CD4D100E54859 /* TKLinkedAccountTest.swift */,
-				3AA3CE9D202CD4D100E54859 /* TKDeparturesModelTest.swift */,
 			);
 			path = parsing;
 			sourceTree = "<group>";
@@ -2323,19 +2336,22 @@
 		3AA3CE9E202CD4D100E54859 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3AA3CE9F202CD4D100E54859 /* hornsbyToSkedGoService.json */,
-				3AA3CEA0202CD4D100E54859 /* locationInfo-carRental.json */,
-				3AA3CEA1202CD4D100E54859 /* regionInfo-Sydney.json */,
-				3AA3CEA2202CD4D100E54859 /* hornsbyToSkedGo.json */,
-				3AA3CEA3202CD4D100E54859 /* berowraToHornsbyService.json */,
-				3AA3CEA4202CD4D100E54859 /* geojson-nuremberg.json */,
-				3AA3CEA5202CD4D100E54859 /* routing-goget.json */,
-				3AA3CEA6202CD4D100E54859 /* regions.json */,
-				3AA3CEA7202CD4D100E54859 /* berowraToHornsby.json */,
-				3AA3CEA8202CD4D100E54859 /* locationInfo-bikePod.json */,
-				3AA3CEA9202CD4D100E54859 /* routing-pt-oldish.json */,
-				3AA3CEAA202CD4D100E54859 /* departures-parentStop.json */,
 				3AA3CEAB202CD4D100E54859 /* alertsTransit.json */,
+				3AA3CEA7202CD4D100E54859 /* berowraToHornsby.json */,
+				3AA3CEA3202CD4D100E54859 /* berowraToHornsbyService.json */,
+				3AA3CEAA202CD4D100E54859 /* departures-parentStop.json */,
+				3AA3CEA4202CD4D100E54859 /* geojson-nuremberg.json */,
+				3AA3CEA2202CD4D100E54859 /* hornsbyToSkedGo.json */,
+				3AA3CE9F202CD4D100E54859 /* hornsbyToSkedGoService.json */,
+				3AA3CEA8202CD4D100E54859 /* locationInfo-bikePod.json */,
+				3AA3CEA0202CD4D100E54859 /* locationInfo-carRental.json */,
+				3AF6FDEF204436D3003BA786 /* regionInfo-multi.json */,
+				3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */,
+				3AA3CEA1202CD4D100E54859 /* regionInfo-Sydney.json */,
+				3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */,
+				3AA3CEA6202CD4D100E54859 /* regions.json */,
+				3AA3CEA5202CD4D100E54859 /* routing-goget.json */,
+				3AA3CEA9202CD4D100E54859 /* routing-pt-oldish.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -2429,6 +2445,9 @@
 				3AB6C6621D1CD08E0089F687 /* model */,
 				3AB6C68A1D1CD08E0089F687 /* server */,
 				3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */,
+				3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */,
+				3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */,
+				3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */,
 				3AB6C6A41D1CD08E0089F687 /* TKConstants.h */,
 				3AB6C6A51D1CD08E0089F687 /* TKConstants.m */,
 				3AB6C6A61D1CD08E0089F687 /* TKTripKit.h */,
@@ -2648,8 +2667,8 @@
 			isa = PBXGroup;
 			children = (
 				3AFFAB351F06854F00147990 /* Categories */,
-				3AFFAB4C1F06854F00147990 /* Loc.swift */,
 				3AFFAB4D1F06854F00147990 /* Model */,
+				3AFFAB4C1F06854F00147990 /* Loc.swift */,
 				3AFFAB531F06854F00147990 /* SGKBetaHelper.h */,
 				3AFFAB541F06854F00147990 /* SGKBetaHelper.m */,
 				3AFFAB551F06854F00147990 /* SGKConfig.h */,
@@ -2949,12 +2968,9 @@
 				3A6DF264202C9AA00084CB2C /* BPKUser.h in Headers */,
 				3A6DF277202C9AA00084CB2C /* BPKStepperCell.h in Headers */,
 				3A6DF29D202C9AA00084CB2C /* TripKitBookingsIncludes.h in Headers */,
-				3A6DF2C5202C9AA00084CB2C /* AMKAccountErrorHelper.h in Headers */,
-				3A6DF2B3202C9AA00084CB2C /* AKFbkProfile.h in Headers */,
 				3A6DF24A202C9AA00084CB2C /* BPKWebViewController.h in Headers */,
 				3A6DF2AA202C9AA00084CB2C /* AKResendEmailViewController.h in Headers */,
 				3A6DF294202C9AA00084CB2C /* BPKDataValidator.h in Headers */,
-				3A6DF2C4202C9AA00084CB2C /* AKFbkHelper.h in Headers */,
 				3A6DF280202C9AA00084CB2C /* BPKSwitchCell.h in Headers */,
 				3A6DF2BC202C9AA00084CB2C /* AMKItem.h in Headers */,
 				3A6DF2DD202C9AA00084CB2C /* UIView+FindFirstResponder.h in Headers */,
@@ -2971,7 +2987,6 @@
 				3A6DF296202C9AA00084CB2C /* BPKHelpers.h in Headers */,
 				3A6DF2A3202C9AA00084CB2C /* AKPasswordEditViewController.h in Headers */,
 				3A6DF2A7202C9AA00084CB2C /* AKAccountViewController.h in Headers */,
-				3A6DF2CB202C9AA00084CB2C /* AKSignUpHeader.h in Headers */,
 				3A6DF2AB202C9AA00084CB2C /* AKBaseTableViewController.h in Headers */,
 				3A6DF258202C9AA00084CB2C /* BPKSection.h in Headers */,
 				3A6DF255202C9AA00084CB2C /* BPKOptionsViewController.h in Headers */,
@@ -3300,6 +3315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A6DF14B202C8EB80084CB2C /* TKPathFriendlinessView.xib in Resources */,
+				3A6ABE6E204050BC00645B93 /* InfoPlist.strings in Resources */,
 				3A6DF13C202C8EB80084CB2C /* TKAlertInfoView.xib in Resources */,
 				3A6DF141202C8EB80084CB2C /* TKAlertCell.xib in Resources */,
 				3A6DF14A202C8EB80084CB2C /* TKDepartureView.xib in Resources */,
@@ -3319,6 +3335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A6ABE64204050BC00645B93 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3327,10 +3344,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A6DF271202C9AA00084CB2C /* BPKSwitchCell.xib in Resources */,
+				3A6ABE69204050BC00645B93 /* InfoPlist.strings in Resources */,
 				3A6DF27F202C9AA00084CB2C /* BPKTableHeader.xib in Resources */,
 				3A6DF288202C9AA00084CB2C /* BPKLabelCell.xib in Resources */,
 				3A6DF27E202C9AA00084CB2C /* BPKDatePickerCell.xib in Resources */,
-				3A6DF2C9202C9AA00084CB2C /* AKSignUpHeader.xib in Resources */,
 				3A6DF2CE202C9AA00084CB2C /* AKTextFieldCell.xib in Resources */,
 				3A6DF2D2202C9AA00084CB2C /* AKLabelCell.xib in Resources */,
 				3A6DF28C202C9AA00084CB2C /* BPKActionOverlay.xib in Resources */,
@@ -3361,9 +3378,12 @@
 				3AA3CECF202CD4D100E54859 /* alertsTransit.json in Resources */,
 				3AA3CECB202CD4D100E54859 /* berowraToHornsby.json in Resources */,
 				3AA3CECC202CD4D100E54859 /* locationInfo-bikePod.json in Resources */,
+				3AF6FDF0204436D4003BA786 /* regionInfo-multi.json in Resources */,
 				3AA3CEC3202CD4D100E54859 /* hornsbyToSkedGoService.json in Resources */,
+				3A6DAEDA2040985B009282FE /* regionInfo-Vancouver.json in Resources */,
 				3AA3CECD202CD4D100E54859 /* routing-pt-oldish.json in Resources */,
 				3AA3CECE202CD4D100E54859 /* departures-parentStop.json in Resources */,
+				3A6DAED92040985B009282FE /* regionInfo-Nuremberg.json in Resources */,
 				3AA3CECA202CD4D100E54859 /* regions.json in Resources */,
 				3AA3CEC8202CD4D100E54859 /* geojson-nuremberg.json in Resources */,
 				3AA3CEC7202CD4D100E54859 /* berowraToHornsbyService.json in Resources */,
@@ -3419,7 +3439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ABBDA822032134000205042 /* ModeInfo.swift in Sources */,
-				3ABBDABB2032134D00205042 /* TKMapZenGeocoder.swift in Sources */,
+				3ABBDABB2032134D00205042 /* TKPeliasGeocoder.swift in Sources */,
 				3ABBDA842032134000205042 /* STKInfoIcon.swift in Sources */,
 				3ABBDA982032134900205042 /* SVKRegion.swift in Sources */,
 				3ABBDA9B2032134900205042 /* SVKServer.swift in Sources */,
@@ -3467,6 +3487,7 @@
 				3ABBDA202032132400205042 /* TKBuzzRouter+Rx.swift in Sources */,
 				3ABBDA582032132D00205042 /* TripRequest.swift in Sources */,
 				3ABBDADA2032135A00205042 /* NSDate+Formatting.swift in Sources */,
+				3A6DAED220403CF7009282FE /* Loc+TripKitInterApp.swift in Sources */,
 				3ABBDA652032132D00205042 /* TKSegment.m in Sources */,
 				3ABBDA212032132400205042 /* TKDeparturesProvider.swift in Sources */,
 				3ABBDA342032132400205042 /* TKSettings.m in Sources */,
@@ -3520,6 +3541,7 @@
 				3ABBDAA02032134D00205042 /* SGAggregateGeocoder.swift in Sources */,
 				3ABBDA7F2032133900205042 /* TKNextSegmentScorer.m in Sources */,
 				3ABBDA6E2032133300205042 /* LocationAPIModel.swift in Sources */,
+				3A6DAED320403CFD009282FE /* Loc+TripKitBookings.swift in Sources */,
 				3ABBDA272032132400205042 /* TKParserHelper.m in Sources */,
 				3ABBDAC62032135400205042 /* SGKConfig.swift in Sources */,
 				3ABBDA4C2032132D00205042 /* StopLocation.swift in Sources */,
@@ -3539,6 +3561,7 @@
 				3ABBDB092032137600205042 /* Trip+Shareable.swift in Sources */,
 				3ABBDA812032133900205042 /* TKUserProfileHelper.swift in Sources */,
 				3ABBDADC2032135A00205042 /* NSDate+Helpers.m in Sources */,
+				3A6DAED620404374009282FE /* Loc+TripKitUI.swift in Sources */,
 				3ABBDA522032132D00205042 /* Trip.swift in Sources */,
 				3ABBDAF52032136100205042 /* SGLocationManager.swift in Sources */,
 				3ABBDA122032131E00205042 /* Loc+TripKit.swift in Sources */,
@@ -3670,7 +3693,6 @@
 			files = (
 				3A6DF2A6202C9AA00084CB2C /* AKBaseTableViewController.m in Sources */,
 				3A6DF29E202C9AA00084CB2C /* TKBookingFormType.swift in Sources */,
-				3A6DF2C3202C9AA00084CB2C /* AMKAccountErrorHelper.m in Sources */,
 				3A6DF2B4202C9AA00084CB2C /* AMKCommunicator.m in Sources */,
 				3A6DF29F202C9AA00084CB2C /* TKUberSSO.swift in Sources */,
 				3A6DF28E202C9AA00084CB2C /* BPKHelpers.m in Sources */,
@@ -3692,7 +3714,6 @@
 				3A6DF25B202C9AA00084CB2C /* BPKForm.m in Sources */,
 				3A6DF2A9202C9AA00084CB2C /* AKPasswordEditViewController.m in Sources */,
 				3A6DF261202C9AA00084CB2C /* SSOAuthenticator.swift in Sources */,
-				3A6DF2BB202C9AA00084CB2C /* AKFbkProfile.m in Sources */,
 				3A6DF276202C9AA00084CB2C /* BPKCell.m in Sources */,
 				3A6DF25C202C9AA00084CB2C /* BPKSectionItem+Address.m in Sources */,
 				3A6DF260202C9AA00084CB2C /* OAuthClient.swift in Sources */,
@@ -3730,7 +3751,6 @@
 				3A6DF2D8202C9AA00084CB2C /* UIView+Keyboard.m in Sources */,
 				3A6DF242202C9AA00084CB2C /* TKBookingCoordinator.swift in Sources */,
 				3A6DF2AE202C9AA00084CB2C /* AKBaseTableViewController.swift in Sources */,
-				3A6DF2D0202C9AA00084CB2C /* AKSignUpHeader.m in Sources */,
 				3A6DF25F202C9AA00084CB2C /* OAuthStatus.swift in Sources */,
 				3A6DF293202C9AA00084CB2C /* BPKAlert.swift in Sources */,
 				3A6DF292202C9AA00084CB2C /* BPKTextFieldHelper.m in Sources */,
@@ -3740,7 +3760,6 @@
 				3A6DF2D7202C9AA00084CB2C /* UIView+FindFirstResponder.m in Sources */,
 				3A6DF2D3202C9AA00084CB2C /* SGKConfig+BookingKit.swift in Sources */,
 				3A6DF24B202C9AA00084CB2C /* BPKBaseTableViewController.m in Sources */,
-				3A6DF2C6202C9AA00084CB2C /* AKFbkHelper.m in Sources */,
 				3A6DF254202C9AA00084CB2C /* BPKMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3763,6 +3782,7 @@
 				3A32CD7B1DC2EC4F003B158B /* RegionAPIModel.swift in Sources */,
 				3AFFAE001F06B1D000147990 /* StopLocation.swift in Sources */,
 				3A79C73B203342B300748DD1 /* VehicleAPIModel.swift in Sources */,
+				3A6DAED120402686009282FE /* Loc+TripKitInterApp.swift in Sources */,
 				3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */,
 				3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */,
 				3A79C748203342CC00748DD1 /* TKAgendaInput.swift in Sources */,
@@ -3901,11 +3921,12 @@
 				3AB6C7001D1CD08E0089F687 /* TKBuzzRouter.m in Sources */,
 				3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */,
 				3AB6C7021D1CD08E0089F687 /* TKFakeRouter.m in Sources */,
-				3AC9A0AE1F682B6E0050217E /* TKMapZenGeocoder.swift in Sources */,
+				3AC9A0AE1F682B6E0050217E /* TKPeliasGeocoder.swift in Sources */,
 				3AFFADFE1F06AFDD00147990 /* TKShareHelper.swift in Sources */,
 				3AA03E5F1F0BC9DB00C6B337 /* SGPermissionManager+AuthorizationAlert.m in Sources */,
 				3A15D8D91D9CE08100BADBEA /* TKBuzzRouter+Rx.swift in Sources */,
 				3AB6C6E91D1CD08E0089F687 /* TripGroup.m in Sources */,
+				3A6DAED5204040B2009282FE /* Loc+TripKitUI.swift in Sources */,
 				3AFFAB9E1F06854F00147990 /* NSNumber+Formatter.m in Sources */,
 				3AB6C6D91D1CD08E0089F687 /* DLSEntry.m in Sources */,
 				3AFFABC61F06854F00147990 /* SVKError.swift in Sources */,
@@ -3928,6 +3949,7 @@
 				3A3C9BB81F75346400C8D476 /* BaseAPIModels.swift in Sources */,
 				3AA39AC51F7A35B60066CC94 /* Codable+Helpers.swift in Sources */,
 				3A8F61211F190CE80017ACDA /* SGLocationManager.swift in Sources */,
+				3A6DAECF20402622009282FE /* Loc+TripKitBookings.swift in Sources */,
 				3AFFAE0A1F06BA3700147990 /* TripRequest+Shareable.swift in Sources */,
 				3AB6C7101D1CD08E0089F687 /* TKSettings.m in Sources */,
 			);
@@ -4000,6 +4022,54 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3A6ABE66204050BC00645B93 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6ABE65204050BC00645B93 /* de */,
+				3AE06A0A20405212001834E0 /* fr */,
+				3A511BD82040522900CA26DD /* it */,
+				3AB1CE7B20405240006123FE /* pt */,
+				3A6A3E0F20405257002690C6 /* nl */,
+				3AFF5E0E2040528D00739DC1 /* es */,
+				3A67BCC5204052A500D5B940 /* zh-Hans */,
+				3ACDFCFD204052BC00CFD006 /* zh-Hant */,
+				3A360EF4204052D800FE0A90 /* fi */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3A6ABE6B204050BC00645B93 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6ABE6A204050BC00645B93 /* de */,
+				3AE06A0B20405212001834E0 /* fr */,
+				3A511BD92040522900CA26DD /* it */,
+				3AB1CE7C20405240006123FE /* pt */,
+				3A6A3E1020405257002690C6 /* nl */,
+				3AFF5E0F2040528D00739DC1 /* es */,
+				3A67BCC6204052A500D5B940 /* zh-Hans */,
+				3ACDFCFE204052BC00CFD006 /* zh-Hant */,
+				3A360EF5204052D800FE0A90 /* fi */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3A6ABE70204050BC00645B93 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6ABE6F204050BC00645B93 /* de */,
+				3AE06A0C20405212001834E0 /* fr */,
+				3A511BD72040522900CA26DD /* it */,
+				3AB1CE7A20405240006123FE /* pt */,
+				3A6A3E0E20405257002690C6 /* nl */,
+				3AFF5E0D2040528D00739DC1 /* es */,
+				3A67BCC4204052A500D5B940 /* zh-Hans */,
+				3ACDFCFC204052BC00CFD006 /* zh-Hant */,
+				3A360EF6204052D800FE0A90 /* fi */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		3AB6C6AA1D1CD08E0089F687 /* TripKit.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

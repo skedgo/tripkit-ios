@@ -12,7 +12,7 @@ import XCTest
 
 class TKBuzzInfoProviderTest: TKTestCase {
     
-  func testRegionInformation() throws {
+  func testRegionInformationSydney() throws {
     let decoder = JSONDecoder()
     let data = try dataFromJSON(named: "regionInfo-Sydney")
     let response = try decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
@@ -27,6 +27,50 @@ class TKBuzzInfoProviderTest: TKTestCase {
     XCTAssertEqual(sydney?.transitBicycleAccessibility, true)
     XCTAssertEqual(sydney?.transitConcessionPricing, true)
     XCTAssertEqual(sydney?.transitWheelchairAccessibility, true)
+  }
+  
+  func testRegionInformationList() throws {
+    let decoder = JSONDecoder()
+    let data = try dataFromJSON(named: "regionInfo-multi")
+    let response = try! decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
+    
+    XCTAssertEqual(response.regions.count, 6)
+  }
+  
+  func testRegionInformationVancouver() throws {
+    let decoder = JSONDecoder()
+    let data = try dataFromJSON(named: "regionInfo-Vancouver")
+    let response = try! decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
+    let vancouver = response.regions.first
+    
+    XCTAssertEqual(response.regions.count, 1)
+    
+    XCTAssertEqual(vancouver?.modes.count, 5)
+    XCTAssertEqual(vancouver?.modes["me_car-s"]?.specificModes?.count, 1)
+    XCTAssertEqual(vancouver?.specificModeDetails(for: "me_car-s_MODO")?.minimumLocalCostForMembership, 1)
+
+    let modo = vancouver?.modes["me_car-s"]?.specificModes?.first
+    XCTAssertEqual(modo?.minimumLocalCostForMembership, 1)
+    XCTAssertEqual(modo?.integrations?.contains(.realTime), true)
+  }
+  
+  func testRegionInformationNuremberg() throws {
+    let decoder = JSONDecoder()
+    let data = try dataFromJSON(named: "regionInfo-Nuremberg")
+    let response = try decoder.decode(TKBuzzInfoProvider.RegionInfoResponse.self, from: data)
+    let nuremberg = response.regions.first
+    
+    XCTAssertEqual(response.regions.count, 1)
+    
+    XCTAssertEqual(nuremberg?.modes.count, 6)
+    XCTAssertEqual(nuremberg?.modes["ps_tax"]?.lockedModes?.count, 1)
+    XCTAssertEqual(nuremberg?.modes["ps_tax"]?.lockedModes?.first?.identifier, "ps_tax_MYDRIVER")
+    
+    let norisbike = nuremberg?.specificModeDetails(for: "cy_bic-s_norisbike-nurnberg")
+    XCTAssertEqual(norisbike?.url, URL(string: "http://www.norisbike.de"))
+    XCTAssertEqual(norisbike?.title, "NorisBike")
+    XCTAssertEqual(norisbike?.minimumLocalCostForMembership, 0)
+    XCTAssertEqual(norisbike?.integrations?.count, 2)
   }
   
   func testPublicTransportModes() throws {

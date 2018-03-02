@@ -19,9 +19,6 @@
 
 #import "AMKAccountKit.h"
 
-#import "AKFbkHelper.h"
-#import "AKFbkProfile.h"
-
 
 // Notifications
 NSString *const AMKAccountErrorKey            = @"AMKAccountError";
@@ -30,11 +27,6 @@ NSString *const AMKRenewalFailureNotification = @"AMKRenewalFailureNotification"
 @interface AMKManager ()
 
 @property (nonatomic, strong) AMKCommunicator *communicator;
-
-// Social
-@property (nonatomic, strong) ACAccountStore *managedStore;
-@property (nonatomic, strong) AKFbkHelper *fbkHelper;
-@property (nonatomic, assign) BOOL isRenewingAccount;
 
 @end
 
@@ -46,43 +38,9 @@ NSString *const AMKRenewalFailureNotification = @"AMKRenewalFailureNotification"
   
   if (self) {
     _communicator = [[AMKCommunicator alloc] init];
-    
-    // take charge of user.
-    [AMKUser sharedUser].dataSource = self;
   }
   
   return self;
-}
-
-- (void)dealloc
-{
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - AMKUserDataSource
-
-- (ACAccount *)userRequestsFacebookAccount:(AMKUser *)user
-{
-  if (user.hasLinkedFacebook) {
-    return [self.fbkHelper fbkAcccount];
-  }
-  
-  return nil;
-}
-
-#pragma mark - Notification
-
-- (void)accountStoreChanged:(NSNotification *)notification
-{
-#pragma unused (notification)
-  
-  [self validateSigninWithAutoRenew:YES completion:^(NSError *error) {
-    if (error != nil && self->_isRenewingAccount == NO) {
-      NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-      [userInfo setObject:error forKey:AMKAccountErrorKey];
-      [[NSNotificationCenter defaultCenter] postNotificationName:AMKRenewalFailureNotification object:self userInfo:userInfo];
-    }
-  }];
 }
 
 #pragma mark - Public: Setup
@@ -97,16 +55,6 @@ NSString *const AMKRenewalFailureNotification = @"AMKRenewalFailureNotification"
   });
   
   return _manager;
-}
-
-- (void)setupWithManagedStore:(ACAccountStore *)store
-{
-  _managedStore = store;
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(accountStoreChanged:)
-                                               name:ACAccountStoreDidChangeNotification
-                                             object:nil];
 }
 
 #pragma mark - Public: Sign out and sign in
@@ -241,62 +189,11 @@ NSString *const AMKRenewalFailureNotification = @"AMKRenewalFailureNotification"
   }
 }
 
-#pragma mark - Public: Social
-
-- (void)linkWithFacebook:(AMKServerBlock)handler
-{
-  [self.fbkHelper link:^(NSString *oauthToken, NSError *error) {
-    if (oauthToken.length != 0) {
-      // Link successful, create a facebook profile
-      [AMKUser sharedUser].facebookAccount = [self.fbkHelper fbkAcccount];
-      
-      // Pass the OAuth token to our backend.
-      [self->_communicator signInWithFacebook:oauthToken completion:handler];
-      
-    } else {
-      if (handler) {
-        handler(nil, error);
-      }
-    }
-  }];
-}
-
-- (void)validateSigninWithAutoRenew:(BOOL)autoRenew completion:(AMKCompletionBlock)completion
-{
-  _isRenewingAccount = autoRenew;
-  
-  if ([[AMKUser sharedUser] hasLinkedFacebook]) {
-    [self.fbkHelper validateWithAutoRenew:autoRenew completion:^(NSError *error) {
-      self->_isRenewingAccount = NO;
-      if (completion) {
-        completion(error);
-      }
-    }];
-    
-  } else {
-    // do something else.
-  }
-}
-
 #pragma mark - Update User
 
 - (void)updateUser:(AMKUser *)user completion:(AMKServerBlock)handler{
   
   [_communicator updateUser:user completion:handler];
-}
-
-#pragma mark - Lazy accessors
-
-- (AKFbkHelper *)fbkHelper
-{
-  if (! _fbkHelper) {
-    ZAssert(_managedStore != nil, @"Missing account store, Perhaps setup wasn't run");
-    _fbkHelper = [[AKFbkHelper alloc] initWithAccountStore:self.managedStore];
-    _fbkHelper.facebookAppId = [[SGKConfig sharedInstance] facebookAppID];
-    _fbkHelper.permissions = [[SGKConfig sharedInstance] facebookAppPermissions];
-  }
-  
-  return _fbkHelper;
 }
 
 @end

@@ -320,7 +320,7 @@
 + (BPKSection *)sectionForPaypalPayment
 {
   BPKSection *section = [[BPKSection alloc] init];
-  [section setTitle:NSLocalizedStringFromTableInBundle(@"Paypal", @"Shared", [SGStyleManager bundle], @"Section title for Paypal payment")];
+  [section setTitle:@"PayPal"];
   [section addItem:[self commonEmailItem]];
   [section addItem:[self commonPasswordItem]];
   return section;
@@ -331,9 +331,9 @@
 + (BPKSectionItem *)commonEmailItem
 {
   NSDictionary *emailJSON = [self jsonForId:kBPKFormIdEmail
-                                      title:NSLocalizedStringFromTableInBundle(@"Email", @"Shared", [SGStyleManager bundle], @"Email address where receipt is sent")
+                                      title:Loc.Mail
                                        type:kBPKFormTypeString
-                                placeholder:NSLocalizedStringFromTableInBundle(@"example@example.com", @"Shared", [SGStyleManager bundle], @"Email placeholder text")
+                                placeholder:Loc.ExampleMail
                                       value:@""
                                      kbType:kBPKKeyboardTypeEmail];
   BPKSectionItem *emailItem = [[BPKSectionItem alloc] initWithJson:emailJSON];
@@ -343,7 +343,7 @@
 + (BPKSectionItem *)commonPasswordItem
 {
   NSDictionary *passwordJson = [self jsonForId:kBPKFormIdPassword
-                                         title:NSLocalizedStringFromTableInBundle(@"Password", @"Shared", [SGStyleManager bundle], nil)
+                                         title:Loc.Password
                                           type:kBPKFormTypePassword
                                    placeholder:nil
                                          value:@""
@@ -355,9 +355,9 @@
 + (BPKSectionItem *)commonNameItem
 {
   NSDictionary *nameJSON = [self jsonForId:kBPKFormIdName
-                                     title:NSLocalizedStringFromTableInBundle(@"Name", @"Shared", [SGStyleManager bundle], @"Name to which receipt is sent")
+                                     title:Loc.Name
                                       type:kBPKFormTypeString
-                               placeholder:NSLocalizedStringFromTableInBundle(@"John Appleseed", @"Shared", [SGStyleManager bundle], @"Name placeholder text")
+                               placeholder:Loc.JohnAppleseed
                                      value:@""
                                     kbType:kBPKKeyboardTypeText];
   BPKSectionItem *nameItem = [[BPKSectionItem alloc] initWithJson:nameJSON];

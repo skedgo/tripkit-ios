@@ -11,10 +11,10 @@
 "%lu recurrences" = "%lu répétitions";
 
 /* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
-"'%@' not found." = "'%@' Aucun résultat trouvé. Veuillez réessayer.";
+"'%@' not found." = "'%@' non trouvé.";
 
 /* Authorization restricted alert message */
-"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "L'accès à cette fonctionnalité a été limité pour votre appareil. Veuillez vérifier les réglages de l'application > Général > Restrictions ou contactez votre fournisseur.";
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "L'accès à cette fonctionnalité est restreinte pour votre appareil. Veuillez vérifier les Réglages de l'application > Général > Restrictions ou contacter votre fournisseur.";
 
 /* Accessibility label for action button */
 "Action" = "Action";
@@ -32,13 +32,10 @@
 "Authorisation needed" = "Autorisation nécessaire";
 
 /* Accessibility label for 'back' or 'previous' button */
-"Back" = "Back";
+"Back" = "Retour";
 
 /* Type of vehicle : bicycle */
 "Bicycle" = "Vélo";
-
-/* Credit card CVC */
-"CVC" = "Code CVC";
 
 /* Cancel action */
 "Cancel" = "Annuler";
@@ -47,16 +44,13 @@
 "Cancelled" = "Annulé";
 
 /* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "Nous ne pouvons pas procéder sans une adresse e-mail valide";
+"Cannot proceed without a valid email address" = "Impossible de continuer sans adresse email valide";
 
 /* Type of vehicle : car */
 "Car" = "Voiture";
 
-/* Credit card number */
-"Card No." = "N° de carte.";
-
 /* Instruction for changing password */
-"Change" = "Remplacer";
+"Change" = "Modifier";
 
 /* Accessibility - user location button - hint */
 "Change tracking options" = "Changer les options de suivi";
@@ -71,19 +65,16 @@
 "Confirm" = "Confirmer";
 
 /* Title for button that allows users to contact our support team to help resolve some error in the app. */
-"Contact support" = "Contactez le service clientèle";
+"Contact support" = "Contactez le service client";
 
 /* Error title when GPS failed. */
-"Could not determine your current location." = "Impossible de déterminer votre position.";
+"Could not determine your current location." = "Impossible de déterminer votre position actuelle.";
 
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
-"Could not download supported regions from TripGo's server. Please try again later." = "Échec du téléchargement des régions supportées depuis le serveur de TripGo. Veuillez réessayer plus tard.";
+"Could not download supported regions from TripGo's server. Please try again later." = "Échec du téléchargement des régions disponibles sur TripGo. Veuillez réessayer plus tard.";
 
 /* Message that indicates the app is creating accounts for users */
 "Creating account" = "Création du compte";
-
-/* Section title for credit card payment */
-"Credit card" = "Carte de crédit";
 
 /* Current city */
 "Current City" = "Ville actuelle";
@@ -101,13 +92,12 @@
 "Don't have an account? Sign up" = "Vous n'avez pas de compte ? Inscrivez-vous";
 
 /* Done action */
-"Done" = "Ok";
+"Done" = "Validé";
 
 /* Drop new pin */
-"Drop new pin" = "Déposer un nouveau point";
+"Drop new pin" = "Ajouter un marqueur";
 
-/* Email address where receipt is sent
-   Email used as Facebook username */
+/* For email address */
 "Email" = "E-mail";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
@@ -116,9 +106,6 @@
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "Tous les jours";
 
-/* Credit card expiry date */
-"Expiry Date" = "Date d'expiration";
-
 /* Reminder to leave preference */
 "For when to leave" = "Pour le départ";
 
@@ -126,13 +113,10 @@
 "Free" = "Gratuit";
 
 /* No comment provided by engineer. */
-"Full name" = "Nom et prénom ";
-
-/* No comment provided by engineer. */
 "Getting a lift" = "Vous faire conduire";
 
 /* Accessibility annotation for trips which have a reminder set. */
-"Has reminder" = "A rappel";
+"Has reminder" = "A un rappel";
 
 /* Include contacts. */
 "Include contacts" = "Inclure des contacts";
@@ -144,13 +128,13 @@
 "Instant results" = "Résultats instantanés";
 
 /* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Compte non valide";
+"Invalid account" = "Compte invalide";
 
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
 
-/* Used when user signs in using Facebook */
-"Linking Facebook" = "Lier votre compte avec Facebook";
+/* Title of button to perform some action at a later time */
+"Later" = "Later";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Chargement";
@@ -159,10 +143,7 @@
 "Location" = "Position";
 
 /* Location iOS authorisation needed text */
-"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "La géolocalisation est requise pour utiliser cette fonctionnalité. Veuillez vérifier que ce service est activé dans Réglages > Confidentialité > Localisation et autorisez cette application.";
-
-/* Indicating a payment is in progress */
-"Making payment" = "Effectuer le paiement";
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "La géolocalisation est requise pour utiliser cette fonctionnalité. Veuillez vérifier que ce service est activé dans Réglages > Confidentialité > Localisation et autoriser cette application.";
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minutes avant le trajet";
@@ -176,33 +157,31 @@
 /* Title for view that shows the summary of a user's account information */
 "My account" = "Mon compte";
 
-/* Name to which receipt is sent
-   Name used in Facebook
-   Title for name of something (or someone) */
+/* Title for name of something (or someone) */
 "Name" = "Nom";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Jamais";
 
-/* Title for sign in view when user does not have an account */
+/* Title of page to create new account */
 "New account" = "Nouveau compte";
 
 /* Next action */
-"Next" = "Suivante";
+"Next" = "Suivant";
 
 /* No comment provided by engineer. */
 "No CO₂" = "Pas de CO₂";
 
 /* Indicator for wheelchair not accessible services */
-"Not wheelchair accessible" = "Not wheelchair accessible";
+"Not wheelchair accessible" = "Pas d'accès en fauteuil roulant";
 
 /* Countdown cell 'now' indicator */
-"Now" = "Immédiat.";
+"Now" = "Maintenant";
 
 /* Ok action */
 "OK" = "OK";
 
-/* Button to open Settings app section for this app */
+/* Button that goes to the Setting's app */
 "Open Settings" = "Ouvrir Réglages";
 
 /* Open in Safari action */
@@ -211,32 +190,23 @@
 /* No comment provided by engineer. */
 "Password" = "Mot de passe ";
 
-/* Indicating a payment is successful */
-"Payment successful" = "Paiement validé";
-
-/* Section title for Paypal payment */
-"Paypal" = "Paypal";
-
 /* Please select a location prompt */
-"Please select a location" = "Veuillez sélectionner une ville";
+"Please select a location" = "Veuillez sélectionner un lieu";
 
 /* Error recovery suggestion when GPS fails. */
 "Please try again or set your location manually." = "Veuillez réessayer ou régler votre position manuellement.";
 
 /* Please verify the location prompt */
-"Please verify the location" = "Veuillez vérifier la ville";
+"Please verify the location" = "Veuillez vérifier le lieu";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "Presser 'recherche' pour plus...";
+"Press 'search' for more..." = "Taper sur 'recherche' pour plus...";
 
 /* No comment provided by engineer. */
 "Read more..." = "En savoir plus...";
 
 /* Indicator for real-time information */
-"Real-time" = "Temps-réel";
-
-/* Title for section that asks users where payment receipt should be sent */
-"Receipt" = "Accusé de réception";
+"Real-time" = "En temps réel";
 
 /* Action title to add/remove reminder */
 "Reminder" = "Rappel";
@@ -254,7 +224,7 @@
 "Repeats yearly" = "Répétition annuelle";
 
 /* Button title to report a problem */
-"Report Problem" = "Rapporter un problème";
+"Report Problem" = "Signaler un problème";
 
 /* Retry action, e.g., in case something didn't load */
 "Retry" = "Réessayer";
@@ -277,33 +247,29 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'..." = "Recherche de '%@'...";
 
-/* Button that goes to the Setting's app */
-"Settings" = "Réglages";
-
-/* No comment provided by engineer. */
-"Sign in" = "Identifiez-vous";
+/* Title of page or button to sign in */
+"Sign in" = "S'identifier";
 
 /* Instruction for signing out user account */
 "Sign out" = "Se déconnecter";
 
-/* No comment provided by engineer. */
-"Sign up" = "S'identifier";
+/* Title of page or button to sign up */
+"Sign up" = "S'inscrire";
 
 /* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Vous ne pouvez pas vous identifier sans un mot de passe valide";
+"Sign up cannot be completed without a valid password" = "L'inscription ne peut pas s'effectuer sans mot de passe valide";
 
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Connexion en cours";
 
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
+/* Message that indicates the app is signing users out of their accounts */
 "Signing out" = "Déconnexion en cours";
 
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Du %@";
 
 /* Tap to set location. (old key: SetLocation) */
-"Tap to set location" = "Touchez pour définir l'emplacement";
+"Tap to set location" = "Appuyer pour définir la position";
 
 /* Message that indicates the app is about to sign users out of their user accounts */
 "The app will now sign out" = "L’application sera maintenant déconnectée";
@@ -330,13 +296,13 @@
 "Values missing from required fields." = "Valeurs manquantes de champs obligatoires.";
 
 /* Every weekday in context of repetitions (especially recurring events) */
-"Weekdays" = "Chaque jour de la semaine";
+"Weekdays" = "Du lundi au vendredi";
 
 /* Every weekend day in context of repetitions (especially recurring events) */
-"Weekends" = "Chaque jour du week-end";
+"Weekends" = "Week-ends";
 
 /* Indicator for unknow if service or station is wheelchair accessible or not */
-"Wheelchair accessibility unknown" = "Wheelchair accessibility unknown";
+"Wheelchair accessibility unknown" = "L'accès en fauteuil roulant n'est pas précisé";
 
 /* Indicator for wheelchair accessible services */
 "Wheelchair accessible" = "Accessible en fauteuil roulant";
@@ -345,10 +311,10 @@
 "Would you like to report a problem?" = "Vous souhaitez signaler un problème ?";
 
 /* Message that informs users that T&C must be agreed before booking can be made. */
-"You need to agree to the booking terms and conditions." = "Vous devez accepter les conditions de réservation.";
+"You need to agree to the booking terms and conditions." = "Vous devez accepter les conditions générales de réservation.";
 
 /* Message that informs users that T&C for insurance must be agreed before booking can be made. */
-"You need to agree to the insurance terms and conditions." = "Vous devez accepter les conditions d’assurance.";
+"You need to agree to the insurance terms and conditions." = "Vous devez accepter les conditions générales d’assurance.";
 
 /* Calendar authorisation needed text */
 "You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Vous avez préalablement refusé l'accès de cette application à votre calendrier. Veuillez autoriser l'accès dans Réglages > Confidentialité > Calendriers pour utiliser cette fonctionnalité.";
@@ -371,12 +337,9 @@
 /* Email placeholder text */
 "example@example.com" = "example@example.com";
 
-/* Credit card expiry date placeholder, mm/yy */
-"mm/yy" = "mm/aa";
-
 /* Short indicator of start-time */
 "starts at %@" = "débute à %@";
 
 /* to %date. (old key: DateToFormat) */
-"to %@" = "jusqu'au %@";
+"to %@" = "à : %@";
 

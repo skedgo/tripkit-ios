@@ -10,6 +10,9 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ atrasado (%2$@ serviço)";
 
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ ago";
+
 /* Number of alerts, in this case, there are multiple (plural */
 "%@ alerts" = "%@ alerts";
 
@@ -57,23 +60,14 @@
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "Em %@";
 
-/* No comment provided by engineer. */
-"Book with FlitWays" = "Reservar com FlitWays";
-
-/* No comment provided by engineer. */
-"Book with Uber" = "Reservar com Uber";
-
-/* Placeholder title while calculating trips */
-"Calculating trips..." = "Calculando viagens...";
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "Book with %@";
 
 /* No comment provided by engineer. */
 "Call" = "Chamada";
 
-/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+/* Action title to make a call to service/company named '@%' */
 "Call %@" = "Chamar %@";
-
-/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
-"Connect to Internet to get trips" = "Conectar a Internet para obter viagens";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Não foi possivel encontar parada de trânsito.";
@@ -102,17 +96,11 @@
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Cheio";
 
-/* No comment provided by engineer. */
-"Get Lyft" = "Obter Lyft";
-
-/* No comment provided by engineer. */
-"Get Ola" = "Obter Ola";
+/* Action title get/download app of name '@%' */
+"Get %@" = "Get %@";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Obter direções";
-
-/* No comment provided by engineer. */
-"Get ingogo" = "Obter ingogo";
 
 /* google maps directions action */
 "Google Maps" = "Google Maps";
@@ -123,11 +111,11 @@
 /* Indication of an activity. (old key: ActivityIndication) */
 "I'll take a %@ at %@ from %@." = "Eu vou pegar o %@ as %@ de %@.";
 
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "In %@";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Entretanto, vamos explorar %@ e aproveitar suas viagens";
-
-/* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "Entretanto, vamos explorar e aproveitar suas viagens";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -154,7 +142,7 @@
 /* No comment provided by engineer. */
 "Live traffic" = "Trânsito em tempo real";
 
-/* Title to show while loading/waiting for results */
+/* Indicating when something is loading */
 "Loading..." = "Carregando...";
 
 /* As in 'this bus/train has many seats available' */
@@ -172,11 +160,8 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Em ponto";
 
-/* No comment provided by engineer. */
-"Open Lyft" = "Abrir Lyft";
-
-/* No comment provided by engineer. */
-"Open Ola" = "Abrir Ola";
+/* Action title open app of name '@%' */
+"Open %@" = "Open %@";
 
 /* Title for opening hours */
 "Opening Hours" = "Horas de Abertura";
@@ -193,7 +178,7 @@
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Pesquisar essa parada novamente ou tentar mais tarde.";
 
-/* Send SMS action */
+/* Send SMS action button */
 "Send SMS" = "Enviar SMS";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
@@ -202,7 +187,7 @@
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
 "Show" = "Show";
 
-/* Show website action */
+/* Show website action button */
 "Show website" = "Mostrar website";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
@@ -241,6 +226,6 @@
 /* goCatch action */
 "goCatch a Taxi" = "goCatch um Taxi";
 
-/* No comment provided by engineer. */
+/* inGogo taxi booking action */
 "ingogo a Taxi" = "ingogo um Taxi";
 

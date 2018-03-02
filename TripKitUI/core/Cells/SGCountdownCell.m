@@ -324,16 +324,16 @@ typedef enum {
 	}
   
   if (self.showAsCanceled) {
-    [self setTimeLetter:NSLocalizedStringFromTableInBundle(@"Cancelled", @"Shared", [SGStyleManager bundle], @"Label for when a service is cancelled.") color:SGCountdownColorRed];
+    [self setTimeLetter:Loc.Cancelled color:SGCountdownColorRed];
   } else if (minutes == 0) {
-		[self setTimeLetter:NSLocalizedStringFromTableInBundle(@"Now", @"Shared", [SGStyleManager bundle], @"Countdown cell 'now' indicator")];
+		[self setTimeLetter:Loc.Now];
 	} else {
 		[self setTimeLetter:nil];
 		self.timeNumberLabel.text = durationString;
     if (isInFuture) {
-      self.timeNumberLabel.accessibilityLabel = [NSString stringWithFormat:@"In %@", durationString];
+      self.timeNumberLabel.accessibilityLabel = [Loc InDurationString:durationString];
     } else {
-      self.timeNumberLabel.accessibilityLabel = [NSString stringWithFormat:@"%@ ago", durationString];
+      self.timeNumberLabel.accessibilityLabel = [Loc AgoDurationString:durationString];
     }
 	}
 	

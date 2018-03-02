@@ -37,9 +37,6 @@
 /* Type of vehicle : bicycle */
 "Bicycle" = "Polkupyörä";
 
-/* Credit card CVC */
-"CVC" = "CVV";
-
 /* Cancel action */
 "Cancel" = "Annuleer";
 
@@ -51,9 +48,6 @@
 
 /* Type of vehicle : car */
 "Car" = "Auto";
-
-/* Credit card number */
-"Card No." = "Kaart nr.";
 
 /* Instruction for changing password */
 "Change" = "Wijzigen";
@@ -82,9 +76,6 @@
 /* Message that indicates the app is creating accounts for users */
 "Creating account" = "Account aanmaken";
 
-/* Section title for credit card payment */
-"Credit card" = "Credit card";
-
 /* Current city */
 "Current City" = "Huidige stad";
 
@@ -106,8 +97,7 @@
 /* Drop new pin */
 "Drop new pin" = "Nieuwe pin neerzetten";
 
-/* Email address where receipt is sent
-   Email used as Facebook username */
+/* For email address */
 "Email" = "E-mail";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
@@ -116,17 +106,11 @@
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "Elke dag";
 
-/* Credit card expiry date */
-"Expiry Date" = "Vervaldatum";
-
 /* Reminder to leave preference */
 "For when to leave" = "Voor vertrek";
 
 /* Free as in beer */
 "Free" = "Gratis";
-
-/* No comment provided by engineer. */
-"Full name" = "Volledige naam";
 
 /* No comment provided by engineer. */
 "Getting a lift" = "Ik krijg een lift";
@@ -149,8 +133,8 @@
 /* Name placeholder text */
 "John Appleseed" = "Klaas Jansen";
 
-/* Used when user signs in using Facebook */
-"Linking Facebook" = "Facebook koppelen";
+/* Title of button to perform some action at a later time */
+"Later" = "Later";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Laden";
@@ -160,9 +144,6 @@
 
 /* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Locatievoorzieningen moet ingeschakeld zijn om deze functie te gebruiken. Ga naar Instellingen > Privacy > Locatievoorzieningen om deze in te schakelen en sta dit ook toe voor deze app.";
-
-/* Indicating a payment is in progress */
-"Making payment" = "Betaling";
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minuten voor vertrek";
@@ -176,15 +157,13 @@
 /* Title for view that shows the summary of a user's account information */
 "My account" = "Mijn account";
 
-/* Name to which receipt is sent
-   Name used in Facebook
-   Title for name of something (or someone) */
+/* Title for name of something (or someone) */
 "Name" = "Naam";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Nooit";
 
-/* Title for sign in view when user does not have an account */
+/* Title of page to create new account */
 "New account" = "Nieuwe account";
 
 /* Next action */
@@ -194,7 +173,7 @@
 "No CO₂" = "Geen CO₂";
 
 /* Indicator for wheelchair not accessible services */
-"Not wheelchair accessible" = "Not wheelchair accessible";
+"Not wheelchair accessible" = "Niet rolstoel toegankelijk";
 
 /* Countdown cell 'now' indicator */
 "Now" = "Nu";
@@ -202,7 +181,7 @@
 /* Ok action */
 "OK" = "OK";
 
-/* Button to open Settings app section for this app */
+/* Button that goes to the Setting's app */
 "Open Settings" = "Instellingen openen";
 
 /* Open in Safari action */
@@ -210,12 +189,6 @@
 
 /* No comment provided by engineer. */
 "Password" = "Paswoord";
-
-/* Indicating a payment is successful */
-"Payment successful" = "Betaling succesvol";
-
-/* Section title for Paypal payment */
-"Paypal" = "PayPal";
 
 /* Please select a location prompt */
 "Please select a location" = "Selecteer een locatie";
@@ -234,9 +207,6 @@
 
 /* Indicator for real-time information */
 "Real-time" = "Real-time";
-
-/* Title for section that asks users where payment receipt should be sent */
-"Receipt" = "Ontvangstbewijs";
 
 /* Action title to add/remove reminder */
 "Reminder" = "Herinnering";
@@ -277,16 +247,13 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'..." = "Op zoek naar '%@'...";
 
-/* Button that goes to the Setting's app */
-"Settings" = "Instellingen";
-
-/* No comment provided by engineer. */
+/* Title of page or button to sign in */
 "Sign in" = "Inloggen";
 
 /* Instruction for signing out user account */
 "Sign out" = "Afmelden";
 
-/* No comment provided by engineer. */
+/* Title of page or button to sign up */
 "Sign up" = "Aanmelden";
 
 /* No comment provided by engineer. */
@@ -295,8 +262,7 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Inloggen";
 
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
+/* Message that indicates the app is signing users out of their accounts */
 "Signing out" = "Afmelden";
 
 /* Starting %date. (old key: DateFromFormat) */
@@ -336,7 +302,7 @@
 "Weekends" = "Weekeinden";
 
 /* Indicator for unknow if service or station is wheelchair accessible or not */
-"Wheelchair accessibility unknown" = "Wheelchair accessibility unknown";
+"Wheelchair accessibility unknown" = "Rolstoel toegankelijkheid onbekend";
 
 /* Indicator for wheelchair accessible services */
 "Wheelchair accessible" = "Rolstoel toegankelijk";
@@ -370,9 +336,6 @@
 
 /* Email placeholder text */
 "example@example.com" = "info@voorbeeld.nl";
-
-/* Credit card expiry date placeholder, mm/yy */
-"mm/yy" = "mm/jj";
 
 /* Short indicator of start-time */
 "starts at %@" = "begint om %@";

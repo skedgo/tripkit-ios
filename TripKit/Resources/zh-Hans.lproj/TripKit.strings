@@ -10,6 +10,9 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "延迟 %1$@ (%2$@ 服务)";
 
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ ago";
+
 /* Number of alerts, in this case, there are multiple (plural */
 "%@ alerts" = "%@提示";
 
@@ -57,23 +60,14 @@
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "时刻 %@";
 
-/* No comment provided by engineer. */
-"Book with FlitWays" = "从FlitWays预定";
-
-/* No comment provided by engineer. */
-"Book with Uber" = "从Uber预定";
-
-/* Placeholder title while calculating trips */
-"Calculating trips..." = "正在计算行程...";
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "Book with %@";
 
 /* No comment provided by engineer. */
 "Call" = "叫计程车";
 
-/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+/* Action title to make a call to service/company named '@%' */
 "Call %@" = "联系%@";
-
-/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
-"Connect to Internet to get trips" = "连接到网络以便获取行程";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "无法找到公交车站。";
@@ -102,17 +96,11 @@
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "完全信任";
 
-/* No comment provided by engineer. */
-"Get Lyft" = "使用Lyft";
-
-/* No comment provided by engineer. */
-"Get Ola" = "使用Ola";
+/* Action title get/download app of name '@%' */
+"Get %@" = "Get %@";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "开始导航";
-
-/* No comment provided by engineer. */
-"Get ingogo" = "使用Ingogo";
 
 /* google maps directions action */
 "Google Maps" = "谷歌地图";
@@ -123,11 +111,11 @@
 /* Indication of an activity. (old key: ActivityIndication) */
 "I'll take a %@ at %@ from %@." = "我将于%2$@从%3$@搭乘%1$@.";
 
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "In %@";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "与此同时，让我们一起探索%@，享受你的旅行吧";
-
-/* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "与此同时，让我们一起探索并享受你的旅行吧";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -154,7 +142,7 @@
 /* No comment provided by engineer. */
 "Live traffic" = "实时交通";
 
-/* Title to show while loading/waiting for results */
+/* Indicating when something is loading */
 "Loading..." = "加载中...";
 
 /* As in 'this bus/train has many seats available' */
@@ -172,11 +160,8 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "准点";
 
-/* No comment provided by engineer. */
-"Open Lyft" = "开启Lyft";
-
-/* No comment provided by engineer. */
-"Open Ola" = "打开Ola";
+/* Action title open app of name '@%' */
+"Open %@" = "Open %@";
 
 /* Title for opening hours */
 "Opening Hours" = "开放时间";
@@ -193,7 +178,7 @@
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "再次搜索车站或者稍后再试。";
 
-/* Send SMS action */
+/* Send SMS action button */
 "Send SMS" = "发送短信";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
@@ -202,7 +187,7 @@
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
 "Show" = "查看";
 
-/* Show website action */
+/* Show website action button */
 "Show website" = "开启网站";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
@@ -241,6 +226,6 @@
 /* goCatch action */
 "goCatch a Taxi" = "使用goCatch叫计程车";
 
-/* No comment provided by engineer. */
+/* inGogo taxi booking action */
 "ingogo a Taxi" = "Ingogo叫车服务";
 

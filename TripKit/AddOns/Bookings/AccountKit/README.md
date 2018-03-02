@@ -2,12 +2,6 @@
 
 ## Usage
 
-During your application initialisation call:
-
-```objective-c
-  [[AMKManager sharedInstance] setup];
-```
-
 Let the user log in by presenting the view controller to sign-up or log-in:
 
 ```objective-c

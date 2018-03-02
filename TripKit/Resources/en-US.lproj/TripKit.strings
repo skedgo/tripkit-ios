@@ -53,15 +53,6 @@
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Get directions";
 
-/* No comment provided by engineer. */
-"Get ingogo" = "Get ingogo";
-
-/* No comment provided by engineer. */
-"Get Lyft" = "Get Lyft";
-
-/* No comment provided by engineer. */
-"Get Uber" = "Get Uber";
-
 /* goCatch action */
 "goCatch a Taxi" = "goCatch a Taxi";
 
@@ -95,12 +86,6 @@
 
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "On time";
-
-/* No comment provided by engineer. */
-"Open Lyft" = "Open Lyft";
-
-/* No comment provided by engineer. */
-"Open Uber" = "Open Uber";
 
 /* Favorite trip 'to' title */
 "To" = "To";

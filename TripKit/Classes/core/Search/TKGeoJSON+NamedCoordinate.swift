@@ -30,7 +30,7 @@ extension SGKNamedCoordinate {
   fileprivate convenience init?(from geojson: TKGeoJSON.Feature) {
     switch geojson.geometry {
     case .point(let position):
-      let mapZen = geojson.properties as? TKMapZenProperties
+      let mapZen = geojson.properties as? TKPeliasProperties
       
       self.init(latitude: position.latitude, longitude: position.longitude, name: mapZen?.name, address: mapZen?.label)
       
@@ -44,7 +44,7 @@ extension SGKNamedCoordinate {
 
 }
 
-extension TKMapZenProperties {
+extension TKPeliasProperties {
   
   private static let mapZenAttribution = API.DataAttribution(provider: API.CompanyInfo(name: "MapZen", website: URL(string: "https://mapzen.com")))
   
@@ -70,7 +70,7 @@ extension TKMapZenProperties {
   }
   
   var dataSources: [API.DataAttribution] {
-    var attributions = [TKMapZenProperties.mapZenAttribution]
+    var attributions = [TKPeliasProperties.mapZenAttribution]
     if let specificSource = self.specificSource {
       attributions.append(specificSource)
     }

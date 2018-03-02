@@ -81,7 +81,7 @@
 
   if (self.openSettingsHandler) {
     alert.hasCancel = YES;
-    [alert addAction:NSLocalizedStringFromTableInBundle(@"Open Settings", @"Shared", [SGStyleManager bundle], @"Button to open Settings app section for this app") handler:self.openSettingsHandler];
+    [alert addAction:Loc.OpenSettings handler:self.openSettingsHandler];
   } else {
     alert.hasCancel = NO;
     [alert addAction:Loc.OK handler:nil];

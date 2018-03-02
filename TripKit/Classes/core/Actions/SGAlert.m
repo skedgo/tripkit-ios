@@ -64,7 +64,7 @@
 
 + (NSString *)alertTitle
 {
-  return NSLocalizedStringFromTableInBundle(@"Alert", @"Shared", [SGStyleManager bundle], @"Default title for alert view");
+  return Loc.Alert;
 }
 
 + (NSString *)cancelTitle

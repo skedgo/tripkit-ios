@@ -23,17 +23,13 @@
 #import "AMKSection.h"
 #import "AKTextFieldItem.h"
 
-// View
-#import "AKSignUpHeader.h"
-
 // Helper
 #import "UIView+Keyboard.h"
 #import "NSString+ValidateEmailAddress.h"
 
-@interface AKSignUpViewController () <AKSignUpHeaderDelegate>
+@interface AKSignUpViewController ()
 
 @property (nonatomic, assign) BOOL isSigningIn;
-@property (nonatomic, assign) BOOL signinUsingFbk;
 
 // Local data
 @property (nonatomic, copy) NSString *name;
@@ -64,7 +60,6 @@
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem cancelButtonWithSelector:@selector(cancelButtonPressed:) forController:self];
   }
 
-  self.tableView.tableHeaderView = [self header];
   self.tableView.tableFooterView = [self footer];
   
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
@@ -90,9 +85,7 @@
 
 - (void)updateTitle
 {
-  self.title = self.isSigningIn
-  ? NSLocalizedStringFromTableInBundle(@"Sign in", @"Shared", [SGStyleManager bundle], @"")
-  : NSLocalizedStringFromTableInBundle(@"New account", @"Shared", [SGStyleManager bundle], @"Title for sign in view when user does not have an account");
+  self.title = self.isSigningIn ? Loc.SignIn : Loc.NewAccount;
 }
 
 - (void)resetLocalData
@@ -149,9 +142,7 @@
 
 - (NSString *)footerText
 {
-  return self.isSigningIn
-    ? NSLocalizedStringFromTableInBundle(@"Don't have an account? Sign up", @"Shared", [SGStyleManager bundle], @"Option for users if they don't yet have a SkedGo account")
-    : NSLocalizedStringFromTableInBundle(@"Already have an account? Sign in", @"Shared", [SGStyleManager bundle], @"Option for users if they already owned a SkedGo account");
+  return self.isSigningIn ? Loc.DontHaveAnAccount : Loc.AlreadyHaveAnAccount;
 }
 
 - (void)footerPressed:(id)sender
@@ -175,17 +166,6 @@
   }
 }
 
-#pragma mark - Private: Table header
-
-- (UIView *)header
-{
-  CGRect frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.view.frame), 120);
-  AKSignUpHeader *header = [[NSBundle bundleForClass:[AKSignUpHeader class]] loadNibNamed:NSStringFromClass([AKSignUpHeader class]) owner:nil options:nil][0];
-  header.frame = frame;
-  header.delegate = self;
-  return header;
-}
-
 #pragma mark - User interactions
 
 - (void)cancelButtonPressed:(id)sender
@@ -202,24 +182,6 @@
 {
 #pragma unused (tap)
   [self.view dismissKeyboard];
-}
-
-#pragma mark - AKSignUpHeaderDelegate
-
-- (void)requestSignupUsingProvider:(AKSignupProviders)provider
-{
-  switch (provider) {
-    case AKSignupProvider_Facebook:
-      [self initiateFacebookSignIn];
-      break;
-      
-    case AKSignupProvider_Twitter:
-//      [self initiateTwitterSignIn];
-      break;
-      
-    default:
-      break;
-  }
 }
 
 #pragma mark - Sign up / Sign in
@@ -243,11 +205,11 @@
   
   // Email.
   if (self.email.length == 0 || ! [self.email isValidEmail]) {
-    [self _showAlertForError:nil orWithMessage:NSLocalizedStringFromTableInBundle(@"Cannot proceed without a valid email address", @"Shared", [SGStyleManager bundle], @"")];
+    [self _showAlertForError:nil orWithMessage:Loc.CannotProceedWithoutMail];
     success = NO;
     
   } else if (self.password.length == 0) {
-    [self _showAlertForError:nil orWithMessage:NSLocalizedStringFromTableInBundle(@"Sign up cannot be completed without a valid password", @"Shared", [SGStyleManager bundle], @"")];
+    [self _showAlertForError:nil orWithMessage:Loc.CannotProceedWithoutPassword];
     success = NO;
   }
   
@@ -258,7 +220,7 @@
 
 - (void)initiateSignIn
 {
-  [KVNProgress showWithStatus:NSLocalizedStringFromTableInBundle(@"Signing in", @"Shared", [SGStyleManager bundle], @"Message that indicates the app is signing users into their user accounts")];
+  [KVNProgress showWithStatus:Loc.SigningIn];
   
   AMKManager *amkManager = [AMKManager sharedInstance];
   
@@ -277,7 +239,7 @@
 
 - (void)initiateSignUp
 {
-  [KVNProgress showWithStatus:NSLocalizedStringFromTableInBundle(@"Creating account", @"Shared", [SGStyleManager bundle], @"Message that indicates the app is creating accounts for users")];
+  [KVNProgress showWithStatus:Loc.CreatingAccount];
   
   AMKManager *amkManager = [AMKManager sharedInstance];
   
@@ -295,25 +257,6 @@
    }];
 }
 
-- (void)initiateFacebookSignIn
-{
-  _signinUsingFbk = YES;
-  
-  [KVNProgress showWithStatus:NSLocalizedStringFromTableInBundle(@"Linking Facebook", @"Shared", [SGStyleManager bundle], @"Used when user signs in using Facebook")];
-  
-  AMKManager *accountManager = [AMKManager sharedInstance];
-  [accountManager linkWithFacebook:^(id object, NSError *error) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self parseResponse:object withError:error forExistingAccount:YES];
-    });
-  }];
-}
-
-- (void)initiateTwitterSignIn
-{
-  // do nothing for now
-}
-
 - (void)parseResponse:(id)response withError:(NSError *)error forExistingAccount:(BOOL)exisingAccount
 {
   if (error != nil) {
@@ -323,7 +266,7 @@
   } else if ([response isKindOfClass:[NSString class]]) {
     if ([(NSString *)response isEqualToString:self.email]) {
       [KVNProgress dismiss];
-      [self _showAlertForError:nil orWithMessage:NSLocalizedStringFromTableInBundle(@"Unknown error", @"Shared", [SGStyleManager bundle], @"")];
+      [self _showAlertForError:nil orWithMessage:Loc.UnknownError];
       
     } else {
       NSString *userToken = (NSString *)response;
@@ -337,11 +280,7 @@
           user.name = self.name;
           akEmail = [[AMKEmail alloc] initWithAddress:self.email isPrimary:YES isVerified:NO];
         } else {
-          if (self.signinUsingFbk) {
-            [user unlinkFacebook:NO];
-          } else {
-            akEmail = [[AMKEmail alloc] initWithAddress:self.email isPrimary:YES isVerified:YES];
-          }
+          akEmail = [[AMKEmail alloc] initWithAddress:self.email isPrimary:YES isVerified:YES];
         }
         
         if (akEmail != nil) {
@@ -372,12 +311,11 @@
   alert.message = error ? error.localizedDescription : message;
   
   // All alert has "OK" button
-  NSBundle *bundle = [SGStyleManager bundle];
   [alert addAction:Loc.OK handler:nil];
   
   // Add a Settings button if needed.
   if (error != nil && [self _shouldOpenSettingsFromError:error]) {
-    [alert addAction:NSLocalizedStringFromTableInBundle(@"Settings", @"Shared", bundle, @"Button that goes to the Setting's app") handler:^{
+    [alert addAction:Loc.OpenSettings handler:^{
       NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
       [[UIApplication sharedApplication] openURL:appSettings];
     }];
@@ -401,7 +339,7 @@
     AMKSection *infoSection = [[AMKSection alloc] init];
     
     AKTextFieldItem *nameItem = [AKTextFieldItem new];
-    nameItem.primaryText = NSLocalizedStringFromTableInBundle(@"Full name", @"Shared", [SGStyleManager bundle], @"");
+    nameItem.primaryText = Loc.Name;
     nameItem.returnKeyType = UIReturnKeyNext;
     
     __weak typeof(nameItem) weakNameItem = nameItem;
@@ -425,7 +363,7 @@
     
     // Email
     AKTextFieldItem *emailItem = [AKTextFieldItem new];
-    emailItem.primaryText = NSLocalizedStringFromTableInBundle(@"Email", @"Shared", [SGStyleManager bundle], @"");
+    emailItem.primaryText = Loc.Mail;
     emailItem.keyboardType = UIKeyboardTypeEmailAddress;
     emailItem.returnKeyType = UIReturnKeyNext;
     
@@ -449,7 +387,7 @@
 
     // Password
     AKTextFieldItem *passwordItem = [AKTextFieldItem new];
-    passwordItem.primaryText = NSLocalizedStringFromTableInBundle(@"Password", @"Shared", [SGStyleManager bundle], @"");
+    passwordItem.primaryText = Loc.Password;
     passwordItem.secureEntry = YES;
     passwordItem.returnKeyType = UIReturnKeyGo;
     
@@ -486,9 +424,7 @@
     AMKSection *actionSection = [AMKSection new];
     
     AMKItem *actionItem = [AMKItem new];
-    actionItem.primaryText = self.isSigningIn
-      ? NSLocalizedStringFromTableInBundle(@"Sign in", @"Shared", [SGStyleManager bundle], @"")
-      : NSLocalizedStringFromTableInBundle(@"Sign up", @"Shared", [SGStyleManager bundle], @"");
+    actionItem.primaryText = self.isSigningIn ? Loc.SignIn : Loc.SignUp;
     [actionItem addDidSelectHandler:^{
       typeof(weakSelf) strongSelf = weakSelf;
       if (strongSelf) {

@@ -37,9 +37,6 @@
 /* Type of vehicle : bicycle */
 "Bicycle" = "Fahrrad";
 
-/* Credit card CVC */
-"CVC" = "CVC";
-
 /* Cancel action */
 "Cancel" = "Abbrechen";
 
@@ -51,9 +48,6 @@
 
 /* Type of vehicle : car */
 "Car" = "Auto";
-
-/* Credit card number */
-"Card No." = "Karten-Nr.";
 
 /* Instruction for changing password */
 "Change" = "Ändern";
@@ -82,14 +76,11 @@
 /* Message that indicates the app is creating accounts for users */
 "Creating account" = "Account wird erstellt...";
 
-/* Section title for credit card payment */
-"Credit card" = "Kreditkarte";
-
 /* Current city */
 "Current City" = "Aktuelle Stadt";
 
 /* Title for user's current location */
-"Current Location" = "Aktueller Ort";
+"Current Location" = "Mein Standort";
 
 /* Delete action */
 "Delete" = "Löschen";
@@ -106,8 +97,7 @@
 /* Drop new pin */
 "Drop new pin" = "Stecknadel";
 
-/* Email address where receipt is sent
-   Email used as Facebook username */
+/* For email address */
 "Email" = "E-Mail";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
@@ -116,17 +106,11 @@
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "Jeden Tag";
 
-/* Credit card expiry date */
-"Expiry Date" = "Ablaufdatum";
-
 /* Reminder to leave preference */
 "For when to leave" = "Wenn ich gehen muss";
 
 /* Free as in beer */
 "Free" = "Kostenlos";
-
-/* No comment provided by engineer. */
-"Full name" = "Name";
 
 /* No comment provided by engineer. */
 "Getting a lift" = "Mitfahrgelegenheit";
@@ -149,8 +133,8 @@
 /* Name placeholder text */
 "John Appleseed" = "Otto Appleseed";
 
-/* Used when user signs in using Facebook */
-"Linking Facebook" = "Facebook wird kontaktiert...";
+/* Title of button to perform some action at a later time */
+"Later" = "Später";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Laden";
@@ -159,10 +143,7 @@
 "Location" = "Ort";
 
 /* Location iOS authorisation needed text */
-"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Ortungsdienste sind für dieses Feature benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Ortungsdiesten > TripGo.";
-
-/* Indicating a payment is in progress */
-"Making payment" = "Bezahlung erfolgt...";
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Ortungsdienste sind für dieses Feature benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Ortungsdiesten.";
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minuten vor Abfahrt";
@@ -176,15 +157,13 @@
 /* Title for view that shows the summary of a user's account information */
 "My account" = "Mein Account";
 
-/* Name to which receipt is sent
-   Name used in Facebook
-   Title for name of something (or someone) */
+/* Title for name of something (or someone) */
 "Name" = "Name";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Niemals";
 
-/* Title for sign in view when user does not have an account */
+/* Title of page to create new account */
 "New account" = "Neuer Account";
 
 /* Next action */
@@ -202,7 +181,7 @@
 /* Ok action */
 "OK" = "OK";
 
-/* Button to open Settings app section for this app */
+/* Button that goes to the Setting's app */
 "Open Settings" = "Einstellungen öffnen";
 
 /* Open in Safari action */
@@ -210,12 +189,6 @@
 
 /* No comment provided by engineer. */
 "Password" = "Passwort";
-
-/* Indicating a payment is successful */
-"Payment successful" = "Zahlung erfolgreich";
-
-/* Section title for Paypal payment */
-"Paypal" = "PayPal";
 
 /* Please select a location prompt */
 "Please select a location" = "Bitte wähle einen Ort aus";
@@ -234,9 +207,6 @@
 
 /* Indicator for real-time information */
 "Real-time" = "Echtzeit";
-
-/* Title for section that asks users where payment receipt should be sent */
-"Receipt" = "Bestätigung";
 
 /* Action title to add/remove reminder */
 "Reminder" = "Erinnerung";
@@ -277,16 +247,13 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'..." = "'%@' suchen...";
 
-/* Button that goes to the Setting's app */
-"Settings" = "Einstellungen";
-
-/* No comment provided by engineer. */
+/* Title of page or button to sign in */
 "Sign in" = "Einloggen";
 
 /* Instruction for signing out user account */
 "Sign out" = "Abmelden";
 
-/* No comment provided by engineer. */
+/* Title of page or button to sign up */
 "Sign up" = "Anmelden";
 
 /* No comment provided by engineer. */
@@ -295,8 +262,7 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Einloggen...";
 
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
+/* Message that indicates the app is signing users out of their accounts */
 "Signing out" = "Ausloggen...";
 
 /* Starting %date. (old key: DateFromFormat) */
@@ -351,10 +317,10 @@
 "You need to agree to the insurance terms and conditions." = "Den Versicherungsbedingungen muss zugestimmt werden.";
 
 /* Calendar authorisation needed text */
-"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Kalenderzugriffsautorisierung benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Kalender > TripGo.";
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Kalenderzugriffsautorisierung benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Kalender.";
 
 /* Contacts authorisation needed text */
-"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Addressbuchzugriffsautorisierung benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Kontakte > TripGo.";
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Addressbuchzugriffsautorisierung benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Kontakte.";
 
 /* Indicator that an event is all-day */
 "all-day" = "ganztägig";
@@ -370,9 +336,6 @@
 
 /* Email placeholder text */
 "example@example.com" = "name@firma.de";
-
-/* Credit card expiry date placeholder, mm/yy */
-"mm/yy" = "MM/JJ";
 
 /* Short indicator of start-time */
 "starts at %@" = "beginnt um %@";

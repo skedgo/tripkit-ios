@@ -28,16 +28,17 @@ public enum TKLocationProvider {
   ///   - radius: Radius of circle in metres
   ///   - modes: Modes for which to fetch locations. If not provided, will use all.
   /// - Returns: Observable of fetched locations; can error out
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil) -> Observable<[STKModeCoordinate]> {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil) -> Single<[STKModeCoordinate]> {
     
     return SVKServer.shared.rx
       .requireRegion(center)
       .flatMap { region in
         TKLocationProvider.fetchLocations(center: center, radius: radius, modes: modes, in: region)
       }
+      .asSingle()
   }
   
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil, in region: SVKRegion) -> Observable<[STKModeCoordinate]> {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil, in region: SVKRegion) -> Single<[STKModeCoordinate]> {
 
     var paras: [String: Any] = [
       "lat": center.latitude,
@@ -52,37 +53,15 @@ public enum TKLocationProvider {
         let decoder = JSONDecoder()
         guard
           let data = data,
-          let response = try? decoder.decode(LocationsResponse.self, from: data)
+          let response = try? decoder.decode(API.LocationsResponse.self, from: data)
         else {
           throw Error.serverReturnedBadFormat
         }
         
-        return response.groups.reduce(mutating: []) { $0.append(contentsOf: $1.all) }
+        return response.groups.reduce(into: []) { $0.append(contentsOf: $1.all) }
       }
+    .asSingle()
     
-  }
-  
-}
-
-fileprivate struct LocationsResponse: Codable {
-  let groups: [GroupedLocations]
-}
-
-fileprivate struct GroupedLocations: Codable {
-  let group: String
-  let hashCode: Int
-  let stops:      [STKStopCoordinate]
-  let bikePods:   [TKBikePodLocation]
-  let carPods:    [TKCarPodLocation]
-  let carParks:   [TKCarParkLocation]
-  let carRentals: [TKCarRentalLocation]
-  
-  var all: [STKModeCoordinate] {
-    return stops    as [STKModeCoordinate]
-      + bikePods    as [STKModeCoordinate]
-      + carPods     as [STKModeCoordinate]
-      + carParks    as [STKModeCoordinate]
-      + carRentals  as [STKModeCoordinate]
   }
   
 }

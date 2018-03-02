@@ -37,9 +37,6 @@
 /* Type of vehicle : bicycle */
 "Bicycle" = "Bicicleta";
 
-/* Credit card CVC */
-"CVC" = "CVC";
-
 /* Cancel action */
 "Cancel" = "Cancelar";
 
@@ -51,9 +48,6 @@
 
 /* Type of vehicle : car */
 "Car" = "Automóvil";
-
-/* Credit card number */
-"Card No." = "Nro de Tarjeta";
 
 /* Instruction for changing password */
 "Change" = "Cambiar";
@@ -82,9 +76,6 @@
 /* Message that indicates the app is creating accounts for users */
 "Creating account" = "Creando cuenta";
 
-/* Section title for credit card payment */
-"Credit card" = "Tarjeta de crédito";
-
 /* Current city */
 "Current City" = "Ciudad actual";
 
@@ -106,8 +97,7 @@
 /* Drop new pin */
 "Drop new pin" = "Soltar Marcador";
 
-/* Email address where receipt is sent
-   Email used as Facebook username */
+/* For email address */
 "Email" = "Correo electrónico";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
@@ -116,17 +106,11 @@
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "Todos los días";
 
-/* Credit card expiry date */
-"Expiry Date" = "Fecha de caducidad";
-
 /* Reminder to leave preference */
 "For when to leave" = "Para el momento de salir";
 
 /* Free as in beer */
 "Free" = "Gratis";
-
-/* No comment provided by engineer. */
-"Full name" = "Nombre completo";
 
 /* No comment provided by engineer. */
 "Getting a lift" = "Conseguir un aventón";
@@ -149,8 +133,8 @@
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
 
-/* Used when user signs in using Facebook */
-"Linking Facebook" = "Enlace a Facebook";
+/* Title of button to perform some action at a later time */
+"Later" = "Later";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Cargando";
@@ -160,9 +144,6 @@
 
 /* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Servicios de localización son requeridos para esta funcionalidad. Por favor, vaya a Ajustes > Privacidad > Localización, asegúrese de que estén habilitados y autorize esta aplicación.";
-
-/* Indicating a payment is in progress */
-"Making payment" = "Realizando el pago";
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minutos antes del viaje";
@@ -176,15 +157,13 @@
 /* Title for view that shows the summary of a user's account information */
 "My account" = "Mi cuenta";
 
-/* Name to which receipt is sent
-   Name used in Facebook
-   Title for name of something (or someone) */
+/* Title for name of something (or someone) */
 "Name" = "Nombre";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Nunca";
 
-/* Title for sign in view when user does not have an account */
+/* Title of page to create new account */
 "New account" = "Nueva cuenta";
 
 /* Next action */
@@ -202,7 +181,7 @@
 /* Ok action */
 "OK" = "Aceptar";
 
-/* Button to open Settings app section for this app */
+/* Button that goes to the Setting's app */
 "Open Settings" = "Abrir opciones";
 
 /* Open in Safari action */
@@ -210,12 +189,6 @@
 
 /* No comment provided by engineer. */
 "Password" = "Contraseña";
-
-/* Indicating a payment is successful */
-"Payment successful" = "Pago exitoso";
-
-/* Section title for Paypal payment */
-"Paypal" = "Paypal";
 
 /* Please select a location prompt */
 "Please select a location" = "Por favor, seleccione una ubicación";
@@ -234,9 +207,6 @@
 
 /* Indicator for real-time information */
 "Real-time" = "Tiempo Real";
-
-/* Title for section that asks users where payment receipt should be sent */
-"Receipt" = "Recibo";
 
 /* Action title to add/remove reminder */
 "Reminder" = "Recordatorio";
@@ -277,16 +247,13 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'..." = "Buscando '%@'...";
 
-/* Button that goes to the Setting's app */
-"Settings" = "Configuraciones";
-
-/* No comment provided by engineer. */
+/* Title of page or button to sign in */
 "Sign in" = "Iniciar sesión";
 
 /* Instruction for signing out user account */
 "Sign out" = "Cerrar sesión";
 
-/* No comment provided by engineer. */
+/* Title of page or button to sign up */
 "Sign up" = "Únete";
 
 /* No comment provided by engineer. */
@@ -295,8 +262,7 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Iniciando sesión";
 
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
+/* Message that indicates the app is signing users out of their accounts */
 "Signing out" = "Cerrando sesión";
 
 /* Starting %date. (old key: DateFromFormat) */
@@ -370,9 +336,6 @@
 
 /* Email placeholder text */
 "example@example.com" = "ejemplo@ejemplo.com";
-
-/* Credit card expiry date placeholder, mm/yy */
-"mm/yy" = "mm/aa";
 
 /* Short indicator of start-time */
 "starts at %@" = "comienza a las %@";

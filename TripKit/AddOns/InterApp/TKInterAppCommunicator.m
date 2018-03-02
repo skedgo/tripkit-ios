@@ -49,17 +49,17 @@
     [self openSegmentInAppleMaps:segment currentLocationHandler:currentLocationHandler];
     
   } else {
-    SGActions *actions = [[SGActions alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Get directions", @"TripKit", [TKTripKit bundle], "Action button title for getting turn-by-turn directions")];
+    SGActions *actions = [[SGActions alloc] initWithTitle:Loc.GetDirections];
     
     __weak TKSegment *directionsSegment = segment;
-    [actions addAction:NSLocalizedStringFromTableInBundle(@"Apple Maps", @"TripKit", [TKTripKit bundle], @"apple maps directions action")
+    [actions addAction:Loc.AppleMaps
                handler:
      ^{
        [TKInterAppCommunicator openSegmentInAppleMaps:directionsSegment currentLocationHandler:currentLocationHandler];
      }];
     
     if (hasGoogleMaps) {
-      [actions addAction:NSLocalizedStringFromTableInBundle(@"Google Maps", @"TripKit", [TKTripKit bundle], @"google maps directions action")
+      [actions addAction:Loc.GoogleMaps
                  handler:
        ^{
          [TKInterAppCommunicator openSegmentInGoogleMapsApp:directionsSegment currentLocationHandler:currentLocationHandler];
@@ -240,44 +240,39 @@
 + (NSString *)titleForExternalAction:(NSString *)action
 {
   if ([action isEqualToString:@"gocatch"]) {
-    return NSLocalizedStringFromTableInBundle(@"goCatch a Taxi", @"TripKit", [TKTripKit bundle], @"goCatch action");
+    return Loc.GoCatchAction;
     
   } else if ([action isEqualToString:@"uber"]) {
-    return NSLocalizedStringFromTableInBundle(@"Book with Uber", @"TripKit", [TKTripKit bundle], nil);
+    return [Loc BookWithService:@"Uber"];
     
   } else if ([action isEqualToString:@"ingogo"]) {
-    return [self deviceHasIngogo]
-    ? NSLocalizedStringFromTableInBundle(@"ingogo a Taxi", @"TripKit", [TKTripKit bundle], nil)
-    : NSLocalizedStringFromTableInBundle(@"Get ingogo", @"TripKit", [TKTripKit bundle], nil);
+    return [self deviceHasIngogo] ? Loc.IngogoAction : [Loc GetAppNamed:@"ingogo"];
     
   } else if ([action hasPrefix:@"lyft"]) { // also lyft_line, etc.
-    return [self deviceHasLyft]
-    ? NSLocalizedStringFromTableInBundle(@"Open Lyft", @"TripKit", [TKTripKit bundle], nil)
-    : NSLocalizedStringFromTableInBundle(@"Get Lyft", @"TripKit", [TKTripKit bundle], nil);
+    return [self deviceHasLyft] ? [Loc OpenAppNamed:@"Lyft"] : [Loc GetAppNamed:@"Lyft"];
     
   } else if ([action isEqualToString:@"ola"]) {
     return [self deviceHasOla]
-    ? NSLocalizedStringFromTableInBundle(@"Open Ola", @"TripKit", [TKTripKit bundle], nil)
-    : NSLocalizedStringFromTableInBundle(@"Get Ola", @"TripKit", [TKTripKit bundle], nil);
+    ? [Loc OpenAppNamed:@"Ola"] : [Loc GetAppNamed:@"Ola"];
 
   } else if ([action isEqualToString:@"flitways"]) {
-    return NSLocalizedStringFromTableInBundle(@"Book with FlitWays", @"TripKit", [TKTripKit bundle], nil);
-    
+    return [Loc BookWithService:@"FlitWays"];
+
   } else if ([action hasPrefix:@"tel:"] && [self canCall]) {
     NSRange nameRange = [action rangeOfString:@"name="];
     if (nameRange.location != NSNotFound) {
       NSString *name = [action substringFromIndex:nameRange.location + nameRange.length];
       name = [name stringByRemovingPercentEncoding];
-      return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Call %@", @"TripKit", [TKTripKit bundle], "Action title for calling provider of name. (old key: CallTaxiFormat)"), name];
+      return [Loc CallService:name];
     } else {
-      return NSLocalizedStringFromTableInBundle(@"Call", @"TripKit", [TKTripKit bundle], nil);
+      return Loc.Call;
     }
     
   } else if ([action hasPrefix:@"sms:"] && [self canSendSMS]) {
-    return NSLocalizedStringFromTableInBundle(@"Send SMS", @"TripKit", [TKTripKit bundle], @"Send SMS action");
+    return Loc.SendSMS;
     
   } else if ([action hasPrefix:@"http:"] || [action hasPrefix:@"https:"]) {
-    return NSLocalizedStringFromTableInBundle(@"Show website", @"TripKit", [TKTripKit bundle], @"Show website action");
+    return Loc.ShowWebsite;
     
   } else {
     return nil;

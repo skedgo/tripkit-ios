@@ -123,6 +123,7 @@ extension API {
     public let source: API.DataAttribution?
   }
 
+  
   public struct LocationInfo : Codable {
     public struct Details: Codable {
       public let w3w: String?
@@ -143,11 +144,28 @@ extension API {
         ?? false
     }
   }
+  
+  
+  public struct LocationsResponse: Codable {
+    public let groups: [Group]
+    
+    public struct Group: Codable {
+      public let key: String
+      public let hashCode: Int
+      public let stops: [STKStopCoordinate]?
+      public let bikePods: [TKBikePodLocation]?
+      public let carPods: [TKCarPodLocation]?
+      public let carParks: [TKCarParkLocation]?
+      public let carRentals: [TKCarRentalLocation]?
+      
+      public var all: [STKModeCoordinate] {
+        return (stops ?? [])    as [STKModeCoordinate]
+          + (bikePods ?? [])    as [STKModeCoordinate]
+          + (carPods ?? [])     as [STKModeCoordinate]
+          + (carParks ?? [])    as [STKModeCoordinate]
+          + (carRentals ?? [])  as [STKModeCoordinate]
+      }
+        
+    }
+  }
 }
-
-
-
-
-
-
-

@@ -8,6 +8,8 @@
 
 #import "SGKCrossPlatform.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 FOUNDATION_EXPORT NSString *const SVKTransportModeIdentifierFlight;
 FOUNDATION_EXPORT NSString *const SVKTransportModeIdentifierRegularPublicTransport;
 FOUNDATION_EXPORT NSString *const SVKTransportModeIdentifierSchoolBuses;
@@ -52,6 +54,12 @@ FOUNDATION_EXPORT NSString *const SVKTransportModeIdentifierWheelchair;
 + (NSSet<NSSet<NSString *> *> *)groupedModeIdentifiers:(NSArray<NSString *> *)modeIdentifiers
                                     includeGroupForAll:(BOOL)addAllGroup;
 
+/**
+ @return The generic mode identifier part, e.g., `pt_pub` for `pt_pub_bus`,
+    which can be used as routing input
+ */
++ (NSString *)genericModeIdentifierForModeIdentifier:(NSString *)modeIdentifier;
+
 + (BOOL)modeIdentifierIsPublicTransport:(NSString *)modeIdentifier;
 + (BOOL)modeIdentifierIsWalking:(NSString *)modeIdentifier;
 + (BOOL)modeIdentifierIsWheelchair:(NSString *)modeIdentifier;
@@ -64,3 +72,5 @@ FOUNDATION_EXPORT NSString *const SVKTransportModeIdentifierWheelchair;
 + (BOOL)modeIdentifierIsExpensive:(NSString *)modeIdentifier;
 
 @end
+
+NS_ASSUME_NONNULL_END

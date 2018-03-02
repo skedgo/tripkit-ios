@@ -12,33 +12,7 @@
 
 #import "SVKServerKit.h"
 
-@interface AMKUser ()
-
-@property (nonatomic, strong) AKFbkProfile *facebookProfile;
-
-@end
-
 @implementation AMKUser
-
-#pragma mark - Custom accessors
-
-- (AKFbkProfile *)facebookProfile
-{
-  if (_facebookProfile != nil) {
-    return _facebookProfile;
-  }
-  
-  ACAccount *account = self.facebookAccount;
-  if (! account && self.dataSource != nil) {
-    account = [self.dataSource userRequestsFacebookAccount:self];
-  }
-  
-  if (account) {
-    _facebookProfile = [[AKFbkProfile alloc] initWithAccount:account];
-  }
-  
-  return _facebookProfile;
-}
 
 #pragma mark - Public methods
 
@@ -126,16 +100,6 @@
   return amkEmails;
 }
 
-- (BOOL)hasLinkedTwitter
-{
-  return [[[NSUserDefaults sharedDefaults] objectForKey:kAMKTwtLinkedUserDefaultsKey] boolValue];
-}
-
-- (BOOL)hasLinkedFacebook
-{
-  return [[[NSUserDefaults sharedDefaults] objectForKey:kAMKFbkLinkedUserDefaultsKey] boolValue];
-}
-
 - (NSDictionary*)userAsDictionary{
   return @{@"givenName"     : self.firstName,
            @"surname"    : self.lastName,
@@ -149,33 +113,14 @@
   [self setEmails:nil];
   [self setToken:nil];
   [self setName:nil];
-  [self unlinkSocialAccounts:YES];
-}
-
-- (void)unlinkFacebook:(BOOL)unlink
-{
-  self.facebookAccount = nil;
-  self.facebookProfile = nil;
-  [[NSUserDefaults sharedDefaults] setObject:@(! unlink) forKey:kAMKFbkLinkedUserDefaultsKey];
-}
-
-- (void)unlinkTwitter:(BOOL)unlink
-{
-  [[NSUserDefaults sharedDefaults] setObject:@(! unlink) forKey:kAMKTwtLinkedUserDefaultsKey];
-}
-
-- (void)unlinkSocialAccounts:(BOOL)unlink
-{
-  [self unlinkFacebook:unlink];
-  [self unlinkTwitter:unlink];
 }
 
 #pragma mark - Overrides
 
 - (NSString *)description
 {
-  NSString *format = @"\n\tFirst: %@\n\tLast: %@\n\tName: %@\n\tToken: %@\n\tEmails: %@\n\tFacebook: %@\n\tTwitter: %@\n\tAppData: %@";
-  return [NSString stringWithFormat:format, self.firstName, self.lastName, self.name, self.token, self.emails, @([self hasLinkedFacebook]), @([self hasLinkedTwitter]),self.appData];
+  NSString *format = @"\n\tFirst: %@\n\tLast: %@\n\tName: %@\n\tToken: %@\n\tEmails: %@\n\tAppData: %@";
+  return [NSString stringWithFormat:format, self.firstName, self.lastName, self.name, self.token, self.emails, self.appData];
 }
 
 #pragma mark - Custom accessors

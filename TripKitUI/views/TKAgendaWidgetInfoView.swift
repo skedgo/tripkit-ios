@@ -36,7 +36,7 @@ public class TKAgendaWidgetInfoView: UIView {
   public func configureForNoUpcomingTrip() {
     imageView.image = UIImage(named: "icon-agenda", in: bundle(), compatibleWith: nil)
     titleLabel.text = Loc.NoPlannedTrips
-    subtitleLabel.text = NSLocalizedString("Plan a trip and it will show up here.", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
+    subtitleLabel.text = Loc.PlanATripAndItllShowUpHere
   }
   
   public func configure(for error: NSError) {
@@ -45,8 +45,8 @@ public class TKAgendaWidgetInfoView: UIView {
   }
   
   public func configureForLoading() {
-    titleLabel.text = NSLocalizedString("Loading...", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title to show while loading/waiting for results")
-    subtitleLabel.text = NSLocalizedString("We are busy getting your upcoming trip. Please wait...", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
+    titleLabel.text = Loc.LoadingDotDotDot
+    subtitleLabel.text = Loc.BusyGettingYourTrip
   }
   
   // MARK: - Utilities

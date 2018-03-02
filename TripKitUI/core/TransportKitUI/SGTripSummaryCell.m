@@ -180,7 +180,7 @@
 - (NSString *)accessibilityLabel
 {
   if (self.showAlertIcon) {
-    return [NSString stringWithFormat:@"%@ - %@", self._tripAccessibilityLabel, NSLocalizedStringFromTableInBundle(@"Has reminder", @"Shared", [SGStyleManager bundle], @"Accessibility annotation for trips which have a reminder set.")];
+    return [NSString stringWithFormat:@"%@ - %@", self._tripAccessibilityLabel, Loc.HasReminder];
   } else {
     return self._tripAccessibilityLabel;
   }
@@ -242,7 +242,7 @@
     
     NSMutableString *title = [NSMutableString stringWithString:departureString];
     [title appendString:@"\n"];
-    [title appendFormat:NSLocalizedStringFromTableInBundle(@"to %@", @"Shared", [SGStyleManager bundle], @"to %date. (old key: DateToFormat)"), arrivalString];
+    [title appendString:[Loc ToArrival:arrivalString]];
     NSString *nonBreaking = [title stringByReplacingOccurrencesOfString:@" " withString:@"\u00a0"];
     self.mainLabel.text = nonBreaking;
     return;
@@ -267,13 +267,13 @@
       NSString *timeText = [SGStyleManager timeString:departure
                                           forTimeZone:self.departureTimeZone
                                    relativeToTimeZone:self.arrivalTimeZone];
-      NSString *bracketed = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"departs %@", @"Shared", [SGStyleManager bundle], "Estimated time of departure; parameter is time, e.g., 'departs 15:30'"), timeText];
+      NSString *bracketed = [Loc DepartsAtTime: timeText];
       secondaryText = [NSString stringWithFormat:@" (%@)", bracketed];
     } else {
       NSString *timeText = [SGStyleManager timeString:arrival
                                           forTimeZone:self.arrivalTimeZone
                                    relativeToTimeZone:self.departureTimeZone];
-      NSString *bracketed = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"arrives %@", @"Shared", [SGStyleManager bundle], "Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'"), timeText];
+      NSString *bracketed = [Loc ArrivesAtTime: timeText];
       secondaryText = [NSString stringWithFormat:@" (%@)", bracketed];
     }
     

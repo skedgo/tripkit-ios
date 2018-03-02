@@ -10,8 +10,11 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ te laat (%2$@ dienst)";
 
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ ago";
+
 /* Number of alerts, in this case, there are multiple (plural */
-"%@ alerts" = "%@ alerts";
+"%@ alerts" = "%@ meldingen";
 
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ fiets vriendelijk";
@@ -57,23 +60,14 @@
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "Op %@";
 
-/* No comment provided by engineer. */
-"Book with FlitWays" = "Boek met FlitWays";
-
-/* No comment provided by engineer. */
-"Book with Uber" = "Boek met Uber";
-
-/* Placeholder title while calculating trips */
-"Calculating trips..." = "Trips berekenen...";
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "Book with %@";
 
 /* No comment provided by engineer. */
 "Call" = "Bel";
 
-/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+/* Action title to make a call to service/company named '@%' */
 "Call %@" = "Bel %@";
-
-/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
-"Connect to Internet to get trips" = "Maak verbinding met het internet om trips te bekijken";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Overstap station kon niet gevonden worden.";
@@ -94,7 +88,7 @@
 "Few seats available" = "Beperkte zitplaatsen beschikbaar";
 
 /* Indicating a path is wheelchair/cycyling friendly */
-"Friendly" = "Friendly";
+"Friendly" = "Vriendelijk";
 
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Van %@";
@@ -102,17 +96,11 @@
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Vol";
 
-/* No comment provided by engineer. */
-"Get Lyft" = "Lyft aanvragen";
-
-/* No comment provided by engineer. */
-"Get Ola" = "Ola krijgen";
+/* Action title get/download app of name '@%' */
+"Get %@" = "Get %@";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Routebeschrijving";
-
-/* No comment provided by engineer. */
-"Get ingogo" = "Ingogo aanvragen";
 
 /* google maps directions action */
 "Google Maps" = "Google Maps";
@@ -123,11 +111,11 @@
 /* Indication of an activity. (old key: ActivityIndication) */
 "I'll take a %@ at %@ from %@." = "Ik neem de %@ om %@ vanuit %@.";
 
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "In %@";
+
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Ondertussen, laten we %@ blijven verkennen en geniet van uw reizen";
-
-/* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "Ondertussen, laten we blijven verkennen en geniet van uw reizen";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -154,7 +142,7 @@
 /* No comment provided by engineer. */
 "Live traffic" = "Live verkeer";
 
-/* Title to show while loading/waiting for results */
+/* Indicating when something is loading */
 "Loading..." = "Laden...";
 
 /* As in 'this bus/train has many seats available' */
@@ -172,11 +160,8 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Op tijd";
 
-/* No comment provided by engineer. */
-"Open Lyft" = "Lyft openen";
-
-/* No comment provided by engineer. */
-"Open Ola" = "Open Ola";
+/* Action title open app of name '@%' */
+"Open %@" = "Open %@";
 
 /* Title for opening hours */
 "Opening Hours" = "Openingstijden";
@@ -193,16 +178,16 @@
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Search for this stop again or try again later.";
 
-/* Send SMS action */
+/* Send SMS action button */
 "Send SMS" = "SMS versturen";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Setup";
 
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
-"Show" = "Show";
+"Show" = "Meer";
 
-/* Show website action */
+/* Show website action button */
 "Show website" = "Open Website";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
@@ -215,10 +200,10 @@
 "Trip" = "Reis";
 
 /* Indicating a path is wheelchair/cycyling unfriendly */
-"Unfriendly" = "Unfriendly";
+"Unfriendly" = "Onvriendelijk";
 
 /* Indicating the wheelchair/cycling friendliness of a path is unknown */
-"Unknown" = "Unknown";
+"Unknown" = "Onbekend";
 
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Bijgewerkt %@ geleden";
@@ -241,6 +226,6 @@
 /* goCatch action */
 "goCatch a Taxi" = "goCatch een Taxi";
 
-/* No comment provided by engineer. */
+/* inGogo taxi booking action */
 "ingogo a Taxi" = "ingogo een Taxi";
 

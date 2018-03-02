@@ -8,6 +8,13 @@
 
 #import "SGWebViewController.h"
 
+#ifdef TK_NO_MODULE
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#else
+@import TripKit;
+#endif
+
 #import <SafariServices/SafariServices.h>
 
 #import "SGActions.h"
@@ -69,7 +76,7 @@
 	}
   
   if (self.navigationController.childViewControllers.firstObject == self) {
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Close", @"Shared", [SGStyleManager bundle], @"Close action") style:UIBarButtonItemStyleDone target:self action:@selector(closeButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Loc.Close style:UIBarButtonItemStyleDone target:self action:@selector(closeButtonPressed:)];
   }
   
   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
@@ -98,7 +105,7 @@
     URL = self.startURL;
   }
   
-  [actions addAction:NSLocalizedStringFromTableInBundle(@"Open in Safari", @"Shared", [SGStyleManager bundle], @"Open in Safari action")
+  [actions addAction:Loc.OpenInSafari
              handler:
    ^{
      [[UIApplication sharedApplication] openURL:URL];
