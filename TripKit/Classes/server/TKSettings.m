@@ -58,7 +58,10 @@
   [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportWalkMaxDuration] forKey:@"wm"];
   [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportTransferTime] forKey:@"tt"];
   [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportEmissions] forKey:@"co2"];
-  
+  if (TKSettings.ignoreCostToReturnCarHireVehicle) {
+    [paras setValue:@(NO) forKey:@"2wirc"];
+  }
+
   // beta features
   if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableFlights]) {
     [paras setValue:@(YES) forKey:@"ef"];
