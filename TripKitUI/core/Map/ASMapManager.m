@@ -293,7 +293,7 @@
 + (MKMapRect)mapRectForUserDefaultsKey:(nullable NSString *)mapKey
                                dateKey:(nullable NSString *)dateKey
 {
-  if (mapKey == nil || true) {
+  if (mapKey == nil) {
     return MKMapRectNull;
   }
   
