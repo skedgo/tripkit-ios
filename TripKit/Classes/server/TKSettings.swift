@@ -30,6 +30,8 @@ extension TKSettings {
     public let emissions: [String: Float]
     public let bookingSandbox: Bool
     public let enableFlights: Bool
+    public let twoWayHireCostIncludesReturn: Bool
+
     
     public enum Weight: String, Codable {
       case money
@@ -61,6 +63,7 @@ extension TKSettings {
       case emissions = "co2"
       case bookingSandbox = "bsb"
       case enableFlights = "ef"
+      case twoWayHireCostIncludesReturn = "2wirc"
     }
     
     public init() {
@@ -76,6 +79,7 @@ extension TKSettings {
       avoidModes = TKUserProfileHelper.dislikedTransitModes
       concession = shared.bool(forKey: TKDefaultsKeyProfileTransportConcessionPricing)
       wheelchair = TKUserProfileHelper.showWheelchairInformation
+      twoWayHireCostIncludesReturn = TKSettings.ignoreCostToReturnCarHireVehicle
       
       cyclingSpeed = Speed(apiValue: shared.object(forKey: TKDefaultsKeyProfileTransportCyclingSpeed)) ?? .medium
       walkingSpeed = Speed(apiValue: shared.object(forKey: TKDefaultsKeyProfileTransportWalkSpeed)) ?? .medium
@@ -105,6 +109,7 @@ extension TKSettings {
       if let tt = minimumTransferTime { paras["tt"] = tt/60 }
       if enableFlights { paras["ef"] = true}
       if bookingSandbox { paras["bsb"] = true }
+      if !twoWayHireCostIncludesReturn { paras["2wirc"] = false }
       paras["co2"] = emissions
       return paras
     }
@@ -134,7 +139,7 @@ extension TKSettings {
   }
   
   /// Determine whether two-way-hire vehicles, such as pod-based car-share, should ignore the cost of returning the car-hire vehicle to its pick-up location. By default this is set to `false` and the cost of returning the vehicle to its pick-up location will be added to all one-way trips. Set this to `true` if the cost of the trip should only include the cost that's attributed to this trip and ignore the unavoidable additional cost for returning the vehicle to its pick-up location.
-  @objc public static var ignoreCostToReturnCarHireVehicle: Bool {
+  public static var ignoreCostToReturnCarHireVehicle: Bool {
     get {
       return UserDefaults.shared.bool(forKey: DefaultsKey.ignoreCostToReturnCarHireVehicle.rawValue)
     }
