@@ -40,6 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL willHotSwap;
 
 /**
+ * Boolean if the last viewed map rect should be restored when the map manager
+ * is taking charge of the map - if `lastMapRectUserDefaultsKey` is set.
+ *
+ * @default true
+ */
+@property (nonatomic, assign) BOOL allowRestoringLastMapRect;
+
+/**
  * The key path to where the last visible map rect is stored in the user
  * defaults.
  *

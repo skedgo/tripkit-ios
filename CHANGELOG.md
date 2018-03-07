@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added Kingfisher convenience methods for setting `UIButton` images which sets the scale according to the file name
 - Added more convenience methods to `SGLocationManager+Rx` and added some documentation
 - Added `TKBuzzInfoProvider.fetchWheelchairSupportInformation` convenience method
+- Added method to opt-out of restoring the last viewed map rect in `ASMapManager`
 
 ### Changed
 

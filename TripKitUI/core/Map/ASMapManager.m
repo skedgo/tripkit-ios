@@ -36,6 +36,15 @@
 
 @implementation ASMapManager
 
+- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    self.allowRestoringLastMapRect = YES;
+  }
+  return self;
+}
+
 - (void)setMapButtonView:(TKMapButtonView *)mapButtonView
 {
   _mapButtonView = mapButtonView;
@@ -81,7 +90,7 @@
   [self addOverlay];
   
   // restore last used map location
-  if (! self.willHotSwap && self.lastMapRectUserDefaultsKey) {
+  if (self.allowRestoringLastMapRect && ! self.willHotSwap && self.lastMapRectUserDefaultsKey) {
     [self showLastUsedMapRect:NO];
   }
 	
@@ -284,7 +293,7 @@
 + (MKMapRect)mapRectForUserDefaultsKey:(nullable NSString *)mapKey
                                dateKey:(nullable NSString *)dateKey
 {
-  if (mapKey == nil) {
+  if (mapKey == nil || true) {
     return MKMapRectNull;
   }
   
