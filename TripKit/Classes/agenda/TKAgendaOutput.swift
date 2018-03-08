@@ -77,6 +77,12 @@ public struct TKAgendaOutput: Decodable {
   /// Map of a trip's ID to the trip
   public var trips: [String: Trip] = [:]
   
+  public init(inputs: [String: TKAgendaInput.Item], track: [TrackItem], hashCode: Int) {
+    self.hashCode = hashCode
+    self.inputs = inputs
+    self.track = track
+  }
+  
   
   // MARK: Decodable
   

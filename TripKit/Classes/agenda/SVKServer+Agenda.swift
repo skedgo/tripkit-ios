@@ -92,7 +92,7 @@ extension Reactive where Base: SVKServer {
   
   /// `GET`-ing the agenda input for a day
   ///
-  /// Resulting observables fires `success` with the input, if it could
+  /// Resulting observables fires on success with the input, if it could
   /// get fetched. Can fail with error.
   ///
   /// Errors caller should handle:
@@ -103,7 +103,7 @@ extension Reactive where Base: SVKServer {
   ///
   /// - Parameter components: Day for which to fetch input
   /// - Returns: Observable as described in notes
-  public func fetchAgendaInput(for components: DateComponents) -> Observable<TKAgendaFetchResult<TKAgendaInput>> {
+  public func fetchAgendaInput(for components: DateComponents) -> Observable<TKAgendaInput> {
     
     guard let dateString = components.dateString else {
       preconditionFailure("Bad components!")
@@ -123,10 +123,8 @@ extension Reactive where Base: SVKServer {
         switch status {
         case 200:
           guard let data = data else { throw TKAgendaError.unexpectedResponse(status, body) }
-          let input = try decoder.decode(TKAgendaInput.self, from: data)
-          return .success(input)
+          return try decoder.decode(TKAgendaInput.self, from: data)
           
-        case 304: return .noChange
         case 401: throw TKAgendaError.userTokenIsInvalid
         case 404: throw TKAgendaError.agendaInputNotAvailable(components)
         default:  throw TKAgendaError.unexpectedResponse(status, body)

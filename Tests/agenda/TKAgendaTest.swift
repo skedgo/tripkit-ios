@@ -92,7 +92,7 @@ class TKAgendaTest: XCTestCase {
     let download = SVKServer.shared.rx.fetchAgendaInput(for: components)
     let result2 = try download.toBlocking().toArray()
     guard let last = result2.last else { XCTFail("Failed to download input"); return }
-    XCTAssert(last == TKAgendaFetchResult.success(input!))
+    XCTAssert(last == input)
 
     let delete = SVKServer.shared.rx.deleteAgenda(for: components)
     let result3 = try delete.toBlocking().toArray()
