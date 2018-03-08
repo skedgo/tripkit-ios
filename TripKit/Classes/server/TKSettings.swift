@@ -79,7 +79,7 @@ extension TKSettings {
       avoidModes = TKUserProfileHelper.dislikedTransitModes
       concession = shared.bool(forKey: TKDefaultsKeyProfileTransportConcessionPricing)
       wheelchair = TKUserProfileHelper.showWheelchairInformation
-      twoWayHireCostIncludesReturn = TKSettings.ignoreCostToReturnCarHireVehicle
+      twoWayHireCostIncludesReturn = !TKSettings.ignoreCostToReturnCarHireVehicle
       
       cyclingSpeed = Speed(apiValue: shared.object(forKey: TKDefaultsKeyProfileTransportCyclingSpeed)) ?? .medium
       walkingSpeed = Speed(apiValue: shared.object(forKey: TKDefaultsKeyProfileTransportWalkSpeed)) ?? .medium
