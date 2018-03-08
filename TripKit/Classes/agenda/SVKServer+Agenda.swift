@@ -90,6 +90,49 @@ extension Reactive where Base: SVKServer {
       }
   }
   
+  /// `GET`-ing the agenda input for a day
+  ///
+  /// Resulting observables fires `success` with the input, if it could
+  /// get fetched. Can fail with error.
+  ///
+  /// Errors caller should handle:
+  /// - `TKAgendaError.userTokenIsInvalid`: Refer to
+  ///     `SVKServer.shared.rx.signIn`
+  /// - `TKAgendaError.agendaInputNotAvailable(DateComponents)`: Call
+  ///     `uploadAgenda` first
+  ///
+  /// - Parameter components: Day for which to fetch input
+  /// - Returns: Observable as described in notes
+  public func fetchAgendaInput(for components: DateComponents) -> Observable<TKAgendaFetchResult<TKAgendaInput>> {
+    
+    guard let dateString = components.dateString else {
+      preconditionFailure("Bad components!")
+    }
+
+    guard let _ = SVKServer.userToken() else {
+      return Observable.error(TKAgendaError.userIsNotLoggedIn)
+    }
+    
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    
+    // This would be a good place to see if we have this cached...
+    
+    return hit(.GET, path: "agenda/\(dateString)/input")
+      .map { status, body, data in
+        switch status {
+        case 200:
+          guard let data = data else { throw TKAgendaError.unexpectedResponse(status, body) }
+          let input = try decoder.decode(TKAgendaInput.self, from: data)
+          return .success(input)
+          
+        case 304: return .noChange
+        case 401: throw TKAgendaError.userTokenIsInvalid
+        case 404: throw TKAgendaError.agendaInputNotAvailable(components)
+        default:  throw TKAgendaError.unexpectedResponse(status, body)
+      }
+    }
+  }
   
   /// `DELETE`-ing agenda input for a day
   ///
@@ -237,7 +280,7 @@ extension Reactive where Base: SVKServer {
   ///       another device, it can be switched to this device by providing
   ///       the owners device ID as a confirmation.
   /// - Returns: Observable as describes in notes.
-  public func updateAgenda(_ input: TKAgendaInput, for components: DateComponents, overwritingDeviceId: String? = nil) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
+  public func updateAgenda(_ input: TKAgendaInput, for components: DateComponents, allowCache: Bool = true, overwritingDeviceId: String? = nil) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
     
     guard let dateString = components.dateString else {
       preconditionFailure("Bad components!")
@@ -263,7 +306,7 @@ extension Reactive where Base: SVKServer {
           }.map { fetched -> TKAgendaFetchResult<TKAgendaOutput> in
             // ... ignoring anything where the result stayed the same
             // as what we had cached even though we uploaded again.
-            if case .success(let new) = fetched, new.hashCode == cached?.hashCode {
+            if allowCache, case .success(let new) = fetched, new.hashCode == cached?.hashCode {
               return .noChange
             } else {
               return fetched

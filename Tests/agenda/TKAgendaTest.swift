@@ -84,14 +84,19 @@ class TKAgendaTest: XCTestCase {
     
   }
   
-  func testUploadingInput() throws {
+  func testUploadingFetchingAndDeletingInput() throws {
     let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
     let result1 = try upload.toBlocking().toArray()
     XCTAssertEqual(result1, [TKAgendaUploadResult.success])
     
+    let download = SVKServer.shared.rx.fetchAgendaInput(for: components)
+    let result2 = try download.toBlocking().toArray()
+    guard let last = result2.last else { XCTFail("Failed to download input"); return }
+    XCTAssert(last == TKAgendaFetchResult.success(input!))
+
     let delete = SVKServer.shared.rx.deleteAgenda(for: components)
-    let result2 = try delete.toBlocking().toArray()
-    XCTAssertEqual(result2, [true])
+    let result3 = try delete.toBlocking().toArray()
+    XCTAssertEqual(result3, [true])
   }
   
   /// Similar to Juptyer notebook Flow 1
@@ -223,3 +228,23 @@ fileprivate extension TKAgendaInput {
   }
   
 }
+
+public func == (lhs: TKAgendaInput, rhs: TKAgendaInput) -> Bool {
+  // Very simplified, but good enough for our purposes here
+  return lhs.items.count == rhs.items.count
+    && lhs.modes.count == rhs.modes.count
+    && lhs.patterns.count == rhs.patterns.count
+    && lhs.vehicles.count == rhs.vehicles.count
+}
+extension TKAgendaInput: Equatable { }
+
+public func ==<T: Equatable> (lhs: TKAgendaFetchResult<T>, rhs: TKAgendaFetchResult<T>) -> Bool {
+  switch (lhs, rhs) {
+  case (.cached(let left), .cached(let right)): return left == right
+  case (.success(let left), .success(let right)): return left == right
+  case (.noChange, .noChange): return true
+  case (.calculating, .calculating): return true
+  default: return false
+  }
+}
+
