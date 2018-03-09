@@ -86,6 +86,11 @@ class TKAgendaTest: XCTestCase {
   
   /// Similar to Juptyer notebook Flow 5
   func testUploadingFetchingAndDeletingInput() throws {
+    // Start clean
+    let delete0 = SVKServer.shared.rx.deleteAgenda(for: components)
+    let result0 = try delete0.toBlocking().toArray()
+    XCTAssert(!result0.isEmpty)
+    
     let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
     let result1 = try upload.toBlocking().toArray()
     XCTAssertEqual(result1, [TKAgendaUploadResult.success])
