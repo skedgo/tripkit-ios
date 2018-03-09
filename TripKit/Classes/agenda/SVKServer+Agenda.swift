@@ -29,7 +29,7 @@ public enum TKAgendaError: Error {
   case userTokenIsInvalid
   case invalidDateComponents(DateComponents)
   case agendaInputNotAvailable(DateComponents)
-  case agendaLockedByOtherDevice(owningDeviceId: String)
+  case agendaLockedByOtherDevice(owningDeviceId: String?)
   case unexpectedResponse(StatusCode, Data?)
 }
 
@@ -85,7 +85,7 @@ extension Reactive where Base: SVKServer {
         case 401: throw TKAgendaError.userTokenIsInvalid
           
         case 403:
-          throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: (responseHeaders["owningdeviceid"] as? String) ?? "")
+          throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: responseHeaders["owningdeviceid"] as? String)
         
         default:
           throw TKAgendaError.unexpectedResponse(status, data)
@@ -149,7 +149,7 @@ extension Reactive where Base: SVKServer {
   ///       another device, it can be deleted anyway by providing the
   ///       owners device ID as a confirmation.
   /// - Returns: Observable as described in notes.
-  public func deleteAgenda(for components: DateComponents, overwritingDeviceId: String? = nil) -> Observable<Bool> {
+  public func deleteAgenda(for components: DateComponents, deviceId: String? = nil, overwritingDeviceId: String? = nil) -> Observable<Bool> {
     
     guard let dateString = components.dateString else {
       preconditionFailure("Bad components!")
@@ -160,16 +160,20 @@ extension Reactive where Base: SVKServer {
     }
     
     TKFileCache.clearAgenda(forDateString: dateString)
+    
+    var headers = [String: String]()
+    headers["deviceId"] = deviceId
+    headers["overwritingDeviceId"] = overwritingDeviceId
 
-    return hit(.DELETE, path: "agenda/\(dateString)/input")
+    return hit(.DELETE, path: "agenda/\(dateString)/input", headers: headers)
       .map { status, _, data -> Bool in
         switch status {
         case 200: return true
         case 404: return false
 
         case 403:
-          // TODO: Fix owningDeviceId
-          throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: "header.owningDeviceId")
+          // We can add the owning device ID here, when the server reports it
+          throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: nil)
           
         default: throw TKAgendaError.unexpectedResponse(status, data)
         }
@@ -281,7 +285,7 @@ extension Reactive where Base: SVKServer {
   ///       another device, it can be switched to this device by providing
   ///       the owners device ID as a confirmation.
   /// - Returns: Observable as describes in notes.
-  public func updateAgenda(_ input: TKAgendaInput, for components: DateComponents, allowCache: Bool = true, overwritingDeviceId: String? = nil) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
+  public func updateAgenda(_ input: TKAgendaInput, for components: DateComponents, allowCache: Bool = true, deviceId: String? = nil, overwritingDeviceId: String? = nil) -> Observable<TKAgendaFetchResult<TKAgendaOutput>> {
     
     guard let dateString = components.dateString else {
       preconditionFailure("Bad components!")
@@ -294,7 +298,7 @@ extension Reactive where Base: SVKServer {
 
         // Then we do the (2) upload...
         let uploadThenFetch = base.rx
-          .uploadAgenda(input, for: components, overwritingDeviceId: overwritingDeviceId)
+          .uploadAgenda(input, for: components, deviceId: deviceId, overwritingDeviceId: overwritingDeviceId)
           .flatMapLatest { [weak base] result -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
             guard let base = base else { return Observable.never() }
             
