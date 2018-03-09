@@ -105,7 +105,7 @@ extension TKBuzzInfoProvider {
     
     return SVKServer.shared.rx
       .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
-      .map { (_, data) -> [API.Alert] in
+      .map { (_, _, data) -> [API.Alert] in
         let decoder = JSONDecoder()
         guard let data = data, let response = try? decoder.decode(AlertsTransitResponse.self, from: data) else { return [] }
         return response.alerts.map { $0.alert }

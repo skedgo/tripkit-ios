@@ -30,7 +30,7 @@ extension Reactive where Base == SVKServer {
     
     let urlFriendly = cloudKitID.replacingOccurrences(of: "_", with: "")
     return hit(.POST, path: "account/apple/\(urlFriendly)")
-      .map { _, data in
+      .map { _, _, data in
         guard let data = data, let response = try? JSONDecoder().decode(SignInResponse.self, from: data) else {
           throw SVKError.error(withCode: 1301, userInfo: [ NSLocalizedDescriptionKey: "Cannot find a valid token" ])
         }

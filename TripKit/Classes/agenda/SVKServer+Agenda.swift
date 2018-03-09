@@ -79,14 +79,13 @@ extension Reactive where Base: SVKServer {
     headers["overwritingDeviceId"] = overwritingDeviceId
     
     return hit(.POST, path: "agenda/\(dateString)/input", parameters: paras ?? [:], headers: headers)
-      .map { status, data -> TKAgendaUploadResult in
+      .map { status, responseHeaders, data -> TKAgendaUploadResult in
         switch status {
         case 200: return .success
         case 401: throw TKAgendaError.userTokenIsInvalid
           
         case 403:
-          // TODO: Fix owningDeviceId
-          throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: "header.owningDeviceId")
+          throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: (responseHeaders["owningdeviceid"] as? String) ?? "")
         
         default:
           throw TKAgendaError.unexpectedResponse(status, data)
@@ -123,7 +122,7 @@ extension Reactive where Base: SVKServer {
     // This would be a good place to see if we have this cached...
     
     return hit(.GET, path: "agenda/\(dateString)/input")
-      .map { status, dataMaybe in
+      .map { status, _, dataMaybe in
         switch status {
         case 200:
           guard let data = dataMaybe else { throw TKAgendaError.unexpectedResponse(status, dataMaybe) }
@@ -163,7 +162,7 @@ extension Reactive where Base: SVKServer {
     TKFileCache.clearAgenda(forDateString: dateString)
 
     return hit(.DELETE, path: "agenda/\(dateString)/input")
-      .map { status, data -> Bool in
+      .map { status, _, data -> Bool in
         switch status {
         case 200: return true
         case 404: return false
@@ -242,7 +241,7 @@ extension Reactive where Base: SVKServer {
         default: return nil
         }
       }
-      .flatMapLatest { status, dataMaybe -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
+      .flatMapLatest { status, _, dataMaybe -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
         switch status {
         case 200:
           guard let data = dataMaybe else { throw TKAgendaError.unexpectedResponse(status, dataMaybe) }
@@ -335,7 +334,7 @@ extension Reactive where Base: SVKServer {
     // TODO: Cache this, too!
     
     return hit(.GET, path: "agenda/summary")
-      .map { status, dataMaybe -> TKAgendaSummary in
+      .map { status, _, dataMaybe -> TKAgendaSummary in
         switch status {
         case 200:
           guard let data = dataMaybe else {

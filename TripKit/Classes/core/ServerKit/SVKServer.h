@@ -16,8 +16,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^SGServerSuccessBlock)(NSInteger status, id _Nullable responseObject, NSData * _Nullable data);
+typedef void (^SGServerFullSuccessBlock)(NSInteger status, NSDictionary<NSString *, id> *headers, id _Nullable responseObject, NSData * _Nullable data);
 typedef void (^SGServerFailureBlock)(NSError *error);
-typedef void (^SGServerGenericBlock)(NSInteger status, id _Nullable responseObject, NSData * _Nullable data, NSError * _Nullable error);
+typedef void (^SGServerGenericBlock)(NSInteger status, NSDictionary<NSString *, id> *headers, id _Nullable responseObject, NSData * _Nullable data, NSError * _Nullable error);
 
 typedef NS_ENUM(NSInteger, SVKServerType) {
   SVKServerTypeProduction = 0,
@@ -99,7 +100,7 @@ FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileEnableFlights;
                     headers:(nullable NSDictionary<NSString *, NSString *> *)headers
                      region:(nullable SVKRegion *)region
              callbackOnMain:(BOOL)callbackOnMain
-                    success:(SGServerSuccessBlock)success
+                    success:(SGServerFullSuccessBlock)success
                     failure:(SGServerFailureBlock)failure;
 
 - (void)hitSkedGoWithMethod:(NSString *)method
@@ -109,7 +110,7 @@ FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileEnableFlights;
                  customData:(nullable NSData*)customData
                      region:(nullable SVKRegion *)region
              callbackOnMain:(BOOL)callbackOnMain
-                    success:(SGServerSuccessBlock)success
+                    success:(SGServerFullSuccessBlock)success
                     failure:(SGServerFailureBlock)failure;
 
 - (nullable id)initiateSyncRequestWithMethod:(NSString *)method

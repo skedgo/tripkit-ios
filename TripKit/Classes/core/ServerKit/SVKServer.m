@@ -192,8 +192,8 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   
   __block id object;
   [self GET:url paras:nil completion:
-   ^(NSInteger status, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
-#pragma unused(status, data)
+   ^(NSInteger status, NSDictionary<NSString *,id> *headers, id _Nullable responseObject, NSData *data, NSError * _Nullable error) {
+#pragma unused(status, headers, data)
      if (! error) {
        // success
        if (semaphore != NULL) {
@@ -249,23 +249,27 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                                                  completionHandler:
                                 ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                   NSInteger status = 0;
+                                  NSDictionary *headers = nil;
                                   if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                                     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
                                     status = httpResponse.statusCode;
+                                    headers = httpResponse.allHeaderFields;
 
                                     [SGKLog verbose:@"SVKServer" block:^NSString * _Nonnull{
                                       return [NSString stringWithFormat:@"Received %@ from %@.\nHeaders: %@", @(status),
                                               httpResponse.URL.absoluteString,
                                               httpResponse.allHeaderFields];
                                     }];
+                                  } else {
+                                    headers = @{};
                                   }
                                   
                                   if (error) {
-                                    completion(status, nil, nil, error);
+                                    completion(status, headers, nil, nil, error);
                                     
                                   } else if (data.length == 0) {
                                     // empty response is not an error
-                                    completion(status, nil, nil, nil);
+                                    completion(status, headers, nil, nil, nil);
                                     
                                   } else {
                                     [SGKLog verbose:@"SVKServer" block:^NSString * _Nonnull{
@@ -279,13 +283,13 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                                     if (responseObject) {
                                       SVKError *serverError = [SVKError errorFromJSON:responseObject statusCode:status];
                                       if (serverError != nil) {
-                                        completion(status, nil, nil,  serverError);
+                                        completion(status, headers, nil, nil,  serverError);
                                       } else {
-                                        completion(status, responseObject, data, nil);
+                                        completion(status, headers, responseObject, data, nil);
                                       }
                                     } else {
                                       [SGKLog error:@"SVKError" format:@"Could not parse: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
-                                      completion(status, nil, nil, parserError);
+                                      completion(status, headers, nil, nil, parserError);
                                     }
                                   }
                                 }];
@@ -302,7 +306,6 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   [self hitSkedGoWithMethod:method
                        path:path
                  parameters:parameters
-                    headers:nil
                      region:region
              callbackOnMain:YES
                     success:success
@@ -324,7 +327,9 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                  customData:nil
                      region:region
              callbackOnMain:callbackOnMain
-                    success:success
+                    success:^(NSInteger status, NSDictionary<NSString *,id> * _Nonnull headers, id  _Nullable responseObject, NSData * _Nullable data) {
+                      success(status, responseObject, data);
+                    }
                     failure:failure];
 }
 
@@ -334,7 +339,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                     headers:(nullable NSDictionary<NSString *, NSString *> *)headers
                      region:(nullable SVKRegion *)region
              callbackOnMain:(BOOL)callbackOnMain
-                    success:(SGServerSuccessBlock)success
+                    success:(SGServerFullSuccessBlock)success
                     failure:(SGServerFailureBlock)failure
 {
   [self hitSkedGoWithMethod:method
@@ -355,7 +360,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                  customData:(nullable NSData*)customData
                      region:(nullable SVKRegion *)region
              callbackOnMain:(BOOL)callbackOnMain
-                    success:(SGServerSuccessBlock)success
+                    success:(SGServerFullSuccessBlock)success
                     failure:(SGServerFailureBlock)failure
 {
   [self initiateDataTaskWithMethod:method
@@ -370,6 +375,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                            success:success
                            failure:failure
                     previousStatus:0
+                   previousHeaders:@{}
                   previousResponse:nil
                       previousData:nil
                      previousError:nil];
@@ -392,6 +398,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                                   success:nil
                                   failure:nil
                            previousStatus:0
+                          previousHeaders:@{}
                          previousResponse:nil
                              previousData:nil
                             previousError:nil];
@@ -462,8 +469,8 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   [SVKServer POST:[NSURL URLWithString:regionsURLString]
             paras:paras
        completion:
-   ^(NSInteger status, id _Nullable responseObject, NSData *data, NSError * _Nullable error) {
-#pragma unused(status, responseObject)
+   ^(NSInteger status, NSDictionary<NSString *, id> *headers, id _Nullable responseObject, NSData *data, NSError * _Nullable error) {
+#pragma unused(status, headers, responseObject)
      if (data) {
        [TKRegionManager.shared updateRegionsFromData:data];
        
@@ -521,9 +528,10 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                                 forRegion:(nullable SVKRegion *)region
                               backupIndex:(NSInteger)backupIndex
                            callbackOnMain:(BOOL)callbackOnMain
-                                  success:(nullable SGServerSuccessBlock)success
+                                  success:(nullable SGServerFullSuccessBlock)success
                                   failure:(nullable SGServerFailureBlock)failure
                            previousStatus:(NSInteger)previousStatus
+                          previousHeaders:(NSDictionary *)previousHeaders
                          previousResponse:(nullable id)previousResponse
                              previousData:(nullable NSData *)previousData
                             previousError:(nullable NSError *)previousError
@@ -546,10 +554,10 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
       if (success) {
         if (callbackOnMain) {
           dispatch_async(dispatch_get_main_queue(), ^{
-            success(previousStatus, previousResponse, previousData);
+            success(previousStatus, previousHeaders, previousResponse, previousData);
           });
         } else {
-          success(previousStatus, previousResponse, previousData);
+          success(previousStatus, previousHeaders, previousResponse, previousData);
         }
       }
     } else {
@@ -586,7 +594,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   }
   
   // Backup handler
-  void (^failOverBlock)(NSInteger, id, NSData *, NSError *) = ^(NSInteger status, id responseObject, NSData *data, NSError *error) {
+  void (^failOverBlock)(NSInteger, NSDictionary<NSString *, id> *,  id, NSData *, NSError *) = ^(NSInteger status, NSDictionary<NSString *, id> *headers, id responseObject, NSData *data, NSError *error) {
     [self initiateDataTaskWithMethod:method
                                 path:path
                           parameters:parameters
@@ -599,6 +607,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                              success:success
                              failure:failure
                       previousStatus:status
+                     previousHeaders:headers
                     previousResponse:responseObject
                         previousData:data
                        previousError:error];
@@ -611,7 +620,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   
   [SVKServer hitRequest:request
              completion:
-   ^(NSInteger status, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
+   ^(NSInteger status, NSDictionary<NSString *,id> *headers, id _Nullable responseObject, NSData *data, NSError * _Nullable error) {
      NSError *serverError = error ?: [SVKError errorFromJSON:responseObject statusCode:status];
      if (serverError) {
        BOOL isUserError = NO;
@@ -633,7 +642,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
          // not failing over as that messes with semaphores!
          dispatch_semaphore_signal(semaphore);
        } else if (! isUserError) {
-         failOverBlock(status, responseObject, data, error);
+         failOverBlock(status, headers, responseObject, data, error);
        }
        
      } else {
@@ -641,10 +650,10 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
        if (success) {
          if (callbackOnMain) {
            dispatch_async(dispatch_get_main_queue(), ^{
-             success(status, successResponse, data);
+             success(status, headers, successResponse, data);
            });
          } else {
-           success(status, successResponse, data);
+           success(status, headers, successResponse, data);
          }
        }
        if (wait && semaphore != NULL) {

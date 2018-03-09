@@ -589,8 +589,8 @@ static NSString *const kPathImage     = @"api/user/image";
                                   region:nil
                           callbackOnMain:YES
                                  success:
-   ^(NSInteger status, id responseObject, NSData *data) {
-#pragma unused(status, data)
+   ^(NSInteger status, NSDictionary<NSString *, id> *headers, id responseObject, NSData *data) {
+#pragma unused(status, headers, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      if (handler != nil) {
