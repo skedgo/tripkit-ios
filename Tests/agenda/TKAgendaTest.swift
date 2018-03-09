@@ -203,6 +203,10 @@ class TKAgendaTest: XCTestCase {
       switch error {
       case TKAgendaError.agendaLockedByOtherDevice(let owner):
         XCTAssertEqual(owner, device1)
+        guard let owner = owner else {
+          XCTFail("Didn't return owner")
+          return
+        }
         owningDeviceId = owner
       default:
         XCTFail("Unexpected error: \(error)")
@@ -233,6 +237,11 @@ class TKAgendaTest: XCTestCase {
         XCTFail("Unexpected error: \(error)")
       }
     }
+    
+    // Clean-up at the end
+    let delete = SVKServer.shared.rx.deleteAgenda(for: components, deviceId: device2)
+    let result3 = try delete.toBlocking().toArray()
+    XCTAssertEqual(result3, [true])
   }
   
 }
