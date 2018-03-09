@@ -31,6 +31,7 @@ class TKSettingsTest: XCTestCase {
     XCTAssertEqual(config.emissions, [:])
     XCTAssertEqual(config.bookingSandbox, false)
     XCTAssertEqual(config.enableFlights, false)
+    XCTAssertEqual(config.twoWayHireCostIncludesReturn, true)
   }
   
   func testReadPerformance() {

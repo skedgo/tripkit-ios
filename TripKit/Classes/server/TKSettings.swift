@@ -71,10 +71,11 @@ extension TKSettings {
       version = TKSettings.parserJsonVersion
       distanceUnit = Locale.current.usesMetricSystem ? .metric : .imperial
       weights = [
-        .money:  shared.float(forKey: TKDefaultsKeyProfileWeightMoney),
-        .carbon: shared.float(forKey: TKDefaultsKeyProfileWeightCarbon),
-        .time:   shared.float(forKey: TKDefaultsKeyProfileWeightTime),
-        .hassle: shared.float(forKey: TKDefaultsKeyProfileWeightHassle),
+        .money:    (shared.object(forKey: TKDefaultsKeyProfileWeightMoney)    as? NSNumber)?.floatValue ?? 1.0,
+        .carbon:   (shared.object(forKey: TKDefaultsKeyProfileWeightCarbon)   as? NSNumber)?.floatValue ?? 1.0,
+        .time:     (shared.object(forKey: TKDefaultsKeyProfileWeightTime)     as? NSNumber)?.floatValue ?? 1.0,
+        .hassle:   (shared.object(forKey: TKDefaultsKeyProfileWeightHassle)   as? NSNumber)?.floatValue ?? 1.0,
+//        .exercise: (shared.object(forKey: TKDefaultsKeyProfileWeightExercise) as? NSNumber)?.floatValue ?? 1.0,
       ]
       avoidModes = TKUserProfileHelper.dislikedTransitModes
       concession = shared.bool(forKey: TKDefaultsKeyProfileTransportConcessionPricing)
