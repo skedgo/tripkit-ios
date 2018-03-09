@@ -188,13 +188,23 @@ class TKAgendaTest: XCTestCase {
   
   /// Similar to Juptyer notebook Flow 3
   func testPostingFromNonOwningDevice() throws {
+    // Start clean
+    let delete0 = SVKServer.shared.rx.deleteAgenda(for: components)
+    let result0 = try delete0.toBlocking().toArray()
+    XCTAssert(!result0.isEmpty)
+    
     let device1 = "Device 1"
     let device2 = "Device 2"
     
     // POSTing from device1
     let upload1 = SVKServer.shared.rx.uploadAgenda(input, for: components, deviceId: device1)
-    let result1 = try upload1.toBlocking().toArray()
-    XCTAssertEqual(result1, [TKAgendaUploadResult.success])
+    do {
+      let result1 = try upload1.toBlocking().toArray()
+      XCTAssertEqual(result1, [TKAgendaUploadResult.success])
+    } catch {
+      XCTFail("Uploading from device 1 shouldn't have failed, but did with error: \(error)")
+      return
+    }
 
     // POSTing from device2 should error
     let input2 = try TKAgendaInput.testInput(excludingSecondEvent: false)
