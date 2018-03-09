@@ -30,7 +30,7 @@ public enum TKAgendaError: Error {
   case invalidDateComponents(DateComponents)
   case agendaInputNotAvailable(DateComponents)
   case agendaLockedByOtherDevice(owningDeviceId: String)
-  case unexpectedResponse(StatusCode, Any?)
+  case unexpectedResponse(StatusCode, Data?)
 }
 
 @available(iOS 10.0, *)
@@ -53,7 +53,7 @@ extension Reactive where Base: SVKServer {
   ///       another device, it can be switched to this device by providing
   ///       the owners device ID as a confirmation.
   /// - Returns: Observable as describes in notes.
-  public func uploadAgenda(_ input: TKAgendaInput, for components: DateComponents, overwritingDeviceId: String? = nil) -> Observable<TKAgendaUploadResult> {
+  public func uploadAgenda(_ input: TKAgendaInput, for components: DateComponents, deviceId: String? = nil, overwritingDeviceId: String? = nil) -> Observable<TKAgendaUploadResult> {
     
     guard let dateString = components.dateString else {
       preconditionFailure("Bad components!")
@@ -62,21 +62,24 @@ extension Reactive where Base: SVKServer {
     guard let _ = SVKServer.userToken() else {
       return Observable.error(TKAgendaError.userIsNotLoggedIn)
     }
-    
-    let encoder = JSONEncoder()
-    encoder.dateEncodingStrategy = .iso8601
-    
+
+    TKFileCache.clearAgenda(forDateString: dateString)
+
     let paras: [String: Any]?
     do {
+      let encoder = JSONEncoder()
+      encoder.dateEncodingStrategy = .iso8601
       paras = (try encoder.encodeJSONObject(input)) as? [String: Any]
     } catch {
       return Observable.error(error)
     }
     
-    TKFileCache.clearAgenda(forDateString: dateString)
+    var headers = [String: String]()
+    headers["deviceId"] = deviceId
+    headers["overwritingDeviceId"] = overwritingDeviceId
     
-    return hit(.POST, path: "agenda/\(dateString)/input", parameters: paras ?? [:])
-      .map { status, body, data -> TKAgendaUploadResult in
+    return hit(.POST, path: "agenda/\(dateString)/input", parameters: paras ?? [:], headers: headers)
+      .map { status, data -> TKAgendaUploadResult in
         switch status {
         case 200: return .success
         case 401: throw TKAgendaError.userTokenIsInvalid
@@ -85,7 +88,8 @@ extension Reactive where Base: SVKServer {
           // TODO: Fix owningDeviceId
           throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: "header.owningDeviceId")
         
-        default: throw TKAgendaError.unexpectedResponse(status, body)
+        default:
+          throw TKAgendaError.unexpectedResponse(status, data)
         }
       }
   }
@@ -119,15 +123,15 @@ extension Reactive where Base: SVKServer {
     // This would be a good place to see if we have this cached...
     
     return hit(.GET, path: "agenda/\(dateString)/input")
-      .map { status, body, data in
+      .map { status, dataMaybe in
         switch status {
         case 200:
-          guard let data = data else { throw TKAgendaError.unexpectedResponse(status, body) }
+          guard let data = dataMaybe else { throw TKAgendaError.unexpectedResponse(status, dataMaybe) }
           return try decoder.decode(TKAgendaInput.self, from: data)
           
         case 401: throw TKAgendaError.userTokenIsInvalid
         case 404: throw TKAgendaError.agendaInputNotAvailable(components)
-        default:  throw TKAgendaError.unexpectedResponse(status, body)
+        default:  throw TKAgendaError.unexpectedResponse(status, dataMaybe)
       }
     }
   }
@@ -159,7 +163,7 @@ extension Reactive where Base: SVKServer {
     TKFileCache.clearAgenda(forDateString: dateString)
 
     return hit(.DELETE, path: "agenda/\(dateString)/input")
-      .map { status, body, data -> Bool in
+      .map { status, data -> Bool in
         switch status {
         case 200: return true
         case 404: return false
@@ -168,7 +172,7 @@ extension Reactive where Base: SVKServer {
           // TODO: Fix owningDeviceId
           throw TKAgendaError.agendaLockedByOtherDevice(owningDeviceId: "header.owningDeviceId")
           
-        default: throw TKAgendaError.unexpectedResponse(status, body)
+        default: throw TKAgendaError.unexpectedResponse(status, data)
         }
       }
     
@@ -232,17 +236,17 @@ extension Reactive where Base: SVKServer {
       path.append("&hashCode=\(hashCode)")
     }
 
-    return hit(.GET, path: path) { status, body, data -> TimeInterval? in
+    return hit(.GET, path: path) { status, data -> TimeInterval? in
         switch status {
         case 299: return 1
         default: return nil
         }
       }
-      .flatMapLatest { status, body, data -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
+      .flatMapLatest { status, dataMaybe -> Observable<TKAgendaFetchResult<TKAgendaOutput>> in
         switch status {
         case 200:
-          guard let data = data, let response = body as? [String: Any] else { throw TKAgendaError.unexpectedResponse(status, body) }
-          let result = try TKAgendaOutput.parse(from: data, body: response)
+          guard let data = dataMaybe else { throw TKAgendaError.unexpectedResponse(status, dataMaybe) }
+          let result = try TKAgendaOutput.parse(from: data)
           TKFileCache.saveAgenda(data, forDateString: dateString)
           return result.map { .success($0) }
           
@@ -250,7 +254,7 @@ extension Reactive where Base: SVKServer {
         case 304: return Observable.just(.noChange)
         case 401: throw TKAgendaError.userTokenIsInvalid
         case 404: throw TKAgendaError.agendaInputNotAvailable(components)
-        default:  throw TKAgendaError.unexpectedResponse(status, body)
+        default:  throw TKAgendaError.unexpectedResponse(status, dataMaybe)
         }
       }
   }
@@ -331,17 +335,17 @@ extension Reactive where Base: SVKServer {
     // TODO: Cache this, too!
     
     return hit(.GET, path: "agenda/summary")
-      .map { status, body, data -> TKAgendaSummary in
+      .map { status, dataMaybe -> TKAgendaSummary in
         switch status {
         case 200:
-          guard let data = data else {
-            throw TKAgendaError.unexpectedResponse(status, body)
+          guard let data = dataMaybe else {
+            throw TKAgendaError.unexpectedResponse(status, dataMaybe)
           }
           let decoder = JSONDecoder()
           decoder.dateDecodingStrategy = .iso8601
           return try decoder.decode(TKAgendaSummary.self, from: data)
         case 401: throw TKAgendaError.userTokenIsInvalid
-        default:  throw TKAgendaError.unexpectedResponse(status, body)
+        default:  throw TKAgendaError.unexpectedResponse(status, dataMaybe)
         }
       }
 
@@ -352,9 +356,9 @@ extension Reactive where Base: SVKServer {
 @available(iOS 10.0, *)
 extension TKAgendaOutput {
   
-  static func parse(from data: Data, body: [String: Any]? = nil) throws -> Observable<TKAgendaOutput> {
-    guard let response = try (body ?? (try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any])) else {
-      throw TKAgendaError.unexpectedResponse(0, body)
+  static func parse(from data: Data) throws -> Observable<TKAgendaOutput> {
+    guard let response = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+      throw TKAgendaError.unexpectedResponse(0, data)
     }
     
     let decoder = JSONDecoder()

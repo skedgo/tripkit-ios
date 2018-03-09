@@ -53,6 +53,7 @@ extension Reactive where Base: SVKServer {
   /// - parameter method: Duh
   /// - parameter path: The endpoint, e.g., `routing.json`
   /// - parameter parameters: The parameters which will either be send in the query (for GET) or as the JSON body (for POST and alike)
+  /// - parameter headers: Additional headers to add to the request
   /// - parameter region: The region for which to hit a server. In most cases, you want to set this as not every SkedGo server has data for every region.
   /// - parameter repeatHandler: Implement and return a non-negative time interval from this handler to fire the Observable again, or `nil` to stop firing.
   /// - returns: An observable with the status code and JSON from hitting the endpoint, both parameters will be the same as the last call to the `repeatHandler`.
@@ -60,9 +61,10 @@ extension Reactive where Base: SVKServer {
     _ method: HTTPMethod,
     path: String,
     parameters: [String: Any] = [:],
+    headers: [String: String] = [:],
     region: SVKRegion? = nil,
-    repeatHandler: ((Int, Any?, Data?) -> (TimeInterval?))? = nil
-  ) -> Observable<(Int, Any?, Data?)>
+    repeatHandler: ((Int, Data?) -> (TimeInterval?))? = nil
+  ) -> Observable<(Int, Data?)>
   {
     // TODO: If `region == nil` region by: last used, user's home, nil
     
@@ -73,8 +75,9 @@ extension Reactive where Base: SVKServer {
         method: method,
         path: path,
         parameters: parameters,
+        headers: headers,
         region: region,
-        repeatHandler: { code, json, data in
+        repeatHandler: { code, data in
           if stopper.stop {
             // we got discarded
             return nil
@@ -82,12 +85,12 @@ extension Reactive where Base: SVKServer {
           
           let hitAgain: TimeInterval?
           if let repeatHandler = repeatHandler {
-            hitAgain = repeatHandler(code, json, data)
+            hitAgain = repeatHandler(code, data)
           } else {
             hitAgain = nil
           }
           
-          subscriber.onNext((code, json, data))
+          subscriber.onNext((code, data))
           if hitAgain == nil {
             subscriber.onCompleted()
           }
@@ -104,17 +107,18 @@ extension Reactive where Base: SVKServer {
     }
   }
   
-  private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: Any] = [:], region: SVKRegion? = nil, repeatHandler: @escaping (Int, Any?, Data?) -> (TimeInterval?), errorHandler: @escaping (Error) -> ()) {
+  private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: Any] = [:], headers: [String: String] = [:], region: SVKRegion? = nil, repeatHandler: @escaping (Int, Data?) -> (TimeInterval?), errorHandler: @escaping (Error) -> ()) {
 
     self.base.hitSkedGo(
       withMethod: method.rawValue,
       path: path,
       parameters: parameters,
+      headers: headers,
       region: region,
       callbackOnMain: false,
       success: { code, response, data in
         
-        let hitAgain = repeatHandler(code, response, data)
+        let hitAgain = repeatHandler(code, data)
         if let seconds = hitAgain, seconds > 0 {
           let queue = DispatchQueue.global(qos: .userInitiated)
           queue.asyncAfter(deadline: DispatchTime.now() + seconds) {
@@ -122,6 +126,7 @@ extension Reactive where Base: SVKServer {
               method: method,
               path: path,
               parameters: parameters,
+              headers: headers,
               region: region,
               repeatHandler: repeatHandler,
               errorHandler: errorHandler

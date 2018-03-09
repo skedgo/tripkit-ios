@@ -49,7 +49,7 @@ public enum TKLocationProvider {
     
     return SVKServer.shared.rx
       .hit(.GET, path: "locations.json", parameters: paras, region: region)
-      .map { _, _, data -> [STKModeCoordinate] in
+      .map { _, data -> [STKModeCoordinate] in
         let decoder = JSONDecoder()
         guard
           let data = data,

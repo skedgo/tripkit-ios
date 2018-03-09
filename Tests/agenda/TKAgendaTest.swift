@@ -84,6 +84,7 @@ class TKAgendaTest: XCTestCase {
     
   }
   
+  /// Similar to Juptyer notebook Flow 5
   func testUploadingFetchingAndDeletingInput() throws {
     let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
     let result1 = try upload.toBlocking().toArray()
@@ -155,8 +156,13 @@ class TKAgendaTest: XCTestCase {
     XCTAssertEqual(cached.hashCode, output.hashCode)
   }
   
-  /// Similar to Juptyer notebook Flow 2, but using helper
+  /// Similar to Juptyer notebook Flow 4, using `updateAgenda` and updating with a new input
   func testCachingResult2() throws {
+    // Start clean
+    let delete = SVKServer.shared.rx.deleteAgenda(for: components)
+    let result0 = try delete.toBlocking().toArray()
+    XCTAssert(!result0.isEmpty)
+    
     // Update first input
     let update1 = SVKServer.shared.rx.updateAgenda(input, for: components)
     let result1 = try update1.toBlocking().toArray()
@@ -176,8 +182,57 @@ class TKAgendaTest: XCTestCase {
   }
   
   /// Similar to Juptyer notebook Flow 3
-  func testPostingFromNonOwningDevice() {
-    XCTFail("Not implemented yet")
+  func testPostingFromNonOwningDevice() throws {
+    let device1 = "Device 1"
+    let device2 = "Device 2"
+    
+    // POSTing from device1
+    let upload1 = SVKServer.shared.rx.uploadAgenda(input, for: components, deviceId: device1)
+    let result1 = try upload1.toBlocking().toArray()
+    XCTAssertEqual(result1, [TKAgendaUploadResult.success])
+
+    // POSTing from device2 should error
+    let input2 = try TKAgendaInput.testInput(excludingSecondEvent: false)
+    let upload2 = SVKServer.shared.rx.uploadAgenda(input2, for: components, deviceId: device2)
+    let owningDeviceId: String
+    do {
+      _ = try upload2.toBlocking().toArray()
+      XCTFail("Upload from device 2 should have failed")
+      return
+    } catch {
+      switch error {
+      case TKAgendaError.agendaLockedByOtherDevice(let owner):
+        XCTAssertEqual(owner, device1)
+        owningDeviceId = owner
+      default:
+        XCTFail("Unexpected error: \(error)")
+        return
+      }
+    }
+    
+    // POSTing from 2 again, overwriting explicitly
+    let upload2take2 = SVKServer.shared.rx.uploadAgenda(input2, for: components, deviceId: device2, overwritingDeviceId: owningDeviceId)
+    do {
+      let result2 = try upload2take2.toBlocking().toArray()
+      XCTAssertEqual(result2, [TKAgendaUploadResult.success])
+    } catch {
+      XCTFail("Uploading and overwriting shouldn't have failed, but did with error: \(error)")
+      return
+    }
+
+    // POSTing from device1 should error
+    let upload1take2 = SVKServer.shared.rx.uploadAgenda(input2, for: components, deviceId: device1)
+    do {
+      _ = try upload1take2.toBlocking().toArray()
+      XCTFail("Upload from device 1 should have failed")
+    } catch {
+      switch error {
+      case TKAgendaError.agendaLockedByOtherDevice(let owner):
+        XCTAssertEqual(owner, device2)
+      default:
+        XCTFail("Unexpected error: \(error)")
+      }
+    }
   }
   
 }

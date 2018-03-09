@@ -584,6 +584,7 @@ static NSString *const kPathImage     = @"api/user/image";
   [self.sharedServer hitSkedGoWithMethod:@"POST"
                                     path:kPathImage
                               parameters:nil
+                                 headers:nil
                               customData:imageData
                                   region:nil
                           callbackOnMain:YES
