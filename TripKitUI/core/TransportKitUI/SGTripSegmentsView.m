@@ -104,13 +104,17 @@
 		}
 		
 		// for the coloured strip
-		UIColor *color = (allowSubtitles && [segment respondsToSelector:@selector(tripSegmentModeColor)])
-      ? [segment tripSegmentModeColor]
-      : nil;
+//    UIColor *color = (allowSubtitles && [segment respondsToSelector:@selector(tripSegmentModeColor)])
+//      ? [segment tripSegmentModeColor]
+//      : nil;
+    
+    UIColor *color = (self.colorCodingTransit && [segment respondsToSelector:@selector(tripSegmentModeColor)])
+    ? [segment tripSegmentModeColor]
+    : nil;
 		
 		// the mode image
     UIImageView * modeImageView = [[UIImageView alloc] initWithImage:image];
-    modeImageView.tintColor = [SGStyleManager darkTextColor];
+    modeImageView.tintColor = color ?: [SGStyleManager darkTextColor];
     modeImageView.alpha = SEGMENT_ITEM_ALPHA;
 
     NSURL *modeImageURL = [segment respondsToSelector:@selector(tripSegmentModeImageURL)]
@@ -224,7 +228,7 @@
       [self addSubview:titleLabel];
       
       modeSideWidth = (CGFloat) fmax(modeSideWidth, modeTitleSize.width);
-    } else if (color) {
+    } else if (color && allowSubtitles) {
       // add the color underneath
       CGFloat y = (CGRectGetHeight(self.frame) - modeSubtitleSize.height - modeTitleSize.height) / 2;
       UIView *stripe = [[UIView alloc] initWithFrame:CGRectMake(x, y, modeTitleSize.width, modeTitleSize.height)];

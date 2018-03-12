@@ -38,6 +38,7 @@ typedef void(^SGTripSummaryCellActionBlock)(UIControl *sender);
 @property (nonatomic, assign) BOOL allowWheelchairIcon;
 @property (nonatomic, assign) BOOL simpleTimes;
 @property (nonatomic, assign) BOOL preferNoPaddings;
+@property (nonatomic, assign) BOOL colorCodingTransit;
 
 @property (nullable, nonatomic, strong) NSTimeZone *relativeTimeZone;
 
