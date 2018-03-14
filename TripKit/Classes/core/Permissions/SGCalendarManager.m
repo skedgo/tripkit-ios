@@ -205,33 +205,15 @@ typedef void (^SGCalendarResultsBlock)(NSString *string, NSArray *results);
 - (NSArray *)autocompleteFast:(NSString *)string forMapRect:(MKMapRect)mapRect
 {
 #pragma unused(mapRect) // no filtering based on map rect for events
+  
+  NSArray<EKEvent *> *events;
   if (string.length == 0) {
-    return nil;
+    events = [self fetchDefaultEvents];
+  } else {
+    events = [self fetchEventsMatchingString:string];
   }
-
-  NSArray *calendarResults = [self fetchEventsMatchingString:string];
-  NSMutableArray *results = [NSMutableArray arrayWithCapacity:calendarResults.count];
-  for (EKEvent *event in calendarResults) {
-    if (event.location) {
-      SGAutocompletionResult *result = [[SGAutocompletionResult alloc] init];
-      result.object   = event;
-      result.title    = [SGCalendarManager titleStringForEvent:event];
-      result.subtitle = event.location;
-      result.image    = [SGAutocompletionResult imageForType:SGAutocompletionSearchIconCalendar];
-
-      NSUInteger titleScore = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:string
-                                                                                   candidate:result.title];
-      NSUInteger locationScore = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:string
-                                                                                      candidate:result.subtitle];
-      NSUInteger rawScore = MIN(100, (NSInteger) (titleScore + locationScore / 2));
-      
-      result.score = [SGAutocompletionResult rangedScoreForScore:rawScore
-                                                  betweenMinimum:50 andMaximum:90];
-      
-      [results addObject:result];
-    }
-  }
-  return results;
+  
+  return [SGCalendarManager autocompletionResultsForEvents:events searchTerm:string];
 }
 
 - (id<MKAnnotation>)annotationForAutocompletionResult:(SGAutocompletionResult *)result

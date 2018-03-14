@@ -21,9 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)titleStringForEvent:(EKEvent *)event;
 
-- (NSArray *)fetchEventsBetweenDate:(NSDate *)startDate
-                         andEndDate:(NSDate *)endDate
-                      fromCalendars:(nullable NSArray *)calendarsOrNil;
+- (NSArray<EKEvent *> *)fetchEventsBetweenDate:(NSDate *)startDate
+                                    andEndDate:(NSDate *)endDate
+                                 fromCalendars:(nullable NSArray *)calendarsOrNil;
 
 - (nullable EKEvent *)eventForIdentifier:(NSString *)identifier;
 
