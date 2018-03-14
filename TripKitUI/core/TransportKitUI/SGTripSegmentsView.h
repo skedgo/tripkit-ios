@@ -22,6 +22,11 @@
 
 @property (nonatomic, assign) BOOL allowWheelchairIcon;
 
+/**
+ This property determines if the transit icon in the view should be color coded.
+ */
+@property (nonatomic, assign) BOOL colorCodingTransitIcon;
+
 - (void)configureForSegments:(NSArray<id<STKTripSegmentDisplayable>> *)segments
               allowSubtitles:(BOOL)allowSubtitles
               allowInfoIcons:(BOOL)allowInfoIcons;

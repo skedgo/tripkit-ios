@@ -39,6 +39,12 @@ typedef void(^SGTripSummaryCellActionBlock)(UIControl *sender);
 @property (nonatomic, assign) BOOL simpleTimes;
 @property (nonatomic, assign) BOOL preferNoPaddings;
 
+/**
+ This property indicates whether the transit mode icons in the trip segment
+ should be colored.
+ */
+@property (nonatomic, assign) BOOL colorCodingTransitIcon;
+
 @property (nullable, nonatomic, strong) NSTimeZone *relativeTimeZone;
 
 @property (nullable, nonatomic, strong) UIColor *preferredTintColor UI_APPEARANCE_SELECTOR;
