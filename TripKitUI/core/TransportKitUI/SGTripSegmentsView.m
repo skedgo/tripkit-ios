@@ -104,17 +104,11 @@
 		}
 		
 		// for the coloured strip
-//    UIColor *color = (allowSubtitles && [segment respondsToSelector:@selector(tripSegmentModeColor)])
-//      ? [segment tripSegmentModeColor]
-//      : nil;
-    
-    UIColor *color = (self.colorCodingTransit && [segment respondsToSelector:@selector(tripSegmentModeColor)])
-    ? [segment tripSegmentModeColor]
-    : nil;
+    UIColor *color = [segment respondsToSelector:@selector(tripSegmentModeColor)] ? [segment tripSegmentModeColor] : nil;
 		
 		// the mode image
     UIImageView * modeImageView = [[UIImageView alloc] initWithImage:image];
-    modeImageView.tintColor = color ?: [SGStyleManager darkTextColor];
+    modeImageView.tintColor = (color != nil && self.colorCodingTransitIcon) ? color : [SGStyleManager darkTextColor];
     modeImageView.alpha = SEGMENT_ITEM_ALPHA;
 
     NSURL *modeImageURL = [segment respondsToSelector:@selector(tripSegmentModeImageURL)]

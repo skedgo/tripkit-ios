@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `TKDepartureView` can now be used without `SGTrackItem`
 - `TKPeliasGeocoder` replaces `TKMapZenGeocoder` and is now using SkedGo's Pelias backend
 - When enabling or disabling the wheelchair mode, wheelchair information for public transport will also be toggled on and off accordingly
+- `SGCalendarManager` now shows events in next 24h when autocompleting empty string
 
 ### Removed
 
