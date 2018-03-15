@@ -822,6 +822,9 @@
 		3AFFAE0A1F06BA3700147990 /* TripRequest+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE091F06BA3700147990 /* TripRequest+Shareable.swift */; };
 		3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE0B1F06BCF200147990 /* Service.swift */; };
 		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
+		D39ECD86205A007A00E09474 /* TKSectionedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */; };
+		D39ECD87205A007A00E09474 /* TKSectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */; };
+		D39ECD89205A029500E09474 /* TKSectionedAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1512,6 +1515,9 @@
 		3AFFAE091F06BA3700147990 /* TripRequest+Shareable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TripRequest+Shareable.swift"; sourceTree = "<group>"; };
 		3AFFAE0B1F06BCF200147990 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertViewController.swift; sourceTree = "<group>"; };
+		D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKSectionedAlertViewController.xib; sourceTree = "<group>"; };
+		D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertViewModel.swift; sourceTree = "<group>"; };
 		D3A779281E513C5000BBAF6C /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1765,6 +1771,9 @@
 			isa = PBXGroup;
 			children = (
 				3A6DF0DE202C8EB80084CB2C /* TKAlertViewController.swift */,
+				D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */,
+				D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */,
+				D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3251,6 +3260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A6DF14B202C8EB80084CB2C /* TKPathFriendlinessView.xib in Resources */,
+				D39ECD87205A007A00E09474 /* TKSectionedAlertViewController.xib in Resources */,
 				3A6ABE6E204050BC00645B93 /* InfoPlist.strings in Resources */,
 				3A6DF13C202C8EB80084CB2C /* TKAlertInfoView.xib in Resources */,
 				3A6DF141202C8EB80084CB2C /* TKAlertCell.xib in Resources */,
@@ -3588,6 +3598,8 @@
 				3A6DF133202C8EB80084CB2C /* RouteMapManager.m in Sources */,
 				3A6DF14D202C8EB80084CB2C /* TKAlertInfoView.swift in Sources */,
 				3A6DF109202C8EB80084CB2C /* TKMapButtonView.swift in Sources */,
+				D39ECD86205A007A00E09474 /* TKSectionedAlertViewController.swift in Sources */,
+				D39ECD89205A029500E09474 /* TKSectionedAlertViewModel.swift in Sources */,
 				3A6DF11F202C8EB80084CB2C /* SGStyleManager+SGCoreUI.m in Sources */,
 				3A6DF132202C8EB80084CB2C /* TripMapManager.m in Sources */,
 				3A6DF119202C8EB80084CB2C /* SGPolylineRenderer.m in Sources */,
