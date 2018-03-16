@@ -249,7 +249,7 @@
   }
   
   UIFont *primaryFont = _mainLabel.font;
-  UIColor *primaryColor = [SGStyleManager darkTextColor];
+  UIColor *primaryColor = self.darkGreyColor;
   
   UIFont *secondaryFont = _mainLabel.font;
   UIColor *secondaryColor = [SGStyleManager lightTextColor];

@@ -108,8 +108,15 @@
 		
 		// the mode image
     UIImageView * modeImageView = [[UIImageView alloc] initWithImage:image];
-    modeImageView.tintColor = (color != nil && self.colorCodingTransitIcon) ? color : [SGStyleManager darkTextColor];
     modeImageView.alpha = SEGMENT_ITEM_ALPHA;
+    
+    if (self.colorCodingTransitIcon) {
+      // remember that color will be nil for non-PT modes. In these cases, since the
+      // PT mode will be colored, we use the lighter grey to reduce the contrast.
+      modeImageView.tintColor = color ?: self.lightGreyColor;
+    } else {
+      modeImageView.tintColor = self.darkGreyColor;
+    }
 
     NSURL *modeImageURL = [segment respondsToSelector:@selector(tripSegmentModeImageURL)]
       ? [segment tripSegmentModeImageURL]
@@ -217,7 +224,7 @@
       SGLabel *titleLabel = [[SGLabel alloc] initWithFrame:rect];
       titleLabel.font = modeTitleFont;
       titleLabel.text = modeTitle;
-      titleLabel.textColor = _textColor ? : [SGStyleManager darkTextColor];
+      titleLabel.textColor = _textColor ? : (self.colorCodingTransitIcon ? self.lightGreyColor : self.darkGreyColor);
       titleLabel.alpha = modeImageView.alpha;
       [self addSubview:titleLabel];
       

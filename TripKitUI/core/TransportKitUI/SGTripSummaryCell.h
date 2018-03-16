@@ -45,6 +45,20 @@ typedef void(^SGTripSummaryCellActionBlock)(UIControl *sender);
  */
 @property (nonatomic, assign) BOOL colorCodingTransitIcon;
 
+/**
+ This color is used for darker texts around the cell. In addition, it is also
+ the color which will be used to tint the transport mode icons in the segment
+ view if `colorCodingTransitIcon` is set to NO.
+ */
+@property (nonatomic, strong) UIColor *darkGreyColor;
+
+/**
+ This color is used for lighter texts around the cell. In addition, it is also the color which
+ the color will be used to tint non-PT modes in the segment view if `colorCodingTransitIcon`
+ is set to YES.
+ */
+@property (nonatomic, strong) UIColor *lightGreyColor;
+
 @property (nullable, nonatomic, strong) NSTimeZone *relativeTimeZone;
 
 @property (nullable, nonatomic, strong) UIColor *preferredTintColor UI_APPEARANCE_SELECTOR;
