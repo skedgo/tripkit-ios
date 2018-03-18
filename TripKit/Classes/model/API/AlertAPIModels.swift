@@ -61,13 +61,13 @@ extension API {
     public let operators: [String]?
     public let serviceTripIDs: [String]?
     public let stopCodes: [String]?
-    public let routeIDs: [String]?
+//    public let routeIDs: [String]?
     public let routes: [API.Route]?
     public let modeIdentifier: String?
   }
   
   public struct Route: Codable {
-    public let id: Int?
+    public let id: String?
     public let name: String?
     public let number: String?
   }

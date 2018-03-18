@@ -29,26 +29,70 @@ public class TKSectionedAlertViewModel {
   
   // MARK: -
   
-  private func alertItems(from decoded: [API.AlertMapping]) -> [String: [String]] {
-    var itemsByModes: [String: [String]] = [:]
-    decoded.forEach { (mapping) in
+  private func alertItems(from decoded: [API.AlertMapping]) -> [String: [AlertGroup]] {
+    var alertGroupsByModes: [String: [AlertGroup]] = [:]
+    var tmp: [AlertGroup] = []
+    decoded.forEach { mapping in
       let mode = mapping.modeIdentifier ?? "Unknown mode"
-      if let existing = itemsByModes[mode] {
-        let existingSet = Set(existing)
-        let newSet = Set(mapping.routeIDs)
-        itemsByModes[mode] = Array(existingSet.union(newSet))
+      if let existing = alertGroupsByModes[mode] {
+        var currentRouteIds = existing.map { $0.routeId }
+        tmp = existing
+        mapping.routes?.forEach {
+          if let index = currentRouteIds.index(of: $0.identifier) {
+            var currentGroup = tmp[index]
+            currentGroup.alerts.append(mapping)
+            tmp[index] = currentGroup
+            alertGroupsByModes[mode] = tmp
+          } else {
+            let newGroup = AlertGroup(routeId: $0.identifier, alerts: [mapping])
+            tmp.append(newGroup)
+            currentRouteIds.append($0.identifier)
+            alertGroupsByModes[mode] = tmp
+          }
+        }
       } else {
-        itemsByModes[mode] = mapping.routeIDs
+        var groups: [AlertGroup] = []
+        mapping.routes?.forEach {
+          let newGroup = AlertGroup(routeId: $0.identifier, alerts: [mapping])
+          groups.append(newGroup)
+        }
+        alertGroupsByModes[mode] = groups
       }
     }
-    return itemsByModes
+    
+    return alertGroupsByModes
+    
+//    var itemsByModes: [String: [String]] = [:]
+//    decoded.forEach { (mapping) in
+//      let mode = mapping.modeIdentifier ?? "Unknown mode"
+//      if let existing = itemsByModes[mode] {
+//        let existingSet = Set(existing)
+//        let newSet = Set(mapping.routeIds)
+//        itemsByModes[mode] = Array(existingSet.union(newSet))
+//      } else {
+//        itemsByModes[mode] = mapping.routeIds
+//      }
+//    }
+//    return itemsByModes
   }
   
-  private func alertSections(from itemsByMode: [String: [String]]) -> [AlertSection] {
+//  private func alertSections(from itemsByMode: [String: [String]]) -> [AlertSection] {
+//    var sections: [AlertSection] = []
+//
+//    itemsByMode.forEach { (key, value) in
+//      let items = value.map { AlertItem(routeId: $0) }
+//      let section = AlertSection(header: key, items: items)
+//      sections.append(section)
+//    }
+//
+//    return sections
+//  }
+  
+  private func alertSections(from alertGroupsByMode: [String: [AlertGroup]]) -> [AlertSection] {
     var sections: [AlertSection] = []
     
-    itemsByMode.forEach { (key, value) in
-      let items = value.map { AlertItem(name: $0) }.sorted(by: { $0.name < $1.name })
+    alertGroupsByMode.forEach { (key, value) in
+      let items = value.map { AlertItem(alertGroup: $0) }
       let section = AlertSection(header: key, items: items)
       sections.append(section)
     }
@@ -62,17 +106,32 @@ public class TKSectionedAlertViewModel {
 
 extension API.AlertMapping {
   
-  var routeIDs: [String] {
-    guard let routes = self.routes else { return ["Unknown"] }
-    return routes.flatMap { $0.number ?? $0.name ?? nil }
+  var routeIds: [String] {
+    guard let routes = self.routes else { return [] }
+    return routes.map { $0.identifier }
+  }
+  
+}
+
+extension API.Route {
+  
+  var identifier: String {
+    return self.number ?? self.name ?? self.id ?? "genericId"
   }
   
 }
 
 // MARK: -
 
+struct AlertGroup {
+  var routeId: String
+  var alerts: [API.AlertMapping]
+}
+
+// MARK: -
+
 struct AlertItem {
-  var name: String
+  var alertGroup: AlertGroup
 }
 
 // MARK: -

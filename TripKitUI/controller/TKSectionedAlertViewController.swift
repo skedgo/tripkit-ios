@@ -40,7 +40,7 @@ public class TKSectionedAlertViewController: UITableViewController {
       if cell == nil {
         cell = UITableViewCell(style: .default, reuseIdentifier: "StandardCell")
       }
-      cell!.textLabel?.text = item.name
+      cell!.textLabel?.text = item.alertGroup.routeId + " (\(item.alertGroup.alerts.count))"
       return cell!
     })
     
@@ -48,5 +48,16 @@ public class TKSectionedAlertViewController: UITableViewController {
       .observeOn(MainScheduler.instance)
       .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
+    
+    tableView.rx.itemSelected
+      .map { dataSource[$0] }
+      .subscribe(onNext: { [unowned self] in
+        self.didSelect($0)
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  private func didSelect(_ alertItem: AlertItem) {
+    print("there are \(alertItem.alertGroup.alerts.count) alerts in this group")
   }
 }
