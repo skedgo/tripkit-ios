@@ -197,11 +197,6 @@ typedef void (^SGCalendarResultsBlock)(NSString *string, NSArray *results);
 
 #pragma mark - SGAutocompletionDataProvider
 
-- (SGAutocompletionDataProviderResultType)resultType
-{
-  return SGAutocompletionDataProviderResultTypeLocation;
-}
-
 - (NSArray *)autocompleteFast:(NSString *)string forMapRect:(MKMapRect)mapRect
 {
 #pragma unused(mapRect) // no filtering based on map rect for events

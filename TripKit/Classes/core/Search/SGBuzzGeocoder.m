@@ -179,11 +179,6 @@
 
 #pragma mark - SGAutocompletionDataProvider
 
-- (SGAutocompletionDataProviderResultType)resultType
-{
-  return SGAutocompletionDataProviderResultTypeLocation;
-}
-
 - (void)autocompleteSlowly:(NSString *)string
                 forMapRect:(MKMapRect)mapRect
                 completion:(SGAutocompletionDataResultBlock)completion

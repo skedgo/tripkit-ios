@@ -18,14 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^SGAutocompletionDataResultBlock)(NSArray <SGAutocompletionResult*> * _Nullable results);
 typedef void(^SGAutocompletionDataActionBlock)(BOOL refreshRequired);
 
-typedef NS_ENUM(NSInteger, SGAutocompletionDataProviderResultType) {
-  SGAutocompletionDataProviderResultTypeLocation = 1,
-  SGAutocompletionDataProviderResultTypeRegion   = 2,
-};
-
 @protocol SGAutocompletionDataProvider <NSObject>
-
-@property (nonatomic, assign, readonly) SGAutocompletionDataProviderResultType resultType;
 
 @optional
 
@@ -66,8 +59,6 @@ typedef NS_ENUM(NSInteger, SGAutocompletionDataProviderResultType) {
  @return The annotation for the object that you previously provided.
  */
 - (nullable id<MKAnnotation>)annotationForAutocompletionResult:(SGAutocompletionResult *)result;
-
-- (void)setMapView:(MKMapView *)mapView;
 
 @end
 

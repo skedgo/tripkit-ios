@@ -36,7 +36,6 @@
 #import "SGCustomEvent.h"
 #import "SGCustomEventRecurrenceRule.h"
 
-
 // Headers
 #import "TKConstants.h"
 

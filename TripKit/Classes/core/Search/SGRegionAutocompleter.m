@@ -24,11 +24,6 @@
 
 #pragma mark - SGAutocompletionDataProvider
 
-- (SGAutocompletionDataProviderResultType)resultType
-{
-  return SGAutocompletionDataProviderResultTypeRegion;
-}
-
 - (NSArray *)autocompleteFast:(NSString *)string forMapRect:(MKMapRect)mapRect
 {
   NSArray *allRegions = [TKRegionManager.shared regions];

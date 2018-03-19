@@ -10,7 +10,6 @@
 #import <MapKit/MapKit.h>
 
 #import "SGSearchDataSource.h"
-#import "SGAutocompletionDataProvider.h"
 
 typedef enum {
 	SGAutocompletionResultCurrentLocation, // => nil
@@ -21,20 +20,22 @@ typedef enum {
 } SGAutocompletionResultType;
 
 @class SGAutocompletionResult;
+@class SGAutocompletionDataSourceSwiftStorage;
 
-typedef void(^SGSearchAutocompletionActionBlock)(BOOL refreshRequired);
-typedef void(^SGSearchAutocompletionResultBlock)(SGAutocompletionResultType resultType, SGAutocompletionResult *result);
+NS_ASSUME_NONNULL_BEGIN
+
+typedef void(^SGSearchAutocompletionResultBlock)(SGAutocompletionResultType resultType, SGAutocompletionResult * _Nullable result);
 
 @interface SGAutocompletionDataSource : NSObject
 #if TARGET_OS_IPHONE
   <SGSearchDataSource>
 #endif
 
-- (instancetype)initWithDataProviders:(NSArray<id<SGAutocompletionDataProvider>> *)dataProviders;
+- (instancetype)initWithStorage:(SGAutocompletionDataSourceSwiftStorage *)storage;
+
+@property (nonatomic, strong) SGAutocompletionDataSourceSwiftStorage *storage;
 
 @property (nonatomic, assign) BOOL showAccessoryButtons;
-
-@property (nonatomic, assign, readonly) SGAutocompletionDataProviderResultType granularity;
 
 /**
  * Main method required to configure the autocompleter for a new search.
@@ -44,15 +45,6 @@ typedef void(^SGSearchAutocompletionResultBlock)(SGAutocompletionResultType resu
                                       showSearchOptions:(BOOL)showSearchOptions;
 
 /**
- * Method that kicks of autocompletion. If it found something interesting
- * it'll call the completion/action block which tells the caller to trigger
- * a refresh of whatever thingy this data source provides data for.
- */
-- (void)autocomplete:(NSString *)string
-          forMapRect:(MKMapRect)mapRect
-          completion:(SGSearchAutocompletionActionBlock)completion;
-
-/**
  * Call this when the user picks an index path. It'll then tell you what to do.
  */
 - (void)processSelectionOfIndexPath:(NSIndexPath *)indexPath
@@ -60,3 +52,5 @@ typedef void(^SGSearchAutocompletionResultBlock)(SGAutocompletionResultType resu
 
 
 @end
+
+NS_ASSUME_NONNULL_END

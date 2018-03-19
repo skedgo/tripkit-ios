@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)stringForScoringOfString:(NSString *)string;
 
-@property (nonatomic, weak) id<SGAutocompletionDataProvider> provider;
+@property (nonatomic, weak, nullable) id provider;
 @property (nonatomic, strong) id object;
 
 @property (nonatomic, copy) NSString *title;

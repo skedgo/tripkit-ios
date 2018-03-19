@@ -236,11 +236,6 @@
 
 #pragma mark - SGAutocompletionDataProvider
 
-- (SGAutocompletionDataProviderResultType)resultType
-{
-  return SGAutocompletionDataProviderResultTypeLocation;
-}
-
 - (NSArray *)autocompleteFast:(NSString *)string forMapRect:(MKMapRect)mapRect
 {
 #pragma unused (mapRect) // search for contacts everywhere, address book matchs, don't have coordinate information,s o we can't score based on map rect here

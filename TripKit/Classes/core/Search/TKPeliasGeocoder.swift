@@ -86,8 +86,6 @@ extension TKPeliasGeocoder: SGGeocoder {
 
 extension TKPeliasGeocoder: SGAutocompletionDataProvider {
   
-  public var resultType: SGAutocompletionDataProviderResultType { return .location }
-  
   public func autocompleteSlowly(_ string: String, for mapRect: MKMapRect, completion: @escaping SGAutocompletionDataResultBlock) {
     
     guard !string.isEmpty else {
