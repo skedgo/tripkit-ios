@@ -46,7 +46,7 @@ class TKShareHelperTest: XCTestCase {
   }
 
   func testW3WQueryUrlWithLatLng() throws {
-    let geocoder = SGAppleGeocoder()
+    let geocoder = TKAppleGeocoder()
     let url = URL(string: "tripgo:///go?tlat=-33.94501&tlng=151.25807&type=1&time=1385535734")!
     
     guard let result = try TKShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first() else { XCTFail(); return }
@@ -65,7 +65,7 @@ class TKShareHelperTest: XCTestCase {
   
   
   func testMeetUrl() throws {
-    let geocoder = SGAppleGeocoder()
+    let geocoder = TKAppleGeocoder()
     let url = URL(string: "tripgo:///meet?lat=-33.94501&lng=151.25807&at=1385535734")!
     
     guard let result = try TKShareHelper.meetingDetails(for: url, using: geocoder).toBlocking().first() else { XCTFail(); return }

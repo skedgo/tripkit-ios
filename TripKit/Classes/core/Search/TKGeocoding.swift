@@ -18,22 +18,16 @@ public protocol TKGeocoding {
 
 public protocol TKAutocompleting {
   
-  func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[SGAutocompletionResult]>
+  func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[SGAutocompletionResult]>
   
   func annotation(for result: SGAutocompletionResult) -> Single<MKAnnotation>
   
-  var additionalActionString: String? { get }
-  
-  func performAdditionalAction(completion: @escaping (Bool) -> Void)
+  var additionalAction: (String, Single<Bool>)? { get }
   
 }
 
 extension TKAutocompleting {
   
-  public var additionalActionString: String? { return nil }
-  
-  public func performAdditionalAction(completion: @escaping (Bool) -> Void) {
-    completion(false)
-  }
+  public var additionalAction: (String, Single<Bool>)? { return nil }
   
 }

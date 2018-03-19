@@ -15,7 +15,7 @@ public enum TKGeocodingBackwardscompatibilityError: Error {
   case couldNotCreateAnnotation
 }
 
-extension SGBaseGeocoder: TKGeocoding {
+extension SGGeocoder where Self: TKGeocoding {
 
   public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[SGKNamedCoordinate]> {
     return Single.create { subscriber in
@@ -33,17 +33,22 @@ extension SGBaseGeocoder: TKGeocoding {
   
 }
 
+extension SGAddressBookManager: TKGeocoding { }
+extension SGBaseGeocoder: TKGeocoding { }
+extension TKPeliasGeocoder: TKGeocoding { }
+
 
 extension SGAutocompletionDataProvider where Self: TKAutocompleting {
   
-  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[SGAutocompletionResult]> {
+  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[SGAutocompletionResult]> {
     if let fast = self.autocompleteFast?(input, for: mapRect) {
-      return Single.just(fast)
+      return Observable.just(fast)
     
     } else {
-      return Single.create { subscriber in
+      return Observable.create { subscriber in
         self.autocompleteSlowly?(input, for: mapRect) { results in
-          subscriber(.success(results ?? []))
+          subscriber.onNext(results ?? [])
+          subscriber.onCompleted()
         }
         return Disposables.create()
       }
@@ -58,12 +63,16 @@ extension SGAutocompletionDataProvider where Self: TKAutocompleting {
     }
   }
   
-  public var additionalActionString: String? {
-    return self.additionalActionString?()
-  }
-  
-  public func performAdditionalAction(completion: @escaping (Bool) -> Void) {
-    self.additionalAction?(completion)
+  public var additionalAction: (String, Single<Bool>)? {
+    guard let title = self.additionalActionString?(), let handler = (self as SGAutocompletionDataProvider).additionalAction else { return nil }
+    
+    let action = Single<Bool>.create { subscriber in
+      handler { refresh in
+        subscriber(.success(refresh))
+      }
+      return Disposables.create()
+    }
+    return (title, action)
   }
   
 }

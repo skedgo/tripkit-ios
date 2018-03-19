@@ -21,8 +21,15 @@ extension SGAutocompletionDataSource {
   
   @objc
   @available(*, deprecated: 9.3, message: "Use `init(autocompleters:)` instead")
-  public convenience init(dataProviders: [SGAutocompletionDataProvider]) {
-    let autocompleters = dataProviders.flatMap { $0 as? TKAutocompleting }
+  public convenience init(dataProviders: [Any]) {
+    let autocompleters = dataProviders.flatMap { provider -> TKAutocompleting? in
+      if let autocompleter = provider as? TKAutocompleting {
+        return autocompleter
+      } else {
+        print("Ignoring \(provider)")
+        return nil
+      }
+    }
     self.init(autocompleters: autocompleters)
   }
   
@@ -41,7 +48,6 @@ extension SGAutocompletionDataSource {
         let observables = self.storage.providers
           .map { provider in
             provider.autocomplete(input, near: self.storage.mapRect)
-              .asObservable()
               .map { results -> [SGAutocompletionResult] in
                 results.forEach { $0.provider = provider as AnyObject }
                 return results
@@ -72,6 +78,7 @@ extension SGAutocompletionDataSource {
   @objc(autocomplete:forMapRect:completion:)
   public func autocomplete(_ input: String, for mapRect: MKMapRect, completion: @escaping (Bool) -> Void) {
     
+    storage.mapRect = mapRect
     storage.inputText.value = input
     
     storage.results
@@ -94,13 +101,67 @@ extension SGAutocompletionDataSource {
 
   @objc
   var additionalActions : [String] {
-    return providers.flatMap { $0.additionalActionString }
+    return providers.flatMap { $0.additionalAction?.0 }
   }
   
-  @objc(performAdditionalActionAtIndex:completion:)
-  func performAdditionalAction(at index: Int, completion: @escaping (Bool) -> Void) {
-    let candidates = providers.filter { $0.additionalActionString != nil }
-    candidates[index].performAdditionalAction(completion: completion)
+}
+
+// MARK: - Selections
+
+extension SGAutocompletionDataSource {
+
+  public enum Selection {
+    case currentLocation
+    case dropPin
+    case refresh
+    case searchForMore
+    case autocompletion(MKAnnotation)
+  }
+  
+  /// Call to figure out what action to perform when user taps soemthing
+  ///
+  /// - Parameter indexPath: Selected index path
+  /// - Parameter refreshHandler: Called if a autocompletion provider requests an action
+  /// - Returns: Action to perform. `nil` returned if nothing to do, in which case the refresh handler will be called.
+  public func processSelection(indexPath: IndexPath) -> Single<Selection> {
+    switch type(ofSection: indexPath.section) {
+    case .sticky:
+      switch stickyOption(at: indexPath) {
+      case .currentLocation: return Single.just(.currentLocation)
+      case .droppedPin: return Single.just(.dropPin)
+      case .nextEvent, .unknown:
+        assertionFailure("Unexpected sticky: \(indexPath)")
+        return Single.just(.refresh)
+      }
+    
+    case .autocompletion:
+      if indexPath.item < autocompletionResults.count {
+        let result = autocompletionResults[indexPath.item]
+        guard let provider = result.provider as? TKAutocompleting else {
+          assertionFailure("Couldn't get provider")
+          return Single.just(.refresh)
+        }
+        return provider.annotation(for: result)
+          .map { .autocompletion($0) }
+
+      } else {
+        assertionFailure("Invalid index path for autocompletion: \(indexPath)")
+        return Single.just(.refresh)
+      }
+    
+    case .more:
+      switch extraRow(at: indexPath) {
+      case .searchForMore: return Single.just(.searchForMore)
+      case .provider:
+        let additionalRow = indexPath.item - 1 // subtract 'press search for more'
+        let actions = providers.flatMap { $0.additionalAction }
+        guard additionalRow >= 0 && additionalRow < actions.count else {
+          assertionFailure("Invalid index path for extras: \(indexPath)")
+          return Single.just(.refresh)
+        }
+        return actions[additionalRow].1.map { _ in .refresh }
+      }
+    }
   }
   
 }

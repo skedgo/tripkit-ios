@@ -14,24 +14,6 @@
 #import "SGAutocompletionDataProvider.h"
 #import "SGAutocompletionResult.h"
 
-typedef enum {
-	SGSearchSectionSticky,
-	SGSearchSectionAutocompletion,
-	SGSearchSectionMore,
-} SGSearchSection;
-
-typedef enum {
-	SGSearchStickyUnknown = 0,
-	SGSearchStickyCurrentLocation,
-	SGSearchStickyDroppedPin,
-	SGSearchStickyNextEvent,
-} SGSearchSticky;
-
-typedef enum {
-	SGSearchExtraRowSearchForMore = 0,
-	SGSearchExtraRowProvider,
-} SGSearchExtraRow;
-
 
 @interface SGAutocompletionDataSource ()
 
@@ -67,67 +49,8 @@ typedef enum {
   [self prepareForNewSearch];
 }
 
-- (void)processSelectionOfIndexPath:(NSIndexPath *)indexPath
-                             result:(SGSearchAutocompletionResultBlock)resultBlock
-{
-  SGSearchSection sectionType = [self typeOfSection:indexPath.section];
-  switch (sectionType) {
-    case SGSearchSectionSticky: {
-      SGSearchSticky stickyOption = [self stickyOptionAtIndexPath:indexPath];
-      switch (stickyOption) {
-        case SGSearchStickyCurrentLocation:
-          resultBlock(SGAutocompletionResultCurrentLocation, nil);
-          break;
-          
-        case SGSearchStickyDroppedPin:
-          resultBlock(SGAutocompletionResultDropPin, nil);
-          break;
-          
-        default:
-          [SGKLog warn:@"SGAutocompletionDataSource" format:@"Unexpected sticky: %d", stickyOption];
-          break;
-      }
-      break;
-    }
-      
-    case SGSearchSectionAutocompletion: {
-      if (indexPath.item < (NSInteger)self.autocompletionResults.count) {
-        SGAutocompletionResult *result = [self.autocompletionResults objectAtIndex:indexPath.item];
-        resultBlock(SGAutocompletionResultObject, result);
-      } else {
-        [SGKLog warn:@"SGAutocompletionDataSource" format:@"Invalid index path: %@", indexPath];
-      }
-      break;
-    }
-      
-    case SGSearchSectionMore: {
-      SGSearchExtraRow extraRow = [self extraRowAtIndexPath:indexPath];
-      switch (extraRow) {
-        case SGSearchExtraRowSearchForMore: {
-          resultBlock(SGAutocompletionResultSearchForMore, nil);
-          break;
-        }
-          
-        case SGSearchExtraRowProvider: {
-          NSInteger additionRowIndex = indexPath.item - 1; // substract 'press search for more row'
-          if (additionRowIndex < 0 || additionRowIndex >= (NSInteger)self.additionalActions.count) {
-            ZAssert(false, @"Selected %@ but there's not enough content: %@", indexPath, self.additionalActions);
-            return;
-          }
-          [self performAdditionalActionAtIndex:additionRowIndex completion:^(BOOL refreshRequired) {
-            if (refreshRequired) {
-              resultBlock(SGAutocompletionResultRefresh, nil);
-            }
-          }];
-          break;
-        }
-      }
-    }
-  }
-}
 
 #if TARGET_OS_IPHONE
-
 
 #pragma mark - SGSearchDataSource / UITableViewDataSource
 
@@ -314,7 +237,7 @@ typedef enum {
   return ! self.startedTyping && (self.showStickyForCurrentLocation || self.showStickyForDropPin);
 }
 
-- (SGSearchSection)typeOfSection:(NSUInteger)section
+- (SGSearchSection)typeOfSection:(NSInteger)section
 {
   BOOL stickies = [self showStickyOptions];
   BOOL filtered = self.autocompletionResults.count > 0;

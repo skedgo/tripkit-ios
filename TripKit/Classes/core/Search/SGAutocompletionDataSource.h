@@ -11,20 +11,29 @@
 
 #import "SGSearchDataSource.h"
 
-typedef enum {
-	SGAutocompletionResultCurrentLocation, // => nil
-	SGAutocompletionResultDropPin, // => nil
-	SGAutocompletionResultObject,
-	SGAutocompletionResultRefresh, // => nil, please refresh the view
-	SGAutocompletionResultSearchForMore, // => nil
-} SGAutocompletionResultType;
-
 @class SGAutocompletionResult;
 @class SGAutocompletionDataSourceSwiftStorage;
 
-NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger, SGSearchSection) {
+  SGSearchSectionSticky,
+  SGSearchSectionAutocompletion,
+  SGSearchSectionMore,
+};
 
-typedef void(^SGSearchAutocompletionResultBlock)(SGAutocompletionResultType resultType, SGAutocompletionResult * _Nullable result);
+typedef NS_ENUM(NSInteger, SGSearchSticky) {
+  SGSearchStickyUnknown = 0,
+  SGSearchStickyCurrentLocation,
+  SGSearchStickyDroppedPin,
+  SGSearchStickyNextEvent,
+};
+
+typedef NS_ENUM(NSInteger, SGSearchExtraRow) {
+  SGSearchExtraRowSearchForMore = 0,
+  SGSearchExtraRowProvider,
+};
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface SGAutocompletionDataSource : NSObject
 #if TARGET_OS_IPHONE
@@ -44,12 +53,11 @@ typedef void(^SGSearchAutocompletionResultBlock)(SGAutocompletionResultType resu
                                    showStickyForDropPin:(BOOL)stickyForDropped
                                       showSearchOptions:(BOOL)showSearchOptions;
 
-/**
- * Call this when the user picks an index path. It'll then tell you what to do.
- */
-- (void)processSelectionOfIndexPath:(NSIndexPath *)indexPath
-                             result:(SGSearchAutocompletionResultBlock)resultBlock;
+- (SGSearchSection)typeOfSection:(NSInteger)section;
 
+- (SGSearchExtraRow)extraRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (SGSearchSticky)stickyOptionAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

@@ -276,10 +276,10 @@
 		3A6DF2DC202C9AA00084CB2C /* UIView+Keyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF23F202C9AA00084CB2C /* UIView+Keyboard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF2DD202C9AA00084CB2C /* UIView+FindFirstResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF240202C9AA00084CB2C /* UIView+FindFirstResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
-		3A7A9007205FDECF00671547 /* SGAppleGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E421F0BC9DB00C6B337 /* SGAppleGeocoder.m */; };
-		3A7A9008205FDECF00671547 /* SGAppleGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E421F0BC9DB00C6B337 /* SGAppleGeocoder.m */; };
 		3A84F00E1F77021200B2F9A0 /* TripGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84F00D1F77021200B2F9A0 /* TripGroup.swift */; };
 		3A8F61211F190CE80017ACDA /* SGLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F61201F190CE80017ACDA /* SGLocationManager.swift */; };
+		3A92205C205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */; };
+		3A92205D205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */; };
 		3A92205F205FCBFF004E6C34 /* TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */; };
 		3A922060205FCBFF004E6C34 /* TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */; };
 		3A922062205FCEB9004E6C34 /* SGAutocompletionDataProvider+TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A922061205FCEB9004E6C34 /* SGAutocompletionDataProvider+TKGeocoding.swift */; };
@@ -302,7 +302,6 @@
 		3AA03E601F0BC9DB00C6B337 /* SGPermissionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E3D1F0BC9DB00C6B337 /* SGPermissionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA03E611F0BC9DB00C6B337 /* SGPermissionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E3E1F0BC9DB00C6B337 /* SGPermissionManager.m */; };
 		3AA03E621F0BC9DB00C6B337 /* SGAggregateGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E401F0BC9DB00C6B337 /* SGAggregateGeocoder.swift */; };
-		3AA03E631F0BC9DB00C6B337 /* SGAppleGeocoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E411F0BC9DB00C6B337 /* SGAppleGeocoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA03E651F0BC9DB00C6B337 /* SGAutocompletionDataProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E431F0BC9DB00C6B337 /* SGAutocompletionDataProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA03E661F0BC9DB00C6B337 /* SGAutocompletionDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E441F0BC9DB00C6B337 /* SGAutocompletionDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA03E671F0BC9DB00C6B337 /* SGAutocompletionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E451F0BC9DB00C6B337 /* SGAutocompletionDataSource.m */; };
@@ -606,7 +605,6 @@
 		3ABBDA9E2032134900205042 /* SVKTransportModes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB761F06854F00147990 /* SVKTransportModes.m */; };
 		3ABBDA9F2032134900205042 /* TKRegionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB711F06854F00147990 /* TKRegionManager.swift */; };
 		3ABBDAA02032134D00205042 /* SGAggregateGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E401F0BC9DB00C6B337 /* SGAggregateGeocoder.swift */; };
-		3ABBDAA12032134D00205042 /* SGAppleGeocoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E411F0BC9DB00C6B337 /* SGAppleGeocoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAA32032134D00205042 /* SGAutocompletionDataProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E431F0BC9DB00C6B337 /* SGAutocompletionDataProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAA42032134D00205042 /* SGAutocompletionDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E441F0BC9DB00C6B337 /* SGAutocompletionDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAA52032134D00205042 /* SGAutocompletionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E451F0BC9DB00C6B337 /* SGAutocompletionDataSource.m */; };
@@ -1186,6 +1184,7 @@
 		3A787EC31D38F646009F9A18 /* TKJSONCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
 		3A84F00D1F77021200B2F9A0 /* TripGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripGroup.swift; sourceTree = "<group>"; };
 		3A8F61201F190CE80017ACDA /* SGLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGLocationManager.swift; sourceTree = "<group>"; };
+		3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAppleGeocoder.swift; sourceTree = "<group>"; };
 		3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocoding.swift; sourceTree = "<group>"; };
 		3A922061205FCEB9004E6C34 /* SGAutocompletionDataProvider+TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SGAutocompletionDataProvider+TKGeocoding.swift"; sourceTree = "<group>"; };
 		3A922064205FD393004E6C34 /* SGAutocompletionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SGAutocompletionDataSource.swift; sourceTree = "<group>"; };
@@ -1206,8 +1205,6 @@
 		3AA03E3D1F0BC9DB00C6B337 /* SGPermissionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPermissionManager.h; sourceTree = "<group>"; };
 		3AA03E3E1F0BC9DB00C6B337 /* SGPermissionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPermissionManager.m; sourceTree = "<group>"; };
 		3AA03E401F0BC9DB00C6B337 /* SGAggregateGeocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGAggregateGeocoder.swift; sourceTree = "<group>"; };
-		3AA03E411F0BC9DB00C6B337 /* SGAppleGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAppleGeocoder.h; sourceTree = "<group>"; };
-		3AA03E421F0BC9DB00C6B337 /* SGAppleGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAppleGeocoder.m; sourceTree = "<group>"; };
 		3AA03E431F0BC9DB00C6B337 /* SGAutocompletionDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAutocompletionDataProvider.h; sourceTree = "<group>"; };
 		3AA03E441F0BC9DB00C6B337 /* SGAutocompletionDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAutocompletionDataSource.h; sourceTree = "<group>"; };
 		3AA03E451F0BC9DB00C6B337 /* SGAutocompletionDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SGAutocompletionDataSource.m; sourceTree = "<group>"; };
@@ -2170,8 +2167,6 @@
 			isa = PBXGroup;
 			children = (
 				3AA03E401F0BC9DB00C6B337 /* SGAggregateGeocoder.swift */,
-				3AA03E411F0BC9DB00C6B337 /* SGAppleGeocoder.h */,
-				3AA03E421F0BC9DB00C6B337 /* SGAppleGeocoder.m */,
 				3AA03E431F0BC9DB00C6B337 /* SGAutocompletionDataProvider.h */,
 				3A922061205FCEB9004E6C34 /* SGAutocompletionDataProvider+TKGeocoding.swift */,
 				3AA03E441F0BC9DB00C6B337 /* SGAutocompletionDataSource.h */,
@@ -2195,6 +2190,7 @@
 				3AA03E551F0BC9DB00C6B337 /* SGRegionAutocompleter.m */,
 				3AA03E561F0BC9DB00C6B337 /* SGSearchDataSource.h */,
 				3A2D06EB1F83DE4B002DA194 /* TKAnnotationClusterer.swift */,
+				3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */,
 				3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */,
 				3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */,
 				3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */,
@@ -2856,7 +2852,6 @@
 				3ABBDA4D2032132D00205042 /* StopVisits.h in Headers */,
 				3ABBDA302032132400205042 /* TKRoutingParser.h in Headers */,
 				3ABBDAF62032136100205042 /* SGPermissionManager+AuthorizationAlert.h in Headers */,
-				3ABBDAA12032134D00205042 /* SGAppleGeocoder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3024,7 +3019,6 @@
 				3AB6C7071D1CD08E0089F687 /* TKRealTimeUpdatableHelper.h in Headers */,
 				3AFFABBC1F06854F00147990 /* SGNotifications.h in Headers */,
 				3AA03E5A1F0BC9DB00C6B337 /* SGCalendarManager.h in Headers */,
-				3AA03E631F0BC9DB00C6B337 /* SGAppleGeocoder.h in Headers */,
 				3AB6C6E61D1CD08E0089F687 /* Trip.h in Headers */,
 				3AB6C70F1D1CD08E0089F687 /* TKSettings.h in Headers */,
 				3AA03E681F0BC9DB00C6B337 /* SGAutocompletionResult.h in Headers */,
@@ -3392,6 +3386,7 @@
 				3ABBDA9B2032134900205042 /* SVKServer.swift in Sources */,
 				3ABBDA702032133300205042 /* PricingTableAPIModel.swift in Sources */,
 				3ABBDA492032132D00205042 /* Shape+CoreDataProperties.swift in Sources */,
+				3A92205D205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */,
 				3ABBDADD2032135A00205042 /* NSError+customError.swift in Sources */,
 				3ABBDA1A2032132400205042 /* TKBuzzInfoProvider.m in Sources */,
 				3ABBDA482032132D00205042 /* Shape+CoreDataClass.swift in Sources */,
@@ -3407,7 +3402,6 @@
 				3ABBDB012032136900205042 /* SVKServer+Rx.swift in Sources */,
 				3ABBDA1B2032132400205042 /* TKBuzzInfoProvider.swift in Sources */,
 				3ABBDA2D2032132400205042 /* TKReporter.swift in Sources */,
-				3A7A9008205FDECF00671547 /* SGAppleGeocoder.m in Sources */,
 				3ABBDAAF2032134D00205042 /* SGFoursquareGeocoder.swift in Sources */,
 				3ABBDA4B2032132D00205042 /* StopLocation.m in Sources */,
 				3ABBDAD52032135A00205042 /* Codable+Helpers.swift in Sources */,
@@ -3810,6 +3804,7 @@
 				3A922062205FCEB9004E6C34 /* SGAutocompletionDataProvider+TKGeocoding.swift in Sources */,
 				3AB6C6FC1D1CD08E0089F687 /* TKBuzzInfoProvider.swift in Sources */,
 				3AA03E741F0BC9DB00C6B337 /* SGKNamedCoordinate+Attribution.swift in Sources */,
+				3A92205C205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */,
 				3A096E261F20DDFB00666E59 /* SGCalendarManager.swift in Sources */,
 				3A3C9BAA1F751FF300C8D476 /* ServiceAPIModel.swift in Sources */,
 				3AA03E711F0BC9DB00C6B337 /* SGFoursquareGeocoder.swift in Sources */,
@@ -3847,7 +3842,6 @@
 				3AFFABD21F06854F00147990 /* STKAnnotations.swift in Sources */,
 				3AFFAE041F06B91300147990 /* StopVisits+Shareable.swift in Sources */,
 				3AFFABA21F06854F00147990 /* NSString+Sizing.m in Sources */,
-				3A7A9007205FDECF00671547 /* SGAppleGeocoder.m in Sources */,
 				3AB6C6DF1D1CD08E0089F687 /* Service.m in Sources */,
 				3AFFABB11F06854F00147990 /* SGKConfig.m in Sources */,
 				3A2D06EC1F83DE4B002DA194 /* TKAnnotationClusterer.swift in Sources */,
