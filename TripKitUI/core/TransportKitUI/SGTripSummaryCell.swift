@@ -100,6 +100,8 @@ extension SGTripSummaryCell {
   private func updateSegments(nano: Bool) {
     segmentView?.allowWheelchairIcon = allowWheelchairIcon
     segmentView?.colorCodingTransitIcon = colorCodingTransitIcon
+    segmentView?.darkTextColor = darkTextColor
+    segmentView?.lightTextColor = lightTextColor
     segmentView?.configure(forSegments: _trip.segments(with: .inSummary), allowSubtitles: !nano, allowInfoIcons: !nano)
   }
   
