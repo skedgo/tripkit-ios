@@ -30,15 +30,16 @@
 /**
  This color is used for darker texts. In addition, this is also the color which
  will be used to tint the transport mode icons if `colorCodingTransitIcon` is
- set to NO.
+ set to NO. If value is nil, then black is used.
  */
-@property (nonatomic, strong) UIColor *darkGreyColor;
+@property (nonatomic, strong, nullable) UIColor *darkTextColor;
 
 /**
  This color is used on lighter texts. In addition, this is also the color which
- will be used to tint non-PT modes if `colorCodingTransitIcon` is set to YES.
+ will be used to tint non-PT modes if `colorCodingTransitIcon` is set to YES. If
+ value is nil, then light grey with value 148/255 is used.
  */
-@property (nonatomic, strong) UIColor *lightGreyColor;
+@property (nonatomic, strong, nullable) UIColor *lightTextColor;
 
 - (void)configureForSegments:(NSArray<id<STKTripSegmentDisplayable>> *)segments
               allowSubtitles:(BOOL)allowSubtitles
