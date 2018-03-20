@@ -33,9 +33,11 @@ extension SGGeocoder where Self: TKGeocoding {
   
 }
 
-extension SGAddressBookManager: TKGeocoding { }
 extension SGBaseGeocoder: TKGeocoding { }
 extension TKPeliasGeocoder: TKGeocoding { }
+#if os(iOS)
+  extension SGAddressBookManager: TKGeocoding { }
+#endif
 
 
 extension SGAutocompletionDataProvider where Self: TKAutocompleting {
@@ -77,10 +79,11 @@ extension SGAutocompletionDataProvider where Self: TKAutocompleting {
   
 }
 
-extension SGAddressBookManager: TKAutocompleting { }
 extension SGBuzzGeocoder: TKAutocompleting { }
 extension SGCalendarManager: TKAutocompleting { }
 extension SGFoursquareGeocoder: TKAutocompleting { }
 extension SGRegionAutocompleter: TKAutocompleting { }
 extension TKPeliasGeocoder: TKAutocompleting { }
-
+#if os(iOS)
+  extension SGAddressBookManager: TKAutocompleting { }
+#endif
