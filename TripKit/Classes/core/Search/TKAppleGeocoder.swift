@@ -114,7 +114,7 @@ fileprivate class LocalSearchCompleterDelegate: NSObject, MKLocalSearchCompleter
   }
   
   func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-    // TODO: Handle error
+    // Ignoring errors
   }
   
 }

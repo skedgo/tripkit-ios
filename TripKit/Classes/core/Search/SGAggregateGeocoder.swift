@@ -26,10 +26,15 @@ extension TKAggregateGeocoder: TKGeocoding {
   
   public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[SGKNamedCoordinate]> {
 
-    let queries = geocoders.map { $0.geocode(input, near: mapRect).asObservable() }
+    let queries = geocoders.map {
+      $0.geocode(input, near: mapRect)
+        .asObservable()
+        .catchErrorJustReturn([]) // Individual failures shouldn't terminate the sequence
+    }
     return Observable
       .merge(queries)
       .filter { !$0.isEmpty }
+      .take(1)
       .asSingle()
   }
 
