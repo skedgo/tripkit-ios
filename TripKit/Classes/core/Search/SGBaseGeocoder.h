@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^SGGeocoderSuccessBlock)(NSString *query, NSArray<SGKNamedCoordinate *> *results);
 typedef void(^SGGeocoderFailureBlock)(NSString *query, NSError * __nullable error);
 
+NS_CLASS_DEPRECATED_IOS(2_0, 9_0, "Use TKGeocoding instead")
 @protocol SGGeocoder <NSObject>
 
 /**
