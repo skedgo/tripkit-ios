@@ -61,7 +61,7 @@ extension API {
     public let operators: [String]?
     public let serviceTripIDs: [String]?
     public let stopCodes: [String]?
-//    public let routeIDs: [String]?
+    public let routeIDs: [String]?
     public let routes: [API.Route]?
     public let modeIdentifier: String?
   }
