@@ -16,7 +16,7 @@ public class TKSectionedAlertViewModel {
   
   private let disposeBag = DisposeBag()
   
-  lazy var sections: Observable<[AlertSection]> = {
+  lazy var sections: Observable<[AlertSection]> = { [unowned self] in 
     return TKBuzzInfoProvider.rx_fetchTransitAlerts(forRegion: region)
       .map { self.alertItems(from: $0) }
       .map { self.alertSections(from: $0) }
@@ -61,32 +61,7 @@ public class TKSectionedAlertViewModel {
     }
     
     return alertGroupsByModes
-    
-//    var itemsByModes: [String: [String]] = [:]
-//    decoded.forEach { (mapping) in
-//      let mode = mapping.modeIdentifier ?? "Unknown mode"
-//      if let existing = itemsByModes[mode] {
-//        let existingSet = Set(existing)
-//        let newSet = Set(mapping.routeIds)
-//        itemsByModes[mode] = Array(existingSet.union(newSet))
-//      } else {
-//        itemsByModes[mode] = mapping.routeIds
-//      }
-//    }
-//    return itemsByModes
   }
-  
-//  private func alertSections(from itemsByMode: [String: [String]]) -> [AlertSection] {
-//    var sections: [AlertSection] = []
-//
-//    itemsByMode.forEach { (key, value) in
-//      let items = value.map { AlertItem(routeId: $0) }
-//      let section = AlertSection(header: key, items: items)
-//      sections.append(section)
-//    }
-//
-//    return sections
-//  }
   
   private func alertSections(from alertGroupsByMode: [String: [AlertGroup]]) -> [AlertSection] {
     var sections: [AlertSection] = []
@@ -126,6 +101,10 @@ extension API.Route {
 struct AlertGroup {
   var routeId: String
   var alerts: [API.AlertMapping]
+  
+  func componentAlerts() -> [API.Alert] {
+    return alerts.map { $0.alert }
+  }
 }
 
 // MARK: -

@@ -25,16 +25,24 @@ extension API {
       let type: ActionType
     }
     
+    public let title: String
+    public let text: String?
+    public let url: URL?
+    public let lastUpdate: TimeInterval?
+    public let remoteIcon: URL?
+    public var icon: SGKImage? {
+      switch severity {
+      case .info, .warning:
+        return STKInfoIcon.image(for: .warning, usage: .normal)
+      case .alert:
+        return STKInfoIcon.image(for: .alert, usage: .normal)
+      }
+    }
+    
     let hashCode: Int
     let severity: Severity
-    public let title: String
-    let text: String?
-    let url: URL?
-    let action: Action?
-    
-    let remoteIcon: URL?
+    let action: Action?    
     let location: API.Location?
-    let lastUpdate: TimeInterval?
     let startTime: TimeInterval?
     let endTime: TimeInterval?
     

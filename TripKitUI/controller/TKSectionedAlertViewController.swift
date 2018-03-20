@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxDataSources
+import SafariServices
 
 public class TKSectionedAlertViewController: UITableViewController {
   
@@ -58,6 +59,19 @@ public class TKSectionedAlertViewController: UITableViewController {
   }
   
   private func didSelect(_ alertItem: AlertItem) {
-    print("there are \(alertItem.alertGroup.alerts.count) alerts in this group")
+    let controller = TKAlertViewController(style: .plain)
+    controller.alerts = alertItem.alertGroup.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0.alert) }
+    controller.alertControllerDelegate = self
+    navigationController?.pushViewController(controller, animated: true)
   }
+  
+}
+
+extension TKSectionedAlertViewController: TKAlertViewControllerDelegate {
+  
+  public func alertViewController(_ controller: TKAlertViewController, didTapOnURL url: URL) {
+    let browser = SFSafariViewController(url: url)
+    present(browser, animated: true, completion: nil)
+  }
+  
 }

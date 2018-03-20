@@ -37,7 +37,7 @@ class TKAlertCell: UITableViewCell {
     return UINib(nibName: String(describing: self), bundle: Bundle(for: TKAlertCell.self))
   }
   
-  @objc var alert: TKAlertModel? {
+  @objc var alert: TKAlert? {
     didSet {
       updateUI()
     }

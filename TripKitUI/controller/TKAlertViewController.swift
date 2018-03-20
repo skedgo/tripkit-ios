@@ -15,8 +15,7 @@ import RxSwift
   import TripKit
 #endif
 
-@objc
-public protocol TKAlertModel {
+@objc public protocol TKAlert {
   var title: String? { get }
   var icon: SGKImage? { get }
   var iconURL: URL? { get }
@@ -25,12 +24,42 @@ public protocol TKAlertModel {
   var lastUpdated: Date? { get }
 }
 
+// MARK: -
+
+/// This is a wrapper class that converts an instance of API.Alert into
+/// an instance that can conform to object protocol `TKAlert`.
+class TKAlertAPIAlertClassWrapper {
+  private let alert: API.Alert
+
+  init(alert: API.Alert) {
+    self.alert = alert
+  }
+}
+
+extension TKAlertAPIAlertClassWrapper: TKAlert {
+  var title: String? { return alert.title }
+  var icon: SGKImage? { return alert.icon }
+  var iconURL: URL? { return alert.remoteIcon }
+  var text: String? { return alert.text }
+  var infoURL: URL? { return alert.url }
+  var lastUpdated: Date? {
+    guard let inTimeInterval = alert.lastUpdate else { return nil }
+    // TODO: Check if this is indeed from 1970.
+    return Date(timeIntervalSince1970: inTimeInterval)
+  }
+}
+
+// MARK: -
+
 public class TKAlertViewController: UITableViewController {
   
-  private let disposeBag = DisposeBag()
+  @objc public weak var alertControllerDelegate: TKAlertViewControllerDelegate?
+  
   private weak var emptyAlertView: TKEmptyAlertView?
   
-  private var alerts: [TKAlertModel] = [] {
+  private let disposeBag = DisposeBag()
+  
+  public var alerts: [TKAlert] = [] {
     didSet {
       if alerts.isEmpty {
         insertEmptyAlertsView()
@@ -41,9 +70,6 @@ public class TKAlertViewController: UITableViewController {
     }
   }
   
-  public var transitAlerts: Observable<[TKAlertModel]>?
-  @objc public weak var alertControllerDelegate: TKAlertViewControllerDelegate?
-  
   // MARK: - View lifecycle
   
   override public func viewDidLoad() {
@@ -51,14 +77,8 @@ public class TKAlertViewController: UITableViewController {
     
     self.title = Loc.Alerts
     
-    if let navigator = navigationController,
-      let topCtr = navigator.viewControllers.first, topCtr == self {
-      let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
-      doneButton.rx.tap
-        .subscribe(onNext: { [unowned self] in
-          self.dismiss(animated: true, completion: nil)
-        })
-        .disposed(by: disposeBag)
+    if navigationController?.topViewController == self {
+      let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped(_:)))
       navigationItem.leftBarButtonItem = doneButton
     }
     
@@ -66,15 +86,10 @@ public class TKAlertViewController: UITableViewController {
     tableView.estimatedRowHeight = 150
     tableView.register(TKAlertCell.nib, forCellReuseIdentifier: String(describing: TKAlertCell.self))
     SGStyleManager.styleTableView(forTileList: tableView)
-    
-    transitAlerts?
-      .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { [weak self] in
-        if let strongSelf = self {
-          strongSelf.alerts = $0
-        }
-      })
-      .disposed(by: disposeBag)
+  }
+  
+  @objc private func doneButtonTapped(_ sender: UIButton) {
+    dismiss(animated: true, completion: nil)
   }
   
   // MARK: - UITableViewDataSource
@@ -142,7 +157,7 @@ public class TKAlertViewController: UITableViewController {
 
 @objc public protocol TKAlertViewControllerDelegate {
   
-  @objc optional func alertViewController(_ controller: TKAlertViewController, didSelectAlert alert: TKAlertModel)
+  @objc optional func alertViewController(_ controller: TKAlertViewController, didSelectAlert alert: TKAlert)
   @objc optional func alertViewController(_ controller: TKAlertViewController, didTapOnURL url: URL)
   
 }
