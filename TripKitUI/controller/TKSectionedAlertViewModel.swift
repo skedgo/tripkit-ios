@@ -18,7 +18,7 @@ public class TKSectionedAlertViewModel {
   
   lazy var sections: Observable<[AlertSection]> = { [unowned self] in 
     return TKBuzzInfoProvider.rx_fetchTransitAlerts(forRegion: region)
-      .map { self.alertItems(from: $0) }
+      .map { self.groupAlertMappings($0) }
       .map { self.alertSections(from: $0) }
       .share(replay: 1)
   }()
@@ -29,31 +29,31 @@ public class TKSectionedAlertViewModel {
   
   // MARK: -
   
-  private func alertItems(from decoded: [API.AlertMapping]) -> [String: [AlertGroup]] {
-    var alertGroupsByModes: [String: [AlertGroup]] = [:]
-    var tmp: [AlertGroup] = []
-    decoded.forEach { mapping in
+  private func groupAlertMappings(_ mappings: [API.AlertMapping]) -> [String: [AlertMappingGroup]] {
+    var alertGroupsByModes: [String: [AlertMappingGroup]] = [:]
+    var tmp: [AlertMappingGroup] = []
+    mappings.forEach { mapping in
       let mode = mapping.modeIdentifier ?? "Unknown mode"
       if let existing = alertGroupsByModes[mode] {
-        var currentRouteIds = existing.map { $0.routeId }
+        var currentRouteIds = existing.map { $0.label }
         tmp = existing
         mapping.routes?.forEach {
-          if let index = currentRouteIds.index(of: $0.identifier) {
+          if let index = currentRouteIds.index(of: $0.label) {
             var currentGroup = tmp[index]
-            currentGroup.alerts.append(mapping)
+            currentGroup.mappings.append(mapping)
             tmp[index] = currentGroup
             alertGroupsByModes[mode] = tmp
           } else {
-            let newGroup = AlertGroup(routeId: $0.identifier, alerts: [mapping])
+            let newGroup = AlertMappingGroup(label: $0.label, mappings: [mapping])
             tmp.append(newGroup)
-            currentRouteIds.append($0.identifier)
+            currentRouteIds.append($0.label)
             alertGroupsByModes[mode] = tmp
           }
         }
       } else {
-        var groups: [AlertGroup] = []
+        var groups: [AlertMappingGroup] = []
         mapping.routes?.forEach {
-          let newGroup = AlertGroup(routeId: $0.identifier, alerts: [mapping])
+          let newGroup = AlertMappingGroup(label: $0.label, mappings: [mapping])
           groups.append(newGroup)
         }
         alertGroupsByModes[mode] = groups
@@ -63,7 +63,7 @@ public class TKSectionedAlertViewModel {
     return alertGroupsByModes
   }
   
-  private func alertSections(from alertGroupsByMode: [String: [AlertGroup]]) -> [AlertSection] {
+  private func alertSections(from alertGroupsByMode: [String: [AlertMappingGroup]]) -> [AlertSection] {
     var sections: [AlertSection] = []
     
     alertGroupsByMode.forEach { (key, value) in
@@ -83,14 +83,14 @@ extension API.AlertMapping {
   
   var routeIds: [String] {
     guard let routes = self.routes else { return [] }
-    return routes.map { $0.identifier }
+    return routes.map { $0.label }
   }
   
 }
 
 extension API.Route {
   
-  var identifier: String {
+  var label: String {
     return self.number ?? self.name ?? self.id ?? "genericId"
   }
   
@@ -98,19 +98,19 @@ extension API.Route {
 
 // MARK: -
 
-struct AlertGroup {
-  var routeId: String
-  var alerts: [API.AlertMapping]
+struct AlertMappingGroup {
+  var label: String
+  var mappings: [API.AlertMapping]
   
-  func componentAlerts() -> [API.Alert] {
-    return alerts.map { $0.alert }
+  func alerts() -> [API.Alert] {
+    return mappings.map { $0.alert }
   }
 }
 
 // MARK: -
 
 struct AlertItem {
-  var alertGroup: AlertGroup
+  var alertGroup: AlertMappingGroup
 }
 
 // MARK: -

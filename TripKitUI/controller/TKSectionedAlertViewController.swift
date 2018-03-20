@@ -41,7 +41,7 @@ public class TKSectionedAlertViewController: UITableViewController {
       if cell == nil {
         cell = UITableViewCell(style: .default, reuseIdentifier: "StandardCell")
       }
-      cell!.textLabel?.text = item.alertGroup.routeId + " (\(item.alertGroup.alerts.count))"
+      cell!.textLabel?.text = item.alertGroup.label + " (\(item.alertGroup.mappings.count))"
       return cell!
     })
     
@@ -60,7 +60,7 @@ public class TKSectionedAlertViewController: UITableViewController {
   
   private func didSelect(_ alertItem: AlertItem) {
     let controller = TKAlertViewController(style: .plain)
-    controller.alerts = alertItem.alertGroup.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0.alert) }
+    controller.alerts = alertItem.alertGroup.mappings.map { TKAlertAPIAlertClassWrapper(alert: $0.alert) }
     controller.alertControllerDelegate = self
     navigationController?.pushViewController(controller, animated: true)
   }
