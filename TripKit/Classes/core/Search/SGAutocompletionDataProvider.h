@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^SGAutocompletionDataResultBlock)(NSArray <SGAutocompletionResult*> * _Nullable results);
 typedef void(^SGAutocompletionDataActionBlock)(BOOL refreshRequired);
 
-NS_CLASS_DEPRECATED(10_10, 10_11, 2_0, 9_0, "Use TKAutocompleting instead")
+NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
 @protocol SGAutocompletionDataProvider <NSObject>
 
 @optional
