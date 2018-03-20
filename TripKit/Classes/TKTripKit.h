@@ -36,7 +36,6 @@
 #import "SGCustomEvent.h"
 #import "SGCustomEventRecurrenceRule.h"
 
-
 // Headers
 #import "TKConstants.h"
 
@@ -86,7 +85,6 @@
 #import "SGTrackHelper.h"
 
 // Search
-#import "SGAppleGeocoder.h"
 #import "SGAutocompletionDataProvider.h"
 #import "SGAutocompletionDataSource.h"
 #import "SGAutocompletionResult.h"

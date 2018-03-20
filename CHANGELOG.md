@@ -18,9 +18,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Moved method to sign in with CloudKitID from TripKitBookings to TripKit
 - `TKDepartureView` can now be used without `SGTrackItem`
+- `TKAppleGeocoder` replaces `SGAppleGeocoder`, now with much improved autocompletion
 - `TKPeliasGeocoder` replaces `TKMapZenGeocoder` and is now using SkedGo's Pelias backend
 - When enabling or disabling the wheelchair mode, wheelchair information for public transport will also be toggled on and off accordingly
 - `SGCalendarManager` now shows events in next 24h when autocompleting empty string
+- `SGAutocompletionDataSource` now has a new interface and is using Rx, resulting in faster autocompletion
+- `SGAddressBookManager` is now using locale for formatting addresses, not always using Australian style
 
 ### Removed
 

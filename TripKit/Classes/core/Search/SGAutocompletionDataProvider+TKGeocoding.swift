@@ -1,0 +1,86 @@
+//
+//  SGAutocompletionDataProvider+TKGeocoding.swift
+//  TripKit
+//
+//  Created by Adrian Schönig on 19.03.18.
+//  Copyright © 2018 SkedGo. All rights reserved.
+//
+
+import Foundation
+
+import RxSwift
+
+public enum TKGeocodingBackwardscompatibilityError: Error {
+  case unknownError
+  case couldNotCreateAnnotation
+}
+
+extension SGGeocoder where Self: TKGeocoding {
+
+  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[SGKNamedCoordinate]> {
+    return Single.create { subscriber in
+      self.geocodeString(
+        input, nearRegion: mapRect,
+        success: { (_, results) in
+          subscriber(.success(results))
+        },
+        failure: { (_, error) in
+          subscriber(.error(error ?? TKGeocodingBackwardscompatibilityError.unknownError))
+        })
+      return Disposables.create()
+    }
+  }
+  
+}
+
+extension SGAddressBookManager: TKGeocoding { }
+extension SGBaseGeocoder: TKGeocoding { }
+extension TKPeliasGeocoder: TKGeocoding { }
+
+
+extension SGAutocompletionDataProvider where Self: TKAutocompleting {
+  
+  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[SGAutocompletionResult]> {
+    if let fast = self.autocompleteFast?(input, for: mapRect) {
+      return Observable.just(fast)
+    
+    } else {
+      return Observable.create { subscriber in
+        self.autocompleteSlowly?(input, for: mapRect) { results in
+          subscriber.onNext(results ?? [])
+          subscriber.onCompleted()
+        }
+        return Disposables.create()
+      }
+    }
+  }
+  
+  public func annotation(for result: SGAutocompletionResult) -> Single<MKAnnotation> {
+    if let annotation = self.annotation?(for: result) {
+      return Single.just(annotation)
+    } else {
+      return Single.error(TKGeocodingBackwardscompatibilityError.couldNotCreateAnnotation)
+    }
+  }
+  
+  public var additionalAction: (String, Single<Bool>)? {
+    guard let title = self.additionalActionString?(), let handler = (self as SGAutocompletionDataProvider).additionalAction else { return nil }
+    
+    let action = Single<Bool>.create { subscriber in
+      handler { refresh in
+        subscriber(.success(refresh))
+      }
+      return Disposables.create()
+    }
+    return (title, action)
+  }
+  
+}
+
+extension SGAddressBookManager: TKAutocompleting { }
+extension SGBuzzGeocoder: TKAutocompleting { }
+extension SGCalendarManager: TKAutocompleting { }
+extension SGFoursquareGeocoder: TKAutocompleting { }
+extension SGRegionAutocompleter: TKAutocompleting { }
+extension TKPeliasGeocoder: TKAutocompleting { }
+
