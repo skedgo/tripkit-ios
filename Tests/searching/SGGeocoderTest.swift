@@ -89,7 +89,7 @@ class SGGeocoderTest: XCTestCase {
   //MARK: - Private helpers
   
   fileprivate func aggregateGeocoder() -> TKAggregateGeocoder {
-    var geocoders: [TKGeocoding] = [SGAppleGeocoder()]
+    var geocoders: [TKGeocoding] = [TKAppleGeocoder()]
     
     let env = ProcessInfo.processInfo.environment
     if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {

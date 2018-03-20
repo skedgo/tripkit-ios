@@ -32,8 +32,9 @@ extension TKAggregateGeocoder: TKGeocoding {
         .catchErrorJustReturn([]) // Individual failures shouldn't terminate the sequence
     }
     return Observable
-      .merge(queries)
-      .filter { !$0.isEmpty }
+      .combineLatest(queries) {
+        $0.reduce([]) { $0.mergeWithPreferences($1) }
+      }
       .take(1)
       .asSingle()
   }
