@@ -49,9 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Main method required to configure the autocompleter for a new search.
  */
-- (void)prepareForNewSearchShowStickyForCurrentLocation:(BOOL)stickyForGPS
-                                   showStickyForDropPin:(BOOL)stickyForDropped
-                                      showSearchOptions:(BOOL)showSearchOptions;
+- (void)prepareForNewSearchForMapRect:(MKMapRect)mapRect
+         showStickyForCurrentLocation:(BOOL)stickyForGPS
+                 showStickyForDropPin:(BOOL)stickyForDropped
+                    showSearchOptions:(BOOL)showSearchOptions;
 
 - (SGSearchSection)typeOfSection:(NSInteger)section;
 

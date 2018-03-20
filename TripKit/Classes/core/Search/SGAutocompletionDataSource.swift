@@ -9,6 +9,7 @@
 import Foundation
 
 import RxSwift
+import RxCocoa
 
 extension SGAutocompletionDataSource {
   
@@ -33,8 +34,8 @@ extension SGAutocompletionDataSource {
     self.init(autocompleters: autocompleters)
   }
   
-  @objc
-  func prepareForNewSearch() {
+  @objc(prepareForNewSearchForMapRect:)
+  func prepareForNewSearch(for mapRect: MKMapRect) {
     storage.disposeBag = DisposeBag()
     
     // When the input is changing, update the results
@@ -65,28 +66,23 @@ extension SGAutocompletionDataSource {
     
     // Start again with empty input
     storage.inputText.value = ""
+    storage.mapRect = mapRect
   }
   
-  /// Kicks off autocompletion. If it found something interesting, it'll
-  /// call the completion handler, telling the caller whether to trigger
-  /// a refresh of whatever this data source provides data for.
+  /// Kicks off autocompletion. If it found something interesting,
+  /// `autocompletionUpdated` will fire, so make sure you observe
+  /// that.
   ///
   /// - Parameters:
   ///   - input: Search string
-  ///   - mapRect: Map rect to limit search to
-  ///   - completion: Called when autocompletion results are loaded
-  @objc(autocomplete:forMapRect:completion:)
-  public func autocomplete(_ input: String, for mapRect: MKMapRect, completion: @escaping (Bool) -> Void) {
-    
-    storage.mapRect = mapRect
+  public func autocomplete(_ input: String) {
     storage.inputText.value = input
-    
-    storage.results
+  }
+  
+  public var autocompletionUpdated: Driver<Void> {
+    return storage.results
       .asDriver()
-      .drive(onNext: { results in
-        completion(true)
-      })
-      .disposed(by: storage.disposeBag)
+      .map { _ in }
   }
   
   @objc

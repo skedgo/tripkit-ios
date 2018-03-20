@@ -37,16 +37,17 @@
 	return self;
 }
 
-- (void)prepareForNewSearchShowStickyForCurrentLocation:(BOOL)stickyForGPS
-                                   showStickyForDropPin:(BOOL)stickyForDropped
-                                      showSearchOptions:(BOOL)showSearchOptions
+- (void)prepareForNewSearchForMapRect:(MKMapRect)mapRect
+         showStickyForCurrentLocation:(BOOL)stickyForGPS
+                 showStickyForDropPin:(BOOL)stickyForDropped
+                    showSearchOptions:(BOOL)showSearchOptions
 {
   // config for what to include in autocompletion
   self.showStickyForCurrentLocation = stickyForGPS;
   self.showStickyForDropPin = stickyForDropped;
   self.showSearchOptions = showSearchOptions;
  
-  [self prepareForNewSearch];
+  [self prepareForNewSearchForMapRect:mapRect];
 }
 
 
