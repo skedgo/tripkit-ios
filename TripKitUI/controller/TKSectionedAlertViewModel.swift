@@ -35,7 +35,7 @@ public class TKSectionedAlertViewModel {
     mappings.forEach { mapping in
       let mode = mapping.modeIdentifier ?? "Unknown mode"
       if let existing = alertGroupsByModes[mode] {
-        var currentRouteIds = existing.map { $0.label }
+        var currentRouteIds = existing.map { $0.route.label }
         tmp = existing
         mapping.routes?.forEach {
           if let index = currentRouteIds.index(of: $0.label) {
@@ -44,7 +44,7 @@ public class TKSectionedAlertViewModel {
             tmp[index] = currentGroup
             alertGroupsByModes[mode] = tmp
           } else {
-            let newGroup = AlertMappingGroup(label: $0.label, mappings: [mapping])
+            let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
             tmp.append(newGroup)
             currentRouteIds.append($0.label)
             alertGroupsByModes[mode] = tmp
@@ -53,7 +53,7 @@ public class TKSectionedAlertViewModel {
       } else {
         var groups: [AlertMappingGroup] = []
         mapping.routes?.forEach {
-          let newGroup = AlertMappingGroup(label: $0.label, mappings: [mapping])
+          let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
           groups.append(newGroup)
         }
         alertGroupsByModes[mode] = groups
@@ -99,7 +99,7 @@ extension API.Route {
 // MARK: -
 
 struct AlertMappingGroup {
-  var label: String
+  var route: API.Route
   var mappings: [API.AlertMapping]
   
   func alerts() -> [API.Alert] {

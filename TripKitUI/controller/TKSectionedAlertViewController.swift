@@ -24,6 +24,12 @@ public class TKSectionedAlertViewController: UITableViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
+    let nib = UINib(nibName: "TKRouteNumberCell", bundle: Bundle(for: TKSectionedAlertViewController.self))
+    tableView.register(nib, forCellReuseIdentifier: "TKRouteNumberCell")
+    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.estimatedRowHeight = 60
+    tableView.separatorStyle = .none
+    
     bindViewModel()
   }
 
@@ -37,13 +43,17 @@ public class TKSectionedAlertViewController: UITableViewController {
     guard viewModel != nil else { assert(false, "No view model found") }
     
     let dataSource = RxTableViewSectionedReloadDataSource<AlertSection>(configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
-      var cell = tv.dequeueReusableCell(withIdentifier: "StandardCell")
-      if cell == nil {
-        cell = UITableViewCell(style: .default, reuseIdentifier: "StandardCell")
-      }
-      cell!.textLabel?.text = item.alertGroup.label + " (\(item.alertGroup.mappings.count))"
-      return cell!
+      let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteNumberCell", for: ip) as! TKRouteNumberCell
+      cell.route = item.alertGroup.route
+//      cell.routeNameLabel.text = item.alertGroup.route.label
+//      SGStyleManager.addDefaultOutline(cell.contentWrapper)
+      return cell
     })
+    
+    // table view section header
+    dataSource.titleForHeaderInSection = { ds, index in
+      return ds.sectionModels[index].header
+    }
     
     viewModel.sections
       .observeOn(MainScheduler.instance)

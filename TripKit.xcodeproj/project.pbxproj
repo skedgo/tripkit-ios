@@ -824,6 +824,8 @@
 		D3348267205BE2B000CA5917 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3348266205BE2B000CA5917 /* RxDataSources.framework */; };
 		D3348268205C4C4B00CA5917 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3348266205BE2B000CA5917 /* RxDataSources.framework */; };
 		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
+		D39B7BAA2060C6FD00988D8A /* TKRouteNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BA82060C6FD00988D8A /* TKRouteNumberCell.swift */; };
+		D39B7BAB2060C6FD00988D8A /* TKRouteNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BA92060C6FD00988D8A /* TKRouteNumberCell.xib */; };
 		D39ECD86205A007A00E09474 /* TKSectionedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */; };
 		D39ECD87205A007A00E09474 /* TKSectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */; };
 		D39ECD89205A029500E09474 /* TKSectionedAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */; };
@@ -1518,6 +1520,8 @@
 		3AFFAE0B1F06BCF200147990 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D3348266205BE2B000CA5917 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = ../../Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		D39B7BA82060C6FD00988D8A /* TKRouteNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRouteNumberCell.swift; sourceTree = "<group>"; };
+		D39B7BA92060C6FD00988D8A /* TKRouteNumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKRouteNumberCell.xib; sourceTree = "<group>"; };
 		D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertViewController.swift; sourceTree = "<group>"; };
 		D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKSectionedAlertViewController.xib; sourceTree = "<group>"; };
 		D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertViewModel.swift; sourceTree = "<group>"; };
@@ -1804,6 +1808,8 @@
 				3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */,
 				3A6DF0E9202C8EB80084CB2C /* VehicleView.h */,
 				3A6DF0F2202C8EB80084CB2C /* VehicleView.m */,
+				D39B7BA82060C6FD00988D8A /* TKRouteNumberCell.swift */,
+				D39B7BA92060C6FD00988D8A /* TKRouteNumberCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3279,6 +3285,7 @@
 				3A6DF10C202C8EB80084CB2C /* SGTripSummaryNanoCell.xib in Resources */,
 				3A6DF13B202C8EB80084CB2C /* TKEmptyAlertView.xib in Resources */,
 				3A6DF115202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib in Resources */,
+				D39B7BAB2060C6FD00988D8A /* TKRouteNumberCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3572,6 +3579,7 @@
 				3A6DF12D202C8EB80084CB2C /* UIButton+TitleAndImage.swift in Sources */,
 				3A6DF14F202C8EB80084CB2C /* AnnotationViewBuilder.swift in Sources */,
 				3A6DF149202C8EB80084CB2C /* CircleAnnotationView.m in Sources */,
+				D39B7BAA2060C6FD00988D8A /* TKRouteNumberCell.swift in Sources */,
 				3A6DF130202C8EB80084CB2C /* SGButton.m in Sources */,
 				3A6DF111202C8EB80084CB2C /* SGTripSummaryCell.swift in Sources */,
 				3A6DF117202C8EB80084CB2C /* SGTripSegmentsView.m in Sources */,
