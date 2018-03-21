@@ -95,16 +95,20 @@ public class TKAlertViewController: UITableViewController {
     
     self.title = Loc.Alerts
     
-    if navigationController?.topViewController == self {
-      let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped(_:)))
-      navigationItem.leftBarButtonItem = doneButton
-    }
-    
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 150
 //    tableView.register(TKAlertCell.nib, forCellReuseIdentifier: String(describing: TKAlertCell.self))
     tableView.register(UINib(nibName: "TKNewAlertCell", bundle: Bundle(for: TKNewAlertCell.self)), forCellReuseIdentifier: "TKNewAlertCell")
     SGStyleManager.styleTableView(forTileList: tableView)
+  }
+  
+  public override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if navigationController?.topViewController == self {
+      let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped(_:)))
+      navigationItem.leftBarButtonItem = doneButton
+    }
   }
   
   @objc private func doneButtonTapped(_ sender: UIButton) {
