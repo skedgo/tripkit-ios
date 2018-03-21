@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TKRouteNumberCell: UITableViewCell {
+class TKRouteCell: UITableViewCell {
   
   @IBOutlet weak var contentWrapper: UIView!
   @IBOutlet weak var routeNumberLabel: UILabel!
@@ -17,8 +17,8 @@ class TKRouteNumberCell: UITableViewCell {
   @IBOutlet weak var alertCountLabel: UILabel!
   @IBOutlet weak var routeNumberWrapper: UIView!
   
-  @IBOutlet weak var contentWrapperTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var contentWrapperBottomConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var contentWrapperTopConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var contentWrapperBottomConstraint: NSLayoutConstraint!
   
   var route: API.Route? {
     didSet {
@@ -62,7 +62,6 @@ class TKRouteNumberCell: UITableViewCell {
   
   override func awakeFromNib() {
     backgroundColor = SGStyleManager.backgroundColorForTileList()
-//    SGStyleManager.addDefaultOutline(contentWrapper)
     infoIcon.tintColor = SGStyleManager.globalTintColor()
     alertCountLabel.textColor = SGStyleManager.globalTintColor()
   }

@@ -28,23 +28,15 @@ extension API {
     public let title: String
     public let text: String?
     public let url: URL?
+    public let startTime: TimeInterval?
+    public let endTime: TimeInterval?
     public let lastUpdate: TimeInterval?
     public let remoteIcon: URL?
-    public var icon: SGKImage? {
-      switch severity {
-      case .info, .warning:
-        return STKInfoIcon.image(for: .warning, usage: .normal)
-      case .alert:
-        return STKInfoIcon.image(for: .alert, usage: .normal)
-      }
-    }
+    public let severity: Severity
     
-    let hashCode: Int
-    let severity: Severity
+    let hashCode: Int    
     let action: Action?    
     let location: API.Location?
-    let startTime: TimeInterval?
-    let endTime: TimeInterval?
     
     // MARK: - Codable
     public init(from decoder: Decoder) throws {

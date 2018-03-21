@@ -24,8 +24,8 @@ public class TKSectionedAlertViewController: UITableViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    let nib = UINib(nibName: "TKRouteNumberCell", bundle: Bundle(for: TKSectionedAlertViewController.self))
-    tableView.register(nib, forCellReuseIdentifier: "TKRouteNumberCell")
+    let nib = UINib(nibName: "TKRouteCell", bundle: Bundle(for: TKSectionedAlertViewController.self))
+    tableView.register(nib, forCellReuseIdentifier: "TKRouteCell")
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 60
     tableView.separatorStyle = .none
@@ -43,7 +43,7 @@ public class TKSectionedAlertViewController: UITableViewController {
     guard viewModel != nil else { assert(false, "No view model found") }
     
     let dataSource = RxTableViewSectionedReloadDataSource<AlertSection>(configureCell: { (ds, tv, ip, item) -> UITableViewCell in
-      let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteNumberCell", for: ip) as! TKRouteNumberCell
+      let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteCell", for: ip) as! TKRouteCell
       cell.route = item.alertGroup.route
       cell.alertCount = item.alertGroup.mappings.count
       cell.mode = item.mode      

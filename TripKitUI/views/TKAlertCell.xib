@@ -173,7 +173,7 @@
                 <outlet property="titleLabel" destination="lfY-1M-Nwr" id="qyw-D4-Mor"/>
                 <outlet property="toDateLabel" destination="8QD-lH-ejj" id="Xgk-lR-GCr"/>
             </connections>
-            <point key="canvasLocation" x="201" y="181.5"/>
+            <point key="canvasLocation" x="60" y="30"/>
         </tableViewCell>
     </objects>
 </document>

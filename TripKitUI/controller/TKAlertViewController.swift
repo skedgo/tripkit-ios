@@ -21,6 +21,7 @@ import RxSwift
   var iconURL: URL? { get }
   var text: String? { get }
   var infoURL: URL? { get }
+  var startTime: Date? { get }
   var lastUpdated: Date? { get }
 }
 
@@ -38,14 +39,31 @@ class TKAlertAPIAlertClassWrapper {
 
 extension TKAlertAPIAlertClassWrapper: TKAlert {
   var title: String? { return alert.title }
-  var icon: SGKImage? { return alert.icon }
   var iconURL: URL? { return alert.remoteIcon }
   var text: String? { return alert.text }
   var infoURL: URL? { return alert.url }
+  
   var lastUpdated: Date? {
     guard let inTimeInterval = alert.lastUpdate else { return nil }
-    // TODO: Check if this is indeed from 1970.
     return Date(timeIntervalSince1970: inTimeInterval)
+  }
+  
+  var startTime: Date? {
+    guard let inTimeInterval = alert.startTime else { return nil }
+    return Date(timeIntervalSince1970: inTimeInterval)
+  }
+  
+  var icon: SGKImage? {
+    let fileName: String
+    switch alert.severity {
+    case .info, .warning:
+      fileName = "icon-alert-yellow-high-res"
+    case .alert:
+      fileName = "icon-alert-red-high-res"
+    }
+    
+    let bundle = Bundle(for: TKAlertViewController.self)
+    return SGKImage(named: fileName, in: bundle, compatibleWith: nil)
   }
 }
 
@@ -84,7 +102,8 @@ public class TKAlertViewController: UITableViewController {
     
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 150
-    tableView.register(TKAlertCell.nib, forCellReuseIdentifier: String(describing: TKAlertCell.self))
+//    tableView.register(TKAlertCell.nib, forCellReuseIdentifier: String(describing: TKAlertCell.self))
+    tableView.register(UINib(nibName: "TKNewAlertCell", bundle: Bundle(for: TKNewAlertCell.self)), forCellReuseIdentifier: "TKNewAlertCell")
     SGStyleManager.styleTableView(forTileList: tableView)
   }
   
@@ -107,7 +126,8 @@ public class TKAlertViewController: UITableViewController {
       preconditionFailure("Index path refers to a non-existent alert")
     }
     
-    let alertCell = tableView.dequeueReusableCell(withIdentifier: String(describing: TKAlertCell.self), for: indexPath) as! TKAlertCell
+//    let alertCell = tableView.dequeueReusableCell(withIdentifier: String(describing: TKAlertCell.self), for: indexPath) as! TKAlertCell
+    let alertCell = tableView.dequeueReusableCell(withIdentifier: "TKNewAlertCell", for: indexPath) as! TKNewAlertCell
     
     let alert = alerts[indexPath.row]
     
