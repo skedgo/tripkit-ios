@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
     <entity name="Alert" representedClassName="Alert" syncable="YES">
         <attribute name="action" optional="YES" attributeType="Transformable" customClassName="NSDictionary" syncable="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -285,15 +285,14 @@
     </entity>
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
         <attribute name="bearing" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="componentsData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUpdate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="occupancyRaw" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="wifi" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="segment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SegmentReference" inverseName="realTimeVehicle" inverseEntity="SegmentReference" syncable="YES"/>
         <relationship name="segmentAlternatives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SegmentReference" inverseName="realTimeVehicleAlternatives" inverseEntity="SegmentReference" syncable="YES"/>
         <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="vehicle" inverseEntity="Service" syncable="YES"/>
@@ -318,6 +317,6 @@
         <element name="Trip" positionX="315" positionY="-252" width="128" height="390"/>
         <element name="TripGroup" positionX="99" positionY="-186" width="128" height="195"/>
         <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="238"/>
-        <element name="Vehicle" positionX="700" positionY="165" width="128" height="253"/>
+        <element name="Vehicle" positionX="700" positionY="165" width="128" height="240"/>
     </elements>
 </model>

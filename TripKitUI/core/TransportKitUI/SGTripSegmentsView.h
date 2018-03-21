@@ -16,7 +16,7 @@
 
 @interface SGTripSegmentsView : UIView
 
-@property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong, nullable) UIColor *textColor;
 
 @property (nonatomic, assign) BOOL tiny;
 
@@ -41,7 +41,7 @@
  */
 @property (nonatomic, strong, nullable) UIColor *lightTextColor;
 
-- (void)configureForSegments:(NSArray<id<STKTripSegmentDisplayable>> *)segments
+- (void)configureForSegments:(nonnull NSArray<id<STKTripSegmentDisplayable>> *)segments
               allowSubtitles:(BOOL)allowSubtitles
               allowInfoIcons:(BOOL)allowInfoIcons;
 
