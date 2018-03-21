@@ -67,7 +67,7 @@ public class TKSectionedAlertViewModel {
     var sections: [AlertSection] = []
     
     alertGroupsByMode.forEach { (key, value) in
-      let items = value.map { AlertItem(alertGroup: $0) }
+      let items = value.map { AlertItem(alertGroup: $0, mode: key) }
       let section = AlertSection(header: key, items: items)
       sections.append(section)
     }
@@ -111,6 +111,8 @@ struct AlertMappingGroup {
 
 struct AlertItem {
   var alertGroup: AlertMappingGroup
+  // FIXME: This should really come from API.
+  var mode: String
 }
 
 // MARK: -

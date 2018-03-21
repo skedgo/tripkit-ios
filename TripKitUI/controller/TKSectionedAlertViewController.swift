@@ -42,11 +42,11 @@ public class TKSectionedAlertViewController: UITableViewController {
   private func bindViewModel() {
     guard viewModel != nil else { assert(false, "No view model found") }
     
-    let dataSource = RxTableViewSectionedReloadDataSource<AlertSection>(configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
+    let dataSource = RxTableViewSectionedReloadDataSource<AlertSection>(configureCell: { (ds, tv, ip, item) -> UITableViewCell in
       let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteNumberCell", for: ip) as! TKRouteNumberCell
       cell.route = item.alertGroup.route
-//      cell.routeNameLabel.text = item.alertGroup.route.label
-//      SGStyleManager.addDefaultOutline(cell.contentWrapper)
+      cell.alertCount = item.alertGroup.mappings.count
+      cell.mode = item.mode      
       return cell
     })
     
