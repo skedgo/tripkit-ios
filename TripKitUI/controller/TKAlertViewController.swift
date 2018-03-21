@@ -105,7 +105,8 @@ public class TKAlertViewController: UITableViewController {
   public override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    if navigationController?.topViewController == self {
+    if let navigator = navigationController,
+      let firstCOntroller = navigator.viewControllers.first, firstCOntroller == self {
       let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped(_:)))
       navigationItem.leftBarButtonItem = doneButton
     }
