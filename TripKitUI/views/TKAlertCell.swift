@@ -21,7 +21,10 @@ class TKAlertCell: UITableViewCell {
   @IBOutlet weak var contentWrapper: UIView!
   @IBOutlet weak var iconView: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var fromDateLabel: UILabel!
+  @IBOutlet weak var toDateLabel: UILabel!
   @IBOutlet weak var textView: UITextView!
+  @IBOutlet weak var affectedRoutesLabel: UILabel!
   @IBOutlet weak var statusLabel: UILabel!
   @IBOutlet weak var actionButton: UIButton!
   @IBOutlet weak var statusView: UIView!
@@ -30,6 +33,8 @@ class TKAlertCell: UITableViewCell {
   @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
   
   private var textViewHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var dateStackViewTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var routeStackViewBottomConstraint: NSLayoutConstraint!
   
   // MARK: -
   
@@ -46,7 +51,7 @@ class TKAlertCell: UITableViewCell {
   private var showStatusView: Bool = true {
     didSet {
       statusView.isHidden = !showStatusView
-      statusViewHeight.constant = showStatusView ? CGFloat(44) : CGFloat(0)
+      statusViewHeight.constant = showStatusView ? 44.0 : 0.0
     }
   }
   
@@ -66,15 +71,14 @@ class TKAlertCell: UITableViewCell {
     titleLabel.text = alert.title
     iconView.image = alert.icon
     if let iconURL = alert.iconURL {
-      iconView.setImage(with: iconURL)
+      iconView.setImage(with: iconURL, placeholder: alert.icon)
     }
     
     if let text = alert.text {
       textView.text = removeStrongTag(from: text)
+    } else {
+      textView.text = nil
     }
-    
-    textViewHeightConstraint.isActive = textView.text.isEmpty
-    textViewBottomConstraint.constant = textView.text.isEmpty ? 0 : 8
     
     if let url = alert.infoURL {
       actionButton.isHidden = false
@@ -92,6 +96,7 @@ class TKAlertCell: UITableViewCell {
       statusLabel.text = SGStyleManager.string(for: lastUpdated, for: NSTimeZone.local, showDate: true, showTime: true)
     } else {
       statusLabel.isHidden = true
+      statusLabel.text = nil
     }
     
     // Show the status view if both status label & action
@@ -102,13 +107,6 @@ class TKAlertCell: UITableViewCell {
   private func reset() {
     disposeBag = DisposeBag()
     tappedOnLink = PublishSubject<URL>()
-    
-    iconView.image = nil
-    titleLabel.text = nil
-    textView.text = nil
-    
-    textViewHeightConstraint.isActive = false
-    textViewBottomConstraint.constant = 8
   }
   
   private func removeStrongTag(from text: String) -> String {
@@ -129,6 +127,8 @@ class TKAlertCell: UITableViewCell {
     SGStyleManager.addDefaultOutline(contentWrapper)
     textViewHeightConstraint = textView.heightAnchor.constraint(equalToConstant: 0)
     actionButton.setTitle(Loc.MoreInfo, for: .normal)
+    fromDateLabel.textColor = SGStyleManager.globalTintColor()
+    toDateLabel.textColor = SGStyleManager.globalTintColor()
   }
   
   override func prepareForReuse() {
@@ -141,5 +141,14 @@ class TKAlertCell: UITableViewCell {
     UIView.animate(withDuration: 0.25) {
       self.contentWrapper.backgroundColor = highlighted ? SGStyleManager.cellSelectionBackgroundColor() : UIColor.white
     }
+  }
+  
+  override func updateConstraints() {
+    super.updateConstraints()
+    
+    dateStackViewTopConstraint.constant = (fromDateLabel.isHidden && toDateLabel.isHidden) ? 0 : 12
+    textViewHeightConstraint.isActive = textView.text.isEmpty
+    textViewBottomConstraint.constant = textView.text.isEmpty ? 0 : 8
+    routeStackViewBottomConstraint.constant = affectedRoutesLabel.isHidden ? 0 : 12
   }
 }
