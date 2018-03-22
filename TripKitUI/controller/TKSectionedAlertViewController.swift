@@ -28,7 +28,7 @@ public class TKSectionedAlertViewController: UITableViewController {
     tableView.register(nib, forCellReuseIdentifier: "TKRouteCell")
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 60
-    tableView.separatorStyle = .none
+//    tableView.separatorStyle = .none
     
     bindViewModel()
   }
@@ -46,7 +46,6 @@ public class TKSectionedAlertViewController: UITableViewController {
       let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteCell", for: ip) as! TKRouteCell
       cell.route = item.alertGroup.route
       cell.alertCount = item.alertGroup.mappings.count
-      cell.mode = item.mode      
       return cell
     })
     
