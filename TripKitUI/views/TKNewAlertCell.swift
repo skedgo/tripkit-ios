@@ -64,20 +64,16 @@ class TKNewAlertCell: UITableViewCell {
     titleLabel.text = alert.title
     textView.text = alert.text
     
-//    // FIXME: This is only for testing.
-//    dateAddedLabel.text = "ADDED: \(SGStyleManager.string(for: Date(), for: .autoupdatingCurrent, showDate: true, showTime: false))"
-    
     dateAddedLabel.isHidden = alert.startTime == nil
     if let dateAdded = alert.startTime {
-      dateAddedLabel.text = SGStyleManager.string(for: dateAdded, for: .autoupdatingCurrent, showDate: true, showTime: false)
+      // FIXME: Use Loc.
+      dateAddedLabel.text = "ADDED: \(SGStyleManager.string(for: dateAdded, for: .autoupdatingCurrent, showDate: true, showTime: false))"
     }
-    
-//    // FIXME: This is only for testing.
-//    lastUpdatedLabel.text = "Last updated: \(SGStyleManager.string(for: Date(), for: .autoupdatingCurrent, showDate: true, showTime: false))"
-    
+
     lastUpdatedLabel.isHidden = alert.lastUpdated == nil
     if let lastUpdated = alert.lastUpdated {
-      lastUpdatedLabel.text = SGStyleManager.string(for: lastUpdated, for: .autoupdatingCurrent, showDate: true, showTime: false)
+      // FIXME: Use Loc.
+      lastUpdatedLabel.text = "Last updated: \(SGStyleManager.string(for: lastUpdated, for: .autoupdatingCurrent, showDate: true, showTime: false))"
     }
     
     readMoreButton.isHidden = alert.infoURL == nil

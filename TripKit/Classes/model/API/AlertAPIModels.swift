@@ -28,9 +28,9 @@ extension API {
     public let title: String
     public let text: String?
     public let url: URL?
-    public let startTime: TimeInterval?
-    public let endTime: TimeInterval?
-    public let lastUpdate: TimeInterval?
+    public let fromDate: Date?
+    public let toDate: Date?
+    public let lastUpdated: Date?
     public let remoteIcon: URL?
     public let severity: Severity
     
@@ -39,7 +39,7 @@ extension API {
     let location: API.Location?
     
     // MARK: - Codable
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {      
       let container = try decoder.container(keyedBy: CodingKeys.self)
       hashCode    = try container.decode(Int.self, forKey: .hashCode)
       severity    = try container.decode(Severity.self, forKey: .severity)
@@ -49,9 +49,9 @@ extension API {
       action      = try? container.decode(Action.self, forKey: .action)
       remoteIcon  = try? container.decode(URL.self, forKey: .remoteIcon)
       location    = try? container.decode(Location.self, forKey: .location)
-      lastUpdate  = try? container.decode(TimeInterval.self, forKey: .lastUpdate)
-      startTime   = try? container.decode(TimeInterval.self, forKey: .startTime)
-      endTime     = try? container.decode(TimeInterval.self, forKey: .endTime)
+      lastUpdated  = try? container.decode(Date.self, forKey: .lastUpdated)
+      fromDate   = try? container.decode(Date.self, forKey: .fromDate)
+      toDate     = try? container.decode(Date.self, forKey: .toDate)
     }
   }
   
@@ -67,9 +67,10 @@ extension API {
   }
   
   public struct Route: Codable {
-    public let id: String?
+    public let id: String
     public let name: String?
     public let number: String?
+    public let modeInfo: ModeInfo
   }
 }
 

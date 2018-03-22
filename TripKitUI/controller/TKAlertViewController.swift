@@ -42,16 +42,8 @@ extension TKAlertAPIAlertClassWrapper: TKAlert {
   var iconURL: URL? { return alert.remoteIcon }
   var text: String? { return alert.text }
   var infoURL: URL? { return alert.url }
-  
-  var lastUpdated: Date? {
-    guard let inTimeInterval = alert.lastUpdate else { return nil }
-    return Date(timeIntervalSince1970: inTimeInterval)
-  }
-  
-  var startTime: Date? {
-    guard let inTimeInterval = alert.startTime else { return nil }
-    return Date(timeIntervalSince1970: inTimeInterval)
-  }
+  var lastUpdated: Date? { return alert.lastUpdated }
+  var startTime: Date? { return alert.fromDate }
   
   var icon: SGKImage? {
     let fileName: String
@@ -60,10 +52,8 @@ extension TKAlertAPIAlertClassWrapper: TKAlert {
       fileName = "icon-alert-yellow-high-res"
     case .alert:
       fileName = "icon-alert-red-high-res"
-    }
-    
-    let bundle = Bundle(for: TKAlertViewController.self)
-    return SGKImage(named: fileName, in: bundle, compatibleWith: nil)
+    }    
+    return TripKitUIBundle.imageNamed(fileName)
   }
 }
 

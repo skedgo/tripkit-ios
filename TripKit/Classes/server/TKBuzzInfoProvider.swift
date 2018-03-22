@@ -77,6 +77,7 @@ extension TKBuzzInfoProvider {
                            completion: completion)
   }
   
+  // MARK: - Transit alerts
   
   /**
    Asynchronously fetches transit alerts for the provided region.
@@ -98,25 +99,30 @@ extension TKBuzzInfoProvider {
   /**
    Asynchronously fetches transit alerts for the provided region using Rx.
    */
-  public class func rx_fetchTransitAlerts(forRegion region: SVKRegion) -> Observable<[API.AlertMapping]> {
+  public class func rx_fetchTransitAlerts(forRegion region: SVKRegion) -> Observable<[API.Alert]> {
+    return rx_fetchTransitAlertMappings(forRegion: region)
+      .map { $0.map {$0.alert} }
+      .catchErrorJustReturn([])
+  }
+  
+  public class func rx_fetchTransitAlertMappings(forRegion region: SVKRegion) -> Observable<[API.AlertMapping]> {
     let paras: [String: Any] = [
-      "region": region.name as Any
+      "region": region.name
     ]
     
     return SVKServer.shared.rx
       .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
       .map { (_, _, data) -> [API.AlertMapping] in
         let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
         guard let data = data else { return [] }
         let response = try decoder.decode(AlertsTransitResponse.self, from: data)
-//        return response.alerts.map { $0.alert }
         return response.alerts
       }
-      .catchError({ (error) -> Observable<[API.AlertMapping]> in
-        print("\(error)")
-        return Observable.empty()
-      })
+      .catchErrorJustReturn([])
   }
+  
+  // MARK: - Accessibility
   
   /**
    Asynchronously fetches information about whether the provided region supports

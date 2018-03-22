@@ -17,7 +17,7 @@ public class TKSectionedAlertViewModel {
   private let disposeBag = DisposeBag()
   
   lazy var sections: Observable<[AlertSection]> = { [unowned self] in 
-    return TKBuzzInfoProvider.rx_fetchTransitAlerts(forRegion: region)
+    return TKBuzzInfoProvider.rx_fetchTransitAlertMappings(forRegion: region)
       .map { self.groupAlertMappings($0) }
       .map { self.alertSections(from: $0) }
       .share(replay: 1)
@@ -31,34 +31,49 @@ public class TKSectionedAlertViewModel {
   
   private func groupAlertMappings(_ mappings: [API.AlertMapping]) -> [String: [AlertMappingGroup]] {
     var alertGroupsByModes: [String: [AlertMappingGroup]] = [:]
-    var tmp: [AlertMappingGroup] = []
-    mappings.forEach { mapping in
-      let mode = mapping.modeIdentifier ?? "Unknown mode"
-      if let existing = alertGroupsByModes[mode] {
-        var currentRouteIds = existing.map { $0.route.label }
-        tmp = existing
-        mapping.routes?.forEach {
-          if let index = currentRouteIds.index(of: $0.label) {
-            var currentGroup = tmp[index]
-            currentGroup.mappings.append(mapping)
-            tmp[index] = currentGroup
-            alertGroupsByModes[mode] = tmp
-          } else {
-            let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
-            tmp.append(newGroup)
-            currentRouteIds.append($0.label)
-            alertGroupsByModes[mode] = tmp
-          }
-        }
-      } else {
-        var groups: [AlertMappingGroup] = []
-        mapping.routes?.forEach {
+    
+    for mapping in mappings {
+      mapping.routes?.forEach {
+        let mode = $0.modeInfo.alt
+        if let existing = alertGroupsByModes[mode] {
+          
+        } else {
+          var groups: [AlertMappingGroup] = []
           let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
           groups.append(newGroup)
+          alertGroupsByModes[mode] = groups
         }
-        alertGroupsByModes[mode] = groups
       }
     }
+    
+//    var tmp: [AlertMappingGroup] = []
+//    mappings.forEach { mapping in
+//      let mode = mapping.modeIdentifier ?? "Unknown mode"
+//      if let existing = alertGroupsByModes[mode] {
+//        var currentRouteIds = existing.map { $0.route.id }
+//        tmp = existing
+//        mapping.routes?.forEach {
+//          if let index = currentRouteIds.index(of: $0.id) {
+//            var currentGroup = tmp[index]
+//            currentGroup.mappings.append(mapping)
+//            tmp[index] = currentGroup
+//            alertGroupsByModes[mode] = tmp
+//          } else {
+//            let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
+//            tmp.append(newGroup)
+//            currentRouteIds.append($0.id)
+//            alertGroupsByModes[mode] = tmp
+//          }
+//        }
+//      } else {
+//        var groups: [AlertMappingGroup] = []
+//        mapping.routes?.forEach {
+//          let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
+//          groups.append(newGroup)
+//        }
+//        alertGroupsByModes[mode] = groups
+//      }
+//    }
     
     return alertGroupsByModes
   }
@@ -83,15 +98,7 @@ extension API.AlertMapping {
   
   var routeIds: [String] {
     guard let routes = self.routes else { return [] }
-    return routes.map { $0.label }
-  }
-  
-}
-
-extension API.Route {
-  
-  var label: String {
-    return self.number ?? self.name ?? self.id ?? "genericId"
+    return routes.map { $0.id }
   }
   
 }
