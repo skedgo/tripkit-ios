@@ -35,13 +35,21 @@ public class TKSectionedAlertViewModel {
     for mapping in mappings {
       mapping.routes?.forEach {
         let mode = $0.modeInfo.alt
-        if let existing = alertGroupsByModes[mode] {
-          
+        if var existingGroups = alertGroupsByModes[mode] {
+          let currentIds  = existingGroups.map { $0.route.id }
+          if let index = currentIds.index(of: $0.id) {
+            var currentMappings = existingGroups[index].mappings
+            currentMappings.append(mapping)
+            existingGroups[index].mappings = currentMappings
+            alertGroupsByModes[mode] = existingGroups
+          } else {
+            let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
+            existingGroups.append(newGroup)
+            alertGroupsByModes[mode] = existingGroups
+          }
         } else {
-          var groups: [AlertMappingGroup] = []
           let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
-          groups.append(newGroup)
-          alertGroupsByModes[mode] = groups
+          alertGroupsByModes[mode] = [newGroup]
         }
       }
     }
