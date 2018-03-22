@@ -12,7 +12,7 @@ import MapKit
 @testable import TripKit
 
 class SGGeocoderTest: XCTestCase {
-  var geocoder: SGAggregateGeocoder!
+  var geocoder: TKAggregateGeocoder!
   
   // sample regions for testing
   let sydney = MKCoordinateRegion.region(latitude: -33.861412, longitude: 151.210774)
@@ -88,8 +88,8 @@ class SGGeocoderTest: XCTestCase {
   
   //MARK: - Private helpers
   
-  fileprivate func aggregateGeocoder() -> SGAggregateGeocoder {
-    var geocoders: [SGGeocoder] = [SGAppleGeocoder()]
+  fileprivate func aggregateGeocoder() -> TKAggregateGeocoder {
+    var geocoders: [TKGeocoding] = [TKAppleGeocoder()]
     
     let env = ProcessInfo.processInfo.environment
     if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
@@ -112,7 +112,7 @@ class SGGeocoderTest: XCTestCase {
     }
 
     
-    return SGAggregateGeocoder(geocoders: geocoders)
+    return TKAggregateGeocoder(geocoders: geocoders)
   }
   
   fileprivate func geocoderPasses(

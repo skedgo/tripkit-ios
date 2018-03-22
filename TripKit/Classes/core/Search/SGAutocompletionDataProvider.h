@@ -18,14 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^SGAutocompletionDataResultBlock)(NSArray <SGAutocompletionResult*> * _Nullable results);
 typedef void(^SGAutocompletionDataActionBlock)(BOOL refreshRequired);
 
-typedef NS_ENUM(NSInteger, SGAutocompletionDataProviderResultType) {
-  SGAutocompletionDataProviderResultTypeLocation = 1,
-  SGAutocompletionDataProviderResultTypeRegion   = 2,
-};
-
+NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
 @protocol SGAutocompletionDataProvider <NSObject>
-
-@property (nonatomic, assign, readonly) SGAutocompletionDataProviderResultType resultType;
 
 @optional
 
@@ -66,8 +60,6 @@ typedef NS_ENUM(NSInteger, SGAutocompletionDataProviderResultType) {
  @return The annotation for the object that you previously provided.
  */
 - (nullable id<MKAnnotation>)annotationForAutocompletionResult:(SGAutocompletionResult *)result;
-
-- (void)setMapView:(MKMapView *)mapView;
 
 @end
 

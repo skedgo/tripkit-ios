@@ -10,53 +10,56 @@
 #import <MapKit/MapKit.h>
 
 #import "SGSearchDataSource.h"
-#import "SGAutocompletionDataProvider.h"
-
-typedef enum {
-	SGAutocompletionResultCurrentLocation, // => nil
-	SGAutocompletionResultDropPin, // => nil
-	SGAutocompletionResultObject,
-	SGAutocompletionResultRefresh, // => nil, please refresh the view
-	SGAutocompletionResultSearchForMore, // => nil
-} SGAutocompletionResultType;
 
 @class SGAutocompletionResult;
+@class SGAutocompletionDataSourceSwiftStorage;
 
-typedef void(^SGSearchAutocompletionActionBlock)(BOOL refreshRequired);
-typedef void(^SGSearchAutocompletionResultBlock)(SGAutocompletionResultType resultType, SGAutocompletionResult *result);
+typedef NS_ENUM(NSInteger, SGSearchSection) {
+  SGSearchSectionSticky,
+  SGSearchSectionAutocompletion,
+  SGSearchSectionMore,
+};
+
+typedef NS_ENUM(NSInteger, SGSearchSticky) {
+  SGSearchStickyUnknown = 0,
+  SGSearchStickyCurrentLocation,
+  SGSearchStickyDroppedPin,
+  SGSearchStickyNextEvent,
+};
+
+typedef NS_ENUM(NSInteger, SGSearchExtraRow) {
+  SGSearchExtraRowSearchForMore = 0,
+  SGSearchExtraRowProvider,
+};
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface SGAutocompletionDataSource : NSObject
 #if TARGET_OS_IPHONE
   <SGSearchDataSource>
 #endif
 
-- (instancetype)initWithDataProviders:(NSArray<id<SGAutocompletionDataProvider>> *)dataProviders;
+- (instancetype)initWithStorage:(SGAutocompletionDataSourceSwiftStorage *)storage;
+
+@property (nonatomic, strong) SGAutocompletionDataSourceSwiftStorage *storage;
 
 @property (nonatomic, assign) BOOL showAccessoryButtons;
-
-@property (nonatomic, assign, readonly) SGAutocompletionDataProviderResultType granularity;
 
 /**
  * Main method required to configure the autocompleter for a new search.
  */
-- (void)prepareForNewSearchShowStickyForCurrentLocation:(BOOL)stickyForGPS
-                                   showStickyForDropPin:(BOOL)stickyForDropped
-                                      showSearchOptions:(BOOL)showSearchOptions;
+- (void)prepareForNewSearchForMapRect:(MKMapRect)mapRect
+         showStickyForCurrentLocation:(BOOL)stickyForGPS
+                 showStickyForDropPin:(BOOL)stickyForDropped
+                    showSearchOptions:(BOOL)showSearchOptions;
 
-/**
- * Method that kicks of autocompletion. If it found something interesting
- * it'll call the completion/action block which tells the caller to trigger
- * a refresh of whatever thingy this data source provides data for.
- */
-- (void)autocomplete:(NSString *)string
-          forMapRect:(MKMapRect)mapRect
-          completion:(SGSearchAutocompletionActionBlock)completion;
+- (SGSearchSection)typeOfSection:(NSInteger)section;
 
-/**
- * Call this when the user picks an index path. It'll then tell you what to do.
- */
-- (void)processSelectionOfIndexPath:(NSIndexPath *)indexPath
-                             result:(SGSearchAutocompletionResultBlock)resultBlock;
+- (SGSearchExtraRow)extraRowAtIndexPath:(NSIndexPath *)indexPath;
 
+- (SGSearchSticky)stickyOptionAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
+NS_ASSUME_NONNULL_END

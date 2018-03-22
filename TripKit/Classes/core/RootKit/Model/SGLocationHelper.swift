@@ -51,7 +51,7 @@ extension SGLocationHelper {
     address.country = dict["Country"] as? String ?? ""
     address.postalCode = dict["ZIP"] as? String ?? ""
     
-    return CNPostalAddressFormatter.string(from: address, style: .mailingAddress)
+    return CNPostalAddressFormatter.string(from: address, style: .mailingAddress).replacingOccurrences(of: "\n", with: ", ")
   }
   
 }

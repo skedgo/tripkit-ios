@@ -31,7 +31,21 @@ public class TKGeocodingResultScorer: NSObject {
     
     let distanceScore = SGAutocompletionResult.scoreBasedOnDistance(from: annotation.coordinate, to: region, longDistance: allowLongDistance)
     
-    let rawScore = (stringScore * 3 + distanceScore) / 4
+    let rawScore = (stringScore + distanceScore) / 2
+    return SGAutocompletionResult.rangedScore(forScore: rawScore, betweenMinimum: minimum, andMaximum: maximum)
+  }
+  
+  public static func calculateScore(title: String, subtitle: String?, searchTerm: String, minimum: UInt, maximum: UInt) -> UInt {
+    
+    let titleScore = SGAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: title)
+    let addressScore: UInt
+    if let subtitle = subtitle {
+      addressScore = SGAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: subtitle)
+    } else {
+      addressScore = 0
+    }
+    let rawScore = max(titleScore, addressScore)
+
     return SGAutocompletionResult.rangedScore(forScore: rawScore, betweenMinimum: minimum, andMaximum: maximum)
   }
   
