@@ -16,8 +16,6 @@
 
 @interface SGTripSegmentsView : UIView
 
-@property (nonatomic, strong) UIColor *textColor;
-
 @property (nonatomic, assign) BOOL tiny;
 
 @property (nonatomic, assign) BOOL allowWheelchairIcon;
@@ -30,18 +28,21 @@
 /**
  This color is used for darker texts. In addition, this is also the color which
  will be used to tint the transport mode icons if `colorCodingTransitIcon` is
- set to NO. If value is nil, then black is used.
+ set to NO.
+ 
+ @default `SGStyleManager.darkTextColor`
  */
-@property (nonatomic, strong, nullable) UIColor *darkTextColor;
+@property (nonatomic, strong, nonnull) UIColor *darkTextColor;
 
 /**
  This color is used on lighter texts. In addition, this is also the color which
- will be used to tint non-PT modes if `colorCodingTransitIcon` is set to YES. If
- value is nil, then light grey with value 148/255 is used.
+ will be used to tint non-PT modes if `colorCodingTransitIcon` is set to YES.
+ 
+ @default `SGStyleManager.lightTextColor`
  */
-@property (nonatomic, strong, nullable) UIColor *lightTextColor;
+@property (nonatomic, strong, nonnull) UIColor *lightTextColor;
 
-- (void)configureForSegments:(NSArray<id<STKTripSegmentDisplayable>> *)segments
+- (void)configureForSegments:(nonnull NSArray<id<STKTripSegmentDisplayable>> *)segments
               allowSubtitles:(BOOL)allowSubtitles
               allowInfoIcons:(BOOL)allowInfoIcons;
 
