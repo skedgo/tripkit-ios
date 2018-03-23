@@ -104,6 +104,10 @@ struct AlertItem {
 struct AlertSection {
   var header: String
   var items: [Item]
+  var icon: UIImage? {
+    guard let imageName = items.first?.alertGroup.route.modeInfo.localImageName else { return nil }
+    return SGStyleManager.image(forModeImageName: imageName, isRealTime: false, of: .listMainMode)
+  }
 }
 
 extension AlertSection: SectionModelType {

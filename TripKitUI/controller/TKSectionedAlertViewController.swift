@@ -79,14 +79,11 @@ extension TKSectionedAlertViewController {
   
   public override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     guard let source = dataSource else { return nil }
-//    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
-//    view.backgroundColor = #colorLiteral(red: 0.9814500152, green: 0.2152487147, blue: 0.4128970433, alpha: 1)
     let header = TKSectionedAlertTableHeader.newInstance()
     header.backgroundColor = SGStyleManager.backgroundColorForTileList()
     let section = source[section]
     header.titleLabel.text = section.header
-//    header.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//    view.addSubview(header)
+    header.iconView.image = section.icon
     return header
   }
   
