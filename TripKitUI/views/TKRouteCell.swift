@@ -36,11 +36,22 @@ class TKRouteCell: UITableViewCell {
     }
   }
   
+  // MARK: -
+  
   override func awakeFromNib() {
     backgroundColor = SGStyleManager.backgroundColorForTileList()
     infoIcon.tintColor = SGStyleManager.globalTintColor()
     alertCountLabel.textColor = SGStyleManager.globalTintColor()
   }
+  
+  override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    super.setHighlighted(highlighted, animated: animated)
+    UIView.animate(withDuration: 0.1) {
+      self.contentWrapper.backgroundColor = highlighted ? SGStyleManager.cellSelectionBackgroundColor() : .white
+    }
+  }
+  
+  // MARK: -
   
   private func updateContent() {
     guard let route = route else { return }
