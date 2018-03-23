@@ -312,7 +312,7 @@ extension Vehicle {
     identifier = model.id
     label = model.label
     icon = model.icon?.absoluteString
-    componentsData = try? JSONEncoder().encode(model.components ?? [[]])
+    components = model.components
     
     if let lastUpdated = model.lastUpdate {
       lastUpdate = Date(timeIntervalSince1970: lastUpdated)

@@ -8,6 +8,8 @@
 
 import Foundation
 
+import RxSwift
+
 extension Vehicle {
   
   public var components: [[API.VehicleComponents]]? {
@@ -63,6 +65,15 @@ extension Vehicle {
     
     let sum = occupancies.reduce(0) { $0 + $1.intValue }
     return API.VehicleOccupancy(intValue: sum / occupancies.count)
+  }
+  
+}
+
+extension Reactive where Base: Vehicle {
+  
+  public var components: Observable<[[API.VehicleComponents]]> {
+    return observeWeakly(NSData.self, "componentsData")
+      .map { [weak base] _ in base?.components ?? [[]] }
   }
   
 }
