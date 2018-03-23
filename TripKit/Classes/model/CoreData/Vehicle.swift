@@ -8,34 +8,23 @@
 
 import Foundation
 
+import RxSwift
+
 extension Vehicle {
   
-  public var occupancy: API.Vehicle.Occupancy? {
+  public var components: [[API.VehicleComponents]]? {
     get {
-      if let raw = occupancyRaw?.intValue {
-        return API.Vehicle.Occupancy(intValue: raw)
+      if let data = componentsData {
+        return try? JSONDecoder().decode([[API.VehicleComponents]].self, from: data)
       } else {
         return nil
       }
     }
     set {
-      if let occupancy = newValue {
-        occupancyRaw = NSNumber(value: occupancy.intValue)
+      if let components = newValue {
+        componentsData = try? JSONEncoder().encode(components)
       } else {
-        occupancyRaw = nil
-      }
-    }
-  }
-  
-  public var isWifiEnabled: Bool? {
-    get {
-      return wifi?.boolValue
-    }
-    set {
-      if let value = newValue {
-        wifi = NSNumber(value: value)
-      } else {
-        wifi = nil
+        componentsData = nil
       }
     }
   }
@@ -45,7 +34,7 @@ extension Vehicle {
   }
   
   @objc public var serviceColor: SGKColor? {
-    return occupancy?.color
+    return averageOccupancy?.color
   }
   
   @objc public var ageFactor: Double {
@@ -61,6 +50,30 @@ extension Vehicle {
   
   fileprivate var anySegmentReference: SegmentReference? {
     return segment ?? segmentAlternatives.first
+  }
+  
+  public var averageOccupancy: API.VehicleOccupancy? {
+    let components = self.components ?? [[]]
+    let occupancies = components
+      .reduce(into: []) { $0.append(contentsOf: $1) }
+      .flatMap { $0.occupancy }
+    if occupancies.isEmpty {
+      return nil
+    } else if occupancies.count == 1 {
+      return occupancies[0]
+    }
+    
+    let sum = occupancies.reduce(0) { $0 + $1.intValue }
+    return API.VehicleOccupancy(intValue: sum / occupancies.count)
+  }
+  
+}
+
+extension Reactive where Base: Vehicle {
+  
+  public var components: Observable<[[API.VehicleComponents]]> {
+    return observeWeakly(NSData.self, "componentsData")
+      .map { [weak base] _ in base?.components ?? [[]] }
   }
   
 }
@@ -97,7 +110,7 @@ extension Vehicle : MKAnnotation {
   }
   
   public var subtitle: String? {
-    return [updatedTitle, occupancy?.description]
+    return [updatedTitle, averageOccupancy?.description]
       .flatMap { $0 }
       .joined(separator: " - ")
   }

@@ -312,7 +312,7 @@ extension Vehicle {
     identifier = model.id
     label = model.label
     icon = model.icon?.absoluteString
-    isWifiEnabled = model.wifi
+    components = model.components
     
     if let lastUpdated = model.lastUpdate {
       lastUpdate = Date(timeIntervalSince1970: lastUpdated)
@@ -321,7 +321,6 @@ extension Vehicle {
       lastUpdate = Date()
     }
     
-    occupancy = model.occupancy
     latitude = NSNumber(value: model.location.lat)
     longitude = NSNumber(value: model.location.lng)
     if let bearing = model.location.bearing {
