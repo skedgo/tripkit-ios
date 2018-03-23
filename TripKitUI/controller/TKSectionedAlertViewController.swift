@@ -17,6 +17,8 @@ public class TKSectionedAlertViewController: UITableViewController {
   
   private let disposeBag = DisposeBag()
   
+  private var dataSource: RxTableViewSectionedReloadDataSource<AlertSection>?
+  
   public static func newInstance() -> TKSectionedAlertViewController {
     return TKSectionedAlertViewController(nibName: "TKSectionedAlertViewController", bundle: Bundle(for: self))
   }
@@ -49,10 +51,7 @@ public class TKSectionedAlertViewController: UITableViewController {
       return cell
     })
     
-    // table view section header
-    dataSource.titleForHeaderInSection = { ds, index in
-      return ds.sectionModels[index].header
-    }
+    self.dataSource = dataSource
     
     viewModel.sections
       .observeOn(MainScheduler.instance)
@@ -72,6 +71,27 @@ public class TKSectionedAlertViewController: UITableViewController {
     controller.alerts = alertItem.alertGroup.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0) }
     controller.alertControllerDelegate = self
     navigationController?.pushViewController(controller, animated: true)
+  }
+  
+}
+
+extension TKSectionedAlertViewController {
+  
+  public override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    guard let source = dataSource else { return nil }
+//    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
+//    view.backgroundColor = #colorLiteral(red: 0.9814500152, green: 0.2152487147, blue: 0.4128970433, alpha: 1)
+    let header = TKSectionedAlertTableHeader.newInstance()
+    header.backgroundColor = SGStyleManager.backgroundColorForTileList()
+    let section = source[section]
+    header.titleLabel.text = section.header
+//    header.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//    view.addSubview(header)
+    return header
+  }
+  
+  public override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 36
   }
   
 }

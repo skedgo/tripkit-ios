@@ -835,6 +835,8 @@
 		D39ECD86205A007A00E09474 /* TKSectionedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */; };
 		D39ECD87205A007A00E09474 /* TKSectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */; };
 		D39ECD89205A029500E09474 /* TKSectionedAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */; };
+		D3F9CEC32064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */; };
+		D3F9CEC52064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1536,6 +1538,8 @@
 		D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKSectionedAlertViewController.xib; sourceTree = "<group>"; };
 		D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertViewModel.swift; sourceTree = "<group>"; };
 		D3A779281E513C5000BBAF6C /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertTableHeader.swift; sourceTree = "<group>"; };
+		D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKSectionedAlertTableHeader.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1822,6 +1826,8 @@
 				D39B7BB020622C5900988D8A /* TKRouteCell.xib */,
 				D39B7BB220622FD100988D8A /* TKNewAlertCell.swift */,
 				D39B7BB320622FD100988D8A /* TKNewAlertCell.xib */,
+				D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */,
+				D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3298,6 +3304,7 @@
 				3A6DF0FD202C8EB80084CB2C /* SGCountdownCell.xib in Resources */,
 				3A6DF10C202C8EB80084CB2C /* SGTripSummaryNanoCell.xib in Resources */,
 				3A6DF13B202C8EB80084CB2C /* TKEmptyAlertView.xib in Resources */,
+				D3F9CEC52064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib in Resources */,
 				3A6DF115202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3642,6 +3649,7 @@
 				3A6DF14C202C8EB80084CB2C /* VehicleView.m in Sources */,
 				D39B7BAF20622C2D00988D8A /* TKRouteCell.swift in Sources */,
 				3A6DF0FF202C8EB80084CB2C /* SGCountdownCell.m in Sources */,
+				D3F9CEC32064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift in Sources */,
 				3A6DF124202C8EB80084CB2C /* UISearchBar+Customizable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
