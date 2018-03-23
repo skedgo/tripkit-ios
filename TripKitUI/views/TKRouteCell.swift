@@ -14,7 +14,7 @@ class TKRouteCell: UITableViewCell {
   @IBOutlet weak var routeNumberLabel: UILabel!
   @IBOutlet weak var infoIcon: UIImageView!
   @IBOutlet weak var alertCountLabel: UILabel!
-  @IBOutlet weak var routeNumberWrapper: UIView!
+  @IBOutlet weak var serviceColorIndicator: UIView!
   
   @IBOutlet private weak var contentWrapperTopConstraint: NSLayoutConstraint!
   @IBOutlet private weak var contentWrapperBottomConstraint: NSLayoutConstraint!
@@ -46,13 +46,7 @@ class TKRouteCell: UITableViewCell {
     guard let route = route else { return }
     
     routeNumberLabel.text = route.number ?? route.name
-    
-    if let color = route.modeInfo.color {
-      routeNumberWrapper.backgroundColor = color
-      routeNumberLabel.textColor = .white
-    } else {
-      routeNumberWrapper.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-    }
+    serviceColorIndicator.backgroundColor = route.modeInfo.color
   }
   
   override func updateConstraints() {

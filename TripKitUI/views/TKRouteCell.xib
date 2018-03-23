@@ -22,25 +22,18 @@
                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="386" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="lKJ-xp-nwZ">
                         <rect key="frame" x="0.0" y="1" width="386" height="47.5"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5D8-bC-Dfc">
-                                <rect key="frame" x="16" y="12.5" width="29.5" height="22.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZK-He-Yhl">
-                                        <rect key="frame" x="6" y="2" width="17.5" height="18.5"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVC-R5-wjf" userLabel="Service color">
+                                <rect key="frame" x="0.0" y="0.0" width="5" height="47.5"/>
                                 <constraints>
-                                    <constraint firstItem="IZK-He-Yhl" firstAttribute="top" secondItem="5D8-bC-Dfc" secondAttribute="top" constant="2" id="FpB-ks-cQt"/>
-                                    <constraint firstAttribute="height" priority="999" constant="22" id="Haz-6H-tlj"/>
-                                    <constraint firstAttribute="bottom" secondItem="IZK-He-Yhl" secondAttribute="bottom" constant="2" id="eK7-UR-bcv"/>
-                                    <constraint firstAttribute="trailing" secondItem="IZK-He-Yhl" secondAttribute="trailing" constant="6" id="kHv-Lq-pvI"/>
-                                    <constraint firstItem="IZK-He-Yhl" firstAttribute="leading" secondItem="5D8-bC-Dfc" secondAttribute="leading" constant="6" id="pI9-dK-qms"/>
+                                    <constraint firstAttribute="width" constant="5" id="cnS-wA-tRu"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="T8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZK-He-Yhl">
+                                <rect key="frame" x="13" y="15.5" width="20" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5ay-CX-oVU">
                                 <rect key="frame" x="332" y="12" width="38" height="24.5"/>
                                 <subviews>
@@ -62,11 +55,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="5ay-CX-oVU" firstAttribute="centerY" secondItem="5D8-bC-Dfc" secondAttribute="centerY" id="0cD-ia-1mi"/>
-                            <constraint firstItem="5D8-bC-Dfc" firstAttribute="centerY" secondItem="lKJ-xp-nwZ" secondAttribute="centerY" id="8ih-wv-l3V"/>
-                            <constraint firstItem="5D8-bC-Dfc" firstAttribute="leading" secondItem="lKJ-xp-nwZ" secondAttribute="leading" constant="16" id="QjQ-4J-8mU"/>
+                            <constraint firstItem="5ay-CX-oVU" firstAttribute="centerY" secondItem="IZK-He-Yhl" secondAttribute="centerY" id="OXn-Y2-v7R"/>
+                            <constraint firstItem="IZK-He-Yhl" firstAttribute="leading" secondItem="kVC-R5-wjf" secondAttribute="trailing" constant="8" id="RaE-2q-zpt"/>
+                            <constraint firstItem="IZK-He-Yhl" firstAttribute="centerY" secondItem="lKJ-xp-nwZ" secondAttribute="centerY" id="WJS-x0-LvD"/>
+                            <constraint firstItem="kVC-R5-wjf" firstAttribute="leading" secondItem="lKJ-xp-nwZ" secondAttribute="leading" id="Xyo-Xo-4eb"/>
                             <constraint firstAttribute="trailing" secondItem="5ay-CX-oVU" secondAttribute="trailing" constant="16" id="b55-5a-aSM"/>
-                            <constraint firstItem="5D8-bC-Dfc" firstAttribute="top" secondItem="lKJ-xp-nwZ" secondAttribute="top" constant="12" id="t3z-1y-GJH"/>
+                            <constraint firstAttribute="bottom" secondItem="kVC-R5-wjf" secondAttribute="bottom" id="dzy-RO-jwv"/>
+                            <constraint firstItem="kVC-R5-wjf" firstAttribute="top" secondItem="lKJ-xp-nwZ" secondAttribute="top" id="mUy-gT-Tea"/>
+                            <constraint firstItem="5ay-CX-oVU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IZK-He-Yhl" secondAttribute="trailing" constant="8" id="yYD-qo-lgS"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -85,7 +81,7 @@
                 <outlet property="contentWrapperTopConstraint" destination="cLK-Sg-C2G" id="lvp-6M-XpF"/>
                 <outlet property="infoIcon" destination="mZV-88-WGo" id="I1g-B5-DCh"/>
                 <outlet property="routeNumberLabel" destination="IZK-He-Yhl" id="ebU-SZ-I5s"/>
-                <outlet property="routeNumberWrapper" destination="5D8-bC-Dfc" id="JtQ-ZM-Bfk"/>
+                <outlet property="serviceColorIndicator" destination="kVC-R5-wjf" id="wDx-Lh-ymY"/>
             </connections>
             <point key="canvasLocation" x="-288" y="-76"/>
         </tableViewCell>

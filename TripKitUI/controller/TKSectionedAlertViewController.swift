@@ -45,7 +45,7 @@ public class TKSectionedAlertViewController: UITableViewController {
     let dataSource = RxTableViewSectionedReloadDataSource<AlertSection>(configureCell: { (ds, tv, ip, item) -> UITableViewCell in
       let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteCell", for: ip) as! TKRouteCell
       cell.route = item.alertGroup.route
-      cell.alertCount = item.alertGroup.mappings.count
+      cell.alertCount = item.alertGroup.alerts.count
       return cell
     })
     
@@ -69,7 +69,7 @@ public class TKSectionedAlertViewController: UITableViewController {
   
   private func didSelect(_ alertItem: AlertItem) {
     let controller = TKAlertViewController(style: .plain)
-    controller.alerts = alertItem.alertGroup.mappings.map { TKAlertAPIAlertClassWrapper(alert: $0.alert) }
+    controller.alerts = alertItem.alertGroup.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0) }
     controller.alertControllerDelegate = self
     navigationController?.pushViewController(controller, animated: true)
   }

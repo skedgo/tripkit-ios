@@ -29,68 +29,41 @@ public class TKSectionedAlertViewModel {
   
   // MARK: -
   
-  private func groupAlertMappings(_ mappings: [API.AlertMapping]) -> [String: [AlertMappingGroup]] {
-    var alertGroupsByModes: [String: [AlertMappingGroup]] = [:]
+  private func groupAlertMappings(_ mappings: [API.AlertMapping]) -> [String: [AlertGroup]] {
+    var alertGroupsByModes: [String: [AlertGroup]] = [:]
     
     for mapping in mappings {
       mapping.routes?.forEach {
-        let mode = $0.modeInfo.alt
+        // TODO: Prefer to just use identifier.
+        let mode = $0.modeInfo.identifier ?? $0.modeInfo.alt
         if var existingGroups = alertGroupsByModes[mode] {
-          let currentIds  = existingGroups.map { $0.route.id }
-          if let index = currentIds.index(of: $0.id) {
-            var currentMappings = existingGroups[index].mappings
-            currentMappings.append(mapping)
-            existingGroups[index].mappings = currentMappings
+          let existingIds  = existingGroups.map { $0.route.id }
+          if let index = existingIds.index(of: $0.id) {
+            var currentAlerts = existingGroups[index].alerts
+            currentAlerts.append(mapping.alert)
+            existingGroups[index].alerts = currentAlerts
             alertGroupsByModes[mode] = existingGroups
           } else {
-            let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
+            let newGroup = AlertGroup(route: $0, alerts: [mapping.alert])
             existingGroups.append(newGroup)
             alertGroupsByModes[mode] = existingGroups
           }
         } else {
-          let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
+          let newGroup = AlertGroup(route: $0, alerts: [mapping.alert])
           alertGroupsByModes[mode] = [newGroup]
         }
       }
     }
     
-//    var tmp: [AlertMappingGroup] = []
-//    mappings.forEach { mapping in
-//      let mode = mapping.modeIdentifier ?? "Unknown mode"
-//      if let existing = alertGroupsByModes[mode] {
-//        var currentRouteIds = existing.map { $0.route.id }
-//        tmp = existing
-//        mapping.routes?.forEach {
-//          if let index = currentRouteIds.index(of: $0.id) {
-//            var currentGroup = tmp[index]
-//            currentGroup.mappings.append(mapping)
-//            tmp[index] = currentGroup
-//            alertGroupsByModes[mode] = tmp
-//          } else {
-//            let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
-//            tmp.append(newGroup)
-//            currentRouteIds.append($0.id)
-//            alertGroupsByModes[mode] = tmp
-//          }
-//        }
-//      } else {
-//        var groups: [AlertMappingGroup] = []
-//        mapping.routes?.forEach {
-//          let newGroup = AlertMappingGroup(route: $0, mappings: [mapping])
-//          groups.append(newGroup)
-//        }
-//        alertGroupsByModes[mode] = groups
-//      }
-//    }
-    
     return alertGroupsByModes
   }
   
-  private func alertSections(from alertGroupsByMode: [String: [AlertMappingGroup]]) -> [AlertSection] {
+  private func alertSections(from alertGroupsByMode: [String: [AlertGroup]]) -> [AlertSection] {
     var sections: [AlertSection] = []
     
     alertGroupsByMode.forEach { (key, value) in
-      let items = value.map { AlertItem(alertGroup: $0, mode: key) }
+      let sorted = value.sorted(by: {$0.title < $1.title})
+      let items = sorted.map { AlertItem(alertGroup: $0) }
       let section = AlertSection(header: key, items: items)
       sections.append(section)
     }
@@ -100,34 +73,30 @@ public class TKSectionedAlertViewModel {
   
 }
 
-// MARK: -
-
-extension API.AlertMapping {
-  
-  var routeIds: [String] {
-    guard let routes = self.routes else { return [] }
-    return routes.map { $0.id }
+extension API.Route {
+  var title: String {
+    return number ?? name ?? id
   }
-  
 }
 
 // MARK: -
 
-struct AlertMappingGroup {
+struct AlertGroup {
+  /// Each group is identifiable by a route. The route is affected
+  /// by the alerts in the group.
   var route: API.Route
-  var mappings: [API.AlertMapping]
   
-  func alerts() -> [API.Alert] {
-    return mappings.map { $0.alert }
-  }
+  /// These are the alerts affecting the route.
+  var alerts: [API.Alert]
+  
+  /// Title for the group. This is mainly used for sorting mapping groups.
+  var title: String { return route.title }
 }
 
 // MARK: -
 
 struct AlertItem {
-  var alertGroup: AlertMappingGroup
-  // FIXME: This should really come from API.
-  var mode: String
+  var alertGroup: AlertGroup
 }
 
 // MARK: -
