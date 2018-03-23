@@ -60,20 +60,20 @@
                                 </subviews>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kBz-eX-YqW">
-                                <rect key="frame" x="16" y="121" width="288" height="233.5"/>
+                                <rect key="frame" x="16" y="117" width="288" height="233.5"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4oq-hJ-3Zs" userLabel="Action stack">
-                                <rect key="frame" x="16" y="362.5" width="288" height="30"/>
+                                <rect key="frame" x="16" y="364.5" width="288" height="28"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eZ-gI-hGk">
-                                        <rect key="frame" x="0.0" y="0.0" width="74" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="74" height="28"/>
                                         <state key="normal" title="Read more"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Last updated" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZo-Fh-5Y5">
-                                        <rect key="frame" x="82" y="7" width="206" height="16"/>
+                                        <rect key="frame" x="82" y="6" width="206" height="16"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                         <constraints>
                             <constraint firstItem="wyp-Ab-KnI" firstAttribute="top" secondItem="Cag-qT-KSE" secondAttribute="top" constant="16" id="2DF-Ui-ld1"/>
                             <constraint firstItem="MlA-Dk-Z9D" firstAttribute="leading" secondItem="Cag-qT-KSE" secondAttribute="leading" constant="16" id="7Ok-04-TOF"/>
-                            <constraint firstItem="4oq-hJ-3Zs" firstAttribute="top" secondItem="kBz-eX-YqW" secondAttribute="bottom" constant="8" id="90B-TB-uaH"/>
+                            <constraint firstItem="4oq-hJ-3Zs" firstAttribute="top" secondItem="kBz-eX-YqW" secondAttribute="bottom" constant="14" id="90B-TB-uaH"/>
                             <constraint firstItem="kBz-eX-YqW" firstAttribute="leading" secondItem="Cag-qT-KSE" secondAttribute="leading" constant="16" id="Iqj-D3-i77"/>
                             <constraint firstItem="4oq-hJ-3Zs" firstAttribute="leading" secondItem="Cag-qT-KSE" secondAttribute="leading" constant="16" id="ReS-8t-g1X"/>
                             <constraint firstAttribute="bottom" secondItem="4oq-hJ-3Zs" secondAttribute="bottom" constant="8" id="XvR-Rf-XXr"/>
@@ -96,7 +96,7 @@
                             <constraint firstAttribute="trailing" secondItem="75u-0W-G0x" secondAttribute="trailing" id="mbQ-TE-6qR"/>
                             <constraint firstAttribute="trailing" secondItem="wyp-Ab-KnI" secondAttribute="trailing" constant="16" id="n3K-c6-up4"/>
                             <constraint firstAttribute="trailing" secondItem="kBz-eX-YqW" secondAttribute="trailing" constant="16" id="rYO-es-Cro"/>
-                            <constraint firstItem="kBz-eX-YqW" firstAttribute="top" secondItem="MlA-Dk-Z9D" secondAttribute="bottom" constant="12" id="wMD-iH-4DC"/>
+                            <constraint firstItem="kBz-eX-YqW" firstAttribute="top" secondItem="MlA-Dk-Z9D" secondAttribute="bottom" constant="8" id="wMD-iH-4DC"/>
                             <constraint firstAttribute="trailing" secondItem="4oq-hJ-3Zs" secondAttribute="trailing" constant="16" id="z4n-tQ-IQf"/>
                         </constraints>
                     </view>
