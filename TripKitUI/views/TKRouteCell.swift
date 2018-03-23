@@ -46,7 +46,7 @@ class TKRouteCell: UITableViewCell {
   
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     super.setHighlighted(highlighted, animated: animated)
-    UIView.animate(withDuration: 0.1) {
+    UIView.animate(withDuration: 0.25) {
       self.contentWrapper.backgroundColor = highlighted ? SGStyleManager.cellSelectionBackgroundColor() : .white
     }
   }
