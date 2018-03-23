@@ -37,6 +37,29 @@
 
 @implementation SGTripSegmentsView
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+  self = [super initWithFrame:frame];
+  if (self) {
+    [self didInit];
+  }
+  return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    [self didInit];
+  }
+  return self;
+}
+
+- (void)didInit {
+  self.darkTextColor = [SGStyleManager darkTextColor];
+  self.lightTextColor = [SGStyleManager lightTextColor];
+}
+
 - (CGSize)intrinsicContentSize
 {
   return self.desiredSize;
@@ -224,7 +247,7 @@
       SGLabel *titleLabel = [[SGLabel alloc] initWithFrame:rect];
       titleLabel.font = modeTitleFont;
       titleLabel.text = modeTitle;
-      titleLabel.textColor = _textColor ? : (self.colorCodingTransitIcon ? self.lightTextColor : self.darkTextColor);
+      titleLabel.textColor = self.colorCodingTransitIcon ? self.lightTextColor : self.darkTextColor;
       titleLabel.alpha = modeImageView.alpha;
       [self addSubview:titleLabel];
       
