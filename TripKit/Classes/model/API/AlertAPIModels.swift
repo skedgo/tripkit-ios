@@ -73,7 +73,7 @@ extension API {
     public let modeInfo: ModeInfo
     
     /// This color applies to an individual service.
-    public var color: UIColor? { return modeInfo.color }
+    public var color: SGKColor? { return modeInfo.color }
   }
   
 }
