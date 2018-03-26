@@ -10,7 +10,7 @@ import XCTest
 
 @testable import TripKit
 
-class TKBuzzInfoProviderTest: TKTestCase {
+class TKBuzzInfoProviderTest: XCTestCase {
     
   func testRegionInformationSydney() throws {
     let decoder = JSONDecoder()

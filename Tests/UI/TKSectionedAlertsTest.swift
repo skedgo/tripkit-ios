@@ -12,7 +12,7 @@ import XCTest
 @testable import TripKitUI
 
 @available(iOS 10.0, *)
-class TKSectionedAlertsTest: TKTestCase {
+class TKSectionedAlertsTest: XCTestCase {
 
   var response: TKBuzzInfoProvider.AlertsTransitResponse!
   

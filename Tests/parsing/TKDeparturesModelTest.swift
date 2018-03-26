@@ -11,7 +11,7 @@ import XCTest
 @testable import TripKit
 
 
-class TKDeparturesModelTest: TKTestCase {
+class TKDeparturesModelTest: XCTestCase {
   
   func testParsingParentStopDepartures() throws {
     let decoder = JSONDecoder()
