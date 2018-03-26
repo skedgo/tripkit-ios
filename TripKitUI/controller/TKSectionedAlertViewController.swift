@@ -43,6 +43,7 @@ public class TKSectionedAlertViewController: UITableViewController {
     if #available(iOS 11.0, *), includeSearchBar {
       searchController = UISearchController(searchResultsController: nil)
       searchController.searchResultsUpdater = self
+      searchController.obscuresBackgroundDuringPresentation = false
       navigationItem.searchController = searchController
       navigationItem.hidesSearchBarWhenScrolling = false
     }
@@ -82,6 +83,7 @@ public class TKSectionedAlertViewController: UITableViewController {
     let controller = TKAlertViewController(style: .plain)
     controller.alerts = alertItem.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0) }
     controller.alertControllerDelegate = self
+    navigationController?.setNavigationBarHidden(false, animated: true)
     navigationController?.pushViewController(controller, animated: true)
   }
   
