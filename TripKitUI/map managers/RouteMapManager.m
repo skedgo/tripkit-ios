@@ -358,7 +358,7 @@
   [builder drawCircleAsTravelled:[self drawCircleAsTravelled:annotation]];
   [builder drawCircleAsLarge:[self drawAsLargeCircle:annotation]];
   [builder withHeading:self.heading];
-  [builder preferSemaphore:[annotation isKindOfClass:[StopVisits class]] && [self showAsSemaphore:(StopVisits *)annotation]];
+  [builder preferSemaphore:[self showAsSemaphore:annotation]];
   return [builder build];
 }
 
@@ -388,9 +388,9 @@
   return YES;
 }
 
-- (BOOL)showAsSemaphore:(StopVisits *)visit
+- (BOOL)showAsSemaphore:(id<MKAnnotation>)annotation
 {
-#pragma unused(visit)
+#pragma unused(annotation)
   return NO;
 }
 

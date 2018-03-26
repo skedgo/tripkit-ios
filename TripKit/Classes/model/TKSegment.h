@@ -186,6 +186,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (TKSegmentWaypoint)guessWaypointTypeForVisit:(StopVisits *)visit;
 
+
+/**
+ @return Dictionary of stop code to bool of which stops along a service this segment is travelling along.
+ */
+- (NSDictionary<NSString *, NSNumber *> *)segmentVisits;
+
 - (BOOL)fillInTemplates:(NSMutableString *)string
                 inTitle:(BOOL)title;
 

@@ -1081,7 +1081,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 	return _singleLineInstruction;
 }
 
-#define UNTRAVELLED_EACH_SIDE 15
+#define UNTRAVELLED_EACH_SIDE 5
 
 - (NSDictionary *)segmentVisits
 {

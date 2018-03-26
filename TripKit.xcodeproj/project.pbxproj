@@ -1736,24 +1736,24 @@
 		3A6DF0AA202C8EB80084CB2C /* TransportKitUI */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF0AB202C8EB80084CB2C /* ASImageAnnotationView.m */,
-				3A6DF0AC202C8EB80084CB2C /* SGSemaphoreView.swift */,
-				3A6DF0AD202C8EB80084CB2C /* SGTripSummaryNanoCell.xib */,
-				3A6DF0AE202C8EB80084CB2C /* SGCountdownCell+STKVehicular.swift */,
-				3A6DF0AF202C8EB80084CB2C /* SGTripSummaryCell.m */,
-				3A6DF0B0202C8EB80084CB2C /* SGTripSegmentsView.h */,
-				3A6DF0B1202C8EB80084CB2C /* STKTransportKitHelper.swift */,
-				3A6DF0B2202C8EB80084CB2C /* SGTripSummaryCell.swift */,
-				3A6DF0B3202C8EB80084CB2C /* SGSemaphoreView.m */,
-				3A6DF0B4202C8EB80084CB2C /* SGPolylineRenderer.h */,
-				3A6DF0B5202C8EB80084CB2C /* SGTripSummaryCell.xib */,
-				3A6DF0B6202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib */,
 				3A6DF0B7202C8EB80084CB2C /* ASImageAnnotationView.h */,
-				3A6DF0B8202C8EB80084CB2C /* SGTripSegmentsView.m */,
-				3A6DF0B9202C8EB80084CB2C /* SGTripSummaryCell.h */,
+				3A6DF0AB202C8EB80084CB2C /* ASImageAnnotationView.m */,
+				3A6DF0AE202C8EB80084CB2C /* SGCountdownCell+STKVehicular.swift */,
+				3A6DF0B4202C8EB80084CB2C /* SGPolylineRenderer.h */,
 				3A6DF0BA202C8EB80084CB2C /* SGPolylineRenderer.m */,
 				3A6DF0BB202C8EB80084CB2C /* SGSemaphoreView.h */,
+				3A6DF0B3202C8EB80084CB2C /* SGSemaphoreView.m */,
+				3A6DF0AC202C8EB80084CB2C /* SGSemaphoreView.swift */,
+				3A6DF0B0202C8EB80084CB2C /* SGTripSegmentsView.h */,
+				3A6DF0B8202C8EB80084CB2C /* SGTripSegmentsView.m */,
+				3A6DF0B9202C8EB80084CB2C /* SGTripSummaryCell.h */,
+				3A6DF0AF202C8EB80084CB2C /* SGTripSummaryCell.m */,
+				3A6DF0B2202C8EB80084CB2C /* SGTripSummaryCell.swift */,
+				3A6DF0B5202C8EB80084CB2C /* SGTripSummaryCell.xib */,
+				3A6DF0B6202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib */,
 				3A6DF0BC202C8EB80084CB2C /* SGTripSummaryMiniCell.xib */,
+				3A6DF0AD202C8EB80084CB2C /* SGTripSummaryNanoCell.xib */,
+				3A6DF0B1202C8EB80084CB2C /* STKTransportKitHelper.swift */,
 			);
 			path = TransportKitUI;
 			sourceTree = "<group>";
