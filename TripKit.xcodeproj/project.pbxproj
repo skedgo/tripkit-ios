@@ -118,11 +118,9 @@
 		3A6DF13E202C8EB80084CB2C /* TKPathFriendlinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E4202C8EB80084CB2C /* TKPathFriendlinessView.swift */; };
 		3A6DF13F202C8EB80084CB2C /* CircleAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0E5202C8EB80084CB2C /* CircleAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF140202C8EB80084CB2C /* TKDepartureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */; };
-		3A6DF141202C8EB80084CB2C /* TKAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E7202C8EB80084CB2C /* TKAlertCell.xib */; };
 		3A6DF142202C8EB80084CB2C /* TKOccupancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E8202C8EB80084CB2C /* TKOccupancyView.swift */; };
 		3A6DF143202C8EB80084CB2C /* VehicleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0E9202C8EB80084CB2C /* VehicleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF144202C8EB80084CB2C /* SGPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */; };
-		3A6DF145202C8EB80084CB2C /* TKAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EB202C8EB80084CB2C /* TKAlertCell.swift */; };
 		3A6DF147202C8EB80084CB2C /* TKEmptyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */; };
 		3A6DF148202C8EB80084CB2C /* TKVehicleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */; };
 		3A6DF149202C8EB80084CB2C /* CircleAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */; };
@@ -830,8 +828,8 @@
 		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
 		D39B7BAF20622C2D00988D8A /* TKRouteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BAE20622C2C00988D8A /* TKRouteCell.swift */; };
 		D39B7BB120622C5900988D8A /* TKRouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB020622C5900988D8A /* TKRouteCell.xib */; };
-		D39B7BB420622FD100988D8A /* TKNewAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BB220622FD100988D8A /* TKNewAlertCell.swift */; };
-		D39B7BB520622FD100988D8A /* TKNewAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB320622FD100988D8A /* TKNewAlertCell.xib */; };
+		D39B7BB420622FD100988D8A /* TKAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BB220622FD100988D8A /* TKAlertCell.swift */; };
+		D39B7BB520622FD100988D8A /* TKAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB320622FD100988D8A /* TKAlertCell.xib */; };
 		D39ECD86205A007A00E09474 /* TKSectionedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */; };
 		D39ECD87205A007A00E09474 /* TKSectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */; };
 		D39ECD89205A029500E09474 /* TKSectionedAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */; };
@@ -1026,11 +1024,9 @@
 		3A6DF0E4202C8EB80084CB2C /* TKPathFriendlinessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKPathFriendlinessView.swift; sourceTree = "<group>"; };
 		3A6DF0E5202C8EB80084CB2C /* CircleAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleAnnotationView.h; sourceTree = "<group>"; };
 		3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDepartureView.swift; sourceTree = "<group>"; };
-		3A6DF0E7202C8EB80084CB2C /* TKAlertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKAlertCell.xib; sourceTree = "<group>"; };
 		3A6DF0E8202C8EB80084CB2C /* TKOccupancyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKOccupancyView.swift; sourceTree = "<group>"; };
 		3A6DF0E9202C8EB80084CB2C /* VehicleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleView.h; sourceTree = "<group>"; };
 		3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPulsingAnnotationView.m; sourceTree = "<group>"; };
-		3A6DF0EB202C8EB80084CB2C /* TKAlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertCell.swift; sourceTree = "<group>"; };
 		3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKEmptyAlertView.swift; sourceTree = "<group>"; };
 		3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKVehicleAnnotationView.swift; sourceTree = "<group>"; };
 		3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleAnnotationView.m; sourceTree = "<group>"; };
@@ -1532,8 +1528,8 @@
 		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D39B7BAE20622C2C00988D8A /* TKRouteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRouteCell.swift; sourceTree = "<group>"; };
 		D39B7BB020622C5900988D8A /* TKRouteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKRouteCell.xib; sourceTree = "<group>"; };
-		D39B7BB220622FD100988D8A /* TKNewAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKNewAlertCell.swift; sourceTree = "<group>"; };
-		D39B7BB320622FD100988D8A /* TKNewAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKNewAlertCell.xib; sourceTree = "<group>"; };
+		D39B7BB220622FD100988D8A /* TKAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAlertCell.swift; sourceTree = "<group>"; };
+		D39B7BB320622FD100988D8A /* TKAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKAlertCell.xib; sourceTree = "<group>"; };
 		D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertViewController.swift; sourceTree = "<group>"; };
 		D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKSectionedAlertViewController.xib; sourceTree = "<group>"; };
 		D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertViewModel.swift; sourceTree = "<group>"; };
@@ -1808,8 +1804,6 @@
 				3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */,
 				3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */,
 				3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */,
-				3A6DF0EB202C8EB80084CB2C /* TKAlertCell.swift */,
-				3A6DF0E7202C8EB80084CB2C /* TKAlertCell.xib */,
 				3A6DF0F3202C8EB80084CB2C /* TKAlertInfoView.swift */,
 				3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */,
 				3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */,
@@ -1824,8 +1818,8 @@
 				3A6DF0F2202C8EB80084CB2C /* VehicleView.m */,
 				D39B7BAE20622C2C00988D8A /* TKRouteCell.swift */,
 				D39B7BB020622C5900988D8A /* TKRouteCell.xib */,
-				D39B7BB220622FD100988D8A /* TKNewAlertCell.swift */,
-				D39B7BB320622FD100988D8A /* TKNewAlertCell.xib */,
+				D39B7BB220622FD100988D8A /* TKAlertCell.swift */,
+				D39B7BB320622FD100988D8A /* TKAlertCell.xib */,
 				D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */,
 				D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */,
 			);
@@ -3293,8 +3287,7 @@
 				D39ECD87205A007A00E09474 /* TKSectionedAlertViewController.xib in Resources */,
 				3A6ABE6E204050BC00645B93 /* InfoPlist.strings in Resources */,
 				3A6DF13C202C8EB80084CB2C /* TKAlertInfoView.xib in Resources */,
-				D39B7BB520622FD100988D8A /* TKNewAlertCell.xib in Resources */,
-				3A6DF141202C8EB80084CB2C /* TKAlertCell.xib in Resources */,
+				D39B7BB520622FD100988D8A /* TKAlertCell.xib in Resources */,
 				D39B7BB120622C5900988D8A /* TKRouteCell.xib in Resources */,
 				3A6DF14A202C8EB80084CB2C /* TKDepartureView.xib in Resources */,
 				3A6DF11B202C8EB80084CB2C /* SGTripSummaryMiniCell.xib in Resources */,
@@ -3621,12 +3614,11 @@
 				3A6DF120202C8EB80084CB2C /* UIImageView+Kingfisher.swift in Sources */,
 				3A6DF106202C8EB80084CB2C /* ASMapManager.m in Sources */,
 				3A6DF13E202C8EB80084CB2C /* TKPathFriendlinessView.swift in Sources */,
-				D39B7BB420622FD100988D8A /* TKNewAlertCell.swift in Sources */,
+				D39B7BB420622FD100988D8A /* TKAlertCell.swift in Sources */,
 				3A6DF10E202C8EB80084CB2C /* SGTripSummaryCell.m in Sources */,
 				3A6DF0FE202C8EB80084CB2C /* SGTableCell.m in Sources */,
 				3A6DF144202C8EB80084CB2C /* SGPulsingAnnotationView.m in Sources */,
 				3A6DF150202C8EB80084CB2C /* MapManagerHelper.swift in Sources */,
-				3A6DF145202C8EB80084CB2C /* TKAlertCell.swift in Sources */,
 				3A6DF147202C8EB80084CB2C /* TKEmptyAlertView.swift in Sources */,
 				3A6DF12F202C8EB80084CB2C /* SGLabel.m in Sources */,
 				3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */,

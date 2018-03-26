@@ -87,8 +87,7 @@ public class TKAlertViewController: UITableViewController {
     
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 150
-//    tableView.register(TKAlertCell.nib, forCellReuseIdentifier: String(describing: TKAlertCell.self))
-    tableView.register(UINib(nibName: "TKNewAlertCell", bundle: Bundle(for: TKNewAlertCell.self)), forCellReuseIdentifier: "TKNewAlertCell")
+    tableView.register(UINib(nibName: "TKAlertCell", bundle: Bundle(for: TKAlertCell.self)), forCellReuseIdentifier: "TKAlertCell")
     SGStyleManager.styleTableView(forTileList: tableView)
   }
   
@@ -121,9 +120,7 @@ public class TKAlertViewController: UITableViewController {
       preconditionFailure("Index path refers to a non-existent alert")
     }
     
-//    let alertCell = tableView.dequeueReusableCell(withIdentifier: String(describing: TKAlertCell.self), for: indexPath) as! TKAlertCell
-    let alertCell = tableView.dequeueReusableCell(withIdentifier: "TKNewAlertCell", for: indexPath) as! TKNewAlertCell
-    
+    let alertCell = tableView.dequeueReusableCell(withIdentifier: "TKAlertCell", for: indexPath) as! TKAlertCell
     let alert = alerts[indexPath.row]
     
     // This configures the cell.
