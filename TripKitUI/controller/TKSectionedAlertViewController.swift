@@ -91,11 +91,6 @@ extension TKSectionedAlertViewController {
     return header
   }
   
-  public override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-    guard let item = dataSource?[indexPath] else { return }
-    didSelect(item)
-  }
-  
   public override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 44
   }
