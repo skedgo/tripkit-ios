@@ -38,6 +38,22 @@ extension API {
     let hashCode: Int    
     let action: Action?    
     let location: API.Location?
+    
+    // MARK: - Codable
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      hashCode    = try container.decode(Int.self, forKey: .hashCode)
+      severity    = try container.decode(Severity.self, forKey: .severity)
+      title       = try container.decode(String.self, forKey: .title)
+      text        = try? container.decode(String.self, forKey: .text)
+      url         = try? container.decode(URL.self, forKey: .url)
+      action      = try? container.decode(Action.self, forKey: .action)
+      remoteIcon  = try? container.decode(URL.self, forKey: .remoteIcon)
+      location    = try? container.decode(Location.self, forKey: .location)
+      lastUpdated  = try? container.decode(Date.self, forKey: .lastUpdated)
+      fromDate   = try? container.decode(Date.self, forKey: .fromDate)
+      toDate     = try? container.decode(Date.self, forKey: .toDate)
+    }
   }
   
   /// Replaces the previous `TKAlertWrapper`
