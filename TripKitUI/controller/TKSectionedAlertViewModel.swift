@@ -12,63 +12,73 @@ import RxDataSources
 
 public class TKSectionedAlertViewModel {
   
-  public let region: SVKRegion
-  
-  private let disposeBag = DisposeBag()
-  
-  lazy var sections: Observable<[AlertSection]> = { [unowned self] in 
-    return TKBuzzInfoProvider.rx_fetchTransitAlertMappings(forRegion: region)
-      .map { self.groupAlertMappings($0) }
-      .map { self.alertSections(from: $0) }
-      .share(replay: 1)
-  }()
+  let sections: Observable<[Section]>
   
   public init(region: SVKRegion) {
-    self.region = region
+    sections = TKBuzzInfoProvider
+      .rx_fetchTransitAlertMappings(forRegion: region)
+        .map { TKSectionedAlertViewModel.groupAlertMappings($0) }
+        .map { TKSectionedAlertViewModel.buildSections(from: $0) }
+        .share(replay: 1)
+    
+  }
+  
+  // MARK:
+  
+  struct Item {
+    let alertGroup: RouteAlerts
+    
+    var alerts: [API.Alert] {
+      return alertGroup.alerts
+    }
+  }
+  
+  
+  struct Section {
+    let modeGroup: ModeGroup
+    var items: [Item]
+    
+    var header: String? { return modeGroup.title }
+    var color: UIColor? { return modeGroup.color }
   }
   
   // MARK: -
   
-  private func groupAlertMappings(_ mappings: [API.AlertMapping]) -> [String: [AlertGroup]] {
-    var alertGroupsByModes: [String: [AlertGroup]] = [:]
+  static func groupAlertMappings(_ mappings: [API.AlertMapping]) -> [ModeGroup: [RouteAlerts]] {
     
-    for mapping in mappings {
-      mapping.routes?.forEach {
-        // TODO: Prefer to just use identifier.
-        let mode = $0.modeInfo.identifier ?? $0.modeInfo.alt
-        if var existingGroups = alertGroupsByModes[mode] {
-          let existingIds  = existingGroups.map { $0.route.id }
-          if let index = existingIds.index(of: $0.id) {
-            var currentAlerts = existingGroups[index].alerts
-            currentAlerts.append(mapping.alert)
-            existingGroups[index].alerts = currentAlerts
-            alertGroupsByModes[mode] = existingGroups
-          } else {
-            let newGroup = AlertGroup(route: $0, transportType: mapping.transportType, alerts: [mapping.alert])
-            existingGroups.append(newGroup)
-            alertGroupsByModes[mode] = existingGroups
-          }
-        } else {
-          let newGroup = AlertGroup(route: $0, transportType: mapping.transportType, alerts: [mapping.alert])
-          alertGroupsByModes[mode] = [newGroup]
-        }
+    // Firstly, we group all alerts by their mode
+    let groupedModes = Dictionary(grouping: mappings) { mapping -> ModeGroup in
+      if let modeInfo = mapping.modeInfo ?? mapping.routes?.first?.modeInfo {
+        return ModeGroup(modeInfo)
+      } else {
+        return ModeGroup.dummy
       }
     }
     
-    return alertGroupsByModes
+    // Secondly, within each mode, we group alerts by route
+    return groupedModes.mapValues { mappings -> [RouteAlerts] in
+      
+      // Mappings are `[Alert: [Route]]`. Here we invert this to `[Route: [Alert]]`
+      let alertsByRoute: [API.Route: [API.Alert]] = mappings.reduce(into: [:]) { acc, mapping in
+        mapping.routes?.forEach { route in
+          var alerts = acc[route] ?? []
+          alerts.append(mapping.alert)
+          acc[route] = alerts
+        }
+      }
+      return alertsByRoute.map {
+        return RouteAlerts(route: $0.key, alerts: $0.value)
+      }
+    }
   }
   
-  private func alertSections(from alertGroupsByMode: [String: [AlertGroup]]) -> [AlertSection] {
-    var sections: [AlertSection] = []
+  private static func buildSections(from alertGroupsByMode: [ModeGroup: [RouteAlerts]]) -> [Section] {
     
-    alertGroupsByMode.forEach { (key, value) in
-      let sorted = value.sorted(by: {$0.title < $1.title})
-      let items = sorted.map { AlertItem(alertGroup: $0) }
-      let section = AlertSection(items: items)
-      sections.append(section)
+    return alertGroupsByMode.reduce(into: []) { acc, tuple in
+      let sorted = tuple.1.sorted(by: {$0.title < $1.title})
+      let items = sorted.map { Item(alertGroup: $0) }
+      acc.append(Section(modeGroup: tuple.0, items: items))
     }
-    
-    return sections
   }
   
 }
@@ -79,14 +89,45 @@ extension API.Route {
   }
 }
 
+public func == (lhs: API.Route, rhs: API.Route) -> Bool {
+  return lhs.id == rhs.id
+}
+extension API.Route: Equatable {}
+extension API.Route: Hashable {
+  public var hashValue: Int { return id.hashValue }
+}
+
 // MARK: -
 
-struct AlertGroup {
+struct ModeGroup {
+  let title: String
+  let color: SGKColor?
+  
+  init(_ modeInfo: ModeInfo) {
+    self.title = modeInfo.descriptor ?? modeInfo.alt
+    self.color = modeInfo.color
+  }
+  
+  private init() {
+    self.title = ""
+    self.color = nil
+  }
+  
+  fileprivate static let dummy = ModeGroup()
+}
+
+func == (lhs: ModeGroup, rhs: ModeGroup) -> Bool {
+  return lhs.title == rhs.title
+}
+extension ModeGroup: Equatable {}
+extension ModeGroup: Hashable {
+  var hashValue: Int { return title.hashValue }
+}
+
+struct RouteAlerts {
   /// Each group is identifiable by a route. The route is affected
   /// by the alerts in the group.
   let route: API.Route
-  
-  let transportType: API.TransportType?
   
   /// These are the alerts affecting the route.
   var alerts: [API.Alert]
@@ -95,43 +136,12 @@ struct AlertGroup {
   var title: String { return route.title }
 }
 
-// MARK: -
+// MARK: - RxDataSources
 
-struct AlertItem {
-  let alertGroup: AlertGroup
+extension TKSectionedAlertViewModel.Section: SectionModelType {
+  typealias Item = TKSectionedAlertViewModel.Item
   
-  var alerts: [API.Alert] {
-    return alertGroup.alerts
-  }
-}
-
-// MARK: -
-
-struct AlertSection {
-  var items: [Item]
-  
-  var header: String? {
-    guard
-      let firstItem = items.first,
-      let transportType = firstItem.alertGroup.transportType
-      else { return nil }
-    
-    return transportType.id
-  }
-  
-  var color: UIColor? {
-    guard
-      let firstItem = items.first,
-      let transportType = firstItem.alertGroup.transportType
-      else { return nil}
-    return transportType.color
-  }
-}
-
-extension AlertSection: SectionModelType {
-  typealias Item = AlertItem
-  
-  init(original: AlertSection, items: [Item]) {
+  init(original: TKSectionedAlertViewModel.Section, items: [Item]) {
     self = original
     self.items = items
   }

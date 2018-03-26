@@ -85,10 +85,14 @@ extension TKBuzzInfoProvider {
    - Note: Completion block is executed on the main thread.
    */
   public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([API.Alert]) -> Void) {
-    
+    let paras: [String: Any] = [
+      "region": region.name,
+      "v": TKSettings.defaultDictionary()["v"] as! Int
+    ]
+
     SVKServer.shared.fetch(AlertsTransitResponse.self,
                            path: "alerts/transit.json",
-                           parameters: ["region": region.name],
+                           parameters: paras,
                            region: region)
     { response in
       let mappings = response?.alerts ?? []
@@ -102,24 +106,24 @@ extension TKBuzzInfoProvider {
   public class func rx_fetchTransitAlerts(forRegion region: SVKRegion) -> Observable<[API.Alert]> {
     return rx_fetchTransitAlertMappings(forRegion: region)
       .map { $0.map {$0.alert} }
-      .catchErrorJustReturn([])
   }
   
   public class func rx_fetchTransitAlertMappings(forRegion region: SVKRegion) -> Observable<[API.AlertMapping]> {
     let paras: [String: Any] = [
-      "region": region.name
+      "region": region.name,
+      "v": TKSettings.defaultDictionary()["v"] as! Int
     ]
     
     return SVKServer.shared.rx
       .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
       .map { (_, _, data) -> [API.AlertMapping] in
         let decoder = JSONDecoder()
+        // This will need adjusting down the track (when using ISO8601)
         decoder.dateDecodingStrategy = .secondsSince1970
         guard let data = data else { return [] }
         let response = try decoder.decode(AlertsTransitResponse.self, from: data)
         return response.alerts
       }
-      .catchErrorJustReturn([])
   }
   
   // MARK: - Accessibility
@@ -184,6 +188,7 @@ extension SVKServer {
 
         do {
           let decoder = JSONDecoder()
+          // This will need adjusting down the track (when using ISO8601)
           let result = try decoder.decode(type, from: data)
           completion(result)
         } catch {

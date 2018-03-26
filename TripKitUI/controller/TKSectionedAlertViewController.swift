@@ -23,7 +23,7 @@ public class TKSectionedAlertViewController: UITableViewController {
   
   private let disposeBag = DisposeBag()
   
-  private var dataSource: RxTableViewSectionedReloadDataSource<AlertSection>?
+  private var dataSource: RxTableViewSectionedReloadDataSource<TKSectionedAlertViewModel.Section>?
   
   public static func newInstance() -> TKSectionedAlertViewController {
     return TKSectionedAlertViewController(nibName: "TKSectionedAlertViewController", bundle: Bundle(for: self))
@@ -49,7 +49,7 @@ public class TKSectionedAlertViewController: UITableViewController {
   private func bindViewModel() {
     guard viewModel != nil else { assert(false, "No view model found") }
     
-    let dataSource = RxTableViewSectionedReloadDataSource<AlertSection>(configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
+    let dataSource = RxTableViewSectionedReloadDataSource<TKSectionedAlertViewModel.Section>(configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
       let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteCell", for: ip) as! TKRouteCell
       cell.route = item.alertGroup.route
       cell.cellTextColor = self?.cellTextColor
@@ -71,7 +71,7 @@ public class TKSectionedAlertViewController: UITableViewController {
       .disposed(by: disposeBag)
   }
   
-  private func didSelect(_ alertItem: AlertItem) {
+  private func didSelect(_ alertItem: TKSectionedAlertViewModel.Item) {
     let controller = TKAlertViewController(style: .plain)
     controller.alerts = alertItem.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0) }
     controller.alertControllerDelegate = self
