@@ -16,9 +16,6 @@ class TKRouteCell: UITableViewCell {
   @IBOutlet weak var routeNumberLabel: UILabel!
   @IBOutlet weak var routeNameLabel: UILabel!
   
-  @IBOutlet private weak var contentWrapperTopConstraint: NSLayoutConstraint!
-  @IBOutlet private weak var contentWrapperBottomConstraint: NSLayoutConstraint!
-  
   /// @default: `SGStyleManager.darkTextColor`
   var cellTextColor: UIColor? {
     willSet {
@@ -55,7 +52,7 @@ class TKRouteCell: UITableViewCell {
     
     modeIcon.image = SGStyleManager.image(forModeImageName: route.modeInfo.localImageName, isRealTime: false, of: .listMainMode)
     modeIcon.tintColor = cellTextColor ?? SGStyleManager.darkTextColor()
-    serviceColorIndicator.backgroundColor = route.modeInfo.color
+    serviceColorIndicator.backgroundColor = route.color
     
     routeNumberLabel.text = route.number ?? route.name
     routeNumberLabel.textColor = cellTextColor ?? SGStyleManager.darkTextColor()
@@ -63,12 +60,6 @@ class TKRouteCell: UITableViewCell {
     routeNameLabel.text = route.name
     routeNameLabel.textColor = cellTextColor ?? SGStyleManager.lightTextColor()
     routeNameLabel.isHidden = (route.name == nil) || (routeNameLabel.text == routeNumberLabel.text)
-  }
-  
-  override func updateConstraints() {
-    super.updateConstraints()
-    contentWrapperTopConstraint.constant = 0
-    contentWrapperBottomConstraint.constant = 0
   }
   
 }

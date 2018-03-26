@@ -93,8 +93,6 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="contentWrapper" destination="lKJ-xp-nwZ" id="3OQ-uZ-KT4"/>
-                <outlet property="contentWrapperBottomConstraint" destination="ygd-ga-TAB" id="Ntu-bS-Z03"/>
-                <outlet property="contentWrapperTopConstraint" destination="cLK-Sg-C2G" id="lvp-6M-XpF"/>
                 <outlet property="modeIcon" destination="fkz-jF-o6F" id="PBa-CE-19G"/>
                 <outlet property="routeNameLabel" destination="GhE-8m-KFF" id="Izn-Hw-bdq"/>
                 <outlet property="routeNumberLabel" destination="IZK-He-Yhl" id="ebU-SZ-I5s"/>

@@ -9,6 +9,7 @@
 import Foundation
 
 extension API {
+  
   public struct Alert: Codable {
     public enum Severity: String, Codable {
       case info = "info"
@@ -61,9 +62,8 @@ extension API {
     public let operators: [String]?
     public let serviceTripIDs: [String]?
     public let stopCodes: [String]?
-    public let routeIDs: [String]?
     public let routes: [API.Route]?
-    public let modeIdentifier: String?
+    public let transportType: TransportType?
   }
   
   public struct Route: Codable {
@@ -71,7 +71,33 @@ extension API {
     public let name: String?
     public let number: String?
     public let modeInfo: ModeInfo
+    
+    /// This color applies to an individual service.
+    public var color: UIColor? { return modeInfo.color }
   }
+  
+  /// This is a `Codable` representation of the transportType JSON. All routes affected
+  /// by the same alert will have the same transportType.
+  public struct TransportType: Codable {
+    public let rgbColor: RGBColor
+    public let id: String
+    public let modeIdentifier: String
+    
+    /// This color applies to the transport type (the transport mode), not the individual
+    /// services of this type.
+    public var color: UIColor {
+      return rgbColor.color      
+    }
+    
+    // MARK: - Codable
+    
+    private enum CodingKeys: String, CodingKey {
+      case modeIdentifier
+      case id = "identifier"
+      case rgbColor = "color"
+    }
+  }
+  
 }
 
 extension API.Alert.Action: Codable {

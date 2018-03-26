@@ -44,12 +44,12 @@ public class TKSectionedAlertViewModel {
             existingGroups[index].alerts = currentAlerts
             alertGroupsByModes[mode] = existingGroups
           } else {
-            let newGroup = AlertGroup(route: $0, alerts: [mapping.alert])
+            let newGroup = AlertGroup(route: $0, transportType: mapping.transportType, alerts: [mapping.alert])
             existingGroups.append(newGroup)
             alertGroupsByModes[mode] = existingGroups
           }
         } else {
-          let newGroup = AlertGroup(route: $0, alerts: [mapping.alert])
+          let newGroup = AlertGroup(route: $0, transportType: mapping.transportType, alerts: [mapping.alert])
           alertGroupsByModes[mode] = [newGroup]
         }
       }
@@ -64,7 +64,7 @@ public class TKSectionedAlertViewModel {
     alertGroupsByMode.forEach { (key, value) in
       let sorted = value.sorted(by: {$0.title < $1.title})
       let items = sorted.map { AlertItem(alertGroup: $0) }
-      let section = AlertSection(header: key, items: items)
+      let section = AlertSection(items: items)
       sections.append(section)
     }
     
@@ -84,7 +84,9 @@ extension API.Route {
 struct AlertGroup {
   /// Each group is identifiable by a route. The route is affected
   /// by the alerts in the group.
-  var route: API.Route
+  let route: API.Route
+  
+  let transportType: API.TransportType?
   
   /// These are the alerts affecting the route.
   var alerts: [API.Alert]
@@ -96,17 +98,33 @@ struct AlertGroup {
 // MARK: -
 
 struct AlertItem {
-  var alertGroup: AlertGroup
+  let alertGroup: AlertGroup
+  
+  var alerts: [API.Alert] {
+    return alertGroup.alerts
+  }
 }
 
 // MARK: -
 
 struct AlertSection {
-  var header: String
   var items: [Item]
-  var icon: UIImage? {
-    guard let imageName = items.first?.alertGroup.route.modeInfo.localImageName else { return nil }
-    return SGStyleManager.image(forModeImageName: imageName, isRealTime: false, of: .listMainMode)
+  
+  var header: String? {
+    guard
+      let firstItem = items.first,
+      let transportType = firstItem.alertGroup.transportType
+      else { return nil }
+    
+    return transportType.id
+  }
+  
+  var color: UIColor? {
+    guard
+      let firstItem = items.first,
+      let transportType = firstItem.alertGroup.transportType
+      else { return nil}
+    return transportType.color
   }
 }
 

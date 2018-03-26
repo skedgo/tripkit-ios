@@ -73,7 +73,7 @@ public class TKSectionedAlertViewController: UITableViewController {
   
   private func didSelect(_ alertItem: AlertItem) {
     let controller = TKAlertViewController(style: .plain)
-    controller.alerts = alertItem.alertGroup.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0) }
+    controller.alerts = alertItem.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0) }
     controller.alertControllerDelegate = self
     navigationController?.pushViewController(controller, animated: true)
   }
@@ -85,10 +85,9 @@ extension TKSectionedAlertViewController {
   public override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     guard let source = dataSource else { return nil }
     let header = TKSectionedAlertTableHeader.newInstance()
-    header.backgroundColor = SGStyleManager.backgroundColorForTileList()
     let section = source[section]
     header.titleLabel.text = section.header
-    header.iconView.image = section.icon
+    header.backgroundColor = section.color
     return header
   }
   
@@ -98,7 +97,7 @@ extension TKSectionedAlertViewController {
   }
   
   public override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 36
+    return 44
   }
   
 }
