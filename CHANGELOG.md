@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added method to opt-out of restoring the last viewed map rect in `ASMapManager`
 - Added real-time vehicle components to `API.Vehicle` and `Vehicle` which provides information of how the physical structure of vehicles
 - Added `TKTrainOccupancyView` to display the per-carriage occupancy of a train
+- Added `TKSectionedAlertViewController` for displaying all transit alerts in a region
 
 ### Changed
 

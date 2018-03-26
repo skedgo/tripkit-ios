@@ -240,6 +240,11 @@ public class Loc : NSObject {
     return String(format: format, date)
   }
   
+  public static func LastUpdated(date: String) -> String {
+    let format = NSLocalizedString("Last updated: %@", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Last updated at %date")
+    return String.init(format: format, date)
+  }
+  
   @objc(Every:)
   public static func Every(dayString: String) -> String {
     let format = NSLocalizedString("Every %@", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat)")

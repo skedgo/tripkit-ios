@@ -29,7 +29,7 @@ public class TKAlertInfoView: UIView {
   /// `title` and `text` properties will be used by the titleLabel and
   /// instructionLabel respectively.
   ///
-  @objc public var alert: TKAlertModel? {
+  @objc public var alert: TKAlert? {
     didSet {
       guard let alert = alert else { return }
       titleLabel.text = alert.title
@@ -53,7 +53,7 @@ public class TKAlertInfoView: UIView {
   ///
   /// - Parameter alert: An alert instance used to configure title and instruction labels.
   /// - Returns: An instance of TKAlertInfoView
-  @objc public class func newInstance(with alert: TKAlertModel) -> TKAlertInfoView {
+  @objc public class func newInstance(with alert: TKAlert) -> TKAlertInfoView {
     let view = newInstance()
     view.alert = alert
     return view

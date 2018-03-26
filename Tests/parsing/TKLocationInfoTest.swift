@@ -10,7 +10,7 @@ import XCTest
 
 @testable import TripKit
 
-class TKLocationInfoTest: TKTestCase {
+class TKLocationInfoTest: XCTestCase {
     
   func testLocationInformationForBikePods() throws {
     let decoder = JSONDecoder()

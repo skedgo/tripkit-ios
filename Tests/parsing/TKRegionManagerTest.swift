@@ -10,7 +10,7 @@ import XCTest
 
 @testable import TripKit
 
-class TKRegionManagerTest: TKTestCase {
+class TKRegionManagerTest: XCTestCase {
   
   var regionData: Data! = nil
   
