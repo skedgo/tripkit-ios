@@ -11,13 +11,22 @@ import UIKit
 class TKRouteCell: UITableViewCell {
   
   @IBOutlet weak var contentWrapper: UIView!
-  @IBOutlet weak var routeNumberLabel: UILabel!
-  @IBOutlet weak var infoIcon: UIImageView!
-  @IBOutlet weak var alertCountLabel: UILabel!
+  @IBOutlet weak var modeIcon: UIImageView!
   @IBOutlet weak var serviceColorIndicator: UIView!
+  @IBOutlet weak var routeNumberLabel: UILabel!
+  @IBOutlet weak var routeNameLabel: UILabel!
   
   @IBOutlet private weak var contentWrapperTopConstraint: NSLayoutConstraint!
   @IBOutlet private weak var contentWrapperBottomConstraint: NSLayoutConstraint!
+  
+  /// @default: `SGStyleManager.darkTextColor`
+  var cellTextColor: UIColor? {
+    willSet {
+      routeNumberLabel.textColor = newValue
+      routeNameLabel.textColor = newValue
+      modeIcon.tintColor = newValue
+    }
+  }
   
   var route: API.Route? {
     didSet {
@@ -25,30 +34,18 @@ class TKRouteCell: UITableViewCell {
     }
   }
   
-  var alertCount: Int? {
-    didSet {
-      guard let value = alertCount else {
-        alertCountLabel.isHidden = true
-        return
-      }
-      alertCountLabel.isHidden = false
-      alertCountLabel.text = "\(value)"
-    }
-  }
-  
   // MARK: -
-  
-  override func awakeFromNib() {
-    backgroundColor = SGStyleManager.backgroundColorForTileList()
-    infoIcon.tintColor = SGStyleManager.globalTintColor()
-    alertCountLabel.textColor = SGStyleManager.globalTintColor()
-  }
   
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     super.setHighlighted(highlighted, animated: animated)
     UIView.animate(withDuration: 0.25) {
-      self.contentWrapper.backgroundColor = highlighted ? SGStyleManager.cellSelectionBackgroundColor() : .white
+      self.backgroundColor = highlighted ? SGStyleManager.cellSelectionBackgroundColor() : .white
     }
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+    self.backgroundColor = selected ? SGStyleManager.cellSelectionBackgroundColor() : .white
   }
   
   // MARK: -
@@ -56,8 +53,16 @@ class TKRouteCell: UITableViewCell {
   private func updateContent() {
     guard let route = route else { return }
     
-    routeNumberLabel.text = route.number ?? route.name
+    modeIcon.image = SGStyleManager.image(forModeImageName: route.modeInfo.localImageName, isRealTime: false, of: .listMainMode)
+    modeIcon.tintColor = cellTextColor ?? SGStyleManager.darkTextColor()
     serviceColorIndicator.backgroundColor = route.modeInfo.color
+    
+    routeNumberLabel.text = route.number ?? route.name
+    routeNumberLabel.textColor = cellTextColor ?? SGStyleManager.darkTextColor()
+    
+    routeNameLabel.text = route.name
+    routeNameLabel.textColor = cellTextColor ?? SGStyleManager.lightTextColor()
+    routeNameLabel.isHidden = (route.name == nil) || (routeNameLabel.text == routeNumberLabel.text)
   }
   
   override func updateConstraints() {

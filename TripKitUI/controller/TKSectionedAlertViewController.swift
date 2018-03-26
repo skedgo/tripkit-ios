@@ -15,6 +15,12 @@ public class TKSectionedAlertViewController: UITableViewController {
   
   public var viewModel: TKSectionedAlertViewModel!
   
+  /// This is used to color the labels, as well as to tint the mode
+  /// icon in cells.
+  ///
+  /// @default: `SGStyleManager.darkTextColor`
+  public var cellTextColor: UIColor?
+  
   private let disposeBag = DisposeBag()
   
   private var dataSource: RxTableViewSectionedReloadDataSource<AlertSection>?
@@ -30,7 +36,6 @@ public class TKSectionedAlertViewController: UITableViewController {
     tableView.register(nib, forCellReuseIdentifier: "TKRouteCell")
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 60
-//    tableView.separatorStyle = .none
     
     bindViewModel()
   }
@@ -44,10 +49,10 @@ public class TKSectionedAlertViewController: UITableViewController {
   private func bindViewModel() {
     guard viewModel != nil else { assert(false, "No view model found") }
     
-    let dataSource = RxTableViewSectionedReloadDataSource<AlertSection>(configureCell: { (ds, tv, ip, item) -> UITableViewCell in
+    let dataSource = RxTableViewSectionedReloadDataSource<AlertSection>(configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
       let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteCell", for: ip) as! TKRouteCell
       cell.route = item.alertGroup.route
-      cell.alertCount = item.alertGroup.alerts.count
+      cell.cellTextColor = self?.cellTextColor
       return cell
     })
     
@@ -85,6 +90,11 @@ extension TKSectionedAlertViewController {
     header.titleLabel.text = section.header
     header.iconView.image = section.icon
     return header
+  }
+  
+  public override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+    guard let item = dataSource?[indexPath] else { return }
+    didSelect(item)
   }
   
   public override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
