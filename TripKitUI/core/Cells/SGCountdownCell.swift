@@ -160,7 +160,7 @@ extension SGCountdownCell {
   }
   
   
-  @objc public func addViewToFootnote(_ view: UIView) {
+  @objc public func replaceFootnoteView(_ view: UIView) {
     // Make sure we start clean.
     for subview in footnoteView.subviews {
       subview.removeFromSuperview()

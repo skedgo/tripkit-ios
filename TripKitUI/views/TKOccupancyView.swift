@@ -14,7 +14,7 @@ import UIKit
 #endif
 
 @available(iOS 9.0, *)
-extension API.Vehicle.Occupancy {
+extension API.VehicleOccupancy {
   
   var icon: UIImage? {
     switch self {
@@ -106,7 +106,7 @@ extension TKOccupancyView {
 extension TKOccupancyView {
   
   public enum Purpose {
-    case occupancy(API.Vehicle.Occupancy)
+    case occupancy(API.VehicleOccupancy)
     case wheelchair
   }
   

@@ -18,9 +18,8 @@
 @dynamic longitude;
 @dynamic lastUpdate;
 @dynamic bearing;
-@dynamic occupancyRaw;
+@dynamic componentsData;
 @dynamic label;
-@dynamic wifi;
 @dynamic toDelete;
 @dynamic service, serviceAlternatives;
 @dynamic segment, segmentAlternatives;
