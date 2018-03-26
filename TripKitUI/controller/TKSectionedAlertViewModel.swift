@@ -7,20 +7,28 @@
 //
 
 import Foundation
+
 import RxSwift
+import RxCocoa
 import RxDataSources
 
-public class TKSectionedAlertViewModel {
+class TKSectionedAlertViewModel {
   
-  let sections: Observable<[Section]>
+  let sections: Driver<[Section]>
   
-  public init(region: SVKRegion) {
-    sections = TKBuzzInfoProvider
-      .rx_fetchTransitAlertMappings(forRegion: region)
-        .map { TKSectionedAlertViewModel.groupAlertMappings($0) }
-        .map { TKSectionedAlertViewModel.buildSections(from: $0) }
-        .share(replay: 1)
+  init(
+    region: SVKRegion,
+    searchText: Observable<String>
+  ) {
     
+    let allRouteAlerts = TKBuzzInfoProvider
+      .rx_fetchTransitAlertMappings(forRegion: region)
+      .map { TKSectionedAlertViewModel.groupAlertMappings($0) }
+
+    sections = Observable.combineLatest(allRouteAlerts, searchText.startWith("")) { TKSectionedAlertViewModel.buildSections(from: $0, filter: $1) }
+      .asDriver(onErrorRecover: { error in
+        return Driver.just([])
+      })
   }
   
   // MARK:
@@ -72,10 +80,12 @@ public class TKSectionedAlertViewModel {
     }
   }
   
-  private static func buildSections(from alertGroupsByMode: [ModeGroup: [RouteAlerts]]) -> [Section] {
+  private static func buildSections(from alertGroupsByMode: [ModeGroup: [RouteAlerts]], filter: String) -> [Section] {
     
     return alertGroupsByMode.reduce(into: []) { acc, tuple in
-      let sorted = tuple.1.sorted(by: {$0.title < $1.title})
+      let filtered = tuple.1.filter { filter.isEmpty || $0.title.contains(filter) }
+      guard !filtered.isEmpty else { return }
+      let sorted = filtered.sorted(by: {$0.title < $1.title})
       let items = sorted.map { Item(alertGroup: $0) }
       acc.append(Section(modeGroup: tuple.0, items: items))
     }

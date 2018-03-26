@@ -13,7 +13,10 @@ import SafariServices
 
 public class TKSectionedAlertViewController: UITableViewController {
   
-  public var viewModel: TKSectionedAlertViewModel!
+  public var region: SVKRegion!
+  public var includeSearchBar: Bool = true
+  
+  private var viewModel: TKSectionedAlertViewModel!
   
   /// This is used to color the labels, as well as to tint the mode
   /// icon in cells.
@@ -22,32 +25,32 @@ public class TKSectionedAlertViewController: UITableViewController {
   public var cellTextColor: UIColor?
   
   private let disposeBag = DisposeBag()
+
+  private var searchController: UISearchController!
+  private let searchText = PublishSubject<String>()
   
   private var dataSource: RxTableViewSectionedReloadDataSource<TKSectionedAlertViewModel.Section>?
   
-  public static func newInstance() -> TKSectionedAlertViewController {
-    return TKSectionedAlertViewController(nibName: "TKSectionedAlertViewController", bundle: Bundle(for: self))
+  public static func newInstance(region: SVKRegion) -> TKSectionedAlertViewController {
+    let controller = TKSectionedAlertViewController(nibName: "TKSectionedAlertViewController", bundle: Bundle(for: self))
+    controller.region = region
+    return controller
   }
         
   override public func viewDidLoad() {
     super.viewDidLoad()
     
+    if #available(iOS 11.0, *), includeSearchBar {
+      searchController = UISearchController(searchResultsController: nil)
+      searchController.searchResultsUpdater = self
+      navigationItem.searchController = searchController
+      navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
     let nib = UINib(nibName: "TKRouteCell", bundle: Bundle(for: TKSectionedAlertViewController.self))
     tableView.register(nib, forCellReuseIdentifier: "TKRouteCell")
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 60
-    
-    bindViewModel()
-  }
-
-  override public func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
-  
-  // MARK: -
-  
-  private func bindViewModel() {
-    guard viewModel != nil else { assert(false, "No view model found") }
     
     let dataSource = RxTableViewSectionedReloadDataSource<TKSectionedAlertViewModel.Section>(configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
       let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteCell", for: ip) as! TKRouteCell
@@ -55,12 +58,16 @@ public class TKSectionedAlertViewController: UITableViewController {
       cell.cellTextColor = self?.cellTextColor
       return cell
     })
+
+    viewModel = TKSectionedAlertViewModel(
+      region: region,
+      searchText: searchText
+    )
     
     self.dataSource = dataSource
     
     viewModel.sections
-      .observeOn(MainScheduler.instance)
-      .bind(to: tableView.rx.items(dataSource: dataSource))
+      .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
     tableView.rx.itemSelected
@@ -102,6 +109,18 @@ extension TKSectionedAlertViewController: TKAlertViewControllerDelegate {
   public func alertViewController(_ controller: TKAlertViewController, didTapOnURL url: URL) {
     let browser = SFSafariViewController(url: url)
     present(browser, animated: true, completion: nil)
+  }
+  
+}
+
+extension TKSectionedAlertViewController: UISearchControllerDelegate {
+  
+}
+
+extension TKSectionedAlertViewController: UISearchResultsUpdating {
+  
+  public func updateSearchResults(for searchController: UISearchController) {
+    searchText.onNext(searchController.searchBar.text ?? "")
   }
   
 }
