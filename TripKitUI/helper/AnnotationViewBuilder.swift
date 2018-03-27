@@ -65,8 +65,10 @@ public class AnnotationViewBuilder: NSObject {
   @objc public func build() -> MKAnnotationView? {
     if let vehicle = annotation as? Vehicle {
       return build(for: vehicle)
+    } else if preferSemaphore, let timePoint = annotation as? STKDisplayableTimePoint {
+      return buildSemaphore(for: timePoint)
     } else if let visit = annotation as? StopVisits {
-      return preferSemaphore ? buildSemaphore(for: visit) : buildCircle(for: visit)
+      return buildCircle(for: visit)
     } else if let stop = annotation as? StopLocation {
       return buildCircle(for: stop)
     } else if let segment = annotation as? TKSegment {
@@ -142,12 +144,12 @@ fileprivate extension AnnotationViewBuilder {
     }
   }
 
-  fileprivate func buildSemaphore(for visit: StopVisits) -> MKAnnotationView {
-    let semaphoreView = self.semaphoreView(for: visit)
+  fileprivate func buildSemaphore(for point: STKDisplayableTimePoint) -> MKAnnotationView {
+    let semaphoreView = self.semaphoreView(for: point)
     
     // Set time stamp on the side opposite to direction of travel
-    let side = semaphoreLabel(for: visit.bearing?.doubleValue)
-    semaphoreView.setTime(visit.departure, isRealTime: visit.service.isRealTime, in: visit.stop.region?.timeZone, onSide: side)
+    let side = semaphoreLabel(for: point.bearing?.doubleValue)
+    semaphoreView.setTime(point.time, isRealTime: point.timeIsRealTime, in: point.timeZone, onSide: side)
 
     semaphoreView.canShowCallout = annotation.title != nil
     semaphoreView.isEnabled = true

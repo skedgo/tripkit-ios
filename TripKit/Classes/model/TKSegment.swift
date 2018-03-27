@@ -53,6 +53,24 @@ extension TKSegment {
   
 }
 
+// MARK: - Public transport
+
+extension TKSegment {
+  
+  public var embarkation: StopVisits? {
+    return service()?.sortedVisits.first { visit in
+      return self.segmentVisits()[visit.stop.stopCode]?.boolValue == true
+    }
+  }
+  
+  public var disembarkation: StopVisits? {
+    return service()?.sortedVisits.reversed().first { visit in
+      return self.segmentVisits()[visit.stop.stopCode]?.boolValue == true
+    }
+  }
+  
+}
+
 // MARK: - Path info
 
 extension TKSegment {
