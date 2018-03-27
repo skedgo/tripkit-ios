@@ -16,6 +16,7 @@ public protocol TKGlyphableAnnotation: MKAnnotation {
   var glyphColor: SGKColor? { get }
   var glyphImage: SGKImage? { get }
   var glyphImageURL: URL? { get }
+  var glyphImageIsTemplate: Bool { get }
   
 }
 
