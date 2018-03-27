@@ -161,6 +161,10 @@ extension TKSegment: STKDisplayablePoint {
   public var pointImageURL: URL? {
     return imageURL(for: .listMainMode)
   }
+  
+  public var pointImageIsTemplate: Bool {
+    return modeInfo()?.remoteImageIsTemplate ?? false
+  }
 
   fileprivate func image(for iconType: SGStyleModeIconType, allowRealTime: Bool) -> SGKImage? {
     var localImageName = modeInfo()?.localImageName
@@ -309,6 +313,11 @@ extension TKSegment: STKTripSegment {
   public var tripSegmentModeImageURL: URL? {
     return imageURL(for: .listMainMode)
   }
+  
+  public var tripSegmentModeImageIsTemplate: Bool {
+    return pointImageIsTemplate
+  }
+
   
   public var tripSegmentModeInfoIconType: STKInfoIconType {
     return alerts().first?.infoIconType ?? .none

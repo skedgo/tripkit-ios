@@ -141,12 +141,10 @@
       modeImageView.tintColor = self.darkTextColor;
     }
 
-    NSURL *modeImageURL = [segment respondsToSelector:@selector(tripSegmentModeImageURL)]
-      ? [segment tripSegmentModeImageURL]
-      : nil;
-    
+    NSURL *modeImageURL = [segment tripSegmentModeImageURL];
+    BOOL asTemplate = [segment tripSegmentModeImageIsTemplate];
     if (modeImageURL) {
-      [modeImageView setImageWithURL:modeImageURL placeholderImage:image];
+      [modeImageView setImageWithURL:modeImageURL asTemplate:asTemplate placeholderImage:image];
     }
     
     // place the mode image

@@ -154,6 +154,7 @@
 
   UIImage *image = nil;
   NSURL *imageURL = nil;
+  BOOL asTemplate = NO;
   NSNumber *bearing = nil;
   BOOL terminal = NO;
   BOOL canFlip = NO;
@@ -161,7 +162,8 @@
   if ([annotation conformsToProtocol:@protocol(STKDisplayablePoint)]) {
     id<STKDisplayablePoint> displayable = (id<STKDisplayablePoint>)annotation;
     image = [displayable pointImage];
-    imageURL = [annotation respondsToSelector:@selector(pointImageURL)] ? [displayable pointImageURL] : nil;
+    imageURL = [displayable pointImageURL];
+    asTemplate = [displayable pointImageIsTemplate];
 
     if ([annotation conformsToProtocol:@protocol(STKDisplayableTimePoint)]) {
       id<STKDisplayableTimePoint> timePoint = (id<STKDisplayableTimePoint>)annotation;
@@ -171,7 +173,7 @@
     }
   }
   
-	[self setHeadWithImage:image imageURL:imageURL forBearing:bearing andHeading:heading inRed:terminal canFlipImage:canFlip];
+  [self setHeadWithImage:image imageURL:imageURL imageIsTemplate:asTemplate forBearing:bearing andHeading:heading inRed:terminal canFlipImage:canFlip];
 }
 
 - (void)prepareForReuse
@@ -201,12 +203,14 @@
 
 - (void)setHeadWithImage:(UIImage *)image
                 imageURL:(NSURL *)imageURL
+         imageIsTemplate:(BOOL)asTemplate
               forBearing:(NSNumber *)bearing
 							andHeading:(CLLocationDirection)heading
 						canFlipImage:(BOOL)canFlipImage
 {
     [self setHeadWithImage:image
                   imageURL:imageURL
+           imageIsTemplate:asTemplate
 								forBearing:bearing
 								andHeading:heading
 										 inRed:NO
@@ -384,6 +388,7 @@
 
 - (void)setHeadWithImage:(UIImage *)image
                 imageURL:(NSURL *)imageURL
+         imageIsTemplate:(BOOL)asTemplate
 							forBearing:(NSNumber *)bearing
 							andHeading:(CLLocationDirection)heading
 									 inRed:(BOOL)red
@@ -424,7 +429,7 @@
   self.modeImageView.tintColor = headTintColor;
   
   if (imageURL) {
-    [self.modeImageView setImageWithURL:imageURL placeholderImage:image];
+    [self.modeImageView setImageWithURL:imageURL asTemplate:asTemplate placeholderImage:image];
   }
   
 	self.isFlipped = NO;

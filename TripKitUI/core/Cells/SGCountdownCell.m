@@ -148,6 +148,7 @@ typedef enum {
                 subsubtitle:(NSString *)subsubtitle
                        icon:(UIImage *)icon
                iconImageURL:(NSURL *)iconImageURL
+             iconIsTemplate:(BOOL)iconIsTemplate
           timeToCountdownTo:(NSDate *)time
                    position:(SGKGrouping)position
                  stripColor:(UIColor *)stripColor
@@ -158,7 +159,7 @@ typedef enum {
   self.time = time;
   self.position = position;
   
-  [self.modeIcon setImageWithURL:iconImageURL placeholderImage:icon];
+  [self.modeIcon setImageWithURL:iconImageURL asTemplate:iconIsTemplate placeholderImage:icon];
   self.modeIcon.tintColor = [SGStyleManager darkTextColor];
   
   self.title.attributedText = title;

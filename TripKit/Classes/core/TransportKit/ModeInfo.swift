@@ -18,7 +18,11 @@ public class ModeInfo: NSObject, Codable, NSSecureCoding {
 
   @objc public let localImageName: String?
   @objc public let remoteImageName: String?
+  private let remoteIconIsTemplate: Bool?
   @objc public let remoteDarkImageName: String?
+  @objc public var remoteImageIsTemplate: Bool {
+    return remoteIconIsTemplate ?? false
+  }
   
   /// Additional descriptor for image, e.g., "GoGet", "Shuttle"
   @objc public let descriptor: String?
@@ -45,6 +49,7 @@ public class ModeInfo: NSObject, Codable, NSSecureCoding {
     case localImageName = "localIcon"
     case remoteImageName = "remoteIcon"
     case remoteDarkImageName = "remoteDarkIcon"
+    case remoteIconIsTemplate
     case descriptor
     case rgbColor = "color"
   }
@@ -71,6 +76,7 @@ public class ModeInfo: NSObject, Codable, NSSecureCoding {
         localImageName = decoded.localImageName
         remoteImageName = decoded.remoteImageName
         remoteDarkImageName = decoded.remoteDarkImageName
+        remoteIconIsTemplate = decoded.remoteIconIsTemplate
         descriptor = decoded.descriptor
         rgbColor = decoded.rgbColor
       } catch {
@@ -91,6 +97,7 @@ public class ModeInfo: NSObject, Codable, NSSecureCoding {
       } else {
         rgbColor = nil
       }
+      remoteIconIsTemplate = false // new property
     }
   }
 }

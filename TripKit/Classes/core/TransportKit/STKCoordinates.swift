@@ -97,6 +97,10 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation, TKGlyphable
     return SVKServer.imageURL(forIconFileNamePart: imageName, of: .mapIcon)
   }
   
+  public var pointImageIsTemplate: Bool {
+    return stopModeInfo.remoteImageIsTemplate
+  }
+  
   public var glyphColor: SGKColor? {
     return stopModeInfo.glyphColor
   }

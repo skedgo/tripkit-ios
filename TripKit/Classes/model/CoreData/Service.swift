@@ -31,6 +31,10 @@ extension Service {
     guard let remoteImage = findModeInfo()?.remoteImageName else { return nil }
     return SVKServer.imageURL(forIconFileNamePart: remoteImage, of: type)
   }
+  
+  public var modeImageIsTemplate: Bool {
+    return findModeInfo()?.remoteImageIsTemplate ?? false
+  }
 
   private func findModeInfo() -> ModeInfo? {
     if let modeInfo = modeInfo {

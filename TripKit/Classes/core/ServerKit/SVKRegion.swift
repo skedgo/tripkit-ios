@@ -32,6 +32,7 @@ public class SVKRegion : NSObject, Codable {
     public let pointDisplaysImage: Bool = true
     public let pointImage: SGKImage? = SGStyleManager.imageNamed("icon-map-info-city")
     public var pointImageURL: URL? = nil
+    public var pointImageIsTemplate: Bool = false
     public var pointClusterIdentifier: String? = "SVKRegion.City"
 
     @objc public var centerBiasedMapRect: MKMapRect {

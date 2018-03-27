@@ -1704,15 +1704,15 @@
 		3A6DF096202C8EB80084CB2C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF097202C8EB80084CB2C /* SGTableCell.h */,
-				3A6DF098202C8EB80084CB2C /* SGTableViewCell.m */,
 				3A6DF099202C8EB80084CB2C /* SGCountdownCell.h */,
-				3A6DF09A202C8EB80084CB2C /* SGCountdownCell.swift */,
-				3A6DF09B202C8EB80084CB2C /* SGTableViewCell.xib */,
-				3A6DF09C202C8EB80084CB2C /* SGCountdownCell.xib */,
-				3A6DF09D202C8EB80084CB2C /* SGTableCell.m */,
 				3A6DF09E202C8EB80084CB2C /* SGCountdownCell.m */,
+				3A6DF09A202C8EB80084CB2C /* SGCountdownCell.swift */,
+				3A6DF09C202C8EB80084CB2C /* SGCountdownCell.xib */,
+				3A6DF097202C8EB80084CB2C /* SGTableCell.h */,
+				3A6DF09D202C8EB80084CB2C /* SGTableCell.m */,
 				3A6DF09F202C8EB80084CB2C /* SGTableViewCell.h */,
+				3A6DF098202C8EB80084CB2C /* SGTableViewCell.m */,
+				3A6DF09B202C8EB80084CB2C /* SGTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
