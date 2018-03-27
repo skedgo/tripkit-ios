@@ -59,6 +59,8 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation, TKGlyphable
     super.init(coder: aDecoder)
   }
   
+  public var priority: Float?
+  
   private var _stopModeInfo: ModeInfo? = nil
   public var stopModeInfo: ModeInfo {
     get {
