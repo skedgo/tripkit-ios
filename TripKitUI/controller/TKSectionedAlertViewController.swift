@@ -44,6 +44,7 @@ public class TKSectionedAlertViewController: UITableViewController {
       searchController = UISearchController(searchResultsController: nil)
       searchController.searchResultsUpdater = self
       searchController.obscuresBackgroundDuringPresentation = false
+      searchController.searchBar.tintColor = SGStyleManager.globalAccentColor()
       navigationItem.searchController = searchController
       navigationItem.hidesSearchBarWhenScrolling = false
     }
