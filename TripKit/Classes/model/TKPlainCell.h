@@ -21,13 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy)   NSString *regionIdentifier;
 @property (nonatomic, assign) SGCellLevel level;
 
-- (nullable NSNumber*)hashCode;
-
-- (nullable NSDate*)lastUpdate;
-
-- (nullable NSArray<STKModeCoordinate *>*)locations;
-
-- (nullable NSArray<STKModeCoordinate *>*)previousLocations;
+@property (nonatomic, readonly, nullable) NSNumber *hashCode;
+@property (nonatomic, readonly, nullable) NSDate *lastUpdate;
+@property (nonatomic, readonly, nullable) NSArray<STKModeCoordinate *> *locations;
+@property (nonatomic, readonly, nullable) NSArray<STKModeCoordinate *> *previousLocations;
 
 - (void)updateLocations:(NSArray<STKModeCoordinate *>*)locations hashCode:(NSNumber *)hashCode;
 
