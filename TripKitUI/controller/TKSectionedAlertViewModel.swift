@@ -14,21 +14,34 @@ import RxDataSources
 
 class TKSectionedAlertViewModel {
   
-  let sections: Driver<[Section]>
+  enum State {
+    case loading
+    case content([Section])
+  }
+  
+  private let rx_contentState = Variable<State>(.loading)
+  var contentState: Observable<State> {
+    return rx_contentState.asObservable()
+  }
+  
+  private let disposeBag = DisposeBag()
   
   init(
     region: SVKRegion,
     searchText: Observable<String>
   ) {
-    
     let allRouteAlerts = TKBuzzInfoProvider
       .rx_fetchTransitAlertMappings(forRegion: region)
       .map { TKSectionedAlertViewModel.groupAlertMappings($0) }
-
-    sections = Observable.combineLatest(allRouteAlerts, searchText.startWith("")) { TKSectionedAlertViewModel.buildSections(from: $0, filter: $1) }
-      .asDriver(onErrorRecover: { error in
-        return Driver.just([])
-      })
+    
+    Observable.combineLatest(allRouteAlerts, searchText.startWith("")) { TKSectionedAlertViewModel.buildSections(from: $0, filter: $1) }
+      .asDriver(onErrorJustReturn: [])
+      .map { sections -> State in
+        return .content(sections)
+      }
+      .asObservable()
+      .bind(to: rx_contentState)
+      .disposed(by: disposeBag)
   }
   
   // MARK:
@@ -40,7 +53,6 @@ class TKSectionedAlertViewModel {
       return alertGroup.alerts
     }
   }
-  
   
   struct Section {
     let modeGroup: ModeGroup

@@ -34,6 +34,7 @@ public class TKSectionedAlertViewController: UITableViewController {
   // MARK: - Supplementary view
   
   private var emptyAlertView: TKEmptyAlertView?
+  private var loadingView: TKLoadingAlertView?
   
   // MARK: - Constructor
   
@@ -76,14 +77,27 @@ public class TKSectionedAlertViewController: UITableViewController {
     
     self.dataSource = dataSource
     
-    viewModel.sections
-      .drive(tableView.rx.items(dataSource: dataSource))
+    viewModel.contentState
+      .map { state -> [TKSectionedAlertViewModel.Section]? in
+        switch state {
+        case .content(let sections): return sections
+        default: return nil
+        }
+      }
+      .filter { $0 != nil}
+      .map { $0! }
+      .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
-    viewModel.sections
-      .asObservable()
-      .subscribe(onNext: { [weak self] in
-        $0.isEmpty ? self?.insertEmptyAlertView() : self?.removeEmptyAlertView()
+    viewModel.contentState
+      .subscribe(onNext: { [weak self] state in
+        switch state {
+        case .loading:
+          self?.insertLoadingView()
+        case .content(let sections):
+          self?.removeLoadingView()
+          sections.isEmpty ? self?.insertEmptyAlertView() : self?.removeEmptyAlertView()
+        }
       })
       .disposed(by: disposeBag)
     
@@ -126,6 +140,21 @@ public class TKSectionedAlertViewController: UITableViewController {
     emptyAlertView = nil
   }
   
+  private func insertLoadingView() {
+    let loadingView = TKLoadingAlertView.newInstance()
+    loadingView.frame.size = view.frame.size
+    loadingView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    loadingView.spinner.startAnimating()
+    view.insertSubview(loadingView, aboveSubview: tableView)
+    self.loadingView = loadingView
+  }
+  
+  private func removeLoadingView() {
+    loadingView?.spinner.stopAnimating()
+    loadingView?.removeFromSuperview()
+    loadingView = nil
+  }
+  
 }
 
 extension TKSectionedAlertViewController {
@@ -161,17 +190,6 @@ extension TKSectionedAlertViewController: UISearchResultsUpdating {
   
   public func updateSearchResults(for searchController: UISearchController) {
     searchText.onNext(searchController.searchBar.text ?? "")
-  }
-  
-}
-
-extension UIView {
-  
-  func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
-    let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-    let mask = CAShapeLayer()
-    mask.path = path.cgPath
-    self.layer.mask = mask
   }
   
 }
