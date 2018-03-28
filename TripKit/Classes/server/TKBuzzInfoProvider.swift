@@ -87,7 +87,7 @@ extension TKBuzzInfoProvider {
   public class func fetchTransitAlerts(forRegion region: SVKRegion, completion: @escaping ([API.Alert]) -> Void) {
     let paras: [String: Any] = [
       "region": region.name,
-      "v": TKSettings.defaultDictionary()["v"] as! Int
+      "v": TKSettings.parserJsonVersion
     ]
 
     SVKServer.shared.fetch(AlertsTransitResponse.self,
@@ -111,7 +111,7 @@ extension TKBuzzInfoProvider {
   public class func rx_fetchTransitAlertMappings(forRegion region: SVKRegion) -> Observable<[API.AlertMapping]> {
     let paras: [String: Any] = [
       "region": region.name,
-      "v": TKSettings.defaultDictionary()["v"] as! Int
+      "v": TKSettings.parserJsonVersion
     ]
     
     return SVKServer.shared.rx

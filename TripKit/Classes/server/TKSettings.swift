@@ -119,8 +119,14 @@ extension TKSettings {
   @objc
   public static let parserJsonVersion: Int = 13
   
-  @objc(defaultDictionary)
-  public static func paras() -> [String: Any] {
+  @objc
+  @available(*, unavailable, renamed: "config")
+  public static func defaultDictionary() -> [String: Any] {
+    return config
+  }
+  
+  @objc
+  public static var config: [String: Any] {
     return Config().paras
   }
   
