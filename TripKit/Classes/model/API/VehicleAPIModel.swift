@@ -7,65 +7,62 @@
 
 import Foundation
 
+// MARK: - Real-time vehicles
+
 extension API {
   
   public struct Vehicle: Codable {
     
-    /// Representation of real-time occupancy information for public transport
-    public enum Occupancy: String, Codable {
-      case unknown = "UNKNOWN"
-      case empty = "EMPTY"
-      case manySeatsAvailable = "MANY_SEATS_AVAILABLE"
-      case fewSeatsAvailable = "FEW_SEATS_AVAILABLE"
-      case standingRoomOnly = "STANDING_ROOM_ONLY"
-      case crushedStandingRoomOnly = "CRUSHED_STANDING_ROOM_ONLY"
-      case full = "FULL"
-      case notAcceptingPassengers = "NOT_ACCEPTING_PASSENGERS"
-    }
+    @available(*, unavailable, renamed: "API.VehicleOccupancy")
+    typealias Occupancy = VehicleOccupancy
     
-    let location: Location
+    public let location: Location
     
-    let id: String?
-    let label: String?
-    let icon: URL?
-    let lastUpdate: TimeInterval?
-    let occupancy: Occupancy?
-    let wifi: Bool?
+    public let id: String?
+    public let label: String?
+    public let icon: URL?
+    public let lastUpdate: TimeInterval?
+    
+    /// Components of this vehicle with additional information.
+    ///
+    /// The top level array represents connected parts of the vehicle, which you can't walk through
+    /// without leaving the vehicle (e.g., two trains connected together). The inner level array
+    /// represents then parts that can be walked through (e.g., the waggons of a train). A bus
+    /// would have a `[[component1]]`. A train could have `[[c1, c2, c3, c4], [c5, c6, c7, c8]]`.
+    ///
+    /// The arrays are ordered by direction of travel always being left-to-right, i.e., the front of the train is the very last element.
+    public let components: [[VehicleComponents]]?
   }
   
-  public enum PrivateVehicleType: String, Codable {
-    case bicycle
-    case motorbike
-    case car
-    case SUV = "4wd"
+  /// Representation of real-time occupancy information for public transport
+  public enum VehicleOccupancy: String, Codable {
+    case unknown = "UNKNOWN"
+    case empty = "EMPTY"
+    case manySeatsAvailable = "MANY_SEATS_AVAILABLE"
+    case fewSeatsAvailable = "FEW_SEATS_AVAILABLE"
+    case standingRoomOnly = "STANDING_ROOM_ONLY"
+    case crushedStandingRoomOnly = "CRUSHED_STANDING_ROOM_ONLY"
+    case full = "FULL"
+    case notAcceptingPassengers = "NOT_ACCEPTING_PASSENGERS"
   }
   
-  /// The TripGo API-compliant dictionary representation of a vehicle
-  public struct PrivateVehicle: Codable {
-    let type: PrivateVehicleType
-    let UUID: String?
-    let name: String?
-    let garage: Location?
+  public struct VehicleComponents: Codable {
+    public let wifi: Bool?
+    public let occupancy: VehicleOccupancy?
   }
+  
 }
 
-// MARK: - Convenience helpers
-
-extension API.Vehicle.Occupancy {
+extension API.VehicleOccupancy {
   
   public var color: SGKColor? {
     
     switch self {
-    case .unknown:
-      return nil
-    case .empty, .manySeatsAvailable:
-      return SGKColor(red: 23/255.0, green: 177/255.0, blue: 94/255.0, alpha: 1)
-    case .fewSeatsAvailable:
-      return SGKColor(red: 255/255.0, green: 181/255.0, blue: 0/255.0, alpha: 1)
-    case .standingRoomOnly, .crushedStandingRoomOnly:
-      return SGKColor(red: 255/255.0, green: 150/255.0, blue: 0/255.0, alpha: 1)
-    case .full, .notAcceptingPassengers:
-      return SGKColor(red: 255/255.0, green: 75/255.0, blue: 71/255.0, alpha: 1)
+    case .unknown: return nil
+    case .empty, .manySeatsAvailable: return #colorLiteral(red: 0, green: 0.7333984971, blue: 0.4438126683, alpha: 1)
+    case .fewSeatsAvailable: return #colorLiteral(red: 1, green: 0.7553820014, blue: 0, alpha: 1)
+    case .standingRoomOnly, .crushedStandingRoomOnly: return #colorLiteral(red: 1, green: 0.6531761289, blue: 0, alpha: 1)
+    case .full, .notAcceptingPassengers: return#colorLiteral(red: 1, green: 0.3921365738, blue: 0.34667629, alpha: 1)
     }
     
   }
@@ -112,3 +109,24 @@ extension API.Vehicle.Occupancy {
   }
   
 }
+
+// MARK: - Private vehicles
+
+extension API {
+  public enum PrivateVehicleType: String, Codable {
+    case bicycle
+    case motorbike
+    case car
+    case SUV = "4wd"
+  }
+  
+  /// The TripGo API-compliant dictionary representation of a vehicle
+  public struct PrivateVehicle: Codable {
+    let type: PrivateVehicleType
+    let UUID: String?
+    let name: String?
+    let garage: Location?
+  }
+}
+
+
