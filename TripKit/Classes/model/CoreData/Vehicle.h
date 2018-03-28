@@ -21,13 +21,12 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @property (nonatomic, retain, nullable) NSNumber * latitude;
 @property (nonatomic, retain, nullable) NSNumber * longitude;
-@property (nonatomic, retain, nullable) NSNumber * occupancyRaw;
 @property (nonatomic, retain, nullable) NSDate * lastUpdate;
 @property (nonatomic, retain, nullable) NSNumber * bearing;
+@property (nonatomic, retain, nullable) NSData * componentsData;
 @property (nonatomic, retain, nullable) NSString * label;
 @property (nonatomic, retain, nullable) NSString * identifier;
 @property (nonatomic, retain, nullable) NSString * icon;
-@property (nonatomic, retain, nullable) NSNumber * wifi;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain, nullable) Service *service;
 @property (nonatomic, retain) NSSet<Service *> *serviceAlternatives;

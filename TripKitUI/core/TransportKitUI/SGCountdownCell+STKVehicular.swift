@@ -19,6 +19,7 @@ extension SGCountdownCell {
       , subsubtitle: nil
       , icon: icon
       , iconImageURL: nil
+      , iconIsTemplate: false
       , timeToCountdownTo: nil
       , position: .edgeToEdge
       , stripColor: nil)

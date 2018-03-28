@@ -18,6 +18,7 @@ public struct SGCountdownCellModel {
   public var subsubtitle: String?
   public var icon: UIImage?
   public var iconImageURL: URL?
+  public var iconIsTemplate: Bool = false
   public var time: Date?
   public var position: SGKGrouping
   public var color: UIColor?
@@ -45,6 +46,7 @@ extension SGCountdownCell {
       , subsubtitle: model.subsubtitle
       , icon: model.icon
       , iconImageURL: model.iconImageURL
+      , iconIsTemplate: model.iconIsTemplate
       , timeToCountdownTo: model.time
       , position: model.position
       , stripColor: model.color)
@@ -70,7 +72,7 @@ extension SGCountdownCell {
   ///   - timeToCountdownTo: Optional time to countdown to/from. If this is in the past, the cell should appear faded.
   ///   - position: Position of this cell relative to the cells around it.
   ///   - stripColor: Optional color to display a coloured strip under the icon.
-  @objc public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, position: SGKGrouping, stripColor: SGKColor?) {
+  @objc public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, iconIsTemplate: Bool, timeToCountdownTo: Date?, position: SGKGrouping, stripColor: SGKColor?) {
     
     _resetContents()
     
@@ -79,6 +81,7 @@ extension SGCountdownCell {
       , subsubtitle: subsubtitle
       , icon: icon
       , iconImageURL: iconImageURL
+      , iconIsTemplate: iconIsTemplate
       , timeToCountdownTo: timeToCountdownTo
       , position: position
       , strip: stripColor)
@@ -160,7 +163,7 @@ extension SGCountdownCell {
   }
   
   
-  @objc public func addViewToFootnote(_ view: UIView) {
+  @objc public func replaceFootnoteView(_ view: UIView) {
     // Make sure we start clean.
     for subview in footnoteView.subviews {
       subview.removeFromSuperview()

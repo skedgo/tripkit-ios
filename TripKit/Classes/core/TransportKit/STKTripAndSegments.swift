@@ -79,6 +79,8 @@ public protocol STKTripSegmentDisplayable : NSObjectProtocol {
   
   var tripSegmentModeImageURL: URL? { get }
   
+  var tripSegmentModeImageIsTemplate: Bool { get }
+  
   var tripSegmentModeInfoIconType: STKInfoIconType { get }
   
   
@@ -128,6 +130,7 @@ extension STKTripSegmentDisplayable {
   var tripSegmentModeColor: SGKColor? { return nil }
   var tripSegmentModeImage: SGKImage? { return nil }
   var tripSegmentModeImageURL: URL? { return nil }
+  var tripSegmentModeImageIsTemplate: Bool { return false }
   var tripSegmentModeInfoIconType: STKInfoIconType { return .none }
   var tripSegmentModeTitle: String? { return nil }
   var tripSegmentModeSubtitle: String? { return nil }

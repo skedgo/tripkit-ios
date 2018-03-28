@@ -8,6 +8,9 @@
 import Foundation
 import MapKit
 
+@available(*, unavailable, renamed: "TKPeliasGeocoder")
+typealias TKMapZenGeocoder = TKPeliasGeocoder
+
 public class TKPeliasGeocoder: NSObject {
   
   public override init() {
@@ -86,8 +89,6 @@ extension TKPeliasGeocoder: SGGeocoder {
 
 extension TKPeliasGeocoder: SGAutocompletionDataProvider {
   
-  public var resultType: SGAutocompletionDataProviderResultType { return .location }
-  
   public func autocompleteSlowly(_ string: String, for mapRect: MKMapRect, completion: @escaping SGAutocompletionDataResultBlock) {
     
     guard !string.isEmpty else {
@@ -113,7 +114,7 @@ extension TKPeliasGeocoder: SGAutocompletionDataProvider {
         let clusters = TKAnnotationClusterer.cluster(coordinates)
         let unique = clusters.flatMap(SGKNamedCoordinate.namedCoordinate(for:))
         
-        let pruned = SGBaseGeocoder.mergedAndPruned(unique, withMaximum: 10)
+        let pruned = SGBaseGeocoder.mergedAndPruned(unique, withMaximum: 7)
         completion(pruned.map(SGAutocompletionResult.init))
       case .failure(_):
         completion(nil)
@@ -130,7 +131,7 @@ extension TKPeliasGeocoder: SGAutocompletionDataProvider {
 extension SGKNamedCoordinate {
   
   fileprivate func setScore(searchTerm: String, near region: MKCoordinateRegion) {
-    self.sortScore = Int(TKGeocodingResultScorer.calculateScore(for: self, searchTerm: searchTerm, near: region, allowLongDistance: false, minimum: 25, maximum: 80))
+    self.sortScore = Int(TKGeocodingResultScorer.calculateScore(for: self, searchTerm: searchTerm, near: region, allowLongDistance: false, minimum: 10, maximum: 60))
   }
   
 }

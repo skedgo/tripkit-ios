@@ -53,6 +53,24 @@ extension TKSegment {
   
 }
 
+// MARK: - Public transport
+
+extension TKSegment {
+  
+  public var embarkation: StopVisits? {
+    return service()?.sortedVisits.first { visit in
+      return self.segmentVisits()[visit.stop.stopCode]?.boolValue == true
+    }
+  }
+  
+  public var disembarkation: StopVisits? {
+    return service()?.sortedVisits.reversed().first { visit in
+      return self.segmentVisits()[visit.stop.stopCode]?.boolValue == true
+    }
+  }
+  
+}
+
 // MARK: - Path info
 
 extension TKSegment {
@@ -144,6 +162,10 @@ extension TKSegment: STKDisplayablePoint {
   
   public var pointImageURL: URL? {
     return imageURL(for: .listMainMode)
+  }
+  
+  public var pointImageIsTemplate: Bool {
+    return modeInfo()?.remoteImageIsTemplate ?? false
   }
 
   fileprivate func image(for iconType: SGStyleModeIconType, allowRealTime: Bool) -> SGKImage? {
@@ -293,6 +315,11 @@ extension TKSegment: STKTripSegment {
   public var tripSegmentModeImageURL: URL? {
     return imageURL(for: .listMainMode)
   }
+  
+  public var tripSegmentModeImageIsTemplate: Bool {
+    return pointImageIsTemplate
+  }
+
   
   public var tripSegmentModeInfoIconType: STKInfoIconType {
     return alerts().first?.infoIconType ?? .none

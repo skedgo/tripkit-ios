@@ -10,7 +10,7 @@ import XCTest
 
 @testable import TripKit
 
-class TKGeoJSONTest: TKTestCase {
+class TKGeoJSONTest: XCTestCase {
   
   func testParsing() throws {
     

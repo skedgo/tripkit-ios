@@ -179,11 +179,6 @@
 
 #pragma mark - SGAutocompletionDataProvider
 
-- (SGAutocompletionDataProviderResultType)resultType
-{
-  return SGAutocompletionDataProviderResultTypeLocation;
-}
-
 - (void)autocompleteSlowly:(NSString *)string
                 forMapRect:(MKMapRect)mapRect
                 completion:(SGAutocompletionDataResultBlock)completion
@@ -332,7 +327,7 @@
 #define GOOD_SCORE 1000
     NSUInteger popularityScore = (MIN(popularity, GOOD_SCORE)) / (GOOD_SCORE / 100);
     popularityScore = [SGAutocompletionResult rangedScoreForScore:popularityScore
-                                                   betweenMinimum:30
+                                                   betweenMinimum:50
                                                        andMaximum:80];
     if (popularity > GOOD_SCORE) {
       NSUInteger moreThanGood = popularityScore / GOOD_SCORE;

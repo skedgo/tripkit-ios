@@ -237,12 +237,8 @@ extension Alert {
     
     hashCode = NSNumber(value: model.hashCode)
     title = model.title
-    if let startTime = model.startTime {
-      self.startTime = Date(timeIntervalSince1970: startTime)
-    }
-    if let endTime = model.endTime {
-      self.endTime = Date(timeIntervalSince1970: endTime)
-    }
+    startTime = model.fromDate
+    endTime = model.toDate
     if let location = model.location {
       self.location = SGKNamedCoordinate(from: location)
     }
@@ -312,7 +308,7 @@ extension Vehicle {
     identifier = model.id
     label = model.label
     icon = model.icon?.absoluteString
-    isWifiEnabled = model.wifi
+    components = model.components
     
     if let lastUpdated = model.lastUpdate {
       lastUpdate = Date(timeIntervalSince1970: lastUpdated)
@@ -321,7 +317,6 @@ extension Vehicle {
       lastUpdate = Date()
     }
     
-    occupancy = model.occupancy
     latitude = NSNumber(value: model.location.lat)
     longitude = NSNumber(value: model.location.lng)
     if let bearing = model.location.bearing {

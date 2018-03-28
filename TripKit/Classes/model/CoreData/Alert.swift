@@ -65,6 +65,10 @@ extension Alert: STKDisplayablePoint {
     return imageURL
   }
   
+  public var pointImageIsTemplate: Bool {
+    return false
+  }
+
   public var isDraggable: Bool {
     return false
   }

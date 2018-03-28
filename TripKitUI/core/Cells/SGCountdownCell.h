@@ -84,6 +84,7 @@
                 subsubtitle:(NSString *)subsubtitle
                        icon:(UIImage *)icon
                iconImageURL:(NSURL *)iconImageURL
+             iconIsTemplate:(BOOL)iconIsTemplate
           timeToCountdownTo:(NSDate *)time
                    position:(SGKGrouping)position
                  stripColor:(UIColor *)stripColor;

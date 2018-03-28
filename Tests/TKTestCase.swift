@@ -15,10 +15,26 @@ import RxBlocking
 
 @testable import TripKit
 
+extension XCTestCase {
+  
+  var bundle: Bundle { return Bundle(for: TKTestCase.self) }
+  
+  func dataFromJSON(named name: String) throws -> Data {
+    let filePath = bundle.path(forResource: name, ofType: "json")
+    return try Data(contentsOf: URL(fileURLWithPath: filePath!))
+  }
+  
+  
+  func contentFromJSON(named name: String) throws -> Any {
+    let data = try dataFromJSON(named: name)
+    return try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0))
+  }
+  
+}
+
 class TKTestCase: XCTestCase {
   
   var tripKitContext: NSManagedObjectContext!
-  let bundle = Bundle(for: TKTestCase.self)
   
   var tripKitModel: NSManagedObjectModel {
     return TKTripKit.tripKitModel()
@@ -34,17 +50,6 @@ class TKTestCase: XCTestCase {
     tripKitContext.persistentStoreCoordinator = tripKitCoordinator
   }
 
-  func dataFromJSON(named name: String) throws -> Data {
-    let filePath = bundle.path(forResource: name, ofType: "json")
-    return try Data(contentsOf: URL(fileURLWithPath: filePath!))
-  }
-
-  
-  func contentFromJSON(named name: String) throws -> Any {
-    let data = try dataFromJSON(named: name)
-    return try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0))
-  }
-  
   func trip(fromFilename filename: String, serviceFilename: String? = nil) -> Trip {
     
     let observable = Observable<Trip>.create { observer in

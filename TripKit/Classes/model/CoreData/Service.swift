@@ -20,38 +20,35 @@ extension Service {
   }
   
   @objc public var modeTitle: String? {
-    if let alt = modeInfo?.alt {
-      return alt
-    }
-    
-    if let reference = segments?.first {
-      return reference.template().modeInfo.alt
-    }
-    
-    if let visit = visits?.first {
-      return visit.stop.modeTitle
-    }
-    
-    assertionFailure("Got no mode, visits or segments!")
-    return nil;
+    return findModeInfo()?.alt
   }
   
   @objc public func modeImage(for type: SGStyleModeIconType) -> SGKImage? {
-    if let modeInfo = modeInfo, let specificImage = SGStyleManager.image(forModeImageName: modeInfo.localImageName, isRealTime: false, of: type) {
-      return specificImage
-    }
-    
-    if let visit = visits?.first {
-      return visit.stop.modeImage(for: type)
-    }
-    
-    assertionFailure("Got no mode, visits or segments!")
-    return nil;
+    return SGStyleManager.image(forModeImageName: findModeInfo()?.localImageName, isRealTime: isRealTime, of: type)
   }
   
   @objc public func modeImageURL(for type: SGStyleModeIconType) -> URL? {
-    guard let remoteImage = modeInfo?.remoteImageName else { return nil }
+    guard let remoteImage = findModeInfo()?.remoteImageName else { return nil }
     return SVKServer.imageURL(forIconFileNamePart: remoteImage, of: type)
   }
   
+  public var modeImageIsTemplate: Bool {
+    return findModeInfo()?.remoteImageIsTemplate ?? false
+  }
+
+  private func findModeInfo() -> ModeInfo? {
+    if let modeInfo = modeInfo {
+      return modeInfo
+    }
+    for visit in visits ?? [] where visit.stop.stopModeInfo != nil {
+      return visit.stop.stopModeInfo
+    }
+    for segment in segments ?? [] where segment.segmentTemplate?.modeInfo != nil {
+      return segment.segmentTemplate?.modeInfo
+    }
+
+    assertionFailure("Got no mode, visits or segments!")
+    return nil
+  }
+
 }

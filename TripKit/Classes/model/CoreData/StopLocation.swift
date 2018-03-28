@@ -72,6 +72,10 @@ extension StopLocation: STKStopAnnotation {
   public var pointImageURL: URL? {
     return modeImageURL(for: .mapIcon)
   }
+  
+  public var pointImageIsTemplate: Bool {
+    return stopModeInfo.remoteImageIsTemplate
+  }
 }
 
 // MARK: - UIActivityItemSource

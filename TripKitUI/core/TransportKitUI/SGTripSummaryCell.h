@@ -39,6 +39,27 @@ typedef void(^SGTripSummaryCellActionBlock)(UIControl *sender);
 @property (nonatomic, assign) BOOL simpleTimes;
 @property (nonatomic, assign) BOOL preferNoPaddings;
 
+/**
+ This property indicates whether the transit mode icons in the trip segment
+ should be colored.
+ */
+@property (nonatomic, assign) BOOL colorCodingTransitIcon;
+
+/**
+ This color is used for darker texts around the cell. In addition, it is also
+ the color which will be used to tint the transport mode icons in the segment
+ view if `colorCodingTransitIcon` is set to NO. If value is nil, then black is
+ used.
+ */
+@property (nonatomic, strong, nullable) UIColor *darkTextColor;
+
+/**
+ This color is used for lighter texts around the cell. In addition, it is also the color which
+ the color will be used to tint non-PT modes in the segment view if `colorCodingTransitIcon`
+ is set to YES. If value is nil, then light grey with value 148/255 is used.
+ */
+@property (nonatomic, strong, nullable) UIColor *lightTextColor;
+
 @property (nullable, nonatomic, strong) NSTimeZone *relativeTimeZone;
 
 @property (nullable, nonatomic, strong) UIColor *preferredTintColor UI_APPEARANCE_SELECTOR;

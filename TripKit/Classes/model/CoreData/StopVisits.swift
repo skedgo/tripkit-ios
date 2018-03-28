@@ -77,6 +77,10 @@ extension StopVisits: STKDisplayablePoint {
     return service.modeImageURL(for: .listMainMode)
   }
   
+  public var pointImageIsTemplate: Bool {
+    return service.modeImageIsTemplate
+  }
+  
 }
 
 // MARK: - STKDisplayableTimePoint

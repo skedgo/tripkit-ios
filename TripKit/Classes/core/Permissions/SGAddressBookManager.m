@@ -90,8 +90,6 @@
   NSMutableArray *result = [NSMutableArray arrayWithCapacity:[addressArray count]];
   
   for (NSUInteger i = 0; i < addressArray.count; i++) {
-		// Convert the the Apple address dictionary to match ours.
-    NSDictionary *address = [SGLocationHelper makeAddrDictFromAppleAddrDict:[addressArray objectAtIndex:i]];
 		
     NSString *labelString = (__bridge_transfer NSString *) ABMultiValueCopyLabelAtIndex(addresses, i);
     BOOL matches = NO;
@@ -113,7 +111,7 @@
     }
     
     NSString *name = [self getAddressName:record withLabel:labelString];
-    NSString *addressString = [self getAddressString:address];
+    NSString *addressString = [SGLocationHelper postalAddressForAddressDictionary:[addressArray objectAtIndex:i]];
 		
     if (addressString && name && recordId) {
       [result addObject:@{kBHKeyForRecordName: name,
@@ -126,38 +124,6 @@
   CFRelease(addresses);
   
   return result;
-}
-
-+ (NSString *)getAddressString:(NSDictionary *)address
-{
-  NSString *street = [address objectForKey:@"street"];
-  if (nil == street) {
-    return nil;
-  }
-  
-  NSString *suburb = [address objectForKey:@"suburb"];
-  NSString *state = [address objectForKey:@"state"];
-  NSString *ZIP = [address objectForKey:@"postcode"];
-  
-  
-  NSString *output = street;
-  if (nil != suburb) {
-    output = [output stringByAppendingFormat:@", %@", suburb];
-  }
-  
-  if (nil != state) {
-    output = [output stringByAppendingFormat:@", %@", state];
-  }
-  
-  if (nil != ZIP) {
-    output = [output stringByAppendingFormat:@", %@", ZIP];
-  }
-  
-  // remove unnecessary whitespaces
-  output = [output stringByReplacingOccurrencesOfString:@"\t" withString:@" "];
-  output = [output stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-  
-  return output;
 }
 
 #pragma mark - SGPermissionManager implementations
@@ -235,11 +201,6 @@
 
 
 #pragma mark - SGAutocompletionDataProvider
-
-- (SGAutocompletionDataProviderResultType)resultType
-{
-  return SGAutocompletionDataProviderResultTypeLocation;
-}
 
 - (NSArray *)autocompleteFast:(NSString *)string forMapRect:(MKMapRect)mapRect
 {

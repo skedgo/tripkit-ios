@@ -16,6 +16,7 @@ public protocol TKGlyphableAnnotation: MKAnnotation {
   var glyphColor: SGKColor? { get }
   var glyphImage: SGKImage? { get }
   var glyphImageURL: URL? { get }
+  var glyphImageIsTemplate: Bool { get }
   
 }
 
@@ -27,6 +28,7 @@ public protocol STKDisplayablePoint: MKAnnotation {
   
   var pointImage: SGKImage? { get }
   var pointImageURL: URL? { get }
+  var pointImageIsTemplate: Bool { get }
   
   /// Identifier for this point for clustering on a map. Typical use
   /// is to cluster nearby annotations with same identifier.

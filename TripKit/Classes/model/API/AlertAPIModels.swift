@@ -9,6 +9,7 @@
 import Foundation
 
 extension API {
+  
   public struct Alert: Codable {
     public enum Severity: String, Codable {
       case info = "info"
@@ -25,18 +26,18 @@ extension API {
       let type: ActionType
     }
     
-    let hashCode: Int
-    let severity: Severity
-    let title: String
-    let text: String?
-    let url: URL?
-    let action: Action?
+    public let title: String
+    public let text: String?
+    public let url: URL?
+    public let fromDate: Date?
+    public let toDate: Date?
+    public let lastUpdated: Date?
+    public let remoteIcon: URL?
+    public let severity: Severity
     
-    let remoteIcon: URL?
+    let hashCode: Int    
+    let action: Action?    
     let location: API.Location?
-    let lastUpdate: TimeInterval?
-    let startTime: TimeInterval?
-    let endTime: TimeInterval?
     
     // MARK: - Codable
     public init(from decoder: Decoder) throws {
@@ -49,9 +50,9 @@ extension API {
       action      = try? container.decode(Action.self, forKey: .action)
       remoteIcon  = try? container.decode(URL.self, forKey: .remoteIcon)
       location    = try? container.decode(Location.self, forKey: .location)
-      lastUpdate  = try? container.decode(TimeInterval.self, forKey: .lastUpdate)
-      startTime   = try? container.decode(TimeInterval.self, forKey: .startTime)
-      endTime     = try? container.decode(TimeInterval.self, forKey: .endTime)
+      lastUpdated  = try? container.decode(Date.self, forKey: .lastUpdated)
+      fromDate   = try? container.decode(Date.self, forKey: .fromDate)
+      toDate     = try? container.decode(Date.self, forKey: .toDate)
     }
   }
   
@@ -61,8 +62,20 @@ extension API {
     public let operators: [String]?
     public let serviceTripIDs: [String]?
     public let stopCodes: [String]?
-    public let routeIDs: [String]?
+    public let routes: [API.Route]?
+    public let modeInfo: ModeInfo?
   }
+  
+  public struct Route: Codable {
+    public let id: String
+    public let name: String?
+    public let number: String?
+    public let modeInfo: ModeInfo
+    
+    /// This color applies to an individual service.
+    public var color: SGKColor? { return modeInfo.color }
+  }
+  
 }
 
 extension API.Alert.Action: Codable {

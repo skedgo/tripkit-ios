@@ -59,6 +59,8 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation, TKGlyphable
     super.init(coder: aDecoder)
   }
   
+  public var priority: Float?
+  
   private var _stopModeInfo: ModeInfo? = nil
   public var stopModeInfo: ModeInfo {
     get {
@@ -97,6 +99,10 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation, TKGlyphable
     return SVKServer.imageURL(forIconFileNamePart: imageName, of: .mapIcon)
   }
   
+  public var pointImageIsTemplate: Bool {
+    return stopModeInfo.remoteImageIsTemplate
+  }
+  
   public var glyphColor: SGKColor? {
     return stopModeInfo.glyphColor
   }
@@ -113,8 +119,12 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation, TKGlyphable
   }
   
   public var glyphImageURL: URL? {
-    // TODO: When the new images on the backend are prepared for this, adopt them here, too.
-    return nil
+    guard let imageName = stopModeInfo.remoteImageName else { return nil }
+    return SVKServer.imageURL(forIconFileNamePart: imageName, of: .listMainMode)
+  }
+  
+  public var glyphImageIsTemplate: Bool {
+    return stopModeInfo.remoteImageIsTemplate
   }
   
 }
