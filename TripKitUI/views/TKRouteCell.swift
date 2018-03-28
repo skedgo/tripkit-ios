@@ -25,6 +25,10 @@ class TKRouteCell: UITableViewCell {
     }
   }
   
+  /// This is the main configuration point. Setting this property updates
+  /// the cell content. Note that, cell appearance such as text and tint
+  /// colors are not updated here. Instead, use other appearance properties
+  /// e.g., `cellTextColor`.
   var route: API.Route? {
     didSet {
       updateContent()
@@ -32,6 +36,10 @@ class TKRouteCell: UITableViewCell {
   }
   
   // MARK: -
+  
+  override func awakeFromNib() {
+    modeIcon.tintColor = SGStyleManager.darkTextColor() // default tint.
+  }
   
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     super.setHighlighted(highlighted, animated: animated)
@@ -50,15 +58,18 @@ class TKRouteCell: UITableViewCell {
   private func updateContent() {
     guard let route = route else { return }
     
-    modeIcon.image = SGStyleManager.image(forModeImageName: route.modeInfo.localImageName, isRealTime: false, of: .listMainMode)
-    modeIcon.tintColor = cellTextColor ?? SGStyleManager.darkTextColor()
+    // This is the generic mode image.
+    let localImage = SGStyleManager.image(forModeImageName: route.modeInfo.localImageName, isRealTime: false, of: .listMainMode)
+    
+    // If we have customised mode icons on the server, use them.
+    if let remoteImageName = route.modeInfo.remoteImageName {
+      let remoteImageURL = SVKServer.imageURL(forIconFileNamePart: remoteImageName, of: .listMainMode)
+      modeIcon.setImage(with: remoteImageURL, asTemplate: route.modeInfo.remoteImageIsTemplate, placeholder: localImage)
+    }
+    
     serviceColorIndicator.backgroundColor = route.color
-    
     routeNumberLabel.text = route.number ?? route.name
-    routeNumberLabel.textColor = cellTextColor ?? SGStyleManager.darkTextColor()
-    
     routeNameLabel.text = route.name
-    routeNameLabel.textColor = cellTextColor ?? SGStyleManager.lightTextColor()
     routeNameLabel.isHidden = (route.name == nil) || (routeNameLabel.text == routeNumberLabel.text)
   }
   
