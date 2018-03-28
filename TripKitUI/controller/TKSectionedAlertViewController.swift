@@ -31,11 +31,19 @@ public class TKSectionedAlertViewController: UITableViewController {
   
   private var dataSource: RxTableViewSectionedReloadDataSource<TKSectionedAlertViewModel.Section>?
   
+  // MARK: - Supplementary view
+  
+  private var emptyAlertView: TKEmptyAlertView?
+  
+  // MARK: - Constructor
+  
   public static func newInstance(region: SVKRegion) -> TKSectionedAlertViewController {
     let controller = TKSectionedAlertViewController(nibName: "TKSectionedAlertViewController", bundle: Bundle(for: self))
     controller.region = region
     return controller
   }
+  
+  // MARK: - View lifecycle
         
   override public func viewDidLoad() {
     super.viewDidLoad()
@@ -72,6 +80,13 @@ public class TKSectionedAlertViewController: UITableViewController {
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
+    viewModel.sections
+      .asObservable()
+      .subscribe(onNext: { [weak self] in
+        $0.isEmpty ? self?.insertEmptyAlertView() : self?.removeEmptyAlertView()
+      })
+      .disposed(by: disposeBag)
+    
     tableView.rx.itemSelected
       .map { dataSource[$0] }
       .subscribe(onNext: { [unowned self] in
@@ -80,12 +95,35 @@ public class TKSectionedAlertViewController: UITableViewController {
       .disposed(by: disposeBag)
   }
   
+  // MARK: - User interaction
+  
   private func didSelect(_ alertItem: TKSectionedAlertViewModel.Item) {
     let controller = TKAlertViewController(style: .plain)
     controller.alerts = alertItem.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0) }
     controller.alertControllerDelegate = self
     navigationController?.setNavigationBarHidden(false, animated: true)
     navigationController?.pushViewController(controller, animated: true)
+  }
+  
+  // MARK: - Supplementary views
+  
+  private func insertEmptyAlertView() {
+    let emptyView = TKEmptyAlertView.makeView()
+    emptyView.frame.size = view.frame.size
+    emptyView.autoresizingMask = [.flexibleWidth, .flexibleWidth]
+    emptyView.textLabel.text = Loc.WeWillKeepYouUpdated
+    
+    if let productName = Bundle.main.productName {
+      emptyView.footerLabel.text = Loc.InTheMeantimeKeepExploring(appName: productName)
+    }
+    
+    view.insertSubview(emptyView, aboveSubview: tableView)
+    emptyAlertView = emptyView
+  }
+  
+  private func removeEmptyAlertView() {
+    emptyAlertView?.removeFromSuperview()
+    emptyAlertView = nil
   }
   
 }
@@ -117,7 +155,6 @@ extension TKSectionedAlertViewController: TKAlertViewControllerDelegate {
 }
 
 extension TKSectionedAlertViewController: UISearchControllerDelegate {
-  
 }
 
 extension TKSectionedAlertViewController: UISearchResultsUpdating {
