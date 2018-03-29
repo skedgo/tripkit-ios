@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSNumber * metres;
 @property (nonatomic, retain) NSNumber * metresFriendly;
 @property (nonatomic, retain) NSNumber * metresUnfriendly;
+@property (nonatomic, retain) NSNumber * metresDismount;
 @property (nonatomic, strong) NSString * modeIdentifier;
 @property (nonatomic, strong) NSString * notesRaw;
 @property (nonatomic, strong) NSString * scheduledStartStopCode;

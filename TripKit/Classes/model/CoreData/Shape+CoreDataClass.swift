@@ -107,6 +107,20 @@ public class Shape: NSManagedObject {
   }
 }
 
+extension Shape {
+  
+  public var friendliness: TKPathFriendliness {
+    if isDismount {
+      return .dismount
+    } else if let friendly = isSafe {
+      return friendly ? .friendly : .unfriendly
+    } else {
+      return .unknown
+    }
+  }
+  
+}
+
 
 extension Shape {
   @objc(fetchTravelledShapeForTemplate:atStart:)
@@ -139,21 +153,11 @@ extension Shape: STKDisplayableRoute {
       return color
     }
     
-    if isDismount {
-      return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    }
-    if let friendly = isSafe {
-      if friendly {
-        return #colorLiteral(red: 0.2862745098, green: 0.862745098, blue: 0.3882352941, alpha: 1)
-      } else {
-        return #colorLiteral(red: 1, green: 0.9058823529, blue: 0.2862745098, alpha: 1)
-      }
-    }
-    
-    if let color = segment?.color() {
-      return color
-    } else {
-      return #colorLiteral(red: 0.5607843137, green: 0.5450980392, blue: 0.5411764706, alpha: 1)
+    switch friendliness {
+    case .friendly, .unfriendly, .dismount:
+      return friendliness.color
+    case .unknown:
+      return segment?.color() ?? friendliness.color
     }
   }
   
@@ -168,8 +172,6 @@ extension Shape: STKDisplayableRoute {
   public var routeDashPattern: [NSNumber]? {
     if isHop {
       return [1, 15] // dots
-    } else if isDismount {
-      return [7, 15] // dashes
     } else {
       return nil
     }
