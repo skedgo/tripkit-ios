@@ -18,11 +18,12 @@ public class TKSectionedAlertViewController: UITableViewController {
   
   private var viewModel: TKSectionedAlertViewModel!
   
-  /// This is used to color the labels, as well as to tint the mode
-  /// icon in cells.
+  /// This is the main text color used throughout the view. Examples of
+  /// where it is applied: title and subtitle labels in the table view
+  /// cells.
   ///
   /// @default: `SGStyleManager.darkTextColor`
-  public var cellTextColor: UIColor?
+  public var textColor: UIColor?
   
   private let disposeBag = DisposeBag()
 
@@ -66,7 +67,7 @@ public class TKSectionedAlertViewController: UITableViewController {
     let dataSource = RxTableViewSectionedReloadDataSource<TKSectionedAlertViewModel.Section>(configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
       let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteCell", for: ip) as! TKRouteCell
       cell.route = item.alertGroup.route
-      cell.cellTextColor = self?.cellTextColor
+      cell.cellTextColor = self?.textColor
       return cell
     })
 
@@ -126,6 +127,7 @@ public class TKSectionedAlertViewController: UITableViewController {
     emptyView.frame.size = view.frame.size
     emptyView.autoresizingMask = [.flexibleWidth, .flexibleWidth]
     emptyView.textLabel.text = Loc.WeWillKeepYouUpdated
+    emptyView.textLabel.textColor = textColor
     
     if let productName = Bundle.main.productName {
       emptyView.footerLabel.text = Loc.InTheMeantimeKeepExploring(appName: productName)
@@ -145,6 +147,7 @@ public class TKSectionedAlertViewController: UITableViewController {
     loadingView.frame.size = view.frame.size
     loadingView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     loadingView.spinner.startAnimating()
+    loadingView.textLabel.textColor = textColor
     view.insertSubview(loadingView, aboveSubview: tableView)
     self.loadingView = loadingView
   }
