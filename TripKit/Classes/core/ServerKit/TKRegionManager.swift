@@ -278,7 +278,7 @@ extension TKRegionManager {
       return [intersectingRegion]
     
     } else {
-      return [startRegions, endRegions].flatMap { $0.first }
+      return [startRegions, endRegions].compactMap { $0.first }
     }
     
   }

@@ -119,7 +119,7 @@ extension Trip {
       "calories": totalCalories.floatValue,
       "arrivalTime": arrivalTime.timeIntervalSince1970,
       "departureTime": departureTime.timeIntervalSince1970,
-      "segments": (self as STKTrip).segments(with: .inDetails).flatMap { ($0 as? TKSegment)?.choiceSetEntry }
+      "segments": (self as STKTrip).segments(with: .inDetails).compactMap { ($0 as? TKSegment)?.choiceSetEntry }
     ]
 
     entry["price"] = totalPrice?.floatValue

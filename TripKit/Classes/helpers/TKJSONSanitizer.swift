@@ -42,7 +42,7 @@ public enum TKJSONSanitizer {
     
     case is [Any]:
       let array = input as! [Any]
-      return array.flatMap(sanitize)
+      return array.compactMap(sanitize)
       
     default:
       return nil

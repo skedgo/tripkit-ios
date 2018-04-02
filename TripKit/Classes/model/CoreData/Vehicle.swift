@@ -56,7 +56,7 @@ extension Vehicle {
     let components = self.components ?? [[]]
     let occupancies = components
       .reduce(into: []) { $0.append(contentsOf: $1) }
-      .flatMap { $0.occupancy }
+      .compactMap { $0.occupancy }
     if occupancies.isEmpty {
       return nil
     } else if occupancies.count == 1 {
@@ -111,7 +111,7 @@ extension Vehicle : MKAnnotation {
   
   public var subtitle: String? {
     return [updatedTitle, averageOccupancy?.description]
-      .flatMap { $0 }
+      .compactMap { $0 }
       .joined(separator: " - ")
   }
   

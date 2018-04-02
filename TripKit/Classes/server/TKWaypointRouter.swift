@@ -216,7 +216,7 @@ class WaypointParasBuilder {
     
     // First we construct the paras on a segment by segment basis
     var foundMatch = false
-    let unglued = trip.segments().flatMap { segment -> (segment: TKSegment, paras: [String: Any])? in
+    let unglued = trip.segments().compactMap { segment -> (segment: TKSegment, paras: [String: Any])? in
       
       if segmentToMatch == segment {
         foundMatch = true

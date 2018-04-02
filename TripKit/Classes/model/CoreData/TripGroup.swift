@@ -14,7 +14,7 @@ extension TripGroup {
     get {
       guard let sourcesRaw = sourcesRaw else { return [] }
       
-      return sourcesRaw.flatMap { rawSource -> API.DataAttribution? in
+      return sourcesRaw.compactMap { rawSource -> API.DataAttribution? in
         let decoder = JSONDecoder()
         return try? decoder.decode(API.DataAttribution.self, withJSONObject: rawSource)
       }

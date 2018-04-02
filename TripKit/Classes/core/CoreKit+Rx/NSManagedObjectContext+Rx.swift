@@ -24,7 +24,7 @@ import RxCocoa
     
     fileprivate func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
       guard let objects = controller.fetchedObjects else { return }
-      let converted = objects.flatMap { $0 as? E }
+      let converted = objects.compactMap { $0 as? E }
       observer.onNext(converted)
     }
   }

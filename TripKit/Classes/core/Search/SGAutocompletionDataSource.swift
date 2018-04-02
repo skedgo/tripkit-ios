@@ -23,7 +23,7 @@ extension SGAutocompletionDataSource {
   @objc
   @available(*, deprecated: 9.3, message: "Use `init(autocompleters:)` instead")
   public convenience init(dataProviders: [Any]) {
-    let autocompleters = dataProviders.flatMap { provider -> TKAutocompleting? in
+    let autocompleters = dataProviders.compactMap { provider -> TKAutocompleting? in
       if let autocompleter = provider as? TKAutocompleting {
         return autocompleter
       } else {
@@ -97,7 +97,7 @@ extension SGAutocompletionDataSource {
 
   @objc
   var additionalActions : [String] {
-    return providers.flatMap { $0.additionalAction?.0 }
+    return providers.compactMap { $0.additionalAction?.0 }
   }
   
 }
@@ -150,7 +150,7 @@ extension SGAutocompletionDataSource {
       case .searchForMore: return Single.just(.searchForMore)
       case .provider:
         let additionalRow = indexPath.item - 1 // subtract 'press search for more'
-        let actions = providers.flatMap { $0.additionalAction }
+        let actions = providers.compactMap { $0.additionalAction }
         guard additionalRow >= 0 && additionalRow < actions.count else {
           assertionFailure("Invalid index path for extras: \(indexPath)")
           return Single.just(.refresh)

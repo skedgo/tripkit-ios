@@ -31,7 +31,7 @@ extension SGCalendarManager {
   @objc(autocompletionResultsForEvents:searchTerm:)
   static func autocompletionResults(for events: [EKEvent], search: String) -> [SGAutocompletionResult] {
     
-    return events.flatMap { event in
+    return events.compactMap { event in
       guard let location = event.location, !location.isEmpty else { return nil }
       return autocompletionResult(for: event, search: search)
     }

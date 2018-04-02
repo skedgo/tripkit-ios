@@ -24,7 +24,7 @@ public class TKTripPattern: NSObject {
   /// - Returns: The trip pattern for a trip
   @objc(tripPatternForTrip:)
   public static func pattern(for trip: Trip) -> [TKSegmentPattern] {
-    return trip.segments().flatMap { $0.pattern }
+    return trip.segments().compactMap { $0.pattern }
   }
   
 
