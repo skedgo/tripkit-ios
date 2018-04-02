@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A04C9AB206D39320015D9E5 /* TKPathFriendliness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04C9AA206D39320015D9E5 /* TKPathFriendliness.swift */; };
+		3A04C9AC206D39320015D9E5 /* TKPathFriendliness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04C9AA206D39320015D9E5 /* TKPathFriendliness.swift */; };
 		3A096E1E1F20DAD500666E59 /* SVKServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E1D1F20DAD500666E59 /* SVKServer.swift */; };
 		3A096E221F20DC5D00666E59 /* SGKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E211F20DC5D00666E59 /* SGKConfig.swift */; };
 		3A096E241F20DD5300666E59 /* TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E231F20DD5300666E59 /* TripKit.swift */; };
@@ -888,6 +890,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A04C9AA206D39320015D9E5 /* TKPathFriendliness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKPathFriendliness.swift; sourceTree = "<group>"; };
 		3A096E1D1F20DAD500666E59 /* SVKServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVKServer.swift; sourceTree = "<group>"; };
 		3A096E211F20DC5D00666E59 /* SGKConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGKConfig.swift; sourceTree = "<group>"; };
 		3A096E231F20DD5300666E59 /* TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripKit.swift; sourceTree = "<group>"; };
@@ -2491,6 +2494,7 @@
 				3AF94B231F0C061500500940 /* TKColoredRoute.swift */,
 				3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */,
 				3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */,
+				3A04C9AA206D39320015D9E5 /* TKPathFriendliness.swift */,
 				3AB6C6841D1CD08E0089F687 /* TKPlainCell.h */,
 				3AB6C6851D1CD08E0089F687 /* TKPlainCell.m */,
 				3AB6C6861D1CD08E0089F687 /* TKSegment.h */,
@@ -3477,6 +3481,7 @@
 				3ABBDABC2032135400205042 /* SGKGeocodable.swift in Sources */,
 				3ABBDA952032134900205042 /* SGKNamedCoordinate+SVKRegion.swift in Sources */,
 				3ABBDA662032132D00205042 /* TKSegment.swift in Sources */,
+				3A04C9AC206D39320015D9E5 /* TKPathFriendliness.swift in Sources */,
 				3ABBDA1F2032132400205042 /* TKBuzzRouter.m in Sources */,
 				3A922066205FD393004E6C34 /* SGAutocompletionDataSource.swift in Sources */,
 				3ABBDA2F2032132400205042 /* TKRouter.m in Sources */,
@@ -3859,6 +3864,7 @@
 				3AFFAB991F06854F00147990 /* NSError+customError.swift in Sources */,
 				3AB6C6F71D1CD08E0089F687 /* TKSegment.m in Sources */,
 				3AB6C6ED1D1CD08E0089F687 /* Vehicle.m in Sources */,
+				3A04C9AB206D39320015D9E5 /* TKPathFriendliness.swift in Sources */,
 				3A51402F1DEE62EE002DB39F /* TKSegment.swift in Sources */,
 				3AFFABB41F06854F00147990 /* SGKCrossPlatform.swift in Sources */,
 				3A9FF6D71DE79FA700DB4647 /* Alert.swift in Sources */,

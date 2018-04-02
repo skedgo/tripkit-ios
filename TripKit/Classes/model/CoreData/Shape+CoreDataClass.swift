@@ -13,6 +13,13 @@ import MapKit
 
 @objc(Shape)
 public class Shape: NSManagedObject {
+  
+  private enum Flag: Int32 {
+    case isSafe     = 1
+    case isNotSafe  = 2
+    case dismount   = 4
+    case isHop      = 8
+  }
 
   fileprivate var _sortedCoordinates: [SGKNamedCoordinate]?
   
@@ -28,22 +35,88 @@ public class Shape: NSManagedObject {
   
   @objc public weak var segment: TKSegment? = nil
   
-  @objc public var start: MKAnnotation? {
-    guard let first = sortedCoordinates?.first else { return nil }
-    
-    return first
-  }
-
-  @objc public var end: MKAnnotation? {
-    guard let last = sortedCoordinates?.last else { return nil }
-    
-    return last
-  }
-  
   public override func didTurnIntoFault() {
     super.didTurnIntoFault()
     _sortedCoordinates = nil
     segment = nil
+  }
+  
+  @objc public var start: MKAnnotation? {
+    return sortedCoordinates?.first
+  }
+
+  @objc public var end: MKAnnotation? {
+    return sortedCoordinates?.last
+  }
+  
+  @objc
+  public var isDismount: Bool {
+    get {
+      return has(.dismount)
+    }
+    set {
+      set(.dismount, to: newValue)
+    }
+  }
+  
+  @objc
+  public var isHop: Bool {
+    get {
+      return has(.isHop)
+    }
+    set {
+      set(.isHop, to: newValue)
+    }
+  }
+  
+  public var isSafe: Bool? {
+    if has(.isSafe) {
+      return true
+    } else if has(.isNotSafe) {
+      return false
+    } else {
+      return nil
+    }
+  }
+  
+  @objc
+  public func setSafety(_ value: NSNumber?) {
+    switch value?.boolValue {
+    case true?:
+      set(.isSafe, to: true)
+      set(.isNotSafe, to: false)
+    case false?:
+      set(.isSafe, to: false)
+      set(.isNotSafe, to: true)
+    case nil:
+      set(.isSafe, to: false)
+      set(.isNotSafe, to: false)
+    }
+  }
+  
+  private func has(_ flag: Flag) -> Bool {
+    return (flags & flag.rawValue) != 0
+  }
+  
+  private func set(_ flag: Flag, to value: Bool) {
+    if value {
+      flags = flags | flag.rawValue
+    } else {
+      flags = flags & ~flag.rawValue
+    }
+  }
+}
+
+extension Shape {
+  
+  public var friendliness: TKPathFriendliness {
+    if isDismount {
+      return .dismount
+    } else if let friendly = isSafe {
+      return friendly ? .friendly : .unfriendly
+    } else {
+      return .unknown
+    }
   }
   
 }
@@ -80,18 +153,11 @@ extension Shape: STKDisplayableRoute {
       return color
     }
     
-    if let friendly = friendly {
-      if friendly.boolValue {
-        return #colorLiteral(red: 0.2862745098, green: 0.862745098, blue: 0.3882352941, alpha: 1)
-      } else {
-        return #colorLiteral(red: 1, green: 0.9058823529, blue: 0.2862745098, alpha: 1)
-      }
-    }
-    
-    if let color = segment?.color() {
-      return color
-    } else {
-      return #colorLiteral(red: 0.5607843137, green: 0.5450980392, blue: 0.5411764706, alpha: 1)
+    switch friendliness {
+    case .friendly, .unfriendly, .dismount:
+      return friendliness.color
+    case .unknown:
+      return segment?.color() ?? friendliness.color
     }
   }
   
@@ -104,7 +170,11 @@ extension Shape: STKDisplayableRoute {
   }
   
   public var routeDashPattern: [NSNumber]? {
-    return nil
+    if isHop {
+      return [1, 15] // dots
+    } else {
+      return nil
+    }
   }
     
   
