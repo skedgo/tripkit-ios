@@ -24,7 +24,7 @@ class TKJSONSanitizerTest: XCTestCase {
       "color": #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
       "url": URL(string: "https://api.tripgo.com")!,
       "derp": NSNull(),
-      "number": NSNumber(value: true),
+      "number": NSNumber(value: 1),
     ]]
 
     guard let sanitized = TKJSONSanitizer.sanitize(nonJson) else { XCTFail(); return }
