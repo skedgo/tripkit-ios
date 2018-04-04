@@ -18,7 +18,7 @@ extension API {
     case notValidTimeZoneIdentifier(String)
   }
   
-  public struct OpeningHours : Codable {
+  public struct OpeningHours : Codable, Equatable {
     
     /// Time zone in which the opening hours are defined
     public let timeZone: TimeZone
@@ -54,7 +54,7 @@ extension API {
     
     /// Opening hours on a particular day of the week (with
     /// a special case for public holidays).
-    public struct Day: Codable {
+    public struct Day: Codable, Equatable {
       
       public let day: DayOfWeek
       public let times: [Time]
@@ -64,7 +64,7 @@ extension API {
         case times
       }
       
-      public struct Time: Codable {
+      public struct Time: Codable, Equatable {
         
         public let opens: TimeInterval
         public let closes: TimeInterval

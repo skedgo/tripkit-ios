@@ -10,7 +10,7 @@ import Foundation
 
 extension API {
   
-  public struct CompanyInfo : Codable {
+  public struct CompanyInfo : Codable, Equatable {
     public let name: String
     public let website: URL?
     public let phone: String?
@@ -28,7 +28,7 @@ extension API {
     }
   }
   
-  public struct DataAttribution : Codable {
+  public struct DataAttribution : Codable, Equatable {
     public let provider: CompanyInfo
     public let disclaimer: String?
     
@@ -38,7 +38,7 @@ extension API {
     }
   }
   
-  public struct Location: Codable {
+  public struct Location: Codable, Equatable {
     let lat: CLLocationDegrees
     let lng: CLLocationDegrees
     let bearing: CLLocationDirection?
@@ -54,7 +54,7 @@ extension API {
     case canceled   = "CANCELLED"
   }
 
-  public struct RGBColor: Codable {
+  public struct RGBColor: Codable, Equatable {
     let red: Int
     let green: Int
     let blue: Int
@@ -89,7 +89,7 @@ extension API {
     #endif
   }
   
-  public struct Vehicle: Codable {
+  public struct Vehicle: Codable, Equatable {
     
     @available(*, unavailable, renamed: "API.VehicleOccupancy")
     typealias Occupancy = VehicleOccupancy
@@ -124,7 +124,7 @@ extension API {
     case notAcceptingPassengers = "NOT_ACCEPTING_PASSENGERS"
   }
   
-  public struct VehicleComponents: Codable {
+  public struct VehicleComponents: Codable, Equatable {
     public let wifi: Bool?
     public let occupancy: VehicleOccupancy?
   }

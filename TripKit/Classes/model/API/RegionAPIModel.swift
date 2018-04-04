@@ -11,7 +11,7 @@ import Foundation
 extension API {
   
   /// Formerly known as `TKRegionInfo`
-  public struct RegionInfo: Codable {
+  public struct RegionInfo: Codable, Equatable {
     public let streetBicyclePaths: Bool
     public let streetWheelchairAccessibility: Bool
     public let transitModes: [ModeInfo]
@@ -33,7 +33,7 @@ extension API {
   ///
   /// Formerly known as `TKParatransitInfo`
   /// - SeeAlso: `TKBuzzInfoProvider`'s `fetchParatransitInformation`
-  public struct Paratransit: Codable {
+  public struct Paratransit: Codable, Equatable {
     public let name: String
     public let url: URL
     public let number: String
@@ -54,7 +54,7 @@ extension API {
   
   /// Additional details about a group of modes,
   /// e.g., all bike or car share providers in a city
-  public struct GenericModeDetails: Codable {
+  public struct GenericModeDetails: Codable, Equatable {
     /// Name of the group
     public let title: String
     
@@ -79,7 +79,7 @@ extension API {
   /// specific mode usually relates to a certain transport
   /// provider, such as a car-sharing provider, bike-sharing
   /// provider, limousine company, or TNC.
-  public struct SpecificModeDetails: Codable {
+  public struct SpecificModeDetails: Codable, Equatable {
     /// Name of thise mode
     public let title: String?
     

@@ -9,9 +9,9 @@ import Foundation
 
 extension API {
 
-  public struct Departures: Codable {
+  public struct Departures: Codable, Equatable {
     
-    public struct Embarkations: Codable {
+    public struct Embarkations: Codable, Equatable {
       let services: [Departure]
       let stopCode: String
     }

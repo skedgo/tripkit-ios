@@ -10,7 +10,7 @@ import Foundation
 
 extension API {
   
-  public struct BikePodInfo : Codable {
+  public struct BikePodInfo : Codable, Equatable {
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
     public let inService: Bool
@@ -42,9 +42,9 @@ extension API {
   }
   
   
-  public struct CarPodInfo : Codable {
+  public struct CarPodInfo : Codable, Equatable {
     
-    public struct Vehicle : Codable {
+    public struct Vehicle : Codable, Equatable {
       public let name: String?
       public let description: String?
       public let licensePlate: String?
@@ -87,7 +87,7 @@ extension API {
   }
   
   
-  public struct CarParkInfo : Codable {
+  public struct CarParkInfo : Codable, Equatable {
     public let identifier: String
     public let name: String
     public let operatorInfo: API.CompanyInfo?
@@ -116,7 +116,7 @@ extension API {
   }
   
   
-  public struct CarRentalInfo : Codable {
+  public struct CarRentalInfo : Codable, Equatable {
     public let identifier: String
     public let company: API.CompanyInfo
     public let openingHours: API.OpeningHours?
@@ -124,8 +124,8 @@ extension API {
   }
 
   
-  public struct LocationInfo : Codable {
-    public struct Details: Codable {
+  public struct LocationInfo : Codable, Equatable {
+    public struct Details: Codable, Equatable {
       public let w3w: String?
       public let w3wInfoURL: URL?
     }
@@ -146,10 +146,10 @@ extension API {
   }
   
   
-  public struct LocationsResponse: Codable {
+  public struct LocationsResponse: Codable, Equatable {
     public let groups: [Group]
     
-    public struct Group: Codable {
+    public struct Group: Codable, Equatable {
       public let key: String
       public let hashCode: Int
       public let stops: [STKStopCoordinate]?
