@@ -25,6 +25,7 @@ extension API {
     public struct Entry: Codable, Equatable {
       public let label: String
       public let price: Float
+      public let maxDurationInMinutes: Int?
     }
 
   }

@@ -88,8 +88,34 @@ extension API {
   
   
   public struct CarParkInfo : Codable, Equatable {
+    
+    public enum EntranceType: String, Codable {
+      case entranceAndExit = "ENTRANCE_EXIT"
+      case entranceOnly = "ENTRANCE_ONLY"
+      case exitOnly = "EXIT_ONLY"
+      case pedestrian = "PEDESTRIAN"
+      case disabledPedestrian = "DISABLED_PEDESTRIAN"
+      case permit = "PERMIT"
+    }
+    
+    public struct Entrance : Codable, Equatable {
+      public let type: EntranceType
+      public let lat: CLLocationDegrees
+      public let lng: CLLocationDegrees
+      public let address: String?
+    }
     public let identifier: String
     public let name: String
+    
+    /// Additional information text from the provider. Can be long and over multiple lines.
+    public let info: String?
+    
+    /// The polygon defining the parking area as an encoded polyline.
+    ///
+    /// See `CLLocation.decodePolyLine`
+    public let encodedParkingArea: String?
+    
+    public let entrances: [Entrance]?
     public let operatorInfo: API.CompanyInfo?
     public let openingHours: API.OpeningHours?
     public let pricingTables: [API.PricingTable]?
@@ -100,7 +126,10 @@ extension API {
 
     private enum CodingKeys: String, CodingKey {
       case identifier
+      case encodedParkingArea
       case name
+      case info
+      case entrances
       case operatorInfo = "operator"
       case openingHours
       case pricingTables
