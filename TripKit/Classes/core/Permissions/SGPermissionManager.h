@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void (^SGPermissionCompletionBlock)(BOOL enabled);
 typedef void(^SGPermissionsOpenSettingsHandler)(void);
 
@@ -22,7 +24,7 @@ FOUNDATION_EXPORT NSString *const SGPermissionsChangedNotification;
 
 @interface SGPermissionManager : NSObject
 
-@property (nonatomic, strong) SGPermissionsOpenSettingsHandler openSettingsHandler;
+@property (nonatomic, strong, nullable) SGPermissionsOpenSettingsHandler openSettingsHandler;
 
 // these are the main interface methods
 
@@ -39,3 +41,5 @@ FOUNDATION_EXPORT NSString *const SGPermissionsChangedNotification;
 - (NSString *)authorizationAlertText;
 
 @end
+
+NS_ASSUME_NONNULL_END
