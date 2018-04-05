@@ -107,7 +107,7 @@ extension SegmentTemplate {
         start = SVKParserHelper.namedCoordinate(for: locationDict)
         assert(start != nil, "Got no start waypoint")
       }
-      if end == nil, let locationDict = startDict {
+      if end == nil, let locationDict = endDict {
         end = SVKParserHelper.namedCoordinate(for: locationDict)
         assert(end != nil, "Got no start waypoint")
       }
@@ -116,7 +116,7 @@ extension SegmentTemplate {
       template.startLocation = start
 
       end?.address = endDict?["address"] as? String
-      template.startLocation = end
+      template.endLocation = end
     }
     
     return template
