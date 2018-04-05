@@ -96,7 +96,7 @@ extension SegmentTemplate {
   }
   
   @objc public var isSelfNavigating: Bool {
-    return !isStationary && SVKTransportModes.modeIdentifierIsSelfNavigating(modeIdentifier)
+    return turnByTurnMode != nil
   }
   
   @objc public var isAffectedByTraffic: Bool {

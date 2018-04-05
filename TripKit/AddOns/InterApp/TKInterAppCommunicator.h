@@ -25,8 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Turn-by-turn
 
-+ (BOOL)canOpenInMapsApp:(TKSegment *)segment;
-
 /**
  Opens the segment in a maps app. Either directly in Apple Maps if nothing else is installed, or it will prompt for using Google Maps or Waze.
  @param segment A segment for which `canOpenInMapsApp` returns YES
