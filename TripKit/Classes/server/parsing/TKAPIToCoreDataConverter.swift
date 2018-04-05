@@ -13,17 +13,6 @@ public class TKAPIToCoreDataConverter: NSObject {
   override private init() {
     super.init()
   }
-  
-  @objc(segmentVisibilityType:)
-  public static func segmentVisibilityType(for string: String) -> STKTripSegmentVisibility {
-    switch string {
-    case "in summary": return .inSummary
-    case "on map": return .onMap
-    case "in details": return .inDetails
-    default: return .hidden
-    }
-  }
-
 }
 
 // MARK: - Stops

@@ -17,6 +17,5 @@
 // Classes
 #import "STKRoutePolyline.h"
 #import "STKVehicular.h"
-#import "STKMiniInstruction.h"
 
 #endif
