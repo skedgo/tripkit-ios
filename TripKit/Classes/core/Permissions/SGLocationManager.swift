@@ -55,7 +55,7 @@ extension SGLocationManager {
     }
   }
   
-  open override func authorizationAlertText() -> String! {
+  open override func authorizationAlertText() -> String {
     return NSLocalizedString("Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app.", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Location iOS authorisation needed text")
   }
   

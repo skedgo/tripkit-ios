@@ -27,7 +27,7 @@ public enum TKLocationProvider {
   ///   - center: Centre coordinate of circle
   ///   - radius: Radius of circle in metres
   ///   - modes: Modes for which to fetch locations. If not provided, will use all.
-  /// - Returns: Observable of fetched locations; can error out
+  /// - Returns: Observable of fetched locations; always returns empty array for international region; can error out
   public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil) -> Single<[STKModeCoordinate]> {
     
     return SVKServer.shared.rx
@@ -40,6 +40,10 @@ public enum TKLocationProvider {
   
   public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil, in region: SVKRegion) -> Single<[STKModeCoordinate]> {
 
+    guard region != SVKInternationalRegion.shared else {
+      return Single.just([])
+    }
+    
     var paras: [String: Any] = [
       "lat": center.latitude,
       "lng": center.longitude,
