@@ -25,12 +25,6 @@ extension API {
       public let label: String?
       public let price: Float
       public let maxDurationInMinutes: Int?
-      
-      private enum CodingKeys: String, CodingKey {
-        case label
-        case price
-        case maxDurationInMinutes = "duration"
-      }
     }
   }
 
