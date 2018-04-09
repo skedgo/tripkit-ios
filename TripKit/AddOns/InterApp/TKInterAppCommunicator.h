@@ -19,30 +19,9 @@ typedef enum {
   TKInterAppCommunicatorITunesAppIDOla      = 539179365,
 } TKInterAppCommunicatorITunesAppID;
 
-typedef NS_ENUM(NSInteger, TKInterAppCommunicatorMapDirectionMode) {
-  TKInterAppCommunicatorMapDirectionModeWalking,
-  TKInterAppCommunicatorMapDirectionModeDriving,
-  TKInterAppCommunicatorMapDirectionModeCycling,
-  TKInterAppCommunicatorMapDirectionModeDefault
-};
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TKInterAppCommunicator : NSObject
-
-#pragma mark - Turn-by-turn
-
-/**
- Opens the segment in a maps app. Either directly in Apple Maps if nothing else is installed, or it will prompt for using Google Maps or Waze.
- @param segment A segment for which `canOpenInMapsApp` returns YES
- @param controller A controller to present the optional action sheet on
- @param sender An optional sender on which to anchor the optional action sheet
- @param currentLocationHandler Will be called to check if turn-by-turn navigation should start at the current location or at the segment's start location. If `nil` it will start at the current location.
- */
-+ (void)openSegmentInMapsApp:(TKSegment *)segment
-           forViewController:(UIViewController *)controller
-                 initiatedBy:(nullable id)sender
-      currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler;
 
 #pragma mark - Taxi / ride sharing apps
 

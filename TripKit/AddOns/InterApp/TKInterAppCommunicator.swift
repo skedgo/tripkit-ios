@@ -37,11 +37,105 @@ extension TKInterAppCommunicator {
     return UIApplication.shared.canOpenURL(testURL)
   }
   
+  // MARK: - Open Maps Apps From Trip Segment
+  
+  /**
+   Opens the segment in a maps app. Either directly in Apple Maps if nothing else is installed, or it will prompt for using Google Maps or Waze.
+   @param segment A segment for which `canOpenInMapsApp` returns YES
+   @param controller A controller to present the optional action sheet on
+   @param sender An optional sender on which to anchor the optional action sheet
+   @param currentLocationHandler Will be called to check if turn-by-turn navigation should start at the current location or at the segment's start location. If `nil` it will start at the current location.
+   */
+  
+  @objc(openSegmentInMapsApp:forViewController:initiatedBy:currentLocationHandler:)
+  public static func openSegmentInMapsApp(
+      _ segment: TKSegment,
+      forViewController controller: UIViewController,
+      initiatedBy sender: Any,
+      currentLocationHandler: ((TKSegment) -> Bool)?
+    ) {
+    
+    let hasGoogleMaps = deviceHasGoogleMaps()
+    let hasWaze = deviceHasWaze()
+    
+    if !hasGoogleMaps && !hasWaze {
+      // just open Apple Maps
+      openSegmentInAppleMaps(segment, currentLocationHandler: currentLocationHandler)
+    } else {
+      let actions = SGActions(title: Loc.GetDirections)
+      
+      // Apple Maps
+      actions.addAction(Loc.AppleMaps) {
+        openSegmentInAppleMaps(segment, currentLocationHandler: currentLocationHandler)
+      }
+      
+      // Google Maps
+      if (hasGoogleMaps) {
+        actions.addAction(Loc.GoogleMaps) {
+          openSegmentInGoogleMaps(segment, currentLocationHandler: currentLocationHandler)
+        }
+      }
+      
+      // Waze
+      if (hasWaze) {
+        actions.addAction("Waze") {
+          openSegmentInWaze(segment)
+        }
+      }
+      
+      actions.hasCancel = true
+      actions.showForSender(sender, in: controller)
+    }
+  }
+  
+  private static func openSegmentInAppleMaps(_ segment: TKSegment, currentLocationHandler: ((TKSegment) -> Bool)?) {
+    guard
+      let mode = turnByTurnMode(segment),
+      let destination = segment.end
+      else {
+        assert(false, "Turn by turn navigation does not apply to this segment OR segment does not have a destination")
+    }
+    
+    var origin: MKAnnotation?
+    if currentLocationHandler?(segment) == false {
+      origin = segment.start
+    }
+    
+    openAppleMaps(in: mode, routeFrom: origin, to: destination)
+  }
+  
+  private static func openSegmentInGoogleMaps(_ segment: TKSegment, currentLocationHandler: ((TKSegment) -> Bool)?) {
+    guard
+      let mode = turnByTurnMode(segment),
+      let destination = segment.end
+      else {
+        assert(false, "Turn by turn navigation does not apply to this segment OR segment does not have a destination")
+    }
+    
+    var origin: MKAnnotation?
+    if currentLocationHandler?(segment) == false {
+      origin = segment.start
+    }
+    
+    openGoogleMaps(in: mode, routeFrom: origin, to: destination)
+  }
+  
+  private static func openSegmentInWaze(_ segment: TKSegment) {
+    guard
+      let destination = segment.end,
+      let mode = turnByTurnMode(segment),
+      mode == .driving
+      else {
+      assert(false, "Trying to open Waze without a destination OR the segment isn't a driving.")
+    }
+    
+    openWaze(routeTo: destination)
+  }
+  
   // MARK: - Open Maps Apps
   
-  @objc(openMapsAppInMode:routeFrom:to:viewController:initiatedBy:)
   public static func openMapsApp(
-      in mode: TKInterAppCommunicatorMapDirectionMode,
+      in mode: TKTurnByTurnMode,
       routeFrom origin: MKAnnotation?,
       to destination: MKAnnotation,
       viewController controller: UIViewController,
@@ -53,13 +147,13 @@ extension TKInterAppCommunicator {
     
     if !hasGoogleMaps && !hasWaze {
       // just open Apple Maps
-      openAppMaps(in: mode, routeFrom: origin, to: destination)
+      openAppleMaps(in: mode, routeFrom: origin, to: destination)
     } else {
       let actions = SGActions(title: Loc.GetDirections)
       
       // Apple Maps
       actions.addAction(Loc.AppleMaps) {
-        openAppMaps(in: mode, routeFrom: origin, to: destination)
+        openAppleMaps(in: mode, routeFrom: origin, to: destination)
       }
       
       // Google Maps
@@ -72,6 +166,7 @@ extension TKInterAppCommunicator {
       // Waze
       if (hasWaze) {
         actions.addAction("Waze") {
+          assert(mode == .driving, "Waze only supports driving turn by turn mode")
           openWaze(routeTo: destination)
         }
       }
@@ -81,8 +176,7 @@ extension TKInterAppCommunicator {
     }
   }
   
-  @objc(openAppMapsInMode:routeFrom:to:)
-  public static func openAppMaps(in mode: TKInterAppCommunicatorMapDirectionMode, routeFrom origin: MKAnnotation?, to destination: MKAnnotation) {
+  private static func openAppleMaps(in mode: TKTurnByTurnMode, routeFrom origin: MKAnnotation?, to destination: MKAnnotation) {
     let originMapItem: MKMapItem
     if let unwrapped = origin {
       let originPlacemark = MKPlacemark(coordinate: unwrapped.coordinate, addressDictionary: nil)
@@ -114,8 +208,7 @@ extension TKInterAppCommunicator {
     MKMapItem.openMaps(with: [originMapItem, destinationMapItem], launchOptions: options )
   }
   
-  @objc(openGoogleMapsInMode:routeFrom:to:)
-  public static func openGoogleMaps(in mode: TKInterAppCommunicatorMapDirectionMode, routeFrom origin: MKAnnotation?, to destination: MKAnnotation) {
+  private static func openGoogleMaps(in mode: TKTurnByTurnMode, routeFrom origin: MKAnnotation?, to destination: MKAnnotation) {
     // https://developers.google.com/maps/documentation/ios/urlscheme
     var request = "comgooglemaps-x-callback://?"
     
@@ -133,9 +226,6 @@ extension TKInterAppCommunicator {
       request.append("directionsmode=driving")
     case .cycling:
       request.append("directionsmode=bicycling")
-    case .default:
-      // nothing to do.
-      break
     }
     
     if let callback = SGKConfig.shared.googleMapsCallback() {
@@ -147,8 +237,7 @@ extension TKInterAppCommunicator {
     }
   }
   
-  @objc(openWazeRouteTo:)
-  public static func openWaze(routeTo destination: MKAnnotation) {
+  private static func openWaze(routeTo destination: MKAnnotation) {
     // https://www.waze.com/about/dev
     let request = String(format: "waze://?ll=%f,%f&navigate=yes", destination.coordinate.latitude, destination.coordinate.longitude)
     if let url = URL(string: request) {
