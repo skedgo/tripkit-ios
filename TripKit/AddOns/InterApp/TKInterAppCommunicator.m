@@ -10,7 +10,6 @@
 
 @import MessageUI;
 
-
 #ifndef TK_NO_MODULE
 @import TripKit;
 #import <TripKitInterApp/TripKitInterApp-Swift.h>
@@ -81,94 +80,65 @@
   }
 }
 
-+ (void)openSegmentInGoogleMaps:(TKSegment *)segment
-{
-  CLLocationCoordinate2D start = [[segment start] coordinate];
-  CLLocationCoordinate2D end   = [[segment end] coordinate];
-  NSString* url = [NSString stringWithFormat: @"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
-                   start.latitude, start.longitude,
-                   end.latitude, end.longitude];
-  [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
-}
+//+ (void)openSegmentInGoogleMaps:(TKSegment *)segment
+//{
+//  CLLocationCoordinate2D start = [[segment start] coordinate];
+//  CLLocationCoordinate2D end   = [[segment end] coordinate];
+//  NSString* url = [NSString stringWithFormat: @"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
+//                   start.latitude, start.longitude,
+//                   end.latitude, end.longitude];
+//  [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+//}
 
 + (void)openSegmentInAppleMaps:(TKSegment *)segment
         currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
 {
-  MKMapItem *start;
+  id<MKAnnotation> origin;
   if (currentLocationHandler == nil || currentLocationHandler(segment)) {
-    start = [MKMapItem mapItemForCurrentLocation];
+    // nothing to do
   } else {
-    MKPlacemark *startPlace = [[MKPlacemark alloc] initWithCoordinate:[[segment start] coordinate] addressDictionary:nil];
-    start = [[MKMapItem alloc] initWithPlacemark:startPlace];
+    origin = [segment start];
   }
-  MKPlacemark *endPlace = [[MKPlacemark alloc] initWithCoordinate:[[segment end] coordinate] addressDictionary:nil];
-  MKMapItem *end = [[MKMapItem alloc] initWithPlacemark:endPlace];
   
-  NSString *directionMode = [segment isWalking] ? MKLaunchOptionsDirectionsModeWalking : MKLaunchOptionsDirectionsModeDriving;
-  NSDictionary *options = @{ MKLaunchOptionsDirectionsModeKey : directionMode, MKLaunchOptionsMapTypeKey : @(MKMapTypeStandard), MKLaunchOptionsShowsTrafficKey : @YES };
+  TKInterAppCommunicatorMapDirectionMode mode = [segment isWalking]
+  ? TKInterAppCommunicatorMapDirectionModeWalking
+  : TKInterAppCommunicatorMapDirectionModeDriving;
   
-  [MKMapItem openMapsWithItems:@[start, end]
-                 launchOptions:options];
-}
-
-+ (BOOL)deviceHasGoogleMaps
-{
-  NSURL *testURL = [NSURL URLWithString:@"comgooglemaps-x-callback://"];
-  return [[UIApplication sharedApplication] canOpenURL:testURL];
+  [TKInterAppCommunicator openAppMapsInMode:mode routeFrom:origin to:[segment end]];
 }
 
 + (void)openSegmentInGoogleMapsApp:(TKSegment *)segment
             currentLocationHandler:(nullable BOOL (^)(TKSegment * __nonnull))currentLocationHandler
 {
-  // https://developers.google.com/maps/documentation/ios/urlscheme
-  
-  NSMutableString *directionsRequest = [NSMutableString stringWithString:@"comgooglemaps-x-callback://?"];
-  
-  // source
+  // origin
+  id<MKAnnotation> origin;
   if (currentLocationHandler == nil || currentLocationHandler(segment)) {
     // nothing to add
   } else {
-    CLLocationCoordinate2D origin = [[segment start] coordinate];
-    [directionsRequest appendFormat:@"saddr=%.5f,%.5f&", origin.latitude, origin.longitude];
+    origin = [segment start];
   }
   
-  // destination
-  CLLocationCoordinate2D destination = [[segment end] coordinate];
-  [directionsRequest appendFormat:@"daddr=%.5f,%.5f&", destination.latitude, destination.longitude];
-  
+  // mode
+  TKInterAppCommunicatorMapDirectionMode mode;
   if ([segment isWalking]) {
-    [directionsRequest appendString:@"directionsmode=walking"];
+    mode = TKInterAppCommunicatorMapDirectionModeWalking;
   } else if ([segment isCycling]) {
-    [directionsRequest appendString:@"directionsmode=bicycling"];
+    mode = TKInterAppCommunicatorMapDirectionModeCycling;
   } else if ([segment isDriving]) {
-    [directionsRequest appendString:@"directionsmode=driving"];
+    mode = TKInterAppCommunicatorMapDirectionModeDriving;
+  } else {
+    mode = TKInterAppCommunicatorMapDirectionModeDefault;
   }
   
-  // call-back
-  NSString *callback = [[SGKConfig sharedInstance] googleMapsCallback];
-  if (callback) {
-    [directionsRequest appendFormat:@"x-success=%@", callback];
-  }
-  NSURL *directionsURL = [NSURL URLWithString:directionsRequest];
-  [[UIApplication sharedApplication] openURL:directionsURL];
-}
-
-+ (BOOL)deviceHasWaze
-{
-  NSURL *testURL = [NSURL URLWithString:@"waze://"];
-  return [[UIApplication sharedApplication] canOpenURL:testURL];
+  [TKInterAppCommunicator openGoogleMapsInMode:mode routeFrom:origin to:[segment end]];
 }
 
 + (void)openSegmentInWazeApp:(TKSegment *)segment
 {
-  // https://www.waze.com/about/dev
-  
   // Waze will always start at the current location
-  CLLocationCoordinate2D destination = [[segment end] coordinate];
-  NSMutableString *directionsRequest = [NSMutableString stringWithFormat:@"waze://?ll=%f,%f&navigate=yes", destination.latitude, destination.longitude];
-  
-  NSURL *directionsURL = [NSURL URLWithString:directionsRequest];
-  [[UIApplication sharedApplication] openURL:directionsURL];
+  if ([segment end] != nil) {
+    [TKInterAppCommunicator openWazeRouteTo:[segment end]];
+  }
 }
 
 #pragma mark - Taxi helpers

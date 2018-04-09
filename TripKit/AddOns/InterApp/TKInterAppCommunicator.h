@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@import MapKit;
+
 @class TKSegment;
 
 typedef enum {
@@ -15,9 +17,14 @@ typedef enum {
   TKInterAppCommunicatorITunesAppIDIngogo   = 463995190,
   TKInterAppCommunicatorITunesAppIDLyft     = 529379082,
   TKInterAppCommunicatorITunesAppIDOla      = 539179365,
-  
 } TKInterAppCommunicatorITunesAppID;
 
+typedef NS_ENUM(NSInteger, TKInterAppCommunicatorMapDirectionMode) {
+  TKInterAppCommunicatorMapDirectionModeWalking,
+  TKInterAppCommunicatorMapDirectionModeDriving,
+  TKInterAppCommunicatorMapDirectionModeCycling,
+  TKInterAppCommunicatorMapDirectionModeDefault
+};
 
 NS_ASSUME_NONNULL_BEGIN
 

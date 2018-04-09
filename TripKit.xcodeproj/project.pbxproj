@@ -842,6 +842,7 @@
 		D39ECD89205A029500E09474 /* TKSectionedAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */; };
 		D3F9CEC32064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */; };
 		D3F9CEC52064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */; };
+		D3FC1F11207B1B3E00D39DF9 /* TKInterAppCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1549,6 +1550,7 @@
 		D3A779281E513C5000BBAF6C /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertTableHeader.swift; sourceTree = "<group>"; };
 		D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKSectionedAlertTableHeader.xib; sourceTree = "<group>"; };
+		D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKInterAppCommunicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1876,6 +1878,7 @@
 				3A6DF179202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.m */,
 				3A6DF17A202C98AF0084CB2C /* TKInterAppCommunicator.h */,
 				3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */,
+				D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator.swift */,
 				3A6DF177202C98AF0084CB2C /* TKInterAppHelpers.swift */,
 			);
 			path = InterApp;
@@ -3689,6 +3692,7 @@
 			files = (
 				3A6DF17D202C98AF0084CB2C /* TKInterAppCommunicator.m in Sources */,
 				3A6DF17E202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.m in Sources */,
+				D3FC1F11207B1B3E00D39DF9 /* TKInterAppCommunicator.swift in Sources */,
 				3A6DF17C202C98AF0084CB2C /* TKInterAppHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
