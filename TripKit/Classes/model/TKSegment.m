@@ -641,11 +641,7 @@ NSString *const UninitializedString =  @"UninitializedString";
         break;
         
       case TKSegmentOrderingRegular: {
-        _start = self.template.startLocation;
-        if (_start == nil) {
-          // old school
-          _start = [self.template endWaypoint:YES];
-        }
+        _start = self.template.start;
         break;
       }
         
@@ -668,11 +664,7 @@ NSString *const UninitializedString =  @"UninitializedString";
         break;
         
       case TKSegmentOrderingRegular: {
-        _end = self.template.endLocation;
-        if (_end == nil) {
-          // old school
-          _end = [self.template endWaypoint:NO];
-        }
+        _end = self.template.end;
         break;
       }
     }

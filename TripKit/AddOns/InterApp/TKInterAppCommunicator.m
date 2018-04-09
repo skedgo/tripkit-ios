@@ -28,14 +28,6 @@
 
 #pragma mark - Turn-by-turn directions helpers
 
-+ (BOOL)canOpenInMapsApp:(TKSegment *)segment
-{
-  if (nil == segment || NO == [segment isKindOfClass:[TKSegment class]])
-    return NO;
-  
-  return [segment isSelfNavigating] && [segment duration:YES] > 2 * 60;
-}
-
 + (void)openSegmentInMapsApp:(TKSegment *)segment
            forViewController:(UIViewController *)controller
                  initiatedBy:(id)sender

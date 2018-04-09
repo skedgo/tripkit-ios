@@ -66,7 +66,6 @@ FOUNDATION_EXPORT NSString *const SVKTransportModeIdentifierWheelchair;
 + (BOOL)modeIdentifierIsCycling:(NSString *)modeIdentifier;
 + (BOOL)modeIdentifierIsDriving:(NSString *)modeIdentifier;
 + (BOOL)modeIdentifierIsSharedVehicle:(NSString *)modeIdentifier;
-+ (BOOL)modeIdentifierIsSelfNavigating:(NSString *)modeIdentifier;
 + (BOOL)modeIdentifierIsAffectedByTraffic:(NSString *)modeIdentifier;
 + (BOOL)modeIdentifierIsFlight:(NSString *)modeIdentifier;
 + (BOOL)modeIdentifierIsExpensive:(NSString *)modeIdentifier;

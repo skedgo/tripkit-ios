@@ -15,22 +15,6 @@
 
 @implementation TKParserHelper
 
-#pragma mark - Segments
-
-+ (NSNumber *)segmentTypeForString:(NSString *)typeString
-{
-  if ([typeString isEqualToString:@"scheduled"]) {
-    return @(TKSegmentTypeScheduled);
-  } else if ([typeString isEqualToString:@"unscheduled"]) {
-    return @(TKSegmentTypeUnscheduled);
-  } else if ([typeString isEqualToString:@"stationary"]) {
-    return @(TKSegmentTypeStationary);
-  } else {
-    ZAssert(true, @"Encountered unknown segment type: '%@'", typeString);
-    return nil;
-  }
-}
-
 #pragma mark - Creating our classes
 
 + (void)updateVehiclesForSegmentReference:(SegmentReference *)reference
@@ -71,7 +55,7 @@
 
 + (NSArray *)insertNewShapes:(NSArray *)shapesArray
                   forService:(Service *)service
-                withModeInfo:(ModeInfo *)modeInfo
+                withModeInfo:(nullable ModeInfo *)modeInfo
 {
   return [self insertNewShapes:shapesArray
                     forService:service
@@ -80,9 +64,9 @@
 }
 
 + (NSArray *)insertNewShapes:(NSArray *)shapesArray
-                  forService:(Service *)requestedService
-                withModeInfo:(ModeInfo *)modeInfo
-            orTripKitContext:(NSManagedObjectContext *)context
+                  forService:(nullable Service *)requestedService
+                withModeInfo:(nullable ModeInfo *)modeInfo
+            orTripKitContext:(nullable NSManagedObjectContext *)context
 {
   if (context == nil) {
     ZAssert(requestedService, @"If you don't supply a context, you need to supply a service!");
