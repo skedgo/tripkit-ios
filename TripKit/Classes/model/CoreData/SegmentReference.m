@@ -9,6 +9,7 @@
 #import "SegmentReference.h"
 
 #import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 enum {
   SGSegmentFlagTimesAreRealtime     = 1 << 0,
@@ -61,7 +62,7 @@ typedef NSUInteger SGSegmentFlag;
 	}
   
   // link up to segment template
-	self.segmentTemplate = [SegmentTemplate fetchSegmentTemplateWithHashCode:self.templateHashCode inTripKitContext:self.managedObjectContext];
+	self.segmentTemplate = [SegmentTemplate fetchSegmentTemplateWithHashCode:self.templateHashCode.integerValue inTripKitContext:self.managedObjectContext];
 	return self.segmentTemplate;
 }
 

@@ -47,7 +47,6 @@
 #import "TripGroup.h"
 #import "Trip.h"
 #import "DLSEntry.h"
-#import "SegmentTemplate.h"
 #import "SegmentReference.h"
 #import "Service.h"
 #import "StopLocation.h"

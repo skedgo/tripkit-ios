@@ -34,7 +34,8 @@ public class ModeInfo: NSObject, Codable, NSSecureCoding {
   }
 
   @objc(modeInfoForDictionary:)
-  public class func modeInfo(for json: [String: Any]) -> ModeInfo? {
+  public class func modeInfo(for json: [String: Any]?) -> ModeInfo? {
+    guard let json = json else { return nil }
     let decoder = JSONDecoder()
     return try? decoder.decode(ModeInfo.self, withJSONObject: json)
   }

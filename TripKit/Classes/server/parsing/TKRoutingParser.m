@@ -28,99 +28,6 @@
   return self;
 }
 
-#pragma mark - Results
-
-- (SegmentTemplate *)insertNewSegmentTemplate:(NSDictionary *)dict
-                                   forService:(Service *)service
-{
-  // Get the visibility and keep only those templates which are visible
-  STKTripSegmentVisibility visibility = [TKAPIToCoreDataConverter segmentVisibilityType:dict[@"visibility"]];
-  if (visibility == STKTripSegmentVisibilityHidden) {
-    return nil;
-  }
-  
-  SegmentTemplate *template = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SegmentTemplate class]) inManagedObjectContext:self.context];
-  template.action           = dict[@"action"];
-  template.visibility       = @(visibility);
-  template.segmentType      = [TKParserHelper segmentTypeForString:dict[@"type"]];
-  template.hashCode         = dict[@"hashCode"];
-  template.bearing          = dict[@"travelDirection"];
-  template.modeIdentifier   = dict[@"modeIdentifier"];
-  template.modeInfo         = [ModeInfo modeInfoForDictionary:dict[@"modeInfo"]];
-  template.miniInstruction  = [STKMiniInstruction miniInstructionForDictionary:dict[@"mini"]];
-  template.notesRaw         = dict[@"notes"];
-  template.smsMessage       = dict[@"smsMessage"];
-  template.smsNumber        = dict[@"smsNumber"];
-  template.durationWithoutTraffic = dict[@"durationWithoutTraffic"];
-  template.metres           = dict[@"metres"];
-  template.metresFriendly   = dict[@"metresSafe"];
-  template.metresUnfriendly = dict[@"metresUnsafe"];
-  template.metresDismount   = dict[@"metresDismount"];
-  
-  if (template.segmentType.integerValue == TKSegmentTypeScheduled) {
-    template.scheduledStartStopCode = dict[@"stopCode"];
-    template.scheduledEndStopCode   = dict[@"endStopCode"];
-    service.operatorName            = dict[@"serviceOperator"];
-  }
-  
-  // additional info
-  template.continuation   = [dict[@"isContinuation"] boolValue];
-  template.hasCarParks    = [dict[@"hasCarParks"] boolValue];
-  
-  // set start, intermediary waypoints and end
-  
-  if (YES == [template isStationary]) {
-    // stationary segments just have a single location
-    template.startLocation = [SVKParserHelper namedCoordinateForDictionary:dict[@"location"]];
-    template.endLocation   = template.startLocation;
-    
-  } else {
-    
-    SGKNamedCoordinate *start = nil;
-    SGKNamedCoordinate *end = nil;
-    
-    // all the waypoints
-    // they should ways be in a 'shapes' array now, but also support the old 'streets' and 'line'
-    NSArray *shapesArray = dict[@"shapes"];
-    if (nil == shapesArray)
-      shapesArray = dict[@"streets"];
-    if (nil == shapesArray)
-      shapesArray = dict[@"line"];
-    
-    NSArray *shapes = [TKParserHelper insertNewShapes:shapesArray
-                                           forService:service
-                                         withModeInfo:template.modeInfo
-                                     orTripKitContext:self.context];
-    for (Shape *shape in shapes) {
-      shape.template = template;
-      if (YES == shape.travelled.boolValue) {
-        if (start == nil) // only if no previous travelled segment!
-          start = [[SGKNamedCoordinate alloc] initWithCoordinate:shape.start.coordinate];
-        // end ALSO if there's a previous travelled segment
-        end   = [[SGKNamedCoordinate alloc] initWithCoordinate:shape.end.coordinate];
-      }
-    }
-    
-    // set the start and end
-    if (! start) {
-      start = [SVKParserHelper namedCoordinateForDictionary:dict[@"from"]];
-    }
-    if (! end) {
-      end   = [SVKParserHelper namedCoordinateForDictionary:dict[@"to"]];
-    }
-    
-    ZAssert(nil != start, @"Got no start waypoint!");
-    start.address = dict[@"from"][@"address"];
-    template.startLocation = start;
-    
-    ZAssert(nil != start, @"Got no end waypoint!");
-    end.address = dict[@"to"][@"address"];
-    template.endLocation = end;
-  }
-  
-  return template;
-}
-
 #pragma mark - Public method
 
 - (TripRequest *)parseAndAddResultBlocking:(NSDictionary *)json
@@ -314,7 +221,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
   for (NSDictionary *segmentTemplateDict in segmentTemplatesArray) {
     // check if we already have a segment template with that id
     NSNumber *hashCode = segmentTemplateDict[@"hashCode"];
-    BOOL hashCodeExists = [SegmentTemplate segmentTemplateHashCode:hashCode
+    BOOL hashCodeExists = [SegmentTemplate segmentTemplateHashCode:hashCode.integerValue
                                             existsInTripKitContext:self.context];
     if (NO == hashCodeExists) {
       // keep it
@@ -402,7 +309,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         
         if (!reference
             && (unprocessedTemplateDict
-                   || YES == [SegmentTemplate segmentTemplateHashCode:hashCode existsInTripKitContext:self.context])) {
+                   || YES == [SegmentTemplate segmentTemplateHashCode:hashCode.integerValue existsInTripKitContext:self.context])) {
           reference = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SegmentReference class]) inManagedObjectContext:self.context];
         }
         
@@ -482,8 +389,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         
         // now we can add the template, too
         if (unprocessedTemplateDict) {
-          [self insertNewSegmentTemplate:unprocessedTemplateDict
-                              forService:service];
+          [SegmentTemplate insertNewTemplateFromDictionary:unprocessedTemplateDict forService:service intoContext:self.context];
           [segmentHashToTemplateDictionaryDict removeObjectForKey:[hashCode description]];
         }
         

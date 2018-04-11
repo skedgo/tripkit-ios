@@ -10,7 +10,6 @@
 @import CoreData;
 
 #import "TKSegment.h"
-#import "SegmentTemplate.h"
 #import "TKRealTimeUpdatable.h"
 
 

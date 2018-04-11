@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added `TKSectionedAlertViewController` for displaying all transit alerts in a region
 - Added `TKPathFriendliness` enum, which now includes "dismount"
 - Updated `TKPathFriendlinessView` to also include "dismount" section where appropriate
+- Added `TKTurnByTurnMode` and `segment.turnByTurnMode`
 
 ### Changed
 
