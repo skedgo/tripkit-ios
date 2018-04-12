@@ -22,7 +22,7 @@ extension SGKImage {
     #if os(iOS) || os(tvOS)
       return SGKImage(named: name, in: TKTripKit.bundle(), compatibleWith: nil)!
     #elseif os(OSX)
-      return bundle.image(forResource: name)
+      return bundle.image(forResource: NSImage.Name(rawValue: name))!
     #endif
   }
 }
