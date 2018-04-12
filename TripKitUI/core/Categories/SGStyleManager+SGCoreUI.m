@@ -8,8 +8,9 @@
 
 #import "SGStyleManager+SGCoreUI.h"
 
-#import "UISearchBar+Customizable.h"
+#import <TripKitUI/TripKitUI-Swift.h>
 
+#import "UISearchBar+Customizable.h"
 #import "UIFont+CustomFonts.h"
 
 @interface UIViewController (PopoverHelpers)
@@ -148,8 +149,10 @@
    includingBackground:(BOOL)includeBackground
 {
   // style the searchbar
-  UIImage *navBarBg    = [UIImage imageNamed:@"bg-nav-secondary"];
-  if (!includeBackground) {
+  UIImage *navBarBg;
+  if (includeBackground) {
+    navBarBg = UIImage.backgroundNavSecondary;
+  } else {
     navBarBg = [[UIImage alloc] init]; // blank
   }
   searchBar.tintColor = [self globalAccentColor];
