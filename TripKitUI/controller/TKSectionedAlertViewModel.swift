@@ -99,10 +99,6 @@ extension API.Route {
   }
 }
 
-public func == (lhs: API.Route, rhs: API.Route) -> Bool {
-  return lhs.id == rhs.id
-}
-extension API.Route: Equatable {}
 extension API.Route: Hashable {
   public var hashValue: Int { return id.hashValue }
 }

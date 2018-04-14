@@ -12,7 +12,8 @@ typedef NS_ENUM(NSInteger, TKSettingsProfileWeight) {
   TKSettingsProfileWeight_Money,
   TKSettingsProfileWeight_Carbon,
   TKSettingsProfileWeight_Time,
-  TKSettingsProfileWeight_Hassle
+  TKSettingsProfileWeight_Hassle,
+  TKSettingsProfileWeight_Exercise,
 };
 
 typedef NS_ENUM(NSInteger, TKSettingsSpeed) {

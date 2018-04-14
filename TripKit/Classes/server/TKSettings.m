@@ -115,6 +115,10 @@
     case TKSettingsProfileWeight_Time:
       [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightTime];
       break;
+
+    case TKSettingsProfileWeight_Exercise:
+      [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightExercise];
+      break;
   }
 }
 
