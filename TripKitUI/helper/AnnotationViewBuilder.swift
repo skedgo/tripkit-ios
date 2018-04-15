@@ -9,8 +9,9 @@
 import Foundation
 
 import MapKit
+import Kingfisher
 
-public class AnnotationViewBuilder: NSObject {
+open class AnnotationViewBuilder: NSObject {
   
   fileprivate var asLarge: Bool
   fileprivate var asTravelled: Bool = true
@@ -18,8 +19,8 @@ public class AnnotationViewBuilder: NSObject {
   fileprivate var alpha: CGFloat = 1
   fileprivate var preferSemaphore: Bool = false
   
-  @objc let annotation: MKAnnotation
-  @objc let mapView: MKMapView
+  @objc public let annotation: MKAnnotation
+  @objc public let mapView: MKMapView
   
   @objc(initForAnnotation:inMapView:)
   public init(for annotation: MKAnnotation, in mapView: MKMapView) {
@@ -62,9 +63,11 @@ public class AnnotationViewBuilder: NSObject {
     return self
   }
   
-  @objc public func build() -> MKAnnotationView? {
-    if let vehicle = annotation as? Vehicle {
-      return build(for: vehicle)
+  @objc open func build(_ usingMarkerAnnotationIfPossible: Bool = false) -> MKAnnotationView? {
+    if #available(iOS 11, *), let glyphable = annotation as? TKGlyphableAnnotation, usingMarkerAnnotationIfPossible {
+      return build(for: glyphable)
+    } else if let vehicle = annotation as? Vehicle {
+      return build(for: vehicle)      
     } else if preferSemaphore, let timePoint = annotation as? STKDisplayableTimePoint {
       return buildSemaphore(for: timePoint)
     } else if let visit = annotation as? StopVisits {
@@ -78,6 +81,52 @@ public class AnnotationViewBuilder: NSObject {
     }
     
     return nil
+  }
+  
+}
+
+// MARK: Glyphable
+
+private extension AnnotationViewBuilder {
+  
+  @available(iOS 11.0, *)
+  private func build(for glyphable: TKGlyphableAnnotation) -> MKAnnotationView {
+    let identifier = glyphable is MKClusterAnnotation ? "ClusterMarker" : "ImageMarker"
+    
+    let view: MKMarkerAnnotationView
+    if let marker = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
+      view = marker
+      view.annotation = glyphable
+    } else {
+      view = MKMarkerAnnotationView(annotation: glyphable, reuseIdentifier: identifier)
+    }
+    
+    view.glyphImage = glyphable.glyphImage
+    view.markerTintColor = glyphable.glyphColor
+    view.canShowCallout = annotation.title != nil
+    
+    // We may have remote icons
+    if let url = glyphable.glyphImageURL {
+      ImageDownloader.default.downloadImage(
+        with: url,
+        options: [.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate))]
+      ) { image, error, downloadedURL, _ in
+        guard
+          let image = image,
+          let latest = view.annotation as? TKGlyphableAnnotation,
+          latest.glyphImageURL == downloadedURL
+          else { return }
+        view.glyphImage = image
+      }
+    }
+    
+    view.collisionMode = .circle
+    if let displayable = glyphable as? STKDisplayablePoint {
+      view.clusteringIdentifier = displayable.priority.rawValue < 500 ? displayable.pointClusterIdentifier : nil
+      view.displayPriority = displayable.priority
+    }
+    
+    return view
   }
   
 }
@@ -263,24 +312,47 @@ fileprivate extension AnnotationViewBuilder {
 
   fileprivate func build(for displayable: STKDisplayablePoint) -> MKAnnotationView {
     
-    let identifier = "ImageAnnotationIdenfifier"
+    let identifier: String
+    if #available(iOS 11, *), displayable is MKClusterAnnotation {
+      identifier = "ClusterAnnotationIdentifier"
+    } else {
+      identifier = "ImageAnnotationIdentifier"
+    }
     
     let imageView: ASImageAnnotationView
     if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? ASImageAnnotationView {
       imageView = recycled
-      imageView.annotation = annotation
+      imageView.annotation = displayable
     } else {
-      imageView = ASImageAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+      imageView = ASImageAnnotationView(annotation: displayable, reuseIdentifier: identifier)
     }
     
     imageView.alpha = 1
     imageView.leftCalloutAccessoryView = nil
     imageView.rightCalloutAccessoryView = nil
-
     imageView.canShowCallout = annotation.title != nil
     imageView.isEnabled = true
     
+    if #available(iOS 11, *) {
+      imageView.collisionMode = .circle
+      imageView.clusteringIdentifier = displayable.priority.rawValue < 500 ? displayable.pointClusterIdentifier : nil
+      imageView.displayPriority = displayable.priority
+    }
+    
     return imageView
+  }
+  
+}
+
+@available(iOS 11.0, *)
+fileprivate extension STKDisplayablePoint {
+  
+  var priority: MKFeatureDisplayPriority {
+    if let mode = self as? STKModeCoordinate, let priority = mode.priority {
+      return MKFeatureDisplayPriority(priority)
+    } else {
+      return .required
+    }
   }
   
 }
