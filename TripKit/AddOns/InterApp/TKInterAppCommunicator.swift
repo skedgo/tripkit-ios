@@ -139,7 +139,7 @@ extension TKInterAppCommunicator {
       routeFrom origin: MKAnnotation?,
       to destination: MKAnnotation,
       viewController controller: UIViewController,
-      initiatedBy sender: Any
+      initiatedBy sender: Any?
     ) {
     
     let hasGoogleMaps = deviceHasGoogleMaps()
