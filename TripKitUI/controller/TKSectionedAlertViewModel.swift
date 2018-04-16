@@ -19,10 +19,7 @@ class TKSectionedAlertViewModel {
     case content([Section])
   }
   
-  private let rx_contentState = Variable<State>(.loading)
-  var contentState: Observable<State> {
-    return rx_contentState.asObservable()
-  }
+  let state: Driver<State>
   
   private let disposeBag = DisposeBag()
   
@@ -34,14 +31,12 @@ class TKSectionedAlertViewModel {
       .rx_fetchTransitAlertMappings(forRegion: region)
       .map { TKSectionedAlertViewModel.groupAlertMappings($0) }
     
-    Observable.combineLatest(allRouteAlerts, searchText.startWith("")) { TKSectionedAlertViewModel.buildSections(from: $0, filter: $1) }
+    state = Observable.combineLatest(allRouteAlerts, searchText.startWith("")) { TKSectionedAlertViewModel.buildSections(from: $0, filter: $1) }
       .asDriver(onErrorJustReturn: [])
       .map { sections -> State in
         return .content(sections)
       }
-      .asObservable()
-      .bind(to: rx_contentState)
-      .disposed(by: disposeBag)
+      .startWith(.loading)
   }
   
   // MARK:

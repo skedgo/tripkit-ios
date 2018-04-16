@@ -78,7 +78,8 @@ public class TKSectionedAlertViewController: UITableViewController {
     
     self.dataSource = dataSource
     
-    viewModel.contentState
+    viewModel.state
+      .asObservable()
       .map { state -> [TKSectionedAlertViewModel.Section]? in
         switch state {
         case .content(let sections): return sections
@@ -90,8 +91,8 @@ public class TKSectionedAlertViewController: UITableViewController {
       .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
-    viewModel.contentState
-      .subscribe(onNext: { [weak self] state in
+    viewModel.state
+      .drive(onNext: { [weak self] state in
         switch state {
         case .loading:
           self?.insertLoadingView()
