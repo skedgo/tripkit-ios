@@ -79,7 +79,6 @@ public class TKSectionedAlertViewController: UITableViewController {
     self.dataSource = dataSource
     
     viewModel.state
-      .asObservable()
       .map { state -> [TKSectionedAlertViewModel.Section]? in
         switch state {
         case .content(let sections): return sections
@@ -88,7 +87,7 @@ public class TKSectionedAlertViewController: UITableViewController {
       }
       .filter { $0 != nil}
       .map { $0! }
-      .bind(to: tableView.rx.items(dataSource: dataSource))
+      .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
     viewModel.state
