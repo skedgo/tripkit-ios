@@ -354,12 +354,12 @@
   if ([annotation isKindOfClass:[MKUserLocation class]])
     return nil;
   
-  AnnotationViewBuilder *builder = [[AnnotationViewBuilder alloc] initForAnnotation:annotation inMapView:mv];
+  TKAnnotationViewBuilder *builder = [[TKAnnotationViewBuilder alloc] initForAnnotation:annotation inMapView:mv];
   [builder drawCircleAsTravelled:[self drawCircleAsTravelled:annotation]];
   [builder drawCircleAsLarge:[self drawAsLargeCircle:annotation]];
   [builder withHeading:self.heading];
   [builder preferSemaphore:[self showAsSemaphore:annotation]];
-  return [builder build];
+  return [builder buildPreferMarkerAnnotationView:NO];
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated

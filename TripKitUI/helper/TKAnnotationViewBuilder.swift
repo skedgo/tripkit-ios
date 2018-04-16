@@ -9,8 +9,9 @@
 import Foundation
 
 import MapKit
+import Kingfisher
 
-public class AnnotationViewBuilder: NSObject {
+open class TKAnnotationViewBuilder: NSObject {
   
   fileprivate var asLarge: Bool
   fileprivate var asTravelled: Bool = true
@@ -18,8 +19,8 @@ public class AnnotationViewBuilder: NSObject {
   fileprivate var alpha: CGFloat = 1
   fileprivate var preferSemaphore: Bool = false
   
-  @objc let annotation: MKAnnotation
-  @objc let mapView: MKMapView
+  @objc public let annotation: MKAnnotation
+  @objc public let mapView: MKMapView
   
   @objc(initForAnnotation:inMapView:)
   public init(for annotation: MKAnnotation, in mapView: MKMapView) {
@@ -33,38 +34,41 @@ public class AnnotationViewBuilder: NSObject {
   }
   
   @objc @discardableResult
-  public func drawCircleAsTravelled(_ travelled: Bool) -> AnnotationViewBuilder {
+  public func drawCircleAsTravelled(_ travelled: Bool) -> TKAnnotationViewBuilder {
     self.asTravelled = travelled
     return self
   }
 
   @objc @discardableResult
-  public func drawCircleAsLarge(_ asLarge: Bool) -> AnnotationViewBuilder {
+  public func drawCircleAsLarge(_ asLarge: Bool) -> TKAnnotationViewBuilder {
     self.asLarge = asLarge
     return self
   }
 
   @objc @discardableResult
-  public func withAlpha(_ alpha: CGFloat) -> AnnotationViewBuilder {
+  public func withAlpha(_ alpha: CGFloat) -> TKAnnotationViewBuilder {
     self.alpha = alpha
     return self
   }
   
   @objc @discardableResult
-  public func withHeading(_ heading: CLLocationDirection) -> AnnotationViewBuilder {
+  public func withHeading(_ heading: CLLocationDirection) -> TKAnnotationViewBuilder {
     self.heading = heading
     return self
   }
   
   @objc @discardableResult
-  public func preferSemaphore(_ prefer: Bool) -> AnnotationViewBuilder {
+  public func preferSemaphore(_ prefer: Bool) -> TKAnnotationViewBuilder {
     self.preferSemaphore = prefer
     return self
   }
   
-  @objc public func build() -> MKAnnotationView? {
-    if let vehicle = annotation as? Vehicle {
-      return build(for: vehicle)
+  @objc(buildPreferMarkerAnnotationView:)
+  open func build(preferMarkerAnnotationView: Bool = false) -> MKAnnotationView? {
+    if #available(iOS 11, *), let glyphable = annotation as? TKGlyphableAnnotation, preferMarkerAnnotationView {
+      return build(for: glyphable)
+    } else if let vehicle = annotation as? Vehicle {
+      return build(for: vehicle)      
     } else if preferSemaphore, let timePoint = annotation as? STKDisplayableTimePoint {
       return buildSemaphore(for: timePoint)
     } else if let visit = annotation as? StopVisits {
@@ -82,9 +86,54 @@ public class AnnotationViewBuilder: NSObject {
   
 }
 
-// MARK: Vehicles
+// MARK: - Glyphable
 
-fileprivate extension AnnotationViewBuilder {
+private extension TKAnnotationViewBuilder {
+  
+  @available(iOS 11.0, *)
+  private func build(for glyphable: TKGlyphableAnnotation) -> MKAnnotationView {
+    let identifier = glyphable is MKClusterAnnotation ? "ClusterMarker" : "ImageMarker"
+    
+    let view: MKMarkerAnnotationView
+    if let marker = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
+      view = marker
+      view.annotation = glyphable
+    } else {
+      view = MKMarkerAnnotationView(annotation: glyphable, reuseIdentifier: identifier)
+    }
+    
+    view.glyphImage = glyphable.glyphImage
+    view.markerTintColor = glyphable.glyphColor
+    view.canShowCallout = annotation.title != nil
+    
+    // We may have remote icons
+    if let url = glyphable.glyphImageURL {
+      ImageDownloader.default.downloadImage(
+        with: url,
+        options: [.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate))]
+      ) { image, error, downloadedURL, _ in
+        guard
+          let image = image,
+          let latest = view.annotation as? TKGlyphableAnnotation,
+          latest.glyphImageURL == downloadedURL
+          else { return }
+        view.glyphImage = image
+      }
+    }
+    
+    if let displayable = glyphable as? STKDisplayablePoint {
+      view.clusteringIdentifier = displayable.priority.rawValue < 500 ? displayable.pointClusterIdentifier : nil
+      view.displayPriority = displayable.priority
+    }
+    
+    return view
+  }
+  
+}
+
+// MARK: - Vehicles
+
+fileprivate extension TKAnnotationViewBuilder {
   fileprivate func build(for vehicle: Vehicle) -> MKAnnotationView {
     let identifier = "VehicleAnnotationView"
     
@@ -119,9 +168,9 @@ fileprivate extension TKVehicleAnnotationView {
   }
 }
 
-// MARK: Semaphores
+// MARK: - Semaphores
 
-fileprivate extension AnnotationViewBuilder {
+fileprivate extension TKAnnotationViewBuilder {
   
   fileprivate func semaphoreView(for annotation: MKAnnotation) -> SGSemaphoreView {
     let identifier = "Semaphore"
@@ -210,9 +259,9 @@ fileprivate extension SGSemaphoreView {
 
 }
 
-// MARK: Circles
+// MARK: - Circles
 
-fileprivate extension AnnotationViewBuilder {
+fileprivate extension TKAnnotationViewBuilder {
   
   fileprivate func buildCircle(for visit: StopVisits) -> MKAnnotationView {
     let color: SGKColor?
@@ -257,37 +306,60 @@ fileprivate extension AnnotationViewBuilder {
   
 }
 
-// MARK: Generic annotations
+// MARK: - Generic annotations
 
-fileprivate extension AnnotationViewBuilder {
+fileprivate extension TKAnnotationViewBuilder {
 
   fileprivate func build(for displayable: STKDisplayablePoint) -> MKAnnotationView {
     
-    let identifier = "ImageAnnotationIdenfifier"
+    let identifier: String
+    if #available(iOS 11, *), displayable is MKClusterAnnotation {
+      identifier = "ClusterAnnotationIdentifier"
+    } else {
+      identifier = "ImageAnnotationIdentifier"
+    }
     
     let imageView: ASImageAnnotationView
     if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? ASImageAnnotationView {
       imageView = recycled
-      imageView.annotation = annotation
+      imageView.annotation = displayable
     } else {
-      imageView = ASImageAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+      imageView = ASImageAnnotationView(annotation: displayable, reuseIdentifier: identifier)
     }
     
     imageView.alpha = 1
     imageView.leftCalloutAccessoryView = nil
     imageView.rightCalloutAccessoryView = nil
-
     imageView.canShowCallout = annotation.title != nil
     imageView.isEnabled = true
+    
+    if #available(iOS 11, *) {
+      imageView.collisionMode = .circle
+      imageView.clusteringIdentifier = displayable.priority.rawValue < 500 ? displayable.pointClusterIdentifier : nil
+      imageView.displayPriority = displayable.priority
+    }
     
     return imageView
   }
   
 }
 
-// MARK: Updating views with headings
+@available(iOS 11.0, *)
+fileprivate extension STKDisplayablePoint {
+  
+  var priority: MKFeatureDisplayPriority {
+    if let mode = self as? STKModeCoordinate, let priority = mode.priority {
+      return MKFeatureDisplayPriority(priority)
+    } else {
+      return .required
+    }
+  }
+  
+}
 
-public extension AnnotationViewBuilder {
+// MARK: - Updating views with headings
+
+public extension TKAnnotationViewBuilder {
   
   @objc public static func update(annotationView: MKAnnotationView, forHeading heading: CLLocationDirection) {
     
