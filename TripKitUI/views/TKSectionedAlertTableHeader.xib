@@ -20,16 +20,26 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4XK-4U-gnf">
-                            <rect key="frame" x="16" y="9" width="37.5" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <rect key="frame" x="16" y="9" width="39" height="18"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vqf-K9-hGL">
+                            <rect key="frame" x="335" y="6" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="7sv-Nl-5d5"/>
+                                <constraint firstAttribute="width" constant="24" id="gap-2C-OC3"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="vqf-K9-hGL" firstAttribute="centerY" secondItem="edf-mB-JCb" secondAttribute="centerY" id="Ri2-Yn-uC3"/>
                         <constraint firstItem="4XK-4U-gnf" firstAttribute="leading" secondItem="edf-mB-JCb" secondAttribute="leading" constant="16" id="Zye-J9-Ot7"/>
                         <constraint firstItem="4XK-4U-gnf" firstAttribute="centerY" secondItem="edf-mB-JCb" secondAttribute="centerY" id="equ-iy-3Jn"/>
+                        <constraint firstItem="vqf-K9-hGL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4XK-4U-gnf" secondAttribute="trailing" constant="8" id="rdx-0y-oLB"/>
+                        <constraint firstAttribute="trailing" secondItem="vqf-K9-hGL" secondAttribute="trailing" constant="16" id="xPF-M6-4Yc"/>
                     </constraints>
                 </view>
             </subviews>
@@ -43,9 +53,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Wun-il-HV7"/>
             <connections>
+                <outlet property="modeImageView" destination="vqf-K9-hGL" id="Xda-em-4Fe"/>
                 <outlet property="titleLabel" destination="4XK-4U-gnf" id="bvi-eU-C7L"/>
             </connections>
-            <point key="canvasLocation" x="5.5" y="-191.5"/>
+            <point key="canvasLocation" x="5.5" y="-192"/>
         </view>
     </objects>
 </document>

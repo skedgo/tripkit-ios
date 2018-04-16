@@ -829,6 +829,8 @@
 		3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE0B1F06BCF200147990 /* Service.swift */; };
 		D31F511B2068BE4F00FB4CE1 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F511A2068BE4F00FB4CE1 /* RxDataSources.framework */; };
 		D31F51252068C27200FB4CE1 /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F51242068C27200FB4CE1 /* Differentiator.framework */; };
+		D3211335206BBAF300E5D929 /* TKLoadingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */; };
+		D3211337206BBB0600E5D929 /* TKLoadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */; };
 		D3348267205BE2B000CA5917 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3348266205BE2B000CA5917 /* RxDataSources.framework */; };
 		D3348268205C4C4B00CA5917 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3348266205BE2B000CA5917 /* RxDataSources.framework */; };
 		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
@@ -1541,6 +1543,8 @@
 		3AFFAE0B1F06BCF200147990 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D31F511A2068BE4F00FB4CE1 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		D31F51242068C27200FB4CE1 /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
+		D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLoadingAlertView.swift; sourceTree = "<group>"; };
+		D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKLoadingAlertView.xib; sourceTree = "<group>"; };
 		D3348266205BE2B000CA5917 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = ../../Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D39B7BAE20622C2C00988D8A /* TKRouteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRouteCell.swift; sourceTree = "<group>"; };
@@ -1867,6 +1871,8 @@
 				D39B7BB320622FD100988D8A /* TKAlertCell.xib */,
 				D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */,
 				D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */,
+				D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */,
+				D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3336,6 +3342,7 @@
 				3A6DF14A202C8EB80084CB2C /* TKDepartureView.xib in Resources */,
 				3A6DF11B202C8EB80084CB2C /* SGTripSummaryMiniCell.xib in Resources */,
 				3A6DF137202C8EB80084CB2C /* TripKitUI.xcassets in Resources */,
+				D3211337206BBB0600E5D929 /* TKLoadingAlertView.xib in Resources */,
 				3A6DF0FC202C8EB80084CB2C /* SGTableViewCell.xib in Resources */,
 				3A6DF114202C8EB80084CB2C /* SGTripSummaryCell.xib in Resources */,
 				3A6DF0FD202C8EB80084CB2C /* SGCountdownCell.xib in Resources */,
@@ -3689,6 +3696,7 @@
 				3A6DF119202C8EB80084CB2C /* SGPolylineRenderer.m in Sources */,
 				3A6DF10B202C8EB80084CB2C /* SGSemaphoreView.swift in Sources */,
 				3A6DF107202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m in Sources */,
+				D3211335206BBAF300E5D929 /* TKLoadingAlertView.swift in Sources */,
 				3A6DF0FB202C8EB80084CB2C /* SGCountdownCell.swift in Sources */,
 				3A6DF142202C8EB80084CB2C /* TKOccupancyView.swift in Sources */,
 				3A6DF125202C8EB80084CB2C /* UIFont+CustomFonts.m in Sources */,
