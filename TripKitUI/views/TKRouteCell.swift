@@ -38,6 +38,7 @@ class TKRouteCell: UITableViewCell {
   // MARK: -
   
   override func awakeFromNib() {
+    super.awakeFromNib()
     modeIcon.tintColor = SGStyleManager.darkTextColor() // default tint.
   }
   
