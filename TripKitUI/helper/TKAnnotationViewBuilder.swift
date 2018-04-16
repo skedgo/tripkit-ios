@@ -11,7 +11,7 @@ import Foundation
 import MapKit
 import Kingfisher
 
-open class AnnotationViewBuilder: NSObject {
+open class TKAnnotationViewBuilder: NSObject {
   
   fileprivate var asLarge: Bool
   fileprivate var asTravelled: Bool = true
@@ -34,37 +34,38 @@ open class AnnotationViewBuilder: NSObject {
   }
   
   @objc @discardableResult
-  public func drawCircleAsTravelled(_ travelled: Bool) -> AnnotationViewBuilder {
+  public func drawCircleAsTravelled(_ travelled: Bool) -> TKAnnotationViewBuilder {
     self.asTravelled = travelled
     return self
   }
 
   @objc @discardableResult
-  public func drawCircleAsLarge(_ asLarge: Bool) -> AnnotationViewBuilder {
+  public func drawCircleAsLarge(_ asLarge: Bool) -> TKAnnotationViewBuilder {
     self.asLarge = asLarge
     return self
   }
 
   @objc @discardableResult
-  public func withAlpha(_ alpha: CGFloat) -> AnnotationViewBuilder {
+  public func withAlpha(_ alpha: CGFloat) -> TKAnnotationViewBuilder {
     self.alpha = alpha
     return self
   }
   
   @objc @discardableResult
-  public func withHeading(_ heading: CLLocationDirection) -> AnnotationViewBuilder {
+  public func withHeading(_ heading: CLLocationDirection) -> TKAnnotationViewBuilder {
     self.heading = heading
     return self
   }
   
   @objc @discardableResult
-  public func preferSemaphore(_ prefer: Bool) -> AnnotationViewBuilder {
+  public func preferSemaphore(_ prefer: Bool) -> TKAnnotationViewBuilder {
     self.preferSemaphore = prefer
     return self
   }
   
-  @objc open func build(_ usingMarkerAnnotationIfPossible: Bool = false) -> MKAnnotationView? {
-    if #available(iOS 11, *), let glyphable = annotation as? TKGlyphableAnnotation, usingMarkerAnnotationIfPossible {
+  @objc(buildPreferMarkerAnnotationView:)
+  open func build(preferMarkerAnnotationView: Bool = false) -> MKAnnotationView? {
+    if #available(iOS 11, *), let glyphable = annotation as? TKGlyphableAnnotation, preferMarkerAnnotationView {
       return build(for: glyphable)
     } else if let vehicle = annotation as? Vehicle {
       return build(for: vehicle)      
@@ -85,9 +86,9 @@ open class AnnotationViewBuilder: NSObject {
   
 }
 
-// MARK: Glyphable
+// MARK: - Glyphable
 
-private extension AnnotationViewBuilder {
+private extension TKAnnotationViewBuilder {
   
   @available(iOS 11.0, *)
   private func build(for glyphable: TKGlyphableAnnotation) -> MKAnnotationView {
@@ -120,7 +121,6 @@ private extension AnnotationViewBuilder {
       }
     }
     
-    view.collisionMode = .circle
     if let displayable = glyphable as? STKDisplayablePoint {
       view.clusteringIdentifier = displayable.priority.rawValue < 500 ? displayable.pointClusterIdentifier : nil
       view.displayPriority = displayable.priority
@@ -131,9 +131,9 @@ private extension AnnotationViewBuilder {
   
 }
 
-// MARK: Vehicles
+// MARK: - Vehicles
 
-fileprivate extension AnnotationViewBuilder {
+fileprivate extension TKAnnotationViewBuilder {
   fileprivate func build(for vehicle: Vehicle) -> MKAnnotationView {
     let identifier = "VehicleAnnotationView"
     
@@ -168,9 +168,9 @@ fileprivate extension TKVehicleAnnotationView {
   }
 }
 
-// MARK: Semaphores
+// MARK: - Semaphores
 
-fileprivate extension AnnotationViewBuilder {
+fileprivate extension TKAnnotationViewBuilder {
   
   fileprivate func semaphoreView(for annotation: MKAnnotation) -> SGSemaphoreView {
     let identifier = "Semaphore"
@@ -259,9 +259,9 @@ fileprivate extension SGSemaphoreView {
 
 }
 
-// MARK: Circles
+// MARK: - Circles
 
-fileprivate extension AnnotationViewBuilder {
+fileprivate extension TKAnnotationViewBuilder {
   
   fileprivate func buildCircle(for visit: StopVisits) -> MKAnnotationView {
     let color: SGKColor?
@@ -306,9 +306,9 @@ fileprivate extension AnnotationViewBuilder {
   
 }
 
-// MARK: Generic annotations
+// MARK: - Generic annotations
 
-fileprivate extension AnnotationViewBuilder {
+fileprivate extension TKAnnotationViewBuilder {
 
   fileprivate func build(for displayable: STKDisplayablePoint) -> MKAnnotationView {
     
@@ -357,9 +357,9 @@ fileprivate extension STKDisplayablePoint {
   
 }
 
-// MARK: Updating views with headings
+// MARK: - Updating views with headings
 
-public extension AnnotationViewBuilder {
+public extension TKAnnotationViewBuilder {
   
   @objc public static func update(annotationView: MKAnnotationView, forHeading heading: CLLocationDirection) {
     

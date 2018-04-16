@@ -142,7 +142,7 @@
 		3A6DF14C202C8EB80084CB2C /* VehicleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F2202C8EB80084CB2C /* VehicleView.m */; };
 		3A6DF14D202C8EB80084CB2C /* TKAlertInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F3202C8EB80084CB2C /* TKAlertInfoView.swift */; };
 		3A6DF14E202C8EB80084CB2C /* SGPulsingAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF14F202C8EB80084CB2C /* AnnotationViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F6202C8EB80084CB2C /* AnnotationViewBuilder.swift */; };
+		3A6DF14F202C8EB80084CB2C /* TKAnnotationViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F6202C8EB80084CB2C /* TKAnnotationViewBuilder.swift */; };
 		3A6DF150202C8EB80084CB2C /* MapManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F7202C8EB80084CB2C /* MapManagerHelper.swift */; };
 		3A6DF152202C8F9A0084CB2C /* TripKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6231D1CD0060089F687 /* TripKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF16B202C97F70084CB2C /* TripKitInterApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF169202C97F70084CB2C /* TripKitInterApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1059,7 +1059,7 @@
 		3A6DF0F2202C8EB80084CB2C /* VehicleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleView.m; sourceTree = "<group>"; };
 		3A6DF0F3202C8EB80084CB2C /* TKAlertInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertInfoView.swift; sourceTree = "<group>"; };
 		3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPulsingAnnotationView.h; sourceTree = "<group>"; };
-		3A6DF0F6202C8EB80084CB2C /* AnnotationViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewBuilder.swift; sourceTree = "<group>"; };
+		3A6DF0F6202C8EB80084CB2C /* TKAnnotationViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAnnotationViewBuilder.swift; sourceTree = "<group>"; };
 		3A6DF0F7202C8EB80084CB2C /* MapManagerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManagerHelper.swift; sourceTree = "<group>"; };
 		3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitInterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF169202C97F70084CB2C /* TripKitInterApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKitInterApp.h; sourceTree = "<group>"; };
@@ -1874,7 +1874,7 @@
 		3A6DF0F5202C8EB80084CB2C /* helper */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF0F6202C8EB80084CB2C /* AnnotationViewBuilder.swift */,
+				3A6DF0F6202C8EB80084CB2C /* TKAnnotationViewBuilder.swift */,
 				3A6DF0F7202C8EB80084CB2C /* MapManagerHelper.swift */,
 			);
 			path = helper;
@@ -3647,7 +3647,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A6DF12D202C8EB80084CB2C /* UIButton+TitleAndImage.swift in Sources */,
-				3A6DF14F202C8EB80084CB2C /* AnnotationViewBuilder.swift in Sources */,
+				3A6DF14F202C8EB80084CB2C /* TKAnnotationViewBuilder.swift in Sources */,
 				3A3658812062892100D8645C /* TKTrainOccupancyView.swift in Sources */,
 				3A6DF149202C8EB80084CB2C /* CircleAnnotationView.m in Sources */,
 				3A6DF130202C8EB80084CB2C /* SGButton.m in Sources */,
