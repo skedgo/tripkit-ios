@@ -43,6 +43,9 @@ class TKSectionedAlertsTest: XCTestCase {
         XCTAssertFalse(routeAlerts.alerts.isEmpty)
       }
     }
+    
+    let totalRoutes = grouped.reduce(0) { $0 + $1.value.count }
+    XCTAssertEqual(totalRoutes, 159)
   }
 
 }
