@@ -93,7 +93,8 @@ extension TKInterAppCommunicator {
       let mode = turnByTurnMode(segment),
       let destination = segment.end
       else {
-        assert(false, "Turn by turn navigation does not apply to this segment OR segment does not have a destination")
+        assertionFailure("Turn by turn navigation does not apply to this segment OR segment does not have a destination")
+        return
     }
     
     var origin: MKAnnotation?
@@ -109,7 +110,8 @@ extension TKInterAppCommunicator {
       let mode = turnByTurnMode(segment),
       let destination = segment.end
       else {
-        assert(false, "Turn by turn navigation does not apply to this segment OR segment does not have a destination")
+        assertionFailure("Turn by turn navigation does not apply to this segment OR segment does not have a destination")
+        return
     }
     
     var origin: MKAnnotation?
@@ -126,7 +128,8 @@ extension TKInterAppCommunicator {
       let mode = turnByTurnMode(segment),
       mode == .driving
       else {
-      assert(false, "Trying to open Waze without a destination OR the segment isn't a driving.")
+        assertionFailure("Trying to open Waze without a destination OR the segment isn't a driving.")
+        return
     }
     
     openWaze(routeTo: destination)
