@@ -42,6 +42,20 @@ public class ModeInfo: NSObject, Codable, NSSecureCoding {
   
   public static let unknown: ModeInfo = modeInfo(for: ["alt": "unknown"])!
   
+  // MARK: Equatable
+  
+  public override func isEqual(_ object: Any?) -> Bool {
+    guard let other = object as? ModeInfo else { return false }
+    return identifier == other.identifier
+      && alt == other.alt
+      && localImageName == other.localImageName
+      && remoteImageName == other.remoteImageName
+      && remoteIconIsTemplate == other.remoteIconIsTemplate
+      && remoteDarkImageName == other.remoteDarkImageName
+      && descriptor == other.descriptor
+      && rgbColor == other.rgbColor
+  }
+  
   // MARK: Codable
   
   private enum CodingKeys: String, CodingKey {
