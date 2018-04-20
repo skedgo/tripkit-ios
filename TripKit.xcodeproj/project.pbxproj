@@ -288,6 +288,8 @@
 		3A6DF2DD202C9AA00084CB2C /* UIView+FindFirstResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF240202C9AA00084CB2C /* UIView+FindFirstResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
 		3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */; };
+		3A7E6139208A08BB0008AAE4 /* SGCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* SGCalendarManager+Autocompleting.swift */; };
+		3A7E613B208A09070008AAE4 /* SGCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* SGCalendarManager+Autocompleting.swift */; };
 		3A84F00E1F77021200B2F9A0 /* TripGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84F00D1F77021200B2F9A0 /* TripGroup.swift */; };
 		3A8F61211F190CE80017ACDA /* SGLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F61201F190CE80017ACDA /* SGLocationManager.swift */; };
 		3A92205C205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */; };
@@ -1217,6 +1219,7 @@
 		3A6DF2F2202C9EA90084CB2C /* KVNProgress.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KVNProgress.framework; path = Carthage/Build/iOS/KVNProgress.framework; sourceTree = "<group>"; };
 		3A787EC31D38F646009F9A18 /* TKJSONCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
 		3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
+		3A7E6138208A08BB0008AAE4 /* SGCalendarManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SGCalendarManager+Autocompleting.swift"; sourceTree = "<group>"; };
 		3A84F00D1F77021200B2F9A0 /* TripGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripGroup.swift; sourceTree = "<group>"; };
 		3A8F61201F190CE80017ACDA /* SGLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGLocationManager.swift; sourceTree = "<group>"; };
 		3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAppleGeocoder.swift; sourceTree = "<group>"; };
@@ -2231,6 +2234,7 @@
 				3AA03E361F0BC9DB00C6B337 /* SGAddressBookManager.m */,
 				3AA03E371F0BC9DB00C6B337 /* SGCalendarManager.h */,
 				3AA03E381F0BC9DB00C6B337 /* SGCalendarManager.m */,
+				3A7E6138208A08BB0008AAE4 /* SGCalendarManager+Autocompleting.swift */,
 				3A096E251F20DDFB00666E59 /* SGCalendarManager.swift */,
 				3AA03E391F0BC9DB00C6B337 /* SGLocationManager.h */,
 				3AA03E3A1F0BC9DB00C6B337 /* SGLocationManager.m */,
@@ -3641,6 +3645,7 @@
 				3ABBDA892032134000205042 /* STKRoutePolyline.m in Sources */,
 				3ABBDAD02032135400205042 /* SGNotifications.m in Sources */,
 				3ABBDAB72032134D00205042 /* TKAnnotationClusterer.swift in Sources */,
+				3A7E613B208A09070008AAE4 /* SGCalendarManager+Autocompleting.swift in Sources */,
 				3A922063205FCEB9004E6C34 /* SGAutocompletionDataProvider+TKGeocoding.swift in Sources */,
 				3ABBDAEC2032135A00205042 /* UIImage+Variations.m in Sources */,
 				3ABBDAD92032135A00205042 /* MKMapView+ZoomLevel.m in Sources */,
@@ -3973,6 +3978,7 @@
 				3AFFAB981F06854F00147990 /* NSDate+Helpers.m in Sources */,
 				3AD1DEA61F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift in Sources */,
 				3AFFAE021F06B85F00147990 /* StopLocation+Shareable.swift in Sources */,
+				3A7E6139208A08BB0008AAE4 /* SGCalendarManager+Autocompleting.swift in Sources */,
 				3AB6C6F51D1CD08E0089F687 /* TKPlainCell.m in Sources */,
 				3AFFAB8A1F06854F00147990 /* SGAlert.m in Sources */,
 				D3FC1F16207B3D1D00D39DF9 /* SegmentTemplate+CoreDataClass.swift in Sources */,

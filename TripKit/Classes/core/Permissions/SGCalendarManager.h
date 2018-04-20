@@ -8,12 +8,11 @@
 
 #import <EventKit/EventKit.h>
 
-#import "SGAutocompletionDataProvider.h"
 #import "SGPermissionManager+AuthorizationAlert.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SGCalendarManager : SGPermissionManager <SGAutocompletionDataProvider>
+@interface SGCalendarManager : SGPermissionManager
 
 + (SGCalendarManager *)sharedInstance NS_REFINED_FOR_SWIFT;
 
@@ -21,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)titleStringForEvent:(EKEvent *)event;
 
+- (NSArray<EKEvent *> *)fetchEventsMatchingString:(NSString *)string;
+  
 - (NSArray<EKEvent *> *)fetchEventsBetweenDate:(NSDate *)startDate
                                     andEndDate:(NSDate *)endDate
                                  fromCalendars:(nullable NSArray *)calendarsOrNil;
