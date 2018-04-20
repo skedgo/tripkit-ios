@@ -48,9 +48,6 @@ extension SGCalendarManager: SGAutocompletionDataProvider {
     tryAuthorizationForSender(nil, in: nil) { enabled in
       actionBlock(enabled)
     }
-    
-    #elseif os(OSX)
-    return nil
     #endif
   }
   
