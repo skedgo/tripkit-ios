@@ -833,6 +833,8 @@
 		D3211337206BBB0600E5D929 /* TKLoadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */; };
 		D3348267205BE2B000CA5917 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3348266205BE2B000CA5917 /* RxDataSources.framework */; };
 		D3348268205C4C4B00CA5917 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3348266205BE2B000CA5917 /* RxDataSources.framework */; };
+		D337467E208D5D980045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
+		D337467F208D5DA90045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
 		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
 		D39B7BAF20622C2D00988D8A /* TKRouteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BAE20622C2C00988D8A /* TKRouteCell.swift */; };
 		D39B7BB120622C5900988D8A /* TKRouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB020622C5900988D8A /* TKRouteCell.xib */; };
@@ -1546,6 +1548,7 @@
 		D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLoadingAlertView.swift; sourceTree = "<group>"; };
 		D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKLoadingAlertView.xib; sourceTree = "<group>"; };
 		D3348266205BE2B000CA5917 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = ../../Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
+		D337467D208D5D980045B0C3 /* UserAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPIModel.swift; sourceTree = "<group>"; };
 		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D39B7BAE20622C2C00988D8A /* TKRouteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRouteCell.swift; sourceTree = "<group>"; };
 		D39B7BB020622C5900988D8A /* TKRouteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKRouteCell.xib; sourceTree = "<group>"; };
@@ -1660,6 +1663,7 @@
 				3A32CD7A1DC2EC4F003B158B /* RegionAPIModel.swift */,
 				3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */,
 				3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */,
+				D337467D208D5D980045B0C3 /* UserAPIModel.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -3524,6 +3528,7 @@
 				3ABBDA342032132400205042 /* TKSettings.m in Sources */,
 				3ABBDACD2032135400205042 /* SGKLog.m in Sources */,
 				3ABBDA902032134400205042 /* SGTrack.swift in Sources */,
+				D337467F208D5DA90045B0C3 /* UserAPIModel.swift in Sources */,
 				3ABBDA8C2032134000205042 /* STKTripAndSegments.swift in Sources */,
 				3ABBDAD72032135A00205042 /* MapKit+Extensions.swift in Sources */,
 				3ABBDA682032132D00205042 /* TKTripFactory.m in Sources */,
@@ -3832,6 +3837,7 @@
 				3AFFABB81F06854F00147990 /* SGKLog.m in Sources */,
 				3AFFABD41F06854F00147990 /* STKInfoIcon.swift in Sources */,
 				3A32CD731DC2DC77003B158B /* Vehicle.swift in Sources */,
+				D337467E208D5D980045B0C3 /* UserAPIModel.swift in Sources */,
 				3AB6C6D31D1CD08E0089F687 /* TKUserProfileHelper.swift in Sources */,
 				3AB6C6D01D1CD08E0089F687 /* NSManagedObject+TKPersistence.m in Sources */,
 				3AFFAE061F06B97300147990 /* TKSegment+Shareable.swift in Sources */,
