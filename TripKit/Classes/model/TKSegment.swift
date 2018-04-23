@@ -51,6 +51,10 @@ extension TKSegment {
     return alertsWithAction().first { !$0.stopsExcludedFromRouting.isEmpty }
   }
   
+  public var turnByTurnMode: TKTurnByTurnMode? {
+    return template?.turnByTurnMode
+  }
+  
 }
 
 // MARK: - Public transport
