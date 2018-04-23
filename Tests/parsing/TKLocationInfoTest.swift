@@ -30,7 +30,7 @@ class TKLocationInfoTest: XCTestCase {
   }
   
 
-  func testcarRental() throws {
+  func testCarRental() throws {
     let decoder = JSONDecoder()
     let data = try dataFromJSON(named: "locationInfo-carRental")
     let info = try! decoder.decode(API.LocationInfo.self, from: data)
@@ -64,6 +64,19 @@ class TKLocationInfoTest: XCTestCase {
     XCTAssertEqual(hours.isOpen(at: Date(from: "16-12-07 08:00", in: MTZ)), true)
     XCTAssertEqual(hours.isOpen(at: Date(from: "16-12-07 16:59", in: MTZ)), true)
     XCTAssertEqual(hours.isOpen(at: Date(from: "16-12-07 17:00", in: MTZ)), false)
+  }
+  
+  func testCarRentalSpecialDays() throws {
+    let decoder = JSONDecoder()
+    let data = try dataFromJSON(named: "locationInfo-carRental-days")
+    let info = try! decoder.decode(API.LocationInfo.self, from: data)
+        
+    guard let hours = info.carRental?.openingHours else { XCTFail(); return }
+
+    let sorted = hours.days(starting: .monday)
+    XCTAssertEqual(sorted.count, 8) // Including public holiday!
+    XCTAssertEqual(sorted.first?.day, .monday)
+    XCTAssertEqual(sorted.last?.day, .publicHoliday)
   }
 }
 

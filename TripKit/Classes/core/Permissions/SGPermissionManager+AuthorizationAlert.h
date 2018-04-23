@@ -14,9 +14,9 @@
 
 @interface SGPermissionManager (AuthorizationAlert)
 
-- (void)tryAuthorizationForSender:(id)sender
-                 inViewController:(UIViewController *)controller
-                       completion:(SGPermissionCompletionBlock)completion;
+- (void)tryAuthorizationForSender:(nullable id)sender
+                 inViewController:(nullable UIViewController *)controller
+                       completion:(nonnull SGPermissionCompletionBlock)completion;
 
 - (void)showAuthorizationAlertForSender:(id)sender
                        inViewController:(UIViewController *)controller;

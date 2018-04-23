@@ -187,7 +187,7 @@
     [sideTitle appendFormat:NSLocalizedStringFromTableInBundle(@"to %@", @"Shared", [SGStyleManager bundle], @"to %date. (old key: DateToFormat)"), endTimeString];
     
   } else if (! startTimeString && ! endTimeString) {
-    [sideTitle appendString:NSLocalizedStringFromTableInBundle(@"all-day", @"Shared", [SGStyleManager bundle], @"Indicator that an event is all-day")];
+    [sideTitle appendString:Loc.AllDay];
   
   } else if (startTimeString) {
     [sideTitle appendFormat:NSLocalizedStringFromTableInBundle(@"starts at %@", @"Shared", [SGStyleManager bundle], @"Short indicator of start-time"), startTimeString];
