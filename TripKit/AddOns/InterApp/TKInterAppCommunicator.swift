@@ -12,11 +12,7 @@ extension TKInterAppCommunicator {
   
   @objc(canOpenInMapsApp:)
   public static func canOpenInMapsApp(_ segment: TKSegment) -> Bool {
-    return turnByTurnMode(segment) != nil
-  }
-  
-  public static func turnByTurnMode(_ segment: TKSegment) -> TKTurnByTurnMode? {
-    return segment.template?.turnByTurnMode
+    return segment.turnByTurnMode != nil
   }
   
 }
@@ -90,7 +86,7 @@ extension TKInterAppCommunicator {
   
   private static func openSegmentInAppleMaps(_ segment: TKSegment, currentLocationHandler: ((TKSegment) -> Bool)?) {
     guard
-      let mode = turnByTurnMode(segment),
+      let mode = segment.turnByTurnMode,
       let destination = segment.end
       else {
         assertionFailure("Turn by turn navigation does not apply to this segment OR segment does not have a destination")
@@ -107,7 +103,7 @@ extension TKInterAppCommunicator {
   
   private static func openSegmentInGoogleMaps(_ segment: TKSegment, currentLocationHandler: ((TKSegment) -> Bool)?) {
     guard
-      let mode = turnByTurnMode(segment),
+      let mode = segment.turnByTurnMode,
       let destination = segment.end
       else {
         assertionFailure("Turn by turn navigation does not apply to this segment OR segment does not have a destination")
@@ -125,7 +121,7 @@ extension TKInterAppCommunicator {
   private static func openSegmentInWaze(_ segment: TKSegment) {
     guard
       let destination = segment.end,
-      let mode = turnByTurnMode(segment),
+      let mode = segment.turnByTurnMode,
       mode == .driving
       else {
         assertionFailure("Trying to open Waze without a destination OR the segment isn't a driving.")
