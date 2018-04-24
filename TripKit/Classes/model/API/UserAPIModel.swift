@@ -59,7 +59,7 @@ extension API {
   }
   
   public struct Email: Codable {
-    let email: String
+    public let email: String
     let validated: Bool?
     let primary: Bool?
     
