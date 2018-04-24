@@ -11,16 +11,14 @@ import Foundation
 extension API {
   
   public struct User: Codable {
-    public var givenName: String?
-    public var surname: String?
-    public var address1: String?
-    public var address2: String?
-    public var postCode: String?
-    public var emails: [Email]?
-    public var phones: [Phone]?
-    public var userId: String?
-    
-    public static let shared = User()
+    public let givenName: String?
+    public let surname: String?
+    public let address1: String?
+    public let address2: String?
+    public let postCode: String?
+    public let emails: [Email]?
+    public let phones: [Phone]?
+    public let userId: String?
     
     public init(
       firstName: String? = nil,
@@ -76,4 +74,5 @@ extension API {
   }
   
 }
+
 
