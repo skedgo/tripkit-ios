@@ -19,6 +19,7 @@ extension API {
     public let emails: [Email]?
     public let phones: [Phone]?
     public let userId: String?
+    public let appData: [String : String]? // TODO: Can we make this more generic?
     
     public init(
       firstName: String? = nil,
@@ -28,7 +29,9 @@ extension API {
       postCode: String? = nil,
       emails: [Email]? = nil,
       phones: [Phone]? = nil,
-      userId: String? = nil) {
+      userId: String? = nil,
+      appData: [String : String]? = nil
+      ) {
       self.givenName = firstName
       self.surname = lastName
       self.address1 = address1
@@ -37,6 +40,7 @@ extension API {
       self.emails = emails
       self.phones = phones
       self.userId = userId
+      self.appData = appData
     }
   }
   
