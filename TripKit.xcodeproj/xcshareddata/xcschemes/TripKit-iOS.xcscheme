@@ -82,11 +82,6 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "MAPZEN_API_KEY"
-            value = "$(MAPZEN_API_KEY)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
             key = "TRIPGO_API_KEY"
             value = "$(TRIPGO_API_KEY)"
             isEnabled = "YES">
