@@ -68,13 +68,16 @@ public class TKJSONCache: NSObject {
     let pathURL: URL
     if let subdirectory = subdirectory {
       pathURL = path.appendingPathComponent(subdirectory, isDirectory: true)
+    } else {
+      pathURL = path
+    }
+    
+    if !fileMan.fileExists(atPath: pathURL.absoluteString) {
       do {
         try fileMan.createDirectory(at: pathURL, withIntermediateDirectories: true, attributes: nil)
       } catch {
         SGKLog.warn("TKJSONCache", text: "Could not create directory \(pathURL), due to: \(error)")
       }
-    } else {
-      pathURL = path
     }
     
     let file = "\(filename).cache"
