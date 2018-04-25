@@ -34,23 +34,18 @@ extension SGCalendarManager: SGAutocompletionDataProvider {
     return annotation
   }
   
+  #if os(iOS) || os(tvOS)
   public func additionalActionString() -> String? {
-    #if os(iOS) || os(tvOS)
     return isAuthorized() ? nil : NSLocalizedString("Include events", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Button to include events in search, too.")
-    
-    #elseif os(OSX)
-    return nil
-    #endif
   }
   
-  public func additionalAction(_ actionBlock: @escaping SGAutocompletionDataActionBlock) {
-    #if os(iOS) || os(tvOS)
-    tryAuthorizationForSender(nil, in: nil) { enabled in
+  public func additionalAction(forPresenter presenter: UIViewController, completion actionBlock: @escaping SGAutocompletionDataActionBlock) {
+    tryAuthorizationForSender(nil, in: presenter) { enabled in
       actionBlock(enabled)
     }
-    #endif
   }
-  
+  #endif
+
 }
 
 extension SGKNamedCoordinate {

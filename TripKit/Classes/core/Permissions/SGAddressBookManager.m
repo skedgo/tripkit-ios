@@ -248,6 +248,7 @@
   }
 }
 
+#if TARGET_OS_IPHONE
 - (NSString *)additionalActionString
 {
   if ([self isAuthorized]) {
@@ -257,14 +258,16 @@
   }
 }
 
-- (void)additionalAction:(SGAutocompletionDataActionBlock)actionBlock
+- (void)additionalActionForPresenter:(UIViewController *)presenter completion:(SGAutocompletionDataActionBlock)actionBlock
 {
   [self tryAuthorizationForSender:nil
-                 inViewController:nil
+                 inViewController:presenter
                        completion:^(BOOL enabled) {
     actionBlock(enabled);
   }];
 }
+#endif
+
 
 #pragma mark - Private methods
 

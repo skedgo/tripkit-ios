@@ -43,6 +43,7 @@ NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
                 forMapRect:(MKMapRect)mapRect
                 completion:(SGAutocompletionDataResultBlock)completion;
 
+#if TARGET_OS_IPHONE
 /**
  @return Optional text to display as part of the provider rows.
  */
@@ -51,9 +52,11 @@ NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
 /**
  Called when the provider row is tapped. Do your thing and execute the block when done, indicating if the autocompletion list should update itself.
  
- @param actionBlock A block that you should call when you're done.
+ @param presenter View controller, that you can use to present
+ @param completion A block that you should call when you're done.
  */
-- (void)additionalAction:(SGAutocompletionDataActionBlock)actionBlock;
+- (void)additionalActionForPresenter:(UIViewController *)presenter completion:(SGAutocompletionDataActionBlock)actionBlock;
+#endif
 
 /**
  @param result The object previously returned from `autocomplete:`.

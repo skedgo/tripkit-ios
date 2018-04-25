@@ -46,6 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL showAccessoryButtons;
 
+#if TARGET_OS_IPHONE
+@property (nonatomic, weak, nullable) UIViewController *presenter;
+#endif
+
 /**
  * Main method required to configure the autocompleter for a new search.
  */
