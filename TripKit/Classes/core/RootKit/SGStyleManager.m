@@ -213,6 +213,54 @@ NSString * const kDateTimeDateFormatterKey = @"DateTimeDateFormatterKey";
 	return [formatter stringFromDate:date];
 }
 
++ (NSDate *)dateForString:(NSString *)string
+              forTimeZone:(nullable NSTimeZone *)timeZone
+              forceFormat:(NSString *)format
+{
+  NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
+  NSDateFormatter *formatter = [threadDictionary objectForKey:kDateTimeDateFormatterKey];
+  
+  if (nil == formatter) {
+    formatter = [[NSDateFormatter alloc] init];
+    [threadDictionary setObject:formatter forKey:kDateTimeDateFormatterKey];
+  }
+  
+  formatter.locale = [SGStyleManager applicationLocale];
+  if (format) {
+    formatter.dateFormat = format;
+  }
+  
+  if (nil != timeZone) {
+    formatter.timeZone = timeZone;
+  }
+  
+  return [formatter dateFromString:string];
+}
+
++ (NSDate *)dateForString:(NSString *)string
+             containsDate:(BOOL)hasDate
+             containsTime:(BOOL)hasTime
+                 timeZone:(nullable NSTimeZone *)timeZone
+{
+  NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
+  NSDateFormatter *formatter = [threadDictionary objectForKey:kDateTimeDateFormatterKey];
+  
+  if (nil == formatter) {
+    formatter = [[NSDateFormatter alloc] init];
+    [threadDictionary setObject:formatter forKey:kDateTimeDateFormatterKey];
+  }
+  
+  formatter.timeStyle = hasTime ? NSDateFormatterShortStyle : NSDateFormatterNoStyle;
+  formatter.dateStyle = hasDate ? NSDateFormatterMediumStyle : NSDateFormatterNoStyle;
+  formatter.locale    = [SGStyleManager applicationLocale];
+  
+  if (nil != timeZone) {
+    formatter.timeZone = timeZone;
+  }
+  
+  return [formatter dateFromString:string];
+}
+
 
 @end
 
