@@ -53,7 +53,7 @@ NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
  Called when the provider row is tapped. Do your thing and execute the block when done, indicating if the autocompletion list should update itself.
  
  @param presenter View controller, that you can use to present
- @param completion A block that you should call when you're done.
+ @param actionBlock A block that you should call when you're done.
  */
 - (void)additionalActionForPresenter:(UIViewController *)presenter completion:(SGAutocompletionDataActionBlock)actionBlock;
 #endif
