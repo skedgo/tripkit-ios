@@ -70,15 +70,6 @@ NS_ASSUME_NONNULL_BEGIN
                 forTimeZone:(NSTimeZone *)timeZone
                  forceStyle:(NSDateFormatterStyle)style;
 
-+ (NSDate *)dateForString:(NSString *)string
-              forTimeZone:(nullable NSTimeZone *)timeZone
-              forceFormat:(NSString *)format;
-
-+ (NSDate *)dateForString:(NSString *)string
-             containsDate:(BOOL)hasDate
-             containsTime:(BOOL)hasTime
-                 timeZone:(nullable NSTimeZone *)timeZone;
-
 @end
 
 @interface SGStyleManager (Color)
