@@ -213,7 +213,6 @@ NSString * const kDateTimeDateFormatterKey = @"DateTimeDateFormatterKey";
 	return [formatter stringFromDate:date];
 }
 
-
 @end
 
 @implementation SGStyleManager (Color)

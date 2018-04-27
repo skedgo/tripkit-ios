@@ -11,14 +11,15 @@ import Foundation
 extension API {
   
   public struct User: Codable {
-    public let givenName: String?
-    public let surname: String?
+    public let firstName: String?
+    public let lastName: String?
     public let address1: String?
     public let address2: String?
     public let postCode: String?
     public let emails: [Email]?
     public let phones: [Phone]?
     public let userId: String?
+    public var appData: [String : Any] = [:]
     
     public init(
       firstName: String? = nil,
@@ -28,49 +29,78 @@ extension API {
       postCode: String? = nil,
       emails: [Email]? = nil,
       phones: [Phone]? = nil,
-      userId: String? = nil) {
-      self.givenName = firstName
-      self.surname = lastName
+      userId: String? = nil,
+      appData: [String : Any] = [:]
+      ) {
+      self.firstName = firstName
+      self.lastName = lastName
       self.address1 = address1
       self.address2 = address2
       self.postCode = postCode
       self.emails = emails
       self.phones = phones
       self.userId = userId
+      self.appData = appData
+    }
+    
+    // MARK: - Codable
+    
+    private enum CodingKeys: String, CodingKey {
+      case firstName = "givenName"
+      case lastName = "surname"
+      case address1
+      case address2
+      case postCode
+      case emails
+      case phones
+      case userId
     }
   }
   
   public struct Phone: Codable {
-    public let phoneCode: String?
-    public let phone: String
+    public let countryCode: String?
+    public let number: String
     let validated: Bool?
     public let type: String?
     public let id: String?
     
     public init(number: String, countryCode: String? = nil, validated: Bool = false, type: String? = nil, id: String? = nil) {
-      self.phoneCode = countryCode
-      self.phone = number
+      self.countryCode = countryCode
+      self.number = number
       self.validated = validated
       self.type = type
       self.id = id
     }
     
-    var isValidated: Bool { return validated ?? false }
+    // MARK: - Codable
+    
+    private enum CodingKeys: String, CodingKey {
+      case countryCode = "phoneCode"
+      case number = "phone"
+      case validated
+      case type
+      case id
+    }
   }
   
   public struct Email: Codable {
-    let email: String
+    public let address: String
     let validated: Bool?
     let primary: Bool?
     
     public init(address: String, validated: Bool = false, primary: Bool = false) {
-      self.email = address
+      self.address = address
       self.validated = validated
       self.primary = primary
     }
     
-    var isValidated: Bool { return validated ?? false }
-    var isPrimary: Bool { return primary ?? false }
+    // MARK: - Codable
+    
+    private enum CodingKeys: String, CodingKey {
+      case address = "email"
+      case validated
+      case primary
+    }
   }
   
 }
