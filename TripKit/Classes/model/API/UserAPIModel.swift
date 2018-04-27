@@ -72,8 +72,6 @@ extension API {
       self.id = id
     }
     
-    var isValidated: Bool { return validated ?? false }
-    
     // MARK: - Codable
     
     private enum CodingKeys: String, CodingKey {
@@ -95,9 +93,6 @@ extension API {
       self.validated = validated
       self.primary = primary
     }
-    
-    var isValidated: Bool { return validated ?? false }
-    var isPrimary: Bool { return primary ?? false }
     
     // MARK: - Codable
     
