@@ -41,8 +41,8 @@ class TKAgendaTest: XCTestCase {
     let env = ProcessInfo.processInfo.environment
     TripKit.apiKey = env["TRIPGO_API_KEY"]!
     
-    // for now we have to run against the local or beta server
-    SVKServer.serverType = .beta
+    // for testing, you can also use the local or beta server
+//    SVKServer.serverType = .beta
     
     // these tests need a fake token
     SVKServer.updateUserToken("tripkit-ios-tester-token")
