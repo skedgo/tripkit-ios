@@ -1033,7 +1033,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
       case TKSegmentOrderingRegular: {
         if (!self.template.action) {
-          return nil;
+          return @"";
         }
         NSMutableString *actionRaw = [NSMutableString stringWithString:self.template.action];
         isTimeDependent = [self fillInTemplates:actionRaw inTitle:YES];

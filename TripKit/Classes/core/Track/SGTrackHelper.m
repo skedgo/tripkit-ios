@@ -161,7 +161,7 @@
     startComponents.timeZone = dayComponents.timeZone;
     includeStart = [startComponents isEqual:dayComponents];
   }
-  if (includeStart) {
+  if (includeStart && displayTimeZone) {
     startTimeString = [SGStyleManager timeString:startDate forTimeZone:displayTimeZone relativeToTimeZone:relativeTimeZone];
   }
 
