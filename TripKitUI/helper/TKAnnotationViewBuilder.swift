@@ -18,6 +18,8 @@ open class TKAnnotationViewBuilder: NSObject {
   fileprivate var heading: CLLocationDirection?
   fileprivate var alpha: CGFloat = 1
   fileprivate var preferSemaphore: Bool = false
+  fileprivate var preferMarker: Bool = false
+  fileprivate var enableClustering: Bool = false
   
   @objc public let annotation: MKAnnotation
   @objc public let mapView: MKMapView
@@ -62,11 +64,24 @@ open class TKAnnotationViewBuilder: NSObject {
     self.preferSemaphore = prefer
     return self
   }
+
+  @objc @discardableResult
+  public func enableClustering(_ cluster: Bool) -> TKAnnotationViewBuilder {
+    self.enableClustering = cluster
+    return self
+  }
+
+  @objc @discardableResult
+  public func preferMarker(_ prefer: Bool) -> TKAnnotationViewBuilder {
+    self.preferMarker = prefer
+    return self
+  }
+
   
-  @objc(buildPreferMarkerAnnotationView:)
-  open func build(preferMarkerAnnotationView: Bool = false) -> MKAnnotationView? {
-    if #available(iOS 11, *), let glyphable = annotation as? TKGlyphableAnnotation, preferMarkerAnnotationView {
-      return build(for: glyphable)
+  @objc
+  open func build() -> MKAnnotationView? {
+    if #available(iOS 11, *), preferMarker, let glyphable = annotation as? TKGlyphableAnnotation {
+      return build(for: glyphable, enableClustering: enableClustering)
     } else if let vehicle = annotation as? Vehicle {
       return build(for: vehicle)      
     } else if preferSemaphore, let timePoint = annotation as? STKDisplayableTimePoint {
@@ -78,7 +93,7 @@ open class TKAnnotationViewBuilder: NSObject {
     } else if let segment = annotation as? TKSegment {
       return buildSemaphore(for: segment)
     } else if let displayable = annotation as? STKDisplayablePoint {
-      return build(for: displayable)
+      return build(for: displayable, enableClustering: enableClustering)
     }
     
     return nil
@@ -91,7 +106,7 @@ open class TKAnnotationViewBuilder: NSObject {
 private extension TKAnnotationViewBuilder {
   
   @available(iOS 11.0, *)
-  private func build(for glyphable: TKGlyphableAnnotation) -> MKAnnotationView {
+  private func build(for glyphable: TKGlyphableAnnotation, enableClustering: Bool) -> MKAnnotationView {
     let identifier = glyphable is MKClusterAnnotation ? "ClusterMarker" : "ImageMarker"
     
     let view: MKMarkerAnnotationView
@@ -122,7 +137,8 @@ private extension TKAnnotationViewBuilder {
     }
     
     if let displayable = glyphable as? STKDisplayablePoint {
-      view.clusteringIdentifier = displayable.priority.rawValue < 500 ? displayable.pointClusterIdentifier : nil
+      view.clusteringIdentifier = enableClustering && displayable.priority.rawValue < 500
+        ? displayable.pointClusterIdentifier : nil
       view.displayPriority = displayable.priority
     }
     
@@ -310,7 +326,7 @@ fileprivate extension TKAnnotationViewBuilder {
 
 fileprivate extension TKAnnotationViewBuilder {
 
-  fileprivate func build(for displayable: STKDisplayablePoint) -> MKAnnotationView {
+  fileprivate func build(for displayable: STKDisplayablePoint, enableClustering: Bool) -> MKAnnotationView {
     
     let identifier: String
     if #available(iOS 11, *), displayable is MKClusterAnnotation {
@@ -335,7 +351,7 @@ fileprivate extension TKAnnotationViewBuilder {
     
     if #available(iOS 11, *) {
       imageView.collisionMode = .circle
-      imageView.clusteringIdentifier = displayable.priority.rawValue < 500 ? displayable.pointClusterIdentifier : nil
+      imageView.clusteringIdentifier = enableClustering && displayable.priority.rawValue < 500 ? displayable.pointClusterIdentifier : nil
       imageView.displayPriority = displayable.priority
     }
     

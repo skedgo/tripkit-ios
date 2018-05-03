@@ -359,7 +359,7 @@
   [builder drawCircleAsLarge:[self drawAsLargeCircle:annotation]];
   [builder withHeading:self.heading];
   [builder preferSemaphore:[self showAsSemaphore:annotation]];
-  return [builder buildPreferMarkerAnnotationView:NO];
+  return [builder build];
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
