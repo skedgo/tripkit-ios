@@ -34,7 +34,7 @@ public class TKReporter {
       
       UserDefaults.standard.removeObject(forKey: key)
       
-      SVKServer.post(url, paras: paras) { _, _, _, error in
+      SVKServer.post(url, paras: paras) { _, _, _, _, error in
         if let error = error {
           SGKLog.debug("TKReporter", text: "Planned trip encountered error: \(error)")
           completion?(false)
@@ -60,7 +60,7 @@ public class TKReporter {
       "samples": samples
     ]
     
-    SVKServer.post(url, paras: paras) { _, _, _, error in
+    SVKServer.post(url, paras: paras) { _, _, _, _, error in
       if let error = error {
         SGKLog.debug("TKReporter", text: "Progress post encountered error: \(error)")
       } else {

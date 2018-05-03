@@ -143,7 +143,7 @@ extension SVKRegion {
   @objc public func unlinkAccount(_ mode: String, remoteURL: URL, completion: @escaping (Bool) -> Void) {
     
     // Also unlink remote
-    SVKServer.get(remoteURL, paras: nil) { _, response, _, error in
+    SVKServer.get(remoteURL, paras: nil) { _, _, response, _, error in
       if let response = response as? [NSObject: AnyObject],
          response.isEmpty && error == nil {
         completion(true)
