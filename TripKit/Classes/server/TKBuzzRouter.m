@@ -157,7 +157,7 @@
     identifier = [NSString stringWithFormat:@"%lu", (unsigned long) hash];
   }
   
-  TKJSONCacheDirectory directory = TKJSONCacheDirectoryDocuments;
+  TKFileCacheDirectory directory = TKFileCacheDirectoryDocuments;
 
   void (^withJSON)(id, NSURL * _Nullable) = ^void(id JSON, NSURL * _Nullable shareURL) {
     [self parseJSON:JSON forTripKitContext:tripKitContext completion:
@@ -428,7 +428,7 @@
   }
   
   // use our default parameters and append those from the URL
-  NSMutableDictionary *paras = [TKSettings defaultDictionary];
+  NSMutableDictionary *paras = [TKSettings.config mutableCopy];
   NSString *query = url.query;
   for (NSString *option in [query componentsSeparatedByString:@"&"]) {
     NSArray *pair = [option componentsSeparatedByString:@"="];
@@ -443,8 +443,8 @@
   
   // Hit it
   [SVKServer GET:baseURL paras:paras completion:
-   ^(NSInteger status, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
-#pragma unused(status, data)
+   ^(NSInteger status, NSDictionary<NSString *,id> *headers, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
+#pragma unused(status, headers, data)
      completion(baseURL, responseObject, error);
    }];
 }
@@ -580,7 +580,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
                                            bestOnly:(BOOL)bestOnly
                                        withASAPTime:(NSDate *)ASAPTime
 {
-	NSMutableDictionary *paras = [TKSettings defaultDictionary];
+	NSMutableDictionary *paras = [TKSettings.config mutableCopy];
 	
   NSArray *sortedModes = [[modeIdentifiers allObjects] sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull mode1, NSString * _Nonnull mode2) {
     return [mode1 compare:mode2];

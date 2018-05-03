@@ -13,17 +13,7 @@ import MapKit
  A `SGTrack` is an object representing a list of events (and similar objects) taking place one after the other - each of which that the user attends.
  */
 @objc
-public protocol SGTrack : NSObjectProtocol {
-  
-  /**
-   Start time of the track. Note that items can start before this.
-   */
-  var startDate: Date { get }
-  
-  /**
-   End time of the track. Note that items can end after this time.
-   */
-  var endDate: Date { get }
+public protocol SGTrack {
   
   /**
    Content of the track. Each conforming to `SGTrackItem`
@@ -41,23 +31,6 @@ public protocol SGTrack : NSObjectProtocol {
   var next: SGTrack? { get }
   
   var startTimeZone: TimeZone? { get }
-  
-  var isEditing: Bool { get set }
-}
-
-extension SGTrack {
-  
-  var previous: SGTrack? { return nil }
-  
-  var next: SGTrack? { return nil }
-  
-  var startTimeZone: TimeZone? { return nil }
-  
-  var isEditing: Bool {
-    get { return false }
-    set { }
-  }
-  
 }
 
 @objc
@@ -77,7 +50,7 @@ public enum SGTrackItemStatus : Int {
  A `SGTrackItem` is something that's on the track of a user for a given day/track. Typically these have locations and times, but both are optional.
  */
 @objc
-public protocol SGTrackItem : NSObjectProtocol {
+public protocol SGTrackItem: NSObjectProtocol {
   
   var title: String { get }
 
@@ -126,11 +99,6 @@ public protocol SGTrackItem : NSObjectProtocol {
 @objc
 public protocol SGTrackItemDisplayable: SGTrackItem {
 
-  /**
-   If the item should be considered as content, e.g., having any item with a content will mark a date on the calendar
-   */
-  var considerAsContent: Bool { get }
-  
   /**
    If the start/end times for this item should usually be hidden (e.g., for "home" or where you're staying).
    */
@@ -219,6 +187,7 @@ public protocol SGTrackItemUserCustomizable: SGTrackItem {
  A track item for which the algorithm can determine the start and end times.
  */
 @objc
+@available(*, deprecated, message: "Not needed with online agenda anymore")
 public protocol SGTrackItemAlgorithmOptimizable: SGTrackItem {
 
   /**

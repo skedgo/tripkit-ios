@@ -339,10 +339,47 @@ extension TKAPIToCoreDataConverter {
   public static func update(vehicle: Vehicle, from dict: [String: Any]) {
     try? vehicle.update(with: dict)
   }
+}
+
+// MARK: - Private vehicles
+
+extension STKVehicular {
+  
+  private var privateVehicleType: API.PrivateVehicleType {
+    switch vehicleType() {
+    case .bicycle: return .bicycle
+    case .motorbike: return .motorbike
+    case .SUV: return .SUV
+    default: return .car
+    }
+  }
+  
+  public func toModel() -> API.PrivateVehicle {
+    return API.PrivateVehicle(
+      type: privateVehicleType,
+      UUID: vehicleUUID?() ?? nil,
+      name: name(),
+      garage: API.Location(annotation: garage?())
+    )
+  }
+}
+
+
+extension TKAPIToCoreDataConverter {
+  
+  public static func vehiclesModel(for vehicles: [STKVehicular]) -> [API.PrivateVehicle] {
+    return vehicles.map { $0.toModel() }
+  }
   
   @objc(vehiclesPayloadForVehicles:)
   public static func vehiclesPayload(for vehicles: [STKVehicular]) -> [[String: Any]] {
-    return vehicles.map(STKVehicularHelper.skedGoFullDictionary(forVehicle:))
+    let model = vehiclesModel(for: vehicles)
+    do {
+      return (try JSONEncoder().encodeJSONObject(model) as? [[String: Any]]) ?? []
+    } catch {
+      assertionFailure()
+      return []
+    }
   }
-  
+
 }

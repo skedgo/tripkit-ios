@@ -43,13 +43,13 @@ extension TKDeparturesProvider {
       "embarkationStops": stopCodes,
       "timeStamp": fromDate.timeIntervalSince1970,
       "limit": limit,
-      "config": TKSettings.defaultDictionary()
+      "config": TKSettings.Config().paras
     ]
     
     return SVKServer.shared.rx
       .hit(.POST, path: "departures.json", parameters: paras, region: region)
-      .map {
-        guard let data = $2 else { throw OutputError.noDataReturn }
+      .map { _, _, data in
+        guard let data = data else { throw OutputError.noDataReturn }
         let decoder = JSONDecoder()
         return try decoder.decode(API.Departures.self, from: data)
     }
@@ -138,7 +138,7 @@ extension TKDeparturesProvider {
       "embarkationStops": [table.startStopCode],
       "disembarkationStops": [table.endStopCode],
       "limit": limit,
-      "config": TKSettings.defaultDictionary()
+      "config": TKSettings.Config().paras
     ]
   }
   
@@ -148,8 +148,8 @@ extension TKDeparturesProvider {
     
     return SVKServer.shared.rx
       .hit(.POST, path: "departures.json", parameters: paras, region: table.startRegion)
-      .map {
-        guard let data = $2 else { throw OutputError.noDataReturn }
+      .map { _, _, data in
+        guard let data = data else { throw OutputError.noDataReturn }
         let decoder = JSONDecoder()
         return try decoder.decode(API.Departures.self, from: data)
     }

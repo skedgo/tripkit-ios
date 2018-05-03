@@ -23,8 +23,14 @@ extension TripRequest {
     }
   }
   
-  @objc public var type: SGTimeType {
-    return SGTimeType(rawValue: self.timeType.intValue) ?? .leaveASAP
+  @objc
+  public var type: SGTimeType {
+    get {
+      return SGTimeType(rawValue: self.timeType.intValue) ?? .leaveASAP
+    }
+    set {
+      timeType = NSNumber(value: newValue.rawValue)
+    }
   }
   
   @objc public var time: Date? {

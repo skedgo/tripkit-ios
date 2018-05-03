@@ -89,7 +89,7 @@
                        usingPrivateVehicles:(NSArray *)privateVehicles
 {
   NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithCapacity:2];
-  paras[@"config"] = [TKSettings defaultDictionary];
+  paras[@"config"] = TKSettings.config;
   paras[@"vehicles"] = [TKAPIToCoreDataConverter vehiclesPayloadForVehicles:privateVehicles];
   
   NSArray *segments = prototype.trip.segments;

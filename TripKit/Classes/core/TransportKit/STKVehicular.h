@@ -81,16 +81,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable NSString *)titleForVehicle:(id<STKVehicular>)vehicle;
 
-/**
- @return The SkedGo API-compliant dictionary representation of this vehicle
- */
-+ (NSDictionary<NSString *, id> *)skedGoFullDictionaryForVehicle:(id<STKVehicular>)vehicle;
-
-/**
- @return The SkedGo API-compliant dictionary representation as a reference to this vehicle which should have been elsewhere provided through a call to `skedGoFullDictionaryForVehicle`.
- */
-+ (NSDictionary<NSString *, id> *)skedGoReferenceDictionaryForVehicle:(id<STKVehicular>)vehicle;
-
 @end
 
 NS_ASSUME_NONNULL_END

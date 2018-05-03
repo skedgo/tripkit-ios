@@ -109,13 +109,6 @@ class TKTTPifierTest: XCTestCase {
     XCTAssert(set  ~= [input[1], input[2]])
   }
 
-  func testPerformanceExample() {
-    // This is an example of a performance test case.
-    self.measure {
-      // Put the code you want to measure the time of here.
-    }
-  }
-
   fileprivate func stay() -> TKAgendaInputItem {
     let input = TestInput(id: 0, start: Date(), startFixed: false, order: 0, isStay: true)
     return .event(input)

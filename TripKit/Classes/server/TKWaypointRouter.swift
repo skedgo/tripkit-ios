@@ -60,7 +60,7 @@ extension TKWaypointRouter {
     let leaveAt = departure > now ? departure : now
     
     var paras = [String: Any]()
-    paras["config"]   = TKSettings.defaultDictionary()
+    paras["config"]   = TKSettings.Config().paras
     paras["vehicles"] = TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     paras["segments"] = pattern
     paras["leaveAt"]  = leaveAt.timeIntervalSince1970 + 60
@@ -210,7 +210,7 @@ class WaypointParasBuilder {
     
     var paras: [String: Any]
     paras = [
-      "config": TKSettings.defaultDictionary(),
+      "config": TKSettings.Config().paras,
       "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
     

@@ -9,7 +9,6 @@
 import Foundation
 
 import RxSwift
-import Marshal
 
 extension Error {
   fileprivate func isNotConnectedError() -> Bool {
@@ -38,13 +37,13 @@ public struct TKTTPifier : TKAgendaBuilderType {
     self.modes = modes
   }
   
-  public func buildTrack(forItems items: [TKAgendaInputItem], startDate: Date, endDate: Date) -> Observable<[TKAgendaOutputItem]> {
+  public func buildTrack(forItems items: [TKTTPifierInputItem], startDate: Date, endDate: Date) -> Observable<[TKTTPifierOutputItem]> {
     let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
     let components = calendar.dateComponents([.day, .month, .year], from: startDate)
     return buildTrack(forItems: items, dateComponents: components)
   }
   
-  public func buildTrack(forItems items: [TKAgendaInputItem], dateComponents: DateComponents) -> Observable<[TKAgendaOutputItem]>
+  public func buildTrack(forItems items: [TKTTPifierInputItem], dateComponents: DateComponents) -> Observable<[TKTTPifierOutputItem]>
   {
     guard let _ = items.first else {
       return Observable.just([])
@@ -54,7 +53,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     guard let _ = items.index(where: { $0.isStay })
     else {
       let outputs = items.flatMap { $0.asFakeOutput() }
-      return Observable.just([TKAgendaOutputItem.stayPlaceholder] + outputs + [TKAgendaOutputItem.stayPlaceholder])
+      return Observable.just([TKTTPifierOutputItem.stayPlaceholder] + outputs + [TKTTPifierOutputItem.stayPlaceholder])
     }
     
     // We also need more than a single stay
@@ -69,7 +68,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     return TKTTPifier.insert(set, into: list, dateComponents: dateComponents, modes: modes)
   }
   
-  public static func split(_ items: [TKAgendaInputItem]) -> (list: [TKAgendaInputItem], set: [TKAgendaInputItem])
+  public static func split(_ items: [TKTTPifierInputItem]) -> (list: [TKTTPifierInputItem], set: [TKTTPifierInputItem])
   {
     guard let first = items.first else {
       preconditionFailure()
@@ -87,7 +86,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
     return (list, set)
   }
   
-  fileprivate static func insert(_ locations: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil) -> Observable<[TKAgendaOutputItem]> {
+  fileprivate static func insert(_ locations: [TKTTPifierInputItem], into: [TKTTPifierInputItem], dateComponents: DateComponents, modes: [String]? = nil) -> Observable<[TKTTPifierOutputItem]> {
     
     precondition(into.count >= 2, "Don't call this unless you have a start and end!")
     
@@ -108,7 +107,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
             }
         }
       }
-      .map { result -> [TKAgendaOutputItem] in
+      .map { result -> [TKTTPifierOutputItem] in
         // 3. Return the results
         if let result = result {
           return result
@@ -132,7 +131,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
       .observeOn(MainScheduler.instance)
   }
   
-  fileprivate static func clearCacheAndRetry(_ region: SVKRegion, insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil) -> Observable<[TKAgendaOutputItem]?> {
+  fileprivate static func clearCacheAndRetry(_ region: SVKRegion, insert: [TKTTPifierInputItem], into: [TKTTPifierInputItem], dateComponents: DateComponents, modes: [String]? = nil) -> Observable<[TKTTPifierOutputItem]?> {
 
     // Clear the cache of problem ID
     let paras = createInput(insert, into: into, dateComponents: dateComponents, modes: modes, region: region)
@@ -152,7 +151,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
    - parameter into: Sorted list of locations to add the new ones into. Typically starts and ends at a hotel.
    - returns: Observable sequence of the region where the problem starts and the id of the problem on the server.
    */
-  fileprivate static func createProblem(_ insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, region: SVKRegion? = nil, modes: [String]? = nil) -> Observable<(SVKRegion, String)> {
+  fileprivate static func createProblem(_ insert: [TKTTPifierInputItem], into: [TKTTPifierInputItem], dateComponents: DateComponents, region: SVKRegion? = nil, modes: [String]? = nil) -> Observable<(SVKRegion, String)> {
 
     guard let first = into.first else {
       preconditionFailure("`into` needs at least one item")
@@ -202,12 +201,12 @@ public struct TKTTPifier : TKAgendaBuilderType {
    - parameter region: Region where the problem starts
    - returns: Observable sequence with the output items or `nil` if the server couldn't calculate them
    */
-  fileprivate static func fetchSolution(_ id: String, inputItems: [TKAgendaInputItem], inRegion region: SVKRegion) -> Observable<[TKAgendaOutputItem]?> {
+  fileprivate static func fetchSolution(_ id: String, inputItems: [TKTTPifierInputItem], inRegion region: SVKRegion) -> Observable<[TKTTPifierOutputItem]?> {
     
     problemIDs.insert(id)
 
     let cachedJson = TKTTPifierCache.marshaledSolution(forId: id)
-    let cachedItems: [TKAgendaOutputItem]?
+    let cachedItems: [TKTTPifierOutputItem]?
     if let json = cachedJson {
       cachedItems = createOutput(inputItems, json: json)
     } else {
@@ -245,7 +244,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
         // Swallow 304 in particular (cached solution still up-to-date)
         return code == 200 && json != nil
       }
-      .map { code, response, _ -> [TKAgendaOutputItem]? in
+      .map { code, response, _ -> [TKTTPifierOutputItem]? in
         if let json = response as? [String: Any],
           let output = createOutput(inputItems, json: json) {
           TKTTPifierCache.save(marshaledSolution: json, forId: id)
@@ -267,7 +266,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
   /**
    Creates the input as required by the `tpp/` endpoint.
    */
-  fileprivate static func createInput(_ insert: [TKAgendaInputItem], into: [TKAgendaInputItem], dateComponents: DateComponents, modes: [String]? = nil, region: SVKRegion? = nil) -> [String: Any] {
+  fileprivate static func createInput(_ insert: [TKTTPifierInputItem], into: [TKTTPifierInputItem], dateComponents: DateComponents, modes: [String]? = nil, region: SVKRegion? = nil) -> [String: Any] {
     
     guard let year = dateComponents.year, let month = dateComponents.month, let day = dateComponents.day else {
       preconditionFailure("Provided bad date components")
@@ -297,9 +296,9 @@ public struct TKTTPifier : TKAgendaBuilderType {
   }
   
   /**
-   Turn an array of `TKAgendaInputItem` into the input for `tpp/` endpoint.
+   Turn an array of `TKTTPifierInputItem` into the input for `tpp/` endpoint.
    */
-  fileprivate static func createInput(_ items: [TKAgendaInputItem])-> [ [String: Any] ] {
+  fileprivate static func createInput(_ items: [TKTTPifierInputItem])-> [ [String: Any] ] {
     return items.reduce([] as [[String: Any]]) { acc, input in
       if let next = input.asInput() {
         return acc + [next]
@@ -309,13 +308,13 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
   }
   
-  fileprivate static func createOutput(_ allInputs: [TKAgendaInputItem], json: [String: Any]) -> [TKAgendaOutputItem]?
+  fileprivate static func createOutput(_ allInputs: [TKTTPifierInputItem], json: [String: Any]) -> [TKTTPifierOutputItem]?
   {
     guard let outputItems = json["items"] as? [[String: Any]] else { return nil }
     
     // Create look-up map of [identifier => event input]
     let eventInputs = allInputs
-      .reduce([:] as [String: TKAgendaEventInputType]) { acc, item in
+      .reduce([:] as [String: TKTTPifierEventInputType]) { acc, item in
         switch item {
         case .event(let input) where input.identifier != nil:
           var newAcc = acc
@@ -328,11 +327,11 @@ public struct TKTTPifier : TKAgendaBuilderType {
       }
     
     // Parse output
-    return outputItems.flatMap { item -> TKAgendaOutputItem? in
+    return outputItems.flatMap { item -> TKTTPifierOutputItem? in
       
       if let id: String = try? item.value(for: "locationId"),
          let input = eventInputs[id] {
-        let eventOutput = TKAgendaEventOutput(forInput: input)
+        let eventOutput = TKTTPifierEventOutput(forInput: input)
         return .event(eventOutput)
       
       } else if let options: [TripOption] = try? item.value(for: "tripOptions") {
@@ -345,12 +344,12 @@ public struct TKTTPifier : TKAgendaBuilderType {
     }
   }
   
-  fileprivate struct TripOption: TKAgendaTripOptionType, Unmarshaling {
+  fileprivate struct TripOption: TKTTPifierTripOptionType, Unmarshaling {
     let usedModes: [ModeIdentifier]
-    let segments: [TKAgendaTripOptionSegmentType]
-    let duration: TKAgendaValue<TimeInterval>
-    let price: TKAgendaValue<PriceUnit>?
-    let score: TKAgendaValue<Double>
+    let segments: [TKTTPifierTripOptionSegmentType]
+    let duration: TKTTPifierValue<TimeInterval>
+    let price: TKTTPifierValue<PriceUnit>?
+    let score: TKTTPifierValue<Double>
     
     init(object: MarshaledObject) throws {
       usedModes = try  object.value(for: "modes")
@@ -380,7 +379,7 @@ public struct TKTTPifier : TKAgendaBuilderType {
   }
 }
 
-extension TKTTPifier.SegmentOverview: TKAgendaTripOptionSegmentType {
+extension TKTTPifier.SegmentOverview: TKTTPifierTripOptionSegmentType {
   
   // MARK: STKTripSegmentDisplayable
 
@@ -441,8 +440,8 @@ extension TKTTPifier.SegmentOverview: TKAgendaTripOptionSegmentType {
 }
 
 
-extension TKAgendaInputItem {
-  public func beforeInList(_ other: TKAgendaInputItem) -> Bool {
+extension TKTTPifierInputItem {
+  public func beforeInList(_ other: TKTTPifierInputItem) -> Bool {
     let first = self
     let second = other
     
@@ -492,7 +491,7 @@ extension TKAgendaInputItem {
   }
   
   /**
-   Turn a `TKAgendaInputItem` into the input for `tpp/` endpoint.
+   Turn a `TKTTPifierInputItem` into the input for `tpp/` endpoint.
    */
   fileprivate func asInput() -> [String: Any]? {
     switch self {

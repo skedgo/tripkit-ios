@@ -60,12 +60,6 @@
 + (NSString *)subtitleForTrackItem:(id<SGTrackItem>)trackItem;
 + (NSAttributedString *)attributedSubtitleForTrackItem:(id<SGTrackItem>)trackItem;
 
-+ (NSString *)timeStringForTrack:(id<SGTrack>)track;
-
-+ (id<MKAnnotation>)originOfTrackItem:(id<SGTrackItem>)trackItem;
-
-+ (id<MKAnnotation>)destinationOfTrackItem:(id<SGTrackItem>)trackItem;
-
 + (BOOL)trackItemShouldBeIgnored:(id<SGTrackItem>)trackItem;
 
 + (NSString *)debugDescriptionForTrackItem:(id<SGTrackItem>)trackItem;

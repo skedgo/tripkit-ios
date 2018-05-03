@@ -25,7 +25,7 @@
 
 + (NSTimeZone *)attendanceTimeZoneForTrackItem:(id<SGTrackItem>)trackItem
 {
-  BOOL affectsTimeZone = [trackItem conformsToProtocol:@protocol(SGTripTrackItem)]
+  BOOL affectsTimeZone = [self trackItemIsTrip:trackItem]
                       || CLLocationCoordinate2DIsValid([[trackItem mapAnnotation] coordinate]);
   if (affectsTimeZone) {
     return [trackItem timeZone];
@@ -149,17 +149,25 @@
 
   unsigned dateFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
   NSCalendar *calendar = dayComponents.calendar;
-  if (displayTimeZone) {
-    calendar.timeZone = displayTimeZone;
+  calendar.timeZone = displayTimeZone;
+  
+  NSDateComponents *normalisedDayComponents = nil;
+  if (dayComponents) {
+    normalisedDayComponents = [[NSDateComponents alloc] init];
+    normalisedDayComponents.calendar = dayComponents.calendar;
+    normalisedDayComponents.timeZone = dayComponents.timeZone;
+    normalisedDayComponents.year = dayComponents.year;
+    normalisedDayComponents.month = dayComponents.month;
+    normalisedDayComponents.day = dayComponents.day;
   }
   
   BOOL includeStart = YES;
-  if (dayComponents && timeZoneMatchesDevice) {
+  if (normalisedDayComponents && timeZoneMatchesDevice) {
     NSDateComponents *startComponents = [calendar components:dateFlags fromDate:startDate];
     // normalise for comparison
-    startComponents.calendar = dayComponents.calendar;
-    startComponents.timeZone = dayComponents.timeZone;
-    includeStart = [startComponents isEqual:dayComponents];
+    startComponents.calendar = normalisedDayComponents.calendar;
+    startComponents.timeZone = normalisedDayComponents.timeZone;
+    includeStart = [startComponents isEqual:normalisedDayComponents];
   }
   if (includeStart) {
     startTimeString = [SGStyleManager timeString:startDate forTimeZone:displayTimeZone relativeToTimeZone:relativeTimeZone];
@@ -169,12 +177,12 @@
   if (duration > 0) {
     NSDate *endDate = [startDate dateByAddingTimeInterval:duration];
     BOOL includeEnd = YES;
-    if (dayComponents && timeZoneMatchesDevice) {
+    if (normalisedDayComponents && timeZoneMatchesDevice) {
       NSDateComponents *endComponents = [calendar components:dateFlags
                                                     fromDate:endDate];
-      endComponents.calendar = dayComponents.calendar;
-      endComponents.timeZone = dayComponents.timeZone;
-      includeEnd = [endComponents isEqual:dayComponents];
+      endComponents.calendar = normalisedDayComponents.calendar;
+      endComponents.timeZone = normalisedDayComponents.timeZone;
+      includeEnd = [endComponents isEqual:normalisedDayComponents];
     }
     if (includeEnd) {
       endTimeString = [SGStyleManager timeString:endDate forTimeZone:displayTimeZone];
@@ -201,50 +209,6 @@
   return [[NSAttributedString alloc] initWithString:nonBreaking];
 }
 
-
-+ (NSString *)timeStringForTrack:(id<SGTrack>)track
-{
-  NSTimeZone *timeZone = [NSTimeZone defaultTimeZone];
-  for (id<SGTrackItem> trackItem in [track items]) {
-    NSTimeZone *itemTimeZone = [self timeZoneForTrackItem:trackItem];
-    if (itemTimeZone) {
-      timeZone = itemTimeZone;
-      break;
-    }
-  }
-  
-  NSString *startString = [SGStyleManager dateString:[track startDate] forTimeZone:timeZone];
-  if ([track endDate]) {
-    NSString *endString   = [SGStyleManager dateString:[track endDate] forTimeZone:timeZone];
-    if ([startString isEqualToString:endString]) {
-      return startString;
-    } else {
-      return [NSString stringWithFormat:@"%@ - %@", startString, endString];
-    }
-  } else {
-    return startString;
-  }
-}
-
-+ (id<MKAnnotation>)originOfTrackItem:(id<SGTrackItem>)trackItem
-{
-  if ([trackItem conformsToProtocol:@protocol(SGTripTrackItem)]) {
-    id<SGTripTrackItem> tripTrackItem = (id<SGTripTrackItem>)trackItem;
-    return [tripTrackItem routeStart];
-  } else  {
-    return [trackItem mapAnnotation];
-  }
-}
-
-+ (id<MKAnnotation>)destinationOfTrackItem:(id<SGTrackItem>)trackItem
-{
-  if ([trackItem conformsToProtocol:@protocol(SGTripTrackItem)]) {
-    id<SGTripTrackItem> tripTrackItem = (id<SGTripTrackItem>)trackItem;
-    return [tripTrackItem routeEnd];
-  } else {
-    return [trackItem mapAnnotation];
-  }
-}
 
 + (BOOL)trackItemShouldBeIgnored:(id<SGTrackItem>)trackItem
 {

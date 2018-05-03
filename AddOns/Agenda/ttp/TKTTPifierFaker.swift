@@ -12,7 +12,7 @@ import CoreLocation
 import RxSwift
 
 enum TKTTPifierFaker {
-  static func fakeInsert(_ locations: [TKAgendaInputItem], into: [TKAgendaInputItem]) -> Observable<[TKAgendaOutputItem]> {
+  static func fakeInsert(_ locations: [TKTTPifierInputItem], into: [TKTTPifierInputItem]) -> Observable<[TKTTPifierOutputItem]> {
 
     // Add all at end
     var inserted = into
@@ -41,7 +41,7 @@ enum TKTTPifierFaker {
     }
   }
   
-  fileprivate static func inputsReturningHome(_ items: [TKAgendaInputItem]) -> [TKAgendaInputItem] {
+  fileprivate static func inputsReturningHome(_ items: [TKTTPifierInputItem]) -> [TKTTPifierInputItem] {
     if let first = items.first {
       return items + [first]
     } else {
@@ -49,8 +49,8 @@ enum TKTTPifierFaker {
     }
   }
   
-  fileprivate static func trackWithTrips(_ items: [TKAgendaInputItem], usePlaceholders: Bool, placeholderTitle: String? = nil) -> [TKAgendaOutputItem] {
-    let (outputs, _) = items.reduce( ([] as [TKAgendaOutputItem], nil as TKAgendaInputItem?) ) { previous, nextInput in
+  fileprivate static func trackWithTrips(_ items: [TKTTPifierInputItem], usePlaceholders: Bool, placeholderTitle: String? = nil) -> [TKTTPifierOutputItem] {
+    let (outputs, _) = items.reduce( ([] as [TKTTPifierOutputItem], nil as TKTTPifierInputItem?) ) { previous, nextInput in
 
       guard let next = nextInput.asFakeOutput() else { fatalError("unexpected Input: \(nextInput)") }
 
@@ -62,8 +62,8 @@ enum TKTTPifierFaker {
       // Inserting trips in between events
       let title = placeholderTitle ?? NSLocalizedString("Calculating trips...", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Placeholder title while calculating trips")
       let outputItem = usePlaceholders
-        ? TKAgendaOutputItem.tripPlaceholder(nil, nil, title)
-        : TKAgendaOutputItem.tripOptions([FakeTripOption()])
+        ? TKTTPifierOutputItem.tripPlaceholder(nil, nil, title)
+        : TKTTPifierOutputItem.tripOptions([FakeTripOption()])
       
       return (outputs + [outputItem, next], nextInput)
     }
@@ -72,10 +72,10 @@ enum TKTTPifierFaker {
   }
 }
 
-private struct FakeTripOption: TKAgendaTripOptionType {
+private struct FakeTripOption: TKTTPifierTripOptionType {
   let usedModes: [ModeIdentifier] = ["pt_pub", "wa_wal"]
-  let duration = TKAgendaValue<TimeInterval>(average: 30 * 60)
-  let price = TKAgendaValue(average: 1.5)
-  let score = TKAgendaValue(average: 3.0)
+  let duration = TKTTPifierValue<TimeInterval>(average: 30 * 60)
+  let price = TKTTPifierValue(average: 1.5)
+  let score = TKTTPifierValue(average: 3.0)
 }
 

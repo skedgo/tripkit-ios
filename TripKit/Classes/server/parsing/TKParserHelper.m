@@ -168,16 +168,16 @@
       if (bearing)
         visit.bearing   = bearing;
       
-      NSNumber *arrivalRaw = [stopDict objectForKey:@"arrival"];
-      NSNumber *departureRaw = [stopDict objectForKey:@"departure"];
+      id arrivalRaw = [stopDict objectForKey:@"arrival"];
+      id departureRaw = [stopDict objectForKey:@"departure"];
       if (arrivalRaw || departureRaw) {
         if (arrivalRaw) {
-          visit.arrival = [NSDate dateWithTimeIntervalSince1970:arrivalRaw.longValue];
+          visit.arrival = [TKParserHelper parseDate:arrivalRaw];
           
         }
         if (departureRaw) {
           // we use 'time' to allow KVO
-          visit.time = [NSDate dateWithTimeIntervalSince1970:departureRaw.longValue];
+          visit.time = [TKParserHelper parseDate:departureRaw];
         }
         
         // keep original time before we touch it with real-time data
@@ -237,7 +237,5 @@
     service.cancelled				= YES;
   }
 }
-
-
 
 @end

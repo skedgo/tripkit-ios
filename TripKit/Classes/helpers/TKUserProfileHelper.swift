@@ -156,6 +156,14 @@ public class TKUserProfileHelper: NSObject {
       return []
     }
   }
+}
+
+extension TKUserProfileHelper {
   
+  public enum Speed: Int, Codable {
+    case slow = 0
+    case medium = 1
+    case fast = 2
+  }
   
 }

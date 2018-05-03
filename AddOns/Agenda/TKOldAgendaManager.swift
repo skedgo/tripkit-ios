@@ -18,15 +18,15 @@ import RxSwift
  date", regardless of the time zone the event is in.
  */
 public protocol TKAgendaDataSource {
-  func items(_ dateComponents: DateComponents) -> Observable<[TKAgendaInputItem]>
+  func items(_ dateComponents: DateComponents) -> Observable<[TKTTPifierInputItem]>
 }
 
 public protocol TKAgendaBuilderType {
-  func buildTrack(forItems items: [TKAgendaInputItem], startDate: Date, endDate: Date) -> Observable<[TKAgendaOutputItem]>
+  func buildTrack(forItems items: [TKTTPifierInputItem], startDate: Date, endDate: Date) -> Observable<[TKTTPifierOutputItem]>
 }
 
 extension TKAgendaBuilderType {
-  func buildTrack(forItems items: [TKAgendaInputItem], dateComponents: DateComponents) -> Observable<[TKAgendaOutputItem]> {
+  func buildTrack(forItems items: [TKTTPifierInputItem], dateComponents: DateComponents) -> Observable<[TKTTPifierOutputItem]> {
     let startDate = dateComponents.earliestDate()
     let endDate = dateComponents.latestDate()
     return buildTrack(forItems: items, startDate: startDate, endDate: endDate)
@@ -39,9 +39,9 @@ extension TKAgendaBuilderType {
  - Note: Make sure to initialise the singleton with the data sources it
             should use before you use it.
  */
-public class TKAgendaManager {
-  private static var _singleton: TKAgendaManager?
-  public class var singleton: TKAgendaManager {
+public class TKOldAgendaManager {
+  private static var _singleton: TKOldAgendaManager?
+  public class var singleton: TKOldAgendaManager {
     if let singleton = _singleton {
       return singleton
     } else {
@@ -54,7 +54,7 @@ public class TKAgendaManager {
       assertionFailure("Ignore subsequent call to `initialize`.")
       return
     }
-    _singleton = TKAgendaManager(builder: builder, dataSources: dataSources)
+    _singleton = TKOldAgendaManager(builder: builder, dataSources: dataSources)
   }
 
   private init(builder: TKAgendaBuilderType, dataSources: [TKAgendaDataSource]) {
@@ -91,7 +91,7 @@ private struct TKSimpleAgenda: TKAgendaType {
   let builder: TKAgendaBuilderType
 
   let triggerRebuild = Variable(false)
-  let outputs = Variable<[TKAgendaOutputItem]?>(nil)
+  let outputs = Variable<[TKTTPifierOutputItem]?>(nil)
   let outputError = Variable<Error?>(nil)
   let generationCount = Variable<Int>(0)
   
@@ -107,7 +107,7 @@ private struct TKSimpleAgenda: TKAgendaType {
     return inputs.asObservable()
   }
 
-  var outputItems: Observable<[TKAgendaOutputItem]?> {
+  var outputItems: Observable<[TKTTPifierOutputItem]?> {
     return outputs.asObservable()
   }
   
@@ -155,4 +155,18 @@ private struct TKSimpleAgenda: TKAgendaType {
       .bind(to: outputs)
   }
 }
+
+// MARK: - Helpers
+
+extension DateComponents {
+  public func earliestDate() -> Date {
+    let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)
+    return calendar!.date(from: self)!
+  }
+  
+  public func latestDate() -> Date {
+    return earliestDate().addingTimeInterval(86400)
+  }
+}
+
 
