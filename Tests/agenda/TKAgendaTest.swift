@@ -14,6 +14,11 @@ import RxBlocking
 
 @testable import TripKit
 
+extension RxTimeInterval {
+  fileprivate static let quick: RxTimeInterval = 3
+  fileprivate static let slow: RxTimeInterval = 45
+}
+
 @available(iOS 10.0, *)
 class TKAgendaTest: XCTestCase {
   
@@ -37,7 +42,6 @@ class TKAgendaTest: XCTestCase {
     TripKit.apiKey = env["TRIPGO_API_KEY"]!
     
     // for now we have to run against the local or beta server
-    // TODO: Fix this (should be production ideally)
     SVKServer.serverType = .beta
     
     // these tests need a fake token
@@ -55,6 +59,8 @@ class TKAgendaTest: XCTestCase {
   override func tearDown() {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     super.tearDown()
+    
+    SVKServer.serverType = .production
   }
   
   func testInitialization() {
@@ -73,7 +79,7 @@ class TKAgendaTest: XCTestCase {
     let testee = SVKServer.shared.rx.uploadAgenda(input, for: components)
     
     do {
-      let _ = try testee.toBlocking().single()
+      let _ = try testee.toBlocking(timeout: .quick).single()
       XCTFail("Observable should error out")
     } catch {
       switch error {
@@ -88,31 +94,31 @@ class TKAgendaTest: XCTestCase {
   func testUploadingFetchingAndDeletingInput() throws {
     // Start clean
     let delete0 = SVKServer.shared.rx.deleteAgenda(for: components)
-    let result0 = try delete0.toBlocking().toArray()
-    XCTAssert(!result0.isEmpty)
-    
+    let result0 = try delete0.toBlocking(timeout: .quick).first()
+    XCTAssertNotNil(result0)
+
     let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
-    let result1 = try upload.toBlocking().toArray()
-    XCTAssertEqual(result1, [TKAgendaUploadResult.success])
+    let result1 = try upload.toBlocking(timeout: .quick).single()
+    XCTAssertEqual(result1, TKAgendaUploadResult.success)
     
     let download = SVKServer.shared.rx.fetchAgendaInput(for: components)
-    let result2 = try download.toBlocking().toArray()
+    let result2 = try download.toBlocking(timeout: .slow).toArray()
     guard let last = result2.last else { XCTFail("Failed to download input"); return }
     XCTAssert(last == input)
 
     let delete = SVKServer.shared.rx.deleteAgenda(for: components)
-    let result3 = try delete.toBlocking().toArray()
-    XCTAssertEqual(result3, [true])
+    let result3 = try delete.toBlocking(timeout: .quick).single()
+    XCTAssertEqual(result3, true)
   }
   
   /// Similar to Juptyer notebook Flow 1
   func testCreateOnDemandFlow() throws {
     let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
-    let result1 = try upload.toBlocking().toArray()
-    XCTAssertEqual(result1, [TKAgendaUploadResult.success])
+    let result1 = try upload.toBlocking(timeout: .quick).single()
+    XCTAssertEqual(result1, TKAgendaUploadResult.success)
     
     let fetch = SVKServer.shared.rx.fetchAgenda(for: components)
-    let result2 = try fetch.toBlocking(timeout: 120).toArray()
+    let result2 = try fetch.toBlocking(timeout: .slow).toArray()
     if let first = result2.first {
       switch first {
       case .success, .calculating: XCTAssert(true)
@@ -135,8 +141,8 @@ class TKAgendaTest: XCTestCase {
     }
     
     let delete = SVKServer.shared.rx.deleteAgenda(for: components)
-    let result3 = try delete.toBlocking().toArray()
-    XCTAssertEqual(result3, [true])
+    let result3 = try delete.toBlocking(timeout: .quick).single()
+    XCTAssertEqual(result3, true)
   }
   
   /// Similar to Juptyer notebook Flow 2
@@ -146,16 +152,16 @@ class TKAgendaTest: XCTestCase {
   /// 4. GET results again, passing hash code, should get 304 not modified
   func testCachingResult() throws {
     let upload = SVKServer.shared.rx.uploadAgenda(input, for: components)
-    let result1 = try upload.toBlocking().toArray()
-    XCTAssertEqual(result1, [TKAgendaUploadResult.success])
+    let result1 = try upload.toBlocking(timeout: .quick).single()
+    XCTAssertEqual(result1, TKAgendaUploadResult.success)
     
     let fetch = SVKServer.shared.rx.fetchAgenda(for: components)
-    let result2 = try fetch.toBlocking(timeout: 120).toArray()
+    let result2 = try fetch.toBlocking(timeout: .slow).toArray()
     guard case .success(let output)? = result2.last else { XCTFail(); return }
     XCTAssertNotNil(output)
 
     let fetch2 = SVKServer.shared.rx.fetchAgenda(for: components)
-    let result3 = try fetch2.toBlocking(timeout: 120).toArray()
+    let result3 = try fetch2.toBlocking(timeout: .slow).toArray()
     guard case .cached(let cached)? = result3.first else { XCTFail(); return }
     guard case .noChange? = result3.last else { XCTFail(); return }
     XCTAssertEqual(cached.hashCode, output.hashCode)
@@ -165,12 +171,12 @@ class TKAgendaTest: XCTestCase {
   func testCachingResult2() throws {
     // Start clean
     let delete = SVKServer.shared.rx.deleteAgenda(for: components)
-    let result0 = try delete.toBlocking().toArray()
-    XCTAssert(!result0.isEmpty)
+    let result0 = try delete.toBlocking(timeout: .quick).first()
+    XCTAssertNotNil(result0)
     
     // Update first input
     let update1 = SVKServer.shared.rx.updateAgenda(input, for: components)
-    let result1 = try update1.toBlocking().toArray()
+    let result1 = try update1.toBlocking(timeout: .slow).toArray()
     guard case .calculating? = result1.first else { XCTFail(); return }
     guard case .success(let uploaded1)? = result1.last else { XCTFail(); return }
     XCTAssertNotNil(uploaded1)
@@ -178,7 +184,7 @@ class TKAgendaTest: XCTestCase {
     // Update with second input
     let newInput = try TKAgendaInput.testInput(excludingSecondEvent: false)
     let update2 = SVKServer.shared.rx.updateAgenda(newInput, for: components)
-    let result2 = try update2.toBlocking().toArray()
+    let result2 = try update2.toBlocking(timeout: .slow).toArray()
     guard case .cached(let cached)? = result2.first else { XCTFail(); return }
     guard case .success(let uploaded2)? = result2.last else { XCTFail(); return }
     XCTAssertNotNil(uploaded2)
@@ -190,17 +196,17 @@ class TKAgendaTest: XCTestCase {
   func testPostingFromNonOwningDevice() throws {
     // Start clean
     let delete0 = SVKServer.shared.rx.deleteAgenda(for: components)
-    let result0 = try delete0.toBlocking().toArray()
-    XCTAssert(!result0.isEmpty)
-    
+    let result0 = try delete0.toBlocking(timeout: .quick).first()
+    XCTAssertNotNil(result0)
+
     let device1 = "Device 1"
     let device2 = "Device 2"
     
     // POSTing from device1
     let upload1 = SVKServer.shared.rx.uploadAgenda(input, for: components, deviceId: device1)
     do {
-      let result1 = try upload1.toBlocking().toArray()
-      XCTAssertEqual(result1, [TKAgendaUploadResult.success])
+      let result1 = try upload1.toBlocking(timeout: .quick).single()
+      XCTAssertEqual(result1, TKAgendaUploadResult.success)
     } catch {
       XCTFail("Uploading from device 1 shouldn't have failed, but did with error: \(error)")
       return
@@ -211,7 +217,7 @@ class TKAgendaTest: XCTestCase {
     let upload2 = SVKServer.shared.rx.uploadAgenda(input2, for: components, deviceId: device2)
     let owningDeviceId: String
     do {
-      _ = try upload2.toBlocking().toArray()
+      _ = try upload2.toBlocking(timeout: .quick).single()
       XCTFail("Upload from device 2 should have failed")
       return
     } catch {
@@ -232,8 +238,8 @@ class TKAgendaTest: XCTestCase {
     // POSTing from 2 again, overwriting explicitly
     let upload2take2 = SVKServer.shared.rx.uploadAgenda(input2, for: components, deviceId: device2, overwritingDeviceId: owningDeviceId)
     do {
-      let result2 = try upload2take2.toBlocking().toArray()
-      XCTAssertEqual(result2, [TKAgendaUploadResult.success])
+      let result2 = try upload2take2.toBlocking(timeout: .quick).single()
+      XCTAssertEqual(result2, TKAgendaUploadResult.success)
     } catch {
       XCTFail("Uploading and overwriting shouldn't have failed, but did with error: \(error)")
       return
@@ -242,7 +248,7 @@ class TKAgendaTest: XCTestCase {
     // POSTing from device1 should error
     let upload1take2 = SVKServer.shared.rx.uploadAgenda(input2, for: components, deviceId: device1)
     do {
-      _ = try upload1take2.toBlocking().toArray()
+      _ = try upload1take2.toBlocking(timeout: .quick).single()
       XCTFail("Upload from device 1 should have failed")
     } catch {
       switch error {
@@ -255,8 +261,8 @@ class TKAgendaTest: XCTestCase {
     
     // Clean-up at the end
     let delete = SVKServer.shared.rx.deleteAgenda(for: components, deviceId: device2)
-    let result3 = try delete.toBlocking().toArray()
-    XCTAssertEqual(result3, [true])
+    let result3 = try delete.toBlocking(timeout: .quick).single()
+    XCTAssertEqual(result3, true)
   }
   
 }
