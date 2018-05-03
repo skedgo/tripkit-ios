@@ -27,6 +27,8 @@ extension SVKServer {
       }
     }
     set {
+      // Only do work, if necessary, to not trigger unnecessary calls
+      guard newValue != _serverType else { return }
       _serverType = newValue
       UserDefaults.shared.set(newValue.rawValue, forKey: SVKDefaultsKeyServerType)
     }

@@ -443,8 +443,8 @@
   
   // Hit it
   [SVKServer GET:baseURL paras:paras completion:
-   ^(NSInteger status, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
-#pragma unused(status, data)
+   ^(NSInteger status, NSDictionary<NSString *,id> *headers, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
+#pragma unused(status, headers, data)
      completion(baseURL, responseObject, error);
    }];
 }

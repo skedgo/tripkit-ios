@@ -397,6 +397,8 @@
 		3AA77F621F76A913001D412D /* AlertAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA77F611F76A913001D412D /* AlertAPIModels.swift */; };
 		3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */; };
 		3AABDD9F1DF7D2E30044A05B /* OpeningHoursAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */; };
+		3AAD87F7209B02B900C75B7E /* VehicleAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */; };
+		3AAD87F8209B02B900C75B7E /* VehicleAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3AB6C6CA1D1CD08E0089F687 /* TKPriceTimeTripClassifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6581D1CD08E0089F687 /* TKPriceTimeTripClassifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB6C6CB1D1CD08E0089F687 /* TKPriceTimeTripClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6591D1CD08E0089F687 /* TKPriceTimeTripClassifier.m */; };
@@ -1324,6 +1326,7 @@
 		3AA77F611F76A913001D412D /* AlertAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAPIModels.swift; sourceTree = "<group>"; };
 		3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+ProductName.swift"; sourceTree = "<group>"; };
 		3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningHoursAPIModel.swift; sourceTree = "<group>"; };
+		3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAPIModel.swift; sourceTree = "<group>"; };
 		3AB1CE7A20405240006123FE /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AB1CE7B20405240006123FE /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AB1CE7C20405240006123FE /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1669,6 +1672,7 @@
 				3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */,
 				3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */,
 				D337467D208D5D980045B0C3 /* UserAPIModel.swift */,
+				3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -3488,6 +3492,7 @@
 				3A92205D205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */,
 				3ABBDADD2032135A00205042 /* NSError+customError.swift in Sources */,
 				3ABBDA1A2032132400205042 /* TKBuzzInfoProvider.m in Sources */,
+				3AAD87F8209B02B900C75B7E /* VehicleAPIModel.swift in Sources */,
 				3ABBDA482032132D00205042 /* Shape+CoreDataClass.swift in Sources */,
 				3ABBDA422032132D00205042 /* SegmentReference.m in Sources */,
 				3ABBDABE2032135400205042 /* SGKSortableAnnotation.swift in Sources */,
@@ -3967,6 +3972,7 @@
 				3AB6C7001D1CD08E0089F687 /* TKBuzzRouter.m in Sources */,
 				3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */,
 				3AB6C7021D1CD08E0089F687 /* TKFakeRouter.m in Sources */,
+				3AAD87F7209B02B900C75B7E /* VehicleAPIModel.swift in Sources */,
 				3AC9A0AE1F682B6E0050217E /* TKPeliasGeocoder.swift in Sources */,
 				3AFFADFE1F06AFDD00147990 /* TKShareHelper.swift in Sources */,
 				3AA03E5F1F0BC9DB00C6B337 /* SGPermissionManager+AuthorizationAlert.m in Sources */,
