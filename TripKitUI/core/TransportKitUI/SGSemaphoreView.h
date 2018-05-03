@@ -41,6 +41,7 @@ typedef NS_ENUM(NSInteger, SGSemaphoreLabel) {
 
 - (void)setHeadWithImage:(UIImage *)image
                 imageURL:(NSURL *)imageURL
+         imageIsTemplate:(BOOL)asTemplate
               forBearing:(NSNumber *)bearing
 							andHeading:(CLLocationDirection)heading
 						canFlipImage:(BOOL)canFlipImage;

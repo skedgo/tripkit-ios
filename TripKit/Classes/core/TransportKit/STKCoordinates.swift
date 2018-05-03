@@ -119,7 +119,7 @@ open class STKModeCoordinate: SGKNamedCoordinate, STKModeAnnotation, TKGlyphable
   }
   
   public var glyphImageURL: URL? {
-    guard let imageName = stopModeInfo.remoteImageName else { return nil }
+    guard stopModeInfo.remoteImageIsTemplate, let imageName = stopModeInfo.remoteImageName else { return nil }
     return SVKServer.imageURL(forIconFileNamePart: imageName, of: .listMainMode)
   }
   

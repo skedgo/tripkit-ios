@@ -272,7 +272,7 @@
                 animationGroup.animations = @[pulseAnimation, opacityAnimation];
 
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    [_colorDotLayer addAnimation:animationGroup forKey:@"pulse"];
+                  [self->_colorDotLayer addAnimation:animationGroup forKey:@"pulse"];
                 });
             }
         });
@@ -296,7 +296,7 @@
                 CAAnimationGroup *animationGroup = self.pulseAnimationGroup;
                 
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    [_colorHaloLayer addAnimation:animationGroup forKey:@"pulse"];
+                  [self->_colorHaloLayer addAnimation:animationGroup forKey:@"pulse"];
                 });
             }
         });
@@ -346,7 +346,7 @@
                 CAAnimationGroup *animationGroup = self.pulseAnimationGroup;
                 
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    [_glowingHaloLayer addAnimation:animationGroup forKey:@"pulse"];
+                  [self->_glowingHaloLayer addAnimation:animationGroup forKey:@"pulse"];
                 });
             }
         });

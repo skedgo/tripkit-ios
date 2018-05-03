@@ -11,6 +11,7 @@ import UIKit
 class TKSectionedAlertTableHeader: UIView {
 
   @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var modeImageView: UIImageView!
   
   static func newInstance() -> TKSectionedAlertTableHeader {
     return TripKitUIBundle.bundle().loadNibNamed("TKSectionedAlertTableHeader", owner: self, options: nil)?.first as! TKSectionedAlertTableHeader

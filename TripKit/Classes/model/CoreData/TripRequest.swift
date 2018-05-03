@@ -197,7 +197,7 @@ extension TripRequest {
     
     return sorted
       .filter { $0.visibility != .hidden }
-      .flatMap { $0.visibleTrip }
+      .compactMap { $0.visibleTrip }
   }
   
   

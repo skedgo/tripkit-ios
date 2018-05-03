@@ -158,7 +158,7 @@ public extension TKShareHelper {
       let items = components.queryItems
       else { return Observable.empty() }
     
-    var adjusted = items.flatMap { item -> URLQueryItem? in
+    var adjusted = items.compactMap { item -> URLQueryItem? in
       guard let value = item.value, !value.isEmpty else { return nil }
       switch item.name {
       case "lat":   return URLQueryItem(name: "tlat",  value: value)

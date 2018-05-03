@@ -25,7 +25,7 @@ extension NSManagedObjectContext {
     
     do {
       let all = try self.fetch(request)
-      let correctType = all.flatMap {
+      let correctType = all.compactMap {
         $0 as? E
       }
       assert(all.count == correctType.count)
@@ -43,7 +43,7 @@ extension NSManagedObjectContext {
     request.sortDescriptors = sortDescriptors
     
     do {
-      return try self.fetch(request).flatMap { $0 as? E }
+      return try self.fetch(request).compactMap { $0 as? E }
     } catch {
       SGKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error)")
       return []

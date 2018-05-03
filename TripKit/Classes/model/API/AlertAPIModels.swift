@@ -10,15 +10,15 @@ import Foundation
 
 extension API {
   
-  public struct Alert: Codable {
+  public struct Alert: Codable, Equatable {
     public enum Severity: String, Codable {
       case info = "info"
       case warning = "warning"
       case alert = "alert"
     }
     
-    public struct Action {
-      enum ActionType {
+    public struct Action: Equatable {
+      enum ActionType: Equatable {
         case reroute([String])
       }
       
@@ -57,7 +57,7 @@ extension API {
   }
   
   /// Replaces the previous `TKAlertWrapper`
-  public struct AlertMapping: Codable {
+  public struct AlertMapping: Codable, Equatable {
     public let alert: API.Alert
     public let operators: [String]?
     public let serviceTripIDs: [String]?
@@ -66,7 +66,7 @@ extension API {
     public let modeInfo: ModeInfo?
   }
   
-  public struct Route: Codable {
+  public struct Route: Codable, Equatable {
     public let id: String
     public let name: String?
     public let number: String?

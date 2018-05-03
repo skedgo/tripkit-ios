@@ -202,13 +202,20 @@
       break;
       
     case SGSearchExtraRowProvider: {
+#if TARGET_OS_IPHONE
       NSInteger index = indexPath.row - 1;
-      if (index >= 0 && index < (NSInteger)self.additionalActions.count) {
-        cell.textLabel.text = self.additionalActions[index];
+      NSArray *actions = self.presenter ? [self additionalActionsForPresenter:self.presenter] : @[];
+      if (index >= 0 && index < (NSInteger)actions.count) {
+        cell.textLabel.text = actions[index];
       } else {
         [SGKLog warn:@"SGAutocompletionDataSource" text:@"Bad row!"];
         cell.textLabel.text = @"";
       }
+#else
+      [SGKLog warn:@"SGAutocompletionDataSource" text:@"Shouldn't happen on MacOS!"];
+      cell.textLabel.text = @"";
+#endif
+
     }
   }
 }
@@ -272,7 +279,13 @@
   if (self.showSearchOptions) {
     extraRows++; // the 'search for more'
   }
-  extraRows += self.additionalActions.count;
+#if TARGET_OS_IPHONE
+  if (self.presenter) {
+    NSArray *actions = [self additionalActionsForPresenter:self.presenter];
+    extraRows += actions.count;
+  }
+#endif
+
   return extraRows;
 }
 

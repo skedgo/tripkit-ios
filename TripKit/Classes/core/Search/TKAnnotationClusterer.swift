@@ -27,7 +27,7 @@ class TKAnnotationClusterer {
         }
         acc.append(TKClusterAnnotation(memberAnnotations: [annotation]))
       }
-      .flatMap {
+      .compactMap {
         return $0.memberAnnotations.count > 1 ? $0 : $0.memberAnnotations.first
       }
   }

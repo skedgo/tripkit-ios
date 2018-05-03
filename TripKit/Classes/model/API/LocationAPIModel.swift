@@ -10,7 +10,7 @@ import Foundation
 
 extension API {
   
-  public struct BikePodInfo : Codable {
+  public struct BikePodInfo : Codable, Equatable {
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
     public let inService: Bool
@@ -42,9 +42,9 @@ extension API {
   }
   
   
-  public struct CarPodInfo : Codable {
+  public struct CarPodInfo : Codable, Equatable {
     
-    public struct Vehicle : Codable {
+    public struct Vehicle : Codable, Equatable {
       public let name: String?
       public let description: String?
       public let licensePlate: String?
@@ -87,9 +87,35 @@ extension API {
   }
   
   
-  public struct CarParkInfo : Codable {
+  public struct CarParkInfo : Codable, Equatable {
+    
+    public enum EntranceType: String, Codable {
+      case entranceAndExit = "ENTRANCE_EXIT"
+      case entranceOnly = "ENTRANCE_ONLY"
+      case exitOnly = "EXIT_ONLY"
+      case pedestrian = "PEDESTRIAN"
+      case disabledPedestrian = "DISABLED_PEDESTRIAN"
+      case permit = "PERMIT"
+    }
+    
+    public struct Entrance : Codable, Equatable {
+      public let type: EntranceType
+      public let lat: CLLocationDegrees
+      public let lng: CLLocationDegrees
+      public let address: String?
+    }
     public let identifier: String
     public let name: String
+    
+    /// Additional information text from the provider. Can be long and over multiple lines.
+    public let info: String?
+    
+    /// The polygon defining the parking area as an encoded polyline.
+    ///
+    /// See `CLLocation.decodePolyLine`
+    public let encodedParkingArea: String?
+    
+    public let entrances: [Entrance]?
     public let operatorInfo: API.CompanyInfo?
     public let openingHours: API.OpeningHours?
     public let pricingTables: [API.PricingTable]?
@@ -100,7 +126,10 @@ extension API {
 
     private enum CodingKeys: String, CodingKey {
       case identifier
+      case encodedParkingArea
       case name
+      case info
+      case entrances
       case operatorInfo = "operator"
       case openingHours
       case pricingTables
@@ -116,7 +145,7 @@ extension API {
   }
   
   
-  public struct CarRentalInfo : Codable {
+  public struct CarRentalInfo : Codable, Equatable {
     public let identifier: String
     public let company: API.CompanyInfo
     public let openingHours: API.OpeningHours?
@@ -124,8 +153,8 @@ extension API {
   }
 
   
-  public struct LocationInfo : Codable {
-    public struct Details: Codable {
+  public struct LocationInfo : Codable, Equatable {
+    public struct Details: Codable, Equatable {
       public let w3w: String?
       public let w3wInfoURL: URL?
     }
@@ -146,10 +175,10 @@ extension API {
   }
   
   
-  public struct LocationsResponse: Codable {
+  public struct LocationsResponse: Codable, Equatable {
     public let groups: [Group]
     
-    public struct Group: Codable {
+    public struct Group: Codable, Equatable {
       public let key: String
       public let hashCode: Int
       public let stops: [STKStopCoordinate]?

@@ -39,7 +39,7 @@ extension TKSegment {
     switch self.order() {
     case .start: return type == .inDetails
     case .regular:
-      let rawVisibility = self.template?.visibility.intValue ?? 0
+      let rawVisibility = self.template?.visibility?.intValue ?? 0
       return rawVisibility >= type.rawValue
     case .end: return type != .inSummary
     }
@@ -49,6 +49,10 @@ extension TKSegment {
   /// Gets the first alert that requires reroute
   @objc public var reroutingAlert: Alert? {
     return alertsWithAction().first { !$0.stopsExcludedFromRouting.isEmpty }
+  }
+  
+  public var turnByTurnMode: TKTurnByTurnMode? {
+    return template?.turnByTurnMode
   }
   
 }
@@ -86,7 +90,7 @@ extension TKSegment {
 extension TKSegment {
   
   @objc public var usesVehicle: Bool {
-    if template?.isSharedVehicle() ?? false {
+    if template?.isSharedVehicle ?? false {
       return true
     } else if reference?.vehicleUUID != nil {
       return true
@@ -99,7 +103,7 @@ extension TKSegment {
   /// - Parameter vehicles: List of the user's vehicles
   /// - Returns: The used vehicle (if there are any) in SkedGo API-compatible form
   @objc public func usedVehicle(fromAll vehicles: [STKVehicular]) -> [AnyHashable: Any]? {
-    if template?.isSharedVehicle() ?? false {
+    if template?.isSharedVehicle ?? false {
       return reference?.sharedVehicleData
     }
     
@@ -266,14 +270,14 @@ extension TKSegment: STKTripSegment {
   }
   
   public var tripSegmentInstruction: String {
-    guard let rawString = template?.miniInstruction.instruction else { return "" }
+    guard let rawString = template?.miniInstruction?.instruction else { return "" }
     let mutable = NSMutableString(string: rawString)
     fill(inTemplates: mutable, inTitle: true)
     return mutable as String
   }
   
   public var tripSegmentMainValue: Any {
-    if let rawString = template?.miniInstruction.mainValue {
+    if let rawString = template?.miniInstruction?.mainValue {
       let mutable = NSMutableString(string: rawString)
       fill(inTemplates: mutable, inTitle: true)
       return mutable as String
@@ -283,7 +287,7 @@ extension TKSegment: STKTripSegment {
   }
   
   public var tripSegmentDetail: String? {
-    if let rawString = template?.miniInstruction.detail {
+    if let rawString = template?.miniInstruction?.detail {
       let mutable = NSMutableString(string: rawString)
       fill(inTemplates: mutable, inTitle: true)
       return mutable as String

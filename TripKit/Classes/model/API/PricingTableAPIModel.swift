@@ -13,21 +13,19 @@ extension API {
   /// Representation of a pricing table
   ///
   /// Matches PricingTable from the tripgo-api
-  public struct PricingTable : Codable {
-    
+  public struct PricingTable : Codable, Equatable {
     public let title: String
     public let subtitle: String?
     public let currency: String
     public let currencySymbol: String
     public let entries: [Entry]
     
-    
     /// A single entry in a pricing table
-    public struct Entry: Codable {
-      public let label: String
+    public struct Entry: Codable, Equatable {
+      public let label: String?
       public let price: Float
+      public let maxDurationInMinutes: Int?
     }
-
   }
 
 }

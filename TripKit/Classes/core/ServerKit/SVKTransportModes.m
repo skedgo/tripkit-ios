@@ -231,22 +231,6 @@ NSString *const SVKTransportModeIdentifierWheelchair                = @"wa_whe";
       || [typeIdentifier isEqualToString:kSGTransportModeTypeIdentifierBicycleShare];
 }
 
-+ (BOOL)modeIdentifierIsSelfNavigating:(NSString *)modeIdentifier
-{
-  if (! modeIdentifier)
-    return NO;
-  
-  NSString *typeIdentifier = [self modeTypeIdentifier:modeIdentifier];
-  return [typeIdentifier isEqualToString:kSGTransportModeTypeIdentifierWalking]
-      || [typeIdentifier isEqualToString:kSGTransportModeTypeIdentifierWheelchair]
-      || [typeIdentifier isEqualToString:kSGTransportModeTypeIdentifierBicycle]
-      || [typeIdentifier isEqualToString:kSGTransportModeTypeIdentifierBicycleShare]
-      || [typeIdentifier isEqualToString:kSGTransportModeTypeIdentifierCar]
-      || [typeIdentifier isEqualToString:kSGTransportModeTypeIdentifierCarShare]
-      || [typeIdentifier isEqualToString:kSGTransportModeTypeIdentifierCarRental]
-      || [typeIdentifier isEqualToString:kSGTransportModeTypeIdentifierMotorbike];
-}
-
 + (BOOL)modeIdentifierIsAffectedByTraffic:(NSString *)modeIdentifier
 {
   if (! modeIdentifier)

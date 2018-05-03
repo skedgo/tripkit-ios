@@ -19,11 +19,11 @@ extension API.VehicleOccupancy {
   var icon: UIImage? {
     switch self {
     case .empty, .manySeatsAvailable, .fewSeatsAvailable:
-      return UIImage(named: "icon-check-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+      return .iconCheckMini
     case .standingRoomOnly, .crushedStandingRoomOnly:
-      return UIImage(named: "icon-exclamation-mark-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+      return .iconExclamationmarkMini
     case .full, .notAcceptingPassengers:
-      return UIImage(named: "icon-cross-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+      return .iconCrossMini
     case .unknown:
       return nil
     }
@@ -143,7 +143,7 @@ extension TKOccupancyView {
       label.text = Loc.WheelchairAccessible.uppercased()
       label.textColor = color
       
-      icon.image = UIImage(named: "icon-wheelchair-mini", in: TKOccupancyView.bundle, compatibleWith: nil)
+      icon.image = .iconWheelchairMini
       icon.backgroundColor = color
       icon.tintColor = UIColor.white
       icon.layer.cornerRadius = 2

@@ -65,17 +65,19 @@ extension SGAutocompletionDataProvider where Self: TKAutocompleting {
     }
   }
   
-  public var additionalAction: (String, Single<Bool>)? {
+  #if os(iOS) || os(tvOS)
+  public func additionalAction(for presenter: UIViewController) -> (String, Single<Bool>)? {
     guard let title = self.additionalActionString?(), let handler = (self as SGAutocompletionDataProvider).additionalAction else { return nil }
     
     let action = Single<Bool>.create { subscriber in
-      handler { refresh in
+      handler(presenter) { refresh in
         subscriber(.success(refresh))
       }
       return Disposables.create()
     }
     return (title, action)
   }
+  #endif
   
 }
 

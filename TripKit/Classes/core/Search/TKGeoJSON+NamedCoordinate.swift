@@ -13,7 +13,7 @@ extension TKGeoJSON {
   func toNamedCoordinates() -> [SGKNamedCoordinate] {
     switch self {
     case .collection(let features):
-      return features.flatMap(SGKNamedCoordinate.init(from:))
+      return features.compactMap(SGKNamedCoordinate.init(from:))
     case .feature(let feature):
       if let coordinate = SGKNamedCoordinate(from: feature) {
         return [coordinate]

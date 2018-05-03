@@ -112,7 +112,7 @@ extension TKPeliasGeocoder: SGAutocompletionDataProvider {
         // MapZen likes coming back with similar locations near each
         // other, so we cluster them.
         let clusters = TKAnnotationClusterer.cluster(coordinates)
-        let unique = clusters.flatMap(SGKNamedCoordinate.namedCoordinate(for:))
+        let unique = clusters.compactMap(SGKNamedCoordinate.namedCoordinate(for:))
         
         let pruned = SGBaseGeocoder.mergedAndPruned(unique, withMaximum: 7)
         completion(pruned.map(SGAutocompletionResult.init))

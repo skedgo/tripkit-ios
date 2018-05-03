@@ -18,7 +18,7 @@ extension API {
     case notValidTimeZoneIdentifier(String)
   }
   
-  public struct OpeningHours : Codable {
+  public struct OpeningHours : Codable, Equatable {
     
     /// Time zone in which the opening hours are defined
     public let timeZone: TimeZone
@@ -54,7 +54,7 @@ extension API {
     
     /// Opening hours on a particular day of the week (with
     /// a special case for public holidays).
-    public struct Day: Codable {
+    public struct Day: Codable, Equatable {
       
       public let day: DayOfWeek
       public let times: [Time]
@@ -64,7 +64,7 @@ extension API {
         case times
       }
       
-      public struct Time: Codable {
+      public struct Time: Codable, Equatable {
         
         public let opens: TimeInterval
         public let closes: TimeInterval
@@ -108,7 +108,7 @@ extension API {
       }
       
       
-      public enum DayOfWeek: String, Codable {
+      public enum DayOfWeek: String, Codable, Equatable {
         case monday         = "MONDAY"
         case tuesday        = "TUESDAY"
         case wednesday      = "WEDNESDAY"
@@ -118,6 +118,9 @@ extension API {
         case sunday         = "SUNDAY"
         case publicHoliday  = "PUBLIC_HOLIDAY"
         
+        public static let weekdays: [DayOfWeek] = [
+          .monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday
+        ]
         
         public var localizedString: String {
           if let weekday = weekday {
@@ -179,13 +182,19 @@ extension API.OpeningHours {
     return false
   }
   
-  
   /// Sorted days relative to provided first-day-of-week
   ///
   /// - Parameter starting: First day of the week
   /// - Returns: Sorted days
   public func days(starting: WeekdayIndex = .monday) -> [Day] {
-    return days.sorted { firstDay, secondDay in
+    var allDays = days
+    for day in Day.DayOfWeek.weekdays {
+      if !allDays.contains(where: { $0.day == day }) {
+        allDays.append(Day(day: day, times: []))
+      }
+    }
+    
+    return allDays.sorted { firstDay, secondDay in
       guard let first = firstDay.day.relativeWeekday(to: starting) else {
         return false
       }

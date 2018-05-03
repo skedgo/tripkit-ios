@@ -34,12 +34,27 @@ public class ModeInfo: NSObject, Codable, NSSecureCoding {
   }
 
   @objc(modeInfoForDictionary:)
-  public class func modeInfo(for json: [String: Any]) -> ModeInfo? {
+  public class func modeInfo(for json: [String: Any]?) -> ModeInfo? {
+    guard let json = json else { return nil }
     let decoder = JSONDecoder()
     return try? decoder.decode(ModeInfo.self, withJSONObject: json)
   }
   
   public static let unknown: ModeInfo = modeInfo(for: ["alt": "unknown"])!
+  
+  // MARK: Equatable
+  
+  public override func isEqual(_ object: Any?) -> Bool {
+    guard let other = object as? ModeInfo else { return false }
+    return identifier == other.identifier
+      && alt == other.alt
+      && localImageName == other.localImageName
+      && remoteImageName == other.remoteImageName
+      && remoteIconIsTemplate == other.remoteIconIsTemplate
+      && remoteDarkImageName == other.remoteDarkImageName
+      && descriptor == other.descriptor
+      && rgbColor == other.rgbColor
+  }
   
   // MARK: Codable
   

@@ -23,7 +23,7 @@ extension SGAutocompletionDataSource {
   @objc
   @available(*, deprecated: 9.3, message: "Use `init(autocompleters:)` instead")
   public convenience init(dataProviders: [Any]) {
-    let autocompleters = dataProviders.flatMap { provider -> TKAutocompleting? in
+    let autocompleters = dataProviders.compactMap { provider -> TKAutocompleting? in
       if let autocompleter = provider as? TKAutocompleting {
         return autocompleter
       } else {
@@ -95,10 +95,12 @@ extension SGAutocompletionDataSource {
     return storage.results.value
   }
 
-  @objc
-  var additionalActions : [String] {
-    return providers.flatMap { $0.additionalAction?.0 }
+  #if os(iOS) || os(tvOS)
+  @objc(additionalActionsForPresenter:)
+  func additionalActions(for presenter: UIViewController) -> [String] {
+    return providers.compactMap { $0.additionalAction(for: presenter)?.0 }
   }
+  #endif
   
 }
 
@@ -119,7 +121,17 @@ extension SGAutocompletionDataSource {
   /// - Parameter indexPath: Selected index path
   /// - Parameter refreshHandler: Called if a autocompletion provider requests an action
   /// - Returns: Action to perform. `nil` returned if nothing to do, in which case the refresh handler will be called.
+  #if os(iOS) || os(tvOS)
+  public func processSelection(indexPath: IndexPath, for presenter: UIViewController) -> Single<Selection> {
+    return _processSelection(indexPath: indexPath, presenter: presenter)
+  }
+  #elseif os(OSX)
   public func processSelection(indexPath: IndexPath) -> Single<Selection> {
+    return _processSelection(indexPath: indexPath, presenter: nil)
+  }
+  #endif
+
+  private func _processSelection(indexPath: IndexPath, presenter: Any?) -> Single<Selection> {
     switch type(ofSection: indexPath.section) {
     case .sticky:
       switch stickyOption(at: indexPath) {
@@ -148,14 +160,25 @@ extension SGAutocompletionDataSource {
     case .more:
       switch extraRow(at: indexPath) {
       case .searchForMore: return Single.just(.searchForMore)
+      
       case .provider:
+        #if os(iOS) || os(tvOS)
+        guard let controller = presenter as? UIViewController else {
+          preconditionFailure()
+        }
+
         let additionalRow = indexPath.item - 1 // subtract 'press search for more'
-        let actions = providers.flatMap { $0.additionalAction }
+        let actions = providers.compactMap { $0.additionalAction(for: controller) }
         guard additionalRow >= 0 && additionalRow < actions.count else {
           assertionFailure("Invalid index path for extras: \(indexPath)")
           return Single.just(.refresh)
         }
         return actions[additionalRow].1.map { _ in .refresh }
+
+        #elseif os(OSX)
+        assertionFailure("This should not be available on macOS")
+        return Single.just(.refresh)
+        #endif
       }
     }
   }

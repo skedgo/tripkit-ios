@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
     <entity name="Alert" representedClassName="Alert" syncable="YES">
         <attribute name="action" optional="YES" attributeType="Transformable" customClassName="NSDictionary" syncable="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -80,10 +80,10 @@
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="hashCode" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="metres" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="metresDismount" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="metresFriendly" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="metresUnfriendly" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="modeIdentifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="modeInfo" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="notesRaw" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scheduledEndStopCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scheduledStartStopCode" optional="YES" attributeType="String" syncable="YES"/>
@@ -135,11 +135,12 @@
     </entity>
     <entity name="Shape" representedClassName="Shape" syncable="YES">
         <attribute name="encodedWaypoints" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="friendly" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="index" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="flags" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="index" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="metres" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="travelled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="toDelete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="travelled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="services" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="shape" inverseEntity="Service" syncable="YES"/>
         <relationship name="template" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SegmentTemplate" inverseName="shapes" inverseEntity="SegmentTemplate" syncable="YES"/>
         <relationship name="visits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StopVisits" inverseName="shapes" inverseEntity="StopVisits" syncable="YES"/>
@@ -309,9 +310,9 @@
         <element name="Cell" positionX="-99" positionY="131" width="128" height="165"/>
         <element name="DLSEntry" positionX="124" positionY="539" width="128" height="73"/>
         <element name="SegmentReference" positionX="511" positionY="-117" width="128" height="238"/>
-        <element name="SegmentTemplate" positionX="952" positionY="-234" width="128" height="388"/>
+        <element name="SegmentTemplate" positionX="952" positionY="-234" width="128" height="390"/>
         <element name="Service" positionX="315" positionY="149" width="128" height="298"/>
-        <element name="Shape" positionX="637" positionY="531" width="128" height="180"/>
+        <element name="Shape" positionX="637" positionY="531" width="128" height="195"/>
         <element name="StopLocation" positionX="-101" positionY="369" width="128" height="283"/>
         <element name="StopVisits" positionX="124" positionY="243" width="128" height="238"/>
         <element name="Trip" positionX="315" positionY="-252" width="128" height="390"/>

@@ -2,8 +2,8 @@
 //  Shape+CoreDataProperties.swift
 //  TripKit
 //
-//  Created by Adrian Schoenig on 4/7/17.
-//  Copyright © 2017 SkedGo. All rights reserved.
+//  Created by Adrian Schönig on 06.11.17.
+//
 //
 
 import Foundation
@@ -17,11 +17,12 @@ extension Shape {
     }
 
     @NSManaged public var encodedWaypoints: String?
-    @NSManaged public var friendly: NSNumber?
-    @NSManaged public var index: NSNumber?
+    @NSManaged public var index: Int16
     @NSManaged public var title: String?
-    @NSManaged public var toDelete: NSNumber?
+    @NSManaged public var toDelete: Bool
     @NSManaged public var travelled: NSNumber?
+    @NSManaged public var flags: Int32
+    @NSManaged public var metres: NSNumber?
     @NSManaged public var services: NSSet?
     @NSManaged public var template: SegmentTemplate?
     @NSManaged public var visits: NSSet?

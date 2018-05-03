@@ -42,8 +42,12 @@ public class TKFileCache: NSObject {
   
   public static func save(_ id: String, data: Data, directory: TKFileCacheDirectory, subdirectory: String? = nil) {
     let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
-    try? data.write(to: fileURL, options: [.atomic])
-    assert(read(id, directory: directory, subdirectory: subdirectory) != nil)
+    do {
+      try data.write(to: fileURL, options: [.atomic])
+      assert(read(id, directory: directory, subdirectory: subdirectory) != nil)
+    } catch {
+      assertionFailure("Error while saving: \(error)")
+    }
   }
   
   public static func remove(_ id: String, directory: TKFileCacheDirectory, subdirectory: String? = nil) {
@@ -72,13 +76,16 @@ public class TKFileCache: NSObject {
     let pathURL: URL
     if let subdirectory = subdirectory {
       pathURL = path.appendingPathComponent(subdirectory, isDirectory: true)
+    } else {
+      pathURL = path
+    }
+    
+    if !fileMan.fileExists(atPath: pathURL.absoluteString) {
       do {
         try fileMan.createDirectory(at: pathURL, withIntermediateDirectories: true, attributes: nil)
       } catch {
         SGKLog.warn("TKJSONCache", text: "Could not create directory \(pathURL), due to: \(error)")
       }
-    } else {
-      pathURL = path
     }
     
     if let filename = filename {

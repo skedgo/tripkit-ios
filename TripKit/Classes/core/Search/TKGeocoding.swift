@@ -39,17 +39,23 @@ public protocol TKAutocompleting {
   ///     result was passed in.
   func annotation(for result: SGAutocompletionResult) -> Single<MKAnnotation>
   
+  #if os(iOS) || os(tvOS)
   /// Text and action for an additional row to display in the results, e.g., to request
   /// user permissions if the autocompletion provider can't provide results without that.
   ///
   /// The `single` should fire on completion of the action (e.g., asking for permission)
   /// indicating if the results or texts should be refreshed.
-  var additionalAction: (String, Single<Bool>)? { get }
-  
+  func additionalAction(for presenter: UIViewController) -> (String, Single<Bool>)?
+  #endif
+
 }
 
 extension TKAutocompleting {
   
-  public var additionalAction: (String, Single<Bool>)? { return nil }
+  #if os(iOS) || os(tvOS)
+  public func additionalAction(for presenter: UIViewController) -> (String, Single<Bool>)? {
+    return nil
+  }
+  #endif
   
 }

@@ -167,7 +167,7 @@ extension BPKForm {
     guard let fields = formFields() else { return false }
     
     let matchFields = fields
-      .flatMap { (aField) -> String? in
+      .compactMap { (aField) -> String? in
         aField["id"].string
       }
       .filter { $0 == id }
