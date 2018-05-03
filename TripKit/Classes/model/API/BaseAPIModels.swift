@@ -46,7 +46,7 @@ extension API {
     let address: String?
   }
   
-  public enum RealTimeStatus: String, Codable {
+  public enum RealTimeStatus: String, Codable, Equatable {
     case capable    = "CAPABLE"
     case incapable  = "INCAPABLE"
     
