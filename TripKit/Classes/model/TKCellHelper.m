@@ -10,9 +10,6 @@
 
 #define CELLS_PER_DEGREE 75
 
-NSString *const SGCellsClearedNotification =  @"SGCellsClearedNotification";
-
-
 @implementation TKCellHelper
 
 + (NSSet *)identifiersForRegion:(MKCoordinateRegion)region

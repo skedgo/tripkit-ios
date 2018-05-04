@@ -8,20 +8,14 @@
 
 #import <MapKit/MapKit.h>
 
-typedef NS_ENUM(NSInteger, SGCellLevel) {
-  SGCellLevelUnknown = 0,
-  SGCellLevelRegion  = 1,
-  SGCellLevelLocal   = 50,
-};
-
-FOUNDATION_EXPORT NSString *const SGCellsClearedNotification;
-
+NS_ASSUME_NONNULL_BEGIN
 
 @interface TKCellHelper : NSObject
 
-+ (NSSet *)identifiersForRegion:(MKCoordinateRegion)region;
++ (NSSet<NSString *> *)identifiersForRegion:(MKCoordinateRegion)region;
 
 + (MKCoordinateRegion)regionForIdentifier:(NSString *)identifier;
 
-
 @end
+
+NS_ASSUME_NONNULL_END

@@ -176,6 +176,8 @@ extension API {
   
   
   public struct LocationsResponse: Codable, Equatable {
+    public static let empty: LocationsResponse = LocationsResponse(groups: [])
+    
     public let groups: [Group]
     
     public struct Group: Codable, Equatable {
