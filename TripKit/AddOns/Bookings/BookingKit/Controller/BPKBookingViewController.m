@@ -349,7 +349,10 @@
      
      if (error != nil) {
        // server error
-       [self handle:error];
+       [self handle:error defaultDismissHandler:^(UIAlertAction * _Nonnull action) {
+         [strongSelf.navigationController popViewControllerAnimated:YES];
+       }];
+//       [self handle:error];
        
      } else if (rawForm != nil) {
        if ([BPKForm canBuildFormFromRawObject:rawForm]) {
@@ -365,7 +368,7 @@
        
      } else {
        // No form and no error means we've reached the end
-       [self.delegate bookingViewController:self didComplete:YES withManager:self.manager];
+       [strongSelf.delegate bookingViewController:self didComplete:YES withManager:self.manager];
        
      }
      
