@@ -10,11 +10,33 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ late (%2$@ service)";
 
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ ago";
+
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@ alerts";
+
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ cycle friendly";
+
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ stops";
+
+/* For describing a time interval, e.g., '8:30 to 8:43'
+ From %time1 to %time2. (old key: TimeFromToShortFormat) */
+"%@ to %@" = "%1$@ to %2$@";
+
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ w/o traffic";
 
-/* No comment provided by engineer. */
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ wheelchair friendly";
+
+/* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 stop";
+
+/* No comment provided by engineer. */
+"Alerts" = "Alerts";
 
 /* apple maps directions action */
 "Apple Maps" = "Apple Maps";
@@ -23,11 +45,29 @@
 "Arrival" = "Arrival";
 
 /* Prefix for selected 'arrive by' time
-   Single line instruction to arrive */
+ Single line instruction to arrive */
 "Arrive" = "Arrive";
+
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "Arrive at %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "Arrive at %1$@ at %2$@";
+
+/* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
+"Arrive in" = "Arrive in";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+"At %@" = "At %@";
+
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "Book with %@";
 
 /* No comment provided by engineer. */
 "Call" = "Call";
+
+/* Action title to make a call to service/company named '@%' */
+"Call %@" = "Call %@";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Could not find transit stop.";
@@ -38,45 +78,157 @@
 /* Destination of the bus */
 "Direction" = "Direction";
 
-/* Walking time */
-"for %@" = "for %@";
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "Disconnect";
+
+/* Indicating a path requires you to dismount and push your bicycle */
+"Dismount" = "Dismount";
+
+/* As in 'this bus/train is empty' */
+"Empty" = "Empty";
+
+/* As in 'this bus/train has few seats available' */
+"Few seats available" = "Few seats available";
+
+/* Indicating a path is wheelchair/cycyling friendly */
+"Friendly" = "Friendly";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "From %@";
+
+/* As in 'this bus/train is full and likely can't accept further passengers' */
+"Full" = "Full";
+
+/* Action title get/download app of name '@%' */
+"Get %@" = "Get %@";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Get directions";
 
-/* goCatch action */
-"goCatch a Taxi" = "goCatch a Taxi";
-
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
-/* No comment provided by engineer. */
-"ingogo a Taxi" = "ingogo a Taxi";
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "I'll arrive at %1$@ at %2$@";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "I'll take a %1$@ at %2$@ from %3$@.";
+
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "In %@";
+
+/* %@ is replaced with app name */
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "In the meantime, let's keep exploring %@ and enjoy your trips";
 
 /* Prefix for selected 'leave after' time
-   Single line instruction to leave */
+ Single line instruction to leave */
 "Leave" = "Leave";
+
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "Leave %@";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "Leave %1$@ at %2$@";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "Leave at %@";
+
+/* Title for when to depart. Countdown to departure will be displayed below. */
+"Leave in" = "Leave in";
 
 /* No comment provided by engineer. */
 "Leave now" = "Leave now";
 
+/* As in 'this bus/train is so full, there's only limited standing room' */
+"Limited standing room only" = "Limited standing room only";
+
 /* No comment provided by engineer. */
 "Live traffic" = "Live traffic";
 
+/* Indicating when something is loading */
+"Loading..." = "Loading...";
+
+/* As in 'this bus/train has many seats available' */
+"Many seats available" = "Many seats available";
+
+/* Title of button to get more details about an alert */
+"More info" = "More info";
+
+/* Indicating no trips have been planned within the next 24 hrs */
+"No planned trips" = "No planned trips";
+
+/* As in 'this bus/train is full and definitely not accepting further passengers' */
+"Not accepting passengers" = "Not accepting passengers";
+
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "On time";
+
+/* Action title open app of name '@%' */
+"Open %@" = "Open %@";
+
+/* Title for opening hours */
+"Opening Hours" = "Opening Hours";
+
+/* No comment provided by engineer. */
+"Plan a trip and it will show up here." = "Plan a trip and it will show up here.";
+
+/* No comment provided by engineer. */
+"Public holiday" = "Public holiday";
 
 /* No comment provided by engineer. */
 "Real-time" = "Real-time";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Search for this stop again or try again later.";
+"Search for this stop again or try again later.." = "Search for this stop again or try again later..";
 
-/* Show website action */
+/* Send SMS action button */
+"Send SMS" = "Send SMS";
+
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "Setup";
+
+/* Title for button that, when tapped, shows something, e.g., a list of alert */
+"Show" = "Show";
+
+/* Show website action button */
 "Show website" = "Show website";
 
-/* Number of stops before you get off a vehicle */
-"%@ stops" = "%@ stops";
+/* As in 'this bus/train is fairly full and has standing room only' */
+"Standing room only" = "Standing room only";
+
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "To %@";
+
+/* Title for a trip */
+"Trip" = "Trip";
+
+/* Indicating a path is wheelchair/cycyling unfriendly */
+"Unfriendly" = "Unfriendly";
+
+/* Indicating the wheelchair/cycling friendliness of a path is unknown */
+"Unknown" = "Unknown";
+
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "Updated %@ ago";
+
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "Vehicle %1$@ updated %2$@ ago";
 
 /* No comment provided by engineer. */
-"Trip" = "Trip";
+"We are busy getting your upcoming trip. Please wait..." = "We are busy getting your upcoming trip. Please wait...";
+
+/* No comment provided by engineer. */
+"We'll keep you updated with the latest transit alerts here" = "We'll keep you updated with the latest transit alerts here";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "at %@";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "for %@";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch a Taxi";
+
+/* inGogo taxi booking action */
+"ingogo a Taxi" = "ingogo a Taxi";
+
