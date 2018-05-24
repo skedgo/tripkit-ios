@@ -232,7 +232,7 @@
 - (NSString *)timeInfoForItem:(BPKSectionItem *)item
 {
   NSNumber *time = [item.json objectForKey:kBPKFormValue];
-  if (! time) {
+  if (time == nil) {
     return @"TBA";
   }
   
@@ -267,7 +267,7 @@
   }
   
   NSNumber *epochTime = [item.json objectForKey:kBPKFormValue];
-  if (! epochTime) {
+  if (epochTime == nil) {
     return @"unavailable";
   }
   

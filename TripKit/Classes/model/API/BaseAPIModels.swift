@@ -26,6 +26,21 @@ extension API {
       self.remoteDarkIcon = remoteDarkIcon
       self.color = color
     }
+    
+    // MARK: Codable (more robust)
+    
+    public init(from decoder: Decoder) throws {
+      let values = try decoder.container(keyedBy: CodingKeys.self)
+      
+      name = try values.decode(String.self, forKey: .name)
+      website = try? values.decode(URL.self, forKey: .website)
+      phone = try? values.decode(String.self, forKey: .phone)
+      remoteIcon = try? values.decode(String.self, forKey: .remoteIcon)
+      remoteDarkIcon = try? values.decode(String.self, forKey: .remoteDarkIcon)
+      color = try? values.decode(RGBColor.self, forKey: .color)
+    }
+
+    
   }
   
   public struct DataAttribution : Codable, Equatable {

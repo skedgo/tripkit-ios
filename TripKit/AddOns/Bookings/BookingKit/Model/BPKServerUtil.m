@@ -35,7 +35,7 @@
 #endif
   
   if (postData) {
-    if (bsb) {
+    if ([bsb boolValue]) {
       NSMutableDictionary *adjusted = [NSMutableDictionary dictionaryWithDictionary:postData];
       adjusted[@"bsb"] = bsb;
       postData = adjusted;
@@ -56,7 +56,7 @@
     }
     
     // Don't foget to indicate whether we are in sandbox environment.
-    if (bsb) {
+    if ([bsb boolValue]) {
       [paras setObject:bsb forKey:@"bsb"];
     }
     

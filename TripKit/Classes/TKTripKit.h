@@ -56,8 +56,8 @@
 
 // Non-core data model classes
 #import "TKSegment.h"
-#import "TKPlainCell.h"
 #import "TKTripFactory.h"
+#import "TKCellHelper.h"
 
 // Helpers
 #import "TKNextSegmentScorer.h"

@@ -20,60 +20,32 @@ typedef void(^FetchRequestBlock)(NSFetchRequest *);
 #pragma mark - Existence
 
 - (BOOL)containsObjectForEntityClass:(Class)entityClass
-                       withPredicate:(NSPredicate *)predOrNil;
-
-- (BOOL)containsObjectForEntityName:(NSString *)entityName
-                       withPredicate:(NSPredicate *)predOrNil;
+                       withPredicate:(NSPredicate *)predOrNil NS_SWIFT_UNAVAILABLE("Use containsObject<E>");
 
 #pragma mark - Fetch
 
 - (NSArray *)fetchObjectsForEntityClass:(Class)entityClass
-                       withFetchRequest:(FetchRequestBlock)requestBlock;
+                       withFetchRequest:(FetchRequestBlock)requestBlock NS_SWIFT_UNAVAILABLE("Use fetchObjects<E>");
 
 - (NSArray *)fetchObjectsForEntityClass:(Class)entityClass
                           withPredicate:(NSPredicate *)predOrNil
                      andSortDescriptors:(NSArray *)sortDescriptorsOrNil
-                          andFetchLimit:(NSInteger)limit;
+                          andFetchLimit:(NSInteger)limit NS_SWIFT_UNAVAILABLE("Use fetchObjects<E>");
 
 - (NSArray *)fetchObjectsForEntityClass:(Class)entityClass
                           withPredicate:(NSPredicate *)predOrNil
-                     andSortDescriptors:(NSArray *)sortDescriptorsOrNil;
+                     andSortDescriptors:(NSArray *)sortDescriptorsOrNil NS_SWIFT_UNAVAILABLE("Use fetchObjects<E>");
 
 - (NSSet *)fetchObjectsForEntityClass:(Class)entityClass
-                        withPredicate:(NSPredicate *)predOrNil;
+                        withPredicate:(NSPredicate *)predOrNil NS_SWIFT_UNAVAILABLE("Use fetchObjects<E>");
 
 - (NSSet *)fetchObjectsForEntityClass:(Class)entityClass
-                  withPredicateString:(NSString *)predicateString, ...;
-
-- (NSArray *)fetchObjectsForEntityName:(NSString *)entityName
-                      withFetchRequest:(FetchRequestBlock)requestBlock;
-
-- (NSArray *)fetchObjectsForEntityName:(NSString *)entityName
-                         withPredicate:(NSPredicate *)predOrNil
-                    andSortDescriptors:(NSArray *)sortDescriptorsOrNil 
-                         andFetchLimit:(NSInteger)limit;
-
-- (NSArray *)fetchObjectsForEntityName:(NSString *)entityName
-                         withPredicate:(NSPredicate *)predOrNil
-                    andSortDescriptors:(NSArray *)sortDescriptorsOrNil;
-
-- (NSSet *)fetchObjectsForEntityName:(NSString *)newEntityName
-                       withPredicate:(NSPredicate *)predOrNil;
-
-- (NSSet *)fetchObjectsForEntityName:(NSString *)newEntityName
-                 withPredicateString:(NSString *)predicateString, ...;
+                  withPredicateString:(NSString *)predicateString, ... NS_SWIFT_UNAVAILABLE("Use fetchObjects<E>");
 
 - (id)fetchUniqueObjectForEntityClass:(Class)entityClass
-                        withPredicate:(NSPredicate *)predicate;
-
-- (id)fetchUniqueObjectForEntityName:(NSString *)entityName
-                       withPredicate:(NSPredicate *)predicate;
+                        withPredicate:(NSPredicate *)predicate NS_SWIFT_UNAVAILABLE("Use fetchUniqueObject<E>");
 
 - (id)fetchUniqueObjectForEntityClass:(Class)entityClass
-                  withPredicateString:(NSString *)predicateString, ...;
-
-- (id)fetchUniqueObjectForEntityName:(NSString *)entityName
-                 withPredicateString:(NSString *)predicateString, ...;
-
+                  withPredicateString:(NSString *)predicateString, ... NS_SWIFT_UNAVAILABLE("Use fetchUniqueObject<E>");
 
 @end

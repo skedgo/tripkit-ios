@@ -115,7 +115,7 @@
           // now we can animate to the proper coordinate
           vehicle.coordinate = goodCoordinate;
           
-          if (vehicle.bearing) {
+          if (vehicle.bearing != nil) {
             [view rotateVehicleWithBearingAngle:vehicle.bearing.floatValue - self.heading];
           }
         }];

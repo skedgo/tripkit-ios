@@ -13,7 +13,7 @@ import RxSwift
 
 public enum TKLocationProvider {
   
-  enum Error: Swift.Error {
+  public enum Error: Swift.Error {
     case serverReturnedBadFormat
   }
   

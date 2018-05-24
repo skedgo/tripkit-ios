@@ -26,8 +26,6 @@ typedef NS_ENUM(NSInteger, SVKServerType) {
   SVKServerTypeLocal
 };
 
-FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileTrackUsage;
-FOUNDATION_EXPORT NSString *const SVKDefaultsKeyUUID;
 FOUNDATION_EXPORT NSString *const SVKDefaultsKeyUserToken;
 FOUNDATION_EXPORT NSString *const SVKDefaultsKeyServerType;
 FOUNDATION_EXPORT NSString *const SVKDefaultsKeyDevelopmentServer;

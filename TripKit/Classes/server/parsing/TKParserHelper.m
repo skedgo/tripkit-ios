@@ -89,7 +89,7 @@
     
     // get information about the service if there's any in there
     NSString *serviceCode = shapeDict[@"serviceTripID"];
-    if (serviceCode && NO == [serviceCode isEqualToString:previousService.code]) {
+    if (serviceCode && NO == [previousService.code isEqualToString:serviceCode]) {
       // we need a new service
       if ([serviceCode isEqualToString:requestedService.code]) {
         currentService = requestedService;

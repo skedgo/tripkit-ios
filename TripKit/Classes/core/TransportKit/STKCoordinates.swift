@@ -143,12 +143,14 @@ public class STKStopCoordinate: STKModeCoordinate, STKStopAnnotation {
     try super.init(from: decoder)
     isDraggable = false
     
-    // From the API these comes in the decoder rather than in the "data" field
     guard let values = try? decoder.container(keyedBy: CodingKeys.self) else { return }
-    stopCode = try values.decode(String.self, forKey: .stopCode)
-    services = try? values.decode(String.self, forKey: .services)
-    stopShortName = try? values.decode(String.self, forKey: .shortName)
-    stopSortScore = try? values.decode(Int.self, forKey: .popularity)
+    if data["sg_services"] == nil {
+      // From the API these comes in the decoder rather than in the "data" field
+      stopCode = try values.decode(String.self, forKey: .stopCode)
+      services = try? values.decode(String.self, forKey: .services)
+      stopShortName = try? values.decode(String.self, forKey: .shortName)
+      stopSortScore = try? values.decode(Int.self, forKey: .popularity)
+    }
   }
   
   public required init?(coder aDecoder: NSCoder) {

@@ -77,7 +77,7 @@
         && [obj2 respondsToSelector:@selector(sortScore)]) {
       NSNumber *score1 = @([(SGKNamedCoordinate *)obj1 sortScore]);
       NSNumber *score2 = @([(SGKNamedCoordinate *)obj2 sortScore]);
-      if (score1 >= 0 && score2 >= 0) {
+      if (score1.integerValue >= 0 && score2.integerValue >= 0) {
         return [score2 compare:score1];
       }
     }

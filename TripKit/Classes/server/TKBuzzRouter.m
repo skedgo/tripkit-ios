@@ -157,7 +157,7 @@
     identifier = [NSString stringWithFormat:@"%lu", (unsigned long) hash];
   }
   
-  TKJSONCacheDirectory directory = TKJSONCacheDirectoryDocuments;
+  TKFileCacheDirectory directory = TKFileCacheDirectoryDocuments;
 
   void (^withJSON)(id, NSURL * _Nullable) = ^void(id JSON, NSURL * _Nullable shareURL) {
     [self parseJSON:JSON forTripKitContext:tripKitContext completion:

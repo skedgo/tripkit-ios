@@ -9,33 +9,39 @@
 import Foundation
 
 @objc
-public enum TKJSONCacheDirectory: Int {
+public enum TKFileCacheDirectory: Int {
   case cache
   case documents
 }
 
-public class TKJSONCache: NSObject {
-  @objc public static func read(_ id: String, directory: TKJSONCacheDirectory) -> [String: Any]? {
+public class TKJSONCache: TKFileCache {
+  @objc public static func read(_ id: String, directory: TKFileCacheDirectory) -> [String: Any]? {
     return read(id, directory: directory, subdirectory: nil)
   }
-
-  @objc public static func read(_ id: String, directory: TKJSONCacheDirectory, subdirectory: String?) -> [String: Any]? {
-    let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
-    
-    if let data = try? Data(contentsOf: fileURL) {
+  
+  @objc public static func read(_ id: String, directory: TKFileCacheDirectory, subdirectory: String?) -> [String: Any]? {
+    if let data = TKFileCache.read(id, directory: directory, subdirectory: subdirectory) {
       return NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: AnyObject]
     } else {
       return nil
     }
   }
-
-  @objc public static func save(_ id: String, dictionary: [String: Any], directory: TKJSONCacheDirectory) {
-    save(id, dictionary: dictionary, directory: directory, subdirectory: nil)
-  }
-
-  @objc public static func save(_ id: String, dictionary: [String: Any], directory: TKJSONCacheDirectory, subdirectory: String?) {
-    let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
+  
+  @objc public static func save(_ id: String, dictionary: [String: Any], directory: TKFileCacheDirectory) {
     let data = NSKeyedArchiver.archivedData(withRootObject: dictionary)
+    TKFileCache.save(id, data: data, directory: directory, subdirectory: nil)
+  }
+}
+
+public class TKFileCache: NSObject {
+  
+  public static func read(_ id: String, directory: TKFileCacheDirectory, subdirectory: String? = nil) -> Data? {
+    let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
+    return try? Data(contentsOf: fileURL)
+  }
+  
+  public static func save(_ id: String, data: Data, directory: TKFileCacheDirectory, subdirectory: String? = nil) {
+    let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
     do {
       try data.write(to: fileURL, options: [.atomic])
       assert(read(id, directory: directory, subdirectory: subdirectory) != nil)
@@ -43,17 +49,19 @@ public class TKJSONCache: NSObject {
       assertionFailure("Error while saving: \(error)")
     }
   }
-
-  @objc public static func remove(_ id: String, directory: TKJSONCacheDirectory) {
-    remove(id, directory: directory, subdirectory: nil)
-  }
-
-  @objc public static func remove(_ id: String, directory: TKJSONCacheDirectory, subdirectory: String?) {
+  
+  public static func remove(_ id: String, directory: TKFileCacheDirectory, subdirectory: String? = nil) {
     let fileURL = cacheURL(directory, filename: id, subdirectory: subdirectory)
     _ = try? FileManager.default.removeItem(at: fileURL)
   }
   
-  private static func cacheURL(_ destination: TKJSONCacheDirectory, filename: String, subdirectory: String? = nil) -> URL {
+  public static func remove(directory: TKFileCacheDirectory, subdirectory: String) {
+    let fileURL = cacheURL(directory, subdirectory: subdirectory)
+    _ = try? FileManager.default.removeItem(at: fileURL)
+  }
+  
+  
+  private static func cacheURL(_ destination: TKFileCacheDirectory, filename: String? = nil, subdirectory: String? = nil) -> URL {
     let fileMan = FileManager.default
     let searchPath: FileManager.SearchPathDirectory
     switch destination {
@@ -80,7 +88,10 @@ public class TKJSONCache: NSObject {
       }
     }
     
-    let file = "\(filename).cache"
-    return pathURL.appendingPathComponent(file)
+    if let filename = filename {
+      return pathURL.appendingPathComponent("\(filename).cache")
+    } else {
+      return pathURL
+    }
   }
 }

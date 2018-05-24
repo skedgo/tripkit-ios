@@ -165,7 +165,7 @@
     return aRenderer;
     
   } else {
-    return nil;
+    return [[MKOverlayRenderer alloc] initWithOverlay:overlay];
   }
 }
 
