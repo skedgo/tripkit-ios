@@ -288,7 +288,7 @@ typedef NSUInteger SGServiceFlag;
 
 		TKColoredRoute *t = [[TKColoredRoute alloc] initWithWaypoints:waypoints
                                                              from:startSplit
-                                                               to:endSplit
+                                                               to:endSplit + 1 // include it, too
                                                         withColor:self.color
                                                       dashPattern:dashPattern
                                                       isTravelled:YES];
@@ -296,7 +296,7 @@ typedef NSUInteger SGServiceFlag;
     
     if (endSplit > 0) {
       t = [[TKColoredRoute alloc] initWithWaypoints:waypoints
-                                               from:endSplit + 1
+                                               from:endSplit
                                                  to:-1
                                           withColor:SGKColor.routeDashColorNonTravelled
                                         dashPattern:dashPattern
