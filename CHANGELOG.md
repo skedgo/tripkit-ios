@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added `TKPathFriendliness` enum, which now includes "dismount"
 - Updated `TKPathFriendlinessView` to also include "dismount" section where appropriate
 - Added `TKTurnByTurnMode` and `segment.turnByTurnMode`
+- Adds `TKFileCache` for easier caching
 
 ### Changed
 
@@ -36,11 +37,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 - Removed `TGAgendaWidgetInfoView`
+- Removed `X-TripGo-UUID` header being passed along with server calls
 
 ### Fixed
 
 - Fixed `TKLocationProvider.fetchLocations` which didn't parse responses
 - Fixed test failures due to hitting non-production backend
+- Various robustness fixes addressing occasional and hard-to-reproduce crashes
 
 ## [Version 3.1.1] - 2018-02-26
 
