@@ -1,5 +1,17 @@
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "The app will now sign out";
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@'s";
+
+/* No comment provided by engineer. */
+"%@'s Home" = "%@'s Home";
+
+/* No comment provided by engineer. */
+"%@'s Work" = "%@'s Work";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu recurrences";
+
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "'%@' not found.";
 
 /* Authorization restricted alert message */
 "Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider.";
@@ -10,9 +22,6 @@
 /* Default title for alert view */
 "Alert" = "Alert";
 
-/* Indicator that an event is all-day */
-"all-day" = "all-day";
-
 /* Option for users if they already owned a SkedGo account */
 "Already have an account? Sign in" = "Already have an account? Sign in";
 
@@ -22,10 +31,13 @@
 /* Authorisation needed title */
 "Authorisation needed" = "Authorisation needed";
 
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Back";
+
 /* Type of vehicle : bicycle */
 "Bicycle" = "Bicycle";
 
-/* Cancel - for action sheets */
+/* Cancel action */
 "Cancel" = "Cancel";
 
 /* Label for when a service is cancelled. */
@@ -46,17 +58,28 @@
 /* Accessibility title for a checkmark/tick button */
 "Checkmark" = "Checkmark";
 
-/* Button title to dismiss a view
-   Close action */
+/* Close action */
 "Close" = "Close";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "Confirm";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Contact support";
 
 /* Error title when GPS failed. */
 "Could not determine your current location." = "Could not determine your current location.";
 
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "Could not download supported regions from TripGo's server. Please try again later.";
+
 /* Message that indicates the app is creating accounts for users */
 "Creating account" = "Creating account";
 
-/* Current location */
+/* Current city */
+"Current City" = "Current City";
+
+/* Title for user's current location */
 "Current Location" = "Current Location";
 
 /* Delete action */
@@ -68,23 +91,22 @@
 /* Option for users if they don't yet have a SkedGo account */
 "Don't have an account? Sign up" = "Don't have an account? Sign up";
 
-/* Keyboard accessory button title */
+/* Done action */
 "Done" = "Done";
 
-/* Email address where receipt is sent
-   Email used as Facebook username */
+/* Drop new pin */
+"Drop new pin" = "Drop new pin";
+
+/* For email address */
 "Email" = "Email";
 
-/* Short indicator of end-time */
-"ends at %@" = "ends at %@";
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "Every %@";
 
 /* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "Every day";
+"Everyday" = "Everyday";
 
-/* Email placeholder text */
-"example@example.com" = "example@example.com";
-
-/* Option that allows users to indicate whether reminder is needed */
+/* Reminder to leave preference */
 "For when to leave" = "For when to leave";
 
 /* Free as in beer */
@@ -100,7 +122,7 @@
 "Include contacts" = "Include contacts";
 
 /* Include events. */
-"Include events" = "Include calendar events";
+"Include events" = "Include events";
 
 /* Instant results proposal */
 "Instant results" = "Instant results";
@@ -111,14 +133,22 @@
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
 
-/* Location name
-   Title for location search screen */
+/* Title of button to perform some action at a later time */
+"Later" = "Later";
+
+/* No comment provided by engineer. */
+"Last updated: %@" = "Last updated: %@";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "Loading";
+
+/* Title for unnamed location */
 "Location" = "Location";
 
-/* Location iOS6+ authorisation needed text */
+/* Location iOS authorisation needed text */
 "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app.";
 
-/* Option that allows users to indicate how eary to show trip reminder */
+/* Reminder to leave preference */
 "Minutes before trip" = "Minutes before trip";
 
 /* More results proposal */
@@ -130,37 +160,35 @@
 /* Title for view that shows the summary of a user's account information */
 "My account" = "My account";
 
-/* Name to which receipt is sent
-   Name used in Facebook
-   Sort by name */
+/* Title for name of something (or someone) */
 "Name" = "Name";
 
-/* Never in context of repetitions (especially recurring events) */
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Never";
 
-/* Title for sign in view when user does not have an account */
+/* Title of page to create new account */
 "New account" = "New account";
 
-/* Button title to complete this step and advance to next
-   Keyboard accessory button title to complete this step and advance to next */
+/* Next action */
 "Next" = "Next";
 
 /* No comment provided by engineer. */
 "No CO₂" = "No CO₂";
 
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Not wheelchair accessible";
+
 /* Countdown cell 'now' indicator */
 "Now" = "Now";
 
-/* Authorisation ok button
-   Default title for button that dismisses alert view
-   Error alert cancel */
+/* Ok action */
 "OK" = "OK";
+
+/* Button that goes to the Setting's app */
+"Open Settings" = "Open Settings";
 
 /* Open in Safari action */
 "Open in Safari" = "Open in Safari";
-
-/* Button to open Settings app section for this app */
-"Open Settings" = "Open Settings";
 
 /* No comment provided by engineer. */
 "Password" = "Password";
@@ -177,7 +205,13 @@
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
 "Press 'search' for more..." = "Press 'search' for more...";
 
-/* Section title at the end of a booking that allows users to set reminders */
+/* No comment provided by engineer. */
+"Read more..." = "Read more...";
+
+/* Indicator for real-time information */
+"Real-time" = "Real-time";
+
+/* Action title to add/remove reminder */
 "Reminder" = "Reminder";
 
 /* Repeats daily */
@@ -192,6 +226,15 @@
 /* Repeats yearly */
 "Repeats yearly" = "Repeats yearly";
 
+/* Button title to report a problem */
+"Report Problem" = "Report Problem";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "Retry";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
+
 /* Sort by overall score, like a ranking. */
 "Score" = "Score";
 
@@ -202,12 +245,18 @@
 "Search Results" = "Search Results";
 
 /* No comment provided by engineer. */
+"Search for a city" = "Search for a city";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'..." = "Searching for '%@'...";
+
+/* Title of page or button to sign in */
 "Sign in" = "Sign in";
 
 /* Instruction for signing out user account */
 "Sign out" = "Sign out";
 
-/* No comment provided by engineer. */
+/* Title of page or button to sign up */
 "Sign up" = "Sign up";
 
 /* No comment provided by engineer. */
@@ -216,15 +265,17 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Signing in";
 
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
+/* Message that indicates the app is signing users out of their accounts */
 "Signing out" = "Signing out";
 
-/* Short indicator of start-time */
-"starts at %@" = "starts at %@";
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "Starting %@";
 
-/* Sports utility vehicle abbreviation */
-"SUV" = "SUV";
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "Tap to set location";
+
+/* Message that indicates the app is about to sign users out of their user accounts */
+"The app will now sign out" = "The app will now sign out";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Tracking - off";
@@ -238,6 +289,9 @@
 /* No comment provided by engineer. */
 "Unknown error" = "Unknown error";
 
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "Up to %@";
+
 /* Message that shows app is updating trip after user finalised bookings */
 "Updating trip" = "Updating trip";
 
@@ -249,6 +303,15 @@
 
 /* Every weekend day in context of repetitions (especially recurring events) */
 "Weekends" = "Weekends";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Wheelchair accessibility unknown";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "Wheelchair accessible";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "Would you like to report a problem?";
 
 /* Message that informs users that T&C must be agreed before booking can be made. */
 "You need to agree to the booking terms and conditions." = "You need to agree to the booking terms and conditions.";
@@ -262,12 +325,24 @@
 /* Contacts authorisation needed text */
 "You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature.";
 
-/* Name for a {Name}'s place if it's unclear if it's home, work or something else. */
-"%@'s" = "%@'s";
+/* Indicator that an event is all-day */
+"all-day" = "all-day";
 
-/* No comment provided by engineer. */
-"%@'s Home" = "%@'s Home";
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "arrives %@";
 
-/* No comment provided by engineer. */
-"%@'s Work" = "%@'s Work";
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "departs %@";
+
+/* Short indicator of end-time */
+"ends at %@" = "ends at %@";
+
+/* Email placeholder text */
+"example@example.com" = "example@example.com";
+
+/* Short indicator of start-time */
+"starts at %@" = "starts at %@";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "to %@";
 

@@ -14,15 +14,9 @@
 - (BOOL)containsObjectForEntityClass:(Class)entityClass
                        withPredicate:(NSPredicate *)predOrNil
 {
-  return [self containsObjectForEntityName:NSStringFromClass(entityClass)
-                             withPredicate:predOrNil];
-}
-
-- (BOOL)containsObjectForEntityName:(NSString *)entityName
-                      withPredicate:(NSPredicate *)predOrNil
-{
   ZAssert(self.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
-  
+
+  NSString *entityName = NSStringFromClass(entityClass);
   NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                             inManagedObjectContext:self];
   NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -189,20 +183,14 @@
 - (id)fetchUniqueObjectForEntityClass:(Class)entityClass
                         withPredicate:(NSPredicate *)predicate
 {
-  id object = [self fetchUniqueObjectForEntityName:NSStringFromClass(entityClass)
-                                     withPredicate:predicate];
-//  ZAssert(object == nil || [object isKindOfClass:entityClass], @"Bad class: %@", [object class]);
-  return object;
-}
-
-- (id)fetchUniqueObjectForEntityName:(NSString *)entityName
-                       withPredicate:(NSPredicate *)predicate
-{
+  NSString *entityName = NSStringFromClass(entityClass);
   NSArray *matches = [self fetchObjectsForEntityName:entityName
                                        withPredicate:predicate
                                   andSortDescriptors:nil
                                        andFetchLimit:1];
-  return [matches firstObject];
+  id object = [matches firstObject];
+  ZAssert(object == nil || [object isKindOfClass:entityClass], @"Bad class: %@", [object class]);
+  return object;
 }
 
 - (id)fetchUniqueObjectForEntityClass:(Class)entityClass
@@ -213,24 +201,8 @@
   NSPredicate * predicate = [NSPredicate predicateWithFormat:predicateString
                                                    arguments:variadicArguments];
   va_end(variadicArguments);
-
-  id object = [self fetchUniqueObjectForEntityName:NSStringFromClass(entityClass)
-                                     withPredicate:predicate];
-//  ZAssert(object == nil || [object isKindOfClass:entityClass], @"Bad class: %@", [object class]);
-  return object;
-}
-
-- (id)fetchUniqueObjectForEntityName:(NSString *)entityName
-                 withPredicateString:(NSString *)predicateString, ...
-{
-  va_list variadicArguments;
-  va_start(variadicArguments, predicateString);
-  NSPredicate * predicate = [NSPredicate predicateWithFormat:predicateString
-                                                   arguments:variadicArguments];
-  va_end(variadicArguments);
   
-  return [self fetchUniqueObjectForEntityName:entityName
-                                withPredicate:predicate];
+  return [self fetchUniqueObjectForEntityClass:entityClass withPredicate:predicate];
 }
 
 + (BOOL)objects:(NSArray *)objects areOfClass:(Class)klass

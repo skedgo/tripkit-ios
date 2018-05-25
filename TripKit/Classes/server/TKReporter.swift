@@ -14,7 +14,7 @@ public class TKReporter {
   
   private init() { }
   
-  public static func reportPlannedTrip(_ trip: Trip, userInfo: [String: Any], completion: ((Bool) -> Void)?) {
+  public static func reportPlannedTrip(_ trip: Trip, userInfo: [String: Any] = [:], includeUserID: Bool = false, completion: ((Bool) -> Void)? = nil) {
     
     guard
       let urlString = trip.plannedURLString,
@@ -25,6 +25,10 @@ public class TKReporter {
     
     var paras = userInfo
     paras["choiceSet"] = trip.request.choiceSet
+    
+    if includeUserID {
+      paras["userToken"] = SVKServer.userToken()
+    }
     
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
       

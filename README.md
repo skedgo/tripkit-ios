@@ -74,5 +74,3 @@ If there's any trouble with that, see the example under [Project](Project).
     // ...
   }
 ```
-
-- By default, calls to SkedGo's servers include an identifier that tracks calls from a single installation across session. This behaviour is **opt-out**. You can overwrite this by setting `TripKit.allowTracking`.

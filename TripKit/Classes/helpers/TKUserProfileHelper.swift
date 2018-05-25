@@ -12,7 +12,7 @@ import Foundation
 
 public class TKUserProfileHelper: NSObject {
   
-  private enum DefaultsKey: String {
+  enum DefaultsKey: String {
     case onWheelchair = "profileOnWheelchair"
     case sortedEnabled = "profileSortedModeIdentifiers"
     case minimized = "profileMinimizedModeIdentifiers"

@@ -15,8 +15,6 @@
 // User profile
 NSString *const SVKDefaultsKeyServerType              = @"internalServerType";
 NSString *const SVKDefaultsKeyDevelopmentServer       = @"developmentServer";
-NSString *const SVKDefaultsKeyProfileTrackUsage       = @"track_usage";
-NSString *const SVKDefaultsKeyUUID										= @"UUID";
 NSString *const SVKDefaultsKeyUserToken               = @"userToken";
 NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 
@@ -121,28 +119,6 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   }
   
   return [NSURL URLWithString:[NSString stringWithFormat:@"%@/modeicons/%@-%@.%@", regionsURLString, iconPrefix, iconFileNamePart, iconExtension]];
-}
-
-/**
- @return A UUID as a string identifying this installation. Returns `nil` if the user defaults have a key `SVKDefaultsKeyProfileTrackUsage` which is set to `true`.
- */
-+ (nullable NSString *)persistentUUID
-{
-  // generate UUID if we dont' have it yet
-  NSUserDefaults *defaults = [NSUserDefaults sharedDefaults];
-  NSString *UUIDString = [defaults stringForKey:SVKDefaultsKeyUUID];
-  if (! UUIDString) {
-    UUIDString = [[NSUUID UUID] UUIDString];
-    [defaults setObject:UUIDString forKey:SVKDefaultsKeyUUID];
-  }
-  
-  // return the UUID unless no tracking of usage allowed
-  NSNumber *allowTracking = [[NSUserDefaults standardUserDefaults] objectForKey:SVKDefaultsKeyProfileTrackUsage];
-  if (allowTracking == nil || allowTracking.boolValue) {
-    return UUIDString;
-  } else {
-    return nil;
-  }
 }
 
 + (nullable NSString *)userToken
@@ -764,7 +740,6 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   
   // Optional
   [headers setValue:[SVKServer xTripGoVersion] forKey:@"X-TripGo-Version"];
-  [headers setValue:[SVKServer persistentUUID] forKey:@"X-TripGo-UUID"];
   [headers setValue:[SVKServer userToken] forKey:@"userToken"];
   
   // Force JSON as server otherwise might return XML
