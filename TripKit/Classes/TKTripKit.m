@@ -85,7 +85,8 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 
 - (NSString *)resetStringForToday
 {
-  return [self.dateFormatter stringFromDate:[NSDate date]];
+  NSString *dateString = [self.dateFormatter stringFromDate:[NSDate date]];
+  return [NSString stringWithFormat:@"%@-%@", [SVKServer xTripGoVersion], dateString];
 }
 
 - (NSURL *)localDirectory

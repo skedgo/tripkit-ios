@@ -49,7 +49,7 @@ public enum TripKit {
 
     NSKeyedUnarchiver.setClass(ModeInfo.self, forClassName: "TripKit.ModeInfo")
     NSKeyedUnarchiver.setClass(ModeInfo.self, forClassName: "SGCoreKit.ModeInfo")
-    NSKeyedUnarchiver.setClass(SVKRegion.self, forClassName: "ModeInfo")
+    NSKeyedUnarchiver.setClass(ModeInfo.self, forClassName: "ModeInfo")
     
     // Give the main class a nudge to wake up
     let _ = TripKit.shared

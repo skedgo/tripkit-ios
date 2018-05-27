@@ -52,6 +52,8 @@ FOUNDATION_EXPORT NSString *const SVKDefaultsKeyProfileEnableFlights;
 
 + (void)updateDevelopmentServer:(NSString *)server;
 
++ (NSString *)xTripGoVersion;
+
 + (NSMutableDictionary *)SkedGoHTTPHeaders;
 
 + (nullable NSString *)userToken;

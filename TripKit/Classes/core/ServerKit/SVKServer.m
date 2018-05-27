@@ -652,7 +652,7 @@ NSString *const SVKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   }
 }
 
-+ (nullable NSString *)xTripGoVersion
++ (NSString *)xTripGoVersion
 {
   NSNumber *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
   return [NSString stringWithFormat:@"i%@", version];

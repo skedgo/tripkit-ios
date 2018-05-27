@@ -289,11 +289,6 @@ fileprivate extension TKAnnotationViewBuilder {
     return buildCircle(for: visit, color: color)
   }
   
-  fileprivate func buildCircle(for stop: StopLocation) -> MKAnnotationView {
-    return buildCircle(for: stop)
-    
-  }
-  
   fileprivate func buildCircle(for annotation: MKAnnotation, color: SGKColor? = nil) -> MKAnnotationView {
     let identifier = asLarge ? "LargeCircleView" : "SmallCircleView"
     
