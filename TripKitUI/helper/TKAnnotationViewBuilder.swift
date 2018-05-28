@@ -20,6 +20,7 @@ open class TKAnnotationViewBuilder: NSObject {
   fileprivate var preferSemaphore: Bool = false
   fileprivate var preferMarker: Bool = false
   fileprivate var enableClustering: Bool = false
+  fileprivate var drawStopAsCircle: Bool = true
   
   @objc public let annotation: MKAnnotation
   @objc public let mapView: MKMapView
@@ -47,6 +48,12 @@ open class TKAnnotationViewBuilder: NSObject {
     return self
   }
 
+  @objc @discardableResult
+  public func drawStopAsCircle(_ asCircle: Bool) -> TKAnnotationViewBuilder {
+    self.drawStopAsCircle = asCircle
+    return self
+  }
+  
   @objc @discardableResult
   public func withAlpha(_ alpha: CGFloat) -> TKAnnotationViewBuilder {
     self.alpha = alpha
@@ -88,7 +95,7 @@ open class TKAnnotationViewBuilder: NSObject {
       return buildSemaphore(for: timePoint)
     } else if let visit = annotation as? StopVisits {
       return buildCircle(for: visit)
-    } else if let stop = annotation as? StopLocation {
+    } else if drawStopAsCircle, let stop = annotation as? StopLocation {
       return buildCircle(for: stop)
     } else if let segment = annotation as? TKSegment {
       return buildSemaphore(for: segment)
