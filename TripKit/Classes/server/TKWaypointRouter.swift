@@ -13,8 +13,8 @@ import RxSwift
 extension TKWaypointRouter {
   // MARK: - Trip patterns + next trips
   
-  /// Calculates a trip based on the provided trip, with the new trip being a trip
-  /// that both departs after the current time and after the provided trip.
+  /// Calculates a trip based on the provided trip. Departure time is the provided
+  /// time or now, whichever is later.
   ///
   /// - Parameters:
   ///   - trip: The trip for which to get the next departure
@@ -36,8 +36,8 @@ extension TKWaypointRouter {
   }
   
   
-  /// Calculates a trip from the provided pattern that's departing both after the
-  /// provided time and after now (i.e., whichever is later).
+  /// Calculates a trip from the provided pattern. Departure time is the provided
+  /// time or now, whichever is later.
   ///
   /// - Parameters:
   ///   - pattern: The pattern that's used as input to calculate a trip
@@ -70,6 +70,15 @@ extension TKWaypointRouter {
   
   // MARK: - Tuning public transport trips
   
+  /// Calculates a trip from the provided trip (implied by the segment), which moves
+  /// where to get on or off the provided `segment` to the provided `visit`.
+  ///
+  /// - Parameters:
+  ///   - segment: The segment for which to change getting on/off
+  ///   - visit: The visit along this segment to get on/off
+  ///   - atStart: `true` if getting on should change, `false` if getting off should change
+  ///   - vehicles: The private vehicles to use for private vehicle segments
+  ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
   @objc public func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [STKVehicular], completion: @escaping (Trip?, Error?) -> Void) {
     
     SVKServer.shared.requireRegions { error in
@@ -214,33 +223,52 @@ class WaypointParasBuilder {
       "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
     
-    // First we construct the paras on a segment by segment basis
+    // Prune the segments, removing stationary segments...
+    let nonStationary = trip.segments()
+      .filter { !$0.isStationary() }
+    
+    // ... and walks after driving/cycling
+    let prunedSegments = nonStationary
+      .enumerated()
+      .filter { index, segment in
+        if index > 0, segment.isWalking() {
+          let previous = nonStationary[index - 1]
+          return !previous.isDriving() && !previous.isCycling() && !previous.isSharedVehicle()
+        } else {
+          return true
+        }
+      }
+      .map { $0.element }
+    
+    // Construct the paras on a segment by segment basis
     var foundMatch = false
-    let unglued = trip.segments().compactMap { segment -> (segment: TKSegment, paras: [String: Any])? in
+    let unglued = prunedSegments.map { segment -> (segment: TKSegment, paras: [String: Any]) in
       
       if segmentToMatch == segment {
         foundMatch = true
         let paras = waypointParas(moving: segment, to: visit, atStart: atStart)
         return (segment, paras)
-      } else if let paras = waypointParas(for: segment) {
-        return (segment, paras)
-        
       } else {
-        return nil
+        let paras = waypointParas(forNonStationary: segment)
+        return (segment, paras)
       }
       
     }
     assert(foundMatch)
     
-    // Then we glue them together, making sure that start + end coordinates are matching
+    // Glue them together, making sure that start + end coordinates are matching
     let arrayParas = unglued.enumerated().map { index, current -> [[String: Any]] in
       
+      // If the next segment is the one to change the embarkation, extend the
+      // end to that location.
       if atStart, index+1 < unglued.count, unglued[index+1].segment == segmentToMatch  {
         var paras = current.paras
         paras["end"] = SVKParserHelper.requestString(for: visit.coordinate)
         return [paras]
       }
       
+      // If you change the embaraktion at the very start, we need to add an additional
+      // walk.
       if atStart, index == 0, current.segment == segmentToMatch {
         let walk: [String : Any] = [
           "start": SVKParserHelper.requestString(for: trip.request.fromLocation.coordinate),
@@ -250,12 +278,12 @@ class WaypointParasBuilder {
         return [walk, current.paras]
       }
       
+      
       if !atStart, index > 0, unglued[index-1].segment == segmentToMatch {
         var paras = current.paras
         paras["start"] = SVKParserHelper.requestString(for: visit.coordinate)
         return [paras]
       }
-
       if !atStart, index == unglued.count - 1, current.segment == segmentToMatch {
         let walk: [String : Any] = [
           "start": SVKParserHelper.requestString(for: visit.coordinate),
@@ -272,10 +300,9 @@ class WaypointParasBuilder {
     return paras
   }
   
-  private func waypointParas(for segment: TKSegment) -> [String: Any]? {
-    if segment.isStationary() {
-      return nil
-    } else if segment.isPublicTransport() {
+  private func waypointParas(forNonStationary segment: TKSegment) -> [String: Any] {
+    assert(!segment.isStationary())
+    if segment.isPublicTransport() {
       return waypointParas(forPublicTransport: segment)
     } else {
       return waypointParas(forPrivateTransport: segment)

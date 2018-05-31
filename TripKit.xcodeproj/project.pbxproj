@@ -722,6 +722,8 @@
 		3AD1DEA61F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */; };
 		3ADB3A581D39E3830012D04B /* TKSegmentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB3A571D39E3830012D04B /* TKSegmentHelper.swift */; };
 		3AE04BE61DEE392800462CB3 /* TKTripPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */; };
+		3AE09B9E20BC1C24004BF42B /* routing-drive-park-walk-train.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */; };
+		3AE09BA020BC1C7E004BF42B /* service-for-park-ride.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */; };
 		3AE194E0202DE2850007B49B /* TripKitBookings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF186202C99D40084CB2C /* TripKitBookings.framework */; };
 		3AE194E5202DE32E0007B49B /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE194E3202DE32D0007B49B /* RxBlocking.framework */; };
 		3AE194E6202DE32E0007B49B /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE194E4202DE32E0007B49B /* RxTest.framework */; };
@@ -1425,6 +1427,8 @@
 		3AE06A0A20405212001834E0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AE06A0B20405212001834E0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AE06A0C20405212001834E0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-drive-park-walk-train.json"; sourceTree = "<group>"; };
+		3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "service-for-park-ride.json"; sourceTree = "<group>"; };
 		3AE194E3202DE32D0007B49B /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		3AE194E4202DE32E0007B49B /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		3AEB43EB1F757C1E00FA3289 /* TKDeparturesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKDeparturesProvider.swift; sourceTree = "<group>"; };
@@ -2390,6 +2394,8 @@
 				3AA3CEA6202CD4D100E54859 /* regions.json */,
 				3AA3CEA5202CD4D100E54859 /* routing-goget.json */,
 				3AA3CEA9202CD4D100E54859 /* routing-pt-oldish.json */,
+				3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */,
+				3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -3404,12 +3410,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AE09B9E20BC1C24004BF42B /* routing-drive-park-walk-train.json in Resources */,
 				3AA3CEC5202CD4D100E54859 /* regionInfo-Sydney.json in Resources */,
 				3AA3CEC6202CD4D100E54859 /* hornsbyToSkedGo.json in Resources */,
 				3AA3CECF202CD4D100E54859 /* alertsTransit.json in Resources */,
 				3AA3CECB202CD4D100E54859 /* berowraToHornsby.json in Resources */,
 				3AA3CECC202CD4D100E54859 /* locationInfo-bikePod.json in Resources */,
 				3AF6FDF0204436D4003BA786 /* regionInfo-multi.json in Resources */,
+				3AE09BA020BC1C7E004BF42B /* service-for-park-ride.json in Resources */,
 				3AA3CEC3202CD4D100E54859 /* hornsbyToSkedGoService.json in Resources */,
 				3A6DAEDA2040985B009282FE /* regionInfo-Vancouver.json in Resources */,
 				3AA3CECD202CD4D100E54859 /* routing-pt-oldish.json in Resources */,
