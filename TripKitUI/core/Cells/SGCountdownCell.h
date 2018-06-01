@@ -74,9 +74,6 @@
 // Rx compatibility
 @property (nonatomic, strong) SGObjCDisposeBag *objcDisposeBag;
 
-// Tap actions
-@property (nonatomic, copy) void (^alertPresentationHandler)(void);
-
 // Internals
 - (void)_resetContents;
 - (void)_configureWithTitle:(NSAttributedString *)title

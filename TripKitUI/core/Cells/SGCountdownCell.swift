@@ -8,9 +8,6 @@
 
 import Foundation
 
-import RxSwift
-import RxCocoa
-
 public struct SGCountdownCellModel {
   
   public struct AlertInfo {
@@ -124,14 +121,6 @@ extension SGCountdownCell {
     alertSymbol.image = STKInfoIcon.image(for: severity, usage: .normal)
     alertLabel.text = alertInfo.count == 1 ? text : Loc.Alerts(alertInfo.count) ?? ""
     showButton.setTitle(Loc.Show, for: .normal)
-    
-    let disposeBag = objcDisposeBag.disposeBag    
-    showButton.rx.tap
-      .subscribe(onNext: { [unowned self] in
-        guard let handler = self.alertPresentationHandler else { return }
-        handler()
-      })
-      .disposed(by: disposeBag)
   }
   
   
