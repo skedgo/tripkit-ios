@@ -75,7 +75,7 @@
 @property (nonatomic, strong) SGObjCDisposeBag *objcDisposeBag;
 
 // Tap actions
-@property (nonatomic, copy) void (^alertPresentationHandler)(NSArray<Alert *> *alerts);
+@property (nonatomic, copy) void (^alertPresentationHandler)(void);
 
 // Internals
 - (void)_resetContents;

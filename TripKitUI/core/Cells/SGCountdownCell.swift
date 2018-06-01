@@ -13,6 +13,20 @@ import RxCocoa
 
 public struct SGCountdownCellModel {
   
+  public struct AlertInfo {
+    public static let empty = AlertInfo(count: 0)
+    
+    public let count: Int
+    public let severity: STKInfoIconType?
+    public let text: String?
+    
+    public init(count: Int, severity: STKInfoIconType? = nil, text: String? = nil) {
+      self.count = count
+      self.severity = severity
+      self.text = text
+    }
+  }
+  
   public var title: NSAttributedString
   public var subtitle: String?
   public var subsubtitle: String?
@@ -25,7 +39,7 @@ public struct SGCountdownCellModel {
   public var isCancelled: Bool = false
   public var isWheelchairEnabled: Bool = false
   public var isAccessible: Bool?
-  public var alerts: [Alert] = []
+  public var alertInfo: AlertInfo = .empty
   
   public init(title: NSAttributedString, position: SGKGrouping = .edgeToEdge) {
     self.title = title
@@ -52,7 +66,7 @@ extension SGCountdownCell {
       , stripColor: model.color)
     
     // We may have alert.
-    configureAlertView(with: model.alerts)
+    configureAlertView(model.alertInfo)
     
     // We may need to show accessibility info.
     configureAccessibleView(asEnabled: model.isWheelchairEnabled, isAccessible: model.isAccessible)
@@ -87,40 +101,41 @@ extension SGCountdownCell {
       , strip: stripColor)
     
     // The cell doesn't show alert by default.
-    configureAlertView(with: [])
+    configureAlertView(.empty)
   }
   
   
-  @objc public func configureAlertView(with alerts: [Alert]) {
-    alertIconWidth.constant = alerts.isEmpty ? 0 : 20
-    alertViewTopConstraint.constant = alerts.isEmpty ? 0 : 8
-    alertViewBottomConstraint.constant = alerts.isEmpty ? 0 : 8
-    showButtonHeightConstraint.constant = alerts.isEmpty ? 0 : showButton.intrinsicContentSize.height
+  private func configureAlertView(_ alertInfo: SGCountdownCellModel.AlertInfo) {
+    let isEmpty = alertInfo.count == 0
+    alertIconWidth.constant = isEmpty ? 0 : 20
+    alertViewTopConstraint.constant = isEmpty ? 0 : 8
+    alertViewBottomConstraint.constant = isEmpty ? 0 : 8
+    showButtonHeightConstraint.constant = isEmpty ? 0 : showButton.intrinsicContentSize.height
     
-    showButton.isHidden = alerts.isEmpty
-    alertSymbol.isHidden = alerts.isEmpty
-    alertLabel.isHidden = alerts.isEmpty    
-    alertSeparator.isHidden = alerts.isEmpty
+    showButton.isHidden = isEmpty
+    alertSymbol.isHidden = isEmpty
+    alertLabel.isHidden = isEmpty
+    alertSeparator.isHidden = isEmpty
     
-    guard let mostSevere = alerts.first else {
+    guard let severity = alertInfo.severity, let text = alertInfo.text else {
       return
     }
     
-    alertSymbol.image = STKInfoIcon.image(for: mostSevere.infoIconType, usage: .normal)
-    alertLabel.text = alerts.count == 1 ? mostSevere.text : Loc.Alerts(alerts.count) ?? ""
+    alertSymbol.image = STKInfoIcon.image(for: severity, usage: .normal)
+    alertLabel.text = alertInfo.count == 1 ? text : Loc.Alerts(alertInfo.count) ?? ""
     showButton.setTitle(Loc.Show, for: .normal)
     
     let disposeBag = objcDisposeBag.disposeBag    
     showButton.rx.tap
       .subscribe(onNext: { [unowned self] in
-        guard self.alertPresentationHandler != nil else { return }
-        self.alertPresentationHandler(alerts)
+        guard let handler = self.alertPresentationHandler else { return }
+        handler()
       })
       .disposed(by: disposeBag)
   }
   
   
-  public func configureAccessibleView(asEnabled isEnabled: Bool, isAccessible: Bool?) {
+  private func configureAccessibleView(asEnabled isEnabled: Bool, isAccessible: Bool?) {
     accessibleIcon.isHidden = !isEnabled
     accessibleSeparator.isHidden = !isEnabled
     
@@ -163,7 +178,7 @@ extension SGCountdownCell {
   }
   
   
-  @objc public func replaceFootnoteView(_ view: UIView) {
+  public func replaceFootnoteView(_ view: UIView) {
     // Make sure we start clean.
     for subview in footnoteView.subviews {
       subview.removeFromSuperview()
