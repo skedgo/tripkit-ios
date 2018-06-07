@@ -26,10 +26,6 @@ enum SGInfoProviderError {
 												inRegion:(nullable SVKRegion *)regionOrNil
 											completion:(SGServiceCompletionBlock)completion;
 
-+ (void)fillInStop:(StopLocation *)stop
-             named:(nullable NSString *)name
-        completion:(void (^)(NSError * __nullable error))completion;
-
 - (void)addContentToService:(Service *)service
                fromResponse:(NSDictionary *)responseDict;
 

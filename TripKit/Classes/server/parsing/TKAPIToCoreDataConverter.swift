@@ -65,25 +65,7 @@ extension TKAPIToCoreDataConverter {
     _ = newStop.update(from: model)
     return newStop
   }
-  
-  @objc(insertNewStopLocation:inTripKitContext:)
-  public static func insertNewStopLocation(from dict: [String: Any], into context: NSManagedObjectContext) -> StopLocation? {
-    let decoder = JSONDecoder()
-    guard let model = try? decoder.decode(API.Stop.self, withJSONObject: dict) else {
-      return nil
-    }
-    return insertNewStopLocation(from: model, into: context)
-  }
-  
-  @objc(updateStopLocation:fromDictionary:)
-  @discardableResult
-  public static func update(_ stop: StopLocation, from dict: [String: Any]) -> Bool {
-    let decoder = JSONDecoder()
-    guard let model = try? decoder.decode(API.Stop.self, withJSONObject: dict) else {
-      return false
-    }
-    return stop.update(from: model)
-  }
+
 }
 
 // MARK: - Services
