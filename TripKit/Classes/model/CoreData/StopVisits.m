@@ -155,8 +155,10 @@
 {
   switch ([self realTimeStatus]) {
     case StopVisitRealTime_NotApplicable:
-    case StopVisitRealTime_NotAvailable:
       return nil;
+      
+    case StopVisitRealTime_NotAvailable:
+      return NSLocalizedStringFromTableInBundle(@"No real-time available", @"TripKit", [TKTripKit bundle], @"Indicator to show when a service does not have real-time data (even though we usually get it for services like this.)");
 
     case StopVisitRealTime_OnTime:
       return NSLocalizedStringFromTableInBundle(@"On time", @"TripKit", [TKTripKit bundle], @"Indicator to show when a service is on time according to real-time data.");
