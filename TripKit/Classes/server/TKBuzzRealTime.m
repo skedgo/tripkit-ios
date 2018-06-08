@@ -72,6 +72,13 @@
                                      }];
     [objectsLookup setValue:entry forKey:service.code];
   }
+
+  if (context == nil) {
+    ZAssert(servicesParamsArray.count == 0, @"Should only get there if there's nothing to do");
+    success(entries);
+    return;
+  }
+  
   [TKBuzzRealTime fetchUpdatesForServiceParas:servicesParamsArray
                                     forRegion:region
                                       success:
@@ -114,6 +121,12 @@
     [objectsLookup setValue:visit forKey:service.code];
   }
   
+  if (context == nil) {
+    ZAssert(servicesParamsArray.count == 0, @"Should only get there if there's nothing to do");
+    success(embarkations);
+    return;
+  }
+  
   [TKBuzzRealTime fetchUpdatesForServiceParas:servicesParamsArray
                                     forRegion:region
                                       success:
@@ -150,6 +163,12 @@
                                      @"operator"      : operatorName
                                      }];
     [servicesLookupDict setValue:service forKey:service.code];
+  }
+  
+  if (context == nil) {
+    ZAssert(servicesParamsArray.count == 0, @"Should only get there if there's nothing to do");
+    success(services);
+    return;
   }
   
   [TKBuzzRealTime fetchUpdatesForServiceParas:servicesParamsArray
