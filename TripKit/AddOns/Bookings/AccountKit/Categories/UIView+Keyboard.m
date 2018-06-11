@@ -14,7 +14,7 @@
 
 - (void)dismissKeyboard
 {
-  UIView *firstResponder = [self findFirstResponder];
+  UIView *firstResponder = [self locateFirstResponder];
   
   if (firstResponder != nil && [firstResponder isKindOfClass:[UITextField class]]) {
     [firstResponder resignFirstResponder];

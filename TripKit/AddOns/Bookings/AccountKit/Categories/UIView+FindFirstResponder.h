@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (FindFirstResponder)
-- (UIView *)findFirstResponder;
+- (UIView *)locateFirstResponder;
 @end
