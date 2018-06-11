@@ -13,14 +13,14 @@
 /**
  Thanks to http://stackoverflow.com/questions/1823317/get-the-current-first-responder-without-using-a-private-api
  */
-- (UIView *)findFirstResponder
+- (UIView *)locateFirstResponder
 {
   if (self.isFirstResponder) {        
     return self;     
   }
   
   for (UIView *subView in self.subviews) {
-    UIView *firstResponder = [subView findFirstResponder];
+    UIView *firstResponder = [subView locateFirstResponder];
     
     if (firstResponder != nil) {
       return firstResponder;
