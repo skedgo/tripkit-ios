@@ -58,7 +58,7 @@ extension StopLocation: STKStopAnnotation {
   }
   
   public var pointClusterIdentifier: String? {
-    return stopModeInfo.identifier ?? "StopLocation"
+    return stopModeInfo?.identifier ?? "StopLocation"
   }
   
   public var pointDisplaysImage: Bool {
@@ -74,7 +74,7 @@ extension StopLocation: STKStopAnnotation {
   }
   
   public var pointImageIsTemplate: Bool {
-    return stopModeInfo.remoteImageIsTemplate
+    return stopModeInfo?.remoteImageIsTemplate ?? false
   }
 }
 
