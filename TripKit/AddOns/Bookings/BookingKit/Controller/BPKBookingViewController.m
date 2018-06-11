@@ -368,7 +368,7 @@
        
      } else {
        // No form and no error means we've reached the end
-       [strongSelf.delegate bookingViewController:self didComplete:YES withManager:self.manager];
+       [strongSelf.delegate bookingViewController:strongSelf didComplete:YES withManager:strongSelf.manager];
        
      }
      
