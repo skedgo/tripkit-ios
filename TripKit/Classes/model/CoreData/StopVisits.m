@@ -125,14 +125,16 @@
 
 - (StopVisitRealTime)realTimeStatus
 {
-  if (!self.service.isRealTimeCapable) {
-    return StopVisitRealTime_NotApplicable;
+  if (self.service.isCancelled) {
+    return StopVisitRealTimeCancelled;
+  } else if (!self.service.isRealTimeCapable) {
+    return StopVisitRealTimeNotApplicable;
   } else if (!self.service.isRealTime) {
-    return StopVisitRealTime_NotAvailable;
+    return StopVisitRealTimeNotAvailable;
   }
   
   if ([self.time isEqual:self.originalTime]) {
-    return StopVisitRealTime_OnTime;
+    return StopVisitRealTimeOnTime;
   } else {
     // do they also display differently?
     NSTimeInterval realTime = [self.time timeIntervalSince1970];
@@ -142,11 +144,11 @@
     timeTable -= (NSInteger)timeTable % 60;
     
     if (realTime - timeTable > 59) {
-      return StopVisitRealTime_Late;
+      return StopVisitRealTimeLate;
     } else if (timeTable - realTime > 59) {
-      return StopVisitRealTime_Early;
+      return StopVisitRealTimeEarly;
     } else {
-      return StopVisitRealTime_OnTime;
+      return StopVisitRealTimeOnTime;
     }
   }
 }
@@ -154,16 +156,19 @@
 - (NSString *)realTimeInformation:(BOOL)withOriginalTime
 {
   switch ([self realTimeStatus]) {
-    case StopVisitRealTime_NotApplicable:
+    case StopVisitRealTimeNotApplicable:
       return nil;
       
-    case StopVisitRealTime_NotAvailable:
+    case StopVisitRealTimeNotAvailable:
       return NSLocalizedStringFromTableInBundle(@"No real-time available", @"TripKit", [TKTripKit bundle], @"Indicator to show when a service does not have real-time data (even though we usually get it for services like this.)");
 
-    case StopVisitRealTime_OnTime:
+    case StopVisitRealTimeCancelled:
+      return Loc.Cancelled;
+      
+    case StopVisitRealTimeOnTime:
       return NSLocalizedStringFromTableInBundle(@"On time", @"TripKit", [TKTripKit bundle], @"Indicator to show when a service is on time according to real-time data.");
       
-    case StopVisitRealTime_Early: {
+    case StopVisitRealTimeEarly: {
       NSString *mins = [self minsForRealTimeInformation];
       if (withOriginalTime) {
         NSTimeZone *timeZone = self.stop.region.timeZone;
@@ -174,7 +179,7 @@
       }
     }
       
-    case StopVisitRealTime_Late: {
+    case StopVisitRealTimeLate: {
       NSString *mins = [self minsForRealTimeInformation];
       if (withOriginalTime) {
         NSTimeZone *timeZone = self.stop.region.timeZone;

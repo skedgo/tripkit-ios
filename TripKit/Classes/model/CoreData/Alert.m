@@ -34,7 +34,7 @@
   return [existingAlerts anyObject];
 }
 
-+ (NSArray *)fetchAlertsWithHashCodes:(NSArray *)hashCodes
++ (NSArray<Alert *> *)fetchAlertsWithHashCodes:(NSArray *)hashCodes
                      inTripKitContext:(NSManagedObjectContext *)tripKitContext
                  sortedByDistanceFrom:(CLLocationCoordinate2D)coordinate
 {
@@ -80,7 +80,7 @@
   return filtered;
 }
 
-+ (NSArray *)fetchAlertsForService:(Service *)service
++ (NSArray<Alert *> *)fetchAlertsForService:(Service *)service
 {
   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toDelete = NO AND hashCode in %@", service.alertHashCodes];
   NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"severity" ascending:NO];
@@ -89,7 +89,7 @@
                                                andSortDescriptors:@[sorter]];
 }
 
-+ (NSArray *)fetchAlertsForStopLocation:(StopLocation *)stopLocation
++ (NSArray<Alert *> *)fetchAlertsForStopLocation:(StopLocation *)stopLocation
 {
   if (stopLocation.alertHashCodes.count == 0) {
     return @[];

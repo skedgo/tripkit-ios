@@ -12,11 +12,12 @@
 #import "TKRealTimeUpdatable.h"
 
 typedef NS_ENUM(NSInteger, StopVisitRealTime) {
-  StopVisitRealTime_NotApplicable, // We don't have real-time for this kind of service
-  StopVisitRealTime_NotAvailable,  // Services like this can have real-time, but this doesn't
-  StopVisitRealTime_OnTime,
-  StopVisitRealTime_Early,
-  StopVisitRealTime_Late,
+  StopVisitRealTimeNotApplicable, // We don't have real-time for this kind of service
+  StopVisitRealTimeNotAvailable,  // Services like this can have real-time, but this doesn't
+  StopVisitRealTimeOnTime,
+  StopVisitRealTimeEarly,
+  StopVisitRealTimeLate,
+  StopVisitRealTimeCancelled
 };
 
 

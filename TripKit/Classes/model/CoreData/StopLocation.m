@@ -15,12 +15,6 @@
 #import "TripKit/TripKit-Swift.h"
 
 
-@interface StopLocation ()
-
-@property (nonatomic, copy) NSArray *alertsIncludingChildren;
-
-@end
-
 @implementation StopLocation
 
 @dynamic name;
@@ -42,7 +36,6 @@
 
 @synthesize lastTopVisit = _lastTopVisit;
 @synthesize lastEarliestDate = _lastEarliestDate;
-@synthesize alertsIncludingChildren = _alertsIncludingChildren;
 
 + (instancetype)fetchStopForStopCode:(NSString *)stopCode
                        inRegionNamed:(NSString *)regionName
@@ -194,15 +187,6 @@
 	}
 }
 
-- (void)resetAlertCache
-{
-  _alertsIncludingChildren = nil;
-  
-  for (StopLocation *stop in self.children) {
-    [stop resetAlertCache];
-  }
-}
-
 - (void)clearVisits
 {
 	for (StopVisits *visit in self.visits) {
@@ -214,22 +198,6 @@
 	for (StopLocation *stop in self.children) {
 		[stop clearVisits];
 	}
-}
-
-#pragma mark - Lazy accessors
-
-- (NSArray *)alertsIncludingChildren
-{
-  if (!_alertsIncludingChildren) {
-    NSMutableArray *alerts = [NSMutableArray array];
-    [alerts addObjectsFromArray:[Alert fetchAlertsForStopLocation:self]];
-    
-    for (StopLocation *child in self.children) {
-      [alerts arrayByAddingObjectsFromArray:child.alertsIncludingChildren];
-    }
-    _alertsIncludingChildren = alerts;
-  }
-  return _alertsIncludingChildren;
 }
 
 @end

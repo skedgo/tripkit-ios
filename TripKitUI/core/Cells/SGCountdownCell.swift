@@ -133,13 +133,20 @@ extension SGCountdownCell {
     alertLabel.isHidden = isEmpty
     alertSeparator.isHidden = isEmpty
     
-    guard let severity = alertInfo.severity, let text = alertInfo.text else {
-      return
+    if !isEmpty {
+      if let severity = alertInfo.severity {
+        alertSymbol.image = STKInfoIcon.image(for: severity, usage: .normal)
+      } else {
+        alertSymbol.isHidden = true
+      }
+      if let text = alertInfo.text, alertInfo.count == 1 {
+        alertLabel.text = text
+      } else {
+        alertLabel.text = Loc.Alerts(alertInfo.count)
+      }
+      showButton.setTitle(Loc.Show, for: .normal)
     }
     
-    alertSymbol.image = STKInfoIcon.image(for: severity, usage: .normal)
-    alertLabel.text = alertInfo.count == 1 ? text : Loc.Alerts(alertInfo.count) ?? ""
-    showButton.setTitle(Loc.Show, for: .normal)
   }
   
   
