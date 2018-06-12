@@ -62,39 +62,38 @@ public class TKAlertInfoView: UIView {
   
   /// Asks the alert info view to show only its title, i.e., hide the instruction
   /// portion of the view.
-  @objc public func showTitleOnly() {
-    guard let superview = self.superview, isShowingFullContent else { return }
-    let topPadding: CGFloat = 20
+  @objc public func showTitleOnly(maxY: CGFloat) {
+    guard superview != nil, isShowingFullContent else { return }
     let bottomPadding: CGFloat
     if #available(iOSApplicationExtension 11.0, *) {
       bottomPadding = safeAreaInsets.bottom
     } else {
       bottomPadding = 0
     }
-    frame.origin.y = superview.frame.height - topPadding - bottomPadding - instructionLabel.frame.minY
+    frame.origin.y = maxY - bottomPadding - instructionLabel.frame.minY
     isShowingFullContent = false
   }
   
   
   /// Ask the alert info view to show its entire content, including both title
   /// and instruction.
-  @objc public func showFullContent() {
-    guard let superview = self.superview, !isShowingFullContent else { return }
-    let topPadding: CGFloat = 20
+  @objc public func showFullContent(maxY: CGFloat) {
+    guard superview != nil, !isShowingFullContent else { return }
+
     let bottomPadding: CGFloat
     if #available(iOSApplicationExtension 11.0, *) {
       bottomPadding = safeAreaInsets.bottom
     } else {
       bottomPadding = 0
     }
-    frame.origin.y = superview.frame.height - topPadding - bottomPadding - instructionLabel.frame.maxY
+    frame.origin.y = maxY - bottomPadding - frame.height
     isShowingFullContent = true
   }
   
   
   /// Toggles the alert info view betwen showing title only or full content.
-  @objc public func toggle() {
-    isShowingFullContent ? showTitleOnly() : showFullContent()
+  @objc public func toggle(maxY: CGFloat) {
+    isShowingFullContent ? showTitleOnly(maxY: maxY) : showFullContent(maxY: maxY)
   }
   
   
