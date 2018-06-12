@@ -24,6 +24,7 @@ extension API {
       case wheelchairAccessible
       case children
       case modeInfo
+      case alertHashCodes
     }
 
 
@@ -42,6 +43,8 @@ extension API {
 
     let children: [Stop]?
     let modeInfo: ModeInfo
+    
+    let alertHashCodes: [Int]?
   }
   
 }

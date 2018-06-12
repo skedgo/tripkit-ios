@@ -121,9 +121,11 @@ extension TKDeparturesProvider {
     // Insert all the alerts, and make sure that the stops point
     // to them, too
     TKAPIToCoreDataConverter.updateOrAddAlerts(departures.alerts, in: context)
-    let alertHashCodes = departures.alerts?.map { $0.hashCode }
-    if let hashCodes = alertHashCodes {
-      stops.forEach { $0.alertHashCodes = hashCodes.map(NSNumber.init) }
+    departures.stops?.forEach {
+      guard let hashCodes = $0.alertHashCodes else {
+        return
+      }
+      lookup[$0.code]?.forEach { $0.alertHashCodes = hashCodes.map(NSNumber.init) }
     }
     
     return addedStops
