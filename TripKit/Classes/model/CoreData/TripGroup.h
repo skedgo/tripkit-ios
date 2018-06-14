@@ -51,9 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see DLSEntry
  */
-- (void)setPairIdentifiers:(NSSet *)pairIdentifiers forPublicSegment:(TKSegment *)segment;
+- (void)setPairIdentifiers:(NSSet<NSString *> *)pairIdentifiers forPublicSegment:(TKSegment *)segment;
 
-- (nullable NSSet *)pairIdentifiersForPublicSegment:(TKSegment *)segment;
+- (nullable NSSet<NSString *> *)pairIdentifiersForPublicSegment:(TKSegment *)segment;
 
 #pragma mark - User interaction
 
