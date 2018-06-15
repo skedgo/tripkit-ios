@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber * visibilityRaw;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, strong, null_resettable) TripRequest *request;
-@property (nonatomic, strong) NSSet *trips;
+@property (nonatomic, strong) NSSet<Trip *> *trips;
 @property (nonatomic, strong, nullable) Trip *visibleTrip;
 
 // Non-CoreData properties
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)adjustVisibleTrip;
 - (nullable NSDate *)earliestDeparture;
 
-- (NSSet *)usedModeIdentifiers;
+- (NSSet<NSString *> *)usedModeIdentifiers;
 
 - (NSString *)debugString;
 
