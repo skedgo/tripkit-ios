@@ -19,7 +19,7 @@
  Called before starting a classifiction of multiple trip groups.
  @param tripGroups The set of trip groups that will be classified.
  */
-- (void)prepareForClassifictionOfTripGroups:(nonnull NSSet *)tripGroups;
+- (void)prepareForClassifictionOfTripGroups:(nonnull NSSet<TripGroup *> *)tripGroups;
 
 /**
  @return The classifiction of that particular trip group.
