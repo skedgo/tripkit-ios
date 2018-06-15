@@ -166,8 +166,6 @@ open class SGKNamedCoordinate : NSObject, Codable, TKClusterable {
     } else {
       self.data = [:]
     }
-    
-    // TODO: Should we include placemark here? What happens if we don't?
   }
   
   public func encode(to encoder: Encoder) throws {

@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "StopVisits.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class StopLocation;
 
 /**
@@ -42,11 +44,11 @@
  
  @return Predicate to query CoreData with
  */
-+ (NSPredicate *)departuresPredicateForPairs:(NSSet *)pairs
++ (NSPredicate *)departuresPredicateForPairs:(NSSet<NSString *> *)pairs
                                     fromDate:(NSDate *)date
-                                      filter:(NSString *)filter;
+                                      filter:(nullable NSString *)filter;
 
-+ (NSArray<DLSEntry *> *)fetchDLSEntriesPairs:(NSSet *)pairs
++ (NSArray<DLSEntry *> *)fetchDLSEntriesPairs:(NSSet<NSString *> *)pairs
                                      fromDate:(NSDate *)date
                                         limit:(NSUInteger)limit
                              inTripKitContext:(NSManagedObjectContext *)context;
@@ -63,3 +65,5 @@
 + (void)clearAllEntriesInTripKitContext:(NSManagedObjectContext *)context;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -293,6 +293,7 @@
 		3A7E6139208A08BB0008AAE4 /* SGCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* SGCalendarManager+Autocompleting.swift */; };
 		3A7E613B208A09070008AAE4 /* SGCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* SGCalendarManager+Autocompleting.swift */; };
 		3A84F00E1F77021200B2F9A0 /* TripGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84F00D1F77021200B2F9A0 /* TripGroup.swift */; };
+		3A879AE720CFD93700107D58 /* Alert+TKAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */; };
 		3A8F61211F190CE80017ACDA /* SGLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F61201F190CE80017ACDA /* SGLocationManager.swift */; };
 		3A92205C205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */; };
 		3A92205D205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */; };
@@ -1237,6 +1238,7 @@
 		3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
 		3A7E6138208A08BB0008AAE4 /* SGCalendarManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SGCalendarManager+Autocompleting.swift"; sourceTree = "<group>"; };
 		3A84F00D1F77021200B2F9A0 /* TripGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripGroup.swift; sourceTree = "<group>"; };
+		3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+TKAlert.swift"; sourceTree = "<group>"; };
 		3A8F61201F190CE80017ACDA /* SGLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGLocationManager.swift; sourceTree = "<group>"; };
 		3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAppleGeocoder.swift; sourceTree = "<group>"; };
 		3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocoding.swift; sourceTree = "<group>"; };
@@ -1851,6 +1853,7 @@
 		3A6DF0DD202C8EB80084CB2C /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */,
 				3A6DF0DE202C8EB80084CB2C /* TKAlertViewController.swift */,
 				D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */,
 				D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */,
@@ -3715,6 +3718,7 @@
 				D39ECD89205A029500E09474 /* TKSectionedAlertViewModel.swift in Sources */,
 				3A6DF11F202C8EB80084CB2C /* SGStyleManager+SGCoreUI.m in Sources */,
 				3A6DF132202C8EB80084CB2C /* TripMapManager.m in Sources */,
+				3A879AE720CFD93700107D58 /* Alert+TKAlert.swift in Sources */,
 				3A6DF119202C8EB80084CB2C /* SGPolylineRenderer.m in Sources */,
 				3A6DF10B202C8EB80084CB2C /* SGSemaphoreView.swift in Sources */,
 				3A6DF107202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m in Sources */,

@@ -118,9 +118,16 @@ extension TKDeparturesProvider {
     }
     assert(addedCount > 0, "No embarkations in \(departures)")
     
+    // Insert all the alerts, and make sure that the stops point
+    // to them, too
     TKAPIToCoreDataConverter.updateOrAddAlerts(departures.alerts, in: context)
+    departures.stops?.forEach {
+      guard let hashCodes = $0.alertHashCodes else {
+        return
+      }
+      lookup[$0.code]?.forEach { $0.alertHashCodes = hashCodes.map(NSNumber.init) }
+    }
     
-    stops.forEach { $0.resetAlertCache() }
     return addedStops
   }
 }

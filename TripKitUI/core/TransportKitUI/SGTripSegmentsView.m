@@ -113,7 +113,9 @@
 	
   CGFloat widthPerSegment = (self.frame.size.width - nextX) / segmentCount;
 	
-  self.centerSegments = (widthPerSegment < 34); // looks weird otherwise
+  if (self.centerSegments && widthPerSegment > 34) {
+    self.centerSegments = false; // looks weird otherwise
+  }
   
   for (id<STKTripSegmentDisplayable> segment in segments) {
     

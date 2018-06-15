@@ -9,14 +9,11 @@
 import Foundation
 import CoreData
 
-
-
-// In Swift-land this would be a struct
 public class TKDLSTable: NSObject {
   
   @objc public let startStopCode: String
   @objc public let endStopCode: String
-  @objc public let previousPairs: Set<AnyHashable>?
+  @objc public var pairIdentifiers: Set<String>?
   @objc public let startRegion: SVKRegion
   @objc public let endRegion: SVKRegion
   @objc public let tripKitContext: NSManagedObjectContext
@@ -33,10 +30,15 @@ public class TKDLSTable: NSObject {
     
     startStopCode = start
     endStopCode = end
-    previousPairs = segment.trip?.tripGroup.pairIdentifiers(forPublicSegment: segment)
+    pairIdentifiers = segment.trip?.tripGroup.pairIdentifiers(forPublicSegment: segment)
     startRegion = segment.startRegion() ?? SVKInternationalRegion.shared
     endRegion = segment.endRegion()     ?? SVKInternationalRegion.shared
     tripKitContext = moc
+  }
+  
+  public func addPairIdentifiers(_ pairs: Set<String>) {
+    let set = pairIdentifiers ?? Set()
+    pairIdentifiers = set.union(pairs)
   }
   
 }

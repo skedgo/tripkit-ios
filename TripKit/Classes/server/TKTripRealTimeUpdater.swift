@@ -64,7 +64,7 @@ public class TKTripRealTimeUpdater {
     realTime.update(
       trip,
       success: { [weak self] updated, didUpdate in
-        guard didUpdate, let updated = updated, updated == self?.trip else { return }
+        guard didUpdate, updated == self?.trip else { return }
         self?.updated.onNext(updated)
       },
       failure: { error in

@@ -43,13 +43,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode
                                inTripKitContext:(NSManagedObjectContext *)tripKitContext;
 
-+ (NSArray *)fetchAlertsWithHashCodes:(NSArray *)hashCodes
-                     inTripKitContext:(NSManagedObjectContext *)tripKitContext
-                 sortedByDistanceFrom:(CLLocationCoordinate2D)coordinate;
++ (NSArray<Alert *> *)fetchAlertsWithHashCodes:(NSArray *)hashCodes
+                              inTripKitContext:(NSManagedObjectContext *)tripKitContext
+                          sortedByDistanceFrom:(CLLocationCoordinate2D)coordinate;
 
-+ (NSArray *)fetchAlertsForService:(Service *)service;
++ (NSArray<Alert *> *)fetchAlertsForService:(Service *)service;
 
-+ (NSArray *)fetchAlertsForStopLocation:(StopLocation *)stopLocation;
++ (NSArray<Alert *> *)fetchAlertsForStopLocation:(StopLocation *)stopLocation;
 
 - (void)remove;
 

@@ -126,6 +126,10 @@ public class Loc : NSObject {
     return NSLocalizedString("all-day", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Indicator that an event is all-day, or that something is open all-day")
   }
   
+  @objc public static var Cancelled: String {
+    return NSLocalizedString("Cancelled", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Label for when a service is cancelled.")
+  }
+  
 
   // MARK: - Reminders
   

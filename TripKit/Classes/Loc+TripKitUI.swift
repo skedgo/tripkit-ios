@@ -32,10 +32,6 @@ extension Loc {
   
   // MARK: -
   
-  @objc public static var Cancelled: String {
-    return NSLocalizedString("Cancelled", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Label for when a service is cancelled.")
-  }
-  
   @objc public static var Now: String {
     return NSLocalizedString("Now", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Countdown cell 'now' indicator")
   }

@@ -9,28 +9,31 @@
 #import <Foundation/Foundation.h>
 
 @class SVKRegion, Trip;
+@class DLSEntry, Service, StopVisits;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface TKBuzzRealTime : NSObject
 
-- (void)cancelRequests;
-
 - (void)updateTrip:(Trip *)trip
 					 success:(void (^)(Trip *trip, BOOL tripUpdated))success
-					 failure:(void (^)(NSError *error))failure;
+					 failure:(void (^)(NSError * _Nullable error))failure;
 
-- (void)updateDLSEntries:(NSSet *)services
++ (void)updateDLSEntries:(NSSet<DLSEntry *> *)entries
                 inRegion:(SVKRegion *)region
-                 success:(void (^)(NSSet *entries))success
-                 failure:(void (^)(NSError *error))failure;
+                 success:(void (^)(NSSet<DLSEntry *> *entries))success
+                 failure:(void (^)(NSError * _Nullable error))failure;
 
-- (void)updateEmbarkations:(NSSet *)services
++ (void)updateEmbarkations:(NSSet<StopVisits *> *)embarkations
                   inRegion:(SVKRegion *)region
-                   success:(void (^)(NSSet *embarkations))success
-                   failure:(void (^)(NSError *error))failure;
+                   success:(void (^)(NSSet<StopVisits *> *embarkations))success
+                   failure:(void (^)(NSError * _Nullable error))failure;
 
-- (void)updateServices:(NSSet *)services
++ (void)updateServices:(NSSet<Service *> *)services
               inRegion:(SVKRegion *)region
-               success:(void (^)(NSSet *services))success
-               failure:(void (^)(NSError *error))failure;
+               success:(void (^)(NSSet<Service *> *services))success
+               failure:(void (^)(NSError * _Nullable error))failure;
 
 @end
+
+NS_ASSUME_NONNULL_END

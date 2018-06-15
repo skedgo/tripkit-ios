@@ -19,13 +19,6 @@
 
 @implementation TKBuzzRealTime
 
-- (void)cancelRequests
-{
-  // TODO: implement
-//	SGServer *server = [SGServer sharedInstance];
-//	[server.client cancelAllHTTPOperationsWithMethod:@"POST" path:@"latest.json"];
-}
-
 - (void)updateTrip:(Trip *)trip
            success:(void (^)(Trip *trip, BOOL tripUpdated))success
            failure:(void (^)(NSError *error))failure {
@@ -50,9 +43,9 @@
     }];
 }
 
-- (void)updateDLSEntries:(NSSet *)entries
++ (void)updateDLSEntries:(NSSet<DLSEntry *> *)entries
                 inRegion:(SVKRegion *)region
-                 success:(void (^)(NSSet *entries))success
+                 success:(void (^)(NSSet<DLSEntry *> *entries))success
                  failure:(void (^)(NSError *error))failure
 {
   NSMutableArray *servicesParamsArray     = [NSMutableArray arrayWithCapacity:entries.count];
@@ -79,25 +72,29 @@
                                      }];
     [objectsLookup setValue:entry forKey:service.code];
   }
-  __weak typeof(self) weakSelf = self;
-  [self fetchUpdatesForServiceParas:servicesParamsArray
-                          forRegion:region
-                            success:
+
+  if (context == nil) {
+    ZAssert(servicesParamsArray.count == 0, @"Should only get there if there's nothing to do");
+    success(entries);
+    return;
+  }
+  
+  [TKBuzzRealTime fetchUpdatesForServiceParas:servicesParamsArray
+                                    forRegion:region
+                                      success:
    ^(id responseObject) {
      [context performBlock:^{
-       typeof(weakSelf) strongSelf = weakSelf;
-       if (strongSelf) {
-         [strongSelf updateObjects:objectsLookup
-                withResponseObject:responseObject];
-         success(entries);
-       }
+       [TKBuzzRealTime updateObjects:objectsLookup
+                  withResponseObject:responseObject];
+       success(entries);
      }];
    }
-                            failure:failure];}
+                                      failure:failure];
+}
 
-- (void)updateEmbarkations:(NSSet *)embarkations
++ (void)updateEmbarkations:(NSSet<StopVisits *> *)embarkations
                   inRegion:(SVKRegion *)region
-                   success:(void (^)(NSSet *embarkations))success
+                   success:(void (^)(NSSet<StopVisits *> *embarkations))success
                    failure:(void (^)(NSError *error))failure
 {
   NSMutableArray *servicesParamsArray     = [NSMutableArray arrayWithCapacity:embarkations.count];
@@ -124,26 +121,28 @@
     [objectsLookup setValue:visit forKey:service.code];
   }
   
-  __weak typeof(self) weakSelf = self;
-  [self fetchUpdatesForServiceParas:servicesParamsArray
-                          forRegion:region
-                            success:
+  if (context == nil) {
+    ZAssert(servicesParamsArray.count == 0, @"Should only get there if there's nothing to do");
+    success(embarkations);
+    return;
+  }
+  
+  [TKBuzzRealTime fetchUpdatesForServiceParas:servicesParamsArray
+                                    forRegion:region
+                                      success:
    ^(id responseObject) {
      [context performBlock:^{
-       typeof(weakSelf) strongSelf = weakSelf;
-       if (strongSelf) {
-         [strongSelf updateObjects:objectsLookup
-                withResponseObject:responseObject];
-         success(embarkations);
-       }
+       [TKBuzzRealTime updateObjects:objectsLookup
+                  withResponseObject:responseObject];
+       success(embarkations);
      }];
    }
-                            failure:failure];
+                                      failure:failure];
 }
 
-- (void)updateServices:(NSSet *)services
++ (void)updateServices:(NSSet<Service *> *)services
               inRegion:(SVKRegion *)region
-               success:(void (^)(NSSet *services))success
+               success:(void (^)(NSSet<Service *> *services))success
                failure:(void (^)(NSError *error))failure
 {
   NSMutableArray *servicesParamsArray     = [NSMutableArray arrayWithCapacity:services.count];
@@ -166,24 +165,26 @@
     [servicesLookupDict setValue:service forKey:service.code];
   }
   
-  __weak typeof(self) weakSelf = self;
-  [self fetchUpdatesForServiceParas:servicesParamsArray
-                          forRegion:region
-                            success:
+  if (context == nil) {
+    ZAssert(servicesParamsArray.count == 0, @"Should only get there if there's nothing to do");
+    success(services);
+    return;
+  }
+  
+  [TKBuzzRealTime fetchUpdatesForServiceParas:servicesParamsArray
+                                    forRegion:region
+                                      success:
    ^(id responseObject) {
      [context performBlock:^{
-       typeof(weakSelf) strongSelf = weakSelf;
-       if (strongSelf) {
-         [strongSelf updateObjects:servicesLookupDict
-                withResponseObject:responseObject];
-         success(services);
-       }
+       [TKBuzzRealTime updateObjects:servicesLookupDict
+              withResponseObject:responseObject];
+       success(services);
      }];
    }
-                            failure:failure];
+                                      failure:failure];
 }
 
-- (void)fetchUpdatesForServiceParas:(NSArray *)serviceParas
++ (void)fetchUpdatesForServiceParas:(NSArray *)serviceParas
                           forRegion:(SVKRegion *)region
                             success:(void (^)(id __nullable responseObject))success
                             failure:(void (^)(NSError * __nullable error))failure
@@ -232,7 +233,7 @@
 
 #pragma mark - Private helpers
 
-- (void)updateObjects:(NSDictionary *)serviceIDToObjectDict
++ (void)updateObjects:(NSDictionary *)serviceIDToObjectDict
    withResponseObject:(id)responseObject
 {
 	ZAssert(serviceIDToObjectDict, @"Method requires map");
