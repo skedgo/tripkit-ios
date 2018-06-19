@@ -8,9 +8,7 @@
 
 #import "DLSEntry.h"
 
-#import <TripKit/TKTripKit.h>
-
-#import "TKRealTimeUpdatableHelper.h"
+#import <TripKit/TripKit-Swift.h>
 
 @implementation DLSEntry
 

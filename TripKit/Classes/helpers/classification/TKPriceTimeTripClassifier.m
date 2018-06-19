@@ -8,7 +8,7 @@
 
 #import "TKPriceTimeTripClassifier.h"
 
-#import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 @interface TKPriceTimeTripClassifier ()
 

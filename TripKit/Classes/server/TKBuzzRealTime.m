@@ -9,7 +9,6 @@
 #import "TKBuzzRealTime.h"
 
 #import <TripKit/TripKit-Swift.h>
-#import <TripKit/TKTripKit.h>
 
 @interface TKBuzzRealTime ()
 

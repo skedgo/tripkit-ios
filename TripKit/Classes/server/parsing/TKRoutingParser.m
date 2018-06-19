@@ -8,7 +8,6 @@
 
 #import "TKRoutingParser.h"
 
-#import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
 
 @interface TKRoutingParser ()
@@ -323,12 +322,8 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           // public-transport
           
           // create a service object if necessary
-          service = [Service fetchExistingServiceWithCode:serviceCode
+          service = [Service fetchOrInsertServiceWithCode:serviceCode
                                          inTripKitContext:self.context];
-          if (nil == service) {
-            service = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Service class]) inManagedObjectContext:self.context];;
-            service.code = serviceCode;
-          }
           
           // always update these as those might be new or updated, as long as they didn't get deleted
           SGKColor *newColor = [SVKParserHelper colorForDictionary:refDict[@"serviceColor"]];

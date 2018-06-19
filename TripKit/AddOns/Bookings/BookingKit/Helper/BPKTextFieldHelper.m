@@ -86,7 +86,6 @@
 {
   BPKUser *user = [BPKUser sharedUser];
   [user updateInfoFromItem:item];
-  DLog(@"user: %@", user);
 }
 
 - (BPKTextFieldCell *)textFieldCellAtIndexPath:(NSIndexPath *)indexPath

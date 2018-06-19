@@ -301,8 +301,6 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-  DLog(@"did show called");
-  
   // restore to the default behavior.
   self.textFieldHelper.disableMoveToNextOnReturn = NO;
   
@@ -316,8 +314,6 @@
 
 - (void)keyboardDidHide:(NSNotification *)notification
 {
-  DLog(@"did hide called");
-  
 #pragma unused (notification)
   if (self.textFieldHelper.willMoveToNext) {
     return;
@@ -341,7 +337,6 @@
                                completion:
    ^(NSInteger status, NSDictionary<NSString *, id> *headers, NSDictionary *rawForm, NSData *data, NSError *error) {
 #pragma unused(status, headers, data)
-     DLog(@"%@", rawForm);
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
      
@@ -518,7 +513,6 @@
     
   } else {
     NSDictionary *input = [BPKFormBuilder buildFormFromSections:self.sections];
-    DLog(@"params = %@", input);
     if (! input) {
       [self processInvalidItemsInSections:self.sections];
       
@@ -654,7 +648,6 @@
 - (void)processInvalidItemsInSections:(NSArray *)sections
 {
   NSArray *indexPaths = [BPKFormBuilder indexPathsForInvalidItemsInSections:sections];
-  DLog(@"%@", indexPaths);
   
   BOOL missingValue = NO;
   BOOL missingTC = NO;

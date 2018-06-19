@@ -8,7 +8,6 @@
 
 #import "Trip.h"
 
-#import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
 
 #import "TKRealTimeUpdatableHelper.h"

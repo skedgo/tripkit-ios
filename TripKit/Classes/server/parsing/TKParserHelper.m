@@ -8,9 +8,6 @@
 
 #import "TKParserHelper.h"
 
-
-
-#import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
 
 @implementation TKParserHelper
@@ -94,13 +91,7 @@
       if ([serviceCode isEqualToString:requestedService.code]) {
         currentService = requestedService;
       } else {
-        // see if we have an object for this already
-        currentService = [Service fetchExistingServiceWithCode:serviceCode inTripKitContext:context];
-        if (! currentService) {
-          currentService = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Service class])
-                                                         inManagedObjectContext:context];
-          currentService.code = serviceCode;
-        }
+        currentService = [Service fetchOrInsertServiceWithCode:serviceCode inTripKitContext:context];
         currentService.color = [SVKParserHelper colorForDictionary:[shapeDict objectForKey:@"serviceColor"]];
         currentService.frequency  = shapeDict[@"frequency"];
         currentService.lineName   = shapeDict[@"serviceName"];

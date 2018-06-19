@@ -30,7 +30,6 @@ typedef NS_ENUM(NSInteger, PaymentTypes) {
   
   if (self) {
     _json = json;
-    DLog(@"initialized with JSON; %@", json);
   }
   
   return self;

@@ -8,9 +8,9 @@ supported cities.
 */
 
 func fetchSortedRegions() -> [Region] {
-  func getJSON(url: NSURL) -> [String: AnyObject]? {
-    guard let data = NSData(contentsOfURL: url),
-      let JSON = try? NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers),
+  func getJSON(_ url: URL) -> [String: AnyObject]? {
+    guard let data = Data(contentsOf: url),
+      let JSON = try? JSONSerialization.jsonObject(with, options: .MutableContainers),
       let dictionary = JSON as? [String: AnyObject] else {
         return nil
     }
@@ -22,7 +22,7 @@ func fetchSortedRegions() -> [Region] {
   
   var allRegions: Set<Region> = []
   for server in servers {
-    guard let URL = NSURL(string: "https://\(server).buzzhives.com/satapp/regionInfo.json"),
+    guard let URL = URL(string: "https://\(server).buzzhives.com/satapp/regionInfo.json"),
       let json = getJSON(URL),
       let regionsJSON = json["regions"] as? [[String: AnyObject]] else {
         print("\(server) has issues.")
@@ -34,6 +34,7 @@ func fetchSortedRegions() -> [Region] {
     
     break
   }
+  
   
   return Array(allRegions).sort()
 }
@@ -52,7 +53,7 @@ let filtered = sorted.filter { region in
   
   var good = false
   for needle in filter {
-    if let _ = region.code.rangeOfString(needle) {
+    if let _ = region.code.range(of: needle) {
       good = true
       break
     }
@@ -81,7 +82,7 @@ for region in filtered {
   }
 
   if includeOperators {
-    let ops = region.operatorsString(operatorCount)
+    let ops = region.operatorsString(maxOperatorCount: operatorCount)
     if ops.utf16.count > 0 {
       string += ": " + ops
     }
