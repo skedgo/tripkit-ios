@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TKRegionOverlayHelper : NSObject
 
-+ (TKRegionOverlayHelper *)sharedInstance;
++ (TKRegionOverlayHelper *)sharedInstance NS_REFINED_FOR_SWIFT;
 
 - (void)clearCache;
 

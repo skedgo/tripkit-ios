@@ -1,5 +1,5 @@
 //
-//  TripMapManager.swift
+//  TKUITripMapManager.swift
 //  TripGo
 //
 //  Created by Adrian Schoenig on 19/4/17.
@@ -42,13 +42,13 @@ public class TKUITripMapManager: TKUIMapManager {
     self.preferredZoomLevel = .road
   }
   
-  override public func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
+  override public func takeCharge(of mapView: UIView, edgePadding: UIEdgeInsets, animated: Bool) {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
-
+    
     add(trip)
   }
   
-  override public func cleanUp(_ mapView: MKMapView, animated: Bool) {
+  override public func cleanUp(_ mapView: UIView, animated: Bool) {
     remove(trip)
     
     super.cleanUp(mapView, animated: animated)
@@ -65,7 +65,7 @@ public class TKUITripMapManager: TKUIMapManager {
 
 // MARK: Adding and removing trips from map
 
-fileprivate extension TKUITripMapManager {
+private extension TKUITripMapManager {
   
   func add(_ trip: Trip) {
     
@@ -107,4 +107,3 @@ fileprivate extension TKUITripMapManager {
   }
   
 }
-

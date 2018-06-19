@@ -24,7 +24,7 @@
 
 @interface SGTripSummaryCell ()
 
-@property (nonatomic, strong) TKTripCellFormatter *formatter;
+@property (nonatomic, strong) TKUITripCellFormatter *formatter;
 
 @property (nonatomic, strong) NSTimeZone *departureTimeZone;
 @property (nonatomic, strong) NSTimeZone *arrivalTimeZone;
@@ -89,7 +89,7 @@
 {
   [super prepareForReuse];
   
-  self.formatter = [[TKTripCellFormatter alloc] init];
+  self.formatter = [[TKUITripCellFormatter alloc] init];
   self.formatter.primaryFont = _mainLabel.font;
   self.formatter.primaryColor = self.darkTextColor;
   self.formatter.secondaryFont = _mainLabel.font;

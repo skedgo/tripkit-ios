@@ -38,10 +38,12 @@ public class TKResultsFetcher {
   /// - note: If the request uses the current location, the location will also get
   ///     locked in.
   ///
-  /// - Parameter request: The request for which to fetch trips
-  /// - Returns: Stream of fetching the results, multiple call backs as different 
+  /// - Parameters:
+  ///   - request: The request for which to fetch trips
+  ///   - classifier: Optional classifier, see `TKTripClassifier` for more
+  /// - Returns: Stream of fetching the results, multiple call backs as different
   ///     modes are fetched.
-  public static func fetchTrips(for request: TripRequest) -> Observable<Progress> {
+  public static func fetchTrips(for request: TripRequest, classifier: TKTripClassifier? = nil) -> Observable<Progress> {
     
     // first we'll lock in this trips time if necessary
     if request.type == .leaveASAP {
@@ -57,7 +59,7 @@ public class TKResultsFetcher {
         .map { location in
           request.override(currentLocation: location)
           return request
-        }
+      }
       
     } else {
       prepared = Observable.just(request)
@@ -66,7 +68,7 @@ public class TKResultsFetcher {
     // 2. Then we can kick off the requests
     return prepared
       .flatMap { request -> Observable<Progress> in
-        return TKBuzzRouter.rx.multiFetchRequest(for: request)
+        return TKBuzzRouter.rx.multiFetchRequest(for: request, classifier: classifier)
       }
       .startWith(.locating)
   }
@@ -101,8 +103,6 @@ fileprivate extension TripRequest {
     }
   }
   
-
-  
 }
 
 
@@ -114,8 +114,8 @@ fileprivate class CountHolder {
 
 fileprivate extension Reactive where Base : TKBuzzRouter {
   
-  static func multiFetchRequest(for request: TripRequest) -> Observable<TKResultsFetcher.Progress> {
-
+  static func multiFetchRequest(for request: TripRequest, classifier: TKTripClassifier? = nil) -> Observable<TKResultsFetcher.Progress> {
+    
     var router: TKBuzzRouter! = TKBuzzRouter()
     
     return Observable.create { observer in
@@ -123,19 +123,19 @@ fileprivate extension Reactive where Base : TKBuzzRouter {
       var holder: CountHolder! = CountHolder()
       let count = router.multiFetchTrips(
         for: request,
-        classifier: nil,
+        classifier: classifier,
         progress: { progress in
           observer.onNext(.partial(Int(progress), holder.count))
           
-        }, completion: { _, error in
-          if let error = error {
-            observer.onError(error)
-          } else {
-            observer.onNext(.finished)
-            observer.onCompleted()
-          }
-          
+      }, completion: { _, error in
+        if let error = error {
+          observer.onError(error)
+        } else {
+          observer.onNext(.finished)
+          observer.onCompleted()
         }
+        
+      }
       )
       
       holder.count = Int(count)

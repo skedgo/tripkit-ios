@@ -24,24 +24,35 @@ extension TGPageCard {
   ///
   /// - Parameter trip: Trip to focus on first
   public convenience init(overviewsHighlighting trip: Trip) {
+    // make sure this is the visible trip in our group
+    trip.setAsPreferredTrip()
+    
     let trips = trip.request.sortedVisibleTrips()
     guard let index = trips.index(of: trip) else { preconditionFailure() }
     
     let cards = trips.enumerated().map { TKUITripOverviewCard(trip: $1, index: $0) }
     
-    // TODO: Give some meaningful title?
-    self.init(title: trip.request.timeSorterTitle(), cards: cards, initialPage: index)
+    self.init(cards: cards, initialPage: index)
     
-    // TODO: Localize
-    headerRightAction = (title: "Start", onPress: { index in
-      cards[index].enterModeByMode()
-    })
+    if let tripHandler = TKUITripOverviewCard.startTripHandler {
+      // TODO: Localize
+      headerRightAction = (title: "Start", onPress: { index in
+        let card = cards[index]
+        let trip = card.cardModel.trip
+        tripHandler(card, trip)
+      })
+    }
   }
   
 }
 
 
 public class TKUITripOverviewCard: TGTableCard {
+  
+  public static var presentSegmentHandler: ((TKUITripOverviewCard, TKSegment) -> Void)?
+
+  public static var startTripHandler: ((TKUITripOverviewCard, Trip) -> Void)?
+
   
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUITripOverviewCardModel.Section>(
     configureCell: { ds, tv, ip, item in
@@ -53,9 +64,8 @@ public class TKUITripOverviewCard: TGTableCard {
     }
   )
   
-  private let cardModel: TKUITripOverviewCardModel
+  fileprivate let cardModel: TKUITripOverviewCardModel
   private let disposeBag = DisposeBag()
-  
   
   public init(trip: Trip, index: Int? = nil) {
     cardModel = TKUITripOverviewCardModel(trip: trip)
@@ -75,44 +85,31 @@ public class TKUITripOverviewCard: TGTableCard {
   
   
   override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    guard let cardView = cardView as? TGTableCardView else {
+    guard let tableView = (cardView as? TGScrollCardView)?.tableView else {
       preconditionFailure()
     }
     
     // Overriding the data source with our Rx one
     // Note: explicitly reset to say we know that we'll override this with Rx
-    cardView.tableView.dataSource = nil
+    tableView.dataSource = nil
     cardModel.sections
-      .bind(to: cardView.tableView.rx.items(dataSource: dataSource))
+      .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
-    // Handling selections
-    cardView.tableView.rx.itemSelected
-      .subscribe(onNext: { [unowned self] in
-        self.enterModeByMode(for: self.dataSource[$0])
-      })
-      .disposed(by: disposeBag)
+    // Handling segment selections
+    if let segmentHandler = TKUITripOverviewCard.presentSegmentHandler {
+      tableView.rx.itemSelected
+        .map { (self, self.cardModel.segment(for: self.dataSource[$0])) }
+        .subscribe(onNext: segmentHandler)
+        .disposed(by: disposeBag)
+    }
   }
   
-
+  
   override public func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
-    
-    // FIXME: Move to a delegate
-    // SGScreenshotFeedback.sharedInstance.object = cardModel.trip
-  }
-  
-  
-  func enterModeByMode(for item: TKUITripOverviewCardModel.SegmentOverview) {
-    guard let mapManager = self.mapManager as? TKUITripMapManager else { preconditionFailure() }
-    
-    let segment = cardModel.segment(for: item)
-    controller?.push(TGPageCard(forModeByModeHighlighting: segment, mapManager: mapManager))
-  }
-
-  func enterModeByMode() {
-    guard let mapManager = self.mapManager as? TKUITripMapManager else { preconditionFailure() }
-    controller?.push(TGPageCard(forModeByModeWith: mapManager))
+   
+    TKUICustomization.shared.feedbackActiveItemHandler?(cardModel.trip)
   }
   
 }

@@ -1,5 +1,5 @@
 //
-//  TKTripCell+Formatter.swift
+//  TKUITripCell+Formatter.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 15.06.18.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension TKTripCell {
+extension TKUITripCell {
   
-  @objc(TKTripCellFormatter)
+  @objc(TKUITripCellFormatter)
   public class Formatter: NSObject {
     @objc public var primaryFont: UIFont?
     @objc public var primaryColor: UIColor?

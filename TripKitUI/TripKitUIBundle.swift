@@ -20,6 +20,14 @@ extension UIImage {
   static let iconCrossMini = named("icon-cross-mini")
   static let iconWheelchairMini = named("icon-wheelchair-mini")
 
+  // Priorities
+  
+  public static let iconMoney = named("icon-money")
+  public static let iconTime = named("icon-time")
+  public static let iconTree = named("icon-tree")
+  public static let iconRelax = named("icon-relax")
+  public static let iconRun = named("icon-run")
+
 }
 
 extension UIImage {

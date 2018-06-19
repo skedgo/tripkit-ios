@@ -11,6 +11,7 @@ import MapKit
 
 import RxSwift
 import RxCocoa
+
 import TGCardViewController
 
 #if TK_NO_MODULE
@@ -20,53 +21,57 @@ import TGCardViewController
 
 class TKUIResultsMapManager: TKUIMapManager {
   
-  fileprivate weak var cardModel: TKUIResultsCardModel!
+  weak var viewModel: TKUIResultsViewModel?
   
-  init(model: TKUIResultsCardModel) {
-    self.cardModel = model
-    
+  override init() {
     super.init()
     
+    self.preferredZoomLevel = .road
     self.showOverlayPolygon = true
   }
   
-  fileprivate var disposeBag = DisposeBag()
+  private var dropPinRecognizer = UILongPressGestureRecognizer()
+  private var droppedPinPublisher = PublishSubject<CLLocationCoordinate2D>()
+  var droppedPin: Driver<CLLocationCoordinate2D> {
+    return droppedPinPublisher.asDriver(onErrorDriveWith: Driver.empty())
+  }
   
-  fileprivate var routeAnnotations = [MKAnnotation]() {
+  private var disposeBag = DisposeBag()
+  
+  private var routeAnnotations = [MKAnnotation]() {
     didSet {
       mapView?.removeAnnotations(oldValue)
       mapView?.addAnnotations(routeAnnotations)
     }
   }
   
-  fileprivate var dropPinRecognizer = UILongPressGestureRecognizer()
   
-  override func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
+  override func takeCharge(of mapView: UIView, edgePadding: UIEdgeInsets, animated: Bool) {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
     
+    guard let mapView = mapView as? MKMapView else { preconditionFailure() }
+    guard let viewModel = viewModel else { assertionFailure(); return }
+    
     // Preparing for route pins
-    cardModel.rx_routeBuilder
-      .subscribe(onNext: { [weak self] info in
-        self?.routeAnnotations = info.annotations
-      })
+    viewModel.mapAnnotations
+      .drive(onNext: { [weak self] in self?.routeAnnotations = $0 })
       .disposed(by: disposeBag)
     
     // Long press to drop pin (typically to set origin)
     mapView.addGestureRecognizer(dropPinRecognizer)
-    dropPinRecognizer.rx
-      .event
-      .subscribe(onNext: { [unowned mapView, weak cardModel] recognizer in
-        guard recognizer.state == .began else { return }
-        let point = recognizer.location(in: mapView)
-        let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
-        cardModel?.dropPin(at: coordinate)
-      })
+    dropPinRecognizer.rx.event
+      .filter { $0.state == .began }
+      .map { [unowned mapView] in
+        let point = $0.location(in: mapView)
+        return mapView.convert(point, toCoordinateFrom: mapView)
+      }
+      .bind(to: droppedPinPublisher)
       .disposed(by: disposeBag)
-    
   }
   
   
-  override func cleanUp(_ mapView: MKMapView, animated: Bool) {
+  override func cleanUp(_ mapView: UIView, animated: Bool) {
+    guard let mapView = mapView as? MKMapView else { preconditionFailure() }
     disposeBag = DisposeBag()
     
     mapView.removeAnnotations(routeAnnotations)
@@ -80,35 +85,16 @@ class TKUIResultsMapManager: TKUIMapManager {
   
 }
 
-// MARK: - Routing
-
-fileprivate extension TKUIResultsCardModel.RouteBuilder {
-  
-  var annotations: [MKAnnotation] {
-    var annotations = [MKAnnotation]()
-    if let origin = origin {
-      annotations.append(origin)
-    }
-    if let destination = destination {
-      annotations.append(destination)
-    }
-    return annotations
-  }
-  
-}
-
-fileprivate extension TKUIResultsMapManager {
-  
-  
-  
-}
-
-
 // MARK: - MKMapViewDelegate
 
 extension TKUIResultsMapManager {
   
   override func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    guard let viewModel = viewModel else {
+      assertionFailure()
+      return nil
+    }
+    
     if annotation === mapView.userLocation {
       return nil // Use the default MKUserLocation annotation
     }
@@ -116,9 +102,9 @@ extension TKUIResultsMapManager {
     // for whatever reason reuse breaks callouts when remove and re-adding views to change their colours, so we just always create a new one.
     let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
     
-    if annotation === cardModel.routeBuilder.origin {
+    if viewModel.annotationIsOrigin(annotation) {
       view.pinTintColor = .green
-    } else if annotation === cardModel.routeBuilder.destination {
+    } else if viewModel.annotationIsDestination(annotation) {
       view.pinTintColor = .red
     } else {
       view.pinTintColor = .purple
@@ -126,7 +112,7 @@ extension TKUIResultsMapManager {
     
     view.animatesDrop = true
     view.isDraggable = true
-
+    
     view.annotation = annotation
     view.alpha = 1
     view.canShowCallout = true
@@ -134,5 +120,4 @@ extension TKUIResultsMapManager {
     return view
   }
   
-  }
-
+}

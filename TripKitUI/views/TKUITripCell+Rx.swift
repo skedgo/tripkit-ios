@@ -1,5 +1,5 @@
 //
-//  TKTripCell+Rx.swift
+//  TKUITripCell+Rx.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 15.06.18.
@@ -11,8 +11,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-extension Reactive where Base: TKTripCell {
-  public var model: Binder<TKTripCell.Model> {
+extension Reactive where Base: TKUITripCell {
+  public var model: Binder<TKUITripCell.Model> {
     return Binder(self.base) { cell, model in
       cell.configure(model)
     }

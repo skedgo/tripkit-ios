@@ -11,6 +11,7 @@ import Foundation
 import TGCardViewController
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 #if TK_NO_MODULE
 #else
@@ -18,6 +19,11 @@ import RxCocoa
 #endif
 
 open class TKUIMapManager: TGMapManager {
+  
+  /// A factory that all map managers will use as for the default annotations.
+  ///
+  /// @default: TKAnnotationViewBuilder
+  public static var annotationBuilderFactory: ((MKAnnotation, MKMapView) -> TKAnnotationViewBuilder) = TKAnnotationViewBuilder.init
   
   open var showOverlayPolygon = false
   
@@ -27,7 +33,7 @@ open class TKUIMapManager: TGMapManager {
       UIView.animate(withDuration: 0.25) {
         for object in mapView.annotations(in: mapView.visibleMapRect) {
           if let annotation = object as? MKAnnotation, let view = mapView.view(for: annotation) {
-            AnnotationViewBuilder.update(annotationView: view, forHeading: self.heading)
+            TKAnnotationViewBuilder.update(annotationView: view, forHeading: self.heading)
           }
         }
       }
@@ -44,9 +50,11 @@ open class TKUIMapManager: TGMapManager {
     }
   }
   
-  override open func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
+  override open func takeCharge(of mapView: UIView, edgePadding: UIEdgeInsets, animated: Bool) {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
     
+    guard let mapView = mapView as? MKMapView else { preconditionFailure() }
+
     // Keep heading
     heading = mapView.camera.heading
     
@@ -59,17 +67,17 @@ open class TKUIMapManager: TGMapManager {
       guard let polygon = polygon else { return }
       self?.overlayPolygon = polygon
     }
-    TKRegionOverlayHelper.sharedInstance().regionsPolygon(updateOverlay)
+    TKRegionOverlayHelper.shared.regionsPolygon(updateOverlay)
     NotificationCenter.default.rx
       .notification(.SGMapShouldRefreshOverlay)
       .subscribe(onNext: { _ in
-        TKRegionOverlayHelper.sharedInstance().clearCache()
-        TKRegionOverlayHelper.sharedInstance().regionsPolygon(updateOverlay)
+        TKRegionOverlayHelper.shared.clearCache()
+        TKRegionOverlayHelper.shared.regionsPolygon(updateOverlay)
       })
       .disposed(by: disposeBag)
   }
   
-  override open func cleanUp(_ mapView: MKMapView, animated: Bool) {
+  override open func cleanUp(_ mapView: UIView, animated: Bool) {
     removeOverlay(overlayPolygon)
     
     super.cleanUp(mapView, animated: animated)
@@ -102,8 +110,13 @@ extension TKUIMapManager {
   }
   
   open func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    return AnnotationViewBuilder(for: annotation, in: mapView)
-      .build()
+    if annotation === mapView.userLocation {
+      // Use the default MKUserLocation annotation
+      return nil
+    }
+    
+    let builder = TKUIMapManager.annotationBuilderFactory(annotation, mapView)
+    return builder.build()
   }
   
   open func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

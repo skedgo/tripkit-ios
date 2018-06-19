@@ -32,17 +32,18 @@ class TKUITripOverviewCardModel {
     }
     
     var items: [SegmentOverview]
-
+    
     fileprivate let index: Int
   }
   
-  struct SegmentOverview {
+  struct SegmentOverview: Equatable {
     let start: Date
     let title: String
     let subtitle: String?
     
     let icon: UIImage?
     let iconURL: URL?
+    let iconIsTemplate: Bool
     
     let action: SegmentAction?
     
@@ -88,6 +89,7 @@ fileprivate extension TKUITripOverviewCardModel.SegmentOverview {
       subtitle: segment.subtitle,
       icon: (segment as STKTripSegment).tripSegmentModeImage,
       iconURL: (segment as STKTripSegment).tripSegmentModeImageURL,
+      iconIsTemplate: (segment as STKTripSegment).tripSegmentModeImageIsTemplate,
       action: nil,
       index: index
     )
@@ -96,15 +98,6 @@ fileprivate extension TKUITripOverviewCardModel.SegmentOverview {
 }
 
 // MARK: - RxDataSource protocol conformance
-
-func ==(lhs: TKUITripOverviewCardModel.SegmentOverview, rhs: TKUITripOverviewCardModel.SegmentOverview) -> Bool {
-  guard lhs.title     == rhs.title      else { return false }
-  guard lhs.subtitle  == rhs.subtitle   else { return false }
-  guard lhs.start     == rhs.start      else { return false }
-  return true
-}
-extension TKUITripOverviewCardModel.SegmentOverview: Equatable {
-}
 
 extension TKUITripOverviewCardModel.SegmentOverview: IdentifiableType {
   typealias Identity = Int
@@ -128,6 +121,3 @@ extension TKUITripOverviewCardModel.Section: AnimatableSectionModelType {
     return header + "\(index)"
   }
 }
-
-
-

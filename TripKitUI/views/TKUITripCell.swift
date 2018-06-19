@@ -1,5 +1,5 @@
 //
-//  TKTripCell.swift
+//  TKUITripCell.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 15.06.18.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class TKTripCell: UITableViewCell {
+public class TKUITripCell: UITableViewCell {
 
-  public static let nib = UINib(nibName: "TKTripCell", bundle: Bundle(for: TKTripCell.self))
+  public static let nib = UINib(nibName: "TKUITripCell", bundle: Bundle(for: TKUITripCell.self))
   
-  public static let reuseIdentifier: String = "TKTripCell"
+  public static let reuseIdentifier: String = "TKUITripCell"
 
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var segmentView: SGTripSegmentsView!
@@ -35,12 +35,9 @@ public class TKTripCell: UITableViewCell {
 
     // Configure the view for the selected state
   }
-}
 
-// MARK: - Model {
-
-extension TKTripCell {
-
+  // MARK: - Model
+  
   public struct Model {
     public let departure: Date
     public let arrival: Date
