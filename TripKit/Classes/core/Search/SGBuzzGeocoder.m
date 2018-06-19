@@ -248,7 +248,6 @@
                       failure:
    ^(NSError *error) {
 #pragma unused(error)
-     DLog(@"Error during autocompletion: %@", error);
      completion(nil);
    }];
 }
