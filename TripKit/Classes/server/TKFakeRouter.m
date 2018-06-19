@@ -8,7 +8,7 @@
 
 #import "TKFakeRouter.h"
 
-#import <TripKit/TKTripKit.h>
+#import <TripKit/TripKit-Swift.h>
 
 @implementation TKFakeRouter
 

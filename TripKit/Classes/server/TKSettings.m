@@ -10,7 +10,6 @@
 
 #import "SGKBetaHelper.h"
 
-#import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
 
 @implementation TKSettings

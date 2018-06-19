@@ -8,7 +8,7 @@
 
 #import "TripRequest+Classify.h"
 
-#import <TripKit/TKTripKit.h>
+#import "TKTripClassifier.h"
 
 @implementation TripRequest (Classify)
 

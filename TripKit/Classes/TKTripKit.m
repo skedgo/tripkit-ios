@@ -6,7 +6,9 @@
 //
 //
 
-#import <TripKit/TKTripKit.h>
+#import "TKTripKit.h"
+
+#import <TripKit/TripKit-Swift.h>
 
 NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification";
 
