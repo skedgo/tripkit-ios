@@ -13,6 +13,7 @@
 #import "TripKit/TripKit-Swift.h"
 #else
 @import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
 
@@ -23,6 +24,7 @@
 
 @interface SGTripSummaryCell ()
 
+@property (nonatomic, strong) TKTripCellFormatter *formatter;
 
 @property (nonatomic, strong) NSTimeZone *departureTimeZone;
 @property (nonatomic, strong) NSTimeZone *arrivalTimeZone;
@@ -86,6 +88,13 @@
 - (void)prepareForReuse
 {
   [super prepareForReuse];
+  
+  self.formatter = [[TKTripCellFormatter alloc] init];
+  self.formatter.primaryFont = _mainLabel.font;
+  self.formatter.primaryColor = self.darkTextColor;
+  self.formatter.secondaryFont = _mainLabel.font;
+  self.formatter.secondaryColor = [SGStyleManager lightTextColor];
+  self.formatter.costColor = self.costsLabel.textColor;
   
   self.wrapper.backgroundColor = [UIColor whiteColor];
   self.contentView.layoutMargins = UIEdgeInsetsMake(8, 8, 8, 8);
@@ -248,134 +257,17 @@
     return;
   }
   
-  UIFont *primaryFont = _mainLabel.font;
-  UIColor *primaryColor = self.darkTextColor;
-  
-  UIFont *secondaryFont = _mainLabel.font;
-  UIColor *secondaryColor = [SGStyleManager lightTextColor];
-  
-  NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] init];
-  NSString *duration = [SGKObjcDateHelper durationStringForStart:departure end:arrival];
-  if (self.durationFirst) {
-    [self appendString:duration
-          toAttributed:attributed
-                  font:primaryFont
-       foregroundColor:primaryColor];
-    
-    NSString *secondaryText;
-    if (self.arriveBefore) {
-      NSString *timeText = [SGStyleManager timeString:departure
-                                          forTimeZone:self.departureTimeZone
-                                   relativeToTimeZone:self.arrivalTimeZone];
-      NSString *bracketed = [Loc DepartsAtTime: timeText];
-      secondaryText = [NSString stringWithFormat:@" (%@)", bracketed];
-    } else {
-      NSString *timeText = [SGStyleManager timeString:arrival
-                                          forTimeZone:self.arrivalTimeZone
-                                   relativeToTimeZone:self.departureTimeZone];
-      NSString *bracketed = [Loc ArrivesAtTime: timeText];
-      secondaryText = [NSString stringWithFormat:@" (%@)", bracketed];
-    }
-    
-    [self appendString:secondaryText
-          toAttributed:attributed
-                  font:secondaryFont
-       foregroundColor:secondaryColor];
-    
-  } else {
-    [self appendString:[SGStyleManager timeString:departure
-                                      forTimeZone:self.departureTimeZone
-                               relativeToTimeZone:self.arrivalTimeZone]
-          toAttributed:attributed
-                  font:primaryFont
-       foregroundColor:primaryColor];
-    
-    [self appendString:@" - "
-          toAttributed:attributed
-                  font:primaryFont
-       foregroundColor:primaryColor];
-    
-    [self appendString:[SGStyleManager timeString:arrival
-                                      forTimeZone:self.arrivalTimeZone
-                               relativeToTimeZone:self.departureTimeZone]
-          toAttributed:attributed
-                  font:primaryFont
-       foregroundColor:primaryColor];
-    
-    [self appendString:@" ("
-          toAttributed:attributed
-                  font:secondaryFont
-       foregroundColor:secondaryColor];
-    
-    [self appendString:duration
-          toAttributed:attributed
-                  font:secondaryFont
-       foregroundColor:secondaryColor];
-    
-    [self appendString:@")"
-          toAttributed:attributed
-                  font:secondaryFont
-       foregroundColor:secondaryColor];
-  }
-  
-  self.mainLabel.attributedText = attributed;
+  self.mainLabel.attributedText = [self.formatter timeStringWithDeparture:departure
+                                                                  arrival:arrival
+                                                        departureTimeZone:self.departureTimeZone
+                                                          arrivalTimeZone:self.arrivalTimeZone
+                                                          focusOnDuration:self.durationFirst
+                                                           isArriveBefore:self.arriveBefore];
 }
 
 - (void)_addCosts:(NSDictionary *)costDict
 {
-  NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] init];
-  
-  NSString *price = costDict[@(STKTripCostTypePrice)];
-  if (price) {
-    [self appendString:price
-          toAttributed:attributed
-                  font:nil
-       foregroundColor:nil];
-    
-    [self appendString:@" ⋅ "
-          toAttributed:attributed
-                  font:nil
-       foregroundColor:self.costsLabel.textColor];
-  }
-
-  // calories
-  [self appendString:costDict[@(STKTripCostTypeCalories)]
-        toAttributed:attributed
-                font:nil
-     foregroundColor:nil];
-
-  [self appendString:@" ⋅ "
-        toAttributed:attributed
-                font:nil
-     foregroundColor:self.costsLabel.textColor];
-  
-  // carbon
-  [self appendString:costDict[@(STKTripCostTypeCarbon)]
-        toAttributed:attributed
-                font:nil
-     foregroundColor:nil];
-  
-  self.costsLabel.attributedText = attributed;
-}
-
-- (void)appendString:(NSString *)string
-        toAttributed:(NSMutableAttributedString *)mutable
-                font:(UIFont *)font
-     foregroundColor:(UIColor *)foreground
-{
-  if (! string)
-    return;
-  
-  NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithCapacity:3];
-  if (font) {
-    attributes[NSFontAttributeName] = font;
-  }
-  if (foreground) {
-    attributes[NSForegroundColorAttributeName] = foreground;
-  }
-  NSAttributedString *add = [[NSAttributedString alloc] initWithString:string
-                                                            attributes:attributes];
-  [mutable appendAttributedString:add];
+  self.costsLabel.attributedText = [self.formatter costStringWithCosts:costDict];
 }
 
 @end

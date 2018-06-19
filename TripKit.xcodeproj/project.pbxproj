@@ -295,6 +295,10 @@
 		3A84F00E1F77021200B2F9A0 /* TripGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84F00D1F77021200B2F9A0 /* TripGroup.swift */; };
 		3A879AE720CFD93700107D58 /* Alert+TKAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */; };
 		3A8F61211F190CE80017ACDA /* SGLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F61201F190CE80017ACDA /* SGLocationManager.swift */; };
+		3A8FAB6D20D3E28B005D4C73 /* TKTripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FAB6B20D3E28B005D4C73 /* TKTripCell.swift */; };
+		3A8FAB6E20D3E28B005D4C73 /* TKTripCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A8FAB6C20D3E28B005D4C73 /* TKTripCell.xib */; };
+		3A8FAB7020D3E512005D4C73 /* TKTripCell+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FAB6F20D3E511005D4C73 /* TKTripCell+Formatter.swift */; };
+		3A8FAB7220D3F433005D4C73 /* TKTripCell+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FAB7120D3F433005D4C73 /* TKTripCell+Rx.swift */; };
 		3A92205C205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */; };
 		3A92205D205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */; };
 		3A92205F205FCBFF004E6C34 /* TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */; };
@@ -1240,6 +1244,10 @@
 		3A84F00D1F77021200B2F9A0 /* TripGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripGroup.swift; sourceTree = "<group>"; };
 		3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+TKAlert.swift"; sourceTree = "<group>"; };
 		3A8F61201F190CE80017ACDA /* SGLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGLocationManager.swift; sourceTree = "<group>"; };
+		3A8FAB6B20D3E28B005D4C73 /* TKTripCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTripCell.swift; sourceTree = "<group>"; };
+		3A8FAB6C20D3E28B005D4C73 /* TKTripCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKTripCell.xib; sourceTree = "<group>"; };
+		3A8FAB6F20D3E511005D4C73 /* TKTripCell+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKTripCell+Formatter.swift"; sourceTree = "<group>"; };
+		3A8FAB7120D3F433005D4C73 /* TKTripCell+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKTripCell+Rx.swift"; sourceTree = "<group>"; };
 		3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAppleGeocoder.swift; sourceTree = "<group>"; };
 		3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocoding.swift; sourceTree = "<group>"; };
 		3A922061205FCEB9004E6C34 /* SGAutocompletionDataProvider+TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SGAutocompletionDataProvider+TKGeocoding.swift"; sourceTree = "<group>"; };
@@ -1869,27 +1877,31 @@
 				3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */,
 				3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */,
 				3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */,
+				D39B7BB220622FD100988D8A /* TKAlertCell.swift */,
+				D39B7BB320622FD100988D8A /* TKAlertCell.xib */,
 				3A6DF0F3202C8EB80084CB2C /* TKAlertInfoView.swift */,
 				3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */,
 				3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */,
 				3A6DF0F0202C8EB80084CB2C /* TKDepartureView.xib */,
 				3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */,
 				3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */,
+				D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */,
+				D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */,
 				3A6DF0E8202C8EB80084CB2C /* TKOccupancyView.swift */,
 				3A6DF0E4202C8EB80084CB2C /* TKPathFriendlinessView.swift */,
 				3A6DF0F1202C8EB80084CB2C /* TKPathFriendlinessView.xib */,
+				D39B7BAE20622C2C00988D8A /* TKRouteCell.swift */,
+				D39B7BB020622C5900988D8A /* TKRouteCell.xib */,
+				D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */,
+				D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */,
 				3A3658802062892100D8645C /* TKTrainOccupancyView.swift */,
+				3A8FAB6B20D3E28B005D4C73 /* TKTripCell.swift */,
+				3A8FAB6C20D3E28B005D4C73 /* TKTripCell.xib */,
+				3A8FAB6F20D3E511005D4C73 /* TKTripCell+Formatter.swift */,
+				3A8FAB7120D3F433005D4C73 /* TKTripCell+Rx.swift */,
 				3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */,
 				3A6DF0E9202C8EB80084CB2C /* VehicleView.h */,
 				3A6DF0F2202C8EB80084CB2C /* VehicleView.m */,
-				D39B7BAE20622C2C00988D8A /* TKRouteCell.swift */,
-				D39B7BB020622C5900988D8A /* TKRouteCell.xib */,
-				D39B7BB220622FD100988D8A /* TKAlertCell.swift */,
-				D39B7BB320622FD100988D8A /* TKAlertCell.xib */,
-				D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */,
-				D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */,
-				D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */,
-				D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3369,6 +3381,7 @@
 				3A6DF13B202C8EB80084CB2C /* TKEmptyAlertView.xib in Resources */,
 				D3F9CEC52064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib in Resources */,
 				3A6DF115202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib in Resources */,
+				3A8FAB6E20D3E28B005D4C73 /* TKTripCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3705,12 +3718,15 @@
 				3A6DF10E202C8EB80084CB2C /* SGTripSummaryCell.m in Sources */,
 				3A6DF0FE202C8EB80084CB2C /* SGTableCell.m in Sources */,
 				3A6DF144202C8EB80084CB2C /* SGPulsingAnnotationView.m in Sources */,
+				3A8FAB6D20D3E28B005D4C73 /* TKTripCell.swift in Sources */,
 				3A6DF150202C8EB80084CB2C /* MapManagerHelper.swift in Sources */,
 				3A6DF147202C8EB80084CB2C /* TKEmptyAlertView.swift in Sources */,
 				3A6DF12F202C8EB80084CB2C /* SGLabel.m in Sources */,
 				3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */,
 				3A6DF11E202C8EB80084CB2C /* UIColor+Variations.m in Sources */,
 				3A6DF0F9202C8EB80084CB2C /* SGTableViewCell.m in Sources */,
+				3A8FAB7020D3E512005D4C73 /* TKTripCell+Formatter.swift in Sources */,
+				3A8FAB7220D3F433005D4C73 /* TKTripCell+Rx.swift in Sources */,
 				3A6DF133202C8EB80084CB2C /* RouteMapManager.m in Sources */,
 				3A6DF14D202C8EB80084CB2C /* TKAlertInfoView.swift in Sources */,
 				3A6DF109202C8EB80084CB2C /* TKMapButtonView.swift in Sources */,

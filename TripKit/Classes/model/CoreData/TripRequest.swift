@@ -245,6 +245,54 @@ extension TripRequest {
     return [first, second, third]
   }
   
+  @objc public func tripSortDescriptors(withPrimary primary: STKTripCostType) -> [NSSortDescriptor] {
+    
+    let primaryTimeSorter = TripRequest.timeSorter(for: type, forGroups: false)
+    let visibilitySorter = NSSortDescriptor(key: "tripGroup.visibilityRaw", ascending: true)
+    let scoreSorter = NSSortDescriptor(key: "totalScore", ascending: true)
+    
+    let first: NSSortDescriptor
+    var second = visibilitySorter
+    var third  = primaryTimeSorter
+    
+    switch (primary, type) {
+    case (.time, .arriveBefore):
+      first  = primaryTimeSorter
+      second = TripRequest.timeSorter(for: .leaveAfter, forGroups: false)
+      third  = visibilitySorter
+      
+    case (.time, _):
+      first  = primaryTimeSorter
+      second = TripRequest.timeSorter(for: .arriveBefore, forGroups: false)
+      third  = visibilitySorter
+      
+    case (.duration, _):
+      first = NSSortDescriptor(key: "minutes", ascending: true)
+      
+    case (.price, _):
+      first = NSSortDescriptor(key: "totalPriceUSD", ascending: true)
+      
+    case (.carbon, _):
+      first = NSSortDescriptor(key: "totalCarbon", ascending: true)
+      
+    case (.calories, _):
+      first = NSSortDescriptor(key: "totalCalories", ascending: true)
+      
+    case (.walking, _):
+      first = NSSortDescriptor(key: "totalWalking", ascending: true)
+      
+    case (.hassle, _):
+      first = NSSortDescriptor(key: "totalHassle", ascending: true)
+      
+    case (.count, _), (.score, _):
+      first = visibilitySorter
+      second = scoreSorter
+      third = primaryTimeSorter
+    }
+    
+    return [first, second, third]
+  }
+  
   private static func timeSorter(for type: SGTimeType, forGroups: Bool = true) -> NSSortDescriptor {
     let base = forGroups ? "visibleTrip." : ""
     if type == .arriveBefore {
