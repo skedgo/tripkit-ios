@@ -1,0 +1,3797 @@
+{
+  "regions": [
+    {
+      "allowsBicyclesOnPublicTransport": true,
+      "bikeShare": [],
+      "code": "AU_NSW_Sydney",
+      "extraModes": [
+        {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax",
+          "title": "Taxi"
+        },
+        {
+          "URL": "https://mydriver.com",
+          "color": {
+            "blue": 0,
+            "green": 0,
+            "red": 0
+          },
+          "icon": "mydriver",
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax_MYDRIVER",
+          "title": "myDriver"
+        },
+        {
+          "URL": "https://www.uber.com",
+          "color": {
+            "blue": 213,
+            "green": 186,
+            "red": 47
+          },
+          "icon": "uber",
+          "integrations": [
+            "bookings",
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "ps_tnc_UBER",
+          "title": "Uber"
+        },
+        {
+          "URL": "http://www.jayride.com.au/",
+          "color": {
+            "blue": 60,
+            "green": 123,
+            "red": 233
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_shu",
+          "title": "Shuttle"
+        },
+        {
+          "URL": "http://www.carnextdoor.com.au",
+          "color": {
+            "blue": 134,
+            "green": 82,
+            "red": 253
+          },
+          "icon": "carnextdoor",
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-s_CND",
+          "title": "Car Next Door"
+        },
+        {
+          "URL": "http://www.goget.com.au/",
+          "color": {
+            "blue": 106,
+            "green": 63,
+            "red": 0
+          },
+          "darkIcon": "goget-dark",
+          "icon": "goget",
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-s_GOG",
+          "title": "GoGet"
+        },
+        {
+          "color": {
+            "blue": 243,
+            "green": 169,
+            "red": 115
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-r_SwiftFleet",
+          "title": "Car rental"
+        }
+      ],
+      "hasSchoolServices": true,
+      "hasWheelchairInformation": true,
+      "modes": {
+        "me_car-r": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Car rental",
+                "color": {
+                  "blue": 243,
+                  "green": 169,
+                  "red": 115
+                },
+                "identifier": "me_car-r_SwiftFleet",
+                "localIcon": "car-share"
+              },
+              "title": "Car rental"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car rental",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-r",
+            "localIcon": "car-share"
+          },
+          "title": "Car rental"
+        },
+        "me_car-s": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "Car Next Door",
+                "color": {
+                  "blue": 134,
+                  "green": 82,
+                  "red": 253
+                },
+                "description": "Car Next Door",
+                "identifier": "me_car-s_CND",
+                "localIcon": "car-share",
+                "remoteIcon": "carnextdoor"
+              },
+              "title": "Car Next Door",
+              "url": "http://www.carnextdoor.com.au"
+            },
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "GoGet",
+                "color": {
+                  "blue": 106,
+                  "green": 63,
+                  "red": 0
+                },
+                "description": "GoGet",
+                "identifier": "me_car-s_GOG",
+                "localIcon": "car-share",
+                "remoteDarkIcon": "goget-dark",
+                "remoteIcon": "goget"
+              },
+              "title": "GoGet",
+              "url": "http://www.goget.com.au/"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-s",
+            "localIcon": "car-share"
+          },
+          "title": "Car share"
+        },
+        "ps_shu": {
+          "modeInfo": {
+            "alt": "Shuttle",
+            "color": {
+              "blue": 60,
+              "green": 123,
+              "red": 233
+            },
+            "identifier": "ps_shu",
+            "localIcon": "shuttlebus"
+          },
+          "title": "Shuttle",
+          "url": "http://www.jayride.com.au/"
+        },
+        "ps_tax": {
+          "modeInfo": {
+            "alt": "Taxi",
+            "color": {
+              "blue": 62,
+              "green": 202,
+              "red": 221
+            },
+            "identifier": "ps_tax",
+            "localIcon": "taxi"
+          },
+          "title": "Taxi",
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "myDriver",
+                "color": {
+                  "blue": 0,
+                  "green": 0,
+                  "red": 0
+                },
+                "description": "myDriver",
+                "identifier": "ps_tax_MYDRIVER",
+                "localIcon": "taxi",
+                "remoteIcon": "mydriver"
+              },
+              "title": "myDriver",
+              "url": "https://mydriver.com"
+            }
+          ]
+        },
+        "ps_tnc": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "bookings",
+                "routing",
+                "real_time"
+              ],
+              "modeInfo": {
+                "alt": "Uber",
+                "color": {
+                  "blue": 213,
+                  "green": 186,
+                  "red": 47
+                },
+                "description": "Uber",
+                "identifier": "ps_tnc_UBER",
+                "localIcon": "tnc",
+                "remoteIcon": "uber"
+              },
+              "title": "Uber",
+              "url": "https://www.uber.com"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Ride share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "ps_tnc",
+            "localIcon": "tnc"
+          },
+          "title": "Ride share"
+        },
+        "pt_pub": {
+          "modeInfo": {
+            "alt": "Public transport",
+            "color": {
+              "blue": 104,
+              "green": 197,
+              "red": 45
+            },
+            "identifier": "pt_pub",
+            "localIcon": "public"
+          },
+          "specificModes": [
+            {
+              "modeInfo": {
+                "alt": "train",
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+              },
+              "operators": [
+                "Sydney Trains",
+                "NSW Trains"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "tram",
+                "identifier": "pt_pub_tram",
+                "localIcon": "tram"
+              },
+              "operators": [
+                "Sydney Light Rail"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "ferry",
+                "identifier": "pt_pub_ferry",
+                "localIcon": "ferry"
+              },
+              "operators": [
+                "Newcastle Transport",
+                "Sydney Ferries",
+                "Captain Cook Cruises",
+                "Manly Fast Ferry",
+                "Cronulla Ferries",
+                "Palm Beach Ferry Service",
+                "Church Point Ferry Service",
+                "Central Coast Ferries",
+                "Brooklyn Ferry Service"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "bus",
+                "identifier": "pt_pub_bus",
+                "localIcon": "bus"
+              },
+              "operators": [
+                "State Transit Sydney",
+                "Transdev NSW",
+                "Busways Western Sydney",
+                "Hillsbus",
+                "Transit Systems",
+                "Hunter Valley Buses",
+                "Newcastle Transport",
+                "Busways Central Coast",
+                "Busabout",
+                "Interline Bus Services",
+                "Premier Illawarra",
+                "Punchbowl Bus Company",
+                "Forest Coach Lines",
+                "Red Bus Service",
+                "Blue Mountains Transit",
+                "Dions Bus Service",
+                "Rover Coaches",
+                "Port Stephens Coaches",
+                "NightRide",
+                "Premier Charters",
+                "OPTUS BUS",
+                "Coastal Liner"
+              ]
+            }
+          ],
+          "title": "Public transport"
+        }
+      },
+      "operators": [
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "Sydney Trains",
+          "numberOfServices": 38201,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_ltd_SCHOOLBUS",
+            "pt_pub_bus"
+          ],
+          "name": "State Transit Sydney",
+          "numberOfServices": 37917,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "NSW Trains",
+          "numberOfServices": 7141,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Transdev NSW",
+          "numberOfServices": 6907,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Busways Western Sydney",
+          "numberOfServices": 6092,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Hillsbus",
+          "numberOfServices": 5947,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Transit Systems",
+          "numberOfServices": 2856,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Hunter Valley Buses",
+          "numberOfServices": 2800,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry",
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Newcastle Transport",
+          "numberOfServices": 2761,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Busways Central Coast",
+          "numberOfServices": 2416,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Busabout",
+          "numberOfServices": 2087,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Sydney Ferries",
+          "numberOfServices": 1889,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_ltd_SCHOOLBUS",
+            "pt_pub_bus"
+          ],
+          "name": "Interline Bus Services",
+          "numberOfServices": 1879,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Premier Illawarra",
+          "numberOfServices": 1789,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Punchbowl Bus Company",
+          "numberOfServices": 1558,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Forest Coach Lines",
+          "numberOfServices": 1142,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_tram"
+          ],
+          "name": "Sydney Light Rail",
+          "numberOfServices": 1117,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "tram",
+              "identifier": "pt_pub_tram",
+              "localIcon": "tram"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Red Bus Service",
+          "numberOfServices": 912,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_ltd_SCHOOLBUS",
+            "pt_pub_bus"
+          ],
+          "name": "Blue Mountains Transit",
+          "numberOfServices": 765,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Dions Bus Service",
+          "numberOfServices": 347,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Captain Cook Cruises",
+          "numberOfServices": 278,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Rover Coaches",
+          "numberOfServices": 275,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_ltd_SCHOOLBUS",
+            "pt_pub_bus"
+          ],
+          "name": "Port Stephens Coaches",
+          "numberOfServices": 244,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "NightRide",
+          "numberOfServices": 208,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Manly Fast Ferry",
+          "numberOfServices": 190,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_ltd_SCHOOLBUS",
+            "pt_pub_bus"
+          ],
+          "name": "Premier Charters",
+          "numberOfServices": 190,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "OPTUS BUS",
+          "numberOfServices": 120,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_ltd_SCHOOLBUS",
+            "pt_pub_bus"
+          ],
+          "name": "Coastal Liner",
+          "numberOfServices": 94,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Cronulla Ferries",
+          "numberOfServices": 50,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Palm Beach Ferry Service",
+          "numberOfServices": 44,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Church Point Ferry Service",
+          "numberOfServices": 39,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Central Coast Ferries",
+          "numberOfServices": 32,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Brooklyn Ferry Service",
+          "numberOfServices": 30,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        }
+      ],
+      "streetBicyclePaths": true,
+      "streetWheelchairAccessibility": true,
+      "supportsConcessionPricing": true,
+      "transitBicycleAccessibility": true,
+      "transitConcessionPricing": true,
+      "transitModes": [
+        {
+          "alt": "train",
+          "identifier": "pt_pub_train",
+          "localIcon": "train"
+        },
+        {
+          "alt": "tram",
+          "identifier": "pt_pub_tram",
+          "localIcon": "tram"
+        },
+        {
+          "alt": "ferry",
+          "identifier": "pt_pub_ferry",
+          "localIcon": "ferry"
+        },
+        {
+          "alt": "bus",
+          "identifier": "pt_pub_bus",
+          "localIcon": "bus"
+        }
+      ],
+      "transitWheelchairAccessibility": true
+    },
+    {
+      "allowsBicyclesOnPublicTransport": true,
+      "bikeShare": [
+        {
+          "URL": "http://www.melbournebikeshare.com.au",
+          "color": {
+            "blue": 174,
+            "green": 70,
+            "red": 0
+          },
+          "icon": "melbournebikeshare",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_melbourne-bike-share",
+          "title": "Melbourne Bike Share"
+        },
+        {
+          "URL": "https://monashbikeshare.com/",
+          "color": {
+            "blue": 0,
+            "green": 0,
+            "red": 200
+          },
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi36",
+          "title": "Monash Bike Share"
+        }
+      ],
+      "code": "AU_VIC_Melbourne",
+      "extraModes": [
+        {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax",
+          "title": "Taxi"
+        },
+        {
+          "URL": "https://mydriver.com",
+          "color": {
+            "blue": 0,
+            "green": 0,
+            "red": 0
+          },
+          "icon": "mydriver",
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax_MYDRIVER",
+          "title": "myDriver"
+        },
+        {
+          "URL": "https://www.uber.com",
+          "color": {
+            "blue": 213,
+            "green": 186,
+            "red": 47
+          },
+          "icon": "uber",
+          "integrations": [
+            "bookings",
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "ps_tnc_UBER",
+          "title": "Uber"
+        },
+        {
+          "URL": "http://www.jayride.com.au/",
+          "color": {
+            "blue": 60,
+            "green": 123,
+            "red": 233
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_shu",
+          "title": "Shuttle"
+        },
+        {
+          "URL": "http://www.flexicar.com.au",
+          "color": {
+            "blue": 243,
+            "green": 169,
+            "red": 115
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-s_FLX",
+          "title": "Flexicar"
+        },
+        {
+          "URL": "http://www.goget.com.au/",
+          "color": {
+            "blue": 106,
+            "green": 63,
+            "red": 0
+          },
+          "darkIcon": "goget-dark",
+          "icon": "goget",
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-s_GOG",
+          "title": "GoGet"
+        },
+        {
+          "color": {
+            "blue": 243,
+            "green": 169,
+            "red": 115
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-r_SwiftFleet",
+          "title": "Car rental"
+        },
+        {
+          "URL": "http://www.melbournebikeshare.com.au",
+          "color": {
+            "blue": 174,
+            "green": 70,
+            "red": 0
+          },
+          "icon": "melbournebikeshare",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_melbourne-bike-share",
+          "title": "Melbourne Bike Share"
+        },
+        {
+          "URL": "https://monashbikeshare.com/",
+          "color": {
+            "blue": 0,
+            "green": 0,
+            "red": 200
+          },
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi36",
+          "title": "Monash Bike Share"
+        }
+      ],
+      "hasSchoolServices": false,
+      "hasWheelchairInformation": false,
+      "modes": {
+        "cy_bic-s": {
+          "modeInfo": {
+            "alt": "Bike share",
+            "color": {
+              "blue": 99,
+              "green": 199,
+              "red": 30
+            },
+            "identifier": "cy_bic-s",
+            "localIcon": "bicycle-share"
+          },
+          "specificModes": [
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 3,
+              "modeInfo": {
+                "alt": "Melbourne Bike Share",
+                "color": {
+                  "blue": 174,
+                  "green": 70,
+                  "red": 0
+                },
+                "description": "Melbourne Bike Share",
+                "identifier": "cy_bic-s_melbourne-bike-share",
+                "localIcon": "bicycle-share",
+                "remoteIcon": "melbournebikeshare"
+              },
+              "title": "Melbourne Bike Share",
+              "url": "http://www.melbournebikeshare.com.au"
+            },
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Monash Bike Share",
+                "color": {
+                  "blue": 0,
+                  "green": 0,
+                  "red": 200
+                },
+                "description": "Monash Bike Share",
+                "identifier": "cy_bic-s_SoBi36",
+                "localIcon": "bicycle-share"
+              },
+              "title": "Monash Bike Share",
+              "url": "https://monashbikeshare.com/"
+            }
+          ],
+          "title": "Bike share"
+        },
+        "me_car-r": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Car rental",
+                "color": {
+                  "blue": 243,
+                  "green": 169,
+                  "red": 115
+                },
+                "identifier": "me_car-r_SwiftFleet",
+                "localIcon": "car-share"
+              },
+              "title": "Car rental"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car rental",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-r",
+            "localIcon": "car-share"
+          },
+          "title": "Car rental"
+        },
+        "me_car-s": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "Flexicar",
+                "color": {
+                  "blue": 243,
+                  "green": 169,
+                  "red": 115
+                },
+                "description": "Flexicar",
+                "identifier": "me_car-s_FLX",
+                "localIcon": "car-share"
+              },
+              "title": "Flexicar",
+              "url": "http://www.flexicar.com.au"
+            },
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "GoGet",
+                "color": {
+                  "blue": 106,
+                  "green": 63,
+                  "red": 0
+                },
+                "description": "GoGet",
+                "identifier": "me_car-s_GOG",
+                "localIcon": "car-share",
+                "remoteDarkIcon": "goget-dark",
+                "remoteIcon": "goget"
+              },
+              "title": "GoGet",
+              "url": "http://www.goget.com.au/"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-s",
+            "localIcon": "car-share"
+          },
+          "title": "Car share"
+        },
+        "ps_shu": {
+          "modeInfo": {
+            "alt": "Shuttle",
+            "color": {
+              "blue": 60,
+              "green": 123,
+              "red": 233
+            },
+            "identifier": "ps_shu",
+            "localIcon": "shuttlebus"
+          },
+          "title": "Shuttle",
+          "url": "http://www.jayride.com.au/"
+        },
+        "ps_tax": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "myDriver",
+                "color": {
+                  "blue": 0,
+                  "green": 0,
+                  "red": 0
+                },
+                "description": "myDriver",
+                "identifier": "ps_tax_MYDRIVER",
+                "localIcon": "taxi",
+                "remoteIcon": "mydriver"
+              },
+              "title": "myDriver",
+              "url": "https://mydriver.com"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Taxi",
+            "color": {
+              "blue": 62,
+              "green": 202,
+              "red": 221
+            },
+            "identifier": "ps_tax",
+            "localIcon": "taxi"
+          },
+          "title": "Taxi"
+        },
+        "ps_tnc": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "bookings",
+                "routing",
+                "real_time"
+              ],
+              "modeInfo": {
+                "alt": "Uber",
+                "color": {
+                  "blue": 213,
+                  "green": 186,
+                  "red": 47
+                },
+                "description": "Uber",
+                "identifier": "ps_tnc_UBER",
+                "localIcon": "tnc",
+                "remoteIcon": "uber"
+              },
+              "title": "Uber",
+              "url": "https://www.uber.com"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Ride share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "ps_tnc",
+            "localIcon": "tnc"
+          },
+          "title": "Ride share"
+        },
+        "pt_pub": {
+          "modeInfo": {
+            "alt": "Public transport",
+            "color": {
+              "blue": 104,
+              "green": 197,
+              "red": 45
+            },
+            "identifier": "pt_pub",
+            "localIcon": "public"
+          },
+          "specificModes": [
+            {
+              "modeInfo": {
+                "alt": "train",
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+              },
+              "operators": [
+                "PTV",
+                "Mornington Railway"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "tram",
+                "identifier": "pt_pub_tram",
+                "localIcon": "tram"
+              },
+              "operators": [
+                "PTV"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "bus",
+                "identifier": "pt_pub_bus",
+                "localIcon": "bus"
+              },
+              "operators": [
+                "PTV"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "ferry",
+                "identifier": "pt_pub_carferry",
+                "localIcon": "ferry"
+              },
+              "operators": [
+                "Queenscliff/Sorrento Ferry"
+              ]
+            }
+          ],
+          "title": "Public transport"
+        }
+      },
+      "operators": [
+        {
+          "modes": [
+            "pt_pub_train",
+            "pt_pub_tram",
+            "pt_pub_bus"
+          ],
+          "name": "PTV",
+          "numberOfServices": 150437,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            },
+            {
+              "alt": "tram",
+              "identifier": "pt_pub_tram",
+              "localIcon": "tram"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_carferry"
+          ],
+          "name": "Queenscliff/Sorrento Ferry",
+          "numberOfServices": 26,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_carferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "Mornington Railway",
+          "numberOfServices": 14,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        }
+      ],
+      "streetBicyclePaths": true,
+      "streetWheelchairAccessibility": true,
+      "supportsConcessionPricing": true,
+      "transitBicycleAccessibility": true,
+      "transitConcessionPricing": true,
+      "transitModes": [
+        {
+          "alt": "train",
+          "identifier": "pt_pub_train",
+          "localIcon": "train"
+        },
+        {
+          "alt": "tram",
+          "identifier": "pt_pub_tram",
+          "localIcon": "tram"
+        },
+        {
+          "alt": "bus",
+          "identifier": "pt_pub_bus",
+          "localIcon": "bus"
+        },
+        {
+          "alt": "ferry",
+          "identifier": "pt_pub_carferry",
+          "localIcon": "ferry"
+        }
+      ],
+      "transitWheelchairAccessibility": false
+    },
+    {
+      "allowsBicyclesOnPublicTransport": true,
+      "bikeShare": [
+        {
+          "URL": "https://www.mobibikes.ca/",
+          "color": {
+            "blue": 223,
+            "green": 171,
+            "red": 0
+          },
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_mobibikes",
+          "title": "Mobi"
+        }
+      ],
+      "code": "CA_BC_Vancouver",
+      "extraModes": [
+        {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax",
+          "title": "Taxi"
+        },
+        {
+          "URL": "https://modo.coop/",
+          "color": {
+            "blue": 54,
+            "green": 62,
+            "red": 239
+          },
+          "icon": "modo",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "me_car-s_MODO",
+          "title": "Modo"
+        },
+        {
+          "color": {
+            "blue": 243,
+            "green": 169,
+            "red": 115
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-r_SwiftFleet",
+          "title": "Car rental"
+        },
+        {
+          "URL": "https://www.mobibikes.ca/",
+          "color": {
+            "blue": 223,
+            "green": 171,
+            "red": 0
+          },
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_mobibikes",
+          "title": "Mobi"
+        }
+      ],
+      "hasSchoolServices": false,
+      "hasWheelchairInformation": false,
+      "modes": {
+        "cy_bic-s": {
+          "modeInfo": {
+            "alt": "Bike share",
+            "color": {
+              "blue": 99,
+              "green": 199,
+              "red": 30
+            },
+            "identifier": "cy_bic-s",
+            "localIcon": "bicycle-share"
+          },
+          "specificModes": [
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 9.75,
+              "modeInfo": {
+                "alt": "Mobi",
+                "color": {
+                  "blue": 223,
+                  "green": 171,
+                  "red": 0
+                },
+                "description": "Mobi",
+                "identifier": "cy_bic-s_mobibikes",
+                "localIcon": "bicycle-share"
+              },
+              "title": "Mobi",
+              "url": "https://www.mobibikes.ca/"
+            }
+          ],
+          "title": "Bike share"
+        },
+        "me_car-r": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Car rental",
+                "color": {
+                  "blue": 243,
+                  "green": 169,
+                  "red": 115
+                },
+                "identifier": "me_car-r_SwiftFleet",
+                "localIcon": "car-share"
+              },
+              "title": "Car rental"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car rental",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-r",
+            "localIcon": "car-share"
+          },
+          "title": "Car rental"
+        },
+        "me_car-s": {
+          "modeInfo": {
+            "alt": "Car share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-s",
+            "localIcon": "car-share"
+          },
+          "specificModes": [
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 1,
+              "modeInfo": {
+                "alt": "Modo",
+                "color": {
+                  "blue": 54,
+                  "green": 62,
+                  "red": 239
+                },
+                "description": "Modo",
+                "identifier": "me_car-s_MODO",
+                "localIcon": "car-share",
+                "remoteIcon": "modo"
+              },
+              "title": "Modo",
+              "url": "https://modo.coop/"
+            }
+          ],
+          "title": "Car share"
+        },
+        "ps_tax": {
+          "modeInfo": {
+            "alt": "Taxi",
+            "color": {
+              "blue": 62,
+              "green": 202,
+              "red": 221
+            },
+            "identifier": "ps_tax",
+            "localIcon": "taxi"
+          },
+          "title": "Taxi"
+        },
+        "pt_pub": {
+          "modeInfo": {
+            "alt": "Public transport",
+            "color": {
+              "blue": 104,
+              "green": 197,
+              "red": 45
+            },
+            "identifier": "pt_pub",
+            "localIcon": "public"
+          },
+          "specificModes": [
+            {
+              "modeInfo": {
+                "alt": "train",
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+              },
+              "operators": [
+                "British Columbia Rapid Transit Company",
+                "West Coast Express"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "ferry",
+                "identifier": "pt_pub_ferry",
+                "localIcon": "ferry"
+              },
+              "operators": [
+                "TransLink"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "bus",
+                "identifier": "pt_pub_bus",
+                "localIcon": "bus"
+              },
+              "operators": [
+                "TransLink",
+                "BC Transit - Central Fraser Valley Transit System",
+                "BC Transit - Whistler Transit System",
+                "BC Transit - RDN Transit System",
+                "BC Transit - Chilliwack Transit System",
+                "BC Transit - Comox Valley Transit System",
+                "BC Transit - Sunshine Coast Transit System",
+                "BC Transit - Squamish Transit System",
+                "BC Transit - Fraser Valley Express"
+              ]
+            }
+          ],
+          "title": "Public transport"
+        }
+      },
+      "operators": [
+        {
+          "modes": [
+            "pt_pub_ferry",
+            "pt_pub_bus"
+          ],
+          "name": "TransLink",
+          "numberOfServices": 70927,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "British Columbia Rapid Transit Company",
+          "numberOfServices": 7052,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Central Fraser Valley Transit System",
+          "numberOfServices": 1554,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Whistler Transit System",
+          "numberOfServices": 1398,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - RDN Transit System",
+          "numberOfServices": 1128,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Chilliwack Transit System",
+          "numberOfServices": 536,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Comox Valley Transit System",
+          "numberOfServices": 417,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Sunshine Coast Transit System",
+          "numberOfServices": 282,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Squamish Transit System",
+          "numberOfServices": 241,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "BC Transit - Fraser Valley Express",
+          "numberOfServices": 50,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "West Coast Express",
+          "numberOfServices": 18,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        }
+      ],
+      "streetBicyclePaths": true,
+      "streetWheelchairAccessibility": true,
+      "supportsConcessionPricing": true,
+      "transitBicycleAccessibility": true,
+      "transitConcessionPricing": true,
+      "transitModes": [
+        {
+          "alt": "train",
+          "identifier": "pt_pub_train",
+          "localIcon": "train"
+        },
+        {
+          "alt": "ferry",
+          "identifier": "pt_pub_ferry",
+          "localIcon": "ferry"
+        },
+        {
+          "alt": "bus",
+          "identifier": "pt_pub_bus",
+          "localIcon": "bus"
+        }
+      ],
+      "transitWheelchairAccessibility": false
+    },
+    {
+      "allowsBicyclesOnPublicTransport": true,
+      "bikeShare": [
+        {
+          "URL": "http://www.norisbike.de",
+          "color": {
+            "blue": 56,
+            "green": 22,
+            "red": 236
+          },
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_norisbike-nurnberg",
+          "title": "NorisBike"
+        }
+      ],
+      "code": "DE_BV_Nuremberg",
+      "extraModes": [
+        {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax",
+          "title": "Taxi"
+        },
+        {
+          "URL": "https://mydriver.com",
+          "color": {
+            "blue": 0,
+            "green": 0,
+            "red": 0
+          },
+          "icon": "mydriver",
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax_MYDRIVER",
+          "title": "myDriver"
+        },
+        {
+          "URL": "https://www.flinkster.de",
+          "color": {
+            "blue": 27,
+            "green": 13,
+            "red": 252
+          },
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "me_car-s_FLINK",
+          "title": "Flinkster"
+        },
+        {
+          "color": {
+            "blue": 243,
+            "green": 169,
+            "red": 115
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-r_SwiftFleet",
+          "title": "Car rental"
+        },
+        {
+          "URL": "https://www.blablacar.com",
+          "color": {
+            "blue": 184,
+            "green": 132,
+            "red": 19
+          },
+          "icon": "blablacar",
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-p_BlaBlaCar",
+          "title": "BlaBlaCar"
+        },
+        {
+          "URL": "http://www.norisbike.de",
+          "color": {
+            "blue": 56,
+            "green": 22,
+            "red": 236
+          },
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_norisbike-nurnberg",
+          "title": "NorisBike"
+        }
+      ],
+      "hasSchoolServices": false,
+      "hasWheelchairInformation": true,
+      "modes": {
+        "cy_bic-s": {
+          "modeInfo": {
+            "alt": "Bike share",
+            "color": {
+              "blue": 99,
+              "green": 199,
+              "red": 30
+            },
+            "identifier": "cy_bic-s",
+            "localIcon": "bicycle-share"
+          },
+          "specificModes": [
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "NorisBike",
+                "color": {
+                  "blue": 56,
+                  "green": 22,
+                  "red": 236
+                },
+                "description": "NorisBike",
+                "identifier": "cy_bic-s_norisbike-nurnberg",
+                "localIcon": "bicycle-share"
+              },
+              "title": "NorisBike",
+              "url": "http://www.norisbike.de"
+            }
+          ],
+          "title": "Bike share"
+        },
+        "me_car-p": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "BlaBlaCar",
+                "color": {
+                  "blue": 184,
+                  "green": 132,
+                  "red": 19
+                },
+                "description": "BlaBlaCar",
+                "identifier": "me_car-p_BlaBlaCar",
+                "localIcon": "car-pool",
+                "remoteIcon": "blablacar"
+              },
+              "title": "BlaBlaCar",
+              "url": "https://www.blablacar.com"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Carpooling",
+            "color": {
+              "blue": 199,
+              "green": 196,
+              "red": 46
+            },
+            "identifier": "me_car-p",
+            "localIcon": "car-pool"
+          },
+          "title": "Carpooling"
+        },
+        "me_car-r": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Car rental",
+                "color": {
+                  "blue": 243,
+                  "green": 169,
+                  "red": 115
+                },
+                "identifier": "me_car-r_SwiftFleet",
+                "localIcon": "car-share"
+              },
+              "title": "Car rental"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car rental",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-r",
+            "localIcon": "car-share"
+          },
+          "title": "Car rental"
+        },
+        "me_car-s": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "modeInfo": {
+                "alt": "Flinkster",
+                "color": {
+                  "blue": 27,
+                  "green": 13,
+                  "red": 252
+                },
+                "description": "Flinkster",
+                "identifier": "me_car-s_FLINK",
+                "localIcon": "car-share"
+              },
+              "title": "Flinkster",
+              "url": "https://www.flinkster.de"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-s",
+            "localIcon": "car-share"
+          },
+          "title": "Car share"
+        },
+        "ps_tax": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "myDriver",
+                "color": {
+                  "blue": 0,
+                  "green": 0,
+                  "red": 0
+                },
+                "description": "myDriver",
+                "identifier": "ps_tax_MYDRIVER",
+                "localIcon": "taxi",
+                "remoteIcon": "mydriver"
+              },
+              "title": "myDriver",
+              "url": "https://mydriver.com"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Taxi",
+            "color": {
+              "blue": 62,
+              "green": 202,
+              "red": 221
+            },
+            "identifier": "ps_tax",
+            "localIcon": "taxi"
+          },
+          "title": "Taxi"
+        },
+        "pt_pub": {
+          "modeInfo": {
+            "alt": "Public transport",
+            "color": {
+              "blue": 104,
+              "green": 197,
+              "red": 45
+            },
+            "identifier": "pt_pub",
+            "localIcon": "public"
+          },
+          "specificModes": [
+            {
+              "modeInfo": {
+                "alt": "train",
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+              },
+              "operators": [
+                "VGN",
+                "DPN"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "subway",
+                "color": {
+                  "blue": 165,
+                  "green": 103,
+                  "red": 0
+                },
+                "identifier": "pt_pub_subway",
+                "localIcon": "subway",
+                "remoteIcon": "subway-germany"
+              },
+              "operators": [
+                "VGN"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "tram",
+                "identifier": "pt_pub_tram",
+                "localIcon": "tram"
+              },
+              "operators": [
+                "VGN"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "bus",
+                "identifier": "pt_pub_bus",
+                "localIcon": "bus"
+              },
+              "operators": [
+                "VGN",
+                "FlixBus"
+              ]
+            }
+          ],
+          "title": "Public transport"
+        }
+      },
+      "operators": [
+        {
+          "modes": [
+            "pt_pub_train",
+            "pt_pub_tram",
+            "pt_pub_subway",
+            "pt_pub_bus"
+          ],
+          "name": "VGN",
+          "numberOfServices": 50056,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            },
+            {
+              "alt": "tram",
+              "identifier": "pt_pub_tram",
+              "localIcon": "tram"
+            },
+            {
+              "alt": "subway",
+              "color": {
+                "blue": 165,
+                "green": 103,
+                "red": 0
+              },
+              "identifier": "pt_pub_subway",
+              "localIcon": "subway",
+              "remoteIcon": "subway-germany"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "FlixBus",
+          "numberOfServices": 1597,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "DPN",
+          "numberOfServices": 201,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        }
+      ],
+      "streetBicyclePaths": true,
+      "streetWheelchairAccessibility": true,
+      "supportsConcessionPricing": false,
+      "transitBicycleAccessibility": true,
+      "transitConcessionPricing": false,
+      "transitModes": [
+        {
+          "alt": "train",
+          "identifier": "pt_pub_train",
+          "localIcon": "train"
+        },
+        {
+          "alt": "subway",
+          "color": {
+            "blue": 165,
+            "green": 103,
+            "red": 0
+          },
+          "identifier": "pt_pub_subway",
+          "localIcon": "subway",
+          "remoteIcon": "subway-germany"
+        },
+        {
+          "alt": "tram",
+          "identifier": "pt_pub_tram",
+          "localIcon": "tram"
+        },
+        {
+          "alt": "bus",
+          "identifier": "pt_pub_bus",
+          "localIcon": "bus"
+        }
+      ],
+      "transitWheelchairAccessibility": true
+    },
+    {
+      "allowsBicyclesOnPublicTransport": true,
+      "bikeShare": [
+        {
+          "URL": "https://bikeshare.metro.net",
+          "color": {
+            "blue": 67,
+            "green": 231,
+            "red": 225
+          },
+          "icon": "metro-bikeshare",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_metro-bike-share",
+          "title": "Metro Bike Share"
+        },
+        {
+          "color": {
+            "blue": 99,
+            "green": 199,
+            "red": 30
+          },
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi125",
+          "title": "Bruin Bike Share"
+        },
+        {
+          "URL": "http://www.santamonicabikeshare.com",
+          "color": {
+            "blue": 59,
+            "green": 211,
+            "red": 66
+          },
+          "icon": "santamonicabikeshare",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi42",
+          "title": "Breeze Bike Share"
+        },
+        {
+          "URL": "http://www.longbeachbikeshare.com",
+          "color": {
+            "blue": 217,
+            "green": 185,
+            "red": 23
+          },
+          "icon": "long-beach-bikeshare",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi63",
+          "title": "Long Beach CA Bikeshare"
+        },
+        {
+          "URL": "http://beverlyhillsbikeshare.com",
+          "color": {
+            "blue": 48,
+            "green": 151,
+            "red": 194
+          },
+          "icon": "beverly-hills-bikeshare",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi73",
+          "title": "Beverly Hills"
+        },
+        {
+          "URL": "http://wehopedals.com/",
+          "color": {
+            "blue": 217,
+            "green": 185,
+            "red": 23
+          },
+          "icon": "weho-pedals",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi89",
+          "title": "WeHo Pedals"
+        }
+      ],
+      "code": "US_CA_LosAngeles",
+      "extraModes": [
+        {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax",
+          "title": "Taxi"
+        },
+        {
+          "URL": "https://www.uber.com",
+          "color": {
+            "blue": 213,
+            "green": 186,
+            "red": 47
+          },
+          "icon": "uber",
+          "integrations": [
+            "bookings",
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "ps_tnc_UBER",
+          "title": "Uber"
+        },
+        {
+          "color": {
+            "blue": 243,
+            "green": 169,
+            "red": 115
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-r_SwiftFleet",
+          "title": "Car rental"
+        },
+        {
+          "URL": "https://bikeshare.metro.net",
+          "color": {
+            "blue": 67,
+            "green": 231,
+            "red": 225
+          },
+          "icon": "metro-bikeshare",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_metro-bike-share",
+          "title": "Metro Bike Share"
+        },
+        {
+          "color": {
+            "blue": 99,
+            "green": 199,
+            "red": 30
+          },
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi125",
+          "title": "Bruin Bike Share"
+        },
+        {
+          "URL": "http://www.santamonicabikeshare.com",
+          "color": {
+            "blue": 59,
+            "green": 211,
+            "red": 66
+          },
+          "icon": "santamonicabikeshare",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi42",
+          "title": "Breeze Bike Share"
+        },
+        {
+          "URL": "http://www.longbeachbikeshare.com",
+          "color": {
+            "blue": 217,
+            "green": 185,
+            "red": 23
+          },
+          "icon": "long-beach-bikeshare",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi63",
+          "title": "Long Beach CA Bikeshare"
+        },
+        {
+          "URL": "http://beverlyhillsbikeshare.com",
+          "color": {
+            "blue": 48,
+            "green": 151,
+            "red": 194
+          },
+          "icon": "beverly-hills-bikeshare",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi73",
+          "title": "Beverly Hills"
+        },
+        {
+          "URL": "http://wehopedals.com/",
+          "color": {
+            "blue": 217,
+            "green": 185,
+            "red": 23
+          },
+          "icon": "weho-pedals",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_SoBi89",
+          "title": "WeHo Pedals"
+        }
+      ],
+      "hasSchoolServices": false,
+      "hasWheelchairInformation": true,
+      "modes": {
+        "cy_bic-s": {
+          "modeInfo": {
+            "alt": "Bike share",
+            "color": {
+              "blue": 99,
+              "green": 199,
+              "red": 30
+            },
+            "identifier": "cy_bic-s",
+            "localIcon": "bicycle-share"
+          },
+          "specificModes": [
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 20,
+              "modeInfo": {
+                "alt": "Metro Bike Share",
+                "color": {
+                  "blue": 67,
+                  "green": 231,
+                  "red": 225
+                },
+                "description": "Metro Bike Share",
+                "identifier": "cy_bic-s_metro-bike-share",
+                "localIcon": "bicycle-share",
+                "remoteIcon": "metro-bikeshare"
+              },
+              "title": "Metro Bike Share",
+              "url": "https://bikeshare.metro.net"
+            },
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "modeInfo": {
+                "alt": "Bruin Bike Share",
+                "color": {
+                  "blue": 99,
+                  "green": 199,
+                  "red": 30
+                },
+                "description": "Bruin Bike Share",
+                "identifier": "cy_bic-s_SoBi125",
+                "localIcon": "bicycle-share"
+              },
+              "title": "Bruin Bike Share"
+            },
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Breeze Bike Share",
+                "color": {
+                  "blue": 59,
+                  "green": 211,
+                  "red": 66
+                },
+                "description": "Breeze Bike Share",
+                "identifier": "cy_bic-s_SoBi42",
+                "localIcon": "bicycle-share",
+                "remoteIcon": "santamonicabikeshare"
+              },
+              "title": "Breeze Bike Share",
+              "url": "http://www.santamonicabikeshare.com"
+            },
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Long Beach CA Bikeshare",
+                "color": {
+                  "blue": 217,
+                  "green": 185,
+                  "red": 23
+                },
+                "description": "Long Beach CA Bikeshare",
+                "identifier": "cy_bic-s_SoBi63",
+                "localIcon": "bicycle-share",
+                "remoteIcon": "long-beach-bikeshare"
+              },
+              "title": "Long Beach CA Bikeshare",
+              "url": "http://www.longbeachbikeshare.com"
+            },
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Beverly Hills",
+                "color": {
+                  "blue": 48,
+                  "green": 151,
+                  "red": 194
+                },
+                "description": "Beverly Hills",
+                "identifier": "cy_bic-s_SoBi73",
+                "localIcon": "bicycle-share",
+                "remoteIcon": "beverly-hills-bikeshare"
+              },
+              "title": "Beverly Hills",
+              "url": "http://beverlyhillsbikeshare.com"
+            },
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 25,
+              "modeInfo": {
+                "alt": "WeHo Pedals",
+                "color": {
+                  "blue": 217,
+                  "green": 185,
+                  "red": 23
+                },
+                "description": "WeHo Pedals",
+                "identifier": "cy_bic-s_SoBi89",
+                "localIcon": "bicycle-share",
+                "remoteIcon": "weho-pedals"
+              },
+              "title": "WeHo Pedals",
+              "url": "http://wehopedals.com/"
+            }
+          ],
+          "title": "Bike share"
+        },
+        "me_car-r": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Car rental",
+                "color": {
+                  "blue": 243,
+                  "green": 169,
+                  "red": 115
+                },
+                "identifier": "me_car-r_SwiftFleet",
+                "localIcon": "car-share"
+              },
+              "title": "Car rental"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car rental",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-r",
+            "localIcon": "car-share"
+          },
+          "title": "Car rental"
+        },
+        "ps_tax": {
+          "modeInfo": {
+            "alt": "Taxi",
+            "color": {
+              "blue": 62,
+              "green": 202,
+              "red": 221
+            },
+            "identifier": "ps_tax",
+            "localIcon": "taxi"
+          },
+          "title": "Taxi"
+        },
+        "ps_tnc": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "bookings",
+                "routing",
+                "real_time"
+              ],
+              "modeInfo": {
+                "alt": "Uber",
+                "color": {
+                  "blue": 213,
+                  "green": 186,
+                  "red": 47
+                },
+                "description": "Uber",
+                "identifier": "ps_tnc_UBER",
+                "localIcon": "tnc",
+                "remoteIcon": "uber"
+              },
+              "title": "Uber",
+              "url": "https://www.uber.com"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Ride share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "ps_tnc",
+            "localIcon": "tnc"
+          },
+          "title": "Ride share"
+        },
+        "pt_pub": {
+          "modeInfo": {
+            "alt": "Public transport",
+            "color": {
+              "blue": 104,
+              "green": 197,
+              "red": 45
+            },
+            "identifier": "pt_pub",
+            "localIcon": "public"
+          },
+          "specificModes": [
+            {
+              "modeInfo": {
+                "alt": "train",
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+              },
+              "operators": [
+                "Metrolink Trains",
+                "Amtrak"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "subway",
+                "identifier": "pt_pub_subway",
+                "localIcon": "subway"
+              },
+              "operators": [
+                "Metro - Los Angeles"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "tram",
+                "identifier": "pt_pub_tram",
+                "localIcon": "tram"
+              },
+              "operators": [
+                "Metro - Los Angeles"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "bus",
+                "identifier": "pt_pub_bus",
+                "localIcon": "bus"
+              },
+              "operators": [
+                "Metro - Los Angeles",
+                "Long Beach Transit",
+                "Riverside Transit Agency",
+                "LADOT",
+                "Big Blue Bus",
+                "Orange County Transportation Authority",
+                "Foothill Transit",
+                "OMNITRANS",
+                "Culver CityBus",
+                "Anaheim Resort Transportation",
+                "Glendale Beeline",
+                "TORRANCE TRANSIT SYSTEM",
+                "Norwalk Transit System",
+                "LAX",
+                "Beaumont Pass Transit",
+                "Mountain Transit",
+                "Palos Verdes Peninsula Transit Authority",
+                "Corona Cruiser",
+                "Thousand Oaks Transit",
+                "Banning Pass Transit",
+                "Laguna Beach Transit",
+                "Amtrak California",
+                "Victor Valley Transit Authority",
+                "Sunline Transit Agency"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "cable car",
+                "identifier": "pt_pub_cablecar",
+                "localIcon": "cablecar"
+              },
+              "operators": [
+                "Mountain Transit"
+              ]
+            }
+          ],
+          "title": "Public transport"
+        }
+      },
+      "operators": [
+        {
+          "modes": [
+            "pt_pub_tram",
+            "pt_pub_subway",
+            "pt_pub_bus"
+          ],
+          "name": "Metro - Los Angeles",
+          "numberOfServices": 38300,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "tram",
+              "identifier": "pt_pub_tram",
+              "localIcon": "tram"
+            },
+            {
+              "alt": "subway",
+              "identifier": "pt_pub_subway",
+              "localIcon": "subway"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Long Beach Transit",
+          "numberOfServices": 35548,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Riverside Transit Agency",
+          "numberOfServices": 17633,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "LADOT",
+          "numberOfServices": 16124,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Big Blue Bus",
+          "numberOfServices": 7723,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Orange County Transportation Authority",
+          "numberOfServices": 7500,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Foothill Transit",
+          "numberOfServices": 4223,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "OMNITRANS",
+          "numberOfServices": 4127,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Culver CityBus",
+          "numberOfServices": 1345,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Anaheim Resort Transportation",
+          "numberOfServices": 1208,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Glendale Beeline",
+          "numberOfServices": 1001,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "TORRANCE TRANSIT SYSTEM",
+          "numberOfServices": 984,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Norwalk Transit System",
+          "numberOfServices": 427,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "LAX",
+          "numberOfServices": 269,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "Metrolink Trains",
+          "numberOfServices": 235,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Beaumont Pass Transit",
+          "numberOfServices": 150,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_cablecar",
+            "pt_pub_bus"
+          ],
+          "name": "Mountain Transit",
+          "numberOfServices": 122,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "cable car",
+              "identifier": "pt_pub_cablecar",
+              "localIcon": "cablecar"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Palos Verdes Peninsula Transit Authority",
+          "numberOfServices": 101,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Corona Cruiser",
+          "numberOfServices": 84,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Thousand Oaks Transit",
+          "numberOfServices": 83,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Banning Pass Transit",
+          "numberOfServices": 59,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Laguna Beach Transit",
+          "numberOfServices": 58,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Amtrak California",
+          "numberOfServices": 39,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Victor Valley Transit Authority",
+          "numberOfServices": 20,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "Amtrak",
+          "numberOfServices": 9,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Sunline Transit Agency",
+          "numberOfServices": 6,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        }
+      ],
+      "paratransit": {
+        "URL": "http://accessla.org/",
+        "name": "Access",
+        "number": "1.800.883.1295"
+      },
+      "streetBicyclePaths": true,
+      "streetWheelchairAccessibility": true,
+      "supportsConcessionPricing": false,
+      "transitBicycleAccessibility": true,
+      "transitConcessionPricing": false,
+      "transitModes": [
+        {
+          "alt": "train",
+          "identifier": "pt_pub_train",
+          "localIcon": "train"
+        },
+        {
+          "alt": "subway",
+          "identifier": "pt_pub_subway",
+          "localIcon": "subway"
+        },
+        {
+          "alt": "tram",
+          "identifier": "pt_pub_tram",
+          "localIcon": "tram"
+        },
+        {
+          "alt": "bus",
+          "identifier": "pt_pub_bus",
+          "localIcon": "bus"
+        },
+        {
+          "alt": "cable car",
+          "identifier": "pt_pub_cablecar",
+          "localIcon": "cablecar"
+        }
+      ],
+      "transitWheelchairAccessibility": true
+    },
+    {
+      "allowsBicyclesOnPublicTransport": true,
+      "bikeShare": [
+        {
+          "URL": "https://boulder.bcycle.com",
+          "color": {
+            "blue": 170,
+            "green": 93,
+            "red": 0
+          },
+          "darkIcon": "bcycle-dark",
+          "icon": "bcycle",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_boulder",
+          "title": "Boulder B-cycle"
+        },
+        {
+          "URL": "http://denver.bcycle.com/",
+          "color": {
+            "blue": 170,
+            "green": 93,
+            "red": 0
+          },
+          "darkIcon": "bcycle-dark",
+          "icon": "bcycle",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_denver",
+          "title": "Denver B-cycle"
+        }
+      ],
+      "code": "US_CO_Denver",
+      "extraModes": [
+        {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax",
+          "title": "Taxi"
+        },
+        {
+          "URL": "https://www.uber.com",
+          "color": {
+            "blue": 213,
+            "green": 186,
+            "red": 47
+          },
+          "icon": "uber",
+          "integrations": [
+            "bookings",
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "ps_tnc_UBER",
+          "title": "Uber"
+        },
+        {
+          "color": {
+            "blue": 243,
+            "green": 169,
+            "red": 115
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "me_car-r_SwiftFleet",
+          "title": "Car rental"
+        },
+        {
+          "URL": "https://boulder.bcycle.com",
+          "color": {
+            "blue": 170,
+            "green": 93,
+            "red": 0
+          },
+          "darkIcon": "bcycle-dark",
+          "icon": "bcycle",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_boulder",
+          "title": "Boulder B-cycle"
+        },
+        {
+          "URL": "http://denver.bcycle.com/",
+          "color": {
+            "blue": 170,
+            "green": 93,
+            "red": 0
+          },
+          "darkIcon": "bcycle-dark",
+          "icon": "bcycle",
+          "integrations": [
+            "routing",
+            "real_time"
+          ],
+          "modeIdentifier": "cy_bic-s_denver",
+          "title": "Denver B-cycle"
+        }
+      ],
+      "hasSchoolServices": false,
+      "hasWheelchairInformation": false,
+      "modes": {
+        "cy_bic-s": {
+          "modeInfo": {
+            "alt": "Bike share",
+            "color": {
+              "blue": 99,
+              "green": 199,
+              "red": 30
+            },
+            "identifier": "cy_bic-s",
+            "localIcon": "bicycle-share"
+          },
+          "specificModes": [
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 8,
+              "modeInfo": {
+                "alt": "Boulder B-cycle",
+                "color": {
+                  "blue": 170,
+                  "green": 93,
+                  "red": 0
+                },
+                "description": "Boulder B-cycle",
+                "identifier": "cy_bic-s_boulder",
+                "localIcon": "bicycle-share",
+                "remoteDarkIcon": "bcycle-dark",
+                "remoteIcon": "bcycle"
+              },
+              "title": "Boulder B-cycle",
+              "url": "https://boulder.bcycle.com"
+            },
+            {
+              "integrations": [
+                "routing",
+                "real_time"
+              ],
+              "minimumLocalCostForMembership": 9,
+              "modeInfo": {
+                "alt": "Denver B-cycle",
+                "color": {
+                  "blue": 170,
+                  "green": 93,
+                  "red": 0
+                },
+                "description": "Denver B-cycle",
+                "identifier": "cy_bic-s_denver",
+                "localIcon": "bicycle-share",
+                "remoteDarkIcon": "bcycle-dark",
+                "remoteIcon": "bcycle"
+              },
+              "title": "Denver B-cycle",
+              "url": "http://denver.bcycle.com/"
+            }
+          ],
+          "title": "Bike share"
+        },
+        "me_car-r": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Car rental",
+                "color": {
+                  "blue": 243,
+                  "green": 169,
+                  "red": 115
+                },
+                "identifier": "me_car-r_SwiftFleet",
+                "localIcon": "car-share"
+              },
+              "title": "Car rental"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car rental",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-r",
+            "localIcon": "car-share"
+          },
+          "title": "Car rental"
+        },
+        "ps_tax": {
+          "modeInfo": {
+            "alt": "Taxi",
+            "color": {
+              "blue": 62,
+              "green": 202,
+              "red": 221
+            },
+            "identifier": "ps_tax",
+            "localIcon": "taxi"
+          },
+          "title": "Taxi"
+        },
+        "ps_tnc": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "bookings",
+                "routing",
+                "real_time"
+              ],
+              "modeInfo": {
+                "alt": "Uber",
+                "color": {
+                  "blue": 213,
+                  "green": 186,
+                  "red": 47
+                },
+                "description": "Uber",
+                "identifier": "ps_tnc_UBER",
+                "localIcon": "tnc",
+                "remoteIcon": "uber"
+              },
+              "title": "Uber",
+              "url": "https://www.uber.com"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Ride share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "ps_tnc",
+            "localIcon": "tnc"
+          },
+          "title": "Ride share"
+        },
+        "pt_pub": {
+          "modeInfo": {
+            "alt": "Public transport",
+            "color": {
+              "blue": 104,
+              "green": 197,
+              "red": 45
+            },
+            "identifier": "pt_pub",
+            "localIcon": "public"
+          },
+          "specificModes": [
+            {
+              "modeInfo": {
+                "alt": "train",
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+              },
+              "operators": [
+                "Regional Transportation District"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "tram",
+                "identifier": "pt_pub_tram",
+                "localIcon": "tram"
+              },
+              "operators": [
+                "Regional Transportation District"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "bus",
+                "identifier": "pt_pub_bus",
+                "localIcon": "bus"
+              },
+              "operators": [
+                "Regional Transportation District",
+                "Bustang"
+              ]
+            }
+          ],
+          "title": "Public transport"
+        }
+      },
+      "operators": [
+        {
+          "modes": [
+            "pt_pub_tram",
+            "pt_pub_train",
+            "pt_pub_bus"
+          ],
+          "name": "Regional Transportation District",
+          "numberOfServices": 23869,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "tram",
+              "identifier": "pt_pub_tram",
+              "localIcon": "tram"
+            },
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "Bustang",
+          "numberOfServices": 53,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        }
+      ],
+      "paratransit": {
+        "URL": "http://www.rtd-denver.com/accessARide.shtml",
+        "name": "Access-A-Ride",
+        "number": "303.299.2960"
+      },
+      "streetBicyclePaths": true,
+      "streetWheelchairAccessibility": true,
+      "supportsConcessionPricing": true,
+      "transitBicycleAccessibility": true,
+      "transitConcessionPricing": true,
+      "transitModes": [
+        {
+          "alt": "train",
+          "identifier": "pt_pub_train",
+          "localIcon": "train"
+        },
+        {
+          "alt": "tram",
+          "identifier": "pt_pub_tram",
+          "localIcon": "tram"
+        },
+        {
+          "alt": "bus",
+          "identifier": "pt_pub_bus",
+          "localIcon": "bus"
+        }
+      ],
+      "transitWheelchairAccessibility": false
+    }
+  ],
+  "server": "192.168.1.13"
+}

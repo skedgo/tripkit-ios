@@ -16,7 +16,9 @@
 
 #pragma mark - Default styles
 
-+ (void)addLightStatusBarGradientLayerToView:(UIView *)view;
++ (void)addLightStatusBarGradientLayerToView:(UIView *)view height:(CGFloat)height;
+
++ (void)addLightStatusBarGradientLayerToView:(UIView *)view belowView:(UIView *)anotherView height:(CGFloat)height;
 
 + (void)removeGradientLayerFromView:(UIView *)view;
 

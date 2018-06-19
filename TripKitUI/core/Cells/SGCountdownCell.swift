@@ -9,22 +9,38 @@
 import Foundation
 
 import RxSwift
-import RxCocoa
 
 public struct SGCountdownCellModel {
+  
+  public struct AlertInfo {
+    public static let empty = AlertInfo(count: 0)
+    
+    public let count: Int
+    public let severity: STKInfoIconType?
+    public let text: String?
+    
+    public init(count: Int, severity: STKInfoIconType? = nil, text: String? = nil) {
+      self.count = count
+      self.severity = severity
+      self.text = text
+    }
+  }
   
   public var title: NSAttributedString
   public var subtitle: String?
   public var subsubtitle: String?
   public var icon: UIImage?
   public var iconImageURL: URL?
+  public var iconIsTemplate: Bool = false
   public var time: Date?
   public var position: SGKGrouping
   public var color: UIColor?
   public var isCancelled: Bool = false
   public var isWheelchairEnabled: Bool = false
   public var isAccessible: Bool?
-  public var alerts: [Alert] = []
+  
+  public var alertInfo: AlertInfo = .empty
+  public var occupancies: Observable<[[API.VehicleOccupancy]]>?
   
   public init(title: NSAttributedString, position: SGKGrouping = .edgeToEdge) {
     self.title = title
@@ -32,6 +48,8 @@ public struct SGCountdownCellModel {
   }
   
 }
+
+// MARK: - Configuration
 
 extension SGCountdownCell {
   
@@ -43,15 +61,31 @@ extension SGCountdownCell {
       , subsubtitle: model.subsubtitle
       , icon: model.icon
       , iconImageURL: model.iconImageURL
+      , iconIsTemplate: model.iconIsTemplate
       , timeToCountdownTo: model.time
       , position: model.position
       , stripColor: model.color)
     
     // We may have alert.
-    configureAlertView(with: model.alerts)
+    configureAlertView(model.alertInfo)
     
     // We may need to show accessibility info.
     configureAccessibleView(asEnabled: model.isWheelchairEnabled, isAccessible: model.isAccessible)
+    
+    // Occupancies, which might change with real-time
+    if let occupancies = model.occupancies {
+      occupancies.subscribe(onNext: { [weak self] occupancies in
+        if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1 {
+          let trainView = TKTrainOccupancyView()
+          trainView.occupancies = occupancies
+          self?.replaceFootnoteView(trainView)
+        } else if let occupancy = occupancies.first?.first, occupancy != .unknown {
+          let occupancyView = TKOccupancyView(with: .occupancy(occupancy))
+          self?.replaceFootnoteView(occupancyView)
+        }
+      }).disposed(by: objcDisposeBag.disposeBag)
+    }
+
   }
   
   
@@ -68,7 +102,7 @@ extension SGCountdownCell {
   ///   - timeToCountdownTo: Optional time to countdown to/from. If this is in the past, the cell should appear faded.
   ///   - position: Position of this cell relative to the cells around it.
   ///   - stripColor: Optional color to display a coloured strip under the icon.
-  @objc public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, timeToCountdownTo: Date?, position: SGKGrouping, stripColor: SGKColor?) {
+  @objc public func configure(title: NSAttributedString, subtitle: String?, subsubtitle: String?, icon: SGKImage?, iconImageURL: URL?, iconIsTemplate: Bool, timeToCountdownTo: Date?, position: SGKGrouping, stripColor: SGKColor?) {
     
     _resetContents()
     
@@ -77,45 +111,46 @@ extension SGCountdownCell {
       , subsubtitle: subsubtitle
       , icon: icon
       , iconImageURL: iconImageURL
+      , iconIsTemplate: iconIsTemplate
       , timeToCountdownTo: timeToCountdownTo
       , position: position
       , strip: stripColor)
     
     // The cell doesn't show alert by default.
-    configureAlertView(with: [])
+    configureAlertView(.empty)
   }
   
   
-  @objc public func configureAlertView(with alerts: [Alert]) {
-    alertIconWidth.constant = alerts.isEmpty ? 0 : 20
-    alertViewTopConstraint.constant = alerts.isEmpty ? 0 : 8
-    alertViewBottomConstraint.constant = alerts.isEmpty ? 0 : 8
-    showButtonHeightConstraint.constant = alerts.isEmpty ? 0 : showButton.intrinsicContentSize.height
+  private func configureAlertView(_ alertInfo: SGCountdownCellModel.AlertInfo) {
+    let isEmpty = alertInfo.count == 0
+    alertIconWidth.constant = isEmpty ? 0 : 20
+    alertViewTopConstraint.constant = isEmpty ? 0 : 8
+    alertViewBottomConstraint.constant = isEmpty ? 0 : 8
+    showButtonHeightConstraint.constant = isEmpty ? 0 : showButton.intrinsicContentSize.height
     
-    showButton.isHidden = alerts.isEmpty
-    alertSymbol.isHidden = alerts.isEmpty
-    alertLabel.isHidden = alerts.isEmpty    
-    alertSeparator.isHidden = alerts.isEmpty
+    showButton.isHidden = isEmpty
+    alertSymbol.isHidden = isEmpty
+    alertLabel.isHidden = isEmpty
+    alertSeparator.isHidden = isEmpty
     
-    guard let mostSevere = alerts.first else {
-      return
+    if !isEmpty {
+      if let severity = alertInfo.severity {
+        alertSymbol.image = STKInfoIcon.image(for: severity, usage: .normal)
+      } else {
+        alertSymbol.isHidden = true
+      }
+      if let text = alertInfo.text, alertInfo.count == 1 {
+        alertLabel.text = text
+      } else {
+        alertLabel.text = Loc.Alerts(alertInfo.count)
+      }
+      showButton.setTitle(Loc.Show, for: .normal)
     }
     
-    alertSymbol.image = STKInfoIcon.image(for: mostSevere.infoIconType, usage: .normal)
-    alertLabel.text = alerts.count == 1 ? mostSevere.text : Loc.Alerts(alerts.count) ?? ""
-    showButton.setTitle(Loc.Show, for: .normal)
-    
-    let disposeBag = objcDisposeBag.disposeBag    
-    showButton.rx.tap
-      .subscribe(onNext: { [unowned self] in
-        guard self.alertPresentationHandler != nil else { return }
-        self.alertPresentationHandler(alerts)
-      })
-      .disposed(by: disposeBag)
   }
   
   
-  public func configureAccessibleView(asEnabled isEnabled: Bool, isAccessible: Bool?) {
+  private func configureAccessibleView(asEnabled isEnabled: Bool, isAccessible: Bool?) {
     accessibleIcon.isHidden = !isEnabled
     accessibleSeparator.isHidden = !isEnabled
     
@@ -140,7 +175,25 @@ extension SGCountdownCell {
   }
   
   
-  @objc public func addViewToFootnote(_ view: UIView) {
+  @objc public func adjustContentWrapper(basedOn position: SGKGrouping) {
+    switch position {
+    case .start:
+      contentWrapperTopConstraint.constant = 0
+      contentWrapperBottomConstraint.constant = -8
+    case .end:
+      contentWrapperTopConstraint.constant = -8
+      contentWrapperBottomConstraint.constant = 0
+    case .middle:
+      contentWrapperTopConstraint.constant = -8
+      contentWrapperBottomConstraint.constant = -8
+    case .individual, .edgeToEdge:
+      contentWrapperTopConstraint.constant = 0
+      contentWrapperBottomConstraint.constant = 0
+    }
+  }
+  
+  
+  public func replaceFootnoteView(_ view: UIView) {
     // Make sure we start clean.
     for subview in footnoteView.subviews {
       subview.removeFromSuperview()
@@ -168,4 +221,17 @@ extension SGCountdownCell {
       footnoteView.addConstraints([leadingSpace, topSpace, trailingSpace, bottomSpace])
     }
   }
+  
+}
+
+extension SGCountdownCell {
+  
+  @objc public class func reuseId() -> String {
+    return "SGCountdownCell"
+  }
+  
+  @objc public class func nib() -> UINib {
+    return UINib(nibName: "SGCountdownCell", bundle: Bundle(for: SGCountdownCell.self))
+  }
+  
 }

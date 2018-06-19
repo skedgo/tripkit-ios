@@ -37,6 +37,29 @@
 
 @implementation SGTripSegmentsView
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+  self = [super initWithFrame:frame];
+  if (self) {
+    [self didInit];
+  }
+  return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    [self didInit];
+  }
+  return self;
+}
+
+- (void)didInit {
+  self.darkTextColor = [SGStyleManager darkTextColor];
+  self.lightTextColor = [SGStyleManager lightTextColor];
+}
+
 - (CGSize)intrinsicContentSize
 {
   return self.desiredSize;
@@ -90,7 +113,9 @@
 	
   CGFloat widthPerSegment = (self.frame.size.width - nextX) / segmentCount;
 	
-  self.centerSegments = (widthPerSegment < 34); // looks weird otherwise
+  if (self.centerSegments && widthPerSegment > 34) {
+    self.centerSegments = false; // looks weird otherwise
+  }
   
   for (id<STKTripSegmentDisplayable> segment in segments) {
     
@@ -104,21 +129,24 @@
 		}
 		
 		// for the coloured strip
-		UIColor *color = (allowSubtitles && [segment respondsToSelector:@selector(tripSegmentModeColor)])
-      ? [segment tripSegmentModeColor]
-      : nil;
+    UIColor *color = [segment respondsToSelector:@selector(tripSegmentModeColor)] ? [segment tripSegmentModeColor] : nil;
 		
 		// the mode image
     UIImageView * modeImageView = [[UIImageView alloc] initWithImage:image];
-    modeImageView.tintColor = [SGStyleManager darkTextColor];
     modeImageView.alpha = SEGMENT_ITEM_ALPHA;
-
-    NSURL *modeImageURL = [segment respondsToSelector:@selector(tripSegmentModeImageURL)]
-      ? [segment tripSegmentModeImageURL]
-      : nil;
     
+    if (self.colorCodingTransitIcon) {
+      // remember that color will be nil for non-PT modes. In these cases, since the
+      // PT mode will be colored, we use the lighter grey to reduce the contrast.
+      modeImageView.tintColor = color ?: self.lightTextColor;
+    } else {
+      modeImageView.tintColor = self.darkTextColor;
+    }
+
+    NSURL *modeImageURL = [segment tripSegmentModeImageURL];
+    BOOL asTemplate = [segment tripSegmentModeImageIsTemplate];
     if (modeImageURL) {
-      [modeImageView setImageWithURL:modeImageURL placeholderImage:image];
+      [modeImageView setImageWithURL:modeImageURL asTemplate:asTemplate placeholderImage:image];
     }
     
     // place the mode image
@@ -219,12 +247,12 @@
       SGLabel *titleLabel = [[SGLabel alloc] initWithFrame:rect];
       titleLabel.font = modeTitleFont;
       titleLabel.text = modeTitle;
-      titleLabel.textColor = _textColor ? : [SGStyleManager darkTextColor];
+      titleLabel.textColor = self.colorCodingTransitIcon ? self.lightTextColor : self.darkTextColor;
       titleLabel.alpha = modeImageView.alpha;
       [self addSubview:titleLabel];
       
       modeSideWidth = (CGFloat) fmax(modeSideWidth, modeTitleSize.width);
-    } else if (color) {
+    } else if (color && allowSubtitles) {
       // add the color underneath
       CGFloat y = (CGRectGetHeight(self.frame) - modeSubtitleSize.height - modeTitleSize.height) / 2;
       UIView *stripe = [[UIView alloc] initWithFrame:CGRectMake(x, y, modeTitleSize.width, modeTitleSize.height)];

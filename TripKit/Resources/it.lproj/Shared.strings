@@ -1,0 +1,345 @@
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@'s";
+
+/* No comment provided by engineer. */
+"%@'s Home" = "%@'s Casa";
+
+/* No comment provided by engineer. */
+"%@'s Work" = "%@'s Lavoro";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu ripetizioni";
+
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "'%@' non trovato.";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "L'accesso a questa funzione è stato limitato sul tuo dispositivo. Controllare le impostazioni, sotto Generali> Restrizioni.";
+
+/* Accessibility label for action button */
+"Action" = "Avvio";
+
+/* Default title for alert view */
+"Alert" = "Attenzione";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "Hai già un account? Accedi";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "Autenticazione";
+
+/* Authorisation needed title */
+"Authorisation needed" = "Autorizzazione necessaria";
+
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Dietro";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "Bicicletta";
+
+/* Cancel action */
+"Cancel" = "Cancella";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "Cancellato";
+
+/* No comment provided by engineer. */
+"Cannot proceed without a valid email address" = "Non può procedere senza un indirizzo email valido";
+
+/* Type of vehicle : car */
+"Car" = "Auto";
+
+/* Instruction for changing password */
+"Change" = "Modifica";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "Modifica le opzioni di monitoraggio";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "Segno di spunta";
+
+/* Close action */
+"Close" = "Chiudi";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "Confermare";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Contatta il supporto";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "Impossibile trovare la tua posizione corrente.";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "Impossibile scaricare regioni supportate dal server di TripGo. Riprova più tardi.";
+
+/* Message that indicates the app is creating accounts for users */
+"Creating account" = "Creazione conto";
+
+/* Current city */
+"Current City" = "Città attuale";
+
+/* Title for user's current location */
+"Current Location" = "Posizione attuale";
+
+/* Delete action */
+"Delete" = "Cancella";
+
+/* Sort by distance */
+"Distance" = "Distanza";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "Non hai un account? Iscriviti";
+
+/* Done action */
+"Done" = "Fatto";
+
+/* Drop new pin */
+"Drop new pin" = "Inserisci nuovo punto";
+
+/* For email address */
+"Email" = "Email";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "Ogni %@";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "Tutti i giorni";
+
+/* Reminder to leave preference */
+"For when to leave" = "Entro che ora vuoi partire";
+
+/* Free as in beer */
+"Free" = "Gratis";
+
+/* No comment provided by engineer. */
+"Getting a lift" = "Prendere Carpool";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "Ha un promemoria";
+
+/* Include contacts. */
+"Include contacts" = "Includi contatti";
+
+/* Include events. */
+"Include events" = "Includi eventi";
+
+/* Instant results proposal */
+"Instant results" = "Risultati istantanei";
+
+/* Title for alert that indicates the user account has become invalid */
+"Invalid account" = "Account non valido";
+
+/* Name placeholder text */
+"John Appleseed" = "John Appleseed";
+
+/* Title of button to perform some action at a later time */
+"Later" = "Later";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "Caricamento";
+
+/* Title for unnamed location */
+"Location" = "Posizione";
+
+/* Location iOS authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Per utilizzare questa funzione è necessario abilitare i servizi di localizzazione. Vai su Impostazioni> Privacy> servizi di localizzazione, assicurati che siano abilitati e autorizza questa app.";
+
+/* Reminder to leave preference */
+"Minutes before trip" = "Minuti prima del viaggio";
+
+/* More results proposal */
+"More results" = "Ulteriori risultati";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "Motocicletta";
+
+/* Title for view that shows the summary of a user's account information */
+"My account" = "Il mio account";
+
+/* Title for name of something (or someone) */
+"Name" = "Nome";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "Mai";
+
+/* Title of page to create new account */
+"New account" = "Nuovo account";
+
+/* Next action */
+"Next" = "Prossimo";
+
+/* No comment provided by engineer. */
+"No CO₂" = "Nessun CO₂";
+
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Non Accessibile con sedia a rotelle";
+
+/* Countdown cell 'now' indicator */
+"Now" = "Adesso";
+
+/* Ok action */
+"OK" = "Ok";
+
+/* Button that goes to the Setting's app */
+"Open Settings" = "Apri Impostazioni";
+
+/* Open in Safari action */
+"Open in Safari" = "Apri in Safari";
+
+/* No comment provided by engineer. */
+"Password" = "Password";
+
+/* Please select a location prompt */
+"Please select a location" = "Seleziona una posizione";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "Riprovare o impostare la tua posizione manualmente.";
+
+/* Please verify the location prompt */
+"Please verify the location" = "Verifica la posizione";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more..." = "Premere 'cerca' per altro...";
+
+/* No comment provided by engineer. */
+"Read more..." = "Leggi di più...";
+
+/* Indicator for real-time information */
+"Real-time" = "Tempo reale";
+
+/* Action title to add/remove reminder */
+"Reminder" = "Promemoria";
+
+/* Repeats daily */
+"Repeats daily" = "Ripeti tutti i giorni";
+
+/* Repeats monthly */
+"Repeats monthly" = "Ripeti mensilmente";
+
+/* Repeats weekly */
+"Repeats weekly" = "Ripeti settimanalmente";
+
+/* Repeats yearly */
+"Repeats yearly" = "Ripeti annualmente";
+
+/* Button title to report a problem */
+"Report Problem" = "Segnala il problema";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "Riprova";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "Punteggio";
+
+/* Empty search bar placeholder */
+"Search" = "Cerca";
+
+/* No comment provided by engineer. */
+"Search Results" = "Risultati della ricerca";
+
+/* No comment provided by engineer. */
+"Search for a city" = "Cerca una città";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'..." = "Cercando '%@'...";
+
+/* Title of page or button to sign in */
+"Sign in" = "Accedi";
+
+/* Instruction for signing out user account */
+"Sign out" = "Esegui il logout";
+
+/* Title of page or button to sign up */
+"Sign up" = "Registrazione";
+
+/* No comment provided by engineer. */
+"Sign up cannot be completed without a valid password" = "L'iscrizione non può essere completata senza una password valida";
+
+/* Message that indicates the app is signing users into their user accounts */
+"Signing in" = "Accesso in corso";
+
+/* Message that indicates the app is signing users out of their accounts */
+"Signing out" = "Logout in corso";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "A partire %@";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "Seleziona un luogo";
+
+/* Message that indicates the app is about to sign users out of their user accounts */
+"The app will now sign out" = "L'applicazione verrà disconnesso";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "Ricerca posizione - spento";
+
+/* user location button - follow */
+"Tracking - on" = "Ricerca posizione - acceso";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "Ricerca posizione - acceso, destinazione compresa";
+
+/* No comment provided by engineer. */
+"Unknown error" = "Errore sconosciuto";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "Fino a %@";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "Aggiornamento del viaggio";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "Valori mancanti dai campi obbligatori.";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "Giorni feriali";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "Fine settimana";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Accessibilità su sedia a rotelle sconosciuta";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "Accessibile con sedia a rotelle";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "Vuoi segnalare un problema?";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "Devi accettare i termini e le condizioni di prenotazione.";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "Devi accettare i termini e le condizioni di assicurazione.";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "A questa applicazione è stato negato l'accesso al tuo calendario. Per favore, vai su Impostazioni > Privacy > Calendario e autorizza questa applicazione ad utilizzare questa funzione.";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "A questa applicazione è stato negato l'accesso ai tuoi contatti. Per favore, vai su Impostazioni > Privacy > Contatti e autorizza questa applicazione ad utilizzare questa funzione.";
+
+/* Indicator that an event is all-day */
+"all-day" = "tutto il giorno";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "arrivo %@";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "partenza %@";
+
+/* Short indicator of end-time */
+"ends at %@" = "termina alle %@";
+
+/* Email placeholder text */
+"example@example.com" = "example@example.com";
+
+/* Short indicator of start-time */
+"starts at %@" = "inizia alle %@";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "a %@";
+

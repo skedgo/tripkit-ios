@@ -18,7 +18,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@class SGMapButtonView;
+@class TKMapButtonView;
 @protocol ASMapManagerDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -27,10 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
-@property (nonatomic, weak, nullable) SGMapButtonView *mapButtonView;
-@property (nonatomic, assign) CGFloat topOverlap;
-@property (nonatomic, assign) CGFloat bottomOverlap;
-
+@property (nonatomic, weak, nullable) TKMapButtonView *mapButtonView;
 
 /**
  * A polygon which will be shown as a greyed out overlay. Use this to mark
@@ -41,6 +38,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) MKPolygon *overlayPolygon;
 
 @property (nonatomic, assign) BOOL willHotSwap;
+
+/**
+ * Boolean if the last viewed map rect should be restored when the map manager
+ * is taking charge of the map - if `lastMapRectUserDefaultsKey` is set.
+ *
+ * @default true
+ */
+@property (nonatomic, assign) BOOL allowRestoringLastMapRect;
 
 /**
  * The key path to where the last visible map rect is stored in the user
@@ -62,6 +67,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (MKMapRect)mapRectForUserDefaultsKey:(nullable NSString *)mapKey
                                dateKey:(nullable NSString *)dateKey;
 
++ (void)saveMapRect:(MKMapRect)rect
+ forUserDefaultsKey:(NSString *)mapKey
+            dateKey:(nullable NSString *)dateKey;
+
 - (BOOL)isActive;
 
 /**
@@ -77,9 +86,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)cleanUp:(BOOL)animated
      completion:(nullable void (^)(BOOL finished))completion;
-
-- (CGFloat)topLayoutGuideLength;
-- (CGFloat)bottomLayoutGuideLength;
 
 @end
 
@@ -112,7 +118,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)mapManagerIsVisible:(ASMapManager *)mapMan;
 
-- (CGFloat)topOverlap;
 - (void)dismissPopoverAnimated:(BOOL)animated;
 
 @end

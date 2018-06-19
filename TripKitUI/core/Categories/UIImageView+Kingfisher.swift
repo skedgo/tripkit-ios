@@ -11,14 +11,49 @@ import Foundation
 import Kingfisher
 
 extension UIImageView {
-  
+
   @objc(setImageWithURL:)
   public func setImage(with url: URL?) {
-    setImage(with: url, placeholder: nil)
+    setImage(with: url, asTemplate: false)
+  }
+
+  @objc(setImageWithURL:asTemplate:)
+  public func setImage(with url: URL?, asTemplate: Bool) {
+    setImage(with: url, asTemplate: asTemplate, placeholder: nil)
   }
 
   @objc(setImageWithURL:placeholderImage:)
   public func setImage(with url: URL?, placeholder: SGKImage?) {
+    setImage(with: url, asTemplate: false, placeholder: placeholder)
+  }
+  
+  @objc(setImageWithURL:asTemplate:placeholderImage:)
+  public func setImage(with url: URL?, asTemplate: Bool, placeholder: SGKImage?) {
+    
+    var options: KingfisherOptionsInfo = []
+    if let url = url, url.path.contains("@2x") {
+      options.append(.scaleFactor(2))
+    } else if let url = url, url.path.contains("@3x") {
+      options.append(.scaleFactor(3))
+    }
+    
+    if asTemplate {
+      options.append(.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate)))
+    }
+    
+    kf.setImage(with: url, placeholder: placeholder, options: options)
+  }
+  
+}
+
+extension UIButton {
+  
+  public func setImage(with url: URL?, for state: UIControlState) {
+    setImage(with: url, for: state, placeholder: nil)
+  }
+  
+  @objc(setImageWithURL:forState:placeholderImage:)
+  public func setImage(with url: URL?, for state: UIControlState, placeholder: SGKImage?) {
     
     let options: KingfisherOptionsInfo?
     if let url = url, url.path.contains("@2x") {
@@ -29,7 +64,7 @@ extension UIImageView {
       options = nil
     }
     
-    kf.setImage(with: url, placeholder: placeholder, options: options)
+    kf.setImage(with: url, for: state, placeholder: placeholder, options: options)
   }
   
 }

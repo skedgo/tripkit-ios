@@ -115,7 +115,7 @@
           // now we can animate to the proper coordinate
           vehicle.coordinate = goodCoordinate;
           
-          if (vehicle.bearing) {
+          if (vehicle.bearing != nil) {
             [view rotateVehicleWithBearingAngle:vehicle.bearing.floatValue - self.heading];
           }
         }];
@@ -354,11 +354,11 @@
   if ([annotation isKindOfClass:[MKUserLocation class]])
     return nil;
   
-  AnnotationViewBuilder *builder = [[AnnotationViewBuilder alloc] initForAnnotation:annotation inMapView:mv];
+  TKAnnotationViewBuilder *builder = [[TKAnnotationViewBuilder alloc] initForAnnotation:annotation inMapView:mv];
   [builder drawCircleAsTravelled:[self drawCircleAsTravelled:annotation]];
   [builder drawCircleAsLarge:[self drawAsLargeCircle:annotation]];
   [builder withHeading:self.heading];
-  [builder preferSemaphore:[annotation isKindOfClass:[StopVisits class]] && [self showAsSemaphore:(StopVisits *)annotation]];
+  [builder preferSemaphore:[self showAsSemaphore:annotation]];
   return [builder build];
 }
 
@@ -388,9 +388,9 @@
   return YES;
 }
 
-- (BOOL)showAsSemaphore:(StopVisits *)visit
+- (BOOL)showAsSemaphore:(id<MKAnnotation>)annotation
 {
-#pragma unused(visit)
+#pragma unused(annotation)
   return NO;
 }
 

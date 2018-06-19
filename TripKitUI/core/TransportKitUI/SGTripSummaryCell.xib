@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,55 +13,55 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SGTripSummaryCell" rowHeight="173" id="q3A-U9-bU9" customClass="SGTripSummaryCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SGTripSummaryCell" rowHeight="173" id="q3A-U9-bU9" customClass="SGTripSummaryCell">
             <rect key="frame" x="0.0" y="0.0" width="358" height="173"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q3A-U9-bU9" id="lBM-9G-sJG">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="q3A-U9-bU9" id="lBM-9G-sJG">
                 <rect key="frame" x="0.0" y="0.0" width="358" height="172.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrf-gw-7h5" userLabel="wrapper">
-                        <rect key="frame" x="8" y="8" width="342" height="156"/>
+                        <rect key="frame" x="16" y="11" width="326" height="151"/>
                         <subviews>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-marker-tick" translatesAutoresizingMaskIntoConstraints="NO" id="dE2-37-R9E">
-                                <rect key="frame" x="317" y="0.0" width="25" height="25"/>
+                                <rect key="frame" x="301" y="0.0" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="LKr-Nb-DjB"/>
                                     <constraint firstAttribute="width" secondItem="dE2-37-R9E" secondAttribute="height" multiplier="1:1" id="wdJ-s8-7Lh"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ayh-xY-XJ9" customClass="SGLabel">
-                                <rect key="frame" x="16" y="8" width="293" height="60"/>
+                                <rect key="frame" x="16" y="8" width="277" height="55"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" red="0.23577216267585754" green="0.23576508462429047" blue="0.23576909303665161" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9M-8O-z27" customClass="SGTripSegmentsView">
-                                <rect key="frame" x="8" y="72" width="326" height="40"/>
+                                <rect key="frame" x="8" y="67" width="310" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="999" constant="40" id="W28-lg-yhr"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SeT-t4-WR8" userLabel="Separator">
-                                <rect key="frame" x="8" y="116" width="326" height="1"/>
+                                <rect key="frame" x="8" y="111" width="310" height="1"/>
                                 <color key="backgroundColor" red="0.95999997854232788" green="0.95999997854232788" blue="0.95999997854232788" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="m4Z-5E-hUI"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ig2-KL-q6G" userLabel="Costs label" customClass="SGLabel">
-                                <rect key="frame" x="16" y="121" width="213" height="27"/>
+                                <rect key="frame" x="16" y="116" width="197" height="27"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" red="0.64233720302581787" green="0.6423180103302002" blue="0.64232891798019409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfV-7h-SsT" customClass="SGButton">
-                                <rect key="frame" x="237" y="121" width="97" height="27"/>
+                                <rect key="frame" x="221" y="116.5" width="97" height="27"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <state key="normal" title="Every 10 minutes"/>
                             </button>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-marker-alert" translatesAutoresizingMaskIntoConstraints="NO" id="I0Q-kM-LN4">
-                                <rect key="frame" x="317" y="0.0" width="25" height="25"/>
+                                <rect key="frame" x="301" y="0.0" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="InO-Rb-cQq"/>
                                 </constraints>
@@ -81,14 +81,13 @@
                             <constraint firstItem="ayh-xY-XJ9" firstAttribute="leading" secondItem="yrf-gw-7h5" secondAttribute="leadingMargin" constant="8" id="Xzp-XP-kvS"/>
                             <constraint firstItem="Ig2-KL-q6G" firstAttribute="top" secondItem="SeT-t4-WR8" secondAttribute="bottom" constant="4" id="gZi-wy-7Kg"/>
                             <constraint firstItem="ayh-xY-XJ9" firstAttribute="top" secondItem="yrf-gw-7h5" secondAttribute="topMargin" id="hhO-B7-63w"/>
-                            <constraint firstItem="Ig2-KL-q6G" firstAttribute="leading" secondItem="yrf-gw-7h5" secondAttribute="leadingMargin" constant="8" id="hwJ-IT-RMU"/>
+                            <constraint firstItem="Ig2-KL-q6G" firstAttribute="leading" secondItem="ayh-xY-XJ9" secondAttribute="leading" id="kws-s3-pbP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="G9M-8O-z27" secondAttribute="trailing" id="lWP-Ib-FAy"/>
-                            <constraint firstItem="dfV-7h-SsT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SeT-t4-WR8" secondAttribute="bottom" id="mAd-Ag-NLh"/>
-                            <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="dfV-7h-SsT" secondAttribute="bottom" id="om4-JS-yzA"/>
                             <constraint firstAttribute="trailing" secondItem="I0Q-kM-LN4" secondAttribute="trailing" id="ppq-5h-t4y"/>
                             <constraint firstAttribute="trailing" secondItem="dE2-37-R9E" secondAttribute="trailing" id="qES-zk-Yzt"/>
                             <constraint firstAttribute="trailing" secondItem="ayh-xY-XJ9" secondAttribute="trailing" constant="33" id="wHY-aU-X6f"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SeT-t4-WR8" secondAttribute="trailing" id="wr6-ka-uXX"/>
+                            <constraint firstItem="dfV-7h-SsT" firstAttribute="height" secondItem="Ig2-KL-q6G" secondAttribute="height" id="xhY-Ge-uE8"/>
                             <constraint firstItem="SeT-t4-WR8" firstAttribute="leading" secondItem="yrf-gw-7h5" secondAttribute="leadingMargin" id="xkQ-jQ-Ftq"/>
                             <constraint firstItem="G9M-8O-z27" firstAttribute="leading" secondItem="yrf-gw-7h5" secondAttribute="leadingMargin" id="yrU-hJ-yn8"/>
                         </constraints>

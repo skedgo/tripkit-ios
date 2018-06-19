@@ -83,6 +83,7 @@ extension SGTripSummaryCell {
     }
     
     // time and duration
+    _addTimeString(forDeparture: trip.departureTime, arrival: trip.arrivalTime, departureTimeZone: trip.departureTimeZone, arrivalTimeZone: trip.arrivalTimeZone ?? trip.departureTimeZone, focusOnDuration: !trip.departureTimeIsFixed, queryIsArriveBefore: trip.isArriveBefore)
     
     if showCosts {
       _addCosts(trip.costValues)
@@ -98,6 +99,15 @@ extension SGTripSummaryCell {
   
   private func updateSegments(nano: Bool) {
     segmentView?.allowWheelchairIcon = allowWheelchairIcon
+    segmentView?.colorCodingTransitIcon = colorCodingTransitIcon
+    
+    if let darkColor = darkTextColor {
+      segmentView?.darkTextColor = darkColor
+    }
+    if let lightColor = lightTextColor {
+      segmentView?.lightTextColor = lightColor
+    }
+
     segmentView?.configure(forSegments: _trip.segments(with: .inSummary), allowSubtitles: !nano, allowInfoIcons: !nano)
   }
   

@@ -29,7 +29,7 @@ public class TKAlertInfoView: UIView {
   /// `title` and `text` properties will be used by the titleLabel and
   /// instructionLabel respectively.
   ///
-  @objc public var alert: TKAlertModel? {
+  @objc public var alert: TKAlert? {
     didSet {
       guard let alert = alert else { return }
       titleLabel.text = alert.title
@@ -53,7 +53,7 @@ public class TKAlertInfoView: UIView {
   ///
   /// - Parameter alert: An alert instance used to configure title and instruction labels.
   /// - Returns: An instance of TKAlertInfoView
-  @objc public class func newInstance(with alert: TKAlertModel) -> TKAlertInfoView {
+  @objc public class func newInstance(with alert: TKAlert) -> TKAlertInfoView {
     let view = newInstance()
     view.alert = alert
     return view
@@ -62,25 +62,38 @@ public class TKAlertInfoView: UIView {
   
   /// Asks the alert info view to show only its title, i.e., hide the instruction
   /// portion of the view.
-  @objc public func showTitleOnly() {
+  @objc public func showTitleOnly(maxY: CGFloat) {
     guard superview != nil, isShowingFullContent else { return }
-    frame.origin.y += frame.size.height - instructionLabel.frame.origin.y
+    let bottomPadding: CGFloat
+    if #available(iOSApplicationExtension 11.0, *) {
+      bottomPadding = safeAreaInsets.bottom
+    } else {
+      bottomPadding = 0
+    }
+    frame.origin.y = maxY - bottomPadding - instructionLabel.frame.minY
     isShowingFullContent = false
   }
   
   
   /// Ask the alert info view to show its entire content, including both title
   /// and instruction.
-  @objc public func showFullContent() {
+  @objc public func showFullContent(maxY: CGFloat) {
     guard superview != nil, !isShowingFullContent else { return }
-    frame.origin.y -= frame.size.height - instructionLabel.frame.origin.y
+
+    let bottomPadding: CGFloat
+    if #available(iOSApplicationExtension 11.0, *) {
+      bottomPadding = safeAreaInsets.bottom
+    } else {
+      bottomPadding = 0
+    }
+    frame.origin.y = maxY - bottomPadding - frame.height
     isShowingFullContent = true
   }
   
   
   /// Toggles the alert info view betwen showing title only or full content.
-  @objc public func toggle() {
-    isShowingFullContent ? showTitleOnly() : showFullContent()
+  @objc public func toggle(maxY: CGFloat) {
+    isShowingFullContent ? showTitleOnly(maxY: maxY) : showFullContent(maxY: maxY)
   }
   
   

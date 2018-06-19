@@ -1,0 +1,59 @@
+{
+  "carRental": {
+    "company": {"name": "East Coast Rentals"},
+    "identifier": "CARRENTAL_1339",
+    "openingHours": {
+      "days": [
+               {
+               "name": "SATURDAY",
+               "times": [{
+                         "closes": "17:00",
+                         "opens": "08:00"
+                         }]
+               },
+               {
+               "name": "THURSDAY",
+               "times": [{
+                         "closes": "17:00",
+                         "opens": "08:00"
+                         }]
+               },
+               {
+               "name": "FRIDAY",
+               "times": [{
+                         "closes": "17:00",
+                         "opens": "08:00"
+                         }]
+               },
+               {
+               "name": "WEDNESDAY",
+               "times": [{
+                         "closes": "17:00",
+                         "opens": "08:00"
+                         }]
+               },
+               {
+               "name": "SUNDAY",
+               "times": [{
+                         "closes": "17:00",
+                         "opens": "08:00"
+                         }]
+               },
+               {
+               "name": "PUBLIC_HOLIDAY",
+               "times": [{
+                         "closes": "17:00",
+                         "opens": "08:00"
+                         }]
+               }
+               ],
+      "timeZone": "Australia/Melbourne"
+    },
+    "source": {"provider": {
+      "name": "Swiftfleet",
+      "website": "http://swiftfleet.com"
+    }}
+  },
+  "lat": -37.80986499999999,
+  "lng": 144.962067
+}

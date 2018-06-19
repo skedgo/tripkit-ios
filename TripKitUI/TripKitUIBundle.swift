@@ -9,9 +9,30 @@
 import Foundation
 import UIKit
 
+extension UIImage {
+
+  @objc public static let backgroundNavSecondary = named("bg-nav-secondary")
+  
+  // Occupancy
+  
+  static let iconCheckMini = named("icon-check-mini")
+  static let iconExclamationmarkMini = named("icon-exclamation-mark-mini")
+  static let iconCrossMini = named("icon-cross-mini")
+  static let iconWheelchairMini = named("icon-wheelchair-mini")
+
+}
+
+extension UIImage {
+  
+  private static func named(_ name: String) -> UIImage {
+    return UIImage(named: name, in: .tripKitUI, compatibleWith: nil)!
+  }
+}
+
+
 public class TripKitUIBundle: NSObject {
   @objc public class func optionalImageNamed(_ name: String) -> UIImage? {
-    return UIImage(named: name, in: bundle(), compatibleWith: nil)
+    return UIImage(named: name, in: .tripKitUI, compatibleWith: nil)
   }
 
   @objc public class func imageNamed(_ name: String) -> UIImage {

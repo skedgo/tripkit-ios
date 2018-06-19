@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitUI"
-  s.version      = "3.0-beta0"
+  s.version      = "3.1.1"
   s.summary      = "SkedGo's TripKitUI"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = 'Apache License, Version 2.0'
@@ -22,13 +22,16 @@ Pod::Spec.new do |s|
 
   s.dependency 'ASPolylineView'
   s.dependency 'Kingfisher'
-  s.dependency 'RxSwift', '~> 4.0.0-rc.0'
-  s.dependency 'RxCocoa', '~> 4.0.0-rc.0'
+  s.dependency 'RxSwift', '~> 4.0.0'
+  s.dependency 'RxCocoa', '~> 4.0.0'
 
   s.dependency 'TGCardViewController'
-  s.dependency 'RxDataSources', '~> 3.0.0-rc.0'
+  s.dependency 'RxDataSources', '~> 3.0.0'
 
-  s.source_files = "TripKitUI/**/*.{h,m,swift}"
+  s.source_files = [
+    "TripKitUI-iOS/*.h",
+    "TripKitUI/**/*.{h,m,swift}"
+  ]
   s.resources    = [
     "Resources/TripKitUI.*",
     "TripKitUI/**/*.xib"

@@ -13,9 +13,9 @@
 #import "TripKit/TripKit-Swift.h"
 #else
 @import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
-#import "SGMapButtonView.h"
 #import "SGPolylineRenderer.h"
 
 @interface ASMapManager ()
@@ -36,7 +36,16 @@
 
 @implementation ASMapManager
 
-- (void)setMapButtonView:(SGMapButtonView *)mapButtonView
+- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    self.allowRestoringLastMapRect = YES;
+  }
+  return self;
+}
+
+- (void)setMapButtonView:(TKMapButtonView *)mapButtonView
 {
   _mapButtonView = mapButtonView;
   self.originalButtons = [mapButtonView items];
@@ -81,7 +90,7 @@
   [self addOverlay];
   
   // restore last used map location
-  if (! self.willHotSwap && self.lastMapRectUserDefaultsKey) {
+  if (self.allowRestoringLastMapRect && ! self.willHotSwap && self.lastMapRectUserDefaultsKey) {
     [self showLastUsedMapRect:NO];
   }
 	
@@ -106,16 +115,6 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
   _tap.delegate = nil;
-}
-
-- (CGFloat)topLayoutGuideLength
-{
-  return self.topOverlap;
-}
-
-- (CGFloat)bottomLayoutGuideLength
-{
-  return self.bottomOverlap;
 }
 
 - (void)setOverlayPolygon:(MKPolygon *)overlayPolygon
@@ -166,7 +165,7 @@
     return aRenderer;
     
   } else {
-    return nil;
+    return [[MKOverlayRenderer alloc] initWithOverlay:overlay];
   }
 }
 
@@ -279,14 +278,14 @@
 	if (self.mapButtonView) {
 		if (! buttons || buttons.count == 0) {
 			// restore
-			[self.mapButtonView setItems:self.originalButtons animated:animated];
+			[self.mapButtonView setItems:self.originalButtons];
 		} else {
 			NSMutableArray *items = [NSMutableArray array];
 			if (includeOriginal) {
 				[items addObjectsFromArray:self.originalButtons];
 			}
 			[items addObjectsFromArray:buttons];
-			[self.mapButtonView setItems:items animated:animated];
+			[self.mapButtonView setItems:items];
 		}
 	}
 }
@@ -318,6 +317,27 @@
                        [rectArray[3] doubleValue]);
 }
 
++ (void)saveMapRect:(MKMapRect)rect
+ forUserDefaultsKey:(NSString *)mapKey
+            dateKey:(nullable NSString *)dateKey
+{
+  if (rect.origin.x > 0 && rect.origin.y > 0 && rect.size.height > 0) {
+    NSArray *rectArray = @[
+                           @(rect.origin.x),
+                           @(rect.origin.y),
+                           @(rect.size.width),
+                           @(rect.size.height)
+                           ];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:rectArray
+                                              forKey:mapKey];
+    
+    if (dateKey != nil) {
+      [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:dateKey];
+    }
+  }
+}
+
 - (void)showLastUsedMapRect:(BOOL)animated
 {
   MKMapRect mapRect = [[self class] mapRectForUserDefaultsKey:self.lastMapRectUserDefaultsKey dateKey:self.lastUseUserDefaultsKey];
@@ -339,21 +359,9 @@
 	
 	// keep it for later if it's a valid rect
 	MKMapRect rect = self.mapView.visibleMapRect;
-	if (rect.origin.x > 0 && rect.origin.y > 0 && rect.size.height > 0) {
-		NSArray *rectArray = @[
-                           @(rect.origin.x),
-                           @(rect.origin.y),
-                           @(rect.size.width),
-                           @(rect.size.height)
-                           ];
-		
-		[[NSUserDefaults standardUserDefaults] setObject:rectArray
-                                              forKey:key];
-    
-    if (self.lastUseUserDefaultsKey != nil) {
-      [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:self.lastUseUserDefaultsKey];
-    }
-	}
+  [ASMapManager saveMapRect:rect
+         forUserDefaultsKey:key
+                    dateKey:self.lastUseUserDefaultsKey];
 }
 
 - (void)addDoubleTapZoomGestureRecognizer

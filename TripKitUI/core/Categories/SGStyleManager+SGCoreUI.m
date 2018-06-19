@@ -8,8 +8,9 @@
 
 #import "SGStyleManager+SGCoreUI.h"
 
-#import "UISearchBar+Customizable.h"
+#import <TripKitUI/TripKitUI-Swift.h>
 
+#import "UISearchBar+Customizable.h"
 #import "UIFont+CustomFonts.h"
 
 @interface UIViewController (PopoverHelpers)
@@ -30,17 +31,23 @@
 
 @implementation SGStyleManager (TripKitUI)
 
-+ (void)addLightStatusBarGradientLayerToView:(UIView *)view
++ (void)addLightStatusBarGradientLayerToView:(UIView *)view height:(CGFloat)height
 {
-  CAGradientLayer *gradient = [CAGradientLayer layer];
-  
   CGFloat width = MAX(CGRectGetWidth(view.frame), CGRectGetHeight(view.frame)) * 1.5f; // bigger to account for resizes
-  gradient.frame = CGRectMake(0, 0, width, 20);
-  
-  UIColor *c1 = [UIColor colorWithRed:52/255.0f green:78/255.0f blue:109/255.0f alpha:0.7f];
-  gradient.colors = @[(id)c1.CGColor, (id)c1.CGColor];
-  
+  CAGradientLayer *gradient = [self lightGradientLayerWithWidth:width height:height];
   [view.layer addSublayer:gradient];
+}
+
++ (void)addLightStatusBarGradientLayerToView:(UIView *)view belowView:(UIView *)anotherView height:(CGFloat)height
+{
+  CGFloat width = MAX(CGRectGetWidth(view.frame), CGRectGetHeight(view.frame)) * 1.5f; // bigger to account for resizes
+  CAGradientLayer *gradient = [self lightGradientLayerWithWidth:width height:height];
+  
+  if (anotherView != nil) {
+    [view.layer insertSublayer:gradient below:anotherView.layer];
+  } else {
+    [view.layer addSublayer:gradient];
+  }
 }
 
 + (void)removeGradientLayerFromView:(UIView *)view
@@ -111,6 +118,19 @@
   return [UIColor colorWithWhite:247/255.f alpha:1];
 }
 
+#pragma mark - Helpers
+
++ (CAGradientLayer *)lightGradientLayerWithWidth:(CGFloat)width height:(CGFloat)height
+{
+  CAGradientLayer *gradient = [CAGradientLayer layer];
+  gradient.frame = CGRectMake(0, 0, width, height);
+  
+  UIColor *c1 = [UIColor colorWithRed:52/255.0f green:78/255.0f blue:109/255.0f alpha:0.7f];
+  gradient.colors = @[(id)c1.CGColor, (id)c1.CGColor];
+  
+  return gradient;
+}
+
 #pragma mark - Styling bars
 
 + (void)styleNavigationControllerAsDark:(UINavigationController *)navigationController
@@ -129,11 +149,13 @@
    includingBackground:(BOOL)includeBackground
 {
   // style the searchbar
-  UIImage *navBarBg    = [UIImage imageNamed:@"bg-nav-secondary"];
-  if (!includeBackground) {
+  UIImage *navBarBg;
+  if (includeBackground) {
+    navBarBg = UIImage.backgroundNavSecondary;
+  } else {
     navBarBg = [[UIImage alloc] init]; // blank
   }
-  searchBar.tintColor = [self globalTintColor];
+  searchBar.tintColor = [self globalAccentColor];
   searchBar.backgroundImage = navBarBg;
   
   // style the text field
@@ -153,7 +175,7 @@
   UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
   UIImage *image = selected ? [self imageNamed:@"icon-callout-tick-filled"] : [self imageNamed:@"icon-callout-tick"];
   [button setImage:image forState:UIControlStateNormal];
-  button.accessibilityLabel = NSLocalizedStringFromTableInBundle(@"Checkmark", @"Shared", [SGStyleManager bundle], "Accessibility title for a checkmark/tick button");
+  button.accessibilityLabel = Loc.Checkmark;
   button.tintColor = [self globalTintColor];
   return button;
 }

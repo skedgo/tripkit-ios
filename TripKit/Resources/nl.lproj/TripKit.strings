@@ -1,0 +1,231 @@
+/* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
+"%1$@ early" = "%1$@ te vroeg";
+
+/* Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
+"%1$@ early (%2$@ service)" = "%1$@ te vroeg (%2$@ dienst)";
+
+/* Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min' */
+"%1$@ late" = "%1$@ te laat";
+
+/* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
+"%1$@ late (%2$@ service)" = "%1$@ te laat (%2$@ dienst)";
+
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ ago";
+
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@ meldingen";
+
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ fiets vriendelijk";
+
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ stations";
+
+/* For describing a time interval, e.g., '8:30 to 8:43'
+   From %time1 to %time2. (old key: TimeFromToShortFormat) */
+"%@ to %@" = "%1$@ naar %2$@";
+
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ zonder verkeer";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ rolstoel vriendelijk";
+
+/* Number of stops before you get off a stop, if there's just 1 stop. */
+"1 stop" = "1 station";
+
+/* No comment provided by engineer. */
+"Alerts" = "Alarm";
+
+/* apple maps directions action */
+"Apple Maps" = "Apple Kaarten";
+
+/* Arrival time sorter title */
+"Arrival" = "Aankomst";
+
+/* Prefix for selected 'arrive by' time
+   Single line instruction to arrive */
+"Arrive" = "Aankomst";
+
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "Arriveer om %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "Arriveer op %@ om %@";
+
+/* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
+"Arrive in" = "Arriveer in";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+"At %@" = "Op %@";
+
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "Book with %@";
+
+/* No comment provided by engineer. */
+"Call" = "Bel";
+
+/* Action title to make a call to service/company named '@%' */
+"Call %@" = "Bel %@";
+
+/* Error title when server could not find a given transit stop. */
+"Could not find transit stop." = "Overstap station kon niet gevonden worden.";
+
+/* Departure time sorter title */
+"Departure" = "Vertrek";
+
+/* Destination of the bus */
+"Direction" = "Eindpunt";
+
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "Verbinding verbreken";
+
+/* As in 'this bus/train is empty' */
+"Empty" = "Leeg";
+
+/* As in 'this bus/train has few seats available' */
+"Few seats available" = "Beperkte zitplaatsen beschikbaar";
+
+/* Indicating a path is wheelchair/cycyling friendly */
+"Friendly" = "Vriendelijk";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "Van %@";
+
+/* As in 'this bus/train is full and likely can't accept further passengers' */
+"Full" = "Vol";
+
+/* Action title get/download app of name '@%' */
+"Get %@" = "Get %@";
+
+/* Action button title for getting turn-by-turn directions */
+"Get directions" = "Routebeschrijving";
+
+/* google maps directions action */
+"Google Maps" = "Google Maps";
+
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "Ik kom aan op %@ om %@.";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "Ik neem de %@ om %@ vanuit %@.";
+
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "In %@";
+
+/* %@ is replaced with app name */
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "Ondertussen, laten we %@ blijven verkennen en geniet van uw reizen";
+
+/* Prefix for selected 'leave after' time
+   Single line instruction to leave */
+"Leave" = "Vertrek";
+
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "Verlaat %@";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "Verlaat %@ om %@";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "Vetrek om %@";
+
+/* Title for when to depart. Countdown to departure will be displayed below. */
+"Leave in" = "Vertrek in";
+
+/* No comment provided by engineer. */
+"Leave now" = "Vertrek nu";
+
+/* As in 'this bus/train is so full, there's only limited standing room' */
+"Limited standing room only" = "Beperkte staruimte";
+
+/* No comment provided by engineer. */
+"Live traffic" = "Live verkeer";
+
+/* Indicating when something is loading */
+"Loading..." = "Laden...";
+
+/* As in 'this bus/train has many seats available' */
+"Many seats available" = "Veel zitplaatsen beschikbaar";
+
+/* Title of button to get more details about an alert */
+"More info" = "Meer info";
+
+/* Indicating no trips have been planned within the next 24 hrs */
+"No planned trips" = "Geen geplannde trips";
+
+/* As in 'this bus/train is full and definitely not accepting further passengers' */
+"Not accepting passengers" = "Accepteert geen passagiers";
+
+/* Indicator to show when a service is on time according to real-time data. */
+"On time" = "Op tijd";
+
+/* Action title open app of name '@%' */
+"Open %@" = "Open %@";
+
+/* Title for opening hours */
+"Opening Hours" = "Openingstijden";
+
+/* No comment provided by engineer. */
+"Plan a trip and it will show up here." = "Plan een reis, en het zal hier verschijnen.";
+
+/* No comment provided by engineer. */
+"Public holiday" = "Officiële feestdag";
+
+/* No comment provided by engineer. */
+"Real-time" = "Real-time";
+
+/* Error recovery suggestion for when when server could not find a given transit stop. */
+"Search for this stop again or try again later.." = "Search for this stop again or try again later.";
+
+/* Send SMS action button */
+"Send SMS" = "SMS versturen";
+
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "Setup";
+
+/* Title for button that, when tapped, shows something, e.g., a list of alert */
+"Show" = "Meer";
+
+/* Show website action button */
+"Show website" = "Open Website";
+
+/* As in 'this bus/train is fairly full and has standing room only' */
+"Standing room only" = "Alleen staruimte beschikbaar";
+
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "Naar %@";
+
+/* Title for a trip */
+"Trip" = "Reis";
+
+/* Indicating a path is wheelchair/cycyling unfriendly */
+"Unfriendly" = "Onvriendelijk";
+
+/* Indicating the wheelchair/cycling friendliness of a path is unknown */
+"Unknown" = "Onbekend";
+
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "Bijgewerkt %@ geleden";
+
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "Voertuig %@ bijgewerkt %@ geleden";
+
+/* No comment provided by engineer. */
+"We are busy getting your upcoming trip. Please wait..." = "We zijn bezig om uw reis op te halen. Een ogenblik geduld...";
+
+/* No comment provided by engineer. */
+"We'll keep you updated with the latest transit alerts here" = "Hier houden we u op de hoogte van de nieuwste transport waarschuwingen";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "om %@";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "voor %@";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch een Taxi";
+
+/* inGogo taxi booking action */
+"ingogo a Taxi" = "ingogo een Taxi";
+

@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)zoomToAnnotation:(id<MKAnnotation>)annotation;
 
-- (BOOL)showAsSemaphore:(StopVisits *)visit;
+- (BOOL)showAsSemaphore:(id<MKAnnotation>)annotation;
 
 @end
 

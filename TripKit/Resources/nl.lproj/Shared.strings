@@ -1,0 +1,345 @@
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@'s";
+
+/* No comment provided by engineer. */
+"%@'s Home" = "%@'s thuis";
+
+/* No comment provided by engineer. */
+"%@'s Work" = "%@'s werk";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu herhalingen";
+
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "'%@' niet gevonden.";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Toegang tot deze functie is niet toegestaan op uw apparaat. Check Instellingen app > Algemeen > Beperkingen of vraag uw aanbieder voor meer informatie.";
+
+/* Accessibility label for action button */
+"Action" = "Actie";
+
+/* Default title for alert view */
+"Alert" = "Alarm";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "Heb je al een account? Aanmelden";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "Verificatie";
+
+/* Authorisation needed title */
+"Authorisation needed" = "Toegang vereist";
+
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Terug";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "Polkupyörä";
+
+/* Cancel action */
+"Cancel" = "Annuleer";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "Geannuleerd";
+
+/* No comment provided by engineer. */
+"Cannot proceed without a valid email address" = "Kan niet verder gaan zonder een geldig e-mailadres";
+
+/* Type of vehicle : car */
+"Car" = "Auto";
+
+/* Instruction for changing password */
+"Change" = "Wijzigen";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "Verander volgen opties";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "Vinkje";
+
+/* Close action */
+"Close" = "Sluiten";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "Bevestigen";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Support contacteren";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "Uw huidige locatie kon niet worden bepaald.";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "Er konden geen ondersteunde gebieden worden gedownload. Probeer het later opnieuw.";
+
+/* Message that indicates the app is creating accounts for users */
+"Creating account" = "Account aanmaken";
+
+/* Current city */
+"Current City" = "Huidige stad";
+
+/* Title for user's current location */
+"Current Location" = "Huidige locatie";
+
+/* Delete action */
+"Delete" = "Verwijderen";
+
+/* Sort by distance */
+"Distance" = "Afstand";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "Nog geen account? Aanmelden";
+
+/* Done action */
+"Done" = "Klaar";
+
+/* Drop new pin */
+"Drop new pin" = "Nieuwe pin neerzetten";
+
+/* For email address */
+"Email" = "E-mail";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "Elke %@";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "Elke dag";
+
+/* Reminder to leave preference */
+"For when to leave" = "Voor vertrek";
+
+/* Free as in beer */
+"Free" = "Gratis";
+
+/* No comment provided by engineer. */
+"Getting a lift" = "Ik krijg een lift";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "Heeft een herinnering";
+
+/* Include contacts. */
+"Include contacts" = "Contactpersonen opnemen";
+
+/* Include events. */
+"Include events" = "Activiteiten invoegen";
+
+/* Instant results proposal */
+"Instant results" = "Direct resultaten weergeven";
+
+/* Title for alert that indicates the user account has become invalid */
+"Invalid account" = "Ongeldig account";
+
+/* Name placeholder text */
+"John Appleseed" = "Klaas Jansen";
+
+/* Title of button to perform some action at a later time */
+"Later" = "Later";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "Laden";
+
+/* Title for unnamed location */
+"Location" = "Locatie";
+
+/* Location iOS authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Locatievoorzieningen moet ingeschakeld zijn om deze functie te gebruiken. Ga naar Instellingen > Privacy > Locatievoorzieningen om deze in te schakelen en sta dit ook toe voor deze app.";
+
+/* Reminder to leave preference */
+"Minutes before trip" = "Minuten voor vertrek";
+
+/* More results proposal */
+"More results" = "Meer resultaten";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "Moottoripyörä";
+
+/* Title for view that shows the summary of a user's account information */
+"My account" = "Mijn account";
+
+/* Title for name of something (or someone) */
+"Name" = "Naam";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "Nooit";
+
+/* Title of page to create new account */
+"New account" = "Nieuwe account";
+
+/* Next action */
+"Next" = "Volgende";
+
+/* No comment provided by engineer. */
+"No CO₂" = "Geen CO₂";
+
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Niet rolstoel toegankelijk";
+
+/* Countdown cell 'now' indicator */
+"Now" = "Nu";
+
+/* Ok action */
+"OK" = "OK";
+
+/* Button that goes to the Setting's app */
+"Open Settings" = "Instellingen openen";
+
+/* Open in Safari action */
+"Open in Safari" = "In Safari openen";
+
+/* No comment provided by engineer. */
+"Password" = "Paswoord";
+
+/* Please select a location prompt */
+"Please select a location" = "Selecteer een locatie";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "Probeer opnieuw of voer de locatie handmatig in.";
+
+/* Please verify the location prompt */
+"Please verify the location" = "Verifiëer de locatie";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more..." = "Druk op 'zoeken' voor meer...";
+
+/* No comment provided by engineer. */
+"Read more..." = "Lees meer...";
+
+/* Indicator for real-time information */
+"Real-time" = "Real-time";
+
+/* Action title to add/remove reminder */
+"Reminder" = "Herinnering";
+
+/* Repeats daily */
+"Repeats daily" = "Herhaald dagelijks";
+
+/* Repeats monthly */
+"Repeats monthly" = "Herhaald maandelijks";
+
+/* Repeats weekly */
+"Repeats weekly" = "Herhaald wekelijks";
+
+/* Repeats yearly */
+"Repeats yearly" = "Herhaald jaarlijks";
+
+/* Button title to report a problem */
+"Report Problem" = "Meld probleem";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "Opnieuw";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "Score";
+
+/* Empty search bar placeholder */
+"Search" = "Zoeken";
+
+/* No comment provided by engineer. */
+"Search Results" = "Zoekresultaten";
+
+/* No comment provided by engineer. */
+"Search for a city" = "Zoek een stad";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'..." = "Op zoek naar '%@'...";
+
+/* Title of page or button to sign in */
+"Sign in" = "Inloggen";
+
+/* Instruction for signing out user account */
+"Sign out" = "Afmelden";
+
+/* Title of page or button to sign up */
+"Sign up" = "Aanmelden";
+
+/* No comment provided by engineer. */
+"Sign up cannot be completed without a valid password" = "Het aanmelden kan niet worden voltooid zonder een geldig wachtwoord";
+
+/* Message that indicates the app is signing users into their user accounts */
+"Signing in" = "Inloggen";
+
+/* Message that indicates the app is signing users out of their accounts */
+"Signing out" = "Afmelden";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "Vanaf %@";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "Tik om een locatie in te stellen";
+
+/* Message that indicates the app is about to sign users out of their user accounts */
+"The app will now sign out" = "De app zal u nu afmelden";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "Volgen - uit";
+
+/* user location button - follow */
+"Tracking - on" = "Volgen - aan";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "Volgen - aan met richting";
+
+/* No comment provided by engineer. */
+"Unknown error" = "Onbekende fout";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "tot %@";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "Reis wordt bijgewerkt";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "Verplichte velden zijn nog niet allemaal ingevuld.";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "Weekdagen";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "Weekeinden";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Rolstoel toegankelijkheid onbekend";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "Rolstoel toegankelijk";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "Wil je een fout melden?";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "U moet akkoord gaan met de voorwaarden van de boeking.";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "U moet akkoord gaan met de verzekeringsvoorwaarden.";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "U heeft eerder de toegang van deze app naar uw kalender geweigerd. Ga naar Instellingen > Privacy > Kalender en geef TripGo toestemming om deze functie te gebruiken.";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "U heeft eerder de toegang van deze app naar uw kontakten geweigerd. Ga naar Instellingen > Privacy > Kontacten en geef TripGo toestemming om deze functie te gebruiken.";
+
+/* Indicator that an event is all-day */
+"all-day" = "hele dag";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "aankomst %@";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "vertrekt %@";
+
+/* Short indicator of end-time */
+"ends at %@" = "eindigt op %@";
+
+/* Email placeholder text */
+"example@example.com" = "info@voorbeeld.nl";
+
+/* Short indicator of start-time */
+"starts at %@" = "begint om %@";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "tot %@";
+

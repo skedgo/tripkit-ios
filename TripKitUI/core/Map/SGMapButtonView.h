@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+//NS_CLASS_DEPRECATED_IOS(2_0, 9_0, "Use TKMapButtonView instead")
 @interface SGMapButtonView : UIView
 
 + (CGRect)mapButtonFrameForViewController:(UIViewController *)viewController

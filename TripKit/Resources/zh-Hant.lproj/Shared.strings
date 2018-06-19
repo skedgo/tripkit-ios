@@ -1,0 +1,345 @@
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@的";
+
+/* No comment provided by engineer. */
+"%@'s Home" = "%@的住家";
+
+/* No comment provided by engineer. */
+"%@'s Work" = "%@的公司";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "重複%lu次";
+
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "無法找到'%@'.";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "在此裝置上使用本功能是受到限制的. 請到設定 > 一般 > 取用限制檢查您的設定或詢問您的裝置提供商.";
+
+/* Accessibility label for action button */
+"Action" = "動作";
+
+/* Default title for alert view */
+"Alert" = "警示";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "已經註冊？立即登錄！";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "認證服務提供商";
+
+/* Authorisation needed title */
+"Authorisation needed" = "需要用戶授權";
+
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "返回";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "自行車";
+
+/* Cancel action */
+"Cancel" = "取消";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "已被取消";
+
+/* No comment provided by engineer. */
+"Cannot proceed without a valid email address" = "需要一個有效的電子郵件來進行下一步";
+
+/* Type of vehicle : car */
+"Car" = "轎車";
+
+/* Instruction for changing password */
+"Change" = "更改";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "變更追蹤選項";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "選取標記";
+
+/* Close action */
+"Close" = "關閉";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "確認";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "聯繫支援";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "無法確認您的當前位置";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "無法從我們的伺服器下載所支援地區的列表．請稍後再嘗試一次。";
+
+/* Message that indicates the app is creating accounts for users */
+"Creating account" = "註冊帳戶";
+
+/* Current city */
+"Current City" = "當前城市";
+
+/* Title for user's current location */
+"Current Location" = "當前位置";
+
+/* Delete action */
+"Delete" = "刪除";
+
+/* Sort by distance */
+"Distance" = "距離";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "沒有帳戶嗎？註冊";
+
+/* Done action */
+"Done" = "完成";
+
+/* Drop new pin */
+"Drop new pin" = "放置新的大頭針";
+
+/* For email address */
+"Email" = "電子信箱";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "每 %@";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "每天";
+
+/* Reminder to leave preference */
+"For when to leave" = "出發時間";
+
+/* Free as in beer */
+"Free" = "免費";
+
+/* No comment provided by engineer. */
+"Getting a lift" = "與人共乘";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "有提醒事項";
+
+/* Include contacts. */
+"Include contacts" = "包含聯絡人";
+
+/* Include events. */
+"Include events" = "包含事件";
+
+/* Instant results proposal */
+"Instant results" = "快速搜尋結果";
+
+/* Title for alert that indicates the user account has become invalid */
+"Invalid account" = "無效的帳戶";
+
+/* Name placeholder text */
+"John Appleseed" = "您的姓名";
+
+/* Title of button to perform some action at a later time */
+"Later" = "Later";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "載入中";
+
+/* Title for unnamed location */
+"Location" = "地點詳情";
+
+/* Location iOS authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "本功能需要使用定位服務. 請到設定 > 隱私 > 定位服務確認服務是開啟的，同時也請確認您已授權本App使用定位服務.";
+
+/* Reminder to leave preference */
+"Minutes before trip" = "多久前提醒";
+
+/* More results proposal */
+"More results" = "更多搜尋結果";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "摩托車";
+
+/* Title for view that shows the summary of a user's account information */
+"My account" = "我的帳戶";
+
+/* Title for name of something (or someone) */
+"Name" = "名稱";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "永不重複";
+
+/* Title of page to create new account */
+"New account" = "設定新帳戶";
+
+/* Next action */
+"Next" = "下一步";
+
+/* No comment provided by engineer. */
+"No CO₂" = "無碳足跡";
+
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "沒有無障礙通道";
+
+/* Countdown cell 'now' indicator */
+"Now" = "現在";
+
+/* Ok action */
+"OK" = "好";
+
+/* Button that goes to the Setting's app */
+"Open Settings" = "開啟設定";
+
+/* Open in Safari action */
+"Open in Safari" = "在Safari中開啟";
+
+/* No comment provided by engineer. */
+"Password" = "密碼";
+
+/* Please select a location prompt */
+"Please select a location" = "請選擇一個地點";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "請再次嘗試一次或手動設定您的位置";
+
+/* Please verify the location prompt */
+"Please verify the location" = "請確認地點";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more..." = "點擊'搜尋'來取得更多結果...";
+
+/* No comment provided by engineer. */
+"Read more..." = "更多資訊";
+
+/* Indicator for real-time information */
+"Real-time" = "即時";
+
+/* Action title to add/remove reminder */
+"Reminder" = "提醒";
+
+/* Repeats daily */
+"Repeats daily" = "每天重複";
+
+/* Repeats monthly */
+"Repeats monthly" = "每月重複";
+
+/* Repeats weekly */
+"Repeats weekly" = "每週重複";
+
+/* Repeats yearly */
+"Repeats yearly" = "每年重複";
+
+/* Button title to report a problem */
+"Report Problem" = "回報問題";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "重試";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "休旅車";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "評分";
+
+/* Empty search bar placeholder */
+"Search" = "搜尋";
+
+/* No comment provided by engineer. */
+"Search Results" = "搜尋結果";
+
+/* No comment provided by engineer. */
+"Search for a city" = "搜尋城市";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'..." = "正在搜尋%@…";
+
+/* Title of page or button to sign in */
+"Sign in" = "登入";
+
+/* Instruction for signing out user account */
+"Sign out" = "登出";
+
+/* Title of page or button to sign up */
+"Sign up" = "註冊";
+
+/* No comment provided by engineer. */
+"Sign up cannot be completed without a valid password" = "需要一個有效的密碼來完成註冊";
+
+/* Message that indicates the app is signing users into their user accounts */
+"Signing in" = "登入中...";
+
+/* Message that indicates the app is signing users out of their accounts */
+"Signing out" = "登出中...";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "從%@";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "點擊來選取地點";
+
+/* Message that indicates the app is about to sign users out of their user accounts */
+"The app will now sign out" = "此App即將登出";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "關閉使用者位置追蹤功能";
+
+/* user location button - follow */
+"Tracking - on" = "開啟使用者位置追蹤功能";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "開啟使用者位置與航向追蹤功能";
+
+/* No comment provided by engineer. */
+"Unknown error" = "未知錯誤";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "到%@";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "更新路線";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "請填寫所有必要的項目";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "平日";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "週末";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "無法取得無障礙通道資訊";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "無障礙通道";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "你想要回報問題嗎？";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "您必須同意關於預訂的相關服務條款";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "您必須同意關於附加保險的相關服務條款";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "您之前拒絕了App使用您的行事曆．如想要使用本功能，請到設定 > 隱私 > 行事曆中更新您的授權.";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "您之前拒絕了App使用您的聯絡資訊．如想要使用本功能，請到設定 > 隱私 > 聯絡資訊中更新您的授權.";
+
+/* Indicator that an event is all-day */
+"all-day" = "整天";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "抵達時刻 %@";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "出發時刻 %@";
+
+/* Short indicator of end-time */
+"ends at %@" = "在%@結束";
+
+/* Email placeholder text */
+"example@example.com" = "example@example.com";
+
+/* Short indicator of start-time */
+"starts at %@" = "從%@開始";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "到%@";
+

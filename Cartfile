@@ -1,0 +1,14 @@
+# TripKit
+github "ReactiveX/RxSwift" ~> 4.0
+github "nighthawk/ASPolygonKit"
+
+# TripKitUI
+github "onevcat/Kingfisher" ~> 4.0
+github "nighthawk/ASPolylineView"
+github "RxSwiftCommunity/RxDataSources" ~> 3.0
+
+# TripKitBookings
+github "kishikawakatsumi/KeychainAccess"
+github "OAuthSwift/OAuthSwift" ~> 1.2.0
+github "SwiftyJSON/SwiftyJSON"
+github "skedgo/KVNProgress"

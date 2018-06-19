@@ -29,8 +29,6 @@
 @property (nonatomic, assign) BOOL durationFirst;
 @property (nonatomic, assign) BOOL arriveBefore;
 
-@property (nonatomic, assign) UIEdgeInsets xibContentMargins;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainLabelTrailingConstraint;
 
 @end
@@ -90,6 +88,7 @@
   [super prepareForReuse];
   
   self.wrapper.backgroundColor = [UIColor whiteColor];
+  self.contentView.layoutMargins = UIEdgeInsetsMake(8, 8, 8, 8);
   
   self._trip = nil;
   
@@ -133,14 +132,10 @@
                         bundle:[NSBundle bundleForClass:aClass]];
 }
 
-- (void)adjustToFillContentView
+- (void)setPreferNoPaddings:(BOOL)preferNoPaddings
 {
-  self.contentView.layoutMargins = UIEdgeInsetsZero;
-}
-
-- (void)adjustToFillContentViewWidth
-{
-  self.contentView.layoutMargins = UIEdgeInsetsMake(self.xibContentMargins.top, 0, self.xibContentMargins.bottom, 0);
+  _preferNoPaddings = preferNoPaddings;
+  self.contentView.layoutMargins = preferNoPaddings ? UIEdgeInsetsZero : UIEdgeInsetsMake(8, 8, 8, 8);
 }
 
 #pragma mark - Custom accessors
@@ -185,7 +180,7 @@
 - (NSString *)accessibilityLabel
 {
   if (self.showAlertIcon) {
-    return [NSString stringWithFormat:@"%@ - %@", self._tripAccessibilityLabel, NSLocalizedStringFromTableInBundle(@"Has reminder", @"Shared", [SGStyleManager bundle], @"Accessibility annotation for trips which have a reminder set.")];
+    return [NSString stringWithFormat:@"%@ - %@", self._tripAccessibilityLabel, Loc.HasReminder];
   } else {
     return self._tripAccessibilityLabel;
   }
@@ -196,15 +191,18 @@
 - (void)didInitialize
 {
   [SGStyleManager addDefaultOutline:self.wrapper];
-
+  
+  self.preservesSuperviewLayoutMargins = NO;
+  self.contentView.preservesSuperviewLayoutMargins = NO;
+  
+  self.wrapper.layer.cornerRadius = 4.0f;
+  
   self.showCosts = YES;
   self._objcDisposeBag = [[SGObjCDisposeBag alloc] init];
   
   [self.actionButton addTarget:self
                         action:@selector(actionButtonPressed:)
               forControlEvents:UIControlEventTouchUpInside];
-  
-  _xibContentMargins = self.contentView.layoutMargins;
   
   _preferredTintColor = self.tintColor;
 }
@@ -244,14 +242,14 @@
     
     NSMutableString *title = [NSMutableString stringWithString:departureString];
     [title appendString:@"\n"];
-    [title appendFormat:NSLocalizedStringFromTableInBundle(@"to %@", @"Shared", [SGStyleManager bundle], @"to %date. (old key: DateToFormat)"), arrivalString];
+    [title appendString:[Loc ToArrival:arrivalString]];
     NSString *nonBreaking = [title stringByReplacingOccurrencesOfString:@" " withString:@"\u00a0"];
     self.mainLabel.text = nonBreaking;
     return;
   }
   
   UIFont *primaryFont = _mainLabel.font;
-  UIColor *primaryColor = [SGStyleManager darkTextColor];
+  UIColor *primaryColor = self.darkTextColor;
   
   UIFont *secondaryFont = _mainLabel.font;
   UIColor *secondaryColor = [SGStyleManager lightTextColor];
@@ -269,13 +267,13 @@
       NSString *timeText = [SGStyleManager timeString:departure
                                           forTimeZone:self.departureTimeZone
                                    relativeToTimeZone:self.arrivalTimeZone];
-      NSString *bracketed = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"departs %@", @"Shared", [SGStyleManager bundle], "Estimated time of departure; parameter is time, e.g., 'departs 15:30'"), timeText];
+      NSString *bracketed = [Loc DepartsAtTime: timeText];
       secondaryText = [NSString stringWithFormat:@" (%@)", bracketed];
     } else {
       NSString *timeText = [SGStyleManager timeString:arrival
                                           forTimeZone:self.arrivalTimeZone
                                    relativeToTimeZone:self.departureTimeZone];
-      NSString *bracketed = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"arrives %@", @"Shared", [SGStyleManager bundle], "Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'"), timeText];
+      NSString *bracketed = [Loc ArrivesAtTime: timeText];
       secondaryText = [NSString stringWithFormat:@" (%@)", bracketed];
     }
     

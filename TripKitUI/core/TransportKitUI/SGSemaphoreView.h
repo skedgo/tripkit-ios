@@ -8,8 +8,10 @@
 
 @import MapKit;
 
-#ifndef TK_NO_MODULE
-
+#ifdef TK_NO_MODULE
+#import "TripKit.h"
+#else
+@import TripKit;
 #endif
 
 typedef NS_ENUM(NSInteger, SGSemaphoreLabel) {
@@ -39,6 +41,7 @@ typedef NS_ENUM(NSInteger, SGSemaphoreLabel) {
 
 - (void)setHeadWithImage:(UIImage *)image
                 imageURL:(NSURL *)imageURL
+         imageIsTemplate:(BOOL)asTemplate
               forBearing:(NSNumber *)bearing
 							andHeading:(CLLocationDirection)heading
 						canFlipImage:(BOOL)canFlipImage;

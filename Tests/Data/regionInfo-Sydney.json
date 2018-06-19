@@ -1,0 +1,947 @@
+{
+  "regions": [
+    {
+      "allowsBicyclesOnPublicTransport": true,
+      "bikeShare": [],
+      "code": "AU_NSW_Sydney",
+      "extraModes": [
+        {
+          "color": {
+            "blue": 62,
+            "green": 202,
+            "red": 221
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_tax",
+          "title": "Taxi"
+        },
+        {
+          "URL": "http://www.jayride.com.au/",
+          "color": {
+            "blue": 60,
+            "green": 123,
+            "red": 233
+          },
+          "integrations": [
+            "routing"
+          ],
+          "modeIdentifier": "ps_shu",
+          "title": "Shuttle"
+        }
+      ],
+      "hasSchoolServices": true,
+      "hasWheelchairInformation": true,
+      "modes": {
+        "me_car-r": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "minimumLocalCostForMembership": 0,
+              "modeInfo": {
+                "alt": "Car rental",
+                "color": {
+                  "blue": 243,
+                  "green": 169,
+                  "red": 115
+                },
+                "identifier": "me_car-r_SwiftFleet",
+                "localIcon": "car-share"
+              },
+              "title": "Car rental"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car rental",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-r",
+            "localIcon": "car-share"
+          },
+          "title": "Car rental"
+        },
+        "me_car-s": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "Car Next Door",
+                "color": {
+                  "blue": 134,
+                  "green": 82,
+                  "red": 253
+                },
+                "description": "Car Next Door",
+                "identifier": "me_car-s_CND",
+                "localIcon": "car-share",
+                "remoteIcon": "carnextdoor"
+              },
+              "title": "Car Next Door",
+              "url": "http://www.carnextdoor.com.au"
+            },
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "GoGet",
+                "color": {
+                  "blue": 106,
+                  "green": 63,
+                  "red": 0
+                },
+                "description": "GoGet",
+                "identifier": "me_car-s_GOG",
+                "localIcon": "car-share",
+                "remoteDarkIcon": "goget-dark",
+                "remoteIcon": "goget"
+              },
+              "title": "GoGet",
+              "url": "http://www.goget.com.au/"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Car share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "me_car-s",
+            "localIcon": "car-share"
+          },
+          "title": "Car share"
+        },
+        "ps_shu": {
+          "modeInfo": {
+            "alt": "Shuttle",
+            "color": {
+              "blue": 60,
+              "green": 123,
+              "red": 233
+            },
+            "identifier": "ps_shu",
+            "localIcon": "shuttlebus"
+          },
+          "title": "Shuttle",
+          "url": "http://www.jayride.com.au/"
+        },
+        "ps_tax": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "routing"
+              ],
+              "modeInfo": {
+                "alt": "myDriver",
+                "color": {
+                  "blue": 0,
+                  "green": 0,
+                  "red": 0
+                },
+                "description": "myDriver",
+                "identifier": "ps_tax_MYDRIVER",
+                "localIcon": "taxi",
+                "remoteIcon": "mydriver"
+              },
+              "title": "myDriver",
+              "url": "https://mydriver.com"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Taxi",
+            "color": {
+              "blue": 62,
+              "green": 202,
+              "red": 221
+            },
+            "identifier": "ps_tax",
+            "localIcon": "taxi"
+          },
+          "title": "Taxi"
+        },
+        "ps_tnc": {
+          "lockedModes": [
+            {
+              "integrations": [
+                "bookings",
+                "routing",
+                "real_time"
+              ],
+              "modeInfo": {
+                "alt": "Uber",
+                "color": {
+                  "blue": 213,
+                  "green": 186,
+                  "red": 47
+                },
+                "description": "Uber",
+                "identifier": "ps_tnc_UBER",
+                "localIcon": "car-ride-share",
+                "remoteIcon": "uber"
+              },
+              "title": "Uber",
+              "url": "https://www.uber.com"
+            }
+          ],
+          "modeInfo": {
+            "alt": "Ride share",
+            "color": {
+              "blue": 243,
+              "green": 169,
+              "red": 115
+            },
+            "identifier": "ps_tnc",
+            "localIcon": "car-ride-share"
+          },
+          "title": "Ride share"
+        },
+        "pt_pub": {
+          "modeInfo": {
+            "alt": "Public transport",
+            "color": {
+              "blue": 104,
+              "green": 197,
+              "red": 45
+            },
+            "identifier": "pt_pub",
+            "localIcon": "public-transport"
+          },
+          "specificModes": [
+            {
+              "modeInfo": {
+                "alt": "train",
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+              },
+              "operators": [
+                "Sydney Trains",
+                "NSW Trains"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "tram",
+                "identifier": "pt_pub_tram",
+                "localIcon": "tram"
+              },
+              "operators": [
+                "Sydney Light Rail"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "ferry",
+                "identifier": "pt_pub_ferry",
+                "localIcon": "ferry"
+              },
+              "operators": [
+                "Newcastle Transport",
+                "Sydney Ferries",
+                "Captain Cook Cruises",
+                "Manly Fast Ferry",
+                "Cronulla Ferries",
+                "Palm Beach Ferry Service",
+                "Church Point Ferry Service",
+                "Central Coast Ferries",
+                "Brooklyn Ferry Service"
+              ]
+            },
+            {
+              "modeInfo": {
+                "alt": "bus",
+                "identifier": "pt_pub_bus",
+                "localIcon": "bus"
+              },
+              "operators": [
+                "State Transit Sydney",
+                "Transdev NSW",
+                "Hillsbus",
+                "Busways Western Sydney",
+                "Hunter Valley Buses",
+                "Transit Systems",
+                "Newcastle Transport",
+                "Busways Central Coast",
+                "Busabout",
+                "Interline Bus Services",
+                "Premier Illawarra",
+                "Punchbowl Bus Company",
+                "Forest Coach Lines",
+                "Red Bus Service",
+                "Blue Mountains Transit",
+                "Dions Bus Service",
+                "Rover Coaches",
+                "Port Stephens Coaches",
+                "NightRide",
+                "Premier Charters",
+                "OPTUS BUS",
+                "Coastal Liner"
+              ]
+            }
+          ],
+          "title": "Public transport"
+        }
+      },
+      "operators": [
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "State Transit Sydney",
+          "numberOfServices": 41466,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "Sydney Trains",
+          "numberOfServices": 28222,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Transdev NSW",
+          "numberOfServices": 7006,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Hillsbus",
+          "numberOfServices": 6187,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Busways Western Sydney",
+          "numberOfServices": 6130,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_train"
+          ],
+          "name": "NSW Trains",
+          "numberOfServices": 5058,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "train",
+              "identifier": "pt_pub_train",
+              "localIcon": "train"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Hunter Valley Buses",
+          "numberOfServices": 3232,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Transit Systems",
+          "numberOfServices": 2878,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry",
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Newcastle Transport",
+          "numberOfServices": 2761,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Busways Central Coast",
+          "numberOfServices": 2416,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Busabout",
+          "numberOfServices": 2087,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Sydney Ferries",
+          "numberOfServices": 1889,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Interline Bus Services",
+          "numberOfServices": 1879,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Premier Illawarra",
+          "numberOfServices": 1789,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Punchbowl Bus Company",
+          "numberOfServices": 1526,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Forest Coach Lines",
+          "numberOfServices": 1252,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_tram"
+          ],
+          "name": "Sydney Light Rail",
+          "numberOfServices": 1117,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "tram",
+              "identifier": "pt_pub_tram",
+              "localIcon": "tram"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Red Bus Service",
+          "numberOfServices": 913,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Blue Mountains Transit",
+          "numberOfServices": 723,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Captain Cook Cruises",
+          "numberOfServices": 332,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Dions Bus Service",
+          "numberOfServices": 325,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Rover Coaches",
+          "numberOfServices": 271,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Port Stephens Coaches",
+          "numberOfServices": 262,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "NightRide",
+          "numberOfServices": 213,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Manly Fast Ferry",
+          "numberOfServices": 190,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Premier Charters",
+          "numberOfServices": 190,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus"
+          ],
+          "name": "OPTUS BUS",
+          "numberOfServices": 120,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_bus",
+            "pt_ltd_SCHOOLBUS"
+          ],
+          "name": "Coastal Liner",
+          "numberOfServices": 94,
+          "realTimeStatus": "CAPABLE",
+          "types": [
+            {
+              "alt": "bus",
+              "identifier": "pt_pub_bus",
+              "localIcon": "bus"
+            },
+            {
+              "alt": "bus",
+              "identifier": "pt_ltd_SCHOOLBUS",
+              "localIcon": "bus"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Cronulla Ferries",
+          "numberOfServices": 50,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Palm Beach Ferry Service",
+          "numberOfServices": 44,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Church Point Ferry Service",
+          "numberOfServices": 39,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Central Coast Ferries",
+          "numberOfServices": 32,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        },
+        {
+          "modes": [
+            "pt_pub_ferry"
+          ],
+          "name": "Brooklyn Ferry Service",
+          "numberOfServices": 30,
+          "realTimeStatus": "INCAPABLE",
+          "types": [
+            {
+              "alt": "ferry",
+              "identifier": "pt_pub_ferry",
+              "localIcon": "ferry"
+            }
+          ]
+        }
+      ],
+      "streetBicyclePaths": true,
+      "streetWheelchairAccessibility": true,
+      "supportsConcessionPricing": true,
+      "transitBicycleAccessibility": true,
+      "transitConcessionPricing": true,
+      "transitModes": [
+        {
+          "alt": "train",
+          "identifier": "pt_pub_train",
+          "localIcon": "train"
+        },
+        {
+          "alt": "tram",
+          "identifier": "pt_pub_tram",
+          "localIcon": "tram"
+        },
+        {
+          "alt": "ferry",
+          "identifier": "pt_pub_ferry",
+          "localIcon": "ferry"
+        },
+        {
+          "alt": "bus",
+          "identifier": "pt_pub_bus",
+          "localIcon": "bus"
+        }
+      ],
+      "transitWheelchairAccessibility": true
+    }
+  ],
+  "server": "104.28.6.61"
+}

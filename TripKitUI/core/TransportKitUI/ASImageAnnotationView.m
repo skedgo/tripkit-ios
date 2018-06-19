@@ -67,7 +67,8 @@
   
   if ([displayable respondsToSelector:@selector(pointImageURL)]) {
     NSURL *imageURL = [displayable pointImageURL];
-    [self.imageView setImageWithURL:imageURL placeholderImage:image];
+    BOOL asTemplate = [displayable pointImageIsTemplate];
+    [self.imageView setImageWithURL:imageURL asTemplate:asTemplate placeholderImage:image];
   }
 }
 
