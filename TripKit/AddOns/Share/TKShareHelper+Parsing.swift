@@ -186,8 +186,8 @@ public extension TKShareHelper {
 public extension TKShareHelper {
   
   public struct StopDetails {
-    public let code: String
     public let region: String
+    public let code: String
     public let filter: String?
   }
   
@@ -199,7 +199,7 @@ public extension TKShareHelper {
     let code = pathComponents[3]
     let filter: String? = pathComponents.count >= 5 ? pathComponents[4] : nil
     
-    let result = StopDetails(code: code, region: region, filter: filter)
+    let result = StopDetails(region: region, code: code, filter: filter)
     return Observable.just(result)
   }
 }
@@ -214,6 +214,53 @@ extension TKShareHelper.StopDetails {
     return stop
   }
 }
+
+// MARK: - Service URLs
+
+public extension TKShareHelper {
+  
+  public struct ServiceDetails {
+    public let region: String
+    public let stopCode: String
+    public let serviceID: String
+  }
+
+  public static func serviceDetails(for url: URL) -> Observable<ServiceDetails> {
+    let pathComponents = url.path.components(separatedBy: "/")
+    if pathComponents.count >= 5 {
+      let region = pathComponents[2]
+      let stopCode = pathComponents[3]
+      let serviceID = pathComponents[4]
+      
+      let details = ServiceDetails(region: region, stopCode: stopCode, serviceID: serviceID)
+      return Observable.just(details)
+    }
+
+    // Old way of /service?regionName=...&stopCode=...&serviceID=...
+    if let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems,
+      let region = items.value(for: "regionName"),
+      let stop = items.value(for: "stopCode"),
+      let service = items.value(for: "serviceID") {
+      
+      let details = ServiceDetails(region: region, stopCode: stop, serviceID: service)
+      return Observable.just(details)
+      
+    } else {
+      return Observable.empty()
+    }
+  }
+}
+
+extension Array where Element == URLQueryItem {
+  
+  fileprivate func value(for key: String) -> String? {
+    guard let item = first(where: { $0.name == key }) else { return nil }
+    
+    return item.value?.removingPercentEncoding
+  }
+  
+}
+
 
 // MARK: - Helpers
 

@@ -92,4 +92,24 @@ class TKShareHelperTest: XCTestCase {
     XCTAssertNil(result.filter)
   }
   
+  func testServiceUrl() throws {
+    let url = URL(string: "https://tripgo.com/service/AR_B_BahiaBlanca/AR_B_BahiaBlanca-P517245/trip-517-V-01-032/1529321905")!
+    
+    guard let result = try TKShareHelper.serviceDetails(for: url).toBlocking().first() else { XCTFail(); return }
+    
+    XCTAssertEqual(result.region, "AR_B_BahiaBlanca")
+    XCTAssertEqual(result.stopCode, "AR_B_BahiaBlanca-P517245")
+    XCTAssertEqual(result.serviceID, "trip-517-V-01-032")
+  }
+  
+  func testOldServiceUrl() throws {
+    let url = URL(string: "https://tripgo.com/service?regionName=AU_NSW_Sydney&stopCode=2000352&serviceID=89-W.1290.120.60.K.8.52029766")!
+    
+    guard let result = try TKShareHelper.serviceDetails(for: url).toBlocking().first() else { XCTFail(); return }
+    
+    XCTAssertEqual(result.region, "AU_NSW_Sydney")
+    XCTAssertEqual(result.stopCode, "2000352")
+    XCTAssertEqual(result.serviceID, "89-W.1290.120.60.K.8.52029766")
+  }
+  
 }
