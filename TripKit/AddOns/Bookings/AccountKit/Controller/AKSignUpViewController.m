@@ -271,7 +271,6 @@
     } else {
       NSString *userToken = (NSString *)response;
       [KVNProgress showSuccessWithCompletion:^{
-        DLog(@"Writing user token = %@", userToken);
         AMKUser *user = [AMKUser sharedUser];
         user.token = userToken;
         
@@ -285,7 +284,6 @@
         
         if (akEmail != nil) {
           [user setEmails:@[ akEmail ]];
-          DLog(@"%@", [AMKUser sharedUser].emails);
         }
         
         [self.delegate signUpViewController:self didSignUpUser:user];

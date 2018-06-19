@@ -46,12 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *lineName;
 @property (nonatomic, copy, nullable) NSString *direction;
 
-+ (nullable instancetype)fetchExistingServiceWithCode:(NSString *)serviceCode
-                                     inTripKitContext:(NSManagedObjectContext *)context;
-
-+ (void)removeServicesBeforeDate:(NSDate *)date
-				fromManagedObjectContext:(NSManagedObjectContext *)context;
-
 - (void)remove;
 
 - (nullable Alert *)sampleAlert;

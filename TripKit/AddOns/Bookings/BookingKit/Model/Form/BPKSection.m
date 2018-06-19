@@ -135,8 +135,6 @@
   NSMutableDictionary *mJson = [NSMutableDictionary dictionaryWithDictionary:_json];
   [mJson setObject:formatted forKey:kBPKFormValue];
   _json = mJson;
-  
-  DLog(@"%@", _json);
 }
 
 - (BOOL)isReadOnly

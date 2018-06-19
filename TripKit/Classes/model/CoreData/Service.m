@@ -51,39 +51,6 @@ typedef NSUInteger SGServiceFlag;
 @synthesize alerts = _alerts;
 @synthesize isRequestingServiceData;
 
-+ (instancetype)fetchExistingServiceWithCode:(NSString *)serviceCode
-                            inTripKitContext:(NSManagedObjectContext *)context
-{
-	if (! serviceCode)
-		return nil;
-	
-  Service *service = nil;
-	NSPredicate *equalServiceCode = [NSPredicate predicateWithFormat:@"toDelete = NO AND code = %@", serviceCode];
-	NSSet *objects = [context fetchObjectsForEntityClass:[Service class] withPredicate:equalServiceCode];
-	if (objects.count > 0) {
-		// We might end up with multiple services. Not nice, but shouldn't be causeing troubles.
-		//			ZAssert(objects.count == 1, @"Multiple services found with code: %@", serviceCode);
-		service = [objects anyObject];
-	}
-	ZAssert(service == nil || service.managedObjectContext != nil, @"Service has no context!");
-  return service;
-}
-
-+ (void)removeServicesBeforeDate:(NSDate *)date
-				fromManagedObjectContext:(NSManagedObjectContext *)context
-{
-	NSSet *objects = [context fetchObjectsForEntityClass:[self class]
-																	 withPredicateString:@"toDelete = NO AND (NONE visits.departure > %@)", date];
-	for (Service *service in objects) {
-		if (service.segments.count == 0) {
-			DLog(@"Deleting service %@ which has %lu visits.", service.lineName, (unsigned long)service.visits.count);
-      [service remove];
-		} else {
-			DLog(@"Keeping service %@ as it has %lu segments..", service.lineName, (unsigned long)service.segments.count);
-		}
-	}
-}
-
 - (void)remove
 {
   self.toDelete = YES;

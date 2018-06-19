@@ -123,53 +123,20 @@ extension TKShareHelper {
 
 extension TKShareHelper {
   
-  @objc public static func isServiceURL(_ url: URL) -> Bool {
+  @objc
+  public static func isServiceURL(_ url: URL) -> Bool {
     return url.path.hasPrefix("/service")
   }
   
-  @objc public static func createServiceURL(serviceID: String, atStopCode stopCode: String, inRegionNamed regionName: String, baseURL: String = "https://tripgo.com") -> URL {
+  @objc
+  public static func createServiceURL(serviceID: String, atStopCode stopCode: String, inRegionNamed regionName: String, baseURL: String = "https://tripgo.com") -> URL {
 
     let escapedID = (serviceID as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     
-    
     let escapedCode = (stopCode as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
   
-    let urlString = "\(baseURL)/service?regionName=\(regionName)&stopCode=\(escapedCode)&serviceID=\(escapedID)"
+    let urlString = "\(baseURL)/service/\(regionName)/\(escapedCode)/\(escapedID)"
     return URL(string: urlString)!
   }
 
-  public struct ServiceDetails {
-    let regionName: String
-    let stopCode: String
-    let serviceID: String
-  }
-  
-  
-  public static func serviceDetails(from url: URL, completion: (ServiceDetails?) -> Void) {
-    
-    guard
-      let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems,
-      let region = items.value(for: "regionName"),
-      let stop = items.value(for: "stopCode"),
-      let service = items.value(for: "serviceID")
-    else {
-      completion(nil)
-      return
-    }
-
-    let details = ServiceDetails(regionName: region, stopCode: stop, serviceID: service)
-    completion(details)
-  }
-  
 }
-
-extension Array where Element == URLQueryItem {
-  
-  fileprivate func value(for key: String) -> String? {
-    guard let item = first(where: { $0.name == key }) else { return nil }
-    
-    return item.value?.removingPercentEncoding
-  }
-  
-}
-

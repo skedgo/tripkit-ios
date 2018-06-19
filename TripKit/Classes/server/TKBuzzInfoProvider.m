@@ -8,7 +8,6 @@
 
 #import "TKBuzzInfoProvider.h"
 
-#import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
 
 @implementation TKBuzzInfoProvider

@@ -15,7 +15,7 @@ public struct Operator {
     }
     
     let isRealTime = realTimeRaw != "INCAPABLE"
-    return Operator(name: name.localizedCapitalizedString, services: services, isRealTime: isRealTime, transitTypes: transitTypes)
+    return Operator(name: name.capitalized(with: .current), services: services, isRealTime: isRealTime, transitTypes: transitTypes)
   }
 }
 
@@ -36,7 +36,7 @@ public struct Region {
         return nil
     }
     
-    let titleParts = title.characters.split(",").map { String($0).stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")) }
+    let titleParts = title.split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) }
     
     guard let city = titleParts.first,
       let country = titleParts.last else {
@@ -49,21 +49,21 @@ public struct Region {
       name += " (\(others))"
     }
     
-    let operators = operatorJSON.flatMap { Operator.loadOperator(fromJSON: $0) }
-    let extras = extraJSON.flatMap { $0["title"] as? String }
+    let operators = operatorJSON.compactMap { Operator.loadOperator(fromJSON: $0) }
+    let extras = extraJSON.compactMap { $0["title"] as? String }
     
     return Region(country: country, state: state, name: name, code: code, operators: operators, extras: extras)
   }
   
-  public func operatorsString(maxOperatorCount: Int = Int.max) -> String {
+  public func operatorsString(maxOperatorCount: Int = .max) -> String {
     return operators
       .map { $0.name + ($0.isRealTime ? " *" : "") }
       .suffix(maxOperatorCount)
-      .joinWithSeparator(", ")
+      .joined(separator: ", ")
   }
   
   public func modesString() -> String {
-    return extras.joinWithSeparator(", ")
+    return extras.joined(separator: ", ")
   }
 }
 
@@ -79,7 +79,7 @@ public func <(x: Region, y: Region) -> Bool {
     return x.country < y.country
   }
   
-  if let xs = x.state, let ys = y.state where xs != ys {
+  if let xs = x.state, let ys = y.state, xs != ys {
     return xs < ys
   }
   

@@ -56,8 +56,6 @@ static NSString *const kPathImage     = @"api/user/image";
     [params setObject:name forKey:kParameterKeyName];
   }
   
-  DLog(@"Sign up params: %@", params);
-  
   [self.sharedServer hitSkedGoWithMethod:@"POST"
                                     path:kPathSignUp
                               parameters:params
@@ -65,7 +63,6 @@ static NSString *const kPathImage     = @"api/user/image";
                                  success:
    ^(NSInteger status, id responseObject, NSData *data) {
 #pragma unused(status, data)
-     DLog(@"%@", responseObject);
      [AMKCommunicator findTokenInResponse:responseObject
                                completion:
       ^(NSString * _Nullable userToken, NSError * _Nullable error) {
@@ -89,7 +86,6 @@ static NSString *const kPathImage     = @"api/user/image";
   NSMutableDictionary *params = [NSMutableDictionary dictionary];
   [params setObject:email forKey:kParameterKeyLogin];
   [params setObject:password forKey:kParameterKeyPassword];
-  DLog(@"Sign up params: %@", params);
   
   [self.sharedServer hitSkedGoWithMethod:@"POST"
                                     path:kPathLogin
@@ -98,7 +94,6 @@ static NSString *const kPathImage     = @"api/user/image";
                                  success:
    ^(NSInteger status, id responseObject, NSData *data) {
 #pragma unused(status, data)
-     DLog(@"%@", responseObject);
      [AMKCommunicator findTokenInResponse:responseObject
                                completion:
       ^(NSString * _Nullable userToken, NSError * _Nullable error) {
@@ -129,7 +124,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"Ignoring response: %@", responseObject);
      if (handler) {
        handler(nil);
      }
@@ -156,7 +150,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"response: %@", responseObject);
      if (handler) {
        handler(name, nil);
      }
@@ -181,7 +174,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"response: %@", responseObject);
      if ([responseObject isKindOfClass:[NSDictionary class]]) {
        NSString *name = [responseObject objectForKey:@"name"];
        if (name != nil && handler != nil) {
@@ -209,7 +201,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"response: %@", responseObject);
      if (handler) {
        handler(surname, nil);
      }
@@ -234,7 +225,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"response: %@", responseObject);
      if ([responseObject isKindOfClass:[NSDictionary class]]) {
        NSString *surname = [responseObject objectForKey:@"surname"];
        if (handler != nil) {
@@ -262,7 +252,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"response: %@", responseObject);
      if (handler) {
        handler(givenName, nil);
      }
@@ -287,7 +276,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"response: %@", responseObject);
      if ([responseObject isKindOfClass:[NSDictionary class]]) {
        NSString *givenName = [responseObject objectForKey:@"givenName"];
        if (handler != nil) {
@@ -315,7 +303,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"response: %@", responseObject);
      if (handler) {
        handler(@{@"surname": surname,@"givenName":givenName}, nil);
      }
@@ -342,7 +329,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"%@", responseObject);
      NSArray *emails = [responseObject objectForKey:kResponseKeyAliases];
      if (emails != nil) {
        if (handler != nil) {
@@ -367,7 +353,6 @@ static NSString *const kPathImage     = @"api/user/image";
 {
   NSString *basePath = kPathAlias;
   NSString *path = [basePath stringByAppendingFormat:@"/%@", email];
-  DLog(@"path: %@", path);
   
   __weak typeof(self) weakSelf = self;
   [self.sharedServer hitSkedGoWithMethod:@"POST"
@@ -379,7 +364,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"Ignoring response: %@", responseObject);
      if (handler != nil) {
        handler(email, nil);
      }
@@ -474,7 +458,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"%@", responseObject);
      
      if (responseObject != nil) {
        if (handler != nil) {
@@ -515,7 +498,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"%@", responseObject);
      
      if (responseObject != nil) {
        if (handler != nil) {
@@ -552,7 +534,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"%@", responseObject);
      
      if (responseObject != nil) {
        if (handler != nil) {
@@ -654,7 +635,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"Ignoring response: %@", responseObject);
      if (handler) {
        handler(to, nil);
      }
@@ -682,7 +662,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"%@", responseObject);
      if (handler) {
        handler(email, nil);
      }
@@ -711,7 +690,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused(status, data)
      __strong typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"response: %@", responseObject);
      if (handler) {
        handler(responseObject, nil);
      }
@@ -763,7 +741,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"Ignoring response: %@", responseObject);
      if (handler) {
        handler(nil);
      }
@@ -780,7 +757,6 @@ static NSString *const kPathImage     = @"api/user/image";
 {
   NSString *basePath = kPathAlias;
   NSString *path = [basePath stringByAppendingFormat:@"/%@", email];
-  DLog(@"path: %@", path);
   
   __weak typeof(self) weakSelf = self;
   [self.sharedServer hitSkedGoWithMethod:@"POST"
@@ -792,7 +768,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"Ignoring response: %@", responseObject);
      if (handler) {
        handler(email, nil);
      }
@@ -809,7 +784,6 @@ static NSString *const kPathImage     = @"api/user/image";
 {
   NSString *basePath = kPathAlias;
   NSString *path = [basePath stringByAppendingFormat:@"/%@", email];
-  DLog(@"path: %@", path);
   
   __weak typeof(self) weakSelf = self;
   [self.sharedServer hitSkedGoWithMethod:@"DELETE"
@@ -821,7 +795,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"Ignoring response: %@", responseObject);
      if (handler) {
        handler(email, nil);
      }
@@ -838,7 +811,6 @@ static NSString *const kPathImage     = @"api/user/image";
 {
   NSString *basePath = kPathAlias;
   NSString *path = [basePath stringByAppendingFormat:@"/%@?primary=%@", email, @"true"];
-  DLog(@"path: %@", path);
   
   __weak typeof(self) weakSelf = self;
   [self.sharedServer hitSkedGoWithMethod:@"POST"
@@ -850,7 +822,6 @@ static NSString *const kPathImage     = @"api/user/image";
 #pragma unused (status, responseObject, data)
      typeof(weakSelf) strongSelf = weakSelf;
      if (! strongSelf) return;
-     DLog(@"Ignoring response: %@", responseObject);
      if (handler) {
        handler(email, nil);
      }

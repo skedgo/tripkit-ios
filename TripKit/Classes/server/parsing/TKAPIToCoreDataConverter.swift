@@ -72,11 +72,7 @@ extension TKAPIToCoreDataConverter {
 
 extension Service {
   convenience init(from model: API.Departure, into context: NSManagedObjectContext) {
-    if #available(iOS 10.0, macOS 10.12, *) {
-      self.init(context: context)
-    } else {
-      self.init(entity: NSEntityDescription.entity(forEntityName: "Service", in: context)!, insertInto: context)
-    }
+    self.init(into: context)
 //    update(from: model)
 //  }
 //

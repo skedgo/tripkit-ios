@@ -8,7 +8,7 @@
 
 #import "Vehicle.h"
 
-#import <TripKit/TKTripKit.h>
+#import "NSManagedObjectContext+SimpleFetch.h"
 
 @implementation Vehicle
 

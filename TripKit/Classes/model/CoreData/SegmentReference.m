@@ -8,7 +8,6 @@
 
 #import "SegmentReference.h"
 
-#import <TripKit/TKTripKit.h>
 #import <TripKit/TripKit-Swift.h>
 
 enum {

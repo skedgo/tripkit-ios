@@ -14,7 +14,6 @@
                         postData:(NSDictionary *)postData
                       completion:(SGServerGenericBlock)completion
 {
-  DLog(@"requesting form from: %@ with data %@", bookingURL, postData);
   
   // We'll call back on the main thread
   void (^handler)(NSInteger, NSDictionary<NSString *, id> *, id, NSData *, NSError *) = ^(NSInteger status, NSDictionary<NSString *, id> *headers, id response, NSData *data, NSError *error) {

@@ -16,10 +16,7 @@ extension TripRequest {
     guard let tripGroups = self.tripGroups else { return Set() }
     
     return tripGroups.reduce(mutating: Set()) { acc, group in
-      guard let trips = group.trips as? Set<Trip> else { assertionFailure()
-        return
-      }
-      acc.formUnion(trips)
+      acc.formUnion(group.trips)
     }
   }
   
