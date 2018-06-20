@@ -86,8 +86,10 @@ class TKUIResultsViewModel {
       .filter { $0 != nil }
       .map { $0!.timeString }
     
-    mapAnnotations = builderChanged.map { $0.annotations }
-    
+    originAnnotation = builderChanged.map { $0.origin }
+
+    destinationAnnotation = builderChanged.map { $0.destination }
+
     // Navigation
     
     let showTrip = inputs.selected
@@ -135,7 +137,9 @@ class TKUIResultsViewModel {
   
   let error: Driver<Error>
   
-  let mapAnnotations: Driver<[MKAnnotation]>
+  let originAnnotation: Driver<MKAnnotation?>
+
+  let destinationAnnotation: Driver<MKAnnotation?>
   
   let next: Driver<Next>
 }
@@ -173,16 +177,18 @@ extension TKUIResultsViewModel {
     
     let relevantInput = Driver.merge(date, pin, refresh)
     
-    return relevantInput.scan(initial) { previous, change in
-      var updated = previous
-      if let time = change.date {
-        updated.time = time
+    return relevantInput
+      .scan(initial) { previous, change in
+        var updated = previous
+        if let time = change.date {
+          updated.time = time
+        }
+        if let pin = change.pin {
+          updated.dropPin(at: pin)
+        }
+        return updated
       }
-      if let pin = change.pin {
-        updated.dropPin(at: pin)
-      }
-      return updated
-    }
+      .startWith(initial)
   }
   
   static func locationsChanged(in builder: RouteBuilder) -> Driver<RouteBuilder> {
@@ -434,35 +440,7 @@ extension TKUIResultsViewModel {
   
 }
 
-// MARK: - Map helpers
-
-private extension TKUIResultsViewModel.RouteBuilder {
-  
-  var annotations: [MKAnnotation] {
-    var annotations = [MKAnnotation]()
-    if let origin = origin {
-      annotations.append(origin)
-    }
-    if let destination = destination {
-      annotations.append(destination)
-    }
-    return annotations
-  }
-  
 }
-
-extension TKUIResultsViewModel {
-  
-  func annotationIsOrigin(_ annotation: MKAnnotation) -> Bool {
-    return false // TODO: Fix
-  }
-  
-  func annotationIsDestination(_ annotation: MKAnnotation) -> Bool {
-    return false // TODO: Fix
-  }
-  
-}
-
 
 // MARK: - Routing
 

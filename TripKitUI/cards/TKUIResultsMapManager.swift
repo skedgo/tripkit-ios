@@ -38,13 +38,28 @@ class TKUIResultsMapManager: TKUIMapManager {
   
   private var disposeBag = DisposeBag()
   
-  private var routeAnnotations = [MKAnnotation]() {
+  private var originAnnotation: MKAnnotation? {
     didSet {
-      mapView?.removeAnnotations(oldValue)
-      mapView?.addAnnotations(routeAnnotations)
+      if let old = oldValue {
+        mapView?.removeAnnotation(old)
+      }
+      if let new = originAnnotation {
+        mapView?.addAnnotation(new)
+      }
     }
   }
-  
+
+  private var destinationAnnotation: MKAnnotation? {
+    didSet {
+      if let old = oldValue {
+        mapView?.removeAnnotation(old)
+      }
+      if let new = originAnnotation {
+        mapView?.addAnnotation(new)
+      }
+    }
+  }
+
   
   override func takeCharge(of mapView: UIView, edgePadding: UIEdgeInsets, animated: Bool) {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
@@ -53,9 +68,14 @@ class TKUIResultsMapManager: TKUIMapManager {
     guard let viewModel = viewModel else { assertionFailure(); return }
     
     // Preparing for route pins
-    viewModel.mapAnnotations
-      .drive(onNext: { [weak self] in self?.routeAnnotations = $0 })
+    viewModel.originAnnotation
+      .drive(onNext: { [weak self] in self?.originAnnotation = $0 })
       .disposed(by: disposeBag)
+    
+    viewModel.destinationAnnotation
+      .drive(onNext: { [weak self] in self?.destinationAnnotation = $0 })
+      .disposed(by: disposeBag)
+
     
     // Long press to drop pin (typically to set origin)
     mapView.addGestureRecognizer(dropPinRecognizer)
@@ -74,8 +94,8 @@ class TKUIResultsMapManager: TKUIMapManager {
     guard let mapView = mapView as? MKMapView else { preconditionFailure() }
     disposeBag = DisposeBag()
     
-    mapView.removeAnnotations(routeAnnotations)
-    routeAnnotations = []
+    originAnnotation = nil
+    destinationAnnotation = nil
     
     mapView.removeGestureRecognizer(dropPinRecognizer)
     
@@ -90,10 +110,6 @@ class TKUIResultsMapManager: TKUIMapManager {
 extension TKUIResultsMapManager {
   
   override func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    guard let viewModel = viewModel else {
-      assertionFailure()
-      return nil
-    }
     
     if annotation === mapView.userLocation {
       return nil // Use the default MKUserLocation annotation
@@ -102,9 +118,9 @@ extension TKUIResultsMapManager {
     // for whatever reason reuse breaks callouts when remove and re-adding views to change their colours, so we just always create a new one.
     let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
     
-    if viewModel.annotationIsOrigin(annotation) {
+    if annotation === originAnnotation {
       view.pinTintColor = .green
-    } else if viewModel.annotationIsDestination(annotation) {
+    } else if annotation === destinationAnnotation {
       view.pinTintColor = .red
     } else {
       view.pinTintColor = .purple
