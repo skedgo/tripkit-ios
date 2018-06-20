@@ -753,7 +753,7 @@
 		3AFD394920D9333500FDC7D0 /* TKUIResultsMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD393E20D9333500FDC7D0 /* TKUIResultsMapManager.swift */; };
 		3AFD394A20D9333500FDC7D0 /* TKUIResultsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD393F20D9333500FDC7D0 /* TKUIResultsCard.swift */; };
 		3AFD394C20D9333500FDC7D0 /* TKUIMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD394120D9333500FDC7D0 /* TKUIMapManager.swift */; };
-		3AFD394D20D9333500FDC7D0 /* TKUIResultsCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD394220D9333500FDC7D0 /* TKUIResultsCardModel.swift */; };
+		3AFD394D20D9333500FDC7D0 /* TKUIResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD394220D9333500FDC7D0 /* TKUIResultsViewModel.swift */; };
 		3AFD394E20D9333500FDC7D0 /* TKUITripOverviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD394320D9333500FDC7D0 /* TKUITripOverviewCard.swift */; };
 		3AFD394F20D9333500FDC7D0 /* TKUISheetViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFD394420D9333500FDC7D0 /* TKUISheetViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFD396120D93AFA00FDC7D0 /* MKPolygon+PolygonFromRectangle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFD395D20D93AF900FDC7D0 /* MKPolygon+PolygonFromRectangle.h */; };
@@ -1496,7 +1496,7 @@
 		3AFD393E20D9333500FDC7D0 /* TKUIResultsMapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIResultsMapManager.swift; sourceTree = "<group>"; };
 		3AFD393F20D9333500FDC7D0 /* TKUIResultsCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIResultsCard.swift; sourceTree = "<group>"; };
 		3AFD394120D9333500FDC7D0 /* TKUIMapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIMapManager.swift; sourceTree = "<group>"; };
-		3AFD394220D9333500FDC7D0 /* TKUIResultsCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIResultsCardModel.swift; sourceTree = "<group>"; };
+		3AFD394220D9333500FDC7D0 /* TKUIResultsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIResultsViewModel.swift; sourceTree = "<group>"; };
 		3AFD394320D9333500FDC7D0 /* TKUITripOverviewCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUITripOverviewCard.swift; sourceTree = "<group>"; };
 		3AFD394420D9333500FDC7D0 /* TKUISheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUISheetViewController.h; sourceTree = "<group>"; };
 		3AFD395D20D93AF900FDC7D0 /* MKPolygon+PolygonFromRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKPolygon+PolygonFromRectangle.h"; sourceTree = "<group>"; };
@@ -2761,7 +2761,7 @@
 		3AFD395020D9337B00FDC7D0 /* view model */ = {
 			isa = PBXGroup;
 			children = (
-				3AFD394220D9333500FDC7D0 /* TKUIResultsCardModel.swift */,
+				3AFD394220D9333500FDC7D0 /* TKUIResultsViewModel.swift */,
 			);
 			path = "view model";
 			sourceTree = "<group>";
@@ -3855,7 +3855,7 @@
 				3A6DF147202C8EB80084CB2C /* TKEmptyAlertView.swift in Sources */,
 				3A6DF12F202C8EB80084CB2C /* SGLabel.m in Sources */,
 				3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */,
-				3AFD394D20D9333500FDC7D0 /* TKUIResultsCardModel.swift in Sources */,
+				3AFD394D20D9333500FDC7D0 /* TKUIResultsViewModel.swift in Sources */,
 				3A6DF11E202C8EB80084CB2C /* UIColor+Variations.m in Sources */,
 				3A6DF0F9202C8EB80084CB2C /* SGTableViewCell.m in Sources */,
 				3A8FAB7020D3E512005D4C73 /* TKUITripCell+Formatter.swift in Sources */,

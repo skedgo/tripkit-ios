@@ -190,14 +190,11 @@ extension TKUIResultsCard {
 extension TKUITripCell.Model {
 
   init(_ trip: Trip) {
-    let faded = trip.missedBookingWindow     // shuttle, etc., departing too soon
-             || trip.calculateOffset() < -60 // doesn't match query
-    
     self.init(
       departure: trip.departureTime, arrival: trip.arrivalTime,
       departureTimeZone: trip.departureTimeZone, arrivalTimeZone: trip.arrivalTimeZone ?? trip.departureTimeZone,
       focusOnDuration: !trip.departureTimeIsFixed, isArriveBefore: trip.isArriveBefore,
-      showFaded: faded,
+      showFaded: trip.showFaded,
       segments: trip.segments(with: .inSummary)
     )
   }

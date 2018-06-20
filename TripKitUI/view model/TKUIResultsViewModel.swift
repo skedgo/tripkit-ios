@@ -302,7 +302,7 @@ extension TKUIResultsViewModel {
     let groupSorters = first.request.sortDescriptors(withPrimary: sortBy)
     let sorted = (groups as NSArray).sortedArray(using: groupSorters).compactMap { $0 as? TripGroup }
     
-    let tripSorters = first.request.tripSortDescriptors(withPrimary: sortBy)
+    let tripSorters = first.request.tripTimeSortDescriptors()
     return sorted.compactMap { group -> Section? in
       guard let best = group.visibleTrip else { return nil }
       let items = (Array(group.trips) as NSArray)
@@ -314,10 +314,8 @@ extension TKUIResultsViewModel {
       if items.count > 2, expand == group {
         show = items + [.lessIndicator(group)]
       } else if items.count > 2 {
-        // TODO: We could be smarter about this, show the best plus the one before
-        // or after (depending on query), and when expanding show all sorted
-        // by time
-        show = items.prefix(2) + [.moreIndicator(group)]
+        let good = items.filter { !($0.trip?.showFaded ?? true) }
+        show = good.prefix(2) + [.moreIndicator(group)]
       } else {
         show = items
       }
@@ -329,6 +327,13 @@ extension TKUIResultsViewModel {
 extension TripGroup {
   var badge: TKMetricClassifier.Classification? {
     return TKMetricClassifier.classification(for: self)
+  }
+}
+
+extension Trip {
+  var showFaded: Bool {
+    return missedBookingWindow     // shuttle, etc., departing too soon
+        || calculateOffset() < -1  // doesn't match query
   }
 }
 
@@ -536,6 +541,8 @@ extension TKUIResultsViewModel.RouteBuilder {
     case .leaveASAP, .leaveAfter:
       if let location = origin, let timeZone = TKRegionManager.shared.timeZone(for: location.coordinate) {
         return timeZone
+      } else {
+        fallthrough // prefer arrival time zone, over current
       }
       
     case .arriveBefore:
