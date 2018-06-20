@@ -44,14 +44,7 @@ public class TKUIResultsCard: TGTableCard {
     self.destination = destination
     self.request = nil
     
-    let title: String
-    if let wrapped = destination.title, let name = wrapped {
-      title = Loc.To(location: name)
-    } else {
-      // TODO: Localise
-      title = "Plan Trip"
-    }
-    
+    let title = "Plan Trip" // TODO: Localise
     let mapManager = TKUIResultsMapManager()
     super.init(
       title: title, style: .grouped,
@@ -65,9 +58,10 @@ public class TKUIResultsCard: TGTableCard {
     self.destination = nil
     self.request = request
     
+    let title = "Routes" // TODO: Localise
     let mapManager = TKUIResultsMapManager()
     super.init(
-      title: "Routes", style: .grouped,
+      title: title, style: .grouped,
       accessoryView: accessoryView, mapManager: mapManager,
       initialPosition: .extended // show fully as we'll have routes shortly
     )
@@ -123,6 +117,10 @@ public class TKUIResultsCard: TGTableCard {
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
+    viewModel.titles
+      .drive(cardView.rx.titles)
+      .disposed(by: disposeBag)
+
     viewModel.timeTitle
       .drive(accessoryView.timeButton.rx.title(for: .normal))
       .disposed(by: disposeBag)
@@ -135,9 +133,7 @@ public class TKUIResultsCard: TGTableCard {
       .disposed(by: disposeBag)
     
     viewModel.request
-      .drive(onNext: {
-        TKUICustomization.shared.feedbackActiveItemHandler?($0)
-      })
+      .drive(onNext: TKUICustomization.shared.feedbackActiveItemHandler)
       .disposed(by: disposeBag)
 
     viewModel.error

@@ -82,6 +82,9 @@ class TKUIResultsViewModel {
     
     sections = TKUIResultsViewModel.buildSections(requestChanged, inputs: inputs)
     
+    titles = builderChanged
+      .map { $0.titles }
+    
     timeTitle = requestChanged
       .filter { $0 != nil }
       .map { $0!.timeString }
@@ -116,6 +119,8 @@ class TKUIResultsViewModel {
   }
   
   let request: Driver<TripRequest>
+  
+  let titles: Driver<(title: String, subtitle: String?)>
   
   let timeTitle: Driver<String>
   
@@ -505,6 +510,26 @@ extension TKUIResultsViewModel.RouteBuilder.Time {
 }
 
 extension TKUIResultsViewModel.RouteBuilder {
+  
+  var titles: (title: String, subtitle: String?) {
+    let destinationName = destination?.title ?? nil
+    let originName = origin?.title ?? nil
+    
+    let title: String
+    if let name = destinationName {
+      title = Loc.To(location: name)
+    } else {
+      title = "Plan Trip" // TODO: Localise
+    }
+    
+    let subtitle: String
+    if let name = originName {
+      subtitle = Loc.From(location: name)
+    } else {
+      subtitle = "From current location" // TODO: Localise
+    }
+    return (title, subtitle)
+  }
   
   var timeZone: TimeZone {
     switch time {
