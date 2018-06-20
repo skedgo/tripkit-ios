@@ -86,9 +86,13 @@ class TKUIResultsViewModel {
       .filter { $0 != nil }
       .map { $0!.timeString }
     
-    originAnnotation = builderChanged.map { $0.origin }
+    originAnnotation = builderChanged
+      .map { $0.origin }
+      .distinctUntilChanged { $0 === $1 }
 
-    destinationAnnotation = builderChanged.map { $0.destination }
+    destinationAnnotation = builderChanged
+      .map { $0.destination }
+      .distinctUntilChanged { $0 === $1 }
 
     // Navigation
     
