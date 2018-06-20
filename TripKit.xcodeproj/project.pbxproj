@@ -741,6 +741,8 @@
 		3AF94B201F0BFB9E00500940 /* Shape+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */; };
 		3AF94B221F0BFDEF00500940 /* SGStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B211F0BFDEF00500940 /* SGStyleManager.swift */; };
 		3AF94B241F0C061500500940 /* TKColoredRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B231F0C061500500940 /* TKColoredRoute.swift */; };
+		3AFCD53020DA716600B78FCD /* TKMetricClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD52F20DA716600B78FCD /* TKMetricClassifier.swift */; };
+		3AFCD53120DA716600B78FCD /* TKMetricClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD52F20DA716600B78FCD /* TKMetricClassifier.swift */; };
 		3AFD394520D9333500FDC7D0 /* TKUISheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD393920D9333500FDC7D0 /* TKUISheetViewController.m */; };
 		3AFD394620D9333500FDC7D0 /* TKUIRoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD393A20D9333500FDC7D0 /* TKUIRoutesViewController.swift */; };
 		3AFD394720D9333500FDC7D0 /* TKUITripOverviewCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD393C20D9333500FDC7D0 /* TKUITripOverviewCardModel.swift */; };
@@ -1481,6 +1483,7 @@
 		3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3AF94B211F0BFDEF00500940 /* SGStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGStyleManager.swift; sourceTree = "<group>"; };
 		3AF94B231F0C061500500940 /* TKColoredRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKColoredRoute.swift; sourceTree = "<group>"; };
+		3AFCD52F20DA716600B78FCD /* TKMetricClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKMetricClassifier.swift; sourceTree = "<group>"; };
 		3AFD393920D9333500FDC7D0 /* TKUISheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUISheetViewController.m; sourceTree = "<group>"; };
 		3AFD393A20D9333500FDC7D0 /* TKUIRoutesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIRoutesViewController.swift; sourceTree = "<group>"; };
 		3AFD393C20D9333500FDC7D0 /* TKUITripOverviewCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUITripOverviewCardModel.swift; sourceTree = "<group>"; };
@@ -2612,6 +2615,7 @@
 		3AB6C6571D1CD08E0089F687 /* classification */ = {
 			isa = PBXGroup;
 			children = (
+				3AFCD52F20DA716600B78FCD /* TKMetricClassifier.swift */,
 				3AB6C6581D1CD08E0089F687 /* TKPriceTimeTripClassifier.h */,
 				3AB6C6591D1CD08E0089F687 /* TKPriceTimeTripClassifier.m */,
 				3AB6C65A1D1CD08E0089F687 /* TKTripClassifier.h */,
@@ -3687,6 +3691,7 @@
 				3ABBDA5B2032132D00205042 /* Vehicle.swift in Sources */,
 				3ABBDAFC2032136500205042 /* SGCustomEventRecurrenceRule.m in Sources */,
 				3ABBDB0C2032137600205042 /* TKShareHelper+Parsing.swift in Sources */,
+				3AFCD53120DA716600B78FCD /* TKMetricClassifier.swift in Sources */,
 				3ABBDAF42032136100205042 /* SGLocationManager.m in Sources */,
 				3ABBDA5A2032132D00205042 /* Vehicle.m in Sources */,
 				3ABBDAD32032135400205042 /* SGStyleManager.m in Sources */,
@@ -4089,6 +4094,7 @@
 				3A32CD751DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift in Sources */,
 				3A57DB5D1F17A58800946553 /* SGLocationHelper.swift in Sources */,
 				3AFFAB911F06854F00147990 /* SGCustomEventRecurrenceRule.swift in Sources */,
+				3AFCD53020DA716600B78FCD /* TKMetricClassifier.swift in Sources */,
 				3AB6C7161D1CD08E0089F687 /* TKTripKit.m in Sources */,
 				3AFD396A20D93B0900FDC7D0 /* TKResultsFetcher.swift in Sources */,
 				3A5140311DEE62FA002DB39F /* TripRequest.swift in Sources */,

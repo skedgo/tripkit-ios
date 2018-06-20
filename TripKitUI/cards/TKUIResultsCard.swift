@@ -204,8 +204,8 @@ extension TKUITripCell.Model {
 
 }
 
-extension TKUIResultsViewModel.SectionBadge {
-  var footerContent: (UIImage, String, UIColor) {
+extension TKMetricClassifier.Classification {
+  fileprivate var footerContent: (UIImage, String, UIColor) {
     return (icon, text, color)
   }
 }

@@ -49,14 +49,6 @@ class TKUIResultsViewModel {
     fileprivate static var empty = RouteBuilder(mode: .destination, origin: nil, destination: nil, time: .leaveASAP)
   }
   
-  enum SectionBadge {
-    case easiest
-    case greenest
-    case fastest
-    case healthiest
-    case cheapest
-  }
-  
   convenience init(destination: MKAnnotation, inputs: UIInput) {
     self.init(builder: RouteBuilder(mode: .origin, origin: nil, destination: destination, time: .leaveASAP), inputs: inputs)
   }
@@ -245,87 +237,12 @@ extension TKUIResultsViewModel {
       .flatMapLatest { request in
         // Fetch the trip and handle errors in here, to not abort the outer observable
         return TKResultsFetcher
-          .fetchTrips(for: request, classifier: BadgeClassifier())
+          .fetchTrips(for: request, classifier: TKMetricClassifier())
           .asDriver(onErrorRecover: { error in
             errorPublisher.onNext(error)
             return Driver.just(.finished)
           })
     }
-  }
-  
-}
-
-fileprivate class BadgeClassifier: NSObject, TKTripClassifier {
-  
-  static let tokenCheapest   = "tokenCheapest"
-  static let tokenFastest    = "tokenFastest"
-  static let tokenEasiest    = "tokenEasiest"
-  static let tokenHealthiest = "tokenHealthiest"
-  static let tokenGreenest   = "tokenGreenest"
-  
-  var prices: (min: Float?, max: Float?)?
-  var hassles: (min: Float, max: Float)?
-  var durations: (min: Float, max: Float)?
-  var calories: (min: Float, max: Float)?
-  var carbons: (min: Float, max: Float)?
-  
-  func prepareForClassifiction(of tripGroups: Set<TripGroup>) {
-    let trips = tripGroups.compactMap { $0.visibleTrip }
-    var anyHaveUnknownCost = false
-    for trip in trips {
-      if let price = trip.totalPrice?.floatValue {
-        prices = (min(prices?.min ?? .infinity, price), max(prices?.max ?? .leastNormalMagnitude, price))
-      } else {
-        anyHaveUnknownCost = true
-      }
-      
-      hassles = (min(hassles?.min ?? .infinity, trip.totalHassle.floatValue),
-                 max(hassles?.max ?? .leastNormalMagnitude, trip.totalHassle.floatValue))
-      durations = (min(durations?.min ?? .infinity, trip.calculateDuration().floatValue),
-                   max(durations?.max ?? .leastNormalMagnitude, trip.calculateDuration().floatValue))
-      
-      // inverted!
-      calories = (min(calories?.min ?? .infinity, trip.totalCalories.floatValue * -1),
-                  max(calories?.max ?? .leastNormalMagnitude, trip.totalCalories.floatValue * -1))
-      
-      carbons = (min(carbons?.min ?? .infinity, trip.totalCarbon.floatValue),
-                 max(carbons?.max ?? .leastNormalMagnitude, trip.totalCarbon.floatValue))
-    }
-    if anyHaveUnknownCost {
-      prices = nil
-    }
-  }
-  
-  func classification(of tripGroup: TripGroup) -> (NSCoding & NSObjectProtocol)? {
-    // TODO: Order this by what the user cares about
-    // fast > cheap > healthy > easy > green
-    guard let trip = tripGroup.visibleTrip else { return nil }
-    
-    if let min = durations?.min, let max = durations?.max, matches(min: min, max: max, value: trip.calculateDuration().floatValue) {
-      return BadgeClassifier.tokenFastest as NSString
-    }
-    if let min = prices?.min, let max = prices?.max, matches(min: min, max: max, value: trip.totalPrice?.floatValue) {
-      return BadgeClassifier.tokenCheapest as NSString
-    }
-    if let min = calories?.min, let max = calories?.max, matches(min: min, max: max, value: trip.totalCalories.floatValue * -1) { // inverted!
-      return BadgeClassifier.tokenHealthiest as NSString
-    }
-    if let min = hassles?.min, let max = hassles?.max, matches(min: min, max: max, value: trip.totalHassle.floatValue) {
-      return BadgeClassifier.tokenEasiest as NSString
-    }
-    if let min = carbons?.min, let max = carbons?.max, matches(min: min, max: max, value: trip.totalCarbon.floatValue) {
-      return BadgeClassifier.tokenGreenest as NSString
-    }
-    return nil
-  }
-  
-  private func matches(min: Float, max: Float, value: Float?) -> Bool {
-    guard let value = value else { return false }
-    guard min == value else { return false}
-    
-    // max has to be more than 25% of min, i.e., don't give the label
-    // if everything is so clsoe
-    return max > min * 1.25
   }
   
 }
@@ -396,19 +313,9 @@ extension TKUIResultsViewModel {
 }
 
 extension TripGroup {
-  
-  var badge: TKUIResultsViewModel.SectionBadge? {
-    guard let token = classification as? String else { return nil }
-    switch token {
-    case BadgeClassifier.tokenCheapest: return .cheapest
-    case BadgeClassifier.tokenEasiest: return .easiest
-    case BadgeClassifier.tokenFastest: return .fastest
-    case BadgeClassifier.tokenHealthiest: return .healthiest
-    case BadgeClassifier.tokenGreenest: return .greenest
-    default: return nil
-    }
+  var badge: TKMetricClassifier.Classification? {
+    return TKMetricClassifier.classification(for: self)
   }
-  
 }
 
 extension TKUIResultsViewModel {
@@ -439,12 +346,12 @@ extension TKUIResultsViewModel {
   struct Section {
     var items: [Item]
     
-    var badge: SectionBadge?
+    var badge: TKMetricClassifier.Classification?
     var costs: [NSNumber: String]
   }
 }
 
-extension TKUIResultsViewModel.SectionBadge {
+extension TKMetricClassifier.Classification {
   
   var icon: UIImage {
     switch self {
