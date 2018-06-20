@@ -45,20 +45,22 @@ public class TKUITripCell: UITableViewCell {
     public let arrivalTimeZone: TimeZone
     public let focusOnDuration: Bool
     public let isArriveBefore: Bool
+    public let showFaded: Bool
     
     public let segments: [STKTripSegmentDisplayable]
     
-    public let alert: String?
+    public let action: String?
     
-    public init(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool = false, isArriveBefore: Bool = false, segments: [STKTripSegmentDisplayable], alert: String? = nil) {
+    public init(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool = false, isArriveBefore: Bool = false, showFaded: Bool = false, segments: [STKTripSegmentDisplayable], action: String? = nil) {
       self.departure = departure
       self.arrival = arrival
       self.departureTimeZone = departureTimeZone
       self.arrivalTimeZone = arrivalTimeZone
       self.focusOnDuration = focusOnDuration
       self.isArriveBefore = isArriveBefore
+      self.showFaded = showFaded
       self.segments = segments
-      self.alert = alert
+      self.action = action
     }
   }
   
@@ -69,9 +71,14 @@ public class TKUITripCell: UITableViewCell {
     
     segmentView.configure(forSegments: model.segments, allowSubtitles: true, allowInfoIcons: true)
     
-    if let alert = model.alert {
+    let alpha: CGFloat = model.showFaded ? 0.2 : 1
+    titleLabel.alpha = alpha
+    segmentView.alpha = alpha
+    actionButton.alpha = alpha
+    
+    if let action = model.action {
       actionButton.isHidden = false
-      actionButton.setTitle(alert, for: .normal)
+      actionButton.setTitle(action, for: .normal)
     } else {
       actionButton.isHidden = true
     }
