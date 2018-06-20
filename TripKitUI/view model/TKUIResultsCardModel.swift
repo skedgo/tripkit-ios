@@ -111,8 +111,6 @@ class TKUIResultsViewModel {
     next = Driver.merge(showTrip, presentTime, presentModes)
   }
   
-  private let disposeBag = DisposeBag()
-  
   let request: Driver<TripRequest>
   
   let timeTitle: Driver<String>
@@ -423,23 +421,6 @@ extension TKUIResultsViewModel {
   //    }
   //  }
   
-  func startRealtime() {
-    //    guard let trips = request.trips else { return }
-    //    for trip in trips {
-    //      let immediately = !trip.timesAreRealTime()
-    //      ServerCommunicator.sharedInstance().registerRealTimeUpdates(trip, updateImmediately: immediately)
-    //    }
-  }
-  
-  func stopRealtime() {
-    //    guard let trips = request.trips else { return }
-    //    for trip in trips {
-    //      ServerCommunicator.sharedInstance().unregisterRealTimeUpdates(trip)
-    //    }
-  }
-  
-}
-
 }
 
 // MARK: - Routing
