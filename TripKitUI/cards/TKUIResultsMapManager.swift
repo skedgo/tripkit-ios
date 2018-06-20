@@ -54,7 +54,7 @@ class TKUIResultsMapManager: TKUIMapManager {
       if let old = oldValue {
         mapView?.removeAnnotation(old)
       }
-      if let new = originAnnotation {
+      if let new = destinationAnnotation {
         mapView?.addAnnotation(new)
       }
     }
