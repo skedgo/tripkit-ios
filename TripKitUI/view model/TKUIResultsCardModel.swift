@@ -30,12 +30,12 @@ class TKUIResultsViewModel {
   )
   
   struct RouteBuilder {
-    fileprivate enum SelectionMode {
+    fileprivate enum SelectionMode: Equatable {
       case origin
       case destination
     }
     
-    enum Time {
+    enum Time: Equatable {
       case leaveASAP
       case leaveAfter(Date)
       case arriveBefore(Date)
@@ -190,6 +190,7 @@ extension TKUIResultsViewModel {
         }
         return updated
       }
+      .distinctUntilChanged()
       .startWith(initial)
   }
   
@@ -536,6 +537,14 @@ extension TKUIResultsViewModel.RouteBuilder {
 
 
 // MARK: - Protocol conformance
+
+func ==(lhs: TKUIResultsViewModel.RouteBuilder, rhs: TKUIResultsViewModel.RouteBuilder) -> Bool {
+  return lhs.time == rhs.time
+    && lhs.origin === rhs.origin
+    && lhs.destination === rhs.destination
+    && lhs.mode == rhs.mode
+}
+extension TKUIResultsViewModel.RouteBuilder: Equatable { }
 
 func ==(lhs: TKUIResultsViewModel.Item, rhs: TKUIResultsViewModel.Item) -> Bool {
   switch (lhs, rhs) {
