@@ -89,13 +89,6 @@
 {
   [super prepareForReuse];
   
-  self.formatter = [[TKUITripCellFormatter alloc] init];
-  self.formatter.primaryFont = _mainLabel.font;
-  self.formatter.primaryColor = self.darkTextColor;
-  self.formatter.secondaryFont = _mainLabel.font;
-  self.formatter.secondaryColor = [SGStyleManager lightTextColor];
-  self.formatter.costColor = self.costsLabel.textColor;
-  
   self.wrapper.backgroundColor = [UIColor whiteColor];
   self.contentView.layoutMargins = UIEdgeInsetsMake(8, 8, 8, 8);
   
@@ -200,6 +193,13 @@
 - (void)didInitialize
 {
   [SGStyleManager addDefaultOutline:self.wrapper];
+  
+  self.formatter = [[TKUITripCellFormatter alloc] init];
+  self.formatter.primaryFont = _mainLabel.font;
+  self.formatter.primaryColor = self.darkTextColor;
+  self.formatter.secondaryFont = _mainLabel.font;
+  self.formatter.secondaryColor = [SGStyleManager lightTextColor];
+  self.formatter.costColor = self.costsLabel.textColor;
   
   self.preservesSuperviewLayoutMargins = NO;
   self.contentView.preservesSuperviewLayoutMargins = NO;
