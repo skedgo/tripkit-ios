@@ -33,6 +33,13 @@ public class TKUIResultsCard: TGTableCard {
   
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   
+  private lazy var footerButton = { () -> UIButton in
+    let button = UIButton(type: .custom)
+    button.titleLabel?.font = SGStyleManager.systemFont(withTextStyle: UIFontTextStyle.caption1.rawValue)
+    button.setTitleColor(SGStyleManager.globalTintColor(), for: .normal)
+    return button
+  }()
+  
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIResultsViewModel.Section>(
     configureCell: TKUIResultsCard.cell
   )
@@ -77,14 +84,16 @@ public class TKUIResultsCard: TGTableCard {
     }
     
     accessoryView.transportButton.isHidden = (resultsDelegate == nil)
-    
+    footerButton.isEnabled = (resultsDelegate != nil)
     
     // Build the view model
-    
+
+    let tappedModes = Driver.merge(accessoryView.transportButton.rx.tap.asDriver(), footerButton.rx.tap.asDriver())
+
     let inputs: TKUIResultsViewModel.UIInput = (
       selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asDriver(),
       tappedDate: accessoryView.timeButton.rx.tap.asDriver(),
-      tappedShowModes: accessoryView.transportButton.rx.tap.asDriver(),
+      tappedShowModes: tappedModes,
       changedDate: changedTime.asDriver(onErrorDriveWith: Driver.empty()),
       changedModes: changedModes.asDriver(onErrorDriveWith: Driver.empty()),
       changedSortOrder: Driver.empty(), // TODO
@@ -106,6 +115,7 @@ public class TKUIResultsCard: TGTableCard {
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
+    tableView.tableFooterView = footerButton
     
     // Overriding the data source with our Rx one
     // Note: explicitly reset to say we know that we'll override this with Rx
@@ -122,9 +132,21 @@ public class TKUIResultsCard: TGTableCard {
       .disposed(by: disposeBag)
 
     viewModel.timeTitle
-      .drive(accessoryView.timeButton.rx.title(for: .normal))
+      .drive(accessoryView.timeButton.rx.title())
       .disposed(by: disposeBag)
     
+    viewModel.includedTransportModes
+      .drive(onNext: { title in
+        if let title = title {
+          self.footerButton.isHidden = false
+          self.footerButton.setTitle(title, for: .normal)
+          self.footerButton.sizeToFit()
+        } else {
+          self.footerButton.isHidden = true
+        }
+      })
+      .disposed(by: disposeBag)
+
     // Monitor progress (note: without this, we won't fetch!)
     viewModel.fetchProgress
       .drive(onNext: { progress in
@@ -209,20 +231,20 @@ extension TKMetricClassifier.Classification {
 
 extension TKUIResultsCard: UITableViewDelegate {
   
-  public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-    guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionFooterView.reuseIdentifier) as? TKUIResultsSectionFooterView else {
-      assertionFailure()
-      return nil
-    }
-    
-    let formatter = TKUITripCell.Formatter()
-    formatter.costColor = footerView.costLabel.textColor
-    
-    let section = dataSource.sectionModels[section]
-    footerView.badge = section.badge?.footerContent
-    footerView.attributedCost = formatter.costString(costs: section.costs)
-    return footerView
-  }
+//  public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//    guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionFooterView.reuseIdentifier) as? TKUIResultsSectionFooterView else {
+//      assertionFailure()
+//      return nil
+//    }
+//
+//    let formatter = TKUITripCell.Formatter()
+//    formatter.costColor = footerView.costLabel.textColor
+//
+//    let section = dataSource.sectionModels[section]
+//    footerView.badge = section.badge?.footerContent
+//    footerView.attributedCost = formatter.costString(costs: section.costs)
+//    return footerView
+//  }
   
 }
 

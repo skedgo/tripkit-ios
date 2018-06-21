@@ -89,6 +89,9 @@ class TKUIResultsViewModel {
       .filter { $0 != nil }
       .map { $0!.timeString }
     
+    includedTransportModes = requestChanged
+      .map { $0?.includedTransportModes }
+    
     originAnnotation = builderChanged
       .map { $0.origin }
       .distinctUntilChanged { $0 === $1 }
@@ -123,6 +126,9 @@ class TKUIResultsViewModel {
   let titles: Driver<(title: String, subtitle: String?)>
   
   let timeTitle: Driver<String>
+  
+  /// Indicates the number of active transport modes
+  let includedTransportModes: Driver<String?>
   
   /// The sections to be displayed in a table view.
   ///
@@ -321,6 +327,14 @@ extension TKUIResultsViewModel {
       }
       return Section(items: show, badge: group.badge, costs: best.costValues)
     }
+  }
+}
+
+extension TripRequest {
+  var includedTransportModes: String {
+    let all = spanningRegion().modeIdentifiers
+    let visible = Set(all).subtracting(TKUserProfileHelper.hiddenModeIdentifiers)
+    return Loc.Showing(visible.count, ofTransportModes: all.count)
   }
 }
 

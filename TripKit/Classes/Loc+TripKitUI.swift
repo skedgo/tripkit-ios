@@ -75,4 +75,8 @@ extension Loc {
     return NSLocalizedString("Checkmark", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Accessibility title for a checkmark/tick button")
   }
   
+  public static func Showing(_ visible: Int, ofTransportModes all: Int) -> String {
+    let format = NSLocalizedString("Showing %@ of %@ transport modes", tableName: "Shared", bundle: SGStyleManager.bundle(), comment: "Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number.")
+    return String(format: format, NSNumber(value: visible), NSNumber(value: all))
+  }
 }
