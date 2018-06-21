@@ -301,9 +301,16 @@ private extension TKUIResultsCard {
 extension TKUIResultsCard: TKUITimePickerSheetDelegate {
   
   public func timePickerRequestsResign(_ pickerSheet: TKUITimePickerSheet) {
-    controller?.dismiss(animated: true) {
+    func onDismissal() {
       let selection = TKUIResultsViewModel.RouteBuilder.Time(timeType: pickerSheet.selectedTimeType(), date: pickerSheet.selectedDate())
       self.changedTime.onNext(selection)
+    }
+    
+    if controller?.presentedViewController != nil {
+      controller?.dismiss(animated: true, completion: onDismissal)
+    } else {
+      // e.g., on iPad where it's displayed as a popover
+      onDismissal()
     }
   }
   
