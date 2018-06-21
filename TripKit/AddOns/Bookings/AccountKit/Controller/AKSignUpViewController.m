@@ -315,7 +315,7 @@
   if (error != nil && [self _shouldOpenSettingsFromError:error]) {
     [alert addAction:Loc.OpenSettings handler:^{
       NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-      [[UIApplication sharedApplication] openURL:appSettings];
+      [[UIApplication sharedApplication] openURL:appSettings options:@{} completionHandler:nil];
     }];
   }
   

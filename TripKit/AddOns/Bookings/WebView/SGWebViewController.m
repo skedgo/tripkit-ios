@@ -108,7 +108,7 @@
   [actions addAction:Loc.OpenInSafari
              handler:
    ^{
-     [[UIApplication sharedApplication] openURL:URL];
+     [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:nil];
    }];
   
   [actions showForSender:sender inController:self];
