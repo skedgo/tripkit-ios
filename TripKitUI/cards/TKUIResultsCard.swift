@@ -231,20 +231,20 @@ extension TKMetricClassifier.Classification {
 
 extension TKUIResultsCard: UITableViewDelegate {
   
-//  public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//    guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionFooterView.reuseIdentifier) as? TKUIResultsSectionFooterView else {
-//      assertionFailure()
-//      return nil
-//    }
-//
-//    let formatter = TKUITripCell.Formatter()
-//    formatter.costColor = footerView.costLabel.textColor
-//
-//    let section = dataSource.sectionModels[section]
-//    footerView.badge = section.badge?.footerContent
-//    footerView.attributedCost = formatter.costString(costs: section.costs)
-//    return footerView
-//  }
+  public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionFooterView.reuseIdentifier) as? TKUIResultsSectionFooterView else {
+      assertionFailure()
+      return nil
+    }
+
+    let formatter = TKUITripCell.Formatter()
+    formatter.costColor = footerView.costLabel.textColor
+
+    let section = dataSource.sectionModels[section]
+    footerView.badge = section.badge?.footerContent
+    footerView.attributedCost = formatter.costString(costs: section.costs)
+    return footerView
+  }
   
 }
 
