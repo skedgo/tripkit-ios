@@ -85,7 +85,9 @@ class TKUIResultsViewModel {
     
     sections = TKUIResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs)
     
-    selectedItem = inputs.tappedMapRoute.withLatestFrom(sections) { $1.find($0) }
+    selectedItem = inputs.tappedMapRoute
+      .startWithOptional(nil) // default selection
+      .withLatestFrom(sections) { $1.find($0) ?? $1.bestItem }
     
     titles = builderChanged
       .map { $0.titles }
@@ -407,13 +409,14 @@ extension TKUIResultsViewModel {
 
 extension TKMetricClassifier.Classification {
   
-  var icon: UIImage {
+  var icon: UIImage? {
     switch self {
     case .easiest: return UIImage.iconRelax
     case .greenest: return UIImage.iconTree
     case .fastest: return UIImage.iconTime
     case .healthiest: return UIImage.iconRun
     case .cheapest: return UIImage.iconMoney
+    case .recommended: return nil
     }
   }
   
@@ -424,6 +427,7 @@ extension TKMetricClassifier.Classification {
     case .fastest: return "Fastest"
     case .healthiest: return "Healthiest"
     case .cheapest: return "Cheapest"
+    case .recommended: return "Recommended"
     }
   }
   
@@ -431,6 +435,7 @@ extension TKMetricClassifier.Classification {
     switch self {
     case .easiest, .cheapest, .fastest: return #colorLiteral(red: 0.7921568627, green: 0.2549019608, blue: 0.0862745098, alpha: 1)
     case .greenest, .healthiest: return #colorLiteral(red: 0.1254901961, green: 0.7882352941, blue: 0.4156862745, alpha: 1)
+    case .recommended: return #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
     }
   }
 }
@@ -492,6 +497,10 @@ extension Array where Element == TKUIResultsViewModel.Section {
       }
     }
     return nil
+  }
+  
+  var bestItem: TKUIResultsViewModel.Item? {
+    return first?.items.first // Assuming we're sorting by best
   }
 }
 

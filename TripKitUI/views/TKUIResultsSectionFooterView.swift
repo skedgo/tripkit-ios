@@ -28,12 +28,12 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     costLabel.text = nil
   }
   
-  var badge: (icon: UIImage, text: String, background: UIColor)? {
+  var badge: (icon: UIImage?, text: String, background: UIColor)? {
     get {
-      guard let icon = badgeIcon.image, let text = badgeLabel.text else {
+      guard let text = badgeLabel.text else {
         return nil
       }
-      return (icon, text, badgeWrapper.backgroundColor ?? .white)
+      return (badgeIcon.image, text, badgeWrapper.backgroundColor ?? .white)
     }
     set {
       guard let badge = newValue else {

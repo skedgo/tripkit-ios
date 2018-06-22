@@ -1668,12 +1668,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3348267205BE2B000CA5917 /* RxDataSources.framework in Frameworks */,
 				3AA3CE69202CD25700E54859 /* ASPolygonKit.framework in Frameworks */,
 				3AA3CE6E202CD25700E54859 /* ASPolylineView.framework in Frameworks */,
 				3AA3CE6F202CD25700E54859 /* Kingfisher.framework in Frameworks */,
 				3AA3CE6B202CD25700E54859 /* RxSwift.framework in Frameworks */,
 				3AA3CE6A202CD25700E54859 /* RxCocoa.framework in Frameworks */,
+				D3348267205BE2B000CA5917 /* RxDataSources.framework in Frameworks */,
 				3AA923F820DA8E0400EBDDC6 /* TGCardViewController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

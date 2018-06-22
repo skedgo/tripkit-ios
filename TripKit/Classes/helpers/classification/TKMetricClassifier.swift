@@ -11,6 +11,7 @@ import Foundation
 public class TKMetricClassifier: NSObject {
   
   public enum Classification: String {
+    case recommended
     case cheapest
     case fastest
     case easiest
@@ -23,6 +24,7 @@ public class TKMetricClassifier: NSObject {
     return Classification(rawValue: token)
   }
   
+  private var weighted: (min: Float?, max: Float?)?
   private var prices: (min: Float?, max: Float?)?
   private var hassles: (min: Float, max: Float)?
   private var durations: (min: Float, max: Float)?
@@ -42,6 +44,8 @@ extension TKMetricClassifier: TKTripClassifier {
         anyHaveUnknownCost = true
       }
       
+      weighted = (min(weighted?.min ?? .infinity, trip.totalScore.floatValue),
+                  max(weighted?.max ?? .leastNormalMagnitude, trip.totalScore.floatValue))
       hassles = (min(hassles?.min ?? .infinity, trip.totalHassle.floatValue),
                  max(hassles?.max ?? .leastNormalMagnitude, trip.totalHassle.floatValue))
       durations = (min(durations?.min ?? .infinity, trip.calculateDuration().floatValue),
@@ -61,9 +65,13 @@ extension TKMetricClassifier: TKTripClassifier {
   
   public func classification(of tripGroup: TripGroup) -> (NSCoding & NSObjectProtocol)? {
     // TODO: Order this by what the user cares about
-    // fast > cheap > healthy > easy > green
+    // recommended > fast > cheap > healthy > easy > green
+    
     guard let trip = tripGroup.visibleTrip else { return nil }
     
+    if let min = weighted?.min, let max = weighted?.max, matches(min: min, max: max, value: trip.totalScore.floatValue) {
+      return TKMetricClassifier.Classification.recommended.rawValue as NSString
+    }
     if let min = durations?.min, let max = durations?.max, matches(min: min, max: max, value: trip.calculateDuration().floatValue) {
       return TKMetricClassifier.Classification.fastest.rawValue as NSString
     }

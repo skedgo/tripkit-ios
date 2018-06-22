@@ -232,7 +232,7 @@ extension TKUITripCell.Model {
 }
 
 extension TKMetricClassifier.Classification {
-  fileprivate var footerContent: (UIImage, String, UIColor) {
+  fileprivate var footerContent: (UIImage?, String, UIColor) {
     return (icon, text, color)
   }
 }
