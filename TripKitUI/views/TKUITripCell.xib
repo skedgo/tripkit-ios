@@ -20,6 +20,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="81.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1t-2l-9F6">
+                        <rect key="frame" x="0.0" y="0.0" width="3" height="81.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="3" id="a9j-KI-k41"/>
+                        </constraints>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsO-d9-TCI">
                         <rect key="frame" x="16" y="11" width="37.5" height="12"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
@@ -46,6 +53,9 @@
                     <constraint firstItem="vsO-d9-TCI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="XEa-36-HWQ"/>
                     <constraint firstItem="y8N-RR-3eg" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="d7s-Fl-ofe"/>
                     <constraint firstItem="FLO-Ou-7xp" firstAttribute="leading" secondItem="y8N-RR-3eg" secondAttribute="trailing" constant="8" id="lwu-sS-TBD"/>
+                    <constraint firstItem="s1t-2l-9F6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mLP-YF-dk6"/>
+                    <constraint firstItem="s1t-2l-9F6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mpW-bF-K5O"/>
+                    <constraint firstAttribute="bottom" secondItem="s1t-2l-9F6" secondAttribute="bottom" id="qlG-ws-JBa"/>
                     <constraint firstAttribute="trailing" secondItem="FLO-Ou-7xp" secondAttribute="trailing" constant="8" id="t5U-pR-ivj"/>
                 </constraints>
             </tableViewCellContentView>
@@ -53,6 +63,7 @@
             <connections>
                 <outlet property="actionButton" destination="FLO-Ou-7xp" id="HGf-HI-MGT"/>
                 <outlet property="segmentView" destination="y8N-RR-3eg" id="ttV-Do-af5"/>
+                <outlet property="selectionIndicator" destination="s1t-2l-9F6" id="iCK-rf-qZ6"/>
                 <outlet property="titleLabel" destination="vsO-d9-TCI" id="bYl-xE-bZL"/>
             </connections>
             <point key="canvasLocation" x="68" y="79"/>

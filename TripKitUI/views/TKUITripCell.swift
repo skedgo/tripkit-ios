@@ -17,7 +17,8 @@ public class TKUITripCell: UITableViewCell {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var segmentView: SGTripSegmentsView!
   @IBOutlet weak var actionButton: UIButton!
-  
+  @IBOutlet weak var selectionIndicator: UIView!
+
   private var formatter: Formatter?
   
   override public func awakeFromNib() {
@@ -28,12 +29,16 @@ public class TKUITripCell: UITableViewCell {
     formatter?.primaryFont = titleLabel.font
     formatter?.secondaryColor = SGStyleManager.lightTextColor()
     formatter?.secondaryFont = titleLabel.font
+    
+    selectionIndicator.isHidden = true
+    selectionIndicator.backgroundColor = SGStyleManager.globalTintColor()
   }
 
   override public func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
+    // Not calling super, to not highlight background
+//    super.setSelected(selected, animated: animated)
 
-    // Configure the view for the selected state
+    selectionIndicator.isHidden = !selected
   }
 
   // MARK: - Model

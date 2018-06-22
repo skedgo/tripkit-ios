@@ -736,6 +736,9 @@
 		3AE194E5202DE32E0007B49B /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE194E3202DE32D0007B49B /* RxBlocking.framework */; };
 		3AE194E6202DE32E0007B49B /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE194E4202DE32E0007B49B /* RxTest.framework */; };
 		3AEB43EC1F757C1F00FA3289 /* TKDeparturesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB43EB1F757C1E00FA3289 /* TKDeparturesProvider.swift */; };
+		3AEB47E920DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47E820DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift */; };
+		3AEB47EA20DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47E820DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift */; };
+		3AEB47EC20DCE48500F9DF83 /* RxHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */; };
 		3AF3F2621E04CA7C00A2EEC6 /* TKBookingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */; };
 		3AF3F2641E04CA8C00A2EEC6 /* TKLocationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */; };
 		3AF6FDF0204436D4003BA786 /* regionInfo-multi.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AF6FDEF204436D3003BA786 /* regionInfo-multi.json */; };
@@ -1480,6 +1483,8 @@
 		3AE194E3202DE32D0007B49B /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		3AE194E4202DE32E0007B49B /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		3AEB43EB1F757C1E00FA3289 /* TKDeparturesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKDeparturesProvider.swift; sourceTree = "<group>"; };
+		3AEB47E820DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPolyline+ClosestPoint.swift"; sourceTree = "<group>"; };
+		3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxHelpers.swift; sourceTree = "<group>"; };
 		3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingTypes.swift; sourceTree = "<group>"; };
 		3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationTypes.swift; sourceTree = "<group>"; };
 		3AF6FDEF204436D3003BA786 /* regionInfo-multi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-multi.json"; sourceTree = "<group>"; };
@@ -1989,6 +1994,7 @@
 			isa = PBXGroup;
 			children = (
 				3A6DF0F7202C8EB80084CB2C /* MapManagerHelper.swift */,
+				3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */,
 				3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */,
 				3A6DF0F6202C8EB80084CB2C /* TKAnnotationViewBuilder.swift */,
 				3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */,
@@ -2603,6 +2609,7 @@
 				3AB6C6571D1CD08E0089F687 /* classification */,
 				3AFD395D20D93AF900FDC7D0 /* MKPolygon+PolygonFromRectangle.h */,
 				3AFD396020D93AFA00FDC7D0 /* MKPolygon+PolygonFromRectangle.m */,
+				3AEB47E820DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift */,
 				3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */,
 				3AB6C65D1D1CD08E0089F687 /* NSManagedObject+TKPersistence.h */,
 				3AB6C65E1D1CD08E0089F687 /* NSManagedObject+TKPersistence.m */,
@@ -3775,6 +3782,7 @@
 				3ABBDA5F2032132D00205042 /* TKColoredRoute.swift in Sources */,
 				3ABBDA692032132D00205042 /* TKTripPattern.swift in Sources */,
 				3ABBDA5C2032132D00205042 /* TKBookingTypes.swift in Sources */,
+				3AEB47EA20DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift in Sources */,
 				3ABBDAB32032134D00205042 /* SGKNamedCoordinate+BuzzData.swift in Sources */,
 				3ABBDA732032133300205042 /* StopAPIModel.swift in Sources */,
 				D3FC1F15207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift in Sources */,
@@ -3836,6 +3844,7 @@
 				3A6DF129202C8EB80084CB2C /* UIView+Hop.m in Sources */,
 				3A6DF11D202C8EB80084CB2C /* UITableView+SafeReload.m in Sources */,
 				3A6DF134202C8EB80084CB2C /* TripMapManager.swift in Sources */,
+				3AEB47EC20DCE48500F9DF83 /* RxHelpers.swift in Sources */,
 				3A6DF10A202C8EB80084CB2C /* ASImageAnnotationView.m in Sources */,
 				3A6DF148202C8EB80084CB2C /* TKVehicleAnnotationView.swift in Sources */,
 				3AFD397320D93D9800FDC7D0 /* TKUISheet.m in Sources */,
@@ -4010,6 +4019,7 @@
 				3A3C9BA61F751FC300C8D476 /* API.swift in Sources */,
 				3AFFABAF1F06854F00147990 /* SGKBetaHelper.m in Sources */,
 				3AB6C6EB1D1CD08E0089F687 /* TripRequest.m in Sources */,
+				3AEB47E920DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift in Sources */,
 				3AFFABAA1F06854F00147990 /* SGKNamedCoordinate.swift in Sources */,
 				3A15D8DB1D9CE08D00BADBEA /* TKRoutingParser.swift in Sources */,
 				3AFFABB81F06854F00147990 /* SGKLog.m in Sources */,

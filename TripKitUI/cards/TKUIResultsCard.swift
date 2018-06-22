@@ -94,6 +94,7 @@ public class TKUIResultsCard: TGTableCard {
       selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asDriver(),
       tappedDate: accessoryView.timeButton.rx.tap.asDriver(),
       tappedShowModes: tappedModes,
+      tappedMapRoute: mapManager.selectedMapRoute,
       changedDate: changedTime.asDriver(onErrorDriveWith: Driver.empty()),
       changedModes: changedModes.asDriver(onErrorDriveWith: Driver.empty()),
       changedSortOrder: Driver.empty(), // TODO
@@ -127,6 +128,13 @@ public class TKUIResultsCard: TGTableCard {
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
+    viewModel.selectedItem
+      .drive(onNext: { [weak self] in
+        let indexPath = self?.dataSource.indexPath(of: $0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+      })
+      .disposed(by: disposeBag)
+
     viewModel.titles
       .drive(cardView.rx.titles)
       .disposed(by: disposeBag)

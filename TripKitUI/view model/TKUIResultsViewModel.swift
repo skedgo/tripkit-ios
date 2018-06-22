@@ -23,6 +23,7 @@ class TKUIResultsViewModel {
     selected: Driver<Item>, // => do .next
     tappedDate: Driver<Void>, // => return which date to show
     tappedShowModes: Driver<Void>, // => return which modes to show
+    tappedMapRoute: Driver<MapRouteItem>,
     changedDate: Driver<RouteBuilder.Time>, // => update request + title
     changedModes: Driver<Void>, // => update request
     changedSortOrder: Driver<STKTripCostType>, // => update sorting
@@ -74,13 +75,17 @@ class TKUIResultsViewModel {
       .filter { $0 != nil }
       .startWith(initialRequest)
     
+    let tripGroupsChanged = TKUIResultsViewModel.fetchTripGroups(requestChanged)
+    
     request = requestChanged
       .filter { $0 != nil }
       .map { $0! }
     
     fetchProgress = TKUIResultsViewModel.fetch(for: requestChanged, errorPublisher: errorPublisher)
     
-    sections = TKUIResultsViewModel.buildSections(requestChanged, inputs: inputs)
+    sections = TKUIResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs)
+    
+    selectedItem = inputs.tappedMapRoute.withLatestFrom(sections) { $1.find($0) }
     
     titles = builderChanged
       .map { $0.titles }
@@ -99,6 +104,16 @@ class TKUIResultsViewModel {
     destinationAnnotation = builderChanged
       .map { $0.destination }
       .distinctUntilChanged { $0 === $1 }
+    
+    mapRoutes = Driver.combineLatest(tripGroupsChanged, inputs.tappedMapRoute.startWithOptional(nil))
+      .map { groups, selection in
+        let routeItems = groups.compactMap { $0.preferredRoute }
+        let selectedTripGroup = selection?.trip.tripGroup
+          ?? groups.first?.request.preferredGroup
+          ?? groups.first
+        let selectedItem = routeItems.first {$0.trip.tripGroup == selectedTripGroup }
+        return (routeItems, selectedItem)
+      }
 
     // Navigation
     
@@ -144,7 +159,9 @@ class TKUIResultsViewModel {
   ///   .bindTo(tableView.rx.items(dataSource: dataSource))
   ///   .disposed(by: disposeBag)
   /// ```
-  let sections: Driver<[TKUIResultsViewModel.Section]>
+  let sections: Driver<[Section]>
+  
+  let selectedItem: Driver<Item?>
   
   let fetchProgress: Driver<TKResultsFetcher.Progress>
   
@@ -153,6 +170,8 @@ class TKUIResultsViewModel {
   let originAnnotation: Driver<MKAnnotation?>
 
   let destinationAnnotation: Driver<MKAnnotation?>
+  
+  let mapRoutes: Driver<([MapRouteItem], selection: MapRouteItem?)>
   
   let next: Driver<Next>
 }
@@ -272,7 +291,25 @@ extension TKUIResultsViewModel {
 
 extension TKUIResultsViewModel {
   
-  static func buildSections(_ requests: Driver<TripRequest?>, inputs: UIInput) -> Driver<[Section]> {
+  static func fetchTripGroups(_ requests: Driver<TripRequest?>) -> Driver<[TripGroup]> {
+    return requests.flatMapLatest { request in
+      guard let request = request, let context = request.managedObjectContext else {
+        return Driver.just([])
+      }
+      
+      return context.rx
+        .fetchObjects(
+          TripGroup.self,
+          sortDescriptors: [NSSortDescriptor(key: "visibleTrip.totalScore", ascending: true)],
+          predicate: NSPredicate(format: "toDelete = NO AND request = %@ AND visibilityRaw != %@", request, NSNumber(value: TripGroupVisibility.hidden.rawValue)),
+          relationshipKeyPathsForPrefetching: ["visibleTrip", "visibleTrip.segmentReferences"]
+        )
+        .throttle(0.5, scheduler: MainScheduler.instance)
+        .asDriver(onErrorJustReturn: [])
+    }
+  }
+  
+  static func buildSections(_ groups: Driver<[TripGroup]>, inputs: UIInput) -> Driver<[Section]> {
     let expand = inputs.selected
       .map { item -> TripGroup? in
         switch item {
@@ -281,25 +318,9 @@ extension TKUIResultsViewModel {
         }
     }
     
-    return Driver.combineLatest(requests, inputs.changedSortOrder.startWith(.score), expand.startWith(nil))
-      .flatMapLatest(buildSections)
-  }
-  
-  private static func buildSections(_ request: TripRequest?, sortOrder: STKTripCostType, expand: TripGroup?) -> Driver<[Section]> {
-    guard let request = request, let context = request.managedObjectContext else {
-      return Driver.just([])
-    }
-    
-    return context.rx
-      .fetchObjects(
-        TripGroup.self,
-        sortDescriptors: [NSSortDescriptor(key: "visibleTrip.totalScore", ascending: true)],
-        predicate: NSPredicate(format: "toDelete = NO AND request = %@ AND visibilityRaw != %@", request, NSNumber(value: TripGroupVisibility.hidden.rawValue)),
-        relationshipKeyPathsForPrefetching: ["visibleTrip", "visibleTrip.segmentReferences"]
-      )
-      .throttle(0.5, scheduler: MainScheduler.instance)
-      .map { sections(for: $0, sortBy: sortOrder, expand: expand) }
-      .asDriver(onErrorJustReturn: [])
+    return Driver
+      .combineLatest(groups, inputs.changedSortOrder.startWith(.score), expand.startWith(nil))
+      .map(sections)
   }
   
   private static func sections(for groups: [TripGroup], sortBy: STKTripCostType, expand: TripGroup?) -> [Section] {
@@ -424,6 +445,54 @@ extension TKUIResultsViewModel.Item {
     }
   }
   
+}
+
+// MARK: - Map content
+
+extension TKUIResultsViewModel {
+  
+  /// An item to be displayed on the map
+  struct MapRouteItem {
+    fileprivate let trip: Trip
+    
+    let polylines: [STKRoutePolyline]
+    
+    init(_ trip: Trip) {
+      self.trip = trip
+
+      let displayableRoutes = trip.segments(with: .onMap)
+        .compactMap { ($0 as? TKSegment)?.shapes() }   // Only include those with shapes
+        .flatMap { $0.filter { $0.routeIsTravelled } } // Flat list of travelled shapes
+      polylines = displayableRoutes.compactMap(STKRoutePolyline.init)
+    }
+  }
+
+}
+
+func ==(lhs: TKUIResultsViewModel.MapRouteItem, rhs: TKUIResultsViewModel.MapRouteItem) -> Bool {
+  return lhs.trip.objectID == rhs.trip.objectID
+}
+extension TKUIResultsViewModel.MapRouteItem: Equatable { }
+
+extension TripGroup {
+  fileprivate var preferredRoute: TKUIResultsViewModel.MapRouteItem? {
+    guard let trip = visibleTrip else { return nil }
+    return TKUIResultsViewModel.MapRouteItem(trip)
+  }
+}
+
+extension Array where Element == TKUIResultsViewModel.Section {
+  fileprivate func find(_ mapRoute: TKUIResultsViewModel.MapRouteItem?) -> TKUIResultsViewModel.Item? {
+    guard let mapRoute = mapRoute else { return nil }
+    for section in self {
+      for item in section.items {
+        if item.trip == mapRoute.trip {
+          return item
+        }
+      }
+    }
+    return nil
+  }
 }
 
 // MARK: - ?
