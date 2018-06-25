@@ -114,6 +114,23 @@ extension StopVisits: STKDisplayableTimePoint {
   
 }
 
+// MARK: - TKRealTimeUpdatable
+
+extension StopVisits: TKRealTimeUpdatable {
+  public var wantsRealTimeUpdates: Bool {
+    return service.wantsRealTimeUpdates
+  }
+  
+  public var objectForRealTimeUpdates: Any {
+    return self
+  }
+  
+  public var regionForRealTimeUpdates: SVKRegion {
+    return stop.region ?? .international
+  }
+}
+
+
 // MARK: - UIActivityItemSource
 
 #if os(iOS)

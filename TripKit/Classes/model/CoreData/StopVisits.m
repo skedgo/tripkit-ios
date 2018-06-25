@@ -220,33 +220,4 @@
   }
 }
 
-#pragma mark - TKRealTimeUpdatable
-
-- (BOOL)wantsRealTimeUpdates
-{
-	return [self.service wantsRealTimeUpdates];
-}
-
-- (id)objectForRealTimeUpdates
-{
-  return self;
-}
-
-- (SVKRegion *)regionForRealTimeUpdates
-{
-  return [self.stop region];
-}
-
-#pragma mark - Helpers
-
-//- (void)setFlag:(SGVisitFlag)flag to:(BOOL)value
-//{
-//	NSInteger flags = self.flags.integerValue;
-//	if (value) {
-//		self.flags = @(flags | flag);
-//	} else {
-//		self.flags = @(flags & ~flag);
-//	}
-//}
-
 @end

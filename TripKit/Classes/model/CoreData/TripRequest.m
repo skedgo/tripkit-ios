@@ -91,7 +91,7 @@
   [regions unionSet:[manager localRegionsContainingCoordinate:self.toLocation.coordinate]];
   
   if (regions.count >= 2) {
-    [regions addObject:[SVKInternationalRegion shared]];
+    [regions addObject:SVKRegion.international];
   }
   return regions;
 }

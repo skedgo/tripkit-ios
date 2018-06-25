@@ -325,7 +325,7 @@ extension TKRegionManager {
     if local.count == 1 {
       return local.first!
     } else {
-      return SVKInternationalRegion.shared
+      return .international
     }
   }
   

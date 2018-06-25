@@ -45,9 +45,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKTripKit.h"
 #import "TKConstants.h"
 
-// Protocol headers
-#import "TKRealTimeUpdatable.h"
-
 // Core Data model classes
 #import "TripRequest.h"
 #import "TripGroup.h"
@@ -85,7 +82,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKBuzzRealTime.h"
 #import "TKBuzzInfoProvider.h"
 #import "TKWaypointRouter.h"
-#import "TKRealTimeUpdatableHelper.h"
 
 // Track
 #import "SGTrackHelper.h"

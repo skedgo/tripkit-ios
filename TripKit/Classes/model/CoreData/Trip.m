@@ -10,9 +10,6 @@
 
 #import <TripKit/TripKit-Swift.h>
 
-#import "TKRealTimeUpdatableHelper.h"
-
-
 enum {
   SGTripFlagShowNoVehicleUUIDAsLift = 1 << 1,
   SGTripFlagHasFixedDeparture       = 1 << 3,
@@ -664,26 +661,6 @@ typedef NSUInteger SGTripFlag;
 }
 
 
-#pragma mark - TKRealTimeUpdatable
-
-- (BOOL)wantsRealTimeUpdates
-{
-	if (self.updateURLString) {
-    return [TKRealTimeUpdatableHelper wantsRealTimeUpdatesForStart:self.departureTime andEnd:self.arrivalTime forPreplanning:YES];
-	}
-	return NO;
-}
-
-- (id)objectForRealTimeUpdates
-{
-  return self;
-}
-
-- (SVKRegion *)regionForRealTimeUpdates
-{
-  return [self.request startRegion];
-}
-
 #pragma mark - Private methods
 
 - (void)setFlag:(SGTripFlag)flag to:(BOOL)value
@@ -724,7 +701,5 @@ typedef NSUInteger SGTripFlag;
   
   return address;
 }
-
-
 
 @end

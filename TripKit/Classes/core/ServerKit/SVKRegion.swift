@@ -19,6 +19,8 @@ enum SVKRegionParserError : Error {
 }
 
 public class SVKRegion : NSObject, Codable {
+  
+  @objc public static let international = SVKInternationalRegion()
 
   @objc(SVKRegionCity)
   public class City : NSObject, Codable, MKAnnotation, STKDisplayablePoint {
@@ -176,9 +178,7 @@ public class SVKRegion : NSObject, Codable {
 
 public class SVKInternationalRegion : SVKRegion {
   
-  @objc public static let shared: SVKRegion = SVKInternationalRegion()
-  
-  private init() {
+  fileprivate init() {
     var modes = [
       SVKTransportModeIdentifierRegularPublicTransport,
       SVKTransportModeIdentifierCar,

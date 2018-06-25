@@ -9,8 +9,6 @@
 @import Foundation;
 @import CoreData;
 
-#import "TKRealTimeUpdatable.h"
-
 typedef NS_ENUM(NSInteger, StopVisitRealTime) {
   StopVisitRealTimeNotApplicable, // We don't have real-time for this kind of service
   StopVisitRealTimeNotAvailable,  // Services like this can have real-time, but this doesn't
@@ -25,7 +23,7 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StopVisits : NSManagedObject <TKRealTimeUpdatable>
+@interface StopVisits : NSManagedObject
 
 @property (nonatomic, retain, nullable) NSDate * arrival;
 @property (nonatomic, retain, nullable) NSNumber * bearing;

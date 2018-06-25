@@ -10,12 +10,11 @@
 @import CoreData;
 
 #import "TKSegment.h"
-#import "TKRealTimeUpdatable.h"
 
 
 @class Alert, SVKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 
-@interface Trip : NSManagedObject <TKRealTimeUpdatable> {
+@interface Trip : NSManagedObject {
 }
 
 #pragma mark - CoreData elements

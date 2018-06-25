@@ -132,6 +132,24 @@ extension Trip: STKTrip {
 }
 
 
+// MARK: - TKRealTimeUpdatable
+
+extension Trip: TKRealTimeUpdatable {
+  public var wantsRealTimeUpdates: Bool {
+    guard updateURLString != nil else { return false }
+    return wantsRealTimeUpdates(forStart: departureTime, end: arrivalTime, forPreplanning: true)
+  }
+  
+  public var objectForRealTimeUpdates: Any {
+    return self
+  }
+  
+  public var regionForRealTimeUpdates: SVKRegion {
+    return request.startRegion() ?? .international
+  }
+}
+
+
 // MARK: - UIActivityItemSource
 
 #if os(iOS)

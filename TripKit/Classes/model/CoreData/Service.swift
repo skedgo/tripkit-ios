@@ -56,6 +56,28 @@ extension Service {
   
 }
 
+// MARK: - TKRealTimeUpdatable
+
+extension Service: TKRealTimeUpdatable {
+  public var wantsRealTimeUpdates: Bool {
+    guard self.isRealTimeCapable else { return false }
+    
+    guard let first = sortedVisits.first, let last = sortedVisits.last else {
+      return true // ask anyway
+    }
+    
+    return wantsRealTimeUpdates(forStart: first.time, end: last.time, forPreplanning: false)
+  }
+  
+  public var objectForRealTimeUpdates: Any {
+    return self
+  }
+  
+  public var regionForRealTimeUpdates: SVKRegion {
+    return region ?? .international
+  }
+}
+
 // MARK: - Helpers
 
 extension Service {

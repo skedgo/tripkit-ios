@@ -12,8 +12,6 @@
 
 #import "TripKit/TripKit-Swift.h"
 
-#import "TKRealTimeUpdatableHelper.h"
-
 enum {
   SGServiceFlagRealTime               = 1 << 0,
   SGServiceFlagRealTimeCapable        = 1 << 1,
@@ -277,33 +275,6 @@ typedef NSUInteger SGServiceFlag;
 	return shapes;
 }
 
-#pragma mark - TKRealTimeUpdatable
-
-- (BOOL)wantsRealTimeUpdates
-{
-	if (! self.isRealTimeCapable)
-		return NO;
-
-	NSArray *sortedVisits = self.sortedVisits;
-	if (sortedVisits.count < 1) {
-		return YES; // just ask anyway
-	} else {
-		StopVisits *first = [self.sortedVisits objectAtIndex:0];
-		StopVisits *last  = [self.sortedVisits lastObject];
-    return [TKRealTimeUpdatableHelper wantsRealTimeUpdatesForStart:first.time andEnd:last.time forPreplanning:NO];
-		
-	}
-}
-
-- (id)objectForRealTimeUpdates
-{
-  return self;
-}
-
-- (SVKRegion *)regionForRealTimeUpdates
-{
-  return [self region];
-}
 
 #pragma mark - Private methods
 

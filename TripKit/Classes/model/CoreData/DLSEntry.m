@@ -65,14 +65,6 @@
   }
 }
 
-#pragma mark - TKRealTimeUpdatable
-
-- (BOOL)wantsRealTimeUpdates
-{
-  return self.service.isRealTimeCapable && [TKRealTimeUpdatableHelper wantsRealTimeUpdatesForStart:self.departure andEnd:self.arrival forPreplanning:NO];
-}
-
-
 #pragma mark - StopVisit
 
 - (SGKGrouping)groupingWithPrevious:(StopVisits *)previous

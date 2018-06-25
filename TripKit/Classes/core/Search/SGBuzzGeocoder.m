@@ -74,7 +74,7 @@
       }
     }
     if (! region) {
-      region = [SVKInternationalRegion shared];
+      region = SVKRegion.international;
     }
     
     __weak typeof(self) weakSelf = self;

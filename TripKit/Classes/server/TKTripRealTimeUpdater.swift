@@ -24,7 +24,7 @@ public class TKTripRealTimeUpdater {
 
     Observable.combineLatest(currentTrip, enabled, tick) { trip, enabled, _ in (trip, enabled) }
       .filter { trip, enabled in
-        return enabled && trip.managedObjectContext != nil && trip.wantsRealTimeUpdates()
+        return enabled && trip.managedObjectContext != nil && trip.wantsRealTimeUpdates
       }
       .map { _ in }
       .subscribe(onNext: { [unowned self] in

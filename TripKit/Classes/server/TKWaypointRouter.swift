@@ -345,8 +345,8 @@ class WaypointParasBuilder {
         preconditionFailure()
     }
     
-    let startRegion = segment.startRegion() ?? SVKInternationalRegion.shared
-    let endRegion   = segment.endRegion()   ?? SVKInternationalRegion.shared
+    let startRegion = segment.startRegion() ?? .international
+    let endRegion   = segment.endRegion()   ?? .international
     
     return [
       "modes": [publicMode],

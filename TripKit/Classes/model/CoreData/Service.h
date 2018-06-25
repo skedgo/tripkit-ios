@@ -9,14 +9,12 @@
 @import Foundation;
 @import CoreData;
 
-#import "TKRealTimeUpdatable.h"
-
 @class Alert, SVKRegion, Shape, StopVisits, SegmentReference, Vehicle, ModeInfo;
 @protocol STKDisplayableRoute;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Service : NSManagedObject <TKRealTimeUpdatable>
+@interface Service : NSManagedObject
 
 @property (nonatomic, retain) NSString * code;
 @property (nonatomic, retain, nullable) id color;

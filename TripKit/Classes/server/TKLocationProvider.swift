@@ -40,7 +40,7 @@ public enum TKLocationProvider {
   
   public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil, in region: SVKRegion) -> Single<[STKModeCoordinate]> {
 
-    guard region != SVKInternationalRegion.shared else {
+    guard region != .international else {
       return Single.just([])
     }
     
