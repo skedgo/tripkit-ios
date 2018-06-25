@@ -162,6 +162,12 @@ public class TKUIResultsCard: TGTableCard {
       })
       .disposed(by: disposeBag)
     
+    viewModel.realTimeUpdate
+      .drive(onNext: { _ in
+        // Indicate progress anywhere?
+      })
+      .disposed(by: disposeBag)
+
     viewModel.request
       .drive(onNext: TKUICustomization.shared.feedbackActiveItemHandler)
       .disposed(by: disposeBag)

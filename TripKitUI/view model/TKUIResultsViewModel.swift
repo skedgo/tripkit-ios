@@ -83,6 +83,8 @@ class TKUIResultsViewModel {
     
     fetchProgress = TKUIResultsViewModel.fetch(for: requestChanged, errorPublisher: errorPublisher)
     
+    realTimeUpdate = TKUIResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged)
+    
     sections = TKUIResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs)
     
     selectedItem = inputs.tappedMapRoute
@@ -165,7 +167,16 @@ class TKUIResultsViewModel {
   
   let selectedItem: Driver<Item?>
   
+  /// Progress of fetching the routing results
+  ///
+  /// - warning: Subscribe to this, otherwise you won't get any results at all.
   let fetchProgress: Driver<TKResultsFetcher.Progress>
+  
+  /// Status of real-time update
+  ///
+  /// - note: Real-updates are only enabled while you're connected
+  ///         to this driver.
+  public let realTimeUpdate: Driver<TKRealTimeUpdateProgress>
   
   let error: Driver<Error>
   
@@ -286,6 +297,56 @@ extension TKUIResultsViewModel {
     }
   }
   
+}
+
+
+// MARK: - Real-time updates
+
+extension TKUIResultsViewModel {
+  
+  static func fetchRealTimeUpdates(for tripGroups: Driver<[TripGroup]>) -> Driver<TKRealTimeUpdateProgress> {
+    
+    return Observable<Int>
+      .interval(30, scheduler: MainScheduler.instance)
+      .withLatestFrom(tripGroups)
+      .flatMapLatest(TKBuzzRealTime.rx.update)
+      .startWith(.idle)
+      .asDriver(onErrorRecover: { error in
+        assertionFailure("Should never error, but did with: \(error)")
+        return Driver.empty()
+      })
+  }
+  
+}
+
+extension Reactive where Base: TKBuzzRealTime {
+  
+  static func update(tripGroups: [TripGroup]) -> Observable<TKRealTimeUpdateProgress> {
+    let trips = tripGroups.compactMap { $0.visibleTrip }
+    let individualUpdates = trips.map(update)
+    return Observable
+      .combineLatest(individualUpdates) { _ in .updated}
+      .startWith(.updating)
+  }
+  
+  static func update(_ trip: Trip) -> Observable<Bool> {
+    var realTime: TKBuzzRealTime! = TKBuzzRealTime()
+    
+    return Observable.create { subscriber in
+      realTime.update(trip, success: { (_, didUpdate) in
+        subscriber.onNext(didUpdate)
+        subscriber.onCompleted()
+      }, failure: { error in
+        // Silently absorb errors
+        subscriber.onNext(false)
+        subscriber.onCompleted()
+      })
+      return Disposables.create {
+        realTime = nil
+      }
+    }
+  }
+
 }
 
 
@@ -543,7 +604,7 @@ extension TKUIResultsViewModel {
     } else if let start = start, let local = TKRegionManager.shared.localRegions(containing: start).first {
       return local
     } else {
-      return SVKInternationalRegion.shared
+      return .international
     }
   }
   
