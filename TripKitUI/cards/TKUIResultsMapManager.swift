@@ -77,8 +77,19 @@ class TKUIResultsMapManager: TKUIMapManager {
   private var allRoutes: [TKUIResultsViewModel.MapRouteItem] = [] {
     didSet {
       guard let mapView = mapView else { return }
-      mapView.removeOverlays(oldValue.flatMap { $0.polylines })
-      mapView.addOverlays(allRoutes.flatMap { $0.polylines })
+      
+      let oldPolylines = oldValue.flatMap { $0.polylines }
+      mapView.removeOverlays(oldPolylines)
+      
+      let newPolylines = allRoutes.flatMap { $0.polylines }
+      mapView.addOverlays(newPolylines)
+      
+      if oldPolylines.isEmpty && !newPolylines.isEmpty {
+        // Zoom to the new polylines plus 20% padding around them
+        let boundingRect = newPolylines.boundingMapRect
+        let zoomToRect = MKMapRectInset(boundingRect, boundingRect.size.width * -0.2, boundingRect.size.height * -0.2)
+        zoom(to: zoomToRect, animated: true)
+      }
     }
   }
 
