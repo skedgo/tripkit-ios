@@ -79,7 +79,15 @@ public class TKAlertViewController: UITableViewController {
   
   public var alerts: [TKAlert] = [] {
     didSet {
-      sortedAlerts = alerts.sorted(by: { $0.isCritical() && !$1.isCritical() })
+      sortedAlerts = alerts
+        .sorted(by: {
+          switch ($0.startTime, $1.startTime) {
+          case (.some(let date1), .some(let date2)): return date1 > date2
+          case (.some, nil): return true
+          default: return false
+          }
+        })
+        .sorted(by: { $0.isCritical() && !$1.isCritical() })
     }
   }
   
