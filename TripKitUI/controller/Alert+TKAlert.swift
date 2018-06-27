@@ -28,4 +28,11 @@ extension Alert: TKAlert {
   public var lastUpdated: Date? {
     return nil
   }
+  
+  public func isCritical() -> Bool {
+    switch alertSeverity {
+    case .alert: return true
+    default: return false
+    }
+  }
 }

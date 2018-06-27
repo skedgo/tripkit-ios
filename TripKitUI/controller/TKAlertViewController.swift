@@ -23,7 +23,10 @@ import RxSwift
   var infoURL: URL? { get }
   var startTime: Date? { get }
   var lastUpdated: Date? { get }
+  
+  func isCritical() -> Bool
 }
+
 
 // MARK: -
 
@@ -55,6 +58,13 @@ extension TKAlertAPIAlertClassWrapper: TKAlert {
     }    
     return TripKitUIBundle.imageNamed(fileName)
   }
+  
+  func isCritical() -> Bool {
+    switch alert.severity {
+    case .alert: return true
+    default: return false
+    }
+  }
 }
 
 // MARK: -
@@ -69,7 +79,13 @@ public class TKAlertViewController: UITableViewController {
   
   public var alerts: [TKAlert] = [] {
     didSet {
-      if alerts.isEmpty {
+      sortedAlerts = alerts.sorted(by: { $0.isCritical() && !$1.isCritical() })
+    }
+  }
+  
+  private var sortedAlerts: [TKAlert] = [] {
+    didSet {
+      if sortedAlerts.isEmpty {
         insertEmptyAlertsView()
       } else {
         emptyAlertView?.removeFromSuperview()
@@ -112,16 +128,16 @@ public class TKAlertViewController: UITableViewController {
   }
   
   override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return alerts.count
+    return sortedAlerts.count
   }
   
   override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard indexPath.row < alerts.count else {
+    guard indexPath.row < sortedAlerts.count else {
       preconditionFailure("Index path refers to a non-existent alert")
     }
     
     let alertCell = tableView.dequeueReusableCell(withIdentifier: "TKAlertCell", for: indexPath) as! TKAlertCell
-    let alert = alerts[indexPath.row]
+    let alert = sortedAlerts[indexPath.row]
     
     // This configures the cell.
     alertCell.alert = alert
@@ -139,11 +155,11 @@ public class TKAlertViewController: UITableViewController {
   // MARK: - Table view delegate
   
   override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard indexPath.row < alerts.count else {
+    guard indexPath.row < sortedAlerts.count else {
       return
     }
     
-    let alert = alerts[indexPath.row]
+    let alert = sortedAlerts[indexPath.row]
     alertControllerDelegate?.alertViewController?(self, didSelectAlert: alert)
   }
   
