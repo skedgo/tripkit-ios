@@ -139,6 +139,8 @@ extension ModeGroup: Hashable {
   var hashValue: Int { return title.hashValue }
 }
 
+// MARK: -
+
 struct RouteAlerts {
   /// Each group is identifiable by a route. The route is affected
   /// by the alerts in the group.
@@ -149,6 +151,20 @@ struct RouteAlerts {
   
   /// Title for the group. This is mainly used for sorting mapping groups.
   var title: String { return route.title }
+}
+
+extension RouteAlerts {
+  
+  func alerts(ofType type: API.Alert.Severity) -> [API.Alert] {
+    return alerts.filter {
+      if case type = $0.severity {
+        return true
+      } else {
+        return false
+      }
+    }
+  }
+  
 }
 
 // MARK: - RxDataSources

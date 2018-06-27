@@ -8,13 +8,23 @@
 
 import UIKit
 
-class TKRouteCell: UITableViewCell {
+class TKGroupedAlertCell: UITableViewCell {
   
   @IBOutlet weak var contentWrapper: UIView!
   @IBOutlet weak var modeIcon: UIImageView!
   @IBOutlet weak var serviceColorIndicator: UIView!
   @IBOutlet weak var routeNumberLabel: UILabel!
   @IBOutlet weak var routeNameLabel: UILabel!
+  @IBOutlet weak var alertCountWrapper: UIView!
+  @IBOutlet weak var alertCountLabel: UILabel!
+  
+  static var nib: UINib {
+    return UINib(nibName: "TKGroupedAlertCell", bundle: TripKitUIBundle.bundle())
+  }
+  
+  static var cellReuseIdentifier: String {
+    return "TKGroupedAlertCell"
+  }
   
   /// @default: `SGStyleManager.darkTextColor`
   var cellTextColor: UIColor? {
@@ -29,7 +39,7 @@ class TKRouteCell: UITableViewCell {
   /// the cell content. Note that, cell appearance such as text and tint
   /// colors are not updated here. Instead, use other appearance properties
   /// e.g., `cellTextColor`.
-  var route: API.Route? {
+  var alertGroup: RouteAlerts? {
     didSet {
       updateContent()
     }
@@ -40,6 +50,8 @@ class TKRouteCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     modeIcon.tintColor = SGStyleManager.darkTextColor() // default tint.
+    alertCountLabel.isHidden = true
+    alertCountWrapper.isHidden = true
   }
   
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
@@ -57,7 +69,11 @@ class TKRouteCell: UITableViewCell {
   // MARK: -
   
   private func updateContent() {
-    guard let route = route else { return }
+    guard let alertGroup = alertGroup else {
+      return
+    }
+    
+    let route = alertGroup.route
     
     // This is the generic mode image.
     let localImage = SGStyleManager.image(forModeImageName: route.modeInfo.localImageName, isRealTime: false, of: .listMainMode)
@@ -69,9 +85,22 @@ class TKRouteCell: UITableViewCell {
     }
     
     serviceColorIndicator.backgroundColor = route.color
+    
     routeNumberLabel.text = route.number ?? route.name
     routeNameLabel.text = route.name
     routeNameLabel.isHidden = (route.name == nil) || (routeNameLabel.text == routeNumberLabel.text)
+    
+    let multipleAlerts = alertGroup.alerts.count > 1
+    
+    alertCountWrapper.isHidden = !multipleAlerts
+    alertCountLabel.isHidden = !multipleAlerts
+    
+    alertCountLabel.text = multipleAlerts ? "\(alertGroup.alerts.count)" : nil
+    if alertGroup.alerts(ofType: .alert).count != 0 {
+      alertCountWrapper.backgroundColor = #colorLiteral(red: 0.8784313725, green: 0.2823529412, blue: 0.2823529412, alpha: 1)
+    } else {
+      alertCountWrapper.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.8274509804, blue: 0.2352941176, alpha: 1)
+    }
   }
   
 }

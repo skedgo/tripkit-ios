@@ -59,14 +59,13 @@ public class TKSectionedAlertViewController: UITableViewController {
       navigationItem.hidesSearchBarWhenScrolling = false
     }
     
-    let nib = UINib(nibName: "TKRouteCell", bundle: Bundle(for: TKSectionedAlertViewController.self))
-    tableView.register(nib, forCellReuseIdentifier: "TKRouteCell")
+    tableView.register(TKGroupedAlertCell.nib, forCellReuseIdentifier: TKGroupedAlertCell.cellReuseIdentifier)
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 60
     
     let dataSource = RxTableViewSectionedReloadDataSource<TKSectionedAlertViewModel.Section>(configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
-      let cell = tv.dequeueReusableCell(withIdentifier: "TKRouteCell", for: ip) as! TKRouteCell
-      cell.route = item.alertGroup.route
+      let cell = tv.dequeueReusableCell(withIdentifier: TKGroupedAlertCell.cellReuseIdentifier, for: ip) as! TKGroupedAlertCell
+      cell.alertGroup = item.alertGroup
       cell.cellTextColor = self?.textColor
       return cell
     })
