@@ -46,6 +46,15 @@ class TKBuzzRouterTest: TKTestCase {
     }
   }
   
+  func testParsingPerformance() throws {
+    let parser = TKRoutingParser(tripKitContext: tripKitContext)
+    let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
+    measure {
+      let request = parser.parseAndAddResultBlocking(json)
+      XCTAssertNotNil(request)
+    }
+  }
+  
   func testParsingGoGetResult() throws {
     let parser = TKRoutingParser(tripKitContext: tripKitContext)
     
@@ -85,12 +94,34 @@ class TKBuzzRouterTest: TKTestCase {
     }
   }
   
-  func testParsingPerformance() throws {
+  func testParsingCycleTrainCycleResult() throws {
     let parser = TKRoutingParser(tripKitContext: tripKitContext)
-    let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
-    measure {
-      let request = parser.parseAndAddResultBlocking(json)
+    
+    let expectation = self.expectation(description: "Parser finished")
+    
+    let json = try contentFromJSON(named: "routing-cycle-train-cycle") as! [String: Any]
+    parser.parseAndAddResult(json) { request in
+      // TODO: (in another test): check the waypoint issue
+      
       XCTAssertNotNil(request)
+      XCTAssertEqual(request?.tripGroups?.count, 5)
+      XCTAssertEqual(request?.trips.count, 33)
+
+      let cycleGroup = request?.tripGroups?.first { $0.trips.contains(where: { $0.usedModeIdentifiers().contains("cy_bic") }) }
+      XCTAssertEqual(cycleGroup?.sources.count, 3)
+
+      let cycleTrip = cycleGroup?.trips.min { $0.totalScore.doubleValue < $1.totalScore.doubleValue }
+      XCTAssertEqual(cycleTrip?.segments().count, 9)
+      XCTAssertEqual(cycleTrip?.segments()[0].alerts().count, 0)
+      
+      // Make sure CoreData is happy
+      try! self.tripKitContext.save()
+      
+      expectation.fulfill()
+    }
+    
+    waitForExpectations(timeout: 3) { error in
+      XCTAssertNil(error)
     }
   }
   
