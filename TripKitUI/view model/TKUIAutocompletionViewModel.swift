@@ -34,6 +34,7 @@ class TKUIAutocompletionViewModel {
     providers: [TKAutocompleting],
     searchText: Observable<String>,
     selected: Observable<Item>,
+    accessorySelected: Observable<Item>,
     biasMapRect: MKMapRect = MKMapRectNull
     ) {
     
@@ -43,19 +44,19 @@ class TKUIAutocompletionViewModel {
       .asDriver(onErrorDriveWith: Driver.empty())
     
     selection = selected
-      .flatMapLatest { result -> Single<MKAnnotation> in
-        guard let provider = result.completion.provider as? TKAutocompleting else {
-          assertionFailure()
-          return Single.error(NSError(code: 18376, message: "Bad provider!"))
-        }
-        return provider.annotation(for: result.completion)
-      }
+      .flatMapLatest { $0.completion.annotation }
+      .asDriver(onErrorDriveWith: Driver.empty())
+    
+    accessorySelection = accessorySelected
+      .flatMapLatest { $0.completion.annotation }
       .asDriver(onErrorDriveWith: Driver.empty())
   }
   
   let sections: Driver<[Section]>
   
   let selection: Driver<MKAnnotation>
+  
+  let accessorySelection: Driver<MKAnnotation>
 }
 
 
@@ -68,6 +69,18 @@ extension Array where Element == SGAutocompletionResult {
       return TKUIAutocompletionViewModel.Item(index: tuple.offset, completion: tuple.element)
     }
     return [TKUIAutocompletionViewModel.Section(items: items)]
+  }
+  
+}
+
+extension SGAutocompletionResult {
+  
+  fileprivate var annotation: Single<MKAnnotation> {
+    guard let provider = provider as? TKAutocompleting else {
+      assertionFailure()
+      return Single.error(NSError(code: 18376, message: "Bad provider!"))
+    }
+    return provider.annotation(for: self)
   }
   
 }

@@ -54,6 +54,7 @@
 		3A67698420EE3A6F0044663F /* TKUIAutocompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67698320EE3A6E0044663F /* TKUIAutocompletionViewModel.swift */; };
 		3A67698620EE3A7A0044663F /* TKUIAutocompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67698520EE3A7A0044663F /* TKUIAutocompletionViewController.swift */; };
 		3A67698820EE3B720044663F /* Array+TKAutocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67698720EE3B720044663F /* Array+TKAutocompleting.swift */; };
+		3A67698D20EE61FF0044663F /* TKUIAutocompletionResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67698C20EE61FF0044663F /* TKUIAutocompletionResultCell.swift */; };
 		3A69C4031DEEB43700872FD1 /* Loc+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */; };
 		3A6ABE64204050BC00645B93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6ABE66204050BC00645B93 /* InfoPlist.strings */; };
 		3A6ABE69204050BC00645B93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6ABE6B204050BC00645B93 /* InfoPlist.strings */; };
@@ -1017,6 +1018,7 @@
 		3A67698320EE3A6E0044663F /* TKUIAutocompletionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAutocompletionViewModel.swift; sourceTree = "<group>"; };
 		3A67698520EE3A7A0044663F /* TKUIAutocompletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAutocompletionViewController.swift; sourceTree = "<group>"; };
 		3A67698720EE3B720044663F /* Array+TKAutocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+TKAutocompleting.swift"; sourceTree = "<group>"; };
+		3A67698C20EE61FF0044663F /* TKUIAutocompletionResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAutocompletionResultCell.swift; sourceTree = "<group>"; };
 		3A67BCC4204052A500D5B940 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3A67BCC5204052A500D5B940 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3A67BCC6204052A500D5B940 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -1977,6 +1979,7 @@
 				D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */,
 				D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */,
 				3A3658802062892100D8645C /* TKTrainOccupancyView.swift */,
+				3A67698C20EE61FF0044663F /* TKUIAutocompletionResultCell.swift */,
 				3AFD397420D93DC100FDC7D0 /* TKUIResultsAccessoryView.swift */,
 				3AFD397520D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib */,
 				3AFD397820D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift */,
@@ -3875,6 +3878,7 @@
 				3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */,
 				3AFD394D20D9333500FDC7D0 /* TKUIResultsViewModel.swift in Sources */,
 				3A6DF11E202C8EB80084CB2C /* UIColor+Variations.m in Sources */,
+				3A67698D20EE61FF0044663F /* TKUIAutocompletionResultCell.swift in Sources */,
 				3A6DF0F9202C8EB80084CB2C /* SGTableViewCell.m in Sources */,
 				3A8FAB7020D3E512005D4C73 /* TKUITripCell+Formatter.swift in Sources */,
 				3AFD394720D9333500FDC7D0 /* TKUITripOverviewCardModel.swift in Sources */,

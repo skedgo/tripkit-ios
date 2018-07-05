@@ -16,6 +16,8 @@ import RxDataSources
 
 public protocol TKUIAutocompletionViewControllerDelegate: class {
   func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect annotation: MKAnnotation)
+
+  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelectAccessoryFor annotation: MKAnnotation)
 }
 
 
@@ -36,6 +38,7 @@ public class TKUIAutocompletionViewController: UITableViewController {
   private let disposeBag = DisposeBag()
   
   private let searchText = PublishSubject<String>()
+  private let accessoryTapped = PublishSubject<TKUIAutocompletionViewModel.Item>()
 
   public init(providers: [TKAutocompleting]) {
     self.providers = providers
@@ -50,30 +53,20 @@ public class TKUIAutocompletionViewController: UITableViewController {
     super.viewDidLoad()
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIAutocompletionViewModel.Section>(
-      configureCell: { _, _, _, item in
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        cell.imageView?.image = item.image
-        cell.imageView?.tintColor = #colorLiteral(red: 0.8500000238, green: 0.8500000238, blue: 0.8500000238, alpha: 1) // From SkedGo default icons
-        cell.textLabel?.text = item.title
-        cell.textLabel?.textColor = SGStyleManager.darkTextColor()
-        cell.detailTextLabel?.text = item.subtitle
-        cell.detailTextLabel?.textColor = SGStyleManager.lightTextColor()
-        cell.contentView.alpha = item.showFaded ? 0.33 : 1
-        
-        if let accessoryImage = item.accessoryImage {
-          cell.accessoryView = SGStyleManager.cellAccessoryButton(with: accessoryImage, target: nil, action: nil)
-        } else {
-          cell.accessoryView = nil
-        }
-        
+      configureCell: { [weak self] _, tv, ip, item in
+        guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else { preconditionFailure() }
+        cell.configure(with: item, onAccessoryTapped: self?.accessoryTapped)
         return cell
       }
     )
+    
+    tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
     
     viewModel = TKUIAutocompletionViewModel(
       providers: providers,
       searchText: searchText,
       selected: tableView.rx.itemSelected.map { dataSource[$0] },
+      accessorySelected: accessoryTapped,
       biasMapRect: biasMapRect
     )
     
@@ -82,9 +75,16 @@ public class TKUIAutocompletionViewController: UITableViewController {
       .disposed(by: disposeBag)
     
     viewModel.selection
-      .drive(onNext: { [weak self] result in
+      .drive(onNext: { [weak self] annotation in
         guard let `self` = self else { return }
-        self.delegate?.autocompleter(self, didSelect: result)
+        self.delegate?.autocompleter(self, didSelect: annotation)
+      })
+      .disposed(by: disposeBag)
+
+    viewModel.accessorySelection
+      .drive(onNext: { [weak self] annotation in
+        guard let `self` = self else { return }
+        self.delegate?.autocompleter(self, didSelectAccessoryFor: annotation)
       })
       .disposed(by: disposeBag)
   }
