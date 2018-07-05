@@ -39,28 +39,8 @@ extension SGAutocompletionDataSource {
     storage.disposeBag = DisposeBag()
     
     // When the input is changing, update the results
-    storage.inputText
-       .asObservable()
-      .throttle(0.2, scheduler: MainScheduler.asyncInstance)
-      .flatMapLatest { input -> Observable<[SGAutocompletionResult]> in
-        // For each provider, let them calculate the result, but make
-        // sure we start with no results, so that the `combineLatest`
-        // will fire ASAP.
-        let observables = self.storage.providers
-          .map { provider in
-            provider.autocomplete(input, near: self.storage.mapRect)
-              .map { results -> [SGAutocompletionResult] in
-                results.forEach { $0.provider = provider as AnyObject }
-                return results
-              }
-              .startWith([])
-              .catchErrorJustReturn([])
-          }
-        return Observable
-          .combineLatest(observables) { $0.flatMap { $0 } }
-          .map { $0.sorted { $0.compare($1) == .orderedAscending }}
-      }
-      .throttle(0.5, scheduler: MainScheduler.asyncInstance)
+    providers
+      .autocomplete(storage.inputText.asObservable(), mapRect: mapRect)
       .bind(to: storage.results)
       .disposed(by: storage.disposeBag)
     

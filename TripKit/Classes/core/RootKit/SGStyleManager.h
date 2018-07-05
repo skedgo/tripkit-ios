@@ -31,8 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if TARGET_OS_IPHONE
 + (UIButton *)cellAccessoryButtonWithImage:(UIImage *)image
-                                    target:(id)target
-                                    action:(SEL)selector;
+                                    target:(nullable id)target
+                                    action:(nullable SEL)selector;
 #endif
 
 #pragma mark - Image names
