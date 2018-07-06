@@ -30,6 +30,28 @@ extension Loc {
     return NSLocalizedString("Arrive in", tableName: "TripKit", bundle: .tripKit, comment: "Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below.")
   }
   
+  
+  // MARK: Attribution
+  
+  public static var DataProviders: String {
+    return NSLocalizedString("Data Providers", tableName: "TripKit", bundle: .tripKit, comment: "Title for screen showing data providers")
+  }
+  
+  public static func DataProvided(by provider: String) -> String {
+    let format = NSLocalizedString("Data provided by %@", tableName: "TripKit", bundle: .tripKit, comment: "Text for attributing data sources. The list of providers will be used instead of '%@'")
+    return String(format: format, provider)
+  }
+  
+  public static var PoweredBy: String {
+    return NSLocalizedString("Powered by", tableName: "TripKit", bundle: .tripKit, comment: "")
+  }
+  
+  public static func PoweredBy(_ provider: String) -> String {
+    let format = NSLocalizedString("Powered by %@", tableName: "TripKit", bundle: .tripKit, comment: "")
+    return String(format: format, provider)
+  }
+  
+  
   // MARK: -
   
   @objc public static var Now: String {

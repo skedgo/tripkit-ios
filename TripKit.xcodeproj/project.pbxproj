@@ -750,6 +750,12 @@
 		3AEB47EC20DCE48500F9DF83 /* RxHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */; };
 		3AF3F2621E04CA7C00A2EEC6 /* TKBookingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */; };
 		3AF3F2641E04CA8C00A2EEC6 /* TKLocationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */; };
+		3AF5F2B120EFF7BE003AAEBA /* TKUIAttributionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF5F2AE20EFF7BD003AAEBA /* TKUIAttributionCell.xib */; };
+		3AF5F2B220EFF7BE003AAEBA /* TKUIAttributionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5F2AF20EFF7BD003AAEBA /* TKUIAttributionCell.swift */; };
+		3AF5F2B320EFF7BE003AAEBA /* TKUIAttributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5F2B020EFF7BD003AAEBA /* TKUIAttributionView.swift */; };
+		3AF5F2B620EFF91F003AAEBA /* TKUIAttributionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF5F2B420EFF91F003AAEBA /* TKUIAttributionTableViewController.xib */; };
+		3AF5F2B720EFF91F003AAEBA /* TKUIAttributionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5F2B520EFF91F003AAEBA /* TKUIAttributionTableViewController.swift */; };
+		3AF5F2B920F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5F2B820F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift */; };
 		3AF6FDF0204436D4003BA786 /* regionInfo-multi.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AF6FDEF204436D3003BA786 /* regionInfo-multi.json */; };
 		3AF94B121F0BF79800500940 /* TKSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B111F0BF79800500940 /* TKSettings.swift */; };
 		3AF94B1F1F0BFB9E00500940 /* Shape+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */; };
@@ -1505,6 +1511,12 @@
 		3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxHelpers.swift; sourceTree = "<group>"; };
 		3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingTypes.swift; sourceTree = "<group>"; };
 		3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationTypes.swift; sourceTree = "<group>"; };
+		3AF5F2AE20EFF7BD003AAEBA /* TKUIAttributionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIAttributionCell.xib; sourceTree = "<group>"; };
+		3AF5F2AF20EFF7BD003AAEBA /* TKUIAttributionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAttributionCell.swift; sourceTree = "<group>"; };
+		3AF5F2B020EFF7BD003AAEBA /* TKUIAttributionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAttributionView.swift; sourceTree = "<group>"; };
+		3AF5F2B420EFF91F003AAEBA /* TKUIAttributionTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIAttributionTableViewController.xib; sourceTree = "<group>"; };
+		3AF5F2B520EFF91F003AAEBA /* TKUIAttributionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAttributionTableViewController.swift; sourceTree = "<group>"; };
+		3AF5F2B820F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripOverviewCard+Configuration.swift"; sourceTree = "<group>"; };
 		3AF6FDEF204436D3003BA786 /* regionInfo-multi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-multi.json"; sourceTree = "<group>"; };
 		3AF94B111F0BF79800500940 /* TKSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSettings.swift; sourceTree = "<group>"; };
 		3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -1904,24 +1916,24 @@
 		3A6DF0BD202C8EB80084CB2C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF0BE202C8EB80084CB2C /* UIFont+CustomFonts.h */,
-				3A6DF0BF202C8EB80084CB2C /* UITableView+SafeReload.m */,
-				3A6DF0C0202C8EB80084CB2C /* UIColor+Variations.m */,
-				3A6DF0C1202C8EB80084CB2C /* SGStyleManager+SGCoreUI.m */,
-				3A6DF0C2202C8EB80084CB2C /* UIImageView+Kingfisher.swift */,
-				3A6DF0C3202C8EB80084CB2C /* UIView+BearingRotation.h */,
-				3A6DF0C4202C8EB80084CB2C /* UIView+Helpers.h */,
-				3A6DF0C5202C8EB80084CB2C /* UIView+Hop.h */,
-				3A6DF0C6202C8EB80084CB2C /* UISearchBar+Customizable.m */,
-				3A6DF0C7202C8EB80084CB2C /* UIFont+CustomFonts.m */,
 				3A6DF0C8202C8EB80084CB2C /* SGStyleManager+SGCoreUI.h */,
-				3A6DF0C9202C8EB80084CB2C /* UIColor+Variations.h */,
-				3A6DF0CA202C8EB80084CB2C /* UITableView+SafeReload.h */,
-				3A6DF0CB202C8EB80084CB2C /* UIView+Hop.m */,
-				3A6DF0CC202C8EB80084CB2C /* UIView+Helpers.m */,
-				3A6DF0CD202C8EB80084CB2C /* UIView+BearingRotation.m */,
-				3A6DF0CE202C8EB80084CB2C /* UISearchBar+Customizable.h */,
+				3A6DF0C1202C8EB80084CB2C /* SGStyleManager+SGCoreUI.m */,
 				3A6DF0CF202C8EB80084CB2C /* UIButton+TitleAndImage.swift */,
+				3A6DF0C9202C8EB80084CB2C /* UIColor+Variations.h */,
+				3A6DF0C0202C8EB80084CB2C /* UIColor+Variations.m */,
+				3A6DF0BE202C8EB80084CB2C /* UIFont+CustomFonts.h */,
+				3A6DF0C7202C8EB80084CB2C /* UIFont+CustomFonts.m */,
+				3A6DF0C2202C8EB80084CB2C /* UIImageView+Kingfisher.swift */,
+				3A6DF0CE202C8EB80084CB2C /* UISearchBar+Customizable.h */,
+				3A6DF0C6202C8EB80084CB2C /* UISearchBar+Customizable.m */,
+				3A6DF0CA202C8EB80084CB2C /* UITableView+SafeReload.h */,
+				3A6DF0BF202C8EB80084CB2C /* UITableView+SafeReload.m */,
+				3A6DF0C3202C8EB80084CB2C /* UIView+BearingRotation.h */,
+				3A6DF0CD202C8EB80084CB2C /* UIView+BearingRotation.m */,
+				3A6DF0C4202C8EB80084CB2C /* UIView+Helpers.h */,
+				3A6DF0CC202C8EB80084CB2C /* UIView+Helpers.m */,
+				3A6DF0C5202C8EB80084CB2C /* UIView+Hop.h */,
+				3A6DF0CB202C8EB80084CB2C /* UIView+Hop.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1930,9 +1942,9 @@
 			isa = PBXGroup;
 			children = (
 				3A6DF0D1202C8EB80084CB2C /* SGButton.h */,
-				3A6DF0D2202C8EB80084CB2C /* SGLabel.m */,
 				3A6DF0D3202C8EB80084CB2C /* SGButton.m */,
 				3A6DF0D4202C8EB80084CB2C /* SGLabel.h */,
+				3A6DF0D2202C8EB80084CB2C /* SGLabel.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1957,6 +1969,8 @@
 				D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */,
 				D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */,
 				D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */,
+				3AF5F2B520EFF91F003AAEBA /* TKUIAttributionTableViewController.swift */,
+				3AF5F2B420EFF91F003AAEBA /* TKUIAttributionTableViewController.xib */,
 				3A67698520EE3A7A0044663F /* TKUIAutocompletionViewController.swift */,
 				3AFD393A20D9333500FDC7D0 /* TKUIRoutesViewController.swift */,
 				3AFD394420D9333500FDC7D0 /* TKUISheetViewController.h */,
@@ -1990,6 +2004,9 @@
 				D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */,
 				D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */,
 				3A3658802062892100D8645C /* TKTrainOccupancyView.swift */,
+				3AF5F2AF20EFF7BD003AAEBA /* TKUIAttributionCell.swift */,
+				3AF5F2AE20EFF7BD003AAEBA /* TKUIAttributionCell.xib */,
+				3AF5F2B020EFF7BD003AAEBA /* TKUIAttributionView.swift */,
 				3A67698C20EE61FF0044663F /* TKUIAutocompletionResultCell.swift */,
 				3AFD397420D93DC100FDC7D0 /* TKUIResultsAccessoryView.swift */,
 				3AFD397520D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib */,
@@ -2785,6 +2802,7 @@
 				3AFD393E20D9333500FDC7D0 /* TKUIResultsMapManager.swift */,
 				3AFD393D20D9333500FDC7D0 /* TKUITripMapManager.swift */,
 				3AFD394320D9333500FDC7D0 /* TKUITripOverviewCard.swift */,
+				3AF5F2B820F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift */,
 			);
 			path = cards;
 			sourceTree = "<group>";
@@ -3519,7 +3537,9 @@
 				D39ECD87205A007A00E09474 /* TKSectionedAlertViewController.xib in Resources */,
 				3A6ABE6E204050BC00645B93 /* InfoPlist.strings in Resources */,
 				3A6DF13C202C8EB80084CB2C /* TKAlertInfoView.xib in Resources */,
+				3AF5F2B620EFF91F003AAEBA /* TKUIAttributionTableViewController.xib in Resources */,
 				D39B7BB520622FD100988D8A /* TKAlertCell.xib in Resources */,
+				3AF5F2B120EFF7BE003AAEBA /* TKUIAttributionCell.xib in Resources */,
 				3A6DF14A202C8EB80084CB2C /* TKDepartureView.xib in Resources */,
 				3A6DF11B202C8EB80084CB2C /* SGTripSummaryMiniCell.xib in Resources */,
 				3A6DF137202C8EB80084CB2C /* TripKitUI.xcassets in Resources */,
@@ -3856,6 +3876,7 @@
 				3A6DF12D202C8EB80084CB2C /* UIButton+TitleAndImage.swift in Sources */,
 				3A6DF14F202C8EB80084CB2C /* TKAnnotationViewBuilder.swift in Sources */,
 				3A3658812062892100D8645C /* TKTrainOccupancyView.swift in Sources */,
+				3AF5F2B920F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift in Sources */,
 				3A6DF149202C8EB80084CB2C /* CircleAnnotationView.m in Sources */,
 				3A6DF130202C8EB80084CB2C /* SGButton.m in Sources */,
 				3A6DF111202C8EB80084CB2C /* SGTripSummaryCell.swift in Sources */,
@@ -3881,6 +3902,7 @@
 				3A6DF12A202C8EB80084CB2C /* UIView+Helpers.m in Sources */,
 				3A6DF112202C8EB80084CB2C /* SGSemaphoreView.m in Sources */,
 				3AFD397020D93D9800FDC7D0 /* TKUITimePickerSheet.m in Sources */,
+				3AF5F2B720EFF91F003AAEBA /* TKUIAttributionTableViewController.swift in Sources */,
 				3AFD397620D93DC200FDC7D0 /* TKUIResultsAccessoryView.swift in Sources */,
 				3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */,
 				3A6DF120202C8EB80084CB2C /* UIImageView+Kingfisher.swift in Sources */,
@@ -3890,6 +3912,7 @@
 				D39B7BB420622FD100988D8A /* TKAlertCell.swift in Sources */,
 				3A6DF10E202C8EB80084CB2C /* SGTripSummaryCell.m in Sources */,
 				3A6DF0FE202C8EB80084CB2C /* SGTableCell.m in Sources */,
+				3AF5F2B320EFF7BE003AAEBA /* TKUIAttributionView.swift in Sources */,
 				3AFD394C20D9333500FDC7D0 /* TKUIMapManager.swift in Sources */,
 				3A6DF144202C8EB80084CB2C /* SGPulsingAnnotationView.m in Sources */,
 				3A8FAB6D20D3E28B005D4C73 /* TKUITripCell.swift in Sources */,
@@ -3913,6 +3936,7 @@
 				3AA923F620DA7CDA00EBDDC6 /* TGCardView+Rx.swift in Sources */,
 				3A6DF11F202C8EB80084CB2C /* SGStyleManager+SGCoreUI.m in Sources */,
 				3A6DF132202C8EB80084CB2C /* TripMapManager.m in Sources */,
+				3AF5F2B220EFF7BE003AAEBA /* TKUIAttributionCell.swift in Sources */,
 				3A879AE720CFD93700107D58 /* Alert+TKAlert.swift in Sources */,
 				3A6DF119202C8EB80084CB2C /* SGPolylineRenderer.m in Sources */,
 				3A6DF10B202C8EB80084CB2C /* SGSemaphoreView.swift in Sources */,

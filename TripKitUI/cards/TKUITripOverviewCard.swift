@@ -35,7 +35,7 @@ extension TGPageCard {
     
     self.init(cards: cards, initialPage: index)
     
-    if let tripHandler = TKUITripOverviewCard.startTripHandler {
+    if let tripHandler = TKUITripOverviewCard.config.startTripHandler {
       // TODO: Localize
       headerRightAction = (title: "Start", onPress: { index in
         let card = cards[index]
@@ -50,10 +50,7 @@ extension TGPageCard {
 
 public class TKUITripOverviewCard: TGTableCard {
   
-  public static var presentSegmentHandler: ((TKUITripOverviewCard, TKSegment) -> Void)?
-
-  public static var startTripHandler: ((TKUITripOverviewCard, Trip) -> Void)?
-
+  public static var config = Configuration.empty
   
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUITripOverviewViewModel.Section>(
     configureCell: { ds, tv, ip, item in
@@ -103,8 +100,14 @@ public class TKUITripOverviewCard: TGTableCard {
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
+    viewModel.dataSources
+      .drive(onNext: { sources in
+        self.showAttribution(for: sources, in: tableView)
+      })
+      .disposed(by: disposeBag)
+
     // Handling segment selections
-    if let segmentHandler = TKUITripOverviewCard.presentSegmentHandler {
+    if let segmentHandler = TKUITripOverviewCard.config.presentSegmentHandler {
       tableView.rx.itemSelected
         .map { (self, self.viewModel.segment(for: self.dataSource[$0])) }
         .filter { $1 != nil }
@@ -145,4 +148,65 @@ extension TKUITripOverviewCard {
     return cell
   }
 
+}
+
+// MARK: - Attribution
+
+extension TKUITripOverviewCard {
+  private func showAttribution(for sources: [API.DataAttribution], in  tableView: UITableView) {
+    let footer = TKUIAttributionView.newView(sources, fitsIn: tableView)
+    footer?.backgroundColor = tableView.backgroundColor
+    
+    let tapper = UITapGestureRecognizer(target: nil, action: nil)
+    tapper.rx.event
+      .filter { $0.state == .ended }
+      .subscribe(onNext: { [weak self] _ in
+        self?.presentAttributions(for: sources, sender: footer)
+      })
+      .disposed(by: disposeBag)
+    footer?.addGestureRecognizer(tapper)
+    
+    tableView.tableFooterView = footer
+  }
+  
+  private func presentAttributions(for sources: [API.DataAttribution], sender: Any?) {
+    
+    let attributor = TKUIAttributionTableViewController(attributions: sources)
+    attributor.delegate = self
+    
+    let navigator = UINavigationController(rootViewController: attributor)
+    present(navigator, sender: sender)
+  }
+  
+  private func present(_ viewController: UIViewController, sender: Any? = nil) {
+    guard let controller = controller else { return }
+    if controller.traitCollection.horizontalSizeClass == .regular {
+      viewController.modalPresentationStyle = .popover
+      let presentation = viewController.popoverPresentationController
+      presentation?.sourceView = controller.view
+      if let view = sender as? UIView {
+        presentation?.sourceRect = view.bounds
+      } else if let barButton = sender as? UIBarButtonItem {
+        presentation?.barButtonItem = barButton
+      }
+    } else {
+      viewController.modalPresentationStyle = .fullScreen
+    }
+    controller.present(viewController, animated: true, completion: nil)
+  }
+  
+}
+
+// MARK: TKUIAttributionTableViewControllerDelegate
+
+extension TKUITripOverviewCard: TKUIAttributionTableViewControllerDelegate {
+  
+  public func attributor(_ attributor: TKUIAttributionTableViewController, requestsWebsite url: URL) {
+    TKUITripOverviewCard.config.presentAttributionHandler?(self, url)
+  }
+  
+  public func requestsDismissal(attributor: TKUIAttributionTableViewController) {
+    attributor.presentingViewController?.dismiss(animated: true, completion: nil)
+  }
+  
 }

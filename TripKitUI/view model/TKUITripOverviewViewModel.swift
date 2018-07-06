@@ -21,12 +21,16 @@ class TKUITripOverviewViewModel {
   init(trip: Trip) {
     self.trip = trip
     
-    self.sections = Driver.just(TKUITripOverviewViewModel.buildSections(for: trip))
+    sections = Driver.just(TKUITripOverviewViewModel.buildSections(for: trip))
+    
+    dataSources = Driver.just(trip.tripGroup.sources)
   }
 
   let trip: Trip
   
   let sections: Driver<[Section]>
+  
+  let dataSources: Driver<[API.DataAttribution]>
   
 }
 
