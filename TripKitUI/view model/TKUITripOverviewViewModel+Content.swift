@@ -154,12 +154,13 @@ fileprivate extension TKSegment {
   
   func toStationaryBridge(to next: TKSegment) -> TKUITripOverviewViewModel.StationaryItem {
     return TKUITripOverviewViewModel.StationaryItem(
-      title: (end?.title ?? next.start?.title ?? nil) ?? Loc.Location,
+      title: (next.start?.title ?? end?.title ?? nil) ?? Loc.Location,
       subtitle: nil,
       time: arrivalTime,
       topConnection: line,
       bottomConnection: next.line,
-      segment: self
+      segment: next // Since this is marking the start of "next", it makes most
+                    // sense to display that when tapping on it.
     )
   }
   
