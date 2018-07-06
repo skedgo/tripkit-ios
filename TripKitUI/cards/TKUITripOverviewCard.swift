@@ -9,6 +9,7 @@
 import Foundation
 
 import RxSwift
+import RxCocoa
 import RxDataSources
 import TGCardViewController
 
@@ -38,7 +39,7 @@ extension TGPageCard {
       // TODO: Localize
       headerRightAction = (title: "Start", onPress: { index in
         let card = cards[index]
-        let trip = card.cardModel.trip
+        let trip = card.viewModel.trip
         tripHandler(card, trip)
       })
     }
@@ -54,21 +55,26 @@ public class TKUITripOverviewCard: TGTableCard {
   public static var startTripHandler: ((TKUITripOverviewCard, Trip) -> Void)?
 
   
-  private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUITripOverviewCardModel.Section>(
+  private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUITripOverviewViewModel.Section>(
     configureCell: { ds, tv, ip, item in
-      let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-      cell.textLabel?.text = item.title
-      cell.detailTextLabel?.text = item.subtitle
-      cell.imageView?.image = item.icon
-      return cell
+      switch item {
+      case .start(let item):
+        return TKUITripOverviewCard.terminalCell(for: item, isStart: true, tableView: tv, indexPath: ip)
+      case .end(let item):
+        return TKUITripOverviewCard.terminalCell(for: item, isStart: false, tableView: tv, indexPath: ip)
+      case .stationary(let item):
+        return TKUITripOverviewCard.stationaryCell(for: item, tableView: tv, indexPath: ip)
+      case .moving(let item):
+        return TKUITripOverviewCard.movingCell(for: item, tableView: tv, indexPath: ip)
+      }
     }
   )
   
-  fileprivate let cardModel: TKUITripOverviewCardModel
+  fileprivate let viewModel: TKUITripOverviewViewModel
   private let disposeBag = DisposeBag()
   
   public init(trip: Trip, index: Int? = nil) {
-    cardModel = TKUITripOverviewCardModel(trip: trip)
+    viewModel = TKUITripOverviewViewModel(trip: trip)
     
     let mapManager = TKUITripMapManager(trip: trip)
     
@@ -92,14 +98,16 @@ public class TKUITripOverviewCard: TGTableCard {
     // Overriding the data source with our Rx one
     // Note: explicitly reset to say we know that we'll override this with Rx
     tableView.dataSource = nil
-    cardModel.sections
-      .bind(to: tableView.rx.items(dataSource: dataSource))
+    viewModel.sections
+      .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
     // Handling segment selections
     if let segmentHandler = TKUITripOverviewCard.presentSegmentHandler {
       tableView.rx.itemSelected
-        .map { (self, self.cardModel.segment(for: self.dataSource[$0])) }
+        .map { (self, self.viewModel.segment(for: self.dataSource[$0])) }
+        .filter { $1 != nil }
+        .map { ($0, $1!)}
         .subscribe(onNext: segmentHandler)
         .disposed(by: disposeBag)
     }
@@ -109,7 +117,35 @@ public class TKUITripOverviewCard: TGTableCard {
   override public func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
    
-    TKUICustomization.shared.feedbackActiveItemHandler?(cardModel.trip)
+    TKUICustomization.shared.feedbackActiveItemHandler?(viewModel.trip)
   }
   
+}
+
+// MARK: - Configuring cells
+
+extension TKUITripOverviewCard {
+  
+  private static func terminalCell(for terminal: TKUITripOverviewViewModel.TerminalItem, isStart: Bool, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+    cell.textLabel?.text = terminal.title
+    cell.detailTextLabel?.text = terminal.subtitle
+    return cell
+  }
+
+  private static func stationaryCell(for stationary: TKUITripOverviewViewModel.StationaryItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+    cell.textLabel?.text = stationary.title
+    cell.detailTextLabel?.text = stationary.subtitle
+    return cell
+  }
+
+  private static func movingCell(for moving: TKUITripOverviewViewModel.MovingItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+    cell.textLabel?.text = moving.title
+    cell.detailTextLabel?.text = moving.notes
+    cell.imageView?.image = moving.icon
+    return cell
+  }
+
 }
