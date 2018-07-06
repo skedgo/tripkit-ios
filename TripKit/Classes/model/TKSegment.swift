@@ -270,14 +270,14 @@ extension TKSegment: STKTripSegment {
   public var tripSegmentInstruction: String {
     guard let rawString = template?.miniInstruction?.instruction else { return "" }
     let mutable = NSMutableString(string: rawString)
-    fill(inTemplates: mutable, inTitle: true)
+    fill(inTemplates: mutable, inTitle: true, includingTime: true)
     return mutable as String
   }
   
   public var tripSegmentMainValue: Any {
     if let rawString = template?.miniInstruction?.mainValue {
       let mutable = NSMutableString(string: rawString)
-      fill(inTemplates: mutable, inTitle: true)
+      fill(inTemplates: mutable, inTitle: true, includingTime: true)
       return mutable as String
     } else {
       return self.departureTime
@@ -287,7 +287,7 @@ extension TKSegment: STKTripSegment {
   public var tripSegmentDetail: String? {
     if let rawString = template?.miniInstruction?.detail {
       let mutable = NSMutableString(string: rawString)
-      fill(inTemplates: mutable, inTitle: true)
+      fill(inTemplates: mutable, inTitle: true, includingTime: true)
       return mutable as String
     } else {
       return nil

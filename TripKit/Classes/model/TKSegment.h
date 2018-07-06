@@ -65,6 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setTitle:(NSString *)title; // just for KVO
 
+@property (nonatomic, strong) NSString *titleWithoutTime;
+
 /**
  @return The local region this segment starts in. Cannot be international and thus might be nil.
  */
@@ -193,7 +195,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary<NSString *, NSNumber *> *)segmentVisits;
 
 - (BOOL)fillInTemplates:(NSMutableString *)string
-                inTitle:(BOOL)title;
+                inTitle:(BOOL)title
+          includingTime:(BOOL)includeTime;
 
 ///-----------------------------------------------------------------------------
 /// @name In-app and external bookings

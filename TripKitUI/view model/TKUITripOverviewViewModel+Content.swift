@@ -14,7 +14,7 @@ extension TKUITripOverviewViewModel {
   
   func segment(for item: Item) -> TKSegment? {
     switch item {
-    case .start, .end: return nil
+    case .terminal: return nil
     case .stationary(let item): return item.segment
     case .moving(let item): return item.segment
     }
@@ -36,16 +36,20 @@ extension TKUITripOverviewViewModel {
   }
   
   enum Item: Equatable {
-    case start(TerminalItem)
+    case terminal(TerminalItem)
     case stationary(StationaryItem)
     case moving(MovingItem)
-    case end(TerminalItem)
   }
   
   struct TerminalItem: Equatable {
     let title: String
     let subtitle: String?
+
+    let time: Date?
+    let timeZone: TimeZone
+    
     let connection: Line?
+    let isStart: Bool
   }
   
   struct StationaryItem: Equatable {
@@ -53,6 +57,7 @@ extension TKUITripOverviewViewModel {
     let subtitle: String?
     
     let time: Date?
+    let timeZone: TimeZone
     
     let topConnection: Line?
     let bottomConnection: Line?
@@ -108,15 +113,10 @@ extension TKUITripOverviewViewModel {
   private static func build(segment: TKSegment, previous: TKSegment?, next: TKSegment?) -> [TKUITripOverviewViewModel.Item] {
     
     switch segment.order() {
-    case .start:
-      return [.start(TKUITripOverviewViewModel.TerminalItem(
-        title: segment.title ?? "", subtitle: nil, connection: next?.line)
-      )]
-      
-    case .end:
-      return [.end(TKUITripOverviewViewModel.TerminalItem(
-        title: segment.title ?? "", subtitle: nil, connection: previous?.line)
-      )]
+    case .start, .end:
+      return [
+        .terminal(segment.toTerminal(previous: previous, next: next))
+      ]
       
     case .regular:
       if segment.isStationary() {
@@ -141,11 +141,24 @@ extension TKUITripOverviewViewModel {
 }
 
 fileprivate extension TKSegment {
+  func toTerminal(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.TerminalItem {
+    let isStart = order() == .start
+    return TKUITripOverviewViewModel.TerminalItem(
+      title: titleWithoutTime,
+      subtitle: nil,
+      time: time,
+      timeZone: timeZone,
+      connection: (isStart ? next : previous)?.line,
+      isStart: isStart
+    )
+  }
+  
   func toStationary(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.StationaryItem {
     return TKUITripOverviewViewModel.StationaryItem(
       title: (start?.title ?? nil) ?? Loc.Location,
-      subtitle: title,
+      subtitle: titleWithoutTime,
       time: departureTime,
+      timeZone: timeZone,
       topConnection: previous?.line,
       bottomConnection: next?.line,
       segment: self
@@ -157,6 +170,7 @@ fileprivate extension TKSegment {
       title: (next.start?.title ?? end?.title ?? nil) ?? Loc.Location,
       subtitle: nil,
       time: arrivalTime,
+      timeZone: timeZone,
       topConnection: line,
       bottomConnection: next.line,
       segment: next // Since this is marking the start of "next", it makes most
@@ -166,7 +180,7 @@ fileprivate extension TKSegment {
   
   func toMoving() -> TKUITripOverviewViewModel.MovingItem {
     return TKUITripOverviewViewModel.MovingItem(
-      title: title ?? "",
+      title: titleWithoutTime,
       notes: notes(),
       icon: (self as STKTripSegment).tripSegmentModeImage,
       iconURL: (self as STKTripSegment).tripSegmentModeImageURL,
@@ -189,8 +203,7 @@ extension TKUITripOverviewViewModel.Item: IdentifiableType {
   typealias Identity = String
   var identity: Identity {
     switch self {
-    case .start: return "Start"
-    case .end: return "End"
+    case .terminal(let item): return item.isStart ? "Start" : "End"
     case .stationary(let item): return String(describing: item.segment.templateHashCode())
     case .moving(let item): return String(describing: item.segment.templateHashCode())
     }

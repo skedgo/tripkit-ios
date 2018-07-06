@@ -18,6 +18,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 @property (nonatomic, copy) NSString *primaryLocationString;
 @property (nonatomic, copy) NSString *singleLineInstruction;
+@property (nonatomic, copy) NSString *singleLineInstructionWithoutTime;
 @property (nonatomic, strong) StopLocation *scheduledStartStop;
 @property (nonatomic, assign) TKSegmentOrdering order;
 @property (nonatomic, strong) NSDictionary *segmentVisits;
@@ -37,6 +38,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 	if (self) {
 		_primaryLocationString = UninitializedString;
 		_singleLineInstruction = UninitializedString;
+    _singleLineInstructionWithoutTime = UninitializedString;
     _order = TKSegmentOrderingRegular;
     _alerts = nil;
 	}
@@ -119,6 +121,10 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSInteger)templateHashCode {
   return self.template.hashCode.integerValue;
+}
+
+- (NSString *)titleWithoutTime {
+  return [self singleLineInstructionWithoutTime];
 }
 
 - (NSString *)departureLocation
@@ -435,7 +441,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
   
   NSMutableString *notes = [NSMutableString stringWithString:raw];
-  BOOL isTimeDependent = [self fillInTemplates:notes inTitle:NO];
+  BOOL isTimeDependent = [self fillInTemplates:notes inTitle:NO includingTime:YES];
   if (isTimeDependent) {
     return notes;
   } else {
@@ -826,6 +832,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (BOOL)fillInTemplates:(NSMutableString *)string
                 inTitle:(BOOL)title
+          includingTime:(BOOL)includeTime
 {
   BOOL isDynamic = NO;
   NSRange range;
@@ -876,27 +883,32 @@ NSString *const UninitializedString =  @"UninitializedString";
   
   range = [string rangeOfString:@"<TIME>"];
   if (range.location != NSNotFound) {
-    NSString *timeString = [SGStyleManager timeString:self.departureTime
-                                          forTimeZone:self.timeZone];
-    BOOL prepend = range.location > 0 && [string characterAtIndex:range.location - 1] != '\n';
-    NSString *replacement;
-    if (prepend) {
-      replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"at %@", @"TripKit", [TKTripKit bundle], "Time of the bus departure. (old key: DepartureTime)"), timeString];
-      replacement = [NSString stringWithFormat:@" %@", replacement];
+    if (includeTime) {
+      NSString *timeString = [SGStyleManager timeString:self.departureTime
+                                            forTimeZone:self.timeZone];
+      BOOL prepend = range.location > 0 && [string characterAtIndex:range.location - 1] != '\n';
+      NSString *replacement;
+      if (prepend) {
+        replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"at %@", @"TripKit", [TKTripKit bundle], "Time of the bus departure. (old key: DepartureTime)"), timeString];
+        replacement = [NSString stringWithFormat:@" %@", replacement];
+      } else {
+        replacement = timeString;
+      }
+      isDynamic = YES;
+      [string replaceCharactersInRange:range withString:replacement];
+      
     } else {
-      replacement = timeString;
+      [string replaceCharactersInRange:range withString:@""];
     }
-    isDynamic = YES;
-    [string replaceCharactersInRange:range withString:replacement];
   }
   
   range = [string rangeOfString:@"<DURATION>"];
   if (range.location != NSNotFound) {
     NSString *durationString = [self stringForDuration:YES];
     NSString *replacement;
-    if (durationString.length == 0)
+    if (durationString.length == 0) {
       replacement = @"";
-    else {
+    } else {
       BOOL prepend = title && range.location > 0;
       if (prepend) {
         replacement = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"for %@", @"TripKit", [TKTripKit bundle], "Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'."), durationString];
@@ -924,6 +936,12 @@ NSString *const UninitializedString =  @"UninitializedString";
     [string replaceCharactersInRange:range withString:replacement];
   }
 
+  // replace empty lead-in
+  [string replaceOccurrencesOfString:@"^: "
+                          withString:@""
+                             options:NSRegularExpressionSearch
+                               range:NSMakeRange(0, string.length)];
+  
   // replace empty lead-in
   [string replaceOccurrencesOfString:@"([\\n^])[ ]*⋅[ ]*"
                           withString:@"$1"
@@ -1003,64 +1021,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
 	if (_singleLineInstruction == UninitializedString) {
     BOOL isTimeDependent = NO;
-    NSString *newString = nil;
-    
-    switch (self.order) {
-      case TKSegmentOrderingStart: {
-        isTimeDependent = self.trip.departureTimeIsFixed;
-        NSString *name = [self.trip.request.fromLocation name];
-        if (! name) {
-          name = [self.trip.request.fromLocation address];
-        }
-        if (isTimeDependent) {
-          NSString *time = [SGStyleManager timeString:self.departureTime
-                                          forTimeZone:self.timeZone];
-          if (name) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@ at %@", @"TripKit", [TKTripKit bundle], "The place of departure with time. (old key: LeaveLocationTime)"), name, time];
-          } else {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave at %@", @"TripKit", [TKTripKit bundle], "Time departure. (old key: LeaveTime)"), time];
-          }
-        } else {
-          if (name) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@", @"TripKit", [TKTripKit bundle], "The place of departure. (old key: LeaveLocation)"), name];
-          } else {
-            newString = NSLocalizedStringFromTableInBundle(@"Leave", @"TripKit", [TKTripKit bundle], @"Single line instruction to leave");
-          }
-        }
-        break;
-      }
-
-      case TKSegmentOrderingRegular: {
-        if (!self.template.action) {
-          return @"";
-        }
-        NSMutableString *actionRaw = [NSMutableString stringWithString:self.template.action];
-        isTimeDependent = [self fillInTemplates:actionRaw inTitle:YES];
-        newString = actionRaw;
-        break;
-      }
-        
-      case TKSegmentOrderingEnd: {
-        isTimeDependent = self.trip.departureTimeIsFixed;
-        NSString *name = [self.trip.request.toLocation name];
-        if (! name) {
-          name = [self.trip.request.toLocation address];
-        }
-        if (isTimeDependent) {
-          NSString *time = [SGStyleManager timeString:self.arrivalTime
-                                          forTimeZone:self.timeZone];
-          if (name.length > 0) {
-            newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Arrive at %@ at %@", @"TripKit", [TKTripKit bundle], "The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime)"), name, time];
-          } else {
-            newString = [Loc ArriveAtDate:time];
-          }
-        } else {
-          newString = NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Single line instruction to arrive");
-        }
-        break;
-      }
-    }
-    
+    NSString *newString = [self buildSingleLineInstructionIncludingTime:YES isTimeDependent:&isTimeDependent];
     if (isTimeDependent)
       // in this place we can't cache the single line instruction as it's dynamic!
       return newString;
@@ -1068,9 +1029,88 @@ NSString *const UninitializedString =  @"UninitializedString";
       // cache it and return it
       _singleLineInstruction = newString;
     }
-	}
-	return _singleLineInstruction;
+  }
+  return _singleLineInstruction;
 }
+
+- (NSString *)singleLineInstructionWithoutTime
+{
+  if (_singleLineInstructionWithoutTime == UninitializedString) {
+    BOOL isTimeDependent = NO;
+    NSString *newString = [self buildSingleLineInstructionIncludingTime:NO isTimeDependent:&isTimeDependent];
+    if (isTimeDependent)
+      // in this place we can't cache the single line instruction as it's dynamic!
+      return newString;
+    else {
+      // cache it and return it
+      _singleLineInstructionWithoutTime = newString;
+    }
+  }
+  return _singleLineInstructionWithoutTime;
+}
+
+- (NSString *)buildSingleLineInstructionIncludingTime:(BOOL)includeTime isTimeDependent:(BOOL *)isTimeDependent {
+  *isTimeDependent = NO;
+  NSString *newString = nil;
+  
+  switch (self.order) {
+    case TKSegmentOrderingStart: {
+      *isTimeDependent = includeTime && self.trip.departureTimeIsFixed;
+      NSString *name = [self.trip.request.fromLocation name];
+      if (! name) {
+        name = [self.trip.request.fromLocation address];
+      }
+      if (*isTimeDependent) {
+        NSString *time = [SGStyleManager timeString:self.departureTime
+                                        forTimeZone:self.timeZone];
+        if (name) {
+          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@ at %@", @"TripKit", [TKTripKit bundle], "The place of departure with time. (old key: LeaveLocationTime)"), name, time];
+        } else {
+          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave at %@", @"TripKit", [TKTripKit bundle], "Time departure. (old key: LeaveTime)"), time];
+        }
+      } else {
+        if (name) {
+          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@", @"TripKit", [TKTripKit bundle], "The place of departure. (old key: LeaveLocation)"), name];
+        } else {
+          newString = NSLocalizedStringFromTableInBundle(@"Leave", @"TripKit", [TKTripKit bundle], @"Single line instruction to leave");
+        }
+      }
+      break;
+    }
+
+    case TKSegmentOrderingRegular: {
+      if (!self.template.action) {
+        return @"";
+      }
+      NSMutableString *actionRaw = [NSMutableString stringWithString:self.template.action];
+      *isTimeDependent = [self fillInTemplates:actionRaw inTitle:YES includingTime:includeTime];
+      newString = actionRaw;
+      break;
+    }
+      
+    case TKSegmentOrderingEnd: {
+      *isTimeDependent = includeTime && self.trip.departureTimeIsFixed;
+      NSString *name = [self.trip.request.toLocation name];
+      if (! name) {
+        name = [self.trip.request.toLocation address];
+      }
+      if (*isTimeDependent) {
+        NSString *time = [SGStyleManager timeString:self.arrivalTime
+                                        forTimeZone:self.timeZone];
+        if (name.length > 0) {
+          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Arrive at %@ at %@", @"TripKit", [TKTripKit bundle], "The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime)"), name, time];
+        } else {
+          newString = [Loc ArriveAtDate:time];
+        }
+      } else {
+        newString = NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Single line instruction to arrive");
+      }
+      break;
+    }
+  }
+  return newString;
+}
+
 
 #define UNTRAVELLED_EACH_SIDE 5
 

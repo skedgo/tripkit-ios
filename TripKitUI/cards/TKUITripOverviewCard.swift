@@ -58,10 +58,8 @@ public class TKUITripOverviewCard: TGTableCard {
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUITripOverviewViewModel.Section>(
     configureCell: { ds, tv, ip, item in
       switch item {
-      case .start(let item):
-        return TKUITripOverviewCard.terminalCell(for: item, isStart: true, tableView: tv, indexPath: ip)
-      case .end(let item):
-        return TKUITripOverviewCard.terminalCell(for: item, isStart: false, tableView: tv, indexPath: ip)
+      case .terminal(let item):
+        return TKUITripOverviewCard.terminalCell(for: item, tableView: tv, indexPath: ip)
       case .stationary(let item):
         return TKUITripOverviewCard.stationaryCell(for: item, tableView: tv, indexPath: ip)
       case .moving(let item):
@@ -95,6 +93,9 @@ public class TKUITripOverviewCard: TGTableCard {
       preconditionFailure()
     }
     
+    tableView.register(TKUISegmentStationaryCell.nib, forCellReuseIdentifier: TKUISegmentStationaryCell.reuseIdentifier)
+    tableView.register(TKUISegmentMovingCell.nib, forCellReuseIdentifier: TKUISegmentMovingCell.reuseIdentifier)
+
     // Overriding the data source with our Rx one
     // Note: explicitly reset to say we know that we'll override this with Rx
     tableView.dataSource = nil
@@ -126,25 +127,21 @@ public class TKUITripOverviewCard: TGTableCard {
 
 extension TKUITripOverviewCard {
   
-  private static func terminalCell(for terminal: TKUITripOverviewViewModel.TerminalItem, isStart: Bool, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-    cell.textLabel?.text = terminal.title
-    cell.detailTextLabel?.text = terminal.subtitle
+  private static func terminalCell(for terminal: TKUITripOverviewViewModel.TerminalItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryCell else { preconditionFailure() }
+    cell.configure(with: terminal)
     return cell
   }
 
   private static func stationaryCell(for stationary: TKUITripOverviewViewModel.StationaryItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-    cell.textLabel?.text = stationary.title
-    cell.detailTextLabel?.text = stationary.subtitle
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryCell else { preconditionFailure() }
+    cell.configure(with: stationary)
     return cell
   }
 
   private static func movingCell(for moving: TKUITripOverviewViewModel.MovingItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-    cell.textLabel?.text = moving.title
-    cell.detailTextLabel?.text = moving.notes
-    cell.imageView?.image = moving.icon
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentMovingCell.reuseIdentifier, for: indexPath) as? TKUISegmentMovingCell else { preconditionFailure() }
+    cell.configure(with: moving)
     return cell
   }
 
