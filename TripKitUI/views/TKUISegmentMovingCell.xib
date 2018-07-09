@@ -43,17 +43,20 @@
                         <rect key="frame" x="82" y="8" width="238" height="40.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpZ-Mg-fai">
-                                <rect key="frame" x="0.0" y="0.0" width="238" height="22"/>
+                                <rect key="frame" x="0.0" y="0.0" width="238" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rk-Bj-uEq">
-                                <rect key="frame" x="0.0" y="26" width="238" height="14.5"/>
+                                <rect key="frame" x="0.0" y="24.5" width="238" height="12"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WG8-Aa-TaE">
+                                <rect key="frame" x="0.0" y="40.5" width="238" height="0.0"/>
+                            </stackView>
                         </subviews>
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RTK-EZ-aSP">
@@ -78,6 +81,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="accessoryViewStack" destination="WG8-Aa-TaE" id="2oF-Iq-ApX"/>
                 <outlet property="line" destination="fbJ-hg-ExU" id="c9F-Pt-X7Q"/>
                 <outlet property="lineWrapper" destination="zM4-hW-aEs" id="Prv-5q-0UF"/>
                 <outlet property="modeImage" destination="RTK-EZ-aSP" id="p6j-7c-HuV"/>

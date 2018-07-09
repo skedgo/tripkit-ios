@@ -77,7 +77,16 @@ extension TKUITripOverviewViewModel {
     
     let action: SegmentAction?
     
+    let accessories: [SegmentAccessory]
+    
     fileprivate let segment: TKSegment
+  }
+  
+  enum SegmentAccessory: Equatable {
+    case wheelchairFriendly
+    case averageOccupancy(API.VehicleOccupancy)
+    case carriageOccupancies([[API.VehicleOccupancy]])
+    case pathFriendliness(TKSegment)
   }
   
   enum SegmentAction {
@@ -179,6 +188,24 @@ fileprivate extension TKSegment {
   }
   
   func toMoving() -> TKUITripOverviewViewModel.MovingItem {
+    var accessories: [TKUITripOverviewViewModel.SegmentAccessory] = []
+    
+    let vehicle = realTimeVehicle()
+    let occupancies = vehicle?.components?.map { $0.map { $0.occupancy ?? .unknown } }
+    if let occupancies = occupancies, occupancies.count > 1 {
+      accessories.append(.carriageOccupancies(occupancies))
+    } else if let occupancy = vehicle?.averageOccupancy, occupancy != .unknown {
+      accessories.append(.averageOccupancy(occupancy))
+    }
+    
+    if let accessible = reference?.isWheelchairAccessible, accessible && TKUserProfileHelper.showWheelchairInformation {
+      accessories.append(.wheelchairFriendly)
+    }
+    
+    if canShowPathFriendliness {
+      accessories.append(.pathFriendliness(self))
+    }
+    
     return TKUITripOverviewViewModel.MovingItem(
       title: titleWithoutTime,
       notes: notes(),
@@ -187,6 +214,7 @@ fileprivate extension TKSegment {
       iconIsTemplate: (self as STKTripSegment).tripSegmentModeImageIsTemplate,
       connection: line,
       action: nil,
+      accessories: accessories,
       segment: self
     )
   }

@@ -1,5 +1,5 @@
 //
-//  TKTrainOccupancyView.swift
+//  TKUITrainOccupancyView.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 21.03.18.
@@ -8,7 +8,10 @@
 
 import Foundation
 
-public class TKTrainOccupancyView: UIView {
+@available(*, unavailable, renamed: "TKUITrainOccupancyView")
+typealias TKTrainOccupancyView = TKUITrainOccupancyView
+
+public class TKUITrainOccupancyView: UIView {
   
   private weak var stack: UIStackView!
   

@@ -1,5 +1,5 @@
 //
-//  TKPathFriendlinessView.swift
+//  TKUIPathFriendlinessView.swift
 //  TripKitUI
 //
 //  Created by Kuan Lun Huang on 27/9/17.
@@ -7,7 +7,10 @@
 
 import UIKit
 
-public class TKPathFriendlinessView: UIView {
+@available(*, unavailable, renamed: "TKUIPathFriendlinessView")
+typealias TKPathFriendlinessView = TKUIPathFriendlinessView
+
+public class TKUIPathFriendlinessView: UIView {
   
   // Bar chart
   @IBOutlet weak var friendlyBarView: UIView!
@@ -151,10 +154,10 @@ public class TKPathFriendlinessView: UIView {
   
 }
 
-extension TKPathFriendlinessView {
+extension TKUIPathFriendlinessView {
   
-  public static func newInstance() -> TKPathFriendlinessView {
-    return Bundle.tripKitUI.loadNibNamed("TKPathFriendlinessView", owner: self, options: nil)?.first as! TKPathFriendlinessView
+  public static func newInstance() -> TKUIPathFriendlinessView {
+    return Bundle.tripKitUI.loadNibNamed("TKUIPathFriendlinessView", owner: self, options: nil)?.first as! TKUIPathFriendlinessView
   }
   
 }

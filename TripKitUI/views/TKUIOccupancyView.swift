@@ -1,5 +1,5 @@
 //
-//  TKOccupancyView.swift
+//  TKUIOccupancyView.swift
 //  TripKit
 //
 //  Created by Kuan Lun Huang on 31/10/2016.
@@ -40,8 +40,11 @@ extension API.VehicleOccupancy {
   
 }
 
+@available(*, unavailable, renamed: "TKUIOccupancyView")
+typealias TKOccupancyView = TKUIOccupancyView
+
 @available(iOS 9.0, *)
-public class TKOccupancyView: UIView {
+public class TKUIOccupancyView: UIView {
   
   public weak var icon: UIImageView!
   public weak var label: UILabel!
@@ -94,16 +97,7 @@ public class TKOccupancyView: UIView {
 }
 
 @available(iOS 9.0, *)
-extension TKOccupancyView {
-  
-  public static var bundle: Bundle {
-    return Bundle(for: TKOccupancyView.self)
-  }
-  
-}
-
-@available(iOS 9.0, *)
-extension TKOccupancyView {
+extension TKUIOccupancyView {
   
   public enum Purpose {
     case occupancy(API.VehicleOccupancy)

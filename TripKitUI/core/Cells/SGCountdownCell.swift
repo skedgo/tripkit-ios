@@ -76,11 +76,11 @@ extension SGCountdownCell {
     if let occupancies = model.occupancies {
       occupancies.subscribe(onNext: { [weak self] occupancies in
         if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1 {
-          let trainView = TKTrainOccupancyView()
+          let trainView = TKUITrainOccupancyView()
           trainView.occupancies = occupancies
           self?.replaceFootnoteView(trainView)
         } else if let occupancy = occupancies.first?.first, occupancy != .unknown {
-          let occupancyView = TKOccupancyView(with: .occupancy(occupancy))
+          let occupancyView = TKUIOccupancyView(with: .occupancy(occupancy))
           self?.replaceFootnoteView(occupancyView)
         }
       }).disposed(by: objcDisposeBag.disposeBag)

@@ -33,7 +33,7 @@
 		3A32CD751DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD741DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift */; };
 		3A32CD791DC2EBC4003B158B /* LocationAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD781DC2EBC4003B158B /* LocationAPIModel.swift */; };
 		3A32CD7B1DC2EC4F003B158B /* RegionAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7A1DC2EC4F003B158B /* RegionAPIModel.swift */; };
-		3A3658812062892100D8645C /* TKTrainOccupancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3658802062892100D8645C /* TKTrainOccupancyView.swift */; };
+		3A3658812062892100D8645C /* TKUITrainOccupancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3658802062892100D8645C /* TKUITrainOccupancyView.swift */; };
 		3A38695720EB6C2400B0A82D /* routing-cycle-train-cycle.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A38695620EB6C2400B0A82D /* routing-cycle-train-cycle.json */; };
 		3A3C9BA61F751FC300C8D476 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BA51F751FC300C8D476 /* API.swift */; };
 		3A3C9BA91F751FF300C8D476 /* DeparturesAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BA71F751FF200C8D476 /* DeparturesAPIModel.swift */; };
@@ -141,17 +141,17 @@
 		3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0DF202C8EB80084CB2C /* TripKitUIBundle.swift */; };
 		3A6DF13B202C8EB80084CB2C /* TKEmptyAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */; };
 		3A6DF13C202C8EB80084CB2C /* TKAlertInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */; };
-		3A6DF13E202C8EB80084CB2C /* TKPathFriendlinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E4202C8EB80084CB2C /* TKPathFriendlinessView.swift */; };
+		3A6DF13E202C8EB80084CB2C /* TKUIPathFriendlinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E4202C8EB80084CB2C /* TKUIPathFriendlinessView.swift */; };
 		3A6DF13F202C8EB80084CB2C /* CircleAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0E5202C8EB80084CB2C /* CircleAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF140202C8EB80084CB2C /* TKDepartureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */; };
-		3A6DF142202C8EB80084CB2C /* TKOccupancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E8202C8EB80084CB2C /* TKOccupancyView.swift */; };
+		3A6DF142202C8EB80084CB2C /* TKUIOccupancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E8202C8EB80084CB2C /* TKUIOccupancyView.swift */; };
 		3A6DF143202C8EB80084CB2C /* VehicleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0E9202C8EB80084CB2C /* VehicleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF144202C8EB80084CB2C /* SGPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */; };
 		3A6DF147202C8EB80084CB2C /* TKEmptyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */; };
 		3A6DF148202C8EB80084CB2C /* TKVehicleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */; };
 		3A6DF149202C8EB80084CB2C /* CircleAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */; };
 		3A6DF14A202C8EB80084CB2C /* TKDepartureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F0202C8EB80084CB2C /* TKDepartureView.xib */; };
-		3A6DF14B202C8EB80084CB2C /* TKPathFriendlinessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F1202C8EB80084CB2C /* TKPathFriendlinessView.xib */; };
+		3A6DF14B202C8EB80084CB2C /* TKUIPathFriendlinessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F1202C8EB80084CB2C /* TKUIPathFriendlinessView.xib */; };
 		3A6DF14C202C8EB80084CB2C /* VehicleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F2202C8EB80084CB2C /* VehicleView.m */; };
 		3A6DF14D202C8EB80084CB2C /* TKAlertInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F3202C8EB80084CB2C /* TKAlertInfoView.swift */; };
 		3A6DF14E202C8EB80084CB2C /* SGPulsingAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -992,7 +992,7 @@
 		3A360EF4204052D800FE0A90 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A360EF5204052D800FE0A90 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A360EF6204052D800FE0A90 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3A3658802062892100D8645C /* TKTrainOccupancyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTrainOccupancyView.swift; sourceTree = "<group>"; };
+		3A3658802062892100D8645C /* TKUITrainOccupancyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITrainOccupancyView.swift; sourceTree = "<group>"; };
 		3A38695620EB6C2400B0A82D /* routing-cycle-train-cycle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-cycle-train-cycle.json"; sourceTree = "<group>"; };
 		3A3C9BA51F751FC300C8D476 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3A3C9BA71F751FF200C8D476 /* DeparturesAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesAPIModel.swift; sourceTree = "<group>"; };
@@ -1137,17 +1137,17 @@
 		3A6DF0DF202C8EB80084CB2C /* TripKitUIBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripKitUIBundle.swift; sourceTree = "<group>"; };
 		3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKEmptyAlertView.xib; sourceTree = "<group>"; };
 		3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKAlertInfoView.xib; sourceTree = "<group>"; };
-		3A6DF0E4202C8EB80084CB2C /* TKPathFriendlinessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKPathFriendlinessView.swift; sourceTree = "<group>"; };
+		3A6DF0E4202C8EB80084CB2C /* TKUIPathFriendlinessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIPathFriendlinessView.swift; sourceTree = "<group>"; };
 		3A6DF0E5202C8EB80084CB2C /* CircleAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleAnnotationView.h; sourceTree = "<group>"; };
 		3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDepartureView.swift; sourceTree = "<group>"; };
-		3A6DF0E8202C8EB80084CB2C /* TKOccupancyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKOccupancyView.swift; sourceTree = "<group>"; };
+		3A6DF0E8202C8EB80084CB2C /* TKUIOccupancyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIOccupancyView.swift; sourceTree = "<group>"; };
 		3A6DF0E9202C8EB80084CB2C /* VehicleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleView.h; sourceTree = "<group>"; };
 		3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPulsingAnnotationView.m; sourceTree = "<group>"; };
 		3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKEmptyAlertView.swift; sourceTree = "<group>"; };
 		3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKVehicleAnnotationView.swift; sourceTree = "<group>"; };
 		3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleAnnotationView.m; sourceTree = "<group>"; };
 		3A6DF0F0202C8EB80084CB2C /* TKDepartureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKDepartureView.xib; sourceTree = "<group>"; };
-		3A6DF0F1202C8EB80084CB2C /* TKPathFriendlinessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKPathFriendlinessView.xib; sourceTree = "<group>"; };
+		3A6DF0F1202C8EB80084CB2C /* TKUIPathFriendlinessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIPathFriendlinessView.xib; sourceTree = "<group>"; };
 		3A6DF0F2202C8EB80084CB2C /* VehicleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleView.m; sourceTree = "<group>"; };
 		3A6DF0F3202C8EB80084CB2C /* TKAlertInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertInfoView.swift; sourceTree = "<group>"; };
 		3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPulsingAnnotationView.h; sourceTree = "<group>"; };
@@ -2000,20 +2000,19 @@
 				3A6DF0F0202C8EB80084CB2C /* TKDepartureView.xib */,
 				3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */,
 				3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */,
-				D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */,
-				D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */,
-				3A6DF0E8202C8EB80084CB2C /* TKOccupancyView.swift */,
-				3A6DF0E4202C8EB80084CB2C /* TKPathFriendlinessView.swift */,
-				3A6DF0F1202C8EB80084CB2C /* TKPathFriendlinessView.xib */,
 				D39B7BAE20622C2C00988D8A /* TKGroupedAlertCell.swift */,
 				D32CA5AE20E34409009C9449 /* TKGroupedAlertCell.xib */,
+				D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */,
+				D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */,
 				D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */,
 				D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */,
-				3A3658802062892100D8645C /* TKTrainOccupancyView.swift */,
 				3AF5F2AF20EFF7BD003AAEBA /* TKUIAttributionCell.swift */,
 				3AF5F2AE20EFF7BD003AAEBA /* TKUIAttributionCell.xib */,
 				3AF5F2B020EFF7BD003AAEBA /* TKUIAttributionView.swift */,
 				3A67698C20EE61FF0044663F /* TKUIAutocompletionResultCell.swift */,
+				3A6DF0E8202C8EB80084CB2C /* TKUIOccupancyView.swift */,
+				3A6DF0E4202C8EB80084CB2C /* TKUIPathFriendlinessView.swift */,
+				3A6DF0F1202C8EB80084CB2C /* TKUIPathFriendlinessView.xib */,
 				3AFD397420D93DC100FDC7D0 /* TKUIResultsAccessoryView.swift */,
 				3AFD397520D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib */,
 				3AFD397820D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift */,
@@ -2026,6 +2025,7 @@
 				3AFD396F20D93D9800FDC7D0 /* TKUISheet.m */,
 				3AFD396D20D93D9700FDC7D0 /* TKUITimePickerSheet.h */,
 				3AFD396C20D93D9600FDC7D0 /* TKUITimePickerSheet.m */,
+				3A3658802062892100D8645C /* TKUITrainOccupancyView.swift */,
 				3AF5F2BC20F3A818003AAEBA /* TKUITripActionsView.swift */,
 				3AF5F2C020F3A9E2003AAEBA /* TKUITripActionView.swift */,
 				3AF5F2BE20F3A829003AAEBA /* TKUITripActionView.xib */,
@@ -3539,7 +3539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A26E1B520EFAFBD00FE4DDD /* TKUISegmentStationaryCell.xib in Resources */,
-				3A6DF14B202C8EB80084CB2C /* TKPathFriendlinessView.xib in Resources */,
+				3A6DF14B202C8EB80084CB2C /* TKUIPathFriendlinessView.xib in Resources */,
 				3AFD397720D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib in Resources */,
 				3AFD397B20D93DD600FDC7D0 /* TKUIResultsSectionFooterView.xib in Resources */,
 				3A6E7D4120EFBD4900013253 /* TKUISegmentMovingCell.xib in Resources */,
@@ -3885,7 +3885,7 @@
 			files = (
 				3A6DF12D202C8EB80084CB2C /* UIButton+TitleAndImage.swift in Sources */,
 				3A6DF14F202C8EB80084CB2C /* TKAnnotationViewBuilder.swift in Sources */,
-				3A3658812062892100D8645C /* TKTrainOccupancyView.swift in Sources */,
+				3A3658812062892100D8645C /* TKUITrainOccupancyView.swift in Sources */,
 				3AF5F2B920F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift in Sources */,
 				3A6DF149202C8EB80084CB2C /* CircleAnnotationView.m in Sources */,
 				3A6DF130202C8EB80084CB2C /* SGButton.m in Sources */,
@@ -3918,7 +3918,7 @@
 				3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */,
 				3A6DF120202C8EB80084CB2C /* UIImageView+Kingfisher.swift in Sources */,
 				3A6DF106202C8EB80084CB2C /* ASMapManager.m in Sources */,
-				3A6DF13E202C8EB80084CB2C /* TKPathFriendlinessView.swift in Sources */,
+				3A6DF13E202C8EB80084CB2C /* TKUIPathFriendlinessView.swift in Sources */,
 				3A26E1AD20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift in Sources */,
 				D39B7BB420622FD100988D8A /* TKAlertCell.swift in Sources */,
 				3A6DF10E202C8EB80084CB2C /* SGTripSummaryCell.m in Sources */,
@@ -3957,7 +3957,7 @@
 				D3211335206BBAF300E5D929 /* TKLoadingAlertView.swift in Sources */,
 				3A6DF0FB202C8EB80084CB2C /* SGCountdownCell.swift in Sources */,
 				3AFD394520D9333500FDC7D0 /* TKUISheetViewController.m in Sources */,
-				3A6DF142202C8EB80084CB2C /* TKOccupancyView.swift in Sources */,
+				3A6DF142202C8EB80084CB2C /* TKUIOccupancyView.swift in Sources */,
 				3A6DF125202C8EB80084CB2C /* UIFont+CustomFonts.m in Sources */,
 				3A6DF105202C8EB80084CB2C /* SGMapButtonView.m in Sources */,
 				3A6DF14C202C8EB80084CB2C /* VehicleView.m in Sources */,

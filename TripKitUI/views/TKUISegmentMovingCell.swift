@@ -13,6 +13,7 @@ class TKUISegmentMovingCell: UITableViewCell {
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var subtitleLabel: UILabel!
+  @IBOutlet weak var accessoryViewStack: UIStackView!
   
   @IBOutlet weak var lineWrapper: UIView!
   @IBOutlet weak var line: UIView!
@@ -21,17 +22,15 @@ class TKUISegmentMovingCell: UITableViewCell {
   
   static let reuseIdentifier = "TKUISegmentMovingCell"
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
+  func addAccessories(_ views: [UIView]) {
+    removeAccessories()
+    views.forEach(accessoryViewStack.addArrangedSubview)
   }
-
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-
-    // Configure the view for the selected state
+  
+  private func removeAccessories() {
+    accessoryViewStack.arrangedSubviews.forEach(accessoryViewStack.removeArrangedSubview(_:))
+    accessoryViewStack.removeAllSubviews()
   }
-    
 }
 
 extension TKUISegmentMovingCell {
@@ -47,6 +46,32 @@ extension TKUISegmentMovingCell {
     subtitleLabel.isHidden = item.notes == nil
 
     line.backgroundColor = item.connection?.color ?? .lightGray
+    
+    let accessories = item.accessories.map { $0.buildView() }
+    addAccessories(accessories)
   }
   
+}
+
+extension TKUITripOverviewViewModel.SegmentAccessory {
+  func buildView() -> UIView {
+    switch self {
+    case .averageOccupancy(let occupancy):
+      return TKUIOccupancyView(with: .occupancy(occupancy))
+      
+    case .carriageOccupancies(let occupancies):
+      let trainView = TKUITrainOccupancyView()
+      trainView.occupancies = occupancies
+      return trainView
+
+    case .pathFriendliness(let segment):
+      let pathFriendlinessView = TKUIPathFriendlinessView.newInstance()
+      pathFriendlinessView.segment = segment
+      return pathFriendlinessView
+
+    case .wheelchairFriendly:
+      return TKUIOccupancyView(with: .wheelchair)
+    }
+
+  }
 }
