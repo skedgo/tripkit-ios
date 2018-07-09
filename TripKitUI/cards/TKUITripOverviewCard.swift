@@ -105,6 +105,15 @@ public class TKUITripOverviewCard: TGTableCard {
         self.showAttribution(for: sources, in: tableView)
       })
       .disposed(by: disposeBag)
+    
+    if let factory = TKUITripOverviewCard.config.tripActionsFactory {
+      let actions = factory(viewModel.trip)
+      let actionsView = TKUITripActionsView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
+      actionsView.configure(with: actions, for: viewModel.trip, card: self)
+      tableView.tableHeaderView = actionsView
+    } else {
+      tableView.tableHeaderView = nil
+    }
 
     // Handling segment selections
     if let segmentHandler = TKUITripOverviewCard.config.presentSegmentHandler {

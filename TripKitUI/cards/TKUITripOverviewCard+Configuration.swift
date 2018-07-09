@@ -8,18 +8,61 @@
 
 import Foundation
 
+
+/// An action that can be added to a `TKUITripOverviewCard`. Set an array of
+/// these on `TKUITripOverviewCard.tripActionsFactory`.
+public protocol TKUITripOverviewCardAction {
+  /// Title (and accessory label) of the button
+  var title: String { get }
+  
+  /// Icon to display as the action. Should be a template image.
+  var icon: UIImage { get }
+  
+  /// Handler executed when user taps on the button, providing the
+  /// corresponding card and trip. Should return whether the button should
+  /// be refreshed as its title or icon changed as a result (e.g., for
+  /// toggle actions such as adding or removing a reminder or favourite).
+  ///
+  /// Parameters are the card, the trip, and the sender
+  var handler: (TKUITripOverviewCard, Trip, UIView) -> Bool { get }
+}
+
 public extension TKUITripOverviewCard {
   
+  /// Configurtion of any `TKUITripOverviewCard`. Use this to add custom
+  /// actions.
+  ///
+  /// This isn't created directly, but rather you modify the static instance
+  /// accessible from `TKUITripOverviewCard.config`.
   public struct Configuration {
     private init() {}
     
-    public static let empty = Configuration()
+    static let empty = Configuration()
     
-    public var presentSegmentHandler: ((TKUITripOverviewCard, TKSegment) -> Void)?
-    
+    /// Called when the user taps on an item in the attribution view, and
+    /// requests displaying that URL. You should then either present it in an
+    /// in-app web view, or call `UIApplication.shared.open()`.
+    ///
+    /// - warning: Make sure you provide this.
     public var presentAttributionHandler: ((TKUITripOverviewCard, URL) -> Void)?
     
+    /// Set this to add a tap-action to every segment in the trip overview
+    /// card.
+    ///
+    /// Handler will be called when the user taps the segment. You can, for
+    /// example, use this to present a detailed view of the segment.
+    public var presentSegmentHandler: ((TKUITripOverviewCard, TKSegment) -> Void)?
+    
+    /// Set this to add a "start" button on a trip, e.g., to enter turn-by-
+    /// turn navigation mode.
     public var startTripHandler: ((TKUITripOverviewCard, Trip) -> Void)?
+    
+    /// Set this to add a list of action button to a trip overview card.
+    ///
+    /// - warning: Only a maximum of three actions can be accomodated. Any
+    ///     more than that will be ignored.
+    ///
+    /// Called when a trip overview card gets presented.
+    public var tripActionsFactory: ((Trip) -> [TKUITripOverviewCardAction])?
   }
-  
 }
