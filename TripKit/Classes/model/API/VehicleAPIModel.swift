@@ -14,7 +14,7 @@ extension API {
   public struct Vehicle: Codable, Equatable {
     
     @available(*, unavailable, renamed: "API.VehicleOccupancy")
-    typealias Occupancy = VehicleOccupancy
+    public typealias Occupancy = VehicleOccupancy
     
     public let location: Location
     

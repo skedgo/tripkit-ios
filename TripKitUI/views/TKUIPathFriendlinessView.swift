@@ -8,7 +8,7 @@
 import UIKit
 
 @available(*, unavailable, renamed: "TKUIPathFriendlinessView")
-typealias TKPathFriendlinessView = TKUIPathFriendlinessView
+public typealias TKPathFriendlinessView = TKUIPathFriendlinessView
 
 public class TKUIPathFriendlinessView: UIView {
   

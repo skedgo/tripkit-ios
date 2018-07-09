@@ -9,7 +9,7 @@
 import RxSwift
 
 @available(*, unavailable, renamed: "TKAggregateGeocoder")
-typealias SGAggregateGeocoder = TKAggregateGeocoder
+public typealias SGAggregateGeocoder = TKAggregateGeocoder
 
 public class TKAggregateGeocoder: NSObject {
 

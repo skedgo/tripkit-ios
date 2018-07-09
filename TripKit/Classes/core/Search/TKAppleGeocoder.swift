@@ -11,7 +11,7 @@ import Foundation
 import RxSwift
 
 @available(iOS, introduced: 9.3, unavailable, renamed: "TKAppleGeocoder")
-typealias SGAppleGeocoder = TKAppleGeocoder
+public typealias SGAppleGeocoder = TKAppleGeocoder
 
 @available(iOS 9.3, *)
 public class TKAppleGeocoder: NSObject {

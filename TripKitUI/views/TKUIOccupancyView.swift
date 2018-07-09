@@ -41,7 +41,7 @@ extension API.VehicleOccupancy {
 }
 
 @available(*, unavailable, renamed: "TKUIOccupancyView")
-typealias TKOccupancyView = TKUIOccupancyView
+public typealias TKOccupancyView = TKUIOccupancyView
 
 @available(iOS 9.0, *)
 public class TKUIOccupancyView: UIView {

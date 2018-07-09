@@ -9,7 +9,7 @@
 import Foundation
 
 @available(*, unavailable, renamed: "TKUITrainOccupancyView")
-typealias TKTrainOccupancyView = TKUITrainOccupancyView
+public typealias TKTrainOccupancyView = TKUITrainOccupancyView
 
 public class TKUITrainOccupancyView: UIView {
   

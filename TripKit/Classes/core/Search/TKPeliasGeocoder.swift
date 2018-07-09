@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 
 @available(*, unavailable, renamed: "TKPeliasGeocoder")
-typealias TKMapZenGeocoder = TKPeliasGeocoder
+public typealias TKMapZenGeocoder = TKPeliasGeocoder
 
 public class TKPeliasGeocoder: NSObject {
   
