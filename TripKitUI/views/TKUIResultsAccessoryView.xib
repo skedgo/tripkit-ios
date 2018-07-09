@@ -29,7 +29,7 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="atI-O2-GFd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Q49-Pg-KeB"/>
                 <constraint firstAttribute="trailing" secondItem="atI-O2-GFd" secondAttribute="trailing" id="dMA-f2-k5u"/>
