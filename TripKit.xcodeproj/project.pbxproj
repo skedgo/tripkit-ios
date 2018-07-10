@@ -1888,12 +1888,12 @@
 		3A6DF094202C8EB80084CB2C /* TripKitUI */ = {
 			isa = PBXGroup;
 			children = (
-				3A682F7920F4B3E200E05195 /* deprecated */,
 				3A6DF0F5202C8EB80084CB2C /* helper */,
 				3A6DF0E0202C8EB80084CB2C /* views */,
 				3AFD395020D9337B00FDC7D0 /* view model */,
 				3AFD393B20D9333500FDC7D0 /* cards */,
 				3A6DF0DD202C8EB80084CB2C /* controller */,
+				3A682F7920F4B3E200E05195 /* deprecated */,
 				3A6DF0DB202C8EB80084CB2C /* TripKitUI.xcassets */,
 				3A6DF0DF202C8EB80084CB2C /* TripKitUIBundle.swift */,
 				3A6DF0DC202C8EB80084CB2C /* TripKitUIUmbrella.h */,
