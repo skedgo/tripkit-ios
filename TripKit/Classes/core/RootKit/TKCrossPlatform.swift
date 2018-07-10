@@ -29,11 +29,13 @@ public typealias SGKImage = TKImage
 @available(*, unavailable, renamed: "TKFont")
 public typealias SGKFont = TKFont
 
+#if os(iOS) || os(tvOS)
 @available(*, unavailable, renamed: "TKAlertController")
 public typealias SGAlert = TKAlertController
 
 @available(*, unavailable, renamed: "TKActions")
 public typealias SGActions = TKActions
+#endif
 
 @available(*, unavailable, renamed: "TKBetaHelper")
 public typealias SGKBetaHelper = TKBetaHelper
