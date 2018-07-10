@@ -12,7 +12,9 @@ import UIKit
 extension UIImage {
 
   @objc public static let backgroundNavSecondary = named("bg-nav-secondary")
-  
+
+  static let iconTripBoyWorker = named("worker")
+
   // Occupancy
   
   static let iconCheckMini = named("icon-check-mini")

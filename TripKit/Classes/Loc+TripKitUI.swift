@@ -52,6 +52,22 @@ extension Loc {
   }
   
   
+  // MARK: - Routing
+
+  @objc public static var PlanANewTrip: String {
+    return NSLocalizedString("Plan a new trip", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that allows users to plan a new trip")
+  }
+  
+  public static var RequestSupport: String {
+    return NSLocalizedString("Request support", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that allows users to request support")
+  }
+  
+  public static func RoutingFrom(_ start: String, toIsNotYetSupported end: String) -> String {
+    let format = NSLocalizedString("Routing from %@ to %@ is not yet supported", tableName: "TripKit", bundle: .tripKit, comment: "Error message if interregional routing isn't yet supported")
+    return String(format: format, start, end)
+  }
+  
+  
   // MARK: -
   
   @objc public static var Now: String {

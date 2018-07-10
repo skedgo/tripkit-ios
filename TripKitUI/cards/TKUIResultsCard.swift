@@ -23,13 +23,16 @@ public protocol TKUIResultsCardDelegate: class {
 }
 
 public class TKUIResultsCard: TGTableCard {
+  
+  public static var config = Configuration.empty
+
   public weak var resultsDelegate: TKUIResultsCardDelegate?
   
   private let destination: MKAnnotation?
   private let request: TripRequest?
   
   private var viewModel: TKUIResultsViewModel!
-  private let disposeBag = DisposeBag()
+  let disposeBag = DisposeBag()
   
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   
@@ -173,20 +176,15 @@ public class TKUIResultsCard: TGTableCard {
       .disposed(by: disposeBag)
 
     viewModel.error
-      .drive(onNext: { [unowned self] error in
-        guard
-          let controller = self.controller, self.viewIsVisible
-          else { return }
-        
-        // TODO: Restore feedback
-        // TODO: Show the nice error again
-        //        if (error as NSError).code == 1001 {
-        //          self.showRoutingSupportView(with: error)
-        //        } else {
-        TKUICustomization.shared.alertHandler?(error, controller)
-        //          
-        //        }
-      })
+      .withLatestFrom(viewModel.request) { ($0, $1) }
+      .drive(onNext: { [weak self] in self?.show($0, for: $1, cardView: cardView, tableView: tableView) })
+      .disposed(by: disposeBag)
+    
+    viewModel.sections
+      .map { $0.first?.items.isEmpty }
+      .distinctUntilChanged()
+      .filter { $0 == false } // we got results!
+      .drive(onNext: { [weak self] _ in self?.clearError(in: cardView) })
       .disposed(by: disposeBag)
     
     viewModel.next

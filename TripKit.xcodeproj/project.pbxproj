@@ -59,6 +59,11 @@
 		3A67698820EE3B720044663F /* Array+TKAutocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67698720EE3B720044663F /* Array+TKAutocompleting.swift */; };
 		3A67698D20EE61FF0044663F /* TKUIAutocompletionResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67698C20EE61FF0044663F /* TKUIAutocompletionResultCell.swift */; };
 		3A67698E20EE666B0044663F /* Array+TKAutocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67698720EE3B720044663F /* Array+TKAutocompleting.swift */; };
+		3A682F1F20F3F8A900E05195 /* TKUIRoutingSupportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A682F1D20F3F8A700E05195 /* TKUIRoutingSupportView.xib */; };
+		3A682F2020F3F8A900E05195 /* TKUIRoutingSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F1E20F3F8A800E05195 /* TKUIRoutingSupportView.swift */; };
+		3A682F2220F3F8ED00E05195 /* TKUIResultsCard+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F2120F3F8ED00E05195 /* TKUIResultsCard+Errors.swift */; };
+		3A682F2420F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F2320F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift */; };
+		3A682F2820F49B8200E05195 /* TKUIResultsCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F2720F49B8200E05195 /* TKUIResultsCard+Configuration.swift */; };
 		3A69C4031DEEB43700872FD1 /* Loc+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */; };
 		3A6ABE64204050BC00645B93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6ABE66204050BC00645B93 /* InfoPlist.strings */; };
 		3A6ABE69204050BC00645B93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6ABE6B204050BC00645B93 /* InfoPlist.strings */; };
@@ -1040,6 +1045,11 @@
 		3A67BCC4204052A500D5B940 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3A67BCC5204052A500D5B940 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3A67BCC6204052A500D5B940 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3A682F1D20F3F8A700E05195 /* TKUIRoutingSupportView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIRoutingSupportView.xib; sourceTree = "<group>"; };
+		3A682F1E20F3F8A800E05195 /* TKUIRoutingSupportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIRoutingSupportView.swift; sourceTree = "<group>"; };
+		3A682F2120F3F8ED00E05195 /* TKUIResultsCard+Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIResultsCard+Errors.swift"; sourceTree = "<group>"; };
+		3A682F2320F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingSupportView+Show.swift"; sourceTree = "<group>"; };
+		3A682F2720F49B8200E05195 /* TKUIResultsCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIResultsCard+Configuration.swift"; sourceTree = "<group>"; };
 		3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loc+TripKit.swift"; sourceTree = "<group>"; };
 		3A6A3E0E20405257002690C6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A6A3E0F20405257002690C6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2017,6 +2027,9 @@
 				3AFD397520D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib */,
 				3AFD397820D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift */,
 				3AFD397920D93DD600FDC7D0 /* TKUIResultsSectionFooterView.xib */,
+				3A682F1E20F3F8A800E05195 /* TKUIRoutingSupportView.swift */,
+				3A682F1D20F3F8A700E05195 /* TKUIRoutingSupportView.xib */,
+				3A682F2320F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift */,
 				3A6E7D3E20EFBD4800013253 /* TKUISegmentMovingCell.swift */,
 				3A6E7D3F20EFBD4800013253 /* TKUISegmentMovingCell.xib */,
 				3A26E1B220EFAFBD00FE4DDD /* TKUISegmentStationaryCell.swift */,
@@ -2808,6 +2821,8 @@
 			children = (
 				3AFD394120D9333500FDC7D0 /* TKUIMapManager.swift */,
 				3AFD393F20D9333500FDC7D0 /* TKUIResultsCard.swift */,
+				3A682F2120F3F8ED00E05195 /* TKUIResultsCard+Errors.swift */,
+				3A682F2720F49B8200E05195 /* TKUIResultsCard+Configuration.swift */,
 				3AFD393E20D9333500FDC7D0 /* TKUIResultsMapManager.swift */,
 				3AFD393D20D9333500FDC7D0 /* TKUITripMapManager.swift */,
 				3AFD394320D9333500FDC7D0 /* TKUITripOverviewCard.swift */,
@@ -3558,6 +3573,7 @@
 				3A6DF0FD202C8EB80084CB2C /* SGCountdownCell.xib in Resources */,
 				3A6DF10C202C8EB80084CB2C /* SGTripSummaryNanoCell.xib in Resources */,
 				3A6DF13B202C8EB80084CB2C /* TKEmptyAlertView.xib in Resources */,
+				3A682F1F20F3F8A900E05195 /* TKUIRoutingSupportView.xib in Resources */,
 				D32CA5AF20E34409009C9449 /* TKGroupedAlertCell.xib in Resources */,
 				3AF5F2BF20F3A829003AAEBA /* TKUITripActionView.xib in Resources */,
 				D3F9CEC52064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib in Resources */,
@@ -3891,12 +3907,15 @@
 				3A6DF130202C8EB80084CB2C /* SGButton.m in Sources */,
 				3A6DF111202C8EB80084CB2C /* SGTripSummaryCell.swift in Sources */,
 				3A6DF117202C8EB80084CB2C /* SGTripSegmentsView.m in Sources */,
+				3A682F2020F3F8A900E05195 /* TKUIRoutingSupportView.swift in Sources */,
 				3A6DF10D202C8EB80084CB2C /* SGCountdownCell+STKVehicular.swift in Sources */,
 				3A67698420EE3A6F0044663F /* TKUIAutocompletionViewModel.swift in Sources */,
 				3AFD394A20D9333500FDC7D0 /* TKUIResultsCard.swift in Sources */,
 				3AFD397A20D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift in Sources */,
 				3AFD394620D9333500FDC7D0 /* TKUIRoutesViewController.swift in Sources */,
+				3A682F2820F49B8200E05195 /* TKUIResultsCard+Configuration.swift in Sources */,
 				3A6DF110202C8EB80084CB2C /* STKTransportKitHelper.swift in Sources */,
+				3A682F2420F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift in Sources */,
 				3A6DF139202C8EB80084CB2C /* TKAlertViewController.swift in Sources */,
 				3A6DF108202C8EB80084CB2C /* SGMapHelper.m in Sources */,
 				3A6DF140202C8EB80084CB2C /* TKDepartureView.swift in Sources */,
@@ -3940,6 +3959,7 @@
 				3AFD394720D9333500FDC7D0 /* TKUITripOverviewViewModel.swift in Sources */,
 				3A8FAB7220D3F433005D4C73 /* TKUITripCell+Rx.swift in Sources */,
 				3A6DF133202C8EB80084CB2C /* RouteMapManager.m in Sources */,
+				3A682F2220F3F8ED00E05195 /* TKUIResultsCard+Errors.swift in Sources */,
 				3A6DF14D202C8EB80084CB2C /* TKAlertInfoView.swift in Sources */,
 				3A6DF109202C8EB80084CB2C /* TKMapButtonView.swift in Sources */,
 				3A6E7D4020EFBD4900013253 /* TKUISegmentMovingCell.swift in Sources */,
