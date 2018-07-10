@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #ifdef TK_NO_MODULE
-#import "SGLabel.h"
+#import "TKUIStyledLabel.h"
 #else
 @import TripKit;
 @import TripKitUI;
@@ -21,9 +21,9 @@
 
 @interface BPKStepperCell : BPKCell <BPKFormCell>
 
-@property (weak, nonatomic) IBOutlet SGLabel *mainLabel;
-@property (weak, nonatomic) IBOutlet SGLabel *subtitleLabel;
-@property (weak, nonatomic) IBOutlet SGLabel *valueLabel;
+@property (weak, nonatomic) IBOutlet TKUIStyledLabel *mainLabel;
+@property (weak, nonatomic) IBOutlet TKUIStyledLabel *subtitleLabel;
+@property (weak, nonatomic) IBOutlet TKUIStyledLabel *valueLabel;
 @property (weak, nonatomic) IBOutlet UIStepper *stepper;
 
 - (void)configureForMainTitle:(NSString *)mainTitle subtitle:(NSString *)subtitle value:(double)value;

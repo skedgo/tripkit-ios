@@ -15,7 +15,7 @@ public class TKUITripCell: UITableViewCell {
   public static let reuseIdentifier: String = "TKUITripCell"
 
   @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var segmentView: SGTripSegmentsView!
+  @IBOutlet weak var segmentView: TKUITripSegmentsView!
   @IBOutlet weak var actionButton: UIButton!
   @IBOutlet weak var selectionIndicator: UIView!
 

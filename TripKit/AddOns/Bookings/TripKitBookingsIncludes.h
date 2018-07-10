@@ -17,6 +17,9 @@
 // Kits
 #import "AMKAccountKit.h"
 #import "BPKBookingKit.h"
+
+// Helpers
+#import "SGTableCell.h"
 #import "SGWebViewController.h"
 
 #endif /* SGBookingKit_h */

@@ -29,7 +29,7 @@ class TKSectionedAlertsTest: XCTestCase {
   func testGroupingAlerts() throws {
     XCTAssertNotNil(response)
     
-    let grouped = TKSectionedAlertViewModel.groupAlertMappings(response.alerts)
+    let grouped = TKUISectionedAlertViewModel.groupAlertMappings(response.alerts)
     XCTAssertEqual(grouped.count, 6)
     
     for (mode, routes) in grouped {

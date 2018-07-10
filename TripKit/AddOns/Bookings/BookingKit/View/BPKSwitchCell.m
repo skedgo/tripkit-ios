@@ -10,7 +10,7 @@
 
 #import "BPKSection.h"
 
-#import "SGLabel.h"
+#import "TKUIStyledLabel.h"
 
 @interface BPKSwitchCell ()
 

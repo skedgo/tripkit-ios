@@ -22,8 +22,8 @@ open class TKUIMapManager: TGMapManager {
   
   /// A factory that all map managers will use as for the default annotations.
   ///
-  /// @default: TKAnnotationViewBuilder
-  public static var annotationBuilderFactory: ((MKAnnotation, MKMapView) -> TKAnnotationViewBuilder) = TKAnnotationViewBuilder.init
+  /// @default: TKUIAnnotationViewBuilder
+  public static var annotationBuilderFactory: ((MKAnnotation, MKMapView) -> TKUIAnnotationViewBuilder) = TKUIAnnotationViewBuilder.init
   
   open var showOverlayPolygon = false
   
@@ -33,7 +33,7 @@ open class TKUIMapManager: TGMapManager {
       UIView.animate(withDuration: 0.25) {
         for object in mapView.annotations(in: mapView.visibleMapRect) {
           if let annotation = object as? MKAnnotation, let view = mapView.view(for: annotation) {
-            TKAnnotationViewBuilder.update(annotationView: view, forHeading: self.heading)
+            TKUIAnnotationViewBuilder.update(annotationView: view, forHeading: self.heading)
           }
         }
       }
@@ -106,7 +106,7 @@ extension TKUIMapManager {
 extension TKUIMapManager {
   
   open func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-    MapManagerHelper.adjustZOrder(views)
+    TKUIMapManagerHelper.adjustZOrder(views)
   }
   
   open func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -122,10 +122,10 @@ extension TKUIMapManager {
   open func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     
     if let geodesic = overlay as? MKGeodesicPolyline {
-      return SGPolylineRenderer(polyline: geodesic)
+      return TKUIPolylineRenderer(polyline: geodesic)
       
     } else if let polyline = overlay as? STKRoutePolyline {
-      let renderer = SGPolylineRenderer(polyline: polyline)
+      let renderer = TKUIPolylineRenderer(polyline: polyline)
       renderer.strokeColor = polyline.route.routeColor
       renderer.lineDashPattern = polyline.route.routeDashPattern
       return renderer

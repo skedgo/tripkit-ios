@@ -20,7 +20,7 @@
 
 @interface BPKTextFieldCell () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet SGLabel *prompt;
+@property (weak, nonatomic) IBOutlet TKUIStyledLabel *prompt;
 
 @property (nonatomic, strong) BPKSectionItem *item;
 

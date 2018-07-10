@@ -9,12 +9,12 @@
 @import UIKit;
 
 #ifdef TK_NO_MODULE
-#import "SGTableCell.h"
-#import "SGLabel.h"
+#import "TKUIStyledLabel.h"
 #else
 @import TripKitUI;
 #endif
 
+#import "SGTableCell.h"
 #import "AKItemCell.h"
 
 typedef BOOL (^TextFieldShouldReturnHandler)(UITextField *textField);
@@ -23,7 +23,7 @@ typedef void (^TextFieldDidEndEditingHandler)(UITextField *textField);
 @interface AKTextFieldCell : SGTableCell <AKItemCell>
 
 @property (nonatomic, weak) IBOutlet UITextField *textField;
-@property (nonatomic, weak) IBOutlet SGLabel *promptLabel;
+@property (nonatomic, weak) IBOutlet TKUIStyledLabel *promptLabel;
 
 @property (nonatomic, copy) TextFieldShouldReturnHandler shouldReturnHandler;
 @property (nonatomic, copy) TextFieldDidEndEditingHandler didEndEditingHandler;

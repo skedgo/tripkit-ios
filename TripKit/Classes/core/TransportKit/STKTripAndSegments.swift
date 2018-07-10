@@ -69,7 +69,7 @@ public protocol STKTrip : NSObjectProtocol {
   var arrivalTimeZone: TimeZone? { get }
 }
 
-/// Protocol with minimum details to display the high-level details of a segment. An example use of this is `SGTripSegmentsView` in `TripKitUI`.
+/// Protocol with minimum details to display the high-level details of a segment. An example use of this is `TKUITripSegmentsView` in `TripKitUI`.
 @objc
 public protocol STKTripSegmentDisplayable : NSObjectProtocol {
   

@@ -81,7 +81,7 @@ private extension TKUITripMapManager {
       // For non-stationary segments, we also add shape information
       guard !segment.isStationary() else { continue }
       
-      guard let toAdd = MapManagerHelper.shapeAnnotations(for: segment) else { continue }
+      guard let toAdd = TKUIMapManagerHelper.shapeAnnotations(for: segment) else { continue }
       annotations += toAdd.points
       overlays += toAdd.overlays
       
@@ -96,7 +96,7 @@ private extension TKUITripMapManager {
     
     mapView?.showsTraffic = affectedByTraffic
     
-    tripOverlays = MapManagerHelper.sort(overlays)
+    tripOverlays = TKUIMapManagerHelper.sort(overlays)
     tripAnnotations = annotations
     
   }

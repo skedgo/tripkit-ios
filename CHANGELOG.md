@@ -51,8 +51,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Updated translations
 - Removed deprecated functionality in `TripKitBookings` related to Facebook and Twitter logins
 - Removed deprecated functionality in `TripKitBookings` related to payments
-- Fixed `TKMapButtonView` blocking touch events
-- Fixed bad image in `SGSemaphoreView`
+- Fixed `TKUIMapButtonView` blocking touch events
+- Fixed bad image in `TKUISemaphoreView`
 
 ## [Version 3.1.0] - 2018-02-12
 

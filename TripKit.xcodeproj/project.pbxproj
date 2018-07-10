@@ -64,6 +64,10 @@
 		3A682F2220F3F8ED00E05195 /* TKUIResultsCard+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F2120F3F8ED00E05195 /* TKUIResultsCard+Errors.swift */; };
 		3A682F2420F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F2320F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift */; };
 		3A682F2820F49B8200E05195 /* TKUIResultsCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F2720F49B8200E05195 /* TKUIResultsCard+Configuration.swift */; };
+		3A682F3920F4A68A00E05195 /* SGTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A682F3720F4A68A00E05195 /* SGTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A682F3A20F4A68A00E05195 /* SGTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F3820F4A68A00E05195 /* SGTableCell.m */; };
+		3A682F7C20F4B3E200E05195 /* ASMapManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A682F7A20F4B3E200E05195 /* ASMapManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A682F7D20F4B3E200E05195 /* ASMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F7B20F4B3E200E05195 /* ASMapManager.m */; };
 		3A69C4031DEEB43700872FD1 /* Loc+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */; };
 		3A6ABE64204050BC00645B93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6ABE66204050BC00645B93 /* InfoPlist.strings */; };
 		3A6ABE69204050BC00645B93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6ABE6B204050BC00645B93 /* InfoPlist.strings */; };
@@ -77,91 +81,58 @@
 		3A6DAED92040985B009282FE /* regionInfo-Nuremberg.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */; };
 		3A6DAEDA2040985B009282FE /* regionInfo-Vancouver.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */; };
 		3A6DF088202C8DA30084CB2C /* TripKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF086202C8DA30084CB2C /* TripKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF0F8202C8EB80084CB2C /* SGTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF097202C8EB80084CB2C /* SGTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF0F9202C8EB80084CB2C /* SGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF098202C8EB80084CB2C /* SGTableViewCell.m */; };
-		3A6DF0FA202C8EB80084CB2C /* SGCountdownCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF099202C8EB80084CB2C /* SGCountdownCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF0FB202C8EB80084CB2C /* SGCountdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF09A202C8EB80084CB2C /* SGCountdownCell.swift */; };
-		3A6DF0FC202C8EB80084CB2C /* SGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF09B202C8EB80084CB2C /* SGTableViewCell.xib */; };
-		3A6DF0FD202C8EB80084CB2C /* SGCountdownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF09C202C8EB80084CB2C /* SGCountdownCell.xib */; };
-		3A6DF0FE202C8EB80084CB2C /* SGTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF09D202C8EB80084CB2C /* SGTableCell.m */; };
-		3A6DF0FF202C8EB80084CB2C /* SGCountdownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF09E202C8EB80084CB2C /* SGCountdownCell.m */; };
-		3A6DF100202C8EB80084CB2C /* SGTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF09F202C8EB80084CB2C /* SGTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF101202C8EB80084CB2C /* SGMapButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0A1202C8EB80084CB2C /* SGMapButtonView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF102202C8EB80084CB2C /* ASMapManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0A2202C8EB80084CB2C /* ASMapManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF103202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0A3202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF104202C8EB80084CB2C /* SGMapHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0A4202C8EB80084CB2C /* SGMapHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF105202C8EB80084CB2C /* SGMapButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0A5202C8EB80084CB2C /* SGMapButtonView.m */; };
-		3A6DF106202C8EB80084CB2C /* ASMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0A6202C8EB80084CB2C /* ASMapManager.m */; };
 		3A6DF107202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0A7202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m */; };
-		3A6DF108202C8EB80084CB2C /* SGMapHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0A8202C8EB80084CB2C /* SGMapHelper.m */; };
-		3A6DF109202C8EB80084CB2C /* TKMapButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0A9202C8EB80084CB2C /* TKMapButtonView.swift */; };
-		3A6DF10A202C8EB80084CB2C /* ASImageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AB202C8EB80084CB2C /* ASImageAnnotationView.m */; };
-		3A6DF10B202C8EB80084CB2C /* SGSemaphoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AC202C8EB80084CB2C /* SGSemaphoreView.swift */; };
-		3A6DF10C202C8EB80084CB2C /* SGTripSummaryNanoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AD202C8EB80084CB2C /* SGTripSummaryNanoCell.xib */; };
-		3A6DF10D202C8EB80084CB2C /* SGCountdownCell+STKVehicular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AE202C8EB80084CB2C /* SGCountdownCell+STKVehicular.swift */; };
-		3A6DF10E202C8EB80084CB2C /* SGTripSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AF202C8EB80084CB2C /* SGTripSummaryCell.m */; };
-		3A6DF10F202C8EB80084CB2C /* SGTripSegmentsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B0202C8EB80084CB2C /* SGTripSegmentsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF110202C8EB80084CB2C /* STKTransportKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B1202C8EB80084CB2C /* STKTransportKitHelper.swift */; };
-		3A6DF111202C8EB80084CB2C /* SGTripSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B2202C8EB80084CB2C /* SGTripSummaryCell.swift */; };
-		3A6DF112202C8EB80084CB2C /* SGSemaphoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B3202C8EB80084CB2C /* SGSemaphoreView.m */; };
-		3A6DF113202C8EB80084CB2C /* SGPolylineRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B4202C8EB80084CB2C /* SGPolylineRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF114202C8EB80084CB2C /* SGTripSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B5202C8EB80084CB2C /* SGTripSummaryCell.xib */; };
-		3A6DF115202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B6202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib */; };
-		3A6DF116202C8EB80084CB2C /* ASImageAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B7202C8EB80084CB2C /* ASImageAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF117202C8EB80084CB2C /* SGTripSegmentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B8202C8EB80084CB2C /* SGTripSegmentsView.m */; };
-		3A6DF118202C8EB80084CB2C /* SGTripSummaryCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B9202C8EB80084CB2C /* SGTripSummaryCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF119202C8EB80084CB2C /* SGPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0BA202C8EB80084CB2C /* SGPolylineRenderer.m */; };
-		3A6DF11A202C8EB80084CB2C /* SGSemaphoreView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0BB202C8EB80084CB2C /* SGSemaphoreView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF11B202C8EB80084CB2C /* SGTripSummaryMiniCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0BC202C8EB80084CB2C /* SGTripSummaryMiniCell.xib */; };
+		3A6DF109202C8EB80084CB2C /* TKUIMapButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0A9202C8EB80084CB2C /* TKUIMapButtonView.swift */; };
+		3A6DF10A202C8EB80084CB2C /* TKUIImageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AB202C8EB80084CB2C /* TKUIImageAnnotationView.m */; };
+		3A6DF10B202C8EB80084CB2C /* TKUISemaphoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AC202C8EB80084CB2C /* TKUISemaphoreView.swift */; };
+		3A6DF10F202C8EB80084CB2C /* TKUITripSegmentsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B0202C8EB80084CB2C /* TKUITripSegmentsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A6DF110202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B1202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift */; };
+		3A6DF112202C8EB80084CB2C /* TKUISemaphoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B3202C8EB80084CB2C /* TKUISemaphoreView.m */; };
+		3A6DF113202C8EB80084CB2C /* TKUIPolylineRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B4202C8EB80084CB2C /* TKUIPolylineRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A6DF116202C8EB80084CB2C /* TKUIImageAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B7202C8EB80084CB2C /* TKUIImageAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A6DF117202C8EB80084CB2C /* TKUITripSegmentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B8202C8EB80084CB2C /* TKUITripSegmentsView.m */; };
+		3A6DF119202C8EB80084CB2C /* TKUIPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0BA202C8EB80084CB2C /* TKUIPolylineRenderer.m */; };
+		3A6DF11A202C8EB80084CB2C /* TKUISemaphoreView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0BB202C8EB80084CB2C /* TKUISemaphoreView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF11C202C8EB80084CB2C /* UIFont+CustomFonts.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0BE202C8EB80084CB2C /* UIFont+CustomFonts.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF11D202C8EB80084CB2C /* UITableView+SafeReload.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0BF202C8EB80084CB2C /* UITableView+SafeReload.m */; };
 		3A6DF11E202C8EB80084CB2C /* UIColor+Variations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0C0202C8EB80084CB2C /* UIColor+Variations.m */; };
 		3A6DF11F202C8EB80084CB2C /* SGStyleManager+SGCoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0C1202C8EB80084CB2C /* SGStyleManager+SGCoreUI.m */; };
 		3A6DF120202C8EB80084CB2C /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0C2202C8EB80084CB2C /* UIImageView+Kingfisher.swift */; };
 		3A6DF121202C8EB80084CB2C /* UIView+BearingRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0C3202C8EB80084CB2C /* UIView+BearingRotation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF122202C8EB80084CB2C /* UIView+Helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0C4202C8EB80084CB2C /* UIView+Helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF123202C8EB80084CB2C /* UIView+Hop.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0C5202C8EB80084CB2C /* UIView+Hop.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF124202C8EB80084CB2C /* UISearchBar+Customizable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0C6202C8EB80084CB2C /* UISearchBar+Customizable.m */; };
 		3A6DF125202C8EB80084CB2C /* UIFont+CustomFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0C7202C8EB80084CB2C /* UIFont+CustomFonts.m */; };
 		3A6DF126202C8EB80084CB2C /* SGStyleManager+SGCoreUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0C8202C8EB80084CB2C /* SGStyleManager+SGCoreUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF127202C8EB80084CB2C /* UIColor+Variations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0C9202C8EB80084CB2C /* UIColor+Variations.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF128202C8EB80084CB2C /* UITableView+SafeReload.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0CA202C8EB80084CB2C /* UITableView+SafeReload.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF129202C8EB80084CB2C /* UIView+Hop.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0CB202C8EB80084CB2C /* UIView+Hop.m */; };
 		3A6DF12A202C8EB80084CB2C /* UIView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0CC202C8EB80084CB2C /* UIView+Helpers.m */; };
 		3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0CD202C8EB80084CB2C /* UIView+BearingRotation.m */; };
 		3A6DF12C202C8EB80084CB2C /* UISearchBar+Customizable.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0CE202C8EB80084CB2C /* UISearchBar+Customizable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF12D202C8EB80084CB2C /* UIButton+TitleAndImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0CF202C8EB80084CB2C /* UIButton+TitleAndImage.swift */; };
-		3A6DF12E202C8EB80084CB2C /* SGButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0D1202C8EB80084CB2C /* SGButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF12F202C8EB80084CB2C /* SGLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D2202C8EB80084CB2C /* SGLabel.m */; };
-		3A6DF130202C8EB80084CB2C /* SGButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D3202C8EB80084CB2C /* SGButton.m */; };
-		3A6DF131202C8EB80084CB2C /* SGLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0D4202C8EB80084CB2C /* SGLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF132202C8EB80084CB2C /* TripMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D6202C8EB80084CB2C /* TripMapManager.m */; };
-		3A6DF133202C8EB80084CB2C /* RouteMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D7202C8EB80084CB2C /* RouteMapManager.m */; };
-		3A6DF134202C8EB80084CB2C /* TripMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D8202C8EB80084CB2C /* TripMapManager.swift */; };
-		3A6DF135202C8EB80084CB2C /* RouteMapManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0D9202C8EB80084CB2C /* RouteMapManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF136202C8EB80084CB2C /* TripMapManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0DA202C8EB80084CB2C /* TripMapManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A6DF12E202C8EB80084CB2C /* TKUIStyledButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0D1202C8EB80084CB2C /* TKUIStyledButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A6DF12F202C8EB80084CB2C /* TKUIStyledLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D2202C8EB80084CB2C /* TKUIStyledLabel.m */; };
+		3A6DF130202C8EB80084CB2C /* TKUIStyledButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D3202C8EB80084CB2C /* TKUIStyledButton.m */; };
+		3A6DF131202C8EB80084CB2C /* TKUIStyledLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0D4202C8EB80084CB2C /* TKUIStyledLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF137202C8EB80084CB2C /* TripKitUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0DB202C8EB80084CB2C /* TripKitUI.xcassets */; };
 		3A6DF138202C8EB80084CB2C /* TripKitUIUmbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0DC202C8EB80084CB2C /* TripKitUIUmbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF139202C8EB80084CB2C /* TKAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0DE202C8EB80084CB2C /* TKAlertViewController.swift */; };
+		3A6DF139202C8EB80084CB2C /* TKUIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0DE202C8EB80084CB2C /* TKUIAlertViewController.swift */; };
 		3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0DF202C8EB80084CB2C /* TripKitUIBundle.swift */; };
-		3A6DF13B202C8EB80084CB2C /* TKEmptyAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */; };
-		3A6DF13C202C8EB80084CB2C /* TKAlertInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */; };
+		3A6DF13B202C8EB80084CB2C /* TKUIEmptyAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E1202C8EB80084CB2C /* TKUIEmptyAlertView.xib */; };
+		3A6DF13C202C8EB80084CB2C /* TKUIAlertInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E2202C8EB80084CB2C /* TKUIAlertInfoView.xib */; };
 		3A6DF13E202C8EB80084CB2C /* TKUIPathFriendlinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E4202C8EB80084CB2C /* TKUIPathFriendlinessView.swift */; };
-		3A6DF13F202C8EB80084CB2C /* CircleAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0E5202C8EB80084CB2C /* CircleAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF140202C8EB80084CB2C /* TKDepartureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */; };
+		3A6DF13F202C8EB80084CB2C /* TKUICircleAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0E5202C8EB80084CB2C /* TKUICircleAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A6DF140202C8EB80084CB2C /* TKUIDepartureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E6202C8EB80084CB2C /* TKUIDepartureView.swift */; };
 		3A6DF142202C8EB80084CB2C /* TKUIOccupancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0E8202C8EB80084CB2C /* TKUIOccupancyView.swift */; };
-		3A6DF143202C8EB80084CB2C /* VehicleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0E9202C8EB80084CB2C /* VehicleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF144202C8EB80084CB2C /* SGPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */; };
-		3A6DF147202C8EB80084CB2C /* TKEmptyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */; };
-		3A6DF148202C8EB80084CB2C /* TKVehicleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */; };
-		3A6DF149202C8EB80084CB2C /* CircleAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */; };
-		3A6DF14A202C8EB80084CB2C /* TKDepartureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F0202C8EB80084CB2C /* TKDepartureView.xib */; };
+		3A6DF143202C8EB80084CB2C /* TKUIVehicleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0E9202C8EB80084CB2C /* TKUIVehicleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A6DF144202C8EB80084CB2C /* TKUIPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EA202C8EB80084CB2C /* TKUIPulsingAnnotationView.m */; };
+		3A6DF147202C8EB80084CB2C /* TKUIEmptyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0ED202C8EB80084CB2C /* TKUIEmptyAlertView.swift */; };
+		3A6DF148202C8EB80084CB2C /* TKUIVehicleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EE202C8EB80084CB2C /* TKUIVehicleAnnotationView.swift */; };
+		3A6DF149202C8EB80084CB2C /* TKUICircleAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0EF202C8EB80084CB2C /* TKUICircleAnnotationView.m */; };
+		3A6DF14A202C8EB80084CB2C /* TKUIDepartureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F0202C8EB80084CB2C /* TKUIDepartureView.xib */; };
 		3A6DF14B202C8EB80084CB2C /* TKUIPathFriendlinessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F1202C8EB80084CB2C /* TKUIPathFriendlinessView.xib */; };
-		3A6DF14C202C8EB80084CB2C /* VehicleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F2202C8EB80084CB2C /* VehicleView.m */; };
-		3A6DF14D202C8EB80084CB2C /* TKAlertInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F3202C8EB80084CB2C /* TKAlertInfoView.swift */; };
-		3A6DF14E202C8EB80084CB2C /* SGPulsingAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF14F202C8EB80084CB2C /* TKAnnotationViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F6202C8EB80084CB2C /* TKAnnotationViewBuilder.swift */; };
-		3A6DF150202C8EB80084CB2C /* MapManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F7202C8EB80084CB2C /* MapManagerHelper.swift */; };
+		3A6DF14C202C8EB80084CB2C /* TKUIVehicleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F2202C8EB80084CB2C /* TKUIVehicleView.m */; };
+		3A6DF14D202C8EB80084CB2C /* TKUIAlertInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F3202C8EB80084CB2C /* TKUIAlertInfoView.swift */; };
+		3A6DF14E202C8EB80084CB2C /* TKUIPulsingAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0F4202C8EB80084CB2C /* TKUIPulsingAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A6DF14F202C8EB80084CB2C /* TKUIAnnotationViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F6202C8EB80084CB2C /* TKUIAnnotationViewBuilder.swift */; };
+		3A6DF150202C8EB80084CB2C /* TKUIMapManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */; };
 		3A6DF152202C8F9A0084CB2C /* TripKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6231D1CD0060089F687 /* TripKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF16B202C97F70084CB2C /* TripKitInterApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF169202C97F70084CB2C /* TripKitInterApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF17B202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF176202C98AF0084CB2C /* SGKConfig+TKInterAppCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -901,22 +872,22 @@
 		3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE0B1F06BCF200147990 /* Service.swift */; };
 		D31F511B2068BE4F00FB4CE1 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F511A2068BE4F00FB4CE1 /* RxDataSources.framework */; };
 		D31F51252068C27200FB4CE1 /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F51242068C27200FB4CE1 /* Differentiator.framework */; };
-		D3211335206BBAF300E5D929 /* TKLoadingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */; };
-		D3211337206BBB0600E5D929 /* TKLoadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */; };
-		D32CA5AF20E34409009C9449 /* TKGroupedAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D32CA5AE20E34409009C9449 /* TKGroupedAlertCell.xib */; };
+		D3211335206BBAF300E5D929 /* TKUILoadingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3211334206BBAF300E5D929 /* TKUILoadingAlertView.swift */; };
+		D3211337206BBB0600E5D929 /* TKUILoadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3211336206BBB0600E5D929 /* TKUILoadingAlertView.xib */; };
+		D32CA5AF20E34409009C9449 /* TKUIGroupedAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D32CA5AE20E34409009C9449 /* TKUIGroupedAlertCell.xib */; };
 		D3348267205BE2B000CA5917 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3348266205BE2B000CA5917 /* RxDataSources.framework */; };
 		D3348268205C4C4B00CA5917 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3348266205BE2B000CA5917 /* RxDataSources.framework */; };
 		D337467E208D5D980045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
 		D337467F208D5DA90045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
 		D38F2D341E5046DD003D1CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38F2D361E5046DD003D1CE2 /* InfoPlist.strings */; };
-		D39B7BAF20622C2D00988D8A /* TKGroupedAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BAE20622C2C00988D8A /* TKGroupedAlertCell.swift */; };
-		D39B7BB420622FD100988D8A /* TKAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BB220622FD100988D8A /* TKAlertCell.swift */; };
-		D39B7BB520622FD100988D8A /* TKAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB320622FD100988D8A /* TKAlertCell.xib */; };
-		D39ECD86205A007A00E09474 /* TKSectionedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */; };
-		D39ECD87205A007A00E09474 /* TKSectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */; };
-		D39ECD89205A029500E09474 /* TKSectionedAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */; };
-		D3F9CEC32064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */; };
-		D3F9CEC52064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */; };
+		D39B7BAF20622C2D00988D8A /* TKUIGroupedAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */; };
+		D39B7BB420622FD100988D8A /* TKUIAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */; };
+		D39B7BB520622FD100988D8A /* TKUIAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */; };
+		D39ECD86205A007A00E09474 /* TKUISectionedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */; };
+		D39ECD87205A007A00E09474 /* TKUISectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39ECD85205A007A00E09474 /* TKUISectionedAlertViewController.xib */; };
+		D39ECD89205A029500E09474 /* TKUISectionedAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */; };
+		D3F9CEC32064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */; };
+		D3F9CEC52064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */; };
 		D3FC1F11207B1B3E00D39DF9 /* TKInterAppCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator.swift */; };
 		D3FC1F14207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F12207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift */; };
 		D3FC1F15207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F12207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift */; };
@@ -1050,6 +1021,10 @@
 		3A682F2120F3F8ED00E05195 /* TKUIResultsCard+Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIResultsCard+Errors.swift"; sourceTree = "<group>"; };
 		3A682F2320F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingSupportView+Show.swift"; sourceTree = "<group>"; };
 		3A682F2720F49B8200E05195 /* TKUIResultsCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIResultsCard+Configuration.swift"; sourceTree = "<group>"; };
+		3A682F3720F4A68A00E05195 /* SGTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTableCell.h; sourceTree = "<group>"; };
+		3A682F3820F4A68A00E05195 /* SGTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTableCell.m; sourceTree = "<group>"; };
+		3A682F7A20F4B3E200E05195 /* ASMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASMapManager.h; sourceTree = "<group>"; };
+		3A682F7B20F4B3E200E05195 /* ASMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASMapManager.m; sourceTree = "<group>"; };
 		3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loc+TripKit.swift"; sourceTree = "<group>"; };
 		3A6A3E0E20405257002690C6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A6A3E0F20405257002690C6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1078,91 +1053,58 @@
 		3A6DF087202C8DA30084CB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A6DF090202C8E280084CB2C /* ASPolylineView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolylineView.framework; path = Carthage/Build/iOS/ASPolylineView.framework; sourceTree = "<group>"; };
 		3A6DF091202C8E280084CB2C /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
-		3A6DF097202C8EB80084CB2C /* SGTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTableCell.h; sourceTree = "<group>"; };
-		3A6DF098202C8EB80084CB2C /* SGTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTableViewCell.m; sourceTree = "<group>"; };
-		3A6DF099202C8EB80084CB2C /* SGCountdownCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGCountdownCell.h; sourceTree = "<group>"; };
-		3A6DF09A202C8EB80084CB2C /* SGCountdownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGCountdownCell.swift; sourceTree = "<group>"; };
-		3A6DF09B202C8EB80084CB2C /* SGTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGTableViewCell.xib; sourceTree = "<group>"; };
-		3A6DF09C202C8EB80084CB2C /* SGCountdownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGCountdownCell.xib; sourceTree = "<group>"; };
-		3A6DF09D202C8EB80084CB2C /* SGTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTableCell.m; sourceTree = "<group>"; };
-		3A6DF09E202C8EB80084CB2C /* SGCountdownCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGCountdownCell.m; sourceTree = "<group>"; };
-		3A6DF09F202C8EB80084CB2C /* SGTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTableViewCell.h; sourceTree = "<group>"; };
-		3A6DF0A1202C8EB80084CB2C /* SGMapButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMapButtonView.h; sourceTree = "<group>"; };
-		3A6DF0A2202C8EB80084CB2C /* ASMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASMapManager.h; sourceTree = "<group>"; };
 		3A6DF0A3202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomToAnnotations.h"; sourceTree = "<group>"; };
-		3A6DF0A4202C8EB80084CB2C /* SGMapHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMapHelper.h; sourceTree = "<group>"; };
-		3A6DF0A5202C8EB80084CB2C /* SGMapButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMapButtonView.m; sourceTree = "<group>"; };
-		3A6DF0A6202C8EB80084CB2C /* ASMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASMapManager.m; sourceTree = "<group>"; };
 		3A6DF0A7202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomToAnnotations.m"; sourceTree = "<group>"; };
-		3A6DF0A8202C8EB80084CB2C /* SGMapHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMapHelper.m; sourceTree = "<group>"; };
-		3A6DF0A9202C8EB80084CB2C /* TKMapButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKMapButtonView.swift; sourceTree = "<group>"; };
-		3A6DF0AB202C8EB80084CB2C /* ASImageAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASImageAnnotationView.m; sourceTree = "<group>"; };
-		3A6DF0AC202C8EB80084CB2C /* SGSemaphoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGSemaphoreView.swift; sourceTree = "<group>"; };
-		3A6DF0AD202C8EB80084CB2C /* SGTripSummaryNanoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGTripSummaryNanoCell.xib; sourceTree = "<group>"; };
-		3A6DF0AE202C8EB80084CB2C /* SGCountdownCell+STKVehicular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SGCountdownCell+STKVehicular.swift"; sourceTree = "<group>"; };
-		3A6DF0AF202C8EB80084CB2C /* SGTripSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTripSummaryCell.m; sourceTree = "<group>"; };
-		3A6DF0B0202C8EB80084CB2C /* SGTripSegmentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTripSegmentsView.h; sourceTree = "<group>"; };
-		3A6DF0B1202C8EB80084CB2C /* STKTransportKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STKTransportKitHelper.swift; sourceTree = "<group>"; };
-		3A6DF0B2202C8EB80084CB2C /* SGTripSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGTripSummaryCell.swift; sourceTree = "<group>"; };
-		3A6DF0B3202C8EB80084CB2C /* SGSemaphoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSemaphoreView.m; sourceTree = "<group>"; };
-		3A6DF0B4202C8EB80084CB2C /* SGPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPolylineRenderer.h; sourceTree = "<group>"; };
-		3A6DF0B5202C8EB80084CB2C /* SGTripSummaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGTripSummaryCell.xib; sourceTree = "<group>"; };
-		3A6DF0B6202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGTripSummaryEdgeToEdgeCell.xib; sourceTree = "<group>"; };
-		3A6DF0B7202C8EB80084CB2C /* ASImageAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASImageAnnotationView.h; sourceTree = "<group>"; };
-		3A6DF0B8202C8EB80084CB2C /* SGTripSegmentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTripSegmentsView.m; sourceTree = "<group>"; };
-		3A6DF0B9202C8EB80084CB2C /* SGTripSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTripSummaryCell.h; sourceTree = "<group>"; };
-		3A6DF0BA202C8EB80084CB2C /* SGPolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPolylineRenderer.m; sourceTree = "<group>"; };
-		3A6DF0BB202C8EB80084CB2C /* SGSemaphoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSemaphoreView.h; sourceTree = "<group>"; };
-		3A6DF0BC202C8EB80084CB2C /* SGTripSummaryMiniCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGTripSummaryMiniCell.xib; sourceTree = "<group>"; };
+		3A6DF0A9202C8EB80084CB2C /* TKUIMapButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIMapButtonView.swift; sourceTree = "<group>"; };
+		3A6DF0AB202C8EB80084CB2C /* TKUIImageAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIImageAnnotationView.m; sourceTree = "<group>"; };
+		3A6DF0AC202C8EB80084CB2C /* TKUISemaphoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISemaphoreView.swift; sourceTree = "<group>"; };
+		3A6DF0B0202C8EB80084CB2C /* TKUITripSegmentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUITripSegmentsView.h; sourceTree = "<group>"; };
+		3A6DF0B1202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+AsAccessoryImage.swift"; sourceTree = "<group>"; };
+		3A6DF0B3202C8EB80084CB2C /* TKUISemaphoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUISemaphoreView.m; sourceTree = "<group>"; };
+		3A6DF0B4202C8EB80084CB2C /* TKUIPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIPolylineRenderer.h; sourceTree = "<group>"; };
+		3A6DF0B7202C8EB80084CB2C /* TKUIImageAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIImageAnnotationView.h; sourceTree = "<group>"; };
+		3A6DF0B8202C8EB80084CB2C /* TKUITripSegmentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUITripSegmentsView.m; sourceTree = "<group>"; };
+		3A6DF0BA202C8EB80084CB2C /* TKUIPolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIPolylineRenderer.m; sourceTree = "<group>"; };
+		3A6DF0BB202C8EB80084CB2C /* TKUISemaphoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUISemaphoreView.h; sourceTree = "<group>"; };
 		3A6DF0BE202C8EB80084CB2C /* UIFont+CustomFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+CustomFonts.h"; sourceTree = "<group>"; };
-		3A6DF0BF202C8EB80084CB2C /* UITableView+SafeReload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SafeReload.m"; sourceTree = "<group>"; };
 		3A6DF0C0202C8EB80084CB2C /* UIColor+Variations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Variations.m"; sourceTree = "<group>"; };
 		3A6DF0C1202C8EB80084CB2C /* SGStyleManager+SGCoreUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SGStyleManager+SGCoreUI.m"; sourceTree = "<group>"; };
 		3A6DF0C2202C8EB80084CB2C /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		3A6DF0C3202C8EB80084CB2C /* UIView+BearingRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BearingRotation.h"; sourceTree = "<group>"; };
 		3A6DF0C4202C8EB80084CB2C /* UIView+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helpers.h"; sourceTree = "<group>"; };
-		3A6DF0C5202C8EB80084CB2C /* UIView+Hop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Hop.h"; sourceTree = "<group>"; };
 		3A6DF0C6202C8EB80084CB2C /* UISearchBar+Customizable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+Customizable.m"; sourceTree = "<group>"; };
 		3A6DF0C7202C8EB80084CB2C /* UIFont+CustomFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CustomFonts.m"; sourceTree = "<group>"; };
 		3A6DF0C8202C8EB80084CB2C /* SGStyleManager+SGCoreUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SGStyleManager+SGCoreUI.h"; sourceTree = "<group>"; };
 		3A6DF0C9202C8EB80084CB2C /* UIColor+Variations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Variations.h"; sourceTree = "<group>"; };
-		3A6DF0CA202C8EB80084CB2C /* UITableView+SafeReload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+SafeReload.h"; sourceTree = "<group>"; };
-		3A6DF0CB202C8EB80084CB2C /* UIView+Hop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Hop.m"; sourceTree = "<group>"; };
 		3A6DF0CC202C8EB80084CB2C /* UIView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helpers.m"; sourceTree = "<group>"; };
 		3A6DF0CD202C8EB80084CB2C /* UIView+BearingRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BearingRotation.m"; sourceTree = "<group>"; };
 		3A6DF0CE202C8EB80084CB2C /* UISearchBar+Customizable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+Customizable.h"; sourceTree = "<group>"; };
-		3A6DF0CF202C8EB80084CB2C /* UIButton+TitleAndImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TitleAndImage.swift"; sourceTree = "<group>"; };
-		3A6DF0D1202C8EB80084CB2C /* SGButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGButton.h; sourceTree = "<group>"; };
-		3A6DF0D2202C8EB80084CB2C /* SGLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGLabel.m; sourceTree = "<group>"; };
-		3A6DF0D3202C8EB80084CB2C /* SGButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGButton.m; sourceTree = "<group>"; };
-		3A6DF0D4202C8EB80084CB2C /* SGLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGLabel.h; sourceTree = "<group>"; };
-		3A6DF0D6202C8EB80084CB2C /* TripMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripMapManager.m; sourceTree = "<group>"; };
-		3A6DF0D7202C8EB80084CB2C /* RouteMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteMapManager.m; sourceTree = "<group>"; };
-		3A6DF0D8202C8EB80084CB2C /* TripMapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripMapManager.swift; sourceTree = "<group>"; };
-		3A6DF0D9202C8EB80084CB2C /* RouteMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteMapManager.h; sourceTree = "<group>"; };
-		3A6DF0DA202C8EB80084CB2C /* TripMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripMapManager.h; sourceTree = "<group>"; };
+		3A6DF0D1202C8EB80084CB2C /* TKUIStyledButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIStyledButton.h; sourceTree = "<group>"; };
+		3A6DF0D2202C8EB80084CB2C /* TKUIStyledLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIStyledLabel.m; sourceTree = "<group>"; };
+		3A6DF0D3202C8EB80084CB2C /* TKUIStyledButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIStyledButton.m; sourceTree = "<group>"; };
+		3A6DF0D4202C8EB80084CB2C /* TKUIStyledLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIStyledLabel.h; sourceTree = "<group>"; };
 		3A6DF0DB202C8EB80084CB2C /* TripKitUI.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TripKitUI.xcassets; sourceTree = "<group>"; };
 		3A6DF0DC202C8EB80084CB2C /* TripKitUIUmbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripKitUIUmbrella.h; sourceTree = "<group>"; };
-		3A6DF0DE202C8EB80084CB2C /* TKAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertViewController.swift; sourceTree = "<group>"; };
+		3A6DF0DE202C8EB80084CB2C /* TKUIAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAlertViewController.swift; sourceTree = "<group>"; };
 		3A6DF0DF202C8EB80084CB2C /* TripKitUIBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripKitUIBundle.swift; sourceTree = "<group>"; };
-		3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKEmptyAlertView.xib; sourceTree = "<group>"; };
-		3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKAlertInfoView.xib; sourceTree = "<group>"; };
+		3A6DF0E1202C8EB80084CB2C /* TKUIEmptyAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIEmptyAlertView.xib; sourceTree = "<group>"; };
+		3A6DF0E2202C8EB80084CB2C /* TKUIAlertInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIAlertInfoView.xib; sourceTree = "<group>"; };
 		3A6DF0E4202C8EB80084CB2C /* TKUIPathFriendlinessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIPathFriendlinessView.swift; sourceTree = "<group>"; };
-		3A6DF0E5202C8EB80084CB2C /* CircleAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleAnnotationView.h; sourceTree = "<group>"; };
-		3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDepartureView.swift; sourceTree = "<group>"; };
+		3A6DF0E5202C8EB80084CB2C /* TKUICircleAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUICircleAnnotationView.h; sourceTree = "<group>"; };
+		3A6DF0E6202C8EB80084CB2C /* TKUIDepartureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIDepartureView.swift; sourceTree = "<group>"; };
 		3A6DF0E8202C8EB80084CB2C /* TKUIOccupancyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIOccupancyView.swift; sourceTree = "<group>"; };
-		3A6DF0E9202C8EB80084CB2C /* VehicleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleView.h; sourceTree = "<group>"; };
-		3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPulsingAnnotationView.m; sourceTree = "<group>"; };
-		3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKEmptyAlertView.swift; sourceTree = "<group>"; };
-		3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKVehicleAnnotationView.swift; sourceTree = "<group>"; };
-		3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleAnnotationView.m; sourceTree = "<group>"; };
-		3A6DF0F0202C8EB80084CB2C /* TKDepartureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKDepartureView.xib; sourceTree = "<group>"; };
+		3A6DF0E9202C8EB80084CB2C /* TKUIVehicleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIVehicleView.h; sourceTree = "<group>"; };
+		3A6DF0EA202C8EB80084CB2C /* TKUIPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIPulsingAnnotationView.m; sourceTree = "<group>"; };
+		3A6DF0ED202C8EB80084CB2C /* TKUIEmptyAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIEmptyAlertView.swift; sourceTree = "<group>"; };
+		3A6DF0EE202C8EB80084CB2C /* TKUIVehicleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIVehicleAnnotationView.swift; sourceTree = "<group>"; };
+		3A6DF0EF202C8EB80084CB2C /* TKUICircleAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUICircleAnnotationView.m; sourceTree = "<group>"; };
+		3A6DF0F0202C8EB80084CB2C /* TKUIDepartureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIDepartureView.xib; sourceTree = "<group>"; };
 		3A6DF0F1202C8EB80084CB2C /* TKUIPathFriendlinessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIPathFriendlinessView.xib; sourceTree = "<group>"; };
-		3A6DF0F2202C8EB80084CB2C /* VehicleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleView.m; sourceTree = "<group>"; };
-		3A6DF0F3202C8EB80084CB2C /* TKAlertInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertInfoView.swift; sourceTree = "<group>"; };
-		3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPulsingAnnotationView.h; sourceTree = "<group>"; };
-		3A6DF0F6202C8EB80084CB2C /* TKAnnotationViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAnnotationViewBuilder.swift; sourceTree = "<group>"; };
-		3A6DF0F7202C8EB80084CB2C /* MapManagerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManagerHelper.swift; sourceTree = "<group>"; };
+		3A6DF0F2202C8EB80084CB2C /* TKUIVehicleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIVehicleView.m; sourceTree = "<group>"; };
+		3A6DF0F3202C8EB80084CB2C /* TKUIAlertInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAlertInfoView.swift; sourceTree = "<group>"; };
+		3A6DF0F4202C8EB80084CB2C /* TKUIPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIPulsingAnnotationView.h; sourceTree = "<group>"; };
+		3A6DF0F6202C8EB80084CB2C /* TKUIAnnotationViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAnnotationViewBuilder.swift; sourceTree = "<group>"; };
+		3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIMapManagerHelper.swift; sourceTree = "<group>"; };
 		3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitInterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF169202C97F70084CB2C /* TripKitInterApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKitInterApp.h; sourceTree = "<group>"; };
 		3A6DF16A202C97F70084CB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1679,21 +1621,21 @@
 		3AFFAE0B1F06BCF200147990 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D31F511A2068BE4F00FB4CE1 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		D31F51242068C27200FB4CE1 /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
-		D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLoadingAlertView.swift; sourceTree = "<group>"; };
-		D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKLoadingAlertView.xib; sourceTree = "<group>"; };
-		D32CA5AE20E34409009C9449 /* TKGroupedAlertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKGroupedAlertCell.xib; sourceTree = "<group>"; };
+		D3211334206BBAF300E5D929 /* TKUILoadingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUILoadingAlertView.swift; sourceTree = "<group>"; };
+		D3211336206BBB0600E5D929 /* TKUILoadingAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUILoadingAlertView.xib; sourceTree = "<group>"; };
+		D32CA5AE20E34409009C9449 /* TKUIGroupedAlertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIGroupedAlertCell.xib; sourceTree = "<group>"; };
 		D3348266205BE2B000CA5917 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = ../../Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		D337467D208D5D980045B0C3 /* UserAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPIModel.swift; sourceTree = "<group>"; };
 		D38F2D351E5046DD003D1CE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		D39B7BAE20622C2C00988D8A /* TKGroupedAlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKGroupedAlertCell.swift; sourceTree = "<group>"; };
-		D39B7BB220622FD100988D8A /* TKAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAlertCell.swift; sourceTree = "<group>"; };
-		D39B7BB320622FD100988D8A /* TKAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKAlertCell.xib; sourceTree = "<group>"; };
-		D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertViewController.swift; sourceTree = "<group>"; };
-		D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKSectionedAlertViewController.xib; sourceTree = "<group>"; };
-		D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertViewModel.swift; sourceTree = "<group>"; };
+		D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIGroupedAlertCell.swift; sourceTree = "<group>"; };
+		D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAlertCell.swift; sourceTree = "<group>"; };
+		D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIAlertCell.xib; sourceTree = "<group>"; };
+		D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertViewController.swift; sourceTree = "<group>"; };
+		D39ECD85205A007A00E09474 /* TKUISectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertViewController.xib; sourceTree = "<group>"; };
+		D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertViewModel.swift; sourceTree = "<group>"; };
 		D3A779281E513C5000BBAF6C /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertTableHeader.swift; sourceTree = "<group>"; };
-		D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKSectionedAlertTableHeader.xib; sourceTree = "<group>"; };
+		D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertTableHeader.swift; sourceTree = "<group>"; };
+		D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertTableHeader.xib; sourceTree = "<group>"; };
 		D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKInterAppCommunicator.swift; sourceTree = "<group>"; };
 		D3FC1F12207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SegmentTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D3FC1F13207B3D1D00D39DF9 /* SegmentTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SegmentTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -1865,20 +1807,58 @@
 		3A682F2F20F4A4A200E05195 /* alerts */ = {
 			isa = PBXGroup;
 			children = (
-				D39B7BB220622FD100988D8A /* TKAlertCell.swift */,
-				D39B7BB320622FD100988D8A /* TKAlertCell.xib */,
-				3A6DF0F3202C8EB80084CB2C /* TKAlertInfoView.swift */,
-				3A6DF0E2202C8EB80084CB2C /* TKAlertInfoView.xib */,
-				3A6DF0ED202C8EB80084CB2C /* TKEmptyAlertView.swift */,
-				3A6DF0E1202C8EB80084CB2C /* TKEmptyAlertView.xib */,
-				D39B7BAE20622C2C00988D8A /* TKGroupedAlertCell.swift */,
-				D32CA5AE20E34409009C9449 /* TKGroupedAlertCell.xib */,
-				D3211334206BBAF300E5D929 /* TKLoadingAlertView.swift */,
-				D3211336206BBB0600E5D929 /* TKLoadingAlertView.xib */,
-				D3F9CEC12064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift */,
-				D3F9CEC42064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib */,
+				D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */,
+				D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */,
+				3A6DF0F3202C8EB80084CB2C /* TKUIAlertInfoView.swift */,
+				3A6DF0E2202C8EB80084CB2C /* TKUIAlertInfoView.xib */,
+				3A6DF0ED202C8EB80084CB2C /* TKUIEmptyAlertView.swift */,
+				3A6DF0E1202C8EB80084CB2C /* TKUIEmptyAlertView.xib */,
+				D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */,
+				D32CA5AE20E34409009C9449 /* TKUIGroupedAlertCell.xib */,
+				D3211334206BBAF300E5D929 /* TKUILoadingAlertView.swift */,
+				D3211336206BBB0600E5D929 /* TKUILoadingAlertView.xib */,
+				D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */,
+				D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */,
 			);
 			path = alerts;
+			sourceTree = "<group>";
+		};
+		3A682F3620F4A68A00E05195 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3A682F3720F4A68A00E05195 /* SGTableCell.h */,
+				3A682F3820F4A68A00E05195 /* SGTableCell.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3A682F7920F4B3E200E05195 /* deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				3A682F7A20F4B3E200E05195 /* ASMapManager.h */,
+				3A682F7B20F4B3E200E05195 /* ASMapManager.m */,
+			);
+			path = deprecated;
+			sourceTree = "<group>";
+		};
+		3A682F7E20F4B71500E05195 /* map annotations */ = {
+			isa = PBXGroup;
+			children = (
+				3A6DF0F6202C8EB80084CB2C /* TKUIAnnotationViewBuilder.swift */,
+				3A6DF0E5202C8EB80084CB2C /* TKUICircleAnnotationView.h */,
+				3A6DF0EF202C8EB80084CB2C /* TKUICircleAnnotationView.m */,
+				3A6DF0B7202C8EB80084CB2C /* TKUIImageAnnotationView.h */,
+				3A6DF0AB202C8EB80084CB2C /* TKUIImageAnnotationView.m */,
+				3A6DF0F4202C8EB80084CB2C /* TKUIPulsingAnnotationView.h */,
+				3A6DF0EA202C8EB80084CB2C /* TKUIPulsingAnnotationView.m */,
+				3A6DF0BB202C8EB80084CB2C /* TKUISemaphoreView.h */,
+				3A6DF0B3202C8EB80084CB2C /* TKUISemaphoreView.m */,
+				3A6DF0AC202C8EB80084CB2C /* TKUISemaphoreView.swift */,
+				3A6DF0EE202C8EB80084CB2C /* TKUIVehicleAnnotationView.swift */,
+				3A6DF0E9202C8EB80084CB2C /* TKUIVehicleView.h */,
+				3A6DF0F2202C8EB80084CB2C /* TKUIVehicleView.m */,
+			);
+			path = "map annotations";
 			sourceTree = "<group>";
 		};
 		3A6DF065202C8C1F0084CB2C /* Metadata */ = {
@@ -1908,9 +1888,8 @@
 		3A6DF094202C8EB80084CB2C /* TripKitUI */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF095202C8EB80084CB2C /* core */,
+				3A682F7920F4B3E200E05195 /* deprecated */,
 				3A6DF0F5202C8EB80084CB2C /* helper */,
-				3A6DF0D5202C8EB80084CB2C /* map managers */,
 				3A6DF0E0202C8EB80084CB2C /* views */,
 				3AFD395020D9337B00FDC7D0 /* view model */,
 				3AFD393B20D9333500FDC7D0 /* cards */,
@@ -1922,131 +1901,37 @@
 			path = TripKitUI;
 			sourceTree = "<group>";
 		};
-		3A6DF095202C8EB80084CB2C /* core */ = {
-			isa = PBXGroup;
-			children = (
-				3A6DF0D0202C8EB80084CB2C /* Base */,
-				3A6DF0BD202C8EB80084CB2C /* Categories */,
-				3A6DF096202C8EB80084CB2C /* Cells */,
-				3A6DF0A0202C8EB80084CB2C /* Map */,
-				3A6DF0AA202C8EB80084CB2C /* TransportKitUI */,
-			);
-			path = core;
-			sourceTree = "<group>";
-		};
-		3A6DF096202C8EB80084CB2C /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				3A6DF099202C8EB80084CB2C /* SGCountdownCell.h */,
-				3A6DF09E202C8EB80084CB2C /* SGCountdownCell.m */,
-				3A6DF09A202C8EB80084CB2C /* SGCountdownCell.swift */,
-				3A6DF09C202C8EB80084CB2C /* SGCountdownCell.xib */,
-				3A6DF097202C8EB80084CB2C /* SGTableCell.h */,
-				3A6DF09D202C8EB80084CB2C /* SGTableCell.m */,
-				3A6DF09F202C8EB80084CB2C /* SGTableViewCell.h */,
-				3A6DF098202C8EB80084CB2C /* SGTableViewCell.m */,
-				3A6DF09B202C8EB80084CB2C /* SGTableViewCell.xib */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		3A6DF0A0202C8EB80084CB2C /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				3A6DF0A2202C8EB80084CB2C /* ASMapManager.h */,
-				3A6DF0A6202C8EB80084CB2C /* ASMapManager.m */,
-				3A6DF0A3202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h */,
-				3A6DF0A7202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m */,
-				3A6DF0A1202C8EB80084CB2C /* SGMapButtonView.h */,
-				3A6DF0A5202C8EB80084CB2C /* SGMapButtonView.m */,
-				3A6DF0A4202C8EB80084CB2C /* SGMapHelper.h */,
-				3A6DF0A8202C8EB80084CB2C /* SGMapHelper.m */,
-				3A6DF0A9202C8EB80084CB2C /* TKMapButtonView.swift */,
-			);
-			path = Map;
-			sourceTree = "<group>";
-		};
-		3A6DF0AA202C8EB80084CB2C /* TransportKitUI */ = {
-			isa = PBXGroup;
-			children = (
-				3A6DF0B7202C8EB80084CB2C /* ASImageAnnotationView.h */,
-				3A6DF0AB202C8EB80084CB2C /* ASImageAnnotationView.m */,
-				3A6DF0AE202C8EB80084CB2C /* SGCountdownCell+STKVehicular.swift */,
-				3A6DF0B4202C8EB80084CB2C /* SGPolylineRenderer.h */,
-				3A6DF0BA202C8EB80084CB2C /* SGPolylineRenderer.m */,
-				3A6DF0BB202C8EB80084CB2C /* SGSemaphoreView.h */,
-				3A6DF0B3202C8EB80084CB2C /* SGSemaphoreView.m */,
-				3A6DF0AC202C8EB80084CB2C /* SGSemaphoreView.swift */,
-				3A6DF0B0202C8EB80084CB2C /* SGTripSegmentsView.h */,
-				3A6DF0B8202C8EB80084CB2C /* SGTripSegmentsView.m */,
-				3A6DF0B9202C8EB80084CB2C /* SGTripSummaryCell.h */,
-				3A6DF0AF202C8EB80084CB2C /* SGTripSummaryCell.m */,
-				3A6DF0B2202C8EB80084CB2C /* SGTripSummaryCell.swift */,
-				3A6DF0B5202C8EB80084CB2C /* SGTripSummaryCell.xib */,
-				3A6DF0B6202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib */,
-				3A6DF0BC202C8EB80084CB2C /* SGTripSummaryMiniCell.xib */,
-				3A6DF0AD202C8EB80084CB2C /* SGTripSummaryNanoCell.xib */,
-				3A6DF0B1202C8EB80084CB2C /* STKTransportKitHelper.swift */,
-			);
-			path = TransportKitUI;
-			sourceTree = "<group>";
-		};
 		3A6DF0BD202C8EB80084CB2C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				3A6DF0A3202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h */,
+				3A6DF0A7202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m */,
 				3A6DF0C8202C8EB80084CB2C /* SGStyleManager+SGCoreUI.h */,
 				3A6DF0C1202C8EB80084CB2C /* SGStyleManager+SGCoreUI.m */,
-				3A6DF0CF202C8EB80084CB2C /* UIButton+TitleAndImage.swift */,
+				3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */,
 				3A6DF0C9202C8EB80084CB2C /* UIColor+Variations.h */,
 				3A6DF0C0202C8EB80084CB2C /* UIColor+Variations.m */,
 				3A6DF0BE202C8EB80084CB2C /* UIFont+CustomFonts.h */,
 				3A6DF0C7202C8EB80084CB2C /* UIFont+CustomFonts.m */,
+				3A6DF0B1202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift */,
 				3A6DF0C2202C8EB80084CB2C /* UIImageView+Kingfisher.swift */,
 				3A6DF0CE202C8EB80084CB2C /* UISearchBar+Customizable.h */,
 				3A6DF0C6202C8EB80084CB2C /* UISearchBar+Customizable.m */,
-				3A6DF0CA202C8EB80084CB2C /* UITableView+SafeReload.h */,
-				3A6DF0BF202C8EB80084CB2C /* UITableView+SafeReload.m */,
 				3A6DF0C3202C8EB80084CB2C /* UIView+BearingRotation.h */,
 				3A6DF0CD202C8EB80084CB2C /* UIView+BearingRotation.m */,
 				3A6DF0C4202C8EB80084CB2C /* UIView+Helpers.h */,
 				3A6DF0CC202C8EB80084CB2C /* UIView+Helpers.m */,
-				3A6DF0C5202C8EB80084CB2C /* UIView+Hop.h */,
-				3A6DF0CB202C8EB80084CB2C /* UIView+Hop.m */,
 			);
 			path = Categories;
-			sourceTree = "<group>";
-		};
-		3A6DF0D0202C8EB80084CB2C /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				3A6DF0D1202C8EB80084CB2C /* SGButton.h */,
-				3A6DF0D3202C8EB80084CB2C /* SGButton.m */,
-				3A6DF0D4202C8EB80084CB2C /* SGLabel.h */,
-				3A6DF0D2202C8EB80084CB2C /* SGLabel.m */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
-		3A6DF0D5202C8EB80084CB2C /* map managers */ = {
-			isa = PBXGroup;
-			children = (
-				3A6DF0D9202C8EB80084CB2C /* RouteMapManager.h */,
-				3A6DF0D7202C8EB80084CB2C /* RouteMapManager.m */,
-				3A6DF0DA202C8EB80084CB2C /* TripMapManager.h */,
-				3A6DF0D6202C8EB80084CB2C /* TripMapManager.m */,
-				3A6DF0D8202C8EB80084CB2C /* TripMapManager.swift */,
-			);
-			path = "map managers";
 			sourceTree = "<group>";
 		};
 		3A6DF0DD202C8EB80084CB2C /* controller */ = {
 			isa = PBXGroup;
 			children = (
 				3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */,
-				3A6DF0DE202C8EB80084CB2C /* TKAlertViewController.swift */,
-				D39ECD84205A007A00E09474 /* TKSectionedAlertViewController.swift */,
-				D39ECD85205A007A00E09474 /* TKSectionedAlertViewController.xib */,
-				D39ECD88205A029500E09474 /* TKSectionedAlertViewModel.swift */,
+				3A6DF0DE202C8EB80084CB2C /* TKUIAlertViewController.swift */,
+				D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */,
+				D39ECD85205A007A00E09474 /* TKUISectionedAlertViewController.xib */,
 				3AF5F2B520EFF91F003AAEBA /* TKUIAttributionTableViewController.swift */,
 				3AF5F2B420EFF91F003AAEBA /* TKUIAttributionTableViewController.xib */,
 				3A67698520EE3A7A0044663F /* TKUIAutocompletionViewController.swift */,
@@ -2061,18 +1946,21 @@
 			isa = PBXGroup;
 			children = (
 				3A682F2F20F4A4A200E05195 /* alerts */,
+				3A682F7E20F4B71500E05195 /* map annotations */,
 				3A682F2D20F4A42200E05195 /* results */,
 				3A682F2E20F4A42E00E05195 /* trip overview */,
-				3A6DF0E5202C8EB80084CB2C /* CircleAnnotationView.h */,
-				3A6DF0EF202C8EB80084CB2C /* CircleAnnotationView.m */,
-				3A6DF0F4202C8EB80084CB2C /* SGPulsingAnnotationView.h */,
-				3A6DF0EA202C8EB80084CB2C /* SGPulsingAnnotationView.m */,
-				3A6DF0E6202C8EB80084CB2C /* TKDepartureView.swift */,
-				3A6DF0F0202C8EB80084CB2C /* TKDepartureView.xib */,
 				3A67698C20EE61FF0044663F /* TKUIAutocompletionResultCell.swift */,
-				3A6DF0EE202C8EB80084CB2C /* TKVehicleAnnotationView.swift */,
-				3A6DF0E9202C8EB80084CB2C /* VehicleView.h */,
-				3A6DF0F2202C8EB80084CB2C /* VehicleView.m */,
+				3A6DF0E6202C8EB80084CB2C /* TKUIDepartureView.swift */,
+				3A6DF0F0202C8EB80084CB2C /* TKUIDepartureView.xib */,
+				3A6DF0A9202C8EB80084CB2C /* TKUIMapButtonView.swift */,
+				3A6DF0B4202C8EB80084CB2C /* TKUIPolylineRenderer.h */,
+				3A6DF0BA202C8EB80084CB2C /* TKUIPolylineRenderer.m */,
+				3A6DF0D1202C8EB80084CB2C /* TKUIStyledButton.h */,
+				3A6DF0D3202C8EB80084CB2C /* TKUIStyledButton.m */,
+				3A6DF0D4202C8EB80084CB2C /* TKUIStyledLabel.h */,
+				3A6DF0D2202C8EB80084CB2C /* TKUIStyledLabel.m */,
+				3A6DF0B0202C8EB80084CB2C /* TKUITripSegmentsView.h */,
+				3A6DF0B8202C8EB80084CB2C /* TKUITripSegmentsView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -2080,11 +1968,10 @@
 		3A6DF0F5202C8EB80084CB2C /* helper */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF0F7202C8EB80084CB2C /* MapManagerHelper.swift */,
+				3A6DF0BD202C8EB80084CB2C /* Categories */,
 				3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */,
-				3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */,
-				3A6DF0F6202C8EB80084CB2C /* TKAnnotationViewBuilder.swift */,
 				3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */,
+				3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -2127,6 +2014,7 @@
 			children = (
 				3A6DF1FC202C9AA00084CB2C /* AccountKit */,
 				3A6DF192202C9AA00084CB2C /* BookingKit */,
+				3A682F3620F4A68A00E05195 /* Helpers */,
 				3A6DF1F8202C9AA00084CB2C /* SSO */,
 				3A6DF190202C9AA00084CB2C /* TKBookingCoordinator.swift */,
 				3A6DF1F7202C9AA00084CB2C /* TKBookingFormType.swift */,
@@ -2643,12 +2531,11 @@
 			children = (
 				3A6DF18E202C9AA00084CB2C /* Bookings */,
 				3A6DF175202C98AF0084CB2C /* InterApp */,
-				3AB6C6451D1CD08E0089F687 /* Share */,
 			);
 			path = AddOns;
 			sourceTree = "<group>";
 		};
-		3AB6C6451D1CD08E0089F687 /* Share */ = {
+		3AB6C6451D1CD08E0089F687 /* sharing */ = {
 			isa = PBXGroup;
 			children = (
 				3AB6C6461D1CD08E0089F687 /* Categories */,
@@ -2656,7 +2543,7 @@
 				3ABA055C1F604551009D0FE9 /* TKShareHelper+Parsing.swift */,
 				3AA03D8A1F0B79D400C6B337 /* TKShareURLProvider.swift */,
 			);
-			path = Share;
+			path = sharing;
 			sourceTree = "<group>";
 		};
 		3AB6C6461D1CD08E0089F687 /* Categories */ = {
@@ -2678,6 +2565,7 @@
 				3AB6C6561D1CD08E0089F687 /* helpers */,
 				3AB6C6621D1CD08E0089F687 /* model */,
 				3AB6C68A1D1CD08E0089F687 /* server */,
+				3AB6C6451D1CD08E0089F687 /* sharing */,
 				3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */,
 				3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */,
 				3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */,
@@ -2860,6 +2748,7 @@
 			children = (
 				3A67698320EE3A6E0044663F /* TKUIAutocompletionViewModel.swift */,
 				3AFD394220D9333500FDC7D0 /* TKUIResultsViewModel.swift */,
+				D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */,
 				3AFD393C20D9333500FDC7D0 /* TKUITripOverviewViewModel.swift */,
 				3A26E1AC20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift */,
 			);
@@ -3178,38 +3067,28 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF12E202C8EB80084CB2C /* SGButton.h in Headers */,
-				3A6DF128202C8EB80084CB2C /* UITableView+SafeReload.h in Headers */,
-				3A6DF100202C8EB80084CB2C /* SGTableViewCell.h in Headers */,
-				3A6DF11A202C8EB80084CB2C /* SGSemaphoreView.h in Headers */,
+				3A6DF12E202C8EB80084CB2C /* TKUIStyledButton.h in Headers */,
+				3A6DF11A202C8EB80084CB2C /* TKUISemaphoreView.h in Headers */,
 				3A6DF088202C8DA30084CB2C /* TripKitUI.h in Headers */,
 				3A6DF11C202C8EB80084CB2C /* UIFont+CustomFonts.h in Headers */,
-				3A6DF136202C8EB80084CB2C /* TripMapManager.h in Headers */,
 				3AFD397120D93D9800FDC7D0 /* TKUITimePickerSheet.h in Headers */,
-				3A6DF131202C8EB80084CB2C /* SGLabel.h in Headers */,
-				3A6DF0F8202C8EB80084CB2C /* SGTableCell.h in Headers */,
-				3A6DF104202C8EB80084CB2C /* SGMapHelper.h in Headers */,
+				3A6DF131202C8EB80084CB2C /* TKUIStyledLabel.h in Headers */,
 				3A6DF138202C8EB80084CB2C /* TripKitUIUmbrella.h in Headers */,
-				3A6DF14E202C8EB80084CB2C /* SGPulsingAnnotationView.h in Headers */,
+				3A6DF14E202C8EB80084CB2C /* TKUIPulsingAnnotationView.h in Headers */,
 				3A6DF121202C8EB80084CB2C /* UIView+BearingRotation.h in Headers */,
-				3A6DF118202C8EB80084CB2C /* SGTripSummaryCell.h in Headers */,
-				3A6DF101202C8EB80084CB2C /* SGMapButtonView.h in Headers */,
-				3A6DF0FA202C8EB80084CB2C /* SGCountdownCell.h in Headers */,
-				3A6DF102202C8EB80084CB2C /* ASMapManager.h in Headers */,
 				3A6DF12C202C8EB80084CB2C /* UISearchBar+Customizable.h in Headers */,
-				3A6DF135202C8EB80084CB2C /* RouteMapManager.h in Headers */,
 				3A6DF103202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h in Headers */,
-				3A6DF116202C8EB80084CB2C /* ASImageAnnotationView.h in Headers */,
-				3A6DF123202C8EB80084CB2C /* UIView+Hop.h in Headers */,
+				3A6DF116202C8EB80084CB2C /* TKUIImageAnnotationView.h in Headers */,
 				3AFD397220D93D9800FDC7D0 /* TKUISheet.h in Headers */,
 				3AFD394F20D9333500FDC7D0 /* TKUISheetViewController.h in Headers */,
 				3A6DF122202C8EB80084CB2C /* UIView+Helpers.h in Headers */,
-				3A6DF143202C8EB80084CB2C /* VehicleView.h in Headers */,
+				3A6DF143202C8EB80084CB2C /* TKUIVehicleView.h in Headers */,
 				3A6DF127202C8EB80084CB2C /* UIColor+Variations.h in Headers */,
-				3A6DF10F202C8EB80084CB2C /* SGTripSegmentsView.h in Headers */,
-				3A6DF113202C8EB80084CB2C /* SGPolylineRenderer.h in Headers */,
+				3A682F7C20F4B3E200E05195 /* ASMapManager.h in Headers */,
+				3A6DF10F202C8EB80084CB2C /* TKUITripSegmentsView.h in Headers */,
+				3A6DF113202C8EB80084CB2C /* TKUIPolylineRenderer.h in Headers */,
 				3A6DF126202C8EB80084CB2C /* SGStyleManager+SGCoreUI.h in Headers */,
-				3A6DF13F202C8EB80084CB2C /* CircleAnnotationView.h in Headers */,
+				3A6DF13F202C8EB80084CB2C /* TKUICircleAnnotationView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3272,6 +3151,7 @@
 				3A6DF27C202C9AA00084CB2C /* BPKTableHeader.h in Headers */,
 				3A6DF28B202C9AA00084CB2C /* BPKActionOverlay.h in Headers */,
 				3A6DF281202C9AA00084CB2C /* BPKMessageCell.h in Headers */,
+				3A682F3920F4A68A00E05195 /* SGTableCell.h in Headers */,
 				3A6DF291202C9AA00084CB2C /* BPKTextFieldBlock.h in Headers */,
 				3A6DF279202C9AA00084CB2C /* BPKTextCell.h in Headers */,
 				3A6DF2DB202C9AA00084CB2C /* UIViewController+modalController.h in Headers */,
@@ -3582,26 +3462,20 @@
 				3AFD397720D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib in Resources */,
 				3AFD397B20D93DD600FDC7D0 /* TKUIResultsSectionFooterView.xib in Resources */,
 				3A6E7D4120EFBD4900013253 /* TKUISegmentMovingCell.xib in Resources */,
-				D39ECD87205A007A00E09474 /* TKSectionedAlertViewController.xib in Resources */,
+				D39ECD87205A007A00E09474 /* TKUISectionedAlertViewController.xib in Resources */,
 				3A6ABE6E204050BC00645B93 /* InfoPlist.strings in Resources */,
-				3A6DF13C202C8EB80084CB2C /* TKAlertInfoView.xib in Resources */,
+				3A6DF13C202C8EB80084CB2C /* TKUIAlertInfoView.xib in Resources */,
 				3AF5F2B620EFF91F003AAEBA /* TKUIAttributionTableViewController.xib in Resources */,
-				D39B7BB520622FD100988D8A /* TKAlertCell.xib in Resources */,
+				D39B7BB520622FD100988D8A /* TKUIAlertCell.xib in Resources */,
 				3AF5F2B120EFF7BE003AAEBA /* TKUIAttributionCell.xib in Resources */,
-				3A6DF14A202C8EB80084CB2C /* TKDepartureView.xib in Resources */,
-				3A6DF11B202C8EB80084CB2C /* SGTripSummaryMiniCell.xib in Resources */,
+				3A6DF14A202C8EB80084CB2C /* TKUIDepartureView.xib in Resources */,
 				3A6DF137202C8EB80084CB2C /* TripKitUI.xcassets in Resources */,
-				D3211337206BBB0600E5D929 /* TKLoadingAlertView.xib in Resources */,
-				3A6DF0FC202C8EB80084CB2C /* SGTableViewCell.xib in Resources */,
-				3A6DF114202C8EB80084CB2C /* SGTripSummaryCell.xib in Resources */,
-				3A6DF0FD202C8EB80084CB2C /* SGCountdownCell.xib in Resources */,
-				3A6DF10C202C8EB80084CB2C /* SGTripSummaryNanoCell.xib in Resources */,
-				3A6DF13B202C8EB80084CB2C /* TKEmptyAlertView.xib in Resources */,
+				D3211337206BBB0600E5D929 /* TKUILoadingAlertView.xib in Resources */,
+				3A6DF13B202C8EB80084CB2C /* TKUIEmptyAlertView.xib in Resources */,
 				3A682F1F20F3F8A900E05195 /* TKUIRoutingSupportView.xib in Resources */,
-				D32CA5AF20E34409009C9449 /* TKGroupedAlertCell.xib in Resources */,
+				D32CA5AF20E34409009C9449 /* TKUIGroupedAlertCell.xib in Resources */,
 				3AF5F2BF20F3A829003AAEBA /* TKUITripActionView.xib in Resources */,
-				D3F9CEC52064BFEF000BDB01 /* TKSectionedAlertTableHeader.xib in Resources */,
-				3A6DF115202C8EB80084CB2C /* SGTripSummaryEdgeToEdgeCell.xib in Resources */,
+				D3F9CEC52064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib in Resources */,
 				3A8FAB6E20D3E28B005D4C73 /* TKUITripCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3923,94 +3797,79 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF12D202C8EB80084CB2C /* UIButton+TitleAndImage.swift in Sources */,
-				3A6DF14F202C8EB80084CB2C /* TKAnnotationViewBuilder.swift in Sources */,
+				3A6DF14F202C8EB80084CB2C /* TKUIAnnotationViewBuilder.swift in Sources */,
 				3A3658812062892100D8645C /* TKUITrainOccupancyView.swift in Sources */,
 				3AF5F2B920F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift in Sources */,
-				3A6DF149202C8EB80084CB2C /* CircleAnnotationView.m in Sources */,
-				3A6DF130202C8EB80084CB2C /* SGButton.m in Sources */,
-				3A6DF111202C8EB80084CB2C /* SGTripSummaryCell.swift in Sources */,
-				3A6DF117202C8EB80084CB2C /* SGTripSegmentsView.m in Sources */,
+				3A6DF149202C8EB80084CB2C /* TKUICircleAnnotationView.m in Sources */,
+				3A6DF130202C8EB80084CB2C /* TKUIStyledButton.m in Sources */,
+				3A6DF117202C8EB80084CB2C /* TKUITripSegmentsView.m in Sources */,
 				3A682F2020F3F8A900E05195 /* TKUIRoutingSupportView.swift in Sources */,
-				3A6DF10D202C8EB80084CB2C /* SGCountdownCell+STKVehicular.swift in Sources */,
 				3A67698420EE3A6F0044663F /* TKUIAutocompletionViewModel.swift in Sources */,
 				3AFD394A20D9333500FDC7D0 /* TKUIResultsCard.swift in Sources */,
 				3AFD397A20D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift in Sources */,
 				3AFD394620D9333500FDC7D0 /* TKUIRoutesViewController.swift in Sources */,
 				3A682F2820F49B8200E05195 /* TKUIResultsCard+Configuration.swift in Sources */,
-				3A6DF110202C8EB80084CB2C /* STKTransportKitHelper.swift in Sources */,
+				3A6DF110202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift in Sources */,
 				3A682F2420F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift in Sources */,
-				3A6DF139202C8EB80084CB2C /* TKAlertViewController.swift in Sources */,
-				3A6DF108202C8EB80084CB2C /* SGMapHelper.m in Sources */,
-				3A6DF140202C8EB80084CB2C /* TKDepartureView.swift in Sources */,
+				3A6DF139202C8EB80084CB2C /* TKUIAlertViewController.swift in Sources */,
+				3A6DF140202C8EB80084CB2C /* TKUIDepartureView.swift in Sources */,
 				3AFD394820D9333500FDC7D0 /* TKUITripMapManager.swift in Sources */,
-				3A6DF129202C8EB80084CB2C /* UIView+Hop.m in Sources */,
+				3A682F7D20F4B3E200E05195 /* ASMapManager.m in Sources */,
 				3A26E1B420EFAFBD00FE4DDD /* TKUISegmentStationaryCell.swift in Sources */,
 				3AF5F2BD20F3A818003AAEBA /* TKUITripActionsView.swift in Sources */,
-				3A6DF11D202C8EB80084CB2C /* UITableView+SafeReload.m in Sources */,
-				3A6DF134202C8EB80084CB2C /* TripMapManager.swift in Sources */,
 				3AEB47EC20DCE48500F9DF83 /* RxHelpers.swift in Sources */,
-				3A6DF10A202C8EB80084CB2C /* ASImageAnnotationView.m in Sources */,
-				3A6DF148202C8EB80084CB2C /* TKVehicleAnnotationView.swift in Sources */,
+				3A6DF10A202C8EB80084CB2C /* TKUIImageAnnotationView.m in Sources */,
+				3A6DF148202C8EB80084CB2C /* TKUIVehicleAnnotationView.swift in Sources */,
 				3AFD397320D93D9800FDC7D0 /* TKUISheet.m in Sources */,
 				3A6DF12A202C8EB80084CB2C /* UIView+Helpers.m in Sources */,
-				3A6DF112202C8EB80084CB2C /* SGSemaphoreView.m in Sources */,
+				3A6DF112202C8EB80084CB2C /* TKUISemaphoreView.m in Sources */,
 				3AFD397020D93D9800FDC7D0 /* TKUITimePickerSheet.m in Sources */,
 				3AF5F2B720EFF91F003AAEBA /* TKUIAttributionTableViewController.swift in Sources */,
 				3AFD397620D93DC200FDC7D0 /* TKUIResultsAccessoryView.swift in Sources */,
 				3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */,
 				3A6DF120202C8EB80084CB2C /* UIImageView+Kingfisher.swift in Sources */,
-				3A6DF106202C8EB80084CB2C /* ASMapManager.m in Sources */,
 				3A6DF13E202C8EB80084CB2C /* TKUIPathFriendlinessView.swift in Sources */,
 				3A26E1AD20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift in Sources */,
-				D39B7BB420622FD100988D8A /* TKAlertCell.swift in Sources */,
-				3A6DF10E202C8EB80084CB2C /* SGTripSummaryCell.m in Sources */,
-				3A6DF0FE202C8EB80084CB2C /* SGTableCell.m in Sources */,
+				D39B7BB420622FD100988D8A /* TKUIAlertCell.swift in Sources */,
 				3AF5F2B320EFF7BE003AAEBA /* TKUIAttributionView.swift in Sources */,
 				3AFD394C20D9333500FDC7D0 /* TKUIMapManager.swift in Sources */,
-				3A6DF144202C8EB80084CB2C /* SGPulsingAnnotationView.m in Sources */,
+				3A6DF144202C8EB80084CB2C /* TKUIPulsingAnnotationView.m in Sources */,
 				3A8FAB6D20D3E28B005D4C73 /* TKUITripCell.swift in Sources */,
-				3A6DF150202C8EB80084CB2C /* MapManagerHelper.swift in Sources */,
-				3A6DF147202C8EB80084CB2C /* TKEmptyAlertView.swift in Sources */,
+				3A6DF150202C8EB80084CB2C /* TKUIMapManagerHelper.swift in Sources */,
+				3A6DF147202C8EB80084CB2C /* TKUIEmptyAlertView.swift in Sources */,
 				3AF5F2C120F3A9E2003AAEBA /* TKUITripActionView.swift in Sources */,
-				3A6DF12F202C8EB80084CB2C /* SGLabel.m in Sources */,
+				3A6DF12F202C8EB80084CB2C /* TKUIStyledLabel.m in Sources */,
 				3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */,
 				3AFD394D20D9333500FDC7D0 /* TKUIResultsViewModel.swift in Sources */,
 				3A6DF11E202C8EB80084CB2C /* UIColor+Variations.m in Sources */,
 				3A67698D20EE61FF0044663F /* TKUIAutocompletionResultCell.swift in Sources */,
-				3A6DF0F9202C8EB80084CB2C /* SGTableViewCell.m in Sources */,
 				3A8FAB7020D3E512005D4C73 /* TKUITripCell+Formatter.swift in Sources */,
 				3AFD394720D9333500FDC7D0 /* TKUITripOverviewViewModel.swift in Sources */,
 				3A8FAB7220D3F433005D4C73 /* TKUITripCell+Rx.swift in Sources */,
-				3A6DF133202C8EB80084CB2C /* RouteMapManager.m in Sources */,
 				3A682F2220F3F8ED00E05195 /* TKUIResultsCard+Errors.swift in Sources */,
-				3A6DF14D202C8EB80084CB2C /* TKAlertInfoView.swift in Sources */,
-				3A6DF109202C8EB80084CB2C /* TKMapButtonView.swift in Sources */,
+				3A6DF14D202C8EB80084CB2C /* TKUIAlertInfoView.swift in Sources */,
+				3A6DF109202C8EB80084CB2C /* TKUIMapButtonView.swift in Sources */,
 				3A6E7D4020EFBD4900013253 /* TKUISegmentMovingCell.swift in Sources */,
-				D39ECD86205A007A00E09474 /* TKSectionedAlertViewController.swift in Sources */,
-				D39ECD89205A029500E09474 /* TKSectionedAlertViewModel.swift in Sources */,
+				D39ECD86205A007A00E09474 /* TKUISectionedAlertViewController.swift in Sources */,
+				D39ECD89205A029500E09474 /* TKUISectionedAlertViewModel.swift in Sources */,
 				3AA923F620DA7CDA00EBDDC6 /* TGCardView+Rx.swift in Sources */,
 				3A6DF11F202C8EB80084CB2C /* SGStyleManager+SGCoreUI.m in Sources */,
-				3A6DF132202C8EB80084CB2C /* TripMapManager.m in Sources */,
 				3AF5F2B220EFF7BE003AAEBA /* TKUIAttributionCell.swift in Sources */,
 				3A879AE720CFD93700107D58 /* Alert+TKAlert.swift in Sources */,
-				3A6DF119202C8EB80084CB2C /* SGPolylineRenderer.m in Sources */,
-				3A6DF10B202C8EB80084CB2C /* SGSemaphoreView.swift in Sources */,
+				3A6DF119202C8EB80084CB2C /* TKUIPolylineRenderer.m in Sources */,
+				3A6DF10B202C8EB80084CB2C /* TKUISemaphoreView.swift in Sources */,
 				3A6DF107202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m in Sources */,
 				3AFD394E20D9333500FDC7D0 /* TKUITripOverviewCard.swift in Sources */,
-				D3211335206BBAF300E5D929 /* TKLoadingAlertView.swift in Sources */,
-				3A6DF0FB202C8EB80084CB2C /* SGCountdownCell.swift in Sources */,
+				D3211335206BBAF300E5D929 /* TKUILoadingAlertView.swift in Sources */,
 				3AFD394520D9333500FDC7D0 /* TKUISheetViewController.m in Sources */,
 				3A6DF142202C8EB80084CB2C /* TKUIOccupancyView.swift in Sources */,
 				3A6DF125202C8EB80084CB2C /* UIFont+CustomFonts.m in Sources */,
-				3A6DF105202C8EB80084CB2C /* SGMapButtonView.m in Sources */,
-				3A6DF14C202C8EB80084CB2C /* VehicleView.m in Sources */,
-				D39B7BAF20622C2D00988D8A /* TKGroupedAlertCell.swift in Sources */,
+				3A6DF14C202C8EB80084CB2C /* TKUIVehicleView.m in Sources */,
+				D39B7BAF20622C2D00988D8A /* TKUIGroupedAlertCell.swift in Sources */,
 				3AFD398220D9510F00FDC7D0 /* TKUICustomization.swift in Sources */,
 				3AFD394920D9333500FDC7D0 /* TKUIResultsMapManager.swift in Sources */,
-				3A6DF0FF202C8EB80084CB2C /* SGCountdownCell.m in Sources */,
 				3A67698620EE3A7A0044663F /* TKUIAutocompletionViewController.swift in Sources */,
-				D3F9CEC32064BFB5000BDB01 /* TKSectionedAlertTableHeader.swift in Sources */,
+				D3F9CEC32064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift in Sources */,
 				3A6DF124202C8EB80084CB2C /* UISearchBar+Customizable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4034,6 +3893,7 @@
 				3A6DF29E202C9AA00084CB2C /* TKBookingFormType.swift in Sources */,
 				3A6DF2B4202C9AA00084CB2C /* AMKCommunicator.m in Sources */,
 				3A6DF29F202C9AA00084CB2C /* TKUberSSO.swift in Sources */,
+				3A682F3A20F4A68A00E05195 /* SGTableCell.m in Sources */,
 				3A6DF28E202C9AA00084CB2C /* BPKHelpers.m in Sources */,
 				3A6DF28A202C9AA00084CB2C /* BPKTextCell.m in Sources */,
 				3A6DF2C8202C9AA00084CB2C /* AKTextFieldCell.m in Sources */,

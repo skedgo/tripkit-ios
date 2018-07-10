@@ -8,20 +8,15 @@
 
 @import UIKit;
 
-#ifndef TK_NO_MODULE
-@import TripKitUI;
-#else
-#import "SGTableCell.h"
-#endif
-
 #import "AKItemCell.h"
+#import "SGTableCell.h"
 
-@class SGLabel;
+@class TKUIStyledLabel;
 
 @interface AKLabelCell : SGTableCell <AKItemCell>
 
-@property (nonatomic, weak) IBOutlet SGLabel *primaryLabel;
-@property (nonatomic, weak) IBOutlet SGLabel *secondaryLabel;
+@property (nonatomic, weak) IBOutlet TKUIStyledLabel *primaryLabel;
+@property (nonatomic, weak) IBOutlet TKUIStyledLabel *secondaryLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *primaryToSecondarySpacing;
 
 + (AKLabelCell *)sharedInstance;

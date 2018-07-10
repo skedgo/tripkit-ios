@@ -209,7 +209,7 @@ extension TKUIResultsMapManager {
   override func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     let renderer = super.mapView(mapView, rendererFor: overlay)
     
-    if let routePolyline = overlay as? STKRoutePolyline, let polylineRenderer = renderer as? SGPolylineRenderer {
+    if let routePolyline = overlay as? STKRoutePolyline, let polylineRenderer = renderer as? TKUIPolylineRenderer {
       let isSelected = selectedRoute?.polylines.contains(routePolyline) ?? false
       polylineRenderer.isSelected = isSelected
     }
@@ -219,7 +219,7 @@ extension TKUIResultsMapManager {
   
 }
 
-extension SGPolylineRenderer {
+extension TKUIPolylineRenderer {
   
   var isSelected: Bool {
     get {

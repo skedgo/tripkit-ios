@@ -9,14 +9,14 @@
 @import UIKit;
 
 #ifdef TK_NO_MODULE
-#import "SGButton.h"
+#import "TKUIStyledButton.h"
 #else
 @import TripKitUI;
 #endif
 
 @interface BPKActionOverlay : UIView
 
-@property (weak, nonatomic) IBOutlet SGButton *button;
+@property (weak, nonatomic) IBOutlet TKUIStyledButton *button;
 
 + (void)showWithTitle:(NSString *)title inView:(UIView *)view onAction:(void(^)(void))actionBlock completion:(void(^)(BOOL))completion;
 

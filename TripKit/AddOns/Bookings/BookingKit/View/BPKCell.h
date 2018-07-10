@@ -8,13 +8,8 @@
 
 @import UIKit;
 
-#ifdef TK_NO_MODULE
-#import "SGTableCell.h"
-#else
-@import TripKitUI;
-#endif
-
 #import "BPKConstants.h"
+#import "SGTableCell.h"
 
 #import "NSString+BookingKit.h"
 

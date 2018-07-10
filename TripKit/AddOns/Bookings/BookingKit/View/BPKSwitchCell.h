@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #ifdef TK_NO_MODULE
-#import "SGLabel.h"
+#import "TKUIStyledLabel.h"
 #else
 @import TripKit;
 @import TripKitUI;
@@ -20,7 +20,7 @@
 
 @interface BPKSwitchCell : BPKCell <BPKFormCell>
 
-@property (weak, nonatomic) IBOutlet SGLabel *prompt;
+@property (weak, nonatomic) IBOutlet TKUIStyledLabel *prompt;
 @property (weak, nonatomic) IBOutlet UISwitch *switchControl;
 
 - (void)configureForPrompt:(NSString *)prompt switchValue:(BOOL)onOrOff;
