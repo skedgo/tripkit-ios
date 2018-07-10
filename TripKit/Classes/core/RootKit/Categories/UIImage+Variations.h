@@ -6,19 +6,19 @@
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-#import "SGKCrossPlatform.h"
+#import "TKCrossPlatform.h"
 
 #if TARGET_OS_IPHONE
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SGKImage (Variations)
+@interface TKImage (Variations)
 
-- (SGKImage *)imageWithTintColor:(SGKColor *)tintColor;
+- (TKImage *)imageWithTintColor:(TKColor *)tintColor;
 
-- (SGKImage *)imageOnBackgroundImage:(SGKImage *)background;
+- (TKImage *)imageOnBackgroundImage:(TKImage *)background;
 
-- (SGKImage *)monochromeImage;
+- (TKImage *)monochromeImage;
 
 @end
 

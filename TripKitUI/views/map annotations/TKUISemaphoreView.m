@@ -18,7 +18,7 @@
 
 #import "TKUISemaphoreView.h"
 
-#import "SGStyleManager+SGCoreUI.h"
+#import "TKStyleManager+TripKitUI.h"
 #import "UIView+BearingRotation.h"
 
 @interface TKUISemaphoreView ()
@@ -106,7 +106,7 @@
 	// observe the new
 	if (didChange &&
       [annotation isKindOfClass:[NSObject class]] &&
-			[annotation conformsToProtocol:@protocol(STKDisplayableTimePoint)])
+			[annotation conformsToProtocol:@protocol(TKDisplayableTimePoint)])
 	{
 		NSObject *object = (NSObject *)annotation;
 		[object addObserver:self
@@ -140,7 +140,7 @@
 	self.frame = mainFrame;
 }
 
-- (void)updateForAnnotation:(NSObject <STKDisplayablePoint> *)annotation
+- (void)updateForAnnotation:(NSObject <TKDisplayablePoint> *)annotation
 {
   [self updateForAnnotation:annotation
                 withHeading:0];
@@ -159,14 +159,14 @@
   BOOL terminal = NO;
   BOOL canFlip = NO;
   
-  if ([annotation conformsToProtocol:@protocol(STKDisplayablePoint)]) {
-    id<STKDisplayablePoint> displayable = (id<STKDisplayablePoint>)annotation;
+  if ([annotation conformsToProtocol:@protocol(TKDisplayablePoint)]) {
+    id<TKDisplayablePoint> displayable = (id<TKDisplayablePoint>)annotation;
     image = [displayable pointImage];
     imageURL = [displayable pointImageURL];
     asTemplate = [displayable pointImageIsTemplate];
 
-    if ([annotation conformsToProtocol:@protocol(STKDisplayableTimePoint)]) {
-      id<STKDisplayableTimePoint> timePoint = (id<STKDisplayableTimePoint>)annotation;
+    if ([annotation conformsToProtocol:@protocol(TKDisplayableTimePoint)]) {
+      id<TKDisplayableTimePoint> timePoint = (id<TKDisplayableTimePoint>)annotation;
       bearing = [timePoint bearing];
       terminal = [timePoint isTerminal];
       canFlip = imageURL == nil && [timePoint canFlipImage];
@@ -237,8 +237,8 @@
 	[self.headImageView updateForMagneticHeading:(CGFloat)heading andBearing:(CGFloat)bearing];
 	
 	// flip the image
-	if ([self.annotation conformsToProtocol:@protocol(STKDisplayableTimePoint)]) {
-    id<STKDisplayableTimePoint> timePoint = (id <STKDisplayableTimePoint>) self.annotation;
+	if ([self.annotation conformsToProtocol:@protocol(TKDisplayableTimePoint)]) {
+    id<TKDisplayableTimePoint> timePoint = (id <TKDisplayableTimePoint>) self.annotation;
     NSURL *imageUrl = [timePoint respondsToSelector:@selector(pointImageURL)] ? [timePoint pointImageURL] : nil;
 		if ([timePoint canFlipImage] && imageUrl == nil) {
 			CLLocationDirection totalBearing = bearing - heading;
@@ -305,7 +305,7 @@
   } else {
     UILabel *timeLabel = [[UILabel alloc] init];
     timeLabel.backgroundColor = [UIColor clearColor];
-    timeLabel.font = [SGStyleManager systemFontWithSize:14];
+    timeLabel.font = [TKStyleManager systemFontWithSize:14];
     timeLabel.textColor = [UIColor whiteColor];
     
 #define TIME_LABEL_VERTICAL_PADDING 4
@@ -318,12 +318,12 @@
     // What's the text and how big is it?
     NSString *timeString;
     if (showFrequency) {
-      timeString = [SGKObjcDateHelper durationStringForMinutes:frequencyInt];
+      timeString = [TKObjcDateHelper durationStringForMinutes:frequencyInt];
     } else {
 			if (nil == timezone) {
 				timezone = [NSTimeZone defaultTimeZone];
 			}
-			timeString = [SGStyleManager timeString:time forTimeZone:timezone];
+			timeString = [TKStyleManager timeString:time forTimeZone:timezone];
     }
     
     timeLabel.text = timeString;

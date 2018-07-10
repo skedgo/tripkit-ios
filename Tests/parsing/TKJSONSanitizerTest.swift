@@ -39,7 +39,7 @@ class TKJSONSanitizerTest: XCTestCase {
     ]
     
     guard let sanitized = TKJSONSanitizer.sanitize(nonJson) else { XCTFail(); return }
-    let decoded = try? JSONDecoder().decode(ModeInfo.self, withJSONObject: sanitized)
+    let decoded = try? JSONDecoder().decode(TKModeInfo.self, withJSONObject: sanitized)
     XCTAssertNotNil(decoded)
   }
     

@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #ifdef TK_NO_MODULE
-#import "SGKEnums.h"
-#import "SGKCrossPlatform.h"
+#import "TKEnums.h"
+#import "TKCrossPlatform.h"
 #else
 @import TripKit;
 #endif
@@ -46,7 +46,7 @@ typedef void (^AMKCompletionBlock)(NSError * _Nullable error);
 - (void)updatePhoneNumberWithId:(NSString*)phoneId phoneNumber:(NSString *)phone phoneCode:(NSString *)phoneCode type:(NSString*)type  completion:(AMKServerBlock)handler;
 - (void)deletePhoneNumberWithId:(NSString*)phoneId completion:(AMKServerBlock)handler;
 
-- (void)addImage:(SGKImage *)image completion:(AMKServerBlock)handler;
+- (void)addImage:(TKImage *)image completion:(AMKServerBlock)handler;
 - (void)deleteImageWithCompletion:(AMKServerBlock)handler;
 
 - (void)changePasswordFrom:(NSString *)from to:(NSString *)to completion:(AMKServerBlock)handler;

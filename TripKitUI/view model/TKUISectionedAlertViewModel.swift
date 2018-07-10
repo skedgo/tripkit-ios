@@ -24,7 +24,7 @@ class TKUISectionedAlertViewModel {
   private let disposeBag = DisposeBag()
   
   init(
-    region: SVKRegion,
+    region: TKRegion,
     searchText: Observable<String>
   ) {
     let allRouteAlerts = TKBuzzInfoProvider
@@ -116,9 +116,9 @@ extension API.Route: Hashable {
 
 struct ModeGroup {
   let title: String
-  let color: SGKColor?
+  let color: TKColor?
   
-  init(_ modeInfo: ModeInfo) {
+  init(_ modeInfo: TKModeInfo) {
     self.title = modeInfo.descriptor ?? modeInfo.alt
     self.color = modeInfo.color
   }

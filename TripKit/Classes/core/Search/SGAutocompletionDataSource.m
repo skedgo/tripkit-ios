@@ -12,7 +12,7 @@
 #import "TripKit/TripKit-Swift.h"
 
 #import "SGAutocompletionDataProvider.h"
-#import "SGAutocompletionResult.h"
+#import "TKAutocompletionResult.h"
 
 
 @interface SGAutocompletionDataSource ()
@@ -127,11 +127,11 @@
     case SGSearchSectionAutocompletion: {
       NSUInteger row = indexPath.row;
       if (row >= self.autocompletionResults.count) {
-        [SGKLog warn:@"SGAutocompletionDataSource" format:@"Unexpected index path in autocompletion results: %@", indexPath];
+        [TKLog warn:@"SGAutocompletionDataSource" format:@"Unexpected index path in autocompletion results: %@", indexPath];
         row = (NSUInteger) MAX(0, (NSInteger)self.autocompletionResults.count - 1);
       }
       
-      SGAutocompletionResult *result = [self.autocompletionResults objectAtIndex:row];
+      TKAutocompletionResult *result = [self.autocompletionResults objectAtIndex:row];
       [self configureCell:cell forResult:result];
       break;
     }
@@ -142,7 +142,7 @@
     }
   }
   
-  cell.backgroundColor = [SGKColor clearColor];
+  cell.backgroundColor = [TKColor clearColor];
 	return cell;
 }
 
@@ -150,30 +150,30 @@
 {
   if (stickyOption == SGSearchStickyCurrentLocation) {
     if (self.showTextForCurrentCity) {
-      cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Current City", @"Shared", [SGStyleManager bundle], "Current city");
+      cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Current City", @"Shared", [TKStyleManager bundle], "Current city");
     } else {
       cell.textLabel.text = Loc.CurrentLocation;
     }
-    cell.textLabel.textColor  = [SGStyleManager darkTextColor];
+    cell.textLabel.textColor  = [TKStyleManager darkTextColor];
 		cell.detailTextLabel.text = @"";
 		cell.imageView.image = [[self class] imageForSticky:stickyOption];
 		
 	} else if (stickyOption == SGSearchStickyDroppedPin) {
-    cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Drop new pin", @"Shared", [SGStyleManager bundle], "Drop new pin");
-    cell.textLabel.textColor  = [SGStyleManager darkTextColor];
+    cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Drop new pin", @"Shared", [TKStyleManager bundle], "Drop new pin");
+    cell.textLabel.textColor  = [TKStyleManager darkTextColor];
 		cell.detailTextLabel.text = @"";
 		cell.imageView.image = [[self class] imageForSticky:stickyOption];
   }
 }
 
-- (void)configureCell:(UITableViewCell *)cell forResult:(SGAutocompletionResult *)result
+- (void)configureCell:(UITableViewCell *)cell forResult:(TKAutocompletionResult *)result
 {
   cell.imageView.image      = result.image;
-  cell.imageView.tintColor  = [SGKColor colorWithWhite:216/255.f alpha:1]; // From SkedGo default icons
+  cell.imageView.tintColor  = [TKColor colorWithWhite:216/255.f alpha:1]; // From SkedGo default icons
   cell.textLabel.text       = result.title;
-  cell.textLabel.textColor  = [SGStyleManager darkTextColor];
+  cell.textLabel.textColor  = [TKStyleManager darkTextColor];
   cell.detailTextLabel.text = ! [result.subtitle isEqualToString:result.title] ? result.subtitle : nil;
-  cell.detailTextLabel.textColor  = [SGStyleManager lightTextColor];
+  cell.detailTextLabel.textColor  = [TKStyleManager lightTextColor];
   
   if (result.isInSupportedRegion) {
     cell.contentView.alpha = result.isInSupportedRegion.boolValue ? 1.0f : 0.33f;
@@ -182,7 +182,7 @@
   }
   
   if (self.showAccessoryButtons && result.accessoryButtonImage) {
-    cell.accessoryView = [SGStyleManager cellAccessoryButtonWithImage:result.accessoryButtonImage
+    cell.accessoryView = [TKStyleManager cellAccessoryButtonWithImage:result.accessoryButtonImage
                                                                target:self
                                                                action:@selector(accessoryButtonTapped:withEvent:)];
     }
@@ -190,7 +190,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell forExtraRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  cell.textLabel.textColor = [SGStyleManager lightTextColor];
+  cell.textLabel.textColor = [TKStyleManager lightTextColor];
   cell.detailTextLabel.text = @"";
   cell.imageView.image = nil;
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -198,7 +198,7 @@
   SGSearchExtraRow extraRow = [self extraRowAtIndexPath:indexPath];
   switch (extraRow) {
     case SGSearchExtraRowSearchForMore:
-      cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Press 'search' for more...", @"Shared", [SGStyleManager bundle], @"Location picker 'no autocompletion results' text. Needs to match text on keyboard.");
+      cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Press 'search' for more...", @"Shared", [TKStyleManager bundle], @"Location picker 'no autocompletion results' text. Needs to match text on keyboard.");
       break;
       
     case SGSearchExtraRowProvider: {
@@ -208,11 +208,11 @@
       if (index >= 0 && index < (NSInteger)actions.count) {
         cell.textLabel.text = actions[index];
       } else {
-        [SGKLog warn:@"SGAutocompletionDataSource" text:@"Bad row!"];
+        [TKLog warn:@"SGAutocompletionDataSource" text:@"Bad row!"];
         cell.textLabel.text = @"";
       }
 #else
-      [SGKLog warn:@"SGAutocompletionDataSource" text:@"Shouldn't happen on MacOS!"];
+      [TKLog warn:@"SGAutocompletionDataSource" text:@"Shouldn't happen on MacOS!"];
       cell.textLabel.text = @"";
 #endif
 
@@ -226,10 +226,10 @@
   SGSearchSection sectionType = [self typeOfSection:section];
   switch (sectionType) {
     case SGSearchSectionAutocompletion:
-      return [self showStickyOptions] ? NSLocalizedStringFromTableInBundle(@"Instant results", @"Shared", [SGStyleManager bundle], "Instant results proposal") : nil;
+      return [self showStickyOptions] ? NSLocalizedStringFromTableInBundle(@"Instant results", @"Shared", [TKStyleManager bundle], "Instant results proposal") : nil;
       
     case SGSearchSectionMore:
-      return NSLocalizedStringFromTableInBundle(@"More results", @"Shared", [SGStyleManager bundle], "More results proposal");
+      return NSLocalizedStringFromTableInBundle(@"More results", @"Shared", [TKStyleManager bundle], "More results proposal");
       
     case SGSearchSectionSticky:
       return nil;
@@ -319,17 +319,17 @@
   return SGSearchStickyDroppedPin;
 }
 
-+ (SGKImage *)imageForSticky:(SGSearchSticky)sticky
++ (TKImage *)imageForSticky:(SGSearchSticky)sticky
 {
 	switch (sticky) {
 		case SGSearchStickyCurrentLocation:
-			return [SGAutocompletionResult imageForType:SGAutocompletionSearchIconCurrentLocation];
+			return [TKAutocompletionResult imageForType:TKAutocompletionSearchIconCurrentLocation];
 			
 		case SGSearchStickyDroppedPin:
-			return [SGAutocompletionResult imageForType:SGAutocompletionSearchIconPin];
+			return [TKAutocompletionResult imageForType:TKAutocompletionSearchIconPin];
 			
 		case SGSearchStickyNextEvent:
-			return [SGAutocompletionResult imageForType:SGAutocompletionSearchIconCalendar];
+			return [TKAutocompletionResult imageForType:TKAutocompletionSearchIconCalendar];
 			
 		default:
 			return nil;

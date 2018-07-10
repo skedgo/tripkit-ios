@@ -47,7 +47,7 @@ public class TKUserProfileHelper: NSObject {
     let shared = UserDefaults.shared
     if let enabled = enabled {
       shared.set(enabled, forKey: DefaultsKey.sortedEnabled.rawValue)
-      if enabled.contains(SVKTransportModeIdentifierWheelchair) {
+      if enabled.contains(TKTransportModeIdentifierWheelchair) {
         showWheelchairInformation = true
       }
     }
@@ -56,7 +56,7 @@ public class TKUserProfileHelper: NSObject {
     }
     if let hidden = hidden {
       shared.set(Array(hidden), forKey: DefaultsKey.hidden.rawValue)
-      if hidden.contains(SVKTransportModeIdentifierWheelchair) {
+      if hidden.contains(TKTransportModeIdentifierWheelchair) {
         showWheelchairInformation = false
       }
     }
@@ -114,7 +114,7 @@ public class TKUserProfileHelper: NSObject {
     if let minimized = UserDefaults.shared.object(forKey: DefaultsKey.minimized.rawValue) as? [Identifier] {
       return Set(minimized)
     } else {
-      return [SVKTransportModeIdentifierMotorbike, SVKTransportModeIdentifierTaxi, SVKTransportModeIdentifierWalking]
+      return [TKTransportModeIdentifierMotorbike, TKTransportModeIdentifierTaxi, TKTransportModeIdentifierWalking]
     }
   }
   
@@ -122,7 +122,7 @@ public class TKUserProfileHelper: NSObject {
     if let hidden = UserDefaults.shared.object(forKey: DefaultsKey.hidden.rawValue) as? [Identifier] {
       return Set(hidden)
     } else {
-      return [SVKTransportModeIdentifierSchoolBuses]
+      return [TKTransportModeIdentifierSchoolBuses]
     }
   }
 

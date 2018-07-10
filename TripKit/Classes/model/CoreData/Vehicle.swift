@@ -33,7 +33,7 @@ extension Vehicle {
     return anyService?.number
   }
   
-  @objc public var serviceColor: SGKColor? {
+  @objc public var serviceColor: TKColor? {
     return averageOccupancy?.color
   }
   

@@ -18,8 +18,8 @@ class TKUIEmptyAlertView: UIView {
     super.awakeFromNib()
     
     imageView.tintColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
-    textLabel.font = SGStyleManager.systemFont(withSize: 17)
-    footerLabel.font = SGStyleManager.systemFont(withSize: 15)
+    textLabel.font = TKStyleManager.systemFont(withSize: 17)
+    footerLabel.font = TKStyleManager.systemFont(withSize: 15)
   }
   
   // MARK: - Creating view

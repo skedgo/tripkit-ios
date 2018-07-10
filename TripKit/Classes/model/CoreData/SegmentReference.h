@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @class Trip, SegmentTemplate, Service, Vehicle;
-@protocol STKVehicular;
+@protocol TKVehicular;
 
 @interface SegmentReference : NSManagedObject
 
@@ -49,8 +49,8 @@
 
 - (SegmentTemplate *)template;
 
-- (void)setVehicle:(id<STKVehicular>)vehicle;
-- (id<STKVehicular>)vehicleFromAllVehicles:(NSArray<id<STKVehicular>> *)allVehicles;
+- (void)setVehicle:(id<TKVehicular>)vehicle;
+- (id<TKVehicular>)vehicleFromAllVehicles:(NSArray<id<TKVehicular>> *)allVehicles;
 
 - (void)setPayload:(id)payload forKey:(NSString *)key;
 - (id)payloadForKey:(NSString *)key;

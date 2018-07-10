@@ -19,18 +19,18 @@
 - (TKSegment *)nextSegmentAtTime:(NSDate *)time
                      forLocation:(CLLocation *)location
 {
-  id<STKTripSegment> bestSegment = [TKNextSegmentScorer nextSegmentOfTrip:self
+  id<TKTripSegment> bestSegment = [TKNextSegmentScorer nextSegmentOfTrip:self
                                                                   forTime:time
                                                              withLocation:location];
   if (bestSegment) {
     ZAssert([bestSegment isKindOfClass:[TKSegment class]], @"Trips shouldn't only have TKSegment objects in them!");
     TKSegment *segment = (TKSegment *)bestSegment;
-    [SGKLog debug:@"NextSegmentScorer" block:^{
+    [TKLog debug:@"NextSegmentScorer" block:^{
       return [NSString stringWithFormat:@"Best: %@", segment.title];
     }];
     return segment;
   } else {
-    [SGKLog debug:@"NextSegmentScorer" block:^{
+    [TKLog debug:@"NextSegmentScorer" block:^{
       return [NSString stringWithFormat:@"Missing best segment for Trip: %@", [self debugString]];
     }];
     return nil;
@@ -54,7 +54,7 @@
 
 @implementation TKNextSegmentScorer
 
-+ (id<STKTripSegment>)nextSegmentOfTrip:(id<STKTrip>)trip
++ (id<TKTripSegment>)nextSegmentOfTrip:(id<TKTrip>)trip
                                 forTime:(NSDate *)time
                            withLocation:(CLLocation *)location
 {
@@ -62,10 +62,10 @@
     return nil;
   }
   
-  id<STKTripSegment> bestSegment = nil;
+  id<TKTripSegment> bestSegment = nil;
   NSUInteger bestScore = 0;
   
-  for (id<STKTripSegment> segment in [trip segmentsWithVisibility:STKTripSegmentVisibilityInDetails]) {
+  for (id<TKTripSegment> segment in [trip segmentsWithVisibility:TKTripSegmentVisibilityInDetails]) {
     NSUInteger score = [self scoreForSegment:segment
                                       atTime:time
                                  forLocation:location];
@@ -82,7 +82,7 @@
   }
 }
 
-+ (NSUInteger)scoreForSegment:(id<STKTripSegment>)segment
++ (NSUInteger)scoreForSegment:(id<TKTripSegment>)segment
                        atTime:(NSDate *)time
                   forLocation:(nullable CLLocation *)location
 {
@@ -92,7 +92,7 @@
                                              atTime:time
                                         forLocation:location];
     
-    [SGKLog debug:@"NextSegmentScorer" block:^{
+    [TKLog debug:@"NextSegmentScorer" block:^{
       return [NSString stringWithFormat:@"%@, S: %ld", tripKitSegment.title, (unsigned long)score];
     }];
     return score;
@@ -191,7 +191,7 @@
   }
 }
 
-+ (NSUInteger)scoreForBasicSegment:(id<STKTripSegment>)segment
++ (NSUInteger)scoreForBasicSegment:(id<TKTripSegment>)segment
                             atTime:(NSDate *)time
                        forLocation:(nullable CLLocation *)location
 {
@@ -262,7 +262,7 @@
       max = lowMaxAtEnd + (NSUInteger) (proportion * (maxMax - lowMaxAtEnd));
     }
     
-    for (id<STKDisplayableRoute> route in shapes) {
+    for (id<TKDisplayableRoute> route in shapes) {
       if (! [route routeIsTravelled]) {
         continue;
       }

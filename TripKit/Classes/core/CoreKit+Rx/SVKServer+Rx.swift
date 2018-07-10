@@ -1,5 +1,5 @@
 //
-//  SVKServer+Rx.swift
+//  TKServer+Rx.swift
 //  SGSkedGoKit
 //
 //  Created by Adrian Schoenig on 1/08/2016.
@@ -18,14 +18,14 @@ public enum HTTPMethod: String {
   case PUT = "PUT"
 }
 
-extension Reactive where Base: SVKServer {
-  public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Observable<SVKRegion> {
+extension Reactive where Base: TKServer {
+  public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Observable<TKRegion> {
     return requireRegions().map {
       TKRegionManager.shared.region(containing: coordinate, coordinate)
     }
   }
   
-  public func requireRegion(_ coordinateRegion: MKCoordinateRegion) -> Observable<SVKRegion> {
+  public func requireRegion(_ coordinateRegion: MKCoordinateRegion) -> Observable<TKRegion> {
     return requireRegions().map {
         TKRegionManager.shared.region(containing: coordinateRegion)
     }
@@ -62,7 +62,7 @@ extension Reactive where Base: SVKServer {
     path: String,
     parameters: [String: Any] = [:],
     headers: [String: String] = [:],
-    region: SVKRegion? = nil,
+    region: TKRegion? = nil,
     repeatHandler: ((Int, Data?) -> (TimeInterval?))? = nil
     ) -> Observable<(Int, [String: Any], Data?)>
   {
@@ -106,7 +106,7 @@ extension Reactive where Base: SVKServer {
     }
   }
   
-  private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: Any] = [:], headers: [String: String] = [:], region: SVKRegion? = nil, repeatHandler: @escaping (Int, [String: Any], Data?) -> (TimeInterval?), errorHandler: @escaping (Error) -> ()) {
+  private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: Any] = [:], headers: [String: String] = [:], region: TKRegion? = nil, repeatHandler: @escaping (Int, [String: Any], Data?) -> (TimeInterval?), errorHandler: @escaping (Error) -> ()) {
 
     self.base.hitSkedGo(
       withMethod: method.rawValue,

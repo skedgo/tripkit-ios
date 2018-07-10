@@ -12,7 +12,7 @@
 
 #endif
 
-@protocol STKTripSegmentDisplayable;
+@protocol TKTripSegmentDisplayable;
 
 @interface TKUITripSegmentsView : UIView
 
@@ -30,7 +30,7 @@
  will be used to tint the transport mode icons if `colorCodingTransitIcon` is
  set to NO.
  
- @default `SGStyleManager.darkTextColor`
+ @default `TKStyleManager.darkTextColor`
  */
 @property (nonatomic, strong, nonnull) UIColor *darkTextColor;
 
@@ -38,11 +38,11 @@
  This color is used on lighter texts. In addition, this is also the color which
  will be used to tint non-PT modes if `colorCodingTransitIcon` is set to YES.
  
- @default `SGStyleManager.lightTextColor`
+ @default `TKStyleManager.lightTextColor`
  */
 @property (nonatomic, strong, nonnull) UIColor *lightTextColor;
 
-- (void)configureForSegments:(nonnull NSArray<id<STKTripSegmentDisplayable>> *)segments
+- (void)configureForSegments:(nonnull NSArray<id<TKTripSegmentDisplayable>> *)segments
               allowSubtitles:(BOOL)allowSubtitles
               allowInfoIcons:(BOOL)allowInfoIcons;
 

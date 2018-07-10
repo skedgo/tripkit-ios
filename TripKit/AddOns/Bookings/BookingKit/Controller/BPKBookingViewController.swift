@@ -13,7 +13,7 @@ extension BPKBookingViewController {
   // MARK: - Error alert
   
   @objc public func handle(_ error: Error, defaultDismissHandler: ((UIAlertAction) -> Void)? = nil) {
-    guard let serverKitError = error as? SVKError else {
+    guard let serverKitError = error as? TKError else {
       BPKAlert.present(in: self, title: nil, message: error.localizedDescription)
       return
     }

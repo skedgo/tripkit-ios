@@ -41,7 +41,7 @@ public protocol TKURLSavable: class, TKURLShareable {
 
       let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
       
-      SVKServer.get(saveURL, paras: nil) { _, _, response, _, _ in
+      TKServer.get(saveURL, paras: nil) { _, _, response, _, _ in
         guard
           let dict = response as? [String: Any],
           let urlString = dict["url"] as? String,
@@ -84,7 +84,7 @@ public protocol TKURLSavable: class, TKURLShareable {
       }
 
       let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
-      let response = SVKServer.syncURL(saveURL, timeout: 10)
+      let response = TKServer.syncURL(saveURL, timeout: 10)
       
       if let dict = response as? [String: Any],
         let urlString = dict["url"] as? String,
@@ -112,7 +112,7 @@ public protocol TKURLSavable: class, TKURLShareable {
     // MARK: - UIActivityItemProvider
     
     public override var item: Any {
-  //    if ([[self activityType] rangeOfString:@"kSGAction"].location != NSNotFound)
+  //    if ([[self activityType] rangeOfString:@"kTKAction"].location != NSNotFound)
   //    return nil; // don't do this for app action activities
 
       if let shareable = placeholderItem as? TKURLShareable, let url = TKShareURLProvider.getShareURL(for: shareable, allowLongURL: false, allowBlocking: true) {

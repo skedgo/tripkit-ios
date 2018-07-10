@@ -68,7 +68,7 @@
 
 - (void)dealloc
 {
-  [SGKLog verbose:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+  [TKLog verbose:NSStringFromClass([self class]) block:^NSString * _Nonnull{
     return [NSString stringWithFormat:@"%@ is dealloc'ed", NSStringFromClass([self class])];
   }];
 
@@ -113,7 +113,7 @@
     
     // Sign out even, if there was an error
     if (error) {
-      [SGKLog warn:@"AKAccountVC" format:@"Error during signout: %@", error];
+      [TKLog warn:@"AKAccountVC" format:@"Error during signout: %@", error];
     }
     
     [KVNProgress showSuccessWithStatus:Loc.SigningOut
@@ -156,7 +156,7 @@
     }
     
     if (error != nil) {
-      [SGAlert showWithText:error.localizedDescription inController:self];
+      [TKAlertController showWithText:error.localizedDescription inController:self];
       
     } else {
       NSMutableArray *akEmails = [NSMutableArray arrayWithCapacity:emails.count];
@@ -191,7 +191,7 @@
 
 - (void)presentAlertWithTitle:(NSString *)title message:(NSString *)message onDismiss:(void(^)(void))dismiss
 {
-  [SGAlert showWithTitle:title message:message inController:self dismiss:dismiss];
+  [TKAlertController showWithTitle:title message:message inController:self dismiss:dismiss];
 }
 
 #pragma mark - Private: App flow

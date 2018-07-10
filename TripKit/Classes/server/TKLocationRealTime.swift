@@ -12,7 +12,7 @@ import RxSwift
 
 public enum TKLocationRealTime {
 
-  public static func fetchRealTimeInfo(for location: SGKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<API.LocationInfo> {
+  public static func fetchRealTimeInfo(for location: TKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<API.LocationInfo> {
     return fetchOnlyOn
       .flatMapLatest { fetch -> Observable<API.LocationInfo> in
         if fetch {
@@ -23,8 +23,8 @@ public enum TKLocationRealTime {
       }
   }
   
-  public static func fetchRealTime(for location: SGKNamedCoordinate) -> Observable<API.LocationInfo> {
-    return SVKServer.shared.rx
+  public static func fetchRealTime(for location: TKNamedCoordinate) -> Observable<API.LocationInfo> {
+    return TKServer.shared.rx
       .requireRegion(location.coordinate)
       .flatMap { region -> Observable<API.LocationInfo> in
 
@@ -41,7 +41,7 @@ public enum TKLocationRealTime {
           ]
         }
         
-        return SVKServer.shared.rx
+        return TKServer.shared.rx
           .hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, data in
             if case 400..<500 = status {
               return nil // Client-side errors; hitting again won't help

@@ -26,7 +26,7 @@ class TKUIResultsViewModel {
     tappedMapRoute: Driver<MapRouteItem>,
     changedDate: Driver<RouteBuilder.Time>, // => update request + title
     changedModes: Driver<Void>, // => update request
-    changedSortOrder: Driver<STKTripCostType>, // => update sorting
+    changedSortOrder: Driver<TKTripCostType>, // => update sorting
     droppedPin: Driver<CLLocationCoordinate2D> // => call dropPin()
   )
   
@@ -194,7 +194,7 @@ class TKUIResultsViewModel {
 extension TKUIResultsViewModel {
   enum Next {
     case showTrip(Trip)
-    case presentModes(modes: [String], region: SVKRegion)
+    case presentModes(modes: [String], region: TKRegion)
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
   }
 }
@@ -386,7 +386,7 @@ extension TKUIResultsViewModel {
       .map(sections)
   }
   
-  private static func sections(for groups: [TripGroup], sortBy: STKTripCostType, expand: TripGroup?) -> [Section] {
+  private static func sections(for groups: [TripGroup], sortBy: TKTripCostType, expand: TripGroup?) -> [Section] {
     guard let first = groups.first else { return [] }
     
     let groupSorters = first.request.sortDescriptors(withPrimary: sortBy)
@@ -521,7 +521,7 @@ extension TKUIResultsViewModel {
   struct MapRouteItem {
     fileprivate let trip: Trip
     
-    let polylines: [STKRoutePolyline]
+    let polylines: [TKRoutePolyline]
     
     init(_ trip: Trip) {
       self.trip = trip
@@ -529,7 +529,7 @@ extension TKUIResultsViewModel {
       let displayableRoutes = trip.segments(with: .onMap)
         .compactMap { ($0 as? TKSegment)?.shapes() }   // Only include those with shapes
         .flatMap { $0.filter { $0.routeIsTravelled } } // Flat list of travelled shapes
-      polylines = displayableRoutes.compactMap(STKRoutePolyline.init)
+      polylines = displayableRoutes.compactMap(TKRoutePolyline.init)
     }
   }
 
@@ -595,7 +595,7 @@ extension TKUIResultsViewModel {
 
 extension TKUIResultsViewModel {
   
-  static func regionForModes(for builder: RouteBuilder) -> SVKRegion {
+  static func regionForModes(for builder: RouteBuilder) -> TKRegion {
     let start = builder.origin?.coordinate
     let end = builder.destination?.coordinate
     
@@ -637,7 +637,7 @@ fileprivate extension TripRequest {
 
 extension TKUIResultsViewModel.RouteBuilder.Time {
   
-  init(timeType: SGTimeType, date: Date) {
+  init(timeType: TKTimeType, date: Date) {
     switch timeType {
     case .leaveASAP, .none:
       self = .leaveASAP
@@ -656,7 +656,7 @@ extension TKUIResultsViewModel.RouteBuilder.Time {
     }
   }
   
-  var timeType: SGTimeType {
+  var timeType: TKTimeType {
     switch self {
     case .leaveASAP: return .leaveASAP
     case .leaveAfter: return .leaveAfter
@@ -709,7 +709,7 @@ extension TKUIResultsViewModel.RouteBuilder {
   fileprivate func generateRequest() -> TripRequest? {
     guard let destination = destination else { return nil }
     
-    let origin = self.origin ?? SGLocationManager.shared.currentLocation
+    let origin = self.origin ?? TKLocationManager.shared.currentLocation
     
     return TripRequest.insert(
       from: origin, to: destination,

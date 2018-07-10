@@ -120,7 +120,7 @@ public struct ProviderAuth: Decodable {
   
 }
 
-extension SVKRegion {
+extension TKRegion {
   /**
    Fetches authentications for the provided `mode`.
    
@@ -143,7 +143,7 @@ extension SVKRegion {
   @objc public func unlinkAccount(_ mode: String, remoteURL: URL, completion: @escaping (Bool) -> Void) {
     
     // Also unlink remote
-    SVKServer.get(remoteURL, paras: nil) { _, _, response, _, error in
+    TKServer.get(remoteURL, paras: nil) { _, _, response, _, error in
       if let response = response as? [NSObject: AnyObject],
          response.isEmpty && error == nil {
         completion(true)
@@ -164,7 +164,7 @@ extension SVKRegion {
       paras["bsb"] = true
     }
     
-    SVKServer.shared.hitSkedGo(
+    TKServer.shared.hitSkedGo(
       withMethod: "GET",
       path: "auth/\(name)",
       parameters: paras,
@@ -182,7 +182,7 @@ extension SVKRegion {
   }
 }
 
-extension Reactive where Base: SVKRegion {
+extension Reactive where Base: TKRegion {
   
   public func linkedAccounts(mode: String? = nil) -> Observable<[ProviderAuth]?> {
     

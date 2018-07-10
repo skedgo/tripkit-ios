@@ -17,11 +17,11 @@ public typealias TKDepartureViewDestination = TKUIDepartureViewDestination
 
 public struct TKUIDepartureViewDestination {
   public let title: String
-  public let icon: SGKImage?
+  public let icon: TKImage?
   public let startTime: Date?
   public let endTime: Date?
   
-  public init(title: String, icon: SGKImage? = nil, startTime: Date? = nil, endTime: Date? = nil) {
+  public init(title: String, icon: TKImage? = nil, startTime: Date? = nil, endTime: Date? = nil) {
     self.title = title
     self.icon = icon
     self.startTime = startTime
@@ -44,7 +44,7 @@ public class TKUIDepartureView: UIView {
     return bundle.loadNibNamed("TKUIDepartureView", owner: self, options: nil)?.first as! TKUIDepartureView
   }
 
-  public func configure(for trip: STKTrip, to destination: SGTrackItemDisplayable?) {
+  public func configure(for trip: TKTrip, to destination: TKTrackItemDisplayable?) {
     
     let endTime: Date?
     if let start = destination?.startDate, let duration = destination?.duration, duration > 0 {
@@ -66,7 +66,7 @@ public class TKUIDepartureView: UIView {
     configure(for: trip, to: destinationInfo)
   }
   
-  public func configure(for trip: STKTrip, to destination: TKUIDepartureViewDestination) {
+  public func configure(for trip: TKTrip, to destination: TKUIDepartureViewDestination) {
     let segments = trip.segments(with: .inSummary)
     tripSegmentView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: true)
     
@@ -83,7 +83,7 @@ public class TKUIDepartureView: UIView {
         formatter.timeStyle = .short
         destinationTimes.text = formatter.string(from: start, to: end)
       } else {
-        destinationTimes.text = Loc.ArriveAt(date: SGStyleManager.timeString(start, for: nil))
+        destinationTimes.text = Loc.ArriveAt(date: TKStyleManager.timeString(start, for: nil))
       }
     } else {
       destinationTimes.text = nil
@@ -102,7 +102,7 @@ public class TKUIDepartureView: UIView {
     super.awakeFromNib()
     
     // Style
-    imageView.backgroundColor = SGStyleManager.globalTintColor()
+    imageView.backgroundColor = TKStyleManager.globalTintColor()
     imageView.tintColor = UIColor.white
     imageView.layer.cornerRadius = 20
     imageView.layer.masksToBounds = true

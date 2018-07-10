@@ -9,8 +9,8 @@
 @import Foundation;
 @import CoreData;
 
-@class Alert, SVKRegion, Shape, StopVisits, SegmentReference, Vehicle, ModeInfo;
-@protocol STKDisplayableRoute;
+@class Alert, TKRegion, Shape, StopVisits, SegmentReference, Vehicle, TKModeInfo;
+@protocol TKDisplayableRoute;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain) NSString * code;
 @property (nonatomic, retain, nullable) id color;
 @property (nonatomic, retain) NSNumber * flags;
-@property (nonatomic, retain, nullable) ModeInfo * modeInfo;
+@property (nonatomic, retain, nullable) TKModeInfo * modeInfo;
 @property (nonatomic, retain, nullable) NSString * name;
 @property (nonatomic, retain, nullable) NSString * number;
 @property (nonatomic, retain, nullable) NSString * operatorName;
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable StopVisits *)visitForStopCode:(NSString *)stopCode;
 
-- (NSArray<id<STKDisplayableRoute>> *)shapesForEmbarkation:(nullable StopVisits *)embarkation
+- (NSArray<id<TKDisplayableRoute>> *)shapesForEmbarkation:(nullable StopVisits *)embarkation
                                             disembarkingAt:(nullable StopVisits *)disembarkation;
 
 - (BOOL)hasServiceData;

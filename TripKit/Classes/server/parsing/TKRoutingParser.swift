@@ -12,7 +12,7 @@ extension TKRoutingParser {
   @objc public static func matchingSegment(in trip: Trip, order: TKSegmentOrdering, first: Bool) -> TKSegment {
     
     var match: TKSegment? = nil
-    for segment in (trip as STKTrip).segments(with: .inDetails) {
+    for segment in (trip as TKTrip).segments(with: .inDetails) {
       if let tks = segment as? TKSegment, tks.order() == order {
         match = tks
         if first {
@@ -33,38 +33,38 @@ extension TKRoutingParser {
       return false
     }
     
-    if let start = start, let named = SGKNamedCoordinate.namedCoordinate(for: start) {
+    if let start = start, let named = TKNamedCoordinate.namedCoordinate(for: start) {
       request.fromLocation = named
     } else {
       let segment = matchingSegment(in: trip, order: .regular, first: true)
       guard let start = segment.start?.coordinate else { return false }
-      request.fromLocation = SGKNamedCoordinate(coordinate: start)
+      request.fromLocation = TKNamedCoordinate(coordinate: start)
     }
-    if let end = end, let named = SGKNamedCoordinate.namedCoordinate(for: end) {
+    if let end = end, let named = TKNamedCoordinate.namedCoordinate(for: end) {
       request.toLocation = named
     } else {
       let segment = matchingSegment(in: trip, order: .regular, first: false)
       guard let end = segment.end?.coordinate else { return false }
-      request.toLocation = SGKNamedCoordinate(coordinate: end)
+      request.toLocation = TKNamedCoordinate(coordinate: end)
     }
     
     if let leaveAfter = leaveAfter {
       request.departureTime = leaveAfter
-      request.timeType = NSNumber(value: SGTimeType.leaveAfter.rawValue)
+      request.timeType = NSNumber(value: TKTimeType.leaveAfter.rawValue)
     }
     
     if let arriveBy = arriveBy {
       request.arrivalTime = arriveBy
-      request.timeType = NSNumber(value: SGTimeType.arriveBefore.rawValue) // can overwrite leave after
+      request.timeType = NSNumber(value: TKTimeType.arriveBefore.rawValue) // can overwrite leave after
     }
     
     if arriveBy == nil && leaveAfter == nil {
       if let trip = request.trips.first {
         let firstRegular = matchingSegment(in: trip, order: .regular, first: true)
         request.departureTime = firstRegular.departureTime
-        request.timeType = NSNumber(value: SGTimeType.leaveAfter.rawValue)
+        request.timeType = NSNumber(value: TKTimeType.leaveAfter.rawValue)
       } else {
-        request.timeType = NSNumber(value: SGTimeType.leaveASAP.rawValue)
+        request.timeType = NSNumber(value: TKTimeType.leaveASAP.rawValue)
       }
     }
     

@@ -9,7 +9,7 @@
 #import "AKBaseTableViewController.h"
 
 #ifdef TK_NO_MODULE
-#import "SGKLog.h"
+#import "TKLog.h"
 #import <TripKit/TripKit-Swift.h>
 #else
 @import TripKit;
@@ -77,7 +77,7 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
  
-  [SGKLog verbose:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+  [TKLog verbose:NSStringFromClass([self class]) block:^NSString * _Nonnull{
     return [NSString stringWithFormat:@"%@ is dealloc'ed", NSStringFromClass([self class])];
   }];
 }

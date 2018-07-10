@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-public class TKBikePodLocation: STKModeCoordinate {
+public class TKBikePodLocation: TKModeCoordinate {
   
   fileprivate let rx_bikePodVar: Variable<API.BikePodInfo>
   
@@ -62,7 +62,7 @@ extension Reactive where Base : TKBikePodLocation {
 }
 
 
-public class TKCarPodLocation: STKModeCoordinate {
+public class TKCarPodLocation: TKModeCoordinate {
   
   fileprivate let rx_carPodVar: Variable<API.CarPodInfo>
   
@@ -114,7 +114,7 @@ extension Reactive where Base : TKCarPodLocation {
 }
 
 
-public class TKCarParkLocation: STKModeCoordinate {
+public class TKCarParkLocation: TKModeCoordinate {
   
   fileprivate let rx_carParkVar: Variable<API.CarParkInfo>
   
@@ -166,7 +166,7 @@ extension Reactive where Base : TKCarParkLocation {
 }
 
 
-public class TKCarRentalLocation: STKModeCoordinate {
+public class TKCarRentalLocation: TKModeCoordinate {
   
   public let carRental: API.CarRentalInfo
   

@@ -37,12 +37,12 @@ extension TKUISegmentMovingCell {
   
   func configure(with item: TKUITripOverviewViewModel.MovingItem) {
     modeImage.setImage(with: item.iconURL, asTemplate: item.iconIsTemplate, placeholder: item.icon)
-    modeImage.tintColor = SGStyleManager.darkTextColor() // TODO: add a colorCodingTransitIcon here, too?
+    modeImage.tintColor = TKStyleManager.darkTextColor() // TODO: add a colorCodingTransitIcon here, too?
     
     titleLabel.text = item.title
-    titleLabel.textColor = SGStyleManager.darkTextColor()
+    titleLabel.textColor = TKStyleManager.darkTextColor()
     subtitleLabel.text = item.notes
-    subtitleLabel.textColor = SGStyleManager.lightTextColor()
+    subtitleLabel.textColor = TKStyleManager.lightTextColor()
     subtitleLabel.isHidden = item.notes == nil
 
     line.backgroundColor = item.connection?.color ?? .lightGray

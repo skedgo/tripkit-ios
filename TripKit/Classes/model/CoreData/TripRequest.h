@@ -11,14 +11,14 @@
 
 #import "TripGroup.h"
 
-@class SVKRegion, SGKNamedCoordinate, Trip;
+@class TKRegion, TKNamedCoordinate, Trip;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TripRequest : NSManagedObject
 
-@property (nonatomic, retain) SGKNamedCoordinate *fromLocation;
-@property (nonatomic, retain) SGKNamedCoordinate *toLocation;
+@property (nonatomic, retain) TKNamedCoordinate *fromLocation;
+@property (nonatomic, retain) TKNamedCoordinate *toLocation;
 @property (nonatomic, retain, nullable) NSString *purpose;
 @property (nonatomic, retain, nullable) TripGroup *preferredGroup;
 @property (nonatomic, strong, nullable) NSDate * arrivalTime;
@@ -51,17 +51,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @return The region the complete trip takes place in. Can be international if it spanning more than one region.
  */
-- (SVKRegion *)spanningRegion;
+- (TKRegion *)spanningRegion;
 
 /**
  @return The local region this trip starts in. Cannot be international and thus might be nil.
  */
-- (nullable SVKRegion *)startRegion;
+- (nullable TKRegion *)startRegion;
 
 /**
  @return The local region this trip ends in. Cannot be international and thus might be nil.
  */
-- (nullable SVKRegion *)endRegion;
+- (nullable TKRegion *)endRegion;
 
 - (NSArray <NSString *> *)applicableModeIdentifiers;
 

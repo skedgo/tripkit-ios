@@ -9,7 +9,7 @@
 @import Foundation;
 
 #ifdef TK_NO_MODULE
-#import "SVKServer.h"
+#import "TKServer.h"
 #else
 @import TripKit;
 #endif
@@ -18,6 +18,6 @@
 
 + (void)requestFormForBookingURL:(NSURL *)bookingURL
                         postData:(NSDictionary *)postData
-                      completion:(SGServerGenericBlock)completion;
+                      completion:(TKServerGenericBlock)completion;
 
 @end

@@ -142,14 +142,14 @@
     TKUIPolylineRenderer *routeRenderer = [[TKUIPolylineRenderer alloc] initWithPolyline:geodesic];
     return routeRenderer;
     
-  } else if ([overlay isKindOfClass:[STKRoutePolyline class]]) {
-    STKRoutePolyline * routeAnnotation = (STKRoutePolyline *) overlay;
+  } else if ([overlay isKindOfClass:[TKRoutePolyline class]]) {
+    TKRoutePolyline * routeAnnotation = (TKRoutePolyline *) overlay;
     UIColor *routeColor = [[routeAnnotation route] routeColor];
     
     TKUIPolylineRenderer *routeRenderer	= [[TKUIPolylineRenderer alloc] initWithPolyline:routeAnnotation];
     routeRenderer.strokeColor       = routeColor;
     
-    id<STKDisplayableRoute> route = [routeAnnotation route];
+    id<TKDisplayableRoute> route = [routeAnnotation route];
     NSArray *lineDashPattern = [route routeDashPattern];
     if (nil != lineDashPattern) {
       routeRenderer.lineDashPattern = lineDashPattern;
@@ -254,7 +254,7 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(shouldRefreshOverlay:)
-                                               name:SGMapShouldRefreshOverlayNotification
+                                               name:TKRegionManager.UpdatedRegionsNotification
                                              object:nil];
 }
 
@@ -266,7 +266,7 @@
   if (! self.willHotSwap) {
     [self.mapView removeOverlay:self.overlayPolygon];
   }
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:SGMapShouldRefreshOverlayNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:TKRegionManager.UpdatedRegionsNotification object:nil];
 }
 
 - (void)setMapButtons:(nullable NSArray *)buttons

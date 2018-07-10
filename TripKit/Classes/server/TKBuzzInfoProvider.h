@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TKDLSTable, SVKRegion, Service, StopLocation;
+@class TKDLSTable, TKRegion, Service, StopLocation;
 
 typedef void (^SGServiceCompletionBlock)(Service *service, BOOL success);
 
@@ -23,7 +23,7 @@ enum SGInfoProviderError {
 
 - (void)downloadContentOfService:(Service *)service
 							forEmbarkationDate:(NSDate *)date
-												inRegion:(nullable SVKRegion *)regionOrNil
+												inRegion:(nullable TKRegion *)regionOrNil
 											completion:(SGServiceCompletionBlock)completion;
 
 - (void)addContentToService:(Service *)service

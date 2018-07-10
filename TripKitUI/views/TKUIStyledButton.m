@@ -12,7 +12,7 @@
 
 #endif
 
-#import "SGStyleManager+SGCoreUI.h"
+#import "TKStyleManager+TripKitUI.h"
 
 @implementation TKUIStyledButton
 
@@ -57,9 +57,9 @@
   
   if (! style) {
     CGFloat point = self.titleLabel.font.pointSize;
-    self.titleLabel.font = [SGStyleManager systemFontWithSize:point];
+    self.titleLabel.font = [TKStyleManager systemFontWithSize:point];
   } else {
-    self.titleLabel.font = [SGStyleManager systemFontWithTextStyle:style];
+    self.titleLabel.font = [TKStyleManager systemFontWithTextStyle:style];
   }
 }
 

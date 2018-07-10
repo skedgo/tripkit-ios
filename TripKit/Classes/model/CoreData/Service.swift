@@ -46,7 +46,7 @@ extension Service {
     let withUpcomingDepartures = NSPredicate(format: "toDelete = NO AND (NONE visits.departure > %@)", date as CVarArg)
     for service in context.fetchObjects(Service.self, predicate: withUpcomingDepartures) {
       if let segments = service.segments, !segments.isEmpty {
-        SGKLog.debug("Service", text: "Keeping service \(service.lineName ?? "") as it has \(segments.count) segments.")
+        TKLog.debug("Service", text: "Keeping service \(service.lineName ?? "") as it has \(segments.count) segments.")
       } else {
         service.remove()
       }
@@ -73,7 +73,7 @@ extension Service: TKRealTimeUpdatable {
     return self
   }
   
-  public var regionForRealTimeUpdates: SVKRegion {
+  public var regionForRealTimeUpdates: TKRegion {
     return region ?? .international
   }
 }
@@ -82,7 +82,7 @@ extension Service: TKRealTimeUpdatable {
 
 extension Service {
   
-  @objc public var region: SVKRegion? {
+  @objc public var region: TKRegion? {
     if let visit = visits?.first {
       return visit.stop.region
     } else {
@@ -95,20 +95,20 @@ extension Service {
     return findModeInfo()?.alt
   }
   
-  @objc public func modeImage(for type: SGStyleModeIconType) -> SGKImage? {
-    return SGStyleManager.image(forModeImageName: findModeInfo()?.localImageName, isRealTime: isRealTime, of: type)
+  @objc public func modeImage(for type: TKStyleModeIconType) -> TKImage? {
+    return TKStyleManager.image(forModeImageName: findModeInfo()?.localImageName, isRealTime: isRealTime, of: type)
   }
   
-  @objc public func modeImageURL(for type: SGStyleModeIconType) -> URL? {
+  @objc public func modeImageURL(for type: TKStyleModeIconType) -> URL? {
     guard let remoteImage = findModeInfo()?.remoteImageName else { return nil }
-    return SVKServer.imageURL(forIconFileNamePart: remoteImage, of: type)
+    return TKServer.imageURL(forIconFileNamePart: remoteImage, of: type)
   }
   
   public var modeImageIsTemplate: Bool {
     return findModeInfo()?.remoteImageIsTemplate ?? false
   }
 
-  private func findModeInfo() -> ModeInfo? {
+  private func findModeInfo() -> TKModeInfo? {
     if let modeInfo = modeInfo {
       return modeInfo
     }

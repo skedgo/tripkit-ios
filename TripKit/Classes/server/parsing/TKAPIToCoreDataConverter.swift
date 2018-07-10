@@ -34,7 +34,7 @@ extension StopLocation {
     if let isAccessible = model.wheelchairAccessible {
       wheelchairAccessible = NSNumber(value: isAccessible)
     }
-    location = SGKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
+    location = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
     stopModeInfo = model.modeInfo
     
     var addedStop = false
@@ -60,7 +60,7 @@ extension StopLocation {
 extension TKAPIToCoreDataConverter {
   
   static func insertNewStopLocation(from model: API.Stop, into context: NSManagedObjectContext) -> StopLocation {
-    let coordinate = SGKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
+    let coordinate = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
     let newStop = StopLocation.insertStop(forStopCode: model.code, modeInfo: nil, atLocation: coordinate, intoTripKitContext: context)
     _ = newStop.update(from: model)
     return newStop
@@ -207,7 +207,7 @@ extension Alert {
     startTime = model.fromDate
     endTime = model.toDate
     if let location = model.location {
-      self.location = SGKNamedCoordinate(from: location)
+      self.location = TKNamedCoordinate(from: location)
     }
     switch model.severity {
     case .alert: alertSeverity = .alert
@@ -319,8 +319,8 @@ extension TKAPIToCoreDataConverter {
   }
   
   @objc(vehiclesPayloadForVehicles:)
-  public static func vehiclesPayload(for vehicles: [STKVehicular]) -> [[String: Any]] {
-    return vehicles.map(STKVehicularHelper.skedGoFullDictionary(forVehicle:))
+  public static func vehiclesPayload(for vehicles: [TKVehicular]) -> [[String: Any]] {
+    return vehicles.map(TKVehicularHelper.skedGoFullDictionary(forVehicle:))
   }
   
 }

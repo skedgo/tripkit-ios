@@ -236,21 +236,21 @@ struct WaypointInput: Codable {
 
     var startCoordinate: CLLocationCoordinate2D? {
       get {
-        return SVKParserHelper.coordinate(forRequest: start)
+        return TKParserHelper.coordinate(forRequest: start)
       }
       set {
         guard let newValue = newValue else { preconditionFailure("Set start directly, e.g., to a stop code") }
-        start = SVKParserHelper.requestString(for: newValue)
+        start = TKParserHelper.requestString(for: newValue)
       }
     }
     
     var endCoordinate: CLLocationCoordinate2D? {
       get {
-        return SVKParserHelper.coordinate(forRequest: end)
+        return TKParserHelper.coordinate(forRequest: end)
       }
       set {
         guard let newValue = newValue else { preconditionFailure("Set end directly, e.g., to a stop code") }
-        end = SVKParserHelper.requestString(for: newValue)
+        end = TKParserHelper.requestString(for: newValue)
       }
     }
   }

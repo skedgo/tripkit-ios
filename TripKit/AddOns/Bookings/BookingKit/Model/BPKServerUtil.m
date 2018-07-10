@@ -12,7 +12,7 @@
 
 + (void)requestFormForBookingURL:(NSURL *)bookingURL
                         postData:(NSDictionary *)postData
-                      completion:(SGServerGenericBlock)completion
+                      completion:(TKServerGenericBlock)completion
 {
   
   // We'll call back on the main thread
@@ -40,7 +40,7 @@
       postData = adjusted;
     }
     
-    [SVKServer POST:bookingURL
+    [TKServer POST:bookingURL
               paras:postData
          completion:handler];
     
@@ -59,7 +59,7 @@
       [paras setObject:bsb forKey:@"bsb"];
     }
     
-    [SVKServer GET:bookingURL
+    [TKServer GET:bookingURL
              paras:paras
         completion:handler];
   }

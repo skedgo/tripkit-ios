@@ -41,16 +41,16 @@ extension TKUISegmentStationaryCell {
   
   func configure(with item: TKUITripOverviewViewModel.StationaryItem) {
     if let time = item.time {
-      timeLabel.text = SGStyleManager.timeString(time, for: item.timeZone)
-      timeLabel.textColor = SGStyleManager.darkTextColor()
+      timeLabel.text = TKStyleManager.timeString(time, for: item.timeZone)
+      timeLabel.textColor = TKStyleManager.darkTextColor()
     } else {
       timeLabel.text = nil
     }
     
     titleLabel.text = item.title
-    titleLabel.textColor = SGStyleManager.darkTextColor()
+    titleLabel.textColor = TKStyleManager.darkTextColor()
     subtitleLabel.text = item.subtitle
-    subtitleLabel.textColor = SGStyleManager.lightTextColor()
+    subtitleLabel.textColor = TKStyleManager.lightTextColor()
     subtitleLabel.isHidden = item.subtitle == nil
 
     lineDot.layer.borderColor = UIColor.black.cgColor
@@ -62,16 +62,16 @@ extension TKUISegmentStationaryCell {
   
   func configure(with item: TKUITripOverviewViewModel.TerminalItem) {
     if let time = item.time {
-      timeLabel.text = SGStyleManager.timeString(time, for: item.timeZone)
-      timeLabel.textColor = SGStyleManager.darkTextColor()
+      timeLabel.text = TKStyleManager.timeString(time, for: item.timeZone)
+      timeLabel.textColor = TKStyleManager.darkTextColor()
     } else {
       timeLabel.text = nil
     }
 
     titleLabel.text = item.title
-    titleLabel.textColor = SGStyleManager.darkTextColor()
+    titleLabel.textColor = TKStyleManager.darkTextColor()
     subtitleLabel.text = item.subtitle
-    subtitleLabel.textColor = SGStyleManager.lightTextColor()
+    subtitleLabel.textColor = TKStyleManager.lightTextColor()
     subtitleLabel.isHidden = item.subtitle == nil
     
     lineDot.layer.borderColor = (item.connection?.color ?? .lightGray).cgColor

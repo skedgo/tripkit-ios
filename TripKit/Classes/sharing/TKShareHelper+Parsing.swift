@@ -62,7 +62,7 @@ public extension TKShareHelper {
         guard let since1970 = TimeInterval(value) else { continue }
         time = Date(timeIntervalSince1970: since1970)
       default:
-        SGKLog.debug("OpenURLHelper", text: "Ignoring \(item.name)=\(value)")
+        TKLog.debug("OpenURLHelper", text: "Ignoring \(item.name)=\(value)")
       }
     }
     
@@ -94,7 +94,7 @@ public extension TKShareHelper {
     let from = coordinate(lat: flat, lng: flng)
     
     // make sure we got a destination
-    let named = SGKNamedCoordinate(coordinate: to)
+    let named = TKNamedCoordinate(coordinate: to)
     named.address = name
     return named.rx_valid(geocoder: geocoder)
       .map { valid in
@@ -117,20 +117,20 @@ extension TKShareHelper.QueryDetails {
   public func toTripRequest(in tripKit: NSManagedObjectContext) -> TripRequest {
     let from, to: MKAnnotation
     if let start = start, start.isValid {
-      from = SGKNamedCoordinate(coordinate: start)
+      from = TKNamedCoordinate(coordinate: start)
     } else {
-      from = SGLocationManager.shared.currentLocation
+      from = TKLocationManager.shared.currentLocation
     }
     
     if end.isValid {
-      let named = SGKNamedCoordinate(coordinate: end)
+      let named = TKNamedCoordinate(coordinate: end)
       named.name = self.title
       to = named
     } else {
-      to = SGLocationManager.shared.currentLocation
+      to = TKLocationManager.shared.currentLocation
     }
     
-    let timeType: SGTimeType
+    let timeType: TKTimeType
     let date: Date?
     switch self.timeType {
     case .leaveASAP:
@@ -272,12 +272,12 @@ extension MKAnnotation {
       return Observable.just(self)
     }
     
-    guard let geocodable = SGKNamedCoordinate.namedCoordinate(for: self) else {
+    guard let geocodable = TKNamedCoordinate.namedCoordinate(for: self) else {
       return Observable.error(TKShareHelper.ExtractionError.invalidCoordinate)
     }
     
     return Observable.create() { observer in
-      SGBaseGeocoder.geocode(geocodable, using: geocoder, near: MKMapRectWorld) { (result: SGBaseGeocoder.Result) -> Void in
+      TKBaseGeocoder.geocode(geocodable, using: geocoder, near: MKMapRectWorld) { (result: TKBaseGeocoder.Result) -> Void in
         switch result {
         case .success:
           observer.onNext(self)

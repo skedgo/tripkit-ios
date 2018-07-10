@@ -27,8 +27,8 @@ public enum TKJSONSanitizer {
     case is URL:
       return (input as! URL).absoluteString
     
-    case is SGKColor:
-      let rgb = API.RGBColor(for: (input as! SGKColor))
+    case is TKColor:
+      let rgb = API.RGBColor(for: (input as! TKColor))
       return try? JSONEncoder().encodeJSONObject(rgb)
       
     case is TimeZone:

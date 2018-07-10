@@ -26,7 +26,7 @@ class TKUIGroupedAlertCell: UITableViewCell {
     return "TKUIGroupedAlertCell"
   }
   
-  /// @default: `SGStyleManager.darkTextColor`
+  /// @default: `TKStyleManager.darkTextColor`
   var cellTextColor: UIColor? {
     willSet {
       routeNumberLabel.textColor = newValue
@@ -49,7 +49,7 @@ class TKUIGroupedAlertCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    modeIcon.tintColor = SGStyleManager.darkTextColor() // default tint.
+    modeIcon.tintColor = TKStyleManager.darkTextColor() // default tint.
     alertCountLabel.isHidden = true
     alertCountWrapper.isHidden = true
   }
@@ -57,13 +57,13 @@ class TKUIGroupedAlertCell: UITableViewCell {
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     super.setHighlighted(highlighted, animated: animated)
     UIView.animate(withDuration: 0.25) {
-      self.backgroundColor = highlighted ? SGStyleManager.cellSelectionBackgroundColor() : .white
+      self.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : .white
     }
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
-    self.backgroundColor = selected ? SGStyleManager.cellSelectionBackgroundColor() : .white
+    self.backgroundColor = selected ? TKStyleManager.cellSelectionBackgroundColor() : .white
   }
   
   // MARK: -
@@ -76,11 +76,11 @@ class TKUIGroupedAlertCell: UITableViewCell {
     let route = alertGroup.route
     
     // This is the generic mode image.
-    let localImage = SGStyleManager.image(forModeImageName: route.modeInfo.localImageName, isRealTime: false, of: .listMainMode)
+    let localImage = TKStyleManager.image(forModeImageName: route.modeInfo.localImageName, isRealTime: false, of: .listMainMode)
     
     // If we have customised mode icons on the server, use them.
     if let remoteImageName = route.modeInfo.remoteImageName {
-      let remoteImageURL = SVKServer.imageURL(forIconFileNamePart: remoteImageName, of: .listMainMode)
+      let remoteImageURL = TKServer.imageURL(forIconFileNamePart: remoteImageName, of: .listMainMode)
       modeIcon.setImage(with: remoteImageURL, asTemplate: route.modeInfo.remoteImageIsTemplate, placeholder: localImage)
     }
     

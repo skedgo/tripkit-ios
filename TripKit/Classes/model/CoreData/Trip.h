@@ -12,7 +12,7 @@
 #import "TKSegment.h"
 
 
-@class Alert, SVKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
+@class Alert, TKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 
 @interface Trip : NSManagedObject {
 }

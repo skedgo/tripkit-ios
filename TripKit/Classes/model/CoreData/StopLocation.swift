@@ -9,7 +9,7 @@
 import Foundation
 
 extension StopLocation {
-  @objc public var region: SVKRegion? {
+  @objc public var region: TKRegion? {
     if let name = regionName {
       return TKRegionManager.shared.localRegion(named: name)
     } else {
@@ -26,21 +26,21 @@ extension StopLocation {
   }
   
   @objc(modeImageForIconType:)
-  public func modeImage(for type: SGStyleModeIconType) -> SGKImage? {
+  public func modeImage(for type: TKStyleModeIconType) -> TKImage? {
     guard let localName = stopModeInfo?.localImageName else { return nil }
-    return SGStyleManager.image(forModeImageName: localName, isRealTime: false, of: type)
+    return TKStyleManager.image(forModeImageName: localName, isRealTime: false, of: type)
   }
   
   @objc(modeImageURLForIconType:)
-  public func modeImageURL(for type: SGStyleModeIconType) -> URL? {
+  public func modeImageURL(for type: TKStyleModeIconType) -> URL? {
     guard let remoteName = stopModeInfo?.remoteImageName else { return nil }
-    return SVKServer.imageURL(forIconFileNamePart: remoteName, of: type)
+    return TKServer.imageURL(forIconFileNamePart: remoteName, of: type)
   }
 }
 
 // MARK: - STKStopAnnotation
 
-extension StopLocation: STKStopAnnotation {
+extension StopLocation: TKStopAnnotation {
   public var title: String? {
     return name
   }
@@ -65,7 +65,7 @@ extension StopLocation: STKStopAnnotation {
     return pointImage != nil
   }
   
-  public var pointImage: SGKImage? {
+  public var pointImage: TKImage? {
     return modeImage(for: .mapIcon)
   }
   

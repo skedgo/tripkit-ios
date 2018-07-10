@@ -14,8 +14,8 @@ public class TKDLSTable: NSObject {
   @objc public let startStopCode: String
   @objc public let endStopCode: String
   @objc public var pairIdentifiers: Set<String>?
-  @objc public let startRegion: SVKRegion
-  @objc public let endRegion: SVKRegion
+  @objc public let startRegion: TKRegion
+  @objc public let endRegion: TKRegion
   @objc public let tripKitContext: NSManagedObjectContext
   
   @objc public init?(for segment: TKSegment) {

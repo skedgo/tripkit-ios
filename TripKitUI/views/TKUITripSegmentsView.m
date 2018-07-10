@@ -19,7 +19,7 @@
 
 #import "TKUIStyledLabel.h"
 #import "UIColor+Variations.h"
-#import "SGStyleManager+SGCoreUI.h"
+#import "TKStyleManager+TripKitUI.h"
 #import "UIView+Helpers.h"
 
 #define SEGMENT_ITEM_ALPHA 1
@@ -56,8 +56,8 @@
 }
 
 - (void)didInit {
-  self.darkTextColor = [SGStyleManager darkTextColor];
-  self.lightTextColor = [SGStyleManager lightTextColor];
+  self.darkTextColor = [TKStyleManager darkTextColor];
+  self.lightTextColor = [TKStyleManager lightTextColor];
 }
 
 - (CGSize)intrinsicContentSize
@@ -75,14 +75,14 @@
   }
 }
 
-- (void)configureForSegments:(NSArray<id<STKTripSegmentDisplayable>> *)segments
+- (void)configureForSegments:(NSArray<id<TKTripSegmentDisplayable>> *)segments
               allowSubtitles:(BOOL)allowSubtitles
               allowInfoIcons:(BOOL)allowInfoIcons
 {
   [self configureForSegments:segments allowTitles:allowSubtitles allowSubtitles:allowSubtitles allowInfoIcons:allowInfoIcons];
 }
 
-- (void)configureForSegments:(NSArray<id<STKTripSegmentDisplayable>> *)segments
+- (void)configureForSegments:(NSArray<id<TKTripSegmentDisplayable>> *)segments
                  allowTitles:(BOOL)allowTitles
               allowSubtitles:(BOOL)allowSubtitles
               allowInfoIcons:(BOOL)allowInfoIcons
@@ -117,7 +117,7 @@
     self.centerSegments = false; // looks weird otherwise
   }
   
-  for (id<STKTripSegmentDisplayable> segment in segments) {
+  for (id<TKTripSegmentDisplayable> segment in segments) {
     
 		UIViewAutoresizing mask = 0;
     
@@ -174,8 +174,8 @@
     [self addSubview:modeImageView];
 		
 		if (allowInfoIcons && [segment respondsToSelector:@selector(tripSegmentModeInfoIconType)]
-        && [segment tripSegmentModeInfoIconType] != STKInfoIconTypeNone) {
-			UIImageView *infoIconImageView = [[UIImageView alloc] initWithImage:[STKInfoIcon imageForInfoIconType:[segment tripSegmentModeInfoIconType] usage:STKInfoIconUsageOverlay]];
+        && [segment tripSegmentModeInfoIconType] != TKInfoIconTypeNone) {
+			UIImageView *infoIconImageView = [[UIImageView alloc] initWithImage:[TKInfoIcon imageForInfoIconType:[segment tripSegmentModeInfoIconType] usage:TKInfoIconUsageOverlay]];
       CGRect imageFrame = infoIconImageView.frame;
       imageFrame.origin.x = newFrame.origin.x;
       imageFrame.origin.y = newFrame.origin.y + CGRectGetHeight(newFrame) - CGRectGetHeight(imageFrame);
@@ -197,7 +197,7 @@
     
     NSString *modeTitle = (allowTitles && [segment respondsToSelector:@selector(tripSegmentModeTitle)]) ? [segment tripSegmentModeTitle] : nil;
     if (modeTitle.length > 0) {
-      modeTitleFont = [SGStyleManager systemFontWithSize:12];
+      modeTitleFont = [TKStyleManager systemFontWithSize:12];
       modeTitleSize = [modeTitle sizeWithFont:modeTitleFont
                            maximumWidth:CGFLOAT_MAX];
     } else if (color) {
@@ -209,7 +209,7 @@
         && self.allowWheelchairIcon
         && [segment respondsToSelector:@selector(tripSegmentIsWheelchairAccessible)]
         && [segment tripSegmentIsWheelchairAccessible]) {
-      modeTitleAccessoryImageView = [[UIImageView alloc] initAsWheelchairAccessoryImageWithTintColor:[SGStyleManager darkTextColor]];
+      modeTitleAccessoryImageView = [[UIImageView alloc] initAsWheelchairAccessoryImageWithTintColor:[TKStyleManager darkTextColor]];
     }
     
     
@@ -219,19 +219,19 @@
     UIImageView *modeSubtitleAccessoryImageView = nil;
     if (allowSubtitles) {
       if ([segment respondsToSelector:@selector(tripSegmentFixedDepartureTime)]) {
-        modeSubtitle = [SGStyleManager timeString:[segment tripSegmentFixedDepartureTime]
+        modeSubtitle = [TKStyleManager timeString:[segment tripSegmentFixedDepartureTime]
                                       forTimeZone:[segment tripSegmentTimeZone]];
 
         if ([segment respondsToSelector:@selector(tripSegmentTimesAreRealTime)]
             && [segment tripSegmentTimesAreRealTime]) {
-          modeSubtitleAccessoryImageView = [[UIImageView alloc] initAsRealTimeAccessoryImageAnimated:YES tintColor:[SGStyleManager lightTextColor]];
+          modeSubtitleAccessoryImageView = [[UIImageView alloc] initAsRealTimeAccessoryImageAnimated:YES tintColor:[TKStyleManager lightTextColor]];
         }
       }
       if (! modeSubtitle && [segment respondsToSelector:@selector(tripSegmentModeSubtitle)]) {
         modeSubtitle = [segment tripSegmentModeSubtitle];
       }
       if (modeSubtitle) {
-        modeSubtitleFont = [SGStyleManager systemFontWithSize:10];
+        modeSubtitleFont = [TKStyleManager systemFontWithSize:10];
         modeSubtitleSize = [modeSubtitle sizeWithFont:modeSubtitleFont maximumWidth:CGFLOAT_MAX];
       }
     }
@@ -292,7 +292,7 @@
       TKUIStyledLabel *subtitleLabel = [[TKUIStyledLabel alloc] initWithFrame:rect];
       subtitleLabel.font = modeSubtitleFont;
       subtitleLabel.text = modeSubtitle;
-      subtitleLabel.textColor = [SGStyleManager lightTextColor];
+      subtitleLabel.textColor = [TKStyleManager lightTextColor];
       subtitleLabel.alpha = modeImageView.alpha;
       [self addSubview:subtitleLabel];
       

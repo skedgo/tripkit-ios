@@ -18,7 +18,7 @@ public protocol TKGeocoding {
   ///   - input: Query typed by the user
   ///   - mapRect: Last map rect the map view was zoomed to (can be `MKMapRectNull`)
   /// - Returns: Single-observable with the geocoding results for the query.
-  func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[SGKNamedCoordinate]>
+  func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]>
   
 }
 
@@ -30,14 +30,14 @@ public protocol TKAutocompleting {
   ///   - input: Query fragment typed by user
   ///   - mapRect: Last map rect the map view was zoomed to (can be `MKMapRectNull`)
   /// - Returns: Autocompletion results for query fragment. Should fire with empty result if nothing found.
-  func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[SGAutocompletionResult]>
+  func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]>
   
   /// Called to fetch the annotation for a previously returned autocompletion result
   ///
   /// - Parameter result: The result for which to fetch the annotation
   /// - Returns: Single-observable with the annotation for the result. Can error out if an unknown
   ///     result was passed in.
-  func annotation(for result: SGAutocompletionResult) -> Single<MKAnnotation>
+  func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation>
   
   #if os(iOS) || os(tvOS)
   /// Text and action for an additional row to display in the results, e.g., to request

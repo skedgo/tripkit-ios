@@ -8,8 +8,7 @@
 
 #import "TKUIStyledLabel.h"
 
-#import "SGRootKit.h"
-#import "SGStyleManager+SGCoreUI.h"
+#import "TKStyleManager+TripKitUI.h"
 
 @implementation TKUIStyledLabel
 
@@ -56,9 +55,9 @@
   
   if (! style) {
     CGFloat point = self.font.pointSize;
-    self.font = [SGStyleManager systemFontWithSize:point];
+    self.font = [TKStyleManager systemFontWithSize:point];
   } else {
-    self.font = [SGStyleManager systemFontWithTextStyle:style];
+    self.font = [TKStyleManager systemFontWithTextStyle:style];
   }
 }
   

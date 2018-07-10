@@ -209,9 +209,9 @@ fileprivate extension TKSegment {
     return TKUITripOverviewViewModel.MovingItem(
       title: titleWithoutTime,
       notes: notes(),
-      icon: (self as STKTripSegment).tripSegmentModeImage,
-      iconURL: (self as STKTripSegment).tripSegmentModeImageURL,
-      iconIsTemplate: (self as STKTripSegment).tripSegmentModeImageIsTemplate,
+      icon: (self as TKTripSegment).tripSegmentModeImage,
+      iconURL: (self as TKTripSegment).tripSegmentModeImageURL,
+      iconIsTemplate: (self as TKTripSegment).tripSegmentModeImageIsTemplate,
       connection: line,
       action: nil,
       accessories: accessories,

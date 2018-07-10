@@ -34,7 +34,7 @@
 {
   [super awakeFromNib];
   self.textView.scrollEnabled = NO;
-  self.textView.font = [SGStyleManager systemFontWithTextStyle:UIFontTextStyleCaption1];
+  self.textView.font = [TKStyleManager systemFontWithTextStyle:UIFontTextStyleCaption1];
 }
 
 - (void)layoutSubviews

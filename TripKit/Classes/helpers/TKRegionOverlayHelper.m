@@ -60,7 +60,7 @@
 
     NSArray *regions = [TKRegionManager.shared regions];
     NSMutableArray *polygons = [NSMutableArray arrayWithCapacity:regions.count];
-    for (SVKRegion *region in regions) {
+    for (TKRegion *region in regions) {
       [polygons addObject:[region polygon]];
     }
 

@@ -15,7 +15,7 @@
 
 - (void)downloadContentOfService:(Service *)service
 							forEmbarkationDate:(NSDate *)date
-												inRegion:(SVKRegion *)regionOrNil
+												inRegion:(TKRegion *)regionOrNil
 											completion:(SGServiceCompletionBlock)completion
 {
   NSParameterAssert(service);
@@ -32,7 +32,7 @@
   }
   
   service.isRequestingServiceData = YES;
-	SVKServer *server = [SVKServer sharedInstance];
+	TKServer *server = [TKServer sharedInstance];
   [server requireRegions:
    ^(NSError *error) {
      if (error) {
@@ -41,7 +41,7 @@
        return;
      }
      
-     SVKRegion *region = regionOrNil ?: service.region;
+     TKRegion *region = regionOrNil ?: service.region;
      if (! region) {
        completion(service, NO);
        return;
@@ -112,7 +112,7 @@
   // real time status
   NSString *realTimeStatus = responseDict[@"realTimeStatus"];
   if (realTimeStatus) {
-    [TKParserHelper adjustService:service
+    [TKCoreDataParserHelper adjustService:service
           forRealTimeStatusString:realTimeStatus];
   }
   
@@ -126,7 +126,7 @@
                              inTripKitContext:context];
   
   // mode info
-  ModeInfo *modeInfo = [ModeInfo modeInfoForDictionary:responseDict[@"modeInfo"]];
+  TKModeInfo *modeInfo = [TKModeInfo modeInfoForDictionary:responseDict[@"modeInfo"]];
   
   // accessibility
   if ([responseDict[@"wheelchairAccessible"] boolValue]) {
@@ -138,7 +138,7 @@
   
   // parse the shapes
   NSArray *shapesArray = responseDict[@"shapes"];
-  [TKParserHelper insertNewShapes:shapesArray
+  [TKCoreDataParserHelper insertNewShapes:shapesArray
                        forService:service
                      withModeInfo:modeInfo];
 }

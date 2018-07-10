@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol STKTrip;
+@protocol TKTrip;
 
 @interface Trip (NextSegment)
 
@@ -46,11 +46,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TKNextSegmentScorer : NSObject
 
-+ (nullable id<STKTripSegment>)nextSegmentOfTrip:(id<STKTrip>)trip
++ (nullable id<TKTripSegment>)nextSegmentOfTrip:(id<TKTrip>)trip
                                          forTime:(NSDate *)time
                                     withLocation:(nullable CLLocation *)location;
 
-+ (NSUInteger)scoreForSegment:(id<STKTripSegment>)segment
++ (NSUInteger)scoreForSegment:(id<TKTripSegment>)segment
                        atTime:(NSDate *)time
                   forLocation:(nullable CLLocation *)location;
 

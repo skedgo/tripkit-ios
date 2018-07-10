@@ -35,13 +35,13 @@ extension TKUIAutocompletionResultCell {
     imageView?.image = item.image
     imageView?.tintColor = #colorLiteral(red: 0.8500000238, green: 0.8500000238, blue: 0.8500000238, alpha: 1) // From SkedGo default icons
     textLabel?.text = item.title
-    textLabel?.textColor = SGStyleManager.darkTextColor()
+    textLabel?.textColor = TKStyleManager.darkTextColor()
     detailTextLabel?.text = item.subtitle
-    detailTextLabel?.textColor = SGStyleManager.lightTextColor()
+    detailTextLabel?.textColor = TKStyleManager.lightTextColor()
     contentView.alpha = item.showFaded ? 0.33 : 1
     
     if let accessoryImage = item.accessoryImage, let target = onAccessoryTapped {
-      let button = SGStyleManager.cellAccessoryButton(with: accessoryImage, target: nil, action: nil)
+      let button = TKStyleManager.cellAccessoryButton(with: accessoryImage, target: nil, action: nil)
       button.rx.tap
         .map { _ in item }
         .bind(to: target)

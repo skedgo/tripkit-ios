@@ -114,7 +114,7 @@
   if (!self.remoteIcon) {
     return nil;
   } else {
-    return [SVKServer imageURLForIconFileNamePart:self.remoteIcon ofIconType:SGStyleModeIconTypeAlert];
+    return [TKServer imageURLForIconFileNamePart:self.remoteIcon ofIconType:TKStyleModeIconTypeAlert];
   }
 }
 

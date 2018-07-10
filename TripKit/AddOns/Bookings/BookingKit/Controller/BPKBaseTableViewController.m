@@ -82,7 +82,7 @@
 
 - (void)dealloc
 {
-  [SGKLog verbose:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+  [TKLog verbose:NSStringFromClass([self class]) block:^NSString * _Nonnull{
     return [NSString stringWithFormat:@"%@ is dealloc'ed", NSStringFromClass([self class])];
   }];
 }
@@ -334,7 +334,7 @@
 - (void)insertHeaderWithTitle:(NSString *)title subtitle:(NSString *)subtitle
 {
   BPKTableHeader *header = [[BPKTableHeader alloc] initWithTitle:title subtitle:subtitle tableView:self.tableView];
-  header.backgroundColor = [SGStyleManager globalTintColor];
+  header.backgroundColor = [TKStyleManager globalTintColor];
   self.tableView.tableHeaderView = header;
 }
 

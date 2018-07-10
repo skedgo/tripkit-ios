@@ -63,17 +63,17 @@ extension API {
     public let serviceTripIDs: [String]?
     public let stopCodes: [String]?
     public let routes: [API.Route]?
-    public let modeInfo: ModeInfo?
+    public let modeInfo: TKModeInfo?
   }
   
   public struct Route: Codable, Equatable {
     public let id: String
     public let name: String?
     public let number: String?
-    public let modeInfo: ModeInfo
+    public let modeInfo: TKModeInfo
     
     /// This color applies to an individual service.
-    public var color: SGKColor? { return modeInfo.color }
+    public var color: TKColor? { return modeInfo.color }
   }
   
 }

@@ -326,7 +326,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
                                          inTripKitContext:self.context];
           
           // always update these as those might be new or updated, as long as they didn't get deleted
-          SGKColor *newColor = [SVKParserHelper colorForDictionary:refDict[@"serviceColor"]];
+          TKColor *newColor = [TKParserHelper colorForDictionary:refDict[@"serviceColor"]];
           service.color     = newColor                      ?: service.color;
           service.frequency = refDict[@"frequency"]         ?: service.frequency;
           service.lineName  = refDict[@"serviceName"]       ?: service.lineName;
@@ -347,7 +347,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           
           // update the real-time status
           NSString *realTimeStatus = refDict[@"realTimeStatus"];
-          [TKParserHelper adjustService:service forRealTimeStatusString:realTimeStatus];
+          [TKCoreDataParserHelper adjustService:service forRealTimeStatusString:realTimeStatus];
           
           // keep the vehicles
           [TKAPIToCoreDataConverter updateVehiclesForService:service
@@ -358,7 +358,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           // private transport
           [reference setSharedVehicleData:refDict[@"sharedVehicle"]];
           [reference setVehicleUUID:refDict[@"vehicleUUID"]];
-          [TKParserHelper updateVehiclesForSegmentReference:reference
+          [TKCoreDataParserHelper updateVehiclesForSegmentReference:reference
                                              primaryVehicle:refDict[@"realtimeVehicle"]
                                         alternativeVehicles:nil];
         }

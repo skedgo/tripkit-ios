@@ -8,7 +8,7 @@
 
 #import "NSUserDefaults+SharedDefaults.h"
 
-#import "SGKConfig.h"
+#import "TKConfig.h"
 
 @implementation NSUserDefaults (SharedDefaults)
 
@@ -19,7 +19,7 @@
   static dispatch_once_t onceToken;
   
   dispatch_once(&onceToken, ^{
-    _sharedDefaults = [[self alloc] initWithSuiteName:[[SGKConfig sharedInstance] appGroupName]];
+    _sharedDefaults = [[self alloc] initWithSuiteName:[[TKConfig sharedInstance] appGroupName]];
   });
   
   return _sharedDefaults;

@@ -21,13 +21,13 @@ public class Shape: NSManagedObject {
     case isHop      = 8
   }
 
-  fileprivate var _sortedCoordinates: [SGKNamedCoordinate]?
+  fileprivate var _sortedCoordinates: [TKNamedCoordinate]?
   
-  fileprivate var sortedCoordinates: [SGKNamedCoordinate]? {
+  fileprivate var sortedCoordinates: [TKNamedCoordinate]? {
     get {
       if let encoded = encodedWaypoints, _sortedCoordinates == nil {
         let coordinates = CLLocationCoordinate2D.decodePolyline(encoded)
-        _sortedCoordinates = coordinates.map(SGKNamedCoordinate.init)
+        _sortedCoordinates = coordinates.map(TKNamedCoordinate.init)
       }
       return _sortedCoordinates
     }
@@ -134,22 +134,22 @@ extension Shape {
   }
 }
 
-// MARK: - STKDisplayableRoute
+// MARK: - TKDisplayableRoute
 
-extension Shape: STKDisplayableRoute {
+extension Shape: TKDisplayableRoute {
   
   public var routePath: [Any] {
     return sortedCoordinates ?? []
   }
   
-  public var routeColor: SGKColor? {
+  public var routeColor: TKColor? {
     if let travelled = travelled, !travelled.boolValue {
       // Non-travelled always gets a special colour
       return .routeDashColorNonTravelled
     }
     
     if let service = services?.anyObject() as? Service,
-      let color = service.color as? SGKColor {
+      let color = service.color as? TKColor {
       return color
     }
     

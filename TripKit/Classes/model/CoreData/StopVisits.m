@@ -14,10 +14,10 @@
 
 #import "TripKit/TripKit-Swift.h"
 
-#import "SGRootKit.h"
+#import "TKRootKit.h"
 #import "StopLocation.h"
 
-#import "SGStyleManager.h"
+#import "TKStyleManager.h"
 
 @implementation StopVisits
 
@@ -84,7 +84,7 @@
 - (NSString *)smsString
 {
 	NSTimeZone *timeZone = self.stop.region.timeZone;
-  NSMutableString *output = [NSMutableString stringWithFormat:@"%@ %@", [self.service shortIdentifier], [SGStyleManager timeString:self.departure forTimeZone:timeZone]];
+  NSMutableString *output = [NSMutableString stringWithFormat:@"%@ %@", [self.service shortIdentifier], [TKStyleManager timeString:self.departure forTimeZone:timeZone]];
   if ([self.service isRealTime])
     [output appendString:@"*"];
   return output;
@@ -98,8 +98,8 @@
   if (self.service.frequency.integerValue > 0) {
     NSTimeZone *timeZone = self.stop.region.timeZone;
     [subtitle appendFormat:@"%@ - %@",
-     [SGStyleManager timeString:self.departure forTimeZone:timeZone],
-     [SGStyleManager timeString:self.arrival forTimeZone:timeZone]];
+     [TKStyleManager timeString:self.departure forTimeZone:timeZone],
+     [TKStyleManager timeString:self.arrival forTimeZone:timeZone]];
   }
   
   // platforms
@@ -172,7 +172,7 @@
       NSString *mins = [self minsForRealTimeInformation];
       if (withOriginalTime) {
         NSTimeZone *timeZone = self.stop.region.timeZone;
-        NSString *service = [SGStyleManager timeString:self.originalTime forTimeZone:timeZone];
+        NSString *service = [TKStyleManager timeString:self.originalTime forTimeZone:timeZone];
         return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%1$@ early (%2$@ service)", @"TripKit", [TKTripKit bundle], @"Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm')."), mins, service];
       } else {
         return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%1$@ early", @"TripKit", [TKTripKit bundle], @"Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'."), mins];
@@ -183,7 +183,7 @@
       NSString *mins = [self minsForRealTimeInformation];
       if (withOriginalTime) {
         NSTimeZone *timeZone = self.stop.region.timeZone;
-        NSString *service = [SGStyleManager timeString:self.originalTime forTimeZone:timeZone];
+        NSString *service = [TKStyleManager timeString:self.originalTime forTimeZone:timeZone];
         return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%1$@ late (%2$@ service)", @"TripKit", [TKTripKit bundle], @"Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').") , mins, service];
       } else {
         return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%1$@ late", @"TripKit", [TKTripKit bundle], @"Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min'") , mins];
@@ -199,7 +199,7 @@
   realTime -= (NSInteger)realTime % 60;
   NSTimeInterval timeTable = [self.originalTime timeIntervalSince1970];
   timeTable -= (NSInteger)timeTable % 60;
-  return [SGKObjcDateHelper durationStringForMinutes:(NSInteger) fabs(realTime - timeTable) / 60];
+  return [TKObjcDateHelper durationStringForMinutes:(NSInteger) fabs(realTime - timeTable) / 60];
 }
 
 - (NSDate *)countdownDate

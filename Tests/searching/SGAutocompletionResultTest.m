@@ -1,5 +1,5 @@
 //
-//  SGAutocompletionResultTest.m
+//  TKAutocompletionResultTest.m
 //  SkedGoKit
 //
 //  Created by Adrian Schoenig on 16/07/2016.
@@ -8,17 +8,17 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SGAutocompletionResult.h"
+#import "TKAutocompletionResult.h"
 
-@interface SGAutocompletionResultTest : XCTestCase
+@interface TKAutocompletionResultTest : XCTestCase
 
 @end
 
-@implementation SGAutocompletionResultTest
+@implementation TKAutocompletionResultTest
 
 - (void)testAutocompletionPreparation
 {
-  XCTAssertEqualObjects([SGAutocompletionResult stringForScoringOfString:@"  Home!!! "], @"home");
+  XCTAssertEqualObjects([TKAutocompletionResult stringForScoringOfString:@"  Home!!! "], @"home");
 }
 
 - (void)testHomeAutocompletion
@@ -26,31 +26,31 @@
   NSString *searchTerm = @"Home";
   NSInteger score;
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@" Homebush"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@" Homebush"];
   XCTAssertEqual(score, 100 - 4);
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"home"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"home"];
   XCTAssertEqual(score, 100);
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Home Thai"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Home Thai"];
   XCTAssertEqual(score, 100 - 5);
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Indian Home Diner"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Indian Home Diner"];
   XCTAssertEqual(score, 48); // penalty for not matching start and excess
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@""];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@""];
   XCTAssertEqual(score, 100);
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"My Home"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"My Home"];
   XCTAssertEqual(score, 75 - 3*2 - 3); // penalty for not matching start
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Adrian's Home"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Adrian's Home"];
   XCTAssertEqual(score, 75 - 8*2 - 8); // penalty for not matching start
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"PCHome"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"PCHome"];
   XCTAssertEqual(score, 40 - 2); // penalty for not matching start of word
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"hxoxmxex"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"hxoxmxex"];
   XCTAssertEqual(score, 0);
 }
 
@@ -59,25 +59,25 @@
   NSString *searchTerm = @"Max B";
   NSInteger score;
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Max Brenner Chocolate Bar"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Max Brenner Chocolate Bar"];
   XCTAssertEqual(score, 100 - 20);
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"max  black"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"max  black"];
   XCTAssertEqual(score, 100 - 4);
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"The MAX BLACK"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"The MAX BLACK"];
   XCTAssertEqual(score, 75 - 4*2 - 8); // penalty for not starting with it
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Max Power Bullets"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Max Power Bullets"];
   XCTAssertEqual(score, 66 - 12); // Right order and all words complete
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Maxwell's Cafe Bar Espresso"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Maxwell's Cafe Bar Espresso"];
   XCTAssertEqual(score, 33 - 21); // Penalty for not having a completed word
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"B Max Property Group"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"B Max Property Group"];
   XCTAssertEqual(score, 0); // Penalty for order mismatch
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"B&N - Max PTY LTD"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"B&N - Max PTY LTD"];
   XCTAssertEqual(score, 1); // Penalty for order mismatch
 }
 
@@ -86,16 +86,16 @@
   NSString *searchTerm = @"Ashfield S";
   NSInteger score;
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Ashfield Station"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Ashfield Station"];
   XCTAssertEqual(score, 100 - 6);
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Ashfield (Station)"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Ashfield (Station)"];
   XCTAssertEqual(score, 100 - 6);
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Brown St near Ashfield"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Brown St near Ashfield"];
   XCTAssertEqual(score, 0); // order mismatch
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Ses Fashions"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Ses Fashions"];
   XCTAssertEqual(score, 0); // missing a word
 }
 
@@ -103,11 +103,11 @@
 {
   NSInteger score;
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"Brandon Ave" candidate:@"Another Ave"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"Brandon Ave" candidate:@"Another Ave"];
   XCTAssertEqual(score, 0);
   
   // This is debatable. Would be nice if you still scored some points
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"Brandon Ave, Sydney" candidate:@"Brandon Avenue"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"Brandon Ave, Sydney" candidate:@"Brandon Avenue"];
   XCTAssertEqual(score, 0);
 }
 
@@ -116,10 +116,10 @@
   NSString *searchTerm = @"Dee Why";
   NSInteger score;
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Big Red Dee Why"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Big Red Dee Why"];
   XCTAssertEqual(score, 75 - 8*2 - 8); // penalty for not matching start
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Dee Why NSW"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Dee Why NSW"];
   XCTAssertEqual(score, 100 - 4);
 }
 
@@ -128,7 +128,7 @@
   NSString *searchTerm = @"george street";
   NSInteger score;
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Telstra Loading Dock 400 George Street Sydney"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"Telstra Loading Dock 400 George Street Sydney"];
   XCTAssertEqual(score, 33);
 }
 
@@ -136,22 +136,22 @@
 {
   NSInteger score;
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"moma" candidate:@"Museum of Modern Art"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"moma" candidate:@"Museum of Modern Art"];
   XCTAssertEqual(score, 95); // minor penalty for abbreviations
 
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"moma" candidate:@"Museum of Modern Art (MoMA)"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"moma" candidate:@"Museum of Modern Art (MoMA)"];
   XCTAssertEqual(score, 95); // minor penalty for abbreviations
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"museum of modern art" candidate:@"MoMA"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"museum of modern art" candidate:@"MoMA"];
   XCTAssertEqual(score, 90); // minor penalty for abbreviations
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"mcg" candidate:@"Melbourne Cricket Ground"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"mcg" candidate:@"Melbourne Cricket Ground"];
   XCTAssertEqual(score, 95); // minor penalty for abbreviations
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"m" candidate:@"Melbourne"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"m" candidate:@"Melbourne"];
   XCTAssertEqual(score, 92); // abbreviation is too short, but it's valid autocompletion
   
-  score = [SGAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"mc" candidate:@"Melbourne Cricket"];
+  score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:@"mc" candidate:@"Melbourne Cricket"];
   XCTAssertEqual(score, 0); // abbreviation is too short
 }
 

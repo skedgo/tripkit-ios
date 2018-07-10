@@ -11,7 +11,7 @@
 
 #import "SGSearchDataSource.h"
 
-@class SGAutocompletionResult;
+@class TKAutocompletionResult;
 @class SGAutocompletionDataSourceSwiftStorage;
 
 typedef NS_ENUM(NSInteger, SGSearchSection) {
@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, SGSearchExtraRow) {
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
 @interface SGAutocompletionDataSource : NSObject
 #if TARGET_OS_IPHONE
   <SGSearchDataSource>

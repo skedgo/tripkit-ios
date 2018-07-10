@@ -12,7 +12,7 @@
 #import "TripKit.h"
 #endif
 
-#import "SVKServerKit.h"
+#import "TKServerKit.h"
 #import "TripKit/TripKit-Swift.h"
 
 @implementation TKRouter
@@ -45,7 +45,7 @@
   ZAssert(success, @"Success block is required");
   
   if ([request isDeleted]) {
-    NSError *error = [NSError errorWithCode:kSVKErrorTypeInternal
+    NSError *error = [NSError errorWithCode:kTKErrorTypeInternal
                                     message:@"Trip request deleted."];
     if (failure) {
       failure(error, self.modeIdentifiers);

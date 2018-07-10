@@ -303,7 +303,7 @@
 {
   ZAssert(error != nil || message != nil, @"Need either an error object of a message");
   
-  SGActions *alert = [[SGActions alloc] init];
+  TKActions *alert = [[TKActions alloc] init];
   alert.hasCancel = NO;
   alert.type = UIAlertControllerStyleAlert;
   alert.message = error ? error.localizedDescription : message;

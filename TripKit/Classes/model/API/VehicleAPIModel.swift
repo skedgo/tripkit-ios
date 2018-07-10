@@ -55,7 +55,7 @@ extension API {
 
 extension API.VehicleOccupancy {
   
-  public var color: SGKColor? {
+  public var color: TKColor? {
     
     switch self {
     case .unknown: return nil

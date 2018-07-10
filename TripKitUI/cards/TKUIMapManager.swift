@@ -69,7 +69,7 @@ open class TKUIMapManager: TGMapManager {
     }
     TKRegionOverlayHelper.shared.regionsPolygon(updateOverlay)
     NotificationCenter.default.rx
-      .notification(.SGMapShouldRefreshOverlay)
+      .notification(.TKRegionManagerUpdatedRegions)
       .subscribe(onNext: { _ in
         TKRegionOverlayHelper.shared.clearCache()
         TKRegionOverlayHelper.shared.regionsPolygon(updateOverlay)
@@ -124,7 +124,7 @@ extension TKUIMapManager {
     if let geodesic = overlay as? MKGeodesicPolyline {
       return TKUIPolylineRenderer(polyline: geodesic)
       
-    } else if let polyline = overlay as? STKRoutePolyline {
+    } else if let polyline = overlay as? TKRoutePolyline {
       let renderer = TKUIPolylineRenderer(polyline: polyline)
       renderer.strokeColor = polyline.route.routeColor
       renderer.lineDashPattern = polyline.route.routeDashPattern

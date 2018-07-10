@@ -20,7 +20,7 @@ extension API {
     let name: String?
     let direction: String?
     let color: RGBColor?
-    let modeInfo: ModeInfo
+    let modeInfo: TKModeInfo
 
     let alertHashCodes: [Int]?
     let bicycleAccessible: Bool?

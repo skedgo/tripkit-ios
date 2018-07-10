@@ -28,15 +28,15 @@ extension AKLabelCell {
     
     self.primaryLabel?.textAlignment = .left
     self.primaryToSecondarySpacing?.constant = 8.0
-    self.primaryLabel?.textColor = SGStyleManager.darkTextColor()
-    self.secondaryLabel?.textColor = SGStyleManager.lightTextColor()
+    self.primaryLabel?.textColor = TKStyleManager.darkTextColor()
+    self.secondaryLabel?.textColor = TKStyleManager.lightTextColor()
   }
   
   open override func awakeFromNib() {
     super.awakeFromNib()
     
-    self.primaryLabel?.textColor = SGStyleManager.darkTextColor()
-    self.secondaryLabel?.textColor = SGStyleManager.lightTextColor()
+    self.primaryLabel?.textColor = TKStyleManager.darkTextColor()
+    self.secondaryLabel?.textColor = TKStyleManager.lightTextColor()
   }
   
 }

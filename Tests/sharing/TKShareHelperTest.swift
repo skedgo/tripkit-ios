@@ -14,11 +14,11 @@ import RxBlocking
 
 class TKShareHelperTest: XCTestCase {
   
-  let geocoder: SGBuzzGeocoder? = {
+  let geocoder: TKSkedGoGeocoder? = {
     let env = ProcessInfo.processInfo.environment
     if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
       TripKit.apiKey = apiKey
-      return SGBuzzGeocoder()
+      return TKSkedGoGeocoder()
     } else {
       return nil
     }
@@ -26,7 +26,7 @@ class TKShareHelperTest: XCTestCase {
   
   func testQueryUrlWithW3W() throws {
     guard let geocoder = geocoder else {
-      XCTFail("Could not construct SGBuzzGeocoder. Check environment variables.")
+      XCTFail("Could not construct TKSkedGoGeocoder. Check environment variables.")
       return
     }
 

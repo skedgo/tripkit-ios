@@ -60,7 +60,7 @@ extension SegmentTemplate {
       return [1] // no dashes if we have dedicated color
     }
     
-    let group: SVKParserHelperMode
+    let group: TKParserHelperMode
     if isWalking {
       group = .walking
     } else if !isPublicTransport && !isStationary {
@@ -68,7 +68,7 @@ extension SegmentTemplate {
     } else {
       group = .vehicle
     }
-    return SVKParserHelper.dashPattern(for: group)
+    return TKParserHelper.dashPattern(for: group)
   }
   
   @objc public var isPublicTransport: Bool {
@@ -76,19 +76,19 @@ extension SegmentTemplate {
   }
 
   @objc public var isWalking: Bool {
-    return SVKTransportModes.modeIdentifierIsWalking(modeIdentifier)
+    return TKTransportModes.modeIdentifierIsWalking(modeIdentifier)
   }
 
   @objc public var isWheelchair: Bool {
-    return SVKTransportModes.modeIdentifierIsWheelchair(modeIdentifier)
+    return TKTransportModes.modeIdentifierIsWheelchair(modeIdentifier)
   }
   
   @objc public var isCycling: Bool {
-    return SVKTransportModes.modeIdentifierIsCycling(modeIdentifier)
+    return TKTransportModes.modeIdentifierIsCycling(modeIdentifier)
   }
   
   @objc public var isDriving: Bool {
-    return SVKTransportModes.modeIdentifierIsDriving(modeIdentifier)
+    return TKTransportModes.modeIdentifierIsDriving(modeIdentifier)
   }
   
   @objc public var isStationary: Bool {
@@ -100,15 +100,15 @@ extension SegmentTemplate {
   }
   
   @objc public var isAffectedByTraffic: Bool {
-    return !isStationary && SVKTransportModes.modeIdentifierIsAffected(byTraffic: modeIdentifier)
+    return !isStationary && TKTransportModes.modeIdentifierIsAffected(byTraffic: modeIdentifier)
   }
   
   @objc public var isSharedVehicle: Bool {
-    return SVKTransportModes.modeIdentifierIsSharedVehicle(modeIdentifier)
+    return TKTransportModes.modeIdentifierIsSharedVehicle(modeIdentifier)
   }
   
   @objc public var isFlight: Bool {
-    return SVKTransportModes.modeIdentifierIsFlight(modeIdentifier)
+    return TKTransportModes.modeIdentifierIsFlight(modeIdentifier)
   }
   
 }
@@ -116,8 +116,8 @@ extension SegmentTemplate {
 // MARK: - Computed properties (from data)
 
 struct SegmentTemplateData: Codable {
-  var miniInstruction: STKMiniInstruction? = nil
-  var modeInfo: ModeInfo? = nil
+  var miniInstruction: TKMiniInstruction? = nil
+  var modeInfo: TKModeInfo? = nil
   var turnByTurnMode: TKTurnByTurnMode? = nil
   
   static func from(data: Data) -> SegmentTemplateData {
@@ -128,7 +128,7 @@ struct SegmentTemplateData: Codable {
       // The old way
       var templateData = SegmentTemplateData()
       if let dict = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: NSCoding] {
-        templateData.modeInfo = dict["modeInfo"] as? ModeInfo
+        templateData.modeInfo = dict["modeInfo"] as? TKModeInfo
       } else {
         assertionFailure("Unexpected data: \(data). Error: \(error)")
       }
@@ -139,12 +139,12 @@ struct SegmentTemplateData: Codable {
 
 extension SegmentTemplate {
   
-  public var miniInstruction: STKMiniInstruction? {
+  public var miniInstruction: TKMiniInstruction? {
     get { return segmentTemplateData.miniInstruction }
     set { edit { $0.miniInstruction = newValue} }
   }
   
-  @objc public var modeInfo: ModeInfo? {
+  @objc public var modeInfo: TKModeInfo? {
     get { return segmentTemplateData.modeInfo }
     set { edit { $0.modeInfo = newValue} }
   }

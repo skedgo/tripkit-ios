@@ -16,6 +16,8 @@
 @import TripKitUI;
 #endif
 
+#import "SGKConstants.h"
+
 #import "AMKAccountKit.h"
 
 // Configure table view
@@ -97,11 +99,11 @@ typedef NS_ENUM(NSInteger, EmailEditingTypes) {
 - (BOOL)validateEmailAddress
 {
   if (! [_address isValidEmail]) {
-    [SGAlert showWithText:@"Invalid email address" inController:self];
+    [TKAlertController showWithText:@"Invalid email address" inController:self];
     return NO;
     
   } else if (! [_address isEqualToString:_confirmedAddress]) {
-    [SGAlert showWithText:@"Email addresses do not match" inController:self];
+    [TKAlertController showWithText:@"Email addresses do not match" inController:self];
     return NO;
   }
   
@@ -128,7 +130,7 @@ typedef NS_ENUM(NSInteger, EmailEditingTypes) {
           [SGKStrongSelf dismissViewControllerAnimated:YES completion:nil];
         }];
      } else {
-       [SGAlert showWithText:error.localizedDescription inController:SGKStrongSelf];
+       [TKAlertController showWithText:error.localizedDescription inController:SGKStrongSelf];
      }
    }];
 }
@@ -146,7 +148,7 @@ typedef NS_ENUM(NSInteger, EmailEditingTypes) {
      SGKPrepareStrongSelf();
      
      if (error != nil) {
-       [SGAlert showWithText:error.localizedDescription inController:SGKStrongSelf];
+       [TKAlertController showWithText:error.localizedDescription inController:SGKStrongSelf];
      } else {
        [KVNProgress showSuccessWithStatus:@"Email removed"
                                completion:
@@ -173,7 +175,7 @@ typedef NS_ENUM(NSInteger, EmailEditingTypes) {
      SGKPrepareStrongSelf();
      
      if (error != nil) {
-       [SGAlert showWithText:error.localizedDescription inController:SGKStrongSelf];
+       [TKAlertController showWithText:error.localizedDescription inController:SGKStrongSelf];
      } else {
        [KVNProgress showSuccessWithStatus:@"Primary email updated"
                                completion:

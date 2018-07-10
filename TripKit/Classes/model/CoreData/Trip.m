@@ -145,14 +145,14 @@ typedef NSUInteger SGTripFlag;
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
   [dateFormatter setDateStyle:NSDateFormatterNoStyle];
-  [dateFormatter setLocale:[SGStyleManager applicationLocale]];
+  [dateFormatter setLocale:[TKStyleManager applicationLocale]];
 	
 	NSTimeZone *tz = [self departureTimeZone];
   if(tz) {
 		[dateFormatter setTimeZone:tz];
   }
 
-  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibilityInDetails]) {
+  for (TKSegment *segment in [self segmentsWithVisibility:TKTripSegmentVisibilityInDetails]) {
     // this is related to SegmentSectionHeaderViews!
     
     // insert a new location as soon as we end up there
@@ -162,7 +162,7 @@ typedef NSUInteger SGTripFlag;
       id<MKAnnotation> thisStart = segment.start;
       id<MKAnnotation> thisEnd   = segment.end;
       if (thisEnd) {
-        if (! [SGLocationHelper coordinate:[thisStart coordinate]
+        if (! [TKLocationHelper coordinate:[thisStart coordinate]
                                     isNear:[thisEnd coordinate]]) {
           // simple case: start is far from end: add location
           [text appendString:[[self class] addressForObject:thisStart]];
@@ -221,7 +221,7 @@ typedef NSUInteger SGTripFlag;
   [output appendString:@"; "];
   
   BOOL first = true;
-  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibilityInDetails]) {
+  for (TKSegment *segment in [self segmentsWithVisibility:TKTripSegmentVisibilityInDetails]) {
     if (first) {
       first = false;
     } else {
@@ -306,24 +306,24 @@ typedef NSUInteger SGTripFlag;
   return NO;
 }
 
-- (SGTimeType)tripTimeType
+- (TKTimeType)tripTimeType
 {
-  return (SGTimeType) self.request.timeType.integerValue;
+  return (TKTimeType) self.request.timeType.integerValue;
 }
 
 - (NSTimeInterval)sortOrderTime
 {
   NSTimeInterval seconds;
-	SGTimeType timeType = [self tripTimeType];
+	TKTimeType timeType = [self tripTimeType];
 	switch (timeType) {
-		case SGTimeTypeArriveBefore:
+		case TKTimeTypeArriveBefore:
       // tis one is backwards!
       seconds = -1 * [self.departureTime timeIntervalSinceReferenceDate];
 			break;
       
-		case SGTimeTypeLeaveAfter:
-    case SGTimeTypeNone: // no selection also sort by time from now
-		case SGTimeTypeLeaveASAP:
+		case TKTimeTypeLeaveAfter:
+    case TKTimeTypeNone: // no selection also sort by time from now
+		case TKTimeTypeLeaveASAP:
 			seconds = [self.arrivalTime timeIntervalSinceReferenceDate];
 			break;
 	}
@@ -333,18 +333,18 @@ typedef NSUInteger SGTripFlag;
 - (NSTimeInterval)calculateOffset
 {
   NSTimeInterval seconds;
-	SGTimeType timeType = [self tripTimeType];
+	TKTimeType timeType = [self tripTimeType];
 	switch (timeType) {
-		case SGTimeTypeArriveBefore:
+		case TKTimeTypeArriveBefore:
 			seconds = [self.request.arrivalTime timeIntervalSinceDate:self.arrivalTime];
 			break;
 		
-		case SGTimeTypeLeaveAfter:
+		case TKTimeTypeLeaveAfter:
 			seconds = [self.departureTime timeIntervalSinceDate:self.request.departureTime];
 			break;
 		
-    case SGTimeTypeNone: // no selection also sort by time from now
-		case SGTimeTypeLeaveASAP:
+    case TKTimeTypeNone: // no selection also sort by time from now
+		case TKTimeTypeLeaveASAP:
 			seconds = [self.departureTime timeIntervalSinceNow];
 			break;
 	}
@@ -354,18 +354,18 @@ typedef NSUInteger SGTripFlag;
 - (NSTimeInterval)calculateDurationFromQuery
 {
   NSTimeInterval seconds;
-	SGTimeType timeType = [self tripTimeType];
+	TKTimeType timeType = [self tripTimeType];
 	switch (timeType) {
-		case SGTimeTypeArriveBefore:
+		case TKTimeTypeArriveBefore:
 			seconds = [self.request.arrivalTime timeIntervalSinceDate:self.departureTime];
 			break;
       
-		case SGTimeTypeLeaveAfter:
+		case TKTimeTypeLeaveAfter:
 			seconds = [self.arrivalTime timeIntervalSinceDate:self.request.departureTime];
 			break;
       
-    case SGTimeTypeNone: // no selection also sort by time from now
-		case SGTimeTypeLeaveASAP:
+    case TKTimeTypeNone: // no selection also sort by time from now
+		case TKTimeTypeLeaveASAP:
 			seconds = [self.arrivalTime timeIntervalSinceNow];
 			break;
 	}
@@ -374,7 +374,7 @@ typedef NSUInteger SGTripFlag;
 
 - (NSNumber *)calculateDuration
 {
-  self.minutes = @([SGKObjcDateHelper minutesForStart:self.departureTime end:self.arrivalTime]);
+  self.minutes = @([TKObjcDateHelper minutesForStart:self.departureTime end:self.arrivalTime]);
   return self.minutes;
 }
 
@@ -585,7 +585,7 @@ typedef NSUInteger SGTripFlag;
       sTripAccessibilityDateFormatter = [[NSDateFormatter alloc] init];
       sTripAccessibilityDateFormatter.dateStyle = NSDateFormatterNoStyle;
       sTripAccessibilityDateFormatter.timeStyle = NSDateFormatterShortStyle;
-      sTripAccessibilityDateFormatter.locale = [SGStyleManager applicationLocale];
+      sTripAccessibilityDateFormatter.locale = [TKStyleManager applicationLocale];
     });
 	}
 	NSTimeZone *timeZone = [self departureTimeZone];
@@ -595,13 +595,13 @@ typedef NSUInteger SGTripFlag;
   sTripAccessibilityDateFormatter.timeZone = timeZone;
 	
   BOOL separateByComma = NO;
-  for (TKSegment *segment in [self segmentsWithVisibility:STKTripSegmentVisibilityInSummary]) {
+  for (TKSegment *segment in [self segmentsWithVisibility:TKTripSegmentVisibilityInSummary]) {
     if (separateByComma) {
       [accessibleLabel appendString:@", "];
     } else {
       separateByComma = YES;
     }
-    ModeInfo *modeInfo = segment.modeInfo;
+    TKModeInfo *modeInfo = segment.modeInfo;
     if (modeInfo) {
       [accessibleLabel appendString:[modeInfo alt]];
     }
@@ -635,7 +635,7 @@ typedef NSUInteger SGTripFlag;
     return @"";
   }
   
-  return [SGKObjcDateHelper durationStringLongForStart:self.departureTime end:self.arrivalTime];
+  return [TKObjcDateHelper durationStringLongForStart:self.departureTime end:self.arrivalTime];
 }
 
 - (NSDictionary *)accessibleCostValues
@@ -649,13 +649,13 @@ typedef NSUInteger SGTripFlag;
   if (includeTime) {
     NSString *durationString = [self durationString];
     if (durationString) {
-      values[@(STKTripCostTypeDuration)] = durationString;
+      values[@(TKTripCostTypeDuration)] = durationString;
     }
   }
-  values[@(STKTripCostTypeCalories)] = [SGStyleManager exerciseStringForCalories: self.totalCalories.doubleValue];
-  values[@(STKTripCostTypeCarbon)]   = [self.totalCarbon toCarbonString];
+  values[@(TKTripCostTypeCalories)] = [TKStyleManager exerciseStringForCalories: self.totalCalories.doubleValue];
+  values[@(TKTripCostTypeCarbon)]   = [self.totalCarbon toCarbonString];
   if (self.totalPrice) {
-    values[@(STKTripCostTypePrice)]  = [self.totalPrice toMoneyString:[self currencySymbol]];
+    values[@(TKTripCostTypePrice)]  = [self.totalPrice toMoneyString:[self currencySymbol]];
   }
   return values;
 }

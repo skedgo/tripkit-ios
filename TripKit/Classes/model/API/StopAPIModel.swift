@@ -42,7 +42,7 @@ extension API {
     let wheelchairAccessible: Bool?
 
     let children: [Stop]?
-    let modeInfo: ModeInfo
+    let modeInfo: TKModeInfo
     
     let alertHashCodes: [Int]?
   }

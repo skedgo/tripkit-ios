@@ -272,7 +272,7 @@
   }
   
   NSDate *date = [NSDate dateWithTimeIntervalSince1970:epochTime.doubleValue];
-  return [SGStyleManager stringForDate:date forTimeZone:[NSTimeZone localTimeZone] showDate:YES showTime:YES];
+  return [TKStyleManager stringForDate:date forTimeZone:[NSTimeZone localTimeZone] showDate:YES showTime:YES];
 }
 
 @end

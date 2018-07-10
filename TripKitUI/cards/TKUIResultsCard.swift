@@ -19,7 +19,7 @@ import RxDataSources
 #endif
 
 public protocol TKUIResultsCardDelegate: class {
-  func resultsCard(_ card: TKUIResultsCard, requestsModePickerWithModes modes: [String], for region: SVKRegion, sender: Any?)
+  func resultsCard(_ card: TKUIResultsCard, requestsModePickerWithModes modes: [String], for region: TKRegion, sender: Any?)
 }
 
 public class TKUIResultsCard: TGTableCard {
@@ -38,8 +38,8 @@ public class TKUIResultsCard: TGTableCard {
   
   private lazy var footerButton = { () -> UIButton in
     let button = UIButton(type: .custom)
-    button.titleLabel?.font = SGStyleManager.systemFont(withTextStyle: UIFontTextStyle.caption1.rawValue)
-    button.setTitleColor(SGStyleManager.globalTintColor(), for: .normal)
+    button.titleLabel?.font = TKStyleManager.systemFont(withTextStyle: UIFontTextStyle.caption1.rawValue)
+    button.setTitleColor(TKStyleManager.globalTintColor(), for: .normal)
     return button
   }()
   
@@ -332,7 +332,7 @@ extension TKUIResultsCard: TKUITimePickerSheetDelegate {
 
 extension TKUIResultsCard {
   
-  private func showTransportOptions(modes: [String], for region: SVKRegion) {
+  private func showTransportOptions(modes: [String], for region: TKRegion) {
     resultsDelegate?.resultsCard(self, requestsModePickerWithModes: modes, for: region, sender: accessoryView.transportButton)
   }
   

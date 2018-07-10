@@ -13,7 +13,7 @@
 #import "UIColor+Variations.h"
 #import "UIView+BearingRotation.h"
 #import "UIView+Helpers.h"
-#import "SGStyleManager+SGCoreUI.h"
+#import "TKStyleManager+TripKitUI.h"
 #import "UIFont+CustomFonts.h"
 #import "UISearchBar+Customizable.h"
 #import "MKMapView+ZoomToAnnotations.h"

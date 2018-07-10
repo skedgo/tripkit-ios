@@ -845,7 +845,7 @@ static NSString *const kPathImage     = @"api/user/image";
 
   } else {
     // We may have user errors, so let's check that.
-    SVKError *error = [SVKError errorFromJSON:response statusCode:200];
+    TKError *error = [TKError errorFromJSON:response statusCode:200];
     if (error) {
       handler(nil, error);
 
@@ -855,7 +855,7 @@ static NSString *const kPathImage     = @"api/user/image";
         handler(userToken, nil);
       } else {
         NSString *description = @"Cannot find a valid token"; // No need to translate this
-        error = [SVKError errorWithCode:1301 userInfo:@{ NSLocalizedDescriptionKey: description}];
+        error = [TKError errorWithCode:1301 userInfo:@{ NSLocalizedDescriptionKey: description}];
         handler(nil, error);
       }
     }
@@ -864,20 +864,9 @@ static NSString *const kPathImage     = @"api/user/image";
 
 #pragma mark - Private methods
 
-- (NSString *)providerIdForAppId:(SGAppIds)appId
+- (TKServer *)sharedServer
 {
-  switch (appId) {
-    case SGAppIdTripGo:
-      return @"FACEBOOK_TRIPGO";
-      
-    default:
-      return @"";
-  }
-}
-
-- (SVKServer *)sharedServer
-{
-  return [SVKServer sharedInstance];
+  return [TKServer sharedInstance];
 }
 
 @end

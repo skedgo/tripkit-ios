@@ -116,10 +116,10 @@
   }
   
   cell.textLabel.textColor = [UIColor darkTextColor];
-  cell.textLabel.font = [SGStyleManager systemFontWithTextStyle:UIFontTextStyleBody];
+  cell.textLabel.font = [TKStyleManager systemFontWithTextStyle:UIFontTextStyleBody];
   
   cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-  cell.detailTextLabel.font = [SGStyleManager systemFontWithTextStyle:UIFontTextStyleCaption1];
+  cell.detailTextLabel.font = [TKStyleManager systemFontWithTextStyle:UIFontTextStyleCaption1];
   
   return cell;
 }

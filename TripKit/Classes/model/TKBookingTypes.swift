@@ -42,13 +42,13 @@ public enum TKBooking {
       case logoImageName = "remoteIcon"
     }
     
-    public var color: SGKColor? {
+    public var color: TKColor? {
       return rgbColor?.color
     }
     
     public var downloadableLogoURL: URL? {
       guard let fileNamePart = logoImageName else { return nil }
-      return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+      return TKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
     }
   }
   

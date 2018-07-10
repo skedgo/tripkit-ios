@@ -46,7 +46,7 @@ public extension UIImageView {
   @objc public convenience init(asWheelchairAccessoryImageWithTintColor tintColor: UIColor?) {
     self.init()
     
-    let image = SGStyleManager.imageNamed("icon-wheelchair")
+    let image = TKStyleManager.imageNamed("icon-wheelchair")
     if let tintColor = tintColor {
       self.image = image.withTintColor(tintColor)
     } else {

@@ -20,7 +20,7 @@
 
 @implementation BPKSectionItem (Address)
 
-- (SGKNamedCoordinate *)annotation
+- (TKNamedCoordinate *)annotation
 {
   if (! [self isAddressItem]) {
     return nil;
@@ -33,7 +33,7 @@
     CGFloat lng = [addressValue[@"lng"] floatValue];
     NSString *address = addressValue[@"address"];
     NSString *name = addressValue[@"name"];
-    SGKNamedCoordinate *annotation = [[SGKNamedCoordinate alloc] initWithLatitude:lat longitude:lng name:name address:address];
+    TKNamedCoordinate *annotation = [[TKNamedCoordinate alloc] initWithLatitude:lat longitude:lng name:name address:address];
     return annotation;
   }
   

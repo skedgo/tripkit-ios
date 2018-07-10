@@ -572,7 +572,7 @@
     return;
   }
   
-  SGKNamedCoordinate *annotation = [item annotation];
+  TKNamedCoordinate *annotation = [item annotation];
   BPKMapViewController *mapController = [[BPKMapViewController alloc] init];
   mapController.annotation = annotation;
   [self.navigationController pushViewController:mapController animated:YES];

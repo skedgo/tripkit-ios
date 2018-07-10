@@ -43,7 +43,7 @@
 }
 
 + (void)updateDLSEntries:(NSSet<DLSEntry *> *)entries
-                inRegion:(SVKRegion *)region
+                inRegion:(TKRegion *)region
                  success:(void (^)(NSSet<DLSEntry *> *entries))success
                  failure:(void (^)(NSError *error))failure
 {
@@ -92,7 +92,7 @@
 }
 
 + (void)updateEmbarkations:(NSSet<StopVisits *> *)embarkations
-                  inRegion:(SVKRegion *)region
+                  inRegion:(TKRegion *)region
                    success:(void (^)(NSSet<StopVisits *> *embarkations))success
                    failure:(void (^)(NSError *error))failure
 {
@@ -140,7 +140,7 @@
 }
 
 + (void)updateServices:(NSSet<Service *> *)services
-              inRegion:(SVKRegion *)region
+              inRegion:(TKRegion *)region
                success:(void (^)(NSSet<Service *> *services))success
                failure:(void (^)(NSError *error))failure
 {
@@ -184,7 +184,7 @@
 }
 
 + (void)fetchUpdatesForServiceParas:(NSArray *)serviceParas
-                          forRegion:(SVKRegion *)region
+                          forRegion:(TKRegion *)region
                             success:(void (^)(id __nullable responseObject))success
                             failure:(void (^)(NSError * __nullable error))failure
 {
@@ -194,7 +194,7 @@
   }
 	if (! region.name) {
 		ZAssert(false, @"Bad region with no name: %@", region);
-		failure([NSError errorWithCode:kSVKErrorTypeInternal message:@"Region has no name."]);
+		failure([NSError errorWithCode:kTKErrorTypeInternal message:@"Region has no name."]);
 		return;
 	}
   if (serviceParas.count == 0) {
@@ -212,7 +212,7 @@
 	};
 	
 	// now send it off to the server
-	SVKServer *server = [SVKServer sharedInstance];
+	TKServer *server = [TKServer sharedInstance];
   [server hitSkedGoWithMethod:@"POST"
                          path:@"latest.json"
                    parameters:paras
@@ -283,7 +283,7 @@
 			if (! startTime)
 				continue;
 			if (startTime.integerValue <= 0) {
-        		[SGKLog info:@"TKBuzzRealTime" format:@"Ignoring bad start time '%@' in response object:\n%@", startTime, responseObject];
+        		[TKLog info:@"TKBuzzRealTime" format:@"Ignoring bad start time '%@' in response object:\n%@", startTime, responseObject];
 				continue;
 			}
 			NSDate *departure = [NSDate dateWithTimeIntervalSince1970:startTime.integerValue];

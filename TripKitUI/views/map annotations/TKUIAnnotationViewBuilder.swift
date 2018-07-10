@@ -94,7 +94,7 @@ open class TKUIAnnotationViewBuilder: NSObject {
       return build(for: glyphable, enableClustering: enableClustering)
     } else if let vehicle = annotation as? Vehicle {
       return build(for: vehicle)      
-    } else if preferSemaphore, let timePoint = annotation as? STKDisplayableTimePoint {
+    } else if preferSemaphore, let timePoint = annotation as? TKDisplayableTimePoint {
       return buildSemaphore(for: timePoint)
     } else if let visit = annotation as? StopVisits {
       return buildCircle(for: visit)
@@ -102,7 +102,7 @@ open class TKUIAnnotationViewBuilder: NSObject {
       return buildCircle(for: stop)
     } else if let segment = annotation as? TKSegment {
       return buildSemaphore(for: segment)
-    } else if let displayable = annotation as? STKDisplayablePoint {
+    } else if let displayable = annotation as? TKDisplayablePoint {
       return build(for: displayable, enableClustering: enableClustering)
     }
     
@@ -146,7 +146,7 @@ private extension TKUIAnnotationViewBuilder {
       }
     }
     
-    if let displayable = glyphable as? STKDisplayablePoint {
+    if let displayable = glyphable as? TKDisplayablePoint {
       view.clusteringIdentifier = enableClustering && displayable.priority.rawValue < 500
         ? displayable.pointClusterIdentifier : nil
       view.displayPriority = displayable.priority
@@ -219,7 +219,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     }
   }
 
-  fileprivate func buildSemaphore(for point: STKDisplayableTimePoint) -> MKAnnotationView {
+  fileprivate func buildSemaphore(for point: TKDisplayableTimePoint) -> MKAnnotationView {
     let semaphoreView = self.semaphoreView(for: point)
     
     // Set time stamp on the side opposite to direction of travel
@@ -254,7 +254,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     if let frequency = segment.frequency() {
       semaphoreView.setFrequency(frequency, onSide: side)
     } else if let departure = segment.departureTime {
-      semaphoreView.setTime(departure, isRealTime: segment.timesAreRealTime(), in: (segment as STKDisplayableTimePoint).timeZone, onSide: side)
+      semaphoreView.setTime(departure, isRealTime: segment.timesAreRealTime(), in: (segment as TKDisplayableTimePoint).timeZone, onSide: side)
     }
     
     semaphoreView.canShowCallout = annotation.title != nil
@@ -290,8 +290,8 @@ fileprivate extension TKUISemaphoreView {
 fileprivate extension TKUIAnnotationViewBuilder {
   
   fileprivate func buildCircle(for visit: StopVisits) -> MKAnnotationView {
-    let color: SGKColor?
-    if asTravelled, let serviceColor = visit.service.color as? SGKColor {
+    let color: TKColor?
+    if asTravelled, let serviceColor = visit.service.color as? TKColor {
       color = serviceColor
     } else {
       color = nil
@@ -299,7 +299,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     return buildCircle(for: visit, color: color)
   }
   
-  fileprivate func buildCircle(for annotation: MKAnnotation, color: SGKColor? = nil) -> MKAnnotationView {
+  fileprivate func buildCircle(for annotation: MKAnnotation, color: TKColor? = nil) -> MKAnnotationView {
     let identifier = asLarge ? "LargeCircleView" : "SmallCircleView"
     
     let circleView: TKUICircleAnnotationView
@@ -331,7 +331,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
 
 fileprivate extension TKUIAnnotationViewBuilder {
 
-  fileprivate func build(for displayable: STKDisplayablePoint, enableClustering: Bool) -> MKAnnotationView {
+  fileprivate func build(for displayable: TKDisplayablePoint, enableClustering: Bool) -> MKAnnotationView {
     
     let identifier: String
     if #available(iOS 11, *), displayable is MKClusterAnnotation {
@@ -366,10 +366,10 @@ fileprivate extension TKUIAnnotationViewBuilder {
 }
 
 @available(iOS 11.0, *)
-fileprivate extension STKDisplayablePoint {
+fileprivate extension TKDisplayablePoint {
   
   var priority: MKFeatureDisplayPriority {
-    if let mode = self as? STKModeCoordinate, let priority = mode.priority {
+    if let mode = self as? TKModeCoordinate, let priority = mode.priority {
       return MKFeatureDisplayPriority(priority)
     } else {
       return .required
@@ -393,7 +393,7 @@ public extension TKUIAnnotationViewBuilder {
       if let segment = annotationView.annotation as? TKSegment {
         bearing = segment.bearing?.doubleValue ?? 0
         
-      } else if let timePoint = annotationView.annotation as? STKDisplayableTimePoint {
+      } else if let timePoint = annotationView.annotation as? TKDisplayableTimePoint {
         bearing = timePoint.bearing?.doubleValue ?? 0
       } else {
         bearing = 0

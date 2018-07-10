@@ -15,13 +15,13 @@ import CoreLocation
 class TKLocationRestorationTest: XCTestCase {
     
   func testRestoringNamedCoordinate() {
-    let namedCoordinate = SGKNamedCoordinate(latitude: 10, longitude: 10, name: "Name", address: "Address")
+    let namedCoordinate = TKNamedCoordinate(latitude: 10, longitude: 10, name: "Name", address: "Address")
     
     let archiver = NSKeyedArchiver()
     archiver.encode(namedCoordinate)
     
     let unarchiver = NSKeyedUnarchiver(forReadingWith: archiver.encodedData)
-    let restored = unarchiver.decodeObject() as? SGKNamedCoordinate
+    let restored = unarchiver.decodeObject() as? TKNamedCoordinate
     XCTAssertNotNil(restored)
     XCTAssertEqual(restored?.coordinate.latitude, namedCoordinate.coordinate.latitude)
     XCTAssertEqual(restored?.coordinate.longitude, namedCoordinate.coordinate.longitude)
@@ -30,7 +30,7 @@ class TKLocationRestorationTest: XCTestCase {
   }
   
   func testRestoringStop() throws {
-    let stop = try JSONDecoder().decode(STKStopCoordinate.self, withJSONObject: [
+    let stop = try JSONDecoder().decode(TKStopCoordinate.self, withJSONObject: [
       "address": "Blacktown Station Platform 1",
       "class": "StopLocation",
       "code": "2148531",
@@ -57,7 +57,7 @@ class TKLocationRestorationTest: XCTestCase {
     archiver.encode(stop)
     
     let unarchiver = NSKeyedUnarchiver(forReadingWith: archiver.encodedData)
-    let restored = unarchiver.decodeObject() as? STKStopCoordinate
+    let restored = unarchiver.decodeObject() as? TKStopCoordinate
     XCTAssertNotNil(restored)
     XCTAssertEqual(restored?.coordinate.latitude, stop.coordinate.latitude)
     XCTAssertEqual(restored?.coordinate.longitude, stop.coordinate.longitude)

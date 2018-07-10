@@ -27,7 +27,7 @@ extension CLGeocoder {
       }
       
       for placemark in placemarks {
-        if let postalAddress = SGLocationHelper.postalAddress(for: placemark) {
+        if let postalAddress = TKLocationHelper.postalAddress(for: placemark) {
           completion(postalAddress)
           return
         }

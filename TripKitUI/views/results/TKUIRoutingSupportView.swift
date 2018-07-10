@@ -35,14 +35,14 @@ public class TKUIRoutingSupportView: UIView {
     supportView.requestSupportButton.layer.cornerRadius = 8
     supportView.requestSupportButton.contentEdgeInsets = UIEdgeInsetsMake(8, 24, 8, 24)
     supportView.requestSupportButton.setTitle(Loc.RequestSupport.uppercased(), for: .normal)
-    supportView.requestSupportButton.backgroundColor = SGStyleManager.globalTintColor()
+    supportView.requestSupportButton.backgroundColor = TKStyleManager.globalTintColor()
     supportView.requestSupportButton.tintColor = .white
     
     // Bottom button
     
     supportView.planNewTripButton.setTitle(Loc.PlanANewTrip.uppercased(), for: .normal)
     supportView.planNewTripButton.backgroundColor = .clear
-    supportView.planNewTripButton.tintColor = SGStyleManager.globalTintColor()
+    supportView.planNewTripButton.tintColor = TKStyleManager.globalTintColor()
     
     // Both buttons
     

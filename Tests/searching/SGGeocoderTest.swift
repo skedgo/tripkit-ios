@@ -19,7 +19,7 @@ class SGGeocoderTest: XCTestCase {
   let newYork = MKCoordinateRegion.region(latitude: 40.716688, longitude: -74.006138)
   
   override func setUp() {
-    SVKServer.serverType = .production
+    TKServer.serverType = .production
     
     geocoder = aggregateGeocoder()
   }
@@ -94,7 +94,7 @@ class SGGeocoderTest: XCTestCase {
     let env = ProcessInfo.processInfo.environment
     if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
       TripKit.apiKey = apiKey
-      geocoders.append(SGBuzzGeocoder())
+      geocoders.append(TKSkedGoGeocoder())
       geocoders.append(TKPeliasGeocoder())
     } else {
       XCTFail("TripGo API key missing. Check environment variable 'TRIPGO_API_KEY'.")
@@ -102,7 +102,7 @@ class SGGeocoderTest: XCTestCase {
     
     if let clientID = env["FOURSQUARE_CLIENT_ID"], !clientID.isEmpty,
        let clientSecret = env["FOURSQUARE_CLIENT_SECRET"], !clientSecret.isEmpty {
-      let foursquare = SGFoursquareGeocoder(
+      let foursquare = TKFoursquareGeocoder(
         clientID: clientID,
         clientSecret: clientSecret
       )
@@ -217,7 +217,7 @@ extension SGGeocoder {
       nearRegion: mapRect,
       success: { query, results in
         
-        let (_, best) = results.reduce((0, nil as SGKNamedCoordinate?)) { previous, next in
+        let (_, best) = results.reduce((0, nil as TKNamedCoordinate?)) { previous, next in
           if next.sortScore > previous.0 {
             return (next.sortScore, next)
           } else {

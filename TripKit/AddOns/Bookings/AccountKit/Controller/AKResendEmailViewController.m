@@ -16,6 +16,8 @@
 @import TripKitUI;
 #endif
 
+#import "SGKConstants.h"
+
 #import "AMKAccountKit.h"
 
 #import "AKLabelCell.h"
@@ -53,7 +55,7 @@
 
 - (void)dealloc
 {
-  [SGKLog verbose:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+  [TKLog verbose:NSStringFromClass([self class]) block:^NSString * _Nonnull{
     return [NSString stringWithFormat:@"%@ is dealloc'ed", NSStringFromClass([self class])];
   }];
 }
@@ -152,7 +154,7 @@
          [SGKStrongSelf popSelfFromStack];
        }];
      } else {
-       [SGAlert showWithText:error.localizedDescription inController:SGKStrongSelf];
+       [TKAlertController showWithText:error.localizedDescription inController:SGKStrongSelf];
      }
      
      [SGKStrongSelf.tableView deselectRowAtIndexPath:SGKStrongSelf.lastSelectedIndexPath animated:YES];

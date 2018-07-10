@@ -44,12 +44,12 @@ public class TKUIAttributionView: UIView {
   }
   
   fileprivate func didInit() {
-    backgroundColor = SGStyleManager.backgroundColorForTileList()
+    backgroundColor = TKStyleManager.backgroundColorForTileList()
     
     let textView = UITextView()
-    textView.font = SGStyleManager.systemFont(withSize: 15)
+    textView.font = TKStyleManager.systemFont(withSize: 15)
     textView.backgroundColor = .clear
-    textView.textColor = SGStyleManager.darkTextColor()
+    textView.textColor = TKStyleManager.darkTextColor()
     textView.isEditable = false
     textView.isScrollEnabled = false
     textView.isPagingEnabled = false
@@ -107,7 +107,7 @@ public class TKUIAttributionView: UIView {
         attributedTitle.addAttribute(.link, value: url, range: range)
         view.title.isUserInteractionEnabled = true
       } else {
-        attributedTitle.addAttribute(.foregroundColor, value: SGStyleManager.globalTintColor(), range: range)
+        attributedTitle.addAttribute(.foregroundColor, value: TKStyleManager.globalTintColor(), range: range)
         view.title.isUserInteractionEnabled = false
       }
       

@@ -71,7 +71,7 @@ extension SGAutocompletionDataSource {
   }
   
   @objc
-  var autocompletionResults: [SGAutocompletionResult] {
+  var autocompletionResults: [TKAutocompletionResult] {
     return storage.results.value
   }
 
@@ -184,7 +184,7 @@ class SGAutocompletionDataSourceSwiftStorage: NSObject {
   
   // Outputs
   
-  fileprivate var results = Variable<[SGAutocompletionResult]>([])
+  fileprivate var results = Variable<[TKAutocompletionResult]>([])
 
   // Helpers
   

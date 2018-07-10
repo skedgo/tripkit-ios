@@ -33,7 +33,7 @@ class TKUIAlertCell: UITableViewCell {
   // MARK: -
   
   override func awakeFromNib() {
-    backgroundColor = SGStyleManager.backgroundColorForTileList()
+    backgroundColor = TKStyleManager.backgroundColorForTileList()
     titleLabel.numberOfLines = 0
     removePadding(from: textView)
   }
@@ -66,12 +66,12 @@ class TKUIAlertCell: UITableViewCell {
     
     dateAddedLabel.isHidden = alert.startTime == nil
     if let dateAdded = alert.startTime {
-      dateAddedLabel.text = Loc.From(date: SGStyleManager.string(for: dateAdded, for: .autoupdatingCurrent, showDate: true, showTime: false))      
+      dateAddedLabel.text = Loc.From(date: TKStyleManager.string(for: dateAdded, for: .autoupdatingCurrent, showDate: true, showTime: false))      
     }
 
     lastUpdatedLabel.isHidden = alert.lastUpdated == nil
     if let lastUpdated = alert.lastUpdated {
-      lastUpdatedLabel.text = Loc.LastUpdated(date: SGStyleManager.string(for: lastUpdated, for: .autoupdatingCurrent, showDate: true, showTime: false))
+      lastUpdatedLabel.text = Loc.LastUpdated(date: TKStyleManager.string(for: lastUpdated, for: .autoupdatingCurrent, showDate: true, showTime: false))
     }
     
     readMoreButton.isHidden = alert.infoURL == nil

@@ -10,7 +10,7 @@
 
 #import "NSString+ValidateEmailAddress.h"
 
-#import "SVKServerKit.h"
+#import "TKServerKit.h"
 
 @implementation AMKUser
 
@@ -157,12 +157,12 @@
 
 - (NSString *)token
 {
-  return [SVKServer userToken];
+  return [TKServer userToken];
 }
 
 - (void)setToken:(NSString *)token
 {
-  [SVKServer updateUserToken:token];
+  [TKServer updateUserToken:token];
 }
 
 - (NSDictionary *)appData

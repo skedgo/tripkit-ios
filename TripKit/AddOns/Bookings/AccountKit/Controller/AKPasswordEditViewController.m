@@ -58,7 +58,7 @@
 
 - (void)dealloc
 {
-  [SGKLog verbose:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+  [TKLog verbose:NSStringFromClass([self class]) block:^NSString * _Nonnull{
     return [NSString stringWithFormat:@"%@ is dealloc'ed", NSStringFromClass([self class])];
   }];
 }
@@ -129,7 +129,7 @@
      self.saveButton.enabled = YES;
      
      if (error) {
-       [SGAlert showWithText:error.localizedDescription inController:self];
+       [TKAlertController showWithText:error.localizedDescription inController:self];
      } else {
        [KVNProgress showSuccessWithStatus:@"Password changed"
                                completion:
@@ -154,17 +154,17 @@
 - (BOOL)showAlertIfRequired
 {
   if (_current.length == 0) {
-    [SGAlert showWithText:@"You must enter your current password to save a new one" inController:self];
+    [TKAlertController showWithText:@"You must enter your current password to save a new one" inController:self];
     return YES;
   }
   
   if (_next.length == 0) {
-    [SGAlert showWithText:@"New password is invalid" inController:self];
+    [TKAlertController showWithText:@"New password is invalid" inController:self];
     return YES;
   }
   
   if (! [_next isEqualToString:_confirmed]) {
-    [SGAlert showWithText:@"Passwords do not match" inController:self];
+    [TKAlertController showWithText:@"Passwords do not match" inController:self];
     return YES;
   }
   

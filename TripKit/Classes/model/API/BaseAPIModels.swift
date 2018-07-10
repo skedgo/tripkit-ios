@@ -74,12 +74,12 @@ extension API {
     let green: Int
     let blue: Int
     
-    var color: SGKColor {
-      return SGKColor(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: 1)
+    var color: TKColor {
+      return TKColor(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: 1)
     }
     
     #if os(iOS) || os(tvOS)
-      public init?(for color: SGKColor?) {
+      public init?(for color: TKColor?) {
         guard let color = color else { return nil }
         var red: CGFloat = 0
         var green: CGFloat = 0
@@ -93,7 +93,7 @@ extension API {
         }
       }
     #elseif os(OSX)
-    public init?(for color: SGKColor?) {
+    public init?(for color: TKColor?) {
       guard let color = color else { return nil }
       var red: CGFloat = 0
       var green: CGFloat = 0
@@ -116,7 +116,7 @@ extension API.CompanyInfo {
       return nil
     }
     
-    return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+    return TKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
   }
   
   public var remoteDarkIconURL: URL? {
@@ -124,7 +124,7 @@ extension API.CompanyInfo {
       return nil
     }
     
-    return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+    return TKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
   }
   
 }

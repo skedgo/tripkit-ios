@@ -16,7 +16,7 @@ public typealias TKSectionedAlertViewController = TKUISectionedAlertViewControll
 
 public class TKUISectionedAlertViewController: UITableViewController {
   
-  public var region: SVKRegion!
+  public var region: TKRegion!
   public var includeSearchBar: Bool = true
   
   private var viewModel: TKUISectionedAlertViewModel!
@@ -25,7 +25,7 @@ public class TKUISectionedAlertViewController: UITableViewController {
   /// where it is applied: title and subtitle labels in the table view
   /// cells.
   ///
-  /// @default: `SGStyleManager.darkTextColor`
+  /// @default: `TKStyleManager.darkTextColor`
   public var textColor: UIColor?
   
   private let disposeBag = DisposeBag()
@@ -42,7 +42,7 @@ public class TKUISectionedAlertViewController: UITableViewController {
   
   // MARK: - Constructor
   
-  public static func newInstance(region: SVKRegion) -> TKUISectionedAlertViewController {
+  public static func newInstance(region: TKRegion) -> TKUISectionedAlertViewController {
     let controller = TKUISectionedAlertViewController(nibName: "TKUISectionedAlertViewController", bundle: Bundle(for: self))
     controller.region = region
     return controller
@@ -57,7 +57,7 @@ public class TKUISectionedAlertViewController: UITableViewController {
       searchController = UISearchController(searchResultsController: nil)
       searchController.searchResultsUpdater = self
       searchController.obscuresBackgroundDuringPresentation = false
-      searchController.searchBar.tintColor = SGStyleManager.globalAccentColor()
+      searchController.searchBar.tintColor = TKStyleManager.globalAccentColor()
       navigationItem.searchController = searchController
       navigationItem.hidesSearchBarWhenScrolling = false
     }

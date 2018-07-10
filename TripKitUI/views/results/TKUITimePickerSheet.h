@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^SGTimePickerSelectAction)(SGTimeType type, NSDate *date);
+typedef void(^SGTimePickerSelectAction)(TKTimeType type, NSDate *date);
 
 @class TKUITimePickerSheet;
 
@@ -24,7 +24,7 @@ typedef void(^SGTimePickerSelectAction)(SGTimeType type, NSDate *date);
 
 - (void)timePicker:(TKUITimePickerSheet *)pickerSheet
         pickedDate:(NSDate *)date
-           forType:(SGTimeType)type;
+           forType:(TKTimeType)type;
 
 - (void)timePickerRequestsResign:(TKUITimePickerSheet *)pickerSheet;
 
@@ -40,10 +40,10 @@ typedef void(^SGTimePickerSelectAction)(SGTimeType type, NSDate *date);
 @property (weak, nonatomic, null_resettable) IBOutlet UIDatePicker *timePicker;
 
 - (NSDate *)selectedDate;
-- (SGTimeType)selectedTimeType;
+- (TKTimeType)selectedTimeType;
 
 - (instancetype)initWithTime:(nullable NSDate *)time
-                    timeType:(SGTimeType)timeType
+                    timeType:(TKTimeType)timeType
                     timeZone:(NSTimeZone *)timeZone;
 
 - (instancetype)initWithTime:(nullable NSDate *)time

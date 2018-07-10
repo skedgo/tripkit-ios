@@ -21,7 +21,7 @@ extension TKUISemaphoreView {
     if let custom = customHeadTintColor {
       return custom
     } else {
-      return SGStyleManager.darkTextColor()
+      return TKStyleManager.darkTextColor()
     }
   }
 

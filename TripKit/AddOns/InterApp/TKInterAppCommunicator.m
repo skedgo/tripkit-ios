@@ -18,7 +18,7 @@
 #import "TripKit/TripKit-Swift.h"
 #endif
 
-#import "SGKConfig+TKInterAppCommunicator.h"
+#import "TKConfig+TKInterAppCommunicator.h"
 
 @interface ComposerDelegate : NSObject <MFMessageComposeViewControllerDelegate>
 + (ComposerDelegate *)sharedInstance;
@@ -66,7 +66,7 @@
   
   __weak TKSegment *actionSegment = segment;
   
-  SGActions *actions = [[SGActions alloc] init];
+  TKActions *actions = [[TKActions alloc] init];
   for (NSString *action in [self sortedExternalActionsForUnsorted:externalActions]) {
     NSString *title = [self titleForExternalAction:action];
     if (title.length > 0) {
@@ -275,12 +275,12 @@
 #pragma unused(error)
      NSString *destinationSuburb = @"";
      for (CLPlacemark *placemark in placemarks) {
-       destinationSuburb = [SGLocationHelper suburbForPlacemark:placemark];
+       destinationSuburb = [TKLocationHelper suburbForPlacemark:placemark];
        if (destinationSuburb.length > 0)
          break;
      }
      
-     NSString *referralCode = [[SGKConfig sharedInstance] gocatchReferralCode];
+     NSString *referralCode = [[TKConfig sharedInstance] gocatchReferralCode];
      if (! referralCode) {
        referralCode = @"";
      }
@@ -418,7 +418,7 @@
     [urlString appendFormat:@"&lat=%.5f&lng=%.5f", start.latitude, start.longitude];
     
     // partner tracking
-    NSString *token = [[SGKConfig sharedInstance] olaXAPPToken];
+    NSString *token = [[TKConfig sharedInstance] olaXAPPToken];
     if (token.length > 0) {
       [urlString appendFormat:@"&utm_source=%@", token];
     }
@@ -463,7 +463,7 @@
     }
 
     // partner tracking
-    NSString *partner = [[SGKConfig sharedInstance] lyftPartnerCompanyName];
+    NSString *partner = [[TKConfig sharedInstance] lyftPartnerCompanyName];
     if (partner.length > 0) {
       [urlString appendFormat:@"&partner=%@", partner];
     }
@@ -482,7 +482,7 @@
 + (void)launchFlitWaysForSegment:(TKSegment *)segment
                   openURLHandler:(nullable void (^)(NSURL *url, NSString * __nullable title))openURLHandler
 {
-  NSString *partnerKey = [[SGKConfig sharedInstance] flitWaysPartnerKey];
+  NSString *partnerKey = [[TKConfig sharedInstance] flitWaysPartnerKey];
   NSString *title = @"FlitWays"; // Not localized on purpose. It's a company name.
   
   if ([self deviceHasFlitWays]) {

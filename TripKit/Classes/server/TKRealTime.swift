@@ -25,7 +25,7 @@ public protocol TKRealTimeUpdatable {
   /// a StopVisit.
   @objc var objectForRealTimeUpdates: Any { get }
   
-  @objc var regionForRealTimeUpdates: SVKRegion { get }
+  @objc var regionForRealTimeUpdates: TKRegion { get }
 }
 
 extension TKRealTimeUpdatable {

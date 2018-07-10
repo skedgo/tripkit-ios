@@ -36,18 +36,18 @@ extension TKUITripCell {
         
         let secondaryText: String
         if isArriveBefore {
-          let timeText = SGStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone)
+          let timeText = TKStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone)
           secondaryText = " (\(Loc.Departs(atTime: timeText)))"
         } else {
-          let timeText = SGStyleManager.timeString(arrival, for: arrivalTimeZone, relativeTo: departureTimeZone)
+          let timeText = TKStyleManager.timeString(arrival, for: arrivalTimeZone, relativeTo: departureTimeZone)
           secondaryText = " (\(Loc.Arrives(atTime: timeText)))"
         }
         append(secondaryText, to: attributed, isPrimary: false)
       
       } else {
-        append(SGStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone), to: attributed, isPrimary: true)
+        append(TKStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone), to: attributed, isPrimary: true)
         append(" - ", to: attributed, isPrimary: true)
-        append(SGStyleManager.timeString(arrival, for: arrivalTimeZone, relativeTo: departureTimeZone), to: attributed, isPrimary: true)
+        append(TKStyleManager.timeString(arrival, for: arrivalTimeZone, relativeTo: departureTimeZone), to: attributed, isPrimary: true)
         
         append(" (\(duration))", to: attributed, isPrimary: false)
       }
@@ -91,7 +91,7 @@ extension TKUITripCell {
 
 fileprivate extension Dictionary where Key == NSNumber {
   
-  subscript(cost: STKTripCostType) -> Value? {
+  subscript(cost: TKTripCostType) -> Value? {
     return self[NSNumber(value: cost.rawValue)]
   }
   

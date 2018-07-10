@@ -24,10 +24,10 @@
              usingPrivateVehicles:(nullable NSArray *)privateVehicles
                        completion:(void(^)(Trip * __nullable trip, NSError * __nullable error))completion
 {
-  SVKServer *server = [SVKServer sharedInstance];
+  TKServer *server = [TKServer sharedInstance];
   [server requireRegions:^(NSError *error) {
     TripRequest *request = segment.trip.request;
-    SVKRegion *region = request.startRegion;
+    TKRegion *region = request.startRegion;
     if (error || !region) {
       completion(nil, error);
       return;
@@ -47,11 +47,11 @@
 #pragma mark - Private methods
 
 - (void)fetchTripUsingWaypointParas:(NSDictionary *)paras
-                           inRegion:(SVKRegion *)region
+                           inRegion:(TKRegion *)region
                        forTripGroup:(TripGroup *)tripGroup
                          completion:(TripFactoryCompletionBlock)completion
 {
-  SVKServer *server = [SVKServer sharedInstance];
+  TKServer *server = [TKServer sharedInstance];
   self.isActive = YES;
   [server hitSkedGoWithMethod:@"POST"
                          path:@"waypoint.json"
@@ -115,10 +115,10 @@
        ];
     } else if (! [segment isStationary]) {
       NSMutableDictionary *segmentDict = [NSMutableDictionary dictionary];
-      segmentDict[@"start"] = [SVKParserHelper requestStringForAnnotation:segment.start];
+      segmentDict[@"start"] = [TKParserHelper requestStringForAnnotation:segment.start];
       
       TKSegment *finalSegment = [segment finalSegmentIncludingContinuation];
-      segmentDict[@"end"]   = [SVKParserHelper requestStringForAnnotation:finalSegment.end];
+      segmentDict[@"end"]   = [TKParserHelper requestStringForAnnotation:finalSegment.end];
       
       segmentDict[@"modes"] = @[segment.modeIdentifier];
       if (segment.reference.vehicleUUID) {

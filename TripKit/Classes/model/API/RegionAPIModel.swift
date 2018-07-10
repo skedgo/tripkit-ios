@@ -14,7 +14,7 @@ extension API {
   public struct RegionInfo: Codable, Equatable {
     public let streetBicyclePaths: Bool
     public let streetWheelchairAccessibility: Bool
-    public let transitModes: [ModeInfo]
+    public let transitModes: [TKModeInfo]
     public let transitBicycleAccessibility: Bool
     public let transitConcessionPricing: Bool
     public let transitWheelchairAccessibility: Bool
@@ -23,7 +23,7 @@ extension API {
     /// Additional information for some of the modes in the region.
     /// Dictionary of a generic mode identifier to the details.
     ///
-    /// Use `SVKTransportModes.genericModeIdentifier` to get the
+    /// Use `TKTransportModes.genericModeIdentifier` to get the
     /// generic part of any mode identifier.
     public let modes: [String: GenericModeDetails]
   }
@@ -59,7 +59,7 @@ extension API {
     public let title: String
     
     /// Additional info about the mode group
-    public let modeInfo: ModeInfo
+    public let modeInfo: TKModeInfo
     
     /// The specific modes of this group that are
     /// available for your API key.
@@ -84,7 +84,7 @@ extension API {
     public let title: String?
     
     /// Additional info about the mode
-    public let modeInfo: ModeInfo
+    public let modeInfo: TKModeInfo
     
     /// Available integrations for this mode that are available
     /// through the TripGo API.
@@ -121,7 +121,7 @@ extension API.RegionInfo {
   ///     (only returns something if it's a specific mode identifier, i.e.,
   ///     one with two underscores in it.)
   public func specificModeDetails(for modeIdentifier: String) -> API.SpecificModeDetails? {
-    let genericMode = SVKTransportModes.genericModeIdentifier(forModeIdentifier: modeIdentifier)
+    let genericMode = TKTransportModes.genericModeIdentifier(forModeIdentifier: modeIdentifier)
     return modes[genericMode]?.specificModes?.first { modeIdentifier == $0.identifier }
   }
   

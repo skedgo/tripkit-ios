@@ -20,9 +20,9 @@ extension TKWaypointRouter {
   ///   - trip: The trip for which to get the next departure
   ///   - vehicles: Optional vehicles that should be for private vehicles segments
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  @objc public func fetchNextTrip(after trip: Trip, using vehicles: [STKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
+  @objc public func fetchNextTrip(after trip: Trip, using vehicles: [TKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
     
-    SVKServer.shared.requireRegions { error in
+    TKServer.shared.requireRegions { error in
       guard let region = trip.request.startRegion() else {
         
         completion(nil, error)
@@ -46,7 +46,7 @@ extension TKWaypointRouter {
   ///   - tripKit: TripKit instance into which the new trip will be inserted
   ///   - region: The region where the trip starts
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  @objc public func fetchTrip(pattern: [TKSegmentPattern], departure: Date, using vehicles: [STKVehicular] = [], into tripKit: TKTripKit, in region: SVKRegion, completion: @escaping (Trip?, Error?) -> Void) {
+  @objc public func fetchTrip(pattern: [TKSegmentPattern], departure: Date, using vehicles: [TKVehicular] = [], into tripKit: TKTripKit, in region: TKRegion, completion: @escaping (Trip?, Error?) -> Void) {
     
     let paras = TKWaypointRouter.nextTripParas(pattern: pattern, departure: departure, using: vehicles)
     
@@ -54,7 +54,7 @@ extension TKWaypointRouter {
   }
   
   
-  private static func nextTripParas(pattern: [TKSegmentPattern], departure: Date, using vehicles: [STKVehicular]) -> [String: Any] {
+  private static func nextTripParas(pattern: [TKSegmentPattern], departure: Date, using vehicles: [TKVehicular]) -> [String: Any] {
     
     let now = Date()
     let leaveAt = departure > now ? departure : now
@@ -79,9 +79,9 @@ extension TKWaypointRouter {
   ///   - atStart: `true` if getting on should change, `false` if getting off should change
   ///   - vehicles: The private vehicles to use for private vehicle segments
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  @objc public func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [STKVehicular], completion: @escaping (Trip?, Error?) -> Void) {
+  @objc public func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [TKVehicular], completion: @escaping (Trip?, Error?) -> Void) {
     
-    SVKServer.shared.requireRegions { error in
+    TKServer.shared.requireRegions { error in
       let request = segment.trip.request
       guard let region = request.startRegion(), error == nil else {
         completion(nil, error)
@@ -105,7 +105,7 @@ extension TKWaypointRouter {
   /// - note: Only use this method if the calculated trip will fit that
   ///     trip group as this will not be checked separately. It will fit
   ///     if it's using the same modes and same/similar stops.
-  private func fetchTrip(waypointParas: [String: Any], region: SVKRegion, into tripGroup: TripGroup, completion: @escaping (Trip?, Error?) -> Void) {
+  private func fetchTrip(waypointParas: [String: Any], region: TKRegion, into tripGroup: TripGroup, completion: @escaping (Trip?, Error?) -> Void) {
     guard let context = tripGroup.managedObjectContext else {
       completion(nil, nil)
       return
@@ -132,7 +132,7 @@ extension TKWaypointRouter {
   /// - note: Only use this method if the calculated trip will have
   ///     the same origin, destination and approximate query time
   ///     as the request as this will not be checked separately.
-  private func fetchTrip(waypointParas: [String: Any], region: SVKRegion, into request: TripRequest, completion: @escaping (Trip?, Error?) -> Void) {
+  private func fetchTrip(waypointParas: [String: Any], region: TKRegion, into request: TripRequest, completion: @escaping (Trip?, Error?) -> Void) {
     guard let context = request.managedObjectContext else {
       completion(nil, nil)
       return
@@ -155,7 +155,7 @@ extension TKWaypointRouter {
   }
   
   /// For calculating a trip and adding it as a stand-alone trip / request to TripKit
-  private func fetchTrip(waypointParas: [String: Any], region: SVKRegion, into context: NSManagedObjectContext, completion: @escaping (Trip?, Error?) -> Void) {
+  private func fetchTrip(waypointParas: [String: Any], region: TKRegion, into context: NSManagedObjectContext, completion: @escaping (Trip?, Error?) -> Void) {
     
     fetchTrip(
       waypointParas: waypointParas,
@@ -172,9 +172,9 @@ extension TKWaypointRouter {
     )
   }
 
-  private func fetchTrip(waypointParas: [String: Any], region: SVKRegion, into context: NSManagedObjectContext, parserHandler: @escaping ([AnyHashable: Any], TKRoutingParser) -> Void, errorHandler: @escaping (Error?) -> Void) {
+  private func fetchTrip(waypointParas: [String: Any], region: TKRegion, into context: NSManagedObjectContext, parserHandler: @escaping ([AnyHashable: Any], TKRoutingParser) -> Void, errorHandler: @escaping (Error?) -> Void) {
     
-    let server = SVKServer.shared
+    let server = TKServer.shared
     server.hitSkedGo(
       withMethod: "POST",
       path: "waypoint.json",
@@ -204,9 +204,9 @@ extension TKWaypointRouter {
 
 class WaypointParasBuilder {
   
-  private let vehicles: [STKVehicular]
+  private let vehicles: [TKVehicular]
   
-  init(privateVehicles vehicles: [STKVehicular] = []) {
+  init(privateVehicles vehicles: [TKVehicular] = []) {
     self.vehicles = vehicles
   }
   
@@ -263,7 +263,7 @@ class WaypointParasBuilder {
       // end to that location.
       if atStart, index+1 < unglued.count, unglued[index+1].segment == segmentToMatch  {
         var paras = current.paras
-        paras["end"] = SVKParserHelper.requestString(for: visit.coordinate)
+        paras["end"] = TKParserHelper.requestString(for: visit.coordinate)
         return [paras]
       }
       
@@ -271,8 +271,8 @@ class WaypointParasBuilder {
       // walk.
       if atStart, index == 0, current.segment == segmentToMatch {
         let walk: [String : Any] = [
-          "start": SVKParserHelper.requestString(for: trip.request.fromLocation.coordinate),
-          "end": SVKParserHelper.requestString(for: visit.coordinate),
+          "start": TKParserHelper.requestString(for: trip.request.fromLocation.coordinate),
+          "end": TKParserHelper.requestString(for: visit.coordinate),
           "modes": ["wa_wal"] // Ok, to send this even when on wheelchair. TKSettings take care of that.
         ]
         return [walk, current.paras]
@@ -281,13 +281,13 @@ class WaypointParasBuilder {
       
       if !atStart, index > 0, unglued[index-1].segment == segmentToMatch {
         var paras = current.paras
-        paras["start"] = SVKParserHelper.requestString(for: visit.coordinate)
+        paras["start"] = TKParserHelper.requestString(for: visit.coordinate)
         return [paras]
       }
       if !atStart, index == unglued.count - 1, current.segment == segmentToMatch {
         let walk: [String : Any] = [
-          "start": SVKParserHelper.requestString(for: visit.coordinate),
-          "end": SVKParserHelper.requestString(for: trip.request.toLocation.coordinate),
+          "start": TKParserHelper.requestString(for: visit.coordinate),
+          "end": TKParserHelper.requestString(for: trip.request.toLocation.coordinate),
           "modes": ["wa_wal"] // Ok, to send this even when on wheelchair. TKSettings take care of that.
         ]
         return [current.paras, walk]
@@ -322,8 +322,8 @@ class WaypointParasBuilder {
     
     var paras: [String : Any] = [
       "modes": [privateMode],
-      "start": SVKParserHelper.requestString(for: start),
-      "end": SVKParserHelper.requestString(for: end)
+      "start": TKParserHelper.requestString(for: start),
+      "end": TKParserHelper.requestString(for: end)
     ]
     
     if let vehicleUUID = segment.reference?.vehicleUUID {

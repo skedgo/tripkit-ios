@@ -25,13 +25,13 @@ public class TKUITripCell: UITableViewCell {
     super.awakeFromNib()
     
     formatter = Formatter()
-    formatter?.primaryColor = SGStyleManager.darkTextColor()
+    formatter?.primaryColor = TKStyleManager.darkTextColor()
     formatter?.primaryFont = titleLabel.font
-    formatter?.secondaryColor = SGStyleManager.lightTextColor()
+    formatter?.secondaryColor = TKStyleManager.lightTextColor()
     formatter?.secondaryFont = titleLabel.font
     
     selectionIndicator.isHidden = true
-    selectionIndicator.backgroundColor = SGStyleManager.globalTintColor()
+    selectionIndicator.backgroundColor = TKStyleManager.globalTintColor()
   }
 
   override public func setSelected(_ selected: Bool, animated: Bool) {
@@ -52,11 +52,11 @@ public class TKUITripCell: UITableViewCell {
     public let isArriveBefore: Bool
     public let showFaded: Bool
     
-    public let segments: [STKTripSegmentDisplayable]
+    public let segments: [TKTripSegmentDisplayable]
     
     public let action: String?
     
-    public init(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool = false, isArriveBefore: Bool = false, showFaded: Bool = false, segments: [STKTripSegmentDisplayable], action: String? = nil) {
+    public init(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool = false, isArriveBefore: Bool = false, showFaded: Bool = false, segments: [TKTripSegmentDisplayable], action: String? = nil) {
       self.departure = departure
       self.arrival = arrival
       self.departureTimeZone = departureTimeZone

@@ -15,7 +15,7 @@ extension Alert {
     static let excludingStopsFromRouting: String = "excludedStopCodes"
   }
   
-  @objc public var infoIconType: STKInfoIconType {
+  @objc public var infoIconType: TKInfoIconType {
     switch alertSeverity {
     case .info, .warning: return .warning
     case .alert: return .alert
@@ -45,9 +45,9 @@ extension Alert: MKAnnotation {
   
 }
 
-// MARK: - STKDisplayablePoint
+// MARK: - TKDisplayablePoint
 
-extension Alert: STKDisplayablePoint {
+extension Alert: TKDisplayablePoint {
 
   public var pointClusterIdentifier: String? {
     return nil
@@ -57,8 +57,8 @@ extension Alert: STKDisplayablePoint {
     return location != nil
   }
   
-  public var pointImage: SGKImage? {
-    return STKInfoIcon.image(for: infoIconType, usage: .map)
+  public var pointImage: TKImage? {
+    return TKInfoIcon.image(for: infoIconType, usage: .map)
   }
   
   public var pointImageURL: URL? {

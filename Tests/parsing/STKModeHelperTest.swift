@@ -1,5 +1,5 @@
 //
-//  STKModeHelperTest.swift
+//  TKModeHelperTest.swift
 //  SkedGoKit
 //
 //  Created by Adrian Schoenig on 5/1/17.
@@ -10,27 +10,27 @@ import XCTest
 
 @testable import TripKit
 
-class STKModeHelperTest: XCTestCase {
+class TKModeHelperTest: XCTestCase {
   
   func testSimple() {
-    XCTAssertEqual(true,  STKModeHelper.modesContain(["wa_wal", "me_car"], ["wa_wal"]))
-    XCTAssertEqual(false, STKModeHelper.modesContain(["wa_wal", "me_car"], ["pt_pub"]))
-    XCTAssertEqual(true,  STKModeHelper.modesContain(["wa_wal"], ["wa_wal", "me_car"]))
-    XCTAssertEqual(false, STKModeHelper.modesContain(["wa_wal"], ["pt_pub", "me_car"]))
+    XCTAssertEqual(true,  TKModeHelper.modesContain(["wa_wal", "me_car"], ["wa_wal"]))
+    XCTAssertEqual(false, TKModeHelper.modesContain(["wa_wal", "me_car"], ["pt_pub"]))
+    XCTAssertEqual(true,  TKModeHelper.modesContain(["wa_wal"], ["wa_wal", "me_car"]))
+    XCTAssertEqual(false, TKModeHelper.modesContain(["wa_wal"], ["pt_pub", "me_car"]))
   }
   
   func testEmpty() {
-    XCTAssertEqual(false, STKModeHelper.modesContain([], ["wa_wal"]))
-    XCTAssertEqual(false, STKModeHelper.modesContain(["wa_wal"], []))
-    XCTAssertEqual(false, STKModeHelper.modesContain([], []))
+    XCTAssertEqual(false, TKModeHelper.modesContain([], ["wa_wal"]))
+    XCTAssertEqual(false, TKModeHelper.modesContain(["wa_wal"], []))
+    XCTAssertEqual(false, TKModeHelper.modesContain([], []))
   }
   
   func testSubmodes() {
-    XCTAssertEqual(false, STKModeHelper.modesContain(["cy_bic-s_melb"], ["cy_bic-s"]))
-    XCTAssertEqual(true,  STKModeHelper.modesContain(["cy_bic-s"], ["cy_bic-s_melb"]))
-    XCTAssertEqual(false, STKModeHelper.modesContain(["cy_bic"],   ["cy_bic-s_melb"]))
-    XCTAssertEqual(true,  STKModeHelper.modesContain(["me_car-s"], ["me_car-s_GOG"]))
-    XCTAssertEqual(false, STKModeHelper.modesContain(["me_car"],   ["me_car-s"]))
+    XCTAssertEqual(false, TKModeHelper.modesContain(["cy_bic-s_melb"], ["cy_bic-s"]))
+    XCTAssertEqual(true,  TKModeHelper.modesContain(["cy_bic-s"], ["cy_bic-s_melb"]))
+    XCTAssertEqual(false, TKModeHelper.modesContain(["cy_bic"],   ["cy_bic-s_melb"]))
+    XCTAssertEqual(true,  TKModeHelper.modesContain(["me_car-s"], ["me_car-s_GOG"]))
+    XCTAssertEqual(false, TKModeHelper.modesContain(["me_car"],   ["me_car-s"]))
   }
   
 }

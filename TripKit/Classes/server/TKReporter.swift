@@ -27,7 +27,7 @@ public class TKReporter {
     paras["choiceSet"] = trip.request.choiceSet
     
     if includeUserID {
-      paras["userToken"] = SVKServer.userToken()
+      paras["userToken"] = TKServer.userToken()
     }
     
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
@@ -38,12 +38,12 @@ public class TKReporter {
       
       UserDefaults.standard.removeObject(forKey: key)
       
-      SVKServer.post(url, paras: paras) { _, _, _, _, error in
+      TKServer.post(url, paras: paras) { _, _, _, _, error in
         if let error = error {
-          SGKLog.debug("TKReporter", text: "Planned trip encountered error: \(error)")
+          TKLog.debug("TKReporter", text: "Planned trip encountered error: \(error)")
           completion?(false)
         } else {
-          SGKLog.debug("TKReporter", text: "Planned trip reported successfully")
+          TKLog.debug("TKReporter", text: "Planned trip reported successfully")
           completion?(true)
         }
       }
@@ -64,11 +64,11 @@ public class TKReporter {
       "samples": samples
     ]
     
-    SVKServer.post(url, paras: paras) { _, _, _, _, error in
+    TKServer.post(url, paras: paras) { _, _, _, _, error in
       if let error = error {
-        SGKLog.debug("TKReporter", text: "Progress post encountered error: \(error)")
+        TKLog.debug("TKReporter", text: "Progress post encountered error: \(error)")
       } else {
-        SGKLog.debug("TKReporter", text: "Progress posted successfully")
+        TKLog.debug("TKReporter", text: "Progress posted successfully")
       }
     }
   }
@@ -123,7 +123,7 @@ extension Trip {
       "calories": totalCalories.floatValue,
       "arrivalTime": arrivalTime.timeIntervalSince1970,
       "departureTime": departureTime.timeIntervalSince1970,
-      "segments": (self as STKTrip).segments(with: .inDetails).compactMap { ($0 as? TKSegment)?.choiceSetEntry }
+      "segments": (self as TKTrip).segments(with: .inDetails).compactMap { ($0 as? TKSegment)?.choiceSetEntry }
     ]
 
     entry["price"] = totalPrice?.floatValue

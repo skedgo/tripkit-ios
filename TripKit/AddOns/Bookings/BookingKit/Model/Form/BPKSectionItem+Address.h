@@ -8,10 +8,10 @@
 
 #import "BPKSection.h"
 
-@class SGKNamedCoordinate;
+@class TKNamedCoordinate;
 
 @interface BPKSectionItem (Address)
 
-- (SGKNamedCoordinate *)annotation;
+- (TKNamedCoordinate *)annotation;
 
 @end

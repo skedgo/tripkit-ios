@@ -20,7 +20,7 @@ class TKUISectionedAlertTableHeader: UIView {
   // MARK: -
   
   override func awakeFromNib() {
-    backgroundColor = SGStyleManager.backgroundColorForTileList()
+    backgroundColor = TKStyleManager.backgroundColorForTileList()
     titleLabel.textColor = .white
   }
   

@@ -50,7 +50,7 @@ public enum TKUberSSO : SSOCompatible {
   public static func start() {
     guard !pretendUberIsInstalled else { return }
     
-    let urlScheme = SGKConfig.shared.appURLScheme()
+    let urlScheme = TKConfig.shared.appURLScheme()
     let appName = Bundle.main.productName ?? "TripGo"
     
     var components = URLComponents()
@@ -103,7 +103,7 @@ public enum TKUberSSO : SSOCompatible {
       query[item.name] = value
     }
     if let error = query["error"] {
-      SGKLog.warn("TKUberSSO", text: "Error: \(error)")
+      TKLog.warn("TKUberSSO", text: "Error: \(error)")
       throw TKUberSSOError.errorFromUber(error)
     }
 

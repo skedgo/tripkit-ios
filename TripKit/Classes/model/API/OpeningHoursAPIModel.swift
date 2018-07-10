@@ -124,7 +124,7 @@ extension API {
         
         public var localizedString: String {
           if let weekday = weekday {
-            return SGCustomEventRecurrenceRule.longString(forWeekday: weekday)
+            return TKCustomEventRecurrenceRule.longString(forWeekday: weekday)
           } else {
             return Loc.PublicHoliday
           }

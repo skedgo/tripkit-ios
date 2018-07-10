@@ -17,9 +17,6 @@
 
 #import <SafariServices/SafariServices.h>
 
-#import "SGActions.h"
-#import "SGStylemanager.h"
-
 @interface SGWebViewController () <UIWebViewDelegate>
 
 @property (nonatomic, strong) NSURL *startURL;
@@ -99,7 +96,7 @@
 
 - (IBAction)actionButtonPressed:(id)sender
 {
-  SGActions *actions = [[SGActions alloc] init];
+  TKActions *actions = [[TKActions alloc] init];
   NSURL *URL = [self.webView request].URL;
   if (URL.absoluteString.length == 0) {
     URL = self.startURL;
@@ -236,7 +233,7 @@
   
   DLog(@"Failed with error: %@", error);
   
-  SGActions *actions = [[SGActions alloc] initWithTitle:@"An unexpected error occurred. Please try again later."];
+  TKActions *actions = [[TKActions alloc] initWithTitle:@"An unexpected error occurred. Please try again later."];
   actions.type = UIAlertControllerStyleAlert;
   [actions showForSender:nil inController:self];
 }

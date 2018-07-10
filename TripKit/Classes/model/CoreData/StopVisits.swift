@@ -10,7 +10,7 @@ import Foundation
 
 extension StopVisits {
   
-  @objc public func grouping(previous: StopVisits?, next: StopVisits?) -> SGKGrouping {
+  @objc public func grouping(previous: StopVisits?, next: StopVisits?) -> TKGrouping {
     let sameAsBefore = previous?.searchString == searchString
     let sameAsAfter = next?.searchString == searchString
     
@@ -30,9 +30,9 @@ extension StopVisits: MKAnnotation {
   
   public var title: String? {
     if let departure = departure {
-      return SGStyleManager.timeString(departure, for: timeZone)
+      return TKStyleManager.timeString(departure, for: timeZone)
     } else if let arrival = arrival {
-      return SGStyleManager.timeString(arrival, for: timeZone)
+      return TKStyleManager.timeString(arrival, for: timeZone)
     } else {
       return stop.title
     }
@@ -53,9 +53,9 @@ extension StopVisits: MKAnnotation {
 }
 
 
-// MARK: - STKDisplayablePoint
+// MARK: - TKDisplayablePoint
 
-extension StopVisits: STKDisplayablePoint {
+extension StopVisits: TKDisplayablePoint {
   
   public var pointDisplaysImage: Bool {
     return true
@@ -69,7 +69,7 @@ extension StopVisits: STKDisplayablePoint {
     return service.modeInfo?.identifier ?? "StopVisits"
   }
   
-  public var pointImage: SGKImage? {
+  public var pointImage: TKImage? {
     return service.modeImage(for: .listMainMode)
   }
   
@@ -85,7 +85,7 @@ extension StopVisits: STKDisplayablePoint {
 
 // MARK: - STKDisplayableTimePoint
 
-extension StopVisits: STKDisplayableTimePoint {
+extension StopVisits: TKDisplayableTimePoint {
   
   public var time: Date {
     get {
@@ -125,7 +125,7 @@ extension StopVisits: TKRealTimeUpdatable {
     return self
   }
   
-  public var regionForRealTimeUpdates: SVKRegion {
+  public var regionForRealTimeUpdates: TKRegion {
     return stop.region ?? .international
   }
 }
@@ -150,7 +150,7 @@ extension StopVisits: TKRealTimeUpdatable {
       let format = NSLocalizedString("I'll take a %@ at %@ from %@.", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indication of an activity. (old key: ActivityIndication)")
       return String(format: format,
                     service.shortIdentifier() ?? "",
-                    SGStyleManager.timeString(time, for: timeZone),
+                    TKStyleManager.timeString(time, for: timeZone),
                     stop.name ?? stop.stopCode
       )
       

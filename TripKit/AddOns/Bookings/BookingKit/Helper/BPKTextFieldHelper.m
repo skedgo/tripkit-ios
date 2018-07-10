@@ -12,7 +12,7 @@
 
 #import "BPKTextFieldCell.h"
 
-#import "SGStyleManager.h"
+#import "TKStyleManager.h"
 
 // user info
 #import "BPKUser.h"
@@ -100,7 +100,7 @@
 
 - (NSDictionary *)attributesForInvalidString:(BOOL)isInvalid
 {
-  UIColor *color = isInvalid ? [UIColor redColor] : [SGStyleManager lightTextColor];
+  UIColor *color = isInvalid ? [UIColor redColor] : [TKStyleManager lightTextColor];
   return @{ NSForegroundColorAttributeName : color };
 }
 

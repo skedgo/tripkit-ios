@@ -8,7 +8,7 @@
 
 #import "NSNumber+Formatter.h"
 
-#import "SGStylemanager.h"
+#import "TKStylemanager.h"
 
 @implementation NSNumber (Formatter)
 
@@ -16,7 +16,7 @@
 {
   double dollars = ceil([self floatValue]);
   if (dollars < 1) {
-    return NSLocalizedStringFromTableInBundle(@"Free", @"Shared", [SGStyleManager bundle], "Free as in beer");
+    return NSLocalizedStringFromTableInBundle(@"Free", @"Shared", [TKStyleManager bundle], "Free as in beer");
   } else {
     if (! currencySymbol) {
       currencySymbol = @"$";
@@ -33,7 +33,7 @@
 - (NSString *)toCarbonString
 {  
   if ([self floatValue] == 0.0) {
-    return NSLocalizedStringFromTableInBundle(@"No CO₂", @"Shared", [SGStyleManager bundle], nil);
+    return NSLocalizedStringFromTableInBundle(@"No CO₂", @"Shared", [TKStyleManager bundle], nil);
   } else {
     NSNumberFormatter *formatter = [[self class] numberFormatter];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;

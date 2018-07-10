@@ -29,7 +29,7 @@ extension TKUIRoutingSupportView {
     let message = buildPrefilledSupportMessage(for: request) ?? NSAttributedString(string: error.localizedDescription)
     
     let supportView = TKUIRoutingSupportView.makeView(with: message)
-    supportView.backgroundColor = SGStyleManager.backgroundColorForTileList()
+    supportView.backgroundColor = TKStyleManager.backgroundColorForTileList()
     supportView.translatesAutoresizingMaskIntoConstraints = false
     if let above = aboveSubview {
       view.insertSubview(supportView, aboveSubview: above)

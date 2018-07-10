@@ -114,18 +114,18 @@
   
   if (! labelStyle) {
     CGFloat point = self.textLabel.font.pointSize;
-    self.textLabel.font = [SGStyleManager systemFontWithSize:point];
+    self.textLabel.font = [TKStyleManager systemFontWithSize:point];
   } else {
-    self.textLabel.font = [SGStyleManager systemFontWithTextStyle:labelStyle];
+    self.textLabel.font = [TKStyleManager systemFontWithTextStyle:labelStyle];
   }
   
   NSString *detailLabelStyle = [[self.detailTextLabel.font fontDescriptor] fontAttributes][UIFontDescriptorTextStyleAttribute];
   
   if (! detailLabelStyle) {
     CGFloat point = self.detailTextLabel.font.pointSize;
-    self.detailTextLabel.font = [SGStyleManager systemFontWithSize:point];
+    self.detailTextLabel.font = [TKStyleManager systemFontWithSize:point];
   } else {
-    self.detailTextLabel.font = [SGStyleManager systemFontWithTextStyle:detailLabelStyle];
+    self.detailTextLabel.font = [TKStyleManager systemFontWithTextStyle:detailLabelStyle];
   }
 }
 

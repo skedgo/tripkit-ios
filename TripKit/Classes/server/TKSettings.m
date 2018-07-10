@@ -8,7 +8,7 @@
 
 #import "TKSettings.h"
 
-#import "SGKBetaHelper.h"
+#import "TKBetaHelper.h"
 
 #import <TripKit/TripKit-Swift.h>
 
@@ -62,7 +62,7 @@
   }
 
   // beta features
-  if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableFlights]) {
+  if ([sharedDefaults boolForKey:TKDefaultsKeyProfileEnableFlights]) {
     [paras setValue:@(YES) forKey:@"ef"];
   }
   [paras setValue:@(YES) forKey:@"ir"];
@@ -75,7 +75,7 @@
     [paras setValue:@(YES) forKey:@"bsb"]; // Default to Sandbox
   }
 #else
-  if ([SGKBetaHelper isBeta]
+  if ([TKBetaHelper isBeta]
       && [sharedDefaults boolForKey:TKDefaultsKeyProfileBookingsUseSandbox]) {
     [paras setValue:@(YES) forKey:@"bsb"];
   }

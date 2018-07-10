@@ -17,7 +17,7 @@ import RxSwift
 
 @objc public protocol TKAlert {
   var title: String? { get }
-  var icon: SGKImage? { get }
+  var icon: TKImage? { get }
   var iconURL: URL? { get }
   var text: String? { get }
   var infoURL: URL? { get }
@@ -48,7 +48,7 @@ extension TKAlertAPIAlertClassWrapper: TKAlert {
   var lastUpdated: Date? { return alert.lastUpdated }
   var startTime: Date? { return alert.fromDate }
   
-  var icon: SGKImage? {
+  var icon: TKImage? {
     let fileName: String
     switch alert.severity {
     case .info, .warning:
@@ -115,7 +115,7 @@ public class TKUIAlertViewController: UITableViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 150
     tableView.register(UINib(nibName: "TKUIAlertCell", bundle: Bundle(for: TKUIAlertCell.self)), forCellReuseIdentifier: "TKUIAlertCell")
-    SGStyleManager.styleTableView(forTileList: tableView)
+    TKStyleManager.styleTableView(forTileList: tableView)
   }
   
   public override func viewWillAppear(_ animated: Bool) {

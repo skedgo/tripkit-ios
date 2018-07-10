@@ -8,7 +8,7 @@
 
 #import "BPKActionOverlay.h"
 
-#import "SGStyleManager.h"
+#import "TKStyleManager.h"
 
 #define DEFAULT_HEIGHT 50.0f
 
@@ -42,7 +42,7 @@
     [self.button setTitle:title forState:UIControlStateNormal];
     [self.button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self setBackgroundColor:[SGStyleManager globalTintColor]];
+    [self setBackgroundColor:[TKStyleManager globalTintColor]];
     [self setActionBlock:actionBlock];
   }
   

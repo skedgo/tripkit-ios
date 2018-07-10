@@ -46,8 +46,8 @@
 {
   [super awakeFromNib];
   
-  self.promptLabel.textColor = [SGStyleManager darkTextColor];
-  self.textField.textColor = [SGStyleManager lightTextColor];
+  self.promptLabel.textColor = [TKStyleManager darkTextColor];
+  self.textField.textColor = [TKStyleManager lightTextColor];
 }
 
 - (void)prepareForReuse

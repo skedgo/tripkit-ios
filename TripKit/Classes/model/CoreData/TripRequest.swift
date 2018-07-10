@@ -20,8 +20,8 @@ extension TripRequest {
     }
   }
   
-  @objc public var type: SGTimeType {
-    return SGTimeType(rawValue: self.timeType.intValue) ?? .leaveASAP
+  @objc public var type: TKTimeType {
+    return TKTimeType(rawValue: self.timeType.intValue) ?? .leaveASAP
   }
   
   @objc public var time: Date? {
@@ -34,7 +34,7 @@ extension TripRequest {
 
   /// Set the time and type for this request.
   @objc(setTime:forType:)
-  public func setTime(_ time: Date?, for type: SGTimeType) {
+  public func setTime(_ time: Date?, for type: TKTimeType) {
     self.timeType = NSNumber(value: type.rawValue)
     
     switch type {
@@ -78,11 +78,11 @@ extension TripRequest {
   }
   
   @objc(insertRequestFrom:to:forTime:ofType:intoContext:)
-  public static func insert(from start: MKAnnotation, to end: MKAnnotation, for time: Date?, timeType: SGTimeType, into context: NSManagedObjectContext) -> TripRequest {
+  public static func insert(from start: MKAnnotation, to end: MKAnnotation, for time: Date?, timeType: TKTimeType, into context: NSManagedObjectContext) -> TripRequest {
     
     let request = insertEmpty(into: context)
-    request.fromLocation = SGKNamedCoordinate.namedCoordinate(for: start)!
-    request.toLocation = SGKNamedCoordinate.namedCoordinate(for: end)!
+    request.fromLocation = TKNamedCoordinate.namedCoordinate(for: start)!
+    request.toLocation = TKNamedCoordinate.namedCoordinate(for: end)!
     
     request.setTime(time, for: timeType)
     if timeType == .leaveASAP {
@@ -92,7 +92,7 @@ extension TripRequest {
   }
   
   @objc(timeStringForTime:ofType:timeZone:)
-  public static func timeString(for time: Date?, timeType: SGTimeType, in timeZone: TimeZone?) -> String {
+  public static func timeString(for time: Date?, timeType: TKTimeType, in timeZone: TimeZone?) -> String {
     
     switch timeType {
     case .leaveASAP:
@@ -120,7 +120,7 @@ extension TripRequest {
     let formatter = DateFormatter()
     formatter.timeStyle = .short
     formatter.dateStyle = .short
-    formatter.locale = SGStyleManager.applicationLocale()
+    formatter.locale = TKStyleManager.applicationLocale()
     formatter.doesRelativeDateFormatting = true
     formatter.timeZone = timeZone
     
@@ -131,7 +131,7 @@ extension TripRequest {
       if #available(iOS 9.0, *) {
         string.append(timeString.localizedLowercase)
       } else {
-        string.append(timeString.lowercased(with: SGStyleManager.applicationLocale()))
+        string.append(timeString.lowercased(with: TKStyleManager.applicationLocale()))
       }
     }
     
@@ -165,7 +165,7 @@ extension TripRequest {
 extension TripRequest {
  
   @objc
-  public func _determineRegions() -> [SVKRegion] {
+  public func _determineRegions() -> [TKRegion] {
     let start = self.fromLocation.coordinate
     let end = self.toLocation.coordinate
     return TKRegionManager.shared.localRegions(start: start, end: end)
@@ -197,7 +197,7 @@ extension TripRequest {
   }
   
   
-  @objc public func sortDescriptors(withPrimary primary: STKTripCostType) -> [NSSortDescriptor] {
+  @objc public func sortDescriptors(withPrimary primary: TKTripCostType) -> [NSSortDescriptor] {
     
     let primaryTimeSorter = TripRequest.timeSorter(for: type)
     let visibilitySorter = NSSortDescriptor(key: "visibilityRaw", ascending: true)
@@ -266,7 +266,7 @@ extension TripRequest {
     }
   }
   
-  private static func timeSorter(for type: SGTimeType, forGroups: Bool = true) -> NSSortDescriptor {
+  private static func timeSorter(for type: TKTimeType, forGroups: Bool = true) -> NSSortDescriptor {
     let base = forGroups ? "visibleTrip." : ""
     if type == .arriveBefore {
       return NSSortDescriptor(key: base + "departureTime", ascending: false)

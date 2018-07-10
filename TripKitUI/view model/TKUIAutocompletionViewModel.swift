@@ -21,7 +21,7 @@ class TKUIAutocompletionViewModel {
   
   struct Item {
     fileprivate let index: Int
-    fileprivate let completion: SGAutocompletionResult
+    fileprivate let completion: TKAutocompletionResult
     
     var image: UIImage { return completion.image }
     var title: String { return completion.title }
@@ -62,7 +62,7 @@ class TKUIAutocompletionViewModel {
 
 // MARK: - Helpers
 
-extension Array where Element == SGAutocompletionResult {
+extension Array where Element == TKAutocompletionResult {
   
   fileprivate func buildSections() -> [TKUIAutocompletionViewModel.Section] {
     let items = enumerated().map { tuple in
@@ -73,7 +73,7 @@ extension Array where Element == SGAutocompletionResult {
   
 }
 
-extension SGAutocompletionResult {
+extension TKAutocompletionResult {
   
   fileprivate var annotation: Single<MKAnnotation> {
     guard let provider = provider as? TKAutocompleting else {

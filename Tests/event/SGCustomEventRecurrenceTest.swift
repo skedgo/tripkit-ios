@@ -32,7 +32,7 @@ class SGCustomEventRecurrenceTest: XCTestCase {
       var starts = [Date]()
       var ends   = [Date]()
 
-      SGCustomEventRecurrenceRule.enumerateRecurrences(
+      TKCustomEventRecurrenceRule.enumerateRecurrences(
         ofRule: "W0111110",
         startTime: 9*3600,
         duration: 8*3600,
@@ -72,7 +72,7 @@ class SGCustomEventRecurrenceTest: XCTestCase {
     
     var starts = [Date]()
     
-    SGCustomEventRecurrenceRule.enumerateRecurrences(
+    TKCustomEventRecurrenceRule.enumerateRecurrences(
       ofRule: "W1111111",
       startTime: 10*3600,
       duration: 1*3600,
@@ -98,7 +98,7 @@ class SGCustomEventRecurrenceTest: XCTestCase {
     
     var starts = [Date]()
     
-    SGCustomEventRecurrenceRule.enumerateRecurrences(
+    TKCustomEventRecurrenceRule.enumerateRecurrences(
       ofRule: "W1111111",
       startTime: 10*3600,
       duration: 1*3600,
@@ -124,7 +124,7 @@ class SGCustomEventRecurrenceTest: XCTestCase {
     
     var starts = [Date]()
     
-    SGCustomEventRecurrenceRule.enumerateRecurrences(
+    TKCustomEventRecurrenceRule.enumerateRecurrences(
       ofRule: "W1111111",
       startTime: 10*3600,
       duration: 1*3600,
@@ -148,7 +148,7 @@ class SGCustomEventRecurrenceTest: XCTestCase {
     
     var starts = [Date]()
     
-    SGCustomEventRecurrenceRule.enumerateRecurrences(
+    TKCustomEventRecurrenceRule.enumerateRecurrences(
       ofRule: "W1111111",
       startTime: 23*3600,
       duration: 2*3600,
@@ -171,7 +171,7 @@ class SGCustomEventRecurrenceTest: XCTestCase {
 
     var starts = [Date]()
     
-    SGCustomEventRecurrenceRule.enumerateRecurrences(
+    TKCustomEventRecurrenceRule.enumerateRecurrences(
       ofRule: "W1111111",
       startTime: 9*3600,
       duration: 8*3600,

@@ -105,7 +105,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     
     var vehicleView: UIView?
     
-    if let iconUrlString = vehicle.icon, let url = SVKServer.imageURL(forIconFileNamePart: iconUrlString, of: .vehicle) {
+    if let iconUrlString = vehicle.icon, let url = TKServer.imageURL(forIconFileNamePart: iconUrlString, of: .vehicle) {
       let vehicleImageView = UIImageView(frame: vehicleRect)
       vehicleImageView.contentMode = .scaleAspectFit
       vehicleImageView.setImage(with: url)
@@ -133,7 +133,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     label.isOpaque = false
     label.textAlignment = .center
     label.textColor = textColorForBackgroundColor(serviceColor)
-    label.font = SGStyleManager.systemFont(withSize: 10)
+    label.font = TKStyleManager.systemFont(withSize: 10)
     label.adjustsFontSizeToFitWidth = true
     label.minimumScaleFactor = 0.75
     wrapper.addSubview(label)

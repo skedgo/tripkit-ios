@@ -17,7 +17,7 @@ public enum TKGeocodingBackwardscompatibilityError: Error {
 
 extension SGGeocoder where Self: TKGeocoding {
 
-  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[SGKNamedCoordinate]> {
+  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
     return Single.create { subscriber in
       self.geocodeString(
         input, nearRegion: mapRect,
@@ -33,16 +33,16 @@ extension SGGeocoder where Self: TKGeocoding {
   
 }
 
-extension SGBaseGeocoder: TKGeocoding { }
+extension TKBaseGeocoder: TKGeocoding { }
 extension TKPeliasGeocoder: TKGeocoding { }
 #if os(iOS)
-  extension SGAddressBookManager: TKGeocoding { }
+  extension TKAddressBookManager: TKGeocoding { }
 #endif
 
 
 extension SGAutocompletionDataProvider where Self: TKAutocompleting {
   
-  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[SGAutocompletionResult]> {
+  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]> {
     if let fast = self.autocompleteFast?(input, for: mapRect) {
       return Observable.just(fast)
     
@@ -57,7 +57,7 @@ extension SGAutocompletionDataProvider where Self: TKAutocompleting {
     }
   }
   
-  public func annotation(for result: SGAutocompletionResult) -> Single<MKAnnotation> {
+  public func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
     if let annotation = self.annotation?(for: result) {
       return Single.just(annotation)
     } else {
@@ -81,11 +81,11 @@ extension SGAutocompletionDataProvider where Self: TKAutocompleting {
   
 }
 
-extension SGBuzzGeocoder: TKAutocompleting { }
-extension SGCalendarManager: TKAutocompleting { }
-extension SGFoursquareGeocoder: TKAutocompleting { }
-extension SGRegionAutocompleter: TKAutocompleting { }
+extension TKSkedGoGeocoder: TKAutocompleting { }
+extension TKCalendarManager: TKAutocompleting { }
+extension TKFoursquareGeocoder: TKAutocompleting { }
+extension TKRegionAutocompleter: TKAutocompleting { }
 extension TKPeliasGeocoder: TKAutocompleting { }
 #if os(iOS)
-  extension SGAddressBookManager: TKAutocompleting { }
+  extension TKAddressBookManager: TKAutocompleting { }
 #endif

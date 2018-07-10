@@ -23,12 +23,12 @@ extension UIImageView {
   }
 
   @objc(setImageWithURL:placeholderImage:)
-  public func setImage(with url: URL?, placeholder: SGKImage?) {
+  public func setImage(with url: URL?, placeholder: TKImage?) {
     setImage(with: url, asTemplate: false, placeholder: placeholder)
   }
   
   @objc(setImageWithURL:asTemplate:placeholderImage:)
-  public func setImage(with url: URL?, asTemplate: Bool, placeholder: SGKImage?) {
+  public func setImage(with url: URL?, asTemplate: Bool, placeholder: TKImage?) {
     
     var options: KingfisherOptionsInfo = []
     if let url = url, url.path.contains("@2x") {
@@ -53,7 +53,7 @@ extension UIButton {
   }
   
   @objc(setImageWithURL:forState:placeholderImage:)
-  public func setImage(with url: URL?, for state: UIControlState, placeholder: SGKImage?) {
+  public func setImage(with url: URL?, for state: UIControlState, placeholder: TKImage?) {
     
     let options: KingfisherOptionsInfo?
     if let url = url, url.path.contains("@2x") {

@@ -10,7 +10,7 @@ import Foundation
 
 extension Trip {
   
-  @objc public var primaryCostType: STKTripCostType {
+  @objc public var primaryCostType: TKTripCostType {
     if departureTimeIsFixed {
       return .time
     } else if isExpensive {
@@ -50,7 +50,7 @@ extension Trip {
       let segment = mainSegment() as? TKSegment,
       let identifier = segment.modeIdentifier()
       else { return false }
-    return SVKTransportModes.modeIdentifierIsExpensive(identifier)
+    return TKTransportModes.modeIdentifierIsExpensive(identifier)
   }
   
 }
@@ -61,7 +61,7 @@ extension Trip {
 extension Trip {
   
   /// If the trip uses a personal vehicle (non shared) which the user might want to assign to one of their vehicles
-  @objc public var usedPrivateVehicleType: STKVehicleType {
+  @objc public var usedPrivateVehicleType: TKVehicleType {
     for segment in segments() {
       let vehicleType = segment.privateVehicleType
       if vehicleType != .none {
@@ -81,30 +81,30 @@ extension Trip {
   }
   
   /// - Parameter vehicle: The vehicle to assign this trip to. `nil` to reset to a generic vehicle.
-  @objc public func assignVehicle(_ vehicle: STKVehicular?) {
+  @objc public func assignVehicle(_ vehicle: TKVehicular?) {
     segments().forEach { $0.assignVehicle(vehicle) }
   }
   
 }
 
 
-// MARK: - STKTrip
+// MARK: - TKTrip
 
-extension Trip: STKTrip {
+extension Trip: TKTrip {
   
-  @objc public func mainSegment() -> STKTripSegment {
+  @objc public func mainSegment() -> TKTripSegment {
     let hash = mainSegmentHashCode.intValue
     if hash > 0 {
       for segment in segments() where segment.templateHashCode() == hash {
         return segment
       }
-      SGKLog.warn("Trip", text: "Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: \(hash)")
+      TKLog.warn("Trip", text: "Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: \(hash)")
     }
     
     return inferMainSegment()
   }
   
-  public func segments(with type: STKTripSegmentVisibility) -> [STKTripSegment] {
+  public func segments(with type: TKTripSegmentVisibility) -> [TKTripSegment] {
     let filtered = segments().filter { $0.hasVisibility(type) }
     return filtered.isEmpty ? segments() : filtered
   }
@@ -144,7 +144,7 @@ extension Trip: TKRealTimeUpdatable {
     return self
   }
   
-  public var regionForRealTimeUpdates: SVKRegion {
+  public var regionForRealTimeUpdates: TKRegion {
     return request.startRegion() ?? .international
   }
 }

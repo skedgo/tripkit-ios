@@ -10,12 +10,12 @@ import Foundation
 
 extension TKGeoJSON {
   
-  func toNamedCoordinates() -> [SGKNamedCoordinate] {
+  func toNamedCoordinates() -> [TKNamedCoordinate] {
     switch self {
     case .collection(let features):
-      return features.compactMap(SGKNamedCoordinate.init(from:))
+      return features.compactMap(TKNamedCoordinate.init(from:))
     case .feature(let feature):
-      if let coordinate = SGKNamedCoordinate(from: feature) {
+      if let coordinate = TKNamedCoordinate(from: feature) {
         return [coordinate]
       } else {
         return []
@@ -25,7 +25,7 @@ extension TKGeoJSON {
   
 }
 
-extension SGKNamedCoordinate {
+extension TKNamedCoordinate {
   
   fileprivate convenience init?(from geojson: TKGeoJSON.Feature) {
     switch geojson.geometry {

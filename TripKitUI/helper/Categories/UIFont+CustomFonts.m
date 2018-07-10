@@ -8,13 +8,13 @@
 
 #import "UIFont+CustomFonts.h"
 
-#import "SGKConfig.h"
+#import "TKConfig.h"
 
 @implementation UIFont (CustomFonts)
 
 + (NSString *)preferredFontName
 {
-  NSString *preferred = [[SGKConfig sharedInstance] preferredFonts][@"Regular"];
+  NSString *preferred = [[TKConfig sharedInstance] preferredFonts][@"Regular"];
   if (preferred) {
     return preferred;
   } else {
@@ -24,7 +24,7 @@
 
 + (NSString *)preferredBoldFontName
 {
-  NSString *preferred = [[SGKConfig sharedInstance] preferredFonts][@"Bold"];
+  NSString *preferred = [[TKConfig sharedInstance] preferredFonts][@"Bold"];
   if (preferred) {
     return preferred;
   } else {

@@ -95,10 +95,10 @@ public enum TKQuickBookingHelper {
       return
     }
     
-    SVKServer.get(bookingsURL, paras: nil) { _, _, response, _, error in
+    TKServer.get(bookingsURL, paras: nil) { _, _, response, _, error in
       guard let array = response as? [[String: Any]], !array.isEmpty else {
         completion([])
-        SGKLog.warn("TKQuickBookingHelper", text: "Response isn't array.\nResponse: \(String(describing: response))\nError: \(String(describing: error))")
+        TKLog.warn("TKQuickBookingHelper", text: "Response isn't array.\nResponse: \(String(describing: response))\nError: \(String(describing: error))")
         return
       }
       

@@ -22,8 +22,8 @@ public class TKUIMapManagerHelper: NSObject {
     return overlays.sorted { one, two -> Bool in
       
       guard
-        let travelledOne = (one as? STKRoutePolyline)?.route.routeIsTravelled,
-        let travelledTwo = (two as? STKRoutePolyline)?.route.routeIsTravelled
+        let travelledOne = (one as? TKRoutePolyline)?.route.routeIsTravelled,
+        let travelledTwo = (two as? TKRoutePolyline)?.route.routeIsTravelled
         else { return true }
       
       if !travelledOne && travelledTwo {
@@ -71,7 +71,7 @@ public class TKUIMapManagerHelper: NSObject {
       if
         let start = segment.start,
         let end = segment.end,
-        let polyline = STKRoutePolyline.geodesicPolyline(for: [start, end]) {
+        let polyline = TKRoutePolyline.geodesicPolyline(for: [start, end]) {
         
         return ([], [polyline], false)
       } else {
@@ -89,7 +89,7 @@ public class TKUIMapManagerHelper: NSObject {
     for shape in shapes {
       // Add the shape itself
       shape.segment = segment
-      if let overlay = STKRoutePolyline(for: shape) {
+      if let overlay = TKRoutePolyline(for: shape) {
         overlays.append(overlay)
       }
       

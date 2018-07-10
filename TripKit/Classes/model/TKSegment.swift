@@ -25,7 +25,7 @@ extension TKSegment {
   }
   
   
-  @objc public func determineRegions() -> [SVKRegion] {
+  @objc public func determineRegions() -> [TKRegion] {
     guard let start = self.start?.coordinate, let end = self.end?.coordinate else { return [] }
     
     return TKRegionManager.shared.localRegions(start: start, end: end)
@@ -35,7 +35,7 @@ extension TKSegment {
   /// Test if this segment has at least the specific length.
   ///
   /// - note: public transport will always return `true` to this.
-  @objc public func hasVisibility(_ type: STKTripSegmentVisibility) -> Bool {
+  @objc public func hasVisibility(_ type: TKTripSegmentVisibility) -> Bool {
     switch self.order() {
     case .start: return type == .inDetails
     case .regular:
@@ -101,13 +101,13 @@ extension TKSegment {
   
   /// - Parameter vehicles: List of the user's vehicles
   /// - Returns: The used vehicle (if there are any) in SkedGo API-compatible form
-  @objc public func usedVehicle(fromAll vehicles: [STKVehicular]) -> [AnyHashable: Any]? {
+  @objc public func usedVehicle(fromAll vehicles: [TKVehicular]) -> [AnyHashable: Any]? {
     if template?.isSharedVehicle ?? false {
       return reference?.sharedVehicleData
     }
     
     if let vehicle = reference?.vehicle(fromAllVehicles: vehicles) {
-      return STKVehicularHelper.skedGoReferenceDictionary(forVehicle: vehicle)
+      return TKVehicularHelper.skedGoReferenceDictionary(forVehicle: vehicle)
     } else {
       return nil
     }
@@ -115,19 +115,19 @@ extension TKSegment {
   
   
   /// The private vehicle type used by this segment (if any)
-  @objc public var privateVehicleType: STKVehicleType {
+  @objc public var privateVehicleType: TKVehicleType {
     guard let identifier = modeIdentifier() else { return .none }
     
     switch identifier {
-    case SVKTransportModeIdentifierCar: return .car
-    case SVKTransportModeIdentifierBicycle: return .bicycle
-    case SVKTransportModeIdentifierMotorbike: return .motorbike
+    case TKTransportModeIdentifierCar: return .car
+    case TKTransportModeIdentifierBicycle: return .bicycle
+    case TKTransportModeIdentifierMotorbike: return .motorbike
     default: return .none
     }
   }
   
   /// - Parameter vehicle: Vehicle to assign to this segment. Only takes affect if its of a compatible type.
-  @objc public func assignVehicle(_ vehicle: STKVehicular?) {
+  @objc public func assignVehicle(_ vehicle: TKVehicular?) {
     guard privateVehicleType == vehicle?.vehicleType() else { return }
     
     reference?.setVehicle(vehicle)
@@ -136,9 +136,9 @@ extension TKSegment {
 }
 
 
-// MARK: - STKDisplayablePoint
+// MARK: - TKDisplayablePoint
 
-extension TKSegment: STKDisplayablePoint {
+extension TKSegment: TKDisplayablePoint {
 
   public var isDraggable: Bool {
     return false
@@ -152,10 +152,10 @@ extension TKSegment: STKDisplayablePoint {
     return coordinate.isValid && hasVisibility(.onMap)
   }
   
-  public var pointImage: SGKImage? {
+  public var pointImage: TKImage? {
     switch order() {
     case .start, .end:
-      return SGStyleManager.imageNamed("icon-pin")
+      return TKStyleManager.imageNamed("icon-pin")
       
     case .regular:
       return image(for: .listMainMode, allowRealTime: false)
@@ -170,7 +170,7 @@ extension TKSegment: STKDisplayablePoint {
     return modeInfo()?.remoteImageIsTemplate ?? false
   }
 
-  fileprivate func image(for iconType: SGStyleModeIconType, allowRealTime: Bool) -> SGKImage? {
+  fileprivate func image(for iconType: TKStyleModeIconType, allowRealTime: Bool) -> TKImage? {
     var localImageName = modeInfo()?.localImageName
     
     if trip.showNoVehicleUUIDAsLift && privateVehicleType == .car && reference?.vehicleUUID == nil {
@@ -182,7 +182,7 @@ extension TKSegment: STKDisplayablePoint {
     return TKSegmentHelper.segmentImage(iconType, localImageName: imageName, modeIdentifier: modeIdentifier(), isRealTime: realTime)
   }
 
-  fileprivate func imageURL(for iconType: SGStyleModeIconType) -> URL? {
+  fileprivate func imageURL(for iconType: TKStyleModeIconType) -> URL? {
     var iconFileNamePart: String? = nil
     
     switch iconType {
@@ -200,7 +200,7 @@ extension TKSegment: STKDisplayablePoint {
     }
     
     if let part = iconFileNamePart {
-      return SVKServer.imageURL(forIconFileNamePart: part, of: iconType)
+      return TKServer.imageURL(forIconFileNamePart: part, of: iconType)
     } else {
       return TKRegionManager.shared.imageURL(forModeIdentifier: modeIdentifier(), iconType: iconType)
     }
@@ -210,7 +210,7 @@ extension TKSegment: STKDisplayablePoint {
 
 // MARK: - STKDisplayableTimePoint
 
-extension TKSegment: STKDisplayableTimePoint {
+extension TKSegment: TKDisplayableTimePoint {
   
   public var time: Date {
     get {
@@ -241,7 +241,7 @@ extension TKSegment: STKDisplayableTimePoint {
   
   public var canFlipImage: Bool {
     // only those pointing left or right
-    return isSelfNavigating() || self.modeIdentifier() == SVKTransportModeIdentifierAutoRickshaw
+    return isSelfNavigating() || self.modeIdentifier() == TKTransportModeIdentifierAutoRickshaw
   }
   
   public var isTerminal: Bool {
@@ -251,19 +251,19 @@ extension TKSegment: STKDisplayableTimePoint {
 }
 
 
-// MARK: - STKTripSegment
+// MARK: - TKTripSegment
 
-extension TKSegment: STKTripSegment {
+extension TKSegment: TKTripSegment {
   
   public var tripSegmentTimeZone: TimeZone? {
     return timeZone
   }
   
-  public var tripSegmentModeImage: SGKImage? {
+  public var tripSegmentModeImage: TKImage? {
     return image(for: .listMainMode, allowRealTime: false)
   }
   
-  public var tripSegmentModeInfo: ModeInfo? {
+  public var tripSegmentModeInfo: TKModeInfo? {
     return modeInfo()
   }
   
@@ -323,7 +323,7 @@ extension TKSegment: STKTripSegment {
   }
 
   
-  public var tripSegmentModeInfoIconType: STKInfoIconType {
+  public var tripSegmentModeInfoIconType: TKInfoIconType {
     return alerts().first?.infoIconType ?? .none
   }
   
@@ -346,7 +346,7 @@ extension TKSegment: STKTripSegment {
       let format = NSLocalizedString("I'll arrive at %@ at %@", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime)")
       return String(format: format,
                     trip.request.toLocation.title ?? "",
-                    SGStyleManager.timeString(arrivalTime, for: timeZone)
+                    TKStyleManager.timeString(arrivalTime, for: timeZone)
       )
       
     }

@@ -10,11 +10,11 @@
 @import CoreData;
 @import MapKit;
 
-#import "SGKCrossPlatform.h"
+#import "TKCrossPlatform.h"
 
 @class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape, SegmentTemplate;
-@class SVKRegion, ModeInfo;
-@protocol STKDisplayableTimePoint, STKTripSegment;
+@class TKRegion, TKModeInfo;
+@protocol TKDisplayableTimePoint, TKTripSegment;
 
 
 typedef NS_ENUM(NSInteger, TKSegmentOrdering) {
@@ -70,12 +70,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @return The local region this segment starts in. Cannot be international and thus might be nil.
  */
-- (nullable SVKRegion *)startRegion;
+- (nullable TKRegion *)startRegion;
 
 /**
  @return The local region this segment ends in. Cannot be international and thus might be nil.
  */
-- (nullable SVKRegion *)endRegion;
+- (nullable TKRegion *)endRegion;
 
 - (TKSegmentOrdering)order;
 
@@ -103,7 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isAffectedByTraffic;
 - (BOOL)isFlight;
 - (BOOL)isImpossible;
-- (SGKColor *)color;
+- (TKColor *)color;
 - (NSArray<NSNumber *> *)dashPattern;
 - (BOOL)isCanceled;
 - (BOOL)timesAreRealTime;
@@ -120,7 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return the transport mode identifier that this segment is using (if any). Can return `nil` for stationary segments such as "leave your house" or "wait between two buses" or "park your car"
  */
 - (nullable NSString *)modeIdentifier;
-- (nullable ModeInfo *)modeInfo;
+- (nullable TKModeInfo *)modeInfo;
 
 /**
  @return All alerts for this segment
@@ -216,7 +216,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Temporary storage for the semaphore image that we want to display on the map for the start of this segment. Used by watch app.
  */
-@property (nullable, nonatomic, strong) SGKImage *mapImage;
+@property (nullable, nonatomic, strong) TKImage *mapImage;
 
 /**
  Temporary storage to mark the active segment, i.e., the segment that the user is on (presumably) and which should be shown immediately to the user.
@@ -227,7 +227,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, readonly) NSString *tripSegmentModeTitle;
 @property (nullable, readonly) NSString *tripSegmentModeSubtitle;
-@property (nullable, readonly) SGKColor *tripSegmentModeColor;
+@property (nullable, readonly) TKColor *tripSegmentModeColor;
 
 @end
 NS_ASSUME_NONNULL_END

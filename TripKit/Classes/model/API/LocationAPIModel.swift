@@ -160,7 +160,7 @@ extension API {
     }
     
     public let details: Details?
-    public let stop: STKStopCoordinate?
+    public let stop: TKStopCoordinate?
     public let bikePod: API.BikePodInfo?
     public let carPod:  API.CarPodInfo?
     public let carPark: API.CarParkInfo?
@@ -183,18 +183,18 @@ extension API {
     public struct Group: Codable, Equatable {
       public let key: String
       public let hashCode: Int
-      public let stops: [STKStopCoordinate]?
+      public let stops: [TKStopCoordinate]?
       public let bikePods: [TKBikePodLocation]?
       public let carPods: [TKCarPodLocation]?
       public let carParks: [TKCarParkLocation]?
       public let carRentals: [TKCarRentalLocation]?
       
-      public var all: [STKModeCoordinate] {
-        return (stops ?? [])    as [STKModeCoordinate]
-          + (bikePods ?? [])    as [STKModeCoordinate]
-          + (carPods ?? [])     as [STKModeCoordinate]
-          + (carParks ?? [])    as [STKModeCoordinate]
-          + (carRentals ?? [])  as [STKModeCoordinate]
+      public var all: [TKModeCoordinate] {
+        return (stops ?? [])    as [TKModeCoordinate]
+          + (bikePods ?? [])    as [TKModeCoordinate]
+          + (carPods ?? [])     as [TKModeCoordinate]
+          + (carParks ?? [])    as [TKModeCoordinate]
+          + (carRentals ?? [])  as [TKModeCoordinate]
       }
         
     }

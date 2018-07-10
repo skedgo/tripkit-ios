@@ -47,14 +47,14 @@ public class TKResultsFetcher {
     
     // first we'll lock in this trips time if necessary
     if request.type == .leaveASAP {
-      request.timeType = NSNumber(value: SGTimeType.leaveAfter.rawValue)
+      request.timeType = NSNumber(value: TKTimeType.leaveAfter.rawValue)
       request.departureTime = Date()
     }
     
     // 1. Fetch current location if necessary
     let prepared: Observable<TripRequest>
     if request.usesCurrentLocation {
-      prepared = SGLocationManager.shared.rx
+      prepared = TKLocationManager.shared.rx
         .fetchCurrentLocation(within: Constants.secondsToRefine)
         .map { location in
           request.override(currentLocation: location)
@@ -79,8 +79,8 @@ public class TKResultsFetcher {
   /// The recommendation is to check against the user's favourites and use those
   /// if they are nearby, so that the user sees "From home" rather than "From some
   /// address near my home".
-  public static var replacementHandler: (CLLocation) -> SGKNamedCoordinate = { location in
-    return SGKNamedCoordinate(coordinate: location.coordinate)
+  public static var replacementHandler: (CLLocation) -> TKNamedCoordinate = { location in
+    return TKNamedCoordinate(coordinate: location.coordinate)
   }
   
 }
@@ -89,12 +89,12 @@ public class TKResultsFetcher {
 fileprivate extension TripRequest {
   
   var usesCurrentLocation: Bool {
-    let placeholder = SGLocationManager.shared.currentLocation
+    let placeholder = TKLocationManager.shared.currentLocation
     return fromLocation === placeholder || toLocation === placeholder
   }
   
   func override(currentLocation: CLLocation) {
-    let placeholder = SGLocationManager.shared.currentLocation
+    let placeholder = TKLocationManager.shared.currentLocation
     if fromLocation === placeholder {
       fromLocation = TKResultsFetcher.replacementHandler(currentLocation)
     }

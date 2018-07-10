@@ -30,7 +30,7 @@
 #pragma mark - UIView
 
 - (instancetype)initWithTime:(nullable NSDate *)time
-                    timeType:(SGTimeType)timeType
+                    timeType:(TKTimeType)timeType
                     timeZone:(NSTimeZone *)timeZone
 {
   self = [super initWithFrame:CGRectMake(0, 0, 320, 216)];
@@ -101,22 +101,22 @@
   return self.timePicker.date;
 }
 
-- (SGTimeType)selectedTimeType
+- (TKTimeType)selectedTimeType
 {
   if (! self.includeTimeType)
-    return SGTimeTypeNone;
+    return TKTimeTypeNone;
   
   if (self.timeTypeSelector.selectedSegmentIndex == 0)
-    return SGTimeTypeLeaveASAP;
+    return TKTimeTypeLeaveASAP;
   
   if (self.timeTypeSelector.selectedSegmentIndex == 1)
-    return SGTimeTypeLeaveAfter;
+    return TKTimeTypeLeaveAfter;
   
   if (self.timeTypeSelector.selectedSegmentIndex == 2)
-    return SGTimeTypeArriveBefore;
+    return TKTimeTypeArriveBefore;
   
   ZAssert(false, @"Unexpected state!");
-  return SGTimeTypeNone;
+  return TKTimeTypeNone;
 }
 
 #pragma mark - User Interaction
@@ -136,7 +136,7 @@
 - (IBAction)nowButtonPressed:(id)sender
 {
   if (self.selectAction) {
-    self.selectAction(SGTimeTypeLeaveASAP, [NSDate date]);
+    self.selectAction(TKTimeTypeLeaveASAP, [NSDate date]);
     self.selectAction = nil;
   }
 
@@ -153,8 +153,8 @@
 {
 #pragma unused(sender)
   self.didSetTime = YES;
-  if (SGTimeTypeLeaveASAP == [self selectedTimeType]) {
-    [self setSelectedTimeType:SGTimeTypeLeaveAfter];
+  if (TKTimeTypeLeaveASAP == [self selectedTimeType]) {
+    [self setSelectedTimeType:TKTimeTypeLeaveAfter];
   } else {
     [self setSelectedTimeType:[self selectedTimeType]];
   }
@@ -162,7 +162,7 @@
 
 - (IBAction)timeSelectorChanged:(id)sender
 {
-  if (SGTimeTypeLeaveASAP == [self selectedTimeType]) {
+  if (TKTimeTypeLeaveASAP == [self selectedTimeType]) {
     [self nowButtonPressed:sender];
   } else {
     [self setSelectedTimeType:[self selectedTimeType]];
@@ -191,7 +191,7 @@
   UIDatePicker *timePicker = [[UIDatePicker alloc] init];
   timePicker.minimumDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * -31]; // 1 month ago
   timePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 31]; // 1 month
-  timePicker.locale = [SGStyleManager applicationLocale]; // Set the 24h setting
+  timePicker.locale = [TKStyleManager applicationLocale]; // Set the 24h setting
   timePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth;
   [timePicker addTarget:self
                  action:@selector(timePickerChanged:)
@@ -242,20 +242,20 @@
   self.frame = CGRectMake(0, 0, CGRectGetWidth(timePickerFrame), CGRectGetHeight(timePickerFrame) + kButtonHeight);
 }
 
-- (void)setSelectedTimeType:(SGTimeType)timeType
+- (void)setSelectedTimeType:(TKTimeType)timeType
 {
   switch (timeType) {
-    case SGTimeTypeLeaveASAP:
+    case TKTimeTypeLeaveASAP:
       self.timeTypeSelector.selectedSegmentIndex = 0;
       [self.timePicker setDate:[NSDate date] animated:YES];
       break;
       
-    case SGTimeTypeLeaveAfter: {
+    case TKTimeTypeLeaveAfter: {
       self.timeTypeSelector.selectedSegmentIndex = 1;
       break;
     }
       
-    case SGTimeTypeArriveBefore: {
+    case TKTimeTypeArriveBefore: {
       self.timeTypeSelector.selectedSegmentIndex = 2;
       break;
     }

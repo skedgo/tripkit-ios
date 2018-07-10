@@ -40,8 +40,8 @@ extension SegmentTemplate {
     template.bearing = dict["travelDirection"] as? NSNumber
     
     template.modeIdentifier   = dict["modeIdentifier"] as? String
-    template.modeInfo         = ModeInfo.modeInfo(for: dict["modeInfo"] as? [String: Any])
-    template.miniInstruction  = STKMiniInstruction.instruction(for: dict["mini"] as? [String: Any])
+    template.modeInfo         = TKModeInfo.modeInfo(for: dict["modeInfo"] as? [String: Any])
+    template.miniInstruction  = TKMiniInstruction.instruction(for: dict["mini"] as? [String: Any])
     template.turnByTurnMode   = TKTurnByTurnMode(rawValue: dict["turn-by-turn"] as? String ?? "")
     
     template.notesRaw         = dict["notes"] as? String
@@ -67,7 +67,7 @@ extension SegmentTemplate {
     if template.isStationary {
       // stationary segments just have a single location
       let locationDict = (dict["location"] as? [String: Any]) ?? [:]
-      let location = SVKParserHelper.namedCoordinate(for: locationDict)
+      let location = TKParserHelper.namedCoordinate(for: locationDict)
       template.startLocation = location
       template.endLocation = location
     
@@ -81,22 +81,22 @@ extension SegmentTemplate {
         ?? (dict["line"] as? [[String: Any]])
         ?? []
       
-      let shapes = TKParserHelper.insertNewShapes(shapesArray, for: service, with: template.modeInfo, orTripKitContext: context)
+      let shapes = TKCoreDataParserHelper.insertNewShapes(shapesArray, for: service, with: template.modeInfo, orTripKitContext: context)
       
-      var start: SGKNamedCoordinate? = nil
-      var end: SGKNamedCoordinate? = nil
+      var start: TKNamedCoordinate? = nil
+      var end: TKNamedCoordinate? = nil
       
       for shape in shapes {
         shape.template = template
         if shape.travelled?.boolValue == true {
           // Only if no previous travelled segment!
           if start == nil, let coordinate = shape.start?.coordinate {
-            start = SGKNamedCoordinate(coordinate: coordinate)
+            start = TKNamedCoordinate(coordinate: coordinate)
           }
 
           // ALSO if there's aprevious travelled segment
           if let coordinate = shape.end?.coordinate {
-            end = SGKNamedCoordinate(coordinate: coordinate)
+            end = TKNamedCoordinate(coordinate: coordinate)
           }
         }
       }
@@ -104,11 +104,11 @@ extension SegmentTemplate {
       let startDict = dict["from"] as? [String: Any]
       let endDict = dict["to"] as? [String: Any]
       if start == nil, let locationDict = startDict  {
-        start = SVKParserHelper.namedCoordinate(for: locationDict)
+        start = TKParserHelper.namedCoordinate(for: locationDict)
         assert(start != nil, "Got no start waypoint")
       }
       if end == nil, let locationDict = endDict {
-        end = SVKParserHelper.namedCoordinate(for: locationDict)
+        end = TKParserHelper.namedCoordinate(for: locationDict)
         assert(end != nil, "Got no start waypoint")
       }
       
@@ -122,7 +122,7 @@ extension SegmentTemplate {
     return template
   }
   
-  private static func segmentVisibilityType(from dict: [String: Any]) -> STKTripSegmentVisibility {
+  private static func segmentVisibilityType(from dict: [String: Any]) -> TKTripSegmentVisibility {
     switch dict["visibility"] as? String {
     case "in summary"?: return .inSummary
     case "on map"?: return .onMap

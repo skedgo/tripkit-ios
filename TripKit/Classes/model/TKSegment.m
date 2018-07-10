@@ -22,7 +22,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 @property (nonatomic, strong) StopLocation *scheduledStartStop;
 @property (nonatomic, assign) TKSegmentOrdering order;
 @property (nonatomic, strong) NSDictionary *segmentVisits;
-@property (nonatomic, strong) NSArray<SVKRegion *> *localRegions;
+@property (nonatomic, strong) NSArray<TKRegion *> *localRegions;
 
 @property (nonatomic, strong) NSArray *alerts;
 
@@ -103,7 +103,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 	return segment;
 }
 
-- (SVKRegion *)startRegion
+- (TKRegion *)startRegion
 {
   if (! _localRegions) {
     _localRegions = [self determineRegions];
@@ -111,7 +111,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   return [_localRegions firstObject];
 }
 
-- (SVKRegion *)endRegion
+- (TKRegion *)endRegion
 {
   if (! _localRegions) {
     _localRegions = [self determineRegions];
@@ -243,7 +243,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   if (! _scheduledStartStop) {
     // create it!
     id<MKAnnotation> start = [self start];
-    SGKNamedCoordinate *location = [SGKNamedCoordinate namedCoordinateForAnnotation:start];
+    TKNamedCoordinate *location = [TKNamedCoordinate namedCoordinateForAnnotation:start];
     StopLocation *newStop = [StopLocation fetchOrInsertStopForStopCode:code
                                                               modeInfo:self.modeInfo
                                                             atLocation:location
@@ -290,7 +290,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   NSTimeInterval withoutTraffic = rawWithoutTraffic.doubleValue;
   NSTimeInterval withTraffic = [self duration:NO];
   if (withTraffic > withoutTraffic + 60) {
-    NSString *durationString = [SGKObjcDateHelper durationStringForMinutes:(NSInteger) (withoutTraffic / 60)];
+    NSString *durationString = [TKObjcDateHelper durationStringForMinutes:(NSInteger) (withoutTraffic / 60)];
     return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%@ w/o traffic", @"TripKit", [TKTripKit bundle], @"Duration without traffic"), durationString];
   } else {
     return nil;
@@ -299,7 +299,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSString *)stringForDuration:(BOOL)includingContinuation {
 	TKSegment *segment = includingContinuation ? [self finalSegmentIncludingContinuation] : self;
-	return [SGKObjcDateHelper durationStringForStart:self.departureTime end:segment.arrivalTime];
+	return [TKObjcDateHelper durationStringForStart:self.departureTime end:segment.arrivalTime];
 }
 
 - (NSNumber *)frequency {
@@ -374,7 +374,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   // commented out the following as it looks a bit
   // weird if when we have bus => walk => bus and
   // only the first bus => walk gets a dot
-//  if ([SGLocationHelper coordinate:[visit coordinate]
+//  if ([TKLocationHelper coordinate:[visit coordinate]
 //                            isNear:[self coordinate]]) {
 //    return NO; // don't show the visit where we get on
 //  }
@@ -425,7 +425,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   return [self.template modeIdentifier];
 }
 
-- (ModeInfo *)modeInfo
+- (TKModeInfo *)modeInfo
 {
   return [self.template modeInfo];
 }
@@ -488,7 +488,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (BOOL)isPlane {
-  return [SVKTransportModes modeIdentifierIsFlight:self.modeIdentifier];
+  return [TKTransportModes modeIdentifierIsFlight:self.modeIdentifier];
 }
 
 - (BOOL)isPublicTransport {
@@ -678,19 +678,19 @@ NSString *const UninitializedString =  @"UninitializedString";
   return _end;
 }
 
-- (SGKColor *)color
+- (TKColor *)color
 {
-  SGKColor *serviceColor = self.service.color;
+  TKColor *serviceColor = self.service.color;
   if (serviceColor) {
     return serviceColor;
   }
-  SGKColor *modeColor = self.modeInfo.color;
+  TKColor *modeColor = self.modeInfo.color;
   if (modeColor) {
 		return modeColor;
   } else if ([self isPublicTransport]) {
-		return [SGKColor colorWithRed:143/255.f green:139/255.f blue:138/255.f alpha:1]; // Dark grey
+		return [TKColor colorWithRed:143/255.f green:139/255.f blue:138/255.f alpha:1]; // Dark grey
   } else {
-    return [SGKColor colorWithRed:214/255.f green:214/255.f blue:214/255.f alpha:1]; // Light grey
+    return [TKColor colorWithRed:214/255.f green:214/255.f blue:214/255.f alpha:1]; // Light grey
   }
 }
 
@@ -779,7 +779,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-- (nullable SGKColor *)tripSegmentModeColor
+- (nullable TKColor *)tripSegmentModeColor
 {
   // These are only used in segment views. We only want to
   // colour public transport there.
@@ -788,7 +788,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
   
   // Prefer service colour over that of the mode itself.
-  SGKColor *color = self.service.color;
+  TKColor *color = self.service.color;
   if (color) {
     return color;
   } else {
@@ -884,7 +884,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   range = [string rangeOfString:@"<TIME>"];
   if (range.location != NSNotFound) {
     if (includeTime) {
-      NSString *timeString = [SGStyleManager timeString:self.departureTime
+      NSString *timeString = [TKStyleManager timeString:self.departureTime
                                             forTimeZone:self.timeZone];
       BOOL prepend = range.location > 0 && [string characterAtIndex:range.location - 1] != '\n';
       NSString *replacement;
@@ -1061,7 +1061,7 @@ NSString *const UninitializedString =  @"UninitializedString";
         name = [self.trip.request.fromLocation address];
       }
       if (*isTimeDependent) {
-        NSString *time = [SGStyleManager timeString:self.departureTime
+        NSString *time = [TKStyleManager timeString:self.departureTime
                                         forTimeZone:self.timeZone];
         if (name) {
           newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@ at %@", @"TripKit", [TKTripKit bundle], "The place of departure with time. (old key: LeaveLocationTime)"), name, time];
@@ -1095,7 +1095,7 @@ NSString *const UninitializedString =  @"UninitializedString";
         name = [self.trip.request.toLocation address];
       }
       if (*isTimeDependent) {
-        NSString *time = [SGStyleManager timeString:self.arrivalTime
+        NSString *time = [TKStyleManager timeString:self.arrivalTime
                                         forTimeZone:self.timeZone];
         if (name.length > 0) {
           newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Arrive at %@ at %@", @"TripKit", [TKTripKit bundle], "The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime)"), name, time];

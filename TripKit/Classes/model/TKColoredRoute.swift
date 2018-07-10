@@ -11,11 +11,11 @@ import Foundation
 public class TKColoredRoute: NSObject {
   
   @objc public let path: [MKAnnotation]
-  public let routeColor: SGKColor?
+  public let routeColor: TKColor?
   public let routeDashPattern: [NSNumber]?
   public let routeIsTravelled: Bool
   
-  @objc public init(path: [MKAnnotation], color: SGKColor?, dashPattern: [NSNumber]?, isTravelled: Bool) {
+  @objc public init(path: [MKAnnotation], color: TKColor?, dashPattern: [NSNumber]?, isTravelled: Bool) {
     self.path = path
     routeColor = color
     routeDashPattern = dashPattern
@@ -23,7 +23,7 @@ public class TKColoredRoute: NSObject {
   }
 
   @objc(initWithWaypoints:from:to:withColor:dashPattern:isTravelled:)
-  public init(path: [MKAnnotation], from: Int, to: Int, color: SGKColor?, dashPattern: [NSNumber]?, isTravelled: Bool) {
+  public init(path: [MKAnnotation], from: Int, to: Int, color: TKColor?, dashPattern: [NSNumber]?, isTravelled: Bool) {
     let first = from > to ? 0 : from
     let last  = to < from ? path.count : to
     self.path = Array(path[first..<last])
@@ -34,7 +34,7 @@ public class TKColoredRoute: NSObject {
   
 }
 
-extension TKColoredRoute: STKDisplayableRoute {
+extension TKColoredRoute: TKDisplayableRoute {
   
   public var routePath: [Any] {
     return path

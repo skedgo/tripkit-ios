@@ -58,7 +58,7 @@ extension TKInterAppCommunicator {
       // just open Apple Maps
       openSegmentInAppleMaps(segment, currentLocationHandler: currentLocationHandler)
     } else {
-      let actions = SGActions(title: Loc.GetDirections)
+      let actions = TKActions(title: Loc.GetDirections)
       
       // Apple Maps
       actions.addAction(Loc.AppleMaps) {
@@ -148,7 +148,7 @@ extension TKInterAppCommunicator {
       // just open Apple Maps
       openAppleMaps(in: mode, routeFrom: origin, to: destination)
     } else {
-      let actions = SGActions(title: Loc.GetDirections)
+      let actions = TKActions(title: Loc.GetDirections)
       
       // Apple Maps
       actions.addAction(Loc.AppleMaps) {
@@ -227,7 +227,7 @@ extension TKInterAppCommunicator {
       request.append("directionsmode=bicycling")
     }
     
-    if let callback = SGKConfig.shared.googleMapsCallback() {
+    if let callback = TKConfig.shared.googleMapsCallback() {
       request.append(String(format: "x-success=%@", callback))
     }
     

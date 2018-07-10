@@ -17,8 +17,8 @@ extension Alert: TKAlert {
     }
   }
   
-  public var icon: SGKImage? {
-    return STKInfoIcon.image(for: infoIconType, usage: .normal)
+  public var icon: TKImage? {
+    return TKInfoIcon.image(for: infoIconType, usage: .normal)
   }
   
   public var iconURL: URL? {

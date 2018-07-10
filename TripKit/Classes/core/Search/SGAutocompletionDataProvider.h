@@ -12,10 +12,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SGAutocompletionResult;
+@class TKAutocompletionResult;
 @protocol SGAutocompletionDataProvider;
 
-typedef void(^SGAutocompletionDataResultBlock)(NSArray <SGAutocompletionResult*> * _Nullable results);
+typedef void(^SGAutocompletionDataResultBlock)(NSArray <TKAutocompletionResult*> * _Nullable results);
 typedef void(^SGAutocompletionDataActionBlock)(BOOL refreshRequired);
 
 NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
@@ -28,16 +28,16 @@ NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
  
  @param string text which should get autocompleted
  
- @return Sorted list of `SGAutocompletionResult` objects.
+ @return Sorted list of `TKAutocompletionResult` objects.
  */
-- (NSArray<SGAutocompletionResult *> *)autocompleteFast:(NSString *)string forMapRect:(MKMapRect)mapRect;
+- (NSArray<TKAutocompletionResult *> *)autocompleteFast:(NSString *)string forMapRect:(MKMapRect)mapRect;
 
 
 /**
  Called whenever the user types a character. This is called asynchronously on a background to not block the user from typing the next character. This method should return immediately, and execute remote requests in a separate queue and then call the completion block.
  
  @param string text which should get autocompleted
- @param completion Sorted list of `SGAutocompletionResult` objects.
+ @param completion Sorted list of `TKAutocompletionResult` objects.
  */
 - (void)autocompleteSlowly:(NSString *)string
                 forMapRect:(MKMapRect)mapRect
@@ -62,7 +62,7 @@ NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
  @param result The object previously returned from `autocomplete:`.
  @return The annotation for the object that you previously provided.
  */
-- (nullable id<MKAnnotation>)annotationForAutocompletionResult:(SGAutocompletionResult *)result;
+- (nullable id<MKAnnotation>)annotationForAutocompletionResult:(TKAutocompletionResult *)result;
 
 @end
 

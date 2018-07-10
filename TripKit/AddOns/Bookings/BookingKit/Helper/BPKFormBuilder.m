@@ -61,13 +61,13 @@
           BPKSectionItem *item = [[BPKSectionItem alloc] initWithJson:field];
           [section addItem:item];
         } else {
-          [SGKLog warn:@"BPKFormBuilder" format:@"Server sent form field which isn't a dictionary: %@", fieldObject];
+          [TKLog warn:@"BPKFormBuilder" format:@"Server sent form field which isn't a dictionary: %@", fieldObject];
         }
       }
       
       [sections addObject:section];
     } else {
-      [SGKLog warn:@"BPKFormBuilder" format:@"Server sent form element which isn't a dictionary: %@", elementObject];
+      [TKLog warn:@"BPKFormBuilder" format:@"Server sent form element which isn't a dictionary: %@", elementObject];
     }
   }
   

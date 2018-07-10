@@ -32,7 +32,7 @@ public class TKDeparturesProvider: NSObject {
 
 extension TKDeparturesProvider {
   
-  public class func fetchDepartures(forStopCodes stopCodes: [String], fromDate: Date = Date(), limit: Int = 10, in region: SVKRegion) -> Observable<API.Departures> {
+  public class func fetchDepartures(forStopCodes stopCodes: [String], fromDate: Date = Date(), limit: Int = 10, in region: TKRegion) -> Observable<API.Departures> {
     
     guard !stopCodes.isEmpty else {
       return Observable.error(InputError.missingField("stopCodes"))
@@ -46,7 +46,7 @@ extension TKDeparturesProvider {
       "config": TKSettings.defaultDictionary()
     ]
     
-    return SVKServer.shared.rx
+    return TKServer.shared.rx
       .hit(.POST, path: "departures.json", parameters: paras, region: region)
       .map { _, _, data in
         guard let data = data else { throw OutputError.noDataReturn }
@@ -59,7 +59,7 @@ extension TKDeparturesProvider {
     
     let stopCodes = stops.map { $0.stopCode }
     
-    return SVKServer.shared.rx
+    return TKServer.shared.rx
       .requireRegions()
       .flatMap { Void -> Observable<API.Departures> in
         guard let region = stops.first?.region else {
@@ -153,7 +153,7 @@ extension TKDeparturesProvider {
     
     let paras: [String: Any] = TKDeparturesProvider.queryParameters(for: table, fromDate: fromDate, limit: limit)
     
-    return SVKServer.shared.rx
+    return TKServer.shared.rx
       .hit(.POST, path: "departures.json", parameters: paras, region: table.startRegion)
       .map { _, _, data in
         guard let data = data else { throw OutputError.noDataReturn }
@@ -164,7 +164,7 @@ extension TKDeparturesProvider {
   
   public class func downloadDepartures(for table: TKDLSTable, fromDate: Date = Date(), limit: Int = 10) -> Observable<Set<String>> {
     
-    return SVKServer.shared.rx
+    return TKServer.shared.rx
       .requireRegions()
       .flatMap { Void -> Observable<API.Departures> in
         return TKDeparturesProvider.fetchDepartures(for: table, fromDate: fromDate, limit: limit)

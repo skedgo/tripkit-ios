@@ -209,7 +209,7 @@ extension TKUIResultsMapManager {
   override func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     let renderer = super.mapView(mapView, rendererFor: overlay)
     
-    if let routePolyline = overlay as? STKRoutePolyline, let polylineRenderer = renderer as? TKUIPolylineRenderer {
+    if let routePolyline = overlay as? TKRoutePolyline, let polylineRenderer = renderer as? TKUIPolylineRenderer {
       let isSelected = selectedRoute?.polylines.contains(routePolyline) ?? false
       polylineRenderer.isSelected = isSelected
     }
@@ -227,11 +227,11 @@ extension TKUIPolylineRenderer {
     }
     set {
       if newValue {
-        strokeColor = SGStyleManager.globalTintColor()
+        strokeColor = TKStyleManager.globalTintColor()
         alpha = 1
         lineWidth = 24
       } else {
-        strokeColor = SGStyleManager.lightTextColor()
+        strokeColor = TKStyleManager.lightTextColor()
         alpha = 0.3
         lineWidth = 12
       }

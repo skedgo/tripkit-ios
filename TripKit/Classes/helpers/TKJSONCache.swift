@@ -84,7 +84,7 @@ public class TKFileCache: NSObject {
       do {
         try fileMan.createDirectory(at: pathURL, withIntermediateDirectories: true, attributes: nil)
       } catch {
-        SGKLog.warn("TKJSONCache", text: "Could not create directory \(pathURL), due to: \(error)")
+        TKLog.warn("TKJSONCache", text: "Could not create directory \(pathURL), due to: \(error)")
       }
     }
     

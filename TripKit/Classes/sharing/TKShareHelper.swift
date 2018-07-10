@@ -19,17 +19,17 @@ public class TKShareHelper: NSObject {
 
 //+ (void)geocodeString:(NSString *)string
 //usingGeocoder:(id<SGGeocoder>)geocoder
-//completion:(void(^)( SGKNamedCoordinate * _Nullable coordinate))completion
+//completion:(void(^)( TKNamedCoordinate * _Nullable coordinate))completion
 //{
 //  [geocoder geocodeString:string
 //    nearRegion:MKMapRectWorld
 //    success:
-//    ^(NSString * _Nonnull query, NSArray<SGKNamedCoordinate *> * _Nonnull results) {
+//    ^(NSString * _Nonnull query, NSArray<TKNamedCoordinate *> * _Nonnull results) {
 //    #pragma unused(query)
 //    dispatch_async(dispatch_get_main_queue(), ^{
-//    id<MKAnnotation> annotation = [SGBaseGeocoder pickBestFromResults:results];
+//    id<MKAnnotation> annotation = [TKBaseGeocoder pickBestFromResults:results];
 //    if (annotation) {
-//    SGKNamedCoordinate *coordinate = [SGKNamedCoordinate namedCoordinateForAnnotation:annotation];
+//    TKNamedCoordinate *coordinate = [TKNamedCoordinate namedCoordinateForAnnotation:annotation];
 //    coordinate.name = string;
 //    completion(coordinate);
 //    } else {
@@ -51,12 +51,12 @@ extension TKShareHelper {
     return url.path.hasPrefix("/go")
   }
 
-  @objc public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: SGTimeType, time: Date?) -> URL {
+  @objc public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: TKTimeType, time: Date?) -> URL {
     return createQueryURL(start: start, end: end, timeType: timeType, time: time, baseURL: "https://tripgo.com")
   }
   
   
-  @objc public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: SGTimeType, time: Date?, baseURL: String) -> URL {
+  @objc public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: TKTimeType, time: Date?, baseURL: String) -> URL {
     
     // TODO: use format string and truncate lat/lng after 5 decimals
     var urlString = "\(baseURL)/go?tlat=\(end.latitude)&tlng=\(end.longitude)"
