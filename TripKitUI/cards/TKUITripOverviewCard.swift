@@ -194,12 +194,13 @@ extension TKUITripOverviewCard {
       let presentation = viewController.popoverPresentationController
       presentation?.sourceView = controller.view
       if let view = sender as? UIView {
+        presentation?.sourceView = view
         presentation?.sourceRect = view.bounds
       } else if let barButton = sender as? UIBarButtonItem {
         presentation?.barButtonItem = barButton
       }
     } else {
-      viewController.modalPresentationStyle = .fullScreen
+      viewController.modalPresentationStyle = .currentContext
     }
     controller.present(viewController, animated: true, completion: nil)
   }
