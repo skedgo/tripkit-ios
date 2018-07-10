@@ -1,5 +1,5 @@
 //
-//  SGCellHelper.m
+//  TKCellHelper.m
 //  TripKit
 //
 //  Created by Adrian Schoenig on 29/10/2014.

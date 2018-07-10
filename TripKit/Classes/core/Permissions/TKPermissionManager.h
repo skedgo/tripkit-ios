@@ -10,21 +10,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^SGPermissionCompletionBlock)(BOOL enabled);
-typedef void(^SGPermissionsOpenSettingsHandler)(void);
+typedef void (^TKPermissionCompletionBlock)(BOOL enabled);
+typedef void(^TKPermissionsOpenSettingsHandler)(void);
 
-typedef NS_ENUM(NSInteger, SGAuthorizationStatus) {
-  SGAuthorizationStatusNotDetermined = 0,
-  SGAuthorizationStatusRestricted,
-  SGAuthorizationStatusDenied,
-  SGAuthorizationStatusAuthorized
+typedef NS_ENUM(NSInteger, TKAuthorizationStatus) {
+  TKAuthorizationStatusNotDetermined = 0,
+  TKAuthorizationStatusRestricted,
+  TKAuthorizationStatusDenied,
+  TKAuthorizationStatusAuthorized
 };
 
-FOUNDATION_EXPORT NSString *const SGPermissionsChangedNotification;
+FOUNDATION_EXPORT NSString *const TKPermissionsChangedNotification;
 
 @interface TKPermissionManager : NSObject
 
-@property (nonatomic, strong, nullable) SGPermissionsOpenSettingsHandler openSettingsHandler;
+@property (nonatomic, strong, nullable) TKPermissionsOpenSettingsHandler openSettingsHandler;
 
 // these are the main interface methods
 
@@ -35,9 +35,9 @@ FOUNDATION_EXPORT NSString *const SGPermissionsChangedNotification;
 
 // subclasses need to implement these
 - (BOOL)featureIsAvailable;
-- (void)askForPermission:(SGPermissionCompletionBlock)completion;
+- (void)askForPermission:(TKPermissionCompletionBlock)completion;
 - (BOOL)authorizationRestrictionsApply;
-- (SGAuthorizationStatus)authorizationStatus;
+- (TKAuthorizationStatus)authorizationStatus;
 - (NSString *)authorizationAlertText;
 
 @end

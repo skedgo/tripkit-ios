@@ -8,7 +8,7 @@
 
 #import "TKPermissionManager.h"
 
-NSString *const SGPermissionsChangedNotification =  @"kSGPermissionsChangedNotification";
+NSString *const TKPermissionsChangedNotification =  @"kTKPermissionsChangedNotification";
 
 @implementation TKPermissionManager
 
@@ -44,14 +44,14 @@ NSString *const SGPermissionsChangedNotification =  @"kSGPermissionsChangedNotif
   return NO;
 }
 
-- (SGAuthorizationStatus)authorizationStatus
+- (TKAuthorizationStatus)authorizationStatus
 {
   // Objective C has no support for abstract methods, so we're raising an exception instead
   NSException *ex = [NSException exceptionWithName:@"Abstract Method Not Overridden"
                                             reason:@"You MUST override this save method"
                                           userInfo:nil];
   [ex raise];
-  return SGAuthorizationStatusNotDetermined;
+  return TKAuthorizationStatusNotDetermined;
 }
 
 - (NSString *)authorizationAlertText
@@ -72,8 +72,8 @@ NSString *const SGPermissionsChangedNotification =  @"kSGPermissionsChangedNotif
     return NO;
   
   if ([self authorizationRestrictionsApply]) {
-    SGAuthorizationStatus status = [self authorizationStatus];
-    return status == SGAuthorizationStatusAuthorized;
+    TKAuthorizationStatus status = [self authorizationStatus];
+    return status == TKAuthorizationStatusAuthorized;
     
   } else {
     // no restrictions apply

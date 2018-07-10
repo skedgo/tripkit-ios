@@ -22,13 +22,6 @@ typedef NS_ENUM(NSInteger, WeekdayIndex) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- @param startDate The start date of the occurance
- @param endDate   The end date of the occurance
- */
-typedef void(^SGCustomEventRecurrenceEnumeration)(NSDate *startDate, NSDate *endDate);
-
-
 @interface TKCustomEventRecurrenceRule : NSObject
 
 + (NSString *)humanReadableRecurrenceRule:(NSString *)recurrenceRule

@@ -1,6 +1,6 @@
 //
 //  TKServer+Rx.swift
-//  SGSkedGoKit
+//  TripKit
 //
 //  Created by Adrian Schoenig on 1/08/2016.
 //  Copyright © 2016 SkedGo. All rights reserved.

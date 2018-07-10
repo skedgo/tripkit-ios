@@ -16,7 +16,7 @@
 - (void)downloadContentOfService:(Service *)service
 							forEmbarkationDate:(NSDate *)date
 												inRegion:(TKRegion *)regionOrNil
-											completion:(SGServiceCompletionBlock)completion
+											completion:(TKServiceCompletionBlock)completion
 {
   NSParameterAssert(service);
   NSParameterAssert(date);

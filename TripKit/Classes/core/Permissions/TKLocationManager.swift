@@ -38,7 +38,7 @@ extension TKLocationManager {
     return true
   }
   
-  open override func authorizationStatus() -> SGAuthorizationStatus {
+  open override func authorizationStatus() -> TKAuthorizationStatus {
     guard CLLocationManager.locationServicesEnabled() else {
       return .denied
     }

@@ -138,24 +138,24 @@
   return YES;
 }
 
-- (SGAuthorizationStatus)authorizationStatus
+- (TKAuthorizationStatus)authorizationStatus
 {
   if ([self authorizationRestrictionsApply]) {
     int status = ABAddressBookGetAuthorizationStatus();
     switch (status) {
       case kABAuthorizationStatusAuthorized:
-        return SGAuthorizationStatusAuthorized;
+        return TKAuthorizationStatusAuthorized;
       case kABAuthorizationStatusDenied:
-        return SGAuthorizationStatusDenied;
+        return TKAuthorizationStatusDenied;
       case kABAuthorizationStatusRestricted:
-        return SGAuthorizationStatusRestricted;
+        return TKAuthorizationStatusRestricted;
       case kABAuthorizationStatusNotDetermined:
-        return SGAuthorizationStatusNotDetermined;
+        return TKAuthorizationStatusNotDetermined;
     }
   }
   
   // authorized by default otherwise
-  return SGAuthorizationStatusAuthorized;
+  return TKAuthorizationStatusAuthorized;
 }
 
 - (void)askForPermission:(void (^)(BOOL enabled))completion

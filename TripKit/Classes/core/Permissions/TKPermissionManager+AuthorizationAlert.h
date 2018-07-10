@@ -16,7 +16,7 @@
 
 - (void)tryAuthorizationForSender:(nullable id)sender
                  inViewController:(nonnull UIViewController *)controller
-                       completion:(nonnull SGPermissionCompletionBlock)completion;
+                       completion:(nonnull TKPermissionCompletionBlock)completion;
 
 - (void)showAuthorizationAlertForSender:(nullable id)sender
                        inViewController:(nonnull UIViewController *)controller;

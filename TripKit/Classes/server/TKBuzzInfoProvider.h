@@ -12,11 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class TKDLSTable, TKRegion, Service, StopLocation;
 
-typedef void (^SGServiceCompletionBlock)(Service *service, BOOL success);
+typedef void (^TKServiceCompletionBlock)(Service *service, BOOL success);
 
-enum SGInfoProviderError {
-  kSGInfoProviderErrorNothingFound    = 1,
-  kSGInfoProviderErrorStopWithoutCode = 2
+enum TKInfoProviderError {
+  kTKInfoProviderErrorNothingFound    = 1,
+  kTKInfoProviderErrorStopWithoutCode = 2
 };
 
 @interface TKBuzzInfoProvider : NSObject
@@ -24,7 +24,7 @@ enum SGInfoProviderError {
 - (void)downloadContentOfService:(Service *)service
 							forEmbarkationDate:(NSDate *)date
 												inRegion:(nullable TKRegion *)regionOrNil
-											completion:(SGServiceCompletionBlock)completion;
+											completion:(TKServiceCompletionBlock)completion;
 
 - (void)addContentToService:(Service *)service
                fromResponse:(NSDictionary *)responseDict;

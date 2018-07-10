@@ -19,7 +19,7 @@
 
 - (void)tryAuthorizationForSender:(id)sender
                  inViewController:(UIViewController *)controller
-                       completion:(SGPermissionCompletionBlock)completion
+                       completion:(TKPermissionCompletionBlock)completion
 {
   if (! [self featureIsAvailable]) {
     //    NSLog(@"Attempted `tryAuthorization` even though feature isn't available!");
@@ -33,15 +33,15 @@
   }
   
   // we aren't authorized yet. can we authorize at all?
-  SGAuthorizationStatus status = [self authorizationStatus];
+  TKAuthorizationStatus status = [self authorizationStatus];
   switch (status) {
-    case SGAuthorizationStatusRestricted:
-    case SGAuthorizationStatusDenied:
+    case TKAuthorizationStatusRestricted:
+    case TKAuthorizationStatusDenied:
       [self showAuthorizationAlertForSender:sender inViewController:controller];
       completion(NO);
       return;
       
-    case SGAuthorizationStatusNotDetermined:
+    case TKAuthorizationStatusNotDetermined:
       [self askForPermission:completion];
       return;
       
@@ -60,13 +60,13 @@
   
   NSString *message = nil;
   
-  SGAuthorizationStatus status = [self authorizationStatus];
+  TKAuthorizationStatus status = [self authorizationStatus];
   switch (status) {
-    case SGAuthorizationStatusDenied:
+    case TKAuthorizationStatusDenied:
       message = [self authorizationAlertText];
       break;
       
-    case SGAuthorizationStatusRestricted:
+    case TKAuthorizationStatusRestricted:
       message = NSLocalizedStringFromTableInBundle(@"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider.", @"Shared", [TKStyleManager bundle], @"Authorization restricted alert message");
       break;
       

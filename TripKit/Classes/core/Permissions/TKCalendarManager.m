@@ -151,24 +151,24 @@ typedef void (^SGCalendarResultsBlock)(NSString *string, NSArray *results);
   return [self.eventStore respondsToSelector:@selector(requestAccessToEntityType:completion:)];
 }
 
-- (SGAuthorizationStatus)authorizationStatus
+- (TKAuthorizationStatus)authorizationStatus
 {
   if ([self authorizationRestrictionsApply]) {
     EKAuthorizationStatus status = [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent];
     switch (status) {
       case EKAuthorizationStatusAuthorized:
-        return SGAuthorizationStatusAuthorized;
+        return TKAuthorizationStatusAuthorized;
       case EKAuthorizationStatusDenied:
-        return SGAuthorizationStatusDenied;
+        return TKAuthorizationStatusDenied;
       case EKAuthorizationStatusRestricted:
-        return SGAuthorizationStatusRestricted;
+        return TKAuthorizationStatusRestricted;
       case EKAuthorizationStatusNotDetermined:
-        return SGAuthorizationStatusNotDetermined;
+        return TKAuthorizationStatusNotDetermined;
     }
   }
   
   // authorized by default otherwise
-  return SGAuthorizationStatusAuthorized;
+  return TKAuthorizationStatusAuthorized;
 }
 
 - (void)askForPermission:(void (^)(BOOL enabled))completion

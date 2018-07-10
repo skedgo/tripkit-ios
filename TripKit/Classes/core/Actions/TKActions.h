@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if TARGET_OS_IPHONE
 
-typedef void(^SGActionBlock)(void);
-typedef void(^SGActionTextfieldBlock)(NSString *value);
+typedef void(^TKActionBlock)(void);
+typedef void(^TKActionTextfieldBlock)(NSString *value);
 
 @interface TKActions : NSObject
 
@@ -36,10 +36,10 @@ typedef void(^SGActionTextfieldBlock)(NSString *value);
 
 - (instancetype)initWithTitle:(nullable NSString *)title;
 
-- (void)addAction:(NSString *)title handler:(nullable SGActionBlock)handler;
+- (void)addAction:(NSString *)title handler:(nullable TKActionBlock)handler;
 
 - (void)setTextFieldWithValue:(NSString *)value
-                      handler:(SGActionTextfieldBlock)handler;
+                      handler:(TKActionTextfieldBlock)handler;
 
 - (void)showForSender:(nullable id)sender
          inController:(UIViewController *)controller;

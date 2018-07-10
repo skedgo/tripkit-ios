@@ -1,5 +1,5 @@
 //
-//  SGCustomEvent.h
+//  TKCustomEvent.h
 //  TripKit
 //
 //  Created by Kuan Lun Huang on 25/02/2014.

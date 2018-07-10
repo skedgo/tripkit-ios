@@ -17,17 +17,17 @@
 @interface SGAction : NSObject
 
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, strong) SGActionBlock handler;
+@property (nonatomic, strong) TKActionBlock handler;
 
 + (instancetype)actionWithTitle:(NSString *)title
-                        handler:(SGActionBlock)hanler;
+                        handler:(TKActionBlock)hanler;
 
 @end
 
 @implementation SGAction
 
 + (instancetype)actionWithTitle:(NSString *)title
-                        handler:(SGActionBlock)handler
+                        handler:(TKActionBlock)handler
 {
   SGAction *action = [[self alloc] init];
   action.title = title;
@@ -44,7 +44,7 @@
 @property (nonatomic, strong) NSMutableArray *actions;
 
 @property (nonatomic, strong) NSString *textfieldValue;;
-@property (nonatomic, strong) SGActionTextfieldBlock textfieldBlock;
+@property (nonatomic, strong) TKActionTextfieldBlock textfieldBlock;
 
 @end
 
@@ -67,12 +67,12 @@
   return [self initWithTitle:nil];
 }
 
-- (void)addAction:(NSString *)title handler:(SGActionBlock)handler
+- (void)addAction:(NSString *)title handler:(TKActionBlock)handler
 {
   [self.actions addObject:[SGAction actionWithTitle:title handler:handler]];
 }
 
-- (void)setTextFieldWithValue:(NSString *)value handler:(SGActionTextfieldBlock)handler
+- (void)setTextFieldWithValue:(NSString *)value handler:(TKActionTextfieldBlock)handler
 {
   self.type = UIAlertControllerStyleAlert;
   self.textfieldBlock = handler;

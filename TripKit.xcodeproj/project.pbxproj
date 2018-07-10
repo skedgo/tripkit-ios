@@ -690,7 +690,7 @@
 		3ABBDAFE2032136900205042 /* NSManagedObjectContext+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB2C1F06854F00147990 /* NSManagedObjectContext+Rx.swift */; };
 		3ABBDAFF2032136900205042 /* TKLocationManager+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E2B1F20E0C500666E59 /* TKLocationManager+rx.swift */; };
 		3ABBDB002032136900205042 /* TKObjCDisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB2D1F06854F00147990 /* TKObjCDisposeBag.swift */; };
-		3ABBDB012032136900205042 /* SVKServer+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB2E1F06854F00147990 /* SVKServer+Rx.swift */; };
+		3ABBDB012032136900205042 /* TKServer+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB2E1F06854F00147990 /* TKServer+Rx.swift */; };
 		3ABBDB062032137600205042 /* StopLocation+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE011F06B85F00147990 /* StopLocation+Shareable.swift */; };
 		3ABBDB072032137600205042 /* StopVisits+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE031F06B91300147990 /* StopVisits+Shareable.swift */; };
 		3ABBDB082032137600205042 /* TKSegment+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE051F06B97300147990 /* TKSegment+Shareable.swift */; };
@@ -780,7 +780,7 @@
 		3AFFAB8A1F06854F00147990 /* TKAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB2A1F06854F00147990 /* TKAlertController.m */; };
 		3AFFAB8B1F06854F00147990 /* NSManagedObjectContext+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB2C1F06854F00147990 /* NSManagedObjectContext+Rx.swift */; };
 		3AFFAB8C1F06854F00147990 /* TKObjCDisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB2D1F06854F00147990 /* TKObjCDisposeBag.swift */; };
-		3AFFAB8D1F06854F00147990 /* SVKServer+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB2E1F06854F00147990 /* SVKServer+Rx.swift */; };
+		3AFFAB8D1F06854F00147990 /* TKServer+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB2E1F06854F00147990 /* TKServer+Rx.swift */; };
 		3AFFAB8E1F06854F00147990 /* TKCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB301F06854F00147990 /* TKCustomEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFAB8F1F06854F00147990 /* TKCustomEventRecurrenceRule.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB311F06854F00147990 /* TKCustomEventRecurrenceRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFAB901F06854F00147990 /* TKCustomEventRecurrenceRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB321F06854F00147990 /* TKCustomEventRecurrenceRule.m */; };
@@ -1526,7 +1526,7 @@
 		3AFFAB2A1F06854F00147990 /* TKAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAlertController.m; sourceTree = "<group>"; };
 		3AFFAB2C1F06854F00147990 /* NSManagedObjectContext+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Rx.swift"; sourceTree = "<group>"; };
 		3AFFAB2D1F06854F00147990 /* TKObjCDisposeBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKObjCDisposeBag.swift; sourceTree = "<group>"; };
-		3AFFAB2E1F06854F00147990 /* SVKServer+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SVKServer+Rx.swift"; sourceTree = "<group>"; };
+		3AFFAB2E1F06854F00147990 /* TKServer+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKServer+Rx.swift"; sourceTree = "<group>"; };
 		3AFFAB301F06854F00147990 /* TKCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCustomEvent.h; sourceTree = "<group>"; };
 		3AFFAB311F06854F00147990 /* TKCustomEventRecurrenceRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCustomEventRecurrenceRule.h; sourceTree = "<group>"; };
 		3AFFAB321F06854F00147990 /* TKCustomEventRecurrenceRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCustomEventRecurrenceRule.m; sourceTree = "<group>"; };
@@ -2328,12 +2328,6 @@
 			isa = PBXGroup;
 			children = (
 				3A67698720EE3B720044663F /* Array+TKAutocompleting.swift */,
-				3AA03E431F0BC9DB00C6B337 /* SGAutocompletionDataProvider.h */,
-				3A922061205FCEB9004E6C34 /* SGAutocompletionDataProvider+TKGeocoding.swift */,
-				3AA03E441F0BC9DB00C6B337 /* SGAutocompletionDataSource.h */,
-				3AA03E451F0BC9DB00C6B337 /* SGAutocompletionDataSource.m */,
-				3A922064205FD393004E6C34 /* SGAutocompletionDataSource.swift */,
-				3AA03E561F0BC9DB00C6B337 /* SGSearchDataSource.h */,
 				3AA03E401F0BC9DB00C6B337 /* TKAggregateGeocoder.swift */,
 				3A2D06EB1F83DE4B002DA194 /* TKAnnotationClusterer.swift */,
 				3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */,
@@ -2557,6 +2551,7 @@
 				3AB6C6621D1CD08E0089F687 /* model */,
 				3AB6C68A1D1CD08E0089F687 /* server */,
 				3AB6C6451D1CD08E0089F687 /* sharing */,
+				3AEBBB0D20F4F3440035096F /* deprecated */,
 				3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */,
 				3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */,
 				3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */,
@@ -2719,6 +2714,19 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		3AEBBB0D20F4F3440035096F /* deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				3AA03E431F0BC9DB00C6B337 /* SGAutocompletionDataProvider.h */,
+				3A922061205FCEB9004E6C34 /* SGAutocompletionDataProvider+TKGeocoding.swift */,
+				3AA03E441F0BC9DB00C6B337 /* SGAutocompletionDataSource.h */,
+				3AA03E451F0BC9DB00C6B337 /* SGAutocompletionDataSource.m */,
+				3A922064205FD393004E6C34 /* SGAutocompletionDataSource.swift */,
+				3AA03E561F0BC9DB00C6B337 /* SGSearchDataSource.h */,
+			);
+			path = deprecated;
+			sourceTree = "<group>";
+		};
 		3AFD393B20D9333500FDC7D0 /* cards */ = {
 			isa = PBXGroup;
 			children = (
@@ -2790,7 +2798,7 @@
 				3AFFAB2C1F06854F00147990 /* NSManagedObjectContext+Rx.swift */,
 				3A096E2B1F20E0C500666E59 /* TKLocationManager+rx.swift */,
 				3AFFAB2D1F06854F00147990 /* TKObjCDisposeBag.swift */,
-				3AFFAB2E1F06854F00147990 /* SVKServer+Rx.swift */,
+				3AFFAB2E1F06854F00147990 /* TKServer+Rx.swift */,
 			);
 			path = "CoreKit+Rx";
 			sourceTree = "<group>";
@@ -3604,7 +3612,7 @@
 				3ABBDA3E2032132D00205042 /* Cell.m in Sources */,
 				3ABBDAC02032135400205042 /* TKLocationHelper.m in Sources */,
 				3ABBDAD42032135400205042 /* TKStyleManager.swift in Sources */,
-				3ABBDB012032136900205042 /* SVKServer+Rx.swift in Sources */,
+				3ABBDB012032136900205042 /* TKServer+Rx.swift in Sources */,
 				3ABBDA1B2032132400205042 /* TKBuzzInfoProvider.swift in Sources */,
 				3A462CC22076218A00AF41EF /* TKTurnByTurnMode.swift in Sources */,
 				3ABBDA2D2032132400205042 /* TKReporter.swift in Sources */,
@@ -4000,7 +4008,7 @@
 				3A51402E1DEE62EE002DB39F /* TKDLSTable.swift in Sources */,
 				3A096E1E1F20DAD500666E59 /* TKServer.swift in Sources */,
 				3AFFABD31F06854F00147990 /* TKCoordinates.swift in Sources */,
-				3AFFAB8D1F06854F00147990 /* SVKServer+Rx.swift in Sources */,
+				3AFFAB8D1F06854F00147990 /* TKServer+Rx.swift in Sources */,
 				3AB6C6E31D1CD08E0089F687 /* StopLocation.m in Sources */,
 				3A462CC12076218A00AF41EF /* TKTurnByTurnMode.swift in Sources */,
 				3AC4DD121DEE32C80026B238 /* TKWaypointRouter.m in Sources */,

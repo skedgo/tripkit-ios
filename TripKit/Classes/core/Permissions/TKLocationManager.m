@@ -29,7 +29,7 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 @property (nonatomic, assign) BOOL wasGpsActive;
 @property (nonatomic, assign) CLLocationDistance distanceFilter;
 
-@property (copy, nonatomic) SGPermissionCompletionBlock completionBlock;
+@property (copy, nonatomic) TKPermissionCompletionBlock completionBlock;
 @property (nonatomic, strong) CLLocation *bestLocationFix;
 @property (nonatomic, strong) TKNamedCoordinate *currentLocationPlaceholder;
 

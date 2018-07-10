@@ -1,5 +1,5 @@
 //
-//  SGPrivateVehicle.m
+//  TKVehicular.m
 //  TripKit
 //
 //  Created by Adrian Schoenig on 19/03/2014.
