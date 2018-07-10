@@ -50,10 +50,8 @@ open class TKUIMapManager: TGMapManager {
     }
   }
   
-  override open func takeCharge(of mapView: UIView, edgePadding: UIEdgeInsets, animated: Bool) {
+  override open func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
-    
-    guard let mapView = mapView as? MKMapView else { preconditionFailure() }
 
     // Keep heading
     heading = mapView.camera.heading
@@ -77,7 +75,7 @@ open class TKUIMapManager: TGMapManager {
       .disposed(by: disposeBag)
   }
   
-  override open func cleanUp(_ mapView: UIView, animated: Bool) {
+  override open func cleanUp(_ mapView: MKMapView, animated: Bool) {
     removeOverlay(overlayPolygon)
     
     super.cleanUp(mapView, animated: animated)

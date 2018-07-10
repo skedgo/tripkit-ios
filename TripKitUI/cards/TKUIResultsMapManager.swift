@@ -95,10 +95,9 @@ class TKUIResultsMapManager: TKUIMapManager {
 
 
   
-  override func takeCharge(of mapView: UIView, edgePadding: UIEdgeInsets, animated: Bool) {
+  override func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
     
-    guard let mapView = mapView as? MKMapView else { preconditionFailure() }
     guard let viewModel = viewModel else { assertionFailure(); return }
     
     viewModel.originAnnotation
@@ -145,8 +144,7 @@ class TKUIResultsMapManager: TKUIMapManager {
   }
   
   
-  override func cleanUp(_ mapView: UIView, animated: Bool) {
-    guard let mapView = mapView as? MKMapView else { preconditionFailure() }
+  override func cleanUp(_ mapView: MKMapView, animated: Bool) {
     disposeBag = DisposeBag()
     
     // clean up map annotations and annotations

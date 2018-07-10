@@ -42,13 +42,13 @@ public class TKUITripMapManager: TKUIMapManager {
     self.preferredZoomLevel = .road
   }
   
-  override public func takeCharge(of mapView: UIView, edgePadding: UIEdgeInsets, animated: Bool) {
+  override public func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
     
     add(trip)
   }
   
-  override public func cleanUp(_ mapView: UIView, animated: Bool) {
+  override public func cleanUp(_ mapView: MKMapView, animated: Bool) {
     remove(trip)
     
     super.cleanUp(mapView, animated: animated)
