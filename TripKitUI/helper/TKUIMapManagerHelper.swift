@@ -17,8 +17,11 @@ public typealias MapManagerHelper = TKUIMapManagerHelper
 public class TKUIMapManagerHelper: NSObject {
   
   @objc(sortOverlays:)
-  public static func sort(_ overlays: [MKOverlay]) -> [MKOverlay] {
-    
+  public static func _objcSort(_ overlays: [MKOverlay]) -> [MKOverlay] {
+    return self.sort(overlays)
+  }
+
+  public static func sort<T: MKOverlay>(_ overlays: [T]) -> [T] {
     return overlays.sorted { one, two -> Bool in
       
       guard

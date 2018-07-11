@@ -162,6 +162,7 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     allRoutes = []
     
     mapView.removeGestureRecognizer(dropPinRecognizer)
+    mapView.removeGestureRecognizer(tapRecognizer)
     
     super.cleanUp(mapView, animated: animated)
   }
