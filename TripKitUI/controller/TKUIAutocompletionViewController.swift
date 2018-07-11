@@ -32,6 +32,8 @@ public class TKUIAutocompletionViewController: UITableViewController {
   
   public weak var delegate: TKUIAutocompletionViewControllerDelegate?
   
+  public var showAccessoryButtons = true
+  
   public var biasMapRect: MKMapRect = MKMapRectNull
 
   private var viewModel: TKUIAutocompletionViewModel!
@@ -54,8 +56,11 @@ public class TKUIAutocompletionViewController: UITableViewController {
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIAutocompletionViewModel.Section>(
       configureCell: { [weak self] _, tv, ip, item in
-        guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else { preconditionFailure() }
-        cell.configure(with: item, onAccessoryTapped: self?.accessoryTapped)
+        guard
+          let `self` = self,
+          let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell
+          else { preconditionFailure() }
+        cell.configure(with: item, onAccessoryTapped: self.showAccessoryButtons ? self.accessoryTapped : nil)
         return cell
       }
     )
