@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// An action that can be added to a `TKUITripOverviewCard`. Set an array of
 /// these on `TKUITripOverviewCard.tripActionsFactory`.
 public protocol TKUITripOverviewCardAction {
@@ -56,6 +55,13 @@ public extension TKUITripOverviewCard {
     /// Set this to add a "start" button on a trip, e.g., to enter turn-by-
     /// turn navigation mode.
     public var startTripHandler: ((TKUITripOverviewCard, Trip) -> Void)?
+    
+    /// Set this to use your own map manager. You can use this in combination
+    /// with `TGCardViewController.builder` to use a map other than Apple's
+    /// MapKit.
+    ///
+    /// Defaults to using `TKUITripMapManager`.
+    public var mapManagerFactory: ((Trip) -> TKUITripMapManagerType) = TKUITripMapManager.init
     
     /// Set this to add a list of action button to a trip overview card.
     ///

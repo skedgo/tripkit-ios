@@ -19,7 +19,15 @@ import TGCardViewController
   import TripKit
 #endif
 
-class TKUIResultsMapManager: TKUIMapManager {
+public protocol TKUIResultsMapManagerType: TGCompatibleMapManager {
+  var viewModel: TKUIResultsViewModel? { get set }
+  
+  var droppedPin: Driver<CLLocationCoordinate2D> { get }
+  
+  var selectedMapRoute: Driver<TKUIResultsViewModel.MapRouteItem> { get }
+}
+
+class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
   
   weak var viewModel: TKUIResultsViewModel?
   
@@ -147,7 +155,7 @@ class TKUIResultsMapManager: TKUIMapManager {
   override func cleanUp(_ mapView: MKMapView, animated: Bool) {
     disposeBag = DisposeBag()
     
-    // clean up map annotations and annotations
+    // clean up map annotations and overlays
     originAnnotation = nil
     destinationAnnotation = nil
     selectedRoute = nil

@@ -17,9 +17,9 @@ import RxDataSources
   import TripKit
 #endif
 
-class TKUIResultsViewModel {
+public class TKUIResultsViewModel {
   
-  typealias UIInput = (
+  public typealias UIInput = (
     selected: Driver<Item>, // => do .next
     tappedDate: Driver<Void>, // => return which date to show
     tappedShowModes: Driver<Void>, // => return which modes to show
@@ -30,13 +30,13 @@ class TKUIResultsViewModel {
     droppedPin: Driver<CLLocationCoordinate2D> // => call dropPin()
   )
   
-  struct RouteBuilder {
+  public struct RouteBuilder {
     fileprivate enum SelectionMode: Equatable {
       case origin
       case destination
     }
     
-    enum Time: Equatable {
+    public enum Time: Equatable {
       case leaveASAP
       case leaveAfter(Date)
       case arriveBefore(Date)
@@ -50,11 +50,11 @@ class TKUIResultsViewModel {
     fileprivate static var empty = RouteBuilder(mode: .destination, origin: nil, destination: nil, time: .leaveASAP)
   }
   
-  convenience init(destination: MKAnnotation, inputs: UIInput) {
+  public convenience init(destination: MKAnnotation, inputs: UIInput) {
     self.init(builder: RouteBuilder(mode: .origin, origin: nil, destination: destination, time: .leaveASAP), inputs: inputs)
   }
   
-  convenience init(request: TripRequest, inputs: UIInput) {
+  public convenience init(request: TripRequest, inputs: UIInput) {
     self.init(builder: request.builder, initialRequest: request, inputs: inputs)
   }
   
@@ -180,11 +180,11 @@ class TKUIResultsViewModel {
   
   let error: Driver<Error>
   
-  let originAnnotation: Driver<MKAnnotation?>
+  public let originAnnotation: Driver<MKAnnotation?>
 
-  let destinationAnnotation: Driver<MKAnnotation?>
+  public let destinationAnnotation: Driver<MKAnnotation?>
   
-  let mapRoutes: Driver<([MapRouteItem], selection: MapRouteItem?)>
+  public let mapRoutes: Driver<([MapRouteItem], selection: MapRouteItem?)>
   
   let next: Driver<Next>
 }
@@ -438,7 +438,7 @@ extension Trip {
 extension TKUIResultsViewModel {
   
   /// An item in a section on the results screen
-  enum Item {
+  public enum Item {
     
     /// A regular/expanded trip
     case trip(Trip)
@@ -460,10 +460,10 @@ extension TKUIResultsViewModel {
   }
   
   /// A section on the results screen, which consists of various sorted items
-  struct Section {
-    var items: [Item]
+  public struct Section {
+    public var items: [Item]
     
-    var badge: TKMetricClassifier.Classification?
+    public var badge: TKMetricClassifier.Classification?
     var costs: [NSNumber: String]
   }
 }
@@ -518,10 +518,10 @@ extension TKUIResultsViewModel.Item {
 extension TKUIResultsViewModel {
   
   /// An item to be displayed on the map
-  struct MapRouteItem {
+  public struct MapRouteItem {
     fileprivate let trip: Trip
     
-    let polylines: [TKRoutePolyline]
+    public let polylines: [TKRoutePolyline]
     
     init(_ trip: Trip) {
       self.trip = trip
@@ -535,7 +535,7 @@ extension TKUIResultsViewModel {
 
 }
 
-func ==(lhs: TKUIResultsViewModel.MapRouteItem, rhs: TKUIResultsViewModel.MapRouteItem) -> Bool {
+public func ==(lhs: TKUIResultsViewModel.MapRouteItem, rhs: TKUIResultsViewModel.MapRouteItem) -> Bool {
   return lhs.trip.objectID == rhs.trip.objectID
 }
 extension TKUIResultsViewModel.MapRouteItem: Equatable { }
@@ -723,7 +723,7 @@ extension TKUIResultsViewModel.RouteBuilder {
 
 // MARK: - Protocol conformance
 
-func ==(lhs: TKUIResultsViewModel.RouteBuilder, rhs: TKUIResultsViewModel.RouteBuilder) -> Bool {
+public func ==(lhs: TKUIResultsViewModel.RouteBuilder, rhs: TKUIResultsViewModel.RouteBuilder) -> Bool {
   return lhs.time == rhs.time
     && lhs.origin === rhs.origin
     && lhs.destination === rhs.destination
@@ -731,7 +731,7 @@ func ==(lhs: TKUIResultsViewModel.RouteBuilder, rhs: TKUIResultsViewModel.RouteB
 }
 extension TKUIResultsViewModel.RouteBuilder: Equatable { }
 
-func ==(lhs: TKUIResultsViewModel.Item, rhs: TKUIResultsViewModel.Item) -> Bool {
+public func ==(lhs: TKUIResultsViewModel.Item, rhs: TKUIResultsViewModel.Item) -> Bool {
   switch (lhs, rhs) {
   case (.trip(let left), .trip(let right)): return left.objectID == right.objectID
   case (.nano(let left), .nano(let right)): return left.objectID == right.objectID
@@ -742,8 +742,8 @@ func ==(lhs: TKUIResultsViewModel.Item, rhs: TKUIResultsViewModel.Item) -> Bool 
 extension TKUIResultsViewModel.Item: Equatable { }
 
 extension TKUIResultsViewModel.Item: IdentifiableType {
-  typealias Identity = String
-  var identity: Identity {
+  public typealias Identity = String
+  public var identity: Identity {
     switch self {
     case .trip(let trip): return trip.objectID.uriRepresentation().absoluteString
     case .nano(let trip): return trip.objectID.uriRepresentation().absoluteString
@@ -754,13 +754,13 @@ extension TKUIResultsViewModel.Item: IdentifiableType {
 }
 
 extension TKUIResultsViewModel.Section: AnimatableSectionModelType {
-  typealias Identity = String
-  typealias Item = TKUIResultsViewModel.Item
+  public typealias Identity = String
+  public typealias Item = TKUIResultsViewModel.Item
   
-  init(original: TKUIResultsViewModel.Section, items: [TKUIResultsViewModel.Item]) {
+  public init(original: TKUIResultsViewModel.Section, items: [TKUIResultsViewModel.Item]) {
     self = original
     self.items = items
   }
   
-  var identity: Identity { return items.first?.identity ?? "Empty" }
+  public var identity: Identity { return items.first?.identity ?? "Empty" }
 }

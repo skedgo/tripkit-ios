@@ -55,7 +55,7 @@ public class TKUIResultsCard: TGTableCard {
     self.request = nil
     
     let title = "Plan Trip" // TODO: Localise
-    let mapManager = TKUIResultsMapManager()
+    let mapManager = TKUIResultsCard.config.mapManagerFactory()
     super.init(
       title: title, style: .grouped,
       accessoryView: accessoryView, mapManager: mapManager,
@@ -69,7 +69,7 @@ public class TKUIResultsCard: TGTableCard {
     self.request = request
     
     let title = "Routes" // TODO: Localise
-    let mapManager = TKUIResultsMapManager()
+    let mapManager = TKUIResultsCard.config.mapManagerFactory()
     super.init(
       title: title, style: .grouped,
       accessoryView: accessoryView, mapManager: mapManager,
@@ -81,7 +81,7 @@ public class TKUIResultsCard: TGTableCard {
   override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     guard
       let tableView = (cardView as? TGScrollCardView)?.tableView,
-      let mapManager = mapManager as? TKUIResultsMapManager
+      let mapManager = mapManager as? TKUIResultsMapManagerType
       else {
         preconditionFailure()
     }

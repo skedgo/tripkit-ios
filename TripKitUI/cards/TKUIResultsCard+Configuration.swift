@@ -24,6 +24,13 @@ public extension TKUIResultsCard {
     ///
     /// Called when the user taps the button.
     public var requestRoutingSupport: ((TKUIResultsCard, TripRequest) -> Void)?
+    
+    /// Set this to use your own map manager. You can use this in combination
+    /// with `TGCardViewController.builder` to use a map other than Apple's
+    /// MapKit.
+    ///
+    /// Defaults to using `TKUIResultsMapManager`.
+    public var mapManagerFactory: (() -> TKUIResultsMapManagerType) = TKUIResultsMapManager.init
   }
 
 }

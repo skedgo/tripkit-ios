@@ -71,7 +71,7 @@ public class TKUITripOverviewCard: TGTableCard {
   public init(trip: Trip, index: Int? = nil) {
     viewModel = TKUITripOverviewViewModel(trip: trip)
     
-    let mapManager = TKUITripMapManager(trip: trip)
+    let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
     
     // TODO: Localize
     let title: String

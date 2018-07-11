@@ -12,6 +12,8 @@ extension TKImage {
   
   @objc public static let iconSearchTimetable = named("icon-search-timetable")
 
+  @objc public static let iconPin = named("icon-pin")
+
 }
 
 extension TKImage {

@@ -16,7 +16,10 @@ import TGCardViewController
   import TripKit
 #endif
 
-public class TKUITripMapManager: TKUIMapManager {
+public protocol TKUITripMapManagerType: TGCompatibleMapManager {
+}
+
+public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
   public let trip: Trip
   
