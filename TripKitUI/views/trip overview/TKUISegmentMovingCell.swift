@@ -47,15 +47,12 @@ extension TKUISegmentMovingCell {
 
     line.backgroundColor = item.connection?.color ?? .lightGray
     
-    let accessories = item.accessories.map { $0.buildView() }
+    let accessories = item.accessories.map(TKUISegmentMovingCell.buildView)
     addAccessories(accessories)
   }
   
-}
-
-extension TKUITripOverviewViewModel.SegmentAccessory {
-  func buildView() -> UIView {
-    switch self {
+  private static func buildView(for segmentAccessory: TKUITripOverviewViewModel.SegmentAccessory) -> UIView {
+    switch segmentAccessory {
     case .averageOccupancy(let occupancy):
       return TKUIOccupancyView(with: .occupancy(occupancy))
       

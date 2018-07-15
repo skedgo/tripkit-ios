@@ -30,6 +30,22 @@ public class TKUIResultsViewModel {
     droppedPin: Driver<CLLocationCoordinate2D> // => call dropPin()
   )
   
+  /// An item to be displayed on the map
+  public struct MapRouteItem {
+    fileprivate let trip: Trip
+    
+    public let polylines: [TKRoutePolyline]
+    
+    init(_ trip: Trip) {
+      self.trip = trip
+      
+      let displayableRoutes = trip.segments(with: .onMap)
+        .compactMap { ($0 as? TKSegment)?.shapes() }   // Only include those with shapes
+        .flatMap { $0.filter { $0.routeIsTravelled } } // Flat list of travelled shapes
+      polylines = displayableRoutes.compactMap(TKRoutePolyline.init)
+    }
+  }
+  
   public struct RouteBuilder {
     fileprivate enum SelectionMode: Equatable {
       case origin
@@ -514,26 +530,6 @@ extension TKUIResultsViewModel.Item {
 }
 
 // MARK: - Map content
-
-extension TKUIResultsViewModel {
-  
-  /// An item to be displayed on the map
-  public struct MapRouteItem {
-    fileprivate let trip: Trip
-    
-    public let polylines: [TKRoutePolyline]
-    
-    init(_ trip: Trip) {
-      self.trip = trip
-
-      let displayableRoutes = trip.segments(with: .onMap)
-        .compactMap { ($0 as? TKSegment)?.shapes() }   // Only include those with shapes
-        .flatMap { $0.filter { $0.routeIsTravelled } } // Flat list of travelled shapes
-      polylines = displayableRoutes.compactMap(TKRoutePolyline.init)
-    }
-  }
-
-}
 
 public func ==(lhs: TKUIResultsViewModel.MapRouteItem, rhs: TKUIResultsViewModel.MapRouteItem) -> Bool {
   return lhs.trip.objectID == rhs.trip.objectID

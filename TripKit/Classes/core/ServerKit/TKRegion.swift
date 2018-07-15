@@ -85,7 +85,7 @@ public class TKRegion : NSObject, Codable {
   @objc public let urls: [URL]
   @objc let encodedPolygon: String
   
-  @objc lazy var polygon: MKPolygon = {
+  @objc public lazy var polygon: MKPolygon = {
     let corners = CLLocation.decodePolyLine(self.encodedPolygon)
     let coordinates = corners.map { $0.coordinate }
     return MKPolygon(coordinates: coordinates, count: coordinates.count)
