@@ -1,6 +1,7 @@
 # Swift 4.2 forks
 github "RxSwiftCommunity/RxDataSources" "xcode10"
 github "skedgo/OAuthSwift" ~> 1.2.2.1
+git "git@gitlab.com:SkedGo/tripgo-cards-ios.git" "xcode10"
 
 # TripKit
 github "ReactiveX/RxSwift" ~> 4.0
@@ -10,7 +11,7 @@ github "nighthawk/ASPolygonKit"
 github "onevcat/Kingfisher" ~> 4.0
 github "nighthawk/ASPolylineView"
 # github "RxSwiftCommunity/RxDataSources" ~> 3.0
-git "git@gitlab.com:SkedGo/tripgo-cards-ios.git" "master"
+# git "git@gitlab.com:SkedGo/tripgo-cards-ios.git" "master"
 
 # TripKitBookings
 github "kishikawakatsumi/KeychainAccess"
