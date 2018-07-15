@@ -56,10 +56,13 @@ public class TKUIAutocompletionViewController: UITableViewController {
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIAutocompletionViewModel.Section>(
       configureCell: { [weak self] _, tv, ip, item in
-        guard
-          let `self` = self,
-          let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell
-          else { preconditionFailure() }
+        guard let `self` = self else {
+          // Shouldn't but can happen on dealloc
+          return UITableViewCell(style: .default, reuseIdentifier: nil)
+        }
+        guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else {
+          preconditionFailure("Couldn't dequeue TKUIAutocompletionResultCell")
+        }
         cell.configure(with: item, onAccessoryTapped: self.showAccessoryButtons ? self.accessoryTapped : nil)
         return cell
       }
