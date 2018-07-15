@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   # s.source       = { path: "." }
   # s.source       = { git: "." }
   s.source       = { git: "https://github.com/skedgo/tripkit-ios.git", tag: "v#{s.version}" }
+  s.swift_version = '4.0'
   s.ios.deployment_target = '9.0'
   s.requires_arc = true
   
@@ -24,6 +25,7 @@ Pod::Spec.new do |s|
   s.dependency 'Kingfisher'
   s.dependency 'RxSwift', '~> 4.0.0'
   s.dependency 'RxCocoa', '~> 4.0.0'
+  s.dependency 'RxDataSources', '~> 3.0.0'
 
   s.source_files = [
     "TripKitUI-iOS/*.h",

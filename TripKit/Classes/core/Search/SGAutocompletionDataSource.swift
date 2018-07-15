@@ -35,7 +35,7 @@ extension SGAutocompletionDataSource {
   }
   
   @objc(prepareForNewSearchForMapRect:)
-  func prepareForNewSearch(for mapRect: MKMapRect) {
+  public func prepareForNewSearch(for mapRect: MKMapRect) {
     storage.disposeBag = DisposeBag()
     
     // When the input is changing, update the results
@@ -86,18 +86,18 @@ extension SGAutocompletionDataSource {
   }
   
   @objc
-  var startedTyping: Bool {
+  public var startedTyping: Bool {
     return !storage.inputText.value.isEmpty
   }
   
   @objc
-  var autocompletionResults: [SGAutocompletionResult] {
+  public var autocompletionResults: [SGAutocompletionResult] {
     return storage.results.value
   }
 
   #if os(iOS) || os(tvOS)
   @objc(additionalActionsForPresenter:)
-  func additionalActions(for presenter: UIViewController) -> [String] {
+  public func additionalActions(for presenter: UIViewController) -> [String] {
     return providers.compactMap { $0.additionalAction(for: presenter)?.0 }
   }
   #endif
