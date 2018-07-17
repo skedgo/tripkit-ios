@@ -80,6 +80,10 @@ public class TKUIAlertViewController: UITableViewController {
   
   private let disposeBag = DisposeBag()
   
+  public func setAlerts(_ alerts: [API.Alert]) {
+    self.alerts = alerts.map(TKAlertAPIAlertClassWrapper.init)
+  }
+  
   public var alerts: [TKAlert] = [] {
     didSet {
       sortedAlerts = alerts

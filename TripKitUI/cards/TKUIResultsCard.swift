@@ -38,7 +38,7 @@ public class TKUIResultsCard: TGTableCard {
   
   private lazy var footerButton = { () -> UIButton in
     let button = UIButton(type: .custom)
-    button.titleLabel?.font = TKStyleManager.systemFont(withTextStyle: UIFontTextStyle.caption1.rawValue)
+    button.titleLabel?.font = TKStyleManager.systemFont(textStyle: UIFontTextStyle.caption1.rawValue)
     button.setTitleColor(TKStyleManager.globalTintColor(), for: .normal)
     return button
   }()

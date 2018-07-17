@@ -61,3 +61,7 @@ extension MKGeodesicPolyline : TKDisplayableRoute {
   }
   
 }
+
+@available(*, unavailable, renamed: "TKDisplayableRoute")
+public typealias STKDisplayableRoute = TKDisplayableRoute
+

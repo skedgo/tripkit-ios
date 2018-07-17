@@ -74,7 +74,7 @@ extension API {
     let green: Int
     let blue: Int
     
-    var color: TKColor {
+    public var color: TKColor {
       return TKColor(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: 1)
     }
     

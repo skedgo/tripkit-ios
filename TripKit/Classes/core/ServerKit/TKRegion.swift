@@ -199,6 +199,12 @@ public class TKInternationalRegion : TKRegion {
   }
 }
 
+@available(*, unavailable, renamed: "TKRegion")
+public typealias SVKRegion = TKRegion
+
+@available(*, unavailable, renamed: "TKInternationalRegion")
+public typealias SVKInternationalRegion = TKInternationalRegion
+
 
 
 

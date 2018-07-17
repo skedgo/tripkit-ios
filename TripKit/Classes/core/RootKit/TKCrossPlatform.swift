@@ -43,6 +43,9 @@ public typealias SGKBetaHelper = TKBetaHelper
 @available(*, unavailable, renamed: "TKConfig")
 public typealias SGKConfig = TKConfig
 
+@available(*, unavailable, renamed: "TKLog")
+public typealias SGKLog = TKLog
+
 @available(*, unavailable, renamed: "TKTimeType")
 public typealias SGTimeType = TKTimeType
 

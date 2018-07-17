@@ -151,3 +151,5 @@ public typealias STKTrip = TKTrip
 @available(*, unavailable, renamed: "TKTripSegment")
 public typealias STKTripSegment = TKTripSegment
 
+@available(*, unavailable, renamed: "TKTripSegmentDisplayable")
+public typealias STKTripSegmentDisplayable = TKTripSegmentDisplayable

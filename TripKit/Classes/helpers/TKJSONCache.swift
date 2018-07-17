@@ -27,9 +27,9 @@ public class TKJSONCache: TKFileCache {
     }
   }
   
-  @objc public static func save(_ id: String, dictionary: [String: Any], directory: TKFileCacheDirectory) {
+  @objc public static func save(_ id: String, dictionary: [String: Any], directory: TKFileCacheDirectory, subdirectory: String?) {
     let data = NSKeyedArchiver.archivedData(withRootObject: dictionary)
-    TKFileCache.save(id, data: data, directory: directory, subdirectory: nil)
+    TKFileCache.save(id, data: data, directory: directory, subdirectory: subdirectory)
   }
 }
 

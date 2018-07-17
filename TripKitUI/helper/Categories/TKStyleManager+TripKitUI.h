@@ -52,8 +52,8 @@
 
 @interface TKStyleManager (Fonts)
 
-+ (UIFont *)systemFontWithSize:(CGFloat)size;
-+ (UIFont *)boldSystemFontWithSize:(CGFloat)size;
-+ (UIFont *)systemFontWithTextStyle:(NSString *)style;
++ (UIFont *)systemFontWithSize:(CGFloat)size NS_SWIFT_NAME(systemFont(size:));
++ (UIFont *)boldSystemFontWithSize:(CGFloat)size NS_SWIFT_NAME(boldSystemFont(size:));
++ (UIFont *)systemFontWithTextStyle:(NSString *)style NS_SWIFT_NAME(systemFont(textStyle:));
 
 @end
