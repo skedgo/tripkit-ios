@@ -39,5 +39,6 @@
 
 // Deprecated things
 #import "ASMapManager.h"
+#import "SGTableCell.h"
 
 #endif /* TripKitUI_h */

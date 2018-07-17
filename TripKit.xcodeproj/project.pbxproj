@@ -65,8 +65,6 @@
 		3A682F2220F3F8ED00E05195 /* TKUIResultsCard+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F2120F3F8ED00E05195 /* TKUIResultsCard+Errors.swift */; };
 		3A682F2420F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F2320F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift */; };
 		3A682F2820F49B8200E05195 /* TKUIResultsCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F2720F49B8200E05195 /* TKUIResultsCard+Configuration.swift */; };
-		3A682F3920F4A68A00E05195 /* SGTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A682F3720F4A68A00E05195 /* SGTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A682F3A20F4A68A00E05195 /* SGTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F3820F4A68A00E05195 /* SGTableCell.m */; };
 		3A682F7C20F4B3E200E05195 /* ASMapManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A682F7A20F4B3E200E05195 /* ASMapManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A682F7D20F4B3E200E05195 /* ASMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A682F7B20F4B3E200E05195 /* ASMapManager.m */; };
 		3A69C4031DEEB43700872FD1 /* Loc+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */; };
@@ -700,6 +698,8 @@
 		3ABBDB0C2032137600205042 /* TKShareHelper+Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA055C1F604551009D0FE9 /* TKShareHelper+Parsing.swift */; };
 		3ABBDB0D2032137600205042 /* TKShareURLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03D8A1F0B79D400C6B337 /* TKShareURLProvider.swift */; };
 		3ABBDB142032189200205042 /* TripKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6231D1CD0060089F687 /* TripKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3ABD101B20FE2CAC00693FF8 /* SGTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ABD101920FE2CAC00693FF8 /* SGTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3ABD101C20FE2CAC00693FF8 /* SGTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD101A20FE2CAC00693FF8 /* SGTableCell.m */; };
 		3AC17E9D207F548E0006794F /* TKImage+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC17E9C207F548E0006794F /* TKImage+TripKit.swift */; };
 		3AC17E9E207F548E0006794F /* TKImage+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC17E9C207F548E0006794F /* TKImage+TripKit.swift */; };
 		3AC4DD111DEE32C80026B238 /* TKWaypointRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1015,8 +1015,6 @@
 		3A682F2120F3F8ED00E05195 /* TKUIResultsCard+Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIResultsCard+Errors.swift"; sourceTree = "<group>"; };
 		3A682F2320F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingSupportView+Show.swift"; sourceTree = "<group>"; };
 		3A682F2720F49B8200E05195 /* TKUIResultsCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIResultsCard+Configuration.swift"; sourceTree = "<group>"; };
-		3A682F3720F4A68A00E05195 /* SGTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTableCell.h; sourceTree = "<group>"; };
-		3A682F3820F4A68A00E05195 /* SGTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTableCell.m; sourceTree = "<group>"; };
 		3A682F7A20F4B3E200E05195 /* ASMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASMapManager.h; sourceTree = "<group>"; };
 		3A682F7B20F4B3E200E05195 /* ASMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASMapManager.m; sourceTree = "<group>"; };
 		3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loc+TripKit.swift"; sourceTree = "<group>"; };
@@ -1435,6 +1433,8 @@
 		3ABA055C1F604551009D0FE9 /* TKShareHelper+Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKShareHelper+Parsing.swift"; sourceTree = "<group>"; };
 		3ABA80A220499D9300E67BC7 /* TKServer+UserAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKServer+UserAccount.swift"; sourceTree = "<group>"; };
 		3ABA80AB204F1AC100E67BC7 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		3ABD101920FE2CAC00693FF8 /* SGTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTableCell.h; sourceTree = "<group>"; };
+		3ABD101A20FE2CAC00693FF8 /* SGTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTableCell.m; sourceTree = "<group>"; };
 		3AC17E9C207F548E0006794F /* TKImage+TripKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKImage+TripKit.swift"; sourceTree = "<group>"; };
 		3AC4DD0E1DEE32C80026B238 /* TKWaypointRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWaypointRouter.h; sourceTree = "<group>"; };
 		3AC4DD0F1DEE32C80026B238 /* TKWaypointRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWaypointRouter.m; sourceTree = "<group>"; };
@@ -1817,8 +1817,6 @@
 			isa = PBXGroup;
 			children = (
 				3A45A92020F4CEA300A9083C /* SGKConstants.h */,
-				3A682F3720F4A68A00E05195 /* SGTableCell.h */,
-				3A682F3820F4A68A00E05195 /* SGTableCell.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1828,6 +1826,8 @@
 			children = (
 				3A682F7A20F4B3E200E05195 /* ASMapManager.h */,
 				3A682F7B20F4B3E200E05195 /* ASMapManager.m */,
+				3ABD101920FE2CAC00693FF8 /* SGTableCell.h */,
+				3ABD101A20FE2CAC00693FF8 /* SGTableCell.m */,
 			);
 			path = deprecated;
 			sourceTree = "<group>";
@@ -3073,6 +3073,7 @@
 				3A6DF116202C8EB80084CB2C /* TKUIImageAnnotationView.h in Headers */,
 				3AFD397220D93D9800FDC7D0 /* TKUISheet.h in Headers */,
 				3AFD394F20D9333500FDC7D0 /* TKUISheetViewController.h in Headers */,
+				3ABD101B20FE2CAC00693FF8 /* SGTableCell.h in Headers */,
 				3A6DF122202C8EB80084CB2C /* UIView+Helpers.h in Headers */,
 				3A6DF143202C8EB80084CB2C /* TKUIVehicleView.h in Headers */,
 				3A6DF127202C8EB80084CB2C /* UIColor+Variations.h in Headers */,
@@ -3144,7 +3145,6 @@
 				3A6DF27C202C9AA00084CB2C /* BPKTableHeader.h in Headers */,
 				3A6DF28B202C9AA00084CB2C /* BPKActionOverlay.h in Headers */,
 				3A6DF281202C9AA00084CB2C /* BPKMessageCell.h in Headers */,
-				3A682F3920F4A68A00E05195 /* SGTableCell.h in Headers */,
 				3A6DF291202C9AA00084CB2C /* BPKTextFieldBlock.h in Headers */,
 				3A6DF279202C9AA00084CB2C /* BPKTextCell.h in Headers */,
 				3A6DF2DB202C9AA00084CB2C /* UIViewController+modalController.h in Headers */,
@@ -3855,6 +3855,7 @@
 				3A6DF125202C8EB80084CB2C /* UIFont+CustomFonts.m in Sources */,
 				3A6DF14C202C8EB80084CB2C /* TKUIVehicleView.m in Sources */,
 				D39B7BAF20622C2D00988D8A /* TKUIGroupedAlertCell.swift in Sources */,
+				3ABD101C20FE2CAC00693FF8 /* SGTableCell.m in Sources */,
 				3AFD398220D9510F00FDC7D0 /* TKUICustomization.swift in Sources */,
 				3AFD394920D9333500FDC7D0 /* TKUIResultsMapManager.swift in Sources */,
 				3A67698620EE3A7A0044663F /* TKUIAutocompletionViewController.swift in Sources */,
@@ -3882,7 +3883,6 @@
 				3A6DF29E202C9AA00084CB2C /* TKBookingFormType.swift in Sources */,
 				3A6DF2B4202C9AA00084CB2C /* AMKCommunicator.m in Sources */,
 				3A6DF29F202C9AA00084CB2C /* TKUberSSO.swift in Sources */,
-				3A682F3A20F4A68A00E05195 /* SGTableCell.m in Sources */,
 				3A6DF28E202C9AA00084CB2C /* BPKHelpers.m in Sources */,
 				3A6DF28A202C9AA00084CB2C /* BPKTextCell.m in Sources */,
 				3A6DF2C8202C9AA00084CB2C /* AKTextFieldCell.m in Sources */,
