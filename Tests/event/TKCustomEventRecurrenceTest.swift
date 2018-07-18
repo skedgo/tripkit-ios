@@ -1,5 +1,5 @@
 //
-//  SGCustomEventRecurrenceTest.swift
+//  TKCustomEventRecurrenceTest.swift
 //  SkedGoKit
 //
 //  Created by Adrian Schoenig on 16/07/2016.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import TripKit
 
-class SGCustomEventRecurrenceTest: XCTestCase {
+class TKCustomEventRecurrenceTest: XCTestCase {
 
   let sydney = TimeZone(identifier: "Australia/Sydney")!
   let london = TimeZone(identifier: "Europe/London")!

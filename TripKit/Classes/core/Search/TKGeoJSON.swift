@@ -54,11 +54,18 @@ public struct TKPeliasProperties: Decodable {
   let distance: CLLocationDistance
   let layer: String? // e.g., address or venue or locality
   
-  let country: String? // United States
-  let region: String? // Pennsylvania
-  let macrocountry: String? // e.g., Mittelfranken
-  let county: String? // Some county
-  let localadmin: String?
+  let country: String?        //  United States -     Australia -        Germany
+  let country_a: String?      //            USA -           AUS -            DEU
+  let neighbourhood: String?  //              - -       Wynyard -            n/a
+  let region: String?         //     California -           n/a -         Bayern
+  let region_a: String?       //             CA -           n/a -            n/a
+  let macrocountry: String?   //            n/a -           n/a -  Mittelfranken
+  let county: String?     // Santa Clara County -           n/a -       Nürnberg
+  let locality: String?       //      Sunnyvale -           n/a -       Nürnberg
+  let localadmin: String?     //            n/a -           n/a -            n/a
+  let postalcode: String?
+  let street: String?
+  let housenumber: String?
   
 }
 
