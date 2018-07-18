@@ -35,7 +35,7 @@ class TKPeliasTitleTest: XCTestCase {
     XCTAssertFalse(subtitles.contains("Kasperackerweg 31, Nürnberg, Germany"), "Result has subtitle without postcode.")
     
     XCTAssertNotEqual(subtitles.count, 0, "No subtitles!")
-    XCTAssertEqual(Set(subtitles).count, coordinates.count, "Some subtitles repeat")
+    XCTAssertEqual(Set(subtitles).count, 1, "Expecting one common subtitle, the city, as titles cover street names already.")
   }
   
   func testMericanSubtitles() throws {
@@ -46,7 +46,7 @@ class TKPeliasTitleTest: XCTestCase {
     
     let subtitles = coordinates.compactMap { $0.subtitle }
     XCTAssertNotEqual(subtitles.count, 0, "No subtitles!")
-    XCTAssertEqual(Set(subtitles).count, coordinates.count, "Some subtitles repeat")
+    XCTAssertEqual(Set(subtitles).count, 3, "Expecting one common subtitle, different variations of the city, as titles cover street names already.")
   }
   
 }
