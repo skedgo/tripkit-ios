@@ -21,13 +21,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zM4-hW-aEs">
-                        <rect key="frame" x="64" y="0.0" width="10" height="57"/>
+                        <rect key="frame" x="68" y="0.0" width="12" height="57"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbJ-hg-ExU">
-                                <rect key="frame" x="3.5" y="0.0" width="3" height="57"/>
+                                <rect key="frame" x="3" y="0.0" width="6" height="57"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="3" id="aFr-oF-mnX"/>
+                                    <constraint firstAttribute="width" constant="6" id="aFr-oF-mnX"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -36,31 +36,31 @@
                             <constraint firstItem="fbJ-hg-ExU" firstAttribute="centerX" secondItem="zM4-hW-aEs" secondAttribute="centerX" id="ZQc-8c-8xM"/>
                             <constraint firstItem="fbJ-hg-ExU" firstAttribute="top" secondItem="zM4-hW-aEs" secondAttribute="top" id="bFB-hM-gzZ"/>
                             <constraint firstItem="fbJ-hg-ExU" firstAttribute="bottom" secondItem="zM4-hW-aEs" secondAttribute="bottom" id="dr5-9A-4HA"/>
-                            <constraint firstAttribute="width" constant="10" id="yVT-SE-OGg"/>
+                            <constraint firstAttribute="width" constant="12" id="yVT-SE-OGg"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PYC-Ry-4oR">
-                        <rect key="frame" x="82" y="8" width="238" height="40.5"/>
+                        <rect key="frame" x="88" y="8" width="232" height="40.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpZ-Mg-fai">
-                                <rect key="frame" x="0.0" y="0.0" width="238" height="20.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="232" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rk-Bj-uEq">
-                                <rect key="frame" x="0.0" y="24.5" width="238" height="12"/>
+                                <rect key="frame" x="0.0" y="24.5" width="232" height="12"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WG8-Aa-TaE">
-                                <rect key="frame" x="0.0" y="40.5" width="238" height="0.0"/>
+                                <rect key="frame" x="0.0" y="40.5" width="232" height="0.0"/>
                             </stackView>
                         </subviews>
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RTK-EZ-aSP">
-                        <rect key="frame" x="19.5" y="13.5" width="30" height="30"/>
+                        <rect key="frame" x="22" y="13.5" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="MRU-Yr-iWL"/>
                             <constraint firstAttribute="width" constant="30" id="fKB-IV-9vI"/>
@@ -68,14 +68,14 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="zM4-hW-aEs" secondAttribute="bottom" constant="-0.5" id="08B-Ya-TQp"/>
+                    <constraint firstAttribute="bottom" secondItem="zM4-hW-aEs" secondAttribute="bottom" id="08B-Ya-TQp"/>
                     <constraint firstItem="zM4-hW-aEs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5jN-21-YSd"/>
                     <constraint firstItem="RTK-EZ-aSP" firstAttribute="centerX" secondItem="zM4-hW-aEs" secondAttribute="centerX" multiplier="0.5" id="8Zu-kI-bUi"/>
                     <constraint firstAttribute="bottom" secondItem="PYC-Ry-4oR" secondAttribute="bottom" constant="8" id="J2K-7R-36U"/>
                     <constraint firstItem="PYC-Ry-4oR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VWD-1e-MWf"/>
                     <constraint firstItem="PYC-Ry-4oR" firstAttribute="leading" secondItem="zM4-hW-aEs" secondAttribute="trailing" constant="8" id="VZe-rh-XAG"/>
                     <constraint firstAttribute="trailing" secondItem="PYC-Ry-4oR" secondAttribute="trailing" id="goc-yB-tOS"/>
-                    <constraint firstItem="zM4-hW-aEs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="64" id="tHO-8q-zez"/>
+                    <constraint firstItem="zM4-hW-aEs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="68" id="tHO-8q-zez"/>
                     <constraint firstItem="RTK-EZ-aSP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vCU-Yx-9gq"/>
                 </constraints>
             </tableViewCellContentView>

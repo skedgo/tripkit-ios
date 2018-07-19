@@ -54,7 +54,7 @@ extension TKUISegmentStationaryCell {
     subtitleLabel.isHidden = item.subtitle == nil
 
     lineDot.layer.borderColor = UIColor.black.cgColor
-    lineDot.layer.borderWidth = 2
+    lineDot.layer.borderWidth = 1.5
     lineDot.layer.cornerRadius = lineDot.frame.width / 2
     topLine.backgroundColor = item.topConnection?.color ?? .lightGray
     bottomLine.backgroundColor = item.bottomConnection?.color ?? .lightGray

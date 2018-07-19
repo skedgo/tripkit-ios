@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,35 +21,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="60.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hh:mm" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uce-ej-Z0P">
-                        <rect key="frame" x="8" y="23" width="48" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hh:mm" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uce-ej-Z0P">
+                        <rect key="frame" x="8" y="23" width="52" height="14.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zM4-hW-aEs">
-                        <rect key="frame" x="64" y="0.0" width="10" height="61"/>
+                        <rect key="frame" x="68" y="0.0" width="12" height="61"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbJ-hg-ExU">
-                                <rect key="frame" x="3.5" y="0.0" width="3" height="30.5"/>
+                                <rect key="frame" x="3" y="0.0" width="6" height="30.5"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="3" id="aFr-oF-mnX"/>
+                                    <constraint firstAttribute="width" constant="6" id="aFr-oF-mnX"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmx-KO-aL2">
-                                <rect key="frame" x="3.5" y="30.5" width="3" height="30.5"/>
+                                <rect key="frame" x="3" y="30.5" width="6" height="30.5"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="3" id="yVM-7F-535"/>
-                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdG-jx-QtJ">
-                                <rect key="frame" x="1" y="26.5" width="8" height="8"/>
+                                <rect key="frame" x="0.0" y="24.5" width="12" height="12"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="8" id="4m5-9u-wKd"/>
-                                    <constraint firstAttribute="height" constant="8" id="c74-fU-ZkT"/>
+                                    <constraint firstAttribute="width" constant="12" id="4m5-9u-wKd"/>
+                                    <constraint firstAttribute="width" secondItem="QdG-jx-QtJ" secondAttribute="height" multiplier="1:1" id="IRE-f9-hUE"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -67,26 +65,27 @@
                         <constraints>
                             <constraint firstItem="QdG-jx-QtJ" firstAttribute="centerX" secondItem="zM4-hW-aEs" secondAttribute="centerX" id="2v8-LO-5iW"/>
                             <constraint firstItem="bmx-KO-aL2" firstAttribute="top" secondItem="zM4-hW-aEs" secondAttribute="bottom" multiplier="0.5" id="8bj-9d-PEm"/>
+                            <constraint firstItem="bmx-KO-aL2" firstAttribute="width" secondItem="fbJ-hg-ExU" secondAttribute="width" id="AIn-Le-Has"/>
                             <constraint firstItem="QdG-jx-QtJ" firstAttribute="centerY" secondItem="zM4-hW-aEs" secondAttribute="centerY" id="Ogs-Ss-gdd"/>
                             <constraint firstItem="fbJ-hg-ExU" firstAttribute="centerX" secondItem="zM4-hW-aEs" secondAttribute="centerX" id="ZQc-8c-8xM"/>
                             <constraint firstItem="fbJ-hg-ExU" firstAttribute="top" secondItem="zM4-hW-aEs" secondAttribute="top" id="bFB-hM-gzZ"/>
                             <constraint firstItem="fbJ-hg-ExU" firstAttribute="bottom" secondItem="zM4-hW-aEs" secondAttribute="bottom" multiplier="0.5" id="dr5-9A-4HA"/>
                             <constraint firstItem="bmx-KO-aL2" firstAttribute="centerX" secondItem="zM4-hW-aEs" secondAttribute="centerX" id="qnS-yJ-BOF"/>
                             <constraint firstAttribute="bottom" secondItem="bmx-KO-aL2" secondAttribute="bottom" id="x7y-eO-J9V"/>
-                            <constraint firstAttribute="width" constant="10" id="yVT-SE-OGg"/>
+                            <constraint firstAttribute="width" constant="12" id="yVT-SE-OGg"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PYC-Ry-4oR">
-                        <rect key="frame" x="82" y="8" width="238" height="44.5"/>
+                        <rect key="frame" x="88" y="8" width="232" height="44.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpZ-Mg-fai">
-                                <rect key="frame" x="0.0" y="0.0" width="238" height="26"/>
+                                <rect key="frame" x="0.0" y="0.0" width="232" height="26"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rk-Bj-uEq">
-                                <rect key="frame" x="0.0" y="30" width="238" height="14.5"/>
+                                <rect key="frame" x="0.0" y="30" width="232" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -95,7 +94,7 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="zM4-hW-aEs" secondAttribute="bottom" constant="-0.5" id="08B-Ya-TQp"/>
+                    <constraint firstAttribute="bottom" secondItem="zM4-hW-aEs" secondAttribute="bottom" id="08B-Ya-TQp"/>
                     <constraint firstItem="zM4-hW-aEs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5jN-21-YSd"/>
                     <constraint firstItem="uce-ej-Z0P" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="BKY-Pq-z82"/>
                     <constraint firstAttribute="bottom" secondItem="PYC-Ry-4oR" secondAttribute="bottom" constant="8" id="J2K-7R-36U"/>
@@ -104,7 +103,7 @@
                     <constraint firstAttribute="trailing" secondItem="PYC-Ry-4oR" secondAttribute="trailing" id="goc-yB-tOS"/>
                     <constraint firstItem="zM4-hW-aEs" firstAttribute="leading" secondItem="uce-ej-Z0P" secondAttribute="trailing" constant="8" id="oNl-7i-t1u"/>
                     <constraint firstItem="uce-ej-Z0P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="oRI-sA-xlx"/>
-                    <constraint firstItem="zM4-hW-aEs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="64" id="tHO-8q-zez"/>
+                    <constraint firstItem="zM4-hW-aEs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="68" id="tHO-8q-zez"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
