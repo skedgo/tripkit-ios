@@ -12,10 +12,29 @@ import RxSwift
 
 extension Vehicle {
   
+  public static func components(from data: Data) -> [[API.VehicleComponents]]? {
+    return try? JSONDecoder().decode([[API.VehicleComponents]].self, from: data)
+  }
+  
+  public static func averageOccupancy(in components: [[API.VehicleComponents]]?) -> API.VehicleOccupancy? {
+    let allComponents = components ?? [[]]
+    let occupancies = allComponents
+      .reduce(into: []) { $0.append(contentsOf: $1) }
+      .compactMap { $0.occupancy }
+    if occupancies.isEmpty {
+      return nil
+    } else if occupancies.count == 1 {
+      return occupancies[0]
+    }
+    
+    let sum = occupancies.reduce(0) { $0 + $1.intValue }
+    return API.VehicleOccupancy(intValue: sum / occupancies.count)
+  }
+  
   public var components: [[API.VehicleComponents]]? {
     get {
       if let data = componentsData {
-        return try? JSONDecoder().decode([[API.VehicleComponents]].self, from: data)
+        return Vehicle.components(from: data)
       } else {
         return nil
       }
@@ -53,18 +72,7 @@ extension Vehicle {
   }
   
   public var averageOccupancy: API.VehicleOccupancy? {
-    let components = self.components ?? [[]]
-    let occupancies = components
-      .reduce(into: []) { $0.append(contentsOf: $1) }
-      .compactMap { $0.occupancy }
-    if occupancies.isEmpty {
-      return nil
-    } else if occupancies.count == 1 {
-      return occupancies[0]
-    }
-    
-    let sum = occupancies.reduce(0) { $0 + $1.intValue }
-    return API.VehicleOccupancy(intValue: sum / occupancies.count)
+    return Vehicle.averageOccupancy(in: components)
   }
   
 }

@@ -40,11 +40,11 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     
     // Vehicle color needs to change following real-time update.
     if let vehicle = annotation as? Vehicle {
-      vehicle.rx.observeWeakly(NSNumber.self, "occupancyRaw")
+      vehicle.rx.observeWeakly(Data.self, "componentsData")
         .filter { $0 != nil }
-        .map { rawOccupancy -> UIColor? in
-          let occupancy = API.VehicleOccupancy(intValue: rawOccupancy!.intValue)
-          return occupancy.color
+        .map { componentsData -> UIColor? in
+          let components = Vehicle.components(from: componentsData!)
+          return Vehicle.averageOccupancy(in: components)?.color
         }
         .subscribe(onNext: { [weak self] color in
           guard let color = color else { return }
