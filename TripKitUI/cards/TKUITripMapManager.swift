@@ -82,6 +82,5 @@ private extension TKUITripMapManager {
     self.overlays = TKUIMapManagerHelper.sort(overlays)
     self.annotations = annotations
     self.dynamicAnnotations = dynamicAnnotations
-    
   }
 }

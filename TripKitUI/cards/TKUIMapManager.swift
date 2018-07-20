@@ -138,6 +138,7 @@ extension TKUIMapManager {
   
   /// Call this to trigger an update of dynamic annotations, such as real-time
   /// vehicles.
+  @objc
   open func updateDynamicAnnotations(animated: Bool = false) {
     guard let mapView = mapView else {
       return
