@@ -48,6 +48,7 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
 private extension TKUITripMapManager {
   func add(_ trip: Trip) {
     var annotations = [MKAnnotation]()
+    var dynamicAnnotations = [MKAnnotation]()
     var overlays = [MKOverlay]()
     var affectedByTraffic = false
     
@@ -65,7 +66,11 @@ private extension TKUITripMapManager {
       
       // TODO: request visits
       
-      // TODO: add vehicles
+      // Add vehicles
+      if let primary = segment.realTimeVehicle() {
+        dynamicAnnotations.append(primary)
+      }
+      dynamicAnnotations.append(contentsOf: segment.realTimeAlternativeVehicles())
       
       // TODO: add alerts
       
@@ -76,6 +81,7 @@ private extension TKUITripMapManager {
     
     self.overlays = TKUIMapManagerHelper.sort(overlays)
     self.annotations = annotations
+    self.dynamicAnnotations = dynamicAnnotations
     
   }
 }
