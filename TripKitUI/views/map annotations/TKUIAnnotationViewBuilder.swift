@@ -20,7 +20,6 @@ open class TKUIAnnotationViewBuilder: NSObject {
   fileprivate var asTravelled: Bool = true
   fileprivate var heading: CLLocationDirection?
   fileprivate var alpha: CGFloat = 1
-  fileprivate var preferSemaphore: Bool = false
   fileprivate var preferMarker: Bool = false
   fileprivate var enableClustering: Bool = false
   fileprivate var drawStopAsCircle: Bool = true
@@ -70,12 +69,6 @@ open class TKUIAnnotationViewBuilder: NSObject {
   }
   
   @objc @discardableResult
-  public func preferSemaphore(_ prefer: Bool) -> TKUIAnnotationViewBuilder {
-    self.preferSemaphore = prefer
-    return self
-  }
-
-  @objc @discardableResult
   public func enableClustering(_ cluster: Bool) -> TKUIAnnotationViewBuilder {
     self.enableClustering = cluster
     return self
@@ -94,7 +87,7 @@ open class TKUIAnnotationViewBuilder: NSObject {
       return build(for: glyphable, enableClustering: enableClustering)
     } else if let vehicle = annotation as? Vehicle {
       return build(for: vehicle)      
-    } else if preferSemaphore, let timePoint = annotation as? TKDisplayableTimePoint {
+    } else if let timePoint = annotation as? TKDisplayableTimePoint, timePoint.prefersSemaphore {
       return buildSemaphore(for: timePoint)
     } else if let visit = annotation as? StopVisits {
       return buildCircle(for: visit)

@@ -50,6 +50,10 @@ public protocol TKDisplayableTimePoint: TKDisplayablePoint {
   var canFlipImage: Bool { get }
   var isTerminal: Bool { get }
   
+  /// Whether this point should ideally be displayed using the style of
+  // `TKSemaphoreView` rather than just a flat image.
+  var prefersSemaphore: Bool { get }
+  
 }
 
 extension TKDisplayableTimePoint {

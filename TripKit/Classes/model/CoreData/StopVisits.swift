@@ -112,6 +112,9 @@ extension StopVisits: TKDisplayableTimePoint {
     return false
   }
   
+  public var prefersSemaphore: Bool {
+    return false
+  }
 }
 
 // MARK: - TKRealTimeUpdatable

@@ -38,7 +38,6 @@ public extension TKModeInfo {
 }
 
 open class TKModeCoordinate: TKNamedCoordinate, TKModeAnnotation, TKGlyphableAnnotation {
-  
   private enum CodingKeys: String, CodingKey {
     case modeInfo
   }
