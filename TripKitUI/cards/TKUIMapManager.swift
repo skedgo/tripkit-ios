@@ -50,6 +50,13 @@ open class TKUIMapManager: TGMapManager {
     }
   }
   
+  public var overlays = [MKOverlay]() {
+    didSet {
+      mapView?.removeOverlays(oldValue)
+      mapView?.addOverlays(overlays, level: .aboveRoads)
+    }
+  }
+  
   override open func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
 
@@ -77,6 +84,7 @@ open class TKUIMapManager: TGMapManager {
   
   override open func cleanUp(_ mapView: MKMapView, animated: Bool) {
     removeOverlay(overlayPolygon)
+    overlays = []
     
     super.cleanUp(mapView, animated: animated)
   }
@@ -143,5 +151,3 @@ extension TKUIMapManager {
   }
   
 }
-
-
