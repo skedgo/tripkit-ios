@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Contacts
 
 extension TKGeoJSON {
   
@@ -25,17 +26,54 @@ extension TKGeoJSON {
   
 }
 
+extension TKPeliasProperties {
+  fileprivate var title: String {
+    return name
+  }
+  
+  fileprivate var subtitle: String? {
+    guard #available(iOS 9.0, macOS 10.11, *) else { return label }
+    
+    let address = CNMutablePostalAddress()
+    address.isoCountryCode = country_a ?? ""
+    address.country = country ?? ""
+    address.state = region ?? ""
+    address.city = locality ?? neighbourhood ?? ""
+    address.postalCode = postalcode ?? ""
+    
+    // https://en.wikipedia.org/wiki/Address_(geography)#Address_format
+    //  > Conventions on the placing of house numbers differ: either before or after the street name. Similarly, there are differences in the placement of postal codes: in the UK, they are written on a separate line at the end of the address; in Australia, Canada and the United States, they usually appear immediately after the state or province, on the same line; in Austria, Belgium, France, Germany and The Netherlands they appear before the city, on the same line.
+    if let street = street, let number = housenumber {
+      switch country_a {
+      case "AUS", "CAN", "USA":
+        address.street = "\(number) \(street)"
+      default:
+        address.street = "\(street) \(number)"
+      }
+    } else {
+      address.street = street ?? ""
+    }
+    
+    // Don't duplicate the title in the subtitle
+    if title.contains(address.street) {
+      address.street = ""
+    }
+    let formatted = CNPostalAddressFormatter.string(from: address, style: .mailingAddress).replacingOccurrences(of: "\n", with: ", ")
+    
+    return formatted.isEmpty ? label : formatted
+  }
+}
+
 extension TKNamedCoordinate {
   
   fileprivate convenience init?(from geojson: TKGeoJSON.Feature) {
     switch geojson.geometry {
     case .point(let position):
-      let mapZen = geojson.properties as? TKPeliasProperties
+      let pelias = geojson.properties as? TKPeliasProperties
+      self.init(latitude: position.latitude, longitude: position.longitude, name: pelias?.title, address: pelias?.subtitle)
       
-      self.init(latitude: position.latitude, longitude: position.longitude, name: mapZen?.name, address: mapZen?.label)
-      
-      clusterIdentifier = mapZen?.layer
-      dataSources = mapZen?.dataSources ?? []
+      clusterIdentifier = pelias?.layer
+      dataSources = pelias?.dataSources ?? []
       
     default:
       return nil

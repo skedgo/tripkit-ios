@@ -130,7 +130,7 @@ extension TKPeliasGeocoder: SGAutocompletionDataProvider {
 
 extension TKNamedCoordinate {
   
-  fileprivate func setScore(searchTerm: String, near region: MKCoordinateRegion) {
+  func setScore(searchTerm: String, near region: MKCoordinateRegion) {
     self.sortScore = Int(TKGeocodingResultScorer.calculateScore(for: self, searchTerm: searchTerm, near: region, allowLongDistance: false, minimum: 10, maximum: 60))
   }
   

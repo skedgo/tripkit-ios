@@ -174,7 +174,7 @@
   [self hitURLForTripDownload:url completion:
    ^(NSURL *shareURL, id JSON, NSError *error) {
      if (JSON) {
-       [TKJSONCache save:identifier dictionary:JSON directory:directory];
+       [TKJSONCache save:identifier dictionary:JSON directory:directory subdirectory:nil];
        withJSON(JSON, shareURL);
        
      } else {

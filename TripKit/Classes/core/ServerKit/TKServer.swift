@@ -8,6 +8,9 @@
 
 import Foundation
 
+@available(*, unavailable, renamed: "TKServer")
+public typealias SVKServer = TKServer
+
 extension TKServer {
   
   public static let shared = TKServer.__sharedInstance()

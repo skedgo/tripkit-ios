@@ -8,10 +8,13 @@
 
 @import UIKit;
 
-#import "AKItemCell.h"
-#import "SGTableCell.h"
+#ifdef TK_NO_MODULE
+#import "TKUIStyledLabel.h"
+#else
+@import TripKitUI;
+#endif
 
-@class TKUIStyledLabel;
+#import "AKItemCell.h"
 
 @interface AKLabelCell : SGTableCell <AKItemCell>
 

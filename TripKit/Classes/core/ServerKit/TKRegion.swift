@@ -85,7 +85,7 @@ public class TKRegion : NSObject, Codable {
   @objc public let urls: [URL]
   @objc let encodedPolygon: String
   
-  @objc lazy var polygon: MKPolygon = {
+  @objc public lazy var polygon: MKPolygon = {
     let corners = CLLocation.decodePolyLine(self.encodedPolygon)
     let coordinates = corners.map { $0.coordinate }
     return MKPolygon(coordinates: coordinates, count: coordinates.count)
@@ -198,6 +198,12 @@ public class TKInternationalRegion : TKRegion {
     return coordinate.isValid
   }
 }
+
+@available(*, unavailable, renamed: "TKRegion")
+public typealias SVKRegion = TKRegion
+
+@available(*, unavailable, renamed: "TKInternationalRegion")
+public typealias SVKInternationalRegion = TKInternationalRegion
 
 
 

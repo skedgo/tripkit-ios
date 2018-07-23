@@ -68,7 +68,7 @@ public class TKUIAlertInfoView: UIView {
   public func showTitleOnly(maxY: CGFloat) {
     guard superview != nil, isShowingFullContent else { return }
     let bottomPadding: CGFloat
-    if #available(iOSApplicationExtension 11.0, *) {
+    if #available(iOS 11.0, *) {
       bottomPadding = safeAreaInsets.bottom
     } else {
       bottomPadding = 0
@@ -84,7 +84,7 @@ public class TKUIAlertInfoView: UIView {
     guard superview != nil, !isShowingFullContent else { return }
 
     let bottomPadding: CGFloat
-    if #available(iOSApplicationExtension 11.0, *) {
+    if #available(iOS 11.0, *) {
       bottomPadding = safeAreaInsets.bottom
     } else {
       bottomPadding = 0

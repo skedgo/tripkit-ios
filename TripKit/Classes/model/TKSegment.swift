@@ -169,7 +169,7 @@ extension TKSegment: TKDisplayablePoint {
   public var pointImageIsTemplate: Bool {
     return modeInfo()?.remoteImageIsTemplate ?? false
   }
-
+  
   fileprivate func image(for iconType: TKStyleModeIconType, allowRealTime: Bool) -> TKImage? {
     var localImageName = modeInfo()?.localImageName
     
@@ -248,6 +248,9 @@ extension TKSegment: TKDisplayableTimePoint {
     return order() == .end
   }
   
+  public var prefersSemaphore: Bool {
+    return true
+  }
 }
 
 

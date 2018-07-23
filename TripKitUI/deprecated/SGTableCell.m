@@ -13,7 +13,7 @@
 #import "TripKit/TripKit-Swift.h"
 #else
 @import TripKit;
-@import TripKitUI;
+#import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
 @implementation SGTableCell

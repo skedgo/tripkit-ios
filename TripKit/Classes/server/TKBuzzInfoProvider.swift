@@ -77,6 +77,17 @@ extension TKBuzzInfoProvider {
                            completion: completion)
   }
   
+  /**
+   Asynchronously fetches additional location information for a specified coordinate.
+   
+   - Note: Completion block is executed on the main thread.
+   */
+  public class func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, for region: TKRegion, completion: @escaping (API.LocationInfo?) -> Void) {
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = coordinate
+    fetchLocationInformation(annotation, for: region, completion: completion)
+  }
+  
   // MARK: - Transit alerts
   
   /**

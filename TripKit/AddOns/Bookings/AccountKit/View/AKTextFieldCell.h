@@ -14,7 +14,6 @@
 @import TripKitUI;
 #endif
 
-#import "SGTableCell.h"
 #import "AKItemCell.h"
 
 typedef BOOL (^TextFieldShouldReturnHandler)(UITextField *textField);

@@ -11,7 +11,7 @@ import MapKit
 
 @testable import TripKit
 
-class SGGeocoderTest: XCTestCase {
+class TKGeocoderTest: XCTestCase {
   var geocoder: TKAggregateGeocoder!
   
   // sample regions for testing

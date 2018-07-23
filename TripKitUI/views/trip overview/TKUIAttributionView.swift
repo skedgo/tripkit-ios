@@ -47,7 +47,7 @@ public class TKUIAttributionView: UIView {
     backgroundColor = TKStyleManager.backgroundColorForTileList()
     
     let textView = UITextView()
-    textView.font = TKStyleManager.systemFont(withSize: 15)
+    textView.font = TKStyleManager.systemFont(size: 15)
     textView.backgroundColor = .clear
     textView.textColor = TKStyleManager.darkTextColor()
     textView.isEditable = false

@@ -1,5 +1,5 @@
 //
-//  PolylineDecoderTest.swift
+//  TKPolylineDecoderTest.swift
 //  SkedGoKit
 //
 //  Created by Adrian Schoenig on 15/07/2016.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import TripKit
 
-class PolylineDecoderTest: XCTestCase {
+class TKPolylineDecoderTest: XCTestCase {
 
   func testDecodeAdelaide()
   {

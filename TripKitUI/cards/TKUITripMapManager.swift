@@ -16,26 +16,11 @@ import TGCardViewController
   import TripKit
 #endif
 
-public protocol TKUITripMapManagerType: TGCompatibleMapManager {
-}
+public protocol TKUITripMapManagerType: TGCompatibleMapManager {}
 
 public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
   public let trip: Trip
-  
-  fileprivate var tripAnnotations = [MKAnnotation]() {
-    didSet {
-      mapView?.removeAnnotations(oldValue)
-      mapView?.addAnnotations(tripAnnotations)
-    }
-  }
-  
-  fileprivate var tripOverlays = [MKOverlay]() {
-    didSet {
-      mapView?.removeOverlays(oldValue)
-      mapView?.addOverlays(tripOverlays, level: .aboveRoads)
-    }
-  }
   
   public init(trip: Trip) {
     self.trip = trip
@@ -47,16 +32,8 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
   override public func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
-    
     add(trip)
   }
-  
-  override public func cleanUp(_ mapView: MKMapView, animated: Bool) {
-    remove(trip)
-    
-    super.cleanUp(mapView, animated: animated)
-  }
-  
   
   public func show(_ segment: TKSegment, animated: Bool) {
     let annos = segment.annotationsToZoomToOnMap()
@@ -66,13 +43,12 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
 }
 
 
-// MARK: Adding and removing trips from map
+// MARK: Adding trips to the map
 
 private extension TKUITripMapManager {
-  
   func add(_ trip: Trip) {
-    
     var annotations = [MKAnnotation]()
+    var dynamicAnnotations = [MKAnnotation]()
     var overlays = [MKOverlay]()
     var affectedByTraffic = false
     
@@ -90,7 +66,11 @@ private extension TKUITripMapManager {
       
       // TODO: request visits
       
-      // TODO: add vehicles
+      // Add vehicles
+      if let primary = segment.realTimeVehicle() {
+        dynamicAnnotations.append(primary)
+      }
+      dynamicAnnotations.append(contentsOf: segment.realTimeAlternativeVehicles())
       
       // TODO: add alerts
       
@@ -99,14 +79,8 @@ private extension TKUITripMapManager {
     
     mapView?.showsTraffic = affectedByTraffic
     
-    tripOverlays = TKUIMapManagerHelper.sort(overlays)
-    tripAnnotations = annotations
-    
+    self.overlays = TKUIMapManagerHelper.sort(overlays)
+    self.annotations = annotations
+    self.dynamicAnnotations = dynamicAnnotations
   }
-  
-  func remove(_ trip: Trip) {
-    tripOverlays = []
-    tripAnnotations = []
-  }
-  
 }
