@@ -12,30 +12,30 @@ extension API {
   public struct Departure: Codable, Equatable {
     
     // information about the service
-    let serviceTripID: String
-    let operatorID: String
+    public let serviceTripID: String
+    public let operatorID: String
     
-    let operatorName: String
-    let number: String?
-    let name: String?
-    let direction: String?
-    let color: RGBColor?
-    let modeInfo: TKModeInfo
+    public let operatorName: String
+    public let number: String?
+    public let name: String?
+    public let direction: String?
+    public let color: RGBColor?
+    public let modeInfo: TKModeInfo
 
-    let alertHashCodes: [Int]?
-    let bicycleAccessible: Bool?
-    let wheelchairAccessible: Bool?
+    public let alertHashCodes: [Int]?
+    public let bicycleAccessible: Bool?
+    public let wheelchairAccessible: Bool?
     
-    let realTimeStatus: RealTimeStatus?
-    let primaryVehicle: Vehicle?
-    let alternativeVehicles: [Vehicle]?
+    public let realTimeStatus: RealTimeStatus?
+    public let primaryVehicle: Vehicle?
+    public let alternativeVehicles: [Vehicle]?
 
     // information about the departure
-    let frequency: Int?
-    let searchString: String?
-    let startTime: TimeInterval?
-    let endTime: TimeInterval?
-    let endStopCode: String?
+    public let frequency: Int?
+    public let searchString: String?
+    public let startTime: TimeInterval?
+    public let endTime: TimeInterval?
+    public let endStopCode: String?
     
     private enum CodingKeys: String, CodingKey {
       case serviceTripID

@@ -12,14 +12,14 @@ extension API {
   public struct Departures: Codable, Equatable {
     
     public struct Embarkations: Codable, Equatable {
-      let services: [Departure]
-      let stopCode: String
+      public let services: [Departure]
+      public let stopCode: String
     }
     
-    let alerts: [Alert]?
-    let embarkationStops: [Embarkations]
-    let parentStops: [Stop]?
-    let stops: [Stop]?
+    public let alerts: [Alert]?
+    public let embarkationStops: [Embarkations]
+    public let parentStops: [Stop]?
+    public let stops: [Stop]?
   }
   
 }
