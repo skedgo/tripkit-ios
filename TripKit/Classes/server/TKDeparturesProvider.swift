@@ -32,22 +32,41 @@ public class TKDeparturesProvider: NSObject {
 
 extension TKDeparturesProvider {
   
-  public class func fetchDepartures(forStopCodes stopCodes: [String], fromDate: Date = Date(), limit: Int = 10, in region: TKRegion) -> Observable<API.Departures> {
+  public class func fetchDepartures(forStopCodes stopCodes: [String], fromDate: Date? = nil, limit: Int = 10, in region: TKRegion, repeatHandler: ((Int, API.Departures) -> TimeInterval?)? = nil) -> Observable<API.Departures> {
+    
+    assert(repeatHandler == nil || fromDate == nil, "Don't set both `fromDate` and the `repeatHandler`. It doesn't make sense to repeat, if you fix the departure time.")
     
     guard !stopCodes.isEmpty else {
       return Observable.error(InputError.missingField("stopCodes"))
     }
     
-    let paras: [String: Any] = [
+    var paras: [String: Any] = [
       "region": region.name,
       "embarkationStops": stopCodes,
-      "timeStamp": fromDate.timeIntervalSince1970,
       "limit": limit,
       "config": TKSettings.defaultDictionary()
     ]
+    if let date = fromDate {
+      paras["timeStamp"] = date.timeIntervalSince1970
+    }
     
     return TKServer.shared.rx
-      .hit(.POST, path: "departures.json", parameters: paras, region: region)
+      .hit(.POST, path: "departures.json", parameters: paras, region: region) { status, data in
+        guard fromDate == nil else {
+          return nil // No result change, no need to repeat
+        }
+        
+        if case 400..<500 = status {
+          return nil // Client-side errors; hitting again won't help
+        }
+
+        guard
+          let repeatHandler = repeatHandler,
+          let data = data, let departures = try? JSONDecoder().decode(API.Departures.self, from: data)
+          else { return nil }
+
+        return repeatHandler(status, departures)
+      }
       .map { _, _, data in
         guard let data = data else { throw OutputError.noDataReturn }
         let decoder = JSONDecoder()
@@ -55,7 +74,7 @@ extension TKDeparturesProvider {
     }
   }
   
-  public class func downloadDepartures(for stops: [StopLocation], fromDate: Date = Date(), limit: Int = 10) -> Observable<Bool> {
+  public class func downloadDepartures(for stops: [StopLocation], fromDate: Date? = nil, limit: Int = 10) -> Observable<Bool> {
     
     let stopCodes = stops.map { $0.stopCode }
     
