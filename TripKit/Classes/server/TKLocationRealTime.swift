@@ -12,6 +12,7 @@ import RxSwift
 
 public enum TKLocationRealTime {
 
+  @available(*, deprecated, message: "You should manage that yourself.")
   public static func fetchRealTimeInfo(for location: TKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<API.LocationInfo> {
     return fetchOnlyOn
       .flatMapLatest { fetch -> Observable<API.LocationInfo> in
