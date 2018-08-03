@@ -46,35 +46,66 @@ public class TKUIResultsViewModel {
     }
   }
   
-  public struct RouteBuilder {
-    fileprivate enum SelectionMode: Equatable {
+  public struct RouteBuilder: Codable {
+    fileprivate enum SelectionMode: String, Equatable, Codable {
       case origin
       case destination
     }
     
-    public enum Time: Equatable {
+    public enum Time: Equatable, Codable {
+      private enum CodingKeys: String, CodingKey {
+        case type
+        case date
+      }
+      
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let type = try container.decode(String.self, forKey: .type)
+        let date = try? container.decode(Date.self, forKey: .date)
+        switch (type, date) {
+        case ("leaveAfter", .some(let date)): self = .leaveAfter(date)
+        case ("arriveBefore", .some(let date)): self = .arriveBefore(date)
+        default: self = .leaveASAP
+        }
+      }
+      
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+        case .leaveASAP:
+          try container.encode("leaveASAP", forKey: .type)
+        case .leaveAfter(let date):
+          try container.encode("leaveAfter", forKey: .type)
+          try container.encode(date, forKey: .date)
+        case .arriveBefore(let date):
+          try container.encode("arriveBefore", forKey: .type)
+          try container.encode(date, forKey: .date)
+        }
+      }
+      
       case leaveASAP
       case leaveAfter(Date)
       case arriveBefore(Date)
     }
     
     fileprivate var mode: SelectionMode
-    fileprivate var origin: MKAnnotation?
-    fileprivate var destination: MKAnnotation?
+    fileprivate var origin: TKNamedCoordinate?
+    fileprivate var destination: TKNamedCoordinate?
     fileprivate var time: Time
     
     fileprivate static var empty = RouteBuilder(mode: .destination, origin: nil, destination: nil, time: .leaveASAP)
   }
   
   public convenience init(destination: MKAnnotation, inputs: UIInput) {
-    self.init(builder: RouteBuilder(mode: .origin, origin: nil, destination: destination, time: .leaveASAP), inputs: inputs)
+    let builder = RouteBuilder(mode: .origin, origin: nil, destination: TKNamedCoordinate.namedCoordinate(for: destination), time: .leaveASAP)
+    self.init(builder: builder, inputs: inputs)
   }
   
   public convenience init(request: TripRequest, inputs: UIInput) {
     self.init(builder: request.builder, initialRequest: request, inputs: inputs)
   }
   
-  fileprivate init(builder: RouteBuilder, initialRequest: TripRequest? = nil, inputs: UIInput) {
+  private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, inputs: UIInput) {
     let builderChanged = TKUIResultsViewModel.watch(builder, inputs: inputs)
     
     let errorPublisher = PublishSubject<Error>()
@@ -259,10 +290,10 @@ extension TKUIResultsViewModel {
     // then triggers a rebuild.
     var origin: Observable<CLLocationCoordinate2D?> = Observable.empty()
     var destination: Observable<CLLocationCoordinate2D?> = Observable.empty()
-    if let asObject = builder.origin as? NSObject {
+    if let asObject = builder.origin {
       origin = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
     }
-    if let asObject = builder.destination as? NSObject {
+    if let asObject = builder.destination {
       destination = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
     }
     return Observable.merge(origin, destination)
@@ -275,8 +306,7 @@ extension TKUIResultsViewModel {
 extension TKUIResultsViewModel.RouteBuilder {
   
   mutating func dropPin(at coordinate: CLLocationCoordinate2D) {
-    let annotation = MKPointAnnotation()
-    annotation.coordinate = coordinate
+    let annotation = TKNamedCoordinate(coordinate: coordinate)
     
     switch mode {
     case .origin:

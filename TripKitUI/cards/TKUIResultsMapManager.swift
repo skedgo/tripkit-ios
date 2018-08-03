@@ -38,6 +38,10 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     self.showOverlayPolygon = true
   }
   
+  required convenience init?(coder aDecoder: NSCoder) {
+    self.init()
+  }
+  
   private var dropPinRecognizer = UILongPressGestureRecognizer()
   private var droppedPinPublisher = PublishSubject<CLLocationCoordinate2D>()
   var droppedPin: Driver<CLLocationCoordinate2D> {

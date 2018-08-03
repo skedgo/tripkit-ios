@@ -84,6 +84,10 @@ public class TKUITripOverviewCard: TGTableCard {
     super.init(title: title, dataSource: dataSource, mapManager: mapManager)
   }
   
+  required public init?(coder: NSCoder) {
+    // TODO: Implement
+    return nil
+  }
   
   override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     guard let tableView = (cardView as? TGScrollCardView)?.tableView else {

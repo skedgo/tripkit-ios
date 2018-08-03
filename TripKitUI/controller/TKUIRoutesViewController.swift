@@ -15,20 +15,18 @@ public protocol TKUIRoutesViewControllerDelegate: TGCardViewControllerDelegate {
 
 public class TKUIRoutesViewController: TGCardViewController {
   
-  private let rootCard: TGCard
-  
   public init(destination: MKAnnotation) {
-    rootCard = TKUIResultsCard(destination: destination)
-    
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+
+    rootCard = TKUIResultsCard(destination: destination)
   }
 
   public init(request: TripRequest) {
+    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+
     rootCard = TKUIResultsCard(request: request)
     
-    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
   }
-
   
   required public init(coder aDecoder: NSCoder) {
     fatalError("Use the `init(destination:)` or `init(request:) methods instead.")
@@ -36,8 +34,6 @@ public class TKUIRoutesViewController: TGCardViewController {
   
   override public func viewDidLoad() {
     super.viewDidLoad()
-
-    push(rootCard)
     
     // TODO: We should make sure that the top card, still has a close button, so that you can get back to the previous screen when this is presented in an app.
   }
