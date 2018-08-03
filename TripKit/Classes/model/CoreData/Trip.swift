@@ -28,18 +28,17 @@ extension Trip {
   public func isMixedModal(ignoreWalking: Bool) -> Bool {
     var previousMode: String? = nil
     for segment in segments() {
-      if segment.isStationary() {
-        continue // always ignore stationary segments
+      guard !segment.isStationary(), let mode = segment.modeIdentifier() {
+        continue // always ignore stationary segments or modes with identifier
       }
+      
       if segment.isWalking(), ignoreWalking || !segment.hasVisibility(.inSummary) {
         continue // we always ignore short walks that don't make it into the summary
       }
-      if let mode = segment.modeIdentifier() {
-        if let previous = previousMode, previous != mode {
-          return true
-        } else {
-          previousMode = mode
-        }
+      if let previous = previousMode, previous != mode {
+        return true
+      } else {
+        previousMode = mode
       }
     }
     return false
