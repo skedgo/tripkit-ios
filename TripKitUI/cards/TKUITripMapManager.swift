@@ -35,6 +35,10 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     add(trip)
   }
   
+  public func showTrip(animated: Bool) {
+    zoom(to: annotations, animated: animated)
+  }
+  
   public func show(_ segment: TKSegment, animated: Bool) {
     let annos = segment.annotationsToZoomToOnMap()
     zoom(to: annos, animated: animated)

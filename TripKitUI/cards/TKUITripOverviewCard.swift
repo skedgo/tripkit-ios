@@ -65,7 +65,8 @@ public class TKUITripOverviewCard: TGTableCard {
     }
   )
   
-  private let index: Int?
+  private let index: Int? // for restoring
+  private var zoomToTrip: Bool = false // for restoring
   
   fileprivate let viewModel: TKUITripOverviewViewModel
   private let disposeBag = DisposeBag()
@@ -100,6 +101,8 @@ public class TKUITripOverviewCard: TGTableCard {
       : nil
     
     self.init(trip: trip, index: index)
+
+    zoomToTrip = true
   }
   
   public override func encode(with aCoder: NSCoder) {
@@ -151,11 +154,15 @@ public class TKUITripOverviewCard: TGTableCard {
     }
   }
   
-  
-  override public func didAppear(animated: Bool) {
+  public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
    
     TKUICustomization.shared.feedbackActiveItemHandler?(viewModel.trip)
+    
+    if zoomToTrip {
+      (mapManager as? TKUITripMapManager)?.showTrip(animated: animated)
+      zoomToTrip = false
+    }
   }
   
 }
