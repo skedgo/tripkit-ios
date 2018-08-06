@@ -65,11 +65,14 @@ public class TKUITripOverviewCard: TGTableCard {
     }
   )
   
+  private let index: Int?
+  
   fileprivate let viewModel: TKUITripOverviewViewModel
   private let disposeBag = DisposeBag()
   
   public init(trip: Trip, index: Int? = nil) {
     viewModel = TKUITripOverviewViewModel(trip: trip)
+    self.index = index
     
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
     
@@ -84,11 +87,29 @@ public class TKUITripOverviewCard: TGTableCard {
     super.init(title: title, dataSource: dataSource, mapManager: mapManager)
   }
   
-  required public init?(coder: NSCoder) {
-    // TODO: Implement
-    return nil
+  public required convenience init?(coder: NSCoder) {
+    guard
+      let data = coder.decodeObject(forKey: "viewModel") as? Data,
+      let trip = TKUITripOverviewViewModel.restore(from: data)
+      else {
+        return nil
+    }
+    
+    let index = coder.containsValue(forKey: "index")
+      ? coder.decodeInteger(forKey: "index")
+      : nil
+    
+    self.init(trip: trip, index: index)
   }
   
+  public override func encode(with aCoder: NSCoder) {
+    aCoder.encode(TKUITripOverviewViewModel.save(trip: viewModel.trip), forKey: "viewModel")
+
+    if let index = index {
+      aCoder.encode(index, forKey: "index")
+    }
+  }
+
   override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     guard let tableView = (cardView as? TGScrollCardView)?.tableView else {
       preconditionFailure()

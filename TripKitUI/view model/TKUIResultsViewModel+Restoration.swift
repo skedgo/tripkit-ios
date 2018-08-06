@@ -1,5 +1,5 @@
 //
-//  TKUIResultsViewModel+State.swift
+//  TKUIResultsViewModel+Restoration.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 03.08.18.
