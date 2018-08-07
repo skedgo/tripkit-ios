@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-open class TKNamedCoordinate : NSObject, Codable, TKClusterable {
+open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable {
   
   public fileprivate(set) var coordinate: CLLocationCoordinate2D {
     didSet {

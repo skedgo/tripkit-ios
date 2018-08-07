@@ -29,8 +29,8 @@ public class TKUIResultsCard: TGTableCard {
   public weak var resultsDelegate: TKUIResultsCardDelegate?
   
   private let destination: MKAnnotation?
-  private let request: TripRequest?
-  
+  private var request: TripRequest? // also for saving
+
   private var viewModel: TKUIResultsViewModel!
   let disposeBag = DisposeBag()
   
@@ -75,6 +75,21 @@ public class TKUIResultsCard: TGTableCard {
       accessoryView: accessoryView, mapManager: mapManager,
       initialPosition: .extended // show fully as we'll have routes shortly
     )
+  }
+  
+  public required convenience init?(coder: NSCoder) {
+    guard
+      let data = coder.decodeObject(forKey: "viewModel") as? Data,
+      let request = TKUIResultsViewModel.restore(from: data)
+      else {
+        return nil
+    }
+    
+    self.init(request: request)
+  }
+  
+  public override func encode(with aCoder: NSCoder) {
+    aCoder.encode(TKUIResultsViewModel.save(request: request), forKey: "viewModel")
   }
   
   
@@ -173,6 +188,10 @@ public class TKUIResultsCard: TGTableCard {
 
     viewModel.request
       .drive(onNext: TKUICustomization.shared.feedbackActiveItemHandler)
+      .disposed(by: disposeBag)
+    
+    viewModel.request
+      .drive(onNext: { [weak self] in self?.request = $0 })
       .disposed(by: disposeBag)
 
     viewModel.error

@@ -65,11 +65,15 @@ public class TKUITripOverviewCard: TGTableCard {
     }
   )
   
+  private let index: Int? // for restoring
+  private var zoomToTrip: Bool = false // for restoring
+  
   fileprivate let viewModel: TKUITripOverviewViewModel
   private let disposeBag = DisposeBag()
   
   public init(trip: Trip, index: Int? = nil) {
     viewModel = TKUITripOverviewViewModel(trip: trip)
+    self.index = index
     
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
     
@@ -84,7 +88,31 @@ public class TKUITripOverviewCard: TGTableCard {
     super.init(title: title, dataSource: dataSource, mapManager: mapManager)
   }
   
+  public required convenience init?(coder: NSCoder) {
+    guard
+      let data = coder.decodeObject(forKey: "viewModel") as? Data,
+      let trip = TKUITripOverviewViewModel.restore(from: data)
+      else {
+        return nil
+    }
+    
+    let index = coder.containsValue(forKey: "index")
+      ? coder.decodeInteger(forKey: "index")
+      : nil
+    
+    self.init(trip: trip, index: index)
+
+    zoomToTrip = true
+  }
   
+  public override func encode(with aCoder: NSCoder) {
+    aCoder.encode(TKUITripOverviewViewModel.save(trip: viewModel.trip), forKey: "viewModel")
+
+    if let index = index {
+      aCoder.encode(index, forKey: "index")
+    }
+  }
+
   override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     guard let tableView = (cardView as? TGScrollCardView)?.tableView else {
       preconditionFailure()
@@ -126,11 +154,15 @@ public class TKUITripOverviewCard: TGTableCard {
     }
   }
   
-  
-  override public func didAppear(animated: Bool) {
+  public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
    
     TKUICustomization.shared.feedbackActiveItemHandler?(viewModel.trip)
+    
+    if zoomToTrip {
+      (mapManager as? TKUITripMapManager)?.showTrip(animated: animated)
+      zoomToTrip = false
+    }
   }
   
 }
