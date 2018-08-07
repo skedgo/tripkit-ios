@@ -14,7 +14,7 @@ build_ios_base:
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
-      - Carthage/Build/iOS
+      - Carthage/Build
       - Carthage/Checkouts
   artifacts:
     paths:
@@ -30,7 +30,7 @@ build_ios_ui:
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
-      - Carthage/Build/iOS
+      - Carthage/Build
       - Carthage/Checkouts
   artifacts:
     paths:
@@ -46,7 +46,7 @@ build_ios_interapp:
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
-      - Carthage/Build/iOS
+      - Carthage/Build
       - Carthage/Checkouts
   artifacts:
     paths:
@@ -62,7 +62,7 @@ build_ios_bookings:
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
-      - Carthage/Build/iOS
+      - Carthage/Build
       - Carthage/Checkouts
   artifacts:
     paths:
@@ -78,7 +78,7 @@ build_mac_base:
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
-      - Carthage/Build/Mac
+      - Carthage/Build
       - Carthage/Checkouts
   artifacts:
     paths:
