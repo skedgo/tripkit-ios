@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 fileprivate struct SSOResult : OAuthData {
   let accessToken: String?
   let expiration: TimeInterval?
@@ -31,6 +29,10 @@ public enum TKUberSSO : SSOCompatible {
   
   public static var pretendUberIsInstalled = false
   
+  private static var clientId: String? {
+    return TKConfig.shared.configuration["UberClientID"] as? String
+  }
+  
   public static func canHandle(mode: String) -> Bool {
     guard mode.lowercased().contains("uber") else { return false }
 
@@ -40,7 +42,10 @@ public enum TKUberSSO : SSOCompatible {
     guard let url = components.url else {
       preconditionFailure()
     }
-    
+
+    // Only works if client ID is provided
+    guard clientId != nil else { return false }
+
     // Is Uber installed?
     return pretendUberIsInstalled || UIApplication.shared.canOpenURL(url)
   }
@@ -49,6 +54,7 @@ public enum TKUberSSO : SSOCompatible {
   
   public static func start() {
     guard !pretendUberIsInstalled else { return }
+    guard let clientId = self.clientId else { return }
     
     let urlScheme = TKConfig.shared.appURLScheme()
     let appName = Bundle.main.productName ?? "TripGo"
@@ -59,7 +65,7 @@ public enum TKUberSSO : SSOCompatible {
     components.queryItems = [
       URLQueryItem(name: "third_party_app_name",  value: appName),
       URLQueryItem(name: "callback_uri_string",   value: urlScheme + "://sso-uber"),
-      URLQueryItem(name: "client_id",             value: "hBzl1hd9ihxKNnB7baQdp8y8iImTOfOF"),
+      URLQueryItem(name: "client_id",             value: clientId),
       URLQueryItem(name: "login_type",            value: "default"),
       URLQueryItem(name: "scope",                 value: "request"),
       URLQueryItem(name: "sdk",                   value: "ios"),
