@@ -1,6 +1,6 @@
 stages:
-  - code_quality
   - build
+  - code_quality
 
 variables:
   LC_ALL: "en_US.UTF-8"
