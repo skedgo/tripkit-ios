@@ -6,12 +6,10 @@ variables:
   LC_ALL: "en_US.UTF-8"
   LANG: "en_US.UTF-8"
 
-before_script:
-  - carthage bootstrap --cache-builds
-
 build_ios_base:
   stage: build
   script:
+    - carthage bootstrap --cache-builds
     - xcodebuild test -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   retry: 2
   cache:
@@ -28,6 +26,7 @@ build_ios_base:
 build_ios_ui:
   stage: build
   script:
+    - carthage bootstrap --cache-builds
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
@@ -43,6 +42,7 @@ build_ios_ui:
 build_ios_interapp:
   stage: build
   script:
+    - carthage bootstrap --cache-builds
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
@@ -58,6 +58,7 @@ build_ios_interapp:
 build_ios_bookings:
   stage: build
   script:
+    - carthage bootstrap --cache-builds
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitBookings-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
@@ -73,6 +74,7 @@ build_ios_bookings:
 build_mac_base:
   stage: build
   script:
+    - carthage bootstrap --cache-builds
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKit-macOS" | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
