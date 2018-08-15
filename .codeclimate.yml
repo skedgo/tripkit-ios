@@ -4,4 +4,4 @@ checks:
     config:
       threshold: 100
 exclude_patterns:
-  - "**/*-CoreDataProperties.swift"
+  - "**/*CoreDataProperties.swift"
