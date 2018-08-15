@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (TKConfig *)sharedInstance NS_REFINED_FOR_SWIFT;
 
-- (NSString *)appGroupName;
+- (nullable NSString *)appGroupName;
 - (NSString *)appURLScheme;
 - (nullable NSURL *)oauthCallbackURL;
 - (BOOL)betaFeaturesAvailable;
