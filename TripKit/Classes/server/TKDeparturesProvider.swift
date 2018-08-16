@@ -62,12 +62,12 @@ extension TKDeparturesProvider {
 
         guard
           let repeatHandler = repeatHandler,
-          let data = data, let departures = try? JSONDecoder().decode(API.Departures.self, from: data)
+          let data = data,
+          let departures = try? JSONDecoder().decode(API.Departures.self, from: data),
+          let timeInterval = repeatHandler(status, departures)
           else { return nil }
-        
-        let timeInterval = repeatHandler(status, departures)
 
-        return (timeInterval != nil) ? (timeInterval!, paras) : nil
+        return .repeatIn(timeInterval)
       }
       .map { _, _, data in
         guard let data = data else { throw OutputError.noDataReturn }

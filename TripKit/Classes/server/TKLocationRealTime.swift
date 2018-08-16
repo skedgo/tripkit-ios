@@ -49,9 +49,9 @@ public enum TKLocationRealTime {
             }
             if let data = data,
                let info = try? JSONDecoder().decode(API.LocationInfo.self, from: data) {
-              return info.hasRealTime ? (10, paras) : nil
+              return info.hasRealTime ? .repeatIn(10) : nil
             } else {
-              return (60, paras) // Try again in a while
+              return .repeatIn(60) // Try again in a while
             }
           }
           .map { status, _, data in

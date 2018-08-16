@@ -18,6 +18,11 @@ public enum HTTPMethod: String {
   case PUT = "PUT"
 }
 
+public enum RepeatHandler {
+  case repeatIn(TimeInterval)
+  case repeatWithNewParameters(TimeInterval, [String: Any])
+}
+
 extension Reactive where Base: TKServer {
   public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Observable<TKRegion> {
     return requireRegions().map {
@@ -63,7 +68,7 @@ extension Reactive where Base: TKServer {
     parameters: [String: Any] = [:],
     headers: [String: String] = [:],
     region: TKRegion? = nil,
-    repeatHandler: ((Int, Data?) -> (TimeInterval, [String : Any])?)? = nil
+    repeatHandler: ((Int, Data?) -> RepeatHandler?)? = nil
     ) -> Observable<(Int, [String: Any], Data?)>
   {
     
@@ -82,7 +87,7 @@ extension Reactive where Base: TKServer {
             return nil
           }
           
-          let hitAgain: (TimeInterval, [String : Any])?
+          let hitAgain: RepeatHandler?
           if let repeatHandler = repeatHandler {
             hitAgain = repeatHandler(code, data)
           } else {
@@ -113,7 +118,7 @@ extension Reactive where Base: TKServer {
       parameters: [String: Any] = [:],
       headers: [String: String] = [:],
       region: TKRegion? = nil,
-      repeatHandler: @escaping (Int, [String: Any], Data?) -> (TimeInterval, [String : Any])?,
+      repeatHandler: @escaping (Int, [String: Any], Data?) -> RepeatHandler?,
       errorHandler: @escaping (Error) -> ()
     ) {
 
@@ -125,23 +130,38 @@ extension Reactive where Base: TKServer {
       region: region,
       callbackOnMain: false,
       success: { code, responseHeaders, response, data in
-        
-        let hitAgain = repeatHandler(code, responseHeaders, data)
-        if let seconds = hitAgain?.0, seconds > 0 {
-          let queue = DispatchQueue.global(qos: .userInitiated)
-          queue.asyncAfter(deadline: DispatchTime.now() + seconds) {
-            self.hitSkedGo(
-              method: method,
-              path: path,
-              parameters: hitAgain?.1 ?? [:],
-              headers: headers,
-              region: region,
-              repeatHandler: repeatHandler,
-              errorHandler: errorHandler
-            )
+        if let hitAgain = repeatHandler(code, responseHeaders, data) {
+          // These are the variables that control how a request is repeated
+          // 1. retryIn: tells us when we can try again, in seconds.
+          // 2. newParameters: tells us when we do retry, what parameters to use. This
+          //    may be different from the original request.
+          let retryIn: TimeInterval
+          let newParameters: [String : Any]
+          
+          switch hitAgain {
+          case .repeatIn(let seconds):
+            retryIn = seconds
+            newParameters = parameters
+          case .repeatWithNewParameters(let seconds, let paras):
+            retryIn = seconds
+            newParameters = paras
+          }
+          
+          if retryIn > 0 {
+            let queue = DispatchQueue.global(qos: .userInitiated)
+            queue.asyncAfter(deadline: DispatchTime.now() + retryIn) {
+              self.hitSkedGo(
+                method: method,
+                path: path,
+                parameters: newParameters,
+                headers: headers,
+                region: region,
+                repeatHandler: repeatHandler,
+                errorHandler: errorHandler
+              )
+            }
           }
         }
-        
       },
       failure: errorHandler)
   }
