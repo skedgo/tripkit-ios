@@ -63,7 +63,7 @@ extension Reactive where Base: TKServer {
     parameters: [String: Any] = [:],
     headers: [String: String] = [:],
     region: TKRegion? = nil,
-    repeatHandler: ((Int, Data?) -> (TimeInterval?))? = nil
+    repeatHandler: ((Int, Data?) -> (TimeInterval, [String : Any])?)? = nil
     ) -> Observable<(Int, [String: Any], Data?)>
   {
     
@@ -82,7 +82,7 @@ extension Reactive where Base: TKServer {
             return nil
           }
           
-          let hitAgain: TimeInterval?
+          let hitAgain: (TimeInterval, [String : Any])?
           if let repeatHandler = repeatHandler {
             hitAgain = repeatHandler(code, data)
           } else {
@@ -90,11 +90,12 @@ extension Reactive where Base: TKServer {
           }
           
           subscriber.onNext((code, responseHeaders, data))
+          
           if hitAgain == nil {
             subscriber.onCompleted()
           }
-          return hitAgain
           
+          return hitAgain
         }, errorHandler: { error in
           subscriber.onError(error)
         }
@@ -106,7 +107,15 @@ extension Reactive where Base: TKServer {
     }
   }
   
-  private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: Any] = [:], headers: [String: String] = [:], region: TKRegion? = nil, repeatHandler: @escaping (Int, [String: Any], Data?) -> (TimeInterval?), errorHandler: @escaping (Error) -> ()) {
+  private func hitSkedGo(
+      method: HTTPMethod,
+      path: String,
+      parameters: [String: Any] = [:],
+      headers: [String: String] = [:],
+      region: TKRegion? = nil,
+      repeatHandler: @escaping (Int, [String: Any], Data?) -> (TimeInterval, [String : Any])?,
+      errorHandler: @escaping (Error) -> ()
+    ) {
 
     self.base.hitSkedGo(
       withMethod: method.rawValue,
@@ -118,20 +127,19 @@ extension Reactive where Base: TKServer {
       success: { code, responseHeaders, response, data in
         
         let hitAgain = repeatHandler(code, responseHeaders, data)
-        if let seconds = hitAgain, seconds > 0 {
+        if let seconds = hitAgain?.0, seconds > 0 {
           let queue = DispatchQueue.global(qos: .userInitiated)
           queue.asyncAfter(deadline: DispatchTime.now() + seconds) {
             self.hitSkedGo(
               method: method,
               path: path,
-              parameters: parameters,
+              parameters: hitAgain?.1 ?? [:],
               headers: headers,
               region: region,
               repeatHandler: repeatHandler,
               errorHandler: errorHandler
             )
           }
-          
         }
         
       },
