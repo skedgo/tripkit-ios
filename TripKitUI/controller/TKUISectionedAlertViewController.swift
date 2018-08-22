@@ -18,7 +18,7 @@ public class TKUISectionedAlertViewController: UITableViewController {
   
   public var region: TKRegion!
   public var includeSearchBar: Bool = true
-  public var eventTrackingDelegate: TKEventTrackable?
+  public var eventTrackingDelegate: TKUIEventTrackable?
   
   private var viewModel: TKUISectionedAlertViewModel!
   
