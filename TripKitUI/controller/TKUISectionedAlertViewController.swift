@@ -18,6 +18,7 @@ public class TKUISectionedAlertViewController: UITableViewController {
   
   public var region: TKRegion!
   public var includeSearchBar: Bool = true
+  public var eventTrackingDelegate: TKUIEventTrackable?
   
   private var viewModel: TKUISectionedAlertViewModel!
   
@@ -110,6 +111,11 @@ public class TKUISectionedAlertViewController: UITableViewController {
         self.didSelect($0)
       })
       .disposed(by: disposeBag)
+  }
+  
+  public override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    eventTrackingDelegate?.trackScreen(named: "ServiceDisruptions")
   }
   
   // MARK: - User interaction
