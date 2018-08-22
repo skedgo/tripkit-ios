@@ -9,7 +9,7 @@
 import Foundation
 
 @objc
-public enum TKTripCostType : Int {
+public enum TKTripCostType : Int, Codable {
   case score
   case time
   case duration
@@ -24,7 +24,7 @@ public enum TKTripCostType : Int {
 
 
 @objc
-public enum TKTripSegmentVisibility : Int {
+public enum TKTripSegmentVisibility : Int, Codable {
   
   /// never visible in UI
   case hidden
