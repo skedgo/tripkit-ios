@@ -30,6 +30,14 @@ public class TKRegion : NSObject, Codable {
     @objc public weak var region: TKRegion? = nil
     public var orderInRegion: Int? = nil
 
+    // This shouldn't be necessary, but there were reports of crashes when
+    // calling `[MKMapView removeAnnotations:]`:
+    //
+    //      Terminating app due to uncaught exception 'NSUnknownKeyException',
+    //      reason: '[<TKRegionCity 0x7f957975d000> valueForUndefinedKey:]: this
+    //      class is not key value coding-compliant for the key subtitle.'
+    public let subtitle: String? = nil // Not necessary, but can
+    
     public let isDraggable: Bool = false
     public let pointDisplaysImage: Bool = true
     public let pointImage: TKImage? = TKStyleManager.imageNamed("icon-map-info-city")
