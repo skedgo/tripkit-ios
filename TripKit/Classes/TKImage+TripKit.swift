@@ -28,7 +28,7 @@ extension TKImage {
     #if os(iOS) || os(tvOS)
       return TKImage(named: name, in: TKTripKit.bundle(), compatibleWith: nil)!
     #elseif os(OSX)
-      return bundle.image(forResource: NSImage.Name(rawValue: name))!
+      return bundle.image(forResource: name)!
     #endif
   }
 }
