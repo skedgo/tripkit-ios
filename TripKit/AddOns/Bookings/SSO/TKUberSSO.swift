@@ -79,7 +79,7 @@ public enum TKUberSSO : SSOCompatible {
         preconditionFailure("You shouldn't call `start` if `canHandle(mode:)` returns false")
     }
     
-    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    UIApplication.shared.open(url)
   }
   
   public static func handle(_ url: URL) throws -> OAuthData? {

@@ -46,9 +46,9 @@ extension TKAppleGeocoder: TKGeocoding {
     
     let fullString = TKLocationHelper.expandAbbreviation(inAddressString: input)
     
-    let request = MKLocalSearchRequest()
+    let request = MKLocalSearch.Request()
     request.naturalLanguageQuery = fullString
-    request.region = MKCoordinateRegionForMapRect(mapRect)
+    request.region = MKCoordinateRegion(mapRect)
     return MKLocalSearch(request: request).rx
       .start()
       .map { $0.map { TKNamedCoordinate($0, forInput: input, near: request.region) } }
@@ -78,7 +78,7 @@ extension TKAppleGeocoder: SGGeocoder {
 extension TKAppleGeocoder: TKAutocompleting {
   
   public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]> {
-    completer.region = MKCoordinateRegionForMapRect(mapRect)
+    completer.region = MKCoordinateRegion(mapRect)
     completer.queryFragment = input
     return completerDelegate.results
       .map { $0.enumerated().map { TKAutocompletionResult($1, forInput: input, index: $0) } }
@@ -88,7 +88,7 @@ extension TKAppleGeocoder: TKAutocompleting {
     guard let completion = result.object as? MKLocalSearchCompletion else {
       return Single.error(GeocoderError.unexpectedResult)
     }
-    let request = MKLocalSearchRequest(completion: completion)
+    let request = MKLocalSearch.Request(completion: completion)
     return MKLocalSearch(request: request).rx
       .start()
       .map {

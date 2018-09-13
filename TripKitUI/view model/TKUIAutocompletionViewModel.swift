@@ -35,7 +35,7 @@ class TKUIAutocompletionViewModel {
     searchText: Observable<String>,
     selected: Observable<Item>,
     accessorySelected: Observable<Item>,
-    biasMapRect: MKMapRect = MKMapRectNull
+    biasMapRect: MKMapRect = .null
     ) {
     
     sections = providers

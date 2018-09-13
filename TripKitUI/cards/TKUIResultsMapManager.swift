@@ -95,7 +95,7 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
       if oldPolylines.isEmpty && !newPolylines.isEmpty {
         // Zoom to the new polylines plus 20% padding around them
         let boundingRect = newPolylines.boundingMapRect
-        let zoomToRect = MKMapRectInset(boundingRect, boundingRect.size.width * -0.2, boundingRect.size.height * -0.2)
+        let zoomToRect = boundingRect.insetBy(dx: boundingRect.size.width * -0.2, dy: boundingRect.size.height * -0.2)
         zoom(to: zoomToRect, animated: true)
       }
     }
@@ -168,7 +168,7 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
   }
   
   private func closestRoute(to coordinate: CLLocationCoordinate2D) -> TKUIResultsViewModel.MapRouteItem? {
-    let mapPoint = MKMapPointForCoordinate(coordinate)
+    let mapPoint = MKMapPoint(coordinate)
     return allRoutes
       .filter { $0 != selectedRoute }
       .min { $0.distance(to: mapPoint) < $1.distance(to: mapPoint) }

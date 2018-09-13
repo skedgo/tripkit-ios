@@ -180,7 +180,7 @@ class SGAutocompletionDataSourceSwiftStorage: NSObject {
 
   fileprivate let inputText = Variable<String>("")
 
-  fileprivate var mapRect = MKMapRectNull
+  fileprivate var mapRect = MKMapRect.null
   
   // Outputs
   

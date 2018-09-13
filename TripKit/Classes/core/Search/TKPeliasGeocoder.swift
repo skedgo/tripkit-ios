@@ -65,7 +65,7 @@ extension TKPeliasGeocoder: SGGeocoder {
       return
     }
     
-    let region = MKCoordinateRegionForMapRect(mapRect)
+    let region = MKCoordinateRegion(mapRect)
     var components = URLComponents(string: "https://pelias.tripgo.com/v1/search")
     components?.queryItems = [
       URLQueryItem(name: "text", value: inputString),
@@ -96,7 +96,7 @@ extension TKPeliasGeocoder: SGAutocompletionDataProvider {
       return
     }
 
-    let region = MKCoordinateRegionForMapRect(mapRect)
+    let region = MKCoordinateRegion(mapRect)
     var components = URLComponents(string: "https://pelias.tripgo.com/v1/autocomplete")
     components?.queryItems = [
       URLQueryItem(name: "text", value: string),

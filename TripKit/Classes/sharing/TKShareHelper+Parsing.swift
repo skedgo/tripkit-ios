@@ -277,7 +277,7 @@ extension MKAnnotation {
     }
     
     return Observable.create() { observer in
-      TKBaseGeocoder.geocode(geocodable, using: geocoder, near: MKMapRectWorld) { (result: TKBaseGeocoder.Result) -> Void in
+      TKBaseGeocoder.geocode(geocodable, using: geocoder, near: .world) { (result: TKBaseGeocoder.Result) -> Void in
         switch result {
         case .success:
           observer.onNext(self)

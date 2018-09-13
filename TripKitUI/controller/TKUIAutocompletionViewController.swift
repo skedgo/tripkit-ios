@@ -34,7 +34,7 @@ public class TKUIAutocompletionViewController: UITableViewController {
   
   public var showAccessoryButtons = true
   
-  public var biasMapRect: MKMapRect = MKMapRectNull
+  public var biasMapRect: MKMapRect = .null
 
   private var viewModel: TKUIAutocompletionViewModel!
   private let disposeBag = DisposeBag()

@@ -64,7 +64,7 @@ public class TKUISectionedAlertViewController: UITableViewController {
     }
     
     tableView.register(TKUIGroupedAlertCell.nib, forCellReuseIdentifier: TKUIGroupedAlertCell.cellReuseIdentifier)
-    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 60
     
     let dataSource = RxTableViewSectionedReloadDataSource<TKUISectionedAlertViewModel.Section>(configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in

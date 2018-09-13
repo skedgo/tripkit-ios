@@ -59,7 +59,7 @@ public class TKUIMapManagerHelper: NSObject {
       return segmentOne.duration(true) < segmentTwo.duration(true)
     }
     
-    sorted.forEach { $0.superview?.bringSubview(toFront: $0) }
+    sorted.forEach { $0.superview?.bringSubviewToFront($0) }
   }
   
   public static func shapeAnnotations(for segment: TKSegment)

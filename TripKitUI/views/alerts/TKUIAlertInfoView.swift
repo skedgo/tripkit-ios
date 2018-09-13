@@ -120,7 +120,7 @@ public class TKUIAlertInfoView: UIView {
     layoutIfNeeded()
     
     // This is the height that can just fit everything in the view.
-    let fittingSize = systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+    let fittingSize = systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     
     // Update the frame to assume fitting height.
     frame.size.height = fittingSize.height

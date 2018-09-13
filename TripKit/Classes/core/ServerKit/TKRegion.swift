@@ -48,7 +48,7 @@ public class TKRegion : NSObject, Codable {
     @objc public var centerBiasedMapRect: MKMapRect {
       // centre it on the region's coordinate
       let size = MKMapSize(width: 300_000, height: 400_00)
-      var center = MKMapPointForCoordinate(coordinate)
+      var center = MKMapPoint(coordinate)
       center.x -= size.width / 2
       center.y -= size.height / 2
       return MKMapRect(origin: center, size: size)

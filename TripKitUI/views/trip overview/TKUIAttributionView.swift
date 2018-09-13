@@ -127,7 +127,7 @@ public class TKUIAttributionView: UIView {
     
     if let containingView = view {
       attributionView.frame.size.width = containingView.frame.width
-      attributionView.frame.size.height = attributionView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+      attributionView.frame.size.height = attributionView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
     }
     
     return attributionView
@@ -140,7 +140,7 @@ public class TKUIAttributionView: UIView {
       attributionView.frame.size.width = containingView.frame.width
       attributionView.setNeedsLayout()
       attributionView.layoutIfNeeded()
-      attributionView.frame.size.height = attributionView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+      attributionView.frame.size.height = attributionView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
     }
     
     return attributionView

@@ -37,7 +37,7 @@ public class TKUIAttributionTableViewController: UITableViewController {
 
     tableView.register(TKUIAttributionCell.nib, forCellReuseIdentifier: TKUIAttributionCell.reuseIdentifier)
 
-    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 44
   }
   

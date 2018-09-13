@@ -33,7 +33,7 @@ public class TKUIRoutingSupportView: UIView {
     // Top button
     
     supportView.requestSupportButton.layer.cornerRadius = 8
-    supportView.requestSupportButton.contentEdgeInsets = UIEdgeInsetsMake(8, 24, 8, 24)
+    supportView.requestSupportButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 24, bottom: 8, right: 24)
     supportView.requestSupportButton.setTitle(Loc.RequestSupport.uppercased(), for: .normal)
     supportView.requestSupportButton.backgroundColor = TKStyleManager.globalTintColor()
     supportView.requestSupportButton.tintColor = .white

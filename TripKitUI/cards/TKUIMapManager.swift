@@ -112,12 +112,12 @@ extension TKUIMapManager {
   
   private func addOverlay() {
     guard let polygon = overlayPolygon, isActive, showOverlayPolygon else { return }
-    mapView?.add(polygon, level: .aboveLabels)
+    mapView?.addOverlay(polygon, level: .aboveLabels)
   }
   
   private func removeOverlay(_ polygon: MKPolygon?) {
     guard let polygon = polygon, isActive else { return }
-    mapView?.remove(polygon)
+    mapView?.removeOverlay(polygon)
   }
   
 }

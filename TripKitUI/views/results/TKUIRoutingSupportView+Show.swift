@@ -61,7 +61,7 @@ extension TKUIRoutingSupportView {
     let message = NSMutableAttributedString(string: text)
     
     let attributes = [ .foregroundColor: UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1.0),
-                       .font: font ] as [NSAttributedStringKey : Any]
+                       .font: font ] as [NSAttributedString.Key : Any]
     
     let fromRange = (text as NSString).range(of: fromAddress)
     message.addAttributes(attributes, range: fromRange)

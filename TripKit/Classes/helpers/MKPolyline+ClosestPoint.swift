@@ -35,9 +35,9 @@ public extension MKPolyline {
       let closest: MKMapPoint
       if u < 0.0 { closest = endPointA }
       else if u > 1.0 { closest = endPointB }
-      else { closest = MKMapPointMake(endPointA.x + u * deltaX, endPointA.y + u * deltaY) }
+      else { closest = MKMapPoint(x: endPointA.x + u * deltaX, y: endPointA.y + u * deltaY) }
       
-      let distance = MKMetersBetweenMapPoints(closest, to)
+      let distance = closest.distance(to: to)
       if distance < distanceTo {
         closestPoint = closest
         distanceTo = distance
