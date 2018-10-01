@@ -55,7 +55,7 @@ public enum TKBooking {
   
   public struct Purchase : Codable {
     public let id:          String
-    private let rawPrice:   Double
+    private let rawPrice:   Double?
     public let currency:    String?
     public let productName: String
     public let productType: String
@@ -78,7 +78,8 @@ public enum TKBooking {
       case attribution = "source"
     }
     
-    public var price: NSDecimalNumber {
+    public var price: NSDecimalNumber? {
+      guard let rawPrice = rawPrice else { return nil }
       return NSDecimalNumber(value: rawPrice)
     }
     
