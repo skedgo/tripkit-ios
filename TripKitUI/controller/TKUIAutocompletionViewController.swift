@@ -56,7 +56,7 @@ public class TKUIAutocompletionViewController: UITableViewController {
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIAutocompletionViewModel.Section>(
       configureCell: { [weak self] _, tv, ip, item in
-        guard let `self` = self else {
+        guard let self = self else {
           // Shouldn't but can happen on dealloc
           return UITableViewCell(style: .default, reuseIdentifier: nil)
         }
@@ -84,14 +84,14 @@ public class TKUIAutocompletionViewController: UITableViewController {
     
     viewModel.selection
       .drive(onNext: { [weak self] annotation in
-        guard let `self` = self else { return }
+        guard let self = self else { return }
         self.delegate?.autocompleter(self, didSelect: annotation)
       })
       .disposed(by: disposeBag)
 
     viewModel.accessorySelection
       .drive(onNext: { [weak self] annotation in
-        guard let `self` = self else { return }
+        guard let self = self else { return }
         self.delegate?.autocompleter(self, didSelectAccessoryFor: annotation)
       })
       .disposed(by: disposeBag)
