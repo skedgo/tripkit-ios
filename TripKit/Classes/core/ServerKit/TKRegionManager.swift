@@ -102,7 +102,8 @@ extension TKRegionManager {
       
       // Silently ignore if region didn't change
       guard response.modes != nil, response.regions != nil else {
-        assert(self.response?.hashCode == response.hashCode)
+        // This asset isn't valid, due to race conditions
+        // assert(self.response?.hashCode == response.hashCode)
         return
       }
       

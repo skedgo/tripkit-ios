@@ -103,7 +103,6 @@ public enum TKBooking {
     
   }
 
-  
   public struct Confirmation : Codable {
     
     public let status: Detail
@@ -114,5 +113,3 @@ public enum TKBooking {
   }
   
 }
-
-
