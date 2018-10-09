@@ -210,6 +210,7 @@
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES">
         <attribute name="arrivalTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="budgetPoints" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="currencySymbol" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="departureTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -316,7 +317,7 @@
         <element name="Shape" positionX="637" positionY="531" width="128" height="195"/>
         <element name="StopLocation" positionX="-101" positionY="369" width="128" height="283"/>
         <element name="StopVisits" positionX="124" positionY="243" width="128" height="238"/>
-        <element name="Trip" positionX="315" positionY="-252" width="128" height="405"/>
+        <element name="Trip" positionX="315" positionY="-252" width="128" height="420"/>
         <element name="TripGroup" positionX="99" positionY="-186" width="128" height="195"/>
         <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="238"/>
         <element name="Vehicle" positionX="700" positionY="165" width="128" height="240"/>

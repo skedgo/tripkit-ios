@@ -40,6 +40,7 @@
 @property (nonatomic, retain, nullable) NSNumber * totalWalking;
 @property (nonatomic, retain, nonnull) NSNumber * totalCalories;
 @property (nonatomic, retain, nonnull) NSNumber * totalScore;
+@property (nonatomic, retain, nullable) NSNumber * budgetPoints;
 @property (nonatomic, assign) BOOL toDelete;
 
 @property (nonatomic, retain, nonnull) NSSet *segmentReferences;

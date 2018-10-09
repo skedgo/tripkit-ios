@@ -263,6 +263,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.currencySymbol       = tripDict[@"currencySymbol"]       ?: trip.currencySymbol;
       trip.totalHassle          = tripDict[@"hassleCost"]           ?: trip.totalHassle;
       trip.totalScore           = tripDict[@"weightedScore"]        ?: trip.totalScore;
+      trip.budgetPoints         = tripDict[@"budgetPoints"]         ?: trip.budgetPoints;
       trip.mainSegmentHashCode  = tripDict[@"mainSegmentHashCode"]  ?: trip.mainSegmentHashCode;
       trip.saveURLString        = tripDict[@"saveURL"]              ?: trip.saveURLString;
       trip.shareURLString       = tripDict[@"shareURL"]             ?: trip.shareURLString;
