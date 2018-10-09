@@ -54,21 +54,23 @@ public enum TKBooking {
   
   
   public struct Purchase : Codable {
-    public let id:          String
-    private let rawPrice:   Double?
-    public let currency:    String?
-    public let productName: String
-    public let productType: String
+    public let id:                  String
+    private let rawPrice:           Double?
+    public let currency:            String?
+    public let budgetPoints:        Int?
+    public let productName:         String
+    public let productType:         String
     private let explicitValidity:   Bool?
-    public let validFor:    TimeInterval?
-    public let validFrom:   Date?
-    public let branding:    TSPBranding?
-    public let attribution: API.DataAttribution?
+    public let validFor:            TimeInterval?
+    public let validFrom:           Date?
+    public let branding:            TSPBranding?
+    public let attribution:         API.DataAttribution?
     
     private enum CodingKeys: String, CodingKey {
       case id
       case rawPrice = "price"
       case currency
+      case budgetPoints
       case productName
       case productType
       case explicitValidity = "valid"
