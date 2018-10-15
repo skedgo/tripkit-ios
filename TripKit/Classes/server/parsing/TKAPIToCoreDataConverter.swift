@@ -125,14 +125,20 @@ extension Service {
       let entityName = (visitType == DLSEntry.self) ? "DLSEntry" : "StopVisits"
       visit = E(entity: NSEntityDescription.entity(forEntityName: entityName, in: context)!, insertInto: context)
     }
-    if let start = model.startTime {
-      // we use 'time' to allow KVO
-      visit.time = Date(timeIntervalSince1970: start)
+
+    // Prefer real-time data all fall back to timetable data
+    if let departure = (model.realTimeDeparture ?? model.startTime) {
+      visit.time = Date(timeIntervalSince1970: departure) // we use 'time' to allow KVO
     }
-    if let end = model.endTime {
-      visit.arrival = Date(timeIntervalSince1970: end)
+    if let arrival = (model.realTimeArrival ?? model.endTime) {
+      visit.arrival = Date(timeIntervalSince1970: arrival)
     }
-    visit.originalTime = visit.time
+    
+    // Keep timetable data indicate whether a service is on-time
+    if let timetable = model.startTime {
+      visit.originalTime = Date(timeIntervalSince1970: timetable)
+    }
+    
     visit.searchString = model.searchString
     visit.service = self
     visit.stop = stop

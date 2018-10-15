@@ -26,11 +26,14 @@ extension API {
     public let bicycleAccessible: Bool?
     public let wheelchairAccessible: Bool?
     
+    // real-time information
     public let realTimeStatus: RealTimeStatus?
+    public let realTimeDeparture: TimeInterval?
+    public let realTimeArrival: TimeInterval?
     public let primaryVehicle: Vehicle?
     public let alternativeVehicles: [Vehicle]?
 
-    // information about the departure
+    // static information about the departure
     public let frequency: Int?
     public let searchString: String?
     public let startTime: TimeInterval?
@@ -56,6 +59,8 @@ extension API {
       case frequency
       
       case realTimeStatus
+      case realTimeDeparture
+      case realTimeArrival
       case primaryVehicle = "realtimeVehicle"
       case alternativeVehicles = "realtimeVehicleAlternatives"
       
