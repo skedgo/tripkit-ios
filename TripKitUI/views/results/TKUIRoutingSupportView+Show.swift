@@ -21,14 +21,15 @@ extension TKUIRoutingSupportView {
     for request: TripRequest? = nil,
     in view: UIView,
     aboveSubview: UIView? = nil,
-    topPadding: CGFloat = 0
+    topPadding: CGFloat = 0,
+    allowRequest: Bool
   ) -> TKUIRoutingSupportView {
     // Start fresh
     clear(from: view)
     
     let message = buildPrefilledSupportMessage(for: request) ?? NSAttributedString(string: error.localizedDescription)
     
-    let supportView = TKUIRoutingSupportView.makeView(with: message)
+    let supportView = TKUIRoutingSupportView.makeView(with: message, allowRoutingRequest: allowRequest)
     supportView.backgroundColor = TKStyleManager.backgroundColorForTileList()
     supportView.translatesAutoresizingMaskIntoConstraints = false
     if let above = aboveSubview {
@@ -44,7 +45,6 @@ extension TKUIRoutingSupportView {
     
     return supportView
   }
-  
   
   private static func buildPrefilledSupportMessage(for request: TripRequest?) -> NSAttributedString? {
     guard

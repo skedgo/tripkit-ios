@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,7 +26,7 @@
                     <rect key="frame" x="35" y="317.5" width="250" height="45"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="IhA-8v-WYX"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="h0B-cU-X2T"/>
+                        <constraint firstAttribute="height" constant="45" id="h0B-cU-X2T"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                     <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
@@ -67,6 +67,8 @@
                 <outlet property="imageView" destination="mBq-DR-zMg" id="PDk-ma-HMK"/>
                 <outlet property="planNewTripButton" destination="qhz-mr-0mP" id="4RA-bt-e57"/>
                 <outlet property="requestSupportButton" destination="6oq-UB-fuX" id="YWO-dC-0fS"/>
+                <outlet property="requestSupportButtonHeightConstraint" destination="h0B-cU-X2T" id="llK-7f-B0I"/>
+                <outlet property="requestSupportButtonTopConstraint" destination="bBP-m1-EvI" id="OMI-ps-PH8"/>
                 <outlet property="textLabel" destination="0Jb-2u-V4r" id="udK-XR-5mK"/>
             </connections>
             <point key="canvasLocation" x="-950" y="-270"/>
