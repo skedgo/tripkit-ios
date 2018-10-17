@@ -55,22 +55,6 @@ build_ios_interapp:
   tags:
     - ios
 
-build_ios_bookings:
-  stage: build
-  script:
-    - carthage bootstrap --cache-builds --platform iOS
-    - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitBookings-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
-  cache:
-    key: "$CI_BUILD_REF_NAME" # per-branch caching
-    paths:
-      - Carthage/Build
-      - Carthage/Checkouts
-  artifacts:
-    paths:
-    - build/reports/build_ios_bookings.html
-  tags:
-    - ios
-
 build_mac_base:
   stage: build
   script:
