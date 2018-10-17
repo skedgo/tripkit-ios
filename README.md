@@ -9,7 +9,6 @@ Additional documentation is available on the [TripGo Developer page](http://sked
 
 - TripKit (iOS, iOS extensions, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
 - TripKitUI (iOS, iOS extensions): UI elements for displaying trips on a map and TripGo-styled table cells.
-- TripKitBookings (iOS): User accounts and in-app booking functionality.
 - TripKitInterApp (iOS): Helpers for deep linking into other apps, such as FlitWays, GoCatch, Ingogo, Lyft, Ola and Uber.
 
 ## Installation
@@ -21,7 +20,6 @@ Add desired pods:
 ```ruby
   pod 'TripKit',                '~> 3.1'
   pod 'TripKitUI',              '~> 3.1'
-  pod 'TripKitBookings',        '~> 3.1'
   pod 'TripKitInterApp',        '~> 3.1'
 ```
 
@@ -45,12 +43,6 @@ When doing so, you'll need to add the respective dependencies:
   - Those of TripKit, plus:
   - ASPolylineView
   - Kingfisher
-- TripKitBookings:
-  - Those of TripKitUI, plus:
-  - KeychainAccess
-  - OAuthSwift
-  - KVNProgress
-  - SwiftyJSON
 
 ### Manually
 

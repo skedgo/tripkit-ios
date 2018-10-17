@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+- Removed `TripKitBookings` framework
 - Removed `TGAgendaWidgetInfoView`
 - Removed `X-TripGo-UUID` header being passed along with server calls
 
