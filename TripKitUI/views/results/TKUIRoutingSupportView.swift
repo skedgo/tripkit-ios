@@ -15,9 +15,12 @@ public class TKUIRoutingSupportView: UIView {
   @IBOutlet public internal(set) weak var requestSupportButton: UIButton!
   @IBOutlet public internal(set) weak var planNewTripButton: UIButton!
   
+  @IBOutlet internal(set) weak var requestSupportButtonTopConstraint: NSLayoutConstraint!
+  @IBOutlet internal(set) weak var requestSupportButtonHeightConstraint: NSLayoutConstraint!
+  
   // MARK: - Factory
   
-  public class func makeView(with message: NSAttributedString) -> TKUIRoutingSupportView {
+  public class func makeView(with message: NSAttributedString, allowRoutingRequest: Bool) -> TKUIRoutingSupportView {
     guard let supportView = Bundle(for: self).loadNibNamed(String(describing: self), owner: self, options: nil)?.first as? TKUIRoutingSupportView else {
       preconditionFailure("Unable to load view from nib")
     }
@@ -31,21 +34,24 @@ public class TKUIRoutingSupportView: UIView {
     supportView.textLabel.attributedText = message
     
     // Top button
+    supportView.requestSupportButtonTopConstraint.constant = allowRoutingRequest ? 50 : 0
+    supportView.requestSupportButtonHeightConstraint.constant = allowRoutingRequest ? 45: 0
+    supportView.requestSupportButton.isHidden = !allowRoutingRequest
     
-    supportView.requestSupportButton.layer.cornerRadius = 8
-    supportView.requestSupportButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 24, bottom: 8, right: 24)
-    supportView.requestSupportButton.setTitle(Loc.RequestSupport.uppercased(), for: .normal)
-    supportView.requestSupportButton.backgroundColor = TKStyleManager.globalTintColor()
-    supportView.requestSupportButton.tintColor = .white
+    if allowRoutingRequest {
+      supportView.requestSupportButton.layer.cornerRadius = 8
+      supportView.requestSupportButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 24, bottom: 8, right: 24)
+      supportView.requestSupportButton.setTitle(Loc.RequestSupport.uppercased(), for: .normal)
+      supportView.requestSupportButton.backgroundColor = TKStyleManager.globalTintColor()
+      supportView.requestSupportButton.tintColor = .white
+    }
     
     // Bottom button
-    
     supportView.planNewTripButton.setTitle(Loc.PlanANewTrip.uppercased(), for: .normal)
     supportView.planNewTripButton.backgroundColor = .clear
     supportView.planNewTripButton.tintColor = TKStyleManager.globalTintColor()
     
     // Both buttons
-    
     supportView.requestSupportButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
     supportView.planNewTripButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
     

@@ -196,7 +196,10 @@ public class TKUIResultsCard: TGTableCard {
 
     viewModel.error
       .withLatestFrom(viewModel.request) { ($0, $1) }
-      .drive(onNext: { [weak self] in self?.show($0, for: $1, cardView: cardView, tableView: tableView) })
+      .drive(onNext: { [weak self] in
+        let canHandleRoutingRequest = TKUIResultsCard.config.requestRoutingSupport != nil
+        self?.show($0, for: $1, cardView: cardView, tableView: tableView, allowRequest: canHandleRoutingRequest)
+      })
       .disposed(by: disposeBag)
     
     viewModel.sections

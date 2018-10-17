@@ -72,12 +72,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)showReminderInbookingViewController:(BPKBookingViewController *)controller;
 
 /**
- *  This method is called when an error is encountered during a booking process and user requests
- *  support by tapping the "Contact support" button on an alert.
+ *  This method returns a block to execute when the Contact Support option in an
+ *  alert is pressed in cases of booking error. If no block is returned, the
+ *  Contact Support option will not be presented to the user in the alert. *
  *
  *  @param controller The controller that presents the alert.
+ *
+ *  @return A block to execute when Contact Support is pressed.
  */
-- (void)bookingViewControllerRequestsSupport:(BPKBookingViewController *)controller;
+- (nullable void (^)(void))contactSupportHandlerForBookingViewController:(BPKBookingViewController *)controller;
 
 @end
 

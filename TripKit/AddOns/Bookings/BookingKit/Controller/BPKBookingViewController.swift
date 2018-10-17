@@ -40,9 +40,10 @@ extension BPKBookingViewController {
     }
     
     // Only include Contact support when the delegate method is available.
-    if let requestSupport = self.delegate?.bookingViewControllerRequestsSupport {
-      let contact = UIAlertAction(title: Loc.ContactSupport, style: .default) { [unowned self] _ in
-        requestSupport(self)
+    if let responder = self.delegate?.contactSupportHandler,
+       let handler = responder(self) {
+      let contact = UIAlertAction(title: Loc.ContactSupport, style: .default) { _ in
+        handler()
       }
       BPKAlert.present(in: self, title: serverKitError.title, message: serverKitError.localizedDescription, actions: [recoveryAction, contact, cancel])
     } else {

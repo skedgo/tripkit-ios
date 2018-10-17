@@ -347,8 +347,7 @@
        [self handle:error defaultDismissHandler:^(UIAlertAction * _Nonnull action) {
          [strongSelf.navigationController popViewControllerAnimated:YES];
        }];
-//       [self handle:error];
-       
+
      } else if (rawForm != nil) {
        if ([BPKForm canBuildFormFromRawObject:rawForm]) {
          BPKForm *form = [[BPKForm alloc] initWithJSON:rawForm];
@@ -360,11 +359,10 @@
          NSString *message = [NSString stringWithFormat:@"%@, code: %@", userError[@"error"], userError[@"errorCode"]];
          [BPKHelpers presentAlertFromController:strongSelf withMessage:message];
        }
-       
+
      } else {
        // No form and no error means we've reached the end
        [strongSelf.delegate bookingViewController:strongSelf didComplete:YES withManager:strongSelf.manager];
-       
      }
      
      if (completion) {
