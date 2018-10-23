@@ -757,6 +757,20 @@
 			remoteGlobalIDString = 3AB6C61F1D1CD0060089F687;
 			remoteInfo = "TripKit-iOS";
 		};
+		3AA4A2C7217F71A300A3A6A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A6DF083202C8DA30084CB2C;
+			remoteInfo = "TripKitUI-iOS";
+		};
+		3AA4A2C9217F71A700A3A6A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A6DF166202C97F60084CB2C;
+			remoteInfo = "TripKitInterApp-iOS";
+		};
 		3AB6C62C1D1CD0060089F687 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
@@ -2585,6 +2599,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				3AA4A2CA217F71A700A3A6A8 /* PBXTargetDependency */,
+				3AA4A2C8217F71A300A3A6A8 /* PBXTargetDependency */,
 				3AB6C62D1D1CD0060089F687 /* PBXTargetDependency */,
 			);
 			name = TripKitTests;
@@ -2763,11 +2779,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ASPolygonKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ASPolylineView.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/KVNProgress.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/OAuthSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TGCardViewController.framework",
@@ -2780,18 +2792,14 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolygonKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolylineView.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainAccess.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KVNProgress.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OAuthSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxDataSources.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TGCardViewController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3331,6 +3339,16 @@
 			isa = PBXTargetDependency;
 			target = 3AB6C61F1D1CD0060089F687 /* TripKit-iOS */;
 			targetProxy = 3A6DF172202C985B0084CB2C /* PBXContainerItemProxy */;
+		};
+		3AA4A2C8217F71A300A3A6A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A6DF083202C8DA30084CB2C /* TripKitUI-iOS */;
+			targetProxy = 3AA4A2C7217F71A300A3A6A8 /* PBXContainerItemProxy */;
+		};
+		3AA4A2CA217F71A700A3A6A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A6DF166202C97F60084CB2C /* TripKitInterApp-iOS */;
+			targetProxy = 3AA4A2C9217F71A700A3A6A8 /* PBXContainerItemProxy */;
 		};
 		3AB6C62D1D1CD0060089F687 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
