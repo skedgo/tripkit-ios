@@ -24,26 +24,6 @@
   });
 }
 
-- (NSString *)appGroupName
-{
-  return self.configuration[@"AppGroupName"];
-}
-
-- (BOOL)betaFeaturesAvailable
-{
-  return [self.configuration[@"BetaFeaturesAvailable"] boolValue];
-}
-
-- (BOOL)accountsAvailable
-{
-  return [self.configuration[@"AccountsAvailable"] boolValue];
-}
-
-- (BOOL)bookingAvailable
-{
-  return [self.configuration[@"BookingAvailable"] boolValue];
-}
-
 - (NSDictionary *)configuration
 {
   if (!_configuration) {

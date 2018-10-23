@@ -12,6 +12,17 @@ extension TKConfig {
   
   public static let shared = TKConfig.__sharedInstance()
   
+}
+
+// MARK: - Basic app configuration
+
+extension TKConfig {
+
+  @objc
+  public var appGroupName: String? {
+    return configuration["AppGroupName"] as? String
+  }
+
   @objc
   public var appURLScheme: String? {
     return configuration["URLScheme"] as? String

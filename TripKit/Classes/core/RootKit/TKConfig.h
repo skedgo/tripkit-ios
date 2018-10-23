@@ -13,11 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (TKConfig *)sharedInstance NS_REFINED_FOR_SWIFT;
 
-- (nullable NSString *)appGroupName;
-- (BOOL)betaFeaturesAvailable;
-- (BOOL)accountsAvailable;
-- (BOOL)bookingAvailable;
-
 // Colors
 - (NSDictionary *)globalTintColor;
 - (NSDictionary *)globalAccentColor;
