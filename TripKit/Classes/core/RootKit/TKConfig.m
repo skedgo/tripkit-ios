@@ -24,42 +24,6 @@
   });
 }
 
-- (NSString *)appGroupName
-{
-  return self.configuration[@"AppGroupName"];
-}
-
-- (NSURL *)oauthCallbackURL
-{
-  NSString *URLString = self.configuration[@"OAuthCallbackURL"];
-  if (URLString) {
-    return [NSURL URLWithString:URLString];
-  } else {
-    return nil;
-  }
-}
-
-- (NSString *)appURLScheme
-{
-  NSString *specified = self.configuration[@"URLScheme"];
-  return specified != nil ? specified : @"tripgo";
-}
-
-- (BOOL)betaFeaturesAvailable
-{
-  return [self.configuration[@"BetaFeaturesAvailable"] boolValue];
-}
-
-- (BOOL)accountsAvailable
-{
-  return [self.configuration[@"AccountsAvailable"] boolValue];
-}
-
-- (BOOL)bookingAvailable
-{
-  return [self.configuration[@"BookingAvailable"] boolValue];
-}
-
 - (NSDictionary *)configuration
 {
   if (!_configuration) {
