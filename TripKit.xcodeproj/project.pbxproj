@@ -246,6 +246,7 @@
 		3AA800F12187079C008CFB6D /* ShareCarAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800EF2187079C008CFB6D /* ShareCarAPIModel.swift */; };
 		3AA800F621870DB6008CFB6D /* TKAvailabilityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800F521870DB6008CFB6D /* TKAvailabilityFetcher.swift */; };
 		3AA800F721870DB6008CFB6D /* TKAvailabilityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800F521870DB6008CFB6D /* TKAvailabilityFetcher.swift */; };
+		3AA800FD218743BC008CFB6D /* TKBookingAvailabilityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800FC218743BC008CFB6D /* TKBookingAvailabilityTest.swift */; };
 		3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */; };
 		3AA923F620DA7CDA00EBDDC6 /* TGCardView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */; };
 		3AA923F820DA8E0400EBDDC6 /* TGCardViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */; };
@@ -1044,6 +1045,7 @@
 		3AA800ED2186F561008CFB6D /* TKUISheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISheetViewController.swift; sourceTree = "<group>"; };
 		3AA800EF2187079C008CFB6D /* ShareCarAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCarAPIModel.swift; sourceTree = "<group>"; };
 		3AA800F521870DB6008CFB6D /* TKAvailabilityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAvailabilityFetcher.swift; sourceTree = "<group>"; };
+		3AA800FC218743BC008CFB6D /* TKBookingAvailabilityTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKBookingAvailabilityTest.swift; sourceTree = "<group>"; };
 		3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+ProductName.swift"; sourceTree = "<group>"; };
 		3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TGCardView+Rx.swift"; sourceTree = "<group>"; };
 		3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TGCardViewController.framework; path = Carthage/Build/iOS/TGCardViewController.framework; sourceTree = "<group>"; };
@@ -1762,6 +1764,7 @@
 			isa = PBXGroup;
 			children = (
 				3AA3CE94202CD4D100E54859 /* TKAlertModelTest.swift */,
+				3AA800FC218743BC008CFB6D /* TKBookingAvailabilityTest.swift */,
 				3AA3CE96202CD4D100E54859 /* TKBookingDecodingTest.swift */,
 				3AA3CE9B202CD4D100E54859 /* TKBuzzInfoProviderTest.swift */,
 				3AA3CE9D202CD4D100E54859 /* TKDeparturesModelTest.swift */,
@@ -3318,6 +3321,7 @@
 				3AA3CEB5202CD4D100E54859 /* TKGeocoderTest.swift in Sources */,
 				3AA3CEB2202CD4D100E54859 /* TKGeoJSONTest.swift in Sources */,
 				3AA3CEBD202CD4D100E54859 /* TKPolylineDecoderTest.swift in Sources */,
+				3AA800FD218743BC008CFB6D /* TKBookingAvailabilityTest.swift in Sources */,
 				3AA3CED0202CD4D100E54859 /* TKCustomEventRecurrenceTest.swift in Sources */,
 				3AA3CEB9202CD4D100E54859 /* TKAlertModelTest.swift in Sources */,
 				3AA3CEB7202CD4D100E54859 /* TKWaypointRouterTest.swift in Sources */,

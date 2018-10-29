@@ -15,13 +15,13 @@ public class TKAvailabilityFetcher: NSObject {
     super.init()
   }
   
-  public struct CarAvailability: Codable {
+  public struct CarAvailability: Codable, Hashable {
     public let car: API.SharedCar
     public let availability: API.BookingAvailability
   }
   
   public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion) -> Single<[CarAvailability]> {
-
+    #warning("FIXME: Hit backend!")
     return .just(TKAvailabilityFetcher.Response.fake.cars)
     
 //    let paras: [String: Any] = [:]

@@ -12,7 +12,7 @@ import Foundation
 
 extension API {
   
-  public struct SharedCar : Codable, Equatable {
+  public struct SharedCar : Codable, Hashable {
     public let identifier: String?
     public let name: String?
     public let description: String?
@@ -22,14 +22,14 @@ extension API {
     public let fuelLevel: Int?
   }
   
-  public struct BookingAvailability: Codable, Equatable {
+  public struct BookingAvailability: Codable, Hashable {
     public enum Status: String, Codable {
       case available = "AVAILABLE"
       case notAvailable = "NOT_AVAILABLE"
       case unknown = "UNKNOWN"
     }
     
-    public struct Interval: Codable, Equatable {
+    public struct Interval: Codable, Hashable {
       public let status: Status
       public let start: Date?
       public let end: Date?
@@ -48,9 +48,24 @@ extension API.BookingAvailability {
     return intervals.first { $0.contains(date) }
   }
   
-  public func getAvailability(start: Date, end: Date) -> API.BookingAvailability.Interval? {
-    // TODO: This logic is likely broken
-    return intervals.first { $0.contains(start) && $0.contains(end) }
+  public func getStatus(start: Date, end: Date) -> API.BookingAvailability.Status {
+    let overlaps = intervals
+      .filter { $0.overlaps(start: start, end: end) }
+      .map { $0.status }
+    
+    // simple cases
+    guard overlaps.count > 0, let first = overlaps.first else { return .unknown }
+    guard overlaps.count > 1 else { return first }
+    
+    // if multiple overlaps, take the most pessimistic
+    if overlaps.contains(.notAvailable) {
+      return .notAvailable
+    } else if overlaps.contains(.unknown) {
+      return .unknown
+    } else {
+      assert(overlaps.contains(.available))
+      return .available
+    }
   }
 }
 
@@ -58,12 +73,26 @@ extension API.BookingAvailability.Interval {
   fileprivate func contains(_ date: Date) -> Bool {
     if let start = start {
       if let end = end {
-        return start <= date && date <= end
+        return start <= date && date < end
       } else {
         return start <= date
       }
     } else if let end = end {
-      return date <= end
+      return date < end
+    } else {
+      return true
+    }
+  }
+  
+  fileprivate func overlaps(start: Date, end: Date) -> Bool {
+    if let myStart = self.start {
+      if let myEnd = self.end {
+        return myStart < end && start < myEnd
+      } else {
+        return myStart < end
+      }
+    } else if let myEnd = self.end {
+      return start < myEnd
     } else {
       return true
     }
