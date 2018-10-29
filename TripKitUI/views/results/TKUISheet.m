@@ -10,9 +10,12 @@
 
 #ifdef TK_NO_MODULE
 #import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#else
+@import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
-#import "TripKit/TripKit-Swift.h"
 
 @interface TKUISheet ()
 
