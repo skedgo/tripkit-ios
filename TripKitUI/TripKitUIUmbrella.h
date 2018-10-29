@@ -30,7 +30,6 @@
 
 // TripKit UI
 #import "TKUITimePickerSheet.h"
-#import "TKUISheetViewController.h"
 
 // Could be internal, but used by Swift internally, must expose
 #import "TKUIVehicleView.h"
