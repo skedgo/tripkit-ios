@@ -114,12 +114,12 @@ extension TKBuzzInfoProvider {
   /**
    Asynchronously fetches transit alerts for the provided region using Rx.
    */
-  public class func rx_fetchTransitAlerts(forRegion region: TKRegion) -> Observable<[API.Alert]> {
+  public class func rx_fetchTransitAlerts(forRegion region: TKRegion) -> Single<[API.Alert]> {
     return rx_fetchTransitAlertMappings(forRegion: region)
       .map { $0.map {$0.alert} }
   }
   
-  public class func rx_fetchTransitAlertMappings(forRegion region: TKRegion) -> Observable<[API.AlertMapping]> {
+  public class func rx_fetchTransitAlertMappings(forRegion region: TKRegion) -> Single<[API.AlertMapping]> {
     let paras: [String: Any] = [
       "region": region.name,
       "v": TKSettings.defaultDictionary()["v"] as! Int
@@ -128,13 +128,14 @@ extension TKBuzzInfoProvider {
     return TKServer.shared.rx
       .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
       .map { (_, _, data) -> [API.AlertMapping] in
+        guard let data = data else { return [] }
         let decoder = JSONDecoder()
         // This will need adjusting down the track (when using ISO8601)
         decoder.dateDecodingStrategy = .secondsSince1970
-        guard let data = data else { return [] }
         let response = try decoder.decode(AlertsTransitResponse.self, from: data)
         return response.alerts
       }
+      .asSingle()
   }
   
   // MARK: - Accessibility

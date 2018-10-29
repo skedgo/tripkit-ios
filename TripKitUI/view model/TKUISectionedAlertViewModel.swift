@@ -31,7 +31,7 @@ class TKUISectionedAlertViewModel {
       .rx_fetchTransitAlertMappings(forRegion: region)
       .map { TKUISectionedAlertViewModel.groupAlertMappings($0) }
     
-    state = Observable.combineLatest(allRouteAlerts, searchText.startWith("")) { TKUISectionedAlertViewModel.buildSections(from: $0, filter: $1) }
+    state = Observable.combineLatest(allRouteAlerts.asObservable(), searchText.startWith("")) { TKUISectionedAlertViewModel.buildSections(from: $0, filter: $1) }
       .asDriver(onErrorJustReturn: [])
       .map { sections -> State in
         return .content(sections)
