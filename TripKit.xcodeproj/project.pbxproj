@@ -626,6 +626,11 @@
 		3AFD397E20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD397C20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift */; };
 		3AFD398220D9510F00FDC7D0 /* TKUICustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */; };
 		3AFD70BD1E558BC800F6B06F /* PricingTableAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD70BC1E558BC800F6B06F /* PricingTableAPIModel.swift */; };
+		3AFEBA91219068FA002FD3C7 /* RxAtomic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFEBA90219068F9002FD3C7 /* RxAtomic.framework */; };
+		3AFEBA9221906926002FD3C7 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3348266205BE2B000CA5917 /* RxDataSources.framework */; };
+		3AFEBA932190698B002FD3C7 /* RxAtomic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFEBA90219068F9002FD3C7 /* RxAtomic.framework */; };
+		3AFEBA942190698C002FD3C7 /* RxAtomic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFEBA90219068F9002FD3C7 /* RxAtomic.framework */; };
+		3AFEBA96219069D2002FD3C7 /* RxAtomic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFEBA95219069D2002FD3C7 /* RxAtomic.framework */; };
 		3AFFAB161F06849500147990 /* Shared.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AFFAB141F06849500147990 /* Shared.strings */; };
 		3AFFAB241F0684CC00147990 /* TripKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFFAB231F0684CC00147990 /* TripKit.xcassets */; };
 		3AFFAB871F06854F00147990 /* TKActions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB271F06854F00147990 /* TKActions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -717,7 +722,6 @@
 		3AFFAE081F06BA1500147990 /* Trip+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE071F06BA1500147990 /* Trip+Shareable.swift */; };
 		3AFFAE0A1F06BA3700147990 /* TripRequest+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE091F06BA3700147990 /* TripRequest+Shareable.swift */; };
 		3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE0B1F06BCF200147990 /* Service.swift */; };
-		D31F511B2068BE4F00FB4CE1 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F511A2068BE4F00FB4CE1 /* RxDataSources.framework */; };
 		D31F51252068C27200FB4CE1 /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F51242068C27200FB4CE1 /* Differentiator.framework */; };
 		D3211335206BBAF300E5D929 /* TKUILoadingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3211334206BBAF300E5D929 /* TKUILoadingAlertView.swift */; };
 		D3211337206BBB0600E5D929 /* TKUILoadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3211336206BBB0600E5D929 /* TKUILoadingAlertView.xib */; };
@@ -854,21 +858,13 @@
 		3A6DAED4204040B2009282FE /* Loc+TripKitUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loc+TripKitUI.swift"; sourceTree = "<group>"; };
 		3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-Nuremberg.json"; sourceTree = "<group>"; };
 		3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-Vancouver.json"; sourceTree = "<group>"; };
-		3A6DF05E202C88E90084CB2C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
-		3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = Carthage/Build/iOS/ASPolygonKit.framework; sourceTree = "<group>"; };
-		3A6DF062202C89180084CB2C /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		3A6DF068202C8C340084CB2C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A6DF069202C8C340084CB2C /* TripKitUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitUI.podspec; sourceTree = "<group>"; };
 		3A6DF06A202C8C340084CB2C /* TripKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKit.podspec; sourceTree = "<group>"; };
 		3A6DF070202C8C6E0084CB2C /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A6DF078202C8C990084CB2C /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
-		3A6DF079202C8C990084CB2C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
-		3A6DF07A202C8C990084CB2C /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = Carthage/Build/Mac/ASPolygonKit.framework; sourceTree = "<group>"; };
 		3A6DF084202C8DA30084CB2C /* TripKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF086202C8DA30084CB2C /* TripKitUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKitUI.h; sourceTree = "<group>"; };
 		3A6DF087202C8DA30084CB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A6DF090202C8E280084CB2C /* ASPolylineView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolylineView.framework; path = Carthage/Build/iOS/ASPolylineView.framework; sourceTree = "<group>"; };
-		3A6DF091202C8E280084CB2C /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		3A6DF0A3202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomToAnnotations.h"; sourceTree = "<group>"; };
 		3A6DF0A7202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomToAnnotations.m"; sourceTree = "<group>"; };
 		3A6DF0A9202C8EB80084CB2C /* TKUIMapButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIMapButtonView.swift; sourceTree = "<group>"; };
@@ -929,10 +925,6 @@
 		3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKInterAppCommunicator.m; sourceTree = "<group>"; };
 		3A6DF179202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TKConfig+TKInterAppCommunicator.m"; sourceTree = "<group>"; };
 		3A6DF17A202C98AF0084CB2C /* TKInterAppCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKInterAppCommunicator.h; sourceTree = "<group>"; };
-		3A6DF2E9202C9B210084CB2C /* OAuthSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuthSwift.framework; path = Carthage/Build/iOS/OAuthSwift.framework; sourceTree = "<group>"; };
-		3A6DF2EA202C9B210084CB2C /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
-		3A6DF2EB202C9B210084CB2C /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
-		3A6DF2F2202C9EA90084CB2C /* KVNProgress.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KVNProgress.framework; path = Carthage/Build/iOS/KVNProgress.framework; sourceTree = "<group>"; };
 		3A6E7D3E20EFBD4800013253 /* TKUISegmentMovingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentMovingCell.swift; sourceTree = "<group>"; };
 		3A6E7D3F20EFBD4800013253 /* TKUISegmentMovingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentMovingCell.xib; sourceTree = "<group>"; };
 		3A787EC31D38F646009F9A18 /* TKJSONCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
@@ -996,10 +988,6 @@
 		3AA3CE65202CD24100E54859 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
 		3AA3CE6C202CD25700E54859 /* ASPolylineView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolylineView.framework; path = Carthage/Build/iOS/ASPolylineView.framework; sourceTree = "<group>"; };
 		3AA3CE6D202CD25700E54859 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
-		3AA3CE78202CD28600E54859 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
-		3AA3CE79202CD28600E54859 /* KVNProgress.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KVNProgress.framework; path = Carthage/Build/iOS/KVNProgress.framework; sourceTree = "<group>"; };
-		3AA3CE7A202CD28600E54859 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
-		3AA3CE7B202CD28600E54859 /* OAuthSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuthSwift.framework; path = Carthage/Build/iOS/OAuthSwift.framework; sourceTree = "<group>"; };
 		3AA3CE80202CD2A700E54859 /* Cartfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Cartfile; sourceTree = "<group>"; };
 		3AA3CE84202CD4D100E54859 /* TKTTPifierTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTTPifierTest.swift; sourceTree = "<group>"; };
 		3AA3CE86202CD4D100E54859 /* TKShareHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKShareHelperTest.swift; sourceTree = "<group>"; };
@@ -1178,6 +1166,8 @@
 		3AFD397C20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRegionOverlayHelper.swift; sourceTree = "<group>"; };
 		3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICustomization.swift; sourceTree = "<group>"; };
 		3AFD70BC1E558BC800F6B06F /* PricingTableAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricingTableAPIModel.swift; sourceTree = "<group>"; };
+		3AFEBA90219068F9002FD3C7 /* RxAtomic.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAtomic.framework; path = Carthage/Build/iOS/RxAtomic.framework; sourceTree = "<group>"; };
+		3AFEBA95219069D2002FD3C7 /* RxAtomic.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAtomic.framework; path = Carthage/Build/Mac/RxAtomic.framework; sourceTree = "<group>"; };
 		3AFF209A1D1CD4F0008BCD9F /* TripKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TripKit-Prefix.pch"; sourceTree = "<group>"; };
 		3AFFAB151F06849500147990 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Shared.strings; sourceTree = "<group>"; };
 		3AFFAB171F06849D00147990 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Shared.strings; sourceTree = "<group>"; };
@@ -1282,7 +1272,6 @@
 		3AFFAE071F06BA1500147990 /* Trip+Shareable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Trip+Shareable.swift"; sourceTree = "<group>"; };
 		3AFFAE091F06BA3700147990 /* TripRequest+Shareable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TripRequest+Shareable.swift"; sourceTree = "<group>"; };
 		3AFFAE0B1F06BCF200147990 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		D31F511A2068BE4F00FB4CE1 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		D31F51242068C27200FB4CE1 /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
 		D3211334206BBAF300E5D929 /* TKUILoadingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUILoadingAlertView.swift; sourceTree = "<group>"; };
 		D3211336206BBB0600E5D929 /* TKUILoadingAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUILoadingAlertView.xib; sourceTree = "<group>"; };
@@ -1309,6 +1298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA3CE66202CD24100E54859 /* ASPolygonKit.framework in Frameworks */,
+				3AFEBA96219069D2002FD3C7 /* RxAtomic.framework in Frameworks */,
 				3AA3CE67202CD24100E54859 /* RxSwift.framework in Frameworks */,
 				3AA3CE68202CD24100E54859 /* RxCocoa.framework in Frameworks */,
 			);
@@ -1321,6 +1311,7 @@
 				3AA3CE69202CD25700E54859 /* ASPolygonKit.framework in Frameworks */,
 				3AA3CE6E202CD25700E54859 /* ASPolylineView.framework in Frameworks */,
 				3AA3CE6F202CD25700E54859 /* Kingfisher.framework in Frameworks */,
+				3AFEBA932190698B002FD3C7 /* RxAtomic.framework in Frameworks */,
 				3AA3CE6B202CD25700E54859 /* RxSwift.framework in Frameworks */,
 				3AA3CE6A202CD25700E54859 /* RxCocoa.framework in Frameworks */,
 				D3348267205BE2B000CA5917 /* RxDataSources.framework in Frameworks */,
@@ -1333,6 +1324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA3CE70202CD26800E54859 /* ASPolygonKit.framework in Frameworks */,
+				3AFEBA942190698C002FD3C7 /* RxAtomic.framework in Frameworks */,
 				3AA3CE72202CD26800E54859 /* RxSwift.framework in Frameworks */,
 				3AA3CE71202CD26800E54859 /* RxCocoa.framework in Frameworks */,
 			);
@@ -1343,6 +1335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA3CE60202CD22F00E54859 /* ASPolygonKit.framework in Frameworks */,
+				3AFEBA91219068FA002FD3C7 /* RxAtomic.framework in Frameworks */,
 				3AA3CE62202CD22F00E54859 /* RxSwift.framework in Frameworks */,
 				3AA3CE61202CD22F00E54859 /* RxCocoa.framework in Frameworks */,
 			);
@@ -1354,9 +1347,9 @@
 			files = (
 				3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */,
 				3AE194E5202DE32E0007B49B /* RxBlocking.framework in Frameworks */,
+				3AFEBA9221906926002FD3C7 /* RxDataSources.framework in Frameworks */,
 				3AE194E6202DE32E0007B49B /* RxTest.framework in Frameworks */,
 				D31F51252068C27200FB4CE1 /* Differentiator.framework in Frameworks */,
-				D31F511B2068BE4F00FB4CE1 /* RxDataSources.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2267,16 +2260,13 @@
 		BF0D12F3CE39D82551585DB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AFEBA90219068F9002FD3C7 /* RxAtomic.framework */,
+				3AFEBA95219069D2002FD3C7 /* RxAtomic.framework */,
 				3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */,
 				D31F51242068C27200FB4CE1 /* Differentiator.framework */,
 				D3348266205BE2B000CA5917 /* RxDataSources.framework */,
-				D31F511A2068BE4F00FB4CE1 /* RxDataSources.framework */,
 				3AE194E3202DE32D0007B49B /* RxBlocking.framework */,
 				3AE194E4202DE32E0007B49B /* RxTest.framework */,
-				3AA3CE7A202CD28600E54859 /* KeychainAccess.framework */,
-				3AA3CE79202CD28600E54859 /* KVNProgress.framework */,
-				3AA3CE7B202CD28600E54859 /* OAuthSwift.framework */,
-				3AA3CE78202CD28600E54859 /* SwiftyJSON.framework */,
 				3AA3CE6C202CD25700E54859 /* ASPolylineView.framework */,
 				3AA3CE6D202CD25700E54859 /* Kingfisher.framework */,
 				3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */,
@@ -2285,18 +2275,6 @@
 				3AA3CE5F202CD22F00E54859 /* RxSwift.framework */,
 				3AA3CE63202CD24100E54859 /* ASPolygonKit.framework */,
 				3AA3CE64202CD24100E54859 /* RxSwift.framework */,
-				3A6DF2F2202C9EA90084CB2C /* KVNProgress.framework */,
-				3A6DF2EB202C9B210084CB2C /* KeychainAccess.framework */,
-				3A6DF2E9202C9B210084CB2C /* OAuthSwift.framework */,
-				3A6DF2EA202C9B210084CB2C /* SwiftyJSON.framework */,
-				3A6DF090202C8E280084CB2C /* ASPolylineView.framework */,
-				3A6DF091202C8E280084CB2C /* Kingfisher.framework */,
-				3A6DF07A202C8C990084CB2C /* ASPolygonKit.framework */,
-				3A6DF062202C89180084CB2C /* RxCocoa.framework */,
-				3A6DF05F202C88E90084CB2C /* ASPolygonKit.framework */,
-				3A6DF05E202C88E90084CB2C /* RxSwift.framework */,
-				3A6DF078202C8C990084CB2C /* RxCocoa.framework */,
-				3A6DF079202C8C990084CB2C /* RxSwift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2779,6 +2757,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TGCardViewController.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxAtomic.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
@@ -2792,6 +2771,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxDataSources.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TGCardViewController.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxAtomic.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
