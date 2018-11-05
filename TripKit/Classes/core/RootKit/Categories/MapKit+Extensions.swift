@@ -11,6 +11,8 @@ import MapKit
 import CoreLocation
 
 extension CLLocationCoordinate2D {
+  public static let invalid = kCLLocationCoordinate2DInvalid
+  
   public var isValid: Bool {
     let suspicious = (abs(latitude) < 0.01 && abs(longitude) < 0.01)
     assert(!suspicious, "Suspicious coordinate: \(self)")
