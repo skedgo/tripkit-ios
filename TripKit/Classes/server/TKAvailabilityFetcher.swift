@@ -10,42 +10,34 @@ import Foundation
 
 import RxSwift
 
-public class TKAvailabilityFetcher: NSObject {
-  private override init() {
-    super.init()
-  }
-  
-  public struct CarAvailability: Codable, Hashable {
-    public let car: API.SharedCar
-    public let availability: API.BookingAvailability
-  }
-  
-  public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion) -> Single<[CarAvailability]> {
-    #warning("FIXME: Hit backend!")
-    return .just(TKAvailabilityFetcher.Response.fake.cars)
+extension TKBuzzInfoProvider {
+  @available(iOS 10.0, *)
+  public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion) -> Single<[API.CarAvailability]> {
     
-//    let paras: [String: Any] = [:]
-//    return TKServer.shared.rx
-//      .hit(.GET, path: "/availabilities", parameters: paras, region: region)
-//      .asSingle()
-//      .map { _, _, data -> [CarAvailability] in
-//        guard let data = data else { return [] }
-//        let decoder = JSONDecoder()
-//        // This will need adjusting down the track (when using ISO8601)
-//        decoder.dateDecodingStrategy = .secondsSince1970
-//        return try decoder.decode(TKAvailabilityFetcher.Response.self, from: data).cars
-//      }
+    //    return .just(TKBuzzInfoProvider.AvailabilityResponse.fake.cars)
+    
+    let paras: [String: Any] = [ "identifier": locationId, "region": region.name ]
+    return TKServer.shared.rx
+      .hit(.GET, path: "locationInfo.json", parameters: paras, region: region)
+      .asSingle()
+      .map { _, _, data -> [API.CarAvailability] in
+        guard let data = data else { return [] }
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let info = try decoder.decode(API.LocationInfo.self, from: data)
+        return info.carPod?.availabilities ?? []
+      }
   }
 }
 
-fileprivate extension TKAvailabilityFetcher {
-  struct Response: Codable {
-    let cars: [CarAvailability]
+fileprivate extension TKBuzzInfoProvider {
+  struct AvailabilityResponse: Codable {
+    let cars: [API.CarAvailability]
   }
 }
 
-extension TKAvailabilityFetcher.Response {
-  fileprivate static var fake: TKAvailabilityFetcher.Response = {
+extension TKBuzzInfoProvider.AvailabilityResponse {
+  fileprivate static var fake: TKBuzzInfoProvider.AvailabilityResponse = {
     let now = Date().timeIntervalSince1970
     let end1 = now  + TimeInterval.random(in: (1...5)) * 3600
     let end2 = end1 + TimeInterval.random(in: (3...10)) * 3600
@@ -109,6 +101,6 @@ extension TKAvailabilityFetcher.Response {
     let data = fake.data(using: .utf8)!
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .secondsSince1970
-    return try! decoder.decode(TKAvailabilityFetcher.Response.self, from: data)
+    return try! decoder.decode(TKBuzzInfoProvider.AvailabilityResponse.self, from: data)
   }()
 }

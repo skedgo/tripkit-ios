@@ -45,8 +45,8 @@ extension API {
   public struct CarPodInfo : Codable, Equatable {
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
-    public let vehicles: [API.SharedCar]?
-
+    
+    public let availabilities: [API.CarAvailability]?
     public let inService: Bool?
     public let availableVehicles: Int?
     public let availableChargingSpaces: Int?
@@ -56,7 +56,7 @@ extension API {
     private enum CodingKeys: String, CodingKey {
       case identifier
       case operatorInfo = "operator"
-      case vehicles
+      case availabilities
       case inService
       case availableVehicles
       case availableChargingSpaces

@@ -9,6 +9,7 @@
 import Foundation
 
 import RxSwift
+import RxCocoa
 
 public extension Reactive where Base : TKLocationManager {
   

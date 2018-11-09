@@ -39,6 +39,12 @@ extension API {
     public let intervals: [Interval]
   }
   
+  public struct CarAvailability: Codable, Hashable {
+    public let car: SharedCar
+    public let availability: BookingAvailability?
+    public let bookingURL: String?
+  }
+  
 }
 
 // MARK: - Convenience functions
