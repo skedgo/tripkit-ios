@@ -43,6 +43,7 @@ extension API {
     public let car: SharedCar
     public let availability: BookingAvailability?
     public let bookingURL: String?
+    public let bookInApp: Bool?
   }
   
 }
