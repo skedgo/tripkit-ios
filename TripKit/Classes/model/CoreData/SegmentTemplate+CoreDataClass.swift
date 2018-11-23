@@ -116,9 +116,11 @@ extension SegmentTemplate {
 // MARK: - Computed properties (from data)
 
 struct SegmentTemplateData: Codable {
+  
   var miniInstruction: TKMiniInstruction? = nil
   var modeInfo: TKModeInfo? = nil
   var turnByTurnMode: TKTurnByTurnMode? = nil
+  var localCost: TKLocalCost? = nil
   
   static func from(data: Data) -> SegmentTemplateData {
     do {
@@ -152,6 +154,11 @@ extension SegmentTemplate {
   public var turnByTurnMode: TKTurnByTurnMode? {
     get { return segmentTemplateData.turnByTurnMode }
     set { edit { $0.turnByTurnMode = newValue} }
+  }
+  
+  public var localCost: TKLocalCost? {
+    get { return segmentTemplateData.localCost }
+    set { edit { $0.localCost = newValue } }
   }
   
   private func edit(_ mutator: (inout SegmentTemplateData) -> Void) {

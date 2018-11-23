@@ -17,10 +17,10 @@ extension SegmentTemplate {
     // Only show relevant segments
     let visibility = segmentVisibilityType(from: dict)
     guard visibility != .hidden else { return nil }
-    
+     
     // Make sure we got good data
     guard
-      let segmentType = self.segmentType(from: dict)
+      let segmentType = segmentType(from: dict)
       else {
         assertionFailure("Segment dictionary is missing critical information")
         return nil
@@ -43,6 +43,7 @@ extension SegmentTemplate {
     template.modeInfo         = TKModeInfo.modeInfo(for: dict["modeInfo"] as? [String: Any])
     template.miniInstruction  = TKMiniInstruction.instruction(for: dict["mini"] as? [String: Any])
     template.turnByTurnMode   = TKTurnByTurnMode(rawValue: dict["turn-by-turn"] as? String ?? "")
+    template.localCost        = TKLocalCost.newInstance(from: dict["localCost"] as? [String: Any])
     
     template.notesRaw         = dict["notes"] as? String
     template.smsMessage       = dict["smsMessage"] as? String
