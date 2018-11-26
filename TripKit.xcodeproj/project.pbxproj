@@ -731,6 +731,7 @@
 		D337467E208D5D980045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
 		D337467F208D5DA90045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
 		D37EF6D821A7BCE80062288E /* TKLocalCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37EF6D721A7BCE80062288E /* TKLocalCost.swift */; };
+		D3957CDD21ACB32000238420 /* TKLocalCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37EF6D721A7BCE80062288E /* TKLocalCost.swift */; };
 		D39B7BAF20622C2D00988D8A /* TKUIGroupedAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */; };
 		D39B7BB420622FD100988D8A /* TKUIAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */; };
 		D39B7BB520622FD100988D8A /* TKUIAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */; };
@@ -2866,6 +2867,7 @@
 				3ABBDAED2032135A00205042 /* Loc.swift in Sources */,
 				3ABBDAFD2032136500205042 /* TKCustomEventRecurrenceRule.swift in Sources */,
 				3ABBDAFE2032136900205042 /* NSManagedObjectContext+Rx.swift in Sources */,
+				D3957CDD21ACB32000238420 /* TKLocalCost.swift in Sources */,
 				3ABBDA5B2032132D00205042 /* Vehicle.swift in Sources */,
 				3ABBDAFC2032136500205042 /* TKCustomEventRecurrenceRule.m in Sources */,
 				3ABBDB0C2032137600205042 /* TKShareHelper+Parsing.swift in Sources */,
