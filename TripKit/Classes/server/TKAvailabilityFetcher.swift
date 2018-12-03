@@ -36,14 +36,14 @@ extension TKBuzzInfoProvider {
   }
   
   @available(iOS 10.0, *)
-  public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion, filter: Observable<(start: Date, end: Date)?>) -> Observable<[API.CarAvailability]> {
+  public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion, filter: Observable<(start: Date, end: Date?)>) -> Observable<[API.CarAvailability]> {
     
     // TODO: We could be smarter about this, cache the previous result and only
     //   query again, if we need new data.
     
     return filter
-      .flatMapLatest { tuple in
-        return fetchVehicleAvailabilities(locationId: locationId, in: region, start: tuple?.start, end: tuple?.end)
+      .flatMapLatest { start, end in
+        return fetchVehicleAvailabilities(locationId: locationId, in: region, start: start, end: end)
       }
     
   }
