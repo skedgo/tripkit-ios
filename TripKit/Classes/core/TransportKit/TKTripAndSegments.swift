@@ -113,6 +113,8 @@ public protocol TKTripSegment : TKTripSegmentDisplayable {
   
   var tripSegmentModeInfo: TKModeInfo? { get }
   
+  var tripSegmentLocalCost: TKLocalCost? { get }
+  
   /// A short detail expanding on `tripSegmentInstruction`.
   var tripSegmentDetail: String? { get }
 }

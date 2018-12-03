@@ -735,6 +735,8 @@
 		D3348267205BE2B000CA5917 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3348266205BE2B000CA5917 /* RxDataSources.framework */; };
 		D337467E208D5D980045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
 		D337467F208D5DA90045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
+		D37EF6D821A7BCE80062288E /* TKLocalCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37EF6D721A7BCE80062288E /* TKLocalCost.swift */; };
+		D3957CDD21ACB32000238420 /* TKLocalCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37EF6D721A7BCE80062288E /* TKLocalCost.swift */; };
 		D39B7BAF20622C2D00988D8A /* TKUIGroupedAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */; };
 		D39B7BB420622FD100988D8A /* TKUIAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */; };
 		D39B7BB520622FD100988D8A /* TKUIAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */; };
@@ -1287,6 +1289,7 @@
 		D32CA5AE20E34409009C9449 /* TKUIGroupedAlertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIGroupedAlertCell.xib; sourceTree = "<group>"; };
 		D3348266205BE2B000CA5917 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = ../../Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		D337467D208D5D980045B0C3 /* UserAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPIModel.swift; sourceTree = "<group>"; };
+		D37EF6D721A7BCE80062288E /* TKLocalCost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLocalCost.swift; sourceTree = "<group>"; };
 		D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIGroupedAlertCell.swift; sourceTree = "<group>"; };
 		D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAlertCell.swift; sourceTree = "<group>"; };
 		D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIAlertCell.xib; sourceTree = "<group>"; };
@@ -2254,6 +2257,7 @@
 				3AFFAB841F06854F00147990 /* TKVehicleType.h */,
 				3AFFAB851F06854F00147990 /* TKVehicular.h */,
 				3AFFAB861F06854F00147990 /* TKVehicular.m */,
+				D37EF6D721A7BCE80062288E /* TKLocalCost.swift */,
 			);
 			path = TransportKit;
 			sourceTree = "<group>";
@@ -2875,6 +2879,7 @@
 				3ABBDAED2032135A00205042 /* Loc.swift in Sources */,
 				3ABBDAFD2032136500205042 /* TKCustomEventRecurrenceRule.swift in Sources */,
 				3ABBDAFE2032136900205042 /* NSManagedObjectContext+Rx.swift in Sources */,
+				D3957CDD21ACB32000238420 /* TKLocalCost.swift in Sources */,
 				3ABBDA5B2032132D00205042 /* Vehicle.swift in Sources */,
 				3ABBDAFC2032136500205042 /* TKCustomEventRecurrenceRule.m in Sources */,
 				3ABBDB0C2032137600205042 /* TKShareHelper+Parsing.swift in Sources */,
@@ -3119,6 +3124,7 @@
 				3AB6C6EB1D1CD08E0089F687 /* TripRequest.m in Sources */,
 				3AEB47E920DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift in Sources */,
 				3AFFABAA1F06854F00147990 /* TKNamedCoordinate.swift in Sources */,
+				D37EF6D821A7BCE80062288E /* TKLocalCost.swift in Sources */,
 				3A15D8DB1D9CE08D00BADBEA /* TKRoutingParser.swift in Sources */,
 				3AFFABB81F06854F00147990 /* TKLog.m in Sources */,
 				3AA800F02187079C008CFB6D /* ShareCarAPIModel.swift in Sources */,

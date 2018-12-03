@@ -297,6 +297,10 @@ extension TKSegment: TKTripSegment {
     }
   }
   
+  public var tripSegmentLocalCost: TKLocalCost? {
+    return template?.localCost
+  }
+  
   public var tripSegmentTimesAreRealTime: Bool {
     return timesAreRealTime()
   }
