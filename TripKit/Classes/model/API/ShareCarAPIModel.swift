@@ -39,10 +39,16 @@ extension API {
     public let intervals: [Interval]
   }
   
+  public struct AppInfo: Codable, Hashable {
+    public let name: String?
+    public let appURLiOS: String?
+  }
+  
   public struct CarAvailability: Codable, Hashable {
     public let car: SharedCar
     public let availability: BookingAvailability?
     public let bookingURL: String?
+    public let appInfo: AppInfo?
     public let bookInApp: Bool?
   }
   
