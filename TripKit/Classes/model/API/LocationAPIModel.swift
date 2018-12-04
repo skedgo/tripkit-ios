@@ -43,20 +43,11 @@ extension API {
   
   
   public struct CarPodInfo : Codable, Equatable {
-    
-    public struct Vehicle : Codable, Equatable {
-      public let name: String?
-      public let description: String?
-      public let licensePlate: String?
-      public let engineType: String?
-      public let fuelType: String?
-      public let fuelLevel: Int?
-    }
-    
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
-    public let vehicles: [API.CarPodInfo.Vehicle]?
-
+    
+    public let hasAvailabilityData: Bool?
+    public let availabilities: [API.CarAvailability]?
     public let inService: Bool?
     public let availableVehicles: Int?
     public let availableChargingSpaces: Int?
@@ -66,7 +57,8 @@ extension API {
     private enum CodingKeys: String, CodingKey {
       case identifier
       case operatorInfo = "operator"
-      case vehicles
+      case hasAvailabilityData
+      case availabilities
       case inService
       case availableVehicles
       case availableChargingSpaces

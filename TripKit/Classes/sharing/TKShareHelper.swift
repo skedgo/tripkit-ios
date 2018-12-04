@@ -18,6 +18,16 @@ public class TKShareHelper: NSObject {
   public static var enableSharingOfURLs: Bool {
     return TKConfig.shared.shareURLDomain != nil
   }
+  
+  public static var baseURL: String? {
+    if let domain = TKConfig.shared.shareURLDomain {
+      return domain
+    } else if let scheme = TKConfig.shared.appURLScheme {
+      return scheme.appending("://")
+    } else {
+      return nil
+    }
+  }
 }
 
 // MARK: - Query URLs
@@ -57,7 +67,7 @@ extension TKShareHelper {
   }
 
   @objc public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: TKTimeType, time: Date?) -> URL? {
-    guard let baseURL = TKConfig.shared.shareURLDomain else { return nil }
+    guard let baseURL = TKShareHelper.baseURL else { return nil }
     
     // TODO: use format string and truncate lat/lng after 5 decimals
     var urlString = "\(baseURL)/go?tlat=\(end.latitude)&tlng=\(end.longitude)"
@@ -85,7 +95,7 @@ extension TKShareHelper {
   }
   
   @objc public static func createMeetURL(coordinate: CLLocationCoordinate2D, at time: Date) -> URL? {
-    guard let baseURL = TKConfig.shared.shareURLDomain else { return nil }
+    guard let baseURL = TKShareHelper.baseURL else { return nil }
     let urlString = "\(baseURL)/meet?lat=\(coordinate.latitude)&lng=\(coordinate.longitude)&at=\(Int(time.timeIntervalSince1970))"
     return URL(string: urlString)
   }
@@ -101,7 +111,7 @@ extension TKShareHelper {
   }
 
   @objc public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?) -> URL? {
-    guard let baseURL = TKConfig.shared.shareURLDomain else { return nil }
+    guard let baseURL = TKShareHelper.baseURL else { return nil }
     let escapedCode = (stopCode as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     
     let addendum: String
@@ -128,7 +138,7 @@ extension TKShareHelper {
   
   @objc
   public static func createServiceURL(serviceID: String, atStopCode stopCode: String, inRegionNamed regionName: String) -> URL? {
-    guard let baseURL = TKConfig.shared.shareURLDomain else { return nil }
+    guard let baseURL = TKShareHelper.baseURL else { return nil }
     let escapedID = (serviceID as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     let escapedCode = (stopCode as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
   

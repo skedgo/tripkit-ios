@@ -17,6 +17,7 @@ extension TKImage {
   // MARK: Modes
   
   public static let iconModeBicycle = named("icon-mode-bicycle")
+  public static let iconModeCarShare = named("icon-mode-car-share")
 
 }
 

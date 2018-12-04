@@ -75,6 +75,10 @@ public class TKCarPodLocation: TKModeCoordinate {
     set { rx_carPodVar.value = newValue }
   }
   
+  public var supportsVehicleAvailability: Bool {
+    return carPod.hasAvailabilityData == true
+  }
+  
   private enum CodingKeys: String, CodingKey {
     case carPod
   }

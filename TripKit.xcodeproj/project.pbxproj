@@ -242,6 +242,11 @@
 		3AA3CED0202CD4D100E54859 /* TKCustomEventRecurrenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3CEAD202CD4D100E54859 /* TKCustomEventRecurrenceTest.swift */; };
 		3AA77F621F76A913001D412D /* AlertAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA77F611F76A913001D412D /* AlertAPIModels.swift */; };
 		3AA800EE2186F561008CFB6D /* TKUISheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800ED2186F561008CFB6D /* TKUISheetViewController.swift */; };
+		3AA800F02187079C008CFB6D /* ShareCarAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800EF2187079C008CFB6D /* ShareCarAPIModel.swift */; };
+		3AA800F12187079C008CFB6D /* ShareCarAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800EF2187079C008CFB6D /* ShareCarAPIModel.swift */; };
+		3AA800F621870DB6008CFB6D /* TKAvailabilityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800F521870DB6008CFB6D /* TKAvailabilityFetcher.swift */; };
+		3AA800F721870DB6008CFB6D /* TKAvailabilityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800F521870DB6008CFB6D /* TKAvailabilityFetcher.swift */; };
+		3AA800FD218743BC008CFB6D /* TKBookingAvailabilityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800FC218743BC008CFB6D /* TKBookingAvailabilityTest.swift */; };
 		3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */; };
 		3AA923F620DA7CDA00EBDDC6 /* TGCardView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */; };
 		3AA923F820DA8E0400EBDDC6 /* TGCardViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */; };
@@ -1028,6 +1033,9 @@
 		3AA3CEAE202CD4D100E54859 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AA77F611F76A913001D412D /* AlertAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAPIModels.swift; sourceTree = "<group>"; };
 		3AA800ED2186F561008CFB6D /* TKUISheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISheetViewController.swift; sourceTree = "<group>"; };
+		3AA800EF2187079C008CFB6D /* ShareCarAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCarAPIModel.swift; sourceTree = "<group>"; };
+		3AA800F521870DB6008CFB6D /* TKAvailabilityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAvailabilityFetcher.swift; sourceTree = "<group>"; };
+		3AA800FC218743BC008CFB6D /* TKBookingAvailabilityTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKBookingAvailabilityTest.swift; sourceTree = "<group>"; };
 		3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+ProductName.swift"; sourceTree = "<group>"; };
 		3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TGCardView+Rx.swift"; sourceTree = "<group>"; };
 		3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TGCardViewController.framework; path = Carthage/Build/iOS/TGCardViewController.framework; sourceTree = "<group>"; };
@@ -1370,8 +1378,8 @@
 		3A3C9BA41F751FB100C8D476 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				3A3C9BA51F751FC300C8D476 /* API.swift */,
 				3AA77F611F76A913001D412D /* AlertAPIModels.swift */,
+				3A3C9BA51F751FC300C8D476 /* API.swift */,
 				3A3C9BB71F75346400C8D476 /* BaseAPIModels.swift */,
 				3A3C9BA71F751FF200C8D476 /* DeparturesAPIModel.swift */,
 				3A32CD781DC2EBC4003B158B /* LocationAPIModel.swift */,
@@ -1379,6 +1387,7 @@
 				3AFD70BC1E558BC800F6B06F /* PricingTableAPIModel.swift */,
 				3A32CD7A1DC2EC4F003B158B /* RegionAPIModel.swift */,
 				3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */,
+				3AA800EF2187079C008CFB6D /* ShareCarAPIModel.swift */,
 				3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */,
 				D337467D208D5D980045B0C3 /* UserAPIModel.swift */,
 				3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */,
@@ -1751,6 +1760,7 @@
 			isa = PBXGroup;
 			children = (
 				3AA3CE94202CD4D100E54859 /* TKAlertModelTest.swift */,
+				3AA800FC218743BC008CFB6D /* TKBookingAvailabilityTest.swift */,
 				3AA3CE96202CD4D100E54859 /* TKBookingDecodingTest.swift */,
 				3AA3CE9B202CD4D100E54859 /* TKBuzzInfoProviderTest.swift */,
 				3AA3CE9D202CD4D100E54859 /* TKDeparturesModelTest.swift */,
@@ -1996,6 +2006,7 @@
 			isa = PBXGroup;
 			children = (
 				3A462CD9207638DB00AF41EF /* parsing */,
+				3AA800F521870DB6008CFB6D /* TKAvailabilityFetcher.swift */,
 				3AB6C68B1D1CD08E0089F687 /* TKBuzzInfoProvider.h */,
 				3AB6C68C1D1CD08E0089F687 /* TKBuzzInfoProvider.m */,
 				3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */,
@@ -2845,6 +2856,7 @@
 				3ABBDA202032132400205042 /* TKBuzzRouter+Rx.swift in Sources */,
 				3ABBDA582032132D00205042 /* TripRequest.swift in Sources */,
 				3ABBDADA2032135A00205042 /* NSDate+Formatting.swift in Sources */,
+				3AA800F12187079C008CFB6D /* ShareCarAPIModel.swift in Sources */,
 				3A6DAED220403CF7009282FE /* Loc+TripKitInterApp.swift in Sources */,
 				3ABBDA652032132D00205042 /* TKSegment.m in Sources */,
 				3ABBDA212032132400205042 /* TKDeparturesProvider.swift in Sources */,
@@ -2922,6 +2934,7 @@
 				3A6DAED620404374009282FE /* Loc+TripKitUI.swift in Sources */,
 				3ABBDA522032132D00205042 /* Trip.swift in Sources */,
 				3ABBDAF52032136100205042 /* TKLocationManager.swift in Sources */,
+				3AA800F721870DB6008CFB6D /* TKAvailabilityFetcher.swift in Sources */,
 				3ABBDA122032131E00205042 /* Loc+TripKit.swift in Sources */,
 				3ABBDB0A2032137600205042 /* TripRequest+Shareable.swift in Sources */,
 				3ABBDAE62032135A00205042 /* NSString+Sizing.m in Sources */,
@@ -3114,6 +3127,7 @@
 				D37EF6D821A7BCE80062288E /* TKLocalCost.swift in Sources */,
 				3A15D8DB1D9CE08D00BADBEA /* TKRoutingParser.swift in Sources */,
 				3AFFABB81F06854F00147990 /* TKLog.m in Sources */,
+				3AA800F02187079C008CFB6D /* ShareCarAPIModel.swift in Sources */,
 				3AFFABD41F06854F00147990 /* TKInfoIcon.swift in Sources */,
 				3A32CD731DC2DC77003B158B /* Vehicle.swift in Sources */,
 				D337467E208D5D980045B0C3 /* UserAPIModel.swift in Sources */,
@@ -3276,6 +3290,7 @@
 				3A8F61211F190CE80017ACDA /* TKLocationManager.swift in Sources */,
 				3A6DAECF20402622009282FE /* Loc+TripKitBookings.swift in Sources */,
 				D3FC1F14207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift in Sources */,
+				3AA800F621870DB6008CFB6D /* TKAvailabilityFetcher.swift in Sources */,
 				3AFFAE0A1F06BA3700147990 /* TripRequest+Shareable.swift in Sources */,
 				3AB6C7101D1CD08E0089F687 /* TKSettings.m in Sources */,
 			);
@@ -3292,6 +3307,7 @@
 				3AA3CEB5202CD4D100E54859 /* TKGeocoderTest.swift in Sources */,
 				3AA3CEB2202CD4D100E54859 /* TKGeoJSONTest.swift in Sources */,
 				3AA3CEBD202CD4D100E54859 /* TKPolylineDecoderTest.swift in Sources */,
+				3AA800FD218743BC008CFB6D /* TKBookingAvailabilityTest.swift in Sources */,
 				3AA3CED0202CD4D100E54859 /* TKCustomEventRecurrenceTest.swift in Sources */,
 				3AA3CEB9202CD4D100E54859 /* TKAlertModelTest.swift in Sources */,
 				3AA3CEB7202CD4D100E54859 /* TKWaypointRouterTest.swift in Sources */,
