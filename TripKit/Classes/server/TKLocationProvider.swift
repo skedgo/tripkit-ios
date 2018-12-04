@@ -35,7 +35,6 @@ public enum TKLocationProvider {
       .flatMap { region in
         TKLocationProvider.fetchLocations(center: center, radius: radius, modes: modes, in: region)
       }
-      .asSingle()
   }
   
   public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil, in region: TKRegion) -> Single<[TKModeCoordinate]> {
@@ -64,8 +63,6 @@ public enum TKLocationProvider {
         
         return response.groups.reduce(into: []) { $0.append(contentsOf: $1.all) }
       }
-    .asSingle()
-    
   }
   
 }

@@ -335,7 +335,7 @@ extension TKUIResultsViewModel {
       .flatMapLatest { request in
         // Fetch the trip and handle errors in here, to not abort the outer observable
         return TKResultsFetcher
-          .fetchTrips(for: request, classifier: TKMetricClassifier())
+          .streamTrips(for: request, classifier: TKMetricClassifier())
           .asDriver(onErrorRecover: { error in
             errorPublisher.onNext(error)
             return Driver.just(.finished)
