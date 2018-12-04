@@ -25,7 +25,6 @@ extension TKBuzzInfoProvider {
     
     return TKServer.shared.rx
       .hit(.GET, path: "locationInfo.json", parameters: paras, region: region)
-      .asSingle()
       .map { _, _, data -> [API.CarAvailability] in
         guard let data = data else { return [] }
         let decoder = JSONDecoder()

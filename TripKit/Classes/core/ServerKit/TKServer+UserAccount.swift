@@ -26,7 +26,7 @@ extension Reactive where Base == TKServer {
   /// - Parameter cloudKitID: The record name of the CloudKit's
   ///     user record ID.
   /// - Returns: The user token
-  public func signIn(withCloudKitID cloudKitID: String) -> Observable<String> {
+  public func signIn(withCloudKitID cloudKitID: String) -> Single<String> {
     
     let urlFriendly = cloudKitID.replacingOccurrences(of: "_", with: "")
     return hit(.POST, path: "account/apple/\(urlFriendly)")

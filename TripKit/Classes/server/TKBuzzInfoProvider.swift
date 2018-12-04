@@ -135,7 +135,6 @@ extension TKBuzzInfoProvider {
         let response = try decoder.decode(AlertsTransitResponse.self, from: data)
         return response.alerts
       }
-      .asSingle()
   }
   
   // MARK: - Accessibility

@@ -43,7 +43,7 @@ public class TKResultsFetcher {
   ///   - classifier: Optional classifier, see `TKTripClassifier` for more
   /// - Returns: Stream of fetching the results, multiple call backs as different
   ///     modes are fetched.
-  public static func fetchTrips(for request: TripRequest, classifier: TKTripClassifier? = nil) -> Observable<Progress> {
+  public static func streamTrips(for request: TripRequest, classifier: TKTripClassifier? = nil) -> Observable<Progress> {
     
     // first we'll lock in this trips time if necessary
     if request.type == .leaveASAP {
@@ -52,22 +52,23 @@ public class TKResultsFetcher {
     }
     
     // 1. Fetch current location if necessary
-    let prepared: Observable<TripRequest>
+    let prepared: Single<TripRequest>
     if request.usesCurrentLocation {
       prepared = TKLocationManager.shared.rx
         .fetchCurrentLocation(within: Constants.secondsToRefine)
         .map { location in
           request.override(currentLocation: location)
           return request
-      }
+        }
       
     } else {
-      prepared = Observable.just(request)
+      prepared = .just(request)
     }
     
     // 2. Then we can kick off the requests
     return prepared
-      .flatMap { request -> Observable<Progress> in
+      .asObservable()
+      .flatMapLatest { request -> Observable<Progress> in
         return TKBuzzRouter.rx.multiFetchRequest(for: request, classifier: classifier)
       }
       .startWith(.locating)

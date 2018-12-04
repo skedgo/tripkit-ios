@@ -22,9 +22,9 @@ public extension Reactive where Base : TKLocationManager {
   ///
   /// - Parameter seconds: Maximum time to give GPS
   /// - Returns: Observable of user's current location; can error out
-  public func fetchCurrentLocation(within seconds: TimeInterval) -> Observable<CLLocation> {
+  public func fetchCurrentLocation(within seconds: TimeInterval) -> Single<CLLocation> {
     guard base.isAuthorized() else {
-      return tryAuthorization().flatMap { authorized -> Observable<CLLocation> in
+      return tryAuthorization().flatMap { authorized -> Single<CLLocation> in
         if authorized {
           return self.fetchCurrentLocation(within: seconds)
         } else {
@@ -33,12 +33,11 @@ public extension Reactive where Base : TKLocationManager {
       }
     }
     
-    return Observable.create { observer in
+    return Single.create { observer in
       self.base.fetchCurrentLocation(within: seconds, success: { (location) in
-        observer.onNext(location)
-        observer.onCompleted()
+        observer(.success(location))
       }, failure: { (error) in
-        observer.onError(error)
+        observer(.error(error))
       })
       
       return Disposables.create()
@@ -110,24 +109,23 @@ public extension Reactive where Base : TKLocationManager {
 #endif
 
   
-  public func tryAuthorization() -> Observable<Bool> {
+  public func tryAuthorization() -> Single<Bool> {
     
     if !base.featureIsAvailable() {
-      return Observable.error(TKLocationManager.LocalizationError.featureNotAvailable)
+      return .error(TKLocationManager.LocalizationError.featureNotAvailable)
     }
     
     switch base.authorizationStatus() {
     case .restricted, .denied:
-      return Observable.error(TKLocationManager.LocalizationError.authorizationDenied)
+      return .error(TKLocationManager.LocalizationError.authorizationDenied)
       
     case .authorized:
-      return Observable.just(true)
+      return .just(true)
       
     case .notDetermined:
-      return Observable.create { observer in
+      return Single.create { observer in
         self.base.ask(forPermission: { success in
-          observer.onNext(success)
-          observer.onCompleted()
+          observer(.success(success))
         })
         return Disposables.create()
       }

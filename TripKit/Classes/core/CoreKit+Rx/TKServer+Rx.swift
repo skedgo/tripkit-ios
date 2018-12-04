@@ -24,28 +24,28 @@ public enum RepeatHandler {
 }
 
 extension Reactive where Base: TKServer {
-  public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Observable<TKRegion> {
-    return requireRegions().map {
-      TKRegionManager.shared.region(containing: coordinate, coordinate)
-    }
+  public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Single<TKRegion> {
+    return requireRegions()
+      .map {
+        TKRegionManager.shared.region(containing: coordinate, coordinate)
+      }
   }
   
-  public func requireRegion(_ coordinateRegion: MKCoordinateRegion) -> Observable<TKRegion> {
-    return requireRegions().map {
+  public func requireRegion(_ coordinateRegion: MKCoordinateRegion) -> Single<TKRegion> {
+    return requireRegions()
+      .map {
         TKRegionManager.shared.region(containing: coordinateRegion)
-    }
+      }
   }
 
-  public func requireRegions() -> Observable<Void> {
-    return Observable.create { subscriber in
+  public func requireRegions() -> Single<Void> {
+    return Single.create { subscriber in
       self.base.requireRegions { error in
         guard error == nil else {
-          subscriber.onError(error!)
+          subscriber(.error(error!))
           return
         }
-        
-        subscriber.onNext(())
-        subscriber.onCompleted()
+        subscriber(.success(()))
       }
       
       return Disposables.create()
@@ -60,9 +60,29 @@ extension Reactive where Base: TKServer {
   /// - parameter parameters: The parameters which will either be send in the query (for GET) or as the JSON body (for POST and alike)
   /// - parameter headers: Additional headers to add to the request
   /// - parameter region: The region for which to hit a server. In most cases, you want to set this as not every SkedGo server has data for every region.
-  /// - parameter repeatHandler: Implement and return a non-negative time interval from this handler to fire the Observable again, or `nil` to stop firing.
   /// - returns: An observable with the status code, headers and data from hitting the endpoint, all status and data will be the same as the last call to the `repeatHandler`.
   public func hit(
+    _ method: HTTPMethod,
+    path: String,
+    parameters: [String: Any] = [:],
+    headers: [String: String] = [:],
+    region: TKRegion? = nil
+    ) -> Single<(Int, [String: Any], Data?)>
+  {
+    return stream(method, path: path, parameters: parameters, headers: headers, region: region, repeatHandler: nil)
+      .asSingle()
+  }
+  
+  /// Hit a SkedGo endpoint, using a variety of options
+  ///
+  /// - parameter method: Duh
+  /// - parameter path: The endpoint, e.g., `routing.json`
+  /// - parameter parameters: The parameters which will either be send in the query (for GET) or as the JSON body (for POST and alike)
+  /// - parameter headers: Additional headers to add to the request
+  /// - parameter region: The region for which to hit a server. In most cases, you want to set this as not every SkedGo server has data for every region.
+  /// - parameter repeatHandler: Implement and return a non-negative time interval from this handler to fire the Observable again, or `nil` to stop firing.
+  /// - returns: An observable with the status code, headers and data from hitting the endpoint, all status and data will be the same as the last call to the `repeatHandler`.
+  public func stream(
     _ method: HTTPMethod,
     path: String,
     parameters: [String: Any] = [:],

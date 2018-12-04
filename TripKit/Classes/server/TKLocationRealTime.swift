@@ -13,21 +13,22 @@ import RxSwift
 public enum TKLocationRealTime {
 
   @available(*, deprecated, message: "You should manage that yourself.")
-  public static func fetchRealTimeInfo(for location: TKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<API.LocationInfo> {
+  public static func streamRealTime(for location: TKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<API.LocationInfo> {
     return fetchOnlyOn
       .flatMapLatest { fetch -> Observable<API.LocationInfo> in
         if fetch {
-          return fetchRealTime(for: location)
+          return streamRealTime(for: location)
         } else {
-          return Observable.empty()
+          return .empty()
         }
       }
   }
   
-  public static func fetchRealTime(for location: TKNamedCoordinate) -> Observable<API.LocationInfo> {
+  public static func streamRealTime(for location: TKNamedCoordinate) -> Observable<API.LocationInfo> {
     return TKServer.shared.rx
       .requireRegion(location.coordinate)
-      .flatMap { region -> Observable<API.LocationInfo> in
+      .asObservable()
+      .flatMapLatest { region -> Observable<API.LocationInfo> in
 
         let paras: [String: Any]
         if let identifier = location.locationID {
@@ -43,7 +44,7 @@ public enum TKLocationRealTime {
         }
         
         return TKServer.shared.rx
-          .hit(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, data in
+          .stream(.GET, path: "locationInfo.json", parameters: paras, region: region) { status, data in
             if case 400..<500 = status {
               return nil // Client-side errors; hitting again won't help
             }
