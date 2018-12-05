@@ -85,12 +85,12 @@ extension API {
   
   public struct Email: Codable {
     public let address: String
-    let validated: Bool?
+    public let verified: Bool?
     let primary: Bool?
     
     public init(address: String, validated: Bool = false, primary: Bool = false) {
       self.address = address
-      self.validated = validated
+      self.verified = validated
       self.primary = primary
     }
     
@@ -98,7 +98,7 @@ extension API {
     
     private enum CodingKeys: String, CodingKey {
       case address = "email"
-      case validated
+      case verified = "validated"
       case primary
     }
   }
