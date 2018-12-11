@@ -331,11 +331,34 @@ extension TKSegment: TKTripSegment {
 
   
   public var tripSegmentModeInfoIconType: TKInfoIconType {
-    return alerts().first?.infoIconType ?? .none
+    let modeAlerts = alerts()
+      .filter { $0.isForMode }
+      .sorted { $0.alertSeverity.rawValue > $1.alertSeverity.rawValue }
+
+    return modeAlerts.first?.infoIconType ?? .none
   }
-  
+
+  public var tripSegmentSubtitleIconType: TKInfoIconType {
+    let nonModeAlerts = alerts()
+      .filter { !$0.isForMode }
+      .sorted { $0.alertSeverity.rawValue > $1.alertSeverity.rawValue }
+
+    return nonModeAlerts.first?.infoIconType ?? .none
+  }
+
 }
 
+extension Alert {
+  fileprivate var isForMode: Bool {
+    if idService != nil {
+      return true
+    } else if location != nil {
+      return false
+    } else {
+      return idStopCode != nil
+    }
+  }
+}
 
 // MARK: - UIActivityItemSource
 

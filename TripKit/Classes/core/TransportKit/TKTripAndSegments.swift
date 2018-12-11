@@ -81,15 +81,19 @@ public protocol TKTripSegmentDisplayable : NSObjectProtocol {
   
   var tripSegmentModeImageIsTemplate: Bool { get }
   
+  /// The icon to display on top of a mode icon to indicate isssues with the
+  /// mode itself, e.g., a service being cancelled or a car share vehicle
+  /// not being available.
   var tripSegmentModeInfoIconType: TKInfoIconType { get }
+
+  /// The icon to display next to the sub-title to indicate secondary issues
+  /// with the segment, e.g., an alert icon for real-time traffic issues.
+  var tripSegmentSubtitleIconType: TKInfoIconType { get }
   
-  
-  /// - todo: This doubles up with `tripSegmentModeInfo`
-  /// - returns: A title to show next to the mode image.
+  /// A title to show next to the mode image.
   var tripSegmentModeTitle: String? { get }
   
-  /// - todo: This doubles up with `tripSegmentModeInfo`
-  /// - returns: A subtitle to show next to the mode image.
+  /// A subtitle to show next to the mode image.
   var tripSegmentModeSubtitle: String? { get }
   
   /// The segment's departure time, if it's a fixed time, e.g., public transport
@@ -120,7 +124,7 @@ public protocol TKTripSegment : TKTripSegmentDisplayable {
 }
 
 
-extension TKTrip {
+public extension TKTrip {
   var isArriveBefore: Bool { return false }
   var costValues: [NSNumber : String] { return [:] }
   var tripPurpose: String? { return nil }
@@ -128,12 +132,13 @@ extension TKTrip {
   var arrivalTimeZone: TimeZone? { return nil }
 }
 
-extension TKTripSegmentDisplayable {
+public extension TKTripSegmentDisplayable {
   var tripSegmentModeColor: TKColor? { return nil }
   var tripSegmentModeImage: TKImage? { return nil }
   var tripSegmentModeImageURL: URL? { return nil }
   var tripSegmentModeImageIsTemplate: Bool { return false }
   var tripSegmentModeInfoIconType: TKInfoIconType { return .none }
+  var tripSegmentSubtitleIconType: TKInfoIconType { return .none }
   var tripSegmentModeTitle: String? { return nil }
   var tripSegmentModeSubtitle: String? { return nil }
   var tripSegmentFixedDepartureTime: Date? { return nil }
@@ -142,9 +147,10 @@ extension TKTripSegmentDisplayable {
   var tripSegmentIsWheelchairAccessible: Bool { return false }
 }
 
-extension TKTripSegment {
+public extension TKTripSegment {
   var tripSegmentModeInfo: TKModeInfo? { return nil }
   var tripSegmentDetail: String? { return nil }
+  var tripSegmentLocalCost: TKLocalCost? { return nil }
 }
 
 @available(*, unavailable, renamed: "TKTrip")

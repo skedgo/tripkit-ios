@@ -129,7 +129,7 @@
 		}
 		
 		// for the coloured strip
-    UIColor *color = [segment respondsToSelector:@selector(tripSegmentModeColor)] ? [segment tripSegmentModeColor] : nil;
+    UIColor *color = [segment tripSegmentModeColor];
 		
 		// the mode image
     UIImageView * modeImageView = [[UIImageView alloc] initWithImage:image];
@@ -173,8 +173,7 @@
     modeImageView.frame = newFrame;
     [self addSubview:modeImageView];
 		
-		if (allowInfoIcons && [segment respondsToSelector:@selector(tripSegmentModeInfoIconType)]
-        && [segment tripSegmentModeInfoIconType] != TKInfoIconTypeNone) {
+		if (allowInfoIcons && [segment tripSegmentModeInfoIconType] != TKInfoIconTypeNone) {
 			UIImageView *infoIconImageView = [[UIImageView alloc] initWithImage:[TKInfoIcon imageForInfoIconType:[segment tripSegmentModeInfoIconType] usage:TKInfoIconUsageOverlay]];
       CGRect imageFrame = infoIconImageView.frame;
       imageFrame.origin.x = newFrame.origin.x;
@@ -184,7 +183,7 @@
 			[self addSubview:infoIconImageView];
 		}
 		
-    CGFloat modeSideWidth = 0;
+    __block CGFloat modeSideWidth = 0;
     // we put mode codes, colours and subtitles to the side
     // subtitle, we are allowed to
     
@@ -195,7 +194,7 @@
     UIFont *modeTitleFont = nil;
     UIFont *modeSubtitleFont = nil;
     
-    NSString *modeTitle = (allowTitles && [segment respondsToSelector:@selector(tripSegmentModeTitle)]) ? [segment tripSegmentModeTitle] : nil;
+    NSString *modeTitle = allowTitles ? [segment tripSegmentModeTitle] : nil;
     if (modeTitle.length > 0) {
       modeTitleFont = [TKStyleManager systemFontWithSize:12];
       modeTitleSize = [modeTitle sizeWithFont:modeTitleFont
@@ -207,39 +206,46 @@
     UIImageView *modeTitleAccessoryImageView = nil;
     if (allowTitles
         && self.allowWheelchairIcon
-        && [segment respondsToSelector:@selector(tripSegmentIsWheelchairAccessible)]
         && [segment tripSegmentIsWheelchairAccessible]) {
       modeTitleAccessoryImageView = [[UIImageView alloc] initAsWheelchairAccessoryImageWithTintColor:[TKStyleManager darkTextColor]];
     }
     
     
-    // We prefer the time + real-time indicator as the subtitle, and fall back
-    // to the subtitle
     NSString *modeSubtitle = nil;
-    UIImageView *modeSubtitleAccessoryImageView = nil;
+    NSMutableArray<UIImageView *> *modeSubtitleAccessoryImageViews = [NSMutableArray arrayWithCapacity:2];
     if (allowSubtitles) {
-      if ([segment respondsToSelector:@selector(tripSegmentFixedDepartureTime)]) {
-        modeSubtitle = [TKStyleManager timeString:[segment tripSegmentFixedDepartureTime]
+      // We prefer the time + real-time indicator as the subtitle, and fall back
+      // to the subtitle
+      NSDate *fixedTime = [segment tripSegmentFixedDepartureTime];
+      if (fixedTime) {
+        modeSubtitle = [TKStyleManager timeString:fixedTime
                                       forTimeZone:[segment tripSegmentTimeZone]];
+      }
 
-        if ([segment respondsToSelector:@selector(tripSegmentTimesAreRealTime)]
-            && [segment tripSegmentTimesAreRealTime]) {
-          modeSubtitleAccessoryImageView = [[UIImageView alloc] initAsRealTimeAccessoryImageAnimated:YES tintColor:[TKStyleManager lightTextColor]];
-        }
+      if ([segment tripSegmentTimesAreRealTime]) {
+        [modeSubtitleAccessoryImageViews addObject:[[UIImageView alloc] initAsRealTimeAccessoryImageAnimated:YES tintColor:[TKStyleManager lightTextColor]]];
       }
-      if (! modeSubtitle && [segment respondsToSelector:@selector(tripSegmentModeSubtitle)]) {
-        modeSubtitle = [segment tripSegmentModeSubtitle];
+
+      NSString *subtitleText = [segment tripSegmentModeSubtitle];
+      if (! modeSubtitle && subtitleText.length > 0) {
+        modeSubtitle = subtitleText;
       }
+      
       if (modeSubtitle) {
         modeSubtitleFont = [TKStyleManager systemFontWithSize:10];
         modeSubtitleSize = [modeSubtitle sizeWithFont:modeSubtitleFont maximumWidth:CGFLOAT_MAX];
+      }
+      
+      if (allowInfoIcons && [segment tripSegmentSubtitleIconType] != TKInfoIconTypeNone) {
+        UIImageView *infoIconImageView = [[UIImageView alloc] initWithImage:[TKInfoIcon imageForInfoIconType:[segment tripSegmentSubtitleIconType] usage:TKInfoIconUsageOverlay]];
+        [modeSubtitleAccessoryImageViews addObject:infoIconImageView];
       }
     }
     
     if (modeTitle.length > 0) {
       // add the bus number to the side
       CGFloat y = (CGRectGetHeight(self.frame) - modeSubtitleSize.height - modeTitleSize.height) / 2;
-      if (modeSubtitleSize.height > 0 || modeSubtitleAccessoryImageView) {
+      if (modeSubtitleSize.height > 0 || modeSubtitleAccessoryImageViews.count > 0) {
         y += 2;
       }
       
@@ -274,7 +280,7 @@
       viewWidth = viewHeight * (imageSize.width / imageSize.height);
       
       CGFloat y = (CGRectGetHeight(self.frame) - modeSubtitleSize.height - viewHeight) / 2;
-      if (modeSubtitleSize.height > 0 || modeSubtitleAccessoryImageView) {
+      if (modeSubtitleSize.height > 0 || modeSubtitleAccessoryImageViews.count > 0) {
         y += 2;
       }
       
@@ -298,22 +304,26 @@
       
       modeSideWidth = (CGFloat) fmax(modeSideWidth, modeSubtitleSize.width);
     }
-    if (modeSubtitleAccessoryImageView) {
-      CGSize imageSize = modeSubtitleAccessoryImageView.image.size;
-      CGFloat viewWidth;
-      CGFloat viewHeight;
-      if (modeSubtitleSize.height > 0) {
-        viewHeight = MIN(imageSize.height, modeSubtitleSize.height);
-      } else {
-        viewHeight = MIN(imageSize.height, 20);
-      }
-      viewWidth = viewHeight * (imageSize.width / imageSize.height);
-      
-      CGFloat y = (CGRectGetHeight(self.frame) - viewHeight - modeTitleSize.height) / 2 + modeTitleSize.height;
-
-      modeSubtitleAccessoryImageView.frame = CGRectMake(x + modeSubtitleSize.width + 2, y, viewWidth, viewHeight);
-      [self addSubview:modeSubtitleAccessoryImageView];
-      modeSideWidth = (CGFloat) fmax(modeSideWidth, modeSubtitleSize.width + 2 + viewWidth);
+    if (modeSubtitleAccessoryImageViews.count > 0) {
+      __block CGFloat subtitleWidth = modeSubtitleSize.width;
+      [modeSubtitleAccessoryImageViews enumerateObjectsUsingBlock:^(UIImageView * _Nonnull imageView, NSUInteger idx, BOOL * _Nonnull stop) {
+        CGSize imageSize = imageView.image.size;
+        CGFloat viewWidth;
+        CGFloat viewHeight;
+        if (modeSubtitleSize.height > 0) {
+          viewHeight = MIN(imageSize.height, modeSubtitleSize.height);
+        } else {
+          viewHeight = MIN(imageSize.height, 20);
+        }
+        viewWidth = viewHeight * (imageSize.width / imageSize.height);
+        
+        CGFloat y = (CGRectGetHeight(self.frame) - viewHeight - modeTitleSize.height) / 2 + modeTitleSize.height;
+        
+        imageView.frame = CGRectMake(x + subtitleWidth + 2, y, viewWidth, viewHeight);
+        [self addSubview:imageView];
+        modeSideWidth = (CGFloat) fmax(modeSideWidth, subtitleWidth + 2 + viewWidth);
+        subtitleWidth += 2 + viewWidth;
+      }];
     }
       
     nextX = CGRectGetMaxX(newFrame) + modeSideWidth + padding;
