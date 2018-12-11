@@ -221,6 +221,9 @@ extension Alert {
     case .info: alertSeverity = .info
     }
     remoteIcon = model.remoteIcon?.absoluteString
+    
+    idService = model.serviceTripID
+    url = model.url?.absoluteString
   
     update(from: model)
   }

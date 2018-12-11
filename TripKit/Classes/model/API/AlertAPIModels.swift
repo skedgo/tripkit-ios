@@ -38,6 +38,7 @@ extension API {
     let hashCode: Int    
     let action: Action?    
     let location: API.Location?
+    let serviceTripID: String?
     
     // MARK: - Codable
     public init(from decoder: Decoder) throws {
@@ -50,6 +51,7 @@ extension API {
       action      = try? container.decode(Action.self, forKey: .action)
       remoteIcon  = try? container.decode(URL.self, forKey: .remoteIcon)
       location    = try? container.decode(Location.self, forKey: .location)
+      serviceTripID = try? container.decode(String.self, forKey: .serviceTripID)
       lastUpdated  = try? container.decode(Date.self, forKey: .lastUpdated)
       fromDate   = try? container.decode(Date.self, forKey: .fromDate)
       toDate     = try? container.decode(Date.self, forKey: .toDate)
