@@ -85,8 +85,8 @@ extension API {
   
   public struct Email: Codable {
     public let address: String
-    public let verified: Bool?
-    let primary: Bool?
+    public let verified: Bool
+    public let primary: Bool
     
     public init(address: String, validated: Bool = false, primary: Bool = false) {
       self.address = address
