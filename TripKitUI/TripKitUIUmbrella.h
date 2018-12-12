@@ -33,7 +33,6 @@
 
 // Could be internal, but used by Swift internally, must expose
 #import "TKUIVehicleView.h"
-#import "TKUICircleAnnotationView.h"
 #import "TKUIPulsingAnnotationView.h"
 
 // Deprecated things
