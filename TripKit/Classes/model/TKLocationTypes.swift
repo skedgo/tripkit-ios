@@ -205,6 +205,58 @@ public class TKCarRentalLocation: TKModeCoordinate {
 
 }
 
+public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
+  
+  fileprivate let rx_infoVar: Variable<API.FreeFloatingVehicleInfo>
+  
+  /// Detailed car-pod related information.
+  ///
+  /// - Note: Can change if real-time data is available. Recommended to use
+  ///         `rx.carPod` instead.
+  public var vehicle: API.FreeFloatingVehicleInfo {
+    get { return rx_infoVar.value }
+    set { rx_infoVar.value = newValue }
+  }
+  
+  private enum CodingKeys: String, CodingKey {
+    case vehicle
+  }
+  
+  public required init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    let info = try values.decode(API.FreeFloatingVehicleInfo.self, forKey: .vehicle)
+    rx_infoVar = Variable(info)
+    try super.init(from: decoder)
+    locationID = info.identifier
+  }
+  
+  public override func encode(to encoder: Encoder) throws {
+    try super.encode(to: encoder)
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(vehicle, forKey: .vehicle)
+  }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    guard let info = try? aDecoder.decode(API.FreeFloatingVehicleInfo.self, forKey: "vehicle") else { return nil }
+    rx_infoVar = Variable(info)
+    super.init(coder: aDecoder)
+    locationID = info.identifier
+  }
+  
+  public override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    try? aCoder.encode(encodable: vehicle, forKey: "vehicle")
+  }
+  
+}
+
+extension Reactive where Base : TKFreeFloatingVehicleLocation {
+  public var vehicle: Observable<API.FreeFloatingVehicleInfo> {
+    return base.rx_infoVar.asObservable()
+  }
+}
+
+
 extension NSCoder {
   
   enum CoderError: Error {

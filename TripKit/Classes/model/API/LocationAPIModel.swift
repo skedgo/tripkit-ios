@@ -10,6 +10,14 @@ import Foundation
 
 extension API {
   
+  public enum SharedVehicleType: String, Codable, Equatable {
+    case bike = "BIKE"
+    case pedelec = "PEDELEC"
+    case kickScooter = "KICK_SCOOTER"
+    case motoScooter = "MOTO_SCOOTER"
+    case car = "CAR"
+  }
+  
   public struct BikePodInfo : Codable, Equatable {
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
@@ -157,12 +165,41 @@ extension API {
     public let carPod:  API.CarPodInfo?
     public let carPark: API.CarParkInfo?
     public let carRental: API.CarRentalInfo?
+    public let freeFloating: API.FreeFloatingVehicleInfo?
     
     public var hasRealTime: Bool {
       return carPark?.hasRealTime
         ?? bikePod?.hasRealTime
         ?? carPod?.hasRealTime
+        ?? freeFloating?.hasRealTime
         ?? false
+    }
+  }
+  
+  public struct FreeFloatingVehicleInfo : Codable, Equatable {
+    public let identifier: String
+    public let operatorInfo: API.CompanyInfo
+    public let vehicleType: SharedVehicleType
+    
+    public let name: String?
+    public let isAvailable: Bool?
+    public let batteryLevel: Int? // percentage, i.e., 0-100
+    public let batteryRange: Int? // kilometres
+    public let lastUpdate: TimeInterval?
+    
+    private enum CodingKeys: String, CodingKey {
+      case identifier
+      case operatorInfo = "operator"
+      case vehicleType
+      case name
+      case isAvailable
+      case batteryLevel
+      case batteryRange
+      case lastUpdate
+    }
+    
+    public var hasRealTime: Bool {
+      return true
     }
   }
   
@@ -180,13 +217,15 @@ extension API {
       public let carPods: [TKCarPodLocation]?
       public let carParks: [TKCarParkLocation]?
       public let carRentals: [TKCarRentalLocation]?
-      
+      public let freeFloating: [TKFreeFloatingVehicleLocation]?
+
       public var all: [TKModeCoordinate] {
-        return (stops ?? [])    as [TKModeCoordinate]
-          + (bikePods ?? [])    as [TKModeCoordinate]
-          + (carPods ?? [])     as [TKModeCoordinate]
-          + (carParks ?? [])    as [TKModeCoordinate]
-          + (carRentals ?? [])  as [TKModeCoordinate]
+        return (stops ?? [])      as [TKModeCoordinate]
+          + (bikePods ?? [])      as [TKModeCoordinate]
+          + (carPods ?? [])       as [TKModeCoordinate]
+          + (carParks ?? [])      as [TKModeCoordinate]
+          + (carRentals ?? [])    as [TKModeCoordinate]
+          + (freeFloating ?? [])  as [TKModeCoordinate]
       }
         
     }
