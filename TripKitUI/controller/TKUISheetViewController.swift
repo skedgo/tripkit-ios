@@ -25,8 +25,8 @@ public class TKUISheetViewController: UIViewController {
     return self.view as? TKUISheet
   }
   
-  public override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  public override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
     
     sheet?.doneButtonPressed(nil)
   }
