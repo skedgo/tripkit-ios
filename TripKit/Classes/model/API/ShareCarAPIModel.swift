@@ -18,8 +18,9 @@ extension API {
     public let description: String?
     public let licensePlate: String?
     public let engineType: String?
-    public let fuelType: String?
+    public let fuelType: String? // Could be enum instead
     public let fuelLevel: Int?
+    public let imageURL: String?
   }
   
   public struct BookingAvailability: Codable, Hashable {
@@ -42,6 +43,12 @@ extension API {
   public struct AppInfo: Codable, Hashable {
     public let name: String?
     public let appURLiOS: String?
+  }
+  
+  public enum AvailabilityMode: String, Codable {
+    case none = "NONE"
+    case current = "CURRENT"
+    case future = "FUTURE"
   }
   
   public struct CarAvailability: Codable, Hashable {

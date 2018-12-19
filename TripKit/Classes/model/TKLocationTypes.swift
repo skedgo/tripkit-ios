@@ -76,7 +76,7 @@ public class TKCarPodLocation: TKModeCoordinate {
   }
   
   public var supportsVehicleAvailability: Bool {
-    return carPod.hasAvailabilityData == true
+    return carPod.availabilityMode != .none
   }
   
   private enum CodingKeys: String, CodingKey {
