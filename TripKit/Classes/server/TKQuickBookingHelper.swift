@@ -23,16 +23,19 @@ public struct TKQuickBooking : Codable {
   /// Localised description
   public let subtitle: String?
   
-  /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`.
+  /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`, unless `bookingURLIsDeepLink` returns `true`.
   public let bookingURL: URL
 
-  // Localised string for doing booking
+  /// Localised string for doing booking
   public let bookingTitle: String
   
-  // URL for secondary booking flow for booking this option. This will typically let you customise the booking or pick from more options, compared to the primary `bookingURL`.
+  /// Whether `bookingURL` is a deep-link into an external system
+  public let bookingURLIsDeepLink: Bool
+  
+  /// URL for secondary booking flow for booking this option. This will typically let you customise the booking or pick from more options, compared to the primary `bookingURL`.
   public let secondaryBookingURL: URL?
 
-  // Localised string for secondary booking action
+  /// Localised string for secondary booking action
   public let secondaryBookingTitle: String?
 
   /// URL to fetch updated trip that's using this booking options. Only present if there would be a change to the trip.
@@ -67,6 +70,7 @@ public struct TKQuickBooking : Codable {
     case imageURL
     case bookingTitle
     case bookingURL
+    case bookingURLIsDeepLink
     case secondaryBookingTitle
     case secondaryBookingURL
     case tripUpdateURL
