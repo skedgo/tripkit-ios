@@ -13,11 +13,11 @@ import Foundation
 extension Loc {
   
   @objc public static var AlreadyHaveAnAccount: String {
-    return NSLocalizedString("Already have an account? Sign in", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Option for users if they already owned a SkedGo account")
+    return NSLocalizedString("Already have an account?", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Option for users if they already owned a SkedGo account")
   }
 
   @objc public static var DontHaveAnAccount: String {
-    return NSLocalizedString("Don't have an account? Sign up", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Option for users if they don't yet have a SkedGo account")
+    return NSLocalizedString("Don't have an account?", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Option for users if they don't yet have a SkedGo account")
   }
 
   @objc public static var Authentication: String {
@@ -149,8 +149,21 @@ extension Loc {
     return NSLocalizedString("The username or password you've entered is incorrect.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Error message shown to a user when he/she enters incorrect username or password")
   }
   
+  public static var MissingUserToken: String {
+    return NSLocalizedString("userToken is missing in the server response", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Error message when our server fails to return userToken in response to a sign in or sign up request")
+  }
+  
+  public static var ResponseContainsNoData: String {
+    return NSLocalizedString("Server response contains no data", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Error message when our server returns empty data in response to a network request")
+  }
+  
   public static var EditAccount: String {
     return NSLocalizedString("Edit Account", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for the screen which allows users to edit their accounts")
+  }
+  
+  public static var Error: String {
+    return NSLocalizedString("Error", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Describing any generic/unclassified errors")
+
   }
   
   public static var ServerError: String {
@@ -185,6 +198,8 @@ extension Loc {
     return NSLocalizedString("Update", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for a button which, when tapped, proceeds to updating password")
   }
   
-  
+  public static var ConfirmPassword: String {
+    return NSLocalizedString("Confirm password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "This often appears below a password field, asking users to confirm the password entered.")
+  }
   
 }
