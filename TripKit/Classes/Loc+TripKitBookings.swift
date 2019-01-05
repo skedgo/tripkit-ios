@@ -137,8 +137,17 @@ extension Loc {
     return NSLocalizedString("Primary email is not set on your account. Please contact us for support", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Message to user if no primary email is set on his/her account")
   }
   
-  public static var PrimaryEmailNotVerifiedForPasswordChange: String {
-    return NSLocalizedString("Primary email must be verified before you can change password. Please follow the link in the email that was sent to you.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Error message shown to a user when he/she tries to change password without the primary email verified")
+  public static var AttemptToChangePasswordWithoutEmailVerified: String {
+    return NSLocalizedString("In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Warning message shown to a user when he/she tries to change password without the primary email verified")
+  }
+  
+  public static var Sent: String {
+    return NSLocalizedString("Sent", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email")
+  }
+  
+  public static var FailedToSend: String {
+    return NSLocalizedString("Failed to send", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email")
+
   }
   
   public static var PasswordIsEmpty: String {
@@ -163,7 +172,6 @@ extension Loc {
   
   public static var Error: String {
     return NSLocalizedString("Error", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Describing any generic/unclassified errors")
-
   }
   
   public static var ServerError: String {
@@ -200,6 +208,10 @@ extension Loc {
   
   public static var ConfirmPassword: String {
     return NSLocalizedString("Confirm password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "This often appears below a password field, asking users to confirm the password entered.")
+  }
+  
+  public static var resendVerificationEmail: String {
+    return NSLocalizedString("Resend verification email", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Give users an option to rece")
   }
   
 }
