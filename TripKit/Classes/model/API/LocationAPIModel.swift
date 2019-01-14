@@ -26,7 +26,7 @@ extension API {
     public let totalSpaces: Int?
     public let lastUpdate: TimeInterval?
     public let source: API.DataAttribution?
-    public let deepLink: String?
+    public let deepLink: URL?
     
     private enum CodingKeys: String, CodingKey {
       case identifier

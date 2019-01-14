@@ -287,9 +287,6 @@ extension TKDeepLinkable {
 
 extension TKBikePodLocation: TKDeepLinkable {
   public var deepLink: URL? {
-    guard let deepLinkURL = bikePod.deepLink else {
-      return nil
-    }
-    return URL(string: deepLinkURL)
+    return bikePod.deepLink
   }
 }
