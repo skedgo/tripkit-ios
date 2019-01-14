@@ -11,6 +11,7 @@ import Foundation
 extension API {
   
   public struct User: Codable {
+    public let name: String?
     public let firstName: String?
     public let lastName: String?
     public let address1: String?
@@ -22,6 +23,7 @@ extension API {
     public var appData: [String : Any] = [:]
     
     public init(
+      name: String? = nil,
       firstName: String? = nil,
       lastName: String? = nil,
       address1: String? = nil,
@@ -32,6 +34,7 @@ extension API {
       userId: String? = nil,
       appData: [String : Any] = [:]
       ) {
+      self.name = name
       self.firstName = firstName
       self.lastName = lastName
       self.address1 = address1
@@ -46,6 +49,7 @@ extension API {
     // MARK: - Codable
     
     private enum CodingKeys: String, CodingKey {
+      case name
       case firstName = "givenName"
       case lastName = "surname"
       case address1
