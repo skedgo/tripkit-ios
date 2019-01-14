@@ -275,3 +275,18 @@ extension NSCoder {
   }
 
 }
+
+// MAKR: - DeepLink
+public protocol TKDeepLinkable {
+  var deepLink: URL? { get }
+}
+
+extension TKDeepLinkable {
+  public var deepLink: URL? { return nil }
+}
+
+extension TKBikePodLocation: TKDeepLinkable {
+  public var deepLink: URL? {
+    return bikePod.deepLink
+  }
+}

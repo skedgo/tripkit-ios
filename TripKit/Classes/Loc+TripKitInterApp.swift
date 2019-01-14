@@ -65,5 +65,9 @@ extension Loc {
     let format = NSLocalizedString("Open %@", tableName: "TripKit", bundle: .tripKit, comment: "Action title open app of name '@%'")
     return String(format: format, appName)
   }
+  
+  public static var OpenApp: String {
+    return NSLocalizedString("Open App", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that opens an external app.")
+  }
 }
 
