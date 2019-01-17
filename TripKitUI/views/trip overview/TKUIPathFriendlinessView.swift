@@ -87,9 +87,13 @@ public class TKUIPathFriendlinessView: UIView {
     
     // Legend
     friendlyLegendLabel.text   = TKPathFriendliness.friendly.title
+    friendlyLegendLabel.font = TKStyleManager.systemFont(size: 12)
     unfriendlyLegendLabel.text = TKPathFriendliness.unfriendly.title
+    unfriendlyLegendLabel.font = TKStyleManager.systemFont(size: 12)
     dismountLegendLabel.text   = TKPathFriendliness.dismount.title
+    dismountLegendLabel.font = TKStyleManager.systemFont(size: 12)
     unknownLegendLabel.text    = TKPathFriendliness.unknown.title
+    unknownLegendLabel.font = TKStyleManager.systemFont(size: 12)
     
     // Colors
     friendlyLegendDot.backgroundColor = TKPathFriendliness.friendly.color
@@ -122,9 +126,13 @@ public class TKUIPathFriendlinessView: UIView {
     
     // Update labels
     friendlyMetreLabel.text = distanceFormatter.string(fromDistance: friendlyMetres)
+    friendlyMetreLabel.font = TKStyleManager.systemFont(size: 12)
     unfriendlyMetreLabel.text = distanceFormatter.string(fromDistance: unfriendlyMetres)
+    unfriendlyMetreLabel.font = TKStyleManager.systemFont(size: 12)
     dismountMetreLabel.text = distanceFormatter.string(fromDistance: dismountMetres)
+    dismountMetreLabel.font = TKStyleManager.systemFont(size: 12)
     unknownMetreLabel.text = distanceFormatter.string(fromDistance: unknownMetres)
+    unknownMetreLabel.font = TKStyleManager.systemFont(size: 12)
     
     // Hide labels if required
     friendlyMetreLabel.isHidden = friendlyMetres < 0.5

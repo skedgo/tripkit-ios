@@ -102,14 +102,15 @@
 
 + (void)styleTableViewForTileList:(UITableView *)tableView
 {
-  tableView.backgroundColor = [self backgroundColorForTileList];
+  tableView.backgroundColor = [TKStyleManager globalViewBackgroundColor];
   tableView.contentInset = UIEdgeInsetsMake(5, 0, 5, 0); // more padding around tiles
   tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 + (UIColor *)backgroundColorForTileList
 {
-  return [UIColor colorWithRed:237/255.0f green:238/255.0f blue:242/255.0f alpha:1];
+  return [TKStyleManager globalViewBackgroundColor];
+//  return [UIColor colorWithRed:237/255.0f green:238/255.0f blue:242/255.0f alpha:1];
 }
 
 + (UIColor *)cellSelectionBackgroundColor
@@ -220,16 +221,21 @@
   return [UIFont boldSystemFontOfSize:size];
 }
 
-+ (UIFont *)systemFontWithTextStyle:(NSString *)style
++ (UIFont *)semiboldSystemFontWithSize:(CGFloat)size
 {
-  NSString *fontName = [UIFont preferredFontName];
-  if (fontName) {
-    UIFont *font = [UIFont preferredFontForTextStyle:style];
-    if (font) {
-      return [UIFont fontWithName:fontName size:font.pointSize];
+  NSString *name = [UIFont preferredSemiboldFontName];
+  if (name) {
+    UIFont *preferredFont = [UIFont fontWithName:name size:size];
+    if (preferredFont) {
+      return preferredFont;
     }
   }
-  return [UIFont preferredFontForTextStyle:style];
+  return [UIFont systemFontOfSize:size weight:UIFontWeightSemibold];
+}
+
++ (UIFont *)systemFontWithTextStyle:(NSString *)style
+{
+  return [self customFontForTextStyle:style];
 }
 
 @end

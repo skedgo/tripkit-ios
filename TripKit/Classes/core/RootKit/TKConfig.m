@@ -60,6 +60,11 @@
   return self.configuration[@"GlobalSecondaryBarTintColor"];
 }
 
+- (NSDictionary *)globalViewBackgroundColor
+{
+  return self.configuration[@"GlobalViewBackgroundColor"];
+}
+
 - (BOOL)globalTranslucency
 {
   return [self.configuration[@"GlobalTranslucency"] boolValue];

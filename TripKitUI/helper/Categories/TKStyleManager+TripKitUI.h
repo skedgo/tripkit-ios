@@ -54,6 +54,7 @@
 
 + (UIFont *)systemFontWithSize:(CGFloat)size NS_SWIFT_NAME(systemFont(size:));
 + (UIFont *)boldSystemFontWithSize:(CGFloat)size NS_SWIFT_NAME(boldSystemFont(size:));
++ (UIFont *)semiboldSystemFontWithSize:(CGFloat)size NS_SWIFT_NAME(semiboldSystemFont(size:));
 + (UIFont *)systemFontWithTextStyle:(NSString *)style NS_SWIFT_NAME(systemFont(textStyle:));
 
 @end

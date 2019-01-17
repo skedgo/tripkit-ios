@@ -92,6 +92,7 @@ public class TKUIAttributionView: UIView {
       view.title.text = Loc.PoweredBy
       view.logo.setImage(with: iconURL)
       view.title.isUserInteractionEnabled = false
+      view.title.font = TKStyleManager.systemFont(size: 13)
 
     } else {
       // Powered by `provider`, where provider is a text.
@@ -100,7 +101,9 @@ public class TKUIAttributionView: UIView {
       case .poweredBy: plain = Loc.PoweredBy(title)
       case .dataProvidedBy: plain = Loc.DataProvided(by: title)
       }
+      
       let attributedTitle = NSMutableAttributedString(string: plain)
+      attributedTitle.addAttribute(.font, value: TKStyleManager.systemFont(size: 13), range: NSRange(location: 0, length: plain.count))
       
       let range = (plain as NSString).range(of: title)
       if let url = url, range.location != NSNotFound {

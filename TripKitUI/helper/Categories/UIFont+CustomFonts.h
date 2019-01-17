@@ -14,6 +14,8 @@
 
 + (nullable NSString *)preferredBoldFontName;
 
++ (nullable NSString *)preferredSemiboldFontName;
+
 + (void)printIncludedCustomFontsByNames;
 
 @end

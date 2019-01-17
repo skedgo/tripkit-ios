@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary *)globalAccentColor;
 - (NSDictionary *)globalBarTintColor;
 - (NSDictionary *)globalSecondaryBarTintColor;
+- (NSDictionary *)globalViewBackgroundColor;
 - (BOOL)globalTranslucency;
 
 // Fonts

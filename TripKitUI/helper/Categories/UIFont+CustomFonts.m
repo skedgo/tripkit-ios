@@ -32,6 +32,16 @@
   }
 }
 
++ (NSString *)preferredSemiboldFontName
+{
+  NSString *preferred = [[TKConfig sharedInstance] preferredFonts][@"Semibold"];
+  if (preferred) {
+    return preferred;
+  } else {
+    return nil;
+  }
+}
+
 + (void)printIncludedCustomFontsByNames
 {
 #ifdef DEBUG
