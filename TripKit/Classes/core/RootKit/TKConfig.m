@@ -41,28 +41,55 @@
 
 - (NSDictionary *)globalTintColor
 {
-  return self.configuration[@"GlobalTintColor"];
+  if ([self.configuration[@"GlobalTintColor"] isKindOfClass:[NSDictionary class]])
+  {
+    return self.configuration[@"GlobalTintColor"];
+  } else {
+    return nil;
+  }
 }
 
 - (NSDictionary *)globalAccentColor
 {
-  NSDictionary *accent = self.configuration[@"GlobalAccentColor"];
-  return accent ?: [self globalTintColor];
+  NSDictionary *accentDictionary;
+  
+  if ([self.configuration[@"GlobalAccentColor"] isKindOfClass:[NSDictionary class]])
+  {
+    accentDictionary = self.configuration[@"GlobalAccentColor"];
+  } else {
+    accentDictionary = nil;
+  }
+  return accentDictionary ?: [self globalTintColor];
 }
 
 - (NSDictionary *)globalBarTintColor
 {
-  return self.configuration[@"GlobalBarTintColor"];
+  if ([self.configuration[@"GlobalBarTintColor"] isKindOfClass:[NSDictionary class]])
+  {
+    return self.configuration[@"GlobalBarTintColor"];
+  } else {
+    return nil;
+  }
 }
 
 - (NSDictionary *)globalSecondaryBarTintColor
 {
-  return self.configuration[@"GlobalSecondaryBarTintColor"];
+  if ([self.configuration[@"GlobalSecondaryBarTintColor"] isKindOfClass:[NSDictionary class]])
+  {
+    return self.configuration[@"GlobalSecondaryBarTintColor"];
+  } else {
+    return nil;
+  }
 }
 
 - (NSDictionary *)globalViewBackgroundColor
 {
-  return self.configuration[@"GlobalViewBackgroundColor"];
+  if ([self.configuration[@"GlobalViewBackgroundColor"] isKindOfClass:[NSDictionary class]])
+  {
+    return self.configuration[@"GlobalViewBackgroundColor"];
+  } else {
+    return nil;
+  }
 }
 
 - (BOOL)globalTranslucency
@@ -74,7 +101,11 @@
 
 - (NSDictionary *)preferredFonts
 {
-  return self.configuration[@"PreferredFonts"];
+  if ([self.configuration[@"PreferredFonts"] isKindOfClass:[NSDictionary class]]) {
+    return self.configuration[@"PreferredFonts"];
+  } else {
+    return nil;
+  }
 }
 
 @end
