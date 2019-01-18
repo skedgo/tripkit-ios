@@ -82,6 +82,9 @@ class TKUIGroupedAlertCell: UITableViewCell {
     if let remoteImageName = route.modeInfo.remoteImageName {
       let remoteImageURL = TKServer.imageURL(forIconFileNamePart: remoteImageName, of: .listMainMode)
       modeIcon.setImage(with: remoteImageURL, asTemplate: route.modeInfo.remoteImageIsTemplate, placeholder: localImage)
+    } else {
+      modeIcon.image = localImage
+      modeIcon.tintColor = TKStyleManager.darkTextColor()
     }
     
     serviceColorIndicator.backgroundColor = route.color
