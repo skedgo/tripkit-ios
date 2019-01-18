@@ -17,7 +17,9 @@ class TKUILoadingAlertView: UIView {
   
   static func newInstance() -> TKUILoadingAlertView {
     let bundle = TripKitUIBundle.bundle()
-    return bundle.loadNibNamed("TKUILoadingAlertView", owner: self, options: nil)?.first as! TKUILoadingAlertView
+    let instance = bundle.loadNibNamed("TKUILoadingAlertView", owner: self, options: nil)?.first as! TKUILoadingAlertView
+    instance.textLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    return instance
   }
 
 }

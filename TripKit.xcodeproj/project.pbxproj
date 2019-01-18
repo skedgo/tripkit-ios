@@ -741,8 +741,8 @@
 		D39B7BB420622FD100988D8A /* TKUIAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */; };
 		D39B7BB520622FD100988D8A /* TKUIAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */; };
 		D39ECD86205A007A00E09474 /* TKUISectionedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */; };
-		D39ECD87205A007A00E09474 /* TKUISectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39ECD85205A007A00E09474 /* TKUISectionedAlertViewController.xib */; };
 		D39ECD89205A029500E09474 /* TKUISectionedAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */; };
+		D3E7C1AF21F17B7600C48248 /* TKUISectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */; };
 		D3F9CEC32064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */; };
 		D3F9CEC52064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */; };
 		D3FC1F11207B1B3E00D39DF9 /* TKInterAppCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator.swift */; };
@@ -1294,8 +1294,8 @@
 		D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAlertCell.swift; sourceTree = "<group>"; };
 		D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIAlertCell.xib; sourceTree = "<group>"; };
 		D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertViewController.swift; sourceTree = "<group>"; };
-		D39ECD85205A007A00E09474 /* TKUISectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertViewController.xib; sourceTree = "<group>"; };
 		D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertViewModel.swift; sourceTree = "<group>"; };
+		D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertViewController.xib; sourceTree = "<group>"; };
 		D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertTableHeader.swift; sourceTree = "<group>"; };
 		D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertTableHeader.xib; sourceTree = "<group>"; };
 		D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKInterAppCommunicator.swift; sourceTree = "<group>"; };
@@ -1570,7 +1570,7 @@
 				3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */,
 				3A6DF0DE202C8EB80084CB2C /* TKUIAlertViewController.swift */,
 				D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */,
-				D39ECD85205A007A00E09474 /* TKUISectionedAlertViewController.xib */,
+				D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */,
 				3AF5F2B520EFF91F003AAEBA /* TKUIAttributionTableViewController.swift */,
 				3AF5F2B420EFF91F003AAEBA /* TKUIAttributionTableViewController.xib */,
 				3A67698520EE3A7A0044663F /* TKUIAutocompletionViewController.swift */,
@@ -2682,12 +2682,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3E7C1AF21F17B7600C48248 /* TKUISectionedAlertViewController.xib in Resources */,
 				3A26E1B520EFAFBD00FE4DDD /* TKUISegmentStationaryCell.xib in Resources */,
 				3A6DF14B202C8EB80084CB2C /* TKUIPathFriendlinessView.xib in Resources */,
 				3AFD397720D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib in Resources */,
 				3AFD397B20D93DD600FDC7D0 /* TKUIResultsSectionFooterView.xib in Resources */,
 				3A6E7D4120EFBD4900013253 /* TKUISegmentMovingCell.xib in Resources */,
-				D39ECD87205A007A00E09474 /* TKUISectionedAlertViewController.xib in Resources */,
 				3A6DF13C202C8EB80084CB2C /* TKUIAlertInfoView.xib in Resources */,
 				3AF5F2B620EFF91F003AAEBA /* TKUIAttributionTableViewController.xib in Resources */,
 				D39B7BB520622FD100988D8A /* TKUIAlertCell.xib in Resources */,

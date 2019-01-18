@@ -21,7 +21,7 @@ class TKUISectionedAlertTableHeader: UIView {
   
   override func awakeFromNib() {
     backgroundColor = TKStyleManager.backgroundColorForTileList()
-    titleLabel.textColor = .white
+    titleLabel.textColor = .black
     titleLabel.font = TKStyleManager.semiboldSystemFont(size: 15)
   }
   
