@@ -60,5 +60,21 @@ extension TKStyleManager {
     }
   }
   
+  @objc public static func mediumCustomFont(forTextStyle textStyle: UIFont.TextStyle) -> UIFont {
+    let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: textStyle)
+    guard
+      let preferredFontName = UIFont.preferredMediumFontName(),
+      let customFont = UIFont(name: preferredFontName, size: descriptor.pointSize)
+      else {
+        return UIFont.systemFont(ofSize: descriptor.pointSize, weight: .medium)
+    }
+    
+    if #available(iOS 11.0, *) {
+      return UIFontMetrics.default.scaledFont(for: customFont)
+    } else {
+      return customFont
+    }
+  }
+  
 }
 

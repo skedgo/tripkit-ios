@@ -233,6 +233,18 @@
   return [UIFont systemFontOfSize:size weight:UIFontWeightSemibold];
 }
 
++ (UIFont *)mediumSystemFontWithSize:(CGFloat)size
+{
+  NSString *name = [UIFont preferredMediumFontName];
+  if (name) {
+    UIFont *preferredFont = [UIFont fontWithName:name size:size];
+    if (preferredFont) {
+      return preferredFont;
+    }
+  }
+  return [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
+}
+
 + (UIFont *)systemFontWithTextStyle:(NSString *)style
 {
   return [self customFontForTextStyle:style];

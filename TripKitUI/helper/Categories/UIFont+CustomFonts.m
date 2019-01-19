@@ -27,6 +27,11 @@
   return [[TKConfig sharedInstance] preferredFonts][@"Semibold"];
 }
 
++ (NSString *)preferredMediumFontName
+{
+  return [[TKConfig sharedInstance] preferredFonts][@"Medium"];
+}
+
 + (void)printIncludedCustomFontsByNames
 {
 #ifdef DEBUG
