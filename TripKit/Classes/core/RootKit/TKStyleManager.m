@@ -220,26 +220,52 @@ NSString * const kDateTimeDateFormatterKey = @"DateTimeDateFormatterKey";
 + (TKColor *)globalTintColor
 {
   NSDictionary *RGBs = [[TKConfig sharedInstance] globalTintColor];
-  return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
+  if (RGBs != nil) {
+    return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
+  } else {
+    return [TKColor colorWithRed:0/255.0f green:204/255.0f blue:102/255.0f alpha:1.0f];
+  }
 }
 
 + (TKColor *)globalBarTintColor
 {
   NSDictionary *RGBs = [[TKConfig sharedInstance] globalBarTintColor];
-  return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
-  
+  if (RGBs != nil) {
+    return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
+  } else {
+    return [TKColor colorWithRed:42/255.0f green:58/255.0f blue:77/255.0f alpha:1.0f];
+  }
 }
 
 + (TKColor *)globalSecondaryBarTintColor
 {
   NSDictionary *RGBs = [[TKConfig sharedInstance] globalSecondaryBarTintColor];
-  return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
+  if (RGBs != nil) {
+    return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
+  } else {
+    return [TKColor colorWithRed:30/255.0f green:42/255.0f blue:54/255.0f alpha:1.0f];
+  }
 }
 
 + (TKColor *)globalAccentColor
 {
   NSDictionary *RGBs = [[TKConfig sharedInstance] globalAccentColor];
-  return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
+  if (RGBs != nil) {
+    return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
+  } else {
+    return [self globalTintColor];
+  }
+}
+
++ (TKColor *)globalViewBackgroundColor
+{
+  NSDictionary *RGBs = [[TKConfig sharedInstance] globalViewBackgroundColor];
+  if (RGBs != nil) {
+    return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
+  } else {
+    // This is the color used in TripGo.
+    return [TKColor colorWithRed:237/255.0f green:238/255.0f blue:242/255.0f alpha:1];
+  }
 }
 
 + (BOOL)globalTranslucency

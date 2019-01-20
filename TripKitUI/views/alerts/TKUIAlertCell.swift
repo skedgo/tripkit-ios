@@ -62,19 +62,25 @@ class TKUIAlertCell: UITableViewCell {
     }
     
     titleLabel.text = alert.title
+    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .headline)
+    
     textView.text = alert.text
+    textView.font = TKStyleManager.customFont(forTextStyle: .body)
     
     dateAddedLabel.isHidden = alert.startTime == nil
     if let dateAdded = alert.startTime {
-      dateAddedLabel.text = Loc.From(date: TKStyleManager.string(for: dateAdded, for: .autoupdatingCurrent, showDate: true, showTime: false))      
+      dateAddedLabel.text = Loc.From(date: TKStyleManager.string(for: dateAdded, for: .autoupdatingCurrent, showDate: true, showTime: false))
+      dateAddedLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
     }
 
     lastUpdatedLabel.isHidden = alert.lastUpdated == nil
     if let lastUpdated = alert.lastUpdated {
       lastUpdatedLabel.text = Loc.LastUpdated(date: TKStyleManager.string(for: lastUpdated, for: .autoupdatingCurrent, showDate: true, showTime: false))
+      lastUpdatedLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     }
     
     readMoreButton.isHidden = alert.infoURL == nil
+    readMoreButton.titleLabel?.font = TKStyleManager.semiboldSystemFont(size: 15)
     if let url = alert.infoURL {
       readMoreButton.rx.tap
         .subscribe(onNext: { [unowned self] in

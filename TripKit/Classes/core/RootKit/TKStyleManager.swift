@@ -61,7 +61,6 @@ extension TKStyleManager {
   
 }
 
-
 // MARK: - Formatting
 
 extension TKStyleManager {

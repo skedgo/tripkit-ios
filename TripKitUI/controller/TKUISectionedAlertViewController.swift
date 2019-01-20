@@ -14,24 +14,17 @@ import SafariServices
 @available(*, unavailable, renamed: "TKUISectionedAlertViewController")
 public typealias TKSectionedAlertViewController = TKUISectionedAlertViewController
 
-public class TKUISectionedAlertViewController: UITableViewController {
+public class TKUISectionedAlertViewController: UIViewController {
   
-  public var region: TKRegion!
-  public var includeSearchBar: Bool = true
+  private(set) var region: TKRegion!
   public var eventTrackingDelegate: TKUIEventTrackable?
+  
+  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var searchBar: UISearchBar!
   
   private var viewModel: TKUISectionedAlertViewModel!
   
-  /// This is the main text color used throughout the view. Examples of
-  /// where it is applied: title and subtitle labels in the table view
-  /// cells.
-  ///
-  /// @default: `TKStyleManager.darkTextColor`
-  public var textColor: UIColor?
-  
   private let disposeBag = DisposeBag()
-
-  private var searchController: UISearchController!
   private let searchText = PublishSubject<String>()
   
   private var dataSource: RxTableViewSectionedReloadDataSource<TKUISectionedAlertViewModel.Section>?
@@ -54,25 +47,24 @@ public class TKUISectionedAlertViewController: UITableViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    if #available(iOS 11.0, *), includeSearchBar {
-      searchController = UISearchController(searchResultsController: nil)
-      searchController.searchResultsUpdater = self
-      searchController.obscuresBackgroundDuringPresentation = false
-      searchController.searchBar.tintColor = TKStyleManager.globalAccentColor()
-      navigationItem.searchController = searchController
-      navigationItem.hidesSearchBarWhenScrolling = false
-    }
+    view.backgroundColor = TKStyleManager.globalViewBackgroundColor()
+    
+    customizeSearchBar()
     
     tableView.register(TKUIGroupedAlertCell.nib, forCellReuseIdentifier: TKUIGroupedAlertCell.cellReuseIdentifier)
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 60
+    tableView.sectionHeaderHeight = UITableView.automaticDimension
+    tableView.estimatedSectionHeaderHeight = 44
     
-    let dataSource = RxTableViewSectionedReloadDataSource<TKUISectionedAlertViewModel.Section>(configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
-      let cell = tv.dequeueReusableCell(withIdentifier: TKUIGroupedAlertCell.cellReuseIdentifier, for: ip) as! TKUIGroupedAlertCell
-      cell.alertGroup = item.alertGroup
-      cell.cellTextColor = self?.textColor
-      return cell
-    })
+    let dataSource = RxTableViewSectionedReloadDataSource<TKUISectionedAlertViewModel.Section>(
+      configureCell: {(ds, tv, ip, item) -> UITableViewCell in
+        let cell = tv.dequeueReusableCell(withIdentifier: TKUIGroupedAlertCell.cellReuseIdentifier, for: ip) as! TKUIGroupedAlertCell
+        cell.alertGroup = item.alertGroup
+        cell.cellTextColor = TKStyleManager.darkTextColor()
+        return cell
+      }
+    )
 
     viewModel = TKUISectionedAlertViewModel(
       region: region,
@@ -131,11 +123,15 @@ public class TKUISectionedAlertViewController: UITableViewController {
   // MARK: - Supplementary views
   
   private func insertEmptyAlertView() {
+    // Remove the old one, just to be safe.
+    emptyAlertView?.removeFromSuperview()
+    
+    // Create the new one
     let emptyView = TKUIEmptyAlertView.makeView()
-    emptyView.frame.size = view.frame.size
+    emptyView.frame = tableView.frame
     emptyView.autoresizingMask = [.flexibleWidth, .flexibleWidth]
     emptyView.textLabel.text = Loc.WeWillKeepYouUpdated
-    emptyView.textLabel.textColor = textColor
+    emptyView.textLabel.textColor = TKStyleManager.darkTextColor()
     
     if let productName = Bundle.main.productName {
       emptyView.footerLabel.text = Loc.InTheMeantimeKeepExploring(appName: productName)
@@ -152,10 +148,10 @@ public class TKUISectionedAlertViewController: UITableViewController {
   
   private func insertLoadingView() {
     let loadingView = TKUILoadingAlertView.newInstance()
-    loadingView.frame.size = view.frame.size
+    loadingView.frame = tableView.frame
     loadingView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     loadingView.spinner.startAnimating()
-    loadingView.textLabel.textColor = textColor
+    loadingView.textLabel.textColor = TKStyleManager.darkTextColor()
     view.insertSubview(loadingView, aboveSubview: tableView)
     self.loadingView = loadingView
   }
@@ -166,25 +162,40 @@ public class TKUISectionedAlertViewController: UITableViewController {
     loadingView = nil
   }
   
+  private func customizeSearchBar() {
+    TKStyleManager.styleSearchBar(searchBar, includingBackground: false)
+    searchBar.backgroundColor = TKStyleManager.globalSecondaryBarTintColor()
+    searchBar.styleTextField {
+      guard let textField = $0 else { return }
+      textField.tintColor = TKStyleManager.globalTintColor()
+      textField.textColor = TKStyleManager.darkTextColor()
+      textField.backgroundColor = .white
+    }
+  }
+  
 }
 
-extension TKUISectionedAlertViewController {
+// MARK: -
+extension TKUISectionedAlertViewController: UITableViewDelegate {
   
-  public override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+  public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     guard let source = dataSource else { return nil }
     let header = TKUISectionedAlertTableHeader.newInstance()
     let section = source[section]
+    header.backgroundColor = section.color ?? TKStyleManager.backgroundColorForTileList()
     header.titleLabel.text = section.header
-    header.backgroundColor = section.color
+    header.titleLabel.textColor = section.color != nil ? .white : TKStyleManager.darkTextColor()
     return header
   }
   
-  public override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 44
+  public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    // As soon as user starts to scroll, dismiss keyboard.
+    searchBar.resignFirstResponder()
   }
   
 }
 
+// MARK: -
 extension TKUISectionedAlertViewController: TKUIAlertViewControllerDelegate {
   
   public func alertViewController(_ controller: TKUIAlertViewController, didTapOnURL url: URL) {
@@ -194,13 +205,29 @@ extension TKUISectionedAlertViewController: TKUIAlertViewControllerDelegate {
   
 }
 
-extension TKUISectionedAlertViewController: UISearchControllerDelegate {
-}
-
-extension TKUISectionedAlertViewController: UISearchResultsUpdating {
+// MARK: - Search bar delegate
+extension TKUISectionedAlertViewController: UISearchBarDelegate {
   
-  public func updateSearchResults(for searchController: UISearchController) {
-    searchText.onNext(searchController.searchBar.text ?? "")
+  public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    searchBar.setShowsCancelButton(true, animated: true)
+  }
+  
+  public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    searchBar.setShowsCancelButton(false, animated: true)
+  }
+  
+  public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+  }
+  
+  public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.text = nil
+    searchText.onNext("")
+    searchBar.resignFirstResponder()
+  }
+  
+  public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    self.searchText.onNext(searchText)
   }
   
 }

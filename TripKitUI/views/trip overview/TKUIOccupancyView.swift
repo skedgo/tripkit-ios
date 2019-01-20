@@ -71,7 +71,7 @@ public class TKUIOccupancyView: UIView {
     self.icon = icon
     
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
+    label.font = TKStyleManager.customFont(forTextStyle: .caption1)
     label.translatesAutoresizingMaskIntoConstraints = false
     addSubview(label)
     self.label = label

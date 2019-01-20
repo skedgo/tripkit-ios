@@ -14,10 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (TKConfig *)sharedInstance NS_REFINED_FOR_SWIFT;
 
 // Colors
-- (NSDictionary *)globalTintColor;
-- (NSDictionary *)globalAccentColor;
-- (NSDictionary *)globalBarTintColor;
-- (NSDictionary *)globalSecondaryBarTintColor;
+- (nullable NSDictionary *)globalTintColor;
+- (nullable NSDictionary *)globalAccentColor;
+- (nullable NSDictionary *)globalBarTintColor;
+- (nullable NSDictionary *)globalSecondaryBarTintColor;
+- (nullable NSDictionary *)globalViewBackgroundColor;
 - (BOOL)globalTranslucency;
 
 // Fonts

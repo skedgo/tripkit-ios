@@ -14,22 +14,22 @@
 
 + (NSString *)preferredFontName
 {
-  NSString *preferred = [[TKConfig sharedInstance] preferredFonts][@"Regular"];
-  if (preferred) {
-    return preferred;
-  } else {
-    return nil;
-  }
+  return [[TKConfig sharedInstance] preferredFonts][@"Regular"];
 }
 
 + (NSString *)preferredBoldFontName
 {
-  NSString *preferred = [[TKConfig sharedInstance] preferredFonts][@"Bold"];
-  if (preferred) {
-    return preferred;
-  } else {
-    return nil;
-  }
+  return [[TKConfig sharedInstance] preferredFonts][@"Bold"];
+}
+
++ (NSString *)preferredSemiboldFontName
+{
+  return [[TKConfig sharedInstance] preferredFonts][@"Semibold"];
+}
+
++ (NSString *)preferredMediumFontName
+{
+  return [[TKConfig sharedInstance] preferredFonts][@"Medium"];
 }
 
 + (void)printIncludedCustomFontsByNames

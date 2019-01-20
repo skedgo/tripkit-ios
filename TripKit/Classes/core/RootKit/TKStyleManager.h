@@ -78,6 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (TKColor *)globalBarTintColor;
 + (TKColor *)globalSecondaryBarTintColor;
 + (TKColor *)globalAccentColor;
++ (TKColor *)globalViewBackgroundColor;
 + (BOOL)globalTranslucency;
 
 @end
