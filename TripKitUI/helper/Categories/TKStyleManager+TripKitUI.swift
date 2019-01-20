@@ -12,6 +12,13 @@ import Foundation
 
 extension TKStyleManager {
   
+  /// This method returns a semibold font with custom font face for a given text style.
+  /// If there's no custom font face specified in the plist, system font face is used.
+  /// This method is typically used on `UILabel`, `UITextField`, and `UITextView` but
+  /// not recommended for system controls, such as `UIButton`.
+  ///
+  /// - Parameter textStyle: TextStyle desired
+  /// - Returns: A semibold font with custom font face.
   @objc public static func semiboldCustomFont(forTextStyle textStyle: UIFont.TextStyle) -> UIFont {
     let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: textStyle)
     guard
@@ -28,6 +35,13 @@ extension TKStyleManager {
     }
   }
   
+  /// This method returns a regular font with custom font face for a given text style.
+  /// If there's no custom font face specified in the plist, system font face is used.
+  /// This method is typically used on `UILabel`, `UITextField`, and `UITextView` but
+  /// not recommended for system controls, such as `UIButton`.
+  ///
+  /// - Parameter textStyle: TextStyle desired
+  /// - Returns: A regular font with custom font face.
   @objc public static func customFont(forTextStyle textStyle: UIFont.TextStyle) -> UIFont {
     let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: textStyle)
     guard
@@ -44,6 +58,13 @@ extension TKStyleManager {
     }
   }
   
+  /// This method returns a bold font with custom font face for a given text style.
+  /// If there's no custom font face specified in the plist, system font face is used.
+  /// This method is typically used on `UILabel`, `UITextField`, and `UITextView` but
+  /// not recommended for system controls, such as `UIButton`.
+  ///
+  /// - Parameter textStyle: TextStyle desired
+  /// - Returns: A bold font with custom font face.
   @objc public static func boldCustomFont(forTextStyle textStyle: UIFont.TextStyle) -> UIFont {
     let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: textStyle)
     guard
@@ -60,6 +81,13 @@ extension TKStyleManager {
     }
   }
   
+  /// This method returns a medium font with custom font face for a given text style.
+  /// If there's no custom font face specified in the plist, system font face is used.
+  /// This method is typically used on `UILabel`, `UITextField`, and `UITextView` but
+  /// not recommended for system controls, such as `UIButton`.
+  ///
+  /// - Parameter textStyle: TextStyle desired
+  /// - Returns: A semibold font with custom font face.
   @objc public static func mediumCustomFont(forTextStyle textStyle: UIFont.TextStyle) -> UIFont {
     let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: textStyle)
     guard
