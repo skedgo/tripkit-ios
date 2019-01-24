@@ -40,6 +40,8 @@ public protocol TKDisplayablePoint: MKAnnotation {
 
 }
 
+/// An annotation that can be displayed using TripKitUI's `TKUISemaphoreView`
+/// or just as a point on the map.
 @objc
 public protocol TKDisplayableTimePoint: TKDisplayablePoint {
   
@@ -50,19 +52,14 @@ public protocol TKDisplayableTimePoint: TKDisplayablePoint {
   var canFlipImage: Bool { get }
   var isTerminal: Bool { get }
   
+  /// Frequency of departures from here in minutes. Should return `nil` if it's
+  /// the departures are based on time-tables instead.
+  var frequency: NSNumber? { get }
+  
   /// Whether this point should ideally be displayed using the style of
-  // `TKSemaphoreView` rather than just a flat image.
+  /// `TKUISemaphoreView` rather than just a flat image.
   var prefersSemaphore: Bool { get }
   
-}
-
-extension TKDisplayableTimePoint {
-
-  var timeIsRealTime: Bool { return false }
-  var bearing: NSNumber? { return nil }
-  var canFlipImage: Bool { return false }
-  var isTerminal: Bool { return false }
-
 }
 
 @objc

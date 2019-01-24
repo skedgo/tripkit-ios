@@ -217,7 +217,12 @@ fileprivate extension TKUIAnnotationViewBuilder {
     
     // Set time stamp on the side opposite to direction of travel
     let side = semaphoreLabel(for: point.bearing?.doubleValue)
-    semaphoreView.setTime(point.time, isRealTime: point.timeIsRealTime, in: point.timeZone, onSide: side)
+    
+    if let frequency = point.frequency {
+      semaphoreView.setFrequency(frequency, onSide: side)
+    } else {
+      semaphoreView.setTime(point.time, isRealTime: point.timeIsRealTime, in: point.timeZone, onSide: side)
+    }
 
     semaphoreView.canShowCallout = annotation.title != nil
     semaphoreView.isEnabled = true

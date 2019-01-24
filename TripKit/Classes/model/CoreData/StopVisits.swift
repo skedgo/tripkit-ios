@@ -86,6 +86,9 @@ extension StopVisits: TKDisplayablePoint {
 // MARK: - STKDisplayableTimePoint
 
 extension StopVisits: TKDisplayableTimePoint {
+  public var frequency: NSNumber? {
+    return service.frequency
+  }
   
   public var time: Date {
     get {

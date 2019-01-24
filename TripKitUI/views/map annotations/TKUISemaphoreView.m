@@ -292,7 +292,7 @@
   [_timeImageView removeFromSuperview];
 	
 	// disable the label and the side if there's no time supplied
-	if (nil == time) {
+	if (nil == time && nil == freq) {
 		side = SGSemaphoreLabelDisabled;
 	}
  
