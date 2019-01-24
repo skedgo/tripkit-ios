@@ -35,7 +35,6 @@ extension Loc {
   @objc public static var Password: String {
     return NSLocalizedString("Password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "")
   }
-
   
   @objc public static var Change: String {
     return NSLocalizedString("Change", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Instruction for changing password")
@@ -132,6 +131,14 @@ extension Loc {
 // MARK: - Account
 
 extension Loc {
+  
+  public static var FirstName: String {
+    return NSLocalizedString("First name", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Placeholder text for textField that asks user's first name/given name")
+  }
+  
+  public static var LastName: String {
+    return NSLocalizedString("Last name", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Placeholder text for textField that asks user's last name/surname")
+  }
   
   public static var PrimaryEmailNotSet: String {
     return NSLocalizedString("Primary email is not set on your account. Please contact us for support", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Message to user if no primary email is set on his/her account")
