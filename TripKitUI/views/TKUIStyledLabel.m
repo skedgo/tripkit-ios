@@ -8,6 +8,14 @@
 
 #import "TKUIStyledLabel.h"
 
+#ifdef TK_NO_MODULE
+#import "TripKit.h"
+#import "TripKit/TripKit-Swift.h"
+#else
+@import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
+#endif
+
 #import "TKStyleManager+TripKitUI.h"
 
 @implementation TKUIStyledLabel
@@ -57,7 +65,7 @@
     CGFloat point = self.font.pointSize;
     self.font = [TKStyleManager systemFontWithSize:point];
   } else {
-    self.font = [TKStyleManager systemFontWithTextStyle:style];
+    self.font = [TKStyleManager customFontForTextStyle:style];
   }
 }
   
