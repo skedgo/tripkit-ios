@@ -652,10 +652,14 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   }
 }
 
-+ (NSString *)xTripGoVersion
++ (nullable NSString *)xTripGoVersion
 {
   NSNumber *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-  return [NSString stringWithFormat:@"i%@", version];
+  if (version) {
+    return [NSString stringWithFormat:@"i%@", version];
+  } else {
+    return nil;
+  }
 }
 
 #pragma mark - Regions
