@@ -212,11 +212,11 @@ fileprivate extension TKUIAnnotationViewBuilder {
     }
   }
 
-  fileprivate func buildSemaphore(for point: TKUISemaphoreDisplayable) -> MKAnnotationView {
+  fileprivate func buildSemaphore(for point: TKUISemaphoreDisplayable, preferredSide: SGSemaphoreLabel? = nil) -> MKAnnotationView {
     let semaphoreView = self.semaphoreView(for: point as MKAnnotation)
     
     // Set time stamp on the side opposite to direction of travel
-    let side = semaphoreLabel(for: point.bearing?.doubleValue)
+    let side = preferredSide ?? semaphoreLabel(for: point.bearing?.doubleValue)
     
     switch point.semaphoreMode {
     case .none:
@@ -240,8 +240,6 @@ fileprivate extension TKUIAnnotationViewBuilder {
   }
   
   fileprivate func buildSemaphore(for segment: TKSegment) -> MKAnnotationView {
-    let semaphoreView = self.semaphoreView(for: segment)
-    
     // Only public transport get the time stamp. And they get it on the side opposite to the
     // travel direction.
     let side: SGSemaphoreLabel
@@ -258,25 +256,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
       side = .disabled
     }
     
-    switch segment.semaphoreMode {
-    case .none:
-      assertionFailure("Shouldn't have used a semaphore. Will use one with head only.")
-      fallthrough
-
-    case .headOnly:
-      semaphoreView.setTime(nil, isRealTime: false, in: .current, onSide: side)
-
-    case .headWithFrequency(let frequency):
-      semaphoreView.setFrequency(frequency, onSide: side)
-
-    case .headWithTime(let date, let timeZone, isRealTime: let isRealTime):
-      semaphoreView.setTime(date, isRealTime: isRealTime, in: timeZone, onSide: side)
-    }
-
-    semaphoreView.canShowCallout = annotation.title != nil
-    semaphoreView.isEnabled = true
-    
-    return semaphoreView
+    return buildSemaphore(for: segment, preferredSide: side)
   }
   
 }

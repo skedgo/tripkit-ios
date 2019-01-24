@@ -76,14 +76,13 @@ extension TKUISemaphoreView {
   public func updateHead(magneticHeading: CLLocationDirection, bearing: CLLocationDirection) {
     headImageView.update(magneticHeading: CGFloat(magneticHeading), bearing: CGFloat(bearing))
     
-    if let displayable = (annotation as? TKUISemaphoreDisplayable) {
-      if displayable.canFlipImage && displayable.pointImageURL == nil {
-        let totalBearing = bearing - magneticHeading
-        let flip = totalBearing > 180 || totalBearing < 0
-        self.flipHead(flip)
-      } else {
-        self.flipHead(false)
-      }
+    guard let displayable = (annotation as? TKUISemaphoreDisplayable) else { return }
+    if displayable.canFlipImage && displayable.pointImageURL == nil {
+      let totalBearing = bearing - magneticHeading
+      let flip = totalBearing > 180 || totalBearing < 0
+      self.flipHead(flip)
+    } else {
+      self.flipHead(false)
     }
   }
   
