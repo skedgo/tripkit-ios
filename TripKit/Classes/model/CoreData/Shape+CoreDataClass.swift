@@ -157,7 +157,7 @@ extension Shape: TKDisplayableRoute {
     case .friendly, .unfriendly, .dismount:
       return friendliness.color
     case .unknown:
-      return segment?.color() ?? friendliness.color
+      return segment?.color ?? friendliness.color
     }
   }
   

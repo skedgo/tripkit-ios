@@ -25,8 +25,8 @@ class TKWaypointRouterTest: TKTestCase {
     // Homesby to Rocks, walking to Waitara
     let trip = self.trip(fromFilename: "hornsbyToSkedGo", serviceFilename: "hornsbyToSkedGoService")
     
-    let trainSegment = trip.segments()[2]
-    let service = trainSegment.service()!
+    let trainSegment = trip.segments[2]
+    let service = trainSegment.service!
     
     let waitara = (service.visits?.first { $0.stop.name!.hasPrefix("Waitara") })!
     
@@ -59,8 +59,8 @@ class TKWaypointRouterTest: TKTestCase {
     // Homesby to Rocks, walking from Milson's Point
     let trip = self.trip(fromFilename: "hornsbyToSkedGo", serviceFilename: "hornsbyToSkedGoService")
     
-    let trainSegment = trip.segments()[2]
-    let service = trainSegment.service()!
+    let trainSegment = trip.segments[2]
+    let service = trainSegment.service!
     
     let milsons = (service.visits?.first { $0.stop.name!.hasPrefix("Milson") })!
     
@@ -93,8 +93,8 @@ class TKWaypointRouterTest: TKTestCase {
     // Berowra to Hornsby, hike to Mt Kuring-Gai
     let trip = self.trip(fromFilename: "berowraToHornsby", serviceFilename: "berowraToHornsbyService")
     
-    let trainSegment = trip.segments()[1]
-    let service = trainSegment.service()!
+    let trainSegment = trip.segments[1]
+    let service = trainSegment.service!
     
     let kuring = (service.visits?.first { $0.stop.name!.contains("Kuring") })!
     
@@ -131,8 +131,8 @@ class TKWaypointRouterTest: TKTestCase {
     // Berowra to Hornsby, hike from Asquith
     let trip = self.trip(fromFilename: "berowraToHornsby", serviceFilename: "berowraToHornsbyService")
     
-    let trainSegment = trip.segments()[1]
-    let service = trainSegment.service()!
+    let trainSegment = trip.segments[1]
+    let service = trainSegment.service!
     
     let asquith = (service.visits?.first { $0.stop.name!.contains("Asquith") })!
     
@@ -169,8 +169,8 @@ class TKWaypointRouterTest: TKTestCase {
     let trip = self.trip(fromFilename: "routing-drive-park-walk-train", serviceFilename: "service-for-park-ride")
     // start - drive - park - walk - train - walk - transfer - bus - walk - end
     
-    let trainSegment = trip.segments()[4]
-    let service = trainSegment.service()!
+    let trainSegment = trip.segments[4]
+    let service = trainSegment.service!
     
     let waitara = (service.visits?.first { $0.stop.name!.contains("Waitara") })!
     

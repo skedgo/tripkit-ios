@@ -212,8 +212,8 @@ class WaypointParasBuilder {
   
   func build(moving segmentToMatch: TKSegment, to visit: StopVisits, atStart: Bool) -> [String: Any] {
     
-    assert(!segmentToMatch.isStationary(), "Can't move stationary segments to a visit")
-    assert(segmentToMatch.isPublicTransport(), "Can only move public transport segments to a visit")
+    assert(!segmentToMatch.isStationary, "Can't move stationary segments to a visit")
+    assert(segmentToMatch.isPublicTransport, "Can only move public transport segments to a visit")
     
     guard let trip = segmentToMatch.trip else { preconditionFailure() }
     
@@ -224,16 +224,15 @@ class WaypointParasBuilder {
     ]
     
     // Prune the segments, removing stationary segments...
-    let nonStationary = trip.segments()
-      .filter { !$0.isStationary() }
+    let nonStationary = trip.segments.filter { !$0.isStationary }
     
     // ... and walks after driving/cycling
     let prunedSegments = nonStationary
       .enumerated()
       .filter { index, segment in
-        if index > 0, segment.isWalking() {
+        if index > 0, segment.isWalking {
           let previous = nonStationary[index - 1]
-          return !previous.isDriving() && !previous.isCycling() && !previous.isSharedVehicle()
+          return !previous.isDriving && !previous.isCycling && !previous.isSharedVehicle
         } else {
           return true
         }
@@ -301,8 +300,8 @@ class WaypointParasBuilder {
   }
   
   private func waypointParas(forNonStationary segment: TKSegment) -> [String: Any] {
-    assert(!segment.isStationary())
-    if segment.isPublicTransport() {
+    assert(!segment.isStationary)
+    if segment.isPublicTransport {
       return waypointParas(forPublicTransport: segment)
     } else {
       return waypointParas(forPrivateTransport: segment)
@@ -310,12 +309,12 @@ class WaypointParasBuilder {
   }
   
   private func waypointParas(forPrivateTransport segment: TKSegment) -> [String: Any] {
-    precondition(!segment.isPublicTransport())
+    precondition(!segment.isPublicTransport)
     
     guard
       let start = segment.start?.coordinate,
       let end = segment.end?.coordinate,
-      let privateMode = segment.modeIdentifier()
+      let privateMode = segment.modeIdentifier
       else {
         preconditionFailure()
     }
@@ -334,19 +333,19 @@ class WaypointParasBuilder {
   }
   
   private func waypointParas(forPublicTransport segment: TKSegment) -> [String: Any] {
-    precondition(segment.isPublicTransport())
+    precondition(segment.isPublicTransport)
     
     guard
-      let startCode = segment.scheduledStartStopCode(),
-      let endCode = segment.scheduledEndStopCode(),
-      let publicMode = segment.modeIdentifier(),
-      let service = segment.service()
+      let startCode = segment.scheduledStartStopCode,
+      let endCode = segment.scheduledEndStopCode,
+      let publicMode = segment.modeIdentifier,
+      let service = segment.service
       else {
         preconditionFailure()
     }
     
-    let startRegion = segment.startRegion() ?? .international
-    let endRegion   = segment.endRegion()   ?? .international
+    let startRegion = segment.startRegion ?? .international
+    let endRegion   = segment.endRegion   ?? .international
     
     return [
       "modes": [publicMode],

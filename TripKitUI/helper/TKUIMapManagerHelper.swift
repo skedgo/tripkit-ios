@@ -65,12 +65,12 @@ public class TKUIMapManagerHelper: NSObject {
   public static func shapeAnnotations(for segment: TKSegment)
     -> (points: [MKAnnotation], overlays: [MKOverlay], requestVisits: Bool)?
   {
-    guard !segment.isStationary()
+    guard !segment.isStationary
       else {
         return nil
     }
     
-    guard !segment.isFlight() else {
+    guard !segment.isFlight else {
       if
         let start = segment.start,
         let end = segment.end,
@@ -82,8 +82,8 @@ public class TKUIMapManagerHelper: NSObject {
       }
     }
     
-    let shapes = segment.shapes() ?? []
-    let allEmpty = segment.isPublicTransport() && shapes.isEmpty
+    let shapes = segment.shapes ?? []
+    let allEmpty = segment.isPublicTransport && shapes.isEmpty
     
     var points = [MKAnnotation]()
     var overlays = [MKOverlay]()
@@ -97,7 +97,7 @@ public class TKUIMapManagerHelper: NSObject {
       }
       
       // Add the visits
-      guard let service = segment.service() else { continue }
+      guard let service = segment.service else { continue }
       if service.hasServiceData() {
         let visits = service.visits ?? []
         for visit in visits where segment.shouldShowVisit(visit) {

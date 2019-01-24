@@ -27,12 +27,12 @@ extension Trip {
   @objc(isMixedModalIgnoringWalking:)
   public func isMixedModal(ignoreWalking: Bool) -> Bool {
     var previousMode: String? = nil
-    for segment in segments() {
-      guard !segment.isStationary(), let mode = segment.modeIdentifier() else {
+    for segment in segments {
+      guard !segment.isStationary, let mode = segment.modeIdentifier else {
         continue // always ignore stationary segments or modes with identifier
       }
       
-      if segment.isWalking(), ignoreWalking || !segment.hasVisibility(.inSummary) {
+      if segment.isWalking, ignoreWalking || !segment.hasVisibility(.inSummary) {
         continue // we always ignore short walks that don't make it into the summary
       }
       if let previous = previousMode, previous != mode {
@@ -47,7 +47,7 @@ extension Trip {
   private var isExpensive: Bool {
     guard
       let segment = mainSegment() as? TKSegment,
-      let identifier = segment.modeIdentifier()
+      let identifier = segment.modeIdentifier
       else { return false }
     return TKTransportModes.modeIdentifierIsExpensive(identifier)
   }
@@ -61,7 +61,7 @@ extension Trip {
   
   /// If the trip uses a personal vehicle (non shared) which the user might want to assign to one of their vehicles
   @objc public var usedPrivateVehicleType: TKVehicleType {
-    for segment in segments() {
+    for segment in segments {
       let vehicleType = segment.privateVehicleType
       if vehicleType != .none {
         return vehicleType
@@ -72,8 +72,8 @@ extension Trip {
   
   /// Segments of this trip which do use a private (or shared) vehicle, i.e., those who return something from `usedVehicle`.
   @objc public var vehicleSegments: Set<TKSegment> {
-    return segments().reduce(mutating: Set()) { acc, segment in
-      if !segment.isStationary() && segment.usesVehicle {
+    return segments.reduce(mutating: Set()) { acc, segment in
+      if !segment.isStationary && segment.usesVehicle {
         acc.insert(segment)
       }
     }
@@ -81,7 +81,7 @@ extension Trip {
   
   /// - Parameter vehicle: The vehicle to assign this trip to. `nil` to reset to a generic vehicle.
   @objc public func assignVehicle(_ vehicle: TKVehicular?) {
-    segments().forEach { $0.assignVehicle(vehicle) }
+    segments.forEach { $0.assignVehicle(vehicle) }
   }
   
 }
@@ -94,7 +94,7 @@ extension Trip: TKTrip {
   @objc public func mainSegment() -> TKTripSegment {
     let hash = mainSegmentHashCode.intValue
     if hash > 0 {
-      for segment in segments() where segment.templateHashCode() == hash {
+      for segment in segments where segment.templateHashCode == hash {
         return segment
       }
       TKLog.warn("Trip", text: "Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: \(hash)")
@@ -104,8 +104,8 @@ extension Trip: TKTrip {
   }
   
   public func segments(with type: TKTripSegmentVisibility) -> [TKTripSegment] {
-    let filtered = segments().filter { $0.hasVisibility(type) }
-    return filtered.isEmpty ? segments() : filtered
+    let filtered = segments.filter { $0.hasVisibility(type) }
+    return filtered.isEmpty ? segments : filtered
   }
   
   public var costValues: [NSNumber : String] {

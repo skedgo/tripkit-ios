@@ -56,13 +56,13 @@ private extension TKUITripMapManager {
     var overlays = [MKOverlay]()
     var affectedByTraffic = false
     
-    for segment in trip.segments() {
+    for segment in trip.segments {
       // We at least add the point for every segment
       guard (segment as TKDisplayablePoint).pointDisplaysImage else { continue }
       annotations.append(segment)
       
       // For non-stationary segments, we also add shape information
-      guard !segment.isStationary() else { continue }
+      guard !segment.isStationary else { continue }
       
       guard let toAdd = TKUIMapManagerHelper.shapeAnnotations(for: segment) else { continue }
       annotations += toAdd.points
@@ -71,14 +71,14 @@ private extension TKUITripMapManager {
       // TODO: request visits
       
       // Add vehicles
-      if let primary = segment.realTimeVehicle() {
+      if let primary = segment.realTimeVehicle {
         dynamicAnnotations.append(primary)
       }
-      dynamicAnnotations.append(contentsOf: segment.realTimeAlternativeVehicles())
+      dynamicAnnotations.append(contentsOf: segment.realTimeAlternativeVehicles)
       
       // TODO: add alerts
       
-      affectedByTraffic = affectedByTraffic || segment.isAffectedByTraffic()
+      affectedByTraffic = affectedByTraffic || segment.isAffectedByTraffic
     }
     
     mapView?.showsTraffic = affectedByTraffic

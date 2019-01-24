@@ -231,7 +231,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     // Only public transport get the time stamp. And they get it on the side opposite to the
     // travel direction.
     let side: SGSemaphoreLabel
-    if segment.isPublicTransport() {
+    if segment.isPublicTransport {
       side = semaphoreLabel(for: segment.bearing?.doubleValue)
       
     } else if segment.isTerminal {
@@ -244,10 +244,10 @@ fileprivate extension TKUIAnnotationViewBuilder {
       side = .disabled
     }
     
-    if let frequency = segment.frequency() {
+    if let frequency = segment.frequency {
       semaphoreView.setFrequency(frequency, onSide: side)
     } else if let departure = segment.departureTime {
-      semaphoreView.setTime(departure, isRealTime: segment.timesAreRealTime(), in: (segment as TKDisplayableTimePoint).timeZone, onSide: side)
+      semaphoreView.setTime(departure, isRealTime: segment.timesAreRealTime, in: (segment as TKDisplayableTimePoint).timeZone, onSide: side)
     }
     
     semaphoreView.canShowCallout = annotation.title != nil

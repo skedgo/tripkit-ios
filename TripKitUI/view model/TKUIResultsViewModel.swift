@@ -40,7 +40,7 @@ public class TKUIResultsViewModel {
       self.trip = trip
       
       let displayableRoutes = trip.segments(with: .onMap)
-        .compactMap { ($0 as? TKSegment)?.shapes() }   // Only include those with shapes
+        .compactMap { ($0 as? TKSegment)?.shapes }   // Only include those with shapes
         .flatMap { $0.filter { $0.routeIsTravelled } } // Flat list of travelled shapes
       polylines = displayableRoutes.compactMap(TKRoutePolyline.init)
     }

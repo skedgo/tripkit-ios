@@ -121,19 +121,19 @@ extension TKUITripOverviewViewModel {
   
   private static func build(segment: TKSegment, previous: TKSegment?, next: TKSegment?) -> [TKUITripOverviewViewModel.Item] {
     
-    switch segment.order() {
+    switch segment.order {
     case .start, .end:
       return [
         .terminal(segment.toTerminal(previous: previous, next: next))
       ]
       
     case .regular:
-      if segment.isStationary() {
+      if segment.isStationary {
         return [
           .stationary(segment.toStationary(previous: previous, next: next)),
         ]
 
-      } else if let next = next, !next.isStationary() {
+      } else if let next = next, !next.isStationary {
         return [
           .moving(segment.toMoving()),
           .stationary(segment.toStationaryBridge(to: next))
@@ -151,7 +151,7 @@ extension TKUITripOverviewViewModel {
 
 fileprivate extension TKSegment {
   func toTerminal(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.TerminalItem {
-    let isStart = order() == .start
+    let isStart = order == .start
     return TKUITripOverviewViewModel.TerminalItem(
       title: titleWithoutTime,
       subtitle: nil,
@@ -190,7 +190,7 @@ fileprivate extension TKSegment {
   func toMoving() -> TKUITripOverviewViewModel.MovingItem {
     var accessories: [TKUITripOverviewViewModel.SegmentAccessory] = []
     
-    let vehicle = realTimeVehicle()
+    let vehicle = realTimeVehicle
     let occupancies = vehicle?.components?.map { $0.map { $0.occupancy ?? .unknown } }
     if let occupancies = occupancies, occupancies.count > 1 {
       accessories.append(.carriageOccupancies(occupancies))
@@ -208,7 +208,7 @@ fileprivate extension TKSegment {
     
     return TKUITripOverviewViewModel.MovingItem(
       title: titleWithoutTime,
-      notes: notes(),
+      notes: notes,
       icon: (self as TKTripSegment).tripSegmentModeImage,
       iconURL: (self as TKTripSegment).tripSegmentModeImageURL,
       iconIsTemplate: (self as TKTripSegment).tripSegmentModeImageIsTemplate,
@@ -220,8 +220,8 @@ fileprivate extension TKSegment {
   }
   
   var line: TKUITripOverviewViewModel.Line? {
-    guard !isStationary() else { return nil }
-    return TKUITripOverviewViewModel.Line(color: color())
+    guard !isStationary else { return nil }
+    return TKUITripOverviewViewModel.Line(color: color)
   }
 }
 
@@ -232,8 +232,8 @@ extension TKUITripOverviewViewModel.Item: IdentifiableType {
   var identity: Identity {
     switch self {
     case .terminal(let item): return item.isStart ? "Start" : "End"
-    case .stationary(let item): return String(describing: item.segment.templateHashCode())
-    case .moving(let item): return String(describing: item.segment.templateHashCode())
+    case .stationary(let item): return String(describing: item.segment.templateHashCode)
+    case .moving(let item): return String(describing: item.segment.templateHashCode)
     }
   }
 }

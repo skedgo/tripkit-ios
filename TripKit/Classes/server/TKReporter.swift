@@ -148,12 +148,12 @@ extension TripGroupVisibility {
 extension TKSegment {
   
   fileprivate var choiceSetEntry: [String: Any]? {
-    guard order() == .regular, !isContinuation() else { return nil }
+    guard order == .regular, !isContinuation else { return nil }
 
     let mode: String
-    if isStationary() {
-      mode = modeInfo()?.localImageName ?? "wait"
-    } else if let identifier = modeInfo()?.identifier ?? modeIdentifier() {
+    if isStationary {
+      mode = modeInfo?.localImageName ?? "wait"
+    } else if let identifier = modeInfo?.identifier ?? modeIdentifier {
       mode = identifier
     } else {
       return nil

@@ -24,7 +24,7 @@ public class TKTripPattern: NSObject {
   /// - Returns: The trip pattern for a trip
   @objc(tripPatternForTrip:)
   public static func pattern(for trip: Trip) -> [TKSegmentPattern] {
-    return trip.segments().compactMap { $0.pattern }
+    return trip.segments.compactMap { $0.pattern }
   }
   
 
@@ -46,8 +46,8 @@ public class TKTripPattern: NSObject {
 extension TKSegment {
   
   fileprivate var pattern: TKSegmentPattern? {
-    guard !isStationary() else { return nil }
-    guard let mode = modeIdentifier() else {
+    guard !isStationary else { return nil }
+    guard let mode = modeIdentifier else {
       assertionFailure("Segment is missing mode: \(self)")
       return nil
     }
@@ -62,8 +62,8 @@ extension TKSegment {
       "modes":  [mode]
     ]
     
-    pattern["alt"] = modeInfo()?.alt
-    pattern["preferredPublic"] = isPublicTransport() ? modeInfo()?.identifier : nil
+    pattern["alt"] = modeInfo?.alt
+    pattern["preferredPublic"] = isPublicTransport ? modeInfo?.identifier : nil
     return pattern
   }
   

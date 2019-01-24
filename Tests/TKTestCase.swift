@@ -59,8 +59,8 @@ class TKTestCase: XCTestCase {
         guard let trip = request?.tripGroups?.first?.visibleTrip else { preconditionFailure() }
         
         if let serviceFilename = serviceFilename {
-          for segment in trip.segments() {
-            if let service = segment.service() {
+          for segment in trip.segments {
+            if let service = segment.service {
               let serviceJson = try! self.contentFromJSON(named: serviceFilename)
               let provider = TKBuzzInfoProvider()
               provider.addContent(to: service, fromResponse: serviceJson as! [AnyHashable : Any])
