@@ -31,7 +31,7 @@ class TKWaypointRouterTest: TKTestCase {
     let waitara = (service.visits?.first { $0.stop.name!.hasPrefix("Waitara") })!
     
     let builder = WaypointParasBuilder()
-    let paras = builder.build(moving: trainSegment, to: waitara, atStart: true)
+    let paras = try builder.build(moving: trainSegment, to: waitara, atStart: true)
     XCTAssertNotNil(paras)
     
     let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
@@ -65,7 +65,7 @@ class TKWaypointRouterTest: TKTestCase {
     let milsons = (service.visits?.first { $0.stop.name!.hasPrefix("Milson") })!
     
     let builder = WaypointParasBuilder()
-    let paras = builder.build(moving: trainSegment, to: milsons, atStart: false)
+    let paras = try builder.build(moving: trainSegment, to: milsons, atStart: false)
     XCTAssertNotNil(paras)
     
     let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
@@ -99,7 +99,7 @@ class TKWaypointRouterTest: TKTestCase {
     let kuring = (service.visits?.first { $0.stop.name!.contains("Kuring") })!
     
     let builder = WaypointParasBuilder()
-    let paras = builder.build(moving: trainSegment, to: kuring, atStart: true)
+    let paras = try builder.build(moving: trainSegment, to: kuring, atStart: true)
     XCTAssertNotNil(paras)
     
     let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
@@ -137,7 +137,7 @@ class TKWaypointRouterTest: TKTestCase {
     let asquith = (service.visits?.first { $0.stop.name!.contains("Asquith") })!
     
     let builder = WaypointParasBuilder()
-    let paras = builder.build(moving: trainSegment, to: asquith, atStart: false)
+    let paras = try builder.build(moving: trainSegment, to: asquith, atStart: false)
     XCTAssertNotNil(paras)
     
     let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
@@ -175,7 +175,7 @@ class TKWaypointRouterTest: TKTestCase {
     let waitara = (service.visits?.first { $0.stop.name!.contains("Waitara") })!
     
     let builder = WaypointParasBuilder()
-    let paras = builder.build(moving: trainSegment, to: waitara, atStart: true)
+    let paras = try builder.build(moving: trainSegment, to: waitara, atStart: true)
     XCTAssertNotNil(paras)
 
     let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
