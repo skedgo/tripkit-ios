@@ -136,11 +136,11 @@
     StopVisits *lastStopBeforeOffset = [visits firstObject];
     StopVisits *firstStopAfterOffset = [visits lastObject];
     for (StopVisits *visit in visits) {
-      if ([time timeIntervalSinceDate:visit.time] > allowedOffset) {
+      if ([time timeIntervalSinceDate:visit.departure] > allowedOffset) {
         // the visit is sufficiently before 'time'
         lastStopBeforeOffset = visit;
       }
-      if ([visit.time timeIntervalSinceDate:time] > allowedOffset) {
+      if ([visit.departure timeIntervalSinceDate:time] > allowedOffset) {
         // found the first sufficiently one after 'time'
         firstStopAfterOffset = visit;
         break; // this also means we are done!
@@ -151,8 +151,8 @@
     zeroScoreDistance = 250;
     start = lastStopBeforeOffset;
     end = firstStopAfterOffset;
-    startTime = [lastStopBeforeOffset time];
-    endTime = [firstStopAfterOffset time];
+    startTime = [lastStopBeforeOffset departure];
+    endTime = [firstStopAfterOffset arrival] ?: [firstStopAfterOffset departure];
     shapes = [segment.service shapesForEmbarkation:lastStopBeforeOffset
                                     disembarkingAt:firstStopAfterOffset];
   

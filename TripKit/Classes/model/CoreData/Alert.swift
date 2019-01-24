@@ -44,33 +44,3 @@ extension Alert: MKAnnotation {
   }
   
 }
-
-// MARK: - TKDisplayablePoint
-
-extension Alert: TKDisplayablePoint {
-
-  public var pointClusterIdentifier: String? {
-    return nil
-  }
-  
-  public var pointDisplaysImage: Bool {
-    return location != nil
-  }
-  
-  public var pointImage: TKImage? {
-    return TKInfoIcon.image(for: infoIconType, usage: .map)
-  }
-  
-  public var pointImageURL: URL? {
-    return imageURL
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return false
-  }
-
-  public var isDraggable: Bool {
-    return false
-  }
-  
-}

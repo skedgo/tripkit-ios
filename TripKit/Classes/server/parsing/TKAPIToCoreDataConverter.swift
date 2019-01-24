@@ -128,7 +128,8 @@ extension Service {
 
     // Prefer real-time data all fall back to timetable data
     if let departure = (model.realTimeDeparture ?? model.startTime) {
-      visit.time = Date(timeIntervalSince1970: departure) // we use 'time' to allow KVO
+      visit.departure = Date(timeIntervalSince1970: departure)
+      visit.triggerRealTimeKVO()
     }
     if let arrival = (model.realTimeArrival ?? model.endTime) {
       visit.arrival = Date(timeIntervalSince1970: arrival)

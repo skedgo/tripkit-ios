@@ -156,7 +156,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     vehicleImageView?.setNeedsDisplay()
     
     // rotate the wrapper
-    wrapper.rotate(forBearing: CGFloat(bearingAngle))
+    wrapper.rotate(bearing: CGFloat(bearingAngle))
     
     // flip the label
     if bearingAngle > 180 {

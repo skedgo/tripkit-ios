@@ -41,7 +41,7 @@
 {
   if (self.observedObject) {
 		[self.observedObject removeObserver:self
-														 forKeyPath:@"time"];
+														 forKeyPath:@"semaphoreMode"];
 		self.observedObject = nil;
   }
 }
@@ -96,7 +96,7 @@
   BOOL didChange = (annotation != self.annotation);
 	if (didChange && self.observedObject != nil) {
 		[self.observedObject removeObserver:self
-														 forKeyPath:@"time"];
+														 forKeyPath:@"semaphoreMode"];
 		self.observedObject = nil;
 	}
 	
@@ -106,11 +106,11 @@
 	// observe the new
 	if (didChange &&
       [annotation isKindOfClass:[NSObject class]] &&
-			[annotation conformsToProtocol:@protocol(TKDisplayableTimePoint)])
+      [TKUISemaphoreView shouldObserve:annotation])
 	{
 		NSObject *object = (NSObject *)annotation;
 		[object addObserver:self
-						 forKeyPath:@"time"
+						 forKeyPath:@"semaphoreMode"
 								options:NSKeyValueObservingOptionNew
 								context:nil];
 		self.observedObject = object;
@@ -140,42 +140,6 @@
 	self.frame = mainFrame;
 }
 
-- (void)updateForAnnotation:(NSObject <TKDisplayablePoint> *)annotation
-{
-  [self updateForAnnotation:annotation
-                withHeading:0];
-}
-
-
-- (void)updateForAnnotation:(id<MKAnnotation>)annotation
-								withHeading:(CLLocationDirection)heading
-{
-	self.annotation = annotation;
-
-  UIImage *image = nil;
-  NSURL *imageURL = nil;
-  BOOL asTemplate = NO;
-  NSNumber *bearing = nil;
-  BOOL terminal = NO;
-  BOOL canFlip = NO;
-  
-  if ([annotation conformsToProtocol:@protocol(TKDisplayablePoint)]) {
-    id<TKDisplayablePoint> displayable = (id<TKDisplayablePoint>)annotation;
-    image = [displayable pointImage];
-    imageURL = [displayable pointImageURL];
-    asTemplate = [displayable pointImageIsTemplate];
-
-    if ([annotation conformsToProtocol:@protocol(TKDisplayableTimePoint)]) {
-      id<TKDisplayableTimePoint> timePoint = (id<TKDisplayableTimePoint>)annotation;
-      bearing = [timePoint bearing];
-      terminal = [timePoint isTerminal];
-      canFlip = imageURL == nil && [timePoint canFlipImage];
-    }
-  }
-  
-  [self setHeadWithImage:image imageURL:imageURL imageIsTemplate:asTemplate forBearing:bearing andHeading:heading inRed:terminal canFlipImage:canFlip];
-}
-
 - (void)prepareForReuse
 {
 	self.isFlipped = NO;
@@ -183,7 +147,7 @@
 	
   if (self.observedObject) {
     [self.observedObject removeObserver:self
-                             forKeyPath:@"time"];
+                             forKeyPath:@"semaphoreMode"];
     self.observedObject = nil;
   }
   
@@ -201,26 +165,10 @@
   self.label = SGSemaphoreLabelDisabled;
 }
 
-- (void)setHeadWithImage:(UIImage *)image
-                imageURL:(NSURL *)imageURL
-         imageIsTemplate:(BOOL)asTemplate
-              forBearing:(NSNumber *)bearing
-							andHeading:(CLLocationDirection)heading
-						canFlipImage:(BOOL)canFlipImage
-{
-    [self setHeadWithImage:image
-                  imageURL:imageURL
-           imageIsTemplate:asTemplate
-								forBearing:bearing
-								andHeading:heading
-										 inRed:NO
-							canFlipImage:canFlipImage];
-}
-
-- (void)setFrequency:(NSNumber *)frequency
+- (void)setFrequency:(NSInteger)frequency
               onSide:(SGSemaphoreLabel)side
 {
-  [self setTimeFlagOnSide:side withTime:nil isRealTime:NO atTimeZone:nil orFrequency:frequency];
+  [self setTimeFlagOnSide:side withTime:nil isRealTime:NO atTimeZone:nil orFrequency:@(frequency)];
 }
 
 - (void)setTime:(NSDate *)timeStamp
@@ -231,32 +179,20 @@
   [self setTimeFlagOnSide:side withTime:timeStamp isRealTime:isRealTime atTimeZone:timezone orFrequency:nil];
 }
 
-- (void)updateHeadForMagneticHeading:(CLLocationDirection)heading andBearing:(CLLocationDirection)bearing
-{
-	// rotate the head
-	[self.headImageView updateForMagneticHeading:(CGFloat)heading andBearing:(CGFloat)bearing];
-	
-	// flip the image
-	if ([self.annotation conformsToProtocol:@protocol(TKDisplayableTimePoint)]) {
-    id<TKDisplayableTimePoint> timePoint = (id <TKDisplayableTimePoint>) self.annotation;
-    NSURL *imageUrl = [timePoint respondsToSelector:@selector(pointImageURL)] ? [timePoint pointImageURL] : nil;
-		if ([timePoint canFlipImage] && imageUrl == nil) {
-			CLLocationDirection totalBearing = bearing - heading;
-			if (totalBearing > 180.0f || totalBearing < 0) {
-				if (NO == self.isFlipped) {
-//					float w =  self.frame.size.width / 2 - self.modeImageView.image.size.width / 2;
-//					self.modeImageView.transform = CGAffineTransformMake(-1.0, 0.0, 0.0, 1.0, w, 0.0);
-					self.modeImageView.transform = CGAffineTransformScale(self.modeImageView.transform, -1, 1);
-					self.isFlipped = YES;
-				}
-			} else {
-				if (self.isFlipped) {
-					self.modeImageView.transform = CGAffineTransformIdentity;
-					self.isFlipped = NO;
-				}
-			}
-		}
-	}
+- (void)flipHead:(BOOL)flip {
+  if (flip) {
+    if (NO == self.isFlipped) {
+      //          float w =  self.frame.size.width / 2 - self.modeImageView.image.size.width / 2;
+      //          self.modeImageView.transform = CGAffineTransformMake(-1.0, 0.0, 0.0, 1.0, w, 0.0);
+      self.modeImageView.transform = CGAffineTransformScale(self.modeImageView.transform, -1, 1);
+      self.isFlipped = YES;
+    }
+  } else {
+    if (self.isFlipped) {
+      self.modeImageView.transform = CGAffineTransformIdentity;
+      self.isFlipped = NO;
+    }
+  }
 }
 
 
@@ -270,10 +206,10 @@
     typeof(weakSelf) strongSelf = weakSelf;
     if (strongSelf
         && object == strongSelf.annotation
-        && [keyPath isEqualToString:@"time"]) {
+        && [keyPath isEqualToString:@"semaphoreMode"]) {
       [strongSelf setTimeFlagOnSide:strongSelf.label
                            withTime:[object time]
-                         isRealTime:[object timeIsRealTime]
+                         isRealTime:[TKUISemaphoreView isRealTime:object]
                          atTimeZone:[object timeZone]
                         orFrequency:nil];
     }

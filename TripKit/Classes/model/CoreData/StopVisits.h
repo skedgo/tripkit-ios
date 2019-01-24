@@ -25,9 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface StopVisits : NSManagedObject
 
-@property (nonatomic, retain, nullable) NSDate * arrival;
+@property (nonatomic, retain, nullable) NSDate * arrival; // DEPRECATED_MSG_ATTRIBUTE("Ambiguous. Use .timing instead");
 @property (nonatomic, retain, nullable) NSNumber * bearing;
-@property (nonatomic, retain, nullable) NSDate * departure;
+@property (nonatomic, retain, nullable) NSDate * departure; // DEPRECATED_MSG_ATTRIBUTE("Ambiguous. Use .timing instead");
 @property (nonatomic, retain, nullable) NSDate * originalTime;
 @property (nonatomic, retain) NSNumber * flags;
 @property (nonatomic, retain) NSNumber * index;

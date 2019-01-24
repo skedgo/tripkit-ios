@@ -289,8 +289,8 @@
 			NSDate *departure = [NSDate dateWithTimeIntervalSince1970:startTime.integerValue];
 			
       if (visit) {
-        // we use 'time' to allow KVO
-        visit.time = departure;
+        visit.departure = departure;
+        [visit triggerRealTimeKVO];
         service.realTime = YES;
 
       } else if (dls) {
@@ -341,14 +341,16 @@
 				if (newDeparture) {
           if (aVisit.departure) delay = [newDeparture timeIntervalSinceDate:aVisit.departure];
 					// use time for KVO
-					aVisit.time = newDeparture;
+					aVisit.departure = newDeparture;
+          [aVisit triggerRealTimeKVO];
 				}
 				if (! newArrival && aVisit.arrival && fabs(delay) < 1) {
 					aVisit.arrival = [aVisit.arrival dateByAddingTimeInterval:delay];
 				}
 				if (! newDeparture && aVisit.departure && fabs(delay) < 1) {
 					// use time for KVO
-					aVisit.time = [aVisit.departure dateByAddingTimeInterval:delay];
+					aVisit.departure = [aVisit.departure dateByAddingTimeInterval:delay];
+          [aVisit triggerRealTimeKVO];
 				}
 			}
 		}

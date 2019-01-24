@@ -155,7 +155,7 @@ fileprivate extension TKSegment {
     return TKUITripOverviewViewModel.TerminalItem(
       title: titleWithoutTime,
       subtitle: nil,
-      time: time,
+      time: isStart ? departureTime : arrivalTime,
       timeZone: timeZone,
       connection: (isStart ? next : previous)?.line,
       isStart: isStart

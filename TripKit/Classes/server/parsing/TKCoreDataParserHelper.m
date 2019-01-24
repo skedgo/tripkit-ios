@@ -164,15 +164,14 @@
       if (arrivalRaw || departureRaw) {
         if (arrivalRaw) {
           visit.arrival = [NSDate dateWithTimeIntervalSince1970:arrivalRaw.longValue];
-          
         }
         if (departureRaw) {
-          // we use 'time' to allow KVO
-          visit.time = [NSDate dateWithTimeIntervalSince1970:departureRaw.longValue];
+          visit.departure = [NSDate dateWithTimeIntervalSince1970:departureRaw.longValue];
+          [visit triggerRealTimeKVO];
         }
         
         // keep original time before we touch it with real-time data
-        visit.originalTime = [visit time];
+        visit.originalTime = [visit departure] ?: [visit arrival];
         
         // frequency-based entries don't have times, so they don't have a region-day either
         [visit adjustRegionDay];

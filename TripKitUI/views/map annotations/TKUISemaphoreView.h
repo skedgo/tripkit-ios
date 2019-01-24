@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, SGSemaphoreLabel) {
 @interface TKUISemaphoreView : MKAnnotationView
 
 @property (nonatomic, readonly) SGSemaphoreLabel label;
+@property (nonatomic, readonly) UIImageView *headImageView;
 
 @property (nonatomic, assign) BOOL tiny;
 
@@ -34,27 +35,22 @@ typedef NS_ENUM(NSInteger, SGSemaphoreLabel) {
 
 // Helpers
 
-- (void)updateForAnnotation:(id<MKAnnotation>)annotation;
-
-- (void)updateForAnnotation:(id<MKAnnotation>)annotation
-								withHeading:(CLLocationDirection)heading;
-
 - (void)setHeadWithImage:(UIImage *)image
                 imageURL:(NSURL *)imageURL
          imageIsTemplate:(BOOL)asTemplate
               forBearing:(NSNumber *)bearing
 							andHeading:(CLLocationDirection)heading
+                   inRed:(BOOL)red
 						canFlipImage:(BOOL)canFlipImage;
 
-- (void)setFrequency:(NSNumber *)frequency
+- (void)setFrequency:(NSInteger)frequency
               onSide:(SGSemaphoreLabel)side;
+
+- (void)flipHead:(BOOL)isFlipped;
 
 - (void)setTime:(NSDate *)timeStamp
      isRealTime:(BOOL)isRealTime
 		 inTimeZone:(NSTimeZone *)timezone
          onSide:(SGSemaphoreLabel)side;
-
-- (void)updateHeadForMagneticHeading:(CLLocationDirection)heading
-													andBearing:(CLLocationDirection)bearing;
 
 @end

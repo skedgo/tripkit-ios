@@ -58,7 +58,7 @@ private extension TKUITripMapManager {
     
     for segment in trip.segments {
       // We at least add the point for every segment
-      guard (segment as TKDisplayablePoint).pointDisplaysImage else { continue }
+      guard (segment as TKUIImageAnnotationDisplayable).pointDisplaysImage else { continue }
       annotations.append(segment)
       
       // For non-stationary segments, we also add shape information

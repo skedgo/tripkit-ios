@@ -49,7 +49,7 @@
     return;
   }
   
-  id<TKDisplayablePoint> displayable = (id<TKDisplayablePoint>) self.annotation;
+  id<TKUIImageAnnotationDisplayable> displayable = (id<TKUIImageAnnotationDisplayable>) self.annotation;
   
 	UIImage *image = [displayable pointImage];
   if (!self.imageView || !CGSizeEqualToSize(self.imageView.image.size, image.size)) {

@@ -14,7 +14,7 @@
 
 @class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape, SegmentTemplate;
 @class TKRegion, TKModeInfo;
-@protocol TKDisplayableTimePoint, TKTripSegment;
+@protocol TKUISemaphoreDisplayable, TKTripSegment;
 
 
 typedef NS_ENUM(NSInteger, TKSegmentOrdering) {

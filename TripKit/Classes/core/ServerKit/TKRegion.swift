@@ -23,7 +23,7 @@ public class TKRegion : NSObject, Codable {
   @objc public static let international = TKInternationalRegion()
 
   @objc(TKRegionCity)
-  public class City : NSObject, Codable, MKAnnotation, TKDisplayablePoint {
+  public class City : NSObject, Codable, MKAnnotation {
     public let title: String?
     public let coordinate: CLLocationCoordinate2D
 
@@ -38,13 +38,6 @@ public class TKRegion : NSObject, Codable {
     //      class is not key value coding-compliant for the key subtitle.'
     public let subtitle: String? = nil // Not necessary, but can
     
-    public let isDraggable: Bool = false
-    public let pointDisplaysImage: Bool = true
-    public let pointImage: TKImage? = TKStyleManager.imageNamed("icon-map-info-city")
-    public var pointImageURL: URL? = nil
-    public var pointImageIsTemplate: Bool = false
-    public var pointClusterIdentifier: String? = "TKRegion.City"
-
     @objc public var centerBiasedMapRect: MKMapRect {
       // centre it on the region's coordinate
       let size = MKMapSize(width: 300_000, height: 400_00)

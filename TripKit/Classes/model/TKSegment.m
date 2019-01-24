@@ -411,9 +411,10 @@ NSString *const UninitializedString =  @"UninitializedString";
   NSTimeInterval duration = [self duration:YES];
   NSDate *gettingOnCutOff = [self.departureTime dateByAddingTimeInterval:duration * 0.3333];
   NSDate *gettingOffCutOff = [self.departureTime dateByAddingTimeInterval:duration * 0.6667];
-  if ([visit.time earlierDate:gettingOnCutOff] == visit.time) {
+  NSDate *time = visit.departure ?: visit.arrival;
+  if ([time earlierDate:gettingOnCutOff] == time) {
     return TKSegmentWaypointGetOn;
-  } else if ([visit.time laterDate:gettingOffCutOff] == visit.time) {
+  } else if ([time laterDate:gettingOffCutOff] == time) {
     return TKSegmentWaypointGetOff;
   } else {
     return TKSegmentWaypointUnknown;
@@ -727,7 +728,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-#pragma mark - STKDisplayableTimePoint
+#pragma mark - TKUISemaphoreDisplayable
 
 - (nullable NSString *)tripSegmentModeTitle
 {

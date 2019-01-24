@@ -10,6 +10,20 @@ import Foundation
 
 extension TKSegment {
   
+  @objc
+  public func triggerRealTimeKVO() {
+    let time = self.departureTime
+    self.departureTime = time
+
+    // Also Title?! We used to do that via ObjC
+  }
+  
+  @objc
+  public var timeZone: TimeZone {
+    guard let coordinate = start?.coordinate else { return .current }
+    return TKRegionManager.shared.timeZone(for: coordinate) ?? .current
+  }
+  
   /// Validates the segment, to make sure it's in a consistent state.
   /// If it's in an inconsistent state, many things can go wrong. You might
   /// want to add calls to this method to assertions and precondition checks.
@@ -136,39 +150,9 @@ extension TKSegment {
 }
 
 
-// MARK: - TKDisplayablePoint
+// MARK: - Image helpers
 
-extension TKSegment: TKDisplayablePoint {
-
-  public var isDraggable: Bool {
-    return false
-  }
-  
-  public var pointClusterIdentifier: String? {
-    return nil
-  }
-  
-  public var pointDisplaysImage: Bool {
-    return coordinate.isValid && hasVisibility(.onMap)
-  }
-  
-  public var pointImage: TKImage? {
-    switch order {
-    case .start, .end:
-      return TKStyleManager.imageNamed("icon-pin")
-      
-    case .regular:
-      return image(for: .listMainMode, allowRealTime: false)
-    }
-  }
-  
-  public var pointImageURL: URL? {
-    return imageURL(for: .listMainMode)
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return modeInfo?.remoteImageIsTemplate ?? false
-  }
+extension TKSegment {
   
   fileprivate func image(for iconType: TKStyleModeIconType, allowRealTime: Bool) -> TKImage? {
     var localImageName = modeInfo?.localImageName
@@ -208,50 +192,6 @@ extension TKSegment: TKDisplayablePoint {
 }
 
 
-// MARK: - STKDisplayableTimePoint
-
-extension TKSegment: TKDisplayableTimePoint {
-  
-  public var time: Date {
-    get {
-      if let time = departureTime {
-        return time
-      } else {
-        assertionFailure("Segment has no time: \(self)")
-        return Date()
-      }
-    }
-    set {
-      self.departureTime = newValue
-    }
-  }
-  
-  public var timeZone: TimeZone {
-    guard let coordinate = start?.coordinate else { return .current }
-    return TKRegionManager.shared.timeZone(for: coordinate) ?? .current
-  }
-  
-  public var timeIsRealTime: Bool {
-    return self.timesAreRealTime
-  }
-
-  public var bearing: NSNumber? {
-    return template?.bearing
-  }
-  
-  public var canFlipImage: Bool {
-    // only those pointing left or right
-    return isSelfNavigating || self.modeIdentifier == TKTransportModeIdentifierAutoRickshaw
-  }
-  
-  public var isTerminal: Bool {
-    return order == .end
-  }
-  
-  public var prefersSemaphore: Bool {
-    return true
-  }
-}
 
 
 // MARK: - TKTripSegment
@@ -326,7 +266,7 @@ extension TKSegment: TKTripSegment {
   }
   
   public var tripSegmentModeImageIsTemplate: Bool {
-    return pointImageIsTemplate
+    return modeInfo?.remoteImageIsTemplate ?? false
   }
 
   

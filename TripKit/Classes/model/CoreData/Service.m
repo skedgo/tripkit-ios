@@ -221,7 +221,7 @@ typedef NSUInteger SGServiceFlag;
                    disembarkingAt:(StopVisits *)disembarkation
 {
 	NSArray *waypoints = [self.shape routePath];
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"time"
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index"
 																																 ascending:YES];
 	NSArray *visits = [self.visits sortedArrayUsingDescriptors:@[sortDescriptor]];
 	
