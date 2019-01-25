@@ -53,16 +53,19 @@
 + (NSArray *)insertNewShapes:(NSArray *)shapesArray
                   forService:(Service *)service
                 withModeInfo:(nullable TKModeInfo *)modeInfo
+               clearRealTime:(BOOL)clearRealTime
 {
   return [self insertNewShapes:shapesArray
                     forService:service
                   withModeInfo:modeInfo
+                 clearRealTime:(BOOL)clearRealTime
               orTripKitContext:nil];
 }
 
 + (NSArray *)insertNewShapes:(NSArray *)shapesArray
                   forService:(nullable Service *)requestedService
                 withModeInfo:(nullable TKModeInfo *)modeInfo
+               clearRealTime:(BOOL)clearRealTime
             orTripKitContext:(nullable NSManagedObjectContext *)context
 {
   if (context == nil) {
@@ -90,6 +93,7 @@
       // we need a new service
       if ([serviceCode isEqualToString:requestedService.code]) {
         currentService = requestedService;
+        
       } else {
         currentService = [Service fetchOrInsertServiceWithCode:serviceCode inTripKitContext:context];
         currentService.color = [TKParserHelper colorForDictionary:[shapeDict objectForKey:@"serviceColor"]];
@@ -107,6 +111,10 @@
       currentService.progenitor = previousService;
     }
     
+    if (clearRealTime) {
+      [currentService setRealTime:NO];
+    }
+    
     // create the new shape
     Shape *shape = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Shape class]) inManagedObjectContext:context];
     shape.index = waypointGroupCount++;
@@ -117,8 +125,9 @@
     shape.isHop = [shapeDict[@"hop"] boolValue];
     shape.metres = shapeDict[@"metres"];
     [shape setSafety: shapeDict[@"safe"]];
-    if (nil == shape.travelled)
+    if (nil == shape.travelled) {
       shape.travelled = @(YES);
+    }
     
     // associate it with the service
     currentService.shape = shape;
