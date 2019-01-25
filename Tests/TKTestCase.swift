@@ -36,18 +36,22 @@ class TKTestCase: XCTestCase {
   
   var tripKitContext: NSManagedObjectContext!
   
-  var tripKitModel: NSManagedObjectModel {
-    return TKTripKit.tripKitModel()
-  }
-  
   override func setUp() {
     super.setUp()
     
     // TripKit context
-    let tripKitCoordinator = NSPersistentStoreCoordinator(managedObjectModel: tripKitModel)
+    let model = TKTripKit.tripKitModel()
+    let tripKitCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
     _ = try! tripKitCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
-    tripKitContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    tripKitContext.persistentStoreCoordinator = tripKitCoordinator
+    let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    context.persistentStoreCoordinator = tripKitCoordinator
+    
+    self.tripKitContext = context
+  }
+  
+  override func tearDown() {
+    super.tearDown()
+    tripKitContext = nil
   }
 
   func trip(fromFilename filename: String, serviceFilename: String? = nil) -> Trip {

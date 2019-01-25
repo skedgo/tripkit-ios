@@ -14,6 +14,16 @@ import XCTest
 
 class TKBuzzRouterTest: TKTestCase {
 
+  override func setUp() {
+    super.setUp()
+    let env = ProcessInfo.processInfo.environment
+    if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
+      TripKit.apiKey = apiKey
+    } else {
+      preconditionFailure("Make sure you supply a TripGo API key")
+    }
+  }
+  
   func testParsingOldPTResult() throws {
     let parser = TKRoutingParser(tripKitContext: tripKitContext)
     
