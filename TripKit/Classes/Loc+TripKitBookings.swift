@@ -191,7 +191,7 @@ extension Loc {
   
   public static var VerifyPassword: String {
     return NSLocalizedString("Verify password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Prompt for users to enter their passwords for verification purpose.")
-  }
+  }  
   
   public static var EnterNewPassword: String {
     return NSLocalizedString("Enter a new password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Prompt for users to enter a new password")
@@ -201,12 +201,24 @@ extension Loc {
     return NSLocalizedString("For your security, please enter your current password.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "A footnote that tells users we are asking for their current passwords, and why.")
   }
   
+  public static var PleaseEnterYourRegisteredEmailToResetPassword: String {
+    return NSLocalizedString("Please enter your registered email address. We will then send you instructions on how to reset password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "A footnote that asks users for their email addresses in order to reset password")
+  }
+  
+  public static var PasswordResetInstructionSentByEmail: String {
+    return NSLocalizedString("Instructions on how to reset password has been sent to the above email address.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "A footnote that instructs users to check their emails for reset instructions")
+  }
+  
   public static var SecurePasswordAreAtLeastFiveCharatersLongAndIncludeNumbersAndSymbols: String {
     return NSLocalizedString("For your security, please enter your current password.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "A footnote that tells users we are asking for their current passwords, and why.")
   }
   
   public static var Verify: String {
     return NSLocalizedString("Verify", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for a button which, when tapped, proceeds to verifying password")
+  }
+  
+  public static var ResetPassword: String {
+    return NSLocalizedString("Reset password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for a button which, when tapped, resets password")
   }
   
   public static var Update: String {
