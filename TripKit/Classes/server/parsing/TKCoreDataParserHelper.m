@@ -58,15 +58,15 @@
   return [self insertNewShapes:shapesArray
                     forService:service
                   withModeInfo:modeInfo
-                 clearRealTime:(BOOL)clearRealTime
-              orTripKitContext:nil];
+              orTripKitContext:nil
+                 clearRealTime:clearRealTime];
 }
 
 + (NSArray *)insertNewShapes:(NSArray *)shapesArray
                   forService:(nullable Service *)requestedService
                 withModeInfo:(nullable TKModeInfo *)modeInfo
-               clearRealTime:(BOOL)clearRealTime
             orTripKitContext:(nullable NSManagedObjectContext *)context
+               clearRealTime:(BOOL)clearRealTime
 {
   if (context == nil) {
     ZAssert(requestedService, @"If you don't supply a context, you need to supply a service!");
