@@ -149,7 +149,12 @@ extension TKBuzzInfoProvider {
   public class func fetchWheelchairSupportInformation(forRegion region: TKRegion, completiton: @escaping (Bool) -> Void)
   {
     fetchRegionInformation(forRegion: region) { info in
-      let isSupported = info?.transitWheelchairAccessibility ?? info?.streetWheelchairAccessibility ?? false
+      let isSupported: Bool
+      if let info = info {
+        isSupported = info.transitWheelchairAccessibility || info.streetWheelchairAccessibility
+      } else {
+        isSupported = false
+      }
       completiton(isSupported)
     }
   }
