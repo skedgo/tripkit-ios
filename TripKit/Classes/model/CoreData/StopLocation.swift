@@ -38,9 +38,9 @@ extension StopLocation {
   }
 }
 
-// MARK: - STKStopAnnotation
+// MARK: - MKAnnotation
 
-extension StopLocation: TKStopAnnotation {
+extension StopLocation: MKAnnotation {
   public var title: String? {
     return name
   }
@@ -52,30 +52,7 @@ extension StopLocation: TKStopAnnotation {
   public var coordinate: CLLocationCoordinate2D {
     return location?.coordinate ?? kCLLocationCoordinate2DInvalid
   }
-  
-  public var isDraggable: Bool {
-    return false
-  }
-  
-  public var pointClusterIdentifier: String? {
-    return stopModeInfo?.identifier ?? "StopLocation"
-  }
-  
-  public var pointDisplaysImage: Bool {
-    return pointImage != nil
-  }
-  
-  public var pointImage: TKImage? {
-    return modeImage(for: .mapIcon)
-  }
-  
-  public var pointImageURL: URL? {
-    return modeImageURL(for: .mapIcon)
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return stopModeInfo?.remoteImageIsTemplate ?? false
-  }
+
 }
 
 // MARK: - UIActivityItemSource

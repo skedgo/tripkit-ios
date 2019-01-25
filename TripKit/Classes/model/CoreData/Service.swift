@@ -62,11 +62,16 @@ extension Service: TKRealTimeUpdatable {
   public var wantsRealTimeUpdates: Bool {
     guard self.isRealTimeCapable else { return false }
     
-    guard let first = sortedVisits.first, let last = sortedVisits.last else {
-      return true // ask anyway
+    guard
+      case .timetabled(_, let maybeDeparture)? = sortedVisits.first?.timing,
+      let departure = maybeDeparture,
+      case .timetabled(let maybeArrival, let maybeFallbackArrival)? = sortedVisits.last?.timing,
+      let arrival = maybeArrival ?? maybeFallbackArrival
+      else {
+        return true // ask anyway
     }
     
-    return wantsRealTimeUpdates(forStart: first.time, end: last.time, forPreplanning: false)
+    return wantsRealTimeUpdates(forStart: departure, end: arrival, forPreplanning: false)
   }
   
   public var objectForRealTimeUpdates: Any {

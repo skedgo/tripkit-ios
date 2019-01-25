@@ -116,7 +116,7 @@
     CGFloat point = self.textLabel.font.pointSize;
     self.textLabel.font = [TKStyleManager systemFontWithSize:point];
   } else {
-    self.textLabel.font = [TKStyleManager systemFontWithTextStyle:labelStyle];
+    self.textLabel.font = [TKStyleManager customFontForTextStyle:labelStyle];
   }
   
   NSString *detailLabelStyle = [[self.detailTextLabel.font fontDescriptor] fontAttributes][UIFontDescriptorTextStyleAttribute];
@@ -125,7 +125,7 @@
     CGFloat point = self.detailTextLabel.font.pointSize;
     self.detailTextLabel.font = [TKStyleManager systemFontWithSize:point];
   } else {
-    self.detailTextLabel.font = [TKStyleManager systemFontWithTextStyle:detailLabelStyle];
+    self.detailTextLabel.font = [TKStyleManager customFontForTextStyle:detailLabelStyle];
   }
 }
 

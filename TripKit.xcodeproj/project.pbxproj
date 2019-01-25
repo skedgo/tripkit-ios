@@ -136,6 +136,8 @@
 		3A6DF17F202C98AF0084CB2C /* TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF17A202C98AF0084CB2C /* TKInterAppCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6E7D4020EFBD4900013253 /* TKUISegmentMovingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E7D3E20EFBD4800013253 /* TKUISegmentMovingCell.swift */; };
 		3A6E7D4120EFBD4900013253 /* TKUISegmentMovingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E7D3F20EFBD4800013253 /* TKUISegmentMovingCell.xib */; };
+		3A7636F921F9F04700639155 /* TKUIAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636F821F9F04700639155 /* TKUIAnnotations.swift */; };
+		3A7636FB21F9F28200639155 /* TKUIAnnotations+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */; };
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
 		3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */; };
 		3A7E6139208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
@@ -933,6 +935,8 @@
 		3A6DF17A202C98AF0084CB2C /* TKInterAppCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKInterAppCommunicator.h; sourceTree = "<group>"; };
 		3A6E7D3E20EFBD4800013253 /* TKUISegmentMovingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentMovingCell.swift; sourceTree = "<group>"; };
 		3A6E7D3F20EFBD4800013253 /* TKUISegmentMovingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentMovingCell.xib; sourceTree = "<group>"; };
+		3A7636F821F9F04700639155 /* TKUIAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAnnotations.swift; sourceTree = "<group>"; };
+		3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIAnnotations+TripKit.swift"; sourceTree = "<group>"; };
 		3A787EC31D38F646009F9A18 /* TKJSONCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
 		3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
 		3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKCalendarManager+Autocompleting.swift"; sourceTree = "<group>"; };
@@ -1485,6 +1489,8 @@
 		3A682F7E20F4B71500E05195 /* map annotations */ = {
 			isa = PBXGroup;
 			children = (
+				3A7636F821F9F04700639155 /* TKUIAnnotations.swift */,
+				3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */,
 				3A6DF0F6202C8EB80084CB2C /* TKUIAnnotationViewBuilder.swift */,
 				3A54757D21C15A4800748EB6 /* TKUICircleAnnotationView.swift */,
 				3A6DF0B7202C8EB80084CB2C /* TKUIImageAnnotationView.h */,
@@ -3030,6 +3036,7 @@
 				3A6DF112202C8EB80084CB2C /* TKUISemaphoreView.m in Sources */,
 				3AFD397020D93D9800FDC7D0 /* TKUITimePickerSheet.m in Sources */,
 				3AF5F2B720EFF91F003AAEBA /* TKUIAttributionTableViewController.swift in Sources */,
+				3A7636FB21F9F28200639155 /* TKUIAnnotations+TripKit.swift in Sources */,
 				3ADC802C2114861500A318B9 /* TKUIResultsViewModel+Restoration.swift in Sources */,
 				3AFD397620D93DC200FDC7D0 /* TKUIResultsAccessoryView.swift in Sources */,
 				3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */,
@@ -3048,6 +3055,7 @@
 				3A6DF12F202C8EB80084CB2C /* TKUIStyledLabel.m in Sources */,
 				3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */,
 				3AFD394D20D9333500FDC7D0 /* TKUIResultsViewModel.swift in Sources */,
+				3A7636F921F9F04700639155 /* TKUIAnnotations.swift in Sources */,
 				3A6DF11E202C8EB80084CB2C /* UIColor+Variations.m in Sources */,
 				3A67698D20EE61FF0044663F /* TKUIAutocompletionResultCell.swift in Sources */,
 				3A8FAB7020D3E512005D4C73 /* TKUITripCell+Formatter.swift in Sources */,

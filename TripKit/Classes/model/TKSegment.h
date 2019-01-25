@@ -14,7 +14,7 @@
 
 @class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape, SegmentTemplate;
 @class TKRegion, TKModeInfo;
-@protocol TKDisplayableTimePoint, TKTripSegment;
+@protocol TKUISemaphoreDisplayable, TKTripSegment;
 
 
 typedef NS_ENUM(NSInteger, TKSegmentOrdering) {
@@ -70,45 +70,45 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @return The local region this segment starts in. Cannot be international and thus might be nil.
  */
-- (nullable TKRegion *)startRegion;
+@property (nullable, readonly) TKRegion *startRegion;
 
 /**
  @return The local region this segment ends in. Cannot be international and thus might be nil.
  */
-- (nullable TKRegion *)endRegion;
+@property (nullable, readonly) TKRegion *endRegion;
 
-- (TKSegmentOrdering)order;
+@property (readonly) TKSegmentOrdering order;
 
 /**
  Call this when segment properties have changed (such as a trip's time)
  */
 - (void)resetCaches;
 
-- (nullable NSSet<Shape *> *)shapes;
+@property (nullable, readonly) NSSet<Shape *> *shapes;
 - (nullable NSArray<Shape *> *)shortedShapes;
 
-- (nullable NSString *)notes;
 - (NSTimeInterval)duration:(BOOL)includingContinuation;
-- (NSInteger)templateHashCode;
-- (BOOL)isContinuation;
-- (BOOL)hasCarParks;
-- (BOOL)isPublicTransport;
-- (BOOL)hasTimetable;
-- (BOOL)isWalking;
-- (BOOL)isCycling;
-- (BOOL)isDriving;
-- (BOOL)isStationary;
-- (BOOL)isSelfNavigating;
-- (BOOL)isSharedVehicle;
-- (BOOL)isAffectedByTraffic;
-- (BOOL)isFlight;
-- (BOOL)isImpossible;
-- (TKColor *)color;
-- (NSArray<NSNumber *> *)dashPattern;
-- (BOOL)isCanceled;
-- (BOOL)timesAreRealTime;
-- (nullable Vehicle *)realTimeVehicle;
-- (NSArray <Vehicle *> *)realTimeAlternativeVehicles;
+@property (nullable, readonly) NSString *notes;
+@property (readonly) NSInteger templateHashCode;
+@property (readonly) BOOL isContinuation;
+@property (readonly) BOOL hasCarParks;
+@property (readonly) BOOL isPublicTransport;
+@property (readonly) BOOL hasTimetable;
+@property (readonly) BOOL isWalking;
+@property (readonly) BOOL isCycling;
+@property (readonly) BOOL isDriving;
+@property (readonly) BOOL isStationary;
+@property (readonly) BOOL isSelfNavigating;
+@property (readonly) BOOL isSharedVehicle;
+@property (readonly) BOOL isAffectedByTraffic;
+@property (readonly) BOOL isFlight;
+@property (readonly) BOOL isImpossible;
+@property (readonly) TKColor *color;
+@property (nullable, readonly) NSArray<NSNumber *> *dashPattern;
+@property (readonly) BOOL isCanceled;
+@property (readonly) BOOL timesAreRealTime;
+@property (nullable, readonly) Vehicle *realTimeVehicle;
+@property (readonly) NSArray <Vehicle *> *realTimeAlternativeVehicles;
 
 /**
  @return The payload passed on by the server for the specified key.
@@ -119,8 +119,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @return the transport mode identifier that this segment is using (if any). Can return `nil` for stationary segments such as "leave your house" or "wait between two buses" or "park your car"
  */
-- (nullable NSString *)modeIdentifier;
-- (nullable TKModeInfo *)modeInfo;
+@property (nullable, readonly) NSString *modeIdentifier;
+@property (nullable, readonly) TKModeInfo *modeInfo;
 
 /**
  @return All alerts for this segment
@@ -160,15 +160,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Public transport
 ///-----------------------------------------------------------------------------
 
-- (nullable NSString *)smsMessage;
-- (nullable NSString *)smsNumber;
-- (nullable NSString *)scheduledServiceCode;
-- (nullable NSString *)scheduledStartStopCode;
-- (nullable NSString *)scheduledEndStopCode;
-- (nullable NSString *)scheduledServiceNumber;
-- (nullable NSNumber *)frequency;
-- (nullable Service *)service;
-- (nullable NSString *)ticketWebsiteURLString;
+@property (nullable, readonly) NSString *smsMessage;
+@property (nullable, readonly) NSString *smsNumber;
+@property (nullable, readonly) NSString *scheduledServiceCode;
+@property (nullable, readonly) NSString *scheduledStartStopCode;
+@property (nullable, readonly) NSString *scheduledEndStopCode;
+@property (nullable, readonly) NSString *scheduledServiceNumber;
+@property (nullable, readonly) NSNumber *frequency;
+@property (nullable, readonly) Service *service;
+@property (nullable, readonly) NSString *ticketWebsiteURLString;
 
 - (BOOL)usesVisit:(StopVisits *)visit;
 - (BOOL)shouldShowVisit:(StopVisits *)visit;

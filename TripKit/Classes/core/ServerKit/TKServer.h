@@ -52,7 +52,7 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileEnableFlights;
 
 + (void)updateDevelopmentServer:(NSString *)server;
 
-+ (NSString *)xTripGoVersion;
++ (nullable NSString *)xTripGoVersion;
 
 + (NSMutableDictionary *)SkedGoHTTPHeaders;
 

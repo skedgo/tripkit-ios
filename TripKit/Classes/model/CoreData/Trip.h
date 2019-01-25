@@ -96,7 +96,7 @@
  */
 - (nonnull NSSet *)usedModeIdentifiers;
 
-- (BOOL)allowImpossibleSegments;
+@property (readonly) BOOL allowImpossibleSegments;
 
 /* Offset in minutes from the specified departure/arrival time.
  * E.g., if you asked for arrive-by, it'll use the arrival time.
@@ -125,7 +125,7 @@
 
 /* Returns all associated segment in their correct order.
  */
-- (nonnull NSArray<TKSegment *> *)segments;
+@property (nonnull, readonly) NSArray<TKSegment *> *segments;
 
 /* The first major segment of the trip, according to segment properties (use mainSegment() instead)
  */
@@ -137,11 +137,11 @@
 
 /* The first public transport segment of the trip
  */
-- (nullable TKSegment *)firstPublicTransport;
+@property (readonly, nullable) TKSegment *firstPublicTransport;
 
 /* All public transport segments of the trip
  */
-- (nonnull NSArray<TKSegment *> *)allPublicTransport;
+@property (nonnull, readonly) NSArray<TKSegment *> *allPublicTransport;
 
 #pragma mark - Visualising trips on the map
 
@@ -151,11 +151,11 @@
 
 #pragma mark - Real-time stuff
 
-- (BOOL)isImpossible;
+@property (readonly) BOOL isImpossible;
 
-- (BOOL)timesAreRealTime;
+@property (readonly) BOOL timesAreRealTime;
 
-- (nullable Alert *)primaryAlert;
+@property (nullable, readonly) Alert *primaryAlert;
 
 @end
 

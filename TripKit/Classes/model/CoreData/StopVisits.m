@@ -84,7 +84,10 @@
 - (NSString *)smsString
 {
 	NSTimeZone *timeZone = self.stop.region.timeZone;
-  NSMutableString *output = [NSMutableString stringWithFormat:@"%@ %@", [self.service shortIdentifier], [TKStyleManager timeString:self.departure forTimeZone:timeZone]];
+  NSString *departure = self.frequency != nil
+    ? [TKStyleManager timeString:self.departure forTimeZone:timeZone]
+    : @"";
+  NSMutableString *output = [NSMutableString stringWithFormat:@"%@ %@", [self.service shortIdentifier], departure];
   if ([self.service isRealTime])
     [output appendString:@"*"];
   return output;
@@ -95,7 +98,7 @@
   NSMutableString *subtitle = [NSMutableString string];
   
   // start and end times for frequency-based services
-  if (self.service.frequency.integerValue > 0) {
+  if (self.service.frequency.integerValue > 0 && self.departure != nil && self.arrival != nil) {
     NSTimeZone *timeZone = self.stop.region.timeZone;
     [subtitle appendFormat:@"%@ - %@",
      [TKStyleManager timeString:self.departure forTimeZone:timeZone],
@@ -133,11 +136,12 @@
     return StopVisitRealTimeNotAvailable;
   }
   
-  if ([self.time isEqual:self.originalTime]) {
+  NSDate *time = self.departure ?: self.arrival;
+  if ([time isEqual:self.originalTime]) {
     return StopVisitRealTimeOnTime;
   } else {
     // do they also display differently?
-    NSTimeInterval realTime = [self.time timeIntervalSince1970];
+    NSTimeInterval realTime = [time timeIntervalSince1970];
     realTime -= (NSInteger)realTime % 60;
     
     NSTimeInterval timeTable = [self.originalTime timeIntervalSince1970];
@@ -195,7 +199,8 @@
 
 - (NSString *)minsForRealTimeInformation
 {
-  NSTimeInterval realTime = [self.time timeIntervalSince1970];
+  NSDate *time = self.departure ?: self.arrival;
+  NSTimeInterval realTime = [time timeIntervalSince1970];
   realTime -= (NSInteger)realTime % 60;
   NSTimeInterval timeTable = [self.originalTime timeIntervalSince1970];
   timeTable -= (NSInteger)timeTable % 60;
@@ -216,7 +221,9 @@
   if (self.index && [self.service isEqual:other.service]) {
     return [self.index compare:other.index];
   } else {
-    return [self.time compare:other.time];
+    NSDate *time = self.departure ?: self.arrival;
+    NSDate *otherTime = other.departure ?: other.arrival;
+    return [time compare:otherTime];
   }
 }
 

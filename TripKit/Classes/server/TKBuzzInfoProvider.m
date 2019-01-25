@@ -140,7 +140,9 @@
   NSArray *shapesArray = responseDict[@"shapes"];
   [TKCoreDataParserHelper insertNewShapes:shapesArray
                        forService:service
-                     withModeInfo:modeInfo];
+                     withModeInfo:modeInfo
+                            clearRealTime:YES // These are time-table times
+   ];
 }
 
 

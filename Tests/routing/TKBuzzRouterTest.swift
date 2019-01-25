@@ -14,6 +14,16 @@ import XCTest
 
 class TKBuzzRouterTest: TKTestCase {
 
+  override func setUp() {
+    super.setUp()
+    let env = ProcessInfo.processInfo.environment
+    if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
+      TripKit.apiKey = apiKey
+    } else {
+      preconditionFailure("Make sure you supply a TripGo API key")
+    }
+  }
+  
   func testParsingOldPTResult() throws {
     let parser = TKRoutingParser(tripKitContext: tripKitContext)
     
@@ -27,7 +37,7 @@ class TKBuzzRouterTest: TKTestCase {
       XCTAssertEqual(request?.tripGroups?.count, 3)
       XCTAssertEqual(request?.trips.count, 4 + 4 + 4)
       for trip in request?.trips ?? [] {
-        XCTAssertGreaterThan(trip.segments().count, 0)
+        XCTAssertGreaterThan(trip.segments.count, 0)
       }
       
       // Evaluating what's in Core Data
@@ -69,19 +79,19 @@ class TKBuzzRouterTest: TKTestCase {
       XCTAssertEqual(request?.trips.count, 1)
       
       let trip = request?.trips.first
-      XCTAssertEqual(trip?.segments().count, 5)
+      XCTAssertEqual(trip?.segments.count, 5)
       
-      XCTAssertNil(trip?.segments()[1].bookingInternalURL())
-      XCTAssertNotNil(trip?.segments()[1].bookingExternalActions())
+      XCTAssertNil(trip?.segments[1].bookingInternalURL())
+      XCTAssertNotNil(trip?.segments[1].bookingExternalActions())
       
-      XCTAssertEqual(trip?.segments()[2].alerts().count, 4)
-      XCTAssertEqual(trip?.segments()[2].alertsWithAction().count, 0)
-      XCTAssertEqual(trip?.segments()[2].alertsWithContent().count, 4)
-      XCTAssertEqual(trip?.segments()[2].alertsWithLocation().count, 4)
-      XCTAssertEqual(trip?.segments()[2].timesAreRealTime(), true)
-      XCTAssertEqual(trip?.segments()[2].isSharedVehicle(), true)
+      XCTAssertEqual(trip?.segments[2].alerts().count, 4)
+      XCTAssertEqual(trip?.segments[2].alertsWithAction().count, 0)
+      XCTAssertEqual(trip?.segments[2].alertsWithContent().count, 4)
+      XCTAssertEqual(trip?.segments[2].alertsWithLocation().count, 4)
+      XCTAssertEqual(trip?.segments[2].timesAreRealTime, true)
+      XCTAssertEqual(trip?.segments[2].isSharedVehicle, true)
 
-      XCTAssertEqual(trip?.segments()[3].hasCarParks(), true)
+      XCTAssertEqual(trip?.segments[3].hasCarParks, true)
 
       // Make sure CoreData is happy
       try! self.tripKitContext.save()
@@ -111,8 +121,8 @@ class TKBuzzRouterTest: TKTestCase {
       XCTAssertEqual(cycleGroup?.sources.count, 3)
 
       let cycleTrip = cycleGroup?.trips.min { $0.totalScore.doubleValue < $1.totalScore.doubleValue }
-      XCTAssertEqual(cycleTrip?.segments().count, 9)
-      XCTAssertEqual(cycleTrip?.segments()[0].alerts().count, 0)
+      XCTAssertEqual(cycleTrip?.segments.count, 9)
+      XCTAssertEqual(cycleTrip?.segments[0].alerts().count, 0)
       
       // Make sure CoreData is happy
       try! self.tripKitContext.save()

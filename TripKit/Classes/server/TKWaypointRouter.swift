@@ -88,12 +88,17 @@ extension TKWaypointRouter {
         return
       }
       
-      let builder = WaypointParasBuilder(privateVehicles: vehicles)
-      let paras = builder.build(moving: segment, to: visit, atStart: atStart)
+      do {
+        let builder = WaypointParasBuilder(privateVehicles: vehicles)
+        let paras = try builder.build(moving: segment, to: visit, atStart: atStart)
+        
+        // Will have new pattern, so we'll add it to the request rather than
+        // to the original trip group.
+        self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.request, completion: completion)
       
-      // Will have new pattern, so we'll add it to the request rather than
-      // to the original trip group.
-      self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.request, completion: completion)
+      } catch {
+        completion(nil, error)
+      }
     }
     
   }
@@ -204,16 +209,21 @@ extension TKWaypointRouter {
 
 class WaypointParasBuilder {
   
+  enum WaypointError: Error {
+    case cannotMoveToFrequencyBasedVisit
+    case timetabledVisitIsMissingTimes
+  }
+  
   private let vehicles: [TKVehicular]
   
   init(privateVehicles vehicles: [TKVehicular] = []) {
     self.vehicles = vehicles
   }
   
-  func build(moving segmentToMatch: TKSegment, to visit: StopVisits, atStart: Bool) -> [String: Any] {
+  func build(moving segmentToMatch: TKSegment, to visit: StopVisits, atStart: Bool) throws -> [String: Any] {
     
-    assert(!segmentToMatch.isStationary(), "Can't move stationary segments to a visit")
-    assert(segmentToMatch.isPublicTransport(), "Can only move public transport segments to a visit")
+    assert(!segmentToMatch.isStationary, "Can't move stationary segments to a visit")
+    assert(segmentToMatch.isPublicTransport, "Can only move public transport segments to a visit")
     
     guard let trip = segmentToMatch.trip else { preconditionFailure() }
     
@@ -224,16 +234,15 @@ class WaypointParasBuilder {
     ]
     
     // Prune the segments, removing stationary segments...
-    let nonStationary = trip.segments()
-      .filter { !$0.isStationary() }
+    let nonStationary = trip.segments.filter { !$0.isStationary }
     
     // ... and walks after driving/cycling
     let prunedSegments = nonStationary
       .enumerated()
       .filter { index, segment in
-        if index > 0, segment.isWalking() {
+        if index > 0, segment.isWalking {
           let previous = nonStationary[index - 1]
-          return !previous.isDriving() && !previous.isCycling() && !previous.isSharedVehicle()
+          return !previous.isDriving && !previous.isCycling && !previous.isSharedVehicle
         } else {
           return true
         }
@@ -242,11 +251,10 @@ class WaypointParasBuilder {
     
     // Construct the paras on a segment by segment basis
     var foundMatch = false
-    let unglued = prunedSegments.map { segment -> (segment: TKSegment, paras: [String: Any]) in
-      
+    let unglued = try prunedSegments.map { segment -> (segment: TKSegment, paras: [String: Any]) in
       if segmentToMatch == segment {
         foundMatch = true
-        let paras = waypointParas(moving: segment, to: visit, atStart: atStart)
+        let paras = try waypointParas(moving: segment, to: visit, atStart: atStart)
         return (segment, paras)
       } else {
         let paras = waypointParas(forNonStationary: segment)
@@ -301,8 +309,8 @@ class WaypointParasBuilder {
   }
   
   private func waypointParas(forNonStationary segment: TKSegment) -> [String: Any] {
-    assert(!segment.isStationary())
-    if segment.isPublicTransport() {
+    assert(!segment.isStationary)
+    if segment.isPublicTransport {
       return waypointParas(forPublicTransport: segment)
     } else {
       return waypointParas(forPrivateTransport: segment)
@@ -310,12 +318,12 @@ class WaypointParasBuilder {
   }
   
   private func waypointParas(forPrivateTransport segment: TKSegment) -> [String: Any] {
-    precondition(!segment.isPublicTransport())
+    precondition(!segment.isPublicTransport)
     
     guard
       let start = segment.start?.coordinate,
       let end = segment.end?.coordinate,
-      let privateMode = segment.modeIdentifier()
+      let privateMode = segment.modeIdentifier
       else {
         preconditionFailure()
     }
@@ -334,19 +342,19 @@ class WaypointParasBuilder {
   }
   
   private func waypointParas(forPublicTransport segment: TKSegment) -> [String: Any] {
-    precondition(segment.isPublicTransport())
+    precondition(segment.isPublicTransport)
     
     guard
-      let startCode = segment.scheduledStartStopCode(),
-      let endCode = segment.scheduledEndStopCode(),
-      let publicMode = segment.modeIdentifier(),
-      let service = segment.service()
+      let startCode = segment.scheduledStartStopCode,
+      let endCode = segment.scheduledEndStopCode,
+      let publicMode = segment.modeIdentifier,
+      let service = segment.service
       else {
         preconditionFailure()
     }
     
-    let startRegion = segment.startRegion() ?? .international
-    let endRegion   = segment.endRegion()   ?? .international
+    let startRegion = segment.startRegion ?? .international
+    let endRegion   = segment.endRegion   ?? .international
     
     return [
       "modes": [publicMode],
@@ -362,17 +370,20 @@ class WaypointParasBuilder {
   }
   
   
-  private func waypointParas(moving segment: TKSegment, to visit: StopVisits, atStart: Bool) -> [String: Any] {
-
+  private func waypointParas(moving segment: TKSegment, to visit: StopVisits, atStart: Bool) throws -> [String: Any] {
+    guard case .timetabled(let arrival, let departure) = visit.timing else {
+      throw WaypointError.cannotMoveToFrequencyBasedVisit
+    }
+    
     var paras = waypointParas(forPublicTransport: segment)
     
     if atStart {
-      guard let departure = visit.departure else { preconditionFailure() }
+      guard let departure = departure else { throw WaypointError.timetabledVisitIsMissingTimes }
       paras["start"] = visit.stop.stopCode
       paras["startTime"] = departure.timeIntervalSince1970
     
     } else {
-      guard let arrival = visit.arrival ?? visit.departure else { preconditionFailure() }
+      guard let arrival = arrival ?? departure else { throw WaypointError.timetabledVisitIsMissingTimes }
       paras["end"] = visit.stop.stopCode
       paras["endTime"] = arrival.timeIntervalSince1970
     }

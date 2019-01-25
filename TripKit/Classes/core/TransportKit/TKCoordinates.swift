@@ -37,7 +37,7 @@ public extension TKModeInfo {
   }
 }
 
-open class TKModeCoordinate: TKNamedCoordinate, TKModeAnnotation, TKGlyphableAnnotation {
+open class TKModeCoordinate: TKNamedCoordinate {
   private enum CodingKeys: String, CodingKey {
     case modeInfo
   }
@@ -61,7 +61,7 @@ open class TKModeCoordinate: TKNamedCoordinate, TKModeAnnotation, TKGlyphableAnn
   public var priority: Float?
   
   private var _stopModeInfo: TKModeInfo? = nil
-  public var stopModeInfo: TKModeInfo {
+  @objc public var stopModeInfo: TKModeInfo {
     get {
       if let decoded = _stopModeInfo {
         return decoded
@@ -82,54 +82,10 @@ open class TKModeCoordinate: TKNamedCoordinate, TKModeAnnotation, TKGlyphableAnn
     }
   }
   
-  public var pointClusterIdentifier: String? {
-    return stopModeInfo.identifier ?? "STKModeCoordinate"
-  }
-  
-  public var pointDisplaysImage: Bool { return stopModeInfo.localImageName != nil }
-  
-  public var pointImage: TKImage? {
-    guard let imageName = stopModeInfo.localImageName else { return nil }
-    return TKStyleManager.image(forModeImageName: imageName, isRealTime: false, of: .mapIcon)
-  }
-  
-  public var pointImageURL: URL? {
-    guard let imageName = stopModeInfo.remoteImageName else { return nil }
-    return TKServer.imageURL(forIconFileNamePart: imageName, of: .mapIcon)
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return stopModeInfo.remoteImageIsTemplate
-  }
-  
-  public var glyphColor: TKColor? {
-    return stopModeInfo.glyphColor
-  }
-  
-  public var glyphImage: TKImage? {
-    guard let imageName = stopModeInfo.localImageName else { return nil }
-    let image = TKStyleManager.image(forModeImageName: imageName, isRealTime: false, of: .listMainMode)
-    #if os(iOS) || os(tvOS)
-      return image?.withRenderingMode(.alwaysTemplate)
-    #else
-      return image
-    #endif
-
-  }
-  
-  public var glyphImageURL: URL? {
-    guard stopModeInfo.remoteImageIsTemplate, let imageName = stopModeInfo.remoteImageName else { return nil }
-    return TKServer.imageURL(forIconFileNamePart: imageName, of: .listMainMode)
-  }
-  
-  public var glyphImageIsTemplate: Bool {
-    return stopModeInfo.remoteImageIsTemplate
-  }
-  
 }
 
 
-public class TKStopCoordinate: TKModeCoordinate, TKStopAnnotation {
+public class TKStopCoordinate: TKModeCoordinate {
   
   private enum CodingKeys: String, CodingKey {
     case stopCode
@@ -170,7 +126,7 @@ public class TKStopCoordinate: TKModeCoordinate, TKStopAnnotation {
     set { data["sg_services"] = newValue }
   }
   
-  public var stopCode: String {
+  @objc public var stopCode: String {
     get { return data["sg_stopCode"] as! String }
     set { data["sg_stopCode"] = newValue }
   }

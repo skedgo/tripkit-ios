@@ -82,7 +82,11 @@ extension SegmentTemplate {
         ?? (dict["line"] as? [[String: Any]])
         ?? []
       
-      let shapes = TKCoreDataParserHelper.insertNewShapes(shapesArray, for: service, with: template.modeInfo, orTripKitContext: context)
+      let shapes = TKCoreDataParserHelper.insertNewShapes(
+        shapesArray,
+        for: service, with: template.modeInfo, orTripKitContext: context,
+        clearRealTime: false // we get real-time data here, no need to clear status
+      )
       
       var start: TKNamedCoordinate? = nil
       var end: TKNamedCoordinate? = nil

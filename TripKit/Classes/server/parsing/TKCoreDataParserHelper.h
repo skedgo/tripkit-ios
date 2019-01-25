@@ -24,12 +24,14 @@ forRealTimeStatusString:(nullable NSString *)realTimeStatus;
 
 + (NSArray<Shape *> *)insertNewShapes:(NSArray<NSDictionary<NSString *, id> *> *)shapesArray
                            forService:(Service *)service
-                         withModeInfo:(nullable TKModeInfo *)modeInfo;
+                         withModeInfo:(nullable TKModeInfo *)modeInfo
+                        clearRealTime:(BOOL)clearRealTime;
 
 + (NSArray<Shape *> *)insertNewShapes:(NSArray<NSDictionary<NSString *, id> *> *)shapesArray
                            forService:(nullable Service *)service
                          withModeInfo:(nullable TKModeInfo *)modeInfo
-                     orTripKitContext:(nullable NSManagedObjectContext *)context;
+                     orTripKitContext:(nullable NSManagedObjectContext *)context
+                        clearRealTime:(BOOL)clearRealTime;
 
 #pragma mark - Vehicles
 

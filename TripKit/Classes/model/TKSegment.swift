@@ -10,6 +10,20 @@ import Foundation
 
 extension TKSegment {
   
+  @objc
+  public func triggerRealTimeKVO() {
+    let time = self.departureTime
+    self.departureTime = time
+
+    // Also Title?! We used to do that via ObjC
+  }
+  
+  @objc
+  public var timeZone: TimeZone {
+    guard let coordinate = start?.coordinate else { return .current }
+    return TKRegionManager.shared.timeZone(for: coordinate) ?? .current
+  }
+  
   /// Validates the segment, to make sure it's in a consistent state.
   /// If it's in an inconsistent state, many things can go wrong. You might
   /// want to add calls to this method to assertions and precondition checks.
@@ -18,7 +32,7 @@ extension TKSegment {
     guard let trip = trip else { return false }
     
     // A segment should be in its trip's segments
-    guard let _ = trip.segments().index(of: self) else { return false }
+    guard let _ = trip.segments.index(of: self) else { return false }
     
     // Passed all checks
     return true
@@ -36,7 +50,7 @@ extension TKSegment {
   ///
   /// - note: public transport will always return `true` to this.
   @objc public func hasVisibility(_ type: TKTripSegmentVisibility) -> Bool {
-    switch self.order() {
+    switch self.order {
     case .start: return type == .inDetails
     case .regular:
       let rawVisibility = self.template?.visibility?.intValue ?? 0
@@ -62,13 +76,13 @@ extension TKSegment {
 extension TKSegment {
   
   public var embarkation: StopVisits? {
-    return service()?.sortedVisits.first { visit in
+    return service?.sortedVisits.first { visit in
       return self.segmentVisits()[visit.stop.stopCode]?.boolValue == true
     }
   }
   
   public var disembarkation: StopVisits? {
-    return service()?.sortedVisits.reversed().first { visit in
+    return service?.sortedVisits.reversed().first { visit in
       return self.segmentVisits()[visit.stop.stopCode]?.boolValue == true
     }
   }
@@ -116,7 +130,7 @@ extension TKSegment {
   
   /// The private vehicle type used by this segment (if any)
   @objc public var privateVehicleType: TKVehicleType {
-    guard let identifier = modeIdentifier() else { return .none }
+    guard let identifier = modeIdentifier else { return .none }
     
     switch identifier {
     case TKTransportModeIdentifierCar: return .car
@@ -136,50 +150,20 @@ extension TKSegment {
 }
 
 
-// MARK: - TKDisplayablePoint
+// MARK: - Image helpers
 
-extension TKSegment: TKDisplayablePoint {
-
-  public var isDraggable: Bool {
-    return false
-  }
-  
-  public var pointClusterIdentifier: String? {
-    return nil
-  }
-  
-  public var pointDisplaysImage: Bool {
-    return coordinate.isValid && hasVisibility(.onMap)
-  }
-  
-  public var pointImage: TKImage? {
-    switch order() {
-    case .start, .end:
-      return TKStyleManager.imageNamed("icon-pin")
-      
-    case .regular:
-      return image(for: .listMainMode, allowRealTime: false)
-    }
-  }
-  
-  public var pointImageURL: URL? {
-    return imageURL(for: .listMainMode)
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return modeInfo()?.remoteImageIsTemplate ?? false
-  }
+extension TKSegment {
   
   fileprivate func image(for iconType: TKStyleModeIconType, allowRealTime: Bool) -> TKImage? {
-    var localImageName = modeInfo()?.localImageName
+    var localImageName = modeInfo?.localImageName
     
     if trip.showNoVehicleUUIDAsLift && privateVehicleType == .car && reference?.vehicleUUID == nil {
       localImageName = "car-pool"
     }
     guard let imageName = localImageName else { return nil }
     
-    let realTime = allowRealTime && timesAreRealTime()
-    return TKSegmentHelper.segmentImage(iconType, localImageName: imageName, modeIdentifier: modeIdentifier(), isRealTime: realTime)
+    let realTime = allowRealTime && timesAreRealTime
+    return TKSegmentHelper.segmentImage(iconType, localImageName: imageName, modeIdentifier: modeIdentifier, isRealTime: realTime)
   }
 
   fileprivate func imageURL(for iconType: TKStyleModeIconType) -> URL? {
@@ -187,13 +171,13 @@ extension TKSegment: TKDisplayablePoint {
     
     switch iconType {
     case .mapIcon, .listMainMode, .resolutionIndependent:
-      iconFileNamePart = modeInfo()?.remoteImageName
+      iconFileNamePart = modeInfo?.remoteImageName
       
     case .listMainModeOnDark, .resolutionIndependentOnDark:
-      iconFileNamePart = modeInfo()?.remoteDarkImageName
+      iconFileNamePart = modeInfo?.remoteDarkImageName
       
     case .vehicle:
-      iconFileNamePart = realTimeVehicle()?.icon
+      iconFileNamePart = realTimeVehicle?.icon
       
     case .alert:
       return nil // not supported for segments
@@ -202,56 +186,12 @@ extension TKSegment: TKDisplayablePoint {
     if let part = iconFileNamePart {
       return TKServer.imageURL(forIconFileNamePart: part, of: iconType)
     } else {
-      return TKRegionManager.shared.imageURL(forModeIdentifier: modeIdentifier(), iconType: iconType)
+      return TKRegionManager.shared.imageURL(forModeIdentifier: modeIdentifier, iconType: iconType)
     }
   }
 }
 
 
-// MARK: - STKDisplayableTimePoint
-
-extension TKSegment: TKDisplayableTimePoint {
-  
-  public var time: Date {
-    get {
-      if let time = departureTime {
-        return time
-      } else {
-        assertionFailure("Segment has no time: \(self)")
-        return Date()
-      }
-    }
-    set {
-      self.departureTime = newValue
-    }
-  }
-  
-  public var timeZone: TimeZone {
-    guard let coordinate = start?.coordinate else { return .current }
-    return TKRegionManager.shared.timeZone(for: coordinate) ?? .current
-  }
-  
-  public var timeIsRealTime: Bool {
-    return self.timesAreRealTime()
-  }
-
-  public var bearing: NSNumber? {
-    return template?.bearing
-  }
-  
-  public var canFlipImage: Bool {
-    // only those pointing left or right
-    return isSelfNavigating() || self.modeIdentifier() == TKTransportModeIdentifierAutoRickshaw
-  }
-  
-  public var isTerminal: Bool {
-    return order() == .end
-  }
-  
-  public var prefersSemaphore: Bool {
-    return true
-  }
-}
 
 
 // MARK: - TKTripSegment
@@ -267,7 +207,7 @@ extension TKSegment: TKTripSegment {
   }
   
   public var tripSegmentModeInfo: TKModeInfo? {
-    return modeInfo()
+    return modeInfo
   }
   
   public var tripSegmentInstruction: String {
@@ -302,7 +242,7 @@ extension TKSegment: TKTripSegment {
   }
   
   public var tripSegmentTimesAreRealTime: Bool {
-    return timesAreRealTime()
+    return timesAreRealTime
   }
   
   public var tripSegmentIsWheelchairAccessible: Bool {
@@ -310,8 +250,8 @@ extension TKSegment: TKTripSegment {
   }
   
   public var tripSegmentFixedDepartureTime: Date? {
-    if isPublicTransport() {
-      if let frequency = frequency()?.intValue, frequency > 0 {
+    if isPublicTransport {
+      if let frequency = frequency?.intValue, frequency > 0 {
         return nil
       } else {
         return departureTime
@@ -326,7 +266,7 @@ extension TKSegment: TKTripSegment {
   }
   
   public var tripSegmentModeImageIsTemplate: Bool {
-    return pointImageIsTemplate
+    return modeInfo?.remoteImageIsTemplate ?? false
   }
 
   
@@ -372,7 +312,7 @@ extension Alert {
     
     public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
       
-      guard order() == .end else { return nil }
+      guard order == .end else { return nil }
       let format = NSLocalizedString("I'll arrive at %@ at %@", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime)")
       return String(format: format,
                     trip.request.toLocation.title ?? "",

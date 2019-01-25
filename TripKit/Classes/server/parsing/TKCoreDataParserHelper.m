@@ -53,17 +53,20 @@
 + (NSArray *)insertNewShapes:(NSArray *)shapesArray
                   forService:(Service *)service
                 withModeInfo:(nullable TKModeInfo *)modeInfo
+               clearRealTime:(BOOL)clearRealTime
 {
   return [self insertNewShapes:shapesArray
                     forService:service
                   withModeInfo:modeInfo
-              orTripKitContext:nil];
+              orTripKitContext:nil
+                 clearRealTime:clearRealTime];
 }
 
 + (NSArray *)insertNewShapes:(NSArray *)shapesArray
                   forService:(nullable Service *)requestedService
                 withModeInfo:(nullable TKModeInfo *)modeInfo
             orTripKitContext:(nullable NSManagedObjectContext *)context
+               clearRealTime:(BOOL)clearRealTime
 {
   if (context == nil) {
     ZAssert(requestedService, @"If you don't supply a context, you need to supply a service!");
@@ -90,6 +93,7 @@
       // we need a new service
       if ([serviceCode isEqualToString:requestedService.code]) {
         currentService = requestedService;
+        
       } else {
         currentService = [Service fetchOrInsertServiceWithCode:serviceCode inTripKitContext:context];
         currentService.color = [TKParserHelper colorForDictionary:[shapeDict objectForKey:@"serviceColor"]];
@@ -107,6 +111,10 @@
       currentService.progenitor = previousService;
     }
     
+    if (clearRealTime) {
+      [currentService setRealTime:NO];
+    }
+    
     // create the new shape
     Shape *shape = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Shape class]) inManagedObjectContext:context];
     shape.index = waypointGroupCount++;
@@ -117,8 +125,9 @@
     shape.isHop = [shapeDict[@"hop"] boolValue];
     shape.metres = shapeDict[@"metres"];
     [shape setSafety: shapeDict[@"safe"]];
-    if (nil == shape.travelled)
+    if (nil == shape.travelled) {
       shape.travelled = @(YES);
+    }
     
     // associate it with the service
     currentService.shape = shape;
@@ -164,15 +173,14 @@
       if (arrivalRaw || departureRaw) {
         if (arrivalRaw) {
           visit.arrival = [NSDate dateWithTimeIntervalSince1970:arrivalRaw.longValue];
-          
         }
         if (departureRaw) {
-          // we use 'time' to allow KVO
-          visit.time = [NSDate dateWithTimeIntervalSince1970:departureRaw.longValue];
+          visit.departure = [NSDate dateWithTimeIntervalSince1970:departureRaw.longValue];
+          [visit triggerRealTimeKVO];
         }
         
         // keep original time before we touch it with real-time data
-        visit.originalTime = [visit time];
+        visit.originalTime = [visit departure] ?: [visit arrival];
         
         // frequency-based entries don't have times, so they don't have a region-day either
         [visit adjustRegionDay];
