@@ -8,6 +8,104 @@
 
 import Foundation
 
+// MARK: - Times
+
+extension TKStyleManager {
+  
+  public enum CountdownMode {
+    case now
+    case upcoming
+    case inPast
+  }
+  
+  public struct Countdown {
+    public let durationText: String
+    public let accessibilityLabel: String
+    public let mode: CountdownMode
+  }
+  
+  /// Determines how a countdown for a specific departure should be displayed.
+  ///
+  /// This is recommended to use for timetables, as it optionally allows
+  /// rounding the minutes in a way that a user is less likely to get annoyed
+  /// at the app as the displayed text will be overly pessimistic to get users
+  /// to hurry up.
+  ///
+  /// - Parameters:
+  ///   - minutes: Actual departure time in minutes from now
+  ///   - fuzzifyMinutes: Whether the texts should be pessimistic
+  /// - Returns: Structure with duration string, accessory label and mode
+  public static func departure(forMinutes minutes: Int, fuzzifyMinutes: Bool = true) -> Countdown {
+    let absoluteMinutes = abs(minutes)
+    let effectiveMinutes = fuzzifyMinutes ? fuzzifiedMinutes(minutes) : minutes
+    
+    let durationString: String
+    switch effectiveMinutes {
+    case 0:
+      durationString = Loc.Now
+    
+    case ..<60: // less than an hour
+      durationString = Date.durationString(forMinutes: effectiveMinutes)
+      
+    case ..<1440: // less than a day
+      durationString = Date.durationString(forHours: absoluteMinutes / 60)
+      
+    default: // days
+      durationString = Date.durationString(forDays: absoluteMinutes / 1440)
+    }
+    
+    let mode: CountdownMode
+    let accessibilityLabel: String
+    switch effectiveMinutes {
+    case 0:
+      mode = .now
+      accessibilityLabel = Loc.Now
+    case ..<0:
+      mode = .inPast
+      accessibilityLabel = Loc.Ago(duration: durationString)
+    default:
+      mode = .upcoming
+      accessibilityLabel = Loc.In(duration: durationString)
+    }
+    
+    return Countdown(
+      durationText: durationString,
+      accessibilityLabel: accessibilityLabel,
+      mode: mode
+    )
+  }
+  
+  @objc
+  public static func departureString(forMinutes minutes: Int, fuzzifyMinutes: Bool) -> String {
+    return departure(forMinutes: minutes, fuzzifyMinutes: fuzzifyMinutes).durationText
+  }
+
+  @objc
+  public static func departureAccessibilityLabel(forMinutes minutes: Int, fuzzifyMinutes: Bool) -> String {
+    return departure(forMinutes: minutes, fuzzifyMinutes: fuzzifyMinutes).accessibilityLabel
+  }
+
+  @objc
+  public static func departureIsNow(forMinutes minutes: Int, fuzzifyMinutes: Bool) -> Bool {
+    return departure(forMinutes: minutes, fuzzifyMinutes: fuzzifyMinutes).mode == .now
+  }
+  
+  private static func fuzzifiedMinutes(_ minutes: Int) -> Int {
+    switch minutes {
+    case ..<0:
+      return minutes
+    case ..<2:
+      return 0
+    case ..<10:
+      return minutes
+    case ..<20:
+      return (minutes / 2) * 2
+    default:
+      return (minutes / 5) * 5
+    }
+  }
+}
+
 // MARK: - Font
 
 extension TKStyleManager {
