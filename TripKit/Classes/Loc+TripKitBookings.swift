@@ -218,7 +218,11 @@ extension Loc {
   }
   
   public static var ResetPassword: String {
-    return NSLocalizedString("Reset password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for a button which, when tapped, resets password")
+    return NSLocalizedString("Reset password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for a button which, when tapped, confirms the reset of password.")
+  }
+  
+  public static var ForgotPassword: String {
+    return NSLocalizedString("Forgot password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for a button which allows users to reset their password")
   }
   
   public static var Update: String {
