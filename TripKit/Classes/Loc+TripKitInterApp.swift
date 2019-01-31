@@ -67,7 +67,7 @@ extension Loc {
   }
   
   public static var OpenApp: String {
-    return NSLocalizedString("Open App", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that opens an external app.")
+    return NSLocalizedString("Open app", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that opens an external app.")
   }
 }
 
