@@ -107,8 +107,13 @@ public enum TKQuickBookingHelper {
       }
       
       segment.storeQuickBookings(fromArray: array)
-      let bookings = try? JSONDecoder().decode([TKQuickBooking].self, withJSONObject: array)
-      completion(bookings ?? [])
+      do {
+        let bookings = try JSONDecoder().decode([TKQuickBooking].self, withJSONObject: array)
+        completion(bookings)
+      } catch {
+        TKLog.warn("TKQuickBookingHelper", text: "Could not parse quick bookings due to \(error)")
+        completion([])
+      }
     }
   }
 
