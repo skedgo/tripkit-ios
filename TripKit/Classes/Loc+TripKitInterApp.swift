@@ -60,6 +60,10 @@ extension Loc {
       return String(format: format, appName)
   }
 
+  public static var GetApp: String {
+    return NSLocalizedString("Get  app", tableName: "TripKit", bundle: .tripKit, comment: "Title for button to get/download an external app.")
+  }
+
   @objc(OpenAppNamed:)
   public static func Open(appName: String) -> String {
     let format = NSLocalizedString("Open %@", tableName: "TripKit", bundle: .tripKit, comment: "Action title open app of name '@%'")

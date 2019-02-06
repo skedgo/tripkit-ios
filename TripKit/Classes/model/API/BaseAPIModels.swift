@@ -17,14 +17,16 @@ extension API {
     public let remoteIcon: String?
     public let remoteDarkIcon: String?
     public let color: RGBColor?
+    public let appInfo: AppInfo?
     
-    public init(name: String, website: URL? = nil, phone: String? = nil, remoteIcon: String? = nil, remoteDarkIcon: String? = nil, color: RGBColor? = nil) {
+    public init(name: String, website: URL? = nil, phone: String? = nil, remoteIcon: String? = nil, remoteDarkIcon: String? = nil, color: RGBColor? = nil, appInfo: AppInfo? = nil) {
       self.name = name
       self.website = website
       self.phone = phone
       self.remoteIcon = remoteIcon
       self.remoteDarkIcon = remoteDarkIcon
       self.color = color
+      self.appInfo = appInfo
     }
     
     // MARK: Codable (more robust)
@@ -38,8 +40,8 @@ extension API {
       remoteIcon = try? values.decode(String.self, forKey: .remoteIcon)
       remoteDarkIcon = try? values.decode(String.self, forKey: .remoteDarkIcon)
       color = try? values.decode(RGBColor.self, forKey: .color)
+      appInfo = try? values.decode(AppInfo.self, forKey: .appInfo)
     }
-
     
   }
   

@@ -19,24 +19,28 @@ extension API {
   }
   
   public struct BikePodInfo : Codable, Equatable {
+    // static information
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
+    public let source: API.DataAttribution?
+    public let deepLink: URL?
+
+    // availability information (usually real-time)
     public let inService: Bool
     public let availableBikes: Int?
     public let totalSpaces: Int?
     public let lastUpdate: TimeInterval?
-    public let source: API.DataAttribution?
-    public let deepLink: URL?
+    
     
     private enum CodingKeys: String, CodingKey {
       case identifier
       case operatorInfo = "operator"
+      case source
+      case deepLink
       case inService
       case availableBikes
       case totalSpaces
       case lastUpdate
-      case source
-      case deepLink
     }
     
     public var availableSpaces: Int? {
@@ -53,9 +57,12 @@ extension API {
   
   
   public struct CarPodInfo : Codable, Equatable {
+    // static information
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
-    
+    public let deepLink: URL?
+
+    // real-time availability information
     public let availabilityMode: API.AvailabilityMode?
     public let availabilities: [API.CarAvailability]?
     public let inService: Bool?
@@ -67,6 +74,8 @@ extension API {
     private enum CodingKeys: String, CodingKey {
       case identifier
       case operatorInfo = "operator"
+      case deepLink
+
       case availabilityMode
       case availabilities
       case inService
@@ -106,9 +115,14 @@ extension API {
       public let lng: CLLocationDegrees
       public let address: String?
     }
+    
     public let identifier: String
     public let name: String
-    
+
+    public let operatorInfo: API.CompanyInfo?
+    public let source: API.DataAttribution?
+    public let deepLink: URL?
+
     /// Additional information text from the provider. Can be long and over multiple lines.
     public let info: String?
     
@@ -118,27 +132,26 @@ extension API {
     public let encodedParkingArea: String?
     
     public let entrances: [Entrance]?
-    public let operatorInfo: API.CompanyInfo?
     public let openingHours: API.OpeningHours?
     public let pricingTables: [API.PricingTable]?
     public let availableSpaces: Int?
     public let totalSpaces: Int?
     public let lastUpdate: TimeInterval?
-    public let source: API.DataAttribution?
 
     private enum CodingKeys: String, CodingKey {
       case identifier
-      case encodedParkingArea
       case name
+      case operatorInfo = "operator"
+      case source
+      case deepLink
+      case encodedParkingArea
       case info
       case entrances
-      case operatorInfo = "operator"
       case openingHours
       case pricingTables
       case availableSpaces
       case totalSpaces
       case lastUpdate
-      case source
     }
     
     public var hasRealTime: Bool {

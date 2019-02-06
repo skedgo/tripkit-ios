@@ -42,7 +42,12 @@ extension API {
   
   public struct AppInfo: Codable, Hashable {
     public let name: String?
-    public let appURLiOS: String?
+    public let downloadURL: URL?
+    
+    public enum CodingKeys: String, CodingKey {
+      case name
+      case downloadURL = "appURLiOS"
+    }
   }
   
   public enum AvailabilityMode: String, Codable {
@@ -54,7 +59,7 @@ extension API {
   public struct CarAvailability: Codable, Hashable {
     public let car: SharedCar
     public let availability: BookingAvailability?
-    public let bookingURL: String?
+    public let bookingURL: URL?
     public let appInfo: AppInfo?
     public let bookInApp: Bool?
   }

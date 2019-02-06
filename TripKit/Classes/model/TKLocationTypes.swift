@@ -277,16 +277,52 @@ extension NSCoder {
 }
 
 // MAKR: - DeepLink
+
 public protocol TKDeepLinkable {
   var deepLink: URL? { get }
+  var downloadLink: URL? { get }
 }
 
 extension TKDeepLinkable {
   public var deepLink: URL? { return nil }
+  public var downloadLink: URL? { return nil }
 }
 
 extension TKBikePodLocation: TKDeepLinkable {
   public var deepLink: URL? {
     return bikePod.deepLink
+  }
+  public var downloadLink: URL? {
+    return bikePod.operatorInfo.appInfo?.downloadURL
+  }
+}
+
+extension TKCarPodLocation: TKDeepLinkable {
+  public var deepLink: URL? {
+    return carPod.deepLink
+  }
+  public var downloadLink: URL? {
+    return carPod.operatorInfo.appInfo?.downloadURL
+  }
+}
+
+extension TKCarParkLocation: TKDeepLinkable {
+  public var deepLink: URL? {
+    return carPark.deepLink
+  }
+  public var downloadLink: URL? {
+    return carPark.operatorInfo?.appInfo?.downloadURL
+  }
+}
+
+extension TKCarRentalLocation: TKDeepLinkable {
+  public var downloadLink: URL? {
+    return carRental.company.appInfo?.downloadURL
+  }
+}
+
+extension TKFreeFloatingVehicleLocation: TKDeepLinkable {
+  public var downloadLink: URL? {
+    return vehicle.operatorInfo.appInfo?.downloadURL
   }
 }
