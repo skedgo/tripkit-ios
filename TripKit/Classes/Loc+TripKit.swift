@@ -99,7 +99,8 @@ extension Loc {
     return String(format: format, to)
   }
 
-  @objc public static func To(from: String, to: String) -> String {
+  @objc(FromTime:toTime:)
+  public static func fromTime(_ from: String, toTime to: String) -> String {
     let format = NSLocalizedString("%@ to %@", tableName: "TripKit", bundle: .tripKit, comment: "For describing a time interval, e.g., '8:30 to 8:43'")
     return String(format: format, from, to)
   }
