@@ -160,13 +160,19 @@ extension Trip: TKRealTimeUpdatable {
     }
     
     public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-      guard activityType == .mail else { return nil }
+
+      // Share the full text of the trip, if it's for a mail or we don't also
+      // share the trip's URL.
+      if activityType == .mail || !TKShareHelper.enableSharingOfURLs {
+        return constructPlainText()
       
-      return constructPlainText()
+      } else {
+        return nil
+      }
     }
     
     public func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-      return Loc.Trip
+      return tripPurpose ?? Loc.Trip
     }
     
   }
