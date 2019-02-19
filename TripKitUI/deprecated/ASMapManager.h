@@ -114,6 +114,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)mapManager:(ASMapManager *)mapMan didSelectAnnotation:(id<MKAnnotation>)annotation sender:(id)sender;
 
+- (void)mapManager:(ASMapManager *)mapMan regionWillChangeAnimated:(BOOL)animated;
 - (void)mapManager:(ASMapManager *)mapMan regionDidChangeAnimated:(BOOL)animated;
 
 - (BOOL)mapManagerIsVisible:(ASMapManager *)mapMan;

@@ -170,8 +170,8 @@
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
 #pragma unused(mapView, animated)
-  if ([self.delegate respondsToSelector:@selector(mapManager:regionDidChangeAnimated:)]) {
-    [self.delegate mapManager:self regionDidChangeAnimated:animated];
+  if ([self.delegate respondsToSelector:@selector(mapManager:regionWillChangeAnimated:)]) {
+    [self.delegate mapManager:self regionWillChangeAnimated:animated];
   }
 }
 
