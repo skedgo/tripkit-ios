@@ -196,7 +196,8 @@ extension API {
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
     public let vehicleType: SharedVehicleType
-    
+    public let source: API.DataAttribution?
+
     public let name: String?
     public let isAvailable: Bool?
     public let batteryLevel: Int? // percentage, i.e., 0-100
@@ -207,6 +208,7 @@ extension API {
       case identifier
       case operatorInfo = "operator"
       case vehicleType
+      case source
       case name
       case isAvailable
       case batteryLevel
