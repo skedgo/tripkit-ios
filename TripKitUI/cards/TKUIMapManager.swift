@@ -18,6 +18,22 @@ import Kingfisher
   import TripKit
 #endif
 
+public protocol TKUIIdentifiableAnnotation: MKAnnotation {
+  var identity: String? { get }
+}
+
+extension TKNamedCoordinate: TKUIIdentifiableAnnotation {
+  public var identity: String? {
+    if let stop = self as? TKStopCoordinate {
+      return stop.stopCode
+    } else if let id = locationID {
+      return id
+    } else {
+      return nil
+    }
+  }
+}
+
 open class TKUIMapManager: TGMapManager {
   
   /// A factory that all map managers will use as for the default annotations.
@@ -58,6 +74,37 @@ open class TKUIMapManager: TGMapManager {
     }
   }
   
+  /// Annotation that should be animated in and out when appearing and
+  /// disappearing. Also, when updating this array, only the differnces will
+  /// be animated for any annotations conforming to `TKUIIdentifiableAnnotation`
+  public var animatedAnnotations = [MKAnnotation]() {
+    didSet {
+      guard let mapView = mapView else { return }
+      
+      let removed = oldValue.elements(notIn: animatedAnnotations)
+      let added = animatedAnnotations.elements(notIn: oldValue)
+      mapView.addAnnotations(added)
+
+      // The tricky thing here is this: We can only remove annotations that the
+      // map is aware of, i.e., if we have A:[1,2,3] => B:[2,3,4] => C:[3,4,5]
+      //
+      // When we get to C, we would remove B2, but that never got added to the
+      // map, instead the map contains A2. So mapView.remove(B2) will NOT remove
+      // A2.
+      if !removed.isEmpty {
+        let removedIDs = removed.identities
+        assert(removed.count == removedIDs.count)
+        let annotationsToRemove = mapView.annotations.filter {
+          guard let id = ($0 as? TKUIIdentifiableAnnotation)?.identity else { return false }
+          return removedIDs.contains(id)
+        }
+        mapView.removeAnnotations(annotationsToRemove)
+      }
+    }
+  }
+  
+  /// Annotations where each annotation can dynamically change, e.g., changing
+  /// its coordinate, title/subtitle, and preferred alpha
   public var dynamicAnnotations = [MKAnnotation]() {
     didSet {
       mapView?.removeAnnotations(oldValue)
@@ -76,6 +123,11 @@ open class TKUIMapManager: TGMapManager {
 
     // Keep heading
     heading = mapView.camera.heading
+    
+    // Add content
+    mapView.addOverlays(overlays)
+    mapView.addAnnotations(animatedAnnotations)
+    mapView.addAnnotations(dynamicAnnotations)
     
     // Fetching and updating polygons which can be slow
     if let _ = self.overlayPolygon {
@@ -98,8 +150,10 @@ open class TKUIMapManager: TGMapManager {
   
   override open func cleanUp(_ mapView: MKMapView, animated: Bool) {
     removeOverlay(overlayPolygon)
-    overlays = []
-    dynamicAnnotations = []
+    
+    mapView.removeOverlays(overlays)
+    mapView.removeAnnotations(animatedAnnotations)
+    mapView.removeAnnotations(dynamicAnnotations)
     
     super.cleanUp(mapView, animated: animated)
   }
@@ -120,6 +174,22 @@ extension TKUIMapManager {
     mapView?.removeOverlay(polygon)
   }
   
+}
+
+// MARK: - Updating animated annotations
+
+fileprivate extension Array where Element: MKAnnotation {
+  fileprivate var identities: [String] {
+    return compactMap { ($0 as? TKUIIdentifiableAnnotation)?.identity }
+  }
+  
+  fileprivate func elements(notIn other: [Element]) -> [Element] {
+    let otherIDs = other.identities
+    return filter {
+      guard let id = ($0 as? TKUIIdentifiableAnnotation)?.identity else { return true }
+      return !otherIDs.contains(id)
+    }
+  }
 }
 
 // MARK: - Updating dynamic annotations
@@ -176,6 +246,22 @@ extension TKUIMapManager {
   
   open func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
     TKUIMapManagerHelper.adjustZOrder(views)
+
+    let animatedIDs = animatedAnnotations.identities
+    let viewsToAnimate = views.filter {
+      guard let identity = ($0.annotation as? TKUIIdentifiableAnnotation)?.identity else { return false }
+      return animatedIDs.contains(identity)
+    }
+    for view in viewsToAnimate {
+      view.alpha = 0
+      let delay = TimeInterval((0...5).randomElement() ?? 0) / 10
+      UIView.animate(
+        withDuration: 0.25, delay: delay, options: [],
+        animations: {
+          view.alpha = 1
+        }, completion: nil
+      )
+    }
   }
   
   open func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
