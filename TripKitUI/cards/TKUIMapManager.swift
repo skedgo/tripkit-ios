@@ -84,22 +84,7 @@ open class TKUIMapManager: TGMapManager {
       let removed = oldValue.elements(notIn: animatedAnnotations)
       let added = animatedAnnotations.elements(notIn: oldValue)
       mapView.addAnnotations(added)
-
-      // The tricky thing here is this: We can only remove annotations that the
-      // map is aware of, i.e., if we have A:[1,2,3] => B:[2,3,4] => C:[3,4,5]
-      //
-      // When we get to C, we would remove B2, but that never got added to the
-      // map, instead the map contains A2. So mapView.remove(B2) will NOT remove
-      // A2.
-      if !removed.isEmpty {
-        let removedIDs = removed.identities
-        assert(removed.count == removedIDs.count)
-        let annotationsToRemove = mapView.annotations.filter {
-          guard let id = ($0 as? TKUIIdentifiableAnnotation)?.identity else { return false }
-          return removedIDs.contains(id)
-        }
-        mapView.removeAnnotations(annotationsToRemove)
-      }
+      removeAnnotations(withSameIDsAs: removed)
     }
   }
   
@@ -152,8 +137,8 @@ open class TKUIMapManager: TGMapManager {
     removeOverlay(overlayPolygon)
     
     mapView.removeOverlays(overlays)
-    mapView.removeAnnotations(animatedAnnotations)
     mapView.removeAnnotations(dynamicAnnotations)
+    removeAnnotations(withSameIDsAs: animatedAnnotations)
     
     super.cleanUp(mapView, animated: animated)
   }
@@ -177,6 +162,30 @@ extension TKUIMapManager {
 }
 
 // MARK: - Updating animated annotations
+
+extension TKUIMapManager {
+  
+  private func removeAnnotations(withSameIDsAs annotations: [MKAnnotation]) {
+    guard let mapView = mapView else { return }
+    
+    // The tricky thing here is this: We can only remove annotations that the
+    // map is aware of, i.e., if we have A:[1,2,3] => B:[2,3,4] => C:[3,4,5]
+    //
+    // When we get to C, we would remove B2, but that never got added to the
+    // map, instead the map contains A2. So mapView.remove(B2) will NOT remove
+    // A2.
+    if !annotations.isEmpty {
+      let removedIDs = annotations.identities
+      assert(annotations.count == removedIDs.count)
+      let annotationsToRemove = mapView.annotations.filter {
+        guard let id = ($0 as? TKUIIdentifiableAnnotation)?.identity else { return false }
+        return removedIDs.contains(id)
+      }
+      mapView.removeAnnotations(annotationsToRemove)
+    }
+  }
+  
+}
 
 fileprivate extension Array where Element: MKAnnotation {
   fileprivate var identities: [String] {
