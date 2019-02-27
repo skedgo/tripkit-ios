@@ -15,7 +15,7 @@ extension Loc {
   }
   
   public static var LoadingDotDotDot: String {
-    return NSLocalizedString("Loading...", tableName: "TripKit", bundle: .tripKit, comment: "Indicating when something is loading")
+    return NSLocalizedString("Loading…", tableName: "TripKit", bundle: .tripKit, comment: "Indicating when something is loading")
   }
   
   public static var BusyGettingYourTrip: String {

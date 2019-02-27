@@ -75,8 +75,21 @@ extension Reactive where Base == TKServer {
     }
   }
   
+  /// Deletes all server-side data for a user, and also signs them out by
+  /// resetting the user token
+  public func deleteUserDataAndSignOut() -> Single<Void> {
+    return hit(.GET, path: "data/user/gdpr")
+      .map { status, _, _ in
+        if status != 200 {
+          throw TKError.error(withCode: 16524, userInfo: [ NSLocalizedDescriptionKey: "Couldn't delete account. Status: \(status)" ])
+        } else {
+          TKServer.updateUserToken(nil)
+        }
+    }
+  }
+  
 }
 
-struct SignInResponse: Codable {
+fileprivate struct SignInResponse: Codable {
   let userToken: String
 }
