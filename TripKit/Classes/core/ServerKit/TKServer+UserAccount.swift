@@ -58,6 +58,23 @@ extension Reactive where Base == TKServer {
     }
   }
   
+  /// Fetches all server-side data for a user, returning it as raw data, which
+  /// can be turned in a JSON string or file.
+  ///
+  /// - Note: Only returns data if a `userToken` was previously set.
+  ///
+  /// - Returns: Data, if any was available
+  public func downloadUserData() -> Single<Data> {
+    return hit(.GET, path: "data/user/gdpr")
+      .map { status, _, data in
+        if let data = data {
+          return data
+        } else {
+          throw TKError.error(withCode: 16523, userInfo: [ NSLocalizedDescriptionKey: "No server-side data" ])
+        }
+    }
+  }
+  
 }
 
 struct SignInResponse: Codable {
