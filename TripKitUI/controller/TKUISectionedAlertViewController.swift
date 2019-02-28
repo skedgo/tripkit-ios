@@ -200,7 +200,7 @@ extension TKUISectionedAlertViewController: TKUIAlertViewControllerDelegate {
   
   public func alertViewController(_ controller: TKUIAlertViewController, didTapOnURL url: URL) {
     let browser = SFSafariViewController(url: url)
-    present(browser, animated: true, completion: nil)
+    present(browser, animated: true)
   }
   
 }

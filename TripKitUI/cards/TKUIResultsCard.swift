@@ -323,7 +323,7 @@ private extension TKUIResultsCard {
       let presenter = pickerController.popoverPresentationController
       presenter?.sourceView = controller.view
       presenter?.sourceRect = controller.view.convert(sender.bounds, from: sender)
-      controller.present(pickerController, animated: true, completion: nil)
+      controller.present(pickerController, animated: true)
       
     } else {
       picker.showWithOverlay(in: controller.view)

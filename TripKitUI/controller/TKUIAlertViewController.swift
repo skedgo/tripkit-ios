@@ -133,7 +133,7 @@ public class TKUIAlertViewController: UITableViewController {
   }
   
   @objc private func doneButtonTapped(_ sender: UIButton) {
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: true)
   }
   
   // MARK: - UITableViewDataSource

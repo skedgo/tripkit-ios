@@ -234,7 +234,7 @@ extension TKUITripOverviewCard {
     } else {
       viewController.modalPresentationStyle = .currentContext
     }
-    controller.present(viewController, animated: true, completion: nil)
+    controller.present(viewController, animated: true)
   }
   
 }
@@ -248,7 +248,7 @@ extension TKUITripOverviewCard: TKUIAttributionTableViewControllerDelegate {
   }
   
   public func requestsDismissal(attributor: TKUIAttributionTableViewController) {
-    attributor.presentingViewController?.dismiss(animated: true, completion: nil)
+    attributor.presentingViewController?.dismiss(animated: true)
   }
   
 }
