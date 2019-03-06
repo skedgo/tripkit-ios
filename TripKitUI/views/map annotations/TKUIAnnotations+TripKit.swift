@@ -240,7 +240,9 @@ extension TKSegment: TKUISemaphoreDisplayable {
       if let time = departureTime {
         return .headWithTime(time, timeZone, isRealTime: timesAreRealTime)
       } else {
-        assertionFailure("Segment has no time: \(self)")
+        // A segment might lose its trip, if the trip since got updated with
+        // real-time information and the segments got rebuild
+        assert(trip == nil, "Segment has a trip but no time: \(self)")
         return .headOnly
       }
     }
