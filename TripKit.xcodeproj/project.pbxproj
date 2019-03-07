@@ -40,6 +40,7 @@
 		3A383CAF223008A300361596 /* TKUISegmentInstructionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A383CAE223008A300361596 /* TKUISegmentInstructionsView.xib */; };
 		3A383CB1223008AE00361596 /* TKUISegmentInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A383CB0223008AE00361596 /* TKUISegmentInstructionsView.swift */; };
 		3A383CB3223018E300361596 /* TKSegment+AccessoryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A383CB2223018E300361596 /* TKSegment+AccessoryViews.swift */; };
+		3A383CB92231464500361596 /* TKUITripModeByModeCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A383CB82231464500361596 /* TKUITripModeByModeCard+Configuration.swift */; };
 		3A38695720EB6C2400B0A82D /* routing-cycle-train-cycle.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A38695620EB6C2400B0A82D /* routing-cycle-train-cycle.json */; };
 		3A3C9BA61F751FC300C8D476 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BA51F751FC300C8D476 /* API.swift */; };
 		3A3C9BA91F751FF300C8D476 /* DeparturesAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BA71F751FF200C8D476 /* DeparturesAPIModel.swift */; };
@@ -830,6 +831,7 @@
 		3A383CAE223008A300361596 /* TKUISegmentInstructionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISegmentInstructionsView.xib; sourceTree = "<group>"; };
 		3A383CB0223008AE00361596 /* TKUISegmentInstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISegmentInstructionsView.swift; sourceTree = "<group>"; };
 		3A383CB2223018E300361596 /* TKSegment+AccessoryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKSegment+AccessoryViews.swift"; sourceTree = "<group>"; };
+		3A383CB82231464500361596 /* TKUITripModeByModeCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripModeByModeCard+Configuration.swift"; sourceTree = "<group>"; };
 		3A38695620EB6C2400B0A82D /* routing-cycle-train-cycle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-cycle-train-cycle.json"; sourceTree = "<group>"; };
 		3A3C9BA51F751FC300C8D476 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3A3C9BA71F751FF200C8D476 /* DeparturesAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesAPIModel.swift; sourceTree = "<group>"; };
@@ -2103,6 +2105,7 @@
 				3A383CA3222FFE2000361596 /* TKUISegmentInstructionsCard.swift */,
 				3AFD393D20D9333500FDC7D0 /* TKUITripMapManager.swift */,
 				3A383CA7222FFE8900361596 /* TKUITripModeByModeCard.swift */,
+				3A383CB82231464500361596 /* TKUITripModeByModeCard+Configuration.swift */,
 				3AFD394320D9333500FDC7D0 /* TKUITripOverviewCard.swift */,
 				3AF5F2B820F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift */,
 			);
@@ -3084,6 +3087,7 @@
 				3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */,
 				3A383CB1223008AE00361596 /* TKUISegmentInstructionsView.swift in Sources */,
 				3AFD394D20D9333500FDC7D0 /* TKUIResultsViewModel.swift in Sources */,
+				3A383CB92231464500361596 /* TKUITripModeByModeCard+Configuration.swift in Sources */,
 				3A7636F921F9F04700639155 /* TKUIAnnotations.swift in Sources */,
 				3A383CA6222FFE3200361596 /* TKUISegmentDirectionsCard.swift in Sources */,
 				3A6DF11E202C8EB80084CB2C /* UIColor+Variations.m in Sources */,

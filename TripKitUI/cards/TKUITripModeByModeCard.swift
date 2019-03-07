@@ -16,6 +16,8 @@ public class TKUITripModeByModeCard: TGPageCard {
     case segmentTripDoesNotMatchMapManager
   }
   
+  public static var config = Configuration.empty
+
   /// Constructs a page card configured for displaying the segments on a
   /// mode-by-mode basis of a trip.
   ///
@@ -28,13 +30,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     let segments = segment.trip.segments
     guard let index = segments.index(of: segment) else { preconditionFailure() }
     
-    let cards = segments.map { segment -> TGCard in
-      if segment.isSelfNavigating {
-        return TKUISegmentDirectionsCard(for: segment, mapManager: mapManager)
-      } else {
-        return TKUISegmentInstructionCard(for: segment, mapManager: mapManager)
-      }
-    }
+    let cards = segments.flatMap { TKUITripModeByModeCard.config.builder.cards(for: $0, mapManager: mapManager) }
     
     super.init(cards: cards, initialPage: index)
   }
