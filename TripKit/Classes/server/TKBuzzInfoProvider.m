@@ -37,12 +37,14 @@
    ^(NSError *error) {
      if (error) {
        DLog(@"Error fetching regions: %@", error);
+       service.isRequestingServiceData = NO;
        completion(service, NO);
        return;
      }
      
      TKRegion *region = regionOrNil ?: service.region;
      if (! region) {
+       service.isRequestingServiceData = NO;
        completion(service, NO);
        return;
      }

@@ -176,7 +176,7 @@ extension TKUIMapManager {
     // A2.
     if !annotations.isEmpty {
       let removedIDs = annotations.identities
-      assert(annotations.count == removedIDs.count)
+      assert(annotations.count == removedIDs.count, "Tried to remove (some) annotations which have no IDs!")
       let annotationsToRemove = mapView.annotations.filter {
         guard let id = ($0 as? TKUIIdentifiableAnnotation)?.identity else { return false }
         return removedIDs.contains(id)

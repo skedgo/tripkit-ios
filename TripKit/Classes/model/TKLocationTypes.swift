@@ -182,25 +182,25 @@ public class TKCarRentalLocation: TKModeCoordinate {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     carRental = try values.decode(API.CarRentalInfo.self, forKey: .carRental)
     try super.init(from: decoder)
+    locationID = carRental.identifier
   }
   
   public override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(carRental, forKey: .carRental)
-    locationID = carRental.identifier
   }
   
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(API.CarRentalInfo.self, forKey: "carRental") else { return nil }
     carRental = info
     super.init(coder: aDecoder)
+    locationID = carRental.identifier
   }
   
   public override func encode(with aCoder: NSCoder) {
     super.encode(with: aCoder)
     try? aCoder.encode(encodable: carRental, forKey: "carRental")
-    locationID = carRental.identifier
   }
 
 }
