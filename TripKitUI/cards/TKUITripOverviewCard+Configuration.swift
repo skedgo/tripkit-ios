@@ -50,11 +50,27 @@ public extension TKUITripOverviewCard {
     ///
     /// Handler will be called when the user taps the segment. You can, for
     /// example, use this to present a detailed view of the segment.
-    public var presentSegmentHandler: ((TKUITripOverviewCard, TKSegment) -> Void)?
+    ///
+    /// By default pushes a `TKUITripModeByModeCard` starting on this segment
+    public var presentSegmentHandler: ((TKUITripOverviewCard, TKSegment) -> Void)? = { card, segment in
+      guard let mapManager = card.mapManager as? TKUITripMapManager else {
+        assertionFailure(); return
+      }
+      let pageCard = try! TKUITripModeByModeCard(startingOn: segment, mapManager: mapManager)
+      card.controller?.push(pageCard)
+    }
     
     /// Set this to add a "start" button on a trip, e.g., to enter turn-by-
     /// turn navigation mode.
-    public var startTripHandler: ((TKUITripOverviewCard, Trip) -> Void)?
+    ///
+    /// By default pushes a `TKUITripModeByModeCard` starting on the first segment
+    public var startTripHandler: ((TKUITripOverviewCard, Trip) -> Void)? = { card, trip in
+      guard let mapManager = card.mapManager as? TKUITripMapManager else {
+        assertionFailure(); return
+      }
+      let pageCard = TKUITripModeByModeCard(mapManager: mapManager)
+      card.controller?.push(pageCard)
+    }
     
     /// Set this to use your own map manager. You can use this in combination
     /// with `TGCardViewController.builder` to use a map other than Apple's
