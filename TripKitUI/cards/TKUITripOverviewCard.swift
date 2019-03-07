@@ -134,6 +134,12 @@ public class TKUITripOverviewCard: TGTableCard {
       })
       .disposed(by: disposeBag)
     
+    viewModel.refreshMap
+      .emit(onNext: {
+        (self.mapManager as? TKUITripMapManager)?.updateTrip()
+      })
+      .disposed(by: disposeBag)
+    
     if let factory = TKUITripOverviewCard.config.tripActionsFactory {
       let actions = factory(viewModel.trip)
       let actionsView = TKUITripActionsView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
@@ -194,7 +200,7 @@ extension TKUITripOverviewCard {
 // MARK: - Attribution
 
 extension TKUITripOverviewCard {
-  private func showAttribution(for sources: [API.DataAttribution], in  tableView: UITableView) {
+  private func showAttribution(for sources: [API.DataAttribution], in tableView: UITableView) {
     let footer = TKUIAttributionView.newView(sources, fitsIn: tableView)
     footer?.backgroundColor = tableView.backgroundColor
     
@@ -244,7 +250,7 @@ extension TKUITripOverviewCard {
 extension TKUITripOverviewCard: TKUIAttributionTableViewControllerDelegate {
   
   public func attributor(_ attributor: TKUIAttributionTableViewController, requestsWebsite url: URL) {
-    TKUITripOverviewCard.config.presentAttributionHandler?(self, url)
+    TKUITripOverviewCard.config.presentAttributionHandler?(self, attributor, url)
   }
   
   public func requestsDismissal(attributor: TKUIAttributionTableViewController) {

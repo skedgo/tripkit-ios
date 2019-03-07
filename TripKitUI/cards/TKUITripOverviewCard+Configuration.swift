@@ -43,7 +43,7 @@ public extension TKUITripOverviewCard {
     /// in-app web view, or call `UIApplication.shared.open()`.
     ///
     /// - warning: Make sure you provide this.
-    public var presentAttributionHandler: ((TKUITripOverviewCard, URL) -> Void)?
+    public var presentAttributionHandler: ((TKUITripOverviewCard, TKUIAttributionTableViewController, URL) -> Void)?
     
     /// Set this to add a tap-action to every segment in the trip overview
     /// card.

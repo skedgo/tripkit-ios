@@ -44,12 +44,23 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     zoom(to: annos, animated: animated)
   }
   
+  public func updateTrip() {
+    removeTrip()
+    add(trip)
+  }
+  
 }
 
 
 // MARK: Adding trips to the map
 
 private extension TKUITripMapManager {
+  func removeTrip() {
+    self.overlays = []
+    self.annotations = []
+    self.dynamicAnnotations = []
+  }
+  
   func add(_ trip: Trip) {
     var annotations = [MKAnnotation]()
     var dynamicAnnotations = [MKAnnotation]()
