@@ -43,7 +43,6 @@ public class TKUISegmentInstructionCard: TGPlainCard {
   public override func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     super.didBuild(cardView: cardView, headerView: headerView)
     
-    instructionView.titleLabel.text = segment.title
     instructionView.notesLabel.text = segment.notes
     
     let accessoryViews = segment.buildAccessoryViews()

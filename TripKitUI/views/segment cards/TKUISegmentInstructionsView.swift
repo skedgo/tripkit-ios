@@ -8,9 +8,13 @@
 
 import UIKit
 
+/// View for detailed instructions of a segment as part of a
+/// `TGUISegmentInstructionCard`.
+///
+/// - Note: Does not include title, which is meant to go into the card's title
+///     view.
 class TKUISegmentInstructionsView: UIView {
   
-  @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var notesLabel: UILabel!
   
   @IBOutlet weak var accessoryStackView: UIStackView!

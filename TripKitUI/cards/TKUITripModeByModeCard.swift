@@ -28,8 +28,11 @@ public class TKUITripModeByModeCard: TGPageCard {
     }
     
     let segments = segment.trip.segments
+
+    // TODO: This doesn't work if the builder doesn't use exactly one card
+    //   per segment. Instead, we should ask the builder for all the cards,
+    //   and to, optionally, also return the index of the start segment.
     guard let index = segments.index(of: segment) else { preconditionFailure() }
-    
     let cards = segments.flatMap { TKUITripModeByModeCard.config.builder.cards(for: $0, mapManager: mapManager) }
     
     super.init(cards: cards, initialPage: index)
