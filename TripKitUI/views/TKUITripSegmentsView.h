@@ -46,5 +46,9 @@
               allowSubtitles:(BOOL)allowSubtitles
               allowInfoIcons:(BOOL)allowInfoIcons;
 
+- (void)selectSegmentAtIndex:(NSInteger)index NS_SWIFT_NAME(select(segmentAtIndex:));
+
+- (NSInteger)segmentIndexAtX:(CGFloat)x NS_SWIFT_NAME(segmentIndex(atX:));
+
 @end
 

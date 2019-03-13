@@ -10,6 +10,10 @@ import Foundation
 
 extension TKSegment {
   
+  public var index: Int {
+    return reference?.index?.intValue ?? -1
+  }
+  
   @objc
   public func triggerRealTimeKVO() {
     let time = self.departureTime
