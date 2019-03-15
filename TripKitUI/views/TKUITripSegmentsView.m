@@ -380,8 +380,19 @@
 
 - (NSInteger)segmentIndexAtX:(CGFloat)x NS_SWIFT_NAME(segmentIndex(atX:))
 {
-  // TODO: Implement this, then handle via taps on the segment view
-  return 0;
+  if (!self.segmentXValues) {
+    return 0;
+  }
+
+  __block NSUInteger index = 0;
+  [self.segmentXValues enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (obj.doubleValue > x) {
+      *stop = true;
+    } else {
+      index = idx;
+    }
+  }];
+  return index;
 }
 
 

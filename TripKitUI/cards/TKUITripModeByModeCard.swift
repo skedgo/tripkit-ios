@@ -19,7 +19,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   /// Storage of information of what the cards are used for the segment at a
   /// specific index. There is one of these for every index, but not all are
   /// guarantueed to have cards, i.e., `cards` can be empty.
-  struct SegmentCards {
+  fileprivate struct SegmentCards {
     let segmentIndex: Int
     let cards: [TGCard]
     
@@ -56,8 +56,15 @@ public class TKUITripModeByModeCard: TGPageCard {
   
   public static var config = Configuration.empty
   
-  let segmentCards: [SegmentCards]
-  let headerSegmentIndices: [Int]
+  private let segmentCards: [SegmentCards]
+  private let headerSegmentIndices: [Int]
+  
+  private var segmentView: TKUITripSegmentsView? {
+    return headerAccessoryView as? TKUITripSegmentsView
+  }
+
+  private let feedbackGenerator = UISelectionFeedbackGenerator()
+
 
   /// Constructs a page card configured for displaying the segments on a
   /// mode-by-mode basis of a trip.
@@ -84,22 +91,10 @@ public class TKUITripModeByModeCard: TGPageCard {
 
     let headerSegments = segment.trip.segments(with: .inSummary).compactMap { $0 as? TKSegment }
     self.headerSegmentIndices = headerSegments.map { $0.index }
-    let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= segment.index } // exact segment might not be available!
 
     super.init(cards: cards, initialPage: initialPage ?? 0)
 
-    let segmentsView = TKUITripSegmentsView(frame: .zero)
-    segmentsView.darkTextColor  = .white
-    segmentsView.lightTextColor = .lightGray
-    segmentsView.configure(forSegments: headerSegments, allowSubtitles: true, allowInfoIcons: false)
-    segmentsView.select(segmentAtIndex: selectedHeaderIndex ?? 0)
-    
-    // TODO: Add tap gesture to the segments view, then use `segmentsView.segmentIndexAtX`
-    //   to determine which header index was tapped, then use `headerSegmentIndices[thatIndex]`
-    //   to get `segment.index`, then call `firstCardIndex` to get the cards index
-    //   then move to that card. Phew.
-    
-    self.headerAccessoryView = segmentsView
+    self.headerAccessoryView = buildSegmentsView(segments: headerSegments, selecting: segment.index)
   }
   
   public convenience init(mapManager: TKUITripMapManager) {
@@ -119,6 +114,49 @@ public class TKUITripModeByModeCard: TGPageCard {
     let segmentIndex = SegmentCards.segmentIndex(ofCardAtIndex: index, in: segmentCards)
     let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= segmentIndex } // exact segment might not be available!
     segmentsView.select(segmentAtIndex: selectedHeaderIndex ?? 0)
+  }
+  
+}
+
+// MARK: - Segments view in header
+
+extension TKUITripModeByModeCard {
+  
+  private func buildSegmentsView(segments: [TKSegment], selecting index: Int) -> TKUITripSegmentsView {
+    let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= index } // exact segment might not be available!
+
+    let segmentsView = TKUITripSegmentsView(frame: .zero)
+    segmentsView.darkTextColor  = .white
+    segmentsView.lightTextColor = .lightGray
+    segmentsView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: false)
+    segmentsView.select(segmentAtIndex: selectedHeaderIndex ?? 0)
+
+    let tapper = UITapGestureRecognizer(target: self, action: #selector(segmentTapped))
+    segmentsView.addGestureRecognizer(tapper)
+    
+    feedbackGenerator.prepare()
+    
+    return segmentsView
+  }
+  
+  @objc
+  private func segmentTapped(_ recognizer: UITapGestureRecognizer) {
+    guard let segmentsView = self.segmentView
+      else { assertionFailure(); return }
+    
+    let x = recognizer.location(in: segmentsView).x
+    let headerIndex = segmentsView.segmentIndex(atX: x)
+    
+    let segmentIndex = headerSegmentIndices[headerIndex]
+    guard
+      let cardIndex = SegmentCards.firstCardIndex(ofSegmentAt: segmentIndex, in: segmentCards),
+      cardIndex != currentPageIndex
+      else { return }
+    
+    move(to: cardIndex)
+    
+    feedbackGenerator.selectionChanged()
+    feedbackGenerator.prepare()
   }
   
 }
