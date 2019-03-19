@@ -17,6 +17,8 @@ public class TKUISegmentDirectionsCard: TGTableCard {
   
   let segment: TKSegment
   
+  let titleView: TKUISegmentHeaderView
+  
   private let disposeBag = DisposeBag()
   
   var tripMapManager: TKUITripMapManager {
@@ -27,7 +29,10 @@ public class TKUISegmentDirectionsCard: TGTableCard {
   init(for segment: TKSegment, mapManager: TKUITripMapManager) {
     self.segment = segment
     
-    super.init(title: .default(segment.title ?? "", nil, nil), mapManager: mapManager)
+    titleView = TKUISegmentHeaderView.newInstance()
+    titleView.configure(for: segment)
+    
+    super.init(title: .custom(titleView, dismissButton: titleView.dismissButton), mapManager: mapManager)
   }
   
   required init?(coder: NSCoder) {

@@ -10,12 +10,18 @@ import Foundation
 
 import TGCardViewController
 
+import RxSwift
+import RxCocoa
+
 public class TKUISegmentInstructionCard: TGPlainCard {
   
   let segment: TKSegment
   
+  let titleView: TKUISegmentHeaderView
   let instructionView: TKUISegmentInstructionsView
   
+  private let disposeBag = DisposeBag()
+
   var tripMapManager: TKUITripMapManager {
     guard let tripper = mapManager as? TKUITripMapManager else { preconditionFailure() }
     return tripper
@@ -24,9 +30,12 @@ public class TKUISegmentInstructionCard: TGPlainCard {
   public init(for segment: TKSegment, mapManager: TKUITripMapManager) {
     self.segment = segment
     
-    self.instructionView = TKUISegmentInstructionsView.newInstance()
+    titleView = TKUISegmentHeaderView.newInstance()
+    titleView.configure(for: segment)
     
-    super.init(title: .default(segment.title ?? "", nil, nil), contentView: instructionView, mapManager: mapManager)
+    instructionView = TKUISegmentInstructionsView.newInstance()
+    
+    super.init(title: .custom(titleView, dismissButton: titleView.dismissButton), contentView: instructionView, mapManager: mapManager)
   }
   
   required init?(coder: NSCoder) {

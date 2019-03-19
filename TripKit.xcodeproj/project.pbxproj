@@ -16,6 +16,8 @@
 		3A096E281F20DF6600666E59 /* TKLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E271F20DF6600666E59 /* TKLocationProvider.swift */; };
 		3A096E2C1F20E0C500666E59 /* TKLocationManager+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E2B1F20E0C500666E59 /* TKLocationManager+rx.swift */; };
 		3A096E2E1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */; };
+		3A0B517F2240E5B6002346D6 /* TKUISegmentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B517D2240E5B6002346D6 /* TKUISegmentHeaderView.swift */; };
+		3A0B51802240E5B6002346D6 /* TKUISegmentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B517E2240E5B6002346D6 /* TKUISegmentHeaderView.xib */; };
 		3A0D46BB1FAD0EBA00B6E209 /* TKJSONSanitizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D46BA1FAD0EBA00B6E209 /* TKJSONSanitizer.swift */; };
 		3A14BE2C1F8F8047008B1B54 /* TKQuickBookingHelper+Fake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A14BE2B1F8F8047008B1B54 /* TKQuickBookingHelper+Fake.swift */; };
 		3A15D8D91D9CE08100BADBEA /* TKBuzzRouter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */; };
@@ -809,6 +811,8 @@
 		3A096E271F20DF6600666E59 /* TKLocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationProvider.swift; sourceTree = "<group>"; };
 		3A096E2B1F20E0C500666E59 /* TKLocationManager+rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKLocationManager+rx.swift"; sourceTree = "<group>"; };
 		3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+SharedDefaults.swift"; sourceTree = "<group>"; };
+		3A0B517D2240E5B6002346D6 /* TKUISegmentHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentHeaderView.swift; sourceTree = "<group>"; };
+		3A0B517E2240E5B6002346D6 /* TKUISegmentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentHeaderView.xib; sourceTree = "<group>"; };
 		3A0D46BA1FAD0EBA00B6E209 /* TKJSONSanitizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONSanitizer.swift; sourceTree = "<group>"; };
 		3A14BE2B1F8F8047008B1B54 /* TKQuickBookingHelper+Fake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKQuickBookingHelper+Fake.swift"; sourceTree = "<group>"; };
 		3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKBuzzRouter+Rx.swift"; sourceTree = "<group>"; };
@@ -1398,6 +1402,8 @@
 		3A383CAD2230086A00361596 /* segment cards */ = {
 			isa = PBXGroup;
 			children = (
+				3A0B517D2240E5B6002346D6 /* TKUISegmentHeaderView.swift */,
+				3A0B517E2240E5B6002346D6 /* TKUISegmentHeaderView.xib */,
 				3A383CAE223008A300361596 /* TKUISegmentInstructionsView.xib */,
 				3A383CB0223008AE00361596 /* TKUISegmentInstructionsView.swift */,
 			);
@@ -2735,6 +2741,7 @@
 				3A6DF137202C8EB80084CB2C /* TripKitUI.xcassets in Resources */,
 				D3211337206BBB0600E5D929 /* TKUILoadingAlertView.xib in Resources */,
 				3A6DF13B202C8EB80084CB2C /* TKUIEmptyAlertView.xib in Resources */,
+				3A0B51802240E5B6002346D6 /* TKUISegmentHeaderView.xib in Resources */,
 				3A682F1F20F3F8A900E05195 /* TKUIRoutingSupportView.xib in Resources */,
 				D32CA5AF20E34409009C9449 /* TKUIGroupedAlertCell.xib in Resources */,
 				3AF5F2BF20F3A829003AAEBA /* TKUITripActionView.xib in Resources */,
@@ -3061,6 +3068,7 @@
 				3AFD394820D9333500FDC7D0 /* TKUITripMapManager.swift in Sources */,
 				3A682F7D20F4B3E200E05195 /* ASMapManager.m in Sources */,
 				3A26E1B420EFAFBD00FE4DDD /* TKUISegmentStationaryCell.swift in Sources */,
+				3A0B517F2240E5B6002346D6 /* TKUISegmentHeaderView.swift in Sources */,
 				3AF5F2BD20F3A818003AAEBA /* TKUITripActionsView.swift in Sources */,
 				3AEB47EC20DCE48500F9DF83 /* RxHelpers.swift in Sources */,
 				3A6DF10A202C8EB80084CB2C /* TKUIImageAnnotationView.m in Sources */,
