@@ -22,6 +22,10 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
   public let trip: Trip
   
+  override public var annotationToZoomToOnTakingCharge: [MKAnnotation] {
+    return trip.segments.flatMap { $0.annotationsToZoomToOnMap() }
+  }
+  
   public init(trip: Trip) {
     self.trip = trip
     
@@ -35,8 +39,17 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     add(trip)
   }
   
+  override public func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
+    let builder = super.annotationBuilder(for: annotation, in: mapView)
+    if let visit = annotation as? StopVisits {
+      let isVisited = trip.usesVisit(visit)
+      builder.drawCircleAsTravelled(isVisited)
+    }
+    return builder
+  }
+  
   public func showTrip(animated: Bool) {
-    zoom(to: annotations, animated: animated)
+    zoom(to: annotationToZoomToOnTakingCharge, animated: animated)
   }
   
   public func show(_ segment: TKSegment, animated: Bool) {

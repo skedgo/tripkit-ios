@@ -143,6 +143,10 @@ open class TKUIMapManager: TGMapManager {
     super.cleanUp(mapView, animated: animated)
   }
   
+  open func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
+    return TKUIMapManager.annotationBuilderFactory(annotation, mapView)
+  }
+  
 }
 
 // MARK: - Overlay polygon
@@ -274,12 +278,12 @@ extension TKUIMapManager {
   }
   
   open func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    if annotation === mapView.userLocation {
+    guard annotation !== mapView.userLocation else {
       // Use the default MKUserLocation annotation
       return nil
     }
     
-    let builder = TKUIMapManager.annotationBuilderFactory(annotation, mapView)
+    let builder = annotationBuilder(for: annotation, in: mapView)
     return builder.build()
   }
   
