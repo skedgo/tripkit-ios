@@ -1,5 +1,5 @@
 //
-//  TKUISegmentHeaderView
+//  TKUISegmentTitleView
 //  TripGoAppKit
 //
 //  Created by Adrian Schönig on 19.03.19.
@@ -12,7 +12,7 @@ import RxSwift
 
 import TGCardViewController
 
-public class TKUISegmentHeaderView: UIView {
+public class TKUISegmentTitleView: UIView {
 
   @IBOutlet weak var modeIcon: UIImageView!
   
@@ -24,8 +24,8 @@ public class TKUISegmentHeaderView: UIView {
   
   private let disposeBag = DisposeBag()
   
-  public static func newInstance() -> TKUISegmentHeaderView {
-    return Bundle(for: TKUISegmentHeaderView.self).loadNibNamed("TKUISegmentHeaderView", owner: self, options: nil)?.first as! TKUISegmentHeaderView
+  public static func newInstance() -> TKUISegmentTitleView {
+    return Bundle(for: TKUISegmentTitleView.self).loadNibNamed("TKUISegmentTitleView", owner: self, options: nil)?.first as! TKUISegmentTitleView
   }
   
   public override func awakeFromNib() {

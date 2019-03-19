@@ -17,7 +17,7 @@ public class TKUISegmentInstructionCard: TGPlainCard {
   
   let segment: TKSegment
   
-  let titleView: TKUISegmentHeaderView
+  let titleView: TKUISegmentTitleView
   let instructionView: TKUISegmentInstructionsView
   
   private let disposeBag = DisposeBag()
@@ -30,7 +30,7 @@ public class TKUISegmentInstructionCard: TGPlainCard {
   public init(for segment: TKSegment, mapManager: TKUITripMapManager) {
     self.segment = segment
     
-    titleView = TKUISegmentHeaderView.newInstance()
+    titleView = TKUISegmentTitleView.newInstance()
     titleView.configure(for: segment)
     
     instructionView = TKUISegmentInstructionsView.newInstance()
