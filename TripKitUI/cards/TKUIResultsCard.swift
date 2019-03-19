@@ -288,7 +288,7 @@ private extension TKUIResultsCard {
   func navigate(to next: TKUIResultsViewModel.Next) {
     switch next {
     case .showTrip(let trip):
-      controller?.push(TGPageCard(overviewsHighlighting: trip))
+      controller?.push(TKUITripsPageCard(highlighting: trip))
       
     case .presentModes(let modes, let region):
       showTransportOptions(modes: modes, for: region)
