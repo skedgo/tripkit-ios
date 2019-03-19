@@ -8,8 +8,6 @@
 
 import UIKit
 
-import RxSwift
-
 import TGCardViewController
 
 public class TKUISegmentTitleView: UIView {
@@ -21,8 +19,6 @@ public class TKUISegmentTitleView: UIView {
   @IBOutlet weak var subsubtitleLabel: UILabel!
   
   @IBOutlet public weak var dismissButton: UIButton!
-  
-  private let disposeBag = DisposeBag()
   
   public static func newInstance() -> TKUISegmentTitleView {
     return Bundle(for: TKUISegmentTitleView.self).loadNibNamed("TKUISegmentTitleView", owner: self, options: nil)?.first as! TKUISegmentTitleView
@@ -39,13 +35,6 @@ public class TKUISegmentTitleView: UIView {
     dismissButton.setTitle(nil, for: .normal)
     
     modeIcon.tintColor = titleLabel.textColor
-  }
-  
-  public func configure(for segment: TKTripSegment) {
-    titleLabel.text = segment.tripSegmentInstruction
-    subtitleLabel.text = segment.tripSegmentDetail
-    
-    modeIcon.setImage(with: segment.tripSegmentModeImageURL, asTemplate: segment.tripSegmentModeImageIsTemplate, placeholder: segment.tripSegmentModeImage)
   }
   
 }

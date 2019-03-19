@@ -26,22 +26,22 @@
                     <rect key="frame" x="46" y="8" width="321" height="49"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="25R-dz-Nwr">
-                            <rect key="frame" x="0.0" y="0.0" width="279" height="49"/>
+                            <rect key="frame" x="0.0" y="0.0" width="274" height="49"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Walk" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEO-Bf-P7i" userLabel="Title" customClass="TKUIStyledLabel">
-                                    <rect key="frame" x="0.0" y="0.0" width="279" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="274" height="20.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <color key="textColor" red="0.097280979160000003" green="0.090294875199999999" blue="0.23543129860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Towards Mona Vale" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccR-Sw-Z6F" userLabel="Subtitle" customClass="TKUIStyledLabel">
-                                    <rect key="frame" x="0.0" y="20.5" width="279" height="14.5"/>
+                                    <rect key="frame" x="0.0" y="20.5" width="274" height="14.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                     <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXs-Kz-Uqb" userLabel="Subsubtitle" customClass="TKUIStyledLabel">
-                                    <rect key="frame" x="0.0" y="35" width="279" height="14"/>
+                                    <rect key="frame" x="0.0" y="35" width="274" height="14"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                     <color key="textColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -49,7 +49,11 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nv4-5c-QYr">
-                            <rect key="frame" x="282" y="0.0" width="39" height="49"/>
+                            <rect key="frame" x="277" y="0.0" width="44" height="49"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="Elm-1k-ZA6"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="f0E-Fz-Dp4"/>
+                            </constraints>
                             <state key="normal" title="Close"/>
                         </button>
                     </subviews>
