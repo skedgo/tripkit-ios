@@ -23,7 +23,7 @@ public class Shape: NSManagedObject {
 
   fileprivate var _sortedCoordinates: [TKNamedCoordinate]?
   
-  fileprivate var sortedCoordinates: [TKNamedCoordinate]? {
+  public var sortedCoordinates: [TKNamedCoordinate]? {
     get {
       if let encoded = encodedWaypoints, _sortedCoordinates == nil {
         let coordinates = CLLocationCoordinate2D.decodePolyline(encoded)
@@ -163,10 +163,6 @@ extension Shape: TKDisplayableRoute {
   
   public var routeIsTravelled: Bool {
     return travelled?.boolValue ?? true
-  }
-  
-  public var showRoute: Bool {
-    return true
   }
   
   public var routeDashPattern: [NSNumber]? {

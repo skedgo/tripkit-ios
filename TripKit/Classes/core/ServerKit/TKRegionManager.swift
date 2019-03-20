@@ -356,7 +356,7 @@ extension TKRegionManager {
   public func city(nearestTo target: CLLocationCoordinate2D) -> TKRegion.City? {
     typealias Match = (TKRegion.City, CLLocationDistance)
     
-    let cities = localRegions(containing: target).reduce(mutating: [TKRegion.City]()) { cities, region in
+    let cities = localRegions(containing: target).reduce(into: [TKRegion.City]()) { cities, region in
       cities.append(contentsOf: region.cities)
     }
     let best = cities.reduce(nil) { acc, city -> Match? in

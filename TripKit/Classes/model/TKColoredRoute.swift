@@ -10,7 +10,7 @@ import Foundation
 
 public class TKColoredRoute: NSObject {
   
-  @objc public let path: [MKAnnotation]
+  @objc public private(set) var path: [MKAnnotation]
   public let routeColor: TKColor?
   public let routeDashPattern: [NSNumber]?
   public let routeIsTravelled: Bool
@@ -33,6 +33,10 @@ public class TKColoredRoute: NSObject {
     routeIsTravelled = isTravelled
   }
   
+  public func append(_ annotations: [MKAnnotation]) {
+    path.append(contentsOf: annotations)
+  }
+  
 }
 
 extension TKColoredRoute: TKDisplayableRoute {
@@ -40,8 +44,6 @@ extension TKColoredRoute: TKDisplayableRoute {
   public var routePath: [Any] {
     return path
   }
-  
-  public var showRoute: Bool { return true }
   
 }
 
