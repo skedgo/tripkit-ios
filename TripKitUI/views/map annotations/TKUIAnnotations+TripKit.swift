@@ -19,6 +19,10 @@ extension TKModeCoordinate: TKUIImageAnnotationDisplayable {
   }
   
   public var pointDisplaysImage: Bool { return stopModeInfo.localImageName != nil }
+
+  public var pointColor: TKColor? {
+    return stopModeInfo.color
+  }
   
   public var pointImage: TKImage? {
     guard let imageName = stopModeInfo.localImageName else { return nil }
@@ -87,6 +91,10 @@ extension Alert: TKUIImageAnnotationDisplayable {
     return location != nil
   }
   
+  public var pointColor: TKColor? {
+    return nil
+  }
+
   public var pointImage: TKImage? {
     return TKInfoIcon.image(for: infoIconType, usage: .map)
   }
@@ -118,6 +126,10 @@ extension StopLocation: TKUIImageAnnotationDisplayable {
     return stopModeInfo?.identifier ?? "StopLocation"
   }
   
+  public var pointColor: TKColor? {
+    return stopModeInfo?.color
+  }
+
   public var pointDisplaysImage: Bool {
     return pointImage != nil
   }
@@ -158,6 +170,10 @@ extension StopVisits: TKUIImageAnnotationDisplayable {
     return service.modeInfo?.identifier ?? "StopVisits"
   }
   
+  public var pointColor: TKColor? {
+    return service.color as? TKColor
+  }
+
   public var pointImage: TKImage? {
     return service.modeImage(for: .listMainMode)
   }
@@ -206,6 +222,10 @@ extension TKSegment: TKUIImageAnnotationDisplayable {
     return coordinate.isValid && hasVisibility(.onMap)
   }
   
+  public var pointColor: TKColor? {
+    return tripSegmentModeColor
+  }
+
   public var pointImage: TKImage? {
     switch order {
     case .start, .end:
@@ -268,6 +288,7 @@ extension TKRegion.City: TKUIImageAnnotationDisplayable {
   
   public var isDraggable: Bool { return false }
   public var pointDisplaysImage: Bool { return true }
+  public var pointColor: TKColor? { return nil }
   public var pointImage: TKImage? { return TKStyleManager.imageNamed("icon-map-info-city") }
   public var pointImageURL: URL? { return nil }
   public var pointImageIsTemplate: Bool { return false }
