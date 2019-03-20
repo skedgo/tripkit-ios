@@ -25,7 +25,9 @@ open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
   public init() {}
   
   open func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [TGCard] {
-    if segment.isSelfNavigating {
+    if segment.order != .regular {
+      return []
+    } else if segment.isSelfNavigating {
       return [TKUISegmentDirectionsCard(for: segment, mapManager: mapManager)]
     } else {
       return [TKUISegmentInstructionCard(for: segment, mapManager: mapManager)]
