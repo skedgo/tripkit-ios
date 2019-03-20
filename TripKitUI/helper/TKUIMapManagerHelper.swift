@@ -119,7 +119,7 @@ extension TKUIMapManagerHelper {
         if let previous = acc.last, previous.canAbsorb(shape) {
           previous.absorb(shape)
         } else {
-          acc.append(TKColoredRoute(shape))
+          acc.append(TKColoredRoute(shape, in: segment))
         }
       }
     
@@ -130,7 +130,8 @@ extension TKUIMapManagerHelper {
 
 extension TKColoredRoute {
   
-  convenience init(_ shape: Shape) {
+  convenience init(_ shape: Shape, in segment: TKSegment) {
+    shape.segment = segment // for better colouring
     self.init(path: shape.sortedCoordinates ?? [], color: shape.routeColor, dashPattern: shape.routeDashPattern, isTravelled: shape.routeIsTravelled)
   }
   
