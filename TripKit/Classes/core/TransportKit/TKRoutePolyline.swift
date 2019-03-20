@@ -9,13 +9,14 @@
 import Foundation
 import CoreLocation
 
+// MARK: - TKDisplayableRoute, the input
+
 @objc
 public protocol TKDisplayableRoute {
   
   var routePath: [Any] { get }// objects that have a coordinate, e.g., <MKAnnotation> or CLLocation
   var routeColor: TKColor? { get }
   var routeDashPattern: [NSNumber]? { get }
-  var showRoute: Bool { get }
   var routeIsTravelled: Bool { get }
   
 }
@@ -23,11 +24,8 @@ public protocol TKDisplayableRoute {
 extension TKDisplayableRoute {
   @nonobjc public var routeColor: TKColor? { return nil }
   @nonobjc public var routeDashPattern: [NSNumber]? { return nil }
-  @nonobjc public var showRoute: Bool { return true }
   @nonobjc public var routeIsTravelled: Bool { return true }
 }
-
-
 
 fileprivate class WrappedCoordinate {
   fileprivate let coordinate: CLLocationCoordinate2D
@@ -52,9 +50,6 @@ extension MKGeodesicPolyline : TKDisplayableRoute {
     return nil
   }
   
-  public var showRoute: Bool {
-    return true
-  }
   
   public var routeIsTravelled: Bool {
     return true
@@ -62,6 +57,7 @@ extension MKGeodesicPolyline : TKDisplayableRoute {
   
 }
 
+// MARK: - Deprectations
+
 @available(*, unavailable, renamed: "TKDisplayableRoute")
 public typealias STKDisplayableRoute = TKDisplayableRoute
-

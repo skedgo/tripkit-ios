@@ -72,7 +72,7 @@ extension Trip {
   
   /// Segments of this trip which do use a private (or shared) vehicle, i.e., those who return something from `usedVehicle`.
   @objc public var vehicleSegments: Set<TKSegment> {
-    return segments.reduce(mutating: Set()) { acc, segment in
+    return segments.reduce(into: Set()) { acc, segment in
       if !segment.isStationary && segment.usesVehicle {
         acc.insert(segment)
       }

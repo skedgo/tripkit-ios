@@ -15,7 +15,7 @@ extension TripRequest {
   @objc public var trips: Set<Trip> {
     guard let tripGroups = self.tripGroups else { return Set() }
     
-    return tripGroups.reduce(mutating: Set()) { acc, group in
+    return tripGroups.reduce(into: Set()) { acc, group in
       acc.formUnion(group.trips)
     }
   }

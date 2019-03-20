@@ -12,52 +12,30 @@
 
 @implementation TKRoutePolyline
 
-+ (nullable instancetype)routePolylineForRoute:(id <TKDisplayableRoute>)originRoute pointsPerTrip:(NSInteger)pointsPerTrip {
++ (nullable instancetype)routePolylineForRoute:(id <TKDisplayableRoute>)originRoute {
   // create the array of coordinates for the line
   NSArray * pathPoints = [originRoute routePath];
   
   NSUInteger i, j, count = [pathPoints count];
-  if (count == 0)
+  if (count == 0) {
     return nil;
-  
-  // make sure that pointsPerTrip does not exceed the number of points that we have
-  if (pointsPerTrip > (NSInteger)count) {
-    pointsPerTrip = count;
   }
   
-  NSInteger skipCount = 1;
-  NSUInteger coordCount = count;
-  if (pointsPerTrip > 1) {
-    // adjust skipCount if we requested a limited number of points
-    skipCount = count / (pointsPerTrip - 1); // 2 means skip all: start + end
-    coordCount = pointsPerTrip;
-  }
-  
-  ZAssert(coordCount > 0, @"'coordCount' needs to be > 0");
-  if (coordCount > 0) {
-    CLLocationCoordinate2D coords[coordCount];
-    for (i = 0, j = 0; i < count && j < coordCount; i += skipCount, j ++) {
-			id obj = [pathPoints objectAtIndex:i];
-			if ([obj respondsToSelector:@selector(coordinate)]) {
-				coords[j] = [obj coordinate];
-			} else {
-				ZAssert(false, @"Bad input: Route %@ has bad path point: %@", originRoute, obj);
-				return nil;
-			}
+  CLLocationCoordinate2D coords[count];
+  for (i = 0, j = 0; i < count && j < count; i += 1, j ++) {
+    id obj = [pathPoints objectAtIndex:i];
+    if ([obj respondsToSelector:@selector(coordinate)]) {
+      coords[j] = [obj coordinate];
+    } else {
+      ZAssert(false, @"Bad input: Route %@ has bad path point: %@", originRoute, obj);
+      return nil;
     }
-    coords[coordCount - 1] = [[pathPoints objectAtIndex:count - 1] coordinate];
-    
-    TKRoutePolyline * routeAnnotation = (TKRoutePolyline *) [self polylineWithCoordinates:coords count:coordCount];
-    routeAnnotation.route = originRoute;
-    
-    return routeAnnotation;
-  } else {
-    return nil;
   }
-}
-
-+ (nullable instancetype)routePolylineForRoute:(id <TKDisplayableRoute>)originRoute {
-  return [self routePolylineForRoute:originRoute pointsPerTrip:-1];
+  coords[count - 1] = [[pathPoints objectAtIndex:count - 1] coordinate];
+  
+  TKRoutePolyline * routeAnnotation = (TKRoutePolyline *) [self polylineWithCoordinates:coords count:count];
+  routeAnnotation.route = originRoute;
+  return routeAnnotation;
 }
 
 + (nullable MKGeodesicPolyline *)geodesicPolylineForAnnotations:(NSArray *)annotations

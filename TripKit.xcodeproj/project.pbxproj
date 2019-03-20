@@ -522,7 +522,6 @@
 		3ABBDAE72032135A00205042 /* NSUserDefaults+SharedDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB471F06854F00147990 /* NSUserDefaults+SharedDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAE82032135A00205042 /* NSUserDefaults+SharedDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB481F06854F00147990 /* NSUserDefaults+SharedDefaults.m */; };
 		3ABBDAE92032135A00205042 /* NSUserDefaults+SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */; };
-		3ABBDAEA2032135A00205042 /* Swift+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB491F06854F00147990 /* Swift+Future.swift */; };
 		3ABBDAEB2032135A00205042 /* UIImage+Variations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB4A1F06854F00147990 /* UIImage+Variations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAEC2032135A00205042 /* UIImage+Variations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB4B1F06854F00147990 /* UIImage+Variations.m */; };
 		3ABBDAED2032135A00205042 /* Loc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB4C1F06854F00147990 /* Loc.swift */; };
@@ -580,8 +579,8 @@
 		3AE6077E20FF4F64006D59B0 /* pelias-de.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6077C20FF4F63006D59B0 /* pelias-de.json */; };
 		3AE6077F20FF4F64006D59B0 /* pelias-us.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6077D20FF4F64006D59B0 /* pelias-us.json */; };
 		3AEB43EC1F757C1F00FA3289 /* TKDeparturesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB43EB1F757C1E00FA3289 /* TKDeparturesProvider.swift */; };
-		3AEB47E920DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47E820DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift */; };
-		3AEB47EA20DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47E820DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift */; };
+		3AEB47E920DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */; };
+		3AEB47EA20DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */; };
 		3AEB47EC20DCE48500F9DF83 /* RxHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */; };
 		3AF3F2621E04CA7C00A2EEC6 /* TKBookingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */; };
 		3AF3F2641E04CA8C00A2EEC6 /* TKLocationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */; };
@@ -668,7 +667,6 @@
 		3AFFABA21F06854F00147990 /* NSString+Sizing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB461F06854F00147990 /* NSString+Sizing.m */; };
 		3AFFABA31F06854F00147990 /* NSUserDefaults+SharedDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB471F06854F00147990 /* NSUserDefaults+SharedDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABA41F06854F00147990 /* NSUserDefaults+SharedDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB481F06854F00147990 /* NSUserDefaults+SharedDefaults.m */; };
-		3AFFABA51F06854F00147990 /* Swift+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB491F06854F00147990 /* Swift+Future.swift */; };
 		3AFFABA61F06854F00147990 /* UIImage+Variations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB4A1F06854F00147990 /* UIImage+Variations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABA71F06854F00147990 /* UIImage+Variations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB4B1F06854F00147990 /* UIImage+Variations.m */; };
 		3AFFABA81F06854F00147990 /* Loc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB4C1F06854F00147990 /* Loc.swift */; };
@@ -1135,7 +1133,7 @@
 		3AE6077C20FF4F63006D59B0 /* pelias-de.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-de.json"; sourceTree = "<group>"; };
 		3AE6077D20FF4F64006D59B0 /* pelias-us.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-us.json"; sourceTree = "<group>"; };
 		3AEB43EB1F757C1E00FA3289 /* TKDeparturesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKDeparturesProvider.swift; sourceTree = "<group>"; };
-		3AEB47E820DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPolyline+ClosestPoint.swift"; sourceTree = "<group>"; };
+		3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMultiPoint+ClosestPoint.swift"; sourceTree = "<group>"; };
 		3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxHelpers.swift; sourceTree = "<group>"; };
 		3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingTypes.swift; sourceTree = "<group>"; };
 		3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationTypes.swift; sourceTree = "<group>"; };
@@ -1225,7 +1223,6 @@
 		3AFFAB461F06854F00147990 /* NSString+Sizing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Sizing.m"; sourceTree = "<group>"; };
 		3AFFAB471F06854F00147990 /* NSUserDefaults+SharedDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+SharedDefaults.h"; sourceTree = "<group>"; };
 		3AFFAB481F06854F00147990 /* NSUserDefaults+SharedDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+SharedDefaults.m"; sourceTree = "<group>"; };
-		3AFFAB491F06854F00147990 /* Swift+Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+Future.swift"; sourceTree = "<group>"; };
 		3AFFAB4A1F06854F00147990 /* UIImage+Variations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIImage+Variations.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3AFFAB4B1F06854F00147990 /* UIImage+Variations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIImage+Variations.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3AFFAB4C1F06854F00147990 /* Loc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loc.swift; sourceTree = "<group>"; };
@@ -1912,7 +1909,7 @@
 				3AB6C6571D1CD08E0089F687 /* classification */,
 				3AFD395D20D93AF900FDC7D0 /* MKPolygon+PolygonFromRectangle.h */,
 				3AFD396020D93AFA00FDC7D0 /* MKPolygon+PolygonFromRectangle.m */,
-				3AEB47E820DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift */,
+				3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */,
 				3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */,
 				3AB6C65D1D1CD08E0089F687 /* NSManagedObject+TKPersistence.h */,
 				3AB6C65E1D1CD08E0089F687 /* NSManagedObject+TKPersistence.m */,
@@ -2205,7 +2202,6 @@
 				3AFFAB471F06854F00147990 /* NSUserDefaults+SharedDefaults.h */,
 				3AFFAB481F06854F00147990 /* NSUserDefaults+SharedDefaults.m */,
 				3A096E2D1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift */,
-				3AFFAB491F06854F00147990 /* Swift+Future.swift */,
 				3AFFAB4A1F06854F00147990 /* UIImage+Variations.h */,
 				3AFFAB4B1F06854F00147990 /* UIImage+Variations.m */,
 			);
@@ -2897,7 +2893,6 @@
 				3ABBDAB92032134D00205042 /* TKGeoJSON.swift in Sources */,
 				3ABBDB082032137600205042 /* TKSegment+Shareable.swift in Sources */,
 				3ABBDB072032137600205042 /* StopVisits+Shareable.swift in Sources */,
-				3ABBDAEA2032135A00205042 /* Swift+Future.swift in Sources */,
 				3ABBDA142032131E00205042 /* TKConstants.m in Sources */,
 				3ABBDA8F2032134000205042 /* TKVehicular.m in Sources */,
 				3ABBDA282032132400205042 /* TKQuickBookingHelper.swift in Sources */,
@@ -2963,7 +2958,7 @@
 				3ABBDA5F2032132D00205042 /* TKColoredRoute.swift in Sources */,
 				3ABBDA692032132D00205042 /* TKTripPattern.swift in Sources */,
 				3ABBDA5C2032132D00205042 /* TKBookingTypes.swift in Sources */,
-				3AEB47EA20DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift in Sources */,
+				3AEB47EA20DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */,
 				3ABBDAB32032134D00205042 /* TKNamedCoordinate+BuzzData.swift in Sources */,
 				3ABBDA732032133300205042 /* StopAPIModel.swift in Sources */,
 				D3FC1F15207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift in Sources */,
@@ -3130,7 +3125,7 @@
 				3A3C9BA61F751FC300C8D476 /* API.swift in Sources */,
 				3AFFABAF1F06854F00147990 /* TKBetaHelper.m in Sources */,
 				3AB6C6EB1D1CD08E0089F687 /* TripRequest.m in Sources */,
-				3AEB47E920DC2EE300F9DF83 /* MKPolyline+ClosestPoint.swift in Sources */,
+				3AEB47E920DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */,
 				3AFFABAA1F06854F00147990 /* TKNamedCoordinate.swift in Sources */,
 				D37EF6D821A7BCE80062288E /* TKLocalCost.swift in Sources */,
 				3A15D8DB1D9CE08D00BADBEA /* TKRoutingParser.swift in Sources */,
@@ -3182,7 +3177,6 @@
 				3AA03E771F0BC9DB00C6B337 /* TKRegionAutocompleter.m in Sources */,
 				3A84F00E1F77021200B2F9A0 /* TripGroup.swift in Sources */,
 				3AFFAB8B1F06854F00147990 /* NSManagedObjectContext+Rx.swift in Sources */,
-				3AFFABA51F06854F00147990 /* Swift+Future.swift in Sources */,
 				3AFFAB921F06854F00147990 /* Date+Helpers.swift in Sources */,
 				3AFFABC81F06854F00147990 /* TKRegion.swift in Sources */,
 				3AFD396720D93AFA00FDC7D0 /* MKPolygon+PolygonFromRectangle.m in Sources */,

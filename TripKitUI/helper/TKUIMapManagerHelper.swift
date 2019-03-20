@@ -16,6 +16,10 @@ public typealias MapManagerHelper = TKUIMapManagerHelper
 
 public class TKUIMapManagerHelper: NSObject {
   
+  private override init() {
+    super.init()
+  }
+  
   @objc(sortOverlays:)
   public static func _objcSort(_ overlays: [MKOverlay]) -> [MKOverlay] {
     return self.sort(overlays)
@@ -65,39 +69,19 @@ public class TKUIMapManagerHelper: NSObject {
   public static func shapeAnnotations(for segment: TKSegment)
     -> (points: [MKAnnotation], overlays: [MKOverlay], requestVisits: Bool)?
   {
-    guard !segment.isStationary
-      else {
-        return nil
-    }
-    
-    guard !segment.isFlight else {
-      if
-        let start = segment.start,
-        let end = segment.end,
-        let polyline = TKRoutePolyline.geodesicPolyline(for: [start, end]) {
-        
-        return ([], [polyline], false)
-      } else {
-        return nil
-      }
-    }
+    guard !segment.isStationary else { return nil }
+    guard !segment.isFlight else { return geodesicShapeAnnotations(for: segment) }
     
     let shapes = segment.shapes ?? []
     let allEmpty = segment.isPublicTransport && shapes.isEmpty
     
+    let overlays = buildOverlaysForShapes(in: segment)
+    
     var points = [MKAnnotation]()
-    var overlays = [MKOverlay]()
     var requestVisits = allEmpty
     
-    for shape in shapes {
-      // Add the shape itself
-      shape.segment = segment
-      if let overlay = TKRoutePolyline(for: shape) {
-        overlays.append(overlay)
-      }
-      
-      // Add the visits
-      guard let service = segment.service else { continue }
+    // Add the visits
+    if let service = segment.service {
       if service.hasServiceData() {
         let visits = service.visits ?? []
         for visit in visits where segment.shouldShowVisit(visit) {
@@ -111,12 +95,57 @@ public class TKUIMapManagerHelper: NSObject {
     return (points, overlays, requestVisits)
   }
   
-  
-  @objc public static func annotationView(for annotation: MKAnnotation, header: CLLocationDirection) -> MKAnnotationView? {
-    
-    return nil
-    
+  private static func geodesicShapeAnnotations(for segment: TKSegment)
+    -> (points: [MKAnnotation], overlays: [MKOverlay], requestVisits: Bool)?
+  {
+    guard
+      let start = segment.start, let end = segment.end,
+      let polyline = TKRoutePolyline.geodesicPolyline(for: [start, end])
+      else { return nil }
+      
+    return ([], [polyline], false)
   }
-
   
 }
+
+// MARK: - Overlays
+
+extension TKUIMapManagerHelper {
+  
+  private static func buildOverlaysForShapes(in segment: TKSegment) -> [MKOverlay] {
+    guard let shapes = segment.shortedShapes() else { return [] }
+
+    let routes = shapes.reduce(into: [TKColoredRoute]()) { acc, shape in
+        if let previous = acc.last, previous.canAbsorb(shape) {
+          previous.absorb(shape)
+        } else {
+          acc.append(TKColoredRoute(shape, in: segment))
+        }
+      }
+    
+    return routes.compactMap(TKRoutePolyline.init)
+  }
+  
+}
+
+extension TKColoredRoute {
+  
+  convenience init(_ shape: Shape, in segment: TKSegment) {
+    shape.segment = segment // for better colouring
+    self.init(path: shape.sortedCoordinates ?? [], color: shape.routeColor, dashPattern: shape.routeDashPattern, isTravelled: shape.routeIsTravelled)
+  }
+  
+  func canAbsorb(_ shape: Shape) -> Bool {
+    // Could also check last location matches first of route, but we just
+    // assume this here
+    
+    return routeColor == shape.routeColor
+        && routeDashPattern == shape.routeDashPattern
+        && routeIsTravelled == shape.routeIsTravelled
+  }
+  
+  func absorb(_ shape: Shape) {
+    append(shape.sortedCoordinates ?? [])
+  }
+}
+

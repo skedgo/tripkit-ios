@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) id<TKDisplayableRoute> route;
 
 + (nullable instancetype)routePolylineForRoute:(id <TKDisplayableRoute>)route;
-+ (nullable instancetype)routePolylineForRoute:(id <TKDisplayableRoute>)route pointsPerTrip:(NSInteger)pointsPerTrip;
 
 /**
  @param annotations An array of id<MKAnnotation> objects
