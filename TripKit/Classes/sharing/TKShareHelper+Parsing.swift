@@ -36,12 +36,12 @@ public extension TKShareHelper {
   /// Extracts the query details from a TripGo API-compatible deep link
   /// - parameter url: TripGo API-compatible deep link
   /// - parameter geocoder: Geocoder used for filling in missing information
-  public static func queryDetails(for url: URL, using geocoder: SGGeocoder) -> Observable<QueryDetails> {
+  public static func queryDetails(for url: URL, using geocoder: SGGeocoder) -> Single<QueryDetails> {
     
     guard
       let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
       let items = components.queryItems
-      else { return Observable.error(ExtractionError.invalidURL) }
+      else { return .error(ExtractionError.invalidURL) }
     
     // get the input from the query
     var tlat, tlng: Double?
@@ -77,7 +77,7 @@ public extension TKShareHelper {
     // we need a to coordinate OR a name
     let to = coordinate(lat: tlat, lng: tlng)
     guard to.isValid || name != nil else {
-      return Observable.error(ExtractionError.missingNecessaryInformation)
+      return .error(ExtractionError.missingNecessaryInformation)
     }
     
     // we're good to go, construct the time and from info
@@ -152,11 +152,11 @@ extension TKShareHelper.QueryDetails {
 
 public extension TKShareHelper {
 
-  public static func meetingDetails(for url: URL, using geocoder: SGGeocoder) -> Observable<QueryDetails> {
+  public static func meetingDetails(for url: URL, using geocoder: SGGeocoder) -> Single<QueryDetails> {
     guard
       let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
       let items = components.queryItems
-      else { return Observable.empty() }
+      else { return .error(ExtractionError.invalidURL) }
     
     var adjusted = items.compactMap { item -> URLQueryItem? in
       guard let value = item.value, !value.isEmpty else { return nil }
@@ -174,7 +174,7 @@ public extension TKShareHelper {
     components.queryItems = adjusted
     guard let newUrl = components.url else {
       assertionFailure()
-      return Observable.empty()
+      return .error(ExtractionError.invalidURL)
     }
     
     return queryDetails(for: newUrl, using: geocoder)
@@ -191,16 +191,16 @@ public extension TKShareHelper {
     public let filter: String?
   }
   
-  public static func stopDetails(for url: URL) -> Observable<StopDetails> {
+  public static func stopDetails(for url: URL) -> Single<StopDetails> {
     let pathComponents = url.path.components(separatedBy: "/")
-    guard pathComponents.count >= 4 else { return Observable.empty() }
+    guard pathComponents.count >= 4 else { return .error(ExtractionError.missingNecessaryInformation) }
     
     let region = pathComponents[2]
     let code = pathComponents[3]
     let filter: String? = pathComponents.count >= 5 ? pathComponents[4] : nil
     
     let result = StopDetails(region: region, code: code, filter: filter)
-    return Observable.just(result)
+    return .just(result)
   }
 }
 
@@ -225,7 +225,7 @@ public extension TKShareHelper {
     public let serviceID: String
   }
 
-  public static func serviceDetails(for url: URL) -> Observable<ServiceDetails> {
+  public static func serviceDetails(for url: URL) -> Single<ServiceDetails> {
     let pathComponents = url.path.components(separatedBy: "/")
     if pathComponents.count >= 5 {
       let region = pathComponents[2]
@@ -233,7 +233,7 @@ public extension TKShareHelper {
       let serviceID = pathComponents[4]
       
       let details = ServiceDetails(region: region, stopCode: stopCode, serviceID: serviceID)
-      return Observable.just(details)
+      return .just(details)
     }
 
     // Old way of /service?regionName=...&stopCode=...&serviceID=...
@@ -243,10 +243,10 @@ public extension TKShareHelper {
       let service = items.value(for: "serviceID") {
       
       let details = ServiceDetails(region: region, stopCode: stop, serviceID: service)
-      return Observable.just(details)
+      return .just(details)
       
     } else {
-      return Observable.empty()
+      return .error(ExtractionError.missingNecessaryInformation)
     }
   }
 }
@@ -266,24 +266,23 @@ extension Array where Element == URLQueryItem {
 
 extension MKAnnotation {
   
-  /// An Observable passing back `self` if its coordinate is valid or it could get geocoded.
-  public func rx_valid(geocoder: SGGeocoder) -> Observable<MKAnnotation> {
+  /// A Single passing back `self` if its coordinate is valid or it could get geocoded.
+  public func rx_valid(geocoder: SGGeocoder) -> Single<MKAnnotation> {
     if coordinate.isValid {
-      return Observable.just(self)
+      return .just(self)
     }
     
     guard let geocodable = TKNamedCoordinate.namedCoordinate(for: self) else {
-      return Observable.error(TKShareHelper.ExtractionError.invalidCoordinate)
+      return .error(TKShareHelper.ExtractionError.invalidCoordinate)
     }
     
-    return Observable.create() { observer in
+    return Single.create() { observer in
       TKBaseGeocoder.geocode(geocodable, using: geocoder, near: .world) { (result: TKBaseGeocoder.Result) -> Void in
         switch result {
         case .success:
-          observer.onNext(self)
-          observer.onCompleted()
+          observer(.success(self))
         case .error(let error):
-          observer.onError(error)
+          observer(.error(error))
         }
       }
       return Disposables.create()
