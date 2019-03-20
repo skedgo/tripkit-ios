@@ -15,7 +15,7 @@ public class TKColoredRoute: NSObject {
   public let routeDashPattern: [NSNumber]?
   public let routeIsTravelled: Bool
   
-  @objc public init(path: [MKAnnotation], color: TKColor?, dashPattern: [NSNumber]?, isTravelled: Bool) {
+  @objc public init(path: [MKAnnotation], color: TKColor? = nil, dashPattern: [NSNumber]? = nil, isTravelled: Bool = true) {
     self.path = path
     routeColor = color
     routeDashPattern = dashPattern

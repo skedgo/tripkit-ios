@@ -86,10 +86,10 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     didSet {
       guard let mapView = mapView else { return }
       
-      let oldPolylines = oldValue.flatMap { $0.polylines }
+      let oldPolylines = oldValue.map { $0.polyline }
       mapView.removeOverlays(oldPolylines)
       
-      let newPolylines = allRoutes.flatMap { $0.polylines }
+      let newPolylines = allRoutes.map { $0.polyline }
       mapView.addOverlays(newPolylines)
       
       if oldPolylines.isEmpty && !newPolylines.isEmpty {
@@ -177,7 +177,7 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
 
 extension TKUIResultsViewModel.MapRouteItem {
   fileprivate func distance(to mapPoint: MKMapPoint) -> CLLocationDistance {
-    return polylines.map { $0.closestPoint(to: mapPoint).distance }.min() ?? .infinity
+    return polyline.closestPoint(to: mapPoint).distance
   }
 }
 
@@ -217,7 +217,7 @@ extension TKUIResultsMapManager {
     let renderer = super.mapView(mapView, rendererFor: overlay)
     
     if let routePolyline = overlay as? TKRoutePolyline, let polylineRenderer = renderer as? TKUIPolylineRenderer {
-      let isSelected = selectedRoute?.polylines.contains(routePolyline) ?? false
+      let isSelected = selectedRoute?.polyline == routePolyline
       polylineRenderer.isSelected = isSelected
     }
     
