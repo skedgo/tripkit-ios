@@ -1,5 +1,5 @@
 //
-//  MKPolyline+ClosestPoint.swift
+//  MKMultiPoint+ClosestPoint.swift
 //  TripKit
 //
 //  Created by Adrian Schönig on 21.06.18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension MKPolyline {
+public extension MKMultiPoint {
 
   // Return the point on the polyline that is the closest to the given point
   // along with the distance between that closest point and the given point.

@@ -68,6 +68,7 @@ struct RegionsResponse: Codable {
 struct ModeDetails: Codable {
   private enum CodingKeys: String, CodingKey {
     case title
+    case subtitle
     case websiteURL = "URL"
     case rgbColor = "color"
     case required
@@ -78,6 +79,7 @@ struct ModeDetails: Codable {
   }
   
   let title: String
+  let subtitle: String?
   let websiteURL: URL?
   let rgbColor: API.RGBColor
   let required: Bool?
@@ -142,7 +144,14 @@ extension TKRegionManager {
   public func title(forModeIdentifier mode: String) -> String? {
     return response?.modes?[mode]?.title
   }
-  
+
+  /// - Parameter mode: The mode identifier for which you want the title
+  /// - Returns: The localized subtitle as defined by the server
+  @objc
+  public func subtitle(forModeIdentifier mode: String) -> String? {
+    return response?.modes?[mode]?.subtitle
+  }
+
   /// - Parameter mode: The mode identifier for which you want the official website URL
   /// - Returns: The URL as defined by the server
   @objc
@@ -347,7 +356,7 @@ extension TKRegionManager {
   public func city(nearestTo target: CLLocationCoordinate2D) -> TKRegion.City? {
     typealias Match = (TKRegion.City, CLLocationDistance)
     
-    let cities = localRegions(containing: target).reduce(mutating: [TKRegion.City]()) { cities, region in
+    let cities = localRegions(containing: target).reduce(into: [TKRegion.City]()) { cities, region in
       cities.append(contentsOf: region.cities)
     }
     let best = cities.reduce(nil) { acc, city -> Match? in
