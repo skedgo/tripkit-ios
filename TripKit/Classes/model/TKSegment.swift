@@ -162,31 +162,24 @@ extension TKSegment {
     }
     guard let imageName = localImageName else { return nil }
     
-    let realTime = allowRealTime && timesAreRealTime
-    return TKSegmentHelper.segmentImage(iconType, localImageName: imageName, modeIdentifier: modeIdentifier, isRealTime: realTime)
+    let isRealTime = allowRealTime && timesAreRealTime
+    if let specificImage = TKStyleManager.image(forModeImageName: imageName, isRealTime: isRealTime, of: iconType) {
+      return specificImage
+    
+    } else if let modeIdentifier = modeIdentifier {
+      let genericImageName = TKTransportModes.modeImageName(forModeIdentifier: modeIdentifier)
+      return TKStyleManager.image(forModeImageName: genericImageName, isRealTime: isRealTime, of: iconType)
+
+    } else {
+      return nil
+    }
   }
 
   fileprivate func imageURL(for iconType: TKStyleModeIconType) -> URL? {
-    var iconFileNamePart: String? = nil
-    
-    switch iconType {
-    case .mapIcon, .listMainMode, .resolutionIndependent:
-      iconFileNamePart = modeInfo?.remoteImageName
-      
-    case .listMainModeOnDark, .resolutionIndependentOnDark:
-      iconFileNamePart = modeInfo?.remoteDarkImageName
-      
-    case .vehicle:
-      iconFileNamePart = realTimeVehicle?.icon
-      
-    case .alert:
-      return nil // not supported for segments
-    }
-    
-    if let part = iconFileNamePart {
-      return TKServer.imageURL(forIconFileNamePart: part, of: iconType)
+    if iconType == .vehicle, let icon = realTimeVehicle?.icon {
+      return TKServer.imageURL(forIconFileNamePart: icon, of: iconType)
     } else {
-      return TKRegionManager.shared.imageURL(forModeIdentifier: modeIdentifier, iconType: iconType)
+      return modeInfo?.imageURL(type: iconType)
     }
   }
 }

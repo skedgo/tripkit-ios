@@ -76,12 +76,11 @@ class TKUIGroupedAlertCell: UITableViewCell {
     let route = alertGroup.route
     
     // This is the generic mode image.
-    let localImage = TKStyleManager.image(forModeImageName: route.modeInfo.localImageName, isRealTime: false, of: .listMainMode)
+    let localImage = route.modeInfo.image
     
     // If we have customised mode icons on the server, use them.
-    if let remoteImageName = route.modeInfo.remoteImageName {
-      let remoteImageURL = TKServer.imageURL(forIconFileNamePart: remoteImageName, of: .listMainMode)
-      modeIcon.setImage(with: remoteImageURL, asTemplate: route.modeInfo.remoteImageIsTemplate, placeholder: localImage)
+    if let imageURL = route.modeInfo.imageURL {
+      modeIcon.setImage(with: imageURL, asTemplate: route.modeInfo.remoteImageIsTemplate, placeholder: localImage)
     } else {
       modeIcon.image = localImage
       modeIcon.tintColor = TKStyleManager.darkTextColor()

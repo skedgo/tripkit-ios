@@ -27,14 +27,12 @@ extension StopLocation {
   
   @objc(modeImageForIconType:)
   public func modeImage(for type: TKStyleModeIconType) -> TKImage? {
-    guard let localName = stopModeInfo?.localImageName else { return nil }
-    return TKStyleManager.image(forModeImageName: localName, isRealTime: false, of: type)
+    return stopModeInfo?.image(type: type)
   }
   
   @objc(modeImageURLForIconType:)
   public func modeImageURL(for type: TKStyleModeIconType) -> URL? {
-    guard let remoteName = stopModeInfo?.remoteImageName else { return nil }
-    return TKServer.imageURL(forIconFileNamePart: remoteName, of: type)
+    return stopModeInfo?.imageURL(type: type)
   }
 }
 

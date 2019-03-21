@@ -101,12 +101,11 @@ extension Service {
   }
   
   @objc public func modeImage(for type: TKStyleModeIconType) -> TKImage? {
-    return TKStyleManager.image(forModeImageName: findModeInfo()?.localImageName, isRealTime: isRealTime, of: type)
+    return findModeInfo()?.image(type: type)
   }
   
   @objc public func modeImageURL(for type: TKStyleModeIconType) -> URL? {
-    guard let remoteImage = findModeInfo()?.remoteImageName else { return nil }
-    return TKServer.imageURL(forIconFileNamePart: remoteImage, of: type)
+    return findModeInfo()?.imageURL(type: type)
   }
   
   public var modeImageIsTemplate: Bool {

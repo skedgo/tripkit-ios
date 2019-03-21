@@ -102,6 +102,9 @@ extension API {
     /// this mode. (Public transport modes only)
     public let operators: [String]?
     
+    /// List of image name-parts related to this operator
+    public let modeImageNames: [String]?
+    
     public var identifier: String {
       if let id = modeInfo.identifier {
         return id
