@@ -51,12 +51,15 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     
     guard let tableView = (cardView as? TGScrollCardView)?.tableView else { return }
     
+    tableView.register(TKUITurnByTurnInstructionCell.nib, forCellReuseIdentifier: TKUITurnByTurnInstructionCell.reuseIdentifier)
+    
     let shapes = segment.shortedShapes() ?? []
     
     Observable.just(shapes)
       .bind(to: tableView.rx.items) { (tableView, row, element) in
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
-        cell.textLabel?.text = "\(element.title ?? "") - \(element.metres ?? 0)m"
+        let cell = tableView.dequeueReusableCell(withIdentifier: TKUITurnByTurnInstructionCell.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! TKUITurnByTurnInstructionCell
+        let cellContent = TKUITurnByTurnInstructionCell.ContentModel(mainInstruction: "\(element.title ?? "") - \(element.metres ?? 0)m")
+        cell.content = cellContent        
         return cell
       }
       .disposed(by: disposeBag)
