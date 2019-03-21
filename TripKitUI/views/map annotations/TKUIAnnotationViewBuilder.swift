@@ -22,7 +22,7 @@ open class TKUIAnnotationViewBuilder: NSObject {
   fileprivate var alpha: CGFloat = 1
   fileprivate var preferMarker: Bool = false
   fileprivate var enableClustering: Bool = false
-  fileprivate var drawImageAnnotationAsCircle: Bool = true
+  fileprivate var drawImageAnnotationAsCircle: Bool = false
 
   @objc public let annotation: MKAnnotation
   @objc public let mapView: MKMapView
