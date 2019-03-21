@@ -139,6 +139,7 @@
 		3A7636F921F9F04700639155 /* TKUIAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636F821F9F04700639155 /* TKUIAnnotations.swift */; };
 		3A7636FB21F9F28200639155 /* TKUIAnnotations+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */; };
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
+		3A7C28702243E02000DA3567 /* TKModeInfo+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */; };
 		3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */; };
 		3A7E6139208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
 		3A7E613B208A09070008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
@@ -2962,6 +2963,7 @@
 				D3FC1F15207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift in Sources */,
 				3ABBDA792032133900205042 /* NSBundle+ProductName.swift in Sources */,
 				3ABBDA162032131E00205042 /* TKTripKit.m in Sources */,
+				3A7C28702243E02000DA3567 /* TKModeInfo+Image.swift in Sources */,
 				3ABBDA3C2032132D00205042 /* Alert.swift in Sources */,
 				3ABBDA232032132400205042 /* TKFakeRouter.m in Sources */,
 				3ABBDA322032132400205042 /* TKRoutingParser.swift in Sources */,
