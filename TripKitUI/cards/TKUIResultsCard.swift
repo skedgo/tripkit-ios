@@ -61,13 +61,14 @@ public class TKUIResultsCard: TGTableCard {
       accessoryView: accessoryView, mapManager: mapManager,
       initialPosition: nil // keep same as before (so that user can drop another pin)
     )
+    didInit()
   }
   
   
   public init(request: TripRequest) {
     self.destination = nil
     self.request = request
-    
+
     let title = "Routes" // TODO: Localise
     let mapManager = TKUIResultsCard.config.mapManagerFactory()
     super.init(
@@ -75,6 +76,7 @@ public class TKUIResultsCard: TGTableCard {
       accessoryView: accessoryView, mapManager: mapManager,
       initialPosition: .extended // show fully as we'll have routes shortly
     )
+    didInit()
   }
   
   public required convenience init?(coder: NSCoder) {
@@ -86,6 +88,12 @@ public class TKUIResultsCard: TGTableCard {
     }
     
     self.init(request: request)
+  }
+  
+  private func didInit() {
+    // Don't de-select as we use a custom style and want to keep highlighting
+    // the best trip (as it's also highlighted on the map still).
+    self.deselectOnAppear = false
   }
   
   public override func encode(with aCoder: NSCoder) {
