@@ -25,13 +25,11 @@ extension TKModeCoordinate: TKUIImageAnnotationDisplayable {
   }
   
   public var pointImage: TKImage? {
-    guard let imageName = stopModeInfo.localImageName else { return nil }
-    return TKStyleManager.image(forModeImageName: imageName, isRealTime: false, of: .mapIcon)
+    return stopModeInfo.image(type: .mapIcon)
   }
   
   public var pointImageURL: URL? {
-    guard let imageName = stopModeInfo.remoteImageName else { return nil }
-    return TKServer.imageURL(forIconFileNamePart: imageName, of: .mapIcon)
+    return stopModeInfo.imageURL(type: .mapIcon)
   }
   
   public var pointImageIsTemplate: Bool {
@@ -49,8 +47,7 @@ extension TKModeCoordinate: TKUIGlyphableAnnotation {
   }
   
   public var glyphImage: TKImage? {
-    guard let imageName = stopModeInfo.localImageName else { return nil }
-    let image = TKStyleManager.image(forModeImageName: imageName, isRealTime: false, of: .listMainMode)
+    let image = stopModeInfo.image
     #if os(iOS) || os(tvOS)
     return image?.withRenderingMode(.alwaysTemplate)
     #else
@@ -60,8 +57,8 @@ extension TKModeCoordinate: TKUIGlyphableAnnotation {
   }
   
   public var glyphImageURL: URL? {
-    guard stopModeInfo.remoteImageIsTemplate, let imageName = stopModeInfo.remoteImageName else { return nil }
-    return TKServer.imageURL(forIconFileNamePart: imageName, of: .listMainMode)
+    guard stopModeInfo.remoteImageIsTemplate else { return nil }
+    return stopModeInfo.imageURL
   }
   
   public var glyphImageIsTemplate: Bool {
