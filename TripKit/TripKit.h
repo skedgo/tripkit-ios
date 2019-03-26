@@ -65,7 +65,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKNextSegmentScorer.h"
 #import "NSManagedObject+TKPersistence.h"
 #import "TripRequest+Classify.h"
-#import "TKRegionOverlayHelper.h"
 
 // Classification
 #import "TKTripClassifier.h"
