@@ -218,8 +218,6 @@
 - (void)shouldRefreshOverlay:(NSNotification *)notification
 {
 #pragma unused(notification)
-  ZAssert(self.overlayPolygon && self.isActive, @"Only call this if we have an overlay polygon and are active!");
-
   // re-add the overlay
   __weak typeof(self) weakSelf = self;
 	dispatch_async(dispatch_get_main_queue(), ^{
@@ -237,8 +235,6 @@
 {
   if (! self.overlayPolygon)
     return;
-  
-  ZAssert(self.isActive, @"Only call this if we have an overlay polygon and are active!");
   
   if (! self.willHotSwap &&
       ! [self.mapView.overlays containsObject:self.overlayPolygon]) {
