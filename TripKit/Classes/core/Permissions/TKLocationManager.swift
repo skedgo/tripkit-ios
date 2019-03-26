@@ -10,16 +10,16 @@ import Foundation
 
 public extension TKLocationManager {
   
-  public enum LocalizationError: Error {
+  enum LocalizationError: Error {
     
     case featureNotAvailable
     case authorizationDenied
     
   }
   
-  public static let shared = TKLocationManager.__sharedInstance()
+  static let shared = TKLocationManager.__sharedInstance()
 
-  public var currentLocation: MKAnnotation {
+  var currentLocation: MKAnnotation {
     return __currentLocationPlaceholder()
   }
   

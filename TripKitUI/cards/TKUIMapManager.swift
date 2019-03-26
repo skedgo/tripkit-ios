@@ -188,11 +188,11 @@ extension TKUIMapManager {
 }
 
 fileprivate extension Array where Element: MKAnnotation {
-  fileprivate var identities: [String] {
+  var identities: [String] {
     return compactMap { ($0 as? TKUIIdentifiableAnnotation)?.identity }
   }
   
-  fileprivate func elements(notIn other: [Element]) -> [Element] {
+  func elements(notIn other: [Element]) -> [Element] {
     let otherIDs = other.identities
     return filter {
       guard let id = ($0 as? TKUIIdentifiableAnnotation)?.identity else { return true }

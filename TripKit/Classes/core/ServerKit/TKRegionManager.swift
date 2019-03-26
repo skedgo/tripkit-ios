@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 public extension NSNotification.Name {
-  public static let TKRegionManagerUpdatedRegions = NSNotification.Name(rawValue: "TKRegionManagerRegionsUpdatedNotification")
+  static let TKRegionManagerUpdatedRegions = NSNotification.Name(rawValue: "TKRegionManagerRegionsUpdatedNotification")
 }
 
 public class TKRegionManager: NSObject {

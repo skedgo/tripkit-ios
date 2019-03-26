@@ -153,7 +153,7 @@ private extension TKUIAnnotationViewBuilder {
 // MARK: - Vehicles
 
 fileprivate extension TKUIAnnotationViewBuilder {
-  fileprivate func build(for vehicle: Vehicle) -> MKAnnotationView {
+  func build(for vehicle: Vehicle) -> MKAnnotationView {
     let identifier = "TKUIVehicleAnnotationView"
     
     let vehicleView: TKUIVehicleAnnotationView
@@ -191,7 +191,7 @@ fileprivate extension TKUIVehicleAnnotationView {
 
 fileprivate extension TKUIAnnotationViewBuilder {
   
-  fileprivate func semaphoreView(for annotation: MKAnnotation) -> TKUISemaphoreView {
+  func semaphoreView(for annotation: MKAnnotation) -> TKUISemaphoreView {
     let identifier = "Semaphore"
     
     let semaphoreView: TKUISemaphoreView
@@ -204,7 +204,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     return semaphoreView
   }
   
-  fileprivate func semaphoreLabel(for bearing: CLLocationDirection?) -> SGSemaphoreLabel {
+  func semaphoreLabel(for bearing: CLLocationDirection?) -> SGSemaphoreLabel {
     if let bearing = bearing, let heading = heading {
       return (bearing - heading) > 180 ? .onRight : .onLeft
     } else {
@@ -212,7 +212,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     }
   }
 
-  fileprivate func buildSemaphore(for point: TKUISemaphoreDisplayable, preferredSide: SGSemaphoreLabel? = nil) -> MKAnnotationView {
+  func buildSemaphore(for point: TKUISemaphoreDisplayable, preferredSide: SGSemaphoreLabel? = nil) -> MKAnnotationView {
     let semaphoreView = self.semaphoreView(for: point as MKAnnotation)
     
     // Set time stamp on the side opposite to direction of travel
@@ -239,7 +239,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     return semaphoreView
   }
   
-  fileprivate func buildSemaphore(for segment: TKSegment) -> MKAnnotationView {
+  func buildSemaphore(for segment: TKSegment) -> MKAnnotationView {
     // Only public transport get the time stamp. And they get it on the side opposite to the
     // travel direction.
     let side: SGSemaphoreLabel
@@ -285,7 +285,7 @@ fileprivate extension TKUISemaphoreView {
 
 fileprivate extension TKUIAnnotationViewBuilder {
   
-  fileprivate func buildCircle(for visit: StopVisits) -> MKAnnotationView {
+  func buildCircle(for visit: StopVisits) -> MKAnnotationView {
     let color: TKColor?
     if asTravelled, let serviceColor = visit.service.color as? TKColor {
       color = serviceColor
@@ -295,7 +295,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     return buildCircle(for: visit, color: color)
   }
   
-  fileprivate func buildCircle(for annotation: MKAnnotation, color: TKColor? = nil) -> MKAnnotationView {
+  func buildCircle(for annotation: MKAnnotation, color: TKColor? = nil) -> MKAnnotationView {
     let identifier = asLarge ? "LargeCircleView" : "SmallCircleView"
     
     let circleView: TKUICircleAnnotationView
@@ -327,7 +327,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
 
 fileprivate extension TKUIAnnotationViewBuilder {
 
-  fileprivate func build(for displayable: TKUIImageAnnotationDisplayable, enableClustering: Bool) -> MKAnnotationView {
+  func build(for displayable: TKUIImageAnnotationDisplayable, enableClustering: Bool) -> MKAnnotationView {
     
     let identifier: String
     if #available(iOS 11, *), displayable is MKClusterAnnotation {
@@ -378,7 +378,7 @@ fileprivate extension TKUIImageAnnotationDisplayable {
 
 public extension TKUIAnnotationViewBuilder {
   
-  @objc public static func update(annotationView: MKAnnotationView, forHeading heading: CLLocationDirection) {
+  @objc static func update(annotationView: MKAnnotationView, forHeading heading: CLLocationDirection) {
     
     if let vehicleView = annotationView as? TKUIVehicleAnnotationView, let vehicle = vehicleView.annotation as? Vehicle {
       vehicleView.rotateVehicle(heading: heading, bearing: vehicle.bearing?.doubleValue)

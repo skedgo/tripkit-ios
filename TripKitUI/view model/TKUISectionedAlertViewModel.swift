@@ -109,7 +109,9 @@ extension API.Route {
 }
 
 extension API.Route: Hashable {
-  public var hashValue: Int { return id.hashValue }
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
 }
 
 // MARK: -
@@ -136,7 +138,9 @@ func == (lhs: ModeGroup, rhs: ModeGroup) -> Bool {
 }
 extension ModeGroup: Equatable {}
 extension ModeGroup: Hashable {
-  var hashValue: Int { return title.hashValue }
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(title)
+  }
 }
 
 // MARK: -
