@@ -29,7 +29,7 @@ extension TGPageCard {
     trip.setAsPreferredTrip()
     
     let trips = trip.request.sortedVisibleTrips()
-    guard let index = trips.index(of: trip) else { preconditionFailure() }
+    guard let index = trips.firstIndex(of: trip) else { preconditionFailure() }
     
     let cards = trips.enumerated().map { TKUITripOverviewCard(trip: $1, index: $0) }
     
