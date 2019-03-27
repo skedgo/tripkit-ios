@@ -123,12 +123,11 @@ open class TKUIMapManager: TGMapManager {
       guard let polygon = polygon else { return }
       self?.overlayPolygon = polygon
     }
-    TKRegionOverlayHelper.shared.regionsPolygon(updateOverlay)
+    TKRegionOverlayHelper.shared.regionsPolygon(completion: updateOverlay)
     NotificationCenter.default.rx
       .notification(.TKRegionManagerUpdatedRegions)
       .subscribe(onNext: { _ in
-        TKRegionOverlayHelper.shared.clearCache()
-        TKRegionOverlayHelper.shared.regionsPolygon(updateOverlay)
+        TKRegionOverlayHelper.shared.regionsPolygon(forceUpdate: true, completion: updateOverlay)
       })
       .disposed(by: disposeBag)
   }
