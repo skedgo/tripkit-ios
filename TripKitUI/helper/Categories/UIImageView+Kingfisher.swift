@@ -10,6 +10,8 @@ import Foundation
 
 import Kingfisher
 
+import TripKit
+
 extension UIImageView {
 
   @objc(setImageWithURL:)

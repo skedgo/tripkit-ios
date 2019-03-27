@@ -15,8 +15,8 @@ public class TKUIRoutingSupportView: UIView {
   @IBOutlet public internal(set) weak var requestSupportButton: UIButton!
   @IBOutlet public internal(set) weak var planNewTripButton: UIButton!
   
-  @IBOutlet internal(set) weak var requestSupportButtonTopConstraint: NSLayoutConstraint!
-  @IBOutlet internal(set) weak var requestSupportButtonHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var requestSupportButtonTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var requestSupportButtonHeightConstraint: NSLayoutConstraint!
   
   // MARK: - Factory
   

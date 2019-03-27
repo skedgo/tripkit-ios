@@ -22,7 +22,7 @@ public extension Array where Element == TKAutocompleting {
   /// - Returns: Stream of autocompletion results. For each input change, it
   ///     can fire multiple times as more results are found by different
   ///     providers (i.e., elements in this array).
-  public func autocomplete(_ text: Observable<String>, mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]> {
+  func autocomplete(_ text: Observable<String>, mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]> {
     
     return text
       .throttle(0.2, latest: true, scheduler: MainScheduler.asyncInstance)

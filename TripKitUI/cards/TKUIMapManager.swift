@@ -123,12 +123,11 @@ open class TKUIMapManager: TGMapManager {
       guard let polygon = polygon else { return }
       self?.overlayPolygon = polygon
     }
-    TKRegionOverlayHelper.shared.regionsPolygon(updateOverlay)
+    TKRegionOverlayHelper.shared.regionsPolygon(completion: updateOverlay)
     NotificationCenter.default.rx
       .notification(.TKRegionManagerUpdatedRegions)
       .subscribe(onNext: { _ in
-        TKRegionOverlayHelper.shared.clearCache()
-        TKRegionOverlayHelper.shared.regionsPolygon(updateOverlay)
+        TKRegionOverlayHelper.shared.regionsPolygon(forceUpdate: true, completion: updateOverlay)
       })
       .disposed(by: disposeBag)
   }
@@ -192,11 +191,11 @@ extension TKUIMapManager {
 }
 
 fileprivate extension Array where Element: MKAnnotation {
-  fileprivate var identities: [String] {
+  var identities: [String] {
     return compactMap { ($0 as? TKUIIdentifiableAnnotation)?.identity }
   }
   
-  fileprivate func elements(notIn other: [Element]) -> [Element] {
+  func elements(notIn other: [Element]) -> [Element] {
     let otherIDs = other.identities
     return filter {
       guard let id = ($0 as? TKUIIdentifiableAnnotation)?.identity else { return true }

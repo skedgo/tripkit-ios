@@ -36,7 +36,7 @@ extension TKSegment {
     guard let trip = trip else { return false }
     
     // A segment should be in its trip's segments
-    guard let _ = trip.segments.index(of: self) else { return false }
+    guard let _ = trip.segments.firstIndex(of: self) else { return false }
     
     // Passed all checks
     return true

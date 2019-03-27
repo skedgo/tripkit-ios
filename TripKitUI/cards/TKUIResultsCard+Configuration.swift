@@ -14,7 +14,7 @@ public extension TKUIResultsCard {
   ///
   /// This isn't created directly, but rather you modify the static instance
   /// accessible from `TKUIResultsCard.config`.
-  public struct Configuration {
+  struct Configuration {
     private init() {}
     
     static let empty = Configuration()

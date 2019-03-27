@@ -22,7 +22,7 @@ public extension Reactive where Base : TKLocationManager {
   ///
   /// - Parameter seconds: Maximum time to give GPS
   /// - Returns: Observable of user's current location; can error out
-  public func fetchCurrentLocation(within seconds: TimeInterval) -> Single<CLLocation> {
+  func fetchCurrentLocation(within seconds: TimeInterval) -> Single<CLLocation> {
     guard base.isAuthorized() else {
       return tryAuthorization().flatMap { authorized -> Single<CLLocation> in
         if authorized {
@@ -52,7 +52,7 @@ public extension Reactive where Base : TKLocationManager {
   /// not granted to the device's location services.
   ///
   /// - Returns: Observable of user's current location; can error out
-  public var currentLocation: Observable<CLLocation> {
+  var currentLocation: Observable<CLLocation> {
     
     return Observable.create { subscriber in
       let date = Date()
@@ -85,7 +85,7 @@ public extension Reactive where Base : TKLocationManager {
   /// - Note: Internally, each subscription creates a new
   /// observable, and a new location manager, so you're
   /// encouraged to share a single subscription.
-  public var deviceHeading: Observable<CLHeading> {
+  var deviceHeading: Observable<CLHeading> {
     
     return Observable.create { subscriber in
       
@@ -109,7 +109,7 @@ public extension Reactive where Base : TKLocationManager {
 #endif
 
   
-  public func tryAuthorization() -> Single<Bool> {
+  func tryAuthorization() -> Single<Bool> {
     
     if !base.featureIsAvailable() {
       return .error(TKLocationManager.LocalizationError.featureNotAvailable)

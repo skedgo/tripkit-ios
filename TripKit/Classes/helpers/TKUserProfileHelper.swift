@@ -142,7 +142,7 @@ public class TKUserProfileHelper: NSObject {
   @objc public class func setTransitMode(_ identifier: Identifier, asPreferred preferred: Bool) {
     var modes = dislikedTransitModes
     if preferred {
-      if let index = modes.index(of: identifier) {
+      if let index = modes.firstIndex(of: identifier) {
         modes.remove(at: index)
       }
     } else {

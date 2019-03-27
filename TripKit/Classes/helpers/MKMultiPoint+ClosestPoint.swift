@@ -16,7 +16,7 @@ public extension MKMultiPoint {
   // Thanks to:
   // http://paulbourke.net/geometry/pointlineplane/
   // https://stackoverflow.com/questions/11713788/how-to-detect-taps-on-mkpolylines-overlays-like-maps-app
-  public func closestPoint(to: MKMapPoint) -> (point: MKMapPoint, distance: CLLocationDistance) {
+  func closestPoint(to: MKMapPoint) -> (point: MKMapPoint, distance: CLLocationDistance) {
     
     var closestPoint = MKMapPoint()
     var distanceTo = CLLocationDistance.infinity

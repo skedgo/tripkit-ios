@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIImageView {
-  @objc public convenience init(asRealTimeAccessoryImageAnimated animated: Bool, tintColor: UIColor? = nil) {
+  @objc convenience init(asRealTimeAccessoryImageAnimated animated: Bool, tintColor: UIColor? = nil) {
     self.init()
     
     let images = UIImageView.realTimeAccessoryImage(animated, tintColor: tintColor)
@@ -43,7 +43,7 @@ public extension UIImageView {
     }
   }
   
-  @objc public convenience init(asWheelchairAccessoryImageWithTintColor tintColor: UIColor?) {
+  @objc convenience init(asWheelchairAccessoryImageWithTintColor tintColor: UIColor?) {
     self.init()
     
     let image = TKStyleManager.imageNamed("icon-wheelchair")

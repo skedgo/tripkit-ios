@@ -6,14 +6,15 @@
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
 //
 
-import MapKit
 
 @objc
 public class TKRegionOverlayHelper: NSObject {
 
+  @objc(sharedInstance)
   public static let shared = TKRegionOverlayHelper()
   
   private var regionsOverlay: MKPolygon?
+  private var calculationToken: Int?
   
   private var callbacks = [(MKPolygon?) -> Void]()
   
@@ -21,16 +22,13 @@ public class TKRegionOverlayHelper: NSObject {
     super.init()
   }
   
-  @objc
-  public func clearCache() {
-    regionsOverlay = nil
-    if let cacheURL = TKRegionOverlayHelper.cacheURL {
-      try? FileManager.default.removeItem(at: cacheURL)
+  @objc(regionsPolygonForcingUpdate:completion:)
+  public func regionsPolygon(forceUpdate: Bool = false, completion: @escaping (MKPolygon?) -> Void) {
+
+    if (forceUpdate) {
+      regionsOverlay = nil
+      TKRegionOverlayHelper.deleteCache()
     }
-  }
-  
-  @objc
-  public func regionsPolygon(_ completion: @escaping (MKPolygon?) -> Void) {
     
     if let polygon = regionsOverlay {
       if (polygon.pointCount > 0) {
@@ -49,7 +47,13 @@ public class TKRegionOverlayHelper: NSObject {
       callbacks.append(completion)
       
       let polygons = TKRegionManager.shared.regions.map { $0.polygon }
+      let calculationToken = TKRegionManager.shared.regionsHash?.intValue
+      self.calculationToken = calculationToken
+      
       MKPolygon.union(polygons) { regionPolygons in
+        // Ignore callbacks for since outdated regions (e.g., switching servers quickly)
+        guard calculationToken == self.calculationToken else { return }
+        
         // create outside polygin (to show which area we cover)
         TKRegionOverlayHelper.savePolygonsToCacheFile(regionPolygons.compactMap { $0 as? (NSCoding & MKPolygon) })
         let overlay = MKPolygon(rectangle: .world, interiorPolygons: regionPolygons)
@@ -74,8 +78,8 @@ extension MKPolygon {
     let points: [MKMapPoint] = [
       MKMapPoint(x: rectangle.minX, y: rectangle.minY),
       MKMapPoint(x: rectangle.minX, y: rectangle.maxY),
-      MKMapPoint(x: rectangle.maxX, y: rectangle.minY),
       MKMapPoint(x: rectangle.maxX, y: rectangle.maxY),
+      MKMapPoint(x: rectangle.maxX, y: rectangle.minY),
     ]
     
     self.init(points: points, count: points.count, interiorPolygons: interiorPolygons)
@@ -92,6 +96,11 @@ extension TKRegionOverlayHelper {
       .urls(for: .cachesDirectory, in: .userDomainMask)
       .first?.appendingPathComponent("regionOverlay.data")
   }()
+  
+  private static func deleteCache() {
+    guard let cacheURL = TKRegionOverlayHelper.cacheURL else { return }
+    try? FileManager.default.removeItem(at: cacheURL)
+  }
   
   private static func loadPolygonsFromCacheFile() -> [MKPolygon]? {
     guard

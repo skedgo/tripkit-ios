@@ -115,7 +115,6 @@
   if (self.timeTypeSelector.selectedSegmentIndex == 2)
     return TKTimeTypeArriveBefore;
   
-  ZAssert(false, @"Unexpected state!");
   return TKTimeTypeNone;
 }
 

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+import TripKit
 
 /// An action that can be added to a `TKUITripOverviewCard`. Set an array of
 /// these on `TKUITripOverviewCard.tripActionsFactory`.
@@ -33,7 +35,7 @@ public extension TKUITripOverviewCard {
   ///
   /// This isn't created directly, but rather you modify the static instance
   /// accessible from `TKUITripOverviewCard.config`.
-  public struct Configuration {
+  struct Configuration {
     private init() {}
     
     static let empty = Configuration()

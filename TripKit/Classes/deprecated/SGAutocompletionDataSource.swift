@@ -21,7 +21,7 @@ extension SGAutocompletionDataSource {
   }
   
   @objc
-  @available(*, deprecated: 9.3, message: "Use `init(autocompleters:)` instead")
+  @available(*, deprecated, message: "Use `init(autocompleters:)` instead")
   public convenience init(dataProviders: [Any]) {
     let autocompleters = dataProviders.compactMap { provider -> TKAutocompleting? in
       if let autocompleter = provider as? TKAutocompleting {
