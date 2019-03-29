@@ -172,6 +172,16 @@ extension Shape: TKDisplayableRoute {
       return nil
     }
   }
+  
+  public var selectionIdentifier: String? {
+    if let templateHash = segment?.templateHashCode {
+      return String(templateHash)
+    } else if let service = services?.anyObject() as? Service {
+      return service.code
+    } else {
+      return nil
+    }
+  }
     
   
 }

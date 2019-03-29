@@ -36,7 +36,6 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     
     self.preferredZoomLevel = .road
     self.showOverlayPolygon = true
-    self.styler = TKUIResultsMapStyler(mapManager: self)
   }
   
   private var dropPinRecognizer = UILongPressGestureRecognizer()
@@ -78,8 +77,7 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
   
   fileprivate var selectedRoute: TKUIResultsViewModel.MapRouteItem? {
     didSet {
-      // Map style changed, tell it to update
-      mapView?.setNeedsDisplay()
+      selectionIdentifier = selectedRoute?.selectionIdentifier
     }
   }
   
@@ -101,7 +99,6 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
       }
     }
   }
-
 
   
   override func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
@@ -174,19 +171,6 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
       .filter { $0 != selectedRoute }
       .min { $0.distance(to: mapPoint) < $1.distance(to: mapPoint) }
   }
-}
-
-fileprivate struct TKUIResultsMapStyler: TKUIMapStyler {
-  weak var mapManager: TKUIResultsMapManager?
-  
-  func selectionStyle(for overlay: MKOverlay, renderer: TKUIPolylineRenderer) -> TKUIMapSelectionStyle {
-    guard let routePolyline = overlay as? TKRoutePolyline else { return .none }
-    
-    let isSelected = mapManager?.selectedRoute?.polyline == routePolyline
-    return isSelected ? .selected : .deselected
-  }
-  
-  
 }
 
 extension TKUIResultsViewModel.MapRouteItem {

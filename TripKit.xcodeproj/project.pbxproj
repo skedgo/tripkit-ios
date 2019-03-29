@@ -31,6 +31,7 @@
 		3A2F25D41F699C32007D3767 /* TKGeocodingResultScorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */; };
 		3A2F65B020E0EECC006FE49D /* DLSEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */; };
 		3A2F65B120E0EECC006FE49D /* DLSEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */; };
+		3A309215224DFAE2005D7E76 /* TKUIPolylineRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A309214224DFAE2005D7E76 /* TKUIPolylineRenderer.swift */; };
 		3A32CD731DC2DC77003B158B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD721DC2DC77003B158B /* Vehicle.swift */; };
 		3A32CD751DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD741DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift */; };
 		3A32CD791DC2EBC4003B158B /* LocationAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD781DC2EBC4003B158B /* LocationAPIModel.swift */; };
@@ -96,10 +97,8 @@
 		3A6DF10F202C8EB80084CB2C /* TKUITripSegmentsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B0202C8EB80084CB2C /* TKUITripSegmentsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF110202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B1202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift */; };
 		3A6DF112202C8EB80084CB2C /* TKUISemaphoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B3202C8EB80084CB2C /* TKUISemaphoreView.m */; };
-		3A6DF113202C8EB80084CB2C /* TKUIPolylineRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B4202C8EB80084CB2C /* TKUIPolylineRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF116202C8EB80084CB2C /* TKUIImageAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B7202C8EB80084CB2C /* TKUIImageAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF117202C8EB80084CB2C /* TKUITripSegmentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B8202C8EB80084CB2C /* TKUITripSegmentsView.m */; };
-		3A6DF119202C8EB80084CB2C /* TKUIPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0BA202C8EB80084CB2C /* TKUIPolylineRenderer.m */; };
 		3A6DF11A202C8EB80084CB2C /* TKUISemaphoreView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0BB202C8EB80084CB2C /* TKUISemaphoreView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF11C202C8EB80084CB2C /* UIFont+CustomFonts.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0BE202C8EB80084CB2C /* UIFont+CustomFonts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF11E202C8EB80084CB2C /* UIColor+Variations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0C0202C8EB80084CB2C /* UIColor+Variations.m */; };
@@ -333,7 +332,6 @@
 		3AB6C7161D1CD08E0089F687 /* TKTripKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6A71D1CD08E0089F687 /* TKTripKit.m */; };
 		3ABA055D1F604551009D0FE9 /* TKShareHelper+Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA055C1F604551009D0FE9 /* TKShareHelper+Parsing.swift */; };
 		3ABA3CCC224B5834006AD17D /* MKOverlay+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA3CCA224B5833006AD17D /* MKOverlay+NSCoding.m */; };
-		3ABA3CE4224CFA19006AD17D /* TKUIMapStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA3CE3224CFA19006AD17D /* TKUIMapStyler.swift */; };
 		3ABA80A320499D9300E67BC7 /* TKServer+UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA80A220499D9300E67BC7 /* TKServer+UserAccount.swift */; };
 		3ABA80A420499D9300E67BC7 /* TKServer+UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA80A220499D9300E67BC7 /* TKServer+UserAccount.swift */; };
 		3ABBDA0D2032119300205042 /* TKCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7A1F06854F00147990 /* TKCoordinates.swift */; };
@@ -819,6 +817,7 @@
 		3A2D06EB1F83DE4B002DA194 /* TKAnnotationClusterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAnnotationClusterer.swift; sourceTree = "<group>"; };
 		3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocodingResultScorer.swift; sourceTree = "<group>"; };
 		3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLSEntry.swift; sourceTree = "<group>"; };
+		3A309214224DFAE2005D7E76 /* TKUIPolylineRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIPolylineRenderer.swift; sourceTree = "<group>"; };
 		3A32CD721DC2DC77003B158B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Vehicle.swift; sourceTree = "<group>"; };
 		3A32CD741DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAPIToCoreDataConverter.swift; sourceTree = "<group>"; };
 		3A32CD781DC2EBC4003B158B /* LocationAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAPIModel.swift; sourceTree = "<group>"; };
@@ -897,10 +896,8 @@
 		3A6DF0B0202C8EB80084CB2C /* TKUITripSegmentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUITripSegmentsView.h; sourceTree = "<group>"; };
 		3A6DF0B1202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+AsAccessoryImage.swift"; sourceTree = "<group>"; };
 		3A6DF0B3202C8EB80084CB2C /* TKUISemaphoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUISemaphoreView.m; sourceTree = "<group>"; };
-		3A6DF0B4202C8EB80084CB2C /* TKUIPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIPolylineRenderer.h; sourceTree = "<group>"; };
 		3A6DF0B7202C8EB80084CB2C /* TKUIImageAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIImageAnnotationView.h; sourceTree = "<group>"; };
 		3A6DF0B8202C8EB80084CB2C /* TKUITripSegmentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUITripSegmentsView.m; sourceTree = "<group>"; };
-		3A6DF0BA202C8EB80084CB2C /* TKUIPolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIPolylineRenderer.m; sourceTree = "<group>"; };
 		3A6DF0BB202C8EB80084CB2C /* TKUISemaphoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUISemaphoreView.h; sourceTree = "<group>"; };
 		3A6DF0BE202C8EB80084CB2C /* UIFont+CustomFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+CustomFonts.h"; sourceTree = "<group>"; };
 		3A6DF0C0202C8EB80084CB2C /* UIColor+Variations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Variations.m"; sourceTree = "<group>"; };
@@ -1127,7 +1124,6 @@
 		3AB6C6A71D1CD08E0089F687 /* TKTripKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTripKit.m; sourceTree = "<group>"; };
 		3ABA055C1F604551009D0FE9 /* TKShareHelper+Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKShareHelper+Parsing.swift"; sourceTree = "<group>"; };
 		3ABA3CCA224B5833006AD17D /* MKOverlay+NSCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKOverlay+NSCoding.m"; sourceTree = "<group>"; };
-		3ABA3CE3224CFA19006AD17D /* TKUIMapStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIMapStyler.swift; sourceTree = "<group>"; };
 		3ABA80A220499D9300E67BC7 /* TKServer+UserAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKServer+UserAccount.swift"; sourceTree = "<group>"; };
 		3ABA80AB204F1AC100E67BC7 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		3ABD101920FE2CAC00693FF8 /* SGTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTableCell.h; sourceTree = "<group>"; };
@@ -1627,8 +1623,7 @@
 				3A6DF0E6202C8EB80084CB2C /* TKUIDepartureView.swift */,
 				3A6DF0F0202C8EB80084CB2C /* TKUIDepartureView.xib */,
 				3A6DF0A9202C8EB80084CB2C /* TKUIMapButtonView.swift */,
-				3A6DF0B4202C8EB80084CB2C /* TKUIPolylineRenderer.h */,
-				3A6DF0BA202C8EB80084CB2C /* TKUIPolylineRenderer.m */,
+				3A309214224DFAE2005D7E76 /* TKUIPolylineRenderer.swift */,
 				3A6DF0D1202C8EB80084CB2C /* TKUIStyledButton.h */,
 				3A6DF0D3202C8EB80084CB2C /* TKUIStyledButton.m */,
 				3A6DF0D4202C8EB80084CB2C /* TKUIStyledLabel.h */,
@@ -2108,7 +2103,6 @@
 				3A383CB82231464500361596 /* TKUITripModeByModeCard+Configuration.swift */,
 				3AFD394320D9333500FDC7D0 /* TKUITripOverviewCard.swift */,
 				3AF5F2B820F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift */,
-				3ABA3CE3224CFA19006AD17D /* TKUIMapStyler.swift */,
 			);
 			path = cards;
 			sourceTree = "<group>";
@@ -2435,7 +2429,6 @@
 				3A6DF127202C8EB80084CB2C /* UIColor+Variations.h in Headers */,
 				3A682F7C20F4B3E200E05195 /* ASMapManager.h in Headers */,
 				3A6DF10F202C8EB80084CB2C /* TKUITripSegmentsView.h in Headers */,
-				3A6DF113202C8EB80084CB2C /* TKUIPolylineRenderer.h in Headers */,
 				3A6DF126202C8EB80084CB2C /* TKStyleManager+TripKitUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3097,11 +3090,11 @@
 				3A67698D20EE61FF0044663F /* TKUIAutocompletionResultCell.swift in Sources */,
 				3A8FAB7020D3E512005D4C73 /* TKUITripCell+Formatter.swift in Sources */,
 				3AFD394720D9333500FDC7D0 /* TKUITripOverviewViewModel.swift in Sources */,
-				3ABA3CE4224CFA19006AD17D /* TKUIMapStyler.swift in Sources */,
 				3A8FAB7220D3F433005D4C73 /* TKUITripCell+Rx.swift in Sources */,
 				3A682F2220F3F8ED00E05195 /* TKUIResultsCard+Errors.swift in Sources */,
 				3A6DF14D202C8EB80084CB2C /* TKUIAlertInfoView.swift in Sources */,
 				3A6DF109202C8EB80084CB2C /* TKUIMapButtonView.swift in Sources */,
+				3A309215224DFAE2005D7E76 /* TKUIPolylineRenderer.swift in Sources */,
 				3A6E7D4020EFBD4900013253 /* TKUISegmentMovingCell.swift in Sources */,
 				D39ECD86205A007A00E09474 /* TKUISectionedAlertViewController.swift in Sources */,
 				D39ECD89205A029500E09474 /* TKUISectionedAlertViewModel.swift in Sources */,
@@ -3109,7 +3102,6 @@
 				3A6DF11F202C8EB80084CB2C /* TKStyleManager+TripKitUI.m in Sources */,
 				3AF5F2B220EFF7BE003AAEBA /* TKUIAttributionCell.swift in Sources */,
 				3A879AE720CFD93700107D58 /* Alert+TKAlert.swift in Sources */,
-				3A6DF119202C8EB80084CB2C /* TKUIPolylineRenderer.m in Sources */,
 				3A6DF10B202C8EB80084CB2C /* TKUISemaphoreView.swift in Sources */,
 				3A6DF107202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m in Sources */,
 				3A383CA8222FFE8900361596 /* TKUITripModeByModeCard.swift in Sources */,

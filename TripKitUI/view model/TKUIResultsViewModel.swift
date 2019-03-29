@@ -35,16 +35,18 @@ public class TKUIResultsViewModel {
     fileprivate let trip: Trip
     
     public let polyline: TKRoutePolyline
+    public let selectionIdentifier: String
     
     init?(_ trip: Trip) {
       self.trip = trip
+      self.selectionIdentifier = trip.objectID.uriRepresentation().absoluteString
       
       let displayableShapes = trip.segments(with: .onMap)
         .compactMap { ($0 as? TKSegment)?.shortedShapes() }   // Only include those with shapes
         .flatMap { $0.filter { $0.routeIsTravelled } } // Flat list of travelled shapes
       
       let route = displayableShapes
-        .reduce(into: TKColoredRoute(path: [])) { $0.append($1.sortedCoordinates ?? []) }
+        .reduce(into: TKColoredRoute(path: [], identifier: selectionIdentifier)) { $0.append($1.sortedCoordinates ?? []) }
 
       guard let polyline = TKRoutePolyline(for: route) else { return nil }
       self.polyline = polyline

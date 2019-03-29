@@ -43,7 +43,17 @@ open class TKUIMapManager: TGMapManager {
   
   open var showOverlayPolygon = false
   
-  open var styler: TKUIMapStyler?
+  /// Cache of renderers, used to update styling when selection changes
+  private var renderers: [WeakRenderers] = []
+  
+  /// The identifier for what should be drawn as selected on the map
+  public var selectionIdentifier: String? {
+    didSet {
+      renderers.removeAll(where: { $0.renderer == nil })
+      renderers.forEach { $0.renderer?.setNeedsDisplay() }
+      mapView?.setNeedsDisplay()
+    }
+  }
   
   fileprivate var heading: CLLocationDirection = 0 {
     didSet {
@@ -215,8 +225,7 @@ extension TKUIMapManager {
     dynamicDisposeBag = bag
     Observable<Int>
       .interval(1, scheduler: MainScheduler.instance) // Every second to show live second-based countdown in callout
-      .subscribe(onNext: { [unowned self] _ in self.updateDynamicAnnotations(animated: true)
-      })
+      .subscribe(onNext: { [unowned self] _ in self.updateDynamicAnnotations(animated: true) })
       .disposed(by: bag)
   }
   
@@ -288,6 +297,11 @@ extension TKUIMapManager {
     return builder.build()
   }
   
+  /// Helper to have weak refernences for renderers
+  private struct WeakRenderers {
+    weak var renderer: TKUIPolylineRenderer?
+  }
+  
   open func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     
     if let geodesic = overlay as? MKGeodesicPolyline {
@@ -297,12 +311,13 @@ extension TKUIMapManager {
       let renderer = TKUIPolylineRenderer(polyline: polyline)
       renderer.strokeColor = polyline.route.routeColor
       renderer.lineDashPattern = polyline.route.routeDashPattern
-      
-      switch styler?.selectionStyle(for: overlay, renderer: renderer) {
-      case .none?, nil: break // nothing to do
-      case .deselected?: renderer.isSelected = false
-      case .selected?: renderer.isSelected = true
+      renderer.selectionIdentifier = polyline.route.routeIsTravelled ? polyline.route.selectionIdentifier : nil
+      renderer.selectionStyler = { [weak self] in
+        guard let target = self?.selectionIdentifier else { return nil}
+        return $0 == target
       }
+      
+      renderers.append(WeakRenderers(renderer: renderer))
       
       return renderer
       
@@ -322,25 +337,4 @@ extension TKUIMapManager {
   
 }
 
-// MARK: - Styling
 
-extension TKUIPolylineRenderer {
-  
-  fileprivate var isSelected: Bool {
-    get {
-      return alpha > 0.9
-    }
-    set {
-      if newValue {
-        strokeColor = TKStyleManager.globalTintColor() // TODO: Don't always override this
-        alpha = 1
-        lineWidth = 24
-      } else {
-        strokeColor = TKStyleManager.lightTextColor()
-        alpha = 0.3
-        lineWidth = 12
-      }
-    }
-  }
-  
-}

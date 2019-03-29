@@ -18,6 +18,7 @@ public protocol TKDisplayableRoute {
   var routeColor: TKColor? { get }
   var routeDashPattern: [NSNumber]? { get }
   var routeIsTravelled: Bool { get }
+  var selectionIdentifier: String? { get }
   
 }
 
@@ -50,9 +51,12 @@ extension MKGeodesicPolyline : TKDisplayableRoute {
     return nil
   }
   
-  
   public var routeIsTravelled: Bool {
     return true
+  }
+  
+  public var selectionIdentifier: String? {
+    return nil
   }
   
 }
