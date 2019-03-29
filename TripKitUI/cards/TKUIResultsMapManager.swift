@@ -36,6 +36,7 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     
     self.preferredZoomLevel = .road
     self.showOverlayPolygon = true
+    self.styler = TKUIResultsMapStyler(mapManager: self)
   }
   
   private var dropPinRecognizer = UILongPressGestureRecognizer()
@@ -75,9 +76,9 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     }
   }
   
-  private var selectedRoute: TKUIResultsViewModel.MapRouteItem? {
+  fileprivate var selectedRoute: TKUIResultsViewModel.MapRouteItem? {
     didSet {
-      // Tell the map to update
+      // Map style changed, tell it to update
       mapView?.setNeedsDisplay()
     }
   }
@@ -175,6 +176,19 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
   }
 }
 
+fileprivate struct TKUIResultsMapStyler: TKUIMapStyler {
+  weak var mapManager: TKUIResultsMapManager?
+  
+  func selectionStyle(for overlay: MKOverlay, renderer: TKUIPolylineRenderer) -> TKUIMapSelectionStyle {
+    guard let routePolyline = overlay as? TKRoutePolyline else { return .none }
+    
+    let isSelected = mapManager?.selectedRoute?.polyline == routePolyline
+    return isSelected ? .selected : .deselected
+  }
+  
+  
+}
+
 extension TKUIResultsViewModel.MapRouteItem {
   fileprivate func distance(to mapPoint: MKMapPoint) -> CLLocationDistance {
     return polyline.closestPoint(to: mapPoint).distance
@@ -211,38 +225,6 @@ extension TKUIResultsMapManager {
     view.canShowCallout = true
     
     return view
-  }
-  
-  override func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    let renderer = super.mapView(mapView, rendererFor: overlay)
-    
-    if let routePolyline = overlay as? TKRoutePolyline, let polylineRenderer = renderer as? TKUIPolylineRenderer {
-      let isSelected = selectedRoute?.polyline == routePolyline
-      polylineRenderer.isSelected = isSelected
-    }
-    
-    return renderer
-  }
-  
-}
-
-extension TKUIPolylineRenderer {
-  
-  var isSelected: Bool {
-    get {
-      return alpha > 0.9
-    }
-    set {
-      if newValue {
-        strokeColor = TKStyleManager.globalTintColor()
-        alpha = 1
-        lineWidth = 24
-      } else {
-        strokeColor = TKStyleManager.lightTextColor()
-        alpha = 0.3
-        lineWidth = 12
-      }
-    }
   }
   
 }

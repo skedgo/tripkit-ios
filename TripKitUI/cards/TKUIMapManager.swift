@@ -43,6 +43,8 @@ open class TKUIMapManager: TGMapManager {
   
   open var showOverlayPolygon = false
   
+  open var styler: TKUIMapStyler?
+  
   fileprivate var heading: CLLocationDirection = 0 {
     didSet {
       guard let mapView = mapView else { return }
@@ -295,6 +297,13 @@ extension TKUIMapManager {
       let renderer = TKUIPolylineRenderer(polyline: polyline)
       renderer.strokeColor = polyline.route.routeColor
       renderer.lineDashPattern = polyline.route.routeDashPattern
+      
+      switch styler?.selectionStyle(for: overlay, renderer: renderer) {
+      case .none?, nil: break // nothing to do
+      case .deselected?: renderer.isSelected = false
+      case .selected?: renderer.isSelected = true
+      }
+      
       return renderer
       
     } else if let polygon = overlay as? MKPolygon {
@@ -309,6 +318,29 @@ extension TKUIMapManager {
   
   open func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
     self.heading = mapView.camera.heading
+  }
+  
+}
+
+// MARK: - Styling
+
+extension TKUIPolylineRenderer {
+  
+  fileprivate var isSelected: Bool {
+    get {
+      return alpha > 0.9
+    }
+    set {
+      if newValue {
+        strokeColor = TKStyleManager.globalTintColor() // TODO: Don't always override this
+        alpha = 1
+        lineWidth = 24
+      } else {
+        strokeColor = TKStyleManager.lightTextColor()
+        alpha = 0.3
+        lineWidth = 12
+      }
+    }
   }
   
 }

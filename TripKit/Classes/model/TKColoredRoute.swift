@@ -15,11 +15,14 @@ public class TKColoredRoute: NSObject {
   public let routeDashPattern: [NSNumber]?
   public let routeIsTravelled: Bool
   
-  @objc public init(path: [MKAnnotation], color: TKColor? = nil, dashPattern: [NSNumber]? = nil, isTravelled: Bool = true) {
+  public let identifier: String?
+  
+  @objc public init(path: [MKAnnotation], color: TKColor? = nil, dashPattern: [NSNumber]? = nil, isTravelled: Bool = true, identifier: String? = nil) {
     self.path = path
     routeColor = color
     routeDashPattern = dashPattern
     routeIsTravelled = isTravelled
+    self.identifier = identifier
   }
 
   @objc(initWithWaypoints:from:to:withColor:dashPattern:isTravelled:)
@@ -31,6 +34,7 @@ public class TKColoredRoute: NSObject {
     routeColor = color
     routeDashPattern = dashPattern
     routeIsTravelled = isTravelled
+    self.identifier = nil
   }
   
   public func append(_ annotations: [MKAnnotation]) {

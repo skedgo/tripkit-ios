@@ -40,12 +40,6 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     return nil
   }
   
-  override public func didAppear(animated: Bool) {
-    super.didAppear(animated: animated)
-    
-    tripMapManager.show(segment, animated: animated)
-  }
-  
   override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     super.didBuild(cardView: cardView, headerView: headerView)
     

@@ -22,6 +22,18 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
   public let trip: Trip
   
+  fileprivate weak var selectedSegment: TKSegment? {
+    didSet {
+      // Map style changed, tell it to update
+      if let mapView = self.mapView {
+        let overlays = mapView.overlays
+        mapView.removeOverlays(overlays)
+        mapView.addOverlays(overlays)
+      }
+      mapView?.setNeedsDisplay()
+    }
+  }
+  
   override public var annotationToZoomToOnTakingCharge: [MKAnnotation] {
     return trip.segments.flatMap { $0.annotationsToZoomToOnMap() }
   }
@@ -32,6 +44,7 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     super.init()
     
     self.preferredZoomLevel = .road
+    self.styler = TKUITripMapStyler(mapManager: self)
   }
   
   override public func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
@@ -53,6 +66,8 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   }
   
   public func show(_ segment: TKSegment, animated: Bool) {
+    self.selectedSegment = segment
+    
     let annos = segment.annotationsToZoomToOnMap()
     zoom(to: annos, animated: animated)
   }
@@ -110,5 +125,24 @@ private extension TKUITripMapManager {
     self.overlays = TKUIMapManagerHelper.sort(overlays)
     self.annotations = annotations
     self.dynamicAnnotations = dynamicAnnotations
+  }
+}
+
+fileprivate struct TKUITripMapStyler: TKUIMapStyler {
+  weak var mapManager: TKUITripMapManager?
+
+  func selectionStyle(for overlay: MKOverlay, renderer: TKUIPolylineRenderer) -> TKUIMapSelectionStyle {
+    
+    guard
+      let selectedId = mapManager?.selectedSegment?.templateHashCode
+      else { return .none }
+    
+    guard
+      let routePolyline = overlay as? TKRoutePolyline,
+      let coloredRoute = routePolyline.route as? TKColoredRoute
+      else { return .none }
+    
+    let isSelected = coloredRoute.identifier == String(selectedId)
+    return isSelected ? .selected : .deselected
   }
 }

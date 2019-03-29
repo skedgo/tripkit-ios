@@ -65,6 +65,7 @@ public class TKUITripModeByModeCard: TGPageCard {
 
   private let feedbackGenerator = UISelectionFeedbackGenerator()
 
+  private let tripMapManager: TKUITripMapManager
 
   /// Constructs a page card configured for displaying the segments on a
   /// mode-by-mode basis of a trip.
@@ -92,6 +93,8 @@ public class TKUITripModeByModeCard: TGPageCard {
     let headerSegments = segment.trip.segments(with: .inSummary).compactMap { $0 as? TKSegment }
     self.headerSegmentIndices = headerSegments.map { $0.index }
 
+    self.tripMapManager = mapManager
+    
     super.init(cards: cards, initialPage: initialPage ?? 0)
 
     self.headerAccessoryView = buildSegmentsView(segments: headerSegments, selecting: segment.index)
@@ -109,11 +112,16 @@ public class TKUITripModeByModeCard: TGPageCard {
   
   public override func didMoveToPage(index: Int) {
     super.didMoveToPage(index: index)
-    
+   
     guard let segmentsView = self.headerAccessoryView as? TKUITripSegmentsView else { return }
     let segmentIndex = SegmentCards.segmentIndex(ofCardAtIndex: index, in: segmentCards)
     let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= segmentIndex } // exact segment might not be available!
     segmentsView.select(segmentAtIndex: selectedHeaderIndex ?? 0)
+    
+    if let segment = tripMapManager.trip.segments.first(where: { $0.index == segmentIndex }) {
+      tripMapManager.show(segment, animated: true)
+    }
+
   }
   
 }
