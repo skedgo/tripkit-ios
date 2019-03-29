@@ -69,7 +69,9 @@ extension TKUISemaphoreView {
   public func updateSelection(for identifier: String?) {
     guard let displayable = annotation as? TKUISemaphoreDisplayable else { return }
     guard let target = identifier else { alpha = 1; return }
-    alpha = displayable.selectionIdentifier == target ? 1 : 0.3
+    
+    let selected = displayable.selectionIdentifier == target
+    alpha = selected ? 1 : 0.3
   }
   
   @objc(rotateHeadForMagneticHeading:)

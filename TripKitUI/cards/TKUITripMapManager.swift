@@ -72,6 +72,8 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     
     let annos = segment.annotationsToZoomToOnMap()
     zoom(to: annos, animated: animated)
+    
+    mapView?.selectAnnotation(segment, animated: animated)
   }
   
   public func updateTrip() {
