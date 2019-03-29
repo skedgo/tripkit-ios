@@ -49,9 +49,26 @@ open class TKUIMapManager: TGMapManager {
   /// The identifier for what should be drawn as selected on the map
   public var selectionIdentifier: String? {
     didSet {
+      guard let mapView = mapView else { return }
+      
+      // update renderers
       renderers.removeAll(where: { $0.renderer == nil })
       renderers.forEach { $0.renderer?.setNeedsDisplay() }
-      mapView?.setNeedsDisplay()
+      
+      // update semaphore views - if needed, we could add a more generic
+      // way for handling this more like the renderer:
+      // 1. Add a `selectionHandler` to TKUIAnnoationViewBuilder
+      // 2. Pass that on from there to views that handle it
+      // 3. Call `setNeedsDisplay()` here (removing lines marked with *)
+      //    and adding instead `.forEach { $0.setNeedsDisplay() }`
+      mapView.annotations(in: mapView.visibleMapRect)
+        .compactMap { $0 as? MKAnnotation }
+        .compactMap { mapView.view(for: $0) }
+        .compactMap { $0 as? TKUISemaphoreView }                   // *
+        .forEach { $0.updateSelection(for: selectionIdentifier ) } // *
+      
+      // give map a chance to itself, if needed (probably not)
+      mapView.setNeedsDisplay()
     }
   }
   
@@ -59,11 +76,10 @@ open class TKUIMapManager: TGMapManager {
     didSet {
       guard let mapView = mapView else { return }
       UIView.animate(withDuration: 0.25) {
-        for object in mapView.annotations(in: mapView.visibleMapRect) {
-          if let annotation = object as? MKAnnotation, let view = mapView.view(for: annotation) {
-            TKUIAnnotationViewBuilder.update(annotationView: view, forHeading: self.heading)
-          }
-        }
+        mapView.annotations(in: mapView.visibleMapRect)
+          .compactMap { $0 as? MKAnnotation }
+          .compactMap { mapView.view(for: $0) }
+          .forEach { TKUIAnnotationViewBuilder.update(annotationView: $0, forHeading: self.heading) }
       }
     }
   }
@@ -309,10 +325,15 @@ extension TKUIMapManager {
       
     } else if let polyline = overlay as? TKRoutePolyline {
       let renderer = TKUIPolylineRenderer(polyline: polyline)
-      renderer.strokeColor = polyline.route.routeColor
+      
+      var style = TKUIPolylineRenderer.SelectionStyle.default
+      style.defaultColor = polyline.route.routeColor
+      style.defaultBorderColor = polyline.route.routeColor?.darker(by: 0.5)
+      
+      renderer.selectionStyle = style
       renderer.lineDashPattern = polyline.route.routeDashPattern
       renderer.selectionIdentifier = polyline.route.routeIsTravelled ? polyline.route.selectionIdentifier : nil
-      renderer.selectionStyler = { [weak self] in
+      renderer.selectionHandler = { [weak self] in
         guard let target = self?.selectionIdentifier else { return nil}
         return $0 == target
       }

@@ -178,6 +178,8 @@ public class TKUITripOverviewCard: TGTableCard {
     if zoomToTrip {
       (mapManager as? TKUITripMapManager)?.showTrip(animated: animated)
       zoomToTrip = false
+    } else {
+      (mapManager as? TKUITripMapManager)?.deselectSegment(animated: animated)
     }
   }
   

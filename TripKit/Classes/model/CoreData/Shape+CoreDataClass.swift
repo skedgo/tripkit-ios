@@ -175,7 +175,7 @@ extension Shape: TKDisplayableRoute {
   
   public var selectionIdentifier: String? {
     if let templateHash = segment?.templateHashCode {
-      return String(templateHash)
+      return String(templateHash) // Should match the definition in TripKitUI!
     } else if let service = services?.anyObject() as? Service {
       return service.code
     } else {

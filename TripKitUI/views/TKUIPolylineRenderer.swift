@@ -14,14 +14,18 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
   
   struct SelectionStyle {
     static let `default` = SelectionStyle(
+      defaultColor: nil,
+      defaultBorderColor: nil,
       selectedColor: TKStyleManager.globalTintColor(),
       selectedBorderColor: TKStyleManager.globalTintColor().darker(by: 0.5),
       deselectedColor: TKStyleManager.lightTextColor()
     )
     
-    let selectedColor: UIColor
-    let selectedBorderColor: UIColor
-    let deselectedColor: UIColor
+    var defaultColor: UIColor?
+    var defaultBorderColor: UIColor?
+    var selectedColor: UIColor
+    var selectedBorderColor: UIColor
+    var deselectedColor: UIColor
   }
   
   /// Identifier for this polyline, used to determine selection style
@@ -32,10 +36,14 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
   ///
   /// Return value should be `nil` if no selection should be applied and the
   /// default colours should be used instead.
-  var selectionStyler: ((String) -> Bool?)?
+  var selectionHandler: ((String) -> Bool?)?
   
   /// The styling to apply on selection
-  var selectionStyle: SelectionStyle = .default
+  var selectionStyle: SelectionStyle = .default {
+    didSet {
+      updateStyling()
+    }
+  }
   
   /// Whether it is currently styled as selected
   private var isSelected: Bool?
@@ -43,17 +51,17 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
   public override init(polyline: MKPolyline) {
     super.init(polyline: polyline)
     
-    lineWidth = 12
     lineJoin = .round
     lineCap = .square
-    alpha = 1.0
+
+    updateStyling()
     
     borderMultiplier = 16/12
   }
   
   override open func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
     let oldSelection = isSelected
-    if let mine = selectionIdentifier, let styler = selectionStyler {
+    if let mine = selectionIdentifier, let styler = selectionHandler {
       isSelected = styler(mine)
     } else {
       isSelected = nil
@@ -66,18 +74,29 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
   }
   
   private func updateStyling() {
-    // TODO: Revert to default style
-    guard let selected = isSelected else { return }
+    
+    // Note: Do not generate new `UIColor` instances in this method, as we
+    // call ith from `mapRect`, which `MKMapView` likes to hammer on many
+    // background threads, which can be quite crashy. Odd.
+    
+    if let selected = isSelected  {
+      if selected {
+        strokeColor = selectionStyle.selectedColor
+        borderColor = selectionStyle.selectedBorderColor
+        alpha = 1
+        lineWidth = 24
+      } else {
+        strokeColor = selectionStyle.deselectedColor
+        borderColor = selectionStyle.deselectedColor
+        alpha = 0.3
+        lineWidth = 12
+      }
 
-    if selected {
-      strokeColor = selectionStyle.selectedColor
-      borderColor = selectionStyle.selectedBorderColor
-      alpha = 1
-      lineWidth = 24
     } else {
-      strokeColor = selectionStyle.deselectedColor
-      borderColor = selectionStyle.deselectedColor
-      alpha = 0.3
+      // Revert back to default style
+      strokeColor = selectionStyle.defaultColor
+      borderColor = selectionStyle.defaultBorderColor ?? selectionStyle.selectedBorderColor
+      alpha = 1
       lineWidth = 12
     }
   }
