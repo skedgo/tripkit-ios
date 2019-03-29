@@ -188,6 +188,10 @@ extension StopVisits: TKUIImageAnnotationDisplayable {
 // MARK: TKUISemaphoreDisplayable
 
 extension StopVisits: TKUISemaphoreDisplayable {
+  public var selectionIdentifier: String? {
+    return nil
+  }
+  
   public var semaphoreMode: TKUISemaphoreView.Mode {
     return .none
   }
@@ -246,6 +250,10 @@ extension TKSegment: TKUIImageAnnotationDisplayable {
 // MARK: - TKUISemaphoreDisplayable
 
 extension TKSegment: TKUISemaphoreDisplayable {
+  public var selectionIdentifier: String? {
+    return String(templateHashCode) // Should match the definition in TripKit!
+  }
+  
   public var semaphoreMode: TKUISemaphoreView.Mode {
     if let frequency = self.frequency?.intValue {
       if !isTerminal {

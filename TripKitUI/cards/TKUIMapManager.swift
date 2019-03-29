@@ -43,15 +43,43 @@ open class TKUIMapManager: TGMapManager {
   
   open var showOverlayPolygon = false
   
+  /// Cache of renderers, used to update styling when selection changes
+  private var renderers: [WeakRenderers] = []
+  
+  /// The identifier for what should be drawn as selected on the map
+  public var selectionIdentifier: String? {
+    didSet {
+      guard let mapView = mapView else { return }
+      
+      // update renderers
+      renderers.removeAll(where: { $0.renderer == nil })
+      renderers.forEach { $0.renderer?.setNeedsDisplay() }
+      
+      // update semaphore views - if needed, we could add a more generic
+      // way for handling this more like the renderer:
+      // 1. Add a `selectionHandler` to TKUIAnnoationViewBuilder
+      // 2. Pass that on from there to views that handle it
+      // 3. Call `setNeedsDisplay()` here (removing lines marked with *)
+      //    and adding instead `.forEach { $0.setNeedsDisplay() }`
+      mapView.annotations(in: mapView.visibleMapRect)
+        .compactMap { $0 as? MKAnnotation }
+        .compactMap { mapView.view(for: $0) }
+        .compactMap { $0 as? TKUISemaphoreView }                   // *
+        .forEach { $0.updateSelection(for: selectionIdentifier ) } // *
+      
+      // give map a chance to itself, if needed (probably not)
+      mapView.setNeedsDisplay()
+    }
+  }
+  
   fileprivate var heading: CLLocationDirection = 0 {
     didSet {
       guard let mapView = mapView else { return }
       UIView.animate(withDuration: 0.25) {
-        for object in mapView.annotations(in: mapView.visibleMapRect) {
-          if let annotation = object as? MKAnnotation, let view = mapView.view(for: annotation) {
-            TKUIAnnotationViewBuilder.update(annotationView: view, forHeading: self.heading)
-          }
-        }
+        mapView.annotations(in: mapView.visibleMapRect)
+          .compactMap { $0 as? MKAnnotation }
+          .compactMap { mapView.view(for: $0) }
+          .forEach { TKUIAnnotationViewBuilder.update(annotationView: $0, forHeading: self.heading) }
       }
     }
   }
@@ -213,8 +241,7 @@ extension TKUIMapManager {
     dynamicDisposeBag = bag
     Observable<Int>
       .interval(1, scheduler: MainScheduler.instance) // Every second to show live second-based countdown in callout
-      .subscribe(onNext: { [unowned self] _ in self.updateDynamicAnnotations(animated: true)
-      })
+      .subscribe(onNext: { [unowned self] _ in self.updateDynamicAnnotations(animated: true) })
       .disposed(by: bag)
   }
   
@@ -286,6 +313,11 @@ extension TKUIMapManager {
     return builder.build()
   }
   
+  /// Helper to have weak refernences for renderers
+  private struct WeakRenderers {
+    weak var renderer: TKUIPolylineRenderer?
+  }
+  
   open func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     
     if let geodesic = overlay as? MKGeodesicPolyline {
@@ -293,8 +325,21 @@ extension TKUIMapManager {
       
     } else if let polyline = overlay as? TKRoutePolyline {
       let renderer = TKUIPolylineRenderer(polyline: polyline)
-      renderer.strokeColor = polyline.route.routeColor
+      
+      var style = TKUIPolylineRenderer.SelectionStyle.default
+      style.defaultColor = polyline.route.routeColor
+      style.defaultBorderColor = polyline.route.routeColor?.darker(by: 0.5)
+      
+      renderer.selectionStyle = style
       renderer.lineDashPattern = polyline.route.routeDashPattern
+      renderer.selectionIdentifier = polyline.route.routeIsTravelled ? polyline.route.selectionIdentifier : nil
+      renderer.selectionHandler = { [weak self] in
+        guard let target = self?.selectionIdentifier else { return nil}
+        return $0 == target
+      }
+      
+      renderers.append(WeakRenderers(renderer: renderer))
+      
       return renderer
       
     } else if let polygon = overlay as? MKPolygon {
@@ -312,3 +357,5 @@ extension TKUIMapManager {
   }
   
 }
+
+

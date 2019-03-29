@@ -22,7 +22,17 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
   public let trip: Trip
   
-  override public var annotationToZoomToOnTakingCharge: [MKAnnotation] {
+  fileprivate weak var selectedSegment: TKSegment? {
+    didSet {
+      if let code = selectedSegment?.templateHashCode {
+        selectionIdentifier = String(code)
+      } else {
+        selectionIdentifier = nil
+      }
+    }
+  }
+  
+  override public var annotationsToZoomToOnTakingCharge: [MKAnnotation] {
     return trip.segments.flatMap { $0.annotationsToZoomToOnMap() }
   }
   
@@ -49,12 +59,21 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   }
   
   public func showTrip(animated: Bool) {
-    zoom(to: annotationToZoomToOnTakingCharge, animated: animated)
+    deselectSegment(animated: animated)
+    zoom(to: annotationsToZoomToOnTakingCharge, animated: animated)
+  }
+  
+  public func deselectSegment(animated: Bool) {
+    self.selectedSegment = nil
   }
   
   public func show(_ segment: TKSegment, animated: Bool) {
+    self.selectedSegment = segment
+    
     let annos = segment.annotationsToZoomToOnMap()
     zoom(to: annos, animated: animated)
+    
+    mapView?.selectAnnotation(segment, animated: animated)
   }
   
   public func updateTrip() {
