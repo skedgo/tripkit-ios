@@ -9,23 +9,18 @@
 import Foundation
 
 import RxSwift
-import RxCocoa
 
 // MARK: - Real-time updates
 
 extension TKUIResultsViewModel {
   
-  static func fetchRealTimeUpdates(for tripGroups: Driver<[TripGroup]>) -> Driver<TKRealTimeUpdateProgress> {
+  static func fetchRealTimeUpdates(for tripGroups: Observable<[TripGroup]>) -> Observable<TKRealTimeUpdateProgress> {
     
     return Observable<Int>
       .interval(30, scheduler: MainScheduler.instance)
       .withLatestFrom(tripGroups)
       .flatMapLatest(TKBuzzRealTime.rx.update)
       .startWith(.idle)
-      .asDriver(onErrorRecover: { error in
-        assertionFailure("Should never error, but did with: \(error)")
-        return Driver.empty()
-      })
   }
   
 }

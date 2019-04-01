@@ -9,7 +9,6 @@
 import Foundation
 
 import RxSwift
-import RxCocoa
 
 extension TKUIResultsViewModel {
   
@@ -80,24 +79,24 @@ extension TKUIResultsViewModel {
 
 extension TKUIResultsViewModel {
   
-  static func watch(_ initial: RouteBuilder, inputs: UIInput) -> Driver<RouteBuilder> {
+  static func watch(_ initial: RouteBuilder, inputs: UIInput, mapInput: MapInput) -> Observable<RouteBuilder> {
     
     typealias BuilderInput = (date: RouteBuilder.Time?, pin: CLLocationCoordinate2D?, forceRefresh: Bool)
     
     // TODO: When pulling to refresh, rebuild
     // When changing modes, force refresh
-    let refresh: Driver<BuilderInput> = inputs.changedModes
+    let refresh: Observable<BuilderInput> = inputs.changedModes.asObservable()
       .map { (date: nil, pin: nil, forceRefresh: true) }
     
     // When changing date, switch to that date
-    let date: Driver<BuilderInput> = inputs.changedDate
+    let date: Observable<BuilderInput> = inputs.changedDate.asObservable()
       .map { (date: $0, pin: nil, forceRefresh: false) }
     
     // When dropping pin, set it
-    let pin: Driver<BuilderInput> = inputs.droppedPin
+    let pin: Observable<BuilderInput> = mapInput.droppedPin.asObservable()
       .map { (date: nil, pin: $0, forceRefresh: false) }
     
-    let relevantInput = Driver.merge(date, pin, refresh)
+    let relevantInput = Observable.merge(date, pin, refresh)
     
     return relevantInput
       .scan(initial) { previous, change in
@@ -114,12 +113,12 @@ extension TKUIResultsViewModel {
       .startWith(initial)
   }
   
-  static func locationsChanged(in builder: RouteBuilder) -> Driver<RouteBuilder> {
+  static func locationsChanged(in builder: RouteBuilder) -> Observable<RouteBuilder> {
     // This looks fairly complicated but all it does is monitoring the builder's
     // origin and destination annotations for changes to their coordinates, and
     // then triggers a rebuild.
-    var origin: Observable<CLLocationCoordinate2D?> = Observable.empty()
-    var destination: Observable<CLLocationCoordinate2D?> = Observable.empty()
+    var origin: Observable<CLLocationCoordinate2D?> = .empty()
+    var destination: Observable<CLLocationCoordinate2D?> = .empty()
     if let asObject = builder.origin {
       origin = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
     }
@@ -128,7 +127,6 @@ extension TKUIResultsViewModel {
     }
     return Observable.merge(origin, destination)
       .map { _ in builder }
-      .asDriver(onErrorDriveWith: Driver.empty())
   }
   
 }
@@ -156,7 +154,7 @@ extension TKUIResultsViewModel.RouteBuilder {
 
 extension TKUIResultsViewModel {
   
-  static func fetch(for request: Driver<TripRequest?>, errorPublisher: PublishSubject<Error>) -> Driver<TKResultsFetcher.Progress> {
+  static func fetch(for request: Observable<TripRequest?>, errorPublisher: PublishSubject<Error>) -> Observable<TKResultsFetcher.Progress> {
     return request
       .filter { $0 != nil }
       .map { $0! }
@@ -166,10 +164,10 @@ extension TKUIResultsViewModel {
         // Fetch the trip and handle errors in here, to not abort the outer observable
         return TKResultsFetcher
           .streamTrips(for: request, classifier: TKMetricClassifier())
-          .asDriver(onErrorRecover: { error in
+          .catchError { error in
             errorPublisher.onNext(error)
-            return Driver.just(.finished)
-          })
+            return .just(.finished)
+          }
     }
   }
   

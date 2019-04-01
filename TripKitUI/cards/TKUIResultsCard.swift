@@ -47,6 +47,7 @@ public class TKUIResultsCard: TGTableCard {
     configureCell: TKUIResultsCard.cell
   )
   
+  private let isVisible = PublishSubject<Bool>()
   private let changedTime = PublishSubject<TKUIResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<Void>()
   
@@ -114,24 +115,28 @@ public class TKUIResultsCard: TGTableCard {
     
     // Build the view model
 
-    let tappedModes = Driver.merge(accessoryView.transportButton.rx.tap.asDriver(), footerButton.rx.tap.asDriver())
+    let tappedModes = Signal.merge(accessoryView.transportButton.rx.tap.asSignal(), footerButton.rx.tap.asSignal())
 
     let inputs: TKUIResultsViewModel.UIInput = (
-      selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asDriver(),
-      tappedDate: accessoryView.timeButton.rx.tap.asDriver(),
+      selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asSignal(),
+      tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: tappedModes,
+      changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
+      changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
+      changedSortOrder: .empty(),
+      isVisible: .empty()
+    )
+    
+    let mapInput: TKUIResultsViewModel.MapInput = (
       tappedMapRoute: mapManager.selectedMapRoute,
-      changedDate: changedTime.asDriver(onErrorDriveWith: Driver.empty()),
-      changedModes: changedModes.asDriver(onErrorDriveWith: Driver.empty()),
-      changedSortOrder: Driver.empty(), // TODO
       droppedPin: mapManager.droppedPin
     )
     
     let viewModel: TKUIResultsViewModel
     if let destination = self.destination {
-      viewModel = TKUIResultsViewModel(destination: destination, inputs: inputs)
+      viewModel = TKUIResultsViewModel(destination: destination, inputs: inputs, mapInput: mapInput)
     } else if let request = self.request {
-      viewModel = TKUIResultsViewModel(request: request, inputs: inputs)
+      viewModel = TKUIResultsViewModel(request: request, inputs: inputs, mapInput: mapInput)
     } else {
       preconditionFailure()
     }
@@ -203,8 +208,9 @@ public class TKUIResultsCard: TGTableCard {
       .disposed(by: disposeBag)
 
     viewModel.error
+      .asObservable()
       .withLatestFrom(viewModel.request) { ($0, $1) }
-      .drive(onNext: { [weak self] in
+      .subscribe(onNext: { [weak self] in
         let canHandleRoutingRequest = TKUIResultsCard.config.requestRoutingSupport != nil
         self?.show($0, for: $1, cardView: cardView, tableView: tableView, allowRequest: canHandleRoutingRequest)
       })
@@ -218,7 +224,7 @@ public class TKUIResultsCard: TGTableCard {
       .disposed(by: disposeBag)
     
     viewModel.next
-      .drive(onNext: { [weak self] in self?.navigate(to: $0) })
+      .emit(onNext: { [weak self] in self?.navigate(to: $0) })
       .disposed(by: disposeBag)
     
     tableView.rx.setDelegate(self)

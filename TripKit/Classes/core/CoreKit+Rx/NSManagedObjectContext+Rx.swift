@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 import RxSwift
-import RxCocoa
 
 #if os(iOS)
 

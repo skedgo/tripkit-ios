@@ -67,10 +67,10 @@ extension TKUIResultsViewModel {
 
 extension TKUIResultsViewModel {
   
-  static func fetchTripGroups(_ requests: Driver<TripRequest?>) -> Driver<[TripGroup]> {
-    return requests.flatMapLatest { request in
+  static func fetchTripGroups(_ requests: Observable<TripRequest?>) -> Observable<[TripGroup]> {
+    return requests.flatMapLatest { request -> Observable<[TripGroup]> in
       guard let request = request, let context = request.managedObjectContext else {
-        return Driver.just([])
+        return .just([])
       }
       
       return context.rx
@@ -81,11 +81,10 @@ extension TKUIResultsViewModel {
           relationshipKeyPathsForPrefetching: ["visibleTrip", "visibleTrip.segmentReferences"]
         )
         .throttle(0.5, scheduler: MainScheduler.instance)
-        .asDriver(onErrorJustReturn: [])
     }
   }
   
-  static func buildSections(_ groups: Driver<[TripGroup]>, inputs: UIInput) -> Driver<[Section]> {
+  static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput) -> Observable<[Section]> {
     let expand = inputs.selected
       .map { item -> TripGroup? in
         switch item {
@@ -94,8 +93,8 @@ extension TKUIResultsViewModel {
         }
     }
     
-    return Driver
-      .combineLatest(groups, inputs.changedSortOrder.startWith(.score), expand.startWith(nil))
+    return Observable
+      .combineLatest(groups, inputs.changedSortOrder.startWith(.score).asObservable(), expand.startWith(nil).asObservable())
       .map(sections)
   }
   

@@ -17,32 +17,38 @@ import RxCocoa
 #endif
 
 public class TKUIResultsViewModel {
-  
+
   public typealias UIInput = (
-    selected: Driver<Item>, // => do .next
-    tappedDate: Driver<Void>, // => return which date to show
-    tappedShowModes: Driver<Void>, // => return which modes to show
-    tappedMapRoute: Driver<MapRouteItem>,
-    changedDate: Driver<RouteBuilder.Time>, // => update request + title
-    changedModes: Driver<Void>, // => update request
-    changedSortOrder: Driver<TKTripCostType>, // => update sorting
-    droppedPin: Driver<CLLocationCoordinate2D> // => call dropPin()
+    selected: Signal<Item>,                     // => do .next
+    tappedDate: Signal<Void>,                   // => return which date to show
+    tappedShowModes: Signal<Void>,              // => return which modes to show
+    changedDate: Signal<RouteBuilder.Time>,     // => update request + title
+    changedModes: Signal<Void>,                 // => update request
+    changedSortOrder: Signal<TKTripCostType>,   // => update sorting
+    isVisible: Signal<Bool>
+  )
+
+  
+  public typealias MapInput = (
+    tappedMapRoute: Signal<MapRouteItem>,
+    droppedPin: Signal<CLLocationCoordinate2D>  // => call dropPin()
   )
   
-  public convenience init(destination: MKAnnotation, inputs: UIInput) {
+  public convenience init(destination: MKAnnotation, inputs: UIInput, mapInput: MapInput) {
     let builder = RouteBuilder(destination: destination)
-    self.init(builder: builder, inputs: inputs)
+    self.init(builder: builder, inputs: inputs, mapInput: mapInput)
   }
   
-  public convenience init(request: TripRequest, inputs: UIInput) {
-    self.init(builder: request.builder, initialRequest: request, inputs: inputs)
+  public convenience init(request: TripRequest, inputs: UIInput, mapInput: MapInput) {
+    self.init(builder: request.builder, initialRequest: request, inputs: inputs, mapInput: mapInput)
   }
   
-  private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, inputs: UIInput) {
-    let builderChanged = TKUIResultsViewModel.watch(builder, inputs: inputs)
-    
+  private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, inputs: UIInput, mapInput: MapInput) {
+    let builderChanged = TKUIResultsViewModel.watch(builder, inputs: inputs, mapInput: mapInput)
+      .share(replay: 1, scope: .forever)
+
     let errorPublisher = PublishSubject<Error>()
-    self.error = errorPublisher.asDriver(onErrorDriveWith: Driver.empty())
+    self.error = errorPublisher.asSignal(onErrorSignalWith: .empty())
     
     // Monitor the builder's annotation's coordinates
     let originOrDestinationChanged = builderChanged
@@ -50,47 +56,61 @@ public class TKUIResultsViewModel {
     
     // Whenever the builder is changing, i.e., when the user changes the inputs,
     // we generate a new request.
-    let requestChanged = Driver.merge(originOrDestinationChanged, builderChanged)
+    let requestChanged = Observable.merge(originOrDestinationChanged, builderChanged)
       .map { $0.generateRequest() }
       .filter { $0 != nil }
       .startWith(initialRequest)
-    
+      .share(replay: 1, scope: .forever)
+
     let tripGroupsChanged = TKUIResultsViewModel.fetchTripGroups(requestChanged)
-    
+      .share(replay: 1, scope: .forever)
+      .distinctUntilChanged()
+
     request = requestChanged
       .filter { $0 != nil }
       .map { $0! }
+      .asDriver(onErrorDriveWith: .empty())
     
     fetchProgress = TKUIResultsViewModel.fetch(for: requestChanged, errorPublisher: errorPublisher)
-    
+      .asDriver(onErrorDriveWith: .empty())
+
     realTimeUpdate = TKUIResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged)
-    
+      .asDriver(onErrorDriveWith: .empty())
+
     sections = TKUIResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs)
-    
-    selectedItem = inputs.tappedMapRoute
+      .asDriver(onErrorJustReturn: [])
+
+    selectedItem = mapInput.tappedMapRoute
       .startWithOptional(nil) // default selection
       .withLatestFrom(sections) { $1.find($0) ?? $1.bestItem }
+      .asDriver(onErrorDriveWith: .empty())
     
     titles = builderChanged
       .map { $0.titles }
-    
+      .asDriver(onErrorDriveWith: .empty())
+
     timeTitle = requestChanged
       .filter { $0 != nil }
       .map { $0!.timeString }
-    
+      .asDriver(onErrorDriveWith: .empty())
+
     includedTransportModes = requestChanged
       .map { $0?.includedTransportModes }
-    
+      .asDriver(onErrorDriveWith: .empty())
+
     originAnnotation = builderChanged
       .map { $0.origin }
       .distinctUntilChanged { $0 === $1 }
+      .asDriver(onErrorDriveWith: .empty())
 
     destinationAnnotation = builderChanged
       .map { $0.destination }
       .distinctUntilChanged { $0 === $1 }
-    
-    mapRoutes = Driver.combineLatest(tripGroupsChanged, inputs.tappedMapRoute.startWithOptional(nil))
+      .asDriver(onErrorDriveWith: .empty())
+
+    mapRoutes = Observable.combineLatest(tripGroupsChanged, mapInput.tappedMapRoute.startWithOptional(nil))
       .map(TKUIResultsViewModel.buildMapContent)
+      .asDriver(onErrorDriveWith: .empty())
 
     // Navigation
     
@@ -98,19 +118,21 @@ public class TKUIResultsViewModel {
       .filter { $0.trip != nil }
       .map { Next.showTrip($0.trip!) }
     
-    let modeInput = Driver.combineLatest(requestChanged, builderChanged)
-    let presentModes = inputs.tappedShowModes
+    let modeInput = Observable.combineLatest(requestChanged, builderChanged)
+    let presentModes = inputs.tappedShowModes.asObservable()
       .withLatestFrom(modeInput) { (_, tuple) -> Next in
         let modes = tuple.0?.applicableModeIdentifiers() ?? []
         let region = TKUIResultsViewModel.regionForModes(for: tuple.1)
         return Next.presentModes(modes: modes, region: region)
-    }
+      }
+      .asSignal(onErrorSignalWith: .empty())
     
-    let presentTime = inputs.tappedDate
+    let presentTime = inputs.tappedDate.asObservable()
       .withLatestFrom(builderChanged)
       .map { Next.presentDatePicker(time: $0.time, timeZone: $0.timeZone) }
-    
-    next = Driver.merge(showTrip, presentTime, presentModes)
+      .asSignal(onErrorSignalWith: .empty())
+
+    next = Signal.merge(showTrip, presentTime, presentModes)
   }
   
   let request: Driver<TripRequest>
@@ -151,7 +173,7 @@ public class TKUIResultsViewModel {
   ///         to this driver.
   public let realTimeUpdate: Driver<TKRealTimeUpdateProgress>
   
-  let error: Driver<Error>
+  let error: Signal<Error>
   
   public let originAnnotation: Driver<MKAnnotation?>
 
@@ -159,7 +181,7 @@ public class TKUIResultsViewModel {
   
   public let mapRoutes: Driver<MapContent>
   
-  let next: Driver<Next>
+  let next: Signal<Next>
 }
 
 // MARK: - Navigation
