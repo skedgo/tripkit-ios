@@ -79,32 +79,31 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="tIX-j1-1DY" userLabel="TimeWrapper">
-                                                <rect key="frame" x="347" y="35" width="64" height="34"/>
+                                                <rect key="frame" x="347" y="32" width="64" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="2 mins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrW-OE-DXP" customClass="TKUIStyledLabel">
-                                                        <rect key="frame" x="0.0" y="9" width="64" height="16"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yhb-5V-Syb" customClass="TKUIStyledLabel">
-                                                        <rect key="frame" x="0.0" y="9" width="64" height="16"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <rect key="frame" x="8" y="12" width="48" height="16"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.83921568629999999" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstItem="Yhb-5V-Syb" firstAttribute="centerY" secondItem="tIX-j1-1DY" secondAttribute="centerY" id="3Rs-d1-NjM"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Yhb-5V-Syb" secondAttribute="trailing" id="AyH-Q7-ZK6"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Yhb-5V-Syb" secondAttribute="trailing" constant="8" id="AyH-Q7-ZK6"/>
                                                     <constraint firstAttribute="height" constant="34" id="Hnk-qt-F51"/>
-                                                    <constraint firstItem="CrW-OE-DXP" firstAttribute="centerY" secondItem="tIX-j1-1DY" secondAttribute="centerY" id="LpC-jg-61S"/>
-                                                    <constraint firstItem="CrW-OE-DXP" firstAttribute="leading" secondItem="tIX-j1-1DY" secondAttribute="leading" id="O9M-4j-Lwx"/>
+                                                    <constraint firstItem="Yhb-5V-Syb" firstAttribute="top" secondItem="tIX-j1-1DY" secondAttribute="top" constant="12" id="Nj2-0L-yFf"/>
                                                     <constraint firstAttribute="width" constant="64" id="UqI-ks-Ucm"/>
-                                                    <constraint firstItem="Yhb-5V-Syb" firstAttribute="leading" secondItem="tIX-j1-1DY" secondAttribute="leading" id="n6s-6K-HkE"/>
-                                                    <constraint firstAttribute="trailing" secondItem="CrW-OE-DXP" secondAttribute="trailing" id="w1X-2m-tOF"/>
+                                                    <constraint firstItem="Yhb-5V-Syb" firstAttribute="leading" secondItem="tIX-j1-1DY" secondAttribute="leading" constant="8" id="XQG-x6-9qh"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="dW5-Pf-EpF"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Yhb-5V-Syb" secondAttribute="bottom" constant="12" id="zH0-Pe-LWv"/>
                                                 </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="Hnk-qt-F51"/>
+                                                        <exclude reference="UqI-ks-Ucm"/>
+                                                    </mask>
+                                                </variation>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -224,6 +223,8 @@
                 <outlet property="serviceImageView" destination="z0E-F8-bjU" id="56I-O9-hpP"/>
                 <outlet property="subsubtitleLabel" destination="WEG-PU-ohE" id="otc-Wy-bfY"/>
                 <outlet property="subtitleLabel" destination="yLh-U7-4mz" id="1Jx-gl-p2r"/>
+                <outlet property="timeToDepartContentView" destination="tIX-j1-1DY" id="QTc-AP-IVg"/>
+                <outlet property="timeToDepartTextLabel" destination="Yhb-5V-Syb" id="Vkp-MU-7q4"/>
                 <outlet property="titleLabel" destination="NG5-pD-VCL" id="bju-6I-dBj"/>
             </connections>
             <point key="canvasLocation" x="212.31884057971016" y="259.15178571428572"/>
