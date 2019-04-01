@@ -75,10 +75,9 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     }
   }
   
-  private var selectedRoute: TKUIResultsViewModel.MapRouteItem? {
+  fileprivate var selectedRoute: TKUIResultsViewModel.MapRouteItem? {
     didSet {
-      // Tell the map to update
-      mapView?.setNeedsDisplay()
+      selectionIdentifier = selectedRoute?.selectionIdentifier
     }
   }
   
@@ -100,7 +99,6 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
       }
     }
   }
-
 
   
   override func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
@@ -211,38 +209,6 @@ extension TKUIResultsMapManager {
     view.canShowCallout = true
     
     return view
-  }
-  
-  override func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    let renderer = super.mapView(mapView, rendererFor: overlay)
-    
-    if let routePolyline = overlay as? TKRoutePolyline, let polylineRenderer = renderer as? TKUIPolylineRenderer {
-      let isSelected = selectedRoute?.polyline == routePolyline
-      polylineRenderer.isSelected = isSelected
-    }
-    
-    return renderer
-  }
-  
-}
-
-extension TKUIPolylineRenderer {
-  
-  var isSelected: Bool {
-    get {
-      return alpha > 0.9
-    }
-    set {
-      if newValue {
-        strokeColor = TKStyleManager.globalTintColor()
-        alpha = 1
-        lineWidth = 24
-      } else {
-        strokeColor = TKStyleManager.lightTextColor()
-        alpha = 0.3
-        lineWidth = 12
-      }
-    }
   }
   
 }

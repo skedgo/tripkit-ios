@@ -14,6 +14,7 @@ public protocol TKUISemaphoreDisplayable: TKUIImageAnnotationDisplayable {
   var bearing: NSNumber? { get }
   var canFlipImage: Bool { get }
   var isTerminal: Bool { get }
+  var selectionIdentifier: String? { get }
 }
 
 extension TKUISemaphoreView {
@@ -63,6 +64,14 @@ extension TKUISemaphoreView {
     let canFlip = imageURL == nil && (annotation as? TKUISemaphoreDisplayable)?.canFlipImage == true
     
     setHeadWith(image, imageURL: imageURL, imageIsTemplate: asTemplate, forBearing: bearing, andHeading: heading, inRed: terminal, canFlipImage: canFlip)
+  }
+  
+  public func updateSelection(for identifier: String?) {
+    guard let displayable = annotation as? TKUISemaphoreDisplayable else { return }
+    guard let target = identifier else { alpha = 1; return }
+    
+    let selected = displayable.selectionIdentifier == target
+    alpha = selected ? 1 : 0.3
   }
   
   @objc(rotateHeadForMagneticHeading:)
