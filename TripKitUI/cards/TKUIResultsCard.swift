@@ -124,7 +124,7 @@ public class TKUIResultsCard: TGTableCard {
       changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
       changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
       changedSortOrder: .empty(),
-      isVisible: .empty()
+      isVisible: isVisible.asSignal(onErrorSignalWith: .empty())
     )
     
     let mapInput: TKUIResultsViewModel.MapInput = (
@@ -229,6 +229,18 @@ public class TKUIResultsCard: TGTableCard {
     
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
+  }
+  
+  public override func didAppear(animated: Bool) {
+    super.didAppear(animated: animated)
+    
+    isVisible.onNext(true)
+  }
+  
+  public override func willDisappear(animated: Bool) {
+    super.willDisappear(animated: animated)
+    
+    isVisible.onNext(false)
   }
   
 }

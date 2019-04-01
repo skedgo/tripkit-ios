@@ -14,10 +14,22 @@ import RxSwift
 
 extension TKUIResultsViewModel {
   
-  static func fetchRealTimeUpdates(for tripGroups: Observable<[TripGroup]>) -> Observable<TKRealTimeUpdateProgress> {
+  static func fetchRealTimeUpdates(for tripGroups: Observable<[TripGroup]>, isVisible: Observable<Bool>) -> Observable<TKRealTimeUpdateProgress> {
     
-    return Observable<Int>
-      .interval(30, scheduler: MainScheduler.instance)
+    // We update when the timer fires and we're visible...
+    let tick = Observable<Int>.interval(30, scheduler: MainScheduler.instance)
+      .withLatestFrom(isVisible.startWith(true))
+      .filter { $0 }
+      .map { _ in }
+    
+    // ... or when we become visible
+    let updateOnAppear = isVisible
+      .filter { $0 }
+      .map { _ in }
+    
+    // Then fire of the actual update (but not more often than once every X secs)
+    return Observable.merge(tick, updateOnAppear)
+      .throttle(15, scheduler: MainScheduler.instance)
       .withLatestFrom(tripGroups)
       .flatMapLatest(TKBuzzRealTime.rx.update)
       .startWith(.idle)

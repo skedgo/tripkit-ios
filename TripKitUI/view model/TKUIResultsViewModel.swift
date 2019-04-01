@@ -74,7 +74,7 @@ public class TKUIResultsViewModel {
     fetchProgress = TKUIResultsViewModel.fetch(for: requestChanged, errorPublisher: errorPublisher)
       .asDriver(onErrorDriveWith: .empty())
 
-    realTimeUpdate = TKUIResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged)
+    realTimeUpdate = TKUIResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged, isVisible: inputs.isVisible.asObservable())
       .asDriver(onErrorDriveWith: .empty())
 
     sections = TKUIResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs)
