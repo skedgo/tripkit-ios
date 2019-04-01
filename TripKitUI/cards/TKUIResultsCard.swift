@@ -33,6 +33,7 @@ public class TKUIResultsCard: TGTableCard {
 
   private var viewModel: TKUIResultsViewModel!
   let disposeBag = DisposeBag()
+  private var realTimeBag = DisposeBag()
   
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   
@@ -47,7 +48,6 @@ public class TKUIResultsCard: TGTableCard {
     configureCell: TKUIResultsCard.cell
   )
   
-  private let isVisible = PublishSubject<Bool>()
   private let changedTime = PublishSubject<TKUIResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<Void>()
   
@@ -123,8 +123,7 @@ public class TKUIResultsCard: TGTableCard {
       tappedShowModes: tappedModes,
       changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
       changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
-      changedSortOrder: .empty(),
-      isVisible: isVisible.asSignal(onErrorSignalWith: .empty())
+      changedSortOrder: .empty()
     )
     
     let mapInput: TKUIResultsViewModel.MapInput = (
@@ -193,12 +192,6 @@ public class TKUIResultsCard: TGTableCard {
       })
       .disposed(by: disposeBag)
     
-    viewModel.realTimeUpdate
-      .drive(onNext: { _ in
-        // Indicate progress anywhere?
-      })
-      .disposed(by: disposeBag)
-
     viewModel.request
       .drive(onNext: TKUICustomization.shared.feedbackActiveItemHandler)
       .disposed(by: disposeBag)
@@ -234,13 +227,15 @@ public class TKUIResultsCard: TGTableCard {
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
     
-    isVisible.onNext(true)
+    viewModel.realTimeUpdate
+      .drive()
+      .disposed(by: realTimeBag)
   }
   
   public override func willDisappear(animated: Bool) {
     super.willDisappear(animated: animated)
     
-    isVisible.onNext(false)
+    realTimeBag = DisposeBag()
   }
   
 }

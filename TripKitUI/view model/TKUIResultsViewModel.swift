@@ -24,8 +24,7 @@ public class TKUIResultsViewModel {
     tappedShowModes: Signal<Void>,              // => return which modes to show
     changedDate: Signal<RouteBuilder.Time>,     // => update request + title
     changedModes: Signal<Void>,                 // => update request
-    changedSortOrder: Signal<TKTripCostType>,   // => update sorting
-    isVisible: Signal<Bool>
+    changedSortOrder: Signal<TKTripCostType>    // => update sorting
   )
 
   
@@ -74,7 +73,7 @@ public class TKUIResultsViewModel {
     fetchProgress = TKUIResultsViewModel.fetch(for: requestChanged, errorPublisher: errorPublisher)
       .asDriver(onErrorDriveWith: .empty())
 
-    realTimeUpdate = TKUIResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged, isVisible: inputs.isVisible.asObservable())
+    realTimeUpdate = TKUIResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged)
       .asDriver(onErrorDriveWith: .empty())
 
     sections = TKUIResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs)

@@ -239,7 +239,7 @@
 	
 	NSArray *servicesArray = responseObject[@"services"];
 	if (servicesArray.count == 0) {
-		DLog(@"Received no results.");
+    [TKLog verbose:@"TKBuzzRealTime" text:@"Received no results."];
 		return;
 	}
 	
