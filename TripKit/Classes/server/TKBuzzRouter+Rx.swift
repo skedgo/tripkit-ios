@@ -9,27 +9,45 @@
 import Foundation
 
 import RxSwift
-import RxCocoa
 
 extension TKBuzzRouter {
   enum RouterError : Error {
     case downloadFailed
+    case noTripFound
   }
 }
 
 extension Reactive where Base : TKBuzzRouter {
   
-  public func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext) -> Observable<Trip> {
-    return Observable.create { observer in
+  public func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext) -> Single<Trip> {
+    return Single.create { observer in
       self.base.downloadTrip(url, identifier: identifier, intoTripKitContext: context) { trip in
         if let trip = trip {
-          observer.onNext(trip)
-          observer.onCompleted()
+          observer(.success(trip))
         } else {
-          observer.onError(TKBuzzRouter.RouterError.downloadFailed)
+          observer(.error(TKBuzzRouter.RouterError.downloadFailed))
         }
       }
       return Disposables.create()
+    }
+  }
+  
+  public static func fetchBestTrip(for request: TripRequest) -> Single<Trip> {
+    var router: TKBuzzRouter! = TKBuzzRouter()
+    return Single.create { subscriber in
+      router.fetchBestTrip(for: request, success: { request, _ in
+        if let best = request.sortedVisibleTrips().first {
+          subscriber(.success(best))
+        } else {
+          subscriber(.error(TKBuzzRouter.RouterError.noTripFound))
+        }
+      }, failure: { error, _ in
+        subscriber(.error(error))
+      })
+      
+      return Disposables.create {
+        router = nil
+      }
     }
   }
   

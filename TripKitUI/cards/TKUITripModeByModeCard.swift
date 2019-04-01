@@ -71,10 +71,13 @@ public class TKUITripModeByModeCard: TGPageCard {
   /// mode-by-mode basis of a trip.
   ///
   /// - Parameter segment: Segment to focus on first
-  public init(startingOn segment: TKSegment, mapManager: TKUITripMapManager) throws {
-    guard segment.trip == mapManager.trip else {
+  public init(startingOn segment: TKSegment, mapManager: TKUITripMapManager? = nil) throws {
+    if let mapTrip = mapManager?.trip, segment.trip != mapTrip {
       throw Error.segmentTripDoesNotMatchMapManager
     }
+    
+    let tripMapManager = mapManager ?? TKUITripMapManager(trip: segment.trip)
+    self.tripMapManager = tripMapManager
     
     // TODO: Segment.index works generally, but not for the first and last
     //   card, i.e., departure and arrival as those don't have an index
@@ -82,7 +85,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     let cardSegments = segment.trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
     
     let segmentCards: [SegmentCards] = cardSegments.map {
-      let cards = TKUITripModeByModeCard.config.builder.cards(for: $0, mapManager: mapManager)
+      let cards = TKUITripModeByModeCard.config.builder.cards(for: $0, mapManager: tripMapManager)
       return SegmentCards(segmentIndex: $0.index, cards: cards)
     }
     let cards = segmentCards.flatMap { $0.cards }
@@ -91,8 +94,6 @@ public class TKUITripModeByModeCard: TGPageCard {
 
     let headerSegments = segment.trip.segments(with: .inSummary).compactMap { $0 as? TKSegment }
     self.headerSegmentIndices = headerSegments.map { $0.index }
-
-    self.tripMapManager = mapManager
     
     super.init(cards: cards, initialPage: initialPage ?? 0)
 
@@ -106,6 +107,12 @@ public class TKUITripModeByModeCard: TGPageCard {
     guard let first = mapManager.trip.segments.first else { preconditionFailure() }
     try! self.init(startingOn: first, mapManager: mapManager)
   }
+  
+  public convenience init(trip: Trip) {
+    guard let first = trip.segments.first else { preconditionFailure() }
+    try! self.init(startingOn: first)
+  }
+
   
   required init?(coder: NSCoder) {
     // TODO: Implement to support state-restoration
