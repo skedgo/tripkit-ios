@@ -7,6 +7,9 @@
 
 import Foundation
 
+import RxSwift
+import RxCocoa
+
 /// An annotation that can be displayed using TripKitUI's `TKUISemaphoreView`
 /// or just as a point on the map.
 public protocol TKUISemaphoreDisplayable: TKUIImageAnnotationDisplayable {
@@ -38,24 +41,16 @@ extension Notification.Name {
 extension TKUISemaphoreView {
   
   @objc
-  static func shouldObserve(_ annotation: MKAnnotation) -> Bool {
-    return annotation is NSObject && annotation is TKUISemaphoreDisplayable
-  }
-  
-  @objc
-  func observe(_ annotation: MKAnnotation) -> NSObjectProtocol? {
-    guard TKUISemaphoreView.shouldObserve(annotation) else { return nil }
+  func observe(_ annotation: MKAnnotation) {
+    self.objcDisposeBag = TKObjCDisposeBag()
     
-    return NotificationCenter.default.addObserver(forName: .TKUISemaphoreRequiresUpdate, object: annotation, queue: OperationQueue.main) { [weak self] notification in
-      guard
-        let self = self,
-        let displayable = notification.object as? TKUISemaphoreDisplayable,
-        annotation === displayable,
-        case .headWithTime(let time, let timeZone, let realTime) = displayable.semaphoreMode
-        else { return }
-      
-      self.setTime(time, isRealTime: realTime, in: timeZone, onSide: self.label)
-    }
+    guard annotation is NSObject, annotation is TKUISemaphoreDisplayable else { return }
+
+    NotificationCenter.default.rx.notification(.TKUISemaphoreRequiresUpdate, object: annotation)
+      .filter { $0.object is TKUISemaphoreDisplayable }
+      .map { ($0.object as? TKUISemaphoreDisplayable)?.semaphoreMode }
+      .bind(to: rx.mode)
+      .disposed(by: objcDisposeBag.disposeBag)
   }
 
   @objc
@@ -152,8 +147,21 @@ extension TKUISemaphoreView {
       return TripKitUIBundle.imageNamed("map-pin-pointer")
     }
   }
-
   
+}
+
+extension Reactive where Base == TKUISemaphoreView {
+  
+  var mode: Binder<TKUISemaphoreView.Mode?> {
+    return Binder(self.base) { semaphore, mode in
+      if case .headWithTime(let time, let timeZone, let realTime)? = mode {
+        semaphore.setTime(time, isRealTime: realTime, in: timeZone, onSide: semaphore.label)
+      } else {
+        semaphore.setTime(nil, isRealTime: false, in: .current, onSide: semaphore.label)
+      }
+    }
+  }
+ 
 }
 
 // MARK: Fix-Its

@@ -32,12 +32,12 @@ extension TKUITripModeByModeCard {
   }
   
   static func notifyOfUpdates(in trip: Trip) {
-    trip.segments
-      .map { Notification(name: .TKUISegmentUpdatedWithRealTimeData, object: $0) }
+    let segments = trip.segments
+      
+    segments.map { Notification(name: .TKUISegmentUpdatedWithRealTimeData, object: $0) }
       .forEach(NotificationCenter.default.post)
     
-    trip.segments(with: .onMap)
-      .map { Notification(name: .TKUISemaphoreRequiresUpdate, object: $0) }
+    segments.map { Notification(name: .TKUISemaphoreRequiresUpdate, object: $0) }
       .forEach(NotificationCenter.default.post)
   }
   

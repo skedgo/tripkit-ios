@@ -31,16 +31,10 @@
 
 @property (nonatomic, assign) SGSemaphoreLabel label;
 @property (nonatomic, assign) BOOL isFlipped;
-@property (nonatomic, strong) id observationToken;
 
 @end
 
 @implementation TKUISemaphoreView
-
-- (void)dealloc
-{
-  self.observationToken = nil;
-}
 
 - (id)initWithAnnotation:(id<MKAnnotation>)annotation
          reuseIdentifier:(NSString *)reuseIdentifier
@@ -90,16 +84,13 @@
 {
 	// stop observing the old
   BOOL didChange = (annotation != self.annotation);
-	if (didChange && self.observationToken != nil) {
-		self.observationToken = nil;
-	}
 	
 	// set the new
 	[super setAnnotation:annotation];
 	
 	// observe the new
-  if (didChange && [TKUISemaphoreView shouldObserve:annotation]) {
-    self.observationToken = [self observe:annotation];
+  if (didChange) {
+    [self observe:annotation];
 	}
 }
 
@@ -131,7 +122,7 @@
 	self.isFlipped = NO;
 	self.tiny = NO;
 	
-  self.observationToken = nil;
+  self.objcDisposeBag = [[TKObjCDisposeBag alloc] init];
   
 	[self setTimeFlagOnSide:SGSemaphoreLabelDisabled withTime:nil isRealTime:NO atTimeZone:nil orFrequency:nil];
 	

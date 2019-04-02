@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) SGSemaphoreLabel label;
 @property (nonatomic, readonly) UIImageView *headImageView;
+@property (nonatomic, strong) TKObjCDisposeBag *objcDisposeBag;
 
 @property (nonatomic, assign) BOOL tiny;
 
