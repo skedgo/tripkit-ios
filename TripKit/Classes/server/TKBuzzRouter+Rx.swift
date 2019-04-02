@@ -51,4 +51,21 @@ extension Reactive where Base : TKBuzzRouter {
     }
   }
   
+  public static func update(_ trip: Trip) -> Single<Bool> {
+    guard trip.wantsRealTimeUpdates else {
+      assertionFailure("Don't bother calling this for trips that don't want updates")
+      return .just(false)
+    }
+    
+    var helper: TKBuzzRouter! = TKBuzzRouter()
+    return Single.create { subscriber in
+      helper.update(trip) { _, didUpdate in
+        subscriber(.success(didUpdate))
+      }
+      return Disposables.create {
+        helper = nil
+      }
+    }
+  }
+  
 }

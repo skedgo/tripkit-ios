@@ -30,27 +30,13 @@ extension Reactive where Base: TKBuzzRealTime {
       .compactMap { $0.visibleTrip }
       .filter { $0.wantsRealTimeUpdates }
     
-    let individualUpdates = trips.map(update).map { $0.asObservable() }
+    let individualUpdates = trips
+      .map(TKBuzzRouter.rx.update)
+      .map { $0.asObservable() }
+    
     return Observable
       .combineLatest(individualUpdates) { _ in .updated }
       .startWith(.updating)
-  }
-  
-  private static func update(_ trip: Trip) -> Single<Bool> {
-    guard trip.wantsRealTimeUpdates else {
-      assertionFailure("Don't bother calling this for trips that don't want updates")
-      return .just(false)
-    }
-    
-    var helper: TKBuzzRouter! = TKBuzzRouter()
-    return Single.create { subscriber in
-      helper.update(trip) { _, didUpdate in
-        subscriber(.success(didUpdate))
-      }
-      return Disposables.create {
-        helper = nil
-      }
-    }
   }
   
 }

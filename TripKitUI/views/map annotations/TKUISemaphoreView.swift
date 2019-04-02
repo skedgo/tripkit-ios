@@ -29,6 +29,10 @@ extension TKUISemaphoreView {
   }
 }
 
+extension Notification.Name {
+  static let TKUISemaphoreRequiresUpdate = Notification.Name("TKUISemaphoreRequiresUpdate")
+}
+
 // MARK:
 
 extension TKUISemaphoreView {
@@ -36,6 +40,22 @@ extension TKUISemaphoreView {
   @objc
   static func shouldObserve(_ annotation: MKAnnotation) -> Bool {
     return annotation is NSObject && annotation is TKUISemaphoreDisplayable
+  }
+  
+  @objc
+  func observe(_ annotation: MKAnnotation) -> NSObjectProtocol? {
+    guard TKUISemaphoreView.shouldObserve(annotation) else { return nil }
+    
+    return NotificationCenter.default.addObserver(forName: .TKUISemaphoreRequiresUpdate, object: annotation, queue: OperationQueue.main) { [weak self] notification in
+      guard
+        let self = self,
+        let displayable = notification.object as? TKUISemaphoreDisplayable,
+        annotation === displayable,
+        case .headWithTime(let time, let timeZone, let realTime) = displayable.semaphoreMode
+        else { return }
+      
+      self.setTime(time, isRealTime: realTime, in: timeZone, onSide: self.label)
+    }
   }
 
   @objc

@@ -8,6 +8,8 @@
 
 import Foundation
 
+import RxSwift
+import RxCocoa
 import TGCardViewController
 
 public class TKUITripModeByModeCard: TGPageCard {
@@ -59,13 +61,18 @@ public class TKUITripModeByModeCard: TGPageCard {
   private let segmentCards: [SegmentCards]
   private let headerSegmentIndices: [Int]
   
-  private var segmentView: TKUITripSegmentsView? {
-    return headerAccessoryView as? TKUITripSegmentsView
+  private var headerSegmentsView: TKUITripSegmentsView? {
+    return TKUITripModeByModeCard.findSubview(TKUITripSegmentsView.self, in: headerAccessoryView)
+  }
+  private var headerETALabel: UILabel? {
+    return TKUITripModeByModeCard.findSubview(UILabel.self, in: headerAccessoryView)
   }
 
   private let feedbackGenerator = UISelectionFeedbackGenerator()
 
   private let tripMapManager: TKUITripMapManager
+  
+  private let disposeBag = DisposeBag()
 
   /// Constructs a page card configured for displaying the segments on a
   /// mode-by-mode basis of a trip.
@@ -92,12 +99,12 @@ public class TKUITripModeByModeCard: TGPageCard {
     let initialPage = SegmentCards.firstCardIndex(ofSegmentAt: segment.index, in: segmentCards)
     self.segmentCards = segmentCards
 
-    let headerSegments = segment.trip.segments(with: .inSummary).compactMap { $0 as? TKSegment }
+    let headerSegments = segment.trip.headerSegments
     self.headerSegmentIndices = headerSegments.map { $0.index }
     
     super.init(cards: cards, initialPage: initialPage ?? 0)
 
-    self.headerAccessoryView = buildSegmentsView(segments: headerSegments, selecting: segment.index)
+    self.headerAccessoryView = buildSegmentsView(segments: headerSegments, selecting: segment.index, trip: segment.trip)
     
     // Little hack for starting with selecting the first page on the map, too
     didMoveToPage(index: initialPage ?? 0)
@@ -112,6 +119,17 @@ public class TKUITripModeByModeCard: TGPageCard {
     guard let first = trip.segments.first else { preconditionFailure() }
     try! self.init(startingOn: first)
   }
+  
+  public override func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
+    super.didBuild(cardView: cardView, headerView: headerView)
+    
+    TKUITripModeByModeCard.realTimeUpdate(for: tripMapManager.trip)
+      .drive(onNext: { [unowned self] progress in
+        guard progress == .updated else { return }
+        self.realTimeUpdate(for: self.tripMapManager.trip) // TODO: Maybe the trip changed!
+      })
+      .disposed(by: disposeBag)
+  }
 
   
   required init?(coder: NSCoder) {
@@ -122,10 +140,9 @@ public class TKUITripModeByModeCard: TGPageCard {
   public override func didMoveToPage(index: Int) {
     super.didMoveToPage(index: index)
    
-    guard let segmentsView = self.headerAccessoryView as? TKUITripSegmentsView else { return }
     let segmentIndex = SegmentCards.segmentIndex(ofCardAtIndex: index, in: segmentCards)
     let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= segmentIndex } // exact segment might not be available!
-    segmentsView.select(segmentAtIndex: selectedHeaderIndex ?? 0)
+    headerSegmentsView?.select(segmentAtIndex: selectedHeaderIndex ?? 0)
     
     if let segment = tripMapManager.trip.segments.first(where: { $0.index == segmentIndex }) {
       tripMapManager.show(segment, animated: true)
@@ -137,9 +154,27 @@ public class TKUITripModeByModeCard: TGPageCard {
 
 // MARK: - Segments view in header
 
+fileprivate extension Trip {
+  var headerSegments: [TKSegment] {
+    return segments(with: .inSummary).compactMap { $0 as? TKSegment }
+  }
+}
+
 extension TKUITripModeByModeCard {
   
-  private func buildSegmentsView(segments: [TKSegment], selecting index: Int) -> TKUITripSegmentsView {
+  private static func findSubview<V: UIView>(_ type: V.Type, in header: UIView?) -> V? {
+    guard let stack = header as? UIStackView else { return nil }
+    return stack.arrangedSubviews.compactMap { $0 as? V }.first
+  }
+  
+  private static func headerTimeText(for trip: Trip) -> String {
+    let departure = TKStyleManager.timeString(trip.departureTime, for: trip.departureTimeZone)
+    let arrival   = TKStyleManager.timeString(trip.arrivalTime, for: trip.arrivalTimeZone ?? trip.departureTimeZone, relativeTo: trip.departureTimeZone)
+    return "\(departure) - \(arrival)"
+  }
+
+  private func buildSegmentsView(segments: [TKSegment], selecting index: Int, trip: Trip) -> UIView {
+    // the segments view
     let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= index } // exact segment might not be available!
 
     let segmentsView = TKUITripSegmentsView(frame: .zero)
@@ -153,12 +188,24 @@ extension TKUITripModeByModeCard {
     
     feedbackGenerator.prepare()
     
-    return segmentsView
+    // the label
+    let label = UILabel()
+    label.text = TKUITripModeByModeCard.headerTimeText(for: trip)
+    label.textColor = TKStyleManager.lightTextColor()
+    label.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    label.textAlignment = .center
+    
+    // combine them
+    let stack = UIStackView(arrangedSubviews: [segmentsView, label])
+    stack.axis = .vertical
+    stack.distribution = .fill
+    
+    return stack
   }
   
   @objc
   private func segmentTapped(_ recognizer: UITapGestureRecognizer) {
-    guard let segmentsView = self.segmentView
+    guard let segmentsView = self.headerSegmentsView
       else { assertionFailure(); return }
     
     let x = recognizer.location(in: segmentsView).x
@@ -174,6 +221,25 @@ extension TKUITripModeByModeCard {
     
     feedbackGenerator.selectionChanged()
     feedbackGenerator.prepare()
+  }
+  
+}
+
+// MARK: - Real-time update
+
+extension TKUITripModeByModeCard {
+  
+  func realTimeUpdate(for trip: Trip) {
+    // Update segment view in header
+    headerSegmentsView?.configure(forSegments: trip.headerSegments, allowSubtitles: true, allowInfoIcons: false)
+    
+    // Update ETA in header
+    headerETALabel?.text = TKUITripModeByModeCard.headerTimeText(for: trip)
+    
+    // TODO: Update trip map manager
+    
+    // Also pass on generic updates
+    TKUITripModeByModeCard.notifyOfUpdates(in: trip)
   }
   
 }
