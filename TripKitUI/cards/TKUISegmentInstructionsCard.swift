@@ -47,7 +47,21 @@ public class TKUISegmentInstructionCard: TGPlainCard {
     super.didBuild(cardView: cardView, headerView: headerView)
     
     instructionView.notesLabel.text = segment.notes
+
+    updateAccessoryViews(for: segment)
     
+    // accessory views depend on real-time data, so let's update
+    NotificationCenter.default.rx
+      .notification(.TKUISegmentUpdatedWithRealTimeData, object: segment)
+      .subscribe(onNext: { [weak self] _ in
+        guard let segment = self?.segment else { return }
+        self?.updateAccessoryViews(for: segment)
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  private func updateAccessoryViews(for segment: TKSegment) {
+    instructionView.accessoryStackView.removeAllSubviews()
     let accessoryViews = segment.buildAccessoryViews()
     accessoryViews.forEach(instructionView.accessoryStackView.addArrangedSubview)
   }
