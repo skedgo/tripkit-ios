@@ -12,6 +12,10 @@ import RxSwift
 import RxCocoa
 import TGCardViewController
 
+public protocol TKUITripModeByModeCardDelegate: class {
+  func modeByModeRequestsRebuildForNewSegments(_ card: TKUITripModeByModeCard, trip: Trip, currentSegment: TKSegment)
+}
+
 public class TKUITripModeByModeCard: TGPageCard {
   
   enum Error: Swift.Error {
@@ -24,6 +28,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   /// guarantueed to have cards, i.e., `cards` can be empty.
   fileprivate struct SegmentCards {
     let segmentIndex: Int
+    let segmentTemplateCode: Int
     let cards: [TGCard]
     
     /// What's the index of the first card for the provided `segment.index`,
@@ -58,6 +63,8 @@ public class TKUITripModeByModeCard: TGPageCard {
   }
   
   public static var config = Configuration.empty
+  
+  public weak var modeByModeDelegate: TKUITripModeByModeCardDelegate?
   
   private let viewModel: TKUITripModeByModeViewModel
   
@@ -101,7 +108,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     
     let segmentCards: [SegmentCards] = cardSegments.map {
       let cards = TKUITripModeByModeCard.config.builder.cards(for: $0, mapManager: tripMapManager)
-      return SegmentCards(segmentIndex: $0.index, cards: cards)
+      return SegmentCards(segmentIndex: $0.index, segmentTemplateCode: $0.templateHashCode, cards: cards)
     }
     let cards = segmentCards.flatMap { $0.cards }
     let initialPage = SegmentCards.firstCardIndex(ofSegmentAt: segment.index, in: segmentCards)
@@ -237,7 +244,27 @@ extension TKUITripModeByModeCard {
 
 extension TKUITripModeByModeCard {
   
+  func segmentsMatch(_ newSegments: [TKSegment]) -> Bool {
+    // TODO: This should also change if something else about the segments
+    //   such as if there are alerts inserted, which the builder might create
+    //   cards for. So ideally, we should pass this to the builder.
+    
+    let oldTemplates = segmentCards.map { $0.segmentTemplateCode }
+    let newTemplates = newSegments.map { $0.templateHashCode }
+    return oldTemplates == newTemplates
+  }
+  
   func realTimeUpdate(for trip: Trip) {
+    assert(trip == tripMapManager.trip, "Uh-oh, trip changed!")
+    
+    let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
+    guard segmentsMatch(cardSegments) else {
+      let segmentIndex = SegmentCards.segmentIndex(ofCardAtIndex: currentPageIndex, in: segmentCards)
+      let segment = cardSegments.first(where: { $0.index == segmentIndex }) ?? cardSegments.first!
+      self.modeByModeDelegate?.modeByModeRequestsRebuildForNewSegments(self, trip: trip, currentSegment: segment)
+      return
+    }
+    
     // Update segment view in header
     headerSegmentsView?.configure(forSegments: trip.headerSegments, allowSubtitles: true, allowInfoIcons: false)
     

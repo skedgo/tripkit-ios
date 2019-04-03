@@ -1,5 +1,5 @@
 //
-//  TKUITripModeByModeCard+ViewModel.swift
+//  TKUITripModeByModeCard+RealTime.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 01.04.19.
