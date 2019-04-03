@@ -14,29 +14,11 @@ import RxSwift
 
 extension TKUIResultsViewModel {
   
-  static func fetchRealTimeUpdates(for tripGroups: Observable<[TripGroup]>) -> Observable<TKRealTimeUpdateProgress> {    
+  static func fetchRealTimeUpdates(for tripGroups: Observable<[TripGroup]>) -> Observable<TKRealTimeUpdateProgress<Void>> {
     return Observable<Int>.interval(30, scheduler: MainScheduler.instance)
       .withLatestFrom(tripGroups)
       .flatMapLatest(TKBuzzRealTime.rx.update)
       .startWith(.idle)
-  }
-  
-}
-
-extension Reactive where Base: TKBuzzRealTime {
-  
-  static func update(tripGroups: [TripGroup]) -> Observable<TKRealTimeUpdateProgress> {
-    let trips = tripGroups
-      .compactMap { $0.visibleTrip }
-      .filter { $0.wantsRealTimeUpdates }
-    
-    let individualUpdates = trips
-      .map(TKBuzzRouter.rx.update)
-      .map { $0.asObservable() }
-    
-    return Observable
-      .combineLatest(individualUpdates) { _ in .updated }
-      .startWith(.updating)
   }
   
 }

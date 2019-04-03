@@ -170,7 +170,7 @@ public class TKUIResultsViewModel {
   ///
   /// - note: Real-updates are only enabled while you're connected
   ///         to this driver.
-  public let realTimeUpdate: Driver<TKRealTimeUpdateProgress>
+  public let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Void>>
   
   let error: Signal<Error>
   

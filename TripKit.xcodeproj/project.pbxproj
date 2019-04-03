@@ -571,6 +571,10 @@
 		3ABCA7CD225202500072EB25 /* TKUIResultsViewModel+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABCA7CC225202500072EB25 /* TKUIResultsViewModel+Content.swift */; };
 		3ABCA7CF225202EF0072EB25 /* TKUIResultsViewModel+CalculateRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABCA7CE225202EF0072EB25 /* TKUIResultsViewModel+CalculateRoutes.swift */; };
 		3ABCA7D5225255980072EB25 /* TKUITripModeByModeCard+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABCA7D4225255980072EB25 /* TKUITripModeByModeCard+ViewModel.swift */; };
+		3ABCA7DF2254DE220072EB25 /* TKUITripModeByModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABCA7DE2254DE220072EB25 /* TKUITripModeByModeViewModel.swift */; };
+		3ABCA7E12254DF030072EB25 /* Notification+TripKitUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABCA7E02254DF030072EB25 /* Notification+TripKitUI.swift */; };
+		3ABCA7E32254E18B0072EB25 /* TKBuzzRealTime+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABCA7E22254E18B0072EB25 /* TKBuzzRealTime+Rx.swift */; };
+		3ABCA7E42254E18B0072EB25 /* TKBuzzRealTime+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABCA7E22254E18B0072EB25 /* TKBuzzRealTime+Rx.swift */; };
 		3ABD101B20FE2CAC00693FF8 /* SGTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ABD101920FE2CAC00693FF8 /* SGTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABD101C20FE2CAC00693FF8 /* SGTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD101A20FE2CAC00693FF8 /* SGTableCell.m */; };
 		3AC17E9D207F548E0006794F /* TKImage+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC17E9C207F548E0006794F /* TKImage+TripKit.swift */; };
@@ -1136,6 +1140,9 @@
 		3ABCA7CC225202500072EB25 /* TKUIResultsViewModel+Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIResultsViewModel+Content.swift"; sourceTree = "<group>"; };
 		3ABCA7CE225202EF0072EB25 /* TKUIResultsViewModel+CalculateRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIResultsViewModel+CalculateRoutes.swift"; sourceTree = "<group>"; };
 		3ABCA7D4225255980072EB25 /* TKUITripModeByModeCard+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripModeByModeCard+ViewModel.swift"; sourceTree = "<group>"; };
+		3ABCA7DE2254DE220072EB25 /* TKUITripModeByModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripModeByModeViewModel.swift; sourceTree = "<group>"; };
+		3ABCA7E02254DF030072EB25 /* Notification+TripKitUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+TripKitUI.swift"; sourceTree = "<group>"; };
+		3ABCA7E22254E18B0072EB25 /* TKBuzzRealTime+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKBuzzRealTime+Rx.swift"; sourceTree = "<group>"; };
 		3ABD101920FE2CAC00693FF8 /* SGTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTableCell.h; sourceTree = "<group>"; };
 		3ABD101A20FE2CAC00693FF8 /* SGTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTableCell.m; sourceTree = "<group>"; };
 		3AC17E9C207F548E0006794F /* TKImage+TripKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKImage+TripKit.swift"; sourceTree = "<group>"; };
@@ -1655,6 +1662,7 @@
 				3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */,
 				3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */,
 				3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */,
+				3ABCA7E02254DF030072EB25 /* Notification+TripKitUI.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -2052,6 +2060,7 @@
 				3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */,
 				3AB6C68E1D1CD08E0089F687 /* TKBuzzRealTime.h */,
 				3AB6C68F1D1CD08E0089F687 /* TKBuzzRealTime.m */,
+				3ABCA7E22254E18B0072EB25 /* TKBuzzRealTime+Rx.swift */,
 				3AB6C6901D1CD08E0089F687 /* TKBuzzRouter.h */,
 				3AB6C6911D1CD08E0089F687 /* TKBuzzRouter.m */,
 				3A15D8D81D9CE08100BADBEA /* TKBuzzRouter+Rx.swift */,
@@ -2132,6 +2141,7 @@
 				3ABCA7CA225202130072EB25 /* TKUIResultsViewModel+RealTime.swift */,
 				3ADC802B2114861500A318B9 /* TKUIResultsViewModel+Restoration.swift */,
 				D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */,
+				3ABCA7DE2254DE220072EB25 /* TKUITripModeByModeViewModel.swift */,
 				3AFD393C20D9333500FDC7D0 /* TKUITripOverviewViewModel.swift */,
 				3A26E1AC20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift */,
 				3A383CBA22315A4D00361596 /* TKUITripOverviewViewModel+Fetch.swift */,
@@ -2979,6 +2989,7 @@
 				3ABBDADC2032135A00205042 /* NSDate+Helpers.m in Sources */,
 				3A6DAED620404374009282FE /* Loc+TripKitUI.swift in Sources */,
 				3ABBDA522032132D00205042 /* Trip.swift in Sources */,
+				3ABCA7E42254E18B0072EB25 /* TKBuzzRealTime+Rx.swift in Sources */,
 				3ABBDAF52032136100205042 /* TKLocationManager.swift in Sources */,
 				3AA800F721870DB6008CFB6D /* TKAvailabilityFetcher.swift in Sources */,
 				3ABBDA122032131E00205042 /* Loc+TripKit.swift in Sources */,
@@ -3056,6 +3067,7 @@
 				3A682F2020F3F8A900E05195 /* TKUIRoutingSupportView.swift in Sources */,
 				3A67698420EE3A6F0044663F /* TKUIAutocompletionViewModel.swift in Sources */,
 				3AFD394A20D9333500FDC7D0 /* TKUIResultsCard.swift in Sources */,
+				3ABCA7E12254DF030072EB25 /* Notification+TripKitUI.swift in Sources */,
 				3AA800EE2186F561008CFB6D /* TKUISheetViewController.swift in Sources */,
 				3AFD397A20D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift in Sources */,
 				3AFD394620D9333500FDC7D0 /* TKUIRoutesViewController.swift in Sources */,
@@ -3116,6 +3128,7 @@
 				3A682F2220F3F8ED00E05195 /* TKUIResultsCard+Errors.swift in Sources */,
 				3A6DF14D202C8EB80084CB2C /* TKUIAlertInfoView.swift in Sources */,
 				3A6DF109202C8EB80084CB2C /* TKUIMapButtonView.swift in Sources */,
+				3ABCA7DF2254DE220072EB25 /* TKUITripModeByModeViewModel.swift in Sources */,
 				3A309215224DFAE2005D7E76 /* TKUIPolylineRenderer.swift in Sources */,
 				3A6E7D4020EFBD4900013253 /* TKUISegmentMovingCell.swift in Sources */,
 				D39ECD86205A007A00E09474 /* TKUISectionedAlertViewController.swift in Sources */,
@@ -3178,6 +3191,7 @@
 				3A6DAED120402686009282FE /* Loc+TripKitInterApp.swift in Sources */,
 				3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */,
 				3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */,
+				3ABCA7E32254E18B0072EB25 /* TKBuzzRealTime+Rx.swift in Sources */,
 				3AB6C6D21D1CD08E0089F687 /* TKNextSegmentScorer.m in Sources */,
 				3AF94B221F0BFDEF00500940 /* TKStyleManager.swift in Sources */,
 				3AFFABB91F06854F00147990 /* TKObjcDateHelper.swift in Sources */,

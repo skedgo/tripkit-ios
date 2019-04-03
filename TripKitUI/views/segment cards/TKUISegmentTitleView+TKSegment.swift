@@ -51,7 +51,7 @@ extension TKUISegmentTitleView {
     disposeBag = DisposeBag()
     
     NotificationCenter.default.rx
-      .notification(.TKUISegmentUpdatedWithRealTimeData, object: segment)
+      .notification(.TKUIUpdatedRealTimeData, object: segment)
       .subscribe(onNext: { [weak self] _ in
         self?.update(for: segment, mode: mode)
       })

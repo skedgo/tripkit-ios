@@ -32,10 +32,6 @@ extension TKUISemaphoreView {
   }
 }
 
-extension Notification.Name {
-  static let TKUISemaphoreRequiresUpdate = Notification.Name("TKUISemaphoreRequiresUpdate")
-}
-
 // MARK:
 
 extension TKUISemaphoreView {
@@ -46,7 +42,7 @@ extension TKUISemaphoreView {
     
     guard annotation is NSObject, annotation is TKUISemaphoreDisplayable else { return }
 
-    NotificationCenter.default.rx.notification(.TKUISemaphoreRequiresUpdate, object: annotation)
+    NotificationCenter.default.rx.notification(.TKUIUpdatedRealTimeData, object: annotation)
       .filter { $0.object is TKUISemaphoreDisplayable }
       .map { ($0.object as? TKUISemaphoreDisplayable)?.semaphoreMode }
       .bind(to: rx.mode)

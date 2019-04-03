@@ -16,6 +16,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   
   enum Error: Swift.Error {
     case segmentTripDoesNotMatchMapManager
+    case segmentHasNoTrip
   }
   
   /// Storage of information of what the cards are used for the segment at a
@@ -58,6 +59,8 @@ public class TKUITripModeByModeCard: TGPageCard {
   
   public static var config = Configuration.empty
   
+  private let viewModel: TKUITripModeByModeViewModel
+  
   private let segmentCards: [SegmentCards]
   private let headerSegmentIndices: [Int]
   
@@ -79,17 +82,22 @@ public class TKUITripModeByModeCard: TGPageCard {
   ///
   /// - Parameter segment: Segment to focus on first
   public init(startingOn segment: TKSegment, mapManager: TKUITripMapManager? = nil) throws {
+    guard let trip = segment.trip else {
+      throw Error.segmentHasNoTrip
+    }
     if let mapTrip = mapManager?.trip, segment.trip != mapTrip {
       throw Error.segmentTripDoesNotMatchMapManager
     }
     
-    let tripMapManager = mapManager ?? TKUITripMapManager(trip: segment.trip)
+    self.viewModel = TKUITripModeByModeViewModel(trip: trip)
+    
+    let tripMapManager = mapManager ?? TKUITripMapManager(trip: trip)
     self.tripMapManager = tripMapManager
     
     // TODO: Segment.index works generally, but not for the first and last
     //   card, i.e., departure and arrival as those don't have an index
     
-    let cardSegments = segment.trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
+    let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
     
     let segmentCards: [SegmentCards] = cardSegments.map {
       let cards = TKUITripModeByModeCard.config.builder.cards(for: $0, mapManager: tripMapManager)
@@ -99,12 +107,12 @@ public class TKUITripModeByModeCard: TGPageCard {
     let initialPage = SegmentCards.firstCardIndex(ofSegmentAt: segment.index, in: segmentCards)
     self.segmentCards = segmentCards
 
-    let headerSegments = segment.trip.headerSegments
+    let headerSegments = trip.headerSegments
     self.headerSegmentIndices = headerSegments.map { $0.index }
     
     super.init(cards: cards, initialPage: initialPage ?? 0)
 
-    self.headerAccessoryView = buildSegmentsView(segments: headerSegments, selecting: segment.index, trip: segment.trip)
+    self.headerAccessoryView = buildSegmentsView(segments: headerSegments, selecting: segment.index, trip: trip)
     
     // Little hack for starting with selecting the first page on the map, too
     didMoveToPage(index: initialPage ?? 0)
@@ -123,10 +131,10 @@ public class TKUITripModeByModeCard: TGPageCard {
   public override func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     super.didBuild(cardView: cardView, headerView: headerView)
     
-    TKUITripModeByModeCard.realTimeUpdate(for: tripMapManager.trip)
+    viewModel.realTimeUpdate
       .drive(onNext: { [unowned self] progress in
-        guard progress == .updated else { return }
-        self.realTimeUpdate(for: self.tripMapManager.trip) // TODO: Maybe the trip changed!
+        guard case .updated(let updatedTrip) = progress else { return }
+        self.realTimeUpdate(for: updatedTrip)
       })
       .disposed(by: disposeBag)
   }
