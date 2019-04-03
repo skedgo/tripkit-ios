@@ -59,6 +59,7 @@ public extension TKUITripOverviewCard {
         assertionFailure(); return
       }
       let pageCard = try! TKUITripModeByModeCard(startingOn: segment, mapManager: mapManager)
+      pageCard.modeByModeDelegate = card
       card.controller?.push(pageCard)
     }
     
@@ -71,6 +72,7 @@ public extension TKUITripOverviewCard {
         assertionFailure(); return
       }
       let pageCard = TKUITripModeByModeCard(mapManager: mapManager)
+      pageCard.modeByModeDelegate = card
       card.controller?.push(pageCard)
     }
     
@@ -88,5 +90,17 @@ public extension TKUITripOverviewCard {
     ///
     /// Called when a trip overview card gets presented.
     public var tripActionsFactory: ((Trip) -> [TKUITripOverviewCardAction])?
+  }
+}
+
+extension TKUITripOverviewCard: TKUITripModeByModeCardDelegate {
+  public func modeByModeRequestsRebuildForNewSegments(_ card: TKUITripModeByModeCard, trip: Trip, currentSegment: TKSegment) {
+    TKLog.debug("TKUITripOverviewCard") { "Swapping page card as segments changed." }
+    
+    guard let mapManager = card.mapManager as? TKUITripMapManager else {
+      assertionFailure(); return
+    }
+    let newPager = try! TKUITripModeByModeCard(startingOn: currentSegment, mapManager: mapManager)
+    controller?.swap(for: newPager, animated: true)
   }
 }

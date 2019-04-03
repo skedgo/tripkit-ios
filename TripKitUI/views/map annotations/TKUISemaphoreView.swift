@@ -7,6 +7,9 @@
 
 import Foundation
 
+import RxSwift
+import RxCocoa
+
 /// An annotation that can be displayed using TripKitUI's `TKUISemaphoreView`
 /// or just as a point on the map.
 public protocol TKUISemaphoreDisplayable: TKUIImageAnnotationDisplayable {
@@ -34,8 +37,16 @@ extension TKUISemaphoreView {
 extension TKUISemaphoreView {
   
   @objc
-  static func shouldObserve(_ annotation: MKAnnotation) -> Bool {
-    return annotation is NSObject && annotation is TKUISemaphoreDisplayable
+  func observe(_ annotation: MKAnnotation) {
+    self.objcDisposeBag = TKObjCDisposeBag()
+    
+    guard annotation is NSObject, annotation is TKUISemaphoreDisplayable else { return }
+
+    NotificationCenter.default.rx.notification(.TKUIUpdatedRealTimeData, object: annotation)
+      .filter { $0.object is TKUISemaphoreDisplayable }
+      .map { ($0.object as? TKUISemaphoreDisplayable)?.semaphoreMode }
+      .bind(to: rx.mode)
+      .disposed(by: objcDisposeBag.disposeBag)
   }
 
   @objc
@@ -132,8 +143,21 @@ extension TKUISemaphoreView {
       return TripKitUIBundle.imageNamed("map-pin-pointer")
     }
   }
-
   
+}
+
+extension Reactive where Base == TKUISemaphoreView {
+  
+  var mode: Binder<TKUISemaphoreView.Mode?> {
+    return Binder(self.base) { semaphore, mode in
+      if case .headWithTime(let time, let timeZone, let realTime)? = mode {
+        semaphore.setTime(time, isRealTime: realTime, in: timeZone, onSide: semaphore.label)
+      } else {
+        semaphore.setTime(nil, isRealTime: false, in: .current, onSide: semaphore.label)
+      }
+    }
+  }
+ 
 }
 
 // MARK: Fix-Its

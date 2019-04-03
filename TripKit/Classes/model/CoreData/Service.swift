@@ -123,7 +123,7 @@ extension Service {
       return segment.segmentTemplate?.modeInfo
     }
 
-    assertionFailure("Got no mode, visits or segments!")
+    TKLog.info("Service", text: "Got no mode, visits or segments!")
     return nil
   }
 

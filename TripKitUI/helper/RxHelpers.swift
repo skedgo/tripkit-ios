@@ -20,6 +20,15 @@ extension Driver where S == DriverSharingStrategy {
   
 }
 
+extension Signal where S == SignalSharingStrategy {
+  
+  func startWithOptional(_ element: Element?) -> Observable<Element?> {
+    return map { $0 as Element? }.asObservable().startWith(element)
+  }
+  
+}
+
+
 extension TableViewSectionedDataSource where S : SectionModelType, S.Item : Equatable {
   
   func indexPath(of needle: S.Item?) -> IndexPath? {

@@ -22,9 +22,9 @@ import TGCardViewController
 public protocol TKUIResultsMapManagerType: TGCompatibleMapManager {
   var viewModel: TKUIResultsViewModel? { get set }
   
-  var droppedPin: Driver<CLLocationCoordinate2D> { get }
+  var droppedPin: Signal<CLLocationCoordinate2D> { get }
   
-  var selectedMapRoute: Driver<TKUIResultsViewModel.MapRouteItem> { get }
+  var selectedMapRoute: Signal<TKUIResultsViewModel.MapRouteItem> { get }
 }
 
 class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
@@ -40,14 +40,14 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
   
   private var dropPinRecognizer = UILongPressGestureRecognizer()
   private var droppedPinPublisher = PublishSubject<CLLocationCoordinate2D>()
-  var droppedPin: Driver<CLLocationCoordinate2D> {
-    return droppedPinPublisher.asDriver(onErrorDriveWith: Driver.empty())
+  var droppedPin: Signal<CLLocationCoordinate2D> {
+    return droppedPinPublisher.asSignal(onErrorSignalWith: .empty())
   }
 
   private var tapRecognizer = UITapGestureRecognizer()
   private var selectedRoutePublisher = PublishSubject<TKUIResultsViewModel.MapRouteItem>()
-  var selectedMapRoute: Driver<TKUIResultsViewModel.MapRouteItem> {
-    return selectedRoutePublisher.asDriver(onErrorDriveWith: Driver.empty())
+  var selectedMapRoute: Signal<TKUIResultsViewModel.MapRouteItem> {
+    return selectedRoutePublisher.asSignal(onErrorSignalWith: .empty())
   }
 
   private var disposeBag = DisposeBag()

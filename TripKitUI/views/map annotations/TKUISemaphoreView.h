@@ -20,25 +20,28 @@ typedef NS_ENUM(NSInteger, SGSemaphoreLabel) {
   SGSemaphoreLabelOnRight
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TKUISemaphoreView : MKAnnotationView
 
 @property (nonatomic, readonly) SGSemaphoreLabel label;
 @property (nonatomic, readonly) UIImageView *headImageView;
+@property (nonatomic, strong) TKObjCDisposeBag *objcDisposeBag;
 
 @property (nonatomic, assign) BOOL tiny;
 
 // Initialisers
 
 - (id)initWithAnnotation:(id<MKAnnotation>)annotation
-				 reuseIdentifier:(NSString *)reuseIdentifier
+				 reuseIdentifier:(nullable NSString *)reuseIdentifier
 						 withHeading:(CLLocationDirection)heading;
 
 // Helpers
 
-- (void)setHeadWithImage:(UIImage *)image
-                imageURL:(NSURL *)imageURL
+- (void)setHeadWithImage:(nullable UIImage *)image
+                imageURL:(nullable NSURL *)imageURL
          imageIsTemplate:(BOOL)asTemplate
-              forBearing:(NSNumber *)bearing
+              forBearing:(nullable NSNumber *)bearing
 							andHeading:(CLLocationDirection)heading
                    inRed:(BOOL)red
 						canFlipImage:(BOOL)canFlipImage;
@@ -48,9 +51,11 @@ typedef NS_ENUM(NSInteger, SGSemaphoreLabel) {
 
 - (void)flipHead:(BOOL)isFlipped;
 
-- (void)setTime:(NSDate *)timeStamp
+- (void)setTime:(nullable NSDate *)timeStamp
      isRealTime:(BOOL)isRealTime
 		 inTimeZone:(NSTimeZone *)timezone
          onSide:(SGSemaphoreLabel)side;
 
 @end
+
+NS_ASSUME_NONNULL_END

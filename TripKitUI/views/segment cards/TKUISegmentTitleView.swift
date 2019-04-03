@@ -8,6 +8,8 @@
 
 import UIKit
 
+import RxSwift
+
 import TGCardViewController
 
 public class TKUISegmentTitleView: UIView {
@@ -19,6 +21,8 @@ public class TKUISegmentTitleView: UIView {
   @IBOutlet weak var subsubtitleLabel: UILabel!
   
   @IBOutlet public weak var dismissButton: UIButton!
+  
+  var disposeBag: DisposeBag!
   
   public static func newInstance() -> TKUISegmentTitleView {
     return Bundle(for: TKUISegmentTitleView.self).loadNibNamed("TKUISegmentTitleView", owner: self, options: nil)?.first as! TKUISegmentTitleView

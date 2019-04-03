@@ -8,6 +8,8 @@
 
 import UIKit
 
+import RxSwift
+
 import TripKit
 
 extension TKUISegmentTitleView {
@@ -18,6 +20,12 @@ extension TKUISegmentTitleView {
   }
   
   public func configure(for segment: TKSegment, mode: SegmentMode = .onSegment) {
+    update(for: segment, mode: mode)
+    
+    monitorUpdates(for: segment, mode: mode)
+  }
+  
+  private func update(for segment: TKSegment, mode: SegmentMode) {
     let title: String
     let subtitle: String?
     
@@ -37,6 +45,18 @@ extension TKUISegmentTitleView {
     subtitleLabel.text = subtitle
     
     modeIcon.setImage(with: segment.tripSegmentModeImageURL, asTemplate: segment.tripSegmentModeImageIsTemplate, placeholder: segment.tripSegmentModeImage)
+  }
+  
+  private func monitorUpdates(for segment: TKSegment, mode: SegmentMode) {
+    disposeBag = DisposeBag()
+    
+    NotificationCenter.default.rx
+      .notification(.TKUIUpdatedRealTimeData, object: segment)
+      .subscribe(onNext: { [weak self] _ in
+        self?.update(for: segment, mode: mode)
+      })
+      .disposed(by: disposeBag)
+    
   }
   
 }
