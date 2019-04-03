@@ -51,6 +51,7 @@ extension Reactive where Base : TKBuzzRouter {
     }
   }
   
+  // TODO: Move to TKBuzzRealTime
   public static func update(_ trip: Trip) -> Single<Bool> {
     guard trip.wantsRealTimeUpdates else {
       assertionFailure("Don't bother calling this for trips that don't want updates")
