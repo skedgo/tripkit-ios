@@ -14,6 +14,7 @@ public protocol TKUIDepartureCellContentDataSource {
   var placeHolderImage: UIImage? { get }
   var imageURL: URL? { get }
   var imageIsTemplate: Bool { get }
+  var imageTintColor: UIColor? { get }
   var lineColor: UIColor? { get }
   var title: NSAttributedString { get }
   var subtitle: String? { get }
@@ -97,6 +98,7 @@ extension TKUIDepartureCell {
     
     serviceColorView.backgroundColor = dataSource.lineColor
     serviceImageView.setImage(with: dataSource.imageURL, asTemplate: dataSource.imageIsTemplate, placeholder: dataSource.placeHolderImage)
+    serviceImageView.tintColor = dataSource.imageTintColor ?? TKStyleManager.darkTextColor()
     
     titleLabel.attributedText = dataSource.title
     subtitleLabel.text = dataSource.subtitle
