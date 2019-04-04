@@ -37,21 +37,6 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
   @objc public init(with annotation: MKAnnotation?, reuseIdentifier: String?) {
     super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
     updated(with: annotation)
-    
-    // Vehicle color needs to change following real-time update.
-    if let vehicle = annotation as? Vehicle {
-      vehicle.rx.observeWeakly(Data.self, "componentsData")
-        .filter { $0 != nil }
-        .map { componentsData -> UIColor? in
-          let components = Vehicle.components(from: componentsData!)
-          return Vehicle.averageOccupancy(in: components)?.color
-        }
-        .subscribe(onNext: { [weak self] color in
-          guard let color = color else { return }
-          self?.vehicleShape?.color = color
-        })
-        .disposed(by: disposeBag)
-    }
   }
   
   required public init?(coder aDecoder: NSCoder) {
@@ -147,6 +132,25 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     if let bearing = vehicle.bearing?.floatValue {
       rotateVehicle(bearingAngle: CLLocationDirection(bearing))
     }
+    
+    observe(vehicle)
+  }
+  
+  private func observe(_ vehicle: Vehicle) {
+    
+    // Vehicle color needs to change following real-time update.
+    vehicle.rx.observeWeakly(Data.self, "componentsData")
+      .filter { $0 != nil }
+      .map { componentsData -> UIColor? in
+        let components = Vehicle.components(from: componentsData!)
+        return Vehicle.averageOccupancy(in: components)?.color
+      }
+      .subscribe(onNext: { [weak self] color in
+        guard let color = color else { return }
+        self?.vehicleShape?.color = color
+      })
+      .disposed(by: disposeBag)
+
   }
   
   // MARK: - Orientation.
