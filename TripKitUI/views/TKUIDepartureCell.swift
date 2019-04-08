@@ -82,6 +82,13 @@ public class TKUIDepartureCell: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
   
+  public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    super.setHighlighted(highlighted, animated: animated)
+    UIView.animate(withDuration: animated ? 0.25: 0) {
+      self.contentView.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : .white
+    }
+  }
+  
   public override func prepareForReuse() {
     super.prepareForReuse()
     disposeBag = DisposeBag()
