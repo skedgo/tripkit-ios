@@ -21,6 +21,7 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 
 @interface TKServer ()
 
+@property (nonatomic, strong) NSOperationQueue* skedGoQueryQueue;
 @property (nonatomic, strong) TKRegion* region;
 @property (nonatomic, copy)   NSArray<NSURL *>* regionServers;
 @property (nonatomic, copy)   NSArray<NSBundle *>* fileBundles;
@@ -339,22 +340,24 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                     success:(TKServerFullSuccessBlock)success
                     failure:(TKServerFailureBlock)failure
 {
-  [self initiateDataTaskWithMethod:method
-                              path:path
-                        parameters:parameters
-                           headers:headers
-                        customData:customData
-                   waitForResponse:NO
-                         forRegion:region
-                       backupIndex:0
-                    callbackOnMain:callbackOnMain
-                           success:success
-                           failure:failure
-                    previousStatus:0
-                   previousHeaders:@{}
-                  previousResponse:nil
-                      previousData:nil
-                     previousError:nil];
+  [self.skedGoQueryQueue addOperationWithBlock:^{
+    [self initiateDataTaskWithMethod:method
+                                path:path
+                          parameters:parameters
+                             headers:headers
+                          customData:customData
+                     waitForResponse:NO
+                           forRegion:region
+                         backupIndex:0
+                      callbackOnMain:callbackOnMain
+                             success:success
+                             failure:failure
+                      previousStatus:0
+                     previousHeaders:@{}
+                    previousResponse:nil
+                        previousData:nil
+                       previousError:nil];
+  }];
 }
 
 - (nullable id)initiateSyncRequestWithMethod:(NSString *)method
@@ -490,6 +493,10 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
     
     self.lastServerType = [[NSUserDefaults sharedDefaults] integerForKey:TKDefaultsKeyServerType];;
     self.lastDevelopmentServer = [TKServer developmentServer];
+    
+    self.skedGoQueryQueue = [[NSOperationQueue alloc] init];
+    self.skedGoQueryQueue.qualityOfService = NSQualityOfServiceUserInitiated;
+    self.skedGoQueryQueue.name = @"com.skedgo.tripkit.server-queue";
   }
   
   return self;
@@ -514,6 +521,7 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 {
 #ifdef DEBUG
   ZAssert(! wait || ! [NSThread isMainThread], @"Don't wait on the main thread!");
+  ZAssert(wait || [[NSOperationQueue currentQueue] isEqual:self.skedGoQueryQueue], @"Should start async data tasks on dedicated queue as we're modifying local variables.");
 #endif
   
   // update region and index first as this might invalidate the client
@@ -571,22 +579,24 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   
   // Backup handler
   void (^failOverBlock)(NSInteger, NSDictionary<NSString *, id> *,  id, NSData *, NSError *) = ^(NSInteger status, NSDictionary<NSString *, id> *headers, id responseObject, NSData *data, NSError *error) {
-    [self initiateDataTaskWithMethod:method
-                                path:path
-                          parameters:parameters
-                             headers:headers
-                          customData:customData
-                     waitForResponse:wait
-                           forRegion:region
-                         backupIndex:backupIndex + 1
-                      callbackOnMain:callbackOnMain
-                             success:success
-                             failure:failure
-                      previousStatus:status
-                     previousHeaders:headers
-                    previousResponse:responseObject
-                        previousData:data
-                       previousError:error];
+    [self.skedGoQueryQueue addOperationWithBlock:^{
+      [self initiateDataTaskWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               headers:headers
+                            customData:customData
+                       waitForResponse:wait
+                             forRegion:region
+                           backupIndex:backupIndex + 1
+                        callbackOnMain:callbackOnMain
+                               success:success
+                               failure:failure
+                        previousStatus:status
+                       previousHeaders:headers
+                      previousResponse:responseObject
+                          previousData:data
+                         previousError:error];
+    }];
   };
   
   // hit the main client
