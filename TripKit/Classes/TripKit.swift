@@ -41,6 +41,11 @@ public enum TripKit {
     NSKeyedUnarchiver.setClass(TKModeCoordinate.self, forClassName: "TripKit.STKModeCoordinate")
     NSKeyedUnarchiver.setClass(TKModeCoordinate.self, forClassName: "TKModeCoordinate")
     NSKeyedUnarchiver.setClass(TKModeCoordinate.self, forClassName: "STKModeCoordinate")
+
+    NSKeyedUnarchiver.setClass(TKMiniInstruction.self, forClassName: "TripKit.TKMiniInstruction")
+    NSKeyedUnarchiver.setClass(TKMiniInstruction.self, forClassName: "TripKit.STKMiniInstruction")
+    NSKeyedUnarchiver.setClass(TKMiniInstruction.self, forClassName: "TKMiniInstruction")
+    NSKeyedUnarchiver.setClass(TKMiniInstruction.self, forClassName: "STKMiniInstruction")
     
     NSKeyedUnarchiver.setClass(TKStopCoordinate.self, forClassName: "TripKit.TKStopCoordinate")
     NSKeyedUnarchiver.setClass(TKStopCoordinate.self, forClassName: "TripKit.STKStopCoordinate")
