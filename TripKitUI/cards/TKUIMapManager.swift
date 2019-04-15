@@ -51,21 +51,15 @@ open class TKUIMapManager: TGMapManager {
     didSet {
       guard let mapView = mapView else { return }
       
-      // update renderers
+      // this updates the renderers
       renderers.removeAll(where: { $0.renderer == nil })
       renderers.forEach { $0.renderer?.setNeedsDisplay() }
       
-      // update semaphore views - if needed, we could add a more generic
-      // way for handling this more like the renderer:
-      // 1. Add a `selectionHandler` to TKUIAnnoationViewBuilder
-      // 2. Pass that on from there to views that handle it
-      // 3. Call `setNeedsDisplay()` here (removing lines marked with *)
-      //    and adding instead `.forEach { $0.setNeedsDisplay() }`
-      mapView.annotations(in: mapView.visibleMapRect)
+      // updates visible views; new views updated from `mapView(_:didAdd:)`
+      let views = mapView.annotations(in: mapView.visibleMapRect)
         .compactMap { $0 as? MKAnnotation }
         .compactMap { mapView.view(for: $0) }
-        .compactMap { $0 as? TKUISemaphoreView }                   // *
-        .forEach { $0.updateSelection(for: selectionIdentifier ) } // *
+      updateAnnotationsViewsForSelection(views)
       
       // give map a chance to itself, if needed (probably not)
       mapView.setNeedsDisplay()
@@ -279,6 +273,24 @@ extension TKUIMapManager {
   
 }
 
+// MARK: - Updating selected annotations
+
+extension TKUIMapManager {
+  
+  private func updateAnnotationsViewsForSelection(_ views: [MKAnnotationView]) {
+    // update semaphore views - if needed, we could add a more generic
+    // way for handling this more like the renderer:
+    // 1. Add a `selectionHandler` to TKUIAnnoationViewBuilder
+    // 2. Pass that on from there to views that handle it
+    // 3. Call `setNeedsDisplay()` here (removing lines marked with *)
+    //    and adding instead `.forEach { $0.setNeedsDisplay() }`
+    views
+      .compactMap { $0 as? TKUISemaphoreView }                   // *
+      .forEach { $0.updateSelection(for: selectionIdentifier ) } // *
+  }
+  
+}
+
 // MARK: - MKMapViewDelegate
 
 extension TKUIMapManager {
@@ -286,6 +298,7 @@ extension TKUIMapManager {
   open func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
     TKUIMapManagerHelper.adjustZOrder(views)
 
+    // animations
     let animatedIDs = animatedAnnotations.identities
     let viewsToAnimate = views.filter {
       guard let identity = ($0.annotation as? TKUIIdentifiableAnnotation)?.identity else { return false }
@@ -301,6 +314,9 @@ extension TKUIMapManager {
         }, completion: nil
       )
     }
+    
+    // the selected view might have been off-screen and was now added
+    updateAnnotationsViewsForSelection(views)
   }
   
   open func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
