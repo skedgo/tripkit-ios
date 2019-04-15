@@ -19,6 +19,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="435" height="194.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efD-bF-n5B">
+                        <rect key="frame" x="0.0" y="0.0" width="3" height="194.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="3" id="X1B-ls-7yq"/>
+                            <constraint firstAttribute="width" constant="3" id="kwc-j8-HPV"/>
+                        </constraints>
+                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="pX8-va-QNb">
                         <rect key="frame" x="0.0" y="0.0" width="435" height="194.5"/>
                         <subviews>
@@ -204,9 +212,12 @@
                 <color key="backgroundColor" red="0.92941176470588238" green="0.93333333333333335" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="pX8-va-QNb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="LAW-T3-ceI"/>
+                    <constraint firstItem="efD-bF-n5B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="PpS-9t-WQc"/>
                     <constraint firstAttribute="trailing" secondItem="pX8-va-QNb" secondAttribute="trailing" id="QCT-Id-V8D"/>
+                    <constraint firstAttribute="bottom" secondItem="efD-bF-n5B" secondAttribute="bottom" id="jKd-l9-HVw"/>
                     <constraint firstItem="pX8-va-QNb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qgH-3B-Jmf"/>
                     <constraint firstAttribute="bottom" secondItem="pX8-va-QNb" secondAttribute="bottom" id="s7S-9W-M6C"/>
+                    <constraint firstItem="efD-bF-n5B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="t1c-nf-Dhs"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -219,6 +230,7 @@
                 <outlet property="alertImageView" destination="HF3-8f-hxP" id="xLY-N6-ArN"/>
                 <outlet property="alertStackView" destination="Jfa-Bf-Q3S" id="YCB-oV-C2K"/>
                 <outlet property="alertTextLabel" destination="iSc-kr-jjc" id="uVj-YQ-5Nv"/>
+                <outlet property="selectionIndicator" destination="efD-bF-n5B" id="kbU-hI-FE8"/>
                 <outlet property="serviceColorView" destination="wWl-tx-YGV" id="YKV-lH-cXm"/>
                 <outlet property="serviceImageView" destination="z0E-F8-bjU" id="56I-O9-hpP"/>
                 <outlet property="subsubtitleLabel" destination="WEG-PU-ohE" id="otc-Wy-bfY"/>

@@ -53,9 +53,11 @@ public class TKUIDepartureCell: UITableViewCell {
   @IBOutlet weak var alertActionButton: UIButton!
   @IBOutlet weak var alertTextLabel: TKUIStyledLabel!
   
+  @IBOutlet weak var selectionIndicator: UIView!
+
   public static let reuseIdentifier = "TKUIDepartureCell"
   public static let nib = UINib(nibName: "TKUIDepartureCell", bundle: .tripKitUI)
-  
+   
   public var dataSource: TKUIDepartureCellContentDataSource? {
     didSet {
       updateUI()
@@ -76,14 +78,18 @@ public class TKUIDepartureCell: UITableViewCell {
     alertTextLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     alertActionButton.titleLabel?.font = TKStyleManager.semiboldSystemFont(size: 13)
     timeToDepartTextLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    
+    selectionIndicator.isHidden = true
+    selectionIndicator.backgroundColor = TKStyleManager.globalTintColor()
   }
 
   public override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
+    // Not calling super, to not highlight background
+    selectionIndicator.isHidden = !selected
   }
   
   public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-    super.setHighlighted(highlighted, animated: animated)
+    // Not calling super to not override line colors
     UIView.animate(withDuration: animated ? 0.25: 0) {
       self.contentView.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : .white
     }
