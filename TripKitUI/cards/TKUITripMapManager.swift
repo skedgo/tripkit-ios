@@ -83,7 +83,6 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
 }
 
-
 // MARK: Adding trips to the map
 
 private extension TKUITripMapManager {

@@ -144,6 +144,14 @@ public class TKUITripModeByModeCard: TGPageCard {
         self.realTimeUpdate(for: updatedTrip)
       })
       .disposed(by: disposeBag)
+    
+    NotificationCenter.default.rx
+      .notification(.TKUIMapManagerSelectionChanged, object: tripMapManager)
+      .map { $0.userInfo?["selection"] as? String }
+      .filter { $0 != nil}
+      .map { $0! }
+      .subscribe(onNext: { [weak self] in self?.reactToMapSelectionChange($0) })
+      .disposed(by: disposeBag)
   }
 
   
@@ -160,9 +168,9 @@ public class TKUITripModeByModeCard: TGPageCard {
     headerSegmentsView?.select(segmentAtIndex: selectedHeaderIndex ?? 0)
     
     if let segment = tripMapManager.trip.segments.first(where: { $0.index == segmentIndex }) {
+      // TODO: Determine if we split the segment into multiple cards, and then maybe just show the first part?
       tripMapManager.show(segment, animated: true)
     }
-
   }
   
 }
@@ -240,11 +248,26 @@ extension TKUITripModeByModeCard {
   
 }
 
+// MARK: - Map interaction
+
+extension TKUITripModeByModeCard {
+  
+  private func reactToMapSelectionChange(_ identifier: String) {
+    guard
+      let segment = tripMapManager.trip.segments.first(where: { $0.selectionIdentifier == identifier }),
+      let cardIndex = SegmentCards.firstCardIndex(ofSegmentAt: segment.index, in: segmentCards)
+      else { return }
+    
+    move(to: cardIndex)
+  }
+  
+}
+
 // MARK: - Real-time update
 
 extension TKUITripModeByModeCard {
   
-  func segmentsMatch(_ newSegments: [TKSegment]) -> Bool {
+  private func segmentsMatch(_ newSegments: [TKSegment]) -> Bool {
     // TODO: This should also change if something else about the segments
     //   such as if there are alerts inserted, which the builder might create
     //   cards for. So ideally, we should pass this to the builder.
@@ -254,7 +277,7 @@ extension TKUITripModeByModeCard {
     return oldTemplates == newTemplates
   }
   
-  func realTimeUpdate(for trip: Trip) {
+  private func realTimeUpdate(for trip: Trip) {
     assert(trip == tripMapManager.trip, "Uh-oh, trip changed!")
     
     let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }

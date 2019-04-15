@@ -22,6 +22,11 @@ public protocol TKUIIdentifiableAnnotation: MKAnnotation {
   var identity: String? { get }
 }
 
+extension Notification.Name {
+  /// User info: ["selection": "identifier" as String]
+  public static let TKUIMapManagerSelectionChanged = Notification.Name("TKUIMapManagerSelectionChanged")
+}
+
 extension TKNamedCoordinate: TKUIIdentifiableAnnotation {
   public var identity: String? {
     if let stop = self as? TKStopCoordinate {
@@ -289,6 +294,17 @@ extension TKUIMapManager {
       .forEach { $0.updateSelection(for: selectionIdentifier ) } // *
   }
   
+  private func updateSelectionForTapping(_ view: MKAnnotationView) {
+    guard
+      let displayable = view.annotation as? TKUISemaphoreDisplayable,
+      let identifier = displayable.selectionIdentifier
+      else { return }
+    
+    self.selectionIdentifier = identifier
+    
+    NotificationCenter.default.post(name: .TKUIMapManagerSelectionChanged, object: self, userInfo: ["selection": identifier])
+  }
+  
 }
 
 // MARK: - MKMapViewDelegate
@@ -372,6 +388,8 @@ extension TKUIMapManager {
     self.heading = mapView.camera.heading
   }
   
+  open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    updateSelectionForTapping(view)
+  }
+  
 }
-
-
