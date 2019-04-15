@@ -52,6 +52,9 @@ extension TKLocationManager {
     case .denied: return .denied
     case .restricted: return .restricted
     case .notDetermined: return .notDetermined
+    @unknown default:
+      assertionFailure("Unexpected case, treating as not determined.")
+      return .notDetermined
     }
   }
   

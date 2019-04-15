@@ -219,8 +219,11 @@ extension TKSegment: TKTripSegment {
       let mutable = NSMutableString(string: rawString)
       fill(inTemplates: mutable, inTitle: true, includingTime: true)
       return mutable as String
+    } else if let date = self.departureTime {
+      return date
     } else {
-      return self.departureTime
+      assertionFailure("Uh-oh. No instruction and no date?")
+      return ""
     }
   }
   

@@ -36,7 +36,7 @@ open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
 }
 
 
-public extension TKUITripModeByModeCard {
+extension TKUITripModeByModeCard {
   
   
   /// Configurtion of any `TKUITripModeByModeCard`. Use this to determine how

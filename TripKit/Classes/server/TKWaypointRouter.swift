@@ -229,7 +229,7 @@ class WaypointParasBuilder {
     
     var paras: [String: Any]
     paras = [
-      "config": TKSettings.defaultDictionary(),
+      "config": TKSettings.defaultDictionary() ?? [:],
       "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
     

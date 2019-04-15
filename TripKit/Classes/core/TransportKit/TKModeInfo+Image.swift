@@ -34,6 +34,8 @@ extension TKModeInfo {
       
     case .vehicle, .alert:
       return nil // not supported
+    @unknown default:
+      return nil
     }
     
     if let part = iconFileNamePart {

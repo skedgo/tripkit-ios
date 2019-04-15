@@ -11,7 +11,7 @@
 
 @class Service, StopLocation, TKNamedCoordinate;
 
-typedef NS_ENUM(NSInteger, AlertSeverity) {
+typedef NS_CLOSED_ENUM(NSInteger, AlertSeverity) {
   AlertSeverityInfo = -1,
   AlertSeverityWarning = 0,
   AlertSeverityAlert = 1,

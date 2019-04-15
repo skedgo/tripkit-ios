@@ -14,6 +14,8 @@
 
 @interface TKStyleManager (TripKitUI)
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - Default styles
 
 + (void)addLightStatusBarGradientLayerToView:(UIView *)view height:(CGFloat)height;
@@ -87,3 +89,5 @@
 + (UIFont *)systemFontWithTextStyle:(NSString *)style __attribute__((deprecated("Use `customFontWithTextStyle` instead"))) NS_SWIFT_NAME(systemFont(textStyle:));
 
 @end
+
+NS_ASSUME_NONNULL_END
