@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, TKSettingsSpeed) {
   TKSettingsSpeed_Fast,
 };
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface TKSettings : NSObject
 
@@ -64,3 +65,5 @@ typedef NS_ENUM(NSInteger, TKSettingsSpeed) {
 + (void)setEmissions:(float)gramsCO2PerKm forModeIdentifier:(NSString *)modeIdentifier;
 
 @end
+
+NS_ASSUME_NONNULL_END

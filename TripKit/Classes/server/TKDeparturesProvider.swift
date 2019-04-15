@@ -53,7 +53,7 @@ extension TKDeparturesProvider {
       "region": region.name,
       "embarkationStops": stopCodes,
       "limit": limit,
-      "config": TKSettings.defaultDictionary() ?? [:]
+      "config": TKSettings.defaultDictionary()
     ]
     if let date = fromDate {
       paras["timeStamp"] = date.timeIntervalSince1970
@@ -175,7 +175,7 @@ extension TKDeparturesProvider {
       "embarkationStops": [table.startStopCode],
       "disembarkationStops": [table.endStopCode],
       "limit": limit,
-      "config": TKSettings.defaultDictionary() ?? [:]
+      "config": TKSettings.defaultDictionary()
     ]
   }
   
