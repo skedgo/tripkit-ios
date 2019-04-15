@@ -36,7 +36,7 @@ public class TKRegion : NSObject, Codable {
     //      Terminating app due to uncaught exception 'NSUnknownKeyException',
     //      reason: '[<TKRegionCity 0x7f957975d000> valueForUndefinedKey:]: this
     //      class is not key value coding-compliant for the key subtitle.'
-    public let subtitle: String? = nil // Not necessary, but can
+    public let subtitle: String? = nil
     
     @objc public var centerBiasedMapRect: MKMapRect {
       // centre it on the region's coordinate

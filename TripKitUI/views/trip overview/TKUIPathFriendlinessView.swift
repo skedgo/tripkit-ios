@@ -70,6 +70,11 @@ public class TKUIPathFriendlinessView: UIView {
       let totalMetres = template.metres?.doubleValue
       else { return }
     
+    guard totalMetres > 0 else {
+      assertionFailure("Don't display this for segments that have no distance.")
+      return
+    }
+    
     let friendlyMetres = template.metresFriendly?.doubleValue ?? Double(0)
     let friendlyRatio = friendlyMetres / totalMetres
     
