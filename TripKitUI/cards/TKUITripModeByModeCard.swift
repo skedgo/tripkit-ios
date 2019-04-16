@@ -294,9 +294,7 @@ extension TKUITripModeByModeCard {
     // Update ETA in header
     headerETALabel?.text = TKUITripModeByModeCard.headerTimeText(for: trip)
     
-    // TODO: Update trip map manager
-    
-    // Also pass on generic updates
+    // Also pass on generic updates, trip map manager will react itself
     TKUITripModeByModeCard.notifyOfUpdates(in: trip)
   }
   
