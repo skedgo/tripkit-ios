@@ -12,22 +12,23 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-extension Driver where S == DriverSharingStrategy {
-  
-  func startWithOptional(_ element: Element?) -> Driver<Element?> {
-    return map { $0 as Element? }.startWith(element)
-  }
-  
-}
-
 extension Signal where S == SignalSharingStrategy {
   
-  func startWithOptional(_ element: Element?) -> Observable<Element?> {
-    return map { $0 as Element? }.asObservable().startWith(element)
+  func startOptional() -> Signal<Element?> {
+    return map { $0 as Element? }
+      .startWith(nil)
   }
   
 }
 
+extension Driver where S == DriverSharingStrategy {
+  
+  func startOptional() -> Driver<Element?> {
+    return map { $0 as Element? }
+      .startWith(nil)
+  }
+  
+}
 
 extension TableViewSectionedDataSource where S : SectionModelType, S.Item : Equatable {
   

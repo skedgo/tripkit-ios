@@ -19,14 +19,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="435" height="194.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efD-bF-n5B">
-                        <rect key="frame" x="0.0" y="0.0" width="3" height="194.5"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="3" id="X1B-ls-7yq"/>
-                            <constraint firstAttribute="width" constant="3" id="kwc-j8-HPV"/>
-                        </constraints>
-                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="pX8-va-QNb">
                         <rect key="frame" x="0.0" y="0.0" width="435" height="194.5"/>
                         <subviews>
@@ -208,6 +200,13 @@
                             <constraint firstItem="iSc-kr-jjc" firstAttribute="leading" secondItem="9g6-fL-6UG" secondAttribute="leading" id="n4A-eN-9Pv"/>
                         </constraints>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efD-bF-n5B">
+                        <rect key="frame" x="0.0" y="0.0" width="3" height="194.5"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="3" id="kwc-j8-HPV"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.92941176470588238" green="0.93333333333333335" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>

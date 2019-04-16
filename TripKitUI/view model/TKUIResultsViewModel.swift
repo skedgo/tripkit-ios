@@ -79,9 +79,8 @@ public class TKUIResultsViewModel {
     sections = TKUIResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs)
       .asDriver(onErrorJustReturn: [])
 
-    selectedItem = mapInput.tappedMapRoute
-      .startWithOptional(nil) // default selection
-      .withLatestFrom(sections) { $1.find($0) ?? $1.bestItem }
+    let selection = mapInput.tappedMapRoute.startOptional() // default selection
+    selectedItem = Observable.combineLatest(selection.asObservable(), sections.asObservable()) { $1.find($0) ?? $1.bestItem }
       .asDriver(onErrorDriveWith: .empty())
     
     titles = builderChanged
@@ -107,7 +106,7 @@ public class TKUIResultsViewModel {
       .distinctUntilChanged { $0 === $1 }
       .asDriver(onErrorDriveWith: .empty())
 
-    mapRoutes = Observable.combineLatest(tripGroupsChanged, mapInput.tappedMapRoute.startWithOptional(nil))
+    mapRoutes = Observable.combineLatest(tripGroupsChanged, mapInput.tappedMapRoute.startOptional().asObservable())
       .map(TKUIResultsViewModel.buildMapContent)
       .asDriver(onErrorDriveWith: .empty())
 
