@@ -22,7 +22,7 @@ class TKWebActionHandler: TKInterAppExternalActionHandler {
     return Loc.ShowWebsite
   }
   
-  func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment, presenter: UIViewController, sender: Any?) {
+  func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment?, presenter: UIViewController, sender: Any?) {
     guard let url = URL(string: identifier) else { assertionFailure(); return }
     TKInterAppCommunicator.shared.openURLHandler(url, self.title(for: identifier), presenter)
   }

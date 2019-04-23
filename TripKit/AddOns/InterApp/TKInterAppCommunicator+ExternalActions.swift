@@ -73,7 +73,7 @@ extension TKInterAppCommunicator {
   }
   
   @objc(performExternalAction:forSegment:presenter:initiatedBy:)
-  public func performExternalAction(_ action: String, for segment: TKSegment, presenter: UIViewController, sender: Any?) {
+  public func performExternalAction(_ action: String, for segment: TKSegment?, presenter: UIViewController, sender: Any?) {
     guard let handler = handlers.first(where: { $0.canHandle(action) }) else { assertionFailure(); return }
     handler.performAction(for: action, segment: segment, presenter: presenter, sender: sender)
   }

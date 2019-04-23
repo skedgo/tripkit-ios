@@ -25,6 +25,6 @@ public protocol TKInterAppExternalActionHandler {
   
   func title(for identifier: TKInterAppIdentifier) -> String
   
-  func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment, presenter: UIViewController, sender: Any?)
+  func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment?, presenter: UIViewController, sender: Any?)
   
 }

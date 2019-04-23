@@ -28,7 +28,7 @@ class TKPhoneActionHandler: TKInterAppExternalActionHandler {
     }
   }
   
-  func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment, presenter: UIViewController, sender: Any?) {
+  func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment?, presenter: UIViewController, sender: Any?) {
     let cleaned = identifier.replacingOccurrences(of: " ", with: "-")
     guard let callURL = URL(string: cleaned) else { assertionFailure(); return }
     UIApplication.shared.open(callURL)

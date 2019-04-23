@@ -26,7 +26,7 @@ class TKSMSActionHandler: TKInterAppExternalActionHandler {
     return Loc.SendSMS
   }
   
-  func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment, presenter: UIViewController, sender: Any?) {
+  func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment?, presenter: UIViewController, sender: Any?) {
     let raw = identifier.replacingOccurrences(of: "sms:", with: "")
     let brokenUp = raw.components(separatedBy: "?")
     guard let recipient = brokenUp.first else {
