@@ -10,15 +10,19 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TKLocationHelper : NSObject
 
-+ (NSString *)nameFromPlacemark:(CLPlacemark *)placemark;
-+ (NSString *)addressForPlacemark:(CLPlacemark *)placemark;
-+ (NSString *)suburbForPlacemark:(CLPlacemark *)placemark;
-+ (NSString *)regionNameForPlacemark:(CLPlacemark *)placemark;
++ (nullable NSString *)nameFromPlacemark:(CLPlacemark *)placemark;
++ (nullable NSString *)addressForPlacemark:(CLPlacemark *)placemark;
++ (nullable NSString *)suburbForPlacemark:(CLPlacemark *)placemark;
++ (nullable NSString *)regionNameForPlacemark:(CLPlacemark *)placemark;
 
 + (NSString *)expandAbbreviationInAddressString:(NSString *)address;
 
 + (BOOL)coordinate:(CLLocationCoordinate2D)first isNear:(CLLocationCoordinate2D)second;
 
 @end
+
+NS_ASSUME_NONNULL_END
