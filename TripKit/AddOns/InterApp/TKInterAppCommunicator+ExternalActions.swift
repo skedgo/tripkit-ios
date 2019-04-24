@@ -35,12 +35,10 @@ extension TKInterAppCommunicator {
   /**
    This will handle the external actions of the specified segments either by launching the external app (if there's only one action) or by presenting a sheet of actions to take for the user.
    @param segment A segment for which `canHandleExternalActions` returns YES
-   @param controller A controller to present the optional action sheet on
+   @param presenter A controller to present the optional action sheet on
    @param sender An optional sender on which to anchor the optional action sheet
-   @param currentLocationHandler Will be called to check if the external action should start at the current location or at the segment's start location. If `nil` it will start at the current location.
-   @param completionHandler Called when any action is triggered.
+   @param completion Called when any action is triggered.
    */
-  
   @objc(handleExternalActions:presenter:initiatedBy:completionHandler:)
   public func handleExternalActions(for segment: TKSegment, presenter: UIViewController, sender: Any?, completion: ((String) -> Void)?) {
     
