@@ -22,14 +22,6 @@ extension Loc {
     return NSLocalizedString("Google Maps", tableName: "TripKit", bundle: .tripKit, comment: "google maps directions action")
   }
   
-  @objc public static var GoCatchAction: String {
-    return NSLocalizedString("goCatch a Taxi", tableName: "TripKit", bundle: .tripKit, comment: "goCatch action")
-  }
-  
-  @objc public static var IngogoAction: String {
-    return NSLocalizedString("ingogo a Taxi", tableName: "TripKit", bundle: .tripKit, comment: "inGogo taxi booking action")
-  }
-  
   @objc public static var Call: String {
     return NSLocalizedString("Call", tableName: "TripKit", bundle: .tripKit, comment: "")
   }

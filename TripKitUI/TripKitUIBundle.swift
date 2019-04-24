@@ -15,6 +15,8 @@ extension UIImage {
 
   static let iconTripBoyWorker = named("worker")
   public static let iconCross = named("icon-cross")
+  public static let iconShowPassword = named("icon-show")
+  public static let iconHidePassword = named("icon-hide")
 
   // Occupancy
   

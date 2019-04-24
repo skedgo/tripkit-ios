@@ -117,7 +117,13 @@
       [string appendString:@", "];
     [string appendString:placemark.country];
   }
-  return string;
+  
+  if (string.length > 0) {
+    return string;
+  } else {
+    return nil;
+  }
+  
 }
 
 + (NSString *)expandAbbreviationInAddressString:(NSString *)address

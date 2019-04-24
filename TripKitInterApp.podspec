@@ -13,9 +13,7 @@ Pod::Spec.new do |s|
   s.swift_version = '4.0'
   s.ios.deployment_target = '9.0'
   s.requires_arc = true
-  
-  s.prefix_header_file = "prefix.pch"
 
   s.dependency 'TripKit', "~> #{s.version}"
-  s.source_files = "TripKit/AddOns/InterApp/**/*.{h,m,swift}"
+  s.source_files = "TripKit/AddOns/InterApp/**/*.{swift}"
 end
