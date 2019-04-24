@@ -48,6 +48,9 @@
 		3A462CC8207626D400AF41EF /* SegmentTemplate+Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A462CC6207626D400AF41EF /* SegmentTemplate+Parsing.swift */; };
 		3A462CD720762FB400AF41EF /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A462CD020762FB400AF41EF /* TripKitModel.xcdatamodeld */; };
 		3A462CD820762FB400AF41EF /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A462CD020762FB400AF41EF /* TripKitModel.xcdatamodeld */; };
+		3A4C41D9226F268A003E057E /* TKInterAppCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4C41D8226F268A003E057E /* TKInterAppCommunicator.swift */; };
+		3A4C41DB226F26DE003E057E /* TKConfig+TKInterAppCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4C41DA226F26DE003E057E /* TKConfig+TKInterAppCommunicator.swift */; };
+		3A4C41DD226F27A8003E057E /* TKInterAppCommunicator+ExternalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4C41DC226F27A8003E057E /* TKInterAppCommunicator+ExternalActions.swift */; };
 		3A51402E1DEE62EE002DB39F /* TKDLSTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */; };
 		3A51402F1DEE62EE002DB39F /* TKSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402D1DEE62EE002DB39F /* TKSegment.swift */; };
 		3A5140311DEE62FA002DB39F /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5140301DEE62FA002DB39F /* TripRequest.swift */; };
@@ -129,11 +132,6 @@
 		3A6DF150202C8EB80084CB2C /* TKUIMapManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */; };
 		3A6DF152202C8F9A0084CB2C /* TripKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6231D1CD0060089F687 /* TripKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF16B202C97F70084CB2C /* TripKitInterApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF169202C97F70084CB2C /* TripKitInterApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF17B202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF176202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF17C202C98AF0084CB2C /* TKInterAppHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF177202C98AF0084CB2C /* TKInterAppHelpers.swift */; };
-		3A6DF17D202C98AF0084CB2C /* TKInterAppCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */; };
-		3A6DF17E202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF179202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.m */; };
-		3A6DF17F202C98AF0084CB2C /* TKInterAppCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF17A202C98AF0084CB2C /* TKInterAppCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6E7D4020EFBD4900013253 /* TKUISegmentMovingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E7D3E20EFBD4800013253 /* TKUISegmentMovingCell.swift */; };
 		3A6E7D4120EFBD4900013253 /* TKUISegmentMovingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E7D3F20EFBD4800013253 /* TKUISegmentMovingCell.xib */; };
 		3A7636F921F9F04700639155 /* TKUIAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636F821F9F04700639155 /* TKUIAnnotations.swift */; };
@@ -252,6 +250,10 @@
 		3AA800F721870DB6008CFB6D /* TKAvailabilityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800F521870DB6008CFB6D /* TKAvailabilityFetcher.swift */; };
 		3AA800FD218743BC008CFB6D /* TKBookingAvailabilityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800FC218743BC008CFB6D /* TKBookingAvailabilityTest.swift */; };
 		3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */; };
+		3AA80DA4226778F500D7A781 /* TKSMSActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA80DA22267783B00D7A781 /* TKSMSActionHandler.swift */; };
+		3AA80DA5226778FC00D7A781 /* TKInterAppExternalActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA80D9F2267776300D7A781 /* TKInterAppExternalActionHandler.swift */; };
+		3AA80DA722677A7600D7A781 /* TKPhoneActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA80DA622677A7500D7A781 /* TKPhoneActionHandler.swift */; };
+		3AA80DA922679CDE00D7A781 /* TKWebActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA80DA822679CDE00D7A781 /* TKWebActionHandler.swift */; };
 		3AA923F620DA7CDA00EBDDC6 /* TGCardView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */; };
 		3AA923F820DA8E0400EBDDC6 /* TGCardViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */; };
 		3AABDD9F1DF7D2E30044A05B /* OpeningHoursAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */; };
@@ -737,7 +739,7 @@
 		D3E7C1AF21F17B7600C48248 /* TKUISectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */; };
 		D3F9CEC32064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */; };
 		D3F9CEC52064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */; };
-		D3FC1F11207B1B3E00D39DF9 /* TKInterAppCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator.swift */; };
+		D3FC1F11207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift */; };
 		D3FC1F14207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F12207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift */; };
 		D3FC1F15207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F12207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift */; };
 		D3FC1F16207B3D1D00D39DF9 /* SegmentTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F13207B3D1D00D39DF9 /* SegmentTemplate+CoreDataClass.swift */; };
@@ -823,6 +825,9 @@
 		3A462CD420762FB400AF41EF /* 3-SpringClean.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "3-SpringClean.xcdatamodel"; sourceTree = "<group>"; };
 		3A462CD520762FB400AF41EF /* 6-SegmentRealTimeVehicle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "6-SegmentRealTimeVehicle.xcdatamodel"; sourceTree = "<group>"; };
 		3A462CD620762FB400AF41EF /* 5-PlannedTrip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "5-PlannedTrip.xcdatamodel"; sourceTree = "<group>"; };
+		3A4C41D8226F268A003E057E /* TKInterAppCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKInterAppCommunicator.swift; sourceTree = "<group>"; };
+		3A4C41DA226F26DE003E057E /* TKConfig+TKInterAppCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKConfig+TKInterAppCommunicator.swift"; sourceTree = "<group>"; };
+		3A4C41DC226F27A8003E057E /* TKInterAppCommunicator+ExternalActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKInterAppCommunicator+ExternalActions.swift"; sourceTree = "<group>"; };
 		3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDLSTable.swift; sourceTree = "<group>"; };
 		3A51402D1DEE62EE002DB39F /* TKSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegment.swift; sourceTree = "<group>"; };
 		3A5140301DEE62FA002DB39F /* TripRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequest.swift; sourceTree = "<group>"; };
@@ -918,11 +923,6 @@
 		3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitInterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF169202C97F70084CB2C /* TripKitInterApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKitInterApp.h; sourceTree = "<group>"; };
 		3A6DF16A202C97F70084CB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A6DF176202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TKConfig+TKInterAppCommunicator.h"; sourceTree = "<group>"; };
-		3A6DF177202C98AF0084CB2C /* TKInterAppHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKInterAppHelpers.swift; sourceTree = "<group>"; };
-		3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKInterAppCommunicator.m; sourceTree = "<group>"; };
-		3A6DF179202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TKConfig+TKInterAppCommunicator.m"; sourceTree = "<group>"; };
-		3A6DF17A202C98AF0084CB2C /* TKInterAppCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKInterAppCommunicator.h; sourceTree = "<group>"; };
 		3A6E7D3E20EFBD4800013253 /* TKUISegmentMovingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentMovingCell.swift; sourceTree = "<group>"; };
 		3A6E7D3F20EFBD4800013253 /* TKUISegmentMovingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentMovingCell.xib; sourceTree = "<group>"; };
 		3A7636F821F9F04700639155 /* TKUIAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAnnotations.swift; sourceTree = "<group>"; };
@@ -1031,6 +1031,10 @@
 		3AA800F521870DB6008CFB6D /* TKAvailabilityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAvailabilityFetcher.swift; sourceTree = "<group>"; };
 		3AA800FC218743BC008CFB6D /* TKBookingAvailabilityTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKBookingAvailabilityTest.swift; sourceTree = "<group>"; };
 		3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+ProductName.swift"; sourceTree = "<group>"; };
+		3AA80D9F2267776300D7A781 /* TKInterAppExternalActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKInterAppExternalActionHandler.swift; sourceTree = "<group>"; };
+		3AA80DA22267783B00D7A781 /* TKSMSActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSMSActionHandler.swift; sourceTree = "<group>"; };
+		3AA80DA622677A7500D7A781 /* TKPhoneActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKPhoneActionHandler.swift; sourceTree = "<group>"; };
+		3AA80DA822679CDE00D7A781 /* TKWebActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKWebActionHandler.swift; sourceTree = "<group>"; };
 		3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TGCardView+Rx.swift"; sourceTree = "<group>"; };
 		3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TGCardViewController.framework; path = Carthage/Build/iOS/TGCardViewController.framework; sourceTree = "<group>"; };
 		3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningHoursAPIModel.swift; sourceTree = "<group>"; };
@@ -1288,7 +1292,7 @@
 		D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertViewController.xib; sourceTree = "<group>"; };
 		D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertTableHeader.swift; sourceTree = "<group>"; };
 		D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertTableHeader.xib; sourceTree = "<group>"; };
-		D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKInterAppCommunicator.swift; sourceTree = "<group>"; };
+		D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKInterAppCommunicator+TurnByTurn.swift"; sourceTree = "<group>"; };
 		D3FC1F12207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SegmentTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D3FC1F13207B3D1D00D39DF9 /* SegmentTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SegmentTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1618,12 +1622,12 @@
 		3A6DF175202C98AF0084CB2C /* InterApp */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF176202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.h */,
-				3A6DF179202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.m */,
-				3A6DF17A202C98AF0084CB2C /* TKInterAppCommunicator.h */,
-				3A6DF178202C98AF0084CB2C /* TKInterAppCommunicator.m */,
-				D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator.swift */,
-				3A6DF177202C98AF0084CB2C /* TKInterAppHelpers.swift */,
+				3AA80DA12267780A00D7A781 /* handlers */,
+				3A4C41DA226F26DE003E057E /* TKConfig+TKInterAppCommunicator.swift */,
+				3A4C41D8226F268A003E057E /* TKInterAppCommunicator.swift */,
+				3A4C41DC226F27A8003E057E /* TKInterAppCommunicator+ExternalActions.swift */,
+				D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift */,
+				3AA80D9F2267776300D7A781 /* TKInterAppExternalActionHandler.swift */,
 			);
 			path = InterApp;
 			sourceTree = "<group>";
@@ -1798,6 +1802,16 @@
 				3AA3CEAD202CD4D100E54859 /* TKCustomEventRecurrenceTest.swift */,
 			);
 			path = event;
+			sourceTree = "<group>";
+		};
+		3AA80DA12267780A00D7A781 /* handlers */ = {
+			isa = PBXGroup;
+			children = (
+				3AA80DA622677A7500D7A781 /* TKPhoneActionHandler.swift */,
+				3AA80DA22267783B00D7A781 /* TKSMSActionHandler.swift */,
+				3AA80DA822679CDE00D7A781 /* TKWebActionHandler.swift */,
+			);
+			path = handlers;
 			sourceTree = "<group>";
 		};
 		3AB6C6161D1CD0060089F687 = {
@@ -2394,9 +2408,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF17F202C98AF0084CB2C /* TKInterAppCommunicator.h in Headers */,
 				3A6DF16B202C97F70084CB2C /* TripKitInterApp.h in Headers */,
-				3A6DF17B202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3068,10 +3080,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF17D202C98AF0084CB2C /* TKInterAppCommunicator.m in Sources */,
-				3A6DF17E202C98AF0084CB2C /* TKConfig+TKInterAppCommunicator.m in Sources */,
-				D3FC1F11207B1B3E00D39DF9 /* TKInterAppCommunicator.swift in Sources */,
-				3A6DF17C202C98AF0084CB2C /* TKInterAppHelpers.swift in Sources */,
+				3A4C41D9226F268A003E057E /* TKInterAppCommunicator.swift in Sources */,
+				3AA80DA4226778F500D7A781 /* TKSMSActionHandler.swift in Sources */,
+				D3FC1F11207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift in Sources */,
+				3AA80DA922679CDE00D7A781 /* TKWebActionHandler.swift in Sources */,
+				3AA80DA722677A7600D7A781 /* TKPhoneActionHandler.swift in Sources */,
+				3A4C41DB226F26DE003E057E /* TKConfig+TKInterAppCommunicator.swift in Sources */,
+				3AA80DA5226778FC00D7A781 /* TKInterAppExternalActionHandler.swift in Sources */,
+				3A4C41DD226F27A8003E057E /* TKInterAppCommunicator+ExternalActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3539,8 +3555,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TripKit/TripKit-Prefix.pch";
 				INFOPLIST_FILE = "TripKitInterApp-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3571,8 +3585,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TripKit/TripKit-Prefix.pch";
 				INFOPLIST_FILE = "TripKitInterApp-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
