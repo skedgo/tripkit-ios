@@ -63,10 +63,10 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     self.selectedSegment = nil
   }
   
-  public func show(_ segment: TKSegment, animated: Bool) {
+  public func show(_ segment: TKSegment, animated: Bool, mode: TKUISegmentMode = .onSegment) {
     self.selectedSegment = segment
     
-    let annos = segment.annotationsToZoomToOnMap()
+    let annos = segment.annotationsToZoomToOnMap(mode: mode)
     zoom(to: annos, animated: animated)
     
     mapView?.selectAnnotation(segment, animated: animated)

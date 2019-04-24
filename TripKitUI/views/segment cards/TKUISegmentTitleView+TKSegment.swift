@@ -14,18 +14,13 @@ import TripKit
 
 extension TKUISegmentTitleView {
   
-  public enum SegmentMode {
-    case getReady
-    case onSegment
-  }
-  
-  public func configure(for segment: TKSegment, mode: SegmentMode = .onSegment) {
+  public func configure(for segment: TKSegment, mode: TKUISegmentMode = .onSegment) {
     update(for: segment, mode: mode)
     
     monitorUpdates(for: segment, mode: mode)
   }
   
-  private func update(for segment: TKSegment, mode: SegmentMode) {
+  private func update(for segment: TKSegment, mode: TKUISegmentMode) {
     let title: String
     let subtitle: String?
     
@@ -34,7 +29,7 @@ extension TKUISegmentTitleView {
       let origin = (segment.start?.title ?? nil) {
       // TODO: Localise
       title = "Get on service to \(destination)"
-      subtitle = "From \(origin) "
+      subtitle = Loc.From(location: origin)
       
     } else {
       title = segment.tripSegmentInstruction
@@ -47,7 +42,7 @@ extension TKUISegmentTitleView {
     modeIcon.setImage(with: segment.tripSegmentModeImageURL, asTemplate: segment.tripSegmentModeImageIsTemplate, placeholder: segment.tripSegmentModeImage)
   }
   
-  private func monitorUpdates(for segment: TKSegment, mode: SegmentMode) {
+  private func monitorUpdates(for segment: TKSegment, mode: TKUISegmentMode) {
     disposeBag = DisposeBag()
     
     NotificationCenter.default.rx

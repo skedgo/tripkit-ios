@@ -144,8 +144,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (TKSegment *)finalSegmentIncludingContinuation;
 
-- (NSArray<id<MKAnnotation>> *)annotationsToZoomToOnMap;
-
 /*
  A singe line instruction which is used on the map screen.
  */

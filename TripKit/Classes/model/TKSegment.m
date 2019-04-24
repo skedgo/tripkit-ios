@@ -553,39 +553,6 @@ NSString *const UninitializedString =  @"UninitializedString";
   return [self.template hasCarParks];
 }
 
-- (NSArray *)annotationsToZoomToOnMap
-{
-  // Show the whole segment if we are self-navigating, otherwise just the start
-  if ([self isSelfNavigating]) {
-    return @[self.start, self.end];
-    
-  } else if (self.service.vehicle) {
-    NSTimeInterval timeIntervalSinceNow = [self.departureTime timeIntervalSinceNow];
-    Vehicle *vehicle = self.service.vehicle;
-    if (timeIntervalSinceNow > 15 * 60) {
-      // more then 15 minutes away, show start
-      return @[self.start];
-      
-    } else if (timeIntervalSinceNow > - 5 * 60) {
-      // it starts in the next 15 minutes, or 5 minutes ago
-      if (self.start) {
-        return @[vehicle, self.start];
-      }
-    } else {
-      // it started more than 5 minutes ago
-      if (self.end) {
-        return @[vehicle, self.end];
-      }
-    }
-  }
-  
-  if (self.start) {
-    return @[self.start];
-  } else {
-    return @[];
-  }
-}
-
 #pragma mark - Booking
 
 - (NSString *)bookingTitle

@@ -26,57 +26,28 @@ public class TKUITripModeByModeCard: TGPageCard {
   /// Storage of information of what the cards are used for the segment at a
   /// specific index. There is one of these for every index, but not all are
   /// guarantueed to have cards, i.e., `cards` can be empty.
-  fileprivate struct SegmentCards {
+  fileprivate struct SegmentCardsInfo {
     let segmentIndex: Int
     let segmentIdentifier: String
-    let cards: [TGCard]
+    let cards: [(TGCard, TKUISegmentMode)]
+    let cardsRange: Range<Int>
     
-    /// What's the index of the first card for the provided `segment.index`,
+    /// What's the indices of the cards for the provided `segment.index`,
     /// if all the cards in the haystack are next to each other?
-    static func firstCardIndex(ofSegmentAt needle: Int, in haystack: [SegmentCards]) -> Int? {
-      let index: (Int, Int?) = haystack.reduce( (0, nil) ) { acc, card in
-        if acc.1 != nil {
-          return acc
-        } else if card.segmentIndex == needle {
-          return (0, acc.0)
-        } else {
-          return (acc.0 + card.cards.count, nil)
-        }
-      }
-      return index.1
+    static func cardIndices(ofSegmentAt needle: Int, in haystack: [SegmentCardsInfo]) -> Range<Int>? {
+      return haystack.first { $0.segmentIndex == needle }?.cardsRange
     }
     
     /// What's the indices of the cards for the provided `segment.selectionIdentifier`,
     /// if all the cards in the haystack are next to each other?
-    static func cardIndices(ofSegmentWithIdentifier needle: String, in haystack: [SegmentCards]) -> Range<Int>? {
-      let index: (Int, Range<Int>?) = haystack.reduce( (0, nil) ) { acc, card in
-        if acc.1 != nil {
-          return acc
-        } else if card.segmentIdentifier == needle {
-          let first = acc.0
-          let last = first + card.cards.count
-          return (0, first..<last)
-        } else {
-          return (acc.0 + card.cards.count, nil)
-        }
-      }
-      return index.1
+    static func cardIndices(ofSegmentWithIdentifier needle: String, in haystack: [SegmentCardsInfo]) -> Range<Int>? {
+      return haystack.first { $0.segmentIdentifier == needle  }?.cardsRange
     }
-
     
-    /// What's `segment.index` of the card at the provided index, if all the
+    /// What's `SegmentCardsInfo` of the card at the provided index, if all the
     /// cards in the haystack are next to each otehr?
-    static func segmentIndex(ofCardAtIndex needle: Int, in haystack: [SegmentCards]) -> Int {
-      let index: (Int, Int?) = haystack.reduce( (0, nil) ) { acc, card in
-        guard acc.1 == nil else { return acc }
-        let currentMax = acc.0 + card.cards.count
-        if needle < currentMax {
-          return (0, card.segmentIndex)
-        } else {
-          return (currentMax, nil)
-        }
-      }
-      return index.1 ?? 0
+    static func cardsInfo(ofCardAtIndex needle: Int, in haystack: [SegmentCardsInfo]) -> SegmentCardsInfo? {
+      return haystack.first { $0.cardsRange.contains(needle) }
     }
   }
   
@@ -86,7 +57,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   
   private let viewModel: TKUITripModeByModeViewModel
   
-  private let segmentCards: [SegmentCards]
+  private let segmentCards: [SegmentCardsInfo]
   private let headerSegmentIndices: [Int]
   
   private var headerSegmentsView: TKUITripSegmentsView? {
@@ -120,23 +91,25 @@ public class TKUITripModeByModeCard: TGPageCard {
     self.tripMapManager = tripMapManager
     
     let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
-    let segmentCards: [SegmentCards] = cardSegments.map {
-      let cards = TKUITripModeByModeCard.config.builder.cards(for: $0, mapManager: tripMapManager)
-      return SegmentCards(segmentIndex: $0.index, segmentIdentifier: $0.selectionIdentifier!, cards: cards)
-    }
-    let cards = segmentCards.flatMap { $0.cards }
-    let initialPage = SegmentCards.firstCardIndex(ofSegmentAt: segment.index, in: segmentCards)
+    let segmentCards: [SegmentCardsInfo] = cardSegments.reduce( ([SegmentCardsInfo](), 0) ) { previous, segment in
+      let cards = TKUITripModeByModeCard.config.builder.cards(for: segment, mapManager: tripMapManager)
+      let range = previous.1 ..< previous.1 + cards.count
+      let info = SegmentCardsInfo(segmentIndex: segment.index, segmentIdentifier: segment.selectionIdentifier!, cards: cards, cardsRange: range)
+      return (previous.0 + [info], range.upperBound)
+    }.0
+    let cards = segmentCards.flatMap { $0.cards.map { $0.0 } }
+    let initialPage = SegmentCardsInfo.cardIndices(ofSegmentAt: segment.index, in: segmentCards)?.lowerBound ?? 0
     self.segmentCards = segmentCards
 
     let headerSegments = trip.headerSegments
     self.headerSegmentIndices = headerSegments.map { $0.index }
     
-    super.init(cards: cards, initialPage: initialPage ?? 0)
+    super.init(cards: cards, initialPage: initialPage)
 
     self.headerAccessoryView = buildSegmentsView(segments: headerSegments, selecting: segment.index, trip: trip)
     
     // Little hack for starting with selecting the first page on the map, too
-    didMoveToPage(index: initialPage ?? 0)
+    didMoveToPage(index: initialPage)
   }
   
   public convenience init(mapManager: TKUITripMapManager) {
@@ -170,20 +143,22 @@ public class TKUITripModeByModeCard: TGPageCard {
 
   
   required init?(coder: NSCoder) {
-    // TODO: Implement to support state-restoration
+    // Implement this to support state-restoration
     return nil
   }
   
   public override func didMoveToPage(index: Int) {
     super.didMoveToPage(index: index)
    
-    let segmentIndex = SegmentCards.segmentIndex(ofCardAtIndex: index, in: segmentCards)
-    let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= segmentIndex } // exact segment might not be available!
+    guard let cardsInfo = SegmentCardsInfo.cardsInfo(ofCardAtIndex: index, in: segmentCards)
+      else { assertionFailure(); return }
+    let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= cardsInfo.segmentIndex } // segment on card might not be in header
     headerSegmentsView?.select(segmentAtIndex: selectedHeaderIndex ?? 0)
     
-    if let segment = tripMapManager.trip.segments.first(where: { $0.index == segmentIndex }) {
-      // TODO: Determine if we split the segment into multiple cards, and then maybe just show the first part?
-      tripMapManager.show(segment, animated: true)
+    if let segment = tripMapManager.trip.segments.first(where: { $0.selectionIdentifier == cardsInfo.segmentIdentifier }) {
+      let offset = index - cardsInfo.cardsRange.lowerBound
+      let mode = cardsInfo.cards[offset].1
+      tripMapManager.show(segment, animated: true, mode: mode)
     }
   }
   
@@ -249,12 +224,20 @@ extension TKUITripModeByModeCard {
     let headerIndex = segmentsView.segmentIndex(atX: x)
     
     let segmentIndex = headerSegmentIndices[headerIndex]
-    guard
-      let cardIndex = SegmentCards.firstCardIndex(ofSegmentAt: segmentIndex, in: segmentCards),
-      cardIndex != currentPageIndex
-      else { return }
+    guard let cardIndices = SegmentCardsInfo.cardIndices(ofSegmentAt: segmentIndex, in: segmentCards)
+      else { assertionFailure(); return }
     
-    move(to: cardIndex)
+    let target: Int
+    if cardIndices.contains(currentPageIndex), cardIndices.count > 1 {
+      target = (currentPageIndex == cardIndices.upperBound - 1)
+        ? cardIndices.lowerBound
+        : currentPageIndex + 1
+    } else if !cardIndices.contains(currentPageIndex) {
+      target = cardIndices.lowerBound
+    } else {
+      return // Only a single card which is already selected
+    }
+    move(to: target)
     
     feedbackGenerator.selectionChanged()
     feedbackGenerator.prepare()
@@ -273,7 +256,7 @@ extension TKUITripModeByModeCard {
     // an earlier card.
     
     guard
-      let indices = SegmentCards.cardIndices(ofSegmentWithIdentifier: identifier, in: segmentCards)
+      let indices = SegmentCardsInfo.cardIndices(ofSegmentWithIdentifier: identifier, in: segmentCards)
       else { return }
     if currentPageIndex < indices.lowerBound {
       move(to: indices.lowerBound)
@@ -303,9 +286,12 @@ extension TKUITripModeByModeCard {
     
     let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
     guard segmentsMatch(cardSegments) else {
-      let segmentIndex = SegmentCards.segmentIndex(ofCardAtIndex: currentPageIndex, in: segmentCards)
-      let segment = cardSegments.first(where: { $0.index == segmentIndex }) ?? cardSegments.first!
-      self.modeByModeDelegate?.modeByModeRequestsRebuildForNewSegments(self, trip: trip, currentSegment: segment)
+      // We use the index here as the identifier would have changed. The index
+      // gives us a good guess for finding the corresponding segment in the new
+      // trip.
+      let segmentIndex = SegmentCardsInfo.cardsInfo(ofCardAtIndex: currentPageIndex, in: segmentCards)?.segmentIndex
+      let newSegment = cardSegments.first(where: { $0.index == segmentIndex }) ?? cardSegments.first!
+      self.modeByModeDelegate?.modeByModeRequestsRebuildForNewSegments(self, trip: trip, currentSegment: newSegment)
       return
     }
     

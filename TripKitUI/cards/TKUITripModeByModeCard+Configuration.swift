@@ -16,7 +16,7 @@ public protocol TKUITripModeByModePageBuilder {
   ///   - segment: A segment to display in the mode-by-mode pager
   ///   - mapManager: The mode-by-mode pager's map manager
   /// - Returns: The cards to use for the provided segment, can be empty
-  func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [TGCard]
+  func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)]
   
 }
 
@@ -24,13 +24,13 @@ open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
   
   public init() {}
   
-  open func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [TGCard] {
+  open func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)] {
     if segment.order != .regular {
       return []
     } else if segment.isSelfNavigating {
-      return [TKUISegmentDirectionsCard(for: segment, mapManager: mapManager)]
+      return [(TKUISegmentDirectionsCard(for: segment, mapManager: mapManager), .onSegment)]
     } else {
-      return [TKUISegmentInstructionCard(for: segment, mapManager: mapManager)]
+      return [(TKUISegmentInstructionCard(for: segment, mapManager: mapManager), .onSegment)]
     }
   }
 }
