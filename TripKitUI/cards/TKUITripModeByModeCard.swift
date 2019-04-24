@@ -46,14 +46,16 @@ public class TKUITripModeByModeCard: TGPageCard {
       return index.1
     }
     
-    /// What's the index of the first card for the provided `segment.selectionIdentifier`,
+    /// What's the indices of the cards for the provided `segment.selectionIdentifier`,
     /// if all the cards in the haystack are next to each other?
-    static func firstCardIndex(ofSegmentWithIdentifier needle: String, in haystack: [SegmentCards]) -> Int? {
-      let index: (Int, Int?) = haystack.reduce( (0, nil) ) { acc, card in
+    static func cardIndices(ofSegmentWithIdentifier needle: String, in haystack: [SegmentCards]) -> Range<Int>? {
+      let index: (Int, Range<Int>?) = haystack.reduce( (0, nil) ) { acc, card in
         if acc.1 != nil {
           return acc
         } else if card.segmentIdentifier == needle {
-          return (0, acc.0)
+          let first = acc.0
+          let last = first + card.cards.count
+          return (0, first..<last)
         } else {
           return (acc.0 + card.cards.count, nil)
         }
@@ -117,7 +119,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     let tripMapManager = mapManager ?? TKUITripMapManager(trip: trip)
     self.tripMapManager = tripMapManager
     
-    let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }    
+    let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
     let segmentCards: [SegmentCards] = cardSegments.map {
       let cards = TKUITripModeByModeCard.config.builder.cards(for: $0, mapManager: tripMapManager)
       return SegmentCards(segmentIndex: $0.index, segmentIdentifier: $0.selectionIdentifier!, cards: cards)
@@ -265,11 +267,19 @@ extension TKUITripModeByModeCard {
 extension TKUITripModeByModeCard {
   
   private func reactToMapSelectionChange(_ identifier: String) {
-    guard
-      let cardIndex = SegmentCards.firstCardIndex(ofSegmentWithIdentifier: identifier, in: segmentCards)
-      else { return }
+    // When the map selection changed, we potentially have several candidate
+    // cards. We then want to move to the closer index, i.e., the last if we
+    // previously showed a later card, or the first if we previously showed
+    // an earlier card.
     
-    move(to: cardIndex)
+    guard
+      let indices = SegmentCards.cardIndices(ofSegmentWithIdentifier: identifier, in: segmentCards)
+      else { return }
+    if currentPageIndex < indices.lowerBound {
+      move(to: indices.lowerBound)
+    } else if currentPageIndex >= indices.upperBound {
+      move(to: indices.upperBound - 1)
+    }
   }
   
 }
