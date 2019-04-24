@@ -28,7 +28,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   /// guarantueed to have cards, i.e., `cards` can be empty.
   fileprivate struct SegmentCards {
     let segmentIndex: Int
-    let segmentTemplateCode: Int
+    let segmentIdentifier: String
     let cards: [TGCard]
     
     /// What's the index of the first card for the provided `segment.index`,
@@ -45,6 +45,22 @@ public class TKUITripModeByModeCard: TGPageCard {
       }
       return index.1
     }
+    
+    /// What's the index of the first card for the provided `segment.selectionIdentifier`,
+    /// if all the cards in the haystack are next to each other?
+    static func firstCardIndex(ofSegmentWithIdentifier needle: String, in haystack: [SegmentCards]) -> Int? {
+      let index: (Int, Int?) = haystack.reduce( (0, nil) ) { acc, card in
+        if acc.1 != nil {
+          return acc
+        } else if card.segmentIdentifier == needle {
+          return (0, acc.0)
+        } else {
+          return (acc.0 + card.cards.count, nil)
+        }
+      }
+      return index.1
+    }
+
     
     /// What's `segment.index` of the card at the provided index, if all the
     /// cards in the haystack are next to each otehr?
@@ -101,14 +117,10 @@ public class TKUITripModeByModeCard: TGPageCard {
     let tripMapManager = mapManager ?? TKUITripMapManager(trip: trip)
     self.tripMapManager = tripMapManager
     
-    // TODO: Segment.index works generally, but not for the first and last
-    //   card, i.e., departure and arrival as those don't have an index
-    
-    let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
-    
+    let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }    
     let segmentCards: [SegmentCards] = cardSegments.map {
       let cards = TKUITripModeByModeCard.config.builder.cards(for: $0, mapManager: tripMapManager)
-      return SegmentCards(segmentIndex: $0.index, segmentTemplateCode: $0.templateHashCode, cards: cards)
+      return SegmentCards(segmentIndex: $0.index, segmentIdentifier: $0.selectionIdentifier!, cards: cards)
     }
     let cards = segmentCards.flatMap { $0.cards }
     let initialPage = SegmentCards.firstCardIndex(ofSegmentAt: segment.index, in: segmentCards)
@@ -254,8 +266,7 @@ extension TKUITripModeByModeCard {
   
   private func reactToMapSelectionChange(_ identifier: String) {
     guard
-      let segment = tripMapManager.trip.segments.first(where: { $0.selectionIdentifier == identifier }),
-      let cardIndex = SegmentCards.firstCardIndex(ofSegmentAt: segment.index, in: segmentCards)
+      let cardIndex = SegmentCards.firstCardIndex(ofSegmentWithIdentifier: identifier, in: segmentCards)
       else { return }
     
     move(to: cardIndex)
@@ -272,8 +283,8 @@ extension TKUITripModeByModeCard {
     //   such as if there are alerts inserted, which the builder might create
     //   cards for. So ideally, we should pass this to the builder.
     
-    let oldTemplates = segmentCards.map { $0.segmentTemplateCode }
-    let newTemplates = newSegments.map { $0.templateHashCode }
+    let oldTemplates = segmentCards.map { $0.segmentIdentifier }
+    let newTemplates = newSegments.compactMap { $0.selectionIdentifier }
     return oldTemplates == newTemplates
   }
   

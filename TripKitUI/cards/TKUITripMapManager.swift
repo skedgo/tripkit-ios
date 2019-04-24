@@ -24,11 +24,7 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
   fileprivate weak var selectedSegment: TKSegment? {
     didSet {
-      if let code = selectedSegment?.templateHashCode {
-        selectionIdentifier = String(code)
-      } else {
-        selectionIdentifier = nil
-      }
+      selectionIdentifier = selectedSegment?.selectionIdentifier
     }
   }
   

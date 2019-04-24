@@ -251,7 +251,13 @@ extension TKSegment: TKUIImageAnnotationDisplayable {
 
 extension TKSegment: TKUISemaphoreDisplayable {
   public var selectionIdentifier: String? {
-    return String(templateHashCode) // Should match the definition in TripKit!
+    // Should match the definition in TripKit => Shape
+    switch order {
+    case .start: return "start"
+    case .regular: return String(templateHashCode)
+    case .end: return "end"
+    }
+    
   }
   
   public var semaphoreMode: TKUISemaphoreView.Mode {
