@@ -92,8 +92,6 @@
 		3A6DAED92040985B009282FE /* regionInfo-Nuremberg.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */; };
 		3A6DAEDA2040985B009282FE /* regionInfo-Vancouver.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */; };
 		3A6DF088202C8DA30084CB2C /* TripKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF086202C8DA30084CB2C /* TripKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF103202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0A3202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF107202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0A7202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m */; };
 		3A6DF109202C8EB80084CB2C /* TKUIMapButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0A9202C8EB80084CB2C /* TKUIMapButtonView.swift */; };
 		3A6DF10A202C8EB80084CB2C /* TKUIImageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AB202C8EB80084CB2C /* TKUIImageAnnotationView.m */; };
 		3A6DF10B202C8EB80084CB2C /* TKUISemaphoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AC202C8EB80084CB2C /* TKUISemaphoreView.swift */; };
@@ -899,8 +897,6 @@
 		3A6DF084202C8DA30084CB2C /* TripKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF086202C8DA30084CB2C /* TripKitUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKitUI.h; sourceTree = "<group>"; };
 		3A6DF087202C8DA30084CB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A6DF0A3202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomToAnnotations.h"; sourceTree = "<group>"; };
-		3A6DF0A7202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomToAnnotations.m"; sourceTree = "<group>"; };
 		3A6DF0A9202C8EB80084CB2C /* TKUIMapButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIMapButtonView.swift; sourceTree = "<group>"; };
 		3A6DF0AB202C8EB80084CB2C /* TKUIImageAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIImageAnnotationView.m; sourceTree = "<group>"; };
 		3A6DF0AC202C8EB80084CB2C /* TKUISemaphoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISemaphoreView.swift; sourceTree = "<group>"; };
@@ -1589,8 +1585,6 @@
 		3A6DF0BD202C8EB80084CB2C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				3A6DF0A3202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h */,
-				3A6DF0A7202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m */,
 				3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */,
 				3A6DF0C8202C8EB80084CB2C /* TKStyleManager+TripKitUI.h */,
 				3A6DF0C1202C8EB80084CB2C /* TKStyleManager+TripKitUI.m */,
@@ -2453,7 +2447,6 @@
 				3A6DF14E202C8EB80084CB2C /* TKUIPulsingAnnotationView.h in Headers */,
 				3A6DF121202C8EB80084CB2C /* UIView+BearingRotation.h in Headers */,
 				3A6DF12C202C8EB80084CB2C /* UISearchBar+Customizable.h in Headers */,
-				3A6DF103202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.h in Headers */,
 				3A6DF116202C8EB80084CB2C /* TKUIImageAnnotationView.h in Headers */,
 				3AFD397220D93D9800FDC7D0 /* TKUISheet.h in Headers */,
 				3ABD101B20FE2CAC00693FF8 /* SGTableCell.h in Headers */,
@@ -3140,7 +3133,6 @@
 				3AF5F2B220EFF7BE003AAEBA /* TKUIAttributionCell.swift in Sources */,
 				3A879AE720CFD93700107D58 /* Alert+TKAlert.swift in Sources */,
 				3A6DF10B202C8EB80084CB2C /* TKUISemaphoreView.swift in Sources */,
-				3A6DF107202C8EB80084CB2C /* MKMapView+ZoomToAnnotations.m in Sources */,
 				3A383CA8222FFE8900361596 /* TKUITripModeByModeCard.swift in Sources */,
 				3AFD394E20D9333500FDC7D0 /* TKUITripOverviewCard.swift in Sources */,
 				D3211335206BBAF300E5D929 /* TKUILoadingAlertView.swift in Sources */,
