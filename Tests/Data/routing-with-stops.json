@@ -1,0 +1,2934 @@
+{
+  "groups": [
+    {
+      "frequency": 10,
+      "sources": [
+        {
+          "disclaimer": "\u00a9 OpenStreetMap contributors\n\nMap data available under the Open Database License. For more information, see http://www.openstreetmap.org/copyright.",
+          "provider": {
+            "name": "OpenStreetMap",
+            "website": "https://www.openstreetmap.org"
+          }
+        },
+        {
+          "provider": {
+            "name": "State Transit Sydney"
+          }
+        }
+      ],
+      "trips": [
+        {
+          "arrive": 1556182673,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556180061,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/468c4bf6-1a89-4341-9b8a-3613077e1ec7",
+          "id": "468c4bf6-1a89-4341-9b8a-3613077e1ec7",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/468c4bf6-1a89-4341-9b8a-3613077e1ec7",
+          "mainSegmentHashCode": 1341335710,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/468c4bf6-1a89-4341-9b8a-3613077e1ec7",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/468c4bf6-1a89-4341-9b8a-3613077e1ec7",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556180100,
+              "id": "dstmKhPx",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556180061
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556182320,
+              "id": "rukxUYDU",
+              "realTime": true,
+              "realtimeVehicle": {
+                "components": [
+                  [
+                    {
+                      "airConditioned": true,
+                      "model": "Volvo~B12BLEA~Volgren~CR228",
+                      "occupancy": "MANY_SEATS_AVAILABLE",
+                      "wheelchairAccessible": true,
+                      "wheelchairSeats": 1,
+                      "wifi": false
+                    }
+                  ]
+                ],
+                "id": "847019",
+                "label": "",
+                "lastUpdate": 1556179186,
+                "location": {
+                  "bearing": 357,
+                  "lat": -33.89325,
+                  "lng": 151.27298
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1341335710,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847019",
+              "startTime": 1556180100,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556182673,
+              "id": "F1GYPXRa",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556182320
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/468c4bf6-1a89-4341-9b8a-3613077e1ec7",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/468c4bf6-1a89-4341-9b8a-3613077e1ec7?hash=356223601",
+          "weightedScore": 35.8
+        },
+        {
+          "arrive": 1556181065,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556178366,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/b21f4f1e-8032-4e85-9688-cd4b7ba91fe1",
+          "id": "b21f4f1e-8032-4e85-9688-cd4b7ba91fe1",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/b21f4f1e-8032-4e85-9688-cd4b7ba91fe1",
+          "mainSegmentHashCode": 1343238490,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/b21f4f1e-8032-4e85-9688-cd4b7ba91fe1",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/b21f4f1e-8032-4e85-9688-cd4b7ba91fe1",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556178405,
+              "id": "W970Ryya",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556178366
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556180712,
+              "id": "lnDwMgPd",
+              "realTime": true,
+              "realtimeVehicle": {
+                "components": [
+                  [
+                    {
+                      "airConditioned": true,
+                      "model": "Volvo~B12BLEA~Volgren~CR228",
+                      "occupancy": "STANDING_ROOM_ONLY",
+                      "wheelchairAccessible": true,
+                      "wheelchairSeats": 1,
+                      "wifi": false
+                    }
+                  ]
+                ],
+                "id": "847591",
+                "label": "",
+                "lastUpdate": 1556179180,
+                "location": {
+                  "bearing": 292,
+                  "lat": -33.89112,
+                  "lng": 151.25322
+                },
+                "occupancy": "STANDING_ROOM_ONLY",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1343238490,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847591",
+              "startTime": 1556178405,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556181065,
+              "id": "yB3k8uAo",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556180712
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/b21f4f1e-8032-4e85-9688-cd4b7ba91fe1",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/b21f4f1e-8032-4e85-9688-cd4b7ba91fe1?hash=476992588",
+          "weightedScore": 101.4
+        },
+        {
+          "arrive": 1556182313,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556179701,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/20b31e16-8272-483b-a8c6-93c5608faf6e",
+          "id": "20b31e16-8272-483b-a8c6-93c5608faf6e",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/20b31e16-8272-483b-a8c6-93c5608faf6e",
+          "mainSegmentHashCode": 1341335710,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/20b31e16-8272-483b-a8c6-93c5608faf6e",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/20b31e16-8272-483b-a8c6-93c5608faf6e",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556179740,
+              "id": "hGCHtnRi",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556179701
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556181960,
+              "id": "WReR9JVX",
+              "realTime": true,
+              "realtimeVehicle": {
+                "components": [
+                  [
+                    {
+                      "airConditioned": true,
+                      "model": "Volvo~B12BLEA~Volgren~CR228",
+                      "occupancy": "MANY_SEATS_AVAILABLE",
+                      "wheelchairAccessible": true,
+                      "wheelchairSeats": 1,
+                      "wifi": false
+                    }
+                  ]
+                ],
+                "id": "847018",
+                "label": "",
+                "lastUpdate": 1556179117,
+                "location": {
+                  "bearing": 214,
+                  "lat": -33.88948,
+                  "lng": 151.28339
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1341335710,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847018",
+              "startTime": 1556179740,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556182313,
+              "id": "44tZ3Qag",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556181960
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/20b31e16-8272-483b-a8c6-93c5608faf6e",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/20b31e16-8272-483b-a8c6-93c5608faf6e?hash=-1603592805",
+          "weightedScore": 33.8
+        },
+        {
+          "arrive": 1556185373,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556182821,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/dd94959b-6a90-4daf-a37d-2b9cc94f9924",
+          "id": "dd94959b-6a90-4daf-a37d-2b9cc94f9924",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/dd94959b-6a90-4daf-a37d-2b9cc94f9924",
+          "mainSegmentHashCode": 569821026,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/dd94959b-6a90-4daf-a37d-2b9cc94f9924",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/dd94959b-6a90-4daf-a37d-2b9cc94f9924",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556182860,
+              "id": "amtJRVPy",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556182821
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556185020,
+              "id": "wmywew17",
+              "segmentTemplateHashCode": 569821026,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "848240",
+              "startTime": 1556182860,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556185373,
+              "id": "tgaO7O3P",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556185020
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/dd94959b-6a90-4daf-a37d-2b9cc94f9924",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/dd94959b-6a90-4daf-a37d-2b9cc94f9924?hash=-1641444734",
+          "weightedScore": 50.7
+        },
+        {
+          "arrive": 1556184113,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556181501,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/13aa62c9-615b-451b-a41d-e2602390cb41",
+          "id": "13aa62c9-615b-451b-a41d-e2602390cb41",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/13aa62c9-615b-451b-a41d-e2602390cb41",
+          "mainSegmentHashCode": 1282234210,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/13aa62c9-615b-451b-a41d-e2602390cb41",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/13aa62c9-615b-451b-a41d-e2602390cb41",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556181540,
+              "id": "hUsOPDNE",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556181501
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556183760,
+              "id": "sMJPbUWQ",
+              "segmentTemplateHashCode": 1282234210,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847841",
+              "startTime": 1556181540,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556184113,
+              "id": "FkqZSeIs",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556183760
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/13aa62c9-615b-451b-a41d-e2602390cb41",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/13aa62c9-615b-451b-a41d-e2602390cb41?hash=5973070",
+          "weightedScore": 43.8
+        },
+        {
+          "arrive": 1556181953,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556179341,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/35093294-274a-40bd-a745-688849dfe46e",
+          "id": "35093294-274a-40bd-a745-688849dfe46e",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/35093294-274a-40bd-a745-688849dfe46e",
+          "mainSegmentHashCode": 1341335710,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/35093294-274a-40bd-a745-688849dfe46e",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/35093294-274a-40bd-a745-688849dfe46e",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556179380,
+              "id": "8hcugJtc",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556179341
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556181600,
+              "id": "yBF3NpuR",
+              "segmentTemplateHashCode": 1341335710,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847017",
+              "startTime": 1556179380,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556181953,
+              "id": "AytDxh1S",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556181600
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/35093294-274a-40bd-a745-688849dfe46e",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/35093294-274a-40bd-a745-688849dfe46e?hash=-1792638297",
+          "weightedScore": 31.8
+        },
+        {
+          "arrive": 1556184473,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556181861,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/36077aa4-8439-4d1f-8acd-c80b6142eea5",
+          "id": "36077aa4-8439-4d1f-8acd-c80b6142eea5",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/36077aa4-8439-4d1f-8acd-c80b6142eea5",
+          "mainSegmentHashCode": 1282234210,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/36077aa4-8439-4d1f-8acd-c80b6142eea5",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/36077aa4-8439-4d1f-8acd-c80b6142eea5",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556181900,
+              "id": "qaIFaG36",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556181861
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556184120,
+              "id": "hdnXcBWi",
+              "segmentTemplateHashCode": 1282234210,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847842",
+              "startTime": 1556181900,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556184473,
+              "id": "ubHaoA9M",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556184120
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/36077aa4-8439-4d1f-8acd-c80b6142eea5",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/36077aa4-8439-4d1f-8acd-c80b6142eea5?hash=624778989",
+          "weightedScore": 45.8
+        },
+        {
+          "arrive": 1556184893,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556182341,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/de960dc8-1c6f-4b73-9b17-b901809a4a06",
+          "id": "de960dc8-1c6f-4b73-9b17-b901809a4a06",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/de960dc8-1c6f-4b73-9b17-b901809a4a06",
+          "mainSegmentHashCode": 569821026,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/de960dc8-1c6f-4b73-9b17-b901809a4a06",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/de960dc8-1c6f-4b73-9b17-b901809a4a06",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556182380,
+              "id": "iaFLuAc7",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556182341
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556184540,
+              "id": "c1jomRpb",
+              "segmentTemplateHashCode": 569821026,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "848239",
+              "startTime": 1556182380,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556184893,
+              "id": "tMQqmrnl",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556184540
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/de960dc8-1c6f-4b73-9b17-b901809a4a06",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/de960dc8-1c6f-4b73-9b17-b901809a4a06?hash=-1179949711",
+          "weightedScore": 48
+        },
+        {
+          "arrive": 1556185733,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556183241,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/c73d4815-471a-42a0-8ab8-b93e3321a1b9",
+          "id": "c73d4815-471a-42a0-8ab8-b93e3321a1b9",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/c73d4815-471a-42a0-8ab8-b93e3321a1b9",
+          "mainSegmentHashCode": -395778206,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/c73d4815-471a-42a0-8ab8-b93e3321a1b9",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/c73d4815-471a-42a0-8ab8-b93e3321a1b9",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556183280,
+              "id": "5JNVrDiV",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556183241
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556185380,
+              "id": "bmpP3xO9",
+              "segmentTemplateHashCode": -395778206,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847965",
+              "startTime": 1556183280,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556185733,
+              "id": "QWe4jKv6",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556185380
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/c73d4815-471a-42a0-8ab8-b93e3321a1b9",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/c73d4815-471a-42a0-8ab8-b93e3321a1b9?hash=-656530826",
+          "weightedScore": 52.5
+        },
+        {
+          "arrive": 1556183393,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556180781,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/db14dfd3-a742-4fee-8c5a-aa46ca7cf967",
+          "id": "db14dfd3-a742-4fee-8c5a-aa46ca7cf967",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/db14dfd3-a742-4fee-8c5a-aa46ca7cf967",
+          "mainSegmentHashCode": 1282234210,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/db14dfd3-a742-4fee-8c5a-aa46ca7cf967",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/db14dfd3-a742-4fee-8c5a-aa46ca7cf967",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556180820,
+              "id": "LktvcHiF",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556180781
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556183040,
+              "id": "nsQBxeYb",
+              "realTime": true,
+              "realtimeVehicle": {
+                "components": [
+                  [
+                    {
+                      "airConditioned": true,
+                      "model": "Volvo~B12BLEA~Volgren~CR228",
+                      "occupancy": "MANY_SEATS_AVAILABLE",
+                      "wheelchairAccessible": true,
+                      "wheelchairSeats": 1,
+                      "wifi": false
+                    }
+                  ]
+                ],
+                "id": "847839",
+                "label": "",
+                "lastUpdate": 1556179184,
+                "location": {
+                  "bearing": 97,
+                  "lat": -33.89132,
+                  "lng": 151.24803
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1282234210,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847839",
+              "startTime": 1556180820,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556183393,
+              "id": "T0uNrzMG",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556183040
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/db14dfd3-a742-4fee-8c5a-aa46ca7cf967",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/db14dfd3-a742-4fee-8c5a-aa46ca7cf967?hash=1562958148",
+          "weightedScore": 39.8
+        },
+        {
+          "arrive": 1556186333,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556183841,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/c26b545c-2448-4169-af69-8b0e2b92a3ec",
+          "id": "c26b545c-2448-4169-af69-8b0e2b92a3ec",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/c26b545c-2448-4169-af69-8b0e2b92a3ec",
+          "mainSegmentHashCode": -395778206,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/c26b545c-2448-4169-af69-8b0e2b92a3ec",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/c26b545c-2448-4169-af69-8b0e2b92a3ec",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556183880,
+              "id": "5A5XHC7p",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556183841
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556185980,
+              "id": "F6sMbUOu",
+              "segmentTemplateHashCode": -395778206,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847966",
+              "startTime": 1556183880,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556186333,
+              "id": "t5UJc6aY",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556185980
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/c26b545c-2448-4169-af69-8b0e2b92a3ec",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/c26b545c-2448-4169-af69-8b0e2b92a3ec?hash=-970806262",
+          "weightedScore": 55.9
+        },
+        {
+          "arrive": 1556183753,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556181141,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/ce0bbc95-891c-4195-a7ea-30030f228ffa",
+          "id": "ce0bbc95-891c-4195-a7ea-30030f228ffa",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/ce0bbc95-891c-4195-a7ea-30030f228ffa",
+          "mainSegmentHashCode": 1282234210,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/ce0bbc95-891c-4195-a7ea-30030f228ffa",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/ce0bbc95-891c-4195-a7ea-30030f228ffa",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556181180,
+              "id": "CKmlDwaq",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556181141
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556183400,
+              "id": "OKeamrT8",
+              "segmentTemplateHashCode": 1282234210,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847840",
+              "startTime": 1556181180,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556183753,
+              "id": "7TtLBHrT",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556183400
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/ce0bbc95-891c-4195-a7ea-30030f228ffa",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/ce0bbc95-891c-4195-a7ea-30030f228ffa?hash=-1702798028",
+          "weightedScore": 41.8
+        },
+        {
+          "arrive": 1556181625,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556179013,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/66a032f1-4326-482c-aa16-8d874f5e926f",
+          "id": "66a032f1-4326-482c-aa16-8d874f5e926f",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/66a032f1-4326-482c-aa16-8d874f5e926f",
+          "mainSegmentHashCode": 1341335710,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/66a032f1-4326-482c-aa16-8d874f5e926f",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/66a032f1-4326-482c-aa16-8d874f5e926f",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556179052,
+              "id": "U5tfx1v5",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556179013
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556181272,
+              "id": "UO2W5Wsz",
+              "realTime": true,
+              "realtimeVehicle": {
+                "components": [
+                  [
+                    {
+                      "airConditioned": true,
+                      "model": "Volvo~B12BLEA~Volgren~CR228",
+                      "occupancy": "MANY_SEATS_AVAILABLE",
+                      "wheelchairAccessible": true,
+                      "wheelchairSeats": 1,
+                      "wifi": false
+                    }
+                  ]
+                ],
+                "id": "847016",
+                "label": "",
+                "lastUpdate": 1556179188,
+                "location": {
+                  "bearing": 223,
+                  "lat": -33.8912,
+                  "lng": 151.27434
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1341335710,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847016",
+              "startTime": 1556179052,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556181625,
+              "id": "0v6peWJd",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556181272
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/66a032f1-4326-482c-aa16-8d874f5e926f",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/66a032f1-4326-482c-aa16-8d874f5e926f?hash=-1366678662",
+          "weightedScore": 29.8
+        },
+        {
+          "arrive": 1556183037,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556180425,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/43abcd3e-139e-45af-b0dd-030c5f8cc738",
+          "id": "43abcd3e-139e-45af-b0dd-030c5f8cc738",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/43abcd3e-139e-45af-b0dd-030c5f8cc738",
+          "mainSegmentHashCode": 1282234210,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/43abcd3e-139e-45af-b0dd-030c5f8cc738",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/43abcd3e-139e-45af-b0dd-030c5f8cc738",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556180464,
+              "id": "2JJzi3kt",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556180425
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556182684,
+              "id": "dXeOeqIM",
+              "realTime": true,
+              "realtimeVehicle": {
+                "components": [
+                  [
+                    {
+                      "airConditioned": true,
+                      "model": "Volvo~B12BLEA~Volgren~CR228",
+                      "occupancy": "MANY_SEATS_AVAILABLE",
+                      "wheelchairAccessible": true,
+                      "wheelchairSeats": 1,
+                      "wifi": false
+                    }
+                  ]
+                ],
+                "id": "847838",
+                "label": "",
+                "lastUpdate": 1556179170,
+                "location": {
+                  "bearing": 71,
+                  "lat": -33.89131,
+                  "lng": 151.25264
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1282234210,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847838",
+              "startTime": 1556180464,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556183037,
+              "id": "F91pb62X",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556182684
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/43abcd3e-139e-45af-b0dd-030c5f8cc738",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/43abcd3e-139e-45af-b0dd-030c5f8cc738?hash=-1136385151",
+          "weightedScore": 37.8
+        },
+        {
+          "arrive": 1556181310,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556178698,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/4d0b9789-9731-4f65-9aee-0ee998b7ecb1",
+          "id": "4d0b9789-9731-4f65-9aee-0ee998b7ecb1",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/4d0b9789-9731-4f65-9aee-0ee998b7ecb1",
+          "mainSegmentHashCode": 1343238490,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/4d0b9789-9731-4f65-9aee-0ee998b7ecb1",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/4d0b9789-9731-4f65-9aee-0ee998b7ecb1",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556178737,
+              "id": "9PjXQan0",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556178698
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556180957,
+              "id": "pJc6ZMk8",
+              "realTime": true,
+              "realtimeVehicle": {
+                "components": [
+                  [
+                    {
+                      "airConditioned": true,
+                      "model": "Volvo~B12BLEA~Volgren~CR228",
+                      "occupancy": "STANDING_ROOM_ONLY",
+                      "wheelchairAccessible": true,
+                      "wheelchairSeats": 1,
+                      "wifi": false
+                    }
+                  ]
+                ],
+                "id": "847592",
+                "label": "",
+                "lastUpdate": 1556179187,
+                "location": {
+                  "bearing": 279,
+                  "lat": -33.89405,
+                  "lng": 151.26404
+                },
+                "occupancy": "STANDING_ROOM_ONLY",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1343238490,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847592",
+              "startTime": 1556178737,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556181310,
+              "id": "gqJYnfJ0",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556180957
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/4d0b9789-9731-4f65-9aee-0ee998b7ecb1",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/4d0b9789-9731-4f65-9aee-0ee998b7ecb1?hash=387213256",
+          "weightedScore": 61.4
+        },
+        {
+          "arrive": 1556180655,
+          "availability": "AVAILABLE",
+          "caloriesCost": 10,
+          "carbonCost": 0.4,
+          "currencySymbol": "$",
+          "depart": 1556178043,
+          "hassleCost": 2,
+          "hookURL": "https://darkages.buzzhives.com/satapp/trip/hook/5c9e07f7-c9ae-4e97-a925-f5431dc5567a",
+          "id": "5c9e07f7-c9ae-4e97-a925-f5431dc5567a",
+          "logURL": "https://darkages.buzzhives.com/satapp/trip/log/5c9e07f7-c9ae-4e97-a925-f5431dc5567a",
+          "mainSegmentHashCode": 1343238490,
+          "moneyCost": 3.66,
+          "moneyUSDCost": 2.87,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/5c9e07f7-c9ae-4e97-a925-f5431dc5567a",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1556178909,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/5c9e07f7-c9ae-4e97-a925-f5431dc5567a",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556178082,
+              "id": "OT02nkV5",
+              "segmentTemplateHashCode": 180517674,
+              "startTime": 1556178043
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556180302,
+              "id": "4rgSaoYh",
+              "realTime": true,
+              "realtimeVehicle": {
+                "components": [
+                  [
+                    {
+                      "airConditioned": true,
+                      "model": "Volvo~B12BLEA~Volgren~CR228",
+                      "occupancy": "STANDING_ROOM_ONLY",
+                      "wheelchairAccessible": true,
+                      "wheelchairSeats": 1,
+                      "wifi": false
+                    }
+                  ]
+                ],
+                "id": "847590",
+                "label": "",
+                "lastUpdate": 1556179188,
+                "location": {
+                  "bearing": 276,
+                  "lat": -33.89088,
+                  "lng": 151.24847
+                },
+                "occupancy": "STANDING_ROOM_ONLY",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1343238490,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "City Circular Quay",
+              "serviceName": "PrePay-Only - North Bondi to City Circular Quay via Bondi Junction",
+              "serviceNumber": "333",
+              "serviceTripID": "847590",
+              "startTime": 1556178082,
+              "stops": 20,
+              "ticket": {
+                "cost": 3.66,
+                "exchange": 0.78376,
+                "name": "Opal (bus)"
+              },
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1556180655,
+              "id": "oaQ9tFFX",
+              "segmentTemplateHashCode": -1307637299,
+              "startTime": 1556180302
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/5c9e07f7-c9ae-4e97-a925-f5431dc5567a",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/5c9e07f7-c9ae-4e97-a925-f5431dc5567a?hash=364419254",
+          "weightedScore": 141.4
+        }
+      ]
+    }
+  ],
+  "realTimeStamp": 1556179146,
+  "region": "AU_NSW_Sydney",
+  "regions": [
+    "AU_NSW_Sydney"
+  ],
+  "segmentTemplates": [
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "Campbell Parade",
+        "class": "Location",
+        "lat": -33.88905,
+        "lng": 151.2779,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 180517674,
+      "metres": 42,
+      "mini": {
+        "description": "Campbell Pde opp Bondi Beach Public School",
+        "instruction": "Walk",
+        "mainValue": "<1/4 mile"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "color": {
+          "blue": 99,
+          "green": 199,
+          "red": 30
+        },
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ <1/4 mile",
+      "streets": [
+        {
+          "encodedWaypoints": "r}ymEymiz[BL??LBFo@EF",
+          "metres": 42,
+          "name": "Campbell Parade"
+        }
+      ],
+      "to": {
+        "address": "Campbell Pde opp Bondi Beach Public School",
+        "class": "Location",
+        "lat": -33.88916,
+        "lng": 151.27801,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 133,
+      "type": "unscheduled",
+      "visibility": "in details"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "200055",
+      "from": {
+        "address": "Campbell Pde opp Bondi Beach Public School",
+        "class": "Location",
+        "lat": -33.88916,
+        "lng": 151.27801,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1341335710,
+      "localCost": {
+        "accuracy": "internal_estimate",
+        "cost": 3.66,
+        "costComponents": [
+          {
+            "cost": 3.66,
+            "name": "Opal (bus)",
+            "type": "TICKET"
+          }
+        ],
+        "currency": "AUD"
+      },
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "color": {
+          "blue": 104,
+          "green": 197,
+          "red": 45
+        },
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($3.66)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "`azmEsojz[Xl@HTR^ZjAu@lAMz@LzA?RD`@ZdB??SQ?P?XAVALGTCNMt@m@vAY~@IVIZKhC",
+          "stops": [
+            {
+              "bearing": 263,
+              "code": "202634",
+              "lat": -33.88961,
+              "lng": 151.28331,
+              "name": "North Bondi Shops, Stand A",
+              "relativeDeparture": -60,
+              "shortName": "Stand A"
+            },
+            {
+              "code": "202635",
+              "lat": -33.88993,
+              "lng": 151.2805,
+              "name": "North Bondi Beach, Campbell Pde",
+              "relativeArrival": 0,
+              "relativeDeparture": 0
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "f~ymEoniz[OMAPGz@@X?zAJp@Lj@Rn@dCzCrC`DlBvA??MRb@f@jCnCX@HGJ@FFBJAJr@`@NBdCBzAQrBm@??@R|@O^AZ@`@HPHHDNJFLLRHTDN@N?l@Ih@m@zC??QFIb@a@rA]~De@`GIvC??IWKxACRa@fFa@nEAHOjE??KAALM|Aa@nEARi@tGEj@IlAFZ??[dBY~EOtBo@vIBjA??MDEx@A^B`@DV_Aj@mAvAgBvBmB`CN|@RdAH^f@dAFLn@pAH`@R~Aj@rD??OBBVAR_BJq@B{@LM|BAbC??GAGv@Dd@AA????ICMjAN?x@Hh@DtAHMrB??????OCSfAO|@aAzEm@~Co@vCQ|@WlAC`A?A????OAc@vB]hCEh@Fp@Hv@t@rCT~@Np@Pv@H~@^bDHx@?hAKzAKp@[hAu@~Ca@`Bw@pC}AtEENyDjEu@|@MF}A~BA?????EIo@t@qEjHe@p@CZ?A????IIwB|Ca@z@Sv@Mz@Gr@APD~@?A????IBEn@KtBCr@SzAG\\g@lBw@rCw@|Ck@~BQnA??????CAYhA]z@QNqAdAqAhASNuAhAa@|@_@x@O^YlA@@????GEIPe@zAiAnDQ`@MRi@x@iAlB??????EGsCrDiDhEy@dASX}ApBKN@T??????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??",
+          "stops": [
+            {
+              "bearing": 240,
+              "code": "202637",
+              "lat": -33.88916,
+              "lng": 151.27801,
+              "name": "Campbell Pde opp Bondi Beach Public School",
+              "relativeDeparture": 0
+            },
+            {
+              "bearing": 198,
+              "code": "202653",
+              "lat": -33.89123,
+              "lng": 151.27435,
+              "name": "Bondi Beach, Campbell Pde, Stand A",
+              "relativeArrival": 60,
+              "relativeDeparture": 60,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 243,
+              "code": "202654",
+              "lat": -33.89437,
+              "lng": 151.2733,
+              "name": "South Bondi Beach, Campbell Pde",
+              "relativeArrival": 240,
+              "relativeDeparture": 240
+            },
+            {
+              "bearing": 281,
+              "code": "202656",
+              "lat": -33.89531,
+              "lng": 151.27144,
+              "name": "Bondi Rd at Dudley St",
+              "relativeArrival": 360,
+              "relativeDeparture": 360
+            },
+            {
+              "bearing": 279,
+              "code": "202659",
+              "lat": -33.89461,
+              "lng": 151.26779,
+              "name": "Bondi Rd opp Castlefield St",
+              "relativeArrival": 480,
+              "relativeDeparture": 480
+            },
+            {
+              "bearing": 279,
+              "code": "202661",
+              "lat": -33.89404,
+              "lng": 151.26409,
+              "name": "Bondi Rd opp Wellington St",
+              "relativeArrival": 600,
+              "relativeDeparture": 600
+            },
+            {
+              "bearing": 278,
+              "code": "202663",
+              "lat": -33.89347,
+              "lng": 151.26028,
+              "name": "Bondi Rd before Park Pde",
+              "relativeArrival": 660,
+              "relativeDeparture": 660
+            },
+            {
+              "bearing": 278,
+              "code": "202255",
+              "lat": -33.8929,
+              "lng": 151.25596,
+              "name": "Waverley Council Chambers, Bondi Rd",
+              "relativeArrival": 840,
+              "relativeDeparture": 840
+            },
+            {
+              "bearing": 305,
+              "code": "202257",
+              "lat": -33.89214,
+              "lng": 151.25008,
+              "name": "Westfield Bondi Junction, Oxford St, Stand A",
+              "relativeArrival": 1020,
+              "relativeDeparture": 1020,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 278,
+              "code": "202268",
+              "lat": -33.89097,
+              "lng": 151.24839,
+              "name": "Bondi Junction Station, Grafton St, Stand Q",
+              "relativeArrival": 1080,
+              "relativeDeparture": 1080,
+              "shortName": "Stand Q"
+            },
+            {
+              "bearing": 232,
+              "code": "202281",
+              "lat": -33.89091,
+              "lng": 151.24794,
+              "name": "Bondi Junction Station, Grafton St, Stand R",
+              "relativeArrival": 1200,
+              "relativeDeparture": 1200,
+              "shortName": "Stand R"
+            },
+            {
+              "bearing": 287,
+              "code": "202258",
+              "lat": -33.89172,
+              "lng": 151.24688,
+              "name": "Oxford St after Newland St",
+              "relativeArrival": 1260,
+              "relativeDeparture": 1260
+            },
+            {
+              "bearing": 284,
+              "code": "202260",
+              "lat": -33.89043,
+              "lng": 151.24254,
+              "name": "Oxford St before York Rd",
+              "relativeArrival": 1380,
+              "relativeDeparture": 1380
+            },
+            {
+              "bearing": 307,
+              "code": "202151",
+              "lat": -33.88767,
+              "lng": 151.23087,
+              "name": "Paddington Public School, Oxford St",
+              "relativeArrival": 1560,
+              "relativeDeparture": 1560
+            },
+            {
+              "bearing": 294,
+              "code": "202152",
+              "lat": -33.88614,
+              "lng": 151.22877,
+              "name": "Oxford St opp William St",
+              "relativeArrival": 1620,
+              "relativeDeparture": 1620
+            },
+            {
+              "bearing": 286,
+              "code": "202153",
+              "lat": -33.88512,
+              "lng": 151.22649,
+              "name": "Paddington Town Hall, Oxford St",
+              "relativeArrival": 1680,
+              "relativeDeparture": 1680
+            },
+            {
+              "bearing": 307,
+              "code": "202155",
+              "lat": -33.88375,
+              "lng": 151.22166,
+              "name": "Oxford St opp Hopewell St",
+              "relativeArrival": 1800,
+              "relativeDeparture": 1800
+            },
+            {
+              "bearing": 299,
+              "code": "201060",
+              "lat": -33.88148,
+              "lng": 151.21859,
+              "name": "Oxford St after South Dowling St",
+              "relativeArrival": 1920,
+              "relativeDeparture": 1920
+            },
+            {
+              "bearing": 310,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Taylor Square, Oxford St, Stand A",
+              "relativeArrival": 1980,
+              "relativeDeparture": 1980,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 308,
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeArrival": 2100,
+              "relativeDeparture": 2100
+            },
+            {
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 2220,
+              "relativeDeparture": 2220,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "hewmE{b|y[??@Su@GiG_@MA{FK?@????@UaG_@s@Gc@AgBKuBMuDWcBKqCB??????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IgAMu@GLbDMCw@EiCMuA@",
+          "stops": [
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeDeparture": 2340
+            },
+            {
+              "bearing": 21,
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 2520,
+              "relativeDeparture": 2520,
+              "shortName": "Stand C"
+            },
+            {
+              "bearing": 345,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeArrival": 2580,
+              "relativeDeparture": 2580
+            },
+            {
+              "code": "200065",
+              "lat": -33.862,
+              "lng": 151.21115,
+              "name": "Circular Quay, Young St, Stand D",
+              "relativeArrival": 2640,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "sources": [
+        {
+          "provider": "State Transit Sydney"
+        }
+      ],
+      "stopCode": "202637",
+      "to": {
+        "address": "Museum Station, Elizabeth St, Stand D",
+        "class": "Location",
+        "lat": -33.87493,
+        "lng": 151.20958,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 282,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "Museum Station, Elizabeth St, Stand D",
+        "class": "Location",
+        "lat": -33.87493,
+        "lng": 151.20958,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -1307637299,
+      "metres": 381,
+      "mini": {
+        "description": "Museum Station, Downing Centre, Stand B",
+        "instruction": "Walk",
+        "mainValue": "<1/4 mile"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "color": {
+          "blue": 99,
+          "green": 199,
+          "red": 30
+        },
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ <1/4 mile",
+      "streets": [
+        {
+          "encodedWaypoints": "hewmE{b|y[BW",
+          "metres": 10,
+          "name": "Walk"
+        },
+        {
+          "encodedWaypoints": "lewmEsc|y[`CP~AJ|@DH@bABPBdBNP@t@DfAD?AYU",
+          "metres": 370,
+          "name": "Elizabeth Street"
+        }
+      ],
+      "to": {
+        "address": "Museum Station, Downing Centre, Stand B",
+        "class": "Location",
+        "lat": -33.87797,
+        "lng": 151.20944,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 182,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "200055",
+      "from": {
+        "address": "Campbell Pde opp Bondi Beach Public School",
+        "class": "Location",
+        "lat": -33.88916,
+        "lng": 151.27801,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1343238490,
+      "localCost": {
+        "accuracy": "internal_estimate",
+        "cost": 3.66,
+        "costComponents": [
+          {
+            "cost": 3.66,
+            "name": "Opal (bus)",
+            "type": "TICKET"
+          }
+        ],
+        "currency": "AUD"
+      },
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "color": {
+          "blue": 104,
+          "green": 197,
+          "red": 45
+        },
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($3.66)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "`azmEsojz[Xl@HTR^ZjAu@lAMz@LzA?RD`@ZdB??SQ?P?XAVALGTCNMt@m@vAY~@IVIZKhC",
+          "stops": [
+            {
+              "bearing": 263,
+              "code": "202634",
+              "lat": -33.88961,
+              "lng": 151.28331,
+              "name": "North Bondi Shops, Stand A",
+              "relativeDeparture": -165,
+              "shortName": "Stand A"
+            },
+            {
+              "code": "202635",
+              "lat": -33.88993,
+              "lng": 151.2805,
+              "name": "North Bondi Beach, Campbell Pde",
+              "relativeArrival": -105,
+              "relativeDeparture": -105
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "f~ymEoniz[OMAPGz@@X?zAJp@Lj@Rn@dCzCrC`DlBvA??MRb@f@jCnCX@HGJ@FFBJAJr@`@NBdCBzAQrBm@??@R|@O^AZ@`@HPHHDNJFLLRHTDN@N?l@Ih@m@zC??QFIb@a@rA]~De@`GIvC??IWKxACRa@fFa@nEAHOjE??KAALM|Aa@nEARi@tGEj@IlAFZ??[dBY~EOtBo@vIBjA??MDEx@A^B`@DV_Aj@mAvAgBvBmB`CN|@RdAH^f@dAFLn@pAH`@R~Aj@rD??OBBVAR_BJq@B{@LM|BAbC??GAGv@Dd@AA????ICMjAN?x@Hh@DtAHMrB??????OCSfAO|@aAzEm@~Co@vCQ|@WlAC`A?A????OAc@vB]hCEh@Fp@Hv@t@rCT~@Np@Pv@H~@^bDHx@?hAKzAKp@[hAu@~Ca@`Bw@pC}AtEENyDjEu@|@MF}A~BA?????EIo@t@qEjHe@p@CZ?A????IIwB|Ca@z@Sv@Mz@Gr@APD~@?A????IBEn@KtBCr@SzAG\\g@lBw@rCw@|Ck@~BQnA??????CAYhA]z@QNqAdAqAhASNuAhAa@|@_@x@O^YlA@@????GEIPe@zAiAnDQ`@MRi@x@iAlB??????EGsCrDiDhEy@dASX}ApBKN@T??????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??",
+          "stops": [
+            {
+              "bearing": 240,
+              "code": "202637",
+              "lat": -33.88916,
+              "lng": 151.27801,
+              "name": "Campbell Pde opp Bondi Beach Public School",
+              "relativeDeparture": -105
+            },
+            {
+              "bearing": 198,
+              "code": "202653",
+              "lat": -33.89123,
+              "lng": 151.27435,
+              "name": "Bondi Beach, Campbell Pde, Stand A",
+              "relativeArrival": -45,
+              "relativeDeparture": -45,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 243,
+              "code": "202654",
+              "lat": -33.89437,
+              "lng": 151.2733,
+              "name": "South Bondi Beach, Campbell Pde",
+              "relativeArrival": 135,
+              "relativeDeparture": 135
+            },
+            {
+              "bearing": 281,
+              "code": "202656",
+              "lat": -33.89531,
+              "lng": 151.27144,
+              "name": "Bondi Rd at Dudley St",
+              "relativeArrival": 255,
+              "relativeDeparture": 255
+            },
+            {
+              "bearing": 279,
+              "code": "202659",
+              "lat": -33.89461,
+              "lng": 151.26779,
+              "name": "Bondi Rd opp Castlefield St",
+              "relativeArrival": 375,
+              "relativeDeparture": 375
+            },
+            {
+              "bearing": 279,
+              "code": "202661",
+              "lat": -33.89404,
+              "lng": 151.26409,
+              "name": "Bondi Rd opp Wellington St",
+              "relativeArrival": 495,
+              "relativeDeparture": 495
+            },
+            {
+              "bearing": 278,
+              "code": "202663",
+              "lat": -33.89347,
+              "lng": 151.26028,
+              "name": "Bondi Rd before Park Pde",
+              "relativeArrival": 555,
+              "relativeDeparture": 555
+            },
+            {
+              "bearing": 278,
+              "code": "202255",
+              "lat": -33.8929,
+              "lng": 151.25596,
+              "name": "Waverley Council Chambers, Bondi Rd",
+              "relativeArrival": 735,
+              "relativeDeparture": 735
+            },
+            {
+              "bearing": 305,
+              "code": "202257",
+              "lat": -33.89214,
+              "lng": 151.25008,
+              "name": "Westfield Bondi Junction, Oxford St, Stand A",
+              "relativeArrival": 915,
+              "relativeDeparture": 915,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 278,
+              "code": "202268",
+              "lat": -33.89097,
+              "lng": 151.24839,
+              "name": "Bondi Junction Station, Grafton St, Stand Q",
+              "relativeArrival": 975,
+              "relativeDeparture": 975,
+              "shortName": "Stand Q"
+            },
+            {
+              "bearing": 232,
+              "code": "202281",
+              "lat": -33.89091,
+              "lng": 151.24794,
+              "name": "Bondi Junction Station, Grafton St, Stand R",
+              "relativeArrival": 1095,
+              "relativeDeparture": 1095,
+              "shortName": "Stand R"
+            },
+            {
+              "bearing": 287,
+              "code": "202258",
+              "lat": -33.89172,
+              "lng": 151.24688,
+              "name": "Oxford St after Newland St",
+              "relativeArrival": 1155,
+              "relativeDeparture": 1155
+            },
+            {
+              "bearing": 284,
+              "code": "202260",
+              "lat": -33.89043,
+              "lng": 151.24254,
+              "name": "Oxford St before York Rd",
+              "relativeArrival": 1275,
+              "relativeDeparture": 1275
+            },
+            {
+              "bearing": 307,
+              "code": "202151",
+              "lat": -33.88767,
+              "lng": 151.23087,
+              "name": "Paddington Public School, Oxford St",
+              "relativeArrival": 1455,
+              "relativeDeparture": 1455
+            },
+            {
+              "bearing": 294,
+              "code": "202152",
+              "lat": -33.88614,
+              "lng": 151.22877,
+              "name": "Oxford St opp William St",
+              "relativeArrival": 1515,
+              "relativeDeparture": 1515
+            },
+            {
+              "bearing": 286,
+              "code": "202153",
+              "lat": -33.88512,
+              "lng": 151.22649,
+              "name": "Paddington Town Hall, Oxford St",
+              "relativeArrival": 1575,
+              "relativeDeparture": 1575
+            },
+            {
+              "bearing": 307,
+              "code": "202155",
+              "lat": -33.88375,
+              "lng": 151.22166,
+              "name": "Oxford St opp Hopewell St",
+              "relativeArrival": 1695,
+              "relativeDeparture": 1695
+            },
+            {
+              "bearing": 299,
+              "code": "201060",
+              "lat": -33.88148,
+              "lng": 151.21859,
+              "name": "Oxford St after South Dowling St",
+              "relativeArrival": 1815,
+              "relativeDeparture": 1815
+            },
+            {
+              "bearing": 310,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Taylor Square, Oxford St, Stand A",
+              "relativeArrival": 1875,
+              "relativeDeparture": 1875,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 308,
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeArrival": 1995,
+              "relativeDeparture": 1995
+            },
+            {
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 2115,
+              "relativeDeparture": 2115,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "hewmE{b|y[??@Su@GiG_@MA{FK?@????@UaG_@s@Gc@AgBKuBMuDWcBKqCB??????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IgAMu@GLbDMCw@EiCMuA@",
+          "stops": [
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeDeparture": 2235
+            },
+            {
+              "bearing": 21,
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 2415,
+              "relativeDeparture": 2415,
+              "shortName": "Stand C"
+            },
+            {
+              "bearing": 345,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeArrival": 2535,
+              "relativeDeparture": 2535
+            },
+            {
+              "code": "200065",
+              "lat": -33.862,
+              "lng": 151.21115,
+              "name": "Circular Quay, Young St, Stand D",
+              "relativeArrival": 2595,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "sources": [
+        {
+          "provider": "State Transit Sydney"
+        }
+      ],
+      "stopCode": "202637",
+      "to": {
+        "address": "Museum Station, Elizabeth St, Stand D",
+        "class": "Location",
+        "lat": -33.87493,
+        "lng": 151.20958,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 282,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "200055",
+      "from": {
+        "address": "Campbell Pde opp Bondi Beach Public School",
+        "class": "Location",
+        "lat": -33.88916,
+        "lng": 151.27801,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 569821026,
+      "localCost": {
+        "accuracy": "internal_estimate",
+        "cost": 3.66,
+        "costComponents": [
+          {
+            "cost": 3.66,
+            "name": "Opal (bus)",
+            "type": "TICKET"
+          }
+        ],
+        "currency": "AUD"
+      },
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "color": {
+          "blue": 104,
+          "green": 197,
+          "red": 45
+        },
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($3.66)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "`azmEsojz[Xl@HTR^ZjAu@lAMz@LzA?RD`@ZdB??SQ?P?XAVALGTCNMt@m@vAY~@IVIZKhC",
+          "stops": [
+            {
+              "bearing": 263,
+              "code": "202634",
+              "lat": -33.88961,
+              "lng": 151.28331,
+              "name": "North Bondi Shops, Stand A",
+              "relativeDeparture": -60,
+              "shortName": "Stand A"
+            },
+            {
+              "code": "202635",
+              "lat": -33.88993,
+              "lng": 151.2805,
+              "name": "North Bondi Beach, Campbell Pde",
+              "relativeArrival": 0,
+              "relativeDeparture": 0
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "f~ymEoniz[OMAPGz@@X?zAJp@Lj@Rn@dCzCrC`DlBvA??MRb@f@jCnCX@HGJ@FFBJAJr@`@NBdCBzAQrBm@??@R|@O^AZ@`@HPHHDNJFLLRHTDN@N?l@Ih@m@zC??QFIb@a@rA]~De@`GIvC??IWKxACRa@fFa@nEAHOjE??KAALM|Aa@nEARi@tGEj@IlAFZ??[dBY~EOtBo@vIBjA??MDEx@A^B`@DV_Aj@mAvAgBvBmB`CN|@RdAH^f@dAFLn@pAH`@R~Aj@rD??OBBVAR_BJq@B{@LM|BAbC??GAGv@Dd@AA????ICMjAN?x@Hh@DtAHMrB??????OCSfAO|@aAzEm@~Co@vCQ|@WlAC`A?A????OAc@vB]hCEh@Fp@Hv@t@rCT~@Np@Pv@H~@^bDHx@?hAKzAKp@[hAu@~Ca@`Bw@pC}AtEENyDjEu@|@MF}A~BA?????EIo@t@qEjHe@p@CZ?A????IIwB|Ca@z@Sv@Mz@Gr@APD~@?A????IBEn@KtBCr@SzAG\\g@lBw@rCw@|Ck@~BQnA??????CAYhA]z@QNqAdAqAhASNuAhAa@|@_@x@O^YlA@@????GEIPe@zAiAnDQ`@MRi@x@iAlB??????EGsCrDiDhEy@dASX}ApBKN@T??????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??",
+          "stops": [
+            {
+              "bearing": 240,
+              "code": "202637",
+              "lat": -33.88916,
+              "lng": 151.27801,
+              "name": "Campbell Pde opp Bondi Beach Public School",
+              "relativeDeparture": 0
+            },
+            {
+              "bearing": 198,
+              "code": "202653",
+              "lat": -33.89123,
+              "lng": 151.27435,
+              "name": "Bondi Beach, Campbell Pde, Stand A",
+              "relativeArrival": 60,
+              "relativeDeparture": 60,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 243,
+              "code": "202654",
+              "lat": -33.89437,
+              "lng": 151.2733,
+              "name": "South Bondi Beach, Campbell Pde",
+              "relativeArrival": 240,
+              "relativeDeparture": 240
+            },
+            {
+              "bearing": 281,
+              "code": "202656",
+              "lat": -33.89531,
+              "lng": 151.27144,
+              "name": "Bondi Rd at Dudley St",
+              "relativeArrival": 360,
+              "relativeDeparture": 360
+            },
+            {
+              "bearing": 279,
+              "code": "202659",
+              "lat": -33.89461,
+              "lng": 151.26779,
+              "name": "Bondi Rd opp Castlefield St",
+              "relativeArrival": 480,
+              "relativeDeparture": 480
+            },
+            {
+              "bearing": 279,
+              "code": "202661",
+              "lat": -33.89404,
+              "lng": 151.26409,
+              "name": "Bondi Rd opp Wellington St",
+              "relativeArrival": 600,
+              "relativeDeparture": 600
+            },
+            {
+              "bearing": 278,
+              "code": "202663",
+              "lat": -33.89347,
+              "lng": 151.26028,
+              "name": "Bondi Rd before Park Pde",
+              "relativeArrival": 660,
+              "relativeDeparture": 660
+            },
+            {
+              "bearing": 278,
+              "code": "202255",
+              "lat": -33.8929,
+              "lng": 151.25596,
+              "name": "Waverley Council Chambers, Bondi Rd",
+              "relativeArrival": 780,
+              "relativeDeparture": 780
+            },
+            {
+              "bearing": 305,
+              "code": "202257",
+              "lat": -33.89214,
+              "lng": 151.25008,
+              "name": "Westfield Bondi Junction, Oxford St, Stand A",
+              "relativeArrival": 960,
+              "relativeDeparture": 960,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 278,
+              "code": "202268",
+              "lat": -33.89097,
+              "lng": 151.24839,
+              "name": "Bondi Junction Station, Grafton St, Stand Q",
+              "relativeArrival": 1020,
+              "relativeDeparture": 1020,
+              "shortName": "Stand Q"
+            },
+            {
+              "bearing": 232,
+              "code": "202281",
+              "lat": -33.89091,
+              "lng": 151.24794,
+              "name": "Bondi Junction Station, Grafton St, Stand R",
+              "relativeArrival": 1140,
+              "relativeDeparture": 1140,
+              "shortName": "Stand R"
+            },
+            {
+              "bearing": 287,
+              "code": "202258",
+              "lat": -33.89172,
+              "lng": 151.24688,
+              "name": "Oxford St after Newland St",
+              "relativeArrival": 1200,
+              "relativeDeparture": 1200
+            },
+            {
+              "bearing": 284,
+              "code": "202260",
+              "lat": -33.89043,
+              "lng": 151.24254,
+              "name": "Oxford St before York Rd",
+              "relativeArrival": 1320,
+              "relativeDeparture": 1320
+            },
+            {
+              "bearing": 307,
+              "code": "202151",
+              "lat": -33.88767,
+              "lng": 151.23087,
+              "name": "Paddington Public School, Oxford St",
+              "relativeArrival": 1500,
+              "relativeDeparture": 1500
+            },
+            {
+              "bearing": 294,
+              "code": "202152",
+              "lat": -33.88614,
+              "lng": 151.22877,
+              "name": "Oxford St opp William St",
+              "relativeArrival": 1560,
+              "relativeDeparture": 1560
+            },
+            {
+              "bearing": 286,
+              "code": "202153",
+              "lat": -33.88512,
+              "lng": 151.22649,
+              "name": "Paddington Town Hall, Oxford St",
+              "relativeArrival": 1620,
+              "relativeDeparture": 1620
+            },
+            {
+              "bearing": 307,
+              "code": "202155",
+              "lat": -33.88375,
+              "lng": 151.22166,
+              "name": "Oxford St opp Hopewell St",
+              "relativeArrival": 1740,
+              "relativeDeparture": 1740
+            },
+            {
+              "bearing": 299,
+              "code": "201060",
+              "lat": -33.88148,
+              "lng": 151.21859,
+              "name": "Oxford St after South Dowling St",
+              "relativeArrival": 1860,
+              "relativeDeparture": 1860
+            },
+            {
+              "bearing": 310,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Taylor Square, Oxford St, Stand A",
+              "relativeArrival": 1920,
+              "relativeDeparture": 1920,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 308,
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeArrival": 2040,
+              "relativeDeparture": 2040
+            },
+            {
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 2160,
+              "relativeDeparture": 2160,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "hewmE{b|y[??@Su@GiG_@MA{FK?@????@UaG_@s@Gc@AgBKuBMuDWcBKqCB??????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IgAMu@GLbDMCw@EiCMuA@",
+          "stops": [
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeDeparture": 2280
+            },
+            {
+              "bearing": 21,
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 2400,
+              "relativeDeparture": 2400,
+              "shortName": "Stand C"
+            },
+            {
+              "bearing": 345,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeArrival": 2460,
+              "relativeDeparture": 2460
+            },
+            {
+              "code": "200065",
+              "lat": -33.862,
+              "lng": 151.21115,
+              "name": "Circular Quay, Young St, Stand D",
+              "relativeArrival": 2520,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "sources": [
+        {
+          "provider": "State Transit Sydney"
+        }
+      ],
+      "stopCode": "202637",
+      "to": {
+        "address": "Museum Station, Elizabeth St, Stand D",
+        "class": "Location",
+        "lat": -33.87493,
+        "lng": 151.20958,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 282,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "200055",
+      "from": {
+        "address": "Campbell Pde opp Bondi Beach Public School",
+        "class": "Location",
+        "lat": -33.88916,
+        "lng": 151.27801,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1282234210,
+      "localCost": {
+        "accuracy": "internal_estimate",
+        "cost": 3.66,
+        "costComponents": [
+          {
+            "cost": 3.66,
+            "name": "Opal (bus)",
+            "type": "TICKET"
+          }
+        ],
+        "currency": "AUD"
+      },
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "color": {
+          "blue": 104,
+          "green": 197,
+          "red": 45
+        },
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($3.66)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "`azmEsojz[Xl@HTR^ZjAu@lAMz@LzA?RD`@ZdB??SQ?P?XAVALGTCNMt@m@vAY~@IVIZKhC",
+          "stops": [
+            {
+              "bearing": 263,
+              "code": "202634",
+              "lat": -33.88961,
+              "lng": 151.28331,
+              "name": "North Bondi Shops, Stand A",
+              "relativeDeparture": -60,
+              "shortName": "Stand A"
+            },
+            {
+              "code": "202635",
+              "lat": -33.88993,
+              "lng": 151.2805,
+              "name": "North Bondi Beach, Campbell Pde",
+              "relativeArrival": 0,
+              "relativeDeparture": 0
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "f~ymEoniz[OMAPGz@@X?zAJp@Lj@Rn@dCzCrC`DlBvA??MRb@f@jCnCX@HGJ@FFBJAJr@`@NBdCBzAQrBm@??@R|@O^AZ@`@HPHHDNJFLLRHTDN@N?l@Ih@m@zC??QFIb@a@rA]~De@`GIvC??IWKxACRa@fFa@nEAHOjE??KAALM|Aa@nEARi@tGEj@IlAFZ??[dBY~EOtBo@vIBjA??MDEx@A^B`@DV_Aj@mAvAgBvBmB`CN|@RdAH^f@dAFLn@pAH`@R~Aj@rD??OBBVAR_BJq@B{@LM|BAbC??GAGv@Dd@AA????ICMjAN?x@Hh@DtAHMrB??????OCSfAO|@aAzEm@~Co@vCQ|@WlAC`A?A????OAc@vB]hCEh@Fp@Hv@t@rCT~@Np@Pv@H~@^bDHx@?hAKzAKp@[hAu@~Ca@`Bw@pC}AtEENyDjEu@|@MF}A~BA?????EIo@t@qEjHe@p@CZ?A????IIwB|Ca@z@Sv@Mz@Gr@APD~@?A????IBEn@KtBCr@SzAG\\g@lBw@rCw@|Ck@~BQnA??????CAYhA]z@QNqAdAqAhASNuAhAa@|@_@x@O^YlA@@????GEIPe@zAiAnDQ`@MRi@x@iAlB??????EGsCrDiDhEy@dASX}ApBKN@T??????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??",
+          "stops": [
+            {
+              "bearing": 240,
+              "code": "202637",
+              "lat": -33.88916,
+              "lng": 151.27801,
+              "name": "Campbell Pde opp Bondi Beach Public School",
+              "relativeDeparture": 0
+            },
+            {
+              "bearing": 198,
+              "code": "202653",
+              "lat": -33.89123,
+              "lng": 151.27435,
+              "name": "Bondi Beach, Campbell Pde, Stand A",
+              "relativeArrival": 60,
+              "relativeDeparture": 60,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 243,
+              "code": "202654",
+              "lat": -33.89437,
+              "lng": 151.2733,
+              "name": "South Bondi Beach, Campbell Pde",
+              "relativeArrival": 240,
+              "relativeDeparture": 240
+            },
+            {
+              "bearing": 281,
+              "code": "202656",
+              "lat": -33.89531,
+              "lng": 151.27144,
+              "name": "Bondi Rd at Dudley St",
+              "relativeArrival": 360,
+              "relativeDeparture": 360
+            },
+            {
+              "bearing": 279,
+              "code": "202659",
+              "lat": -33.89461,
+              "lng": 151.26779,
+              "name": "Bondi Rd opp Castlefield St",
+              "relativeArrival": 480,
+              "relativeDeparture": 480
+            },
+            {
+              "bearing": 279,
+              "code": "202661",
+              "lat": -33.89404,
+              "lng": 151.26409,
+              "name": "Bondi Rd opp Wellington St",
+              "relativeArrival": 600,
+              "relativeDeparture": 600
+            },
+            {
+              "bearing": 278,
+              "code": "202663",
+              "lat": -33.89347,
+              "lng": 151.26028,
+              "name": "Bondi Rd before Park Pde",
+              "relativeArrival": 660,
+              "relativeDeparture": 660
+            },
+            {
+              "bearing": 278,
+              "code": "202255",
+              "lat": -33.8929,
+              "lng": 151.25596,
+              "name": "Waverley Council Chambers, Bondi Rd",
+              "relativeArrival": 840,
+              "relativeDeparture": 840
+            },
+            {
+              "bearing": 305,
+              "code": "202257",
+              "lat": -33.89214,
+              "lng": 151.25008,
+              "name": "Westfield Bondi Junction, Oxford St, Stand A",
+              "relativeArrival": 1020,
+              "relativeDeparture": 1020,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 278,
+              "code": "202268",
+              "lat": -33.89097,
+              "lng": 151.24839,
+              "name": "Bondi Junction Station, Grafton St, Stand Q",
+              "relativeArrival": 1080,
+              "relativeDeparture": 1080,
+              "shortName": "Stand Q"
+            },
+            {
+              "bearing": 232,
+              "code": "202281",
+              "lat": -33.89091,
+              "lng": 151.24794,
+              "name": "Bondi Junction Station, Grafton St, Stand R",
+              "relativeArrival": 1200,
+              "relativeDeparture": 1200,
+              "shortName": "Stand R"
+            },
+            {
+              "bearing": 287,
+              "code": "202258",
+              "lat": -33.89172,
+              "lng": 151.24688,
+              "name": "Oxford St after Newland St",
+              "relativeArrival": 1260,
+              "relativeDeparture": 1260
+            },
+            {
+              "bearing": 284,
+              "code": "202260",
+              "lat": -33.89043,
+              "lng": 151.24254,
+              "name": "Oxford St before York Rd",
+              "relativeArrival": 1380,
+              "relativeDeparture": 1380
+            },
+            {
+              "bearing": 307,
+              "code": "202151",
+              "lat": -33.88767,
+              "lng": 151.23087,
+              "name": "Paddington Public School, Oxford St",
+              "relativeArrival": 1560,
+              "relativeDeparture": 1560
+            },
+            {
+              "bearing": 294,
+              "code": "202152",
+              "lat": -33.88614,
+              "lng": 151.22877,
+              "name": "Oxford St opp William St",
+              "relativeArrival": 1620,
+              "relativeDeparture": 1620
+            },
+            {
+              "bearing": 286,
+              "code": "202153",
+              "lat": -33.88512,
+              "lng": 151.22649,
+              "name": "Paddington Town Hall, Oxford St",
+              "relativeArrival": 1680,
+              "relativeDeparture": 1680
+            },
+            {
+              "bearing": 307,
+              "code": "202155",
+              "lat": -33.88375,
+              "lng": 151.22166,
+              "name": "Oxford St opp Hopewell St",
+              "relativeArrival": 1800,
+              "relativeDeparture": 1800
+            },
+            {
+              "bearing": 299,
+              "code": "201060",
+              "lat": -33.88148,
+              "lng": 151.21859,
+              "name": "Oxford St after South Dowling St",
+              "relativeArrival": 1920,
+              "relativeDeparture": 1920
+            },
+            {
+              "bearing": 310,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Taylor Square, Oxford St, Stand A",
+              "relativeArrival": 1980,
+              "relativeDeparture": 1980,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 308,
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeArrival": 2100,
+              "relativeDeparture": 2100
+            },
+            {
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 2220,
+              "relativeDeparture": 2220,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "hewmE{b|y[??@Su@GiG_@MA{FK?@????@UaG_@s@Gc@AgBKuBMuDWcBKqCB??????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IgAMu@GLbDMCw@EiCMuA@",
+          "stops": [
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeDeparture": 2340
+            },
+            {
+              "bearing": 21,
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 2460,
+              "relativeDeparture": 2460,
+              "shortName": "Stand C"
+            },
+            {
+              "bearing": 345,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeArrival": 2520,
+              "relativeDeparture": 2520
+            },
+            {
+              "code": "200065",
+              "lat": -33.862,
+              "lng": 151.21115,
+              "name": "Circular Quay, Young St, Stand D",
+              "relativeArrival": 2580,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "sources": [
+        {
+          "provider": "State Transit Sydney"
+        }
+      ],
+      "stopCode": "202637",
+      "to": {
+        "address": "Museum Station, Elizabeth St, Stand D",
+        "class": "Location",
+        "lat": -33.87493,
+        "lng": 151.20958,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 282,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "200055",
+      "from": {
+        "address": "Campbell Pde opp Bondi Beach Public School",
+        "class": "Location",
+        "lat": -33.88916,
+        "lng": 151.27801,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -395778206,
+      "localCost": {
+        "accuracy": "internal_estimate",
+        "cost": 3.66,
+        "costComponents": [
+          {
+            "cost": 3.66,
+            "name": "Opal (bus)",
+            "type": "TICKET"
+          }
+        ],
+        "currency": "AUD"
+      },
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "color": {
+          "blue": 104,
+          "green": 197,
+          "red": 45
+        },
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($3.66)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "`azmEsojz[Xl@HTR^ZjAu@lAMz@LzA?RD`@ZdB??SQ?P?XAVALGTCNMt@m@vAY~@IVIZKhC",
+          "stops": [
+            {
+              "bearing": 263,
+              "code": "202634",
+              "lat": -33.88961,
+              "lng": 151.28331,
+              "name": "North Bondi Shops, Stand A",
+              "relativeDeparture": -60,
+              "shortName": "Stand A"
+            },
+            {
+              "code": "202635",
+              "lat": -33.88993,
+              "lng": 151.2805,
+              "name": "North Bondi Beach, Campbell Pde",
+              "relativeArrival": 0,
+              "relativeDeparture": 0
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "f~ymEoniz[OMAPGz@@X?zAJp@Lj@Rn@dCzCrC`DlBvA??MRb@f@jCnCX@HGJ@FFBJAJr@`@NBdCBzAQrBm@??@R|@O^AZ@`@HPHHDNJFLLRHTDN@N?l@Ih@m@zC??QFIb@a@rA]~De@`GIvC??IWKxACRa@fFa@nEAHOjE??KAALM|Aa@nEARi@tGEj@IlAFZ??[dBY~EOtBo@vIBjA??MDEx@A^B`@DV_Aj@mAvAgBvBmB`CN|@RdAH^f@dAFLn@pAH`@R~Aj@rD??OBBVAR_BJq@B{@LM|BAbC??GAGv@Dd@AA????ICMjAN?x@Hh@DtAHMrB??????OCSfAO|@aAzEm@~Co@vCQ|@WlAC`A?A????OAc@vB]hCEh@Fp@Hv@t@rCT~@Np@Pv@H~@^bDHx@?hAKzAKp@[hAu@~Ca@`Bw@pC}AtEENyDjEu@|@MF}A~BA?????EIo@t@qEjHe@p@CZ?A????IIwB|Ca@z@Sv@Mz@Gr@APD~@?A????IBEn@KtBCr@SzAG\\g@lBw@rCw@|Ck@~BQnA??????CAYhA]z@QNqAdAqAhASNuAhAa@|@_@x@O^YlA@@????GEIPe@zAiAnDQ`@MRi@x@iAlB??????EGsCrDiDhEy@dASX}ApBKN@T??????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??",
+          "stops": [
+            {
+              "bearing": 240,
+              "code": "202637",
+              "lat": -33.88916,
+              "lng": 151.27801,
+              "name": "Campbell Pde opp Bondi Beach Public School",
+              "relativeDeparture": 0
+            },
+            {
+              "bearing": 198,
+              "code": "202653",
+              "lat": -33.89123,
+              "lng": 151.27435,
+              "name": "Bondi Beach, Campbell Pde, Stand A",
+              "relativeArrival": 60,
+              "relativeDeparture": 60,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 243,
+              "code": "202654",
+              "lat": -33.89437,
+              "lng": 151.2733,
+              "name": "South Bondi Beach, Campbell Pde",
+              "relativeArrival": 240,
+              "relativeDeparture": 240
+            },
+            {
+              "bearing": 281,
+              "code": "202656",
+              "lat": -33.89531,
+              "lng": 151.27144,
+              "name": "Bondi Rd at Dudley St",
+              "relativeArrival": 360,
+              "relativeDeparture": 360
+            },
+            {
+              "bearing": 279,
+              "code": "202659",
+              "lat": -33.89461,
+              "lng": 151.26779,
+              "name": "Bondi Rd opp Castlefield St",
+              "relativeArrival": 480,
+              "relativeDeparture": 480
+            },
+            {
+              "bearing": 279,
+              "code": "202661",
+              "lat": -33.89404,
+              "lng": 151.26409,
+              "name": "Bondi Rd opp Wellington St",
+              "relativeArrival": 600,
+              "relativeDeparture": 600
+            },
+            {
+              "bearing": 278,
+              "code": "202663",
+              "lat": -33.89347,
+              "lng": 151.26028,
+              "name": "Bondi Rd before Park Pde",
+              "relativeArrival": 660,
+              "relativeDeparture": 660
+            },
+            {
+              "bearing": 278,
+              "code": "202255",
+              "lat": -33.8929,
+              "lng": 151.25596,
+              "name": "Waverley Council Chambers, Bondi Rd",
+              "relativeArrival": 780,
+              "relativeDeparture": 780
+            },
+            {
+              "bearing": 305,
+              "code": "202257",
+              "lat": -33.89214,
+              "lng": 151.25008,
+              "name": "Westfield Bondi Junction, Oxford St, Stand A",
+              "relativeArrival": 960,
+              "relativeDeparture": 960,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 278,
+              "code": "202268",
+              "lat": -33.89097,
+              "lng": 151.24839,
+              "name": "Bondi Junction Station, Grafton St, Stand Q",
+              "relativeArrival": 1020,
+              "relativeDeparture": 1020,
+              "shortName": "Stand Q"
+            },
+            {
+              "bearing": 232,
+              "code": "202281",
+              "lat": -33.89091,
+              "lng": 151.24794,
+              "name": "Bondi Junction Station, Grafton St, Stand R",
+              "relativeArrival": 1140,
+              "relativeDeparture": 1140,
+              "shortName": "Stand R"
+            },
+            {
+              "bearing": 287,
+              "code": "202258",
+              "lat": -33.89172,
+              "lng": 151.24688,
+              "name": "Oxford St after Newland St",
+              "relativeArrival": 1200,
+              "relativeDeparture": 1200
+            },
+            {
+              "bearing": 284,
+              "code": "202260",
+              "lat": -33.89043,
+              "lng": 151.24254,
+              "name": "Oxford St before York Rd",
+              "relativeArrival": 1320,
+              "relativeDeparture": 1320
+            },
+            {
+              "bearing": 307,
+              "code": "202151",
+              "lat": -33.88767,
+              "lng": 151.23087,
+              "name": "Paddington Public School, Oxford St",
+              "relativeArrival": 1500,
+              "relativeDeparture": 1500
+            },
+            {
+              "bearing": 294,
+              "code": "202152",
+              "lat": -33.88614,
+              "lng": 151.22877,
+              "name": "Oxford St opp William St",
+              "relativeArrival": 1560,
+              "relativeDeparture": 1560
+            },
+            {
+              "bearing": 286,
+              "code": "202153",
+              "lat": -33.88512,
+              "lng": 151.22649,
+              "name": "Paddington Town Hall, Oxford St",
+              "relativeArrival": 1620,
+              "relativeDeparture": 1620
+            },
+            {
+              "bearing": 307,
+              "code": "202155",
+              "lat": -33.88375,
+              "lng": 151.22166,
+              "name": "Oxford St opp Hopewell St",
+              "relativeArrival": 1740,
+              "relativeDeparture": 1740
+            },
+            {
+              "bearing": 299,
+              "code": "201060",
+              "lat": -33.88148,
+              "lng": 151.21859,
+              "name": "Oxford St after South Dowling St",
+              "relativeArrival": 1800,
+              "relativeDeparture": 1800
+            },
+            {
+              "bearing": 310,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Taylor Square, Oxford St, Stand A",
+              "relativeArrival": 1860,
+              "relativeDeparture": 1860,
+              "shortName": "Stand A"
+            },
+            {
+              "bearing": 308,
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeArrival": 1980,
+              "relativeDeparture": 1980
+            },
+            {
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 2100,
+              "relativeDeparture": 2100,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "hewmE{b|y[??@Su@GiG_@MA{FK?@????@UaG_@s@Gc@AgBKuBMuDWcBKqCB??????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IgAMu@GLbDMCw@EiCMuA@",
+          "stops": [
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeDeparture": 2220
+            },
+            {
+              "bearing": 21,
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 2340,
+              "relativeDeparture": 2340,
+              "shortName": "Stand C"
+            },
+            {
+              "bearing": 345,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeArrival": 2400,
+              "relativeDeparture": 2400
+            },
+            {
+              "code": "200065",
+              "lat": -33.862,
+              "lng": 151.21115,
+              "name": "Circular Quay, Young St, Stand D",
+              "relativeArrival": 2460,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "sources": [
+        {
+          "provider": "State Transit Sydney"
+        }
+      ],
+      "stopCode": "202637",
+      "to": {
+        "address": "Museum Station, Elizabeth St, Stand D",
+        "class": "Location",
+        "lat": -33.87493,
+        "lng": 151.20958,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 282,
+      "type": "scheduled",
+      "visibility": "in summary"
+    }
+  ]
+}

@@ -82,7 +82,7 @@ public class TKUIMapManagerHelper: NSObject {
     
     // Add the visits
     if let service = segment.service {
-      if service.hasServiceData() {
+      if service.hasServiceData {
         let visits = service.visits ?? []
         for visit in visits where segment.shouldShowVisit(visit) {
           points.append(visit)

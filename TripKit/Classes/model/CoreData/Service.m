@@ -114,16 +114,6 @@ typedef NSUInteger SGServiceFlag;
   [self setFlag:SGServiceFlagWheelchairAccessible to:wheelchairAccessible];
 }
 
-- (BOOL)hasServiceData
-{
-  return self.shape && self.visits.count > 1;
-}
-
-- (BOOL)isFrequencyBased
-{
-  return self.frequency.integerValue > 0;
-}
-
 - (void)setLineName:(NSString *)lineName
 {
   if (! lineName) {
