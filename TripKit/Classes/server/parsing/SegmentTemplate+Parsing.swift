@@ -10,9 +10,14 @@ import Foundation
 
 extension SegmentTemplate {
   
-  @objc(insertNewTemplateFromDictionary:forService:intoContext:)
+  @objc(insertNewTemplateFromDictionary:forService:relativeTime:intoContext:)
   @discardableResult
-  public static func insertNewTemplate(from dict: [String: Any], for service: Service?, into context: NSManagedObjectContext) -> SegmentTemplate? {
+  public static func insertNewTemplate(
+    from dict: [String: Any],
+    for service: Service?,
+    relativeTime: Date?,
+    into context: NSManagedObjectContext
+  ) -> SegmentTemplate? {
     
     // Only show relevant segments
     let visibility = segmentVisibilityType(from: dict)
@@ -73,19 +78,10 @@ extension SegmentTemplate {
       template.endLocation = location
     
     } else {
-      
-      // all the waypoints should be in 'shapes', but we
-      // also support older 'streets' and 'line', e.g.,
-      // for testing
-      let shapesArray = (dict["shapes"] as? [[String: Any]])
-        ?? (dict["streets"] as? [[String: Any]])
-        ?? (dict["line"] as? [[String: Any]])
-        ?? []
-      
-      let shapes = TKCoreDataParserHelper.insertNewShapes(
-        shapesArray,
-        for: service, with: template.modeInfo, orTripKitContext: context,
-        clearRealTime: false // we get real-time data here, no need to clear status
+      let shapes = insertNewShapes(
+        from: dict,
+        for: service, relativeTime: relativeTime,
+        modeInfo: template.modeInfo, context: context
       )
       
       var start: TKNamedCoordinate? = nil
@@ -125,6 +121,31 @@ extension SegmentTemplate {
     }
     
     return template
+  }
+  
+  @objc(insertNewShapesFromDictionary:forService:relativeTime:modeInfo:intoContext:)
+  @discardableResult
+  public static func insertNewShapes(
+    from dict: [String: Any],
+    for service: Service?,
+    relativeTime: Date?,
+    modeInfo: TKModeInfo?,
+    context: NSManagedObjectContext?
+  ) -> [Shape] {
+    
+    // all the waypoints should be in 'shapes', but we
+    // also support older 'streets' and 'line', e.g.,
+    // for testing
+    let shapesArray = (dict["shapes"] as? [[String: Any]])
+      ?? (dict["streets"] as? [[String: Any]])
+      ?? (dict["line"] as? [[String: Any]])
+      ?? []
+    
+    return TKCoreDataParserHelper.insertNewShapes(
+      shapesArray, for: service, relativeTime: relativeTime,
+      with: modeInfo, orTripKitContext: context,
+      clearRealTime: false // we get real-time data here, no need to clear status
+    )
   }
   
   private static func segmentVisibilityType(from dict: [String: Any]) -> TKTripSegmentVisibility {

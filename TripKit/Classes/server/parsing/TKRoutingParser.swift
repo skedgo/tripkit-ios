@@ -68,9 +68,7 @@ extension TKRoutingParser {
       }
     }
     
-    if let trip = request.trips.first {
-      trip.setAsPreferredTrip()
-    }
+    request.tripGroups?.first?.adjustVisibleTrip()
     return true
   }
   

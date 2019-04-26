@@ -59,13 +59,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray<id<TKDisplayableRoute>> *)shapesForEmbarkation:(nullable StopVisits *)embarkation
                                             disembarkingAt:(nullable StopVisits *)disembarkation;
 
-- (BOOL)hasServiceData;
-
 @property (nonatomic, assign) BOOL isRequestingServiceData;
 
 - (BOOL)looksLikeAnExpress;
-
-- (BOOL)isFrequencyBased;
 
 @end
 

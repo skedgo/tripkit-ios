@@ -96,6 +96,16 @@ extension Service {
     }
   }
   
+  @objc public var hasServiceData: Bool {
+    guard shape != nil, let visits = self.visits else { return false }
+    return visits.count > 1
+  }
+
+  @objc public var isFrequencyBased: Bool {
+    guard let frequency = self.frequency else { return false }
+    return frequency.intValue > 0
+  }
+
   @objc public var modeTitle: String? {
     return findModeInfo()?.alt
   }

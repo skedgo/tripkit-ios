@@ -57,6 +57,7 @@
 {
   return [self insertNewShapes:shapesArray
                     forService:service
+                  relativeTime:nil
                   withModeInfo:modeInfo
               orTripKitContext:nil
                  clearRealTime:clearRealTime];
@@ -64,6 +65,7 @@
 
 + (NSArray *)insertNewShapes:(NSArray *)shapesArray
                   forService:(nullable Service *)requestedService
+                relativeTime:(nullable NSDate *)relativeTime
                 withModeInfo:(nullable TKModeInfo *)modeInfo
             orTripKitContext:(nullable NSManagedObjectContext *)context
                clearRealTime:(BOOL)clearRealTime
@@ -80,6 +82,8 @@
   
   Service *previousService = nil;
   Service *currentService = nil;
+  
+  int index = 0;
   
   for (NSDictionary *shapeDict in shapesArray) {
     // is there any content in this shape?
@@ -129,8 +133,11 @@
       shape.travelled = @(YES);
     }
     
-    // associate it with the service
-    currentService.shape = shape;
+    if ([shape.travelled boolValue]) {
+      // we only associate the travelled section here, which isn't great
+      // but better than only associating the last one...
+      currentService.shape = shape;
+    }
     
     // remember the existing visits
     NSMutableDictionary *existingVisits = [NSMutableDictionary dictionaryWithCapacity:currentService.visits.count];
@@ -144,7 +151,6 @@
     }
     
     // add the stops (if we have any)
-    int index = 0;
     for (NSDictionary *stopDict in [shapeDict objectForKey:@"stops"]) {
       ZAssert(currentService, @"When you try to add stops, you need a service!");
       
@@ -158,33 +164,7 @@
       }
       visit.index = @(index++);
       
-      // when we re-use an existing visit, we need to be conservative
-      // as to not overwrite a previous arrival/departure with a new 'nil'
-      // value. this can happen, say, with the 555 loop where 'circular quay'
-      // is both the first and last stop. we don't want to overwrite the
-      // initial departure with the nil value when the service gets back there
-      // at the end of its loop.
-      NSNumber *bearing = [stopDict objectForKey:@"bearing"];
-      if (bearing)
-        visit.bearing   = bearing;
-      
-      NSNumber *arrivalRaw = [stopDict objectForKey:@"arrival"];
-      NSNumber *departureRaw = [stopDict objectForKey:@"departure"];
-      if (arrivalRaw || departureRaw) {
-        if (arrivalRaw) {
-          visit.arrival = [NSDate dateWithTimeIntervalSince1970:arrivalRaw.longValue];
-        }
-        if (departureRaw) {
-          visit.departure = [NSDate dateWithTimeIntervalSince1970:departureRaw.longValue];
-          [visit triggerRealTimeKVO];
-        }
-        
-        // keep original time before we touch it with real-time data
-        visit.originalTime = [visit departure] ?: [visit arrival];
-        
-        // frequency-based entries don't have times, so they don't have a region-day either
-        [visit adjustRegionDay];
-      }
+      [self configureVisit:visit fromShapeStopDict:stopDict timesRelativeToDate:relativeTime];
       
       // hook-up to shape
       [visit addShapesObject:shape];
@@ -212,6 +192,9 @@
     }
     
     [addedShapes addObject:shape];
+    if (previousService != currentService && currentService && previousService) {
+      index = 0;
+    }
     previousService = currentService;
   }
   return addedShapes;
@@ -236,7 +219,5 @@
     service.cancelled				= YES;
   }
 }
-
-
 
 @end

@@ -29,6 +29,7 @@ forRealTimeStatusString:(nullable NSString *)realTimeStatus;
 
 + (NSArray<Shape *> *)insertNewShapes:(NSArray<NSDictionary<NSString *, id> *> *)shapesArray
                            forService:(nullable Service *)service
+                         relativeTime:(nullable NSDate *)relativeTime
                          withModeInfo:(nullable TKModeInfo *)modeInfo
                      orTripKitContext:(nullable NSManagedObjectContext *)context
                         clearRealTime:(BOOL)clearRealTime;

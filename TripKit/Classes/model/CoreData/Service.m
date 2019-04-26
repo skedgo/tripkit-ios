@@ -114,16 +114,6 @@ typedef NSUInteger SGServiceFlag;
   [self setFlag:SGServiceFlagWheelchairAccessible to:wheelchairAccessible];
 }
 
-- (BOOL)hasServiceData
-{
-  return self.shape && self.visits.count > 1;
-}
-
-- (BOOL)isFrequencyBased
-{
-  return self.frequency.integerValue > 0;
-}
-
 - (void)setLineName:(NSString *)lineName
 {
   if (! lineName) {
@@ -356,12 +346,14 @@ typedef NSUInteger SGServiceFlag;
     for (StopVisits *visit in self.visits) {
       if ([visit isKindOfClass:[DLSEntry class]])
         continue;
+      
       // avoid duplicate indexes which can happen if we fetched service data
       // multiple times. which shouldn't happen, but even if it does this method
       // should enforce
       NSNumber *index = visit.index;
       if ([indices containsObject:index])
         continue;
+      
       [visits addObject:visit];
       [indices addObject:index];
     }

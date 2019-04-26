@@ -60,10 +60,8 @@
                completion:(void (^)(TripRequest * _Nullable request))completion
 {
   [self.context performBlock:^{
-    // create an empty request
     TripRequest *request = [TripRequest insertEmptyIntoContext:self.context];
     
-    // parse everything
     NSArray *added = [self parseAndAddResult:json
                                   forRequest:request
                                  orTripGroup:nil
@@ -173,7 +171,6 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
   allowDuplicatingExistingTrip:(BOOL)allowDuplicates
 
 {
-  // check if this is an error
   NSString *error = json[@"error"];
   if (error) {
     DLog(@"Error while parsing: %@", error);
@@ -217,14 +214,15 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
   
   // At first, we need to parse the segment templates, since the trips will reference them
   NSMutableDictionary *segmentHashToTemplateDictionaryDict = [NSMutableDictionary dictionaryWithCapacity:segmentTemplatesArray.count];
+  NSMutableSet *addedTemplateHashCodes = [NSMutableSet setWithCapacity:segmentTemplatesArray.count];
   for (NSDictionary *segmentTemplateDict in segmentTemplatesArray) {
-    // check if we already have a segment template with that id
     NSNumber *hashCode = segmentTemplateDict[@"hashCode"];
+    [segmentHashToTemplateDictionaryDict setValue:segmentTemplateDict forKey:[hashCode description]];
+
     BOOL hashCodeExists = [SegmentTemplate segmentTemplateHashCode:hashCode.integerValue
                                             existsInTripKitContext:self.context];
-    if (NO == hashCodeExists) {
-      // keep it
-      [segmentHashToTemplateDictionaryDict setValue:segmentTemplateDict forKey:[hashCode description]];
+    if (hashCodeExists) {
+      [addedTemplateHashCodes addObject:hashCode];
     }
   }
   
@@ -292,7 +290,9 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         // create the reference object
         SegmentReference *reference = nil;
         NSNumber *hashCode = refDict[@"segmentTemplateHashCode"];
-        NSDictionary *unprocessedTemplateDict = segmentHashToTemplateDictionaryDict[[hashCode description]];
+        NSDictionary *templateDict = segmentHashToTemplateDictionaryDict[[hashCode description]];
+        ZAssert(templateDict != nil, @"Missing template for %@", hashCode);
+        BOOL isNewTemplate = ![addedTemplateHashCodes containsObject:hashCode];
         
         if (tripToUpdate) {
           for (SegmentReference *existingReference in unmatchedSegmentReferences) {
@@ -309,8 +309,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         }
         
         if (!reference
-            && (unprocessedTemplateDict
-                   || YES == [SegmentTemplate segmentTemplateHashCode:hashCode.integerValue existsInTripKitContext:self.context])) {
+            && (isNewTemplate || YES == [SegmentTemplate segmentTemplateHashCode:hashCode.integerValue existsInTripKitContext:self.context])) {
           reference = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SegmentReference class]) inManagedObjectContext:self.context];
         }
         
@@ -384,10 +383,14 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           }];
         }
         
-        // now we can add the template, too
-        if (unprocessedTemplateDict) {
-          [SegmentTemplate insertNewTemplateFromDictionary:unprocessedTemplateDict forService:service intoContext:self.context];
-          [segmentHashToTemplateDictionaryDict removeObjectForKey:[hashCode description]];
+        ZAssert(templateDict, @"No segment template found for code %@", hashCode);
+        if (isNewTemplate) {
+          [SegmentTemplate insertNewTemplateFromDictionary:templateDict forService:service relativeTime:reference.startTime intoContext:self.context];
+          [addedTemplateHashCodes addObject:hashCode];
+        } else if (service) {
+          // We don't need to insert the full template, but need to add
+          // shapes for that service
+          [SegmentTemplate insertNewShapesFromDictionary:templateDict forService:service relativeTime:reference.startTime modeInfo:service.modeInfo intoContext:self.context];
         }
         
         reference.index = @(segmentCount++);
