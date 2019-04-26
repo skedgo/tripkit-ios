@@ -135,6 +135,82 @@ class TKBuzzRouterTest: TKTestCase {
     }
   }
   
+  func testParsingPublicTransportWithStops() throws {
+    let parser = TKRoutingParser(tripKitContext: tripKitContext)
+    
+    let expectation = self.expectation(description: "Parser finished")
+    
+    let json = try contentFromJSON(named: "routing-with-stops") as! [String: Any]
+    parser.parseAndAddResult(json) { request in
+      XCTAssertNotNil(request)
+      XCTAssertEqual(request?.tripGroups?.count, 1)
+      XCTAssertEqual(request?.trips.count, 16)
+      
+      for trip in request?.trips ?? [] {
+        let services = trip.segments.compactMap { $0.service }
+        XCTAssertEqual(services.count, 1)
+        for service in services {
+          XCTAssertTrue(service.hasServiceData)
+          XCTAssertEqual(service.shape?.routeIsTravelled, true)
+          
+          for visit in service.visits ?? [] {
+            XCTAssertNotNil(visit.departure ?? visit.arrival, "No time for visit to stop \(visit.stop.stopCode) - service \(service.code)")
+          }
+        }
+      }
+      
+      if let best = request?.tripGroups?.first?.visibleTrip, let bestService = best.segments[2].service {
+        XCTAssertEqual(best.totalScore.doubleValue, 29.8, accuracy: 0.1)
+        XCTAssertEqual(bestService.code, "847016")
+        
+        XCTAssertEqual(bestService.visits?.count, 27)
+        XCTAssertEqual(bestService.sortedVisits.count, 27)
+        XCTAssertEqual(bestService.sortedVisits.map { $0.index.intValue }, (0...26).map { $0 })
+        
+        XCTAssertEqual(bestService.sortedVisits.map { $0.stop.stopCode },
+                       ["202634",
+                        "202635",
+                        "202637",
+                        "202653",
+                        "202654",
+                        "202656",
+                        "202659",
+                        "202661",
+                        "202663",
+                        "202255",
+                        "202257",
+                        "202268",
+                        "202281",
+                        "202258",
+                        "202260",
+                        "202151",
+                        "202152",
+                        "202153",
+                        "202155",
+                        "201060",
+                        "201051",
+                        "201056",
+                        "200055",
+                        "200057",
+                        "2000421",
+                        "200059",
+                        "200065",
+          ])
+      } else {
+        XCTFail("Couldn't find best trip")
+      }
+      
+      // Make sure CoreData is happy
+      try! self.tripKitContext.save()
+      
+      expectation.fulfill()
+    }
+    
+    waitForExpectations(timeout: 3) { error in
+      XCTAssertNil(error)
+    }
+  }
+  
   func testTripCache() throws {
     let identifier = "Test"
     let directory = TKFileCacheDirectory.documents // where TKBuzzRouter keeps its trips

@@ -622,6 +622,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   
   if (bestOnly) {
     paras[@"bestOnly"] = @(YES);
+    paras[@"includeStops"] = @(YES);
   }
   
   if (request.excludedStops.count > 0) {
