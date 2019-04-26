@@ -163,6 +163,8 @@ class TKBuzzRouterTest: TKTestCase {
         XCTAssertEqual(best.totalScore.doubleValue, 29.8, accuracy: 0.1)
         XCTAssertEqual(bestService.code, "847016")
         
+        XCTAssertEqual(bestService.visits?.count, 27)
+        XCTAssertEqual(bestService.sortedVisits.count, 27)
         XCTAssertEqual(bestService.sortedVisits.map { $0.index.intValue }, (0...26).map { $0 })
         
         XCTAssertEqual(bestService.sortedVisits.map { $0.stop.stopCode },

@@ -60,10 +60,8 @@
                completion:(void (^)(TripRequest * _Nullable request))completion
 {
   [self.context performBlock:^{
-    // create an empty request
     TripRequest *request = [TripRequest insertEmptyIntoContext:self.context];
     
-    // parse everything
     NSArray *added = [self parseAndAddResult:json
                                   forRequest:request
                                  orTripGroup:nil
@@ -173,7 +171,6 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
   allowDuplicatingExistingTrip:(BOOL)allowDuplicates
 
 {
-  // check if this is an error
   NSString *error = json[@"error"];
   if (error) {
     DLog(@"Error while parsing: %@", error);
@@ -386,15 +383,14 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           }];
         }
         
-        if (templateDict) {
-          if (isNewTemplate) {
-            [SegmentTemplate insertNewTemplateFromDictionary:templateDict forService:service relativeTime:reference.startTime intoContext:self.context];
-            [addedTemplateHashCodes addObject:hashCode];
-          } else if (service) {
-            // We don't need to insert the full template, but need to add
-            // shapes for that service
-            [SegmentTemplate insertNewShapesFromDictionary:templateDict forService:service relativeTime:reference.startTime modeInfo:service.modeInfo intoContext:self.context];
-          }
+        ZAssert(templateDict, @"No segment template found for code %@", hashCode);
+        if (isNewTemplate) {
+          [SegmentTemplate insertNewTemplateFromDictionary:templateDict forService:service relativeTime:reference.startTime intoContext:self.context];
+          [addedTemplateHashCodes addObject:hashCode];
+        } else if (service) {
+          // We don't need to insert the full template, but need to add
+          // shapes for that service
+          [SegmentTemplate insertNewShapesFromDictionary:templateDict forService:service relativeTime:reference.startTime modeInfo:service.modeInfo intoContext:self.context];
         }
         
         reference.index = @(segmentCount++);

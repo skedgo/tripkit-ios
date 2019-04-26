@@ -192,7 +192,7 @@
     }
     
     [addedShapes addObject:shape];
-    if (previousService != currentService && currentService) {
+    if (previousService != currentService && currentService && previousService) {
       index = 0;
     }
     previousService = currentService;
