@@ -142,11 +142,14 @@
     // remember the existing visits
     NSMutableDictionary *existingVisits = [NSMutableDictionary dictionaryWithCapacity:currentService.visits.count];
     for (StopVisits *visit in currentService.visits) {
-      if (! [visit isKindOfClass:[DLSEntry class]] // ignore DLS entries
-          && visit.stop.stopCode) {
+      if ([visit isKindOfClass:[DLSEntry class]]) {
+        continue;
+      }
+      
+      if (visit.stop.stopCode) {
         [existingVisits setValue:visit forKey:visit.stop.stopCode];
       } else {
-        DLog(@"A stop visit without a stop code for it's stop snuck in: %@", visit.stop);
+        DLog(@"A stop visit without a stop code for its stop snuck in: %@", visit.stop);
       }
     }
     
