@@ -16,7 +16,7 @@ extension TKUITripOverviewViewModel {
   static func fetchContentOfServices(in trip: Trip) -> Signal<Void> {
     let requests = trip.segments
       .compactMap { $0.service != nil ? ($0.service!, $0.departureTime, $0.startRegion ?? trip.regionForRealTimeUpdates) : nil }
-      .filter { $0.0.hasServiceData() == false }
+      .filter { $0.0.hasServiceData == false }
       .map(TKBuzzInfoProvider.rx.downloadContent)
       .map { $0.asSignal(onErrorSignalWith: .empty()) }
 
