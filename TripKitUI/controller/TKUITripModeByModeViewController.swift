@@ -18,19 +18,37 @@ public class TKUITripModeByModeViewController: TGCardViewController {
   public init(trip: Trip, initialPosition: TGCardPosition = .extended) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
     
-    rootCard = TKUITripModeByModeCard(trip: trip, initialPosition: initialPosition)
-    // TODO: Be the card's delegate and handle `modeByModeRequestsRebuildForNewSegments`
+    let mxmCard = TKUITripModeByModeCard(trip: trip, initialPosition: initialPosition)
+    mxmCard.style = TKUICustomization.shared.cardStyle
+    mxmCard.modeByModeDelegate = self
+    rootCard = mxmCard
   }
   
   public init(startingOn segment: TKSegment, mode: TKUISegmentMode = .onSegment, initialPosition: TGCardPosition = .extended) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
     
-    rootCard = try! TKUITripModeByModeCard(startingOn: segment, mode: mode, initialPosition: initialPosition)
-    // TODO: Be the card's delegate and handle `modeByModeRequestsRebuildForNewSegments`
+    let mxmCard = try! TKUITripModeByModeCard(startingOn: segment, mode: mode, initialPosition: initialPosition)
+    mxmCard.style = TKUICustomization.shared.cardStyle
+    mxmCard.modeByModeDelegate = self
+    rootCard = mxmCard
   }
   
   required public init(coder aDecoder: NSCoder) {
     fatalError("Use the `init(trip:)` or `init(startingOn:) methods instead.")
   }
   
+}
+
+extension TKUITripModeByModeViewController: TKUITripModeByModeCardDelegate {
+  public func modeByModeRequestsRebuildForNewSegments(_ card: TKUITripModeByModeCard, trip: Trip, currentSegment: TKSegment) {
+    do {
+      let newCard = try TKUITripModeByModeCard(startingOn: currentSegment)
+      newCard.style = TKUICustomization.shared.cardStyle
+      newCard.modeByModeDelegate = self
+      self.swap(for: newCard, animated: true)
+    
+    } catch {
+      TKUICustomization.shared.alertHandler(error, self)
+    }
+  }
 }

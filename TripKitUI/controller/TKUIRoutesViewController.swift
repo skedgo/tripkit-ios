@@ -18,13 +18,17 @@ public class TKUIRoutesViewController: TGCardViewController {
   public init(destination: MKAnnotation) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
 
-    rootCard = TKUIResultsCard(destination: destination)
+    let resultsCard = TKUIResultsCard(destination: destination)
+    resultsCard.style = TKUICustomization.shared.cardStyle
+    rootCard = resultsCard
   }
 
   public init(request: TripRequest) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
 
-    rootCard = TKUIResultsCard(request: request)
+    let resultsCard = TKUIResultsCard(request: request)
+    resultsCard.style = TKUICustomization.shared.cardStyle
+    rootCard = resultsCard
     
   }
   
@@ -32,14 +36,4 @@ public class TKUIRoutesViewController: TGCardViewController {
     fatalError("Use the `init(destination:)` or `init(request:) methods instead.")
   }
   
-  override public func viewDidLoad() {
-    super.viewDidLoad()
-    
-    // TODO: We should make sure that the top card, still has a close button, so that you can get back to the previous screen when this is presented in an app.
-  }
-
-  override public func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
 }
