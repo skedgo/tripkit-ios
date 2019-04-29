@@ -1,6 +1,6 @@
-git "git@gitlab.com:SkedGo/tripgo-cards-ios.git" "7251503e24db142e618dcb5530986dcaef864967"
+git "git@gitlab.com:SkedGo/tripgo-cards-ios.git" "90d7636a9a235fe7bab4687fad152eb7a1b4716f"
 github "ReactiveX/RxSwift" "4.5.0"
-github "RxSwiftCommunity/RxDataSources" "a5d0b791394cd51b812fdaf3ed3ecc3b287c5e3e"
+github "RxSwiftCommunity/RxDataSources" "bf7aaeb49f65ef43e9c5c78ccb1a05871f9a7e9d"
 github "nighthawk/ASPolygonKit" "0.2.1"
 github "nighthawk/ASPolylineView" "v1.0.3"
 github "onevcat/Kingfisher" "4.10.1"
