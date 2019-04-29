@@ -245,6 +245,32 @@
     }];
 }
 
+- (void)updateTrip:(Trip *)trip
+           fromURL:(NSURL *)URL
+           aborter:(nullable BOOL(^)(NSURL *URL))aborter
+        completion:(void(^)(NSURL *URL, Trip * __nullable trip, NSError * __nullable error))completion
+{
+  [self hitURLForTripDownload:URL
+                   completion:
+   ^(NSURL *shareURL, id JSON, NSError *error) {
+#pragma unused(shareURL)
+    if (JSON) {
+      if (aborter && aborter(URL)) {
+        return;
+      }
+      
+      [self parseJSON:JSON
+         updatingTrip:trip
+           completion:
+       ^(Trip *updatedTrip) {
+         completion(URL, updatedTrip, nil);
+      }];
+    } else {
+      completion(URL, nil, error);
+    }
+  }];
+}
+
 
 - (void)fetchBestTripForRequest:(TripRequest *)request
                         success:(TKRouterSuccess)success
