@@ -11,36 +11,26 @@ import Foundation
 import TGCardViewController
 
 public protocol TKUITripModeByModeViewControllerDelegate: TGCardViewControllerDelegate {
-  
 }
 
 public class TKUITripModeByModeViewController: TGCardViewController {
   
-  public init(trip: Trip) {
+  public init(trip: Trip, initialPosition: TGCardPosition = .extended) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
     
-    rootCard = TKUITripModeByModeCard(trip: trip)
+    rootCard = TKUITripModeByModeCard(trip: trip, initialPosition: initialPosition)
+    // TODO: Be the card's delegate and handle `modeByModeRequestsRebuildForNewSegments`
   }
   
-  public init(startingOn segment: TKSegment) {
+  public init(startingOn segment: TKSegment, mode: TKUISegmentMode = .onSegment, initialPosition: TGCardPosition = .extended) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
     
-    rootCard = try! TKUITripModeByModeCard(startingOn: segment)
-    
+    rootCard = try! TKUITripModeByModeCard(startingOn: segment, mode: mode, initialPosition: initialPosition)
+    // TODO: Be the card's delegate and handle `modeByModeRequestsRebuildForNewSegments`
   }
   
   required public init(coder aDecoder: NSCoder) {
-    fatalError("Use the `init(destination:)` or `init(request:) methods instead.")
+    fatalError("Use the `init(trip:)` or `init(startingOn:) methods instead.")
   }
   
-  override public func viewDidLoad() {
-    super.viewDidLoad()
-    
-    // TODO: We should make sure that the top card, still has a close button, so that you can get back to the previous screen when this is presented in an app.
-  }
-  
-  override public func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
 }

@@ -77,7 +77,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   /// mode-by-mode basis of a trip.
   ///
   /// - Parameter segment: Segment to focus on first
-  public init(startingOn segment: TKSegment, mapManager: TKUITripMapManager? = nil) throws {
+  public init(startingOn segment: TKSegment, mode: TKUISegmentMode = .onSegment, mapManager: TKUITripMapManager? = nil, initialPosition: TGCardPosition = .peaking) throws {
     guard let trip = segment.trip else {
       throw Error.segmentHasNoTrip
     }
@@ -91,20 +91,21 @@ public class TKUITripModeByModeCard: TGPageCard {
     self.tripMapManager = tripMapManager
     
     let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
-    let segmentCards: [SegmentCardsInfo] = cardSegments.reduce( ([SegmentCardsInfo](), 0) ) { previous, segment in
+    self.segmentCards = cardSegments.reduce( ([SegmentCardsInfo](), 0) ) { previous, segment in
       let cards = TKUITripModeByModeCard.config.builder.cards(for: segment, mapManager: tripMapManager)
       let range = previous.1 ..< previous.1 + cards.count
       let info = SegmentCardsInfo(segmentIndex: segment.index, segmentIdentifier: segment.selectionIdentifier!, cards: cards, cardsRange: range)
       return (previous.0 + [info], range.upperBound)
     }.0
-    let cards = segmentCards.flatMap { $0.cards.map { $0.0 } }
-    let initialPage = SegmentCardsInfo.cardIndices(ofSegmentAt: segment.index, in: segmentCards)?.lowerBound ?? 0
-    self.segmentCards = segmentCards
 
     let headerSegments = trip.headerSegments
     self.headerSegmentIndices = headerSegments.map { $0.index }
     
-    super.init(cards: cards, initialPage: initialPage)
+    // TODO: Pick the correct one according to the mode, too
+    let initialPage = SegmentCardsInfo.cardIndices(ofSegmentAt: segment.index, in: segmentCards)?.lowerBound ?? 0
+    
+    let cards = segmentCards.flatMap { $0.cards.map { $0.0 } }
+    super.init(cards: cards, initialPage: initialPage, initialPosition: initialPosition)
 
     self.headerAccessoryView = buildSegmentsView(segments: headerSegments, selecting: segment.index, trip: trip)
     
@@ -117,9 +118,9 @@ public class TKUITripModeByModeCard: TGPageCard {
     try! self.init(startingOn: first, mapManager: mapManager)
   }
   
-  public convenience init(trip: Trip) {
+  public convenience init(trip: Trip, initialPosition: TGCardPosition = .peaking) {
     guard let first = trip.segments.first else { preconditionFailure() }
-    try! self.init(startingOn: first)
+    try! self.init(startingOn: first, initialPosition: initialPosition)
   }
   
   public override func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
