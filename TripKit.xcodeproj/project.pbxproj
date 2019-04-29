@@ -62,6 +62,7 @@
 		3A462CC8207626D400AF41EF /* SegmentTemplate+Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A462CC6207626D400AF41EF /* SegmentTemplate+Parsing.swift */; };
 		3A462CD720762FB400AF41EF /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A462CD020762FB400AF41EF /* TripKitModel.xcdatamodeld */; };
 		3A462CD820762FB400AF41EF /* TripKitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A462CD020762FB400AF41EF /* TripKitModel.xcdatamodeld */; };
+		3A474D9F2276E79000AE82D2 /* TKUITripModeByModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A474D9E2276E79000AE82D2 /* TKUITripModeByModeViewController.swift */; };
 		3A4C41D9226F268A003E057E /* TKInterAppCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4C41D8226F268A003E057E /* TKInterAppCommunicator.swift */; };
 		3A4C41DB226F26DE003E057E /* TKConfig+TKInterAppCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4C41DA226F26DE003E057E /* TKConfig+TKInterAppCommunicator.swift */; };
 		3A4C41DD226F27A8003E057E /* TKInterAppCommunicator+ExternalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4C41DC226F27A8003E057E /* TKInterAppCommunicator+ExternalActions.swift */; };
@@ -859,6 +860,7 @@
 		3A462CD420762FB400AF41EF /* 3-SpringClean.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "3-SpringClean.xcdatamodel"; sourceTree = "<group>"; };
 		3A462CD520762FB400AF41EF /* 6-SegmentRealTimeVehicle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "6-SegmentRealTimeVehicle.xcdatamodel"; sourceTree = "<group>"; };
 		3A462CD620762FB400AF41EF /* 5-PlannedTrip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "5-PlannedTrip.xcdatamodel"; sourceTree = "<group>"; };
+		3A474D9E2276E79000AE82D2 /* TKUITripModeByModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripModeByModeViewController.swift; sourceTree = "<group>"; };
 		3A4C41D8226F268A003E057E /* TKInterAppCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKInterAppCommunicator.swift; sourceTree = "<group>"; };
 		3A4C41DA226F26DE003E057E /* TKConfig+TKInterAppCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKConfig+TKInterAppCommunicator.swift"; sourceTree = "<group>"; };
 		3A4C41DC226F27A8003E057E /* TKInterAppCommunicator+ExternalActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKInterAppCommunicator+ExternalActions.swift"; sourceTree = "<group>"; };
@@ -1622,14 +1624,15 @@
 			children = (
 				3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */,
 				3A6DF0DE202C8EB80084CB2C /* TKUIAlertViewController.swift */,
-				D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */,
-				D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */,
 				3AF5F2B520EFF91F003AAEBA /* TKUIAttributionTableViewController.swift */,
 				3AF5F2B420EFF91F003AAEBA /* TKUIAttributionTableViewController.xib */,
 				3A67698520EE3A7A0044663F /* TKUIAutocompletionViewController.swift */,
-				3AFD393A20D9333500FDC7D0 /* TKUIRoutesViewController.swift */,
-				3AA800ED2186F561008CFB6D /* TKUISheetViewController.swift */,
 				D32829D2212CFC06006E3D0E /* TKUIEventTrackable.swift */,
+				3AFD393A20D9333500FDC7D0 /* TKUIRoutesViewController.swift */,
+				D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */,
+				D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */,
+				3AA800ED2186F561008CFB6D /* TKUISheetViewController.swift */,
+				3A474D9E2276E79000AE82D2 /* TKUITripModeByModeViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3074,6 +3077,7 @@
 				3A6DF130202C8EB80084CB2C /* TKUIStyledButton.m in Sources */,
 				3A6DF117202C8EB80084CB2C /* TKUITripSegmentsView.m in Sources */,
 				3A682F2020F3F8A900E05195 /* TKUIRoutingSupportView.swift in Sources */,
+				3A474D9F2276E79000AE82D2 /* TKUITripModeByModeViewController.swift in Sources */,
 				3A67698420EE3A6F0044663F /* TKUIAutocompletionViewModel.swift in Sources */,
 				3A4C4202227087F0003E057E /* TKUISegmentMode.swift in Sources */,
 				3AFD394A20D9333500FDC7D0 /* TKUIResultsCard.swift in Sources */,
