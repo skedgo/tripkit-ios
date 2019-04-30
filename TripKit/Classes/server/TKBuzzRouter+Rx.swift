@@ -32,8 +32,11 @@ extension Reactive where Base : TKBuzzRouter {
     }
   }
   
-  public static func fetchBestTrip(for request: TripRequest) -> Single<Trip> {
+  public static func fetchBestTrip<C>(for request: TripRequest, modes: C) -> Single<Trip> where C: Collection, C.Element == String {
     var router: TKBuzzRouter! = TKBuzzRouter()
+    if !modes.isEmpty {
+      router.modeIdentifiers = Set(modes)
+    }
     return Single.create { subscriber in
       router.fetchBestTrip(for: request, success: { request, _ in
         if let best = request.sortedVisibleTrips().first {

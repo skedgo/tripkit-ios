@@ -31,6 +31,7 @@ public extension TKShareHelper {
     public let end: CLLocationCoordinate2D
     public let title: String?
     public let timeType: Time
+    public let modes: [String]
   }
   
   /// Extracts the query details from a TripGo API-compatible deep link
@@ -49,6 +50,7 @@ public extension TKShareHelper {
     var flat, flng: Double?
     var type: Int?
     var time: Date?
+    var modes: [String] = .init()
     for item in items {
       guard let value = item.value, !value.isEmpty else { continue }
       switch item.name {
@@ -61,6 +63,8 @@ public extension TKShareHelper {
       case "time":
         guard let since1970 = TimeInterval(value) else { continue }
         time = Date(timeIntervalSince1970: since1970)
+      case "modes", "mode":
+        modes.append(value)
       default:
         TKLog.debug("OpenURLHelper", text: "Ignoring \(item.name)=\(value)")
       }
@@ -103,7 +107,8 @@ public extension TKShareHelper {
           start: from.isValid ? from : nil,
           end: valid.coordinate,
           title: name,
-          timeType: timeType
+          timeType: timeType,
+          modes: modes
         )
     }
   }
