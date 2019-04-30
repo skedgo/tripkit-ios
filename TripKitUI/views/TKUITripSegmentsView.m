@@ -172,6 +172,17 @@
     newFrame.size.height = imageHeight;
 		modeImageView.autoresizingMask = mask;
     modeImageView.frame = newFrame;
+
+    if (modeImageURL && !asTemplate) {
+      // remove images that aren't templates look weird on the background colour
+      CGRect circleFrame = CGRectInset(newFrame, -1.0f, -1.0f);
+      UIView *modeCircleBackground = [[UIView alloc] initWithFrame:circleFrame];
+      modeCircleBackground.backgroundColor = [UIColor whiteColor];
+      modeCircleBackground.layer.cornerRadius = CGRectGetWidth(circleFrame) / 2;
+      modeCircleBackground.alpha = alpha;
+      [self addSubview:modeCircleBackground];
+    }
+
     [self addSubview:modeImageView];
 		
 		if (allowInfoIcons && [segment tripSegmentModeInfoIconType] != TKInfoIconTypeNone) {
@@ -370,7 +381,8 @@
   CGFloat maxXToSelect = index + 1 < self.segmentXValues.count ? self.segmentXValues[index + 1].doubleValue : CGFLOAT_MAX;
 
   for (UIView *subview in self.subviews) {
-    if (subview.frame.origin.x >= minXToSelect && subview.frame.origin.x < maxXToSelect) {
+    CGFloat midX = CGRectGetMidX(subview.frame);
+    if (midX >= minXToSelect && midX < maxXToSelect) {
       subview.alpha = SEGMENT_ITEM_ALPHA_SELECTED;
     } else {
       subview.alpha = SEGMENT_ITEM_ALPHA_DESELECTED;
