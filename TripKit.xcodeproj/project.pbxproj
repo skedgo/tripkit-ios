@@ -751,8 +751,6 @@
 		D335907421EF604100CB57E3 /* TKStyleManager+TripKitUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335907321EF604100CB57E3 /* TKStyleManager+TripKitUI.swift */; };
 		D337467E208D5D980045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
 		D337467F208D5DA90045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
-		D33C0DF822432C8200497B32 /* TKUITurnByTurnInstructionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C0DF622432C8200497B32 /* TKUITurnByTurnInstructionCell.swift */; };
-		D33C0DF922432C8200497B32 /* TKUITurnByTurnInstructionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33C0DF722432C8200497B32 /* TKUITurnByTurnInstructionCell.xib */; };
 		D37EF6D821A7BCE80062288E /* TKLocalCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37EF6D721A7BCE80062288E /* TKLocalCost.swift */; };
 		D3957CDD21ACB32000238420 /* TKLocalCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37EF6D721A7BCE80062288E /* TKLocalCost.swift */; };
 		D39B7BAF20622C2D00988D8A /* TKUIGroupedAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */; };
@@ -1329,8 +1327,6 @@
 		D32CA5AE20E34409009C9449 /* TKUIGroupedAlertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIGroupedAlertCell.xib; sourceTree = "<group>"; };
 		D335907321EF604100CB57E3 /* TKStyleManager+TripKitUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKStyleManager+TripKitUI.swift"; sourceTree = "<group>"; };
 		D337467D208D5D980045B0C3 /* UserAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPIModel.swift; sourceTree = "<group>"; };
-		D33C0DF622432C8200497B32 /* TKUITurnByTurnInstructionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITurnByTurnInstructionCell.swift; sourceTree = "<group>"; };
-		D33C0DF722432C8200497B32 /* TKUITurnByTurnInstructionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUITurnByTurnInstructionCell.xib; sourceTree = "<group>"; };
 		D37EF6D721A7BCE80062288E /* TKLocalCost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLocalCost.swift; sourceTree = "<group>"; };
 		D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIGroupedAlertCell.swift; sourceTree = "<group>"; };
 		D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAlertCell.swift; sourceTree = "<group>"; };
@@ -1425,8 +1421,6 @@
 				3A0B517D2240E5B6002346D6 /* TKUISegmentTitleView.swift */,
 				3A0B517E2240E5B6002346D6 /* TKUISegmentTitleView.xib */,
 				3A7013AD22413A1100F07756 /* TKUISegmentTitleView+TKSegment.swift */,
-				D33C0DF622432C8200497B32 /* TKUITurnByTurnInstructionCell.swift */,
-				D33C0DF722432C8200497B32 /* TKUITurnByTurnInstructionCell.xib */,
 			);
 			path = "segment cards";
 			sourceTree = "<group>";
@@ -2765,7 +2759,6 @@
 				3A6DF13C202C8EB80084CB2C /* TKUIAlertInfoView.xib in Resources */,
 				3AF5F2B620EFF91F003AAEBA /* TKUIAttributionTableViewController.xib in Resources */,
 				D39B7BB520622FD100988D8A /* TKUIAlertCell.xib in Resources */,
-				D33C0DF922432C8200497B32 /* TKUITurnByTurnInstructionCell.xib in Resources */,
 				3AF5F2B120EFF7BE003AAEBA /* TKUIAttributionCell.xib in Resources */,
 				3A6DF14A202C8EB80084CB2C /* TKUIDepartureView.xib in Resources */,
 				3A6DF137202C8EB80084CB2C /* TripKitUI.xcassets in Resources */,
@@ -3115,7 +3108,6 @@
 				3A7636FB21F9F28200639155 /* TKUIAnnotations+TripKit.swift in Sources */,
 				3ADC802C2114861500A318B9 /* TKUIResultsViewModel+Restoration.swift in Sources */,
 				3AFD397620D93DC200FDC7D0 /* TKUIResultsAccessoryView.swift in Sources */,
-				D33C0DF822432C8200497B32 /* TKUITurnByTurnInstructionCell.swift in Sources */,
 				3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */,
 				3A6DF120202C8EB80084CB2C /* UIImageView+Kingfisher.swift in Sources */,
 				3A6DF13E202C8EB80084CB2C /* TKUIPathFriendlinessView.swift in Sources */,

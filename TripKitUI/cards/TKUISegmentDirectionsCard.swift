@@ -51,15 +51,9 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     
     guard let tableView = (cardView as? TGScrollCardView)?.tableView else { return }
     
-    tableView.register(TKUITurnByTurnInstructionCell.nib, forCellReuseIdentifier: TKUITurnByTurnInstructionCell.reuseIdentifier)
-    
     viewModel = TKUISegmentDirectionsViewModel(segment: segment)
     
-    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUISegmentDirectionsViewModel.Section>( configureCell: { (ds, tv, ip, item) -> UITableViewCell in
-      let cell = tableView.dequeueReusableCell(withIdentifier: TKUITurnByTurnInstructionCell.reuseIdentifier, for: ip) as! TKUITurnByTurnInstructionCell
-      cell.content = item.contentModel
-      return cell
-    })
+    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUISegmentDirectionsViewModel.Section>(configureCell: TKUISegmentDirectionsCard.configureCell)
     
     viewModel.sections
       .drive(tableView.rx.items(dataSource: dataSource))
@@ -68,10 +62,25 @@ public class TKUISegmentDirectionsCard: TGTableCard {
   
 }
 
-extension TKUISegmentDirectionsViewModel.Item {
+// MARK: Configuring cells
+
+extension TKUISegmentDirectionsCard {
   
-  var contentModel: TKUITurnByTurnInstructionCell.ContentModel {
-    return TKUITurnByTurnInstructionCell.ContentModel(mainInstruction: mainInstruction, supplementalInfo: supplementalInfo, directionImage: directionImage)
+  static func configureCell(dataSource: TableViewSectionedDataSource<TKUISegmentDirectionsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUISegmentDirectionsViewModel.Item) -> UITableViewCell {
+
+    let identifier = "TurnByTurnInstructionCell"
+    let cell = tableView.dequeueReusableCell(withIdentifier: identifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: identifier)
+
+    if let distance = item.distance {
+      let distanceFormatter = MKDistanceFormatter()
+      distanceFormatter.unitStyle = .abbreviated
+      
+      cell.textLabel?.text = distanceFormatter.string(fromDistance: distance)
+    }
+    
+    cell.detailTextLabel?.text = item.streetInstruction
+    
+    return cell
   }
   
 }
