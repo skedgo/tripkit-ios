@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 import RxSwift
 
@@ -160,7 +161,8 @@ public class TKUIAlertViewController: UITableViewController {
     // This intercepts the tap on the action button.
     alertCell.tappedOnLink
       .subscribe(onNext: { [unowned self] in
-        self.alertControllerDelegate?.alertViewController?(self, didTapOnURL: $0)
+        let browser = SFSafariViewController(url: $0)
+        self.present(browser, animated: true, completion: nil)
       })
       .disposed(by: disposeBag)
     
