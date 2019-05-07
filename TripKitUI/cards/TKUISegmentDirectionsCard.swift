@@ -12,13 +12,19 @@ import TGCardViewController
 
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 public class TKUISegmentDirectionsCard: TGTableCard {
+  
+  public static func canShowInstructions(for segment: TKSegment) -> Bool {
+    return TKUISegmentDirectionsViewModel.canShowInstructions(for: segment)
+  }
   
   let segment: TKSegment
   
   let titleView: TKUISegmentTitleView
   
+  private var viewModel: TKUISegmentDirectionsViewModel!
   private let disposeBag = DisposeBag()
   
   var tripMapManager: TKUITripMapManager {
@@ -36,7 +42,7 @@ public class TKUISegmentDirectionsCard: TGTableCard {
   }
   
   required init?(coder: NSCoder) {
-    // TODO: Implement to support state-restoration
+    // LATER: Implement to support state-restoration
     return nil
   }
   
@@ -47,16 +53,25 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     
     tableView.register(TKUITurnByTurnInstructionCell.nib, forCellReuseIdentifier: TKUITurnByTurnInstructionCell.reuseIdentifier)
     
-    let shapes = segment.shortedShapes() ?? []
+    viewModel = TKUISegmentDirectionsViewModel(segment: segment)
     
-    Observable.just(shapes)
-      .bind(to: tableView.rx.items) { (tableView, row, element) in
-        let cell = tableView.dequeueReusableCell(withIdentifier: TKUITurnByTurnInstructionCell.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! TKUITurnByTurnInstructionCell
-        let cellContent = TKUITurnByTurnInstructionCell.ContentModel(mainInstruction: "\(element.title ?? "") - \(element.metres ?? 0)m")
-        cell.content = cellContent        
-        return cell
-      }
+    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUISegmentDirectionsViewModel.Section>( configureCell: { (ds, tv, ip, item) -> UITableViewCell in
+      let cell = tableView.dequeueReusableCell(withIdentifier: TKUITurnByTurnInstructionCell.reuseIdentifier, for: ip) as! TKUITurnByTurnInstructionCell
+      cell.content = item.contentModel
+      return cell
+    })
+    
+    viewModel.sections
+      .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
+  }
+  
+}
+
+extension TKUISegmentDirectionsViewModel.Item {
+  
+  var contentModel: TKUITurnByTurnInstructionCell.ContentModel {
+    return TKUITurnByTurnInstructionCell.ContentModel(mainInstruction: mainInstruction, supplementalInfo: supplementalInfo, directionImage: directionImage)
   }
   
 }

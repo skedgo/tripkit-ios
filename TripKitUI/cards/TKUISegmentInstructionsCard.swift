@@ -14,7 +14,7 @@ import RxSwift
 import RxCocoa
 
 public class TKUISegmentInstructionCard: TGPlainCard {
-  
+
   let segment: TKSegment
   
   let titleView: TKUISegmentTitleView
@@ -39,7 +39,7 @@ public class TKUISegmentInstructionCard: TGPlainCard {
   }
   
   required init?(coder: NSCoder) {
-    // TODO: Implement to support state-restoration
+    // LATER: Implement to support state-restoration
     return nil
   }
   
