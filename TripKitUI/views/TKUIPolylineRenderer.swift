@@ -12,6 +12,11 @@ import ASPolylineView
 
 open class TKUIPolylineRenderer: ASPolylineRenderer {
   
+  public enum SelectionMode {
+    case thickWithSelectionColor
+    case regularWithNormalColor
+  }
+
   struct SelectionStyle {
     static let `default` = SelectionStyle(
       defaultColor: nil,
@@ -44,6 +49,8 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
       updateStyling()
     }
   }
+  
+  var selectionMode: SelectionMode = .thickWithSelectionColor
   
   /// Whether it is currently styled as selected
   private var isSelected: Bool?
@@ -81,10 +88,18 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
     
     if let selected = isSelected  {
       if selected {
-        strokeColor = selectionStyle.selectedColor
-        borderColor = selectionStyle.selectedBorderColor
+        switch selectionMode {
+        case .regularWithNormalColor:
+          strokeColor = selectionStyle.defaultColor
+          borderColor = selectionStyle.defaultBorderColor ?? selectionStyle.selectedBorderColor
+          lineWidth = 12
+        case .thickWithSelectionColor:
+          strokeColor = selectionStyle.selectedColor
+          borderColor = selectionStyle.selectedBorderColor
+          lineWidth = 24
+        }
         alpha = 1
-        lineWidth = 24
+
       } else {
         strokeColor = selectionStyle.deselectedColor
         borderColor = selectionStyle.deselectedColor

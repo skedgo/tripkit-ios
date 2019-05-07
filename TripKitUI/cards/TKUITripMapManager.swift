@@ -37,6 +37,7 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     
     super.init()
     
+    self.selectionMode = .regularWithNormalColor
     self.preferredZoomLevel = .road
   }
   

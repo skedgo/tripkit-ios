@@ -71,6 +71,8 @@ open class TKUIMapManager: TGMapManager {
     }
   }
   
+  public var selectionMode: TKUIPolylineRenderer.SelectionMode = .thickWithSelectionColor
+  
   fileprivate var heading: CLLocationDirection = 0 {
     didSet {
       guard let mapView = mapView else { return }
@@ -362,6 +364,7 @@ extension TKUIMapManager {
       style.defaultColor = polyline.route.routeColor
       style.defaultBorderColor = polyline.route.routeColor?.darker(by: 0.5)
       
+      renderer.selectionMode = selectionMode
       renderer.selectionStyle = style
       renderer.lineDashPattern = polyline.route.routeDashPattern
       renderer.selectionIdentifier = polyline.route.routeIsTravelled ? polyline.route.selectionIdentifier : nil
