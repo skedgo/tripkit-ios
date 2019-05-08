@@ -80,7 +80,7 @@ extension TKUIResultsViewModel {
           predicate: NSPredicate(format: "toDelete = NO AND request = %@ AND visibilityRaw != %@", request, NSNumber(value: TripGroupVisibility.hidden.rawValue)),
           relationshipKeyPathsForPrefetching: ["visibleTrip", "visibleTrip.segmentReferences"]
         )
-        .throttle(0.5, scheduler: MainScheduler.instance)
+        .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
     }
   }
   

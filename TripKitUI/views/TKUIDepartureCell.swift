@@ -122,7 +122,7 @@ extension TKUIDepartureCell {
     updateServiceAlertSection()
     
     if dataSource.approximateTimeToDepart != nil {
-      Observable<Int>.interval(5, scheduler: MainScheduler.instance)
+      Observable<Int>.interval(.seconds(5), scheduler: MainScheduler.instance)
         .startWith(0)
         .subscribe(onNext: { [weak self] _ in
           self?.updateCounter()

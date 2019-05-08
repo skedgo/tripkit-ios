@@ -45,7 +45,7 @@ extension SGAutocompletionDataSource {
       .disposed(by: storage.disposeBag)
     
     // Start again with empty input
-    storage.inputText.value = ""
+    storage.inputText.accept("")
     storage.mapRect = mapRect
   }
   
@@ -56,7 +56,7 @@ extension SGAutocompletionDataSource {
   /// - Parameters:
   ///   - input: Search string
   public func autocomplete(_ input: String) {
-    storage.inputText.value = input
+    storage.inputText.accept(input)
   }
   
   public var autocompletionUpdated: Driver<Void> {
@@ -178,13 +178,13 @@ class SGAutocompletionDataSourceSwiftStorage: NSObject {
   
   fileprivate var providers: [TKAutocompleting] = []
 
-  fileprivate let inputText = Variable<String>("")
+  fileprivate let inputText = BehaviorRelay<String>(value: "")
 
   fileprivate var mapRect = MKMapRect.null
   
   // Outputs
   
-  fileprivate var results = Variable<[TKAutocompletionResult]>([])
+  fileprivate var results = BehaviorRelay<[TKAutocompletionResult]>(value: [])
 
   // Helpers
   

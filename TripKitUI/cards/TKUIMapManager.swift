@@ -241,7 +241,7 @@ extension TKUIMapManager {
     let bag = DisposeBag()
     dynamicDisposeBag = bag
     Observable<Int>
-      .interval(1, scheduler: MainScheduler.instance) // Every second to show live second-based countdown in callout
+      .interval(.seconds(1), scheduler: MainScheduler.instance) // Every second to show live second-based countdown in callout
       .subscribe(onNext: { [unowned self] _ in self.updateDynamicAnnotations(animated: true) })
       .disposed(by: bag)
   }

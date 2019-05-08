@@ -15,7 +15,7 @@ import RxSwift
 extension TKUIResultsViewModel {
   
   static func fetchRealTimeUpdates(for tripGroups: Observable<[TripGroup]>) -> Observable<TKRealTimeUpdateProgress<Void>> {
-    return Observable<Int>.interval(30, scheduler: MainScheduler.instance)
+    return Observable<Int>.interval(.seconds(30), scheduler: MainScheduler.instance)
       .withLatestFrom(tripGroups)
       .flatMapLatest(TKBuzzRealTime.rx.update)
       .startWith(.idle)

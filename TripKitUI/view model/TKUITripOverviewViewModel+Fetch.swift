@@ -20,7 +20,7 @@ extension TKUITripOverviewViewModel {
       .map(TKBuzzInfoProvider.rx.downloadContent)
       .map { $0.asSignal(onErrorSignalWith: .empty()) }
 
-    return Signal.merge(requests).throttle(0.5, latest: true)
+    return Signal.merge(requests).throttle(.milliseconds(500), latest: true)
   }
   
 }

@@ -9,14 +9,14 @@
 import Foundation
 
 import RxSwift
+import RxRelay
 
 /// Helper class that manages real-time updates for trips. Also handles
 /// switching to a different trip.
 public class TKTripRealTimeUpdater {
   
-  public init(trip: Trip? = nil, timeBetweenUpdates: TimeInterval = 10) {
-    tripVar = Variable(trip)
-    self.timeBetweenUpdates = timeBetweenUpdates
+  public init(trip: Trip? = nil, timeBetweenUpdates: DispatchTimeInterval = .seconds(10)) {
+    tripVar = BehaviorRelay(value: trip)
     
     let currentTrip = tripVar.asObservable().filter { $0 != nil }.map { $0! }.distinctUntilChanged()
     let enabled = enabledVar.asObservable().distinctUntilChanged()
@@ -34,17 +34,16 @@ public class TKTripRealTimeUpdater {
   }
   
   private let realTime = TKBuzzRealTime()
-  private let timeBetweenUpdates: TimeInterval
 
-  private var tripVar: Variable<Trip?>
-  private var enabledVar = Variable(true)
+  private var tripVar: BehaviorRelay<Trip?>
+  private var enabledVar = BehaviorRelay(value: true)
   private var updated = PublishSubject<Trip>()
   private let disposeBag = DisposeBag()
 
   /// The trip which is getting updated with real-time data
   public var trip: Trip? {
     get { return tripVar.value }
-    set { tripVar.value = newValue }
+    set { tripVar.accept(newValue) }
   }
   
   /// Whether real-time updates are enabled at all (regardless of whether
@@ -52,7 +51,7 @@ public class TKTripRealTimeUpdater {
   /// trip doesn't support real-time updates).
   public var isEnabled: Bool {
     get { return enabledVar.value }
-    set { enabledVar.value = newValue }
+    set { enabledVar.accept(newValue) }
   }
   
   /// Observable sequence that is triggered whenever the trip has been

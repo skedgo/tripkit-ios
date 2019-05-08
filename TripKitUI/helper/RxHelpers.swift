@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-extension Signal where S == SignalSharingStrategy {
+extension Signal where SharingStrategy == SignalSharingStrategy {
   
   func startOptional() -> Signal<Element?> {
     return map { $0 as Element? }
@@ -21,7 +21,7 @@ extension Signal where S == SignalSharingStrategy {
   
 }
 
-extension Driver where S == DriverSharingStrategy {
+extension Driver where SharingStrategy == DriverSharingStrategy {
   
   func startOptional() -> Driver<Element?> {
     return map { $0 as Element? }
@@ -30,9 +30,9 @@ extension Driver where S == DriverSharingStrategy {
   
 }
 
-extension TableViewSectionedDataSource where S : SectionModelType, S.Item : Equatable {
+extension TableViewSectionedDataSource where Section : SectionModelType, Section.Item : Equatable {
   
-  func indexPath(of needle: S.Item?) -> IndexPath? {
+  func indexPath(of needle: Section.Item?) -> IndexPath? {
     guard let needle = needle else { return nil }
     for (section, s) in self.sectionModels.enumerated() {
       for (item, i) in s.items.enumerated() {
