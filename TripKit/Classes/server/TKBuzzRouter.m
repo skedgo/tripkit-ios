@@ -193,43 +193,53 @@
     }];
 }
 
-- (void)updateTrip:(Trip *)trip completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion
+- (void)updateTrip:(Trip *)trip completionWithFlag:(void(^)(Trip *trip, BOOL tripUpdated))completion
 {
-    NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
-    [self hitURLForTripDownload:updateURL completion:^(NSURL *shareURL, id JSON, NSError *error) {
+  NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
+  if (updateURL == nil) {
+    [TKLog info:@"TKBuzzRouter" format:@"Tried to update a trip that doesn't have a (valid) update URL: %@", trip];
+    completion(trip, NO);
+    return;
+  }
+  
+  [self hitURLForTripDownload:updateURL completion:^(NSURL *shareURL, id JSON, NSError *error) {
 #pragma unused(shareURL)
-        if (JSON) {
-          [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
-            [TKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
-              __block NSString *result = nil;
-              [updatedTrip.managedObjectContext performBlockAndWait:^{
-                result = [NSString stringWithFormat:@"Updated trip (%ld): %@", (long)updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
-              }];
-              return result;
-            }];
-            if (completion) {
-                completion(updatedTrip, YES);
-            }
+    if (JSON) {
+      [self parseJSON:JSON updatingTrip:trip completion:^(Trip * _Nullable updatedTrip) {
+        [TKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+          __block NSString *result = nil;
+          [updatedTrip.managedObjectContext performBlockAndWait:^{
+            result = [NSString stringWithFormat:@"Updated trip (%ld): %@", (long)updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
           }];
-        } else if (! error) {
-            // No new data (but also no error
-          [TKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
-            __block NSString *result = nil;
-            [trip.managedObjectContext performBlockAndWait:^{
-              result = [NSString stringWithFormat:@"No update for trip (%ld): %@", (long)trip.tripGroup.visibility, [trip debugString]];
-            }];
-            return result;
-          }];
-          if (completion) {
-              completion(trip, NO);
+          return result;
+        }];
+        if (completion) {
+          if (updatedTrip != nil) {
+            completion(updatedTrip, YES);
+          } else {
+            completion(trip, NO);
           }
         }
-    }];
+      }];
+    } else if (! error) {
+        // No new data (but also no error
+      [TKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+        __block NSString *result = nil;
+        [trip.managedObjectContext performBlockAndWait:^{
+          result = [NSString stringWithFormat:@"No update for trip (%ld): %@", (long)trip.tripGroup.visibility, [trip debugString]];
+        }];
+        return result;
+      }];
+      if (completion) {
+        completion(trip, NO);
+      }
+    }
+  }];
 }
 
-- (void)updateTrip:(Trip *)trip completion:(void(^)(Trip * __nullable trip))completion
+- (void)updateTrip:(Trip *)trip completion:(void(^)(Trip *trip))completion
 {
-    [self updateTrip:trip completionWithFlag:^(Trip * __nullable updatedTrip, BOOL tripGotUpdated) {
+    [self updateTrip:trip completionWithFlag:^(Trip *updatedTrip, BOOL tripGotUpdated) {
 #pragma unused(tripGotUpdated)
         completion(updatedTrip);
     }];
@@ -526,6 +536,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
    ^(Trip *updatedTrip) {
      if (updatedTrip) {
        ZAssert(updatedTrip.managedObjectContext == tripKitContext, @"Context mismatch.");
+       ZAssert(updatedTrip == trip, @"Trip object shouldn't have changed");
        NSError *publicError = nil;
        BOOL publicSuccess = [tripKitContext save:&publicError];
        ZAssert(publicSuccess, @"Error saving: %@", publicError);

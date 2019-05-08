@@ -222,6 +222,8 @@ extension TKRegionManager {
       part = details.vehicleIcon
     case .alert:
       part = nil // not supported for modes
+    @unknown default:
+      part = nil
     }
     guard let fileNamePart = part else { return nil }
     return TKServer.imageURL(forIconFileNamePart: fileNamePart, of: iconType)

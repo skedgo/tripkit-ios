@@ -23,7 +23,6 @@
 
 // TransportKitUI
 #import "TKUIImageAnnotationView.h"
-#import "TKUIPolylineRenderer.h"
 #import "TKUISemaphoreView.h"
 #import "TKUITripSegmentsView.h"
 

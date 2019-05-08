@@ -22,6 +22,11 @@ public protocol TKUIIdentifiableAnnotation: MKAnnotation {
   var identity: String? { get }
 }
 
+extension Notification.Name {
+  /// User info: ["selection": "identifier" as String]
+  public static let TKUIMapManagerSelectionChanged = Notification.Name("TKUIMapManagerSelectionChanged")
+}
+
 extension TKNamedCoordinate: TKUIIdentifiableAnnotation {
   public var identity: String? {
     if let stop = self as? TKStopCoordinate {
@@ -43,15 +48,39 @@ open class TKUIMapManager: TGMapManager {
   
   open var showOverlayPolygon = false
   
+  /// Cache of renderers, used to update styling when selection changes
+  private var renderers: [WeakRenderers] = []
+  
+  /// The identifier for what should be drawn as selected on the map
+  public var selectionIdentifier: String? {
+    didSet {
+      guard let mapView = mapView else { return }
+      
+      // this updates the renderers
+      renderers.removeAll(where: { $0.renderer == nil })
+      renderers.forEach { $0.renderer?.setNeedsDisplay() }
+      
+      // updates visible views; new views updated from `mapView(_:didAdd:)`
+      let views = mapView.annotations(in: mapView.visibleMapRect)
+        .compactMap { $0 as? MKAnnotation }
+        .compactMap { mapView.view(for: $0) }
+      updateAnnotationsViewsForSelection(views)
+      
+      // give map a chance to itself, if needed (probably not)
+      mapView.setNeedsDisplay()
+    }
+  }
+  
+  public var selectionMode: TKUIPolylineRenderer.SelectionMode = .thickWithSelectionColor
+  
   fileprivate var heading: CLLocationDirection = 0 {
     didSet {
       guard let mapView = mapView else { return }
       UIView.animate(withDuration: 0.25) {
-        for object in mapView.annotations(in: mapView.visibleMapRect) {
-          if let annotation = object as? MKAnnotation, let view = mapView.view(for: annotation) {
-            TKUIAnnotationViewBuilder.update(annotationView: view, forHeading: self.heading)
-          }
-        }
+        mapView.annotations(in: mapView.visibleMapRect)
+          .compactMap { $0 as? MKAnnotation }
+          .compactMap { mapView.view(for: $0) }
+          .forEach { TKUIAnnotationViewBuilder.update(annotationView: $0, forHeading: self.heading) }
       }
     }
   }
@@ -142,6 +171,10 @@ open class TKUIMapManager: TGMapManager {
     super.cleanUp(mapView, animated: animated)
   }
   
+  open func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
+    return TKUIMapManager.annotationBuilderFactory(annotation, mapView)
+  }
+  
 }
 
 // MARK: - Overlay polygon
@@ -209,8 +242,7 @@ extension TKUIMapManager {
     dynamicDisposeBag = bag
     Observable<Int>
       .interval(1, scheduler: MainScheduler.instance) // Every second to show live second-based countdown in callout
-      .subscribe(onNext: { [unowned self] _ in self.updateDynamicAnnotations(animated: true)
-      })
+      .subscribe(onNext: { [unowned self] _ in self.updateDynamicAnnotations(animated: true) })
       .disposed(by: bag)
   }
   
@@ -248,6 +280,35 @@ extension TKUIMapManager {
   
 }
 
+// MARK: - Updating selected annotations
+
+extension TKUIMapManager {
+  
+  private func updateAnnotationsViewsForSelection(_ views: [MKAnnotationView]) {
+    // update semaphore views - if needed, we could add a more generic
+    // way for handling this more like the renderer:
+    // 1. Add a `selectionHandler` to TKUIAnnoationViewBuilder
+    // 2. Pass that on from there to views that handle it
+    // 3. Call `setNeedsDisplay()` here (removing lines marked with *)
+    //    and adding instead `.forEach { $0.setNeedsDisplay() }`
+    views
+      .compactMap { $0 as? TKUISemaphoreView }                   // *
+      .forEach { $0.updateSelection(for: selectionIdentifier ) } // *
+  }
+  
+  private func updateSelectionForTapping(_ view: MKAnnotationView) {
+    guard
+      let displayable = view.annotation as? TKUISemaphoreDisplayable,
+      let identifier = displayable.selectionIdentifier
+      else { return }
+    
+    self.selectionIdentifier = identifier
+    
+    NotificationCenter.default.post(name: .TKUIMapManagerSelectionChanged, object: self, userInfo: ["selection": identifier])
+  }
+  
+}
+
 // MARK: - MKMapViewDelegate
 
 extension TKUIMapManager {
@@ -255,6 +316,7 @@ extension TKUIMapManager {
   open func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
     TKUIMapManagerHelper.adjustZOrder(views)
 
+    // animations
     let animatedIDs = animatedAnnotations.identities
     let viewsToAnimate = views.filter {
       guard let identity = ($0.annotation as? TKUIIdentifiableAnnotation)?.identity else { return false }
@@ -270,16 +332,24 @@ extension TKUIMapManager {
         }, completion: nil
       )
     }
+    
+    // the selected view might have been off-screen and was now added
+    updateAnnotationsViewsForSelection(views)
   }
   
   open func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    if annotation === mapView.userLocation {
+    guard annotation !== mapView.userLocation else {
       // Use the default MKUserLocation annotation
       return nil
     }
     
-    let builder = TKUIMapManager.annotationBuilderFactory(annotation, mapView)
+    let builder = annotationBuilder(for: annotation, in: mapView)
     return builder.build()
+  }
+  
+  /// Helper to have weak refernences for renderers
+  private struct WeakRenderers {
+    weak var renderer: TKUIPolylineRenderer?
   }
   
   open func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -289,8 +359,22 @@ extension TKUIMapManager {
       
     } else if let polyline = overlay as? TKRoutePolyline {
       let renderer = TKUIPolylineRenderer(polyline: polyline)
-      renderer.strokeColor = polyline.route.routeColor
+      
+      var style = TKUIPolylineRenderer.SelectionStyle.default
+      style.defaultColor = polyline.route.routeColor
+      style.defaultBorderColor = polyline.route.routeColor?.darker(by: 0.5)
+      
+      renderer.selectionMode = selectionMode
+      renderer.selectionStyle = style
       renderer.lineDashPattern = polyline.route.routeDashPattern
+      renderer.selectionIdentifier = polyline.route.routeIsTravelled ? polyline.route.selectionIdentifier : nil
+      renderer.selectionHandler = { [weak self] in
+        guard let target = self?.selectionIdentifier else { return nil}
+        return $0 == target
+      }
+      
+      renderers.append(WeakRenderers(renderer: renderer))
+      
       return renderer
       
     } else if let polygon = overlay as? MKPolygon {
@@ -305,6 +389,10 @@ extension TKUIMapManager {
   
   open func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
     self.heading = mapView.camera.heading
+  }
+  
+  open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    updateSelectionForTapping(view)
   }
   
 }

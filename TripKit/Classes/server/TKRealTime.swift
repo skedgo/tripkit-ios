@@ -8,10 +8,10 @@
 
 import Foundation
 
-public enum TKRealTimeUpdateProgress {
+public enum TKRealTimeUpdateProgress<E> {
   case idle
   case updating
-  case updated
+  case updated(E)
 }
 
 @objc

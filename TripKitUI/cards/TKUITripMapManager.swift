@@ -22,11 +22,22 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
   public let trip: Trip
   
+  fileprivate weak var selectedSegment: TKSegment? {
+    didSet {
+      selectionIdentifier = selectedSegment?.selectionIdentifier
+    }
+  }
+  
+  override public var annotationsToZoomToOnTakingCharge: [MKAnnotation] {
+    return trip.segments.flatMap { $0.annotationsToZoomToOnMap() }
+  }
+  
   public init(trip: Trip) {
     self.trip = trip
     
     super.init()
     
+    self.selectionMode = .regularWithNormalColor
     self.preferredZoomLevel = .road
   }
   
@@ -35,21 +46,49 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     add(trip)
   }
   
-  public func showTrip(animated: Bool) {
-    zoom(to: annotations, animated: animated)
+  override public func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
+    let builder = super.annotationBuilder(for: annotation, in: mapView)
+    if let visit = annotation as? StopVisits {
+      let isVisited = trip.usesVisit(visit)
+      builder.drawCircleAsTravelled(isVisited)
+    }
+    return builder
   }
   
-  public func show(_ segment: TKSegment, animated: Bool) {
-    let annos = segment.annotationsToZoomToOnMap()
+  public func showTrip(animated: Bool) {
+    deselectSegment(animated: animated)
+    zoom(to: annotationsToZoomToOnTakingCharge, animated: animated)
+  }
+  
+  public func deselectSegment(animated: Bool) {
+    self.selectedSegment = nil
+  }
+  
+  public func show(_ segment: TKSegment, animated: Bool, mode: TKUISegmentMode = .onSegment) {
+    self.selectedSegment = segment
+    
+    let annos = segment.annotationsToZoomToOnMap(mode: mode)
     zoom(to: annos, animated: animated)
+    
+    mapView?.selectAnnotation(segment, animated: animated)
+  }
+  
+  public func updateTrip() {
+    removeTrip()
+    add(trip)
   }
   
 }
 
-
 // MARK: Adding trips to the map
 
 private extension TKUITripMapManager {
+  func removeTrip() {
+    self.overlays = []
+    self.annotations = []
+    self.dynamicAnnotations = []
+  }
+  
   func add(_ trip: Trip) {
     var annotations = [MKAnnotation]()
     var dynamicAnnotations = [MKAnnotation]()

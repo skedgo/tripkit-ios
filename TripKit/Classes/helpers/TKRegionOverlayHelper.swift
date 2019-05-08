@@ -6,7 +6,6 @@
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
 //
 
-import MapKit
 
 @objc
 public class TKRegionOverlayHelper: NSObject {

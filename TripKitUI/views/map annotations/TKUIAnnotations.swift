@@ -26,6 +26,7 @@ public protocol TKUIImageAnnotationDisplayable: MKAnnotation {
   var pointDisplaysImage: Bool { get }
   var isDraggable: Bool { get }
   
+  var pointColor: TKColor? { get }
   var pointImage: TKImage? { get }
   var pointImageURL: URL? { get }
   var pointImageIsTemplate: Bool { get }

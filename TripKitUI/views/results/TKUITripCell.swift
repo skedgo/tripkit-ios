@@ -36,10 +36,16 @@ public class TKUITripCell: UITableViewCell {
 
   override public func setSelected(_ selected: Bool, animated: Bool) {
     // Not calling super, to not highlight background
-//    super.setSelected(selected, animated: animated)
-
     selectionIndicator.isHidden = !selected
   }
+  
+  override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    // Not calling super to not override line colors
+    UIView.animate(withDuration: animated ? 0.25 : 0) {
+      self.contentView.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : .white
+    }
+  }
+
 
   // MARK: - Model
   

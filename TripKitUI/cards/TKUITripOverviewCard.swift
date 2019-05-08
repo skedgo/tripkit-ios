@@ -18,13 +18,14 @@ import TGCardViewController
   import TripKit
 #endif
 
-extension TGPageCard {
+
+public class TKUITripsPageCard: TGPageCard {
   
   /// Constructs a page card configured for displaying the alternative trips
   /// of a request.
   ///
   /// - Parameter trip: Trip to focus on first
-  public convenience init(overviewsHighlighting trip: Trip) {
+  public init(highlighting trip: Trip) {
     // make sure this is the visible trip in our group
     trip.setAsPreferredTrip()
     
@@ -33,20 +34,29 @@ extension TGPageCard {
     
     let cards = trips.enumerated().map { TKUITripOverviewCard(trip: $1, index: $0) }
     
-    self.init(cards: cards, initialPage: index)
+    super.init(cards: cards, initialPage: index)
     
-    if let tripHandler = TKUITripOverviewCard.config.startTripHandler {
-      // TODO: Localize
-      headerRightAction = (title: "Start", onPress: { index in
-        let card = cards[index]
-        let trip = card.viewModel.trip
-        tripHandler(card, trip)
-      })
-    }
+    setUpTripHandler()
+  }
+  
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+
+    setUpTripHandler()
+  }
+  
+  private func setUpTripHandler() {
+    guard let tripHandler = TKUITripOverviewCard.config.startTripHandler else { return }
+    
+    // TODO: Localize
+    headerRightAction = (title: "Start", onPress: { index in
+      guard let card = self.cards[index] as? TKUITripOverviewCard else { assertionFailure(); return }
+      let trip = card.viewModel.trip
+      tripHandler(card, trip)
+    })
   }
   
 }
-
 
 public class TKUITripOverviewCard: TGTableCard {
   
@@ -134,6 +144,12 @@ public class TKUITripOverviewCard: TGTableCard {
       })
       .disposed(by: disposeBag)
     
+    viewModel.refreshMap
+      .emit(onNext: {
+        (self.mapManager as? TKUITripMapManager)?.updateTrip()
+      })
+      .disposed(by: disposeBag)
+    
     if let factory = TKUITripOverviewCard.config.tripActionsFactory {
       let actions = factory(viewModel.trip)
       let actionsView = TKUITripActionsView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
@@ -162,6 +178,8 @@ public class TKUITripOverviewCard: TGTableCard {
     if zoomToTrip {
       (mapManager as? TKUITripMapManager)?.showTrip(animated: animated)
       zoomToTrip = false
+    } else {
+      (mapManager as? TKUITripMapManager)?.deselectSegment(animated: animated)
     }
   }
   
@@ -194,7 +212,7 @@ extension TKUITripOverviewCard {
 // MARK: - Attribution
 
 extension TKUITripOverviewCard {
-  private func showAttribution(for sources: [API.DataAttribution], in  tableView: UITableView) {
+  private func showAttribution(for sources: [API.DataAttribution], in tableView: UITableView) {
     let footer = TKUIAttributionView.newView(sources, fitsIn: tableView)
     footer?.backgroundColor = tableView.backgroundColor
     
@@ -244,7 +262,7 @@ extension TKUITripOverviewCard {
 extension TKUITripOverviewCard: TKUIAttributionTableViewControllerDelegate {
   
   public func attributor(_ attributor: TKUIAttributionTableViewController, requestsWebsite url: URL) {
-    TKUITripOverviewCard.config.presentAttributionHandler?(self, url)
+    TKUITripOverviewCard.config.presentAttributionHandler?(self, attributor, url)
   }
   
   public func requestsDismissal(attributor: TKUIAttributionTableViewController) {

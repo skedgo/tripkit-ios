@@ -10,6 +10,10 @@ import Foundation
 
 extension TKSegment {
   
+  public var index: Int {
+    return reference?.index?.intValue ?? -1
+  }
+  
   @objc
   public func triggerRealTimeKVO() {
     let time = self.departureTime
@@ -94,7 +98,8 @@ extension TKSegment {
 extension TKSegment {
   
   public var canShowPathFriendliness: Bool {
-    return self.template?.metresFriendly != nil
+    guard let totalMeters = template?.metresFriendly?.doubleValue else { return false }
+    return totalMeters > 0
   }
   
 }
@@ -215,8 +220,11 @@ extension TKSegment: TKTripSegment {
       let mutable = NSMutableString(string: rawString)
       fill(inTemplates: mutable, inTitle: true, includingTime: true)
       return mutable as String
+    } else if let date = self.departureTime {
+      return date
     } else {
-      return self.departureTime
+      assertionFailure("Uh-oh. No instruction and no date?")
+      return ""
     }
   }
   

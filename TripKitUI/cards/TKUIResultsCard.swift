@@ -33,6 +33,7 @@ public class TKUIResultsCard: TGTableCard {
 
   private var viewModel: TKUIResultsViewModel!
   let disposeBag = DisposeBag()
+  private var realTimeBag = DisposeBag()
   
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   
@@ -61,13 +62,14 @@ public class TKUIResultsCard: TGTableCard {
       accessoryView: accessoryView, mapManager: mapManager,
       initialPosition: nil // keep same as before (so that user can drop another pin)
     )
+    didInit()
   }
   
   
   public init(request: TripRequest) {
     self.destination = nil
     self.request = request
-    
+
     let title = "Routes" // TODO: Localise
     let mapManager = TKUIResultsCard.config.mapManagerFactory()
     super.init(
@@ -75,6 +77,7 @@ public class TKUIResultsCard: TGTableCard {
       accessoryView: accessoryView, mapManager: mapManager,
       initialPosition: .extended // show fully as we'll have routes shortly
     )
+    didInit()
   }
   
   public required convenience init?(coder: NSCoder) {
@@ -86,6 +89,12 @@ public class TKUIResultsCard: TGTableCard {
     }
     
     self.init(request: request)
+  }
+  
+  private func didInit() {
+    // Don't de-select as we use a custom style and want to keep highlighting
+    // the best trip (as it's also highlighted on the map still).
+    self.deselectOnAppear = false
   }
   
   public override func encode(with aCoder: NSCoder) {
@@ -106,24 +115,27 @@ public class TKUIResultsCard: TGTableCard {
     
     // Build the view model
 
-    let tappedModes = Driver.merge(accessoryView.transportButton.rx.tap.asDriver(), footerButton.rx.tap.asDriver())
+    let tappedModes = Signal.merge(accessoryView.transportButton.rx.tap.asSignal(), footerButton.rx.tap.asSignal())
 
     let inputs: TKUIResultsViewModel.UIInput = (
-      selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asDriver(),
-      tappedDate: accessoryView.timeButton.rx.tap.asDriver(),
+      selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asSignal(),
+      tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: tappedModes,
+      changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
+      changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
+      changedSortOrder: .empty()
+    )
+    
+    let mapInput: TKUIResultsViewModel.MapInput = (
       tappedMapRoute: mapManager.selectedMapRoute,
-      changedDate: changedTime.asDriver(onErrorDriveWith: Driver.empty()),
-      changedModes: changedModes.asDriver(onErrorDriveWith: Driver.empty()),
-      changedSortOrder: Driver.empty(), // TODO
       droppedPin: mapManager.droppedPin
     )
     
     let viewModel: TKUIResultsViewModel
     if let destination = self.destination {
-      viewModel = TKUIResultsViewModel(destination: destination, inputs: inputs)
+      viewModel = TKUIResultsViewModel(destination: destination, inputs: inputs, mapInput: mapInput)
     } else if let request = self.request {
-      viewModel = TKUIResultsViewModel(request: request, inputs: inputs)
+      viewModel = TKUIResultsViewModel(request: request, inputs: inputs, mapInput: mapInput)
     } else {
       preconditionFailure()
     }
@@ -180,12 +192,6 @@ public class TKUIResultsCard: TGTableCard {
       })
       .disposed(by: disposeBag)
     
-    viewModel.realTimeUpdate
-      .drive(onNext: { _ in
-        // Indicate progress anywhere?
-      })
-      .disposed(by: disposeBag)
-
     viewModel.request
       .drive(onNext: TKUICustomization.shared.feedbackActiveItemHandler)
       .disposed(by: disposeBag)
@@ -195,8 +201,9 @@ public class TKUIResultsCard: TGTableCard {
       .disposed(by: disposeBag)
 
     viewModel.error
+      .asObservable()
       .withLatestFrom(viewModel.request) { ($0, $1) }
-      .drive(onNext: { [weak self] in
+      .subscribe(onNext: { [weak self] in
         let canHandleRoutingRequest = TKUIResultsCard.config.requestRoutingSupport != nil
         self?.show($0, for: $1, cardView: cardView, tableView: tableView, allowRequest: canHandleRoutingRequest)
       })
@@ -210,11 +217,25 @@ public class TKUIResultsCard: TGTableCard {
       .disposed(by: disposeBag)
     
     viewModel.next
-      .drive(onNext: { [weak self] in self?.navigate(to: $0) })
+      .emit(onNext: { [weak self] in self?.navigate(to: $0) })
       .disposed(by: disposeBag)
     
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
+  }
+  
+  public override func didAppear(animated: Bool) {
+    super.didAppear(animated: animated)
+    
+    viewModel.realTimeUpdate
+      .drive()
+      .disposed(by: realTimeBag)
+  }
+  
+  public override func willDisappear(animated: Bool) {
+    super.willDisappear(animated: animated)
+    
+    realTimeBag = DisposeBag()
   }
   
 }
@@ -288,7 +309,7 @@ private extension TKUIResultsCard {
   func navigate(to next: TKUIResultsViewModel.Next) {
     switch next {
     case .showTrip(let trip):
-      controller?.push(TGPageCard(overviewsHighlighting: trip))
+      controller?.push(TKUITripsPageCard(highlighting: trip))
       
     case .presentModes(let modes, let region):
       showTransportOptions(modes: modes, for: region)

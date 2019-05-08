@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong) id<TKDisplayableRoute> route;
 
+@property(nonatomic, copy, nullable) NSString *selectionIdentifier;
+
 + (nullable instancetype)routePolylineForRoute:(id <TKDisplayableRoute>)route;
 
 /**

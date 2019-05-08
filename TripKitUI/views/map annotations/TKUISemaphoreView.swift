@@ -7,6 +7,9 @@
 
 import Foundation
 
+import RxSwift
+import RxCocoa
+
 /// An annotation that can be displayed using TripKitUI's `TKUISemaphoreView`
 /// or just as a point on the map.
 public protocol TKUISemaphoreDisplayable: TKUIImageAnnotationDisplayable {
@@ -14,6 +17,7 @@ public protocol TKUISemaphoreDisplayable: TKUIImageAnnotationDisplayable {
   var bearing: NSNumber? { get }
   var canFlipImage: Bool { get }
   var isTerminal: Bool { get }
+  var selectionIdentifier: String? { get }
 }
 
 extension TKUISemaphoreView {
@@ -33,8 +37,16 @@ extension TKUISemaphoreView {
 extension TKUISemaphoreView {
   
   @objc
-  static func shouldObserve(_ annotation: MKAnnotation) -> Bool {
-    return annotation is NSObject && annotation is TKUISemaphoreDisplayable
+  func observe(_ annotation: MKAnnotation) {
+    self.objcDisposeBag = TKObjCDisposeBag()
+    
+    guard annotation is NSObject, annotation is TKUISemaphoreDisplayable else { return }
+
+    NotificationCenter.default.rx.notification(.TKUIUpdatedRealTimeData, object: annotation)
+      .filter { $0.object is TKUISemaphoreDisplayable }
+      .map { ($0.object as? TKUISemaphoreDisplayable)?.semaphoreMode }
+      .bind(to: rx.mode)
+      .disposed(by: objcDisposeBag.disposeBag)
   }
 
   @objc
@@ -63,6 +75,14 @@ extension TKUISemaphoreView {
     let canFlip = imageURL == nil && (annotation as? TKUISemaphoreDisplayable)?.canFlipImage == true
     
     setHeadWith(image, imageURL: imageURL, imageIsTemplate: asTemplate, forBearing: bearing, andHeading: heading, inRed: terminal, canFlipImage: canFlip)
+  }
+  
+  public func updateSelection(for identifier: String?) {
+    guard let displayable = annotation as? TKUISemaphoreDisplayable else { return }
+    guard let target = identifier else { alpha = 1; return }
+    
+    let selected = displayable.selectionIdentifier == target
+    alpha = selected ? 1 : 0.3
   }
   
   @objc(rotateHeadForMagneticHeading:)
@@ -123,8 +143,21 @@ extension TKUISemaphoreView {
       return TripKitUIBundle.imageNamed("map-pin-pointer")
     }
   }
-
   
+}
+
+extension Reactive where Base == TKUISemaphoreView {
+  
+  var mode: Binder<TKUISemaphoreView.Mode?> {
+    return Binder(self.base) { semaphore, mode in
+      if case .headWithTime(let time, let timeZone, let realTime)? = mode {
+        semaphore.setTime(time, isRealTime: realTime, in: timeZone, onSide: semaphore.label)
+      } else {
+        semaphore.setTime(nil, isRealTime: false, in: .current, onSide: semaphore.label)
+      }
+    }
+  }
+ 
 }
 
 // MARK: Fix-Its

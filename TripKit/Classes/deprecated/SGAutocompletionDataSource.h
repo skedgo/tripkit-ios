@@ -14,20 +14,20 @@
 @class TKAutocompletionResult;
 @class SGAutocompletionDataSourceSwiftStorage;
 
-typedef NS_ENUM(NSInteger, SGSearchSection) {
+typedef NS_CLOSED_ENUM(NSInteger, SGSearchSection) {
   SGSearchSectionSticky,
   SGSearchSectionAutocompletion,
   SGSearchSectionMore,
 };
 
-typedef NS_ENUM(NSInteger, SGSearchSticky) {
+typedef NS_CLOSED_ENUM(NSInteger, SGSearchSticky) {
   SGSearchStickyUnknown = 0,
   SGSearchStickyCurrentLocation,
   SGSearchStickyDroppedPin,
   SGSearchStickyNextEvent,
 };
 
-typedef NS_ENUM(NSInteger, SGSearchExtraRow) {
+typedef NS_CLOSED_ENUM(NSInteger, SGSearchExtraRow) {
   SGSearchExtraRowSearchForMore = 0,
   SGSearchExtraRowProvider,
 };

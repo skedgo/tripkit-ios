@@ -17,7 +17,7 @@
 @protocol TKUISemaphoreDisplayable, TKTripSegment;
 
 
-typedef NS_ENUM(NSInteger, TKSegmentOrdering) {
+typedef NS_CLOSED_ENUM(NSInteger, TKSegmentOrdering) {
   TKSegmentOrderingStart   = 1,
   TKSegmentOrderingRegular = 2,
   TKSegmentOrderingEnd     = 4
@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, TKSegmentWaypoint) {
   TKSegmentWaypointGetOff
 };
 
-typedef NS_ENUM(NSInteger, TKSegmentType) {
+typedef NS_CLOSED_ENUM(NSInteger, TKSegmentType) {
   TKSegmentTypeUnknown = 0,
   TKSegmentTypeStationary,
   TKSegmentTypeScheduled,
@@ -143,8 +143,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray<Alert *> *)alertsWithAction;
 
 - (TKSegment *)finalSegmentIncludingContinuation;
-
-- (NSArray<id<MKAnnotation>> *)annotationsToZoomToOnMap;
 
 /*
  A singe line instruction which is used on the map screen.

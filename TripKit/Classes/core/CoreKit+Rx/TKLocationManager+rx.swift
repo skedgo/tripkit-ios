@@ -130,6 +130,9 @@ public extension Reactive where Base : TKLocationManager {
         return Disposables.create()
       }
       
+    @unknown default:
+      assertionFailure("Unexpected new case. Treating as not authorized.")
+      return .just(false)
     }
     
   }

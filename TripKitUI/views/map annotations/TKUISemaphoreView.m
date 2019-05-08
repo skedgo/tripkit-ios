@@ -31,20 +31,10 @@
 
 @property (nonatomic, assign) SGSemaphoreLabel label;
 @property (nonatomic, assign) BOOL isFlipped;
-@property (nonatomic, weak) id observedObject;
 
 @end
 
 @implementation TKUISemaphoreView
-
-- (void)dealloc
-{
-  if (self.observedObject) {
-		[self.observedObject removeObserver:self
-														 forKeyPath:@"semaphoreMode"];
-		self.observedObject = nil;
-  }
-}
 
 - (id)initWithAnnotation:(id<MKAnnotation>)annotation
          reuseIdentifier:(NSString *)reuseIdentifier
@@ -94,26 +84,13 @@
 {
 	// stop observing the old
   BOOL didChange = (annotation != self.annotation);
-	if (didChange && self.observedObject != nil) {
-		[self.observedObject removeObserver:self
-														 forKeyPath:@"semaphoreMode"];
-		self.observedObject = nil;
-	}
 	
 	// set the new
 	[super setAnnotation:annotation];
 	
 	// observe the new
-	if (didChange &&
-      [annotation isKindOfClass:[NSObject class]] &&
-      [TKUISemaphoreView shouldObserve:annotation])
-	{
-		NSObject *object = (NSObject *)annotation;
-		[object addObserver:self
-						 forKeyPath:@"semaphoreMode"
-								options:NSKeyValueObservingOptionNew
-								context:nil];
-		self.observedObject = object;
+  if (didChange) {
+    [self observe:annotation];
 	}
 }
 
@@ -145,11 +122,7 @@
 	self.isFlipped = NO;
 	self.tiny = NO;
 	
-  if (self.observedObject) {
-    [self.observedObject removeObserver:self
-                             forKeyPath:@"semaphoreMode"];
-    self.observedObject = nil;
-  }
+  self.objcDisposeBag = [[TKObjCDisposeBag alloc] init];
   
 	[self setTimeFlagOnSide:SGSemaphoreLabelDisabled withTime:nil isRealTime:NO atTimeZone:nil orFrequency:nil];
 	
@@ -193,27 +166,6 @@
       self.isFlipped = NO;
     }
   }
-}
-
-
-#pragma mark - KVO
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-#pragma unused(change, context)
-  __weak typeof(self) weakSelf = self;
-  dispatch_async(dispatch_get_main_queue(), ^{
-    typeof(weakSelf) strongSelf = weakSelf;
-    if (strongSelf
-        && object == strongSelf.annotation
-        && [keyPath isEqualToString:@"semaphoreMode"]) {
-      [strongSelf setTimeFlagOnSide:strongSelf.label
-                           withTime:[object time]
-                         isRealTime:[TKUISemaphoreView isRealTime:object]
-                         atTimeZone:[object timeZone]
-                        orFrequency:nil];
-    }
-  });
 }
 
 #pragma mark - Private methods

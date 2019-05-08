@@ -27,7 +27,7 @@ extension TKUIResultsCard {
       let parent = (cardView as? TGScrollCardView)?.scrollViewWrapper ?? cardView
       showRoutingSupportView(with: error, for: request, parentView: parent, tableView: tableView, allowRequest: allowRequest)
     } else {
-      TKUICustomization.shared.alertHandler?(error, controller)
+      TKUICustomization.shared.alertHandler(error, controller)
     }
   }
   

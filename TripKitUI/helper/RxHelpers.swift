@@ -12,10 +12,20 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+extension Signal where S == SignalSharingStrategy {
+  
+  func startOptional() -> Signal<Element?> {
+    return map { $0 as Element? }
+      .startWith(nil)
+  }
+  
+}
+
 extension Driver where S == DriverSharingStrategy {
   
-  func startWithOptional(_ element: Element?) -> Driver<Element?> {
-    return map { $0 as Element? }.startWith(element)
+  func startOptional() -> Driver<Element?> {
+    return map { $0 as Element? }
+      .startWith(nil)
   }
   
 }

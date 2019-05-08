@@ -24,6 +24,8 @@ class TKUITripOverviewViewModel {
     sections = Driver.just(TKUITripOverviewViewModel.buildSections(for: trip))
     
     dataSources = Driver.just(trip.tripGroup.sources)
+    
+    refreshMap = TKUITripOverviewViewModel.fetchContentOfServices(in: trip)
   }
 
   let trip: Trip
@@ -32,6 +34,6 @@ class TKUITripOverviewViewModel {
   
   let dataSources: Driver<[API.DataAttribution]>
   
+  let refreshMap: Signal<Void>
 }
-
 

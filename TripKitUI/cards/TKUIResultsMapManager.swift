@@ -22,9 +22,9 @@ import TGCardViewController
 public protocol TKUIResultsMapManagerType: TGCompatibleMapManager {
   var viewModel: TKUIResultsViewModel? { get set }
   
-  var droppedPin: Driver<CLLocationCoordinate2D> { get }
+  var droppedPin: Signal<CLLocationCoordinate2D> { get }
   
-  var selectedMapRoute: Driver<TKUIResultsViewModel.MapRouteItem> { get }
+  var selectedMapRoute: Signal<TKUIResultsViewModel.MapRouteItem> { get }
 }
 
 class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
@@ -40,14 +40,14 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
   
   private var dropPinRecognizer = UILongPressGestureRecognizer()
   private var droppedPinPublisher = PublishSubject<CLLocationCoordinate2D>()
-  var droppedPin: Driver<CLLocationCoordinate2D> {
-    return droppedPinPublisher.asDriver(onErrorDriveWith: Driver.empty())
+  var droppedPin: Signal<CLLocationCoordinate2D> {
+    return droppedPinPublisher.asSignal(onErrorSignalWith: .empty())
   }
 
   private var tapRecognizer = UITapGestureRecognizer()
   private var selectedRoutePublisher = PublishSubject<TKUIResultsViewModel.MapRouteItem>()
-  var selectedMapRoute: Driver<TKUIResultsViewModel.MapRouteItem> {
-    return selectedRoutePublisher.asDriver(onErrorDriveWith: Driver.empty())
+  var selectedMapRoute: Signal<TKUIResultsViewModel.MapRouteItem> {
+    return selectedRoutePublisher.asSignal(onErrorSignalWith: .empty())
   }
 
   private var disposeBag = DisposeBag()
@@ -75,10 +75,9 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     }
   }
   
-  private var selectedRoute: TKUIResultsViewModel.MapRouteItem? {
+  fileprivate var selectedRoute: TKUIResultsViewModel.MapRouteItem? {
     didSet {
-      // Tell the map to update
-      mapView?.setNeedsDisplay()
+      selectionIdentifier = selectedRoute?.selectionIdentifier
     }
   }
   
@@ -100,7 +99,6 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
       }
     }
   }
-
 
   
   override func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
@@ -211,38 +209,6 @@ extension TKUIResultsMapManager {
     view.canShowCallout = true
     
     return view
-  }
-  
-  override func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    let renderer = super.mapView(mapView, rendererFor: overlay)
-    
-    if let routePolyline = overlay as? TKRoutePolyline, let polylineRenderer = renderer as? TKUIPolylineRenderer {
-      let isSelected = selectedRoute?.polyline == routePolyline
-      polylineRenderer.isSelected = isSelected
-    }
-    
-    return renderer
-  }
-  
-}
-
-extension TKUIPolylineRenderer {
-  
-  var isSelected: Bool {
-    get {
-      return alpha > 0.9
-    }
-    set {
-      if newValue {
-        strokeColor = TKStyleManager.globalTintColor()
-        alpha = 1
-        lineWidth = 24
-      } else {
-        strokeColor = TKStyleManager.lightTextColor()
-        alpha = 0.3
-        lineWidth = 12
-      }
-    }
   }
   
 }

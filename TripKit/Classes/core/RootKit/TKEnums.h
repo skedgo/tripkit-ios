@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, TKTimeType) {
+typedef NS_CLOSED_ENUM(NSInteger, TKTimeType) {
   TKTimeTypeLeaveASAP     = 0,
   TKTimeTypeLeaveAfter    = 1,
   TKTimeTypeArriveBefore  = 2,

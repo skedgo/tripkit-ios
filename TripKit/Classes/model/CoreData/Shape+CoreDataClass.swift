@@ -172,7 +172,21 @@ extension Shape: TKDisplayableRoute {
       return nil
     }
   }
-    
+  
+  public var selectionIdentifier: String? {
+    if let segment = segment {
+      // Should match the definition in TripKitUI => TKUIAnnotations+TripKit
+      switch segment.order {
+      case .start: return "start"
+      case .regular: return String(segment.templateHashCode)
+      case .end: return "end"
+      }
+
+    } else if let service = services?.anyObject() as? Service {
+      return service.code
+    } else {
+      return nil
+    }
+  }
   
 }
-

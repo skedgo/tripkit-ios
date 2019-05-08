@@ -19,6 +19,10 @@ extension TKModeCoordinate: TKUIImageAnnotationDisplayable {
   }
   
   public var pointDisplaysImage: Bool { return stopModeInfo.localImageName != nil }
+
+  public var pointColor: TKColor? {
+    return stopModeInfo.color
+  }
   
   public var pointImage: TKImage? {
     return stopModeInfo.image(type: .mapIcon)
@@ -84,6 +88,10 @@ extension Alert: TKUIImageAnnotationDisplayable {
     return location != nil
   }
   
+  public var pointColor: TKColor? {
+    return nil
+  }
+
   public var pointImage: TKImage? {
     return TKInfoIcon.image(for: infoIconType, usage: .map)
   }
@@ -115,6 +123,10 @@ extension StopLocation: TKUIImageAnnotationDisplayable {
     return stopModeInfo?.identifier ?? "StopLocation"
   }
   
+  public var pointColor: TKColor? {
+    return stopModeInfo?.color
+  }
+
   public var pointDisplaysImage: Bool {
     return pointImage != nil
   }
@@ -155,6 +167,10 @@ extension StopVisits: TKUIImageAnnotationDisplayable {
     return service.modeInfo?.identifier ?? "StopVisits"
   }
   
+  public var pointColor: TKColor? {
+    return service.color as? TKColor
+  }
+
   public var pointImage: TKImage? {
     return service.modeImage(for: .listMainMode)
   }
@@ -172,6 +188,10 @@ extension StopVisits: TKUIImageAnnotationDisplayable {
 // MARK: TKUISemaphoreDisplayable
 
 extension StopVisits: TKUISemaphoreDisplayable {
+  public var selectionIdentifier: String? {
+    return nil
+  }
+  
   public var semaphoreMode: TKUISemaphoreView.Mode {
     return .none
   }
@@ -203,6 +223,10 @@ extension TKSegment: TKUIImageAnnotationDisplayable {
     return coordinate.isValid && hasVisibility(.onMap)
   }
   
+  public var pointColor: TKColor? {
+    return tripSegmentModeColor
+  }
+
   public var pointImage: TKImage? {
     switch order {
     case .start, .end:
@@ -226,6 +250,16 @@ extension TKSegment: TKUIImageAnnotationDisplayable {
 // MARK: - TKUISemaphoreDisplayable
 
 extension TKSegment: TKUISemaphoreDisplayable {
+  public var selectionIdentifier: String? {
+    // Should match the definition in TripKit => Shape
+    switch order {
+    case .start: return "start"
+    case .regular: return String(templateHashCode)
+    case .end: return "end"
+    }
+    
+  }
+  
   public var semaphoreMode: TKUISemaphoreView.Mode {
     if let frequency = self.frequency?.intValue {
       if !isTerminal {
@@ -237,7 +271,9 @@ extension TKSegment: TKUISemaphoreDisplayable {
       if let time = departureTime {
         return .headWithTime(time, timeZone, isRealTime: timesAreRealTime)
       } else {
-        assertionFailure("Segment has no time: \(self)")
+        // A segment might lose its trip, if the trip since got updated with
+        // real-time information and the segments got rebuild
+        assert(trip == nil, "Segment has a trip but no time: \(self)")
         return .headOnly
       }
     }
@@ -263,6 +299,7 @@ extension TKRegion.City: TKUIImageAnnotationDisplayable {
   
   public var isDraggable: Bool { return false }
   public var pointDisplaysImage: Bool { return true }
+  public var pointColor: TKColor? { return nil }
   public var pointImage: TKImage? { return TKStyleManager.imageNamed("icon-map-info-city") }
   public var pointImageURL: URL? { return nil }
   public var pointImageIsTemplate: Bool { return false }

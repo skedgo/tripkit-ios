@@ -22,8 +22,8 @@ open class TKUIAnnotationViewBuilder: NSObject {
   fileprivate var alpha: CGFloat = 1
   fileprivate var preferMarker: Bool = false
   fileprivate var enableClustering: Bool = false
-  fileprivate var drawStopAsCircle: Bool = true
-  
+  fileprivate var drawImageAnnotationAsCircle: Bool = false
+
   @objc public let annotation: MKAnnotation
   @objc public let mapView: MKMapView
   
@@ -51,8 +51,8 @@ open class TKUIAnnotationViewBuilder: NSObject {
   }
 
   @objc @discardableResult
-  public func drawStopAsCircle(_ asCircle: Bool) -> TKUIAnnotationViewBuilder {
-    self.drawStopAsCircle = asCircle
+  public func drawImageAnnotationAsCircle(_ asCircle: Bool) -> TKUIAnnotationViewBuilder {
+    self.drawImageAnnotationAsCircle = asCircle
     return self
   }
   
@@ -83,20 +83,27 @@ open class TKUIAnnotationViewBuilder: NSObject {
   
   @objc
   open func build() -> MKAnnotationView? {
+
     if #available(iOS 11, *), preferMarker, let glyphable = annotation as? TKUIGlyphableAnnotation {
       return build(for: glyphable, enableClustering: enableClustering)
     } else if let vehicle = annotation as? Vehicle {
       return build(for: vehicle)      
+
     } else if let timePoint = annotation as? TKUISemaphoreDisplayable, timePoint.semaphoreMode != .none {
       return buildSemaphore(for: timePoint)
-    } else if let visit = annotation as? StopVisits {
-      return buildCircle(for: visit)
-    } else if drawStopAsCircle, let stop = annotation as? StopLocation {
-      return buildCircle(for: stop)
     } else if let segment = annotation as? TKSegment {
       return buildSemaphore(for: segment)
+
+    } else if let visit = annotation as? StopVisits {
+      return buildCircle(for: visit)
+
     } else if let displayable = annotation as? TKUIImageAnnotationDisplayable {
-      return build(for: displayable, enableClustering: enableClustering)
+      if drawImageAnnotationAsCircle {
+        return buildCircle(for: annotation)
+      } else {
+        return build(for: displayable, enableClustering: enableClustering)
+      }
+      
     }
     
     return nil
@@ -285,16 +292,6 @@ fileprivate extension TKUISemaphoreView {
 
 fileprivate extension TKUIAnnotationViewBuilder {
   
-  func buildCircle(for visit: StopVisits) -> MKAnnotationView {
-    let color: TKColor?
-    if asTravelled, let serviceColor = visit.service.color as? TKColor {
-      color = serviceColor
-    } else {
-      color = nil
-    }
-    return buildCircle(for: visit, color: color)
-  }
-  
   func buildCircle(for annotation: MKAnnotation, color: TKColor? = nil) -> MKAnnotationView {
     let identifier = asLarge ? "LargeCircleView" : "SmallCircleView"
     
@@ -307,7 +304,11 @@ fileprivate extension TKUIAnnotationViewBuilder {
     }
     
     circleView.isFaded = !asTravelled
-    circleView.circleColor = color ?? .routeDashColorNonTravelled
+    if asTravelled, let color = (annotation as? TKUIImageAnnotationDisplayable)?.pointColor {
+      circleView.circleColor = color
+    } else {
+      circleView.circleColor = .routeDashColorNonTravelled
+    }
     circleView.alpha = alpha
     circleView.setNeedsDisplay()
 

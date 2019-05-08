@@ -22,16 +22,18 @@
 #import "TKStyleManager+TripKitUI.h"
 #import "UIView+Helpers.h"
 
-#define SEGMENT_ITEM_ALPHA 1
-#define SEGMENT_ITEM_ALPHA_PAST 0.25
+#define SEGMENT_ITEM_ALPHA_SELECTED   1
+#define SEGMENT_ITEM_ALPHA_DESELECTED 0.25
 
 @interface TKUITripSegmentsView ()
 
 @property (nonatomic, assign) CGSize desiredSize;
-@property (nonatomic, assign) BOOL centerSegments;
 
 @property (nonatomic, assign) BOOL didLayoutSubviews;
 @property (nonatomic, nullable, strong) void (^onLayoutSubviews)(void);
+
+@property (nonatomic, copy) NSArray<NSNumber *>* segmentXValues;
+@property (nonatomic, assign) NSInteger segmentIndexToSelect;
 
 @end
 
@@ -58,10 +60,16 @@
 - (void)didInit {
   self.darkTextColor = [TKStyleManager darkTextColor];
   self.lightTextColor = [TKStyleManager lightTextColor];
+  self.segmentIndexToSelect = -1;
 }
 
 - (CGSize)intrinsicContentSize
 {
+  if (CGSizeEqualToSize(CGSizeZero, self.desiredSize) && self.onLayoutSubviews != nil) {
+    self.didLayoutSubviews = YES;
+    self.onLayoutSubviews();
+    self.onLayoutSubviews = nil;
+  }
   return self.desiredSize;
 }
 
@@ -107,19 +115,22 @@
   CGFloat padding = PADDING * (self.tiny ? 0.6f : 1.0f);
   CGFloat nextX = padding / 2;
   
+  // We might not yet have a frame, if the Auto Layout engine wants to get the
+  // intrinsic size of this view, before it's been added. In that case, we
+  // let it grow as big as it wants to be.
+  BOOL limitSize = !CGSizeEqualToSize(CGSizeZero, self.frame.size);
+  CGFloat maxHeight = limitSize ? CGRectGetHeight(self.frame) : 44;
+  
+  NSMutableArray *segmentXValues = [NSMutableArray arrayWithCapacity:segments.count];
+  NSInteger segmentIndexToSelect = (self.segmentIndexToSelect >=0 && self.segmentIndexToSelect < segments.count) ? self.segmentIndexToSelect : -1;
+  
   // populate scroll view with segments
   int count = 0;
-	NSInteger segmentCount = segments.count;
-	
-  CGFloat widthPerSegment = (self.frame.size.width - nextX) / segmentCount;
-	
-  if (self.centerSegments && widthPerSegment > 34) {
-    self.centerSegments = false; // looks weird otherwise
-  }
   
   for (id<TKTripSegmentDisplayable> segment in segments) {
-    
-		UIViewAutoresizing mask = 0;
+
+    UIViewAutoresizing mask = 0;
+    CGFloat alpha = (segmentIndexToSelect == -1 || segmentIndexToSelect == count) ? SEGMENT_ITEM_ALPHA_SELECTED : SEGMENT_ITEM_ALPHA_DESELECTED;
     
     // create image view
     UIImage *image = [segment tripSegmentModeImage];
@@ -133,7 +144,7 @@
 		
 		// the mode image
     UIImageView * modeImageView = [[UIImageView alloc] initWithImage:image];
-    modeImageView.alpha = SEGMENT_ITEM_ALPHA;
+    modeImageView.alpha = alpha;
     
     if (self.colorCodingTransitIcon) {
       // remember that color will be nil for non-PT modes. In these cases, since the
@@ -153,24 +164,25 @@
     CGFloat imageWidth = image.size.width * (self.tiny ? 0.6f : 1.0f);
     CGFloat imageHeight = image.size.height * (self.tiny ? 0.6f : 1.0f);
     CGRect newFrame = modeImageView.frame;
-    if (self.centerSegments) {
-			if (count == 0) {
-				mask = UIViewAutoresizingFlexibleRightMargin;
-			} else if (count == segmentCount - 1) {
-				mask = UIViewAutoresizingFlexibleLeftMargin;
-			} else {
-				mask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-			}
-      newFrame.origin.x = count * widthPerSegment + (widthPerSegment - imageWidth) / 2;
-    } else {
-      newFrame.origin.x = nextX;
-    }
+    newFrame.origin.x = nextX;
+    [segmentXValues addObject:@(nextX)];
     
-    newFrame.origin.y = (self.frame.size.height - imageHeight) / 2;
+    newFrame.origin.y = (maxHeight - imageHeight) / 2;
     newFrame.size.width = imageWidth;
     newFrame.size.height = imageHeight;
 		modeImageView.autoresizingMask = mask;
     modeImageView.frame = newFrame;
+
+    if (modeImageURL && !asTemplate) {
+      // remove images that aren't templates look weird on the background colour
+      CGRect circleFrame = CGRectInset(newFrame, -1.0f, -1.0f);
+      UIView *modeCircleBackground = [[UIView alloc] initWithFrame:circleFrame];
+      modeCircleBackground.backgroundColor = [UIColor whiteColor];
+      modeCircleBackground.layer.cornerRadius = CGRectGetWidth(circleFrame) / 2;
+      modeCircleBackground.alpha = alpha;
+      [self addSubview:modeCircleBackground];
+    }
+
     [self addSubview:modeImageView];
 		
 		if (allowInfoIcons && [segment tripSegmentModeInfoIconType] != TKInfoIconTypeNone) {
@@ -180,6 +192,7 @@
       imageFrame.origin.y = newFrame.origin.y + CGRectGetHeight(newFrame) - CGRectGetHeight(imageFrame);
 			infoIconImageView.frame = imageFrame;
 			infoIconImageView.autoresizingMask = mask;
+      infoIconImageView.alpha = modeImageView.alpha;
 			[self addSubview:infoIconImageView];
 		}
 		
@@ -244,7 +257,7 @@
     
     if (modeTitle.length > 0) {
       // add the bus number to the side
-      CGFloat y = (CGRectGetHeight(self.frame) - modeSubtitleSize.height - modeTitleSize.height) / 2;
+      CGFloat y = (maxHeight - modeSubtitleSize.height - modeTitleSize.height) / 2;
       if (modeSubtitleSize.height > 0 || modeSubtitleAccessoryImageViews.count > 0) {
         y += 2;
       }
@@ -260,11 +273,12 @@
       modeSideWidth = (CGFloat) fmax(modeSideWidth, modeTitleSize.width);
     } else if (color && allowSubtitles) {
       // add the color underneath
-      CGFloat y = (CGRectGetHeight(self.frame) - modeSubtitleSize.height - modeTitleSize.height) / 2;
+      CGFloat y = (maxHeight - modeSubtitleSize.height - modeTitleSize.height) / 2;
       UIView *stripe = [[UIView alloc] initWithFrame:CGRectMake(x, y, modeTitleSize.width, modeTitleSize.height)];
       stripe.layer.borderColor  = color.CGColor;
       stripe.layer.borderWidth  = modeTitleSize.width / 4;
       stripe.layer.cornerRadius = modeTitleSize.width / 2;
+      stripe.alpha = modeImageView.alpha;
       [self addSubview:stripe];
       modeSideWidth = (CGFloat) fmax(modeSideWidth, modeTitleSize.width);
     }
@@ -279,12 +293,13 @@
       }
       viewWidth = viewHeight * (imageSize.width / imageSize.height);
       
-      CGFloat y = (CGRectGetHeight(self.frame) - modeSubtitleSize.height - viewHeight) / 2;
+      CGFloat y = (maxHeight - modeSubtitleSize.height - viewHeight) / 2;
       if (modeSubtitleSize.height > 0 || modeSubtitleAccessoryImageViews.count > 0) {
         y += 2;
       }
       
       modeTitleAccessoryImageView.frame = CGRectMake(x + modeTitleSize.width + 2, y, viewWidth, viewHeight);
+      modeTitleAccessoryImageView.alpha = modeImageView.alpha;
       [self addSubview:modeTitleAccessoryImageView];
       modeSideWidth = (CGFloat) fmax(modeSideWidth, modeTitleSize.width + 2 + viewWidth);
     }
@@ -292,7 +307,7 @@
     
     if (modeSubtitle.length > 0) {
       // label goes under the mode code (if we have one)
-      CGFloat y = (CGRectGetHeight(self.frame) - modeSubtitleSize.height - modeTitleSize.height) / 2 + modeTitleSize.height;
+      CGFloat y = (maxHeight - modeSubtitleSize.height - modeTitleSize.height) / 2 + modeTitleSize.height;
       
       CGRect rect = CGRectMake(x + 2, y, modeSubtitleSize.width, modeSubtitleSize.height);
       TKUIStyledLabel *subtitleLabel = [[TKUIStyledLabel alloc] initWithFrame:rect];
@@ -317,9 +332,10 @@
         }
         viewWidth = viewHeight * (imageSize.width / imageSize.height);
         
-        CGFloat y = (CGRectGetHeight(self.frame) - viewHeight - modeTitleSize.height) / 2 + modeTitleSize.height;
+        CGFloat y = (maxHeight - viewHeight - modeTitleSize.height) / 2 + modeTitleSize.height;
         
         imageView.frame = CGRectMake(x + subtitleWidth + 2, y, viewWidth, viewHeight);
+        imageView.alpha = modeImageView.alpha;
         [self addSubview:imageView];
         modeSideWidth = (CGFloat) fmax(modeSideWidth, subtitleWidth + 2 + viewWidth);
         subtitleWidth += 2 + viewWidth;
@@ -329,10 +345,10 @@
     nextX = CGRectGetMaxX(newFrame) + modeSideWidth + padding;
     count++;
     if (allowSubtitles) {
-      self.desiredSize = CGSizeMake(nextX, self.frame.size.height);
+      self.desiredSize = CGSizeMake(nextX, maxHeight);
     }
     
-    if (nextX > CGRectGetWidth(self.frame)) {
+    if (limitSize && nextX > CGRectGetWidth(self.frame)) {
       // can we shrink?
       if (allowSubtitles) {
         [self configureForSegments:segments
@@ -350,7 +366,47 @@
       }
     }
   }
+  
+  self.segmentXValues = [segmentXValues copy];
 }
+
+- (void)selectSegmentAtIndex:(NSInteger)index
+{
+  self.segmentIndexToSelect = index;
+  if (!self.segmentXValues) {
+    return;
+  }
+  
+  CGFloat minXToSelect = self.segmentXValues[index].doubleValue;
+  CGFloat maxXToSelect = index + 1 < self.segmentXValues.count ? self.segmentXValues[index + 1].doubleValue : CGFLOAT_MAX;
+
+  for (UIView *subview in self.subviews) {
+    CGFloat midX = CGRectGetMidX(subview.frame);
+    if (midX >= minXToSelect && midX < maxXToSelect) {
+      subview.alpha = SEGMENT_ITEM_ALPHA_SELECTED;
+    } else {
+      subview.alpha = SEGMENT_ITEM_ALPHA_DESELECTED;
+    }
+  }
+}
+
+- (NSInteger)segmentIndexAtX:(CGFloat)x NS_SWIFT_NAME(segmentIndex(atX:))
+{
+  if (!self.segmentXValues) {
+    return 0;
+  }
+
+  __block NSUInteger index = 0;
+  [self.segmentXValues enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (obj.doubleValue > x) {
+      *stop = true;
+    } else {
+      index = idx;
+    }
+  }];
+  return index;
+}
+
 
 
 #pragma mark - Private helpers
