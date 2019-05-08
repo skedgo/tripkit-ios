@@ -9,10 +9,11 @@
 import Foundation
 
 import RxSwift
+import RxRelay
 
 public class TKBikePodLocation: TKModeCoordinate {
   
-  fileprivate let rx_bikePodVar: Variable<API.BikePodInfo>
+  fileprivate let rx_bikePodVar: BehaviorRelay<API.BikePodInfo>
   
   /// Detailed bike-pod related information.
   ///
@@ -20,7 +21,7 @@ public class TKBikePodLocation: TKModeCoordinate {
   ///         `rx.bikePod` instead.
   public var bikePod: API.BikePodInfo {
     get { return rx_bikePodVar.value }
-    set { rx_bikePodVar.value = newValue }
+    set { rx_bikePodVar.accept(newValue) }
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -30,7 +31,7 @@ public class TKBikePodLocation: TKModeCoordinate {
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     let info = try values.decode(API.BikePodInfo.self, forKey: .bikePod)
-    rx_bikePodVar = Variable(info)
+    rx_bikePodVar = BehaviorRelay(value: info)
     try super.init(from: decoder)
     locationID = info.identifier
   }
@@ -43,7 +44,7 @@ public class TKBikePodLocation: TKModeCoordinate {
   
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(API.BikePodInfo.self, forKey: "bikePod") else { return nil }
-    rx_bikePodVar = Variable(info)
+    rx_bikePodVar = BehaviorRelay(value: info)
     super.init(coder: aDecoder)
     locationID = info.identifier
   }
@@ -64,7 +65,7 @@ extension Reactive where Base : TKBikePodLocation {
 
 public class TKCarPodLocation: TKModeCoordinate {
   
-  fileprivate let rx_carPodVar: Variable<API.CarPodInfo>
+  fileprivate let rx_carPodVar: BehaviorRelay<API.CarPodInfo>
   
   /// Detailed car-pod related information.
   ///
@@ -72,7 +73,7 @@ public class TKCarPodLocation: TKModeCoordinate {
   ///         `rx.carPod` instead.
   public var carPod: API.CarPodInfo {
     get { return rx_carPodVar.value }
-    set { rx_carPodVar.value = newValue }
+    set { rx_carPodVar.accept(newValue) }
   }
   
   public var supportsVehicleAvailability: Bool {
@@ -86,7 +87,7 @@ public class TKCarPodLocation: TKModeCoordinate {
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     let info = try values.decode(API.CarPodInfo.self, forKey: .carPod)
-    rx_carPodVar = Variable(info)
+    rx_carPodVar = BehaviorRelay(value: info)
     try super.init(from: decoder)
     locationID = info.identifier
   }
@@ -99,7 +100,7 @@ public class TKCarPodLocation: TKModeCoordinate {
 
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(API.CarPodInfo.self, forKey: "carPod") else { return nil }
-    rx_carPodVar = Variable(info)
+    rx_carPodVar = BehaviorRelay(value: info)
     super.init(coder: aDecoder)
     locationID = info.identifier
   }
@@ -120,7 +121,7 @@ extension Reactive where Base : TKCarPodLocation {
 
 public class TKCarParkLocation: TKModeCoordinate {
   
-  fileprivate let rx_carParkVar: Variable<API.CarParkInfo>
+  fileprivate let rx_carParkVar: BehaviorRelay<API.CarParkInfo>
   
   /// Detailed car-park related information.
   ///
@@ -128,7 +129,7 @@ public class TKCarParkLocation: TKModeCoordinate {
   ///         `rx.carPark` instead.
   public var carPark: API.CarParkInfo {
     get { return rx_carParkVar.value }
-    set { rx_carParkVar.value = newValue }
+    set { rx_carParkVar.accept(newValue) }
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -138,7 +139,7 @@ public class TKCarParkLocation: TKModeCoordinate {
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     let info = try values.decode(API.CarParkInfo.self, forKey: .carPark)
-    rx_carParkVar = Variable(info)
+    rx_carParkVar = BehaviorRelay(value: info)
     try super.init(from: decoder)
     locationID = info.identifier
   }
@@ -151,7 +152,7 @@ public class TKCarParkLocation: TKModeCoordinate {
   
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(API.CarParkInfo.self, forKey: "carPark") else { return nil }
-    rx_carParkVar = Variable(info)
+    rx_carParkVar = BehaviorRelay(value: info)
     super.init(coder: aDecoder)
     locationID = info.identifier
   }
@@ -207,7 +208,7 @@ public class TKCarRentalLocation: TKModeCoordinate {
 
 public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   
-  fileprivate let rx_infoVar: Variable<API.FreeFloatingVehicleInfo>
+  fileprivate let rx_infoVar: BehaviorRelay<API.FreeFloatingVehicleInfo>
   
   /// Detailed car-pod related information.
   ///
@@ -215,7 +216,7 @@ public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   ///         `rx.carPod` instead.
   public var vehicle: API.FreeFloatingVehicleInfo {
     get { return rx_infoVar.value }
-    set { rx_infoVar.value = newValue }
+    set { rx_infoVar.accept(newValue) }
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -225,7 +226,7 @@ public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     let info = try values.decode(API.FreeFloatingVehicleInfo.self, forKey: .vehicle)
-    rx_infoVar = Variable(info)
+    rx_infoVar = BehaviorRelay(value: info)
     try super.init(from: decoder)
     locationID = info.identifier
   }
@@ -238,7 +239,7 @@ public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(API.FreeFloatingVehicleInfo.self, forKey: "vehicle") else { return nil }
-    rx_infoVar = Variable(info)
+    rx_infoVar = BehaviorRelay(value: info)
     super.init(coder: aDecoder)
     locationID = info.identifier
   }

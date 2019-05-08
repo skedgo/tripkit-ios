@@ -22,7 +22,7 @@ class TKUITripModeByModeViewModel {
   private static func fetchRealTime(for trip: Trip) -> Driver<TKRealTimeUpdateProgress<Trip>> {
     guard trip.wantsRealTimeUpdates else { return .empty() }
     
-    return Observable<Int>.interval(30, scheduler: MainScheduler.instance)
+    return Observable<Int>.interval(.seconds(30), scheduler: MainScheduler.instance)
       .flatMapLatest { _ in
         TKBuzzRealTime.rx.update(trip)
           .map { $1 ? .idle : .updated($0) }
