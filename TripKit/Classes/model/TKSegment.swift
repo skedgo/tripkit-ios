@@ -98,7 +98,8 @@ extension TKSegment {
 extension TKSegment {
   
   public var canShowPathFriendliness: Bool {
-    return self.template?.metresFriendly != nil
+    guard let totalMeters = template?.metresFriendly?.doubleValue else { return false }
+    return totalMeters > 0
   }
   
 }
