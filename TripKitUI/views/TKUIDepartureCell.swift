@@ -50,7 +50,7 @@ public class TKUIDepartureCell: UITableViewCell {
   
   @IBOutlet weak var alertStackView: UIStackView!
   @IBOutlet weak var alertImageView: UIImageView!
-  @IBOutlet weak var alertActionButton: UIButton!
+  @IBOutlet public weak var alertActionButton: UIButton!
   @IBOutlet weak var alertTextLabel: TKUIStyledLabel!
   
   @IBOutlet weak var selectionIndicator: UIView!
@@ -263,7 +263,7 @@ extension TKUIDepartureCell {
     
     // Setting counter background
     if dataSource.serviceIsCancelled {
-      timeToDepartContentView.backgroundColor = UIColor(red: 231/255, green: 77/255, blue: 79/255, alpha: 1)
+      timeToDepartContentView.backgroundColor = #colorLiteral(red: 0.9058823529, green: 0.3019607843, blue: 0.3098039216, alpha: 1)
     } else {
       UIView.animate(withDuration: 0.25) {
         self.timeToDepartContentView.backgroundColor = self.color(forCountingDownFrom: minutesToShow)
@@ -281,7 +281,7 @@ extension TKUIDepartureCell {
     let subtleHighlight = TKStyleManager.globalTintColor().withAlphaComponent(0.7)
     
     if minutesToCount < 0 {
-      return UIColor(white: 183/255, alpha: 1.0)
+      return #colorLiteral(red: 0.7200000286, green: 0.7200000286, blue: 0.7200000286, alpha: 1)
       
     } else if minutesToCount > 15 {
       return subtleHighlight
