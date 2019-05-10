@@ -100,12 +100,10 @@
 		3A6DAEDA2040985B009282FE /* regionInfo-Vancouver.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */; };
 		3A6DF088202C8DA30084CB2C /* TripKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF086202C8DA30084CB2C /* TripKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF109202C8EB80084CB2C /* TKUIMapButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0A9202C8EB80084CB2C /* TKUIMapButtonView.swift */; };
-		3A6DF10A202C8EB80084CB2C /* TKUIImageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AB202C8EB80084CB2C /* TKUIImageAnnotationView.m */; };
 		3A6DF10B202C8EB80084CB2C /* TKUISemaphoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0AC202C8EB80084CB2C /* TKUISemaphoreView.swift */; };
 		3A6DF10F202C8EB80084CB2C /* TKUITripSegmentsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B0202C8EB80084CB2C /* TKUITripSegmentsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF110202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B1202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift */; };
 		3A6DF112202C8EB80084CB2C /* TKUISemaphoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B3202C8EB80084CB2C /* TKUISemaphoreView.m */; };
-		3A6DF116202C8EB80084CB2C /* TKUIImageAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0B7202C8EB80084CB2C /* TKUIImageAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF117202C8EB80084CB2C /* TKUITripSegmentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0B8202C8EB80084CB2C /* TKUITripSegmentsView.m */; };
 		3A6DF11A202C8EB80084CB2C /* TKUISemaphoreView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0BB202C8EB80084CB2C /* TKUISemaphoreView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF11C202C8EB80084CB2C /* UIFont+CustomFonts.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0BE202C8EB80084CB2C /* UIFont+CustomFonts.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -911,12 +909,10 @@
 		3A6DF086202C8DA30084CB2C /* TripKitUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripKitUI.h; sourceTree = "<group>"; };
 		3A6DF087202C8DA30084CB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A6DF0A9202C8EB80084CB2C /* TKUIMapButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIMapButtonView.swift; sourceTree = "<group>"; };
-		3A6DF0AB202C8EB80084CB2C /* TKUIImageAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIImageAnnotationView.m; sourceTree = "<group>"; };
 		3A6DF0AC202C8EB80084CB2C /* TKUISemaphoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISemaphoreView.swift; sourceTree = "<group>"; };
 		3A6DF0B0202C8EB80084CB2C /* TKUITripSegmentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUITripSegmentsView.h; sourceTree = "<group>"; };
 		3A6DF0B1202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+AsAccessoryImage.swift"; sourceTree = "<group>"; };
 		3A6DF0B3202C8EB80084CB2C /* TKUISemaphoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUISemaphoreView.m; sourceTree = "<group>"; };
-		3A6DF0B7202C8EB80084CB2C /* TKUIImageAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIImageAnnotationView.h; sourceTree = "<group>"; };
 		3A6DF0B8202C8EB80084CB2C /* TKUITripSegmentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUITripSegmentsView.m; sourceTree = "<group>"; };
 		3A6DF0BB202C8EB80084CB2C /* TKUISemaphoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUISemaphoreView.h; sourceTree = "<group>"; };
 		3A6DF0BE202C8EB80084CB2C /* UIFont+CustomFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+CustomFonts.h"; sourceTree = "<group>"; };
@@ -1543,8 +1539,6 @@
 				3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */,
 				3A6DF0F6202C8EB80084CB2C /* TKUIAnnotationViewBuilder.swift */,
 				3A54757D21C15A4800748EB6 /* TKUICircleAnnotationView.swift */,
-				3A6DF0B7202C8EB80084CB2C /* TKUIImageAnnotationView.h */,
-				3A6DF0AB202C8EB80084CB2C /* TKUIImageAnnotationView.m */,
 				3A6DF0F4202C8EB80084CB2C /* TKUIPulsingAnnotationView.h */,
 				3A6DF0EA202C8EB80084CB2C /* TKUIPulsingAnnotationView.m */,
 				3A6DF0BB202C8EB80084CB2C /* TKUISemaphoreView.h */,
@@ -2466,7 +2460,6 @@
 				3A6DF14E202C8EB80084CB2C /* TKUIPulsingAnnotationView.h in Headers */,
 				3A6DF121202C8EB80084CB2C /* UIView+BearingRotation.h in Headers */,
 				3A6DF12C202C8EB80084CB2C /* UISearchBar+Customizable.h in Headers */,
-				3A6DF116202C8EB80084CB2C /* TKUIImageAnnotationView.h in Headers */,
 				3AFD397220D93D9800FDC7D0 /* TKUISheet.h in Headers */,
 				3ABD101B20FE2CAC00693FF8 /* SGTableCell.h in Headers */,
 				3A6DF122202C8EB80084CB2C /* UIView+Helpers.h in Headers */,
@@ -3099,7 +3092,6 @@
 				3A0B517F2240E5B6002346D6 /* TKUISegmentTitleView.swift in Sources */,
 				3AF5F2BD20F3A818003AAEBA /* TKUITripActionsView.swift in Sources */,
 				3AEB47EC20DCE48500F9DF83 /* RxHelpers.swift in Sources */,
-				3A6DF10A202C8EB80084CB2C /* TKUIImageAnnotationView.m in Sources */,
 				3ABCA7CF225202EF0072EB25 /* TKUIResultsViewModel+CalculateRoutes.swift in Sources */,
 				3A6DF148202C8EB80084CB2C /* TKUIVehicleAnnotationView.swift in Sources */,
 				3AFD397320D93D9800FDC7D0 /* TKUISheet.m in Sources */,

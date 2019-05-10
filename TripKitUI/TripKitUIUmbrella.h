@@ -22,7 +22,6 @@
 #import "TKUIStyledButton.h"
 
 // TransportKitUI
-#import "TKUIImageAnnotationView.h"
 #import "TKUISemaphoreView.h"
 #import "TKUITripSegmentsView.h"
 

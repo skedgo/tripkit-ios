@@ -97,15 +97,11 @@ open class TKUIAnnotationViewBuilder: NSObject {
     } else if let visit = annotation as? StopVisits {
       return buildCircle(for: visit)
 
-    } else if let displayable = annotation as? TKUIImageAnnotationDisplayable {
+    } else if let mode = annotation as? TKUIModeAnnotation {
       if drawImageAnnotationAsCircle {
         return buildCircle(for: annotation)
-      
-      } else if let mode = annotation as? TKUIModeAnnotation {
-        return build(for: mode, enableClustering: enableClustering)
-      
       } else {
-        return build(for: displayable, enableClustering: enableClustering)
+        return build(for: mode, enableClustering: enableClustering)
       }
     }
     
@@ -357,38 +353,6 @@ fileprivate extension TKUIAnnotationViewBuilder {
     return modeView
   }
 
-  func build(for displayable: TKUIImageAnnotationDisplayable, enableClustering: Bool) -> MKAnnotationView {
-    
-    let identifier: String
-    if #available(iOS 11, *), displayable is MKClusterAnnotation {
-      identifier = "ClusterAnnotationIdentifier"
-    } else {
-      identifier = "ImageAnnotationIdentifier"
-    }
-    
-    let imageView: TKUIImageAnnotationView
-    if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUIImageAnnotationView {
-      imageView = recycled
-      imageView.annotation = displayable
-    } else {
-      imageView = TKUIImageAnnotationView(annotation: displayable, reuseIdentifier: identifier)
-    }
-    
-    imageView.alpha = 1
-    imageView.leftCalloutAccessoryView = nil
-    imageView.rightCalloutAccessoryView = nil
-    imageView.canShowCallout = annotation.title != nil
-    imageView.isEnabled = true
-    
-    if #available(iOS 11, *) {
-      imageView.collisionMode = .circle
-      imageView.clusteringIdentifier = enableClustering && displayable.priority.rawValue < 500 ? displayable.pointClusterIdentifier : nil
-      imageView.displayPriority = displayable.priority
-    }
-    
-    return imageView
-  }
-  
 }
 
 @available(iOS 11.0, *)
