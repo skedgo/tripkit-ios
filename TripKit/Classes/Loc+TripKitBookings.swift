@@ -233,6 +233,10 @@ extension Loc {
     return NSLocalizedString("Confirm password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "This often appears below a password field, asking users to confirm the password entered.")
   }
   
+  public static var OptionalReferralCode: String {
+    return NSLocalizedString("Referral code (optional)", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "This is the placeholder text in a text field to inform users an optioanl referral code can be entered.")
+  }
+  
   public static var resendVerificationEmail: String {
     return NSLocalizedString("Resend verification email", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Give users an option to rece")
   }
