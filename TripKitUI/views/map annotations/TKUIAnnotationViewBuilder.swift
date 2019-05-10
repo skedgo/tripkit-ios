@@ -100,10 +100,13 @@ open class TKUIAnnotationViewBuilder: NSObject {
     } else if let displayable = annotation as? TKUIImageAnnotationDisplayable {
       if drawImageAnnotationAsCircle {
         return buildCircle(for: annotation)
+      
+      } else if let mode = annotation as? TKUIModeAnnotation, TKUIModeAnnotationView.canDisplay(mode) {
+        return build(for: mode, enableClustering: enableClustering)
+      
       } else {
         return build(for: displayable, enableClustering: enableClustering)
       }
-      
     }
     
     return nil
@@ -327,6 +330,32 @@ fileprivate extension TKUIAnnotationViewBuilder {
 // MARK: - Generic annotations
 
 fileprivate extension TKUIAnnotationViewBuilder {
+  
+  func build(for modeAnnotation: TKUIModeAnnotation, enableClustering: Bool) -> MKAnnotationView {
+    let identifier = "StopImageAnnotationIdentifier"
+
+    let modeView: TKUIModeAnnotationView
+    if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUIModeAnnotationView {
+      modeView = recycled
+      modeView.annotation = modeAnnotation
+    } else {
+      modeView = TKUIModeAnnotationView(annotation: modeAnnotation, reuseIdentifier: identifier)
+    }
+    
+    modeView.alpha = 1
+    modeView.leftCalloutAccessoryView = nil
+    modeView.rightCalloutAccessoryView = nil
+    modeView.canShowCallout = annotation.title != nil
+    modeView.isEnabled = true
+    
+    if #available(iOS 11, *) {
+      modeView.collisionMode = .circle
+      modeView.clusteringIdentifier = enableClustering && modeAnnotation.priority.rawValue < 500 ? modeAnnotation.clusterIdentifier : nil
+      modeView.displayPriority = modeAnnotation.priority
+    }
+    
+    return modeView
+  }
 
   func build(for displayable: TKUIImageAnnotationDisplayable, enableClustering: Bool) -> MKAnnotationView {
     
@@ -363,7 +392,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
 }
 
 @available(iOS 11.0, *)
-fileprivate extension TKUIImageAnnotationDisplayable {
+fileprivate extension MKAnnotation {
   
   var priority: MKFeatureDisplayPriority {
     if let mode = self as? TKModeCoordinate, let priority = mode.priority {

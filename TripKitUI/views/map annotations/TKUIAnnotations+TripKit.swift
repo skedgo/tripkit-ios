@@ -10,6 +10,15 @@ import Foundation
 
 // MARK: - TKModeCoordinate
 
+// MARK: TKUIModeAnnotation
+
+extension TKModeCoordinate: TKUIModeAnnotation {
+  public var modeInfo: TKModeInfo! {
+    return stopModeInfo
+  }
+}
+
+
 // MARK: TKUIImageAnnotationDisplayable
 
 extension TKModeCoordinate: TKUIImageAnnotationDisplayable {
@@ -73,7 +82,6 @@ extension TKModeCoordinate: TKUIGlyphableAnnotation {
 
 extension TKStopCoordinate: TKUIStopAnnotation {}
 
-
 // MARK: - Alert
 
 // MARK: TKUIImageAnnotationDisplayable
@@ -112,6 +120,20 @@ extension Alert: TKUIImageAnnotationDisplayable {
 
 // MARK: - StopLocation
 
+// MARK: TKUIModeAnnotation
+
+extension StopLocation: TKUIModeAnnotation {
+  public var modeInfo: TKModeInfo! {
+    return stopModeInfo
+  }
+
+  
+  public var clusterIdentifier: String? {
+    return stopModeInfo?.identifier ?? "StopLocation"
+  }
+}
+
+
 // MARK: TKUIStopAnnotation
 
 extension StopLocation: TKUIImageAnnotationDisplayable {
@@ -120,7 +142,7 @@ extension StopLocation: TKUIImageAnnotationDisplayable {
   }
   
   public var pointClusterIdentifier: String? {
-    return stopModeInfo?.identifier ?? "StopLocation"
+    return clusterIdentifier
   }
   
   public var pointColor: TKColor? {

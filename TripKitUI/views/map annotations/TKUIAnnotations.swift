@@ -21,6 +21,7 @@ public protocol TKUIGlyphableAnnotation: MKAnnotation {
 }
 
 @objc
+//@available(*, deprecated, message: "Please use use-case specific annotations instead")
 public protocol TKUIImageAnnotationDisplayable: MKAnnotation {
   
   var pointDisplaysImage: Bool { get }
@@ -42,6 +43,14 @@ public protocol TKUIImageAnnotationDisplayable: MKAnnotation {
 }
 
 @objc
+public protocol TKUIModeAnnotation: MKAnnotation {
+  var modeInfo: TKModeInfo! { get }
+  var clusterIdentifier: String? { get }
+}
+
+
+@objc
+//@available(*, deprecated, message: "Please use use-case specific annotations instead")
 public protocol TKUIStopAnnotation: TKUIImageAnnotationDisplayable {
   
   var stopModeInfo: TKModeInfo! { get }
