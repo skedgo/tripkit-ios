@@ -74,7 +74,6 @@ struct ModeDetails: Codable {
     case required
     case implies
     case icon
-    case darkIcon
     case vehicleIcon
   }
   
@@ -85,7 +84,6 @@ struct ModeDetails: Codable {
   let required: Bool?
   let implies: [String]?
   let icon: String?
-  let darkIcon: String?
   let vehicleIcon: String?
   
   var color: TKColor {
@@ -216,8 +214,6 @@ extension TKRegionManager {
     switch iconType {
     case .mapIcon, .listMainMode, .resolutionIndependent:
       part = details.icon
-    case .listMainModeOnDark, .resolutionIndependentOnDark:
-      part = details.darkIcon
     case .vehicle:
       part = details.vehicleIcon
     case .alert:

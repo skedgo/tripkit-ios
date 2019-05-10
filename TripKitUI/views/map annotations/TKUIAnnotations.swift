@@ -11,58 +11,43 @@ import Foundation
 import CoreLocation
 import MapKit
 
+/// For displaying an annotation in a `MKMarkerAnnotationView`
 public protocol TKUIGlyphableAnnotation: MKAnnotation {
-  
   var glyphColor: TKColor? { get }
   var glyphImage: TKImage? { get }
   var glyphImageURL: URL? { get }
   var glyphImageIsTemplate: Bool { get }
-  
 }
 
-@objc
-//@available(*, deprecated, message: "Please use use-case specific annotations instead")
-public protocol TKUIImageAnnotationDisplayable: MKAnnotation {
-  
-  var pointDisplaysImage: Bool { get }
-  var isDraggable: Bool { get }
-  
-  var pointColor: TKColor? { get }
-  var pointImage: TKImage? { get }
-  var pointImageURL: URL? { get }
-  var pointImageIsTemplate: Bool { get }
-  
-  /// Identifier for this point for clustering on a map. Typical use
-  /// is to cluster nearby annotations with same identifier.
-  ///
-  /// Return `nil` to not allow clustering this annotation.
-  var pointClusterIdentifier: String? { get }
-  
-  @objc optional func setCoordinate(coordinate: CLLocationCoordinate2D)
-  
+/// For displaying an annotation in a `TKUIImageAnnotationView`
+public protocol TKUIImageAnnotation: MKAnnotation {
+  var image: TKImage? { get }
+  var imageURL: URL? { get }
 }
 
+/// For displaying an annotation in a `TKUIModeAnnotationView`
 @objc
 public protocol TKUIModeAnnotation: MKAnnotation {
   var modeInfo: TKModeInfo! { get }
   var clusterIdentifier: String? { get }
 }
 
+public extension TKUIModeAnnotation {
+  var image: TKImage? { return modeInfo?.image }
+  var imageURL: URL? { return modeInfo?.imageURL }
+  var imageIsTemplate: Bool { return modeInfo?.remoteImageIsTemplate ?? false }
+}
 
 @objc
-//@available(*, deprecated, message: "Please use use-case specific annotations instead")
-public protocol TKUIStopAnnotation: TKUIImageAnnotationDisplayable {
-  
-  var stopModeInfo: TKModeInfo! { get }
-  var stopCode: String { get }
-  
+public protocol TKUIStopAnnotation: TKUIModeAnnotation {
+  var stopCode: String { get }  
 }
 
 @available(*, unavailable, renamed: "TKUIImageAnnotationDisplayable")
-public typealias STKDisplayablePoint = TKUIImageAnnotationDisplayable
+public typealias STKDisplayablePoint = TKUIImageAnnotation
 
 @available(*, unavailable, renamed: "TKUIImageAnnotationDisplayable")
-public typealias TKDisplayablePoint = TKUIImageAnnotationDisplayable
+public typealias TKDisplayablePoint = TKUIImageAnnotation
 
 @available(*, unavailable, renamed: "TKUIStopAnnotation")
 public typealias TKStopAnnotation = TKUIStopAnnotation

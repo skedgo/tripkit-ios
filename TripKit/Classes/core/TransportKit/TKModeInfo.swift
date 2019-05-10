@@ -22,7 +22,6 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
   @objc public let localImageName: String?
   @objc public let remoteImageName: String?
   private let remoteIconIsTemplate: Bool?
-  @objc public let remoteDarkImageName: String?
   @objc public var remoteImageIsTemplate: Bool {
     return remoteIconIsTemplate ?? false
   }
@@ -54,7 +53,6 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
       && localImageName == other.localImageName
       && remoteImageName == other.remoteImageName
       && remoteIconIsTemplate == other.remoteIconIsTemplate
-      && remoteDarkImageName == other.remoteDarkImageName
       && descriptor == other.descriptor
       && rgbColor == other.rgbColor
   }
@@ -66,7 +64,6 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
     case alt
     case localImageName = "localIcon"
     case remoteImageName = "remoteIcon"
-    case remoteDarkImageName = "remoteDarkIcon"
     case remoteIconIsTemplate
     case descriptor
     case rgbColor = "color"
@@ -93,7 +90,6 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
         alt = decoded.alt
         localImageName = decoded.localImageName
         remoteImageName = decoded.remoteImageName
-        remoteDarkImageName = decoded.remoteDarkImageName
         remoteIconIsTemplate = decoded.remoteIconIsTemplate
         descriptor = decoded.descriptor
         rgbColor = decoded.rgbColor
@@ -108,7 +104,6 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
       identifier = aDecoder.decodeObject(forKey: "identifier") as? String
       localImageName = aDecoder.decodeObject(forKey: "localIcon") as? String
       remoteImageName = aDecoder.decodeObject(forKey: "remoteIcon") as? String
-      remoteDarkImageName = aDecoder.decodeObject(forKey: "remoteDarkIcon") as? String
       descriptor = aDecoder.decodeObject(forKey: "description") as? String
       if let color = aDecoder.decodeObject(forKey: "color") as? TKColor {
         rgbColor = API.RGBColor(for: color)

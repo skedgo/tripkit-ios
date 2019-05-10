@@ -29,9 +29,6 @@ extension TKModeInfo {
     case .mapIcon, .listMainMode, .resolutionIndependent:
       iconFileNamePart = remoteImageName
       
-    case .listMainModeOnDark, .resolutionIndependentOnDark:
-      iconFileNamePart = remoteDarkImageName
-      
     case .vehicle, .alert:
       return nil // not supported
     @unknown default:

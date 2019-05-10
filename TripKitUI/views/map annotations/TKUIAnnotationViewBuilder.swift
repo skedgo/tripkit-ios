@@ -103,6 +103,9 @@ open class TKUIAnnotationViewBuilder: NSObject {
       } else {
         return build(for: mode, enableClustering: enableClustering)
       }
+    
+    } else if let image = annotation as? TKUIImageAnnotation {
+      return build(for: image)
     }
     
     return nil
@@ -145,10 +148,10 @@ private extension TKUIAnnotationViewBuilder {
       }
     }
     
-    if let displayable = glyphable as? TKUIImageAnnotationDisplayable {
-      view.clusteringIdentifier = enableClustering && displayable.priority.rawValue < 500
-        ? displayable.pointClusterIdentifier : nil
-      view.displayPriority = displayable.priority
+    if let modeAnnotation = glyphable as? TKUIModeAnnotation {
+      view.clusteringIdentifier = enableClustering && modeAnnotation.priority.rawValue < 500
+        ? modeAnnotation.clusterIdentifier : nil
+      view.displayPriority = modeAnnotation.priority
     }
     
     return view
@@ -303,7 +306,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     }
     
     circleView.isFaded = !asTravelled
-    if asTravelled, let color = (annotation as? TKUIImageAnnotationDisplayable)?.pointColor {
+    if asTravelled, let color = (annotation as? TKUIModeAnnotation)?.modeInfo.color {
       circleView.circleColor = color
     } else {
       circleView.circleColor = .routeDashColorNonTravelled
@@ -328,7 +331,13 @@ fileprivate extension TKUIAnnotationViewBuilder {
 fileprivate extension TKUIAnnotationViewBuilder {
   
   func build(for modeAnnotation: TKUIModeAnnotation, enableClustering: Bool) -> MKAnnotationView {
-    let identifier = "StopImageAnnotationIdentifier"
+
+    let identifier: String
+    if #available(iOS 11, *), modeAnnotation is MKClusterAnnotation {
+      identifier = "ClusteredModeAnnotationIdentifier"
+    } else {
+      identifier = "ModeAnnotationIdentifier"
+    }
 
     let modeView: TKUIModeAnnotationView
     if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUIModeAnnotationView {
@@ -353,6 +362,26 @@ fileprivate extension TKUIAnnotationViewBuilder {
     return modeView
   }
 
+  func build(for image: TKUIImageAnnotation) -> MKAnnotationView {
+    
+    let identifier = "ImageAnnotationIdentifier"
+    
+    let imageView: TKUIImageAnnotationView
+    if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUIImageAnnotationView {
+      imageView = recycled
+      imageView.annotation = image
+    } else {
+      imageView = TKUIImageAnnotationView(annotation: image, reuseIdentifier: identifier)
+    }
+    
+    imageView.alpha = 1
+    imageView.leftCalloutAccessoryView = nil
+    imageView.rightCalloutAccessoryView = nil
+    imageView.canShowCallout = annotation.title != nil
+    imageView.isEnabled = true
+    return imageView
+  }
+  
 }
 
 @available(iOS 11.0, *)

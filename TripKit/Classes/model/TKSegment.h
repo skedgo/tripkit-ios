@@ -14,8 +14,7 @@
 
 @class DLSEntry, SegmentReference, Service, Trip, Vehicle, Alert, StopVisits, Shape, SegmentTemplate;
 @class TKRegion, TKModeInfo;
-@protocol TKUISemaphoreDisplayable, TKTripSegment;
-
+@protocol TKTripSegment;
 
 typedef NS_CLOSED_ENUM(NSInteger, TKSegmentOrdering) {
   TKSegmentOrderingStart   = 1,

@@ -30,6 +30,7 @@
 		3A26E1AD20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A26E1AC20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift */; };
 		3A26E1B420EFAFBD00FE4DDD /* TKUISegmentStationaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A26E1B220EFAFBD00FE4DDD /* TKUISegmentStationaryCell.swift */; };
 		3A26E1B520EFAFBD00FE4DDD /* TKUISegmentStationaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A26E1B320EFAFBD00FE4DDD /* TKUISegmentStationaryCell.xib */; };
+		3A27DC6E2285FF1100BE6A96 /* TKUIImageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A27DC6D2285FF1100BE6A96 /* TKUIImageAnnotationView.swift */; };
 		3A2D06EC1F83DE4B002DA194 /* TKAnnotationClusterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D06EB1F83DE4B002DA194 /* TKAnnotationClusterer.swift */; };
 		3A2F25D41F699C32007D3767 /* TKGeocodingResultScorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */; };
 		3A2F65B020E0EECC006FE49D /* DLSEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */; };
@@ -827,6 +828,7 @@
 		3A26E1AC20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripOverviewViewModel+Content.swift"; sourceTree = "<group>"; };
 		3A26E1B220EFAFBD00FE4DDD /* TKUISegmentStationaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISegmentStationaryCell.swift; sourceTree = "<group>"; };
 		3A26E1B320EFAFBD00FE4DDD /* TKUISegmentStationaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISegmentStationaryCell.xib; sourceTree = "<group>"; };
+		3A27DC6D2285FF1100BE6A96 /* TKUIImageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIImageAnnotationView.swift; sourceTree = "<group>"; };
 		3A2D06EB1F83DE4B002DA194 /* TKAnnotationClusterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAnnotationClusterer.swift; sourceTree = "<group>"; };
 		3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocodingResultScorer.swift; sourceTree = "<group>"; };
 		3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLSEntry.swift; sourceTree = "<group>"; };
@@ -1539,12 +1541,13 @@
 				3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */,
 				3A6DF0F6202C8EB80084CB2C /* TKUIAnnotationViewBuilder.swift */,
 				3A54757D21C15A4800748EB6 /* TKUICircleAnnotationView.swift */,
+				3A27DC6D2285FF1100BE6A96 /* TKUIImageAnnotationView.swift */,
+				3A39757C22857D750094F883 /* TKUIModeAnnotationView.swift */,
 				3A6DF0F4202C8EB80084CB2C /* TKUIPulsingAnnotationView.h */,
 				3A6DF0EA202C8EB80084CB2C /* TKUIPulsingAnnotationView.m */,
 				3A6DF0BB202C8EB80084CB2C /* TKUISemaphoreView.h */,
 				3A6DF0B3202C8EB80084CB2C /* TKUISemaphoreView.m */,
 				3A6DF0AC202C8EB80084CB2C /* TKUISemaphoreView.swift */,
-				3A39757C22857D750094F883 /* TKUIModeAnnotationView.swift */,
 				3A6DF0EE202C8EB80084CB2C /* TKUIVehicleAnnotationView.swift */,
 				3A6DF0E9202C8EB80084CB2C /* TKUIVehicleView.h */,
 				3A6DF0F2202C8EB80084CB2C /* TKUIVehicleView.m */,
@@ -3106,6 +3109,7 @@
 				3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */,
 				3A6DF120202C8EB80084CB2C /* UIImageView+Kingfisher.swift in Sources */,
 				3A6DF13E202C8EB80084CB2C /* TKUIPathFriendlinessView.swift in Sources */,
+				3A27DC6E2285FF1100BE6A96 /* TKUIImageAnnotationView.swift in Sources */,
 				3A26E1AD20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift in Sources */,
 				3ABCA7D5225255980072EB25 /* TKUITripModeByModeCard+RealTime.swift in Sources */,
 				D39B7BB420622FD100988D8A /* TKUIAlertCell.swift in Sources */,

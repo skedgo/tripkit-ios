@@ -159,7 +159,7 @@ extension TKSegment {
 
 extension TKSegment {
   
-  fileprivate func image(for iconType: TKStyleModeIconType, allowRealTime: Bool) -> TKImage? {
+  fileprivate func image() -> TKImage? {
     var localImageName = modeInfo?.localImageName
     
     if trip.showNoVehicleUUIDAsLift && privateVehicleType == .car && reference?.vehicleUUID == nil {
@@ -167,13 +167,12 @@ extension TKSegment {
     }
     guard let imageName = localImageName else { return nil }
     
-    let isRealTime = allowRealTime && timesAreRealTime
-    if let specificImage = TKStyleManager.image(forModeImageName: imageName, isRealTime: isRealTime, of: iconType) {
+    if let specificImage = TKStyleManager.image(forModeImageName: imageName) {
       return specificImage
     
     } else if let modeIdentifier = modeIdentifier {
       let genericImageName = TKTransportModes.modeImageName(forModeIdentifier: modeIdentifier)
-      return TKStyleManager.image(forModeImageName: genericImageName, isRealTime: isRealTime, of: iconType)
+      return TKStyleManager.image(forModeImageName: genericImageName)
 
     } else {
       return nil
@@ -201,7 +200,7 @@ extension TKSegment: TKTripSegment {
   }
   
   public var tripSegmentModeImage: TKImage? {
-    return image(for: .listMainMode, allowRealTime: false)
+    return image()
   }
   
   public var tripSegmentModeInfo: TKModeInfo? {

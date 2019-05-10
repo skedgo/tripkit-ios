@@ -21,7 +21,8 @@ public class TKUIModeAnnotationView: MKAnnotationView {
   private weak var imageView: UIImageView!
   private weak var remoteImageView: UIImageView?
 
-  public init(annotation: TKUIModeAnnotation, reuseIdentifier: String?) {
+  @objc
+  public override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
     super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
     
     frame.size = TKUIModeAnnotationView.defaultSize
