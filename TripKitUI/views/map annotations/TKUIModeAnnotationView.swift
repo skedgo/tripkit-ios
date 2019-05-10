@@ -17,13 +17,6 @@ public class TKUIModeAnnotationView: MKAnnotationView {
   
   public static let defaultSize = CGSize(width: 19, height: 19)
 
-  public static func canDisplay(_ mode: TKUIModeAnnotation) -> Bool {
-    // This generally also works with TKUIModeAnnotation, but we need to
-    // adjust the icons that the backend is proposing as many of them don't
-    // look great on the map.
-    return mode is TKUIStopAnnotation || mode.modeInfo?.imageURL == nil
-  }
-  
   private weak var backgroundCircle: UIView!
   private weak var imageView: UIImageView!
   private weak var remoteImageView: UIImageView?
@@ -83,13 +76,14 @@ public class TKUIModeAnnotationView: MKAnnotationView {
       self.imageView = imageView
     }
     
-    // template images fit into the normal image, but others replace the
-    // circle and the default image
+    // Template images fit into the normal image and we can use the regular
+    // list style. Other's we specifically ask for the map icon, which then
+    // replaces the circle and default image.
     showRemoteOnly = false
-    if let imageURL = modeInfo.imageURL {
+    if modeInfo.imageURL != nil {
       if modeInfo.remoteImageIsTemplate {
         remoteImageView?.removeFromSuperview()
-        imageView.setImage(with: imageURL, asTemplate: true, placeholder: image)
+        imageView.setImage(with: modeInfo.imageURL(type: .listMainMode), asTemplate: true, placeholder: image)
         
       } else {
         if remoteImageView == nil {
@@ -98,7 +92,7 @@ public class TKUIModeAnnotationView: MKAnnotationView {
           addSubview(remoteImage)
           remoteImageView = remoteImage
         }
-        remoteImageView?.setImage(with: imageURL) { [weak self] success in
+        remoteImageView?.setImage(with: modeInfo.imageURL(type: .mapIcon)) { [weak self] success in
           self?.showRemoteOnly = success
         }
       }

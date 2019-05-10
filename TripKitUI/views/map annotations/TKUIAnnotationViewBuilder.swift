@@ -101,7 +101,7 @@ open class TKUIAnnotationViewBuilder: NSObject {
       if drawImageAnnotationAsCircle {
         return buildCircle(for: annotation)
       
-      } else if let mode = annotation as? TKUIModeAnnotation, TKUIModeAnnotationView.canDisplay(mode) {
+      } else if let mode = annotation as? TKUIModeAnnotation {
         return build(for: mode, enableClustering: enableClustering)
       
       } else {
