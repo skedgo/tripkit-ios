@@ -265,20 +265,6 @@
 
 #pragma mark - Private helpers
 
-+ (TKImage *)imageForStopType:(NSString *)stopType
-{
-  NSParameterAssert(stopType);
-  
-  NSString *imageName = [NSString stringWithFormat:@"icon-map-info-%@", stopType];
-#if TARGET_OS_IPHONE
-  return [[TKImageCacher sharedInstance] monochromeImageForName:imageName];
-#else
-  return [TKStyleManager imageNamed:imageName];
-#endif
-}
-
-
-
 + (TKAutocompletionResult *)autocompletionResultForDictionary:(NSDictionary *)json
                                                 forSearchTerm:(NSString *)inputString
 {
@@ -291,9 +277,14 @@
   if ([class isEqualToString:@"StopLocation"]) {
     result.title = json[@"name"];
     result.subtitle = json[@"services"];
-    NSString *stopType = json[@"stopType"];
-    result.image = stopType ? [self imageForStopType:stopType] : [TKAutocompletionResult imageForType:TKAutocompletionSearchIconPin];
     result.accessoryButtonImage = [TKStyleManager imageNamed:@"icon-search-timetable"];
+    TKModeInfo *modeInfo = [TKModeInfo modeInfoForDictionary:json[@"modeInfo"]];
+    if (modeInfo) {
+      result.image = [TKModeImageFactory.sharedInstance imageForModeInfo:modeInfo];
+    }
+    if (!result.image) {
+      result.image = [TKAutocompletionResult imageForType:TKAutocompletionSearchIconPin];
+    }
 
   } else {
     NSString *name = json[@"name"];
