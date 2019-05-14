@@ -23,11 +23,17 @@ extension API {
       public let startTime: Date?
       public let title: String
       public let url: URL?
+      public let icon: Icon?
     }
     
     public struct Location: Codable, Equatable {
       public let lat: Double
       public let lng: Double
+    }
+    
+    public struct Icon: Codable, Equatable {
+      public let remoteIcon: String
+      public let remoteIconIsTemplate: Bool?
     }
   }
   
