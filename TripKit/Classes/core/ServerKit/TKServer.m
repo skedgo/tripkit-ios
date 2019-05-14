@@ -81,13 +81,11 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
       break;
 
     case TKStyleModeIconTypeListMainMode:
-    case TKStyleModeIconTypeListMainModeOnDark:
       iconPrefix = @"icon-mode";
       isPNG = YES;
       break;
       
     case TKStyleModeIconTypeResolutionIndependent:
-    case TKStyleModeIconTypeResolutionIndependentOnDark:
       iconPrefix = @"icon-mode";
       isPNG = NO;
       break;

@@ -96,8 +96,8 @@ private extension TKUITripMapManager {
     var affectedByTraffic = false
     
     for segment in trip.segments {
-      // We at least add the point for every segment
-      guard (segment as TKUIImageAnnotationDisplayable).pointDisplaysImage else { continue }
+      // We at least add the semaphore for every segment
+      guard segment.hasVisibility(.onMap), segment.coordinate.isValid else { continue }
       annotations.append(segment)
       
       // For non-stationary segments, we also add shape information

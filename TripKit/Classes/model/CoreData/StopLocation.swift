@@ -23,17 +23,7 @@ extension StopLocation {
   
   public var isWheelchairAccessible: Bool? {
     return wheelchairAccessible?.boolValue
-  }
-  
-  @objc(modeImageForIconType:)
-  public func modeImage(for type: TKStyleModeIconType) -> TKImage? {
-    return stopModeInfo?.image(type: type)
-  }
-  
-  @objc(modeImageURLForIconType:)
-  public func modeImageURL(for type: TKStyleModeIconType) -> URL? {
-    return stopModeInfo?.imageURL(type: type)
-  }
+  }  
 }
 
 // MARK: - MKAnnotation

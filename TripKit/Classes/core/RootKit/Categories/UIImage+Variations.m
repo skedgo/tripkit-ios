@@ -68,28 +68,6 @@
   return combinedImage;
 }
 
-- (UIImage *)monochromeImage
-{
-  CIImage *inputImage = [[CIImage alloc] initWithImage:self];
-  CIFilter *monochrome = [CIFilter filterWithName:@"CIColorMonochrome"];
-  [monochrome setDefaults];
-  [monochrome setValue:inputImage forKey:kCIInputImageKey];
-  
-  // make greyscale
-  CIColor *color = [CIColor colorWithRed:0.5 green:0.5 blue:0.5];
-  [monochrome setValue:color forKeyPath:@"inputColor"];
-  
-  CIImage *outputImage = [monochrome valueForKey:kCIOutputImageKey];
-  // define context
-  CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @YES}]; // use software renderer, so that we can do this in the background
-  
-  CGImageRef cgImage = [context createCGImage:outputImage
-                                     fromRect:outputImage.extent];
-  UIImage *image = [UIImage imageWithCGImage:cgImage scale:self.scale orientation:UIImageOrientationUp];
-  CGImageRelease(cgImage);
-  return image;
-}
-
 @end
 
 #endif

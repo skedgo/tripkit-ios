@@ -12,10 +12,11 @@ import RxCocoa
 
 /// An annotation that can be displayed using TripKitUI's `TKUISemaphoreView`
 /// or just as a point on the map.
-public protocol TKUISemaphoreDisplayable: TKUIImageAnnotationDisplayable {
+public protocol TKUISemaphoreDisplayable: TKUIImageAnnotation {
   var semaphoreMode: TKUISemaphoreView.Mode { get }
   var bearing: NSNumber? { get }
   var canFlipImage: Bool { get }
+  var imageIsTemplate: Bool { get }
   var isTerminal: Bool { get }
   var selectionIdentifier: String? { get }
 }
@@ -35,6 +36,11 @@ extension TKUISemaphoreView {
 // MARK:
 
 extension TKUISemaphoreView {
+  
+  @objc(canDisplayAnnotation:)
+  public static func canDisplay(_ annotation: MKAnnotation) -> Bool {
+    return annotation is TKUISemaphoreDisplayable
+  }
   
   @objc
   func observe(_ annotation: MKAnnotation) {
@@ -67,12 +73,14 @@ extension TKUISemaphoreView {
   public func update(for annotation: MKAnnotation, heading: CLLocationDirection) {
     self.annotation = annotation
     
-    let image = (annotation as? TKUIImageAnnotationDisplayable)?.pointImage
-    let imageURL = (annotation as? TKUIImageAnnotationDisplayable)?.pointImageURL
-    let asTemplate = (annotation as? TKUIImageAnnotationDisplayable)?.pointImageIsTemplate ?? false
-    let bearing = (annotation as? TKUISemaphoreDisplayable)?.bearing
-    let terminal = (annotation as? TKUISemaphoreDisplayable)?.isTerminal ?? false
-    let canFlip = imageURL == nil && (annotation as? TKUISemaphoreDisplayable)?.canFlipImage == true
+    guard let semaphorable = annotation as? TKUISemaphoreDisplayable else { return }
+    
+    let image = semaphorable.image
+    let imageURL = semaphorable.imageURL
+    let asTemplate = semaphorable.imageIsTemplate
+    let bearing = semaphorable.bearing
+    let terminal = semaphorable.isTerminal
+    let canFlip = imageURL == nil && semaphorable.canFlipImage == true
     
     setHeadWith(image, imageURL: imageURL, imageIsTemplate: asTemplate, forBearing: bearing, andHeading: heading, inRed: terminal, canFlipImage: canFlip)
   }
@@ -97,7 +105,7 @@ extension TKUISemaphoreView {
     headImageView.update(magneticHeading: CGFloat(magneticHeading), bearing: CGFloat(bearing))
     
     guard let displayable = (annotation as? TKUISemaphoreDisplayable) else { return }
-    if displayable.canFlipImage && displayable.pointImageURL == nil {
+    if displayable.canFlipImage && displayable.imageURL == nil {
       let totalBearing = bearing - magneticHeading
       let flip = totalBearing > 180 || totalBearing < 0
       self.flipHead(flip)

@@ -18,6 +18,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     }
   }
   
+  @objc
   public var clusterIdentifier: String? = nil
   
   @objc public var name: String? = nil

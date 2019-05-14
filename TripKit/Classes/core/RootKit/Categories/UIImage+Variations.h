@@ -18,8 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (TKImage *)imageOnBackgroundImage:(TKImage *)background;
 
-- (TKImage *)monochromeImage;
-
 @end
 
 

@@ -9,13 +9,10 @@
 @import CoreLocation;
 #import "TKCrossPlatform.h"
 
-
 typedef NS_ENUM(NSInteger, TKStyleModeIconType) {
 	TKStyleModeIconTypeListMainMode,
-  TKStyleModeIconTypeListMainModeOnDark,
   TKStyleModeIconTypeMapIcon,
   TKStyleModeIconTypeResolutionIndependent, // SVGs! You probably need SVGKit to handle these.
-  TKStyleModeIconTypeResolutionIndependentOnDark, // SVGs! You probably need SVGKit to handle these.
   TKStyleModeIconTypeVehicle,
   TKStyleModeIconTypeAlert,
 };
