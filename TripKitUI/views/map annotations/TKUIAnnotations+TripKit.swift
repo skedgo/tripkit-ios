@@ -10,32 +10,12 @@ import Foundation
 
 // MARK: - TKModeCoordinate
 
-// MARK: TKUIImageAnnotationDisplayable
+// MARK: TKUIModeAnnotation
 
-extension TKModeCoordinate: TKUIImageAnnotationDisplayable {
-  
-  public var pointClusterIdentifier: String? {
-    return stopModeInfo.identifier ?? "STKModeCoordinate"
+extension TKModeCoordinate: TKUIModeAnnotation {
+  public var modeInfo: TKModeInfo! {
+    return stopModeInfo
   }
-  
-  public var pointDisplaysImage: Bool { return stopModeInfo.localImageName != nil }
-
-  public var pointColor: TKColor? {
-    return stopModeInfo.color
-  }
-  
-  public var pointImage: TKImage? {
-    return stopModeInfo.image(type: .mapIcon)
-  }
-  
-  public var pointImageURL: URL? {
-    return stopModeInfo.imageURL(type: .mapIcon)
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return stopModeInfo.remoteImageIsTemplate
-  }
-  
 }
 
 // MARK: TKUIGlyphableAnnotation
@@ -73,76 +53,33 @@ extension TKModeCoordinate: TKUIGlyphableAnnotation {
 
 extension TKStopCoordinate: TKUIStopAnnotation {}
 
-
 // MARK: - Alert
 
-// MARK: TKUIImageAnnotationDisplayable
+// MARK: TKUIImageAnnotation
 
-extension Alert: TKUIImageAnnotationDisplayable {
-  
-  public var pointClusterIdentifier: String? {
-    return nil
-  }
-  
-  public var pointDisplaysImage: Bool {
-    return location != nil
-  }
-  
-  public var pointColor: TKColor? {
-    return nil
-  }
-
-  public var pointImage: TKImage? {
+extension Alert: TKUIImageAnnotation {
+  public var image: TKImage? {
+    // Only show an image, if we have a location
+    guard location != nil else { return nil }
     return TKInfoIcon.image(for: infoIconType, usage: .map)
   }
-  
-  public var pointImageURL: URL? {
-    return imageURL
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return false
-  }
-  
-  public var isDraggable: Bool {
-    return false
-  }
-  
 }
 
 // MARK: - StopLocation
 
-// MARK: TKUIStopAnnotation
+// MARK: TKUIModeAnnotation
 
-extension StopLocation: TKUIImageAnnotationDisplayable {
-  public var isDraggable: Bool {
-    return false
+extension StopLocation: TKUIModeAnnotation {
+  public var modeInfo: TKModeInfo! {
+    return stopModeInfo
   }
+
   
-  public var pointClusterIdentifier: String? {
+  public var clusterIdentifier: String? {
     return stopModeInfo?.identifier ?? "StopLocation"
   }
-  
-  public var pointColor: TKColor? {
-    return stopModeInfo?.color
-  }
-
-  public var pointDisplaysImage: Bool {
-    return pointImage != nil
-  }
-  
-  public var pointImage: TKImage? {
-    return modeImage(for: .mapIcon)
-  }
-  
-  public var pointImageURL: URL? {
-    return modeImageURL(for: .mapIcon)
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return stopModeInfo?.remoteImageIsTemplate ?? false
-  }
 }
+
 
 // MARK: TKUIStopAnnotation
 
@@ -151,38 +88,16 @@ extension StopLocation: TKUIStopAnnotation {}
 
 // MARK: - StopVisits
 
-// MARK: TKUIImageAnnotationDisplayable
+// MARK: TKUIModeAnnotation
 
-extension StopVisits: TKUIImageAnnotationDisplayable {
-  
-  public var pointDisplaysImage: Bool {
-    return true
+extension StopVisits: TKUIModeAnnotation {
+  public var modeInfo: TKModeInfo! {
+    return service.modeInfo
   }
   
-  public var isDraggable: Bool {
-    return false
-  }
-  
-  public var pointClusterIdentifier: String? {
+  public var clusterIdentifier: String? {
     return service.modeInfo?.identifier ?? "StopVisits"
   }
-  
-  public var pointColor: TKColor? {
-    return service.color as? TKColor
-  }
-
-  public var pointImage: TKImage? {
-    return service.modeImage(for: .listMainMode)
-  }
-  
-  public var pointImageURL: URL? {
-    return service.modeImageURL(for: .listMainMode)
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return service.modeImageIsTemplate
-  }
-  
 }
 
 // MARK: TKUISemaphoreDisplayable
@@ -207,44 +122,12 @@ extension StopVisits: TKUISemaphoreDisplayable {
 
 // MARK: - TKSegment
 
-// MARK: - TKUIImageAnnotationDisplayable
+// MARK: - TKUIModeAnnotation
 
-extension TKSegment: TKUIImageAnnotationDisplayable {
-  
-  public var isDraggable: Bool {
-    return false
-  }
-  
-  public var pointClusterIdentifier: String? {
+extension TKSegment: TKUIModeAnnotation {
+  public var clusterIdentifier: String? {
     return nil
   }
-  
-  public var pointDisplaysImage: Bool {
-    return coordinate.isValid && hasVisibility(.onMap)
-  }
-  
-  public var pointColor: TKColor? {
-    return tripSegmentModeColor
-  }
-
-  public var pointImage: TKImage? {
-    switch order {
-    case .start, .end:
-      return TKStyleManager.imageNamed("icon-pin")
-      
-    case .regular:
-      return tripSegmentModeImage
-    }
-  }
-  
-  public var pointImageURL: URL? {
-    return tripSegmentModeImageURL
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return tripSegmentModeImageIsTemplate
-  }
-  
 }
 
 // MARK: - TKUISemaphoreDisplayable
@@ -257,7 +140,6 @@ extension TKSegment: TKUISemaphoreDisplayable {
     case .regular: return String(templateHashCode)
     case .end: return "end"
     }
-    
   }
   
   public var semaphoreMode: TKUISemaphoreView.Mode {
@@ -295,16 +177,7 @@ extension TKSegment: TKUISemaphoreDisplayable {
 
 // MARK: - TKRegion.City
 
-extension TKRegion.City: TKUIImageAnnotationDisplayable {
-  
-  public var isDraggable: Bool { return false }
-  public var pointDisplaysImage: Bool { return true }
-  public var pointColor: TKColor? { return nil }
-  public var pointImage: TKImage? { return TKStyleManager.imageNamed("icon-map-info-city") }
-  public var pointImageURL: URL? { return nil }
-  public var pointImageIsTemplate: Bool { return false }
-  public var pointClusterIdentifier: String? { return "TKRegion.City" }
-  
+extension TKRegion.City: TKUIImageAnnotation {
+  public var image: TKImage? { return TKStyleManager.imageNamed("icon-map-info-city") }
+  public var imageURL: URL? { return nil }
 }
-
-

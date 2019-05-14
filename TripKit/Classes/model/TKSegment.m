@@ -695,7 +695,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-#pragma mark - TKUISemaphoreDisplayable
+#pragma mark - TKTripSegment
 
 - (nullable NSString *)tripSegmentModeTitle
 {

@@ -97,13 +97,15 @@ open class TKUIAnnotationViewBuilder: NSObject {
     } else if let visit = annotation as? StopVisits {
       return buildCircle(for: visit)
 
-    } else if let displayable = annotation as? TKUIImageAnnotationDisplayable {
+    } else if let mode = annotation as? TKUIModeAnnotation {
       if drawImageAnnotationAsCircle {
         return buildCircle(for: annotation)
       } else {
-        return build(for: displayable, enableClustering: enableClustering)
+        return build(for: mode, enableClustering: enableClustering)
       }
-      
+    
+    } else if let image = annotation as? TKUIImageAnnotation {
+      return build(for: image)
     }
     
     return nil
@@ -146,10 +148,10 @@ private extension TKUIAnnotationViewBuilder {
       }
     }
     
-    if let displayable = glyphable as? TKUIImageAnnotationDisplayable {
-      view.clusteringIdentifier = enableClustering && displayable.priority.rawValue < 500
-        ? displayable.pointClusterIdentifier : nil
-      view.displayPriority = displayable.priority
+    if let modeAnnotation = glyphable as? TKUIModeAnnotation {
+      view.clusteringIdentifier = enableClustering && modeAnnotation.priority.rawValue < 500
+        ? modeAnnotation.clusterIdentifier : nil
+      view.displayPriority = modeAnnotation.priority
     }
     
     return view
@@ -304,7 +306,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     }
     
     circleView.isFaded = !asTravelled
-    if asTravelled, let color = (annotation as? TKUIImageAnnotationDisplayable)?.pointColor {
+    if asTravelled, let color = (annotation as? TKUIModeAnnotation)?.modeInfo.color {
       circleView.circleColor = color
     } else {
       circleView.circleColor = .routeDashColorNonTravelled
@@ -327,22 +329,49 @@ fileprivate extension TKUIAnnotationViewBuilder {
 // MARK: - Generic annotations
 
 fileprivate extension TKUIAnnotationViewBuilder {
+  
+  func build(for modeAnnotation: TKUIModeAnnotation, enableClustering: Bool) -> MKAnnotationView {
 
-  func build(for displayable: TKUIImageAnnotationDisplayable, enableClustering: Bool) -> MKAnnotationView {
-    
     let identifier: String
-    if #available(iOS 11, *), displayable is MKClusterAnnotation {
-      identifier = "ClusterAnnotationIdentifier"
+    if #available(iOS 11, *), modeAnnotation is MKClusterAnnotation {
+      identifier = "ClusteredModeAnnotationIdentifier"
     } else {
-      identifier = "ImageAnnotationIdentifier"
+      identifier = "ModeAnnotationIdentifier"
     }
+
+    let modeView: TKUIModeAnnotationView
+    if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUIModeAnnotationView {
+      modeView = recycled
+      modeView.annotation = modeAnnotation
+    } else {
+      modeView = TKUIModeAnnotationView(annotation: modeAnnotation, reuseIdentifier: identifier)
+    }
+    
+    modeView.alpha = 1
+    modeView.leftCalloutAccessoryView = nil
+    modeView.rightCalloutAccessoryView = nil
+    modeView.canShowCallout = annotation.title != nil
+    modeView.isEnabled = true
+    
+    if #available(iOS 11, *) {
+      modeView.collisionMode = .circle
+      modeView.clusteringIdentifier = enableClustering && modeAnnotation.priority.rawValue < 500 ? modeAnnotation.clusterIdentifier : nil
+      modeView.displayPriority = modeAnnotation.priority
+    }
+    
+    return modeView
+  }
+
+  func build(for image: TKUIImageAnnotation) -> MKAnnotationView {
+    
+    let identifier = "ImageAnnotationIdentifier"
     
     let imageView: TKUIImageAnnotationView
     if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUIImageAnnotationView {
       imageView = recycled
-      imageView.annotation = displayable
+      imageView.annotation = image
     } else {
-      imageView = TKUIImageAnnotationView(annotation: displayable, reuseIdentifier: identifier)
+      imageView = TKUIImageAnnotationView(annotation: image, reuseIdentifier: identifier)
     }
     
     imageView.alpha = 1
@@ -350,20 +379,13 @@ fileprivate extension TKUIAnnotationViewBuilder {
     imageView.rightCalloutAccessoryView = nil
     imageView.canShowCallout = annotation.title != nil
     imageView.isEnabled = true
-    
-    if #available(iOS 11, *) {
-      imageView.collisionMode = .circle
-      imageView.clusteringIdentifier = enableClustering && displayable.priority.rawValue < 500 ? displayable.pointClusterIdentifier : nil
-      imageView.displayPriority = displayable.priority
-    }
-    
     return imageView
   }
   
 }
 
 @available(iOS 11.0, *)
-fileprivate extension TKUIImageAnnotationDisplayable {
+fileprivate extension MKAnnotation {
   
   var priority: MKFeatureDisplayPriority {
     if let mode = self as? TKModeCoordinate, let priority = mode.priority {

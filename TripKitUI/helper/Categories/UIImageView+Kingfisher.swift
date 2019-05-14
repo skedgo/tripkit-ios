@@ -15,22 +15,27 @@ import TripKit
 extension UIImageView {
 
   @objc(setImageWithURL:)
-  public func setImage(with url: URL?) {
-    setImage(with: url, asTemplate: false)
+  public func _setImage(with url: URL?) {
+    setImage(with: url)
   }
 
   @objc(setImageWithURL:asTemplate:)
-  public func setImage(with url: URL?, asTemplate: Bool) {
-    setImage(with: url, asTemplate: asTemplate, placeholder: nil)
+  public func _setImage(with url: URL?, asTemplate: Bool) {
+    setImage(with: url, asTemplate: asTemplate)
   }
 
   @objc(setImageWithURL:placeholderImage:)
-  public func setImage(with url: URL?, placeholder: TKImage?) {
-    setImage(with: url, asTemplate: false, placeholder: placeholder)
+  public func _setImage(with url: URL?, placeholder: TKImage?) {
+    setImage(with: url, placeholder: placeholder)
   }
   
   @objc(setImageWithURL:asTemplate:placeholderImage:)
-  public func setImage(with url: URL?, asTemplate: Bool, placeholder: TKImage?) {
+  public func _setImage(with url: URL?, asTemplate: Bool, placeholder: TKImage?) {
+    setImage(with: url, asTemplate: asTemplate, placeholder: placeholder)
+  }
+  
+  @objc(setImageWithURL:asTemplate:placeholderImage:completionHandler:)
+  public func setImage(with url: URL?, asTemplate: Bool = false, placeholder: TKImage? = nil, completion: ((Bool) -> Void)? = nil) {
     
     var options: KingfisherOptionsInfo = []
     if let url = url, url.path.contains("@2x") {
@@ -43,7 +48,14 @@ extension UIImageView {
       options.append(.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate)))
     }
     
-    kf.setImage(with: url, placeholder: placeholder, options: options)
+    kf.setImage(with: url, placeholder: placeholder, options: options) { result in
+      switch result {
+      case .success:
+        completion?(true)
+      case .failure:
+        completion?(false)
+      }
+    }
   }
   
 }
