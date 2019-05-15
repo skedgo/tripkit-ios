@@ -27,23 +27,50 @@ public extension Array where Element == TKAutocompleting {
     return text
       .throttle(.milliseconds(200), latest: true, scheduler: MainScheduler.asyncInstance)
       .flatMapLatest { input -> Observable<[TKAutocompletionResult]> in
-        // For each provider, let them calculate the result, but make
-        // sure we start with no results, so that the `combineLatest`
-        // will fire ASAP.
-        let observables = self.map { provider in
-            provider.autocomplete(input, near: mapRect)
-              .map { results -> [TKAutocompletionResult] in
-                results.forEach { $0.provider = provider as AnyObject }
-                return results
-              }
-              .startWith([])
-              .catchErrorJustReturn([])
-        }
-        return Observable
-          .combineLatest(observables) { $0.flatMap { $0 } }
-          .map { $0.sorted { $0.compare($1) == .orderedAscending }}
+        let autocompletions = self.map { provider in
+          provider
+            .autocomplete(input, near: mapRect)
+            .map { results -> [TKAutocompletionResult] in
+              results.forEach { $0.provider = provider as AnyObject }
+              return results
+            }
+          }
+        return Observable.stableRace(autocompletions)
       }
-      .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
   }
   
+}
+
+extension ObservableType {
+
+  static func stableRace<Collection: Swift.Collection>(_ collection: Collection, comparer: @escaping (Element, Element) -> Bool) -> Observable<[Element]>
+    where Collection.Element: Observable<[Element]> {
+
+      // For each provider, let them calculate the result, but make
+      // sure we start with no results, so that the `combineLatest`
+      // will fire ASAP.
+      let adjusted = collection.map {
+        $0.startWith([])
+          .catchErrorJustReturn([])
+      }
+      
+      let combined = Observable
+        .combineLatest(adjusted) { $0.flatMap { $0 } }
+        .map { $0.sorted(by: comparer) }
+      
+      return combined
+        .throttle(.milliseconds(500), scheduler: SharingScheduler.make())
+  }
+  
+  static func stableRace<Collection: Swift.Collection>(_ collection: Collection) -> Observable<[Element]>
+    where Collection.Element: Observable<[Element]>, Element: Comparable {
+    return stableRace(collection, comparer: <)
+  }
+  
+}
+
+extension TKAutocompletionResult: Comparable {
+  public static func < (lhs: TKAutocompletionResult, rhs: TKAutocompletionResult) -> Bool {
+    return lhs.compare(rhs) == .orderedAscending
+  }
 }
