@@ -98,7 +98,7 @@ extension TKServer {
       #if os(iOS) || os(tvOS)
       scale = UIScreen.main.scale
       #elseif os(OSX)
-      scale = NSScreen.main.backingScaleFactor
+      scale = NSScreen.main?.backingScaleFactor ?? 1
       #endif
       
       if scale >= 2.9 {
