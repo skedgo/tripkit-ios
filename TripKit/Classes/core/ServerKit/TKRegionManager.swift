@@ -222,7 +222,7 @@ extension TKRegionManager {
       part = nil
     }
     guard let fileNamePart = part else { return nil }
-    return TKServer.imageURL(forIconFileNamePart: fileNamePart, of: iconType)
+    return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: iconType)
   }
 
 }

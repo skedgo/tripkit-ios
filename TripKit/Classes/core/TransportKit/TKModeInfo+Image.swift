@@ -36,7 +36,7 @@ extension TKModeInfo {
     }
     
     if let part = iconFileNamePart {
-      return TKServer.imageURL(forIconFileNamePart: part, of: type)
+      return TKServer.imageURL(iconFileNamePart: part, iconType: type)
     } else {
       return TKRegionManager.shared.imageURL(forModeIdentifier: identifier, iconType: type)
     }

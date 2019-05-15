@@ -45,9 +45,6 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileEnableFlights;
 
 + (NSURLRequest *)GETRequestWithSkedGoHTTPHeadersForURL:(NSURL *)URL paras:(nullable NSDictionary *)paras;
 
-+ (nullable NSURL *)imageURLForIconFileNamePart:(NSString *)fileNamePart
-                                     ofIconType:(TKStyleModeIconType)type;
-
 + (NSString *)developmentServer;
 
 + (void)updateDevelopmentServer:(NSString *)server;

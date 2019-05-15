@@ -90,7 +90,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     
     var vehicleView: UIView?
     
-    if let iconUrlString = vehicle.icon, let url = TKServer.imageURL(forIconFileNamePart: iconUrlString, of: .vehicle) {
+    if let iconUrlString = vehicle.icon, let url = TKServer.imageURL(iconFileNamePart: iconUrlString, iconType: .vehicle) {
       let vehicleImageView = UIImageView(frame: vehicleRect)
       vehicleImageView.contentMode = .scaleAspectFit
       vehicleImageView.setImage(with: url)
