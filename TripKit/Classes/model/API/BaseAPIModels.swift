@@ -118,7 +118,7 @@ extension API.CompanyInfo {
       return nil
     }
     
-    return TKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+    return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: .listMainMode)
   }
   
   public var remoteDarkIconURL: URL? {
@@ -126,7 +126,7 @@ extension API.CompanyInfo {
       return nil
     }
     
-    return TKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+    return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: .listMainMode)
   }
   
 }

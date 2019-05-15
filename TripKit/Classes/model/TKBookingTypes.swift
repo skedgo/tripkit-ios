@@ -48,7 +48,7 @@ public enum TKBooking {
     
     public var downloadableLogoURL: URL? {
       guard let fileNamePart = logoImageName else { return nil }
-      return TKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+      return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: .listMainMode)
     }
   }
   

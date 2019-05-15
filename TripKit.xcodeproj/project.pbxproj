@@ -758,6 +758,7 @@
 		D39B7BB520622FD100988D8A /* TKUIAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */; };
 		D39ECD86205A007A00E09474 /* TKUISectionedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */; };
 		D39ECD89205A029500E09474 /* TKUISectionedAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */; };
+		D3BC460D2288F39800590403 /* EventAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC460C2288F39800590403 /* EventAPIModel.swift */; };
 		D3E7C1AF21F17B7600C48248 /* TKUISectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */; };
 		D3F9CEC32064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */; };
 		D3F9CEC52064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */; };
@@ -1332,6 +1333,7 @@
 		D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIAlertCell.xib; sourceTree = "<group>"; };
 		D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertViewController.swift; sourceTree = "<group>"; };
 		D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertViewModel.swift; sourceTree = "<group>"; };
+		D3BC460C2288F39800590403 /* EventAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAPIModel.swift; sourceTree = "<group>"; };
 		D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertViewController.xib; sourceTree = "<group>"; };
 		D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertTableHeader.swift; sourceTree = "<group>"; };
 		D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertTableHeader.xib; sourceTree = "<group>"; };
@@ -1440,6 +1442,7 @@
 				3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */,
 				D337467D208D5D980045B0C3 /* UserAPIModel.swift */,
 				3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */,
+				D3BC460C2288F39800590403 /* EventAPIModel.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -3305,6 +3308,7 @@
 				3A7135FA2289695A00D4068E /* TKModeImageBuilder.swift in Sources */,
 				3A92205C205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */,
 				3A096E261F20DDFB00666E59 /* TKCalendarManager.swift in Sources */,
+				D3BC460D2288F39800590403 /* EventAPIModel.swift in Sources */,
 				3A3C9BAA1F751FF300C8D476 /* ServiceAPIModel.swift in Sources */,
 				3AA03E711F0BC9DB00C6B337 /* TKFoursquareGeocoder.swift in Sources */,
 				3AFFAB961F06854F00147990 /* NSDate+Formatting.swift in Sources */,

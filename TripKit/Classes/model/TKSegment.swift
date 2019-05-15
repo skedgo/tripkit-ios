@@ -181,7 +181,7 @@ extension TKSegment {
 
   fileprivate func imageURL(for iconType: TKStyleModeIconType) -> URL? {
     if iconType == .vehicle, let icon = realTimeVehicle?.icon {
-      return TKServer.imageURL(forIconFileNamePart: icon, of: iconType)
+      return TKServer.imageURL(iconFileNamePart: icon, iconType: iconType)
     } else {
       return modeInfo?.imageURL(type: iconType)
     }
