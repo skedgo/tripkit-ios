@@ -17,6 +17,7 @@ extension API {
     
     public struct Event: Codable, Equatable {
       public let description: String
+      public let displayImage: String?
       public let endTime: Date?
       public let id: String
       public let location: Location
