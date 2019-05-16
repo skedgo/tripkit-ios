@@ -36,6 +36,7 @@ public class TKGeocodingResultScorer: NSObject {
   }
   
   public static func calculateScore(title: String, subtitle: String?, searchTerm: String, minimum: UInt, maximum: UInt) -> UInt {
+    assert(maximum > minimum, "Order must be preserved.")
     
     let titleScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: title)
     let addressScore: UInt

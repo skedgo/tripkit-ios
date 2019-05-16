@@ -47,11 +47,13 @@ extension TKModeCoordinate: TKUIGlyphableAnnotation {
   
 }
 
+
 // MARK: - TKStopCoordinate
 
 // MARK: TKUIStopAnnotation
 
 extension TKStopCoordinate: TKUIStopAnnotation {}
+
 
 // MARK: - Alert
 
@@ -64,6 +66,7 @@ extension Alert: TKUIImageAnnotation {
     return TKInfoIcon.image(for: infoIconType, usage: .map)
   }
 }
+
 
 // MARK: - StopLocation
 
@@ -79,7 +82,6 @@ extension StopLocation: TKUIModeAnnotation {
     return stopModeInfo?.identifier ?? "StopLocation"
   }
 }
-
 
 // MARK: TKUIStopAnnotation
 
@@ -119,6 +121,7 @@ extension StopVisits: TKUISemaphoreDisplayable {
     return false
   }
 }
+
 
 // MARK: - TKSegment
 
