@@ -15,7 +15,7 @@ public enum TKGeocodingBackwardscompatibilityError: Error {
   case couldNotCreateAnnotation
 }
 
-extension SGGeocoder where Self: TKGeocoding {
+extension TKBaseGeocoder {
 
   public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
     return Single.create { subscriber in
@@ -34,11 +34,6 @@ extension SGGeocoder where Self: TKGeocoding {
 }
 
 extension TKBaseGeocoder: TKGeocoding { }
-extension TKPeliasGeocoder: TKGeocoding { }
-#if os(iOS)
-  extension TKAddressBookManager: TKGeocoding { }
-#endif
-
 
 extension SGAutocompletionDataProvider where Self: TKAutocompleting {
   
@@ -66,26 +61,25 @@ extension SGAutocompletionDataProvider where Self: TKAutocompleting {
   }
   
   #if os(iOS) || os(tvOS)
-  public func additionalAction(for presenter: UIViewController) -> (String, Single<Bool>)? {
-    guard let title = self.additionalActionString?(), let handler = (self as SGAutocompletionDataProvider).additionalAction else { return nil }
+  public func additionalActionTitle() -> String? {
+    return self.additionalActionString?()
+  }
+  
+  public func triggerAdditional(presenter: UIViewController) -> Single<Bool> {
+    guard let handler = additionalAction else { assertionFailure(); return .never() }
     
-    let action = Single<Bool>.create { subscriber in
+    return Single.create { subscriber in
       handler(presenter) { refresh in
         subscriber(.success(refresh))
       }
       return Disposables.create()
     }
-    return (title, action)
   }
   #endif
   
 }
 
 extension TKSkedGoGeocoder: TKAutocompleting { }
-extension TKCalendarManager: TKAutocompleting { }
 extension TKFoursquareGeocoder: TKAutocompleting { }
 extension TKRegionAutocompleter: TKAutocompleting { }
 extension TKPeliasGeocoder: TKAutocompleting { }
-#if os(iOS)
-  extension TKAddressBookManager: TKAutocompleting { }
-#endif

@@ -17,9 +17,29 @@ class TKUIAutocompletionViewModel {
   
   struct Section {
     var items: [Item]
+    let title: String?
   }
   
-  struct Item {
+  enum Item {
+    case autocompletion(AutocompletionItem)
+    case action(ActionItem)
+    
+   fileprivate var result: TKAutocompletionResult? {
+      switch self {
+      case .autocompletion(let item): return item.completion
+      case .action: return nil
+      }
+    }
+    
+    fileprivate var provider: TKAutocompleting? {
+      switch self {
+      case .autocompletion: return nil
+      case .action(let item): return item.provider
+      }
+    }
+  }
+  
+  struct AutocompletionItem {
     fileprivate let index: Int
     fileprivate let completion: TKAutocompletionResult
     
@@ -30,45 +50,83 @@ class TKUIAutocompletionViewModel {
     var showFaded: Bool { return completion.isInSupportedRegion?.boolValue == false }
   }
   
+  struct ActionItem {
+    fileprivate let provider: TKAutocompleting
+    let title: String
+    
+    fileprivate init?(provider: TKAutocompleting) {
+      guard let title = provider.additionalActionTitle() else { return nil }
+      self.provider = provider
+      self.title = title
+    }
+  }
+  
   init(
     providers: [TKAutocompleting],
     searchText: Observable<String>,
-    selected: Observable<Item>,
-    accessorySelected: Observable<Item>,
+    selected: Signal<Item>,
+    accessorySelected: Signal<Item>,
     biasMapRect: MKMapRect = .null
     ) {
     
-    sections = providers
-      .autocomplete(searchText, mapRect: biasMapRect)
-      .map { $0.buildSections() }
+    sections = TKUIAutocompletionViewModel
+      .buildSections(providers, searchText: searchText, biasMapRect: biasMapRect)
       .asDriver(onErrorDriveWith: Driver.empty())
     
     selection = selected
-      .flatMapLatest { $0.completion.annotation }
-      .asDriver(onErrorDriveWith: Driver.empty())
+      .asObservable()
+      .compactMap { $0.result }
+      .flatMapLatest { $0.annotation }
+      .asSignal(onErrorSignalWith: .empty())
     
     accessorySelection = accessorySelected
-      .flatMapLatest { $0.completion.annotation }
-      .asDriver(onErrorDriveWith: Driver.empty())
+      .asObservable()
+      .compactMap { $0.result }
+      .flatMapLatest { $0.annotation }
+      .asSignal(onErrorSignalWith: .empty())
+
+    triggerAction = selected
+      .asObservable()
+      .compactMap { $0.provider }
+      .asSignal(onErrorSignalWith: .empty())
   }
   
   let sections: Driver<[Section]>
   
-  let selection: Driver<MKAnnotation>
+  let selection: Signal<MKAnnotation>
   
-  let accessorySelection: Driver<MKAnnotation>
+  let accessorySelection: Signal<MKAnnotation>
+  
+  let triggerAction: Signal<TKAutocompleting>
 }
 
 
 // MARK: - Helpers
 
+extension TKUIAutocompletionViewModel {
+  
+  private static func buildSections(_ providers: [TKAutocompleting], searchText: Observable<String>, biasMapRect: MKMapRect) -> Observable<[Section]> {
+    
+    let additionalItems = providers
+      .compactMap(ActionItem.init)
+      .map { Item.action($0) }
+    let additionalSection = additionalItems.isEmpty ? [] : [Section(items: additionalItems, title: NSLocalizedString("More results", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "'More results' section in autocompletion"))]
+
+    return providers
+      .autocomplete(searchText, mapRect: biasMapRect)
+      .map { $0.buildSections() + additionalSection }
+  }
+  
+}
+
 extension Array where Element == TKAutocompletionResult {
   
   fileprivate func buildSections() -> [TKUIAutocompletionViewModel.Section] {
-    let items = enumerated().map { tuple in
-      return TKUIAutocompletionViewModel.Item(index: tuple.offset, completion: tuple.element)
+    let items = enumerated().map { tuple -> TKUIAutocompletionViewModel.Item in
+      let autocompletion = TKUIAutocompletionViewModel.AutocompletionItem(index: tuple.offset, completion: tuple.element)
+      return .autocompletion(autocompletion)
     }
-    return [TKUIAutocompletionViewModel.Section(items: items)]
+    return [TKUIAutocompletionViewModel.Section(items: items, title: nil)]
   }
   
 }
@@ -89,9 +147,11 @@ extension TKAutocompletionResult {
 // MARK: - RxDataSource protocol conformance
 
 func == (lhs: TKUIAutocompletionViewModel.Item, rhs: TKUIAutocompletionViewModel.Item) -> Bool {
-  guard lhs.title     == rhs.title      else { return false }
-  guard lhs.subtitle  == rhs.subtitle   else { return false }
-  return true
+  switch (lhs, rhs) {
+  case (.autocompletion(let left), .autocompletion(let right)): return left.completion == right.completion
+  case (.action(let left), .action(let right)): return left.title == right.title
+  default: return false
+  }
 }
 
 extension TKUIAutocompletionViewModel.Item: Equatable {
@@ -100,7 +160,10 @@ extension TKUIAutocompletionViewModel.Item: Equatable {
 extension TKUIAutocompletionViewModel.Item: IdentifiableType {
   typealias Identity = String
   var identity: Identity {
-    return "\(index)-\(title)"
+    switch self {
+    case .action(let action): return action.title
+    case .autocompletion(let autocompletion): return "\(autocompletion.index)-\(autocompletion.title)"
+    }
   }
 }
 

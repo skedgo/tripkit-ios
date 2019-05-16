@@ -6,6 +6,22 @@
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
+import RxSwift
+
+extension TKGeocoding where Self: SGGeocoder {
+  
+  public func geocode(_ object: TKGeocodable, near region: MKMapRect) -> Single<Bool> {
+    
+    return Single<Bool>.create { subscriber in
+      TKBaseGeocoder.geocode(object, using: self, near: region) {
+        subscriber(.success($0))
+      }
+      return Disposables.create()
+    }
+  }
+  
+}
+
 extension TKBaseGeocoder {
   
   public enum GeocodingError: Error {

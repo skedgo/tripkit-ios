@@ -25,6 +25,7 @@ public extension Array where Element == TKAutocompleting {
   func autocomplete(_ text: Observable<String>, mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]> {
     
     return text
+      .distinctUntilChanged()
       .throttle(.milliseconds(200), latest: true, scheduler: MainScheduler.asyncInstance)
       .flatMapLatest { input -> Observable<[TKAutocompletionResult]> in
         // For each provider, let them calculate the result, but make

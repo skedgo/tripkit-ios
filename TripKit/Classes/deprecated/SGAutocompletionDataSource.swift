@@ -20,20 +20,6 @@ extension SGAutocompletionDataSource {
     self.init(storage: storage)
   }
   
-  @objc
-  @available(*, deprecated, message: "Use `init(autocompleters:)` instead")
-  public convenience init(dataProviders: [Any]) {
-    let autocompleters = dataProviders.compactMap { provider -> TKAutocompleting? in
-      if let autocompleter = provider as? TKAutocompleting {
-        return autocompleter
-      } else {
-        print("Ignoring \(provider)")
-        return nil
-      }
-    }
-    self.init(autocompleters: autocompleters)
-  }
-  
   @objc(prepareForNewSearchForMapRect:)
   public func prepareForNewSearch(for mapRect: MKMapRect) {
     storage.disposeBag = DisposeBag()
@@ -78,7 +64,7 @@ extension SGAutocompletionDataSource {
   #if os(iOS) || os(tvOS)
   @objc(additionalActionsForPresenter:)
   public func additionalActions(for presenter: UIViewController) -> [String] {
-    return providers.compactMap { $0.additionalAction(for: presenter)?.0 }
+    return providers.compactMap { $0.additionalActionTitle() }
   }
   #endif
   
@@ -148,12 +134,12 @@ extension SGAutocompletionDataSource {
         }
 
         let additionalRow = indexPath.item - 1 // subtract 'press search for more'
-        let actions = providers.compactMap { $0.additionalAction(for: controller) }
+        let actions = providers.compactMap { $0.triggerAdditional(presenter: controller) }
         guard additionalRow >= 0 && additionalRow < actions.count else {
           assertionFailure("Invalid index path for extras: \(indexPath)")
           return Single.just(.refresh)
         }
-        return actions[additionalRow].1.map { _ in .refresh }
+        return actions[additionalRow].map { _ in .refresh }
 
         #elseif os(OSX)
         assertionFailure("This should not be available on macOS")

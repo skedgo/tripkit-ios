@@ -12,27 +12,28 @@
 
 #if TARGET_OS_IPHONE
 
-//#import "TKPermissionManager.h"
+@protocol SGGeocoder;
+
 #import "TKPermissionManager+AuthorizationAlert.h"
-#import "TKBaseGeocoder.h"
-#import "SGAutocompletionDataProvider.h"
 
 #define kBHKeyForRecordName     @"name"
 #define kBHKeyForRecordAddress  @"address"
 #define kBHKeyForRecordId       @"recordId"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, TKAddressBookManagerAddressType) {
 	TKAddressBookManagerAddressTypeUnknown = 0,
   TKAddressBookManagerAddressTypeHome,
   TKAddressBookManagerAddressTypeWork
-} TKAddressBookManagerAddressType;
+};
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^TKAddressBookManagerCompletionBlock)(NSString *string, NSArray *results);
 
 //NS_CLASS_DEPRECATED_IOS(2_0, 9_0, "Use SGContactsManager instead")
-@interface TKAddressBookManager : TKPermissionManager <SGAutocompletionDataProvider, SGGeocoder>
+@interface TKAddressBookManager : TKPermissionManager
 
-@property (nonatomic, strong) id<SGGeocoder> helperGeocoder;
+@property (nonatomic, strong, nullable) id<SGGeocoder> helperGeocoder;
 
 + (TKAddressBookManager *)sharedInstance;
 
@@ -48,5 +49,7 @@ typedef void (^TKAddressBookManagerCompletionBlock)(NSString *string, NSArray *r
                     completion:(TKAddressBookManagerCompletionBlock)block;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif
