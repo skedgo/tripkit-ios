@@ -92,11 +92,11 @@ extension StopLocation: TKUIStopAnnotation {}
 
 extension StopVisits: TKUIModeAnnotation {
   public var modeInfo: TKModeInfo! {
-    return service.modeInfo
+    return service.findModeInfo() ?? .unknown
   }
   
   public var clusterIdentifier: String? {
-    return service.modeInfo?.identifier ?? "StopVisits"
+    return modeInfo?.identifier ?? "StopVisits"
   }
 }
 
