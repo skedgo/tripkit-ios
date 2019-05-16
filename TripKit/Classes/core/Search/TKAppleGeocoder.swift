@@ -131,7 +131,7 @@ extension TKAutocompletionResult {
     subtitle = completion.subtitle
     image = TKAutocompletionResult.image(forType: .pin)
     
-    score = Int(TKGeocodingResultScorer.calculateScore(title: title, subtitle: subtitle, searchTerm: input, minimum: 15, maximum: 65)) - index
+    score = Int(TKGeocodingResultScorer.calculateScore(title: title, subtitle: subtitle, searchTerm: input, minimum: 25, maximum: 65)) - index
   }
   
 }
