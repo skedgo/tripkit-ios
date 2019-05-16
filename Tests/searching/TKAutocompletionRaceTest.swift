@@ -14,6 +14,8 @@ import RxTest
 
 @testable import TripKit
 
+fileprivate let 💥 = [-1]
+
 class TKAutocompletionRaceTest: XCTestCase {
   
   func testBestInFirstBatch() throws {
@@ -66,8 +68,8 @@ class TKAutocompletionRaceTest: XCTestCase {
     ])
     
     XCTAssertEqual(simulated, Recorded.events([
-      .next(6, [1, 2, 3, 4, 5, 6]),
-      .completed(5),
+      .next(4, [1, 2, 3, 4, 5, 6]),
+      .completed(4),
     ]))
   }
 
@@ -86,28 +88,58 @@ class TKAutocompletionRaceTest: XCTestCase {
   
   func testNoResults() throws {
     let simulated = runSimulation(cutOff: 5, fastSpots: 2, [
+      ([], at: 3)
     ])
     
     XCTAssertEqual(simulated, Recorded.events([
-      .next(5, []),
-      .completed(5),
+      .next(3, []),
+      .completed(3),
+    ]))
+  }
+  
+  func testNoInput() throws {
+    let simulated = runSimulation(cutOff: 5, fastSpots: 2, [
+    ])
+    
+    XCTAssertEqual(simulated, Recorded.events([
+      .completed(0),
     ]))
   }
   
   func testErrorInOne() throws {
-    XCTFail("Not yet implemented")
+    let simulated = runSimulation(cutOff: 5, fastSpots: 2, [
+      ([1, 3], at: 1),
+      (💥, at: 3),
+      ([2, 5], at: 6),
+    ])
+    
+    XCTAssertEqual(simulated, Recorded.events([
+      .next(5, [1, 3]),
+      .next(6, [1, 3, 2, 5]),
+      .completed(6),
+    ]))
   }
 
   func testErrorInAll() throws {
-    XCTFail("Not yet implemented")
+    let simulated = runSimulation(cutOff: 5, fastSpots: 2, [
+      (💥, at: 1),
+      (💥, at: 3),
+      (💥, at: 6),
+    ])
+    
+    XCTAssertEqual(simulated, Recorded.events([
+      .next(6, []),
+      .completed(6),
+    ]))
   }
-
 
 }
 
 // MARK: - Running the simulations
 
 extension TKAutocompletionRaceTest {
+  
+  private struct InputError: Error {}
   
   func runSimulation(cutOff: TestTime, fastSpots: Int, _ inputs: [([Int], at: TestTime)]) -> [Recorded<Event<[Int]>>] {
     
@@ -116,10 +148,16 @@ extension TKAutocompletionRaceTest {
     let observer = scheduler.createObserver([Int].self)
     
     let inputEvents: [[Recorded<Event<[Int]>>]] = inputs.map { input in
-      return [
-        .next(input.at, input.0),
-        .completed(input.at)
-      ]
+      if input.0 == 💥 {
+        return [
+          .error(input.at, InputError())
+        ]
+      } else {
+        return [
+          .next(input.at, input.0),
+          .completed(input.at)
+        ]
+      }
     }
 
     SharingScheduler.mock(scheduler: scheduler) {
@@ -127,7 +165,7 @@ extension TKAutocompletionRaceTest {
         .map(scheduler.createHotObservable)
         .map { $0.asObservable() }
       
-      let processed = Observable.stableRace(observables)
+      let processed = Observable.stableRace(observables, cutOff: .seconds(cutOff), fastSpots: fastSpots)
       
       processed
         .bind(to: observer)
