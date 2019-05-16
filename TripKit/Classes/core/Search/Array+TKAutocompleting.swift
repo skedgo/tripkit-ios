@@ -34,6 +34,7 @@ public extension Array where Element == TKAutocompleting {
               results.forEach { $0.provider = provider as AnyObject }
               return results
             }
+            .asObservable()
           }
         return Observable.stableRace(autocompletions)
       }
@@ -61,6 +62,7 @@ extension ObservableType {
       let merged = Observable.merge(observables)
         .scan(into: []) { $0.append(contentsOf: $1) }
         .map { $0.sorted(by: comparer) }
+        .share()
       
       // ... This represents 1.: What are the best X results when the timer first?
       let timeOut = Observable<Int>.timer(cutOff, scheduler: SharingScheduler.make())
@@ -78,7 +80,9 @@ extension ObservableType {
           if all.isEmpty {
             return first
           } else {
-            return first + all.filter { !first.contains($0) }
+            let second = all.filter { !first.contains($0) }
+            assert(second.count + first.count == all.count)
+            return first + second
           }
         }
         .filter { !$0.isEmpty }
