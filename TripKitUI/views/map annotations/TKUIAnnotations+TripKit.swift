@@ -47,11 +47,13 @@ extension TKModeCoordinate: TKUIGlyphableAnnotation {
   
 }
 
+
 // MARK: - TKStopCoordinate
 
 // MARK: TKUIStopAnnotation
 
 extension TKStopCoordinate: TKUIStopAnnotation {}
+
 
 // MARK: - Alert
 
@@ -64,6 +66,7 @@ extension Alert: TKUIImageAnnotation {
     return TKInfoIcon.image(for: infoIconType, usage: .map)
   }
 }
+
 
 // MARK: - StopLocation
 
@@ -80,7 +83,6 @@ extension StopLocation: TKUIModeAnnotation {
   }
 }
 
-
 // MARK: TKUIStopAnnotation
 
 extension StopLocation: TKUIStopAnnotation {}
@@ -92,11 +94,11 @@ extension StopLocation: TKUIStopAnnotation {}
 
 extension StopVisits: TKUIModeAnnotation {
   public var modeInfo: TKModeInfo! {
-    return service.modeInfo
+    return service.findModeInfo() ?? .unknown
   }
   
   public var clusterIdentifier: String? {
-    return service.modeInfo?.identifier ?? "StopVisits"
+    return modeInfo?.identifier ?? "StopVisits"
   }
 }
 
@@ -119,6 +121,7 @@ extension StopVisits: TKUISemaphoreDisplayable {
     return false
   }
 }
+
 
 // MARK: - TKSegment
 

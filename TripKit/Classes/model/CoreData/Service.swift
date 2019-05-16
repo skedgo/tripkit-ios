@@ -122,7 +122,8 @@ extension Service {
     return findModeInfo()?.remoteImageIsTemplate ?? false
   }
 
-  private func findModeInfo() -> TKModeInfo? {
+  @objc
+  public func findModeInfo() -> TKModeInfo? {
     if let modeInfo = modeInfo {
       return modeInfo
     }

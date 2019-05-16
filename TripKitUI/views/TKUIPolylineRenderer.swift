@@ -44,7 +44,7 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
   var selectionHandler: ((String) -> Bool?)?
   
   /// The styling to apply on selection
-  var selectionStyle: SelectionStyle = .default {
+  var selectionStyle: SelectionStyle {
     didSet {
       updateStyling()
     }
@@ -56,6 +56,8 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
   private var isSelected: Bool?
   
   public override init(polyline: MKPolyline) {
+    selectionStyle = .default
+    
     super.init(polyline: polyline)
     
     lineJoin = .round

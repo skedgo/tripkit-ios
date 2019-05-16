@@ -390,7 +390,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         } else if (service) {
           // We don't need to insert the full template, but need to add
           // shapes for that service
-          [SegmentTemplate insertNewShapesFromDictionary:templateDict forService:service relativeTime:reference.startTime modeInfo:service.modeInfo intoContext:self.context];
+          [SegmentTemplate insertNewShapesFromDictionary:templateDict forService:service relativeTime:reference.startTime modeInfo:[service findModeInfo] intoContext:self.context];
         }
         
         reference.index = @(segmentCount++);
