@@ -306,7 +306,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     }
     
     circleView.isFaded = !asTravelled
-    if asTravelled, let color = (annotation as? TKUIModeAnnotation)?.modeInfo.color {
+    if asTravelled, let color = (annotation as? TKUIModeAnnotation)?.modeInfo?.color {
       circleView.circleColor = color
     } else {
       circleView.circleColor = .routeDashColorNonTravelled
