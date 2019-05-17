@@ -37,15 +37,14 @@ extension TKBaseGeocoder: TKGeocoding { }
 
 extension SGAutocompletionDataProvider where Self: TKAutocompleting {
   
-  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]> {
+  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
     if let fast = self.autocompleteFast?(input, for: mapRect) {
-      return Observable.just(fast)
+      return .just(fast)
     
     } else {
-      return Observable.create { subscriber in
+      return Single.create { subscriber in
         self.autocompleteSlowly?(input, for: mapRect) { results in
-          subscriber.onNext(results ?? [])
-          subscriber.onCompleted()
+          subscriber(.success(results ?? []))
         }
         return Disposables.create()
       }

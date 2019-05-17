@@ -22,16 +22,14 @@ public class TKAppleGeocoder: NSObject {
   }
   
   private let completer: MKLocalSearchCompleter
-  private let completerDelegate: LocalSearchCompleterDelegate
+  private var completerDelegate: LocalSearchCompleterDelegate!
   private var disposeBag: DisposeBag!
   
   public override init() {
     self.completer = MKLocalSearchCompleter()
-    self.completerDelegate = LocalSearchCompleterDelegate()
     
     super.init()
     
-    completer.delegate = completerDelegate
     completer.filterType = .locationsOnly
   }
   
@@ -77,11 +75,15 @@ extension TKAppleGeocoder: SGGeocoder {
 @available(iOS 9.3, *)
 extension TKAppleGeocoder: TKAutocompleting {
   
-  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]> {
+  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
+    completerDelegate = LocalSearchCompleterDelegate()
+    completer.delegate = completerDelegate
     completer.region = MKCoordinateRegion(mapRect)
     completer.queryFragment = input
     return completerDelegate.results
       .map { $0.enumerated().map { TKAutocompletionResult($1, forInput: input, index: $0) } }
+      .take(1)
+      .asSingle()
   }
   
   public func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
@@ -114,7 +116,7 @@ fileprivate class LocalSearchCompleterDelegate: NSObject, MKLocalSearchCompleter
   }
   
   func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-    // Ignoring errors
+    results.onNext([])
   }
   
 }
@@ -129,7 +131,7 @@ extension TKAutocompletionResult {
     subtitle = completion.subtitle
     image = TKAutocompletionResult.image(forType: .pin)
     
-    score = Int(TKGeocodingResultScorer.calculateScore(title: title, subtitle: subtitle, searchTerm: input, minimum: 15, maximum: 65)) - index
+    score = Int(TKGeocodingResultScorer.calculateScore(title: title, subtitle: subtitle, searchTerm: input, minimum: 25, maximum: 65)) - index
   }
   
 }

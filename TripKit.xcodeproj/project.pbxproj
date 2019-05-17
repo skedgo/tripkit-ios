@@ -25,6 +25,7 @@
 		3A15DDCA2271A6C7001AC0F5 /* routing-with-stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */; };
 		3A15DDCC2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */; };
 		3A15DDCD227300FA001AC0F5 /* TKCoreDataParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */; };
+		3A218773228C5B7500B44B96 /* TKAutocompletionRaceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A218772228C5B7500B44B96 /* TKAutocompletionRaceTest.swift */; };
 		3A21A4AD20690448005F411D /* alertsTransit-melbourne.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A21A4AC20690447005F411D /* alertsTransit-melbourne.json */; };
 		3A21A4B32069057D005F411D /* TKSectionedAlertsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A21A4B22069057D005F411D /* TKSectionedAlertsTest.swift */; };
 		3A26E1AD20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A26E1AC20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift */; };
@@ -826,6 +827,7 @@
 		3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRoutingParser.swift; sourceTree = "<group>"; };
 		3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-with-stops.json"; sourceTree = "<group>"; };
 		3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKCoreDataParserHelper.swift; sourceTree = "<group>"; };
+		3A218772228C5B7500B44B96 /* TKAutocompletionRaceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAutocompletionRaceTest.swift; sourceTree = "<group>"; };
 		3A21A4AC20690447005F411D /* alertsTransit-melbourne.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alertsTransit-melbourne.json"; sourceTree = "<group>"; };
 		3A21A4B22069057D005F411D /* TKSectionedAlertsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertsTest.swift; sourceTree = "<group>"; };
 		3A26E1AC20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripOverviewViewModel+Content.swift"; sourceTree = "<group>"; };
@@ -1801,6 +1803,7 @@
 				3AE6077C20FF4F63006D59B0 /* pelias-de.json */,
 				3AE6077D20FF4F64006D59B0 /* pelias-us.json */,
 				3AA3CE8B202CD4D100E54859 /* TKAnnotationClusterer.swift */,
+				3A218772228C5B7500B44B96 /* TKAutocompletionRaceTest.swift */,
 				3AA3CE8C202CD4D100E54859 /* TKAutocompletionResultTest.m */,
 				3AA3CE8D202CD4D100E54859 /* TKGeocoderTest.swift */,
 				3AA3CE8A202CD4D100E54859 /* TKGeoJSONTest.swift */,
@@ -3412,6 +3415,7 @@
 				3AA3CED0202CD4D100E54859 /* TKCustomEventRecurrenceTest.swift in Sources */,
 				3AA3CEB9202CD4D100E54859 /* TKAlertModelTest.swift in Sources */,
 				3AA3CEB7202CD4D100E54859 /* TKWaypointRouterTest.swift in Sources */,
+				3A218773228C5B7500B44B96 /* TKAutocompletionRaceTest.swift in Sources */,
 				3AE6077920FF4BB7006D59B0 /* TKPeliasTitleTest.swift in Sources */,
 				3AA3CEC2202CD4D100E54859 /* TKDeparturesModelTest.swift in Sources */,
 				3AA3CEB4202CD4D100E54859 /* TKAutocompletionResultTest.m in Sources */,

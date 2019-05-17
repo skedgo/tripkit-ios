@@ -31,29 +31,26 @@
   NSMutableArray *array = [NSMutableArray arrayWithCapacity:allRegions.count];
   for (TKAutocompletionResult *result in self.allAutocompletionResults) {
     
-    BOOL matches = NO;
+    NSUInteger titleScore;
     if (string.length > 0) {
-      if ([result.title rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
-        matches = YES;
-      } else if (result.subtitle && [result.subtitle rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
-        matches = YES;
-      }
-      
+      titleScore = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:string candidate:result.title];
     } else {
-      matches = YES; // everything matches empty strings
+      titleScore = 100; // everything matches empty strings
     }
     
-    if (matches) {
-      // score it
+    if (titleScore > 0) {
       TKRegionCity *annotation = result.object;
-      NSUInteger rawScore = [TKAutocompletionResult scoreBasedOnDistanceFromCoordinate:[annotation coordinate]
+      
+      NSUInteger distanceScore = [TKAutocompletionResult scoreBasedOnDistanceFromCoordinate:annotation.coordinate
                                                                               toRegion:MKCoordinateRegionForMapRect(mapRect)
                                                                           longDistance:YES];
-      result.score = [TKAutocompletionResult rangedScoreForScore:rawScore
-                                                  betweenMinimum:50
-                                                      andMaximum:90];
       
-      // add it
+      NSUInteger rawScore = (titleScore * 9 + distanceScore) / 10l;
+      
+      result.score = [TKAutocompletionResult rangedScoreForScore:rawScore
+                                                  betweenMinimum:10
+                                                      andMaximum:70];
+      
       [array addObject:result];
     }
   }

@@ -29,8 +29,8 @@ public protocol TKAutocompleting {
   /// - Parameters:
   ///   - input: Query fragment typed by user
   ///   - mapRect: Last map rect the map view was zoomed to (can be `MKMapRectNull`)
-  /// - Returns: Autocompletion results for query fragment. Should fire with empty result if nothing found.
-  func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]>
+  /// - Returns: Autocompletion results for query fragment. Should fire with empty result or error out if nothing found. Needs to complete.
+  func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]>
   
   /// Called to fetch the annotation for a previously returned autocompletion result
   ///
