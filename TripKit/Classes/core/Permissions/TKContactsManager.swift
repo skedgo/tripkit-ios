@@ -75,7 +75,7 @@ public class TKContactsManager: TKPermissionManager {
     return contacts.flatMap { $0.toContactAddresses() }.filter { $0.matches(kind) }
   }
   
-  public func fetchMyLocations(limitTo kind: AddressKind? = nil) -> [ContactAddress] {
+  public func fetchMyLocations(limitTo kind: AddressKind? = nil) throws -> [ContactAddress] {
     assert(!Thread.isMainThread, "Don't call this on the main thread. It's slow.")
     
     guard isAuthorized() else { return [] }
@@ -138,8 +138,12 @@ extension CNContact {
   }
   
   fileprivate func circularThumbnail() -> TKImage? {
+    #if os(iOS) || os(tvOS)
     guard #available(iOS 10.0, *), let data = thumbnailImageData, let thumbnail = TKImage(data: data) else { return nil }
-    
     return TKImageBuilder.drawCircularImage(insideImage: thumbnail)
+
+    #elseif os(OSX)
+    return nil
+    #endif
   }
 }

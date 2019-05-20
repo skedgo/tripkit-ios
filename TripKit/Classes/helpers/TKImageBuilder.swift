@@ -8,6 +8,7 @@
 
 import Foundation
 
+#if os(iOS) || os(tvOS)
 @available(iOS 10.0, *)
 class TKImageBuilder {
   
@@ -64,3 +65,4 @@ class TKImageBuilder {
   }
   
 }
+#endif
