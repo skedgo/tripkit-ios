@@ -6,13 +6,13 @@
 //
 //
 
-#import "TKBaseGeocoder.h"
-
 #import "SGAutocompletionDataProvider.h"
+
+#import "SGDeprecatedGeocoder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TKFoursquareGeocoder : TKBaseGeocoder <SGAutocompletionDataProvider>
+@interface TKFoursquareGeocoder : NSObject <SGAutocompletionDataProvider, SGDeprecatedGeocoder>
 
 - (instancetype)initWithClientID:(NSString *)clientID
                     clientSecret:(NSString *)clientSecret;

@@ -42,7 +42,7 @@ public class TKShareHelper: NSObject {
 //    ^(NSString * _Nonnull query, NSArray<TKNamedCoordinate *> * _Nonnull results) {
 //    #pragma unused(query)
 //    dispatch_async(dispatch_get_main_queue(), ^{
-//    id<MKAnnotation> annotation = [TKBaseGeocoder pickBestFromResults:results];
+//    id<MKAnnotation> annotation = [TKGeocoderHelper pickBestFromResults:results];
 //    if (annotation) {
 //    TKNamedCoordinate *coordinate = [TKNamedCoordinate namedCoordinateForAnnotation:annotation];
 //    coordinate.name = string;

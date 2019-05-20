@@ -12,15 +12,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SGGeocoder;
-
 @interface TKCalendarManager : TKPermissionManager
 
 + (TKCalendarManager *)sharedInstance NS_REFINED_FOR_SWIFT;
 
 @property (nonatomic, strong, nullable) EKEventStore *eventStore;
 
-@property (nonatomic, strong, nullable) id<SGGeocoder> helperGeocoder;
+@property (nonatomic, strong, nullable) id helperGeocoder;
 
 + (NSString *)titleStringForEvent:(EKEvent *)event;
 

@@ -11,7 +11,6 @@
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
 
-#import "SGAutocompletionDataProvider.h"
 #import "TKAutocompletionResult.h"
 
 

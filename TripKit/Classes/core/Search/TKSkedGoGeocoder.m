@@ -33,6 +33,8 @@
   return self;
 }
 
+#pragma mark - SGDeprecatedGeocoder
+
 - (void)geocodeString:(NSString *)inputString
            nearRegion:(MKMapRect)mapRect
               success:(SGGeocoderSuccessBlock)success

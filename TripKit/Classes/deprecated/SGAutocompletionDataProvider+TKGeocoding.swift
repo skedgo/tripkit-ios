@@ -15,26 +15,6 @@ public enum TKGeocodingBackwardscompatibilityError: Error {
   case couldNotCreateAnnotation
 }
 
-extension TKBaseGeocoder {
-
-  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
-    return Single.create { subscriber in
-      self.geocodeString(
-        input, nearRegion: mapRect,
-        success: { (_, results) in
-          subscriber(.success(results))
-        },
-        failure: { (_, error) in
-          subscriber(.error(error ?? TKGeocodingBackwardscompatibilityError.unknownError))
-        })
-      return Disposables.create()
-    }
-  }
-  
-}
-
-extension TKBaseGeocoder: TKGeocoding { }
-
 extension SGAutocompletionDataProvider where Self: TKAutocompleting {
   
   public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
@@ -81,4 +61,3 @@ extension SGAutocompletionDataProvider where Self: TKAutocompleting {
 extension TKSkedGoGeocoder: TKAutocompleting { }
 extension TKFoursquareGeocoder: TKAutocompleting { }
 extension TKRegionAutocompleter: TKAutocompleting { }
-extension TKPeliasGeocoder: TKAutocompleting { }

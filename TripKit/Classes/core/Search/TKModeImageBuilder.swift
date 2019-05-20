@@ -9,7 +9,7 @@
 import Foundation
 
 @objc
-@available(iOSApplicationExtension 10.0, *)
+@available(iOS 10.0, *)
 public class TKModeImageFactory: NSObject {
   
   @objc(sharedInstance)
@@ -35,28 +35,9 @@ public class TKModeImageFactory: NSObject {
   }
   
   private func buildImage(for modeInfo: TKModeInfo) -> TKImage? {
-    #if os(iOS) || os(tvOS)
     guard let overlayImage = modeInfo.image else { return nil }
     
-    let newSize = CGSize(width: 19, height: 19)
-    let fullRect = CGRect(origin: .zero, size: newSize)
-    let renderer = UIGraphicsImageRenderer(size: newSize)
-    let image = renderer.image { context in
-      context.cgContext.setFillColor(#colorLiteral(red: 0.795085609, green: 0.8003450036, blue: 0.7956672311, alpha: 1))
-      context.cgContext.fillEllipse(in: fullRect)
-      
-      context.cgContext.setStrokeColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-      context.cgContext.setLineWidth(1)
-      context.cgContext.strokeEllipse(in: fullRect)
-      
-      context.cgContext.setFillColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-      overlayImage.draw(in: fullRect.insetBy(dx: 3, dy: 3))
-    }
-    return image
-    
-    #elseif os(OSX)
-    return nil
-    #endif
+    return TKImageBuilder.drawCircularImage(insideOverlay: overlayImage, background: #colorLiteral(red: 0.795085609, green: 0.8003450036, blue: 0.7956672311, alpha: 1))
   }
 
 }

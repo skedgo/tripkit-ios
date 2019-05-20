@@ -14,9 +14,7 @@ public typealias SGAggregateGeocoder = TKAggregateGeocoder
 public class TKAggregateGeocoder: NSObject {
 
   public let geocoders: [TKGeocoding]
-  
-  private var disposeBag: DisposeBag!
-  
+    
   public init(geocoders: [TKGeocoding]) {
     self.geocoders = geocoders
   }
@@ -39,19 +37,4 @@ extension TKAggregateGeocoder: TKGeocoding {
       .asSingle()
   }
 
-}
-
-extension TKAggregateGeocoder: SGGeocoder {
-  
-  public func geocodeString(_ inputString: String, nearRegion mapRect: MKMapRect, success: @escaping SGGeocoderSuccessBlock, failure: SGGeocoderFailureBlock? = nil) {
-    disposeBag = DisposeBag()
-    geocode(inputString, near: mapRect)
-      .subscribe(onSuccess: { results in
-        success(inputString, results)
-      }, onError: { error in
-        failure?(inputString, error)
-      })
-      .disposed(by: disposeBag)
-  }
-  
 }

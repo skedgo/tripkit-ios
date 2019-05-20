@@ -6,16 +6,19 @@
 //  Copyright 2011 SkedGo. All rights reserved.
 //
 
-#import "TKBaseGeocoder.h"
-
 #import <MapKit/MapKit.h>
 
 #import "SGAutocompletionDataProvider.h"
+#import "SGDeprecatedGeocoder.h"
 
 @class TKRegion;
 
-@interface TKSkedGoGeocoder : TKBaseGeocoder <SGAutocompletionDataProvider>
+NS_ASSUME_NONNULL_BEGIN
+
+@interface TKSkedGoGeocoder : NSObject <SGAutocompletionDataProvider, SGDeprecatedGeocoder>
 
 @property (nonatomic, strong, nullable) TKRegion *fallbackRegion;
 
 @end
+
+NS_ASSUME_NONNULL_END

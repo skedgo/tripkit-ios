@@ -116,7 +116,7 @@ class TKGeocoderTest: XCTestCase {
   }
   
   fileprivate func geocoderPasses(
-    _ geocoder: SGGeocoder,
+    _ geocoder: TKGeocoding,
     input: String,
     near region: MKCoordinateRegion,
     resultsInAny any: [String] = [],
@@ -136,7 +136,7 @@ class TKGeocoderTest: XCTestCase {
   }
   
   fileprivate func geocoderPasses(
-    _ geocoder: SGGeocoder,
+    _ geocoder: TKGeocoding,
     input: String,
     near region: MKCoordinateRegion,
     bestStartsWithAny starts: [String])
@@ -154,7 +154,7 @@ class TKGeocoderTest: XCTestCase {
   }
 }
 
-extension SGGeocoder {
+extension TKGeocoding {
   
   /// Runs the geocoder and checks that the results match any of the provided good results
   /// in `any` and don't match any of the provided bad results in `none`. Then calls the

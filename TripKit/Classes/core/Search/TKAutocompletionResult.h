@@ -23,8 +23,6 @@ typedef NS_ENUM(NSInteger, TKAutocompletionSearchIcon) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SGAutocompletionDataProvider;
-
 @interface TKAutocompletionResult : NSObject
 
 + (TKImage *)imageForType:(TKAutocompletionSearchIcon)type;

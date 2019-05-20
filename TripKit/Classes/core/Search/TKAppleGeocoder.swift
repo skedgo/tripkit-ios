@@ -23,7 +23,6 @@ public class TKAppleGeocoder: NSObject {
   
   private let completer: MKLocalSearchCompleter
   private var completerDelegate: LocalSearchCompleterDelegate!
-  private var disposeBag: DisposeBag!
   
   public override init() {
     self.completer = MKLocalSearchCompleter()
@@ -50,22 +49,6 @@ extension TKAppleGeocoder: TKGeocoding {
     return MKLocalSearch(request: request).rx
       .start()
       .map { $0.map { TKNamedCoordinate($0, forInput: input, near: request.region) } }
-  }
-  
-}
-
-@available(iOS 9.3, *)
-extension TKAppleGeocoder: SGGeocoder {
-  
-  public func geocodeString(_ inputString: String, nearRegion mapRect: MKMapRect, success: @escaping SGGeocoderSuccessBlock, failure: SGGeocoderFailureBlock? = nil) {
-    disposeBag = DisposeBag()
-    geocode(inputString, near: mapRect)
-      .subscribe(onSuccess: { results in
-        success(inputString, results)
-      }, onError: { error in
-        failure?(inputString, error)
-      })
-      .disposed(by: disposeBag)
   }
   
 }
