@@ -30,6 +30,7 @@ extension Loc {
     return NSLocalizedString("Show", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that, when tapped, shows something, e.g., a list of alert")
   }
   
+  
   // MARK: - Linking to TSP
   
   @objc public static var Disconnect: String {
@@ -39,6 +40,7 @@ extension Loc {
   @objc public static var Setup: String {
     return NSLocalizedString("Setup", tableName: "TripKit", bundle: .tripKit, comment: "Set up to connect/link to a service provider, e.g., Uber")
   }
+  
   
   // MARK: - Accessibility
   
@@ -99,7 +101,6 @@ extension Loc {
     return NSLocalizedString("Transport", tableName: "TripKit", bundle: .tripKit, comment: "Title for button to access transport modes")
   }
   
-
   
   // MARK: - Format
 

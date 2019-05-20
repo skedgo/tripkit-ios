@@ -9,6 +9,9 @@
 import XCTest
 import MapKit
 
+import RxSwift
+import RxBlocking
+
 @testable import TripKit
 
 class TKGeocoderTest: XCTestCase {
@@ -114,6 +117,17 @@ class TKGeocoderTest: XCTestCase {
     
     return TKAggregateGeocoder(geocoders: geocoders)
   }
+}
+
+// MARK: - Helpers
+
+extension TKGeocoderTest {
+  
+  enum Error: Swift.Error {
+    case badResult(String)
+    case noGoodResult(String)
+    case bestIsNoGood(String)
+  }
   
   fileprivate func geocoderPasses(
     _ geocoder: TKGeocoding,
@@ -121,17 +135,14 @@ class TKGeocoderTest: XCTestCase {
     near region: MKCoordinateRegion,
     resultsInAny any: [String] = [],
     noneOf none: [String] = [],
-    of coordinate: CLLocationCoordinate2D? = nil)
+    of coordinate: CLLocationCoordinate2D? = nil,
+    file: StaticString = #file, line: UInt = #line)
   {
-    let expectation = self.expectation(description: "expectation-\(input)")
-    
-    geocoder.passes(input, near:region, resultsInAny:any, noneOf:none, of:coordinate) { passed in
-      XCTAssertNil(passed)
-      expectation.fulfill()
-    }
-    
-    waitForExpectations(timeout: 15) { error in
-      XCTAssertNil(error)
+    let result = geocoder.passes(input, near:region, resultsInAny:any, noneOf:none, of:coordinate)
+    do {
+      _ = try result.toBlocking().first()
+    } catch {
+      XCTFail("Failed with error: \(error)", file: file, line: line)
     }
   }
   
@@ -139,17 +150,14 @@ class TKGeocoderTest: XCTestCase {
     _ geocoder: TKGeocoding,
     input: String,
     near region: MKCoordinateRegion,
-    bestStartsWithAny starts: [String])
+    bestStartsWithAny starts: [String],
+    file: StaticString = #file, line: UInt = #line)
   {
-    let expectation = self.expectation(description: "expectation-\(input)")
-    
-    geocoder.passes(input, near:region, bestStartsWithAny: starts) { passed in
-      XCTAssertNil(passed)
-      expectation.fulfill()
-    }
-    
-    waitForExpectations(timeout: 15) { error in
-      XCTAssertNil(error)
+    let result = geocoder.passes(input, near:region, bestStartsWithAny: starts)
+    do {
+      _ = try result.toBlocking().first()
+    } catch {
+      XCTFail("Failed with error: \(error)", file: file, line: line)
     }
   }
 }
@@ -170,13 +178,11 @@ extension TKGeocoding {
     near region: MKCoordinateRegion,
     resultsInAny any: [String] = [],
     noneOf none: [String] = [],
-    of coordinate: CLLocationCoordinate2D? = nil,
-    completion handler: @escaping (String?) -> Void)
+    of coordinate: CLLocationCoordinate2D? = nil)
+    -> Single<Void>
   {
     let mapRect = MKMapRect.forCoordinateRegion(region)
-    self.geocodeString(input, nearRegion: mapRect,
-      success: { query, results in
-        
+    return geocode(input, near: mapRect).map { results in
         var foundGood = any.count == 0
         for result in results {
           // ignore results without a title
@@ -190,16 +196,13 @@ extension TKGeocoding {
           
           // none should be bad
           for bad in none where title.contains(bad) {
-            handler("Result '\(title)' is bad as it contains '\(bad)'")
-            return
+            throw TKGeocoderTest.Error.badResult("Result '\(title)' is bad as it contains '\(bad)'")
           }
         }
-        handler(foundGood ? nil : "Found no result containing '\(any)'")
-        
-      },
-      failure: { query, error in
-        handler("Error: \(String(describing: error))")
-    })
+        if !foundGood {
+          throw TKGeocoderTest.Error.noGoodResult("Found no result containing '\(any)'")
+        }
+      }
   }
   
   /// Runs the geocoder and checks that the highest scored result starts with any of the
@@ -209,14 +212,10 @@ extension TKGeocoding {
   /// - parameter region: Region near which to search
   /// - parameter starts: Any result needs to start with any of these
   /// - parameter completion: Called when done, with one parameter indicating if all results pass
-  func passes(_ input: String, near region: MKCoordinateRegion, bestStartsWithAny starts: [String], completion handler: @escaping (String?) -> Void)
+  func passes(_ input: String, near region: MKCoordinateRegion, bestStartsWithAny starts: [String]) -> Single<Void>
   {
     let mapRect = MKMapRect.forCoordinateRegion(region)
-    self.geocodeString(
-      input,
-      nearRegion: mapRect,
-      success: { query, results in
-        
+    return geocode(input, near: mapRect).map { results in
         let (_, best) = results.reduce((0, nil as TKNamedCoordinate?)) { previous, next in
           if next.sortScore > previous.0 {
             return (next.sortScore, next)
@@ -228,16 +227,11 @@ extension TKGeocoding {
         // check if we found a good result
         if let title = best?.title {
           for good in starts where title.lowercased().hasPrefix(good.lowercased()) {
-            handler(nil)
             return
           }
         }
-        handler("Best match '\(String(describing: best?.title))' does not have good title.")
-        
-    },
-    failure: { query, error in
-        handler("Error: \(String(describing: error))")
-    })
+        throw TKGeocoderTest.Error.bestIsNoGood("Best match '\(String(describing: best?.title))' does not have good title.")
+    }
   }
 }
 
