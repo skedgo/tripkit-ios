@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source       = { git: "https://github.com/skedgo/tripkit-ios.git", tag: "v#{s.version}" }
   s.swift_version = '4.0'
   s.ios.deployment_target = '8.0'
-  s.osx.deployment_target = '10.12'
+  s.osx.deployment_target = '10.13'
   s.requires_arc = true
   
   s.prefix_header_file = "prefix.pch"
