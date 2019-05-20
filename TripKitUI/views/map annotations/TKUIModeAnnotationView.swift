@@ -116,7 +116,15 @@ public class TKUIModeAnnotationView: MKAnnotationView {
 fileprivate extension TKModeInfo {
   
   var defaultColor: TKColor {
-    guard let identifier = self.identifier else { return TKStyleManager.globalTintColor() }
+    guard let identifier = self.identifier
+      else {
+        if localImageName == "parking" {
+          return #colorLiteral(red: 0.2567383349, green: 0.5468673706, blue: 0.9439687133, alpha: 1) // got no mode identifier as it applies to several
+        } else {
+          return TKStyleManager.globalTintColor()
+        }
+        
+    }
     
     switch identifier {
     case "in_air":            return #colorLiteral(red: 0.2354567349, green: 0.6183182597, blue: 0.5550506115, alpha: 1)
@@ -130,7 +138,7 @@ fileprivate extension TKModeInfo {
     case "pt_pub_funicular":  return #colorLiteral(red: 0.4494780302, green: 0.664527297, blue: 0.954687655, alpha: 1)
     case "pt_pub_monorail":   return #colorLiteral(red: 0.8918713927, green: 0.7548664212, blue: 0.08011957258, alpha: 1)
     case "ps_tax":            return #colorLiteral(red: 0.892275691, green: 0.8211820722, blue: 0.07182558626, alpha: 1)
-    case "me_car":            return #colorLiteral(red: 0.2567383349, green: 0.5468673706, blue: 0.9439687133, alpha: 1) // parking
+    case "me_car":            return #colorLiteral(red: 0.2567383349, green: 0.5468673706, blue: 0.9439687133, alpha: 1)
     case "me_car-s":          return #colorLiteral(red: 0.4492250085, green: 0.6646941304, blue: 0.9505276084, alpha: 1)
     default: return TKStyleManager.globalTintColor()
     }
