@@ -22,7 +22,7 @@
 
 @implementation TKRegionAutocompleter
 
-#pragma mark - SGAutocompletionDataProvider
+#pragma mark - SGDeprecatedAutocompletionDataProvider
 
 - (NSArray *)autocompleteFast:(NSString *)string forMapRect:(MKMapRect)mapRect
 {

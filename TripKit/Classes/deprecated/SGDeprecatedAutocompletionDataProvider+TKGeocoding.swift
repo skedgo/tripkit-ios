@@ -1,5 +1,5 @@
 //
-//  SGAutocompletionDataProvider+TKGeocoding.swift
+//  SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift
 //  TripKit
 //
 //  Created by Adrian Schönig on 19.03.18.
@@ -15,7 +15,7 @@ public enum TKGeocodingBackwardscompatibilityError: Error {
   case couldNotCreateAnnotation
 }
 
-extension SGAutocompletionDataProvider where Self: TKAutocompleting {
+extension SGDeprecatedAutocompletionDataProvider where Self: TKAutocompleting {
   
   public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
     if let fast = self.autocompleteFast?(input, for: mapRect) {

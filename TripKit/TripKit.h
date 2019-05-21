@@ -95,5 +95,5 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 // Deprecated
 #import "SGSearchDataSource.h"
-#import "SGAutocompletionDataProvider.h"
+#import "SGDeprecatedAutocompletionDataProvider.h"
 #import "SGAutocompletionDataSource.h"

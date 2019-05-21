@@ -1,5 +1,5 @@
 //
-//  SGAutocompletionDataProvider.h
+//  SGDeprecatedAutocompletionDataProvider.h
 //  TripKit
 //
 //  Created by Adrian Schoenig on 23/10/2013.
@@ -13,13 +13,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class TKAutocompletionResult;
-@protocol SGAutocompletionDataProvider;
+@protocol SGDeprecatedAutocompletionDataProvider;
 
 typedef void(^SGAutocompletionDataResultBlock)(NSArray <TKAutocompletionResult*> * _Nullable results);
 typedef void(^SGAutocompletionDataActionBlock)(BOOL refreshRequired);
 
-NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
-@protocol SGAutocompletionDataProvider <NSObject>
+@protocol SGDeprecatedAutocompletionDataProvider <NSObject>
 
 @optional
 

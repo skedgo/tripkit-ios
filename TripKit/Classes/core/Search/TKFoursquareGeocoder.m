@@ -84,7 +84,7 @@
  }];
 }
 
-#pragma mark - SGAutocompletionDataProvider
+#pragma mark - SGDeprecatedAutocompletionDataProvider
 
 - (void)autocompleteSlowly:(NSString *)string
                 forMapRect:(MKMapRect)mapRect

@@ -8,14 +8,14 @@
 
 #import <MapKit/MapKit.h>
 
-#import "SGAutocompletionDataProvider.h"
+#import "SGDeprecatedAutocompletionDataProvider.h"
 #import "SGDeprecatedGeocoder.h"
 
 @class TKRegion;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TKSkedGoGeocoder : NSObject <SGAutocompletionDataProvider, SGDeprecatedGeocoder>
+@interface TKSkedGoGeocoder : NSObject <SGDeprecatedAutocompletionDataProvider, SGDeprecatedGeocoder>
 
 @property (nonatomic, strong, nullable) TKRegion *fallbackRegion;
 
