@@ -8,7 +8,7 @@ Additional documentation is available on the [TripGo Developer page](http://sked
 ## Components
 
 - TripKit (iOS, iOS extensions, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
-- TripKitUI (iOS, iOS extensions): UI elements for displaying trips on a map and TripGo-styled table cells.
+- [TripKitUI](docs/view-controllers.md) (iOS, iOS extensions): UI elements for displaying trips on a map and TripGo-styled table cells.
 - TripKitInterApp (iOS): Helpers for deep linking into other apps, such as FlitWays, GoCatch, Ingogo, Lyft, Ola and Uber.
 
 ## Installation
