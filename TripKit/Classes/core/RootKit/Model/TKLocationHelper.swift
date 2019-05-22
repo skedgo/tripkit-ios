@@ -15,31 +15,21 @@ import Contacts
 #endif
 
 extension TKLocationHelper {
-  
+
   @objc(postalAddressForPlacemark:)
+  @available(*, deprecated, message: "Use `CNPostalAddressFormatter` directly instead")
   public static func postalAddress(for placemark: CLPlacemark) -> String? {
     
     guard let dict = placemark.addressDictionary else { return nil }
     
     // TODO: iOS 11 does this better
-    let address: String
-    
-    if #available(iOS 9.0, macOS 10.11, *) {
-      address = postalAddress(forAddressDictionary: dict)
-    } else {
-      #if os(iOS)
-        address = ABCreateStringWithAddressDictionary(dict, true)
-      #else
-        return nil
-      #endif
-    }
-    
+    let address = postalAddress(forAddressDictionary: dict)
     let oneLine = address.replacingOccurrences(of: "\n", with: ", ")
     return oneLine
   }
   
-  @available(iOS 9.0, macOS 10.11, *)
   @objc(postalAddressForAddressDictionary:)
+  @available(*, deprecated, message: "Use `CNPostalAddressFormatter` directly instead")
   public static func postalAddress(forAddressDictionary dict: [AnyHashable: Any]) -> String {
     
     // TODO: iOS 11 does this better

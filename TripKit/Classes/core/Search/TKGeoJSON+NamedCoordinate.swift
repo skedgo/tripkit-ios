@@ -32,8 +32,6 @@ extension TKPeliasProperties {
   }
   
   fileprivate var subtitle: String? {
-    guard #available(iOS 9.0, macOS 10.11, *) else { return label }
-    
     let address = CNMutablePostalAddress()
     address.isoCountryCode = country_a ?? ""
     address.country = country ?? ""

@@ -11,7 +11,6 @@ import Contacts
 
 import RxSwift
 
-@available(iOS 9.0, *)
 extension Reactive where Base == TKContactsManager {
   
   public func fetchContacts(searchString: String, kind: TKContactsManager.AddressKind? = nil) -> Single<[TKContactsManager.ContactAddress]> {

@@ -47,7 +47,7 @@ extension TKCalendarManager: TKAutocompleting {
     
     if annotation.coordinate.isValid {
       return .just(annotation)
-    } else if #available(iOS 9.3, *) {
+    } else {
 
       let geocoder = helperGeocoder as? TKAppleGeocoder ?? TKAppleGeocoder()
       helperGeocoder = geocoder
@@ -55,8 +55,6 @@ extension TKCalendarManager: TKAutocompleting {
       return geocoder
         .geocode(annotation, near: .world)
         .map { _ in annotation } // TODO: Only if success
-    } else {
-      return .error(AutocompletionError.couldNotResolveEvent)
     }
   }
   
@@ -130,7 +128,7 @@ extension TKNamedCoordinate {
   /// - Parameter event: Event
   @objc(initWithEvent:)
   public convenience init?(_ event: EKEvent) {
-    guard #available(iOS 9.0, *), let structured = event.structuredLocation, let location = structured.geoLocation else { return nil }
+    guard let structured = event.structuredLocation, let location = structured.geoLocation else { return nil }
     
     let address: String?
     if let fromStructure = structured.value(forKey: "address") as? String {

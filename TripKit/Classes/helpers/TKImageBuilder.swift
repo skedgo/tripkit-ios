@@ -9,7 +9,6 @@
 import Foundation
 
 #if os(iOS) || os(tvOS)
-@available(iOS 10.0, *)
 class TKImageBuilder {
   
   /// Creates a circular image that is a small version of the provided image

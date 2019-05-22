@@ -9,7 +9,6 @@
 import Foundation
 
 @objc
-@available(iOS 10.0, *)
 public class TKModeImageFactory: NSObject {
   
   @objc(sharedInstance)

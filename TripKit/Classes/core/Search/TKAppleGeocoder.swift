@@ -13,7 +13,6 @@ import RxSwift
 @available(iOS, introduced: 9.3, unavailable, renamed: "TKAppleGeocoder")
 public typealias SGAppleGeocoder = TKAppleGeocoder
 
-@available(iOS 9.3, *)
 public class TKAppleGeocoder: NSObject {
   
   enum GeocoderError: Error {
@@ -36,7 +35,6 @@ public class TKAppleGeocoder: NSObject {
 
 // MARK: Geocoding
 
-@available(iOS 9.3, *)
 extension TKAppleGeocoder: TKGeocoding {
   
   public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
@@ -55,7 +53,6 @@ extension TKAppleGeocoder: TKGeocoding {
 
 // MARK: - Autocompletion
 
-@available(iOS 9.3, *)
 extension TKAppleGeocoder: TKAutocompleting {
   
   public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
@@ -89,7 +86,6 @@ extension TKAppleGeocoder: TKAutocompleting {
 
 // MARK: - Helpers
 
-@available(iOS 9.3, *)
 fileprivate class LocalSearchCompleterDelegate: NSObject, MKLocalSearchCompleterDelegate {
   
   let results = PublishSubject<[MKLocalSearchCompletion]>()
@@ -104,7 +100,6 @@ fileprivate class LocalSearchCompleterDelegate: NSObject, MKLocalSearchCompleter
   
 }
 
-@available(iOS 9.3, *)
 extension TKAutocompletionResult {
   
   convenience init(_ completion: MKLocalSearchCompletion, forInput input: String, index: Int) {

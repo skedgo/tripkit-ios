@@ -13,7 +13,6 @@ import RxSwift
 
 // MARK: - TKAutocompleting
 
-@available(iOS 9.0, *)
 extension TKContactsManager: TKAutocompleting {
   
   public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
@@ -56,7 +55,6 @@ extension TKContactsManager: TKAutocompleting {
   
 }
 
-@available(iOS 9.0, *)
 extension TKContactsManager.ContactAddress {
   fileprivate func toResult(provider: TKAutocompleting, search: String) -> TKAutocompletionResult {
     let result = TKAutocompletionResult()
@@ -89,7 +87,6 @@ extension Optional {
 }
 // MARK: - TKGeocoding
 
-@available(iOS 9.0, *)
 extension TKContactsManager: TKGeocoding {
   
   public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {

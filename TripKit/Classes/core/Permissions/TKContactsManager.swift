@@ -9,7 +9,6 @@
 import Foundation
 import Contacts
 
-@available(iOS 9.0, *)
 public class TKContactsManager: TKPermissionManager {
   
   public enum AddressKind {
@@ -123,7 +122,6 @@ public class TKContactsManager: TKPermissionManager {
 
 // MARK: - Helpers
 
-@available(iOS 9.0, *)
 extension CNContact {
   fileprivate func toContactAddresses() -> [TKContactsManager.ContactAddress] {
     
@@ -139,7 +137,7 @@ extension CNContact {
   
   fileprivate func circularThumbnail() -> TKImage? {
     #if os(iOS) || os(tvOS)
-    guard #available(iOS 10.0, *), let data = thumbnailImageData, let thumbnail = TKImage(data: data) else { return nil }
+    guard let data = thumbnailImageData, let thumbnail = TKImage(data: data) else { return nil }
     return TKImageBuilder.drawCircularImage(insideImage: thumbnail)
 
     #elseif os(OSX)

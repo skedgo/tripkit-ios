@@ -12,7 +12,6 @@ import RxSwift
 
 extension TKBuzzInfoProvider {
   
-  @available(iOS 10.0, *)
   public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion, start: Date? = nil, end: Date? = nil) -> Single<[API.CarAvailability]> {
     
     var paras: [String: Any] = [ "identifier": locationId, "region": region.name ]
@@ -34,7 +33,6 @@ extension TKBuzzInfoProvider {
       }
   }
   
-  @available(iOS 10.0, *)
   public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion, filter: Observable<(start: Date, end: Date?)>) -> Observable<[API.CarAvailability]> {
     
     // TODO: We could be smarter about this, cache the previous result and only
