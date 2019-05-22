@@ -34,3 +34,8 @@ Project/Pods
 /Carthage
 /TripKit.framework.zip
 xcshareddata
+
+# Documentation
+/docs/TripKit
+/docs/TripKitUI
+/docs/TripKitInterApp

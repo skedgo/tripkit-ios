@@ -12,21 +12,23 @@ import MessageUI
 
 import TripKit
 
-class TKSMSActionHandler: TKInterAppExternalActionHandler {
+/// Handler for `sms:` actions, bringing up the Messages app,
+/// optionally pre-filling a message.
+public class TKSMSActionHandler: TKInterAppExternalActionHandler {
   
   private let canSendSMS = UIApplication.shared.canOpenURL(URL(string: "sms:")!)
   
-  let priority: TKInterAppExternalActionPriority = .low
+  public let priority: TKInterAppExternalActionPriority = .low
   
-  func canHandle(_ string: TKInterAppIdentifier) -> Bool {
+  public func canHandle(_ string: TKInterAppIdentifier) -> Bool {
     return canSendSMS && string.hasPrefix("sms:")
   }
   
-  func title(for identifier: TKInterAppIdentifier) -> String {
+  public func title(for identifier: TKInterAppIdentifier) -> String {
     return Loc.SendSMS
   }
   
-  func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment?, presenter: UIViewController, sender: Any?) {
+  public func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment?, presenter: UIViewController, sender: Any?) {
     let raw = identifier.replacingOccurrences(of: "sms:", with: "")
     let brokenUp = raw.components(separatedBy: "?")
     guard let recipient = brokenUp.first else {
