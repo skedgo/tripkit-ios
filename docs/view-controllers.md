@@ -17,7 +17,7 @@ Each of these share the following characteristics:
 
 ## Real-time departures and service details
 
-<img src="assets/departures.png" height="200px" />
+<img src="assets/departures.png" height="400px" />
 
 The stand-alone view controller `TKUIDeparturesViewController` let's you quickly and easily embed public transport departures. 
 
@@ -40,7 +40,7 @@ Note: As an alternative to using the stand-alone view controller, you can also t
 
 ## Trip planning and trip details
 
-<img src="assets/routing.png" height="200px" />
+<img src="assets/routing.png" height="400px" />
 
 The stand-alone view controller `TKUIRoutesViewController` let's you quickly and easily show routing results between two locations for various modes including combinations of those modes, i.e., this is fully multi-modal and inter-modal.
 
@@ -71,7 +71,7 @@ Note: As an alternative to using the stand-alone view controller, you can also t
 
 ## Location search
 
-<img src="assets/search.png" height="200px" />
+<img src="assets/search.png" height="400px" />
 
 The `TKUIAutocompletionViewController` can be used with the standard `UISearchController` to provide autocompletion results for addresses, POIs and custom data sources.
 
