@@ -10,17 +10,19 @@ import Foundation
 
 import TripKit
 
-class TKPhoneActionHandler: TKInterAppExternalActionHandler {
+/// Handler for `tel:` actions, bringing up the Phone app,
+/// optionally showing a name nominated by the TripGo backend.
+public class TKPhoneActionHandler: TKInterAppExternalActionHandler {
   
   private let canCall = UIApplication.shared.canOpenURL(URL(string: "tel:")!)
   
-  let priority: TKInterAppExternalActionPriority = .low
+  public let priority: TKInterAppExternalActionPriority = .low
   
-  func canHandle(_ string: TKInterAppIdentifier) -> Bool {
+  public func canHandle(_ string: TKInterAppIdentifier) -> Bool {
     return canCall && string.hasPrefix("tel:")
   }
   
-  func title(for identifier: TKInterAppIdentifier) -> String {
+  public func title(for identifier: TKInterAppIdentifier) -> String {
     if let nameRange = identifier.range(of: "name="), let name = identifier[nameRange.upperBound...].removingPercentEncoding {
       return Loc.Call(service: name)
     } else {
@@ -28,7 +30,7 @@ class TKPhoneActionHandler: TKInterAppExternalActionHandler {
     }
   }
   
-  func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment?, presenter: UIViewController, sender: Any?) {
+  public func performAction(for identifier: TKInterAppIdentifier, segment: TKSegment?, presenter: UIViewController, sender: Any?) {
     let cleaned = identifier.replacingOccurrences(of: " ", with: "-")
     guard let callURL = URL(string: cleaned) else { assertionFailure(); return }
     UIApplication.shared.open(callURL)
