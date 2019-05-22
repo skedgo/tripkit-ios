@@ -28,7 +28,7 @@ Add desired pods:
 Add this to your `Cartfile`:
 
 ```
-github "skedgo/tripkit-ios" ~> 3.1
+git "git@gitlab.com:SkedGo/iOS/tripkit-ios.git" "tripkit-4.0"
 ```
 
 Then run `carthage update` and add the desired framework to your project as described in [the Carthage docs](https://github.com/Carthage/Carthage).
@@ -43,6 +43,7 @@ When doing so, you'll need to add the respective dependencies:
   - Those of TripKit, plus:
   - ASPolylineView
   - Kingfisher
+  - [TGCardViewController](https://gitlab.com/SkedGo/iOS/tripgo-cards-ios)
 
 ### Manually
 
