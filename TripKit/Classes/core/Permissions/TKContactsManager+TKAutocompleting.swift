@@ -61,8 +61,6 @@ extension TKContactsManager.ContactAddress {
     result.object = self
     result.title = locationName
     result.subtitle = address
-      .replacingOccurrences(of: "\n", with: ", ")
-      .replacingOccurrences(of: "  ", with: " ")
     result.image = image ?? TKAutocompletionResult.image(forType: .contact)
     result.provider = provider as AnyObject
     

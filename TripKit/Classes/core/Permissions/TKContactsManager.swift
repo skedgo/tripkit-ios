@@ -130,8 +130,8 @@ extension CNContact {
     
     let image = circularThumbnail()
     return postalAddresses.map {
-      let formatted = CNPostalAddressFormatter().string(from: $0.value)
-      return TKContactsManager.ContactAddress(name: givenName, image: image, kind: TKContactsManager.AddressKind(label: $0.label), address: formatted, postalAddress: $0.value)
+      let singleLine = TKAddressFormatter.singleLineAddress(for: $0.value)
+      return TKContactsManager.ContactAddress(name: givenName, image: image, kind: TKContactsManager.AddressKind(label: $0.label), address: singleLine, postalAddress: $0.value)
     }
   }
   

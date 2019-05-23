@@ -56,8 +56,7 @@ extension TKPeliasProperties {
     if title.contains(address.street) {
       address.street = ""
     }
-    let formatted = CNPostalAddressFormatter.string(from: address, style: .mailingAddress).replacingOccurrences(of: "\n", with: ", ")
-    
+    let formatted = TKAddressFormatter.singleLineAddress(for: address)
     return formatted.isEmpty ? label : formatted
   }
 }
