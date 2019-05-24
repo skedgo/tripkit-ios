@@ -26,7 +26,7 @@ extension TKUIDeparturesViewModel {
   
   public struct Item {
     let dataModel: StopVisits
-    public let contentModel: DepartureCardContentModel
+    public let contentModel: TKUIDepartureCardContentModel
     public let isSelected: Bool
   }
 
@@ -129,7 +129,7 @@ extension TKUIDeparturesViewModel {
   
   static func buildSections(_ visits: [StopVisits], groupStops: Bool, selectedServiceID: String?) -> [Section] {
     let items = visits.compactMap { visit -> Item? in
-      guard let contentModel = DepartureCardContentModel.build(for: visit) else { return nil }
+      guard let contentModel = TKUIDepartureCardContentModel.build(for: visit) else { return nil }
       let selected = visit.service.code == selectedServiceID
       return Item(dataModel: visit, contentModel: contentModel, isSelected: selected)
     }

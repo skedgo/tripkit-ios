@@ -77,10 +77,10 @@ class TKUIServiceTitleView: UIView {
   }
 }
 
-// MARK: - DepartureCardContentModel compatibility
+// MARK: - TKUIDepartureCardContentModel compatibility
 
 extension TKUIServiceTitleView {
-  func configure(with model: DepartureCardContentModel) {
+  func configure(with model: TKUIDepartureCardContentModel) {
     // Main content
     titleLabel.attributedText = model.title
     subtitleLabel.text = model.subtitle

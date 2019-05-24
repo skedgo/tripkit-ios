@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 extension Reactive where Base: TKUIServiceTitleView {
-  var model: Binder<DepartureCardContentModel> {
+  var model: Binder<TKUIDepartureCardContentModel> {
     return Binder(self.base) { header, model in
       header.configure(with: model)
     }

@@ -46,7 +46,7 @@ public class TKUIServiceViewModel {
 
     header = withNewRealTime
       .asObservable()
-      .compactMap { DepartureCardContentModel.build(for: dataInput.embarkation) }
+      .compactMap { TKUIDepartureCardContentModel.build(for: dataInput.embarkation) }
       .asDriver(onErrorDriveWith: .empty())
 
     sections = Driver.combineLatest(withNewRealTime, withContent) { $1 }
@@ -68,7 +68,7 @@ public class TKUIServiceViewModel {
   
   /// Title view with details about the embarkation.
   /// Can change with real-time data.
-  public let header: Driver<DepartureCardContentModel>
+  public let header: Driver<TKUIDepartureCardContentModel>
   
   /// Sections with stops of the service, for display in a table view.
   /// Can change with real-time data.

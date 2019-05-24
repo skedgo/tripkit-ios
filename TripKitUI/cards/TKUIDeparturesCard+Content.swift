@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-public struct DepartureCardContentModel {
+public struct TKUIDepartureCardContentModel {
   
   public var servicePlaceholderImage: UIImage?
   public var serviceImageURL: URL?
@@ -33,14 +33,14 @@ public struct DepartureCardContentModel {
   
 }
 
-extension DepartureCardContentModel {
+extension TKUIDepartureCardContentModel {
   
-  static func build(for visit: StopVisits, hideAlerts: Bool = false) -> DepartureCardContentModel? {
+  static func build(for visit: StopVisits, hideAlerts: Bool = false) -> TKUIDepartureCardContentModel? {
     guard let service = (visit.service as Service?) else {
       return nil
     }
     
-    var model = DepartureCardContentModel(title: visit.buildTitle())
+    var model = TKUIDepartureCardContentModel(title: visit.buildTitle())
     
     model.servicePlaceholderImage = service.modeImage(for: .listMainMode)
     model.serviceImageURL = service.modeImageURL(for: .listMainMode)
@@ -77,7 +77,7 @@ extension DepartureCardContentModel {
 }
 
 // MARK: - Protocol conformance
-extension DepartureCardContentModel: TKUIDepartureCellContentDataSource {
+extension TKUIDepartureCardContentModel: TKUIDepartureCellContentDataSource {
   
   public var placeHolderImage: UIImage? { return servicePlaceholderImage }
   public var imageURL: URL? { return serviceImageURL }
