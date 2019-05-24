@@ -11,29 +11,44 @@ import Foundation
 @available(*, unavailable, renamed: "TKModeInfo")
 public typealias ModeInfo = TKModeInfo
 
-/// Information to identify and display a mode. Kind of like the
+/// Information to identify and display a transport mode. Kind of like the
 /// big sibling of a mode identifier string.
 public class TKModeInfo: NSObject, Codable, NSSecureCoding {
+  
+  /// The mode identifier string. Can be `nil`, e.g., for parking as that can
+  /// apply to multiple modes.
   @objc public let identifier: String?
 
   /// Text representation of the image
   @objc public let alt: String
 
+  /// Image part name; use with `TKStyleManager.image(forModeImageName:)`
   @objc public let localImageName: String?
+  
+  /// Image part name; use with `TKServer.imageURL(iconFileNamePart:)`
   @objc public let remoteImageName: String?
-  private let remoteIconIsTemplate: Bool?
+
+  /// If true, then `remoteImageName` should be treated as a template image and
+  /// have an appropriate colour applied to it.
   @objc public var remoteImageIsTemplate: Bool {
     return remoteIconIsTemplate ?? false
   }
-  
+  private let remoteIconIsTemplate: Bool?
+
+  /// If true, `remoteImageIsBranding` points at a brand image and should be
+  /// shown next to the local image; if `false` it shoud replace  it.
+  @objc public var remoteImageIsBranding: Bool {
+    return remoteIconIsBranding ?? false
+  }
+  private let remoteIconIsBranding: Bool?
+
   /// Additional descriptor for image, e.g., "GoGet", "Shuttle"
   @objc public let descriptor: String?
   
-  private let rgbColor: API.RGBColor?
-
   @objc public var color: TKColor? {
     return rgbColor?.color
   }
+  private let rgbColor: API.RGBColor?
 
   @objc(modeInfoForDictionary:)
   public class func modeInfo(for json: [String: Any]?) -> TKModeInfo? {
@@ -53,6 +68,7 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
       && localImageName == other.localImageName
       && remoteImageName == other.remoteImageName
       && remoteIconIsTemplate == other.remoteIconIsTemplate
+      && remoteIconIsBranding == other.remoteIconIsBranding
       && descriptor == other.descriptor
       && rgbColor == other.rgbColor
   }
@@ -65,6 +81,7 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
     case localImageName = "localIcon"
     case remoteImageName = "remoteIcon"
     case remoteIconIsTemplate
+    case remoteIconIsBranding
     case descriptor
     case rgbColor = "color"
   }
@@ -91,6 +108,7 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
         localImageName = decoded.localImageName
         remoteImageName = decoded.remoteImageName
         remoteIconIsTemplate = decoded.remoteIconIsTemplate
+        remoteIconIsBranding = decoded.remoteIconIsBranding
         descriptor = decoded.descriptor
         rgbColor = decoded.rgbColor
       } catch {
@@ -110,7 +128,10 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
       } else {
         rgbColor = nil
       }
-      remoteIconIsTemplate = false // new property
+      
+      // new properties
+      remoteIconIsTemplate = false
+      remoteIconIsBranding = false
     }
   }
 }

@@ -79,9 +79,15 @@ public protocol TKTripSegmentDisplayable : NSObjectProtocol {
   
   var tripSegmentModeImageURL: URL? { get }
   
+  /// If true, then `tripSegmentModeImageURL` should be treated as a template
+  /// image and have an appropriate colour applied to it.
   var tripSegmentModeImageIsTemplate: Bool { get }
-  
-  /// The icon to display on top of a mode icon to indicate isssues with the
+
+  /// If true, `tripSegmentModeImageURL` points at a brand image and should be
+  /// shown next to `tripSegmentModeImage`; if `false` it shoud replace  it.
+  var tripSegmentModeImageIsBranding: Bool { get }
+
+  /// The icon to display on top of a mode icon to indicate issues with the
   /// mode itself, e.g., a service being cancelled or a car share vehicle
   /// not being available.
   var tripSegmentModeInfoIconType: TKInfoIconType { get }
@@ -137,6 +143,7 @@ public extension TKTripSegmentDisplayable {
   var tripSegmentModeImage: TKImage? { return nil }
   var tripSegmentModeImageURL: URL? { return nil }
   var tripSegmentModeImageIsTemplate: Bool { return false }
+  var tripSegmentModeImageIsBranding: Bool { return false }
   var tripSegmentModeInfoIconType: TKInfoIconType { return .none }
   var tripSegmentSubtitleIconType: TKInfoIconType { return .none }
   var tripSegmentModeTitle: String? { return nil }

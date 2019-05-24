@@ -143,7 +143,7 @@
     UIColor *color = [segment tripSegmentModeColor];
 		
 		// the mode image
-    UIImageView * modeImageView = [[UIImageView alloc] initWithImage:image];
+    UIImageView *modeImageView = [[UIImageView alloc] initWithImage:image];
     modeImageView.alpha = alpha;
     
     if (self.colorCodingTransitIcon) {
@@ -154,12 +154,6 @@
       modeImageView.tintColor = self.darkTextColor;
     }
 
-    NSURL *modeImageURL = [segment tripSegmentModeImageURL];
-    BOOL asTemplate = [segment tripSegmentModeImageIsTemplate];
-    if (modeImageURL) {
-      [modeImageView setImageWithURL:modeImageURL asTemplate:asTemplate placeholderImage:image];
-    }
-    
     // place the mode image
     CGFloat imageWidth = image.size.width * (self.tiny ? 0.6f : 1.0f);
     CGFloat imageHeight = image.size.height * (self.tiny ? 0.6f : 1.0f);
@@ -173,6 +167,27 @@
 		modeImageView.autoresizingMask = mask;
     modeImageView.frame = newFrame;
 
+    UIImageView *brandImageView;
+    NSURL *modeImageURL = [segment tripSegmentModeImageURL];
+    BOOL asTemplate = [segment tripSegmentModeImageIsTemplate];
+    BOOL asBranding = [segment tripSegmentModeImageIsBranding];
+    if (modeImageURL) {
+      if (asBranding) {
+        // brand images are not overlaid over the mode icon, but appear next
+        // to them
+        CGRect brandFrame = newFrame;
+        brandFrame.origin.x += brandFrame.size.width + 2;
+        brandImageView = [[UIImageView alloc] initWithFrame:brandFrame];
+        brandImageView.autoresizingMask = mask;
+        brandImageView.alpha = alpha;
+        [brandImageView setImageWithURL:modeImageURL];
+        newFrame = brandFrame;
+        
+      } else {
+        [modeImageView setImageWithURL:modeImageURL asTemplate:asTemplate placeholderImage:image];
+      }
+    }
+    
     if (modeImageURL && !asTemplate) {
       // remove images that aren't templates look weird on the background colour
       CGRect circleFrame = CGRectInset(newFrame, -1.0f, -1.0f);
@@ -184,7 +199,11 @@
     }
 
     [self addSubview:modeImageView];
-		
+
+    if (brandImageView) {
+      [self addSubview:brandImageView];
+    }
+
 		if (allowInfoIcons && [segment tripSegmentModeInfoIconType] != TKInfoIconTypeNone) {
 			UIImageView *infoIconImageView = [[UIImageView alloc] initWithImage:[TKInfoIcon imageForInfoIconType:[segment tripSegmentModeInfoIconType] usage:TKInfoIconUsageOverlay]];
       CGRect imageFrame = infoIconImageView.frame;
@@ -222,7 +241,6 @@
         && [segment tripSegmentIsWheelchairAccessible]) {
       modeTitleAccessoryImageView = [[UIImageView alloc] initAsWheelchairAccessoryImageWithTintColor:[TKStyleManager darkTextColor]];
     }
-    
     
     NSString *modeSubtitle = nil;
     NSMutableArray<UIImageView *> *modeSubtitleAccessoryImageViews = [NSMutableArray arrayWithCapacity:2];
