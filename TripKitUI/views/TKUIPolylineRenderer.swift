@@ -7,10 +7,9 @@
 //
 
 import Foundation
+import CoreGraphics
 
-import ASPolylineView
-
-open class TKUIPolylineRenderer: ASPolylineRenderer {
+open class TKUIPolylineRenderer: MKPolylineRenderer {
   
   public enum SelectionMode {
     case thickWithSelectionColor
@@ -32,6 +31,19 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
     var selectedBorderColor: UIColor
     var deselectedColor: UIColor
   }
+  
+  /// Color used for the wider border around the polyline.
+  /// Defaults to black.
+  public var borderColor: UIColor = .black
+  
+  /// Color used as the backdrop if there's a dash pattern
+  /// Defaults to white
+  public var backgroundColor: UIColor? = .white
+  
+  /// The factor by which the border expands past the line.
+  /// 1.5 leads to a very thin line.
+  /// Defaults to 2.0
+  public var borderMultiplier: CGFloat = 2.0
   
   /// Identifier for this polyline, used to determine selection style
   public var selectionIdentifier: String?
@@ -58,7 +70,7 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
   public override init(polyline: MKPolyline) {
     selectionStyle = .default
     
-    super.init(polyline: polyline)
+    super.init(overlay: polyline)
     
     lineJoin = .round
     lineCap = .square
@@ -66,6 +78,23 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
     updateStyling()
     
     borderMultiplier = 16/12
+  }
+  
+  private func drawLine(color: CGColor, width: CGFloat, allowDashes: Bool, zoomScale: MKZoomScale, in context: CGContext) {
+    context.addPath(path)
+    
+    if allowDashes {
+      // Defaults take care of dash pattern
+      applyStrokeProperties(to: context, atZoomScale: zoomScale)
+    } else {
+      context.setLineCap(lineCap)
+      context.setLineJoin(lineJoin)
+      context.setMiterLimit(miterLimit)
+    }
+    
+    context.setStrokeColor(color)
+    context.setLineWidth(width / zoomScale)
+    context.strokePath()
   }
   
   override open func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
@@ -79,7 +108,21 @@ open class TKUIPolylineRenderer: ASPolylineRenderer {
       updateStyling()
     }
     
-    super.draw(mapRect, zoomScale: zoomScale, in: context)
+    let baseWidth = self.lineWidth
+    let width = zoomScale < 0.01 ? baseWidth / 2 : baseWidth
+    
+    // draw the border, it's slightly wider than the specified width
+    drawLine(color: borderColor.cgColor, width: width * borderMultiplier, allowDashes: false, zoomScale: zoomScale, in: context)
+    
+    // background onto which to draw dashes
+    if let background = backgroundColor {
+      drawLine(color: background.cgColor, width: width, allowDashes: false, zoomScale: zoomScale, in: context)
+    }
+    
+    // the regular line
+    if let stroke = strokeColor {
+      drawLine(color: stroke.cgColor, width: width, allowDashes: true, zoomScale: zoomScale, in: context)
+    }
   }
   
   private func updateStyling() {

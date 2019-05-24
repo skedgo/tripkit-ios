@@ -41,7 +41,6 @@ When doing so, you'll need to add the respective dependencies:
   - RxCocoa
 - TripKitUI:
   - Those of TripKit, plus:
-  - ASPolylineView
   - Kingfisher
   - [TGCardViewController](https://gitlab.com/SkedGo/iOS/tripgo-cards-ios)
 
