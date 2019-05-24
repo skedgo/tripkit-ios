@@ -68,6 +68,39 @@ extension Loc {
   }
   
   
+  // MARK: - Departures + Services
+
+  @objc public static var Timetable: String {
+    return NSLocalizedString("Timetable", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to access timetable")
+  }
+  
+  public static func Every(prefix: String? = nil, repetition: String) -> String {
+    if let prefix = prefix {
+      let format = NSLocalizedString("%@ every %@", tableName: "TripKit", bundle: .tripKit, comment: "Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes'")
+      return String(format: format, prefix, repetition)
+    } else {
+      let format = NSLocalizedString("Every %@", tableName: "TripKit", bundle: .tripKit, comment: "Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes'")
+      return String(format: format, repetition)
+    }
+  }
+  
+  public static func At(what: String, time: String) -> String {
+    let format = NSLocalizedString("%@ at %@", tableName: "TripKit", bundle: .tripKit, comment: "Filler for a specific service running at a time, e.g., '396 at 11:56am'")
+    return String(format: format, what, time)
+  }
+  
+  public static func At(time: String) -> String {
+    let format = NSLocalizedString("At %@", tableName: "TripKit", bundle: .tripKit, comment: "Filler for a service running at time, e.g., 'At 11:56am'")
+    return String(format: format, time)
+  }
+
+  public static func More(count: Int) -> String? {
+    guard count > 0 else { return nil }
+    let format = NSLocalizedString("%@ more", tableName: "TripKit", bundle: .tripKit, comment: "Text for an 'x more' indication if there's more content. '%@' will be replaced with a number")
+    return String(format: format, NSNumber(value: count))
+  }
+
+  
   // MARK: -
   
   @objc public static var Now: String {

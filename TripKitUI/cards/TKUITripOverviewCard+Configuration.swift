@@ -6,27 +6,10 @@
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import TripKit
 
-/// An action that can be added to a `TKUITripOverviewCard`. Set an array of
-/// these on `TKUITripOverviewCard.tripActionsFactory`.
-public protocol TKUITripOverviewCardAction {
-  /// Title (and accessory label) of the button
-  var title: String { get }
-  
-  /// Icon to display as the action. Should be a template image.
-  var icon: UIImage { get }
-  
-  /// Handler executed when user taps on the button, providing the
-  /// corresponding card and trip. Should return whether the button should
-  /// be refreshed as its title or icon changed as a result (e.g., for
-  /// toggle actions such as adding or removing a reminder or favourite).
-  ///
-  /// Parameters are the card, the trip, and the sender
-  var handler: (TKUITripOverviewCard, Trip, UIView) -> Bool { get }
-}
+public typealias TKUITripOverviewCardAction = TKUICardAction<TKUITripOverviewCard, Trip>
 
 public extension TKUITripOverviewCard {
   
@@ -83,7 +66,7 @@ public extension TKUITripOverviewCard {
     /// Defaults to using `TKUITripMapManager`.
     public var mapManagerFactory: ((Trip) -> TKUITripMapManagerType) = TKUITripMapManager.init
     
-    /// Set this to add a list of action button to a trip overview card.
+    /// Set this to add a list of action buttons to a trip overview card.
     ///
     /// - warning: Only a maximum of three actions can be accomodated. Any
     ///     more than that will be ignored.
