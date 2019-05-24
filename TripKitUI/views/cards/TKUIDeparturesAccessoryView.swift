@@ -8,13 +8,14 @@
 
 import UIKit
 
+import RxSwift
+
 class TKUIDeparturesAccessoryView: UIView {
 
   @IBOutlet weak var timeButton: UIButton!
-  @IBOutlet weak var favoriteButton: UIButton!
-  @IBOutlet weak var shareButton: UIButton!
   @IBOutlet weak var customActionStack: UIStackView!
   
+  private var disposeBag = DisposeBag()
   
   static func newInstance() -> TKUIDeparturesAccessoryView {
     let bundle = Bundle(for: self)
@@ -30,7 +31,9 @@ class TKUIDeparturesAccessoryView: UIView {
     timeButton.setTitle(nil, for: .normal)
   }
   
-  func setCustomActions<Card, Model>(_ actions: [TKUICardAction<Card, Model>]) {
+  func setCustomActions(_ actions: [TKUIDeparturesCardAction], for model: [TKUIStopAnnotation], card: TKUIDeparturesCard) {
+    disposeBag = DisposeBag()
+    
     customActionStack.arrangedSubviews.forEach(customActionStack.removeArrangedSubview)
     
     let buttons = actions.map { action -> UIButton in
@@ -39,6 +42,18 @@ class TKUIDeparturesAccessoryView: UIView {
       button.setImage(action.icon, for: .normal)
       button.widthAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
       button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+      
+      button.rx.tap
+        .subscribe(onNext: { [weak card, unowned button] in
+          guard let card = card else { return }
+          let update = action.handler(card, model, button)
+          if update {
+            button.accessibilityLabel = action.title
+            button.setImage(action.icon, for: .normal)
+          }
+        })
+        .disposed(by: disposeBag)
+      
       return button
     }
     buttons.forEach(customActionStack.addArrangedSubview)

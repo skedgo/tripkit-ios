@@ -45,7 +45,7 @@ extension TKUIDepartureCardContentModel {
     model.servicePlaceholderImage = service.modeImage(for: .listMainMode)
     model.serviceImageURL = service.modeImageURL(for: .listMainMode)
     model.serviceImageIsTemplate = service.modeImageIsTemplate
-//    model.serviceImageIsColorCoded = TGWhiteLabel.shared.styleSource.colorCodingTransitIcon
+    model.serviceImageIsColorCoded = TKUIDeparturesCard.config.colorCodeTransitIcons
     model.serviceLineColor = service.color as? UIColor
     model.subtitle = visit.secondaryInformation()
     model.subsubtitle = visit.realTimeInformation(true)

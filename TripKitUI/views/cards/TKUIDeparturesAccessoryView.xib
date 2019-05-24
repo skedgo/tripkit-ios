@@ -20,23 +20,10 @@
                     <state key="normal" title="Button"/>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jin-SJ-hvl">
-                    <rect key="frame" x="260" y="0.0" width="115" height="44"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="trf-NR-zAG">
-                            <rect key="frame" x="0.0" y="0.0" width="63" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="3uc-LZ-tqE"/>
-                            </constraints>
-                            <state key="normal" title="Favourite"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mt8-5Q-UFQ">
-                            <rect key="frame" x="71" y="0.0" width="44" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="vIT-zr-DRY"/>
-                            </constraints>
-                            <state key="normal" title="Share"/>
-                        </button>
-                    </subviews>
+                    <rect key="frame" x="375" y="0.0" width="0.0" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="250" id="nYk-1j-nr8"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -52,8 +39,6 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="customActionStack" destination="jin-SJ-hvl" id="E6D-AK-h8P"/>
-                <outlet property="favoriteButton" destination="trf-NR-zAG" id="wTf-5k-N05"/>
-                <outlet property="shareButton" destination="Mt8-5Q-UFQ" id="tvo-AH-ZLz"/>
                 <outlet property="timeButton" destination="TJK-XX-Gi6" id="3w8-Rg-Eoj"/>
             </connections>
             <point key="canvasLocation" x="66.5" y="-245"/>

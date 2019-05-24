@@ -610,7 +610,6 @@
 		3ACF47392297FFDD0096860D /* TKUIServiceVisitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47372297FFDD0096860D /* TKUIServiceVisitCell.xib */; };
 		3ACF473A2297FFDD0096860D /* TKUIServiceVisitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47382297FFDD0096860D /* TKUIServiceVisitCell.swift */; };
 		3ACF473C229800A70096860D /* TKUIDeparturesCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF473B229800A70096860D /* TKUIDeparturesCard+Configuration.swift */; };
-		3ACF474222980F2C0096860D /* TKUICardAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF474122980F2C0096860D /* TKUICardAction.swift */; };
 		3ACF474522980FCB0096860D /* TKUIDeparturesAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF474322980FCB0096860D /* TKUIDeparturesAccessoryView.swift */; };
 		3ACF474622980FCB0096860D /* TKUIDeparturesAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF474422980FCB0096860D /* TKUIDeparturesAccessoryView.xib */; };
 		3ACF474822981FF40096860D /* TGCardViewController+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF474722981FF40096860D /* TGCardViewController+Present.swift */; };
@@ -1218,7 +1217,6 @@
 		3ACF47372297FFDD0096860D /* TKUIServiceVisitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIServiceVisitCell.xib; sourceTree = "<group>"; };
 		3ACF47382297FFDD0096860D /* TKUIServiceVisitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIServiceVisitCell.swift; sourceTree = "<group>"; };
 		3ACF473B229800A70096860D /* TKUIDeparturesCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIDeparturesCard+Configuration.swift"; sourceTree = "<group>"; };
-		3ACF474122980F2C0096860D /* TKUICardAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICardAction.swift; sourceTree = "<group>"; };
 		3ACF474322980FCB0096860D /* TKUIDeparturesAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIDeparturesAccessoryView.swift; sourceTree = "<group>"; };
 		3ACF474422980FCB0096860D /* TKUIDeparturesAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIDeparturesAccessoryView.xib; sourceTree = "<group>"; };
 		3ACF474722981FF40096860D /* TGCardViewController+Present.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TGCardViewController+Present.swift"; sourceTree = "<group>"; };
@@ -2260,7 +2258,6 @@
 		3AFD393B20D9333500FDC7D0 /* cards */ = {
 			isa = PBXGroup;
 			children = (
-				3ACF474122980F2C0096860D /* TKUICardAction.swift */,
 				3ACF471C2297F9F10096860D /* TKUIDeparturesCard.swift */,
 				3ACF473B229800A70096860D /* TKUIDeparturesCard+Configuration.swift */,
 				3ACF47192297F9F00096860D /* TKUIDeparturesCard+Content.swift */,
@@ -3306,7 +3303,6 @@
 				3A383CB1223008AE00361596 /* TKUISegmentInstructionsView.swift in Sources */,
 				3A7013AE22413A1100F07756 /* TKUISegmentTitleView+TKSegment.swift in Sources */,
 				3AFD394D20D9333500FDC7D0 /* TKUIResultsViewModel.swift in Sources */,
-				3ACF474222980F2C0096860D /* TKUICardAction.swift in Sources */,
 				3ACF473A2297FFDD0096860D /* TKUIServiceVisitCell.swift in Sources */,
 				3A39757D22857D750094F883 /* TKUIModeAnnotationView.swift in Sources */,
 				3ACF474522980FCB0096860D /* TKUIDeparturesAccessoryView.swift in Sources */,

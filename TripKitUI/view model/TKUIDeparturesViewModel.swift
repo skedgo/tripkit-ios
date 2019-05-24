@@ -35,7 +35,6 @@ public class TKUIDeparturesViewModel: NSObject {
     showAlerts: Signal<Item>,
     filter: Driver<String>,
     date: Driver<Date>,
-    toggleFavorite: Signal<Void>,
     refresh: Signal<Void>,
     loadMoreAfter: Signal<Item>
   )

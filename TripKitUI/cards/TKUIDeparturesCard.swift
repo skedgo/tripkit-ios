@@ -171,9 +171,8 @@ public class TKUIDeparturesCard : TGTableCard {
     let input: TKUIDeparturesViewModel.UIInput = (
       selected: tableView.rx.modelSelected(TKUIDeparturesViewModel.Item.self).asSignal(),
       showAlerts: cellAlertPublisher.asSignal(onErrorSignalWith: .empty()),
-      filter: .empty(), // TODO
+      filter: .empty(),
       date: datePublisher.asDriver(onErrorDriveWith: .empty()),
-      toggleFavorite: accessoryView.favoriteButton.rx.tap.asSignal(),
       refresh: .empty(),
       loadMoreAfter: loadMoreAfter
     )
@@ -215,7 +214,14 @@ public class TKUIDeparturesCard : TGTableCard {
     
     // TODO: Add viewModel.error
 
-    
+    let actions: [TKUIDeparturesCardAction]
+    if let factory = TKUIDeparturesCard.config.departuresActionsFactory {
+      actions = factory(viewModel.departureStops)
+    } else {
+      actions = []
+    }
+    accessoryView.setCustomActions(actions, for: viewModel.departureStops, card: self)
+
     // Interactions
 
     accessoryView.timeButton.rx.tap
