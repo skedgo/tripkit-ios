@@ -57,12 +57,6 @@
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "%@에서";
 
-/* No comment provided by engineer. */
-"Book with FlitWays" = "FlitWays에서 예약";
-
-/* No comment provided by engineer. */
-"Book with Uber" = "우버 예약하기";
-
 /* Placeholder title while calculating trips */
 "Calculating trips..." = "일정을 불러오고 있습니다.";
 
