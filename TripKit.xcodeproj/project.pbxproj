@@ -235,7 +235,6 @@
 		3AA3CE69202CD25700E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
 		3AA3CE6A202CD25700E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
 		3AA3CE6B202CD25700E54859 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5F202CD22F00E54859 /* RxSwift.framework */; };
-		3AA3CE6E202CD25700E54859 /* ASPolylineView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE6C202CD25700E54859 /* ASPolylineView.framework */; };
 		3AA3CE6F202CD25700E54859 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE6D202CD25700E54859 /* Kingfisher.framework */; };
 		3AA3CE70202CD26800E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
 		3AA3CE71202CD26800E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
@@ -1034,7 +1033,6 @@
 		3AA3CE63202CD24100E54859 /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = Carthage/Build/Mac/ASPolygonKit.framework; sourceTree = "<group>"; };
 		3AA3CE64202CD24100E54859 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
 		3AA3CE65202CD24100E54859 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
-		3AA3CE6C202CD25700E54859 /* ASPolylineView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolylineView.framework; path = Carthage/Build/iOS/ASPolylineView.framework; sourceTree = "<group>"; };
 		3AA3CE6D202CD25700E54859 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		3AA3CE80202CD2A700E54859 /* Cartfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Cartfile; sourceTree = "<group>"; };
 		3AA3CE84202CD4D100E54859 /* TKTTPifierTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTTPifierTest.swift; sourceTree = "<group>"; };
@@ -1368,7 +1366,6 @@
 			files = (
 				3A9A5222224A824800AC0FB5 /* RxDataSources.framework in Frameworks */,
 				3AA3CE69202CD25700E54859 /* ASPolygonKit.framework in Frameworks */,
-				3AA3CE6E202CD25700E54859 /* ASPolylineView.framework in Frameworks */,
 				3A9A5223224A825600AC0FB5 /* Differentiator.framework in Frameworks */,
 				3A8B15B32282D13A005D7314 /* RxRelay.framework in Frameworks */,
 				3AA3CE6F202CD25700E54859 /* Kingfisher.framework in Frameworks */,
@@ -2372,7 +2369,6 @@
 				3AE194E3202DE32D0007B49B /* RxBlocking.framework */,
 				3AE194E4202DE32E0007B49B /* RxTest.framework */,
 				3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */,
-				3AA3CE6C202CD25700E54859 /* ASPolylineView.framework */,
 				3AA3CE63202CD24100E54859 /* ASPolygonKit.framework */,
 				3AA3CE6D202CD25700E54859 /* Kingfisher.framework */,
 				3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */,
@@ -2845,7 +2841,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ASPolygonKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ASPolylineView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
@@ -2859,7 +2854,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolygonKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolylineView.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxDataSources.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",

@@ -21,7 +21,6 @@ Pod::Spec.new do |s|
 
   s.dependency 'TripKit', "~> #{s.version}"
 
-  s.dependency 'ASPolylineView'
   s.dependency 'Kingfisher'
   s.dependency 'RxSwift', '~> 4.0.0'
   s.dependency 'RxCocoa', '~> 4.0.0'
