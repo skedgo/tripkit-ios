@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitUI"
-  s.version      = "3.1.1"
+  s.version      = "4.0.0-beta"
   s.summary      = "SkedGo's TripKitUI"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = 'Apache License, Version 2.0'
@@ -21,10 +21,10 @@ Pod::Spec.new do |s|
 
   s.dependency 'TripKit', "~> #{s.version}"
 
-  s.dependency 'Kingfisher'
-  s.dependency 'RxSwift', '~> 4.0.0'
-  s.dependency 'RxCocoa', '~> 4.0.0'
-  s.dependency 'RxDataSources', '~> 3.0.0'
+  s.dependency 'Kingfisher', '~> 5.4'
+  s.dependency 'RxSwift', '~> 5.0'
+  s.dependency 'RxCocoa', '~> 5.0'
+  s.dependency 'RxDataSources', '~> 4.0'
 
   s.dependency 'TGCardViewController'
 

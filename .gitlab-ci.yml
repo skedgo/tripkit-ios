@@ -1,5 +1,6 @@
 stages:
   - build
+  - examples
   - code_quality
 
 variables:
@@ -68,6 +69,22 @@ build_mac_base:
   artifacts:
     paths:
     - build/reports/build_macos.html
+  tags:
+    - ios
+
+build_minimap_example:
+  stage: examples
+  script:
+    - cd Examples/MiniMap
+    - pod install
+    - xcodebuild build -workspace MiniMap.xcworkspace -scheme MiniMap ONLY_ACTIVE_ARCH=NO | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+  cache:
+    key: "$CI_BUILD_REF_NAME" # per-branch caching
+    paths:
+      - Examples/MiniMap/Pods
+  artifacts:
+    paths:
+    - build/reports/examples_minimap.html
   tags:
     - ios
 

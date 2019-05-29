@@ -11,7 +11,7 @@ import Foundation
 extension TKCoreDataParserHelper {
   
   @objc(configureVisit:fromShapeStopDict:timesRelativeToDate:)
-  static func configure(_ visit: StopVisits, fromShapeStopDict dict: [String: Any], timesRelativeTo relative: Date?) {
+  public static func configure(_ visit: StopVisits, fromShapeStopDict dict: [String: Any], timesRelativeTo relative: Date?) {
     
     precondition((visit.service as Service?) != nil)
     precondition((visit.index as NSNumber?) != nil)
