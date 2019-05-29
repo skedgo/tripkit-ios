@@ -65,6 +65,9 @@ public class TKUIAutocompletionViewController: UITableViewController {
         }
         cell.configure(with: item, onAccessoryTapped: self.showAccessoryButtons ? self.accessoryTapped : nil)
         return cell
+      },
+      titleForHeaderInSection: { ds, index in
+        return ds.sectionModels[index].title
       }
     )
     
@@ -73,8 +76,8 @@ public class TKUIAutocompletionViewController: UITableViewController {
     viewModel = TKUIAutocompletionViewModel(
       providers: providers,
       searchText: searchText,
-      selected: tableView.rx.itemSelected.map { dataSource[$0] },
-      accessorySelected: accessoryTapped,
+      selected: tableView.rx.itemSelected.map { dataSource[$0] }.asSignal(onErrorSignalWith: .empty()),
+      accessorySelected: accessoryTapped.asSignal(onErrorSignalWith: .empty()),
       biasMapRect: biasMapRect
     )
     
@@ -83,19 +86,38 @@ public class TKUIAutocompletionViewController: UITableViewController {
       .disposed(by: disposeBag)
     
     viewModel.selection
-      .drive(onNext: { [weak self] annotation in
+      .emit(onNext: { [weak self] annotation in
         guard let self = self else { return }
         self.delegate?.autocompleter(self, didSelect: annotation)
       })
       .disposed(by: disposeBag)
 
     viewModel.accessorySelection
-      .drive(onNext: { [weak self] annotation in
+      .emit(onNext: { [weak self] annotation in
         guard let self = self else { return }
         self.delegate?.autocompleter(self, didSelectAccessoryFor: annotation)
       })
       .disposed(by: disposeBag)
+    
+    viewModel.triggerAction
+      .asObservable()
+      .flatMapLatest { $0.triggerAdditional(presenter: self).asObservable() }
+      .subscribe(onNext: { result in
+        print(result)
+      })
+      .disposed(by: disposeBag)
   }
+}
+
+extension TKUIAutocompletionViewController {
+  
+  public override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.y > 40, !scrollView.isDecelerating {
+      // we are actively scrolling a fair bit => disable the keyboard
+      (parent as? UISearchController)?.searchBar.resignFirstResponder()
+    }
+  }
+  
 }
 
 extension TKUIAutocompletionViewController: UISearchResultsUpdating {

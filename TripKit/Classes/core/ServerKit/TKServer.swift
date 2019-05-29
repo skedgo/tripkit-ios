@@ -38,8 +38,7 @@ extension TKServer {
   }
   
   @objc(imageURLForIconFileNamePart:ofIconType:)
-  @available(*, deprecated, renamed: "imageURL(iconFileNamePart:iconType:)")
-  public static func imageURL(forIconFileNamePart fileNamePart: String, of iconType: TKStyleModeIconType) -> URL? {
+  public static func _imageURL(forIconFileNamePart fileNamePart: String, of iconType: TKStyleModeIconType) -> URL? {
     return imageURL(iconFileNamePart: fileNamePart, iconType: iconType)
   }
 

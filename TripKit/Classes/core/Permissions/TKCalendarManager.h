@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) EKEventStore *eventStore;
 
+@property (nonatomic, strong, nullable) id helperGeocoder;
+
 + (NSString *)titleStringForEvent:(EKEvent *)event;
 
 - (NSArray<EKEvent *> *)fetchEventsMatchingString:(NSString *)string;

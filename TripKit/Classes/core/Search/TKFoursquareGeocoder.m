@@ -41,7 +41,7 @@
   return self;
 }
 
-#pragma mark - TKBaseGeocoder
+#pragma mark - SGDeprecatedGeocoder
 
 - (void)geocodeString:(NSString *)inputString
            nearRegion:(MKMapRect)mapRect
@@ -84,7 +84,7 @@
  }];
 }
 
-#pragma mark - SGAutocompletionDataProvider
+#pragma mark - SGDeprecatedAutocompletionDataProvider
 
 - (void)autocompleteSlowly:(NSString *)string
                 forMapRect:(MKMapRect)mapRect
@@ -246,8 +246,8 @@
   }
   
   NSUInteger max = asAutocompletionResult ? 5 : 10;
-  NSArray *filtered = [TKBaseGeocoder mergedAndPruned:coordinates
-                                          withMaximum:max];
+  NSArray *filtered = [TKGeocoderHelper mergedAndPruned:coordinates
+                                            withMaximum:max];
   
   if (asAutocompletionResult) {
     NSMutableArray *results = [NSMutableArray arrayWithCapacity:filtered.count];

@@ -12,21 +12,13 @@ import Foundation
 
 extension Service {
   
-  convenience init(into context: NSManagedObjectContext) {
-    if #available(iOS 10.0, macOS 10.12, *) {
-      self.init(context: context)
-    } else {
-      self.init(entity: NSEntityDescription.entity(forEntityName: "Service", in: context)!, insertInto: context)
-    }
-  }
-  
   @objc(fetchOrInsertServiceWithCode:inTripKitContext:)
   public static func fetchOrInsert(code: String, in context: NSManagedObjectContext) -> Service {
     if let existing = fetchExistingService(code: code, in: context) {
       return existing
     }
     
-    let service = Service(into: context)
+    let service = Service(context: context)
     service.code = code
     return service
   }

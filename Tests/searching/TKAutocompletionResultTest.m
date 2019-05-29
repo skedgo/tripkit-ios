@@ -48,7 +48,7 @@
   XCTAssertEqual(score, 75 - 8*2 - 8); // penalty for not matching start
   
   score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"PCHome"];
-  XCTAssertEqual(score, 40 - 2); // penalty for not matching start of word
+  XCTAssertEqual(score, 25 - 2); // penalty for not matching start of word
   
   score = [TKAutocompletionResult scoreBasedOnNameMatchBetweenSearchTerm:searchTerm candidate:@"hxoxmxex"];
   XCTAssertEqual(score, 0);

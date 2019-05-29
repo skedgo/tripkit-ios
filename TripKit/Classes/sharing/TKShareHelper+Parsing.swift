@@ -37,7 +37,7 @@ public extension TKShareHelper {
   /// Extracts the query details from a TripGo API-compatible deep link
   /// - parameter url: TripGo API-compatible deep link
   /// - parameter geocoder: Geocoder used for filling in missing information
-  static func queryDetails(for url: URL, using geocoder: SGGeocoder) -> Single<QueryDetails> {
+  static func queryDetails(for url: URL, using geocoder: TKGeocoding) -> Single<QueryDetails> {
     
     guard
       let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
@@ -157,7 +157,7 @@ extension TKShareHelper.QueryDetails {
 
 public extension TKShareHelper {
 
-  static func meetingDetails(for url: URL, using geocoder: SGGeocoder) -> Single<QueryDetails> {
+  static func meetingDetails(for url: URL, using geocoder: TKGeocoding) -> Single<QueryDetails> {
     guard
       let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
       let items = components.queryItems
@@ -272,7 +272,7 @@ extension Array where Element == URLQueryItem {
 extension MKAnnotation {
   
   /// A Single passing back `self` if its coordinate is valid or it could get geocoded.
-  public func rx_valid(geocoder: SGGeocoder) -> Single<MKAnnotation> {
+  public func rx_valid(geocoder: TKGeocoding) -> Single<MKAnnotation> {
     if coordinate.isValid {
       return .just(self)
     }
@@ -281,17 +281,10 @@ extension MKAnnotation {
       return .error(TKShareHelper.ExtractionError.invalidCoordinate)
     }
     
-    return Single.create() { observer in
-      TKBaseGeocoder.geocode(geocodable, using: geocoder, near: .world) { (result: TKBaseGeocoder.Result) -> Void in
-        switch result {
-        case .success:
-          observer(.success(self))
-        case .error(let error):
-          observer(.error(error))
-        }
-      }
-      return Disposables.create()
-    }
+    return TKGeocoderHelper.geocode(geocodable, using: geocoder, near: .world)
+      .asObservable()
+      .compactMap { [weak self] _ in self }
+      .asSingle()
   }
   
 }

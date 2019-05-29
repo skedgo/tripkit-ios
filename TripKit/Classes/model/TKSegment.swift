@@ -268,7 +268,10 @@ extension TKSegment: TKTripSegment {
   public var tripSegmentModeImageIsTemplate: Bool {
     return modeInfo?.remoteImageIsTemplate ?? false
   }
-
+  
+  public var tripSegmentModeImageIsBranding: Bool {
+    return modeInfo?.remoteImageIsBranding ?? false
+  }
   
   public var tripSegmentModeInfoIconType: TKInfoIconType {
     let modeAlerts = alerts()

@@ -19,7 +19,7 @@
 {
   ZAssert(nil != placemark, @"Placemark can't be nil.");
   
-  NSString *postalAddress = [self postalAddressForPlacemark:placemark];
+  NSString *postalAddress = [TKAddressFormatter singleLineAddressStringForPlacemark:placemark];
   if (postalAddress != nil) {
     return postalAddress;
   }

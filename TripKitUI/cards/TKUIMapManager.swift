@@ -347,7 +347,7 @@ extension TKUIMapManager {
     return builder.build()
   }
   
-  /// Helper to have weak refernences for renderers
+  /// Helper to have weak references for renderers
   private struct WeakRenderers {
     weak var renderer: TKUIPolylineRenderer?
   }
