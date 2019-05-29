@@ -173,7 +173,7 @@
                      min:33];
     } else {
       // in-word match
-      return [self score:40 penalty:excess min:15];
+      return [self score:25 penalty:excess min:5];
     }
   }
   

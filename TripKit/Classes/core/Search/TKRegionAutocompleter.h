@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SGAutocompletionDataProvider.h"
-#import "TKBaseGeocoder.h"
+#import "SGDeprecatedAutocompletionDataProvider.h"
 
-@interface TKRegionAutocompleter : TKBaseGeocoder <SGAutocompletionDataProvider>
+@interface TKRegionAutocompleter : NSObject <SGDeprecatedAutocompletionDataProvider>
 
 @end

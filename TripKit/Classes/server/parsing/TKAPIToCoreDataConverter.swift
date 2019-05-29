@@ -72,7 +72,7 @@ extension TKAPIToCoreDataConverter {
 
 extension Service {
   convenience init(from model: API.Departure, into context: NSManagedObjectContext) {
-    self.init(into: context)
+    self.init(context: context)
 //    update(from: model)
 //  }
 //
@@ -118,13 +118,7 @@ extension Service {
   func addVisits<E: StopVisits>(_ visitType: E.Type, from model: API.Departure, at stop: StopLocation) -> E? {
     guard let context = managedObjectContext else { return nil }
     
-    let visit: E
-    if #available(iOS 10.0, macOS 10.12, *) {
-      visit = E(context: context)
-    } else {
-      let entityName = (visitType == DLSEntry.self) ? "DLSEntry" : "StopVisits"
-      visit = E(entity: NSEntityDescription.entity(forEntityName: entityName, in: context)!, insertInto: context)
-    }
+    let visit = E(context: context)
 
     // Prefer real-time data all fall back to timetable data
     if let departure = (model.realTimeDeparture ?? model.startTime) {
@@ -203,11 +197,7 @@ extension TKAPIToCoreDataConverter {
 extension Alert {
   
   convenience init(from model: API.Alert, into context: NSManagedObjectContext) {
-    if #available(iOS 10.0, macOS 10.12, *) {
-      self.init(context: context)
-    } else {
-      self.init(entity: NSEntityDescription.entity(forEntityName: "Alert", in: context)!, insertInto: context)
-    }
+    self.init(context: context)
     
     hashCode = NSNumber(value: model.hashCode)
     title = model.title
@@ -273,11 +263,7 @@ extension TKAPIToCoreDataConverter {
 extension Vehicle {
   
   fileprivate convenience init(from model: API.Vehicle, into context: NSManagedObjectContext) {
-    if #available(iOS 10.0, macOS 10.12, *) {
-      self.init(context: context)
-    } else {
-      self.init(entity: NSEntityDescription.entity(forEntityName: "Vehicle", in: context)!, insertInto: context)
-    }
+    self.init(context: context)
     update(with: model)
   }
   

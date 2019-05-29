@@ -13,7 +13,6 @@ import UIKit
   import TripKit
 #endif
 
-@available(iOS 9.0, *)
 extension API.VehicleOccupancy {
   
   var icon: UIImage? {
@@ -43,7 +42,6 @@ extension API.VehicleOccupancy {
 @available(*, unavailable, renamed: "TKUIOccupancyView")
 public typealias TKOccupancyView = TKUIOccupancyView
 
-@available(iOS 9.0, *)
 public class TKUIOccupancyView: UIView {
   
   public weak var icon: UIImageView!
@@ -96,7 +94,6 @@ public class TKUIOccupancyView: UIView {
 
 }
 
-@available(iOS 9.0, *)
 extension TKUIOccupancyView {
   
   public enum Purpose {

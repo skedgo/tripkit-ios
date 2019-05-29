@@ -8,6 +8,8 @@
 import Foundation
 import MapKit
 
+import RxSwift
+
 @available(*, unavailable, renamed: "TKPeliasGeocoder")
 public typealias TKMapZenGeocoder = TKPeliasGeocoder
 
@@ -22,29 +24,21 @@ public class TKPeliasGeocoder: NSObject {
     case failure(Error?)
   }
   
-  private func hitSearch(_ components: URLComponents?, completion: @escaping (Result) -> Void) {
+  private func hitSearch(_ components: URLComponents?) -> Single<[TKNamedCoordinate]> {
     
     guard let url = components?.url else {
       assertionFailure("Couldn't construct MapZen query URL. Check the code.")
-      return
+      return .just([])
     }
     
     var request = URLRequest(url: url)
     request.addValue(TKServer.shared.apiKey, forHTTPHeaderField: "X-TripGo-Key")
-    let task = URLSession.shared.dataTask(with: request) { data, response, error in
-      
-      if let data = data {
-        do {
-          let coordinates = try TKPeliasGeocoder.parse(data: data)
-          completion(.success(coordinates))
-        } catch {
-          completion(.failure(error))
-        }
-      } else {
-        completion(.failure(error))
+    
+    return URLSession.shared.rx.data(request: request)
+      .map { data in
+        return try TKPeliasGeocoder.parse(data: data)
       }
-    }
-    task.resume()
+      .asSingle()
   }
   
   private static func parse(data: Data) throws -> [TKNamedCoordinate] {
@@ -56,74 +50,63 @@ public class TKPeliasGeocoder: NSObject {
   
 }
 
-extension TKPeliasGeocoder: SGGeocoder {
+extension TKPeliasGeocoder: TKGeocoding {
   
-  public func geocodeString(_ inputString: String, nearRegion mapRect: MKMapRect, success: @escaping SGGeocoderSuccessBlock, failure: SGGeocoderFailureBlock? = nil) {
+  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
     
-    guard !inputString.isEmpty else {
-      success(inputString, [])
-      return
+    guard !input.isEmpty else {
+      return .just([])
     }
     
     let region = MKCoordinateRegion(mapRect)
     var components = URLComponents(string: "https://pelias.tripgo.com/v1/search")
     components?.queryItems = [
-      URLQueryItem(name: "text", value: inputString),
+      URLQueryItem(name: "text", value: input),
       URLQueryItem(name: "focus.point.lat", value: String(region.center.latitude)),
       URLQueryItem(name: "focus.point.lon", value: String(region.center.longitude)),
     ]
     
-    hitSearch(components) { result in
-      switch result {
-      case .success(let coordinates):
-        coordinates.forEach { $0.setScore(searchTerm: inputString, near: region) }
-        let pruned = TKBaseGeocoder.mergedAndPruned(coordinates, withMaximum: 10)
-        success(inputString, pruned)
-      case .failure(let error):
-        failure?(inputString, error)
+    return hitSearch(components)
+      .map { coordinates in
+        coordinates.forEach { $0.setScore(searchTerm: input, near: region) }
+        return TKGeocoderHelper.mergedAndPruned(coordinates, withMaximum: 10)
       }
-    }
   }
   
 }
 
-extension TKPeliasGeocoder: SGAutocompletionDataProvider {
+extension TKPeliasGeocoder: TKAutocompleting {
   
-  public func autocompleteSlowly(_ string: String, for mapRect: MKMapRect, completion: @escaping SGAutocompletionDataResultBlock) {
-    
-    guard !string.isEmpty else {
-      completion([])
-      return
+  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
+
+    guard !input.isEmpty else {
+      return .just([])
     }
 
     let region = MKCoordinateRegion(mapRect)
     var components = URLComponents(string: "https://pelias.tripgo.com/v1/autocomplete")
     components?.queryItems = [
-      URLQueryItem(name: "text", value: string),
+      URLQueryItem(name: "text", value: input),
       URLQueryItem(name: "focus.point.lat", value: String(region.center.latitude)),
       URLQueryItem(name: "focus.point.lon", value: String(region.center.longitude)),
     ]
     
-    hitSearch(components) { result in
-      switch result {
-      case .success(let coordinates):
-        coordinates.forEach { $0.setScore(searchTerm: string, near: region) }
+    return hitSearch(components)
+      .map { coordinates in
+        coordinates.forEach { $0.setScore(searchTerm: input, near: region) }
         
-        // MapZen likes coming back with similar locations near each
+        // Pelias likes coming back with similar locations near each
         // other, so we cluster them.
         let clusters = TKAnnotationClusterer.cluster(coordinates)
         let unique = clusters.compactMap(TKNamedCoordinate.namedCoordinate(for:))
-        
-        let pruned = TKBaseGeocoder.mergedAndPruned(unique, withMaximum: 7)
-        completion(pruned.map(TKAutocompletionResult.init))
-      case .failure(_):
-        completion(nil)
+        let pruned = TKGeocoderHelper.mergedAndPruned(unique, withMaximum: 7)
+        return pruned.map(TKAutocompletionResult.init)
       }
-    }
   }
   
-  public func annotation(for result: TKAutocompletionResult) -> MKAnnotation? {
-    return result.object as? TKNamedCoordinate
+  public func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
+    guard let coordinate = result.object as? TKNamedCoordinate else { preconditionFailure() }
+    return .just(coordinate)
   }
   
 }

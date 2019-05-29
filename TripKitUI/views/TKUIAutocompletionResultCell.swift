@@ -32,15 +32,25 @@ extension TKUIAutocompletionResultCell {
   func configure(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: PublishSubject<TKUIAutocompletionViewModel.Item>?) {
     disposeBag = DisposeBag()
     
-    imageView?.image = item.image
-    imageView?.tintColor = #colorLiteral(red: 0.8500000238, green: 0.8500000238, blue: 0.8500000238, alpha: 1) // From SkedGo default icons
-    textLabel?.text = item.title
-    textLabel?.textColor = TKStyleManager.darkTextColor()
-    detailTextLabel?.text = item.subtitle
-    detailTextLabel?.textColor = TKStyleManager.lightTextColor()
-    contentView.alpha = item.showFaded ? 0.33 : 1
+    switch item {
+    case .action: configureAction(with: item)
+    case .autocompletion: configureAutocompletion(with: item, onAccessoryTapped: onAccessoryTapped)
+    }
+
+  }
+  
+  private func configureAutocompletion(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: PublishSubject<TKUIAutocompletionViewModel.Item>?) {
+    guard case .autocompletion(let autocompletion) = item else { assertionFailure(); return  }
     
-    if let accessoryImage = item.accessoryImage, let target = onAccessoryTapped {
+    imageView?.image = autocompletion.image
+    imageView?.tintColor = #colorLiteral(red: 0.8500000238, green: 0.8500000238, blue: 0.8500000238, alpha: 1) // From SkedGo default icons
+    textLabel?.text = autocompletion.title
+    textLabel?.textColor = TKStyleManager.darkTextColor()
+    detailTextLabel?.text = autocompletion.subtitle
+    detailTextLabel?.textColor = TKStyleManager.lightTextColor()
+    contentView.alpha = autocompletion.showFaded ? 0.33 : 1
+    
+    if let accessoryImage = autocompletion.accessoryImage, let target = onAccessoryTapped {
       let button = TKStyleManager.cellAccessoryButton(with: accessoryImage, target: nil, action: nil)
       button.rx.tap
         .map { _ in item }
@@ -50,7 +60,18 @@ extension TKUIAutocompletionResultCell {
     } else {
       accessoryView = nil
     }
-
+    
+  }
+  
+  private func configureAction(with item: TKUIAutocompletionViewModel.Item) {
+    guard case .action(let action) = item else { assertionFailure(); return  }
+    
+    imageView?.image = nil
+    textLabel?.text = action.title
+    textLabel?.textColor = TKStyleManager.darkTextColor()
+    detailTextLabel?.text = nil
+    contentView.alpha = 1
+    accessoryView = nil
   }
   
 }

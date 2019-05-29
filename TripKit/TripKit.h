@@ -84,16 +84,16 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKTrackHelper.h"
 
 // Search
-#import "SGAutocompletionDataProvider.h"
-#import "SGAutocompletionDataSource.h"
 #import "TKAutocompletionResult.h"
-#import "TKBaseGeocoder.h"
 #import "TKSkedGoGeocoder.h"
 #import "TKFoursquareGeocoder.h"
 #import "TKRegionAutocompleter.h"
-#import "SGSearchDataSource.h"
 
 // Permissions
-#import "TKAddressBookManager.h"
 #import "TKCalendarManager.h"
 #import "TKLocationManager.h"
+
+// Deprecated
+#import "SGSearchDataSource.h"
+#import "SGDeprecatedAutocompletionDataProvider.h"
+#import "SGAutocompletionDataSource.h"

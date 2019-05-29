@@ -1,12 +1,37 @@
 //
-//  TKBaseGeocoder.swift
+//  TKGeocoderHelper.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 27/11/2015.
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-extension TKBaseGeocoder {
+import RxSwift
+
+extension TKGeocoding {
+  
+  public func geocode(_ object: TKGeocodable, near region: MKMapRect) -> Single<Bool> {
+    
+    return TKGeocoderHelper.geocode(object, using: self, near: region)
+      .map { true }
+      .catchErrorJustReturn(false)
+  }
+  
+}
+
+public class TKGeocoderHelper: NSObject {
+
+  public static var preferredGeocoder: TKGeocoding = {
+    if #available(iOSApplicationExtension 9.3, *) {
+      return TKAppleGeocoder()
+    } else {
+      return TKPeliasGeocoder()
+    }
+  }()
+  
+  private override init() {
+    super.init()
+  }
   
   public enum GeocodingError: Error {
     case missingAddress
@@ -14,46 +39,29 @@ extension TKBaseGeocoder {
     case unknownServerError(String)
   }
   
-  public enum Result {
-    case success
-    case error(Swift.Error)
-  }
-
-  @objc public class func mergedAndPruned(_ input:[TKNamedCoordinate], withMaximum max: Int) -> [TKNamedCoordinate] {
-    return input.deduplicated().pruned(maximum: max)
+  @objc(errorForNoLocationFoundForInput:)
+  public static func errorForNoLocationFound(forInput input: String) -> Error {
+    let format = NSLocalizedString("'%@' not found.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Error when location search for %input was not successful. (old key: RequestErrorFormat)")
+    let message = String(format: format, input)
+    return NSError(code: 64720, message: message)
   }
   
-  @objc public class func pruned(_ input:[TKAutocompletionResult], withMaximum max: Int) -> [TKAutocompletionResult] {
-    return input.pruned(maximum: max) { $0.score }
+  public class func geocodeUsingPreferredGeocoder(_ object: TKGeocodable, near region: MKMapRect) -> Single<Void> {
+    return self.geocode(object, using: preferredGeocoder, near: region)
   }
   
-  @objc(geocodeObject:usingGeocoder:nearRegion:completion:)
-  public class func geocode(_ object: TKGeocodable, using geocoder: SGGeocoder, near region: MKMapRect, completion: @escaping (Bool) -> Void) {
-    return geocode(object, using: geocoder, near: region) { (result: Result) -> Void in
-      switch result {
-      case .success: completion(true)
-      case .error: completion(false)
-      }
-    }
-  }
-
-  
-  public class func geocode(_ object: TKGeocodable, using geocoder: SGGeocoder, near region: MKMapRect, completion: @escaping (Result) -> Void) {
+  public class func geocode(_ object: TKGeocodable, using geocoder: TKGeocoding, near region: MKMapRect) -> Single<Void> {
     
     guard let address = object.addressForGeocoding, !address.isEmpty else {
-      completion(.error(GeocodingError.missingAddress))
-      return
+      return .error(GeocodingError.missingAddress)
     }
     
-    geocoder.geocodeString(address, nearRegion: region,
-                           success:
-      { query, results in
-        guard !results.isEmpty else {
-          completion(.error(GeocodingError.serverFoundNoMatch(query)))
-          return
+    return geocoder.geocode(address, near: region)
+      .map { results in
+        guard let best = TKGeocoderHelper.pickBest(from: results) else {
+          throw GeocodingError.serverFoundNoMatch(address)
         }
         
-        let best = TKBaseGeocoder.pickBest(fromResults: results)
 
         // The objects stored in the objectsToBeGeocoded dictionary do
         // not have coordinate values assigned (e.g., a location from
@@ -65,22 +73,43 @@ extension TKBaseGeocoder {
         // the reverse geocoding returns the updated address matching
         // the coordinate.
         object.assign(best.coordinate, forAddress: address)
-        completion(.success)
         
-      },
-                           failure:
-      { query, error in
-        if let error = error {
-          completion(.error(error))
-        } else {
-          completion(.error(GeocodingError.unknownServerError(query)))
-        }
-      })
+        return ()
+      }
+  }
+  
+  @objc(pickBestFromResults:)
+  public class func pickBest(from results: [MKAnnotation]) -> MKAnnotation? {
+    if results.count == 0 {
+      return nil
+    
+    } else if results.count == 1, let first = results.first {
+      return first
+    
+    } else {
+      return results
+        .compactMap { $0 as? TKSortableAnnotation }
+        .sorted { return $0.sortScore > $1.sortScore }
+        .first
+        ?? results.first // if not sortable, pick first
+    }
     
   }
   
 }
 
+// MARK: - Merging and pruning
+
+extension TKGeocoderHelper {
+  @objc public class func mergedAndPruned(_ input:[TKNamedCoordinate], withMaximum max: Int) -> [TKNamedCoordinate] {
+    return input.deduplicated().pruned(maximum: max)
+  }
+  
+  @objc public class func pruned(_ input:[TKAutocompletionResult], withMaximum max: Int) -> [TKAutocompletionResult] {
+    return input.pruned(maximum: max) { $0.score }
+  }
+}
+  
 extension TKNamedCoordinate {
   fileprivate func merge(_ other: TKNamedCoordinate) {
     sortScore = sortScore + min(10, other.sortScore)

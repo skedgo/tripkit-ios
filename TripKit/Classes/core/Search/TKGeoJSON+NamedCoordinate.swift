@@ -32,8 +32,6 @@ extension TKPeliasProperties {
   }
   
   fileprivate var subtitle: String? {
-    guard #available(iOS 9.0, macOS 10.11, *) else { return label }
-    
     let address = CNMutablePostalAddress()
     address.isoCountryCode = country_a ?? ""
     address.country = country ?? ""
@@ -58,8 +56,7 @@ extension TKPeliasProperties {
     if title.contains(address.street) {
       address.street = ""
     }
-    let formatted = CNPostalAddressFormatter.string(from: address, style: .mailingAddress).replacingOccurrences(of: "\n", with: ", ")
-    
+    let formatted = TKAddressFormatter.singleLineAddress(for: address)
     return formatted.isEmpty ? label : formatted
   }
 }

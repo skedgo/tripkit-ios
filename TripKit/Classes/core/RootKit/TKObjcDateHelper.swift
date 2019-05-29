@@ -9,7 +9,7 @@
 import Foundation
 
 @objc(TKObjcDateHelper)
-public class DontUseThisFromSwiftTKObjcDateHelper: NSObject {
+public class _TKObjcDateHelper: NSObject {
   
   @objc
   public static func durationString(forSeconds seconds: TimeInterval) -> String {
