@@ -617,6 +617,19 @@
 		3ACF474522980FCB0096860D /* TKUIDeparturesAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF474322980FCB0096860D /* TKUIDeparturesAccessoryView.swift */; };
 		3ACF474622980FCB0096860D /* TKUIDeparturesAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF474422980FCB0096860D /* TKUIDeparturesAccessoryView.xib */; };
 		3ACF474822981FF40096860D /* TGCardViewController+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF474722981FF40096860D /* TGCardViewController+Present.swift */; };
+		3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A3229EEDFE0096860D /* AppDelegate.swift */; };
+		3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A5229EEDFE0096860D /* ViewController.swift */; };
+		3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47A7229EEDFE0096860D /* Main.storyboard */; };
+		3ACF47AB229EEDFF0096860D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47AA229EEDFF0096860D /* Assets.xcassets */; };
+		3ACF47AE229EEDFF0096860D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */; };
+		3ACF47B8229EF0890096860D /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5F202CD22F00E54859 /* RxSwift.framework */; };
+		3ACF47B9229EF08D0096860D /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8B15B12282D13A005D7314 /* RxRelay.framework */; };
+		3ACF47BA229EF0900096860D /* TGCardViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */; };
+		3ACF47BB229EF0930096860D /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F51242068C27200FB4CE1 /* Differentiator.framework */; };
+		3ACF47BC229EF0960096860D /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5221224A824800AC0FB5 /* RxDataSources.framework */; };
+		3ACF47BD229EF09B0096860D /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
+		3ACF47BE229EF09F0096860D /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
+		3ACF47BF229EF0A30096860D /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE6D202CD25700E54859 /* Kingfisher.framework */; };
 		3AD1DEA61F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */; };
 		3AD62B8E2243964C00069F4E /* TKModeInfo+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */; };
 		3AD8F19320E0E90F00E82E2E /* TKRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD8F19220E0E90F00E82E2E /* TKRealTime.swift */; };
@@ -836,6 +849,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3A1498D61F0FD33F0061A0D0;
 			remoteInfo = MiniMap;
+		};
+		3ACF47B4229EF0000096860D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3AB6C61F1D1CD0060089F687;
+			remoteInfo = "TripKit-iOS";
+		};
+		3ACF47B6229EF0000096860D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A6DF083202C8DA30084CB2C;
+			remoteInfo = "TripKitUI-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1195,8 +1222,6 @@
 		3AC9A0AC1F682B6E0050217E /* TKPeliasGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKPeliasGeocoder.swift; sourceTree = "<group>"; };
 		3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeoJSON.swift; sourceTree = "<group>"; };
 		3ACF46F62297E6E50096860D /* TKUIDeparturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIDeparturesViewController.swift; sourceTree = "<group>"; };
-		3ACF47002297EC820096860D /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
-		3ACF47012297EC820096860D /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		3ACF47032297EC820096860D /* MiniMap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MiniMap.xcodeproj; sourceTree = "<group>"; };
 		3ACF47062297EC820096860D /* MiniMap.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = MiniMap.xcworkspace; sourceTree = "<group>"; };
 		3ACF47082297EC820096860D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -1226,6 +1251,13 @@
 		3ACF474322980FCB0096860D /* TKUIDeparturesAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIDeparturesAccessoryView.swift; sourceTree = "<group>"; };
 		3ACF474422980FCB0096860D /* TKUIDeparturesAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIDeparturesAccessoryView.xib; sourceTree = "<group>"; };
 		3ACF474722981FF40096860D /* TGCardViewController+Present.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TGCardViewController+Present.swift"; sourceTree = "<group>"; };
+		3ACF47A1229EEDFE0096860D /* TripKitUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripKitUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ACF47A3229EEDFE0096860D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3ACF47A5229EEDFE0096860D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3ACF47A8229EEDFE0096860D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3ACF47AA229EEDFF0096860D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3ACF47AD229EEDFF0096860D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3ACF47AF229EEDFF0096860D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKGeoJSON+NamedCoordinate.swift"; sourceTree = "<group>"; };
 		3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKModeInfo+Image.swift"; sourceTree = "<group>"; };
 		3AD8F19220E0E90F00E82E2E /* TKRealTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRealTime.swift; sourceTree = "<group>"; };
@@ -1464,6 +1496,21 @@
 				3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */,
 				3AE194E5202DE32E0007B49B /* RxBlocking.framework in Frameworks */,
 				3AE194E6202DE32E0007B49B /* RxTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3ACF479E229EEDFE0096860D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ACF47B9229EF08D0096860D /* RxRelay.framework in Frameworks */,
+				3ACF47BA229EF0900096860D /* TGCardViewController.framework in Frameworks */,
+				3ACF47BF229EF0A30096860D /* Kingfisher.framework in Frameworks */,
+				3ACF47BE229EF09F0096860D /* RxCocoa.framework in Frameworks */,
+				3ACF47BC229EF0960096860D /* RxDataSources.framework in Frameworks */,
+				3ACF47BB229EF0930096860D /* Differentiator.framework in Frameworks */,
+				3ACF47BD229EF09B0096860D /* ASPolygonKit.framework in Frameworks */,
+				3ACF47B8229EF0890096860D /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1970,6 +2017,7 @@
 				3A6DF070202C8C6E0084CB2C /* TripKit.framework */,
 				3A6DF084202C8DA30084CB2C /* TripKitUI.framework */,
 				3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */,
+				3ACF47A1229EEDFE0096860D /* TripKitUIExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2187,19 +2235,10 @@
 		3ACF46FE2297EC820096860D /* Examples */ = {
 			isa = PBXGroup;
 			children = (
-				3ACF46FF2297EC820096860D /* Carthage */,
 				3ACF47022297EC820096860D /* MiniMap */,
+				3ACF47A2229EEDFE0096860D /* TripKitUIExample */,
 			);
 			path = Examples;
-			sourceTree = "<group>";
-		};
-		3ACF46FF2297EC820096860D /* Carthage */ = {
-			isa = PBXGroup;
-			children = (
-				3ACF47002297EC820096860D /* Cartfile.resolved */,
-				3ACF47012297EC820096860D /* Cartfile */,
-			);
-			path = Carthage;
 			sourceTree = "<group>";
 		};
 		3ACF47022297EC820096860D /* MiniMap */ = {
@@ -2246,6 +2285,19 @@
 				3ACF47372297FFDD0096860D /* TKUIServiceVisitCell.xib */,
 			);
 			path = cards;
+			sourceTree = "<group>";
+		};
+		3ACF47A2229EEDFE0096860D /* TripKitUIExample */ = {
+			isa = PBXGroup;
+			children = (
+				3ACF47A3229EEDFE0096860D /* AppDelegate.swift */,
+				3ACF47A5229EEDFE0096860D /* ViewController.swift */,
+				3ACF47A7229EEDFE0096860D /* Main.storyboard */,
+				3ACF47AA229EEDFF0096860D /* Assets.xcassets */,
+				3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */,
+				3ACF47AF229EEDFF0096860D /* Info.plist */,
+			);
+			path = TripKitUIExample;
 			sourceTree = "<group>";
 		};
 		3AEBBB0D20F4F3440035096F /* deprecated */ = {
@@ -2805,6 +2857,26 @@
 			productReference = 3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		3ACF47A0229EEDFE0096860D /* TripKitUIExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3ACF47B3229EEDFF0096860D /* Build configuration list for PBXNativeTarget "TripKitUIExample" */;
+			buildPhases = (
+				3ACF479D229EEDFE0096860D /* Sources */,
+				3ACF479E229EEDFE0096860D /* Frameworks */,
+				3ACF479F229EEDFE0096860D /* Resources */,
+				3ACF47C0229EF0C40096860D /* Copy Carthage Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3ACF47B5229EF0000096860D /* PBXTargetDependency */,
+				3ACF47B7229EF0000096860D /* PBXTargetDependency */,
+			);
+			name = TripKitUIExample;
+			productName = TripKitUIExample;
+			productReference = 3ACF47A1229EEDFE0096860D /* TripKitUIExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2812,7 +2884,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = TK;
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "SkedGo Pty Ltd";
 				TargetAttributes = {
@@ -2840,6 +2912,9 @@
 						DevelopmentTeam = JFT62W5LA3;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Manual;
+					};
+					3ACF47A0229EEDFE0096860D = {
+						CreatedOnToolsVersion = 10.2.1;
 					};
 				};
 			};
@@ -2880,6 +2955,7 @@
 				3A6DF083202C8DA30084CB2C /* TripKitUI-iOS */,
 				3A6DF166202C97F60084CB2C /* TripKitInterApp-iOS */,
 				3AB6C6291D1CD0060089F687 /* TripKitTests */,
+				3ACF47A0229EEDFE0096860D /* TripKitUIExample */,
 			);
 		};
 /* End PBXProject section */
@@ -2986,9 +3062,53 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3ACF479F229EEDFE0096860D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ACF47AE229EEDFF0096860D /* LaunchScreen.storyboard in Resources */,
+				3ACF47AB229EEDFF0096860D /* Assets.xcassets in Resources */,
+				3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3ACF47C0229EF0C40096860D /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxTest.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ASPolygonKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/TGCardViewController.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework",
+			);
+			name = "Copy Carthage Frameworks";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxTest.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolygonKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxDataSources.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TGCardViewController.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRelay.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 		3AE194E7202DE35E0007B49B /* Copy Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -3608,6 +3728,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3ACF479D229EEDFE0096860D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */,
+				3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3635,6 +3764,16 @@
 			isa = PBXTargetDependency;
 			target = 3AB6C61F1D1CD0060089F687 /* TripKit-iOS */;
 			targetProxy = 3AB6C62C1D1CD0060089F687 /* PBXContainerItemProxy */;
+		};
+		3ACF47B5229EF0000096860D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3AB6C61F1D1CD0060089F687 /* TripKit-iOS */;
+			targetProxy = 3ACF47B4229EF0000096860D /* PBXContainerItemProxy */;
+		};
+		3ACF47B7229EF0000096860D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A6DF083202C8DA30084CB2C /* TripKitUI-iOS */;
+			targetProxy = 3ACF47B6229EF0000096860D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3665,6 +3804,22 @@
 				3ACF470B2297EC820096860D /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3ACF47A7229EEDFE0096860D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3ACF47A8229EEDFE0096860D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3ACF47AD229EEDFF0096860D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		3AFFAB141F06849500147990 /* Shared.strings */ = {
@@ -4128,6 +4283,76 @@
 			};
 			name = Release;
 		};
+		3ACF47B0229EEDFF0096860D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JFT62W5LA3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Examples/TripKitUIExample/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skedgo.TripKitUIExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3ACF47B1229EEDFF0096860D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JFT62W5LA3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(SRCROOT)/Examples/TripKitUIExample/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skedgo.TripKitUIExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4181,6 +4406,15 @@
 			buildConfigurations = (
 				3AB6C6381D1CD0060089F687 /* Debug */,
 				3AB6C6391D1CD0060089F687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3ACF47B3229EEDFF0096860D /* Build configuration list for PBXNativeTarget "TripKitUIExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3ACF47B0229EEDFF0096860D /* Debug */,
+				3ACF47B1229EEDFF0096860D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
