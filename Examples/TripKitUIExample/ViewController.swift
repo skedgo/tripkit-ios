@@ -99,7 +99,7 @@ extension MainViewController: TKUIAutocompletionViewControllerDelegate {
 extension MainViewController {
   
   func showDepartures(stop: TKUIStopAnnotation) {
-    let departures = TKUIDeparturesViewController(stops: [stop])
+    let departures = TKUIDeparturesViewController(stop: stop)
     departures.delegate = self
     navigationController?.setNavigationBarHidden(true, animated: true)
     navigationController?.pushViewController(departures, animated: true)
