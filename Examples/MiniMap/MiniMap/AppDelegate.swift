@@ -18,27 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     TripKit.apiKey = ProcessInfo.processInfo.environment["TRIPGO_API_KEY"] ?? "MY_API_KEY"
     TripKit.prepareForNewSession()
     
-//    let start: MKAnnotation = ...
-//    let end: MKAnnotation = ...
-//    
-//    let request = TripRequest.insert(
-//      from: start, to: end,
-//      for: nil, timeType: .leaveASAP,
-//      into: TripKit.shared.tripKitContext
-//    )
-//    
-//    let router = TKBuzzRouter()
-//    router.modeIdentifiers = [ SVKTransportModeIdentifierRegularPublicTransport ]
-//    
-//    router.fetchTrips(for: request, success: { request, _ in
-//      
-//      let trips = request.trips()
-//      // show trips
-//      
-//    }, failure: { error, _ in
-//      // handle error
-//    })
-    
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {

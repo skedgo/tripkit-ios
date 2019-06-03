@@ -68,7 +68,7 @@ class ViewController: NSViewController {
     guard let from = from, let to = to else { return }
     
     router.modeIdentifiers = [
-      SVKTransportModeIdentifierRegularPublicTransport
+      TKTransportModeIdentifierRegularPublicTransport
     ]
     
     let request = TripRequest.insert(from: from, to: to, for: nil, timeType: .leaveASAP, into: TripKit.shared.tripKitContext)
@@ -79,12 +79,12 @@ class ViewController: NSViewController {
         return
       }
       
-      for segment in trip.segments() {
-        guard segment.hasVisibility(.onMap), let shapes = segment.shapes() else { continue }
+      for segment in trip.segments {
+        guard segment.hasVisibility(.onMap), let shapes = segment.shapes else { continue }
         self.mapView.addAnnotation(segment)
         for shape in shapes {
-          guard let polyline = STKRoutePolyline(for: shape) else { continue }
-          self.mapView.add(polyline)
+          guard let polyline = TKRoutePolyline(for: shape) else { continue }
+          self.mapView.addOverlay(polyline)
         }
       }
       
@@ -114,7 +114,7 @@ extension ViewController: MKMapViewDelegate {
   }
   
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    if let polyline = overlay as? STKRoutePolyline {
+    if let polyline = overlay as? TKRoutePolyline {
       let renderer = MKPolylineRenderer(polyline: polyline)
       renderer.lineWidth = 10
       renderer.strokeColor = polyline.route.routeColor
