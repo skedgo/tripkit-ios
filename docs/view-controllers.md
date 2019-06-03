@@ -34,7 +34,9 @@ This view controller has the following features:
 
 It has the following additional customisation points:
 
-- **to be defined**
+- Style of cards via `TKUICustomization`
+- Departures screen via `TKUIDeparturesCard.config`:
+  - Customisable list of action buttons
 
 Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (`TKUIDeparturesCard` and `TKUIServiceCard`) and use them directly in a `TGCardViewController` container.
 
@@ -56,6 +58,7 @@ This view controller has the following features:
 
 It has the following additional customisation points:
 
+- Style of cards via `TKUICustomization`
 - Results screen via `TKUIResultsCard.config`:
 	- Option to provide dedicated text and action for handling cases where start and/or end location are not in supported areas.
 - Trip overview via `TKUITripOverviewCard.config`:
