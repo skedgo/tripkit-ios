@@ -62,18 +62,10 @@ class TKUIServiceTitleView: UIView {
     // Hook up constraints.
     view.translatesAutoresizingMaskIntoConstraints = false
     
-    if #available(iOS 9.0, *) {
-      view.leadingAnchor.constraint(equalTo: footnoteView.leadingAnchor).isActive = true
-      view.topAnchor.constraint(equalTo: footnoteView.topAnchor).isActive = true
-      footnoteView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-      footnoteView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    } else if let footnoteView = footnoteView {
-      let leadingSpace = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: footnoteView, attribute: .leading, multiplier: 1, constant: 0)
-      let topSpace = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: footnoteView, attribute: .top, multiplier: 1, constant: 0)
-      let trailingSpace = NSLayoutConstraint(item: footnoteView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0)
-      let bottomSpace = NSLayoutConstraint(item: footnoteView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
-      footnoteView.addConstraints([leadingSpace, topSpace, trailingSpace, bottomSpace])
-    }
+    view.leadingAnchor.constraint(equalTo: footnoteView.leadingAnchor).isActive = true
+    view.topAnchor.constraint(equalTo: footnoteView.topAnchor).isActive = true
+    footnoteView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    footnoteView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
   }
 }
 
