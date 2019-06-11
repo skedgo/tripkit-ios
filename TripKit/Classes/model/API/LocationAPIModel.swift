@@ -168,30 +168,6 @@ extension API {
     public let source: API.DataAttribution?
   }
 
-  
-  public struct LocationInfo : Codable, Equatable {
-    public struct Details: Codable, Equatable {
-      public let w3w: String?
-      public let w3wInfoURL: URL?
-    }
-    
-    public let details: Details?
-    public let stop: TKStopCoordinate?
-    public let bikePod: API.BikePodInfo?
-    public let carPod:  API.CarPodInfo?
-    public let carPark: API.CarParkInfo?
-    public let carRental: API.CarRentalInfo?
-    public let freeFloating: API.FreeFloatingVehicleInfo?
-    
-    public var hasRealTime: Bool {
-      return carPark?.hasRealTime
-        ?? bikePod?.hasRealTime
-        ?? carPod?.hasRealTime
-        ?? freeFloating?.hasRealTime
-        ?? false
-    }
-  }
-  
   public struct FreeFloatingVehicleInfo: Codable, Equatable {
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
@@ -222,13 +198,23 @@ extension API {
   }
   
   public struct OnStreetParkingInfo: Codable, Equatable {
+    public enum PaymentType: String, Codable {
+      case meter = "METER"
+      case creditCard = "CREDIT_CARD"
+      case phone = "PHONE"
+      case coins = "COINS"
+      case app = "APP"
+    }
+    
     public let identifier: String
     public let description: String
+    public let paymentTypes: [PaymentType]?
     public let source: API.DataAttribution?
     
     public let availableSpaces: Int?
     public let totalSpaces: Int?
-    
+    public let lastUpdate: TimeInterval?
+
     /// The polyline defining the parking area along the street as an encoded polyline.
     ///
     /// This is optional as some on-street parking isn't defined by a line,
@@ -250,6 +236,32 @@ extension API {
     }
   }
   
+  public struct LocationInfo : Codable, Equatable {
+    public struct Details: Codable, Equatable {
+      public let w3w: String?
+      public let w3wInfoURL: URL?
+    }
+    
+    public let details: Details?
+    public let stop: TKStopCoordinate?
+    public let bikePod: API.BikePodInfo?
+    public let carPod:  API.CarPodInfo?
+    public let carPark: API.CarParkInfo?
+    public let carRental: API.CarRentalInfo?
+    public let freeFloating: API.FreeFloatingVehicleInfo?
+    public let onStreetParking: API.OnStreetParkingInfo?
+
+    
+    public var hasRealTime: Bool {
+      return carPark?.hasRealTime
+        ?? bikePod?.hasRealTime
+        ?? carPod?.hasRealTime
+        ?? freeFloating?.hasRealTime
+        ?? onStreetParking?.hasRealTime
+        ?? false
+    }
+  }
+  
   public struct LocationsResponse: Codable, Equatable {
     public static let empty: LocationsResponse = LocationsResponse(groups: [])
     
@@ -264,7 +276,6 @@ extension API {
       public let carParks: [TKCarParkLocation]?
       public let carRentals: [TKCarRentalLocation]?
       public let freeFloating: [TKFreeFloatingVehicleLocation]?
-
       public let onStreetParking: [TKOnStreetParkingLocation]?
 
       public var all: [TKModeCoordinate] {
