@@ -235,7 +235,6 @@ extension API {
       public let carPods: [TKCarPodLocation]?
       public let carParks: [TKCarParkLocation]?
       public let carRentals: [TKCarRentalLocation]?
-//      public let onStreetParking: [TKOnStreetParking]?
       public let freeFloating: [TKFreeFloatingVehicleLocation]?
 
       public var all: [TKModeCoordinate] {
