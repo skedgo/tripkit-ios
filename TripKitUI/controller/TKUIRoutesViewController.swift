@@ -13,8 +13,23 @@ public protocol TKUIRoutesViewControllerDelegate: TGCardViewControllerDelegate {
   
 }
 
+/// The `TKUIRoutesViewController` class provides a user interface for viewing
+/// routing options.
+///
+/// Upon selection of a route by the user, the details of the trip will be
+/// displayed.
+///
+/// Customisation points:
+/// - `TKUICustomization` for the visual style of the cards
+/// - `TKUIResultsCard.config` for the comparison of routing options
+/// - `TKUITripOverviewCard.config` for the trip details
+/// - `TKUITripModeByModeCard.config` for the step-by-step details of a trip
 public class TKUIRoutesViewController: TGCardViewController {
   
+  /// Configure for showing the routes from the user's current location
+  /// to the provided location leaving now.
+  ///
+  /// - Parameter destination: Destination of the trip
   public init(destination: MKAnnotation) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
 
@@ -23,13 +38,20 @@ public class TKUIRoutesViewController: TGCardViewController {
     rootCard = resultsCard
   }
 
+  /// Configure for showing the routes for the provided trip request
+  ///
+  /// Use this when you want to customise the departure location to something
+  /// other than the user's current location, or when you want to set the
+  /// departure or arrival time.
+  ///
+  /// - Parameter request: The trip request object, which should be instatiated
+  ///     using `TripRequest.insert(...)`
   public init(request: TripRequest) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
 
     let resultsCard = TKUIResultsCard(request: request)
     resultsCard.style = TKUICustomization.shared.cardStyle
     rootCard = resultsCard
-    
   }
   
   required public init(coder aDecoder: NSCoder) {
