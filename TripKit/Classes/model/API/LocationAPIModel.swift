@@ -19,7 +19,7 @@ extension API {
     case car = "CAR"
   }
   
-  public struct BikePodInfo : Codable, Equatable {
+  public struct BikePodInfo: Codable, Equatable {
     // static information
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
@@ -57,7 +57,7 @@ extension API {
   }
   
   
-  public struct CarPodInfo : Codable, Equatable {
+  public struct CarPodInfo: Codable, Equatable {
     // static information
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
@@ -99,7 +99,7 @@ extension API {
   }
   
   
-  public struct CarParkInfo : Codable, Equatable {
+  public struct CarParkInfo: Codable, Equatable {
     
     public enum EntranceType: String, Codable {
       case entranceAndExit = "ENTRANCE_EXIT"
@@ -110,7 +110,7 @@ extension API {
       case permit = "PERMIT"
     }
     
-    public struct Entrance : Codable, Equatable {
+    public struct Entrance: Codable, Equatable {
       public let type: EntranceType
       public let lat: CLLocationDegrees
       public let lng: CLLocationDegrees
@@ -161,7 +161,7 @@ extension API {
   }
   
   
-  public struct CarRentalInfo : Codable, Equatable {
+  public struct CarRentalInfo: Codable, Equatable {
     public let identifier: String
     public let company: API.CompanyInfo
     public let openingHours: API.OpeningHours?
@@ -192,7 +192,7 @@ extension API {
     }
   }
   
-  public struct FreeFloatingVehicleInfo : Codable, Equatable {
+  public struct FreeFloatingVehicleInfo: Codable, Equatable {
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
     public let vehicleType: SharedVehicleType
@@ -221,6 +221,34 @@ extension API {
     }
   }
   
+  public struct OnStreetParkingInfo: Codable, Equatable {
+    public let identifier: String
+    public let description: String
+    public let source: API.DataAttribution?
+    
+    public let availableSpaces: Int?
+    public let totalSpaces: Int?
+    
+    /// The polyline defining the parking area along the street as an encoded polyline.
+    ///
+    /// This is optional as some on-street parking isn't defined by a line,
+    /// but by an area. See `encodedPolygon`
+    ///
+    /// See `CLLocation.decodePolyLine`
+    public let encodedPolyline: String?
+
+    /// The polygon defining the parking area as an encoded polyline.
+    ///
+    /// This is optional as most on-street parking isn't defined by an area,
+    /// but by a line. See `encodedPolyline`
+    ///
+    /// See `CLLocation.decodePolyLine`
+    public let encodedPolygon: String?
+    
+    public var hasRealTime: Bool {
+      return availableSpaces != nil
+    }
+  }
   
   public struct LocationsResponse: Codable, Equatable {
     public static let empty: LocationsResponse = LocationsResponse(groups: [])
@@ -237,13 +265,16 @@ extension API {
       public let carRentals: [TKCarRentalLocation]?
       public let freeFloating: [TKFreeFloatingVehicleLocation]?
 
+      public let onStreetParking: [TKOnStreetParkingLocation]?
+
       public var all: [TKModeCoordinate] {
-        return (stops ?? [])      as [TKModeCoordinate]
-          + (bikePods ?? [])      as [TKModeCoordinate]
-          + (carPods ?? [])       as [TKModeCoordinate]
-          + (carParks ?? [])      as [TKModeCoordinate]
-          + (carRentals ?? [])    as [TKModeCoordinate]
-          + (freeFloating ?? [])  as [TKModeCoordinate]
+        return (stops ?? [])        as [TKModeCoordinate]
+          + (bikePods ?? [])        as [TKModeCoordinate]
+          + (carPods ?? [])         as [TKModeCoordinate]
+          + (carParks ?? [])        as [TKModeCoordinate]
+          + (carRentals ?? [])      as [TKModeCoordinate]
+          + (freeFloating ?? [])    as [TKModeCoordinate]
+          + (onStreetParking ?? []) as [TKModeCoordinate]
       }
         
     }

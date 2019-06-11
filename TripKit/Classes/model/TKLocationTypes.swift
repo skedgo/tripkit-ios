@@ -201,6 +201,44 @@ public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   
 }
 
+public class TKOnStreetParkingLocation: TKModeCoordinate {
+  
+  /// Detailed on-street parking related information.
+  ///
+  /// - Note: Can change if real-time data is available. So use KVO or Rx.
+  public var parking: API.OnStreetParkingInfo
+  
+  private enum CodingKeys: String, CodingKey {
+    case parking = "onStreetParking"
+  }
+  
+  public required init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    parking = try values.decode(API.OnStreetParkingInfo.self, forKey: .parking)
+    try super.init(from: decoder)
+    locationID = parking.identifier
+  }
+  
+  public override func encode(to encoder: Encoder) throws {
+    try super.encode(to: encoder)
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(parking, forKey: .parking)
+  }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    guard let info = try? aDecoder.decode(API.OnStreetParkingInfo.self, forKey: CodingKeys.parking.rawValue) else { return nil }
+    parking = info
+    super.init(coder: aDecoder)
+    locationID = info.identifier
+  }
+  
+  public override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    try? aCoder.encode(encodable: parking, forKey: CodingKeys.parking.rawValue)
+  }
+  
+}
+
 extension NSCoder {
   
   enum CoderError: Error {
