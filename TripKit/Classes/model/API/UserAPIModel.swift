@@ -57,7 +57,7 @@ extension API {
       case postCode
       case emails
       case phones
-      case userId
+      case userId = "userID"
     }
   }
   
