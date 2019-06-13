@@ -1,0 +1,155 @@
+//
+//  ViewController.swift
+//  TripKitUIExample
+//
+//  Created by Adrian Schönig on 29.05.19.
+//  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.
+//
+
+import UIKit
+
+import TGCardViewController
+import TripKitUI
+
+class MainViewController: UITableViewController {
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view.
+  }
+
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let id = tableView.cellForRow(at: indexPath)?.accessibilityIdentifier else {
+      preconditionFailure("Missing accessibility identifier for row at \(indexPath)")
+    }
+    
+    switch id {
+    case "showSearch":
+      showSearch()
+      
+    case "showRoutes":
+      showRoutes()
+      
+    default:
+      preconditionFailure("Don't know what to do with \(id)")
+    }
+  }
+  
+}
+
+// MARK: - Search
+
+extension MainViewController {
+
+  func showSearch() {
+    // We include TKSkedGoGeocoder here which will provide public transport
+    // locations. This requires also a bias map rect, as this only searches on
+    // a per-city level.
+    guard let randomCity = TKRegionManager.shared.regions.randomElement()?.cities.first else {
+      print("Couldn't search as regions weren't fetched.")
+      return
+    }
+    
+    let resultsController = TKUIAutocompletionViewController(providers: [TKSkedGoGeocoder()])
+    resultsController.biasMapRect = randomCity.centerBiasedMapRect
+
+    resultsController.delegate = self
+
+    // Fix for bad padding between search bar and first row
+    // Kudos to https://stackoverflow.com/questions/40435806/extra-space-on-top-of-uisearchcontrollers-uitableview
+    resultsController.tableView.contentInsetAdjustmentBehavior = .never
+
+    let searchController = UISearchController(searchResultsController: resultsController)
+    searchController.searchResultsUpdater = resultsController
+    searchController.searchBar.placeholder = "Search in \(randomCity.title ?? "unnamed city")"
+    self.present(searchController, animated: true)
+  }
+
+}
+
+extension MainViewController: TKUIAutocompletionViewControllerDelegate {
+  
+  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect annotation: MKAnnotation) {
+    if let stop = annotation as? TKUIStopAnnotation {
+      dismiss(animated: true) {
+        self.showDepartures(stop: stop)
+      }
+      
+    } else {
+      print("Selected \(annotation)")
+    }
+  }
+  
+  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelectAccessoryFor annotation: MKAnnotation) {
+    if let stop = annotation as? TKUIStopAnnotation {
+      dismiss(animated: true) {
+        self.showDepartures(stop: stop)
+      }
+
+    } else {
+      print("Selected accessor for \(annotation)")
+    }
+  }
+  
+}
+
+
+// MARK: - Departures
+
+extension MainViewController {
+  
+  func showDepartures(stop: TKUIStopAnnotation) {
+    let departures = TKUIDeparturesViewController(stop: stop)
+    departures.delegate = self
+    navigationController?.setNavigationBarHidden(true, animated: true)
+    navigationController?.pushViewController(departures, animated: true)
+  }
+  
+}
+
+extension MainViewController: TKUIDeparturesViewControllerDelegate {
+  
+  func requestsDismissal(for controller: TGCardViewController) {
+    navigationController?.setNavigationBarHidden(false, animated: true)
+    navigationController?.popViewController(animated: true)
+  }
+  
+}
+
+
+// MARK: - Routes
+
+extension MainViewController {
+
+  func showRoutes() {
+    
+    // we generate a random routing request from some city to a random destination
+    // diagonally nearby
+    guard let randomCity = TKRegionManager.shared.regions.randomElement()?.cities.first else {
+      print("Couldn't search as regions weren't fetched.")
+      return
+    }
+
+    let delta = Double((-10...10).randomElement()!) / 50.0
+    let nearby = MKPointAnnotation()
+    nearby.coordinate = CLLocationCoordinate2D(latitude: randomCity.coordinate.latitude + delta, longitude: randomCity.coordinate.longitude + delta)
+    nearby.title = "Destination"
+
+    let request = TripRequest.insert(
+      from: randomCity,
+      to: nearby,
+      for: nil, timeType: .leaveASAP, into: TripKit.shared.tripKitContext
+    )
+    
+    let routes = TKUIRoutesViewController(request: request)
+    routes.delegate = self
+    navigationController?.setNavigationBarHidden(true, animated: true)
+    navigationController?.pushViewController(routes, animated: true)
+  }
+
+}
+
+extension MainViewController: TKUIRoutesViewControllerDelegate {
+  
+}
+

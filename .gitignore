@@ -28,12 +28,14 @@ DerivedData
 Project/Podfile.lock
 Project/Pods
 /Project/TripKit.framework.zip
-/Examples/MiniMap/Podfile.lock
-/Examples/MiniMap/Pods
 /Project/Carthage
 /Carthage
 /TripKit.framework.zip
 xcshareddata
+
+# Examples
+/Examples/MiniMap/Podfile.lock
+/Examples/MiniMap/Pods
 
 # Documentation
 /docs/TripKit

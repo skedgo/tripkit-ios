@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TKUIDeparturesAccessoryView" customModule="TripKitUI" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJK-XX-Gi6">
+                    <rect key="frame" x="0.0" y="0.0" width="46" height="44"/>
+                    <state key="normal" title="Button"/>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jin-SJ-hvl">
+                    <rect key="frame" x="375" y="0.0" width="0.0" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="250" id="nYk-1j-nr8"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="jin-SJ-hvl" secondAttribute="trailing" id="0Hc-pH-NRE"/>
+                <constraint firstAttribute="bottom" secondItem="TJK-XX-Gi6" secondAttribute="bottom" id="21G-qQ-ReY"/>
+                <constraint firstItem="TJK-XX-Gi6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4oj-cf-3C1"/>
+                <constraint firstItem="TJK-XX-Gi6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ff5-IN-NxU"/>
+                <constraint firstAttribute="bottom" secondItem="jin-SJ-hvl" secondAttribute="bottom" id="bqe-wg-mcA"/>
+                <constraint firstItem="jin-SJ-hvl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="x5c-sl-GDr"/>
+                <constraint firstItem="jin-SJ-hvl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TJK-XX-Gi6" secondAttribute="trailing" constant="8" id="yhK-BN-0Eb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="customActionStack" destination="jin-SJ-hvl" id="E6D-AK-h8P"/>
+                <outlet property="timeButton" destination="TJK-XX-Gi6" id="3w8-Rg-Eoj"/>
+            </connections>
+            <point key="canvasLocation" x="66.5" y="-245"/>
+        </view>
+    </objects>
+</document>

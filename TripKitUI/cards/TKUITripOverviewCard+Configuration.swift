@@ -6,7 +6,6 @@
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import TripKit
 
@@ -83,7 +82,7 @@ public extension TKUITripOverviewCard {
     /// Defaults to using `TKUITripMapManager`.
     public var mapManagerFactory: ((Trip) -> TKUITripMapManagerType) = TKUITripMapManager.init
     
-    /// Set this to add a list of action button to a trip overview card.
+    /// Set this to add a list of action buttons to a trip overview card.
     ///
     /// - warning: Only a maximum of three actions can be accomodated. Any
     ///     more than that will be ignored.

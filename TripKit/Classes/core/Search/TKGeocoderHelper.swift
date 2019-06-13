@@ -22,11 +22,7 @@ extension TKGeocoding {
 public class TKGeocoderHelper: NSObject {
 
   public static var preferredGeocoder: TKGeocoding = {
-    if #available(iOSApplicationExtension 9.3, *) {
-      return TKAppleGeocoder()
-    } else {
-      return TKPeliasGeocoder()
-    }
+    return TKAppleGeocoder()
   }()
   
   private override init() {
