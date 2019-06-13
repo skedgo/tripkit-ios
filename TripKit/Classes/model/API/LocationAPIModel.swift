@@ -206,9 +206,38 @@ extension API {
       case app = "APP"
     }
     
+    public struct Restriction: Codable, Equatable {
+      let color: String
+      let maxParkingTime: Int
+      let parkingSymbol: String
+      let applicableDays: String
+      let applicableTimes: String
+      let type: String
+      
+      private enum CodingKeys: String, CodingKey {
+        case color = "colour"
+        case maxParkingTime
+        case parkingSymbol
+        case applicableDays = "daysLabel"
+        case applicableTimes = "timesLabel"
+        case type
+      }
+      
+      public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        color = try values.decode(String.self, forKey: .color)
+        maxParkingTime = try values.decode(Int.self, forKey: .maxParkingTime)
+        parkingSymbol = try values.decode(String.self, forKey: .parkingSymbol)
+        applicableDays = try values.decode(String.self, forKey: .applicableDays)
+        applicableTimes = try values.decode(String.self, forKey: .applicableTimes)
+        type = try values.decode(String.self, forKey: .type)
+      }
+    }
+    
     public let identifier: String
     public let description: String
     public let paymentTypes: [PaymentType]?
+    public let restrictions: [Restriction]?
     public let source: API.DataAttribution?
     
     public let availableSpaces: Int?
