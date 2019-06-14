@@ -21,6 +21,7 @@ public class TKUIServiceCard: TGTableCard {
   
   private var dataInput: TKUIServiceViewModel.DataInput
   private var viewModel: TKUIServiceViewModel!
+  private let serviceMapManager: TKUIServiceMapManager
   private let disposeBag = DisposeBag()
   
   private let scrollToTopPublisher = PublishSubject<Void>()
@@ -33,7 +34,7 @@ public class TKUIServiceCard: TGTableCard {
   /// - Parameters:
   ///   - embarkation: Where to get onto the service
   ///   - disembarkation: Where to get off the service (optional)
-  public init(titleView: (UIView, UIButton)? = nil, embarkation: StopVisits, disembarkation: StopVisits? = nil, reusing: TGMapManager? = nil) {
+  public init(titleView: (UIView, UIButton)? = nil, embarkation: StopVisits, disembarkation: StopVisits? = nil, reusing: TKUITripMapManager? = nil) {
     dataInput = (embarkation, disembarkation)
     
     let title: CardTitle
@@ -46,10 +47,18 @@ public class TKUIServiceCard: TGTableCard {
       self.titleView = header
     }
     
+    self.serviceMapManager = TKUIServiceMapManager()
+    let mapManager: TGMapManager
+    if let trip = reusing {
+      mapManager = TKUIComposingMapManager(composing: serviceMapManager, onTopOf: trip)
+    } else {
+      mapManager = serviceMapManager
+    }
+    
     super.init(
       title: title,
       style: .plain,
-      mapManager: reusing ?? TKUIServiceMapManager(),
+      mapManager: mapManager,
       initialPosition: .peaking
     )
   }
@@ -76,8 +85,6 @@ public class TKUIServiceCard: TGTableCard {
         preconditionFailure()
     }
     
-    let TKUIServiceMapManager = mapManager as? TKUIServiceMapManager
-    
     // Build the view model
     
     viewModel = TKUIServiceViewModel(
@@ -85,7 +92,7 @@ public class TKUIServiceCard: TGTableCard {
       itemSelected: tableView.rx.modelSelected(TKUIServiceViewModel.Item.self).asDriver()
     )
     
-    TKUIServiceMapManager?.viewModel = viewModel
+    serviceMapManager.viewModel = viewModel
 
     // Table view configuration
     
