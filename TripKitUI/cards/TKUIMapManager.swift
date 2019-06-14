@@ -39,6 +39,33 @@ extension TKNamedCoordinate: TKUIIdentifiableAnnotation {
   }
 }
 
+/// The base class for map managers in TripKitUI
+///
+/// The following diagram illustrates the relationships:
+///
+/// ```
+/// ┌────────────────────────────────────────────────────────────────────┐
+/// │ TGCardViewController                                               │
+/// │ ┏━━━━━━━━━━━━━━━━━━━┓                   ╔════════════════════════╗ │
+/// │ ┃TGMapManager       ┃─ ─ ─Implements ─ ▶║TGCompatibleMapManager  ║ │
+/// │ ┗━━━━━━━━━━━━━━━━━━━┛                   ╚════════════════════════╝ │
+/// └───────────▲────────────────────────────────────────────────────────┘
+///             │
+///         Subclass──────────────────┐
+///             │                     │
+/// ┌───────────┼─────────────────────┼──────────────────────────────────┐
+/// │ TripKitUI │                     │                                  │
+/// │ ┏━━━━━━━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━━━━━━━┓                        │
+/// │ ┃TKUIMapManager     ┃ ┃TKUIComposingMap...┃                        │
+/// │ ┗━━━━━━━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━━━━━━━┛                        │
+/// │           ▲                                                        │
+/// │       Subclass──────────────────┬─────────────────────┐            │
+/// │           │                     │                     │            │
+/// │ ┏━━━━━━━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━━━━━━━┓  │
+/// │ ┃TKUIServiceMapMa...┃ ┃TKUIResultsMapMa...┃ ┃TKUITripMapManager ┃  │
+/// │ ┗━━━━━━━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━━━━━━━┛  │
+/// └────────────────────────────────────────────────────────────────────┘
+/// ```
 open class TKUIMapManager: TGMapManager {
   
   /// A factory that all map managers will use as for the default annotations.
