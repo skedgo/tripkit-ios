@@ -206,6 +206,32 @@ extension API {
       case app = "APP"
     }
     
+    public enum AvailableContent: String, Codable, CaseIterable {
+      public init(from decoder: Decoder) throws {
+        // We do this manually rather than using the default Codable
+        // implementation, to flag unknown content as `.unknown`.
+        let single = try decoder.singleValueContainer()
+        let string = try single.decode(String.self)
+        let match = AvailableContent.allCases.first { $0.rawValue == string }
+        if let known = match {
+          self = known
+        } else {
+          self = .unknown
+        }
+      }
+      
+      public func encode(to encoder: Encoder) throws {
+        var single = encoder.singleValueContainer()
+        try single.encode(rawValue)
+      }
+      
+      case restrictions
+      case paymentTypes
+      case totalSpaces
+      case availableSpaces
+      case unknown
+    }
+    
     public struct Restriction: Codable, Equatable {
       public let color: String
       public let maximumParkingMinutes: Int
@@ -216,9 +242,11 @@ extension API {
     
     public let identifier: String
     public let description: String
+    public let availableContent: [AvailableContent]?
+    public let source: API.DataAttribution?
+
     public let paymentTypes: [PaymentType]?
     public let restrictions: [Restriction]?
-    public let source: API.DataAttribution?
     
     public let availableSpaces: Int?
     public let totalSpaces: Int?
