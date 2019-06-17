@@ -13,14 +13,15 @@ import RxCocoa
 
 extension TKUITripOverviewViewModel {
   
-  static func fetchContentOfServices(in trip: Trip) -> Signal<Void> {
+  static func fetchContentOfServices(in trip: Trip) -> Observable<Void> {
     let requests = trip.segments
       .compactMap { $0.service != nil ? ($0.service!, $0.departureTime, $0.startRegion ?? trip.regionForRealTimeUpdates) : nil }
       .filter { $0.0.hasServiceData == false }
       .map(TKBuzzInfoProvider.rx.downloadContent)
-      .map { $0.asSignal(onErrorSignalWith: .empty()) }
+      .map { $0.asObservable() }
 
-    return Signal.merge(requests).throttle(.milliseconds(500), latest: true)
+    let merged = Observable<Void>.merge(requests)
+    return merged.throttle(.milliseconds(500), latest: true, scheduler: MainScheduler.asyncInstance)
   }
   
 }

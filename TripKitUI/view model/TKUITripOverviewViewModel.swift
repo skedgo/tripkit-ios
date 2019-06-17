@@ -26,6 +26,7 @@ class TKUITripOverviewViewModel {
     dataSources = Driver.just(trip.tripGroup.sources)
     
     refreshMap = TKUITripOverviewViewModel.fetchContentOfServices(in: trip)
+      .asSignal(onErrorSignalWith: .empty())
   }
 
   let trip: Trip
