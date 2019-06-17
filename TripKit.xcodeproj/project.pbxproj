@@ -25,6 +25,7 @@
 		3A15DDCA2271A6C7001AC0F5 /* routing-with-stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */; };
 		3A15DDCC2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */; };
 		3A15DDCD227300FA001AC0F5 /* TKCoreDataParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */; };
+		3A17E60022B7DC33005318D5 /* locationInfo-onStreetParking.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A17E5FF22B7DC33005318D5 /* locationInfo-onStreetParking.json */; };
 		3A218773228C5B7500B44B96 /* TKAutocompletionRaceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A218772228C5B7500B44B96 /* TKAutocompletionRaceTest.swift */; };
 		3A21A4AD20690448005F411D /* alertsTransit-melbourne.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A21A4AC20690447005F411D /* alertsTransit-melbourne.json */; };
 		3A21A4B32069057D005F411D /* TKSectionedAlertsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A21A4B22069057D005F411D /* TKSectionedAlertsTest.swift */; };
@@ -884,6 +885,7 @@
 		3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRoutingParser.swift; sourceTree = "<group>"; };
 		3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-with-stops.json"; sourceTree = "<group>"; };
 		3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKCoreDataParserHelper.swift; sourceTree = "<group>"; };
+		3A17E5FF22B7DC33005318D5 /* locationInfo-onStreetParking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "locationInfo-onStreetParking.json"; sourceTree = "<group>"; };
 		3A218772228C5B7500B44B96 /* TKAutocompletionRaceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAutocompletionRaceTest.swift; sourceTree = "<group>"; };
 		3A21A4AC20690447005F411D /* alertsTransit-melbourne.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alertsTransit-melbourne.json"; sourceTree = "<group>"; };
 		3A21A4B22069057D005F411D /* TKSectionedAlertsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSectionedAlertsTest.swift; sourceTree = "<group>"; };
@@ -1963,6 +1965,7 @@
 				3AA3CEA8202CD4D100E54859 /* locationInfo-bikePod.json */,
 				3AA3CEA0202CD4D100E54859 /* locationInfo-carRental.json */,
 				3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */,
+				3A17E5FF22B7DC33005318D5 /* locationInfo-onStreetParking.json */,
 				3AF6FDEF204436D3003BA786 /* regionInfo-multi.json */,
 				3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */,
 				3AA3CEA1202CD4D100E54859 /* regionInfo-Sydney.json */,
@@ -3056,6 +3059,7 @@
 				3A6DAED92040985B009282FE /* regionInfo-Nuremberg.json in Resources */,
 				3AA3CECA202CD4D100E54859 /* regions.json in Resources */,
 				3AE6077F20FF4F64006D59B0 /* pelias-us.json in Resources */,
+				3A17E60022B7DC33005318D5 /* locationInfo-onStreetParking.json in Resources */,
 				3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */,
 				3AA3CEC8202CD4D100E54859 /* geojson-nuremberg.json in Resources */,
 				3A21A4AD20690448005F411D /* alertsTransit-melbourne.json in Resources */,
