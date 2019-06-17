@@ -207,11 +207,11 @@ extension API {
     }
     
     public struct Restriction: Codable, Equatable {
-      let color: String
-      let maximumParkingMinutes: Int
-      let parkingSymbol: String
-      let daysAndTimes: OpeningHours
-      let type: String
+      public let color: String
+      public let maximumParkingMinutes: Int
+      public let parkingSymbol: String
+      public let daysAndTimes: OpeningHours
+      public let type: String
     }
     
     public let identifier: String
