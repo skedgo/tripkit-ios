@@ -14,9 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TKImage (Variations)
 
-- (TKImage *)imageWithTintColor:(TKColor *)tintColor;
-
-- (TKImage *)imageOnBackgroundImage:(TKImage *)background;
+- (TKImage *)tk_imageWithTintColor:(TKColor *)tintColor;
 
 @end
 
