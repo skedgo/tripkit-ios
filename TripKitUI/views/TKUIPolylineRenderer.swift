@@ -83,7 +83,6 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
   private func drawLine(color: CGColor, width: CGFloat, allowDashes: Bool, zoomScale: MKZoomScale, in context: CGContext) {
     guard let path = path else { return }
     
-    
     if allowDashes {
       // Defaults take care of dash pattern
       applyStrokeProperties(to: context, atZoomScale: zoomScale)
@@ -101,6 +100,8 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
   }
   
   override open func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
+    guard path != nil else { return }
+
     let oldSelection = isSelected
     if let mine = selectionIdentifier, let styler = selectionHandler {
       isSelected = styler(mine)
