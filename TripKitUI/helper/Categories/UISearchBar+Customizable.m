@@ -21,14 +21,22 @@
 - (void)setClearButtonNormalImage:(UIImage *)normalImage HighlightedImage:(UIImage *)highlightedImage TintColor:(UIColor *)tintColor{
   NSArray *subView = [self subviews];
   NSArray *subsubView = [[subView objectAtIndex:0] subviews];
-  UIButton *clearButton = [[subsubView objectAtIndex:1] valueForKey:@"_clearButton"];
-  if (normalImage != nil) {
-    [clearButton setImage:[normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+  
+  @try {
+    UIButton *clearButton = [[subsubView objectAtIndex:1] valueForKey:@"_clearButton"];
+    if (normalImage != nil) {
+      [clearButton setImage:[normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    }
+    if (highlightedImage != nil) {
+      [clearButton setImage:[highlightedImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateHighlighted];
+    }
+    clearButton.tintColor = tintColor;
   }
-  if (highlightedImage != nil) {
-    [clearButton setImage:[highlightedImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateHighlighted];
+  @catch (NSException *exception) {
+    // valueForKey:@"_clearButton"] crashes on iOS 13 with NSUndefinedKeyException
+    // we should use the proper search bar customisation on iOS 13.
+    return;
   }
-  clearButton.tintColor = tintColor;
 }
 
 - (void)setTextFieldBackgroundImage:(UIImage *)image
