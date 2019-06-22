@@ -25,7 +25,7 @@
 		3A15DDCA2271A6C7001AC0F5 /* routing-with-stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */; };
 		3A15DDCC2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */; };
 		3A15DDCD227300FA001AC0F5 /* TKCoreDataParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */; };
-		3A1AAB3722BE199A000ED3CC /* UIImage+Variations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A1AAB3522BE199A000ED3CC /* UIImage+Variations.h */; };
+		3A1AAB3722BE199A000ED3CC /* UIImage+Variations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A1AAB3522BE199A000ED3CC /* UIImage+Variations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A1AAB3822BE199A000ED3CC /* UIImage+Variations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AAB3622BE199A000ED3CC /* UIImage+Variations.m */; };
 		3A218773228C5B7500B44B96 /* TKAutocompletionRaceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A218772228C5B7500B44B96 /* TKAutocompletionRaceTest.swift */; };
 		3A21A4AD20690448005F411D /* alertsTransit-melbourne.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A21A4AC20690447005F411D /* alertsTransit-melbourne.json */; };
