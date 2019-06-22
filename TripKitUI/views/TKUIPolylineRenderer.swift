@@ -81,6 +81,8 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
   }
   
   private func drawLine(color: CGColor, width: CGFloat, allowDashes: Bool, zoomScale: MKZoomScale, in context: CGContext) {
+    guard let path = path else { return }
+    
     
     if allowDashes {
       // Defaults take care of dash pattern
