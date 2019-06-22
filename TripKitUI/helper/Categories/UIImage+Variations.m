@@ -8,9 +8,6 @@
 
 #import "UIImage+Variations.h"
 
-#if TARGET_OS_IPHONE
-
-@import QuartzCore;
 @import CoreImage;
 
 @implementation UIImage (Variations)
@@ -41,5 +38,3 @@
 }
 
 @end
-
-#endif
