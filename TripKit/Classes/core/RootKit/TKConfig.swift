@@ -41,5 +41,16 @@ extension TKConfig {
   public var shareURLDomain: String? {
     return configuration["ShareURLDomain"] as? String
   }
+  
+  /// Base URL used to connect to our beta server. This allows WLs to point
+  /// to a temporary deployment of satapp.
+  ///
+  /// - Note: If this is not set, then the default base URL,
+  ///  "https://bigbang.buzzhives.com/satapp-beta/" is used.
+  
+  @objc
+  public var betaServerBaseURL: String {
+    return configuration["BetaServerBaseURL"] as? String ?? "https://bigbang.buzzhives.com/satapp-beta/"
+  }
 
 }
