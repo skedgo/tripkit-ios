@@ -20,7 +20,6 @@
 #import "NSString+Sizing.h"
 #import "NSManagedObjectContext+SimpleFetch.h"
 #import "NSUserDefaults+SharedDefaults.h"
-#import "UIImage+Variations.h"
 #import "MKMapView+ZoomLevel.h"
 
 #import "TKLocationHelper.h"

@@ -1,5 +1,5 @@
 //
-//  TKSectionedAlertsTest.swift
+//  TKUISectionedAlertsTest.swift
 //  TripKitTests
 //
 //  Created by Adrian Schönig on 26.03.18.
@@ -11,7 +11,7 @@ import XCTest
 @testable import TripKit
 @testable import TripKitUI
 
-class TKSectionedAlertsTest: XCTestCase {
+class TKUISectionedAlertsTest: XCTestCase {
 
   var response: TKBuzzInfoProvider.AlertsTransitResponse!
   

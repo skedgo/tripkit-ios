@@ -14,7 +14,7 @@ import CoreLocation
 @objc
 public protocol TKDisplayableRoute {
   
-  var routePath: [Any] { get }// objects that have a coordinate, e.g., <MKAnnotation> or CLLocation
+  var routePath: [Any] { get } // objects that have a coordinate, e.g., <MKAnnotation> or CLLocation
   var routeColor: TKColor? { get }
   var routeDashPattern: [NSNumber]? { get }
   var routeIsTravelled: Bool { get }
