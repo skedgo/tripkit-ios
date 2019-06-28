@@ -95,8 +95,9 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
     context.setStrokeColor(color)
     context.setLineWidth(width / zoomScale)
 
-    strokePath(path, in: context)
-
+    // Don't use `strokePath(path, in: context)`, as that doesn't always stroke (?)
+    context.addPath(path)
+    context.strokePath()
   }
   
   override open func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
