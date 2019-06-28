@@ -240,6 +240,7 @@ extension API {
       public let type: String
     }
     
+    public let actualRate: String?
     public let identifier: String
     public let description: String
     public let availableContent: [AvailableContent]?
