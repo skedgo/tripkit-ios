@@ -66,16 +66,16 @@
 {
   switch (vehicleType) {
     case TKVehicleType_Bicycle:
-      return NSLocalizedStringFromTableInBundle(@"Bicycle", @"Shared", [TKStyleManager bundle], "Type of vehicle : bicycle");
+      return Loc.VehicleTypeBicycle;
       
     case TKVehicleType_Car:
-      return NSLocalizedStringFromTableInBundle(@"Car", @"Shared", [TKStyleManager bundle], "Type of vehicle : car");
+      return Loc.VehicleTypeCar;
       
     case TKVehicleType_Motorbike:
-      return NSLocalizedStringFromTableInBundle(@"Motorbike", @"Shared", [TKStyleManager bundle], "Type of vehicle : motorbike");
+      return Loc.VehicleTypeMotorbike;
       
     case TKVehicleType_SUV:
-      return NSLocalizedStringFromTableInBundle(@"SUV", @"Shared", [TKStyleManager bundle], @"Sports utility vehicle abbreviation");
+      return Loc.VehicleTypeSUV;
 
     case TKVehicleType_None:
       return nil;

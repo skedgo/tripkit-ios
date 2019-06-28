@@ -225,10 +225,10 @@
   SGSearchSection sectionType = [self typeOfSection:section];
   switch (sectionType) {
     case SGSearchSectionAutocompletion:
-      return [self showStickyOptions] ? NSLocalizedStringFromTableInBundle(@"Instant results", @"Shared", [TKStyleManager bundle], "Instant results proposal") : nil;
+      return [self showStickyOptions] ? Loc.InstantResults : nil;
       
     case SGSearchSectionMore:
-      return NSLocalizedStringFromTableInBundle(@"More results", @"Shared", [TKStyleManager bundle], "More results proposal");
+      return NSLocalizedStringFromTableInBundle(Loc.MoreResults);
       
     case SGSearchSectionSticky:
       return nil;

@@ -272,8 +272,8 @@ extension TKUIResultsViewModel {
   //    } else {
   //      // We have a request, there was no explicit error during routing.
   //      let info = [
-  //        NSLocalizedDescriptionKey: NSLocalizedString("No routes found.", comment: "Error title when routing produced no results (but no specific error was returned from routing)."),
-  //        NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("Please adjust your query and try again.", comment: "Error recovery suggestion for when routing produced no results (but no specific error was returned from routing)."),
+  //        NSLocalizedDescriptionKey: Loc.NoRoutesFound,
+  //        NSLocalizedRecoverySuggestionErrorKey: Loc.PleaseAdjustYourQuery,
   //        ]
   //
   //      let noTrips = NSError(domain: "com.buzzhives.TripGo", code: 872631, userInfo: info)
