@@ -195,12 +195,12 @@ extension TKMetricClassifier.Classification {
   
   var text: String {
     switch self {
-    case .easiest: return "Easiest" // TODO: Localise
-    case .greenest: return "Greenest"
-    case .fastest: return "Fastest"
-    case .healthiest: return "Healthiest"
-    case .cheapest: return "Cheapest"
-    case .recommended: return "Recommended"
+    case .easiest: return Loc.BadgeEasiest
+    case .greenest: return Loc.BadgeGreenest
+    case .fastest: return Loc.BadgeFastest
+    case .healthiest: return Loc.BadgeHealthiest
+    case .cheapest: return Loc.BadgeCheapest
+    case .recommended: return Loc.BadgeRecommended
     }
   }
   

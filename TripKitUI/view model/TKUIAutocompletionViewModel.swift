@@ -110,7 +110,7 @@ extension TKUIAutocompletionViewModel {
     let additionalItems = providers
       .compactMap(ActionItem.init)
       .map { Item.action($0) }
-    let additionalSection = additionalItems.isEmpty ? [] : [Section(items: additionalItems, title: NSLocalizedString("More results", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "'More results' section in autocompletion"))]
+    let additionalSection = additionalItems.isEmpty ? [] : [Section(items: additionalItems, title: Loc.MoreResults)]
 
     return providers
       .autocomplete(searchText, mapRect: biasMapRect)

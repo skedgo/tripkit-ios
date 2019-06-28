@@ -34,10 +34,18 @@ extension Loc {
     return NSLocalizedString("Show website", tableName: "TripKit", bundle: .tripKit, comment: "Show website action button")
   }
 
+  public static var Book: String {
+    return NSLocalizedString("Book", tableName: "TripKit", bundle: .tripKit, comment: "Action title to make a booking")
+  }
+  
   @objc(BookWithService:)
   public static func BookWith(service: String) -> String {
     let format = NSLocalizedString("Book with %@", tableName: "TripKit", bundle: .tripKit, comment: "Action title to make a booking using service/app named '@%'")
       return String(format: format, service)
+  }
+  
+  public static var ExtendBooking: String {
+    return NSLocalizedString("Extend", tableName: "TripKit", bundle: .tripKit, comment: "Action title to extend an existing booking")
   }
   
   @objc(CallService:)

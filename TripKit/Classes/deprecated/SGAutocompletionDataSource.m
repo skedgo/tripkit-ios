@@ -228,7 +228,7 @@
       return [self showStickyOptions] ? Loc.InstantResults : nil;
       
     case SGSearchSectionMore:
-      return NSLocalizedStringFromTableInBundle(Loc.MoreResults);
+      return Loc.MoreResults;
       
     case SGSearchSectionSticky:
       return nil;

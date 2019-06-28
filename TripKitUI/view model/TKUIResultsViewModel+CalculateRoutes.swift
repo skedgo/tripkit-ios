@@ -138,11 +138,11 @@ extension TKUIResultsViewModel.RouteBuilder {
     
     switch mode {
     case .origin:
-      annotation.title = "Origin"
+      annotation.title = Loc.StartLocation
       origin = annotation
       mode = .destination
     case .destination:
-      annotation.title = "Destination"
+      annotation.title = Loc.EndLocation
       destination = annotation
       mode = .origin
     }
@@ -259,14 +259,14 @@ extension TKUIResultsViewModel.RouteBuilder {
     if let name = destinationName {
       title = Loc.To(location: name)
     } else {
-      title = "Plan Trip" // TODO: Localise
+      title = Loc.PlanTrip
     }
     
     let subtitle: String
     if let name = originName {
       subtitle = Loc.From(location: name)
     } else {
-      subtitle = "From current location" // TODO: Localise
+      subtitle = Loc.FromCurrentLocation
     }
     return (title, subtitle)
   }
