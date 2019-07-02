@@ -1,4 +1,4 @@
-# View Controllers of `TripKitUI` 
+# View Controllers of TripKitUI
 
 `TripKitUI` provides customisable view controllers for the following high-level features:
 

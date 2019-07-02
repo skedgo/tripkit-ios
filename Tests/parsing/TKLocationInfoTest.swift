@@ -78,6 +78,15 @@ class TKLocationInfoTest: XCTestCase {
     XCTAssertEqual(sorted.first?.day, .monday)
     XCTAssertEqual(sorted.last?.day, .publicHoliday)
   }
+
+  func testOnStreetParking() throws {
+    let decoder = JSONDecoder()
+    let data = try dataFromJSON(named: "locationInfo-onStreetParking")
+    let info = try! decoder.decode(API.LocationInfo.self, from: data)
+    
+    guard let parking = info.onStreetParking else { XCTFail(); return }
+    XCTAssertNotNil(parking)
+  }
 }
 
 

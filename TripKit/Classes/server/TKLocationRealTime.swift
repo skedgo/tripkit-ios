@@ -55,12 +55,10 @@ public enum TKLocationRealTime {
               return .repeatIn(60) // Try again in a while
             }
           }
-          .map { status, _, data in
+          .compactMap { status, _, data in
             guard let data = data else { return nil }
             return try? JSONDecoder().decode(API.LocationInfo.self, from: data)
           }
-          .filter { $0 != nil }
-          .map { $0! }
       }
   }
   
