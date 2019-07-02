@@ -19,7 +19,7 @@ extension API {
     case car = "CAR"
   }
   
-  public struct BikePodInfo : Codable, Equatable {
+  public struct BikePodInfo: Codable, Equatable {
     // static information
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
@@ -57,7 +57,7 @@ extension API {
   }
   
   
-  public struct CarPodInfo : Codable, Equatable {
+  public struct CarPodInfo: Codable, Equatable {
     // static information
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
@@ -99,7 +99,7 @@ extension API {
   }
   
   
-  public struct CarParkInfo : Codable, Equatable {
+  public struct CarParkInfo: Codable, Equatable {
     
     public enum EntranceType: String, Codable {
       case entranceAndExit = "ENTRANCE_EXIT"
@@ -110,7 +110,7 @@ extension API {
       case permit = "PERMIT"
     }
     
-    public struct Entrance : Codable, Equatable {
+    public struct Entrance: Codable, Equatable {
       public let type: EntranceType
       public let lat: CLLocationDegrees
       public let lng: CLLocationDegrees
@@ -161,38 +161,14 @@ extension API {
   }
   
   
-  public struct CarRentalInfo : Codable, Equatable {
+  public struct CarRentalInfo: Codable, Equatable {
     public let identifier: String
     public let company: API.CompanyInfo
     public let openingHours: API.OpeningHours?
     public let source: API.DataAttribution?
   }
 
-  
-  public struct LocationInfo : Codable, Equatable {
-    public struct Details: Codable, Equatable {
-      public let w3w: String?
-      public let w3wInfoURL: URL?
-    }
-    
-    public let details: Details?
-    public let stop: TKStopCoordinate?
-    public let bikePod: API.BikePodInfo?
-    public let carPod:  API.CarPodInfo?
-    public let carPark: API.CarParkInfo?
-    public let carRental: API.CarRentalInfo?
-    public let freeFloating: API.FreeFloatingVehicleInfo?
-    
-    public var hasRealTime: Bool {
-      return carPark?.hasRealTime
-        ?? bikePod?.hasRealTime
-        ?? carPod?.hasRealTime
-        ?? freeFloating?.hasRealTime
-        ?? false
-    }
-  }
-  
-  public struct FreeFloatingVehicleInfo : Codable, Equatable {
+  public struct FreeFloatingVehicleInfo: Codable, Equatable {
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
     public let vehicleType: SharedVehicleType
@@ -221,6 +197,108 @@ extension API {
     }
   }
   
+  public struct OnStreetParkingInfo: Codable, Equatable {
+    public enum PaymentType: String, Codable {
+      case meter = "METER"
+      case creditCard = "CREDIT_CARD"
+      case phone = "PHONE"
+      case coins = "COINS"
+      case app = "APP"
+    }
+    
+    public enum AvailableContent: String, Codable, CaseIterable {
+      public init(from decoder: Decoder) throws {
+        // We do this manually rather than using the default Codable
+        // implementation, to flag unknown content as `.unknown`.
+        let single = try decoder.singleValueContainer()
+        let string = try single.decode(String.self)
+        let match = AvailableContent.allCases.first { $0.rawValue == string }
+        if let known = match {
+          self = known
+        } else {
+          self = .unknown
+        }
+      }
+      
+      public func encode(to encoder: Encoder) throws {
+        var single = encoder.singleValueContainer()
+        try single.encode(rawValue)
+      }
+      
+      case restrictions
+      case paymentTypes
+      case totalSpaces
+      case availableSpaces
+      case unknown
+    }
+    
+    public struct Restriction: Codable, Equatable {
+      public let color: String
+      public let maximumParkingMinutes: Int
+      public let parkingSymbol: String
+      public let daysAndTimes: OpeningHours
+      public let type: String
+    }
+    
+    public let actualRate: String?
+    public let identifier: String
+    public let description: String
+    public let availableContent: [AvailableContent]?
+    public let source: API.DataAttribution?
+
+    public let paymentTypes: [PaymentType]?
+    public let restrictions: [Restriction]?
+    
+    public let availableSpaces: Int?
+    public let totalSpaces: Int?
+    public let lastUpdate: TimeInterval?
+
+    /// The polyline defining the parking area along the street as an encoded polyline.
+    ///
+    /// This is optional as some on-street parking isn't defined by a line,
+    /// but by an area. See `encodedPolygon`
+    ///
+    /// See `CLLocation.decodePolyLine`
+    public let encodedPolyline: String?
+
+    /// The polygon defining the parking area as an encoded polyline.
+    ///
+    /// This is optional as most on-street parking isn't defined by an area,
+    /// but by a line. See `encodedPolyline`
+    ///
+    /// See `CLLocation.decodePolyLine`
+    public let encodedPolygon: String?
+    
+    public var hasRealTime: Bool {
+      return availableSpaces != nil
+    }
+  }
+  
+  public struct LocationInfo : Codable, Equatable {
+    public struct Details: Codable, Equatable {
+      public let w3w: String?
+      public let w3wInfoURL: URL?
+    }
+    
+    public let details: Details?
+    public let stop: TKStopCoordinate?
+    public let bikePod: API.BikePodInfo?
+    public let carPod:  API.CarPodInfo?
+    public let carPark: API.CarParkInfo?
+    public let carRental: API.CarRentalInfo?
+    public let freeFloating: API.FreeFloatingVehicleInfo?
+    public let onStreetParking: API.OnStreetParkingInfo?
+
+    
+    public var hasRealTime: Bool {
+      return carPark?.hasRealTime
+        ?? bikePod?.hasRealTime
+        ?? carPod?.hasRealTime
+        ?? freeFloating?.hasRealTime
+        ?? onStreetParking?.hasRealTime
+        ?? false
+    }
+  }
   
   public struct LocationsResponse: Codable, Equatable {
     public static let empty: LocationsResponse = LocationsResponse(groups: [])
@@ -236,14 +314,16 @@ extension API {
       public let carParks: [TKCarParkLocation]?
       public let carRentals: [TKCarRentalLocation]?
       public let freeFloating: [TKFreeFloatingVehicleLocation]?
+      public let onStreetParking: [TKOnStreetParkingLocation]?
 
       public var all: [TKModeCoordinate] {
-        return (stops ?? [])      as [TKModeCoordinate]
-          + (bikePods ?? [])      as [TKModeCoordinate]
-          + (carPods ?? [])       as [TKModeCoordinate]
-          + (carParks ?? [])      as [TKModeCoordinate]
-          + (carRentals ?? [])    as [TKModeCoordinate]
-          + (freeFloating ?? [])  as [TKModeCoordinate]
+        return (stops ?? [])        as [TKModeCoordinate]
+          + (bikePods ?? [])        as [TKModeCoordinate]
+          + (carPods ?? [])         as [TKModeCoordinate]
+          + (carParks ?? [])        as [TKModeCoordinate]
+          + (carRentals ?? [])      as [TKModeCoordinate]
+          + (freeFloating ?? [])    as [TKModeCoordinate]
+          + (onStreetParking ?? []) as [TKModeCoordinate]
       }
         
     }

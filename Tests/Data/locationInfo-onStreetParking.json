@@ -1,0 +1,218 @@
+{
+  "lat": -37.818205,
+  "lng": 144.96278,
+  "onStreetParking": {
+    "actualRate": "$7.00 per hour",
+    "availableSpaces": 3,
+    "description": "Bond Street between Flinders Street and Flinders Lane",
+    "encodedPolyline": "fiyeFs_xsZvAg@",
+    "identifier": "parking|AU_VIC_Melbourne|ubi_on_3311",
+    "lastUpdate": 1560781923,
+    "parkingArea": [
+      {
+        "lat": -37.81796,
+        "lng": 144.96266
+      },
+      {
+        "lat": -37.8184,
+        "lng": 144.96286
+      }
+    ],
+    "paymentTypes": [
+      "METER",
+      "CREDIT_CARD",
+      "PHONE",
+      "COINS"
+    ],
+    "restrictions": [
+      {
+        "color": "#3CB916",
+        "daysAndTimes": {
+          "days": [{
+            "name": "SUNDAY",
+            "times": [{
+              "closes": "18:30",
+              "opens": "7:30"
+            }]
+          }],
+          "timeZone": "Australia/Melbourne"
+        },
+        "maximumParkingMinutes": 180,
+        "parkingSymbol": "3P",
+        "type": "Free"
+      },
+      {
+        "color": "#3CB916",
+        "daysAndTimes": {
+          "days": [
+            {
+              "name": "MONDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "TUESDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "WEDNESDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "THURSDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "FRIDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            }
+          ],
+          "timeZone": "Australia/Melbourne"
+        },
+        "maximumParkingMinutes": 60,
+        "parkingSymbol": "1P",
+        "type": "Free"
+      },
+      {
+        "color": "#3CB916",
+        "daysAndTimes": {
+          "days": [
+            {
+              "name": "MONDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "TUESDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "WEDNESDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "THURSDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "FRIDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            }
+          ],
+          "timeZone": "Australia/Melbourne"
+        },
+        "maximumParkingMinutes": 240,
+        "parkingSymbol": "4P",
+        "type": "Free"
+      },
+      {
+        "color": "#3CB916",
+        "daysAndTimes": {
+          "days": [{
+            "name": "SATURDAY",
+            "times": [{
+              "closes": "0:30+1d",
+              "opens": "7:30"
+            }]
+          }],
+          "timeZone": "Australia/Melbourne"
+        },
+        "maximumParkingMinutes": 240,
+        "parkingSymbol": "4P",
+        "type": "Free"
+      },
+      {
+        "color": "#3CB916",
+        "daysAndTimes": {
+          "days": [
+            {
+              "name": "MONDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "TUESDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "WEDNESDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "THURSDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "FRIDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            },
+            {
+              "name": "SATURDAY",
+              "times": [{
+                "closes": "18:30",
+                "opens": "7:30"
+              }]
+            }
+          ],
+          "timeZone": "Australia/Melbourne"
+        },
+        "maximumParkingMinutes": 180,
+        "parkingSymbol": "3P",
+        "type": "Free"
+      }
+    ],
+    "source": {"provider": {
+      "color": {
+        "blue": 247,
+        "green": 196,
+        "red": 56
+      },
+      "name": "UbiPark",
+      "phone": "1300 266 400",
+      "website": "https://ubipark.com/"
+    }},
+    "totalSpaces": 5
+  }
+}

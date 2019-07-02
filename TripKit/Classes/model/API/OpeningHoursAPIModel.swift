@@ -88,17 +88,21 @@ extension API {
 
           // HH:MM string (from backend)
           let string: String = try values.decode(String.self, forKey: key)
-          let split = string.components(separatedBy: ":")
-          guard
-            let first = split.first,
-            let hours = Int(first),
-            let last  = split.last,
-            let mins  = Int(last)
-            else {
-              throw TKOpeningHoursParserError.badTimeOfDay(string)
+          let byColon = string.components(separatedBy: ":")
+          guard let leftOfColon = byColon.first, let hours = Int(leftOfColon), let rightOfColon = byColon.last else {
+            throw TKOpeningHoursParserError.badTimeOfDay(string)
+          }
+          if let mins = Int(rightOfColon) {
+            return TimeInterval(hours * 3600 + mins * 60)
           }
 
-          return TimeInterval(hours * 3600 + mins * 60)
+          // HH:MM+Xd string (from backend)
+          let byPlus = rightOfColon.components(separatedBy: "+")
+          if let leftOfPlus = byPlus.first, let rightOfPlus = byPlus.last?.first, let mins = Int(leftOfPlus), let days = Int(String(rightOfPlus)) {
+            return TimeInterval(days * 86400 + hours * 3600 + mins * 60)
+          }
+          
+          throw TKOpeningHoursParserError.badTimeOfDay(string)
         }
         
         
