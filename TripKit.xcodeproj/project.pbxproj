@@ -895,6 +895,7 @@
 		3A26E1B320EFAFBD00FE4DDD /* TKUISegmentStationaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISegmentStationaryCell.xib; sourceTree = "<group>"; };
 		3A27DC6D2285FF1100BE6A96 /* TKUIImageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIImageAnnotationView.swift; sourceTree = "<group>"; };
 		3A2D06EB1F83DE4B002DA194 /* TKAnnotationClusterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAnnotationClusterer.swift; sourceTree = "<group>"; };
+		3A2EC07722CB76C500601A64 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocodingResultScorer.swift; sourceTree = "<group>"; };
 		3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLSEntry.swift; sourceTree = "<group>"; };
 		3A309214224DFAE2005D7E76 /* TKUIPolylineRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIPolylineRenderer.swift; sourceTree = "<group>"; };
@@ -947,7 +948,7 @@
 		3A5140301DEE62FA002DB39F /* TripRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequest.swift; sourceTree = "<group>"; };
 		3A54757D21C15A4800748EB6 /* TKUICircleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICircleAnnotationView.swift; sourceTree = "<group>"; };
 		3A63A88520B74C13007B8D46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
-		3A63A88820B74C19007B8D46 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TripKit.strings; sourceTree = "<group>"; };
+		3A63A88820B74C19007B8D46 /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A63A88920B74C1B007B8D46 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/TripKit.strings"; sourceTree = "<group>"; };
 		3A63A88A20B74C1D007B8D46 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A63A88B20B74C1E007B8D46 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/TripKit.strings; sourceTree = "<group>"; };
@@ -3818,6 +3819,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3ACF47A8229EEDFE0096860D /* Base */,
+				3A2EC07722CB76C500601A64 /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

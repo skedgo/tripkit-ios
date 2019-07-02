@@ -9,7 +9,7 @@
 import Foundation
 
 import RxSwift
-import RxDataSources
+import RxDataSources 
 
 extension TKUISegmentDirectionsViewModel {
   
@@ -25,13 +25,7 @@ extension TKUISegmentDirectionsViewModel {
     
     /// Localised textual instruction for following this street for the
     /// relevant distance (i.e., using current street name).
-    var streetInstruction: String {
-      if let name = streetName {
-        return "Along \(name)" // TODO :Localize
-      } else {
-        return "Along unnamed street" // TODO: Localize
-      }
-    }
+    var streetInstruction: String { return Loc.AlongStreet(named: streetName) }
   }
   
 }

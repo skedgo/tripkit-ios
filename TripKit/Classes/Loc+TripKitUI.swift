@@ -31,7 +31,7 @@ extension Loc {
   }
   
   
-  // MARK: Attribution
+  // MARK: - Attribution
   
   public static var DataProviders: String {
     return NSLocalizedString("Data Providers", tableName: "TripKit", bundle: .tripKit, comment: "Title for screen showing data providers")
@@ -54,10 +54,26 @@ extension Loc {
   
   // MARK: - Routing
 
+  public static var PlanTrip: String {
+    return NSLocalizedString("Plan Trip", tableName: "TripKit", bundle: .tripKit, comment: "Title of page to plan a trip")
+  }
+  
   @objc public static var PlanANewTrip: String {
     return NSLocalizedString("Plan a new trip", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that allows users to plan a new trip")
   }
   
+  @objc public static var Trips: String {
+    return NSLocalizedString("Trips", tableName: "TripKit", bundle: .tripKit, comment: "Title of page that shows routing results")
+  }
+  
+  public static var StartLocation: String {
+    return NSLocalizedString("Start location", tableName: "TripKit", bundle: .tripKit, comment: "Placeholder name for origin (then replaced with address or name)")
+  }
+
+  public static var EndLocation: String {
+    return NSLocalizedString("End location", tableName: "TripKit", bundle: .tripKit, comment: "Placeholder name for destination (then replaced with address or name)")
+  }
+
   public static var RequestSupport: String {
     return NSLocalizedString("Request support", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that allows users to request support")
   }
@@ -67,6 +83,65 @@ extension Loc {
     return String(format: format, start, end)
   }
   
+  public static var NoRoutesFound: String {
+    return NSLocalizedString("No routes found.", tableName: "TripKit", bundle: .tripKit, comment: "Error title when routing produced no results (but no specific error was returned from routing).")
+  }
+  
+  public static var PleaseAdjustYourQuery: String {
+    return NSLocalizedString("Please adjust your query and try again.", tableName: "TripKit", bundle: .tripKit, comment: "Error recovery suggestion for when routing produced no results (but no specific error was returned from routing).")
+  }
+
+  public static var BadgeEasiest: String {
+    return NSLocalizedString("Easiest", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Easiest")
+  }
+
+  public static var BadgeGreenest: String {
+    return NSLocalizedString("Greenest", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Greenest")
+  }
+
+  public static var BadgeFastest: String {
+    return NSLocalizedString("Fastest", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Fastest")
+  }
+
+  public static var BadgeHealthiest: String {
+    return NSLocalizedString("Healthiest", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Healthiest")
+  }
+
+  public static var BadgeCheapest: String {
+    return NSLocalizedString("Cheapest", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Cheapest")
+  }
+
+  public static var BadgeRecommended: String {
+    return NSLocalizedString("Recommended", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Recommended")
+  }
+
+  
+  // MARK: - Trip details
+
+  public static func Trip(index: Int?) -> String {
+    guard let index = index else { return Loc.Trip }
+    let format = NSLocalizedString("Trip %@", tableName: "TripKit", bundle: .tripKit, comment: "Title for trip of provided index")
+    return String(format: format, NSNumber(value: index))
+  }
+  
+  public static var ActionStart: String {
+    return NSLocalizedString("Start", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to start a trip")
+  }
+
+  public static func GetOnService(To location: String) -> String {
+    let format = NSLocalizedString("Get on service to %@", tableName: "TripKit", bundle: .tripKit, comment: "Instruction to get a service towards provided destination")
+    return String(format: format, location)
+  }
+
+  public static func AlongStreet(named: String?) -> String {
+    if let name = named {
+      let format = NSLocalizedString("Along %@", tableName: "TripKit", bundle: .tripKit, comment: "Instruction to follow street of the provided name")
+      return String(format: format, name)
+    } else {
+      return NSLocalizedString("Along unnamed street", tableName: "TripKit", bundle: .tripKit, comment: "Instruction to follow unnamed street")
+    }
+  }
+
   
   // MARK: - Departures + Services
 
@@ -150,4 +225,17 @@ extension Loc {
     let format = NSLocalizedString("Showing %@ of %@ transport modes", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number.")
     return String(format: format, NSNumber(value: visible), NSNumber(value: all))
   }
+  
+  // MARK: - Autocompletion
+  
+  @objc
+  public static var InstantResults: String {
+    return NSLocalizedString("Instant results", tableName: "TripKit", bundle: .tripKit, comment: "Title for section with instant results in autocompletion")
+  }
+
+  @objc
+  public static var MoreResults: String {
+    return NSLocalizedString("More results", tableName: "TripKit", bundle: .tripKit, comment: "'More results' section in autocompletion")
+  }
+
 }

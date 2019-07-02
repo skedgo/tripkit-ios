@@ -27,8 +27,7 @@ extension TKUISegmentTitleView {
     if segment.isPublicTransport, mode == .getReady,
       let destination = (segment.end?.title ?? nil),
       let origin = (segment.start?.title ?? nil) {
-      // TODO: Localise
-      title = "Get on service to \(destination)"
+      title = Loc.GetOnService(To: destination)
       subtitle = Loc.From(location: origin)
       
     } else {

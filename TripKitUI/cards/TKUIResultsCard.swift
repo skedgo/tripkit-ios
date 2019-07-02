@@ -55,7 +55,7 @@ public class TKUIResultsCard: TGTableCard {
     self.destination = destination
     self.request = nil
     
-    let title = "Plan Trip" // TODO: Localise
+    let title = Loc.PlanTrip
     let mapManager = TKUIResultsCard.config.mapManagerFactory()
     super.init(
       title: title, style: .grouped,
@@ -70,7 +70,7 @@ public class TKUIResultsCard: TGTableCard {
     self.destination = nil
     self.request = request
 
-    let title = "Routes" // TODO: Localise
+    let title = Loc.Trips
     let mapManager = TKUIResultsCard.config.mapManagerFactory()
     super.init(
       title: title, style: .grouped,

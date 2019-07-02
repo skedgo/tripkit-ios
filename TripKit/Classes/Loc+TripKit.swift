@@ -30,6 +30,44 @@ extension Loc {
     return NSLocalizedString("Show", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that, when tapped, shows something, e.g., a list of alert")
   }
   
+  // MARK: - Vehicles and transport modes
+  
+  public static var Vehicles: String {
+    return NSLocalizedString("Vehicles", tableName: "TripKit", bundle: .tripKit, comment: "Title for showing the number of available vehicles (e.g., scooters, cars or bikes)")
+  }
+  
+  @objc
+  public static var VehicleTypeBicycle: String {
+    return NSLocalizedString("Bicycle", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Bicycle")
+  }
+  
+  public static var VehicleTypeEBike: String {
+    return NSLocalizedString("E-Bike", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: E-Bike")
+  }
+  
+  @objc
+  public static var VehicleTypeCar: String {
+    return NSLocalizedString("Car", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Car")
+  }
+  
+  public static var VehicleTypeKickScooter: String {
+    return NSLocalizedString("Kick Scooter", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Kick Scooter")
+  }
+  
+  public static var VehicleTypeMotoScooter: String {
+    return NSLocalizedString("Moto Scooter", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Moto Scooter")
+  }
+
+  @objc
+  public static var VehicleTypeMotorbike: String {
+    return NSLocalizedString("Motorbike", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Motorbike")
+  }
+
+  @objc
+  public static var VehicleTypeSUV: String {
+    return NSLocalizedString("SUV", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: SUV")
+  }
+
   
   // MARK: - Linking to TSP
   
@@ -116,6 +154,11 @@ extension Loc {
     return String(format: format, from)
   }
 
+  public static var FromCurrentLocation: String {
+    return NSLocalizedString("From current location", tableName: "TripKit", bundle: .tripKit, comment: "")
+  }
+
+  
   @objc(ToLocation:)
   public static func To(location to: String) -> String {
     let format = NSLocalizedString("To %@", tableName: "TripKit", bundle: .tripKit, comment: "Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd)")

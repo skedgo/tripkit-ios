@@ -48,8 +48,7 @@ public class TKUITripsPageCard: TGPageCard {
   private func setUpTripHandler() {
     guard let tripHandler = TKUITripOverviewCard.config.startTripHandler else { return }
     
-    // TODO: Localize
-    headerRightAction = (title: "Start", onPress: { index in
+    headerRightAction = (title: Loc.ActionStart, onPress: { index in
       guard let card = self.cards[index] as? TKUITripOverviewCard else { assertionFailure(); return }
       let trip = card.viewModel.trip
       tripHandler(card, trip)
@@ -86,16 +85,7 @@ public class TKUITripOverviewCard: TGTableCard {
     self.index = index
     
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
-    
-    // TODO: Localize
-    let title: String
-    if let index = index {
-      title = "Trip \(index + 1)"
-    } else {
-      title = "Trip"
-    }
-    
-    super.init(title: title, dataSource: dataSource, mapManager: mapManager)
+    super.init(title: Loc.Trip(index: index), dataSource: dataSource, mapManager: mapManager)
   }
   
   public required convenience init?(coder: NSCoder) {

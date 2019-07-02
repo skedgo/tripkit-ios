@@ -195,12 +195,12 @@ extension TKMetricClassifier.Classification {
   
   var text: String {
     switch self {
-    case .easiest: return "Easiest" // TODO: Localise
-    case .greenest: return "Greenest"
-    case .fastest: return "Fastest"
-    case .healthiest: return "Healthiest"
-    case .cheapest: return "Cheapest"
-    case .recommended: return "Recommended"
+    case .easiest: return Loc.BadgeEasiest
+    case .greenest: return Loc.BadgeGreenest
+    case .fastest: return Loc.BadgeFastest
+    case .healthiest: return Loc.BadgeHealthiest
+    case .cheapest: return Loc.BadgeCheapest
+    case .recommended: return Loc.BadgeRecommended
     }
   }
   
@@ -272,8 +272,8 @@ extension TKUIResultsViewModel {
   //    } else {
   //      // We have a request, there was no explicit error during routing.
   //      let info = [
-  //        NSLocalizedDescriptionKey: NSLocalizedString("No routes found.", comment: "Error title when routing produced no results (but no specific error was returned from routing)."),
-  //        NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("Please adjust your query and try again.", comment: "Error recovery suggestion for when routing produced no results (but no specific error was returned from routing)."),
+  //        NSLocalizedDescriptionKey: Loc.NoRoutesFound,
+  //        NSLocalizedRecoverySuggestionErrorKey: Loc.PleaseAdjustYourQuery,
   //        ]
   //
   //      let noTrips = NSError(domain: "com.buzzhives.TripGo", code: 872631, userInfo: info)
