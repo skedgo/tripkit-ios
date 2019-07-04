@@ -64,7 +64,7 @@ extension API {
         case times
       }
       
-      public struct Time: Codable, Equatable {
+      public struct Time: Codable, Equatable, Hashable {
         
         public let opens: TimeInterval
         public let closes: TimeInterval
