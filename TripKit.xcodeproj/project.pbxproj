@@ -947,6 +947,7 @@
 		3A51402D1DEE62EE002DB39F /* TKSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegment.swift; sourceTree = "<group>"; };
 		3A5140301DEE62FA002DB39F /* TripRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequest.swift; sourceTree = "<group>"; };
 		3A54757D21C15A4800748EB6 /* TKUICircleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICircleAnnotationView.swift; sourceTree = "<group>"; };
+		3A5F9A2422D5E60700B72957 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Main.strings; sourceTree = "<group>"; };
 		3A63A88520B74C13007B8D46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A63A88820B74C19007B8D46 /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A63A88920B74C1B007B8D46 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/TripKit.strings"; sourceTree = "<group>"; };
@@ -3820,6 +3821,7 @@
 			children = (
 				3ACF47A8229EEDFE0096860D /* Base */,
 				3A2EC07722CB76C500601A64 /* de */,
+				3A5F9A2422D5E60700B72957 /* fi */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

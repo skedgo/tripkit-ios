@@ -1,17 +1,17 @@
-/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "Sijaintia '%@' ei löytynyt";
+
+/* '%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else. */
 "%@'s" = "Käyttäjän %@";
 
-/* No comment provided by engineer. */
+/* '%@' will be replaced with the person's name */
 "%@'s Home" = "Käyttäjän %@ Koti";
 
-/* No comment provided by engineer. */
+/* '%@' will be replaced with the person's name */
 "%@'s Work" = "Käyttäjän %@ Työ";
 
 /* Number of repeats. (old key: NumberRecurrences) */
 "%lu recurrences" = "%lu kerta(a)";
-
-/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
-"'%@' not found." = "Sijaintia '%@' ei löytynyt";
 
 /* Authorization restricted alert message */
 "Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Tämän ominaisuuden käyttöoikeutta on rajoitettu laitteessasi. Tarkista laitteesi Asetukset > Yleiset > Rajoitukset tai kysy neuvoa laitteen toimittajalta.";
@@ -22,8 +22,17 @@
 /* Default title for alert view */
 "Alert" = "Ilmoitus";
 
+/* Indicator that an event is all-day, or that something is open all-day */
+"all-day" = "koko päivä";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account?" = "Onko sinulla jo tili?";
+
 /* Option for users if they already owned a SkedGo account */
 "Already have an account? Sign in" = "Sinulla on jo tili? Kirjaudu sisään";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "saapuu klo %@";
 
 /* Source where the account was derived, e.g., Facebook */
 "Authentication" = "Todennus";
@@ -64,6 +73,9 @@
 /* Title on the button that asks users to confirm if they want to proceed with booking */
 "Confirm" = "Vahvista";
 
+/* This often appears below a password field, asking users to confirm the password entered. */
+"Confirm password" = "Vahvista salasana";
+
 /* Title for button that allows users to contact our support team to help resolve some error in the app. */
 "Contact support" = "Ota yhteys tukeen";
 
@@ -82,11 +94,20 @@
 /* Title for user's current location */
 "Current Location" = "Tämänhetkinen sijainti";
 
+/* Class of errors usually originated from databases */
+"Data Error" = "Datavirhe";
+
 /* Delete action */
 "Delete" = "Poista";
 
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "lähtee klo %@";
+
 /* Sort by distance */
 "Distance" = "Etäisyys";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account?" = "Eikö sinulla ole tiliä?";
 
 /* Option for users if they don't yet have a SkedGo account */
 "Don't have an account? Sign up" = "Sinulla ei ole vielä tiliä? Rekisteröidy";
@@ -97,8 +118,20 @@
 /* Drop new pin */
 "Drop new pin" = "Sijoita uusi piste";
 
+/* Title for the screen which allows users to edit their accounts */
+"Edit Account" = "Muokkaa tiliä";
+
 /* For email address */
 "Email" = "Sähköposti";
+
+/* Short indicator of end-time */
+"ends at %@" = "päättyy klo %@";
+
+/* Prompt for users to enter a new password */
+"Enter a new password" = "Anna uusi salasana";
+
+/* Describing any generic/unclassified errors */
+"Error" = "Virhe";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "Joka %@";
@@ -106,8 +139,23 @@
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "Päivittäin";
 
+/* Email placeholder text */
+"example@example.com" = "example@example.com";
+
+/* Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email */
+"Failed to send" = "Lähettäminen epäonnistui";
+
+/* Placeholder text for textField that asks user's first name/given name */
+"First name" = "Etunimi";
+
 /* Reminder to leave preference */
 "For when to leave" = "Kun pitää lähteä";
+
+/* A footnote that tells users we are asking for their current passwords, and why. */
+"For your security, please enter your current password." = "Anna nykyinen salasanasi turvallisuussyistä.";
+
+/* Title for a button which allows users to reset their password */
+"Forgot password" = "Salasana unohtui";
 
 /* Free as in beer */
 "Free" = "Ilmainen";
@@ -118,14 +166,20 @@
 /* Accessibility annotation for trips which have a reminder set. */
 "Has reminder" = "Muistutus asetettu";
 
+/* Warning message shown to a user when he/she tries to change password without the primary email verified */
+"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "Vaihtaaksesi salasanasi sinun on ensin vahvistettava sähköpostiosoitteesi. Seuraa sinulle lähetettyä linkkiä tai pyydä uusi alla.";
+
 /* Include contacts. */
 "Include contacts" = "Sisällytä yhteystiedot";
 
-/* Include events. */
+/* Button to include events in search, too. */
 "Include events" = "Sisällytä tapahtumat";
 
 /* Instant results proposal */
 "Instant results" = "Pikahaun tulokset";
+
+/* A footnote that instructs users to check their emails for reset instructions */
+"Instructions on how to reset password has been sent to the above email address." = "Ohjeet salasanan palauttamiseksi on lähetetty edellä mainittuun sähköpostiosoitteeseen.";
 
 /* Title for alert that indicates the user account has become invalid */
 "Invalid account" = "Virheellinen tili";
@@ -133,8 +187,14 @@
 /* Name placeholder text */
 "John Appleseed" = "Milla Matkaaja";
 
+/* Placeholder text for textField that asks user's last name/surname */
+"Last name" = "Sukunimi";
+
+/* Last updated at %date */
+"Last updated: %@" = "Viimeksi päivitetty: %@";
+
 /* Title of button to perform some action at a later time */
-"Later" = "Later";
+"Later" = "Myöhemmin";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Ladataan";
@@ -181,14 +241,17 @@
 /* Ok action */
 "OK" = "Ok";
 
-/* Button that goes to the Setting's app */
-"Open Settings" = "Avaa Asetukset";
-
 /* Open in Safari action */
 "Open in Safari" = "Avaa Safarissa";
 
+/* Button that goes to the Setting's app */
+"Open Settings" = "Avaa Asetukset";
+
 /* No comment provided by engineer. */
 "Password" = "Salasana";
+
+/* A footnote that asks users for their email addresses in order to reset password */
+"Please enter your registered email address. We will then send you instructions on how to reset password" = "Anna rekisteröity sähköpostiosoitteesi. Lähetämme sinulle ohjeet salasanan palauttamiseksi";
 
 /* Please select a location prompt */
 "Please select a location" = "Ole hyvä ja valitse sijainti";
@@ -202,11 +265,17 @@
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
 "Press 'search' for more..." = "Paina 'Etsi' saadaksesi lisätuloksia...";
 
+/* Message to user if no primary email is set on his/her account */
+"Primary email is not set on your account. Please contact us for support" = "Tilillesi ei ole määritetty ensisijaista sähköpostia. Ota yhteyttä meihin saadaksesi tukea";
+
 /* No comment provided by engineer. */
 "Read more..." = "Lisätiedot...";
 
 /* Indicator for real-time information */
 "Real-time" = "Reaaliaikainen";
+
+/* This is the placeholder text in a text field to inform users an optioanl referral code can be entered. */
+"Referral code (optional)" = "Suosittelukoodi (valinnainen)";
 
 /* Action title to add/remove reminder */
 "Reminder" = "Muistutus";
@@ -226,11 +295,14 @@
 /* Button title to report a problem */
 "Report Problem" = "Ilmoita ongelmasta";
 
+/* Give users an option to rece */
+"Resend verification email" = "Lähetä vahvistussähköposti uudelleen";
+
+/* Title for a button which, when tapped, confirms the reset of password. */
+"Reset password" = "Palauta salasana";
+
 /* Retry action, e.g., in case something didn't load */
 "Retry" = "Yritä uudelleen";
-
-/* Sports utility vehicle abbreviation */
-"SUV" = "SUV";
 
 /* Sort by overall score, like a ranking. */
 "Score" = "Pisteytys";
@@ -239,13 +311,25 @@
 "Search" = "Hae";
 
 /* No comment provided by engineer. */
-"Search Results" = "Hakutulokset";
+"Search for a city" = "Hae kaupunkia";
 
 /* No comment provided by engineer. */
-"Search for a city" = "Hae kaupunkia";
+"Search Results" = "Hakutulokset";
 
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'..." = "Haetaan sijaintia '%@'...";
+
+/* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
+"Sent" = "Lähetetty";
+
+/* Class of errors generated by our servers */
+"Server Error" = "Palvelinvirhe";
+
+/* Error message when our server returns empty data in response to a network request */
+"Server response contains no data" = "Palvelimen vastaus ei sisällä tietoja";
+
+/* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
+"Showing %@ of %@ transport modes" = "Näytetään %1$@ / %2$@ kulkumuodoista";
 
 /* Title of page or button to sign in */
 "Sign in" = "Kirjaudu sisään";
@@ -268,11 +352,26 @@
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "%@ lähtien";
 
+/* Short indicator of start-time */
+"starts at %@" = "alkaa klo %@";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
+
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Napauta asettaaksesi sijainnin";
 
 /* Message that indicates the app is about to sign users out of their user accounts */
 "The app will now sign out" = "Sovellus sulkeutuu";
+
+/* Error message shown to a user when zero-length password field is detected */
+"The password field cannot be empty." = "Salasanakenttä ei voi olla tyhjä.";
+
+/* Error message shown to a user when he/she enters incorrect username or password */
+"The username or password you've entered is incorrect." = "Antamasi käyttäjätunnus tai salasana on virheellinen.";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "%@ asti";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Seuranta - pois päältä";
@@ -289,11 +388,23 @@
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "%@ asti";
 
+/* Title for a button which, when tapped, proceeds to updating password */
+"Update" = "Päivitä";
+
 /* Message that shows app is updating trip after user finalised bookings */
 "Updating trip" = "Matkaa päivitetään";
 
+/* Error message when our server fails to return userToken in response to a sign in or sign up request */
+"userToken is missing in the server response" = "userToken puuttuu palvelimen vastauksesta";
+
 /* Message that informs users that some values are missing from the required fields in a booking form. */
 "Values missing from required fields." = "Osa pakollisista tiedoista puuttuu.";
+
+/* Title for a button which, when tapped, proceeds to verifying password */
+"Verify" = "Vahvista";
+
+/* Prompt for users to enter their passwords for verification purpose. */
+"Verify password" = "Vahvista salasana";
 
 /* Every weekday in context of repetitions (especially recurring events) */
 "Weekdays" = "Arkisin";
@@ -321,25 +432,4 @@
 
 /* Contacts authorisation needed text */
 "You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Et aiemmin sallinut tämän sovelluksen pääsyä yhteystietoihisi. Mene kohtaan Asetukset > Tietosuoja > Yhteystiedot ja salli tämän sovelluksen käyttää tätä ominaisuutta.";
-
-/* Indicator that an event is all-day */
-"all-day" = "koko päivä";
-
-/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
-"arrives %@" = "saapuu klo %@";
-
-/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
-"departs %@" = "lähtee klo %@";
-
-/* Short indicator of end-time */
-"ends at %@" = "päättyy klo %@";
-
-/* Email placeholder text */
-"example@example.com" = "example@example.com";
-
-/* Short indicator of start-time */
-"starts at %@" = "alkaa klo %@";
-
-/* to %date. (old key: DateToFormat) */
-"to %@" = "%@ asti";
 
