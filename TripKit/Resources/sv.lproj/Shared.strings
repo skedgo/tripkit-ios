@@ -1,0 +1,435 @@
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "%@ kan inte hittas.";
+
+/* '%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@'s";
+
+/* '%@' will be replaced with the person's name */
+"%@'s Home" = "%@: s hem";
+
+/* '%@' will be replaced with the person's name */
+"%@'s Work" = "%@s arbete";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu upprepningar";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Åtkomst till den här funktionen har begränsats för din enhet. Kontrollera appens inställningar > Allmänt > Begränsningar eller fråga din leverantör.";
+
+/* Accessibility label for action button */
+"Action" = "Åtgärd";
+
+/* Default title for alert view */
+"Alert" = "Larm";
+
+/* Indicator that an event is all-day, or that something is open all-day */
+"all-day" = "dygnet runt";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account?" = "Har du redan ett konto?";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "Har du redan ett konto? Logga in";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "anländer %@";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "Autentisering";
+
+/* Authorisation needed title */
+"Authorisation needed" = "Godkännande krävs";
+
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Tillbaka";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "Cykel";
+
+/* Cancel action */
+"Cancel" = "Avbryt";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "Avbruten";
+
+/* No comment provided by engineer. */
+"Cannot proceed without a valid email address" = "Kan inte fortsätta utan en giltig e-postadress";
+
+/* Type of vehicle : car */
+"Car" = "Bil";
+
+/* Instruction for changing password */
+"Change" = "Byt";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "Ändra spårningsalternativ";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "Kryssruta";
+
+/* Close action */
+"Close" = "Stäng";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "Bekräfta";
+
+/* This often appears below a password field, asking users to confirm the password entered. */
+"Confirm password" = "Bekräfta lösenord";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Kontakta support";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "Kan inte bestämma din nuvarande plats.";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "Områden med stöd kunde inte hämtas från TripGos server. Försök igen senare.";
+
+/* Message that indicates the app is creating accounts for users */
+"Creating account" = "Skapar konto";
+
+/* Current city */
+"Current City" = "Nuvarande stad";
+
+/* Title for user's current location */
+"Current Location" = "Nuvarande plats";
+
+/* Class of errors usually originated from databases */
+"Data Error" = "Datafel";
+
+/* Delete action */
+"Delete" = "Ta bort";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "avgår %@";
+
+/* Sort by distance */
+"Distance" = "Avstånd";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account?" = "Har du inget konto?";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "Har du inget konto? Registrera dig";
+
+/* Done action */
+"Done" = "Klart";
+
+/* Drop new pin */
+"Drop new pin" = "Fäst nytt stift";
+
+/* Title for the screen which allows users to edit their accounts */
+"Edit Account" = "Redigera konto";
+
+/* For email address */
+"Email" = "E-post";
+
+/* Short indicator of end-time */
+"ends at %@" = "slutar kl. %@";
+
+/* Prompt for users to enter a new password */
+"Enter a new password" = "Ange ett nytt lösenord";
+
+/* Describing any generic/unclassified errors */
+"Error" = "Fel";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "Var %@";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "Varje dag";
+
+/* Email placeholder text */
+"example@example.com" = "exempel@exempel.se";
+
+/* Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email */
+"Failed to send" = "Kunde inte skicka";
+
+/* Placeholder text for textField that asks user's first name/given name */
+"First name" = "Förnamn";
+
+/* Reminder to leave preference */
+"For when to leave" = "För när du ska åka";
+
+/* A footnote that tells users we are asking for their current passwords, and why. */
+"For your security, please enter your current password." = "Ange ditt nuvarande lösenord för din egen säkerhet.";
+
+/* Title for a button which allows users to reset their password */
+"Forgot password" = "Glömt lösenordet";
+
+/* Free as in beer */
+"Free" = "Gratis";
+
+/* No comment provided by engineer. */
+"Getting a lift" = "Få lift";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "Har påminnelse";
+
+/* Warning message shown to a user when he/she tries to change password without the primary email verified */
+"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "För att ändra ditt lösenord måste du först bekräfta din e-postadress. Vänligen följ länken som skickades till dig eller begär en annan nedan.";
+
+/* Include contacts. */
+"Include contacts" = "Inkludera kontakter";
+
+/* Button to include events in search, too. */
+"Include events" = "Inkludera händelser";
+
+/* Instant results proposal */
+"Instant results" = "Omedelbara resultat";
+
+/* A footnote that instructs users to check their emails for reset instructions */
+"Instructions on how to reset password has been sent to the above email address." = "Instruktioner för hur du återställer lösenord har skickats till ovanstående e-postadress.";
+
+/* Title for alert that indicates the user account has become invalid */
+"Invalid account" = "Ogiltigt konto";
+
+/* Name placeholder text */
+"John Appleseed" = "John Appleseed";
+
+/* Placeholder text for textField that asks user's last name/surname */
+"Last name" = "Efternamn";
+
+/* Last updated at %date */
+"Last updated: %@" = "Senast uppdaterad: %@";
+
+/* Title of button to perform some action at a later time */
+"Later" = "Senare";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "Laddar";
+
+/* Title for unnamed location */
+"Location" = "Plats";
+
+/* Location iOS authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Platstjänster krävs för att använda den här funktionen. Gå till appens Inställningar > Sekretess > Platstjänster, och se till att de är påslagna och godkänn den här appen.";
+
+/* Reminder to leave preference */
+"Minutes before trip" = "Minuter innan resan";
+
+/* More results proposal */
+"More results" = "Fler resultat";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "Motorcykel";
+
+/* Title for view that shows the summary of a user's account information */
+"My account" = "Mitt konto";
+
+/* Title for name of something (or someone) */
+"Name" = "Namn";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "Aldrig";
+
+/* Title of page to create new account */
+"New account" = "Nytt konto";
+
+/* Next action */
+"Next" = "Nästa";
+
+/* No comment provided by engineer. */
+"No CO₂" = "Ingen CO₂";
+
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Inte tillgänglig med rullstol";
+
+/* Countdown cell 'now' indicator */
+"Now" = "Nu";
+
+/* Ok action */
+"OK" = "OK";
+
+/* Open in Safari action */
+"Open in Safari" = "Öppna i Safari";
+
+/* Button that goes to the Setting's app */
+"Open Settings" = "Öppna inställningar";
+
+/* No comment provided by engineer. */
+"Password" = "Lösenord";
+
+/* A footnote that asks users for their email addresses in order to reset password */
+"Please enter your registered email address. We will then send you instructions on how to reset password" = "Vänligen ange din registrerade e-postadress. Vi skickar sedan instruktioner om hur du återställer lösenordet";
+
+/* Please select a location prompt */
+"Please select a location" = "Välj en plats";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "Försök igen eller ställ in din plats manuellt.";
+
+/* Please verify the location prompt */
+"Please verify the location" = "Verifiera platsen";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more..." = "Tryck på \"sök\" för mer...";
+
+/* Message to user if no primary email is set on his/her account */
+"Primary email is not set on your account. Please contact us for support" = "Primär e-post är inte inställd på ditt konto. Kontakta oss för support";
+
+/* No comment provided by engineer. */
+"Read more..." = "Läs mer...";
+
+/* Indicator for real-time information */
+"Real-time" = "Realtid";
+
+/* This is the placeholder text in a text field to inform users an optioanl referral code can be entered. */
+"Referral code (optional)" = "Hänvisningskod (valfritt)";
+
+/* Action title to add/remove reminder */
+"Reminder" = "Påminnelse";
+
+/* Repeats daily */
+"Repeats daily" = "Upprepas dagligen";
+
+/* Repeats monthly */
+"Repeats monthly" = "Upprepas månadsvis";
+
+/* Repeats weekly */
+"Repeats weekly" = "Upprepas veckovis";
+
+/* Repeats yearly */
+"Repeats yearly" = "Upprepas årligen";
+
+/* Button title to report a problem */
+"Report Problem" = "Rapportera problem";
+
+/* Give users an option to rece */
+"Resend verification email" = "Skicka bekräftelse-e-post igen";
+
+/* Title for a button which, when tapped, confirms the reset of password. */
+"Reset password" = "Återställ lösenordet";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "Försök igen";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "Poäng";
+
+/* Empty search bar placeholder */
+"Search" = "Sök";
+
+/* No comment provided by engineer. */
+"Search for a city" = "Sök efter en stad";
+
+/* No comment provided by engineer. */
+"Search Results" = "Sökresultat";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'..." = "Söker efter '%@'...";
+
+/* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
+"Sent" = "Skickat";
+
+/* Class of errors generated by our servers */
+"Server Error" = "Serverfel";
+
+/* Error message when our server returns empty data in response to a network request */
+"Server response contains no data" = "Serverrespons innehåller inga data";
+
+/* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
+"Showing %@ of %@ transport modes" = "Visar %1$@ av %2$@ transportsätt";
+
+/* Title of page or button to sign in */
+"Sign in" = "Logga in";
+
+/* Instruction for signing out user account */
+"Sign out" = "Logga ut";
+
+/* Title of page or button to sign up */
+"Sign up" = "Registrera dig";
+
+/* No comment provided by engineer. */
+"Sign up cannot be completed without a valid password" = "Registrering kan inte slutföras utan ett giltigt lösenord";
+
+/* Message that indicates the app is signing users into their user accounts */
+"Signing in" = "Loggar in";
+
+/* Message that indicates the app is signing users out of their accounts */
+"Signing out" = "Loggar ut";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "Startar %@";
+
+/* Short indicator of start-time */
+"starts at %@" = "börjar kl. %@";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "Tryck för att ange plats";
+
+/* Message that indicates the app is about to sign users out of their user accounts */
+"The app will now sign out" = "Appen kommer nu att logga ut";
+
+/* Error message shown to a user when zero-length password field is detected */
+"The password field cannot be empty." = "Lösenordsfältet kan inte vara tomt.";
+
+/* Error message shown to a user when he/she enters incorrect username or password */
+"The username or password you've entered is incorrect." = "Angivet användarnamn eller lösenord är felaktigt.";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "till %@";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "Spårning – av";
+
+/* user location button - follow */
+"Tracking - on" = "Spårning – på";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "Spårning – på med rubrik";
+
+/* No comment provided by engineer. */
+"Unknown error" = "Okänt fel";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "Upp till %@";
+
+/* Title for a button which, when tapped, proceeds to updating password */
+"Update" = "Uppdatera";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "Uppdaterar resa";
+
+/* Error message when our server fails to return userToken in response to a sign in or sign up request */
+"userToken is missing in the server response" = "userToken saknas i serverns respons";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "Värden saknas från obligatoriska fält.";
+
+/* Title for a button which, when tapped, proceeds to verifying password */
+"Verify" = "Bekräfta";
+
+/* Prompt for users to enter their passwords for verification purpose. */
+"Verify password" = "Bekräfta lösenord";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "Vardagar";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "Helger";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Okänd tillgänglighet med rullstol";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "Tillgänglig med rullstol";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "Vill du rapportera ett problem?";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "Du måste godkänna bokningsvillkoren.";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "Du måste godkänna försäkringsvillkoren.";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Du har tidigare nekat den här appens åtkomst till din kalender. Gå till appens Inställningar > Sekretess > Kalender och godkänn att appen får använda den här funktionen.";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Du har tidigare nekat den här appens åtkomst till dina kontakter. Gå till appens Inställningar > Sekretess > Kontakter och godkänn att appen får använda den här funktionen.";
+
