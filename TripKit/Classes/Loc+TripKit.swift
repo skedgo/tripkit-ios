@@ -167,8 +167,15 @@ extension Loc {
 
   @objc(FromTime:toTime:)
   public static func fromTime(_ from: String, toTime to: String) -> String {
-    let format = NSLocalizedString("%@ to %@", tableName: "TripKit", bundle: .tripKit, comment: "For describing a time interval, e.g., '8:30 to 8:43'")
-    return String(format: format, from, to)
+    switch UIView.userInterfaceLayoutDirection(for: .unspecified) {
+    case .leftToRight:
+      return String(format: "%@ → %@", from, to)
+    case .rightToLeft:
+      return String(format: "%@ ← %@", to, from)
+    @unknown default:
+      assertionFailure("Unexpected case encountered")
+      return String(format: "%@ → %@", from, to)
+    }
   }
   
   @objc(Stops:)
