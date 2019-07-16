@@ -363,8 +363,11 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
       break;
       
     case TKServerTypeBeta:
-      regionsURLString = @"https://bigbang.buzzhives.com/satapp-beta/regions.json";
+    {
+      NSString *baseString = [[TKConfig sharedInstance] betaServerBaseURL];
+      regionsURLString = [baseString stringByAppendingString:@"regions.json"];
       break;
+    }
 
     case TKServerTypeLocal:
       regionsURLString = [[TKServer developmentServer] stringByAppendingString:@"regions.json"];
@@ -880,7 +883,8 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
     }
       
     case TKServerTypeBeta: {
-      _regionServers = @[ [NSURL URLWithString:@"https://bigbang.buzzhives.com/satapp-beta/"] ];
+      NSString *baseURL = [[TKConfig sharedInstance] betaServerBaseURL];
+      _regionServers = @[ [NSURL URLWithString:baseURL] ];
       break;
     }
 

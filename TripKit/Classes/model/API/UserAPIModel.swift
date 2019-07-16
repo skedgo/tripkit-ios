@@ -17,6 +17,7 @@ extension API {
     public let address1: String?
     public let address2: String?
     public let postCode: String?
+    public let email: String?
     public let emails: [Email]?
     public let phones: [Phone]?
     public let userId: String?
@@ -29,6 +30,7 @@ extension API {
       address1: String? = nil,
       address2: String? = nil,
       postCode: String? = nil,
+      email: String? = nil,
       emails: [Email]? = nil,
       phones: [Phone]? = nil,
       userId: String? = nil,
@@ -40,6 +42,7 @@ extension API {
       self.address1 = address1
       self.address2 = address2
       self.postCode = postCode
+      self.email = email
       self.emails = emails
       self.phones = phones
       self.userId = userId
@@ -55,6 +58,7 @@ extension API {
       case address1
       case address2
       case postCode
+      case email
       case emails
       case phones
       case userId = "userID"
