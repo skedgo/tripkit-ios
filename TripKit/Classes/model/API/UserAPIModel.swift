@@ -63,6 +63,36 @@ extension API {
       case phones
       case userId = "userID"
     }
+    
+    public init(from decoder: Decoder) throws {
+      let values = try decoder.container(keyedBy: CodingKeys.self)
+      userId = try? values.decode(String.self, forKey: .userId)
+      name = try? values.decode(String.self, forKey: .name)
+      firstName = try? values.decode(String.self, forKey: .firstName)
+      lastName = try? values.decode(String.self, forKey: .lastName)
+      address1 = try? values.decode(String.self, forKey: .address1)
+      address2 = try? values.decode(String.self, forKey: .address2)
+      postCode = try? values.decode(String.self, forKey: .postCode)
+      email = try? values.decode(String.self, forKey: .email)
+      phones = try? values.decode([Phone].self, forKey: .phones)
+      
+      if let emails = try? values.decode([Email].self, forKey: .emails) {
+        // if the api returns `emails` field, use it.
+        self.emails = emails
+      } else if let address = try? values.decode(String.self, forKey: .email) {
+        // our api only returns `email` field if, and only if, the email
+        // is the primary email and is validated. So if the api does not
+        // explicitly return `emails`, we can safely create one based on
+        // the `email` field.
+        //
+        // this ticket: https://redmine.buzzhives.com/issues/11622, aims
+        // to make our api more consistent.
+        let primaryEmail = Email(address: address, validated: true, primary: true)
+        self.emails = [primaryEmail]
+      } else {
+        self.emails = nil
+      }
+    }
   }
   
   public struct Phone: Codable {
