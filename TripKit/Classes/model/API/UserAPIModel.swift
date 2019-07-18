@@ -17,36 +17,31 @@ extension API {
     public let address1: String?
     public let address2: String?
     public let postCode: String?
-    public let email: String?
-    public let emails: [Email]?
     public let phones: [Phone]?
-    public let userId: String?
-    public var appData: [String : Any] = [:]
+    public var appData: [String : Any]?
+    private let rawUserId: String?
+    private let rawEmail: String?
+    private let rawEmails: [Email]?
     
-    public init(
-      name: String? = nil,
-      firstName: String? = nil,
-      lastName: String? = nil,
-      address1: String? = nil,
-      address2: String? = nil,
-      postCode: String? = nil,
-      email: String? = nil,
-      emails: [Email]? = nil,
-      phones: [Phone]? = nil,
-      userId: String? = nil,
-      appData: [String : Any] = [:]
-      ) {
+    public init(name: String? = nil,
+                firstName: String? = nil,
+                lastName: String? = nil,
+                address1: String? = nil,
+                address2: String? = nil,
+                postCode: String? = nil,
+                email: String? = nil,
+                phone: String? = nil,
+                appData: [String: Any]? = nil) {
       self.name = name
       self.firstName = firstName
       self.lastName = lastName
       self.address1 = address1
       self.address2 = address2
       self.postCode = postCode
-      self.email = email
-      self.emails = emails
-      self.phones = phones
-      self.userId = userId
-      self.appData = appData
+      self.rawEmail = email
+      self.rawEmails = rawEmail != nil ? [Email(address: rawEmail!)] : nil
+      self.phones = phone != nil ? [Phone(number: phone!)] : nil
+      self.rawUserId = nil // This is not set directly
     }
     
     // MARK: - Codable
@@ -58,40 +53,18 @@ extension API {
       case address1
       case address2
       case postCode
-      case email
-      case emails
       case phones
-      case userId = "userID"
+      case rawEmail = "email"
+      case rawEmails = "emails"
+      case rawUserId = "userID"
     }
     
-    public init(from decoder: Decoder) throws {
-      let values = try decoder.container(keyedBy: CodingKeys.self)
-      userId = try? values.decode(String.self, forKey: .userId)
-      name = try? values.decode(String.self, forKey: .name)
-      firstName = try? values.decode(String.self, forKey: .firstName)
-      lastName = try? values.decode(String.self, forKey: .lastName)
-      address1 = try? values.decode(String.self, forKey: .address1)
-      address2 = try? values.decode(String.self, forKey: .address2)
-      postCode = try? values.decode(String.self, forKey: .postCode)
-      email = try? values.decode(String.self, forKey: .email)
-      phones = try? values.decode([Phone].self, forKey: .phones)
-      
-      if let emails = try? values.decode([Email].self, forKey: .emails) {
-        // if the api returns `emails` field, use it.
-        self.emails = emails
-      } else if let address = try? values.decode(String.self, forKey: .email) {
-        // our api only returns `email` field if, and only if, the email
-        // is the primary email and is validated. So if the api does not
-        // explicitly return `emails`, we can safely create one based on
-        // the `email` field.
-        //
-        // this ticket: https://redmine.buzzhives.com/issues/11622, aims
-        // to make our api more consistent.
-        let primaryEmail = Email(address: address, validated: true, primary: true)
-        self.emails = [primaryEmail]
-      } else {
-        self.emails = nil
-      }
+    public var userId: String? { return rawUserId }
+    
+    public var emails: [Email]? {
+      if rawEmails != nil { return rawEmails! }
+      else if let email = rawEmail { return [Email(address: email, validated: true, primary: true)] }
+      else { return nil }
     }
   }
   
