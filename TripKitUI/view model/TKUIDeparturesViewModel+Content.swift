@@ -78,7 +78,13 @@ extension TKUIDeparturesViewModel {
       .asObservable()
       ?? .just(nil)
     
-    relevantInput = Observable.combineLatest(filterSteam, dateStream) { (filter: $0, date: $1) }
+    // Fire once a minute regardless of input, to allow occassional update
+    // of the list as the `earliestDate` in the predicates below might
+    // depend on the current time. We could only do this when no date is set,
+    // but this timer is only firing once a minute anyway.
+    let timer = Observable<Int>.interval(.seconds(60), scheduler: MainScheduler.instance).startWith(0)
+    
+    relevantInput = Observable.combineLatest(filterSteam, dateStream, timer) { filter, date, _ in (filter: filter, date: date) }
     
     if let stops = data.stops, !stops.isEmpty {
       let stopLocations = self.stopLocations(for: stops)
