@@ -62,7 +62,7 @@ extension API {
     public var userId: String? { return rawUserId }
     
     public var emails: [Email]? {
-      if rawEmails != nil { return rawEmails! }
+      if let emails = rawEmails { return emails }
       else if let email = rawEmail { return [Email(address: email, validated: true, primary: true)] }
       else { return nil }
     }
