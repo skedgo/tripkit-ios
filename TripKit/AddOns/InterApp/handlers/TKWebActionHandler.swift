@@ -16,6 +16,8 @@ public class TKWebActionHandler: TKInterAppExternalActionHandler {
   
   public let priority: TKInterAppExternalActionPriority = .low
   
+  public let type: TKInterAppCommunicator.ExternalActionType = .website
+  
   public func canHandle(_ string: TKInterAppIdentifier) -> Bool {
     return string.hasPrefix("http:") || string.hasPrefix("https:")
   }

@@ -20,6 +20,8 @@ public class TKSMSActionHandler: TKInterAppExternalActionHandler {
   
   public let priority: TKInterAppExternalActionPriority = .low
   
+  public let type: TKInterAppCommunicator.ExternalActionType = .message
+  
   public func canHandle(_ string: TKInterAppIdentifier) -> Bool {
     return canSendSMS && string.hasPrefix("sms:")
   }
