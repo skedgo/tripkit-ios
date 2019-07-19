@@ -40,7 +40,7 @@ extension API {
       self.postCode = postCode
       self.rawEmail = email
       self.rawEmails = rawEmail.flatMap { [Email(address: $0)] }
-      self.phones = phone != nil ? [Phone(number: phone!)] : nil
+      self.phones = phone.flatMap { [Phone(number: $0)] }
       self.rawUserId = nil // This is not set directly
     }
     
