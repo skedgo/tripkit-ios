@@ -10,6 +10,14 @@ import Foundation
 
 public extension TKUIResultsCard {
   
+  enum SupportType {
+    /// User tried querying for a from/to pair that isn't supported yet
+    case unsupportedQuery(TripRequest)
+    
+    /// User encountered an unidentifier routing error
+    case routingError(Error, TripRequest)
+  }
+  
   /// Configurtion of any `TKUIResultsCard`.
   ///
   /// This isn't created directly, but rather you modify the static instance
@@ -19,11 +27,11 @@ public extension TKUIResultsCard {
     
     static let empty = Configuration()
     
-    /// Set this to have a button on the results card that is shown when the
-    /// user tried to query for a from/to pair that isn't supported yet.
+    /// Set this to have a button on the results card to contact customer support
+    /// when the user is encountering errors.
     ///
     /// Called when the user taps the button.
-    public var requestRoutingSupport: ((TKUIResultsCard, TripRequest) -> Void)?
+    public var contactCustomerSupport: ((TKUIResultsCard, SupportType) -> Void)?
     
     /// Set this to use your own map manager. You can use this in combination
     /// with `TGCardViewController.builder` to use a map other than Apple's
