@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <view contentMode="scaleToFill" id="60J-df-xWy" customClass="TKUITripBoyView" customModule="TripKitUI" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="254" translatesAutoresizingMaskIntoConstraints="NO" id="ski-st-0S2">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="365.5"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="254" verticalCompressionResistancePriority="752" placeholderIntrinsicWidth="71" placeholderIntrinsicHeight="83" translatesAutoresizingMaskIntoConstraints="NO" id="DC3-y0-epq">
+                            <rect key="frame" x="124.5" y="48" width="71" height="83"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="#No bookings yet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5q7-Ap-cDI">
+                            <rect key="frame" x="80.5" y="151" width="159.5" height="24"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                            <color key="textColor" red="0.34901960780000002" green="0.41176470590000003" blue="0.46666666670000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="254" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="#Description which can be quite long, quite long, quite long, quite long, quite long, quite long, quite long" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRv-q8-ecH">
+                            <rect key="frame" x="28" y="195" width="264" height="46.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                            <color key="textColor" red="0.34901960780000002" green="0.41176470590000003" blue="0.46666666670000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jHE-pm-Jq9">
+                            <rect key="frame" x="116.5" y="261.5" width="87" height="76"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="254" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xKe-fs-FjF">
+                                    <rect key="frame" x="23" y="0.0" width="41" height="33"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <state key="normal" title="Retry"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfU-Fl-Kxw">
+                                    <rect key="frame" x="0.0" y="43" width="87" height="33"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <state key="normal" title="#Plan a trip"/>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="DC3-y0-epq" firstAttribute="centerX" secondItem="ski-st-0S2" secondAttribute="centerX" id="4lQ-p2-wXv"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="iRv-q8-ecH" secondAttribute="trailing" constant="20" id="5df-2N-Mtp"/>
+                        <constraint firstItem="iRv-q8-ecH" firstAttribute="top" secondItem="5q7-Ap-cDI" secondAttribute="bottom" constant="20" id="5qn-LL-Jyc"/>
+                        <constraint firstItem="jHE-pm-Jq9" firstAttribute="centerX" secondItem="ski-st-0S2" secondAttribute="centerX" id="Hep-fm-fzs"/>
+                        <constraint firstItem="DC3-y0-epq" firstAttribute="top" secondItem="ski-st-0S2" secondAttribute="topMargin" constant="20" id="LcK-8a-mUU"/>
+                        <constraint firstItem="iRv-q8-ecH" firstAttribute="leading" secondItem="ski-st-0S2" secondAttribute="leadingMargin" constant="20" id="PTz-hw-uG0"/>
+                        <constraint firstItem="5q7-Ap-cDI" firstAttribute="top" secondItem="DC3-y0-epq" secondAttribute="bottom" constant="20" id="nYU-Qi-8N2"/>
+                        <constraint firstAttribute="bottomMargin" secondItem="jHE-pm-Jq9" secondAttribute="bottom" constant="20" id="olA-V9-k24"/>
+                        <constraint firstItem="jHE-pm-Jq9" firstAttribute="top" secondItem="iRv-q8-ecH" secondAttribute="bottom" constant="20" id="pUA-hP-Lo9"/>
+                        <constraint firstItem="5q7-Ap-cDI" firstAttribute="centerX" secondItem="DC3-y0-epq" secondAttribute="centerX" id="tqK-xh-TOq"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ski-st-0S2" firstAttribute="centerX" secondItem="60J-df-xWy" secondAttribute="centerX" id="BgQ-49-kX5"/>
+                <constraint firstItem="ski-st-0S2" firstAttribute="leading" secondItem="60J-df-xWy" secondAttribute="leading" id="GvP-Eu-t8j"/>
+                <constraint firstAttribute="trailing" secondItem="ski-st-0S2" secondAttribute="trailing" id="JZT-um-gZ8"/>
+                <constraint firstItem="ski-st-0S2" firstAttribute="centerY" secondItem="60J-df-xWy" secondAttribute="centerY" id="rvV-Wb-X9B"/>
+                <constraint firstItem="ski-st-0S2" firstAttribute="top" secondItem="60J-df-xWy" secondAttribute="top" id="toX-Xr-0HQ"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="rvV-Wb-X9B"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="actionButton" destination="DfU-Fl-Kxw" id="qlQ-gA-tXQ"/>
+                <outlet property="descriptionLabel" destination="iRv-q8-ecH" id="ao6-fd-rsp"/>
+                <outlet property="retryButton" destination="xKe-fs-FjF" id="dSa-or-Lce"/>
+                <outlet property="titleLabel" destination="5q7-Ap-cDI" id="5Kg-1p-eou"/>
+                <outlet property="tripBoyImageView" destination="DC3-y0-epq" id="cQR-bn-8Oy"/>
+            </connections>
+            <point key="canvasLocation" x="-510" y="-264"/>
+        </view>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+    </objects>
+</document>

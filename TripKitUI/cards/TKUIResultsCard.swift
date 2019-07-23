@@ -204,8 +204,7 @@ public class TKUIResultsCard: TGTableCard {
       .asObservable()
       .withLatestFrom(viewModel.request) { ($0, $1) }
       .subscribe(onNext: { [weak self] in
-        let canHandleRoutingRequest = TKUIResultsCard.config.requestRoutingSupport != nil
-        self?.show($0, for: $1, cardView: cardView, tableView: tableView, allowRequest: canHandleRoutingRequest)
+        self?.show($0, for: $1, cardView: cardView, tableView: tableView)
       })
       .disposed(by: disposeBag)
     
