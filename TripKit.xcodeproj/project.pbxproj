@@ -1048,6 +1048,9 @@
 		3A7636F821F9F04700639155 /* TKUIAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAnnotations.swift; sourceTree = "<group>"; };
 		3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIAnnotations+TripKit.swift"; sourceTree = "<group>"; };
 		3A787EC31D38F646009F9A18 /* TKJSONCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
+		3A78EFC422E85D1400018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = no.lproj/Main.strings; sourceTree = "<group>"; };
+		3A78EFC522E85D1400018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = no.lproj/TripKit.strings; sourceTree = "<group>"; };
+		3A78EFC622E85D1500018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = no.lproj/Shared.strings; sourceTree = "<group>"; };
 		3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
 		3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKCalendarManager+Autocompleting.swift"; sourceTree = "<group>"; };
 		3A84F00D1F77021200B2F9A0 /* TripGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripGroup.swift; sourceTree = "<group>"; };
@@ -2959,6 +2962,7 @@
 				ko,
 				da,
 				sv,
+				nb,
 			);
 			mainGroup = 3AB6C6161D1CD0060089F687;
 			productRefGroup = 3AB6C6211D1CD0060089F687 /* Products */;
@@ -3820,6 +3824,7 @@
 				3A63A89220B74C2A007B8D46 /* ko */,
 				3A63A89320B74C2C007B8D46 /* da */,
 				3A5EC04322D5ECD100187551 /* sv */,
+				3A78EFC522E85D1400018696 /* nb */,
 			);
 			name = TripKit.strings;
 			sourceTree = "<group>";
@@ -3841,6 +3846,7 @@
 				3A5F9A2422D5E60700B72957 /* fi */,
 				3AC3B70822D5EBFF00B48575 /* da */,
 				3A5EC04022D5ECD100187551 /* sv */,
+				3A78EFC422E85D1400018696 /* nb */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -3871,6 +3877,7 @@
 				3AFFAB211F0684B700147990 /* ko */,
 				3AFFAB221F0684B900147990 /* da */,
 				3A5EC04222D5ECD100187551 /* sv */,
+				3A78EFC622E85D1500018696 /* nb */,
 			);
 			name = Shared.strings;
 			sourceTree = "<group>";
