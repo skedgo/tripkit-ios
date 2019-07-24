@@ -25,9 +25,6 @@
 /* Label for when a service is cancelled. */
 "Cancelled" = "Cancelled";
 
-/* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "Cannot proceed without a valid email address";
-
 /* Type of vehicle : car */
 "Car" = "Car";
 
@@ -227,9 +224,6 @@
 /* Never in context of repetitions (especially recurring events) */
 "Never" = "Never";
 
-/* Title for sign in view when user does not have an account */
-"New account" = "New account";
-
 /* Button title to complete this step and advance to next
    Keyboard accessory button title to complete this step and advance to next */
 "Next" = "Next";
@@ -320,16 +314,6 @@
 /* No comment provided by engineer. */
 "Sign up" = "Sign up";
 
-/* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Sign up cannot be completed without a valid password";
-
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Signing in";
-
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Signing out";
-
 /* Short indicator of start-time */
 "starts at %@" = "starts at %@";
 
@@ -344,9 +328,6 @@
 
 /* user location button - follow with heading */
 "Tracking - on with heading" = "Tracking - on with heading";
-
-/* No comment provided by engineer. */
-"Unknown error" = "Unknown error";
 
 /* Message that shows app is updating trip after user finalised bookings */
 "Updating trip" = "Updating trip";

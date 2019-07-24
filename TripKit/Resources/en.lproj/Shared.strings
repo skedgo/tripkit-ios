@@ -148,17 +148,11 @@
 /* Type of vehicle : motorbike */
 "Motorbike" = "Motorbike";
 
-/* Title for view that shows the summary of a user's account information */
-"My account" = "My account";
-
 /* Title for name of something (or someone) */
 "Name" = "Name";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Never";
-
-/* Title of page to create new account */
-"New account" = "New account";
 
 /* Next action */
 "Next" = "Next";
@@ -250,12 +244,6 @@
 /* Title of page or button to sign up */
 "Sign up" = "Sign up";
 
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Signing in";
-
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Signing out";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Starting %@";
 
@@ -270,9 +258,6 @@
 
 /* user location button - follow with heading */
 "Tracking - on with heading" = "Tracking - on with heading";
-
-/* No comment provided by engineer. */
-"Unknown error" = "Unknown error";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "Up to %@";

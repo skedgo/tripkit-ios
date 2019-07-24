@@ -289,10 +289,6 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "로그인 중...";
 
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
-"Signing out" = "로그아웃 중...";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "%@에 시작..";
 

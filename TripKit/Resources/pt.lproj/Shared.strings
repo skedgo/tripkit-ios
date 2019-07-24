@@ -256,9 +256,6 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Entrando";
 
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Saindo";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "De %@";
 

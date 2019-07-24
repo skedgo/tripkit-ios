@@ -256,9 +256,6 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Accesso in corso";
 
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Logout in corso";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "A partire %@";
 

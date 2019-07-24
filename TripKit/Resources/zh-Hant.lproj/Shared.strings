@@ -256,9 +256,6 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "登入中...";
 
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "登出中...";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "從%@";
 

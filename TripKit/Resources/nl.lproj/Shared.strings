@@ -256,9 +256,6 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Inloggen";
 
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Afmelden";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Vanaf %@";
 

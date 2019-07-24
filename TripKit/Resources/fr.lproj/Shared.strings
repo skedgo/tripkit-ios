@@ -256,9 +256,6 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Connexion en cours";
 
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Déconnexion en cours";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Du %@";
 

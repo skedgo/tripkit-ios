@@ -340,9 +340,6 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Logger ind";
 
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Logger ud";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Start %@";
 
