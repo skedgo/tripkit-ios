@@ -143,7 +143,7 @@
 "Live traffic" = "traffico in tempo reale";
 
 /* Indicating when something is loading */
-"Loading..." = "Caricamento...";
+"Loading…" = "Caricamento…";
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Molti posti disponibili";

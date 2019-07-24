@@ -245,9 +245,6 @@
 "Live traffic" = "Trafik i realtid";
 
 /* Indicating when something is loading */
-"Loading..." = "Laddar...";
-
-/* Indicating when something is loading */
 "Loading…" = "Laddar…";
 
 /* As in 'this bus/train has many seats available' */

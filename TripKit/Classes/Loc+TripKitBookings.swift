@@ -40,52 +40,12 @@ extension Loc {
     return NSLocalizedString("Change", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Instruction for changing password")
   }
 
-  @objc public static var AppWillNowSignOut: String {
-    return NSLocalizedString("The app will now sign out", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Message that indicates the app is about to sign users out of their user accounts")
-  }
-
-  @objc public static var InvalidAccount: String {
-    return NSLocalizedString("Invalid account", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for alert that indicates the user account has become invalid")
-  }
-  
-  @objc public static var SigningOut: String {
-    return NSLocalizedString("Signing out", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Message that indicates the app is signing users out of their accounts")
-  }
-  
-  @objc public static var MyAccount: String {
-    return NSLocalizedString("My account", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for view that shows the summary of a user's account information")
-  }
-  
   @objc public static var SignIn: String {
     return NSLocalizedString("Sign in", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title of page or button to sign in")
   }
   
-  @objc public static var SigningIn: String {
-    return NSLocalizedString("Signing in", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Message that indicates the app is signing users into their user accounts")
-  }
-  
   @objc public static var SignUp: String {
     return NSLocalizedString("Sign up", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title of page or button to sign up")
-  }
-  
-  @objc public static var NewAccount: String {
-    return NSLocalizedString("New account", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title of page to create new account")
-  }
-  
-  @objc public static var CreatingAccount: String {
-    return NSLocalizedString("Creating account", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Message that indicates the app is creating accounts for users")
-  }
-  
-  @objc public static var CannotProceedWithoutMail: String {
-    return NSLocalizedString("Cannot proceed without a valid email address", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "")
-  }
-  
-  @objc public static var CannotProceedWithoutPassword: String {
-    return NSLocalizedString("Sign up cannot be completed without a valid password", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "")
-  }
-  
-  @objc public static var UnknownError: String {
-    return NSLocalizedString("Unknown error", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "")
   }
   
   @objc public static var OpenSettings: String {
@@ -154,7 +114,6 @@ extension Loc {
   
   public static var FailedToSend: String {
     return NSLocalizedString("Failed to send", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email")
-
   }
   
   public static var PasswordIsEmpty: String {

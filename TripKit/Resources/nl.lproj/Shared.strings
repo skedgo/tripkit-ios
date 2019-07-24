@@ -73,9 +73,6 @@
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
 "Could not download supported regions from TripGo's server. Please try again later." = "Er konden geen ondersteunde gebieden worden gedownload. Probeer het later opnieuw.";
 
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "Account aanmaken";
-
 /* Current city */
 "Current City" = "Huidige stad";
 
@@ -126,9 +123,6 @@
 
 /* Instant results proposal */
 "Instant results" = "Direct resultaten weergeven";
-
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Ongeldig account";
 
 /* Name placeholder text */
 "John Appleseed" = "Klaas Jansen";
@@ -200,10 +194,10 @@
 "Please verify the location" = "Verifiëer de locatie";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "Druk op 'zoeken' voor meer...";
+"Press 'search' for more…" = "Druk op 'zoeken' voor meer…";
 
 /* No comment provided by engineer. */
-"Read more..." = "Lees meer...";
+"Read more…" = "Lees meer…";
 
 /* Indicator for real-time information */
 "Real-time" = "Real-time";
@@ -245,7 +239,7 @@
 "Search for a city" = "Zoek een stad";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "Op zoek naar '%@'...";
+"Searching for '%@'…" = "Op zoek naar '%@'…";
 
 /* Title of page or button to sign in */
 "Sign in" = "Inloggen";
@@ -270,9 +264,6 @@
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Tik om een locatie in te stellen";
-
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "De app zal u nu afmelden";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Volgen - uit";

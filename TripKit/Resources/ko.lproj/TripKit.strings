@@ -149,7 +149,7 @@
 "Live traffic" = "실시간 교통";
 
 /* Title to show while loading/waiting for results */
-"Loading..." = "로딩 중...";
+"Loading…" = "로딩 중…";
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "자리가 많이 남아 있습니다.";

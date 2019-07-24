@@ -85,9 +85,6 @@
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
 "Could not download supported regions from TripGo's server. Please try again later." = "Kunne ikke download tilgængellige regioner fra Tripgo's server. Prøv igen senere.";
 
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "Opretter konto";
-
 /* Current city */
 "Current City" = "Nuværende by";
 
@@ -181,9 +178,6 @@
 /* A footnote that instructs users to check their emails for reset instructions */
 "Instructions on how to reset password has been sent to the above email address." = "Instruktioner til, hvordan du nulstiller adgangskode, er blevet sendt til ovennævnte e-mailadresse.";
 
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Ugyldig konto";
-
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
 
@@ -263,13 +257,13 @@
 "Please verify the location" = "Kontroller venligst placeringen";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "Tryk for 'Søg' for mere...";
+"Press 'search' for more…" = "Tryk for 'Søg' for mere…";
 
 /* Message to user if no primary email is set on his/her account */
 "Primary email is not set on your account. Please contact us for support" = "Primær e-mail er ikke indstillet på din konto. Du bedes kontakte os for support";
 
 /* No comment provided by engineer. */
-"Read more..." = "Læs mere...";
+"Read more…" = "Læs mere…";
 
 /* Indicator for real-time information */
 "Real-time" = "Virkelig Tid";
@@ -317,7 +311,7 @@
 "Search Results" = "Søgeresultater";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "Søger efter '%@'...";
+"Searching for '%@'…" = "Søger efter '%@'…";
 
 /* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
 "Sent" = "Sendt";
@@ -360,9 +354,6 @@
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Tryk for at indstille placering";
-
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "Appen vil nu logge ud";
 
 /* Error message shown to a user when zero-length password field is detected */
 "The password field cannot be empty." = "Adgangskodefeltet kan ikke være tomt.";

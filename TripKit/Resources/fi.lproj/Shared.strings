@@ -85,9 +85,6 @@
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
 "Could not download supported regions from TripGo's server. Please try again later." = "Tuettuja alueita ei voitu ladata TripGo:n palvelimelle. Yritä myöhemmin uudelleen";
 
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "Luodaan tiliä";
-
 /* Current city */
 "Current City" = "Tämänhetkinen kaupunki";
 
@@ -181,9 +178,6 @@
 /* A footnote that instructs users to check their emails for reset instructions */
 "Instructions on how to reset password has been sent to the above email address." = "Ohjeet salasanan palauttamiseksi on lähetetty edellä mainittuun sähköpostiosoitteeseen.";
 
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Virheellinen tili";
-
 /* Name placeholder text */
 "John Appleseed" = "Milla Matkaaja";
 
@@ -263,13 +257,13 @@
 "Please verify the location" = "Ole hyvä ja vahvista sijainti";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "Paina 'Etsi' saadaksesi lisätuloksia...";
+"Press 'search' for more…" = "Paina 'Etsi' saadaksesi lisätuloksia…";
 
 /* Message to user if no primary email is set on his/her account */
 "Primary email is not set on your account. Please contact us for support" = "Tilillesi ei ole määritetty ensisijaista sähköpostia. Ota yhteyttä meihin saadaksesi tukea";
 
 /* No comment provided by engineer. */
-"Read more..." = "Lisätiedot...";
+"Read more…" = "Lisätiedot…";
 
 /* Indicator for real-time information */
 "Real-time" = "Reaaliaikainen";
@@ -317,7 +311,7 @@
 "Search Results" = "Hakutulokset";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "Haetaan sijaintia '%@'...";
+"Searching for '%@'…" = "Haetaan sijaintia '%@'…";
 
 /* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
 "Sent" = "Lähetetty";
@@ -360,9 +354,6 @@
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Napauta asettaaksesi sijainnin";
-
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "Sovellus sulkeutuu";
 
 /* Error message shown to a user when zero-length password field is detected */
 "The password field cannot be empty." = "Salasanakenttä ei voi olla tyhjä.";

@@ -73,9 +73,6 @@
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
 "Could not download supported regions from TripGo's server. Please try again later." = "Impossibile scaricare regioni supportate dal server di TripGo. Riprova più tardi.";
 
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "Creazione conto";
-
 /* Current city */
 "Current City" = "Città attuale";
 
@@ -126,9 +123,6 @@
 
 /* Instant results proposal */
 "Instant results" = "Risultati istantanei";
-
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Account non valido";
 
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
@@ -200,10 +194,10 @@
 "Please verify the location" = "Verifica la posizione";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "Premere 'cerca' per altro...";
+"Press 'search' for more…" = "Premere 'cerca' per altro…";
 
 /* No comment provided by engineer. */
-"Read more..." = "Leggi di più...";
+"Read more…" = "Leggi di più…";
 
 /* Indicator for real-time information */
 "Real-time" = "Tempo reale";
@@ -245,7 +239,7 @@
 "Search for a city" = "Cerca una città";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "Cercando '%@'...";
+"Searching for '%@'…" = "Cercando '%@'…";
 
 /* Title of page or button to sign in */
 "Sign in" = "Accedi";
@@ -270,9 +264,6 @@
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Seleziona un luogo";
-
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "L'applicazione verrà disconnesso";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Ricerca posizione - spento";

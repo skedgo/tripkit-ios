@@ -245,9 +245,6 @@
 "Live traffic" = "Levende trafik";
 
 /* Indicating when something is loading */
-"Loading..." = "Indlæser...";
-
-/* Indicating when something is loading */
 "Loading…" = "Indlæser…";
 
 /* As in 'this bus/train has many seats available' */

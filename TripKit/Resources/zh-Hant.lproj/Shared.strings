@@ -73,9 +73,6 @@
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
 "Could not download supported regions from TripGo's server. Please try again later." = "無法從我們的伺服器下載所支援地區的列表．請稍後再嘗試一次。";
 
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "註冊帳戶";
-
 /* Current city */
 "Current City" = "當前城市";
 
@@ -126,9 +123,6 @@
 
 /* Instant results proposal */
 "Instant results" = "快速搜尋結果";
-
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "無效的帳戶";
 
 /* Name placeholder text */
 "John Appleseed" = "您的姓名";
@@ -203,7 +197,7 @@
 "Press 'search' for more..." = "點擊'搜尋'來取得更多結果...";
 
 /* No comment provided by engineer. */
-"Read more..." = "更多資訊";
+"Read more…" = "更多資訊";
 
 /* Indicator for real-time information */
 "Real-time" = "即時";
@@ -245,7 +239,7 @@
 "Search for a city" = "搜尋城市";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "正在搜尋%@…";
+"Searching for '%@'…" = "正在搜尋%@…";
 
 /* Title of page or button to sign in */
 "Sign in" = "登入";
@@ -270,9 +264,6 @@
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "點擊來選取地點";
-
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "此App即將登出";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "關閉使用者位置追蹤功能";
