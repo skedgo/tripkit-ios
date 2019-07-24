@@ -52,9 +52,6 @@
 /* Label for when a service is cancelled. */
 "Cancelled" = "Fällt aus";
 
-/* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "E-Mailadresse ist ungültig";
-
 /* Type of vehicle : car */
 "Car" = "Auto";
 
@@ -208,17 +205,11 @@
 /* Type of vehicle : motorbike */
 "Motorbike" = "Motorrad";
 
-/* Title for view that shows the summary of a user's account information */
-"My account" = "Mein Konto";
-
 /* Title for name of something (or someone) */
 "Name" = "Name";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Niemals";
-
-/* Title of page to create new account */
-"New account" = "Neues Benutzerkonto";
 
 /* Next action */
 "Next" = "Weiter";
@@ -334,12 +325,6 @@
 /* Title of page or button to sign up */
 "Sign up" = "Anmelden";
 
-/* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Passwort ungültig";
-
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Einloggen...";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Ab %@";
 
@@ -369,9 +354,6 @@
 
 /* user location button - follow with heading */
 "Tracking - on with heading" = "Ortung - ein, inklusive Richtung";
-
-/* No comment provided by engineer. */
-"Unknown error" = "Unbekannter Fehler";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "bis %@";

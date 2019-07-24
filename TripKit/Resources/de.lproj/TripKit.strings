@@ -72,7 +72,7 @@
 "Arrive at %@ at %@" = "Ankunft bei %1$@ um %2$@";
 
 /* Arrive before button */
-"Arrive by" = "Ankunft bis";
+"Arrive by" = "Ankunft";
 
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Ankunft";
