@@ -52,9 +52,6 @@
 /* Label for when a service is cancelled. */
 "Cancelled" = "Aflyst";
 
-/* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "Kan ikke fortsætte uden en gyldig e-mail adresse";
-
 /* Type of vehicle : car */
 "Car" = "Bil";
 
@@ -208,17 +205,11 @@
 /* Type of vehicle : motorbike */
 "Motorbike" = "Motorcykel";
 
-/* Title for view that shows the summary of a user's account information */
-"My account" = "Min konto";
-
 /* Title for name of something (or someone) */
 "Name" = "Navn";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Aldrig";
-
-/* Title of page to create new account */
-"New account" = "Ny konto";
 
 /* Next action */
 "Next" = "Næste";
@@ -334,12 +325,6 @@
 /* Title of page or button to sign up */
 "Sign up" = "Tilmeld";
 
-/* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Tilmelding kan ikke fuldføres uden en gyldig adgangskode";
-
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Logger ind";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Start %@";
 
@@ -369,9 +354,6 @@
 
 /* user location button - follow with heading */
 "Tracking - on with heading" = "Sporing - fortsæt med overskriften";
-
-/* No comment provided by engineer. */
-"Unknown error" = "Ukendt fejl";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "Indtil %@";

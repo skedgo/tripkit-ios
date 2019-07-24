@@ -52,9 +52,6 @@
 /* Label for when a service is cancelled. */
 "Cancelled" = "Peruttu";
 
-/* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "Et voi jatkaa ilman voimassa olevaa sähköpostiosoitetta";
-
 /* Type of vehicle : car */
 "Car" = "Auto";
 
@@ -208,17 +205,11 @@
 /* Type of vehicle : motorbike */
 "Motorbike" = "Moottoripyörä";
 
-/* Title for view that shows the summary of a user's account information */
-"My account" = "Oma tili";
-
 /* Title for name of something (or someone) */
 "Name" = "Nimi";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Ei koskaan";
-
-/* Title of page to create new account */
-"New account" = "Uusi tili";
 
 /* Next action */
 "Next" = "Seuraava";
@@ -334,12 +325,6 @@
 /* Title of page or button to sign up */
 "Sign up" = "Rekisteröidy";
 
-/* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Rekisteröinti ei onnistu ilman voimassa olevaa salasanaa";
-
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Kirjaudutaan sisään";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "%@ lähtien";
 
@@ -369,9 +354,6 @@
 
 /* user location button - follow with heading */
 "Tracking - on with heading" = "Seuranta - päällä (sis. kulkusuunta)";
-
-/* No comment provided by engineer. */
-"Unknown error" = "Tuntematon virhe";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "%@ asti";

@@ -19,8 +19,7 @@
 /* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
 "%@ stops" = "%@ pysäkki(ä)";
 
-/* For describing a time interval, e.g., '8:30 to 8:43'
-   From %time1 to %time2. (old key: TimeFromToShortFormat) */
+/* From %time1 to %time2. (old key: TimeFromToShortFormat) */
 "%@ to %@" = "Kohteesta '%1$@' Kohteeseen '%2$@'";
 
 /* Duration without traffic */
@@ -246,7 +245,7 @@
 "Live traffic" = "Live-liikenne";
 
 /* Indicating when something is loading */
-"Loading…" = "Ladataan…";
+"Loading…" = "Ladataan...";
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Paljon istumapaikkoja jäljellä";

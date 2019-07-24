@@ -2,10 +2,10 @@
 "%@ ago" = "%@ sedan";
 
 /* Number of alerts, in this case, there are multiple (plural) */
-"%@ alerts" = "%@ larm";
+"%@ alerts" = "%@ aviseringar";
 
 /* Filler for a specific service running at a time, e.g., '396 at 11:56am' */
-"%@ at %@" = "%1$@s på %2$@s";
+"%@ at %@" = "%1$@s kl. %2$@s";
 
 /* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
 "%@ cycle friendly" = "%@ cykelvänlig";
@@ -14,7 +14,7 @@
 "%@ every %@" = "%1$@ var %2$@";
 
 /* Text for an 'x more' indication if there's more content. '%@' will be replaced with a number */
-"%@ more" = "%@ fler";
+"%@ more" = "%@ till";
 
 /* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
 "%@ stops" = "%@ stopp";
@@ -23,7 +23,7 @@
 "%@ to %@" = "%1$@ till %2$@";
 
 /* Duration without traffic */
-"%@ w/o traffic" = "%@ m/u trafik";
+"%@ w/o traffic" = "%@ utan trafik";
 
 /* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
 "%@ wheelchair friendly" = "%@ rullstolsanpassad";
@@ -41,13 +41,13 @@
 "%1$@ late (%2$@ service)" = "%1$@ sen (%2$@ tjänst)";
 
 /* Number of alerts, in this case, there is just one */
-"1 alert" = "1 larm";
+"1 alert" = "1 avisering";
 
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 stopp";
 
 /* No comment provided by engineer. */
-"Alerts" = "Larm";
+"Alerts" = "Aviseringar";
 
 /* Instruction to follow street of the provided name */
 "Along %@" = "Längs %@";
@@ -56,7 +56,7 @@
 "Along unnamed street" = "Längs namnlös gata";
 
 /* apple maps directions action */
-"Apple Maps" = "Apple Maps";
+"Apple Maps" = "Apple Kartor";
 
 /* Arrival time sorter title */
 "Arrival" = "Ankomst";
@@ -66,16 +66,16 @@
 "Arrive" = "Ankomst";
 
 /* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
-"Arrive at %@" = "Ankomst kl. %@";
+"Arrive at %@" = "Anländer kl. %@";
 
 /* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
-"Arrive at %@ at %@" = "Ankommer till %1$@ kl. %2$@";
+"Arrive at %@ at %@" = "Anländer till %1$@ kl. %2$@";
 
 /* Arrive before button */
 "Arrive by" = "Anländer med";
 
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
-"Arrive in" = "Ankommer om";
+"Arrive in" = "Anländer om";
 
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "kl. %@";
@@ -106,10 +106,10 @@
 "Cheapest" = "Billigast";
 
 /* Error title when server could not find a given transit stop. */
-"Could not find transit stop." = "Det gick inte att hitta transitstopp.";
+"Could not find transit stop." = "Det gick inte att hitta mellanlandning/byte.";
 
 /* Text for attributing data sources. The list of providers will be used instead of '%@' */
-"Data provided by %@" = "Data tillhandahållen av %@";
+"Data provided by %@" = "Data från %@";
 
 /* Title for screen showing data providers */
 "Data Providers" = "Dataleverantörer";
@@ -133,7 +133,7 @@
 "E-Bike" = "Elcykel";
 
 /* Trip badge: Easiest */
-"Easiest" = "Lättaste";
+"Easiest" = "Lättast";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Tom";
@@ -145,10 +145,10 @@
 "Every %@" = "Var %@";
 
 /* Action title to extend an existing booking */
-"Extend" = "Förlängning";
+"Extend" = "Förläng";
 
 /* Trip badge: Fastest */
-"Fastest" = "Snabbaste";
+"Fastest" = "Snabbast";
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Få lediga platser";
@@ -157,7 +157,7 @@
 "for %@" = "i %@";
 
 /* Indicating a path is wheelchair/cycyling friendly */
-"Friendly" = "Snäll";
+"Friendly" = "Vänlig";
 
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Från %@";
@@ -187,25 +187,25 @@
 "Google Maps" = "Google Maps";
 
 /* Trip badge: Greenest */
-"Greenest" = "Grönaste";
+"Greenest" = "Grönast";
 
 /* Trip badge: Healthiest */
-"Healthiest" = "Sundaste";
+"Healthiest" = "Sundast";
 
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
 "I'll arrive at %@ at %@" = "Jag anländer till %1$@ kl. %2$@";
 
 /* Indication of an activity. (old key: ActivityIndication) */
-"I'll take a %@ at %@ from %@." = "Jag tar en %1$@ kl. %2$@ från %3$@.";
+"I'll take a %@ at %@ from %@." = "Jag tar %1$@ kl. %2$@ från %3$@.";
 
 /* Indication of an activity. */
-"I'll take a %@ from %@." = "Jag tar en %1$@ kl. från %2$@.";
+"I'll take a %@ from %@." = "Jag tar %1$@ från %2$@.";
 
 /* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
 "In %@" = "Om %@";
 
 /* %@ is replaced with app name */
-"In the meantime, let's keep exploring %@ and enjoy your trips" = "Under tiden fortsätter vi att utforska %@ och njuta av resan";
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "Under tiden fortsätter vi att utforska %@ och njut av resan";
 
 /* inGogo taxi booking action */
 "ingogo a Taxi" = "ingogo en taxi";
@@ -290,7 +290,7 @@
 "Plan a new trip" = "Planera en ny resa";
 
 /* No comment provided by engineer. */
-"Plan a trip and it will show up here." = "Planera en resa och den kommer att visas här.";
+"Plan a trip and it will show up here." = "Planera en resa så visas den här.";
 
 /* Title of page to plan a trip */
 "Plan Trip" = "Planera resa";
@@ -317,10 +317,10 @@
 "Request support" = "Begär support";
 
 /* Error message if interregional routing isn't yet supported */
-"Routing from %@ to %@ is not yet supported" = "Rutter från %1$@ till %2$@ stöds ännu inte";
+"Routing from %@ to %@ is not yet supported" = "Rutter från %1$@ till %2$@ stöds inte än";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
-"Search for this stop again or try again later.." = "Sök efter det här stoppet igen eller försök igen senare...";
+"Search for this stop again or try again later.." = "Sök efter mellanlandning/byte igen eller försök igen senare...";
 
 /* Send SMS action button */
 "Send SMS" = "Skicka SMS";
@@ -365,16 +365,16 @@
 "Trips" = "Resor";
 
 /* Indicating a path is wheelchair/cycyling unfriendly */
-"Unfriendly" = "Tuff";
+"Unfriendly" = "Inte vänlig";
 
 /* Indicating the wheelchair/cycling friendliness of a path is unknown */
 "Unknown" = "Okänt";
 
 /* Vehicle updated. (old key: VehicleUpdated) */
-"Updated %@ ago" = "Uppdaterat %@ sedan";
+"Updated %@ ago" = "Uppdaterades för %@ sedan";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
-"Vehicle %@ updated %@ ago" = "Fordon %1$@ uppdaterat för %2$@ sedan";
+"Vehicle %@ updated %@ ago" = "Fordon %1$@ uppdaterades för %2$@ sedan";
 
 /* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
 "Vehicles" = "Fordon";
@@ -383,5 +383,5 @@
 "We are busy getting your upcoming trip. Please wait..." = "Vi är upptagna med att hämta din kommande resa. Vänta...";
 
 /* No comment provided by engineer. */
-"We'll keep you updated with the latest transit alerts here" = "Vi håller dig uppdaterad med de senaste transitvarningarna här";
+"We'll keep you updated with the latest transit alerts here" = "Vi håller dig uppdaterad med de senaste transitaviseringarna här";
 
