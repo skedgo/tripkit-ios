@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 public class TKUserProfileHelper: NSObject {
   
   enum DefaultsKey: String {
@@ -22,10 +20,10 @@ public class TKUserProfileHelper: NSObject {
   
   public typealias Identifier = String
   
-  //MARK: - Simple settings
+  
+  // MARK: - Simple settings
   
   @objc public static var showWheelchairInformationKey =  DefaultsKey.onWheelchair.rawValue
-  
   
   /// Whether to show wheelchair information and show routes as being
   /// on a wheelchair. This will set TripKit's settings
@@ -36,6 +34,10 @@ public class TKUserProfileHelper: NSObject {
     set {
       UserDefaults.shared.set(newValue, forKey: DefaultsKey.onWheelchair.rawValue)
     }
+  }
+  
+  public class var hiddenModesPickedManually: Bool {
+    return UserDefaults.shared.object(forKey: DefaultsKey.hidden.rawValue) != nil 
   }
   
   

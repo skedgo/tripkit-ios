@@ -17,36 +17,31 @@ extension API {
     public let address1: String?
     public let address2: String?
     public let postCode: String?
-    public let email: String?
-    public let emails: [Email]?
     public let phones: [Phone]?
-    public let userId: String?
-    public var appData: [String : Any] = [:]
+    public var appData: [String : Any]?
+    private let rawUserId: String?
+    private let rawEmail: String?
+    private let rawEmails: [Email]?
     
-    public init(
-      name: String? = nil,
-      firstName: String? = nil,
-      lastName: String? = nil,
-      address1: String? = nil,
-      address2: String? = nil,
-      postCode: String? = nil,
-      email: String? = nil,
-      emails: [Email]? = nil,
-      phones: [Phone]? = nil,
-      userId: String? = nil,
-      appData: [String : Any] = [:]
-      ) {
+    public init(name: String? = nil,
+                firstName: String? = nil,
+                lastName: String? = nil,
+                address1: String? = nil,
+                address2: String? = nil,
+                postCode: String? = nil,
+                email: String? = nil,
+                phone: String? = nil,
+                appData: [String: Any]? = nil) {
       self.name = name
       self.firstName = firstName
       self.lastName = lastName
       self.address1 = address1
       self.address2 = address2
       self.postCode = postCode
-      self.email = email
-      self.emails = emails
-      self.phones = phones
-      self.userId = userId
-      self.appData = appData
+      self.rawEmail = email
+      self.rawEmails = rawEmail.flatMap { [Email(address: $0)] }
+      self.phones = phone.flatMap { [Phone(number: $0)] }
+      self.rawUserId = nil // This is not set directly
     }
     
     // MARK: - Codable
@@ -58,10 +53,18 @@ extension API {
       case address1
       case address2
       case postCode
-      case email
-      case emails
       case phones
-      case userId = "userID"
+      case rawEmail = "email"
+      case rawEmails = "emails"
+      case rawUserId = "userID"
+    }
+    
+    public var userId: String? { return rawUserId }
+    
+    public var emails: [Email]? {
+      if let emails = rawEmails { return emails }
+      else if let email = rawEmail { return [Email(address: email, validated: true, primary: true)] }
+      else { return nil }
     }
   }
   

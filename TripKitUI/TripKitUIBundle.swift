@@ -14,6 +14,9 @@ extension UIImage {
   @objc public static let backgroundNavSecondary = named("bg-nav-secondary")
 
   static let iconTripBoyWorker = named("worker")
+  static let iconTripBoyHappy = named("tripboy-smile")
+  static let iconTripBoySad = named("tripboy-sad")
+  
   public static let iconCross = named("icon-cross")
   public static let iconShowPassword = named("icon-show")
   public static let iconHidePassword = named("icon-hide")

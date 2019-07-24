@@ -12,6 +12,29 @@ import TripKit
 
 extension TKInterAppCommunicator {
   
+  public enum ExternalActionType {
+    case phone
+    case message
+    case website
+    case appDownload
+    case appDeepLink
+    case ticket
+  }
+  
+  public struct ExternalAction: Equatable {
+    public static func == (lhs: TKInterAppCommunicator.ExternalAction, rhs: TKInterAppCommunicator.ExternalAction) -> Bool {
+      return lhs.identifier == rhs.identifier
+    }
+    
+    let action: TKInterAppIdentifier
+
+    public let title: String
+    public let type: ExternalActionType
+    public var identifier: AnyHashable { return action }
+
+    let handler: TKInterAppExternalActionHandler
+  }
+  
   static var defaultHandlers: [TKInterAppExternalActionHandler] = [
     TKPhoneActionHandler(), TKSMSActionHandler(), TKWebActionHandler()
   ]
@@ -25,6 +48,17 @@ extension TKInterAppCommunicator {
   public func canHandleExternalActions(for segment: TKSegment) -> Bool {
     guard let actions = segment.bookingExternalActions() else { return false }
     return actions.first { self.titleForExternalAction($0) != nil } != nil
+  }
+  
+  public func externalActions(for segment: TKSegment) -> [ExternalAction] {
+    guard let externalActions = segment.bookingExternalActions() else { return [] }
+    
+    // First we build the actions, sorting them priority and dealing with the
+    // case where multiple actions can be handled by the same handler (and
+    // we'd only want to show one then)
+    return self.handlers
+      .compactMap { $0.handledAction(outOf: externalActions) }
+      .sorted { $0.handler.priority.rawValue > $1.handler.priority.rawValue }
   }
   
   private func titleForExternalAction(_ action: String) -> String? {
@@ -42,15 +76,7 @@ extension TKInterAppCommunicator {
   @objc(handleExternalActions:presenter:initiatedBy:completionHandler:)
   public func handleExternalActions(for segment: TKSegment, presenter: UIViewController, sender: Any?, completion: ((String) -> Void)?) {
     
-    guard let externalActions = segment.bookingExternalActions() else { return }
-    
-    // First we build the actions, sorting them priority and dealing with the
-    // case where multiple actions can be handled by the same handler (and
-    // we'd only want to show one then)
-    let handlers = self.handlers
-      .compactMap { $0.handledAction(outOf: externalActions) }
-      .sorted { $0.handler.priority.rawValue > $1.handler.priority.rawValue }
-    
+    let handlers = self.externalActions(for: segment)
     guard !handlers.isEmpty else { return }
     
     if handlers.count == 1, let handled = handlers.first {
@@ -76,20 +102,19 @@ extension TKInterAppCommunicator {
     handler.performAction(for: action, segment: segment, presenter: presenter, sender: sender)
   }
   
-}
+  public func perform(_ action: ExternalAction, for segment: TKSegment?, presenter: UIViewController, sender: Any?) {
+    action.handler.performAction(for: action.action, segment: segment, presenter: presenter, sender: sender)
+  }
 
-fileprivate struct HandledAction {
-  let action: TKInterAppIdentifier
-  let title: String
-  let handler: TKInterAppExternalActionHandler
+  
 }
 
 fileprivate extension TKInterAppExternalActionHandler {
   
-  func handledAction(outOf actions: [TKInterAppIdentifier]) -> HandledAction? {
+  func handledAction(outOf actions: [TKInterAppIdentifier]) -> TKInterAppCommunicator.ExternalAction? {
     guard let action = actions.first(where: canHandle) else { return nil }
     let title = self.title(for: action)
-    return HandledAction(action: action, title: title, handler: self)
+    return TKInterAppCommunicator.ExternalAction(action: action, title: title, type: type, handler: self)
   }
   
 }

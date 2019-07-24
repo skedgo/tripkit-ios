@@ -21,6 +21,8 @@ public protocol TKInterAppExternalActionHandler {
   
   var priority: TKInterAppExternalActionPriority { get }
   
+  var type: TKInterAppCommunicator.ExternalActionType { get }
+  
   func canHandle(_ string: TKInterAppIdentifier) -> Bool
   
   func title(for identifier: TKInterAppIdentifier) -> String

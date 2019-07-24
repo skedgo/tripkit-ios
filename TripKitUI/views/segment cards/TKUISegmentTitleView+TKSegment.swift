@@ -14,13 +14,13 @@ import TripKit
 
 extension TKUISegmentTitleView {
   
-  public func configure(for segment: TKSegment, mode: TKUISegmentMode = .onSegment) {
-    update(for: segment, mode: mode)
+  public func configure(for segment: TKSegment, preferredTitle: String? = nil, mode: TKUISegmentMode = .onSegment) {
+    update(for: segment, preferredTitle: preferredTitle, mode: mode)
     
-    monitorUpdates(for: segment, mode: mode)
+    monitorUpdates(for: segment, preferredTitle: preferredTitle, mode: mode)
   }
   
-  private func update(for segment: TKSegment, mode: TKUISegmentMode) {
+  private func update(for segment: TKSegment, preferredTitle: String?, mode: TKUISegmentMode) {
     let title: String
     let subtitle: String?
     
@@ -31,7 +31,7 @@ extension TKUISegmentTitleView {
       subtitle = Loc.From(location: origin)
       
     } else {
-      title = segment.tripSegmentInstruction
+      title = preferredTitle ?? segment.tripSegmentInstruction
       subtitle = segment.tripSegmentDetail
     }
     
@@ -41,13 +41,13 @@ extension TKUISegmentTitleView {
     modeIcon.setImage(with: segment.tripSegmentModeImageURL, asTemplate: segment.tripSegmentModeImageIsTemplate, placeholder: segment.tripSegmentModeImage)
   }
   
-  private func monitorUpdates(for segment: TKSegment, mode: TKUISegmentMode) {
+  private func monitorUpdates(for segment: TKSegment, preferredTitle: String?, mode: TKUISegmentMode) {
     disposeBag = DisposeBag()
     
     NotificationCenter.default.rx
       .notification(.TKUIUpdatedRealTimeData, object: segment)
       .subscribe(onNext: { [weak self] _ in
-        self?.update(for: segment, mode: mode)
+        self?.update(for: segment, preferredTitle: preferredTitle, mode: mode)
       })
       .disposed(by: disposeBag)
     

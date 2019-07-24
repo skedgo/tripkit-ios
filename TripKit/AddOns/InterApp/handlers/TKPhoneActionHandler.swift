@@ -13,11 +13,12 @@ import TripKit
 /// Handler for `tel:` actions, bringing up the Phone app,
 /// optionally showing a name nominated by the TripGo backend.
 public class TKPhoneActionHandler: TKInterAppExternalActionHandler {
-  
   private let canCall = UIApplication.shared.canOpenURL(URL(string: "tel:")!)
   
   public let priority: TKInterAppExternalActionPriority = .low
-  
+
+  public let type: TKInterAppCommunicator.ExternalActionType = .phone
+
   public func canHandle(_ string: TKInterAppIdentifier) -> Bool {
     return canCall && string.hasPrefix("tel:")
   }

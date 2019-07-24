@@ -66,3 +66,7 @@ If there's any trouble with that, see the example under [Project](Project).
     // ...
   }
 ```
+
+## License
+
+TripKit is copyright 2011-2019 by SkedGo Pty Ltd
