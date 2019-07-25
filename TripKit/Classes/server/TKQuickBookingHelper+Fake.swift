@@ -8,6 +8,8 @@
 
 import Foundation
 
+#if BETA || DEBUG
+
 extension TKBooking.Confirmation {
   static func fakeTNC() -> TKBooking.Confirmation {
     let fake = """
@@ -69,3 +71,5 @@ extension TKBooking.Confirmation {
     return try! JSONDecoder().decode(TKBooking.Confirmation.self, from: fake.data(using: .utf8)!)
   }
 }
+
+#endif
