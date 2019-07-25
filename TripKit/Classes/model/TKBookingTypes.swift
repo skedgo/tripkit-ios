@@ -11,14 +11,14 @@ import Foundation
 /// Case-less enum just to create a namespace
 public enum TKBooking {
   
-  public struct Detail : Codable {
+  public struct Detail: Codable, Hashable {
     public let title: String
     public let subtitle: String?
     public let imageURL: URL?
   }
   
 
-  public struct Action : Codable {
+  public struct Action: Codable, Hashable {
     public let title: String
     public let isDestructive: Bool
     public let internalURL: URL?
@@ -33,7 +33,7 @@ public enum TKBooking {
   }
   
 
-  public struct TSPBranding: Codable {
+  public struct TSPBranding: Codable, Hashable {
     private let rgbColor: API.RGBColor?
     private let logoImageName: String?
     
@@ -53,7 +53,7 @@ public enum TKBooking {
   }
   
   
-  public struct Purchase : Codable {
+  public struct Purchase: Codable, Hashable {
     public let id:                  String
     private let rawPrice:           Double?
     public let currency:            String?
@@ -105,7 +105,7 @@ public enum TKBooking {
     
   }
 
-  public struct Confirmation : Codable {
+  public struct Confirmation : Codable, Hashable {
     
     public let status: Detail
     public let provider: Detail?

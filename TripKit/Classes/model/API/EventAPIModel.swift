@@ -10,12 +10,12 @@ import Foundation
 
 extension API {
   
-  public struct EventsResponse: Codable, Equatable {
+  public struct EventsResponse: Codable, Hashable {
     public static let empty: EventsResponse = EventsResponse(events: [])
     
     public let events: [Event]
     
-    public struct Event: Codable, Equatable {
+    public struct Event: Codable, Hashable {
       public let description: String
       public let displayImage: String?
       public let endTime: Date?
@@ -27,12 +27,12 @@ extension API {
       public let icon: Icon?
     }
     
-    public struct Location: Codable, Equatable {
+    public struct Location: Codable, Hashable {
       public let lat: Double
       public let lng: Double
     }
     
-    public struct Icon: Codable, Equatable {
+    public struct Icon: Codable, Hashable {
       public let remoteIcon: String
       public let remoteIconIsTemplate: Bool?
     }

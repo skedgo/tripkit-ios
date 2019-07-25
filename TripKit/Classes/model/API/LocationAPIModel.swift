@@ -11,7 +11,7 @@ import CoreLocation
 
 extension API {
   
-  public enum SharedVehicleType: String, Codable, Equatable {
+  public enum SharedVehicleType: String, Codable {
     case bike = "BIKE"
     case pedelec = "PEDELEC"
     case kickScooter = "KICK_SCOOTER"
@@ -19,7 +19,7 @@ extension API {
     case car = "CAR"
   }
   
-  public struct BikePodInfo: Codable, Equatable {
+  public struct BikePodInfo: Codable, Hashable {
     // static information
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
@@ -57,7 +57,7 @@ extension API {
   }
   
   
-  public struct CarPodInfo: Codable, Equatable {
+  public struct CarPodInfo: Codable, Hashable {
     // static information
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
@@ -99,7 +99,7 @@ extension API {
   }
   
   
-  public struct CarParkInfo: Codable, Equatable {
+  public struct CarParkInfo: Codable, Hashable {
     
     public enum EntranceType: String, Codable {
       case entranceAndExit = "ENTRANCE_EXIT"
@@ -110,7 +110,7 @@ extension API {
       case permit = "PERMIT"
     }
     
-    public struct Entrance: Codable, Equatable {
+    public struct Entrance: Codable, Hashable {
       public let type: EntranceType
       public let lat: CLLocationDegrees
       public let lng: CLLocationDegrees
@@ -161,14 +161,14 @@ extension API {
   }
   
   
-  public struct CarRentalInfo: Codable, Equatable {
+  public struct CarRentalInfo: Codable, Hashable {
     public let identifier: String
     public let company: API.CompanyInfo
     public let openingHours: API.OpeningHours?
     public let source: API.DataAttribution?
   }
 
-  public struct FreeFloatingVehicleInfo: Codable, Equatable {
+  public struct FreeFloatingVehicleInfo: Codable, Hashable {
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
     public let vehicleType: SharedVehicleType
@@ -197,7 +197,7 @@ extension API {
     }
   }
   
-  public struct OnStreetParkingInfo: Codable, Equatable {
+  public struct OnStreetParkingInfo: Codable, Hashable {
     public enum PaymentType: String, Codable {
       case meter = "METER"
       case creditCard = "CREDIT_CARD"
@@ -232,7 +232,7 @@ extension API {
       case unknown
     }
     
-    public struct Restriction: Codable, Equatable {
+    public struct Restriction: Codable, Hashable {
       public let color: String
       public let maximumParkingMinutes: Int
       public let parkingSymbol: String
@@ -274,8 +274,8 @@ extension API {
     }
   }
   
-  public struct LocationInfo : Codable, Equatable {
-    public struct Details: Codable, Equatable {
+  public struct LocationInfo : Codable, Hashable {
+    public struct Details: Codable, Hashable {
       public let w3w: String?
       public let w3wInfoURL: URL?
     }
@@ -300,12 +300,12 @@ extension API {
     }
   }
   
-  public struct LocationsResponse: Codable, Equatable {
+  public struct LocationsResponse: Codable, Hashable {
     public static let empty: LocationsResponse = LocationsResponse(groups: [])
     
     public let groups: [Group]
     
-    public struct Group: Codable, Equatable {
+    public struct Group: Codable, Hashable {
       public let key: String
       public let hashCode: Int
       public let stops: [TKStopCoordinate]?
