@@ -35,6 +35,7 @@ class TKUIDeparturesAccessoryView: UIView {
     disposeBag = DisposeBag()
     
     customActionStack.arrangedSubviews.forEach(customActionStack.removeArrangedSubview)
+    customActionStack.removeAllSubviews()
     
     let buttons = actions.map { action -> UIButton in
       let button = UIButton(type: .custom)
