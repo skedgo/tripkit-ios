@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TKQuickBookingPrice {
+public struct TKQuickBookingPrice: Hashable {
   /// Price in local currency, typically not in smallest unit, but dollars
   public let localCost: Float
   
@@ -16,7 +16,7 @@ public struct TKQuickBookingPrice {
   public let USDCost: Float
 }
 
-public struct TKQuickBooking : Codable {
+public struct TKQuickBooking: Codable, Hashable {
   /// Localised identifying this booking option
   public let title: String
 

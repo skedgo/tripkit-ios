@@ -10,7 +10,7 @@ import Foundation
 
 extension API {
 
-  public struct Stop: Codable, Equatable {
+  public struct Stop: Codable, Hashable {
     private enum CodingKeys: String, CodingKey {
       case code
       case lat

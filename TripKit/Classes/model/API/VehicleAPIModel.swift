@@ -11,7 +11,7 @@ import Foundation
 
 extension API {
   
-  public struct Vehicle: Codable, Equatable {
+  public struct Vehicle: Codable, Hashable {
     
     @available(*, unavailable, renamed: "API.VehicleOccupancy")
     public typealias Occupancy = VehicleOccupancy
@@ -35,7 +35,7 @@ extension API {
   }
   
   /// Representation of real-time occupancy information for public transport
-  public enum VehicleOccupancy: String, Codable, Equatable {
+  public enum VehicleOccupancy: String, Codable, Hashable {
     case unknown = "UNKNOWN"
     case empty = "EMPTY"
     case manySeatsAvailable = "MANY_SEATS_AVAILABLE"
@@ -46,7 +46,7 @@ extension API {
     case notAcceptingPassengers = "NOT_ACCEPTING_PASSENGERS"
   }
   
-  public struct VehicleComponents: Codable, Equatable {
+  public struct VehicleComponents: Codable, Hashable {
     public let wifi: Bool?
     public let occupancy: VehicleOccupancy?
   }

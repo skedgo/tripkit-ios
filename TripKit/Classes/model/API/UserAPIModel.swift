@@ -68,7 +68,7 @@ extension API {
     }
   }
   
-  public struct Phone: Codable {
+  public struct Phone: Codable, Hashable {
     public let countryCode: String?
     public let number: String
     let validated: Bool?
@@ -94,7 +94,7 @@ extension API {
     }
   }
   
-  public struct Email: Codable {
+  public struct Email: Codable, Hashable {
     public let address: String
     public let verified: Bool
     public let primary: Bool

@@ -9,7 +9,7 @@ import Foundation
 
 extension API {
 
-  public struct Departure: Codable, Equatable {
+  public struct Departure: Codable, Hashable {
     
     // information about the service
     public let serviceTripID: String
