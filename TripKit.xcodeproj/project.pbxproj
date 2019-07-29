@@ -801,6 +801,7 @@
 		D39ECD89205A029500E09474 /* TKUISectionedAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */; };
 		D3BC460D2288F39800590403 /* EventAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC460C2288F39800590403 /* EventAPIModel.swift */; };
 		D3E7C1AF21F17B7600C48248 /* TKUISectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */; };
+		D3EC9E8722EDD4CA0080B0E6 /* TKUINearbyModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC9E8522EDD4CA0080B0E6 /* TKUINearbyModePicker.swift */; };
 		D3F9CEC32064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */; };
 		D3F9CEC52064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */; };
 		D3FC1F11207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift */; };
@@ -1442,6 +1443,7 @@
 		D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertViewModel.swift; sourceTree = "<group>"; };
 		D3BC460C2288F39800590403 /* EventAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAPIModel.swift; sourceTree = "<group>"; };
 		D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertViewController.xib; sourceTree = "<group>"; };
+		D3EC9E8522EDD4CA0080B0E6 /* TKUINearbyModePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TKUINearbyModePicker.swift; path = ../../../../TripGoAppKit/Classes/view/TKUINearbyModePicker.swift; sourceTree = "<group>"; };
 		D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertTableHeader.swift; sourceTree = "<group>"; };
 		D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertTableHeader.xib; sourceTree = "<group>"; };
 		D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKInterAppCommunicator+TurnByTurn.swift"; sourceTree = "<group>"; };
@@ -1784,6 +1786,7 @@
 				3A6DF0D2202C8EB80084CB2C /* TKUIStyledLabel.m */,
 				3AFCE27222E7115700090933 /* TKUITripBoyView.swift */,
 				3AFCE27022E7115700090933 /* TKUITripBoyView.xib */,
+				D3EC9E8522EDD4CA0080B0E6 /* TKUINearbyModePicker.swift */,
 				3A6DF0B0202C8EB80084CB2C /* TKUITripSegmentsView.h */,
 				3A6DF0B8202C8EB80084CB2C /* TKUITripSegmentsView.m */,
 			);
@@ -3381,6 +3384,7 @@
 				3A4C4202227087F0003E057E /* TKUISegmentMode.swift in Sources */,
 				3AFD394A20D9333500FDC7D0 /* TKUIResultsCard.swift in Sources */,
 				3ACF471E2297F9F10096860D /* TKUIDeparturesCard+Content.swift in Sources */,
+				D3EC9E8722EDD4CA0080B0E6 /* TKUINearbyModePicker.swift in Sources */,
 				3ACF472B2297FA080096860D /* TKUIServiceViewModel+MapContent.swift in Sources */,
 				3ABCA7E12254DF030072EB25 /* Notification+TripKitUI.swift in Sources */,
 				3AA800EE2186F561008CFB6D /* TKUISheetViewController.swift in Sources */,
