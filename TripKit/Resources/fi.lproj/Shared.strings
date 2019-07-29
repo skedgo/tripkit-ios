@@ -1,5 +1,5 @@
 /* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
-"'%@' not found." = "Sijaintia '%@' ei löytynyt";
+"'%@' not found." = "Sijaintia %@ ei löytynyt.";
 
 /* '%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else. */
 "%@'s" = "Käyttäjän %@";
@@ -14,7 +14,7 @@
 "%lu recurrences" = "%lu kerta(a)";
 
 /* Authorization restricted alert message */
-"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Tämän ominaisuuden käyttöoikeutta on rajoitettu laitteessasi. Tarkista laitteesi Asetukset > Yleiset > Rajoitukset tai kysy neuvoa laitteen toimittajalta.";
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Tämän ominaisuuden käyttöoikeutta on rajoitettu laitteessasi. Tarkista laitteesi Asetukset > Yleiset > Rajoitukset, tai kysy neuvoa laitteen toimittajalta.";
 
 /* Accessibility label for action button */
 "Action" = "Toiminta";
@@ -134,7 +134,7 @@
 "Everyday" = "Päivittäin";
 
 /* Email placeholder text */
-"example@example.com" = "example@example.com";
+"example@example.com" = "esimerkki@example.com";
 
 /* Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email */
 "Failed to send" = "Lähettäminen epäonnistui";
@@ -143,7 +143,7 @@
 "First name" = "Etunimi";
 
 /* Reminder to leave preference */
-"For when to leave" = "Kun pitää lähteä";
+"For when to leave" = "Kun täytyy lähteä";
 
 /* A footnote that tells users we are asking for their current passwords, and why. */
 "For your security, please enter your current password." = "Anna nykyinen salasanasi turvallisuussyistä.";
@@ -194,7 +194,7 @@
 "Location" = "Sijainti";
 
 /* Location iOS authorisation needed text */
-"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Käyttääksesi tätä ominaisuutta tulee sinun sallia sijaintipalvelujen käyttö. Mene asetuksissa kohtaan Tietosuoja > Sijaintipalvelut. Varmista, että sijaintipalvelut on kytketty päälle ja anna TripGolle lupa käyttää niitä.";
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Käyttääksesi tätä ominaisuutta sinun on sallittava sijaintipalvelujen käyttö. Siirry asetuksissa kohtaan Tietosuoja > Sijaintipalvelut. Varmista, että sijaintipalvelut on kytketty päälle, ja anna TripGolle lupa käyttää niitä.";
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minuuttia ennen lähtöä";
@@ -224,7 +224,7 @@
 "Now" = "Nyt";
 
 /* Ok action */
-"OK" = "Ok";
+"OK" = "OK";
 
 /* Open in Safari action */
 "Open in Safari" = "Avaa Safarissa";
@@ -239,7 +239,7 @@
 "Please enter your registered email address. We will then send you instructions on how to reset password" = "Anna rekisteröity sähköpostiosoitteesi. Lähetämme sinulle ohjeet salasanan palauttamiseksi";
 
 /* Please select a location prompt */
-"Please select a location" = "Ole hyvä ja valitse sijainti";
+"Please select a location" = "Ole hyvä, ja valitse sijainti";
 
 /* Error recovery suggestion when GPS fails. */
 "Please try again or set your location manually." = "Yritä uudelleen tai syötä sijainti manuaalisesti.";
@@ -248,7 +248,7 @@
 "Please verify the location" = "Ole hyvä ja vahvista sijainti";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more…" = "Paina 'Etsi' saadaksesi lisätuloksia…";
+"Press 'search' for more…" = "Paina \"Etsi\" saadaksesi lisätuloksia…";
 
 /* Message to user if no primary email is set on his/her account */
 "Primary email is not set on your account. Please contact us for support" = "Tilillesi ei ole määritetty ensisijaista sähköpostia. Ota yhteyttä meihin saadaksesi tukea";
@@ -302,7 +302,7 @@
 "Search Results" = "Hakutulokset";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'…" = "Haetaan sijaintia '%@'…";
+"Searching for '%@'…" = "Haetaan sijaintia \"%@\"…";
 
 /* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
 "Sent" = "Lähetetty";
@@ -314,7 +314,7 @@
 "Server response contains no data" = "Palvelimen vastaus ei sisällä tietoja";
 
 /* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
-"Showing %@ of %@ transport modes" = "Näytetään %1$@ / %2$@ kulkumuodoista";
+"Showing %@ of %@ transport modes" = "Näytetään %1$@ / %2$@ kulkumuotoa";
 
 /* Title of page or button to sign in */
 "Sign in" = "Kirjaudu sisään";
@@ -344,7 +344,7 @@
 "The username or password you've entered is incorrect." = "Antamasi käyttäjätunnus tai salasana on virheellinen.";
 
 /* to %date. (old key: DateToFormat) */
-"to %@" = "%@ asti";
+"to %@" = "%@ saakka";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Seuranta - pois päältä";
@@ -356,7 +356,7 @@
 "Tracking - on with heading" = "Seuranta - päällä (sis. kulkusuunta)";
 
 /* Up to %date. (old key: DateToFormat) */
-"Up to %@" = "%@ asti";
+"Up to %@" = "%@ saakka";
 
 /* Title for a button which, when tapped, proceeds to updating password */
 "Update" = "Päivitä";
@@ -395,11 +395,11 @@
 "You need to agree to the booking terms and conditions." = "Sinun tulee hyväksyä varauksen käyttöehdot.";
 
 /* Message that informs users that T&C for insurance must be agreed before booking can be made. */
-"You need to agree to the insurance terms and conditions." = "Sinun tulee hyväksyä vakuutuksen käyttöehdot.";
+"You need to agree to the insurance terms and conditions." = "Sinun on hyväksyttävä vakuutuksen käyttöehdot.";
 
 /* Calendar authorisation needed text */
-"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Et aiemmin sallinut tämän sovelluksen pääsyä kalenteriisi. Ole hyvä, mene kohtaan Asetukset > Yksityisyys > Kalenteri ja salli tämän sovelluksen käyttää kyseistä ominaisuutta.";
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Et aiemmin sallinut tämän sovelluksen pääsyä kalenteriisi. Ole hyvä, ja mene kohtaan Asetukset > Yksityisyys > Kalenteri ja salli tämän sovelluksen käyttää kyseistä ominaisuutta.";
 
 /* Contacts authorisation needed text */
-"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Et aiemmin sallinut tämän sovelluksen pääsyä yhteystietoihisi. Mene kohtaan Asetukset > Tietosuoja > Yhteystiedot ja salli tämän sovelluksen käyttää tätä ominaisuutta.";
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Et aiemmin sallinut tämän sovelluksen pääsyä yhteystietoihisi. Siirry kohtaan Asetukset > Tietosuoja > Yhteystiedot, ja salli tämän sovelluksen käyttää tätä ominaisuutta.";
 

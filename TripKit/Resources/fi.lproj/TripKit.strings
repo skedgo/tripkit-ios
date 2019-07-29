@@ -20,7 +20,7 @@
 "%@ stops" = "%@ pysäkki(ä)";
 
 /* From %time1 to %time2. (old key: TimeFromToShortFormat) */
-"%@ to %@" = "Kohteesta '%1$@' Kohteeseen '%2$@'";
+"%@ to %@" = "Kohteesta %1$@ kohteeseen %2$@";
 
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ ilman ruuhkaa";
@@ -97,7 +97,7 @@
 "Call" = "Soita";
 
 /* Action title to make a call to service/company named '@%' */
-"Call %@" = "Soita firmalle %@";
+"Call %@" = "Soita yritykselle %@";
 
 /* Text for vehicle of type: Car */
 "Car" = "Auto";
@@ -109,7 +109,7 @@
 "Could not find transit stop." = "Välipysäkkiä ei löytynyt.";
 
 /* Text for attributing data sources. The list of providers will be used instead of '%@' */
-"Data provided by %@" = "Tietojen tarjoaja %@";
+"Data provided by %@" = "Tiedot tarjoaa %@";
 
 /* Title for screen showing data providers */
 "Data Providers" = "Tietolähteet";
@@ -233,7 +233,7 @@
 "Leave at %@" = "Lähde klo %@";
 
 /* Title for when to depart. Countdown to departure will be displayed below. */
-"Leave in" = "Lähtöaika";
+"Leave in" = "Lähtöön aikaa";
 
 /* No comment provided by engineer. */
 "Leave now" = "Lähde nyt";
@@ -299,10 +299,10 @@
 "Please adjust your query and try again." = "Ole hyvä, muokkaa hakua ja yritä sitten uudelleen.";
 
 /* No comment provided by engineer. */
-"Powered by" = "Powered by";
+"Powered by" = "Palvelun tarjoaa";
 
 /* No comment provided by engineer. */
-"Powered by %@" = "Powered by %@";
+"Powered by %@" = "Palvelun tarjoaa %@";
 
 /* No comment provided by engineer. */
 "Public holiday" = "Yleinen vapaapäivä";
@@ -317,13 +317,13 @@
 "Request support" = "Ota yhteyttä tukeen";
 
 /* Error message if interregional routing isn't yet supported */
-"Routing from %@ to %@ is not yet supported" = "Reititystä välillä %1$@ - %2$@ ei vielä tueta.";
+"Routing from %@ to %@ is not yet supported" = "Reititystä välillä %1$@ – %2$@ ei vielä tueta.";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Hae tämän pysäkin tietoja uudelleen tai yritä myöhemmin uudelleen..";
 
 /* Send SMS action button */
-"Send SMS" = "Lähetä SMS";
+"Send SMS" = "Lähetä tekstiviesti";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Asetukset";
@@ -332,7 +332,7 @@
 "Show" = "Näytä";
 
 /* Show website action button */
-"Show website" = "Avaa nettisivusto";
+"Show website" = "Avaa verkkosivusto";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Vain seisomapaikkoja";
@@ -380,7 +380,7 @@
 "Vehicles" = "Ajoneuvot";
 
 /* No comment provided by engineer. */
-"We are busy getting your upcoming trip. Please wait..." = "Matkan tietojen latauksessa viivettä. Ole hyvä, odota...";
+"We are busy getting your upcoming trip. Please wait..." = "Matkan tietojen latauksessa viivettä. Ole hyvä ja odota...";
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Täältä löydät viimeisimmät matkaasi liittyvät ilmoitukset";
