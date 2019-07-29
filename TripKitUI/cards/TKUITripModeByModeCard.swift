@@ -129,9 +129,14 @@ public class TKUITripModeByModeCard: TGPageCard {
     viewModel.realTimeUpdate
       .drive(onNext: { [unowned self] progress in
         guard case .updated(let updatedTrip) = progress else { return }
-        self.realTimeUpdate(for: updatedTrip)
+        self.reflectUpdates(of: updatedTrip)
       })
       .disposed(by: disposeBag)
+    
+    viewModel.tripDidUpdate
+      .emit(onNext: { [unowned self] in self.reflectUpdates(of: $0) })
+      .disposed(by: disposeBag)
+
     
     NotificationCenter.default.rx
       .notification(.TKUIMapManagerSelectionChanged, object: tripMapManager)
@@ -282,7 +287,10 @@ extension TKUITripModeByModeCard {
     return oldTemplates == newTemplates
   }
   
-  private func realTimeUpdate(for trip: Trip) {
+  /// Call this whenver the trip object did change to reflect those changes in the UI
+  ///
+  /// - Parameter trip: The trip; fires an assert if the trip changed to what's on the map.
+  private func reflectUpdates(of trip: Trip) {
     assert(trip == tripMapManager.trip, "Uh-oh, trip changed!")
     
     let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
