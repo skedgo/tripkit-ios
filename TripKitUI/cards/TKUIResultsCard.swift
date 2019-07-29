@@ -146,6 +146,10 @@ public class TKUIResultsCard: TGTableCard {
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
+    
+    let modePicker = TKUINearbyModePicker()
+    modePicker.backgroundColor = .white
+    modePicker.addAsHeader(to: tableView)
     tableView.tableFooterView = footerButton
     
     // Overriding the data source with our Rx one
