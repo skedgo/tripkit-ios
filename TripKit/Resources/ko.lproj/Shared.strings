@@ -79,9 +79,6 @@
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
 "Could not download supported regions from TripGo's server. Please try again later." = "TripGo 서버에서 지원되는 지역이 다운로드 되지 않았습니다. 나중에 다시 시도해 주세요.";
 
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "계정을 만들고 있습니다.";
-
 /* Section title for credit card payment */
 "Credit card" = "신용카드";
 
@@ -142,9 +139,6 @@
 
 /* Instant results proposal */
 "Instant results" = "즉각적인 결과";
-
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "계정이 존재하지 않습니다.";
 
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
@@ -227,10 +221,10 @@
 "Please verify the location" = "위치를 확인 하십시오";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "더 자세한 정보를 원하시면 검색을 눌러주세요.";
+"Press 'search' for more…" = "더 자세한 정보를 원하시면 검색을 눌러주세요.";
 
 /* No comment provided by engineer. */
-"Read more..." = "더 보기";
+"Read more…" = "더 보기";
 
 /* Indicator for real-time information */
 "Real-time" = "실시간";
@@ -275,7 +269,7 @@
 "Search for a city" = "도시 검색";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "%@ 검색 중...";
+"Searching for '%@'…" = "%@ 검색 중…";
 
 /* Button that goes to the Setting's app */
 "Settings" = "설정";
@@ -295,18 +289,11 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "로그인 중...";
 
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
-"Signing out" = "로그아웃 중...";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "%@에 시작..";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "위치를 설정 하려면 여기를 누르세요.";
-
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "지금 로그아웃 합니다.";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "추적-  끄기";

@@ -119,7 +119,7 @@ public class Loc : NSObject {
   
   @objc
   public static var ReadMore: String {
-    return NSLocalizedString("Read more...", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "")
+    return NSLocalizedString("Read more…", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "")
   }
   
   @objc public static var AllDay: String {
@@ -262,7 +262,7 @@ public class Loc : NSObject {
   
   @objc(SearchingFor:)
   public static func SearchingFor(_ keyword: String) -> String {
-    let format = NSLocalizedString("Searching for '%@'...", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Placeholder text while waiting for server response when searching for a location.")
+    let format = NSLocalizedString("Searching for '%@'…", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Placeholder text while waiting for server response when searching for a location.")
     return String(format: format, keyword)
   }
   

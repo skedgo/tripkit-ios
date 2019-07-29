@@ -1,0 +1,18 @@
+/* Class = "UINavigationItem"; title = "TripKitUI"; ObjectID = "3cV-wV-YCF"; */
+"3cV-wV-YCF.title" = "TripKitUI";
+
+/* Class = "UITableViewSection"; headerTitle = "Search"; ObjectID = "6ua-M0-Hgf"; */
+"6ua-M0-Hgf.headerTitle" = "Search";
+
+/* Class = "UITableViewSection"; headerTitle = "View controllers"; ObjectID = "587-Lp-kV0"; */
+"587-Lp-kV0.headerTitle" = "View controllers";
+
+/* Class = "UILabel"; text = "TKUIRoutesViewController"; ObjectID = "N0j-AY-v3I"; */
+"N0j-AY-v3I.text" = "TKUIRoutesViewController";
+
+/* Class = "UILabel"; text = "TKUIAutocompletionViewController"; ObjectID = "NKv-AO-eM1"; */
+"NKv-AO-eM1.text" = "TKUIAutocompletionViewController";
+
+/* Class = "UILabel"; text = "(incl. TKUIDeparturesViewController)"; ObjectID = "z70-Ro-dJ8"; */
+"z70-Ro-dJ8.text" = "(incl. TKUIDeparturesViewController)";
+

@@ -1,6 +1,3 @@
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "The app will now sign out";
-
 /* Authorization restricted alert message */
 "Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider.";
 
@@ -28,9 +25,6 @@
 /* Label for when a service is cancelled. */
 "Cancelled" = "Cancelled";
 
-/* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "Cannot proceed without a valid email address";
-
 /* Type of vehicle : car */
 "Car" = "Car";
 
@@ -55,9 +49,6 @@
 
 /* Could not download supported regions warning */
 "CouldNotDownloadSupportedRegions" = "Could not download supported regions from TripGo's server. Please try again later.";
-
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "Creating account";
 
 /* Section title for credit card payment */
 "Credit card" = "Credit card";
@@ -128,9 +119,6 @@
 
 /* Instant results proposal */
 "Instant results" = "Instant results";
-
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Invalid account";
 
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
@@ -236,9 +224,6 @@
 /* Never in context of repetitions (especially recurring events) */
 "Never" = "Never";
 
-/* Title for sign in view when user does not have an account */
-"New account" = "New account";
-
 /* Button title to complete this step and advance to next
    Keyboard accessory button title to complete this step and advance to next */
 "Next" = "Next";
@@ -282,7 +267,7 @@
 "Please verify the location" = "Please verify the location";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "Press 'search' for more...";
+"Press 'search' for more…" = "Press 'search' for more…";
 
 /* Title for section that asks users where payment receipt should be sent */
 "Receipt" = "Receipt";
@@ -329,16 +314,6 @@
 /* No comment provided by engineer. */
 "Sign up" = "Sign up";
 
-/* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Sign up cannot be completed without a valid password";
-
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Signing in";
-
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Signing out";
-
 /* Short indicator of start-time */
 "starts at %@" = "starts at %@";
 
@@ -353,9 +328,6 @@
 
 /* user location button - follow with heading */
 "Tracking - on with heading" = "Tracking - on with heading";
-
-/* No comment provided by engineer. */
-"Unknown error" = "Unknown error";
 
 /* Message that shows app is updating trip after user finalised bookings */
 "Updating trip" = "Updating trip";

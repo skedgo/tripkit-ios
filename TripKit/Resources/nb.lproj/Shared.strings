@@ -1,405 +1,405 @@
 /* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
-"'%@' not found." = "Sijaintia %@ ei löytynyt.";
+"'%@' not found." = "'%@' ikke funnet.";
 
 /* '%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else. */
-"%@'s" = "Käyttäjän %@";
+"%@'s" = "%@s";
 
 /* '%@' will be replaced with the person's name */
-"%@'s Home" = "Käyttäjän %@ Koti";
+"%@'s Home" = "%@s hjem";
 
 /* '%@' will be replaced with the person's name */
-"%@'s Work" = "Käyttäjän %@ Työ";
+"%@'s Work" = "%@s jobb";
 
 /* Number of repeats. (old key: NumberRecurrences) */
-"%lu recurrences" = "%lu kerta(a)";
+"%lu recurrences" = "%lu gjentakelser";
 
 /* Authorization restricted alert message */
-"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Tämän ominaisuuden käyttöoikeutta on rajoitettu laitteessasi. Tarkista laitteesi Asetukset > Yleiset > Rajoitukset, tai kysy neuvoa laitteen toimittajalta.";
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Tilgang til denne funksjonen er begrenset for enheten. Vennligst sjekk appens innstillinger > Generelt > Begrensninger eller spør telefonleverandøren.";
 
 /* Accessibility label for action button */
-"Action" = "Toiminta";
+"Action" = "Handling";
 
 /* Default title for alert view */
-"Alert" = "Ilmoitus";
+"Alert" = "Varsel";
 
 /* Indicator that an event is all-day, or that something is open all-day */
-"all-day" = "koko päivä";
+"all-day" = "hele døgnet";
 
 /* Option for users if they already owned a SkedGo account */
-"Already have an account?" = "Onko sinulla jo tili?";
+"Already have an account?" = "Har du allerede en konto?";
 
 /* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "Sinulla on jo tili? Kirjaudu sisään";
+"Already have an account? Sign in" = "Har du allerede en konto? Logg inn";
 
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
-"arrives %@" = "saapuu klo %@";
+"arrives %@" = "ankommer %@";
 
 /* Source where the account was derived, e.g., Facebook */
-"Authentication" = "Todennus";
+"Authentication" = "Bekreftelse";
 
 /* Authorisation needed title */
-"Authorisation needed" = "Lupa tarvitaan";
+"Authorisation needed" = "Bekreftelse nødvendig";
 
 /* Accessibility label for 'back' or 'previous' button */
-"Back" = "Takaisin";
+"Back" = "Tilbake";
 
 /* Type of vehicle : bicycle */
-"Bicycle" = "Pyörä";
+"Bicycle" = "Sykkel";
 
 /* Cancel action */
-"Cancel" = "Peruuta";
+"Cancel" = "Avbryt";
 
 /* Label for when a service is cancelled. */
-"Cancelled" = "Peruttu";
+"Cancelled" = "Avbrutt";
 
 /* Type of vehicle : car */
-"Car" = "Auto";
+"Car" = "Bil";
 
 /* Instruction for changing password */
-"Change" = "Muuta";
+"Change" = "Endre";
 
 /* Accessibility - user location button - hint */
-"Change tracking options" = "Muuta seurantavaihtoehtoja";
+"Change tracking options" = "Endre sporingsalternativer";
 
 /* Accessibility title for a checkmark/tick button */
-"Checkmark" = "Valintamerkki";
+"Checkmark" = "Markering";
 
 /* Close action */
-"Close" = "Sulje";
+"Close" = "Lukk";
 
 /* Title on the button that asks users to confirm if they want to proceed with booking */
-"Confirm" = "Vahvista";
+"Confirm" = "Bekreft";
 
 /* This often appears below a password field, asking users to confirm the password entered. */
-"Confirm password" = "Vahvista salasana";
+"Confirm password" = "Bekreft passord";
 
 /* Title for button that allows users to contact our support team to help resolve some error in the app. */
-"Contact support" = "Ota yhteys tukeen";
+"Contact support" = "Kontakt kundestøtte";
 
 /* Error title when GPS failed. */
-"Could not determine your current location." = "Tämänhetkistä sijaintiasi ei voitu määrittää.";
+"Could not determine your current location." = "Kunne ikke finne din nåværende plassering.";
 
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
-"Could not download supported regions from TripGo's server. Please try again later." = "Tuettuja alueita ei voitu ladata TripGo:n palvelimelle. Yritä myöhemmin uudelleen";
+"Could not download supported regions from TripGo's server. Please try again later." = "Kunne ikke laste ned støttede områder fra TripGos server. Prøv igjen senere.";
 
 /* Current city */
-"Current City" = "Tämänhetkinen kaupunki";
+"Current City" = "Gjeldende by";
 
 /* Title for user's current location */
-"Current Location" = "Tämänhetkinen sijainti";
+"Current Location" = "Gjeldende plassering";
 
 /* Class of errors usually originated from databases */
-"Data Error" = "Datavirhe";
+"Data Error" = "Datafeil";
 
 /* Delete action */
-"Delete" = "Poista";
+"Delete" = "Slett";
 
 /* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
-"departs %@" = "lähtee klo %@";
+"departs %@" = "avgang %@";
 
 /* Sort by distance */
-"Distance" = "Etäisyys";
+"Distance" = "Avstand";
 
 /* Option for users if they don't yet have a SkedGo account */
-"Don't have an account?" = "Eikö sinulla ole tiliä?";
+"Don't have an account?" = "Har du ikke en konto?";
 
 /* Option for users if they don't yet have a SkedGo account */
-"Don't have an account? Sign up" = "Sinulla ei ole vielä tiliä? Rekisteröidy";
+"Don't have an account? Sign up" = "Har du ikke en konto? Registrer deg";
 
 /* Done action */
-"Done" = "Valmis";
+"Done" = "Ferdig";
 
 /* Drop new pin */
-"Drop new pin" = "Sijoita uusi piste";
+"Drop new pin" = "Slipp ny nål";
 
 /* Title for the screen which allows users to edit their accounts */
-"Edit Account" = "Muokkaa tiliä";
+"Edit Account" = "Rediger konto";
 
 /* For email address */
-"Email" = "Sähköposti";
+"Email" = "E-post";
 
 /* Short indicator of end-time */
-"ends at %@" = "päättyy klo %@";
+"ends at %@" = "slutter kl. %@";
 
 /* Prompt for users to enter a new password */
-"Enter a new password" = "Anna uusi salasana";
+"Enter a new password" = "Skriv inn ett nytt passord";
 
 /* Describing any generic/unclassified errors */
-"Error" = "Virhe";
+"Error" = "Feil";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
-"Every %@" = "Joka %@";
+"Every %@" = "Hvert %@";
 
 /* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "Päivittäin";
+"Everyday" = "Hver dag";
 
 /* Email placeholder text */
-"example@example.com" = "esimerkki@example.com";
+"example@example.com" = "example@example.com";
 
 /* Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email */
-"Failed to send" = "Lähettäminen epäonnistui";
+"Failed to send" = "Kunne ikke sende";
 
 /* Placeholder text for textField that asks user's first name/given name */
-"First name" = "Etunimi";
+"First name" = "Fornavn";
 
 /* Reminder to leave preference */
-"For when to leave" = "Kun täytyy lähteä";
+"For when to leave" = "For når du skal reise";
 
 /* A footnote that tells users we are asking for their current passwords, and why. */
-"For your security, please enter your current password." = "Anna nykyinen salasanasi turvallisuussyistä.";
+"For your security, please enter your current password." = "For din sikkerhet, skriv inn ditt nåværende passord.";
 
 /* Title for a button which allows users to reset their password */
-"Forgot password" = "Salasana unohtui";
+"Forgot password" = "Glemt passord";
 
 /* Free as in beer */
-"Free" = "Ilmainen";
+"Free" = "Gratis";
 
 /* No comment provided by engineer. */
-"Getting a lift" = "Hanki kyyti";
+"Getting a lift" = "Få skyss";
 
 /* Accessibility annotation for trips which have a reminder set. */
-"Has reminder" = "Muistutus asetettu";
+"Has reminder" = "Har påminnelse";
 
 /* Warning message shown to a user when he/she tries to change password without the primary email verified */
-"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "Vaihtaaksesi salasanasi sinun on ensin vahvistettava sähköpostiosoitteesi. Seuraa sinulle lähetettyä linkkiä tai pyydä uusi alla.";
+"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "For å endre passord, må du først bekrefte e-postadressen din. Følg linken som ble sendt til deg, eller be om en ny nedenfor.";
 
 /* Include contacts. */
-"Include contacts" = "Sisällytä yhteystiedot";
+"Include contacts" = "Inkluder kontakter";
 
 /* Button to include events in search, too. */
-"Include events" = "Sisällytä tapahtumat";
+"Include events" = "Inkluder hendelser";
 
 /* Instant results proposal */
-"Instant results" = "Pikahaun tulokset";
+"Instant results" = "Direkte resultater";
 
 /* A footnote that instructs users to check their emails for reset instructions */
-"Instructions on how to reset password has been sent to the above email address." = "Ohjeet salasanan palauttamiseksi on lähetetty edellä mainittuun sähköpostiosoitteeseen.";
+"Instructions on how to reset password has been sent to the above email address." = "Instruksjoner for hvordan du tilbakestiller passord ble sendt til ovennevnte e-postadresse.";
 
 /* Name placeholder text */
-"John Appleseed" = "Milla Matkaaja";
+"John Appleseed" = "John Appleseed";
 
 /* Placeholder text for textField that asks user's last name/surname */
-"Last name" = "Sukunimi";
+"Last name" = "Etternavn";
 
 /* Last updated at %date */
-"Last updated: %@" = "Viimeksi päivitetty: %@";
+"Last updated: %@" = "Sist oppdatert: %@";
 
 /* Title of button to perform some action at a later time */
-"Later" = "Myöhemmin";
+"Later" = "Senere";
 
 /* Title on the button that indicates to the user that booking is in progressing */
-"Loading" = "Ladataan";
+"Loading" = "Laster";
 
 /* Title for unnamed location */
-"Location" = "Sijainti";
+"Location" = "Sted";
 
 /* Location iOS authorisation needed text */
-"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Käyttääksesi tätä ominaisuutta sinun on sallittava sijaintipalvelujen käyttö. Siirry asetuksissa kohtaan Tietosuoja > Sijaintipalvelut. Varmista, että sijaintipalvelut on kytketty päälle, ja anna TripGolle lupa käyttää niitä.";
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Posisjonstjenester kreves for å bruke denne funksjonen. Gå til appens Innstillinger > Personvern > Posisjonstjenester, pass på at de er slått på og godkjenn denne appen.";
 
 /* Reminder to leave preference */
-"Minutes before trip" = "Minuuttia ennen lähtöä";
+"Minutes before trip" = "Minutter før reisen";
 
 /* More results proposal */
-"More results" = "Lisää tuloksia";
+"More results" = "Flere resultater";
 
 /* Type of vehicle : motorbike */
-"Motorbike" = "Moottoripyörä";
+"Motorbike" = "Motorsykkel";
 
 /* Title for name of something (or someone) */
-"Name" = "Nimi";
+"Name" = "Navn";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
-"Never" = "Ei koskaan";
+"Never" = "Aldri";
 
 /* Next action */
-"Next" = "Seuraava";
+"Next" = "Neste";
 
 /* No comment provided by engineer. */
-"No CO₂" = "Ei CO₂";
+"No CO₂" = "Ingen CO₂";
 
 /* Indicator for wheelchair not accessible services */
-"Not wheelchair accessible" = "Pyörätuoli ei tuettu";
+"Not wheelchair accessible" = "Ikke tilgjengelig for rullestol";
 
 /* Countdown cell 'now' indicator */
-"Now" = "Nyt";
+"Now" = "Nå";
 
 /* Ok action */
 "OK" = "OK";
 
 /* Open in Safari action */
-"Open in Safari" = "Avaa Safarissa";
+"Open in Safari" = "Vis i Safari";
 
 /* Button that goes to the Setting's app */
-"Open Settings" = "Avaa Asetukset";
+"Open Settings" = "Åpne innstillinger";
 
 /* No comment provided by engineer. */
-"Password" = "Salasana";
+"Password" = "Passord";
 
 /* A footnote that asks users for their email addresses in order to reset password */
-"Please enter your registered email address. We will then send you instructions on how to reset password" = "Anna rekisteröity sähköpostiosoitteesi. Lähetämme sinulle ohjeet salasanan palauttamiseksi";
+"Please enter your registered email address. We will then send you instructions on how to reset password" = "Skriv inn din registrerte e-postadresse. Vi sender deg deretter instruksjoner om hvordan du tilbakestiller passordet";
 
 /* Please select a location prompt */
-"Please select a location" = "Ole hyvä, ja valitse sijainti";
+"Please select a location" = "Velg sted";
 
 /* Error recovery suggestion when GPS fails. */
-"Please try again or set your location manually." = "Yritä uudelleen tai syötä sijainti manuaalisesti.";
+"Please try again or set your location manually." = "Prøv igjen eller angi stedet manuelt.";
 
 /* Please verify the location prompt */
-"Please verify the location" = "Ole hyvä ja vahvista sijainti";
+"Please verify the location" = "Vennligst bekreft stedet";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more…" = "Paina \"Etsi\" saadaksesi lisätuloksia…";
+"Press 'search' for more…" = "Trykk på 'søk' for mer …";
 
 /* Message to user if no primary email is set on his/her account */
-"Primary email is not set on your account. Please contact us for support" = "Tilillesi ei ole määritetty ensisijaista sähköpostia. Ota yhteyttä meihin saadaksesi tukea";
+"Primary email is not set on your account. Please contact us for support" = "Primær e-post er ikke angitt på kontoen din. Kontakt oss for assistanse";
 
 /* No comment provided by engineer. */
-"Read more…" = "Lisätiedot…";
+"Read more…" = "Les mer …";
 
 /* Indicator for real-time information */
-"Real-time" = "Reaaliaikainen";
+"Real-time" = "Sanntid";
 
 /* This is the placeholder text in a text field to inform users an optioanl referral code can be entered. */
-"Referral code (optional)" = "Suosittelukoodi (valinnainen)";
+"Referral code (optional)" = "Referansekode (valgfritt)";
 
 /* Action title to add/remove reminder */
-"Reminder" = "Muistutus";
+"Reminder" = "Påminnelse";
 
 /* Repeats daily */
-"Repeats daily" = "Toistuu päivittäin";
+"Repeats daily" = "Gjentas daglig";
 
 /* Repeats monthly */
-"Repeats monthly" = "Toistuu kuukausittain";
+"Repeats monthly" = "Gjentas månedlig";
 
 /* Repeats weekly */
-"Repeats weekly" = "Toistuu viikoittain";
+"Repeats weekly" = "Gjentas ukentlig";
 
 /* Repeats yearly */
-"Repeats yearly" = "Toistuu vuosittain";
+"Repeats yearly" = "Gjentas årlig";
 
 /* Button title to report a problem */
-"Report Problem" = "Ilmoita ongelmasta";
+"Report Problem" = "Rapporter problem";
 
 /* Give users an option to rece */
-"Resend verification email" = "Lähetä vahvistussähköposti uudelleen";
+"Resend verification email" = "Send bekreftelsen til e-post på nytt";
 
 /* Title for a button which, when tapped, confirms the reset of password. */
-"Reset password" = "Palauta salasana";
+"Reset password" = "Tilbakestill passord";
 
 /* Retry action, e.g., in case something didn't load */
-"Retry" = "Yritä uudelleen";
+"Retry" = "Prøv på nytt";
 
 /* Sort by overall score, like a ranking. */
-"Score" = "Pisteytys";
+"Score" = "Poengsum";
 
 /* Empty search bar placeholder */
-"Search" = "Hae";
+"Search" = "Søk";
 
 /* No comment provided by engineer. */
-"Search for a city" = "Hae kaupunkia";
+"Search for a city" = "Søk etter by";
 
 /* No comment provided by engineer. */
-"Search Results" = "Hakutulokset";
+"Search Results" = "Søkeresultater";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'…" = "Haetaan sijaintia \"%@\"…";
+"Searching for '%@'…" = "Søker etter '%@ ' …";
 
 /* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
-"Sent" = "Lähetetty";
+"Sent" = "Sendt";
 
 /* Class of errors generated by our servers */
-"Server Error" = "Palvelinvirhe";
+"Server Error" = "Serverfeil";
 
 /* Error message when our server returns empty data in response to a network request */
-"Server response contains no data" = "Palvelimen vastaus ei sisällä tietoja";
+"Server response contains no data" = "Serversvar inneholder ingen data";
 
 /* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
-"Showing %@ of %@ transport modes" = "Näytetään %1$@ / %2$@ kulkumuotoa";
+"Showing %@ of %@ transport modes" = "Viser %1$@ av %2$@ transportmoduser";
 
 /* Title of page or button to sign in */
-"Sign in" = "Kirjaudu sisään";
+"Sign in" = "Logg inn";
 
 /* Instruction for signing out user account */
-"Sign out" = "Kirjaudu ulos";
+"Sign out" = "Logg ut";
 
 /* Title of page or button to sign up */
-"Sign up" = "Rekisteröidy";
+"Sign up" = "Register deg";
 
 /* Starting %date. (old key: DateFromFormat) */
-"Starting %@" = "%@ lähtien";
+"Starting %@" = "Starter %@";
 
 /* Short indicator of start-time */
-"starts at %@" = "alkaa klo %@";
+"starts at %@" = "starter kl. %@";
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "SUV";
 
 /* Tap to set location. (old key: SetLocation) */
-"Tap to set location" = "Napauta asettaaksesi sijainnin";
+"Tap to set location" = "Trykk for å angi sted";
 
 /* Error message shown to a user when zero-length password field is detected */
-"The password field cannot be empty." = "Salasanakenttä ei voi olla tyhjä.";
+"The password field cannot be empty." = "Passordfeltet kan ikke være tomt.";
 
 /* Error message shown to a user when he/she enters incorrect username or password */
-"The username or password you've entered is incorrect." = "Antamasi käyttäjätunnus tai salasana on virheellinen.";
+"The username or password you've entered is incorrect." = "Brukernavn eller passord er feil.";
 
 /* to %date. (old key: DateToFormat) */
-"to %@" = "%@ saakka";
+"to %@" = "til %@";
 
 /* Accessibility - user location button - off */
-"Tracking - off" = "Seuranta - pois päältä";
+"Tracking - off" = "Sporing - av";
 
 /* user location button - follow */
-"Tracking - on" = "Seuranta - päällä";
+"Tracking - on" = "Sporing - på";
 
 /* user location button - follow with heading */
-"Tracking - on with heading" = "Seuranta - päällä (sis. kulkusuunta)";
+"Tracking - on with heading" = "Sporing - på med overskrift";
 
 /* Up to %date. (old key: DateToFormat) */
-"Up to %@" = "%@ saakka";
+"Up to %@" = "Opptil %@";
 
 /* Title for a button which, when tapped, proceeds to updating password */
-"Update" = "Päivitä";
+"Update" = "Oppdater";
 
 /* Message that shows app is updating trip after user finalised bookings */
-"Updating trip" = "Matkaa päivitetään";
+"Updating trip" = "Oppdaterer reise";
 
 /* Error message when our server fails to return userToken in response to a sign in or sign up request */
-"userToken is missing in the server response" = "userToken puuttuu palvelimen vastauksesta";
+"userToken is missing in the server response" = "userToken mangler i serversvar";
 
 /* Message that informs users that some values are missing from the required fields in a booking form. */
-"Values missing from required fields." = "Osa pakollisista tiedoista puuttuu.";
+"Values missing from required fields." = "Verdier mangler fra obligatoriske felt.";
 
 /* Title for a button which, when tapped, proceeds to verifying password */
-"Verify" = "Vahvista";
+"Verify" = "Bekreft";
 
 /* Prompt for users to enter their passwords for verification purpose. */
-"Verify password" = "Vahvista salasana";
+"Verify password" = "Bekreft passord";
 
 /* Every weekday in context of repetitions (especially recurring events) */
-"Weekdays" = "Arkisin";
+"Weekdays" = "Hverdager";
 
 /* Every weekend day in context of repetitions (especially recurring events) */
-"Weekends" = "Viikonloppuisin";
+"Weekends" = "Helger";
 
 /* Indicator for unknow if service or station is wheelchair accessible or not */
-"Wheelchair accessibility unknown" = "Pyörätuoli tuelle ei tietoa";
+"Wheelchair accessibility unknown" = "Rullestoltilgjengelighet ukjent";
 
 /* Indicator for wheelchair accessible services */
-"Wheelchair accessible" = "Pyörätuolilla liikkuminen huomioitu";
+"Wheelchair accessible" = "Tilgjengelig for rullestol";
 
 /* Question asked when user is taking a screenshot */
-"Would you like to report a problem?" = "Haluaisitko ilmoittaa ongelmasta?";
+"Would you like to report a problem?" = "Ønsker du å rapportere et problem?";
 
 /* Message that informs users that T&C must be agreed before booking can be made. */
-"You need to agree to the booking terms and conditions." = "Sinun tulee hyväksyä varauksen käyttöehdot.";
+"You need to agree to the booking terms and conditions." = "Du må godta bestillingsbetingelsene.";
 
 /* Message that informs users that T&C for insurance must be agreed before booking can be made. */
-"You need to agree to the insurance terms and conditions." = "Sinun on hyväksyttävä vakuutuksen käyttöehdot.";
+"You need to agree to the insurance terms and conditions." = "Du må godta forsikringsbetingelsene.";
 
 /* Calendar authorisation needed text */
-"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Et aiemmin sallinut tämän sovelluksen pääsyä kalenteriisi. Ole hyvä, ja mene kohtaan Asetukset > Yksityisyys > Kalenteri ja salli tämän sovelluksen käyttää kyseistä ominaisuutta.";
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Du har tidligere nektet denne appens tilgang til kalenderen din. Vennligst gå til appens innstillinger > Personvern > Kalender og godkjenn appen for å bruke denne funksjonen.";
 
 /* Contacts authorisation needed text */
-"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Et aiemmin sallinut tämän sovelluksen pääsyä yhteystietoihisi. Siirry kohtaan Asetukset > Tietosuoja > Yhteystiedot, ja salli tämän sovelluksen käyttää tätä ominaisuutta.";
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Du har tidligere nektet denne appens tilgang til kontaktene dine. Vennligst gå til appens innstillinger > Personvern > Kontakter og godkjenn appen for å bruke denne funksjonen.";
 
