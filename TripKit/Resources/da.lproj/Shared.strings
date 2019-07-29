@@ -11,13 +11,13 @@
 "%@'s Work" = "%@s arbejde";
 
 /* Number of repeats. (old key: NumberRecurrences) */
-"%lu recurrences" = "%lu gentagelse";
+"%lu recurrences" = "%lu gentagelser";
 
 /* Authorization restricted alert message */
-"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Adgang til denne funktion er begrænset til din enhed. Kontroller appens indstillinger > Generelt > begrænsninger eller spørg din udbyder.";
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Adgang til denne funktion er begrænset til din enhed. Kontrollér appens indstillinger > Generelt > Begrænsninger eller spørg din enhedsudbyder.";
 
 /* Accessibility label for action button */
-"Action" = "Aktion";
+"Action" = "Handling";
 
 /* Default title for alert view */
 "Alert" = "Advarsel";
@@ -47,22 +47,22 @@
 "Bicycle" = "Cykel";
 
 /* Cancel action */
-"Cancel" = "Fortryd";
+"Cancel" = "Annullér";
 
 /* Label for when a service is cancelled. */
-"Cancelled" = "Aflyst";
+"Cancelled" = "Annulleret";
 
 /* Type of vehicle : car */
 "Car" = "Bil";
 
 /* Instruction for changing password */
-"Change" = "Ændre";
+"Change" = "Ændr";
 
 /* Accessibility - user location button - hint */
-"Change tracking options" = "Ændre sporings indstillinger";
+"Change tracking options" = "Ændr sporingsindstillinger";
 
 /* Accessibility title for a checkmark/tick button */
-"Checkmark" = "Kryds af";
+"Checkmark" = "Markering";
 
 /* Close action */
 "Close" = "Luk";
@@ -77,10 +77,10 @@
 "Contact support" = "Kontakt support";
 
 /* Error title when GPS failed. */
-"Could not determine your current location." = "Kan ikke finde din aktuelle placering.";
+"Could not determine your current location." = "Kunne ikke finde din aktuelle placering.";
 
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
-"Could not download supported regions from TripGo's server. Please try again later." = "Kunne ikke download tilgængellige regioner fra Tripgo's server. Prøv igen senere.";
+"Could not download supported regions from TripGo's server. Please try again later." = "Kunne ikke downloade understøttede regioner fra Tripgos server. Prøv igen senere.";
 
 /* Current city */
 "Current City" = "Nuværende by";
@@ -110,7 +110,7 @@
 "Done" = "Færdig";
 
 /* Drop new pin */
-"Drop new pin" = "Sæt nyt markering";
+"Drop new pin" = "Slip ny nål";
 
 /* Title for the screen which allows users to edit their accounts */
 "Edit Account" = "Rediger konto";
@@ -119,7 +119,7 @@
 "Email" = "E-mail";
 
 /* Short indicator of end-time */
-"ends at %@" = "ender om %@";
+"ends at %@" = "ender kl. %@";
 
 /* Prompt for users to enter a new password */
 "Enter a new password" = "Indtast en ny adgangskode";
@@ -131,7 +131,7 @@
 "Every %@" = "Hver %@";
 
 /* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "Hverdag";
+"Everyday" = "Hver dag";
 
 /* Email placeholder text */
 "example@example.com" = "example@example.com";
@@ -143,7 +143,7 @@
 "First name" = "Fornavn";
 
 /* Reminder to leave preference */
-"For when to leave" = "For hvornår at forlade";
+"For when to leave" = "For hvornår du skal tage afsted";
 
 /* A footnote that tells users we are asking for their current passwords, and why. */
 "For your security, please enter your current password." = "Indtast din nuværende adgangskode af hensyn til din sikkerhed.";
@@ -164,10 +164,10 @@
 "In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "For at ændre din adgangskode skal du først bekræfte din e-mail. Du bedes følge linket, der blev sendt til dig, eller anmode om et nyt nedenfor.";
 
 /* Include contacts. */
-"Include contacts" = "Inkludér komtakter";
+"Include contacts" = "Medtag kontaktpersoner";
 
 /* Button to include events in search, too. */
-"Include events" = "Inkludér begivenhed";
+"Include events" = "Medtag begivenheder";
 
 /* Instant results proposal */
 "Instant results" = "Øjeblikkelige resultater";
@@ -194,10 +194,10 @@
 "Location" = "Placering";
 
 /* Location iOS authorisation needed text */
-"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Placeringstjenester er forpligtet til at bruge denne funktion. Gå Venligst til appens indstillinger > privatliv > placeringstjenester, Sørg for de er tændt og godkend denne app.";
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Placeringstjenester er forpligtede til at bruge denne funktion. Gå til appens indstillinger > Databeskyttelse > Placeringstjenester, sørg for, at de er tændt og godkend denne app.";
 
 /* Reminder to leave preference */
-"Minutes before trip" = "Minutter før turen";
+"Minutes before trip" = "Minutter før tur";
 
 /* More results proposal */
 "More results" = "Flere resultater";
@@ -227,7 +227,7 @@
 "OK" = "OK";
 
 /* Open in Safari action */
-"Open in Safari" = "Åben i Safari";
+"Open in Safari" = "Åbn i Safari";
 
 /* Button that goes to the Setting's app */
 "Open Settings" = "Åbn indstillinger";
@@ -239,16 +239,16 @@
 "Please enter your registered email address. We will then send you instructions on how to reset password" = "Indtast din registrerede e-mailadresse. Vi vil derefter sende dig instruktioner til, hvordan du nulstiller adgangskode";
 
 /* Please select a location prompt */
-"Please select a location" = "Vælg venligst en placering";
+"Please select a location" = "Vælg en placering";
 
 /* Error recovery suggestion when GPS fails. */
-"Please try again or set your location manually." = "Prøv venligst igen, eller angiv din position manuelt.";
+"Please try again or set your location manually." = "Prøv igen eller indstil din placering manuelt.";
 
 /* Please verify the location prompt */
-"Please verify the location" = "Kontroller venligst placeringen";
+"Please verify the location" = "Bekræft placeringen";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more…" = "Tryk for 'Søg' for mere…";
+"Press 'search' for more…" = "Tryk på 'Søg' for mere…";
 
 /* Message to user if no primary email is set on his/her account */
 "Primary email is not set on your account. Please contact us for support" = "Primær e-mail er ikke indstillet på din konto. Du bedes kontakte os for support";
@@ -257,7 +257,7 @@
 "Read more…" = "Læs mere…";
 
 /* Indicator for real-time information */
-"Real-time" = "Virkelig Tid";
+"Real-time" = "Realtid";
 
 /* This is the placeholder text in a text field to inform users an optioanl referral code can be entered. */
 "Referral code (optional)" = "Henvisningskode (valgfri)";
@@ -266,19 +266,19 @@
 "Reminder" = "Påmindelse";
 
 /* Repeats daily */
-"Repeats daily" = "Gentager dagligt";
+"Repeats daily" = "Gentages dagligt";
 
 /* Repeats monthly */
 "Repeats monthly" = "Gentages månedligt";
 
 /* Repeats weekly */
-"Repeats weekly" = "Gentager ugentligt";
+"Repeats weekly" = "Gentages ugentligt";
 
 /* Repeats yearly */
-"Repeats yearly" = "Gentager årligt";
+"Repeats yearly" = "Gentages årligt";
 
 /* Button title to report a problem */
-"Report Problem" = "Rapporter problemet";
+"Report Problem" = "Indberet problem";
 
 /* Give users an option to rece */
 "Resend verification email" = "Gensend bekræftelsesmail";
@@ -287,10 +287,10 @@
 "Reset password" = "Nulstil adgangskode";
 
 /* Retry action, e.g., in case something didn't load */
-"Retry" = "Prøv Igen";
+"Retry" = "Prøv igen";
 
 /* Sort by overall score, like a ranking. */
-"Score" = "Subtotal";
+"Score" = "Score";
 
 /* Empty search bar placeholder */
 "Search" = "Søg";
@@ -323,13 +323,13 @@
 "Sign out" = "Log ud";
 
 /* Title of page or button to sign up */
-"Sign up" = "Tilmeld";
+"Sign up" = "Tilmeld dig";
 
 /* Starting %date. (old key: DateFromFormat) */
-"Starting %@" = "Start %@";
+"Starting %@" = "Starter %@";
 
 /* Short indicator of start-time */
-"starts at %@" = "starter ved %@";
+"starts at %@" = "starter kl. %@";
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "SUV";
@@ -344,25 +344,25 @@
 "The username or password you've entered is incorrect." = "Brugernavnet eller adgangskoden, som du har indtastet, er forkert.";
 
 /* to %date. (old key: DateToFormat) */
-"to %@" = "indtil %@";
+"to %@" = "til %@";
 
 /* Accessibility - user location button - off */
-"Tracking - off" = "Sporing - fra";
+"Tracking - off" = "Sporing - slukket";
 
 /* user location button - follow */
-"Tracking - on" = "Sporing - til";
+"Tracking - on" = "Sporing - tændt";
 
 /* user location button - follow with heading */
-"Tracking - on with heading" = "Sporing - fortsæt med overskriften";
+"Tracking - on with heading" = "Sporing - tændt med overskrift";
 
 /* Up to %date. (old key: DateToFormat) */
-"Up to %@" = "Indtil %@";
+"Up to %@" = "Op til %@";
 
 /* Title for a button which, when tapped, proceeds to updating password */
 "Update" = "Opdatér";
 
 /* Message that shows app is updating trip after user finalised bookings */
-"Updating trip" = "Opdatere turen";
+"Updating trip" = "Opdaterer tur";
 
 /* Error message when our server fails to return userToken in response to a sign in or sign up request */
 "userToken is missing in the server response" = "userToken mangler i serversvar";
@@ -386,20 +386,20 @@
 "Wheelchair accessibility unknown" = "Tilgængelighed for kørestolsbrugere ukendt";
 
 /* Indicator for wheelchair accessible services */
-"Wheelchair accessible" = "Tilgængelig med kørestol";
+"Wheelchair accessible" = "Handicapvenlig";
 
 /* Question asked when user is taking a screenshot */
-"Would you like to report a problem?" = "Ønsker du at rapportere et problem?";
+"Would you like to report a problem?" = "Ønsker du at indberette et problem?";
 
 /* Message that informs users that T&C must be agreed before booking can be made. */
-"You need to agree to the booking terms and conditions." = "Du skal acceptere bestillings betingelser og vilkår.";
+"You need to agree to the booking terms and conditions." = "Du skal acceptere booking-vilkårene og - betingelserne.";
 
 /* Message that informs users that T&C for insurance must be agreed before booking can be made. */
-"You need to agree to the insurance terms and conditions." = "Du skal accepterer forsikrings vilkår og betingelser.";
+"You need to agree to the insurance terms and conditions." = "Du skal acceptere forsikringsvilkårene og -betingelserne.";
 
 /* Calendar authorisation needed text */
-"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Du har tidligere nægtet denne app adgang til din kalender. Gå venligst til appens indstillinger > privatliv > kalender og tillad denne app til at bruge denne funktion.";
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Du har tidligere nægtet denne app adgang til din kalender. Du bedes gå til appens indstillinger > Databeskyttelse > Kalender og give denne app tilladelse til at bruge denne funktion.";
 
 /* Contacts authorisation needed text */
-"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Du har tidligere nægtet denne app adgang til dine kontakter. gå venligst til appens indstillinger > privatliv > kontakter og tillad denne app at bruge denne funktion.";
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Du har tidligere nægtet denne app adgang til dine kontakter. Du bedes gå til appens indstillinger > Databeskyttelse > Kontakter og give denne app tilladelse til at bruge denne funktion.";
 
