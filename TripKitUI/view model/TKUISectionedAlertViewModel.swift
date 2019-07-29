@@ -108,11 +108,6 @@ extension API.Route {
   }
 }
 
-extension API.Route: Hashable {
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
-}
 
 // MARK: -
 
