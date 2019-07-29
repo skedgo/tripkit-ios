@@ -24,6 +24,11 @@ class TKUISectionedAlertsTest: XCTestCase {
   
   func testParsingAlerts() throws {
     XCTAssertNotNil(response)
+    
+    let routeIDs = response.alerts.reduce(into: Set<String>()) { acc, mapping in
+      mapping.routes?.forEach { acc.insert($0.id) }
+    }
+    XCTAssertEqual(routeIDs.count, 158)
   }
 
   func testGroupingAlerts() throws {
@@ -43,7 +48,7 @@ class TKUISectionedAlertsTest: XCTestCase {
     }
     
     let totalRoutes = grouped.reduce(0) { $0 + $1.value.count }
-    XCTAssertEqual(totalRoutes, 159)
+    XCTAssertEqual(totalRoutes, 158)
   }
 
 }
