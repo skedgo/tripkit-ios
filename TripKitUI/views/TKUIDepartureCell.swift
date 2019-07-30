@@ -10,20 +10,23 @@ import UIKit
 
 import RxSwift
 
-public protocol TKUIDepartureCellContentDataSource {
-  var placeHolderImage: UIImage? { get }
-  var imageURL: URL? { get }
-  var imageIsTemplate: Bool { get }
-  var imageTintColor: UIColor? { get }
-  var lineColor: UIColor? { get }
-  var title: NSAttributedString { get }
-  var subtitle: String? { get }
-  var subsubtitle: String? { get }
-  var approximateTimeToDepart: Date? { get }
-  var serviceIsCancelled: Bool { get }
-  var accessibilityDisplaySetting: TKUIAccessibilityDisplaySetting { get }
-  var alerts: [Alert] { get }
-  var vehicleOccupancies: Observable<[[API.VehicleOccupancy]]>? { get }
+public struct TKUIDepartureCellContent {
+  public var placeHolderImage: UIImage? = nil
+  public var imageURL: URL?
+  public var imageIsTemplate: Bool
+  public var imageTintColor: UIColor?
+
+  public var serviceShortName: String?
+  public var serviceColor: UIColor?
+  public var serviceIsCancelled: Bool
+
+  public var title: NSAttributedString
+  public var subtitle: String?
+
+  public var approximateTimeToDepart: Date?
+  public var accessibilityDisplaySetting: TKUIAccessibilityDisplaySetting
+  public var alerts: [Alert]
+  public var vehicleOccupancies: Observable<[[API.VehicleOccupancy]]>?
 }
 
 public enum TKUIAccessibilityDisplaySetting {
@@ -31,34 +34,27 @@ public enum TKUIAccessibilityDisplaySetting {
   case disabled
 }
 
-public class TKUIDepartureCell: UITableViewCell {
+class TKUIDepartureCell: UITableViewCell {
   
   @IBOutlet weak var serviceImageView: UIImageView!
   @IBOutlet weak var serviceColorView: UIView!
+  @IBOutlet weak var serviceShortNameLabel: TKUIStyledLabel!
   
   @IBOutlet weak var titleLabel: TKUIStyledLabel!
   @IBOutlet weak var subtitleLabel: TKUIStyledLabel!
-  @IBOutlet weak var subsubtitleLabel: TKUIStyledLabel!
-  @IBOutlet weak var additionalInfoStackView: UIStackView!
   
-  @IBOutlet weak var timeToDepartContentView: UIView!
   @IBOutlet weak var timeToDepartTextLabel: TKUIStyledLabel!
+  @IBOutlet weak var timeToDepartUnitLabel: TKUIStyledLabel!
   
-  @IBOutlet weak var accessibilityStackView: UIStackView!
   @IBOutlet weak var accessibleImageView: UIImageView!
-  @IBOutlet weak var accessibleTextLabel: TKUIStyledLabel!
-  
-  @IBOutlet weak var alertStackView: UIStackView!
   @IBOutlet weak var alertImageView: UIImageView!
-  @IBOutlet public weak var alertActionButton: UIButton!
-  @IBOutlet weak var alertTextLabel: TKUIStyledLabel!
   
   @IBOutlet weak var selectionIndicator: UIView!
 
-  public static let reuseIdentifier = "TKUIDepartureCell"
-  public static let nib = UINib(nibName: "TKUIDepartureCell", bundle: .tripKitUI)
+  static let reuseIdentifier = "TKUIDepartureCell"
+  static let nib = UINib(nibName: "TKUIDepartureCell", bundle: .tripKitUI)
    
-  public var dataSource: TKUIDepartureCellContentDataSource? {
+  var dataSource: TKUIDepartureCellContent? {
     didSet {
       updateUI()
     }
@@ -68,27 +64,21 @@ public class TKUIDepartureCell: UITableViewCell {
 
   public override func awakeFromNib() {
     super.awakeFromNib()
-    
-    timeToDepartContentView.layer.cornerRadius = 3
-    
-    titleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
-    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    subsubtitleLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
-    accessibleTextLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    alertTextLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    alertActionButton.titleLabel?.font = TKStyleManager.semiboldSystemFont(size: 13)
-    timeToDepartTextLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+
+    titleLabel.textColor = .tkLabelSecondary
+    subtitleLabel.textColor = .tkLabelSecondary
+    timeToDepartUnitLabel.textColor = .tkStateSuccess
     
     selectionIndicator.isHidden = true
     selectionIndicator.backgroundColor = TKStyleManager.globalTintColor()
   }
 
-  public override func setSelected(_ selected: Bool, animated: Bool) {
+  override func setSelected(_ selected: Bool, animated: Bool) {
     // Not calling super, to not highlight background
     selectionIndicator.isHidden = !selected
   }
   
-  public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+  override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     // Not calling super to not override line colors
     UIView.animate(withDuration: animated ? 0.25: 0) {
       self.contentView.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : .white
@@ -109,13 +99,15 @@ extension TKUIDepartureCell {
   private func updateUI() {
     guard let dataSource = dataSource else { return }
     
-    serviceColorView.backgroundColor = dataSource.lineColor
     serviceImageView.setImage(with: dataSource.imageURL, asTemplate: dataSource.imageIsTemplate, placeholder: dataSource.placeHolderImage)
     serviceImageView.tintColor = dataSource.imageTintColor ?? TKStyleManager.darkTextColor()
     
+    serviceShortNameLabel.text = dataSource.serviceShortName
+    serviceShortNameLabel.textColor = .tkBackground
+    serviceColorView.backgroundColor = dataSource.serviceColor ?? .tkLabelPrimary
+    
     titleLabel.attributedText = dataSource.title
     subtitleLabel.text = dataSource.subtitle
-    subsubtitleLabel.text = dataSource.subsubtitle
     
     updateAdditionalInfoSection()
     updateAccessibilitySection()
@@ -150,12 +142,12 @@ extension TKUIDepartureCell {
         info.text = Loc.WheelchairAccessibilityUnknown
       }
       
+      accessibleImageView.isHidden = false
       accessibleImageView.image = info.icon
-      accessibleTextLabel.text = info.text
-      accessibilityStackView.isHidden = false
+      accessibleImageView.accessibilityLabel = info.text
       
     case .disabled:
-      accessibilityStackView.isHidden = true
+      accessibleImageView.isHidden = true
     }    
   }
   
@@ -164,61 +156,54 @@ extension TKUIDepartureCell {
       let dataSource = dataSource,
       !dataSource.alerts.isEmpty
       else {
-        alertStackView.isHidden = true
+        alertImageView.isHidden = true
         return
     }
     
-    alertStackView.isHidden = false
+    alertImageView.isHidden = false
     
     // For now, we only show the first alert.
     let alert = dataSource.alerts[0]
     alertImageView.image = TKInfoIcon.image(for: alert.infoIconType, usage: .normal)
-    
-    if let description = alert.title ?? alert.text, dataSource.alerts.count == 1 {
-      alertTextLabel.text = description
-    } else {
-      alertTextLabel.text = Loc.Alerts(dataSource.alerts.count)
-    }
-    
-    alertActionButton.setTitle(Loc.Show, for: .normal)
+    alertImageView.accessibilityLabel = alert.title ?? alert.text ?? Loc.Alert
   }
   
   private func updateAdditionalInfoSection() {
-    if let occupancies = dataSource?.vehicleOccupancies {
-      occupancies
-        .subscribe(onNext: { [weak self] occupancies in
-          if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1 {
-            let trainView = TKUITrainOccupancyView()
-            trainView.occupancies = occupancies
-            self?.updateAdditionalInfoStackViewContent(with: trainView)
-          } else if let occupancy = occupancies.first?.first, occupancy != .unknown {
-            let occupancyView = TKUIOccupancyView(with: .occupancy(occupancy))
-            self?.updateAdditionalInfoStackViewContent(with: occupancyView)
-          } else {
-            self?.updateAdditionalInfoStackViewContent(with: nil)
-          }
-        })
-        .disposed(by: disposeBag)
-      
-      additionalInfoStackView.isHidden = false
-    } else {
-      additionalInfoStackView.isHidden = true
-    }
+//    if let occupancies = dataSource?.vehicleOccupancies {
+//      occupancies
+//        .subscribe(onNext: { [weak self] occupancies in
+//          if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1 {
+//            let trainView = TKUITrainOccupancyView()
+//            trainView.occupancies = occupancies
+//            self?.updateAdditionalInfoStackViewContent(with: trainView)
+//          } else if let occupancy = occupancies.first?.first, occupancy != .unknown {
+//            let occupancyView = TKUIOccupancyView(with: .occupancy(occupancy))
+//            self?.updateAdditionalInfoStackViewContent(with: occupancyView)
+//          } else {
+//            self?.updateAdditionalInfoStackViewContent(with: nil)
+//          }
+//        })
+//        .disposed(by: disposeBag)
+//
+//      additionalInfoStackView.isHidden = false
+//    } else {
+//      additionalInfoStackView.isHidden = true
+//    }
   }
   
-  private func updateAdditionalInfoStackViewContent(with newView: UIView?) {
-    additionalInfoStackView.arrangedSubviews.forEach {
-      additionalInfoStackView.removeArrangedSubview($0)
-      $0.removeFromSuperview()
-    }
-    
-    if let newView = newView {
-      additionalInfoStackView.addArrangedSubview(newView)
-      additionalInfoStackView.isHidden = false
-    } else {
-      additionalInfoStackView.isHidden = true
-    }
-  }
+//  private func updateAdditionalInfoStackViewContent(with newView: UIView?) {
+//    additionalInfoStackView.arrangedSubviews.forEach {
+//      additionalInfoStackView.removeArrangedSubview($0)
+//      $0.removeFromSuperview()
+//    }
+//
+//    if let newView = newView {
+//      additionalInfoStackView.addArrangedSubview(newView)
+//      additionalInfoStackView.isHidden = false
+//    } else {
+//      additionalInfoStackView.isHidden = true
+//    }
+//  }
   
 }
 
@@ -235,71 +220,37 @@ extension TKUIDepartureCell {
       let timeToDepart = dataSource.approximateTimeToDepart
       else {
         timeToDepartTextLabel.isHidden = true
-        timeToDepartContentView.isHidden = true
+        timeToDepartUnitLabel.isHidden = true
         return
     }
     
-    timeToDepartContentView.isHidden = false
+    timeToDepartTextLabel.isHidden = false
     
     let minutesToShow = minutesToCount(till: timeToDepart)
     
-    // Setting counter text
-    var text: String?
-    var accessibilityText: String?
-    
     if dataSource.serviceIsCancelled {
-      text = Loc.Cancelled
-      
-    } else if (TKStyleManager.departureIsNow(forMinutes: minutesToShow, fuzzifyMinutes: true)) {
-      text = Loc.Now
+      timeToDepartTextLabel.text = Loc.Cancelled
+      timeToDepartTextLabel.textColor = .tkStateError
+      timeToDepartUnitLabel.isHidden = true
       
     } else {
-      text = TKStyleManager.departureString(forMinutes: minutesToShow, fuzzifyMinutes: true)
-      accessibilityText = TKStyleManager.departureAccessibilityLabel(forMinutes: minutesToShow, fuzzifyMinutes: true)
-    }
-    
-    timeToDepartTextLabel.text = text
-    timeToDepartTextLabel.accessibilityLabel = accessibilityText
-    
-    // Setting counter background
-    if dataSource.serviceIsCancelled {
-      timeToDepartContentView.backgroundColor = #colorLiteral(red: 0.9058823529, green: 0.3019607843, blue: 0.3098039216, alpha: 1)
-    } else {
-      UIView.animate(withDuration: 0.25) {
-        self.timeToDepartContentView.backgroundColor = self.color(forCountingDownFrom: minutesToShow)
+      timeToDepartTextLabel.textColor = .tkStateSuccess
+      
+      let departure = TKStyleManager.departure(forMinutes: minutesToShow, fuzzifyMinutes: true)
+      if departure.mode == .now {
+        timeToDepartTextLabel.text = Loc.Now
+        timeToDepartUnitLabel.isHidden = true
+      } else {
+        timeToDepartTextLabel.text = departure.number
+        timeToDepartUnitLabel.text = departure.unit
+        timeToDepartUnitLabel.isHidden = false
+        timeToDepartTextLabel.accessibilityLabel = departure.accessibilityLabel
       }
     }
     
     // Fade if required
     UIView.animate(withDuration: 0.25) {
       self.contentView.alpha = minutesToShow < 0 ? 0.5 : 1
-    }
-  }
-  
-  private func color(forCountingDownFrom minutesToCount: Int) -> UIColor {
-    let strongHighlight = TKStyleManager.globalTintColor()
-    let subtleHighlight = TKStyleManager.globalTintColor().withAlphaComponent(0.7)
-    
-    if minutesToCount < 0 {
-      return #colorLiteral(red: 0.7200000286, green: 0.7200000286, blue: 0.7200000286, alpha: 1)
-      
-    } else if minutesToCount > 15 {
-      return subtleHighlight
-      
-    } else {
-      let fadeFrom = subtleHighlight
-      var redFrom: CGFloat = 0, greenFrom: CGFloat = 0, blueFrom: CGFloat = 0, alpha: CGFloat = 0
-      fadeFrom.getRed(&redFrom, green: &greenFrom, blue: &blueFrom, alpha: &alpha)
-      
-      let fadeTo = strongHighlight
-      var redTo: CGFloat = 0, greenTo: CGFloat = 0, blueTo: CGFloat = 0
-      fadeTo.getRed(&redTo, green: &greenTo, blue: &blueTo, alpha: &alpha)
-      
-      let danger = CGFloat((15 - minutesToCount)) / 15
-      let red = redTo + (redFrom - redTo) * (1 - danger)
-      let green = greenTo + (greenFrom - greenTo) * (1 - danger)
-      let blue = blueTo + (blueFrom - blueTo) * (1 - danger)
-      return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
   }
   

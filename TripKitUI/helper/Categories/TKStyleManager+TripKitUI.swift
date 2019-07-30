@@ -19,6 +19,9 @@ extension TKStyleManager {
   }
   
   public struct Countdown {
+    public let number: String
+    public let unit: String
+    
     public let durationText: String
     public let accessibilityLabel: String
     public let mode: CountdownMode
@@ -40,18 +43,25 @@ extension TKStyleManager {
     let effectiveMinutes = fuzzifyMinutes ? fuzzifiedMinutes(minutes) : minutes
     
     let durationString: String
+    let number: String
+    let unit: String
     switch effectiveMinutes {
     case 0:
       durationString = Loc.Now
-    
+      number = "0"
+      unit = ""
+      
     case ..<60: // less than an hour
       durationString = Date.durationString(forMinutes: effectiveMinutes)
+      (number, unit) = ("\(effectiveMinutes)", "min") // TODO: Localise
       
     case ..<1440: // less than a day
       durationString = Date.durationString(forHours: absoluteMinutes / 60)
-      
+      (number, unit) = ("\(effectiveMinutes / 60)", "hr") // TODO: Localise
+
     default: // days
       durationString = Date.durationString(forDays: absoluteMinutes / 1440)
+      (number, unit) = ("\(effectiveMinutes / 1440)", "days") // TODO: Localise
     }
     
     let mode: CountdownMode
@@ -69,6 +79,8 @@ extension TKStyleManager {
     }
     
     return Countdown(
+      number: number,
+      unit: unit,
       durationText: durationString,
       accessibilityLabel: accessibilityLabel,
       mode: mode

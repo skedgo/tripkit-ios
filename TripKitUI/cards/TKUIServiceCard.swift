@@ -109,9 +109,9 @@ public class TKUIServiceCard: TGTableCard {
     // Bind outputs
     
     if let title = titleView {
-      viewModel.header
-        .drive(title.rx.model)
-        .disposed(by: disposeBag)
+//      viewModel.header
+//        .drive(title.rx.model)
+//        .disposed(by: disposeBag)
     }
 
     viewModel.sections

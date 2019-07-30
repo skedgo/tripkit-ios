@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (StopVisitRealTime)realTimeStatus;
 
-- (nullable NSString *)realTimeInformation:(BOOL)withOriginalTime;
+- (NSString *)realTimeInformation:(BOOL)withOriginalTime;
 
 - (nullable NSDate *)countdownDate;
 

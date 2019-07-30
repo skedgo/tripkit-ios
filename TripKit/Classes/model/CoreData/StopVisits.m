@@ -161,7 +161,8 @@
 {
   switch ([self realTimeStatus]) {
     case StopVisitRealTimeNotApplicable:
-      return nil;
+      // TODO: Localize
+      return @"Scheduled";
       
     case StopVisitRealTimeNotAvailable:
       return NSLocalizedStringFromTableInBundle(@"No real-time available", @"TripKit", [TKTripKit bundle], @"Indicator to show when a service does not have real-time data (even though we usually get it for services like this.)");

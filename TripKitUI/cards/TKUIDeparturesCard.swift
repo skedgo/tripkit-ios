@@ -148,10 +148,6 @@ public class TKUIDeparturesCard : TGTableCard {
         }
         
         cell.dataSource = item.contentModel
-        cell.alertActionButton.rx.tap
-          .map { _ in item }
-          .bind(to: cellAlertPublisher)
-          .disposed(by: cell.disposeBag)
         return cell
         
       }, titleForHeaderInSection: { ds, index in
