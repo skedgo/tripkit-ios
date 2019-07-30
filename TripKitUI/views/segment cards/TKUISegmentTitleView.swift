@@ -31,14 +31,20 @@ public class TKUISegmentTitleView: UIView {
   public override func awakeFromNib() {
     super.awakeFromNib()
     
+    titleLabel.font = TKUICustomization.shared.cardStyle.titleFont
+    titleLabel.textColor = TKUICustomization.shared.cardStyle.titleTextColor
     titleLabel.text = nil
+
+    subtitleLabel.font = TKUICustomization.shared.cardStyle.subtitleFont
+    subtitleLabel.textColor = TKUICustomization.shared.cardStyle.subtitleTextColor
     subtitleLabel.text = nil
+
     subsubtitleLabel.text = nil
     
     dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
     dismissButton.setTitle(nil, for: .normal)
     
-    modeIcon.tintColor = titleLabel.textColor
+    modeIcon.tintColor = .tkBackground
   }
   
 }
