@@ -14,7 +14,7 @@
 "%@ every %@" = "%1$@ 每 %2$@ 分钟一趟";
 
 /* Text for an 'x more' indication if there's more content. '%@' will be replaced with a number */
-"%@ more" = "%@ more";
+"%@ more" = "%@ 个";
 
 /* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
 "%@ stops" = "%@站";
@@ -41,7 +41,7 @@
 "%1$@ late (%2$@ service)" = "延迟 %1$@ (%2$@ 服务)";
 
 /* Number of alerts, in this case, there is just one */
-"1 alert" = "1 alert";
+"1 alert" = "1 个警报";
 
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1站";
@@ -50,10 +50,10 @@
 "Alerts" = "提示";
 
 /* Instruction to follow street of the provided name */
-"Along %@" = "Along %@";
+"Along %@" = "沿着 %@";
 
 /* Instruction to follow unnamed street */
-"Along unnamed street" = "Along unnamed street";
+"Along unnamed street" = "沿着无名的街道";
 
 /* apple maps directions action */
 "Apple Maps" = "苹果地图";
@@ -103,7 +103,7 @@
 "Car" = "轿车";
 
 /* Trip badge: Cheapest */
-"Cheapest" = "Cheapest";
+"Cheapest" = "最便宜";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "无法找到公交车站。";
@@ -130,25 +130,25 @@
 "Dismount" = "需要下车";
 
 /* Text for vehicle of type: E-Bike */
-"E-Bike" = "E-Bike";
+"E-Bike" = "电动自行车";
 
 /* Trip badge: Easiest */
-"Easiest" = "Easiest";
+"Easiest" = "最容易";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "空的";
 
 /* Placeholder name for destination (then replaced with address or name) */
-"End location" = "End location";
+"End location" = "结束位置";
 
 /* Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes' */
 "Every %@" = "每%@分钟一趟";
 
 /* Action title to extend an existing booking */
-"Extend" = "Extend";
+"Extend" = "延长";
 
 /* Trip badge: Fastest */
-"Fastest" = "Fastest";
+"Fastest" = "最快";
 
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "几个座位空余";
@@ -172,13 +172,13 @@
 "Get %@" = "下载 %@";
 
 /* Title for button to get/download an external app. */
-"Get app" = "Get app";
+"Get app" = "获取应用";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "开始导航";
 
 /* Instruction to get a service towards provided destination */
-"Get on service to %@" = "Get on service to %@";
+"Get on service to %@" = "获得去%@的服务";
 
 /* goCatch action */
 "goCatch a Taxi" = "使用goCatch叫计程车";
