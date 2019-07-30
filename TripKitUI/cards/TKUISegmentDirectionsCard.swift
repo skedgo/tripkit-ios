@@ -60,6 +60,10 @@ public class TKUISegmentDirectionsCard: TGTableCard {
       .disposed(by: disposeBag)
   }
   
+  private func setup(_ tableView: UITableView) {
+    tableView.tableFooterView = UIView()
+  }
+  
 }
 
 // MARK: Configuring cells
