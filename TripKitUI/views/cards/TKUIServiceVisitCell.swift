@@ -146,7 +146,7 @@ extension TKUIServiceVisitCell {
     case false?:
       accessoryImageView.image = TripKitUIBundle.imageNamed("icon-wheelchair-not-accessible")
     case nil:
-      accessoryImageView.image = TripKitUIBundle.imageNamed("icon-wheelchair-unknow")
+      accessoryImageView.image = TripKitUIBundle.imageNamed("icon-wheelchair-unknown")
     }
   }
 }

@@ -102,9 +102,10 @@ extension TKUIDepartureCell {
     serviceImageView.setImage(with: dataSource.imageURL, asTemplate: dataSource.imageIsTemplate, placeholder: dataSource.placeHolderImage)
     serviceImageView.tintColor = dataSource.imageTintColor ?? TKStyleManager.darkTextColor()
     
+    let serviceColor = dataSource.serviceColor ?? .tkLabelPrimary
     serviceShortNameLabel.text = dataSource.serviceShortName
-    serviceShortNameLabel.textColor = .tkBackground
-    serviceColorView.backgroundColor = dataSource.serviceColor ?? .tkLabelPrimary
+    serviceShortNameLabel.textColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
+    serviceColorView.backgroundColor = serviceColor
     
     titleLabel.attributedText = dataSource.title
     subtitleLabel.text = dataSource.subtitle
@@ -138,7 +139,7 @@ extension TKUIDepartureCell {
         info.icon = TripKitUIBundle.imageNamed("icon-wheelchair-not-accessible")
         info.text = Loc.WheelchairNotAccessible
       default:
-        info.icon = TripKitUIBundle.imageNamed("icon-wheelchair-unknow")
+        info.icon = TripKitUIBundle.imageNamed("icon-wheelchair-unknown")
         info.text = Loc.WheelchairAccessibilityUnknown
       }
       

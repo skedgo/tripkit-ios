@@ -120,7 +120,15 @@ extension StopVisits {
       }
     }
     
-    return NSAttributedString(string: title)
+    let color: UIColor
+    switch realTimeStatus() {
+    case .cancelled: color = .tkStateError
+    case .early, .late: color = .tkStateWarning
+    case .onTime: color = .tkStateSuccess
+    case .notApplicable, .notAvailable: color = .tkLabelSecondary
+    }
+    
+    return NSAttributedString(string: title, attributes: [.foregroundColor: color])
   }
   
 }
