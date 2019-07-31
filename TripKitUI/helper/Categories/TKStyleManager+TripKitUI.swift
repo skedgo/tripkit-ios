@@ -53,15 +53,23 @@ extension TKStyleManager {
       
     case ..<60: // less than an hour
       durationString = Date.durationString(forMinutes: effectiveMinutes)
-      (number, unit) = ("\(effectiveMinutes)", "min") // TODO: Localise
+      let full = DateComponentsFormatter.localizedString(from: DateComponents(minute: effectiveMinutes), unitsStyle: .short) ?? ""
+      number = full.trimmingCharacters(in: .letters).trimmingCharacters(in: .whitespaces)
+      unit = full.trimmingCharacters(in: .decimalDigits).trimmingCharacters(in: .whitespaces)
       
     case ..<1440: // less than a day
-      durationString = Date.durationString(forHours: absoluteMinutes / 60)
-      (number, unit) = ("\(effectiveMinutes / 60)", "hr") // TODO: Localise
+      let hours = absoluteMinutes / 60
+      durationString = Date.durationString(forHours: hours)
+      let full = DateComponentsFormatter.localizedString(from: DateComponents(hour: hours), unitsStyle: .short) ?? ""
+      number = full.trimmingCharacters(in: .letters).trimmingCharacters(in: .whitespaces)
+      unit = full.trimmingCharacters(in: .decimalDigits).trimmingCharacters(in: .whitespaces)
 
     default: // days
-      durationString = Date.durationString(forDays: absoluteMinutes / 1440)
-      (number, unit) = ("\(effectiveMinutes / 1440)", "days") // TODO: Localise
+      let days = absoluteMinutes / 1440
+      durationString = Date.durationString(forDays: days)
+      let full = DateComponentsFormatter.localizedString(from: DateComponents(day: days), unitsStyle: .short) ?? ""
+      number = full.trimmingCharacters(in: .letters).trimmingCharacters(in: .whitespaces)
+      unit = full.trimmingCharacters(in: .decimalDigits).trimmingCharacters(in: .whitespaces)
     }
     
     let mode: CountdownMode

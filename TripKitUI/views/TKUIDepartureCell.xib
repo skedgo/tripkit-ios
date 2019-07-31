@@ -36,7 +36,7 @@
                                         <rect key="frame" x="24" y="0.0" width="50" height="37.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E84" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZ8-Tg-CEt" customClass="TKUIStyledLabel">
-                                                <rect key="frame" x="4" y="4" width="42" height="29.5"/>
+                                                <rect key="frame" x="4" y="0.0" width="42" height="37.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                                 <nil key="highlightedColor"/>
@@ -44,8 +44,8 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.37254901959999998" green="0.57647058819999997" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="uZ8-Tg-CEt" firstAttribute="top" secondItem="wWl-tx-YGV" secondAttribute="top" constant="4" id="8CE-P5-pT5"/>
-                                            <constraint firstAttribute="bottom" secondItem="uZ8-Tg-CEt" secondAttribute="bottom" constant="4" id="M7T-Ii-fEX"/>
+                                            <constraint firstItem="uZ8-Tg-CEt" firstAttribute="top" secondItem="wWl-tx-YGV" secondAttribute="top" id="8CE-P5-pT5"/>
+                                            <constraint firstAttribute="bottom" secondItem="uZ8-Tg-CEt" secondAttribute="bottom" id="M7T-Ii-fEX"/>
                                             <constraint firstItem="uZ8-Tg-CEt" firstAttribute="leading" secondItem="wWl-tx-YGV" secondAttribute="leading" constant="4" id="R3A-xd-dGa"/>
                                             <constraint firstAttribute="trailing" secondItem="uZ8-Tg-CEt" secondAttribute="trailing" constant="4" id="ajY-ZZ-Rfy"/>
                                         </constraints>
