@@ -23,7 +23,9 @@ public class TKUIServiceVisitCell: UITableViewCell {
   
   @IBOutlet weak var topLine: UIView!
   @IBOutlet weak var bottomLine: UIView!
-  @IBOutlet weak var dot: UIView!
+  @IBOutlet weak var outerDot: UIView!
+  @IBOutlet weak var innerDot: UIView!
+
   @IBOutlet weak var accessoryImageView: UIImageView!
   
   @objc
@@ -55,9 +57,9 @@ public class TKUIServiceVisitCell: UITableViewCell {
   
   override public func awakeFromNib() {
     super.awakeFromNib()
-    dot.layer.borderColor = UIColor.black.cgColor
-    dot.layer.borderWidth = 1.5
-    dot.layer.cornerRadius = dot.frame.width / 2
+    outerDot.layer.cornerRadius = outerDot.frame.width / 2
+
+    innerDot.layer.cornerRadius = innerDot.frame.width / 2
   }
   
   override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
@@ -83,11 +85,11 @@ public class TKUIServiceVisitCell: UITableViewCell {
 
 extension TKUIServiceVisitCell {
   func setTiming(_ timing: TKServiceTiming, timeZone: TimeZone, isVisited: Bool) {
-    let textColor = isVisited ? TKStyleManager.darkTextColor() : TKStyleManager.lightTextColor()
+    let textColor: UIColor = isVisited ? .tkLabelSecondary : .tkLabelTertiary
 
-    arrivalTimeLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    arrivalTimeLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
     arrivalTimeLabel.textColor = textColor
-    departureTimeLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    departureTimeLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
     departureTimeLabel.textColor = textColor
 
     var arrivalText: String?
@@ -120,15 +122,14 @@ extension TKUIServiceVisitCell {
   }
   
   func setTitle(_ title: String?, subtitle: String? = nil,  isVisited: Bool) {
-    let textColor = isVisited ? TKStyleManager.darkTextColor() : TKStyleManager.lightTextColor()
     
     titleLabel.text = title
     titleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
-    titleLabel.textColor = textColor
+    titleLabel.textColor = isVisited ? .tkLabelPrimary : .tkLabelTertiary
     
     subtitleLabel.text = subtitle
-    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
-    subtitleLabel.textColor = TKStyleManager.lightTextColor()
+    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    subtitleLabel.textColor = isVisited ? .tkLabelSecondary : .tkLabelTertiary
     
     stopNameStack.spacing = (subtitle != nil) ? 4 : 0
   }
@@ -162,6 +163,13 @@ extension TKUIServiceVisitCell {
     topLine.isHidden = item.topConnection == nil
     bottomLine.backgroundColor = item.bottomConnection
     bottomLine.isHidden = item.bottomConnection == nil
+    
+    var dotColor = item.topConnection ?? item.bottomConnection
+    if item.isVisited {
+      dotColor = dotColor?.withAlphaComponent(1)
+    } else {
+    }
+    outerDot.backgroundColor = dotColor
   }
   
   @objc
@@ -183,6 +191,7 @@ extension TKUIServiceVisitCell {
     setTitle(title, isVisited: isVisited)
     
     let serviceColor = (visit.service.color as? UIColor) ?? .black
+    outerDot.backgroundColor = serviceColor
     topLine.backgroundColor = (isVisited && visit != embarkation) ? serviceColor : serviceColor.withAlphaComponent(0.3)
     bottomLine.backgroundColor = (isVisited && visit != disembarkation) ? serviceColor : serviceColor.withAlphaComponent(0.3)
     topLine.isHidden = false
