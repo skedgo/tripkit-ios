@@ -24,14 +24,38 @@ public struct TKUIDepartureCellContent {
   public var subtitle: String?
 
   public var approximateTimeToDepart: Date?
-  public var accessibilityDisplaySetting: TKUIAccessibilityDisplaySetting
+  public var alwaysShowAccessibilityInformation: Bool
+  public var wheelchairAccessibility: TKUIWheelchairAccessibility
   public var alerts: [Alert]
   public var vehicleOccupancies: Observable<[[API.VehicleOccupancy]]>?
 }
 
-public enum TKUIAccessibilityDisplaySetting {
-  case enabled(Bool?)
-  case disabled
+public enum TKUIWheelchairAccessibility {
+  case accessible
+  case notAccessible
+  case unknown
+  
+  public var title: String {
+    switch self {
+    case .accessible:
+      return Loc.WheelchairAccessible
+    case .notAccessible:
+      return Loc.WheelchairNotAccessible
+    case .unknown:
+      return Loc.WheelchairAccessibilityUnknown
+    }
+  }
+  
+  public var icon: UIImage {
+    switch self {
+    case .accessible:
+      return TripKitUIBundle.imageNamed("icon-wheelchair-accessible")
+    case .notAccessible:
+      return TripKitUIBundle.imageNamed("icon-wheelchair-not-accessible")
+    case .unknown:
+      return TripKitUIBundle.imageNamed("icon-wheelchair-unknown")
+    }
+  }
 }
 
 class TKUIDepartureCell: UITableViewCell {
@@ -127,27 +151,11 @@ extension TKUIDepartureCell {
   private func updateAccessibilitySection() {
     guard let dataSource = dataSource else { return }
     
-    switch dataSource.accessibilityDisplaySetting {
-    case .enabled(let isAccessible):
-      var info: (icon: UIImage, text: String)
-      
-      switch isAccessible {
-      case true?:
-        info.icon = TripKitUIBundle.imageNamed("icon-wheelchair-accessible")
-        info.text = Loc.WheelchairAccessible
-      case false?:
-        info.icon = TripKitUIBundle.imageNamed("icon-wheelchair-not-accessible")
-        info.text = Loc.WheelchairNotAccessible
-      default:
-        info.icon = TripKitUIBundle.imageNamed("icon-wheelchair-unknown")
-        info.text = Loc.WheelchairAccessibilityUnknown
-      }
-      
+    if dataSource.alwaysShowAccessibilityInformation {
       accessibleImageView.isHidden = false
-      accessibleImageView.image = info.icon
-      accessibleImageView.accessibilityLabel = info.text
-      
-    case .disabled:
+      accessibleImageView.image = dataSource.wheelchairAccessibility.icon
+      accessibleImageView.accessibilityLabel = dataSource.wheelchairAccessibility.title
+    } else {
       accessibleImageView.isHidden = true
     }    
   }

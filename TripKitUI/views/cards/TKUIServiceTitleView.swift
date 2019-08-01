@@ -69,32 +69,15 @@ class TKUIServiceTitleView: UIView {
   }
 }
 
-// MARK: - TKUIDepartureCardContentModel compatibility
+// MARK: - TKUIDepartureCellContent compatibility
 
 extension TKUIServiceTitleView {
-  func configure(with model: TKUIDepartureCardContentModel) {
+  func configure(with model: TKUIDepartureCellContent) {
     // Main content
     titleLabel.attributedText = model.title
     subtitleLabel.text = model.subtitle
-    subsubtitleLabel.text = model.subsubtitle
-    modeIcon.setImage(with: model.serviceImageURL, asTemplate: model.serviceImageIsTemplate, placeholder: model.servicePlaceholderImage)
+    modeIcon.setImage(with: model.imageURL, asTemplate: model.imageIsTemplate, placeholder: model.placeHolderImage)
     modeIcon.tintColor = TKStyleManager.darkTextColor()
-    coloredStrip.backgroundColor = model.serviceLineColor
-    
-    // TODO: Also include alerts
-    
-    // Footer
-    if let occupancies = model.serviceOccupancies {
-      occupancies.subscribe(onNext: { [weak self] occupancies in
-        if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1 {
-          let trainView = TKUITrainOccupancyView()
-          trainView.occupancies = occupancies
-          self?.replaceFootnoteView(trainView)
-        } else if let occupancy = occupancies.first?.first, occupancy != .unknown {
-          let occupancyView = TKUIOccupancyView(with: .occupancy(occupancy))
-          self?.replaceFootnoteView(occupancyView)
-        }
-      }).disposed(by: disposeBag)
-    }
+    coloredStrip.backgroundColor = model.serviceColor
   }
 }

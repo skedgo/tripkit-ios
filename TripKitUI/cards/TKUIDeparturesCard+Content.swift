@@ -40,19 +40,15 @@ extension TKUIDepartureCellContent {
       return nil
     }
     
-    let accessibility: TKUIAccessibilityDisplaySetting
-    if TKUserProfileHelper.showWheelchairInformation {
-      let serviceIsAccessible: Bool?
-      if let isStopAccessible = visit.stop.isWheelchairAccessible {
-        serviceIsAccessible = isStopAccessible && service.isWheelchairAccessible
-      } else if service.isWheelchairAccessible {
-        serviceIsAccessible = true
-      } else {
-        serviceIsAccessible = nil
-      }
-      accessibility = .enabled(serviceIsAccessible)
+    let accessibility: TKUIWheelchairAccessibility
+    if let isStopAccessible = visit.stop.isWheelchairAccessible {
+      accessibility = isStopAccessible && service.isWheelchairAccessible
+        ? .accessible
+        : .notAccessible
+    } else if service.isWheelchairAccessible {
+      accessibility = .accessible
     } else {
-      accessibility = .disabled
+      accessibility = .unknown
     }
     
     let occupancies = service.vehicle?.rx.components
@@ -69,7 +65,8 @@ extension TKUIDepartureCellContent {
       title: visit.buildTitle(),
       subtitle: visit.secondaryInformation(),
       approximateTimeToDepart: visit.countdownDate(),
-      accessibilityDisplaySetting: accessibility,
+      alwaysShowAccessibilityInformation: TKUserProfileHelper.showWheelchairInformation,
+      wheelchairAccessibility: accessibility,
       alerts: service.allAlerts(),
       vehicleOccupancies: occupancies
     )

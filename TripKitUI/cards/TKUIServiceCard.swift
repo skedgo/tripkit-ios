@@ -25,8 +25,10 @@ public class TKUIServiceCard: TGTableCard {
   private let disposeBag = DisposeBag()
   
   private let scrollToTopPublisher = PublishSubject<Void>()
+  private let toggleHeaderPublisher = PublishSubject<Bool>()
 
   private let titleView: TKUIServiceTitleView?
+  private var headerView: UIView?
   
   /// Configures a new instance that will fetch the service details
   /// and the show them in the list and on the map.
@@ -109,10 +111,29 @@ public class TKUIServiceCard: TGTableCard {
     // Bind outputs
     
     if let title = titleView {
-//      viewModel.header
-//        .drive(title.rx.model)
-//        .disposed(by: disposeBag)
+      viewModel.header
+        .drive(title.rx.model)
+        .disposed(by: disposeBag)
     }
+    
+    viewModel.header
+      .drive(onNext: { content in
+        if self.headerView == nil {
+          self.buildHeader(expanded: false, content: content, for: tableView)
+        }
+        if let mini = self.headerView as? TKUIServiceHeaderMiniView {
+          mini.configure(with: content)
+        } else if let maxi = self.headerView as? TKUIServiceHeaderView {
+          maxi.configure(with: content)
+        }
+      })
+      .disposed(by: disposeBag)
+    
+    toggleHeaderPublisher.withLatestFrom(viewModel.header.asObservable()) { ($0, $1)}
+      .subscribe(onNext: { expand, content in
+        self.buildHeader(expanded: expand, content: content, for: tableView)
+      })
+      .disposed(by: disposeBag)
 
     viewModel.sections
       .drive(tableView.rx.items(dataSource: dataSource))
@@ -153,6 +174,41 @@ public class TKUIServiceCard: TGTableCard {
 // MARK: - Scrolling to embarkation
 
 extension TKUIServiceCard: UITableViewDelegate {
+
+  private func buildHeader(expanded: Bool, content: TKUIDepartureCellContent, for tableView: UITableView) {
+    let button: UIButton
+    if expanded {
+      let header = TKUIServiceHeaderView.newInstance()
+      header.expandyButton.rx.tap
+        .subscribe(onNext: {
+          self.toggleHeaderPublisher.onNext(false)
+        })
+        .disposed(by: disposeBag)
+      header.configure(with: content)
+      headerView = header
+    } else {
+      let header = TKUIServiceHeaderMiniView.newInstance()
+      header.expandyButton.rx.tap
+        .subscribe(onNext: {
+          self.toggleHeaderPublisher.onNext(true)
+        })
+        .disposed(by: disposeBag)
+      header.configure(with: content)
+      headerView = header
+    }
+    
+    tableView.reloadData()
+  }
+  
+  public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    return headerView
+  }
+  
+  public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    let size = headerView?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    print(size)
+    return size?.height ?? 0
+  }
   
   public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
     guard scrollView is UITableView else {
@@ -164,4 +220,3 @@ extension TKUIServiceCard: UITableViewDelegate {
   }
   
 }
-
