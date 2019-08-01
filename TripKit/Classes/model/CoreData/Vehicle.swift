@@ -16,21 +16,6 @@ extension Vehicle {
     return try? JSONDecoder().decode([[API.VehicleComponents]].self, from: data)
   }
   
-  public static func averageOccupancy(in components: [[API.VehicleComponents]]?) -> API.VehicleOccupancy? {
-    let allComponents = components ?? [[]]
-    let occupancies = allComponents
-      .reduce(into: []) { $0.append(contentsOf: $1) }
-      .compactMap { $0.occupancy }
-    if occupancies.isEmpty {
-      return nil
-    } else if occupancies.count == 1 {
-      return occupancies[0]
-    }
-    
-    let sum = occupancies.reduce(0) { $0 + $1.intValue }
-    return API.VehicleOccupancy(intValue: sum / occupancies.count)
-  }
-  
   public var components: [[API.VehicleComponents]]? {
     get {
       if let data = componentsData {
@@ -72,7 +57,7 @@ extension Vehicle {
   }
   
   public var averageOccupancy: API.VehicleOccupancy? {
-    return Vehicle.averageOccupancy(in: components)
+    return API.VehicleOccupancy.average(in: components)
   }
   
 }
@@ -118,7 +103,7 @@ extension Vehicle : MKAnnotation {
   }
   
   public var subtitle: String? {
-    return [updatedTitle, averageOccupancy?.description]
+    return [updatedTitle, averageOccupancy?.localizedTitle]
       .compactMap { $0 }
       .joined(separator: " - ")
   }

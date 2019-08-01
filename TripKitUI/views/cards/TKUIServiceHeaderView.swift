@@ -11,19 +11,21 @@ import UIKit
 import RxSwift
 
 class TKUIServiceHeaderView: UIView {
-  @IBOutlet weak var accessibilityStack: UIStackView!
+  @IBOutlet weak var accessibilityWrapper: UIView!
   @IBOutlet weak var accessibilityImageView: UIImageView!
   @IBOutlet weak var accessibilityTitleLabel: UILabel!
 
-  @IBOutlet weak var realTimeStack: UIStackView!
-  @IBOutlet weak var realTimeImageView: UIImageView!
-  @IBOutlet weak var realTimeAlertStack: UIStackView!
-  @IBOutlet weak var realTimeAlertImageView: UIImageView!
-  @IBOutlet weak var realTimeAlertLabel: UILabel!
-  @IBOutlet weak var realTimeInfoStack: UIStackView!
-  @IBOutlet weak var realTimeUpdatedLabel: UILabel!
+  @IBOutlet weak var occupancyStack: UIStackView!
+  @IBOutlet weak var occupancyImageView: UIImageView!
+  @IBOutlet weak var occupancyLabel: UILabel!
+  @IBOutlet weak var occupancyAdditionalStack: UIStackView!
+  @IBOutlet weak var occupancyUpdatedLabel: UILabel!
 
-  @IBOutlet weak var infoStack: UIStackView!
+  @IBOutlet weak var alertWrapper: UIView!
+  @IBOutlet weak var alertImageView: UIImageView!
+  @IBOutlet weak var alertTitleLabel: UILabel!
+  @IBOutlet weak var alertBodyLabel: UILabel!
+  @IBOutlet weak var alertMoreButton: UIButton!
   
   @IBOutlet weak var expandyButton: UIButton!
   @IBOutlet weak var separator: UIView!
@@ -37,57 +39,85 @@ class TKUIServiceHeaderView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    updateAccessibility()
-    updateRealTime()
-
-    infoStack.isHidden = true
-    
     separator.backgroundColor = .tkLabelTertiary
+    
+    alertMoreButton.setTitle(Loc.ReadMore, for: .normal)
   }
   
   private func updateAccessibility(_ accessibility: TKUIWheelchairAccessibility? = nil) {
-    accessibilityStack.isHidden = accessibility == nil
+    accessibilityWrapper.isHidden = accessibility == nil
     accessibilityImageView.image = accessibility?.icon
     accessibilityTitleLabel.text = accessibility?.title
   }
   
   private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<[[API.VehicleOccupancy]]>? = nil, lastUpdated: Date? = nil) {
     
-    // TODO: Show alerts
+    if let sampleAlert = alerts.first {
+      alertWrapper.isHidden = false
+
+      alertImageView.image = sampleAlert.icon
+      alertTitleLabel.text = alerts.count > 1
+        ? Loc.Alerts(alerts.count)
+        : sampleAlert.title ?? Loc.Alert
+      alertBodyLabel.text = alerts.count > 1
+        ? sampleAlert.title
+        : sampleAlert.text
+
+    } else {
+      alertWrapper.isHidden = true
+    }
     
-    occupancies?.subscribe(onNext: { [weak self] occupancies in
-        if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1 {
-          let trainView = TKUITrainOccupancyView()
-          trainView.occupancies = occupancies
-          self?.updateRealTimeInfoStackViewContent(with: trainView)
-        } else if let occupancy = occupancies.first?.first, occupancy != .unknown {
-          let occupancyView = TKUIOccupancyView(with: .occupancy(occupancy))
-          self?.updateRealTimeInfoStackViewContent(with: occupancyView)
-        } else {
-          self?.updateRealTimeInfoStackViewContent(with: nil)
-        }
-      })
+    occupancyStack.isHidden = true
+    occupancies?
+      .subscribe(onNext: { [weak self] in self?.updateOccupancies($0) })
       .disposed(by: disposeBag)
     
     if let updated = lastUpdated {
-      realTimeUpdatedLabel.isHidden = false
-      realTimeUpdatedLabel.text = Loc.LastUpdated(date: TKStyleManager.string(for: updated, for: .autoupdatingCurrent, showDate: false, showTime: true))
+      occupancyUpdatedLabel.isHidden = false
+      #warning("TODO: Fix time zone, or use relative time (!) + 'ago'")
+      occupancyUpdatedLabel.text = Loc.LastUpdated(date: TKStyleManager.string(for: updated, for: .autoupdatingCurrent, showDate: false, showTime: true))
     } else {
-      realTimeUpdatedLabel.isHidden = true
+      occupancyUpdatedLabel.isHidden = true
+    }
+  }
+  
+  private func updateOccupancies(_ occupancies: [[API.VehicleOccupancy]]) {
+    if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1 {
+      occupancyStack.isHidden = false
+      
+      let average = API.VehicleOccupancy.average(in: occupancies.flatMap { $0 })
+      occupancyImageView.image = average.standingPeople()
+      occupancyLabel.text = average.localizedTitle
+
+      let trainView = TKUITrainOccupancyView()
+      trainView.occupancies = occupancies
+      updateRealTimeInfoStackViewContent(with: trainView)
+      
+    } else if let occupancy = occupancies.first?.first, occupancy != .unknown {
+      occupancyStack.isHidden = false
+
+      occupancyImageView.image = occupancy.standingPeople()
+      occupancyLabel.text = occupancy.localizedTitle
+      
+      updateRealTimeInfoStackViewContent(with: nil)
+
+    } else {
+      occupancyStack.isHidden = true
+      updateRealTimeInfoStackViewContent(with: nil)
     }
   }
     
   private func updateRealTimeInfoStackViewContent(with newView: UIView?) {
-    realTimeInfoStack.arrangedSubviews.forEach {
-      realTimeInfoStack.removeArrangedSubview($0)
+    occupancyAdditionalStack.arrangedSubviews.forEach {
+      occupancyAdditionalStack.removeArrangedSubview($0)
       $0.removeFromSuperview()
     }
 
     if let newView = newView {
-      realTimeInfoStack.addArrangedSubview(newView)
-      realTimeInfoStack.isHidden = false
+      occupancyAdditionalStack.addArrangedSubview(newView)
+      occupancyAdditionalStack.isHidden = false
     } else {
-      realTimeInfoStack.isHidden = true
+      occupancyAdditionalStack.isHidden = true
     }
   }
 }
@@ -97,6 +127,8 @@ class TKUIServiceHeaderView: UIView {
 extension TKUIServiceHeaderView {
   func configure(with model: TKUIDepartureCellContent) {
     updateAccessibility(model.wheelchairAccessibility)
+    
+    #warning("TODO: Add last updated")
     updateRealTime(alerts: model.alerts, occupancies: model.vehicleOccupancies, lastUpdated: Date())
   }
 }

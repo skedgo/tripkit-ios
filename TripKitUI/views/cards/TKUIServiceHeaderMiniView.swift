@@ -25,9 +25,6 @@ class TKUIServiceHeaderMiniView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    updateAccessibility()
-    updateRealTime()
-    
     separator.backgroundColor = .tkLabelTertiary
   }
   

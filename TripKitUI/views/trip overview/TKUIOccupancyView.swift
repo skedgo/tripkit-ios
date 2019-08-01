@@ -107,7 +107,7 @@ extension TKUIOccupancyView {
     switch purpose {
     case .occupancy(let occupancy):
       guard
-        let title = occupancy.description else {
+        let title = occupancy.localizedTitle else {
           return
       }
       
