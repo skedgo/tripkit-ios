@@ -9,6 +9,7 @@
 import UIKit
 
 import RxSwift
+import TGCardViewController
 
 class TKUIServiceHeaderMiniView: UIView {
   @IBOutlet weak var accessibilityImageView: UIImageView!
@@ -27,7 +28,17 @@ class TKUIServiceHeaderMiniView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    expandyButton.setImage(TGCard.arrowButtonImage(direction: .down, background: tintColor.withAlphaComponent(0.12), arrow: tintColor), for: .normal)
+    expandyButton.setTitle(nil, for: .normal)
+    expandyButton.accessibilityLabel = Loc.Expand
+
     separator.backgroundColor = .tkLabelTertiary
+  }
+  
+  override func tintColorDidChange() {
+    super.tintColorDidChange()
+    
+    expandyButton.setImage(TGCard.arrowButtonImage(direction: .down, background: tintColor.withAlphaComponent(0.12), arrow: tintColor), for: .normal)
   }
   
   private func updateAccessibility(_ accessibility: TKUIWheelchairAccessibility) {
