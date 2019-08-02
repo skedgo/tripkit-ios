@@ -47,6 +47,7 @@ extension API {
   }
   
   public struct VehicleComponents: Codable, Hashable {
+    public let airConditioned: Bool?
     public let wifi: Bool?
     public let occupancy: VehicleOccupancy?
   }

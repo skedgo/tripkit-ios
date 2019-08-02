@@ -10,29 +10,6 @@ import Foundation
 
 import RxSwift
 
-public struct TKUIDepartureCardContentModel {
-  
-  public var servicePlaceholderImage: UIImage?
-  public var serviceImageURL: URL?
-  public var serviceImageIsTemplate = false
-  public var serviceLineColor: UIColor?
-  public var serviceImageIsColorCoded: Bool = false
-  public var title: NSAttributedString
-  public var subtitle: String?
-  public var subsubtitle: String?
-  public var approximateTimeToDepart: Date?
-  public var serviceIsCancelled = false
-  public var serviceIsAccessible: Bool?
-  public var requiresAccessibilitySupport = false
-  public var serviceAlerts: [Alert] = []
-  public var serviceOccupancies: Observable<[[API.VehicleOccupancy]]>?
-  
-  public init(title: NSAttributedString) {
-    self.title = title
-  }
-  
-}
-
 extension TKUIDepartureCellContent {
   
   static func build(for visit: StopVisits) -> TKUIDepartureCellContent? {
@@ -53,10 +30,11 @@ extension TKUIDepartureCellContent {
     
     let serviceColor = service.color as? UIColor
     return TKUIDepartureCellContent(
-      placeHolderImage: service.modeImage(for: .listMainMode),
+      placeholderImage: service.modeImage(for: .listMainMode),
       imageURL: service.modeImageURL(for: .listMainMode),
       imageIsTemplate: service.modeImageIsTemplate,
       imageTintColor: TKUIDeparturesCard.config.colorCodeTransitIcons ? serviceColor : nil,
+      modeName: service.modeTitle ?? "",
       serviceShortName: service.shortIdentifier(),
       serviceColor: serviceColor,
       serviceIsCancelled: service.isCancelled,

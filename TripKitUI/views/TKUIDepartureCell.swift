@@ -11,11 +11,12 @@ import UIKit
 import RxSwift
 
 public struct TKUIDepartureCellContent {
-  public var placeHolderImage: UIImage? = nil
+  public var placeholderImage: UIImage? = nil
   public var imageURL: URL?
   public var imageIsTemplate: Bool
   public var imageTintColor: UIColor?
-
+  public var modeName: String
+  
   public var serviceShortName: String?
   public var serviceColor: UIColor?
   public var serviceIsCancelled: Bool
@@ -124,7 +125,7 @@ extension TKUIDepartureCell {
   private func updateUI() {
     guard let dataSource = dataSource else { return }
     
-    serviceImageView.setImage(with: dataSource.imageURL, asTemplate: dataSource.imageIsTemplate, placeholder: dataSource.placeHolderImage)
+    serviceImageView.setImage(with: dataSource.imageURL, asTemplate: dataSource.imageIsTemplate, placeholder: dataSource.placeholderImage)
     serviceImageView.tintColor = dataSource.imageTintColor ?? TKStyleManager.darkTextColor()
     
     let serviceColor = dataSource.serviceColor ?? .tkLabelPrimary

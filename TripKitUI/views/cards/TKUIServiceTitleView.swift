@@ -55,7 +55,7 @@ extension TKUIServiceTitleView {
     
     serviceTitleLabel.text = model.lineText ?? "Service" // TODO: Localise
     
-    serviceImageView.setImage(with: model.imageURL, asTemplate: model.imageIsTemplate, placeholder: model.placeHolderImage)
+    serviceImageView.setImage(with: model.imageURL, asTemplate: model.imageIsTemplate, placeholder: model.placeholderImage)
     serviceImageView.tintColor = model.imageTintColor ?? TKStyleManager.darkTextColor()
     
     let serviceColor = model.serviceColor ?? .tkLabelPrimary

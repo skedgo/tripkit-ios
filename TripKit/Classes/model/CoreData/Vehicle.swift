@@ -104,9 +104,9 @@ extension Vehicle : MKAnnotation {
   
   public var title: String? {
     guard let modeTitle =
-      anyService?.modeTitle?.capitalized(with: Locale.current)
-      ?? anySegmentReference?.template()?.modeInfo?.descriptor
-      ?? label
+      anyService?.modeTitle
+        ?? anySegmentReference?.template()?.modeInfo?.descriptor
+        ?? label
       else { return nil }
     
     if let number = service?.number {

@@ -71,7 +71,7 @@ extension TKUIServiceHeaderMiniView {
     disposeBag = DisposeBag()
 
     updateAccessibility(model.wheelchairAccessibility)
-    updateRealTime(alerts: model.alerts, occupancies: model.vehicleOccupancies.map { $0.map { $0.0 } })
+    updateRealTime(alerts: model.alerts, occupancies: model.vehicleOccupancies?.map { $0.0 })
     
     // stack views are weird; this should be in the front, but sometimes
     // gets put back
