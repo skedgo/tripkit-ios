@@ -51,9 +51,6 @@ extension TKUIDepartureCellContent {
       accessibility = .unknown
     }
     
-    let occupancies = service.vehicle?.rx.components
-      .map { $0.map { $0.map { $0.occupancy ?? .unknown } } }
-    
     return TKUIDepartureCellContent(
       placeHolderImage: service.modeImage(for: .listMainMode),
       imageURL: service.modeImageURL(for: .listMainMode),
@@ -68,7 +65,7 @@ extension TKUIDepartureCellContent {
       alwaysShowAccessibilityInformation: TKUserProfileHelper.showWheelchairInformation,
       wheelchairAccessibility: accessibility,
       alerts: service.allAlerts(),
-      vehicleOccupancies: occupancies
+      vehicleOccupancies: service.vehicle?.rx.occupancies
     )
     
 //    model.serviceImageIsColorCoded = TKUIDeparturesCard.config.colorCodeTransitIcons

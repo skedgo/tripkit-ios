@@ -405,7 +405,6 @@ extension UITableView {
   
 }
 
-
 // MARK: - Alerts
 
 extension TKUIDeparturesCard {

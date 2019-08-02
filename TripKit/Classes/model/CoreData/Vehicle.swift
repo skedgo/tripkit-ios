@@ -64,10 +64,24 @@ extension Vehicle {
 
 extension Reactive where Base: Vehicle {
   
-  public var components: Observable<[[API.VehicleComponents]]> {
+  public var components: Observable<([[API.VehicleComponents]], Date)> {
     return observeWeakly(NSData.self, "componentsData")
-      .map { [weak base] _ in base?.components ?? [[]] }
+      .map { [weak base] _ in
+        let components = base?.components ?? [[]]
+        let date = base?.lastUpdate ?? Date()
+        return (components, date)
+      }
   }
+  
+  public var occupancies: Observable<([[API.VehicleOccupancy]], Date)> {
+    return observeWeakly(NSData.self, "componentsData")
+      .map { [weak base] _ in
+        let components = base?.components ?? [[]]
+        let date = base?.lastUpdate ?? Date()
+        return (components.map { $0.map { $0.occupancy ?? .unknown }}, date)
+    }
+  }
+
   
 }
 

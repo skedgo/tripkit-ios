@@ -11,12 +11,14 @@ import UIKit
 import RxSwift
 
 class TKUIServiceHeaderMiniView: UIView {
-  @IBOutlet weak var collapsedAccessibilityImageView: UIImageView!
+  @IBOutlet weak var accessibilityImageView: UIImageView!
+  @IBOutlet weak var occupancyImageView: UIImageView!
+  @IBOutlet weak var alertImageView: UIImageView!
   
   @IBOutlet weak var expandyButton: UIButton!
   @IBOutlet weak var separator: UIView!
   
-  private let disposeBag = DisposeBag()
+  private var disposeBag = DisposeBag()
   
   static func newInstance() -> TKUIServiceHeaderMiniView {
     return Bundle(for: TKUIServiceHeaderMiniView.self).loadNibNamed("TKUIServiceHeaderMiniView", owner: self, options: nil)?.first as! TKUIServiceHeaderMiniView
@@ -28,14 +30,24 @@ class TKUIServiceHeaderMiniView: UIView {
     separator.backgroundColor = .tkLabelTertiary
   }
   
-  private func updateAccessibility(_ accessibility: TKUIWheelchairAccessibility? = nil) {
-    collapsedAccessibilityImageView.image = accessibility?.icon
-    collapsedAccessibilityImageView.isHidden = accessibility == nil
+  private func updateAccessibility(_ accessibility: TKUIWheelchairAccessibility) {
+    accessibilityImageView.image = accessibility.icon
   }
   
-  private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<[[API.VehicleOccupancy]]>? = nil, lastUpdated: Date? = nil) {
+  private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<[[API.VehicleOccupancy]]>? = nil) {
     
-    // TODO: Show alert + occupancy icons
+    let alert = alerts.first
+    alertImageView.isHidden = alert == nil
+    alertImageView.image = alert?.icon
+
+    occupancyImageView.isHidden = true
+    occupancies?
+      .subscribe(onNext: { [weak self] in
+        let average = API.VehicleOccupancy.average(in: $0.flatMap { $0 })
+        self?.occupancyImageView.isHidden = false
+        self?.occupancyImageView.image = average.standingPeople()
+      })
+      .disposed(by: disposeBag)
   }
 }
 
@@ -43,7 +55,13 @@ class TKUIServiceHeaderMiniView: UIView {
 
 extension TKUIServiceHeaderMiniView {
   func configure(with model: TKUIDepartureCellContent) {
+    disposeBag = DisposeBag()
+
     updateAccessibility(model.wheelchairAccessibility)
-    updateRealTime(alerts: model.alerts, occupancies: model.vehicleOccupancies, lastUpdated: Date())
+    updateRealTime(alerts: model.alerts, occupancies: model.vehicleOccupancies.map { $0.map { $0.0 } })
+    
+    // stack views are weird; this should be in the front, but sometimes
+    // gets put back
+    bringSubviewToFront(expandyButton)
   }
 }

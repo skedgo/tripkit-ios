@@ -13,23 +13,35 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TKUIServiceHeaderMiniView" customModule="TripKitUI" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="158"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="8rJ-Jd-GL9">
-                    <rect key="frame" x="16" y="16" width="20" height="125"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="8rJ-Jd-GL9">
+                    <rect key="frame" x="16" y="16" width="72" height="21"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S1c-5o-te0">
-                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                            <rect key="frame" x="0.0" y="0.5" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="EJ2-g6-0Rj"/>
                                 <constraint firstAttribute="height" constant="20" id="RUQ-AU-WRH"/>
                             </constraints>
                         </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qWX-SA-XNI">
+                            <rect key="frame" x="26" y="0.5" width="20" height="20"/>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kT9-FC-8x4">
+                            <rect key="frame" x="52" y="0.5" width="20" height="20"/>
+                        </imageView>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="kT9-FC-8x4" firstAttribute="width" secondItem="S1c-5o-te0" secondAttribute="width" id="7ct-iI-Rhm"/>
+                        <constraint firstItem="kT9-FC-8x4" firstAttribute="height" secondItem="S1c-5o-te0" secondAttribute="height" id="Yrf-ha-oFj"/>
+                        <constraint firstItem="qWX-SA-XNI" firstAttribute="width" secondItem="S1c-5o-te0" secondAttribute="width" id="Z5k-Qm-rQz"/>
+                        <constraint firstItem="qWX-SA-XNI" firstAttribute="height" secondItem="S1c-5o-te0" secondAttribute="height" id="jXD-4r-51X"/>
+                    </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIn-iB-HC6">
-                    <rect key="frame" x="0.0" y="157" width="414" height="1"/>
+                    <rect key="frame" x="0.0" y="53" width="414" height="1"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="5KX-bT-UUO"/>
@@ -59,11 +71,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="collapsedAccessibilityImageView" destination="S1c-5o-te0" id="MBB-f2-f3b"/>
+                <outlet property="accessibilityImageView" destination="S1c-5o-te0" id="w0e-et-43g"/>
+                <outlet property="alertImageView" destination="kT9-FC-8x4" id="ubI-gy-ZTF"/>
                 <outlet property="expandyButton" destination="13U-pb-ltM" id="QOh-kS-4Za"/>
+                <outlet property="occupancyImageView" destination="qWX-SA-XNI" id="tyA-MH-V6S"/>
                 <outlet property="separator" destination="KIn-iB-HC6" id="3QE-YJ-Yjl"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="-106.47321428571428"/>
+            <point key="canvasLocation" x="137.68115942028987" y="-141.29464285714286"/>
         </view>
     </objects>
 </document>

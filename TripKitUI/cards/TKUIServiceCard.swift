@@ -26,6 +26,7 @@ public class TKUIServiceCard: TGTableCard {
   
   private let scrollToTopPublisher = PublishSubject<Void>()
   private let toggleHeaderPublisher = PublishSubject<Bool>()
+  private let showAlertsPublisher = PublishSubject<Void>()
 
   private let titleView: TKUIServiceTitleView?
   private var headerView: UIView?
@@ -117,21 +118,28 @@ public class TKUIServiceCard: TGTableCard {
     }
     
     viewModel.header
-      .drive(onNext: { content in
+      .drive(onNext: { [weak self] content in
+        guard let self = self else { return }
         if self.headerView == nil {
-          self.buildHeader(expanded: false, content: content, for: tableView)
-        }
-        if let mini = self.headerView as? TKUIServiceHeaderMiniView {
+          self.buildHeader(expanded: !content.alerts.isEmpty, content: content, for: tableView)
+        } else if let mini = self.headerView as? TKUIServiceHeaderMiniView {
           mini.configure(with: content)
         } else if let maxi = self.headerView as? TKUIServiceHeaderView {
           maxi.configure(with: content)
         }
+
       })
       .disposed(by: disposeBag)
     
     toggleHeaderPublisher.withLatestFrom(viewModel.header.asObservable()) { ($0, $1)}
-      .subscribe(onNext: { expand, content in
-        self.buildHeader(expanded: expand, content: content, for: tableView)
+      .subscribe(onNext: { [weak self] expand, content in
+        self?.buildHeader(expanded: expand, content: content, for: tableView)
+      })
+      .disposed(by: disposeBag)
+    
+    showAlertsPublisher.withLatestFrom(viewModel.header.asObservable()) { ($1) }
+      .subscribe(onNext: { [weak self] content in
+        self?.showAlerts(content.alerts)
       })
       .disposed(by: disposeBag)
 
@@ -170,30 +178,37 @@ public class TKUIServiceCard: TGTableCard {
   
 }
 
-
-// MARK: - Scrolling to embarkation
+// MARK: - UITableViewDelegate + Headers
 
 extension TKUIServiceCard: UITableViewDelegate {
 
   private func buildHeader(expanded: Bool, content: TKUIDepartureCellContent, for tableView: UITableView) {
-    let button: UIButton
     if expanded {
       let header = TKUIServiceHeaderView.newInstance()
+      header.configure(with: content)
+
       header.expandyButton.rx.tap
-        .subscribe(onNext: {
-          self.toggleHeaderPublisher.onNext(false)
+        .subscribe(onNext: { [weak self] in
+          self?.toggleHeaderPublisher.onNext(false)
         })
         .disposed(by: disposeBag)
-      header.configure(with: content)
+      
+      header.alertMoreButton.rx.tap
+        .subscribe(onNext: { [weak self] in
+          self?.showAlertsPublisher.onNext(())
+        })
+        .disposed(by: disposeBag)
+
       headerView = header
     } else {
       let header = TKUIServiceHeaderMiniView.newInstance()
+      header.configure(with: content)
+
       header.expandyButton.rx.tap
-        .subscribe(onNext: {
-          self.toggleHeaderPublisher.onNext(true)
+        .subscribe(onNext: { [weak self] in
+          self?.toggleHeaderPublisher.onNext(true)
         })
         .disposed(by: disposeBag)
-      header.configure(with: content)
       headerView = header
     }
     
@@ -206,7 +221,6 @@ extension TKUIServiceCard: UITableViewDelegate {
   
   public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     let size = headerView?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-    print(size)
     return size?.height ?? 0
   }
   
@@ -217,6 +231,20 @@ extension TKUIServiceCard: UITableViewDelegate {
     
     scrollToTopPublisher.onNext(())
     return false
+  }
+  
+}
+
+// MARK: - Alerts
+
+extension TKUIServiceCard {
+  
+  private func showAlerts(_ alerts: [Alert]) {
+    guard !alerts.isEmpty else { return }
+
+    let alertController = TKUIAlertViewController(style: .plain)
+    alertController.alerts = alerts
+    controller?.present(alertController, inNavigator: true)
   }
   
 }

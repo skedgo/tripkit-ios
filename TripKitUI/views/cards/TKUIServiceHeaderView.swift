@@ -15,10 +15,12 @@ class TKUIServiceHeaderView: UIView {
   @IBOutlet weak var accessibilityImageView: UIImageView!
   @IBOutlet weak var accessibilityTitleLabel: UILabel!
 
-  @IBOutlet weak var occupancyStack: UIStackView!
+  @IBOutlet weak var occupancyWrapper: UIView!
   @IBOutlet weak var occupancyImageView: UIImageView!
   @IBOutlet weak var occupancyLabel: UILabel!
-  @IBOutlet weak var occupancyAdditionalStack: UIStackView!
+  @IBOutlet weak var trainOccupancyView: TKUITrainOccupancyView!
+  @IBOutlet weak var trainOccupancyHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var trainOccupancyBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var occupancyUpdatedLabel: UILabel!
 
   @IBOutlet weak var alertWrapper: UIView!
@@ -30,7 +32,7 @@ class TKUIServiceHeaderView: UIView {
   @IBOutlet weak var expandyButton: UIButton!
   @IBOutlet weak var separator: UIView!
   
-  private let disposeBag = DisposeBag()
+  private var disposeBag = DisposeBag()
   
   static func newInstance() -> TKUIServiceHeaderView {
     return Bundle(for: TKUIServiceHeaderView.self).loadNibNamed("TKUIServiceHeaderView", owner: self, options: nil)?.first as! TKUIServiceHeaderView
@@ -39,18 +41,24 @@ class TKUIServiceHeaderView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    separator.backgroundColor = .tkLabelTertiary
+    accessibilityTitleLabel.textColor = .tkLabelPrimary
     
-    alertMoreButton.setTitle(Loc.ReadMore, for: .normal)
+    occupancyLabel.textColor = .tkLabelPrimary
+    occupancyUpdatedLabel.textColor = .tkLabelSecondary
+
+    alertTitleLabel.textColor = .tkLabelPrimary
+    alertBodyLabel.textColor = .tkLabelPrimary
+    alertMoreButton.setTitle(Loc.Show, for: .normal)
+
+    separator.backgroundColor = .tkLabelTertiary
   }
   
-  private func updateAccessibility(_ accessibility: TKUIWheelchairAccessibility? = nil) {
-    accessibilityWrapper.isHidden = accessibility == nil
-    accessibilityImageView.image = accessibility?.icon
-    accessibilityTitleLabel.text = accessibility?.title
+  private func updateAccessibility(_ accessibility: TKUIWheelchairAccessibility) {
+    accessibilityImageView.image = accessibility.icon
+    accessibilityTitleLabel.text = accessibility.title
   }
   
-  private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<[[API.VehicleOccupancy]]>? = nil, lastUpdated: Date? = nil) {
+  private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<([[API.VehicleOccupancy]], Date)>?) {
     
     if let sampleAlert = alerts.first {
       alertWrapper.isHidden = false
@@ -67,68 +75,70 @@ class TKUIServiceHeaderView: UIView {
       alertWrapper.isHidden = true
     }
     
-    occupancyStack.isHidden = true
+    occupancyWrapper.isHidden = true
     occupancies?
-      .subscribe(onNext: { [weak self] in self?.updateOccupancies($0) })
+      .subscribe(onNext: { [weak self] in
+        self?.updateOccupancies($0.0, lastUpdated: $0.1)
+      })
       .disposed(by: disposeBag)
-    
-    if let updated = lastUpdated {
-      occupancyUpdatedLabel.isHidden = false
-      #warning("TODO: Fix time zone, or use relative time (!) + 'ago'")
-      occupancyUpdatedLabel.text = Loc.LastUpdated(date: TKStyleManager.string(for: updated, for: .autoupdatingCurrent, showDate: false, showTime: true))
-    } else {
-      occupancyUpdatedLabel.isHidden = true
-    }
   }
   
-  private func updateOccupancies(_ occupancies: [[API.VehicleOccupancy]]) {
+  private func updateOccupancies(_ occupancies: [[API.VehicleOccupancy]], lastUpdated: Date) {
+    
+    Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+      .startWith(0)
+      .subscribe(onNext: { [weak self] _ in
+        let duration = Date.durationString(forSeconds: lastUpdated.timeIntervalSinceNow * -1)
+        let format = NSLocalizedString("Updated %@ ago", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle updated. (old key: VehicleUpdated)")
+        let updatedTitle = String(format: format, duration)
+        self?.occupancyUpdatedLabel.text = Loc.LastUpdated(date: updatedTitle)
+      })
+      .disposed(by: disposeBag)
+
     if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1 {
-      occupancyStack.isHidden = false
+      occupancyWrapper.isHidden = false
       
       let average = API.VehicleOccupancy.average(in: occupancies.flatMap { $0 })
       occupancyImageView.image = average.standingPeople()
       occupancyLabel.text = average.localizedTitle
 
-      let trainView = TKUITrainOccupancyView()
-      trainView.occupancies = occupancies
-      updateRealTimeInfoStackViewContent(with: trainView)
+      trainOccupancyView.isHidden = false
+      trainOccupancyView.occupancies = occupancies
+      trainOccupancyHeightConstraint?.isActive = true
+      trainOccupancyBottomConstraint?.isActive = true
       
     } else if let occupancy = occupancies.first?.first, occupancy != .unknown {
-      occupancyStack.isHidden = false
+      occupancyWrapper.isHidden = false
 
       occupancyImageView.image = occupancy.standingPeople()
       occupancyLabel.text = occupancy.localizedTitle
       
-      updateRealTimeInfoStackViewContent(with: nil)
+      trainOccupancyView.isHidden = true
+      trainOccupancyHeightConstraint?.isActive = false
+      trainOccupancyBottomConstraint?.isActive = false
 
     } else {
-      occupancyStack.isHidden = true
-      updateRealTimeInfoStackViewContent(with: nil)
+      occupancyWrapper.isHidden = true
     }
-  }
     
-  private func updateRealTimeInfoStackViewContent(with newView: UIView?) {
-    occupancyAdditionalStack.arrangedSubviews.forEach {
-      occupancyAdditionalStack.removeArrangedSubview($0)
-      $0.removeFromSuperview()
-    }
-
-    if let newView = newView {
-      occupancyAdditionalStack.addArrangedSubview(newView)
-      occupancyAdditionalStack.isHidden = false
-    } else {
-      occupancyAdditionalStack.isHidden = true
-    }
+    setNeedsUpdateConstraints()
   }
+
 }
 
 // MARK: - TKUIDepartureCellContent compatibility
 
 extension TKUIServiceHeaderView {
   func configure(with model: TKUIDepartureCellContent) {
-    updateAccessibility(model.wheelchairAccessibility)
+    disposeBag = DisposeBag()
     
-    #warning("TODO: Add last updated")
-    updateRealTime(alerts: model.alerts, occupancies: model.vehicleOccupancies, lastUpdated: Date())
+    updateAccessibility(model.wheelchairAccessibility)
+    updateRealTime(alerts: model.alerts, occupancies: model.vehicleOccupancies)
+    
+    // stack views are weird; this should be in the front, but sometimes
+    // gets put back
+    bringSubviewToFront(expandyButton)
+    
+    updateConstraintsIfNeeded()
   }
 }

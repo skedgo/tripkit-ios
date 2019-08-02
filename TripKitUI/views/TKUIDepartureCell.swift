@@ -27,7 +27,7 @@ public struct TKUIDepartureCellContent {
   public var alwaysShowAccessibilityInformation: Bool
   public var wheelchairAccessibility: TKUIWheelchairAccessibility
   public var alerts: [Alert]
-  public var vehicleOccupancies: Observable<[[API.VehicleOccupancy]]>?
+  public var vehicleOccupancies: Observable<([[API.VehicleOccupancy]], Date)>?
 }
 
 public enum TKUIWheelchairAccessibility {

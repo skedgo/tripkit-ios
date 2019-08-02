@@ -9,7 +9,7 @@
 @import Foundation;
 @import CoreData;
 
-typedef NS_ENUM(NSInteger, StopVisitRealTime) {
+typedef NS_CLOSED_ENUM(NSInteger, StopVisitRealTime) {
   StopVisitRealTimeNotApplicable, // We don't have real-time for this kind of service
   StopVisitRealTimeNotAvailable,  // Services like this can have real-time, but this doesn't
   StopVisitRealTimeOnTime,

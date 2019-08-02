@@ -53,7 +53,8 @@ public class TKUIServiceViewModel {
       .map(TKUIServiceViewModel.buildSections)
     
     // Map content doesn't change with real-time
-    mapContent = withContent.map(TKUIServiceViewModel.buildMapContent)
+    let mapContent = withContent.map(TKUIServiceViewModel.buildMapContent)
+    self.mapContent = mapContent
     
     selectAnnotation = itemSelected
       .withLatestFrom(mapContent) { ($0, $1) }
