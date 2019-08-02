@@ -21,12 +21,14 @@ public class TKUIServiceVisitCell: UITableViewCell {
   @IBOutlet weak var subtitleLabel: UILabel!
   @IBOutlet weak var setReminderButton: UIButton!
   
+  @IBOutlet weak var accessibilityWrapper: UIView!
+  @IBOutlet weak var accessibilityImageView: UIImageView!
+  @IBOutlet weak var accessibilityTitleLabel: UILabel!
+  
   @IBOutlet weak var topLine: UIView!
   @IBOutlet weak var bottomLine: UIView!
   @IBOutlet weak var outerDot: UIView!
   @IBOutlet weak var innerDot: UIView!
-
-  @IBOutlet weak var accessoryImageView: UIImageView!
   
   @objc
   public static let nib = UINib(nibName: "TKUIServiceVisitCell", bundle: Bundle(for: TKUIServiceVisitCell.self))
@@ -57,8 +59,8 @@ public class TKUIServiceVisitCell: UITableViewCell {
   
   override public func awakeFromNib() {
     super.awakeFromNib()
+    
     outerDot.layer.cornerRadius = outerDot.frame.width / 2
-
     innerDot.layer.cornerRadius = innerDot.frame.width / 2
   }
   
@@ -131,24 +133,22 @@ extension TKUIServiceVisitCell {
     subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     subtitleLabel.textColor = isVisited ? .tkLabelSecondary : .tkLabelTertiary
     
+    accessibilityTitleLabel.textColor = isVisited ? .tkLabelSecondary : .tkLabelTertiary
+    
     stopNameStack.spacing = (subtitle != nil) ? 4 : 0
   }
   
-  func setStopAccessibility(isAccessible: Bool?) {
-    guard TKUserProfileHelper.showWheelchairInformation else {
-      accessoryImageView.isHidden = true
+  func setStopAccessibility(accessibility: TKUIWheelchairAccessibility?) {
+    guard let accessibility = accessibility else {
+      accessibilityWrapper.isHidden = true
       return
     }
+
+    accessibilityWrapper.isHidden = false
+    accessibilityImageView.image = accessibility.icon
+    accessibilityTitleLabel.text = accessibility.title
     
-    accessoryImageView.isHidden = false
-    switch isAccessible {
-    case true?:
-      accessoryImageView.image = TripKitUIBundle.imageNamed("icon-wheelchair-accessible")
-    case false?:
-      accessoryImageView.image = TripKitUIBundle.imageNamed("icon-wheelchair-not-accessible")
-    case nil:
-      accessoryImageView.image = TripKitUIBundle.imageNamed("icon-wheelchair-unknown")
-    }
+    stopNameStack.spacing = 4
   }
 }
 
@@ -158,6 +158,12 @@ extension TKUIServiceVisitCell {
     setTiming(item.timing, timeZone: item.timeZone, isVisited: item.isVisited)
 
     setTitle(item.title, isVisited: item.isVisited)
+    
+    if TKUserProfileHelper.showWheelchairInformation {
+      setStopAccessibility(accessibility: item.dataModel.stop.wheelchairAccessibility)
+    } else {
+      setStopAccessibility(accessibility: nil)
+    }
     
     topLine.backgroundColor = item.topConnection
     topLine.isHidden = item.topConnection == nil
@@ -197,7 +203,21 @@ extension TKUIServiceVisitCell {
     topLine.isHidden = false
     bottomLine.isHidden = false
     
-    setStopAccessibility(isAccessible: visit.stop.isWheelchairAccessible)
+    if TKUserProfileHelper.showWheelchairInformation {
+      setStopAccessibility(accessibility: visit.stop.wheelchairAccessibility)
+    } else {
+      setStopAccessibility(accessibility: nil)
+    }
   }
   
+}
+
+fileprivate extension StopLocation {
+  var wheelchairAccessibility: TKUIWheelchairAccessibility {
+    switch isWheelchairAccessible {
+    case .some(true): return .accessible
+    case .some(false): return .notAccessible
+    case nil: return .unknown
+    }
+  }
 }
