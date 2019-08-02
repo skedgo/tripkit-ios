@@ -20,8 +20,8 @@ public struct TKUIDepartureCellContent {
   public var serviceColor: UIColor?
   public var serviceIsCancelled: Bool
 
-  public var title: NSAttributedString
-  public var subtitle: String?
+  public var timeText: NSAttributedString
+  public var lineText: String?
 
   public var approximateTimeToDepart: Date?
   public var alwaysShowAccessibilityInformation: Bool
@@ -132,8 +132,8 @@ extension TKUIDepartureCell {
     serviceShortNameLabel.textColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
     serviceColorView.backgroundColor = serviceColor
     
-    titleLabel.attributedText = dataSource.title
-    subtitleLabel.text = dataSource.subtitle
+    titleLabel.attributedText = dataSource.timeText
+    subtitleLabel.text = dataSource.lineText
     
     updateAccessibilitySection()
     updateRealTime()

@@ -51,25 +51,23 @@ extension TKUIDepartureCellContent {
       accessibility = .unknown
     }
     
+    let serviceColor = service.color as? UIColor
     return TKUIDepartureCellContent(
       placeHolderImage: service.modeImage(for: .listMainMode),
       imageURL: service.modeImageURL(for: .listMainMode),
       imageIsTemplate: service.modeImageIsTemplate,
-      imageTintColor: nil,
+      imageTintColor: TKUIDeparturesCard.config.colorCodeTransitIcons ? serviceColor : nil,
       serviceShortName: service.shortIdentifier(),
-      serviceColor: service.color as? UIColor,
+      serviceColor: serviceColor,
       serviceIsCancelled: service.isCancelled,
-      title: visit.buildTitle(),
-      subtitle: visit.secondaryInformation(),
+      timeText: visit.buildTimeText(),
+      lineText: visit.buildLineText(),
       approximateTimeToDepart: visit.countdownDate(),
       alwaysShowAccessibilityInformation: TKUserProfileHelper.showWheelchairInformation,
       wheelchairAccessibility: accessibility,
       alerts: service.allAlerts(),
       vehicleOccupancies: service.vehicle?.rx.occupancies
     )
-    
-//    model.serviceImageIsColorCoded = TKUIDeparturesCard.config.colorCodeTransitIcons
-//    model.subsubtitle = visit.realTimeInformation(true)
   }
   
 }
@@ -77,14 +75,23 @@ extension TKUIDepartureCellContent {
 // MARK: -
 extension StopVisits {
   
-  fileprivate func buildTitle() -> NSAttributedString {
-    var title = realTimeInformation(false) + " · "
+  fileprivate func buildTimeText() -> NSAttributedString {
+    var text = realTimeInformation(false) + " · "
     
     // Frequency based service
     switch timing {
-    case .frequencyBased(let frequency, _, _, _):
+    case .frequencyBased(let frequency, let start, let end, _):
       let freqString = Date.durationString(forMinutes: Int(frequency / 60))
-      title += Loc.Every(repetition: freqString)
+      text += Loc.Every(repetition: freqString)
+      
+      if let start = start, let end = end {
+        let timeZone = stop.region?.timeZone ?? .current
+        text += " ⋅ "
+        text += TKStyleManager.timeString(start, for: timeZone)
+        text += " - "
+        text += TKStyleManager.timeString(end, for: timeZone)
+      }
+
       
     case .timetabled(let arrival, let departure):
       let timeZone = stop.region?.timeZone
@@ -97,7 +104,7 @@ extension StopVisits {
       if self is DLSEntry {
         // time-table
         if !departureString.isEmpty {
-          title += departureString
+          text += departureString
         }
         
         var arrivalString = ""
@@ -106,11 +113,11 @@ extension StopVisits {
         }
         
         if !arrivalString.isEmpty {
-          title += String(format: " - %@", arrivalString)
+          text += String(format: " - %@", arrivalString)
         }
         
       } else if !departureString.isEmpty {
-        title += departureString
+        text += departureString
       }
     }
     
@@ -122,7 +129,29 @@ extension StopVisits {
     case .notApplicable, .notAvailable: color = .tkLabelSecondary
     }
     
-    return NSAttributedString(string: title, attributes: [.foregroundColor: color])
+    return NSAttributedString(string: text, attributes: [.foregroundColor: color])
+  }
+  
+  fileprivate func buildLineText() -> String? {
+    var text = ""
+    
+    // platforms
+    if let standName = stop.shortName?.trimmingCharacters(in: .whitespaces), !standName.isEmpty {
+      if !text.isEmpty {
+        text += " ⋅ "
+      }
+      text += standName
+    }
+    
+    // direction
+    if let direction = service.direction?.trimmingCharacters(in: .whitespaces), !direction.isEmpty {
+      if !text.isEmpty {
+        text += " ⋅ "
+      }
+      text += direction
+    }
+    
+    return text.isEmpty ? nil : text
   }
   
 }
