@@ -106,10 +106,10 @@ class TKUIServiceHeaderView: UIView {
       })
       .disposed(by: disposeBag)
 
-    if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1 {
+    if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1, let average = API.VehicleOccupancy.average(in: occupancies.flatMap { $0 })
+ {
       occupancyWrapper.isHidden = false
       
-      let average = API.VehicleOccupancy.average(in: occupancies.flatMap { $0 })
       occupancyImageView.image = average.standingPeople()
       occupancyLabel.text = average.localizedTitle
 

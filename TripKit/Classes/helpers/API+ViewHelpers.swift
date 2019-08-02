@@ -23,7 +23,8 @@ extension API.VehicleOccupancy {
     return average(in: occupancies)
   }
   
-  public static func average(in all: [API.VehicleOccupancy]) -> API.VehicleOccupancy {
+  public static func average(in all: [API.VehicleOccupancy]) -> API.VehicleOccupancy? {
+    guard !all.isEmpty else { return nil }
     let sum = all.reduce(0) { $0 + $1.intValue }
     return API.VehicleOccupancy(intValue: sum / all.count)
   }

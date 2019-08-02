@@ -72,6 +72,7 @@ class TKUIDepartureCell: UITableViewCell {
   
   @IBOutlet weak var accessibleImageView: UIImageView!
   @IBOutlet weak var alertImageView: UIImageView!
+  @IBOutlet weak var occupancyImageView: UIImageView!
   
   @IBOutlet weak var selectionIndicator: UIView!
 
@@ -134,9 +135,8 @@ extension TKUIDepartureCell {
     titleLabel.attributedText = dataSource.title
     subtitleLabel.text = dataSource.subtitle
     
-    updateAdditionalInfoSection()
     updateAccessibilitySection()
-    updateServiceAlertSection()
+    updateRealTime()
     
     if dataSource.approximateTimeToDepart != nil {
       Observable<Int>.interval(.seconds(5), scheduler: MainScheduler.instance)
@@ -160,59 +160,24 @@ extension TKUIDepartureCell {
     }    
   }
   
-  private func updateServiceAlertSection() {
-    guard
-      let dataSource = dataSource,
-      !dataSource.alerts.isEmpty
-      else {
-        alertImageView.isHidden = true
-        return
-    }
+  private func updateRealTime() {
+    guard let dataSource = dataSource else { return }
+
+    let alert = dataSource.alerts.first
+    alertImageView.isHidden = alert == nil
+    alertImageView.image = alert?.icon
+    alertImageView.accessibilityLabel = alert?.title ?? Loc.Alert
     
-    alertImageView.isHidden = false
-    
-    // For now, we only show the first alert.
-    let alert = dataSource.alerts[0]
-    alertImageView.image = TKInfoIcon.image(for: alert.infoIconType, usage: .normal)
-    alertImageView.accessibilityLabel = alert.title ?? alert.text ?? Loc.Alert
+    occupancyImageView.isHidden = true
+    dataSource.vehicleOccupancies?
+      .subscribe(onNext: { [weak self] in
+        let average = API.VehicleOccupancy.average(in: $0.0.flatMap { $0 })
+        self?.occupancyImageView.isHidden = average == nil
+        self?.occupancyImageView.image = average?.standingPeople()
+        self?.occupancyImageView.accessibilityLabel = average?.localizedTitle
+      })
+      .disposed(by: disposeBag)
   }
-  
-  private func updateAdditionalInfoSection() {
-//    if let occupancies = dataSource?.vehicleOccupancies {
-//      occupancies
-//        .subscribe(onNext: { [weak self] occupancies in
-//          if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1 {
-//            let trainView = TKUITrainOccupancyView()
-//            trainView.occupancies = occupancies
-//            self?.updateAdditionalInfoStackViewContent(with: trainView)
-//          } else if let occupancy = occupancies.first?.first, occupancy != .unknown {
-//            let occupancyView = TKUIOccupancyView(with: .occupancy(occupancy))
-//            self?.updateAdditionalInfoStackViewContent(with: occupancyView)
-//          } else {
-//            self?.updateAdditionalInfoStackViewContent(with: nil)
-//          }
-//        })
-//        .disposed(by: disposeBag)
-//
-//      additionalInfoStackView.isHidden = false
-//    } else {
-//      additionalInfoStackView.isHidden = true
-//    }
-  }
-  
-//  private func updateAdditionalInfoStackViewContent(with newView: UIView?) {
-//    additionalInfoStackView.arrangedSubviews.forEach {
-//      additionalInfoStackView.removeArrangedSubview($0)
-//      $0.removeFromSuperview()
-//    }
-//
-//    if let newView = newView {
-//      additionalInfoStackView.addArrangedSubview(newView)
-//      additionalInfoStackView.isHidden = false
-//    } else {
-//      additionalInfoStackView.isHidden = true
-//    }
-//  }
   
 }
 

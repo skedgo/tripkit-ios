@@ -50,13 +50,15 @@ class TKUIServiceHeaderMiniView: UIView {
     let alert = alerts.first
     alertImageView.isHidden = alert == nil
     alertImageView.image = alert?.icon
+    alertImageView.accessibilityLabel = alert?.title ?? Loc.Alert
 
     occupancyImageView.isHidden = true
     occupancies?
       .subscribe(onNext: { [weak self] in
         let average = API.VehicleOccupancy.average(in: $0.flatMap { $0 })
-        self?.occupancyImageView.isHidden = false
-        self?.occupancyImageView.image = average.standingPeople()
+        self?.occupancyImageView.isHidden = average == nil
+        self?.occupancyImageView.image = average?.standingPeople()
+        self?.occupancyImageView.accessibilityLabel = average?.localizedTitle
       })
       .disposed(by: disposeBag)
   }
