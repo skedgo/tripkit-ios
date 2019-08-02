@@ -17,6 +17,7 @@ public struct TKUIDepartureCellContent {
   public var imageTintColor: UIColor?
   public var modeName: String
   
+  
   public var serviceShortName: String?
   public var serviceColor: UIColor?
   public var serviceIsCancelled: Bool
@@ -93,6 +94,7 @@ class TKUIDepartureCell: UITableViewCell {
 
     titleLabel.textColor = .tkLabelSecondary
     subtitleLabel.textColor = .tkLabelSecondary
+    timeToDepartTextLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
     timeToDepartUnitLabel.textColor = .tkStateSuccess
     
     selectionIndicator.isHidden = true

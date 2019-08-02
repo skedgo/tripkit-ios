@@ -12,31 +12,31 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TKUIDepartureCell" rowHeight="114" id="KGk-i7-Jjw" customClass="TKUIDepartureCell" customModule="TripKitUI" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="435" height="114"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TKUIDepartureCell" rowHeight="96" id="KGk-i7-Jjw" customClass="TKUIDepartureCell" customModule="TripKitUI" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="435" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="435" height="113.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="435" height="95.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="pX8-va-QNb">
-                        <rect key="frame" x="16" y="20" width="178" height="73.5"/>
+                        <rect key="frame" x="16" y="16" width="178" height="63.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Pup-Ao-bJK">
-                                <rect key="frame" x="0.0" y="0.0" width="146" height="37.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="146" height="27.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z0E-F8-bjU">
-                                        <rect key="frame" x="0.0" y="9" width="20" height="20"/>
+                                        <rect key="frame" x="0.0" y="4" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="z0E-F8-bjU" secondAttribute="height" multiplier="1:1" id="HLi-ZS-F52"/>
                                             <constraint firstAttribute="width" constant="20" id="k70-7O-A6n"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="253" translatesAutoresizingMaskIntoConstraints="NO" id="wWl-tx-YGV">
-                                        <rect key="frame" x="24" y="0.0" width="50" height="37.5"/>
+                                        <rect key="frame" x="24" y="0.0" width="50" height="27.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E84" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZ8-Tg-CEt" customClass="TKUIStyledLabel">
-                                                <rect key="frame" x="4" y="0.0" width="42" height="37.5"/>
+                                                <rect key="frame" x="4" y="0.0" width="42" height="27.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                                 <nil key="highlightedColor"/>
@@ -56,21 +56,21 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert-red" translatesAutoresizingMaskIntoConstraints="NO" id="HF3-8f-hxP">
-                                        <rect key="frame" x="78" y="9" width="20" height="20"/>
+                                        <rect key="frame" x="78" y="4" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Ake-xU-IIE"/>
                                             <constraint firstAttribute="width" constant="20" id="HU7-SD-sOw"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TDC-Nm-1eo">
-                                        <rect key="frame" x="102" y="9" width="20" height="20"/>
+                                        <rect key="frame" x="102" y="4" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="9J0-L8-Ypn"/>
                                             <constraint firstAttribute="height" constant="20" id="tit-BN-2gg"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICy-nw-nCU">
-                                        <rect key="frame" x="126" y="9" width="20" height="20"/>
+                                        <rect key="frame" x="126" y="4" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="GlK-cZ-cbX"/>
                                             <constraint firstAttribute="width" constant="20" id="K6I-bY-ii0"/>
@@ -79,13 +79,13 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="On time · 3:35pm" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NG5-pD-VCL" customClass="TKUIStyledLabel">
-                                <rect key="frame" x="0.0" y="39.5" width="105.5" height="16"/>
+                                <rect key="frame" x="0.0" y="29.5" width="105.5" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Stand C · Mona Vale Junction" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yLh-U7-4mz" customClass="TKUIStyledLabel">
-                                <rect key="frame" x="0.0" y="57.5" width="178" height="16"/>
+                                <rect key="frame" x="0.0" y="47.5" width="178" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -93,7 +93,7 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iaM-1r-elk">
-                        <rect key="frame" x="379" y="38.5" width="40" height="36.5"/>
+                        <rect key="frame" x="379" y="29.5" width="40" height="36.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yhb-5V-Syb" customClass="TKUIStyledLabel">
                                 <rect key="frame" x="3" y="0.0" width="34.5" height="20.5"/>
@@ -113,7 +113,7 @@
                         </constraints>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0C-s1-6Mr">
-                        <rect key="frame" x="0.0" y="0.0" width="3" height="113.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="3" height="95.5"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="3" id="Wgp-Sh-0cE"/>
@@ -126,12 +126,12 @@
                     <constraint firstItem="iaM-1r-elk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pX8-va-QNb" secondAttribute="trailing" constant="16" id="5nE-pL-oN4"/>
                     <constraint firstItem="pX8-va-QNb" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B0X-7f-TQw"/>
                     <constraint firstItem="B0C-s1-6Mr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Cm4-mS-sKJ"/>
-                    <constraint firstItem="pX8-va-QNb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="LAW-T3-ceI"/>
+                    <constraint firstItem="pX8-va-QNb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="LAW-T3-ceI"/>
                     <constraint firstItem="B0C-s1-6Mr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YcF-vp-U4l"/>
                     <constraint firstItem="iaM-1r-elk" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="g8I-GO-do5"/>
                     <constraint firstAttribute="trailing" secondItem="iaM-1r-elk" secondAttribute="trailing" constant="16" id="ifP-8R-NKZ"/>
                     <constraint firstItem="pX8-va-QNb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="qgH-3B-Jmf"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pX8-va-QNb" secondAttribute="bottom" constant="20" id="s7S-9W-M6C"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pX8-va-QNb" secondAttribute="bottom" constant="16" id="s7S-9W-M6C"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -148,7 +148,7 @@
                 <outlet property="timeToDepartUnitLabel" destination="WIX-KC-bMq" id="mBl-3q-16U"/>
                 <outlet property="titleLabel" destination="NG5-pD-VCL" id="bju-6I-dBj"/>
             </connections>
-            <point key="canvasLocation" x="212.31884057971016" y="225.66964285714283"/>
+            <point key="canvasLocation" x="212.31884057971016" y="219.64285714285714"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -13,12 +13,12 @@
 
 import UIKit
 
-public class TKUIStyleKit : NSObject {
+class TKUIStyleKit : NSObject {
   
   //// Drawing Methods
   
 
-  @objc dynamic public class func drawOccupancyPeople(occupied: UIColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000), occupiedCount: CGFloat = 2) {
+  @objc dynamic class func drawOccupancyPeople(occupied: UIColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000), occupiedCount: CGFloat = 2) {
     //// General Declarations
     let context = UIGraphicsGetCurrentContext()!
     
@@ -97,7 +97,7 @@ public class TKUIStyleKit : NSObject {
     context.restoreGState()
   }
   
-  @objc dynamic public class func drawStandingPerson(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 4, height: 15), resizing: ResizingBehavior = .aspectFit, occupied: UIColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)) {
+  @objc dynamic class func drawStandingPerson(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 4, height: 15), resizing: ResizingBehavior = .aspectFit, occupied: UIColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)) {
     //// General Declarations
     let context = UIGraphicsGetCurrentContext()!
     
@@ -139,7 +139,7 @@ public class TKUIStyleKit : NSObject {
   
   //// Generated Images
   
-  @objc dynamic public class func imageOfOccupancyPeople(occupied: UIColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000), occupiedCount: CGFloat = 2) -> UIImage {
+  @objc dynamic class func imageOfOccupancyPeople(occupied: UIColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000), occupiedCount: CGFloat = 2) -> UIImage {
     UIGraphicsBeginImageContextWithOptions(CGSize(width: 24, height: 24), false, 0)
     TKUIStyleKit.drawOccupancyPeople(occupied: occupied, occupiedCount: occupiedCount)
     
@@ -153,13 +153,13 @@ public class TKUIStyleKit : NSObject {
   
   
   @objc(TKUIStyleKitResizingBehavior)
-  public enum ResizingBehavior: Int {
+  enum ResizingBehavior: Int {
     case aspectFit /// The content is proportionally resized to fit into the target rectangle.
     case aspectFill /// The content is proportionally resized to completely fill the target rectangle.
     case stretch /// The content is stretched to match the entire target rectangle.
     case center /// The content is centered in the target rectangle, but it is NOT resized.
     
-    public func apply(rect: CGRect, target: CGRect) -> CGRect {
+    func apply(rect: CGRect, target: CGRect) -> CGRect {
       if rect == target || target == CGRect.zero {
         return rect
       }
