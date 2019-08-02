@@ -42,6 +42,18 @@ extension TKStyleManager {
     let absoluteMinutes = abs(minutes)
     let effectiveMinutes = fuzzifyMinutes ? fuzzifiedMinutes(minutes) : minutes
     
+    func parts(components: DateComponents) -> (String, String) {
+      let formatter = DateComponentsFormatter()
+      
+      formatter.unitsStyle = .full
+      let number = formatter.string(from: components)?.trimmingCharacters(in: .letters).trimmingCharacters(in: .whitespaces) ?? ""
+      
+      formatter.unitsStyle = .brief
+      let letter = formatter.string(from: components)?.replacingOccurrences(of: number, with: "").trimmingCharacters(in: .whitespaces) ?? ""
+      
+      return (number, letter)
+    }
+    
     let durationString: String
     let number: String
     let unit: String
@@ -53,23 +65,17 @@ extension TKStyleManager {
       
     case ..<60: // less than an hour
       durationString = Date.durationString(forMinutes: effectiveMinutes)
-      let full = DateComponentsFormatter.localizedString(from: DateComponents(minute: effectiveMinutes), unitsStyle: .short) ?? ""
-      number = full.trimmingCharacters(in: .letters).trimmingCharacters(in: .whitespaces)
-      unit = full.trimmingCharacters(in: .decimalDigits).trimmingCharacters(in: .whitespaces)
+      (number, unit) = parts(components: DateComponents(minute: effectiveMinutes))
       
     case ..<1440: // less than a day
       let hours = absoluteMinutes / 60
       durationString = Date.durationString(forHours: hours)
-      let full = DateComponentsFormatter.localizedString(from: DateComponents(hour: hours), unitsStyle: .short) ?? ""
-      number = full.trimmingCharacters(in: .letters).trimmingCharacters(in: .whitespaces)
-      unit = full.trimmingCharacters(in: .decimalDigits).trimmingCharacters(in: .whitespaces)
+      (number, unit) = parts(components: DateComponents(hour: hours))
 
     default: // days
       let days = absoluteMinutes / 1440
       durationString = Date.durationString(forDays: days)
-      let full = DateComponentsFormatter.localizedString(from: DateComponents(day: days), unitsStyle: .short) ?? ""
-      number = full.trimmingCharacters(in: .letters).trimmingCharacters(in: .whitespaces)
-      unit = full.trimmingCharacters(in: .decimalDigits).trimmingCharacters(in: .whitespaces)
+      (number, unit) = parts(components: DateComponents(day: days))
     }
     
     let mode: CountdownMode
