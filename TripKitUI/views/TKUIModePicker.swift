@@ -46,6 +46,9 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   ///   - currentlyEnabled:  Optional handler to check if a mode should be enabled; by default all are enabled
   public func configure(all modes: [Item], currentlyEnabled: (Item) -> Bool = { _ in true }) {
 
+    // Need to set this first, as updating modes will trigger the observable
+    visibleModes = modes
+
     // For any new modes, use the visibility as determined by the handler
     for mode in modes where !seenModes.contains(mode) {
       seenModes.append(mode)
@@ -56,7 +59,6 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     
     // Must be called after `pickedModes` is set, so mode icon can be dimmed
     // properly.
-    visibleModes = modes
     updateUI()
     
     if let container = superview {
