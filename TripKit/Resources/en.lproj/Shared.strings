@@ -43,9 +43,6 @@
 /* Label for when a service is cancelled. */
 "Cancelled" = "Cancelled";
 
-/* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "Cannot proceed without a valid email address";
-
 /* Type of vehicle : car */
 "Car" = "Car";
 
@@ -72,9 +69,6 @@
 
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
 "Could not download supported regions from TripGo's server. Please try again later." = "Could not download supported regions from TripGo's server. Please try again later.";
-
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "Creating account";
 
 /* Current city */
 "Current City" = "Current City";
@@ -127,9 +121,6 @@
 /* Instant results proposal */
 "Instant results" = "Instant results";
 
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Invalid account";
-
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
 
@@ -157,17 +148,11 @@
 /* Type of vehicle : motorbike */
 "Motorbike" = "Motorbike";
 
-/* Title for view that shows the summary of a user's account information */
-"My account" = "My account";
-
 /* Title for name of something (or someone) */
 "Name" = "Name";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Never";
-
-/* Title of page to create new account */
-"New account" = "New account";
 
 /* Next action */
 "Next" = "Next";
@@ -203,10 +188,10 @@
 "Please verify the location" = "Please verify the location";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "Press 'search' for more...";
+"Press 'search' for more…" = "Press 'search' for more…";
 
 /* No comment provided by engineer. */
-"Read more..." = "Read more...";
+"Read more…" = "Read more…";
 
 /* Indicator for real-time information */
 "Real-time" = "Real-time";
@@ -248,7 +233,7 @@
 "Search for a city" = "Search for a city";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "Searching for '%@'...";
+"Searching for '%@'…" = "Searching for '%@'…";
 
 /* Title of page or button to sign in */
 "Sign in" = "Sign in";
@@ -259,23 +244,11 @@
 /* Title of page or button to sign up */
 "Sign up" = "Sign up";
 
-/* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Sign up cannot be completed without a valid password";
-
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Signing in";
-
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Signing out";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Starting %@";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Tap to set location";
-
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "The app will now sign out";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Tracking - off";
@@ -285,9 +258,6 @@
 
 /* user location button - follow with heading */
 "Tracking - on with heading" = "Tracking - on with heading";
-
-/* No comment provided by engineer. */
-"Unknown error" = "Unknown error";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "Up to %@";

@@ -14,7 +14,7 @@ extension Reactive where Base: TKBuzzRealTime {
 
   public static func update(_ trip: Trip) -> Single<(Trip, didUpdate: Bool)> {
     guard trip.wantsRealTimeUpdates else {
-      assertionFailure("Don't bother calling this for trips that don't want updates")
+      TKLog.debug("TKBuzzRealTime", text: "Don't bother calling this for trips that don't want updates")
       return .just((trip, false))
     }
     

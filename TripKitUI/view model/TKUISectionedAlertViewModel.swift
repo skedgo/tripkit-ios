@@ -74,15 +74,14 @@ class TKUISectionedAlertViewModel {
     return groupedModes.mapValues { mappings -> [RouteAlerts] in
       
       // Mappings are `[Alert: [Route]]`. Here we invert this to `[Route: [Alert]]`
-      let alertsByRoute: [API.Route: [API.Alert]] = mappings.reduce(into: [:]) { acc, mapping in
+      let alertsByRoute: [String: (API.Route, [API.Alert])] = mappings.reduce(into: [:]) { acc, mapping in
         mapping.routes?.forEach { route in
-          var alerts = acc[route] ?? []
-          alerts.append(mapping.alert)
-          acc[route] = alerts
+          let previously = acc[route.id, default: (route, [])]
+          acc[route.id] = (previously.0, previously.1 + [mapping.alert])
         }
       }
       return alertsByRoute.map {
-        return RouteAlerts(route: $0.key, alerts: $0.value)
+        return RouteAlerts(route: $0.value.0, alerts: $0.value.1)
       }
     }
   }
@@ -108,11 +107,6 @@ extension API.Route {
   }
 }
 
-extension API.Route: Hashable {
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
-}
 
 // MARK: -
 

@@ -73,9 +73,6 @@
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
 "Could not download supported regions from TripGo's server. Please try again later." = "Não foi possível baixar regiões apoiadas do servidor TripGo. Por favor tente de novo mais tarde.";
 
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "Criar conta";
-
 /* Current city */
 "Current City" = "Cidade atual";
 
@@ -126,9 +123,6 @@
 
 /* Instant results proposal */
 "Instant results" = "Resultado instantâneo";
-
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Conta inválida";
 
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
@@ -200,10 +194,10 @@
 "Please verify the location" = "Porfavor verifique a localizacão";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "Apertar 'pesquisa' para mais...";
+"Press 'search' for more…" = "Apertar 'pesquisa' para mais…";
 
 /* No comment provided by engineer. */
-"Read more..." = "Saiba mais...";
+"Read more…" = "Saiba mais…";
 
 /* Indicator for real-time information */
 "Real-time" = "Tempo real";
@@ -245,7 +239,7 @@
 "Search for a city" = "Procura pela cidade";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "Procurando por '%@'...";
+"Searching for '%@'…" = "Procurando por '%@'…";
 
 /* Title of page or button to sign in */
 "Sign in" = "Entrar";
@@ -262,17 +256,11 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Entrando";
 
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Saindo";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "De %@";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Toque para definir a localização";
-
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "O aplicativo vai agora fechar";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Ratreamento - desligado";

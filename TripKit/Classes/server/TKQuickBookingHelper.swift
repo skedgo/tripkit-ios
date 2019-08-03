@@ -88,31 +88,32 @@ public enum TKQuickBookingHelper {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
-  public static func fetchQuickBookings(forSegment segment: TKSegment, completion: @escaping ([TKQuickBooking]) -> Void) {
+  public static func fetchQuickBookings(for segment: TKSegment, completion: @escaping ([TKQuickBooking]?, Error?) -> Void) {
     if let stored = segment.storedQuickBookings {
-      completion(stored)
+      completion(stored, nil)
       return
     }
     
     guard let bookingsURL = segment.bookingQuickInternalURL() else {
-      completion([])
+      completion([], nil)
       return
     }
     
     TKServer.get(bookingsURL, paras: nil) { _, _, response, _, error in
       guard let array = response as? [[String: Any]], !array.isEmpty else {
-        completion([])
-        TKLog.warn("TKQuickBookingHelper", text: "Response isn't array.\nResponse: \(String(describing: response))\nError: \(String(describing: error))")
+        let error = error ?? NSError(code: 67123, message: "Expected an array, but got: \(String(describing: response))")
+        TKLog.warn("TKQuickBookingHelper", text: "Invalid server response: \(error)")
+        completion(nil, error)
         return
       }
       
       segment.storeQuickBookings(fromArray: array)
       do {
         let bookings = try JSONDecoder().decode([TKQuickBooking].self, withJSONObject: array)
-        completion(bookings)
+        completion(bookings, nil)
       } catch {
         TKLog.warn("TKQuickBookingHelper", text: "Could not parse quick bookings due to \(error)")
-        completion([])
+        completion(nil, error)
       }
     }
   }

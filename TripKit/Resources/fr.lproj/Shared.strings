@@ -73,9 +73,6 @@
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
 "Could not download supported regions from TripGo's server. Please try again later." = "Échec du téléchargement des régions disponibles sur TripGo. Veuillez réessayer plus tard.";
 
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "Création du compte";
-
 /* Current city */
 "Current City" = "Ville actuelle";
 
@@ -126,9 +123,6 @@
 
 /* Instant results proposal */
 "Instant results" = "Résultats instantanés";
-
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Compte invalide";
 
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
@@ -200,10 +194,10 @@
 "Please verify the location" = "Veuillez vérifier le lieu";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "Taper sur 'recherche' pour plus...";
+"Press 'search' for more…" = "Taper sur 'recherche' pour plus…";
 
 /* No comment provided by engineer. */
-"Read more..." = "En savoir plus...";
+"Read more…" = "En savoir plus…";
 
 /* Indicator for real-time information */
 "Real-time" = "En temps réel";
@@ -245,7 +239,7 @@
 "Search for a city" = "Recherche d'une ville";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "Recherche de '%@'...";
+"Searching for '%@'…" = "Recherche de '%@'…";
 
 /* Title of page or button to sign in */
 "Sign in" = "S'identifier";
@@ -262,17 +256,11 @@
 /* Message that indicates the app is signing users into their user accounts */
 "Signing in" = "Connexion en cours";
 
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Déconnexion en cours";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Du %@";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Appuyer pour définir la position";
-
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "L’application sera maintenant déconnectée";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Suivi - désactivé";

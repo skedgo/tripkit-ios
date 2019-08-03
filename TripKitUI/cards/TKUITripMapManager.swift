@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 
+import RxSwift
 import TGCardViewController
 
 #if TK_NO_MODULE
@@ -21,6 +22,8 @@ public protocol TKUITripMapManagerType: TGCompatibleMapManager {}
 public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
   public let trip: Trip
+  
+  private let disposeBag = DisposeBag()
   
   fileprivate weak var selectedSegment: TKSegment? {
     didSet {
@@ -44,6 +47,14 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   override public func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
     add(trip)
+    
+    NotificationCenter.default.rx
+      .notification(.TKTripUpdatedNotification, object: trip)
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.updateDynamicAnnotation(trip: self.trip)
+      })
+      .disposed(by: disposeBag)
   }
   
   override public func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
@@ -91,7 +102,6 @@ private extension TKUITripMapManager {
   
   func add(_ trip: Trip) {
     var annotations = [MKAnnotation]()
-    var dynamicAnnotations = [MKAnnotation]()
     var overlays = [MKOverlay]()
     var affectedByTraffic = false
     
@@ -109,6 +119,21 @@ private extension TKUITripMapManager {
       
       // TODO: request visits
       
+      affectedByTraffic = affectedByTraffic || segment.isAffectedByTraffic
+    }
+    
+    updateDynamicAnnotation(trip: trip)
+    
+    mapView?.showsTraffic = affectedByTraffic
+    
+    self.overlays = TKUIMapManagerHelper.sort(overlays)
+    self.annotations = annotations
+  }
+  
+  func updateDynamicAnnotation(trip: Trip) {
+    var dynamicAnnotations = [MKAnnotation]()
+    
+    for segment in trip.segments {
       // Add vehicles
       if let primary = segment.realTimeVehicle {
         dynamicAnnotations.append(primary)
@@ -116,14 +141,10 @@ private extension TKUITripMapManager {
       dynamicAnnotations.append(contentsOf: segment.realTimeAlternativeVehicles)
       
       // TODO: add alerts
-      
-      affectedByTraffic = affectedByTraffic || segment.isAffectedByTraffic
     }
-    
-    mapView?.showsTraffic = affectedByTraffic
-    
-    self.overlays = TKUIMapManagerHelper.sort(overlays)
-    self.annotations = annotations
-    self.dynamicAnnotations = dynamicAnnotations
+
+    if dynamicAnnotations.count != self.dynamicAnnotations.count {
+      self.dynamicAnnotations = dynamicAnnotations
+    }
   }
 }

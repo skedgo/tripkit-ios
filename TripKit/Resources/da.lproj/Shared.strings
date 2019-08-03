@@ -1,29 +1,38 @@
-/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
-"%@'s" = "%@s";
-
-/* No comment provided by engineer. */
-"%@'s Home" = "%@s Hjem";
-
-/* No comment provided by engineer. */
-"%@'s Work" = "%@s arbejde";
-
-/* Number of repeats. (old key: NumberRecurrences) */
-"%lu recurrences" = "%lu gentagelse";
-
 /* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
 "'%@' not found." = "%@ ikke fundet.";
 
+/* '%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@s";
+
+/* '%@' will be replaced with the person's name */
+"%@'s Home" = "%@s Hjem";
+
+/* '%@' will be replaced with the person's name */
+"%@'s Work" = "%@s arbejde";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu gentagelser";
+
 /* Authorization restricted alert message */
-"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Adgang til denne funktion er begrænset til din enhed. Kontroller appens indstillinger > Generelt > begrænsninger eller spørg din udbyder.";
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Adgang til denne funktion er begrænset til din enhed. Kontrollér appens indstillinger > Generelt > Begrænsninger eller spørg din enhedsudbyder.";
 
 /* Accessibility label for action button */
-"Action" = "Aktion";
+"Action" = "Handling";
 
 /* Default title for alert view */
 "Alert" = "Advarsel";
 
+/* Indicator that an event is all-day, or that something is open all-day */
+"all-day" = "hele døgnet";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account?" = "Har du allerede en konto?";
+
 /* Option for users if they already owned a SkedGo account */
 "Already have an account? Sign in" = "Har du allerede en konto? Log på";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "ankommer %@";
 
 /* Source where the account was derived, e.g., Facebook */
 "Authentication" = "Godkendelse";
@@ -37,32 +46,23 @@
 /* Type of vehicle : bicycle */
 "Bicycle" = "Cykel";
 
-/* Credit card CVC */
-"CVC" = "CVC";
-
 /* Cancel action */
-"Cancel" = "Fortryd";
+"Cancel" = "Annullér";
 
 /* Label for when a service is cancelled. */
-"Cancelled" = "Aflyst";
-
-/* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "Kan ikke fortsætte uden en gyldig e-mail adresse";
+"Cancelled" = "Annulleret";
 
 /* Type of vehicle : car */
 "Car" = "Bil";
 
-/* Credit card number */
-"Card No." = "Kort nr.";
-
 /* Instruction for changing password */
-"Change" = "Ændre";
+"Change" = "Ændr";
 
 /* Accessibility - user location button - hint */
-"Change tracking options" = "Ændre sporings indstillinger";
+"Change tracking options" = "Ændr sporingsindstillinger";
 
 /* Accessibility title for a checkmark/tick button */
-"Checkmark" = "Kryds af";
+"Checkmark" = "Markering";
 
 /* Close action */
 "Close" = "Luk";
@@ -70,20 +70,17 @@
 /* Title on the button that asks users to confirm if they want to proceed with booking */
 "Confirm" = "Bekræft";
 
+/* This often appears below a password field, asking users to confirm the password entered. */
+"Confirm password" = "Bekræft adgangskode";
+
 /* Title for button that allows users to contact our support team to help resolve some error in the app. */
 "Contact support" = "Kontakt support";
 
 /* Error title when GPS failed. */
-"Could not determine your current location." = "Kan ikke finde din aktuelle placering.";
+"Could not determine your current location." = "Kunne ikke finde din aktuelle placering.";
 
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
-"Could not download supported regions from TripGo's server. Please try again later." = "Kunne ikke download tilgængellige regioner fra Tripgo's server. Prøv igen senere.";
-
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "Opretter konto";
-
-/* Section title for credit card payment */
-"Credit card" = "Betalingskort";
+"Could not download supported regions from TripGo's server. Please try again later." = "Kunne ikke downloade understøttede regioner fra Tripgos server. Prøv igen senere.";
 
 /* Current city */
 "Current City" = "Nuværende by";
@@ -91,11 +88,20 @@
 /* Title for user's current location */
 "Current Location" = "Nuværende Placering";
 
+/* Class of errors usually originated from databases */
+"Data Error" = "Datafejl";
+
 /* Delete action */
 "Delete" = "Slet";
 
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "afgår %@";
+
 /* Sort by distance */
 "Distance" = "Afstand";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account?" = "Har du ikke en konto?";
 
 /* Option for users if they don't yet have a SkedGo account */
 "Don't have an account? Sign up" = "Har du ikke en konto? Tilmeld dig";
@@ -104,29 +110,49 @@
 "Done" = "Færdig";
 
 /* Drop new pin */
-"Drop new pin" = "Sæt nyt markering";
+"Drop new pin" = "Slip ny nål";
 
-/* Email address where receipt is sent
-   Email used as Facebook username */
+/* Title for the screen which allows users to edit their accounts */
+"Edit Account" = "Rediger konto";
+
+/* For email address */
 "Email" = "E-mail";
+
+/* Short indicator of end-time */
+"ends at %@" = "ender kl. %@";
+
+/* Prompt for users to enter a new password */
+"Enter a new password" = "Indtast en ny adgangskode";
+
+/* Describing any generic/unclassified errors */
+"Error" = "Fejl";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "Hver %@";
 
 /* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "Hverdag";
+"Everyday" = "Hver dag";
 
-/* Credit card expiry date */
-"Expiry Date" = "Udløbsdato";
+/* Email placeholder text */
+"example@example.com" = "example@example.com";
+
+/* Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email */
+"Failed to send" = "Afsendelse mislykkedes";
+
+/* Placeholder text for textField that asks user's first name/given name */
+"First name" = "Fornavn";
 
 /* Reminder to leave preference */
-"For when to leave" = "For hvornår at forlade";
+"For when to leave" = "For hvornår du skal tage afsted";
+
+/* A footnote that tells users we are asking for their current passwords, and why. */
+"For your security, please enter your current password." = "Indtast din nuværende adgangskode af hensyn til din sikkerhed.";
+
+/* Title for a button which allows users to reset their password */
+"Forgot password" = "Glemt adgangskode";
 
 /* Free as in beer */
 "Free" = "Ledig";
-
-/* No comment provided by engineer. */
-"Full name" = "Fulde navn";
 
 /* No comment provided by engineer. */
 "Getting a lift" = "Få et lift";
@@ -134,23 +160,32 @@
 /* Accessibility annotation for trips which have a reminder set. */
 "Has reminder" = "Har påmindelser";
 
-/* Include contacts. */
-"Include contacts" = "Inkludér komtakter";
+/* Warning message shown to a user when he/she tries to change password without the primary email verified */
+"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "For at ændre din adgangskode skal du først bekræfte din e-mail. Du bedes følge linket, der blev sendt til dig, eller anmode om et nyt nedenfor.";
 
-/* Include events. */
-"Include events" = "Inkludér begivenhed";
+/* Include contacts. */
+"Include contacts" = "Medtag kontaktpersoner";
+
+/* Button to include events in search, too. */
+"Include events" = "Medtag begivenheder";
 
 /* Instant results proposal */
 "Instant results" = "Øjeblikkelige resultater";
 
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Ugyldig konto";
+/* A footnote that instructs users to check their emails for reset instructions */
+"Instructions on how to reset password has been sent to the above email address." = "Instruktioner til, hvordan du nulstiller adgangskode, er blevet sendt til ovennævnte e-mailadresse.";
 
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
 
-/* Used when user signs in using Facebook */
-"Linking Facebook" = "Forbind med Facebook";
+/* Placeholder text for textField that asks user's last name/surname */
+"Last name" = "Efternavn";
+
+/* Last updated at %date */
+"Last updated: %@" = "Sidst opdateret %@";
+
+/* Title of button to perform some action at a later time */
+"Later" = "Senere";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Indlæser";
@@ -159,13 +194,10 @@
 "Location" = "Placering";
 
 /* Location iOS authorisation needed text */
-"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Placeringstjenester er forpligtet til at bruge denne funktion. Gå Venligst til appens indstillinger > privatliv > placeringstjenester, Sørg for de er tændt og godkend denne app.";
-
-/* Indicating a payment is in progress */
-"Making payment" = "Foretager betaling";
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Placeringstjenester er forpligtede til at bruge denne funktion. Gå til appens indstillinger > Databeskyttelse > Placeringstjenester, sørg for, at de er tændt og godkend denne app.";
 
 /* Reminder to leave preference */
-"Minutes before trip" = "Minutter før turen";
+"Minutes before trip" = "Minutter før tur";
 
 /* More results proposal */
 "More results" = "Flere resultater";
@@ -173,19 +205,11 @@
 /* Type of vehicle : motorbike */
 "Motorbike" = "Motorcykel";
 
-/* Title for view that shows the summary of a user's account information */
-"My account" = "Min konto";
-
-/* Name to which receipt is sent
-   Name used in Facebook
-   Title for name of something (or someone) */
+/* Title for name of something (or someone) */
 "Name" = "Navn";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Aldrig";
-
-/* Title for sign in view when user does not have an account */
-"New account" = "Ny konto";
 
 /* Next action */
 "Next" = "Næste";
@@ -194,7 +218,7 @@
 "No CO₂" = "Ingen CO₂";
 
 /* Indicator for wheelchair not accessible services */
-"Not wheelchair accessible" = "Not wheelchair accessible";
+"Not wheelchair accessible" = "Ikke tilgængelig for kørestolsbrugere";
 
 /* Countdown cell 'now' indicator */
 "Now" = "Nu";
@@ -202,132 +226,155 @@
 /* Ok action */
 "OK" = "OK";
 
-/* Button to open Settings app section for this app */
-"Open Settings" = "Åbn indstillinger";
-
 /* Open in Safari action */
-"Open in Safari" = "Åben i Safari";
+"Open in Safari" = "Åbn i Safari";
+
+/* Button that goes to the Setting's app */
+"Open Settings" = "Åbn indstillinger";
 
 /* No comment provided by engineer. */
 "Password" = "Adgangskode";
 
-/* Indicating a payment is successful */
-"Payment successful" = "Betaling gennemført";
-
-/* Section title for Paypal payment */
-"Paypal" = "Paypal";
+/* A footnote that asks users for their email addresses in order to reset password */
+"Please enter your registered email address. We will then send you instructions on how to reset password" = "Indtast din registrerede e-mailadresse. Vi vil derefter sende dig instruktioner til, hvordan du nulstiller adgangskode";
 
 /* Please select a location prompt */
-"Please select a location" = "Vælg venligst en placering";
+"Please select a location" = "Vælg en placering";
 
 /* Error recovery suggestion when GPS fails. */
-"Please try again or set your location manually." = "Prøv venligst igen, eller angiv din position manuelt.";
+"Please try again or set your location manually." = "Prøv igen eller indstil din placering manuelt.";
 
 /* Please verify the location prompt */
-"Please verify the location" = "Kontroller venligst placeringen";
+"Please verify the location" = "Bekræft placeringen";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "Tryk for 'Søg' for mere...";
+"Press 'search' for more…" = "Tryk på 'Søg' for mere…";
+
+/* Message to user if no primary email is set on his/her account */
+"Primary email is not set on your account. Please contact us for support" = "Primær e-mail er ikke indstillet på din konto. Du bedes kontakte os for support";
 
 /* No comment provided by engineer. */
-"Read more..." = "Læs mere...";
+"Read more…" = "Læs mere…";
 
 /* Indicator for real-time information */
-"Real-time" = "Virkelig Tid";
+"Real-time" = "Realtid";
 
-/* Title for section that asks users where payment receipt should be sent */
-"Receipt" = "Kvittering";
+/* This is the placeholder text in a text field to inform users an optioanl referral code can be entered. */
+"Referral code (optional)" = "Henvisningskode (valgfri)";
 
 /* Action title to add/remove reminder */
 "Reminder" = "Påmindelse";
 
 /* Repeats daily */
-"Repeats daily" = "Gentager dagligt";
+"Repeats daily" = "Gentages dagligt";
 
 /* Repeats monthly */
 "Repeats monthly" = "Gentages månedligt";
 
 /* Repeats weekly */
-"Repeats weekly" = "Gentager ugentligt";
+"Repeats weekly" = "Gentages ugentligt";
 
 /* Repeats yearly */
-"Repeats yearly" = "Gentager årligt";
+"Repeats yearly" = "Gentages årligt";
 
 /* Button title to report a problem */
-"Report Problem" = "Rapporter problemet";
+"Report Problem" = "Indberet problem";
+
+/* Give users an option to rece */
+"Resend verification email" = "Gensend bekræftelsesmail";
+
+/* Title for a button which, when tapped, confirms the reset of password. */
+"Reset password" = "Nulstil adgangskode";
 
 /* Retry action, e.g., in case something didn't load */
-"Retry" = "Prøv Igen";
-
-/* Sports utility vehicle abbreviation */
-"SUV" = "SUV";
+"Retry" = "Prøv igen";
 
 /* Sort by overall score, like a ranking. */
-"Score" = "Subtotal";
+"Score" = "Score";
 
 /* Empty search bar placeholder */
 "Search" = "Søg";
 
 /* No comment provided by engineer. */
-"Search Results" = "Søgeresultater";
-
-/* No comment provided by engineer. */
 "Search for a city" = "Søg efter en by";
 
-/* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "Søger efter '%@'...";
-
-/* Button that goes to the Setting's app */
-"Settings" = "Indstillinger";
-
 /* No comment provided by engineer. */
+"Search Results" = "Søgeresultater";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'…" = "Søger efter '%@'…";
+
+/* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
+"Sent" = "Sendt";
+
+/* Class of errors generated by our servers */
+"Server Error" = "Serverfejl";
+
+/* Error message when our server returns empty data in response to a network request */
+"Server response contains no data" = "Serverrespons indeholder ingen data";
+
+/* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
+"Showing %@ of %@ transport modes" = "Viser %1$@ af %2$@ transportformer";
+
+/* Title of page or button to sign in */
 "Sign in" = "Log ind";
 
 /* Instruction for signing out user account */
 "Sign out" = "Log ud";
 
-/* No comment provided by engineer. */
-"Sign up" = "Tilmeld";
-
-/* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Tilmelding kan ikke fuldføres uden en gyldig adgangskode";
-
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Logger ind";
-
-/* Message that indicates the app has successfully completed signing out
-   Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Logger ud";
+/* Title of page or button to sign up */
+"Sign up" = "Tilmeld dig";
 
 /* Starting %date. (old key: DateFromFormat) */
-"Starting %@" = "Start %@";
+"Starting %@" = "Starter %@";
+
+/* Short indicator of start-time */
+"starts at %@" = "starter kl. %@";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Tryk for at indstille placering";
 
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "Appen vil nu logge ud";
+/* Error message shown to a user when zero-length password field is detected */
+"The password field cannot be empty." = "Adgangskodefeltet kan ikke være tomt.";
+
+/* Error message shown to a user when he/she enters incorrect username or password */
+"The username or password you've entered is incorrect." = "Brugernavnet eller adgangskoden, som du har indtastet, er forkert.";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "til %@";
 
 /* Accessibility - user location button - off */
-"Tracking - off" = "Sporing - fra";
+"Tracking - off" = "Sporing - slukket";
 
 /* user location button - follow */
-"Tracking - on" = "Sporing - til";
+"Tracking - on" = "Sporing - tændt";
 
 /* user location button - follow with heading */
-"Tracking - on with heading" = "Sporing - fortsæt med overskriften";
-
-/* No comment provided by engineer. */
-"Unknown error" = "Ukendt fejl";
+"Tracking - on with heading" = "Sporing - tændt med overskrift";
 
 /* Up to %date. (old key: DateToFormat) */
-"Up to %@" = "Indtil %@";
+"Up to %@" = "Op til %@";
+
+/* Title for a button which, when tapped, proceeds to updating password */
+"Update" = "Opdatér";
 
 /* Message that shows app is updating trip after user finalised bookings */
-"Updating trip" = "Opdatere turen";
+"Updating trip" = "Opdaterer tur";
+
+/* Error message when our server fails to return userToken in response to a sign in or sign up request */
+"userToken is missing in the server response" = "userToken mangler i serversvar";
 
 /* Message that informs users that some values are missing from the required fields in a booking form. */
 "Values missing from required fields." = "Værdier mangler fra påkrævede felter.";
+
+/* Title for a button which, when tapped, proceeds to verifying password */
+"Verify" = "Bekræft";
+
+/* Prompt for users to enter their passwords for verification purpose. */
+"Verify password" = "Bekræft adgangskode";
 
 /* Every weekday in context of repetitions (especially recurring events) */
 "Weekdays" = "Hverdage";
@@ -336,47 +383,23 @@
 "Weekends" = "Weekender";
 
 /* Indicator for unknow if service or station is wheelchair accessible or not */
-"Wheelchair accessibility unknown" = "Wheelchair accessibility unknown";
+"Wheelchair accessibility unknown" = "Tilgængelighed for kørestolsbrugere ukendt";
 
 /* Indicator for wheelchair accessible services */
-"Wheelchair accessible" = "Tilgængelig med kørestol";
+"Wheelchair accessible" = "Handicapvenlig";
 
 /* Question asked when user is taking a screenshot */
-"Would you like to report a problem?" = "Ønsker du at rapportere et problem?";
+"Would you like to report a problem?" = "Ønsker du at indberette et problem?";
 
 /* Message that informs users that T&C must be agreed before booking can be made. */
-"You need to agree to the booking terms and conditions." = "Du skal acceptere bestillings betingelser og vilkår.";
+"You need to agree to the booking terms and conditions." = "Du skal acceptere booking-vilkårene og - betingelserne.";
 
 /* Message that informs users that T&C for insurance must be agreed before booking can be made. */
-"You need to agree to the insurance terms and conditions." = "Du skal accepterer forsikrings vilkår og betingelser.";
+"You need to agree to the insurance terms and conditions." = "Du skal acceptere forsikringsvilkårene og -betingelserne.";
 
 /* Calendar authorisation needed text */
-"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Du har tidligere nægtet denne app adgang til din kalender. Gå venligst til appens indstillinger > privatliv > kalender og tillad denne app til at bruge denne funktion.";
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Du har tidligere nægtet denne app adgang til din kalender. Du bedes gå til appens indstillinger > Databeskyttelse > Kalender og give denne app tilladelse til at bruge denne funktion.";
 
 /* Contacts authorisation needed text */
-"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Du har tidligere nægtet denne app adgang til dine kontakter. gå venligst til appens indstillinger > privatliv > kontakter og tillad denne app at bruge denne funktion.";
-
-/* Indicator that an event is all-day */
-"all-day" = "hele døgnet";
-
-/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
-"arrives %@" = "ankommer %@";
-
-/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
-"departs %@" = "afgår %@";
-
-/* Short indicator of end-time */
-"ends at %@" = "ender om %@";
-
-/* Email placeholder text */
-"example@example.com" = "example@example.com";
-
-/* Credit card expiry date placeholder, mm/yy */
-"mm/yy" = "mm/åå";
-
-/* Short indicator of start-time */
-"starts at %@" = "starter ved %@";
-
-/* to %date. (old key: DateToFormat) */
-"to %@" = "indtil %@";
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Du har tidligere nægtet denne app adgang til dine kontakter. Du bedes gå til appens indstillinger > Databeskyttelse > Kontakter og give denne app tilladelse til at bruge denne funktion.";
 

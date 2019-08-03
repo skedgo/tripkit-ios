@@ -19,9 +19,8 @@
 /* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
 "%@ stops" = "%@ Stops";
 
-/* For describing a time interval, e.g., '8:30 to 8:43'
-   From %time1 to %time2. (old key: TimeFromToShortFormat) */
-"%@ to %@" = "%@ bis %@";
+/* From %time1 to %time2. (old key: TimeFromToShortFormat) */
+"%@ to %@" = "Von %1$@ nach %2$@";
 
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ ohne Verkehr";
@@ -246,9 +245,6 @@
 "Live traffic" = "Live-Verkehr";
 
 /* Indicating when something is loading */
-"Loading..." = "Laden...";
-
-/* Indicating when something is loading */
 "Loading…" = "Wird geladen…";
 
 /* As in 'this bus/train has many seats available' */
@@ -321,7 +317,7 @@
 "Request support" = "Support-Anfrage";
 
 /* Error message if interregional routing isn't yet supported */
-"Routing from %@ to %@ is not yet supported" = "Routen von %1$@ nach %2$@ sind noch nicht unterstützt.";
+"Routing from %@ to %@ is not yet supported" = "Routen von %1$@ nach %2$@ werden noch nicht unterstützt";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Bitte suche erneut nach dieser Haltestelle oder versuche es später nochmal.";

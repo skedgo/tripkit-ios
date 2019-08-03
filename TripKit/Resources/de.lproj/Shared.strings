@@ -1,5 +1,5 @@
 /* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
-"'%@' not found." = "Wir konnten ‘%@' nicht finden.";
+"'%@' not found." = "‘%@' nicht gefunden.";
 
 /* '%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else. */
 "%@'s" = "%@s";
@@ -14,7 +14,7 @@
 "%lu recurrences" = "%lu Wiederholungen";
 
 /* Authorization restricted alert message */
-"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Zugriff zu diesem Feature wurde eingeschränkt. Bitte überprüfe die Einstellungen-App unter Allgemein > Einschränkungen.";
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Zugriff zu diesem Feature wurde auf deinem Gerät eingeschränkt. Bitte überprüfe die Einstellungen-App unter Allgemein > Einschränkungen.";
 
 /* Accessibility label for action button */
 "Action" = "Aktion";
@@ -26,10 +26,10 @@
 "all-day" = "ganztägig";
 
 /* Option for users if they already owned a SkedGo account */
-"Already have an account?" = "Account bereits vorhanden?";
+"Already have an account?" = "Du hast schon ein Konto?";
 
 /* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "Hast du bereits einen Account? Einloggen...";
+"Already have an account? Sign in" = "Du hast schon ein Konto? Einloggen";
 
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
 "arrives %@" = "Ankunft %@";
@@ -50,10 +50,7 @@
 "Cancel" = "Abbrechen";
 
 /* Label for when a service is cancelled. */
-"Cancelled" = "Abgesagt";
-
-/* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "E-Mailadresse ist ungültig";
+"Cancelled" = "Fällt aus";
 
 /* Type of vehicle : car */
 "Car" = "Auto";
@@ -85,9 +82,6 @@
 /* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
 "Could not download supported regions from TripGo's server. Please try again later." = "TripGo konnte die Liste der verfügbaren Städte nicht herunterladen. Bitte versuche es später noch einmal.";
 
-/* Message that indicates the app is creating accounts for users */
-"Creating account" = "Account wird erstellt...";
-
 /* Current city */
 "Current City" = "Aktuelle Stadt";
 
@@ -110,7 +104,7 @@
 "Don't have an account?" = "Noch kein Konto?";
 
 /* Option for users if they don't yet have a SkedGo account */
-"Don't have an account? Sign up" = "Du hast noch keinen Account? Anmelden...";
+"Don't have an account? Sign up" = "Du hast noch kein Konto? Registrieren";
 
 /* Done action */
 "Done" = "Fertig";
@@ -152,7 +146,7 @@
 "For when to leave" = "Wenn ich gehen muss";
 
 /* A footnote that tells users we are asking for their current passwords, and why. */
-"For your security, please enter your current password." = "Aus Sicherheitsgründen, gib bitte dein aktuelles Passwort ein.";
+"For your security, please enter your current password." = "Gib bitte aus Sicherheitsgründen dein aktuelles Passwort ein.";
 
 /* Title for a button which allows users to reset their password */
 "Forgot password" = "Zugangsdaten zurücksetzen";
@@ -167,7 +161,7 @@
 "Has reminder" = "Erinnerung aktiv";
 
 /* Warning message shown to a user when he/she tries to change password without the primary email verified */
-"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "Um dein Password zu ändern, musst du zuerst deine E-Mail-Adresse bestätigen. Bitte folge den Bestätigungslink der an dich geschickt wurde oder fordere einen neuen an.";
+"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "Um dein Password zu ändern, musst du zuerst deine E-Mail-Adresse bestätigen. Bitte klicke den Bestätigungs-Link, der an dich geschickt wurde, oder fordere einen neuen an.";
 
 /* Include contacts. */
 "Include contacts" = "Kontakte durchsuchen";
@@ -180,9 +174,6 @@
 
 /* A footnote that instructs users to check their emails for reset instructions */
 "Instructions on how to reset password has been sent to the above email address." = "Anweisungen zum Zurücksetzen deines Passworts wurden an die obige E-Mail-Adresse gesendet.";
-
-/* Title for alert that indicates the user account has become invalid */
-"Invalid account" = "Account ungültig";
 
 /* Name placeholder text */
 "John Appleseed" = "Otto Appleseed";
@@ -197,16 +188,16 @@
 "Later" = "Später";
 
 /* Title on the button that indicates to the user that booking is in progressing */
-"Loading" = "Laden";
+"Loading" = "Wird geladen";
 
 /* Title for unnamed location */
 "Location" = "Ort";
 
 /* Location iOS authorisation needed text */
-"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Ortungsdienste sind für dieses Feature benötigt. Bitte aktiviere sie in der Einstellungen-App unter Datenschutz > Ortungsdiesten.";
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Um dieses Feature nutzen zu können, aktiviere bitte Ortungsdienste in der Einstellungen-App unter Datenschutz > Ortungsdienste und stelle sicher, dass TripGo Zugriff erlaubt hat.";
 
 /* Reminder to leave preference */
-"Minutes before trip" = "Minuten vor Abfahrt";
+"Minutes before trip" = "Minuten vor Trip-Beginn";
 
 /* More results proposal */
 "More results" = "Mehr Ergebnisse";
@@ -214,17 +205,11 @@
 /* Type of vehicle : motorbike */
 "Motorbike" = "Motorrad";
 
-/* Title for view that shows the summary of a user's account information */
-"My account" = "Mein Account";
-
 /* Title for name of something (or someone) */
 "Name" = "Name";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Niemals";
-
-/* Title of page to create new account */
-"New account" = "Neuer Account";
 
 /* Next action */
 "Next" = "Weiter";
@@ -263,13 +248,13 @@
 "Please verify the location" = "Bitte Ort bestätigen";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more..." = "'Suche' für mehr drücken...";
+"Press 'search' for more…" = "'Suche' für mehr drücken…";
 
 /* Message to user if no primary email is set on his/her account */
 "Primary email is not set on your account. Please contact us for support" = "Primäre E-Mail ist nicht vorhanden. Bitte kontaktiere unseren Support";
 
 /* No comment provided by engineer. */
-"Read more..." = "Mehr lesen...";
+"Read more…" = "Mehr lesen…";
 
 /* Indicator for real-time information */
 "Real-time" = "Echtzeit";
@@ -317,7 +302,7 @@
 "Search Results" = "Suchergebnisse";
 
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'..." = "'%@' suchen...";
+"Searching for '%@'…" = "'%@' suchen…";
 
 /* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
 "Sent" = "Gesendet";
@@ -329,7 +314,7 @@
 "Server response contains no data" = "Die Serverantwort enthält keine Daten";
 
 /* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
-"Showing %@ of %@ transport modes" = "%1$@ von %2$@ Transportmodi";
+"Showing %@ of %@ transport modes" = "%1$@ von %2$@ Transportoptionen";
 
 /* Title of page or button to sign in */
 "Sign in" = "Einloggen";
@@ -339,15 +324,6 @@
 
 /* Title of page or button to sign up */
 "Sign up" = "Anmelden";
-
-/* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Passwort ungültig";
-
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Einloggen...";
-
-/* Message that indicates the app is signing users out of their accounts */
-"Signing out" = "Ausloggen...";
 
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Ab %@";
@@ -360,9 +336,6 @@
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Ort auswählen";
-
-/* Message that indicates the app is about to sign users out of their user accounts */
-"The app will now sign out" = "Ausloggen...";
 
 /* Error message shown to a user when zero-length password field is detected */
 "The password field cannot be empty." = "Das Passwortfeld darf nicht leer sein.";
@@ -381,9 +354,6 @@
 
 /* user location button - follow with heading */
 "Tracking - on with heading" = "Ortung - ein, inklusive Richtung";
-
-/* No comment provided by engineer. */
-"Unknown error" = "Unbekannter Fehler";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "bis %@";

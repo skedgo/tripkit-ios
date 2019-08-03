@@ -197,7 +197,7 @@
   SGSearchExtraRow extraRow = [self extraRowAtIndexPath:indexPath];
   switch (extraRow) {
     case SGSearchExtraRowSearchForMore:
-      cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Press 'search' for more...", @"Shared", [TKStyleManager bundle], @"Location picker 'no autocompletion results' text. Needs to match text on keyboard.");
+      cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Press 'search' for more…", @"Shared", [TKStyleManager bundle], @"Location picker 'no autocompletion results' text. Needs to match text on keyboard.");
       break;
       
     case SGSearchExtraRowProvider: {
