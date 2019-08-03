@@ -24,6 +24,8 @@ public protocol TKUIResultsCardDelegate: class {
 
 public class TKUIResultsCard: TGTableCard {
   
+  typealias RoutingModePicker = TKUIModePicker<TKRegion.RoutingMode>
+  
   public static var config = Configuration.empty
 
   public weak var resultsDelegate: TKUIResultsCardDelegate?
@@ -147,8 +149,7 @@ public class TKUIResultsCard: TGTableCard {
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
     
-    let modePicker = TKUINearbyModePicker()
-    modePicker.backgroundColor = .white
+    let modePicker = buildModePicker()
     modePicker.addAsHeader(to: tableView)
     tableView.tableFooterView = footerButton
     
@@ -191,9 +192,7 @@ public class TKUIResultsCard: TGTableCard {
 
     // Monitor progress (note: without this, we won't fetch!)
     viewModel.fetchProgress
-      .drive(onNext: { progress in
-        // TODO: Indicate loading state
-      })
+      .drive()
       .disposed(by: disposeBag)
     
     viewModel.request
@@ -304,6 +303,34 @@ extension TKUIResultsCard: UITableViewDelegate {
     return footerView
   }
   
+}
+
+// MARK: - Mode picker
+
+private extension TKUIResultsCard {
+  func buildModePicker() -> RoutingModePicker {
+    let modePicker = RoutingModePicker()
+    modePicker.backgroundColor = .white
+
+    // Arguably, this logic should be in the view model, but kept it here at
+    // first to get something working quickly.
+    let allModes = request?.spanningRegion().routingModes ?? []
+    let enabled = TKUserProfileHelper.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(allModes.map { $0.identifier })
+
+    modePicker.configure(all: allModes) { enabled.contains($0.identifier) }
+    
+    modePicker.rx_pickedModes
+      .drive(onNext: { [unowned self] enabled in
+        let enabledIDs = enabled.map { $0.identifier }
+        var hidden = allModes.map  { $0.identifier }
+        hidden.removeAll(where: enabledIDs.contains)
+        TKUserProfileHelper.updateTransportModesWithEnabledOrder(nil, minimized: nil, hidden: Set(hidden))
+        
+        self.refreshForUpdatedModes()
+      }).disposed(by: disposeBag)
+    
+    return modePicker
+  }
 }
 
 // MARK: - Navigation

@@ -1,6 +1,6 @@
 //
-//  NearbyModeSelector.swift
-//  TripGo
+//  TKUIModePicker.swift
+//  TripKitUI
 //
 //  Created by Kuan Lun Huang on 22/5/17.
 //  Copyright © 2017 SkedGo Pty Ltd. All rights reserved.
@@ -12,93 +12,63 @@ import RxCocoa
 import RxSwift
 import TripKit
 
-public struct TKUIModePickerItem {
-  let rawData: Any
-  let identifier: String?
-  let imageURL: URL?
-  let image: TKImage?
-  let imageTextRepresentation: String
-}
-
-extension TKUIModePickerItem {
-  public init(from modeInfo: TKModeInfo) {
-    rawData = modeInfo
-    identifier = modeInfo.identifier
-    imageURL = modeInfo.imageURL
-    image = modeInfo.image
-    imageTextRepresentation = modeInfo.alt
-  }
-  
-  public var modeInfo: TKModeInfo? {
-    return rawData as? TKModeInfo
-  }
-}
-
-extension TKUIModePickerItem: Comparable {
-  public static func < (lhs: TKUIModePickerItem, rhs: TKUIModePickerItem) -> Bool {
-    if let leftId = lhs.identifier, let rightId = rhs.identifier {
-      return leftId < rightId
-    } else {
-      return lhs.identifier != nil
-    }
-  }
-}
-
-extension TKUIModePickerItem: Equatable {
-  public static func == (lhs: TKUIModePickerItem, rhs: TKUIModePickerItem) -> Bool {
-    return lhs.identifier == rhs.identifier
-  }
+public protocol TKUIModePickerItem: Equatable {
+  var image: TKImage? { get }
+  var imageTextRepresentation: String { get }
+  var imageURL: URL? { get }
 }
 
 // MARK: -
-public class TKUINearbyModePicker: UIView {
+fileprivate enum Constants {
+  /// Padding on top of first and below last stack views. Note that the
+  /// separatator will pin a the bottom of the view.
+  static let viewPaddingVertical: CGFloat   =  8
   
-  private enum Constants {
-    /// Padding on top of first and below last stack views. Note that the
-    /// separatator will pin a the bottom of the view.
-    static let viewPaddingVertical: CGFloat   =  8
-    
-    /// Padding on the left and right of all stack views.
-    static let viewPaddingHorizontal: CGFloat = 16
-
-    static let modeButtonWidth: CGFloat       = 40
-    static let modeButtonSpacing: CGFloat     = 10
-    static let modeStackSpacing: CGFloat      =  8
-    static let modesPerStackView: Int         =  5
-    
-    static let separatorHeight: CGFloat       =  1
-  }
+  /// Padding on the left and right of all stack views.
+  static let viewPaddingHorizontal: CGFloat = 16
   
-  /// These are all the available/visible modes
-  var modes: [TKUIModePickerItem] = [] {
-    didSet {
-      let maximisedModes = TKUserProfileHelper.maximizedModeIdentifiers(modes.compactMap { $0.identifier })
+  static let modeButtonWidth: CGFloat       = 40
+  static let modeButtonSpacing: CGFloat     = 10
+  static let modeStackSpacing: CGFloat      =  8
+  static let modesPerStackView: Int         =  5
+  
+  static let separatorHeight: CGFloat       =  1
+}
 
-      // Whenever we encounter a new mode, default the visibility to whether it
-      // is maximised or not.
-      modes
-        .filter { !seenModes.contains($0) }
-        .map { seenModes.append($0); return $0 } // like Rx's `doOn`
-        .filter { maximisedModes.contains($0.identifier ?? "") }
-        .forEach { toggledModes.append($0) }
-      
-      // Must be called after `pickedModes` is set, so mode icon can be dimmed
-      // properly.
-      updateUI()
-      
-      if let container = superview {
-        self.frame.size.width = container.frame.width
-        container.frame.size.height = self.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-      }
-    }
-  }
+public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   
   private let disposeBag = DisposeBag()
+  
+  private var visibleModes: [Item] = []
+  
+  /// - Parameters:
+  ///   - modes: These are all the available/visible modes
+  ///   - currentlyEnabled:  Optional handler to check if a mode should be enabled; by default all are enabled
+  public func configure(all modes: [Item], currentlyEnabled: (Item) -> Bool = { _ in true }) {
+
+    // For any new modes, use the visibility as determined by the handler
+    for mode in modes where !seenModes.contains(mode) {
+      seenModes.append(mode)
+      if currentlyEnabled(mode) {
+        toggledModes.append(mode)
+      }
+    }
+    
+    // Must be called after `pickedModes` is set, so mode icon can be dimmed
+    // properly.
+    visibleModes = modes
+    updateUI()
+    
+    if let container = superview {
+      self.frame.size.width = container.frame.width
+      container.frame.size.height = self.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+    }
+  }
   
   // MARK: - Configuration
   
   private func updateUI() {
-    guard modes.count > 0 else { return }
+    guard visibleModes.count > 0 else { return }
     
     // Clean up
     removeAllSubviews()
@@ -119,7 +89,7 @@ public class TKUINearbyModePicker: UIView {
       modesPerStack = Constants.modesPerStackView
     }
 
-    for (index, mode) in modes.sorted().enumerated() {
+    for (index, mode) in visibleModes.enumerated() {
       if (index % modesPerStack) == 0 {
         // Here we need a new stack view holding another row of mode icons.
         currentModeButtonStackView = modeButtonStackView()
@@ -187,7 +157,7 @@ public class TKUINearbyModePicker: UIView {
     return button
   }
   
-  private func modeButton(for mode: TKUIModePickerItem) -> UIButton {
+  private func modeButton(for mode: Item) -> UIButton {
     let button = templateModeButton()
     button.accessibilityLabel = mode.imageTextRepresentation
     button.layer.cornerRadius = Constants.modeButtonWidth * 0.5
@@ -198,24 +168,24 @@ public class TKUINearbyModePicker: UIView {
     button.rx.tap
       .subscribe(onNext: { [unowned self] in
         let newSelected = self.toggleMode(mode)
-        TKUINearbyModePicker.styleModeButton(button, selected: newSelected)
+        TKUIModePicker.styleModeButton(button, selected: newSelected)
       })
       .disposed(by: disposeBag)
     
-    TKUINearbyModePicker.styleModeButton(button, selected: pickedModes.contains(mode))
+    TKUIModePicker.styleModeButton(button, selected: pickedModes.contains(mode))
     
     return button
   }
   
   // MARK: - Handling tap on mode icons
   
-  func toggleMode(_ mode: TKUIModePickerItem) -> Bool {
+  func toggleMode(_ mode: Item) -> Bool {
     let selected = toggledModes.contains(mode)
     setMode(mode, selected: !selected)
     return !selected
   }
   
-  func setMode(_ mode: TKUIModePickerItem, selected: Bool) {
+  func setMode(_ mode: Item, selected: Bool) {
     if selected {
       guard !toggledModes.contains(mode) else { return }
       toggledModes.append(mode)
@@ -227,14 +197,14 @@ public class TKUINearbyModePicker: UIView {
   
   /// For keeping track of what modes we've encountered before, i.e., if a mode
   /// disappears and then re-appears, we'll remember its toggled state.
-  private var seenModes: [TKUIModePickerItem] = []
+  private var seenModes: [Item] = []
 
   /// For keeping track of what modes a user has toggled on/off before. This is
   /// all the enabled modes, even though they might not currently be visible,
   /// i.e., they are not in `modes`.
-  private let rx_toggledModes = BehaviorRelay<[TKUIModePickerItem]>(value: [])
+  private let rx_toggledModes = BehaviorRelay<[Item]>(value: [])
 
-  private var toggledModes: [TKUIModePickerItem] {
+  private var toggledModes: [Item] {
     get {
       return rx_toggledModes.value
     }
@@ -243,73 +213,27 @@ public class TKUINearbyModePicker: UIView {
     }
   }
 
-  fileprivate var rx_pickedModes: Driver<[TKUIModePickerItem]> {
+  public var rx_pickedModes: Driver<[Item]> {
     return rx_toggledModes
       .asDriver()
-      .map { $0.filter(self.modes.contains) }
+      .map { [weak self] in
+        guard let self = self else { return [] }
+        return $0.filter(self.visibleModes.contains)
+      }
   }
   
   /// Visible modes that are currently enabled
-  var pickedModes: [TKUIModePickerItem] {
+  var pickedModes: [Item] {
     get {
-      return rx_toggledModes.value.filter(modes.contains)
+      return rx_toggledModes.value.filter(visibleModes.contains)
     }
   }
   
 }
 
-extension TKUINearbyModePicker {
-  public func addAsHeader(to tableView: UITableView) {
-    // constrain the picker to the width of the table view
-    frame.size.width = tableView.frame.width
-    
-    // ask the layout system for the minimum height required to
-    // display the picker in full.
-    let requiredHeight = systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-    
-    // create a wrapper that is big enough to contain the picker
-    let wrapper = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: requiredHeight))
-    wrapper.addSubview(self)
-    
-    // connect up constraints
-    translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-        topAnchor.constraint(equalTo: wrapper.topAnchor),
-        bottomAnchor.constraint(equalTo: wrapper.bottomAnchor),
-        leadingAnchor.constraint(equalTo: wrapper.leadingAnchor),
-        trailingAnchor.constraint(equalTo: wrapper.trailingAnchor)
-      ])
-    
-    // attach the wrapper to the table view as table view header
-    tableView.tableHeaderView = wrapper
-  }
-}
-
-extension TKUINearbyModePicker {
+extension TKUIModePicker {
   private static func styleModeButton(_ button: UIButton, selected: Bool) {
     button.backgroundColor = selected ? #colorLiteral(red: 0.3696880937, green: 0.6858631968, blue: 0.2820466757, alpha: 1) : .lightGray
     button.tintColor = selected ? .white : #colorLiteral(red: 0.9601849914, green: 0.9601849914, blue: 0.9601849914, alpha: 1)
-  }
-}
-
-extension TKModeInfo: Comparable {
-  public static func < (lhs: TKModeInfo, rhs: TKModeInfo) -> Bool {
-    if let leftId = lhs.identifier, let rightId = rhs.identifier {
-      return leftId < rightId
-    } else {
-      return lhs.identifier != nil
-    }
-  }
-}
-
-extension Reactive where Base: TKUINearbyModePicker {
-  public var availableModes: Binder<[TKUIModePickerItem]> {
-    return Binder(self.base) { view, modes in
-      view.modes = modes
-    }
-  }
-  
-  public var pickedModes: Driver<[TKUIModePickerItem]> {
-    return base.rx_pickedModes
   }
 }

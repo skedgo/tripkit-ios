@@ -87,15 +87,17 @@ extension TKUIResultsViewModel {
     // When changing modes, force refresh
     let refresh: Observable<BuilderInput> = inputs.changedModes.asObservable()
       .map { (date: nil, pin: nil, forceRefresh: true) }
+      .throttle(.milliseconds(250), scheduler: MainScheduler.asyncInstance)
     
     // When changing date, switch to that date
     let date: Observable<BuilderInput> = inputs.changedDate.asObservable()
+      .distinctUntilChanged()
       .map { (date: $0, pin: nil, forceRefresh: false) }
-    
+
     // When dropping pin, set it
     let pin: Observable<BuilderInput> = mapInput.droppedPin.asObservable()
       .map { (date: nil, pin: $0, forceRefresh: false) }
-    
+
     let relevantInput = Observable.merge(date, pin, refresh)
     
     return relevantInput
@@ -109,7 +111,6 @@ extension TKUIResultsViewModel {
         }
         return updated
       }
-      .distinctUntilChanged()
       .startWith(initial)
   }
   
