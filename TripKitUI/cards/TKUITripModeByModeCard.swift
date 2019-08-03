@@ -196,8 +196,8 @@ extension TKUITripModeByModeCard {
     let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= index } // exact segment might not be available!
 
     let segmentsView = TKUITripSegmentsView(frame: .zero)
-    segmentsView.darkTextColor  = .white
-    segmentsView.lightTextColor = .lightGray
+    segmentsView.darkTextColor  = .tkLabelPrimary
+    segmentsView.lightTextColor = .tkLabelSecondary
     segmentsView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: false)
     segmentsView.select(segmentAtIndex: selectedHeaderIndex ?? 0)
 
@@ -209,7 +209,7 @@ extension TKUITripModeByModeCard {
     // the label
     let label = UILabel()
     label.text = TKUITripModeByModeCard.headerTimeText(for: trip)
-    label.textColor = TKStyleManager.lightTextColor()
+    label.textColor = .tkLabelSecondary
     label.font = TKStyleManager.customFont(forTextStyle: .footnote)
     label.textAlignment = .center
     
