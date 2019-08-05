@@ -39,19 +39,12 @@ public class TKUIResultsCard: TGTableCard {
   
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   
-  private lazy var footerButton = { () -> UIButton in
-    let button = UIButton(type: .custom)
-    button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .caption1)
-    button.setTitleColor(TKStyleManager.globalTintColor(), for: .normal)
-    return button
-  }()
-  
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIResultsViewModel.Section>(
     configureCell: TKUIResultsCard.cell
   )
   
   private let changedTime = PublishSubject<TKUIResultsViewModel.RouteBuilder.Time>()
-  private let changedModes = PublishSubject<Void>()
+  private let changedModes = PublishSubject<[String]?>()
   
   public init(destination: MKAnnotation) {
     self.destination = destination
@@ -113,16 +106,13 @@ public class TKUIResultsCard: TGTableCard {
     }
     
     accessoryView.transportButton.isHidden = (resultsDelegate == nil)
-    footerButton.isEnabled = (resultsDelegate != nil)
     
     // Build the view model
-
-    let tappedModes = Signal.merge(accessoryView.transportButton.rx.tap.asSignal(), footerButton.rx.tap.asSignal())
 
     let inputs: TKUIResultsViewModel.UIInput = (
       selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asSignal(),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
-      tappedShowModes: tappedModes,
+      tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
       changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
       changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
       changedSortOrder: .empty()
@@ -151,7 +141,7 @@ public class TKUIResultsCard: TGTableCard {
     
     let modePicker = buildModePicker()
     modePicker.addAsHeader(to: tableView)
-    tableView.tableFooterView = footerButton
+    tableView.tableFooterView = UIView()
     
     // Overriding the data source with our Rx one
     // Note: explicitly reset to say we know that we'll override this with Rx
@@ -178,15 +168,22 @@ public class TKUIResultsCard: TGTableCard {
       .drive(accessoryView.timeButton.rx.title())
       .disposed(by: disposeBag)
     
-    viewModel.includedTransportModes
-      .drive(onNext: { title in
-        if let title = title {
-          self.footerButton.isHidden = false
-          self.footerButton.setTitle(title, for: .normal)
-          self.footerButton.sizeToFit()
-        } else {
-          self.footerButton.isHidden = true
-        }
+    viewModel.availableModes
+      .drive(onNext: { allModes in
+        // Arguably, this logic should be in the view model, but kept it here at
+        // first to get something working quickly.
+        let enabled = TKUserProfileHelper.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(allModes.map { $0.identifier })
+        
+        modePicker.configure(all: allModes) { enabled.contains($0.identifier) }
+      })
+      .disposed(by: disposeBag)
+    
+    changedModes.withLatestFrom(viewModel.availableModes) { ($0, $1) }
+      .subscribe(onNext: { enabled, all in
+        guard let enabled = enabled else { return }
+        var hidden = all.map  { $0.identifier }
+        hidden.removeAll(where: enabled.contains)
+        TKUserProfileHelper.updateTransportModesWithEnabledOrder(nil, minimized: nil, hidden: Set(hidden))
       })
       .disposed(by: disposeBag)
 
@@ -311,23 +308,12 @@ private extension TKUIResultsCard {
   func buildModePicker() -> RoutingModePicker {
     let modePicker = RoutingModePicker()
     modePicker.backgroundColor = .white
-
-    // Arguably, this logic should be in the view model, but kept it here at
-    // first to get something working quickly.
-    let allModes = request?.spanningRegion().routingModes ?? []
-    let enabled = TKUserProfileHelper.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(allModes.map { $0.identifier })
-
-    modePicker.configure(all: allModes) { enabled.contains($0.identifier) }
     
     modePicker.rx_pickedModes
-      .drive(onNext: { [unowned self] enabled in
-        let enabledIDs = enabled.map { $0.identifier }
-        var hidden = allModes.map  { $0.identifier }
-        hidden.removeAll(where: enabledIDs.contains)
-        TKUserProfileHelper.updateTransportModesWithEnabledOrder(nil, minimized: nil, hidden: Set(hidden))
-        
-        self.refreshForUpdatedModes()
-      }).disposed(by: disposeBag)
+      .drive(onNext: { [weak self] in
+        self?.changedModes.onNext($0.map { $0.identifier })
+      })
+      .disposed(by: disposeBag)
     
     return modePicker
   }
@@ -410,7 +396,7 @@ extension TKUIResultsCard {
   }
   
   public func refreshForUpdatedModes() {
-    changedModes.onNext(())
+    changedModes.onNext(nil)
   }
   
 }

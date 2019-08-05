@@ -23,7 +23,7 @@ public class TKUIResultsViewModel {
     tappedDate: Signal<Void>,                   // => return which date to show
     tappedShowModes: Signal<Void>,              // => return which modes to show
     changedDate: Signal<RouteBuilder.Time>,     // => update request + title
-    changedModes: Signal<Void>,                 // => update request
+    changedModes: Signal<[String]?>,            // => update request
     changedSortOrder: Signal<TKTripCostType>    // => update sorting
   )
 
@@ -88,12 +88,11 @@ public class TKUIResultsViewModel {
       .asDriver(onErrorDriveWith: .empty())
 
     timeTitle = requestChanged
-      .filter { $0 != nil }
-      .map { $0!.timeString }
+      .compactMap { $0?.timeString }
       .asDriver(onErrorDriveWith: .empty())
-
-    includedTransportModes = requestChanged
-      .map { $0?.includedTransportModes }
+    
+    availableModes = requestChanged
+      .compactMap { $0?.spanningRegion().routingModes }
       .asDriver(onErrorDriveWith: .empty())
 
     originAnnotation = builderChanged
@@ -139,8 +138,7 @@ public class TKUIResultsViewModel {
   
   let timeTitle: Driver<String>
   
-  /// Indicates the number of active transport modes
-  let includedTransportModes: Driver<String?>
+  let availableModes: Driver<[TKRegion.RoutingMode]>
   
   /// The sections to be displayed in a table view.
   ///

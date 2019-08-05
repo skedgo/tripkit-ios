@@ -19,8 +19,8 @@ extension TKRegion {
     
     fileprivate let localImageName: String
     fileprivate let remoteImageName: String?
-    fileprivate let remoteImageIsTemplate: Bool
-    fileprivate let remoteImageIsBranding: Bool
+    public let remoteImageIsTemplate: Bool
+    public let remoteImageIsBranding: Bool
   }
   
   public var routingModes: [RoutingMode] {

@@ -9,9 +9,9 @@
 import Foundation
 
 extension TKModeInfo: TKUIModePickerItem {
-  public var imageTextRepresentation: String {
-    return alt
-  }
+  public var imageURLIsTemplate: Bool { return remoteImageIsTemplate }
+  public var imageURLIsBranding: Bool { return remoteImageIsBranding }
+  public var imageTextRepresentation: String { return alt }
 }
 
 extension TKModeInfo: Comparable {

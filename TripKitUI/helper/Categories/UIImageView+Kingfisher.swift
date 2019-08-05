@@ -62,23 +62,27 @@ extension UIImageView {
 
 extension UIButton {
   
-  public func setImage(with url: URL?, for state: UIControl.State) {
-    setImage(with: url, for: state, placeholder: nil)
-  }
-  
-  @objc(setImageWithURL:forState:placeholderImage:)
-  public func setImage(with url: URL?, for state: UIControl.State, placeholder: TKImage?) {
-    
-    let options: KingfisherOptionsInfo?
+  @objc(setImageWithURL:asTemplate:placeholderImage:forState:completionHandler:)
+  public func setImage(with url: URL?, asTemplate: Bool = false, placeholder: TKImage? = nil, for state: UIControl.State = .normal, completion: ((Bool) -> Void)? = nil) {
+    var options: KingfisherOptionsInfo = []
     if let url = url, url.path.contains("@2x") {
-      options = [.scaleFactor(2)]
+      options.append(.scaleFactor(2))
     } else if let url = url, url.path.contains("@3x") {
-      options = [.scaleFactor(3)]
-    } else {
-      options = nil
+      options.append(.scaleFactor(3))
     }
     
-    kf.setImage(with: url, for: state, placeholder: placeholder, options: options)
+    if asTemplate {
+      options.append(.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate)))
+    }
+    
+    kf.setImage(with: url, for: state, placeholder: placeholder, options: options) { result in
+      switch result {
+      case .success:
+        completion?(true)
+      case .failure:
+        completion?(false)
+      }
+    }
   }
   
 }

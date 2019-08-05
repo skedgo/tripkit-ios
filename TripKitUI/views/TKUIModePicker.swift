@@ -12,10 +12,12 @@ import RxCocoa
 import RxSwift
 import TripKit
 
-public protocol TKUIModePickerItem: Equatable {
+public protocol TKUIModePickerItem: Hashable {
   var image: TKImage? { get }
   var imageTextRepresentation: String { get }
   var imageURL: URL? { get }
+  var imageURLIsTemplate: Bool { get }
+  var imageURLIsBranding: Bool { get }
 }
 
 // MARK: -
@@ -40,6 +42,8 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   private let disposeBag = DisposeBag()
   
   private var visibleModes: [Item] = []
+  
+  private var modeIsBranded: [Item: Bool] = [:]
   
   /// - Parameters:
   ///   - modes: These are all the available/visible modes
@@ -164,23 +168,33 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     button.accessibilityLabel = mode.imageTextRepresentation
     button.layer.cornerRadius = Constants.modeButtonWidth * 0.5
     
-    // Use remote icon if available
-    button.setImage(with: mode.imageURL, for: .normal, placeholder: mode.image)
+    TKUIModePicker.styleModeButton(button, selected: pickedModes.contains(mode))
+    
+    button.setImage(with: mode.imageURL, asTemplate: mode.imageURLIsTemplate, placeholder: mode.image) { [weak self] gotImage in
+      guard let self = self else { return }
+      self.modeIsBranded[mode] = gotImage
+      let selected = self.getMode(mode)
+      TKUIModePicker.styleModeButton(button, selected: selected, isBranded: mode.imageURLIsBranding && gotImage)
+    }
     
     button.rx.tap
-      .subscribe(onNext: { [unowned self] in
+      .subscribe(onNext: { [weak self] in
+        guard let self = self else { return }
         let newSelected = self.toggleMode(mode)
-        TKUIModePicker.styleModeButton(button, selected: newSelected)
+        let isBranded = self.modeIsBranded[mode] ?? false
+        TKUIModePicker.styleModeButton(button, selected: newSelected, isBranded: mode.imageURLIsBranding && isBranded)
       })
       .disposed(by: disposeBag)
-    
-    TKUIModePicker.styleModeButton(button, selected: pickedModes.contains(mode))
     
     return button
   }
   
   // MARK: - Handling tap on mode icons
-  
+
+  func getMode(_ mode: Item) -> Bool {
+    return toggledModes.contains(mode)
+  }
+
   func toggleMode(_ mode: Item) -> Bool {
     let selected = toggledModes.contains(mode)
     setMode(mode, selected: !selected)
@@ -234,8 +248,19 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
 }
 
 extension TKUIModePicker {
-  private static func styleModeButton(_ button: UIButton, selected: Bool) {
-    button.backgroundColor = selected ? #colorLiteral(red: 0.3696880937, green: 0.6858631968, blue: 0.2820466757, alpha: 1) : .lightGray
-    button.tintColor = selected ? .white : #colorLiteral(red: 0.9601849914, green: 0.9601849914, blue: 0.9601849914, alpha: 1)
+  private static func styleModeButton(_ button: UIButton, selected: Bool, isBranded: Bool = false) {
+    button.layer.borderWidth  = 2
+
+    if isBranded {
+      button.backgroundColor    = .tkBackground
+      button.layer.borderColor  = (selected ? UIColor.tkStateSuccess : .tkLabelTertiary).cgColor
+
+    } else {
+      button.backgroundColor    = selected ? .tkStateSuccess : .tkBackground
+      button.tintColor          = selected ? .tkBackground : .tkLabelTertiary
+      button.layer.borderColor  = (selected ? UIColor.tkStateSuccess : .tkLabelTertiary).cgColor
+    }
+    
+    button.alpha              = selected ? 1 : 0.3
   }
 }

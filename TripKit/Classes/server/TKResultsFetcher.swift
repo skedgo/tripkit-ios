@@ -127,16 +127,14 @@ fileprivate extension Reactive where Base : TKBuzzRouter {
         classifier: classifier,
         progress: { progress in
           observer.onNext(.partial(Int(progress), holder.count))
-          
-      }, completion: { _, error in
-        if let error = error {
-          observer.onError(error)
-        } else {
-          observer.onNext(.finished)
-          observer.onCompleted()
+        }, completion: { _, error in
+          if let error = error {
+            observer.onError(error)
+          } else {
+            observer.onNext(.finished)
+            observer.onCompleted()
+          }
         }
-        
-      }
       )
       
       holder.count = Int(count)
