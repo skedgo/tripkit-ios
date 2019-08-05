@@ -19,6 +19,9 @@ extension TKStyleManager {
   }
   
   public struct Countdown {
+    public let number: String
+    public let unit: String
+    
     public let durationText: String
     public let accessibilityLabel: String
     public let mode: CountdownMode
@@ -39,19 +42,40 @@ extension TKStyleManager {
     let absoluteMinutes = abs(minutes)
     let effectiveMinutes = fuzzifyMinutes ? fuzzifiedMinutes(minutes) : minutes
     
+    func parts(components: DateComponents) -> (String, String) {
+      let formatter = DateComponentsFormatter()
+      
+      formatter.unitsStyle = .full
+      let number = formatter.string(from: components)?.trimmingCharacters(in: .letters).trimmingCharacters(in: .whitespaces) ?? ""
+      
+      formatter.unitsStyle = .brief
+      let letter = formatter.string(from: components)?.replacingOccurrences(of: number, with: "").trimmingCharacters(in: .whitespaces) ?? ""
+      
+      return (number, letter)
+    }
+    
     let durationString: String
+    let number: String
+    let unit: String
     switch effectiveMinutes {
     case 0:
       durationString = Loc.Now
-    
+      number = "0"
+      unit = ""
+      
     case ..<60: // less than an hour
       durationString = Date.durationString(forMinutes: effectiveMinutes)
+      (number, unit) = parts(components: DateComponents(minute: effectiveMinutes))
       
     case ..<1440: // less than a day
-      durationString = Date.durationString(forHours: absoluteMinutes / 60)
-      
+      let hours = absoluteMinutes / 60
+      durationString = Date.durationString(forHours: hours)
+      (number, unit) = parts(components: DateComponents(hour: hours))
+
     default: // days
-      durationString = Date.durationString(forDays: absoluteMinutes / 1440)
+      let days = absoluteMinutes / 1440
+      durationString = Date.durationString(forDays: days)
+      (number, unit) = parts(components: DateComponents(day: days))
     }
     
     let mode: CountdownMode
@@ -69,6 +93,8 @@ extension TKStyleManager {
     }
     
     return Countdown(
+      number: number,
+      unit: unit,
       durationText: durationString,
       accessibilityLabel: accessibilityLabel,
       mode: mode

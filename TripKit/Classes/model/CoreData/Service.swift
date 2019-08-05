@@ -99,7 +99,7 @@ extension Service {
   }
 
   @objc public var modeTitle: String? {
-    return findModeInfo()?.alt
+    return findModeInfo()?.alt.localizedCapitalized
   }
   
   @objc public func modeImage(for type: TKStyleModeIconType) -> TKImage? {

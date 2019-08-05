@@ -125,7 +125,11 @@ public class Loc : NSObject {
   @objc public static var AllDay: String {
     return NSLocalizedString("all-day", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Indicator that an event is all-day, or that something is open all-day")
   }
-  
+
+  @objc public static var Scheduled: String {
+    return NSLocalizedString("Scheduled", tableName: "TripKit", bundle: .tripKit, comment: "Label to indicate that the time for a service is the scheduled time, i.e., displayed as on the timetable with no real-time data available.")
+  }
+
   @objc public static var Cancelled: String {
     return NSLocalizedString("Cancelled", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Label for when a service is cancelled.")
   }

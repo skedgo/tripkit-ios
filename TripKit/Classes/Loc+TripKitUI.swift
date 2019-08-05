@@ -30,7 +30,14 @@ extension Loc {
     return NSLocalizedString("Arrive in", tableName: "TripKit", bundle: .tripKit, comment: "Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below.")
   }
   
-  
+  public static var Expand: String {
+    return NSLocalizedString("Expand", tableName: "TripKit", bundle: .tripKit, comment: "Accessibility title for button that points down to expand a section")
+  }
+
+  public static var Collapse: String {
+    return NSLocalizedString("Collapse", tableName: "TripKit", bundle: .tripKit, comment: "Accessibility title for button that points up to collapse a section")
+  }
+
   // MARK: - Attribution
   
   public static var DataProviders: String {
