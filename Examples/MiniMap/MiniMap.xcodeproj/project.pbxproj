@@ -24,7 +24,6 @@
 		3A1498E01F0FD33F0061A0D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A1498E21F0FD33F0061A0D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A1498E81F0FD8C10061A0D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		3A5EC03E22D5ECD100187551 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
 		3ACF47162297F0D20096860D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		693FF9E30D332167BEF4BA22 /* Pods-MiniMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniMap/Pods-MiniMap.release.xcconfig"; sourceTree = "<group>"; };
 		BF0A0E7D914AE57785D3A0C8 /* Pods-MiniMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MiniMap/Pods-MiniMap.debug.xcconfig"; sourceTree = "<group>"; };
@@ -133,13 +132,11 @@
 			};
 			buildConfigurationList = 3A1498D11F0FD33F0061A0D0 /* Build configuration list for PBXProject "MiniMap" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
-				sv,
 			);
 			mainGroup = 3A1498CD1F0FD33F0061A0D0;
 			productRefGroup = 3A1498D71F0FD33F0061A0D0 /* Products */;
@@ -227,7 +224,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				3A1498E01F0FD33F0061A0D0 /* Base */,
-				3A5EC03E22D5ECD100187551 /* sv */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

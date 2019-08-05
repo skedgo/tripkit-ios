@@ -17,7 +17,14 @@ public class TKUICustomization {
   private init() { }
   
   /// The style to use for any of TGCardViewController-based controllers
-  public var cardStyle: TGCardStyle = .default
+  public var cardStyle: TGCardStyle = {
+    var style = TGCardStyle.default
+    style.backgroundColor = .tkBackground
+    style.grabHandleColor = .tkLabelTertiary
+    style.titleTextColor = .tkLabelPrimary
+    style.subtitleTextColor = .tkLabelSecondary
+    return style
+  }()
 
   /// Called whenever a view controller or card is displaying a new object,
   /// which can be used to attaching debugging information to bug reports.

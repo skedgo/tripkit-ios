@@ -46,14 +46,15 @@ public class TKUIServiceViewModel {
 
     header = withNewRealTime
       .asObservable()
-      .compactMap { TKUIDepartureCardContentModel.build(for: dataInput.embarkation) }
+      .compactMap { TKUIDepartureCellContent.build(for: dataInput.embarkation) }
       .asDriver(onErrorDriveWith: .empty())
 
     sections = Driver.combineLatest(withNewRealTime, withContent) { $1 }
       .map(TKUIServiceViewModel.buildSections)
     
     // Map content doesn't change with real-time
-    mapContent = withContent.map(TKUIServiceViewModel.buildMapContent)
+    let mapContent = withContent.map(TKUIServiceViewModel.buildMapContent)
+    self.mapContent = mapContent
     
     selectAnnotation = itemSelected
       .withLatestFrom(mapContent) { ($0, $1) }
@@ -68,7 +69,7 @@ public class TKUIServiceViewModel {
   
   /// Title view with details about the embarkation.
   /// Can change with real-time data.
-  public let header: Driver<TKUIDepartureCardContentModel>
+  public let header: Driver<TKUIDepartureCellContent>
   
   /// Sections with stops of the service, for display in a table view.
   /// Can change with real-time data.

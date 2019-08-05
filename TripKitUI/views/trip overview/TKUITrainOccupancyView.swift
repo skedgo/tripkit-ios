@@ -69,7 +69,7 @@ public class TKUITrainOccupancyView: UIView {
         }
         let image = TripKitUIBundle.imageNamed(imageName)
         let imageView = UIImageView(image: image)
-        imageView.tintColor = inner.color ?? .gray
+        imageView.tintColor = inner.color ?? .tkLabelTertiary
         stack.addArrangedSubview(imageView)
       }
     }

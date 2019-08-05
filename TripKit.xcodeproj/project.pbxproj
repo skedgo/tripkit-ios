@@ -74,6 +74,15 @@
 		3A3C9BAA1F751FF300C8D476 /* ServiceAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */; };
 		3A3C9BB61F752F9900C8D476 /* StopAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */; };
 		3A3C9BB81F75346400C8D476 /* BaseAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BB71F75346400C8D476 /* BaseAPIModels.swift */; };
+		3A40921422F0A7F80049AAE7 /* UIColor+TripKitUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40921322F0A7F80049AAE7 /* UIColor+TripKitUI.swift */; };
+		3A40922522F1A24C0049AAE7 /* TKUIServiceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40922422F1A24C0049AAE7 /* TKUIServiceHeaderView.swift */; };
+		3A40922722F1A2570049AAE7 /* TKUIServiceHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A40922622F1A2570049AAE7 /* TKUIServiceHeaderView.xib */; };
+		3A40922C22F1E27B0049AAE7 /* TKUIServiceHeaderMiniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40922A22F1E27A0049AAE7 /* TKUIServiceHeaderMiniView.swift */; };
+		3A40922D22F1E27B0049AAE7 /* TKUIServiceHeaderMiniView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A40922B22F1E27A0049AAE7 /* TKUIServiceHeaderMiniView.xib */; };
+		3A40923422F34B950049AAE7 /* TKUIStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40923322F34B950049AAE7 /* TKUIStyleKit.swift */; };
+		3A40923722F3515E0049AAE7 /* API+ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40923622F3515E0049AAE7 /* API+ViewHelpers.swift */; };
+		3A40923B22F353AE0049AAE7 /* API+ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40923A22F353AE0049AAE7 /* API+ViewHelpers.swift */; };
+		3A40923C22F353AE0049AAE7 /* API+ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40923A22F353AE0049AAE7 /* API+ViewHelpers.swift */; };
 		3A462CC12076218A00AF41EF /* TKTurnByTurnMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A462CC02076218A00AF41EF /* TKTurnByTurnMode.swift */; };
 		3A462CC22076218A00AF41EF /* TKTurnByTurnMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A462CC02076218A00AF41EF /* TKTurnByTurnMode.swift */; };
 		3A462CC42076254C00AF41EF /* TKMiniInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A462CC32076254C00AF41EF /* TKMiniInstruction.swift */; };
@@ -935,6 +944,14 @@
 		3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPIModel.swift; sourceTree = "<group>"; };
 		3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopAPIModel.swift; sourceTree = "<group>"; };
 		3A3C9BB71F75346400C8D476 /* BaseAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIModels.swift; sourceTree = "<group>"; };
+		3A40921322F0A7F80049AAE7 /* UIColor+TripKitUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+TripKitUI.swift"; path = "TripKitUI/helper/UIColor+TripKitUI.swift"; sourceTree = SOURCE_ROOT; };
+		3A40922422F1A24C0049AAE7 /* TKUIServiceHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIServiceHeaderView.swift; sourceTree = "<group>"; };
+		3A40922622F1A2570049AAE7 /* TKUIServiceHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIServiceHeaderView.xib; sourceTree = "<group>"; };
+		3A40922A22F1E27A0049AAE7 /* TKUIServiceHeaderMiniView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIServiceHeaderMiniView.swift; sourceTree = "<group>"; };
+		3A40922B22F1E27A0049AAE7 /* TKUIServiceHeaderMiniView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIServiceHeaderMiniView.xib; sourceTree = "<group>"; };
+		3A40923322F34B950049AAE7 /* TKUIStyleKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIStyleKit.swift; sourceTree = "<group>"; };
+		3A40923622F3515E0049AAE7 /* API+ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+ViewHelpers.swift"; sourceTree = "<group>"; };
+		3A40923A22F353AE0049AAE7 /* API+ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+ViewHelpers.swift"; sourceTree = "<group>"; };
 		3A462CC02076218A00AF41EF /* TKTurnByTurnMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTurnByTurnMode.swift; sourceTree = "<group>"; };
 		3A462CC32076254C00AF41EF /* TKMiniInstruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKMiniInstruction.swift; sourceTree = "<group>"; };
 		3A462CC6207626D400AF41EF /* SegmentTemplate+Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentTemplate+Parsing.swift"; sourceTree = "<group>"; };
@@ -1806,6 +1823,7 @@
 				3A6DF0D3202C8EB80084CB2C /* TKUIStyledButton.m */,
 				3A6DF0D4202C8EB80084CB2C /* TKUIStyledLabel.h */,
 				3A6DF0D2202C8EB80084CB2C /* TKUIStyledLabel.m */,
+				3A40923322F34B950049AAE7 /* TKUIStyleKit.swift */,
 				3AFCE27222E7115700090933 /* TKUITripBoyView.swift */,
 				3AFCE27022E7115700090933 /* TKUITripBoyView.xib */,
 				D3EC9E8A22EE7D810080B0E6 /* TKUIModePicker.swift */,
@@ -1822,12 +1840,14 @@
 			isa = PBXGroup;
 			children = (
 				3A6DF0BD202C8EB80084CB2C /* Categories */,
+				3A40923622F3515E0049AAE7 /* API+ViewHelpers.swift */,
 				3ABCA7E02254DF030072EB25 /* Notification+TripKitUI.swift */,
 				3ACF472E2297FBB10096860D /* NSCoder+CoreData.swift */,
 				3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */,
 				3ACF474722981FF40096860D /* TGCardViewController+Present.swift */,
 				3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */,
 				3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */,
+				3A40921322F0A7F80049AAE7 /* UIColor+TripKitUI.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -2134,6 +2154,7 @@
 			isa = PBXGroup;
 			children = (
 				3AB6C6571D1CD08E0089F687 /* classification */,
+				3A40923A22F353AE0049AAE7 /* API+ViewHelpers.swift */,
 				3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */,
 				3ABA3CCA224B5833006AD17D /* MKOverlay+NSCoding.m */,
 				3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */,
@@ -2322,6 +2343,10 @@
 			children = (
 				3ACF474322980FCB0096860D /* TKUIDeparturesAccessoryView.swift */,
 				3ACF474422980FCB0096860D /* TKUIDeparturesAccessoryView.xib */,
+				3A40922A22F1E27A0049AAE7 /* TKUIServiceHeaderMiniView.swift */,
+				3A40922B22F1E27A0049AAE7 /* TKUIServiceHeaderMiniView.xib */,
+				3A40922422F1A24C0049AAE7 /* TKUIServiceHeaderView.swift */,
+				3A40922622F1A2570049AAE7 /* TKUIServiceHeaderView.xib */,
 				3ACF47312297FC3E0096860D /* TKUIServiceTitleView.swift */,
 				3ACF47322297FC3E0096860D /* TKUIServiceTitleView.xib */,
 				3ACF47332297FC3E0096860D /* TKUIServiceTitleView+Rx.swift */,
@@ -2965,7 +2990,6 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				de,
@@ -3050,10 +3074,12 @@
 				3ACF47352297FC3E0096860D /* TKUIServiceTitleView.xib in Resources */,
 				3A0B51802240E5B6002346D6 /* TKUISegmentTitleView.xib in Resources */,
 				3A682F1F20F3F8A900E05195 /* TKUIRoutingSupportView.xib in Resources */,
+				3A40922D22F1E27B0049AAE7 /* TKUIServiceHeaderMiniView.xib in Resources */,
 				D32CA5AF20E34409009C9449 /* TKUIGroupedAlertCell.xib in Resources */,
 				3AF5F2BF20F3A829003AAEBA /* TKUITripActionView.xib in Resources */,
 				3ACF47392297FFDD0096860D /* TKUIServiceVisitCell.xib in Resources */,
 				D3F9CEC52064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib in Resources */,
+				3A40922722F1A2570049AAE7 /* TKUIServiceHeaderView.xib in Resources */,
 				3A8FAB6E20D3E28B005D4C73 /* TKUITripCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3287,6 +3313,7 @@
 				3ABBDAD32032135400205042 /* TKStyleManager.m in Sources */,
 				3ABBDA6B2032133300205042 /* AlertAPIModels.swift in Sources */,
 				3ABBDA312032132400205042 /* TKRoutingParser.m in Sources */,
+				3A40923C22F353AE0049AAE7 /* API+ViewHelpers.swift in Sources */,
 				3ABBDAB92032134D00205042 /* TKGeoJSON.swift in Sources */,
 				3ABBDB082032137600205042 /* TKSegment+Shareable.swift in Sources */,
 				3ABBDB072032137600205042 /* StopVisits+Shareable.swift in Sources */,
@@ -3405,6 +3432,7 @@
 				3AF5F2B920F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift in Sources */,
 				D32829D3212CFC06006E3D0E /* TKUIEventTrackable.swift in Sources */,
 				D335907421EF604100CB57E3 /* TKStyleManager+TripKitUI.swift in Sources */,
+				3A40922C22F1E27B0049AAE7 /* TKUIServiceHeaderMiniView.swift in Sources */,
 				3A6DF130202C8EB80084CB2C /* TKUIStyledButton.m in Sources */,
 				3A6DF117202C8EB80084CB2C /* TKUITripSegmentsView.m in Sources */,
 				3A682F2020F3F8A900E05195 /* TKUIRoutingSupportView.swift in Sources */,
@@ -3420,6 +3448,7 @@
 				3AFD397A20D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift in Sources */,
 				3AFD394620D9333500FDC7D0 /* TKUIRoutesViewController.swift in Sources */,
 				3A682F2820F49B8200E05195 /* TKUIResultsCard+Configuration.swift in Sources */,
+				3A40923722F3515E0049AAE7 /* API+ViewHelpers.swift in Sources */,
 				3A4E164522B3A08B000DD2B8 /* TKUIComposingMapManager.swift in Sources */,
 				3A6DF110202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift in Sources */,
 				3A682F2420F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift in Sources */,
@@ -3481,10 +3510,12 @@
 				3A383CB1223008AE00361596 /* TKUISegmentInstructionsView.swift in Sources */,
 				3A7013AE22413A1100F07756 /* TKUISegmentTitleView+TKSegment.swift in Sources */,
 				3AFD394D20D9333500FDC7D0 /* TKUIResultsViewModel.swift in Sources */,
+				3A40921422F0A7F80049AAE7 /* UIColor+TripKitUI.swift in Sources */,
 				3ACF473A2297FFDD0096860D /* TKUIServiceVisitCell.swift in Sources */,
 				3A39757D22857D750094F883 /* TKUIModeAnnotationView.swift in Sources */,
 				3ACF474522980FCB0096860D /* TKUIDeparturesAccessoryView.swift in Sources */,
 				3A383CB92231464500361596 /* TKUITripModeByModeCard+Configuration.swift in Sources */,
+				3A40922522F1A24C0049AAE7 /* TKUIServiceHeaderView.swift in Sources */,
 				3A7636F921F9F04700639155 /* TKUIAnnotations.swift in Sources */,
 				3A383CA6222FFE3200361596 /* TKUISegmentDirectionsCard.swift in Sources */,
 				3A6DF11E202C8EB80084CB2C /* UIColor+Variations.m in Sources */,
@@ -3498,6 +3529,7 @@
 				3A682F2220F3F8ED00E05195 /* TKUIResultsCard+Errors.swift in Sources */,
 				3A6DF14D202C8EB80084CB2C /* TKUIAlertInfoView.swift in Sources */,
 				3A6DF109202C8EB80084CB2C /* TKUIMapButtonView.swift in Sources */,
+				3A40923422F34B950049AAE7 /* TKUIStyleKit.swift in Sources */,
 				3ABCA7DF2254DE220072EB25 /* TKUITripModeByModeViewModel.swift in Sources */,
 				3A309215224DFAE2005D7E76 /* TKUIPolylineRenderer.swift in Sources */,
 				3A6E7D4020EFBD4900013253 /* TKUISegmentMovingCell.swift in Sources */,
@@ -3713,6 +3745,7 @@
 				3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */,
 				3AB6C7021D1CD08E0089F687 /* TKFakeRouter.m in Sources */,
 				3AAD87F7209B02B900C75B7E /* VehicleAPIModel.swift in Sources */,
+				3A40923B22F353AE0049AAE7 /* API+ViewHelpers.swift in Sources */,
 				3AC9A0AE1F682B6E0050217E /* TKPeliasGeocoder.swift in Sources */,
 				3AFFADFE1F06AFDD00147990 /* TKShareHelper.swift in Sources */,
 				3AA03E5F1F0BC9DB00C6B337 /* TKPermissionManager+AuthorizationAlert.m in Sources */,
