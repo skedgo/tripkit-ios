@@ -27,10 +27,11 @@ extension API {
     ///
     /// The top level array represents connected parts of the vehicle, which you can't walk through
     /// without leaving the vehicle (e.g., two trains connected together). The inner level array
-    /// represents then parts that can be walked through (e.g., the waggons of a train). A bus
+    /// represents then parts that can be walked through (e.g., the carriages of a train). A bus
     /// would have a `[[component1]]`. A train could have `[[c1, c2, c3, c4], [c5, c6, c7, c8]]`.
     ///
-    /// The arrays are ordered by direction of travel always being left-to-right, i.e., the front of the train is the very last element.
+    /// The arrays are ordered by direction of travel always being left-to-right,
+    /// i.e., the front of the train is the very last element.
     public let components: [[VehicleComponents]]?
   }
   
@@ -46,6 +47,7 @@ extension API {
     case notAcceptingPassengers = "NOT_ACCEPTING_PASSENGERS"
   }
   
+  /// Components of a vehicle, typically provided as a nested array, see `Vehicle.components`
   public struct VehicleComponents: Codable, Hashable {
     public let airConditioned: Bool?
     public let wifi: Bool?

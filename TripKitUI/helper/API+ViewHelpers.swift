@@ -10,7 +10,12 @@ import Foundation
 
 extension API.VehicleOccupancy {
   
-  public func standingPeople(occupiedColor: TKColor? = nil) -> TKImage? {
+  /// A small icon showing 4 people, where some of them are drawn in the "occupied color",
+  /// depending on occupancy.
+  ///
+  /// - Parameter occupiedColor: Colour for occupied state, defaults to 'primary label' colour
+  /// - Returns: Image or `nil` for `.unknown` occupancy
+  func standingPeople(occupiedColor: TKColor? = nil) -> TKImage? {
     var standingCount: Int? {
       switch self {
       case .unknown: return nil

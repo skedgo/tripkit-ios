@@ -10,6 +10,8 @@ import Foundation
 
 extension API.VehicleOccupancy {
   
+  /// - Parameter all: Nested vehicle components
+  /// - Returns: Average occupancy in the provided nested list of vehicle components, `nil` if no occupancy found.
   public static func average(in all: [[API.VehicleComponents]]?) -> API.VehicleOccupancy? {
     let occupancies = (all ?? [])
       .reduce(into: []) { $0.append(contentsOf: $1) }
@@ -23,6 +25,8 @@ extension API.VehicleOccupancy {
     return average(in: occupancies)
   }
   
+  /// - Parameter all: List of occupancies
+  /// - Returns: Average occupancy, `nil` if list was empty
   public static func average(in all: [API.VehicleOccupancy]) -> API.VehicleOccupancy? {
     guard !all.isEmpty else { return nil }
     let sum = all.reduce(0) { $0 + $1.intValue }
