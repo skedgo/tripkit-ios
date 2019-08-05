@@ -12,11 +12,22 @@ import RxCocoa
 import RxSwift
 import TripKit
 
+/// An item that `TKUIModePicker` can display
 public protocol TKUIModePickerItem: Hashable {
+  
+  /// The default image to show for the mode. Items without images are ignored.
   var image: TKImage? { get }
+  
+  /// A textual representation for the image. Should describe the item. Used for accessibility support.
   var imageTextRepresentation: String { get }
+  
+  /// An optional URL to an image to replace the default image
   var imageURL: URL? { get }
+  
+  /// Whether `imageURL` points at an image that can be used in template mode
   var imageURLIsTemplate: Bool { get }
+
+  /// Whether `imageURL` points at an image which should not be displayed on coloured background
   var imageURLIsBranding: Bool { get }
 }
 
@@ -37,6 +48,10 @@ fileprivate enum Constants {
   static let separatorHeight: CGFloat       =  1
 }
 
+/// Displays a list of items that the user can toggle on and off.
+///
+/// Call the `configure` method to set the available items, then attach to `rx_pickModes` to listen to changes
+/// of the user tapping on items.
 public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   
   private let disposeBag = DisposeBag()
@@ -44,10 +59,16 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   private var visibleModes: [Item] = []
   
   private var modeIsBranded: [Item: Bool] = [:]
-  
+
+  /// Configures the currently visible items
+  ///
+  /// - Note: you can call `configure` multiple times with different sets of items. The mode picker will keep track
+  ///     of which items were previously selected (or not) and maintains that information even if the items are
+  ///     temporarily removed from the `configure` method's `modes`
+  ///
   /// - Parameters:
   ///   - modes: These are all the available/visible modes
-  ///   - currentlyEnabled:  Optional handler to check if a mode should be enabled; by default all are enabled
+  ///   - currentlyEnabled:  Optional handler to check if an item should be enabled; by default all are enabled
   public func configure(all modes: [Item], currentlyEnabled: (Item) -> Bool = { _ in true }) {
 
     // Need to set this first, as updating modes will trigger the observable
