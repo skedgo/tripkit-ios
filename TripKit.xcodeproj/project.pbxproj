@@ -111,6 +111,7 @@
 		3A65B92E22F5C3E9001ACDEB /* TKUIModePicker+RoutingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A65B92D22F5C3E9001ACDEB /* TKUIModePicker+RoutingMode.swift */; };
 		3A65B92F22F5C4BC001ACDEB /* TKRegion+RoutingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A65B92B22F5B2C3001ACDEB /* TKRegion+RoutingMode.swift */; };
 		3A65B93022F5C4BC001ACDEB /* TKRegion+RoutingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A65B92B22F5B2C3001ACDEB /* TKRegion+RoutingMode.swift */; };
+		3A65B93322F5E32E001ACDEB /* TKUIModePickerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A65B93122F5E329001ACDEB /* TKUIModePickerTest.swift */; };
 		3A67698420EE3A6F0044663F /* TKUIAutocompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67698320EE3A6E0044663F /* TKUIAutocompletionViewModel.swift */; };
 		3A67698620EE3A7A0044663F /* TKUIAutocompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67698520EE3A7A0044663F /* TKUIAutocompletionViewController.swift */; };
 		3A67698820EE3B720044663F /* Array+TKAutocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67698720EE3B720044663F /* Array+TKAutocompleting.swift */; };
@@ -997,6 +998,7 @@
 		3A65B92922F5ADCC001ACDEB /* TKUIModePicker+TKModeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIModePicker+TKModeInfo.swift"; sourceTree = "<group>"; };
 		3A65B92B22F5B2C3001ACDEB /* TKRegion+RoutingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKRegion+RoutingMode.swift"; sourceTree = "<group>"; };
 		3A65B92D22F5C3E9001ACDEB /* TKUIModePicker+RoutingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIModePicker+RoutingMode.swift"; sourceTree = "<group>"; };
+		3A65B93122F5E329001ACDEB /* TKUIModePickerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIModePickerTest.swift; sourceTree = "<group>"; };
 		3A67698320EE3A6E0044663F /* TKUIAutocompletionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAutocompletionViewModel.swift; sourceTree = "<group>"; };
 		3A67698520EE3A7A0044663F /* TKUIAutocompletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAutocompletionViewController.swift; sourceTree = "<group>"; };
 		3A67698720EE3B720044663F /* Array+TKAutocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+TKAutocompleting.swift"; sourceTree = "<group>"; };
@@ -1572,6 +1574,7 @@
 			children = (
 				3A4A180C22BCCC8800CAFEC0 /* TKUIPolylineRendererStabilityTest.swift */,
 				3A21A4B22069057D005F411D /* TKUISectionedAlertsTest.swift */,
+				3A65B93122F5E329001ACDEB /* TKUIModePickerTest.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -3795,6 +3798,7 @@
 				3AA3CEB5202CD4D100E54859 /* TKGeocoderTest.swift in Sources */,
 				3AA3CEB2202CD4D100E54859 /* TKGeoJSONTest.swift in Sources */,
 				3AA3CEBD202CD4D100E54859 /* TKPolylineDecoderTest.swift in Sources */,
+				3A65B93322F5E32E001ACDEB /* TKUIModePickerTest.swift in Sources */,
 				3AA800FD218743BC008CFB6D /* TKBookingAvailabilityTest.swift in Sources */,
 				3AA3CED0202CD4D100E54859 /* TKCustomEventRecurrenceTest.swift in Sources */,
 				3AA3CEB9202CD4D100E54859 /* TKAlertModelTest.swift in Sources */,
