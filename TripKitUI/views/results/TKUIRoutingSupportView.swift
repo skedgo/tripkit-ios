@@ -25,6 +25,8 @@ public class TKUIRoutingSupportView: UIView {
       preconditionFailure("Unable to load view from nib")
     }
     
+    supportView.backgroundColor = .tkBackground
+    
     // Image view
     supportView.imageView.contentMode = .center
     supportView.imageView.image = .iconTripBoyWorker
@@ -43,7 +45,7 @@ public class TKUIRoutingSupportView: UIView {
       supportView.requestSupportButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 24, bottom: 8, right: 24)
       supportView.requestSupportButton.setTitle(Loc.RequestSupport.uppercased(), for: .normal)
       supportView.requestSupportButton.backgroundColor = TKStyleManager.globalTintColor()
-      supportView.requestSupportButton.tintColor = .white
+      supportView.requestSupportButton.tintColor = .tkBackground
     }
     
     // Bottom button

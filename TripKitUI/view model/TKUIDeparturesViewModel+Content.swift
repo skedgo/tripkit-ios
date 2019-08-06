@@ -19,7 +19,11 @@ extension TKUIDeparturesViewModel {
     public var items: [Item]
     
     public var title: String {
-      guard let timeZone = items.first?.dataModel.stop.region?.timeZone else { return "" }
+      guard
+        !Calendar.current.isDateInToday(date),
+        let timeZone = items.first?.dataModel.stop.region?.timeZone
+        else { return "" }
+
       return TKStyleManager.dateString(date, for: timeZone)
     }
   }

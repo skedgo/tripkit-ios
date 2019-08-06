@@ -87,6 +87,7 @@
             <connections>
                 <outlet property="dismissButton" destination="nv4-5c-QYr" id="ECc-j4-pAD"/>
                 <outlet property="modeIcon" destination="r1s-7w-aJM" id="nZA-ZT-ukc"/>
+                <outlet property="modeWrapper" destination="d3c-vY-icO" id="E7X-UG-4om"/>
                 <outlet property="subsubtitleLabel" destination="LXs-Kz-Uqb" id="oyk-ES-VSm"/>
                 <outlet property="subtitleLabel" destination="ccR-Sw-Z6F" id="gSY-nL-Ofu"/>
                 <outlet property="titleLabel" destination="wEO-Bf-P7i" id="dxg-Tr-QWO"/>

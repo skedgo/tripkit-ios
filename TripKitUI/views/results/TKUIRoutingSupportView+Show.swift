@@ -30,7 +30,7 @@ extension TKUIRoutingSupportView {
     let message = buildPrefilledSupportMessage(for: request) ?? NSAttributedString(string: error.localizedDescription)
     
     let supportView = TKUIRoutingSupportView.makeView(with: message, allowRoutingRequest: allowRequest)
-    supportView.backgroundColor = TKStyleManager.backgroundColorForTileList()
+    supportView.backgroundColor = .tkBackground
     supportView.translatesAutoresizingMaskIntoConstraints = false
     if let above = aboveSubview {
       view.insertSubview(supportView, aboveSubview: above)
@@ -54,14 +54,16 @@ extension TKUIRoutingSupportView {
     }
     
     // Set attributes
-    let font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    let font = TKStyleManager.boldCustomFont(forTextStyle: .body)
     
     // Build the final string
     let text = Loc.RoutingFrom(fromAddress, toIsNotYetSupported: toAddress)
     let message = NSMutableAttributedString(string: text)
     
-    let attributes = [ .foregroundColor: UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1.0),
-                       .font: font ] as [NSAttributedString.Key : Any]
+    let attributes: [NSAttributedString.Key : Any] = [
+      .foregroundColor: UIColor.tkLabelPrimary,
+                 .font: font
+    ]
     
     let fromRange = (text as NSString).range(of: fromAddress)
     message.addAttributes(attributes, range: fromRange)

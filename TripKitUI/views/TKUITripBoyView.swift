@@ -23,7 +23,7 @@ public class TKUITripBoyView: UIView {
 
   public func configure(title: String?, description: String?, actionTitle: String?, isHappy: Bool, allowRetry: Bool) {
     
-    backgroundColor = TKStyleManager.backgroundColorForTileList()
+    backgroundColor = .tkBackground
     
     titleLabel.text = title
     descriptionLabel.text = description
@@ -61,7 +61,7 @@ public class TKUITripBoyView: UIView {
     let tripBoy = TKUITripBoyView.newInstance()
     tripBoy.configure(title: title, description: error.localizedDescription, actionTitle: actionTitle, isHappy: false, allowRetry: false)
     
-    tripBoy.backgroundColor = TKStyleManager.backgroundColorForTileList()
+    tripBoy.backgroundColor = .tkBackground
     tripBoy.translatesAutoresizingMaskIntoConstraints = false
     if let above = aboveSubview {
       view.insertSubview(tripBoy, aboveSubview: above)
