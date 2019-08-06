@@ -69,16 +69,18 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   /// - Parameters:
   ///   - modes: These are all the available/visible modes
   ///   - currentlyEnabled:  Optional handler to check if an item should be enabled; by default all are enabled
-  public func configure(all modes: [Item], currentlyEnabled: (Item) -> Bool = { _ in true }) {
+  public func configure(all modes: [Item], updateAll: Bool = false, currentlyEnabled: (Item) -> Bool = { _ in true }) {
 
     // Need to set this first, as updating modes will trigger the observable
     visibleModes = modes
 
     // For any new modes, use the visibility as determined by the handler
-    for mode in modes where !seenModes.contains(mode) {
-      seenModes.append(mode)
+    for mode in modes where updateAll || !seenModes.contains(mode) {
+      seenModes.insert(mode)
       if currentlyEnabled(mode) {
-        toggledModes.append(mode)
+        toggledModes.insert(mode)
+      } else {
+        toggledModes.remove(mode)
       }
     }
     
@@ -224,24 +226,22 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   
   func setMode(_ mode: Item, selected: Bool) {
     if selected {
-      guard !toggledModes.contains(mode) else { return }
-      toggledModes.append(mode)
+      toggledModes.insert(mode)
     } else {
-      guard let position = toggledModes.firstIndex(of: mode) else { return }
-      toggledModes.remove(at: position)
+      toggledModes.remove(mode)
     }
   }
   
   /// For keeping track of what modes we've encountered before, i.e., if a mode
   /// disappears and then re-appears, we'll remember its toggled state.
-  private var seenModes: [Item] = []
+  private var seenModes: Set<Item> = []
 
   /// For keeping track of what modes a user has toggled on/off before. This is
   /// all the enabled modes, even though they might not currently be visible,
   /// i.e., they are not in `modes`.
-  private let rx_toggledModes = BehaviorRelay<[Item]>(value: [])
+  private let rx_toggledModes = BehaviorRelay<Set<Item>>(value: [])
 
-  private var toggledModes: [Item] {
+  private var toggledModes: Set<Item> {
     get {
       return rx_toggledModes.value
     }
@@ -250,9 +250,10 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     }
   }
 
-  public var rx_pickedModes: Driver<[Item]> {
+  public var rx_pickedModes: Driver<Set<Item>> {
     return rx_toggledModes
       .asDriver()
+      .distinctUntilChanged()
       .map { [weak self] in
         guard let self = self else { return [] }
         return $0.filter(self.visibleModes.contains)
@@ -260,7 +261,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   }
   
   /// Visible modes that are currently enabled
-  var pickedModes: [Item] {
+  var pickedModes: Set<Item> {
     get {
       return rx_toggledModes.value.filter(visibleModes.contains)
     }

@@ -197,6 +197,7 @@
 		3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */; };
 		3A7E6139208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
 		3A7E613B208A09070008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
+		3A84A05A22F9A68A0005D0B4 /* TKUIResultsViewModel+ToggleModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84A05922F9A68A0005D0B4 /* TKUIResultsViewModel+ToggleModes.swift */; };
 		3A84F00E1F77021200B2F9A0 /* TripGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84F00D1F77021200B2F9A0 /* TripGroup.swift */; };
 		3A879AE720CFD93700107D58 /* Alert+TKAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */; };
 		3A8B15B22282D13A005D7314 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8B15B12282D13A005D7314 /* RxRelay.framework */; };
@@ -1093,6 +1094,7 @@
 		3A78EFC622E85D1500018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Shared.strings; sourceTree = "<group>"; };
 		3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
 		3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKCalendarManager+Autocompleting.swift"; sourceTree = "<group>"; };
+		3A84A05922F9A68A0005D0B4 /* TKUIResultsViewModel+ToggleModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIResultsViewModel+ToggleModes.swift"; sourceTree = "<group>"; };
 		3A84F00D1F77021200B2F9A0 /* TripGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripGroup.swift; sourceTree = "<group>"; };
 		3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+TKAlert.swift"; sourceTree = "<group>"; };
 		3A8B15B12282D13A005D7314 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
@@ -2435,6 +2437,7 @@
 				3ABCA7CE225202EF0072EB25 /* TKUIResultsViewModel+CalculateRoutes.swift */,
 				3ABCA7CC225202500072EB25 /* TKUIResultsViewModel+Content.swift */,
 				3ABCA7CA225202130072EB25 /* TKUIResultsViewModel+RealTime.swift */,
+				3A84A05922F9A68A0005D0B4 /* TKUIResultsViewModel+ToggleModes.swift */,
 				3ADC802B2114861500A318B9 /* TKUIResultsViewModel+Restoration.swift */,
 				D39ECD88205A029500E09474 /* TKUISectionedAlertViewModel.swift */,
 				3A71027D2281A04200756FCE /* TKUISegmentDirectionsViewModel.swift */,
@@ -3547,6 +3550,7 @@
 				3A71027E2281A04200756FCE /* TKUISegmentDirectionsViewModel.swift in Sources */,
 				3A8FAB7220D3F433005D4C73 /* TKUITripCell+Rx.swift in Sources */,
 				3A682F2220F3F8ED00E05195 /* TKUIResultsCard+Errors.swift in Sources */,
+				3A84A05A22F9A68A0005D0B4 /* TKUIResultsViewModel+ToggleModes.swift in Sources */,
 				3A6DF14D202C8EB80084CB2C /* TKUIAlertInfoView.swift in Sources */,
 				3A6DF109202C8EB80084CB2C /* TKUIMapButtonView.swift in Sources */,
 				3A40923422F34B950049AAE7 /* TKUIStyleKit.swift in Sources */,

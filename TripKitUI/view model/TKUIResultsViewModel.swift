@@ -26,7 +26,6 @@ public class TKUIResultsViewModel {
     changedModes: Signal<[String]?>,            // => update request
     changedSortOrder: Signal<TKTripCostType>    // => update sorting
   )
-
   
   public typealias MapInput = (
     tappedMapRoute: Signal<MapRouteItem>,
@@ -91,8 +90,15 @@ public class TKUIResultsViewModel {
       .compactMap { $0?.timeString }
       .asDriver(onErrorDriveWith: .empty())
     
-    availableModes = requestChanged
-      .compactMap { $0?.spanningRegion().routingModes }
+    let availableFromRequest: Observable<AvailableModes> = requestChanged
+      .compactMap(TKUIResultsViewModel.buildAvailableModes)
+    
+    let availableFromChange = inputs.changedModes.asObservable()
+      .withLatestFrom(requestChanged) { ($0, $1) }
+      .compactMap(TKUIResultsViewModel.updateAvailableModes)
+
+    availableModes = Observable.merge(availableFromRequest, availableFromChange)
+      .distinctUntilChanged()
       .asDriver(onErrorDriveWith: .empty())
 
     originAnnotation = builderChanged
@@ -128,7 +134,7 @@ public class TKUIResultsViewModel {
       .withLatestFrom(builderChanged)
       .map { Next.presentDatePicker(time: $0.time, timeZone: $0.timeZone) }
       .asSignal(onErrorSignalWith: .empty())
-
+    
     next = Signal.merge(showTrip, presentTime, presentModes)
   }
   
@@ -138,7 +144,7 @@ public class TKUIResultsViewModel {
   
   let timeTitle: Driver<String>
   
-  let availableModes: Driver<[TKRegion.RoutingMode]>
+  let availableModes: Driver<AvailableModes>
   
   /// The sections to be displayed in a table view.
   ///

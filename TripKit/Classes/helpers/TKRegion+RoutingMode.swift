@@ -24,7 +24,11 @@ extension TKRegion {
   }
   
   public var routingModes: [RoutingMode] {
-    return self.modeIdentifiers.compactMap(TKRegionManager.shared.buildRoutingMode)
+    var modes = modeIdentifiers
+    if self != TKRegion.international {
+      modes += [TKTransportModeIdentifierWheelchair]
+    }
+    return modes.compactMap(TKRegionManager.shared.buildRoutingMode)
   }
   
 }

@@ -108,13 +108,17 @@ public class TKUIResultsCard: TGTableCard {
     accessoryView.transportButton.isHidden = (resultsDelegate == nil)
     
     // Build the view model
+    
+    let changedModes = self.changedModes
+      .debounce(.milliseconds(100), scheduler: MainScheduler.instance)
+      .asSignal(onErrorSignalWith: .empty())
 
     let inputs: TKUIResultsViewModel.UIInput = (
       selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asSignal(),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
       changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
-      changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
+      changedModes: changedModes,
       changedSortOrder: .empty()
     )
     
@@ -169,24 +173,11 @@ public class TKUIResultsCard: TGTableCard {
       .disposed(by: disposeBag)
     
     viewModel.availableModes
-      .drive(onNext: { allModes in
-        // Arguably, this logic should be in the view model, but kept it here at
-        // first to get something working quickly.
-        let enabled = TKUserProfileHelper.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(allModes.map { $0.identifier })
-        
-        modePicker.configure(all: allModes) { enabled.contains($0.identifier) }
+      .drive(onNext: { modes in
+        modePicker.configure(all: modes.available, updateAll: true, currentlyEnabled: modes.isEnabled)
       })
       .disposed(by: disposeBag)
     
-    changedModes.withLatestFrom(viewModel.availableModes) { ($0, $1) }
-      .subscribe(onNext: { enabled, all in
-        guard let enabled = enabled else { return }
-        var hidden = all.map  { $0.identifier }
-        hidden.removeAll(where: enabled.contains)
-        TKUserProfileHelper.updateTransportModesWithEnabledOrder(nil, minimized: nil, hidden: Set(hidden))
-      })
-      .disposed(by: disposeBag)
-
     // Monitor progress (note: without this, we won't fetch!)
     viewModel.fetchProgress
       .drive()
@@ -328,6 +319,7 @@ private extension TKUIResultsCard {
       controller?.push(TKUITripsPageCard(highlighting: trip))
       
     case .presentModes(let modes, let region):
+      
       showTransportOptions(modes: modes, for: region)
       
     case .presentDatePicker(let time, let timeZone):
