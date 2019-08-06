@@ -14,6 +14,7 @@ import TGCardViewController
 
 public class TKUISegmentTitleView: UIView {
 
+  @IBOutlet weak var modeWrapper: UIView!
   @IBOutlet weak var modeIcon: UIImageView!
   
   @IBOutlet weak var titleLabel: UILabel!

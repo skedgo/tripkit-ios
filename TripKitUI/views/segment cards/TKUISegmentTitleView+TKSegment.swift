@@ -38,7 +38,18 @@ extension TKUISegmentTitleView {
     titleLabel.text = title
     subtitleLabel.text = subtitle
     
-    modeIcon.setImage(with: segment.tripSegmentModeImageURL, asTemplate: segment.tripSegmentModeImageIsTemplate, placeholder: segment.tripSegmentModeImage)
+    modeWrapper.backgroundColor = .tkStateSuccess
+    modeWrapper.layer.borderWidth = 2
+    modeWrapper.layer.borderColor = UIColor.tkStateSuccess.cgColor
+    modeIcon.setImage(with: segment.tripSegmentModeImageURL, asTemplate: segment.tripSegmentModeImageIsTemplate, placeholder: segment.tripSegmentModeImage) { [weak self] success in
+      guard
+        let self = self,
+        success,
+        segment.tripSegmentModeImageIsBranding
+        else { return }
+
+      self.modeWrapper.backgroundColor = .tkBackground
+    }
   }
   
   private func monitorUpdates(for segment: TKSegment, preferredTitle: String?, mode: TKUISegmentMode) {
