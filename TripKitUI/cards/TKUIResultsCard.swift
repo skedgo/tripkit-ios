@@ -109,16 +109,12 @@ public class TKUIResultsCard: TGTableCard {
     
     // Build the view model
     
-    let changedModes = self.changedModes
-      .debounce(.milliseconds(100), scheduler: MainScheduler.instance)
-      .asSignal(onErrorSignalWith: .empty())
-
     let inputs: TKUIResultsViewModel.UIInput = (
       selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asSignal(),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
       changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
-      changedModes: changedModes,
+      changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
       changedSortOrder: .empty()
     )
     

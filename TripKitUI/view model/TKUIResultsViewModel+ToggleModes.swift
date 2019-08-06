@@ -36,14 +36,16 @@ extension TKUIResultsViewModel {
   
   static func updateAvailableModes(enabled: [String]?, request: TripRequest?) -> AvailableModes? {
     guard let enabled = enabled, let all = request?.spanningRegion().routingModes else { return nil }
-    
+
+    // check this first, in case that TKUserProfileHelper messes with it
+    let oldWheelchairOn = TKUserProfileHelper.showWheelchairInformation
+
     // handle regular modes
     var hidden = all.map  { $0.identifier }
     hidden.removeAll(where: enabled.contains)
     TKUserProfileHelper.updateTransportModesWithEnabledOrder(nil, minimized: nil, hidden: Set(hidden))
     
     // handle toggling wheelchair on and off
-    let oldWheelchairOn = TKUserProfileHelper.showWheelchairInformation
     let newWheelchairOn: Bool
     switch (enabled.contains(TKTransportModeIdentifierWheelchair), enabled.contains(TKTransportModeIdentifierWalking)) {
     case (true, true), (false, false): newWheelchairOn = !oldWheelchairOn
