@@ -31,9 +31,10 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
   
   weak var viewModel: TKUIResultsViewModel?
   
-  override init() {
+  init(destination: MKAnnotation? = nil) {
     super.init()
-    
+
+    self.destinationAnnotation = destination
     self.preferredZoomLevel = .road
     self.showOverlayPolygon = true
   }
@@ -105,6 +106,11 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
     
     guard let viewModel = viewModel else { assertionFailure(); return }
+    
+    let zoomTo = [originAnnotation, destinationAnnotation].compactMap { $0 }
+    if !zoomTo.isEmpty {
+      self.zoom(to: zoomTo, animated: true)
+    }
     
     viewModel.originAnnotation
       .drive(onNext: { [weak self] in self?.originAnnotation = $0 })

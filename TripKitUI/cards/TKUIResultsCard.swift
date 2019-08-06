@@ -51,7 +51,7 @@ public class TKUIResultsCard: TGTableCard {
     self.request = nil
     
     let title = Loc.PlanTrip
-    let mapManager = TKUIResultsCard.config.mapManagerFactory()
+    let mapManager = TKUIResultsCard.config.mapManagerFactory(destination)
     super.init(
       title: title, style: .grouped,
       accessoryView: accessoryView, mapManager: mapManager,
@@ -66,7 +66,7 @@ public class TKUIResultsCard: TGTableCard {
     self.request = request
 
     let title = Loc.Trips
-    let mapManager = TKUIResultsCard.config.mapManagerFactory()
+    let mapManager = TKUIResultsCard.config.mapManagerFactory(request.toLocation)
     super.init(
       title: title, style: .grouped,
       accessoryView: accessoryView, mapManager: mapManager,
@@ -159,7 +159,8 @@ public class TKUIResultsCard: TGTableCard {
     
     viewModel.selectedItem
       .drive(onNext: { [weak self] in
-        let indexPath = self?.dataSource.indexPath(of: $0)
+        guard let indexPath = self?.dataSource.indexPath(of: $0) else { return }
+        if let visible = tableView.indexPathsForVisibleRows, visible.contains(indexPath) { return }
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
       })
       .disposed(by: disposeBag)
