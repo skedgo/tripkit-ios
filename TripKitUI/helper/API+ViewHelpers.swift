@@ -19,9 +19,9 @@ extension API.VehicleOccupancy {
     var standingCount: Int? {
       switch self {
       case .unknown: return nil
-      case .empty, .manySeatsAvailable: return 0
-      case .fewSeatsAvailable: return 1
-      case .standingRoomOnly: return 2
+      case .empty, .manySeatsAvailable: return 1
+      case .fewSeatsAvailable: return 2
+      case .standingRoomOnly: return 3
       case .crushedStandingRoomOnly: return 3
       case .full, .notAcceptingPassengers: return 4
       }
