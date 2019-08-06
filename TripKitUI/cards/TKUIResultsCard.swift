@@ -295,6 +295,7 @@ extension TKUIResultsCard: UITableViewDelegate {
 private extension TKUIResultsCard {
   func buildModePicker() -> RoutingModePicker {
     let modePicker = RoutingModePicker()
+    modePicker.containerView = controller?.view
     modePicker.backgroundColor = .white
     
     modePicker.rx_pickedModes

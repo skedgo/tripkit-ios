@@ -59,6 +59,8 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   private var visibleModes: [Item] = []
   
   private var modeIsBranded: [Item: Bool] = [:]
+  
+  weak var containerView: UIView?
 
   /// Configures the currently visible items
   ///
@@ -186,30 +188,94 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     return button
   }
   
-  private func modeButton(for mode: Item) -> UIButton {
+  private func modeButton(for item: Item) -> UIButton {
     let button = templateModeButton()
-    button.accessibilityLabel = mode.imageTextRepresentation
+    button.accessibilityLabel = item.imageTextRepresentation
     button.layer.cornerRadius = Constants.modeButtonWidth * 0.5
     
-    TKUIModePicker.styleModeButton(button, selected: pickedModes.contains(mode))
+    TKUIModePicker.styleModeButton(button, selected: pickedModes.contains(item))
     
-    button.setImage(with: mode.imageURL, asTemplate: mode.imageURLIsTemplate, placeholder: mode.image) { [weak self] gotImage in
+    button.setImage(with: item.imageURL, asTemplate: item.imageURLIsTemplate, placeholder: item.image) { [weak self] gotImage in
       guard let self = self else { return }
-      self.modeIsBranded[mode] = gotImage
-      let selected = self.getMode(mode)
-      TKUIModePicker.styleModeButton(button, selected: selected, isBranded: mode.imageURLIsBranding && gotImage)
+      self.modeIsBranded[item] = gotImage
+      let selected = self.getMode(item)
+      TKUIModePicker.styleModeButton(button, selected: selected, isBranded: item.imageURLIsBranding && gotImage)
     }
     
+    button.rx.controlEvent(.touchDown)
+      .subscribe(onNext: { [weak self] in
+        self?.show(item: item, above: button)
+      })
+      .disposed(by: disposeBag)
+
+    Signal.merge([
+        button.rx.controlEvent(.touchUpInside).asSignal(),
+        button.rx.controlEvent(.touchCancel).asSignal(),
+        button.rx.controlEvent(.touchDragExit).asSignal()
+      ])
+      .emit(onNext: { [weak self] in
+        self?.hide(item: item)
+      })
+      .disposed(by: disposeBag)
+
     button.rx.tap
       .subscribe(onNext: { [weak self] in
         guard let self = self else { return }
-        let newSelected = self.toggleMode(mode)
-        let isBranded = self.modeIsBranded[mode] ?? false
-        TKUIModePicker.styleModeButton(button, selected: newSelected, isBranded: mode.imageURLIsBranding && isBranded)
+        let newSelected = self.toggleMode(item)
+        let isBranded = self.modeIsBranded[item] ?? false
+        TKUIModePicker.styleModeButton(button, selected: newSelected, isBranded: item.imageURLIsBranding && isBranded)
       })
       .disposed(by: disposeBag)
     
     return button
+  }
+  
+  // MARK: - Handling touch up and down
+  
+  private var labels = [Item: UIView]()
+  
+  private func show(item: Item, above: UIButton) {
+    guard let containerView = self.containerView else { return }
+    guard labels[item] == nil else { return }
+    
+    self.clipsToBounds = false
+    
+    let wrapper = UIView()
+    wrapper.translatesAutoresizingMaskIntoConstraints = false
+    wrapper.backgroundColor = .tkBackground
+    wrapper.layer.cornerRadius = 4
+    wrapper.layer.borderColor = UIColor.tkLabelSecondary.cgColor
+    wrapper.layer.borderWidth = 2
+    labels[item] = wrapper
+    
+    let label = UILabel()
+    label.backgroundColor = .clear
+    label.textColor = .tkLabelSecondary
+    label.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    label.text = item.imageTextRepresentation
+    label.translatesAutoresizingMaskIntoConstraints = false
+
+    wrapper.addSubview(label)
+    label.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 8).isActive = true
+    label.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 4).isActive = true
+    wrapper.trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 8).isActive = true
+    wrapper.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 4).isActive = true
+    
+    containerView.addSubview(wrapper)
+    above.topAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: 8).isActive = true
+    
+    let center = wrapper.centerXAnchor.constraint(equalTo: above.centerXAnchor)
+    center.priority = .defaultHigh
+    center.isActive = true
+    
+    wrapper.leadingAnchor.constraint(greaterThanOrEqualTo: containerView.leadingAnchor).isActive = true
+    containerView.trailingAnchor.constraint(greaterThanOrEqualTo: wrapper.trailingAnchor).isActive = true
+  }
+  
+  private func hide(item: Item) {
+    guard let label = labels[item] else { return }
+    label.removeFromSuperview()
+    labels[item] = nil
   }
   
   // MARK: - Handling tap on mode icons
