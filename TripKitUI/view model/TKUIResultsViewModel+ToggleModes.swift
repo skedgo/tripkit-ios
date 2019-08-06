@@ -11,6 +11,8 @@ import Foundation
 extension TKUIResultsViewModel {
   
   struct AvailableModes: Equatable {
+    static let none = AvailableModes(available: [], enabled: [])
+    
     let available: [TKRegion.RoutingMode]
     fileprivate let enabled: Set<String>
     

@@ -77,14 +77,16 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     visibleModes = modes
 
     // For any new modes, use the visibility as determined by the handler
+    var toggled = self.toggledModes
     for mode in modes where updateAll || !seenModes.contains(mode) {
       seenModes.insert(mode)
       if currentlyEnabled(mode) {
-        toggledModes.insert(mode)
+        toggled.insert(mode)
       } else {
-        toggledModes.remove(mode)
+        toggled.remove(mode)
       }
     }
+    toggledModes = toggled
     
     // Must be called after `pickedModes` is set, so mode icon can be dimmed
     // properly.
@@ -224,6 +226,8 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
         let newSelected = self.toggleMode(item)
         let isBranded = self.modeIsBranded[item] ?? false
         TKUIModePicker.styleModeButton(button, selected: newSelected, isBranded: item.imageURLIsBranding && isBranded)
+        
+        self.tap.onNext(())
       })
       .disposed(by: disposeBag)
     
@@ -305,31 +309,23 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   /// For keeping track of what modes a user has toggled on/off before. This is
   /// all the enabled modes, even though they might not currently be visible,
   /// i.e., they are not in `modes`.
-  private let rx_toggledModes = BehaviorRelay<Set<Item>>(value: [])
+  private var toggledModes: Set<Item> = []
+  
+  private let tap = PublishSubject<Void>()
 
-  private var toggledModes: Set<Item> {
-    get {
-      return rx_toggledModes.value
-    }
-    set {
-      rx_toggledModes.accept(newValue)
-    }
-  }
-
-  public var rx_pickedModes: Driver<Set<Item>> {
-    return rx_toggledModes
-      .asDriver()
-      .distinctUntilChanged()
+  public var rx_pickedModes: Signal<Set<Item>> {
+    return tap
       .map { [weak self] in
         guard let self = self else { return [] }
-        return $0.filter(self.visibleModes.contains)
+        return self.toggledModes.filter(self.visibleModes.contains)
       }
+      .asSignal(onErrorSignalWith: .empty())
   }
   
   /// Visible modes that are currently enabled
   var pickedModes: Set<Item> {
     get {
-      return rx_toggledModes.value.filter(visibleModes.contains)
+      return toggledModes.filter(visibleModes.contains)
     }
   }
   

@@ -22,6 +22,7 @@ public class TKUIResultsViewModel {
     selected: Signal<Item>,                     // => do .next
     tappedDate: Signal<Void>,                   // => return which date to show
     tappedShowModes: Signal<Void>,              // => return which modes to show
+    tappedShowModeOptions: Signal<Void>,        // => trigger mode configurator
     changedDate: Signal<RouteBuilder.Time>,     // => update request + title
     changedModes: Signal<[String]?>,            // => update request
     changedSortOrder: Signal<TKTripCostType>    // => update sorting
@@ -96,9 +97,19 @@ public class TKUIResultsViewModel {
     let availableFromChange = inputs.changedModes.asObservable()
       .withLatestFrom(requestChanged) { ($0, $1) }
       .compactMap(TKUIResultsViewModel.updateAvailableModes)
-
-    availableModes = Observable.merge(availableFromRequest, availableFromChange)
+    
+    let available = Observable.merge(availableFromRequest, availableFromChange)
       .distinctUntilChanged()
+    
+    let showModes = inputs.tappedShowModes.scan(false) { acc, _ in !acc }.asObservable()
+
+    availableModes = Observable.combineLatest(available, showModes) { available, show in
+        if show {
+          return available
+        } else {
+          return .none
+        }
+      }
       .asDriver(onErrorDriveWith: .empty())
 
     originAnnotation = builderChanged
@@ -122,11 +133,11 @@ public class TKUIResultsViewModel {
       .map { Next.showTrip($0.trip!) }
     
     let modeInput = Observable.combineLatest(requestChanged, builderChanged)
-    let presentModes = inputs.tappedShowModes.asObservable()
+    let presentModes = inputs.tappedShowModeOptions.asObservable()
       .withLatestFrom(modeInput) { (_, tuple) -> Next in
         let modes = tuple.0?.applicableModeIdentifiers() ?? []
         let region = TKUIResultsViewModel.regionForModes(for: tuple.1)
-        return Next.presentModes(modes: modes, region: region)
+        return Next.presentModeConfigurator(modes: modes, region: region)
       }
       .asSignal(onErrorSignalWith: .empty())
     
@@ -191,7 +202,7 @@ public class TKUIResultsViewModel {
 extension TKUIResultsViewModel {
   enum Next {
     case showTrip(Trip)
-    case presentModes(modes: [String], region: TKRegion)
+    case presentModeConfigurator(modes: [String], region: TKRegion)
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
   }
 }

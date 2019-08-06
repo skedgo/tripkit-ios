@@ -38,6 +38,7 @@ public class TKUIResultsCard: TGTableCard {
   private var realTimeBag = DisposeBag()
   
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
+  private weak var modePicker: RoutingModePicker?
   
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIResultsViewModel.Section>(
     configureCell: TKUIResultsCard.cell
@@ -105,14 +106,13 @@ public class TKUIResultsCard: TGTableCard {
         preconditionFailure()
     }
     
-    accessoryView.transportButton.isHidden = (resultsDelegate == nil)
-    
     // Build the view model
     
     let inputs: TKUIResultsViewModel.UIInput = (
       selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asSignal(),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
+      tappedShowModeOptions: .empty(),
       changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
       changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
       changedSortOrder: .empty()
@@ -139,10 +139,8 @@ public class TKUIResultsCard: TGTableCard {
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
     
-    let modePicker = buildModePicker()
-    modePicker.addAsHeader(to: tableView)
     tableView.tableFooterView = UIView()
-    
+
     // Overriding the data source with our Rx one
     // Note: explicitly reset to say we know that we'll override this with Rx
     tableView.dataSource = nil
@@ -170,9 +168,7 @@ public class TKUIResultsCard: TGTableCard {
       .disposed(by: disposeBag)
     
     viewModel.availableModes
-      .drive(onNext: { modes in
-        modePicker.configure(all: modes.available, updateAll: true, currentlyEnabled: modes.isEnabled)
-      })
+      .drive(onNext: { [weak self] in self?.updateModePicker($0, in: tableView) })
       .disposed(by: disposeBag)
     
     // Monitor progress (note: without this, we won't fetch!)
@@ -293,13 +289,30 @@ extension TKUIResultsCard: UITableViewDelegate {
 // MARK: - Mode picker
 
 private extension TKUIResultsCard {
+  func updateModePicker(_ modes: TKUIResultsViewModel.AvailableModes, in tableView: UITableView) {
+    if modes.available.isEmpty {
+      tableView.tableHeaderView = nil
+      
+    } else {
+      let modePicker: RoutingModePicker
+      if let existing = self.modePicker {
+        modePicker = existing
+      } else {
+        modePicker = self.buildModePicker()
+        modePicker.addAsHeader(to: tableView)
+        self.modePicker = modePicker
+      }
+      modePicker.configure(all: modes.available, updateAll: true, currentlyEnabled: modes.isEnabled)
+    }
+  }
+  
   func buildModePicker() -> RoutingModePicker {
     let modePicker = RoutingModePicker()
     modePicker.containerView = controller?.view
-    modePicker.backgroundColor = .white
+    modePicker.backgroundColor = .tkBackground
     
     modePicker.rx_pickedModes
-      .drive(onNext: { [weak self] in
+      .emit(onNext: { [weak self] in
         self?.changedModes.onNext($0.map { $0.identifier })
       })
       .disposed(by: disposeBag)
@@ -316,8 +329,7 @@ private extension TKUIResultsCard {
     case .showTrip(let trip):
       controller?.push(TKUITripsPageCard(highlighting: trip))
       
-    case .presentModes(let modes, let region):
-      
+    case .presentModeConfigurator(let modes, let region):      
       showTransportOptions(modes: modes, for: region)
       
     case .presentDatePicker(let time, let timeZone):
