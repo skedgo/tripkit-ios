@@ -132,7 +132,7 @@ extension TKRegionManager {
   
 }
 
-// MARK: - Getting mode details {
+// MARK: - Getting mode details
 
 extension TKRegionManager {
 
@@ -201,8 +201,10 @@ extension TKRegionManager {
     }
   }
   
+  func remoteImageName(forModeIdentifier mode: String) -> String? {
+    return response?.modes?[mode]?.icon
+  }
 
-  
   @objc(imageURLForModeIdentifier:ofIconType:)
   public func imageURL(forModeIdentifier mode: String?, iconType: TKStyleModeIconType) -> URL? {
     guard

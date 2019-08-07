@@ -69,7 +69,7 @@ extension TKUIResultsViewModel {
     fileprivate(set) var origin: TKNamedCoordinate?
     fileprivate(set) var destination: TKNamedCoordinate?
     fileprivate(set) var time: Time
-    
+
     fileprivate static var empty = RouteBuilder(mode: .destination)
   }
   
@@ -83,19 +83,20 @@ extension TKUIResultsViewModel {
     
     typealias BuilderInput = (date: RouteBuilder.Time?, pin: CLLocationCoordinate2D?, forceRefresh: Bool)
     
-    // TODO: When pulling to refresh, rebuild
     // When changing modes, force refresh
     let refresh: Observable<BuilderInput> = inputs.changedModes.asObservable()
-      .map { (date: nil, pin: nil, forceRefresh: true) }
+      .map { _ in (date: nil, pin: nil, forceRefresh: true) }
+      .debounce(.milliseconds(250), scheduler: MainScheduler.instance)
     
     // When changing date, switch to that date
     let date: Observable<BuilderInput> = inputs.changedDate.asObservable()
+      .distinctUntilChanged()
       .map { (date: $0, pin: nil, forceRefresh: false) }
-    
+
     // When dropping pin, set it
     let pin: Observable<BuilderInput> = mapInput.droppedPin.asObservable()
       .map { (date: nil, pin: $0, forceRefresh: false) }
-    
+
     let relevantInput = Observable.merge(date, pin, refresh)
     
     return relevantInput
@@ -109,7 +110,6 @@ extension TKUIResultsViewModel {
         }
         return updated
       }
-      .distinctUntilChanged()
       .startWith(initial)
   }
   

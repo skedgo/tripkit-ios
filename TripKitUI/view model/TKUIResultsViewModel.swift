@@ -22,11 +22,11 @@ public class TKUIResultsViewModel {
     selected: Signal<Item>,                     // => do .next
     tappedDate: Signal<Void>,                   // => return which date to show
     tappedShowModes: Signal<Void>,              // => return which modes to show
+    tappedShowModeOptions: Signal<Void>,        // => trigger mode configurator
     changedDate: Signal<RouteBuilder.Time>,     // => update request + title
-    changedModes: Signal<Void>,                 // => update request
+    changedModes: Signal<[String]?>,            // => update request
     changedSortOrder: Signal<TKTripCostType>    // => update sorting
   )
-
   
   public typealias MapInput = (
     tappedMapRoute: Signal<MapRouteItem>,
@@ -88,12 +88,28 @@ public class TKUIResultsViewModel {
       .asDriver(onErrorDriveWith: .empty())
 
     timeTitle = requestChanged
-      .filter { $0 != nil }
-      .map { $0!.timeString }
+      .compactMap { $0?.timeString }
       .asDriver(onErrorDriveWith: .empty())
+    
+    let availableFromRequest: Observable<AvailableModes> = requestChanged
+      .compactMap(TKUIResultsViewModel.buildAvailableModes)
+    
+    let availableFromChange = inputs.changedModes.asObservable()
+      .withLatestFrom(requestChanged) { ($0, $1) }
+      .compactMap(TKUIResultsViewModel.updateAvailableModes)
+    
+    let available = Observable.merge(availableFromRequest, availableFromChange)
+      .distinctUntilChanged()
+    
+    let showModes = inputs.tappedShowModes.scan(false) { acc, _ in !acc }.asObservable()
 
-    includedTransportModes = requestChanged
-      .map { $0?.includedTransportModes }
+    availableModes = Observable.combineLatest(available, showModes) { available, show in
+        if show {
+          return available
+        } else {
+          return .none
+        }
+      }
       .asDriver(onErrorDriveWith: .empty())
 
     originAnnotation = builderChanged
@@ -117,11 +133,11 @@ public class TKUIResultsViewModel {
       .map { Next.showTrip($0.trip!) }
     
     let modeInput = Observable.combineLatest(requestChanged, builderChanged)
-    let presentModes = inputs.tappedShowModes.asObservable()
+    let presentModes = inputs.tappedShowModeOptions.asObservable()
       .withLatestFrom(modeInput) { (_, tuple) -> Next in
         let modes = tuple.0?.applicableModeIdentifiers() ?? []
         let region = TKUIResultsViewModel.regionForModes(for: tuple.1)
-        return Next.presentModes(modes: modes, region: region)
+        return Next.presentModeConfigurator(modes: modes, region: region)
       }
       .asSignal(onErrorSignalWith: .empty())
     
@@ -129,7 +145,7 @@ public class TKUIResultsViewModel {
       .withLatestFrom(builderChanged)
       .map { Next.presentDatePicker(time: $0.time, timeZone: $0.timeZone) }
       .asSignal(onErrorSignalWith: .empty())
-
+    
     next = Signal.merge(showTrip, presentTime, presentModes)
   }
   
@@ -139,8 +155,7 @@ public class TKUIResultsViewModel {
   
   let timeTitle: Driver<String>
   
-  /// Indicates the number of active transport modes
-  let includedTransportModes: Driver<String?>
+  let availableModes: Driver<AvailableModes>
   
   /// The sections to be displayed in a table view.
   ///
@@ -187,7 +202,7 @@ public class TKUIResultsViewModel {
 extension TKUIResultsViewModel {
   enum Next {
     case showTrip(Trip)
-    case presentModes(modes: [String], region: TKRegion)
+    case presentModeConfigurator(modes: [String], region: TKRegion)
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
   }
 }

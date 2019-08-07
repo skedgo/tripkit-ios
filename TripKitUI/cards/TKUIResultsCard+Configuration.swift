@@ -38,7 +38,7 @@ public extension TKUIResultsCard {
     /// MapKit.
     ///
     /// Defaults to using `TKUIResultsMapManager`.
-    public var mapManagerFactory: (() -> TKUIResultsMapManagerType) = TKUIResultsMapManager.init
+    public var mapManagerFactory: ((MKAnnotation?) -> TKUIResultsMapManagerType) = TKUIResultsMapManager.init
   }
 
 }
