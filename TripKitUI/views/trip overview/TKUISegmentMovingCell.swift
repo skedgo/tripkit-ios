@@ -8,12 +8,16 @@
 
 import UIKit
 
+import RxSwift
+
 class TKUISegmentMovingCell: UITableViewCell {
+  @IBOutlet weak var modeWrapper: UIView!
   @IBOutlet weak var modeImage: UIImageView!
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var subtitleLabel: UILabel!
   @IBOutlet weak var accessoryViewStack: UIStackView!
+  @IBOutlet weak var buttonStackView: UIStackView!
   
   @IBOutlet weak var lineWrapper: UIView!
   @IBOutlet weak var line: UIView!
@@ -21,6 +25,23 @@ class TKUISegmentMovingCell: UITableViewCell {
   static let nib = UINib(nibName: "TKUISegmentMovingCell", bundle: Bundle(for: TKUISegmentMovingCell.self))
   
   static let reuseIdentifier = "TKUISegmentMovingCell"
+  
+  private var disposeBag = DisposeBag()
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
+    titleLabel.textColor = .tkLabelPrimary
+    
+    subtitleLabel.textColor = .tkLabelSecondary
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    disposeBag = DisposeBag()
+  }
   
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     // Not calling super to not override line colors
@@ -32,34 +53,35 @@ class TKUISegmentMovingCell: UITableViewCell {
   override func setSelected(_ selected: Bool, animated: Bool) {
     setHighlighted(selected, animated: animated);
   }
+}
 
-  func addAccessories(_ views: [UIView]) {
-    removeAccessories()
-    views.forEach(accessoryViewStack.addArrangedSubview)
-  }
-  
-  private func removeAccessories() {
-    accessoryViewStack.arrangedSubviews.forEach(accessoryViewStack.removeArrangedSubview(_:))
-    accessoryViewStack.removeAllSubviews()
+fileprivate extension UIStackView {
+  func resetViews(_ views: [UIView]) {
+    arrangedSubviews.forEach(removeArrangedSubview)
+    removeAllSubviews()
+    views.forEach(addArrangedSubview)
   }
 }
 
 extension TKUISegmentMovingCell {
   
-  func configure(with item: TKUITripOverviewViewModel.MovingItem) {
+  func configure(with item: TKUITripOverviewViewModel.MovingItem, for card: TKUITripOverviewCard) {
     modeImage.setImage(with: item.iconURL, asTemplate: item.iconIsTemplate, placeholder: item.icon)
-    modeImage.tintColor = TKStyleManager.darkTextColor() // TODO: add a colorCodingTransitIcon here, too?
+    modeImage.tintColor = .white
     
     titleLabel.text = item.title
-    titleLabel.textColor = TKStyleManager.darkTextColor()
     subtitleLabel.text = item.notes
-    subtitleLabel.textColor = TKStyleManager.lightTextColor()
     subtitleLabel.isHidden = item.notes == nil
 
-    line.backgroundColor = item.connection?.color ?? .lightGray
+    let lineColor = item.connection?.color ?? .lightGray
+    modeWrapper.backgroundColor = lineColor
+    line.backgroundColor = lineColor
     
     let accessories = item.accessories.map(TKUISegmentMovingCell.buildView)
-    addAccessories(accessories)
+    accessoryViewStack.resetViews(accessories)
+    
+    let buttons = item.actions.map { buildView(for: $0, for: card) }
+    buttonStackView.resetViews(buttons)
   }
   
   private static func buildView(for segmentAccessory: TKUITripOverviewViewModel.SegmentAccessory) -> UIView {
@@ -80,6 +102,17 @@ extension TKUISegmentMovingCell {
     case .wheelchairFriendly:
       return TKUIOccupancyView(with: .wheelchair)
     }
-
+  }
+  
+  private func buildView(for action: TKUITripOverviewCardAction, for card: TKUITripOverviewCard) -> UIView {
+    let button = UIButton(type: .custom)
+    button.setTitle(action.title, for: .normal)
+    button.setImage(action.icon, for: .normal)
+    button.rx.tap
+      .subscribe(onNext: { [unowned card] in
+        _ = action.handler(card, button)
+      })
+      .disposed(by: disposeBag)
+    return button
   }
 }

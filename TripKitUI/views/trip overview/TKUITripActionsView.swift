@@ -55,9 +55,9 @@ extension TKUITripActionsView {
       actionView.imageWrapper.backgroundColor = .clear
       actionView.imageView.image = action.icon
       actionView.titleLabel.text = action.title
-      actionView.onTap = { [weak card, weak trip, unowned actionView] sender in
-        guard let card = card, let trip = trip else { return }
-        let update = action.handler(card, trip, sender)
+      actionView.onTap = { [weak card, unowned actionView] sender in
+        guard let card = card else { return }
+        let update = action.handler(card, sender)
         if update {
           actionView.imageView.image = action.icon
           actionView.titleLabel.text = action.title

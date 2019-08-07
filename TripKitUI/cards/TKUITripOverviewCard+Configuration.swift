@@ -10,7 +10,8 @@ import UIKit
 import TripKit
 
 /// An action that can be added to a `TKUITripOverviewCard`. Set an array of
-/// these on `TKUITripOverviewCard.tripActionsFactory`.
+/// these on `TKUITripOverviewCard.tripActionsFactory` and/or
+///  on `TKUITripOverviewCard.segmentActionsFactory`.
 public protocol TKUITripOverviewCardAction {
   /// Title (and accessory label) of the button
   var title: String { get }
@@ -24,7 +25,7 @@ public protocol TKUITripOverviewCardAction {
   /// toggle actions such as adding or removing a reminder or favourite).
   ///
   /// Parameters are the card, the trip, and the sender
-  var handler: (TKUITripOverviewCard, Trip, UIView) -> Bool { get }
+  var handler: (TKUITripOverviewCard, UIView) -> Bool { get }
 }
 
 public extension TKUITripOverviewCard {
@@ -89,6 +90,14 @@ public extension TKUITripOverviewCard {
     ///
     /// Called when a trip overview card gets presented.
     public var tripActionsFactory: ((Trip) -> [TKUITripOverviewCardAction])?
+    
+    /// Set this to add a list of action buttons to a segment on the trip overview card.
+    ///
+    /// - warning: Only a maximum of three actions can be accomodated. Any
+    ///     more than that will be ignored.
+    ///
+    /// Called when a trip overview card gets presented.
+    public var segmentActionsfactory: ((TKSegment) -> [TKUITripOverviewCardAction])?
   }
 }
 
