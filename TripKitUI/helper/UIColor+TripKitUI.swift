@@ -10,6 +10,14 @@ import Foundation
 
 extension UIColor {
   
+  public static let tkBarSecondary: UIColor = {
+    if #available(iOS 11.0, *) {
+      return UIColor(named: "TKBarSecondary", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return #colorLiteral(red: 0.9019607843, green: 0.937254902, blue: 0.9490196078, alpha: 1)
+    }
+  }()
+  
   public static let tkLabelPrimary: UIColor = {
     if #available(iOS 11.0, *) {
       return UIColor(named: "TKLabelPrimary", in: .tripKitUI, compatibleWith: nil)!
