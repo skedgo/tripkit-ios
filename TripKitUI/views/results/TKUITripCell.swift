@@ -15,20 +15,26 @@ public class TKUITripCell: UITableViewCell {
   public static let reuseIdentifier: String = "TKUITripCell"
 
   @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var subtitleLabel: UILabel!
   @IBOutlet weak var segmentView: TKUITripSegmentsView!
   @IBOutlet weak var actionButton: UIButton!
   @IBOutlet weak var selectionIndicator: UIView!
-
+  @IBOutlet weak var metricsLabel: UILabel!
+  
   private var formatter: Formatter?
   
   override public func awakeFromNib() {
     super.awakeFromNib()
     
+    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
+    titleLabel.textColor = .tkLabelPrimary
+    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .subheadline)
+    subtitleLabel.textColor = .tkLabelSecondary
+    actionButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .subheadline)
+    actionButton.backgroundColor = TKStyleManager.globalTintColor()
+    actionButton.tintColor = .white
+    
     formatter = Formatter()
-    formatter?.primaryColor = TKStyleManager.darkTextColor()
-    formatter?.primaryFont = titleLabel.font
-    formatter?.secondaryColor = TKStyleManager.lightTextColor()
-    formatter?.secondaryFont = titleLabel.font
     
     selectionIndicator.isHidden = true
     selectionIndicator.backgroundColor = TKStyleManager.globalTintColor()
@@ -57,9 +63,7 @@ public class TKUITripCell: UITableViewCell {
     public let focusOnDuration: Bool
     public let isArriveBefore: Bool
     public let showFaded: Bool
-    
     public let segments: [TKTripSegmentDisplayable]
-    
     public let action: String?
     
     public init(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool = false, isArriveBefore: Bool = false, showFaded: Bool = false, segments: [TKTripSegmentDisplayable], action: String? = nil) {
@@ -78,7 +82,9 @@ public class TKUITripCell: UITableViewCell {
   public func configure(_ model: Model) {
     guard let formatter = formatter else { preconditionFailure() }
     
-    titleLabel.attributedText = formatter.timeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    titleLabel.attributedText = formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    
+    subtitleLabel.attributedText = formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     
     segmentView.configure(forSegments: model.segments, allowSubtitles: true, allowInfoIcons: true)
     

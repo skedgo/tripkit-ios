@@ -55,6 +55,43 @@ extension TKUITripCell {
       return attributed
     }
     
+    public func primaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
+      let attributes = [
+        NSAttributedString.Key.font: TKStyleManager.boldCustomFont(forTextStyle: .body),
+        NSAttributedString.Key.foregroundColor: UIColor.tkLabelPrimary
+      ]
+      
+      if focusOnDuration {
+        return NSAttributedString(string: arrival.durationSince(departure), attributes: attributes)
+      } else {
+        var fullText = TKStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone)
+        fullText.append(" - ")
+        fullText.append(TKStyleManager.timeString(arrival, for: arrivalTimeZone, relativeTo: departureTimeZone))
+        return NSAttributedString(string: fullText, attributes: attributes)
+      }
+    }
+    
+    public func secondaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
+      let attributes = [
+          NSAttributedString.Key.font: TKStyleManager.customFont(forTextStyle: .subheadline),
+          NSAttributedString.Key.foregroundColor: UIColor.tkLabelSecondary
+      ]
+      
+      if focusOnDuration {
+        if isArriveBefore {
+          let timeText = TKStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone)
+          let fullText = "\(Loc.Departs(atTime: timeText))"
+          return NSAttributedString(string: fullText, attributes: attributes)
+        } else {
+          let timeText = TKStyleManager.timeString(arrival, for: arrivalTimeZone, relativeTo: departureTimeZone)
+          let fullText = "\(Loc.Arrives(atTime: timeText))"
+          return NSAttributedString(string: fullText, attributes: attributes)
+        }
+      } else {
+        return NSAttributedString(string: arrival.durationSince(departure), attributes: attributes)
+      }
+    }
+    
     @objc
     public func costString(costs: [NSNumber: String]) -> NSAttributedString {
       let attributed = NSMutableAttributedString()
