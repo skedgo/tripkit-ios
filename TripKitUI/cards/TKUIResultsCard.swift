@@ -291,6 +291,10 @@ extension TKUIResultsCard: UITableViewDelegate {
 private extension TKUIResultsCard {
   func updateModePicker(_ modes: TKUIResultsViewModel.AvailableModes, in tableView: UITableView) {
     if modes.available.isEmpty {
+      if let header = tableView.tableHeaderView {
+        tableView.contentSize.height -= header.frame.height
+      }
+      
       tableView.tableHeaderView = nil
       
     } else {
@@ -303,6 +307,13 @@ private extension TKUIResultsCard {
         self.modePicker = modePicker
       }
       modePicker.configure(all: modes.available, updateAll: true, currentlyEnabled: modes.isEnabled)
+      
+      // header is inserted after table view content is laid out,
+      // so we need to manually adjust the content size so the
+      // extra space taken up by the header view is accounted for.
+      if let header = tableView.tableHeaderView {
+        tableView.contentSize.height += header.frame.height
+      }
     }
   }
   
