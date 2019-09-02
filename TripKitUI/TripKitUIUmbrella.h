@@ -17,7 +17,6 @@
 #import "TKStyleManager+TripKitUI.h"
 #import "UIFont+CustomFonts.h"
 #import "UIImage+Variations.h"
-#import "UISearchBar+Customizable.h"
 
 // Cells
 #import "TKUIStyledLabel.h"

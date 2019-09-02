@@ -39,9 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)styleTableViewForTileList:(UITableView *)tableView;
 
 + (void)styleNavigationControllerAsDark:(UINavigationController *)navigationController;
-  
-+ (void)styleSearchBar:(UISearchBar *)searchBar
-   includingBackground:(BOOL)includeBackground;
 
 @end
 
