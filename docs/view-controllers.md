@@ -10,9 +10,11 @@ Each of these share the following characteristics:
 
 - Customisation points for colours and fonts
 - VoiceOver accessible
-- Translated into the following languages: 
+- Translated into the following languages: Chinese (Simplified + Traditional), Danish, Dutch, English, Finnish, French, German, Italian, Korean, Norwegian (Bokmål), Portuguese, Spanish and Swedish
 - Compatible with iPhone and iPad
-- Compatible with Apple's MapKit out of the box, but can also use other map UI layers
+- Compatible with iOS 10.3+
+- Compatible with Dark Mode on iOS 13+
+- Compatible with Apple's MapKit out of the box, but can also use other map UI layers, such as Google, HERE or OpenStreetMap
 - Source code available
 
 ## Real-time departures and service details
@@ -24,11 +26,11 @@ The stand-alone view controller `TKUIDeparturesViewController` let's you quickly
 This view controller has the following features:
 
 - Show departures for an individual stop or larger station
-	- Show real-time information where available, including real-time departure time, service disruption and availability/crowdedness.
-	- Optionally show wheelchair accessibility information
-	- Adjust departure time
+	- Real-time information where available, including real-time departure and arrival times, service disruptions and crowdedness of individual services.
+	- Optionally with wheelchair accessibility information
+	- Let users set the time of the first departure time
 - Show details of each service
-	- Route on the map
+	- Toute on the map
 	- List of stops including arrival and departure time at each stop
 	- Real-time vehicle location where available
 
@@ -50,9 +52,9 @@ This view controller has the following features:
 
 - Show routing results to a specified location from the user's current location, or between specified locations
 	- High-level comparison of trips, showing durations, cost, carbon emissions, and calories burnt
-	- Show real-time information, including departure times, traffic, service disruptions, pricing quotes, ETAs
-	- Customise what modes should be included
-	- Adjust time to depart or time to arrive
+	- Real-time information, including departure times, traffic, service disruptions, pricing quotes, ETAs
+	- Let users select what modes should be included
+	- Let users set the time to depart or the time to arrive
 - Show details for each trip as an overview
 - Show details for each trip on a mode-by-mode basis
 
@@ -60,12 +62,13 @@ It has the following additional customisation points:
 
 - Style of cards via `TKUICustomization`
 - Results screen via `TKUIResultsCard.config`:
-	- Option to provide dedicated text and action for handling cases where start and/or end location are not in supported areas.
+	- Option to provide a feedback action when user presses a "Contact support" button in case of an error or trying to route in an area that's not supported
 - Trip overview via `TKUITripOverviewCard.config`:
 	- Presentation of attribution
 	- Custom callback for what to do when tapping a segment
 	- Custom callback for what to do when tapping 'start' button of trip
 	- Customisable list of per-trip action buttons
+	- Customisable list of per-segment action buttons
 - Trip mode-by-mode cards view `TKUITripModeByModeCard.config`:
 	- What cards to display for each segment
 
