@@ -37,6 +37,14 @@ class TKUISegmentMovingCell: UITableViewCell {
     subtitleLabel.textColor = .tkLabelSecondary
   }
   
+  override func tintColorDidChange() {
+    super.tintColorDidChange()
+    
+    buttonStackView.arrangedSubviews
+      .compactMap { $0 as? UIButton }
+      .forEach { $0.setTitleColor(tintColor, for: .normal) }
+  }
+  
   override func prepareForReuse() {
     super.prepareForReuse()
     
@@ -106,6 +114,9 @@ extension TKUISegmentMovingCell {
   
   private func buildView(for action: TKUITripOverviewCardAction, for card: TKUITripOverviewCard) -> UIView {
     let button = UIButton(type: .custom)
+    button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .body)
+    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: -4)
+
     button.setTitle(action.title, for: .normal)
     button.setImage(action.icon, for: .normal)
     button.rx.tap
