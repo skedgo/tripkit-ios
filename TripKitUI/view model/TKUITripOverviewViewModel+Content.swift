@@ -221,7 +221,7 @@ fileprivate extension TKSegment {
   }
   
   var line: TKUITripOverviewViewModel.Line? {
-    guard !isStationary else { return nil }
+    guard isPublicTransport else { return nil }
     return TKUITripOverviewViewModel.Line(color: color)
   }
 }

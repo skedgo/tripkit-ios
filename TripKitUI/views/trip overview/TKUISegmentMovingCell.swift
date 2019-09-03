@@ -75,17 +75,19 @@ fileprivate extension UIStackView {
 extension TKUISegmentMovingCell {
   
   func configure(with item: TKUITripOverviewViewModel.MovingItem, for card: TKUITripOverviewCard) {
-    // TODO: Don't do this if icon is branding
+    let hasLine = item.connection?.color != nil
+    
+    // TODO: Don't do this if we have a line and icon is branding
     modeImage.setImage(with: item.iconURL, asTemplate: item.iconIsTemplate, placeholder: item.icon)
-    modeImage.tintColor = .white
+    modeImage.tintColor = hasLine ? .tkBackground : .tkLabelPrimary
     
     titleLabel.text = item.title
     subtitleLabel.text = item.notes
     subtitleLabel.isHidden = item.notes == nil
 
-    let lineColor = item.connection?.color ?? .lightGray
-    modeWrapper.backgroundColor = lineColor
-    line.backgroundColor = lineColor
+    modeWrapper.backgroundColor = item.connection?.color ?? .clear
+    line.backgroundColor = item.connection?.color
+    line.isHidden = !hasLine
     
     let accessories = item.accessories.map(TKUISegmentMovingCell.buildView)
     accessoryViewStack.resetViews(accessories)

@@ -77,11 +77,13 @@ extension TKUISegmentStationaryCell {
     subtitleLabel.text = item.subtitle
     subtitleLabel.isHidden = item.subtitle == nil
 
-    lineDot.layer.borderColor = UIColor.black.cgColor
+    lineDot.layer.borderColor = (item.bottomConnection?.color ?? item.topConnection?.color ?? .tkLabelPrimary).cgColor
     lineDot.layer.borderWidth = 2
     lineDot.layer.cornerRadius = lineDot.frame.width / 2
-    topLine.backgroundColor = item.topConnection?.color ?? .lightGray
-    bottomLine.backgroundColor = item.bottomConnection?.color ?? .lightGray
+    topLine.backgroundColor = item.topConnection?.color
+    topLine.isHidden = item.topConnection?.color == nil
+    bottomLine.backgroundColor = item.bottomConnection?.color
+    bottomLine.isHidden = item.bottomConnection?.color == nil
   }
   
   func configure(with item: TKUITripOverviewViewModel.TerminalItem) {
@@ -97,13 +99,13 @@ extension TKUISegmentStationaryCell {
     subtitleLabel.text = item.subtitle
     subtitleLabel.isHidden = item.subtitle == nil
     
-    lineDot.layer.borderColor = (item.connection?.color ?? .lightGray).cgColor
+    lineDot.layer.borderColor = (item.connection?.color ?? .tkLabelPrimary).cgColor
     lineDot.layer.borderWidth = 2
     lineDot.layer.cornerRadius = lineDot.frame.width / 2
-    topLine.backgroundColor = item.connection?.color ?? .lightGray
-    topLine.isHidden = item.isStart
-    bottomLine.backgroundColor = item.connection?.color ?? .lightGray
-    bottomLine.isHidden = !item.isStart
+    topLine.backgroundColor = item.connection?.color
+    topLine.isHidden = item.connection?.color == nil
+    bottomLine.backgroundColor = item.connection?.color
+    bottomLine.isHidden = item.connection?.color == nil
   }
   
 }
