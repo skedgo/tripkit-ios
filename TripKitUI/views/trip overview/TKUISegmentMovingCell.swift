@@ -75,6 +75,7 @@ fileprivate extension UIStackView {
 extension TKUISegmentMovingCell {
   
   func configure(with item: TKUITripOverviewViewModel.MovingItem, for card: TKUITripOverviewCard) {
+    // TODO: Don't do this if icon is branding
     modeImage.setImage(with: item.iconURL, asTemplate: item.iconIsTemplate, placeholder: item.icon)
     modeImage.tintColor = .white
     
