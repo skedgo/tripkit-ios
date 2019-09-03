@@ -68,6 +68,7 @@ fileprivate extension UIStackView {
     arrangedSubviews.forEach(removeArrangedSubview)
     removeAllSubviews()
     views.forEach(addArrangedSubview)
+    isHidden = views.isEmpty
   }
 }
 

@@ -71,6 +71,7 @@ public class TKUIAttributionView: UIView {
     imageView.leadingAnchor.constraint(equalTo: textView.trailingAnchor).isActive = true
     imageView.centerYAnchor.constraint(equalTo: textView.centerYAnchor).isActive = true
     imageView.heightAnchor.constraint(equalTo: textView.heightAnchor).isActive = true
+    imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
     
     switch contentAlignment {
     case .leading:
