@@ -13,13 +13,7 @@ extension UIImage {
 
   @objc public static let backgroundNavSecondary = named("bg-nav-secondary")
 
-  static let iconTripBoyWorker = named("worker")
-  static let iconTripBoyHappy = named("tripboy-smile")
-  static let iconTripBoySad = named("tripboy-sad")
-  
   public static let iconCross = named("icon-cross")
-  public static let iconShowPassword = named("icon-show")
-  public static let iconHidePassword = named("icon-hide")
 
   // Occupancy
   
@@ -35,6 +29,18 @@ extension UIImage {
   public static let iconTree = named("icon-tree")
   public static let iconRelax = named("icon-relax")
   public static let iconRun = named("icon-run")
+  
+  // Actions
+
+  public static let iconArrowUp = named("icon-arrow-up")
+  public static let iconShowPassword = named("icon-show")
+  public static let iconHidePassword = named("icon-hide")
+
+  // TripBoy
+  
+  static let iconTripBoyWorker = named("worker")
+  static let iconTripBoyHappy = named("tripboy-smile")
+  static let iconTripBoySad = named("tripboy-sad")
 
 }
 
