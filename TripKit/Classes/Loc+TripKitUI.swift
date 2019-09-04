@@ -212,16 +212,14 @@ extension Loc {
     return String(format: format, arrival)
   }
   
-  @objc(DepartsAtTime:)
-  public static func Departs(atTime time: String) -> String {
+  public static func Departs(atTime time: String, capitalize: Bool = false) -> String {
     let format = NSLocalizedString("departs %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Estimated time of departure; parameter is time, e.g., 'departs 15:30'")
-    return String(format: format, time)
+    return String(format: capitalize ? format.localizedCapitalized : format, time)
   }
   
-  @objc(ArrivesAtTime:)
-  public static func Arrives(atTime time: String) -> String {
+  public static func Arrives(atTime time: String, capitalize: Bool = false) -> String {
     let format = NSLocalizedString("arrives %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'")
-    return String(format: format, time)
+    return String(format: capitalize ? format.localizedCapitalized : format, time)
   }
   
   @objc public static var Checkmark: String {

@@ -72,7 +72,7 @@ public class TKUITripOverviewCard: TGTableCard {
     self.index = index
     
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
-    super.init(title: Loc.Trip(index: index), mapManager: mapManager)
+    super.init(title: Loc.Trip(index: index.map { $0 + 1 }), mapManager: mapManager)
   }
   
   public required convenience init?(coder: NSCoder) {
@@ -121,6 +121,10 @@ public class TKUITripOverviewCard: TGTableCard {
         }
     })
     
+    viewModel.titles
+      .drive(cardView.rx.titles)
+      .disposed(by: disposeBag)
+
     viewModel.sections
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
