@@ -116,6 +116,7 @@
                 <constraint firstItem="EBX-LF-vMP" firstAttribute="centerY" secondItem="njF-e1-oar" secondAttribute="centerY" id="u7x-yN-0CY"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <inset key="separatorInset" minX="64" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="bottomLine" destination="bmx-KO-aL2" id="vwo-G9-EZh"/>
                 <outlet property="lineDot" destination="QdG-jx-QtJ" id="VtP-GU-0N5"/>

@@ -78,7 +78,7 @@ extension TKUISegmentStationaryCell {
     subtitleLabel.isHidden = item.subtitle == nil
 
     lineDot.layer.borderColor = (item.bottomConnection?.color ?? item.topConnection?.color ?? .tkLabelPrimary).cgColor
-    lineDot.layer.borderWidth = 2
+    lineDot.layer.borderWidth = 3
     lineDot.layer.cornerRadius = lineDot.frame.width / 2
     topLine.backgroundColor = item.topConnection?.color
     topLine.isHidden = item.topConnection?.color == nil
@@ -100,7 +100,7 @@ extension TKUISegmentStationaryCell {
     subtitleLabel.isHidden = item.subtitle == nil
     
     lineDot.layer.borderColor = (item.connection?.color ?? .tkLabelPrimary).cgColor
-    lineDot.layer.borderWidth = 2
+    lineDot.layer.borderWidth = 3
     lineDot.layer.cornerRadius = lineDot.frame.width / 2
     topLine.backgroundColor = item.connection?.color
     topLine.isHidden = item.connection?.color == nil

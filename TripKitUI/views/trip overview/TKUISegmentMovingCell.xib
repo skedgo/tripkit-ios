@@ -98,6 +98,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <inset key="separatorInset" minX="64" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="accessoryViewStack" destination="WG8-Aa-TaE" id="2oF-Iq-ApX"/>
                 <outlet property="buttonStackView" destination="ilS-Xt-Fav" id="Gje-dt-Q6m"/>

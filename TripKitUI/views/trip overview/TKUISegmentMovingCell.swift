@@ -99,7 +99,7 @@ extension TKUISegmentMovingCell {
   private static func buildView(for segmentAccessory: TKUITripOverviewViewModel.SegmentAccessory) -> UIView {
     switch segmentAccessory {
     case .averageOccupancy(let occupancy):
-      return TKUIOccupancyView(with: .occupancy(occupancy))
+      return TKUIOccupancyView(with: .occupancy(occupancy, simple: true))
       
     case .carriageOccupancies(let occupancies):
       let trainView = TKUITrainOccupancyView()
@@ -118,11 +118,13 @@ extension TKUISegmentMovingCell {
   
   private func buildView(for action: TKUITripOverviewCardAction, for card: TKUITripOverviewCard) -> UIView {
     let button = UIButton(type: .custom)
-    button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .body)
-    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: -4)
+    button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
+
+    // We could add an icon here, too, but that's not yet in the style guide
+    // button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: -4)
+    // button.setImage(action.icon, for: .normal)
 
     button.setTitle(action.title, for: .normal)
-    button.setImage(action.icon, for: .normal)
     button.rx.tap
       .subscribe(onNext: { [unowned card] in
         _ = action.handler(card, button)
