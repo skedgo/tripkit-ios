@@ -28,8 +28,8 @@ class TKUITripActionsView: UIView {
     let stack = UIStackView()
     stack.translatesAutoresizingMaskIntoConstraints = false
     stack.axis = .horizontal
-    stack.alignment = .leading
-    stack.distribution = .equalSpacing
+    stack.alignment = .fill
+    stack.distribution = .fillEqually
     stack.spacing = 8
     
     addSubview(stack)
@@ -39,6 +39,7 @@ class TKUITripActionsView: UIView {
       stack.leadingAnchor.constraint(equalTo: leadingAnchor),
       stack.topAnchor.constraint(equalTo: topAnchor),
       stack.bottomAnchor.constraint(equalTo: bottomAnchor),
+      stack.trailingAnchor.constraint(equalTo: trailingAnchor),
     ])
   }
 }
@@ -52,7 +53,6 @@ extension TKUITripActionsView {
     
     for action in actions {
       let actionView = TKUITripActionView.newInstance()
-      actionView.imageWrapper.backgroundColor = .clear
       actionView.imageView.image = action.icon
       actionView.titleLabel.text = action.title
       actionView.onTap = { [weak card, unowned actionView] sender in
@@ -63,6 +63,7 @@ extension TKUITripActionsView {
           actionView.titleLabel.text = action.title
         }
       }
+      actionView.bold = action.style == .bold
       stack.addArrangedSubview(actionView)
     }
   }
