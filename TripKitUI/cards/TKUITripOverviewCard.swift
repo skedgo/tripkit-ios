@@ -35,24 +35,10 @@ public class TKUITripsPageCard: TGPageCard {
     let cards = trips.enumerated().map { TKUITripOverviewCard(trip: $1, index: $0) }
     
     super.init(cards: cards, initialPage: index)
-    
-    setUpTripHandler()
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-
-    setUpTripHandler()
-  }
-  
-  private func setUpTripHandler() {
-    guard let tripHandler = TKUITripOverviewCard.config.startTripHandler else { return }
-    
-    headerRightAction = (title: Loc.ActionStart, onPress: { index in
-      guard let card = self.cards[index] as? TKUITripOverviewCard else { assertionFailure(); return }
-      let trip = card.viewModel.trip
-      tripHandler(card, trip)
-    })
   }
   
 }

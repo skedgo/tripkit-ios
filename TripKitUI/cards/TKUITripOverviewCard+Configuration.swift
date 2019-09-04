@@ -6,41 +6,6 @@
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
 //
 
-import UIKit
-import TripKit
-
-public enum TKUITripOverviewCardActionStyle {
-  /// Highlights the button with the tint colour as a circular background
-  case bold
-  
-  /// Normal style of the button, not tinted, with a light circular border around the icon
-  case normal
-}
-
-/// An action that can be added to a `TKUITripOverviewCard`. Set an array of
-/// these on `TKUITripOverviewCard.tripActionsFactory` and/or
-///  on `TKUITripOverviewCard.segmentActionsFactory`.
-public protocol TKUITripOverviewCardAction {
-  /// Title (and accessory label) of the button
-  var title: String { get }
-  
-  /// Icon to display as the action. Should be a template image.
-  var icon: UIImage { get }
-  
-  var style: TKUITripOverviewCardActionStyle { get }
-  
-  /// Handler executed when user taps on the button, providing the
-  /// corresponding card and trip. Should return whether the button should
-  /// be refreshed as its title or icon changed as a result (e.g., for
-  /// toggle actions such as adding or removing a reminder or favourite).
-  ///
-  /// Parameters are the card, the trip, and the sender
-  var handler: (TKUITripOverviewCard, UIView) -> Bool { get }
-}
-
-public extension TKUITripOverviewCardAction {
-  var style: TKUITripOverviewCardActionStyle { .normal }
-}
 
 public extension TKUITripOverviewCard {
   
@@ -73,19 +38,6 @@ public extension TKUITripOverviewCard {
         assertionFailure(); return
       }
       let pageCard = try! TKUITripModeByModeCard(startingOn: segment, mapManager: mapManager)
-      pageCard.modeByModeDelegate = card
-      card.controller?.push(pageCard)
-    }
-    
-    /// Set this to add a "start" button on a trip, e.g., to enter turn-by-
-    /// turn navigation mode.
-    ///
-    /// By default pushes a `TKUITripModeByModeCard` starting on the first segment
-    public var startTripHandler: ((TKUITripOverviewCard, Trip) -> Void)? = { card, trip in
-      guard let mapManager = card.mapManager as? TKUITripMapManager else {
-        assertionFailure(); return
-      }
-      let pageCard = TKUITripModeByModeCard(mapManager: mapManager)
       pageCard.modeByModeDelegate = card
       card.controller?.push(pageCard)
     }

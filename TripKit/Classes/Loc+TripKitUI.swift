@@ -132,7 +132,11 @@ extension Loc {
   }
   
   public static var ActionStart: String {
-    return NSLocalizedString("Start", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to start a trip")
+    return NSLocalizedString("Start", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to start a trip (primarily after pausing)")
+  }
+
+  public static var ActionGo: String {
+    return NSLocalizedString("Go", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to start a trip")
   }
 
   public static func GetOnService(To location: String) -> String {
