@@ -20,8 +20,8 @@ typedef NS_ENUM(NSInteger, TKLogLevel) {
 
 #ifndef TK_DEBUG_LEVEL
   #ifdef DEBUG
-//    #define TK_DEBUG_LEVEL TKLogLevel_Info
-    #define TK_DEBUG_LEVEL TKLogLevel_Verbose
+    #define TK_DEBUG_LEVEL TKLogLevel_Info
+//    #define TK_DEBUG_LEVEL TKLogLevel_Verbose
   #else
     #define TK_DEBUG_LEVEL TKLogLevel_Warn
   #endif
