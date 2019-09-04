@@ -32,6 +32,7 @@
 @property (nonatomic, strong, nullable) NSString * progressURLString;
 @property (nonatomic, strong, nullable) NSString * plannedURLString;
 @property (nonatomic, strong, nullable) NSString * logURLString;
+@property (nonatomic, strong, nullable) NSString * bundleId;
 @property (nonatomic, retain, nonnull) NSNumber * totalCarbon;
 @property (nonatomic, retain, nonnull) NSNumber * totalHassle;
 @property (nonatomic, retain, nullable) NSNumber * totalPrice;
