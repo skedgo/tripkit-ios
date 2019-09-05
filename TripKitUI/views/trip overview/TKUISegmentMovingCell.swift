@@ -119,6 +119,7 @@ extension TKUISegmentMovingCell {
   private func buildView(for action: TKUITripOverviewCardAction, for card: TKUITripOverviewCard) -> UIView {
     let button = UIButton(type: .custom)
     button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
+    button.setTitleColor(tintColor, for: .normal)
 
     // We could add an icon here, too, but that's not yet in the style guide
     // button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: -4)
