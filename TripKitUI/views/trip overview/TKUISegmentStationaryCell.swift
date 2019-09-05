@@ -114,10 +114,22 @@ extension TKUISegmentStationaryCell {
     subtitleLabel.text = item.subtitle
     subtitleLabel.isHidden = item.subtitle == nil
     
-    linePinImageView.isHidden = false
-    linePinImageView.tintColor = item.connection?.color ?? .tkLabelPrimary
-    linePinImageView.backgroundColor = .tkBackground
-    lineDot.isHidden = true
+    if let color = item.connection?.color {
+      // If there's a line, don't use the pin as that looks a bit funny, just
+      // use the circle instead.
+      linePinImageView.isHidden = true
+      lineDot.isHidden = false
+      lineDot.layer.borderColor = color.cgColor
+      lineDot.layer.borderWidth = 3
+      lineDot.layer.cornerRadius = lineDot.frame.width / 2
+
+    } else {
+      linePinImageView.isHidden = false
+      linePinImageView.tintColor = item.connection?.color ?? .tkLabelPrimary
+      linePinImageView.backgroundColor = .tkBackground
+      lineDot.isHidden = true
+    }
+    
 
     topLine.backgroundColor = item.connection?.color
     topLine.isHidden = item.isStart || item.connection?.color == nil
