@@ -211,8 +211,8 @@
     <entity name="Trip" representedClassName="Trip" syncable="YES">
         <attribute name="arrivalTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="budgetPoints" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="bundleId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="currencySymbol" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="departureTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="logURLString" optional="YES" attributeType="String" syncable="YES"/>

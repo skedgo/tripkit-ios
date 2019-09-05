@@ -262,7 +262,6 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.totalHassle          = tripDict[@"hassleCost"]           ?: trip.totalHassle;
       trip.totalScore           = tripDict[@"weightedScore"]        ?: trip.totalScore;
       trip.budgetPoints         = tripDict[@"budgetPoints"]         ?: trip.budgetPoints;
-      trip.bundleId             = tripDict[@"bundleId"]             ?: trip.bundleId;
       trip.mainSegmentHashCode  = tripDict[@"mainSegmentHashCode"]  ?: trip.mainSegmentHashCode;
       trip.saveURLString        = tripDict[@"saveURL"]              ?: trip.saveURLString;
       trip.shareURLString       = tripDict[@"shareURL"]             ?: trip.shareURLString;
@@ -274,6 +273,10 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
 
       if ([tripDict[@"availability"] isKindOfClass:[NSString class]]) {
         trip.missedBookingWindow  = [@"MISSED_PREBOOKING_WINDOW" isEqualToString:tripDict[@"availability"]];
+      }
+      
+      if ([tripDict[@"bundleId"] isKindOfClass:[NSString class]]) {
+        [trip setBundleId:tripDict[@"bundleId"]];
       }
       
       [trip calculateDuration];
