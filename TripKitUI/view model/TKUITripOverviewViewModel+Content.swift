@@ -47,7 +47,8 @@ extension TKUITripOverviewViewModel {
 
     let time: Date?
     let timeZone: TimeZone
-    
+    let timesAreFixed: Bool
+
     let connection: Line?
     let isStart: Bool
   }
@@ -59,7 +60,8 @@ extension TKUITripOverviewViewModel {
     let startTime: Date?
     let endTime: Date?
     let timeZone: TimeZone
-    
+    let timesAreFixed: Bool
+
     let topConnection: Line?
     let bottomConnection: Line?
     
@@ -155,6 +157,7 @@ fileprivate extension TKSegment {
       subtitle: nil,
       time: isStart ? departureTime : arrivalTime,
       timeZone: timeZone,
+      timesAreFixed: trip.departureTimeIsFixed,
       connection: (isStart ? next : previous)?.line,
       isStart: isStart
     )
@@ -167,6 +170,7 @@ fileprivate extension TKSegment {
       startTime: departureTime,
       endTime: arrivalTime,
       timeZone: timeZone,
+      timesAreFixed: trip.departureTimeIsFixed,
       topConnection: previous?.line,
       bottomConnection: next?.line,
       segment: self
@@ -181,6 +185,7 @@ fileprivate extension TKSegment {
       startTime: arrivalTime,
       endTime: next.departureTime,
       timeZone: timeZone,
+      timesAreFixed: trip.departureTimeIsFixed,
       topConnection: line,
       bottomConnection: next.line,
       segment: next // Since this is marking the start of "next", it makes most

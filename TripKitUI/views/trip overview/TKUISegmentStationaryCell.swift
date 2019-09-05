@@ -23,6 +23,13 @@ class TKUISegmentStationaryCell: UITableViewCell {
   @IBOutlet weak var bottomLine: UIView!
   @IBOutlet weak var linePinImageView: UIImageView!
   
+  /// Space from the label stack across the time stack to the superview. Ideally
+  /// we wouldn't need this and instead just have a fixed space between the label
+  /// stack and the time stack, but Auto Layout can't seem to handle this and
+  /// won't allow the label stack to grow vertically. So we have this, and toggle it
+  /// between 82 and 16 depending on whether there's a time stack.
+  @IBOutlet weak var labelStackTrailingConstraint: NSLayoutConstraint!
+  
   static let nib = UINib(nibName: "TKUISegmentStationaryCell", bundle: Bundle(for: TKUISegmentStationaryCell.self))
   
   static let reuseIdentifier = "TKUISegmentStationaryCell"
@@ -57,7 +64,10 @@ extension TKUISegmentStationaryCell {
     let startText = item.startTime.map { TKStyleManager.timeString($0, for: item.timeZone) }
     let endText = item.endTime.map { TKStyleManager.timeString($0, for: item.timeZone) }
 
-    if let start = startText, let end = endText, start != end {
+    if !item.timesAreFixed {
+      timeStack.isHidden = true
+
+    } else if let start = startText, let end = endText, start != end {
       timeStack.isHidden = false
       timeEndLabel.isHidden = false
       timeLabel.text = start
@@ -72,7 +82,8 @@ extension TKUISegmentStationaryCell {
     } else {
       timeStack.isHidden = true
     }
-    
+    labelStackTrailingConstraint.constant = timeStack.isHidden ? 16 : 82
+
     titleLabel.text = item.title
     subtitleLabel.text = item.subtitle
     subtitleLabel.isHidden = item.subtitle == nil
@@ -90,12 +101,14 @@ extension TKUISegmentStationaryCell {
   
   func configure(with item: TKUITripOverviewViewModel.TerminalItem) {
     timeEndLabel.isHidden = true
-    if let time = item.time {
+
+    if item.timesAreFixed, let time = item.time {
       timeStack.isHidden = false
       timeLabel.text = TKStyleManager.timeString(time, for: item.timeZone)
     } else {
       timeStack.isHidden = true
     }
+    labelStackTrailingConstraint.constant = timeStack.isHidden ? 16 : 82
 
     titleLabel.text = item.title
     subtitleLabel.text = item.subtitle

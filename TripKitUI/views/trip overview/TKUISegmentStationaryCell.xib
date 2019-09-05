@@ -134,6 +134,7 @@
             <inset key="separatorInset" minX="64" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="bottomLine" destination="bmx-KO-aL2" id="vwo-G9-EZh"/>
+                <outlet property="labelStackTrailingConstraint" destination="IfB-Lh-O5R" id="oKh-J4-1Tk"/>
                 <outlet property="lineDot" destination="QdG-jx-QtJ" id="VtP-GU-0N5"/>
                 <outlet property="linePinImageView" destination="OBE-7D-M41" id="RNo-Yj-4T6"/>
                 <outlet property="lineWrapper" destination="zM4-hW-aEs" id="Prv-5q-0UF"/>
