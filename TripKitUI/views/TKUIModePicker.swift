@@ -315,10 +315,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
 
   public var rx_pickedModes: Signal<Set<Item>> {
     return tap
-      .map { [weak self] in
-        guard let self = self else { return [] }
-        return self.toggledModes.filter(self.visibleModes.contains)
-      }
+      .map { [weak self] in self?.pickedModes ?? [] }
       .asSignal(onErrorSignalWith: .empty())
   }
   
