@@ -34,7 +34,7 @@ public class TKUITripsPageCard: TGPageCard {
     
     let cards = trips.enumerated().map { TKUITripOverviewCard(trip: $1, index: $0) }
     
-    super.init(cards: cards, initialPage: index)
+    super.init(cards: cards, initialPage: index, includeHeader: false)
   }
   
   required init?(coder: NSCoder) {
