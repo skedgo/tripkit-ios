@@ -21,6 +21,7 @@ class TKUISegmentStationaryCell: UITableViewCell {
   @IBOutlet weak var topLine: UIView!
   @IBOutlet weak var lineDot: UIView!
   @IBOutlet weak var bottomLine: UIView!
+  @IBOutlet weak var linePinImageView: UIImageView!
   
   static let nib = UINib(nibName: "TKUISegmentStationaryCell", bundle: Bundle(for: TKUISegmentStationaryCell.self))
   
@@ -73,10 +74,11 @@ extension TKUISegmentStationaryCell {
     }
     
     titleLabel.text = item.title
-    
     subtitleLabel.text = item.subtitle
     subtitleLabel.isHidden = item.subtitle == nil
 
+    linePinImageView.isHidden = true
+    lineDot.isHidden = false
     lineDot.layer.borderColor = (item.bottomConnection?.color ?? item.topConnection?.color ?? .tkLabelPrimary).cgColor
     lineDot.layer.borderWidth = 3
     lineDot.layer.cornerRadius = lineDot.frame.width / 2
@@ -99,13 +101,15 @@ extension TKUISegmentStationaryCell {
     subtitleLabel.text = item.subtitle
     subtitleLabel.isHidden = item.subtitle == nil
     
-    lineDot.layer.borderColor = (item.connection?.color ?? .tkLabelPrimary).cgColor
-    lineDot.layer.borderWidth = 3
-    lineDot.layer.cornerRadius = lineDot.frame.width / 2
+    linePinImageView.isHidden = false
+    linePinImageView.tintColor = item.connection?.color ?? .tkLabelPrimary
+    linePinImageView.backgroundColor = .tkBackground
+    lineDot.isHidden = true
+
     topLine.backgroundColor = item.connection?.color
-    topLine.isHidden = item.connection?.color == nil
+    topLine.isHidden = item.isStart || item.connection?.color == nil
     bottomLine.backgroundColor = item.connection?.color
-    bottomLine.isHidden = item.connection?.color == nil
+    bottomLine.isHidden = !item.isStart || item.connection?.color == nil
   }
   
 }

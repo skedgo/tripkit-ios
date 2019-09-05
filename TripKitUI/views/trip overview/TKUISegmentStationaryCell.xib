@@ -50,6 +50,13 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin-needle" translatesAutoresizingMaskIntoConstraints="NO" id="OBE-7D-M41">
+                                <rect key="frame" x="-7" y="35.5" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="OBE-7D-M41" secondAttribute="height" multiplier="1:1" id="D1k-ks-bSx"/>
+                                    <constraint firstAttribute="width" constant="32" id="q87-mF-NAd"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -57,9 +64,11 @@
                             <constraint firstItem="bmx-KO-aL2" firstAttribute="top" secondItem="zM4-hW-aEs" secondAttribute="bottom" multiplier="0.5" id="8bj-9d-PEm"/>
                             <constraint firstItem="bmx-KO-aL2" firstAttribute="width" secondItem="fbJ-hg-ExU" secondAttribute="width" id="AIn-Le-Has"/>
                             <constraint firstItem="QdG-jx-QtJ" firstAttribute="centerY" secondItem="zM4-hW-aEs" secondAttribute="centerY" id="Ogs-Ss-gdd"/>
+                            <constraint firstItem="OBE-7D-M41" firstAttribute="centerY" secondItem="QdG-jx-QtJ" secondAttribute="centerY" id="YP8-Mw-D95"/>
                             <constraint firstItem="fbJ-hg-ExU" firstAttribute="centerX" secondItem="zM4-hW-aEs" secondAttribute="centerX" id="ZQc-8c-8xM"/>
                             <constraint firstItem="fbJ-hg-ExU" firstAttribute="top" secondItem="zM4-hW-aEs" secondAttribute="top" id="bFB-hM-gzZ"/>
                             <constraint firstItem="fbJ-hg-ExU" firstAttribute="bottom" secondItem="zM4-hW-aEs" secondAttribute="bottom" multiplier="0.5" id="dr5-9A-4HA"/>
+                            <constraint firstItem="OBE-7D-M41" firstAttribute="centerX" secondItem="QdG-jx-QtJ" secondAttribute="centerX" id="mfe-u5-bnY"/>
                             <constraint firstItem="bmx-KO-aL2" firstAttribute="centerX" secondItem="zM4-hW-aEs" secondAttribute="centerX" id="qnS-yJ-BOF"/>
                             <constraint firstAttribute="bottom" secondItem="bmx-KO-aL2" secondAttribute="bottom" id="x7y-eO-J9V"/>
                             <constraint firstAttribute="width" constant="18" id="yVT-SE-OGg"/>
@@ -126,6 +135,7 @@
             <connections>
                 <outlet property="bottomLine" destination="bmx-KO-aL2" id="vwo-G9-EZh"/>
                 <outlet property="lineDot" destination="QdG-jx-QtJ" id="VtP-GU-0N5"/>
+                <outlet property="linePinImageView" destination="OBE-7D-M41" id="RNo-Yj-4T6"/>
                 <outlet property="lineWrapper" destination="zM4-hW-aEs" id="Prv-5q-0UF"/>
                 <outlet property="subtitleLabel" destination="3rk-Bj-uEq" id="Dic-y6-iAl"/>
                 <outlet property="timeEndLabel" destination="GZe-HK-fhy" id="Oid-xT-feZ"/>
@@ -137,4 +147,7 @@
             <point key="canvasLocation" x="22.399999999999999" y="120.08995502248877"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="pin-needle" width="24" height="24"/>
+    </resources>
 </document>

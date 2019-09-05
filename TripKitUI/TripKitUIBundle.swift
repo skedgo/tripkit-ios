@@ -14,6 +14,7 @@ extension UIImage {
   @objc public static let backgroundNavSecondary = named("bg-nav-secondary")
 
   public static let iconCross = named("icon-cross")
+  public static let iconPinNeedle = named("pin-needle")
 
   // Occupancy
   
@@ -32,9 +33,10 @@ extension UIImage {
   
   // Actions
 
-  public static let iconArrowUp = named("icon-arrow-up")
+  public static let iconArrowUp = named("arrow-up")
   public static let iconShowPassword = named("icon-show")
   public static let iconHidePassword = named("icon-hide")
+  public static let iconShare = named("share")
 
   // TripBoy
   
