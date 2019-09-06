@@ -10,7 +10,6 @@
 
 #import <TripKitUI/TripKitUI-Swift.h>
 
-#import "UISearchBar+Customizable.h"
 #import "UIFont+CustomFonts.h"
 
 @interface UIViewController (PopoverHelpers)
@@ -145,28 +144,6 @@
     }
   }
   
-
-+ (void)styleSearchBar:(UISearchBar *)searchBar
-   includingBackground:(BOOL)includeBackground
-{
-  // style the searchbar
-  UIImage *navBarBg;
-  if (includeBackground) {
-    navBarBg = UIImage.backgroundNavSecondary;
-  } else {
-    navBarBg = [[UIImage alloc] init]; // blank
-  }
-  searchBar.tintColor = [self globalAccentColor];
-  searchBar.backgroundImage = navBarBg;
-  
-  // style the text field
-  [searchBar styleTextField:^(UITextField *textField) {
-    textField.font = [self systemFontWithSize:15];
-    textField.textColor = [TKStyleManager darkTextColor];
-    textField.backgroundColor = [UIColor clearColor];
-  }];
-}
-
 @end
 
 @implementation TKStyleManager (Buttons)
