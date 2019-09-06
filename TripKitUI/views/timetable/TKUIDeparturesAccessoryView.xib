@@ -36,14 +36,14 @@
                     <rect key="frame" x="0.0" y="41" width="375" height="52"/>
                     <subviews>
                         <searchBar contentMode="redraw" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvs-8c-5zh">
-                            <rect key="frame" x="8" y="4" width="305" height="44"/>
+                            <rect key="frame" x="8" y="4" width="297" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="N5Z-YY-eie"/>
                             </constraints>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJK-XX-Gi6">
-                            <rect key="frame" x="321" y="11" width="46" height="30"/>
+                            <rect key="frame" x="313" y="11" width="46" height="30"/>
                             <state key="normal" title="Button"/>
                         </button>
                     </subviews>
@@ -53,7 +53,7 @@
                         <constraint firstItem="Kvs-8c-5zh" firstAttribute="leading" secondItem="ouN-Ng-mBY" secondAttribute="leading" constant="8" id="Lyr-hM-lTv"/>
                         <constraint firstItem="TJK-XX-Gi6" firstAttribute="leading" secondItem="Kvs-8c-5zh" secondAttribute="trailing" constant="8" id="nxu-xJ-3IT"/>
                         <constraint firstItem="TJK-XX-Gi6" firstAttribute="centerY" secondItem="Kvs-8c-5zh" secondAttribute="centerY" id="qVO-pF-m0j"/>
-                        <constraint firstAttribute="trailing" secondItem="TJK-XX-Gi6" secondAttribute="trailing" constant="8" id="vOL-3a-RTj"/>
+                        <constraint firstAttribute="trailing" secondItem="TJK-XX-Gi6" secondAttribute="trailing" constant="16" id="vOL-3a-RTj"/>
                         <constraint firstAttribute="bottom" secondItem="Kvs-8c-5zh" secondAttribute="bottom" constant="4" id="wWD-rM-D4f"/>
                     </constraints>
                 </view>

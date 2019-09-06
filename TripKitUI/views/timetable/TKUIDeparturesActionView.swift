@@ -58,8 +58,8 @@ class TKUIDeparturesActionView: UIView {
   }
   
   private func updateForBoldness() {
-    if bold {
-      backgroundColor = tintColor ?? .clear
+    if bold, let tintColor = self.tintColor {
+      backgroundColor = tintColor
       layer.borderWidth = 0
       layer.borderColor = nil
       imageView.tintColor = .tkBackground

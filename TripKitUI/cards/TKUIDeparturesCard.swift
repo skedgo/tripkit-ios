@@ -164,10 +164,12 @@ public class TKUIDeparturesCard : TGTableCard {
       .map { dataSource[$0] }
       .asSignal(onErrorSignalWith: .empty())
     
+    let filter = accessoryView.searchBar.rx.text.orEmpty
+    
     let input: TKUIDeparturesViewModel.UIInput = (
       selected: tableView.rx.modelSelected(TKUIDeparturesViewModel.Item.self).asSignal(),
       showAlerts: cellAlertPublisher.asSignal(onErrorSignalWith: .empty()),
-      filter: .empty(),
+      filter: filter.asDriver(),
       date: datePublisher.asDriver(onErrorDriveWith: .empty()),
       refresh: .empty(),
       loadMoreAfter: loadMoreAfter

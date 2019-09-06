@@ -619,6 +619,8 @@
 		3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */; };
 		3AC9A0AE1F682B6E0050217E /* TKPeliasGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0AC1F682B6E0050217E /* TKPeliasGeocoder.swift */; };
 		3AC9A0AF1F682B6E0050217E /* TKGeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */; };
+		3ACB87922322AD9700896733 /* TKUIDeparturesCardAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB87912322AD9700896733 /* TKUIDeparturesCardAction.swift */; };
+		3ACB87952322ADBD00896733 /* TKUICardActionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB87942322ADBD00896733 /* TKUICardActionStyle.swift */; };
 		3ACF46F72297E6E50096860D /* TKUIDeparturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF46F62297E6E50096860D /* TKUIDeparturesViewController.swift */; };
 		3ACF471E2297F9F10096860D /* TKUIDeparturesCard+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47192297F9F00096860D /* TKUIDeparturesCard+Content.swift */; };
 		3ACF471F2297F9F10096860D /* TKUIServiceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF471B2297F9F00096860D /* TKUIServiceCard.swift */; };
@@ -1286,6 +1288,8 @@
 		3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKWaypointRouter.swift; sourceTree = "<group>"; };
 		3AC9A0AC1F682B6E0050217E /* TKPeliasGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKPeliasGeocoder.swift; sourceTree = "<group>"; };
 		3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeoJSON.swift; sourceTree = "<group>"; };
+		3ACB87912322AD9700896733 /* TKUIDeparturesCardAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIDeparturesCardAction.swift; sourceTree = "<group>"; };
+		3ACB87942322ADBD00896733 /* TKUICardActionStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICardActionStyle.swift; sourceTree = "<group>"; };
 		3ACF46F62297E6E50096860D /* TKUIDeparturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIDeparturesViewController.swift; sourceTree = "<group>"; };
 		3ACF47032297EC820096860D /* MiniMap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MiniMap.xcodeproj; sourceTree = "<group>"; };
 		3ACF47062297EC820096860D /* MiniMap.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = MiniMap.xcworkspace; sourceTree = "<group>"; };
@@ -2411,10 +2415,12 @@
 		3AFD393B20D9333500FDC7D0 /* cards */ = {
 			isa = PBXGroup;
 			children = (
+				3ACB87942322ADBD00896733 /* TKUICardActionStyle.swift */,
 				3A4E164322B3A08B000DD2B8 /* TKUIComposingMapManager.swift */,
 				3ACF471C2297F9F10096860D /* TKUIDeparturesCard.swift */,
 				3ACF473B229800A70096860D /* TKUIDeparturesCard+Configuration.swift */,
 				3ACF47192297F9F00096860D /* TKUIDeparturesCard+Content.swift */,
+				3ACB87912322AD9700896733 /* TKUIDeparturesCardAction.swift */,
 				3AFD394120D9333500FDC7D0 /* TKUIMapManager.swift */,
 				3AFD393F20D9333500FDC7D0 /* TKUIResultsCard.swift */,
 				3A682F2720F49B8200E05195 /* TKUIResultsCard+Configuration.swift */,
@@ -3473,6 +3479,7 @@
 				3A506B29231FB403003DD234 /* Trip+Titles.swift in Sources */,
 				3A4C4202227087F0003E057E /* TKUISegmentMode.swift in Sources */,
 				3AFD394A20D9333500FDC7D0 /* TKUIResultsCard.swift in Sources */,
+				3ACB87922322AD9700896733 /* TKUIDeparturesCardAction.swift in Sources */,
 				3ACF471E2297F9F10096860D /* TKUIDeparturesCard+Content.swift in Sources */,
 				3ACF472B2297FA080096860D /* TKUIServiceViewModel+MapContent.swift in Sources */,
 				3ABCA7E12254DF030072EB25 /* Notification+TripKitUI.swift in Sources */,
@@ -3526,6 +3533,7 @@
 				3AF5F2B320EFF7BE003AAEBA /* TKUIAttributionView.swift in Sources */,
 				D3049DFD224C49E600CB59D1 /* TKUIDepartureCell.swift in Sources */,
 				3AFCE27422E7115700090933 /* TKUITripBoyView.swift in Sources */,
+				3ACB87952322ADBD00896733 /* TKUICardActionStyle.swift in Sources */,
 				3A506B3123200457003DD234 /* TKUITripOverviewCardAction.swift in Sources */,
 				3AFD394C20D9333500FDC7D0 /* TKUIMapManager.swift in Sources */,
 				3ACF47342297FC3E0096860D /* TKUIServiceTitleView.swift in Sources */,

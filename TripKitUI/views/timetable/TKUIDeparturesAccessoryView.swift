@@ -29,13 +29,14 @@ class TKUIDeparturesAccessoryView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    bottomBar.backgroundColor = .tkLabelQuarternary // TODO
+    bottomBar.backgroundColor = .tkBackgroundSecondary
     
-    searchBar.placeholder = Loc.Search
-
     // Apply default style, removing the search bar's background
     TKStyleManager.style(searchBar)
-    
+
+    searchBar.placeholder = Loc.Search
+    searchBar.searchTextField.backgroundColor = .tkBackground
+
     timeButton.setTitle(nil, for: .normal)
   }
   
@@ -43,11 +44,13 @@ class TKUIDeparturesAccessoryView: UIView {
     customActionStack.arrangedSubviews.forEach(customActionStack.removeArrangedSubview)
     customActionStack.removeAllSubviews()
     
+    customActionStack.isHidden = actions.isEmpty
+    
     for action in actions {
       let actionView = TKUIDeparturesActionView.newInstance()
       actionView.imageView.image = action.icon
       actionView.label.text = action.title
-      actionView.bold = Bool.random() // TODO
+      actionView.bold = action.style == .bold
       actionView.onTap = { [weak card, unowned actionView] sender in
         guard let card = card else { return }
         let update = action.handler(card, model, sender)
@@ -56,6 +59,7 @@ class TKUIDeparturesAccessoryView: UIView {
           actionView.label.text = action.title
         }
       }
+      customActionStack.addArrangedSubview(actionView)
     }
   }
   
