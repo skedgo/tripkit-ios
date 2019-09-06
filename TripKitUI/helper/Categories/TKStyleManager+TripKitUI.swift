@@ -28,7 +28,7 @@ extension TKStyleManager {
     style(searchBar) { textField in
       textField.clearButtonMode = .whileEditing
       textField.font = systemFont(size: 15)
-      textField.textColor = darkTextColor()
+      textField.textColor = .tkLabelPrimary
       textField.backgroundColor = .clear
       
       styler(textField)

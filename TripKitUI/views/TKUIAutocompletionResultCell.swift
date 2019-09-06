@@ -45,9 +45,9 @@ extension TKUIAutocompletionResultCell {
     imageView?.image = autocompletion.image
     imageView?.tintColor = #colorLiteral(red: 0.8500000238, green: 0.8500000238, blue: 0.8500000238, alpha: 1) // From SkedGo default icons
     textLabel?.text = autocompletion.title
-    textLabel?.textColor = TKStyleManager.darkTextColor()
+    textLabel?.textColor = .tkLabelPrimary
     detailTextLabel?.text = autocompletion.subtitle
-    detailTextLabel?.textColor = TKStyleManager.lightTextColor()
+    detailTextLabel?.textColor = .tkLabelSecondary
     contentView.alpha = autocompletion.showFaded ? 0.33 : 1
     
     if let accessoryImage = autocompletion.accessoryImage, let target = onAccessoryTapped {
@@ -68,7 +68,7 @@ extension TKUIAutocompletionResultCell {
     
     imageView?.image = nil
     textLabel?.text = action.title
-    textLabel?.textColor = TKStyleManager.darkTextColor()
+    textLabel?.textColor = .tkLabelPrimary
     detailTextLabel?.text = nil
     contentView.alpha = 1
     accessoryView = nil

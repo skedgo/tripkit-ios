@@ -236,6 +236,8 @@ extension TKUIResultsCard {
       
     } else {
       let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+      cell.backgroundColor = .tkBackground
+      cell.textLabel?.textColor = .tkLabelSecondary
       switch item {
       case .lessIndicator: cell.textLabel?.text = "Less"
       case .moreIndicator: cell.textLabel?.text = "More"
