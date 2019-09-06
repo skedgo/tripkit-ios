@@ -57,7 +57,7 @@ class TKUITripActionView: UIView {
       imageWrapper.backgroundColor = tintColor ?? .clear
       imageWrapper.layer.borderWidth = 0
       imageWrapper.layer.borderColor = nil
-      imageWrapper.tintColor = .white
+      imageWrapper.tintColor = .tkBackground
     } else {
       imageWrapper.backgroundColor = .tkBackground
       imageWrapper.layer.borderWidth = 2
