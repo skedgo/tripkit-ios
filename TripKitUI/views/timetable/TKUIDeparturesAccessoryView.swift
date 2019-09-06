@@ -32,10 +32,9 @@ class TKUIDeparturesAccessoryView: UIView {
     bottomBar.backgroundColor = .tkLabelQuarternary // TODO
     
     searchBar.placeholder = Loc.Search
-//    searchBar.backgroundColor = .tkLabelQuarternary
-//    searchBar.barTintColor = .clear
-    
-    TKStyleManager.styleSearchBar(searchBar, includingBackground: false)
+
+    // Apply default style, removing the search bar's background
+    TKStyleManager.style(searchBar)
     
     timeButton.setTitle(nil, for: .normal)
   }
