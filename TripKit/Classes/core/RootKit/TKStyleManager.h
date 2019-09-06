@@ -22,9 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSLocale *)applicationLocale;
 
-+ (TKColor *)darkTextColor;
++ (TKColor *)darkTextColor DEPRECATED_MSG_ATTRIBUTE("Use dark-mode ready colors");
 
-+ (TKColor *)lightTextColor;
++ (TKColor *)lightTextColor DEPRECATED_MSG_ATTRIBUTE("Use dark-mode ready colors");
 
 #if TARGET_OS_IPHONE
 + (UIButton *)cellAccessoryButtonWithImage:(UIImage *)image

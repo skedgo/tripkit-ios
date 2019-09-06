@@ -32,6 +32,8 @@ public class TKUISegmentTitleView: UIView {
   public override func awakeFromNib() {
     super.awakeFromNib()
     
+    backgroundColor = .tkBackground
+    
     titleLabel.font = TKUICustomization.shared.cardStyle.titleFont
     titleLabel.textColor = TKUICustomization.shared.cardStyle.titleTextColor
     titleLabel.text = nil

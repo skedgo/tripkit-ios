@@ -37,6 +37,9 @@ class TKUISegmentStationaryCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    backgroundColor = .tkBackground
+    lineDot.backgroundColor = .tkBackground
+    
     titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
     titleLabel.textColor = .tkLabelPrimary
     subtitleLabel.textColor = .tkLabelSecondary
@@ -48,7 +51,7 @@ class TKUISegmentStationaryCell: UITableViewCell {
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     // Not calling super to not override line colors
     UIView.animate(withDuration: animated ? 0.25 : 0) {
-      self.contentView.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : .white
+      self.contentView.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : self.backgroundColor
     }
   }
   
