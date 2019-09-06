@@ -22,7 +22,7 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
       defaultBorderColor: nil,
       selectedColor: TKStyleManager.globalTintColor(),
       selectedBorderColor: TKStyleManager.globalTintColor().darker(by: 0.5),
-      deselectedColor: TKStyleManager.lightTextColor()
+      deselectedColor: .tkLabelSecondary
     )
     
     var defaultColor: UIColor?

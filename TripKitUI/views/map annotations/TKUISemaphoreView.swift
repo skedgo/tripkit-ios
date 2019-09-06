@@ -126,11 +126,8 @@ extension TKUISemaphoreView {
 
   @objc
   public static var headTintColor: UIColor {
-    if let custom = customHeadTintColor {
-      return custom
-    } else {
-      return TKStyleManager.darkTextColor()
-    }
+    // This doesn't adjust to dark-mode on purpose as the head-image isn't ready for that yet
+    return customHeadTintColor ?? .black
   }
 
   

@@ -101,6 +101,8 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   // MARK: - Configuration
   
   private func updateUI() {
+    backgroundColor = .clear
+    
     guard visibleModes.count > 0 else { return }
     
     // Clean up
@@ -163,7 +165,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     // Add separator
     let separator = UIView()
     separator.translatesAutoresizingMaskIntoConstraints = false
-    separator.backgroundColor = #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.831372549, alpha: 1)
+    separator.backgroundColor = .tkSeparator
     addSubview(separator)
     
     separator.heightAnchor.constraint(equalToConstant: Constants.separatorHeight).isActive = true
