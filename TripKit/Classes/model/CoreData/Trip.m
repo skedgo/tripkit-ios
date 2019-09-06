@@ -38,6 +38,7 @@ typedef NSUInteger SGTripFlag;
 @dynamic currencySymbol;
 @dynamic budgetPoints;
 @dynamic totalScore;
+@dynamic data;
 @dynamic toDelete;
 
 @dynamic representedGroup;
@@ -138,6 +139,16 @@ typedef NSUInteger SGTripFlag;
 - (void)setShareURL:(NSURL *)shareURL
 {
   self.shareURLString = [shareURL absoluteString];
+}
+
+- (NSString *)bundleId
+{
+  return [self dataForKey:@"bundleId"];
+}
+
+- (void)setBundleId:(NSString *)bundleId
+{
+  [self setData:bundleId forKey:@"bundleId"];
 }
 
 - (NSString *)constructPlainText
@@ -433,6 +444,50 @@ typedef NSUInteger SGTripFlag;
   if (preferred) {
     [self setAsPreferredTrip];
   }
+}
+
+#pragma mark - Data
+
+- (id)dataForKey:(NSString *)key
+{
+  NSDictionary *dataDictionary = [self mutableDataDictionary];
+  if (dataDictionary) {
+    return dataDictionary[key];
+  } else {
+    return nil;
+  }
+}
+
+- (void)setData:(id)data forKey:(NSString *)key
+{
+  if ([data conformsToProtocol:@protocol(NSCoding)]) {
+    NSMutableDictionary *mutable = [self mutableDataDictionary];
+    mutable[key] = data;
+    [self setMutableDataDictionary:mutable];
+    
+  } else if (data == nil) {
+    NSMutableDictionary *mutable = [self mutableDataDictionary];
+    [mutable removeObjectForKey:key];
+    [self setMutableDataDictionary:mutable];
+  }
+}
+
+- (void)setMutableDataDictionary:(NSMutableDictionary *)mutable
+{
+  self.data = [NSKeyedArchiver archivedDataWithRootObject:mutable];
+}
+
+- (NSMutableDictionary *)mutableDataDictionary
+{
+  if ([self.data isKindOfClass:[NSData class]]) {
+    id object = [NSKeyedUnarchiver unarchiveObjectWithData:self.data];
+    if ([object isKindOfClass:[NSMutableDictionary class]]) {
+      return object;
+    } else {
+      ZAssert(false, @"Unexpected data: %@", self.data);
+    }
+  }
+  return [NSMutableDictionary dictionaryWithCapacity:1];
 }
 
 #pragma mark - Segment accessors
