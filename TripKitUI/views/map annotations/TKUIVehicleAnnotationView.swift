@@ -86,7 +86,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     // The vehicle
     let vehicleRect = CGRect(x: (frame.width - vehicleWidth)/2, y: (frame.height - vehicleHeight)/2, width: vehicleWidth, height: vehicleHeight)
     
-    let serviceColor = vehicle.serviceColor ?? .black
+    let serviceColor = vehicle.serviceColor ?? .tkLabelPrimary
     
     var vehicleView: UIView?
     
