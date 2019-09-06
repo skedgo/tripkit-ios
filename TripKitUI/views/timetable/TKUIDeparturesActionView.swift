@@ -37,6 +37,8 @@ class TKUIDeparturesActionView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    backgroundColor = .clear
+    
     let tapper = UITapGestureRecognizer(target: self, action: #selector(tapperFired(_:)))
     self.addGestureRecognizer(tapper)
     

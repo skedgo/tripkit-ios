@@ -28,6 +28,8 @@ class TKUIServiceHeaderMiniView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    backgroundColor = .tkBackground
+    
     expandyButton.setImage(TGCard.arrowButtonImage(direction: .down, background: tintColor.withAlphaComponent(0.12), arrow: tintColor), for: .normal)
     expandyButton.setTitle(nil, for: .normal)
     expandyButton.accessibilityLabel = Loc.Expand
