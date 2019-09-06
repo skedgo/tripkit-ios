@@ -149,13 +149,11 @@
 		3A6DF120202C8EB80084CB2C /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0C2202C8EB80084CB2C /* UIImageView+Kingfisher.swift */; };
 		3A6DF121202C8EB80084CB2C /* UIView+BearingRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0C3202C8EB80084CB2C /* UIView+BearingRotation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF122202C8EB80084CB2C /* UIView+Helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0C4202C8EB80084CB2C /* UIView+Helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF124202C8EB80084CB2C /* UISearchBar+Customizable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0C6202C8EB80084CB2C /* UISearchBar+Customizable.m */; };
 		3A6DF125202C8EB80084CB2C /* UIFont+CustomFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0C7202C8EB80084CB2C /* UIFont+CustomFonts.m */; };
 		3A6DF126202C8EB80084CB2C /* TKStyleManager+TripKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0C8202C8EB80084CB2C /* TKStyleManager+TripKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF127202C8EB80084CB2C /* UIColor+Variations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0C9202C8EB80084CB2C /* UIColor+Variations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF12A202C8EB80084CB2C /* UIView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0CC202C8EB80084CB2C /* UIView+Helpers.m */; };
 		3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0CD202C8EB80084CB2C /* UIView+BearingRotation.m */; };
-		3A6DF12C202C8EB80084CB2C /* UISearchBar+Customizable.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0CE202C8EB80084CB2C /* UISearchBar+Customizable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF12E202C8EB80084CB2C /* TKUIStyledButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0D1202C8EB80084CB2C /* TKUIStyledButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF12F202C8EB80084CB2C /* TKUIStyledLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D2202C8EB80084CB2C /* TKUIStyledLabel.m */; };
 		3A6DF130202C8EB80084CB2C /* TKUIStyledButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D3202C8EB80084CB2C /* TKUIStyledButton.m */; };
@@ -1048,13 +1046,11 @@
 		3A6DF0C2202C8EB80084CB2C /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		3A6DF0C3202C8EB80084CB2C /* UIView+BearingRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BearingRotation.h"; sourceTree = "<group>"; };
 		3A6DF0C4202C8EB80084CB2C /* UIView+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helpers.h"; sourceTree = "<group>"; };
-		3A6DF0C6202C8EB80084CB2C /* UISearchBar+Customizable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+Customizable.m"; sourceTree = "<group>"; };
 		3A6DF0C7202C8EB80084CB2C /* UIFont+CustomFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CustomFonts.m"; sourceTree = "<group>"; };
 		3A6DF0C8202C8EB80084CB2C /* TKStyleManager+TripKitUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TKStyleManager+TripKitUI.h"; sourceTree = "<group>"; };
 		3A6DF0C9202C8EB80084CB2C /* UIColor+Variations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Variations.h"; sourceTree = "<group>"; };
 		3A6DF0CC202C8EB80084CB2C /* UIView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helpers.m"; sourceTree = "<group>"; };
 		3A6DF0CD202C8EB80084CB2C /* UIView+BearingRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BearingRotation.m"; sourceTree = "<group>"; };
-		3A6DF0CE202C8EB80084CB2C /* UISearchBar+Customizable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+Customizable.h"; sourceTree = "<group>"; };
 		3A6DF0D1202C8EB80084CB2C /* TKUIStyledButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIStyledButton.h; sourceTree = "<group>"; };
 		3A6DF0D2202C8EB80084CB2C /* TKUIStyledLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIStyledLabel.m; sourceTree = "<group>"; };
 		3A6DF0D3202C8EB80084CB2C /* TKUIStyledButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIStyledButton.m; sourceTree = "<group>"; };
@@ -1799,8 +1795,6 @@
 				3A1AAB3622BE199A000ED3CC /* UIImage+Variations.m */,
 				3A6DF0B1202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift */,
 				3A6DF0C2202C8EB80084CB2C /* UIImageView+Kingfisher.swift */,
-				3A6DF0CE202C8EB80084CB2C /* UISearchBar+Customizable.h */,
-				3A6DF0C6202C8EB80084CB2C /* UISearchBar+Customizable.m */,
 				3A6DF0C3202C8EB80084CB2C /* UIView+BearingRotation.h */,
 				3A6DF0CD202C8EB80084CB2C /* UIView+BearingRotation.m */,
 				3A6DF0C4202C8EB80084CB2C /* UIView+Helpers.h */,
@@ -2761,7 +2755,6 @@
 				3A54758021C15C1E00748EB6 /* TripKitUIUmbrella.h in Headers */,
 				3A6DF14E202C8EB80084CB2C /* TKUIPulsingAnnotationView.h in Headers */,
 				3A6DF121202C8EB80084CB2C /* UIView+BearingRotation.h in Headers */,
-				3A6DF12C202C8EB80084CB2C /* UISearchBar+Customizable.h in Headers */,
 				3AFD397220D93D9800FDC7D0 /* TKUISheet.h in Headers */,
 				3ABD101B20FE2CAC00693FF8 /* SGTableCell.h in Headers */,
 				3A6DF122202C8EB80084CB2C /* UIView+Helpers.h in Headers */,
@@ -3600,7 +3593,6 @@
 				3AFD394920D9333500FDC7D0 /* TKUIResultsMapManager.swift in Sources */,
 				3A67698620EE3A7A0044663F /* TKUIAutocompletionViewController.swift in Sources */,
 				D3F9CEC32064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift in Sources */,
-				3A6DF124202C8EB80084CB2C /* UISearchBar+Customizable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
