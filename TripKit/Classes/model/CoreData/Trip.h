@@ -24,6 +24,7 @@
 @property (nonatomic, strong, nonnull) NSNumber * minutes; // cache for sorting
 @property (nonatomic, strong, nonnull) NSNumber * mainSegmentHashCode;
 
+@property (nonatomic, retain, nullable) id data; // NSData (or NSDictionary)
 @property (nonatomic, strong, nonnull) NSNumber * flags;
 @property (nonatomic, strong, nullable) NSString * saveURLString;
 @property (nonatomic, strong, nullable) NSString * shareURLString;
@@ -63,6 +64,8 @@
 @property (nonatomic, strong, nullable) NSURL *shareURL;
 
 @property (nonatomic, strong, nullable, readonly) NSURL *saveURL;
+
+@property (nonatomic, copy, nullable) NSString *bundleId;
 
 /**
  Checks if trip is in a usable state for CoreData. Bit of an ugly check to use

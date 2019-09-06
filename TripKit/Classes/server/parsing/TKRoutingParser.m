@@ -275,6 +275,10 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         trip.missedBookingWindow  = [@"MISSED_PREBOOKING_WINDOW" isEqualToString:tripDict[@"availability"]];
       }
       
+      if ([tripDict[@"bundleId"] isKindOfClass:[NSString class]]) {
+        [trip setBundleId:tripDict[@"bundleId"]];
+      }
+      
       [trip calculateDuration];
       
       // updated trip isn't strictly speaking new, but we want to process it as a successful match.
