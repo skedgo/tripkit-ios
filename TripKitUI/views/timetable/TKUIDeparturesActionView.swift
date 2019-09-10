@@ -62,8 +62,12 @@ class TKUIDeparturesActionView: UIView {
       backgroundColor = tintColor
       layer.borderWidth = 0
       layer.borderColor = nil
-      imageView.tintColor = .tkBackground
-      label.textColor = .tkBackground
+      
+      // TODO: This isn't correct, shouldn't be dynamic as tint colours aren't
+      let textColor: UIColor = tintColor.isDark() ? .tkBackground : .tkLabelPrimary
+      
+      imageView.tintColor = textColor
+      label.textColor = textColor
     } else {
       backgroundColor = .tkBackground
       layer.borderWidth = 2

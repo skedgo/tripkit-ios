@@ -132,9 +132,11 @@ extension TKUIDepartureCell {
     serviceImageView.setImage(with: dataSource.imageURL, asTemplate: dataSource.imageIsTemplate, placeholder: dataSource.placeholderImage)
     serviceImageView.tintColor = dataSource.imageTintColor ?? .tkLabelPrimary
     
-    let serviceColor = dataSource.serviceColor ?? .tkLabelPrimary
     serviceShortNameLabel.text = dataSource.serviceShortName
-    serviceShortNameLabel.textColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
+    let serviceColor = dataSource.serviceColor ?? .tkLabelPrimary
+    // TODO: This isn't correct if we use model.serviceColor as those aren't dynamic
+    let textColor: UIColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
+    serviceShortNameLabel.textColor = textColor
     serviceColorView.backgroundColor = serviceColor
     
     titleLabel.attributedText = dataSource.timeText
