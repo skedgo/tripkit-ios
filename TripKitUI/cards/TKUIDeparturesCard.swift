@@ -207,6 +207,10 @@ public class TKUIDeparturesCard : TGTableCard {
       .drive(accessoryView.timeButton.rx.title(for: .normal))
       .disposed(by: disposeBag)
     
+    viewModel.lines
+      .drive(accessoryView.rx.lines)
+      .disposed(by: disposeBag)
+
     
     // TODO: Add viewModel.embarkationStopAlerts
     

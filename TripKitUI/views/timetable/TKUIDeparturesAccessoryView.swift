@@ -9,8 +9,17 @@
 import UIKit
 
 class TKUIDeparturesAccessoryView: UIView {
+
+  struct Line: Hashable {
+    let text: String
+    var color: UIColor? = nil
+    var faded: Bool = false
+  }
   
+
   @IBOutlet weak var serviceCollectionView: UICollectionView!
+  @IBOutlet weak var serviceCollectionLayout: TKUICollectionViewBubbleLayout!
+  @IBOutlet weak var serviceCollectionHeightConstraint: NSLayoutConstraint!
   
   @IBOutlet weak var customActionStack: UIStackView!
 
@@ -18,6 +27,18 @@ class TKUIDeparturesAccessoryView: UIView {
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var timeButton: UIButton!
     
+  var lines: [Line] = [] {
+    didSet {
+      serviceCollectionView.reloadData()
+      
+      serviceCollectionView.bounds = CGRect(x: 0, y: 0, width: bounds.width, height: 200) // .infinity or .max lead to crashes or infinite loops in iOS 13 :(
+      serviceCollectionView.layoutIfNeeded()
+      serviceCollectionHeightConstraint.constant = serviceCollectionLayout.collectionViewContentSize.height
+    }
+  }
+  
+  private var sizingCell: TKUIServiceNumberCell!
+  
   static func newInstance() -> TKUIDeparturesAccessoryView {
     let bundle = Bundle(for: self)
     guard
@@ -28,6 +49,11 @@ class TKUIDeparturesAccessoryView: UIView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    
+    sizingCell = TKUIServiceNumberCell.newInstance()
+    serviceCollectionView.register(TKUIServiceNumberCell.nib, forCellWithReuseIdentifier: TKUIServiceNumberCell.reuseIdentifier)
+    serviceCollectionView.dataSource = self
+    serviceCollectionLayout.delegate = self
     
     bottomBar.backgroundColor = .tkBackgroundSecondary
     
@@ -63,4 +89,43 @@ class TKUIDeparturesAccessoryView: UIView {
     }
   }
   
+}
+
+extension TKUIDeparturesAccessoryView: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return lines.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TKUIServiceNumberCell.reuseIdentifier, for: indexPath) as! TKUIServiceNumberCell
+    cell.configure(lines[indexPath.item])
+    return cell
+  }
+}
+
+extension TKUIDeparturesAccessoryView: TKUICollectionViewBubbleLayoutDelegate {
+  
+  func collectionView(_ collectionView: UICollectionView, itemSizeAt indexPath: IndexPath) -> CGSize {
+    sizingCell.configure(lines[indexPath.item])
+    sizingCell.layoutIfNeeded()
+    sizingCell.sizeToFit()
+    
+    return sizingCell.systemLayoutSizeFitting(collectionView.bounds.size, withHorizontalFittingPriority: .defaultLow, verticalFittingPriority: .defaultLow)
+  }
+  
+}
+
+extension TKUIServiceNumberCell {
+  func configure(_ line: TKUIDeparturesAccessoryView.Line) {
+    wrapperView.alpha = line.faded ? 0.2 : 1
+    
+    numberLabel.text = line.text
+    
+    let serviceColor = line.color ?? .tkLabelPrimary
+    // TODO: This isn't correct if we use model.serviceColor as those aren't dynamic
+    let textColor: UIColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
+    numberLabel.textColor = textColor
+    wrapperView.backgroundColor = serviceColor
+  }
 }
