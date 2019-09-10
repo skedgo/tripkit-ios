@@ -367,12 +367,7 @@ extension TKUIDeparturesCard: UITableViewDelegate {
     
     // Dismiss keyboard, unless we're typing
     if scrollView.isDragging, !scrollView.isDecelerating, scrollView.contentOffset.y > 40 {
-//      [self.searchBar resignFirstResponder];
-//
-//      // edge insets
-//      UIEdgeInsets contentInsets = self.insets;
-//      tableView.contentInset = contentInsets;
-//      tableView.scrollIndicatorInsets = contentInsets;
+      accessoryView.searchBar.resignFirstResponder()
     }
     
     let percentScrolled = (tableView.contentOffset.y + tableView.frame.height) / tableView.contentSize.height
