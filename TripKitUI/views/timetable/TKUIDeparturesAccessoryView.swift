@@ -110,8 +110,7 @@ extension TKUIDeparturesAccessoryView: TKUICollectionViewBubbleLayoutDelegate {
     sizingCell.configure(lines[indexPath.item])
     sizingCell.layoutIfNeeded()
     sizingCell.sizeToFit()
-    
-    return sizingCell.systemLayoutSizeFitting(collectionView.bounds.size, withHorizontalFittingPriority: .defaultLow, verticalFittingPriority: .defaultLow)
+    return sizingCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
   }
   
 }

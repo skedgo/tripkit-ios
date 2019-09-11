@@ -29,7 +29,7 @@ class TKUIDeparturesActionView: UIView {
     }
   }
   
-  class func newInstance() -> TKUIDeparturesActionView {
+  static func newInstance() -> TKUIDeparturesActionView {
     let view = Bundle(for: self).loadNibNamed("TKUIDeparturesActionView", owner: self, options: nil)?.first as! TKUIDeparturesActionView
     return view
   }

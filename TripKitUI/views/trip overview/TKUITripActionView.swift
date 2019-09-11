@@ -27,7 +27,7 @@ class TKUITripActionView: UIView {
   
   var onTap: ((TKUITripActionView) -> Void)?
   
-  class func newInstance() -> TKUITripActionView {
+  static func newInstance() -> TKUITripActionView {
     let view = Bundle(for: self).loadNibNamed("TKUITripActionView", owner: self, options: nil)?.first as! TKUITripActionView
     return view
   }

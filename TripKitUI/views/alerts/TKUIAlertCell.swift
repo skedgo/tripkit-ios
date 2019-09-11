@@ -33,7 +33,7 @@ class TKUIAlertCell: UITableViewCell {
   // MARK: -
   
   override func awakeFromNib() {
-    backgroundColor = TKStyleManager.backgroundColorForTileList()
+    backgroundColor = .tkBackgroundTile
     titleLabel.numberOfLines = 0
     removePadding(from: textView)
   }
