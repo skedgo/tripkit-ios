@@ -47,7 +47,7 @@ public class TKUISectionedAlertViewController: UIViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    view.backgroundColor = TKStyleManager.globalViewBackgroundColor()
+    view.backgroundColor = .tkBackground
     
     customizeSearchBar()
     
@@ -180,7 +180,7 @@ extension TKUISectionedAlertViewController: UITableViewDelegate {
     guard let source = dataSource else { return nil }
     let header = TKUISectionedAlertTableHeader.newInstance()
     let section = source[section]
-    header.backgroundColor = section.color ?? TKStyleManager.backgroundColorForTileList()
+    header.backgroundColor = section.color ?? .tkBackground
     header.titleLabel.text = section.header
     header.titleLabel.textColor = section.color != nil ? .tkBackground : .tkLabelPrimary
     return header

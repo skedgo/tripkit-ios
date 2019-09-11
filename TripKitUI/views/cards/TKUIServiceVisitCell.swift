@@ -67,7 +67,7 @@ public class TKUIServiceVisitCell: UITableViewCell {
   override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
     // Not calling super to not override line colors
     UIView.animate(withDuration: animated ? 0.25 : 0) {
-      self.contentView.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : .white
+      self.contentView.backgroundColor = highlighted ? .tkBackgroundSelected : .tkBackground
     }
   }
   

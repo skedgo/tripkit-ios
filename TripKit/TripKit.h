@@ -80,9 +80,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKBuzzRealTime.h"
 #import "TKBuzzInfoProvider.h"
 
-// Track
-#import "TKTrackHelper.h"
-
 // Search
 #import "TKAutocompletionResult.h"
 #import "TKSkedGoGeocoder.h"
@@ -94,6 +91,4 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKLocationManager.h"
 
 // Deprecated
-#import "SGSearchDataSource.h"
 #import "SGDeprecatedAutocompletionDataProvider.h"
-#import "SGAutocompletionDataSource.h"

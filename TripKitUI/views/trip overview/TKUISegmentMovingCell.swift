@@ -56,7 +56,7 @@ class TKUISegmentMovingCell: UITableViewCell {
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     // Not calling super to not override line colors
     UIView.animate(withDuration: animated ? 0.25 : 0) {
-      self.contentView.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : self.backgroundColor
+      self.contentView.backgroundColor = highlighted ? .tkBackgroundSelected : self.backgroundColor
     }
   }
   

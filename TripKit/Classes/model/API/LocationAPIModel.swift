@@ -9,6 +9,10 @@
 import Foundation
 import CoreLocation
 
+protocol RealTimeUpdatable {
+  var hasRealTime: Bool { get }
+}
+
 extension API {
   
   public enum SharedVehicleType: String, Codable {
@@ -19,7 +23,7 @@ extension API {
     case car = "CAR"
   }
   
-  public struct BikePodInfo: Codable, Hashable {
+  public struct BikePodInfo: Codable, Hashable, RealTimeUpdatable {
     // static information
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
@@ -57,7 +61,7 @@ extension API {
   }
   
   
-  public struct CarPodInfo: Codable, Hashable {
+  public struct CarPodInfo: Codable, Hashable, RealTimeUpdatable {
     // static information
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
@@ -99,7 +103,7 @@ extension API {
   }
   
   
-  public struct CarParkInfo: Codable, Hashable {
+  public struct CarParkInfo: Codable, Hashable, RealTimeUpdatable {
     
     public enum EntranceType: String, Codable {
       case entranceAndExit = "ENTRANCE_EXIT"
@@ -161,14 +165,15 @@ extension API {
   }
   
   
-  public struct CarRentalInfo: Codable, Hashable {
+  public struct CarRentalInfo: Codable, Hashable, RealTimeUpdatable {
     public let identifier: String
     public let company: API.CompanyInfo
     public let openingHours: API.OpeningHours?
     public let source: API.DataAttribution?
+    public var hasRealTime: Bool { false }
   }
 
-  public struct FreeFloatingVehicleInfo: Codable, Hashable {
+  public struct FreeFloatingVehicleInfo: Codable, Hashable, RealTimeUpdatable {
     public let identifier: String
     public let operatorInfo: API.CompanyInfo
     public let vehicleType: SharedVehicleType
@@ -192,12 +197,10 @@ extension API {
       case lastUpdate
     }
     
-    public var hasRealTime: Bool {
-      return true
-    }
+    public var hasRealTime: Bool { true }
   }
   
-  public struct OnStreetParkingInfo: Codable, Hashable {
+  public struct OnStreetParkingInfo: Codable, Hashable, RealTimeUpdatable {
     public enum PaymentType: String, Codable {
       case meter = "METER"
       case creditCard = "CREDIT_CARD"
@@ -275,7 +278,7 @@ extension API {
     }
   }
   
-  public struct LocationInfo : Codable, Hashable {
+  public struct LocationInfo : Codable, Hashable, RealTimeUpdatable {
     public struct Details: Codable, Hashable {
       public let w3w: String?
       public let w3wInfoURL: URL?
@@ -292,12 +295,8 @@ extension API {
 
     
     public var hasRealTime: Bool {
-      return carPark?.hasRealTime
-        ?? bikePod?.hasRealTime
-        ?? carPod?.hasRealTime
-        ?? freeFloating?.hasRealTime
-        ?? onStreetParking?.hasRealTime
-        ?? false
+      let sources: [RealTimeUpdatable?] = [bikePod, carPod, carPod, carRental, freeFloating, onStreetParking]
+      return sources.contains { $0?.hasRealTime == true }
     }
   }
   

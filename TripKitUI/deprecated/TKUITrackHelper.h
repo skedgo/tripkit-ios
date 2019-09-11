@@ -1,5 +1,5 @@
 //
-//  TKTrackHelper.h
+//  TKUITrackHelper.h
 //  TripKit
 //
 //  Created by Adrian Schoenig on 20/01/2014.
@@ -14,7 +14,7 @@
 /**
  A collection of helper classes for processing and preparing objects that conform to the the `TKTrack` and `SGTrackItem` protocols.
  */
-@interface TKTrackHelper : NSObject
+@interface TKUITrackHelper : NSObject
 
 /**
  Identifies the time zone that the specified track item takes place. The time zone typically depends on the location that this event starts in.

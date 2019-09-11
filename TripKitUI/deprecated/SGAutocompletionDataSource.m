@@ -8,11 +8,13 @@
 
 #import "SGAutocompletionDataSource.h"
 
+#ifdef TK_NO_MODULE
 #import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
-
-#import "TKAutocompletionResult.h"
-
+#else
+@import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
+#endif
 
 @interface SGAutocompletionDataSource ()
 
@@ -153,13 +155,13 @@
     } else {
       cell.textLabel.text = Loc.CurrentLocation;
     }
-    cell.textLabel.textColor  = [TKStyleManager darkTextColor];
+    cell.textLabel.textColor  = UIColor.tkLabelPrimary;
 		cell.detailTextLabel.text = @"";
 		cell.imageView.image = [[self class] imageForSticky:stickyOption];
 		
 	} else if (stickyOption == SGSearchStickyDroppedPin) {
     cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Drop new pin", @"Shared", [TKStyleManager bundle], "Drop new pin");
-    cell.textLabel.textColor  = [TKStyleManager darkTextColor];
+    cell.textLabel.textColor  = UIColor.tkLabelPrimary;
 		cell.detailTextLabel.text = @"";
 		cell.imageView.image = [[self class] imageForSticky:stickyOption];
   }
@@ -168,11 +170,11 @@
 - (void)configureCell:(UITableViewCell *)cell forResult:(TKAutocompletionResult *)result
 {
   cell.imageView.image      = result.image;
-  cell.imageView.tintColor  = [TKColor colorWithWhite:216/255.f alpha:1]; // From SkedGo default icons
+  cell.imageView.tintColor  = UIColor.tkLabelSecondary;
   cell.textLabel.text       = result.title;
-  cell.textLabel.textColor  = [TKStyleManager darkTextColor];
+  cell.textLabel.textColor  = UIColor.tkLabelPrimary;
   cell.detailTextLabel.text = ! [result.subtitle isEqualToString:result.title] ? result.subtitle : nil;
-  cell.detailTextLabel.textColor  = [TKStyleManager lightTextColor];
+  cell.detailTextLabel.textColor  = UIColor.tkLabelSecondary;
   
   if (result.isInSupportedRegion) {
     cell.contentView.alpha = result.isInSupportedRegion.boolValue ? 1.0f : 0.33f;
@@ -189,7 +191,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell forExtraRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  cell.textLabel.textColor = [TKStyleManager lightTextColor];
+  cell.textLabel.textColor = UIColor.tkLabelSecondary;
   cell.detailTextLabel.text = @"";
   cell.imageView.image = nil;
   cell.selectionStyle = UITableViewCellSelectionStyleNone;

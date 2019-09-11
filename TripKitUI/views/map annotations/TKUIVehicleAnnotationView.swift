@@ -118,7 +118,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     label.isOpaque = false
     label.textAlignment = .center
     label.textColor = textColorForBackgroundColor(serviceColor)
-    label.font = TKStyleManager.systemFont(size: 10)
+    label.font = TKStyleManager.customFont(forTextStyle: .caption2)
     label.adjustsFontSizeToFitWidth = true
     label.minimumScaleFactor = 0.75
     wrapper.addSubview(label)

@@ -92,13 +92,13 @@ public class TKUIPathFriendlinessView: UIView {
     
     // Legend
     friendlyLegendLabel.text   = TKPathFriendliness.friendly.title
-    friendlyLegendLabel.font = TKStyleManager.systemFont(size: 12)
+    friendlyLegendLabel.font   = TKStyleManager.customFont(forTextStyle: .caption1)
     unfriendlyLegendLabel.text = TKPathFriendliness.unfriendly.title
-    unfriendlyLegendLabel.font = TKStyleManager.systemFont(size: 12)
+    unfriendlyLegendLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
     dismountLegendLabel.text   = TKPathFriendliness.dismount.title
-    dismountLegendLabel.font = TKStyleManager.systemFont(size: 12)
+    dismountLegendLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
     unknownLegendLabel.text    = TKPathFriendliness.unknown.title
-    unknownLegendLabel.font = TKStyleManager.systemFont(size: 12)
+    unknownLegendLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
     
     // Colors
     friendlyLegendDot.backgroundColor = TKPathFriendliness.friendly.color
