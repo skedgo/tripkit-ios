@@ -24,7 +24,7 @@ class TKUIEmptyAlertView: UIView {
   
   // MARK: - Creating view
   
-  class func makeView() -> TKUIEmptyAlertView {
+  static func makeView() -> TKUIEmptyAlertView {
     let bundle = TripKitUIBundle.bundle()
     return bundle.loadNibNamed(String(describing: self), owner: self, options: nil)!.first as! TKUIEmptyAlertView
   }

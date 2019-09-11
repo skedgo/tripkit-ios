@@ -60,6 +60,8 @@ public class TKUIServiceVisitCell: UITableViewCell {
   override public func awakeFromNib() {
     super.awakeFromNib()
     
+    backgroundColor = .tkBackground
+
     outerDot.layer.cornerRadius = outerDot.frame.width / 2
     innerDot.layer.cornerRadius = innerDot.frame.width / 2
   }

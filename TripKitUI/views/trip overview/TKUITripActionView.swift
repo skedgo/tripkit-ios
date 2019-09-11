@@ -27,7 +27,7 @@ class TKUITripActionView: UIView {
   
   var onTap: ((TKUITripActionView) -> Void)?
   
-  class func newInstance() -> TKUITripActionView {
+  static func newInstance() -> TKUITripActionView {
     let view = Bundle(for: self).loadNibNamed("TKUITripActionView", owner: self, options: nil)?.first as! TKUITripActionView
     return view
   }
@@ -59,7 +59,7 @@ class TKUITripActionView: UIView {
       imageWrapper.backgroundColor = tintColor ?? .clear
       imageWrapper.layer.borderWidth = 0
       imageWrapper.layer.borderColor = nil
-      imageWrapper.tintColor = .white
+      imageWrapper.tintColor = .tkBackground
     } else {
       imageWrapper.backgroundColor = .tkBackground
       imageWrapper.layer.borderWidth = 2

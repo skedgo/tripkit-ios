@@ -49,12 +49,14 @@ class TKUITripActionsView: UIView {
 extension TKUITripActionsView {
   
   func configure(with actions: [TKUITripOverviewCardAction], for trip: Trip, card: TKUITripOverviewCard) {
+    stack.arrangedSubviews.forEach(stack.removeArrangedSubview)
     stack.removeAllSubviews()
     
     for action in actions {
       let actionView = TKUITripActionView.newInstance()
       actionView.imageView.image = action.icon
       actionView.titleLabel.text = action.title
+      actionView.bold = action.style == .bold
       actionView.onTap = { [weak card, unowned actionView] sender in
         guard let card = card else { return }
         let update = action.handler(card, sender)
@@ -63,7 +65,6 @@ extension TKUITripActionsView {
           actionView.titleLabel.text = action.title
         }
       }
-      actionView.bold = action.style == .bold
       stack.addArrangedSubview(actionView)
     }
   }

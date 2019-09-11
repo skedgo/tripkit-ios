@@ -85,7 +85,7 @@ public class TKUIAttributionView: UIView {
   
   // MARK: - Creating view
   
-  public class func newView(title: String, iconURL: URL? = nil, url: URL? = nil, alignment: Alignment = .leading, wording: Wording) -> TKUIAttributionView {
+  public static func newView(title: String, iconURL: URL? = nil, url: URL? = nil, alignment: Alignment = .leading, wording: Wording) -> TKUIAttributionView {
     let view = TKUIAttributionView(contentAlignment: alignment)
     
     if let iconURL = iconURL {
@@ -123,7 +123,7 @@ public class TKUIAttributionView: UIView {
     return view
   }
   
-  public class func newView(_ sources: [API.DataAttribution], fitsIn view: UIView? = nil) -> TKUIAttributionView? {
+  public static func newView(_ sources: [API.DataAttribution], fitsIn view: UIView? = nil) -> TKUIAttributionView? {
     guard !sources.isEmpty else { return nil }
     
     let names = sources.map { $0.provider.name }.joined(separator: ", ")
@@ -138,7 +138,7 @@ public class TKUIAttributionView: UIView {
     return attributionView
   }
   
-  public class func newView(_ attribution: API.DataAttribution, fitsIn view: UIView? = nil) -> TKUIAttributionView {
+  public static func newView(_ attribution: API.DataAttribution, fitsIn view: UIView? = nil) -> TKUIAttributionView {
     let attributionView = newView(title: attribution.provider.name, iconURL: attribution.provider.remoteIconURL, url: attribution.provider.website, wording: .poweredBy)
     
     if let containingView = view {

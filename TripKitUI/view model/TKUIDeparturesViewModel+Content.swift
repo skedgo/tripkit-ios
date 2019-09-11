@@ -150,6 +150,22 @@ extension TKUIDeparturesViewModel {
   }
   
 }
+
+// MARK: - Lines
+
+extension TKUIDeparturesViewModel {
+  static func extractLines(from visits: [StopVisits]) -> [TKUIDeparturesAccessoryView.Line] {
+    var lines: Set<TKUIDeparturesAccessoryView.Line> = []
+    for visit in visits {
+      guard let text = visit.service.shortIdentifier() else { continue }
+      let line = TKUIDeparturesAccessoryView.Line(text: text, color: visit.service.color as? UIColor)
+      lines.insert(line)
+    }
+    return Array(lines).sorted { $0.text < $1.text }
+  }
+}
+
+
 // MARK: - Updating + fetching content
 
 extension TKUIDeparturesViewModel {

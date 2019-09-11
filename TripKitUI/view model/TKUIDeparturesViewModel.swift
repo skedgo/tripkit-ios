@@ -62,6 +62,8 @@ public class TKUIDeparturesViewModel: NSObject {
     let errorPublisher = PublishSubject<Error>()
 
     let departures = TKUIDeparturesViewModel.fetchContent(for: data, input: input, errorPublisher: errorPublisher)
+    
+    lines = departures.map(TKUIDeparturesViewModel.extractLines)
 
     sections = departures
       .map { TKUIDeparturesViewModel.buildSections($0, groupStops: data.groupStops, selectedServiceID: data.selectedServiceID) }
@@ -118,6 +120,8 @@ public class TKUIDeparturesViewModel: NSObject {
   public let time: Driver<Date>
   
   public let timeTitle: Driver<String>
+  
+  let lines: Driver<[TKUIDeparturesAccessoryView.Line]>
     
   public let sections: Driver<[Section]>
   

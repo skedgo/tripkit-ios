@@ -16,7 +16,7 @@ public class TKUITripBoyView: UIView {
   @IBOutlet public weak var actionButton: UIButton!
   @IBOutlet public weak var retryButton: UIButton!
   
-  public class func newInstance() -> TKUITripBoyView {
+  public static func newInstance() -> TKUITripBoyView {
     let view = Bundle(for: self).loadNibNamed("TKUITripBoyView", owner: self, options: nil)?.first as! TKUITripBoyView
     return view
   }
@@ -55,7 +55,7 @@ public class TKUITripBoyView: UIView {
   }
 
   @discardableResult
-  public class func show(error: Error, title: String? = nil, in view: UIView, aboveSubview: UIView? = nil, actionTitle: String? = nil) -> TKUITripBoyView {
+  public static func show(error: Error, title: String? = nil, in view: UIView, aboveSubview: UIView? = nil, actionTitle: String? = nil) -> TKUITripBoyView {
     self.clear(from: view)
 
     let tripBoy = TKUITripBoyView.newInstance()
