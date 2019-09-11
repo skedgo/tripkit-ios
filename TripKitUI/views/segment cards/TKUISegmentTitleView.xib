@@ -23,7 +23,6 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="r1s-7w-aJM" secondAttribute="height" multiplier="1:1" id="2Db-U5-FPA"/>
-                                <constraint firstAttribute="width" constant="30" id="5zE-9r-LPX"/>
                             </constraints>
                         </imageView>
                     </subviews>
@@ -31,7 +30,8 @@
                     <constraints>
                         <constraint firstItem="r1s-7w-aJM" firstAttribute="centerY" secondItem="d3c-vY-icO" secondAttribute="centerY" id="0ks-jY-FuO"/>
                         <constraint firstItem="r1s-7w-aJM" firstAttribute="centerX" secondItem="d3c-vY-icO" secondAttribute="centerX" id="1Oz-dH-gKA"/>
-                        <constraint firstAttribute="height" constant="40" id="4IK-Tr-04J"/>
+                        <constraint firstItem="r1s-7w-aJM" firstAttribute="width" secondItem="d3c-vY-icO" secondAttribute="height" multiplier="3:4" id="1wR-AV-DIO"/>
+                        <constraint firstAttribute="width" secondItem="d3c-vY-icO" secondAttribute="height" multiplier="1:1" id="AuQ-Eo-eCY"/>
                         <constraint firstAttribute="width" constant="40" id="bpr-pu-5UW"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>

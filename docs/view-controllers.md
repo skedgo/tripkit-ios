@@ -30,7 +30,7 @@ This view controller has the following features:
 	- Optionally with wheelchair accessibility information
 	- Let users set the time of the first departure time
 - Show details of each service
-	- Toute on the map
+	- Route on the map
 	- List of stops including arrival and departure time at each stop
 	- Real-time vehicle location where available
 
@@ -56,7 +56,7 @@ This view controller has the following features:
 	- Let users select what modes should be included
 	- Let users set the time to depart or the time to arrive
 - Show details for each trip as an overview
-- Show details for each trip on a mode-by-mode basis
+
 
 It has the following additional customisation points:
 
@@ -66,13 +66,29 @@ It has the following additional customisation points:
 - Trip overview via `TKUITripOverviewCard.config`:
 	- Presentation of attribution
 	- Custom callback for what to do when tapping a segment
-	- Custom callback for what to do when tapping 'start' button of trip
 	- Customisable list of per-trip action buttons
 	- Customisable list of per-segment action buttons
-- Trip mode-by-mode cards view `TKUITripModeByModeCard.config`:
-	- What cards to display for each segment
 
-Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (`TKUIResultsCard`, `TKUITripOverviewCard` and `TKUITripModeByModeCard`) and use them directly in a `TGCardViewController` container.
+Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (`TKUIResultsCard` and `TKUITripOverviewCard`) and use them directly in a `TGCardViewController` container.
+
+## Trip mode-by-mode overview
+
+<img src="assets/mode-by-mode.png" height="400px" />
+
+The stand-alone view controller `TKUIModeByModeViewController` let's you display details of a trip on a mode-by-mode (or segment-by-segment) basis.
+
+This view controller has the following features:
+
+- Show details for a trip on a mode-by-mode basis
+- Highly customisable what cards to display for each mode, including custom cards or also the built-in cards like `TKUIDeparturesCard` or `TKUIServiceCard` from above
+
+It has the following additional customisation points:
+
+- Style of cards via `TKUICustomization`
+- Trip mode-by-mode cards view `TKUITripModeByModeCard.config`:
+  - What cards to display for each segment
+
+Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (`TKUITripModeByModeCard`, as well as the per-segment cards) and use them directly in a `TGCardViewController` container. This for example allows to show these mode-by-mode details when a user selects a segment on a trip card (see `TKUITripOverviewCard`). 
 
 
 ## Location search

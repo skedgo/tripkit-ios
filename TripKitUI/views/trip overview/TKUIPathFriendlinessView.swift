@@ -113,6 +113,10 @@ public class TKUIPathFriendlinessView: UIView {
     unfriendlyMetreLabel.textColor = TKPathFriendliness.unfriendly.color
     dismountMetreLabel.textColor = TKPathFriendliness.dismount.color
     unknownMetreLabel.textColor = TKPathFriendliness.unknown.color
+    friendlyLegendLabel.textColor = .tkLabelSecondary
+    unfriendlyLegendLabel.textColor = .tkLabelSecondary
+    dismountLegendLabel.textColor = .tkLabelSecondary
+    unknownLegendLabel.textColor = .tkLabelSecondary
 
     // Update bar chart.
     let widthConstraints = [

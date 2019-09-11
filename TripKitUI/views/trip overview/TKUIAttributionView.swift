@@ -47,9 +47,9 @@ public class TKUIAttributionView: UIView {
     backgroundColor = TKStyleManager.backgroundColorForTileList()
     
     let textView = UITextView()
-    textView.font = TKStyleManager.systemFont(size: 15)
+    textView.font = TKStyleManager.customFont(forTextStyle: .footnote)
     textView.backgroundColor = .clear
-    textView.textColor = TKStyleManager.darkTextColor()
+    textView.textColor = .tkLabelSecondary
     textView.isEditable = false
     textView.isScrollEnabled = false
     textView.isPagingEnabled = false
@@ -71,6 +71,7 @@ public class TKUIAttributionView: UIView {
     imageView.leadingAnchor.constraint(equalTo: textView.trailingAnchor).isActive = true
     imageView.centerYAnchor.constraint(equalTo: textView.centerYAnchor).isActive = true
     imageView.heightAnchor.constraint(equalTo: textView.heightAnchor).isActive = true
+    imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
     
     switch contentAlignment {
     case .leading:
@@ -92,7 +93,7 @@ public class TKUIAttributionView: UIView {
       view.title.text = Loc.PoweredBy
       view.logo.setImage(with: iconURL)
       view.title.isUserInteractionEnabled = false
-      view.title.font = TKStyleManager.systemFont(size: 13)
+      view.title.font = TKStyleManager.customFont(forTextStyle: .footnote)
 
     } else {
       // Powered by `provider`, where provider is a text.
@@ -103,7 +104,8 @@ public class TKUIAttributionView: UIView {
       }
       
       let attributedTitle = NSMutableAttributedString(string: plain)
-      attributedTitle.addAttribute(.font, value: TKStyleManager.systemFont(size: 13), range: NSRange(location: 0, length: plain.count))
+      attributedTitle.addAttribute(.font, value: TKStyleManager.customFont(forTextStyle: .footnote), range: NSRange(location: 0, length: plain.count))
+      attributedTitle.addAttribute(.foregroundColor, value: UIColor.tkLabelSecondary, range: NSRange(location: 0, length: plain.count))
       
       let range = (plain as NSString).range(of: title)
       if let url = url, range.location != NSNotFound {

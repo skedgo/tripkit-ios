@@ -24,34 +24,15 @@ extension TKUITripCell {
     public override init() {
       super.init()
     }
-
+    
     @objc
     public func timeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
       
+      let titles = Trip.timeTitles(departure: departure, arrival: arrival, departureTimeZone: departureTimeZone, arrivalTimeZone: arrivalTimeZone, focusOnDuration: focusOnDuration, isArriveBefore: isArriveBefore)
+      
       let attributed = NSMutableAttributedString()
-      
-      let duration = arrival.durationSince(departure)
-      if focusOnDuration {
-        append(duration, to: attributed, isPrimary: true)
-        
-        let secondaryText: String
-        if isArriveBefore {
-          let timeText = TKStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone)
-          secondaryText = " (\(Loc.Departs(atTime: timeText)))"
-        } else {
-          let timeText = TKStyleManager.timeString(arrival, for: arrivalTimeZone, relativeTo: departureTimeZone)
-          secondaryText = " (\(Loc.Arrives(atTime: timeText)))"
-        }
-        append(secondaryText, to: attributed, isPrimary: false)
-      
-      } else {
-        append(TKStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone), to: attributed, isPrimary: true)
-        append(" - ", to: attributed, isPrimary: true)
-        append(TKStyleManager.timeString(arrival, for: arrivalTimeZone, relativeTo: departureTimeZone), to: attributed, isPrimary: true)
-        
-        append(" (\(duration))", to: attributed, isPrimary: false)
-      }
-      
+      append(titles.title, to: attributed, isPrimary: true)
+      append(" (\(titles.subtitle))", to: attributed, isPrimary: false)
       return attributed
     }
     

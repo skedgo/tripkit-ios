@@ -47,7 +47,8 @@ extension TKUITripOverviewViewModel {
 
     let time: Date?
     let timeZone: TimeZone
-    
+    let timesAreFixed: Bool
+
     let connection: Line?
     let isStart: Bool
   }
@@ -56,9 +57,11 @@ extension TKUITripOverviewViewModel {
     let title: String
     let subtitle: String?
     
-    let time: Date?
+    let startTime: Date?
+    let endTime: Date?
     let timeZone: TimeZone
-    
+    let timesAreFixed: Bool
+
     let topConnection: Line?
     let bottomConnection: Line?
     
@@ -66,6 +69,10 @@ extension TKUITripOverviewViewModel {
   }
   
   struct MovingItem: Equatable {
+    static func == (lhs: TKUITripOverviewViewModel.MovingItem, rhs: TKUITripOverviewViewModel.MovingItem) -> Bool {
+      return lhs.segment == rhs.segment
+    }
+    
     let title: String
     let notes: String?
     
@@ -75,8 +82,7 @@ extension TKUITripOverviewViewModel {
     
     let connection: Line?
     
-    let action: SegmentAction?
-    
+    let actions: [TKUITripOverviewCardAction]
     let accessories: [SegmentAccessory]
     
     fileprivate let segment: TKSegment
@@ -87,12 +93,6 @@ extension TKUITripOverviewViewModel {
     case averageOccupancy(API.VehicleOccupancy)
     case carriageOccupancies([[API.VehicleOccupancy]])
     case pathFriendliness(TKSegment)
-  }
-  
-  enum SegmentAction {
-    case addAlarm
-    case removeAlarm
-    case shareETA
   }
 }
 
@@ -157,6 +157,7 @@ fileprivate extension TKSegment {
       subtitle: nil,
       time: isStart ? departureTime : arrivalTime,
       timeZone: timeZone,
+      timesAreFixed: trip.departureTimeIsFixed,
       connection: (isStart ? next : previous)?.line,
       isStart: isStart
     )
@@ -166,8 +167,10 @@ fileprivate extension TKSegment {
     return TKUITripOverviewViewModel.StationaryItem(
       title: (start?.title ?? nil) ?? Loc.Location,
       subtitle: titleWithoutTime,
-      time: departureTime,
+      startTime: departureTime,
+      endTime: arrivalTime,
       timeZone: timeZone,
+      timesAreFixed: trip.departureTimeIsFixed,
       topConnection: previous?.line,
       bottomConnection: next?.line,
       segment: self
@@ -175,11 +178,14 @@ fileprivate extension TKSegment {
   }
   
   func toStationaryBridge(to next: TKSegment) -> TKUITripOverviewViewModel.StationaryItem {
+    assert(!isStationary && !next.isStationary)
     return TKUITripOverviewViewModel.StationaryItem(
       title: (next.start?.title ?? end?.title ?? nil) ?? Loc.Location,
       subtitle: nil,
-      time: arrivalTime,
+      startTime: arrivalTime,
+      endTime: next.departureTime,
       timeZone: timeZone,
+      timesAreFixed: trip.departureTimeIsFixed,
       topConnection: line,
       bottomConnection: next.line,
       segment: next // Since this is marking the start of "next", it makes most
@@ -213,14 +219,14 @@ fileprivate extension TKSegment {
       iconURL: (self as TKTripSegment).tripSegmentModeImageURL,
       iconIsTemplate: (self as TKTripSegment).tripSegmentModeImageIsTemplate,
       connection: line,
-      action: nil,
+      actions: TKUITripOverviewCard.config.segmentActionsfactory?(self) ?? [],
       accessories: accessories,
       segment: self
     )
   }
   
   var line: TKUITripOverviewViewModel.Line? {
-    guard !isStationary else { return nil }
+    guard !isStationary, !isWalking else { return nil }
     return TKUITripOverviewViewModel.Line(color: color)
   }
 }

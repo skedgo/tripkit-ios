@@ -34,25 +34,11 @@ public class TKUITripsPageCard: TGPageCard {
     
     let cards = trips.enumerated().map { TKUITripOverviewCard(trip: $1, index: $0) }
     
-    super.init(cards: cards, initialPage: index)
-    
-    setUpTripHandler()
+    super.init(cards: cards, initialPage: index, includeHeader: false)
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-
-    setUpTripHandler()
-  }
-  
-  private func setUpTripHandler() {
-    guard let tripHandler = TKUITripOverviewCard.config.startTripHandler else { return }
-    
-    headerRightAction = (title: Loc.ActionStart, onPress: { index in
-      guard let card = self.cards[index] as? TKUITripOverviewCard else { assertionFailure(); return }
-      let trip = card.viewModel.trip
-      tripHandler(card, trip)
-    })
   }
   
 }
@@ -60,19 +46,6 @@ public class TKUITripsPageCard: TGPageCard {
 public class TKUITripOverviewCard: TGTableCard {
   
   public static var config = Configuration.empty
-  
-  private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUITripOverviewViewModel.Section>(
-    configureCell: { ds, tv, ip, item in
-      switch item {
-      case .terminal(let item):
-        return TKUITripOverviewCard.terminalCell(for: item, tableView: tv, indexPath: ip)
-      case .stationary(let item):
-        return TKUITripOverviewCard.stationaryCell(for: item, tableView: tv, indexPath: ip)
-      case .moving(let item):
-        return TKUITripOverviewCard.movingCell(for: item, tableView: tv, indexPath: ip)
-      }
-    }
-  )
   
   private let index: Int? // for restoring
   private var zoomToTrip: Bool = false // for restoring
@@ -85,7 +58,7 @@ public class TKUITripOverviewCard: TGTableCard {
     self.index = index
     
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
-    super.init(title: Loc.Trip(index: index), dataSource: dataSource, mapManager: mapManager)
+    super.init(title: Loc.Trip(index: index.map { $0 + 1 }), mapManager: mapManager)
   }
   
   public required convenience init?(coder: NSCoder) {
@@ -121,9 +94,23 @@ public class TKUITripOverviewCard: TGTableCard {
     tableView.register(TKUISegmentStationaryCell.nib, forCellReuseIdentifier: TKUISegmentStationaryCell.reuseIdentifier)
     tableView.register(TKUISegmentMovingCell.nib, forCellReuseIdentifier: TKUISegmentMovingCell.reuseIdentifier)
 
-    // Overriding the data source with our Rx one
-    // Note: explicitly reset to say we know that we'll override this with Rx
     tableView.dataSource = nil
+    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUITripOverviewViewModel.Section>(
+      configureCell: { [unowned self] ds, tv, ip, item in
+        switch item {
+        case .terminal(let item):
+          return TKUITripOverviewCard.terminalCell(for: item, tableView: tv, indexPath: ip)
+        case .stationary(let item):
+          return TKUITripOverviewCard.stationaryCell(for: item, tableView: tv, indexPath: ip)
+        case .moving(let item):
+          return self.movingCell(for: item, tableView: tv, indexPath: ip)
+        }
+    })
+    
+    viewModel.titles
+      .drive(cardView.rx.titles)
+      .disposed(by: disposeBag)
+
     viewModel.sections
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
@@ -152,7 +139,7 @@ public class TKUITripOverviewCard: TGTableCard {
     // Handling segment selections
     if let segmentHandler = TKUITripOverviewCard.config.presentSegmentHandler {
       tableView.rx.itemSelected
-        .map { (self, self.viewModel.segment(for: self.dataSource[$0])) }
+        .map { (self, self.viewModel.segment(for: dataSource[$0])) }
         .filter { $1 != nil }
         .map { ($0, $1!)}
         .subscribe(onNext: segmentHandler)
@@ -191,9 +178,9 @@ extension TKUITripOverviewCard {
     return cell
   }
 
-  private static func movingCell(for moving: TKUITripOverviewViewModel.MovingItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+  private func movingCell(for moving: TKUITripOverviewViewModel.MovingItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentMovingCell.reuseIdentifier, for: indexPath) as? TKUISegmentMovingCell else { preconditionFailure() }
-    cell.configure(with: moving)
+    cell.configure(with: moving, for: self)
     return cell
   }
 
