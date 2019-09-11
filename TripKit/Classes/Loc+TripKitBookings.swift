@@ -169,7 +169,7 @@ extension Loc {
   }
   
   public static var SecurePasswordAreAtLeastFiveCharatersLongAndIncludeNumbersAndSymbols: String {
-    return NSLocalizedString("For your security, please enter your current password.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "A footnote that tells users we are asking for their current passwords, and why.")
+    return NSLocalizedString("Secure passwords are at least five characters long and include numbers and symbols", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "A footnote that tells recommends the format of a secure password.")
   }
   
   public static var Verify: String {
