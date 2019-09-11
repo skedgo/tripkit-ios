@@ -80,7 +80,7 @@ class TKUIAlertCell: UITableViewCell {
     }
     
     readMoreButton.isHidden = alert.infoURL == nil
-    readMoreButton.titleLabel?.font = TKStyleManager.semiboldSystemFont(size: 15)
+    readMoreButton.titleLabel?.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
     if let url = alert.infoURL {
       readMoreButton.rx.tap
         .subscribe(onNext: { [unowned self] in

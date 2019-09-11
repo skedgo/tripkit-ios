@@ -35,6 +35,10 @@
 
 // Deprecated things
 #import "ASMapManager.h"
+#import "SGAutocompletionDataSource.h"
+#import "SGSearchDataSource.h"
 #import "SGTableCell.h"
+#import "TKUITrackHelper.h"
+
 
 #endif /* TripKitUI_h */

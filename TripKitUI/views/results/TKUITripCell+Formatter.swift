@@ -13,12 +13,12 @@ extension TKUITripCell {
   @objc(TKUITripCellFormatter)
   public class Formatter: NSObject {
     @objc public var primaryFont: UIFont?
-    @objc public var primaryColor: UIColor?
+    @objc public var primaryColor: UIColor = .tkLabelPrimary
     
     @objc public var secondaryFont: UIFont?
-    @objc public var secondaryColor: UIColor?
+    @objc public var secondaryColor: UIColor = .tkLabelSecondary
     
-    @objc public var costColor: UIColor?
+    @objc public var costColor: UIColor = .tkLabelSecondary
     
     @objc
     public override init() {
@@ -40,12 +40,12 @@ extension TKUITripCell {
     public func costString(costs: [NSNumber: String]) -> NSAttributedString {
       let attributed = NSMutableAttributedString()
       if let price = costs[.price] {
-        append(price, to: attributed)
+        append(price, to: attributed, color: costColor)
         append(" ⋅ ", to: attributed, color: costColor)
       }
-      append(costs[.calories], to: attributed)
+      append(costs[.calories], to: attributed, color: costColor)
       append(" ⋅ ", to: attributed, color: costColor)
-      append(costs[.carbon], to: attributed)
+      append(costs[.carbon], to: attributed, color: costColor)
       return attributed
     }
 
@@ -53,16 +53,15 @@ extension TKUITripCell {
       append(string, to: attributed, font: isPrimary ? primaryFont : secondaryFont, color: isPrimary ? primaryColor : secondaryColor)
     }
     
-    private func append(_ string: String?, to attributed: NSMutableAttributedString, font: UIFont? = nil, color: UIColor? = nil) {
+    private func append(_ string: String?, to attributed: NSMutableAttributedString, font: UIFont? = nil, color: UIColor) {
       guard let string = string else { return }
       
       var attributes = [NSAttributedString.Key: Any]()
       if let font = font {
         attributes[.font] = font
       }
-      if let foreground = color {
-        attributes[.foregroundColor] = foreground
-      }
+      attributes[.foregroundColor] = color
+
       let addition = NSAttributedString(string: string, attributes: attributes)
       attributed.append(addition)
     }

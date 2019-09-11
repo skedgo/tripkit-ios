@@ -44,7 +44,7 @@ public class TKUIAttributionView: UIView {
   }
   
   fileprivate func didInit() {
-    backgroundColor = TKStyleManager.backgroundColorForTileList()
+    backgroundColor = .tkBackground
     
     let textView = UITextView()
     textView.font = TKStyleManager.customFont(forTextStyle: .footnote)

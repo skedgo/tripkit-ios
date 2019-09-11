@@ -34,11 +34,11 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
   
   /// Color used for the wider border around the polyline.
   /// Defaults to black.
-  public var borderColor: UIColor = .black
+  public var borderColor: UIColor = .tkLabelPrimary
   
   /// Color used as the backdrop if there's a dash pattern
   /// Defaults to white
-  public var backgroundColor: UIColor? = .white
+  public var backgroundColor: UIColor? = .tkBackground
   
   /// The factor by which the border expands past the line.
   /// 1.5 leads to a very thin line.

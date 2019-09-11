@@ -74,6 +74,7 @@ extension UIColor {
     }
   }()
   
+  /// Primary background colour
   @objc
   public static let tkBackground: UIColor = {
     if #available(iOS 11.0, *) {
@@ -83,6 +84,7 @@ extension UIColor {
     }
   }()
   
+  /// Background colour for elements that should be offset, e.g., grouped cells
   @objc
   public static let tkBackgroundSecondary: UIColor = {
     if #available(iOS 11.0, *) {
@@ -92,7 +94,39 @@ extension UIColor {
     }
   }()
 
-  
+  /// Background colour for cells when tapping them
+  @objc
+  public static let tkBackgroundSelected: UIColor = {
+    if #available(iOS 11.0, *) {
+      #warning("TODO: Review")
+      return .tkBackgroundSecondary
+    } else {
+      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
+    }
+  }()
+
+  /// The background colour for tiles
+  @objc
+  public static let tkBackgroundTile: UIColor = {
+    if #available(iOS 11.0, *) {
+      #warning("TODO: Review")
+      return .tkBackground
+    } else {
+      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
+    }
+  }()
+
+  /// The background colour for what's *behind* tiles
+  @objc
+  public static let tkBackgroundBelowTile: UIColor = {
+    if #available(iOS 11.0, *) {
+      #warning("TODO: Review")
+      return .tkBackgroundSecondary
+    } else {
+      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
+    }
+  }()
+
   @objc
   public static let tkSeparator: UIColor = {
     if #available(iOS 13.0, *) {
