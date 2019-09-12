@@ -11,11 +11,15 @@ import Foundation
 extension TKColor {
   
   @objc public static var routeDashColorNonTravelled: TKColor {
+    #if os(iOS) || os(tvOS)
     if #available(iOS 13.0, *) {
       return .secondarySystemFill
     } else {
       return TKColor.lightGray.withAlphaComponent(0.25)
     }
+    #elseif os(OSX)
+    return TKColor.lightGray.withAlphaComponent(0.25)
+    #endif
   }
   
 }
