@@ -22,9 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSLocale *)applicationLocale;
 
-+ (TKColor *)darkTextColor;
++ (TKColor *)darkTextColor DEPRECATED_MSG_ATTRIBUTE("Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI");
 
-+ (TKColor *)lightTextColor;
++ (TKColor *)lightTextColor DEPRECATED_MSG_ATTRIBUTE("Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI");
 
 #if TARGET_OS_IPHONE
 + (UIButton *)cellAccessoryButtonWithImage:(UIImage *)image
@@ -72,11 +72,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TKStyleManager (Color)
 
 + (TKColor *)globalTintColor;
-+ (TKColor *)globalBarTintColor;
-+ (TKColor *)globalSecondaryBarTintColor;
 + (TKColor *)globalAccentColor;
-+ (TKColor *)globalViewBackgroundColor;
 + (BOOL)globalTranslucency;
+
++ (TKColor *)globalBarTintColor DEPRECATED_MSG_ATTRIBUTE("Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI");
++ (TKColor *)globalSecondaryBarTintColor DEPRECATED_MSG_ATTRIBUTE("Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI");
++ (TKColor *)globalViewBackgroundColor DEPRECATED_MSG_ATTRIBUTE("Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI");
 
 @end
 

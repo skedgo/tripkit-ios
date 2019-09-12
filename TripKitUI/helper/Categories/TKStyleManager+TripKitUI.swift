@@ -8,6 +8,55 @@
 
 import Foundation
 
+// MARK: - Default Styles
+
+extension TKStyleManager {
+
+  @objc(styleSearchBar:includingBackground:)
+  public static func style(_ searchBar: UISearchBar, includingBackground: Bool = false) {
+    style(searchBar, includingBackground: includingBackground, styler: { _ in })
+  }
+
+  @objc(styleSearchBar:includingBackground:styler:)
+  public static func style(_ searchBar: UISearchBar, includingBackground: Bool, styler: (UITextField) -> Void) {
+    searchBar.backgroundImage = includingBackground
+      ? UIImage.backgroundNavSecondary
+      : UIImage() // blank
+    
+    searchBar.tintColor = globalAccentColor()
+    
+    style(searchBar) { textField in
+      textField.clearButtonMode = .whileEditing
+      textField.font = customFont(forTextStyle: .subheadline)
+      textField.textColor = .tkLabelPrimary
+      textField.backgroundColor = .clear
+      
+      styler(textField)
+    }
+  }
+  
+  @objc(styleSearchBar:styler:)
+  public static func style(_ searchBar: UISearchBar, styler: (UITextField) -> Void) {
+    if #available(iOS 13.0, *) {
+      styler(searchBar.searchTextField)
+    } else {
+      
+      if let textField = searchBar.subviews.compactMap( { $0 as? UITextField } ).first {
+        styler(textField)
+      
+      } else if let textField = searchBar.subviews.first?.subviews.compactMap( { $0 as? UITextField } ).first {
+        // look one-level deep
+        styler(textField)
+
+      } else {
+        assertionFailure("Couldn't locate text field")
+      }
+    }
+    
+  }
+  
+}
+
 // MARK: - Times
 
 extension TKStyleManager {

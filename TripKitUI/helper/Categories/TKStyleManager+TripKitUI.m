@@ -10,7 +10,6 @@
 
 #import <TripKitUI/TripKitUI-Swift.h>
 
-#import "UISearchBar+Customizable.h"
 #import "UIFont+CustomFonts.h"
 
 @interface UIViewController (PopoverHelpers)
@@ -72,7 +71,7 @@
 + (void)addDefaultOutline:(UIView *)view
 {
   CGFloat width = 0.5;
-  CGColorRef color = [UIColor colorWithWhite:204.f/255 alpha:1].CGColor;
+  CGColorRef color = UIColor.tkSeparator.CGColor;
   
   view.layer.borderColor = color;
   view.layer.borderWidth = width;
@@ -102,21 +101,19 @@
 
 + (void)styleTableViewForTileList:(UITableView *)tableView
 {
-  tableView.backgroundColor = [TKStyleManager globalViewBackgroundColor];
+  tableView.backgroundColor = UIColor.tkBackgroundBelowTile;
   tableView.contentInset = UIEdgeInsetsMake(5, 0, 5, 0); // more padding around tiles
   tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 + (UIColor *)backgroundColorForTileList
 {
-  return [TKStyleManager globalViewBackgroundColor];
-//  return [UIColor colorWithRed:237/255.0f green:238/255.0f blue:242/255.0f alpha:1];
+  return UIColor.tkBackgroundBelowTile;
 }
 
 + (UIColor *)cellSelectionBackgroundColor
 {
-  //  return [UIColor colorWithWhite:250/255.f alpha:1];
-  return [UIColor colorWithWhite:247/255.f alpha:1];
+  return UIColor.tkBackgroundSelected;
 }
 
 #pragma mark - Helpers
@@ -145,28 +142,6 @@
     }
   }
   
-
-+ (void)styleSearchBar:(UISearchBar *)searchBar
-   includingBackground:(BOOL)includeBackground
-{
-  // style the searchbar
-  UIImage *navBarBg;
-  if (includeBackground) {
-    navBarBg = UIImage.backgroundNavSecondary;
-  } else {
-    navBarBg = [[UIImage alloc] init]; // blank
-  }
-  searchBar.tintColor = [self globalAccentColor];
-  searchBar.backgroundImage = navBarBg;
-  
-  // style the text field
-  [searchBar styleTextField:^(UITextField *textField) {
-    textField.font = [self systemFontWithSize:15];
-    textField.textColor = [TKStyleManager darkTextColor];
-    textField.backgroundColor = [UIColor clearColor];
-  }];
-}
-
 @end
 
 @implementation TKStyleManager (Buttons)

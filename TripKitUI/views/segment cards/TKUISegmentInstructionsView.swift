@@ -22,4 +22,11 @@ class TKUISegmentInstructionsView: UIView {
   static func newInstance() -> TKUISegmentInstructionsView {
     return Bundle.tripKitUI.loadNibNamed("TKUISegmentInstructionsView", owner: self, options: nil)?.first as! TKUISegmentInstructionsView
   }
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    backgroundColor = .tkBackground
+    notesLabel.textColor = .tkLabelPrimary
+  }
 }

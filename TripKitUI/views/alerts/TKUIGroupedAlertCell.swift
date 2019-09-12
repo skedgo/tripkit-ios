@@ -49,7 +49,8 @@ class TKUIGroupedAlertCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    modeIcon.tintColor = TKStyleManager.darkTextColor() // default tint.
+    backgroundColor = .tkBackground
+    modeIcon.tintColor = .tkLabelPrimary
     alertCountLabel.isHidden = true
     alertCountWrapper.isHidden = true
   }
@@ -57,13 +58,13 @@ class TKUIGroupedAlertCell: UITableViewCell {
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     super.setHighlighted(highlighted, animated: animated)
     UIView.animate(withDuration: 0.25) {
-      self.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : .white
+      self.backgroundColor = highlighted ? .tkBackgroundSelected : .tkBackground
     }
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
-    self.backgroundColor = selected ? TKStyleManager.cellSelectionBackgroundColor() : .white
+    self.backgroundColor = selected ? .tkBackgroundSelected : .tkBackground
   }
   
   // MARK: -
@@ -83,7 +84,7 @@ class TKUIGroupedAlertCell: UITableViewCell {
       modeIcon.setImage(with: imageURL, asTemplate: route.modeInfo.remoteImageIsTemplate, placeholder: localImage)
     } else {
       modeIcon.image = localImage
-      modeIcon.tintColor = TKStyleManager.darkTextColor()
+      modeIcon.tintColor = .tkLabelPrimary
     }
     
     serviceColorIndicator.backgroundColor = route.color
@@ -98,7 +99,7 @@ class TKUIGroupedAlertCell: UITableViewCell {
     
     alertCountWrapper.isHidden = !multipleAlerts
     alertCountLabel.isHidden = !multipleAlerts
-    alertCountLabel.font = TKStyleManager.systemFont(size: 15)
+    alertCountLabel.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     
     alertCountLabel.text = multipleAlerts ? "\(alertGroup.alerts.count)" : nil
     if alertGroup.alerts(ofType: .alert).count != 0 {

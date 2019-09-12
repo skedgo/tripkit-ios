@@ -1,18 +1,22 @@
 //
-//  TKTrackHelper.m
+//  TKUITrackHelper.m
 //  TripKit
 //
 //  Created by Adrian Schoenig on 20/01/2014.
 //  Copyright (c) 2014 Adrian Schoenig. All rights reserved.
 //
 
-#import "TKTrackHelper.h"
+#import "TKUITrackHelper.h"
 
+#ifdef TK_NO_MODULE
+#import "TripKit.h"
 #import "TripKit/TripKit-Swift.h"
+#else
+@import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
+#endif
 
-#import "TKStyleManager.h"
-
-@implementation TKTrackHelper
+@implementation TKUITrackHelper
 
 + (NSTimeZone *)timeZoneForTrackItem:(id<TKTrackItem>)trackItem
 {
@@ -76,7 +80,7 @@
       break;
       
     case TKTrackItemStatusExcluded:
-      atts = @{NSForegroundColorAttributeName: [TKStyleManager lightTextColor]};
+      atts = @{NSForegroundColorAttributeName: UIColor.tkLabelSecondary};
       break;
       
     default:
@@ -273,7 +277,7 @@
 {
   NSMutableString *description = [NSMutableString string];
   for (id<TKTrackItem> trackItem in trackItems) {
-    [description appendFormat:@"- %@\n", [TKTrackHelper debugDescriptionForTrackItem:trackItem]];
+    [description appendFormat:@"- %@\n", [TKUITrackHelper debugDescriptionForTrackItem:trackItem]];
   }
   return description;
 }

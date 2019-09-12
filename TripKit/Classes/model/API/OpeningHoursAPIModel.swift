@@ -82,14 +82,14 @@ extension API {
         
         private static func time(from values: KeyedDecodingContainer<CodingKeys>, key: CodingKeys) throws -> TimeInterval {
           // TimeInterval (previously parsed)
-          if let interval = try? values.decode(TimeInterval.self, forKey: key) {
+          if let interval: TimeInterval = try? values.decode(TimeInterval.self, forKey: key) {
             return interval
           }
 
           // HH:MM string (from backend)
           let string: String = try values.decode(String.self, forKey: key)
-          let byColon = string.components(separatedBy: ":")
-          guard let leftOfColon = byColon.first, let hours = Int(leftOfColon), let rightOfColon = byColon.last else {
+          let byColon: [String] = string.components(separatedBy: ":")
+          guard let leftOfColon: String = byColon.first, let hours: Int = Int(leftOfColon), let rightOfColon: String = byColon.last else {
             throw TKOpeningHoursParserError.badTimeOfDay(string)
           }
           if let mins = Int(rightOfColon) {
@@ -97,8 +97,8 @@ extension API {
           }
 
           // HH:MM+Xd string (from backend)
-          let byPlus = rightOfColon.components(separatedBy: "+")
-          if let leftOfPlus = byPlus.first, let rightOfPlus = byPlus.last?.first, let mins = Int(leftOfPlus), let days = Int(String(rightOfPlus)) {
+          let byPlus: [String] = rightOfColon.components(separatedBy: "+")
+          if let leftOfPlus: String = byPlus.first, let mins: Int = Int(leftOfPlus), let rightOfPlus: Character = byPlus.last?.first, let days: Int = Int(String(rightOfPlus)) {
             return TimeInterval(days * 86400 + hours * 3600 + mins * 60)
           }
           

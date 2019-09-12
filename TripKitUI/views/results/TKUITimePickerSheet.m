@@ -10,9 +10,11 @@
 
 #ifdef TK_NO_MODULE
 #import "TripKit.h"
-#endif
-
 #import "TripKit/TripKit-Swift.h"
+#else
+@import TripKit;
+#import "TripKitUI/TripKitUI-Swift.h"
+#endif
 
 @interface TKUITimePickerSheet ()
 
@@ -185,7 +187,7 @@
 {
   static const CGFloat kButtonHeight = 44;
   
-  self.backgroundColor = [UIColor whiteColor];
+  self.backgroundColor = UIColor.tkBackground;
   
   UIDatePicker *timePicker = [[UIDatePicker alloc] init];
   timePicker.minimumDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * -31]; // 1 month ago

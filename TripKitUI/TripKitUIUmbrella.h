@@ -17,7 +17,6 @@
 #import "TKStyleManager+TripKitUI.h"
 #import "UIFont+CustomFonts.h"
 #import "UIImage+Variations.h"
-#import "UISearchBar+Customizable.h"
 
 // Cells
 #import "TKUIStyledLabel.h"
@@ -36,6 +35,10 @@
 
 // Deprecated things
 #import "ASMapManager.h"
+#import "SGAutocompletionDataSource.h"
+#import "SGSearchDataSource.h"
 #import "SGTableCell.h"
+#import "TKUITrackHelper.h"
+
 
 #endif /* TripKitUI_h */

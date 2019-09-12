@@ -1,0 +1,10 @@
+platform :ios, '10.4'
+use_frameworks!
+
+target 'CocoaPodsTest' do
+  pod 'TGCardViewController', :git => 'https://gitlab.com/SkedGo/iOS/tripgo-cards-ios.git'
+
+  pod 'TripKit', :path => '../../'
+  pod 'TripKitUI', :path => '../../'
+  pod 'TripKitInterApp', :path => '../../'
+end

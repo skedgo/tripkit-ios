@@ -6,26 +6,6 @@
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
 //
 
-import UIKit
-import TripKit
-
-/// An action that can be added to a `TKUITripOverviewCard`. Set an array of
-/// these on `TKUITripOverviewCard.tripActionsFactory`.
-public protocol TKUITripOverviewCardAction {
-  /// Title (and accessory label) of the button
-  var title: String { get }
-  
-  /// Icon to display as the action. Should be a template image.
-  var icon: UIImage { get }
-  
-  /// Handler executed when user taps on the button, providing the
-  /// corresponding card and trip. Should return whether the button should
-  /// be refreshed as its title or icon changed as a result (e.g., for
-  /// toggle actions such as adding or removing a reminder or favourite).
-  ///
-  /// Parameters are the card, the trip, and the sender
-  var handler: (TKUITripOverviewCard, Trip, UIView) -> Bool { get }
-}
 
 public extension TKUITripOverviewCard {
   
@@ -62,19 +42,6 @@ public extension TKUITripOverviewCard {
       card.controller?.push(pageCard)
     }
     
-    /// Set this to add a "start" button on a trip, e.g., to enter turn-by-
-    /// turn navigation mode.
-    ///
-    /// By default pushes a `TKUITripModeByModeCard` starting on the first segment
-    public var startTripHandler: ((TKUITripOverviewCard, Trip) -> Void)? = { card, trip in
-      guard let mapManager = card.mapManager as? TKUITripMapManager else {
-        assertionFailure(); return
-      }
-      let pageCard = TKUITripModeByModeCard(mapManager: mapManager)
-      pageCard.modeByModeDelegate = card
-      card.controller?.push(pageCard)
-    }
-    
     /// Set this to use your own map manager. You can use this in combination
     /// with `TGCardViewController.builder` to use a map other than Apple's
     /// MapKit.
@@ -89,6 +56,14 @@ public extension TKUITripOverviewCard {
     ///
     /// Called when a trip overview card gets presented.
     public var tripActionsFactory: ((Trip) -> [TKUITripOverviewCardAction])?
+    
+    /// Set this to add a list of action buttons to a segment on the trip overview card.
+    ///
+    /// - warning: Only a maximum of three actions can be accomodated. Any
+    ///     more than that will be ignored.
+    ///
+    /// Called when a trip overview card gets presented.
+    public var segmentActionsfactory: ((TKSegment) -> [TKUITripOverviewCardAction])?
   }
 }
 

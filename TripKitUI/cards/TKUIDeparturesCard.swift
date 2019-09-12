@@ -164,10 +164,12 @@ public class TKUIDeparturesCard : TGTableCard {
       .map { dataSource[$0] }
       .asSignal(onErrorSignalWith: .empty())
     
+    let filter = accessoryView.searchBar.rx.text.orEmpty
+    
     let input: TKUIDeparturesViewModel.UIInput = (
       selected: tableView.rx.modelSelected(TKUIDeparturesViewModel.Item.self).asSignal(),
       showAlerts: cellAlertPublisher.asSignal(onErrorSignalWith: .empty()),
-      filter: .empty(),
+      filter: filter.asDriver(),
       date: datePublisher.asDriver(onErrorDriveWith: .empty()),
       refresh: .empty(),
       loadMoreAfter: loadMoreAfter
@@ -205,6 +207,10 @@ public class TKUIDeparturesCard : TGTableCard {
       .drive(accessoryView.timeButton.rx.title(for: .normal))
       .disposed(by: disposeBag)
     
+    viewModel.lines
+      .drive(accessoryView.rx.lines)
+      .disposed(by: disposeBag)
+
     
     // TODO: Add viewModel.embarkationStopAlerts
     
@@ -361,12 +367,7 @@ extension TKUIDeparturesCard: UITableViewDelegate {
     
     // Dismiss keyboard, unless we're typing
     if scrollView.isDragging, !scrollView.isDecelerating, scrollView.contentOffset.y > 40 {
-//      [self.searchBar resignFirstResponder];
-//
-//      // edge insets
-//      UIEdgeInsets contentInsets = self.insets;
-//      tableView.contentInset = contentInsets;
-//      tableView.scrollIndicatorInsets = contentInsets;
+      accessoryView.searchBar.resignFirstResponder()
     }
     
     let percentScrolled = (tableView.contentOffset.y + tableView.frame.height) / tableView.contentSize.height

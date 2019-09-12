@@ -1,0 +1,17 @@
+//
+//  TKUICardActionStyle.swift
+//  TripKitUI-iOS
+//
+//  Created by Adrian Schönig on 06.09.19.
+//  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.
+//
+
+import Foundation
+
+public enum TKUICardActionStyle {
+  /// Highlights the button with the tint colour as a circular background
+  case bold
+  
+  /// Normal style of the button, not tinted, with a light circular border around the icon
+  case normal
+}

@@ -20,9 +20,9 @@ class TKUISectionedAlertTableHeader: UIView {
   // MARK: -
   
   override func awakeFromNib() {
-    backgroundColor = TKStyleManager.backgroundColorForTileList()
-    titleLabel.textColor = .black
-    titleLabel.font = TKStyleManager.semiboldSystemFont(size: 15)
+    backgroundColor = .tkBackground
+    titleLabel.textColor = .tkLabelPrimary
+    titleLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
   }
   
 }

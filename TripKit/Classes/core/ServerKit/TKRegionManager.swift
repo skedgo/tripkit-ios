@@ -307,7 +307,6 @@ extension TKRegionManager {
   @objc(localRegionsContainingCoordinate:)
   public func localRegions(containing coordinate: CLLocationCoordinate2D) -> Set<TKRegion> {
     guard coordinate.isValid else { return [] }
-    
     let containing = regions.filter { $0.contains(coordinate) }
     return Set(containing)
   }
@@ -344,7 +343,7 @@ extension TKRegionManager {
   ///     return `nil` if the coordinate falls outside any supported region.
   @objc(timeZoneForCoordinate:)
   public func timeZone(for coordinate: CLLocationCoordinate2D) -> TimeZone? {
-    return localRegions(containing: coordinate).first?.timeZone
+    return regions.first { $0.contains(coordinate) }?.timeZone
   }
   
   

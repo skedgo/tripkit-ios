@@ -86,7 +86,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     // The vehicle
     let vehicleRect = CGRect(x: (frame.width - vehicleWidth)/2, y: (frame.height - vehicleHeight)/2, width: vehicleWidth, height: vehicleHeight)
     
-    let serviceColor = vehicle.serviceColor ?? .black
+    let serviceColor = vehicle.serviceColor ?? .tkLabelPrimary
     
     var vehicleView: UIView?
     
@@ -118,7 +118,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     label.isOpaque = false
     label.textAlignment = .center
     label.textColor = textColorForBackgroundColor(serviceColor)
-    label.font = TKStyleManager.systemFont(size: 10)
+    label.font = TKStyleManager.customFont(forTextStyle: .caption2)
     label.adjustsFontSizeToFitWidth = true
     label.minimumScaleFactor = 0.75
     wrapper.addSubview(label)

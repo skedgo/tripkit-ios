@@ -21,6 +21,8 @@ class TKUITripOverviewViewModel {
   init(trip: Trip) {
     self.trip = trip
     
+    titles = trip.rx.titles
+    
     sections = Driver.just(TKUITripOverviewViewModel.buildSections(for: trip))
     
     dataSources = Driver.just(trip.tripGroup.sources)
@@ -28,13 +30,33 @@ class TKUITripOverviewViewModel {
     refreshMap = TKUITripOverviewViewModel.fetchContentOfServices(in: trip)
       .asSignal(onErrorSignalWith: .empty())
   }
-
+  
   let trip: Trip
+
+  let titles: Driver<(title: String, subtitle: String?)>
   
   let sections: Driver<[Section]>
   
   let dataSources: Driver<[API.DataAttribution]>
   
   let refreshMap: Signal<Void>
+}
+
+fileprivate extension Reactive where Base == Trip {
+  static func titles(for trip: Trip) -> (title: String, subtitle: String?) {
+    let timeTitles = trip.timeTitles(capitalize: true)
+    return (
+      timeTitles.title,
+      timeTitles.subtitle
+    )
+  }
+  
+  var titles: Driver<(title: String, subtitle: String?)> {
+    // TODO: This should update with real-time data
+    
+    return Observable.merge(observe(Date.self, "arrivalTime"), observe(Date.self, "departureTime"))
+      .map { [unowned base] _ in Self.titles(for: base) }
+      .asDriver(onErrorDriveWith: .empty())
+  }
 }
 
