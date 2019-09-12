@@ -158,7 +158,7 @@
   
   } else if ([overlay isKindOfClass:[MKPolygon class]]) {
     MKPolygonRenderer *aRenderer = [[MKPolygonRenderer alloc] initWithPolygon:(MKPolygon*)overlay];
-    aRenderer.fillColor = [UIColor colorWithRed:52/255.0f green:78/255.0f blue:109/255.0f alpha:0.5f];
+    aRenderer.fillColor = UIColor.tkMapOverlay;
     aRenderer.lineWidth = 0;
     return aRenderer;
     

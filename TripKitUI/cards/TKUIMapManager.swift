@@ -406,7 +406,7 @@ extension TKUIMapManager {
       
     } else if let polygon = overlay as? MKPolygon {
       let renderer = MKPolygonRenderer(polygon: polygon)
-      renderer.fillColor = UIColor(red: 52/255, green: 78/255, blue: 109/255, alpha: 0.5)
+      renderer.fillColor = .tkMapOverlay
       renderer.lineWidth = 0
       return renderer
     }

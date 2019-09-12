@@ -92,7 +92,7 @@ extension API {
           guard let leftOfColon: String = byColon.first, let hours: Int = Int(leftOfColon), let rightOfColon: String = byColon.last else {
             throw TKOpeningHoursParserError.badTimeOfDay(string)
           }
-          if let mins = Int(rightOfColon) {
+          if let mins: Int = Int(rightOfColon) {
             return TimeInterval(hours * 3600 + mins * 60)
           }
 

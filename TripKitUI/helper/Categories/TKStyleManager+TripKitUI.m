@@ -30,16 +30,10 @@
 
 @implementation TKStyleManager (TripKitUI)
 
-+ (void)addLightStatusBarGradientLayerToView:(UIView *)view height:(CGFloat)height
-{
-  CGFloat width = MAX(CGRectGetWidth(view.frame), CGRectGetHeight(view.frame)) * 1.5f; // bigger to account for resizes
-  CAGradientLayer *gradient = [self lightGradientLayerWithWidth:width height:height];
-  [view.layer addSublayer:gradient];
-}
-
 + (void)addLightStatusBarGradientLayerToView:(UIView *)view belowView:(UIView *)anotherView height:(CGFloat)height
 {
   CGFloat width = MAX(CGRectGetWidth(view.frame), CGRectGetHeight(view.frame)) * 1.5f; // bigger to account for resizes
+  
   CAGradientLayer *gradient = [self lightGradientLayerWithWidth:width height:height];
   
   if (anotherView != nil) {
@@ -75,16 +69,6 @@
   
   view.layer.borderColor = color;
   view.layer.borderWidth = width;
-  
-  //  CALayer *topBorder = [CALayer layer];
-  //  topBorder.frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), width);
-  //  topBorder.backgroundColor = color;
-  //  [view.layer addSublayer:topBorder];
-  //
-  //  CALayer *bottomBorder = [CALayer layer];
-  //  bottomBorder.frame = CGRectMake(0, CGRectGetMaxY(view.frame) - width, CGRectGetWidth(view.frame), width);
-  //  bottomBorder.backgroundColor = color;
-  //  [view.layer addSublayer:bottomBorder];
 }
 
 + (void)addDefaultButtonOutline:(UIButton *)button cornerRadius:(CGFloat)radius
@@ -123,7 +107,7 @@
   CAGradientLayer *gradient = [CAGradientLayer layer];
   gradient.frame = CGRectMake(0, 0, width, height);
   
-  UIColor *c1 = [UIColor colorWithRed:52/255.0f green:78/255.0f blue:109/255.0f alpha:0.7f];
+  UIColor *c1 = UIColor.tkStatusBarOverlay;
   gradient.colors = @[(id)c1.CGColor, (id)c1.CGColor];
   
   return gradient;
