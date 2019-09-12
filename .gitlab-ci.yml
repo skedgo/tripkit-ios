@@ -88,6 +88,22 @@ build_minimap_example:
   tags:
     - ios
 
+build_cocoapodstest_example:
+  stage: examples
+  script:
+    - cd Examples/CocoaPodsTest
+    - pod install
+    - xcodebuild build -workspace MinCocoaPodsTestiMap.xcworkspace -scheme CocoaPodsTest ONLY_ACTIVE_ARCH=NO | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+  cache:
+    key: "$CI_BUILD_REF_NAME" # per-branch caching
+    paths:
+      - Examples/CocoaPodsTest/Pods
+  artifacts:
+    paths:
+    - build/reports/examples_minimap.html
+  tags:
+    - ios
+
 code_quality:
   stage: code_quality
   image: docker:stable

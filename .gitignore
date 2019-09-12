@@ -36,6 +36,8 @@ xcshareddata
 # Examples
 /Examples/MiniMap/Podfile.lock
 /Examples/MiniMap/Pods
+/Examples/CocoaPodsTest/Podfile.lock
+/Examples/CocoaPodsTest/Pods
 
 # Documentation
 /docs/TripKit
