@@ -21,9 +21,16 @@ class MainViewController: UITableViewController {
     // inter-app actions from TripKitInterApp
      if #available(iOS 13.0, *) {
       TKUITripOverviewCard.config.segmentActionsfactory = { segment in
-        TKInterAppCommunicator.shared
-          .externalActions(for: segment)
-          .map { SegmentExternalAction(segment: segment, action: $0) }
+        var actions = [TKUITripOverviewCardAction]()
+        
+        for action in TKInterAppCommunicator.shared.externalActions(for: segment) {
+          actions.append(SegmentExternalAction(segment: segment, action: action))
+        }
+        
+        if TKInterAppCommunicator.canOpenInMapsApp(segment) {
+          actions.append(SegmentDirectionsAction(segment: segment))
+        }
+        return actions
       }
     }
     
@@ -170,7 +177,7 @@ fileprivate struct SegmentExternalAction: TKUITripOverviewCardAction {
   let segment: TKSegment
   let action: TKInterAppCommunicator.ExternalAction
   
-  var title: String { return action.title }
+  var title: String { action.title }
   
   var icon: UIImage {
     switch action.type {
@@ -191,6 +198,27 @@ fileprivate struct SegmentExternalAction: TKUITripOverviewCardAction {
         else { return false }
       
       TKInterAppCommunicator.shared.perform(self.action, for: segment, presenter: controller, sender: sender)
+      return false
+    }
+  }
+}
+
+@available(iOS 13.0, *)
+fileprivate struct SegmentDirectionsAction: TKUITripOverviewCardAction {
+  let segment: TKSegment
+
+  let title = Loc.GetDirections
+  let icon  = UIImage(systemName: "arrow.turn.up.right")!
+  let style = TKUICardActionStyle.bold
+  
+  var handler: (TKUITripOverviewCard, UIView) -> Bool {
+    return { [weak segment] card, sender in
+      guard
+        let segment = segment,
+        let controller = card.controller
+        else { return false }
+      
+      TKInterAppCommunicator.openSegmentInMapsApp(segment, forViewController: controller, initiatedBy: sender, currentLocationHandler: nil)
       return false
     }
   }
