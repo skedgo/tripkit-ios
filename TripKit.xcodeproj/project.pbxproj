@@ -834,6 +834,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3A1777A6232BF3090093D495 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A6DF166202C97F60084CB2C;
+			remoteInfo = "TripKitInterApp-iOS";
+		};
 		3A6DF153202C90D80084CB2C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
@@ -2971,6 +2978,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3A1777A7232BF3090093D495 /* PBXTargetDependency */,
 				3ACF47B5229EF0000096860D /* PBXTargetDependency */,
 				3ACF47B7229EF0000096860D /* PBXTargetDependency */,
 			);
@@ -3874,6 +3882,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3A1777A7232BF3090093D495 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A6DF166202C97F60084CB2C /* TripKitInterApp-iOS */;
+			targetProxy = 3A1777A6232BF3090093D495 /* PBXContainerItemProxy */;
+		};
 		3A6DF154202C90D80084CB2C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3AB6C61F1D1CD0060089F687 /* TripKit-iOS */;
