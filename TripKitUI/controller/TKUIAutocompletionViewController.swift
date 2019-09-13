@@ -71,6 +71,10 @@ public class TKUIAutocompletionViewController: UITableViewController {
       }
     )
     
+    // Reset to `nil` as we'll overwrite these
+    tableView.delegate = nil
+    tableView.dataSource = nil
+    
     tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
     
     viewModel = TKUIAutocompletionViewModel(
@@ -105,6 +109,9 @@ public class TKUIAutocompletionViewController: UITableViewController {
       .subscribe(onNext: { result in
         print(result)
       })
+      .disposed(by: disposeBag)
+    
+    tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
   }
 }
