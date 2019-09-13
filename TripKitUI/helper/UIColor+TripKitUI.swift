@@ -102,10 +102,17 @@ extension UIColor {
   /// Background colour for cells when tapping them
   @objc
   public static let tkBackgroundSelected: UIColor = {
-    if #available(iOS 11.0, *) {
-      return .tkBackgroundSecondary
+    if #available(iOS 13.0, *) {
+      return UIColor { traits in
+        switch traits.userInterfaceStyle {
+        case .dark:
+          return #colorLiteral(red: 0.2274509804, green: 0.2274509804, blue: 0.2352941176, alpha: 1)
+        case _:
+          return #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.8392156863, alpha: 1)
+        }
+      }
     } else {
-      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
+      return #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.8392156863, alpha: 1)
     }
   }()
 
