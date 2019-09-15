@@ -36,14 +36,27 @@ extension TKInterAppCommunicator {
   
   // MARK: - Open Maps Apps From Trip Segment
   
-  /**
-   Opens the segment in a maps app. Either directly in Apple Maps if nothing else is installed, or it will prompt for using Google Maps or Waze.
-   @param segment A segment for which `canOpenInMapsApp` returns YES
-   @param controller A controller to present the optional action sheet on
-   @param sender An optional sender on which to anchor the optional action sheet
-   @param currentLocationHandler Will be called to check if turn-by-turn navigation should start at the current location or at the segment's start location. If `nil` it will start at the current location.
-   */
-  
+  /// Opens the segment in a maps app. Either directly in Apple Maps if nothing else is installed, or it will
+  /// prompt for using Google Maps or Waze.
+  ///
+  /// - warning: Checking for Google Maps and Waze only works the appropriate URL schemes are
+  ///            added to the `LSApplicationQueriesSchemes`of your app's `Info.plist`:
+  ///
+  /// ```
+  /// <key>LSApplicationQueriesSchemes</key>
+  /// <array>
+  ///   <string>comgooglemaps-x-callback</string>
+  ///   <string>waze</string>
+  ///   ...
+  /// </array>
+  /// ```
+  ///
+  /// - Parameter segment: A segment for which `canOpenInMapsApp` returns `true`
+  /// - Parameter controller: A controller to present the optional action sheet on
+  /// - Parameter sender: A controller to present the optional action sheet on
+  /// - Parameter currentLocationHandler: Will be called to check if turn-by-turn navigation
+  ///               should start at the current location or at the segment's start location. If `nil` it will
+  ///               start at the current location.
   @objc(openSegmentInMapsApp:forViewController:initiatedBy:currentLocationHandler:)
   public static func openSegmentInMapsApp(
       _ segment: TKSegment,
