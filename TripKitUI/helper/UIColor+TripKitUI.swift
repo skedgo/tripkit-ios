@@ -52,6 +52,13 @@ extension UIColor {
     }
   }()
   
+  // MARK: - Buttons
+  
+  @objc public static var tkFilledButtonBackgroundColor: UIColor = .tripgoFilledButtonBackground
+  @objc public static var tkFilledButtonTextColor: UIColor = .tripgoFilledButtonTextColor
+  @objc public static var tkEmptyButtonBackgroundColor: UIColor = .tripgoEmptyButtonBackground
+  @objc public static var tkEmptyButtonTextColor: UIColor = .tripgoEmptyButtonTextColor
+  
   // MARK: - States
 
   @objc
@@ -246,6 +253,22 @@ extension UIColor {
         }
       }
     } else { return #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1) }
+  }()
+  
+  private static var tripgoFilledButtonBackground: UIColor = {
+    return .tkAppTintColor
+  }()
+  
+  private static var tripgoFilledButtonTextColor: UIColor = {
+    return .white
+  }()
+  
+  private static var tripgoEmptyButtonBackground: UIColor = {
+    return .tkBackground
+  }()
+  
+  private static var tripgoEmptyButtonTextColor: UIColor = {
+    return .tkLabelPrimary
   }()
   
 }
