@@ -25,6 +25,12 @@
 		3A15DDCA2271A6C7001AC0F5 /* routing-with-stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */; };
 		3A15DDCC2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */; };
 		3A15DDCD227300FA001AC0F5 /* TKCoreDataParserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */; };
+		3A1777AC232C17560093D495 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
+		3A1777AD232C17560093D495 /* TripKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A1777AF232C17570093D495 /* TripKitInterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */; };
+		3A1777B0232C17570093D495 /* TripKitInterApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A1777B1232C17590093D495 /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
+		3A1777B2232C17590093D495 /* TripKitUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A17E60022B7DC33005318D5 /* locationInfo-onStreetParking.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A17E5FF22B7DC33005318D5 /* locationInfo-onStreetParking.json */; };
 		3A1AAB3722BE199A000ED3CC /* UIImage+Variations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A1AAB3522BE199A000ED3CC /* UIImage+Variations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A1AAB3822BE199A000ED3CC /* UIImage+Variations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AAB3622BE199A000ED3CC /* UIImage+Variations.m */; };
@@ -834,6 +840,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3A1777A6232BF3090093D495 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A6DF166202C97F60084CB2C;
+			remoteInfo = "TripKitInterApp-iOS";
+		};
 		3A6DF153202C90D80084CB2C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
@@ -891,6 +904,22 @@
 			remoteInfo = "TripKitUI-iOS";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3A1777AE232C17560093D495 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3A1777AD232C17560093D495 /* TripKit.framework in Embed Frameworks */,
+				3A1777B0232C17570093D495 /* TripKitInterApp.framework in Embed Frameworks */,
+				3A1777B2232C17590093D495 /* TripKitUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3A04C9AA206D39320015D9E5 /* TKPathFriendliness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKPathFriendliness.swift; sourceTree = "<group>"; };
@@ -1581,8 +1610,11 @@
 				3ACF47BA229EF0900096860D /* TGCardViewController.framework in Frameworks */,
 				3ACF47BF229EF0A30096860D /* Kingfisher.framework in Frameworks */,
 				3ACF47BE229EF09F0096860D /* RxCocoa.framework in Frameworks */,
+				3A1777AC232C17560093D495 /* TripKit.framework in Frameworks */,
+				3A1777B1232C17590093D495 /* TripKitUI.framework in Frameworks */,
 				3ACF47BC229EF0960096860D /* RxDataSources.framework in Frameworks */,
 				3ACF47BB229EF0930096860D /* Differentiator.framework in Frameworks */,
+				3A1777AF232C17570093D495 /* TripKitInterApp.framework in Frameworks */,
 				3ACF47BD229EF09B0096860D /* ASPolygonKit.framework in Frameworks */,
 				3ACF47B8229EF0890096860D /* RxSwift.framework in Frameworks */,
 			);
@@ -2967,10 +2999,12 @@
 				3ACF479E229EEDFE0096860D /* Frameworks */,
 				3ACF479F229EEDFE0096860D /* Resources */,
 				3ACF47C0229EF0C40096860D /* Copy Carthage Frameworks */,
+				3A1777AE232C17560093D495 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3A1777A7232BF3090093D495 /* PBXTargetDependency */,
 				3ACF47B5229EF0000096860D /* PBXTargetDependency */,
 				3ACF47B7229EF0000096860D /* PBXTargetDependency */,
 			);
@@ -3874,6 +3908,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3A1777A7232BF3090093D495 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A6DF166202C97F60084CB2C /* TripKitInterApp-iOS */;
+			targetProxy = 3A1777A6232BF3090093D495 /* PBXContainerItemProxy */;
+		};
 		3A6DF154202C90D80084CB2C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3AB6C61F1D1CD0060089F687 /* TripKit-iOS */;
