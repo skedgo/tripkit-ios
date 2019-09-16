@@ -23,13 +23,11 @@ extension TKStyleManager {
       ? UIImage.backgroundNavSecondary
       : UIImage() // blank
     
-    searchBar.tintColor = globalAccentColor()
-    
     style(searchBar) { textField in
       textField.clearButtonMode = .whileEditing
       textField.font = customFont(forTextStyle: .subheadline)
       textField.textColor = .tkLabelPrimary
-      textField.backgroundColor = .clear
+      textField.backgroundColor = .tkBackground
       
       styler(textField)
     }
