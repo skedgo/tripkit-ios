@@ -10,6 +10,10 @@ import Foundation
 
 extension UIColor {
   
+  // MARK: - Primary
+  
+  @objc public static var tkAppTintColor: UIColor = .tripgoTintColor
+  
   // MARK: - Labels
   
   @objc
@@ -225,4 +229,23 @@ extension UIColor {
     }
   }()
 
+}
+
+// MARK: - TripGo defaults
+
+extension UIColor {
+  
+  #warning("All colors defined in this extension should ideally use brand-neutral values")
+  
+  private static var tripgoTintColor: UIColor = {
+    if #available(iOS 13.0, *) {
+      return UIColor { traits in
+        switch traits.userInterfaceStyle {
+        case .dark: return #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1)
+        case _: return #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1)
+        }
+      }
+    } else { return #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1) }
+  }()
+  
 }
