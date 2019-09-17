@@ -196,6 +196,9 @@
       modeCircleBackground.layer.cornerRadius = CGRectGetWidth(circleFrame) / 2;
       modeCircleBackground.alpha = alpha;
       [self addSubview:modeCircleBackground];
+      
+      // add a little bit more spacing next to the circle background
+      newFrame.origin.x += 2;
     }
 
     [self addSubview:modeImageView];
