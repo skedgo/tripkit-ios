@@ -112,7 +112,7 @@ public class TKUIAttributionView: UIView {
         attributedTitle.addAttribute(.link, value: url, range: range)
         view.title.isUserInteractionEnabled = true
       } else {
-        attributedTitle.addAttribute(.foregroundColor, value: TKStyleManager.globalTintColor(), range: range)
+        attributedTitle.addAttribute(.foregroundColor, value: UIColor.tkAppTintColor, range: range)
         view.title.isUserInteractionEnabled = false
       }
       

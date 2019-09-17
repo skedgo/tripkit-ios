@@ -33,7 +33,9 @@ public class TKUIAttributionTableViewController: UITableViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: Loc.Close, style: .done, target: self, action: #selector(closeButtonPressed(_:)))
+    tableView.backgroundColor = .tkBackground
+    
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: Loc.Close, style: .done, target: self, action: #selector(closeButtonPressed(_:)))
 
     tableView.register(TKUIAttributionCell.nib, forCellReuseIdentifier: TKUIAttributionCell.reuseIdentifier)
 
