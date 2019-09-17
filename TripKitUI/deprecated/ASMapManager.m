@@ -101,8 +101,13 @@
   
   self.willHotSwap = NO;
   
-  [self addDoubleTapZoomGestureRecognizer];
-	
+  if (@available(iOS 13.0, *)) {
+    // Double-tap-then-swipe-to-zoom gesture is built in, and adding it again
+    // leads to very poor responsiveness on callout accessory views (WTF).
+  } else {
+    [self addDoubleTapZoomGestureRecognizer];
+  }
+
 	if (completion) {
 		completion(YES);
 	}
@@ -358,7 +363,7 @@
                     dateKey:self.lastUseUserDefaultsKey];
 }
 
-- (void)addDoubleTapZoomGestureRecognizer
+- (void)addDoubleTapZoomGestureRecognizer NS_DEPRECATED_IOS(10_0, 13_0)
 {
     if (!self.tap) {
         self.tap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(tapResponder:)];
@@ -371,7 +376,7 @@
     }
 }
 
-- (void)removeDoubleTapZoomGestureRecognizer
+- (void)removeDoubleTapZoomGestureRecognizer NS_DEPRECATED_IOS(10_0, 13_0)
 {
     if (self.tap) {
         [self.mapView removeGestureRecognizer:self.tap];
