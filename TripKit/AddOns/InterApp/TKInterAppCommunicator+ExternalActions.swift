@@ -51,7 +51,7 @@ extension TKInterAppCommunicator {
   @objc(canHandleExternalActions:)
   public func canHandleExternalActions(for segment: TKSegment) -> Bool {
     guard let actions = segment.bookingExternalActions() else { return false }
-    return actions.first { self.titleForExternalAction($0) != nil } != nil
+    return actions.contains { self.canHandleExternalAction($0) }
   }
   
   /// Checks if the communication can handle the provided action, which depends both on whether
@@ -60,7 +60,7 @@ extension TKInterAppCommunicator {
   /// - Parameter action: An action string, as defined by SkedGo's backend
   /// - Returns: Whether the action can be handled, i.e., triggering `performExternalAction` will succeed.
   public func canHandleExternalAction(_ action: String) -> Bool {
-    return titleForExternalAction(action) != nil
+    return handlers.contains { $0.canHandle(action) }
   }
   
   /// Determines external actions for the provided segment
@@ -73,14 +73,10 @@ extension TKInterAppCommunicator {
     // First we build the actions, sorting them priority and dealing with the
     // case where multiple actions can be handled by the same handler (and
     // we'd only want to show one then)
+    let bookingTitle = segment.bookingTitle()
     return self.handlers
-      .compactMap { $0.handledAction(outOf: externalActions) }
+      .compactMap { $0.handledAction(outOf: externalActions, bookingTitle: bookingTitle) }
       .sorted { $0.handler.priority.rawValue > $1.handler.priority.rawValue }
-  }
-  
-  private func titleForExternalAction(_ action: String) -> String? {
-    guard let handler = handlers.first(where: { $0.canHandle(action) }) else { return nil }
-    return handler.title(for: action)
   }
   
   /// This will handle the external actions of the specified segments either by launching the external app (if there's only one action) or by presenting a sheet of actions to take for the user.
@@ -141,9 +137,9 @@ extension TKInterAppCommunicator {
 
 fileprivate extension TKInterAppExternalActionHandler {
   
-  func handledAction(outOf actions: [TKInterAppIdentifier]) -> TKInterAppCommunicator.ExternalAction? {
+  func handledAction(outOf actions: [TKInterAppIdentifier], bookingTitle: String?) -> TKInterAppCommunicator.ExternalAction? {
     guard let action = actions.first(where: canHandle) else { return nil }
-    let title = self.title(for: action)
+    let title = bookingTitle ?? self.title(for: action)
     return TKInterAppCommunicator.ExternalAction(action: action, title: title, type: type, handler: self)
   }
   
