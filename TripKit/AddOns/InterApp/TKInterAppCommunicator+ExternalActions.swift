@@ -28,7 +28,7 @@ extension TKInterAppCommunicator {
     
     let action: TKInterAppIdentifier
 
-    public let title: String
+    public var title: String
     public let type: ExternalActionType
     public var identifier: AnyHashable { return action }
 
@@ -73,10 +73,18 @@ extension TKInterAppCommunicator {
     // First we build the actions, sorting them priority and dealing with the
     // case where multiple actions can be handled by the same handler (and
     // we'd only want to show one then)
-    let bookingTitle = segment.bookingTitle()
-    return self.handlers
-      .compactMap { $0.handledAction(outOf: externalActions, bookingTitle: bookingTitle) }
+    let actions: [ExternalAction] = self.handlers
+      .compactMap { $0.handledAction(outOf: externalActions) }
       .sorted { $0.handler.priority.rawValue > $1.handler.priority.rawValue }
+    
+    // If we only have one action, we prefer the title suggested by the backend
+    // otherwise keep the per-handler titles to not duplicate them
+    if actions.count == 1, var action = actions.first, let suggestedTitle = segment.bookingTitle() {
+      action.title = suggestedTitle
+      return [action]
+    } else {
+      return actions
+    }
   }
   
   /// This will handle the external actions of the specified segments either by launching the external app (if there's only one action) or by presenting a sheet of actions to take for the user.
@@ -137,9 +145,9 @@ extension TKInterAppCommunicator {
 
 fileprivate extension TKInterAppExternalActionHandler {
   
-  func handledAction(outOf actions: [TKInterAppIdentifier], bookingTitle: String?) -> TKInterAppCommunicator.ExternalAction? {
+  func handledAction(outOf actions: [TKInterAppIdentifier]) -> TKInterAppCommunicator.ExternalAction? {
     guard let action = actions.first(where: canHandle) else { return nil }
-    let title = bookingTitle ?? self.title(for: action)
+    let title = self.title(for: action)
     return TKInterAppCommunicator.ExternalAction(action: action, title: title, type: type, handler: self)
   }
   
