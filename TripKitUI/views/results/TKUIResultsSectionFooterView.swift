@@ -22,7 +22,6 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    backgroundColor = .tkBackground
     contentView.backgroundColor = .tkBackgroundSecondary
     
     badgeWrapper.isHidden = true
