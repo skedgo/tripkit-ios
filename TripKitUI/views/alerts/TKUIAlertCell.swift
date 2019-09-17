@@ -11,12 +11,14 @@ import RxSwift
 
 class TKUIAlertCell: UITableViewCell {
   
+  @IBOutlet weak var contentWrapper: UIView!
   @IBOutlet weak var iconView: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var textView: UITextView!
   @IBOutlet weak var readMoreButton: UIButton!
   @IBOutlet weak var dateAddedLabel: UILabel!
   @IBOutlet weak var lastUpdatedLabel: UILabel!
+  @IBOutlet weak var separator: UIView!
   
   @IBOutlet weak var actionStackTopConstraint: NSLayoutConstraint!
   @IBOutlet private weak var dateAddedStackTopConstraint: NSLayoutConstraint!
@@ -33,8 +35,29 @@ class TKUIAlertCell: UITableViewCell {
   // MARK: -
   
   override func awakeFromNib() {
-    backgroundColor = .tkBackgroundTile
+    contentView.backgroundColor = .tkBackgroundBelowTile
+    
+    contentWrapper.layer.cornerRadius = 4
+    contentWrapper.backgroundColor = .tkBackgroundTile
+    TKStyleManager.addDefaultOutline(contentWrapper)
+    
+    separator.backgroundColor = .tkSeparator
+    
     titleLabel.numberOfLines = 0
+    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .headline)
+    titleLabel.textColor = .tkLabelPrimary
+    
+    textView.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    textView.textColor = .tkLabelPrimary
+    
+    dateAddedLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+    dateAddedLabel.textColor = .tkLabelSecondary
+    
+    lastUpdatedLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    lastUpdatedLabel.textColor = .tkLabelSecondary
+    
+    readMoreButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .subheadline)
+    
     removePadding(from: textView)
   }
   
@@ -62,25 +85,21 @@ class TKUIAlertCell: UITableViewCell {
     }
     
     titleLabel.text = alert.title
-    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .headline)
     
     textView.text = alert.text
-    textView.font = TKStyleManager.customFont(forTextStyle: .body)
     
     dateAddedLabel.isHidden = alert.startTime == nil
     if let dateAdded = alert.startTime {
       dateAddedLabel.text = Loc.From(date: TKStyleManager.string(for: dateAdded, for: .autoupdatingCurrent, showDate: true, showTime: false))
-      dateAddedLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
+      
     }
 
     lastUpdatedLabel.isHidden = alert.lastUpdated == nil
     if let lastUpdated = alert.lastUpdated {
       lastUpdatedLabel.text = Loc.LastUpdated(date: TKStyleManager.string(for: lastUpdated, for: .autoupdatingCurrent, showDate: true, showTime: false))
-      lastUpdatedLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     }
     
     readMoreButton.isHidden = alert.infoURL == nil
-    readMoreButton.titleLabel?.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
     if let url = alert.infoURL {
       readMoreButton.rx.tap
         .subscribe(onNext: { [unowned self] in
