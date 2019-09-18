@@ -133,7 +133,11 @@ public class Loc : NSObject {
   @objc public static var Cancelled: String {
     return NSLocalizedString("Cancelled", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Label for when a service is cancelled.")
   }
-  
+
+  @objc public static var NoRealTimeAvailable: String {
+    return NSLocalizedString("No real-time available", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show when a service does not have real-time data (even though we usually get it for services like this.)")
+  }
+
 
   // MARK: - Reminders
   
