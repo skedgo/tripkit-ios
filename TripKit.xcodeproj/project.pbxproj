@@ -203,6 +203,8 @@
 		3A7102802281A11F00756FCE /* TKUISegmentDirectionsViewModel+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71027F2281A11F00756FCE /* TKUISegmentDirectionsViewModel+Content.swift */; };
 		3A7135FA2289695A00D4068E /* TKModeImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7135F92289695A00D4068E /* TKModeImageBuilder.swift */; };
 		3A7135FB2289695A00D4068E /* TKModeImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7135F92289695A00D4068E /* TKModeImageBuilder.swift */; };
+		3A71F15D2423053200527935 /* TKSegment+StationaryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71F15C2423053200527935 /* TKSegment+StationaryType.swift */; };
+		3A71F15E2423053200527935 /* TKSegment+StationaryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71F15C2423053200527935 /* TKSegment+StationaryType.swift */; };
 		3A7377CD23226915004C91CC /* TKUIExtendedActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7377CC23226915004C91CC /* TKUIExtendedActionView.swift */; };
 		3A7377CF23226921004C91CC /* TKUIExtendedActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7377CE23226921004C91CC /* TKUIExtendedActionView.xib */; };
 		3A7636F921F9F04700639155 /* TKUIAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636F821F9F04700639155 /* TKUIAnnotations.swift */; };
@@ -1090,6 +1092,7 @@
 		3A71027D2281A04200756FCE /* TKUISegmentDirectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISegmentDirectionsViewModel.swift; sourceTree = "<group>"; };
 		3A71027F2281A11F00756FCE /* TKUISegmentDirectionsViewModel+Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUISegmentDirectionsViewModel+Content.swift"; sourceTree = "<group>"; };
 		3A7135F92289695A00D4068E /* TKModeImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKModeImageBuilder.swift; sourceTree = "<group>"; };
+		3A71F15C2423053200527935 /* TKSegment+StationaryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKSegment+StationaryType.swift"; sourceTree = "<group>"; };
 		3A7377CC23226915004C91CC /* TKUIExtendedActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIExtendedActionView.swift; sourceTree = "<group>"; };
 		3A7377CE23226921004C91CC /* TKUIExtendedActionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIExtendedActionView.xib; sourceTree = "<group>"; };
 		3A7636F821F9F04700639155 /* TKUIAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAnnotations.swift; sourceTree = "<group>"; };
@@ -2216,6 +2219,7 @@
 				3AB6C6861D1CD08E0089F687 /* TKSegment.h */,
 				3AB6C6871D1CD08E0089F687 /* TKSegment.m */,
 				3A51402D1DEE62EE002DB39F /* TKSegment.swift */,
+				3A71F15C2423053200527935 /* TKSegment+StationaryType.swift */,
 				3ADDD2C823B200A1005A4406 /* TKWheelchairAccessibility.swift */,
 				3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */,
 				3A462CC02076218A00AF41EF /* TKTurnByTurnMode.swift */,
@@ -3224,6 +3228,7 @@
 				3A38622522929C0800C8E704 /* TKContactsManager.swift in Sources */,
 				3A67698E20EE666B0044663F /* Array+TKAutocompleting.swift in Sources */,
 				3AFD397E20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift in Sources */,
+				3A71F15E2423053200527935 /* TKSegment+StationaryType.swift in Sources */,
 				3AAD87F8209B02B900C75B7E /* VehicleAPIModel.swift in Sources */,
 				3ABBDA482032132D00205042 /* Shape+CoreDataClass.swift in Sources */,
 				3ABBDA422032132D00205042 /* SegmentReference.m in Sources */,
@@ -3661,6 +3666,7 @@
 				3AA03E771F0BC9DB00C6B337 /* TKRegionAutocompleter.m in Sources */,
 				3AE4277022AF97B70081DC1E /* TKLocationTypes+Rx.swift in Sources */,
 				3A84F00E1F77021200B2F9A0 /* TripGroup.swift in Sources */,
+				3A71F15D2423053200527935 /* TKSegment+StationaryType.swift in Sources */,
 				3AFFAB8B1F06854F00147990 /* NSManagedObjectContext+Rx.swift in Sources */,
 				3AFFAB921F06854F00147990 /* Date+Helpers.swift in Sources */,
 				3AFFABC81F06854F00147990 /* TKRegion.swift in Sources */,
