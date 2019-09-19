@@ -822,6 +822,7 @@
 		D337467F208D5DA90045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
 		D37EF6D821A7BCE80062288E /* TKLocalCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37EF6D721A7BCE80062288E /* TKLocalCost.swift */; };
 		D3957CDD21ACB32000238420 /* TKLocalCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37EF6D721A7BCE80062288E /* TKLocalCost.swift */; };
+		D39910F323334BFF004A09C8 /* UIColor+TripGoDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39910F223334BFF004A09C8 /* UIColor+TripGoDefault.swift */; };
 		D39B7BAF20622C2D00988D8A /* TKUIGroupedAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */; };
 		D39B7BB420622FD100988D8A /* TKUIAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */; };
 		D39B7BB520622FD100988D8A /* TKUIAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */; };
@@ -1528,6 +1529,7 @@
 		D335907321EF604100CB57E3 /* TKStyleManager+TripKitUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKStyleManager+TripKitUI.swift"; sourceTree = "<group>"; };
 		D337467D208D5D980045B0C3 /* UserAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPIModel.swift; sourceTree = "<group>"; };
 		D37EF6D721A7BCE80062288E /* TKLocalCost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLocalCost.swift; sourceTree = "<group>"; };
+		D39910F223334BFF004A09C8 /* UIColor+TripGoDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+TripGoDefault.swift"; sourceTree = "<group>"; };
 		D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIGroupedAlertCell.swift; sourceTree = "<group>"; };
 		D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAlertCell.swift; sourceTree = "<group>"; };
 		D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIAlertCell.xib; sourceTree = "<group>"; };
@@ -1912,6 +1914,7 @@
 				3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */,
 				3A506B28231FB403003DD234 /* Trip+Titles.swift */,
 				3A40921322F0A7F80049AAE7 /* UIColor+TripKitUI.swift */,
+				D39910F223334BFF004A09C8 /* UIColor+TripGoDefault.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -3552,6 +3555,7 @@
 				3A6DF112202C8EB80084CB2C /* TKUISemaphoreView.m in Sources */,
 				3ACF47212297F9F10096860D /* TKUIServiceMapManager.swift in Sources */,
 				3AFD397020D93D9800FDC7D0 /* TKUITimePickerSheet.m in Sources */,
+				D39910F323334BFF004A09C8 /* UIColor+TripGoDefault.swift in Sources */,
 				3AF5F2B720EFF91F003AAEBA /* TKUIAttributionTableViewController.swift in Sources */,
 				3A7636FB21F9F28200639155 /* TKUIAnnotations+TripKit.swift in Sources */,
 				3ADC802C2114861500A318B9 /* TKUIResultsViewModel+Restoration.swift in Sources */,
