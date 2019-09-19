@@ -16,41 +16,10 @@ extension UIColor {
   
   // MARK: - Labels
   
-  @objc
-  public static let tkLabelPrimary: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKLabelPrimary", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .darkText
-    }
-  }()
-  
-  @objc
-  public static let tkLabelSecondary: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKLabelSecondary", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .darkText
-    }
-  }()
-  
-  @objc
-  public static let tkLabelTertiary: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKLabelTertiary", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .darkText
-    }
-  }()
-  
-  @objc
-  public static let tkLabelQuarternary: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKLabelQuarternary", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .darkText
-    }
-  }()
+  @objc public static var tkLabelPrimary: UIColor = .tripgoLabelPrimary
+  @objc public static var tkLabelSecondary: UIColor = .tripgoLabelSecondary
+  @objc public static var tkLabelTertiary: UIColor = .tripgoLabelTertiary
+  @objc public static var tkLabelQuarternary: UIColor = .tripgoLabelQuarternary
   
   // MARK: - Buttons
   
@@ -61,102 +30,30 @@ extension UIColor {
   
   // MARK: - States
 
-  @objc
-  public static let tkStateError: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKStateError", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .red
-    }
-  }()
-  
-  @objc
-  public static let tkStateWarning: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKStateWarning", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .orange
-    }
-  }()
-  
-  @objc
-  public static let tkStateSuccess: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKStateSuccess", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .green
-    }
-  }()
+  @objc public static var tkStateError: UIColor = .tripgoStateError
+  @objc public static var tkStateWarning: UIColor = .tripgoStateWarning
+  @objc public static var tkStateSuccess: UIColor = .tripgoStateSuccess
   
   // MARK: - Background
   
   /// Primary background colour
-  @objc
-  public static let tkBackground: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKBackground", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .white
-    }
-  }()
+  @objc public static var tkBackground: UIColor = .tripgoBackground
   
   /// Background colour for elements that should be offset, e.g., grouped cells
-  @objc
-  public static let tkBackgroundSecondary: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKBackgroundSecondary", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
-    }
-  }()
+  @objc public static var tkBackgroundSecondary: UIColor = .tripgoBackgroundSecondary
 
   /// Background colour for cells when tapping them
-  @objc
-  public static let tkBackgroundSelected: UIColor = {
-    if #available(iOS 13.0, *) {
-      return UIColor { traits in
-        switch traits.userInterfaceStyle {
-        case .dark:
-          return #colorLiteral(red: 0.2274509804, green: 0.2274509804, blue: 0.2352941176, alpha: 1)
-        case _:
-          return #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.8392156863, alpha: 1)
-        }
-      }
-    } else {
-      return #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.8392156863, alpha: 1)
-    }
-  }()
+  @objc public static var tkBackgroundSelected: UIColor = .tripgoBackgroundSelected
 
   /// The background colour for tiles
-  @objc
-  public static let tkBackgroundTile: UIColor = {
-    if #available(iOS 11.0, *) {
-      return .tkBackground
-    } else {
-      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
-    }
-  }()
+  @objc public static var tkBackgroundTile: UIColor = .tripgoBackgroundTile
 
   /// The background colour for what's *behind* tiles
-  @objc
-  public static let tkBackgroundBelowTile: UIColor = {
-    if #available(iOS 11.0, *) {
-      return .tkBackgroundSecondary
-    } else {
-      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
-    }
-  }()
+  @objc public static var tkBackgroundBelowTile: UIColor = .tripgoBackgroundBelowTile
 
   /// The background colour for grouped table views, where each cell would use `.tkBackground`
   /// as its background colour.
-  @objc
-  public static let tkBackgroundGrouped: UIColor = {
-    if #available(iOS 11.0, *) {
-      return .tkBackgroundSecondary
-    } else {
-      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
-    }
-  }()
+  @objc public static var tkBackgroundGrouped: UIColor = .tripgoBackgroundGrouped
   
   // MARK: - Accessories
 
@@ -244,7 +141,7 @@ extension UIColor {
   
   #warning("All colors defined in this extension should ideally use brand-neutral values")
   
-  private static var tripgoTintColor: UIColor = {
+  private static let tripgoTintColor: UIColor = {
     if #available(iOS 13.0, *) {
       return UIColor { traits in
         switch traits.userInterfaceStyle {
@@ -255,20 +152,128 @@ extension UIColor {
     } else { return #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1) }
   }()
   
-  private static var tripgoFilledButtonBackground: UIColor = {
-    return .tkAppTintColor
+  // MARK: - Buttons
+  
+  private static let tripgoFilledButtonBackground: UIColor = .tkAppTintColor
+  private static let tripgoFilledButtonTextColor: UIColor = .white
+  private static let tripgoEmptyButtonBackground: UIColor = .tkBackground
+  private static let tripgoEmptyButtonTextColor: UIColor = .tkLabelPrimary
+  
+  // MARK: - Background
+  
+  private static let tripgoBackground: UIColor = {
+    if #available(iOS 11.0, *) {
+      return UIColor(named: "TKBackground", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return .white
+    }
   }()
   
-  private static var tripgoFilledButtonTextColor: UIColor = {
-    return .white
+  private static let tripgoBackgroundSecondary: UIColor = {
+    if #available(iOS 11.0, *) {
+      return UIColor(named: "TKBackgroundSecondary", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
+    }
   }()
   
-  private static var tripgoEmptyButtonBackground: UIColor = {
-    return .tkBackground
+  private static let tripgoBackgroundTile: UIColor = {
+    if #available(iOS 11.0, *) {
+      return .tkBackground
+    } else {
+      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
+    }
   }()
   
-  private static var tripgoEmptyButtonTextColor: UIColor = {
-    return .tkLabelPrimary
+  private static let tripgoBackgroundBelowTile: UIColor = {
+    if #available(iOS 11.0, *) {
+      return .tkBackgroundSecondary
+    } else {
+      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
+    }
+  }()
+  
+  private static let tripgoBackgroundGrouped: UIColor = {
+    if #available(iOS 11.0, *) {
+      return .tkBackgroundSecondary
+    } else {
+      return #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
+    }
+  }()
+  
+  private static let tripgoBackgroundSelected: UIColor = {
+    if #available(iOS 13.0, *) {
+      return UIColor { traits in
+        switch traits.userInterfaceStyle {
+        case .dark:
+          return #colorLiteral(red: 0.2274509804, green: 0.2274509804, blue: 0.2352941176, alpha: 1)
+        case _:
+          return #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.8392156863, alpha: 1)
+        }
+      }
+    } else {
+      return #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.8392156863, alpha: 1)
+    }
+  }()
+  
+  // MARK: - Labels
+  
+  private static let tripgoLabelPrimary: UIColor = {
+    if #available(iOS 11.0, *) {
+      return UIColor(named: "TKLabelPrimary", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return .darkText
+    }
+  }()
+  
+  private static let tripgoLabelSecondary: UIColor = {
+    if #available(iOS 11.0, *) {
+      return UIColor(named: "TKLabelSecondary", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return .darkText
+    }
+  }()
+  
+  private static let tripgoLabelTertiary: UIColor = {
+    if #available(iOS 11.0, *) {
+      return UIColor(named: "TKLabelTertiary", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return .darkText
+    }
+  }()
+  
+  private static let tripgoLabelQuarternary: UIColor = {
+    if #available(iOS 11.0, *) {
+      return UIColor(named: "TKLabelQuarternary", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return .darkText
+    }
+  }()
+  
+  // MARK: - States
+    
+  private static let tripgoStateError: UIColor = {
+    if #available(iOS 11.0, *) {
+      return UIColor(named: "TKStateError", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return .red
+    }
+  }()
+  
+  private static let tripgoStateWarning: UIColor = {
+    if #available(iOS 11.0, *) {
+      return UIColor(named: "TKStateWarning", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return .orange
+    }
+  }()
+  
+  private static let tripgoStateSuccess: UIColor = {
+    if #available(iOS 11.0, *) {
+      return UIColor(named: "TKStateSuccess", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return .green
+    }
   }()
   
 }
