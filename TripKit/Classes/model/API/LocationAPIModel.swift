@@ -235,6 +235,13 @@ extension API {
       case unknown
     }
     
+    public enum Vacancy: String, Codable {
+      case unknown = "UNKNOWN"
+      case full = "NO_VACANCY"
+      case limited = "LIMITED_VACANCY"
+      case plenty = "PLENTY_VACANCY"
+    }
+    
     public struct Restriction: Codable, Hashable {
       public let color: String
       public let maximumParkingMinutes: Int
@@ -255,6 +262,7 @@ extension API {
     public let availableSpaces: Int?
     public let totalSpaces: Int?
     public let occupiedSpaces: Int?
+    public let parkingVacancy: Vacancy
     public let lastUpdate: TimeInterval?
 
     /// The polyline defining the parking area along the street as an encoded polyline.
