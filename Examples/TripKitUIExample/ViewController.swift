@@ -23,6 +23,10 @@ class MainViewController: UITableViewController {
       TKUITripOverviewCard.config.segmentActionsfactory = { segment in
         var actions = [TKUITripOverviewCardAction]()
         
+        if segment.isPublicTransport {
+          actions.append(SegmentTimetableAction(segment: segment))
+        }
+        
         for action in TKInterAppCommunicator.shared.externalActions(for: segment) {
           actions.append(SegmentExternalAction(segment: segment, action: action))
         }
@@ -224,3 +228,28 @@ fileprivate struct SegmentDirectionsAction: TKUITripOverviewCardAction {
   }
 }
 
+@available(iOS 13.0, *)
+fileprivate struct SegmentTimetableAction: TKUITripOverviewCardAction {
+  let segment: TKSegment
+
+  let title = "Show timetable"
+  let icon  = UIImage(systemName: "clock")!
+  
+  var handler: (TKUITripOverviewCard, UIView) -> Bool {
+    return { [weak segment] card, sender in
+      guard
+        let segment = segment,
+        let dls = TKDLSTable(for: segment),
+        let controller = card.controller
+        else { return false }
+      
+      // The TKUIDeparturesCard's title doesn't work well yet with a DLS table, so we use this instead
+      let segmentTitle = TKUISegmentTitleView.newInstance()
+      segmentTitle.configure(for: segment, mode: .getReady)
+      
+      let departures = TKUIDeparturesCard(titleView: (segmentTitle, segmentTitle.dismissButton), dlsTable: dls, startDate: segment.departureTime.addingTimeInterval(-10 * 60), selectedServiceID: segment.service?.code)
+      controller.push(departures)
+      return false
+    }
+  }
+}

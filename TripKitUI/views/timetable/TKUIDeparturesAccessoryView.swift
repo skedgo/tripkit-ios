@@ -58,10 +58,10 @@ class TKUIDeparturesAccessoryView: UIView {
     bottomBar.backgroundColor = .tkBackgroundSecondary
     
     // Apply default style, removing the search bar's background
-    TKStyleManager.style(searchBar)
-
+    TKStyleManager.style(searchBar) { textField in
+      textField.backgroundColor = .tkBackground
+    }
     searchBar.placeholder = Loc.Search
-    searchBar.searchTextField.backgroundColor = .tkBackground
 
     timeButton.setTitle(nil, for: .normal)
   }
