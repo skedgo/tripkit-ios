@@ -262,7 +262,7 @@ extension API {
     public let availableSpaces: Int?
     public let totalSpaces: Int?
     public let occupiedSpaces: Int?
-    public let parkingVacancy: Vacancy
+    public let parkingVacancy: Vacancy?
     public let lastUpdate: TimeInterval?
 
     /// The polyline defining the parking area along the street as an encoded polyline.
