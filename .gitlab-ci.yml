@@ -94,6 +94,7 @@ build_cocoapodstest_example:
     - cd Examples/CocoaPodsTest
     - pod install
     - xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest ONLY_ACTIVE_ARCH=NO | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+  retry: 1
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
