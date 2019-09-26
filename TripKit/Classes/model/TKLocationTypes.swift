@@ -210,7 +210,7 @@ public class TKOnStreetParkingLocation: TKModeCoordinate {
   public var parking: API.OnStreetParkingInfo
   
   private enum CodingKeys: String, CodingKey {
-    case parking = "onStreetParking"
+    case parking = "onStreetParkingDetails"
   }
   
   public required init(from decoder: Decoder) throws {
