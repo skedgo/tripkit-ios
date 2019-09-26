@@ -232,6 +232,7 @@ extension API {
       case paymentTypes
       case totalSpaces
       case availableSpaces
+      case actualRate
       case unknown
     }
     
