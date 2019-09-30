@@ -70,12 +70,14 @@
                 <constraint firstItem="jin-SJ-hvl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dDE-4f-3L0"/>
                 <constraint firstItem="jin-SJ-hvl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="kDW-9X-oto"/>
                 <constraint firstAttribute="trailing" secondItem="jin-SJ-hvl" secondAttribute="trailing" constant="16" id="nfU-IX-1LK"/>
+                <constraint firstItem="ouN-Ng-mBY" firstAttribute="top" secondItem="CuO-gT-c8T" secondAttribute="bottom" constant="16" id="y8Z-cl-z3c"/>
                 <constraint firstItem="jin-SJ-hvl" firstAttribute="top" secondItem="CuO-gT-c8T" secondAttribute="bottom" constant="16" id="zeD-cS-Oun"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="dDE-4f-3L0"/>
+                    <exclude reference="y8Z-cl-z3c"/>
                 </mask>
             </variation>
             <connections>
@@ -84,6 +86,7 @@
                 <outlet property="searchBar" destination="Kvs-8c-5zh" id="GON-Xy-Lwi"/>
                 <outlet property="serviceCollectionHeightConstraint" destination="Sy2-ru-RmS" id="MVv-9C-CUL"/>
                 <outlet property="serviceCollectionLayout" destination="SrO-do-0bT" id="7v0-rA-eVV"/>
+                <outlet property="serviceCollectionToBottomBarConstraint" destination="y8Z-cl-z3c" id="JF2-ps-BE0"/>
                 <outlet property="serviceCollectionView" destination="CuO-gT-c8T" id="KR3-PW-ZPl"/>
                 <outlet property="timeButton" destination="TJK-XX-Gi6" id="3w8-Rg-Eoj"/>
             </connections>

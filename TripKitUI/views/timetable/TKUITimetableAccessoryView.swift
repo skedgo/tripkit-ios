@@ -21,6 +21,9 @@ class TKUITimetableAccessoryView: UIView {
   @IBOutlet weak var serviceCollectionLayout: TKUICollectionViewBubbleLayout!
   @IBOutlet weak var serviceCollectionHeightConstraint: NSLayoutConstraint!
   
+  /// Constraint between collection view and bottom bar. Should be activated when `customActionStack` is hidden.
+  @IBOutlet weak var serviceCollectionToBottomBarConstraint: NSLayoutConstraint!
+  
   @IBOutlet weak var customActionStack: UIStackView!
 
   @IBOutlet weak var bottomBar: UIView!
@@ -55,6 +58,9 @@ class TKUITimetableAccessoryView: UIView {
     serviceCollectionView.dataSource = self
     serviceCollectionLayout.delegate = self
     
+    customActionStack.isHidden = true
+    serviceCollectionToBottomBarConstraint.isActive = true
+
     bottomBar.backgroundColor = .tkBackgroundSecondary
     
     // Apply default style, removing the search bar's background
@@ -71,6 +77,7 @@ class TKUITimetableAccessoryView: UIView {
     customActionStack.removeAllSubviews()
     
     customActionStack.isHidden = actions.isEmpty
+    serviceCollectionToBottomBarConstraint.isActive = actions.isEmpty
     
     for action in actions {
       let actionView = TKUITimetableActionView.newInstance()
