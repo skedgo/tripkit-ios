@@ -26,12 +26,12 @@ class TKUIResultsAccessoryView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    backgroundColor = .tkBarSecondary
+    backgroundColor = .tkAppSecondaryTintColor
     timeButton.setTitle(nil, for: .normal)
-    timeButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .subheadline)
+    timeButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     timeButton.tintColor = .tkLabelSecondary
     transportButton.setTitle(Loc.Transport, for: .normal)
-    transportButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .subheadline)
+    transportButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     transportButton.tintColor = .tkLabelSecondary
   }
 

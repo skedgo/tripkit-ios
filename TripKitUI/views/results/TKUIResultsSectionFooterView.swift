@@ -25,11 +25,13 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     contentView.backgroundColor = .tkBackgroundSecondary
     
     badgeWrapper.isHidden = true
-    badgeIcon.tintColor = .tkBackground
+    badgeIcon.tintColor = .tkFilledButtonTextColor
     badgeLabel.text = nil
-    badgeLabel.textColor = .tkBackground
+    badgeLabel.textColor = .tkFilledButtonTextColor
+    badgeLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     costLabel.text = nil
     costLabel.textColor = .tkLabelSecondary
+    costLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
   }
   
   var badge: (icon: UIImage?, text: String, background: UIColor)? {
@@ -68,6 +70,5 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
       costLabel.attributedText = newValue
     }
   }
-
   
 }

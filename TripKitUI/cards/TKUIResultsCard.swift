@@ -139,6 +139,7 @@ public class TKUIResultsCard: TGTableCard {
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
     
+    tableView.backgroundColor = .tkBackgroundGrouped
     tableView.tableFooterView = UIView()
 
     // Overriding the data source with our Rx one
@@ -236,7 +237,7 @@ extension TKUIResultsCard {
       
     } else {
       let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-      cell.backgroundColor = .tkBackground
+      cell.backgroundColor = .tkBackgroundTile
       cell.textLabel?.textColor = .tkLabelSecondary
       switch item {
       case .lessIndicator: cell.textLabel?.text = "Less"
