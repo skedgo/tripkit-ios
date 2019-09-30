@@ -1,5 +1,5 @@
 //
-//  TKUIResultsViewModel+CalculateRoutes.swift
+//  TKUIRoutingResultsViewModel+CalculateRoutes.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 01.04.19.
@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   public struct RouteBuilder: Codable {
     fileprivate enum SelectionMode: String, Equatable, Codable {
@@ -77,7 +77,7 @@ extension TKUIResultsViewModel {
 
 // MARK: - Builder
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   static func watch(_ initial: RouteBuilder, inputs: UIInput, mapInput: MapInput) -> Observable<RouteBuilder> {
     
@@ -131,7 +131,7 @@ extension TKUIResultsViewModel {
   
 }
 
-extension TKUIResultsViewModel.RouteBuilder {
+extension TKUIRoutingResultsViewModel.RouteBuilder {
   
   mutating func dropPin(at coordinate: CLLocationCoordinate2D) {
     let annotation = TKNamedCoordinate(coordinate: coordinate)
@@ -152,7 +152,7 @@ extension TKUIResultsViewModel.RouteBuilder {
 
 // MARK: - Fetching routes
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   static func fetch(for request: Observable<TripRequest?>, errorPublisher: PublishSubject<Error>) -> Observable<TKResultsFetcher.Progress> {
     return request
@@ -175,7 +175,7 @@ extension TKUIResultsViewModel {
 
 // MARK: - Routing
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   static func regionForModes(for builder: RouteBuilder) -> TKRegion {
     let start = builder.origin?.coordinate
@@ -194,9 +194,9 @@ extension TKUIResultsViewModel {
 
 extension TripRequest {
   
-  var builder: TKUIResultsViewModel.RouteBuilder {
+  var builder: TKUIRoutingResultsViewModel.RouteBuilder {
     
-    let time: TKUIResultsViewModel.RouteBuilder.Time
+    let time: TKUIRoutingResultsViewModel.RouteBuilder.Time
     switch type {
     case .leaveASAP, .none:
       time = .leaveASAP
@@ -206,7 +206,7 @@ extension TripRequest {
       time = .arriveBefore(self.time!)
     }
     
-    return TKUIResultsViewModel.RouteBuilder(
+    return TKUIRoutingResultsViewModel.RouteBuilder(
       mode: .destination,
       origin: fromLocation,
       destination: toLocation,
@@ -217,7 +217,7 @@ extension TripRequest {
   
 }
 
-extension TKUIResultsViewModel.RouteBuilder.Time {
+extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
   
   init(timeType: TKTimeType, date: Date) {
     switch timeType {
@@ -249,7 +249,7 @@ extension TKUIResultsViewModel.RouteBuilder.Time {
   
 }
 
-extension TKUIResultsViewModel.RouteBuilder {
+extension TKUIRoutingResultsViewModel.RouteBuilder {
   
   var titles: (title: String, subtitle: String?) {
     let destinationName = destination?.title ?? nil
@@ -304,11 +304,11 @@ extension TKUIResultsViewModel.RouteBuilder {
 
 // MARK: - Protocol conformance
 
-public func ==(lhs: TKUIResultsViewModel.RouteBuilder, rhs: TKUIResultsViewModel.RouteBuilder) -> Bool {
+public func ==(lhs: TKUIRoutingResultsViewModel.RouteBuilder, rhs: TKUIRoutingResultsViewModel.RouteBuilder) -> Bool {
   return lhs.time == rhs.time
     && lhs.origin === rhs.origin
     && lhs.destination === rhs.destination
     && lhs.mode == rhs.mode
 }
-extension TKUIResultsViewModel.RouteBuilder: Equatable { }
+extension TKUIRoutingResultsViewModel.RouteBuilder: Equatable { }
 

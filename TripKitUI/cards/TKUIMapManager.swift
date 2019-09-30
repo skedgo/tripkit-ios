@@ -62,7 +62,7 @@ extension TKNamedCoordinate: TKUIIdentifiableAnnotation {
 /// │       Subclass──────────────────┬─────────────────────┐            │
 /// │           │                     │                     │            │
 /// │ ┏━━━━━━━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━━━━━━━┓  │
-/// │ ┃TKUIServiceMapMa...┃ ┃TKUIResultsMapMa...┃ ┃TKUITripMapManager ┃  │
+/// │ ┃TKUIServiceMapMa...┃ ┃TKUIRoutingResul...┃ ┃TKUITripMapManager ┃  │
 /// │ ┗━━━━━━━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━━━━━━━┛  │
 /// └────────────────────────────────────────────────────────────────────┘
 /// ```

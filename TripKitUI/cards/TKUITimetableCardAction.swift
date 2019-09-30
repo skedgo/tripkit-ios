@@ -1,5 +1,5 @@
 //
-//  TKUIDeparturesCardAction.swift
+//  TKUITimetableCardCardAction.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 06.09.19.
@@ -8,7 +8,11 @@
 
 import Foundation
 
-public protocol TKUIDeparturesCardAction {
+@available(*, unavailable, renamed: "TKUITimetableCardAction")
+public typealias TKUIDeparturesCardAction = TKUITimetableCardAction
+
+
+public protocol TKUITimetableCardAction {
 
   /// Title (and accessory label) of the button
   var title: String { get }
@@ -24,11 +28,11 @@ public protocol TKUIDeparturesCardAction {
   /// toggle actions such as adding or removing a reminder or favourite).
   ///
   /// Parameters are the card, the model instance, and the sender
-  var handler: (TKUIDeparturesCard, [TKUIStopAnnotation], UIView) -> Bool { get }
+  var handler: (TKUITimetableCard, [TKUIStopAnnotation], UIView) -> Bool { get }
 
 }
 
-public extension TKUIDeparturesCardAction {
+public extension TKUITimetableCardAction {
   var style: TKUICardActionStyle { .normal }
 }
 

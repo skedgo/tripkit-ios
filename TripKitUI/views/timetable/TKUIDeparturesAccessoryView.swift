@@ -66,7 +66,7 @@ class TKUIDeparturesAccessoryView: UIView {
     timeButton.setTitle(nil, for: .normal)
   }
   
-  func setCustomActions(_ actions: [TKUIDeparturesCardAction], for model: [TKUIStopAnnotation], card: TKUIDeparturesCard) {
+  func setCustomActions(_ actions: [TKUITimetableCardAction], for model: [TKUIStopAnnotation], card: TKUITimetableCard) {
     customActionStack.arrangedSubviews.forEach(customActionStack.removeArrangedSubview)
     customActionStack.removeAllSubviews()
     

@@ -1,5 +1,5 @@
 //
-//  TKUIResultsViewModel+RealTime.swift
+//  TKUIRoutingResultsViewModel+RealTime.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 01.04.19.
@@ -12,7 +12,7 @@ import RxSwift
 
 // MARK: - Real-time updates
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   static func fetchRealTimeUpdates(for tripGroups: Observable<[TripGroup]>) -> Observable<TKRealTimeUpdateProgress<Void>> {
     return Observable<Int>.interval(.seconds(30), scheduler: MainScheduler.instance)

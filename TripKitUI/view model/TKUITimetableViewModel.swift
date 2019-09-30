@@ -1,5 +1,5 @@
 //
-//  TKUIDeparturesViewModel.swift
+//  TKUITimetableViewModel.swift
 //  TripGoAppKit
 //
 //  Created by Adrian Schönig on 01.06.18.
@@ -14,7 +14,7 @@ import RxCocoa
 
 /// View model for displaying and interacting with public
 /// transport departures from an stop (or list thereof).
-public class TKUIDeparturesViewModel: NSObject {
+public class TKUITimetableViewModel: NSObject {
   
   enum Constants {
     static let minutesToFetchBeforeNow = 15
@@ -56,17 +56,17 @@ public class TKUIDeparturesViewModel: NSObject {
     startDate = data.startDate
     restorationState = RestorableState(dataInput: data)
     
-    let timeZone = TKUIDeparturesViewModel.timeZone(from: data)
+    let timeZone = TKUITimetableViewModel.timeZone(from: data)
     self.timeZone = timeZone
 
     let errorPublisher = PublishSubject<Error>()
 
-    let departures = TKUIDeparturesViewModel.fetchContent(for: data, input: input, errorPublisher: errorPublisher)
+    let departures = TKUITimetableViewModel.fetchContent(for: data, input: input, errorPublisher: errorPublisher)
     
-    lines = departures.map(TKUIDeparturesViewModel.extractLines)
+    lines = departures.map(TKUITimetableViewModel.extractLines)
 
     sections = departures
-      .map { TKUIDeparturesViewModel.buildSections($0, groupStops: data.groupStops, selectedServiceID: data.selectedServiceID) }
+      .map { TKUITimetableViewModel.buildSections($0, groupStops: data.groupStops, selectedServiceID: data.selectedServiceID) }
     
     let selection = (input?.selected ?? .empty()).startOptional() // default selection
     selectedItem = Observable.combineLatest(selection.asObservable(), sections.asObservable()) { $0 ?? $1.defaultSelection }
@@ -74,7 +74,7 @@ public class TKUIDeparturesViewModel: NSObject {
       .asDriver(onErrorDriveWith: .empty())
 
     embarkationStopAlerts = departures
-      .map(TKUIDeparturesViewModel.buildAlerts)
+      .map(TKUITimetableViewModel.buildAlerts)
       .distinctUntilChanged { $0.count == $1.count }
     
     time = (input?.date ?? .empty())
@@ -84,9 +84,9 @@ public class TKUIDeparturesViewModel: NSObject {
       .map { TKStyleManager.timeString($0, for: timeZone) }
       .startWith(Loc.Now)
     
-    titles = Driver.just(TKUIDeparturesViewModel.titles(from: data))
+    titles = Driver.just(TKUITimetableViewModel.titles(from: data))
     
-    realTimeUpdate = TKUIDeparturesViewModel.fetchRealtimeUpdates(departures: departures)
+    realTimeUpdate = TKUITimetableViewModel.fetchRealtimeUpdates(departures: departures)
       .asDriver(onErrorRecover: { error in
         errorPublisher.onNext(error)
         return .empty()
@@ -145,7 +145,7 @@ public class TKUIDeparturesViewModel: NSObject {
 
 // MARK: - Navigation
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   
   public enum Next {
     case departure(StopVisits)
@@ -156,7 +156,7 @@ extension TKUIDeparturesViewModel {
 
 // MARK: - Scrolling to base date
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
 
   public func topIndexPath(in sections: [Section]) -> IndexPath? {
     let targetTimeInterval: TimeInterval
@@ -180,7 +180,7 @@ extension TKUIDeparturesViewModel {
 
 // MARK: - Sharing
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   
   public func stopVisits(for items: [Item]) -> [StopVisits] {
     return items.map { $0.dataModel }
@@ -190,7 +190,7 @@ extension TKUIDeparturesViewModel {
 
 // MARK: - Input conversion
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   
   static func timeZone(from data: DataInput) -> TimeZone {
     if let stops = data.stops, let first = stops.first {
@@ -244,7 +244,7 @@ extension StopLocation {
 
 // MARK: - User activity
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   static let typeIdentifier = "com.buzzhives.TripPlanner.showStopTimeTable"
   
   private func urlForUserActivity() -> URL? {
@@ -270,13 +270,13 @@ extension TKUIDeparturesViewModel {
     
     let title = stop.title ?? Loc.Timetable
 
-    let activity = NSUserActivity(activityType: TKUIDeparturesViewModel.typeIdentifier)
+    let activity = NSUserActivity(activityType: TKUITimetableViewModel.typeIdentifier)
     activity.title = title
     activity.webpageURL = url
     activity.userInfo = ["stopTimeTableURL": url]
     activity.requiredUserInfoKeys = ["stopTimeTableURL"]
 
-    let attributeSet = CSSearchableItemAttributeSet(itemContentType: TKUIDeparturesViewModel.typeIdentifier)
+    let attributeSet = CSSearchableItemAttributeSet(itemContentType: TKUITimetableViewModel.typeIdentifier)
     attributeSet.title = title
     if let image = stop.glyphImage {
       attributeSet.thumbnailData = image.pngData()
@@ -293,7 +293,7 @@ extension TKUIDeparturesViewModel {
 
 // MARK: - State restoration
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   public struct RestorableState: Codable {
     let stops: [TKStopCoordinate]?
     let groupStops: Bool
@@ -302,7 +302,7 @@ extension TKUIDeparturesViewModel {
     // loading those again, as this is used when coming from the MxM screens
     // though those currently don't restore anyway.
     // We'd then call StopLocation(fromPersistentId: $0, in: TripKit.shared.context)
-    // When this is done, also fix up `init?(dataInput: TKUIDeparturesViewModel.DataInput)`
+    // When this is done, also fix up `init?(dataInput: TKUITimetableViewModel.DataInput)`
   }
 
   public func save() throws -> Data {
@@ -320,8 +320,8 @@ extension TKUIDeparturesViewModel {
 }
 
 
-extension TKUIDeparturesViewModel.RestorableState {
-  init?(dataInput: TKUIDeparturesViewModel.DataInput) {
+extension TKUITimetableViewModel.RestorableState {
+  init?(dataInput: TKUITimetableViewModel.DataInput) {
     
     // LATER: When we restore also StopLocations, then we should handle this here, too.
     // When we do this, we can make this non-failable again.

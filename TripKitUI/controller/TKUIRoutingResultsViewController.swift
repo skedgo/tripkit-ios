@@ -1,5 +1,5 @@
 //
-//  TKUIRoutesViewController.swift
+//  TKUIRoutingResultsViewController.swift
 //  TripKitUI
 //
 //  Created by Adrian Schoenig on 17.10.17.
@@ -9,11 +9,18 @@ import UIKit
 
 import TGCardViewController
 
-public protocol TKUIRoutesViewControllerDelegate: TGCardViewControllerDelegate {
+@available(*, unavailable, renamed: "TKUIRoutingResultsViewController")
+public typealias TKUIRoutesViewController = TKUIRoutingResultsViewController
+
+@available(*, unavailable, renamed: "TKUIRoutingResultsViewControllerDelegate")
+public typealias TKUIRoutesViewControllerDelegate = TKUIRoutingResultsViewControllerDelegate
+
+
+public protocol TKUIRoutingResultsViewControllerDelegate: TGCardViewControllerDelegate {
   
 }
 
-/// The `TKUIRoutesViewController` class provides a user interface for viewing
+/// The `TKUIRoutingResultsViewController` class provides a user interface for viewing
 /// routing options.
 ///
 /// Upon selection of a route by the user, the details of the trip will be
@@ -21,10 +28,10 @@ public protocol TKUIRoutesViewControllerDelegate: TGCardViewControllerDelegate {
 ///
 /// Customisation points:
 /// - `TKUICustomization` for the visual style of the cards
-/// - `TKUIResultsCard.config` for the comparison of routing options
+/// - `TKUIRoutingResultsCard.config` for the comparison of routing options
 /// - `TKUITripOverviewCard.config` for the trip details
 /// - `TKUITripModeByModeCard.config` for the step-by-step details of a trip
-public class TKUIRoutesViewController: TGCardViewController {
+public class TKUIRoutingResultsViewController: TGCardViewController {
   
   /// Configure for showing the routes from the user's current location
   /// to the provided location leaving now.
@@ -33,7 +40,7 @@ public class TKUIRoutesViewController: TGCardViewController {
   public init(destination: MKAnnotation) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
 
-    let resultsCard = TKUIResultsCard(destination: destination)
+    let resultsCard = TKUIRoutingResultsCard(destination: destination)
     resultsCard.style = TKUICustomization.shared.cardStyle
     rootCard = resultsCard
   }
@@ -49,7 +56,7 @@ public class TKUIRoutesViewController: TGCardViewController {
   public init(request: TripRequest) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
 
-    let resultsCard = TKUIResultsCard(request: request)
+    let resultsCard = TKUIRoutingResultsCard(request: request)
     resultsCard.style = TKUICustomization.shared.cardStyle
     rootCard = resultsCard
   }
