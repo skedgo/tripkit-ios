@@ -92,6 +92,8 @@ class TKUIDepartureCell: UITableViewCell {
   public override func awakeFromNib() {
     super.awakeFromNib()
 
+    backgroundColor = .tkBackground
+    
     titleLabel.textColor = .tkLabelSecondary
     subtitleLabel.textColor = .tkLabelSecondary
     timeToDepartTextLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
@@ -109,7 +111,7 @@ class TKUIDepartureCell: UITableViewCell {
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     // Not calling super to not override line colors
     UIView.animate(withDuration: animated ? 0.25: 0) {
-      self.contentView.backgroundColor = highlighted ? TKStyleManager.cellSelectionBackgroundColor() : .white
+      self.contentView.backgroundColor = highlighted ? .tkBackgroundSelected : self.backgroundColor
     }
   }
   
@@ -128,11 +130,13 @@ extension TKUIDepartureCell {
     guard let dataSource = dataSource else { return }
     
     serviceImageView.setImage(with: dataSource.imageURL, asTemplate: dataSource.imageIsTemplate, placeholder: dataSource.placeholderImage)
-    serviceImageView.tintColor = dataSource.imageTintColor ?? TKStyleManager.darkTextColor()
+    serviceImageView.tintColor = dataSource.imageTintColor ?? .tkLabelPrimary
     
-    let serviceColor = dataSource.serviceColor ?? .tkLabelPrimary
     serviceShortNameLabel.text = dataSource.serviceShortName
-    serviceShortNameLabel.textColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
+    let serviceColor = dataSource.serviceColor ?? .tkLabelPrimary
+    // TODO: This isn't correct if we use model.serviceColor as those aren't dynamic
+    let textColor: UIColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
+    serviceShortNameLabel.textColor = textColor
     serviceColorView.backgroundColor = serviceColor
     
     titleLabel.attributedText = dataSource.timeText

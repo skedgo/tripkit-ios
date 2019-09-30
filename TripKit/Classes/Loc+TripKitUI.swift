@@ -132,7 +132,11 @@ extension Loc {
   }
   
   public static var ActionStart: String {
-    return NSLocalizedString("Start", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to start a trip")
+    return NSLocalizedString("Start", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to start a trip (primarily after pausing)")
+  }
+
+  public static var ActionGo: String {
+    return NSLocalizedString("Go", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to start a trip")
   }
 
   public static func GetOnService(To location: String) -> String {
@@ -212,16 +216,14 @@ extension Loc {
     return String(format: format, arrival)
   }
   
-  @objc(DepartsAtTime:)
-  public static func Departs(atTime time: String) -> String {
+  public static func Departs(atTime time: String, capitalize: Bool = false) -> String {
     let format = NSLocalizedString("departs %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Estimated time of departure; parameter is time, e.g., 'departs 15:30'")
-    return String(format: format, time)
+    return String(format: capitalize ? format.localizedCapitalized : format, time)
   }
   
-  @objc(ArrivesAtTime:)
-  public static func Arrives(atTime time: String) -> String {
+  public static func Arrives(atTime time: String, capitalize: Bool = false) -> String {
     let format = NSLocalizedString("arrives %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'")
-    return String(format: format, time)
+    return String(format: capitalize ? format.localizedCapitalized : format, time)
   }
   
   @objc public static var Checkmark: String {

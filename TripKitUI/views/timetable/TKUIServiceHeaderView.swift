@@ -42,6 +42,8 @@ class TKUIServiceHeaderView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    backgroundColor = .tkBackground
+    
     accessibilityTitleLabel.textColor = .tkLabelPrimary
     
     occupancyLabel.textColor = .tkLabelPrimary

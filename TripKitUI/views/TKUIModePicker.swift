@@ -101,6 +101,8 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   // MARK: - Configuration
   
   private func updateUI() {
+    backgroundColor = .clear
+    
     guard visibleModes.count > 0 else { return }
     
     // Clean up
@@ -163,7 +165,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     // Add separator
     let separator = UIView()
     separator.translatesAutoresizingMaskIntoConstraints = false
-    separator.backgroundColor = #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.831372549, alpha: 1)
+    separator.backgroundColor = .tkSeparator
     addSubview(separator)
     
     separator.heightAnchor.constraint(equalToConstant: Constants.separatorHeight).isActive = true
@@ -315,10 +317,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
 
   public var rx_pickedModes: Signal<Set<Item>> {
     return tap
-      .map { [weak self] in
-        guard let self = self else { return [] }
-        return self.toggledModes.filter(self.visibleModes.contains)
-      }
+      .map { [weak self] in self?.pickedModes ?? [] }
       .asSignal(onErrorSignalWith: .empty())
   }
   

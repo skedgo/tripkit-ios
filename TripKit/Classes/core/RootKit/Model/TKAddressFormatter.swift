@@ -27,7 +27,7 @@ public class TKAddressFormatter: NSObject {
   public static func singleLineAddress(for placemark: CLPlacemark) -> String? {
     let postalAddress: CNPostalAddress
     
-    if #available(iOSApplicationExtension 11.0, *), let fromPlacemark = placemark.postalAddress {
+    if #available(iOS 11.0, *), let fromPlacemark = placemark.postalAddress {
       postalAddress = fromPlacemark
     } else if let dict = placemark.addressDictionary {
       postalAddress = self.postalAddress(forAddressDictionary: dict)

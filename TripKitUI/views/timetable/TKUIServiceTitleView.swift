@@ -32,6 +32,8 @@ class TKUIServiceTitleView: UIView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    
+    backgroundColor = .tkBackground
 
     serviceTitleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
     serviceTitleLabel.textColor = .tkLabelPrimary
@@ -56,11 +58,14 @@ extension TKUIServiceTitleView {
     serviceTitleLabel.text = model.lineText ?? "Service" // TODO: Localise
     
     serviceImageView.setImage(with: model.imageURL, asTemplate: model.imageIsTemplate, placeholder: model.placeholderImage)
-    serviceImageView.tintColor = model.imageTintColor ?? TKStyleManager.darkTextColor()
+    serviceImageView.tintColor = model.imageTintColor ?? .tkLabelPrimary
     
-    let serviceColor = model.serviceColor ?? .tkLabelPrimary
     serviceShortNameLabel.text = model.serviceShortName
-    serviceShortNameLabel.textColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
+
+    let serviceColor = model.serviceColor ?? .tkLabelPrimary
+    // TODO: This isn't correct if we use model.serviceColor as those aren't dynamic
+    let textColor: UIColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
+    serviceShortNameLabel.textColor = textColor
     serviceColorView.backgroundColor = serviceColor
     
     serviceTimeLabel.attributedText = model.timeText

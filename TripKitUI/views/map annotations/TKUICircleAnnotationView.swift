@@ -49,7 +49,7 @@ public class TKUICircleAnnotationView: MKAnnotationView {
     if isFaded || circleColor != nil {
       context.setFillColor(fillColor.cgColor)
     } else {
-      context.setFillColor(UIColor.white.cgColor)
+      context.setFillColor(UIColor.tkBackground.cgColor)
     }
     context.fillEllipse(in: circleRect)
     

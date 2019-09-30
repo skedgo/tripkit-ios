@@ -14,9 +14,11 @@ import RxCocoa
 extension TKUITripOverviewViewModel {
   
   static func fetchContentOfServices(in trip: Trip) -> Observable<Void> {
-    let requests = trip.segments
-      .compactMap { $0.service != nil ? ($0.service!, $0.departureTime, $0.startRegion ?? trip.regionForRealTimeUpdates) : nil }
+    let queries: [(Service, Date, TKRegion)] = trip.segments
+      .compactMap { $0.service != nil ? ($0.service!, $0.departureTime!, $0.startRegion ?? trip.regionForRealTimeUpdates) : nil }
       .filter { $0.0.hasServiceData == false }
+      
+    let requests: [Observable<Void>] = queries
       .map(TKBuzzInfoProvider.rx.downloadContent)
       .map { $0.asObservable() }
 

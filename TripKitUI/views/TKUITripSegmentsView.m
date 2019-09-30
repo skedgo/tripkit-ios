@@ -58,8 +58,8 @@
 }
 
 - (void)didInit {
-  self.darkTextColor = [TKStyleManager darkTextColor];
-  self.lightTextColor = [TKStyleManager lightTextColor];
+  self.darkTextColor = UIColor.tkLabelPrimary;
+  self.lightTextColor = UIColor.tkLabelSecondary;
   self.segmentIndexToSelect = -1;
 }
 
@@ -196,6 +196,9 @@
       modeCircleBackground.layer.cornerRadius = CGRectGetWidth(circleFrame) / 2;
       modeCircleBackground.alpha = alpha;
       [self addSubview:modeCircleBackground];
+      
+      // add a little bit more spacing next to the circle background
+      newFrame.origin.x += 2;
     }
 
     [self addSubview:modeImageView];
@@ -239,7 +242,7 @@
     if (allowTitles
         && self.allowWheelchairIcon
         && [segment tripSegmentIsWheelchairAccessible]) {
-      modeTitleAccessoryImageView = [[UIImageView alloc] initAsWheelchairAccessoryImageWithTintColor:[TKStyleManager darkTextColor]];
+      modeTitleAccessoryImageView = [[UIImageView alloc] initAsWheelchairAccessoryImageWithTintColor:UIColor.tkLabelPrimary];
     }
     
     NSString *modeSubtitle = nil;
@@ -254,7 +257,7 @@
       }
 
       if ([segment tripSegmentTimesAreRealTime]) {
-        [modeSubtitleAccessoryImageViews addObject:[[UIImageView alloc] initAsRealTimeAccessoryImageAnimated:YES tintColor:[TKStyleManager lightTextColor]]];
+        [modeSubtitleAccessoryImageViews addObject:[[UIImageView alloc] initAsRealTimeAccessoryImageAnimated:YES tintColor:UIColor.tkLabelSecondary]];
       }
 
       NSString *subtitleText = [segment tripSegmentModeSubtitle];
@@ -331,7 +334,7 @@
       TKUIStyledLabel *subtitleLabel = [[TKUIStyledLabel alloc] initWithFrame:rect];
       subtitleLabel.font = modeSubtitleFont;
       subtitleLabel.text = modeSubtitle;
-      subtitleLabel.textColor = [TKStyleManager lightTextColor];
+      subtitleLabel.textColor = UIColor.tkLabelSecondary;
       subtitleLabel.alpha = modeImageView.alpha;
       [self addSubview:subtitleLabel];
       

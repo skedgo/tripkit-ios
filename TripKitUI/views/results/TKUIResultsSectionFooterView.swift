@@ -22,10 +22,14 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    contentView.backgroundColor = .tkBackgroundSecondary
+    
     badgeWrapper.isHidden = true
-    badgeIcon.tintColor = .white
+    badgeIcon.tintColor = .tkBackground
     badgeLabel.text = nil
+    badgeLabel.textColor = .tkBackground
     costLabel.text = nil
+    costLabel.textColor = .tkLabelSecondary
   }
   
   var badge: (icon: UIImage?, text: String, background: UIColor)? {
@@ -33,7 +37,7 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
       guard let text = badgeLabel.text else {
         return nil
       }
-      return (badgeIcon.image, text, badgeWrapper.backgroundColor ?? .white)
+      return (badgeIcon.image, text, badgeWrapper.backgroundColor ?? .tkBackground)
     }
     set {
       guard let badge = newValue else {

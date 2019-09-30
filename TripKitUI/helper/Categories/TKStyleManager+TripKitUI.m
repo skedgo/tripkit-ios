@@ -10,7 +10,6 @@
 
 #import <TripKitUI/TripKitUI-Swift.h>
 
-#import "UISearchBar+Customizable.h"
 #import "UIFont+CustomFonts.h"
 
 @interface UIViewController (PopoverHelpers)
@@ -31,16 +30,10 @@
 
 @implementation TKStyleManager (TripKitUI)
 
-+ (void)addLightStatusBarGradientLayerToView:(UIView *)view height:(CGFloat)height
-{
-  CGFloat width = MAX(CGRectGetWidth(view.frame), CGRectGetHeight(view.frame)) * 1.5f; // bigger to account for resizes
-  CAGradientLayer *gradient = [self lightGradientLayerWithWidth:width height:height];
-  [view.layer addSublayer:gradient];
-}
-
 + (void)addLightStatusBarGradientLayerToView:(UIView *)view belowView:(UIView *)anotherView height:(CGFloat)height
 {
   CGFloat width = MAX(CGRectGetWidth(view.frame), CGRectGetHeight(view.frame)) * 1.5f; // bigger to account for resizes
+  
   CAGradientLayer *gradient = [self lightGradientLayerWithWidth:width height:height];
   
   if (anotherView != nil) {
@@ -72,20 +65,10 @@
 + (void)addDefaultOutline:(UIView *)view
 {
   CGFloat width = 0.5;
-  CGColorRef color = [UIColor colorWithWhite:204.f/255 alpha:1].CGColor;
+  CGColorRef color = UIColor.tkSeparator.CGColor;
   
   view.layer.borderColor = color;
   view.layer.borderWidth = width;
-  
-  //  CALayer *topBorder = [CALayer layer];
-  //  topBorder.frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), width);
-  //  topBorder.backgroundColor = color;
-  //  [view.layer addSublayer:topBorder];
-  //
-  //  CALayer *bottomBorder = [CALayer layer];
-  //  bottomBorder.frame = CGRectMake(0, CGRectGetMaxY(view.frame) - width, CGRectGetWidth(view.frame), width);
-  //  bottomBorder.backgroundColor = color;
-  //  [view.layer addSublayer:bottomBorder];
 }
 
 + (void)addDefaultButtonOutline:(UIButton *)button cornerRadius:(CGFloat)radius
@@ -102,21 +85,19 @@
 
 + (void)styleTableViewForTileList:(UITableView *)tableView
 {
-  tableView.backgroundColor = [TKStyleManager globalViewBackgroundColor];
+  tableView.backgroundColor = UIColor.tkBackgroundBelowTile;
   tableView.contentInset = UIEdgeInsetsMake(5, 0, 5, 0); // more padding around tiles
   tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 + (UIColor *)backgroundColorForTileList
 {
-  return [TKStyleManager globalViewBackgroundColor];
-//  return [UIColor colorWithRed:237/255.0f green:238/255.0f blue:242/255.0f alpha:1];
+  return UIColor.tkBackgroundBelowTile;
 }
 
 + (UIColor *)cellSelectionBackgroundColor
 {
-  //  return [UIColor colorWithWhite:250/255.f alpha:1];
-  return [UIColor colorWithWhite:247/255.f alpha:1];
+  return UIColor.tkBackgroundSelected;
 }
 
 #pragma mark - Helpers
@@ -126,7 +107,7 @@
   CAGradientLayer *gradient = [CAGradientLayer layer];
   gradient.frame = CGRectMake(0, 0, width, height);
   
-  UIColor *c1 = [UIColor colorWithRed:52/255.0f green:78/255.0f blue:109/255.0f alpha:0.7f];
+  UIColor *c1 = UIColor.tkStatusBarOverlay;
   gradient.colors = @[(id)c1.CGColor, (id)c1.CGColor];
   
   return gradient;
@@ -145,28 +126,6 @@
     }
   }
   
-
-+ (void)styleSearchBar:(UISearchBar *)searchBar
-   includingBackground:(BOOL)includeBackground
-{
-  // style the searchbar
-  UIImage *navBarBg;
-  if (includeBackground) {
-    navBarBg = UIImage.backgroundNavSecondary;
-  } else {
-    navBarBg = [[UIImage alloc] init]; // blank
-  }
-  searchBar.tintColor = [self globalAccentColor];
-  searchBar.backgroundImage = navBarBg;
-  
-  // style the text field
-  [searchBar styleTextField:^(UITextField *textField) {
-    textField.font = [self systemFontWithSize:15];
-    textField.textColor = [TKStyleManager darkTextColor];
-    textField.backgroundColor = [UIColor clearColor];
-  }];
-}
-
 @end
 
 @implementation TKStyleManager (Buttons)

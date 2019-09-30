@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
     "TripKitUI/**/*.{h,m,swift}"
   ]
   s.resources    = [
-    "Resources/TripKitUI.*",
+    "TripKitUI/TripKitUI.xcassets",
     "TripKitUI/**/*.xib"
   ]
 

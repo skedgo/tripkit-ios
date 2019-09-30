@@ -75,6 +75,9 @@ extension TKUISegmentDirectionsCard {
     let identifier = "TurnByTurnInstructionCell"
     let cell = tableView.dequeueReusableCell(withIdentifier: identifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: identifier)
 
+    cell.backgroundColor = .tkBackground
+    cell.textLabel?.textColor = .tkLabelPrimary
+
     if let distance = item.distance {
       let distanceFormatter = MKDistanceFormatter()
       distanceFormatter.unitStyle = .abbreviated
@@ -82,6 +85,7 @@ extension TKUISegmentDirectionsCard {
       cell.textLabel?.text = distanceFormatter.string(fromDistance: distance)
     }
     
+    cell.detailTextLabel?.textColor = .tkLabelSecondary
     cell.detailTextLabel?.text = item.streetInstruction
     
     return cell

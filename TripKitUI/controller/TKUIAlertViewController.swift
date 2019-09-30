@@ -120,14 +120,15 @@ public class TKUIAlertViewController: UITableViewController {
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 150
     tableView.register(UINib(nibName: "TKUIAlertCell", bundle: Bundle(for: TKUIAlertCell.self)), forCellReuseIdentifier: "TKUIAlertCell")
-    TKStyleManager.styleTableView(forTileList: tableView)
+    tableView.backgroundColor = .tkBackgroundGrouped
+    tableView.separatorStyle = .none
   }
   
   public override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     if let navigator = navigationController,
-      let firstCOntroller = navigator.viewControllers.first, firstCOntroller == self {
+      let firstController = navigator.viewControllers.first, firstController == self {
       let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped(_:)))
       navigationItem.leftBarButtonItem = doneButton
     }

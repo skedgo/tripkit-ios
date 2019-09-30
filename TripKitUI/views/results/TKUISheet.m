@@ -179,7 +179,7 @@
 {
   UIView *overlay = [[UIView alloc] initWithFrame:frame];
 	overlay.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-  overlay.backgroundColor = [UIColor colorWithRed:54/255.f green:78/255.f blue:108/255.f alpha:0.8f];
+  overlay.backgroundColor = UIColor.tkSheetOverlay;
   overlay.alpha = 0.0;
   UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedOverlay:)];
   [overlay addGestureRecognizer:tapGesture];

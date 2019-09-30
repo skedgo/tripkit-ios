@@ -161,8 +161,10 @@
 {
   switch ([self realTimeStatus]) {
     case StopVisitRealTimeNotApplicable:
-    case StopVisitRealTimeNotAvailable:
       return Loc.Scheduled;
+
+    case StopVisitRealTimeNotAvailable:
+      return Loc.NoRealTimeAvailable;
 
     case StopVisitRealTimeCancelled:
       return Loc.Cancelled;

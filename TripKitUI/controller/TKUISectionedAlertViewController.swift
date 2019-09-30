@@ -47,7 +47,7 @@ public class TKUISectionedAlertViewController: UIViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    view.backgroundColor = TKStyleManager.globalViewBackgroundColor()
+    view.backgroundColor = .tkBackground
     
     customizeSearchBar()
     
@@ -61,7 +61,7 @@ public class TKUISectionedAlertViewController: UIViewController {
       configureCell: {(ds, tv, ip, item) -> UITableViewCell in
         let cell = tv.dequeueReusableCell(withIdentifier: TKUIGroupedAlertCell.cellReuseIdentifier, for: ip) as! TKUIGroupedAlertCell
         cell.alertGroup = item.alertGroup
-        cell.cellTextColor = TKStyleManager.darkTextColor()
+        cell.cellTextColor = .tkLabelPrimary
         return cell
       }
     )
@@ -131,7 +131,7 @@ public class TKUISectionedAlertViewController: UIViewController {
     emptyView.frame = tableView.frame
     emptyView.autoresizingMask = [.flexibleWidth, .flexibleWidth]
     emptyView.textLabel.text = Loc.WeWillKeepYouUpdated
-    emptyView.textLabel.textColor = TKStyleManager.darkTextColor()
+    emptyView.textLabel.textColor = .tkLabelPrimary
     
     if let productName = Bundle.main.productName {
       emptyView.footerLabel.text = Loc.InTheMeantimeKeepExploring(appName: productName)
@@ -151,7 +151,7 @@ public class TKUISectionedAlertViewController: UIViewController {
     loadingView.frame = tableView.frame
     loadingView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     loadingView.spinner.startAnimating()
-    loadingView.textLabel.textColor = TKStyleManager.darkTextColor()
+    loadingView.textLabel.textColor = .tkLabelPrimary
     view.insertSubview(loadingView, aboveSubview: tableView)
     self.loadingView = loadingView
   }
@@ -163,14 +163,12 @@ public class TKUISectionedAlertViewController: UIViewController {
   }
   
   private func customizeSearchBar() {
-    TKStyleManager.styleSearchBar(searchBar, includingBackground: false)
-    searchBar.backgroundColor = TKStyleManager.globalSecondaryBarTintColor()
-    searchBar.styleTextField {
-      guard let textField = $0 else { return }
+    TKStyleManager.style(searchBar, includingBackground: false) { textField in
       textField.tintColor = TKStyleManager.globalTintColor()
-      textField.textColor = TKStyleManager.darkTextColor()
-      textField.backgroundColor = .white
+      textField.textColor = .tkLabelPrimary
+      textField.backgroundColor = .tkBackground
     }
+    searchBar.backgroundColor = TKStyleManager.globalSecondaryBarTintColor()
   }
   
 }
@@ -182,9 +180,9 @@ extension TKUISectionedAlertViewController: UITableViewDelegate {
     guard let source = dataSource else { return nil }
     let header = TKUISectionedAlertTableHeader.newInstance()
     let section = source[section]
-    header.backgroundColor = section.color ?? TKStyleManager.backgroundColorForTileList()
+    header.backgroundColor = section.color ?? .tkBackground
     header.titleLabel.text = section.header
-    header.titleLabel.textColor = section.color != nil ? .white : TKStyleManager.darkTextColor()
+    header.titleLabel.textColor = section.color != nil ? .tkBackground : .tkLabelPrimary
     return header
   }
   

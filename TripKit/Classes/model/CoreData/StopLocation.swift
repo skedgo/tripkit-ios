@@ -13,7 +13,9 @@ extension StopLocation {
     if let name = regionName {
       return TKRegionManager.shared.localRegion(named: name)
     } else {
-      return location?.regions.first
+      let region = location?.regions.first
+      regionName = region?.name
+      return region
     }
   }
   

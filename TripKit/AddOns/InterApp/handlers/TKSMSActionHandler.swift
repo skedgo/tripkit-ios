@@ -14,6 +14,17 @@ import TripKit
 
 /// Handler for `sms:` actions, bringing up the Messages app,
 /// optionally pre-filling a message.
+///
+/// - warning: This only works if you add the `sms` URL scheme to the
+///           `LSApplicationQueriesSchemes`of your app's `Info.plist`, e.g.,:
+///
+/// ```
+/// <key>LSApplicationQueriesSchemes</key>
+/// <array>
+///   <string>sms</string>
+///   ...
+/// </array>
+/// ```
 public class TKSMSActionHandler: TKInterAppExternalActionHandler {
   
   private let canSendSMS = UIApplication.shared.canOpenURL(URL(string: "sms:")!)

@@ -92,13 +92,13 @@ public class TKUIPathFriendlinessView: UIView {
     
     // Legend
     friendlyLegendLabel.text   = TKPathFriendliness.friendly.title
-    friendlyLegendLabel.font = TKStyleManager.systemFont(size: 12)
+    friendlyLegendLabel.font   = TKStyleManager.customFont(forTextStyle: .caption1)
     unfriendlyLegendLabel.text = TKPathFriendliness.unfriendly.title
-    unfriendlyLegendLabel.font = TKStyleManager.systemFont(size: 12)
+    unfriendlyLegendLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
     dismountLegendLabel.text   = TKPathFriendliness.dismount.title
-    dismountLegendLabel.font = TKStyleManager.systemFont(size: 12)
+    dismountLegendLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
     unknownLegendLabel.text    = TKPathFriendliness.unknown.title
-    unknownLegendLabel.font = TKStyleManager.systemFont(size: 12)
+    unknownLegendLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
     
     // Colors
     friendlyLegendDot.backgroundColor = TKPathFriendliness.friendly.color
@@ -113,6 +113,10 @@ public class TKUIPathFriendlinessView: UIView {
     unfriendlyMetreLabel.textColor = TKPathFriendliness.unfriendly.color
     dismountMetreLabel.textColor = TKPathFriendliness.dismount.color
     unknownMetreLabel.textColor = TKPathFriendliness.unknown.color
+    friendlyLegendLabel.textColor = .tkLabelSecondary
+    unfriendlyLegendLabel.textColor = .tkLabelSecondary
+    dismountLegendLabel.textColor = .tkLabelSecondary
+    unknownLegendLabel.textColor = .tkLabelSecondary
 
     // Update bar chart.
     let widthConstraints = [

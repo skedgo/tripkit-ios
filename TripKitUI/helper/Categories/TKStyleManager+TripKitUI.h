@@ -18,8 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Default styles
 
-+ (void)addLightStatusBarGradientLayerToView:(UIView *)view height:(CGFloat)height;
-
 + (void)addLightStatusBarGradientLayerToView:(UIView *)view belowView:(UIView *)anotherView height:(CGFloat)height;
 
 + (void)removeGradientLayerFromView:(UIView *)view;
@@ -32,16 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)addDefaultButtonOutline:(UIButton *)button outlineColor:(UIColor *)color cornerRadius:(CGFloat)radius;
 
-+ (UIColor *)backgroundColorForTileList;
++ (UIColor *)backgroundColorForTileList DEPRECATED_MSG_ATTRIBUTE("Use UIColor.tkBackgroundBelowTile");
 
-+ (UIColor *)cellSelectionBackgroundColor;
++ (UIColor *)cellSelectionBackgroundColor DEPRECATED_MSG_ATTRIBUTE("Use UIColor.tkBackroundSelected");
 
 + (void)styleTableViewForTileList:(UITableView *)tableView;
 
 + (void)styleNavigationControllerAsDark:(UINavigationController *)navigationController;
-  
-+ (void)styleSearchBar:(UISearchBar *)searchBar
-   includingBackground:(BOOL)includeBackground;
 
 @end
 

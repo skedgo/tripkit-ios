@@ -12,6 +12,17 @@ import TripKit
 
 /// Handler for `tel:` actions, bringing up the Phone app,
 /// optionally showing a name nominated by the TripGo backend.
+///
+/// - warning: This only works if you add the `tel` URL scheme to the
+///           `LSApplicationQueriesSchemes`of your app's `Info.plist`, e.g.,:
+///
+/// ```
+/// <key>LSApplicationQueriesSchemes</key>
+/// <array>
+///   <string>tel</string>
+///   ...
+/// </array>
+/// ```
 public class TKPhoneActionHandler: TKInterAppExternalActionHandler {
   private let canCall = UIApplication.shared.canOpenURL(URL(string: "tel:")!)
   

@@ -26,7 +26,7 @@ public extension UIImageView {
     self.accessibilityLabel = Loc.RealTime
   }
   
-  private class func realTimeAccessoryImage(_ animated: Bool, tintColor: UIColor? = nil) -> [UIImage] {
+  private static func realTimeAccessoryImage(_ animated: Bool, tintColor: UIColor? = nil) -> [UIImage] {
     if animated {
       var image1 = TripKitUIBundle.imageNamed("icon-signal-bars1")
       var image2 = TripKitUIBundle.imageNamed("icon-signal-bars2")

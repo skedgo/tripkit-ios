@@ -30,7 +30,7 @@
  will be used to tint the transport mode icons if `colorCodingTransitIcon` is
  set to NO.
  
- @default `TKStyleManager.darkTextColor`
+ @default `UIColor.tkLabelPrimary`
  */
 @property (nonatomic, strong, nonnull) UIColor *darkTextColor;
 
@@ -38,7 +38,7 @@
  This color is used on lighter texts. In addition, this is also the color which
  will be used to tint non-PT modes if `colorCodingTransitIcon` is set to YES.
  
- @default `TKStyleManager.lightTextColor`
+ @default `UIColor.tkLabelSecondary`
  */
 @property (nonatomic, strong, nonnull) UIColor *lightTextColor;
 

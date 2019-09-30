@@ -28,7 +28,7 @@ extension TKInterAppCommunicator {
     
     let action: TKInterAppIdentifier
 
-    public let title: String
+    public var title: String
     public let type: ExternalActionType
     public var identifier: AnyHashable { return action }
 
@@ -51,7 +51,7 @@ extension TKInterAppCommunicator {
   @objc(canHandleExternalActions:)
   public func canHandleExternalActions(for segment: TKSegment) -> Bool {
     guard let actions = segment.bookingExternalActions() else { return false }
-    return actions.first { self.titleForExternalAction($0) != nil } != nil
+    return actions.contains { self.canHandleExternalAction($0) }
   }
   
   /// Checks if the communication can handle the provided action, which depends both on whether
@@ -60,7 +60,7 @@ extension TKInterAppCommunicator {
   /// - Parameter action: An action string, as defined by SkedGo's backend
   /// - Returns: Whether the action can be handled, i.e., triggering `performExternalAction` will succeed.
   public func canHandleExternalAction(_ action: String) -> Bool {
-    return titleForExternalAction(action) != nil
+    return handlers.contains { $0.canHandle(action) }
   }
   
   /// Determines external actions for the provided segment
@@ -73,14 +73,18 @@ extension TKInterAppCommunicator {
     // First we build the actions, sorting them priority and dealing with the
     // case where multiple actions can be handled by the same handler (and
     // we'd only want to show one then)
-    return self.handlers
+    let actions: [ExternalAction] = self.handlers
       .compactMap { $0.handledAction(outOf: externalActions) }
       .sorted { $0.handler.priority.rawValue > $1.handler.priority.rawValue }
-  }
-  
-  private func titleForExternalAction(_ action: String) -> String? {
-    guard let handler = handlers.first(where: { $0.canHandle(action) }) else { return nil }
-    return handler.title(for: action)
+    
+    // If we only have one action, we prefer the title suggested by the backend
+    // otherwise keep the per-handler titles to not duplicate them
+    if actions.count == 1, var action = actions.first, let suggestedTitle = segment.bookingTitle() {
+      action.title = suggestedTitle
+      return [action]
+    } else {
+      return actions
+    }
   }
   
   /// This will handle the external actions of the specified segments either by launching the external app (if there's only one action) or by presenting a sheet of actions to take for the user.

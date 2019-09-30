@@ -10,78 +10,61 @@ import Foundation
 
 extension UIColor {
   
-  public static let tkBarSecondary: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKBarSecondary", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return #colorLiteral(red: 0.9019607843, green: 0.937254902, blue: 0.9490196078, alpha: 1)
-    }
-  }()
+  // MARK: - Primary
   
-  public static let tkLabelPrimary: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKLabelPrimary", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .darkText
-    }
-  }()
+  @objc public static var tkAppTintColor: UIColor = .tripgoTintColor
   
-  public static let tkLabelSecondary: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKLabelSecondary", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .darkText
-    }
-  }()
+  // MARK: - Labels
   
-  public static let tkLabelTertiary: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKLabelTertiary", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .darkText
-    }
-  }()
+  @objc public static var tkLabelPrimary: UIColor = .tripgoLabelPrimary
+  @objc public static var tkLabelSecondary: UIColor = .tripgoLabelSecondary
+  @objc public static var tkLabelTertiary: UIColor = .tripgoLabelTertiary
+  @objc public static var tkLabelQuarternary: UIColor = .tripgoLabelQuarternary
   
-  public static let tkLabelQuarternary: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKLabelQuarternary", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .darkText
-    }
-  }()
+  // MARK: - Buttons
   
+  @objc public static var tkFilledButtonBackgroundColor: UIColor = .tripgoFilledButtonBackground
+  @objc public static var tkFilledButtonTextColor: UIColor = .tripgoFilledButtonTextColor
+  @objc public static var tkEmptyButtonBackgroundColor: UIColor = .tripgoEmptyButtonBackground
+  @objc public static var tkEmptyButtonTextColor: UIColor = .tripgoEmptyButtonTextColor
+  
+  // MARK: - States
 
-  public static let tkStateError: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKStateError", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .red
-    }
-  }()
+  @objc public static var tkStateError: UIColor = .tripgoStateError
+  @objc public static var tkStateWarning: UIColor = .tripgoStateWarning
+  @objc public static var tkStateSuccess: UIColor = .tripgoStateSuccess
   
-  public static let tkStateWarning: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKStateWarning", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .orange
-    }
-  }()
+  // MARK: - Background
   
-  public static let tkStateSuccess: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKStateSuccess", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .green
-    }
-  }()
+  /// Primary background colour
+  @objc public static var tkBackground: UIColor = .tripgoBackground
   
+  /// Background colour for elements that should be offset, e.g., grouped cells
+  @objc public static var tkBackgroundSecondary: UIColor = .tripgoBackgroundSecondary
 
-  public static let tkBackground: UIColor = {
-    if #available(iOS 11.0, *) {
-      return UIColor(named: "TKBackground", in: .tripKitUI, compatibleWith: nil)!
-    } else {
-      return .white
-    }
-  }()
+  /// Background colour for cells when tapping them
+  @objc public static var tkBackgroundSelected: UIColor = .tripgoBackgroundSelected
+
+  /// The background colour for tiles
+  @objc public static var tkBackgroundTile: UIColor = .tripgoBackgroundTile
+
+  /// The background colour for what's *behind* tiles
+  @objc public static var tkBackgroundBelowTile: UIColor = .tripgoBackgroundBelowTile
+
+  /// The background colour for grouped table views, where each cell would use `.tkBackground`
+  /// as its background colour.
+  @objc public static var tkBackgroundGrouped: UIColor = .tripgoBackgroundGrouped
   
+  // MARK: - Accessories
+
+  @objc public static var tkSeparator: UIColor = .tripgoSeparator
+  
+  /// Secondary, more subtle, separator which is useful for views like table view cells  that are already
+  /// separted via a separator but also need to display a separator as a subview
+  @objc public static var tkSeparatorSubtle: UIColor = .tripgoSeparatorSubtle
+
+  @objc public static var tkMapOverlay: UIColor = .tripgoMapOverlay
+  @objc public static let tkSheetOverlay: UIColor = .tripgoSheetOverlay
+  @objc public static let tkStatusBarOverlay: UIColor = .tripgoStatusBarOverlay
+
 }

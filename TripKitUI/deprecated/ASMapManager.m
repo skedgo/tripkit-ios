@@ -101,8 +101,13 @@
   
   self.willHotSwap = NO;
   
-  [self addDoubleTapZoomGestureRecognizer];
-	
+  if (@available(iOS 13.0, *)) {
+    // Double-tap-then-swipe-to-zoom gesture is built in, and adding it again
+    // leads to very poor responsiveness on callout accessory views (WTF).
+  } else {
+    [self addDoubleTapZoomGestureRecognizer];
+  }
+
 	if (completion) {
 		completion(YES);
 	}
@@ -158,7 +163,7 @@
   
   } else if ([overlay isKindOfClass:[MKPolygon class]]) {
     MKPolygonRenderer *aRenderer = [[MKPolygonRenderer alloc] initWithPolygon:(MKPolygon*)overlay];
-    aRenderer.fillColor = [UIColor colorWithRed:52/255.0f green:78/255.0f blue:109/255.0f alpha:0.5f];
+    aRenderer.fillColor = UIColor.tkMapOverlay;
     aRenderer.lineWidth = 0;
     return aRenderer;
     
@@ -358,7 +363,7 @@
                     dateKey:self.lastUseUserDefaultsKey];
 }
 
-- (void)addDoubleTapZoomGestureRecognizer
+- (void)addDoubleTapZoomGestureRecognizer NS_DEPRECATED_IOS(10_0, 13_0)
 {
     if (!self.tap) {
         self.tap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(tapResponder:)];
@@ -371,7 +376,7 @@
     }
 }
 
-- (void)removeDoubleTapZoomGestureRecognizer
+- (void)removeDoubleTapZoomGestureRecognizer NS_DEPRECATED_IOS(10_0, 13_0)
 {
     if (self.tap) {
         [self.mapView removeGestureRecognizer:self.tap];

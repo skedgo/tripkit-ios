@@ -45,7 +45,7 @@ public class TKUIAlertInfoView: UIView {
   /// set to default texts.
   ///
   /// - Returns: An instance of TKUIAlertInfoView.
-  public class func newInstance() -> TKUIAlertInfoView {
+  public static func newInstance() -> TKUIAlertInfoView {
     return Bundle.tripKitUI.loadNibNamed("TKUIAlertInfoView", owner: self, options: nil)!.first as! TKUIAlertInfoView
   }
   
@@ -56,7 +56,7 @@ public class TKUIAlertInfoView: UIView {
   ///
   /// - Parameter alert: An alert instance used to configure title and instruction labels.
   /// - Returns: An instance of TKUIAlertInfoView
-  public class func newInstance(with alert: TKAlert) -> TKUIAlertInfoView {
+  public static func newInstance(with alert: TKAlert) -> TKUIAlertInfoView {
     let view = newInstance()
     view.alert = alert
     return view
