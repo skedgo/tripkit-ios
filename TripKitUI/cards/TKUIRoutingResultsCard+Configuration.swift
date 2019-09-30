@@ -1,5 +1,5 @@
 //
-//  TKUIResultsCard+Configuration.swift
+//  TKUIRoutingResultsCard+Configuration.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 10.07.18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension TKUIResultsCard {
+public extension TKUIRoutingResultsCard {
   
   enum SupportType {
     /// User tried querying for a from/to pair that isn't supported yet
@@ -18,10 +18,10 @@ public extension TKUIResultsCard {
     case routingError(Error, TripRequest)
   }
   
-  /// Configurtion of any `TKUIResultsCard`.
+  /// Configurtion of any `TKUIRoutingResultsCard`.
   ///
   /// This isn't created directly, but rather you modify the static instance
-  /// accessible from `TKUIResultsCard.config`.
+  /// accessible from `TKUIRoutingResultsCard.config`.
   struct Configuration {
     private init() {}
     
@@ -31,14 +31,14 @@ public extension TKUIResultsCard {
     /// when the user is encountering errors.
     ///
     /// Called when the user taps the button.
-    public var contactCustomerSupport: ((TKUIResultsCard, SupportType) -> Void)?
+    public var contactCustomerSupport: ((TKUIRoutingResultsCard, SupportType) -> Void)?
     
     /// Set this to use your own map manager. You can use this in combination
     /// with `TGCardViewController.builder` to use a map other than Apple's
     /// MapKit.
     ///
-    /// Defaults to using `TKUIResultsMapManager`.
-    public var mapManagerFactory: ((MKAnnotation?) -> TKUIResultsMapManagerType) = TKUIResultsMapManager.init
+    /// Defaults to using `TKUIRoutingResultsMapManager`.
+    public var mapManagerFactory: ((MKAnnotation?) -> TKUIRoutingResultsMapManagerType) = TKUIRoutingResultsMapManager.init
   }
 
 }

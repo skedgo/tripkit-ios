@@ -43,10 +43,10 @@ public protocol TKUIStopAnnotation: TKUIModeAnnotation {
   var stopCode: String { get }  
 }
 
-@available(*, unavailable, renamed: "TKUIImageAnnotationDisplayable")
+@available(*, unavailable, renamed: "TKUIImageAnnotation")
 public typealias STKDisplayablePoint = TKUIImageAnnotation
 
-@available(*, unavailable, renamed: "TKUIImageAnnotationDisplayable")
+@available(*, unavailable, renamed: "TKUIImageAnnotation")
 public typealias TKDisplayablePoint = TKUIImageAnnotation
 
 @available(*, unavailable, renamed: "TKUIStopAnnotation")

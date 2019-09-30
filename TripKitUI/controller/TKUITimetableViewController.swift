@@ -1,5 +1,5 @@
 //
-//  TKUIDeparturesViewController.swift
+//  TKUITimetableViewController.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 24.05.19.
@@ -10,11 +10,16 @@ import UIKit
 
 import TGCardViewController
 
-public protocol TKUIDeparturesViewControllerDelegate: TGCardViewControllerDelegate {
-  
+@available(*, unavailable, renamed: "TKUITimetableViewController")
+public typealias TKUIDeparturesViewController = TKUITimetableViewController
+
+@available(*, unavailable, renamed: "TKUITimetableViewControllerDelegate")
+public typealias TKUIDeparturesViewControllerDelegate = TKUITimetableViewControllerDelegate
+
+public protocol TKUITimetableViewControllerDelegate: TGCardViewControllerDelegate {
 }
 
-/// The `TKUIDeparturesViewController` class provides a user interface for
+/// The `TKUITimetableViewController` class provides a user interface for
 /// viewing the departures from a public transport stop or for viewing the
 /// public transport connections between two public transport stops.
 ///
@@ -23,8 +28,8 @@ public protocol TKUIDeparturesViewControllerDelegate: TGCardViewControllerDelega
 ///
 /// Customisation points:
 /// - `TKUICustomization` for the visual style of the cards
-/// - `TKUIDeparturesCard.config` for the list of departures
-public class TKUIDeparturesViewController: TGCardViewController {
+/// - `TKUITimetableCard.config` for the list of departures
+public class TKUITimetableViewController: TGCardViewController {
   
   /// Configure for showing the departures from a public transport stop.
   ///
@@ -37,7 +42,7 @@ public class TKUIDeparturesViewController: TGCardViewController {
   public init(stop: TKUIStopAnnotation) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
     
-    let departuresCard = TKUIDeparturesCard(stops: [stop])
+    let departuresCard = TKUITimetableCard(stops: [stop])
     departuresCard.style = TKUICustomization.shared.cardStyle
     rootCard = departuresCard
   }
@@ -51,7 +56,7 @@ public class TKUIDeparturesViewController: TGCardViewController {
   public init(dlsTable: TKDLSTable, startDate: Date = Date()) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
     
-    let departuresCard = TKUIDeparturesCard(dlsTable: dlsTable, startDate: startDate)
+    let departuresCard = TKUITimetableCard(dlsTable: dlsTable, startDate: startDate)
     departuresCard.style = TKUICustomization.shared.cardStyle
     rootCard = departuresCard
     

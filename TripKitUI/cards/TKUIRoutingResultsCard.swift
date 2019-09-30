@@ -1,5 +1,5 @@
 //
-//  TKUIResultsCard.swift
+//  TKUIRoutingResultsCard.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 10/4/17.
@@ -18,33 +18,40 @@ import RxDataSources
   import TripKit
 #endif
 
-public protocol TKUIResultsCardDelegate: class {
-  func resultsCard(_ card: TKUIResultsCard, requestsModePickerWithModes modes: [String], for region: TKRegion, sender: Any?)
+@available(*, unavailable, renamed: "TKUIRoutingResultsCard")
+public typealias TKUIResultsCard = TKUIRoutingResultsCard
+
+@available(*, unavailable, renamed: "TKUIRoutingResultsCardDelegate")
+public typealias TKUIResultsCardDelegate = TKUIRoutingResultsCardDelegate
+
+
+public protocol TKUIRoutingResultsCardDelegate: class {
+  func resultsCard(_ card: TKUIRoutingResultsCard, requestsModePickerWithModes modes: [String], for region: TKRegion, sender: Any?)
 }
 
-public class TKUIResultsCard: TGTableCard {
+public class TKUIRoutingResultsCard: TGTableCard {
   
   typealias RoutingModePicker = TKUIModePicker<TKRegion.RoutingMode>
   
   public static var config = Configuration.empty
 
-  public weak var resultsDelegate: TKUIResultsCardDelegate?
+  public weak var resultsDelegate: TKUIRoutingResultsCardDelegate?
   
   private let destination: MKAnnotation?
   private var request: TripRequest? // also for saving
 
-  private var viewModel: TKUIResultsViewModel!
+  private var viewModel: TKUIRoutingResultsViewModel!
   let disposeBag = DisposeBag()
   private var realTimeBag = DisposeBag()
   
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   private weak var modePicker: RoutingModePicker?
   
-  private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIResultsViewModel.Section>(
-    configureCell: TKUIResultsCard.cell
+  private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
+    configureCell: TKUIRoutingResultsCard.cell
   )
   
-  private let changedTime = PublishSubject<TKUIResultsViewModel.RouteBuilder.Time>()
+  private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
   
   public init(destination: MKAnnotation) {
@@ -52,7 +59,7 @@ public class TKUIResultsCard: TGTableCard {
     self.request = nil
     
     let title = Loc.PlanTrip
-    let mapManager = TKUIResultsCard.config.mapManagerFactory(destination)
+    let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(destination)
     super.init(
       title: title, style: .grouped,
       accessoryView: accessoryView, mapManager: mapManager,
@@ -67,7 +74,7 @@ public class TKUIResultsCard: TGTableCard {
     self.request = request
 
     let title = Loc.Trips
-    let mapManager = TKUIResultsCard.config.mapManagerFactory(request.toLocation)
+    let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(request.toLocation)
     super.init(
       title: title, style: .grouped,
       accessoryView: accessoryView, mapManager: mapManager,
@@ -79,7 +86,7 @@ public class TKUIResultsCard: TGTableCard {
   public required convenience init?(coder: NSCoder) {
     guard
       let data = coder.decodeObject(forKey: "viewModel") as? Data,
-      let request = TKUIResultsViewModel.restore(from: data)
+      let request = TKUIRoutingResultsViewModel.restore(from: data)
       else {
         return nil
     }
@@ -94,22 +101,22 @@ public class TKUIResultsCard: TGTableCard {
   }
   
   public override func encode(with aCoder: NSCoder) {
-    aCoder.encode(TKUIResultsViewModel.save(request: request), forKey: "viewModel")
+    aCoder.encode(TKUIRoutingResultsViewModel.save(request: request), forKey: "viewModel")
   }
   
   
   override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     guard
       let tableView = (cardView as? TGScrollCardView)?.tableView,
-      let mapManager = mapManager as? TKUIResultsMapManagerType
+      let mapManager = mapManager as? TKUIRoutingResultsMapManagerType
       else {
         preconditionFailure()
     }
     
     // Build the view model
     
-    let inputs: TKUIResultsViewModel.UIInput = (
-      selected: tableView.rx.modelSelected(TKUIResultsViewModel.Item.self).asSignal(),
+    let inputs: TKUIRoutingResultsViewModel.UIInput = (
+      selected: tableView.rx.modelSelected(TKUIRoutingResultsViewModel.Item.self).asSignal(),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
       tappedShowModeOptions: .empty(),
@@ -118,16 +125,16 @@ public class TKUIResultsCard: TGTableCard {
       changedSortOrder: .empty()
     )
     
-    let mapInput: TKUIResultsViewModel.MapInput = (
+    let mapInput: TKUIRoutingResultsViewModel.MapInput = (
       tappedMapRoute: mapManager.selectedMapRoute,
       droppedPin: mapManager.droppedPin
     )
     
-    let viewModel: TKUIResultsViewModel
+    let viewModel: TKUIRoutingResultsViewModel
     if let destination = self.destination {
-      viewModel = TKUIResultsViewModel(destination: destination, inputs: inputs, mapInput: mapInput)
+      viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: inputs, mapInput: mapInput)
     } else if let request = self.request {
-      viewModel = TKUIResultsViewModel(request: request, inputs: inputs, mapInput: mapInput)
+      viewModel = TKUIRoutingResultsViewModel(request: request, inputs: inputs, mapInput: mapInput)
     } else {
       preconditionFailure()
     }
@@ -225,9 +232,9 @@ public class TKUIResultsCard: TGTableCard {
 
 // MARK: - Cell configuration
 
-extension TKUIResultsCard {
+extension TKUIRoutingResultsCard {
   
-  static func cell(dataSource: RxDataSources.TableViewSectionedDataSource<TKUIResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIResultsViewModel.Item) -> UITableViewCell {
+  static func cell(dataSource: RxDataSources.TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {
     
     if let trip = item.trip {
       let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
@@ -269,7 +276,7 @@ extension TKMetricClassifier.Classification {
   }
 }
 
-extension TKUIResultsCard: UITableViewDelegate {
+extension TKUIRoutingResultsCard: UITableViewDelegate {
   
   public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionFooterView.reuseIdentifier) as? TKUIResultsSectionFooterView else {
@@ -290,8 +297,8 @@ extension TKUIResultsCard: UITableViewDelegate {
 
 // MARK: - Mode picker
 
-private extension TKUIResultsCard {
-  func updateModePicker(_ modes: TKUIResultsViewModel.AvailableModes, in tableView: UITableView) {
+private extension TKUIRoutingResultsCard {
+  func updateModePicker(_ modes: TKUIRoutingResultsViewModel.AvailableModes, in tableView: UITableView) {
     if modes.available.isEmpty {
       if let header = tableView.tableHeaderView {
         tableView.contentSize.height -= header.frame.height
@@ -336,8 +343,8 @@ private extension TKUIResultsCard {
 
 // MARK: - Navigation
 
-private extension TKUIResultsCard {
-  func navigate(to next: TKUIResultsViewModel.Next) {
+private extension TKUIRoutingResultsCard {
+  func navigate(to next: TKUIRoutingResultsViewModel.Next) {
     switch next {
     case .showTrip(let trip):
       controller?.push(TKUITripsPageCard(highlighting: trip))
@@ -353,9 +360,9 @@ private extension TKUIResultsCard {
 
 // MARK: - Picking times
 
-private extension TKUIResultsCard {
+private extension TKUIRoutingResultsCard {
   
-  func showTimePicker(time: TKUIResultsViewModel.RouteBuilder.Time, timeZone: TimeZone) {
+  func showTimePicker(time: TKUIRoutingResultsViewModel.RouteBuilder.Time, timeZone: TimeZone) {
     
     guard let controller = controller else {
       preconditionFailure("Shouldn't be able to show time picker!")
@@ -364,7 +371,7 @@ private extension TKUIResultsCard {
     
     let picker = TKUITimePickerSheet(time: time.date, timeType: time.timeType, timeZone: timeZone)
     picker.selectAction = { [weak self] timeType, date in
-      self?.changedTime.onNext(TKUIResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
+      self?.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
     }
     
     if controller.traitCollection.horizontalSizeClass == .regular {
@@ -384,11 +391,11 @@ private extension TKUIResultsCard {
   
 }
 
-extension TKUIResultsCard: TKUITimePickerSheetDelegate {
+extension TKUIRoutingResultsCard: TKUITimePickerSheetDelegate {
   
   public func timePickerRequestsResign(_ pickerSheet: TKUITimePickerSheet) {
     func onDismissal() {
-      let selection = TKUIResultsViewModel.RouteBuilder.Time(timeType: pickerSheet.selectedTimeType(), date: pickerSheet.selectedDate())
+      let selection = TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: pickerSheet.selectedTimeType(), date: pickerSheet.selectedDate())
       self.changedTime.onNext(selection)
     }
     
@@ -404,7 +411,7 @@ extension TKUIResultsCard: TKUITimePickerSheetDelegate {
 
 // MARK: - Picking transport modes
 
-extension TKUIResultsCard {
+extension TKUIRoutingResultsCard {
   
   private func showTransportOptions(modes: [String], for region: TKRegion) {
     resultsDelegate?.resultsCard(self, requestsModePickerWithModes: modes, for: region, sender: accessoryView.transportButton)

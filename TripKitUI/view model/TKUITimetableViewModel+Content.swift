@@ -1,5 +1,5 @@
 //
-//  TKUIDeparturesViewModel+Content.swift
+//  TKUITimetableViewModel+Content.swift
 //  TripGoAppKit
 //
 //  Created by Adrian Schönig on 20.03.19.
@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   
   public struct Section {
     let date: Date
@@ -38,7 +38,7 @@ extension TKUIDeparturesViewModel {
 
 // MARK: - Building sections
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   
   static func fetchContent(for data: DataInput, input: UIInput?, errorPublisher: PublishSubject<Error>) -> Driver<[StopVisits]> {
     return fetchDepartures(for: data, input: input) // fetch in background
@@ -52,7 +52,7 @@ extension TKUIDeparturesViewModel {
           return false
         }
       }
-      .flatMapLatest { _ in TKUIDeparturesViewModel.departures(for: data, input: input) }
+      .flatMapLatest { _ in TKUITimetableViewModel.departures(for: data, input: input) }
       .asDriver(onErrorRecover: { error in
         errorPublisher.onNext(error)
         return .empty()
@@ -93,11 +93,11 @@ extension TKUIDeparturesViewModel {
     if let stops = data.stops, !stops.isEmpty {
       let stopLocations = self.stopLocations(for: stops)
       return relevantInput
-        .flatMapLatest { TKUIDeparturesViewModel.stopVisits(for: stopLocations, filter: $0, date: $1) }
+        .flatMapLatest { TKUITimetableViewModel.stopVisits(for: stopLocations, filter: $0, date: $1) }
       
     } else if let dlsTable = data.dlsTable {
       return relevantInput
-        .flatMapLatest { TKUIDeparturesViewModel.stopVisits(for: dlsTable.pairIdentifiers, date: $0.date) }
+        .flatMapLatest { TKUITimetableViewModel.stopVisits(for: dlsTable.pairIdentifiers, date: $0.date) }
       
     } else {
       preconditionFailure("Need non-empty `stops` or `dlsTable`")
@@ -153,7 +153,7 @@ extension TKUIDeparturesViewModel {
 
 // MARK: - Lines
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   static func extractLines(from visits: [StopVisits]) -> [TKUIDeparturesAccessoryView.Line] {
     var lines: Set<TKUIDeparturesAccessoryView.Line> = []
     for visit in visits {
@@ -168,7 +168,7 @@ extension TKUIDeparturesViewModel {
 
 // MARK: - Updating + fetching content
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   
   private enum FetchResult {
     case addedDepartures
@@ -265,7 +265,7 @@ extension TKUIDeparturesViewModel {
 
 // MARK: - Real-time updates
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   
   static func fetchRealtimeUpdates(departures: Driver<[StopVisits]>) -> Observable<TKRealTimeUpdateProgress<Void>> {
     
@@ -284,7 +284,7 @@ extension TKUIDeparturesViewModel {
   
 }
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   fileprivate enum FetchError: Error {
     case unknownError
   }
@@ -308,7 +308,7 @@ extension Reactive where Base: TKBuzzRealTime {
           if let error = error {
             subscriber.onError(error)
           } else {
-            subscriber.onError(TKUIDeparturesViewModel.FetchError.unknownError)
+            subscriber.onError(TKUITimetableViewModel.FetchError.unknownError)
           }
         })
         return Disposables.create()
@@ -326,7 +326,7 @@ extension Reactive where Base: TKBuzzRealTime {
           if let error = error {
             subscriber.onError(error)
           } else {
-            subscriber.onError(TKUIDeparturesViewModel.FetchError.unknownError)
+            subscriber.onError(TKUITimetableViewModel.FetchError.unknownError)
           }
         })
         return Disposables.create()
@@ -340,7 +340,7 @@ extension Reactive where Base: TKBuzzRealTime {
 
 // MARK: - Alerts
 
-extension TKUIDeparturesViewModel {
+extension TKUITimetableViewModel {
   
   static func buildAlerts(_ visits: [StopVisits]) -> [TKAlert] {
     
@@ -372,8 +372,8 @@ extension StopLocation {
 
 // MARK: - Selection
 
-extension Array where Element == TKUIDeparturesViewModel.Section {
-  var defaultSelection: TKUIDeparturesViewModel.Item? {
+extension Array where Element == TKUITimetableViewModel.Section {
+  var defaultSelection: TKUITimetableViewModel.Item? {
     for section in self {
       return section.items.first(where: { $0.isSelected })
     }
@@ -385,15 +385,15 @@ extension Array where Element == TKUIDeparturesViewModel.Section {
 
 // MARK: - RxDataSources
 
-extension TKUIDeparturesViewModel.Item: Equatable {
+extension TKUITimetableViewModel.Item: Equatable {
   
-  public static func ==(lhs: TKUIDeparturesViewModel.Item, rhs: TKUIDeparturesViewModel.Item) -> Bool {
+  public static func ==(lhs: TKUITimetableViewModel.Item, rhs: TKUITimetableViewModel.Item) -> Bool {
     return lhs.dataModel.objectID == rhs.dataModel.objectID
   }
   
 }
 
-extension TKUIDeparturesViewModel.Item: IdentifiableType {
+extension TKUITimetableViewModel.Item: IdentifiableType {
   public typealias Identity = NSManagedObjectID
   
   public var identity: Identity {
@@ -401,11 +401,11 @@ extension TKUIDeparturesViewModel.Item: IdentifiableType {
   }
 }
 
-extension TKUIDeparturesViewModel.Section: AnimatableSectionModelType {
-  public typealias Item = TKUIDeparturesViewModel.Item
+extension TKUITimetableViewModel.Section: AnimatableSectionModelType {
+  public typealias Item = TKUITimetableViewModel.Item
   public typealias Identity = Date
   
-  public init(original: TKUIDeparturesViewModel.Section, items: [Item]) {
+  public init(original: TKUITimetableViewModel.Section, items: [Item]) {
     self = original
     self.items = items
   }

@@ -1,6 +1,6 @@
 //
-//  DepartureCard+Content.swift
-//  TripGoAppKit
+//  TKUITimetableCard+Content.swift
+//  TripKitUI
 //
 //  Created by Kuan Lun Huang on 28/3/19.
 //  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.
@@ -33,7 +33,7 @@ extension TKUIDepartureCellContent {
       placeholderImage: service.modeImage(for: .listMainMode),
       imageURL: service.modeImageURL(for: .listMainMode),
       imageIsTemplate: service.modeImageIsTemplate,
-      imageTintColor: TKUIDeparturesCard.config.colorCodeTransitIcons ? serviceColor : nil,
+      imageTintColor: TKUITimetableCard.config.colorCodeTransitIcons ? serviceColor : nil,
       modeName: service.modeTitle ?? "",
       serviceShortName: service.shortIdentifier(),
       serviceColor: serviceColor,

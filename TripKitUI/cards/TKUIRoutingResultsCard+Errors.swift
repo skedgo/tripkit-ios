@@ -1,5 +1,5 @@
 //
-//  TKUIResultsCard+Errors.swift
+//  TKUIRoutingResultsCard+Errors.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 09.07.18.
@@ -12,7 +12,7 @@ import TGCardViewController
 import RxSwift
 import RxCocoa
 
-extension TKUIResultsCard {
+extension TKUIRoutingResultsCard {
   
   func show(
       _ error: Error,
@@ -44,14 +44,14 @@ extension TKUIResultsCard {
       tableView: UITableView
   ) {
     
-    let allowRequest = TKUIResultsCard.config.contactCustomerSupport != nil
+    let allowRequest = TKUIRoutingResultsCard.config.contactCustomerSupport != nil
 
     let supportView = TKUIRoutingSupportView.show(with: error, for: request, in: parentView, aboveSubview: tableView, allowRequest: allowRequest)
     
     if allowRequest {
       supportView.requestSupportButton.rx.tap
         .subscribe(onNext: { [unowned self] in
-          TKUIResultsCard.config.contactCustomerSupport?(self, .unsupportedQuery(request))
+          TKUIRoutingResultsCard.config.contactCustomerSupport?(self, .unsupportedQuery(request))
         })
         .disposed(by: disposeBag)
     }
@@ -66,7 +66,7 @@ extension TKUIResultsCard {
     parentView: UIView,
     tableView: UITableView
   ) {
-    let allowRequest = TKUIResultsCard.config.contactCustomerSupport != nil
+    let allowRequest = TKUIRoutingResultsCard.config.contactCustomerSupport != nil
     let actionTitle = allowRequest ? Loc.ContactSupport : nil
 
     let tripBoy = TKUITripBoyView.show(error: error, title: "Trips not available".localizedCapitalized, in: parentView, aboveSubview: tableView, actionTitle: actionTitle)
@@ -74,7 +74,7 @@ extension TKUIResultsCard {
     if allowRequest {
       tripBoy.actionButton.rx.tap
         .subscribe(onNext: { [unowned self] in
-          TKUIResultsCard.config.contactCustomerSupport?(self, .routingError(error, request))
+          TKUIRoutingResultsCard.config.contactCustomerSupport?(self, .routingError(error, request))
         })
         .disposed(by: disposeBag)
     }
