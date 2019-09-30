@@ -26,7 +26,7 @@ class TKUIGroupedAlertCell: UITableViewCell {
     return "TKUIGroupedAlertCell"
   }
   
-  /// @default: `TKStyleManager.darkTextColor`
+  /// @default: `UIColor.tkLabelPrimary`
   var cellTextColor: UIColor? {
     willSet {
       routeNumberLabel.textColor = newValue
