@@ -154,11 +154,11 @@ extension TKUITimetableViewModel {
 // MARK: - Lines
 
 extension TKUITimetableViewModel {
-  static func extractLines(from visits: [StopVisits]) -> [TKUIDeparturesAccessoryView.Line] {
-    var lines: Set<TKUIDeparturesAccessoryView.Line> = []
+  static func extractLines(from visits: [StopVisits]) -> [TKUITimetableAccessoryView.Line] {
+    var lines: Set<TKUITimetableAccessoryView.Line> = []
     for visit in visits {
       guard let text = visit.service.shortIdentifier() else { continue }
-      let line = TKUIDeparturesAccessoryView.Line(text: text, color: visit.service.color as? UIColor)
+      let line = TKUITimetableAccessoryView.Line(text: text, color: visit.service.color as? UIColor)
       lines.insert(line)
     }
     return Array(lines).sorted { $0.text < $1.text }

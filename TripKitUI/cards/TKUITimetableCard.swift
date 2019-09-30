@@ -52,7 +52,7 @@ public class TKUITimetableCard : TGTableCard {
   private let loadMorePublisher = PublishSubject<IndexPath>()
   private let scrollToTopPublisher = PublishSubject<Void>()
 
-  private let accessoryView = TKUIDeparturesAccessoryView.newInstance()
+  private let accessoryView = TKUITimetableAccessoryView.newInstance()
   
   /// Configures a new instance that'll fetch and display the departures for
   /// the provided public transport stop(s).

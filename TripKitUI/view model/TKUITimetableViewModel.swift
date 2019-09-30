@@ -121,7 +121,7 @@ public class TKUITimetableViewModel: NSObject {
   
   public let timeTitle: Driver<String>
   
-  let lines: Driver<[TKUIDeparturesAccessoryView.Line]>
+  let lines: Driver<[TKUITimetableAccessoryView.Line]>
     
   public let sections: Driver<[Section]>
   

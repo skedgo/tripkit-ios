@@ -1,6 +1,6 @@
 //
-//  TKUIDeparturesAccessoryView.swift
-//  TripGoAppKit
+//  TKUITimetableAccessoryView.swift
+//  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 06.06.18.
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TKUIDeparturesAccessoryView: UIView {
+class TKUITimetableAccessoryView: UIView {
 
   struct Line: Hashable {
     let text: String
@@ -39,10 +39,10 @@ class TKUIDeparturesAccessoryView: UIView {
   
   private var sizingCell: TKUIServiceNumberCell!
   
-  static func newInstance() -> TKUIDeparturesAccessoryView {
+  static func newInstance() -> TKUITimetableAccessoryView {
     let bundle = Bundle(for: self)
     guard
-      let view = bundle.loadNibNamed("TKUIDeparturesAccessoryView", owner: nil, options: nil)!.first as? TKUIDeparturesAccessoryView
+      let view = bundle.loadNibNamed("TKUITimetableAccessoryView", owner: nil, options: nil)!.first as? TKUITimetableAccessoryView
       else { preconditionFailure() }
     return view
   }
@@ -73,7 +73,7 @@ class TKUIDeparturesAccessoryView: UIView {
     customActionStack.isHidden = actions.isEmpty
     
     for action in actions {
-      let actionView = TKUIDeparturesActionView.newInstance()
+      let actionView = TKUITimetableActionView.newInstance()
       actionView.imageView.image = action.icon
       actionView.label.text = action.title
       actionView.bold = action.style == .bold
@@ -91,7 +91,7 @@ class TKUIDeparturesAccessoryView: UIView {
   
 }
 
-extension TKUIDeparturesAccessoryView: UICollectionViewDataSource {
+extension TKUITimetableAccessoryView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return lines.count
   }
@@ -104,7 +104,7 @@ extension TKUIDeparturesAccessoryView: UICollectionViewDataSource {
   }
 }
 
-extension TKUIDeparturesAccessoryView: TKUICollectionViewBubbleLayoutDelegate {
+extension TKUITimetableAccessoryView: TKUICollectionViewBubbleLayoutDelegate {
   
   func collectionView(_ collectionView: UICollectionView, itemSizeAt indexPath: IndexPath) -> CGSize {
     sizingCell.configure(lines[indexPath.item])
@@ -116,7 +116,7 @@ extension TKUIDeparturesAccessoryView: TKUICollectionViewBubbleLayoutDelegate {
 }
 
 extension TKUIServiceNumberCell {
-  func configure(_ line: TKUIDeparturesAccessoryView.Line) {
+  func configure(_ line: TKUITimetableAccessoryView.Line) {
     wrapperView.alpha = line.faded ? 0.2 : 1
     
     numberLabel.text = line.text
