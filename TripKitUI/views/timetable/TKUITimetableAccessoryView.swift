@@ -58,7 +58,7 @@ class TKUITimetableAccessoryView: UIView {
     bottomBar.backgroundColor = .tkBackgroundSecondary
     
     // Apply default style, removing the search bar's background
-    TKStyleManager.style(searchBar) { textField in
+    TKStyleManager.style(searchBar, includingBackground: false) { textField in
       textField.backgroundColor = .tkBackground
     }
     searchBar.placeholder = Loc.Search
