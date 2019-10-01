@@ -20,6 +20,9 @@ public class TKUITripCell: UITableViewCell {
   @IBOutlet weak var mainSegmentActionButton: UIButton!
   @IBOutlet weak var selectionIndicator: UIView!
 
+  @IBOutlet private weak var mainSegmentActionButtonTopSpacing: NSLayoutConstraint!
+  @IBOutlet weak var mainSegmentActionButtonHeight: NSLayoutConstraint!
+  
   private var formatter: Formatter?
   
   override public func awakeFromNib() {
@@ -95,9 +98,13 @@ public class TKUITripCell: UITableViewCell {
     
     if let action = model.action {
       mainSegmentActionButton.isHidden = false
+      mainSegmentActionButtonTopSpacing.constant = 4
       mainSegmentActionButton.setTitle(action, for: .normal)
+      mainSegmentActionButtonHeight.constant = mainSegmentActionButton.intrinsicContentSize.height
     } else {
-      mainSegmentActionButton.isHidden = false
+      mainSegmentActionButton.isHidden = true
+      mainSegmentActionButtonTopSpacing.constant = 0
+      mainSegmentActionButtonHeight.constant = 0
     }
   }
     
