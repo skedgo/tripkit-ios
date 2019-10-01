@@ -9,15 +9,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TKUIResultsSectionFooterView" rowHeight="36" id="WeV-oj-bKU" customClass="TKUIResultsSectionFooterView" customModule="TripKitUI" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TKUIResultsSectionFooterView" rowHeight="50" id="WeV-oj-bKU" customClass="TKUIResultsSectionFooterView" customModule="TripKitUI" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="238" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WeV-oj-bKU" id="11j-pl-SZQ">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                <rect key="frame" x="0.0" y="0.0" width="238" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" horizontalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="9R5-TK-d6g">
-                        <rect key="frame" x="15" y="7" width="58" height="22"/>
+                        <rect key="frame" x="15" y="14" width="58" height="22"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyY-wb-7CC">
                                 <rect key="frame" x="22" y="4" width="31" height="14"/>
@@ -51,7 +51,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5N-vE-V7X">
-                        <rect key="frame" x="329" y="11" width="31" height="14.5"/>
+                        <rect key="frame" x="192" y="18" width="31" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -78,7 +78,7 @@
                 <outlet property="badgeWrapper" destination="9R5-TK-d6g" id="xUZ-ne-AN8"/>
                 <outlet property="costLabel" destination="B5N-vE-V7X" id="ueu-Gn-hUY"/>
             </connections>
-            <point key="canvasLocation" x="28" y="-126.83658170914543"/>
+            <point key="canvasLocation" x="-81.599999999999994" y="-120.53973013493254"/>
         </tableViewCell>
     </objects>
 </document>

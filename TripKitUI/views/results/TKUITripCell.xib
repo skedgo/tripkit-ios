@@ -35,34 +35,6 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fmI-s1-xjJ">
-                        <rect key="frame" x="15" y="87.5" width="97" height="38.5"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ckz-QZ-oup" userLabel="Information stack">
-                                <rect key="frame" x="0.0" y="0.0" width="97" height="38.5"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EPl-sr-ewR">
-                                        <rect key="frame" x="0.0" y="7.5" width="24" height="24"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="2f2-2T-f0z"/>
-                                            <constraint firstAttribute="width" constant="24" id="Qgm-ep-dGz"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="12"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f10-9e-Ymk">
-                                        <rect key="frame" x="32" y="6" width="65" height="27"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <state key="normal" title="Information"/>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                    </stackView>
                     <view contentMode="scaleToFill" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="y8N-RR-3eg" customClass="TKUITripSegmentsView">
                         <rect key="frame" x="15" y="39.5" width="290" height="40"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -71,9 +43,9 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLO-Ou-7xp">
-                        <rect key="frame" x="265" y="92" width="40" height="30"/>
+                        <rect key="frame" x="204" y="96" width="101" height="30"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                        <state key="normal" title="Order"/>
+                        <state key="normal" title="View timetable"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="36mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJE-k6-hxt">
                         <rect key="frame" x="248" y="11" width="57" height="20.5"/>
@@ -84,14 +56,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="qJE-k6-hxt" secondAttribute="trailing" id="5gG-GF-aTN"/>
-                    <constraint firstItem="fmI-s1-xjJ" firstAttribute="leading" secondItem="R4b-AK-zvO" secondAttribute="leading" id="Fad-gz-u3G"/>
                     <constraint firstItem="R4b-AK-zvO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="OQ9-UQ-lKV"/>
-                    <constraint firstItem="fmI-s1-xjJ" firstAttribute="top" secondItem="y8N-RR-3eg" secondAttribute="bottom" constant="8" id="QxR-Nd-MIt"/>
                     <constraint firstItem="FLO-Ou-7xp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y8N-RR-3eg" secondAttribute="bottom" constant="4" id="Zby-L3-prb"/>
                     <constraint firstItem="y8N-RR-3eg" firstAttribute="leading" secondItem="R4b-AK-zvO" secondAttribute="leading" id="bQY-pT-hzj"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="fmI-s1-xjJ" secondAttribute="bottom" id="eBQ-tC-7RY"/>
                     <constraint firstAttribute="trailingMargin" secondItem="y8N-RR-3eg" secondAttribute="trailing" id="i3x-g7-jRq"/>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="FLO-Ou-7xp" secondAttribute="bottom" id="lDM-a2-jDW"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="FLO-Ou-7xp" secondAttribute="bottom" id="lDM-a2-jDW"/>
                     <constraint firstItem="s1t-2l-9F6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mLP-YF-dk6"/>
                     <constraint firstItem="R4b-AK-zvO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="mSQ-0o-toN"/>
                     <constraint firstItem="s1t-2l-9F6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mpW-bF-K5O"/>
@@ -100,13 +69,10 @@
                     <constraint firstItem="qJE-k6-hxt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R4b-AK-zvO" secondAttribute="trailing" constant="8" id="tQW-rn-22E"/>
                     <constraint firstItem="qJE-k6-hxt" firstAttribute="centerY" secondItem="vsO-d9-TCI" secondAttribute="centerY" id="toW-MB-Pql"/>
                     <constraint firstItem="y8N-RR-3eg" firstAttribute="top" secondItem="R4b-AK-zvO" secondAttribute="bottom" constant="8" id="vcV-gE-m03"/>
-                    <constraint firstItem="FLO-Ou-7xp" firstAttribute="centerY" secondItem="fmI-s1-xjJ" secondAttribute="centerY" id="yUB-Z3-cfm"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="alertActionButton" destination="f10-9e-Ymk" id="XhJ-G2-v0w"/>
-                <outlet property="alertIconView" destination="EPl-sr-ewR" id="hBL-LL-xCu"/>
                 <outlet property="mainSegmentActionButton" destination="FLO-Ou-7xp" id="HGf-HI-MGT"/>
                 <outlet property="segmentView" destination="y8N-RR-3eg" id="ttV-Do-af5"/>
                 <outlet property="selectionIndicator" destination="s1t-2l-9F6" id="iCK-rf-qZ6"/>

@@ -19,26 +19,19 @@ public class TKUITripCell: UITableViewCell {
   @IBOutlet weak var segmentView: TKUITripSegmentsView!
   @IBOutlet weak var mainSegmentActionButton: UIButton!
   @IBOutlet weak var selectionIndicator: UIView!
-  @IBOutlet weak var alertIconView: UIImageView!
-  @IBOutlet weak var alertActionButton: UIButton!
+
+  private var formatter: Formatter?
   
   override public func awakeFromNib() {
     super.awakeFromNib()
 
     backgroundColor = .tkBackground
     
-    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
-    titleLabel.textColor = .tkLabelPrimary
-    
-    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .subheadline)
-    subtitleLabel.textColor = .tkLabelSecondary
-    
-    // TODO: This should be replaced
-    alertIconView.backgroundColor = .systemTeal
-    
-    alertActionButton.tintColor = .tkAppTintColor
-    alertActionButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
-    alertActionButton.setTitle(Loc.MoreInfo, for: .normal)
+    formatter = Formatter()
+    formatter?.primaryColor = .tkLabelPrimary
+    formatter?.primaryFont = TKStyleManager.boldCustomFont(forTextStyle: .body)
+    formatter?.secondaryColor = .tkLabelSecondary
+    formatter?.secondaryFont = TKStyleManager.boldCustomFont(forTextStyle: .body)
     
     mainSegmentActionButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
     mainSegmentActionButton.tintColor = .tkAppTintColor
@@ -87,7 +80,7 @@ public class TKUITripCell: UITableViewCell {
   }
   
   public func configure(_ model: Model) {
-    let formatter = Formatter()
+    guard let formatter = self.formatter else { return }
     
     titleLabel.attributedText = formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     
@@ -104,7 +97,7 @@ public class TKUITripCell: UITableViewCell {
       mainSegmentActionButton.isHidden = false
       mainSegmentActionButton.setTitle(action, for: .normal)
     } else {
-      mainSegmentActionButton.isHidden = true
+      mainSegmentActionButton.isHidden = false
     }
   }
     

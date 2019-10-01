@@ -22,13 +22,13 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    contentView.backgroundColor = .tkBackgroundSecondary
+    contentView.backgroundColor = .tkBackgroundTile
     
     badgeWrapper.isHidden = true
     badgeIcon.tintColor = .tkFilledButtonTextColor
     badgeLabel.text = nil
     badgeLabel.textColor = .tkFilledButtonTextColor
-    badgeLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    badgeLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
     costLabel.text = nil
     costLabel.textColor = .tkLabelSecondary
     costLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
