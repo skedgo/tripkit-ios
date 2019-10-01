@@ -1,5 +1,5 @@
 //
-//  TKUIResultsViewModel+ToggleModes.swift
+//  TKUIRoutingResultsViewModel+ToggleModes.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 06.08.19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   struct AvailableModes: Equatable {
     static let none = AvailableModes(available: [], enabled: [])

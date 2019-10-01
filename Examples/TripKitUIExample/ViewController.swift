@@ -121,7 +121,7 @@ extension MainViewController: TKUIAutocompletionViewControllerDelegate {
 extension MainViewController {
   
   func showDepartures(stop: TKUIStopAnnotation) {
-    let departures = TKUIDeparturesViewController(stop: stop)
+    let departures = TKUITimetableViewController(stop: stop)
     departures.delegate = self
     navigationController?.setNavigationBarHidden(true, animated: true)
     navigationController?.pushViewController(departures, animated: true)
@@ -129,7 +129,7 @@ extension MainViewController {
   
 }
 
-extension MainViewController: TKUIDeparturesViewControllerDelegate {
+extension MainViewController: TKUITimetableViewControllerDelegate {
   
   func requestsDismissal(for controller: TGCardViewController) {
     navigationController?.setNavigationBarHidden(false, animated: true)
@@ -163,7 +163,7 @@ extension MainViewController {
       for: nil, timeType: .leaveASAP, into: TripKit.shared.tripKitContext
     )
     
-    let routes = TKUIRoutesViewController(request: request)
+    let routes = TKUIRoutingResultsViewController(request: request)
     routes.delegate = self
     navigationController?.setNavigationBarHidden(true, animated: true)
     navigationController?.pushViewController(routes, animated: true)
@@ -171,7 +171,7 @@ extension MainViewController {
 
 }
 
-extension MainViewController: TKUIRoutesViewControllerDelegate {
+extension MainViewController: TKUIRoutingResultsViewControllerDelegate {
 }
 
 // MARK: - Segment actions
@@ -243,11 +243,11 @@ fileprivate struct SegmentTimetableAction: TKUITripOverviewCardAction {
         let controller = card.controller
         else { return false }
       
-      // The TKUIDeparturesCard's title doesn't work well yet with a DLS table, so we use this instead
+      // The TKUITimetableCard's title doesn't work well yet with a DLS table, so we use this instead
       let segmentTitle = TKUISegmentTitleView.newInstance()
       segmentTitle.configure(for: segment, mode: .getReady)
       
-      let departures = TKUIDeparturesCard(titleView: (segmentTitle, segmentTitle.dismissButton), dlsTable: dls, startDate: segment.departureTime.addingTimeInterval(-10 * 60), selectedServiceID: segment.service?.code)
+      let departures = TKUITimetableCard(titleView: (segmentTitle, segmentTitle.dismissButton), dlsTable: dls, startDate: segment.departureTime.addingTimeInterval(-10 * 60), selectedServiceID: segment.service?.code)
       controller.push(departures)
       return false
     }

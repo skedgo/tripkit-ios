@@ -1,6 +1,6 @@
 //
-//  TKUIDeparturesAccessoryView.swift
-//  TripGoAppKit
+//  TKUITimetableAccessoryView.swift
+//  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 06.06.18.
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TKUIDeparturesAccessoryView: UIView {
+class TKUITimetableAccessoryView: UIView {
 
   struct Line: Hashable {
     let text: String
@@ -20,6 +20,9 @@ class TKUIDeparturesAccessoryView: UIView {
   @IBOutlet weak var serviceCollectionView: UICollectionView!
   @IBOutlet weak var serviceCollectionLayout: TKUICollectionViewBubbleLayout!
   @IBOutlet weak var serviceCollectionHeightConstraint: NSLayoutConstraint!
+  
+  /// Constraint between collection view and bottom bar. Should be activated when `customActionStack` is hidden.
+  @IBOutlet weak var serviceCollectionToBottomBarConstraint: NSLayoutConstraint!
   
   @IBOutlet weak var customActionStack: UIStackView!
 
@@ -39,10 +42,10 @@ class TKUIDeparturesAccessoryView: UIView {
   
   private var sizingCell: TKUIServiceNumberCell!
   
-  static func newInstance() -> TKUIDeparturesAccessoryView {
+  static func newInstance() -> TKUITimetableAccessoryView {
     let bundle = Bundle(for: self)
     guard
-      let view = bundle.loadNibNamed("TKUIDeparturesAccessoryView", owner: nil, options: nil)!.first as? TKUIDeparturesAccessoryView
+      let view = bundle.loadNibNamed("TKUITimetableAccessoryView", owner: nil, options: nil)!.first as? TKUITimetableAccessoryView
       else { preconditionFailure() }
     return view
   }
@@ -55,10 +58,13 @@ class TKUIDeparturesAccessoryView: UIView {
     serviceCollectionView.dataSource = self
     serviceCollectionLayout.delegate = self
     
+    customActionStack.isHidden = true
+    serviceCollectionToBottomBarConstraint.isActive = true
+
     bottomBar.backgroundColor = .tkBackgroundSecondary
     
     // Apply default style, removing the search bar's background
-    TKStyleManager.style(searchBar) { textField in
+    TKStyleManager.style(searchBar, includingBackground: false) { textField in
       textField.backgroundColor = .tkBackground
     }
     searchBar.placeholder = Loc.Search
@@ -66,14 +72,15 @@ class TKUIDeparturesAccessoryView: UIView {
     timeButton.setTitle(nil, for: .normal)
   }
   
-  func setCustomActions(_ actions: [TKUIDeparturesCardAction], for model: [TKUIStopAnnotation], card: TKUIDeparturesCard) {
+  func setCustomActions(_ actions: [TKUITimetableCardAction], for model: [TKUIStopAnnotation], card: TKUITimetableCard) {
     customActionStack.arrangedSubviews.forEach(customActionStack.removeArrangedSubview)
     customActionStack.removeAllSubviews()
     
     customActionStack.isHidden = actions.isEmpty
+    serviceCollectionToBottomBarConstraint.isActive = actions.isEmpty
     
     for action in actions {
-      let actionView = TKUIDeparturesActionView.newInstance()
+      let actionView = TKUITimetableActionView.newInstance()
       actionView.imageView.image = action.icon
       actionView.label.text = action.title
       actionView.bold = action.style == .bold
@@ -91,7 +98,7 @@ class TKUIDeparturesAccessoryView: UIView {
   
 }
 
-extension TKUIDeparturesAccessoryView: UICollectionViewDataSource {
+extension TKUITimetableAccessoryView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return lines.count
   }
@@ -104,7 +111,7 @@ extension TKUIDeparturesAccessoryView: UICollectionViewDataSource {
   }
 }
 
-extension TKUIDeparturesAccessoryView: TKUICollectionViewBubbleLayoutDelegate {
+extension TKUITimetableAccessoryView: TKUICollectionViewBubbleLayoutDelegate {
   
   func collectionView(_ collectionView: UICollectionView, itemSizeAt indexPath: IndexPath) -> CGSize {
     sizingCell.configure(lines[indexPath.item])
@@ -116,7 +123,7 @@ extension TKUIDeparturesAccessoryView: TKUICollectionViewBubbleLayoutDelegate {
 }
 
 extension TKUIServiceNumberCell {
-  func configure(_ line: TKUIDeparturesAccessoryView.Line) {
+  func configure(_ line: TKUITimetableAccessoryView.Line) {
     wrapperView.alpha = line.faded ? 0.2 : 1
     
     numberLabel.text = line.text

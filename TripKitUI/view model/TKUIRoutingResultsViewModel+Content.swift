@@ -1,5 +1,5 @@
 //
-//  TKUIResultsViewModel+Content.swift
+//  TKUIRoutingResultsViewModel+Content.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 01.04.19.
@@ -14,13 +14,13 @@ import RxDataSources
 
 // MARK: - List content
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
 }
 
 // MARK: - Map Content
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
 
   /// An item to be displayed on the map
   public struct MapRouteItem {
@@ -50,7 +50,7 @@ extension TKUIResultsViewModel {
   
 }
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   static func buildMapContent(all groups: [TripGroup], selection: MapRouteItem?) -> MapContent {
     let routeItems = groups.compactMap { $0.preferredRoute }
@@ -65,7 +65,7 @@ extension TKUIResultsViewModel {
 
 // MARK: - Building results
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   static func fetchTripGroups(_ requests: Observable<TripRequest?>) -> Observable<[TripGroup]> {
     return requests.flatMapLatest { request -> Observable<[TripGroup]> in
@@ -147,7 +147,7 @@ extension Trip {
   }
 }
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   /// An item in a section on the results screen
   public enum Item {
@@ -213,7 +213,7 @@ extension TKMetricClassifier.Classification {
   }
 }
 
-extension TKUIResultsViewModel.Item {
+extension TKUIRoutingResultsViewModel.Item {
   
   fileprivate init?(trip: Trip, in group: TripGroup) {
     switch group.visibility {
@@ -227,20 +227,20 @@ extension TKUIResultsViewModel.Item {
 
 // MARK: - Map content
 
-public func ==(lhs: TKUIResultsViewModel.MapRouteItem, rhs: TKUIResultsViewModel.MapRouteItem) -> Bool {
+public func ==(lhs: TKUIRoutingResultsViewModel.MapRouteItem, rhs: TKUIRoutingResultsViewModel.MapRouteItem) -> Bool {
   return lhs.trip.objectID == rhs.trip.objectID
 }
-extension TKUIResultsViewModel.MapRouteItem: Equatable { }
+extension TKUIRoutingResultsViewModel.MapRouteItem: Equatable { }
 
 extension TripGroup {
-  fileprivate var preferredRoute: TKUIResultsViewModel.MapRouteItem? {
+  fileprivate var preferredRoute: TKUIRoutingResultsViewModel.MapRouteItem? {
     guard let trip = visibleTrip else { return nil }
-    return TKUIResultsViewModel.MapRouteItem(trip)
+    return TKUIRoutingResultsViewModel.MapRouteItem(trip)
   }
 }
 
-extension Array where Element == TKUIResultsViewModel.Section {
-  func find(_ mapRoute: TKUIResultsViewModel.MapRouteItem?) -> TKUIResultsViewModel.Item? {
+extension Array where Element == TKUIRoutingResultsViewModel.Section {
+  func find(_ mapRoute: TKUIRoutingResultsViewModel.MapRouteItem?) -> TKUIRoutingResultsViewModel.Item? {
     guard let mapRoute = mapRoute else { return nil }
     for section in self {
       for item in section.items {
@@ -252,14 +252,14 @@ extension Array where Element == TKUIResultsViewModel.Section {
     return nil
   }
   
-  var bestItem: TKUIResultsViewModel.Item? {
+  var bestItem: TKUIRoutingResultsViewModel.Item? {
     return first?.items.first // Assuming we're sorting by best
   }
 }
 
 // MARK: - ?
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   //  func allQueriesDidFinish(with error: NSError?) {
   //    // TODO: Call this again?
@@ -287,7 +287,7 @@ extension TKUIResultsViewModel {
 
 // MARK: - RxDataSources
 
-public func ==(lhs: TKUIResultsViewModel.Item, rhs: TKUIResultsViewModel.Item) -> Bool {
+public func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsViewModel.Item) -> Bool {
   switch (lhs, rhs) {
   case (.trip(let left), .trip(let right)): return left.objectID == right.objectID
   case (.nano(let left), .nano(let right)): return left.objectID == right.objectID
@@ -295,9 +295,9 @@ public func ==(lhs: TKUIResultsViewModel.Item, rhs: TKUIResultsViewModel.Item) -
   default: return false
   }
 }
-extension TKUIResultsViewModel.Item: Equatable { }
+extension TKUIRoutingResultsViewModel.Item: Equatable { }
 
-extension TKUIResultsViewModel.Item: IdentifiableType {
+extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
   public typealias Identity = String
   public var identity: Identity {
     switch self {
@@ -309,11 +309,11 @@ extension TKUIResultsViewModel.Item: IdentifiableType {
   }
 }
 
-extension TKUIResultsViewModel.Section: AnimatableSectionModelType {
+extension TKUIRoutingResultsViewModel.Section: AnimatableSectionModelType {
   public typealias Identity = String
-  public typealias Item = TKUIResultsViewModel.Item
+  public typealias Item = TKUIRoutingResultsViewModel.Item
   
-  public init(original: TKUIResultsViewModel.Section, items: [TKUIResultsViewModel.Item]) {
+  public init(original: TKUIRoutingResultsViewModel.Section, items: [TKUIRoutingResultsViewModel.Item]) {
     self = original
     self.items = items
   }

@@ -1,6 +1,6 @@
 //
-//  TKUIDeparturesCard.swift
-//  TripGo
+//  TKUITimetableCard.swift
+//  TripKitUI
 //
 //  Created by Adrian Schoenig on 19/5/17.
 //  Copyright © 2017 SkedGo Pty Ltd. All rights reserved.
@@ -13,30 +13,36 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public protocol TKUIDeparturesCardDelegate: class {
-  func TKUIDeparturesCard(_ card: TKUIDeparturesCard, selectedDeparture: StopVisits)
+@available(*, unavailable, renamed: "TKUITimetableCard")
+public typealias TKUIDeparturesCard = TKUITimetableCard
+
+@available(*, unavailable, renamed: "TKUITimetableCardDelegate")
+public typealias TKUIDeparturesCardDelegate = TKUITimetableCardDelegate
+
+public protocol TKUITimetableCardDelegate: class {
+  func timetableCard(_ card: TKUITimetableCard, selectedDeparture: StopVisits)
 }
 
 /// A card that lists all the departures from a public transport stop (or a
 /// list thereof).
-public class TKUIDeparturesCard : TGTableCard {
+public class TKUITimetableCard : TGTableCard {
   
   enum Input {
     case stops([TKUIStopAnnotation])
     case dls(TKDLSTable, start: Date, selectedServiceID: String?)
-    case restored(TKUIDeparturesViewModel.RestorableState)
+    case restored(TKUITimetableViewModel.RestorableState)
   }
   
   public static var config = Configuration.empty
   
   /// Provide a departures delegate to handle taps on departures, rather than
   /// using the default behaviour of pushing a card displaying the service.
-  public weak var departuresDelegate: TKUIDeparturesCardDelegate?
+  public weak var departuresDelegate: TKUITimetableCardDelegate?
   
   private let input: Input
 
-  private var viewModel: TKUIDeparturesViewModel!
-  private var dataSource: RxTableViewSectionedAnimatedDataSource<TKUIDeparturesViewModel.Section>!
+  private var viewModel: TKUITimetableViewModel!
+  private var dataSource: RxTableViewSectionedAnimatedDataSource<TKUITimetableViewModel.Section>!
   private var tableView: UITableView!
   
   private let disposeBag = DisposeBag()
@@ -46,7 +52,7 @@ public class TKUIDeparturesCard : TGTableCard {
   private let loadMorePublisher = PublishSubject<IndexPath>()
   private let scrollToTopPublisher = PublishSubject<Void>()
 
-  private let accessoryView = TKUIDeparturesAccessoryView.newInstance()
+  private let accessoryView = TKUITimetableAccessoryView.newInstance()
   
   /// Configures a new instance that'll fetch and display the departures for
   /// the provided public transport stop(s).
@@ -96,7 +102,7 @@ public class TKUIDeparturesCard : TGTableCard {
   required public init?(coder: NSCoder) {
     guard
       let data = coder.decodeData(),
-      let restoredState = TKUIDeparturesViewModel.restoredState(from: data)
+      let restoredState = TKUITimetableViewModel.restoredState(from: data)
       else {
         return nil
     }
@@ -139,9 +145,9 @@ public class TKUIDeparturesCard : TGTableCard {
     
     tableView.register(TKUIDepartureCell.nib, forCellReuseIdentifier: TKUIDepartureCell.reuseIdentifier)
     
-    let cellAlertPublisher = PublishSubject<TKUIDeparturesViewModel.Item>()
+    let cellAlertPublisher = PublishSubject<TKUITimetableViewModel.Item>()
 
-    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIDeparturesViewModel.Section>(
+    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUITimetableViewModel.Section>(
       configureCell: { ds, tv, ip, item in
         guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIDepartureCell.reuseIdentifier, for: ip) as? TKUIDepartureCell else {
           preconditionFailure()
@@ -166,8 +172,8 @@ public class TKUIDeparturesCard : TGTableCard {
     
     let filter = accessoryView.searchBar.rx.text.orEmpty
     
-    let input: TKUIDeparturesViewModel.UIInput = (
-      selected: tableView.rx.modelSelected(TKUIDeparturesViewModel.Item.self).asSignal(),
+    let input: TKUITimetableViewModel.UIInput = (
+      selected: tableView.rx.modelSelected(TKUITimetableViewModel.Item.self).asSignal(),
       showAlerts: cellAlertPublisher.asSignal(onErrorSignalWith: .empty()),
       filter: filter.asDriver(),
       date: datePublisher.asDriver(onErrorDriveWith: .empty()),
@@ -177,11 +183,11 @@ public class TKUIDeparturesCard : TGTableCard {
     
     switch self.input {
     case .stops(let stops):
-      viewModel = TKUIDeparturesViewModel(stops: stops, input: input)
+      viewModel = TKUITimetableViewModel(stops: stops, input: input)
     case .dls(let dls, let start, let selection):
-      viewModel = TKUIDeparturesViewModel(dlsTable: dls, startDate: start, selectedServiceID: selection, input: input)
+      viewModel = TKUITimetableViewModel(dlsTable: dls, startDate: start, selectedServiceID: selection, input: input)
     case .restored(let state):
-      viewModel = TKUIDeparturesViewModel(restoredState: state, input: input)
+      viewModel = TKUITimetableViewModel(restoredState: state, input: input)
     }
     
     
@@ -216,8 +222,8 @@ public class TKUIDeparturesCard : TGTableCard {
     
     // TODO: Add viewModel.error
 
-    let actions: [TKUIDeparturesCardAction]
-    if let factory = TKUIDeparturesCard.config.departuresActionsFactory {
+    let actions: [TKUITimetableCardAction]
+    if let factory = TKUITimetableCard.config.timetableActionsFactory {
       actions = factory(viewModel.departureStops)
     } else {
       actions = []
@@ -292,15 +298,15 @@ public class TKUIDeparturesCard : TGTableCard {
 
 // MARK: - Navigation
 
-extension TKUIDeparturesCard {
+extension TKUITimetableCard {
   
-  private func navigate(to next: TKUIDeparturesViewModel.Next) {
+  private func navigate(to next: TKUITimetableViewModel.Next) {
     guard let controller = controller else { return } // Delayed callback
     
     switch next {
     case .departure(let departure):
       if let delegate = departuresDelegate {
-        delegate.TKUIDeparturesCard(self, selectedDeparture: departure)
+        delegate.timetableCard(self, selectedDeparture: departure)
       } else {
         controller.push(TKUIServiceCard(embarkation: departure))
       }
@@ -315,7 +321,7 @@ extension TKUIDeparturesCard {
 
 // MARK: - Time selection
 
-private extension TKUIDeparturesCard {
+private extension TKUITimetableCard {
   
   func showTimePicker(date: Date, sender: UIView) {
     
@@ -345,7 +351,7 @@ private extension TKUIDeparturesCard {
   
 }
 
-extension TKUIDeparturesCard: TKUITimePickerSheetDelegate {
+extension TKUITimetableCard: TKUITimePickerSheetDelegate {
   
   public func timePickerRequestsResign(_ pickerSheet: TKUITimePickerSheet) {
     controller?.dismiss(animated: true) {
@@ -358,7 +364,7 @@ extension TKUIDeparturesCard: TKUITimePickerSheetDelegate {
 
 // MARK: - Scrolling to base data and to bottom
 
-extension TKUIDeparturesCard: UITableViewDelegate {
+extension TKUITimetableCard: UITableViewDelegate {
   
   public func scrollViewDidScroll(_ scrollView: UIScrollView) {
     guard let tableView = scrollView as? UITableView else {
@@ -408,7 +414,7 @@ extension UITableView {
 
 // MARK: - Alerts
 
-extension TKUIDeparturesCard {
+extension TKUITimetableCard {
   
   private func show(_ alerts: [TKAlert]) {
     guard !alerts.isEmpty else { return }

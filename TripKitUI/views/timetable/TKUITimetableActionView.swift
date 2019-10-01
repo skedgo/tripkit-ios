@@ -1,5 +1,5 @@
 //
-//  TKUIDeparturesActionView.swift
+//  TKUITimetableActionView.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 06.09.19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TKUIDeparturesActionView: UIView {
+class TKUITimetableActionView: UIView {
 
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var label: UILabel!
@@ -21,7 +21,7 @@ class TKUIDeparturesActionView: UIView {
     }
   }
 
-  var onTap: ((TKUIDeparturesActionView) -> Void)?
+  var onTap: ((TKUITimetableActionView) -> Void)?
   
   override var frame: CGRect {
     didSet {
@@ -29,8 +29,8 @@ class TKUIDeparturesActionView: UIView {
     }
   }
   
-  static func newInstance() -> TKUIDeparturesActionView {
-    let view = Bundle(for: self).loadNibNamed("TKUIDeparturesActionView", owner: self, options: nil)?.first as! TKUIDeparturesActionView
+  static func newInstance() -> TKUITimetableActionView {
+    let view = Bundle(for: self).loadNibNamed("TKUITimetableActionView", owner: self, options: nil)?.first as! TKUITimetableActionView
     return view
   }
   

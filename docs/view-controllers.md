@@ -21,7 +21,7 @@ Each of these share the following characteristics:
 
 <img src="assets/departures.png" height="400px" />
 
-The stand-alone view controller `TKUIDeparturesViewController` let's you quickly and easily embed public transport departures. 
+The stand-alone view controller `TKUITimetableViewController` let's you quickly and easily embed public transport departures. 
 
 This view controller has the following features:
 
@@ -37,16 +37,16 @@ This view controller has the following features:
 It has the following additional customisation points:
 
 - Style of cards via `TKUICustomization`
-- Departures screen via `TKUIDeparturesCard.config`:
+- Timetable screen via `TKUITimetableCard.config`:
   - Customisable list of action buttons
 
-Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (`TKUIDeparturesCard` and `TKUIServiceCard`) and use them directly in a `TGCardViewController` container.
+Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (`TKUITimetableCard` and `TKUIServiceCard`) and use them directly in a `TGCardViewController` container.
 
 ## Trip planning and trip details
 
 <img src="assets/routing.png" height="400px" />
 
-The stand-alone view controller `TKUIRoutesViewController` let's you quickly and easily show routing results between two locations for various modes including combinations of those modes, i.e., this is fully multi-modal and inter-modal.
+The stand-alone view controller `TKUIRoutingResultsViewController` let's you quickly and easily show routing results between two locations for various modes including combinations of those modes, i.e., this is fully multi-modal and inter-modal.
 
 This view controller has the following features:
 
@@ -61,7 +61,7 @@ This view controller has the following features:
 It has the following additional customisation points:
 
 - Style of cards via `TKUICustomization`
-- Results screen via `TKUIResultsCard.config`:
+- Results screen via `TKUIRoutingResultsCard.config`:
 	- Option to provide a feedback action when user presses a "Contact support" button in case of an error or trying to route in an area that's not supported
 - Trip overview via `TKUITripOverviewCard.config`:
 	- Presentation of attribution
@@ -69,7 +69,7 @@ It has the following additional customisation points:
 	- Customisable list of per-trip action buttons
 	- Customisable list of per-segment action buttons
 
-Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (`TKUIResultsCard` and `TKUITripOverviewCard`) and use them directly in a `TGCardViewController` container.
+Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (`TKUIRoutingResultsCard` and `TKUITripOverviewCard`) and use them directly in a `TGCardViewController` container.
 
 ## Trip mode-by-mode overview
 
@@ -80,7 +80,7 @@ The stand-alone view controller `TKUIModeByModeViewController` let's you display
 This view controller has the following features:
 
 - Show details for a trip on a mode-by-mode basis
-- Highly customisable what cards to display for each mode, including custom cards or also the built-in cards like `TKUIDeparturesCard` or `TKUIServiceCard` from above
+- Highly customisable what cards to display for each mode, including custom cards or also the built-in cards like `TKUITimetableCard` or `TKUIServiceCard` from above
 
 It has the following additional customisation points:
 

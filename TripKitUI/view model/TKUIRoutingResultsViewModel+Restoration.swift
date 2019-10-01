@@ -1,5 +1,5 @@
 //
-//  TKUIResultsViewModel+Restoration.swift
+//  TKUIRoutingResultsViewModel+Restoration.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 03.08.18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   
   private struct RestorationInfo: Codable {
     let requestID: String

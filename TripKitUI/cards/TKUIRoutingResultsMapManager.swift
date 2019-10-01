@@ -1,5 +1,5 @@
 //
-//  TKUIResultsMapManager.swift
+//  TKUIRoutingResultsMapManager.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 13/4/17.
@@ -19,17 +19,17 @@ import TGCardViewController
   import TripKit
 #endif
 
-public protocol TKUIResultsMapManagerType: TGCompatibleMapManager {
-  var viewModel: TKUIResultsViewModel? { get set }
+public protocol TKUIRoutingResultsMapManagerType: TGCompatibleMapManager {
+  var viewModel: TKUIRoutingResultsViewModel? { get set }
   
   var droppedPin: Signal<CLLocationCoordinate2D> { get }
   
-  var selectedMapRoute: Signal<TKUIResultsViewModel.MapRouteItem> { get }
+  var selectedMapRoute: Signal<TKUIRoutingResultsViewModel.MapRouteItem> { get }
 }
 
-class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
+class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManagerType {
   
-  weak var viewModel: TKUIResultsViewModel?
+  weak var viewModel: TKUIRoutingResultsViewModel?
   
   init(destination: MKAnnotation? = nil) {
     super.init()
@@ -46,8 +46,8 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
   }
 
   private var tapRecognizer = UITapGestureRecognizer()
-  private var selectedRoutePublisher = PublishSubject<TKUIResultsViewModel.MapRouteItem>()
-  var selectedMapRoute: Signal<TKUIResultsViewModel.MapRouteItem> {
+  private var selectedRoutePublisher = PublishSubject<TKUIRoutingResultsViewModel.MapRouteItem>()
+  var selectedMapRoute: Signal<TKUIRoutingResultsViewModel.MapRouteItem> {
     return selectedRoutePublisher.asSignal(onErrorSignalWith: .empty())
   }
 
@@ -76,13 +76,13 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     }
   }
   
-  fileprivate var selectedRoute: TKUIResultsViewModel.MapRouteItem? {
+  fileprivate var selectedRoute: TKUIRoutingResultsViewModel.MapRouteItem? {
     didSet {
       selectionIdentifier = selectedRoute?.selectionIdentifier
     }
   }
   
-  private var allRoutes: [TKUIResultsViewModel.MapRouteItem] = [] {
+  private var allRoutes: [TKUIRoutingResultsViewModel.MapRouteItem] = [] {
     didSet {
       guard let mapView = mapView else { return }
       
@@ -171,7 +171,7 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
     super.cleanUp(mapView, animated: animated)
   }
   
-  private func closestRoute(to coordinate: CLLocationCoordinate2D) -> TKUIResultsViewModel.MapRouteItem? {
+  private func closestRoute(to coordinate: CLLocationCoordinate2D) -> TKUIRoutingResultsViewModel.MapRouteItem? {
     let mapPoint = MKMapPoint(coordinate)
     return allRoutes
       .filter { $0 != selectedRoute }
@@ -179,7 +179,7 @@ class TKUIResultsMapManager: TKUIMapManager, TKUIResultsMapManagerType {
   }
 }
 
-extension TKUIResultsViewModel.MapRouteItem {
+extension TKUIRoutingResultsViewModel.MapRouteItem {
   fileprivate func distance(to mapPoint: MKMapPoint) -> CLLocationDistance {
     return polyline.closestPoint(to: mapPoint).distance
   }
@@ -188,7 +188,7 @@ extension TKUIResultsViewModel.MapRouteItem {
 
 // MARK: - MKMapViewDelegate
 
-extension TKUIResultsMapManager {
+extension TKUIRoutingResultsMapManager {
   
   override func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     

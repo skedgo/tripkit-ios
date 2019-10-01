@@ -1,5 +1,5 @@
 //
-//  TKUIResultsViewModel.swift
+//  TKUIRoutingResultsViewModel.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 10/4/17.
@@ -16,7 +16,7 @@ import RxCocoa
   import TripKit
 #endif
 
-public class TKUIResultsViewModel {
+public class TKUIRoutingResultsViewModel {
 
   public typealias UIInput = (
     selected: Signal<Item>,                     // => do .next
@@ -43,7 +43,7 @@ public class TKUIResultsViewModel {
   }
   
   private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, inputs: UIInput, mapInput: MapInput) {
-    let builderChanged = TKUIResultsViewModel.watch(builder, inputs: inputs, mapInput: mapInput)
+    let builderChanged = TKUIRoutingResultsViewModel.watch(builder, inputs: inputs, mapInput: mapInput)
       .share(replay: 1, scope: .forever)
 
     let errorPublisher = PublishSubject<Error>()
@@ -51,7 +51,7 @@ public class TKUIResultsViewModel {
     
     // Monitor the builder's annotation's coordinates
     let originOrDestinationChanged = builderChanged
-      .flatMapLatest(TKUIResultsViewModel.locationsChanged)
+      .flatMapLatest(TKUIRoutingResultsViewModel.locationsChanged)
     
     // Whenever the builder is changing, i.e., when the user changes the inputs,
     // we generate a new request.
@@ -61,7 +61,7 @@ public class TKUIResultsViewModel {
       .startWith(initialRequest)
       .share(replay: 1, scope: .forever)
 
-    let tripGroupsChanged = TKUIResultsViewModel.fetchTripGroups(requestChanged)
+    let tripGroupsChanged = TKUIRoutingResultsViewModel.fetchTripGroups(requestChanged)
       .share(replay: 1, scope: .forever)
       .distinctUntilChanged()
 
@@ -70,13 +70,13 @@ public class TKUIResultsViewModel {
       .map { $0! }
       .asDriver(onErrorDriveWith: .empty())
     
-    fetchProgress = TKUIResultsViewModel.fetch(for: requestChanged, errorPublisher: errorPublisher)
+    fetchProgress = TKUIRoutingResultsViewModel.fetch(for: requestChanged, errorPublisher: errorPublisher)
       .asDriver(onErrorDriveWith: .empty())
 
-    realTimeUpdate = TKUIResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged)
+    realTimeUpdate = TKUIRoutingResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged)
       .asDriver(onErrorDriveWith: .empty())
 
-    sections = TKUIResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs)
+    sections = TKUIRoutingResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs)
       .asDriver(onErrorJustReturn: [])
 
     let selection = mapInput.tappedMapRoute.startOptional() // default selection
@@ -92,11 +92,11 @@ public class TKUIResultsViewModel {
       .asDriver(onErrorDriveWith: .empty())
     
     let availableFromRequest: Observable<AvailableModes> = requestChanged
-      .compactMap(TKUIResultsViewModel.buildAvailableModes)
+      .compactMap(TKUIRoutingResultsViewModel.buildAvailableModes)
     
     let availableFromChange = inputs.changedModes.asObservable()
       .withLatestFrom(requestChanged) { ($0, $1) }
-      .compactMap(TKUIResultsViewModel.updateAvailableModes)
+      .compactMap(TKUIRoutingResultsViewModel.updateAvailableModes)
     
     let available = Observable.merge(availableFromRequest, availableFromChange)
       .distinctUntilChanged()
@@ -123,7 +123,7 @@ public class TKUIResultsViewModel {
       .asDriver(onErrorDriveWith: .empty())
 
     mapRoutes = Observable.combineLatest(tripGroupsChanged, mapInput.tappedMapRoute.startOptional().asObservable())
-      .map(TKUIResultsViewModel.buildMapContent)
+      .map(TKUIRoutingResultsViewModel.buildMapContent)
       .asDriver(onErrorDriveWith: .empty())
 
     // Navigation
@@ -136,7 +136,7 @@ public class TKUIResultsViewModel {
     let presentModes = inputs.tappedShowModeOptions.asObservable()
       .withLatestFrom(modeInput) { (_, tuple) -> Next in
         let modes = tuple.0?.applicableModeIdentifiers() ?? []
-        let region = TKUIResultsViewModel.regionForModes(for: tuple.1)
+        let region = TKUIRoutingResultsViewModel.regionForModes(for: tuple.1)
         return Next.presentModeConfigurator(modes: modes, region: region)
       }
       .asSignal(onErrorSignalWith: .empty())
@@ -199,7 +199,7 @@ public class TKUIResultsViewModel {
 
 // MARK: - Navigation
 
-extension TKUIResultsViewModel {
+extension TKUIRoutingResultsViewModel {
   enum Next {
     case showTrip(Trip)
     case presentModeConfigurator(modes: [String], region: TKRegion)
