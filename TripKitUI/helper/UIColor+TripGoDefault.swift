@@ -28,10 +28,10 @@ extension UIColor {
       return UIColor { traits in
         switch traits.userInterfaceStyle {
         case .dark: return #colorLiteral(red: 0.1176470588, green: 0.1647058824, blue: 0.2117647059, alpha: 1)
-        case _: return #colorLiteral(red: 0.1176470588, green: 0.1647058824, blue: 0.2117647059, alpha: 1)
+        case _: return .tkBackground
         }
       }
-    } else { return #colorLiteral(red: 0.1176470588, green: 0.1647058824, blue: 0.2117647059, alpha: 1) }
+    } else { return.tkBackground }
   }()
 
   
