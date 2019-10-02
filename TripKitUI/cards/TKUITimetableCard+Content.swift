@@ -99,14 +99,7 @@ extension StopVisits {
       }
     }
     
-    let color: UIColor
-    switch realTimeStatus() {
-    case .cancelled: color = .tkStateError
-    case .early, .late: color = .tkStateWarning
-    case .onTime: color = .tkStateSuccess
-    case .notApplicable, .notAvailable: color = .tkLabelSecondary
-    }
-    
+    let color = realTimeStatus().color
     return NSAttributedString(string: text, attributes: [.foregroundColor: color])
   }
   
