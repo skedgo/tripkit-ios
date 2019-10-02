@@ -112,9 +112,14 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
 
     // Calculate the number of modes per stack, depending on the available
     // width
-    let widthPerMode = Constants.modeButtonWidth + Constants.modeButtonSpacing
-    let availableWidth = frame.width - Constants.viewPaddingHorizontal * 2
-    let modesPerStack = Int(availableWidth / widthPerMode)
+    let modesPerStack: Int
+    if frame == .zero {
+      modesPerStack = Constants.modesPerStackView
+    } else {
+      let widthPerMode = Constants.modeButtonWidth + Constants.modeButtonSpacing
+      let availableWidth = frame.width - Constants.viewPaddingHorizontal * 2
+      modesPerStack = Int(availableWidth / widthPerMode)
+    }
 
     for (index, mode) in visibleModes.enumerated() {
       if (index % modesPerStack) == 0 {
