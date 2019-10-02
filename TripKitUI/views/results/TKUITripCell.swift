@@ -36,7 +36,7 @@ public class TKUITripCell: UITableViewCell {
     formatter?.secondaryColor = .tkLabelSecondary
     formatter?.secondaryFont = TKStyleManager.boldCustomFont(forTextStyle: .body)
     
-    mainSegmentActionButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+    mainSegmentActionButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
     mainSegmentActionButton.tintColor = .tkAppTintColor
     
     selectionIndicator.isHidden = true
