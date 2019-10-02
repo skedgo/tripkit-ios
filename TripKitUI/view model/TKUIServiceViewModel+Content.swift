@@ -32,6 +32,9 @@ extension TKUIServiceViewModel {
     /// Time zone of the stop
     public let timeZone: TimeZone
     
+    /// Real-time satatus of the departure
+    public let realTimeStatus: StopVisitRealTime
+    
     /// Whether this stop is at or after disembarkation, and, optionally,
     /// at or before the disembarkation
     public let isVisited: Bool
@@ -102,12 +105,13 @@ extension TKUIServiceViewModel.Item {
     } else {
       bottomConnectionColor = (isVisited && visit != disembarkation) ? serviceColor : serviceColor.withAlphaComponent(0.3)
     }
-
+    
     self.init(
       dataModel: visit,
       title: visit.stop.title ?? visit.stop.stopCode,
       timing: visit.timing,
       timeZone: visit.timeZone,
+      realTimeStatus: visit.realTimeStatus(),
       isVisited: isVisited,
       topConnection: topConnectionColor,
       bottomConnection: bottomConnectionColor

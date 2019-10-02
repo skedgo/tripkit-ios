@@ -88,8 +88,9 @@ public class TKUIServiceVisitCell: UITableViewCell {
 }
 
 extension TKUIServiceVisitCell {
-  func setTiming(_ timing: TKServiceTiming, timeZone: TimeZone, isVisited: Bool) {
-    let textColor: UIColor = isVisited ? .tkLabelSecondary : .tkLabelTertiary
+  func setTiming(_ timing: TKServiceTiming, timeZone: TimeZone, isVisited: Bool, realTime: StopVisitRealTime) {
+    
+    let textColor: UIColor = isVisited ? realTime.color : .tkLabelTertiary
 
     arrivalTimeLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
     arrivalTimeLabel.textColor = textColor
@@ -157,7 +158,7 @@ extension TKUIServiceVisitCell {
 extension TKUIServiceVisitCell {
   
   func configure(with item: TKUIServiceViewModel.Item) {
-    setTiming(item.timing, timeZone: item.timeZone, isVisited: item.isVisited)
+    setTiming(item.timing, timeZone: item.timeZone, isVisited: item.isVisited, realTime: item.realTimeStatus)
 
     setTitle(item.title, isVisited: item.isVisited)
     
@@ -193,7 +194,7 @@ extension TKUIServiceVisitCell {
       isVisited = true
     }
     
-    setTiming(visit.timing, timeZone: visit.timeZone, isVisited: isVisited)
+    setTiming(visit.timing, timeZone: visit.timeZone, isVisited: isVisited, realTime: visit.realTimeStatus())
     
     let title = visit.stop.title ?? visit.stop.location?.title
     setTitle(title, isVisited: isVisited)
