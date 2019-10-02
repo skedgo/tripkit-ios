@@ -300,31 +300,36 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
 
 private extension TKUIRoutingResultsCard {
   func updateModePicker(_ modes: TKUIRoutingResultsViewModel.AvailableModes, in tableView: UITableView) {
-    if modes.available.isEmpty {
-      if let header = tableView.tableHeaderView {
-        tableView.contentSize.height -= header.frame.height
-      }
-      
+    guard !modes.available.isEmpty else {
       tableView.tableHeaderView = nil
-      
-    } else {
-      let modePicker: RoutingModePicker
-      if let existing = self.modePicker {
-        modePicker = existing
-      } else {
-        modePicker = self.buildModePicker()
-        modePicker.addAsHeader(to: tableView)
-        self.modePicker = modePicker
-      }
-      modePicker.configure(all: modes.available, updateAll: true, currentlyEnabled: modes.isEnabled)
-      
-      // header is inserted after table view content is laid out,
-      // so we need to manually adjust the content size so the
-      // extra space taken up by the header view is accounted for.
-      if let header = tableView.tableHeaderView {
-        tableView.contentSize.height += header.frame.height
-      }
+      return
     }
+    
+    let modePicker: RoutingModePicker
+    
+    if let existing = self.modePicker {
+      modePicker = existing
+    } else {
+      modePicker = self.buildModePicker()
+      self.modePicker = modePicker
+    }
+    
+    modePicker.frame.size.width = tableView.frame.width
+    modePicker.configure(all: modes.available, updateAll: true, currentlyEnabled: modes.isEnabled)
+    
+    let pickerHeight = modePicker.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+    let header = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: pickerHeight))
+    header.addSubview(modePicker)
+    
+    modePicker.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      modePicker.topAnchor.constraint(equalTo: header.topAnchor),
+      modePicker.bottomAnchor.constraint(equalTo: header.bottomAnchor),
+      modePicker.leadingAnchor.constraint(equalTo: header.leadingAnchor),
+      modePicker.trailingAnchor.constraint(equalTo: header.trailingAnchor)
+    ])
+    
+    tableView.tableHeaderView = header
   }
   
   func buildModePicker() -> RoutingModePicker {
