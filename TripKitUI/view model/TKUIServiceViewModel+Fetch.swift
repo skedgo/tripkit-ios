@@ -54,6 +54,7 @@ extension TKUIServiceViewModel {
     
     return Observable<Int>
       .interval(realTimeRefreshInterval, scheduler: MainScheduler.instance)
+      .startWith(0) // update immediately
       .flatMapLatest { _ -> Observable<TKRealTimeUpdateProgress<Void>> in
         return TKBuzzRealTime.rx
           .update(embarkation: embarkation)
