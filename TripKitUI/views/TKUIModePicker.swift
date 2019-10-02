@@ -66,7 +66,10 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   ///
   /// - Note: you can call `configure` multiple times with different sets of items. The mode picker will keep track
   ///     of which items were previously selected (or not) and maintains that information even if the items are
-  ///     temporarily removed from the `configure` method's `modes`
+  ///     temporarily removed from the `configure` method's `modes`.
+  ///
+  /// - Important: you must set a desired width for the mode picker **before** calling this method, otherwise,
+  ///       the number of modes per row will not be calculated properly. 
   ///
   /// - Parameters:
   ///   - modes: These are all the available/visible modes
@@ -91,18 +94,11 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     // Must be called after `pickedModes` is set, so mode icon can be dimmed
     // properly.
     updateUI()
-    
-    if let container = superview {
-      self.frame.size.width = container.frame.width
-      container.frame.size.height = self.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-    }
   }
   
   // MARK: - Configuration
   
   private func updateUI() {
-    backgroundColor = .clear
-    
     guard visibleModes.count > 0 else { return }
     
     // Clean up
@@ -117,11 +113,12 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     // Calculate the number of modes per stack, depending on the available
     // width
     let modesPerStack: Int
-    if let container = superview {
-      let widthPerMode = Constants.modeButtonWidth + Constants.modeButtonSpacing
-      modesPerStack = Int(container.bounds.width / widthPerMode)
-    } else {
+    if frame == .zero {
       modesPerStack = Constants.modesPerStackView
+    } else {
+      let widthPerMode = Constants.modeButtonWidth + Constants.modeButtonSpacing
+      let availableWidth = frame.width - Constants.viewPaddingHorizontal * 2
+      modesPerStack = Int(availableWidth / widthPerMode)
     }
 
     for (index, mode) in visibleModes.enumerated() {

@@ -15,25 +15,32 @@ public class TKUITripCell: UITableViewCell {
   public static let reuseIdentifier: String = "TKUITripCell"
 
   @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var subtitleLabel: UILabel!
   @IBOutlet weak var segmentView: TKUITripSegmentsView!
-  @IBOutlet weak var actionButton: UIButton!
+  @IBOutlet weak var mainSegmentActionButton: UIButton!
   @IBOutlet weak var selectionIndicator: UIView!
 
+  @IBOutlet private weak var mainSegmentActionButtonTopSpacing: NSLayoutConstraint!
+  @IBOutlet weak var mainSegmentActionButtonHeight: NSLayoutConstraint!
+  
   private var formatter: Formatter?
   
   override public func awakeFromNib() {
     super.awakeFromNib()
-    
+
     backgroundColor = .tkBackground
     
     formatter = Formatter()
     formatter?.primaryColor = .tkLabelPrimary
-    formatter?.primaryFont = titleLabel.font
+    formatter?.primaryFont = TKStyleManager.boldCustomFont(forTextStyle: .body)
     formatter?.secondaryColor = .tkLabelSecondary
-    formatter?.secondaryFont = titleLabel.font
+    formatter?.secondaryFont = TKStyleManager.boldCustomFont(forTextStyle: .body)
+    
+    mainSegmentActionButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    mainSegmentActionButton.tintColor = .tkAppTintColor
     
     selectionIndicator.isHidden = true
-    selectionIndicator.backgroundColor = TKStyleManager.globalTintColor()
+    selectionIndicator.backgroundColor = .tkAppTintColor
   }
 
   override public func setSelected(_ selected: Bool, animated: Bool) {
@@ -59,9 +66,7 @@ public class TKUITripCell: UITableViewCell {
     public let focusOnDuration: Bool
     public let isArriveBefore: Bool
     public let showFaded: Bool
-    
     public let segments: [TKTripSegmentDisplayable]
-    
     public let action: String?
     
     public init(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool = false, isArriveBefore: Bool = false, showFaded: Bool = false, segments: [TKTripSegmentDisplayable], action: String? = nil) {
@@ -78,22 +83,28 @@ public class TKUITripCell: UITableViewCell {
   }
   
   public func configure(_ model: Model) {
-    guard let formatter = formatter else { preconditionFailure() }
+    guard let formatter = self.formatter else { return }
     
-    titleLabel.attributedText = formatter.timeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    titleLabel.attributedText = formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    
+    subtitleLabel.attributedText = formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     
     segmentView.configure(forSegments: model.segments, allowSubtitles: true, allowInfoIcons: true)
     
     let alpha: CGFloat = model.showFaded ? 0.2 : 1
     titleLabel.alpha = alpha
     segmentView.alpha = alpha
-    actionButton.alpha = alpha
+    mainSegmentActionButton.alpha = alpha
     
     if let action = model.action {
-      actionButton.isHidden = false
-      actionButton.setTitle(action, for: .normal)
+      mainSegmentActionButton.isHidden = false
+      mainSegmentActionButtonTopSpacing.constant = 4
+      mainSegmentActionButton.setTitle(action, for: .normal)
+      mainSegmentActionButtonHeight.constant = mainSegmentActionButton.intrinsicContentSize.height
     } else {
-      actionButton.isHidden = true
+      mainSegmentActionButton.isHidden = true
+      mainSegmentActionButtonTopSpacing.constant = 0
+      mainSegmentActionButtonHeight.constant = 0
     }
   }
     

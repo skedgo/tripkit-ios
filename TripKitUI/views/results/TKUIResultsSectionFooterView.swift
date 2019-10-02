@@ -22,14 +22,16 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    contentView.backgroundColor = .tkBackgroundSecondary
+    contentView.backgroundColor = .tkBackgroundTile
     
     badgeWrapper.isHidden = true
-    badgeIcon.tintColor = .tkBackground
+    badgeIcon.tintColor = .tkFilledButtonTextColor
     badgeLabel.text = nil
-    badgeLabel.textColor = .tkBackground
+    badgeLabel.textColor = .tkFilledButtonTextColor
+    badgeLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
     costLabel.text = nil
     costLabel.textColor = .tkLabelSecondary
+    costLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
   }
   
   var badge: (icon: UIImage?, text: String, background: UIColor)? {
@@ -68,6 +70,5 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
       costLabel.attributedText = newValue
     }
   }
-
   
 }
