@@ -44,6 +44,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
   let disposeBag = DisposeBag()
   private var realTimeBag = DisposeBag()
   
+  private var titleView: TKUIResultsTitleView?
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   private weak var modePicker: RoutingModePicker?
   
@@ -58,13 +59,19 @@ public class TKUIRoutingResultsCard: TGTableCard {
     self.destination = destination
     self.request = nil
     
-    let title = Loc.PlanTrip
     let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(destination)
+    
+    let resultsTitle = TKUIResultsTitleView.newInstance()
+    resultsTitle.accessoryView = accessoryView
+    self.titleView = resultsTitle
+    
     super.init(
-      title: title, style: .grouped,
-      accessoryView: accessoryView, mapManager: mapManager,
-      initialPosition: nil // keep same as before (so that user can drop another pin)
+      title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
+      style: .grouped,
+      mapManager: mapManager,
+      initialPosition: nil
     )
+
     didInit()
   }
   
@@ -168,7 +175,9 @@ public class TKUIRoutingResultsCard: TGTableCard {
       .disposed(by: disposeBag)
 
     viewModel.titles
-      .drive(cardView.rx.titles)
+      .drive(onNext: { [weak self] input in
+        self?.titleView?.configure(destination: input.title , origin: input.subtitle)
+      })
       .disposed(by: disposeBag)
 
     viewModel.timeTitle
