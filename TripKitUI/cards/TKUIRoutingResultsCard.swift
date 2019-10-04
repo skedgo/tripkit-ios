@@ -188,6 +188,12 @@ public class TKUIRoutingResultsCard: TGTableCard {
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
+    viewModel.sections
+      .drive(onNext: { [weak self] in
+        self?.updateVisibleSectionBadges(sections: $0, tableView: tableView)
+      })
+    .disposed(by: disposeBag)
+
     viewModel.selectedItem
       .drive(onNext: { [weak self] in
         guard let indexPath = self?.dataSource.indexPath(of: $0) else { return }
@@ -305,6 +311,18 @@ extension TKMetricClassifier.Classification {
     return (icon, text, color)
   }
   
+}
+
+extension TKUIRoutingResultsCard {
+  private func updateVisibleSectionBadges(sections: [TKUIRoutingResultsViewModel.Section], tableView: UITableView) {
+    guard let visible = tableView.indexPathsForVisibleRows else { return }
+    let indices = visible.reduce(into: Set<Int>()) { $0.insert($1.section) }
+    for section in indices {
+      if let badge = sections[section].badge, let header = tableView.headerView(forSection: section) as? TKUIResultsSectionHeaderView {
+        header.badge = badge.footerContent
+      }
+    }
+  }
 }
 
 extension TKUIRoutingResultsCard: UITableViewDelegate {
