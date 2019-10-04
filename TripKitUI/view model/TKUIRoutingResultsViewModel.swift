@@ -25,7 +25,9 @@ public class TKUIRoutingResultsViewModel {
     tappedShowModeOptions: Signal<Void>,        // => trigger mode configurator
     changedDate: Signal<RouteBuilder.Time>,     // => update request + title
     changedModes: Signal<[String]?>,            // => update request
-    changedSortOrder: Signal<TKTripCostType>    // => update sorting
+    changedSortOrder: Signal<TKTripCostType>,   // => update sorting
+    changedOrigin: Signal<MKAnnotation>,        // => update request + title
+    changedDestination: Signal<MKAnnotation>    // => update request + subtitle
   )
   
   public typealias MapInput = (

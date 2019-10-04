@@ -10,17 +10,24 @@ import UIKit
 
 import TGCardViewController
 
+import RxSwift
+import RxCocoa
+
 class TKUIResultsTitleView: UIView {
-  
-  @IBOutlet weak var dismissButton: UIButton!
   
   @IBOutlet weak var originLabel: UILabel!
   @IBOutlet weak var destinationLabel: UILabel!
+  @IBOutlet weak var dismissButton: UIButton!
   
   @IBOutlet private weak var topLevelStack: UIStackView!
   @IBOutlet private weak var accessoryViewContainer: UIView!
   
   @IBOutlet private weak var topLevelStackBottomSpacing: NSLayoutConstraint!
+  
+  private let locationSearchPublisher = PublishSubject<TKUILocationSearchSpecifier>()
+  var locationTapped: Signal<TKUILocationSearchSpecifier> {
+    return locationSearchPublisher.asSignal(onErrorSignalWith: .empty())
+  }
   
   var accessoryView: UIView? {
     get {
@@ -63,9 +70,17 @@ class TKUIResultsTitleView: UIView {
     
     originLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     originLabel.textColor = .tkLabelSecondary
+    let originLabelTapper = UITapGestureRecognizer(target: self, action: #selector(originLabelTapped))
+    originLabelTapper.delegate = self
+    originLabel.isUserInteractionEnabled = true
+    originLabel.addGestureRecognizer(originLabelTapper)
     
     destinationLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
     destinationLabel.textColor = .tkLabelPrimary
+    let destinationTapper = UITapGestureRecognizer(target: self, action: #selector(destinationLabelTapped))
+    destinationTapper.delegate = self
+    destinationLabel.isUserInteractionEnabled = true
+    destinationLabel.addGestureRecognizer(destinationTapper)
     
     dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
     dismissButton.setTitle(nil, for: .normal)
@@ -74,6 +89,26 @@ class TKUIResultsTitleView: UIView {
   func configure(destination: String?, origin: String?) {
     destinationLabel.text = destination
     originLabel.text = origin
+  }
+  
+  @objc private func originLabelTapped() {
+    locationSearchPublisher.onNext(.origin)
+  }
+  
+  @objc private func destinationLabelTapped() {
+    locationSearchPublisher.onNext(.destination)
+  }
+  
+}
+
+extension TKUIResultsTitleView: UIGestureRecognizerDelegate {
+  
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
+  }
+  
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
   }
   
 }

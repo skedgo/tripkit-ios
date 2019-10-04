@@ -37,6 +37,12 @@ public class TKUIRoutingResultsCard: TGTableCard {
 
   public weak var resultsDelegate: TKUIRoutingResultsCardDelegate?
   
+  /// An optional list of autocompletion data providers. This list will be used by an instance of
+  /// `TKUILocationSearchViewController`, which is presented when users click on
+  /// the origin or destination labels. If none was provided, the `TKAppleGeocoder` and
+  /// `TKSkedGoGeocoder` will be used
+  public var autocompletionDataProviders: [TKAutocompleting]?
+  
   private let destination: MKAnnotation?
   private var request: TripRequest? // also for saving
 
@@ -54,6 +60,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
   
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
+  private let changedOrigin = PublishSubject<MKAnnotation>()
+  private let changedDestination = PublishSubject<MKAnnotation>()
   
   public init(destination: MKAnnotation) {
     self.destination = destination
@@ -75,18 +83,23 @@ public class TKUIRoutingResultsCard: TGTableCard {
     didInit()
   }
   
-  
   public init(request: TripRequest) {
     self.destination = nil
     self.request = request
-
-    let title = Loc.Trips
+    
     let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(request.toLocation)
+    
+    let resultsTitle = TKUIResultsTitleView.newInstance()
+    resultsTitle.accessoryView = accessoryView
+    self.titleView = resultsTitle
+    
     super.init(
-      title: title, style: .grouped,
-      accessoryView: accessoryView, mapManager: mapManager,
+      title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
+      style: .grouped,
+      mapManager: mapManager,
       initialPosition: .extended // show fully as we'll have routes shortly
     )
+    
     didInit()
   }
   
@@ -94,9 +107,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     guard
       let data = coder.decodeObject(forKey: "viewModel") as? Data,
       let request = TKUIRoutingResultsViewModel.restore(from: data)
-      else {
-        return nil
-    }
+      else { return nil }
     
     self.init(request: request)
   }
@@ -111,14 +122,11 @@ public class TKUIRoutingResultsCard: TGTableCard {
     aCoder.encode(TKUIRoutingResultsViewModel.save(request: request), forKey: "viewModel")
   }
   
-  
   override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     guard
       let tableView = (cardView as? TGScrollCardView)?.tableView,
       let mapManager = mapManager as? TKUIRoutingResultsMapManagerType
-      else {
-        preconditionFailure()
-    }
+      else { preconditionFailure() }
     
     // Build the view model
     
@@ -129,7 +137,9 @@ public class TKUIRoutingResultsCard: TGTableCard {
       tappedShowModeOptions: .empty(),
       changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
       changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
-      changedSortOrder: .empty()
+      changedSortOrder: .empty(),
+      changedOrigin: changedOrigin.asSignal(onErrorSignalWith: .empty()),
+      changedDestination: changedDestination.asSignal(onErrorSignalWith: .empty())
     )
     
     let mapInput: TKUIRoutingResultsViewModel.MapInput = (
@@ -222,6 +232,12 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
+    
+    // Search places
+    
+    titleView?.locationTapped
+    .emit(onNext: { [weak self] in self?.showSearch(for: $0) })
+    .disposed(by: disposeBag)
   }
   
   public override func didAppear(animated: Bool) {
@@ -281,9 +297,11 @@ extension TKUITripCell.Model {
 }
 
 extension TKMetricClassifier.Classification {
+  
   fileprivate var footerContent: (UIImage?, String, UIColor) {
     return (icon, text, color)
   }
+  
 }
 
 extension TKUIRoutingResultsCard: UITableViewDelegate {
@@ -308,6 +326,7 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
 // MARK: - Mode picker
 
 private extension TKUIRoutingResultsCard {
+  
   func updateModePicker(_ modes: TKUIRoutingResultsViewModel.AvailableModes, in tableView: UITableView) {
     guard !modes.available.isEmpty else {
       tableView.tableHeaderView = nil
@@ -354,11 +373,13 @@ private extension TKUIRoutingResultsCard {
     
     return modePicker
   }
+  
 }
 
 // MARK: - Navigation
 
 private extension TKUIRoutingResultsCard {
+  
   func navigate(to next: TKUIRoutingResultsViewModel.Next) {
     switch next {
     case .showTrip(let trip):
@@ -371,6 +392,35 @@ private extension TKUIRoutingResultsCard {
       showTimePicker(time: time, timeZone: timeZone)
     }
   }
+  
+}
+
+// MARK: - Search places
+
+private extension TKUIRoutingResultsCard {
+  
+  func showSearch(for specifier: TKUILocationSearchSpecifier) {
+    let searcher = TKUILocationSearchViewController(for: specifier)
+    searcher.autocompletionDataProviders = autocompletionDataProviders
+    searcher.delegate = self
+    controller?.present(searcher, animated: true)
+  }
+  
+}
+
+extension TKUIRoutingResultsCard: TKUILocationSearchViewControllerDelegate {
+  
+  func locationSearchController(_ controller: TKUILocationSearchViewController, selected annotation: MKAnnotation, for specifier: TKUILocationSearchSpecifier) {
+    self.controller?.dismiss(animated: true, completion: { [weak self] in
+      switch specifier {
+      case .origin:
+        self?.changedOrigin.onNext(annotation)
+      case .destination:
+        self?.changedDestination.onNext(annotation)
+      }
+    })
+  }
+  
 }
 
 // MARK: - Picking times
@@ -378,10 +428,10 @@ private extension TKUIRoutingResultsCard {
 private extension TKUIRoutingResultsCard {
   
   func showTimePicker(time: TKUIRoutingResultsViewModel.RouteBuilder.Time, timeZone: TimeZone) {
-    
     guard let controller = controller else {
       preconditionFailure("Shouldn't be able to show time picker!")
     }
+    
     let sender: UIButton = accessoryView.timeButton
     
     let picker = TKUITimePickerSheet(time: time.date, timeType: time.timeType, timeZone: timeZone)
