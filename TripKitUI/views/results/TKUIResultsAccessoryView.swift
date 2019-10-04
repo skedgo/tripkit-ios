@@ -34,21 +34,13 @@ class TKUIResultsAccessoryView: UIView {
     timeButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     timeButton.tintColor = .tkAppTintColor
     timeButton.setImage(.iconChevronDown, for: .normal)
-    timeButton.flipImageToOtherSide()
+    timeButton.switchImageToOtherSide()
     
     transportButton.setTitle(Loc.Transport, for: .normal)
     transportButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     transportButton.tintColor = .tkAppTintColor
     transportButton.setImage(.iconChevronDown, for: .normal)
-    transportButton.flipImageToOtherSide()
+    transportButton.switchImageToOtherSide()
   }
 
-}
-
-fileprivate extension UIButton {
-  func flipImageToOtherSide() {
-    transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-    titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-    imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-  }
 }
