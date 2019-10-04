@@ -356,16 +356,20 @@ private extension TKUIRoutingResultsCard {
   func updateModePicker(_ modes: TKUIRoutingResultsViewModel.AvailableModes, in tableView: UITableView) {
     guard !modes.available.isEmpty else {
       tableView.tableHeaderView = emptyHeader
+      self.modePicker = nil
       return
     }
     
     let modePicker: RoutingModePicker
+    let scrollToPicker: Bool
     
     if let existing = self.modePicker {
       modePicker = existing
+      scrollToPicker = false
     } else {
       modePicker = self.buildModePicker()
       self.modePicker = modePicker
+      scrollToPicker = true
     }
 
     modePicker.backgroundColor = .tkBackgroundGrouped
@@ -385,6 +389,10 @@ private extension TKUIRoutingResultsCard {
     ])
     
     tableView.tableHeaderView = header
+    
+    if scrollToPicker {
+      tableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 10, height: 10), animated: true)
+    }
   }
   
   func buildModePicker() -> RoutingModePicker {
