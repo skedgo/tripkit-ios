@@ -367,7 +367,8 @@ private extension TKUIRoutingResultsCard {
       modePicker = self.buildModePicker()
       self.modePicker = modePicker
     }
-    
+
+    modePicker.backgroundColor = .tkBackgroundGrouped
     modePicker.frame.size.width = tableView.frame.width
     modePicker.configure(all: modes.available, updateAll: true, currentlyEnabled: modes.isEnabled)
     

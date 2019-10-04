@@ -26,9 +26,6 @@ public protocol TKUIModePickerItem: Hashable {
   
   /// Whether `imageURL` points at an image that can be used in template mode
   var imageURLIsTemplate: Bool { get }
-
-  /// Whether `imageURL` points at an image which should not be displayed on coloured background
-  var imageURLIsBranding: Bool { get }
 }
 
 // MARK: -
@@ -57,8 +54,6 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   private let disposeBag = DisposeBag()
   
   private var visibleModes: [Item] = []
-  
-  private var modeIsBranded: [Item: Bool] = [:]
   
   weak var containerView: UIView?
 
@@ -153,23 +148,12 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     combinedStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.viewPaddingVertical).isActive = true
     combinedStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.viewPaddingHorizontal).isActive = true
     trailingAnchor.constraint(equalTo: combinedStackView.trailingAnchor, constant: Constants.viewPaddingHorizontal).isActive = true
-    
+    bottomAnchor.constraint(equalTo: combinedStackView.bottomAnchor, constant: Constants.viewPaddingVertical).isActive = true
+
     // Adding the mode image stack views.
     modeButtonStackViews.forEach {
       combinedStackView.addArrangedSubview($0)
     }
-    
-    // Add separator
-    let separator = UIView()
-    separator.translatesAutoresizingMaskIntoConstraints = false
-    separator.backgroundColor = .tkSeparator
-    addSubview(separator)
-    
-    separator.heightAnchor.constraint(equalToConstant: Constants.separatorHeight).isActive = true
-    separator.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-    trailingAnchor.constraint(equalTo: separator.trailingAnchor).isActive = true
-    separator.topAnchor.constraint(equalTo: combinedStackView.bottomAnchor, constant: Constants.viewPaddingVertical).isActive = true
-    bottomAnchor.constraint(equalTo: separator.bottomAnchor).isActive = true    
   }
   
   private func modeButtonStackView() -> UIStackView {
@@ -198,9 +182,8 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     
     button.setImage(with: item.imageURL, asTemplate: item.imageURLIsTemplate, placeholder: item.image) { [weak self] gotImage in
       guard let self = self else { return }
-      self.modeIsBranded[item] = gotImage
       let selected = self.getMode(item)
-      TKUIModePicker.styleModeButton(button, selected: selected, isBranded: item.imageURLIsBranding && gotImage)
+      TKUIModePicker.styleModeButton(button, selected: selected)
     }
     
     button.rx.controlEvent(.touchDown)
@@ -223,8 +206,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
       .subscribe(onNext: { [weak self] in
         guard let self = self else { return }
         let newSelected = self.toggleMode(item)
-        let isBranded = self.modeIsBranded[item] ?? false
-        TKUIModePicker.styleModeButton(button, selected: newSelected, isBranded: item.imageURLIsBranding && isBranded)
+        TKUIModePicker.styleModeButton(button, selected: newSelected)
         
         self.tap.onNext(())
       })
@@ -241,29 +223,57 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     guard let containerView = self.containerView else { return }
     guard labels[item] == nil else { return }
     
+    let enabled = getMode(item)
+
     self.clipsToBounds = false
-    
+
     let wrapper = UIView()
     wrapper.translatesAutoresizingMaskIntoConstraints = false
     wrapper.backgroundColor = .tkBackground
     wrapper.layer.cornerRadius = 4
-    wrapper.layer.borderColor = UIColor.tkLabelSecondary.cgColor
-    wrapper.layer.borderWidth = 2
     labels[item] = wrapper
     
-    let label = UILabel()
-    label.backgroundColor = .clear
-    label.textColor = .tkLabelSecondary
-    label.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    label.text = item.imageTextRepresentation
-    label.translatesAutoresizingMaskIntoConstraints = false
-
-    wrapper.addSubview(label)
-    label.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 8).isActive = true
-    label.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 4).isActive = true
-    wrapper.trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 8).isActive = true
-    wrapper.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 4).isActive = true
+    let modeImageView = UIImageView()
+    modeImageView.setImage(with: item.imageURL, asTemplate: item.imageURLIsTemplate, placeholder: item.image)
+    modeImageView.backgroundColor = .clear
+    modeImageView.translatesAutoresizingMaskIntoConstraints = false
+    modeImageView.alpha = enabled ? 1 : 0.2
+    wrapper.addSubview(modeImageView)
     
+    let modeNameLabel = UILabel()
+    modeNameLabel.backgroundColor = .clear
+    modeNameLabel.textColor = .tkLabelSecondary
+    modeNameLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .subheadline)
+    modeNameLabel.text = item.imageTextRepresentation
+    modeNameLabel.translatesAutoresizingMaskIntoConstraints = false
+    wrapper.addSubview(modeNameLabel)
+
+    
+    let statusLabel = UILabel()
+    statusLabel.backgroundColor = .clear
+    statusLabel.textColor = enabled ? .tkStateSuccess : .tkStateError
+    statusLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+    statusLabel.text = enabled ? "Enabled" : "Disabled" // TODO: Localise
+    statusLabel.translatesAutoresizingMaskIntoConstraints = false
+    wrapper.addSubview(statusLabel)
+    
+    NSLayoutConstraint.activate([
+      modeImageView.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor),
+      modeNameLabel.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 8),
+      statusLabel.topAnchor.constraint(equalTo: modeNameLabel.bottomAnchor, constant: 4),
+      wrapper.bottomAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 8),
+
+      modeImageView.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 16),
+      modeNameLabel.leadingAnchor.constraint(equalTo: modeImageView.trailingAnchor, constant: 16),
+      modeNameLabel.leadingAnchor.constraint(equalTo: statusLabel.leadingAnchor),
+      modeNameLabel.trailingAnchor.constraint(equalTo: statusLabel.trailingAnchor),
+      wrapper.trailingAnchor.constraint(equalTo: modeNameLabel.trailingAnchor, constant: 24)
+    ])
+    
+    wrapper.layer.shadowColor = UIColor.tkLabelPrimary.cgColor
+    wrapper.layer.shadowOpacity = 0.2
+    wrapper.layer.shadowRadius = 16
+
     containerView.addSubview(wrapper)
     above.topAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: 8).isActive = true
     
@@ -273,6 +283,10 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     
     wrapper.leadingAnchor.constraint(greaterThanOrEqualTo: containerView.leadingAnchor).isActive = true
     containerView.trailingAnchor.constraint(greaterThanOrEqualTo: wrapper.trailingAnchor).isActive = true
+    
+    wrapper.setNeedsLayout()
+    wrapper.layoutIfNeeded()
+    wrapper.layer.cornerRadius = wrapper.bounds.height / 2
   }
   
   private func hide(item: Item) {
@@ -328,19 +342,9 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
 }
 
 extension TKUIModePicker {
-  private static func styleModeButton(_ button: UIButton, selected: Bool, isBranded: Bool = false) {
-    button.layer.borderWidth  = 2
-
-    if isBranded {
-      button.backgroundColor    = .tkBackground
-      button.layer.borderColor  = (selected ? UIColor.tkStateSuccess : .tkLabelTertiary).cgColor
-
-    } else {
-      button.backgroundColor    = selected ? .tkStateSuccess : .tkBackground
-      button.tintColor          = selected ? .tkBackground : .tkLabelTertiary
-      button.layer.borderColor  = (selected ? UIColor.tkStateSuccess : .tkLabelTertiary).cgColor
-    }
-    
-    button.alpha              = selected ? 1 : 0.3
+  private static func styleModeButton(_ button: UIButton, selected: Bool) {
+    button.backgroundColor    = selected ? .tkBackground : .tripgoLabelQuarternary
+    button.tintColor          = .tkLabelPrimary
+    button.alpha              = selected ? 1 : 0.2
   }
 }
