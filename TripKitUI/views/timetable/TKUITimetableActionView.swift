@@ -63,9 +63,7 @@ class TKUITimetableActionView: UIView {
       layer.borderWidth = 0
       layer.borderColor = nil
       
-      // TODO: This isn't correct, shouldn't be dynamic as tint colours aren't
-      let textColor: UIColor = tintColor.isDark() ? .tkBackground : .tkLabelPrimary
-      
+      let textColor: UIColor = tintColor.isDark() ? .tkLabelOnDark : .tkLabelOnLight
       imageView.tintColor = textColor
       label.textColor = textColor
     } else {

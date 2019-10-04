@@ -117,8 +117,6 @@ private extension TKUITripMapManager {
       annotations += toAdd.points
       overlays += toAdd.overlays
       
-      // TODO: request visits
-      
       affectedByTraffic = affectedByTraffic || segment.isAffectedByTraffic
     }
     

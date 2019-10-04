@@ -21,6 +21,9 @@ extension UIColor {
   @objc public static var tkLabelTertiary: UIColor = .tripgoLabelTertiary
   @objc public static var tkLabelQuarternary: UIColor = .tripgoLabelQuarternary
   
+  @objc public static var tkLabelOnDark: UIColor = .white
+  @objc public static var tkLabelOnLight: UIColor = .darkText
+  
   // MARK: - Buttons
   
   @objc public static var tkFilledButtonBackgroundColor: UIColor = .tripgoFilledButtonBackground

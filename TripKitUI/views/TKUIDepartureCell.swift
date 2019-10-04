@@ -134,8 +134,7 @@ extension TKUIDepartureCell {
     
     serviceShortNameLabel.text = dataSource.serviceShortName
     let serviceColor = dataSource.serviceColor ?? .tkLabelPrimary
-    // TODO: This isn't correct if we use model.serviceColor as those aren't dynamic
-    let textColor: UIColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
+    let textColor: UIColor = serviceColor.isDark() ? .tkLabelOnDark : .tkLabelOnLight
     serviceShortNameLabel.textColor = textColor
     serviceColorView.backgroundColor = serviceColor
     

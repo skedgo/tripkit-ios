@@ -258,34 +258,6 @@ extension Array where Element == TKUIRoutingResultsViewModel.Section {
   }
 }
 
-// MARK: - ?
-
-extension TKUIRoutingResultsViewModel {
-  
-  //  func allQueriesDidFinish(with error: NSError?) {
-  //    // TODO: Call this again?
-  //
-  //    guard let request = self.rx_request.value, !request.hasTrips() else { return }
-  //
-  //    if let error = error {
-  //      rx_error.onNext(error)
-  //
-  //    } else {
-  //      // We have a request, there was no explicit error during routing.
-  //      let info = [
-  //        NSLocalizedDescriptionKey: Loc.NoRoutesFound,
-  //        NSLocalizedRecoverySuggestionErrorKey: Loc.PleaseAdjustYourQuery,
-  //        ]
-  //
-  //      let noTrips = NSError(domain: "com.buzzhives.TripGo", code: 872631, userInfo: info)
-  //      rx_error.onNext(noTrips)
-  //    }
-  //  }
-  
-}
-
-
-
 // MARK: - RxDataSources
 
 public func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsViewModel.Item) -> Bool {
