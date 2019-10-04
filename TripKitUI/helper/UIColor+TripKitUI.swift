@@ -14,10 +14,6 @@ extension UIColor {
   
   @objc public static var tkAppTintColor: UIColor = .tripgoTintColor
   
-  /// This is currently only used in TKUIResultsViewController, specifically to tint
-  /// the "Time" and "Transport" buttons
-  @objc public static var tkAppSecondaryTintColor: UIColor = .tripgoSecondaryTintColor
-  
   // MARK: - Labels
   
   @objc public static var tkLabelPrimary: UIColor = .tripgoLabelPrimary

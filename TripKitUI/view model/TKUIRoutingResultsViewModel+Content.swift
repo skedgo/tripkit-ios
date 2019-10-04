@@ -182,31 +182,34 @@ extension TKMetricClassifier.Classification {
   
   var icon: UIImage? {
     switch self {
-    case .easiest: return UIImage.iconRelax
-    case .greenest: return UIImage.iconTree
-    case .fastest: return UIImage.iconTime
-    case .healthiest: return UIImage.iconRun
-    case .cheapest: return UIImage.iconMoney
-    case .recommended: return nil
+    case .cheapest: return .badgeMoney
+    case .easiest: return .badgeLeaf
+    case .fastest: return .badgeLightning
+    case .greenest: return .badgeLeaf
+    case .healthiest: return .badgeHeart
+    case .recommended: return .badgeCheck
     }
   }
   
   var text: String {
     switch self {
-    case .easiest: return Loc.BadgeEasiest
-    case .greenest: return Loc.BadgeGreenest
-    case .fastest: return Loc.BadgeFastest
-    case .healthiest: return Loc.BadgeHealthiest
     case .cheapest: return Loc.BadgeCheapest
+    case .easiest: return Loc.BadgeEasiest
+    case .fastest: return Loc.BadgeFastest
+    case .greenest: return Loc.BadgeGreenest
+    case .healthiest: return Loc.BadgeHealthiest
     case .recommended: return Loc.BadgeRecommended
     }
   }
   
   var color: UIColor {
     switch self {
-    case .easiest, .cheapest, .fastest: return #colorLiteral(red: 0.7921568627, green: 0.2549019608, blue: 0.0862745098, alpha: 1)
-    case .greenest, .healthiest: return #colorLiteral(red: 0.1254901961, green: 0.7882352941, blue: 0.4156862745, alpha: 1)
-    case .recommended: return #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+    case .cheapest: return #colorLiteral(red: 1, green: 0.5529411765, blue: 0.1058823529, alpha: 1)
+    case .easiest: return #colorLiteral(red: 0.137254902, green: 0.6941176471, blue: 0.368627451, alpha: 1)
+    case .fastest: return #colorLiteral(red: 1, green: 0.7490196078, blue: 0, alpha: 1)
+    case .greenest: return #colorLiteral(red: 0, green: 0.6588235294, blue: 0.5607843137, alpha: 1)
+    case .healthiest: return #colorLiteral(red: 0.8823529412, green: 0.3568627451, blue: 0.4470588235, alpha: 1)
+    case .recommended: return #colorLiteral(red: 0.09411764706, green: 0.5019607843, blue: 0.9058823529, alpha: 1)
     }
   }
 }

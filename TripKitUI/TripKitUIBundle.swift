@@ -23,20 +23,25 @@ extension UIImage {
   static let iconCrossMini = named("icon-cross-mini")
   static let iconWheelchairMini = named("icon-wheelchair-mini")
 
-  // Priorities
-  
-  public static let iconMoney = named("icon-money")
-  public static let iconTime = named("icon-time")
-  public static let iconTree = named("icon-tree")
-  public static let iconRelax = named("icon-relax")
-  public static let iconRun = named("icon-run")
-  
+  // Badges
+
+  public static let badgeCheck = named("check-mark")
+  public static let badgeHeart = named("heart-circle")
+  public static let badgeLeaf = named("leaf-circle")
+  public static let badgeLightning = named("lightning-circle")
+  public static let badgeLike = named("like-circle")
+  public static let badgeMoney = named("money-circle")
+
   // Actions
 
   public static let iconArrowUp = named("arrow-up")
   public static let iconShowPassword = named("icon-show")
   public static let iconHidePassword = named("icon-hide")
   public static let iconShare = named("share")
+
+  public static let iconChevronDown = named("chevron-down")
+  public static let iconChevronRight = named("chevron-right")
+  public static let iconChevronUp = named("chevron-up")
 
   // TripBoy
   

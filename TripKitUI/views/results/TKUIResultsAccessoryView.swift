@@ -14,6 +14,7 @@ class TKUIResultsAccessoryView: UIView {
 
   @IBOutlet weak var timeButton: UIButton!
   @IBOutlet weak var transportButton: UIButton!
+  @IBOutlet weak var separator: UIView!
   
   static func instantiate() -> TKUIResultsAccessoryView {
     let bundle = Bundle(for: self)
@@ -26,13 +27,28 @@ class TKUIResultsAccessoryView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    backgroundColor = .tkAppSecondaryTintColor
+    backgroundColor = UIColor.tkAppTintColor.withAlphaComponent(0.12)
+    separator.backgroundColor = .tkSeparatorSubtle
+    
     timeButton.setTitle(nil, for: .normal)
     timeButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
-    timeButton.tintColor = .tkLabelSecondary
+    timeButton.tintColor = .tkAppTintColor
+    timeButton.setImage(.iconChevronDown, for: .normal)
+    timeButton.flipImageToOtherSide()
+    
     transportButton.setTitle(Loc.Transport, for: .normal)
     transportButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
-    transportButton.tintColor = .tkLabelSecondary
+    transportButton.tintColor = .tkAppTintColor
+    transportButton.setImage(.iconChevronDown, for: .normal)
+    transportButton.flipImageToOtherSide()
   }
 
+}
+
+fileprivate extension UIButton {
+  func flipImageToOtherSide() {
+    transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+    titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+    imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+  }
 }
