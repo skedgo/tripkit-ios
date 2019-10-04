@@ -13,6 +13,11 @@ import TGCardViewController
 import RxSwift
 import RxCocoa
 
+enum TKUILocationSearchSpecifier {
+  case origin
+  case destination
+}
+
 class TKUIResultsTitleView: UIView {
   
   @IBOutlet weak var originLabel: UILabel!

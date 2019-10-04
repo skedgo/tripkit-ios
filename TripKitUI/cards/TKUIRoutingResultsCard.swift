@@ -58,6 +58,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
     configureCell: TKUIRoutingResultsCard.cell
   )
   
+  private var searchSpecifier: TKUILocationSearchSpecifier?
+  
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
   private let changedOrigin = PublishSubject<MKAnnotation>()
@@ -400,24 +402,65 @@ private extension TKUIRoutingResultsCard {
 private extension TKUIRoutingResultsCard {
   
   func showSearch(for specifier: TKUILocationSearchSpecifier) {
-    let searcher = TKUILocationSearchViewController(for: specifier)
-    searcher.autocompletionDataProviders = autocompletionDataProviders
-    searcher.delegate = self
-    controller?.present(searcher, animated: true)
+    self.searchSpecifier = specifier
+    
+    let resultsController: TKUIAutocompletionViewController
+    
+    if let providers = autocompletionDataProviders {
+      resultsController = TKUIAutocompletionViewController(providers: providers)
+    } else {
+      let geocoders = [TKAppleGeocoder(), TKSkedGoGeocoder()]
+      let providers = geocoders.compactMap { $0 as? TKAutocompleting }
+      resultsController = TKUIAutocompletionViewController(providers: providers)
+    }
+    
+    if #available(iOS 11.0, *) {
+      // Fix for bad padding between search bar and first row
+      // Kudos to https://stackoverflow.com/questions/40435806/extra-space-on-top-of-uisearchcontrollers-uitableview
+      resultsController.tableView.contentInsetAdjustmentBehavior = .never
+    }
+    
+    resultsController.delegate = self
+    resultsController.biasMapRect = (mapManager as? TGMapManager)?.mapView?.visibleMapRect ?? .null
+    
+    let searchController = UISearchController(searchResultsController: resultsController)
+    searchController.searchResultsUpdater = resultsController
+    searchController.searchBar.placeholder = (specifier == .origin) ? "Search origin" : "Search destination"
+    
+    TKStyleManager.style(searchController.searchBar, includingBackground: false) {
+      $0.backgroundColor = .tkBackground
+      $0.tintColor = .tkLabelPrimary
+      $0.textColor = .tkLabelPrimary
+    }
+    
+    controller?.present(searchController, animated: true)
   }
   
 }
 
-extension TKUIRoutingResultsCard: TKUILocationSearchViewControllerDelegate {
+extension TKUIRoutingResultsCard: TKUIAutocompletionViewControllerDelegate {
   
-  func locationSearchController(_ controller: TKUILocationSearchViewController, selected annotation: MKAnnotation, for specifier: TKUILocationSearchSpecifier) {
+  public func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect annotation: MKAnnotation) {
     self.controller?.dismiss(animated: true, completion: { [weak self] in
+      guard let self = self, let specifier = self.searchSpecifier else {
+        assertionFailure()
+        return
+      }
+      
       switch specifier {
       case .origin:
-        self?.changedOrigin.onNext(annotation)
+        self.changedOrigin.onNext(annotation)
       case .destination:
-        self?.changedDestination.onNext(annotation)
+        self.changedDestination.onNext(annotation)
       }
+      
+      self.searchSpecifier = nil
+    })
+  }
+  
+  public func autocompleter(_ controller: TKUIAutocompletionViewController, didSelectAccessoryFor annotation: MKAnnotation) {
+    self.controller?.dismiss(animated: true, completion: {
+      //
     })
   }
   
