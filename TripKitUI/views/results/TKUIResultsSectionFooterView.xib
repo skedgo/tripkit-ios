@@ -17,24 +17,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5N-vE-V7X">
-                        <rect key="frame" x="15" y="12" width="31" height="19"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                        <rect key="frame" x="16" y="12" width="33" height="19"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                         <color key="textColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jnb-cy-Exr">
-                        <rect key="frame" x="185" y="8" width="38" height="27"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                        <rect key="frame" x="182" y="7.5" width="41" height="28"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                         <state key="normal" title="Button"/>
                     </button>
                 </subviews>
                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="B5N-vE-V7X" secondAttribute="trailing" constant="16" id="2nB-iQ-btF"/>
                     <constraint firstItem="Jnb-cy-Exr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="B5N-vE-V7X" secondAttribute="trailing" constant="8" symbolic="YES" id="E4L-LT-ydr"/>
                     <constraint firstItem="Jnb-cy-Exr" firstAttribute="centerY" secondItem="B5N-vE-V7X" secondAttribute="centerY" id="F9n-fo-PaA"/>
                     <constraint firstAttribute="bottom" secondItem="B5N-vE-V7X" secondAttribute="bottom" constant="12" id="I7j-r7-yVf"/>
                     <constraint firstItem="B5N-vE-V7X" firstAttribute="top" secondItem="11j-pl-SZQ" secondAttribute="top" constant="12" id="N4c-jN-PSP"/>
-                    <constraint firstItem="B5N-vE-V7X" firstAttribute="leading" secondItem="11j-pl-SZQ" secondAttribute="leadingMargin" id="Zze-I6-2Lj"/>
+                    <constraint firstItem="B5N-vE-V7X" firstAttribute="leading" secondItem="11j-pl-SZQ" secondAttribute="leading" constant="16" id="Zze-I6-2Lj"/>
                     <constraint firstItem="Jnb-cy-Exr" firstAttribute="trailing" secondItem="11j-pl-SZQ" secondAttribute="trailingMargin" id="a5U-8d-UkZ"/>
                 </constraints>
             </tableViewCellContentView>

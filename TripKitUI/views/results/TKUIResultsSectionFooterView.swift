@@ -15,6 +15,10 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
   static let nib = UINib(nibName: "TKUIResultsSectionFooterView", bundle: Bundle(for: TKUIResultsSectionFooterView.self))
   static let reuseIdentifier = "TKUIResultsSectionFooterView"
   
+  static func newInstance() -> TKUIResultsSectionFooterView {
+    return Bundle.tripKitUI.loadNibNamed("TKUIResultsSectionFooterView", owner: self, options: nil)?.first as! TKUIResultsSectionFooterView
+  }
+  
   @IBOutlet weak var costLabel: UILabel!
   @IBOutlet weak var button: UIButton!
   

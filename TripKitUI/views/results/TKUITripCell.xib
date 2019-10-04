@@ -25,7 +25,7 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="R4b-AK-zvO">
-                        <rect key="frame" x="15" y="11" width="108.5" height="20.5"/>
+                        <rect key="frame" x="16" y="11" width="108.5" height="20.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="04:59 - 05:35" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsO-d9-TCI">
                                 <rect key="frame" x="0.0" y="0.0" width="108.5" height="20.5"/>
@@ -36,7 +36,7 @@
                         </subviews>
                     </stackView>
                     <view contentMode="scaleToFill" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="y8N-RR-3eg" customClass="TKUITripSegmentsView">
-                        <rect key="frame" x="15" y="39.5" width="290" height="40"/>
+                        <rect key="frame" x="16" y="39.5" width="288" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" priority="999" constant="40" id="7cL-bg-n3k"/>
                         </constraints>
@@ -50,13 +50,13 @@
                         <state key="normal" title="CTA"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="36mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJE-k6-hxt">
-                        <rect key="frame" x="248" y="11" width="57" height="20.5"/>
+                        <rect key="frame" x="247" y="11" width="57" height="20.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="83m-f5-90i">
-                        <rect key="frame" x="3" y="136" width="317" height="1"/>
+                        <rect key="frame" x="0.0" y="136" width="320" height="1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="XHF-eu-umV"/>
@@ -64,12 +64,12 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="qJE-k6-hxt" secondAttribute="trailing" id="5gG-GF-aTN"/>
-                    <constraint firstItem="R4b-AK-zvO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="OQ9-UQ-lKV"/>
+                    <constraint firstAttribute="trailing" secondItem="qJE-k6-hxt" secondAttribute="trailing" constant="16" id="5gG-GF-aTN"/>
+                    <constraint firstItem="R4b-AK-zvO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="OQ9-UQ-lKV"/>
                     <constraint firstAttribute="trailing" secondItem="83m-f5-90i" secondAttribute="trailing" id="R82-zg-5LE"/>
                     <constraint firstItem="FLO-Ou-7xp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y8N-RR-3eg" secondAttribute="bottom" constant="4" id="Zby-L3-prb"/>
                     <constraint firstItem="y8N-RR-3eg" firstAttribute="leading" secondItem="R4b-AK-zvO" secondAttribute="leading" id="bQY-pT-hzj"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="y8N-RR-3eg" secondAttribute="trailing" id="i3x-g7-jRq"/>
+                    <constraint firstAttribute="trailing" secondItem="y8N-RR-3eg" secondAttribute="trailing" constant="16" id="i3x-g7-jRq"/>
                     <constraint firstAttribute="bottomMargin" secondItem="FLO-Ou-7xp" secondAttribute="bottom" id="lDM-a2-jDW"/>
                     <constraint firstItem="s1t-2l-9F6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mLP-YF-dk6"/>
                     <constraint firstItem="R4b-AK-zvO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="mSQ-0o-toN"/>
@@ -80,7 +80,7 @@
                     <constraint firstItem="qJE-k6-hxt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R4b-AK-zvO" secondAttribute="trailing" constant="8" id="tQW-rn-22E"/>
                     <constraint firstItem="qJE-k6-hxt" firstAttribute="centerY" secondItem="vsO-d9-TCI" secondAttribute="centerY" id="toW-MB-Pql"/>
                     <constraint firstItem="y8N-RR-3eg" firstAttribute="top" secondItem="R4b-AK-zvO" secondAttribute="bottom" constant="8" id="vcV-gE-m03"/>
-                    <constraint firstItem="83m-f5-90i" firstAttribute="leading" secondItem="s1t-2l-9F6" secondAttribute="trailing" id="yyc-XN-iBU"/>
+                    <constraint firstItem="83m-f5-90i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yyc-XN-iBU"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
