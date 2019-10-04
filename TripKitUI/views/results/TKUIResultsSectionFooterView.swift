@@ -8,67 +8,45 @@
 
 import UIKit
 
+import RxSwift
+
 class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
 
   static let nib = UINib(nibName: "TKUIResultsSectionFooterView", bundle: Bundle(for: TKUIResultsSectionFooterView.self))
   static let reuseIdentifier = "TKUIResultsSectionFooterView"
   
-  @IBOutlet weak var badgeWrapper: UIView!
-  @IBOutlet weak var badgeIcon: UIImageView!
-  @IBOutlet weak var badgeLabel: UILabel!
-  
   @IBOutlet weak var costLabel: UILabel!
+  @IBOutlet weak var button: UIButton!
+  
+  var disposeBag = DisposeBag()
   
   override func awakeFromNib() {
     super.awakeFromNib()
     
     contentView.backgroundColor = .tkBackgroundTile
     
-    badgeWrapper.isHidden = true
-    badgeIcon.tintColor = .tkFilledButtonTextColor
-    badgeLabel.text = nil
-    badgeLabel.textColor = .tkFilledButtonTextColor
-    badgeLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
     costLabel.text = nil
     costLabel.textColor = .tkLabelSecondary
-    costLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
+    costLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    
+    button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
   }
   
-  var badge: (icon: UIImage?, text: String, background: UIColor)? {
-    get {
-      guard let text = badgeLabel.text else {
-        return nil
-      }
-      return (badgeIcon.image, text, badgeWrapper.backgroundColor ?? .tkBackground)
-    }
-    set {
-      guard let badge = newValue else {
-        badgeWrapper.isHidden = true
-        return
-      }
-      badgeWrapper.isHidden = false
-      badgeIcon.image = badge.icon
-      badgeLabel.text = badge.text.uppercased(with: .current)
-      badgeWrapper.backgroundColor = badge.background
-    }
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    costLabel.text = nil
+    disposeBag = DisposeBag()
   }
   
   var cost: String? {
-    get {
-      return costLabel.text
-    }
-    set {
-      costLabel.text = newValue
-    }
+    get { costLabel.text }
+    set { costLabel.text = newValue }
   }
   
   var attributedCost: NSAttributedString? {
-    get {
-      return costLabel.attributedText
-    }
-    set {
-      costLabel.attributedText = newValue
-    }
+    get { costLabel.attributedText }
+    set { costLabel.attributedText = newValue }
   }
   
 }

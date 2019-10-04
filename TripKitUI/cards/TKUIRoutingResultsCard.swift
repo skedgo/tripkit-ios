@@ -54,6 +54,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   private weak var modePicker: RoutingModePicker?
   
+  let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
+  
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
     configureCell: TKUIRoutingResultsCard.cell
   )
@@ -64,7 +66,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let changedModes = PublishSubject<[String]?>()
   private let changedOrigin = PublishSubject<MKAnnotation>()
   private let changedDestination = PublishSubject<MKAnnotation>()
-  
+  private let tappedToggleButton = PublishSubject<TripGroup?>()
+
   public init(destination: MKAnnotation) {
     self.destination = destination
     self.request = nil
@@ -134,6 +137,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     let inputs: TKUIRoutingResultsViewModel.UIInput = (
       selected: tableView.rx.modelSelected(TKUIRoutingResultsViewModel.Item.self).asSignal(),
+      tappedToggleButton: tappedToggleButton.asSignal(onErrorSignalWith: .empty()),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
       tappedShowModeOptions: .empty(),
@@ -164,9 +168,12 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
-    
+    tableView.register(TKUIResultsSectionHeaderView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
+
     tableView.backgroundColor = .tkBackgroundGrouped
+    tableView.separatorStyle = .none
     tableView.tableFooterView = UIView()
+    tableView.tableHeaderView = emptyHeader
 
     // Overriding the data source with our Rx one
     // Note: explicitly reset to say we know that we'll override this with Rx
@@ -264,22 +271,13 @@ extension TKUIRoutingResultsCard {
   
   static func cell(dataSource: RxDataSources.TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {
     
-    if let trip = item.trip {
-      let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
-      tripCell.configure(TKUITripCell.Model(trip))
-      return tripCell
-      
-    } else {
-      let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-      cell.backgroundColor = .tkBackgroundTile
-      cell.textLabel?.textColor = .tkLabelSecondary
-      switch item {
-      case .lessIndicator: cell.textLabel?.text = "Less"
-      case .moreIndicator: cell.textLabel?.text = "More"
-      case .nano, .trip: preconditionFailure()
-      }
-      return cell
-    }
+    let showSeparator = dataSource.sectionModels[indexPath.section].items.count > 1
+    
+    let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
+    tripCell.configure(TKUITripCell.Model(item.trip))
+    tripCell.separatorView.isHidden = !showSeparator
+    
+    return tripCell
   }
   
 }
@@ -318,9 +316,35 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     formatter.costColor = footerView.costLabel.textColor
 
     let section = dataSource.sectionModels[section]
-    footerView.badge = section.badge?.footerContent
     footerView.attributedCost = formatter.costString(costs: section.costs)
+    
+    if let buttonContent = section.toggleButton {
+      footerView.button.isHidden = false
+      footerView.button.setTitle(buttonContent.title, for: .normal)
+      footerView.button.rx.tap
+        .subscribe(onNext: { [unowned tappedToggleButton] in
+          tappedToggleButton.onNext(buttonContent.payload)
+        })
+        .disposed(by: footerView.disposeBag)
+
+    } else {
+      footerView.button.isHidden = true
+    }
+    
     return footerView
+  }
+  
+  public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let section = dataSource.sectionModels[section]
+    guard let content = section.badge?.footerContent else { return nil }
+
+    guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier) as? TKUIResultsSectionHeaderView else {
+      assertionFailure()
+      return nil
+    }
+
+    headerView.badge = content
+    return headerView
   }
   
 }
@@ -331,7 +355,7 @@ private extension TKUIRoutingResultsCard {
   
   func updateModePicker(_ modes: TKUIRoutingResultsViewModel.AvailableModes, in tableView: UITableView) {
     guard !modes.available.isEmpty else {
-      tableView.tableHeaderView = nil
+      tableView.tableHeaderView = emptyHeader
       return
     }
     

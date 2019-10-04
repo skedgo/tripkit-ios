@@ -19,7 +19,8 @@ public class TKUITripCell: UITableViewCell {
   @IBOutlet weak var segmentView: TKUITripSegmentsView!
   @IBOutlet weak var mainSegmentActionButton: UIButton!
   @IBOutlet weak var selectionIndicator: UIView!
-
+  @IBOutlet weak var separatorView: UIView!
+  
   @IBOutlet private weak var mainSegmentActionButtonTopSpacing: NSLayoutConstraint!
   @IBOutlet weak var mainSegmentActionButtonHeight: NSLayoutConstraint!
   
@@ -32,15 +33,17 @@ public class TKUITripCell: UITableViewCell {
     
     formatter = Formatter()
     formatter?.primaryColor = .tkLabelPrimary
-    formatter?.primaryFont = TKStyleManager.boldCustomFont(forTextStyle: .body)
+    formatter?.primaryFont = TKStyleManager.customFont(forTextStyle: .body)
     formatter?.secondaryColor = .tkLabelSecondary
-    formatter?.secondaryFont = TKStyleManager.boldCustomFont(forTextStyle: .body)
+    formatter?.secondaryFont = TKStyleManager.customFont(forTextStyle: .body)
     
     mainSegmentActionButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
     mainSegmentActionButton.tintColor = .tkAppTintColor
     
     selectionIndicator.isHidden = true
     selectionIndicator.backgroundColor = .tkAppTintColor
+    
+    separatorView.backgroundColor = .tkSeparatorSubtle
   }
 
   override public func setSelected(_ selected: Bool, animated: Bool) {

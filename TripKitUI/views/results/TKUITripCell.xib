@@ -55,10 +55,18 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="83m-f5-90i">
+                        <rect key="frame" x="3" y="136" width="317" height="1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="XHF-eu-umV"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="qJE-k6-hxt" secondAttribute="trailing" id="5gG-GF-aTN"/>
                     <constraint firstItem="R4b-AK-zvO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="OQ9-UQ-lKV"/>
+                    <constraint firstAttribute="trailing" secondItem="83m-f5-90i" secondAttribute="trailing" id="R82-zg-5LE"/>
                     <constraint firstItem="FLO-Ou-7xp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y8N-RR-3eg" secondAttribute="bottom" constant="4" id="Zby-L3-prb"/>
                     <constraint firstItem="y8N-RR-3eg" firstAttribute="leading" secondItem="R4b-AK-zvO" secondAttribute="leading" id="bQY-pT-hzj"/>
                     <constraint firstAttribute="trailingMargin" secondItem="y8N-RR-3eg" secondAttribute="trailing" id="i3x-g7-jRq"/>
@@ -66,11 +74,13 @@
                     <constraint firstItem="s1t-2l-9F6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mLP-YF-dk6"/>
                     <constraint firstItem="R4b-AK-zvO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="mSQ-0o-toN"/>
                     <constraint firstItem="s1t-2l-9F6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mpW-bF-K5O"/>
+                    <constraint firstAttribute="bottom" secondItem="83m-f5-90i" secondAttribute="bottom" id="pGV-cc-dwn"/>
                     <constraint firstAttribute="bottom" secondItem="s1t-2l-9F6" secondAttribute="bottom" id="qlG-ws-JBa"/>
                     <constraint firstAttribute="trailingMargin" secondItem="FLO-Ou-7xp" secondAttribute="trailing" id="t5U-pR-ivj"/>
                     <constraint firstItem="qJE-k6-hxt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R4b-AK-zvO" secondAttribute="trailing" constant="8" id="tQW-rn-22E"/>
                     <constraint firstItem="qJE-k6-hxt" firstAttribute="centerY" secondItem="vsO-d9-TCI" secondAttribute="centerY" id="toW-MB-Pql"/>
                     <constraint firstItem="y8N-RR-3eg" firstAttribute="top" secondItem="R4b-AK-zvO" secondAttribute="bottom" constant="8" id="vcV-gE-m03"/>
+                    <constraint firstItem="83m-f5-90i" firstAttribute="leading" secondItem="s1t-2l-9F6" secondAttribute="trailing" id="yyc-XN-iBU"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -80,6 +90,7 @@
                 <outlet property="mainSegmentActionButtonTopSpacing" destination="Zby-L3-prb" id="mKg-vn-LLt"/>
                 <outlet property="segmentView" destination="y8N-RR-3eg" id="ttV-Do-af5"/>
                 <outlet property="selectionIndicator" destination="s1t-2l-9F6" id="iCK-rf-qZ6"/>
+                <outlet property="separatorView" destination="83m-f5-90i" id="di4-QI-Rxp"/>
                 <outlet property="subtitleLabel" destination="qJE-k6-hxt" id="XGN-jL-yhC"/>
                 <outlet property="titleLabel" destination="vsO-d9-TCI" id="bYl-xE-bZL"/>
             </connections>

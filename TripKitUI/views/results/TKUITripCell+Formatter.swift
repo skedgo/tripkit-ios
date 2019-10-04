@@ -38,7 +38,7 @@ extension TKUITripCell {
     
     public func primaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
       let attributes = [
-        NSAttributedString.Key.font: TKStyleManager.boldCustomFont(forTextStyle: .body),
+        NSAttributedString.Key.font: TKStyleManager.customFont(forTextStyle: .body),
         NSAttributedString.Key.foregroundColor: UIColor.tkLabelPrimary
       ]
       

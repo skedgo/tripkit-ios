@@ -85,16 +85,12 @@ extension TKUIRoutingResultsViewModel {
   }
   
   static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput) -> Observable<[Section]> {
-    let expand = inputs.selected
-      .map { item -> TripGroup? in
-        switch item {
-        case .nano, .trip, .lessIndicator: return nil
-        case .moreIndicator(let group): return group
-        }
-    }
-    
     return Observable
-      .combineLatest(groups, inputs.changedSortOrder.startWith(.score).asObservable(), expand.startWith(nil).asObservable())
+      .combineLatest(
+        groups,
+        inputs.changedSortOrder.startWith(.score).asObservable(),
+        inputs.tappedToggleButton.startWith(nil).asObservable()
+      )
       .map(sections)
   }
   
@@ -113,15 +109,19 @@ extension TKUIRoutingResultsViewModel {
         .compactMap { Item(trip: $0, in: group) }
       
       let show: [Item]
+      let toggleButton: SectionToggle?
       if items.count > 2, expand == group {
-        show = items + [.lessIndicator(group)]
+        show = items
+        toggleButton = (title: "Less", payload: nil) // TODO: Localise
       } else if items.count > 2 {
-        let good = items.filter { !($0.trip?.showFaded ?? true) }
-        show = good.prefix(2) + [.moreIndicator(group)]
+        let good = items.filter { !$0.trip.showFaded }
+        show = Array(good.prefix(2))
+        toggleButton = (title: "More", payload: group) // TODO: Localise
       } else {
         show = items
+        toggleButton = nil
       }
-      return Section(items: show, badge: group.badge, costs: best.costValues)
+      return Section(items: show, badge: group.badge, costs: best.costValues, toggleButton: toggleButton)
     }
   }
 }
@@ -158,18 +158,15 @@ extension TKUIRoutingResultsViewModel {
     /// A minimised trip
     case nano(Trip)
     
-    case moreIndicator(TripGroup)
-    case lessIndicator(TripGroup)
-    
-    var trip: Trip? {
+    var trip: Trip {
       switch self {
       case .nano(let trip): return trip
       case .trip(let trip): return trip
-      case .moreIndicator, .lessIndicator: return nil
       }
     }
-    
   }
+  
+  public typealias SectionToggle = (title: String, payload: TripGroup?)
   
   /// A section on the results screen, which consists of various sorted items
   public struct Section {
@@ -177,6 +174,7 @@ extension TKUIRoutingResultsViewModel {
     
     public var badge: TKMetricClassifier.Classification?
     var costs: [NSNumber: String]
+    public let toggleButton: SectionToggle?
   }
 }
 
@@ -291,7 +289,6 @@ public func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsVie
   switch (lhs, rhs) {
   case (.trip(let left), .trip(let right)): return left.objectID == right.objectID
   case (.nano(let left), .nano(let right)): return left.objectID == right.objectID
-  case (.moreIndicator, .moreIndicator): return true
   default: return false
   }
 }
@@ -303,8 +300,6 @@ extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
     switch self {
     case .trip(let trip): return trip.objectID.uriRepresentation().absoluteString
     case .nano(let trip): return trip.objectID.uriRepresentation().absoluteString
-    case .moreIndicator(let group): return "more-\(group.objectID.uriRepresentation().absoluteString)"
-    case .lessIndicator(let group): return "less-\(group.objectID.uriRepresentation().absoluteString)"
     }
   }
 }

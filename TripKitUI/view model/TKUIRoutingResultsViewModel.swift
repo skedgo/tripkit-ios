@@ -20,6 +20,7 @@ public class TKUIRoutingResultsViewModel {
 
   public typealias UIInput = (
     selected: Signal<Item>,                     // => do .next
+    tappedToggleButton: Signal<TripGroup?>,     // => expand/collapse
     tappedDate: Signal<Void>,                   // => return which date to show
     tappedShowModes: Signal<Void>,              // => return which modes to show
     tappedShowModeOptions: Signal<Void>,        // => trigger mode configurator
@@ -131,8 +132,7 @@ public class TKUIRoutingResultsViewModel {
     // Navigation
     
     let showTrip = inputs.selected
-      .filter { $0.trip != nil }
-      .map { Next.showTrip($0.trip!) }
+      .map { Next.showTrip($0.trip) }
     
     let modeInput = Observable.combineLatest(requestChanged, builderChanged)
     let presentModes = inputs.tappedShowModeOptions.asObservable()

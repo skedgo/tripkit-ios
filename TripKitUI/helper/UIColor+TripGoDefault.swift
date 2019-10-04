@@ -10,8 +10,6 @@ import Foundation
 
 extension UIColor {
   
-  #warning("All colors defined in this extension should ideally use brand-neutral values")
-  
   static let tripgoTintColor: UIColor = {
     if #available(iOS 13.0, *) {
       return UIColor { traits in
