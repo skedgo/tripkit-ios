@@ -210,7 +210,9 @@ public class TKUITimetableCard : TGTableCard {
       .disposed(by: disposeBag)
 
     viewModel.timeTitle
-      .drive(accessoryView.timeButton.rx.title(for: .normal))
+      .drive(onNext: { [accessoryView] in
+        accessoryView.timeButton.accessibilityLabel = $0
+      })
       .disposed(by: disposeBag)
     
     viewModel.lines

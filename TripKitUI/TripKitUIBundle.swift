@@ -42,6 +42,7 @@ extension UIImage {
   public static let iconChevronDown = named("chevron-down")
   public static let iconChevronRight = named("chevron-right")
   public static let iconChevronUp = named("chevron-up")
+  public static let iconChevronTimetable = named("timetable-chevron-down")
 
   // TripBoy
   

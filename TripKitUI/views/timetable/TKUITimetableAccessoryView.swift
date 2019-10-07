@@ -70,8 +70,7 @@ class TKUITimetableAccessoryView: UIView {
     searchBar.placeholder = Loc.Search
 
     timeButton.setTitle(nil, for: .normal)
-    timeButton.setImage(.iconChevronDown, for: .normal)
-    timeButton.switchImageToOtherSide()
+    timeButton.setImage(.iconChevronTimetable, for: .normal)
   }
   
   func setCustomActions(_ actions: [TKUITimetableCardAction], for model: [TKUIStopAnnotation], card: TKUITimetableCard) {
