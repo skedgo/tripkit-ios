@@ -411,7 +411,7 @@ private extension TKUIRoutingResultsCard {
     tableView.tableHeaderView = header
     
     if scrollToPicker {
-      tableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 10, height: 10), animated: true)
+      tableView.scrollRectToVisible(header.frame, animated: true)
     }
   }
   
