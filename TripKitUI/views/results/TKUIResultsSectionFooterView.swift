@@ -43,7 +43,7 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     self.costLabel = costLabel
     
     let button = UIButton(type: .system)
-    if #available(iOSApplicationExtension 11.0, *) {
+    if #available(iOS 11.0, *) {
       button.contentHorizontalAlignment = .trailing
     } else {
       button.contentHorizontalAlignment = .right
