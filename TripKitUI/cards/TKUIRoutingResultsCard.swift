@@ -56,8 +56,6 @@ public class TKUIRoutingResultsCard: TGTableCard {
   
   let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
   
-  private lazy var sizingHeader = TKUIResultsSectionHeaderView.newInstance()
-  
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
     configureCell: TKUIRoutingResultsCard.cell
   )
@@ -170,7 +168,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
-    tableView.register(TKUIResultsSectionHeaderView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
+    tableView.register(TKUIResultsSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
 
     tableView.backgroundColor = .tkBackgroundGrouped
     tableView.separatorStyle = .none
@@ -352,14 +350,6 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     }
     
     return footerView
-  }
-  
-  public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    let section = dataSource.sectionModels[section]
-    guard let content = section.badge?.footerContent else { return 16 }
-
-    sizingHeader.badge = content
-    return sizingHeader.systemLayoutSizeFitting(CGSize(width: tableView.bounds.width, height: 666)).height
   }
 
   public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
