@@ -10,12 +10,7 @@ import UIKit
 
 class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
 
-  static let nib = UINib(nibName: "TKUIResultsSectionHeaderView", bundle: Bundle(for: TKUIResultsSectionHeaderView.self))
   static let reuseIdentifier = "TKUIResultsSectionHeaderView"
-  
-  static func newInstance() -> TKUIResultsSectionHeaderView {
-    return Bundle.tripKitUI.loadNibNamed("TKUIResultsSectionHeaderView", owner: self, options: nil)?.first as! TKUIResultsSectionHeaderView
-  }
   
   @IBOutlet weak var wrapper: UIView!
   @IBOutlet weak var badgeIcon: UIImageView!

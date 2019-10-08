@@ -220,7 +220,6 @@
 		3A879AE720CFD93700107D58 /* Alert+TKAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */; };
 		3A897A0F2344E457004D0281 /* StopVisits+RealTimeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897A0E2344E457004D0281 /* StopVisits+RealTimeColor.swift */; };
 		3A897A1F2347356C004D0281 /* TKUIResultsSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897A1C2347356C004D0281 /* TKUIResultsSectionHeaderView.swift */; };
-		3A897A202347356C004D0281 /* TKUIResultsSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A897A1E2347356C004D0281 /* TKUIResultsSectionHeaderView.xib */; };
 		3A897A22234776B0004D0281 /* UIButton+SwapImageSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897A21234776B0004D0281 /* UIButton+SwapImageSide.swift */; };
 		3A8B15B22282D13A005D7314 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8B15B12282D13A005D7314 /* RxRelay.framework */; };
 		3A8B15B32282D13A005D7314 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8B15B12282D13A005D7314 /* RxRelay.framework */; };
@@ -724,7 +723,6 @@
 		3AFD397620D93DC200FDC7D0 /* TKUIResultsAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD397420D93DC100FDC7D0 /* TKUIResultsAccessoryView.swift */; };
 		3AFD397720D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFD397520D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib */; };
 		3AFD397A20D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD397820D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift */; };
-		3AFD397B20D93DD600FDC7D0 /* TKUIResultsSectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFD397920D93DD600FDC7D0 /* TKUIResultsSectionFooterView.xib */; };
 		3AFD397D20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD397C20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift */; };
 		3AFD397E20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD397C20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift */; };
 		3AFD398220D9510F00FDC7D0 /* TKUICustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */; };
@@ -1150,7 +1148,6 @@
 		3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+TKAlert.swift"; sourceTree = "<group>"; };
 		3A897A0E2344E457004D0281 /* StopVisits+RealTimeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StopVisits+RealTimeColor.swift"; sourceTree = "<group>"; };
 		3A897A1C2347356C004D0281 /* TKUIResultsSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIResultsSectionHeaderView.swift; sourceTree = "<group>"; };
-		3A897A1E2347356C004D0281 /* TKUIResultsSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIResultsSectionHeaderView.xib; sourceTree = "<group>"; };
 		3A897A21234776B0004D0281 /* UIButton+SwapImageSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SwapImageSide.swift"; sourceTree = "<group>"; };
 		3A8B15B12282D13A005D7314 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		3A8B15B52282D160005D7314 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/Mac/RxRelay.framework; sourceTree = "<group>"; };
@@ -1426,7 +1423,6 @@
 		3AFD397420D93DC100FDC7D0 /* TKUIResultsAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIResultsAccessoryView.swift; sourceTree = "<group>"; };
 		3AFD397520D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIResultsAccessoryView.xib; sourceTree = "<group>"; };
 		3AFD397820D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIResultsSectionFooterView.swift; sourceTree = "<group>"; };
-		3AFD397920D93DD600FDC7D0 /* TKUIResultsSectionFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIResultsSectionFooterView.xib; sourceTree = "<group>"; };
 		3AFD397C20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRegionOverlayHelper.swift; sourceTree = "<group>"; };
 		3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICustomization.swift; sourceTree = "<group>"; };
 		3AFD70BC1E558BC800F6B06F /* PricingTableAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricingTableAPIModel.swift; sourceTree = "<group>"; };
@@ -1702,9 +1698,7 @@
 				3AFD397420D93DC100FDC7D0 /* TKUIResultsAccessoryView.swift */,
 				3AFD397520D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib */,
 				3AFD397820D93DD600FDC7D0 /* TKUIResultsSectionFooterView.swift */,
-				3AFD397920D93DD600FDC7D0 /* TKUIResultsSectionFooterView.xib */,
 				3A897A1C2347356C004D0281 /* TKUIResultsSectionHeaderView.swift */,
-				3A897A1E2347356C004D0281 /* TKUIResultsSectionHeaderView.xib */,
 				3A682F1E20F3F8A800E05195 /* TKUIRoutingSupportView.swift */,
 				3A682F1D20F3F8A700E05195 /* TKUIRoutingSupportView.xib */,
 				3A682F2320F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift */,
@@ -1925,14 +1919,14 @@
 				3ABCA7E02254DF030072EB25 /* Notification+TripKitUI.swift */,
 				3ACF472E2297FBB10096860D /* NSCoder+CoreData.swift */,
 				3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */,
+				3A897A0E2344E457004D0281 /* StopVisits+RealTimeColor.swift */,
 				3ACF474722981FF40096860D /* TGCardViewController+Present.swift */,
 				3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */,
 				3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */,
 				3A506B28231FB403003DD234 /* Trip+Titles.swift */,
-				3A897A0E2344E457004D0281 /* StopVisits+RealTimeColor.swift */,
 				3A897A21234776B0004D0281 /* UIButton+SwapImageSide.swift */,
-				3A40921322F0A7F80049AAE7 /* UIColor+TripKitUI.swift */,
 				D39910F223334BFF004A09C8 /* UIColor+TripGoDefault.swift */,
+				3A40921322F0A7F80049AAE7 /* UIColor+TripKitUI.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -3151,12 +3145,10 @@
 				3A6DF14B202C8EB80084CB2C /* TKUIPathFriendlinessView.xib in Resources */,
 				3AFD397720D93DC200FDC7D0 /* TKUIResultsAccessoryView.xib in Resources */,
 				D3049DFE224C49E600CB59D1 /* TKUIDepartureCell.xib in Resources */,
-				3AFD397B20D93DD600FDC7D0 /* TKUIResultsSectionFooterView.xib in Resources */,
 				3A6E7D4120EFBD4900013253 /* TKUISegmentMovingCell.xib in Resources */,
 				3A6DF13C202C8EB80084CB2C /* TKUIAlertInfoView.xib in Resources */,
 				3AF5F2B620EFF91F003AAEBA /* TKUIAttributionTableViewController.xib in Resources */,
 				D39B7BB520622FD100988D8A /* TKUIAlertCell.xib in Resources */,
-				3A897A202347356C004D0281 /* TKUIResultsSectionHeaderView.xib in Resources */,
 				3AF5F2B120EFF7BE003AAEBA /* TKUIAttributionCell.xib in Resources */,
 				3A77B75122F8815D0082CCAF /* InfoPlist.strings in Resources */,
 				3A6DF14A202C8EB80084CB2C /* TKUIDepartureView.xib in Resources */,
