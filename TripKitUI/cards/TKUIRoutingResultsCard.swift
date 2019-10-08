@@ -57,7 +57,6 @@ public class TKUIRoutingResultsCard: TGTableCard {
   let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
   
   private lazy var sizingHeader = TKUIResultsSectionHeaderView.newInstance()
-  private lazy var sizingFooter = TKUIResultsSectionFooterView.newInstance()
   
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
     configureCell: TKUIRoutingResultsCard.cell
@@ -170,7 +169,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     // Table view configuration
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
-    tableView.register(TKUIResultsSectionFooterView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
+    tableView.register(TKUIResultsSectionFooterView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
     tableView.register(TKUIResultsSectionHeaderView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
 
     tableView.backgroundColor = .tkBackgroundGrouped
@@ -326,11 +325,6 @@ extension TKUIRoutingResultsCard {
 }
 
 extension TKUIRoutingResultsCard: UITableViewDelegate {
-
-  public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    sizingFooter.cost = "A cost"
-    return sizingFooter.systemLayoutSizeFitting(CGSize(width: tableView.bounds.width, height: 666)).height
-  }
   
   public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionFooterView.reuseIdentifier) as? TKUIResultsSectionFooterView else {
@@ -363,11 +357,11 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
   public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     let section = dataSource.sectionModels[section]
     guard let content = section.badge?.footerContent else { return 16 }
-    
+
     sizingHeader.badge = content
     return sizingHeader.systemLayoutSizeFitting(CGSize(width: tableView.bounds.width, height: 666)).height
   }
-  
+
   public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let section = dataSource.sectionModels[section]
     guard let content = section.badge?.footerContent else {
