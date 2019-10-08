@@ -66,9 +66,9 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     contentView.addSubview(stack)
     NSLayoutConstraint.activate([
         stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-        stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+        stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
         contentView.trailingAnchor.constraint(equalTo: stack.trailingAnchor, constant: 16),
-        contentView.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 12)
+        contentView.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 6)
       ]
     )
     
