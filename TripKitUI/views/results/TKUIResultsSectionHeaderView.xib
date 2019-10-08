@@ -20,14 +20,14 @@
                         <rect key="frame" x="0.0" y="16" width="238" height="46"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u50-HR-F2a">
-                                <rect key="frame" x="16" y="23" width="16" height="16"/>
+                                <rect key="frame" x="16" y="20.5" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="LuB-bZ-sL6"/>
                                     <constraint firstAttribute="width" constant="16" id="fDE-og-XFB"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyY-wb-7CC">
-                                <rect key="frame" x="40" y="16" width="182" height="30"/>
+                                <rect key="frame" x="40" y="16" width="182" height="25"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,15 +40,15 @@
                             <constraint firstItem="nyY-wb-7CC" firstAttribute="top" secondItem="shT-dW-NR6" secondAttribute="top" constant="16" id="PtS-l2-5oW"/>
                             <constraint firstItem="nyY-wb-7CC" firstAttribute="height" relation="greaterThanOrEqual" secondItem="u50-HR-F2a" secondAttribute="height" id="UQn-XX-XrE"/>
                             <constraint firstAttribute="trailing" secondItem="nyY-wb-7CC" secondAttribute="trailing" constant="16" id="VLU-LK-tjI"/>
-                            <constraint firstAttribute="bottom" secondItem="nyY-wb-7CC" secondAttribute="bottom" id="vcZ-i3-EO3"/>
+                            <constraint firstAttribute="bottom" secondItem="nyY-wb-7CC" secondAttribute="bottom" constant="5" id="vcZ-i3-EO3"/>
                             <constraint firstItem="u50-HR-F2a" firstAttribute="centerY" secondItem="nyY-wb-7CC" secondAttribute="centerY" id="xE1-OT-8We"/>
                         </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="shT-dW-NR6" secondAttribute="bottom" id="3Mg-W2-3RD"/>
-                    <constraint firstItem="shT-dW-NR6" firstAttribute="top" secondItem="11j-pl-SZQ" secondAttribute="top" constant="16" id="E7a-nu-p02"/>
+                    <constraint firstAttribute="bottom" secondItem="shT-dW-NR6" secondAttribute="bottom" priority="999" id="3Mg-W2-3RD"/>
+                    <constraint firstItem="shT-dW-NR6" firstAttribute="top" secondItem="11j-pl-SZQ" secondAttribute="top" priority="999" constant="16" id="E7a-nu-p02"/>
                     <constraint firstItem="shT-dW-NR6" firstAttribute="leading" secondItem="11j-pl-SZQ" secondAttribute="leading" id="v0S-FQ-cxo"/>
                     <constraint firstAttribute="trailing" secondItem="shT-dW-NR6" secondAttribute="trailing" id="vUv-Yv-epK"/>
                 </constraints>
