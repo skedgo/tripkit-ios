@@ -37,12 +37,6 @@ public class TKUIRoutingResultsCard: TGTableCard {
 
   public weak var resultsDelegate: TKUIRoutingResultsCardDelegate?
   
-  /// An optional list of autocompletion data providers. This list will be used by an instance of
-  /// `TKUILocationSearchViewController`, which is presented when users click on
-  /// the origin or destination labels. If none was provided, the `TKAppleGeocoder` and
-  /// `TKSkedGoGeocoder` will be used
-  public var autocompletionDataProviders: [TKAutocompleting]?
-  
   private let destination: MKAnnotation?
   private var request: TripRequest? // also for saving
 
@@ -457,15 +451,9 @@ private extension TKUIRoutingResultsCard {
   func showSearch(for specifier: TKUILocationSearchSpecifier) {
     self.searchSpecifier = specifier
     
-    let resultsController: TKUIAutocompletionViewController
-    
-    if let providers = autocompletionDataProviders {
-      resultsController = TKUIAutocompletionViewController(providers: providers)
-    } else {
-      let geocoders = [TKAppleGeocoder(), TKSkedGoGeocoder()]
-      let providers = geocoders.compactMap { $0 as? TKAutocompleting }
-      resultsController = TKUIAutocompletionViewController(providers: providers)
-    }
+    let resultsController = TKUIAutocompletionViewController(providers: TKUIRoutingResultsCard.config.autocompletionDataProviders)
+    resultsController.delegate = self
+    resultsController.biasMapRect = (mapManager as? TGMapManager)?.mapView?.visibleMapRect ?? .null
     
     if #available(iOS 11.0, *) {
       // Fix for bad padding between search bar and first row
@@ -473,12 +461,9 @@ private extension TKUIRoutingResultsCard {
       resultsController.tableView.contentInsetAdjustmentBehavior = .never
     }
     
-    resultsController.delegate = self
-    resultsController.biasMapRect = (mapManager as? TGMapManager)?.mapView?.visibleMapRect ?? .null
-    
     let searchController = UISearchController(searchResultsController: resultsController)
     searchController.searchResultsUpdater = resultsController
-    searchController.searchBar.placeholder = (specifier == .origin) ? "Search origin" : "Search destination"
+    searchController.searchBar.placeholder = (specifier == .origin) ? Loc.StartLocation : Loc.EndLocation
     
     TKStyleManager.style(searchController.searchBar, includingBackground: false) {
       $0.backgroundColor = .tkBackground

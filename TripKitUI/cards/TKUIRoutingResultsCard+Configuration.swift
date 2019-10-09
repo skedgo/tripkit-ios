@@ -39,6 +39,12 @@ public extension TKUIRoutingResultsCard {
     ///
     /// Defaults to using `TKUIRoutingResultsMapManager`.
     public var mapManagerFactory: ((MKAnnotation?) -> TKUIRoutingResultsMapManagerType) = TKUIRoutingResultsMapManager.init
+    
+    /// An optional list of autocompletion data providers. This list will be used by an instance of
+    /// `TKUILocationSearchViewController`, which is presented when users click on
+    /// the origin or destination labels. If none was provided, the `TKAppleGeocoder` and
+    /// `TKSkedGoGeocoder` will be used
+    public var autocompletionDataProviders: [TKAutocompleting] = [TKAppleGeocoder(), TKSkedGoGeocoder()]
   }
 
 }
