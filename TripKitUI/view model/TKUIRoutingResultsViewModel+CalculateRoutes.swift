@@ -83,35 +83,30 @@ extension TKUIRoutingResultsViewModel {
     
     typealias BuilderInput = (
       date: RouteBuilder.Time?,
-      origin: MKAnnotation?,
-      destination: MKAnnotation?,
+      search: SearchMode?,
       pin: CLLocationCoordinate2D?,
       forceRefresh: Bool
     )
     
     // When changing modes, force refresh
     let refresh: Observable<BuilderInput> = inputs.changedModes.asObservable()
-      .map { _ in (date: nil, origin: nil, destination: nil, pin: nil, forceRefresh: true) }
+      .map { _ in (date: nil, search: nil, pin: nil, forceRefresh: true) }
       .debounce(.milliseconds(250), scheduler: MainScheduler.instance)
     
     // When changing date, switch to that date
     let date: Observable<BuilderInput> = inputs.changedDate.asObservable()
       .distinctUntilChanged()
-      .map { (date: $0, origin: nil, destination: nil, pin: nil, forceRefresh: false) }
+      .map { (date: $0, search: nil, pin: nil, forceRefresh: false) }
 
     // When dropping pin, set it
     let pin: Observable<BuilderInput> = mapInput.droppedPin.asObservable()
-      .map { (date: nil, origin: nil, destination: nil, pin: $0, forceRefresh: false) }
+      .map { (date: nil, search: nil, pin: $0, forceRefresh: false) }
     
     // ...
-    let origin: Observable<BuilderInput> = inputs.changedOrigin.asObservable()
-      .map { (date: nil, origin: $0, destination: nil, pin: nil, forceRefresh: false) }
-    
-    // ...
-    let destination: Observable<BuilderInput> = inputs.changedDestination.asObservable()
-      .map{ (date: nil, origin: nil, destination: $0, pin: nil, forceRefresh: false) }
+    let search: Observable<BuilderInput> = inputs.changedSearch.asObservable()
+      .map { (date: nil, search: $0, pin: nil, forceRefresh: false) }
 
-    let relevantInput = Observable.merge(date, origin, destination, pin, refresh)
+    let relevantInput = Observable.merge(date, search, pin, refresh)
     
     return relevantInput
       .scan(initial) { previous, change in
@@ -125,12 +120,11 @@ extension TKUIRoutingResultsViewModel {
           updated.dropPin(at: pin)
         }
         
-        if let origin = change.origin {
-          updated.origin = TKNamedCoordinate.namedCoordinate(for: origin)
-        }
-        
-        if let destination = change.destination {
-          updated.destination = TKNamedCoordinate.namedCoordinate(for: destination)
+        if let mode = change.search {
+          switch mode {
+          case .origin(let location): updated.origin = TKNamedCoordinate.namedCoordinate(for: location)
+          case .destination(let location): updated.destination = TKNamedCoordinate.namedCoordinate(for: location)
+          }
         }
         
         return updated

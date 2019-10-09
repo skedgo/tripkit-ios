@@ -17,6 +17,11 @@ import RxCocoa
 #endif
 
 public class TKUIRoutingResultsViewModel {
+  
+  public enum SearchMode {
+    case origin(MKAnnotation)
+    case destination(MKAnnotation)
+  }
 
   public typealias UIInput = (
     selected: Signal<Item>,                     // => do .next
@@ -27,8 +32,7 @@ public class TKUIRoutingResultsViewModel {
     changedDate: Signal<RouteBuilder.Time>,     // => update request + title
     changedModes: Signal<[String]?>,            // => update request
     changedSortOrder: Signal<TKTripCostType>,   // => update sorting
-    changedOrigin: Signal<MKAnnotation>,        // => update request + title
-    changedDestination: Signal<MKAnnotation>    // => update request + subtitle
+    changedSearch: Signal<SearchMode>
   )
   
   public typealias MapInput = (

@@ -58,8 +58,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
   
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
-  private let changedOrigin = PublishSubject<MKAnnotation>()
-  private let changedDestination = PublishSubject<MKAnnotation>()
+  private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchMode>()
   private let tappedToggleButton = PublishSubject<TripGroup?>()
 
   public init(destination: MKAnnotation) {
@@ -138,8 +137,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
       changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
       changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
       changedSortOrder: .empty(),
-      changedOrigin: changedOrigin.asSignal(onErrorSignalWith: .empty()),
-      changedDestination: changedDestination.asSignal(onErrorSignalWith: .empty())
+      changedSearch: changedSearch.asSignal(onErrorSignalWith: .empty())
     )
     
     let mapInput: TKUIRoutingResultsViewModel.MapInput = (
@@ -487,9 +485,9 @@ extension TKUIRoutingResultsCard: TKUIAutocompletionViewControllerDelegate {
       
       switch specifier {
       case .origin:
-        self.changedOrigin.onNext(annotation)
+        self.changedSearch.onNext(.origin(annotation))
       case .destination:
-        self.changedDestination.onNext(annotation)
+        self.changedSearch.onNext(.destination(annotation))
       }
       
       self.searchSpecifier = nil
