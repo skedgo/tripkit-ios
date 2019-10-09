@@ -19,8 +19,13 @@ import RxCocoa
 public class TKUIRoutingResultsViewModel {
   
   public enum SearchMode {
-    case origin(MKAnnotation)
-    case destination(MKAnnotation)
+    case origin
+    case destination
+  }
+  
+  public struct SearchResult {
+    let mode: SearchMode
+    let location: MKAnnotation
   }
 
   public typealias UIInput = (
@@ -32,7 +37,7 @@ public class TKUIRoutingResultsViewModel {
     changedDate: Signal<RouteBuilder.Time>,     // => update request + title
     changedModes: Signal<[String]?>,            // => update request
     changedSortOrder: Signal<TKTripCostType>,   // => update sorting
-    changedSearch: Signal<SearchMode>
+    changedSearch: Signal<SearchResult>
   )
   
   public typealias MapInput = (

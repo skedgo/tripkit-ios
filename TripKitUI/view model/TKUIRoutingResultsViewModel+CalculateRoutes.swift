@@ -83,7 +83,7 @@ extension TKUIRoutingResultsViewModel {
     
     typealias BuilderInput = (
       date: RouteBuilder.Time?,
-      search: SearchMode?,
+      search: SearchResult?,
       pin: CLLocationCoordinate2D?,
       forceRefresh: Bool
     )
@@ -120,10 +120,11 @@ extension TKUIRoutingResultsViewModel {
           updated.dropPin(at: pin)
         }
         
-        if let mode = change.search {
-          switch mode {
-          case .origin(let location): updated.origin = TKNamedCoordinate.namedCoordinate(for: location)
-          case .destination(let location): updated.destination = TKNamedCoordinate.namedCoordinate(for: location)
+        if let search = change.search {
+          if search.mode == .origin {
+            updated.origin = TKNamedCoordinate.namedCoordinate(for: search.location)
+          } else {
+            updated.destination = TKNamedCoordinate.namedCoordinate(for: search.location)
           }
         }
         

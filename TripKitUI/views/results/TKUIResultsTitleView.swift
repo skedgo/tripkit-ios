@@ -13,11 +13,6 @@ import TGCardViewController
 import RxSwift
 import RxCocoa
 
-enum TKUILocationSearchSpecifier {
-  case origin
-  case destination
-}
-
 class TKUIResultsTitleView: UIView {
   
   @IBOutlet weak var originLabel: UILabel!
@@ -29,8 +24,8 @@ class TKUIResultsTitleView: UIView {
   
   @IBOutlet private weak var topLevelStackBottomSpacing: NSLayoutConstraint!
   
-  private let locationSearchPublisher = PublishSubject<TKUILocationSearchSpecifier>()
-  var locationTapped: Signal<TKUILocationSearchSpecifier> {
+  private let locationSearchPublisher = PublishSubject<TKUIRoutingResultsViewModel.SearchMode>()
+  var locationTapped: Signal<TKUIRoutingResultsViewModel.SearchMode> {
     return locationSearchPublisher.asSignal(onErrorSignalWith: .empty())
   }
   

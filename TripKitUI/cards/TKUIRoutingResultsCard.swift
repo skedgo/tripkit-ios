@@ -54,11 +54,11 @@ public class TKUIRoutingResultsCard: TGTableCard {
     configureCell: TKUIRoutingResultsCard.cell
   )
   
-  private var searchSpecifier: TKUILocationSearchSpecifier?
+  private var searchMode: TKUIRoutingResultsViewModel.SearchMode?
   
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
-  private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchMode>()
+  private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
   private let tappedToggleButton = PublishSubject<TripGroup?>()
 
   public init(destination: MKAnnotation) {
@@ -446,8 +446,8 @@ private extension TKUIRoutingResultsCard {
 
 private extension TKUIRoutingResultsCard {
   
-  func showSearch(for specifier: TKUILocationSearchSpecifier) {
-    self.searchSpecifier = specifier
+  func showSearch(for mode: TKUIRoutingResultsViewModel.SearchMode) {
+    self.searchMode = mode
     
     let resultsController = TKUIAutocompletionViewController(providers: TKUIRoutingResultsCard.config.autocompletionDataProviders)
     resultsController.delegate = self
@@ -461,7 +461,7 @@ private extension TKUIRoutingResultsCard {
     
     let searchController = UISearchController(searchResultsController: resultsController)
     searchController.searchResultsUpdater = resultsController
-    searchController.searchBar.placeholder = (specifier == .origin) ? Loc.StartLocation : Loc.EndLocation
+    searchController.searchBar.placeholder = (mode == .origin) ? Loc.StartLocation : Loc.EndLocation
     
     TKStyleManager.style(searchController.searchBar, includingBackground: false) {
       $0.backgroundColor = .tkBackground
@@ -478,19 +478,19 @@ extension TKUIRoutingResultsCard: TKUIAutocompletionViewControllerDelegate {
   
   public func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect annotation: MKAnnotation) {
     self.controller?.dismiss(animated: true, completion: { [weak self] in
-      guard let self = self, let specifier = self.searchSpecifier else {
+      guard let self = self, let specifier = self.searchMode else {
         assertionFailure()
         return
       }
       
       switch specifier {
       case .origin:
-        self.changedSearch.onNext(.origin(annotation))
+        self.changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: annotation))
       case .destination:
-        self.changedSearch.onNext(.destination(annotation))
+        self.changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: annotation))
       }
       
-      self.searchSpecifier = nil
+      self.searchMode = nil
     })
   }
   
