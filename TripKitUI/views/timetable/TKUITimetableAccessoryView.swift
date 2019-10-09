@@ -70,6 +70,7 @@ class TKUITimetableAccessoryView: UIView {
     searchBar.placeholder = Loc.Search
 
     timeButton.setTitle(nil, for: .normal)
+    timeButton.setImage(.iconChevronTimetable, for: .normal)
   }
   
   func setCustomActions(_ actions: [TKUITimetableCardAction], for model: [TKUIStopAnnotation], card: TKUITimetableCard) {
@@ -128,10 +129,12 @@ extension TKUIServiceNumberCell {
     
     numberLabel.text = line.text
     
-    let serviceColor = line.color ?? .tkLabelPrimary
-    // TODO: This isn't correct if we use model.serviceColor as those aren't dynamic
-    let textColor: UIColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
-    numberLabel.textColor = textColor
-    wrapperView.backgroundColor = serviceColor
+    if let serviceColor = line.color {
+      numberLabel.textColor = serviceColor.isDark() ? .tkLabelOnDark : .tkLabelOnLight
+      wrapperView.backgroundColor = serviceColor
+    } else {
+      numberLabel.textColor = .tkBackground
+      wrapperView.backgroundColor = .tkLabelPrimary
+    }
   }
 }

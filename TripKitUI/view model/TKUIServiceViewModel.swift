@@ -63,8 +63,6 @@ public class TKUIServiceViewModel {
       .asDriver(onErrorDriveWith: .empty())
     
     error = errorPublisher.asDriver(onErrorRecover: { Driver.just($0) })
-    
-    // TODO: Add real-time alerts
   }
   
   /// Title view with details about the embarkation.

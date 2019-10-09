@@ -78,19 +78,25 @@ extension TKUISegmentMovingCell {
   
   func configure(with item: TKUITripOverviewViewModel.MovingItem, for card: TKUITripOverviewCard) {
     let hasLine = item.connection?.color != nil
+    let modeImageColor: UIColor
+    switch item.connection?.color?.isDark() {
+    case .some(true): modeImageColor = .tkLabelOnDark
+    case .some(false): modeImageColor = .tkLabelOnLight
+    case nil: modeImageColor = .tkLabelPrimary
+    }
     
     modeImage.setImage(with: item.iconURL, asTemplate: item.iconIsTemplate, placeholder: item.icon)
-    modeImage.tintColor = hasLine ? .tkBackground : .tkLabelPrimary
+    modeImage.tintColor = modeImageColor
     
     if item.iconURL != nil, !item.iconIsTemplate {
       // If we have a remote image, that's not a template, put it as is on
       // the background
-      modeImage.tintColor = .tkLabelPrimary
+      modeImage.tintColor = .tkLabelOnDark
       modeWrapper.backgroundColor = .tkBackground
       
     } else {
       // ... otherwise, put the image on a background
-      modeImage.tintColor = hasLine ? .tkBackground : .tkLabelPrimary
+      modeImage.tintColor = modeImageColor
       modeWrapper.backgroundColor = item.connection?.color ?? .clear
     }
     

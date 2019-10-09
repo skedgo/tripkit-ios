@@ -62,11 +62,13 @@ extension TKUIServiceTitleView {
     
     serviceShortNameLabel.text = model.serviceShortName
 
-    let serviceColor = model.serviceColor ?? .tkLabelPrimary
-    // TODO: This isn't correct if we use model.serviceColor as those aren't dynamic
-    let textColor: UIColor = serviceColor.isDark() ? .tkBackground : .tkLabelPrimary
-    serviceShortNameLabel.textColor = textColor
-    serviceColorView.backgroundColor = serviceColor
+    if let serviceColor = model.serviceColor {
+      serviceShortNameLabel.textColor = serviceColor.isDark() ? .tkLabelOnDark : .tkLabelOnLight
+      serviceColorView.backgroundColor = serviceColor
+    } else {
+      serviceShortNameLabel.textColor = .tkBackground
+      serviceColorView.backgroundColor = .tkLabelPrimary
+    }
     
     serviceTimeLabel.attributedText = model.timeText
   }

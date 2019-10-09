@@ -44,42 +44,60 @@ public class TKUIRoutingResultsCard: TGTableCard {
   let disposeBag = DisposeBag()
   private var realTimeBag = DisposeBag()
   
+  private var titleView: TKUIResultsTitleView?
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   private weak var modePicker: RoutingModePicker?
+  
+  let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
   
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
     configureCell: TKUIRoutingResultsCard.cell
   )
   
+  private var searchMode: TKUIRoutingResultsViewModel.SearchMode?
+  
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
-  
+  private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+  private let tappedToggleButton = PublishSubject<TripGroup?>()
+
   public init(destination: MKAnnotation) {
     self.destination = destination
     self.request = nil
     
-    let title = Loc.PlanTrip
     let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(destination)
+    
+    let resultsTitle = TKUIResultsTitleView.newInstance()
+    resultsTitle.accessoryView = accessoryView
+    self.titleView = resultsTitle
+    
     super.init(
-      title: title, style: .grouped,
-      accessoryView: accessoryView, mapManager: mapManager,
-      initialPosition: nil // keep same as before (so that user can drop another pin)
+      title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
+      style: .grouped,
+      mapManager: mapManager,
+      initialPosition: nil
     )
+
     didInit()
   }
-  
   
   public init(request: TripRequest) {
     self.destination = nil
     self.request = request
-
-    let title = Loc.Trips
+    
     let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(request.toLocation)
+    
+    let resultsTitle = TKUIResultsTitleView.newInstance()
+    resultsTitle.accessoryView = accessoryView
+    self.titleView = resultsTitle
+    
     super.init(
-      title: title, style: .grouped,
-      accessoryView: accessoryView, mapManager: mapManager,
+      title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
+      style: .grouped,
+      mapManager: mapManager,
       initialPosition: .extended // show fully as we'll have routes shortly
     )
+    
     didInit()
   }
   
@@ -87,9 +105,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     guard
       let data = coder.decodeObject(forKey: "viewModel") as? Data,
       let request = TKUIRoutingResultsViewModel.restore(from: data)
-      else {
-        return nil
-    }
+      else { return nil }
     
     self.init(request: request)
   }
@@ -104,25 +120,24 @@ public class TKUIRoutingResultsCard: TGTableCard {
     aCoder.encode(TKUIRoutingResultsViewModel.save(request: request), forKey: "viewModel")
   }
   
-  
   override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     guard
       let tableView = (cardView as? TGScrollCardView)?.tableView,
       let mapManager = mapManager as? TKUIRoutingResultsMapManagerType
-      else {
-        preconditionFailure()
-    }
+      else { preconditionFailure() }
     
     // Build the view model
     
     let inputs: TKUIRoutingResultsViewModel.UIInput = (
       selected: tableView.rx.modelSelected(TKUIRoutingResultsViewModel.Item.self).asSignal(),
+      tappedToggleButton: tappedToggleButton.asSignal(onErrorSignalWith: .empty()),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
       tappedShowModeOptions: .empty(),
       changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
       changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
-      changedSortOrder: .empty()
+      changedSortOrder: .empty(),
+      changedSearch: changedSearch.asSignal(onErrorSignalWith: .empty())
     )
     
     let mapInput: TKUIRoutingResultsViewModel.MapInput = (
@@ -144,10 +159,13 @@ public class TKUIRoutingResultsCard: TGTableCard {
     // Table view configuration
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
-    tableView.register(TKUIResultsSectionFooterView.nib, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
-    
+    tableView.register(TKUIResultsSectionFooterView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
+    tableView.register(TKUIResultsSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
+
     tableView.backgroundColor = .tkBackgroundGrouped
+    tableView.separatorStyle = .none
     tableView.tableFooterView = UIView()
+    tableView.tableHeaderView = emptyHeader
 
     // Overriding the data source with our Rx one
     // Note: explicitly reset to say we know that we'll override this with Rx
@@ -159,6 +177,12 @@ public class TKUIRoutingResultsCard: TGTableCard {
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
+    viewModel.sections
+      .drive(onNext: { [weak self] in
+        self?.updateVisibleSectionBadges(sections: $0, tableView: tableView)
+      })
+    .disposed(by: disposeBag)
+
     viewModel.selectedItem
       .drive(onNext: { [weak self] in
         guard let indexPath = self?.dataSource.indexPath(of: $0) else { return }
@@ -168,7 +192,9 @@ public class TKUIRoutingResultsCard: TGTableCard {
       .disposed(by: disposeBag)
 
     viewModel.titles
-      .drive(cardView.rx.titles)
+      .drive(onNext: { [weak self] input in
+        self?.titleView?.configure(destination: input.title , origin: input.subtitle)
+      })
       .disposed(by: disposeBag)
 
     viewModel.timeTitle
@@ -213,6 +239,12 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
+    
+    // Search places
+    
+    titleView?.locationTapped
+    .emit(onNext: { [weak self] in self?.showSearch(for: $0) })
+    .disposed(by: disposeBag)
   }
   
   public override func didAppear(animated: Bool) {
@@ -237,22 +269,13 @@ extension TKUIRoutingResultsCard {
   
   static func cell(dataSource: RxDataSources.TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {
     
-    if let trip = item.trip {
-      let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
-      tripCell.configure(TKUITripCell.Model(trip))
-      return tripCell
-      
-    } else {
-      let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-      cell.backgroundColor = .tkBackgroundTile
-      cell.textLabel?.textColor = .tkLabelSecondary
-      switch item {
-      case .lessIndicator: cell.textLabel?.text = "Less"
-      case .moreIndicator: cell.textLabel?.text = "More"
-      case .nano, .trip: preconditionFailure()
-      }
-      return cell
-    }
+    let showSeparator = dataSource.sectionModels[indexPath.section].items.count > 1
+    
+    let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
+    tripCell.configure(TKUITripCell.Model(item.trip))
+    tripCell.separatorView.isHidden = !showSeparator
+    
+    return tripCell
   }
   
 }
@@ -272,8 +295,22 @@ extension TKUITripCell.Model {
 }
 
 extension TKMetricClassifier.Classification {
+  
   fileprivate var footerContent: (UIImage?, String, UIColor) {
     return (icon, text, color)
+  }
+  
+}
+
+extension TKUIRoutingResultsCard {
+  private func updateVisibleSectionBadges(sections: [TKUIRoutingResultsViewModel.Section], tableView: UITableView) {
+    guard let visible = tableView.indexPathsForVisibleRows else { return }
+    let indices = visible.reduce(into: Set<Int>()) { $0.insert($1.section) }
+    for section in indices {
+      if let badge = sections[section].badge, let header = tableView.headerView(forSection: section) as? TKUIResultsSectionHeaderView {
+        header.badge = badge.footerContent
+      }
+    }
   }
 }
 
@@ -289,9 +326,37 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     formatter.costColor = footerView.costLabel.textColor
 
     let section = dataSource.sectionModels[section]
-    footerView.badge = section.badge?.footerContent
     footerView.attributedCost = formatter.costString(costs: section.costs)
+    
+    if let buttonContent = section.toggleButton {
+      footerView.button.isHidden = false
+      footerView.button.setTitle(buttonContent.title, for: .normal)
+      footerView.button.rx.tap
+        .subscribe(onNext: { [unowned tappedToggleButton] in
+          tappedToggleButton.onNext(buttonContent.payload)
+        })
+        .disposed(by: footerView.disposeBag)
+
+    } else {
+      footerView.button.isHidden = true
+    }
+    
     return footerView
+  }
+
+  public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let section = dataSource.sectionModels[section]
+    guard let content = section.badge?.footerContent else {
+      return UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 16))
+    }
+
+    guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier) as? TKUIResultsSectionHeaderView else {
+      assertionFailure()
+      return nil
+    }
+
+    headerView.badge = content
+    return headerView
   }
   
 }
@@ -299,21 +364,27 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
 // MARK: - Mode picker
 
 private extension TKUIRoutingResultsCard {
+  
   func updateModePicker(_ modes: TKUIRoutingResultsViewModel.AvailableModes, in tableView: UITableView) {
     guard !modes.available.isEmpty else {
-      tableView.tableHeaderView = nil
+      tableView.tableHeaderView = emptyHeader
+      self.modePicker = nil
       return
     }
     
     let modePicker: RoutingModePicker
+    let scrollToPicker: Bool
     
     if let existing = self.modePicker {
       modePicker = existing
+      scrollToPicker = false
     } else {
       modePicker = self.buildModePicker()
       self.modePicker = modePicker
+      scrollToPicker = true
     }
-    
+
+    modePicker.backgroundColor = .tkBackgroundGrouped
     modePicker.frame.size.width = tableView.frame.width
     modePicker.configure(all: modes.available, updateAll: true, currentlyEnabled: modes.isEnabled)
     
@@ -330,6 +401,10 @@ private extension TKUIRoutingResultsCard {
     ])
     
     tableView.tableHeaderView = header
+    
+    if scrollToPicker {
+      tableView.scrollRectToVisible(header.frame, animated: true)
+    }
   }
   
   func buildModePicker() -> RoutingModePicker {
@@ -345,11 +420,13 @@ private extension TKUIRoutingResultsCard {
     
     return modePicker
   }
+  
 }
 
 // MARK: - Navigation
 
 private extension TKUIRoutingResultsCard {
+  
   func navigate(to next: TKUIRoutingResultsViewModel.Next) {
     switch next {
     case .showTrip(let trip):
@@ -362,6 +439,67 @@ private extension TKUIRoutingResultsCard {
       showTimePicker(time: time, timeZone: timeZone)
     }
   }
+  
+}
+
+// MARK: - Search places
+
+private extension TKUIRoutingResultsCard {
+  
+  func showSearch(for mode: TKUIRoutingResultsViewModel.SearchMode) {
+    self.searchMode = mode
+    
+    let resultsController = TKUIAutocompletionViewController(providers: TKUIRoutingResultsCard.config.autocompletionDataProviders)
+    resultsController.delegate = self
+    resultsController.biasMapRect = (mapManager as? TGMapManager)?.mapView?.visibleMapRect ?? .null
+    
+    if #available(iOS 11.0, *) {
+      // Fix for bad padding between search bar and first row
+      // Kudos to https://stackoverflow.com/questions/40435806/extra-space-on-top-of-uisearchcontrollers-uitableview
+      resultsController.tableView.contentInsetAdjustmentBehavior = .never
+    }
+    
+    let searchController = UISearchController(searchResultsController: resultsController)
+    searchController.searchResultsUpdater = resultsController
+    searchController.searchBar.placeholder = (mode == .origin) ? Loc.StartLocation : Loc.EndLocation
+    
+    TKStyleManager.style(searchController.searchBar, includingBackground: false) {
+      $0.backgroundColor = .tkBackground
+      $0.tintColor = .tkLabelPrimary
+      $0.textColor = .tkLabelPrimary
+    }
+    
+    controller?.present(searchController, animated: true)
+  }
+  
+}
+
+extension TKUIRoutingResultsCard: TKUIAutocompletionViewControllerDelegate {
+  
+  public func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect annotation: MKAnnotation) {
+    self.controller?.dismiss(animated: true, completion: { [weak self] in
+      guard let self = self, let specifier = self.searchMode else {
+        assertionFailure()
+        return
+      }
+      
+      switch specifier {
+      case .origin:
+        self.changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: annotation))
+      case .destination:
+        self.changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: annotation))
+      }
+      
+      self.searchMode = nil
+    })
+  }
+  
+  public func autocompleter(_ controller: TKUIAutocompletionViewController, didSelectAccessoryFor annotation: MKAnnotation) {
+    self.controller?.dismiss(animated: true, completion: {
+      //
+    })
+  }
+  
 }
 
 // MARK: - Picking times
@@ -369,10 +507,10 @@ private extension TKUIRoutingResultsCard {
 private extension TKUIRoutingResultsCard {
   
   func showTimePicker(time: TKUIRoutingResultsViewModel.RouteBuilder.Time, timeZone: TimeZone) {
-    
     guard let controller = controller else {
       preconditionFailure("Shouldn't be able to show time picker!")
     }
+    
     let sender: UIButton = accessoryView.timeButton
     
     let picker = TKUITimePickerSheet(time: time.date, timeType: time.timeType, timeZone: timeZone)

@@ -8,67 +8,91 @@
 
 import UIKit
 
-class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
+import RxSwift
 
-  static let nib = UINib(nibName: "TKUIResultsSectionFooterView", bundle: Bundle(for: TKUIResultsSectionFooterView.self))
+class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
+  
   static let reuseIdentifier = "TKUIResultsSectionFooterView"
   
-  @IBOutlet weak var badgeWrapper: UIView!
-  @IBOutlet weak var badgeIcon: UIImageView!
-  @IBOutlet weak var badgeLabel: UILabel!
-  
   @IBOutlet weak var costLabel: UILabel!
+  @IBOutlet weak var button: UIButton!
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    
-    contentView.backgroundColor = .tkBackgroundTile
-    
-    badgeWrapper.isHidden = true
-    badgeIcon.tintColor = .tkFilledButtonTextColor
-    badgeLabel.text = nil
-    badgeLabel.textColor = .tkFilledButtonTextColor
-    badgeLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
-    costLabel.text = nil
-    costLabel.textColor = .tkLabelSecondary
-    costLabel.font = TKStyleManager.customFont(forTextStyle: .caption1)
+  var disposeBag = DisposeBag()
+  
+  override init(reuseIdentifier: String?) {
+    super.init(reuseIdentifier: reuseIdentifier)
+    didInit()
   }
   
-  var badge: (icon: UIImage?, text: String, background: UIColor)? {
-    get {
-      guard let text = badgeLabel.text else {
-        return nil
-      }
-      return (badgeIcon.image, text, badgeWrapper.backgroundColor ?? .tkBackground)
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  private func didInit() {
+    contentView.backgroundColor = .tkBackground
+    
+    let costLabel = UILabel()
+    costLabel.contentMode = .left
+    costLabel.numberOfLines = 1
+    costLabel.text = nil
+    costLabel.textColor = .tkLabelSecondary
+    costLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    costLabel.translatesAutoresizingMaskIntoConstraints = false
+    costLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
+    costLabel.setContentCompressionResistancePriority(UILayoutPriority(750), for: .horizontal)
+    self.costLabel = costLabel
+    
+    let button = UIButton(type: .system)
+    if #available(iOS 11.0, *) {
+      button.contentHorizontalAlignment = .trailing
+    } else {
+      button.contentHorizontalAlignment = .right
     }
-    set {
-      guard let badge = newValue else {
-        badgeWrapper.isHidden = true
-        return
-      }
-      badgeWrapper.isHidden = false
-      badgeIcon.image = badge.icon
-      badgeLabel.text = badge.text.uppercased(with: .current)
-      badgeWrapper.backgroundColor = badge.background
-    }
+    // TODO: Localise or should we use "Loc.MoreResults"?
+    button.setTitle("More", for: .normal)
+    button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    button.tintColor = .tkAppTintColor
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
+    button.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
+    self.button = button
+    
+    let stack = UIStackView(arrangedSubviews: [costLabel, button])
+    stack.axis = .horizontal
+    stack.alignment = .fill
+    stack.distribution = .fill
+    stack.spacing = 16
+    stack.translatesAutoresizingMaskIntoConstraints = false
+    contentView.addSubview(stack)
+    NSLayoutConstraint.activate([
+        stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+        stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+        contentView.trailingAnchor.constraint(equalTo: stack.trailingAnchor, constant: 16),
+        contentView.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 6)
+      ]
+    )
+    
+    // When table view animates sections in and out, the layout system somehow
+    // assumes a height that is significantly smaller than required. This is a
+    // workaround.
+    contentView.constraintsAffectingLayout(for: .vertical).forEach { $0.priority = UILayoutPriority(999) }
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    costLabel.text = nil
+    disposeBag = DisposeBag()
   }
   
   var cost: String? {
-    get {
-      return costLabel.text
-    }
-    set {
-      costLabel.text = newValue
-    }
+    get { costLabel.text }
+    set { costLabel.text = newValue }
   }
   
   var attributedCost: NSAttributedString? {
-    get {
-      return costLabel.attributedText
-    }
-    set {
-      costLabel.attributedText = newValue
-    }
+    get { costLabel.attributedText }
+    set { costLabel.attributedText = newValue }
   }
   
 }

@@ -10,8 +10,6 @@ import Foundation
 
 extension UIColor {
   
-  #warning("All colors defined in this extension should ideally use brand-neutral values")
-  
   static let tripgoTintColor: UIColor = {
     if #available(iOS 13.0, *) {
       return UIColor { traits in
@@ -22,18 +20,6 @@ extension UIColor {
       }
     } else { return #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1) }
   }()
-  
-  static let tripgoSecondaryTintColor: UIColor = {
-    if #available(iOS 13.0, *) {
-      return UIColor { traits in
-        switch traits.userInterfaceStyle {
-        case .dark: return #colorLiteral(red: 0.1176470588, green: 0.1647058824, blue: 0.2117647059, alpha: 1)
-        case _: return .tkBackground
-        }
-      }
-    } else { return.tkBackground }
-  }()
-
   
   
   // MARK: - Buttons

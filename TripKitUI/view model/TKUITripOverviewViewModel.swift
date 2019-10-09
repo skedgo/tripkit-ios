@@ -52,8 +52,6 @@ fileprivate extension Reactive where Base == Trip {
   }
   
   var titles: Driver<(title: String, subtitle: String?)> {
-    // TODO: This should update with real-time data
-    
     return Observable.merge(observe(Date.self, "arrivalTime"), observe(Date.self, "departureTime"))
       .map { [unowned base] _ in Self.titles(for: base) }
       .asDriver(onErrorDriveWith: .empty())

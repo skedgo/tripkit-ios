@@ -85,16 +85,12 @@ extension TKUIRoutingResultsViewModel {
   }
   
   static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput) -> Observable<[Section]> {
-    let expand = inputs.selected
-      .map { item -> TripGroup? in
-        switch item {
-        case .nano, .trip, .lessIndicator: return nil
-        case .moreIndicator(let group): return group
-        }
-    }
-    
     return Observable
-      .combineLatest(groups, inputs.changedSortOrder.startWith(.score).asObservable(), expand.startWith(nil).asObservable())
+      .combineLatest(
+        groups,
+        inputs.changedSortOrder.startWith(.score).asObservable(),
+        inputs.tappedToggleButton.startWith(nil).asObservable()
+      )
       .map(sections)
   }
   
@@ -113,15 +109,19 @@ extension TKUIRoutingResultsViewModel {
         .compactMap { Item(trip: $0, in: group) }
       
       let show: [Item]
+      let toggleButton: SectionToggle?
       if items.count > 2, expand == group {
-        show = items + [.lessIndicator(group)]
+        show = items
+        toggleButton = (title: "Less", payload: nil) // TODO: Localise
       } else if items.count > 2 {
-        let good = items.filter { !($0.trip?.showFaded ?? true) }
-        show = good.prefix(2) + [.moreIndicator(group)]
+        let good = items.filter { !$0.trip.showFaded }
+        show = Array(good.prefix(2))
+        toggleButton = (title: "More", payload: group) // TODO: Localise
       } else {
         show = items
+        toggleButton = nil
       }
-      return Section(items: show, badge: group.badge, costs: best.costValues)
+      return Section(items: show, badge: group.badge, costs: best.costValues, toggleButton: toggleButton)
     }
   }
 }
@@ -158,18 +158,15 @@ extension TKUIRoutingResultsViewModel {
     /// A minimised trip
     case nano(Trip)
     
-    case moreIndicator(TripGroup)
-    case lessIndicator(TripGroup)
-    
-    var trip: Trip? {
+    var trip: Trip {
       switch self {
       case .nano(let trip): return trip
       case .trip(let trip): return trip
-      case .moreIndicator, .lessIndicator: return nil
       }
     }
-    
   }
+  
+  public typealias SectionToggle = (title: String, payload: TripGroup?)
   
   /// A section on the results screen, which consists of various sorted items
   public struct Section {
@@ -177,6 +174,7 @@ extension TKUIRoutingResultsViewModel {
     
     public var badge: TKMetricClassifier.Classification?
     var costs: [NSNumber: String]
+    public let toggleButton: SectionToggle?
   }
 }
 
@@ -184,31 +182,34 @@ extension TKMetricClassifier.Classification {
   
   var icon: UIImage? {
     switch self {
-    case .easiest: return UIImage.iconRelax
-    case .greenest: return UIImage.iconTree
-    case .fastest: return UIImage.iconTime
-    case .healthiest: return UIImage.iconRun
-    case .cheapest: return UIImage.iconMoney
-    case .recommended: return nil
+    case .cheapest: return .badgeMoney
+    case .easiest: return .badgeLeaf
+    case .fastest: return .badgeLightning
+    case .greenest: return .badgeLeaf
+    case .healthiest: return .badgeHeart
+    case .recommended: return .badgeCheck
     }
   }
   
   var text: String {
     switch self {
-    case .easiest: return Loc.BadgeEasiest
-    case .greenest: return Loc.BadgeGreenest
-    case .fastest: return Loc.BadgeFastest
-    case .healthiest: return Loc.BadgeHealthiest
     case .cheapest: return Loc.BadgeCheapest
+    case .easiest: return Loc.BadgeEasiest
+    case .fastest: return Loc.BadgeFastest
+    case .greenest: return Loc.BadgeGreenest
+    case .healthiest: return Loc.BadgeHealthiest
     case .recommended: return Loc.BadgeRecommended
     }
   }
   
   var color: UIColor {
     switch self {
-    case .easiest, .cheapest, .fastest: return #colorLiteral(red: 0.7921568627, green: 0.2549019608, blue: 0.0862745098, alpha: 1)
-    case .greenest, .healthiest: return #colorLiteral(red: 0.1254901961, green: 0.7882352941, blue: 0.4156862745, alpha: 1)
-    case .recommended: return #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+    case .cheapest: return #colorLiteral(red: 1, green: 0.5529411765, blue: 0.1058823529, alpha: 1)
+    case .easiest: return #colorLiteral(red: 0.137254902, green: 0.6941176471, blue: 0.368627451, alpha: 1)
+    case .fastest: return #colorLiteral(red: 1, green: 0.7490196078, blue: 0, alpha: 1)
+    case .greenest: return #colorLiteral(red: 0, green: 0.6588235294, blue: 0.5607843137, alpha: 1)
+    case .healthiest: return #colorLiteral(red: 0.8823529412, green: 0.3568627451, blue: 0.4470588235, alpha: 1)
+    case .recommended: return #colorLiteral(red: 0.09411764706, green: 0.5019607843, blue: 0.9058823529, alpha: 1)
     }
   }
 }
@@ -257,41 +258,12 @@ extension Array where Element == TKUIRoutingResultsViewModel.Section {
   }
 }
 
-// MARK: - ?
-
-extension TKUIRoutingResultsViewModel {
-  
-  //  func allQueriesDidFinish(with error: NSError?) {
-  //    // TODO: Call this again?
-  //
-  //    guard let request = self.rx_request.value, !request.hasTrips() else { return }
-  //
-  //    if let error = error {
-  //      rx_error.onNext(error)
-  //
-  //    } else {
-  //      // We have a request, there was no explicit error during routing.
-  //      let info = [
-  //        NSLocalizedDescriptionKey: Loc.NoRoutesFound,
-  //        NSLocalizedRecoverySuggestionErrorKey: Loc.PleaseAdjustYourQuery,
-  //        ]
-  //
-  //      let noTrips = NSError(domain: "com.buzzhives.TripGo", code: 872631, userInfo: info)
-  //      rx_error.onNext(noTrips)
-  //    }
-  //  }
-  
-}
-
-
-
 // MARK: - RxDataSources
 
 public func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsViewModel.Item) -> Bool {
   switch (lhs, rhs) {
   case (.trip(let left), .trip(let right)): return left.objectID == right.objectID
   case (.nano(let left), .nano(let right)): return left.objectID == right.objectID
-  case (.moreIndicator, .moreIndicator): return true
   default: return false
   }
 }
@@ -303,8 +275,6 @@ extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
     switch self {
     case .trip(let trip): return trip.objectID.uriRepresentation().absoluteString
     case .nano(let trip): return trip.objectID.uriRepresentation().absoluteString
-    case .moreIndicator(let group): return "more-\(group.objectID.uriRepresentation().absoluteString)"
-    case .lessIndicator(let group): return "less-\(group.objectID.uriRepresentation().absoluteString)"
     }
   }
 }
