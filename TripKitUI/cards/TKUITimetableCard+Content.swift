@@ -38,6 +38,7 @@ extension TKUIDepartureCellContent {
       serviceShortName: service.shortIdentifier(),
       serviceColor: serviceColor,
       serviceIsCancelled: service.isCancelled,
+      accessibilityLabel: visit.accessibilityDescription(includeRealTime: true),
       timeText: visit.buildTimeText(),
       lineText: visit.buildLineText(),
       approximateTimeToDepart: visit.countdownDate(),

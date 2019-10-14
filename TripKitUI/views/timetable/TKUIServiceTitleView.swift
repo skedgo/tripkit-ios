@@ -46,6 +46,7 @@ class TKUIServiceTitleView: UIView {
     
     dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
     dismissButton.setTitle(nil, for: .normal)
+    dismissButton.accessibilityLabel = Loc.Close
   }
 
 }
