@@ -669,15 +669,22 @@ typedef NSUInteger SGTripFlag;
     }
   }
   
+  NSString *arrival = [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]];
+
   [accessibleLabel appendString:@"; "];
   if ([self departureTimeIsFixed]) {
-    NSString *format = NSLocalizedStringFromTableInBundle(@"%@ to %@", @"TripKit", [TKTripKit bundle], "From %time1 to %time2. (old key: TimeFromToShortFormat)");
-    [accessibleLabel appendFormat:format, [sTripAccessibilityDateFormatter stringFromDate:[self departureTime]], [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]]];
+    NSString *departureTime = [sTripAccessibilityDateFormatter stringFromDate:[self departureTime]];
+    
+    [accessibleLabel appendString:[Loc Departs:departureTime capitalize:NO]];
+    [accessibleLabel appendString:@"; "];
+    [accessibleLabel appendString:[Loc Arrives:arrival capitalize:NO]];
+    [accessibleLabel appendString:@"; "];
+    [accessibleLabel appendString:[self durationString]];
     [accessibleLabel appendFormat:@"; %@", [self durationString]];
   } else {
-    [accessibleLabel appendFormat:@"%@; ", [self durationString]];
+    [accessibleLabel appendString:[self durationString]];
+    [accessibleLabel appendString:@"; "];
 
-    NSString *arrival = [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]];
     [accessibleLabel appendString:[Loc ArriveAtDate:arrival]];
   }
   

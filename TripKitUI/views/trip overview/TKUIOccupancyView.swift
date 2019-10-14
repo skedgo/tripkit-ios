@@ -105,10 +105,13 @@ extension TKUIOccupancyView {
   public convenience init(with purpose: Purpose) {
     self.init()
     
+    isAccessibilityElement = true
+
     switch purpose {
     case .occupancy(let occupancy, simple: true):
       guard let title = occupancy.localizedTitle else { return }
 
+      accessibilityLabel = title
       label.text = title
       label.font = TKStyleManager.customFont(forTextStyle: .footnote)
       label.textColor = .tkLabelSecondary
@@ -118,6 +121,8 @@ extension TKUIOccupancyView {
       
     case .occupancy(let occupancy, simple: false):
       guard let title = occupancy.localizedTitle else { return }
+      
+      accessibilityLabel = title
       
       label.text = title.localizedUppercase
       
@@ -139,6 +144,7 @@ extension TKUIOccupancyView {
     case .wheelchair:
       let color = #colorLiteral(red: 0, green: 0.6078431373, blue: 0.8745098039, alpha: 1)
       
+      accessibilityLabel = Loc.WheelchairAccessible
       label.text = Loc.WheelchairAccessible.localizedUppercase
       label.textColor = color
       

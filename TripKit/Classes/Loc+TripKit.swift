@@ -142,6 +142,18 @@ extension Loc {
   
   // MARK: - Format
 
+  @objc(Departs:capitalize:)
+  public static func Departs(atTime time: String, capitalize: Bool = false) -> String {
+    let format = NSLocalizedString("departs %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Estimated time of departure; parameter is time, e.g., 'departs 15:30'")
+    return String(format: capitalize ? format.localizedCapitalized : format, time)
+  }
+  
+  @objc(Arrives:capitalize:)
+  public static func Arrives(atTime time: String, capitalize: Bool = false) -> String {
+    let format = NSLocalizedString("arrives %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'")
+    return String(format: capitalize ? format.localizedCapitalized : format, time)
+  }
+  
   @objc(ArriveAtDate:)
   public static func ArriveAt(date: String) -> String {
     let format = NSLocalizedString("Arrive at %@", tableName: "TripKit", bundle: .tripKit, comment: "'%@' will be replaced with the arrival time. (old key: ArrivalTime)")

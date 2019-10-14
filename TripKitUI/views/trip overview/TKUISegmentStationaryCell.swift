@@ -74,12 +74,15 @@ extension TKUISegmentStationaryCell {
       timeStack.isHidden = false
       timeEndLabel.isHidden = false
       timeLabel.text = start
+      timeLabel.accessibilityLabel = Loc.Arrives(atTime: start)
       timeEndLabel.text = end
+      timeEndLabel.accessibilityLabel = Loc.Departs(atTime: end)
 
     } else if let time = startText ?? endText {
       timeStack.isHidden = false
       timeEndLabel.isHidden = true
       timeLabel.text = time
+      timeLabel.accessibilityLabel = Loc.At(time: time)
       timeEndLabel.text = nil
     
     } else {
@@ -106,8 +109,10 @@ extension TKUISegmentStationaryCell {
     timeEndLabel.isHidden = true
 
     if item.timesAreFixed, let time = item.time {
+      let text = TKStyleManager.timeString(time, for: item.timeZone)
       timeStack.isHidden = false
-      timeLabel.text = TKStyleManager.timeString(time, for: item.timeZone)
+      timeLabel.text = text
+      timeLabel.accessibilityLabel = text
     } else {
       timeStack.isHidden = true
     }
