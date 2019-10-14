@@ -39,6 +39,7 @@ extension TKUIDepartureCellContent {
       serviceColor: serviceColor,
       serviceIsCancelled: service.isCancelled,
       accessibilityLabel: visit.accessibilityDescription(includeRealTime: true),
+      accessibilityTimeText: visit.buildTimeText(spacer: ";").string,
       timeText: visit.buildTimeText(),
       lineText: visit.buildLineText(),
       approximateTimeToDepart: visit.countdownDate(),
@@ -54,8 +55,8 @@ extension TKUIDepartureCellContent {
 // MARK: -
 extension StopVisits {
   
-  fileprivate func buildTimeText() -> NSAttributedString {
-    var text = realTimeInformation(false) + " · "
+  fileprivate func buildTimeText(spacer: String = "·") -> NSAttributedString {
+    var text = realTimeInformation(false) + " \(spacer) "
     
     // Frequency based service
     switch timing {
@@ -65,7 +66,7 @@ extension StopVisits {
       
       if let start = start, let end = end {
         let timeZone = stop.region?.timeZone ?? .current
-        text += " ⋅ "
+        text += " \(spacer) "
         text += TKStyleManager.timeString(start, for: timeZone)
         text += " - "
         text += TKStyleManager.timeString(end, for: timeZone)

@@ -72,5 +72,6 @@ extension TKUIServiceTitleView {
     }
     
     serviceTimeLabel.attributedText = model.timeText
+    serviceTimeLabel.accessibilityLabel = model.accessibilityTimeText ?? model.timeText.string
   }
 }

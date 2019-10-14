@@ -22,6 +22,7 @@ public struct TKUIDepartureCellContent {
   public var serviceIsCancelled: Bool
 
   public var accessibilityLabel: String?
+  public var accessibilityTimeText: String?
   public var timeText: NSAttributedString
   public var lineText: String?
 
