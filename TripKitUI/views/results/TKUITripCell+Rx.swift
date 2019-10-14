@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 extension Reactive where Base: TKUITripCell {
-  public var model: Binder<TKUITripCell.Model> {
+  var model: Binder<TKUITripCell.Model> {
     return Binder(self.base) { cell, model in
       cell.configure(model)
     }

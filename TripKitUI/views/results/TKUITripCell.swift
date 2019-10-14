@@ -61,31 +61,20 @@ public class TKUITripCell: UITableViewCell {
 
   // MARK: - Model
   
-  public struct Model {
-    public let departure: Date
-    public let arrival: Date
-    public let departureTimeZone: TimeZone
-    public let arrivalTimeZone: TimeZone
-    public let focusOnDuration: Bool
-    public let isArriveBefore: Bool
-    public let showFaded: Bool
-    public let segments: [TKTripSegmentDisplayable]
-    public let action: String?
-    
-    public init(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool = false, isArriveBefore: Bool = false, showFaded: Bool = false, segments: [TKTripSegmentDisplayable], action: String? = nil) {
-      self.departure = departure
-      self.arrival = arrival
-      self.departureTimeZone = departureTimeZone
-      self.arrivalTimeZone = arrivalTimeZone
-      self.focusOnDuration = focusOnDuration
-      self.isArriveBefore = isArriveBefore
-      self.showFaded = showFaded
-      self.segments = segments
-      self.action = action
-    }
+  struct Model {
+    let departure: Date
+    let arrival: Date
+    let departureTimeZone: TimeZone
+    let arrivalTimeZone: TimeZone
+    let focusOnDuration: Bool
+    let isArriveBefore: Bool
+    let showFaded: Bool
+    let segments: [TKTripSegmentDisplayable]
+    var action: String?
+    var accessibilityLabel: String?
   }
   
-  public func configure(_ model: Model) {
+  func configure(_ model: Model) {
     guard let formatter = self.formatter else { return }
     
     titleLabel.attributedText = formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
@@ -109,6 +98,8 @@ public class TKUITripCell: UITableViewCell {
       mainSegmentActionButtonTopSpacing.constant = 0
       mainSegmentActionButtonHeight.constant = 0
     }
+    
+    accessibilityLabel = model.accessibilityLabel
   }
     
 }

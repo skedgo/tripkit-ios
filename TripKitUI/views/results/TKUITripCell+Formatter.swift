@@ -85,6 +85,16 @@ extension TKUITripCell {
       append(costs[.carbon], to: attributed, color: costColor)
       return attributed
     }
+    
+    public func costAccessibilityLabel(costs: [NSNumber: String]) -> String {
+      return [
+          costs[.price],
+          costs[.calories],
+          costs[.carbon]?.replacingOccurrences(of: "CO₂", with: "C-O-2") // Don't say "Co subscript 2"
+        ]
+        .compactMap { $0 }
+        .joined(separator: "; ")
+    }
 
     private func append(_ string: String?, to attributed: NSMutableAttributedString, isPrimary: Bool) {
       append(string, to: attributed, font: isPrimary ? primaryFont : secondaryFont, color: isPrimary ? primaryColor : secondaryColor)
