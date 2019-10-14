@@ -19,7 +19,7 @@ public extension MKMultiPoint {
   func closestPoint(to: MKMapPoint) -> (point: MKMapPoint, distance: CLLocationDistance) {
     
     var closestPoint = MKMapPoint()
-    var distanceTo = CLLocationDistance.infinity
+    var distanceTo: CLLocationDistance = .infinity
     
     let points = self.points()
     for i in 0 ..< pointCount - 1 {

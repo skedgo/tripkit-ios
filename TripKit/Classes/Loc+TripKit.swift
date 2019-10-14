@@ -227,6 +227,11 @@ extension Loc {
     return String(format: format, NSNumber(value: count))
   }
   
+  @objc
+  public static var RoutingBetweenTheseLocationsIsNotYetSupported: String {
+    return NSLocalizedString("Routing between these locations is not yet supported.", tableName: "TripKit", bundle: .tripKit, comment: "")
+  }
+  
 }
 
 // MARK: - Helpers

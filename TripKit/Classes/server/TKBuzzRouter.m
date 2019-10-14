@@ -339,7 +339,10 @@
 			return;
 		}
 		
-		if (error) {
+    // Mark as active early, to make sure we pass on errors
+    strongSelf.isActive = YES;
+
+    if (error) {
 			// could not get regions
 			[strongSelf handleError:error
                       failure:failure];
@@ -350,16 +353,14 @@
     TripRequest *request = strongSelf.currentRequest;
     TKRegion *region = [request startRegion];
     if (! region) {
-      error = [NSError errorWithCode:kTKServerErrorTypeUser
-                             message:@"Unsupported region."];
+      error = [NSError errorWithCode:1001 // matches server
+                             message:Loc.RoutingBetweenTheseLocationsIsNotYetSupported];
       [strongSelf handleError:error
                       failure:failure];
       return;
     }
     
     // we are good to send requests. create them, then tell the caller.
-    strongSelf.isActive = YES;
-    
     NSDate *ASAPTime = nil;
     if (request.type == TKTimeTypeLeaveASAP) {
       ASAPTime = [NSDate date];
@@ -367,7 +368,6 @@
       request.timeType = @(TKTimeTypeLeaveAfter);
     }
     
-
     NSDictionary *paras = [strongSelf createRequestParametersForRequest:request
                                                      andModeIdentifiers:strongSelf.modeIdentifiers
                                                                bestOnly:bestOnly

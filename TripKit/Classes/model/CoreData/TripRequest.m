@@ -90,7 +90,8 @@
   [regions unionSet:[manager localRegionsContainingCoordinate:self.fromLocation.coordinate]];
   [regions unionSet:[manager localRegionsContainingCoordinate:self.toLocation.coordinate]];
   
-  if (regions.count >= 2) {
+  // Add international, if we either have no region or more than 1
+  if (regions.count != 1) {
     [regions addObject:TKRegion.international];
   }
   return regions;
