@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [Version 4.0-rc1] - 2019-10-15
+
 ### Added
 
 TripKitUI has received a significant update with view controllers for trip planning, public transport timetables and location search. See `docs/view-controller.md` for details.
