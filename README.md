@@ -28,7 +28,7 @@ Add desired pods:
 Add this to your `Cartfile`:
 
 ```
-git "git@gitlab.com:SkedGo/iOS/tripkit-ios.git" "master"
+git "https://gitlab.com/SkedGo/iOS/tripkit-ios.git" "master"
 ```
 
 Then run `carthage update` and add the desired framework to your project as described in [the Carthage docs](https://github.com/Carthage/Carthage).
