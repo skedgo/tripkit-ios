@@ -21,29 +21,29 @@
 - (void)updateTrip:(Trip *)trip
            success:(void (^)(Trip *trip, BOOL tripUpdated))success
            failure:(void (^)(NSError *error))failure {
-    if (trip == nil) {
-        ZAssert(false, @"Don't call this without a trip");
-        return;
-    }
-    
-    if (trip.request == nil) {
-        DLog(@"Not updating trip as it doesn't have a request (anymore): %@", trip);
-        return;
-    }
-    
-    [self.helperRouter updateTrip:trip
-               completionWithFlag:
-     ^(Trip * updatedTrip, BOOL wasUpdated) {
-         if (updatedTrip == trip) {
-             success(trip, wasUpdated);
-         } else {
-             failure(nil);
-         }
-    }];
+  if (trip == nil) {
+    ZAssert(false, @"Don't call this without a trip");
+    return;
+  }
+  
+  if (trip.request == nil) {
+    DLog(@"Not updating trip as it doesn't have a request (anymore): %@", trip);
+    return;
+  }
+
+  [self.helperRouter updateTrip:trip
+             completionWithFlag:
+   ^(Trip * updatedTrip, BOOL wasUpdated) {
+     if (updatedTrip == trip) {
+       success(trip, wasUpdated);
+     } else {
+       failure(nil);
+     }
+  }];
 }
 
 + (void)updateDLSEntries:(NSSet<DLSEntry *> *)entries
-                inRegion:(SVKRegion *)region
+                inRegion:(TKRegion *)region
                  success:(void (^)(NSSet<DLSEntry *> *entries))success
                  failure:(void (^)(NSError *error))failure
 {
@@ -92,7 +92,7 @@
 }
 
 + (void)updateEmbarkations:(NSSet<StopVisits *> *)embarkations
-                  inRegion:(SVKRegion *)region
+                  inRegion:(TKRegion *)region
                    success:(void (^)(NSSet<StopVisits *> *embarkations))success
                    failure:(void (^)(NSError *error))failure
 {
@@ -140,7 +140,7 @@
 }
 
 + (void)updateServices:(NSSet<Service *> *)services
-              inRegion:(SVKRegion *)region
+              inRegion:(TKRegion *)region
                success:(void (^)(NSSet<Service *> *services))success
                failure:(void (^)(NSError *error))failure
 {
@@ -184,7 +184,7 @@
 }
 
 + (void)fetchUpdatesForServiceParas:(NSArray *)serviceParas
-                          forRegion:(SVKRegion *)region
+                          forRegion:(TKRegion *)region
                             success:(void (^)(id __nullable responseObject))success
                             failure:(void (^)(NSError * __nullable error))failure
 {
@@ -194,7 +194,7 @@
   }
 	if (! region.name) {
 		ZAssert(false, @"Bad region with no name: %@", region);
-		failure([NSError errorWithCode:kSVKErrorTypeInternal message:@"Region has no name."]);
+		failure([NSError errorWithCode:kTKErrorTypeInternal message:@"Region has no name."]);
 		return;
 	}
   if (serviceParas.count == 0) {
@@ -212,7 +212,7 @@
 	};
 	
 	// now send it off to the server
-	SVKServer *server = [SVKServer sharedInstance];
+	TKServer *server = [TKServer sharedInstance];
   [server hitSkedGoWithMethod:@"POST"
                          path:@"latest.json"
                    parameters:paras
@@ -239,7 +239,7 @@
 	
 	NSArray *servicesArray = responseObject[@"services"];
 	if (servicesArray.count == 0) {
-		DLog(@"Received no results.");
+    [TKLog verbose:@"TKBuzzRealTime" text:@"Received no results."];
 		return;
 	}
 	
@@ -283,14 +283,14 @@
 			if (! startTime)
 				continue;
 			if (startTime.integerValue <= 0) {
-        		[SGKLog info:@"TKBuzzRealTime" format:@"Ignoring bad start time '%@' in response object:\n%@", startTime, responseObject];
+        		[TKLog info:@"TKBuzzRealTime" format:@"Ignoring bad start time '%@' in response object:\n%@", startTime, responseObject];
 				continue;
 			}
 			NSDate *departure = [NSDate dateWithTimeIntervalSince1970:startTime.integerValue];
 			
       if (visit) {
-        // we use 'time' to allow KVO
-        visit.time = departure;
+        visit.departure = departure;
+        [visit triggerRealTimeKVO];
         service.realTime = YES;
 
       } else if (dls) {
@@ -341,14 +341,16 @@
 				if (newDeparture) {
           if (aVisit.departure) delay = [newDeparture timeIntervalSinceDate:aVisit.departure];
 					// use time for KVO
-					aVisit.time = newDeparture;
+					aVisit.departure = newDeparture;
+          [aVisit triggerRealTimeKVO];
 				}
 				if (! newArrival && aVisit.arrival && fabs(delay) < 1) {
 					aVisit.arrival = [aVisit.arrival dateByAddingTimeInterval:delay];
 				}
 				if (! newDeparture && aVisit.departure && fabs(delay) < 1) {
 					// use time for KVO
-					aVisit.time = [aVisit.departure dateByAddingTimeInterval:delay];
+					aVisit.departure = [aVisit.departure dateByAddingTimeInterval:delay];
+          [aVisit triggerRealTimeKVO];
 				}
 			}
 		}

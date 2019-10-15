@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TKQuickBookingPrice {
+public struct TKQuickBookingPrice: Hashable {
   /// Price in local currency, typically not in smallest unit, but dollars
   public let localCost: Float
   
@@ -16,23 +16,26 @@ public struct TKQuickBookingPrice {
   public let USDCost: Float
 }
 
-public struct TKQuickBooking : Codable {
+public struct TKQuickBooking: Codable, Hashable {
   /// Localised identifying this booking option
   public let title: String
 
   /// Localised description
   public let subtitle: String?
   
-  /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`.
+  /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`, unless `bookingURLIsDeepLink` returns `true`.
   public let bookingURL: URL
 
-  // Localised string for doing booking
+  /// Localised string for doing booking
   public let bookingTitle: String
   
-  // URL for secondary booking flow for booking this option. This will typically let you customise the booking or pick from more options, compared to the primary `bookingURL`.
+  /// Whether `bookingURL` is a deep-link into an external system
+  public let bookingURLIsDeepLink: Bool
+  
+  /// URL for secondary booking flow for booking this option. This will typically let you customise the booking or pick from more options, compared to the primary `bookingURL`.
   public let secondaryBookingURL: URL?
 
-  // Localised string for secondary booking action
+  /// Localised string for secondary booking action
   public let secondaryBookingTitle: String?
 
   /// URL to fetch updated trip that's using this booking options. Only present if there would be a change to the trip.
@@ -67,6 +70,7 @@ public struct TKQuickBooking : Codable {
     case imageURL
     case bookingTitle
     case bookingURL
+    case bookingURLIsDeepLink
     case secondaryBookingTitle
     case secondaryBookingURL
     case tripUpdateURL
@@ -84,27 +88,33 @@ public enum TKQuickBookingHelper {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
-  public static func fetchQuickBookings(forSegment segment: TKSegment, completion: @escaping ([TKQuickBooking]) -> Void) {
+  public static func fetchQuickBookings(for segment: TKSegment, completion: @escaping ([TKQuickBooking]?, Error?) -> Void) {
     if let stored = segment.storedQuickBookings {
-      completion(stored)
+      completion(stored, nil)
       return
     }
     
     guard let bookingsURL = segment.bookingQuickInternalURL() else {
-      completion([])
+      completion([], nil)
       return
     }
     
-    SVKServer.get(bookingsURL, paras: nil) { _, _, response, _, error in
+    TKServer.get(bookingsURL, paras: nil) { _, _, response, _, error in
       guard let array = response as? [[String: Any]], !array.isEmpty else {
-        completion([])
-        SGKLog.warn("TKQuickBookingHelper", text: "Response isn't array.\nResponse: \(String(describing: response))\nError: \(String(describing: error))")
+        let error = error ?? NSError(code: 67123, message: "Expected an array, but got: \(String(describing: response))")
+        TKLog.warn("TKQuickBookingHelper", text: "Invalid server response: \(error)")
+        completion(nil, error)
         return
       }
       
       segment.storeQuickBookings(fromArray: array)
-      let bookings = try? JSONDecoder().decode([TKQuickBooking].self, withJSONObject: array)
-      completion(bookings ?? [])
+      do {
+        let bookings = try JSONDecoder().decode([TKQuickBooking].self, withJSONObject: array)
+        completion(bookings, nil)
+      } catch {
+        TKLog.warn("TKQuickBookingHelper", text: "Could not parse quick bookings due to \(error)")
+        completion(nil, error)
+      }
     }
   }
 

@@ -6,10 +6,10 @@
 //
 //
 
-#import "SGKCrossPlatform.h"
+#import "TKCrossPlatform.h"
 
 @interface NSString (Sizing)
 
-- (CGSize)sizeWithFont:(SGKFont *)font maximumWidth:(CGFloat)maxWidth;
+- (CGSize)sizeWithFont:(TKFont *)font maximumWidth:(CGFloat)maxWidth;
 
 @end

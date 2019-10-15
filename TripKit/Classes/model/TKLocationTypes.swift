@@ -8,20 +8,12 @@
 
 import Foundation
 
-import RxSwift
-
-public class TKBikePodLocation: STKModeCoordinate {
-  
-  fileprivate let rx_bikePodVar: Variable<API.BikePodInfo>
+public class TKBikePodLocation: TKModeCoordinate {
   
   /// Detailed bike-pod related information.
   ///
-  /// - Note: Can change if real-time data is available. Recommended to use
-  ///         `rx.bikePod` instead.
-  public var bikePod: API.BikePodInfo {
-    get { return rx_bikePodVar.value }
-    set { rx_bikePodVar.value = newValue }
-  }
+  /// - Note: Can change if real-time data is available. So use KVO or Rx.
+  public var bikePod: API.BikePodInfo
   
   private enum CodingKeys: String, CodingKey {
     case bikePod
@@ -29,10 +21,9 @@ public class TKBikePodLocation: STKModeCoordinate {
   
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    let info = try values.decode(API.BikePodInfo.self, forKey: .bikePod)
-    rx_bikePodVar = Variable(info)
+    bikePod = try values.decode(API.BikePodInfo.self, forKey: .bikePod)
     try super.init(from: decoder)
-    locationID = info.identifier
+    locationID = bikePod.identifier
   }
   
   public override func encode(to encoder: Encoder) throws {
@@ -43,7 +34,7 @@ public class TKBikePodLocation: STKModeCoordinate {
   
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(API.BikePodInfo.self, forKey: "bikePod") else { return nil }
-    rx_bikePodVar = Variable(info)
+    bikePod = info
     super.init(coder: aDecoder)
     locationID = info.identifier
   }
@@ -55,24 +46,18 @@ public class TKBikePodLocation: STKModeCoordinate {
 
 }
 
-extension Reactive where Base : TKBikePodLocation {
-  public var bikePod: Observable<API.BikePodInfo> {
-    return base.rx_bikePodVar.asObservable()
-  }
-}
 
 
-public class TKCarPodLocation: STKModeCoordinate {
-  
-  fileprivate let rx_carPodVar: Variable<API.CarPodInfo>
+public class TKCarPodLocation: TKModeCoordinate {
   
   /// Detailed car-pod related information.
   ///
-  /// - Note: Can change if real-time data is available. Recommended to use
-  ///         `rx.carPod` instead.
-  public var carPod: API.CarPodInfo {
-    get { return rx_carPodVar.value }
-    set { rx_carPodVar.value = newValue }
+  /// - Note: Can change if real-time data is available. So use KVO or Rx.
+  public var carPod: API.CarPodInfo
+  
+  public var supportsVehicleAvailability: Bool {
+    guard let mode = carPod.availabilityMode else { return false }
+    return mode != .none
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -81,10 +66,9 @@ public class TKCarPodLocation: STKModeCoordinate {
   
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    let info = try values.decode(API.CarPodInfo.self, forKey: .carPod)
-    rx_carPodVar = Variable(info)
+    carPod = try values.decode(API.CarPodInfo.self, forKey: .carPod)
     try super.init(from: decoder)
-    locationID = info.identifier
+    locationID = carPod.identifier
   }
   
   public override func encode(to encoder: Encoder) throws {
@@ -95,7 +79,7 @@ public class TKCarPodLocation: STKModeCoordinate {
 
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(API.CarPodInfo.self, forKey: "carPod") else { return nil }
-    rx_carPodVar = Variable(info)
+    carPod = info
     super.init(coder: aDecoder)
     locationID = info.identifier
   }
@@ -107,25 +91,12 @@ public class TKCarPodLocation: STKModeCoordinate {
   
 }
 
-extension Reactive where Base : TKCarPodLocation {
-  public var carPod: Observable<API.CarPodInfo> {
-    return base.rx_carPodVar.asObservable()
-  }
-}
-
-
-public class TKCarParkLocation: STKModeCoordinate {
-  
-  fileprivate let rx_carParkVar: Variable<API.CarParkInfo>
+public class TKCarParkLocation: TKModeCoordinate {
   
   /// Detailed car-park related information.
   ///
-  /// - Note: Can change if real-time data is available. Recommended to use
-  ///         `rx.carPark` instead.
-  public var carPark: API.CarParkInfo {
-    get { return rx_carParkVar.value }
-    set { rx_carParkVar.value = newValue }
-  }
+  /// - Note: Can change if real-time data is available. So use KVO or Rx.
+  public var carPark: API.CarParkInfo
   
   private enum CodingKeys: String, CodingKey {
     case carPark
@@ -133,10 +104,9 @@ public class TKCarParkLocation: STKModeCoordinate {
   
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    let info = try values.decode(API.CarParkInfo.self, forKey: .carPark)
-    rx_carParkVar = Variable(info)
+    carPark = try values.decode(API.CarParkInfo.self, forKey: .carPark)
     try super.init(from: decoder)
-    locationID = info.identifier
+    locationID = carPark.identifier
   }
   
   public override func encode(to encoder: Encoder) throws {
@@ -147,7 +117,7 @@ public class TKCarParkLocation: STKModeCoordinate {
   
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(API.CarParkInfo.self, forKey: "carPark") else { return nil }
-    rx_carParkVar = Variable(info)
+    carPark = info
     super.init(coder: aDecoder)
     locationID = info.identifier
   }
@@ -159,14 +129,7 @@ public class TKCarParkLocation: STKModeCoordinate {
 
 }
 
-extension Reactive where Base : TKCarParkLocation {
-  public var carPark: Observable<API.CarParkInfo> {
-    return base.rx_carParkVar.asObservable()
-  }
-}
-
-
-public class TKCarRentalLocation: STKModeCoordinate {
+public class TKCarRentalLocation: TKModeCoordinate {
   
   public let carRental: API.CarRentalInfo
   
@@ -178,27 +141,103 @@ public class TKCarRentalLocation: STKModeCoordinate {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     carRental = try values.decode(API.CarRentalInfo.self, forKey: .carRental)
     try super.init(from: decoder)
+    locationID = carRental.identifier
   }
   
   public override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(carRental, forKey: .carRental)
-    locationID = carRental.identifier
   }
   
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(API.CarRentalInfo.self, forKey: "carRental") else { return nil }
     carRental = info
     super.init(coder: aDecoder)
+    locationID = carRental.identifier
   }
   
   public override func encode(with aCoder: NSCoder) {
     super.encode(with: aCoder)
     try? aCoder.encode(encodable: carRental, forKey: "carRental")
-    locationID = carRental.identifier
   }
 
+}
+
+public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
+  
+  /// Detailed car-pod related information.
+  ///
+  /// - Note: Can change if real-time data is available. So use KVO or Rx.
+  public var vehicle: API.FreeFloatingVehicleInfo
+  
+  private enum CodingKeys: String, CodingKey {
+    case vehicle
+  }
+  
+  public required init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    vehicle = try values.decode(API.FreeFloatingVehicleInfo.self, forKey: .vehicle)
+    try super.init(from: decoder)
+    locationID = vehicle.identifier
+  }
+  
+  public override func encode(to encoder: Encoder) throws {
+    try super.encode(to: encoder)
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(vehicle, forKey: .vehicle)
+  }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    guard let info = try? aDecoder.decode(API.FreeFloatingVehicleInfo.self, forKey: "vehicle") else { return nil }
+    vehicle = info
+    super.init(coder: aDecoder)
+    locationID = info.identifier
+  }
+  
+  public override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    try? aCoder.encode(encodable: vehicle, forKey: "vehicle")
+  }
+  
+}
+
+public class TKOnStreetParkingLocation: TKModeCoordinate {
+  
+  /// Detailed on-street parking related information.
+  ///
+  /// - Note: Can change if real-time data is available. So use KVO or Rx.
+  public var parking: API.OnStreetParkingInfo
+  
+  private enum CodingKeys: String, CodingKey {
+    case parking = "onStreetParkingDetails"
+  }
+  
+  public required init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    parking = try values.decode(API.OnStreetParkingInfo.self, forKey: .parking)
+    try super.init(from: decoder)
+    locationID = parking.identifier
+  }
+  
+  public override func encode(to encoder: Encoder) throws {
+    try super.encode(to: encoder)
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(parking, forKey: .parking)
+  }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    guard let info = try? aDecoder.decode(API.OnStreetParkingInfo.self, forKey: CodingKeys.parking.rawValue) else { return nil }
+    parking = info
+    super.init(coder: aDecoder)
+    locationID = info.identifier
+  }
+  
+  public override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    try? aCoder.encode(encodable: parking, forKey: CodingKeys.parking.rawValue)
+  }
+  
 }
 
 extension NSCoder {
@@ -218,4 +257,55 @@ extension NSCoder {
     encode(data, forKey: key)
   }
 
+}
+
+// MAKR: - DeepLink
+
+public protocol TKDeepLinkable {
+  var deepLink: URL? { get }
+  var downloadLink: URL? { get }
+}
+
+extension TKDeepLinkable {
+  public var deepLink: URL? { return nil }
+  public var downloadLink: URL? { return nil }
+}
+
+extension TKBikePodLocation: TKDeepLinkable {
+  public var deepLink: URL? {
+    return bikePod.deepLink
+  }
+  public var downloadLink: URL? {
+    return bikePod.operatorInfo.appInfo?.downloadURL
+  }
+}
+
+extension TKCarPodLocation: TKDeepLinkable {
+  public var deepLink: URL? {
+    return carPod.deepLink
+  }
+  public var downloadLink: URL? {
+    return carPod.operatorInfo.appInfo?.downloadURL
+  }
+}
+
+extension TKCarParkLocation: TKDeepLinkable {
+  public var deepLink: URL? {
+    return carPark.deepLink
+  }
+  public var downloadLink: URL? {
+    return carPark.operatorInfo?.appInfo?.downloadURL
+  }
+}
+
+extension TKCarRentalLocation: TKDeepLinkable {
+  public var downloadLink: URL? {
+    return carRental.company.appInfo?.downloadURL
+  }
+}
+
+extension TKFreeFloatingVehicleLocation: TKDeepLinkable {
+  public var downloadLink: URL? {
+    return vehicle.operatorInfo.appInfo?.downloadURL
+  }
 }

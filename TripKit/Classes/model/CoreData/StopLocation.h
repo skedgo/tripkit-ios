@@ -10,17 +10,17 @@
 @import CoreData;
 
 
-@class Cell, Shape, StopVisits, Alert, SGKNamedCoordinate, ModeInfo;
+@class Cell, Shape, StopVisits, Alert, TKNamedCoordinate, TKModeInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface StopLocation : NSManagedObject
 
-@property (nonatomic, retain, nullable) SGKNamedCoordinate *location;
+@property (nonatomic, retain, nullable) TKNamedCoordinate *location;
 @property (nonatomic, retain, nullable) NSString * name;
 @property (nonatomic, retain, nullable) NSString * shortName;
 @property (nonatomic, copy) NSString * stopCode;
-@property (nonatomic, strong, null_resettable) ModeInfo * stopModeInfo;
+@property (nonatomic, strong, null_resettable) TKModeInfo * stopModeInfo;
 @property (nonatomic, retain, nullable) NSNumber * sortScore;
 @property (nonatomic, retain, nullable) NSString * filter;
 @property (nonatomic, retain, nullable) NSString * regionName;
@@ -46,13 +46,13 @@ NS_ASSUME_NONNULL_BEGIN
                           intoTripKitContext:(NSManagedObjectContext *)tripKitContext;
 
 + (instancetype)fetchOrInsertStopForStopCode:(NSString *)stopCode
-                                    modeInfo:(nullable ModeInfo *)modeInfo
-                                  atLocation:(nullable SGKNamedCoordinate *)location
+                                    modeInfo:(nullable TKModeInfo *)modeInfo
+                                  atLocation:(nullable TKNamedCoordinate *)location
                           intoTripKitContext:(NSManagedObjectContext *)tripKitContext;
 
 + (instancetype)insertStopForStopCode:(NSString *)stopCode
-                             modeInfo:(nullable ModeInfo *)modeInfo
-                           atLocation:(nullable SGKNamedCoordinate *)location
+                             modeInfo:(nullable TKModeInfo *)modeInfo
+                           atLocation:(nullable TKNamedCoordinate *)location
                    intoTripKitContext:(NSManagedObjectContext *)tripKitContext;
 
 + (nullable NSString *)platformForStopCode:(NSString *)stopCode

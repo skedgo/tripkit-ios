@@ -10,12 +10,11 @@
 @import CoreData;
 
 #import "TKSegment.h"
-#import "TKRealTimeUpdatable.h"
 
 
-@class Alert, SVKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
+@class Alert, TKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 
-@interface Trip : NSManagedObject <TKRealTimeUpdatable> {
+@interface Trip : NSManagedObject {
 }
 
 #pragma mark - CoreData elements
@@ -25,13 +24,15 @@
 @property (nonatomic, strong, nonnull) NSNumber * minutes; // cache for sorting
 @property (nonatomic, strong, nonnull) NSNumber * mainSegmentHashCode;
 
+@property (nonatomic, retain, nullable) id data; // NSData (or NSDictionary)
 @property (nonatomic, strong, nonnull) NSNumber * flags;
 @property (nonatomic, strong, nullable) NSString * saveURLString;
 @property (nonatomic, strong, nullable) NSString * shareURLString;
-@property (nonatomic, strong, nullable) NSString * updateURLString;
-@property (nonatomic, strong, nullable) NSString * plannedURLString;
-@property (nonatomic, strong, nullable) NSString * progressURLString;
 @property (nonatomic, strong, nullable) NSString * temporaryURLString;
+@property (nonatomic, strong, nullable) NSString * updateURLString;
+@property (nonatomic, strong, nullable) NSString * progressURLString;
+@property (nonatomic, strong, nullable) NSString * plannedURLString;
+@property (nonatomic, strong, nullable) NSString * logURLString;
 @property (nonatomic, retain, nonnull) NSNumber * totalCarbon;
 @property (nonatomic, retain, nonnull) NSNumber * totalHassle;
 @property (nonatomic, retain, nullable) NSNumber * totalPrice;
@@ -40,6 +41,7 @@
 @property (nonatomic, retain, nullable) NSNumber * totalWalking;
 @property (nonatomic, retain, nonnull) NSNumber * totalCalories;
 @property (nonatomic, retain, nonnull) NSNumber * totalScore;
+@property (nonatomic, retain, nullable) NSNumber * budgetPoints;
 @property (nonatomic, assign) BOOL toDelete;
 
 @property (nonatomic, retain, nonnull) NSSet *segmentReferences;
@@ -62,6 +64,8 @@
 @property (nonatomic, strong, nullable) NSURL *shareURL;
 
 @property (nonatomic, strong, nullable, readonly) NSURL *saveURL;
+
+@property (nonatomic, copy, nullable) NSString *bundleId;
 
 /**
  Checks if trip is in a usable state for CoreData. Bit of an ugly check to use
@@ -95,7 +99,7 @@
  */
 - (nonnull NSSet *)usedModeIdentifiers;
 
-- (BOOL)allowImpossibleSegments;
+@property (readonly) BOOL allowImpossibleSegments;
 
 /* Offset in minutes from the specified departure/arrival time.
  * E.g., if you asked for arrive-by, it'll use the arrival time.
@@ -124,7 +128,7 @@
 
 /* Returns all associated segment in their correct order.
  */
-- (nonnull NSArray<TKSegment *> *)segments;
+@property (nonnull, readonly) NSArray<TKSegment *> *segments;
 
 /* The first major segment of the trip, according to segment properties (use mainSegment() instead)
  */
@@ -136,11 +140,11 @@
 
 /* The first public transport segment of the trip
  */
-- (nullable TKSegment *)firstPublicTransport;
+@property (readonly, nullable) TKSegment *firstPublicTransport;
 
 /* All public transport segments of the trip
  */
-- (nonnull NSArray<TKSegment *> *)allPublicTransport;
+@property (nonnull, readonly) NSArray<TKSegment *> *allPublicTransport;
 
 #pragma mark - Visualising trips on the map
 
@@ -150,11 +154,11 @@
 
 #pragma mark - Real-time stuff
 
-- (BOOL)isImpossible;
+@property (readonly) BOOL isImpossible;
 
-- (BOOL)timesAreRealTime;
+@property (readonly) BOOL timesAreRealTime;
 
-- (nullable Alert *)primaryAlert;
+@property (nullable, readonly) Alert *primaryAlert;
 
 @end
 

@@ -17,8 +17,8 @@ extension Alert: TKAlert {
     }
   }
   
-  public var icon: SGKImage? {
-    return STKInfoIcon.image(for: infoIconType, usage: .normal)
+  public var icon: TKImage? {
+    return TKInfoIcon.image(for: infoIconType, usage: .normal)
   }
   
   public var iconURL: URL? {
@@ -27,5 +27,12 @@ extension Alert: TKAlert {
   
   public var lastUpdated: Date? {
     return nil
+  }
+  
+  public func isCritical() -> Bool {
+    switch alertSeverity {
+    case .alert: return true
+    default: return false
+    }
   }
 }

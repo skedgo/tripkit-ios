@@ -8,7 +8,7 @@
 
 #import "TKSettings.h"
 
-#import "SGKBetaHelper.h"
+#import "TKBetaHelper.h"
 
 #import <TripKit/TripKit-Swift.h>
 
@@ -23,12 +23,7 @@
   [paras setValue:@(11) forKey:@"v"];
   
   // distance units
-  NSString *unit;
-  if (@available(iOS 10.0, *)) {
-    unit = [NSLocale currentLocale].usesMetricSystem ? @"metric" : @"imperial";
-  } else {
-    unit = @"auto";
-  }
+  NSString *unit = [NSLocale currentLocale].usesMetricSystem ? @"metric" : @"imperial";
   [paras setValue:unit forKey:@"unit"];
   
   // profile settings
@@ -62,7 +57,7 @@
   }
 
   // beta features
-  if ([sharedDefaults boolForKey:SVKDefaultsKeyProfileEnableFlights]) {
+  if ([sharedDefaults boolForKey:TKDefaultsKeyProfileEnableFlights]) {
     [paras setValue:@(YES) forKey:@"ef"];
   }
   [paras setValue:@(YES) forKey:@"ir"];
@@ -75,7 +70,7 @@
     [paras setValue:@(YES) forKey:@"bsb"]; // Default to Sandbox
   }
 #else
-  if ([SGKBetaHelper isBeta]
+  if ([TKBetaHelper isBeta]
       && [sharedDefaults boolForKey:TKDefaultsKeyProfileBookingsUseSandbox]) {
     [paras setValue:@(YES) forKey:@"bsb"];
   }

@@ -10,7 +10,7 @@
 
 @implementation NSString (Sizing)
 
-- (CGSize)sizeWithFont:(SGKFont *)font maximumWidth:(CGFloat)maxWidth
+- (CGSize)sizeWithFont:(TKFont *)font maximumWidth:(CGFloat)maxWidth
 {
   NSDictionary *atts = @{NSFontAttributeName: font};
   NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];

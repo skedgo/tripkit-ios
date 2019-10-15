@@ -14,7 +14,7 @@ public enum TKPathFriendliness {
   case dismount
   case unknown
   
-  public var color: SGKColor {
+  public var color: TKColor {
     switch self {
     case .friendly:   return #colorLiteral(red: 0.2862745098, green: 0.862745098, blue: 0.3882352941, alpha: 1)
     case .unfriendly: return #colorLiteral(red: 1, green: 0.9058823529, blue: 0.2862745098, alpha: 1)

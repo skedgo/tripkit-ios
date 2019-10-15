@@ -53,7 +53,7 @@
   NSMutableArray *enabledModes = [NSMutableArray arrayWithArray:applicableModes];
   [enabledModes removeObjectsInArray:[[TKUserProfileHelper hiddenModeIdentifiers] allObjects]];
   
-  NSSet *groupedIdentifiers   = [SVKTransportModes groupedModeIdentifiers:enabledModes includeGroupForAll:YES];
+  NSSet *groupedIdentifiers   = [TKTransportModes groupedModeIdentifiers:enabledModes includeGroupForAll:YES];
   NSUInteger requestCount = [groupedIdentifiers count];
   self.finishedWorkers = 0;
   
@@ -174,7 +174,7 @@
   [self hitURLForTripDownload:url completion:
    ^(NSURL *shareURL, id JSON, NSError *error) {
      if (JSON) {
-       [TKJSONCache save:identifier dictionary:JSON directory:directory];
+       [TKJSONCache save:identifier dictionary:JSON directory:directory subdirectory:nil];
        withJSON(JSON, shareURL);
        
      } else {
@@ -184,7 +184,7 @@
        } else {
          
          // failure
-         [SGKLog warn:NSStringFromClass([self class]) format:@"Failed to download trip, and no copy in cache. Error: %@", error];
+         [TKLog info:NSStringFromClass([self class]) format:@"Failed to download trip, and no copy in cache. Error: %@", error];
          if (completion) {
            completion(nil);
          }
@@ -193,43 +193,53 @@
     }];
 }
 
-- (void)updateTrip:(Trip *)trip completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion
+- (void)updateTrip:(Trip *)trip completionWithFlag:(void(^)(Trip *trip, BOOL tripUpdated))completion
 {
-    NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
-    [self hitURLForTripDownload:updateURL completion:^(NSURL *shareURL, id JSON, NSError *error) {
+  NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
+  if (updateURL == nil) {
+    [TKLog info:@"TKBuzzRouter" format:@"Tried to update a trip that doesn't have a (valid) update URL: %@", trip];
+    completion(trip, NO);
+    return;
+  }
+  
+  [self hitURLForTripDownload:updateURL completion:^(NSURL *shareURL, id JSON, NSError *error) {
 #pragma unused(shareURL)
-        if (JSON) {
-          [self parseJSON:JSON updatingTrip:trip completion:^(Trip *updatedTrip) {
-            [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
-              __block NSString *result = nil;
-              [updatedTrip.managedObjectContext performBlockAndWait:^{
-                result = [NSString stringWithFormat:@"Updated trip (%ld): %@", (long)updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
-              }];
-              return result;
-            }];
-            if (completion) {
-                completion(updatedTrip, YES);
-            }
+    if (JSON) {
+      [self parseJSON:JSON updatingTrip:trip completion:^(Trip * _Nullable updatedTrip) {
+        [TKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+          __block NSString *result = nil;
+          [updatedTrip.managedObjectContext performBlockAndWait:^{
+            result = [NSString stringWithFormat:@"Updated trip (%ld): %@", (long)updatedTrip.tripGroup.visibility, [updatedTrip debugString]];
           }];
-        } else if (! error) {
-            // No new data (but also no error
-          [SGKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
-            __block NSString *result = nil;
-            [trip.managedObjectContext performBlockAndWait:^{
-              result = [NSString stringWithFormat:@"No update for trip (%ld): %@", (long)trip.tripGroup.visibility, [trip debugString]];
-            }];
-            return result;
-          }];
-          if (completion) {
-              completion(trip, NO);
+          return result;
+        }];
+        if (completion) {
+          if (updatedTrip != nil) {
+            completion(updatedTrip, YES);
+          } else {
+            completion(trip, NO);
           }
         }
-    }];
+      }];
+    } else if (! error) {
+        // No new data (but also no error
+      [TKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
+        __block NSString *result = nil;
+        [trip.managedObjectContext performBlockAndWait:^{
+          result = [NSString stringWithFormat:@"No update for trip (%ld): %@", (long)trip.tripGroup.visibility, [trip debugString]];
+        }];
+        return result;
+      }];
+      if (completion) {
+        completion(trip, NO);
+      }
+    }
+  }];
 }
 
-- (void)updateTrip:(Trip *)trip completion:(void(^)(Trip * __nullable trip))completion
+- (void)updateTrip:(Trip *)trip completion:(void(^)(Trip *trip))completion
 {
-    [self updateTrip:trip completionWithFlag:^(Trip * __nullable updatedTrip, BOOL tripGotUpdated) {
+    [self updateTrip:trip completionWithFlag:^(Trip *updatedTrip, BOOL tripGotUpdated) {
 #pragma unused(tripGotUpdated)
         completion(updatedTrip);
     }];
@@ -302,7 +312,7 @@
 	if (! CLLocationCoordinate2DIsValid([self.currentRequest.fromLocation coordinate])) {
 		ZAssert(false, @"Tried routing with bad from location: %@", self.currentRequest.fromLocation);
 		
-		NSError *error = [NSError errorWithCode:kSVKServerErrorTypeUser
+		NSError *error = [NSError errorWithCode:kTKServerErrorTypeUser
 																		message:@"Start location could not be determined. Please try again or select manually."];
 		
 		[self handleError:error
@@ -313,7 +323,7 @@
 	if (! CLLocationCoordinate2DIsValid([self.currentRequest.toLocation coordinate])) {
 		ZAssert(false, @"Tried routing with bad to location: %@", self.currentRequest.toLocation);
 		
-		NSError *error = [NSError errorWithCode:kSVKServerErrorTypeUser
+		NSError *error = [NSError errorWithCode:kTKServerErrorTypeUser
 																		message:@"End location could not be determined. Please try again or select manually."];
 		
 		[self handleError:error
@@ -322,14 +332,17 @@
 	}
 
 	__weak typeof(self) weakSelf = self;
-  SVKServer *server = [SVKServer sharedInstance];
+  TKServer *server = [TKServer sharedInstance];
 	[server requireRegions:^(NSError *error) {
     typeof(weakSelf) strongSelf = weakSelf;
 		if (! strongSelf) {
 			return;
 		}
 		
-		if (error) {
+    // Mark as active early, to make sure we pass on errors
+    strongSelf.isActive = YES;
+
+    if (error) {
 			// could not get regions
 			[strongSelf handleError:error
                       failure:failure];
@@ -338,26 +351,23 @@
     
     // we are guaranteed to have regions
     TripRequest *request = strongSelf.currentRequest;
-    SVKRegion *region = [request startRegion];
+    TKRegion *region = [request startRegion];
     if (! region) {
-      error = [NSError errorWithCode:kSVKServerErrorTypeUser
-                             message:@"Unsupported region."];
+      error = [NSError errorWithCode:1001 // matches server
+                             message:Loc.RoutingBetweenTheseLocationsIsNotYetSupported];
       [strongSelf handleError:error
                       failure:failure];
       return;
     }
     
     // we are good to send requests. create them, then tell the caller.
-    strongSelf.isActive = YES;
-    
     NSDate *ASAPTime = nil;
-    if (request.type == SGTimeTypeLeaveASAP) {
+    if (request.type == TKTimeTypeLeaveASAP) {
       ASAPTime = [NSDate date];
       request.departureTime = ASAPTime;
-      request.timeType = @(SGTimeTypeLeaveAfter);
+      request.timeType = @(TKTimeTypeLeaveAfter);
     }
     
-
     NSDictionary *paras = [strongSelf createRequestParametersForRequest:request
                                                      andModeIdentifiers:strongSelf.modeIdentifiers
                                                                bestOnly:bestOnly
@@ -398,12 +408,12 @@
 {
   TKBuzzRouter *router = [[TKBuzzRouter alloc] init];
   NSDictionary *paras = [router createRequestParametersForRequest:tripRequest andModeIdentifiers:modeIdentifiers bestOnly:NO withASAPTime:nil];
-  NSURL *baseUrl = [[SVKServer sharedInstance] currentBaseURL];
+  NSURL *baseUrl = [[TKServer sharedInstance] currentBaseURL];
   if (!baseUrl) {
     return nil;
   }
   NSURL *fullUrl = [baseUrl URLByAppendingPathComponent:@"routing.json"];
-  NSURLRequest *request = [SVKServer GETRequestWithSkedGoHTTPHeadersForURL:fullUrl paras:paras];
+  NSURLRequest *request = [TKServer GETRequestWithSkedGoHTTPHeadersForURL:fullUrl paras:paras];
   return [[request URL] absoluteString];
 }
 
@@ -436,12 +446,12 @@
     } else if (pair.count == 2) {
       [paras setValue:pair[1] forKey:pair[0]];
     } else {
-      [SGKLog warn:NSStringFromClass([self class]) format:@"Unknown option: %@", option];
+      [TKLog info:NSStringFromClass([self class]) format:@"Unknown option: %@", option];
     }
   }
   
   // Hit it
-  [SVKServer GET:baseURL paras:paras completion:
+  [TKServer GET:baseURL paras:paras completion:
    ^(NSInteger status, NSDictionary<NSString *,id> *headers, id  _Nullable responseObject, NSData *data, NSError * _Nullable error) {
 #pragma unused(status, headers, data)
      completion(baseURL, responseObject, error);
@@ -496,7 +506,9 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
     return;
 	}
 
-  [SGKLog warn:NSStringFromClass([self class]) format:@"Request failed with error %@ (%@)", error, [error description]];
+  [TKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull {
+    return [NSString stringWithFormat:@"Request failed with error: %@", [error description]];
+  }];
   self.isActive = NO;
   
   dispatch_async(dispatch_get_main_queue(), ^{
@@ -526,6 +538,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
    ^(Trip *updatedTrip) {
      if (updatedTrip) {
        ZAssert(updatedTrip.managedObjectContext == tripKitContext, @"Context mismatch.");
+       ZAssert(updatedTrip == trip, @"Trip object shouldn't have changed");
        NSError *publicError = nil;
        BOOL publicSuccess = [tripKitContext save:&publicError];
        ZAssert(publicSuccess, @"Error saving: %@", publicError);
@@ -587,25 +600,25 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
 	[paras setValue:sortedModes forKey:@"modes"];
 	
   // locations
-  NSString *fromString = [SVKParserHelper requestStringForAnnotation:request.fromLocation];
-  NSString *toString = [SVKParserHelper requestStringForAnnotation:request.toLocation];
+  NSString *fromString = [TKParserHelper requestStringForAnnotation:request.fromLocation];
+  NSString *toString = [TKParserHelper requestStringForAnnotation:request.toLocation];
 	[paras setValue:fromString forKey:@"from"];
 	[paras setValue:toString forKey:@"to"];
 
   // times
 	NSDate *departure, *arrival = nil;
-  switch ((SGTimeType) request.timeType.integerValue) {
-    case SGTimeTypeArriveBefore:
-    case SGTimeTypeLeaveAfter:
+  switch ((TKTimeType) request.timeType.integerValue) {
+    case TKTimeTypeArriveBefore:
+    case TKTimeTypeLeaveAfter:
       departure = request.departureTime;
       arrival   = request.arrivalTime;
       break;
 
-    case SGTimeTypeNone:
+    case TKTimeTypeNone:
       // do nothing and let the server do time-independent routing
       break;
 
-    case SGTimeTypeLeaveASAP:
+    case TKTimeTypeLeaveASAP:
       departure = ASAPTime;
       break;
   }
@@ -622,6 +635,7 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   
   if (bestOnly) {
     paras[@"bestOnly"] = @(YES);
+    paras[@"includeStops"] = @(YES);
   }
   
   if (request.excludedStops.count > 0) {
@@ -642,9 +656,8 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   ZAssert(tripKitContext != nil, @"Managed object context required!");
   
   // analyse result
-  NSError *serverError = [SVKError errorFromJSON:json statusCode:200];
+  NSError *serverError = [TKError errorFromJSON:json statusCode:200];
   if (serverError) {
-    [SGKLog warn:NSStringFromClass([self class]) format:@"Encountered server error: %@", serverError];
 		[self handleError:serverError
 							failure:failure];
     return;

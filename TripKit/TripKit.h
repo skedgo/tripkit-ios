@@ -27,26 +27,22 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #endif
 
 // Kits
-#import "SGRootKit.h"
-#import "SVKServerKit.h"
-#import "STKTransportKit.h"
+#import "TKRootKit.h"
+#import "TKServerKit.h"
+#import "TKTransportKit.h"
 
 // Helpers
 #if TARGET_OS_IPHONE
-#import "SGActions.h"
-#import "SGAlert.h"
-#import "SGImageCacher.h"
+#import "TKActions.h"
+#import "TKAlertController.h"
 #endif
 
-#import "SGCustomEvent.h"
-#import "SGCustomEventRecurrenceRule.h"
+#import "TKCustomEvent.h"
+#import "TKCustomEventRecurrenceRule.h"
 
 // Headers
 #import "TKTripKit.h"
 #import "TKConstants.h"
-
-// Protocol headers
-#import "TKRealTimeUpdatable.h"
 
 // Core Data model classes
 #import "TripRequest.h"
@@ -76,30 +72,23 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 // Routing
 #import "TKSettings.h"
-#import "TKParserHelper.h"
+#import "TKCoreDataParserHelper.h"
 #import "TKRoutingParser.h"
 #import "TKRouter.h"
 #import "TKBuzzRouter.h"
 #import "TKFakeRouter.h"
 #import "TKBuzzRealTime.h"
 #import "TKBuzzInfoProvider.h"
-#import "TKWaypointRouter.h"
-#import "TKRealTimeUpdatableHelper.h"
-
-// Track
-#import "SGTrackHelper.h"
 
 // Search
-#import "SGAutocompletionDataProvider.h"
-#import "SGAutocompletionDataSource.h"
-#import "SGAutocompletionResult.h"
-#import "SGBaseGeocoder.h"
-#import "SGBuzzGeocoder.h"
-#import "SGFoursquareGeocoder.h"
-#import "SGRegionAutocompleter.h"
-#import "SGSearchDataSource.h"
+#import "TKAutocompletionResult.h"
+#import "TKSkedGoGeocoder.h"
+#import "TKFoursquareGeocoder.h"
+#import "TKRegionAutocompleter.h"
 
 // Permissions
-#import "SGAddressBookManager.h"
-#import "SGCalendarManager.h"
-#import "SGLocationManager.h"
+#import "TKCalendarManager.h"
+#import "TKLocationManager.h"
+
+// Deprecated
+#import "SGDeprecatedAutocompletionDataProvider.h"

@@ -12,8 +12,6 @@
 
 #import "TripKit/TripKit-Swift.h"
 
-#import "TKRealTimeUpdatableHelper.h"
-
 enum {
   SGServiceFlagRealTime               = 1 << 0,
   SGServiceFlagRealTimeCapable        = 1 << 1,
@@ -116,16 +114,6 @@ typedef NSUInteger SGServiceFlag;
   [self setFlag:SGServiceFlagWheelchairAccessible to:wheelchairAccessible];
 }
 
-- (BOOL)hasServiceData
-{
-  return self.shape && self.visits.count > 1;
-}
-
-- (BOOL)isFrequencyBased
-{
-  return self.frequency.integerValue > 0;
-}
-
 - (void)setLineName:(NSString *)lineName
 {
   if (! lineName) {
@@ -223,7 +211,7 @@ typedef NSUInteger SGServiceFlag;
                    disembarkingAt:(StopVisits *)disembarkation
 {
 	NSArray *waypoints = [self.shape routePath];
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"time"
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index"
 																																 ascending:YES];
 	NSArray *visits = [self.visits sortedArrayUsingDescriptors:@[sortDescriptor]];
 	
@@ -248,14 +236,14 @@ typedef NSUInteger SGServiceFlag;
 		TKColoredRoute *u = [[TKColoredRoute alloc] initWithWaypoints:waypoints
                                                              from:0
                                                                to:startSplit + 1 // include it
-                                                        withColor:SGKColor.routeDashColorNonTravelled
+                                                        withColor:TKColor.routeDashColorNonTravelled
                                                       dashPattern:dashPattern
                                                       isTravelled:NO];
 		[shapes addObject:u];
 
 		TKColoredRoute *t = [[TKColoredRoute alloc] initWithWaypoints:waypoints
                                                              from:startSplit
-                                                               to:endSplit + 1 // include it, too
+                                                               to:endSplit > 0 ? endSplit + 1 : -1 // include it, too
                                                         withColor:self.color
                                                       dashPattern:dashPattern
                                                       isTravelled:YES];
@@ -265,7 +253,7 @@ typedef NSUInteger SGServiceFlag;
       t = [[TKColoredRoute alloc] initWithWaypoints:waypoints
                                                from:endSplit
                                                  to:-1
-                                          withColor:SGKColor.routeDashColorNonTravelled
+                                          withColor:TKColor.routeDashColorNonTravelled
                                         dashPattern:dashPattern
                                         isTravelled:NO];
       [shapes addObject:t];
@@ -277,33 +265,6 @@ typedef NSUInteger SGServiceFlag;
 	return shapes;
 }
 
-#pragma mark - TKRealTimeUpdatable
-
-- (BOOL)wantsRealTimeUpdates
-{
-	if (! self.isRealTimeCapable)
-		return NO;
-
-	NSArray *sortedVisits = self.sortedVisits;
-	if (sortedVisits.count < 1) {
-		return YES; // just ask anyway
-	} else {
-		StopVisits *first = [self.sortedVisits objectAtIndex:0];
-		StopVisits *last  = [self.sortedVisits lastObject];
-    return [TKRealTimeUpdatableHelper wantsRealTimeUpdatesForStart:first.time andEnd:last.time forPreplanning:NO];
-		
-	}
-}
-
-- (id)objectForRealTimeUpdates
-{
-  return self;
-}
-
-- (SVKRegion *)regionForRealTimeUpdates
-{
-  return [self region];
-}
 
 #pragma mark - Private methods
 
@@ -385,12 +346,14 @@ typedef NSUInteger SGServiceFlag;
     for (StopVisits *visit in self.visits) {
       if ([visit isKindOfClass:[DLSEntry class]])
         continue;
+      
       // avoid duplicate indexes which can happen if we fetched service data
       // multiple times. which shouldn't happen, but even if it does this method
       // should enforce
       NSNumber *index = visit.index;
       if ([indices containsObject:index])
         continue;
+      
       [visits addObject:visit];
       [indices addObject:index];
     }

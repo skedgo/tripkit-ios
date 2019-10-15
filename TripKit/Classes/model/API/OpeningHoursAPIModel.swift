@@ -18,7 +18,7 @@ extension API {
     case notValidTimeZoneIdentifier(String)
   }
   
-  public struct OpeningHours : Codable, Equatable {
+  public struct OpeningHours: Codable, Hashable {
     
     /// Time zone in which the opening hours are defined
     public let timeZone: TimeZone
@@ -54,7 +54,7 @@ extension API {
     
     /// Opening hours on a particular day of the week (with
     /// a special case for public holidays).
-    public struct Day: Codable, Equatable {
+    public struct Day: Codable, Hashable {
       
       public let day: DayOfWeek
       public let times: [Time]
@@ -64,7 +64,7 @@ extension API {
         case times
       }
       
-      public struct Time: Codable, Equatable {
+      public struct Time: Codable, Hashable {
         
         public let opens: TimeInterval
         public let closes: TimeInterval
@@ -82,23 +82,27 @@ extension API {
         
         private static func time(from values: KeyedDecodingContainer<CodingKeys>, key: CodingKeys) throws -> TimeInterval {
           // TimeInterval (previously parsed)
-          if let interval = try? values.decode(TimeInterval.self, forKey: key) {
+          if let interval: TimeInterval = try? values.decode(TimeInterval.self, forKey: key) {
             return interval
           }
 
           // HH:MM string (from backend)
           let string: String = try values.decode(String.self, forKey: key)
-          let split = string.components(separatedBy: ":")
-          guard
-            let first = split.first,
-            let hours = Int(first),
-            let last  = split.last,
-            let mins  = Int(last)
-            else {
-              throw TKOpeningHoursParserError.badTimeOfDay(string)
+          let byColon: [String] = string.components(separatedBy: ":")
+          guard let leftOfColon: String = byColon.first, let hours: Int = Int(leftOfColon), let rightOfColon: String = byColon.last else {
+            throw TKOpeningHoursParserError.badTimeOfDay(string)
+          }
+          if let mins: Int = Int(rightOfColon) {
+            return TimeInterval(hours * 3600 + mins * 60)
           }
 
-          return TimeInterval(hours * 3600 + mins * 60)
+          // HH:MM+Xd string (from backend)
+          let byPlus: [String] = rightOfColon.components(separatedBy: "+")
+          if let leftOfPlus: String = byPlus.first, let mins: Int = Int(leftOfPlus), let rightOfPlus: Character = byPlus.last?.first, let days: Int = Int(String(rightOfPlus)) {
+            return TimeInterval(days * 86400 + hours * 3600 + mins * 60)
+          }
+          
+          throw TKOpeningHoursParserError.badTimeOfDay(string)
         }
         
         
@@ -108,7 +112,7 @@ extension API {
       }
       
       
-      public enum DayOfWeek: String, Codable, Equatable {
+      public enum DayOfWeek: String, Codable {
         case monday         = "MONDAY"
         case tuesday        = "TUESDAY"
         case wednesday      = "WEDNESDAY"
@@ -124,7 +128,7 @@ extension API {
         
         public var localizedString: String {
           if let weekday = weekday {
-            return SGCustomEventRecurrenceRule.longString(forWeekday: weekday)
+            return TKCustomEventRecurrenceRule.longString(forWeekday: weekday)
           } else {
             return Loc.PublicHoliday
           }

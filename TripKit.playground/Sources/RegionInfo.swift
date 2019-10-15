@@ -87,5 +87,5 @@ public func <(x: Region, y: Region) -> Bool {
 }
 
 extension Region: Hashable {
-  public var hashValue: Int { return "\(country).\(state).\(name)".hashValue }
+  public var hashValue: Int { return "\(country).\(String(describing: state)).\(name)".hashValue }
 }

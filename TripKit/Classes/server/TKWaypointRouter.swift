@@ -10,9 +10,39 @@ import Foundation
 
 import RxSwift
 
-extension TKWaypointRouter {
+fileprivate extension Result {
+  func callHandler(_ handler: (Success?, Failure?) -> Void) {
+    switch self {
+    case .success(let success): handler(success, nil)
+    case .failure(let error): handler(nil, error)
+    }
+  }
+}
+
+public class TKWaypointRouter: NSObject {
+  
+  public enum WaypointError: Error {
+    case cannotMoveToFrequencyBasedVisit
+    case timetabledVisitIsMissingTimes
+
+    case couldNotFindRegionForTrip
+    case builderIsMissingRequiredInput(String)
+
+    case tripGotDisassociatedFromCoreData
+    case fetchedResultsButGotNoTrip
+    case serverFailedWithUnknownError
+  }
+  
+
   // MARK: - Trip patterns + next trips
   
+  @objc(fetchNextTripAfter:usingPrivateVehicles:completion:)
+  public func _fetchNextTrip(after trip: Trip, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
+    fetchNextTrip(after: trip, usingPrivateVehicles: vehicles) { (result: Result<Trip, Error>) in
+      result.callHandler(completion)
+    }
+  }
+
   /// Calculates a trip based on the provided trip. Departure time is the provided
   /// time or now, whichever is later.
   ///
@@ -20,12 +50,11 @@ extension TKWaypointRouter {
   ///   - trip: The trip for which to get the next departure
   ///   - vehicles: Optional vehicles that should be for private vehicles segments
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  @objc public func fetchNextTrip(after trip: Trip, using vehicles: [STKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
+  public func fetchNextTrip(after trip: Trip, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
     
-    SVKServer.shared.requireRegions { error in
+    TKServer.shared.requireRegions { error in
       guard let region = trip.request.startRegion() else {
-        
-        completion(nil, error)
+        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
         return
       }
       
@@ -35,6 +64,13 @@ extension TKWaypointRouter {
     }
   }
   
+  
+  @objc(fetchTripWithPattern:departure:usingPrivateVehicles:intoTripKit:inRegion:completion:)
+  public func _fetchTrip(pattern: [TKSegmentPattern], departure: Date, usingPrivateVehicles vehicles: [TKVehicular] = [], into tripKit: TKTripKit, in region: TKRegion, completion: @escaping (Trip?, Error?) -> Void) {
+    fetchTrip(pattern: pattern, departure: departure, usingPrivateVehicles: vehicles, into: tripKit, in: region) { (result: Result<Trip, Error>) in
+      result.callHandler(completion)
+    }
+  }
   
   /// Calculates a trip from the provided pattern. Departure time is the provided
   /// time or now, whichever is later.
@@ -46,15 +82,14 @@ extension TKWaypointRouter {
   ///   - tripKit: TripKit instance into which the new trip will be inserted
   ///   - region: The region where the trip starts
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  @objc public func fetchTrip(pattern: [TKSegmentPattern], departure: Date, using vehicles: [STKVehicular] = [], into tripKit: TKTripKit, in region: SVKRegion, completion: @escaping (Trip?, Error?) -> Void) {
+  public func fetchTrip(pattern: [TKSegmentPattern], departure: Date, usingPrivateVehicles vehicles: [TKVehicular] = [], into tripKit: TKTripKit = TripKit.shared, in region: TKRegion, completion: @escaping (Result<Trip, Error>) -> Void) {
     
     let paras = TKWaypointRouter.nextTripParas(pattern: pattern, departure: departure, using: vehicles)
-    
-    self.fetchTrip(waypointParas: paras, region: region, into: tripKit.tripKitContext, completion: completion)
+    fetchTrip(waypointParas: paras, region: region, into: tripKit.tripKitContext, completion: completion)
   }
   
   
-  private static func nextTripParas(pattern: [TKSegmentPattern], departure: Date, using vehicles: [STKVehicular]) -> [String: Any] {
+  private static func nextTripParas(pattern: [TKSegmentPattern], departure: Date, using vehicles: [TKVehicular]) -> [String: Any] {
     
     let now = Date()
     let leaveAt = departure > now ? departure : now
@@ -70,6 +105,14 @@ extension TKWaypointRouter {
   
   // MARK: - Tuning public transport trips
   
+  @objc(fetchTripMovingSegment:toVisit:atStart:usingPrivateVehicles:completion:)
+  public func _fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
+    fetchTrip(moving: segment, to: visit, atStart: atStart, usingPrivateVehicles: vehicles) { (result: Result<Trip, Error>) in
+      result.callHandler(completion)
+    }
+  }
+
+  
   /// Calculates a trip from the provided trip (implied by the segment), which moves
   /// where to get on or off the provided `segment` to the provided `visit`.
   ///
@@ -79,21 +122,61 @@ extension TKWaypointRouter {
   ///   - atStart: `true` if getting on should change, `false` if getting off should change
   ///   - vehicles: The private vehicles to use for private vehicle segments
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  @objc public func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [STKVehicular], completion: @escaping (Trip?, Error?) -> Void) {
+  public func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
     
-    SVKServer.shared.requireRegions { error in
-      let request = segment.trip.request
-      guard let region = request.startRegion(), error == nil else {
-        completion(nil, error)
+    TKServer.shared.requireRegions { error in
+      if let error = error {
+        completion(.failure(error))
+        return
+      }
+      guard let region = segment.trip.request.startRegion() else {
+        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
         return
       }
       
-      let builder = WaypointParasBuilder(privateVehicles: vehicles)
-      let paras = builder.build(moving: segment, to: visit, atStart: atStart)
+      do {
+        let builder = WaypointParasBuilder(privateVehicles: vehicles)
+        let paras = try builder.build(moving: segment, to: visit, atStart: atStart)
+        
+        // Will have new pattern, so we'll add it to the request rather than
+        // to the original trip group.
+        self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.request, completion: completion)
       
-      // Will have new pattern, so we'll add it to the request rather than
-      // to the original trip group.
-      self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.request, completion: completion)
+      } catch {
+        completion(.failure(error))
+      }
+    }
+  }
+  
+  @objc(fetchTripReplacingSegment:withDLSEntry:usingPrivateVehicles:completion:)
+  public func _fetchTrip(replacing segment: TKSegment, with entry: DLSEntry, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
+    self.fetchTrip(replacing: segment, with: entry, usingPrivateVehicles: vehicles) { (result: Result<Trip, Error>) in
+      result.callHandler(completion)
+    }
+  }
+  
+  public func fetchTrip(replacing segment: TKSegment, with entry: DLSEntry, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
+    
+    TKServer.shared.requireRegions { error in
+      if let error = error {
+        completion(.failure(error))
+        return
+      }
+      guard let region = segment.trip.request.startRegion() else {
+        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
+        return
+      }
+      
+      do {
+        let builder = WaypointParasBuilder(privateVehicles: vehicles)
+        let paras = try builder.build(replacing: segment, with: entry, fallbackRegion: region)
+        
+        // Will have the same pattern, so we'll add it to original trip group
+        self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup, completion: completion)
+        
+      } catch {
+        completion(.failure(error))
+      }
     }
     
   }
@@ -105,9 +188,9 @@ extension TKWaypointRouter {
   /// - note: Only use this method if the calculated trip will fit that
   ///     trip group as this will not be checked separately. It will fit
   ///     if it's using the same modes and same/similar stops.
-  private func fetchTrip(waypointParas: [String: Any], region: SVKRegion, into tripGroup: TripGroup, completion: @escaping (Trip?, Error?) -> Void) {
+  private func fetchTrip(waypointParas: [String: Any], region: TKRegion, into tripGroup: TripGroup, completion: @escaping (Result<Trip, Error>) -> Void) {
     guard let context = tripGroup.managedObjectContext else {
-      completion(nil, nil)
+      completion(.failure(TKWaypointRouter.WaypointError.tripGotDisassociatedFromCoreData))
       return
     }
     
@@ -117,12 +200,16 @@ extension TKWaypointRouter {
       into: context,
       parserHandler: { json, parser in
         parser.parseAndAddResult(json, into: tripGroup, merging: false) { trips in
-          completion(trips.first, nil)
+          if let trip = trips.first {
+            completion(.success(trip))
+          } else {
+            completion(.failure(TKWaypointRouter.WaypointError.fetchedResultsButGotNoTrip))
+          }
         }
 
       },
       errorHandler: { error in
-        completion(nil, error)
+        completion(.failure(error))
       }
     )
   }
@@ -132,9 +219,9 @@ extension TKWaypointRouter {
   /// - note: Only use this method if the calculated trip will have
   ///     the same origin, destination and approximate query time
   ///     as the request as this will not be checked separately.
-  private func fetchTrip(waypointParas: [String: Any], region: SVKRegion, into request: TripRequest, completion: @escaping (Trip?, Error?) -> Void) {
+  private func fetchTrip(waypointParas: [String: Any], region: TKRegion, into request: TripRequest, completion: @escaping (Result<Trip, Error>) -> Void) {
     guard let context = request.managedObjectContext else {
-      completion(nil, nil)
+      completion(.failure(TKWaypointRouter.WaypointError.tripGotDisassociatedFromCoreData))
       return
     }
     
@@ -144,18 +231,22 @@ extension TKWaypointRouter {
       into: context,
       parserHandler: { json, parser in
         parser.parseAndAddResult(json, for: request, merging: false) { trips in
-          completion(trips.first, nil)
+          if let trip = trips.first {
+            completion(.success(trip))
+          } else {
+            completion(.failure(TKWaypointRouter.WaypointError.fetchedResultsButGotNoTrip))
+          }
         }
         
       },
       errorHandler: { error in
-        completion(nil, error)
+        completion(.failure(error))
       }
     )
   }
   
   /// For calculating a trip and adding it as a stand-alone trip / request to TripKit
-  private func fetchTrip(waypointParas: [String: Any], region: SVKRegion, into context: NSManagedObjectContext, completion: @escaping (Trip?, Error?) -> Void) {
+  private func fetchTrip(waypointParas: [String: Any], region: TKRegion, into context: NSManagedObjectContext, completion: @escaping (Result<Trip, Error>) -> Void) {
     
     fetchTrip(
       waypointParas: waypointParas,
@@ -163,18 +254,22 @@ extension TKWaypointRouter {
       into: context,
       parserHandler: { (json, parser) in
         parser.parseAndAddResult(json) { request in
-          completion(request?.trips.first, nil)
+          if let trip = request?.trips.first {
+            completion(.success(trip))
+          } else {
+            completion(.failure(TKWaypointRouter.WaypointError.fetchedResultsButGotNoTrip))
+          }
         }
       },
       errorHandler: { error in
-        completion(nil, error)
+        completion(.failure(error))
       }
     )
   }
 
-  private func fetchTrip(waypointParas: [String: Any], region: SVKRegion, into context: NSManagedObjectContext, parserHandler: @escaping ([AnyHashable: Any], TKRoutingParser) -> Void, errorHandler: @escaping (Error?) -> Void) {
+  private func fetchTrip(waypointParas: [String: Any], region: TKRegion, into context: NSManagedObjectContext, parserHandler: @escaping ([AnyHashable: Any], TKRoutingParser) -> Void, errorHandler: @escaping (Error) -> Void) {
     
-    let server = SVKServer.shared
+    let server = TKServer.shared
     server.hitSkedGo(
       withMethod: "POST",
       path: "waypoint.json",
@@ -183,7 +278,7 @@ extension TKWaypointRouter {
       callbackOnMain: false,
       success: { status, response, _ in
         guard let json = response as? [AnyHashable: Any] else {
-          errorHandler(nil)
+          errorHandler(nil ?? TKWaypointRouter.WaypointError.serverFailedWithUnknownError)
           return
         }
         
@@ -194,7 +289,7 @@ extension TKWaypointRouter {
       },
       failure: { (error: Swift.Error?) -> Void in
         context.perform {
-          errorHandler(error)
+          errorHandler(error ?? TKWaypointRouter.WaypointError.serverFailedWithUnknownError)
         }
       }
     )
@@ -204,36 +299,34 @@ extension TKWaypointRouter {
 
 class WaypointParasBuilder {
   
-  private let vehicles: [STKVehicular]
+  private let vehicles: [TKVehicular]
   
-  init(privateVehicles vehicles: [STKVehicular] = []) {
+  init(privateVehicles vehicles: [TKVehicular] = []) {
     self.vehicles = vehicles
   }
   
-  func build(moving segmentToMatch: TKSegment, to visit: StopVisits, atStart: Bool) -> [String: Any] {
+  func build(moving segmentToMatch: TKSegment, to visit: StopVisits, atStart: Bool) throws -> [String: Any] {
     
-    assert(!segmentToMatch.isStationary(), "Can't move stationary segments to a visit")
-    assert(segmentToMatch.isPublicTransport(), "Can only move public transport segments to a visit")
+    assert(!segmentToMatch.isStationary, "Can't move stationary segments to a visit")
+    assert(segmentToMatch.isPublicTransport, "Can only move public transport segments to a visit")
     
     guard let trip = segmentToMatch.trip else { preconditionFailure() }
     
-    var paras: [String: Any]
-    paras = [
+    var paras: [String: Any] = [
       "config": TKSettings.defaultDictionary(),
       "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
     
     // Prune the segments, removing stationary segments...
-    let nonStationary = trip.segments()
-      .filter { !$0.isStationary() }
+    let nonStationary = trip.segments.filter { !$0.isStationary }
     
     // ... and walks after driving/cycling
     let prunedSegments = nonStationary
       .enumerated()
       .filter { index, segment in
-        if index > 0, segment.isWalking() {
+        if index > 0, segment.isWalking {
           let previous = nonStationary[index - 1]
-          return !previous.isDriving() && !previous.isCycling() && !previous.isSharedVehicle()
+          return !previous.isDriving && !previous.isCycling && !previous.isSharedVehicle
         } else {
           return true
         }
@@ -242,17 +335,15 @@ class WaypointParasBuilder {
     
     // Construct the paras on a segment by segment basis
     var foundMatch = false
-    let unglued = prunedSegments.map { segment -> (segment: TKSegment, paras: [String: Any]) in
-      
+    let unglued = try prunedSegments.map { segment -> (segment: TKSegment, paras: [String: Any]) in
       if segmentToMatch == segment {
         foundMatch = true
-        let paras = waypointParas(moving: segment, to: visit, atStart: atStart)
+        let paras = try waypointParas(moving: segment, to: visit, atStart: atStart)
         return (segment, paras)
       } else {
-        let paras = waypointParas(forNonStationary: segment)
+        let paras = try waypointParas(forNonStationary: segment)
         return (segment, paras)
       }
-      
     }
     assert(foundMatch)
     
@@ -263,7 +354,7 @@ class WaypointParasBuilder {
       // end to that location.
       if atStart, index+1 < unglued.count, unglued[index+1].segment == segmentToMatch  {
         var paras = current.paras
-        paras["end"] = SVKParserHelper.requestString(for: visit.coordinate)
+        paras["end"] = TKParserHelper.requestString(for: visit.coordinate)
         return [paras]
       }
       
@@ -271,8 +362,8 @@ class WaypointParasBuilder {
       // walk.
       if atStart, index == 0, current.segment == segmentToMatch {
         let walk: [String : Any] = [
-          "start": SVKParserHelper.requestString(for: trip.request.fromLocation.coordinate),
-          "end": SVKParserHelper.requestString(for: visit.coordinate),
+          "start": TKParserHelper.requestString(for: trip.request.fromLocation.coordinate),
+          "end": TKParserHelper.requestString(for: visit.coordinate),
           "modes": ["wa_wal"] // Ok, to send this even when on wheelchair. TKSettings take care of that.
         ]
         return [walk, current.paras]
@@ -281,13 +372,13 @@ class WaypointParasBuilder {
       
       if !atStart, index > 0, unglued[index-1].segment == segmentToMatch {
         var paras = current.paras
-        paras["start"] = SVKParserHelper.requestString(for: visit.coordinate)
+        paras["start"] = TKParserHelper.requestString(for: visit.coordinate)
         return [paras]
       }
       if !atStart, index == unglued.count - 1, current.segment == segmentToMatch {
         let walk: [String : Any] = [
-          "start": SVKParserHelper.requestString(for: visit.coordinate),
-          "end": SVKParserHelper.requestString(for: trip.request.toLocation.coordinate),
+          "start": TKParserHelper.requestString(for: visit.coordinate),
+          "end": TKParserHelper.requestString(for: trip.request.toLocation.coordinate),
           "modes": ["wa_wal"] // Ok, to send this even when on wheelchair. TKSettings take care of that.
         ]
         return [current.paras, walk]
@@ -300,30 +391,28 @@ class WaypointParasBuilder {
     return paras
   }
   
-  private func waypointParas(forNonStationary segment: TKSegment) -> [String: Any] {
-    assert(!segment.isStationary())
-    if segment.isPublicTransport() {
-      return waypointParas(forPublicTransport: segment)
+  private func waypointParas(forNonStationary segment: TKSegment) throws -> [String: Any] {
+    assert(!segment.isStationary)
+    if segment.isPublicTransport {
+      return try waypointParas(forPublicTransport: segment)
     } else {
-      return waypointParas(forPrivateTransport: segment)
+      return try waypointParas(forMoving: segment)
     }
   }
   
-  private func waypointParas(forPrivateTransport segment: TKSegment) -> [String: Any] {
-    precondition(!segment.isPublicTransport())
-    
+  private func waypointParas(forMoving segment: TKSegment) throws -> [String: Any] {
     guard
       let start = segment.start?.coordinate,
       let end = segment.end?.coordinate,
-      let privateMode = segment.modeIdentifier()
+      let privateMode = segment.modeIdentifier
       else {
-        preconditionFailure()
+        throw TKWaypointRouter.WaypointError.builderIsMissingRequiredInput("Segment is missing start, end, or mode.")
     }
     
     var paras: [String : Any] = [
       "modes": [privateMode],
-      "start": SVKParserHelper.requestString(for: start),
-      "end": SVKParserHelper.requestString(for: end)
+      "start": TKParserHelper.requestString(for: start),
+      "end": TKParserHelper.requestString(for: end)
     ]
     
     if let vehicleUUID = segment.reference?.vehicleUUID {
@@ -333,20 +422,20 @@ class WaypointParasBuilder {
     return paras
   }
   
-  private func waypointParas(forPublicTransport segment: TKSegment) -> [String: Any] {
-    precondition(segment.isPublicTransport())
+  private func waypointParas(forPublicTransport segment: TKSegment) throws -> [String: Any] {
+    precondition(segment.isPublicTransport)
     
     guard
-      let startCode = segment.scheduledStartStopCode(),
-      let endCode = segment.scheduledEndStopCode(),
-      let publicMode = segment.modeIdentifier(),
-      let service = segment.service()
+      let startCode = segment.scheduledStartStopCode,
+      let endCode = segment.scheduledEndStopCode,
+      let publicMode = segment.modeIdentifier,
+      let service = segment.service
       else {
-        preconditionFailure()
+        throw TKWaypointRouter.WaypointError.builderIsMissingRequiredInput("Segment is missing required public transport information.")
     }
     
-    let startRegion = segment.startRegion() ?? SVKInternationalRegion.shared
-    let endRegion   = segment.endRegion()   ?? SVKInternationalRegion.shared
+    let startRegion = segment.startRegion ?? .international
+    let endRegion   = segment.endRegion   ?? .international
     
     return [
       "modes": [publicMode],
@@ -361,24 +450,68 @@ class WaypointParasBuilder {
     ]
   }
   
-  
-  private func waypointParas(moving segment: TKSegment, to visit: StopVisits, atStart: Bool) -> [String: Any] {
-
-    var paras = waypointParas(forPublicTransport: segment)
+  private func waypointParas(moving segment: TKSegment, to visit: StopVisits, atStart: Bool) throws -> [String: Any] {
+    guard case .timetabled(let arrival, let departure) = visit.timing else {
+      throw TKWaypointRouter.WaypointError.cannotMoveToFrequencyBasedVisit
+    }
+    
+    var paras = try waypointParas(forPublicTransport: segment)
     
     if atStart {
-      guard let departure = visit.departure else { preconditionFailure() }
+      guard let departure = departure else { throw TKWaypointRouter.WaypointError.timetabledVisitIsMissingTimes }
       paras["start"] = visit.stop.stopCode
       paras["startTime"] = departure.timeIntervalSince1970
     
     } else {
-      guard let arrival = visit.arrival ?? visit.departure else { preconditionFailure() }
+      guard let arrival = arrival ?? departure else { throw TKWaypointRouter.WaypointError.timetabledVisitIsMissingTimes }
       paras["end"] = visit.stop.stopCode
       paras["endTime"] = arrival.timeIntervalSince1970
     }
     
     return paras
+  }
+  
+  func build(replacing prototype: TKSegment, with entry: DLSEntry, fallbackRegion: TKRegion) throws -> [String: Any] {
+    guard let identifier = prototype.modeIdentifier else {
+      throw TKWaypointRouter.WaypointError.builderIsMissingRequiredInput("segment.modeIdentifier")
+    }
     
+    var paras: [String: Any] = [
+      "config": TKSettings.defaultDictionary(),
+      "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
+    ]
+
+    // continuations are taken care of by the entry's send stop and segment's `finalSegment`
+    let relevantSegments = prototype.trip.segments.filter { !$0.isContinuation && !$0.isStationary }
+    
+    let segmentParas = try relevantSegments.map { segment -> [String: Any] in
+      if segment == prototype {
+        return try waypointParas(for: entry, mode: identifier, fallbackRegion: fallbackRegion)
+      } else {
+        return try waypointParas(forMoving: segment)
+      }
+    }
+
+    paras["segments"] = segmentParas
+    return paras
+  }
+  
+  private func waypointParas(for entry: DLSEntry, mode: String, fallbackRegion: TKRegion) throws -> [String: Any] {
+    guard let departure = entry.departure, let arrival = entry.arrival else {
+      throw TKWaypointRouter.WaypointError.cannotMoveToFrequencyBasedVisit
+    }
+
+    return [
+      "modes": [mode],
+      "start": entry.stop.stopCode,
+      "end": entry.endStop.stopCode,
+      "startTime": departure.timeIntervalSince1970,
+      "endTime": arrival.timeIntervalSince1970,
+      "serviceTripID": entry.service.code,
+      "operator": entry.service.operatorName ?? "",
+      "region": entry.stop.region?.name ?? fallbackRegion.name,
+      "disembarkationRegion": entry.endStop.region?.name ?? fallbackRegion.name
+    ]
   }
   
 }

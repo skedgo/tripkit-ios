@@ -15,7 +15,7 @@ extension Alert {
     static let excludingStopsFromRouting: String = "excludedStopCodes"
   }
   
-  @objc public var infoIconType: STKInfoIconType {
+  @objc public var infoIconType: TKInfoIconType {
     switch alertSeverity {
     case .info, .warning: return .warning
     case .alert: return .alert
@@ -41,36 +41,6 @@ extension Alert: MKAnnotation {
     } else {
       return kCLLocationCoordinate2DInvalid
     }
-  }
-  
-}
-
-// MARK: - STKDisplayablePoint
-
-extension Alert: STKDisplayablePoint {
-
-  public var pointClusterIdentifier: String? {
-    return nil
-  }
-  
-  public var pointDisplaysImage: Bool {
-    return location != nil
-  }
-  
-  public var pointImage: SGKImage? {
-    return STKInfoIcon.image(for: infoIconType, usage: .map)
-  }
-  
-  public var pointImageURL: URL? {
-    return imageURL
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return false
-  }
-
-  public var isDraggable: Bool {
-    return false
   }
   
 }

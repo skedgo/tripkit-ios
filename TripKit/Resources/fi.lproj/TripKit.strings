@@ -1,3 +1,30 @@
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ sitten";
+
+/* Number of alerts, in this case, there are multiple (plural) */
+"%@ alerts" = "%@ hälytykset";
+
+/* Filler for a specific service running at a time, e.g., '396 at 11:56am' */
+"%@ at %@" = "%1$@ kello %2$@";
+
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ Suotuisa pyöräilyyn";
+
+/* Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes' */
+"%@ every %@" = "%1$@ joka %2$@";
+
+/* Text for an 'x more' indication if there's more content. '%@' will be replaced with a number */
+"%@ more" = "%@ lisää";
+
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ pysäkki(ä)";
+
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ ilman ruuhkaa";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ Pyörätuolille suotuisa";
+
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
 "%1$@ early" = "%1$@ etuajassa";
 
@@ -10,33 +37,20 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ myöhässä (%2$@ yhteys)";
 
-/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
-"%@ ago" = "%@ ago";
-
-/* Number of alerts, in this case, there are multiple (plural */
-"%@ alerts" = "%@ hälytykset";
-
-/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
-"%@ cycle friendly" = "%@ Suotuisa pyöräilyyn";
-
-/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
-"%@ stops" = "%@ pysäkki(ä)";
-
-/* For describing a time interval, e.g., '8:30 to 8:43'
-   From %time1 to %time2. (old key: TimeFromToShortFormat) */
-"%@ to %@" = "%@ -> %@";
-
-/* Duration without traffic */
-"%@ w/o traffic" = "%@ ilman ruuhkaa";
-
-/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
-"%@ wheelchair friendly" = "%@ Pyörätuolille suotuisa";
+/* Number of alerts, in this case, there is just one */
+"1 alert" = "1 hälytys";
 
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 pysähdys";
 
 /* No comment provided by engineer. */
 "Alerts" = "Ilmoitukset";
+
+/* Instruction to follow street of the provided name */
+"Along %@" = "Pitkin katua %@";
+
+/* Instruction to follow unnamed street */
+"Along unnamed street" = "Pitkin nimetöntä katua";
 
 /* apple maps directions action */
 "Apple Maps" = "Apple Maps";
@@ -52,25 +66,50 @@
 "Arrive at %@" = "Saapuu klo %@";
 
 /* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
-"Arrive at %@ at %@" = "Saapuminen kohteeseen %@ klo %@";
+"Arrive at %@ at %@" = "Saapuminen kohteeseen %1$@ klo %2$@";
+
+/* Arrive before button */
+"Arrive by" = "Saapu klo";
 
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Saapuu";
 
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "Lähtee klo %@";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary)
+   Filler for a service running at time, e.g., 'At 11:56am' */
 "At %@" = "Kohteessa %@";
 
+/* Text for vehicle of type: Bicycle */
+"Bicycle" = "Pyörä";
+
+/* Action title to make a booking */
+"Book" = "Varaa";
+
 /* Action title to make a booking using service/app named '@%' */
-"Book with %@" = "Book with %@";
+"Book with %@" = "Varaa palvelussa %@";
 
 /* No comment provided by engineer. */
 "Call" = "Soita";
 
 /* Action title to make a call to service/company named '@%' */
-"Call %@" = "Soita firmalle %@";
+"Call %@" = "Soita yritykselle %@";
+
+/* Text for vehicle of type: Car */
+"Car" = "Auto";
+
+/* Trip badge: Cheapest */
+"Cheapest" = "Halvin";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Välipysäkkiä ei löytynyt.";
+
+/* Text for attributing data sources. The list of providers will be used instead of '%@' */
+"Data provided by %@" = "Tiedot tarjoaa %@";
+
+/* Title for screen showing data providers */
+"Data Providers" = "Tietolähteet";
 
 /* Departure time sorter title */
 "Departure" = "Lähtöaika";
@@ -81,11 +120,38 @@
 /* To disconnect/unlink from a service provider, e.g., Uber */
 "Disconnect" = "Katkaise yhteys";
 
+/* Button to dismiss something, e.g., an error or action action sheet */
+"Dismiss" = "Hylkää";
+
+/* Indicating a path requires you to dismount and push your bicycle */
+"Dismount" = "Taluttaminen";
+
+/* Text for vehicle of type: E-Bike */
+"E-Bike" = "Sähköpyörä";
+
+/* Trip badge: Easiest */
+"Easiest" = "Helpoin";
+
 /* As in 'this bus/train is empty' */
 "Empty" = "Tyhjä";
 
+/* Placeholder name for destination (then replaced with address or name) */
+"End location" = "Loppusijainti";
+
+/* Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes' */
+"Every %@" = "Joka %@";
+
+/* Action title to extend an existing booking */
+"Extend" = "Laajenna";
+
+/* Trip badge: Fastest */
+"Fastest" = "Nopein";
+
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Muutamia paikkoja vapaana";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "kesto %@";
 
 /* Indicating a path is wheelchair/cycyling friendly */
 "Friendly" = "Ystävällinen";
@@ -93,29 +159,59 @@
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Kohteesta %@";
 
+/* No comment provided by engineer. */
+"From current location" = "Tämänhetkisestä sijainnista";
+
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Kaikki";
 
 /* Action title get/download app of name '@%' */
-"Get %@" = "Get %@";
+"Get %@" = "Hanki %@";
+
+/* Title for button to get/download an external app. */
+"Get app" = "Hanki sovellus";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Hae reittiohjeet";
 
+/* Instruction to get a service towards provided destination */
+"Get on service to %@" = "Nouse kulkuvälineeseen kohteeseen %@";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch Taksi";
+
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
+/* Trip badge: Greenest */
+"Greenest" = "Vihrein";
+
+/* Trip badge: Healthiest */
+"Healthiest" = "Terveellisin";
+
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
-"I'll arrive at %@ at %@" = "Saapuminen kohteeseen %@ klo %@";
+"I'll arrive at %@ at %@" = "Saapuminen kohteeseen %1$@ klo %2$@";
 
 /* Indication of an activity. (old key: ActivityIndication) */
-"I'll take a %@ at %@ from %@." = "Otan %@ paikasta %@";
+"I'll take a %@ at %@ from %@." = "Otan kulkuvälineen %1$@ klo %2$@ paikasta %3$@.";
+
+/* Indication of an activity. */
+"I'll take a %@ from %@." = "Otan kulkuvälineen %1$@ paikasta %2$@.";
 
 /* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
-"In %@" = "In %@";
+"In %@" = "%@ päästä";
 
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Sillä välin, jatketaan selailua %@ ja nautitaan saatavilla olevista matkoista";
+
+/* inGogo taxi booking action */
+"ingogo a Taxi" = "ingogo Taksi";
+
+/* Title for section with instant results in autocompletion */
+"Instant results" = "Pikahaun tulokset";
+
+/* Text for vehicle of type: Kick Scooter */
+"Kick Scooter" = "Potkulauta";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -125,13 +221,16 @@
 "Leave %@" = "Lähde kohteesta %@";
 
 /* The place of departure with time. (old key: LeaveLocationTime) */
-"Leave %@ at %@" = "Lähde kohteesta %@ klo %@";
+"Leave %@ at %@" = "Lähde kohteesta %1$@ klo %2$@";
+
+/* Leave after button */
+"Leave at" = "Lähtöaika";
 
 /* Time departure. (old key: LeaveTime) */
 "Leave at %@" = "Lähde klo %@";
 
 /* Title for when to depart. Countdown to departure will be displayed below. */
-"Leave in" = "Lähtöaika";
+"Leave in" = "Lähtöön aikaa";
 
 /* No comment provided by engineer. */
 "Leave now" = "Lähde nyt";
@@ -143,7 +242,7 @@
 "Live traffic" = "Live-liikenne";
 
 /* Indicating when something is loading */
-"Loading..." = "Ladataan...";
+"Loading…" = "Ladataan...";
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Paljon istumapaikkoja jäljellä";
@@ -151,8 +250,23 @@
 /* Title of button to get more details about an alert */
 "More info" = "Lisätietoja";
 
+/* 'More results' section in autocompletion */
+"More results" = "Lisää tuloksia";
+
+/* Text for vehicle of type: Moto Scooter */
+"Moto Scooter" = "Moottoriskootteri";
+
+/* Text for vehicle of type: Motorbike */
+"Motorbike" = "Moottoripyörä";
+
 /* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Ei suunniteltuja matkoja";
+
+/* Indicator to show when a service does not have real-time data (even though we usually get it for services like this.) */
+"No real-time available" = "Ei reaaliaikaisia tietoja saatavilla";
+
+/* Error title when routing produced no results (but no specific error was returned from routing). */
+"No routes found." = "Reittejä ei löytynyt.";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
 "Not accepting passengers" = "Ei tilaa lisämatkustajille";
@@ -161,13 +275,31 @@
 "On time" = "Ajoissa";
 
 /* Action title open app of name '@%' */
-"Open %@" = "Open %@";
+"Open %@" = "Avaa %@";
+
+/* Title for button that opens an external app. */
+"Open app" = "Avaa sovellus";
 
 /* Title for opening hours */
 "Opening Hours" = "Avoinna lähtien";
 
+/* Title for button that allows users to plan a new trip */
+"Plan a new trip" = "Suunnittele uusi matka";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Suunniteltuasi reitin löydät sen täältä.";
+
+/* Title of page to plan a trip */
+"Plan Trip" = "Suunnittele matka";
+
+/* Error recovery suggestion for when routing produced no results (but no specific error was returned from routing). */
+"Please adjust your query and try again." = "Ole hyvä, muokkaa hakua ja yritä sitten uudelleen.";
+
+/* No comment provided by engineer. */
+"Powered by" = "Palvelun tarjoaa";
+
+/* No comment provided by engineer. */
+"Powered by %@" = "Palvelun tarjoaa %@";
 
 /* No comment provided by engineer. */
 "Public holiday" = "Yleinen vapaapäivä";
@@ -175,11 +307,20 @@
 /* No comment provided by engineer. */
 "Real-time" = "Reaaliaikainen";
 
+/* Trip badge: Recommended */
+"Recommended" = "Suositeltu";
+
+/* Title for button that allows users to request support */
+"Request support" = "Ota yhteyttä tukeen";
+
+/* Error message if interregional routing isn't yet supported */
+"Routing from %@ to %@ is not yet supported" = "Reititystä välillä %1$@ – %2$@ ei vielä tueta.";
+
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Hae tämän pysäkin tietoja uudelleen tai yritä myöhemmin uudelleen..";
 
 /* Send SMS action button */
-"Send SMS" = "Lähetä SMS";
+"Send SMS" = "Lähetä tekstiviesti";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Asetukset";
@@ -188,16 +329,37 @@
 "Show" = "Näytä";
 
 /* Show website action button */
-"Show website" = "Avaa nettisivusto";
+"Show website" = "Avaa verkkosivusto";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Vain seisomapaikkoja";
 
+/* Title of button to start a trip */
+"Start" = "Lähtö";
+
+/* Placeholder name for origin (then replaced with address or name) */
+"Start location" = "Aloituspaikka";
+
+/* Text for vehicle of type: SUV */
+"SUV" = "SUV";
+
+/* Title of button to access timetable */
+"Timetable" = "Aikataulu";
+
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "Kohteeseen %@";
 
+/* Title for button to access transport modes */
+"Transport" = "Kulkutavat";
+
 /* Title for a trip */
 "Trip" = "Matka";
+
+/* Title for trip of provided index */
+"Trip %@" = "Matka %@";
+
+/* Title of page that shows routing results */
+"Trips" = "Matkat";
 
 /* Indicating a path is wheelchair/cycyling unfriendly */
 "Unfriendly" = "Sopimaton";
@@ -209,23 +371,14 @@
 "Updated %@ ago" = "Päivitetty %@ sitten";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
-"Vehicle %@ updated %@ ago" = "Ajoneuvo %@ päivitetty %@ sitten";
+"Vehicle %@ updated %@ ago" = "Ajoneuvo %1$@ päivitetty %2$@ sitten";
+
+/* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
+"Vehicles" = "Ajoneuvot";
 
 /* No comment provided by engineer. */
-"We are busy getting your upcoming trip. Please wait..." = "Matkan tietojen latauksessa viivettä. Ole hyvä, odota...";
+"We are busy getting your upcoming trip. Please wait..." = "Matkan tietojen latauksessa viivettä. Ole hyvä ja odota...";
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Täältä löydät viimeisimmät matkaasi liittyvät ilmoitukset";
-
-/* Time of the bus departure. (old key: DepartureTime) */
-"at %@" = "Lähtee klo %@";
-
-/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
-"for %@" = "kesto %@";
-
-/* goCatch action */
-"goCatch a Taxi" = "goCatch Taksi";
-
-/* inGogo taxi booking action */
-"ingogo a Taxi" = "ingogo Taksi";
 

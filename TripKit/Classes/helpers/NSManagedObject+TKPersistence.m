@@ -1,5 +1,5 @@
 //
-//  NSManagedObject+SGPersistence.m
+//  NSManagedObject+TKPersistence.m
 //  TripPlanner
 //
 //  Created by Kuan Lun Huang on 20/11/12.

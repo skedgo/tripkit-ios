@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TKUITripActionView" customModule="TripKitUI" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="88" height="87"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zqx-K8-S2Y">
+                    <rect key="frame" x="26" y="0.0" width="36" height="36"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2a8-Uh-i4e">
+                            <rect key="frame" x="6" y="6" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="2a8-Uh-i4e" secondAttribute="height" multiplier="1:1" id="eZ3-sX-Vx4"/>
+                                <constraint firstAttribute="width" constant="24" id="t7T-IL-Mx3"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Zqx-K8-S2Y" secondAttribute="height" multiplier="1:1" id="TlO-L4-Ked"/>
+                        <constraint firstAttribute="width" constant="36" id="eRT-Ch-jWW"/>
+                        <constraint firstItem="2a8-Uh-i4e" firstAttribute="centerX" secondItem="Zqx-K8-S2Y" secondAttribute="centerX" id="twu-fM-b8f"/>
+                        <constraint firstItem="2a8-Uh-i4e" firstAttribute="centerY" secondItem="Zqx-K8-S2Y" secondAttribute="centerY" id="uc8-p9-Ybu"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSV-2L-tRU">
+                    <rect key="frame" x="6" y="40" width="76" height="14.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="BSV-2L-tRU" firstAttribute="top" secondItem="Zqx-K8-S2Y" secondAttribute="bottom" constant="4" id="0jI-li-KPf"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Zqx-K8-S2Y" secondAttribute="trailing" constant="6" id="BKN-Tp-RIn"/>
+                <constraint firstItem="BSV-2L-tRU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="6" id="EyT-6N-8Ze"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BSV-2L-tRU" secondAttribute="bottom" id="Qd5-OO-gXE"/>
+                <constraint firstItem="Zqx-K8-S2Y" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="6" id="X1j-z0-M66"/>
+                <constraint firstAttribute="trailing" secondItem="BSV-2L-tRU" secondAttribute="trailing" constant="6" id="dVZ-1d-qDF"/>
+                <constraint firstItem="BSV-2L-tRU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ewM-KE-vIn"/>
+                <constraint firstItem="Zqx-K8-S2Y" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="o5e-RJ-uZA"/>
+                <constraint firstItem="Zqx-K8-S2Y" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="tBB-Vg-BBL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageView" destination="2a8-Uh-i4e" id="Etw-yp-qTH"/>
+                <outlet property="imageWrapper" destination="Zqx-K8-S2Y" id="A7J-if-vFM"/>
+                <outlet property="titleLabel" destination="BSV-2L-tRU" id="95t-O1-Nxa"/>
+            </connections>
+            <point key="canvasLocation" x="-119" y="-238.5"/>
+        </view>
+    </objects>
+</document>

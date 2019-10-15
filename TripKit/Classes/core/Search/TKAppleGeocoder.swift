@@ -11,9 +11,8 @@ import Foundation
 import RxSwift
 
 @available(iOS, introduced: 9.3, unavailable, renamed: "TKAppleGeocoder")
-typealias SGAppleGeocoder = TKAppleGeocoder
+public typealias SGAppleGeocoder = TKAppleGeocoder
 
-@available(iOS 9.3, *)
 public class TKAppleGeocoder: NSObject {
   
   enum GeocoderError: Error {
@@ -22,16 +21,13 @@ public class TKAppleGeocoder: NSObject {
   }
   
   private let completer: MKLocalSearchCompleter
-  private let completerDelegate: LocalSearchCompleterDelegate
-  private var disposeBag: DisposeBag!
+  private var completerDelegate: LocalSearchCompleterDelegate!
   
   public override init() {
     self.completer = MKLocalSearchCompleter()
-    self.completerDelegate = LocalSearchCompleterDelegate()
     
     super.init()
     
-    completer.delegate = completerDelegate
     completer.filterType = .locationsOnly
   }
   
@@ -39,61 +35,47 @@ public class TKAppleGeocoder: NSObject {
 
 // MARK: Geocoding
 
-@available(iOS 9.3, *)
 extension TKAppleGeocoder: TKGeocoding {
   
-  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[SGKNamedCoordinate]> {
+  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
     
-    let fullString = SGLocationHelper.expandAbbreviation(inAddressString: input)
+    let fullString = TKLocationHelper.expandAbbreviation(inAddressString: input)
     
-    let request = MKLocalSearchRequest()
+    let request = MKLocalSearch.Request()
     request.naturalLanguageQuery = fullString
-    request.region = MKCoordinateRegionForMapRect(mapRect)
+    request.region = MKCoordinateRegion(mapRect)
     return MKLocalSearch(request: request).rx
       .start()
-      .map { $0.map { SGKNamedCoordinate($0, forInput: input, near: request.region) } }
-  }
-  
-}
-
-@available(iOS 9.3, *)
-extension TKAppleGeocoder: SGGeocoder {
-  
-  public func geocodeString(_ inputString: String, nearRegion mapRect: MKMapRect, success: @escaping SGGeocoderSuccessBlock, failure: SGGeocoderFailureBlock? = nil) {
-    disposeBag = DisposeBag()
-    geocode(inputString, near: mapRect)
-      .subscribe(onSuccess: { results in
-        success(inputString, results)
-      }, onError: { error in
-        failure?(inputString, error)
-      })
-      .disposed(by: disposeBag)
+      .map { $0.map { TKNamedCoordinate($0, forInput: input, near: request.region) } }
   }
   
 }
 
 // MARK: - Autocompletion
 
-@available(iOS 9.3, *)
 extension TKAppleGeocoder: TKAutocompleting {
   
-  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Observable<[SGAutocompletionResult]> {
-    completer.region = MKCoordinateRegionForMapRect(mapRect)
+  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
+    completerDelegate = LocalSearchCompleterDelegate()
+    completer.delegate = completerDelegate
+    completer.region = MKCoordinateRegion(mapRect)
     completer.queryFragment = input
     return completerDelegate.results
-      .map { $0.enumerated().map { SGAutocompletionResult($1, forInput: input, index: $0) } }
+      .map { $0.enumerated().map { TKAutocompletionResult($1, forInput: input, index: $0) } }
+      .take(1)
+      .asSingle()
   }
   
-  public func annotation(for result: SGAutocompletionResult) -> Single<MKAnnotation> {
+  public func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
     guard let completion = result.object as? MKLocalSearchCompletion else {
       return Single.error(GeocoderError.unexpectedResult)
     }
-    let request = MKLocalSearchRequest(completion: completion)
+    let request = MKLocalSearch.Request(completion: completion)
     return MKLocalSearch(request: request).rx
       .start()
       .map {
         if let first = $0.first {
-          return SGKNamedCoordinate(first)
+          return TKNamedCoordinate(first)
         } else {
           throw TKAppleGeocoder.GeocoderError.noMatchingMapItemFound
         }
@@ -104,7 +86,6 @@ extension TKAppleGeocoder: TKAutocompleting {
 
 // MARK: - Helpers
 
-@available(iOS 9.3, *)
 fileprivate class LocalSearchCompleterDelegate: NSObject, MKLocalSearchCompleterDelegate {
   
   let results = PublishSubject<[MKLocalSearchCompletion]>()
@@ -114,27 +95,26 @@ fileprivate class LocalSearchCompleterDelegate: NSObject, MKLocalSearchCompleter
   }
   
   func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-    // Ignoring errors
+    results.onNext([])
   }
   
 }
 
-@available(iOS 9.3, *)
-extension SGAutocompletionResult {
+extension TKAutocompletionResult {
   
   convenience init(_ completion: MKLocalSearchCompletion, forInput input: String, index: Int) {
     self.init()
     object = completion
     title = completion.title
     subtitle = completion.subtitle
-    image = SGAutocompletionResult.image(forType: .pin)
+    image = TKAutocompletionResult.image(forType: .pin)
     
-    score = Int(TKGeocodingResultScorer.calculateScore(title: title, subtitle: subtitle, searchTerm: input, minimum: 15, maximum: 65)) - index
+    score = Int(TKGeocodingResultScorer.calculateScore(title: title, subtitle: subtitle, searchTerm: input, minimum: 25, maximum: 65)) - index
   }
   
 }
 
-extension SGKNamedCoordinate {
+extension TKNamedCoordinate {
   
   convenience init(_ mapItem: MKMapItem, forInput input: String? = nil, near region: MKCoordinateRegion? = nil) {
     self.init(placemark: mapItem.placemark)

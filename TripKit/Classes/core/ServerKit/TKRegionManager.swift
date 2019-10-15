@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 public extension NSNotification.Name {
-  public static let TKRegionManagerUpdatedRegions = NSNotification.Name(rawValue: "SVKRegionManagerRegionsUpdatedNotification")
+  static let TKRegionManagerUpdatedRegions = NSNotification.Name(rawValue: "TKRegionManagerRegionsUpdatedNotification")
 }
 
 public class TKRegionManager: NSObject {
@@ -42,7 +42,7 @@ public class TKRegionManager: NSObject {
     return response != nil
   }
   
-  @objc public var regions: [SVKRegion] {
+  @objc public var regions: [TKRegion] {
     return response?.regions ?? []
   }
   
@@ -61,32 +61,32 @@ public class TKRegionManager: NSObject {
 
 struct RegionsResponse: Codable {
   let modes: [String: ModeDetails]?
-  let regions: [SVKRegion]?
+  let regions: [TKRegion]?
   let hashCode: Int
 }
 
 struct ModeDetails: Codable {
   private enum CodingKeys: String, CodingKey {
     case title
+    case subtitle
     case websiteURL = "URL"
     case rgbColor = "color"
     case required
     case implies
     case icon
-    case darkIcon
     case vehicleIcon
   }
   
   let title: String
+  let subtitle: String?
   let websiteURL: URL?
   let rgbColor: API.RGBColor
   let required: Bool?
   let implies: [String]?
   let icon: String?
-  let darkIcon: String?
   let vehicleIcon: String?
   
-  var color: SGKColor {
+  var color: TKColor {
     return rgbColor.color
   }
 }
@@ -102,7 +102,8 @@ extension TKRegionManager {
       
       // Silently ignore if region didn't change
       guard response.modes != nil, response.regions != nil else {
-        assert(self.response?.hashCode == response.hashCode)
+        // This asset isn't valid, due to race conditions
+        // assert(self.response?.hashCode == response.hashCode)
         return
       }
       
@@ -110,10 +111,9 @@ extension TKRegionManager {
       TKRegionManager.saveToCache(data)
       
       NotificationCenter.default.post(name: .TKRegionManagerUpdatedRegions, object: self)
-      NotificationCenter.default.post(name: .SGMapShouldRefreshOverlay, object: self)
 
     } catch {
-      SGKLog.warn("TKRegionManager", text: "Failed to parse regions: \(error)")
+      TKLog.warn("TKRegionManager", text: "Failed to parse regions: \(error)")
     }
   }
   
@@ -132,7 +132,7 @@ extension TKRegionManager {
   
 }
 
-// MARK: - Getting mode details {
+// MARK: - Getting mode details
 
 extension TKRegionManager {
 
@@ -142,7 +142,14 @@ extension TKRegionManager {
   public func title(forModeIdentifier mode: String) -> String? {
     return response?.modes?[mode]?.title
   }
-  
+
+  /// - Parameter mode: The mode identifier for which you want the title
+  /// - Returns: The localized subtitle as defined by the server
+  @objc
+  public func subtitle(forModeIdentifier mode: String) -> String? {
+    return response?.modes?[mode]?.subtitle
+  }
+
   /// - Parameter mode: The mode identifier for which you want the official website URL
   /// - Returns: The URL as defined by the server
   @objc
@@ -153,7 +160,7 @@ extension TKRegionManager {
   /// - Parameter mode: The mode identifier for which you want the official color
   /// - Returns: The color as defined by the server
   @objc
-  public func color(forModeIdentifier mode: String) -> SGKColor? {
+  public func color(forModeIdentifier mode: String) -> TKColor? {
     return response?.modes?[mode]?.color
   }
   
@@ -194,10 +201,12 @@ extension TKRegionManager {
     }
   }
   
+  func remoteImageName(forModeIdentifier mode: String) -> String? {
+    return response?.modes?[mode]?.icon
+  }
 
-  
   @objc(imageURLForModeIdentifier:ofIconType:)
-  public func imageURL(forModeIdentifier mode: String?, iconType: SGStyleModeIconType) -> URL? {
+  public func imageURL(forModeIdentifier mode: String?, iconType: TKStyleModeIconType) -> URL? {
     guard
       let mode = mode,
       let details = response?.modes?[mode]
@@ -207,15 +216,15 @@ extension TKRegionManager {
     switch iconType {
     case .mapIcon, .listMainMode, .resolutionIndependent:
       part = details.icon
-    case .listMainModeOnDark, .resolutionIndependentOnDark:
-      part = details.darkIcon
     case .vehicle:
       part = details.vehicleIcon
     case .alert:
       part = nil // not supported for modes
+    @unknown default:
+      part = nil
     }
     guard let fileNamePart = part else { return nil }
-    return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: iconType)
+    return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: iconType)
   }
 
 }
@@ -253,9 +262,9 @@ extension TKRegionManager {
 
 extension TKRegionManager {
   
-  /// - Returns: A matching local region or the shared instance of `SVKInternationalRegion` if no local region contains this coordinate region.
+  /// - Returns: A matching local region or the shared instance of `TKInternationalRegion` if no local region contains this coordinate region.
   @objc(regionContainingCoordinateRegion:)
-  public func region(containing region: MKCoordinateRegion) -> SVKRegion {
+  public func region(containing region: MKCoordinateRegion) -> TKRegion {
     return self.region(containing: region.topLeft, region.bottomRight)
   }
   
@@ -269,7 +278,7 @@ extension TKRegionManager {
   ///     the same region, or C) two elements (a local region for the start and
   ///     one for the end coordinates).
   @objc(localRegionsForStart:andEnd:)
-  public func localRegions(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D) -> [SVKRegion] {
+  public func localRegions(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D) -> [TKRegion] {
     
     let startRegions  = localRegions(containing: start)
     let endRegions    = localRegions(containing: end)
@@ -286,7 +295,7 @@ extension TKRegionManager {
   
   /// - Returns: Local regions that overlap with the provided coordinate region. Can be empty.
   @objc(localRegionsOverlappingCoordinateRegion:)
-  public func localRegions(overlapping region: MKCoordinateRegion) -> [SVKRegion] {
+  public func localRegions(overlapping region: MKCoordinateRegion) -> [TKRegion] {
     let mapRect = MKMapRect.forCoordinateRegion(region)
     return regions.filter { $0.intersects(mapRect) }
   }
@@ -296,9 +305,8 @@ extension TKRegionManager {
   /// - Returns: The local (non-international) regions intersecting with the 
   ///     provided coordinate
   @objc(localRegionsContainingCoordinate:)
-  public func localRegions(containing coordinate: CLLocationCoordinate2D) -> Set<SVKRegion> {
+  public func localRegions(containing coordinate: CLLocationCoordinate2D) -> Set<TKRegion> {
     guard coordinate.isValid else { return [] }
-    
     let containing = regions.filter { $0.contains(coordinate) }
     return Set(containing)
   }
@@ -307,7 +315,7 @@ extension TKRegionManager {
   /// - Parameter name: A region code
   /// - Returns: The local (non-international) region matching the provided code
   @objc(localRegionWithName:)
-  public func localRegion(named name: String) -> SVKRegion? {
+  public func localRegion(named name: String) -> TKRegion? {
     return regions.first { $0.name == name }
   }
   
@@ -320,12 +328,12 @@ extension TKRegionManager {
   /// - Returns: A local region if both lie within the same or the shared
   ///     international region instance.
   @objc(regionContainingCoordinate:andOther:)
-  public func region(containing first: CLLocationCoordinate2D, _ second: CLLocationCoordinate2D) -> SVKRegion {
+  public func region(containing first: CLLocationCoordinate2D, _ second: CLLocationCoordinate2D) -> TKRegion {
     let local = localRegions(start: first, end: second)
     if local.count == 1 {
       return local.first!
     } else {
-      return SVKInternationalRegion.shared
+      return .international
     }
   }
   
@@ -335,7 +343,7 @@ extension TKRegionManager {
   ///     return `nil` if the coordinate falls outside any supported region.
   @objc(timeZoneForCoordinate:)
   public func timeZone(for coordinate: CLLocationCoordinate2D) -> TimeZone? {
-    return localRegions(containing: coordinate).first?.timeZone
+    return regions.first { $0.contains(coordinate) }?.timeZone
   }
   
   
@@ -344,10 +352,10 @@ extension TKRegionManager {
   /// - Parameter target: Coordinate for which to find closest city
   /// - Returns: Nearest City
   @objc(cityNearestToCoordinate:)
-  public func city(nearestTo target: CLLocationCoordinate2D) -> SVKRegion.City? {
-    typealias Match = (SVKRegion.City, CLLocationDistance)
+  public func city(nearestTo target: CLLocationCoordinate2D) -> TKRegion.City? {
+    typealias Match = (TKRegion.City, CLLocationDistance)
     
-    let cities = localRegions(containing: target).reduce(mutating: [SVKRegion.City]()) { cities, region in
+    let cities = localRegions(containing: target).reduce(into: [TKRegion.City]()) { cities, region in
       cities.append(contentsOf: region.cities)
     }
     let best = cities.reduce(nil) { acc, city -> Match? in

@@ -7,10 +7,9 @@ Additional documentation is available on the [TripGo Developer page](http://sked
 
 ## Components
 
-- TripKit (iOS, iOS extensions, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
-- TripKitUI (iOS, iOS extensions): UI elements for displaying trips on a map and TripGo-styled table cells.
-- TripKitBookings (iOS): User accounts and in-app booking functionality.
-- TripKitInterApp (iOS): Helpers for deep linking into other apps, such as FlitWays, GoCatch, Ingogo, Lyft, Ola and Uber.
+- **TripKit** (iOS, iOS extensions, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
+- **TripKitUI** (iOS, iOS extensions): [View controllers](docs/view-controllers.md), as well as individual UI helpers and components.
+- **TripKitInterApp** (iOS): Helpers for deep linking into other apps, such as FlitWays, GoCatch, Ingogo, Lyft, Ola and Uber.
 
 ## Installation
 
@@ -21,7 +20,6 @@ Add desired pods:
 ```ruby
   pod 'TripKit',                '~> 3.1'
   pod 'TripKitUI',              '~> 3.1'
-  pod 'TripKitBookings',        '~> 3.1'
   pod 'TripKitInterApp',        '~> 3.1'
 ```
 
@@ -30,7 +28,7 @@ Add desired pods:
 Add this to your `Cartfile`:
 
 ```
-github "skedgo/tripkit-ios" ~> 3.1
+git "git@gitlab.com:SkedGo/iOS/tripkit-ios.git" "tripkit-4.0"
 ```
 
 Then run `carthage update` and add the desired framework to your project as described in [the Carthage docs](https://github.com/Carthage/Carthage).
@@ -43,14 +41,8 @@ When doing so, you'll need to add the respective dependencies:
   - RxCocoa
 - TripKitUI:
   - Those of TripKit, plus:
-  - ASPolylineView
   - Kingfisher
-- TripKitBookings:
-  - Those of TripKitUI, plus:
-  - KeychainAccess
-  - OAuthSwift
-  - KVNProgress
-  - SwiftyJSON
+  - [TGCardViewController](https://gitlab.com/SkedGo/iOS/tripgo-cards-ios)
 
 ### Manually
 
@@ -74,3 +66,7 @@ If there's any trouble with that, see the example under [Project](Project).
     // ...
   }
 ```
+
+## License
+
+TripKit is copyright 2011-2019 by SkedGo Pty Ltd

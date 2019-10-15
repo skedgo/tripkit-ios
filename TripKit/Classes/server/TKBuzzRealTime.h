@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class SVKRegion, Trip;
+@class TKRegion, Trip;
 @class DLSEntry, Service, StopVisits;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,17 +20,17 @@ NS_ASSUME_NONNULL_BEGIN
 					 failure:(void (^)(NSError * _Nullable error))failure;
 
 + (void)updateDLSEntries:(NSSet<DLSEntry *> *)entries
-                inRegion:(SVKRegion *)region
+                inRegion:(TKRegion *)region
                  success:(void (^)(NSSet<DLSEntry *> *entries))success
                  failure:(void (^)(NSError * _Nullable error))failure;
 
 + (void)updateEmbarkations:(NSSet<StopVisits *> *)embarkations
-                  inRegion:(SVKRegion *)region
+                  inRegion:(TKRegion *)region
                    success:(void (^)(NSSet<StopVisits *> *embarkations))success
                    failure:(void (^)(NSError * _Nullable error))failure;
 
 + (void)updateServices:(NSSet<Service *> *)services
-              inRegion:(SVKRegion *)region
+              inRegion:(TKRegion *)region
                success:(void (^)(NSSet<Service *> *services))success
                failure:(void (^)(NSError * _Nullable error))failure;
 

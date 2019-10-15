@@ -73,14 +73,14 @@
 }
 
 + (instancetype)fetchOrInsertStopForStopCode:(NSString *)stopCode
-                                    modeInfo:(ModeInfo *)modeInfo
-                                  atLocation:(SGKNamedCoordinate *)location
+                                    modeInfo:(TKModeInfo *)modeInfo
+                                  atLocation:(TKNamedCoordinate *)location
                           intoTripKitContext:(NSManagedObjectContext *)tripKitContext
 {
   NSParameterAssert(tripKitContext);
 	
   StopLocation *stop = nil;
-  SVKRegion *region = nil;
+  TKRegion *region = nil;
   if (location && stopCode) {
     region = [[location regions] anyObject];
     stop = [self fetchStopForStopCode:stopCode
@@ -107,8 +107,8 @@
 }
 
 + (instancetype)insertStopForStopCode:(NSString *)stopCode
-                             modeInfo:(ModeInfo *)modeInfo
-                           atLocation:(SGKNamedCoordinate *)location
+                             modeInfo:(TKModeInfo *)modeInfo
+                           atLocation:(TKNamedCoordinate *)location
                    intoTripKitContext:(NSManagedObjectContext *)tripKitContext
 {
   NSString *entityName = NSStringFromClass(self);

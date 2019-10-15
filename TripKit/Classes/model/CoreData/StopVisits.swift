@@ -10,7 +10,42 @@ import Foundation
 
 extension StopVisits {
   
-  @objc public func grouping(previous: StopVisits?, next: StopVisits?) -> SGKGrouping {
+  @objc
+  public func triggerRealTimeKVO() {
+    let timing = self.timing
+    self.timing = timing
+  }
+  
+  @objc
+  public var timeZone: TimeZone {
+    return stop.region?.timeZone ?? .current
+  }
+  
+  @objc
+  public var frequency: NSNumber? {
+    return service.frequency
+  }
+  
+  public var timing: TKServiceTiming {
+    get {
+      if let minutes = service.frequency?.intValue {
+        return .frequencyBased(frequency: TimeInterval(minutes * 60), start: departure, end: arrival, totalTravelTime: nil)
+        
+      } else {
+        return .timetabled(arrival: arrival, departure: departure)
+      }
+    }
+    set {
+      // KVO
+    }
+  }
+  
+  @objc
+  public var timeForServerRequests: Date {
+    return departure ?? arrival ?? Date()
+  }
+  
+  @objc public func grouping(previous: StopVisits?, next: StopVisits?) -> TKGrouping {
     let sameAsBefore = previous?.searchString == searchString
     let sameAsAfter = next?.searchString == searchString
     
@@ -22,6 +57,40 @@ extension StopVisits {
     }
   }
   
+  @objc
+  public func accessibilityDescription(includeRealTime: Bool) -> String {
+    var label = ""
+
+    if let number = service.number, !number.isEmpty {
+      label.append(number)
+    }
+    if let direction = service.direction {
+      label.append(";")
+      label.append(direction)
+    }
+    
+    if self is DLSEntry {
+      if let departure = departure {
+        label.append(";")
+        label.append(Loc.Departs(atTime: TKStyleManager.timeString(departure, for: timeZone)))
+      }
+      if let arrival = arrival {
+        label.append(";")
+        label.append(Loc.Arrives(atTime: TKStyleManager.timeString(arrival, for: timeZone)))
+      }
+    } else if let time = departure ?? arrival {
+      label.append(";")
+      label.append(Loc.At(time: TKStyleManager.timeString(time, for: timeZone)))
+    }
+    
+    if includeRealTime {
+      label.append(";")
+      label.append(realTimeInformation(false))
+    }
+    
+    return label
+  }
+  
 }
 
 // MARK: - MKAnnotation
@@ -29,19 +98,29 @@ extension StopVisits {
 extension StopVisits: MKAnnotation {
   
   public var title: String? {
-    if let departure = departure {
-      return SGStyleManager.timeString(departure, for: timeZone)
-    } else if let arrival = arrival {
-      return SGStyleManager.timeString(arrival, for: timeZone)
-    } else {
+    switch timing {
+    case .timetabled(let arrival, let departure):
+      if let departure = departure {
+        return TKStyleManager.timeString(departure, for: timeZone)
+      } else if let arrival = arrival {
+        return TKStyleManager.timeString(arrival, for: timeZone)
+      } else {
+        return stop.title
+      }
+    case .frequencyBased:
       return stop.title
     }
   }
   
   public var subtitle: String? {
-    if departure != nil || arrival != nil {
-      return stop.title
-    } else {
+    switch timing {
+    case .timetabled(let arrival, let departure):
+      if departure != nil || arrival != nil {
+        return stop.title
+      } else {
+        return nil
+      }
+    case .frequencyBased:
       return nil
     }
   }
@@ -53,66 +132,23 @@ extension StopVisits: MKAnnotation {
 }
 
 
-// MARK: - STKDisplayablePoint
 
-extension StopVisits: STKDisplayablePoint {
-  
-  public var pointDisplaysImage: Bool {
-    return true
-  }
-  
-  public var isDraggable: Bool {
-    return false
-  }
+// MARK: - TKRealTimeUpdatable
 
-  public var pointClusterIdentifier: String? {
-    return service.modeInfo?.identifier ?? "StopVisits"
+extension StopVisits: TKRealTimeUpdatable {
+  public var wantsRealTimeUpdates: Bool {
+    return service.wantsRealTimeUpdates
   }
   
-  public var pointImage: SGKImage? {
-    return service.modeImage(for: .listMainMode)
+  public var objectForRealTimeUpdates: Any {
+    return self
   }
   
-  public var pointImageURL: URL? {
-    return service.modeImageURL(for: .listMainMode)
+  public var regionForRealTimeUpdates: TKRegion {
+    return stop.region ?? .international
   }
-  
-  public var pointImageIsTemplate: Bool {
-    return service.modeImageIsTemplate
-  }
-  
 }
 
-// MARK: - STKDisplayableTimePoint
-
-extension StopVisits: STKDisplayableTimePoint {
-  
-  public var time: Date {
-    get {
-      return departure ?? arrival ?? Date()
-    }
-    set {
-      departure = newValue
-    }
-  }
-  
-  public var timeZone: TimeZone {
-    return stop.region?.timeZone ?? .current
-  }
-  
-  public var timeIsRealTime: Bool {
-    return service.isRealTime
-  }
-  
-  public var canFlipImage: Bool {
-    return true
-  }
-  
-  public var isTerminal: Bool {
-    return false
-  }
-  
-}
 
 // MARK: - UIActivityItemSource
 
@@ -120,7 +156,7 @@ extension StopVisits: STKDisplayableTimePoint {
   
   extension StopVisits: UIActivityItemSource {
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivityType?) -> String {
+    public func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
       return service.modeTitle ?? ""
     }
     
@@ -128,14 +164,24 @@ extension StopVisits: STKDisplayableTimePoint {
       return ""
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
       
-      let format = NSLocalizedString("I'll take a %@ at %@ from %@.", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indication of an activity. (old key: ActivityIndication)")
-      return String(format: format,
-                    service.shortIdentifier() ?? "",
-                    SGStyleManager.timeString(time, for: timeZone),
-                    stop.name ?? stop.stopCode
-      )
+      if case .timetabled(_, let maybeDeparture) = timing, let departure = maybeDeparture {
+        let departureTime = TKStyleManager.timeString(departure, for: timeZone)
+        let format = NSLocalizedString("I'll take a %@ at %@ from %@.", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indication of an activity. (old key: ActivityIndication)")
+        return String(format: format,
+                      service.shortIdentifier() ?? "",
+                      departureTime,
+                      stop.name ?? stop.stopCode
+        )
+        
+      } else {
+        let format = NSLocalizedString("I'll take a %@ from %@.", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indication of an activity.")
+        return String(format: format,
+                      service.shortIdentifier() ?? "",
+                      stop.name ?? stop.stopCode
+        )
+      }
       
     }
     

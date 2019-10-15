@@ -28,19 +28,18 @@ public enum TKLocationProvider {
   ///   - radius: Radius of circle in metres
   ///   - modes: Modes for which to fetch locations. If not provided, will use all.
   /// - Returns: Observable of fetched locations; always returns empty array for international region; can error out
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil) -> Single<[STKModeCoordinate]> {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil) -> Single<[TKModeCoordinate]> {
     
-    return SVKServer.shared.rx
+    return TKServer.shared.rx
       .requireRegion(center)
       .flatMap { region in
         TKLocationProvider.fetchLocations(center: center, radius: radius, modes: modes, in: region)
       }
-      .asSingle()
   }
   
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil, in region: SVKRegion) -> Single<[STKModeCoordinate]> {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil, in region: TKRegion) -> Single<[TKModeCoordinate]> {
 
-    guard region != SVKInternationalRegion.shared else {
+    guard region != .international else {
       return Single.just([])
     }
     
@@ -51,9 +50,9 @@ public enum TKLocationProvider {
     ]
     paras["modes"] = modes
     
-    return SVKServer.shared.rx
+    return TKServer.shared.rx
       .hit(.GET, path: "locations.json", parameters: paras, region: region)
-      .map { _, _, data -> [STKModeCoordinate] in
+      .map { _, _, data -> [TKModeCoordinate] in
         let decoder = JSONDecoder()
         guard
           let data = data,
@@ -64,8 +63,6 @@ public enum TKLocationProvider {
         
         return response.groups.reduce(into: []) { $0.append(contentsOf: $1.all) }
       }
-    .asSingle()
-    
   }
   
 }

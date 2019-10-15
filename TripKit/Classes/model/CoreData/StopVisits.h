@@ -9,9 +9,7 @@
 @import Foundation;
 @import CoreData;
 
-#import "TKRealTimeUpdatable.h"
-
-typedef NS_ENUM(NSInteger, StopVisitRealTime) {
+typedef NS_CLOSED_ENUM(NSInteger, StopVisitRealTime) {
   StopVisitRealTimeNotApplicable, // We don't have real-time for this kind of service
   StopVisitRealTimeNotAvailable,  // Services like this can have real-time, but this doesn't
   StopVisitRealTimeOnTime,
@@ -25,11 +23,11 @@ typedef NS_ENUM(NSInteger, StopVisitRealTime) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StopVisits : NSManagedObject <TKRealTimeUpdatable>
+@interface StopVisits : NSManagedObject
 
-@property (nonatomic, retain, nullable) NSDate * arrival;
+@property (nonatomic, retain, nullable) NSDate * arrival; // DEPRECATED_MSG_ATTRIBUTE("Ambiguous. Use .timing instead");
 @property (nonatomic, retain, nullable) NSNumber * bearing;
-@property (nonatomic, retain, nullable) NSDate * departure;
+@property (nonatomic, retain, nullable) NSDate * departure; // DEPRECATED_MSG_ATTRIBUTE("Ambiguous. Use .timing instead");
 @property (nonatomic, retain, nullable) NSDate * originalTime;
 @property (nonatomic, retain) NSNumber * flags;
 @property (nonatomic, retain) NSNumber * index;
@@ -61,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (StopVisitRealTime)realTimeStatus;
 
-- (nullable NSString *)realTimeInformation:(BOOL)withOriginalTime;
+- (NSString *)realTimeInformation:(BOOL)withOriginalTime;
 
 - (nullable NSDate *)countdownDate;
 

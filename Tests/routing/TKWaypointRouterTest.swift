@@ -25,13 +25,13 @@ class TKWaypointRouterTest: TKTestCase {
     // Homesby to Rocks, walking to Waitara
     let trip = self.trip(fromFilename: "hornsbyToSkedGo", serviceFilename: "hornsbyToSkedGoService")
     
-    let trainSegment = trip.segments()[2]
-    let service = trainSegment.service()!
+    let trainSegment = trip.segments[2]
+    let service = trainSegment.service!
     
     let waitara = (service.visits?.first { $0.stop.name!.hasPrefix("Waitara") })!
     
     let builder = WaypointParasBuilder()
-    let paras = builder.build(moving: trainSegment, to: waitara, atStart: true)
+    let paras = try builder.build(moving: trainSegment, to: waitara, atStart: true)
     XCTAssertNotNil(paras)
     
     let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
@@ -59,13 +59,13 @@ class TKWaypointRouterTest: TKTestCase {
     // Homesby to Rocks, walking from Milson's Point
     let trip = self.trip(fromFilename: "hornsbyToSkedGo", serviceFilename: "hornsbyToSkedGoService")
     
-    let trainSegment = trip.segments()[2]
-    let service = trainSegment.service()!
+    let trainSegment = trip.segments[2]
+    let service = trainSegment.service!
     
     let milsons = (service.visits?.first { $0.stop.name!.hasPrefix("Milson") })!
     
     let builder = WaypointParasBuilder()
-    let paras = builder.build(moving: trainSegment, to: milsons, atStart: false)
+    let paras = try builder.build(moving: trainSegment, to: milsons, atStart: false)
     XCTAssertNotNil(paras)
     
     let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
@@ -93,13 +93,13 @@ class TKWaypointRouterTest: TKTestCase {
     // Berowra to Hornsby, hike to Mt Kuring-Gai
     let trip = self.trip(fromFilename: "berowraToHornsby", serviceFilename: "berowraToHornsbyService")
     
-    let trainSegment = trip.segments()[1]
-    let service = trainSegment.service()!
+    let trainSegment = trip.segments[1]
+    let service = trainSegment.service!
     
     let kuring = (service.visits?.first { $0.stop.name!.contains("Kuring") })!
     
     let builder = WaypointParasBuilder()
-    let paras = builder.build(moving: trainSegment, to: kuring, atStart: true)
+    let paras = try builder.build(moving: trainSegment, to: kuring, atStart: true)
     XCTAssertNotNil(paras)
     
     let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
@@ -131,13 +131,13 @@ class TKWaypointRouterTest: TKTestCase {
     // Berowra to Hornsby, hike from Asquith
     let trip = self.trip(fromFilename: "berowraToHornsby", serviceFilename: "berowraToHornsbyService")
     
-    let trainSegment = trip.segments()[1]
-    let service = trainSegment.service()!
+    let trainSegment = trip.segments[1]
+    let service = trainSegment.service!
     
     let asquith = (service.visits?.first { $0.stop.name!.contains("Asquith") })!
     
     let builder = WaypointParasBuilder()
-    let paras = builder.build(moving: trainSegment, to: asquith, atStart: false)
+    let paras = try builder.build(moving: trainSegment, to: asquith, atStart: false)
     XCTAssertNotNil(paras)
     
     let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
@@ -169,13 +169,13 @@ class TKWaypointRouterTest: TKTestCase {
     let trip = self.trip(fromFilename: "routing-drive-park-walk-train", serviceFilename: "service-for-park-ride")
     // start - drive - park - walk - train - walk - transfer - bus - walk - end
     
-    let trainSegment = trip.segments()[4]
-    let service = trainSegment.service()!
+    let trainSegment = trip.segments[4]
+    let service = trainSegment.service!
     
     let waitara = (service.visits?.first { $0.stop.name!.contains("Waitara") })!
     
     let builder = WaypointParasBuilder()
-    let paras = builder.build(moving: trainSegment, to: waitara, atStart: true)
+    let paras = try builder.build(moving: trainSegment, to: waitara, atStart: true)
     XCTAssertNotNil(paras)
 
     let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
@@ -236,21 +236,21 @@ struct WaypointInput: Codable {
 
     var startCoordinate: CLLocationCoordinate2D? {
       get {
-        return SVKParserHelper.coordinate(forRequest: start)
+        return TKParserHelper.coordinate(forRequest: start)
       }
       set {
         guard let newValue = newValue else { preconditionFailure("Set start directly, e.g., to a stop code") }
-        start = SVKParserHelper.requestString(for: newValue)
+        start = TKParserHelper.requestString(for: newValue)
       }
     }
     
     var endCoordinate: CLLocationCoordinate2D? {
       get {
-        return SVKParserHelper.coordinate(forRequest: end)
+        return TKParserHelper.coordinate(forRequest: end)
       }
       set {
         guard let newValue = newValue else { preconditionFailure("Set end directly, e.g., to a stop code") }
-        end = SVKParserHelper.requestString(for: newValue)
+        end = TKParserHelper.requestString(for: newValue)
       }
     }
   }

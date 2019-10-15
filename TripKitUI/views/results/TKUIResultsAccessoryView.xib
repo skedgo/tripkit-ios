@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TKUIResultsAccessoryView" customModule="TripKitUI" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLD-Td-WnO">
+                    <rect key="frame" x="16" y="0.0" width="132" height="52"/>
+                    <state key="normal" title="Arriving at 9:00 am"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t0Q-S8-WVt">
+                    <rect key="frame" x="296" y="8" width="1" height="36"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="BgP-UX-V1V"/>
+                        <constraint firstAttribute="width" constant="1" id="bJc-SE-ko1"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvC-c0-UQp">
+                    <rect key="frame" x="305" y="0.0" width="54" height="52"/>
+                    <state key="normal" title="Options"/>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="t0Q-S8-WVt" secondAttribute="bottom" constant="8" id="0aD-sB-cuL"/>
+                <constraint firstItem="XvC-c0-UQp" firstAttribute="leading" secondItem="t0Q-S8-WVt" secondAttribute="trailing" constant="8" id="3Sp-Ot-0s0"/>
+                <constraint firstItem="XvC-c0-UQp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MLD-Td-WnO" secondAttribute="trailing" constant="8" symbolic="YES" id="5t4-Uj-ctn"/>
+                <constraint firstItem="XvC-c0-UQp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="HtY-HX-xyv"/>
+                <constraint firstAttribute="trailing" secondItem="XvC-c0-UQp" secondAttribute="trailing" constant="16" id="MBn-Md-qh0"/>
+                <constraint firstItem="t0Q-S8-WVt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="VXy-UB-vNM"/>
+                <constraint firstItem="MLD-Td-WnO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="j2P-qP-XPB"/>
+                <constraint firstAttribute="bottomMargin" secondItem="MLD-Td-WnO" secondAttribute="bottom" id="nzd-hp-r6C"/>
+                <constraint firstItem="MLD-Td-WnO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="xFL-y6-cTy"/>
+                <constraint firstAttribute="bottomMargin" secondItem="XvC-c0-UQp" secondAttribute="bottom" id="zEi-gd-roo"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="separator" destination="t0Q-S8-WVt" id="gc9-Qn-ste"/>
+                <outlet property="timeButton" destination="MLD-Td-WnO" id="9gE-eM-VJL"/>
+                <outlet property="transportButton" destination="XvC-c0-UQp" id="7Dc-gb-srY"/>
+            </connections>
+            <point key="canvasLocation" x="136.80000000000001" y="157.42128935532236"/>
+        </view>
+    </objects>
+</document>

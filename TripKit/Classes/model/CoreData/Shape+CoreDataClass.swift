@@ -21,13 +21,13 @@ public class Shape: NSManagedObject {
     case isHop      = 8
   }
 
-  fileprivate var _sortedCoordinates: [SGKNamedCoordinate]?
+  fileprivate var _sortedCoordinates: [TKNamedCoordinate]?
   
-  fileprivate var sortedCoordinates: [SGKNamedCoordinate]? {
+  public var sortedCoordinates: [TKNamedCoordinate]? {
     get {
       if let encoded = encodedWaypoints, _sortedCoordinates == nil {
         let coordinates = CLLocationCoordinate2D.decodePolyline(encoded)
-        _sortedCoordinates = coordinates.map(SGKNamedCoordinate.init)
+        _sortedCoordinates = coordinates.map(TKNamedCoordinate.init)
       }
       return _sortedCoordinates
     }
@@ -134,22 +134,22 @@ extension Shape {
   }
 }
 
-// MARK: - STKDisplayableRoute
+// MARK: - TKDisplayableRoute
 
-extension Shape: STKDisplayableRoute {
+extension Shape: TKDisplayableRoute {
   
   public var routePath: [Any] {
     return sortedCoordinates ?? []
   }
   
-  public var routeColor: SGKColor? {
+  public var routeColor: TKColor? {
     if let travelled = travelled, !travelled.boolValue {
       // Non-travelled always gets a special colour
       return .routeDashColorNonTravelled
     }
     
     if let service = services?.anyObject() as? Service,
-      let color = service.color as? SGKColor {
+      let color = service.color as? TKColor {
       return color
     }
     
@@ -157,16 +157,12 @@ extension Shape: STKDisplayableRoute {
     case .friendly, .unfriendly, .dismount:
       return friendliness.color
     case .unknown:
-      return segment?.color() ?? friendliness.color
+      return segment?.color ?? friendliness.color
     }
   }
   
   public var routeIsTravelled: Bool {
     return travelled?.boolValue ?? true
-  }
-  
-  public var showRoute: Bool {
-    return true
   }
   
   public var routeDashPattern: [NSNumber]? {
@@ -176,7 +172,21 @@ extension Shape: STKDisplayableRoute {
       return nil
     }
   }
-    
+  
+  public var selectionIdentifier: String? {
+    if let segment = segment {
+      // Should match the definition in TripKitUI => TKUIAnnotations+TripKit
+      switch segment.order {
+      case .start: return "start"
+      case .regular: return String(segment.templateHashCode)
+      case .end: return "end"
+      }
+
+    } else if let service = services?.anyObject() as? Service {
+      return service.code
+    } else {
+      return nil
+    }
+  }
   
 }
-

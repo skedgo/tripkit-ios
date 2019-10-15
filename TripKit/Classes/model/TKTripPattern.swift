@@ -24,7 +24,7 @@ public class TKTripPattern: NSObject {
   /// - Returns: The trip pattern for a trip
   @objc(tripPatternForTrip:)
   public static func pattern(for trip: Trip) -> [TKSegmentPattern] {
-    return trip.segments().compactMap { $0.pattern }
+    return trip.segments.compactMap { $0.pattern }
   }
   
 
@@ -33,8 +33,8 @@ public class TKTripPattern: NSObject {
     guard
       let startString = pattern.first?["start"] as? String,
       let endString = pattern.last?["end"] as? String,
-      let start = SVKParserHelper.coordinate(forRequest: startString),
-      let end = SVKParserHelper.coordinate(forRequest: endString)
+      let start = TKParserHelper.coordinate(forRequest: startString),
+      let end = TKParserHelper.coordinate(forRequest: endString)
       else { return nil }
     
     return (start, end)
@@ -46,8 +46,8 @@ public class TKTripPattern: NSObject {
 extension TKSegment {
   
   fileprivate var pattern: TKSegmentPattern? {
-    guard !isStationary() else { return nil }
-    guard let mode = modeIdentifier() else {
+    guard !isStationary else { return nil }
+    guard let mode = modeIdentifier else {
       assertionFailure("Segment is missing mode: \(self)")
       return nil
     }
@@ -57,22 +57,22 @@ extension TKSegment {
     }
     
     var pattern: [String: Any] = [
-      "start":  SVKParserHelper.requestString(for: start),
-      "end":    SVKParserHelper.requestString(for: end),
+      "start":  TKParserHelper.requestString(for: start),
+      "end":    TKParserHelper.requestString(for: end),
       "modes":  [mode]
     ]
     
-    pattern["alt"] = modeInfo()?.alt
-    pattern["preferredPublic"] = isPublicTransport() ? modeInfo()?.identifier : nil
+    pattern["alt"] = modeInfo?.alt
+    pattern["preferredPublic"] = isPublicTransport ? modeInfo?.identifier : nil
     return pattern
   }
   
 }
 
 
-extension SVKParserHelper {
+extension TKParserHelper {
   
-  /// Inverse of `SVKParserHelper.requestString(for:)`
+  /// Inverse of `TKParserHelper.requestString(for:)`
   class func coordinate(forRequest string: String) -> CLLocationCoordinate2D? {
     
     let pruned = string

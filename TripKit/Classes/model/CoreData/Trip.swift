@@ -10,7 +10,7 @@ import Foundation
 
 extension Trip {
   
-  @objc public var primaryCostType: STKTripCostType {
+  @objc public var primaryCostType: TKTripCostType {
     if departureTimeIsFixed {
       return .time
     } else if isExpensive {
@@ -27,19 +27,18 @@ extension Trip {
   @objc(isMixedModalIgnoringWalking:)
   public func isMixedModal(ignoreWalking: Bool) -> Bool {
     var previousMode: String? = nil
-    for segment in segments() {
-      if segment.isStationary() {
-        continue // always ignore stationary segments
+    for segment in segments {
+      guard !segment.isStationary, let mode = segment.modeIdentifier else {
+        continue // always ignore stationary segments or modes with identifier
       }
-      if segment.isWalking(), ignoreWalking || !segment.hasVisibility(.inSummary) {
+      
+      if segment.isWalking, ignoreWalking || !segment.hasVisibility(.inSummary) {
         continue // we always ignore short walks that don't make it into the summary
       }
-      if let mode = segment.modeIdentifier() {
-        if let previous = previousMode, previous != mode {
-          return true
-        } else {
-          previousMode = mode
-        }
+      if let previous = previousMode, previous != mode {
+        return true
+      } else {
+        previousMode = mode
       }
     }
     return false
@@ -48,9 +47,9 @@ extension Trip {
   private var isExpensive: Bool {
     guard
       let segment = mainSegment() as? TKSegment,
-      let identifier = segment.modeIdentifier()
+      let identifier = segment.modeIdentifier
       else { return false }
-    return SVKTransportModes.modeIdentifierIsExpensive(identifier)
+    return TKTransportModes.modeIdentifierIsExpensive(identifier)
   }
   
 }
@@ -61,8 +60,8 @@ extension Trip {
 extension Trip {
   
   /// If the trip uses a personal vehicle (non shared) which the user might want to assign to one of their vehicles
-  @objc public var usedPrivateVehicleType: STKVehicleType {
-    for segment in segments() {
+  @objc public var usedPrivateVehicleType: TKVehicleType {
+    for segment in segments {
       let vehicleType = segment.privateVehicleType
       if vehicleType != .none {
         return vehicleType
@@ -73,40 +72,40 @@ extension Trip {
   
   /// Segments of this trip which do use a private (or shared) vehicle, i.e., those who return something from `usedVehicle`.
   @objc public var vehicleSegments: Set<TKSegment> {
-    return segments().reduce(mutating: Set()) { acc, segment in
-      if !segment.isStationary() && segment.usesVehicle {
+    return segments.reduce(into: Set()) { acc, segment in
+      if !segment.isStationary && segment.usesVehicle {
         acc.insert(segment)
       }
     }
   }
   
   /// - Parameter vehicle: The vehicle to assign this trip to. `nil` to reset to a generic vehicle.
-  @objc public func assignVehicle(_ vehicle: STKVehicular?) {
-    segments().forEach { $0.assignVehicle(vehicle) }
+  @objc public func assignVehicle(_ vehicle: TKVehicular?) {
+    segments.forEach { $0.assignVehicle(vehicle) }
   }
   
 }
 
 
-// MARK: - STKTrip
+// MARK: - TKTrip
 
-extension Trip: STKTrip {
+extension Trip: TKTrip {
   
-  @objc public func mainSegment() -> STKTripSegment {
+  @objc public func mainSegment() -> TKTripSegment {
     let hash = mainSegmentHashCode.intValue
     if hash > 0 {
-      for segment in segments() where segment.templateHashCode() == hash {
+      for segment in segments where segment.templateHashCode == hash {
         return segment
       }
-      SGKLog.warn("Trip", text: "Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: \(hash)")
+      TKLog.warn("Trip", text: "Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: \(hash)")
     }
     
     return inferMainSegment()
   }
   
-  public func segments(with type: STKTripSegmentVisibility) -> [STKTripSegment] {
-    let filtered = segments().filter { $0.hasVisibility(type) }
-    return filtered.isEmpty ? segments() : filtered
+  public func segments(with type: TKTripSegmentVisibility) -> [TKTripSegment] {
+    let filtered = segments.filter { $0.hasVisibility(type) }
+    return filtered.isEmpty ? segments : filtered
   }
   
   public var costValues: [NSNumber : String] {
@@ -132,6 +131,24 @@ extension Trip: STKTrip {
 }
 
 
+// MARK: - TKRealTimeUpdatable
+
+extension Trip: TKRealTimeUpdatable {
+  public var wantsRealTimeUpdates: Bool {
+    guard updateURLString != nil else { return false }
+    return wantsRealTimeUpdates(forStart: departureTime, end: arrivalTime, forPreplanning: true)
+  }
+  
+  public var objectForRealTimeUpdates: Any {
+    return self
+  }
+  
+  public var regionForRealTimeUpdates: TKRegion {
+    return request.startRegion() ?? .international
+  }
+}
+
+
 // MARK: - UIActivityItemSource
 
 #if os(iOS)
@@ -142,14 +159,20 @@ extension Trip: STKTrip {
       return ""
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
-      guard activityType == .mail else { return nil }
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+
+      // Share the full text of the trip, if it's for a mail or we don't also
+      // share the trip's URL.
+      if activityType == .mail || !TKShareHelper.enableSharingOfURLs {
+        return constructPlainText()
       
-      return constructPlainText()
+      } else {
+        return nil
+      }
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivityType?) -> String {
-      return Loc.Trip
+    public func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+      return tripPurpose ?? Loc.Trip
     }
     
   }

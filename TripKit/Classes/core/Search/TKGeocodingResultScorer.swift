@@ -20,33 +20,34 @@ public class TKGeocodingResultScorer: NSObject {
       return 0
     }
     
-    let titleScore = SGAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: title)
+    let titleScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: title)
     let addressScore: UInt
     if let subtitle = (annotation.subtitle ?? nil) {
-      addressScore = SGAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: subtitle)
+      addressScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: subtitle)
     } else {
       addressScore = 0
     }
     let stringScore = max(titleScore, addressScore)
     
-    let distanceScore = SGAutocompletionResult.scoreBasedOnDistance(from: annotation.coordinate, to: region, longDistance: allowLongDistance)
+    let distanceScore = TKAutocompletionResult.scoreBasedOnDistance(from: annotation.coordinate, to: region, longDistance: allowLongDistance)
     
     let rawScore = (stringScore + distanceScore) / 2
-    return SGAutocompletionResult.rangedScore(forScore: rawScore, betweenMinimum: minimum, andMaximum: maximum)
+    return TKAutocompletionResult.rangedScore(forScore: rawScore, betweenMinimum: minimum, andMaximum: maximum)
   }
   
   public static func calculateScore(title: String, subtitle: String?, searchTerm: String, minimum: UInt, maximum: UInt) -> UInt {
+    assert(maximum > minimum, "Order must be preserved.")
     
-    let titleScore = SGAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: title)
+    let titleScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: title)
     let addressScore: UInt
     if let subtitle = subtitle {
-      addressScore = SGAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: subtitle)
+      addressScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchTerm, candidate: subtitle)
     } else {
       addressScore = 0
     }
     let rawScore = max(titleScore, addressScore)
 
-    return SGAutocompletionResult.rangedScore(forScore: rawScore, betweenMinimum: minimum, andMaximum: maximum)
+    return TKAutocompletionResult.rangedScore(forScore: rawScore, betweenMinimum: minimum, andMaximum: maximum)
   }
   
 }

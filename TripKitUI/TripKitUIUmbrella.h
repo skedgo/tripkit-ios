@@ -11,40 +11,34 @@
 
 // Categories
 #import "UIColor+Variations.h"
+#import "UIImage+Variations.h"
 #import "UIView+BearingRotation.h"
 #import "UIView+Helpers.h"
-#import "UIView+Hop.h"
-#import "UITableView+SafeReload.h"
-#import "SGStyleManager+SGCoreUI.h"
+#import "TKStyleManager+TripKitUI.h"
 #import "UIFont+CustomFonts.h"
-#import "UISearchBar+Customizable.h"
+#import "UIImage+Variations.h"
 
 // Cells
-#import "SGCountdownCell.h"
-#import "SGTableViewCell.h"
-#import "SGLabel.h"
-#import "SGButton.h"
-#import "SGTableCell.h"
-
-// Map
-#import "MKMapView+ZoomToAnnotations.h"
-#import "SGMapButtonView.h"
-#import "SGMapHelper.h"
+#import "TKUIStyledLabel.h"
+#import "TKUIStyledButton.h"
 
 // TransportKitUI
-#import "ASImageAnnotationView.h"
-#import "SGPolylineRenderer.h"
-#import "SGSemaphoreView.h"
-#import "SGTripSegmentsView.h"
-#import "SGTripSummaryCell.h"
+#import "TKUISemaphoreView.h"
+#import "TKUITripSegmentsView.h"
 
 // TripKit UI
+#import "TKUITimePickerSheet.h"
 
-#import "RouteMapManager.h"
-#import "TripMapManager.h"
+// Could be internal, but used by Swift internally, must expose
+#import "TKUIVehicleView.h"
+#import "TKUIPulsingAnnotationView.h"
 
-#import "VehicleView.h"
-#import "CircleAnnotationView.h"
-#import "SGPulsingAnnotationView.h"
+// Deprecated things
+#import "ASMapManager.h"
+#import "SGAutocompletionDataSource.h"
+#import "SGSearchDataSource.h"
+#import "SGTableCell.h"
+#import "TKUITrackHelper.h"
+
 
 #endif /* TripKitUI_h */

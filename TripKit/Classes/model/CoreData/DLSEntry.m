@@ -65,22 +65,14 @@
   }
 }
 
-#pragma mark - TKRealTimeUpdatable
-
-- (BOOL)wantsRealTimeUpdates
-{
-  return self.service.isRealTimeCapable && [TKRealTimeUpdatableHelper wantsRealTimeUpdatesForStart:self.departure andEnd:self.arrival forPreplanning:NO];
-}
-
-
 #pragma mark - StopVisit
 
-- (SGKGrouping)groupingWithPrevious:(StopVisits *)previous
+- (TKGrouping)groupingWithPrevious:(StopVisits *)previous
                               next:(StopVisits *)next
 {
 #pragma unused(previous, next)
   // never break these up. we assume that dls entries to different locations are never displayed together.
-  return SGKGrouping_EdgeToEdge;
+  return TKGrouping_EdgeToEdge;
 }
 
 @end

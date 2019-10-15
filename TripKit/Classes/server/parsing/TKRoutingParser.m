@@ -60,10 +60,8 @@
                completion:(void (^)(TripRequest * _Nullable request))completion
 {
   [self.context performBlock:^{
-    // create an empty request
     TripRequest *request = [TripRequest insertEmptyIntoContext:self.context];
     
-    // parse everything
     NSArray *added = [self parseAndAddResult:json
                                   forRequest:request
                                  orTripGroup:nil
@@ -173,7 +171,6 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
   allowDuplicatingExistingTrip:(BOOL)allowDuplicates
 
 {
-  // check if this is an error
   NSString *error = json[@"error"];
   if (error) {
     DLog(@"Error while parsing: %@", error);
@@ -217,14 +214,15 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
   
   // At first, we need to parse the segment templates, since the trips will reference them
   NSMutableDictionary *segmentHashToTemplateDictionaryDict = [NSMutableDictionary dictionaryWithCapacity:segmentTemplatesArray.count];
+  NSMutableSet *addedTemplateHashCodes = [NSMutableSet setWithCapacity:segmentTemplatesArray.count];
   for (NSDictionary *segmentTemplateDict in segmentTemplatesArray) {
-    // check if we already have a segment template with that id
     NSNumber *hashCode = segmentTemplateDict[@"hashCode"];
+    [segmentHashToTemplateDictionaryDict setValue:segmentTemplateDict forKey:[hashCode description]];
+
     BOOL hashCodeExists = [SegmentTemplate segmentTemplateHashCode:hashCode.integerValue
                                             existsInTripKitContext:self.context];
-    if (NO == hashCodeExists) {
-      // keep it
-      [segmentHashToTemplateDictionaryDict setValue:segmentTemplateDict forKey:[hashCode description]];
+    if (hashCodeExists) {
+      [addedTemplateHashCodes addObject:hashCode];
     }
   }
   
@@ -263,6 +261,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.currencySymbol       = tripDict[@"currencySymbol"]       ?: trip.currencySymbol;
       trip.totalHassle          = tripDict[@"hassleCost"]           ?: trip.totalHassle;
       trip.totalScore           = tripDict[@"weightedScore"]        ?: trip.totalScore;
+      trip.budgetPoints         = tripDict[@"budgetPoints"]         ?: trip.budgetPoints;
       trip.mainSegmentHashCode  = tripDict[@"mainSegmentHashCode"]  ?: trip.mainSegmentHashCode;
       trip.saveURLString        = tripDict[@"saveURL"]              ?: trip.saveURLString;
       trip.shareURLString       = tripDict[@"shareURL"]             ?: trip.shareURLString;
@@ -270,9 +269,14 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.updateURLString      = tripDict[@"updateURL"]            ?: trip.updateURLString;
       trip.progressURLString    = tripDict[@"progressURL"]          ?: trip.progressURLString;
       trip.plannedURLString     = tripDict[@"plannedURL"]           ?: trip.plannedURLString;
-      
+      trip.logURLString         = tripDict[@"logURL"]               ?: trip.logURLString;
+
       if ([tripDict[@"availability"] isKindOfClass:[NSString class]]) {
         trip.missedBookingWindow  = [@"MISSED_PREBOOKING_WINDOW" isEqualToString:tripDict[@"availability"]];
+      }
+      
+      if ([tripDict[@"bundleId"] isKindOfClass:[NSString class]]) {
+        [trip setBundleId:tripDict[@"bundleId"]];
       }
       
       [trip calculateDuration];
@@ -290,7 +294,9 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         // create the reference object
         SegmentReference *reference = nil;
         NSNumber *hashCode = refDict[@"segmentTemplateHashCode"];
-        NSDictionary *unprocessedTemplateDict = segmentHashToTemplateDictionaryDict[[hashCode description]];
+        NSDictionary *templateDict = segmentHashToTemplateDictionaryDict[[hashCode description]];
+        ZAssert(templateDict != nil, @"Missing template for %@", hashCode);
+        BOOL isNewTemplate = ![addedTemplateHashCodes containsObject:hashCode];
         
         if (tripToUpdate) {
           for (SegmentReference *existingReference in unmatchedSegmentReferences) {
@@ -307,8 +313,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         }
         
         if (!reference
-            && (unprocessedTemplateDict
-                   || YES == [SegmentTemplate segmentTemplateHashCode:hashCode.integerValue existsInTripKitContext:self.context])) {
+            && (isNewTemplate || YES == [SegmentTemplate segmentTemplateHashCode:hashCode.integerValue existsInTripKitContext:self.context])) {
           reference = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SegmentReference class]) inManagedObjectContext:self.context];
         }
         
@@ -326,7 +331,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
                                          inTripKitContext:self.context];
           
           // always update these as those might be new or updated, as long as they didn't get deleted
-          SGKColor *newColor = [SVKParserHelper colorForDictionary:refDict[@"serviceColor"]];
+          TKColor *newColor = [TKParserHelper colorForDictionary:refDict[@"serviceColor"]];
           service.color     = newColor                      ?: service.color;
           service.frequency = refDict[@"frequency"]         ?: service.frequency;
           service.lineName  = refDict[@"serviceName"]       ?: service.lineName;
@@ -347,7 +352,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           
           // update the real-time status
           NSString *realTimeStatus = refDict[@"realTimeStatus"];
-          [TKParserHelper adjustService:service forRealTimeStatusString:realTimeStatus];
+          [TKCoreDataParserHelper adjustService:service forRealTimeStatusString:realTimeStatus];
           
           // keep the vehicles
           [TKAPIToCoreDataConverter updateVehiclesForService:service
@@ -358,7 +363,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           // private transport
           [reference setSharedVehicleData:refDict[@"sharedVehicle"]];
           [reference setVehicleUUID:refDict[@"vehicleUUID"]];
-          [TKParserHelper updateVehiclesForSegmentReference:reference
+          [TKCoreDataParserHelper updateVehiclesForSegmentReference:reference
                                              primaryVehicle:refDict[@"realtimeVehicle"]
                                         alternativeVehicles:nil];
         }
@@ -382,10 +387,14 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           }];
         }
         
-        // now we can add the template, too
-        if (unprocessedTemplateDict) {
-          [SegmentTemplate insertNewTemplateFromDictionary:unprocessedTemplateDict forService:service intoContext:self.context];
-          [segmentHashToTemplateDictionaryDict removeObjectForKey:[hashCode description]];
+        ZAssert(templateDict, @"No segment template found for code %@", hashCode);
+        if (isNewTemplate) {
+          [SegmentTemplate insertNewTemplateFromDictionary:templateDict forService:service relativeTime:reference.startTime intoContext:self.context];
+          [addedTemplateHashCodes addObject:hashCode];
+        } else if (service) {
+          // We don't need to insert the full template, but need to add
+          // shapes for that service
+          [SegmentTemplate insertNewShapesFromDictionary:templateDict forService:service relativeTime:reference.startTime modeInfo:[service findModeInfo] intoContext:self.context];
         }
         
         reference.index = @(segmentCount++);

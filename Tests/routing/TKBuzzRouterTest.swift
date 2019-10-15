@@ -14,6 +14,16 @@ import XCTest
 
 class TKBuzzRouterTest: TKTestCase {
 
+  override func setUp() {
+    super.setUp()
+    let env = ProcessInfo.processInfo.environment
+    if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
+      TripKit.apiKey = apiKey
+    } else {
+      preconditionFailure("Make sure you supply a TripGo API key")
+    }
+  }
+  
   func testParsingOldPTResult() throws {
     let parser = TKRoutingParser(tripKitContext: tripKitContext)
     
@@ -27,7 +37,7 @@ class TKBuzzRouterTest: TKTestCase {
       XCTAssertEqual(request?.tripGroups?.count, 3)
       XCTAssertEqual(request?.trips.count, 4 + 4 + 4)
       for trip in request?.trips ?? [] {
-        XCTAssertGreaterThan(trip.segments().count, 0)
+        XCTAssertGreaterThan(trip.segments.count, 0)
       }
       
       // Evaluating what's in Core Data
@@ -46,6 +56,15 @@ class TKBuzzRouterTest: TKTestCase {
     }
   }
   
+  func testParsingPerformance() throws {
+    let parser = TKRoutingParser(tripKitContext: tripKitContext)
+    let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
+    measure {
+      let request = parser.parseAndAddResultBlocking(json)
+      XCTAssertNotNil(request)
+    }
+  }
+  
   func testParsingGoGetResult() throws {
     let parser = TKRoutingParser(tripKitContext: tripKitContext)
     
@@ -60,19 +79,19 @@ class TKBuzzRouterTest: TKTestCase {
       XCTAssertEqual(request?.trips.count, 1)
       
       let trip = request?.trips.first
-      XCTAssertEqual(trip?.segments().count, 5)
+      XCTAssertEqual(trip?.segments.count, 5)
       
-      XCTAssertNil(trip?.segments()[1].bookingInternalURL())
-      XCTAssertNotNil(trip?.segments()[1].bookingExternalActions())
+      XCTAssertNil(trip?.segments[1].bookingInternalURL())
+      XCTAssertNotNil(trip?.segments[1].bookingExternalActions())
       
-      XCTAssertEqual(trip?.segments()[2].alerts().count, 4)
-      XCTAssertEqual(trip?.segments()[2].alertsWithAction().count, 0)
-      XCTAssertEqual(trip?.segments()[2].alertsWithContent().count, 4)
-      XCTAssertEqual(trip?.segments()[2].alertsWithLocation().count, 4)
-      XCTAssertEqual(trip?.segments()[2].timesAreRealTime(), true)
-      XCTAssertEqual(trip?.segments()[2].isSharedVehicle(), true)
+      XCTAssertEqual(trip?.segments[2].alerts().count, 4)
+      XCTAssertEqual(trip?.segments[2].alertsWithAction().count, 0)
+      XCTAssertEqual(trip?.segments[2].alertsWithContent().count, 4)
+      XCTAssertEqual(trip?.segments[2].alertsWithLocation().count, 4)
+      XCTAssertEqual(trip?.segments[2].timesAreRealTime, true)
+      XCTAssertEqual(trip?.segments[2].isSharedVehicle, true)
 
-      XCTAssertEqual(trip?.segments()[3].hasCarParks(), true)
+      XCTAssertEqual(trip?.segments[3].hasCarParks, true)
 
       // Make sure CoreData is happy
       try! self.tripKitContext.save()
@@ -85,12 +104,110 @@ class TKBuzzRouterTest: TKTestCase {
     }
   }
   
-  func testParsingPerformance() throws {
+  func testParsingCycleTrainCycleResult() throws {
     let parser = TKRoutingParser(tripKitContext: tripKitContext)
-    let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
-    measure {
-      let request = parser.parseAndAddResultBlocking(json)
+    
+    let expectation = self.expectation(description: "Parser finished")
+    
+    let json = try contentFromJSON(named: "routing-cycle-train-cycle") as! [String: Any]
+    parser.parseAndAddResult(json) { request in
+      // TODO: (in another test): check the waypoint issue
+      
       XCTAssertNotNil(request)
+      XCTAssertEqual(request?.tripGroups?.count, 5)
+      XCTAssertEqual(request?.trips.count, 33)
+
+      let cycleGroup = request?.tripGroups?.first { $0.trips.contains(where: { $0.usedModeIdentifiers().contains("cy_bic") }) }
+      XCTAssertEqual(cycleGroup?.sources.count, 3)
+
+      let cycleTrip = cycleGroup?.trips.min { $0.totalScore.doubleValue < $1.totalScore.doubleValue }
+      XCTAssertEqual(cycleTrip?.segments.count, 9)
+      XCTAssertEqual(cycleTrip?.segments[0].alerts().count, 0)
+      
+      // Make sure CoreData is happy
+      try! self.tripKitContext.save()
+      
+      expectation.fulfill()
+    }
+    
+    waitForExpectations(timeout: 3) { error in
+      XCTAssertNil(error)
+    }
+  }
+  
+  func testParsingPublicTransportWithStops() throws {
+    let parser = TKRoutingParser(tripKitContext: tripKitContext)
+    
+    let expectation = self.expectation(description: "Parser finished")
+    
+    let json = try contentFromJSON(named: "routing-with-stops") as! [String: Any]
+    parser.parseAndAddResult(json) { request in
+      XCTAssertNotNil(request)
+      XCTAssertEqual(request?.tripGroups?.count, 1)
+      XCTAssertEqual(request?.trips.count, 16)
+      
+      for trip in request?.trips ?? [] {
+        let services = trip.segments.compactMap { $0.service }
+        XCTAssertEqual(services.count, 1)
+        for service in services {
+          XCTAssertTrue(service.hasServiceData)
+          XCTAssertEqual(service.shape?.routeIsTravelled, true)
+          
+          for visit in service.visits ?? [] {
+            XCTAssertNotNil(visit.departure ?? visit.arrival, "No time for visit to stop \(visit.stop.stopCode) - service \(service.code)")
+          }
+        }
+      }
+      
+      if let best = request?.tripGroups?.first?.visibleTrip, let bestService = best.segments[2].service {
+        XCTAssertEqual(best.totalScore.doubleValue, 29.8, accuracy: 0.1)
+        XCTAssertEqual(bestService.code, "847016")
+        
+        XCTAssertEqual(bestService.visits?.count, 27)
+        XCTAssertEqual(bestService.sortedVisits.count, 27)
+        XCTAssertEqual(bestService.sortedVisits.map { $0.index.intValue }, (0...26).map { $0 })
+        
+        XCTAssertEqual(bestService.sortedVisits.map { $0.stop.stopCode },
+                       ["202634",
+                        "202635",
+                        "202637",
+                        "202653",
+                        "202654",
+                        "202656",
+                        "202659",
+                        "202661",
+                        "202663",
+                        "202255",
+                        "202257",
+                        "202268",
+                        "202281",
+                        "202258",
+                        "202260",
+                        "202151",
+                        "202152",
+                        "202153",
+                        "202155",
+                        "201060",
+                        "201051",
+                        "201056",
+                        "200055",
+                        "200057",
+                        "2000421",
+                        "200059",
+                        "200065",
+          ])
+      } else {
+        XCTFail("Couldn't find best trip")
+      }
+      
+      // Make sure CoreData is happy
+      try! self.tripKitContext.save()
+      
+      expectation.fulfill()
+    }
+    
+    waitForExpectations(timeout: 3) { error in
+      XCTAssertNil(error)
     }
   }
   

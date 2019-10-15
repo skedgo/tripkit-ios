@@ -30,6 +30,45 @@ extension Loc {
     return NSLocalizedString("Show", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that, when tapped, shows something, e.g., a list of alert")
   }
   
+  // MARK: - Vehicles and transport modes
+  
+  public static var Vehicles: String {
+    return NSLocalizedString("Vehicles", tableName: "TripKit", bundle: .tripKit, comment: "Title for showing the number of available vehicles (e.g., scooters, cars or bikes)")
+  }
+  
+  @objc
+  public static var VehicleTypeBicycle: String {
+    return NSLocalizedString("Bicycle", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Bicycle")
+  }
+  
+  public static var VehicleTypeEBike: String {
+    return NSLocalizedString("E-Bike", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: E-Bike")
+  }
+  
+  @objc
+  public static var VehicleTypeCar: String {
+    return NSLocalizedString("Car", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Car")
+  }
+  
+  public static var VehicleTypeKickScooter: String {
+    return NSLocalizedString("Kick Scooter", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Kick Scooter")
+  }
+  
+  public static var VehicleTypeMotoScooter: String {
+    return NSLocalizedString("Moto Scooter", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Moto Scooter")
+  }
+
+  @objc
+  public static var VehicleTypeMotorbike: String {
+    return NSLocalizedString("Motorbike", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Motorbike")
+  }
+
+  @objc
+  public static var VehicleTypeSUV: String {
+    return NSLocalizedString("SUV", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: SUV")
+  }
+
+  
   // MARK: - Linking to TSP
   
   @objc public static var Disconnect: String {
@@ -39,6 +78,7 @@ extension Loc {
   @objc public static var Setup: String {
     return NSLocalizedString("Setup", tableName: "TripKit", bundle: .tripKit, comment: "Set up to connect/link to a service provider, e.g., Uber")
   }
+  
   
   // MARK: - Accessibility
   
@@ -58,8 +98,62 @@ extension Loc {
     return NSLocalizedString("Unknown", tableName: "TripKit", bundle: .tripKit, comment: "Indicating the wheelchair/cycling friendliness of a path is unknown")
   }
   
+  
+  // MARK: - Permission manager
+  
+  public static var ContactsAuthorizationAlertText: String {
+    return NSLocalizedString("You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Contacts authorisation needed text")
+  }
+  
+  public static func PersonsHome(name: String) -> String {
+    let format = NSLocalizedString("%@'s Home", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "'%@' will be replaced with the person's name")
+    return String(format: format, name)
+  }
+
+  public static func PersonsWork(name: String) -> String {
+    let format = NSLocalizedString("%@'s Work", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "'%@' will be replaced with the person's name")
+    return String(format: format, name)
+  }
+
+  public static func PersonsPlace(name: String) -> String {
+    let format = NSLocalizedString("%@'s", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "'%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else.")
+    return String(format: format, name)
+  }
+
+  
+  // MARK: - Cards
+  
+  @objc public static var Dismiss: String {
+    return NSLocalizedString("Dismiss", tableName: "TripKit", bundle: .tripKit, comment: "Button to dismiss something, e.g., an error or action action sheet")
+  }
+  
+  @objc public static var LeaveAt: String {
+    return NSLocalizedString("Leave at", tableName: "TripKit", bundle: .tripKit, comment: "Leave after button")
+  }
+  
+  @objc public static var ArriveBy: String {
+    return NSLocalizedString("Arrive by", tableName: "TripKit", bundle: .tripKit, comment: "Arrive before button")
+  }
+  
+  @objc public static var Transport: String {
+    return NSLocalizedString("Transport", tableName: "TripKit", bundle: .tripKit, comment: "Title for button to access transport modes")
+  }
+  
+  
   // MARK: - Format
 
+  @objc(Departs:capitalize:)
+  public static func Departs(atTime time: String, capitalize: Bool = false) -> String {
+    let format = NSLocalizedString("departs %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Estimated time of departure; parameter is time, e.g., 'departs 15:30'")
+    return String(format: capitalize ? format.localizedCapitalized : format, time)
+  }
+  
+  @objc(Arrives:capitalize:)
+  public static func Arrives(atTime time: String, capitalize: Bool = false) -> String {
+    let format = NSLocalizedString("arrives %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'")
+    return String(format: capitalize ? format.localizedCapitalized : format, time)
+  }
+  
   @objc(ArriveAtDate:)
   public static func ArriveAt(date: String) -> String {
     let format = NSLocalizedString("Arrive at %@", tableName: "TripKit", bundle: .tripKit, comment: "'%@' will be replaced with the arrival time. (old key: ArrivalTime)")
@@ -72,15 +166,32 @@ extension Loc {
     return String(format: format, from)
   }
 
+  public static var FromCurrentLocation: String {
+    return NSLocalizedString("From current location", tableName: "TripKit", bundle: .tripKit, comment: "")
+  }
+
+  
   @objc(ToLocation:)
   public static func To(location to: String) -> String {
     let format = NSLocalizedString("To %@", tableName: "TripKit", bundle: .tripKit, comment: "Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd)")
     return String(format: format, to)
   }
 
-  @objc public static func To(from: String, to: String) -> String {
-    let format = NSLocalizedString("%@ to %@", tableName: "TripKit", bundle: .tripKit, comment: "For describing a time interval, e.g., '8:30 to 8:43'")
-    return String(format: format, from, to)
+  @objc(FromTime:toTime:)
+  public static func fromTime(_ from: String, toTime to: String) -> String {
+    #if os(iOS) || os(tvOS)
+    switch UIView.userInterfaceLayoutDirection(for: .unspecified) {
+    case .leftToRight:
+      return String(format: "%@ → %@", from, to)
+    case .rightToLeft:
+      return String(format: "%@ ← %@", to, from)
+    @unknown default:
+      assertionFailure("Unexpected case encountered")
+      return String(format: "%@ → %@", from, to)
+    }
+    #else
+    return String(format: "%@ → %@", from, to)
+    #endif
   }
   
   @objc(Stops:)
@@ -126,6 +237,11 @@ extension Loc {
     
     let format = NSLocalizedString("%@ alerts", tableName: "TripKit", bundle: .tripKit, comment: "Number of alerts, in this case, there are multiple (plural)")
     return String(format: format, NSNumber(value: count))
+  }
+  
+  @objc
+  public static var RoutingBetweenTheseLocationsIsNotYetSupported: String {
+    return NSLocalizedString("Routing between these locations is not yet supported.", tableName: "TripKit", bundle: .tripKit, comment: "")
   }
   
 }

@@ -14,13 +14,12 @@ public enum TripKit {
   
   public static var apiKey: String {
     get {
-      return SVKServer.shared.apiKey
+      return TKServer.shared.apiKey
     }
     set {
-      SVKServer.shared.apiKey = newValue
+      TKServer.shared.apiKey = newValue
     }
   }
-  
   
   /// Prepares TripKit to be used
   ///
@@ -30,31 +29,56 @@ public enum TripKit {
   public static func prepareForNewSession() {
     
     // Backwards compatibility with old versions of TripKit
-    NSKeyedUnarchiver.setClass(SGKNamedCoordinate.self, forClassName: "TripKit.SGKNamedCoordinate")
-    NSKeyedUnarchiver.setClass(SGKNamedCoordinate.self, forClassName: "SGCoreKit.SGKNamedCoordinate")
-    NSKeyedUnarchiver.setClass(SGKNamedCoordinate.self, forClassName: "SGKNamedCoordinate")
-    NSKeyedUnarchiver.setClass(SGKNamedCoordinate.self, forClassName: "SGNamedCoordinate")
-    NSKeyedUnarchiver.setClass(SGKNamedCoordinate.self, forClassName: "NamedCoordinate")
+    NSKeyedUnarchiver.setClass(TKNamedCoordinate.self, forClassName: "TripKit.TKNamedCoordinate")
+    NSKeyedUnarchiver.setClass(TKNamedCoordinate.self, forClassName: "TripKit.SGKNamedCoordinate")
+    NSKeyedUnarchiver.setClass(TKNamedCoordinate.self, forClassName: "SGCoreKit.SGKNamedCoordinate")
+    NSKeyedUnarchiver.setClass(TKNamedCoordinate.self, forClassName: "TKNamedCoordinate")
+    NSKeyedUnarchiver.setClass(TKNamedCoordinate.self, forClassName: "SGKNamedCoordinate")
+    NSKeyedUnarchiver.setClass(TKNamedCoordinate.self, forClassName: "SGNamedCoordinate")
+    NSKeyedUnarchiver.setClass(TKNamedCoordinate.self, forClassName: "NamedCoordinate")
+
+    NSKeyedUnarchiver.setClass(TKModeCoordinate.self, forClassName: "TripKit.TKModeCoordinate")
+    NSKeyedUnarchiver.setClass(TKModeCoordinate.self, forClassName: "TripKit.STKModeCoordinate")
+    NSKeyedUnarchiver.setClass(TKModeCoordinate.self, forClassName: "TKModeCoordinate")
+    NSKeyedUnarchiver.setClass(TKModeCoordinate.self, forClassName: "STKModeCoordinate")
+
+    NSKeyedUnarchiver.setClass(TKMiniInstruction.self, forClassName: "TripKit.TKMiniInstruction")
+    NSKeyedUnarchiver.setClass(TKMiniInstruction.self, forClassName: "TripKit.STKMiniInstruction")
+    NSKeyedUnarchiver.setClass(TKMiniInstruction.self, forClassName: "TKMiniInstruction")
+    NSKeyedUnarchiver.setClass(TKMiniInstruction.self, forClassName: "STKMiniInstruction")
     
-    NSKeyedUnarchiver.setClass(STKStopCoordinate.self, forClassName: "TripKit.STKStopCoordinate")
-    NSKeyedUnarchiver.setClass(STKStopCoordinate.self, forClassName: "SGCoreKit.STKStopCoordinate")
-    NSKeyedUnarchiver.setClass(STKStopCoordinate.self, forClassName: "STKStopCoordinate")
-    NSKeyedUnarchiver.setClass(STKStopCoordinate.self, forClassName: "SGStopCoordinate")
+    NSKeyedUnarchiver.setClass(TKStopCoordinate.self, forClassName: "TripKit.TKStopCoordinate")
+    NSKeyedUnarchiver.setClass(TKStopCoordinate.self, forClassName: "TripKit.STKStopCoordinate")
+    NSKeyedUnarchiver.setClass(TKStopCoordinate.self, forClassName: "SGCoreKit.STKStopCoordinate")
+    NSKeyedUnarchiver.setClass(TKStopCoordinate.self, forClassName: "TKStopCoordinate")
+    NSKeyedUnarchiver.setClass(TKStopCoordinate.self, forClassName: "STKStopCoordinate")
+    NSKeyedUnarchiver.setClass(TKStopCoordinate.self, forClassName: "SGStopCoordinate")
 
-    NSKeyedUnarchiver.setClass(SVKRegion.self, forClassName: "TripKit.SVKRegion")
-    NSKeyedUnarchiver.setClass(SVKRegion.self, forClassName: "SGCoreKit.SVKRegion")
-    NSKeyedUnarchiver.setClass(SVKRegion.self, forClassName: "SVKRegion")
-    NSKeyedUnarchiver.setClass(SVKRegion.self, forClassName: "SGRegion")
-    NSKeyedUnarchiver.setClass(SVKRegion.self, forClassName: "Region")
+    NSKeyedUnarchiver.setClass(TKRegion.self, forClassName: "TripKit.TKRegion")
+    NSKeyedUnarchiver.setClass(TKRegion.self, forClassName: "TripKit.SVKRegion")
+    NSKeyedUnarchiver.setClass(TKRegion.self, forClassName: "SGCoreKit.SVKRegion")
+    NSKeyedUnarchiver.setClass(TKRegion.self, forClassName: "TKRegion")
+    NSKeyedUnarchiver.setClass(TKRegion.self, forClassName: "SVKRegion")
+    NSKeyedUnarchiver.setClass(TKRegion.self, forClassName: "SGRegion")
+    NSKeyedUnarchiver.setClass(TKRegion.self, forClassName: "Region")
 
-    NSKeyedUnarchiver.setClass(ModeInfo.self, forClassName: "TripKit.ModeInfo")
-    NSKeyedUnarchiver.setClass(ModeInfo.self, forClassName: "SGCoreKit.ModeInfo")
-    NSKeyedUnarchiver.setClass(ModeInfo.self, forClassName: "ModeInfo")
+    NSKeyedUnarchiver.setClass(TKModeInfo.self, forClassName: "TripKit.TKModeInfo")
+    NSKeyedUnarchiver.setClass(TKModeInfo.self, forClassName: "TripKit.ModeInfo")
+    NSKeyedUnarchiver.setClass(TKModeInfo.self, forClassName: "SGCoreKit.ModeInfo")
+    NSKeyedUnarchiver.setClass(TKModeInfo.self, forClassName: "TKModeInfo")
+    NSKeyedUnarchiver.setClass(TKModeInfo.self, forClassName: "ModeInfo")
     
     // Give the main class a nudge to wake up
     let _ = TripKit.shared
     
-    SVKServer.shared.updateRegions(forced: false)
+    TKServer.shared.updateRegions(forced: false)
   }
   
+}
+
+extension TKTripKit {
+  @objc
+  public static func prepareForNewSession() {
+    TripKit.prepareForNewSession()
+  }
 }

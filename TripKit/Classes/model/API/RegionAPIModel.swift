@@ -11,10 +11,10 @@ import Foundation
 extension API {
   
   /// Formerly known as `TKRegionInfo`
-  public struct RegionInfo: Codable, Equatable {
+  public struct RegionInfo: Codable, Hashable {
     public let streetBicyclePaths: Bool
     public let streetWheelchairAccessibility: Bool
-    public let transitModes: [ModeInfo]
+    public let transitModes: [TKModeInfo]
     public let transitBicycleAccessibility: Bool
     public let transitConcessionPricing: Bool
     public let transitWheelchairAccessibility: Bool
@@ -23,7 +23,7 @@ extension API {
     /// Additional information for some of the modes in the region.
     /// Dictionary of a generic mode identifier to the details.
     ///
-    /// Use `SVKTransportModes.genericModeIdentifier` to get the
+    /// Use `TKTransportModes.genericModeIdentifier` to get the
     /// generic part of any mode identifier.
     public let modes: [String: GenericModeDetails]
   }
@@ -33,7 +33,7 @@ extension API {
   ///
   /// Formerly known as `TKParatransitInfo`
   /// - SeeAlso: `TKBuzzInfoProvider`'s `fetchParatransitInformation`
-  public struct Paratransit: Codable, Equatable {
+  public struct Paratransit: Codable, Hashable {
     public let name: String
     public let url: URL
     public let number: String
@@ -54,12 +54,12 @@ extension API {
   
   /// Additional details about a group of modes,
   /// e.g., all bike or car share providers in a city
-  public struct GenericModeDetails: Codable, Equatable {
+  public struct GenericModeDetails: Codable, Hashable {
     /// Name of the group
     public let title: String
     
     /// Additional info about the mode group
-    public let modeInfo: ModeInfo
+    public let modeInfo: TKModeInfo
     
     /// The specific modes of this group that are
     /// available for your API key.
@@ -79,12 +79,12 @@ extension API {
   /// specific mode usually relates to a certain transport
   /// provider, such as a car-sharing provider, bike-sharing
   /// provider, limousine company, or TNC.
-  public struct SpecificModeDetails: Codable, Equatable {
+  public struct SpecificModeDetails: Codable, Hashable {
     /// Name of thise mode
     public let title: String?
     
     /// Additional info about the mode
-    public let modeInfo: ModeInfo
+    public let modeInfo: TKModeInfo
     
     /// Available integrations for this mode that are available
     /// through the TripGo API.
@@ -101,6 +101,9 @@ extension API {
     /// List of public transport operator names servicing
     /// this mode. (Public transport modes only)
     public let operators: [String]?
+    
+    /// List of image name-parts related to this operator
+    public let modeImageNames: [String]?
     
     public var identifier: String {
       if let id = modeInfo.identifier {
@@ -121,7 +124,7 @@ extension API.RegionInfo {
   ///     (only returns something if it's a specific mode identifier, i.e.,
   ///     one with two underscores in it.)
   public func specificModeDetails(for modeIdentifier: String) -> API.SpecificModeDetails? {
-    let genericMode = SVKTransportModes.genericModeIdentifier(forModeIdentifier: modeIdentifier)
+    let genericMode = TKTransportModes.genericModeIdentifier(forModeIdentifier: modeIdentifier)
     return modes[genericMode]?.specificModes?.first { modeIdentifier == $0.identifier }
   }
   

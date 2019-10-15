@@ -26,10 +26,14 @@ public class TKJSONCache: TKFileCache {
       return nil
     }
   }
-  
+
   @objc public static func save(_ id: String, dictionary: [String: Any], directory: TKFileCacheDirectory) {
+    save(id, dictionary: dictionary, directory: directory, subdirectory: nil)
+  }
+  
+  @objc public static func save(_ id: String, dictionary: [String: Any], directory: TKFileCacheDirectory, subdirectory: String?) {
     let data = NSKeyedArchiver.archivedData(withRootObject: dictionary)
-    TKFileCache.save(id, data: data, directory: directory, subdirectory: nil)
+    TKFileCache.save(id, data: data, directory: directory, subdirectory: subdirectory)
   }
 }
 
@@ -84,7 +88,7 @@ public class TKFileCache: NSObject {
       do {
         try fileMan.createDirectory(at: pathURL, withIntermediateDirectories: true, attributes: nil)
       } catch {
-        SGKLog.warn("TKJSONCache", text: "Could not create directory \(pathURL), due to: \(error)")
+        TKLog.warn("TKJSONCache", text: "Could not create directory \(pathURL), due to: \(error)")
       }
     }
     

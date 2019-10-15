@@ -16,9 +16,6 @@
 /* No comment provided by engineer. */
 "1 stop" = "1 stop";
 
-/* Indication of an activity */
-"ActivityIndication" = "I'll take a %@ at %@ from %@.";
-
 /* apple maps directions action */
 "Apple Maps" = "Apple Maps";
 
@@ -35,14 +32,8 @@
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Could not find transit stop.";
 
-/* Description for how to redeem the coupon code for ingogo. %couponCode is provided. */
-"CouponCodeIngogoFormat" = "Enter coupon code '%@' when registering to claim your free $5 credit (only valid for new registrations)";
-
 /* Departure time sorter title */
 "Departure" = "Departure";
-
-/* Time of the bus departure */
-"DepartureTime" = "at %@";
 
 /* Destination of the bus */
 "Direction" = "Direction";
@@ -69,20 +60,8 @@
 /* No comment provided by engineer. */
 "Leave now" = "Leave now";
 
-/* The place of departure */
-"LeaveLocation" = "Leave %@";
-
-/* The place of departure with time */
-"LeaveLocationTime" = "Leave %@ at %@";
-
-/* Time departure */
-"LeaveTime" = "Leave at %@";
-
 /* No comment provided by engineer. */
 "Live traffic" = "Live traffic";
-
-/* ArrivalTime */
-"MessageArrivalTime" = "I'll arrive at %@ at %@.";
 
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "On time";
@@ -102,15 +81,6 @@
 /* Number of stops before you get off a vehicle */
 "%@ stops" = "%@ stops";
 
-/* From %time1 to %time2 */
-"TimeFromToShortFormat" = "%@ to %@";
-
 /* No comment provided by engineer. */
 "Trip" = "Trip";
-
-/* Vehicle 'x' updated */
-"VehicleCalledUpdated" = "Vehicle %@ updated %@ ago";
-
-/* Vehicle updated */
-"VehicleUpdated" = "Updated %@ ago";
 

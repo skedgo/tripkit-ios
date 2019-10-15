@@ -1,3 +1,30 @@
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ 前";
+
+/* Number of alerts, in this case, there are multiple (plural) */
+"%@ alerts" = "%@ 提示";
+
+/* Filler for a specific service running at a time, e.g., '396 at 11:56am' */
+"%@ at %@" = "%1$@ 於 %2$@";
+
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "自行車友善度%@";
+
+/* Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes' */
+"%@ every %@" = "%1$@ 每 %2$@";
+
+/* Text for an 'x more' indication if there's more content. '%@' will be replaced with a number */
+"%@ more" = "還有 %@ 個";
+
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@站";
+
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ 路況良好下";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "無障礙通道比例 %@";
+
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
 "%1$@ early" = "提前%1$@";
 
@@ -10,33 +37,20 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "延誤%1$@ (%2$@ 的班次)";
 
-/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
-"%@ ago" = "%@ ago";
-
-/* Number of alerts, in this case, there are multiple (plural */
-"%@ alerts" = "%@ 提示";
-
-/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
-"%@ cycle friendly" = "自行車友善度%@";
-
-/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
-"%@ stops" = "%@站";
-
-/* For describing a time interval, e.g., '8:30 to 8:43'
-   From %time1 to %time2. (old key: TimeFromToShortFormat) */
-"%@ to %@" = "%@ ～ %@";
-
-/* Duration without traffic */
-"%@ w/o traffic" = "%@ 路況良好下";
-
-/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
-"%@ wheelchair friendly" = "無障礙通道比例 %@";
+/* Number of alerts, in this case, there is just one */
+"1 alert" = "1個提示";
 
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1站";
 
 /* No comment provided by engineer. */
 "Alerts" = "警示";
+
+/* Instruction to follow street of the provided name */
+"Along %@" = "沿著%@";
+
+/* Instruction to follow unnamed street */
+"Along unnamed street" = "沿著未命名的街道";
 
 /* apple maps directions action */
 "Apple Maps" = "蘋果地圖";
@@ -54,14 +68,27 @@
 /* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
 "Arrive at %@ at %@" = "在%2$@到達%1$@";
 
+/* Arrive before button */
+"Arrive by" = "此前到達";
+
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "離到達";
 
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "於%@";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary)
+   Filler for a service running at time, e.g., 'At 11:56am' */
 "At %@" = "時刻 %@";
 
+/* Text for vehicle of type: Bicycle */
+"Bicycle" = "自行車";
+
+/* Action title to make a booking */
+"Book" = "預訂";
+
 /* Action title to make a booking using service/app named '@%' */
-"Book with %@" = "Book with %@";
+"Book with %@" = "預定%@";
 
 /* No comment provided by engineer. */
 "Call" = "聯繫計程車";
@@ -69,8 +96,20 @@
 /* Action title to make a call to service/company named '@%' */
 "Call %@" = "聯繫%@";
 
+/* Text for vehicle of type: Car */
+"Car" = "轎車";
+
+/* Trip badge: Cheapest */
+"Cheapest" = "最便宜";
+
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "無法找到車站";
+
+/* Text for attributing data sources. The list of providers will be used instead of '%@' */
+"Data provided by %@" = "資料供應商: %@";
+
+/* Title for screen showing data providers */
+"Data Providers" = "資料提供商";
 
 /* Departure time sorter title */
 "Departure" = "離站";
@@ -81,11 +120,38 @@
 /* To disconnect/unlink from a service provider, e.g., Uber */
 "Disconnect" = "登出連結的帳戶";
 
+/* Button to dismiss something, e.g., an error or action action sheet */
+"Dismiss" = "關閉";
+
+/* Indicating a path requires you to dismount and push your bicycle */
+"Dismount" = "需要推行";
+
+/* Text for vehicle of type: E-Bike */
+"E-Bike" = "電動自行車";
+
+/* Trip badge: Easiest */
+"Easiest" = "Easiest";
+
 /* As in 'this bus/train is empty' */
 "Empty" = "空車";
 
+/* Placeholder name for destination (then replaced with address or name) */
+"End location" = "終點";
+
+/* Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes' */
+"Every %@" = "每 %@";
+
+/* Action title to extend an existing booking */
+"Extend" = "延長現有預定";
+
+/* Trip badge: Fastest */
+"Fastest" = "最快速";
+
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "只有幾個座位";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "%@";
 
 /* Indicating a path is wheelchair/cycyling friendly */
 "Friendly" = "友善";
@@ -93,17 +159,35 @@
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "出發地: %@";
 
+/* No comment provided by engineer. */
+"From current location" = "從當前的位置";
+
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "車已滿";
 
 /* Action title get/download app of name '@%' */
-"Get %@" = "Get %@";
+"Get %@" = "取得 %@";
+
+/* Title for button to get/download an external app. */
+"Get app" = "下載 app";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "使用導航";
 
+/* Instruction to get a service towards provided destination */
+"Get on service to %@" = "Get on service to %@";
+
+/* goCatch action */
+"goCatch a Taxi" = "使用goCatch";
+
 /* google maps directions action */
 "Google Maps" = "Google地圖";
+
+/* Trip badge: Greenest */
+"Greenest" = "最環保";
+
+/* Trip badge: Healthiest */
+"Healthiest" = "最健康";
 
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
 "I'll arrive at %@ at %@" = "我將於%2$@到達%1$@.";
@@ -111,11 +195,23 @@
 /* Indication of an activity. (old key: ActivityIndication) */
 "I'll take a %@ at %@ from %@." = "我將於%2$@從%3$@搭乘%1$@.";
 
+/* Indication of an activity. */
+"I'll take a %@ from %@." = "I'll take a %1$@ from %2$@.";
+
 /* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
 "In %@" = "In %@";
 
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "在此同時，讓我們繼續使用 %@，享受你的旅行";
+
+/* inGogo taxi booking action */
+"ingogo a Taxi" = "Ingogo叫車服務";
+
+/* Title for section with instant results in autocompletion */
+"Instant results" = "快速搜尋結果";
+
+/* Text for vehicle of type: Kick Scooter */
+"Kick Scooter" = "踢踏板車";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -126,6 +222,9 @@
 
 /* The place of departure with time. (old key: LeaveLocationTime) */
 "Leave %@ at %@" = "在%2$@離開%1$@";
+
+/* Leave after button */
+"Leave at" = "此前離開";
 
 /* Time departure. (old key: LeaveTime) */
 "Leave at %@" = "於%@離開";
@@ -143,7 +242,7 @@
 "Live traffic" = "即時路況";
 
 /* Indicating when something is loading */
-"Loading..." = "載入中...";
+"Loading…" = "正在載入…";
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "尚有很多座位";
@@ -151,8 +250,20 @@
 /* Title of button to get more details about an alert */
 "More info" = "更多資訊";
 
+/* 'More results' section in autocompletion */
+"More results" = "更多搜尋結果";
+
+/* Text for vehicle of type: Moto Scooter */
+"Moto Scooter" = "小型摩托車";
+
+/* Text for vehicle of type: Motorbike */
+"Motorbike" = "摩托車";
+
 /* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "沒有已規劃的路線";
+
+/* Error title when routing produced no results (but no specific error was returned from routing). */
+"No routes found." = "無法找到任何合適的路線";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
 "Not accepting passengers" = "不再接受乘客";
@@ -161,19 +272,46 @@
 "On time" = "準點";
 
 /* Action title open app of name '@%' */
-"Open %@" = "Open %@";
+"Open %@" = "開啟 %@";
+
+/* Title for button that opens an external app. */
+"Open app" = "開啟App";
 
 /* Title for opening hours */
 "Opening Hours" = "營業時間";
 
+/* Title for button that allows users to plan a new trip */
+"Plan a new trip" = "規劃新的路線";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "您在TripGo中所規劃的路線將會顯示在這裡．";
+
+/* Title of page to plan a trip */
+"Plan Trip" = "規劃路線";
+
+/* Error recovery suggestion for when routing produced no results (but no specific error was returned from routing). */
+"Please adjust your query and try again." = "請調整一下您的搜索條件並再次嘗試";
+
+/* No comment provided by engineer. */
+"Powered by" = "資料提供商";
+
+/* No comment provided by engineer. */
+"Powered by %@" = "資料提供商為 %@";
 
 /* No comment provided by engineer. */
 "Public holiday" = "公共假期";
 
 /* No comment provided by engineer. */
 "Real-time" = "即時";
+
+/* Trip badge: Recommended */
+"Recommended" = "推薦";
+
+/* Title for button that allows users to request support */
+"Request support" = "請求支援";
+
+/* Error message if interregional routing isn't yet supported */
+"Routing from %@ to %@ is not yet supported" = "尚未支援從%1$@到%2$@的路線";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Search for this stop again or try again later.";
@@ -193,11 +331,32 @@
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "只有站位";
 
+/* Title of button to start a trip */
+"Start" = "出發時間";
+
+/* Placeholder name for origin (then replaced with address or name) */
+"Start location" = "起點";
+
+/* Text for vehicle of type: SUV */
+"SUV" = "休旅車";
+
+/* Title of button to access timetable */
+"Timetable" = "時刻表";
+
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "目的地: %@";
 
+/* Title for button to access transport modes */
+"Transport" = "交通工具";
+
 /* Title for a trip */
 "Trip" = "旅程";
+
+/* Title for trip of provided index */
+"Trip %@" = "第 %@ 個旅程";
+
+/* Title of page that shows routing results */
+"Trips" = "路線";
 
 /* Indicating a path is wheelchair/cycyling unfriendly */
 "Unfriendly" = "不友善";
@@ -209,23 +368,14 @@
 "Updated %@ ago" = "%@前更新";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
-"Vehicle %@ updated %@ ago" = "車輛%@的位置在%@前更新";
+"Vehicle %@ updated %@ ago" = "車輛%1$@的位置在%2$@前更新";
+
+/* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
+"Vehicles" = "Vehicles";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "我們正忙著規劃您的路線．請稍候．．．";
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "我們將在這裡提供您最新的交通警示";
-
-/* Time of the bus departure. (old key: DepartureTime) */
-"at %@" = "於%@";
-
-/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
-"for %@" = "%@";
-
-/* goCatch action */
-"goCatch a Taxi" = "使用goCatch";
-
-/* inGogo taxi booking action */
-"ingogo a Taxi" = "Ingogo叫車服務";
 

@@ -9,9 +9,9 @@
 @import CoreData;
 @import CoreLocation;
 
-@class Service, StopLocation, SGKNamedCoordinate;
+@class Service, StopLocation, TKNamedCoordinate;
 
-typedef NS_ENUM(NSInteger, AlertSeverity) {
+typedef NS_CLOSED_ENUM(NSInteger, AlertSeverity) {
   AlertSeverityInfo = -1,
   AlertSeverityWarning = 0,
   AlertSeverityAlert = 1,
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Alert : NSManagedObject
 
-@property (nonatomic, retain, nullable) SGKNamedCoordinate *location;
+@property (nonatomic, retain, nullable) TKNamedCoordinate *location;
 @property (nonatomic, retain) NSNumber * hashCode;
 @property (nonatomic, copy, nullable) NSString * title;
 @property (nonatomic, retain, nullable) NSString * text;

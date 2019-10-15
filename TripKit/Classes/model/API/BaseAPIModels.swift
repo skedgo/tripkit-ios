@@ -10,21 +10,23 @@ import Foundation
 
 extension API {
   
-  public struct CompanyInfo : Codable, Equatable {
+  public struct CompanyInfo: Codable, Hashable {
     public let name: String
     public let website: URL?
     public let phone: String?
     public let remoteIcon: String?
     public let remoteDarkIcon: String?
     public let color: RGBColor?
+    public let appInfo: AppInfo?
     
-    public init(name: String, website: URL? = nil, phone: String? = nil, remoteIcon: String? = nil, remoteDarkIcon: String? = nil, color: RGBColor? = nil) {
+    public init(name: String, website: URL? = nil, phone: String? = nil, remoteIcon: String? = nil, remoteDarkIcon: String? = nil, color: RGBColor? = nil, appInfo: AppInfo? = nil) {
       self.name = name
       self.website = website
       self.phone = phone
       self.remoteIcon = remoteIcon
       self.remoteDarkIcon = remoteDarkIcon
       self.color = color
+      self.appInfo = appInfo
     }
     
     // MARK: Codable (more robust)
@@ -38,12 +40,12 @@ extension API {
       remoteIcon = try? values.decode(String.self, forKey: .remoteIcon)
       remoteDarkIcon = try? values.decode(String.self, forKey: .remoteDarkIcon)
       color = try? values.decode(RGBColor.self, forKey: .color)
+      appInfo = try? values.decode(AppInfo.self, forKey: .appInfo)
     }
-
     
   }
   
-  public struct DataAttribution : Codable, Equatable {
+  public struct DataAttribution: Codable, Hashable {
     public let provider: CompanyInfo
     public let disclaimer: String?
     
@@ -53,7 +55,7 @@ extension API {
     }
   }
   
-  public struct Location: Codable, Equatable {
+  public struct Location: Codable, Hashable {
     let lat: CLLocationDegrees
     let lng: CLLocationDegrees
     let bearing: CLLocationDirection?
@@ -69,17 +71,17 @@ extension API {
     case canceled   = "CANCELLED"
   }
 
-  public struct RGBColor: Codable, Equatable {
+  public struct RGBColor: Codable, Hashable {
     let red: Int
     let green: Int
     let blue: Int
     
-    var color: SGKColor {
-      return SGKColor(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: 1)
+    public var color: TKColor {
+      return TKColor(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: 1)
     }
     
     #if os(iOS) || os(tvOS)
-      public init?(for color: SGKColor?) {
+      public init?(for color: TKColor?) {
         guard let color = color else { return nil }
         var red: CGFloat = 0
         var green: CGFloat = 0
@@ -93,7 +95,7 @@ extension API {
         }
       }
     #elseif os(OSX)
-    public init?(for color: SGKColor?) {
+    public init?(for color: TKColor?) {
       guard let color = color else { return nil }
       var red: CGFloat = 0
       var green: CGFloat = 0
@@ -116,7 +118,7 @@ extension API.CompanyInfo {
       return nil
     }
     
-    return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+    return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: .listMainMode)
   }
   
   public var remoteDarkIconURL: URL? {
@@ -124,7 +126,7 @@ extension API.CompanyInfo {
       return nil
     }
     
-    return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+    return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: .listMainMode)
   }
   
 }

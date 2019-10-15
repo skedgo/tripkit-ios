@@ -22,10 +22,6 @@
 /* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
 "%@ stops" = "%@ paradas";
 
-/* For describing a time interval, e.g., '8:30 to 8:43'
-   From %time1 to %time2. (old key: TimeFromToShortFormat) */
-"%@ to %@" = "%@ até %@";
-
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ sem trânsito";
 
@@ -143,7 +139,7 @@
 "Live traffic" = "Trânsito em tempo real";
 
 /* Indicating when something is loading */
-"Loading..." = "Carregando...";
+"Loading…" = "Carregando…";
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Muitos lugares disponíveis";

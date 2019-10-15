@@ -10,15 +10,15 @@ import Foundation
 
 extension API {
   
-  public struct Alert: Codable, Equatable {
+  public struct Alert: Codable, Hashable {
     public enum Severity: String, Codable {
       case info = "info"
       case warning = "warning"
       case alert = "alert"
     }
     
-    public struct Action: Equatable {
-      enum ActionType: Equatable {
+    public struct Action: Hashable {
+      enum ActionType: Hashable {
         case reroute([String])
       }
       
@@ -38,6 +38,7 @@ extension API {
     let hashCode: Int    
     let action: Action?    
     let location: API.Location?
+    let serviceTripID: String?
     
     // MARK: - Codable
     public init(from decoder: Decoder) throws {
@@ -50,6 +51,7 @@ extension API {
       action      = try? container.decode(Action.self, forKey: .action)
       remoteIcon  = try? container.decode(URL.self, forKey: .remoteIcon)
       location    = try? container.decode(Location.self, forKey: .location)
+      serviceTripID = try? container.decode(String.self, forKey: .serviceTripID)
       lastUpdated  = try? container.decode(Date.self, forKey: .lastUpdated)
       fromDate   = try? container.decode(Date.self, forKey: .fromDate)
       toDate     = try? container.decode(Date.self, forKey: .toDate)
@@ -57,23 +59,23 @@ extension API {
   }
   
   /// Replaces the previous `TKAlertWrapper`
-  public struct AlertMapping: Codable, Equatable {
+  public struct AlertMapping: Codable, Hashable {
     public let alert: API.Alert
     public let operators: [String]?
     public let serviceTripIDs: [String]?
     public let stopCodes: [String]?
     public let routes: [API.Route]?
-    public let modeInfo: ModeInfo?
+    public let modeInfo: TKModeInfo?
   }
   
-  public struct Route: Codable, Equatable {
+  public struct Route: Codable, Hashable {
     public let id: String
     public let name: String?
     public let number: String?
-    public let modeInfo: ModeInfo
+    public let modeInfo: TKModeInfo
     
     /// This color applies to an individual service.
-    public var color: SGKColor? { return modeInfo.color }
+    public var color: TKColor? { return modeInfo.color }
   }
   
 }

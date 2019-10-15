@@ -1,0 +1,384 @@
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ sedan";
+
+/* Number of alerts, in this case, there are multiple (plural) */
+"%@ alerts" = "%@ aviseringar";
+
+/* Filler for a specific service running at a time, e.g., '396 at 11:56am' */
+"%@ at %@" = "%1$@s kl. %2$@s";
+
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ cykelvänlig";
+
+/* Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes' */
+"%@ every %@" = "%1$@ var %2$@";
+
+/* Text for an 'x more' indication if there's more content. '%@' will be replaced with a number */
+"%@ more" = "%@ till";
+
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ stopp";
+
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ utan trafik";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ rullstolsanpassad";
+
+/* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
+"%1$@ early" = "%1$@ tidig";
+
+/* Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
+"%1$@ early (%2$@ service)" = "%1$@ tidig (%2$@ tjänst)";
+
+/* Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min' */
+"%1$@ late" = "%1$@ sen";
+
+/* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
+"%1$@ late (%2$@ service)" = "%1$@ sen (%2$@ tjänst)";
+
+/* Number of alerts, in this case, there is just one */
+"1 alert" = "1 avisering";
+
+/* Number of stops before you get off a stop, if there's just 1 stop. */
+"1 stop" = "1 stopp";
+
+/* No comment provided by engineer. */
+"Alerts" = "Aviseringar";
+
+/* Instruction to follow street of the provided name */
+"Along %@" = "Längs %@";
+
+/* Instruction to follow unnamed street */
+"Along unnamed street" = "Längs namnlös gata";
+
+/* apple maps directions action */
+"Apple Maps" = "Apple Kartor";
+
+/* Arrival time sorter title */
+"Arrival" = "Ankomst";
+
+/* Prefix for selected 'arrive by' time
+   Single line instruction to arrive */
+"Arrive" = "Ankomst";
+
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "Anländer kl. %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "Anländer till %1$@ kl. %2$@";
+
+/* Arrive before button */
+"Arrive by" = "Anländer med";
+
+/* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
+"Arrive in" = "Anländer om";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "kl. %@";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary)
+   Filler for a service running at time, e.g., 'At 11:56am' */
+"At %@" = "Kl. %@";
+
+/* Text for vehicle of type: Bicycle */
+"Bicycle" = "Cykel";
+
+/* Action title to make a booking */
+"Book" = "Boka";
+
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "Boka med %@";
+
+/* No comment provided by engineer. */
+"Call" = "Ring";
+
+/* Action title to make a call to service/company named '@%' */
+"Call %@" = "Ring %@";
+
+/* Text for vehicle of type: Car */
+"Car" = "Bil";
+
+/* Trip badge: Cheapest */
+"Cheapest" = "Billigast";
+
+/* Error title when server could not find a given transit stop. */
+"Could not find transit stop." = "Det gick inte att hitta mellanlandning/byte.";
+
+/* Text for attributing data sources. The list of providers will be used instead of '%@' */
+"Data provided by %@" = "Data från %@";
+
+/* Title for screen showing data providers */
+"Data Providers" = "Dataleverantörer";
+
+/* Departure time sorter title */
+"Departure" = "Avgång";
+
+/* Destination of the bus */
+"Direction" = "Riktning";
+
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "Koppla från";
+
+/* Button to dismiss something, e.g., an error or action action sheet */
+"Dismiss" = "Avvisa";
+
+/* Indicating a path requires you to dismount and push your bicycle */
+"Dismount" = "Kliv av";
+
+/* Text for vehicle of type: E-Bike */
+"E-Bike" = "Elcykel";
+
+/* Trip badge: Easiest */
+"Easiest" = "Lättast";
+
+/* As in 'this bus/train is empty' */
+"Empty" = "Tom";
+
+/* Placeholder name for destination (then replaced with address or name) */
+"End location" = "Slutdestination";
+
+/* Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes' */
+"Every %@" = "Var %@";
+
+/* Action title to extend an existing booking */
+"Extend" = "Förläng";
+
+/* Trip badge: Fastest */
+"Fastest" = "Snabbast";
+
+/* As in 'this bus/train has few seats available' */
+"Few seats available" = "Få lediga platser";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "i %@";
+
+/* Indicating a path is wheelchair/cycyling friendly */
+"Friendly" = "Vänlig";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "Från %@";
+
+/* No comment provided by engineer. */
+"From current location" = "Från nuvarande plats";
+
+/* As in 'this bus/train is full and likely can't accept further passengers' */
+"Full" = "Fullt";
+
+/* Action title get/download app of name '@%' */
+"Get %@" = "Hämta %@";
+
+/* Title for button to get/download an external app. */
+"Get app" = "Hämta app";
+
+/* Action button title for getting turn-by-turn directions */
+"Get directions" = "Få vägbeskrivningar";
+
+/* Instruction to get a service towards provided destination */
+"Get on service to %@" = "Åk med tjänst till %@";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch en taxi";
+
+/* google maps directions action */
+"Google Maps" = "Google Maps";
+
+/* Trip badge: Greenest */
+"Greenest" = "Grönast";
+
+/* Trip badge: Healthiest */
+"Healthiest" = "Sundast";
+
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "Jag anländer till %1$@ kl. %2$@";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "Jag tar %1$@ kl. %2$@ från %3$@.";
+
+/* Indication of an activity. */
+"I'll take a %@ from %@." = "Jag tar %1$@ från %2$@.";
+
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "Om %@";
+
+/* %@ is replaced with app name */
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "Under tiden fortsätter vi att utforska %@ och njut av resan";
+
+/* inGogo taxi booking action */
+"ingogo a Taxi" = "ingogo en taxi";
+
+/* Title for section with instant results in autocompletion */
+"Instant results" = "Omedelbara resultat";
+
+/* Text for vehicle of type: Kick Scooter */
+"Kick Scooter" = "Sparkcykel";
+
+/* Prefix for selected 'leave after' time
+   Single line instruction to leave */
+"Leave" = "Avgång";
+
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "Avgång från %@";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "Avgång från %1$@ kl. %2$@";
+
+/* Leave after button */
+"Leave at" = "Åk klockan";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "Avgång kl. %@";
+
+/* Title for when to depart. Countdown to departure will be displayed below. */
+"Leave in" = "Avgång om";
+
+/* No comment provided by engineer. */
+"Leave now" = "Avgång nu";
+
+/* As in 'this bus/train is so full, there's only limited standing room' */
+"Limited standing room only" = "Endast begränsat med ståplatser";
+
+/* No comment provided by engineer. */
+"Live traffic" = "Trafik i realtid";
+
+/* Indicating when something is loading */
+"Loading…" = "Laddar…";
+
+/* As in 'this bus/train has many seats available' */
+"Many seats available" = "Många lediga platser";
+
+/* Title of button to get more details about an alert */
+"More info" = "Mer info";
+
+/* 'More results' section in autocompletion */
+"More results" = "Fler resultat";
+
+/* Text for vehicle of type: Moto Scooter */
+"Moto Scooter" = "Motordriven sparkcykel";
+
+/* Text for vehicle of type: Motorbike */
+"Motorbike" = "Motorcykel";
+
+/* Indicating no trips have been planned within the next 24 hrs */
+"No planned trips" = "Inga planerade resor";
+
+/* Indicator to show when a service does not have real-time data (even though we usually get it for services like this.) */
+"No real-time available" = "Realtid inte tillgängligt";
+
+/* Error title when routing produced no results (but no specific error was returned from routing). */
+"No routes found." = "Inga rutter hittades.";
+
+/* As in 'this bus/train is full and definitely not accepting further passengers' */
+"Not accepting passengers" = "Tar inte emot passagerare";
+
+/* Indicator to show when a service is on time according to real-time data. */
+"On time" = "I tid";
+
+/* Action title open app of name '@%' */
+"Open %@" = "Öppna %@";
+
+/* Title for button that opens an external app. */
+"Open app" = "Öppna app";
+
+/* Title for opening hours */
+"Opening Hours" = "Öppettider";
+
+/* Title for button that allows users to plan a new trip */
+"Plan a new trip" = "Planera en ny resa";
+
+/* No comment provided by engineer. */
+"Plan a trip and it will show up here." = "Planera en resa så visas den här.";
+
+/* Title of page to plan a trip */
+"Plan Trip" = "Planera resa";
+
+/* Error recovery suggestion for when routing produced no results (but no specific error was returned from routing). */
+"Please adjust your query and try again." = "Justera din sökning och försök igen.";
+
+/* No comment provided by engineer. */
+"Powered by" = "Drivs av";
+
+/* No comment provided by engineer. */
+"Powered by %@" = "Drivs av %@";
+
+/* No comment provided by engineer. */
+"Public holiday" = "Helgdag";
+
+/* No comment provided by engineer. */
+"Real-time" = "Realtid";
+
+/* Trip badge: Recommended */
+"Recommended" = "Rekommenderad";
+
+/* Title for button that allows users to request support */
+"Request support" = "Begär support";
+
+/* Error message if interregional routing isn't yet supported */
+"Routing from %@ to %@ is not yet supported" = "Rutter från %1$@ till %2$@ stöds inte än";
+
+/* Error recovery suggestion for when when server could not find a given transit stop. */
+"Search for this stop again or try again later.." = "Sök efter mellanlandning/byte igen eller försök igen senare...";
+
+/* Send SMS action button */
+"Send SMS" = "Skicka SMS";
+
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "Konfigurera";
+
+/* Title for button that, when tapped, shows something, e.g., a list of alert */
+"Show" = "Visa";
+
+/* Show website action button */
+"Show website" = "Visa webbplats";
+
+/* As in 'this bus/train is fairly full and has standing room only' */
+"Standing room only" = "Endast ståplatser";
+
+/* Title of button to start a trip */
+"Start" = "Starta";
+
+/* Placeholder name for origin (then replaced with address or name) */
+"Start location" = "Startplats";
+
+/* Text for vehicle of type: SUV */
+"SUV" = "SUV";
+
+/* Title of button to access timetable */
+"Timetable" = "Tidtabell";
+
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "Till %@";
+
+/* Title for button to access transport modes */
+"Transport" = "Transport";
+
+/* Title for a trip */
+"Trip" = "Resa";
+
+/* Title for trip of provided index */
+"Trip %@" = "Resa %@";
+
+/* Title of page that shows routing results */
+"Trips" = "Resor";
+
+/* Indicating a path is wheelchair/cycyling unfriendly */
+"Unfriendly" = "Inte vänlig";
+
+/* Indicating the wheelchair/cycling friendliness of a path is unknown */
+"Unknown" = "Okänt";
+
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "Uppdaterades för %@ sedan";
+
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "Fordon %1$@ uppdaterades för %2$@ sedan";
+
+/* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
+"Vehicles" = "Fordon";
+
+/* No comment provided by engineer. */
+"We are busy getting your upcoming trip. Please wait..." = "Vi är upptagna med att hämta din kommande resa. Vänta...";
+
+/* No comment provided by engineer. */
+"We'll keep you updated with the latest transit alerts here" = "Vi håller dig uppdaterad med de senaste transitaviseringarna här";
+

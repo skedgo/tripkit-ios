@@ -1,3 +1,30 @@
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ fa";
+
+/* Number of alerts, in this case, there are multiple (plural) */
+"%@ alerts" = "%@ avvisi";
+
+/* Filler for a specific service running at a time, e.g., '396 at 11:56am' */
+"%@ at %@" = "%1$@ alle %2$@";
+
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ cycle friendly";
+
+/* Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes' */
+"%@ every %@" = "%1$@ ogni %2$@";
+
+/* Text for an 'x more' indication if there's more content. '%@' will be replaced with a number */
+"%@ more" = "%@ altro";
+
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ fermate";
+
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ w/o traffico";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ sedie a rotelle";
+
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
 "%1$@ early" = "%1$@ presto";
 
@@ -10,33 +37,20 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ tardi (%2$@ servizio)";
 
-/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
-"%@ ago" = "%@ ago";
-
-/* Number of alerts, in this case, there are multiple (plural */
-"%@ alerts" = "%@ avvisi";
-
-/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
-"%@ cycle friendly" = "%@ cycle friendly";
-
-/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
-"%@ stops" = "%@ fermate";
-
-/* For describing a time interval, e.g., '8:30 to 8:43'
-   From %time1 to %time2. (old key: TimeFromToShortFormat) */
-"%@ to %@" = "%@ a %@";
-
-/* Duration without traffic */
-"%@ w/o traffic" = "%@ w/o traffico";
-
-/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
-"%@ wheelchair friendly" = "%@ sedie a rotelle";
+/* Number of alerts, in this case, there is just one */
+"1 alert" = "1 avviso";
 
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "Una fermata";
 
 /* No comment provided by engineer. */
 "Alerts" = "Avvisi";
+
+/* Instruction to follow street of the provided name */
+"Along %@" = "Lungo %@";
+
+/* Instruction to follow unnamed street */
+"Along unnamed street" = "Lungo una strada senza nome";
 
 /* apple maps directions action */
 "Apple Maps" = "Mappe di Apple";
@@ -52,16 +66,29 @@
 "Arrive at %@" = "Arriva alle %@";
 
 /* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
-"Arrive at %@ at %@" = "Arriva a %@ alle %@";
+"Arrive at %@ at %@" = "Arriva a %1$@ alle %2$@";
+
+/* Arrive before button */
+"Arrive by" = "Arrivare entro";
 
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Arrivare in";
 
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "alle %@";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary)
+   Filler for a service running at time, e.g., 'At 11:56am' */
 "At %@" = "A %@";
 
+/* Text for vehicle of type: Bicycle */
+"Bicycle" = "Bicicletta";
+
+/* Action title to make a booking */
+"Book" = "Prenota";
+
 /* Action title to make a booking using service/app named '@%' */
-"Book with %@" = "Book with %@";
+"Book with %@" = "Prenota con %@";
 
 /* No comment provided by engineer. */
 "Call" = "Chiama";
@@ -69,8 +96,20 @@
 /* Action title to make a call to service/company named '@%' */
 "Call %@" = "Chiama %@";
 
+/* Text for vehicle of type: Car */
+"Car" = "Auto";
+
+/* Trip badge: Cheapest */
+"Cheapest" = "Più economico";
+
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Impossibile trovare la fermata di transito.";
+
+/* Text for attributing data sources. The list of providers will be used instead of '%@' */
+"Data provided by %@" = "Dati forniti da %@";
+
+/* Title for screen showing data providers */
+"Data Providers" = "Provider di dati";
 
 /* Departure time sorter title */
 "Departure" = "Partenza";
@@ -81,11 +120,38 @@
 /* To disconnect/unlink from a service provider, e.g., Uber */
 "Disconnect" = "Disconnettere";
 
+/* Button to dismiss something, e.g., an error or action action sheet */
+"Dismiss" = "Ignora";
+
+/* Indicating a path requires you to dismount and push your bicycle */
+"Dismount" = "Scendi";
+
+/* Text for vehicle of type: E-Bike */
+"E-Bike" = "E-Bike";
+
+/* Trip badge: Easiest */
+"Easiest" = "Più facile";
+
 /* As in 'this bus/train is empty' */
 "Empty" = "Vuoto";
 
+/* Placeholder name for destination (then replaced with address or name) */
+"End location" = "Posizione di fine";
+
+/* Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes' */
+"Every %@" = "Ogni %@";
+
+/* Action title to extend an existing booking */
+"Extend" = "Estendi";
+
+/* Trip badge: Fastest */
+"Fastest" = "Più veloce";
+
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Pochi posti disponibili";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "per %@";
 
 /* Indicating a path is wheelchair/cycyling friendly */
 "Friendly" = "Ideale";
@@ -93,29 +159,59 @@
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Da %@";
 
+/* No comment provided by engineer. */
+"From current location" = "Dalla posizione corrente";
+
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Completo";
 
 /* Action title get/download app of name '@%' */
-"Get %@" = "Get %@";
+"Get %@" = "Ottieni %@";
+
+/* Title for button to get/download an external app. */
+"Get app" = "Scarica l'app";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Ottieni indicazioni";
 
+/* Instruction to get a service towards provided destination */
+"Get on service to %@" = "Metti in servizio verso %@";
+
+/* goCatch action */
+"goCatch a Taxi" = "Prendi un goCatch";
+
 /* google maps directions action */
 "Google Maps" = "Google Map";
 
+/* Trip badge: Greenest */
+"Greenest" = "Più verde";
+
+/* Trip badge: Healthiest */
+"Healthiest" = "Più Salutare";
+
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
-"I'll arrive at %@ at %@" = "Arrivo a %@ alle %@.";
+"I'll arrive at %@ at %@" = "Arrivo a %1$@ alle %2$@.";
 
 /* Indication of an activity. (old key: ActivityIndication) */
-"I'll take a %@ at %@ from %@." = "Prendo il %@ alle %@ da %@.";
+"I'll take a %@ at %@ from %@." = "Prendo il %1$@ alle %2$@ da %3$@.";
+
+/* Indication of an activity. */
+"I'll take a %@ from %@." = "Prenderò un %1$@ da %2$@.";
 
 /* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
 "In %@" = "In %@";
 
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Nel frattempo, continuiamo a esplorare %@ e godetevi i tuoi viaggi";
+
+/* inGogo taxi booking action */
+"ingogo a Taxi" = "Prendi un ingogo";
+
+/* Title for section with instant results in autocompletion */
+"Instant results" = "Risultati istantanei";
+
+/* Text for vehicle of type: Kick Scooter */
+"Kick Scooter" = "Monopattino";
 
 /* Prefix for selected 'leave after' time
    Single line instruction to leave */
@@ -125,7 +221,10 @@
 "Leave %@" = "Parte da %@";
 
 /* The place of departure with time. (old key: LeaveLocationTime) */
-"Leave %@ at %@" = "Parte da %@ alle %@";
+"Leave %@ at %@" = "Parte da %1$@ alle %2$@";
+
+/* Leave after button */
+"Leave at" = "Parte alle";
 
 /* Time departure. (old key: LeaveTime) */
 "Leave at %@" = "Parte alle %@";
@@ -143,7 +242,7 @@
 "Live traffic" = "traffico in tempo reale";
 
 /* Indicating when something is loading */
-"Loading..." = "Caricamento...";
+"Loading…" = "Caricamento…";
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Molti posti disponibili";
@@ -151,8 +250,23 @@
 /* Title of button to get more details about an alert */
 "More info" = "Più informazioni";
 
+/* 'More results' section in autocompletion */
+"More results" = "Ulteriori risultati";
+
+/* Text for vehicle of type: Moto Scooter */
+"Moto Scooter" = "Scooter";
+
+/* Text for vehicle of type: Motorbike */
+"Motorbike" = "Motocicletta";
+
 /* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Nessun viaggio pianificato";
+
+/* Indicator to show when a service does not have real-time data (even though we usually get it for services like this.) */
+"No real-time available" = "Nessun tempo reale disponibile";
+
+/* Error title when routing produced no results (but no specific error was returned from routing). */
+"No routes found." = "Nessuna rotta trovata.";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
 "Not accepting passengers" = "Non accettare i passeggeri";
@@ -161,19 +275,46 @@
 "On time" = "Puntuale";
 
 /* Action title open app of name '@%' */
-"Open %@" = "Open %@";
+"Open %@" = "Apri %@";
+
+/* Title for button that opens an external app. */
+"Open app" = "Apri app";
 
 /* Title for opening hours */
 "Opening Hours" = "Orari d'apertura";
 
+/* Title for button that allows users to plan a new trip */
+"Plan a new trip" = "Pianifica un nuovo viaggio";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Pianificare un viaggio e verrà visualizzato qui.";
+
+/* Title of page to plan a trip */
+"Plan Trip" = "Pianifica viaggio";
+
+/* Error recovery suggestion for when routing produced no results (but no specific error was returned from routing). */
+"Please adjust your query and try again." = "Modifica la tua query e riprova.";
+
+/* No comment provided by engineer. */
+"Powered by" = "Fornito da";
+
+/* No comment provided by engineer. */
+"Powered by %@" = "Fornito da %@";
 
 /* No comment provided by engineer. */
 "Public holiday" = "Giorno festivo";
 
 /* No comment provided by engineer. */
 "Real-time" = "Tempo reale";
+
+/* Trip badge: Recommended */
+"Recommended" = "Raccomandati";
+
+/* Title for button that allows users to request support */
+"Request support" = "Richiesta di supporto";
+
+/* Error message if interregional routing isn't yet supported */
+"Routing from %@ to %@ is not yet supported" = "Percorso da %1$@ a %2$@ non ancora supportato.";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Search for this stop again or try again later.";
@@ -193,11 +334,32 @@
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Solo in piedi";
 
+/* Title of button to start a trip */
+"Start" = "Parti";
+
+/* Placeholder name for origin (then replaced with address or name) */
+"Start location" = "Posizione di inizio";
+
+/* Text for vehicle of type: SUV */
+"SUV" = "SUV";
+
+/* Title of button to access timetable */
+"Timetable" = "Orario";
+
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "A %@";
 
+/* Title for button to access transport modes */
+"Transport" = "Trasporto";
+
 /* Title for a trip */
 "Trip" = "Viaggio";
+
+/* Title for trip of provided index */
+"Trip %@" = "Viaggio %@";
+
+/* Title of page that shows routing results */
+"Trips" = "Viaggi";
 
 /* Indicating a path is wheelchair/cycyling unfriendly */
 "Unfriendly" = "Inadatto";
@@ -209,23 +371,14 @@
 "Updated %@ ago" = "Aggiornato dal %@";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
-"Vehicle %@ updated %@ ago" = "Veicolo %@ aggiornato dal %@";
+"Vehicle %@ updated %@ ago" = "Veicolo %1$@ aggiornato dal %2$@";
+
+/* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
+"Vehicles" = "Veicoli";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "Siamo impegnati ad ottenere il tuo prossimo viaggio. Attendere prego...";
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Vi terremo aggiornati con gli ultimi avvisi di transito qui";
-
-/* Time of the bus departure. (old key: DepartureTime) */
-"at %@" = "alle %@";
-
-/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
-"for %@" = "per %@";
-
-/* goCatch action */
-"goCatch a Taxi" = "Prendi un goCatch";
-
-/* inGogo taxi booking action */
-"ingogo a Taxi" = "Prendi un ingogo";
 

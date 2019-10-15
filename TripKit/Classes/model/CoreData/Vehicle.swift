@@ -12,10 +12,14 @@ import RxSwift
 
 extension Vehicle {
   
+  public static func components(from data: Data) -> [[API.VehicleComponents]]? {
+    return try? JSONDecoder().decode([[API.VehicleComponents]].self, from: data)
+  }
+  
   public var components: [[API.VehicleComponents]]? {
     get {
       if let data = componentsData {
-        return try? JSONDecoder().decode([[API.VehicleComponents]].self, from: data)
+        return Vehicle.components(from: data)
       } else {
         return nil
       }
@@ -33,7 +37,7 @@ extension Vehicle {
     return anyService?.number
   }
   
-  @objc public var serviceColor: SGKColor? {
+  @objc public var serviceColor: TKColor? {
     return averageOccupancy?.color
   }
   
@@ -53,28 +57,31 @@ extension Vehicle {
   }
   
   public var averageOccupancy: API.VehicleOccupancy? {
-    let components = self.components ?? [[]]
-    let occupancies = components
-      .reduce(into: []) { $0.append(contentsOf: $1) }
-      .compactMap { $0.occupancy }
-    if occupancies.isEmpty {
-      return nil
-    } else if occupancies.count == 1 {
-      return occupancies[0]
-    }
-    
-    let sum = occupancies.reduce(0) { $0 + $1.intValue }
-    return API.VehicleOccupancy(intValue: sum / occupancies.count)
+    return API.VehicleOccupancy.average(in: components)
   }
   
 }
 
 extension Reactive where Base: Vehicle {
   
-  public var components: Observable<[[API.VehicleComponents]]> {
+  public var components: Observable<([[API.VehicleComponents]], Date)> {
     return observeWeakly(NSData.self, "componentsData")
-      .map { [weak base] _ in base?.components ?? [[]] }
+      .map { [weak base] _ in
+        let components = base?.components ?? [[]]
+        let date = base?.lastUpdate ?? Date()
+        return (components, date)
+      }
   }
+  
+  public var occupancies: Observable<([[API.VehicleOccupancy]], Date)> {
+    return observeWeakly(NSData.self, "componentsData")
+      .map { [weak base] _ in
+        let components = base?.components ?? [[]]
+        let date = base?.lastUpdate ?? Date()
+        return (components.map { $0.map { $0.occupancy ?? .unknown }}, date)
+    }
+  }
+
   
 }
 
@@ -97,9 +104,9 @@ extension Vehicle : MKAnnotation {
   
   public var title: String? {
     guard let modeTitle =
-      anyService?.modeTitle?.capitalized(with: Locale.current)
-      ?? anySegmentReference?.template()?.modeInfo?.descriptor
-      ?? label
+      anyService?.modeTitle
+        ?? anySegmentReference?.template()?.modeInfo?.descriptor
+        ?? label
       else { return nil }
     
     if let number = service?.number {
@@ -110,7 +117,7 @@ extension Vehicle : MKAnnotation {
   }
   
   public var subtitle: String? {
-    return [updatedTitle, averageOccupancy?.description]
+    return [updatedTitle, averageOccupancy?.localizedTitle]
       .compactMap { $0 }
       .joined(separator: " - ")
   }

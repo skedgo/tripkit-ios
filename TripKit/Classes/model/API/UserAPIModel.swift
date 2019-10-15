@@ -11,53 +11,64 @@ import Foundation
 extension API {
   
   public struct User: Codable {
+    public let name: String?
     public let firstName: String?
     public let lastName: String?
     public let address1: String?
     public let address2: String?
     public let postCode: String?
-    public let emails: [Email]?
     public let phones: [Phone]?
-    public let userId: String?
-    public var appData: [String : Any] = [:]
+    public var appData: [String : Any]?
+    private let rawUserId: String?
+    private let rawEmail: String?
+    private let rawEmails: [Email]?
     
-    public init(
-      firstName: String? = nil,
-      lastName: String? = nil,
-      address1: String? = nil,
-      address2: String? = nil,
-      postCode: String? = nil,
-      emails: [Email]? = nil,
-      phones: [Phone]? = nil,
-      userId: String? = nil,
-      appData: [String : Any] = [:]
-      ) {
+    public init(name: String? = nil,
+                firstName: String? = nil,
+                lastName: String? = nil,
+                address1: String? = nil,
+                address2: String? = nil,
+                postCode: String? = nil,
+                email: String? = nil,
+                phone: String? = nil,
+                appData: [String: Any]? = nil) {
+      self.name = name
       self.firstName = firstName
       self.lastName = lastName
       self.address1 = address1
       self.address2 = address2
       self.postCode = postCode
-      self.emails = emails
-      self.phones = phones
-      self.userId = userId
-      self.appData = appData
+      self.rawEmail = email
+      self.rawEmails = rawEmail.flatMap { [Email(address: $0)] }
+      self.phones = phone.flatMap { [Phone(number: $0)] }
+      self.rawUserId = nil // This is not set directly
     }
     
     // MARK: - Codable
     
     private enum CodingKeys: String, CodingKey {
+      case name
       case firstName = "givenName"
       case lastName = "surname"
       case address1
       case address2
       case postCode
-      case emails
       case phones
-      case userId
+      case rawEmail = "email"
+      case rawEmails = "emails"
+      case rawUserId = "userID"
+    }
+    
+    public var userId: String? { return rawUserId }
+    
+    public var emails: [Email]? {
+      if let emails = rawEmails { return emails }
+      else if let email = rawEmail { return [Email(address: email, validated: true, primary: true)] }
+      else { return nil }
     }
   }
   
-  public struct Phone: Codable {
+  public struct Phone: Codable, Hashable {
     public let countryCode: String?
     public let number: String
     let validated: Bool?
@@ -83,14 +94,14 @@ extension API {
     }
   }
   
-  public struct Email: Codable {
+  public struct Email: Codable, Hashable {
     public let address: String
-    let validated: Bool?
-    let primary: Bool?
+    public let verified: Bool
+    public let primary: Bool
     
     public init(address: String, validated: Bool = false, primary: Bool = false) {
       self.address = address
-      self.validated = validated
+      self.verified = validated
       self.primary = primary
     }
     
@@ -98,7 +109,7 @@ extension API {
     
     private enum CodingKeys: String, CodingKey {
       case address = "email"
-      case validated
+      case verified = "validated"
       case primary
     }
   }

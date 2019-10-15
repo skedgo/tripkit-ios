@@ -65,11 +65,11 @@ typedef NSUInteger SGSegmentFlag;
 	return self.segmentTemplate;
 }
 
-- (id<STKVehicular>)vehicleFromAllVehicles:(NSArray *)allVehicles
+- (id<TKVehicular>)vehicleFromAllVehicles:(NSArray *)allVehicles
 {
   NSString *vehicleUUID = [self vehicleUUID];
   if (vehicleUUID) {
-    for (id<STKVehicular> vehicle in allVehicles) {
+    for (id<TKVehicular> vehicle in allVehicles) {
       if ([vehicle respondsToSelector:@selector(vehicleUUID)]
           && [[vehicle vehicleUUID] isEqualToString:vehicleUUID]) {
         return vehicle;
@@ -79,7 +79,7 @@ typedef NSUInteger SGSegmentFlag;
   return nil;
 }
 
-- (void)setVehicle:(id<STKVehicular>)vehicle
+- (void)setVehicle:(id<TKVehicular>)vehicle
 {
   if ([vehicle respondsToSelector:@selector(vehicleUUID)]) {
     self.vehicleUUID = [vehicle vehicleUUID];

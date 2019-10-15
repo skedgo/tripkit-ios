@@ -15,10 +15,10 @@ extension TKSettings {
     case ignoreCostToReturnCarHireVehicle = "profileTransportIgnoreCostToReturnCarHireVehicle"
   }
   
-  @objc public static var sortOrder: STKTripCostType {
+  @objc public static var sortOrder: TKTripCostType {
     get {
       let index = UserDefaults.shared.integer(forKey: DefaultsKey.sortIndex.rawValue)
-      return STKTripCostType(rawValue: index) ?? .score
+      return TKTripCostType(rawValue: index) ?? .score
     }
     set {
       UserDefaults.shared.set(newValue.rawValue, forKey: DefaultsKey.sortIndex.rawValue)

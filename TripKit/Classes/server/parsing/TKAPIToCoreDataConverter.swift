@@ -34,7 +34,7 @@ extension StopLocation {
     if let isAccessible = model.wheelchairAccessible {
       wheelchairAccessible = NSNumber(value: isAccessible)
     }
-    location = SGKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
+    location = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
     stopModeInfo = model.modeInfo
     
     var addedStop = false
@@ -60,7 +60,7 @@ extension StopLocation {
 extension TKAPIToCoreDataConverter {
   
   static func insertNewStopLocation(from model: API.Stop, into context: NSManagedObjectContext) -> StopLocation {
-    let coordinate = SGKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
+    let coordinate = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
     let newStop = StopLocation.insertStop(forStopCode: model.code, modeInfo: nil, atLocation: coordinate, intoTripKitContext: context)
     _ = newStop.update(from: model)
     return newStop
@@ -72,7 +72,7 @@ extension TKAPIToCoreDataConverter {
 
 extension Service {
   convenience init(from model: API.Departure, into context: NSManagedObjectContext) {
-    self.init(into: context)
+    self.init(context: context)
 //    update(from: model)
 //  }
 //
@@ -118,21 +118,22 @@ extension Service {
   func addVisits<E: StopVisits>(_ visitType: E.Type, from model: API.Departure, at stop: StopLocation) -> E? {
     guard let context = managedObjectContext else { return nil }
     
-    let visit: E
-    if #available(iOS 10.0, macOS 10.12, *) {
-      visit = E(context: context)
-    } else {
-      let entityName = (visitType == DLSEntry.self) ? "DLSEntry" : "StopVisits"
-      visit = E(entity: NSEntityDescription.entity(forEntityName: entityName, in: context)!, insertInto: context)
+    let visit = E(context: context)
+
+    // Prefer real-time data all fall back to timetable data
+    if let departure = (model.realTimeDeparture ?? model.startTime) {
+      visit.departure = Date(timeIntervalSince1970: departure)
+      visit.triggerRealTimeKVO()
     }
-    if let start = model.startTime {
-      // we use 'time' to allow KVO
-      visit.time = Date(timeIntervalSince1970: start)
+    if let arrival = (model.realTimeArrival ?? model.endTime) {
+      visit.arrival = Date(timeIntervalSince1970: arrival)
     }
-    if let end = model.endTime {
-      visit.arrival = Date(timeIntervalSince1970: end)
+    
+    // Keep timetable data indicate whether a service is on-time
+    if let timetable = model.startTime {
+      visit.originalTime = Date(timeIntervalSince1970: timetable)
     }
-    visit.originalTime = visit.time
+    
     visit.searchString = model.searchString
     visit.service = self
     visit.stop = stop
@@ -196,18 +197,14 @@ extension TKAPIToCoreDataConverter {
 extension Alert {
   
   convenience init(from model: API.Alert, into context: NSManagedObjectContext) {
-    if #available(iOS 10.0, macOS 10.12, *) {
-      self.init(context: context)
-    } else {
-      self.init(entity: NSEntityDescription.entity(forEntityName: "Alert", in: context)!, insertInto: context)
-    }
+    self.init(context: context)
     
     hashCode = NSNumber(value: model.hashCode)
     title = model.title
     startTime = model.fromDate
     endTime = model.toDate
     if let location = model.location {
-      self.location = SGKNamedCoordinate(from: location)
+      self.location = TKNamedCoordinate(from: location)
     }
     switch model.severity {
     case .alert: alertSeverity = .alert
@@ -215,6 +212,9 @@ extension Alert {
     case .info: alertSeverity = .info
     }
     remoteIcon = model.remoteIcon?.absoluteString
+    
+    idService = model.serviceTripID
+    url = model.url?.absoluteString
   
     update(from: model)
   }
@@ -263,11 +263,7 @@ extension TKAPIToCoreDataConverter {
 extension Vehicle {
   
   fileprivate convenience init(from model: API.Vehicle, into context: NSManagedObjectContext) {
-    if #available(iOS 10.0, macOS 10.12, *) {
-      self.init(context: context)
-    } else {
-      self.init(entity: NSEntityDescription.entity(forEntityName: "Vehicle", in: context)!, insertInto: context)
-    }
+    self.init(context: context)
     update(with: model)
   }
   
@@ -319,8 +315,8 @@ extension TKAPIToCoreDataConverter {
   }
   
   @objc(vehiclesPayloadForVehicles:)
-  public static func vehiclesPayload(for vehicles: [STKVehicular]) -> [[String: Any]] {
-    return vehicles.map(STKVehicularHelper.skedGoFullDictionary(forVehicle:))
+  public static func vehiclesPayload(for vehicles: [TKVehicular]) -> [[String: Any]] {
+    return vehicles.map(TKVehicularHelper.skedGoFullDictionary(forVehicle:))
   }
   
 }

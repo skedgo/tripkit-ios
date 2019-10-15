@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="VGo-lB-GoV" customClass="TKUIServiceTitleView" customModule="TripKitUI" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="372" height="88"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="25R-dz-Nwr">
+                    <rect key="frame" x="16" y="0.0" width="302" height="80"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="E84 at 3:35pm" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEO-Bf-P7i" customClass="TKUIStyledLabel">
+                            <rect key="frame" x="0.0" y="0.0" width="132" height="24"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                            <color key="textColor" red="0.097280979160000003" green="0.090294875199999999" blue="0.23543129860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MfX-Iw-wtY">
+                            <rect key="frame" x="0.0" y="26" width="256" height="54"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r1s-7w-aJM">
+                                    <rect key="frame" x="0.0" y="17" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="r1s-7w-aJM" secondAttribute="height" multiplier="1:1" id="2Db-U5-FPA"/>
+                                        <constraint firstAttribute="width" constant="20" id="5zE-9r-LPX"/>
+                                    </constraints>
+                                </imageView>
+                                <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zTd-aC-Zmm">
+                                    <rect key="frame" x="24" y="19" width="32.5" height="16"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="E84" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOr-po-JDX" customClass="TKUIStyledLabel">
+                                            <rect key="frame" x="4" y="0.0" width="24.5" height="16"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                            <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.37254901959999998" green="0.57647058819999997" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="hOr-po-JDX" firstAttribute="top" secondItem="zTd-aC-Zmm" secondAttribute="top" id="Eql-lg-c5J"/>
+                                        <constraint firstItem="hOr-po-JDX" firstAttribute="leading" secondItem="zTd-aC-Zmm" secondAttribute="leading" constant="4" id="YVM-PF-ITW"/>
+                                        <constraint firstAttribute="bottom" secondItem="hOr-po-JDX" secondAttribute="bottom" id="tfN-sE-rnz"/>
+                                        <constraint firstAttribute="trailing" secondItem="hOr-po-JDX" secondAttribute="trailing" constant="4" id="usJ-e0-deq"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="Stand C, Mona vale Junction" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccR-Sw-Z6F" customClass="TKUIStyledLabel">
+                                    <rect key="frame" x="60.5" y="18" width="195.5" height="18"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nv4-5c-QYr">
+                    <rect key="frame" x="324" y="-11" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="4oj-jE-cVm"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="XXt-9L-fMN"/>
+                    </constraints>
+                    <state key="normal" title="Close"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="25R-dz-Nwr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" id="EEO-k5-Isf"/>
+                <constraint firstAttribute="trailing" secondItem="nv4-5c-QYr" secondAttribute="trailing" constant="4" id="OjM-FW-aM6"/>
+                <constraint firstItem="25R-dz-Nwr" firstAttribute="leading" secondItem="VGo-lB-GoV" secondAttribute="leading" constant="16" id="eJw-uI-ol2"/>
+                <constraint firstItem="nv4-5c-QYr" firstAttribute="leading" secondItem="25R-dz-Nwr" secondAttribute="trailing" constant="6" id="hya-Iy-LcG"/>
+                <constraint firstAttribute="bottom" secondItem="25R-dz-Nwr" secondAttribute="bottom" constant="8" id="nug-4o-Q8i"/>
+                <constraint firstItem="nv4-5c-QYr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" constant="-11" id="sJG-UB-pP2"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="dismissButton" destination="nv4-5c-QYr" id="ECc-j4-pAD"/>
+                <outlet property="serviceColorView" destination="zTd-aC-Zmm" id="d8Y-0z-2vS"/>
+                <outlet property="serviceImageView" destination="r1s-7w-aJM" id="flS-B7-Txx"/>
+                <outlet property="serviceShortNameLabel" destination="hOr-po-JDX" id="WLR-84-OcN"/>
+                <outlet property="serviceTimeLabel" destination="ccR-Sw-Z6F" id="GeU-yw-IN9"/>
+                <outlet property="serviceTitleLabel" destination="wEO-Bf-P7i" id="5Eq-3z-LKU"/>
+            </connections>
+            <point key="canvasLocation" x="28.800000000000001" y="-701.64917541229386"/>
+        </view>
+    </objects>
+</document>

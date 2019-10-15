@@ -16,6 +16,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+.DS_Store
 
 # CocoaPods
 #
@@ -27,9 +28,18 @@ DerivedData
 Project/Podfile.lock
 Project/Pods
 /Project/TripKit.framework.zip
-/Examples/MiniMap/Podfile.lock
-/Examples/MiniMap/Pods
 /Project/Carthage
 /Carthage
 /TripKit.framework.zip
 xcshareddata
+
+# Examples
+/Examples/MiniMap/Podfile.lock
+/Examples/MiniMap/Pods
+/Examples/CocoaPodsTest/Podfile.lock
+/Examples/CocoaPodsTest/Pods
+
+# Documentation
+/docs/TripKit
+/docs/TripKitUI
+/docs/TripKitInterApp

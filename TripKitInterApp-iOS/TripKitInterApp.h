@@ -15,6 +15,3 @@ FOUNDATION_EXPORT double TripKitInterApp_iOSVersionNumber;
 FOUNDATION_EXPORT const unsigned char TripKitInterApp_iOSVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <TripKitInterApp_iOS/PublicHeader.h>
-
-#import "TKInterAppCommunicator.h"
-#import "SGKConfig+TKInterAppCommunicator.h"

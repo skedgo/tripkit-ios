@@ -10,7 +10,7 @@ import Foundation
 
 extension API {
 
-  public struct Stop: Codable, Equatable {
+  public struct Stop: Codable, Hashable {
     private enum CodingKeys: String, CodingKey {
       case code
       case lat
@@ -42,7 +42,7 @@ extension API {
     let wheelchairAccessible: Bool?
 
     let children: [Stop]?
-    let modeInfo: ModeInfo
+    let modeInfo: TKModeInfo
     
     let alertHashCodes: [Int]?
   }

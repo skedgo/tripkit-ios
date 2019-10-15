@@ -31,23 +31,53 @@ public class TKDeparturesProvider: NSObject {
 // MARK: - Departures.json for stops
 
 extension TKDeparturesProvider {
+
+  public class func fetchDepartures(forStopCodes stopCodes: [String], fromDate: Date, limit: Int = 10, in region: TKRegion) -> Single<API.Departures> {
+    return streamDepartures(forStopCodes: stopCodes, fromDate: fromDate, limit: limit, in: region, repeatHandler: nil)
+      .asSingle()
+  }
+    
+  public class func streamDepartures(forStopCodes stopCodes: [String], limit: Int = 10, in region: TKRegion, repeatHandler: ((Int, API.Departures) -> TimeInterval?)? = nil) -> Observable<API.Departures> {
+    return streamDepartures(forStopCodes: stopCodes, fromDate: nil, limit: limit, in: region, repeatHandler: repeatHandler)
+  }
   
-  public class func fetchDepartures(forStopCodes stopCodes: [String], fromDate: Date = Date(), limit: Int = 10, in region: SVKRegion) -> Observable<API.Departures> {
+  private class func streamDepartures(forStopCodes stopCodes: [String], fromDate: Date?, limit: Int = 10, in region: TKRegion, repeatHandler: ((Int, API.Departures) -> TimeInterval?)?) -> Observable<API.Departures> {
+    
+    assert(repeatHandler == nil || fromDate == nil, "Don't set both `fromDate` and the `repeatHandler`. It doesn't make sense to repeat, if you fix the departure time.")
     
     guard !stopCodes.isEmpty else {
       return Observable.error(InputError.missingField("stopCodes"))
     }
     
-    let paras: [String: Any] = [
+    var paras: [String: Any] = [
       "region": region.name,
       "embarkationStops": stopCodes,
-      "timeStamp": fromDate.timeIntervalSince1970,
       "limit": limit,
       "config": TKSettings.defaultDictionary()
     ]
+    if let date = fromDate {
+      paras["timeStamp"] = date.timeIntervalSince1970
+    }
     
-    return SVKServer.shared.rx
-      .hit(.POST, path: "departures.json", parameters: paras, region: region)
+    return TKServer.shared.rx
+      .stream(.POST, path: "departures.json", parameters: paras, region: region) { status, data in
+        guard fromDate == nil else {
+          return nil // No result change, no need to repeat
+        }
+        
+        if case 400..<500 = status {
+          return nil // Client-side errors; hitting again won't help
+        }
+
+        guard
+          let repeatHandler = repeatHandler,
+          let data = data,
+          let departures = try? JSONDecoder().decode(API.Departures.self, from: data),
+          let timeInterval = repeatHandler(status, departures)
+          else { return nil }
+
+        return .repeatIn(timeInterval)
+      }
       .map { _, _, data in
         guard let data = data else { throw OutputError.noDataReturn }
         let decoder = JSONDecoder()
@@ -55,13 +85,13 @@ extension TKDeparturesProvider {
     }
   }
   
-  public class func downloadDepartures(for stops: [StopLocation], fromDate: Date = Date(), limit: Int = 10) -> Observable<Bool> {
+  public class func downloadDepartures(for stops: [StopLocation], fromDate: Date, limit: Int = 10) -> Single<Bool> {
     
     let stopCodes = stops.map { $0.stopCode }
     
-    return SVKServer.shared.rx
+    return TKServer.shared.rx
       .requireRegions()
-      .flatMap { Void -> Observable<API.Departures> in
+      .flatMap { Void -> Single<API.Departures> in
         guard let region = stops.first?.region else {
           throw OutputError.couldNotFetchRegions
         }
@@ -149,11 +179,11 @@ extension TKDeparturesProvider {
     ]
   }
   
-  public class func fetchDepartures(for table: TKDLSTable, fromDate: Date = Date(), limit: Int = 10) -> Observable<API.Departures> {
+  public class func fetchDepartures(for table: TKDLSTable, fromDate: Date = Date(), limit: Int = 10) -> Single<API.Departures> {
     
     let paras: [String: Any] = TKDeparturesProvider.queryParameters(for: table, fromDate: fromDate, limit: limit)
     
-    return SVKServer.shared.rx
+    return TKServer.shared.rx
       .hit(.POST, path: "departures.json", parameters: paras, region: table.startRegion)
       .map { _, _, data in
         guard let data = data else { throw OutputError.noDataReturn }
@@ -162,11 +192,11 @@ extension TKDeparturesProvider {
     }
   }
   
-  public class func downloadDepartures(for table: TKDLSTable, fromDate: Date = Date(), limit: Int = 10) -> Observable<Set<String>> {
+  public class func downloadDepartures(for table: TKDLSTable, fromDate: Date, limit: Int = 10) -> Single<Set<String>> {
     
-    return SVKServer.shared.rx
+    return TKServer.shared.rx
       .requireRegions()
-      .flatMap { Void -> Observable<API.Departures> in
+      .flatMap { Void -> Single<API.Departures> in
         return TKDeparturesProvider.fetchDepartures(for: table, fromDate: fromDate, limit: limit)
       }
       .map { departures -> Set<String> in

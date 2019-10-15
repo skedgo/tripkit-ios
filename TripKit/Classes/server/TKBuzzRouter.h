@@ -56,10 +56,10 @@ NS_ASSUME_NONNULL_BEGIN
           completion:(void(^)(Trip * __nullable trip))completion;
 
 - (void)updateTrip:(Trip *)trip
-        completion:(void(^)(Trip * __nullable trip))completion;
+        completion:(void(^)(Trip *trip))completion;
 
 - (void)updateTrip:(Trip *)trip
-completionWithFlag:(void(^)(Trip * __nullable trip, BOOL tripUpdated))completion;
+completionWithFlag:(void(^)(Trip *trip, BOOL tripUpdated))completion;
 
 - (void)updateTrip:(Trip *)trip
            fromURL:(NSURL *)URL

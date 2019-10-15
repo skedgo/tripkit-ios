@@ -9,11 +9,13 @@
 import Foundation
 
 extension StopLocation {
-  @objc public var region: SVKRegion? {
+  @objc public var region: TKRegion? {
     if let name = regionName {
       return TKRegionManager.shared.localRegion(named: name)
     } else {
-      return location?.regions.first
+      let region = location?.regions.first
+      regionName = region?.name
+      return region
     }
   }
   
@@ -23,24 +25,12 @@ extension StopLocation {
   
   public var isWheelchairAccessible: Bool? {
     return wheelchairAccessible?.boolValue
-  }
-  
-  @objc(modeImageForIconType:)
-  public func modeImage(for type: SGStyleModeIconType) -> SGKImage? {
-    guard let localName = stopModeInfo?.localImageName else { return nil }
-    return SGStyleManager.image(forModeImageName: localName, isRealTime: false, of: type)
-  }
-  
-  @objc(modeImageURLForIconType:)
-  public func modeImageURL(for type: SGStyleModeIconType) -> URL? {
-    guard let remoteName = stopModeInfo?.remoteImageName else { return nil }
-    return SVKServer.imageURL(forIconFileNamePart: remoteName, of: type)
-  }
+  }  
 }
 
-// MARK: - STKStopAnnotation
+// MARK: - MKAnnotation
 
-extension StopLocation: STKStopAnnotation {
+extension StopLocation: MKAnnotation {
   public var title: String? {
     return name
   }
@@ -52,30 +42,7 @@ extension StopLocation: STKStopAnnotation {
   public var coordinate: CLLocationCoordinate2D {
     return location?.coordinate ?? kCLLocationCoordinate2DInvalid
   }
-  
-  public var isDraggable: Bool {
-    return false
-  }
-  
-  public var pointClusterIdentifier: String? {
-    return stopModeInfo?.identifier ?? "StopLocation"
-  }
-  
-  public var pointDisplaysImage: Bool {
-    return pointImage != nil
-  }
-  
-  public var pointImage: SGKImage? {
-    return modeImage(for: .mapIcon)
-  }
-  
-  public var pointImageURL: URL? {
-    return modeImageURL(for: .mapIcon)
-  }
-  
-  public var pointImageIsTemplate: Bool {
-    return stopModeInfo?.remoteImageIsTemplate ?? false
-  }
+
 }
 
 // MARK: - UIActivityItemSource
@@ -88,7 +55,7 @@ extension StopLocation: STKStopAnnotation {
       return ""
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
       guard let last = lastTopVisit else { return nil }
       
       var output: String = self.title ?? ""

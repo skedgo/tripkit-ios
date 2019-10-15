@@ -10,28 +10,28 @@ import Foundation
 
 extension SegmentTemplate {
   
-  @objc(insertNewTemplateFromDictionary:forService:intoContext:)
+  @objc(insertNewTemplateFromDictionary:forService:relativeTime:intoContext:)
   @discardableResult
-  public static func insertNewTemplate(from dict: [String: Any], for service: Service?, into context: NSManagedObjectContext) -> SegmentTemplate? {
+  public static func insertNewTemplate(
+    from dict: [String: Any],
+    for service: Service?,
+    relativeTime: Date?,
+    into context: NSManagedObjectContext
+  ) -> SegmentTemplate? {
     
     // Only show relevant segments
     let visibility = segmentVisibilityType(from: dict)
     guard visibility != .hidden else { return nil }
-    
+     
     // Make sure we got good data
     guard
-      let segmentType = self.segmentType(from: dict)
+      let segmentType = segmentType(from: dict)
       else {
         assertionFailure("Segment dictionary is missing critical information")
         return nil
       }
     
-    let template: SegmentTemplate
-    if #available(iOS 10.0, macOS 10.12, *) {
-      template = SegmentTemplate(context: context)
-    } else {
-      template = NSEntityDescription.insertNewObject(forEntityName: "SegmentTemplate", into: context) as! SegmentTemplate
-    }
+    let template = SegmentTemplate(context: context)
     
     template.action = dict["action"] as? String
     template.visibility = NSNumber(value: visibility.rawValue)
@@ -40,9 +40,10 @@ extension SegmentTemplate {
     template.bearing = dict["travelDirection"] as? NSNumber
     
     template.modeIdentifier   = dict["modeIdentifier"] as? String
-    template.modeInfo         = ModeInfo.modeInfo(for: dict["modeInfo"] as? [String: Any])
-    template.miniInstruction  = STKMiniInstruction.instruction(for: dict["mini"] as? [String: Any])
+    template.modeInfo         = TKModeInfo.modeInfo(for: dict["modeInfo"] as? [String: Any])
+    template.miniInstruction  = TKMiniInstruction.instruction(for: dict["mini"] as? [String: Any])
     template.turnByTurnMode   = TKTurnByTurnMode(rawValue: dict["turn-by-turn"] as? String ?? "")
+    template.localCost        = TKLocalCost.newInstance(from: dict["localCost"] as? [String: Any])
     
     template.notesRaw         = dict["notes"] as? String
     template.smsMessage       = dict["smsMessage"] as? String
@@ -67,36 +68,31 @@ extension SegmentTemplate {
     if template.isStationary {
       // stationary segments just have a single location
       let locationDict = (dict["location"] as? [String: Any]) ?? [:]
-      let location = SVKParserHelper.namedCoordinate(for: locationDict)
+      let location = TKParserHelper.namedCoordinate(for: locationDict)
       template.startLocation = location
       template.endLocation = location
     
     } else {
+      let shapes = insertNewShapes(
+        from: dict,
+        for: service, relativeTime: relativeTime,
+        modeInfo: template.modeInfo, context: context
+      )
       
-      // all the waypoints should be in 'shapes', but we
-      // also support older 'streets' and 'line', e.g.,
-      // for testing
-      let shapesArray = (dict["shapes"] as? [[String: Any]])
-        ?? (dict["streets"] as? [[String: Any]])
-        ?? (dict["line"] as? [[String: Any]])
-        ?? []
-      
-      let shapes = TKParserHelper.insertNewShapes(shapesArray, for: service, with: template.modeInfo, orTripKitContext: context)
-      
-      var start: SGKNamedCoordinate? = nil
-      var end: SGKNamedCoordinate? = nil
+      var start: TKNamedCoordinate? = nil
+      var end: TKNamedCoordinate? = nil
       
       for shape in shapes {
         shape.template = template
         if shape.travelled?.boolValue == true {
           // Only if no previous travelled segment!
           if start == nil, let coordinate = shape.start?.coordinate {
-            start = SGKNamedCoordinate(coordinate: coordinate)
+            start = TKNamedCoordinate(coordinate: coordinate)
           }
 
           // ALSO if there's aprevious travelled segment
           if let coordinate = shape.end?.coordinate {
-            end = SGKNamedCoordinate(coordinate: coordinate)
+            end = TKNamedCoordinate(coordinate: coordinate)
           }
         }
       }
@@ -104,11 +100,11 @@ extension SegmentTemplate {
       let startDict = dict["from"] as? [String: Any]
       let endDict = dict["to"] as? [String: Any]
       if start == nil, let locationDict = startDict  {
-        start = SVKParserHelper.namedCoordinate(for: locationDict)
+        start = TKParserHelper.namedCoordinate(for: locationDict)
         assert(start != nil, "Got no start waypoint")
       }
       if end == nil, let locationDict = endDict {
-        end = SVKParserHelper.namedCoordinate(for: locationDict)
+        end = TKParserHelper.namedCoordinate(for: locationDict)
         assert(end != nil, "Got no start waypoint")
       }
       
@@ -122,7 +118,32 @@ extension SegmentTemplate {
     return template
   }
   
-  private static func segmentVisibilityType(from dict: [String: Any]) -> STKTripSegmentVisibility {
+  @objc(insertNewShapesFromDictionary:forService:relativeTime:modeInfo:intoContext:)
+  @discardableResult
+  public static func insertNewShapes(
+    from dict: [String: Any],
+    for service: Service?,
+    relativeTime: Date?,
+    modeInfo: TKModeInfo?,
+    context: NSManagedObjectContext?
+  ) -> [Shape] {
+    
+    // all the waypoints should be in 'shapes', but we
+    // also support older 'streets' and 'line', e.g.,
+    // for testing
+    let shapesArray = (dict["shapes"] as? [[String: Any]])
+      ?? (dict["streets"] as? [[String: Any]])
+      ?? (dict["line"] as? [[String: Any]])
+      ?? []
+    
+    return TKCoreDataParserHelper.insertNewShapes(
+      shapesArray, for: service, relativeTime: relativeTime,
+      with: modeInfo, orTripKitContext: context,
+      clearRealTime: false // we get real-time data here, no need to clear status
+    )
+  }
+  
+  private static func segmentVisibilityType(from dict: [String: Any]) -> TKTripSegmentVisibility {
     switch dict["visibility"] as? String {
     case "in summary"?: return .inSummary
     case "on map"?: return .onMap

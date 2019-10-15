@@ -11,14 +11,14 @@ import Foundation
 /// Case-less enum just to create a namespace
 public enum TKBooking {
   
-  public struct Detail : Codable {
+  public struct Detail: Codable, Hashable {
     public let title: String
     public let subtitle: String?
     public let imageURL: URL?
   }
   
 
-  public struct Action : Codable {
+  public struct Action: Codable, Hashable {
     public let title: String
     public let isDestructive: Bool
     public let internalURL: URL?
@@ -33,7 +33,7 @@ public enum TKBooking {
   }
   
 
-  public struct TSPBranding: Codable {
+  public struct TSPBranding: Codable, Hashable {
     private let rgbColor: API.RGBColor?
     private let logoImageName: String?
     
@@ -42,33 +42,35 @@ public enum TKBooking {
       case logoImageName = "remoteIcon"
     }
     
-    public var color: SGKColor? {
+    public var color: TKColor? {
       return rgbColor?.color
     }
     
     public var downloadableLogoURL: URL? {
       guard let fileNamePart = logoImageName else { return nil }
-      return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: .listMainMode)
+      return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: .listMainMode)
     }
   }
   
   
-  public struct Purchase : Codable {
-    public let id:          String
-    private let rawPrice:   Double
-    public let currency:    String?
-    public let productName: String
-    public let productType: String
+  public struct Purchase: Codable, Hashable {
+    public let id:                  String
+    private let rawPrice:           Double?
+    public let currency:            String?
+    public let budgetPoints:        Int?
+    public let productName:         String
+    public let productType:         String
     private let explicitValidity:   Bool?
-    public let validFor:    TimeInterval?
-    public let validFrom:   Date?
-    public let branding:    TSPBranding?
-    public let attribution: API.DataAttribution?
+    public let validFor:            TimeInterval?
+    public let validFrom:           Date?
+    public let branding:            TSPBranding?
+    public let attribution:         API.DataAttribution?
     
     private enum CodingKeys: String, CodingKey {
       case id
       case rawPrice = "price"
       case currency
+      case budgetPoints
       case productName
       case productType
       case explicitValidity = "valid"
@@ -78,7 +80,8 @@ public enum TKBooking {
       case attribution = "source"
     }
     
-    public var price: NSDecimalNumber {
+    public var price: NSDecimalNumber? {
+      guard let rawPrice = rawPrice else { return nil }
       return NSDecimalNumber(value: rawPrice)
     }
     
@@ -102,8 +105,7 @@ public enum TKBooking {
     
   }
 
-  
-  public struct Confirmation : Codable {
+  public struct Confirmation : Codable, Hashable {
     
     public let status: Detail
     public let provider: Detail?
@@ -113,5 +115,3 @@ public enum TKBooking {
   }
   
 }
-
-

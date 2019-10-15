@@ -15,7 +15,7 @@
 @interface TripRequest ()
 
 @property (nonatomic, strong) NSMutableSet *requestedModes;
-@property (nonatomic, strong) NSArray<SVKRegion *> *localRegions;
+@property (nonatomic, strong) NSArray<TKRegion *> *localRegions;
 
 @end
 
@@ -57,14 +57,14 @@
 	self.requestedModes = nil;
 }
 
-- (SVKRegion *)spanningRegion
+- (TKRegion *)spanningRegion
 {
   CLLocationCoordinate2D start = [self.fromLocation coordinate];
   CLLocationCoordinate2D end = [self.toLocation coordinate];
   return [TKRegionManager.shared regionContainingCoordinate:start andOther:end];
 }
 
-- (SVKRegion *)startRegion
+- (TKRegion *)startRegion
 {
   if (! _localRegions) {
     _localRegions = [self _determineRegions];
@@ -72,7 +72,7 @@
   return [_localRegions firstObject];
 }
 
-- (SVKRegion *)endRegion
+- (TKRegion *)endRegion
 {
   if (! _localRegions) {
     _localRegions = [self _determineRegions];
@@ -83,15 +83,16 @@
 /**
  @return The regions that this query is touching
  */
-- (nonnull NSSet <SVKRegion *> *)touchedRegions
+- (nonnull NSSet <TKRegion *> *)touchedRegions
 {
   NSMutableSet *regions = [NSMutableSet setWithCapacity:5];
   TKRegionManager *manager = TKRegionManager.shared;
   [regions unionSet:[manager localRegionsContainingCoordinate:self.fromLocation.coordinate]];
   [regions unionSet:[manager localRegionsContainingCoordinate:self.toLocation.coordinate]];
   
-  if (regions.count >= 2) {
-    [regions addObject:[SVKInternationalRegion shared]];
+  // Add international, if we either have no region or more than 1
+  if (regions.count != 1) {
+    [regions addObject:TKRegion.international];
   }
   return regions;
 }
@@ -104,7 +105,7 @@
   }
   
   NSMutableSet *modes = [NSMutableSet set];
-  for (SVKRegion *region in regions) {
+  for (TKRegion *region in regions) {
     [modes addObjectsFromArray:[region modeIdentifiers]];
   }
   return [[modes allObjects] sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull obj1, NSString * _Nonnull obj2) {
@@ -130,10 +131,10 @@
     return NO;
   if (fabs([other.time timeIntervalSinceDate:self.time]) >  30) // within 30 seconds
     return NO;
-  if (! [SGLocationHelper coordinate:[other.fromLocation coordinate]
+  if (! [TKLocationHelper coordinate:[other.fromLocation coordinate]
                               isNear:[self.fromLocation coordinate]])
     return NO;
-  if (! [SGLocationHelper coordinate:[other.toLocation coordinate]
+  if (! [TKLocationHelper coordinate:[other.toLocation coordinate]
                               isNear:[self.toLocation coordinate]])
     return NO;
   return YES;
@@ -147,11 +148,11 @@
   for (TripGroup *group in allGroups) {
     NSSet *groupModeIdentifiers = [group usedModeIdentifiers];
     
-    if ([STKModeHelper modes:hidden contain:groupModeIdentifiers]) {
+    if ([TKModeHelper modes:hidden contain:groupModeIdentifiers]) {
       // if any mode is hidden, hide the whole group
       group.visibility = TripGroupVisibilityHidden;
       
-    } else if ([STKModeHelper modes:minimized contain:groupModeIdentifiers]) {
+    } else if ([TKModeHelper modes:minimized contain:groupModeIdentifiers]) {
       id key = groupModeIdentifiers;
       NSMutableArray *groups = [minimizedModeIdentifierSetToTripGroups objectForKey:key];
       if (! groups) {
@@ -197,7 +198,7 @@
 
 - (NSString *)timeSorterTitle
 {
-  if (self.timeType.intValue == SGTimeTypeArriveBefore) {
+  if (self.timeType.intValue == TKTimeTypeArriveBefore) {
     return NSLocalizedStringFromTableInBundle(@"Departure", @"TripKit", [TKTripKit bundle], @"Departure time sorter title") ;
   } else {
     return NSLocalizedStringFromTableInBundle(@"Arrival", @"TripKit", [TKTripKit bundle], @"Arrival time sorter title") ;
