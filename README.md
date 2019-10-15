@@ -18,9 +18,9 @@ Additional documentation is available on the [TripGo Developer page](http://sked
 Add desired pods:
 
 ```ruby
-  pod 'TripKit',                '~> 3.1'
-  pod 'TripKitUI',              '~> 3.1'
-  pod 'TripKitInterApp',        '~> 3.1'
+  pod 'TripKit',                '~> 4.0'
+  pod 'TripKitUI',              '~> 4.0'
+  pod 'TripKitInterApp',        '~> 4.0'
 ```
 
 ### Carthage
@@ -28,7 +28,7 @@ Add desired pods:
 Add this to your `Cartfile`:
 
 ```
-git "git@gitlab.com:SkedGo/iOS/tripkit-ios.git" "tripkit-4.0"
+git "git@gitlab.com:SkedGo/iOS/tripkit-ios.git" "master"
 ```
 
 Then run `carthage update` and add the desired framework to your project as described in [the Carthage docs](https://github.com/Carthage/Carthage).
