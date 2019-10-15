@@ -184,7 +184,7 @@
        } else {
          
          // failure
-         [TKLog warn:NSStringFromClass([self class]) format:@"Failed to download trip, and no copy in cache. Error: %@", error];
+         [TKLog info:NSStringFromClass([self class]) format:@"Failed to download trip, and no copy in cache. Error: %@", error];
          if (completion) {
            completion(nil);
          }
@@ -446,7 +446,7 @@
     } else if (pair.count == 2) {
       [paras setValue:pair[1] forKey:pair[0]];
     } else {
-      [TKLog warn:NSStringFromClass([self class]) format:@"Unknown option: %@", option];
+      [TKLog info:NSStringFromClass([self class]) format:@"Unknown option: %@", option];
     }
   }
   
@@ -506,7 +506,9 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
     return;
 	}
 
-  [TKLog warn:NSStringFromClass([self class]) format:@"Request failed with error %@ (%@)", error, [error description]];
+  [TKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull {
+    return [NSString stringWithFormat:@"Request failed with error: %@", [error description]];
+  }];
   self.isActive = NO;
   
   dispatch_async(dispatch_get_main_queue(), ^{
@@ -656,7 +658,6 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   // analyse result
   NSError *serverError = [TKError errorFromJSON:json statusCode:200];
   if (serverError) {
-    [TKLog warn:NSStringFromClass([self class]) format:@"Encountered server error: %@", serverError];
 		[self handleError:serverError
 							failure:failure];
     return;

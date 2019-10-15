@@ -197,7 +197,7 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                                         completion(status, headers, responseObject, data, nil);
                                       }
                                     } else {
-                                      [TKLog error:@"TKError" format:@"Could not parse: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+                                      [TKLog warn:@"TKError" format:@"Could not parse: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
                                       completion(status, headers, nil, nil, parserError);
                                     }
                                   }

@@ -26,7 +26,7 @@ extension NSManagedObjectContext {
     do {
       return try self.fetch(request)
     } catch {
-      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error)")
+      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return []
     }
   }
@@ -40,7 +40,7 @@ extension NSManagedObjectContext {
     do {
       return try self.fetch(request)
     } catch {
-      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error)")
+      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return []
     }
   }
@@ -54,7 +54,7 @@ extension NSManagedObjectContext {
     do {
       return try self.fetch(request).first
     } catch {
-      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error)")
+      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return nil
     }
   }
@@ -68,7 +68,7 @@ extension NSManagedObjectContext {
     do {
       return try self.count(for: request) > 0
     } catch {
-      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error)")
+      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return false
     }
   }

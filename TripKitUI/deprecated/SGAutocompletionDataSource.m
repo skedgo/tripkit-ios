@@ -128,7 +128,7 @@
     case SGSearchSectionAutocompletion: {
       NSUInteger row = indexPath.row;
       if (row >= self.autocompletionResults.count) {
-        [TKLog warn:@"SGAutocompletionDataSource" format:@"Unexpected index path in autocompletion results: %@", indexPath];
+        [TKLog warn:@"SGAutocompletionDataSource" format:@"Unexpected index path in autocompletion results: %@. Please file a bug with steps to reproduce this.", indexPath];
         row = (NSUInteger) MAX(0, (NSInteger)self.autocompletionResults.count - 1);
       }
       
@@ -209,11 +209,11 @@
       if (index >= 0 && index < (NSInteger)actions.count) {
         cell.textLabel.text = actions[index];
       } else {
-        [TKLog warn:@"SGAutocompletionDataSource" text:@"Bad row!"];
+        [TKLog warn:@"SGAutocompletionDataSource" text:@"Bad row! Please file a bug with steps to reproduce this."];
         cell.textLabel.text = @"";
       }
 #else
-      [TKLog warn:@"SGAutocompletionDataSource" text:@"Shouldn't happen on MacOS!"];
+      [TKLog warn:@"SGAutocompletionDataSource" text:@"Shouldn't happen on MacOS! Please file a bug with steps to reproduce this."];
       cell.textLabel.text = @"";
 #endif
 

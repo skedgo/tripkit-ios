@@ -98,13 +98,13 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   if (appGroupName != nil) {
     directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:appGroupName];
     if (directory == nil) {
-      [TKLog warn:@"TKTripKit" format:@"Can't load container directory for app group (%@)!", appGroupName];
+      [TKLog warn:@"TKTripKit" format:@"Can't load container directory for app group (%@)! Check your settings.", appGroupName];
     }
   }
   if (nil == directory) {
     directory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     if (directory == nil) {
-      [TKLog error:@"TKTripKit" format:@"Can't local directory for TripKit!"];
+      [TKLog error:@"TKTripKit" format:@"Can't find local directory for TripKit!"];
     }
   }
   return directory;
