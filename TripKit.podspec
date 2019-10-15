@@ -24,8 +24,7 @@ Pod::Spec.new do |s|
 
   s.source_files = [
     "TripKit/TripKit.h",
-    "TripKit/Classes/**/*.{h,m,swift}",
-    "TripKit/AddOns/Share/**/*"
+    "TripKit/Classes/**/*.{h,m,swift}"
   ]
 
   s.resources    = [
