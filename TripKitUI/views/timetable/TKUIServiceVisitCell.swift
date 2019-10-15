@@ -120,6 +120,16 @@ extension TKUIServiceVisitCell {
       arrivalText = nil
     }
 
+    if let arrival = arrivalText {
+      // Be more verbose when showing both times
+      arrivalTimeLabel.accessibilityLabel = Loc.Arrives(atTime:arrival)
+      departureTimeLabel.accessibilityLabel = departureText.map { Loc.Departs(atTime:$0) }
+    } else {
+      // Otherwise just speak the single time
+      arrivalTimeLabel.accessibilityLabel = nil
+      departureTimeLabel.accessibilityLabel = departureText
+    }
+    
     arrivalTimeLabel.text = arrivalText
     departureTimeLabel.text = departureText
     arrivalTimeLabel.isHidden = arrivalText == nil

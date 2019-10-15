@@ -46,7 +46,8 @@ public class TKUISegmentTitleView: UIView {
     
     dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
     dismissButton.setTitle(nil, for: .normal)
-    
+    dismissButton.accessibilityLabel = Loc.Close
+
     modeIcon.tintColor = .tkBackground
   }
   

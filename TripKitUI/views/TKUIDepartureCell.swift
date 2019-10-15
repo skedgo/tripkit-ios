@@ -17,11 +17,12 @@ public struct TKUIDepartureCellContent {
   public var imageTintColor: UIColor?
   public var modeName: String
   
-  
   public var serviceShortName: String?
   public var serviceColor: UIColor?
   public var serviceIsCancelled: Bool
 
+  public var accessibilityLabel: String?
+  public var accessibilityTimeText: String?
   public var timeText: NSAttributedString
   public var lineText: String?
 
@@ -128,6 +129,8 @@ extension TKUIDepartureCell {
   
   private func updateUI() {
     guard let dataSource = dataSource else { return }
+    
+    accessibilityLabel = dataSource.accessibilityLabel
     
     serviceImageView.setImage(with: dataSource.imageURL, asTemplate: dataSource.imageIsTemplate, placeholder: dataSource.placeholderImage)
     serviceImageView.tintColor = dataSource.imageTintColor ?? .tkLabelPrimary

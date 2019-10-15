@@ -46,6 +46,7 @@ class TKUIServiceTitleView: UIView {
     
     dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
     dismissButton.setTitle(nil, for: .normal)
+    dismissButton.accessibilityLabel = Loc.Close
   }
 
 }
@@ -71,5 +72,6 @@ extension TKUIServiceTitleView {
     }
     
     serviceTimeLabel.attributedText = model.timeText
+    serviceTimeLabel.accessibilityLabel = model.accessibilityTimeText ?? model.timeText.string
   }
 }

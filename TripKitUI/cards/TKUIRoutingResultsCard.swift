@@ -293,7 +293,8 @@ extension TKUITripCell.Model {
       departureTimeZone: trip.departureTimeZone, arrivalTimeZone: trip.arrivalTimeZone ?? trip.departureTimeZone,
       focusOnDuration: !trip.departureTimeIsFixed, isArriveBefore: trip.isArriveBefore,
       showFaded: trip.showFaded,
-      segments: trip.segments(with: .inSummary)
+      segments: trip.segments(with: .inSummary),
+      accessibilityLabel: trip.accessibilityLabel
     )
   }
 
@@ -332,6 +333,7 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
 
     let section = dataSource.sectionModels[section]
     footerView.attributedCost = formatter.costString(costs: section.costs)
+    footerView.accessibilityLabel = formatter.costAccessibilityLabel(costs: section.costs)
     
     if let buttonContent = section.toggleButton {
       footerView.button.isHidden = false

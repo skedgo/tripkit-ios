@@ -19,9 +19,6 @@
 /* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
 "%@ stops" = "%@ Stops";
 
-/* From %time1 to %time2. (old key: TimeFromToShortFormat) */
-"%@ to %@" = "Von %1$@ nach %2$@";
-
 /* Duration without traffic */
 "%@ w/o traffic" = "%@ ohne Verkehr";
 

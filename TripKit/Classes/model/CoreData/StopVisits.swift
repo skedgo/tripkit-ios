@@ -57,6 +57,40 @@ extension StopVisits {
     }
   }
   
+  @objc
+  public func accessibilityDescription(includeRealTime: Bool) -> String {
+    var label = ""
+
+    if let number = service.number, !number.isEmpty {
+      label.append(number)
+    }
+    if let direction = service.direction {
+      label.append(";")
+      label.append(direction)
+    }
+    
+    if self is DLSEntry {
+      if let departure = departure {
+        label.append(";")
+        label.append(Loc.Departs(atTime: TKStyleManager.timeString(departure, for: timeZone)))
+      }
+      if let arrival = arrival {
+        label.append(";")
+        label.append(Loc.Arrives(atTime: TKStyleManager.timeString(arrival, for: timeZone)))
+      }
+    } else if let time = departure ?? arrival {
+      label.append(";")
+      label.append(Loc.At(time: TKStyleManager.timeString(time, for: timeZone)))
+    }
+    
+    if includeRealTime {
+      label.append(";")
+      label.append(realTimeInformation(false))
+    }
+    
+    return label
+  }
+  
 }
 
 // MARK: - MKAnnotation

@@ -87,9 +87,6 @@ public class TKUIPathFriendlinessView: UIView {
     let unknownMetres = totalMetres - friendlyMetres - dismountMetres - unfriendlyMetres - 1 // -1 for rounding issues
     let unknownRatio = unknownMetres / totalMetres
     
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .percent
-    
     // Legend
     friendlyLegendLabel.text   = TKPathFriendliness.friendly.title
     friendlyLegendLabel.font   = TKStyleManager.customFont(forTextStyle: .caption1)
@@ -120,11 +117,11 @@ public class TKUIPathFriendlinessView: UIView {
 
     // Update bar chart.
     let widthConstraints = [
-        friendlyBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(friendlyRatio)),
-        unfriendlyBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(unfriendlyRatio)),
-        dismountBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(dismountRatio)),
-        unknownBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(unknownRatio))
-      ]
+      friendlyBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(friendlyRatio)),
+      unfriendlyBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(unfriendlyRatio)),
+      dismountBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(dismountRatio)),
+      unknownBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(unknownRatio))
+    ]
     
     // Lower the priority of the width constraint because floating point arithmetic may produce
     // ratios that don't add up to precisely 1 should one of the bar views has zero width.
@@ -142,6 +139,8 @@ public class TKUIPathFriendlinessView: UIView {
     dismountMetreLabel.font = TKStyleManager.systemFont(size: 12)
     unknownMetreLabel.text = distanceFormatter.string(fromDistance: unknownMetres)
     unknownMetreLabel.font = TKStyleManager.systemFont(size: 12)
+    
+    updateAccessibilityLabel(friendly: friendlyMetres, unfriendly: unfriendlyMetres, dismount: dismountMetres, unknown: unknownMetres)
     
     // Hide labels if required
     friendlyMetreLabel.isHidden = friendlyMetres < 0.5
@@ -167,6 +166,22 @@ public class TKUIPathFriendlinessView: UIView {
     friendlyToUnfriendlySpacingConstraint.constant = friendlyMetreLabel.isHidden ? 0 : 8
     unfriendlyToDismountSpacingConstraint.constant = dismountMetreLabel.isHidden ? 0 : 8
     dismountToUnknownSpacingConstraint.constant = unfriendlyMetreLabel.isHidden ? 0 : 8
+  }
+  
+  private func updateAccessibilityLabel(friendly: CLLocationDistance, unfriendly: CLLocationDistance, dismount: CLLocationDistance, unknown: CLLocationDistance) {
+    let distanceFormatter = MKDistanceFormatter()
+
+    let parts = [
+        (Loc.FriendlyPath, friendly),
+        (Loc.UnfriendlyPath, unfriendly),
+        (Loc.Dismount, dismount),
+        (Loc.UnknownPathFriendliness, unknown),
+      ]
+      .filter { $0.1 > 0.5 }
+      .map { ($0.0, distanceFormatter.string(fromDistance: $0.1)) }
+    
+    isAccessibilityElement = true
+    accessibilityLabel = parts.map { "\($0.0): \($0.1)" }.joined(separator: "\n")
   }
   
 }
