@@ -29,7 +29,7 @@ class TKBuzzRouterTest: TKTestCase {
     
     let expectation = self.expectation(description: "Parser finished")
     
-    let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-pt-oldish")
     parser.parseAndAddResult(json) { request in
       
       // Evaluating the returned response
@@ -58,7 +58,7 @@ class TKBuzzRouterTest: TKTestCase {
   
   func testParsingPerformance() throws {
     let parser = TKRoutingParser(tripKitContext: tripKitContext)
-    let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-pt-oldish")
     measure {
       let request = parser.parseAndAddResultBlocking(json)
       XCTAssertNotNil(request)
@@ -70,7 +70,7 @@ class TKBuzzRouterTest: TKTestCase {
     
     let expectation = self.expectation(description: "Parser finished")
     
-    let json = try contentFromJSON(named: "routing-goget") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-goget")
     parser.parseAndAddResult(json) { request in
       
       XCTAssertNotNil(request)
@@ -109,7 +109,7 @@ class TKBuzzRouterTest: TKTestCase {
     
     let expectation = self.expectation(description: "Parser finished")
     
-    let json = try contentFromJSON(named: "routing-cycle-train-cycle") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-cycle-train-cycle")
     parser.parseAndAddResult(json) { request in
       // TODO: (in another test): check the waypoint issue
       
@@ -140,7 +140,7 @@ class TKBuzzRouterTest: TKTestCase {
     
     let expectation = self.expectation(description: "Parser finished")
     
-    let json = try contentFromJSON(named: "routing-with-stops") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-with-stops")
     parser.parseAndAddResult(json) { request in
       XCTAssertNotNil(request)
       XCTAssertEqual(request?.tripGroups?.count, 1)
@@ -211,10 +211,64 @@ class TKBuzzRouterTest: TKTestCase {
     }
   }
   
+  func testParsingTripAwayFromNetwork11833() throws {
+    let parser = TKRoutingParser(tripKitContext: tripKitContext)
+    
+    let expectation = self.expectation(description: "Parser finished")
+    
+    let json: [String: Any] = try contentFromJSON(named: "routing-motorbike")
+    parser.parseAndAddResult(json) { request in
+      do {
+        XCTAssertNotNil(request)
+        let queryFrom = try XCTUnwrap(request?.fromLocation.coordinate)
+        let queryTo = try XCTUnwrap(request?.toLocation.coordinate)
+
+        // reconstructing the query
+        let expectedFrom = CLLocationCoordinate2D(latitude: -33.6594, longitude: 151.2237)
+        let queryFromDistance = try XCTUnwrap(queryFrom.distance(from: expectedFrom))
+        XCTAssertEqual(queryFromDistance, 0, accuracy: 10)
+        let expectedTo = CLLocationCoordinate2D(latitude: -33.54381, longitude: 151.21246)
+        let queryToDistance = try XCTUnwrap(queryTo.distance(from: expectedTo))
+        XCTAssertEqual(queryToDistance, 0, accuracy: 10)
+
+        // basic trip properties
+        XCTAssertEqual(request?.tripGroups?.count, 1)
+        XCTAssertEqual(request?.trips.count, 1)
+        let trip = try XCTUnwrap(request?.trips.first)
+        XCTAssertEqual(trip.totalScore.doubleValue, 64, accuracy: 0.1)
+        XCTAssertEqual(trip.tripGroup.sources.count, 4)
+        
+        // terminal segments should map trip, but not query
+        let tripStart = try XCTUnwrap(trip.segments.first?.start?.coordinate)
+        let startDistance = try XCTUnwrap(queryFrom.distance(from: tripStart))
+        XCTAssertEqual(startDistance, 350, accuracy: 50)
+        let tripEnd = try XCTUnwrap(trip.segments.last?.end?.coordinate)
+        let endDistance = try XCTUnwrap(queryTo.distance(from: tripEnd))
+        XCTAssertEqual(endDistance, 400, accuracy: 50)
+        
+        XCTFail("Also check the first + last segment wording (it should have 'near' in it)")
+        XCTFail("Do a similar check for a trip that's on the network")
+        XCTFail("Also check TKUIMapManagerHelper.additionalMapAnnotations to be non-empty for start and end, empty for rest")
+
+        // Make sure CoreData is happy
+        try self.tripKitContext.save()
+      
+      } catch {
+        XCTFail("Unexpected error: \(error)")
+      }
+      
+      expectation.fulfill()
+    }
+    
+    waitForExpectations(timeout: 3) { error in
+      XCTAssertNil(error)
+    }
+  }
+  
   func testTripCache() throws {
     let identifier = "Test"
     let directory = TKFileCacheDirectory.documents // where TKBuzzRouter keeps its trips
-    let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-pt-oldish")
 
     // 0. Clear
     TKJSONCache.remove(identifier, directory: directory)
