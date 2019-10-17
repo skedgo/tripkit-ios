@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+- Addressed some crashes
+
 ## [Version 4.0-rc1] - 2019-10-15
 
 ### Added

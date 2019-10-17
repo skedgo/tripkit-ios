@@ -633,7 +633,8 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 
 - (NSURL *)currentBaseURL
 {
-  NSArray<NSURL *> *servers = self.regionServers;
+  // Create a copy for thread safety
+  NSArray<NSURL *> *servers = [self.regionServers copy];
   NSUInteger serverIndex = _serverIndex;
   
   if (servers.count <= serverIndex) {
