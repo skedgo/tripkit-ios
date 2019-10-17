@@ -91,6 +91,7 @@ open class TKUIAnnotationViewBuilder: NSObject {
 
     } else if let timePoint = annotation as? TKUISemaphoreDisplayable, timePoint.semaphoreMode != .none {
       return buildSemaphore(for: timePoint)
+    
     } else if let segment = annotation as? TKSegment {
       return buildSemaphore(for: segment)
 
@@ -106,6 +107,9 @@ open class TKUIAnnotationViewBuilder: NSObject {
     
     } else if let image = annotation as? TKUIImageAnnotation {
       return build(for: image)
+    
+    } else if let query = annotation as? TKUIRoutingQueryAnnotation {
+      return build(for: query)
     }
     
     return nil
@@ -380,6 +384,13 @@ fileprivate extension TKUIAnnotationViewBuilder {
     imageView.canShowCallout = annotation.title != nil
     imageView.isEnabled = true
     return imageView
+  }
+  
+  func build(for query: TKUIRoutingQueryAnnotation) -> MKAnnotationView {
+    let view = MKPinAnnotationView(annotation: query, reuseIdentifier: query.isStart ? "QueryStart" : "QueryEnd")
+    view.pinTintColor = query.isStart ? .green : .red
+    view.canShowCallout = true
+    return view
   }
   
 }

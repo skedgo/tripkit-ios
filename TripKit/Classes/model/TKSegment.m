@@ -46,6 +46,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (id)initAsTerminal:(TKSegmentOrdering)order
+             atLocation:(id<MKAnnotation>)location
              forTrip:(Trip *)aTrip
 {
   NSParameterAssert(aTrip);
@@ -59,6 +60,8 @@ NSString *const UninitializedString =  @"UninitializedString";
 	if (self) {
     self.order = order;
     self.trip = aTrip;
+    self.start = location;
+    self.end = location;
 	}
 	return self;
 }
@@ -606,43 +609,22 @@ NSString *const UninitializedString =  @"UninitializedString";
 - (id<MKAnnotation>)start
 {
   if (nil == _start) {
-    ZAssert(self.trip, @"All segments need a trip");
-    
-    switch (self.order) {
-      case TKSegmentOrderingStart:
-        _start = self.trip.request.fromLocation;
-        break;
-        
-      case TKSegmentOrderingRegular: {
-        _start = self.template.start;
-        break;
-      }
-        
-      case TKSegmentOrderingEnd:
-        _start = self.trip.request.toLocation;
-        break;
-    }
+    ZAssert(self.order == TKSegmentOrderingRegular, @"Set start + end on terminal segments");
+    _start = self.template.start;
   }
-//  ZAssert(_start != nil, @"Start missing for segment %@ in request %@", self, self.trip.request);
+
+  ZAssert(_start != nil, @"Start missing for segment %@ in request %@", self, self.trip.request);
   return _start;
 }
 
 - (id<MKAnnotation>)end
 {
   if (nil == _end) {
-    switch (self.order) {
-      case TKSegmentOrderingStart:
-      case TKSegmentOrderingEnd:
-        _end = [self start];
-        break;
-        
-      case TKSegmentOrderingRegular: {
-        _end = self.template.end;
-        break;
-      }
-    }
+    ZAssert(self.order == TKSegmentOrderingRegular, @"Set start + end on terminal segments");
+    _end = self.template.end;
   }
-//  ZAssert(_end != nil, @"End missing for segment %@ in request %@", self, self.trip.request);
+
+  ZAssert(_end != nil, @"End missing for segment %@ in request %@", self, self.trip.request);
   return _end;
 }
 
