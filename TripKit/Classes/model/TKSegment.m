@@ -1010,21 +1010,19 @@ NSString *const UninitializedString =  @"UninitializedString";
       if (! name) {
         name = [self.trip.request.fromLocation address];
       }
-      if (*isTimeDependent) {
-        NSString *time = [TKStyleManager timeString:self.departureTime
-                                        forTimeZone:self.timeZone];
-        if (name) {
-          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@ at %@", @"TripKit", [TKTripKit bundle], "The place of departure with time. (old key: LeaveLocationTime)"), name, time];
-        } else {
-          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave at %@", @"TripKit", [TKTripKit bundle], "Time departure. (old key: LeaveTime)"), time];
+      
+      if ([self matchesQuery]) {
+        NSString *time = nil;
+        if (*isTimeDependent) {
+          time = [TKStyleManager timeString:self.departureTime
+                                forTimeZone:self.timeZone];
         }
+        
+        newString = [Loc LeaveFromLocationNamed:name atTime:time];
       } else {
-        if (name) {
-          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@", @"TripKit", [TKTripKit bundle], "The place of departure. (old key: LeaveLocation)"), name];
-        } else {
-          newString = NSLocalizedStringFromTableInBundle(@"Leave", @"TripKit", [TKTripKit bundle], @"Single line instruction to leave");
-        }
+        newString = [Loc LeaveNearLocationNamed:name];
       }
+      
       break;
     }
 
@@ -1044,16 +1042,16 @@ NSString *const UninitializedString =  @"UninitializedString";
       if (! name) {
         name = [self.trip.request.toLocation address];
       }
-      if (*isTimeDependent) {
-        NSString *time = [TKStyleManager timeString:self.arrivalTime
-                                        forTimeZone:self.timeZone];
-        if (name.length > 0) {
-          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Arrive at %@ at %@", @"TripKit", [TKTripKit bundle], "The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime)"), name, time];
-        } else {
-          newString = [Loc ArriveAtDate:time];
+
+      if ([self matchesQuery]) {
+        NSString *time = nil;
+        if (*isTimeDependent) {
+          time = [TKStyleManager timeString:self.arrivalTime
+                                forTimeZone:self.timeZone];
         }
+        newString = [Loc ArriveAtLocationNamed:name atTime:time];
       } else {
-        newString = NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Single line instruction to arrive");
+        newString = [Loc ArriveNearLocationNamed:name];
       }
       break;
     }

@@ -110,15 +110,9 @@ public class TKUIMapManagerHelper: NSObject {
   /// (i.e., in addition to the segment itself as long as its content such as stop visits, alerts and real-time
   /// vehicles). These are typically the query's from and to location if the trip starts away from the query.
   public static func additionalMapAnnotations(for segment: TKSegment) -> [MKAnnotation] {
-    func areFarAway(_ first: MKAnnotation?, _ second: MKAnnotation?) -> Bool {
-      guard let first = first?.coordinate, let second = second?.coordinate else { return false }
-      guard let distance = first.distance(from: second) else { return false }
-      return distance > 100
-    }
-    
-    if segment.order == .start, let from = segment.trip?.request.fromLocation, areFarAway(segment.start, from) {
+    if segment.order == .start, !segment.matchesQuery(), let from = segment.trip?.request.fromLocation {
       return [TKUIRoutingQueryAnnotation(at: from, isStart: true)]
-    } else if segment.order == .end, let to = segment.trip?.request.toLocation, areFarAway(segment.end, to) {
+    } else if segment.order == .end, !segment.matchesQuery(), let to = segment.trip?.request.toLocation {
       return [TKUIRoutingQueryAnnotation(at: to, isStart: false)]
     } else {
       return []

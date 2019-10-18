@@ -22,19 +22,21 @@ extension TKRoutingParser {
     }
     return match!
   }
-  
+
   /// Helper method to fill in a request wich the specified location.
   ///
   /// Typically used on requests that were created as part of a previous call to
   /// `parseAndAddResult`. All parameters except `request` are optional.
-  @objc public static func populate(_ request: TripRequest, start: MKAnnotation?, end: MKAnnotation?, leaveAfter: Date?, arriveBy: Date?) -> Bool {
-    
+  @objc public static func populate(_ request: TripRequest, start: MKAnnotation?, end: MKAnnotation?, leaveAfter: Date?, arriveBy: Date?, queryJSON: [String: Any]? = nil) -> Bool {
+
     guard let trip = request.trips.first else {
       return false
     }
     
     if let start = start, let named = TKNamedCoordinate.namedCoordinate(for: start) {
       request.fromLocation = named
+    } else if let json = queryJSON?["from"] as? [String: Any], let from = TKParserHelper.namedCoordinate(for: json) {
+      request.fromLocation = from
     } else {
       let segment = matchingSegment(in: trip, order: .regular, first: true)
       guard let start = segment.start?.coordinate else { return false }
@@ -42,6 +44,8 @@ extension TKRoutingParser {
     }
     if let end = end, let named = TKNamedCoordinate.namedCoordinate(for: end) {
       request.toLocation = named
+    } else if let json = queryJSON?["to"] as? [String: Any], let to = TKParserHelper.namedCoordinate(for: json) {
+      request.toLocation = to
     } else {
       let segment = matchingSegment(in: trip, order: .regular, first: false)
       guard let end = segment.end?.coordinate else { return false }

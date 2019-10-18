@@ -209,6 +209,66 @@ extension Loc {
   
 }
 
+// MARK: - Segment instructions
+
+extension Loc {
+  
+  @objc(LeaveFromLocationNamed:atTime:)
+  public static func LeaveFromLocation(_ name: String? = nil, at time: String? = nil) -> String {
+    if let name = name, !name.isEmpty, let time = time, !time.isEmpty {
+      let format = NSLocalizedString("Leave %@ at %@", tableName: "TripKit", bundle: .tripKit, comment: "The first '%@' will be replaced with the place of departure, the second with the departure time. (old key: LeaveLocationTime)")
+      return String(format: format, name, time)
+      
+    } else if let name = name, !name.isEmpty {
+      let format = NSLocalizedString("Leave %@", tableName: "TripKit", bundle: .tripKit, comment: "The place of departure. (old key: LeaveLocation)")
+      return String(format: format, name)
+
+    } else if let time = time, !time.isEmpty {
+      let format = NSLocalizedString("Leave at %@", tableName: "TripKit", bundle: .tripKit, comment: "Departure time. (old key: LeaveTime)")
+      return String(format: format, time)
+
+    } else {
+      return NSLocalizedString("Leave", tableName: "TripKit", bundle: .tripKit, comment: "Single line instruction to leave")
+    }
+  }
+
+  @objc(LeaveNearLocationNamed:)
+  public static func LeaveNearLocation(_ name: String?) -> String {
+    guard let name = name else { return LeaveFromLocation() }
+    
+    let format = NSLocalizedString("Depart near %@", tableName: "TripKit", bundle: .tripKit, comment: "Used when the trip does not start at the requested location, but nearby. The '%@' will be replaced with requested departure location.")
+    return String(format: format, name)
+  }
+  
+  @objc(ArriveAtLocationNamed:atTime:)
+  public static func ArriveAtLocation(_ name: String? = nil, at time: String? = nil) -> String {
+    if let name = name, !name.isEmpty, let time = time, !time.isEmpty {
+      let format = NSLocalizedString("Arrive %@ at %@", tableName: "TripKit", bundle: .tripKit, comment: "The first '%@' will be replaced with the place of arrival, the second with the arrival time. (old key: ArrivalLocationTime)")
+      return String(format: format, name, time)
+      
+    } else if let name = name, !name.isEmpty {
+      let format = NSLocalizedString("Arrive %@", tableName: "TripKit", bundle: .tripKit, comment: "The place of arrival.")
+      return String(format: format, name)
+
+    } else if let time = time, !time.isEmpty {
+      let format = NSLocalizedString("Arrive at %@", tableName: "TripKit", bundle: .tripKit, comment: "Arrival time.")
+      return String(format: format, time)
+
+    } else {
+      return NSLocalizedString("Arrive", tableName: "TripKit", bundle: .tripKit, comment: "Single line instruction to arrive")
+    }
+  }
+
+  @objc(ArriveNearLocationNamed:)
+  public static func ArriveNearLocation(_ name: String?) -> String {
+    guard let name = name else { return ArriveAtLocation() }
+    
+    let format = NSLocalizedString("Arrive near %@", tableName: "TripKit", bundle: .tripKit, comment: "Used when the trip does not end at the requested location, but nearby. The '%@' will be replaced with requested destination location.")
+    return String(format: format, name)
+  }
+  
+}
+
 // MARK: - Alerts
 
 extension Loc {
