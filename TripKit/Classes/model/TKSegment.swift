@@ -71,7 +71,7 @@ extension TKSegment {
         let start = start?.coordinate,
         let distance = start.distance(from: queryFrom)
         else { return true }
-      return distance < 100
+      return distance < 250
       
     case .end:
       guard
@@ -79,7 +79,7 @@ extension TKSegment {
         let end = end?.coordinate,
         let distance = end.distance(from: queryTo)
         else { return true }
-      return distance < 100
+      return distance < 250
 
     case .regular:
       return true

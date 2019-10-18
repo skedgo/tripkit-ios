@@ -174,10 +174,7 @@
       
       if (! existingVisit) {
         // we added a new visit
-        TKNamedCoordinate *coordinate = [[TKNamedCoordinate alloc] initWithLatitude:[stopDict[@"lat"] doubleValue]
-                                                                          longitude:[stopDict[@"lng"] doubleValue]
-                                                                               name:stopDict[@"name"]
-                                                                            address:nil];
+        TKNamedCoordinate *coordinate = [TKParserHelper namedCoordinateForDictionary:stopDict];
         
         // we used to fetchOrInsert here, but the duplicate checking is remarkably slow
         StopLocation *stop = [StopLocation insertStopForStopCode:stopCode
