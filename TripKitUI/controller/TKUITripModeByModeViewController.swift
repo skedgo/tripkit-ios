@@ -18,6 +18,10 @@ public class TKUITripModeByModeViewController: TGCardViewController {
   public init(trip: Trip, initialPosition: TGCardPosition = .peaking) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
     
+    #if targetEnvironment(macCatalyst)
+    mode = .sidebar
+    #endif
+
     let mxmCard = TKUITripModeByModeCard(trip: trip, initialPosition: initialPosition)
     mxmCard.style = TKUICustomization.shared.cardStyle
     mxmCard.modeByModeDelegate = self
@@ -27,6 +31,10 @@ public class TKUITripModeByModeViewController: TGCardViewController {
   public init(startingOn segment: TKSegment, mode: TKUISegmentMode = .onSegment, initialPosition: TGCardPosition = .peaking) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
     
+    #if targetEnvironment(macCatalyst)
+    mode = .sidebar
+    #endif
+
     let mxmCard = try! TKUITripModeByModeCard(startingOn: segment, mode: mode, initialPosition: initialPosition)
     mxmCard.style = TKUICustomization.shared.cardStyle
     mxmCard.modeByModeDelegate = self

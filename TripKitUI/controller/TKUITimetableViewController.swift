@@ -42,6 +42,10 @@ public class TKUITimetableViewController: TGCardViewController {
   public init(stop: TKUIStopAnnotation) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
     
+    #if targetEnvironment(macCatalyst)
+    mode = .sidebar
+    #endif
+
     let departuresCard = TKUITimetableCard(stops: [stop])
     departuresCard.style = TKUICustomization.shared.cardStyle
     rootCard = departuresCard
@@ -56,10 +60,13 @@ public class TKUITimetableViewController: TGCardViewController {
   public init(dlsTable: TKDLSTable, startDate: Date = Date()) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
     
+    #if targetEnvironment(macCatalyst)
+    mode = .sidebar
+    #endif
+
     let departuresCard = TKUITimetableCard(dlsTable: dlsTable, startDate: startDate)
     departuresCard.style = TKUICustomization.shared.cardStyle
     rootCard = departuresCard
-    
   }
   
   required public init(coder aDecoder: NSCoder) {

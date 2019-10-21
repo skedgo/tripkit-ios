@@ -40,6 +40,10 @@ public class TKUIRoutingResultsViewController: TGCardViewController {
   public init(destination: MKAnnotation) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
 
+    #if targetEnvironment(macCatalyst)
+    mode = .sidebar
+    #endif
+
     let resultsCard = TKUIRoutingResultsCard(destination: destination)
     resultsCard.style = TKUICustomization.shared.cardStyle
     rootCard = resultsCard
@@ -55,6 +59,10 @@ public class TKUIRoutingResultsViewController: TGCardViewController {
   ///     using `TripRequest.insert(...)`
   public init(request: TripRequest) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+
+    #if targetEnvironment(macCatalyst)
+    mode = .sidebar
+    #endif
 
     let resultsCard = TKUIRoutingResultsCard(request: request)
     resultsCard.style = TKUICustomization.shared.cardStyle
