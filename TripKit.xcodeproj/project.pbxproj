@@ -667,6 +667,8 @@
 		3AD8F19420E0E90F00E82E2E /* TKRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD8F19220E0E90F00E82E2E /* TKRealTime.swift */; };
 		3ADC802C2114861500A318B9 /* TKUIRoutingResultsViewModel+Restoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC802B2114861500A318B9 /* TKUIRoutingResultsViewModel+Restoration.swift */; };
 		3ADC803221184F7300A318B9 /* TKUITripOverviewViewModel+Restoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC803121184F7300A318B9 /* TKUITripOverviewViewModel+Restoration.swift */; };
+		3ADD3B9B2358BA3000CD4713 /* TKUIRoutingQueryAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD3B9A2358BA3000CD4713 /* TKUIRoutingQueryAnnotation.swift */; };
+		3ADD3B9F2358BDAF00CD4713 /* routing-motorbike.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD3B9D2358BDA900CD4713 /* routing-motorbike.json */; };
 		3AE04BE61DEE392800462CB3 /* TKTripPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */; };
 		3AE09B9E20BC1C24004BF42B /* routing-drive-park-walk-train.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */; };
 		3AE09BA020BC1C7E004BF42B /* service-for-park-ride.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */; };
@@ -1366,6 +1368,8 @@
 		3AD8F19220E0E90F00E82E2E /* TKRealTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRealTime.swift; sourceTree = "<group>"; };
 		3ADC802B2114861500A318B9 /* TKUIRoutingResultsViewModel+Restoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingResultsViewModel+Restoration.swift"; sourceTree = "<group>"; };
 		3ADC803121184F7300A318B9 /* TKUITripOverviewViewModel+Restoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripOverviewViewModel+Restoration.swift"; sourceTree = "<group>"; };
+		3ADD3B9A2358BA3000CD4713 /* TKUIRoutingQueryAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIRoutingQueryAnnotation.swift; sourceTree = "<group>"; };
+		3ADD3B9D2358BDA900CD4713 /* routing-motorbike.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-motorbike.json"; sourceTree = "<group>"; };
 		3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTripPattern.swift; sourceTree = "<group>"; };
 		3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-drive-park-walk-train.json"; sourceTree = "<group>"; };
 		3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "service-for-park-ride.json"; sourceTree = "<group>"; };
@@ -1778,6 +1782,7 @@
 				3A39757C22857D750094F883 /* TKUIModeAnnotationView.swift */,
 				3A6DF0F4202C8EB80084CB2C /* TKUIPulsingAnnotationView.h */,
 				3A6DF0EA202C8EB80084CB2C /* TKUIPulsingAnnotationView.m */,
+				3ADD3B9A2358BA3000CD4713 /* TKUIRoutingQueryAnnotation.swift */,
 				3A6DF0BB202C8EB80084CB2C /* TKUISemaphoreView.h */,
 				3A6DF0B3202C8EB80084CB2C /* TKUISemaphoreView.m */,
 				3A6DF0AC202C8EB80084CB2C /* TKUISemaphoreView.swift */,
@@ -2074,8 +2079,8 @@
 		3AA3CE9E202CD4D100E54859 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3AA3CEAB202CD4D100E54859 /* alertsTransit.json */,
 				3A21A4AC20690447005F411D /* alertsTransit-melbourne.json */,
+				3AA3CEAB202CD4D100E54859 /* alertsTransit.json */,
 				3AA3CEA7202CD4D100E54859 /* berowraToHornsby.json */,
 				3AA3CEA3202CD4D100E54859 /* berowraToHornsbyService.json */,
 				3AA3CEAA202CD4D100E54859 /* departures-parentStop.json */,
@@ -2083,18 +2088,19 @@
 				3AA3CEA2202CD4D100E54859 /* hornsbyToSkedGo.json */,
 				3AA3CE9F202CD4D100E54859 /* hornsbyToSkedGoService.json */,
 				3AA3CEA8202CD4D100E54859 /* locationInfo-bikePod.json */,
-				3AA3CEA0202CD4D100E54859 /* locationInfo-carRental.json */,
 				3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */,
+				3AA3CEA0202CD4D100E54859 /* locationInfo-carRental.json */,
 				3A17E5FF22B7DC33005318D5 /* locationInfo-onStreetParking.json */,
 				3AF6FDEF204436D3003BA786 /* regionInfo-multi.json */,
 				3A6DAED72040985A009282FE /* regionInfo-Nuremberg.json */,
 				3AA3CEA1202CD4D100E54859 /* regionInfo-Sydney.json */,
 				3A6DAED82040985B009282FE /* regionInfo-Vancouver.json */,
 				3AA3CEA6202CD4D100E54859 /* regions.json */,
-				3AA3CEA5202CD4D100E54859 /* routing-goget.json */,
-				3AA3CEA9202CD4D100E54859 /* routing-pt-oldish.json */,
-				3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */,
 				3A38695620EB6C2400B0A82D /* routing-cycle-train-cycle.json */,
+				3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */,
+				3AA3CEA5202CD4D100E54859 /* routing-goget.json */,
+				3ADD3B9D2358BDA900CD4713 /* routing-motorbike.json */,
+				3AA3CEA9202CD4D100E54859 /* routing-pt-oldish.json */,
 				3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */,
 				3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */,
 			);
@@ -3177,6 +3183,7 @@
 				3AA3CEC5202CD4D100E54859 /* regionInfo-Sydney.json in Resources */,
 				3AA3CEC6202CD4D100E54859 /* hornsbyToSkedGo.json in Resources */,
 				3AE6077E20FF4F64006D59B0 /* pelias-de.json in Resources */,
+				3ADD3B9F2358BDAF00CD4713 /* routing-motorbike.json in Resources */,
 				3AA3CECF202CD4D100E54859 /* alertsTransit.json in Resources */,
 				3A15DDCA2271A6C7001AC0F5 /* routing-with-stops.json in Resources */,
 				3AA3CECB202CD4D100E54859 /* berowraToHornsby.json in Resources */,
@@ -3567,6 +3574,7 @@
 				3AF5F2B320EFF7BE003AAEBA /* TKUIAttributionView.swift in Sources */,
 				D3049DFD224C49E600CB59D1 /* TKUIDepartureCell.swift in Sources */,
 				3AFCE27422E7115700090933 /* TKUITripBoyView.swift in Sources */,
+				3ADD3B9B2358BA3000CD4713 /* TKUIRoutingQueryAnnotation.swift in Sources */,
 				3ACB87952322ADBD00896733 /* TKUICardActionStyle.swift in Sources */,
 				3A506B3123200457003DD234 /* TKUITripOverviewCardAction.swift in Sources */,
 				3A2717492327D67E007FF59D /* TKUITimetableAccessoryView+Rx.swift in Sources */,

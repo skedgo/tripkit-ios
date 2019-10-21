@@ -155,15 +155,7 @@
 - (TKNamedCoordinate *)simpleResultFromDictionary:(NSDictionary *)aChoice
                                     forSearchTerm:(NSString *)inputString
 {
-  
-  NSString *name      = aChoice[@"name"];
-  NSString *address   = aChoice[@"address"];
-  
-  TKNamedCoordinate *result = [[TKNamedCoordinate alloc] initWithLatitude:[aChoice[@"lat"] doubleValue]
-                                                                longitude:[aChoice[@"lng"] doubleValue]
-                                                                     name:name
-                                                                  address:address];
-	
+  TKNamedCoordinate *result = [TKParserHelper namedCoordinateForDictionary:aChoice];
   NSString *urlString  = aChoice[@"URL"];
   result.url           = urlString ? [NSURL URLWithString:urlString] : nil;
   result.phone         = aChoice[@"phone"];

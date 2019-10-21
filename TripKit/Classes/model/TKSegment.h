@@ -54,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
                 forTrip:(Trip *)aTrip;
 
 - (id)initAsTerminal:(TKSegmentOrdering)order
+          atLocation:(id<MKAnnotation>)location
              forTrip:(Trip *)aTrip;
 
 /* 

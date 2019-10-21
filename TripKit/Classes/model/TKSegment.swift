@@ -63,6 +63,28 @@ extension TKSegment {
     }
   }
   
+  @objc public func matchesQuery() -> Bool {
+    switch order {
+    case .start:
+      guard
+        let queryFrom = trip?.request.fromLocation.coordinate,
+        let start = start?.coordinate,
+        let distance = start.distance(from: queryFrom)
+        else { return true }
+      return distance < 250
+      
+    case .end:
+      guard
+        let queryTo = trip?.request.toLocation.coordinate,
+        let end = end?.coordinate,
+        let distance = end.distance(from: queryTo)
+        else { return true }
+      return distance < 250
+
+    case .regular:
+      return true
+    }
+  }
   
   /// Gets the first alert that requires reroute
   @objc public var reroutingAlert: Alert? {

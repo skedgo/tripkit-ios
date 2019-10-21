@@ -46,6 +46,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (id)initAsTerminal:(TKSegmentOrdering)order
+             atLocation:(id<MKAnnotation>)location
              forTrip:(Trip *)aTrip
 {
   NSParameterAssert(aTrip);
@@ -59,6 +60,8 @@ NSString *const UninitializedString =  @"UninitializedString";
 	if (self) {
     self.order = order;
     self.trip = aTrip;
+    self.start = location;
+    self.end = location;
 	}
 	return self;
 }
@@ -606,43 +609,22 @@ NSString *const UninitializedString =  @"UninitializedString";
 - (id<MKAnnotation>)start
 {
   if (nil == _start) {
-    ZAssert(self.trip, @"All segments need a trip");
-    
-    switch (self.order) {
-      case TKSegmentOrderingStart:
-        _start = self.trip.request.fromLocation;
-        break;
-        
-      case TKSegmentOrderingRegular: {
-        _start = self.template.start;
-        break;
-      }
-        
-      case TKSegmentOrderingEnd:
-        _start = self.trip.request.toLocation;
-        break;
-    }
+    ZAssert(self.order == TKSegmentOrderingRegular, @"Set start + end on terminal segments");
+    _start = self.template.start;
   }
-//  ZAssert(_start != nil, @"Start missing for segment %@ in request %@", self, self.trip.request);
+
+  ZAssert(_start != nil, @"Start missing for segment %@ in request %@", self, self.trip.request);
   return _start;
 }
 
 - (id<MKAnnotation>)end
 {
   if (nil == _end) {
-    switch (self.order) {
-      case TKSegmentOrderingStart:
-      case TKSegmentOrderingEnd:
-        _end = [self start];
-        break;
-        
-      case TKSegmentOrderingRegular: {
-        _end = self.template.end;
-        break;
-      }
-    }
+    ZAssert(self.order == TKSegmentOrderingRegular, @"Set start + end on terminal segments");
+    _end = self.template.end;
   }
-//  ZAssert(_end != nil, @"End missing for segment %@ in request %@", self, self.trip.request);
+
+  ZAssert(_end != nil, @"End missing for segment %@ in request %@", self, self.trip.request);
   return _end;
 }
 
@@ -1028,21 +1010,19 @@ NSString *const UninitializedString =  @"UninitializedString";
       if (! name) {
         name = [self.trip.request.fromLocation address];
       }
-      if (*isTimeDependent) {
-        NSString *time = [TKStyleManager timeString:self.departureTime
-                                        forTimeZone:self.timeZone];
-        if (name) {
-          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@ at %@", @"TripKit", [TKTripKit bundle], "The place of departure with time. (old key: LeaveLocationTime)"), name, time];
-        } else {
-          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave at %@", @"TripKit", [TKTripKit bundle], "Time departure. (old key: LeaveTime)"), time];
+      
+      if ([self matchesQuery]) {
+        NSString *time = nil;
+        if (*isTimeDependent) {
+          time = [TKStyleManager timeString:self.departureTime
+                                forTimeZone:self.timeZone];
         }
+        
+        newString = [Loc LeaveFromLocationNamed:name atTime:time];
       } else {
-        if (name) {
-          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Leave %@", @"TripKit", [TKTripKit bundle], "The place of departure. (old key: LeaveLocation)"), name];
-        } else {
-          newString = NSLocalizedStringFromTableInBundle(@"Leave", @"TripKit", [TKTripKit bundle], @"Single line instruction to leave");
-        }
+        newString = [Loc LeaveNearLocationNamed:name];
       }
+      
       break;
     }
 
@@ -1062,16 +1042,16 @@ NSString *const UninitializedString =  @"UninitializedString";
       if (! name) {
         name = [self.trip.request.toLocation address];
       }
-      if (*isTimeDependent) {
-        NSString *time = [TKStyleManager timeString:self.arrivalTime
-                                        forTimeZone:self.timeZone];
-        if (name.length > 0) {
-          newString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"Arrive at %@ at %@", @"TripKit", [TKTripKit bundle], "The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime)"), name, time];
-        } else {
-          newString = [Loc ArriveAtDate:time];
+
+      if ([self matchesQuery]) {
+        NSString *time = nil;
+        if (*isTimeDependent) {
+          time = [TKStyleManager timeString:self.arrivalTime
+                                forTimeZone:self.timeZone];
         }
+        newString = [Loc ArriveAtLocationNamed:name atTime:time];
       } else {
-        newString = NSLocalizedStringFromTableInBundle(@"Arrive", @"TripKit", [TKTripKit bundle], @"Single line instruction to arrive");
+        newString = [Loc ArriveNearLocationNamed:name];
       }
       break;
     }

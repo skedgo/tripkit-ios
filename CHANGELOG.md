@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Tweaked handling when the calculated trip starts or ends not directly at the requested location,
+  by adding 'near' to the wording and displaying the query's origin and/or destination on the map.
+
 ### Fixed
 
 - Addressed some crashes

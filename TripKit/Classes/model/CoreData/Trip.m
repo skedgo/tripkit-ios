@@ -264,10 +264,13 @@ typedef NSUInteger SGTripFlag;
   // order ascending by index
   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" 
                                                                  ascending:YES];
-  NSArray *sortedReferences = [self.segmentReferences sortedArrayUsingDescriptors:@[sortDescriptor]];
+  NSArray<SegmentReference *>*sortedReferences = [self.segmentReferences sortedArrayUsingDescriptors:@[sortDescriptor]];
   NSMutableArray *sorted = [NSMutableArray arrayWithCapacity:sortedReferences.count + 2];
   
-  TKSegment *start = [[TKSegment alloc] initAsTerminal:TKSegmentOrderingStart forTrip:self];
+  id<MKAnnotation> startLocation = [[[sortedReferences firstObject] template] start];
+  id<MKAnnotation> endLocation = [[[sortedReferences lastObject] template] end];
+
+  TKSegment *start = [[TKSegment alloc] initAsTerminal:TKSegmentOrderingStart atLocation:startLocation forTrip:self];
   [sorted addObject:start];
   
 	TKSegment *previous = start;
@@ -284,7 +287,7 @@ typedef NSUInteger SGTripFlag;
 		previous = seg;
   }
   
-  TKSegment *end = [[TKSegment alloc] initAsTerminal:TKSegmentOrderingEnd forTrip:self];
+  TKSegment *end = [[TKSegment alloc] initAsTerminal:TKSegmentOrderingEnd atLocation:endLocation forTrip:self];
   previous.next = end;
   end.previous = previous;
   [sorted addObject:end];

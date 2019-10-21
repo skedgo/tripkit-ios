@@ -11,6 +11,7 @@ import Foundation
 import XCTest
 
 @testable import TripKit
+@testable import TripKitUI
 
 class TKBuzzRouterTest: TKTestCase {
 
@@ -29,7 +30,7 @@ class TKBuzzRouterTest: TKTestCase {
     
     let expectation = self.expectation(description: "Parser finished")
     
-    let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-pt-oldish")
     parser.parseAndAddResult(json) { request in
       
       // Evaluating the returned response
@@ -58,7 +59,7 @@ class TKBuzzRouterTest: TKTestCase {
   
   func testParsingPerformance() throws {
     let parser = TKRoutingParser(tripKitContext: tripKitContext)
-    let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-pt-oldish")
     measure {
       let request = parser.parseAndAddResultBlocking(json)
       XCTAssertNotNil(request)
@@ -70,32 +71,43 @@ class TKBuzzRouterTest: TKTestCase {
     
     let expectation = self.expectation(description: "Parser finished")
     
-    let json = try contentFromJSON(named: "routing-goget") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-goget")
     parser.parseAndAddResult(json) { request in
       
-      XCTAssertNotNil(request)
-      XCTAssertEqual(request?.tripGroups?.count, 1)
-      XCTAssertEqual(request?.tripGroups?.first?.sources.count, 3)
-      XCTAssertEqual(request?.trips.count, 1)
-      
-      let trip = request?.trips.first
-      XCTAssertEqual(trip?.segments.count, 5)
-      
-      XCTAssertNil(trip?.segments[1].bookingInternalURL())
-      XCTAssertNotNil(trip?.segments[1].bookingExternalActions())
-      
-      XCTAssertEqual(trip?.segments[2].alerts().count, 4)
-      XCTAssertEqual(trip?.segments[2].alertsWithAction().count, 0)
-      XCTAssertEqual(trip?.segments[2].alertsWithContent().count, 4)
-      XCTAssertEqual(trip?.segments[2].alertsWithLocation().count, 4)
-      XCTAssertEqual(trip?.segments[2].timesAreRealTime, true)
-      XCTAssertEqual(trip?.segments[2].isSharedVehicle, true)
+      do {
+        XCTAssertNotNil(request)
+        XCTAssertEqual(request?.tripGroups?.count, 1)
+        XCTAssertEqual(request?.tripGroups?.first?.sources.count, 3)
+        XCTAssertEqual(request?.trips.count, 1)
+        
+        let trip = try XCTUnwrap(request?.trips.first)
+        XCTAssertEqual(trip.segments.count, 5)
+        
+        XCTAssertNil(trip.segments[1].bookingInternalURL())
+        XCTAssertNotNil(trip.segments[1].bookingExternalActions())
+        
+        XCTAssertEqual(trip.segments[2].alerts().count, 4)
+        XCTAssertEqual(trip.segments[2].alertsWithAction().count, 0)
+        XCTAssertEqual(trip.segments[2].alertsWithContent().count, 4)
+        XCTAssertEqual(trip.segments[2].alertsWithLocation().count, 4)
+        XCTAssertEqual(trip.segments[2].timesAreRealTime, true)
+        XCTAssertEqual(trip.segments[2].isSharedVehicle, true)
 
-      XCTAssertEqual(trip?.segments[3].hasCarParks, true)
+        XCTAssertEqual(trip.segments[3].hasCarParks, true)
+        
+        // wording should be the regular variant (not 'near')
+        let startSegment = try XCTUnwrap(trip.segments.first)
+        let endSegment = try XCTUnwrap(trip.segments.last)
+        XCTAssertEqual(startSegment.title, Loc.LeaveFromLocation())
+        XCTAssertEqual(endSegment.title, Loc.ArriveAtLocation())
 
-      // Make sure CoreData is happy
-      try! self.tripKitContext.save()
-      
+        // Make sure CoreData is happy
+        try self.tripKitContext.save()
+        
+      } catch {
+        XCTFail("Unexpected error: \(error)")
+      }
+        
       expectation.fulfill()
     }
     
@@ -109,23 +121,36 @@ class TKBuzzRouterTest: TKTestCase {
     
     let expectation = self.expectation(description: "Parser finished")
     
-    let json = try contentFromJSON(named: "routing-cycle-train-cycle") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-cycle-train-cycle")
     parser.parseAndAddResult(json) { request in
       // TODO: (in another test): check the waypoint issue
       
-      XCTAssertNotNil(request)
-      XCTAssertEqual(request?.tripGroups?.count, 5)
-      XCTAssertEqual(request?.trips.count, 33)
+      do {
+        XCTAssertNotNil(request)
+        XCTAssertEqual(request?.tripGroups?.count, 5)
+        XCTAssertEqual(request?.trips.count, 33)
 
-      let cycleGroup = request?.tripGroups?.first { $0.trips.contains(where: { $0.usedModeIdentifiers().contains("cy_bic") }) }
-      XCTAssertEqual(cycleGroup?.sources.count, 3)
+        let cycleGroup = try XCTUnwrap(request?.tripGroups?.first { $0.trips.contains(where: { $0.usedModeIdentifiers().contains("cy_bic") }) })
+        XCTAssertEqual(cycleGroup.sources.count, 3)
 
-      let cycleTrip = cycleGroup?.trips.min { $0.totalScore.doubleValue < $1.totalScore.doubleValue }
-      XCTAssertEqual(cycleTrip?.segments.count, 9)
-      XCTAssertEqual(cycleTrip?.segments[0].alerts().count, 0)
-      
-      // Make sure CoreData is happy
-      try! self.tripKitContext.save()
+        let cycleTrip = try XCTUnwrap(cycleGroup.trips.min { $0.totalScore.doubleValue < $1.totalScore.doubleValue })
+        XCTAssertEqual(cycleTrip.segments.count, 9)
+        XCTAssertEqual(cycleTrip.segments[0].alerts().count, 0)
+        
+        // should not get the additional start + end annotations
+        let startSegment = try XCTUnwrap(cycleTrip.segments.first)
+        let startAnnotations = TKUIMapManagerHelper.additionalMapAnnotations(for: startSegment)
+        XCTAssertEqual(startAnnotations.count, 0)
+        let endSegment = try XCTUnwrap(cycleTrip.segments.last)
+        let endAnnotations = TKUIMapManagerHelper.additionalMapAnnotations(for: endSegment)
+        XCTAssertEqual(endAnnotations.count, 0)
+        
+        // Make sure CoreData is happy
+        try self.tripKitContext.save()
+        
+      } catch {
+        XCTFail("Unexpected error: \(error)")
+      }
       
       expectation.fulfill()
     }
@@ -140,7 +165,7 @@ class TKBuzzRouterTest: TKTestCase {
     
     let expectation = self.expectation(description: "Parser finished")
     
-    let json = try contentFromJSON(named: "routing-with-stops") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-with-stops")
     parser.parseAndAddResult(json) { request in
       XCTAssertNotNil(request)
       XCTAssertEqual(request?.tripGroups?.count, 1)
@@ -211,10 +236,78 @@ class TKBuzzRouterTest: TKTestCase {
     }
   }
   
+  func testParsingTripAwayFromNetwork11833() throws {
+    let parser = TKRoutingParser(tripKitContext: tripKitContext)
+    
+    let expectation = self.expectation(description: "Parser finished")
+    
+    let json: [String: Any] = try contentFromJSON(named: "routing-motorbike")
+    parser.parseAndAddResult(json) { request in
+      do {
+        XCTAssertNotNil(request)
+        let queryFrom = try XCTUnwrap(request?.fromLocation.coordinate)
+        let queryTo = try XCTUnwrap(request?.toLocation.coordinate)
+
+        // reconstructing the query
+        let expectedFrom = CLLocationCoordinate2D(latitude: -33.6594, longitude: 151.2237)
+        let queryFromDistance = try XCTUnwrap(queryFrom.distance(from: expectedFrom))
+        XCTAssertEqual(queryFromDistance, 0, accuracy: 10)
+        let expectedTo = CLLocationCoordinate2D(latitude: -33.54381, longitude: 151.21246)
+        let queryToDistance = try XCTUnwrap(queryTo.distance(from: expectedTo))
+        XCTAssertEqual(queryToDistance, 0, accuracy: 10)
+
+        // basic trip properties
+        XCTAssertEqual(request?.tripGroups?.count, 1)
+        XCTAssertEqual(request?.trips.count, 1)
+        let trip = try XCTUnwrap(request?.trips.first)
+        XCTAssertEqual(trip.totalScore.doubleValue, 64, accuracy: 0.1)
+        XCTAssertEqual(trip.tripGroup.sources.count, 4)
+        
+        // terminal segments should map trip, but not query
+        let startSegment = try XCTUnwrap(trip.segments.first)
+        let endSegment = try XCTUnwrap(trip.segments.last)
+        let tripStart = try XCTUnwrap(startSegment.start?.coordinate)
+        let startDistance = try XCTUnwrap(queryFrom.distance(from: tripStart))
+        XCTAssertEqual(startDistance, 350, accuracy: 50)
+        let tripEnd = try XCTUnwrap(endSegment.end?.coordinate)
+        let endDistance = try XCTUnwrap(queryTo.distance(from: tripEnd))
+        XCTAssertEqual(endDistance, 400, accuracy: 50)
+        
+        // wording should be the 'near' variant
+        XCTAssertEqual(startSegment.title, Loc.LeaveNearLocation("Ku-Ring-Gai Chase NSW 2084, Australia"))
+        XCTAssertEqual(endSegment.title, Loc.ArriveNearLocation("Brooklyn NSW 2083, Australia"))
+        
+        // should get the additional start + end annotations
+        let startAnnotations = TKUIMapManagerHelper.additionalMapAnnotations(for: startSegment)
+        XCTAssertEqual(startAnnotations.count, 1)
+        let startAnnotation = try XCTUnwrap(startAnnotations.first)
+        let distanceStartAnnotationToQueryFrom = try XCTUnwrap(queryFrom.distance(from: startAnnotation.coordinate))
+        XCTAssertEqual(distanceStartAnnotationToQueryFrom, 0, accuracy: 10)
+        let endAnnotations = TKUIMapManagerHelper.additionalMapAnnotations(for: endSegment)
+        XCTAssertEqual(endAnnotations.count, 1)
+        let endAnnotation = try XCTUnwrap(endAnnotations.first)
+        let distanceEndAnnotationToQueryTo = try XCTUnwrap(queryTo.distance(from: endAnnotation.coordinate))
+        XCTAssertEqual(distanceEndAnnotationToQueryTo, 0, accuracy: 10)
+
+        // Make sure CoreData is happy
+        try self.tripKitContext.save()
+      
+      } catch {
+        XCTFail("Unexpected error: \(error)")
+      }
+      
+      expectation.fulfill()
+    }
+    
+    waitForExpectations(timeout: 3) { error in
+      XCTAssertNil(error)
+    }
+  }
+  
   func testTripCache() throws {
     let identifier = "Test"
     let directory = TKFileCacheDirectory.documents // where TKBuzzRouter keeps its trips
-    let json = try contentFromJSON(named: "routing-pt-oldish") as! [String: Any]
+    let json: [String: Any] = try contentFromJSON(named: "routing-pt-oldish")
 
     // 0. Clear
     TKJSONCache.remove(identifier, directory: directory)

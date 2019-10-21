@@ -106,6 +106,8 @@ private extension TKUITripMapManager {
     var affectedByTraffic = false
     
     for segment in trip.segments {
+      annotations.append(contentsOf: TKUIMapManagerHelper.additionalMapAnnotations(for: segment))
+      
       // We at least add the semaphore for every segment
       guard segment.hasVisibility(.onMap), segment.coordinate.isValid else { continue }
       annotations.append(segment)

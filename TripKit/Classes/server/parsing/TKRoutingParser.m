@@ -47,7 +47,7 @@
       return;
     }
     
-    BOOL success = [TKRoutingParser populate:request start:nil end:nil leaveAfter:nil arriveBy:nil];
+    BOOL success = [TKRoutingParser populate:request start:nil end:nil leaveAfter:nil arriveBy:nil queryJSON:json[@"query"]];
     if (! success) {
       return;
     }
@@ -74,7 +74,7 @@
       return;
     }
     
-    BOOL success = [TKRoutingParser populate:request start:nil end:nil leaveAfter:nil arriveBy:nil];
+    BOOL success = [TKRoutingParser populate:request start:nil end:nil leaveAfter:nil arriveBy:nil queryJSON:json[@"query"]];
     if (! success) {
       [request remove];
       DLog(@"Got trip without a segment from JSON: %@", json);
