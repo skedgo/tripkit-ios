@@ -218,10 +218,6 @@
 		3A897A0F2344E457004D0281 /* StopVisits+RealTimeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897A0E2344E457004D0281 /* StopVisits+RealTimeColor.swift */; };
 		3A897A1F2347356C004D0281 /* TKUIResultsSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897A1C2347356C004D0281 /* TKUIResultsSectionHeaderView.swift */; };
 		3A897A22234776B0004D0281 /* UIButton+SwapImageSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897A21234776B0004D0281 /* UIButton+SwapImageSide.swift */; };
-		3A8B15B22282D13A005D7314 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8B15B12282D13A005D7314 /* RxRelay.framework */; };
-		3A8B15B32282D13A005D7314 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8B15B12282D13A005D7314 /* RxRelay.framework */; };
-		3A8B15B42282D13A005D7314 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8B15B12282D13A005D7314 /* RxRelay.framework */; };
-		3A8B15B62282D160005D7314 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8B15B52282D160005D7314 /* RxRelay.framework */; };
 		3A8F61211F190CE80017ACDA /* TKLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F61201F190CE80017ACDA /* TKLocationManager.swift */; };
 		3A8FAB6D20D3E28B005D4C73 /* TKUITripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FAB6B20D3E28B005D4C73 /* TKUITripCell.swift */; };
 		3A8FAB6E20D3E28B005D4C73 /* TKUITripCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A8FAB6C20D3E28B005D4C73 /* TKUITripCell.xib */; };
@@ -234,8 +230,6 @@
 		3A922062205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A922061205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift */; };
 		3A922063205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A922061205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift */; };
 		3A94672B1D62B08400EEB667 /* TKLocationRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A94672A1D62B08400EEB667 /* TKLocationRealTime.swift */; };
-		3A9A5222224A824800AC0FB5 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5221224A824800AC0FB5 /* RxDataSources.framework */; };
-		3A9A5223224A825600AC0FB5 /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F51242068C27200FB4CE1 /* Differentiator.framework */; };
 		3A9FF6D71DE79FA700DB4647 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6D61DE79FA700DB4647 /* Alert.swift */; };
 		3A9FF6DB1DE79FC400DB4647 /* TKReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6DA1DE79FC400DB4647 /* TKReporter.swift */; };
 		3AA03D8B1F0B79D400C6B337 /* TKShareURLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03D8A1F0B79D400C6B337 /* TKShareURLProvider.swift */; };
@@ -263,19 +257,6 @@
 		3AA03E771F0BC9DB00C6B337 /* TKRegionAutocompleter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E551F0BC9DB00C6B337 /* TKRegionAutocompleter.m */; };
 		3AA39AC51F7A35B60066CC94 /* Codable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39AC41F7A35B60066CC94 /* Codable+Helpers.swift */; };
 		3AA39ACF1F7A63BB0066CC94 /* MapKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39ACE1F7A63BA0066CC94 /* MapKit+Extensions.swift */; };
-		3AA3CE60202CD22F00E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
-		3AA3CE61202CD22F00E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
-		3AA3CE62202CD22F00E54859 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5F202CD22F00E54859 /* RxSwift.framework */; };
-		3AA3CE66202CD24100E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE63202CD24100E54859 /* ASPolygonKit.framework */; };
-		3AA3CE67202CD24100E54859 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE64202CD24100E54859 /* RxSwift.framework */; };
-		3AA3CE68202CD24100E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE65202CD24100E54859 /* RxCocoa.framework */; };
-		3AA3CE69202CD25700E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
-		3AA3CE6A202CD25700E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
-		3AA3CE6B202CD25700E54859 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5F202CD22F00E54859 /* RxSwift.framework */; };
-		3AA3CE6F202CD25700E54859 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE6D202CD25700E54859 /* Kingfisher.framework */; };
-		3AA3CE70202CD26800E54859 /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
-		3AA3CE71202CD26800E54859 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
-		3AA3CE72202CD26800E54859 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5F202CD22F00E54859 /* RxSwift.framework */; };
 		3AA3CEB0202CD4D100E54859 /* TKShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3CE86202CD4D100E54859 /* TKShareHelperTest.swift */; };
 		3AA3CEB1202CD4D100E54859 /* TKLocationRestorationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3CE88202CD4D100E54859 /* TKLocationRestorationTest.swift */; };
 		3AA3CEB2202CD4D100E54859 /* TKGeoJSONTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3CE8A202CD4D100E54859 /* TKGeoJSONTest.swift */; };
@@ -321,7 +302,6 @@
 		3AA80DA722677A7600D7A781 /* TKPhoneActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA80DA622677A7500D7A781 /* TKPhoneActionHandler.swift */; };
 		3AA80DA922679CDE00D7A781 /* TKWebActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA80DA822679CDE00D7A781 /* TKWebActionHandler.swift */; };
 		3AA923F620DA7CDA00EBDDC6 /* TGCardView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */; };
-		3AA923F820DA8E0400EBDDC6 /* TGCardViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */; };
 		3AABDD9F1DF7D2E30044A05B /* OpeningHoursAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */; };
 		3AAD87F7209B02B900C75B7E /* VehicleAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */; };
 		3AAD87F8209B02B900C75B7E /* VehicleAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */; };
@@ -653,14 +633,6 @@
 		3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47A7229EEDFE0096860D /* Main.storyboard */; };
 		3ACF47AB229EEDFF0096860D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47AA229EEDFF0096860D /* Assets.xcassets */; };
 		3ACF47AE229EEDFF0096860D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */; };
-		3ACF47B8229EF0890096860D /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5F202CD22F00E54859 /* RxSwift.framework */; };
-		3ACF47B9229EF08D0096860D /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8B15B12282D13A005D7314 /* RxRelay.framework */; };
-		3ACF47BA229EF0900096860D /* TGCardViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */; };
-		3ACF47BB229EF0930096860D /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F51242068C27200FB4CE1 /* Differentiator.framework */; };
-		3ACF47BC229EF0960096860D /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5221224A824800AC0FB5 /* RxDataSources.framework */; };
-		3ACF47BD229EF09B0096860D /* ASPolygonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */; };
-		3ACF47BE229EF09F0096860D /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */; };
-		3ACF47BF229EF0A30096860D /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CE6D202CD25700E54859 /* Kingfisher.framework */; };
 		3AD1DEA61F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */; };
 		3AD62B8E2243964C00069F4E /* TKModeInfo+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */; };
 		3AD8F19320E0E90F00E82E2E /* TKRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD8F19220E0E90F00E82E2E /* TKRealTime.swift */; };
@@ -1145,8 +1117,6 @@
 		3A897A0E2344E457004D0281 /* StopVisits+RealTimeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StopVisits+RealTimeColor.swift"; sourceTree = "<group>"; };
 		3A897A1C2347356C004D0281 /* TKUIResultsSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIResultsSectionHeaderView.swift; sourceTree = "<group>"; };
 		3A897A21234776B0004D0281 /* UIButton+SwapImageSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SwapImageSide.swift"; sourceTree = "<group>"; };
-		3A8B15B12282D13A005D7314 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
-		3A8B15B52282D160005D7314 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/Mac/RxRelay.framework; sourceTree = "<group>"; };
 		3A8F61201F190CE80017ACDA /* TKLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationManager.swift; sourceTree = "<group>"; };
 		3A8FAB6B20D3E28B005D4C73 /* TKUITripCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripCell.swift; sourceTree = "<group>"; };
 		3A8FAB6C20D3E28B005D4C73 /* TKUITripCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUITripCell.xib; sourceTree = "<group>"; };
@@ -1156,7 +1126,6 @@
 		3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocoding.swift; sourceTree = "<group>"; };
 		3A922061205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift"; sourceTree = "<group>"; };
 		3A94672A1D62B08400EEB667 /* TKLocationRealTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationRealTime.swift; sourceTree = "<group>"; };
-		3A9A5221224A824800AC0FB5 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		3A9FF6D61DE79FA700DB4647 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Alert.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3A9FF6DA1DE79FC400DB4647 /* TKReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKReporter.swift; sourceTree = "<group>"; };
 		3AA03D8A1F0B79D400C6B337 /* TKShareURLProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKShareURLProvider.swift; sourceTree = "<group>"; };
@@ -1185,13 +1154,6 @@
 		3AA39AC41F7A35B60066CC94 /* Codable+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Helpers.swift"; sourceTree = "<group>"; };
 		3AA39ACE1F7A63BA0066CC94 /* MapKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extensions.swift"; sourceTree = "<group>"; };
 		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitInterApp.podspec; sourceTree = "<group>"; };
-		3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = Carthage/Build/iOS/ASPolygonKit.framework; sourceTree = "<group>"; };
-		3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		3AA3CE5F202CD22F00E54859 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
-		3AA3CE63202CD24100E54859 /* ASPolygonKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASPolygonKit.framework; path = Carthage/Build/Mac/ASPolygonKit.framework; sourceTree = "<group>"; };
-		3AA3CE64202CD24100E54859 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
-		3AA3CE65202CD24100E54859 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
-		3AA3CE6D202CD25700E54859 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		3AA3CE80202CD2A700E54859 /* Cartfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Cartfile; sourceTree = "<group>"; };
 		3AA3CE86202CD4D100E54859 /* TKShareHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKShareHelperTest.swift; sourceTree = "<group>"; };
 		3AA3CE88202CD4D100E54859 /* TKLocationRestorationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationRestorationTest.swift; sourceTree = "<group>"; };
@@ -1238,7 +1200,6 @@
 		3AA80DA622677A7500D7A781 /* TKPhoneActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKPhoneActionHandler.swift; sourceTree = "<group>"; };
 		3AA80DA822679CDE00D7A781 /* TKWebActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKWebActionHandler.swift; sourceTree = "<group>"; };
 		3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TGCardView+Rx.swift"; sourceTree = "<group>"; };
-		3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TGCardViewController.framework; path = Carthage/Build/iOS/TGCardViewController.framework; sourceTree = "<group>"; };
 		3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningHoursAPIModel.swift; sourceTree = "<group>"; };
 		3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAPIModel.swift; sourceTree = "<group>"; };
 		3AAD8815209C78E300C75B7E /* TKUserProfileHelper+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUserProfileHelper+Rx.swift"; sourceTree = "<group>"; };
@@ -1524,7 +1485,6 @@
 		3AFFAE0B1F06BCF200147990 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D3049DFB224C49E600CB59D1 /* TKUIDepartureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIDepartureCell.swift; sourceTree = "<group>"; };
 		D3049DFC224C49E600CB59D1 /* TKUIDepartureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIDepartureCell.xib; sourceTree = "<group>"; };
-		D31F51242068C27200FB4CE1 /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
 		D3211334206BBAF300E5D929 /* TKUILoadingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUILoadingAlertView.swift; sourceTree = "<group>"; };
 		D3211336206BBB0600E5D929 /* TKUILoadingAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUILoadingAlertView.xib; sourceTree = "<group>"; };
 		D32829D2212CFC06006E3D0E /* TKUIEventTrackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIEventTrackable.swift; sourceTree = "<group>"; };
@@ -1555,10 +1515,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AA3CE66202CD24100E54859 /* ASPolygonKit.framework in Frameworks */,
-				3AA3CE67202CD24100E54859 /* RxSwift.framework in Frameworks */,
-				3AA3CE68202CD24100E54859 /* RxCocoa.framework in Frameworks */,
-				3A8B15B62282D160005D7314 /* RxRelay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1566,14 +1522,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A9A5222224A824800AC0FB5 /* RxDataSources.framework in Frameworks */,
-				3AA3CE69202CD25700E54859 /* ASPolygonKit.framework in Frameworks */,
-				3A9A5223224A825600AC0FB5 /* Differentiator.framework in Frameworks */,
-				3A8B15B32282D13A005D7314 /* RxRelay.framework in Frameworks */,
-				3AA3CE6F202CD25700E54859 /* Kingfisher.framework in Frameworks */,
-				3AA3CE6B202CD25700E54859 /* RxSwift.framework in Frameworks */,
-				3AA3CE6A202CD25700E54859 /* RxCocoa.framework in Frameworks */,
-				3AA923F820DA8E0400EBDDC6 /* TGCardViewController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1581,10 +1529,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AA3CE70202CD26800E54859 /* ASPolygonKit.framework in Frameworks */,
-				3AA3CE72202CD26800E54859 /* RxSwift.framework in Frameworks */,
-				3AA3CE71202CD26800E54859 /* RxCocoa.framework in Frameworks */,
-				3A8B15B42282D13A005D7314 /* RxRelay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1592,10 +1536,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AA3CE60202CD22F00E54859 /* ASPolygonKit.framework in Frameworks */,
-				3AA3CE62202CD22F00E54859 /* RxSwift.framework in Frameworks */,
-				3AA3CE61202CD22F00E54859 /* RxCocoa.framework in Frameworks */,
-				3A8B15B22282D13A005D7314 /* RxRelay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1613,17 +1553,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ACF47B9229EF08D0096860D /* RxRelay.framework in Frameworks */,
-				3ACF47BA229EF0900096860D /* TGCardViewController.framework in Frameworks */,
-				3ACF47BF229EF0A30096860D /* Kingfisher.framework in Frameworks */,
-				3ACF47BE229EF09F0096860D /* RxCocoa.framework in Frameworks */,
 				3A1777AC232C17560093D495 /* TripKit.framework in Frameworks */,
 				3A1777B1232C17590093D495 /* TripKitUI.framework in Frameworks */,
-				3ACF47BC229EF0960096860D /* RxDataSources.framework in Frameworks */,
-				3ACF47BB229EF0930096860D /* Differentiator.framework in Frameworks */,
 				3A1777AF232C17570093D495 /* TripKitInterApp.framework in Frameworks */,
-				3ACF47BD229EF09B0096860D /* ASPolygonKit.framework in Frameworks */,
-				3ACF47B8229EF0890096860D /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2692,20 +2624,8 @@
 		BF0D12F3CE39D82551585DB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AA3CE5F202CD22F00E54859 /* RxSwift.framework */,
-				3AA3CE64202CD24100E54859 /* RxSwift.framework */,
-				3A8B15B12282D13A005D7314 /* RxRelay.framework */,
-				3A8B15B52282D160005D7314 /* RxRelay.framework */,
-				3AA923F720DA8E0400EBDDC6 /* TGCardViewController.framework */,
-				D31F51242068C27200FB4CE1 /* Differentiator.framework */,
-				3A9A5221224A824800AC0FB5 /* RxDataSources.framework */,
 				3AE194E3202DE32D0007B49B /* RxBlocking.framework */,
 				3AE194E4202DE32E0007B49B /* RxTest.framework */,
-				3AA3CE5D202CD22F00E54859 /* ASPolygonKit.framework */,
-				3AA3CE63202CD24100E54859 /* ASPolygonKit.framework */,
-				3AA3CE6D202CD25700E54859 /* Kingfisher.framework */,
-				3AA3CE5E202CD22F00E54859 /* RxCocoa.framework */,
-				3AA3CE65202CD24100E54859 /* RxCocoa.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3228,21 +3148,17 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxTest.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ASPolygonKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/TGCardViewController.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework",
+				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_SUBFOLDER)/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_SUBFOLDER)/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_SUBFOLDER)/ASPolygonKit.framework",
+				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_SUBFOLDER)/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_SUBFOLDER)/RxDataSources.framework",
+				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_SUBFOLDER)/Differentiator.framework",
+				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_SUBFOLDER)/TGCardViewController.framework",
+				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_SUBFOLDER)/RxRelay.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxTest.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ASPolygonKit.framework",
@@ -4505,6 +4421,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CARTHAGE_SUBFOLDER = iOS;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -4542,6 +4459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CARTHAGE_SUBFOLDER = iOS;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
