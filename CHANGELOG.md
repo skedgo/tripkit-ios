@@ -6,10 +6,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- `TKUIModePicker`: Show tooltips on hover on macOS
+
 ### Changed
 
 - Tweaked handling when the calculated trip starts or ends not directly at the requested location,
   by adding 'near' to the wording and displaying the query's origin and/or destination on the map.
+- `TKUIRoutingResults`: When passing a `TripRequest` that already has trips in it, then
+  the card will just show those results, rather than querying for new results, and the UI to change
+  the trip request will be disabled. To enable it set `request.expandForFavorite = true`.
 
 ### Fixed
 

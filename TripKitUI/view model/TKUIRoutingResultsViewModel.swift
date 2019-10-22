@@ -66,23 +66,38 @@ public class TKUIRoutingResultsViewModel {
       .flatMapLatest(TKUIRoutingResultsViewModel.locationsChanged)
     
     // Whenever the builder is changing, i.e., when the user changes the inputs,
-    // we generate a new request.
-    let requestChanged = Observable.merge(originOrDestinationChanged, builderChanged)
-      .map { $0.generateRequest() }
-      .filter { $0 != nil }
-      .startWith(initialRequest)
-      .share(replay: 1, scope: .forever)
+    // we generate a new request. However, we don't do this if the got
+    // provided with a request and `expandForFavorite` is not set; in that
+    // case we just display the results.
+    let requestChanged: Observable<(TripRequest?, mutable: Bool)>
+    if let request = initialRequest, request.tripGroups?.isEmpty == false, request.expandForFavorite == false {
+      requestChanged = .just( (request, mutable: false) )
+    } else {
+      requestChanged = Observable.merge(originOrDestinationChanged, builderChanged)
+        .map { $0.generateRequest() }
+        .filter { $0 != nil }
+        .startWith(initialRequest)
+        .map { ($0, mutable: true) }
+        .share(replay: 1, scope: .forever)
+    }
 
-    let tripGroupsChanged = TKUIRoutingResultsViewModel.fetchTripGroups(requestChanged)
+    let requestToShow = requestChanged.map { $0.0 }
+    let updateableRequest = requestChanged.filter { $0.1 == true }.map { $0.0 }
+
+    let tripGroupsChanged = TKUIRoutingResultsViewModel.fetchTripGroups(requestToShow)
       .share(replay: 1, scope: .forever)
       .distinctUntilChanged()
 
-    request = requestChanged
+    requestIsMutable = requestChanged.map { $0.1 }
+      .startWith(true)
+      .asDriver(onErrorJustReturn: true)
+    
+    request = requestToShow
       .filter { $0 != nil }
       .map { $0! }
       .asDriver(onErrorDriveWith: .empty())
     
-    fetchProgress = TKUIRoutingResultsViewModel.fetch(for: requestChanged, errorPublisher: errorPublisher)
+    fetchProgress = TKUIRoutingResultsViewModel.fetch(for: updateableRequest, errorPublisher: errorPublisher)
       .asDriver(onErrorDriveWith: .empty())
 
     realTimeUpdate = TKUIRoutingResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged)
@@ -99,15 +114,15 @@ public class TKUIRoutingResultsViewModel {
       .map { $0.titles }
       .asDriver(onErrorDriveWith: .empty())
 
-    timeTitle = requestChanged
+    timeTitle = requestToShow
       .compactMap { $0?.timeString }
       .asDriver(onErrorDriveWith: .empty())
     
-    let availableFromRequest: Observable<AvailableModes> = requestChanged
+    let availableFromRequest: Observable<AvailableModes> = requestToShow
       .compactMap(TKUIRoutingResultsViewModel.buildAvailableModes)
     
     let availableFromChange = inputs.changedModes.asObservable()
-      .withLatestFrom(requestChanged) { ($0, $1) }
+      .withLatestFrom(requestToShow) { ($0, $1) }
       .compactMap(TKUIRoutingResultsViewModel.updateAvailableModes)
     
     let available = Observable.merge(availableFromRequest, availableFromChange)
@@ -143,7 +158,7 @@ public class TKUIRoutingResultsViewModel {
     let showTrip = inputs.selected
       .map { Next.showTrip($0.trip) }
     
-    let modeInput = Observable.combineLatest(requestChanged, builderChanged)
+    let modeInput = Observable.combineLatest(requestToShow, builderChanged)
     let presentModes = inputs.tappedShowModeOptions.asObservable()
       .withLatestFrom(modeInput) { (_, tuple) -> Next in
         let modes = tuple.0?.applicableModeIdentifiers() ?? []
@@ -161,6 +176,9 @@ public class TKUIRoutingResultsViewModel {
   }
   
   let request: Driver<TripRequest>
+  
+  /// Whether the user is allowed to change the request
+  let requestIsMutable: Driver<Bool>
   
   let titles: Driver<(title: String, subtitle: String?)>
   
