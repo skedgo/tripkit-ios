@@ -205,19 +205,21 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
       })
       .disposed(by: disposeBag)
 
-    let hover = UIHoverGestureRecognizer()
-    hover.rx.event
-      .subscribe { [weak self] event in
-        guard let self = self, let state = event.element?.state else { return }
-        switch state {
-        case .began,
-             .changed:  self.show(item: item, above: button)
-        case .ended:    self.hide(item: item)
-        default:        break
+    if #available(iOS 13.0, *) {
+      let hover = UIHoverGestureRecognizer()
+      hover.rx.event
+        .subscribe { [weak self] event in
+          guard let self = self, let state = event.element?.state else { return }
+          switch state {
+          case .began,
+               .changed:  self.show(item: item, above: button)
+          case .ended:    self.hide(item: item)
+          default:        break
+          }
         }
-      }
-      .disposed(by: disposeBag)
-    button.addGestureRecognizer(hover)
+        .disposed(by: disposeBag)
+      button.addGestureRecognizer(hover)
+    #endif
     
     button.rx.tap
       .subscribe(onNext: { [weak self] in
