@@ -65,10 +65,13 @@ class TKUIAutocompletionViewModel {
     providers: [TKAutocompleting],
     searchText: Observable<String>,
     selected: Signal<Item>,
-    accessorySelected: Signal<Item>,
+    accessorySelected: Signal<Item>? = nil,
     biasMapRect: MKMapRect = .null
     ) {
     
+    #warning("If `accessorySelected` is nil, don't show those.")
+    
+
     sections = TKUIAutocompletionViewModel
       .buildSections(providers, searchText: searchText, biasMapRect: biasMapRect)
       .asDriver(onErrorDriveWith: Driver.empty())
@@ -79,7 +82,7 @@ class TKUIAutocompletionViewModel {
       .flatMapLatest { $0.annotation }
       .asSignal(onErrorSignalWith: .empty())
     
-    accessorySelection = accessorySelected
+    accessorySelection = (accessorySelected  ?? .empty())
       .asObservable()
       .compactMap { $0.result }
       .flatMapLatest { $0.annotation }
