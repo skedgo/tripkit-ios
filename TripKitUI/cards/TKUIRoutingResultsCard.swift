@@ -60,7 +60,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let changedModes = PublishSubject<[String]?>()
   private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
   private let tappedToggleButton = PublishSubject<TripGroup?>()
-
+  
   public init(destination: MKAnnotation) {
     self.destination = destination
     self.request = nil
@@ -215,6 +215,10 @@ public class TKUIRoutingResultsCard: TGTableCard {
       })
       .disposed(by: disposeBag)
     
+    viewModel.requestIsMutable
+      .drive(onNext: { [weak self] in self?.allowChangingQuery = $0 })
+      .disposed(by: disposeBag)
+    
     viewModel.request
       .drive(onNext: TKUICustomization.shared.feedbackActiveItemHandler)
       .disposed(by: disposeBag)
@@ -248,8 +252,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
     // Search places
     
     titleView?.locationTapped
-    .emit(onNext: { [weak self] in self?.showSearch(for: $0) })
-    .disposed(by: disposeBag)
+      .emit(onNext: { [weak self] in self?.showSearch(for: $0) })
+      .disposed(by: disposeBag)
   }
   
   public override func didAppear(animated: Bool) {
@@ -266,7 +270,21 @@ public class TKUIRoutingResultsCard: TGTableCard {
     realTimeBag = DisposeBag()
   }
   
+  // MARK: - Disabling interaction
+
+  var allowChangingQuery: Bool = true {
+    didSet {
+      accessoryView.timeButton.isEnabled = allowChangingQuery
+      
+      accessoryView.transportButton.isEnabled = true // we disable the mode picker instead
+      modePicker?.isEnabled = allowChangingQuery
+      
+      titleView?.enableTappingLocation = allowChangingQuery
+    }
+  }
 }
+
+
 
 // MARK: - Cell configuration
 
@@ -391,6 +409,7 @@ private extension TKUIRoutingResultsCard {
       scrollToPicker = true
     }
 
+    modePicker.isEnabled = allowChangingQuery
     modePicker.backgroundColor = .tkBackgroundGrouped
     modePicker.frame.size.width = tableView.frame.width
     modePicker.configure(all: modes.available, updateAll: true, currentlyEnabled: modes.isEnabled)

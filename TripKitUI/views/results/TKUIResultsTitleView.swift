@@ -24,6 +24,8 @@ class TKUIResultsTitleView: UIView {
   
   @IBOutlet private weak var topLevelStackBottomSpacing: NSLayoutConstraint!
   
+  var enableTappingLocation: Bool = true
+  
   private let locationSearchPublisher = PublishSubject<TKUIRoutingResultsViewModel.SearchMode>()
   var locationTapped: Signal<TKUIRoutingResultsViewModel.SearchMode> {
     return locationSearchPublisher.asSignal(onErrorSignalWith: .empty())
@@ -93,10 +95,14 @@ class TKUIResultsTitleView: UIView {
   }
   
   @objc private func originLabelTapped() {
+    guard enableTappingLocation else { return }
+    
     locationSearchPublisher.onNext(.origin)
   }
   
   @objc private func destinationLabelTapped() {
+    guard enableTappingLocation else { return }
+
     locationSearchPublisher.onNext(.destination)
   }
   
