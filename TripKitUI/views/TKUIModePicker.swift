@@ -219,7 +219,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
         }
         .disposed(by: disposeBag)
       button.addGestureRecognizer(hover)
-    #endif
+    }
     
     button.rx.tap
       .subscribe(onNext: { [weak self] in
