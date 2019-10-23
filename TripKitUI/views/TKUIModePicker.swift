@@ -57,6 +57,9 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   
   weak var containerView: UIView?
 
+  /// Whether user can enable/disable modes
+  public var isEnabled: Bool = true
+  
   /// Configures the currently visible items
   ///
   /// - Note: you can call `configure` multiple times with different sets of items. The mode picker will keep track
@@ -202,9 +205,25 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
       })
       .disposed(by: disposeBag)
 
+    if #available(iOS 13.0, *) {
+      let hover = UIHoverGestureRecognizer()
+      hover.rx.event
+        .subscribe { [weak self] event in
+          guard let self = self, let state = event.element?.state else { return }
+          switch state {
+          case .began,
+               .changed:  self.show(item: item, above: button)
+          case .ended:    self.hide(item: item)
+          default:        break
+          }
+        }
+        .disposed(by: disposeBag)
+      button.addGestureRecognizer(hover)
+    }
+    
     button.rx.tap
       .subscribe(onNext: { [weak self] in
-        guard let self = self else { return }
+        guard let self = self, self.isEnabled else { return }
         let newSelected = self.toggleMode(item)
         TKUIModePicker.styleModeButton(button, selected: newSelected)
         
@@ -303,11 +322,15 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
 
   func toggleMode(_ mode: Item) -> Bool {
     let selected = toggledModes.contains(mode)
+    guard isEnabled else { return selected }
+
     setMode(mode, selected: !selected)
     return !selected
   }
   
   func setMode(_ mode: Item, selected: Bool) {
+    guard isEnabled else { return }
+
     if selected {
       toggledModes.insert(mode)
     } else {
