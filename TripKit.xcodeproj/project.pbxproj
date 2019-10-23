@@ -602,6 +602,7 @@
 		3ABCA7E42254E18B0072EB25 /* TKBuzzRealTime+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABCA7E22254E18B0072EB25 /* TKBuzzRealTime+Rx.swift */; };
 		3ABD101B20FE2CAC00693FF8 /* SGTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ABD101920FE2CAC00693FF8 /* SGTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABD101C20FE2CAC00693FF8 /* SGTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD101A20FE2CAC00693FF8 /* SGTableCell.m */; };
+		3AC01ADE2360435600B54484 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC01ADD2360435600B54484 /* TKUIRoutingQueryInputViewModelTest.swift */; };
 		3AC17E9D207F548E0006794F /* TKImage+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC17E9C207F548E0006794F /* TKImage+TripKit.swift */; };
 		3AC17E9E207F548E0006794F /* TKImage+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC17E9C207F548E0006794F /* TKImage+TripKit.swift */; };
 		3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */; };
@@ -1284,6 +1285,7 @@
 		3ABCA7E22254E18B0072EB25 /* TKBuzzRealTime+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKBuzzRealTime+Rx.swift"; sourceTree = "<group>"; };
 		3ABD101920FE2CAC00693FF8 /* SGTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTableCell.h; sourceTree = "<group>"; };
 		3ABD101A20FE2CAC00693FF8 /* SGTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTableCell.m; sourceTree = "<group>"; };
+		3AC01ADD2360435600B54484 /* TKUIRoutingQueryInputViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIRoutingQueryInputViewModelTest.swift; sourceTree = "<group>"; };
 		3AC17E9C207F548E0006794F /* TKImage+TripKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKImage+TripKit.swift"; sourceTree = "<group>"; };
 		3AC3B70822D5EBFF00B48575 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Main.strings; sourceTree = "<group>"; };
 		3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKWaypointRouter.swift; sourceTree = "<group>"; };
@@ -1569,9 +1571,10 @@
 		3A21A4B12069057D005F411D /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				3A4A180C22BCCC8800CAFEC0 /* TKUIPolylineRendererStabilityTest.swift */,
-				3A21A4B22069057D005F411D /* TKUISectionedAlertsTest.swift */,
 				3A65B93122F5E329001ACDEB /* TKUIModePickerTest.swift */,
+				3A4A180C22BCCC8800CAFEC0 /* TKUIPolylineRendererStabilityTest.swift */,
+				3AC01ADD2360435600B54484 /* TKUIRoutingQueryInputViewModelTest.swift */,
+				3A21A4B22069057D005F411D /* TKUISectionedAlertsTest.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -3816,6 +3819,7 @@
 				3AA3CEB4202CD4D100E54859 /* TKAutocompletionResultTest.m in Sources */,
 				3A4A180D22BCCC8800CAFEC0 /* TKUIPolylineRendererStabilityTest.swift in Sources */,
 				3AA3CEB0202CD4D100E54859 /* TKShareHelperTest.swift in Sources */,
+				3AC01ADE2360435600B54484 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */,
 				3AA3CEC0202CD4D100E54859 /* TKBuzzInfoProviderTest.swift in Sources */,
 				3A21A4B32069057D005F411D /* TKUISectionedAlertsTest.swift in Sources */,
 				3AA3CEB3202CD4D100E54859 /* TKAnnotationClusterer.swift in Sources */,

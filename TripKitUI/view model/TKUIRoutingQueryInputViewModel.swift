@@ -28,75 +28,136 @@ class TKUIRoutingQueryInputViewModel {
     
     // optional
     var selected: Signal<Item> = .empty()
-    let selectedSearchMode: Signal<TKUIRoutingResultsViewModel.SearchMode> = .empty()
+    var selectedSearchMode: Signal<TKUIRoutingResultsViewModel.SearchMode> = .empty()
     var tappedSwap: Signal<Void> = .empty()
   }
   
-  init(origin: MKAnnotation? = nil, destination: MKAnnotation?, biasMapRect: MKMapRect = .null, inputs: UIInput) {
+  init(origin: MKAnnotation? = nil, destination: MKAnnotation? = nil, biasMapRect: MKMapRect = .null, inputs: UIInput, providers: [TKAutocompleting]? = nil) {
 
-    let activeMode = inputs.selectedSearchMode
-      .startWith(.destination)
-      .asDriver(onErrorJustReturn: .destination)
+    let origin = origin ?? TKLocationManager.shared.currentLocation
+    let providers = providers ?? TKUIRoutingResultsCard.config.autocompletionDataProviders
     
-    typealias SearchInput = (String, String, TKUIRoutingResultsViewModel.SearchMode)
-    let initial: SearchInput = (
-      (origin?.title ?? nil) ?? "",
-      (destination?.title ?? nil) ?? "",
-      .destination
+    enum Action {
+      case initial
+      case typeText(String)
+      case selectMode(TKUIRoutingResultsViewModel.SearchMode)
+      case selectItem(Item)
+      case selectResult(MKAnnotation)
+      case swap
+    }
+    
+    // -- The input to the helper AutocompletionVM
+
+    struct SearchState {
+      var originText: String = ""
+      var destinationText: String = ""
+      var mode: TKUIRoutingResultsViewModel.SearchMode = .destination
+    }
+    
+    let initialSearch = SearchState(
+      originText: (origin.title ?? nil) ?? "",
+      destinationText: (destination?.title ?? nil) ?? "",
+      mode: .destination
     )
-    
-    #warning("FIXME: Handle swap")
-    
-    // Tracks text for each and active mode
-    let searchInput =
-      Observable.combineLatest(
-        inputs.searchText,
-        activeMode.asObservable()
-      )
-      .scan(initial) { acc, next -> SearchInput in
-        switch next.1 {
-        case .origin: return (next.0, acc.1, next.1)
-        case .destination: return (acc.0, next.0, next.1)
-        }
-      }
+
+    let searchActions: Observable<Action> = Observable.merge([
+        inputs.searchText.map { .typeText($0) },
+        inputs.selectedSearchMode.asObservable()
+          .distinctUntilChanged().map { .selectMode($0) },
+        inputs.selected.asObservable().map { .selectItem($0) },
+        inputs.tappedSwap.asObservable().map { .swap },
+      ]).startWith(.initial)
+
+    let searchInput = searchActions.scan(into: initialSearch) { state, action in
+      switch (action, state.mode) {
+      case (.typeText(let text), .origin):
+        state.originText = text
+      case (.typeText(let text), .destination):
+        state.destinationText = text
       
+      case (.selectItem(.autocompletion(let result)), .origin):
+        state.originText = result.title
+      case (.selectItem(.autocompletion(let result)), .destination):
+        state.destinationText = result.title
+
+      case (.selectMode(let mode), _):
+        state.mode = mode
+
+      case (.swap, _):
+        (state.originText, state.destinationText) = (state.destinationText, state.originText)
+        // Not swapping mode on purpose
+        
+      default: break
+      }
+    }
+
     // Just the text for the active mode
     let searchText = searchInput
-      .map { input -> String in
-        switch input.2 {
-        case .origin: return input.0
-        case .destination: return input.1
+      .map { state -> String in
+        switch state.mode {
+        case .origin: return state.originText
+        case .destination: return state.destinationText
         }
       }
     
     let autocompletionModel = TKUIAutocompletionViewModel(
-      providers: TKUIRoutingResultsCard.config.autocompletionDataProviders,
+      providers: providers,
       searchText: searchText,
       selected: inputs.selected,
       biasMapRect: biasMapRect
     )
     
-    self.activeMode = activeMode
+    // -- Handling selections
     
-    #warning("Also handle tapping a result (which should then update the text")
+    struct SelectionState {
+      var origin: MKAnnotation? = nil
+      var destination: MKAnnotation? = nil
+      var mode: TKUIRoutingResultsViewModel.SearchMode = .destination
+    }
     
-    originText = searchInput.map { $0.0 }.asDriver(onErrorJustReturn: "")
-    destinationText = searchInput.map { $0.1 }.asDriver(onErrorJustReturn: "")
+    let selectionActions: Observable<Action> = Observable.merge([
+        autocompletionModel.selection.asObservable().map { .selectResult($0) },
+        inputs.tappedSwap.asObservable().map { .swap },
+        searchInput.map { $0.mode }.distinctUntilChanged().map { .selectMode($0) },
+      ]).startWith(.initial)
+
+    let selections = selectionActions
+      .scan(into: SelectionState(origin: origin, destination: destination)) { state, action in
+        switch (action, state.mode) {
+        case (.selectResult(let selection), .origin):
+          state.origin = selection
+        case (.selectResult(let selection), .destination):
+          state.destination = selection
+        case (.selectMode(let mode), _):
+          state.mode = mode
+        case (.swap, _):
+          (state.origin, state.destination) = (state.destination, state.origin)
+        default: break
+        }
+      }
     
+    self.activeMode = searchInput.map { $0.mode }
+      .distinctUntilChanged()
+      .asDriver(onErrorDriveWith: .empty())
+    
+    originDestination = searchInput.map { ($0.originText, $0.destinationText) }
+      .distinctUntilChanged { $0.0 == $1.0 && $0.1 == $1.1 }
+      .asDriver(onErrorDriveWith: .empty())
+
     sections = autocompletionModel.sections
     
     triggerAction = autocompletionModel.triggerAction
-
-    #warning("FIXME: Fix this up, doing a similar thing as above")
     
-    selections = autocompletionModel.selection
+    self.selections = inputs.tappedDone.asObservable()
+      .withLatestFrom(selections)
+      .filter { $0.origin != nil && $0.destination != nil }
+      .map { ($0.origin!, $0.destination!) }
+      .asSignal(onErrorSignalWith: .empty())
   }
   
   let activeMode: Driver<TKUIRoutingResultsViewModel.SearchMode>
   
-  let originText: Driver<String>
-  
-  let destinationText: Driver<String>
+  let originDestination: Driver<(origin: String, destination: String)>
   
   let sections: Driver<[Section]>
   
