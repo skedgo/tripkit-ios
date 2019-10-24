@@ -41,7 +41,11 @@ class TKUIRoutingQueryInputViewModel {
       biasMapRect: biasMapRect
     )
     
-    let state = Self.buildState(origin: origin, destination: destination, inputs: inputs, selection: autocompletionModel.selection)
+    let state = Self.buildState(
+        origin: origin, destination: destination,
+        inputs: inputs, selection: autocompletionModel.selection
+      )
+      .share(replay: 1, scope: .whileConnected)
     
     activeMode = state.map { $0.mode }
       .distinctUntilChanged()
@@ -52,8 +56,12 @@ class TKUIRoutingQueryInputViewModel {
       .asDriver(onErrorDriveWith: .empty())
 
     sections = autocompletionModel.sections
-    
+
     triggerAction = autocompletionModel.triggerAction
+    
+    enableRouteButton = state
+      .map { $0.origin != nil && $0.destination != nil }
+      .asDriver(onErrorJustReturn: false)
 
     selections = inputs.tappedDone.asObservable()
       .withLatestFrom(state)
@@ -67,6 +75,8 @@ class TKUIRoutingQueryInputViewModel {
   let originDestination: Driver<(origin: String, destination: String)>
   
   let sections: Driver<[Section]>
+  
+  let enableRouteButton: Driver<Bool>
   
   let selections: Signal<(MKAnnotation, MKAnnotation)>
   

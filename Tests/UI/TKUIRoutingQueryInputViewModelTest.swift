@@ -23,6 +23,9 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
     
     let mode = try viewModel.activeMode.toBlocking().first()
     XCTAssertEqual(mode, .destination)
+    
+    let routeEnabled = try viewModel.enableRouteButton.toBlocking().first()
+    XCTAssertEqual(routeEnabled, false)
   }
   
   func testDefaultOriginIsCurrentLocation() throws {
@@ -31,6 +34,9 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
     let od = try viewModel.originDestination.toBlocking().first()
     XCTAssertEqual(od?.origin, Loc.CurrentLocation)
     XCTAssertEqual(od?.destination, "")
+    
+    let routeEnabled = try viewModel.enableRouteButton.toBlocking().first()
+    XCTAssertEqual(routeEnabled, false)
   }
 
   func testStartsOnProvidedLocations() throws {
@@ -43,6 +49,9 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
     let od = try viewModel.originDestination.toBlocking().first()
     XCTAssertEqual(od?.origin, "Maroubra")
     XCTAssertEqual(od?.destination, Loc.CurrentLocation)
+    
+    let routeEnabled = try viewModel.enableRouteButton.toBlocking().first()
+    XCTAssertEqual(routeEnabled, true)
   }
   
   func testStartsAutocompletingEmptyString() throws {

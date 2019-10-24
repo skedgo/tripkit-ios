@@ -92,6 +92,10 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
     viewModel.originDestination
       .drive(titleView.rx.originDestination)
       .disposed(by: disposeBag)
+    
+    viewModel.enableRouteButton
+      .drive(titleView.routeButton.rx.isEnabled)
+      .disposed(by: disposeBag)
 
     viewModel.sections
       .drive(tableView.rx.items(dataSource: dataSource))
@@ -120,11 +124,14 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
 
 extension TKUIRoutingQueryInputCard: UITableViewDelegate {
   
+  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
   public func scrollViewDidScroll(_ scrollView: UIScrollView) {
     if scrollView.contentOffset.y > 40, !scrollView.isDecelerating {
       // we are actively scrolling a fair bit => disable the keyboard
-      
-      #warning("FIXME: Do that")
+      _ = titleView.resignFirstResponder()
     }
   }
   

@@ -189,9 +189,9 @@ public class TKUIRoutingResultsCard: TGTableCard {
       })
       .disposed(by: disposeBag)
 
-    viewModel.titles
+    viewModel.originDestination
       .drive(onNext: { [weak self] input in
-        self?.titleView?.configure(destination: input.title , origin: input.subtitle)
+        self?.titleView?.configure(destination: input.destination , origin: input.origin)
       })
       .disposed(by: disposeBag)
 
