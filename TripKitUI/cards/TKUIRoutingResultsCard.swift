@@ -53,9 +53,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
     configureCell: TKUIRoutingResultsCard.cell
   )
-  
-  private var searchMode: TKUIRoutingResultsViewModel.SearchMode?
-  
+    
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
   private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
@@ -473,60 +471,27 @@ private extension TKUIRoutingResultsCard {
 private extension TKUIRoutingResultsCard {
   
   func showSearch(for mode: TKUIRoutingResultsViewModel.SearchMode) {
-    self.searchMode = mode
+    let biasMapRect = (mapManager as? TGMapManager)?.mapView?.visibleMapRect ?? .null
     
-    let resultsController = TKUIAutocompletionViewController(providers: TKUIRoutingResultsCard.config.autocompletionDataProviders)
-    resultsController.delegate = self
-    resultsController.biasMapRect = (mapManager as? TGMapManager)?.mapView?.visibleMapRect ?? .null
+    #warning("FIXME: Add to and from")
+    let card = TKUIRoutingQueryInputCard(biasMapRect: biasMapRect)
+    card.queryDelegate = self
     
-    if #available(iOS 11.0, *) {
-      // Fix for bad padding between search bar and first row
-      // Kudos to https://stackoverflow.com/questions/40435806/extra-space-on-top-of-uisearchcontrollers-uitableview
-      resultsController.tableView.contentInsetAdjustmentBehavior = .never
-    }
-    
-    let searchController = UISearchController(searchResultsController: resultsController)
-    searchController.searchResultsUpdater = resultsController
-    searchController.searchBar.placeholder = (mode == .origin) ? Loc.StartLocation : Loc.EndLocation
-    
-    TKStyleManager.style(searchController.searchBar, includingBackground: false) {
-      $0.backgroundColor = .tkBackground
-      $0.tintColor = .tkLabelPrimary
-      $0.textColor = .tkLabelPrimary
-    }
-    
-    controller?.present(searchController, animated: true)
+    controller?.push(card)
   }
   
 }
 
-extension TKUIRoutingResultsCard: TKUIAutocompletionViewControllerDelegate {
-  
-  public func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect annotation: MKAnnotation) {
-    self.controller?.dismiss(animated: true, completion: { [weak self] in
-      guard let self = self, let specifier = self.searchMode else {
-        assertionFailure()
-        return
-      }
-      
-      switch specifier {
-      case .origin:
-        self.changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: annotation))
-      case .destination:
-        self.changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: annotation))
-      }
-      
-      self.searchMode = nil
-    })
+extension TKUIRoutingResultsCard: TKUIRoutingQueryInputCardDelegate {
+  public func routingQueryInput(card: TKUIRoutingQueryInputCard, selectedOrigin origin: MKAnnotation, destination: MKAnnotation) {
+    
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: origin))
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: destination))
+    
+    controller?.pop()
   }
-  
-  public func autocompleter(_ controller: TKUIAutocompletionViewController, didSelectAccessoryFor annotation: MKAnnotation) {
-    self.controller?.dismiss(animated: true, completion: {
-      //
-    })
-  }
-  
 }
+
 
 // MARK: - Picking times
 

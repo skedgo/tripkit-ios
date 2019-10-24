@@ -66,6 +66,14 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
     let items = try XCTUnwrap(try viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.compactMap { $0.accessory }, [])
   }
+
+  func testInitial() throws {
+    let results = run([])
+    
+    XCTAssertEqual(results, [
+      "\(Loc.CurrentLocation) -- ",
+    ])
+  }
   
   func testTypingAndSelecting() throws {
     let results = run([
@@ -97,7 +105,7 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
     XCTAssertEqual(results, "✅ \(Loc.CurrentLocation) -- Melbourne")
   }
 
-  func testAutocompletingBoth() throws {
+  func testAutocompletingBothWithExplicitModeSelection() throws {
     let results = run([
         .mode(.origin),
         .type("N"),
@@ -111,11 +119,24 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
     XCTAssertEqual(results, "✅ Nuremberg -- Bahia Blanca")
   }
   
+  func testAutocompletingBothWithImplicitModeSelection() throws {
+    let results = run([
+        .type("B"),
+        .select("Bahia Blanca", index: 0),
+        .type("N"),
+        .select("Nuremberg", index: 0),
+        .route
+      ]).last
+    
+    XCTAssertEqual(results, "✅ Nuremberg -- Bahia Blanca")
+  }
+  
   func testSwapping() throws {
     let results = run([
         .type("N"),
         .select("Nuremberg", index: 0),
         .swap,
+        .mode(.destination),
         .type("B"),
         .select("Bahia Blanca", index: 0),
         .route
