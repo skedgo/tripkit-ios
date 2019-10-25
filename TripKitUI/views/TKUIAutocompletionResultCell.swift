@@ -29,7 +29,7 @@ class TKUIAutocompletionResultCell: UITableViewCell {
 
 extension TKUIAutocompletionResultCell {
   
-  func configure(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: PublishSubject<TKUIAutocompletionViewModel.Item>?) {
+  func configure(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: PublishSubject<TKUIAutocompletionViewModel.Item>? = nil) {
     disposeBag = DisposeBag()
     
     switch item {
