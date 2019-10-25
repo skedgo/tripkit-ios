@@ -55,7 +55,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   
   private var visibleModes: [Item] = []
   
-  weak var containerView: UIView?
+  public weak var containerView: UIView?
 
   /// Whether user can enable/disable modes
   public var isEnabled: Bool = true
