@@ -126,7 +126,6 @@
 		3A5EF197235F51C5001B4177 /* TKUIRoutingQueryInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EF196235F51C5001B4177 /* TKUIRoutingQueryInputViewModel.swift */; };
 		3A63A88620B74C13007B8D46 /* TripKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A63A88420B74C13007B8D46 /* TripKit.strings */; };
 		3A63A88720B74C13007B8D46 /* TripKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A63A88420B74C13007B8D46 /* TripKit.strings */; };
-		3A65B92822F5ACCE001ACDEB /* TKUIModePicker+TableViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A65B92722F5ACCE001ACDEB /* TKUIModePicker+TableViewHelper.swift */; };
 		3A65B92A22F5ADCC001ACDEB /* TKUIModePicker+TKModeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A65B92922F5ADCC001ACDEB /* TKUIModePicker+TKModeInfo.swift */; };
 		3A65B92E22F5C3E9001ACDEB /* TKUIModePicker+RoutingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A65B92D22F5C3E9001ACDEB /* TKUIModePicker+RoutingMode.swift */; };
 		3A65B92F22F5C4BC001ACDEB /* TKRegion+RoutingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A65B92B22F5B2C3001ACDEB /* TKRegion+RoutingMode.swift */; };
@@ -1027,7 +1026,6 @@
 		3A63A89120B74C28007B8D46 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/TripKit.strings"; sourceTree = "<group>"; };
 		3A63A89220B74C2A007B8D46 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A63A89320B74C2C007B8D46 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/TripKit.strings; sourceTree = "<group>"; };
-		3A65B92722F5ACCE001ACDEB /* TKUIModePicker+TableViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIModePicker+TableViewHelper.swift"; sourceTree = "<group>"; };
 		3A65B92922F5ADCC001ACDEB /* TKUIModePicker+TKModeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIModePicker+TKModeInfo.swift"; sourceTree = "<group>"; };
 		3A65B92B22F5B2C3001ACDEB /* TKRegion+RoutingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKRegion+RoutingMode.swift"; sourceTree = "<group>"; };
 		3A65B92D22F5C3E9001ACDEB /* TKUIModePicker+RoutingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIModePicker+RoutingMode.swift"; sourceTree = "<group>"; };
@@ -1848,7 +1846,6 @@
 				3AFCE27022E7115700090933 /* TKUITripBoyView.xib */,
 				D3EC9E8A22EE7D810080B0E6 /* TKUIModePicker.swift */,
 				3A65B92D22F5C3E9001ACDEB /* TKUIModePicker+RoutingMode.swift */,
-				3A65B92722F5ACCE001ACDEB /* TKUIModePicker+TableViewHelper.swift */,
 				3A65B92922F5ADCC001ACDEB /* TKUIModePicker+TKModeInfo.swift */,
 				3A6DF0B0202C8EB80084CB2C /* TKUITripSegmentsView.h */,
 				3A6DF0B8202C8EB80084CB2C /* TKUITripSegmentsView.m */,

@@ -53,7 +53,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
     configureCell: TKUIRoutingResultsCard.cell
   )
-    
+  
+  private let highlighted = PublishSubject<IndexPath>()
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
   private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
@@ -126,8 +127,19 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     // Build the view model
     
+    let selected: Signal<TKUIRoutingResultsViewModel.Item>
+    #if targetEnvironment(macCatalyst)
+    selected = highlighted
+      .map { [unowned self] in self.dataSource[$0] }
+      .asSignal(onErrorSignalWith: .empty())
+    #else
+    selected = tableView.rx
+      .modelSelected(TKUIRoutingResultsViewModel.Item.self)
+      .asSignal()
+    #endif
+
     let inputs: TKUIRoutingResultsViewModel.UIInput = (
-      selected: tableView.rx.modelSelected(TKUIRoutingResultsViewModel.Item.self).asSignal(),
+      selected: selected,
       tappedToggleButton: tappedToggleButton.asSignal(onErrorSignalWith: .empty()),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
@@ -337,6 +349,12 @@ extension TKUIRoutingResultsCard {
 }
 
 extension TKUIRoutingResultsCard: UITableViewDelegate {
+  
+  public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+    #if targetEnvironment(macCatalyst)
+    highlighted.onNext(indexPath)
+    #endif
+  }
   
   public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionFooterView.reuseIdentifier) as? TKUIResultsSectionFooterView else {
