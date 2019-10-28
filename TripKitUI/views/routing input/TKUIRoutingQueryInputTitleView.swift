@@ -89,6 +89,19 @@ class TKUIRoutingQueryInputTitleView: UIView {
     }
   }
   
+  func becomeFirstResponder(mode: TKUIRoutingResultsViewModel.SearchMode) {
+    guard
+      let searchBar = mode == .origin ? fromSearchBar : toSearchBar
+      else { return }
+    
+    let isFirst = searchBar.becomeFirstResponder()
+    print(mode)
+    print(isFirst)
+    if #available(iOS 13.0, *) {
+      searchBar.searchTextField.selectedTextRange = searchBar.searchTextField.textualRange
+    }
+  }
+
   override func resignFirstResponder() -> Bool {
     if fromSearchBar.isFirstResponder {
       return fromSearchBar.resignFirstResponder()
@@ -174,19 +187,6 @@ extension Reactive where Base == TKUIRoutingQueryInputTitleView {
     return Binder(self.base) { view, mode in
       view.fromButton.tintColor = mode == .origin ? .tkAppTintColor : .tkLabelSecondary
       view.toButton.tintColor = mode == .destination ? .tkAppTintColor : .tkLabelSecondary
-
-      switch mode {
-      case .origin:
-        view.fromSearchBar.becomeFirstResponder()
-        if #available(iOS 13.0, *) {
-          view.fromSearchBar.searchTextField.selectedTextRange = view.fromSearchBar.searchTextField.textualRange
-        }
-      case .destination:
-        view.toSearchBar.becomeFirstResponder()
-        if #available(iOS 13.0, *) {
-          view.toSearchBar.searchTextField.selectedTextRange = view.toSearchBar.searchTextField.textualRange
-        }
-      }
     }
   }
   
