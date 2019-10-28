@@ -30,7 +30,8 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
   private let biasMapRect: MKMapRect
   
   private var viewModel: TKUIRoutingQueryInputViewModel!
-  let disposeBag = DisposeBag()
+  private let didAppear = PublishSubject<Void>()
+  private let disposeBag = DisposeBag()
 
   private let titleView: TKUIRoutingQueryInputTitleView
 
@@ -88,7 +89,7 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
     viewModel.activeMode
       .drive(titleView.rx.searchMode)
       .disposed(by: disposeBag)
-
+    
     viewModel.originDestination
       .drive(titleView.rx.originDestination)
       .disposed(by: disposeBag)
@@ -101,6 +102,17 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
+    // Only become first responder once we appeared and after a brief delay,
+    // as immediately on `didAppear` doesn't work in testing on iOS 13.
+    didAppear
+      .delay(.milliseconds(100), scheduler: MainScheduler.instance)
+      .withLatestFrom(viewModel.activeMode)
+      .subscribe(onNext: { [weak self] mode in
+        guard let self = self else { return }
+        self.titleView.becomeFirstResponder(mode: mode)
+      })
+    .disposed(by: disposeBag)
+
     viewModel.triggerAction
       .asObservable()
       .flatMapLatest { [weak self] action -> Observable<Bool> in
@@ -119,6 +131,12 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
 
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
+  }
+  
+  public override func didAppear(animated: Bool) {
+    super.didAppear(animated: animated)
+    
+    self.didAppear.onNext(())
   }
 }
 

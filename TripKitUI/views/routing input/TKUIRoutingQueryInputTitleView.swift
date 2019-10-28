@@ -33,7 +33,9 @@ class TKUIRoutingQueryInputTitleView: UIView {
   private var isAnimatingSwap: Bool = false
   private var onSwapCompletion: (() -> Void)? = nil
   
-  fileprivate let startedEditing = PublishSubject<TKUIRoutingResultsViewModel.SearchMode>()
+  fileprivate let switchMode = PublishSubject<TKUIRoutingResultsViewModel.SearchMode>()
+  fileprivate let typed = PublishSubject<String>()
+  
   private let disposeBag = DisposeBag()
   
   override func awakeFromNib() {
@@ -65,15 +67,25 @@ class TKUIRoutingQueryInputTitleView: UIView {
     buttonLine.backgroundColor = .tkSeparatorSubtle
     swapButton.tintColor = .tkLabelSecondary
     
-    swapButton.addTarget(self, action: #selector(animateSwap), for: .touchUpInside)
-    
+    closeButton.tintColor = .tkAppTintColor
     closeButton.setTitle(Loc.Cancel, for: .normal)
     closeButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .body)
+    routeButton.tintColor = .tkAppTintColor
     routeButton.setTitle("Route", for: .normal) // TODO: Localise
     routeButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
+
+    swapButton.addTarget(self, action: #selector(animateSwap), for: .touchUpInside)
     
-    fromSearchBar.rx.setDelegate(self).disposed(by: disposeBag)
-    toSearchBar.rx.setDelegate(self).disposed(by: disposeBag)
+    fromButton.rx.tap
+      .subscribe(onNext: { [weak self] _ in self?.switchMode.onNext(.origin)})
+      .disposed(by: disposeBag)
+
+    toButton.rx.tap
+      .subscribe(onNext: { [weak self] _ in self?.switchMode.onNext(.destination)})
+      .disposed(by: disposeBag)
+    
+    fromSearchBar.delegate = self
+    toSearchBar.delegate = self
   }
   
   func setText(origin: String, destination: String) {
@@ -89,6 +101,19 @@ class TKUIRoutingQueryInputTitleView: UIView {
     }
   }
   
+  func becomeFirstResponder(mode: TKUIRoutingResultsViewModel.SearchMode) {
+    guard
+      let searchBar = mode == .origin ? fromSearchBar : toSearchBar
+      else { return }
+    
+    let isFirst = searchBar.becomeFirstResponder()
+    print(mode)
+    print(isFirst)
+    if #available(iOS 13.0, *) {
+      searchBar.searchTextField.selectedTextRange = searchBar.searchTextField.textualRange
+    }
+  }
+
   override func resignFirstResponder() -> Bool {
     if fromSearchBar.isFirstResponder {
       return fromSearchBar.resignFirstResponder()
@@ -107,11 +132,15 @@ extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
   
   func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
     switch searchBar {
-    case fromSearchBar: startedEditing.onNext(.origin)
-    case toSearchBar: startedEditing.onNext(.destination)
+    case fromSearchBar: switchMode.onNext(.origin)
+    case toSearchBar: switchMode.onNext(.destination)
     default: assertionFailure()
     }
     return true
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    typed.onNext(searchText)
   }
   
 }
@@ -158,7 +187,6 @@ extension TKUIRoutingQueryInputTitleView {
       }
     )
   }
-  
 }
 
 // MARK: - Rx interface
@@ -174,56 +202,14 @@ extension Reactive where Base == TKUIRoutingQueryInputTitleView {
     return Binder(self.base) { view, mode in
       view.fromButton.tintColor = mode == .origin ? .tkAppTintColor : .tkLabelSecondary
       view.toButton.tintColor = mode == .destination ? .tkAppTintColor : .tkLabelSecondary
-
-      switch mode {
-      case .origin:
-        view.fromSearchBar.becomeFirstResponder()
-        if #available(iOS 13.0, *) {
-          view.fromSearchBar.searchTextField.selectedTextRange = view.fromSearchBar.searchTextField.textualRange
-        }
-      case .destination:
-        view.toSearchBar.becomeFirstResponder()
-        if #available(iOS 13.0, *) {
-          view.toSearchBar.searchTextField.selectedTextRange = view.toSearchBar.searchTextField.textualRange
-        }
-      }
     }
   }
   
-  var searchInput: Observable<(TKUIRoutingResultsViewModel.SearchMode, String)> {
-    return Observable.merge([
-        base.fromSearchBar.rx.editedText.map { (.origin, $0) },
-        base.toSearchBar.rx.editedText.map { (.destination, $0) },
-      ])
+  var searchText: Observable<String> {
+    base.typed.asObservable()
   }
-
-  var searchText: Observable<String> { searchInput.map { $0.1 } }
   
   var selectedSearchMode: Signal<TKUIRoutingResultsViewModel.SearchMode> {
-    return Signal.merge([
-        base.startedEditing.asSignal(onErrorSignalWith: .empty()),
-        base.fromButton.rx.tap.asSignal().map { .origin },
-        base.toButton.rx.tap.asSignal().map { .destination }
-      ])
-  }
-}
-
-fileprivate extension Reactive where Base == UISearchBar {
-  var editedText: Observable<String> {
-    return text
-      .withLatestFrom(isEditing) { ($0, $1) }
-      .compactMap { $1 ? $0 : nil }
-  }
-  
-  var isEditing: Observable<Bool> {
-    let didBegin = textDidBeginEditing
-    let didEnd = textDidEndEditing
-    
-    return Observable.merge([
-        didBegin.map { _ in true },
-        didEnd.map { _ in false },
-      ])
-      .startWith(false)
-      .distinctUntilChanged()
+    base.switchMode.asSignal(onErrorSignalWith: .empty())
   }
 }
