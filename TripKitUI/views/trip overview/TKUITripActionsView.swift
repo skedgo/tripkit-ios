@@ -54,6 +54,7 @@ extension TKUITripActionsView {
     
     for action in actions {
       let actionView = TKUITripActionView.newInstance()
+      actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
       actionView.titleLabel.text = action.title
       actionView.bold = action.style == .bold
