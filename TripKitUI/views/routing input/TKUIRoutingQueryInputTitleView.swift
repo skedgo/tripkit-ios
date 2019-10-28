@@ -67,9 +67,10 @@ class TKUIRoutingQueryInputTitleView: UIView {
     buttonLine.backgroundColor = .tkSeparatorSubtle
     swapButton.tintColor = .tkLabelSecondary
     
-    
+    closeButton.tintColor = .tkAppTintColor
     closeButton.setTitle(Loc.Cancel, for: .normal)
     closeButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .body)
+    routeButton.tintColor = .tkAppTintColor
     routeButton.setTitle("Route", for: .normal) // TODO: Localise
     routeButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
 
