@@ -71,6 +71,7 @@ class TKUITimetableAccessoryView: UIView {
 
     timeButton.setTitle(nil, for: .normal)
     timeButton.setImage(.iconChevronTimetable, for: .normal)
+    timeButton.tintColor = .tkAppTintColor
   }
   
   func setCustomActions(_ actions: [TKUITimetableCardAction], for model: [TKUIStopAnnotation], card: TKUITimetableCard) {
@@ -82,6 +83,7 @@ class TKUITimetableAccessoryView: UIView {
     
     for action in actions {
       let actionView = TKUITimetableActionView.newInstance()
+      actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
       actionView.label.text = action.title
       actionView.bold = action.style == .bold
