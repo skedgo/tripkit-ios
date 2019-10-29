@@ -262,7 +262,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
     // Search places
     
     titleView?.locationTapped
-      .emit(onNext: { [weak self] in self?.showSearch(for: $0) })
+      .withLatestFrom(viewModel.request)
+      .emit(onNext: { [weak self] in self?.showSearch(origin: $0.fromLocation, destination: $0.toLocation) })
       .disposed(by: disposeBag)
   }
   
@@ -488,11 +489,10 @@ private extension TKUIRoutingResultsCard {
 
 private extension TKUIRoutingResultsCard {
   
-  func showSearch(for mode: TKUIRoutingResultsViewModel.SearchMode) {
+  func showSearch(origin: MKAnnotation?, destination: MKAnnotation?) {
     let biasMapRect = (mapManager as? TGMapManager)?.mapView?.visibleMapRect ?? .null
     
-    #warning("FIXME: Add to and from")
-    let card = TKUIRoutingQueryInputCard(biasMapRect: biasMapRect)
+    let card = TKUIRoutingQueryInputCard(origin: origin, destination: destination, biasMapRect: biasMapRect)
     card.queryDelegate = self
     
     controller?.push(card)
