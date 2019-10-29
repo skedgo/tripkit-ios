@@ -35,6 +35,7 @@ class TKUIRoutingQueryInputTitleView: UIView {
   
   fileprivate let switchMode = PublishSubject<TKUIRoutingResultsViewModel.SearchMode>()
   fileprivate let typed = PublishSubject<String>()
+  fileprivate let route = PublishSubject<Void>()
   
   private let disposeBag = DisposeBag()
   
@@ -52,6 +53,8 @@ class TKUIRoutingQueryInputTitleView: UIView {
       TKStyleManager.style(searchBar) { textField in
         // This is to remove the space occupied by the magnifying glass.
         textField.leftView = UIImageView()
+        
+        textField.delegate = self
       }
     }
     
@@ -145,6 +148,18 @@ extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
   
 }
 
+// MARK: - UITextFieldDelegate
+
+extension TKUIRoutingQueryInputTitleView: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    _ = self.resignFirstResponder()
+    
+    self.route.onNext(())
+    
+    return false
+  }
+}
+
 // MARK: - Animations
 
 extension TKUIRoutingQueryInputTitleView {
@@ -205,11 +220,24 @@ extension Reactive where Base == TKUIRoutingQueryInputTitleView {
     }
   }
   
+  var enableRoute: Binder<Bool> {
+    return Binder(self.base) { view, enabled in
+      view.routeButton.isEnabled = enabled
+    }
+  }
+  
   var searchText: Observable<String> {
     base.typed.asObservable()
   }
   
   var selectedSearchMode: Signal<TKUIRoutingResultsViewModel.SearchMode> {
     base.switchMode.asSignal(onErrorSignalWith: .empty())
+  }
+  
+  var route: Signal<Void> {
+    return Signal.merge(
+      base.routeButton.rx.tap.asSignal(),
+      base.route.asSignal(onErrorSignalWith: .empty())
+    )
   }
 }

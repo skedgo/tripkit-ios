@@ -79,7 +79,7 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
       biasMapRect: biasMapRect,
       inputs: TKUIRoutingQueryInputViewModel.UIInput(
         searchText: titleView.rx.searchText,
-        tappedDone: titleView.routeButton.rx.tap.asSignal(),
+        tappedDone: titleView.rx.route,
         selected: tableView.rx.modelSelected(TKUIRoutingQueryInputViewModel.Item.self).asSignal(onErrorSignalWith: .empty()),
         selectedSearchMode: titleView.rx.selectedSearchMode,
         tappedSwap: titleView.swapButton.rx.tap.asSignal()
@@ -95,7 +95,7 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
       .disposed(by: disposeBag)
     
     viewModel.enableRouteButton
-      .drive(titleView.routeButton.rx.isEnabled)
+      .drive(titleView.rx.enableRoute)
       .disposed(by: disposeBag)
 
     viewModel.sections
