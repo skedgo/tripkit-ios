@@ -136,7 +136,7 @@
   UIImage *image = selected ? [self imageNamed:@"icon-callout-tick-filled"] : [self imageNamed:@"icon-callout-tick"];
   [button setImage:image forState:UIControlStateNormal];
   button.accessibilityLabel = Loc.Checkmark;
-  button.tintColor = [self globalTintColor];
+  button.tintColor = UIColor.tkAppTintColor;
   return button;
 }
 
