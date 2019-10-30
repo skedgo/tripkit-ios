@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - `TKUIModePicker`: Show tooltips on hover on macOS
+- Added `TKUIRoutingQueryInputCard` for setting origin and destination (and swapping them)
 
 ### Changed
 
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `TKUIRoutingResults`: When passing a `TripRequest` that already has trips in it, then
   the card will just show those results, rather than querying for new results, and the UI to change
   the trip request will be disabled. To enable it set `request.expandForFavorite = true`.
+- `TKUIRoutingResults`: Updated the title view of the card to bring up the new query input card on tap.
 
 ### Fixed
 

@@ -18,13 +18,19 @@ class TKUIResultsTitleView: UIView {
   @IBOutlet weak var originLabel: UILabel!
   @IBOutlet weak var destinationLabel: UILabel!
   @IBOutlet weak var dismissButton: UIButton!
+  @IBOutlet weak var originButton: UIButton!
+  @IBOutlet weak var originButtonBackground: UIView!
   
   @IBOutlet private weak var topLevelStack: UIStackView!
   @IBOutlet private weak var accessoryViewContainer: UIView!
   
   @IBOutlet private weak var topLevelStackBottomSpacing: NSLayoutConstraint!
   
-  var enableTappingLocation: Bool = true
+  var enableTappingLocation: Bool = true {
+    didSet {
+      originButton.isEnabled = enableTappingLocation
+    }
+  }
   
   private let locationSearchPublisher = PublishSubject<TKUIRoutingResultsViewModel.SearchMode>()
   var locationTapped: Signal<TKUIRoutingResultsViewModel.SearchMode> {
@@ -77,6 +83,10 @@ class TKUIResultsTitleView: UIView {
     originLabel.isUserInteractionEnabled = true
     originLabel.addGestureRecognizer(originLabelTapper)
     
+    originButton.tintColor = .tkAppTintColor
+    originButton.accessibilityLabel = Loc.StartLocation
+    originButtonBackground.backgroundColor = UIColor.tkAppTintColor.withAlphaComponent(0.12)
+    
     destinationLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
     destinationLabel.textColor = .tkLabelPrimary
     let destinationTapper = UITapGestureRecognizer(target: self, action: #selector(destinationLabelTapped))
@@ -90,11 +100,31 @@ class TKUIResultsTitleView: UIView {
   }
   
   func configure(destination: String?, origin: String?) {
-    destinationLabel.text = destination
-    originLabel.text = origin
+    let destinationText: String
+    if let name = destination {
+      destinationText = Loc.To(location: name)
+    } else {
+      destinationText = Loc.PlanTrip
+    }
+    destinationLabel.text = destinationText
+
+    let originName = origin ?? "..."
+    let originText = Loc.From(location: originName)
+    let attributedOrigin = NSMutableAttributedString(string: originText)
+    attributedOrigin.addAttribute(
+      .foregroundColor, value: UIColor.tkLabelSecondary,
+      range: NSRange(location: 0, length: (originText as NSString).length)
+    )
+    attributedOrigin.addAttribute(
+      .foregroundColor, value: UIColor.tkAppTintColor,
+      range: (originText as NSString).range(of: originName)
+    )
+    
+    originLabel.attributedText = attributedOrigin
   }
   
-  @objc private func originLabelTapped() {
+  @objc @IBAction
+  private func originLabelTapped() {
     guard enableTappingLocation else { return }
     
     locationSearchPublisher.onNext(.origin)

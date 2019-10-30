@@ -271,24 +271,10 @@ extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
 
 extension TKUIRoutingResultsViewModel.RouteBuilder {
   
-  var titles: (title: String, subtitle: String?) {
+  var originDestination: (String?, String?) {
     let destinationName = destination?.title ?? nil
     let originName = origin?.title ?? nil
-    
-    let title: String
-    if let name = destinationName {
-      title = Loc.To(location: name)
-    } else {
-      title = Loc.PlanTrip
-    }
-    
-    let subtitle: String
-    if let name = originName {
-      subtitle = Loc.From(location: name)
-    } else {
-      subtitle = Loc.FromCurrentLocation
-    }
-    return (title, subtitle)
+    return (originName, destinationName)
   }
   
   var timeZone: TimeZone {

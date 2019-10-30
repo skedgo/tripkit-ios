@@ -110,8 +110,8 @@ public class TKUIRoutingResultsViewModel {
     selectedItem = Observable.combineLatest(selection.asObservable(), sections.asObservable()) { $1.find($0) ?? $1.bestItem }
       .asDriver(onErrorDriveWith: .empty())
     
-    titles = builderChanged
-      .map { $0.titles }
+    originDestination = builderChanged
+      .map { $0.originDestination }
       .asDriver(onErrorDriveWith: .empty())
 
     timeTitle = requestToShow
@@ -180,7 +180,7 @@ public class TKUIRoutingResultsViewModel {
   /// Whether the user is allowed to change the request
   let requestIsMutable: Driver<Bool>
   
-  let titles: Driver<(title: String, subtitle: String?)>
+  let originDestination: Driver<(origin: String?, destination: String?)>
   
   let timeTitle: Driver<String>
   

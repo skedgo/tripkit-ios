@@ -40,14 +40,15 @@ class TKUIAutocompletionViewModel {
   }
   
   struct AutocompletionItem {
-    fileprivate let index: Int
-    fileprivate let completion: TKAutocompletionResult
+    let index: Int
+    let completion: TKAutocompletionResult
+    let includeAccessory: Bool
     
-    var image: UIImage { return completion.image }
-    var title: String { return completion.title }
-    var subtitle: String? { return completion.subtitle }
-    var accessoryImage: UIImage? { return completion.accessoryButtonImage }
-    var showFaded: Bool { return completion.isInSupportedRegion?.boolValue == false }
+    var image: UIImage { completion.image }
+    var title: String { completion.title }
+    var subtitle: String? { completion.subtitle }
+    var accessoryImage: UIImage? { includeAccessory ? completion.accessoryButtonImage : nil }
+    var showFaded: Bool { completion.isInSupportedRegion?.boolValue == false }
   }
   
   struct ActionItem {
@@ -65,12 +66,12 @@ class TKUIAutocompletionViewModel {
     providers: [TKAutocompleting],
     searchText: Observable<String>,
     selected: Signal<Item>,
-    accessorySelected: Signal<Item>,
+    accessorySelected: Signal<Item>? = nil,
     biasMapRect: MKMapRect = .null
     ) {
     
     sections = TKUIAutocompletionViewModel
-      .buildSections(providers, searchText: searchText, biasMapRect: biasMapRect)
+      .buildSections(providers, searchText: searchText, biasMapRect: biasMapRect, includeAccessory: accessorySelected != nil)
       .asDriver(onErrorDriveWith: Driver.empty())
     
     selection = selected
@@ -79,7 +80,7 @@ class TKUIAutocompletionViewModel {
       .flatMapLatest { $0.annotation }
       .asSignal(onErrorSignalWith: .empty())
     
-    accessorySelection = accessorySelected
+    accessorySelection = (accessorySelected  ?? .empty())
       .asObservable()
       .compactMap { $0.result }
       .flatMapLatest { $0.annotation }
@@ -105,7 +106,7 @@ class TKUIAutocompletionViewModel {
 
 extension TKUIAutocompletionViewModel {
   
-  private static func buildSections(_ providers: [TKAutocompleting], searchText: Observable<String>, biasMapRect: MKMapRect) -> Observable<[Section]> {
+  private static func buildSections(_ providers: [TKAutocompleting], searchText: Observable<String>, biasMapRect: MKMapRect, includeAccessory: Bool) -> Observable<[Section]> {
     
     let additionalItems = providers
       .compactMap(ActionItem.init)
@@ -114,16 +115,16 @@ extension TKUIAutocompletionViewModel {
 
     return providers
       .autocomplete(searchText, mapRect: biasMapRect)
-      .map { $0.buildSections() + additionalSection }
+      .map { $0.buildSections(includeAccessory: includeAccessory) + additionalSection }
   }
   
 }
 
 extension Array where Element == TKAutocompletionResult {
   
-  fileprivate func buildSections() -> [TKUIAutocompletionViewModel.Section] {
+  fileprivate func buildSections(includeAccessory: Bool) -> [TKUIAutocompletionViewModel.Section] {
     let items = enumerated().map { tuple -> TKUIAutocompletionViewModel.Item in
-      let autocompletion = TKUIAutocompletionViewModel.AutocompletionItem(index: tuple.offset, completion: tuple.element)
+      let autocompletion = TKUIAutocompletionViewModel.AutocompletionItem(index: tuple.offset, completion: tuple.element, includeAccessory: includeAccessory)
       return .autocompletion(autocompletion)
     }
     return [TKUIAutocompletionViewModel.Section(items: items, title: nil)]
