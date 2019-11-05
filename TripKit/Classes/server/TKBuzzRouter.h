@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  `progress` is called.
  */
 - (NSUInteger)multiFetchTripsForRequest:(TripRequest *)request
+                                  modes:(nullable NSArray<NSString *>*)modes
                              classifier:(nullable id<TKTripClassifier>)classifier
                                progress:(nullable void (^)(NSUInteger))progress
                              completion:(void (^)(TripRequest * __nonnull, NSError * __nullable))completion;

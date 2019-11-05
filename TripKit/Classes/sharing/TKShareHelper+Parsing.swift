@@ -21,23 +21,25 @@ public extension TKShareHelper {
   }
 
   struct QueryDetails {
-    public enum Time {
+    public static let empty = QueryDetails(end: .invalid)
+    
+    public enum Time: Equatable {
       case leaveASAP
       case leaveAfter(Date)
       case arriveBy(Date)
     }
     
-    public let start: CLLocationCoordinate2D?
-    public let end: CLLocationCoordinate2D
-    public let title: String?
-    public let timeType: Time
-    public let modes: [String]
+    public var start: CLLocationCoordinate2D? = nil
+    public var end: CLLocationCoordinate2D
+    public var title: String? = nil
+    public var timeType: Time = .leaveASAP
+    public var modes: [String] = []
   }
   
   /// Extracts the query details from a TripGo API-compatible deep link
   /// - parameter url: TripGo API-compatible deep link
   /// - parameter geocoder: Geocoder used for filling in missing information
-  static func queryDetails(for url: URL, using geocoder: TKGeocoding) -> Single<QueryDetails> {
+  static func queryDetails(for url: URL, using geocoder: TKGeocoding = TKAppleGeocoder()) -> Single<QueryDetails> {
     
     guard
       let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
@@ -119,7 +121,7 @@ extension TKShareHelper.QueryDetails {
   /// Converts the query details into a TripRequest
   /// - parameter tripKit: TripKit's managed object context into which
   ///                      to insert the request
-  public func toTripRequest(in tripKit: NSManagedObjectContext) -> TripRequest {
+  public func toTripRequest(in tripKit: NSManagedObjectContext = TripKit.shared.tripKitContext) -> TripRequest {
     let from, to: MKAnnotation
     if let start = start, start.isValid {
       from = TKNamedCoordinate(coordinate: start)
@@ -157,7 +159,7 @@ extension TKShareHelper.QueryDetails {
 
 public extension TKShareHelper {
 
-  static func meetingDetails(for url: URL, using geocoder: TKGeocoding) -> Single<QueryDetails> {
+  static func meetingDetails(for url: URL, using geocoder: TKGeocoding = TKAppleGeocoder()) -> Single<QueryDetails> {
     guard
       let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
       let items = components.queryItems

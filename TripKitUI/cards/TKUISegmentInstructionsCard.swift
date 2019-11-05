@@ -61,9 +61,13 @@ public class TKUISegmentInstructionCard: TGPlainCard {
   }
   
   private func updateAccessoryViews(for segment: TKSegment) {
-    instructionView.accessoryStackView.removeAllSubviews()
+    guard let stack = instructionView.accessoryStackView else { return }
+    
+    stack.arrangedSubviews.forEach(stack.removeArrangedSubview)
+    stack.removeAllSubviews()
+    
     let accessoryViews = segment.buildAccessoryViews()
-    accessoryViews.forEach(instructionView.accessoryStackView.addArrangedSubview)
+    accessoryViews.forEach(stack.addArrangedSubview)
   }
   
 }
