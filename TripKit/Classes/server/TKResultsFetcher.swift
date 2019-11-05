@@ -18,7 +18,7 @@ import RxSwift
 /// last requested query.
 public class TKResultsFetcher {
   
-  public enum Progress {
+  public enum Progress: Equatable {
     case locating
     case started(Int)
     case partial(Int, Int)

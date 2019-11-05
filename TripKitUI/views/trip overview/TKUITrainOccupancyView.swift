@@ -57,8 +57,9 @@ public class TKUITrainOccupancyView: UIView {
   }
   
   private func updateStack() {
+    stack.arrangedSubviews.forEach(stack.removeArrangedSubview)
     stack.removeAllSubviews()
-
+    
     for outer in occupancies {
       for (index, inner) in outer.enumerated() {
         let imageName: String
