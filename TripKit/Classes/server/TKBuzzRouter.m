@@ -42,6 +42,7 @@
 }
 
 - (NSUInteger)multiFetchTripsForRequest:(TripRequest *)request
+                                  modes:(nullable NSArray<NSString *>*)modes
                              classifier:(nullable id<TKTripClassifier>)classifier
                                progress:(nullable void (^)(NSUInteger))progress
                              completion:(void (^)(TripRequest * __nullable, NSError * __nullable))completion
@@ -49,9 +50,13 @@
   [self cancelRequests];
   self.isActive = YES;
   
-  NSArray *applicableModes = [request applicableModeIdentifiers];
-  NSMutableArray *enabledModes = [NSMutableArray arrayWithArray:applicableModes];
-  [enabledModes removeObjectsInArray:[[TKUserProfileHelper hiddenModeIdentifiers] allObjects]];
+  NSArray *enabledModes = modes;
+  if (enabledModes == nil) {
+    NSArray *applicableModes = [request applicableModeIdentifiers];
+    NSMutableArray *mutableModes = [NSMutableArray arrayWithArray:applicableModes];
+    [mutableModes removeObjectsInArray:[[TKUserProfileHelper hiddenModeIdentifiers] allObjects]];
+    enabledModes = mutableModes;
+  }
   
   NSSet *groupedIdentifiers   = [TKTransportModes groupedModeIdentifiers:enabledModes includeGroupForAll:YES];
   NSUInteger requestCount = [groupedIdentifiers count];
@@ -81,12 +86,14 @@
        typeof(weakSelf) strongSelf = weakSelf;
        if (strongSelf) {
          
-         // We get thet minimized and hidden modes here in the completion block
-         // since they might have changed while waiting for results
-         NSSet *minimized = [TKUserProfileHelper minimizedModeIdentifiers];
-         NSSet *hidden = [TKUserProfileHelper hiddenModeIdentifiers];
-         [completedRequest adjustVisibilityForMinimizedModeIdentifiers:minimized
-                                                 hiddenModeIdentifiers:hidden];
+         if (modes == nil) {
+           // We get thet minimized and hidden modes here in the completion block
+           // since they might have changed while waiting for results
+           NSSet *minimized = [TKUserProfileHelper minimizedModeIdentifiers];
+           NSSet *hidden = [TKUserProfileHelper hiddenModeIdentifiers];
+           [completedRequest adjustVisibilityForMinimizedModeIdentifiers:minimized
+                                                   hiddenModeIdentifiers:hidden];
+         }
          
          // Updating classifications before making results visible
          if (classifier) {
