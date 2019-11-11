@@ -93,6 +93,8 @@
            NSSet *hidden = [TKUserProfileHelper hiddenModeIdentifiers];
            [completedRequest adjustVisibilityForMinimizedModeIdentifiers:minimized
                                                    hiddenModeIdentifiers:hidden];
+         } else {
+           [completedRequest adjustVisibilityForMinimizedModeIdentifiers:[NSSet set] hiddenModeIdentifiers:[NSSet set]];
          }
          
          // Updating classifications before making results visible
