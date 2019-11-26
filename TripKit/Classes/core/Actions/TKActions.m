@@ -107,12 +107,12 @@
     [alerter addAction:[UIAlertAction actionWithTitle:Loc.Done
                                                 style:UIAlertActionStyleDefault handler:
                         ^(UIAlertAction * _Nonnull action) {
-                          __strong UIAlertController *strongAlerter = weakAlerter;
-                          if (strongAlerter) {
-                            UITextField *textField = [strongAlerter.textFields firstObject];
-                            self.textfieldBlock(textField.text);
-                          }
-                        }]];
+      __strong UIAlertController *strongAlerter = weakAlerter;
+      if (strongAlerter) {
+        UITextField *textField = [strongAlerter.textFields firstObject];
+        self.textfieldBlock(textField.text);
+      }
+    }]];
   }
   
   if (self.hasCancel) {

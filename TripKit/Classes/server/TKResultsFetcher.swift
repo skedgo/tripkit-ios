@@ -43,7 +43,7 @@ public class TKResultsFetcher {
   ///   - classifier: Optional classifier, see `TKTripClassifier` for more
   /// - Returns: Stream of fetching the results, multiple call backs as different
   ///     modes are fetched.
-  public static func streamTrips(for request: TripRequest, modes: [String]? = nil, classifier: TKTripClassifier? = nil) -> Observable<Progress> {
+  public static func streamTrips(for request: TripRequest, modes: [String]? = nil, classifier: TKTripClassifier? = nil, additionalParameters: [URLQueryItem]? = nil) -> Observable<Progress> {
     
     // first we'll lock in this trips time if necessary
     if request.type == .leaveASAP {
@@ -69,7 +69,10 @@ public class TKResultsFetcher {
     return prepared
       .asObservable()
       .flatMapLatest { request -> Observable<Progress> in
-        return TKBuzzRouter.rx.multiFetchRequest(for: request, modes: modes, classifier: classifier)
+        return TKBuzzRouter.rx.multiFetchRequest(
+          for: request, modes: modes,
+          classifier: classifier, additionalParameters: additionalParameters
+        )
       }
       .startWith(.locating)
   }
@@ -115,9 +118,10 @@ fileprivate class CountHolder {
 
 fileprivate extension Reactive where Base : TKBuzzRouter {
   
-  static func multiFetchRequest(for request: TripRequest, modes: [String]?, classifier: TKTripClassifier? = nil) -> Observable<TKResultsFetcher.Progress> {
+  static func multiFetchRequest(for request: TripRequest, modes: [String]?, classifier: TKTripClassifier? = nil, additionalParameters: [URLQueryItem]? = nil) -> Observable<TKResultsFetcher.Progress> {
     
     var router: TKBuzzRouter! = TKBuzzRouter()
+    router.additionalParameters = additionalParameters.flatMap(Set.init)
     
     return Observable.create { observer in
       
