@@ -158,6 +158,8 @@ NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
   for (NSString *identifier in modeIdentifiers) {
     if ([processedModes containsObject:identifier])
       continue; // added it already
+    if ([identifier isEqual:TKTransportModeIdentifierFlight] && modeIdentifiers.count > 1)
+      continue; // don't add flights by themselves
     
     NSMutableSet *group = [NSMutableSet setWithObject:identifier];
     NSSet *implied = [NSSet setWithArray:[regionMan impliedModeIdentifiers:identifier]];
