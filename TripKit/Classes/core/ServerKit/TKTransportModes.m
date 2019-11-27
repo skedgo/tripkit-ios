@@ -155,11 +155,15 @@ NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
   NSMutableSet *groupedModes = [NSMutableSet setWithCapacity:modeIdentifiers.count + 1];
   TKRegionManager *regionMan = TKRegionManager.shared;
   NSMutableSet *processedModes = [NSMutableSet setWithCapacity:modeIdentifiers.count];
+  BOOL includesWalkOnly = false;
   for (NSString *identifier in modeIdentifiers) {
-    if ([processedModes containsObject:identifier])
+    if ([processedModes containsObject:identifier]) {
       continue; // added it already
-    if ([identifier isEqual:TKTransportModeIdentifierFlight] && modeIdentifiers.count > 1)
+    } if ([identifier isEqualToString:TKTransportModeIdentifierFlight] && modeIdentifiers.count > 1) {
       continue; // don't add flights by themselves
+    } if ([identifier isEqualToString:TKTransportModeIdentifierWalking] || [identifier isEqualToString:TKTransportModeIdentifierWheelchair]) {
+      includesWalkOnly = true;
+    }
     
     NSMutableSet *group = [NSMutableSet setWithObject:identifier];
     NSSet *implied = [NSSet setWithArray:[regionMan impliedModeIdentifiers:identifier]];
@@ -180,7 +184,7 @@ NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
     [processedModes unionSet:group];
   }
   
-  if (addAllGroup && groupedModes.count > 1) {
+  if (addAllGroup && groupedModes.count > 1 + (includesWalkOnly ? 1 : 0)) {
     [groupedModes addObject:modeIdentifiers];
   }
   
