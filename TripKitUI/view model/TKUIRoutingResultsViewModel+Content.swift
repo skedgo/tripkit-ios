@@ -67,9 +67,9 @@ extension TKUIRoutingResultsViewModel {
 
 extension TKUIRoutingResultsViewModel {
   
-  static func fetchTripGroups(_ requests: Observable<TripRequest?>) -> Observable<[TripGroup]> {
+  static func fetchTripGroups(_ requests: Observable<TripRequest>) -> Observable<[TripGroup]> {
     return requests.flatMapLatest { request -> Observable<[TripGroup]> in
-      guard let request = request, let context = request.managedObjectContext else {
+      guard let context = request.managedObjectContext else {
         return .just([])
       }
       

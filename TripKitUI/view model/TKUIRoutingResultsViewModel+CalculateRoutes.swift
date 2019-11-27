@@ -79,7 +79,19 @@ extension TKUIRoutingResultsViewModel {
 
 extension TKUIRoutingResultsViewModel {
   
-  static func watch(_ initial: RouteBuilder, inputs: UIInput, mapInput: MapInput) -> Observable<RouteBuilder> {
+  private static func buildId(for builder: RouteBuilder, force: Bool = false) -> String {
+    guard !force else { return UUID().uuidString }
+    var id: String = "\(builder.time.timeType.rawValue)-\(Int(builder.time.date.timeIntervalSince1970) % 60)"
+    if let origin = builder.origin?.coordinate {
+      id.append("\(Int(origin.latitude * 100_000)),\(Int(origin.longitude * 100_000))")
+    }
+    if let destination = builder.destination?.coordinate {
+      id.append("\(Int(destination.latitude * 100_000)),\(Int(destination.longitude * 100_000))")
+    }
+    return id
+  }
+  
+  static func watch(_ initial: RouteBuilder, inputs: UIInput, mapInput: MapInput) -> Observable<(RouteBuilder, id: String)> {
     
     typealias BuilderInput = (
       date: RouteBuilder.Time?,
@@ -91,7 +103,6 @@ extension TKUIRoutingResultsViewModel {
     // When changing modes, force refresh
     let refresh: Observable<BuilderInput> = inputs.changedModes.asObservable()
       .map { _ in (date: nil, search: nil, pin: nil, forceRefresh: true) }
-      .debounce(.milliseconds(250), scheduler: MainScheduler.instance)
     
     // When changing date, switch to that date
     let date: Observable<BuilderInput> = inputs.changedDate.asObservable()
@@ -109,8 +120,8 @@ extension TKUIRoutingResultsViewModel {
     let relevantInput = Observable.merge(date, search, pin, refresh)
     
     return relevantInput
-      .scan(initial) { previous, change in
-        var updated = previous
+      .scan( (initial, buildId(for: initial)) ) { previous, change in
+        var updated = previous.0
         
         if let time = change.date {
           updated.time = time
@@ -128,25 +139,35 @@ extension TKUIRoutingResultsViewModel {
           }
         }
         
-        return updated
+        return (updated, id: Self.buildId(for: updated, force: change.forceRefresh) )
       }
-      .startWith(initial)
+      .startWith( (initial, id: buildId(for: initial)) )
   }
   
-  static func locationsChanged(in builder: RouteBuilder) -> Observable<RouteBuilder> {
+  static func locationsChanged(in builder: RouteBuilder, id: String) -> Observable<(RouteBuilder, id: String)> {
     // This looks fairly complicated but all it does is monitoring the builder's
     // origin and destination annotations for changes to their coordinates, and
     // then triggers a rebuild.
-    var origin: Observable<CLLocationCoordinate2D?> = .empty()
-    var destination: Observable<CLLocationCoordinate2D?> = .empty()
+    
+    func isCloseEnough(first: CLLocationCoordinate2D, second: CLLocationCoordinate2D) -> Bool {
+      guard let distance = first.distance(from: second) else { return true }
+      return distance < 50
+    }
+    
+    var origin: Observable<CLLocationCoordinate2D> = .empty()
+    var destination: Observable<CLLocationCoordinate2D> = .empty()
     if let asObject = builder.origin {
       origin = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
+        .compactMap { [weak asObject] _ in asObject?.coordinate }
+        .distinctUntilChanged(isCloseEnough)
     }
     if let asObject = builder.destination {
       destination = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
+        .compactMap { [weak asObject] _ in asObject?.coordinate }
+        .distinctUntilChanged(isCloseEnough)
     }
     return Observable.merge(origin, destination)
-      .map { _ in builder }
+      .map { _ in (builder, Self.buildId(for: builder)) }
   }
   
 }
@@ -174,11 +195,8 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
 
 extension TKUIRoutingResultsViewModel {
   
-  static func fetch(for request: Observable<TripRequest?>, errorPublisher: PublishSubject<Error>) -> Observable<TKResultsFetcher.Progress> {
+  static func fetch(for request: Observable<TripRequest>, errorPublisher: PublishSubject<Error>) -> Observable<TKResultsFetcher.Progress> {
     return request
-      .filter { $0 != nil }
-      .map { $0! }
-      .distinctUntilChanged()
       .filter { $0.managedObjectContext != nil }
       .flatMapLatest { request in
         // Fetch the trip and handle errors in here, to not abort the outer observable
@@ -188,7 +206,7 @@ extension TKUIRoutingResultsViewModel {
             errorPublisher.onNext(error)
             return .just(.finished)
           }
-    }
+      }
   }
   
 }
