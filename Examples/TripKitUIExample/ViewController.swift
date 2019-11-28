@@ -52,9 +52,14 @@ class MainViewController: UITableViewController {
     case "showRoutes":
       showRoutes()
       
+    case "showHome":
+      showHome()
+      
     default:
       preconditionFailure("Don't know what to do with \(id)")
     }
+    
+    tableView.deselectRow(at: indexPath, animated: true)
   }
   
 }
@@ -172,6 +177,17 @@ extension MainViewController {
 }
 
 extension MainViewController: TKUIRoutingResultsViewControllerDelegate {
+}
+
+// MARK: - Home
+
+extension MainViewController {
+  
+  func showHome() {
+    let homeController = TKUIHomeViewController()
+    present(homeController, animated: true, completion: nil)
+  }
+  
 }
 
 // MARK: - Segment actions
