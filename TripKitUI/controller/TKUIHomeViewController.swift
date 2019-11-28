@@ -21,7 +21,19 @@ public class TKUIHomeViewController: TGCardViewController {
   }
   
   public override func viewDidLoad() {
+    
+    // Here, we always route from user's current location, hence
+    // make sure we ask for permission.
+    builder.askForLocationPermissions = { completion in
+      TKLocationManager.shared.ask(forPermission: completion)
+    }
+    
+    // We can also select a different place for the current location
+    // button
+    locationButtonPosition = .bottom
+    
     rootCard = TKUIHomeCard()
+    
     super.viewDidLoad()
   }
   

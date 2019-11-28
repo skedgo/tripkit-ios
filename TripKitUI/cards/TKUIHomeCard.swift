@@ -72,7 +72,8 @@ public class TKUIHomeCard: TGTableCard {
     searchViewModel = TKUIAutocompletionViewModel(
       providers: searchProviders ?? [TKAppleGeocoder(), TKSkedGoGeocoder()],
       searchText: searchTextPublisher.asObserver(),
-      selected: tableView.rx.itemSelected.map { dataSource[$0] }.asSignal(onErrorSignalWith: .empty())
+      selected: tableView.rx.itemSelected.map { dataSource[$0] }.asSignal(onErrorSignalWith: .empty()),
+      accessorySelected: searchResultAccessoryTapped.asSignal(onErrorSignalWith: .empty())
     )
     
     searchViewModel.sections
@@ -80,19 +81,41 @@ public class TKUIHomeCard: TGTableCard {
       .disposed(by: disposeBag)
     
     searchViewModel.selection
-      .emit(onNext: { annotation in
-        print("selected annotation: \(annotation)")
+      .emit(onNext: { [weak self] annotation in
+        self?.showRoutes(to: annotation)
       })
       .disposed(by: disposeBag)
     
     searchViewModel.accessorySelection
-      .emit(onNext: { annotation in
-        print("accessory tapped for annotation: \(annotation)")
+      .emit(onNext: { [weak self] annotation in
+        guard let stop = annotation as? TKUIStopAnnotation else {
+          assertionFailure("Expecting a stop annotation, but got \(annotation)")
+          return
+        }
+        self?.showTimetable(for: stop)
       })
       .disposed(by: disposeBag)
   }
   
 }
+
+// MARK: - Action on search result
+
+extension TKUIHomeCard {
+  
+  private func showRoutes(to destination: MKAnnotation) {
+    let routingResultCard = TKUIRoutingResultsCard(destination: destination)
+    controller?.push(routingResultCard)
+  }
+  
+  private func showTimetable(for stop: TKUIStopAnnotation) {
+    let timetableCard = TKUITimetableCard(stops: [stop])
+    controller?.push(timetableCard)
+  }
+  
+}
+
+// MARK: - Search bar
 
 extension TKUIHomeCard: UISearchBarDelegate {
   
