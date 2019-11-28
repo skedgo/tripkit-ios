@@ -1,0 +1,33 @@
+author: SkedGo
+author_url: https://skedgo.com
+title: TripKitUI iOS
+theme: fullwidth
+output: TripKitUI
+
+custom_categories:
+  - name: Trip planning
+    children:
+      - TKUIRoutingResultsViewController
+      - TKUIRoutingResultsViewControllerDelegate
+      - TKUIRoutingResultsCard
+      - TKUIRoutingResultsCardDelegate
+      - TKUIRoutingQueryInputCard
+      - TKUIRoutingQueryInputCardDelegate
+      - TKUITripOverviewCard
+      - TKUITripModeByModeViewController
+      - TKUITripModeByModeViewControllerDelegate
+      - TKUITripModeByModeCard
+      - TKUITripModeByModeCardDelegate
+      - TKUITripModeByModePageBuilder
+  - name: Timetables
+    children:
+      - TKUITimetableViewController
+      - TKUITimetableViewControllerDelegate
+      - TKUITimetableCard
+      - TKUITimetableCardAction
+      - TKUITimetableCardDelegate
+      - TKUIServiceCard
+  - name: Search
+    children:
+      - TKUIAutocompletionViewController
+      - TKUIAutocompletionViewControllerDelegate
