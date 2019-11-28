@@ -125,19 +125,22 @@
 
 - (BOOL)resultsInSameQueryAs:(TripRequest *)other
 {
-  if (other == nil)
+  if (other == nil) {
     return NO;
-  if (other.type != self.type)
+  } else if ((other.type == TKTimeTypeArriveBefore && self.type != TKTimeTypeArriveBefore)
+              || (other.type != TKTimeTypeArriveBefore && self.type == TKTimeTypeArriveBefore)) {
     return NO;
-  if (fabs([other.time timeIntervalSinceDate:self.time]) >  30) // within 30 seconds
+  } else if (fabs([other.time timeIntervalSinceDate:self.time]) >  30) { // within 30 seconds
     return NO;
-  if (! [TKLocationHelper coordinate:[other.fromLocation coordinate]
-                              isNear:[self.fromLocation coordinate]])
+  } else if (! [TKLocationHelper coordinate:[other.fromLocation coordinate]
+                                     isNear:[self.fromLocation coordinate]]) {
     return NO;
-  if (! [TKLocationHelper coordinate:[other.toLocation coordinate]
-                              isNear:[self.toLocation coordinate]])
+  } else if (! [TKLocationHelper coordinate:[other.toLocation coordinate]
+                                     isNear:[self.toLocation coordinate]]) {
     return NO;
-  return YES;
+  } else {
+    return YES;
+  }
 }
 
 - (void)adjustVisibilityForMinimizedModeIdentifiers:(NSSet * __nonnull)minimized

@@ -10,6 +10,8 @@
 
 #import <TripKit/TripKit-Swift.h>
 
+#import "TKTransportModes.h"
+#import "TripRequest.h"
 #import "TripRequest+Classify.h"
 
 #define kBHRoutingTimeOutSecond           30
@@ -78,6 +80,7 @@
     worker = [[TKBuzzRouter alloc] init];
     self.workerRouters[modeIdentifiers] = worker;
     worker.modeIdentifiers = modeIdentifiers;
+    worker.additionalParameters = self.additionalParameters;
     
     __weak typeof(self) weakSelf = self;
     [worker fetchTripsForRequest:request
@@ -649,6 +652,10 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   
   if (request.excludedStops.count > 0) {
     paras[@"avoidStops"] = request.excludedStops;
+  }
+  
+  for (NSURLQueryItem *item in self.additionalParameters) {
+    paras[item.name] = item.value;
   }
   
   return paras;
