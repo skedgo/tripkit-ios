@@ -186,7 +186,8 @@ extension MainViewController {
   func showHome() {
     let homeController = TKUIHomeViewController()
     homeController.searchResultsDelegate = self
-    present(homeController, animated: true, completion: nil)
+    navigationController?.setNavigationBarHidden(true, animated: true)
+    navigationController?.pushViewController(homeController, animated: true)
   }
   
 }
