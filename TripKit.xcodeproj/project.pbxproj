@@ -811,6 +811,7 @@
 		D3BC460D2288F39800590403 /* EventAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC460C2288F39800590403 /* EventAPIModel.swift */; };
 		D3BC6731238F70C10042EFD9 /* TKUIHomeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC672F238F6F8B0042EFD9 /* TKUIHomeCard.swift */; };
 		D3BC6732238F71700042EFD9 /* TKUIHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC672C238F45940042EFD9 /* TKUIHomeViewController.swift */; };
+		D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */; };
 		D3E7C1AF21F17B7600C48248 /* TKUISectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */; };
 		D3EC9E8B22EE7D810080B0E6 /* TKUIModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC9E8A22EE7D810080B0E6 /* TKUIModePicker.swift */; };
 		D3F9CEC32064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */; };
@@ -1515,6 +1516,7 @@
 		D3BC460C2288F39800590403 /* EventAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAPIModel.swift; sourceTree = "<group>"; };
 		D3BC672C238F45940042EFD9 /* TKUIHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIHomeViewController.swift; sourceTree = "<group>"; };
 		D3BC672F238F6F8B0042EFD9 /* TKUIHomeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIHomeCard.swift; sourceTree = "<group>"; };
+		D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryHistoryManager.swift; sourceTree = "<group>"; };
 		D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertViewController.xib; sourceTree = "<group>"; };
 		D3EC9E8A22EE7D810080B0E6 /* TKUIModePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIModePicker.swift; sourceTree = "<group>"; };
 		D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertTableHeader.swift; sourceTree = "<group>"; };
@@ -2389,6 +2391,7 @@
 				3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */,
 				3ACF47AF229EEDFF0096860D /* Info.plist */,
 				3A77B74C22F8815D0082CCAF /* InfoPlist.strings */,
+				D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */,
 			);
 			path = TripKitUIExample;
 			sourceTree = "<group>";
@@ -3852,6 +3855,7 @@
 			files = (
 				3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */,
 				3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */,
+				D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

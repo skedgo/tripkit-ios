@@ -185,7 +185,16 @@ extension MainViewController {
   
   func showHome() {
     let homeController = TKUIHomeViewController()
+    homeController.searchResultsDelegate = self
     present(homeController, animated: true, completion: nil)
+  }
+  
+}
+
+extension MainViewController: TKUIHomeCardSearchResultsDelegate {
+  
+  func homeCard(_ card: TKUIHomeCard, selected searchResult: MKAnnotation) {
+    InMemoryHistoryManager.shared.add(searchResult)
   }
   
 }

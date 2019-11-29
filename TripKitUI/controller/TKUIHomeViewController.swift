@@ -12,6 +12,13 @@ import TGCardViewController
 
 public class TKUIHomeViewController: TGCardViewController {
   
+  public weak var searchResultsDelegate: TKUIHomeCardSearchResultsDelegate? {
+    didSet {
+      guard let homeCard = rootCard as? TKUIHomeCard else { return }
+      homeCard.searchResultDelegate = searchResultsDelegate
+    }
+  }
+  
   public init() {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
   }
@@ -32,13 +39,12 @@ public class TKUIHomeViewController: TGCardViewController {
     // button
     locationButtonPosition = .bottom
     
-    rootCard = TKUIHomeCard()
+    let homeCard = TKUIHomeCard()
+    homeCard.searchResultDelegate = searchResultsDelegate
+    rootCard = homeCard
     
     super.viewDidLoad()
   }
   
 }
-
-
-
 

@@ -14,9 +14,20 @@ import RxDataSources
 
 import TGCardViewController
 
+public protocol TKUIHomeCardSearchResultsDelegate: class {
+  
+  func homeCard(_ card: TKUIHomeCard, selected searchResult: MKAnnotation)
+  
+}
+
+
+// MARK: -
+
 public class TKUIHomeCard: TGTableCard {
   
   public var searchProviders: [TKAutocompleting]?
+  
+  public var searchResultDelegate: TKUIHomeCardSearchResultsDelegate?
   
   private let searchTextPublisher = PublishSubject<String>()
   
@@ -26,13 +37,13 @@ public class TKUIHomeCard: TGTableCard {
   
   private let disposeBag = DisposeBag()
   
+  private let searchBar = UISearchBar()
+  
   init() {
     let mapManager = TKUIMapManager()
     
     // Home card requires a custom title view that includes
     // a search bar only.
-    let searchBar = UISearchBar()
-    
     super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager, initialPosition: .peaking)
     
     searchBar.delegate = self
@@ -82,7 +93,20 @@ public class TKUIHomeCard: TGTableCard {
     
     searchViewModel.selection
       .emit(onNext: { [weak self] annotation in
-        self?.showRoutes(to: annotation)
+        guard let self = self else { return }
+        
+        // To replicate Apple Maps, once a user dismiss the routing card,
+        // the search bar is cleared and the card in which it's embedeed,
+        // i.e., Home card, is moved back to the peaking position. To do
+        // this, we call `clearSearchBar` method, however, this **must**
+        // be called before the routing card is pushed.
+        self.clearSearchBar()
+        
+        // Push the routing card
+        self.showRoutes(to: annotation)
+        
+        // Notify the delegate
+        self.searchResultDelegate?.homeCard(self, selected: annotation)
       })
       .disposed(by: disposeBag)
     
@@ -92,6 +116,12 @@ public class TKUIHomeCard: TGTableCard {
           assertionFailure("Expecting a stop annotation, but got \(annotation)")
           return
         }
+        // To replicate Apple Maps, once a user dismiss the timetable card,
+        // the search bar is cleared and the card in which it's embedeed,
+        // i.e., Home card, is moved back to the peaking position. To do
+        // this, we call `clearSearchBar` method, however, this **must**
+        // be called before the timetable card is pushed.
+        self?.clearSearchBar()
         self?.showTimetable(for: stop)
       })
       .disposed(by: disposeBag)
@@ -104,12 +134,16 @@ public class TKUIHomeCard: TGTableCard {
 extension TKUIHomeCard {
   
   private func showRoutes(to destination: MKAnnotation) {
-    let routingResultCard = TKUIRoutingResultsCard(destination: destination)
-    controller?.push(routingResultCard)
+    // We push the routing card. To replicate Apple Maps, we put
+    // the routing card at the peaking position when it's pushed.
+    let routingResultCard = TKUIRoutingResultsCard(destination: destination, initialPosition: .peaking)
+    controller?.push(routingResultCard)    
   }
   
   private func showTimetable(for stop: TKUIStopAnnotation) {
-    let timetableCard = TKUITimetableCard(stops: [stop])
+    // We push the timetable card. To replicate Apple Maps, we put
+    // the timetable card at the peaking position when it's pushed.
+    let timetableCard = TKUITimetableCard(stops: [stop], reusing: (mapManager as? TKUIMapManager), initialPosition: .peaking)
     controller?.push(timetableCard)
   }
   
@@ -133,6 +167,15 @@ extension TKUIHomeCard: UISearchBarDelegate {
   }
   
   public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    clearSearchBar()
+  }
+  
+  public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+    self.controller?.moveCard(to: .peaking, animated: true)
+  }
+  
+  private func clearSearchBar() {
     // Clear the text on search bar
     searchBar.text = ""
     
@@ -143,11 +186,6 @@ extension TKUIHomeCard: UISearchBarDelegate {
     searchBar.resignFirstResponder()
     
     // We don't need to be extended mode.
-    self.controller?.moveCard(to: .peaking, animated: true)
-  }
-  
-  public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    searchBar.resignFirstResponder()
     self.controller?.moveCard(to: .peaking, animated: true)
   }
   

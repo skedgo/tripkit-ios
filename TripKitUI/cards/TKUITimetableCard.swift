@@ -62,7 +62,7 @@ public class TKUITimetableCard : TGTableCard {
   ///   - mapManager: Optional map manager, which will be asked to display
   ///       the stop(s) on appearance, by asking its map view to select the
   ///       first stop and calling `mapManager.zoom(to:animated)`.
-  public init(titleView: (UIView, UIButton)? = nil, stops: [TKUIStopAnnotation], reusing mapManager: TGMapManager? = nil) {
+  public init(titleView: (UIView, UIButton)? = nil, stops: [TKUIStopAnnotation], reusing mapManager: TGMapManager? = nil, initialPosition: TGCardPosition? = nil) {
     self.input = .stops(stops)
 
     let title: CardTitle
@@ -72,7 +72,7 @@ public class TKUITimetableCard : TGTableCard {
       title = .default(Loc.Timetable, nil, self.accessoryView)
     }
     
-    super.init(title: title, mapManager: mapManager, initialPosition: .extended)
+    super.init(title: title, mapManager: mapManager, initialPosition: initialPosition ?? .extended)
     didInit()
   }
 
