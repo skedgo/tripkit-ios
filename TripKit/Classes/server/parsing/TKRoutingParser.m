@@ -342,8 +342,16 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           reference.ticketWebsiteURLString = refDict[@"ticketWebsiteURL"];
           reference.serviceStops = refDict[@"stops"];
           reference.departurePlatform = refDict[@"platform"];
+          reference.arrivalPlatform = refDict[@"endPlatform"];
           reference.bicycleAccessible = [refDict[@"bicycleAccessible"] boolValue];
           reference.wheelchairAccessible = [refDict[@"wheelchairAccessible"] boolValue];
+          
+          if (refDict[@"timetableStartTime"]) {
+            reference.timetableStartTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"timetableStartTime"] integerValue]];
+          }
+          if (refDict[@"timetableEndTime"]) {
+            reference.timetableEndTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"timetableEndTime"] integerValue]];
+          }
           
           // set the trip status
           if (service.frequency.integerValue == 0) {
