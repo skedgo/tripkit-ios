@@ -184,7 +184,7 @@ NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
     [processedModes unionSet:group];
   }
   
-  if (addAllGroup && groupedModes.count > 1 + (includesWalkOnly ? 1 : 0)) {
+  if (addAllGroup && modeIdentifiers.count > 1 + (includesWalkOnly ? 1 : 0)) {
     [groupedModes addObject:modeIdentifiers];
   }
   
