@@ -798,6 +798,8 @@
 		D335907421EF604100CB57E3 /* TKStyleManager+TripKitUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335907321EF604100CB57E3 /* TKStyleManager+TripKitUI.swift */; };
 		D337467E208D5D980045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
 		D337467F208D5DA90045B0C3 /* UserAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337467D208D5D980045B0C3 /* UserAPIModel.swift */; };
+		D33C052423949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */; };
+		D33C05272394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C05262394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift */; };
 		D372268A2345A8CF00DBCFC8 /* TKUIResultsTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37226872345A8C600DBCFC8 /* TKUIResultsTitleView.swift */; };
 		D372268C2345A8E500DBCFC8 /* TKUIResultsTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D372268B2345A8E500DBCFC8 /* TKUIResultsTitleView.xib */; };
 		D37EF6D821A7BCE80062288E /* TKLocalCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37EF6D721A7BCE80062288E /* TKLocalCost.swift */; };
@@ -1504,6 +1506,8 @@
 		D32CA5AE20E34409009C9449 /* TKUIGroupedAlertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIGroupedAlertCell.xib; sourceTree = "<group>"; };
 		D335907321EF604100CB57E3 /* TKStyleManager+TripKitUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKStyleManager+TripKitUI.swift"; sourceTree = "<group>"; };
 		D337467D208D5D980045B0C3 /* UserAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPIModel.swift; sourceTree = "<group>"; };
+		D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InMemoryHistoryManager+Autocompleting.swift"; sourceTree = "<group>"; };
+		D33C05262394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIHomeCard+Configuration.swift"; sourceTree = "<group>"; };
 		D37226872345A8C600DBCFC8 /* TKUIResultsTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIResultsTitleView.swift; sourceTree = "<group>"; };
 		D372268B2345A8E500DBCFC8 /* TKUIResultsTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIResultsTitleView.xib; sourceTree = "<group>"; };
 		D37EF6D721A7BCE80062288E /* TKLocalCost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLocalCost.swift; sourceTree = "<group>"; };
@@ -2392,6 +2396,7 @@
 				3ACF47AF229EEDFF0096860D /* Info.plist */,
 				3A77B74C22F8815D0082CCAF /* InfoPlist.strings */,
 				D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */,
+				D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */,
 			);
 			path = TripKitUIExample;
 			sourceTree = "<group>";
@@ -2434,6 +2439,7 @@
 				3AF5F2B820F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift */,
 				3A506B3023200457003DD234 /* TKUITripOverviewCardAction.swift */,
 				D3BC672F238F6F8B0042EFD9 /* TKUIHomeCard.swift */,
+				D33C05262394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift */,
 			);
 			path = cards;
 			sourceTree = "<group>";
@@ -3491,6 +3497,7 @@
 				3A383CBB22315A4D00361596 /* TKUITripOverviewViewModel+Fetch.swift in Sources */,
 				3A6DF12A202C8EB80084CB2C /* UIView+Helpers.m in Sources */,
 				3ACF472D2297FA080096860D /* TKUITimetableViewModel.swift in Sources */,
+				D33C05272394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift in Sources */,
 				3A6DF112202C8EB80084CB2C /* TKUISemaphoreView.m in Sources */,
 				3ACF47212297F9F10096860D /* TKUIServiceMapManager.swift in Sources */,
 				3AFD397020D93D9800FDC7D0 /* TKUITimePickerSheet.m in Sources */,
@@ -3854,6 +3861,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */,
+				D33C052423949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift in Sources */,
 				3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */,
 				D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */,
 			);

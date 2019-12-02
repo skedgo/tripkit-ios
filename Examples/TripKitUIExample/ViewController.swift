@@ -185,6 +185,11 @@ extension MainViewController {
   
   func showHome() {
     let homeController = TKUIHomeViewController()
+    homeController.autocompletionDataProviders = [
+      TKAppleGeocoder(),
+      TKSkedGoGeocoder(),
+      InMemoryHistoryManager.shared
+    ]
     homeController.searchResultsDelegate = self
     navigationController?.setNavigationBarHidden(true, animated: true)
     navigationController?.pushViewController(homeController, animated: true)

@@ -19,6 +19,8 @@ public class TKUIHomeViewController: TGCardViewController {
     }
   }
   
+  public var autocompletionDataProviders: [TKAutocompleting]?
+  
   public init() {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
   }
@@ -38,6 +40,8 @@ public class TKUIHomeViewController: TGCardViewController {
     // We can also select a different place for the current location
     // button
     locationButtonPosition = .bottom
+    
+    TKUIHomeCard.config.autocompletionDataProviders = autocompletionDataProviders
     
     let homeCard = TKUIHomeCard()
     homeCard.searchResultDelegate = searchResultsDelegate

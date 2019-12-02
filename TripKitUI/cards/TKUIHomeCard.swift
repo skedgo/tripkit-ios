@@ -25,7 +25,7 @@ public protocol TKUIHomeCardSearchResultsDelegate: class {
 
 public class TKUIHomeCard: TGTableCard {
   
-  public var searchProviders: [TKAutocompleting]?
+  public static var config = Configuration.empty
   
   public var searchResultDelegate: TKUIHomeCardSearchResultsDelegate?
   
@@ -80,8 +80,11 @@ public class TKUIHomeCard: TGTableCard {
     
     tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
     
+    // We use Apple & SkedGo if none is provided for autocompletion
+    let autocompleteDataProviders = TKUIHomeCard.config.autocompletionDataProviders ?? [TKAppleGeocoder(), TKSkedGoGeocoder()]
+    
     searchViewModel = TKUIAutocompletionViewModel(
-      providers: searchProviders ?? [TKAppleGeocoder(), TKSkedGoGeocoder()],
+      providers: autocompleteDataProviders,
       searchText: searchTextPublisher.asObserver(),
       selected: tableView.rx.itemSelected.map { dataSource[$0] }.asSignal(onErrorSignalWith: .empty()),
       accessorySelected: searchResultAccessoryTapped.asSignal(onErrorSignalWith: .empty())
@@ -102,27 +105,35 @@ public class TKUIHomeCard: TGTableCard {
         // be called before the routing card is pushed.
         self.clearSearchBar()
         
-        // Push the routing card
+        // Push the Routing card
         self.showRoutes(to: annotation)
         
-        // Notify the delegate
+        // Notify the delegate of the selection
         self.searchResultDelegate?.homeCard(self, selected: annotation)
       })
       .disposed(by: disposeBag)
     
     searchViewModel.accessorySelection
       .emit(onNext: { [weak self] annotation in
+        guard let self = self else { return }
+        
         guard let stop = annotation as? TKUIStopAnnotation else {
           assertionFailure("Expecting a stop annotation, but got \(annotation)")
           return
         }
+        
         // To replicate Apple Maps, once a user dismiss the timetable card,
         // the search bar is cleared and the card in which it's embedeed,
         // i.e., Home card, is moved back to the peaking position. To do
         // this, we call `clearSearchBar` method, however, this **must**
         // be called before the timetable card is pushed.
-        self?.clearSearchBar()
-        self?.showTimetable(for: stop)
+        self.clearSearchBar()
+        
+        // Push the Timetable card
+        self.showTimetable(for: stop)
+        
+        // Notify the delegate of the selection
+        self.searchResultDelegate?.homeCard(self, selected: annotation)
       })
       .disposed(by: disposeBag)
   }
