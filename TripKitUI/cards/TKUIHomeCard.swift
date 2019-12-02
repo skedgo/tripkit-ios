@@ -98,18 +98,18 @@ public class TKUIHomeCard: TGTableCard {
       .emit(onNext: { [weak self] annotation in
         guard let self = self else { return }
         
+        // Push the Routing card
+        self.showRoutes(to: annotation)
+        
+        // Notify the delegate of the selection
+        self.searchResultDelegate?.homeCard(self, selected: annotation)
+        
         // To replicate Apple Maps, once a user dismiss the routing card,
         // the search bar is cleared and the card in which it's embedeed,
         // i.e., Home card, is moved back to the peaking position. To do
         // this, we call `clearSearchBar` method, however, this **must**
         // be called before the routing card is pushed.
         self.clearSearchBar()
-        
-        // Push the Routing card
-        self.showRoutes(to: annotation)
-        
-        // Notify the delegate of the selection
-        self.searchResultDelegate?.homeCard(self, selected: annotation)
       })
       .disposed(by: disposeBag)
     
@@ -122,18 +122,18 @@ public class TKUIHomeCard: TGTableCard {
           return
         }
         
-        // To replicate Apple Maps, once a user dismiss the timetable card,
-        // the search bar is cleared and the card in which it's embedeed,
-        // i.e., Home card, is moved back to the peaking position. To do
-        // this, we call `clearSearchBar` method, however, this **must**
-        // be called before the timetable card is pushed.
-        self.clearSearchBar()
-        
         // Push the Timetable card
         self.showTimetable(for: stop)
         
         // Notify the delegate of the selection
         self.searchResultDelegate?.homeCard(self, selected: annotation)
+        
+        // To replicate Apple Maps, once a user dismiss the timetable card,
+        // the search bar is cleared and the card in which it's embedeed,
+        // i.e., Home card, is moved back to the peaking position. To do
+        // this, we call `clearSearchBar` method, however, this **must**
+        // be called before the timetable card is pushed.
+        self.clearSearchBar()  
       })
       .disposed(by: disposeBag)
   }

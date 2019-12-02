@@ -57,6 +57,10 @@ extension InMemoryHistoryManager {
     result.subtitle = history.annotation.subtitle ?? nil
     result.image = TKAutocompletionResult.image(forType: .history)
     
+    if let aStop = history.annotation as? TKStopCoordinate {
+      result.accessoryButtonImage = TKStyleManager.imageNamed("icon-search-timetable")
+    }
+    
     if searchText.isEmpty {
       result.score = 90
       
