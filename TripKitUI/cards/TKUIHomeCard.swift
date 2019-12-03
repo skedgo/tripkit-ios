@@ -53,6 +53,11 @@ public class TKUIHomeCard: TGTableCard {
     self.init()
   }
   
+  public override func willAppear(animated: Bool) {
+    searchTextPublisher.onNext("")
+    super.willAppear(animated: animated)
+  }
+  
   public override func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
     guard let tableView = (cardView as? TGScrollCardView)?.tableView else {
       preconditionFailure()
@@ -85,7 +90,7 @@ public class TKUIHomeCard: TGTableCard {
     
     searchViewModel = TKUIAutocompletionViewModel(
       providers: autocompleteDataProviders,
-      searchText: searchTextPublisher.asObserver(),
+      searchText: searchTextPublisher.asObservable(),
       selected: tableView.rx.itemSelected.map { dataSource[$0] }.asSignal(onErrorSignalWith: .empty()),
       accessorySelected: searchResultAccessoryTapped.asSignal(onErrorSignalWith: .empty())
     )
@@ -133,7 +138,7 @@ public class TKUIHomeCard: TGTableCard {
         // i.e., Home card, is moved back to the peaking position. To do
         // this, we call `clearSearchBar` method, however, this **must**
         // be called before the timetable card is pushed.
-        self.clearSearchBar()  
+        self.clearSearchBar()
       })
       .disposed(by: disposeBag)
   }

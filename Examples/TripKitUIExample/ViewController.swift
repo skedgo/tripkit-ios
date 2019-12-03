@@ -17,6 +17,8 @@ class MainViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    ExampleCustomizer.configureCards()
+    
     // Customizing the look of TripKitUI, showing how to integrate the
     // inter-app actions from TripKitInterApp
      if #available(iOS 13.0, *) {
@@ -188,7 +190,8 @@ extension MainViewController {
     homeController.autocompletionDataProviders = [
       TKAppleGeocoder(),
       TKSkedGoGeocoder(),
-      InMemoryHistoryManager.shared
+      InMemoryFavoriteManager.shared
+//      InMemoryHistoryManager.shared
     ]
     homeController.searchResultsDelegate = self
     navigationController?.setNavigationBarHidden(true, animated: true)

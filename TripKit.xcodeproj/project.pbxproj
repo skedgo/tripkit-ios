@@ -791,6 +791,9 @@
 		3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE0B1F06BCF200147990 /* Service.swift */; };
 		D3049DFD224C49E600CB59D1 /* TKUIDepartureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3049DFB224C49E600CB59D1 /* TKUIDepartureCell.swift */; };
 		D3049DFE224C49E600CB59D1 /* TKUIDepartureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3049DFC224C49E600CB59D1 /* TKUIDepartureCell.xib */; };
+		D31410992395DFE7009498C5 /* ExampleCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31410982395DFE7009498C5 /* ExampleCustomizer.swift */; };
+		D314109D2395E79E009498C5 /* InMemoryFavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314109C2395E79E009498C5 /* InMemoryFavoriteManager.swift */; };
+		D314109F2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314109E2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift */; };
 		D3211335206BBAF300E5D929 /* TKUILoadingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3211334206BBAF300E5D929 /* TKUILoadingAlertView.swift */; };
 		D3211337206BBB0600E5D929 /* TKUILoadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3211336206BBB0600E5D929 /* TKUILoadingAlertView.xib */; };
 		D32829D3212CFC06006E3D0E /* TKUIEventTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32829D2212CFC06006E3D0E /* TKUIEventTrackable.swift */; };
@@ -1500,6 +1503,9 @@
 		3AFFAE0B1F06BCF200147990 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D3049DFB224C49E600CB59D1 /* TKUIDepartureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIDepartureCell.swift; sourceTree = "<group>"; };
 		D3049DFC224C49E600CB59D1 /* TKUIDepartureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIDepartureCell.xib; sourceTree = "<group>"; };
+		D31410982395DFE7009498C5 /* ExampleCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCustomizer.swift; sourceTree = "<group>"; };
+		D314109C2395E79E009498C5 /* InMemoryFavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFavoriteManager.swift; sourceTree = "<group>"; };
+		D314109E2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InMemoryFavoriteManager+Autocompleting.swift"; sourceTree = "<group>"; };
 		D3211334206BBAF300E5D929 /* TKUILoadingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUILoadingAlertView.swift; sourceTree = "<group>"; };
 		D3211336206BBB0600E5D929 /* TKUILoadingAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUILoadingAlertView.xib; sourceTree = "<group>"; };
 		D32829D2212CFC06006E3D0E /* TKUIEventTrackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIEventTrackable.swift; sourceTree = "<group>"; };
@@ -2388,6 +2394,7 @@
 		3ACF47A2229EEDFE0096860D /* TripKitUIExample */ = {
 			isa = PBXGroup;
 			children = (
+				D314109B2395E779009498C5 /* Autocompleter */,
 				3ACF47A3229EEDFE0096860D /* AppDelegate.swift */,
 				3ACF47A5229EEDFE0096860D /* ViewController.swift */,
 				3ACF47A7229EEDFE0096860D /* Main.storyboard */,
@@ -2395,8 +2402,7 @@
 				3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */,
 				3ACF47AF229EEDFF0096860D /* Info.plist */,
 				3A77B74C22F8815D0082CCAF /* InfoPlist.strings */,
-				D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */,
-				D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */,
+				D31410982395DFE7009498C5 /* ExampleCustomizer.swift */,
 			);
 			path = TripKitUIExample;
 			sourceTree = "<group>";
@@ -2658,6 +2664,17 @@
 				3AE194E4202DE32E0007B49B /* RxTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D314109B2395E779009498C5 /* Autocompleter */ = {
+			isa = PBXGroup;
+			children = (
+				D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */,
+				D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */,
+				D314109C2395E79E009498C5 /* InMemoryFavoriteManager.swift */,
+				D314109E2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift */,
+			);
+			path = Autocompleter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3861,8 +3878,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */,
+				D314109D2395E79E009498C5 /* InMemoryFavoriteManager.swift in Sources */,
 				D33C052423949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift in Sources */,
+				D314109F2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift in Sources */,
 				3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */,
+				D31410992395DFE7009498C5 /* ExampleCustomizer.swift in Sources */,
 				D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -90,6 +90,7 @@ class TKUIAutocompletionViewModel {
       .asObservable()
       .compactMap { $0.provider }
       .asSignal(onErrorSignalWith: .empty())
+    
   }
   
   let sections: Driver<[Section]>

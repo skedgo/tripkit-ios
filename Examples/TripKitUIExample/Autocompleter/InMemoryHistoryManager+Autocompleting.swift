@@ -9,7 +9,7 @@
 import Foundation
 
 import RxSwift
-import TripKit
+import TripKitUI
 
 extension InMemoryHistoryManager: TKAutocompleting {
   
@@ -40,9 +40,7 @@ extension InMemoryHistoryManager {
   
   private func fetchHistory(matching searchText: String) -> [History] {
     let loweredCasedSearchText = searchText.lowercased()
-    return history.filter {
-      $0.annotation.title??.lowercased().contains(loweredCasedSearchText) ?? false
-    }
+    return history.filter { $0.annotation.title??.lowercased().contains(loweredCasedSearchText) ?? false }
   }
   
   static func autocompletionResult(for history: History, searchText: String) -> TKAutocompletionResult? {
@@ -57,7 +55,7 @@ extension InMemoryHistoryManager {
     result.subtitle = history.annotation.subtitle ?? nil
     result.image = TKAutocompletionResult.image(forType: .history)
     
-    if let aStop = history.annotation as? TKStopCoordinate {
+    if history.annotation is TKUIStopAnnotation {
       result.accessoryButtonImage = TKStyleManager.imageNamed("icon-search-timetable")
     }
     
