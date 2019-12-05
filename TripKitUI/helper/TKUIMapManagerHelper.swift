@@ -126,7 +126,7 @@ public class TKUIMapManagerHelper: NSObject {
 extension TKUIMapManagerHelper {
   
   private static func buildOverlaysForShapes(in segment: TKSegment) -> [MKOverlay] {
-    guard let shapes = segment.shortedShapes() else { return [] }
+    guard let shapes = segment.sortedShapes() else { return [] }
 
     let routes = shapes.reduce(into: [TKColoredRoute]()) { acc, shape in
         if let previous = acc.last, previous.canAbsorb(shape) {

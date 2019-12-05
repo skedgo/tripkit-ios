@@ -85,10 +85,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)resetCaches;
 
 @property (nullable, readonly) NSSet<Shape *> *shapes;
-- (nullable NSArray<Shape *> *)shortedShapes;
+- (nullable NSArray<Shape *> *)sortedShapes;
 
 - (NSTimeInterval)duration:(BOOL)includingContinuation;
 @property (nullable, readonly) NSString *notes;
+@property (nullable, readonly) NSString *notesWithoutPlatforms;
 @property (readonly) NSInteger templateHashCode;
 @property (readonly) BOOL isContinuation;
 @property (readonly) BOOL hasCarParks;

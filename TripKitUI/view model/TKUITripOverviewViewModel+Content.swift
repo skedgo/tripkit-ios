@@ -39,13 +39,17 @@ extension TKUITripOverviewViewModel {
     case terminal(TerminalItem)
     case stationary(StationaryItem)
     case moving(MovingItem)
+  
+  struct TimeInfo: Equatable {
+    let actualTime: Date
+    var timetableTime: Date? = nil
   }
   
   struct TerminalItem: Equatable {
     let title: String
     let subtitle: String?
 
-    let time: Date?
+    let time: TimeInfo?
     let timeZone: TimeZone
     let timesAreFixed: Bool
 
@@ -57,10 +61,11 @@ extension TKUITripOverviewViewModel {
     let title: String
     let subtitle: String?
     
-    let startTime: Date?
-    let endTime: Date?
+    let startTime: TimeInfo?
+    let endTime: TimeInfo?
     let timeZone: TimeZone
     let timesAreFixed: Bool
+    let isContinuation: Bool
 
     let topConnection: Line?
     let bottomConnection: Line?
@@ -150,12 +155,22 @@ extension TKUITripOverviewViewModel {
 }
 
 fileprivate extension TKSegment {
+  var departureTimeInfo: TKUITripOverviewViewModel.TimeInfo? {
+    guard type == .scheduled else { return nil }
+    return departureTime.flatMap { TKUITripOverviewViewModel.TimeInfo(actualTime: $0, timetableTime: self.scheduledTimetableStartTime) }
+  }
+  
+  var arrivalTimeInfo: TKUITripOverviewViewModel.TimeInfo? {
+    guard type == .scheduled else { return nil }
+    return arrivalTime.flatMap { TKUITripOverviewViewModel.TimeInfo(actualTime: $0, timetableTime: self.scheduledTimetableEndTime) }
+  }
+  
   func toTerminal(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.TerminalItem {
     let isStart = order == .start
     return TKUITripOverviewViewModel.TerminalItem(
       title: titleWithoutTime,
       subtitle: nil,
-      time: isStart ? departureTime : arrivalTime,
+      time: isStart ? next?.departureTimeInfo : previous?.arrivalTimeInfo,
       timeZone: timeZone,
       timesAreFixed: trip.departureTimeIsFixed,
       connection: (isStart ? next : previous)?.line,
@@ -164,13 +179,16 @@ fileprivate extension TKSegment {
   }
   
   func toStationary(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.StationaryItem {
+    assert(isStationary)
+    
     return TKUITripOverviewViewModel.StationaryItem(
       title: (start?.title ?? nil) ?? Loc.Location,
       subtitle: titleWithoutTime,
-      startTime: departureTime,
-      endTime: arrivalTime,
+      startTime: previous?.arrivalTimeInfo,
+      endTime: next?.departureTimeInfo,
       timeZone: timeZone,
       timesAreFixed: trip.departureTimeIsFixed,
+      isContinuation: false,
       topConnection: previous?.line,
       bottomConnection: next?.line,
       segment: self
@@ -179,17 +197,20 @@ fileprivate extension TKSegment {
   
   func toStationaryBridge(to next: TKSegment) -> TKUITripOverviewViewModel.StationaryItem {
     assert(!isStationary && !next.isStationary)
+    
     return TKUITripOverviewViewModel.StationaryItem(
       title: (next.start?.title ?? end?.title ?? nil) ?? Loc.Location,
       subtitle: nil,
-      startTime: arrivalTime,
-      endTime: next.departureTime,
+      startTime: next.isContinuation ? nil : arrivalTimeInfo,
+      endTime: next.isContinuation ? nil : next.departureTimeInfo,
       timeZone: timeZone,
       timesAreFixed: trip.departureTimeIsFixed,
+      isContinuation: next.isContinuation,
       topConnection: line,
       bottomConnection: next.line,
-      segment: next // Since this is marking the start of "next", it makes most
-                    // sense to display that when tapping on it.
+      segment: next.isContinuation ? self : next // Since this is marking the
+                    // start of "next", it makes most sense to display that
+                    // when tapping on it (unless it's a continuation)
     )
   }
   
@@ -215,8 +236,8 @@ fileprivate extension TKSegment {
     return TKUITripOverviewViewModel.MovingItem(
       title: titleWithoutTime,
       notes: notes,
-      icon: (self as TKTripSegment).tripSegmentModeImage,
-      iconURL: (self as TKTripSegment).tripSegmentModeImageURL,
+      icon: isContinuation ? nil : (self as TKTripSegment).tripSegmentModeImage,
+      iconURL: isContinuation ? nil : (self as TKTripSegment).tripSegmentModeImageURL,
       iconIsTemplate: (self as TKTripSegment).tripSegmentModeImageIsTemplate,
       connection: line,
       actions: TKUITripOverviewCard.config.segmentActionsfactory?(self) ?? [],

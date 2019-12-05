@@ -95,6 +95,10 @@ extension TKSegment {
     return template?.turnByTurnMode
   }
   
+  public var type: TKSegmentType? {
+    return template?.segmentType.flatMap { TKSegmentType(rawValue: $0.intValue) }
+  }
+  
 }
 
 // MARK: - Public transport

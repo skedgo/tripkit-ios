@@ -13,12 +13,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+`TKUITripOverviewCard`:
+
+- Only show times in list for PT segments, highlighting real-time status of times
 - Tweaked handling when the calculated trip starts or ends not directly at the requested location,
   by adding 'near' to the wording and displaying the query's origin and/or destination on the map.
-- `TKUIRoutingResults`: When passing a `TripRequest` that already has trips in it, then
+- Adjusted logic when calculating "minutes" to ignore seconds in dates, to align with time stamps in the UI.
+- Continuation segments: Use a smaller dot for the locations in the list when you stay on the transport.
+- Continuation segments: Hide mode icon in continuation segments
+- Trips starting/ending at a PT stop, prefer to take the name of that stop
+
+  `TKUIRoutingResults`: 
+  
+- When passing a `TripRequest` that already has trips in it, then
   the card will just show those results, rather than querying for new results, and the UI to change
   the trip request will be disabled. To enable it set `request.expandForFavorite = true`.
-- `TKUIRoutingResults`: Updated the title view of the card to bring up the new query input card on tap.
+- Updated the title view of the card to bring up the new query input card on tap.
+- Fixes issue where continuations might not appear on the map
 
 ### Fixed
 

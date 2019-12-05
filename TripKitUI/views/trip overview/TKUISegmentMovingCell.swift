@@ -88,6 +88,8 @@ extension TKUISegmentMovingCell {
     modeImage.setImage(with: item.iconURL, asTemplate: item.iconIsTemplate, placeholder: item.icon)
     modeImage.tintColor = modeImageColor
     
+    modeWrapper.isHidden = item.icon == nil && item.iconURL == nil
+    
     if item.iconURL != nil, !item.iconIsTemplate {
       // If we have a remote image, that's not a template, put it as is on
       // the background
