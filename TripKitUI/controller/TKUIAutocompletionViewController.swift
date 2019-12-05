@@ -39,7 +39,7 @@ public class TKUIAutocompletionViewController: UITableViewController {
   private var viewModel: TKUIAutocompletionViewModel!
   private let disposeBag = DisposeBag()
   
-  private let searchText = PublishSubject<String>()
+  private let searchText = PublishSubject<(String, forced: Bool)>()
   private let accessoryTapped = PublishSubject<TKUIAutocompletionViewModel.Item>()
 
   public init(providers: [TKAutocompleting]) {
@@ -130,7 +130,7 @@ extension TKUIAutocompletionViewController {
 extension TKUIAutocompletionViewController: UISearchResultsUpdating {
   
   public func updateSearchResults(for searchController: UISearchController) {
-    searchText.onNext(searchController.searchBar.text ?? "")
+    searchText.onNext((searchController.searchBar.text ?? "", forced: false))
   }
   
 }

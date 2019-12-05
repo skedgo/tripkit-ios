@@ -22,22 +22,28 @@ public extension Array where Element == TKAutocompleting {
   /// - Returns: Stream of autocompletion results. For each input change, it
   ///     can fire multiple times as more results are found by different
   ///     providers (i.e., elements in this array).
-  func autocomplete(_ text: Observable<String>, mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]> {
+  func autocomplete(_ text: Observable<(String, forced: Bool)>, mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]> {
     
     return text
-      .distinctUntilChanged()
+      .distinctUntilChanged( { $0.0 == $1.0 && $0.1 == $1.1} )
       .throttle(.milliseconds(200), latest: true, scheduler: MainScheduler.asyncInstance)
       .flatMapLatest { input -> Observable<[TKAutocompletionResult]> in
         let autocompletions = self.map { provider in
           provider
-            .autocomplete(input, near: mapRect)
+            .autocomplete(input.0, near: mapRect)
             .map { results -> [TKAutocompletionResult] in
               results.forEach { $0.provider = provider as AnyObject }
               return results
             }
             .asObservable()
+            .startWith([])
           }
-        return Observable.stableRace(autocompletions)
+        
+        if input.forced {
+          return Observable.combineLatest(autocompletions).map { $0.flatMap { $0 } }
+        } else {
+          return Observable.stableRace(autocompletions)
+        }
       }
   }
   

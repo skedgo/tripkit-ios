@@ -26,7 +26,7 @@ extension SGAutocompletionDataSource {
     
     // When the input is changing, update the results
     providers
-      .autocomplete(storage.inputText.asObservable(), mapRect: mapRect)
+      .autocomplete(storage.inputText.asObservable().map { ($0, forced: false) }, mapRect: mapRect)
       .bind(to: storage.results)
       .disposed(by: storage.disposeBag)
     

@@ -29,7 +29,7 @@ public class TKUIHomeCard: TGTableCard {
   
   public var searchResultDelegate: TKUIHomeCardSearchResultsDelegate?
   
-  private let searchTextPublisher = PublishSubject<String>()
+  private let searchTextPublisher = PublishSubject<(String, forced: Bool)>()
   
   private let searchResultAccessoryTapped = PublishSubject<TKUIAutocompletionViewModel.Item>()
   
@@ -54,7 +54,7 @@ public class TKUIHomeCard: TGTableCard {
   }
   
   public override func willAppear(animated: Bool) {
-    searchTextPublisher.onNext("")
+    searchTextPublisher.onNext(("", forced: true))
     super.willAppear(animated: animated)
   }
   
@@ -170,7 +170,7 @@ extension TKUIHomeCard {
 extension TKUIHomeCard: UISearchBarDelegate {
   
   public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    searchTextPublisher.onNext(searchText)
+    searchTextPublisher.onNext((searchText, forced: false))
   }
   
   public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -196,7 +196,7 @@ extension TKUIHomeCard: UISearchBarDelegate {
     searchBar.text = ""
     
     // Clear the results
-    searchTextPublisher.onNext("")
+    searchTextPublisher.onNext(("", forced: false))
     
     // Dismiss the keyboard
     searchBar.resignFirstResponder()
