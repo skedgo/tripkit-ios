@@ -116,7 +116,6 @@ extension TKUIAutocompletionViewModel {
 
     return providers
       .autocomplete(searchText, mapRect: biasMapRect)
-      .debug()
       .map { $0.buildSections(includeAccessory: includeAccessory) + additionalSection }
   }
   
