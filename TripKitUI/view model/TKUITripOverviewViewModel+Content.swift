@@ -39,6 +39,7 @@ extension TKUITripOverviewViewModel {
     case terminal(TerminalItem)
     case stationary(StationaryItem)
     case moving(MovingItem)
+  }
   
   struct TimeInfo: Equatable {
     let actualTime: Date
