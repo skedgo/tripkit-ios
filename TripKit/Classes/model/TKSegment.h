@@ -144,6 +144,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray<Alert *> *)alertsWithAction;
 
 - (TKSegment *)finalSegmentIncludingContinuation;
+- (TKSegment *)originalSegmentIncludingContinuation;
 
 /*
  A singe line instruction which is used on the map screen.

@@ -87,11 +87,12 @@ extension TKUIServiceViewModel.Item {
       isVisited = visit.index.intValue <= disembarkation.index.intValue
     }
     
-    // TODO: Also make nil if there's nothing before of after this service
+    // Important to use service from `embarkation`, not the one from `visit`,
+    // as `visit.service` might a continuation of `embarkation.service`
+    let sortedVisits = embarkation.service.visitsIncludingContinuation()
+
     let serviceColor = (visit.service.color as? UIColor) ?? .black
-    
-    let sortedVisits = visit.service.visitsIncludingContinuation()
-    
+
     let topConnectionColor: UIColor?
     if visit == sortedVisits.first {
       topConnectionColor = nil

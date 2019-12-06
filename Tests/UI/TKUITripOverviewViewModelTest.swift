@@ -130,7 +130,7 @@ extension Array where Element == TKUITripOverviewViewModel.Section.Item {
   var subtitles: [String] {
     compactMap { item -> String? in
       switch item {
-      case .impossible, .moving: return nil
+      case .moving: return nil
       case .stationary(let item): return item.subtitle
       case .terminal(let item): return item.subtitle
       }
@@ -140,7 +140,7 @@ extension Array where Element == TKUITripOverviewViewModel.Section.Item {
   var timeInfos: [TKUITripOverviewViewModel.TimeInfo] {
     flatMap { item -> [TKUITripOverviewViewModel.TimeInfo] in
       switch item {
-      case .impossible, .moving: return []
+      case .moving: return []
       case .stationary(let item): return [item.startTime, item.endTime].compactMap { $0 }
       case .terminal(let item): return [item.time].compactMap { $0 }
       }

@@ -174,8 +174,9 @@ extension Shape: TKDisplayableRoute {
   }
   
   public var selectionIdentifier: String? {
-    if let segment = segment {
+    if let segment = segment?.originalSegmentIncludingContinuation() {
       // Should match the definition in TripKitUI => TKUIAnnotations+TripKit
+      
       switch segment.order {
       case .start: return "start"
       case .regular: return String(segment.templateHashCode)

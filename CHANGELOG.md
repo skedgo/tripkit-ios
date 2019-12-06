@@ -31,6 +31,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Updated the title view of the card to bring up the new query input card on tap.
 - Fixes issue where continuations might not appear on the map
 
+`TKUIServiceCard`:
+
+- Style fixes when displaying services that continue into other services
+
+`TKUITimetableCard`:
+
+- Fixes issue where 
+
 ### Fixed
 
 - Addressed some crashes
