@@ -34,6 +34,7 @@ public extension TKShareHelper {
     public var title: String? = nil
     public var timeType: Time = .leaveASAP
     public var modes: [String] = []
+    public var additional: [URLQueryItem] = []
   }
   
   /// Extracts the query details from a TripGo API-compatible deep link
@@ -68,7 +69,8 @@ public extension TKShareHelper {
       case "modes", "mode":
         modes.append(value)
       default:
-        TKLog.debug("OpenURLHelper", text: "Ignoring \(item.name)=\(value)")
+//        TKLog.debug("OpenURLHelper", text: "Ignoring \(item.name)=\(value)")
+        continue
       }
     }
     

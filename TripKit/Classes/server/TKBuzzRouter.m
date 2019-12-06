@@ -53,7 +53,7 @@
   self.isActive = YES;
   
   NSArray *enabledModes = modes;
-  if (enabledModes == nil) {
+  if (enabledModes == nil || modes.count == 0) {
     NSArray *applicableModes = [request applicableModeIdentifiers];
     NSMutableArray *mutableModes = [NSMutableArray arrayWithArray:applicableModes];
     [mutableModes removeObjectsInArray:[[TKUserProfileHelper hiddenModeIdentifiers] allObjects]];
