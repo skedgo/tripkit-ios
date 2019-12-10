@@ -93,6 +93,7 @@ public class TKUITripOverviewCard: TGTableCard {
     
     tableView.register(TKUISegmentStationaryCell.nib, forCellReuseIdentifier: TKUISegmentStationaryCell.reuseIdentifier)
     tableView.register(TKUISegmentMovingCell.nib, forCellReuseIdentifier: TKUISegmentMovingCell.reuseIdentifier)
+    tableView.register(TKUISegmentAlertCell.nib, forCellReuseIdentifier: TKUISegmentAlertCell.reuseIdentifier)
 
     tableView.dataSource = nil
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUITripOverviewViewModel.Section>(
@@ -104,6 +105,8 @@ public class TKUITripOverviewCard: TGTableCard {
           return TKUITripOverviewCard.stationaryCell(for: item, tableView: tv, indexPath: ip)
         case .moving(let item):
           return self.movingCell(for: item, tableView: tv, indexPath: ip)
+        case .alert(let item):
+          return self.alertCell(for: item, tableView: tv, indexPath: ip)
         }
     })
     
@@ -175,6 +178,21 @@ extension TKUITripOverviewCard {
   private static func stationaryCell(for stationary: TKUITripOverviewViewModel.StationaryItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryCell else { preconditionFailure() }
     cell.configure(with: stationary)
+    return cell
+  }
+  
+  private func alertCell(for alertItem: TKUITripOverviewViewModel.AlertItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentAlertCell.reuseIdentifier, for: indexPath) as? TKUISegmentAlertCell else { preconditionFailure() }
+    cell.configure(with: alertItem)
+    
+    cell.actionButton.rx.tap
+      .subscribe(onNext: { [weak self] in
+        let controller = TKUIAlertViewController()
+        controller.alerts = alertItem.alerts.map { $0 as TKAlert }
+        self?.controller?.present(controller, inNavigator: true)
+      })
+      .disposed(by: cell.disposeBag)
+    
     return cell
   }
 

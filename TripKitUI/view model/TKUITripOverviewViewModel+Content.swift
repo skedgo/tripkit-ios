@@ -17,6 +17,7 @@ extension TKUITripOverviewViewModel {
     case .terminal: return nil
     case .stationary(let item): return item.segment
     case .moving(let item): return item.segment
+    case .alert(let item): return item.segment
     }
   }
   
@@ -39,6 +40,7 @@ extension TKUITripOverviewViewModel {
     case terminal(TerminalItem)
     case stationary(StationaryItem)
     case moving(MovingItem)
+    case alert(AlertItem)
   }
   
   struct TerminalItem: Equatable {
@@ -84,6 +86,22 @@ extension TKUITripOverviewViewModel {
     
     let actions: [TKUITripOverviewCardAction]
     let accessories: [SegmentAccessory]
+    
+    fileprivate let segment: TKSegment
+  }
+  
+  struct AlertItem: Equatable {
+    static func == (lhs: TKUITripOverviewViewModel.AlertItem, rhs: TKUITripOverviewViewModel.AlertItem) -> Bool {
+      return lhs.segment == rhs.segment
+    }
+    
+    let icon: UIImage?
+    let title: String?
+    let actionTitle: String?
+    
+    let connection: Line?
+    
+    var alerts: [Alert] { segment.alerts() }
     
     fileprivate let segment: TKSegment
   }
@@ -134,15 +152,23 @@ extension TKUITripOverviewViewModel {
         ]
 
       } else if let next = next, !next.isStationary {
-        return [
-          .moving(segment.toMoving()),
-          .stationary(segment.toStationaryBridge(to: next))
-        ]
+        var items: [TKUITripOverviewViewModel.Item] = [.moving(segment.toMoving())]
+        
+        if !segment.alerts().isEmpty {
+          items.append(.alert(segment.toAlert()))
+        }
+        
+        items.append(.stationary(segment.toStationaryBridge(to: next)))
+        return items
         
       } else {
-        return [
-          .moving(segment.toMoving()),
-        ]
+        var items: [TKUITripOverviewViewModel.Item] = [.moving(segment.toMoving())]
+        
+        if !segment.alerts().isEmpty {
+          items.append(.alert(segment.toAlert()))
+        }
+        
+        return items
       }
     }
   }
@@ -193,6 +219,10 @@ fileprivate extension TKSegment {
     )
   }
   
+  func toAlert() -> TKUITripOverviewViewModel.AlertItem {
+    return TKUITripOverviewViewModel.AlertItem(icon: nil, title: nil, actionTitle: nil, connection: line, segment: self)
+  }
+  
   func toMoving() -> TKUITripOverviewViewModel.MovingItem {
     var accessories: [TKUITripOverviewViewModel.SegmentAccessory] = []
     
@@ -240,6 +270,7 @@ extension TKUITripOverviewViewModel.Item: IdentifiableType {
     case .terminal(let item): return item.isStart ? "Start" : "End"
     case .stationary(let item): return String(describing: item.segment.templateHashCode)
     case .moving(let item): return String(describing: item.segment.templateHashCode)
+    case .alert(let item): return String(describing: item.segment.templateHashCode)
     }
   }
 }
