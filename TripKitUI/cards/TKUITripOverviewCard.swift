@@ -142,12 +142,25 @@ public class TKUITripOverviewCard: TGTableCard {
     // Handling segment selections
     if let segmentHandler = TKUITripOverviewCard.config.presentSegmentHandler {
       tableView.rx.itemSelected
+        .filter { !dataSource[$0].isAlert }
         .map { (self, self.viewModel.segment(for: dataSource[$0])) }
         .filter { $1 != nil }
-        .map { ($0, $1!)}
+        .map { ($0, $1!) }
         .subscribe(onNext: segmentHandler)
         .disposed(by: disposeBag)
     }
+    
+    // Handling action on alerts
+    tableView.rx.itemSelected
+      .map {
+        switch dataSource[$0] {
+        case .alert(let alertItem): return alertItem.alerts as [TKAlert]
+        default: return []
+        }
+      }
+      .filter { !$0.isEmpty }
+      .subscribe(onNext: show)
+      .disposed(by: disposeBag)
   }
   
   public override func didAppear(animated: Bool) {
@@ -262,6 +275,18 @@ extension TKUITripOverviewCard: TKUIAttributionTableViewControllerDelegate {
   
   public func requestsDismissal(attributor: TKUIAttributionTableViewController) {
     attributor.presentingViewController?.dismiss(animated: true)
+  }
+  
+}
+
+// MARK: - Navigation
+
+extension TKUITripOverviewCard {
+  
+  private func show(_ alerts: [TKAlert]) {
+    let alertController = TKUIAlertViewController()
+    alertController.alerts = alerts
+    controller?.present(alertController, inNavigator: true)
   }
   
 }

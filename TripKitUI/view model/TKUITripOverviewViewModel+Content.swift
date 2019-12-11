@@ -114,6 +114,17 @@ extension TKUITripOverviewViewModel {
   }
 }
 
+extension TKUITripOverviewViewModel.Item {
+  
+  var isAlert: Bool {
+    switch self {
+    case .alert: return true
+    default: return false
+    }
+  }
+  
+}
+
 // MARK: - Creating sections
 
 extension TKUITripOverviewViewModel {
