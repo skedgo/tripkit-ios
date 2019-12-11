@@ -66,8 +66,8 @@ extension TKUISegmentAlertCell {
 extension TKUITripOverviewViewModel.AlertItem {
   
   var defaultIcon: UIImage? { TKInfoIcon.image(for: .warning, usage: .normal) }
-  var defaultTitle: String { "Information" }
-  var defaultSubtitle: String? { alerts.count == 1 ? nil : "\(alerts.count) alerts" }
+  var defaultTitle: String { Loc.Information }
+  var defaultSubtitle: String? { alerts.count == 1 ? nil : Loc.Alerts(alerts.count) }
   
 }
 

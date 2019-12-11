@@ -92,7 +92,7 @@ extension TKUITripOverviewViewModel {
   
   struct AlertItem: Equatable {
     static func == (lhs: TKUITripOverviewViewModel.AlertItem, rhs: TKUITripOverviewViewModel.AlertItem) -> Bool {
-      return lhs.segment == rhs.segment
+      return lhs.segment.alerts() == rhs.segment.alerts()
     }
     
     let icon: UIImage?
