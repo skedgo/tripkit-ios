@@ -8,8 +8,6 @@
 
 import UIKit
 
-import RxSwift
-
 class TKUISegmentAlertCell: UITableViewCell {
   
   @IBOutlet private weak var contentWrapper: UIView!
@@ -18,9 +16,7 @@ class TKUISegmentAlertCell: UITableViewCell {
   @IBOutlet weak var line: UIView!
   @IBOutlet weak var iconView: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var actionButton: UIButton!
-  
-  var disposeBag = DisposeBag()
+  @IBOutlet weak var subtitleLabel: UILabel!
   
   static let nib = UINib(nibName: "TKUISegmentAlertCell", bundle: Bundle(for: TKUISegmentAlertCell.self))
   
@@ -37,18 +33,18 @@ class TKUISegmentAlertCell: UITableViewCell {
     titleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     titleLabel.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
     
-    actionButton.setTitleColor(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1), for: .normal)
-    actionButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    subtitleLabel.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
-    // Configure the view for the selected state
   }
   
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    disposeBag = DisposeBag()
+  override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    UIView.animate(withDuration: animated ? 0.25 : 0) {
+      self.contentWrapper.backgroundColor = highlighted ? #colorLiteral(red: 0.05987539297, green: 0.5114932569, blue: 0.8331292794, alpha: 0.5) : #colorLiteral(red: 0.9294117647, green: 0.9607843137, blue: 0.9921568627, alpha: 1)
+    }
   }
     
 }
@@ -62,7 +58,7 @@ extension TKUISegmentAlertCell {
     
     iconView.image = item.icon ?? item.defaultIcon
     titleLabel.text = item.title ?? item.defaultTitle
-    actionButton.setTitle(item.actionTitle ?? item.defaultActionTitle, for: .normal)
+    subtitleLabel.text = item.subtitle ?? item.defaultSubtitle
   }
   
 }
@@ -71,7 +67,7 @@ extension TKUITripOverviewViewModel.AlertItem {
   
   var defaultIcon: UIImage? { TKInfoIcon.image(for: .warning, usage: .normal) }
   var defaultTitle: String { "Information" }
-  var defaultActionTitle: String { alerts.count == 1 ? "1 alert" : "\(alerts.count) alerts" }
+  var defaultSubtitle: String? { alerts.count == 1 ? nil : "\(alerts.count) alerts" }
   
 }
 

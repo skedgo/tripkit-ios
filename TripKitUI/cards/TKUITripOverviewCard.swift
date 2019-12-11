@@ -196,16 +196,7 @@ extension TKUITripOverviewCard {
   
   private func alertCell(for alertItem: TKUITripOverviewViewModel.AlertItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentAlertCell.reuseIdentifier, for: indexPath) as? TKUISegmentAlertCell else { preconditionFailure() }
-    cell.configure(with: alertItem)
-    
-    cell.actionButton.rx.tap
-      .subscribe(onNext: { [weak self] in
-        let controller = TKUIAlertViewController()
-        controller.alerts = alertItem.alerts.map { $0 as TKAlert }
-        self?.controller?.present(controller, inNavigator: true)
-      })
-      .disposed(by: cell.disposeBag)
-    
+    cell.configure(with: alertItem)    
     return cell
   }
 

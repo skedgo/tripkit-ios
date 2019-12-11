@@ -97,7 +97,7 @@ extension TKUITripOverviewViewModel {
     
     let icon: UIImage?
     let title: String?
-    let actionTitle: String?
+    let subtitle: String?
     
     let connection: Line?
     
@@ -231,7 +231,7 @@ fileprivate extension TKSegment {
   }
   
   func toAlert() -> TKUITripOverviewViewModel.AlertItem {
-    return TKUITripOverviewViewModel.AlertItem(icon: nil, title: nil, actionTitle: nil, connection: line, segment: self)
+    return TKUITripOverviewViewModel.AlertItem(icon: nil, title: nil, subtitle: nil, connection: line, segment: self)
   }
   
   func toMoving() -> TKUITripOverviewViewModel.MovingItem {
