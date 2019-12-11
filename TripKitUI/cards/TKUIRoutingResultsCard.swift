@@ -48,7 +48,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   private weak var modePicker: RoutingModePicker?
   
-  let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
+  private let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
   
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
     configureCell: TKUIRoutingResultsCard.cell
@@ -207,8 +207,13 @@ public class TKUIRoutingResultsCard: TGTableCard {
     // We use this to clear errors as soon as starting a new search
     viewModel.fetchProgress
       .drive(onNext: { [weak self] progress in
-        if case .started = progress {
+        switch progress {
+        case .started:
+          self?.insertProgressIndicator(to: tableView)
           self?.clearError(in: cardView)
+        case .finished:
+          tableView.tableHeaderView = self?.emptyHeader
+        default: break
         }
       })
       .disposed(by: disposeBag)
@@ -554,6 +559,25 @@ extension TKUIRoutingResultsCard {
   
   public func refreshForUpdatedModes() {
     changedModes.onNext(nil)
+  }
+  
+}
+
+// MARK: -
+
+extension TKUIRoutingResultsCard {
+  
+  func insertProgressIndicator(to tableView: UITableView) {
+    let indicator = UIActivityIndicatorView(style: .gray)
+    indicator.startAnimating()
+    indicator.translatesAutoresizingMaskIntoConstraints = false
+    
+    let wrapper = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 44))
+    wrapper.addSubview(indicator)
+    indicator.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
+    indicator.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor).isActive = true
+    
+    tableView.tableHeaderView = wrapper
   }
   
 }
