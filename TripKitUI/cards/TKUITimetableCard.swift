@@ -136,12 +136,8 @@ public class TKUITimetableCard : TGTableCard {
   
   // MARK: - Card Life Cycle
   
-  override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    super.didBuild(cardView: cardView, headerView: headerView)
-    
-    guard let tableView = (cardView as? TGScrollCardView)?.tableView else {
-      preconditionFailure()
-    }
+  override public func didBuild(tableView: UITableView, cardView: TGCardView, headerView: TGHeaderView?) {
+    super.didBuild(tableView: tableView, cardView: cardView, headerView: headerView)
     
     tableView.register(TKUIDepartureCell.nib, forCellReuseIdentifier: TKUIDepartureCell.reuseIdentifier)
     

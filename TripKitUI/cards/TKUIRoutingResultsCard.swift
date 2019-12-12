@@ -119,11 +119,10 @@ public class TKUIRoutingResultsCard: TGTableCard {
     aCoder.encode(TKUIRoutingResultsViewModel.save(request: request), forKey: "viewModel")
   }
   
-  override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    guard
-      let tableView = (cardView as? TGScrollCardView)?.tableView,
-      let mapManager = mapManager as? TKUIRoutingResultsMapManagerType
-      else { preconditionFailure() }
+  override public func didBuild(tableView: UITableView, cardView: TGCardView, headerView: TGHeaderView?) {
+    super.didBuild(tableView: tableView, cardView: cardView, headerView: headerView)
+    
+    guard let mapManager = mapManager as? TKUIRoutingResultsMapManagerType else { preconditionFailure() }
     
     // Build the view model
     

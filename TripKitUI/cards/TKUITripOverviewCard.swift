@@ -86,10 +86,8 @@ public class TKUITripOverviewCard: TGTableCard {
     }
   }
 
-  override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    guard let tableView = (cardView as? TGScrollCardView)?.tableView else {
-      preconditionFailure()
-    }
+  override public func didBuild(tableView: UITableView, cardView: TGCardView, headerView: TGHeaderView?) {
+    super.didBuild(tableView: tableView, cardView: cardView, headerView: headerView)
     
     tableView.register(TKUISegmentStationaryCell.nib, forCellReuseIdentifier: TKUISegmentStationaryCell.reuseIdentifier)
     tableView.register(TKUISegmentMovingCell.nib, forCellReuseIdentifier: TKUISegmentMovingCell.reuseIdentifier)
