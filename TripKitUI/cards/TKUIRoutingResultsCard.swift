@@ -157,6 +157,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     // Table view configuration
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
+    tableView.register(TKUIProgressCell.nib, forCellReuseIdentifier: TKUIProgressCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
     tableView.register(TKUIResultsSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
 
@@ -207,13 +208,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
     // We use this to clear errors as soon as starting a new search
     viewModel.fetchProgress
       .drive(onNext: { [weak self] progress in
-        switch progress {
-        case .started:
-          self?.insertProgressIndicator(to: tableView)
+        if case .started = progress {
           self?.clearError(in: cardView)
-        case .finished:
-          tableView.tableHeaderView = self?.emptyHeader
-        default: break
         }
       })
       .disposed(by: disposeBag)
@@ -294,15 +290,18 @@ public class TKUIRoutingResultsCard: TGTableCard {
 
 extension TKUIRoutingResultsCard {
   
-  static func cell(dataSource: RxDataSources.TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {
-    
-    let showSeparator = dataSource.sectionModels[indexPath.section].items.count > 1
-    
-    let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
-    tripCell.configure(TKUITripCell.Model(item.trip))
-    tripCell.separatorView.isHidden = !showSeparator
-    
-    return tripCell
+  static func cell(dataSource: RxDataSources.TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {    
+    switch item {
+    case .progress:
+      let progressCell = tableView.dequeueReusableCell(withIdentifier: TKUIProgressCell.reuseIdentifier, for: indexPath) as! TKUIProgressCell
+      progressCell.contentView.backgroundColor = .tkBackgroundSecondary // this blends in the background beneath tiles
+      return progressCell
+    case .nano(let trip), .trip(let trip):
+      let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
+      tripCell.configure(TKUITripCell.Model(trip))
+      tripCell.separatorView.isHidden = !(dataSource.sectionModels[indexPath.section].items.count > 1)
+      return tripCell
+    }
   }
   
 }
@@ -349,6 +348,11 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
       assertionFailure()
       return nil
     }
+   
+    // progress cell does not need a footer
+    guard dataSource.sectionModels[section].items.first?.trip != nil else {
+      return nil
+    }
 
     let formatter = TKUITripCell.Formatter()
     formatter.costColor = footerView.costLabel.textColor
@@ -371,6 +375,15 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     }
     
     return footerView
+  }
+  
+  public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    if dataSource.sectionModels[section].items.first?.trip == nil {
+      return .leastNonzeroMagnitude
+    } else {
+      let footer = TKUIResultsSectionFooterView()
+      return footer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+    }
   }
 
   public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -559,25 +572,6 @@ extension TKUIRoutingResultsCard {
   
   public func refreshForUpdatedModes() {
     changedModes.onNext(nil)
-  }
-  
-}
-
-// MARK: -
-
-extension TKUIRoutingResultsCard {
-  
-  func insertProgressIndicator(to tableView: UITableView) {
-    let indicator = UIActivityIndicatorView(style: .gray)
-    indicator.startAnimating()
-    indicator.translatesAutoresizingMaskIntoConstraints = false
-    
-    let wrapper = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 44))
-    wrapper.addSubview(indicator)
-    indicator.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
-    indicator.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor).isActive = true
-    
-    tableView.tableHeaderView = wrapper
   }
   
 }

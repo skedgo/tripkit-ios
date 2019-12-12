@@ -105,7 +105,7 @@ public class TKUIRoutingResultsViewModel {
     realTimeUpdate = TKUIRoutingResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged)
       .asDriver(onErrorDriveWith: .empty())
 
-    sections = TKUIRoutingResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs)
+    sections = TKUIRoutingResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs, progress: fetchProgress.asObservable())
       .asDriver(onErrorJustReturn: [])
 
     let selection = mapInput.tappedMapRoute.startOptional() // default selection
@@ -158,7 +158,8 @@ public class TKUIRoutingResultsViewModel {
     // Navigation
     
     let showTrip = inputs.selected
-      .map { Next.showTrip($0.trip) }
+      .filter { $0.trip != nil }
+      .map { Next.showTrip($0.trip!) }
     
     let modeInput = Observable.combineLatest(requestToShow, builderChanged)
     let presentModes = inputs.tappedShowModeOptions.asObservable()
