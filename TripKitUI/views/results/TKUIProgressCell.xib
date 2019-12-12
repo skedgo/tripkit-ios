@@ -17,19 +17,31 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="QI3-Hg-SXV">
-                        <rect key="frame" x="150" y="4" width="20" height="36"/>
-                    </activityIndicatorView>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZLI-wz-raZ">
+                        <rect key="frame" x="112.5" y="4" width="95.5" height="36"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="QI3-Hg-SXV">
+                                <rect key="frame" x="0.0" y="8" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvS-kM-WeS">
+                                <rect key="frame" x="28" y="9" width="67.5" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="QI3-Hg-SXV" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="KVf-lE-dbG"/>
-                    <constraint firstItem="QI3-Hg-SXV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Wnq-eq-ZQX"/>
-                    <constraint firstItem="QI3-Hg-SXV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lh4-eT-OLm"/>
+                    <constraint firstItem="ZLI-wz-raZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="EOo-Wd-DD1"/>
+                    <constraint firstItem="ZLI-wz-raZ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="tWg-2Y-reB"/>
+                    <constraint firstItem="ZLI-wz-raZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="uZX-s1-cQL"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="spinner" destination="QI3-Hg-SXV" id="Zzm-uG-gzu"/>
+                <outlet property="titleLabel" destination="jvS-kM-WeS" id="Nsc-uM-fg5"/>
             </connections>
             <point key="canvasLocation" x="133" y="154"/>
         </tableViewCell>

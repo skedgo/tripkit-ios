@@ -11,6 +11,7 @@ import UIKit
 public class TKUIProgressCell: UITableViewCell {
   
   @IBOutlet weak var spinner: UIActivityIndicatorView!
+  @IBOutlet weak var titleLabel: UILabel!
   
   public static let nib = UINib(nibName: "TKUIProgressCell", bundle: Bundle(for: TKUIProgressCell.self))
   
@@ -18,6 +19,9 @@ public class TKUIProgressCell: UITableViewCell {
 
   override public func awakeFromNib() {
     super.awakeFromNib()
+    
+    titleLabel.font = TKStyleManager.customFont(forTextStyle: .subheadline)
+    titleLabel.textColor = .tkLabelSecondary
   }
   
   public override func prepareForReuse() {

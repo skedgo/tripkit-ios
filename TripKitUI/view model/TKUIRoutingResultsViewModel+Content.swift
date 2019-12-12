@@ -96,13 +96,21 @@ extension TKUIRoutingResultsViewModel {
   }
   
   private static func sections(for groups: [TripGroup], sortBy: TKTripCostType, expand: TripGroup?, progress: TKResultsFetcher.Progress) -> [Section] {
-    guard let first = groups.first else { return [] }
+    let progressIndicatorSection = TKUIRoutingResultsViewModel.Section(items: [.progress], badge: nil, costs: [:], toggleButton: nil)
+    
+    guard let first = groups.first else {
+      if case .finished = progress {
+        return []
+      } else {
+        // happens when progress is `locating` and `start`
+        return [progressIndicatorSection]
+      }
+    }
     
     let groupSorters = first.request.sortDescriptors(withPrimary: sortBy)
     let sorted = (groups as NSArray).sortedArray(using: groupSorters).compactMap { $0 as? TripGroup }
     
     let tripSorters = first.request.tripTimeSortDescriptors()
-    
     var sections = sorted.compactMap { group -> Section? in
       guard let best = group.visibleTrip else { return nil }
       let items = (Array(group.trips) as NSArray)
@@ -128,13 +136,12 @@ extension TKUIRoutingResultsViewModel {
     
     switch progress {
     case .finished: break
-    default:
-      let progress = TKUIRoutingResultsViewModel.Section(items: [.progress], badge: nil, costs: [:], toggleButton: nil)
-      sections.insert(progress, at: 0)
+    default: sections.insert(progressIndicatorSection, at: 0)
     }
     
     return sections
   }
+  
 }
 
 extension TripRequest {
