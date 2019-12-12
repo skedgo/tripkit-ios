@@ -289,6 +289,10 @@ extension Loc {
     let format = NSLocalizedString("In the meantime, let's keep exploring %@ and enjoy your trips", tableName: "TripKit", bundle: .tripKit, comment: "%@ is replaced with app name")
     return String(format: format, appName)
   }
+  
+  public static var Information: String {
+    return NSLocalizedString("Information", tableName: "TripKit", bundle: .tripKit, comment: "")
+  }
 
   public static func Alerts(_ count: Int) -> String {
     if count == 1 {
