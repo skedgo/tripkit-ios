@@ -113,8 +113,12 @@ public class TKUIRoutingResultsViewModel {
       .asDriver(onErrorDriveWith: .empty())
     
     originDestination = builderChanged
-      .map { $0.originDestination }
+      .flatMapLatest { $0.fetchOriginDestination() }
       .asDriver(onErrorDriveWith: .empty())
+    
+//    originDestination = builderChanged
+//      .map { $0.originDestination }
+//      .asDriver(onErrorDriveWith: .empty())
 
     timeTitle = requestToShow
       .map { $0.timeString }

@@ -324,6 +324,30 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
     )
   }
   
+  func fetchOriginDestination() -> Observable<(origin: String?, destination: String?)> {
+    let originObservable: Observable<String?>
+    if let origin = self.origin {
+      originObservable = CLGeocoder().rx
+        .reverseGeocode(namedCoordinate: origin)
+        .catchErrorJustReturn(nil)
+        .startWith(origin.title)
+    } else {
+      originObservable = .just(nil)
+    }
+    
+    let destinationObservable: Observable<String?>
+    if let destination = self.destination {
+      destinationObservable = CLGeocoder().rx
+        .reverseGeocode(namedCoordinate: destination)
+        .catchErrorJustReturn(nil)
+        .startWith(destination.title)
+    } else {
+      destinationObservable = .just(nil)
+    }
+    
+    return Observable.combineLatest(originObservable, destinationObservable) { (origin: $0, destination: $1) }
+  }
+  
 }
 
 // MARK: - Protocol conformance
@@ -335,4 +359,29 @@ public func ==(lhs: TKUIRoutingResultsViewModel.RouteBuilder, rhs: TKUIRoutingRe
     && lhs.mode == rhs.mode
 }
 extension TKUIRoutingResultsViewModel.RouteBuilder: Equatable { }
+
+// MARK: -
+
+extension Reactive where Base: CLGeocoder {
+  
+  func reverseGeocode(namedCoordinate: TKNamedCoordinate) -> Observable<String?> {
+    return Observable.create { subscriber in
+      
+      let location = CLLocation(latitude: namedCoordinate.coordinate.latitude, longitude: namedCoordinate.coordinate.longitude)
+      let geocoder = CLGeocoder()
+      geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+        if let error = error {
+          subscriber.onError(error)
+        } else {
+          subscriber.onNext(placemarks?.first?.name)
+          subscriber.onCompleted()
+        }
+      }
+      
+      return Disposables.create()
+      
+    }
+  }
+  
+}
 
