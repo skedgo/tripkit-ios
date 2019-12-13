@@ -253,6 +253,31 @@ extension TripRequest {
     
   }
   
+  func reverseGeocodeLocations() -> Observable<(origin: String?, destination: String?)> {
+    let originObservable: Observable<String?>
+    if let from = self.fromLocation.title, from != Loc.Location {
+      originObservable = .just(from)
+    } else {
+      originObservable = CLGeocoder().rx
+        .reverseGeocode(namedCoordinate: self.fromLocation)
+        .catchErrorJustReturn(nil)
+        .startWith(nil)
+    }
+    
+    
+    let destinationObservable: Observable<String?>
+    if let to = self.toLocation.title, to != Loc.Location {
+      destinationObservable = .just(to)
+    } else {
+      destinationObservable = CLGeocoder().rx
+        .reverseGeocode(namedCoordinate: self.toLocation)
+        .catchErrorJustReturn(nil)
+        .startWith(nil)
+    }
+    
+    return Observable.combineLatest(originObservable, destinationObservable) { (origin: $0, destination: $1) }
+  }
+  
 }
 
 extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
@@ -289,12 +314,6 @@ extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
 
 extension TKUIRoutingResultsViewModel.RouteBuilder {
   
-  var originDestination: (String?, String?) {
-    let destinationName = destination?.title ?? nil
-    let originName = origin?.title ?? nil
-    return (originName, destinationName)
-  }
-  
   var timeZone: TimeZone {
     switch time {
     case .leaveASAP, .leaveAfter:
@@ -324,30 +343,6 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
     )
   }
   
-  func fetchOriginDestination() -> Observable<(origin: String?, destination: String?)> {
-    let originObservable: Observable<String?>
-    if let origin = self.origin {
-      originObservable = CLGeocoder().rx
-        .reverseGeocode(namedCoordinate: origin)
-        .catchErrorJustReturn(nil)
-        .startWith(origin.title)
-    } else {
-      originObservable = .just(nil)
-    }
-    
-    let destinationObservable: Observable<String?>
-    if let destination = self.destination {
-      destinationObservable = CLGeocoder().rx
-        .reverseGeocode(namedCoordinate: destination)
-        .catchErrorJustReturn(nil)
-        .startWith(destination.title)
-    } else {
-      destinationObservable = .just(nil)
-    }
-    
-    return Observable.combineLatest(originObservable, destinationObservable) { (origin: $0, destination: $1) }
-  }
-  
 }
 
 // MARK: - Protocol conformance
@@ -366,11 +361,12 @@ extension Reactive where Base: CLGeocoder {
   
   func reverseGeocode(namedCoordinate: TKNamedCoordinate) -> Observable<String?> {
     return Observable.create { subscriber in
-      
+      print("reverse geocoding \(namedCoordinate.title)")
       let location = CLLocation(latitude: namedCoordinate.coordinate.latitude, longitude: namedCoordinate.coordinate.longitude)
       let geocoder = CLGeocoder()
       geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
         if let error = error {
+          print("reverse geocoding encountered error")
           subscriber.onError(error)
         } else {
           subscriber.onNext(placemarks?.first?.name)

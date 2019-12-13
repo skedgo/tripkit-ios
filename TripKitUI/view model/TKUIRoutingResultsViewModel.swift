@@ -112,13 +112,9 @@ public class TKUIRoutingResultsViewModel {
     selectedItem = Observable.combineLatest(selection.asObservable(), sections.asObservable()) { $1.find($0) ?? $1.bestItem }
       .asDriver(onErrorDriveWith: .empty())
     
-    originDestination = builderChanged
-      .flatMapLatest { $0.fetchOriginDestination() }
+    originDestination = requestChanged
+      .flatMapLatest { $0.0.reverseGeocodeLocations() }
       .asDriver(onErrorDriveWith: .empty())
-    
-//    originDestination = builderChanged
-//      .map { $0.originDestination }
-//      .asDriver(onErrorDriveWith: .empty())
 
     timeTitle = requestToShow
       .map { $0.timeString }
