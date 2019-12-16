@@ -139,6 +139,11 @@ extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
     case toSearchBar: switchMode.onNext(.destination)
     default: assertionFailure()
     }
+    
+    // Before editing begins, we publish the current search text so that
+    // the autocompletion shows immediate results if available.
+    typed.onNext(searchBar.text ?? "")
+    
     return true
   }
   
