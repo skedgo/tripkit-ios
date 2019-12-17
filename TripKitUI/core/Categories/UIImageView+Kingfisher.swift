@@ -48,12 +48,12 @@ extension UIImageView {
 
 extension UIButton {
   
-  public func setImage(with url: URL?, for state: UIControlState) {
+  public func setImage(with url: URL?, for state: UIControl.State) {
     setImage(with: url, for: state, placeholder: nil)
   }
   
   @objc(setImageWithURL:forState:placeholderImage:)
-  public func setImage(with url: URL?, for state: UIControlState, placeholder: SGKImage?) {
+  public func setImage(with url: URL?, for state: UIControl.State, placeholder: SGKImage?) {
     
     let options: KingfisherOptionsInfo?
     if let url = url, url.path.contains("@2x") {

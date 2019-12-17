@@ -26,12 +26,7 @@ extension SegmentTemplate {
         return nil
       }
     
-    let template: SegmentTemplate
-    if #available(iOS 10.0, macOS 10.12, *) {
-      template = SegmentTemplate(context: context)
-    } else {
-      template = NSEntityDescription.insertNewObject(forEntityName: "SegmentTemplate", into: context) as! SegmentTemplate
-    }
+    let template = SegmentTemplate(context: context)
     
     template.action = dict["action"] as? String
     template.visibility = NSNumber(value: visibility.rawValue)

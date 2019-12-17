@@ -122,7 +122,7 @@ public class TripBookingCoordinator {
   fileprivate var disposeBag = DisposeBag()
   
   fileprivate func machine(for segment: TKSegment) -> Variable<TKBookingStateMachine>? {
-    guard let index = trip?.segments().index(of: segment) else { return nil }
+    guard let index = trip?.segments().firstIndex(of: segment) else { return nil }
     return stateMachines?[index]
   }
   

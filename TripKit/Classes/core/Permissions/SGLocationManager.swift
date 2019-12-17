@@ -10,16 +10,16 @@ import Foundation
 
 public extension SGLocationManager {
   
-  public enum LocalizationError: Error {
+  enum LocalizationError: Error {
     
     case featureNotAvailable
     case authorizationDenied
     
   }
   
-  public static let shared = SGLocationManager.__sharedInstance()
+  static let shared = SGLocationManager.__sharedInstance()
 
-  public var currentLocation: MKAnnotation {
+  var currentLocation: MKAnnotation {
     return __currentLocationPlaceholder()
   }
   
@@ -52,6 +52,9 @@ extension SGLocationManager {
     case .denied: return .denied
     case .restricted: return .restricted
     case .notDetermined: return .notDetermined
+    @unknown default:
+      assertionFailure("Unexpected case, treating as not determined.")
+      return .notDetermined
     }
   }
   

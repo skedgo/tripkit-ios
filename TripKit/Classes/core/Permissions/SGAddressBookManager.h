@@ -29,7 +29,7 @@ typedef enum {
 
 typedef void (^SGAddressBookManagerCompletionBlock)(NSString *string, NSArray *results);
 
-//NS_CLASS_DEPRECATED_IOS(2_0, 9_0, "Use SGContactsManager instead")
+NS_CLASS_DEPRECATED_IOS(2_0, 9_0, "Use SGContactsManager from TripKit 4 instead")
 @interface SGAddressBookManager : SGPermissionManager <SGAutocompletionDataProvider, SGGeocoder>
 
 @property (nonatomic, strong) id<SGGeocoder> helperGeocoder;

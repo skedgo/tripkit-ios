@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, SGAppIds) {
   SGAppIdUnknown
 };
 
-typedef NS_ENUM(NSInteger, SGTimeType) {
+typedef NS_CLOSED_ENUM(NSInteger, SGTimeType) {
   SGTimeTypeLeaveASAP     = 0,
   SGTimeTypeLeaveAfter    = 1,
   SGTimeTypeArriveBefore  = 2,

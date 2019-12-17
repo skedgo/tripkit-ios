@@ -14,13 +14,13 @@ import RxSwift
 
 public extension TKShareHelper {
   
-  public enum ExtractionError: String, Error {
+  enum ExtractionError: String, Error {
     case invalidURL
     case invalidCoordinate
     case missingNecessaryInformation
   }
 
-  public struct QueryDetails {
+  struct QueryDetails {
     public enum Time {
       case leaveASAP
       case leaveAfter(Date)
@@ -36,7 +36,7 @@ public extension TKShareHelper {
   /// Extracts the query details from a TripGo API-compatible deep link
   /// - parameter url: TripGo API-compatible deep link
   /// - parameter geocoder: Geocoder used for filling in missing information
-  public static func queryDetails(for url: URL, using geocoder: SGGeocoder) -> Observable<QueryDetails> {
+  static func queryDetails(for url: URL, using geocoder: SGGeocoder) -> Observable<QueryDetails> {
     
     guard
       let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
@@ -152,7 +152,7 @@ extension TKShareHelper.QueryDetails {
 
 public extension TKShareHelper {
 
-  public static func meetingDetails(for url: URL, using geocoder: SGGeocoder) -> Observable<QueryDetails> {
+  static func meetingDetails(for url: URL, using geocoder: SGGeocoder) -> Observable<QueryDetails> {
     guard
       let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
       let items = components.queryItems
@@ -185,13 +185,13 @@ public extension TKShareHelper {
 
 public extension TKShareHelper {
   
-  public struct StopDetails {
+  struct StopDetails {
     public let region: String
     public let code: String
     public let filter: String?
   }
   
-  public static func stopDetails(for url: URL) -> Observable<StopDetails> {
+  static func stopDetails(for url: URL) -> Observable<StopDetails> {
     let pathComponents = url.path.components(separatedBy: "/")
     guard pathComponents.count >= 4 else { return Observable.empty() }
     
@@ -219,13 +219,13 @@ extension TKShareHelper.StopDetails {
 
 public extension TKShareHelper {
   
-  public struct ServiceDetails {
+  struct ServiceDetails {
     public let region: String
     public let stopCode: String
     public let serviceID: String
   }
 
-  public static func serviceDetails(for url: URL) -> Observable<ServiceDetails> {
+  static func serviceDetails(for url: URL) -> Observable<ServiceDetails> {
     let pathComponents = url.path.components(separatedBy: "/")
     if pathComponents.count >= 5 {
       let region = pathComponents[2]
@@ -277,7 +277,7 @@ extension MKAnnotation {
     }
     
     return Observable.create() { observer in
-      SGBaseGeocoder.geocode(geocodable, using: geocoder, near: MKMapRectWorld) { (result: SGBaseGeocoder.Result) -> Void in
+      SGBaseGeocoder.geocode(geocodable, using: geocoder, near: .world) { (result: SGBaseGeocoder.Result) -> Void in
         switch result {
         case .success:
           observer.onNext(self)

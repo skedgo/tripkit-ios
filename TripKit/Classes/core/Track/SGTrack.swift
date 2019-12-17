@@ -205,7 +205,7 @@ public protocol SGTrackItemUserCustomizable: SGTrackItem {
     /**
      The editing style for how to display this track item in the list.
      */
-    var editingStyle: UITableViewCellEditingStyle { get }
+    var editingStyle: UITableViewCell.EditingStyle { get }
   #endif
 
   /**

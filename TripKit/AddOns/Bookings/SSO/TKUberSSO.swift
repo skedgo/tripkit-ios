@@ -73,11 +73,7 @@ public enum TKUberSSO : SSOCompatible {
         preconditionFailure("You shouldn't call `start` if `canHandle(mode:)` returns false")
     }
     
-    if #available(iOS 10.0, *) {
-      UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    } else {
-      UIApplication.shared.openURL(url)
-    }
+    UIApplication.shared.open(url)
   }
   
   public static func handle(_ url: URL) throws -> OAuthData? {
@@ -128,4 +124,9 @@ public enum TKUberSSO : SSOCompatible {
     )
   }
   
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

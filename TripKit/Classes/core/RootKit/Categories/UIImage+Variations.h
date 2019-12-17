@@ -14,11 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SGKImage (Variations)
 
-- (SGKImage *)imageWithTintColor:(SGKColor *)tintColor;
+- (SGKImage *)tk_imageWithTintColor:(SGKColor *)tintColor;
 
-- (SGKImage *)imageOnBackgroundImage:(SGKImage *)background;
+- (SGKImage *)tk_imageOnBackgroundImage:(SGKImage *)background;
 
-- (SGKImage *)monochromeImage;
+- (SGKImage *)tk_monochromeImage;
 
 @end
 

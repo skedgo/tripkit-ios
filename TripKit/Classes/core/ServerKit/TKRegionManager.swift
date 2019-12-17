@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 public extension NSNotification.Name {
-  public static let TKRegionManagerUpdatedRegions = NSNotification.Name(rawValue: "SVKRegionManagerRegionsUpdatedNotification")
+  static let TKRegionManagerUpdatedRegions = NSNotification.Name(rawValue: "SVKRegionManagerRegionsUpdatedNotification")
 }
 
 public class TKRegionManager: NSObject {
@@ -212,7 +212,9 @@ extension TKRegionManager {
     case .vehicle:
       part = details.vehicleIcon
     case .alert:
-      part = nil // not supported for modes
+      return nil // not supported
+    @unknown default:
+      return nil
     }
     guard let fileNamePart = part else { return nil }
     return SVKServer.imageURL(forIconFileNamePart: fileNamePart, of: iconType)

@@ -46,6 +46,8 @@ extension SGStyleManager {
       fullName = "icon-map-info-\(partName)"
     case .alert:
       fullName = "icon-alert-yellow-map"
+    @unknown default:
+      return nil
     }
     if let image = optionalImageNamed(fullName) {
       imageCache.setObject(image, forKey: key)

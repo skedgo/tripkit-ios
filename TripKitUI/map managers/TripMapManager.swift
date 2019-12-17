@@ -39,7 +39,7 @@ extension TripMapManager {
       && mapView.visibleMapRect.origin.x >= 0 // might happen if map view is minimized
     {
       let fromToRect = [trip.request.fromLocation, trip.request.toLocation].mapRect
-      forzeZoom = (!MKMapRectIntersectsRect(mapView.visibleMapRect, fromToRect))
+      forzeZoom = (!mapView.visibleMapRect.intersects(fromToRect))
     }
     
     // don't force zooma gain
@@ -119,9 +119,7 @@ extension TripMapManager {
     zoomTo += primaries.map { $0 as MKAnnotation }
     addPrimaryVehicles(primaries, secondaryVehicles: alternatives)
     
-    if #available(iOS 9.0, *) {
-      mapView.showsTraffic = affectedByTraffic
-    }
+    mapView.showsTraffic = affectedByTraffic
     
     if !zoomTo.isEmpty {
       mapView.zoom(to: zoomTo, edgePadding: delegate()?.mapManagerEdgePadding(self) ?? UIEdgeInsets.zero, animated: animated)

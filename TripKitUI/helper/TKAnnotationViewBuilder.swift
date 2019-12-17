@@ -132,14 +132,14 @@ private extension TKAnnotationViewBuilder {
     if let url = glyphable.glyphImageURL {
       ImageDownloader.default.downloadImage(
         with: url,
-        options: [.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate))]
-      ) { image, error, downloadedURL, _ in
+        options: [.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate))])
+      { result in
         guard
-          let image = image,
+          let imageResult = try? result.get(),
           let latest = view.annotation as? TKGlyphableAnnotation,
-          latest.glyphImageURL == downloadedURL
+          latest.glyphImageURL == imageResult.url
           else { return }
-        view.glyphImage = image
+        view.glyphImage = imageResult.image
       }
     }
     
@@ -157,7 +157,7 @@ private extension TKAnnotationViewBuilder {
 // MARK: - Vehicles
 
 fileprivate extension TKAnnotationViewBuilder {
-  fileprivate func build(for vehicle: Vehicle) -> MKAnnotationView {
+  func build(for vehicle: Vehicle) -> MKAnnotationView {
     let identifier = "VehicleAnnotationView"
     
     let vehicleView: TKVehicleAnnotationView
@@ -195,7 +195,7 @@ fileprivate extension TKVehicleAnnotationView {
 
 fileprivate extension TKAnnotationViewBuilder {
   
-  fileprivate func semaphoreView(for annotation: MKAnnotation) -> SGSemaphoreView {
+  func semaphoreView(for annotation: MKAnnotation) -> SGSemaphoreView {
     let identifier = "Semaphore"
     
     let semaphoreView: SGSemaphoreView
@@ -208,7 +208,7 @@ fileprivate extension TKAnnotationViewBuilder {
     return semaphoreView
   }
   
-  fileprivate func semaphoreLabel(for bearing: CLLocationDirection?) -> SGSemaphoreLabel {
+  func semaphoreLabel(for bearing: CLLocationDirection?) -> SGSemaphoreLabel {
     if let bearing = bearing, let heading = heading {
       return (bearing - heading) > 180 ? .onRight : .onLeft
     } else {
@@ -216,7 +216,7 @@ fileprivate extension TKAnnotationViewBuilder {
     }
   }
 
-  fileprivate func buildSemaphore(for point: STKDisplayableTimePoint) -> MKAnnotationView {
+  func buildSemaphore(for point: STKDisplayableTimePoint) -> MKAnnotationView {
     let semaphoreView = self.semaphoreView(for: point)
     
     // Set time stamp on the side opposite to direction of travel
@@ -229,7 +229,7 @@ fileprivate extension TKAnnotationViewBuilder {
     return semaphoreView
   }
   
-  fileprivate func buildSemaphore(for segment: TKSegment) -> MKAnnotationView {
+  func buildSemaphore(for segment: TKSegment) -> MKAnnotationView {
     let semaphoreView = self.semaphoreView(for: segment)
     
     // Only public transport get the time stamp. And they get it on the side opposite to the
@@ -286,7 +286,7 @@ fileprivate extension SGSemaphoreView {
 
 fileprivate extension TKAnnotationViewBuilder {
   
-  fileprivate func buildCircle(for visit: StopVisits) -> MKAnnotationView {
+  func buildCircle(for visit: StopVisits) -> MKAnnotationView {
     let color: SGKColor?
     if asTravelled, let serviceColor = visit.service.color as? SGKColor {
       color = serviceColor
@@ -296,7 +296,7 @@ fileprivate extension TKAnnotationViewBuilder {
     return buildCircle(for: visit, color: color)
   }
   
-  fileprivate func buildCircle(for annotation: MKAnnotation, color: SGKColor? = nil) -> MKAnnotationView {
+  func buildCircle(for annotation: MKAnnotation, color: SGKColor? = nil) -> MKAnnotationView {
     let identifier = asLarge ? "LargeCircleView" : "SmallCircleView"
     
     let circleView: CircleAnnotationView
@@ -328,7 +328,7 @@ fileprivate extension TKAnnotationViewBuilder {
 
 fileprivate extension TKAnnotationViewBuilder {
 
-  fileprivate func build(for displayable: STKDisplayablePoint, enableClustering: Bool) -> MKAnnotationView {
+  func build(for displayable: STKDisplayablePoint, enableClustering: Bool) -> MKAnnotationView {
     
     let identifier: String
     if #available(iOS 11, *), displayable is MKClusterAnnotation {
@@ -379,7 +379,7 @@ fileprivate extension STKDisplayablePoint {
 
 public extension TKAnnotationViewBuilder {
   
-  @objc public static func update(annotationView: MKAnnotationView, forHeading heading: CLLocationDirection) {
+  @objc static func update(annotationView: MKAnnotationView, forHeading heading: CLLocationDirection) {
     
     if let vehicleView = annotationView as? TKVehicleAnnotationView, let vehicle = vehicleView.annotation as? Vehicle {
       vehicleView.rotateVehicle(heading: heading, bearing: vehicle.bearing?.doubleValue)

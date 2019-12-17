@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIImageView {
-  @objc public convenience init(asRealTimeAccessoryImageAnimated animated: Bool, tintColor: UIColor? = nil) {
+  @objc convenience init(asRealTimeAccessoryImageAnimated animated: Bool, tintColor: UIColor? = nil) {
     self.init()
     
     let images = UIImageView.realTimeAccessoryImage(animated, tintColor: tintColor)
@@ -33,9 +33,9 @@ public extension UIImageView {
       var image3 = TripKitUIBundle.imageNamed("icon-signal-bars3")
       
       if let tintColor = tintColor {
-        image1 = image1.withTintColor(tintColor)
-        image2 = image2.withTintColor(tintColor)
-        image3 = image3.withTintColor(tintColor)
+        image1 = image1.tk_image(withTintColor: tintColor)
+        image2 = image2.tk_image(withTintColor: tintColor)
+        image3 = image3.tk_image(withTintColor: tintColor)
       }
       return [image1, image2, image3, image3, image3, image3, image3, image3]
     } else {
@@ -43,12 +43,12 @@ public extension UIImageView {
     }
   }
   
-  @objc public convenience init(asWheelchairAccessoryImageWithTintColor tintColor: UIColor?) {
+  @objc convenience init(asWheelchairAccessoryImageWithTintColor tintColor: UIColor?) {
     self.init()
     
     let image = SGStyleManager.imageNamed("icon-wheelchair")
     if let tintColor = tintColor {
-      self.image = image.withTintColor(tintColor)
+      self.image = image.tk_image(withTintColor: tintColor)
     } else {
       self.image = image
     }
