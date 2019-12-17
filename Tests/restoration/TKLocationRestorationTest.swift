@@ -12,8 +12,6 @@ import CoreLocation
 
 @testable import TripKit
 
-
-@available(iOS 10.0, *)
 class TKLocationRestorationTest: XCTestCase {
     
   func testRestoringNamedCoordinate() {

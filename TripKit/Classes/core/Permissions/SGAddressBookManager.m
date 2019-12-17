@@ -141,7 +141,7 @@
 - (SGAuthorizationStatus)authorizationStatus
 {
   if ([self authorizationRestrictionsApply]) {
-    int status = ABAddressBookGetAuthorizationStatus();
+    ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
     switch (status) {
       case kABAuthorizationStatusAuthorized:
         return SGAuthorizationStatusAuthorized;

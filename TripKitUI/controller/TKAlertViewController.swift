@@ -85,7 +85,7 @@ public class TKAlertViewController: UITableViewController {
     
     self.title = Loc.Alerts
     
-    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 150
     tableView.register(UINib(nibName: "TKAlertCell", bundle: Bundle(for: TKAlertCell.self)), forCellReuseIdentifier: "TKAlertCell")
     SGStyleManager.styleTableView(forTileList: tableView)

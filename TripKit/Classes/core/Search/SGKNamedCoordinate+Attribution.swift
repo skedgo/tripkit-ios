@@ -19,7 +19,7 @@ public extension SGKNamedCoordinate {
     }
   }
   
-  public var dataSources: [API.DataAttribution] {
+  var dataSources: [API.DataAttribution] {
     get {
       guard let json = data["dataSources"] as Any?, let sanitized = TKJSONSanitizer.sanitize(json) else { return [] }
       return (try? JSONDecoder().decode([API.DataAttribution].self, withJSONObject: sanitized)) ?? []

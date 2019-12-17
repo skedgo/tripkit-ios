@@ -50,7 +50,7 @@
     }
     
     if (image) {
-      image = [image monochromeImage];
+      image = [image tk_monochromeImage];
       [self.monochromeImageCache setObject:image forKey:imageName];
     } else {
       DLog(@"Missing image: %@", imageName);

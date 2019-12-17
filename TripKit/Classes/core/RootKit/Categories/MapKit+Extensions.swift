@@ -50,20 +50,20 @@ extension MKCoordinateRegion {
 extension MKMapRect {
   public static func forCoordinateRegion(_ region: MKCoordinateRegion) -> MKMapRect
   {
-    let a = MKMapPointForCoordinate(region.topLeft)
-    let b = MKMapPointForCoordinate(region.bottomRight)
+    let a = MKMapPoint(region.topLeft)
+    let b = MKMapPoint(region.bottomRight)
     
-    return MKMapRectMake(min(a.x,b.x), min(a.y,b.y), abs(a.x-b.x), abs(a.y-b.y))
+    return MKMapRect(x: min(a.x,b.x), y: min(a.y,b.y), width: abs(a.x-b.x), height: abs(a.y-b.y))
   }
 }
 
 extension Array where Element: MKAnnotation {
   
   public var mapRect: MKMapRect {
-    return reduce(MKMapRectNull) { prior, annotation in
-      let point = MKMapPointForCoordinate(annotation.coordinate)
+    return reduce(.null) { prior, annotation in
+      let point = MKMapPoint(annotation.coordinate)
       let miniRect = MKMapRect(origin: point, size: MKMapSize(width: 1, height: 1))
-      return MKMapRectUnion(prior, miniRect)
+      return prior.union(miniRect)
     }
   }
   

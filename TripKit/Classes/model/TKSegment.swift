@@ -18,7 +18,7 @@ extension TKSegment {
     guard let trip = trip else { return false }
     
     // A segment should be in its trip's segments
-    guard let _ = trip.segments().index(of: self) else { return false }
+    guard let _ = trip.segments().firstIndex(of: self) else { return false }
     
     // Passed all checks
     return true
@@ -197,6 +197,9 @@ extension TKSegment: STKDisplayablePoint {
       
     case .alert:
       return nil // not supported for segments
+
+    @unknown default:
+      return nil
     }
     
     if let part = iconFileNamePart {
@@ -279,8 +282,11 @@ extension TKSegment: STKTripSegment {
       let mutable = NSMutableString(string: rawString)
       fill(inTemplates: mutable, inTitle: true)
       return mutable as String
+    } else if let date = self.departureTime {
+      return date
     } else {
-      return self.departureTime
+      assertionFailure("Uh-oh. No instruction and no date?")
+      return ""
     }
   }
   
@@ -340,7 +346,7 @@ extension TKSegment: STKTripSegment {
       return ""
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
       
       guard order() == .end else { return nil }
       let format = NSLocalizedString("I'll arrive at %@ at %@", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime)")

@@ -11,7 +11,7 @@ import Foundation
 public extension AKAccountViewController {
   
   @objc
-  override public func configureLabelCell(_ labelCell: AKLabelCell, withItem item: AMKItem) {
+  override func configureLabelCell(_ labelCell: AKLabelCell, withItem item: AMKItem) {
     super.configureLabelCell(labelCell, withItem: item)
     
     if item.actionType == .destructive {

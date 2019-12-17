@@ -21,7 +21,7 @@ public extension Reactive where Base : SGLocationManager {
   ///
   /// - Parameter seconds: Maximum time to give GPS
   /// - Returns: Observable of user's current location; can error out
-  public func fetchCurrentLocation(within seconds: TimeInterval) -> Observable<CLLocation> {
+  func fetchCurrentLocation(within seconds: TimeInterval) -> Observable<CLLocation> {
     guard base.isAuthorized() else {
       return tryAuthorization().flatMap { authorized -> Observable<CLLocation> in
         if authorized {
@@ -52,7 +52,7 @@ public extension Reactive where Base : SGLocationManager {
   /// not granted to the device's location services.
   ///
   /// - Returns: Observable of user's current location; can error out
-  public var currentLocation: Observable<CLLocation> {
+  var currentLocation: Observable<CLLocation> {
     
     return Observable.create { subscriber in
       let date = Date()
@@ -85,7 +85,7 @@ public extension Reactive where Base : SGLocationManager {
   /// - Note: Internally, each subscription creates a new
   /// observable, and a new location manager, so you're
   /// encouraged to share a single subscription.
-  public var deviceHeading: Observable<CLHeading> {
+  var deviceHeading: Observable<CLHeading> {
     
     return Observable.create { subscriber in
       
@@ -109,7 +109,7 @@ public extension Reactive where Base : SGLocationManager {
 #endif
 
   
-  public func tryAuthorization() -> Observable<Bool> {
+  func tryAuthorization() -> Observable<Bool> {
     
     if !base.featureIsAvailable() {
       return Observable.error(SGLocationManager.LocalizationError.featureNotAvailable)
@@ -131,6 +131,9 @@ public extension Reactive where Base : SGLocationManager {
         return Disposables.create()
       }
       
+    @unknown default:
+      assertionFailure("Unexpected new case. Treating as not authorized.")
+      return .just(false)
     }
     
   }

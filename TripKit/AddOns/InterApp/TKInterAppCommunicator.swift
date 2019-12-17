@@ -232,7 +232,7 @@ extension TKInterAppCommunicator {
     }
     
     if let requestURL = URL(string: request) {
-      UIApplication.shared.openURL(requestURL)
+      UIApplication.shared.open(requestURL)
     }
   }
   
@@ -240,7 +240,7 @@ extension TKInterAppCommunicator {
     // https://www.waze.com/about/dev
     let request = String(format: "waze://?ll=%f,%f&navigate=yes", destination.coordinate.latitude, destination.coordinate.longitude)
     if let url = URL(string: request) {
-      UIApplication.shared.openURL(url)
+      UIApplication.shared.open(url)
     }
   }
   

@@ -23,12 +23,7 @@
   [paras setValue:@(11) forKey:@"v"];
   
   // distance units
-  NSString *unit;
-  if (@available(iOS 10.0, *)) {
-    unit = [NSLocale currentLocale].usesMetricSystem ? @"metric" : @"imperial";
-  } else {
-    unit = @"auto";
-  }
+  NSString *unit = [NSLocale currentLocale].usesMetricSystem ? @"metric" : @"imperial";
   [paras setValue:unit forKey:@"unit"];
   
   // profile settings

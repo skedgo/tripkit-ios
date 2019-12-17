@@ -15,7 +15,7 @@
 
 @implementation UIImage (Variations)
 
-- (UIImage *)imageWithTintColor:(UIColor *)tintColor
+- (UIImage *)tk_imageWithTintColor:(UIColor *)tintColor
 {
   CGRect drawRect = CGRectMake(0, 0, self.size.width, self.size.height);
   
@@ -40,7 +40,7 @@
   return tintedImage;
 }
 
-- (UIImage *)imageOnBackgroundImage:(UIImage *)background
+- (UIImage *)tk_imageOnBackgroundImage:(UIImage *)background
 {
   CGRect drawRect = CGRectMake(0, 0, background.size.width, background.size.height);
   
@@ -68,7 +68,7 @@
   return combinedImage;
 }
 
-- (UIImage *)monochromeImage
+- (UIImage *)tk_monochromeImage
 {
   CIImage *inputImage = [[CIImage alloc] initWithImage:self];
   CIFilter *monochrome = [CIFilter filterWithName:@"CIColorMonochrome"];

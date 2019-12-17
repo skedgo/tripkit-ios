@@ -58,7 +58,7 @@ extension SGKNamedCoordinate {
   /// - Parameter event: Event
   @objc(initWithEvent:)
   public convenience init?(_ event: EKEvent) {
-    guard #available(iOS 9.0, *), let structured = event.structuredLocation, let location = structured.geoLocation else { return nil }
+    guard let structured = event.structuredLocation, let location = structured.geoLocation else { return nil }
     
     let address: String?
     if let fromStructure = structured.value(forKey: "address") as? String {

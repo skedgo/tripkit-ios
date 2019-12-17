@@ -56,6 +56,18 @@ public class ModeInfo: NSObject, Codable, NSSecureCoding {
       && rgbColor == other.rgbColor
   }
   
+  public override var hash: Int {
+    var hasher = Hasher()
+    hasher.combine(identifier)
+    hasher.combine(alt)
+    hasher.combine(localImageName)
+    hasher.combine(remoteImageName)
+    hasher.combine(remoteIconIsTemplate)
+    hasher.combine(descriptor)
+    hasher.combine(rgbColor)
+    return hasher.finalize()
+  }
+  
   // MARK: Codable
   
   private enum CodingKeys: String, CodingKey {

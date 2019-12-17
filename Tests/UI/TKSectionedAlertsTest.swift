@@ -11,7 +11,6 @@ import XCTest
 @testable import TripKit
 @testable import TripKitUI
 
-@available(iOS 10.0, *)
 class TKSectionedAlertsTest: XCTestCase {
 
   var response: TKBuzzInfoProvider.AlertsTransitResponse!
@@ -25,9 +24,13 @@ class TKSectionedAlertsTest: XCTestCase {
   
   func testParsingAlerts() throws {
     XCTAssertNotNil(response)
+
+    let routeIDs = response.alerts.reduce(into: Set<String>()) { acc, mapping in
+      mapping.routes?.forEach { acc.insert($0.id) }
+    }
+    XCTAssertEqual(routeIDs.count, 158)
   }
 
-  @available(iOS 10.0, *)
   func testGroupingAlerts() throws {
     XCTAssertNotNil(response)
     

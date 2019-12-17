@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitUI"
-  s.version      = "3.1.1"
+  s.version      = "3.2.0"
   s.summary      = "SkedGo's TripKitUI"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = 'Apache License, Version 2.0'
@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   # s.source       = { path: "." }
   # s.source       = { git: "." }
   s.source       = { git: "https://github.com/skedgo/tripkit-ios.git", tag: "v#{s.version}" }
-  s.swift_version = '4.0'
-  s.ios.deployment_target = '9.0'
+  s.swift_version = '5.0'
+  s.ios.deployment_target = '10.3'
   s.requires_arc = true
   
   s.prefix_header_file = "prefix.pch"
@@ -23,9 +23,9 @@ Pod::Spec.new do |s|
 
   s.dependency 'ASPolylineView'
   s.dependency 'Kingfisher'
-  s.dependency 'RxSwift', '~> 4.0.0'
-  s.dependency 'RxCocoa', '~> 4.0.0'
-  s.dependency 'RxDataSources', '~> 3.0.0'
+  s.dependency 'RxSwift', '~> 5.0.0'
+  s.dependency 'RxCocoa', '~> 5.0.0'
+  s.dependency 'RxDataSources', '~> 4.0.0'
 
   s.source_files = [
     "TripKitUI-iOS/*.h",

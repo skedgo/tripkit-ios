@@ -344,16 +344,17 @@ extension Reactive where Base : OAuth2Swift {
       self.base.authorize(
         withCallbackURL: input.callbackURL,
         scope: input.scope,
-        state: input.state,
-        success: { _, _, parameters in
-          let data = RawOAuthData(parameters)
-          observer.onNext( OAuthResult.with(form: input.form, oauth: data) )
-          observer.onCompleted()
-      },
-        failure: { error in
-          observer.onNext( .error(error) )
-          observer.onCompleted()
-      })
+        state: input.state) { result in
+          switch result {
+            case .success(let success):
+              let data = RawOAuthData(success.parameters)
+              observer.onNext( OAuthResult.with(form: input.form, oauth: data) )
+              observer.onCompleted()
+            case .failure(let error):
+              observer.onNext( .error(error) )
+              observer.onCompleted()
+          }
+      }
       
       if let url = handling {
         OAuthSwift.handle(url: url)

@@ -13,7 +13,7 @@
 @class DLSEntry, TKSegment;
 
 
-typedef NS_ENUM(NSInteger, TripGroupVisibility) {
+typedef NS_CLOSED_ENUM(NSInteger, TripGroupVisibility) {
 	TripGroupVisibilityFull = 0,
   TripGroupVisibilityMini = 1,
   TripGroupVisibilityHidden = 2,
