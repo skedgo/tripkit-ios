@@ -148,6 +148,15 @@ extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
   }
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    // We are publishing the search mode here again because it's possible that
+    // the text change was initiated from a search bar that does not match the
+    // current search mode, see: https://redmine.buzzhives.com/issues/12017.
+    switch searchBar {
+    case fromSearchBar: switchMode.onNext(.origin)
+    case toSearchBar: switchMode.onNext(.destination)
+    default: assertionFailure()
+    }
+    
     typed.onNext(searchText)
   }
   
