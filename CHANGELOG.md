@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [Version 3.2] - 2019-12-17
+
+Now requires iOS 10.3
+
 ### Added
 
 - Added `TKSettings.ignoreCostToReturnCarHireVehicle` to ignore the cost of returning, say, a pod-based car share to its pick-up location
