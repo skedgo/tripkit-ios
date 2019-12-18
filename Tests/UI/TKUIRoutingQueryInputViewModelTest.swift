@@ -183,7 +183,7 @@ extension TKUIRoutingQueryInputViewModelTest {
     let observer = scheduler.createObserver(String.self)
     
     // set-up inputs
-    var searches = [Recorded<Event<String>>]()
+    var searches = [Recorded<Event<(String, forced: Bool)>>]()
     var selections = [Recorded<Event<TKUIRoutingQueryInputViewModel.Item>>]()
     var modes = [Recorded<Event<TKUIRoutingResultsViewModel.SearchMode>>]()
     var swaps = [Recorded<Event<Void>>]()
@@ -191,7 +191,7 @@ extension TKUIRoutingQueryInputViewModelTest {
     for (index, action) in actions.enumerated() {
       let time: TestTime = (index + 1) * 100
       switch action {
-      case .type(let text): searches.append(.next(time, text))
+      case .type(let text): searches.append(.next(time, (text, forced: false)))
       case .mode(let mode): modes.append(.next(time, mode))
       case .swap: swaps.append(.next(time, ()))
       case .route: routes.append(.next(time, ()))
