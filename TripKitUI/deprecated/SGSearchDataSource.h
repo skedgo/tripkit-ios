@@ -8,7 +8,7 @@
 
 #if TARGET_OS_IPHONE
 
-NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 11_0, "Use TKAutocompleting instead")
+NS_CLASS_DEPRECATED(10_10, 10_13, 2_0, 13_0, "Use TKAutocompleting instead")
 @protocol SGSearchDataSource <UITableViewDataSource>
 
 @optional

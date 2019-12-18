@@ -1,0 +1,3 @@
+# TripKit
+github "ReactiveX/RxSwift" "master" # ~> 5.0
+github "nighthawk/ASPolygonKit"

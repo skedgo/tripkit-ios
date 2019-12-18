@@ -59,7 +59,6 @@ public class TKUITimetableViewController: TGCardViewController {
     let departuresCard = TKUITimetableCard(dlsTable: dlsTable, startDate: startDate)
     departuresCard.style = TKUICustomization.shared.cardStyle
     rootCard = departuresCard
-    
   }
   
   required public init(coder aDecoder: NSCoder) {

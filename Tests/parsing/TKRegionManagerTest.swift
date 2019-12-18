@@ -52,7 +52,61 @@ class TKRegionManagerTest: XCTestCase {
     TKRegionManager.shared.updateRegions(from: data!)
     XCTAssert(TKRegionManager.shared.hasRegions)
     XCTAssertEqual(TKRegionManager.shared.regions.count, 143)
-
+  }
+  
+  func testSortingModes() throws {
+    let group1 = [
+      "in_air",
+      "pt_pub",
+      "pt_ltd_SCHOOLBUS",
+      "ps_tax",
+      "me_car",
+      "me_car-r_SwiftFleet",
+      "me_mot",
+      "cy_bic",
+      "cy_bic-s_bysykkelen",
+      "wa_wal"
+    ]
+    
+    let group2 = [
+      "in_air",
+      "pt_pub",
+      "pt_ltd_SCHOOLBUS",
+      "ps_tax",
+      "ps_tnc_UBER",
+      "me_car",
+      "me_car-r_SwiftFleet",
+      "me_mot",
+      "cy_bic",
+      "cy_bic-s",
+      "wa_wal"
+    ]
+    
+    let group3 = [
+      "pt_pub",
+      "me_car",
+      "me_mot"
+    ]
+    
+    func toRoutingModes(_ identifiers: [String]) -> [TKRegion.RoutingMode] {
+      identifiers.map(TKRegion.RoutingMode.buildForTesting)
+    }
+    
+    let sorted = TKRegionManager.sortedFlattenedModes([toRoutingModes(group1), toRoutingModes(group2), toRoutingModes(group3)]).map { $0.identifier }
+    
+    XCTAssertEqual(sorted, [
+      "in_air",
+      "pt_pub",
+      "pt_ltd_SCHOOLBUS",
+      "ps_tax",
+      "ps_tnc_UBER",
+      "me_car",
+      "me_car-r_SwiftFleet",
+      "me_mot",
+      "cy_bic",
+      "cy_bic-s",
+      "wa_wal"
+    ])
   }
   
 }

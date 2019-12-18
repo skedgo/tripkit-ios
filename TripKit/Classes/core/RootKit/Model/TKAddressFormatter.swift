@@ -23,7 +23,7 @@ public class TKAddressFormatter: NSObject {
   }
   
   @objc(singleLineAddressStringForPlacemark:)
-  @available(iOS, obsoleted: 11.0, message: "Use `CNPostalAddressFormatter.string(from: placemark.postalAddress)` directly instead")
+//  @available(iOS, obsoleted: 11.0, message: "Use `CNPostalAddressFormatter.string(from: placemark.postalAddress)` directly instead")
   public static func singleLineAddress(for placemark: CLPlacemark) -> String? {
     let postalAddress: CNPostalAddress
     

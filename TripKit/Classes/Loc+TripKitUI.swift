@@ -143,6 +143,10 @@ extension Loc {
     return NSLocalizedString("Go", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to start a trip")
   }
 
+  public static var Service: String {
+    return NSLocalizedString("Service", tableName: "TripKit", bundle: .tripKit, comment: "Title for displaying the details of a public transport service (i.e., a specific departure of a specific route)")
+  }
+
   public static func GetOnService(To location: String) -> String {
     let format = NSLocalizedString("Get on service to %@", tableName: "TripKit", bundle: .tripKit, comment: "Instruction to get a service towards provided destination")
     return String(format: format, location)

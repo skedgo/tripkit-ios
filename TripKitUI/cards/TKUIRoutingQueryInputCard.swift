@@ -49,11 +49,9 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    guard
-      let tableView = (cardView as? TGScrollCardView)?.tableView
-      else { preconditionFailure() }
-
+  override public func didBuild(tableView: UITableView, headerView: TGHeaderView?) {
+    super.didBuild(tableView: tableView, headerView: headerView)
+    
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIAutocompletionViewModel.Section>(
       configureCell: { _, tv, ip, item in
         guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else {

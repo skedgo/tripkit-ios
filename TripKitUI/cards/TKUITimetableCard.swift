@@ -48,6 +48,7 @@ public class TKUITimetableCard : TGTableCard {
   private let disposeBag = DisposeBag()
   private var realTimeDisposeBag = DisposeBag()
 
+  private let highlighted = PublishSubject<IndexPath>()
   private let datePublisher = PublishSubject<Date>()
   private let loadMorePublisher = PublishSubject<IndexPath>()
   private let scrollToTopPublisher = PublishSubject<Void>()
@@ -136,12 +137,8 @@ public class TKUITimetableCard : TGTableCard {
   
   // MARK: - Card Life Cycle
   
-  override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    super.didBuild(cardView: cardView, headerView: headerView)
-    
-    guard let tableView = (cardView as? TGScrollCardView)?.tableView else {
-      preconditionFailure()
-    }
+  override public func didBuild(tableView: UITableView, cardView: TGCardView, headerView: TGHeaderView?) {
+    super.didBuild(tableView: tableView, cardView: cardView, headerView: headerView)
     
     tableView.register(TKUIDepartureCell.nib, forCellReuseIdentifier: TKUIDepartureCell.reuseIdentifier)
     
@@ -172,8 +169,23 @@ public class TKUITimetableCard : TGTableCard {
     
     let filter = accessoryView.searchBar.rx.text.orEmpty
     
+    let selected: Signal<TKUITimetableViewModel.Item>
+    #if targetEnvironment(macCatalyst)
+    self.clickToHighlightDoubleClickToSelect = false
+    self.handleMacSelection = highlighted.onNext
+    
+    selected = highlighted
+      .map { [unowned self] in self.dataSource[$0] }
+      .asSignal(onErrorSignalWith: .empty())
+    #else
+    selected = tableView.rx
+      .modelSelected(TKUITimetableViewModel.Item.self)
+      .asSignal()
+    #endif
+
+    
     let input: TKUITimetableViewModel.UIInput = (
-      selected: tableView.rx.modelSelected(TKUITimetableViewModel.Item.self).asSignal(),
+      selected: selected,
       showAlerts: cellAlertPublisher.asSignal(onErrorSignalWith: .empty()),
       filter: filter.asDriver(),
       date: datePublisher.asDriver(onErrorDriveWith: .empty()),
