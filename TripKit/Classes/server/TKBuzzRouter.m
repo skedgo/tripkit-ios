@@ -60,7 +60,13 @@
     enabledModes = mutableModes;
   }
   
-  NSSet *groupedIdentifiers   = [TKTransportModes groupedModeIdentifiers:enabledModes includeGroupForAll:YES];
+  NSSet *groupedIdentifiers;
+  if ([self.additionalParameters containsObject:[[NSURLQueryItem alloc] initWithName:@"allModes" value:@"true"]]) {
+    groupedIdentifiers = [NSSet setWithObject:[NSSet setWithArray:enabledModes]];
+  } else {
+    groupedIdentifiers = [TKTransportModes groupedModeIdentifiers:enabledModes includeGroupForAll:YES];
+  }
+  
   NSUInteger requestCount = [groupedIdentifiers count];
   self.finishedWorkers = 0;
   

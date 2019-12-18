@@ -46,11 +46,9 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     return nil
   }
   
-  override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    super.didBuild(cardView: cardView, headerView: headerView)
-    
-    guard let tableView = (cardView as? TGScrollCardView)?.tableView else { return }
-    
+  override public func didBuild(tableView: UITableView, headerView: TGHeaderView?) {
+    super.didBuild(tableView: tableView, headerView: headerView)
+
     viewModel = TKUISegmentDirectionsViewModel(segment: segment)
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUISegmentDirectionsViewModel.Section>(configureCell: TKUISegmentDirectionsCard.configureCell)

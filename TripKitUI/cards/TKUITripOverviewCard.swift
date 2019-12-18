@@ -53,6 +53,8 @@ public class TKUITripOverviewCard: TGTableCard {
   fileprivate let viewModel: TKUITripOverviewViewModel
   private let disposeBag = DisposeBag()
   
+  private let highlighted = PublishSubject<IndexPath>()
+
   public init(trip: Trip, index: Int? = nil) {
     viewModel = TKUITripOverviewViewModel(trip: trip)
     self.index = index
@@ -86,10 +88,8 @@ public class TKUITripOverviewCard: TGTableCard {
     }
   }
 
-  override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    guard let tableView = (cardView as? TGScrollCardView)?.tableView else {
-      preconditionFailure()
-    }
+  override public func didBuild(tableView: UITableView, cardView: TGCardView, headerView: TGHeaderView?) {
+    super.didBuild(tableView: tableView, cardView: cardView, headerView: headerView)
     
     tableView.register(TKUISegmentStationaryCell.nib, forCellReuseIdentifier: TKUISegmentStationaryCell.reuseIdentifier)
     tableView.register(TKUISegmentMovingCell.nib, forCellReuseIdentifier: TKUISegmentMovingCell.reuseIdentifier)
@@ -139,26 +139,37 @@ public class TKUITripOverviewCard: TGTableCard {
       tableView.tableHeaderView = nil
     }
 
+    let selected: Observable<TKUITripOverviewViewModel.Item>
+    #if targetEnvironment(macCatalyst)
+    self.clickToHighlightDoubleClickToSelect = true
+    self.handleMacSelection = highlighted.onNext
+    selected = highlighted
+      .map { dataSource[$0] }
+      .asObservable()
+    #else
+    selected = tableView.rx
+      .modelSelected(TKUITripOverviewViewModel.Item.self)
+      .asObservable()
+    #endif
+
     // Handling segment selections
     if let segmentHandler = TKUITripOverviewCard.config.presentSegmentHandler {
-      tableView.rx.itemSelected
-        .filter { !dataSource[$0].isAlert }
-        .map { (self, self.viewModel.segment(for: dataSource[$0])) }
-        .filter { $1 != nil }
-        .map { ($0, $1!) }
+      selected
+        .filter { !$0.isAlert }
+        .compactMap(viewModel.segment)
+        .map { (self, $0) }
         .subscribe(onNext: segmentHandler)
         .disposed(by: disposeBag)
     }
     
     // Handling action on alerts
-    tableView.rx.itemSelected
-      .map {
-        switch dataSource[$0] {
+    selected
+      .compactMap {
+        switch $0 {
         case .alert(let alertItem): return alertItem.alerts as [TKAlert]
-        default: return []
+        default: return nil
         }
       }
-      .filter { !$0.isEmpty }
       .subscribe(onNext: show)
       .disposed(by: disposeBag)
   }

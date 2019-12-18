@@ -53,7 +53,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
     configureCell: TKUIRoutingResultsCard.cell
   )
-    
+  
+  private let highlighted = PublishSubject<IndexPath>()
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
   private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
@@ -118,16 +119,29 @@ public class TKUIRoutingResultsCard: TGTableCard {
     aCoder.encode(TKUIRoutingResultsViewModel.save(request: request), forKey: "viewModel")
   }
   
-  override public func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    guard
-      let tableView = (cardView as? TGScrollCardView)?.tableView,
-      let mapManager = mapManager as? TKUIRoutingResultsMapManagerType
-      else { preconditionFailure() }
+  override public func didBuild(tableView: UITableView, cardView: TGCardView, headerView: TGHeaderView?) {
+    super.didBuild(tableView: tableView, cardView: cardView, headerView: headerView)
+    
+    guard let mapManager = mapManager as? TKUIRoutingResultsMapManagerType else { preconditionFailure() }
     
     // Build the view model
     
+    let selected: Signal<TKUIRoutingResultsViewModel.Item>
+    #if targetEnvironment(macCatalyst)
+    self.clickToHighlightDoubleClickToSelect = true
+    self.handleMacSelection = highlighted.onNext
+    
+    selected = highlighted
+      .map { [unowned self] in self.dataSource[$0] }
+      .asSignal(onErrorSignalWith: .empty())
+    #else
+    selected = tableView.rx
+      .modelSelected(TKUIRoutingResultsViewModel.Item.self)
+      .asSignal()
+    #endif
+
     let inputs: TKUIRoutingResultsViewModel.UIInput = (
-      selected: tableView.rx.modelSelected(TKUIRoutingResultsViewModel.Item.self).asSignal(),
+      selected: selected,
       tappedToggleButton: tappedToggleButton.asSignal(onErrorSignalWith: .empty()),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
@@ -297,6 +311,10 @@ extension TKUIRoutingResultsCard {
     tripCell.configure(TKUITripCell.Model(item.trip))
     tripCell.separatorView.isHidden = !showSeparator
     
+    #if targetEnvironment(macCatalyst)
+    tripCell.accessoryType = .disclosureIndicator
+    #endif
+
     return tripCell
   }
   
