@@ -60,11 +60,11 @@ build_mac_base:
   stage: build
   script:
     - mv Cartfile.resolved Cartfile.resolved.ios
-    - mv Cardfile.resolved.macos Cartfile.resolved
+    - mv Cartfile.resolved.macos Cartfile.resolved
     - carthage bootstrap --cache-builds --platform macOS
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKit-macOS" | xcpretty -c -r html && exit ${PIPESTATUS[0]}
     - mv Cartfile.resolved Cartfile.resolved.macos
-    - mv Cardfile.resolved.ios Cartfile.resolved
+    - mv Cartfile.resolved.ios Cartfile.resolved
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
