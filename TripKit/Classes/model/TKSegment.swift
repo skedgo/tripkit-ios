@@ -11,7 +11,7 @@ import Foundation
 extension TKSegment {
   
   public var index: Int {
-    return reference?.index?.intValue ?? -1
+    return reference?.index.intValue ?? -1
   }
   
   @objc
