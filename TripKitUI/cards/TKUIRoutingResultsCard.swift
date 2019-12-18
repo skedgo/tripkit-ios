@@ -128,6 +128,9 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     let selected: Signal<TKUIRoutingResultsViewModel.Item>
     #if targetEnvironment(macCatalyst)
+    self.clickToHighlightDoubleClickToSelect = true
+    self.handleMacSelection = highlighted.onNext
+    
     selected = highlighted
       .map { [unowned self] in self.dataSource[$0] }
       .asSignal(onErrorSignalWith: .empty())
@@ -308,6 +311,10 @@ extension TKUIRoutingResultsCard {
     tripCell.configure(TKUITripCell.Model(item.trip))
     tripCell.separatorView.isHidden = !showSeparator
     
+    #if targetEnvironment(macCatalyst)
+    tripCell.accessoryType = .disclosureIndicator
+    #endif
+
     return tripCell
   }
   
@@ -349,12 +356,6 @@ extension TKUIRoutingResultsCard {
 }
 
 extension TKUIRoutingResultsCard: UITableViewDelegate {
-  
-  public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-    #if targetEnvironment(macCatalyst)
-    highlighted.onNext(indexPath)
-    #endif
-  }
   
   public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionFooterView.reuseIdentifier) as? TKUIResultsSectionFooterView else {

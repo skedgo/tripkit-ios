@@ -48,6 +48,7 @@ public class TKUITimetableCard : TGTableCard {
   private let disposeBag = DisposeBag()
   private var realTimeDisposeBag = DisposeBag()
 
+  private let highlighted = PublishSubject<IndexPath>()
   private let datePublisher = PublishSubject<Date>()
   private let loadMorePublisher = PublishSubject<IndexPath>()
   private let scrollToTopPublisher = PublishSubject<Void>()
@@ -168,8 +169,23 @@ public class TKUITimetableCard : TGTableCard {
     
     let filter = accessoryView.searchBar.rx.text.orEmpty
     
+    let selected: Signal<TKUITimetableViewModel.Item>
+    #if targetEnvironment(macCatalyst)
+    self.clickToHighlightDoubleClickToSelect = false
+    self.handleMacSelection = highlighted.onNext
+    
+    selected = highlighted
+      .map { [unowned self] in self.dataSource[$0] }
+      .asSignal(onErrorSignalWith: .empty())
+    #else
+    selected = tableView.rx
+      .modelSelected(TKUITimetableViewModel.Item.self)
+      .asSignal()
+    #endif
+
+    
     let input: TKUITimetableViewModel.UIInput = (
-      selected: tableView.rx.modelSelected(TKUITimetableViewModel.Item.self).asSignal(),
+      selected: selected,
       showAlerts: cellAlertPublisher.asSignal(onErrorSignalWith: .empty()),
       filter: filter.asDriver(),
       date: datePublisher.asDriver(onErrorDriveWith: .empty()),

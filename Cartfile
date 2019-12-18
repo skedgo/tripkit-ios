@@ -5,4 +5,4 @@ github "nighthawk/ASPolygonKit"
 # TripKitUI
 github "onevcat/Kingfisher" ~> 5.4
 github "RxSwiftCommunity/RxDataSources" ~> 4.0
-git "git@gitlab.com:SkedGo/tripgo-cards-ios.git" "32-catalyst" # "master"
+git "git@gitlab.com:SkedGo/tripgo-cards-ios.git" "master"

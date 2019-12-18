@@ -53,6 +53,8 @@ public class TKUITripOverviewCard: TGTableCard {
   fileprivate let viewModel: TKUITripOverviewViewModel
   private let disposeBag = DisposeBag()
   
+  private let highlighted = PublishSubject<IndexPath>()
+
   public init(trip: Trip, index: Int? = nil) {
     viewModel = TKUITripOverviewViewModel(trip: trip)
     self.index = index
@@ -137,27 +139,39 @@ public class TKUITripOverviewCard: TGTableCard {
       tableView.tableHeaderView = nil
     }
 
+    let selected: Signal<TKUITripOverviewViewModel.Item>
+    #if targetEnvironment(macCatalyst)
+    self.clickToHighlightDoubleClickToSelect = true
+    self.handleMacSelection = highlighted.onNext
+    selected = highlighted
+      .map { dataSource[$0] }
+      .asSignal(onErrorSignalWith: .empty())
+    #else
+    selected = tableView.rx
+      .modelSelected(TKUITripOverviewViewModel.Item.self)
+      .asSignal()
+    #endif
+
     // Handling segment selections
     if let segmentHandler = TKUITripOverviewCard.config.presentSegmentHandler {
-      tableView.rx.itemSelected
-        .filter { !dataSource[$0].isAlert }
-        .map { (self, self.viewModel.segment(for: dataSource[$0])) }
+      selected
+        .filter { !$0.isAlert }
+        .map { (self, self.viewModel.segment(for: $0)) }
         .filter { $1 != nil }
         .map { ($0, $1!) }
-        .subscribe(onNext: segmentHandler)
+        .emit(onNext: segmentHandler)
         .disposed(by: disposeBag)
     }
     
     // Handling action on alerts
-    tableView.rx.itemSelected
-      .map {
-        switch dataSource[$0] {
+    selected
+      .compactMap {
+        switch $0 {
         case .alert(let alertItem): return alertItem.alerts as [TKAlert]
-        default: return []
+        default: return nil
         }
       }
-      .filter { !$0.isEmpty }
-      .subscribe(onNext: show)
+      .emit(onNext: show)
       .disposed(by: disposeBag)
   }
   
