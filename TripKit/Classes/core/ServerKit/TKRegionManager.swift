@@ -57,7 +57,7 @@ public class TKRegionManager: NSObject {
   
 }
 
-// MARK: - Parsing {
+// MARK: - Parsing
 
 struct RegionsResponse: Codable {
   let modes: [String: ModeDetails]?
@@ -226,10 +226,49 @@ extension TKRegionManager {
     guard let fileNamePart = part else { return nil }
     return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: iconType)
   }
+  
+  public static func sortedModes(in regions: [TKRegion]) -> [TKRegion.RoutingMode] {
+    let all = regions.map { $0.routingModes }
+    return sortedFlattenedModes(all)
+  }
+  
+  public static func sortedFlattenedModes(_ modes: [[TKRegion.RoutingMode]]) -> [TKRegion.RoutingMode] {
+    guard let first = modes.first else { return [] }
+    
+    var added = Set<String>()
+    added = added.union(first.map { $0.identifier })
+    var all = first
+    
+    for group in modes.dropFirst() {
+      for (index, mode) in group.enumerated() where !added.contains(mode.identifier) {
+        added.insert(mode.identifier)
+        
+        if index > 0, let previousIndex = all.firstIndex(of: group[index - 1]) {
+          all.insert(mode, at: previousIndex + 1)
+        } else if index == 0 {
+          all.insert(mode, at: 0)
+        } else {
+          assertionFailure("We're merging in sequence here; how come the previous element isn't in the list? Previous is: \(group[index - 1]) from \(group)")
+          all.append(mode)
+        }
+      }
+    }
+    
+    // Remove specific modes for which we have the generic one
+    for mode in all {
+      let generic = TKTransportModes.genericModeIdentifier(forModeIdentifier: mode.identifier)
+      if generic != mode.identifier, added.contains(generic) {
+        added.remove(mode.identifier)
+        all.removeAll { $0.identifier == mode.identifier }
+      }
+    }
+    
+    return all
+  }
 
 }
 
-// MARK: - Testing coordinates {
+// MARK: - Testing coordinates
 
 extension TKRegionManager {
  

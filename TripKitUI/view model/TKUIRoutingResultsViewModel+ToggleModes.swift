@@ -22,10 +22,13 @@ extension TKUIRoutingResultsViewModel {
   }
   
   static func buildAvailableModes(for request: TripRequest?) -> AvailableModes? {
-    guard let all = request?.spanningRegion().routingModes else { return nil }
-    let enabled = TKUserProfileHelper.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(all.map { $0.identifier })
     
+    let regions = [request?.startRegion(), request?.endRegion(), request?.spanningRegion()].compactMap { $0 }
+    let all = TKRegionManager.sortedModes(in: regions)
+      
+    let enabled = TKUserProfileHelper.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(all.map { $0.identifier })
     var newEnabled = Set(enabled)
+    
     if TKUserProfileHelper.showWheelchairInformation {
       newEnabled.insert(TKTransportModeIdentifierWheelchair)
       newEnabled.remove(TKTransportModeIdentifierWalking)
@@ -33,6 +36,7 @@ extension TKUIRoutingResultsViewModel {
       newEnabled.insert(TKTransportModeIdentifierWalking)
       newEnabled.remove(TKTransportModeIdentifierWheelchair)
     }
+    
     return AvailableModes(available: all, enabled: newEnabled)
   }
   

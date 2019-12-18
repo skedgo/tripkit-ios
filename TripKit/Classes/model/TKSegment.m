@@ -223,10 +223,22 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.template.scheduledStartStopCode;
 }
 
-- (NSString *)scheduledStartPlatform
-{
+- (NSString *)scheduledStartPlatform {
   return self.reference.departurePlatform;
 }
+
+- (NSString *)scheduledEndPlatform {
+  return self.reference.arrivalPlatform;
+}
+
+- (NSDate *)scheduledTimetableStartTime {
+  return self.reference.timetableStartTime;
+}
+
+- (NSDate *)scheduledTimetableEndTime {
+  return self.reference.timetableEndTime;
+}
+
 
 - (StopLocation *)scheduledStartStop
 {

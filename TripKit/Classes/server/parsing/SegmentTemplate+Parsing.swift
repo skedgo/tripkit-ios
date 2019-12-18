@@ -136,6 +136,8 @@ extension SegmentTemplate {
       ?? (dict["line"] as? [[String: Any]])
       ?? []
     
+    let modeInfo = modeInfo ?? TKModeInfo.modeInfo(for: dict["modeInfo"] as? [String: Any])
+    
     return TKCoreDataParserHelper.insertNewShapes(
       shapesArray, for: service, relativeTime: relativeTime,
       with: modeInfo, orTripKitContext: context,
