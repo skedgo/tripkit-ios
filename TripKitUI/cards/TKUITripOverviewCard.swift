@@ -139,27 +139,26 @@ public class TKUITripOverviewCard: TGTableCard {
       tableView.tableHeaderView = nil
     }
 
-    let selected: Signal<TKUITripOverviewViewModel.Item>
+    let selected: Observable<TKUITripOverviewViewModel.Item>
     #if targetEnvironment(macCatalyst)
     self.clickToHighlightDoubleClickToSelect = true
     self.handleMacSelection = highlighted.onNext
     selected = highlighted
       .map { dataSource[$0] }
-      .asSignal(onErrorSignalWith: .empty())
+      .asObservable()
     #else
     selected = tableView.rx
       .modelSelected(TKUITripOverviewViewModel.Item.self)
-      .asSignal()
+      .asObservable()
     #endif
 
     // Handling segment selections
     if let segmentHandler = TKUITripOverviewCard.config.presentSegmentHandler {
       selected
         .filter { !$0.isAlert }
-        .map { (self, self.viewModel.segment(for: $0)) }
-        .filter { $1 != nil }
-        .map { ($0, $1!) }
-        .emit(onNext: segmentHandler)
+        .compactMap(viewModel.segment)
+        .map { (self, $0) }
+        .subscribe(onNext: segmentHandler)
         .disposed(by: disposeBag)
     }
     
@@ -171,7 +170,7 @@ public class TKUITripOverviewCard: TGTableCard {
         default: return nil
         }
       }
-      .emit(onNext: show)
+      .subscribe(onNext: show)
       .disposed(by: disposeBag)
   }
   
