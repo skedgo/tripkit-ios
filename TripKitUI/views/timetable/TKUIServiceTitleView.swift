@@ -56,7 +56,7 @@ class TKUIServiceTitleView: UIView {
 extension TKUIServiceTitleView {
   func configure(with model: TKUIDepartureCellContent) {
     
-    serviceTitleLabel.text = model.lineText ?? "Service" // TODO: Localise
+    serviceTitleLabel.text = model.lineText ?? Loc.Service
     
     serviceImageView.setImage(with: model.imageURL, asTemplate: model.imageIsTemplate, placeholder: model.placeholderImage)
     serviceImageView.tintColor = model.imageTintColor ?? .tkLabelPrimary
