@@ -58,10 +58,8 @@ public class TKUIHomeCard: TGTableCard {
     super.willAppear(animated: animated)
   }
   
-  public override func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    guard let tableView = (cardView as? TGScrollCardView)?.tableView else {
-      preconditionFailure()
-    }
+  public override func didBuild(tableView: UITableView, headerView: TGHeaderView?) {
+    super.didBuild(tableView: tableView, headerView: headerView)
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIAutocompletionViewModel.Section>(
       configureCell: { [weak self] _, tv, ip, item in
