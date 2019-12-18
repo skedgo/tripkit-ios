@@ -13,14 +13,18 @@ extension TKRegion {
   public struct RoutingMode: Hashable {
     public let identifier: String
     public let title: String
-    public let subtitle: String?
-    public let website: URL?
-    public let color: TKColor?
+    public var subtitle: String? = nil
+    public var website: URL? = nil
+    public var color: TKColor? = nil
     
     fileprivate let localImageName: String
-    fileprivate let remoteImageName: String?
-    public let remoteImageIsTemplate: Bool
-    public let remoteImageIsBranding: Bool
+    fileprivate var remoteImageName: String? = nil
+    public var remoteImageIsTemplate: Bool = false
+    public var remoteImageIsBranding: Bool = false
+    
+    static func buildForTesting(_ identifier: String) -> Self {
+      return RoutingMode(identifier: identifier, title: identifier, localImageName: "meh")
+    }
   }
   
   public var routingModes: [RoutingMode] {

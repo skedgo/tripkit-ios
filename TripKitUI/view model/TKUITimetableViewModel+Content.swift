@@ -276,6 +276,7 @@ extension TKUITimetableViewModel {
         guard let region = departures.first?.stop.region else { return .empty() }
         return TKBuzzRealTime.rx
           .update(departures: departures, in: region)
+          .asObservable()
           .map { _ in .updated(()) }
           .startWith(.updating)
       }
@@ -292,41 +293,39 @@ extension TKUITimetableViewModel {
 
 extension Reactive where Base: TKBuzzRealTime {
   
-  static func update(departures: [StopVisits], in region: TKRegion) -> Observable<[StopVisits]> {
+  static func update(departures: [StopVisits], in region: TKRegion) -> Single<[StopVisits]> {
     
     let dlsEntries = departures.compactMap({ $0 as? DLSEntry })
     if !dlsEntries.isEmpty {
-      return Observable.create { subscriber in
+      return Single.create { subscriber in
         TKBuzzRealTime.updateDLSEntries(
           Set(dlsEntries),
           in: region,
           success: { updatedDepartures in
             let asVisits = updatedDepartures.map { $0 as StopVisits }
-            subscriber.onNext(asVisits)
-            subscriber.onCompleted()
+            subscriber(.success(asVisits))
         }, failure: { error in
           if let error = error {
-            subscriber.onError(error)
+            subscriber(.error(error))
           } else {
-            subscriber.onError(TKUITimetableViewModel.FetchError.unknownError)
+            subscriber(.error(TKUITimetableViewModel.FetchError.unknownError))
           }
         })
         return Disposables.create()
       }
       
     } else {
-      return Observable.create { subscriber in
+      return Single.create { subscriber in
         TKBuzzRealTime.updateEmbarkations(
           Set(departures),
           in: region,
           success: { updatedDepartures in
-            subscriber.onNext(Array(updatedDepartures))
-            // TODO: Shouldn't this complete? Turn into Single?
+            subscriber(.success(Array(updatedDepartures)))
         }, failure: { error in
           if let error = error {
-            subscriber.onError(error)
+            subscriber(.error(error))
           } else {
-            subscriber.onError(TKUITimetableViewModel.FetchError.unknownError)
+            subscriber(.error(TKUITimetableViewModel.FetchError.unknownError))
           }
         })
         return Disposables.create()

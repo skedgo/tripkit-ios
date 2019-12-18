@@ -201,6 +201,8 @@ fileprivate extension TKSegment {
   }
   
   func toStationary(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.StationaryItem {
+    assert(isStationary)
+    
     return TKUITripOverviewViewModel.StationaryItem(
       title: (start?.title ?? nil) ?? Loc.Location,
       subtitle: titleWithoutTime,

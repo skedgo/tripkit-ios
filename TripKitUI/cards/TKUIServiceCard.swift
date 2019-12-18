@@ -81,13 +81,9 @@ public class TKUIServiceCard: TGTableCard {
   
   // MARK: - Card life cycle
 
-  public override func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
-    guard
-      let tableView = (cardView as? TGScrollCardView)?.tableView
-      else {
-        preconditionFailure()
-    }
-    
+  override public func didBuild(tableView: UITableView, headerView: TGHeaderView?) {
+    super.didBuild(tableView: tableView, headerView: headerView)
+
     // Build the view model
     
     viewModel = TKUIServiceViewModel(

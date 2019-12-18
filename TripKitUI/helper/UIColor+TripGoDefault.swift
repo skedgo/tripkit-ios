@@ -11,6 +11,11 @@ import Foundation
 extension UIColor {
   
   static let tripgoTintColor: UIColor = {
+    #if targetEnvironment(macCatalyst)
+    // Catalyst prefers the system accent color, which we can get like this
+    let dummyButton = UIButton()
+    return dummyButton.tintColor
+    #else
     if #available(iOS 13.0, *) {
       return UIColor { traits in
         switch traits.userInterfaceStyle {
@@ -19,6 +24,7 @@ extension UIColor {
         }
       }
     } else { return #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1) }
+    #endif
   }()
   
   

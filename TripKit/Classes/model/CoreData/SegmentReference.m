@@ -57,7 +57,8 @@ typedef NSUInteger SGSegmentFlag;
   }
 	
 	if (! self.templateHashCode) {
-		return nil; // this gotta be a terminal
+    DLog(@"Deleting segment reference without a hash coee: %@", self);
+		return nil;
 	}
   
   // link up to segment template
@@ -138,6 +139,16 @@ typedef NSUInteger SGSegmentFlag;
   [self setData:departurePlatform forKey:@"departurePlatform"];
 }
 
+- (NSString *)arrivalPlatform
+{
+  return [self dataForKey:@"arrivalPlatform"];
+}
+
+- (void)setArrivalPlatform:(NSString *)arrivalPlatform
+{
+  [self setData:arrivalPlatform forKey:@"arrivalPlatform"];
+}
+
 - (NSNumber *)serviceStops
 {
   return [self dataForKey:@"serviceStops"];
@@ -146,6 +157,26 @@ typedef NSUInteger SGSegmentFlag;
 - (void)setServiceStops:(NSNumber *)serviceStops
 {
   [self setData:serviceStops forKey:@"serviceStops"];
+}
+
+- (NSDate *)timetableStartTime
+{
+  return [self dataForKey:@"timetableStartTime"];
+}
+
+- (void)setTimetableStartTime:(NSDate *)timetableStartTime
+{
+  [self setData:timetableStartTime forKey:@"timetableStartTime"];
+}
+
+- (NSDate *)timetableEndTime
+{
+  return [self dataForKey:@"timetableEndTime"];
+}
+
+- (void)setTimetableEndTime:(NSDate *)timetableEndTime
+{
+  [self setData:timetableEndTime forKey:@"timetableEndTime"];
 }
 
 - (void)setPayload:(id)payload forKey:(NSString *)key
