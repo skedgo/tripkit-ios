@@ -14,7 +14,7 @@ import RxCocoa
 
 public class TKUINearbyMapManager: TKUIMapManager {
   
-  weak var viewModel: TKUINearbyViewModel?
+  public weak var viewModel: TKUINearbyViewModel?
   
   public override init() {
     super.init()
@@ -26,11 +26,11 @@ public class TKUINearbyMapManager: TKUIMapManager {
   private var mapTrackingPublisher = PublishSubject<MKUserTrackingMode>()
   private var mapCenterPublisher = PublishSubject<CLLocationCoordinate2D>()
   
-  var mapCenter: Driver<CLLocationCoordinate2D?> {
+  public var mapCenter: Driver<CLLocationCoordinate2D?> {
     mapRect.map { MKMapRectEqualToRect($0, .null) ? nil :   MKCoordinateRegion($0).center }
   }
   
-  var mapRect: Driver<MKMapRect> {
+  public var mapRect: Driver<MKMapRect> {
     Self
       .buildMapCenter(tracking: mapTrackingPublisher, center: mapCenterPublisher)
       .map { [weak self] center in
@@ -47,11 +47,11 @@ public class TKUINearbyMapManager: TKUIMapManager {
   
   private var tapRecognizer = UITapGestureRecognizer()
   private var mapSelectionPublisher = PublishSubject<TKUIIdentifiableAnnotation?>()
-  var mapSelection: Signal<TKUIIdentifiableAnnotation?> {
+  public var mapSelection: Signal<TKUIIdentifiableAnnotation?> {
     return mapSelectionPublisher.asSignal(onErrorJustReturn: nil)
   }
   
-  var searchResult: MKAnnotation? {
+  public var searchResult: MKAnnotation? {
     didSet {
       updateSearchResult(searchResult, previous: oldValue)
     }

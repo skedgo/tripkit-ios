@@ -15,22 +15,33 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class TKUINearbyViewModel {
+public class TKUINearbyViewModel {
   
-  enum Next {
+  public enum Next {
     case stop(TKUIStopAnnotation)
     case location(TKModeCoordinate)
   }
   
-  struct ListInput {
-    var pickedModes: Signal<Set<TKModeInfo>> = .empty()
-    var selection: Signal<TKUINearbyViewModel.Item> = .empty()
-    var searchResult: Driver<MKAnnotation> = .empty()
+  public struct ListInput {
+    public let pickedModes: Signal<Set<TKModeInfo>>
+    public let selection: Signal<TKUINearbyViewModel.Item>
+    public let searchResult: Driver<MKAnnotation>
+    
+    public init(pickedModes: Signal<Set<TKModeInfo>> = .empty(), selection: Signal<TKUINearbyViewModel.Item> = .empty(), searchResult: Driver<MKAnnotation> = .empty()) {
+      self.pickedModes = pickedModes
+      self.selection = selection
+      self.searchResult = searchResult
+    }
   }
   
-  struct MapInput {
-    var mapRect: Driver<MKMapRect> = .just(.null)
-    var selection: Signal<TKUIIdentifiableAnnotation?> = .empty()
+  public struct MapInput {
+    public let mapRect: Driver<MKMapRect>
+    public let selection: Signal<TKUIIdentifiableAnnotation?>
+    
+    public init(mapRect: Driver<MKMapRect> = .just(.null), selection: Signal<TKUIIdentifiableAnnotation?> = .empty()) {
+      self.mapRect = mapRect
+      self.selection = selection
+    }
   }
   
   /// Creates a new view model
@@ -39,7 +50,7 @@ class TKUINearbyViewModel {
   ///   - mode: The mode identifier to which to limit the nearby locations
   ///   - pickedModes: The selected modes (only used if `mode == nil`)
   ///   - mapCenter: The centre of the map, if the user moved it, should drive with `nil` if map is centred on the user's current location
-  init(
+  public init(
       limitTo mode: String? = nil,
       startLocation: MKAnnotation? = nil,
       cardInput: ListInput = ListInput(),
@@ -89,7 +100,7 @@ class TKUINearbyViewModel {
     self.availableModes = nearby
       .map { content -> [TKModeInfo] in
         let allModes = content.locations.compactMap { $0.stopModeInfo }
-        return allModes.filterDuplicates { $0 == $1 }
+        return allModes.tk_filterDuplicates { $0 == $1 }
       }
       .asDriver(onErrorJustReturn: [])
     
@@ -127,32 +138,32 @@ class TKUINearbyViewModel {
   
   fileprivate let refreshPublisher: PublishSubject<Void>
 
-  let limitToMode: String?
+  public let limitToMode: String?
   
-  let startLocation: MKAnnotation?
+  public let startLocation: MKAnnotation?
 
   // View output
   
   // These are the modes available in the locations.json output.
-  let availableModes: Driver<[TKModeInfo]>
+  public let availableModes: Driver<[TKModeInfo]>
 
-  let error: Driver<Error>
+  public let error: Driver<Error>
   
-  let sections: Driver<[Section]>
+  public let sections: Driver<[Section]>
   
-  let mapAnnotations: Driver<[TKUIIdentifiableAnnotation]>
+  public let mapAnnotations: Driver<[TKUIIdentifiableAnnotation]>
   
-  let mapOverlays: Driver<[MKOverlay]>
+  public let mapOverlays: Driver<[MKOverlay]>
   
   // View actions
   
-  let next: Signal<Next>
+  public let next: Signal<Next>
   
   /// This will always be an annotations that's in `mapAnnotations`
-  let mapAnnotationToSelect: Signal<TKUIIdentifiableAnnotation>
+  public let mapAnnotationToSelect: Signal<TKUIIdentifiableAnnotation>
   
   /// This will typically be an annotation that's NOT in `mapAnnotations`
-  let searchResultToShow: Driver<MKAnnotation?>
+  public let searchResultToShow: Driver<MKAnnotation?>
   
 }
 
@@ -160,7 +171,7 @@ class TKUINearbyViewModel {
 
 extension Array {
   
-  func filterDuplicates(includeElement: @escaping (_ lhs: Element, _ rhs: Element) -> Bool) -> [Element] {
+  public func tk_filterDuplicates(includeElement: @escaping (_ lhs: Element, _ rhs: Element) -> Bool) -> [Element] {
     
     return reduce(into: []) { acc, element in
       if nil == acc.first(where: { includeElement(element, $0) }) {

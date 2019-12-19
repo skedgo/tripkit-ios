@@ -19,31 +19,31 @@ import RxDataSources
 extension TKUINearbyViewModel {
   
   /// An item in a section on the nearby screen
-  struct Item {
-    let modeCoordinate: TKModeCoordinate
+  public struct Item {
+    public let modeCoordinate: TKModeCoordinate
     
-    let title: String
-    let icon: UIImage?
-    let iconURL: URL?
-    let identifier: String
+    public let title: String
+    public let icon: UIImage?
+    public let iconURL: URL?
+    public let identifier: String
     
-    let subtitle: Driver<String?>
-    let distance: Driver<CLLocationDistance?>
-    let heading: Driver<CLLocationDirection?>
+    public let subtitle: Driver<String?>
+    public let distance: Driver<CLLocationDistance?>
+    public let heading: Driver<CLLocationDirection?>
     
-    var mapAnnotation: TKUIIdentifiableAnnotation? {
+    public var mapAnnotation: TKUIIdentifiableAnnotation? {
       return modeCoordinate is TKDisplayableRoute ? nil : modeCoordinate
     }
   }
   
   /// A section on the nearby screen, which is made up of various sorted items.
-  struct Section {
+  public struct Section {
     static let empty = Section(items: [])
     
-    var header: String { return "" }
+    public var header: String { return "" }
     
     /// Items in this section, all instances of the `TKUINearbyViewModel.Item` enum
-    var items: [Item]
+    public var items: [Item]
   }
   
 }
@@ -189,7 +189,7 @@ extension CLLocationCoordinate2D {
     return radians * 180.0 / .pi
   }
   
-  func bearing(from other: CLLocationCoordinate2D) -> CLLocationDirection {
+  public func bearing(from other: CLLocationCoordinate2D) -> CLLocationDirection {
     let lat1 = degreesToRadians(degrees: latitude)
     let lng1 = degreesToRadians(degrees: longitude)
     
@@ -255,29 +255,29 @@ extension TKOnStreetParkingLocation: TKDisplayableRoute {
 
 extension TKUINearbyViewModel.Item: Equatable {
   
-  static func ==(lhs: TKUINearbyViewModel.Item, rhs: TKUINearbyViewModel.Item) -> Bool {
+  public static func ==(lhs: TKUINearbyViewModel.Item, rhs: TKUINearbyViewModel.Item) -> Bool {
     return lhs.identifier == rhs.identifier
   }
   
 }
 
 extension TKUINearbyViewModel.Item: IdentifiableType {
-  typealias Identity = String
+  public typealias Identity = String
   
-  var identity: Identity {
+  public var identity: Identity {
     return identifier
   }
 }
 
 
 extension TKUINearbyViewModel.Section: AnimatableSectionModelType {
-  typealias Item = TKUINearbyViewModel.Item
-  typealias Identity = String
+  public typealias Item = TKUINearbyViewModel.Item
+  public typealias Identity = String
   
-  init(original: TKUINearbyViewModel.Section, items: [Item]) {
+  public init(original: TKUINearbyViewModel.Section, items: [Item]) {
     self = original
     self.items = items
   }
   
-  var identity: Identity { return "SingleSection" }
+  public var identity: Identity { return "SingleSection" }
 }

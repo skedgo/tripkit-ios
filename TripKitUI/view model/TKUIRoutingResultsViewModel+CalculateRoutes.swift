@@ -335,4 +335,3 @@ public func ==(lhs: TKUIRoutingResultsViewModel.RouteBuilder, rhs: TKUIRoutingRe
     && lhs.mode == rhs.mode
 }
 extension TKUIRoutingResultsViewModel.RouteBuilder: Equatable { }
-
