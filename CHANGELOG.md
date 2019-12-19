@@ -19,9 +19,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   the card will just show those results, rather than querying for new results, and the UI to change
   the trip request will be disabled. To enable it set `request.expandForFavorite = true`.
 - `TKUIRoutingResults`: Updated the title view of the card to bring up the new query input card on tap.
+- `TKUIRoutingResults`: In long distance trips, you can now select all relevant modes
 
 ### Fixed
 
+- Fixes styling of some modes in dark mode (school buses, flights, and some car share)
 - Addressed some crashes
 
 ## [Version 4.0-rc1] - 2019-10-15
