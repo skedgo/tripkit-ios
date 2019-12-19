@@ -67,8 +67,8 @@ class TKUIAutocompletionViewModel {
     searchText: Observable<(String, forced: Bool)>,
     selected: Signal<Item>,
     accessorySelected: Signal<Item>? = nil,
-    biasMapRect: MKMapRect = .null
-    ) {
+    biasMapRect: Driver<MKMapRect> = .just(.null)
+  ) {
     
     sections = TKUIAutocompletionViewModel
       .buildSections(providers, searchText: searchText, biasMapRect: biasMapRect, includeAccessory: accessorySelected != nil)
@@ -107,15 +107,16 @@ class TKUIAutocompletionViewModel {
 
 extension TKUIAutocompletionViewModel {
   
-  private static func buildSections(_ providers: [TKAutocompleting], searchText: Observable<(String, forced: Bool)>, biasMapRect: MKMapRect, includeAccessory: Bool) -> Observable<[Section]> {
+  private static func buildSections(_ providers: [TKAutocompleting], searchText: Observable<(String, forced: Bool)>, biasMapRect: Driver<MKMapRect>, includeAccessory: Bool) -> Observable<[Section]> {
     
     let additionalItems = providers
       .compactMap(ActionItem.init)
       .map { Item.action($0) }
     let additionalSection = additionalItems.isEmpty ? [] : [Section(items: additionalItems, title: Loc.MoreResults)]
 
-    return providers
-      .autocomplete(searchText, mapRect: biasMapRect)
+    return biasMapRect
+      .asObservable()
+      .flatMapLatest { providers.autocomplete(searchText, mapRect: $0) }
       .map { $0.buildSections(includeAccessory: includeAccessory) + additionalSection }
   }
   

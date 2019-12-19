@@ -33,14 +33,16 @@ public class TKUIHomeCard: TGTableCard {
   
   private let searchResultAccessoryTapped = PublishSubject<TKUIAutocompletionViewModel.Item>()
   
-  private var searchViewModel: TKUIAutocompletionViewModel!
-  
+  private var viewModel: TKUIHomeViewModel!
+  private let nearbyMapManager: TKUINearbyMapManager
+
   private let disposeBag = DisposeBag()
   
   private let searchBar = UISearchBar()
   
   init() {
-    let mapManager = TKUIMapManager()
+    let mapManager = TKUINearbyMapManager()
+    self.nearbyMapManager = mapManager
     
     // Home card requires a custom title view that includes
     // a search bar only.
@@ -61,7 +63,7 @@ public class TKUIHomeCard: TGTableCard {
   public override func didBuild(tableView: UITableView, headerView: TGHeaderView?) {
     super.didBuild(tableView: tableView, headerView: headerView)
     
-    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIAutocompletionViewModel.Section>(
+    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIHomeViewModel.Section>(
       configureCell: { [weak self] _, tv, ip, item in
         guard let self = self else {
           // Shouldn't but can happen on dealloc
@@ -83,21 +85,35 @@ public class TKUIHomeCard: TGTableCard {
     
     tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
     
-    // We use Apple & SkedGo if none is provided for autocompletion
-    let autocompleteDataProviders = TKUIHomeCard.config.autocompletionDataProviders ?? [TKAppleGeocoder(), TKSkedGoGeocoder()]
-    
-    searchViewModel = TKUIAutocompletionViewModel(
-      providers: autocompleteDataProviders,
+    let listInput = TKUIHomeViewModel.ListInput(
       searchText: searchTextPublisher.asObservable(),
       selected: tableView.rx.itemSelected.map { dataSource[$0] }.asSignal(onErrorSignalWith: .empty()),
       accessorySelected: searchResultAccessoryTapped.asSignal(onErrorSignalWith: .empty())
     )
+
+    let mapInput = TKUIHomeViewModel.MapInput(
+      mapRect: nearbyMapManager.mapRect,
+      selected: nearbyMapManager.mapSelection
+    )
     
-    searchViewModel.sections
+    viewModel = TKUIHomeViewModel(
+      listInput: listInput,
+      mapInput: mapInput
+    )
+    
+    // List content
+    
+    viewModel.sections
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
-    searchViewModel.selection
+    // Map content
+
+    nearbyMapManager.viewModel = viewModel.nearbyViewModel
+    
+    // Interaction
+    
+    viewModel.selection
       .emit(onNext: { [weak self] annotation in
         guard let self = self else { return }
         
@@ -116,7 +132,7 @@ public class TKUIHomeCard: TGTableCard {
       })
       .disposed(by: disposeBag)
     
-    searchViewModel.accessorySelection
+    viewModel.accessorySelection
       .emit(onNext: { [weak self] annotation in
         guard let self = self else { return }
         
@@ -139,6 +155,7 @@ public class TKUIHomeCard: TGTableCard {
         self.clearSearchBar()
       })
       .disposed(by: disposeBag)
+    
   }
   
 }
