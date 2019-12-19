@@ -172,6 +172,17 @@
     BOOL asTemplate = [segment tripSegmentModeImageIsTemplate];
     BOOL asBranding = [segment tripSegmentModeImageIsBranding];
     if (modeImageURL) {
+      UIView *modeCircleBackground = nil;
+      if (!asTemplate) {
+        // remote images that aren't templates look weird on the background colour
+        CGRect circleFrame = CGRectInset(newFrame, -1.0f, -1.0f);
+        modeCircleBackground = [[UIView alloc] initWithFrame:circleFrame];
+        modeCircleBackground.backgroundColor = [UIColor whiteColor];
+        modeCircleBackground.layer.cornerRadius = CGRectGetWidth(circleFrame) / 2;
+        modeCircleBackground.alpha = alpha;
+        [self addSubview:modeCircleBackground];
+      }
+      
       if (asBranding) {
         // brand images are not overlaid over the mode icon, but appear next
         // to them
@@ -184,21 +195,17 @@
         newFrame = brandFrame;
         
       } else {
-        [modeImageView setImageWithURL:modeImageURL asTemplate:asTemplate placeholderImage:image];
+        [modeImageView setImageWithURL:modeImageURL asTemplate:asTemplate placeholderImage:image completionHandler:^(BOOL succeed) {
+          if (!succeed) {
+            [modeCircleBackground removeFromSuperview];
+          }
+        }];
       }
-    }
-    
-    if (modeImageURL && !asTemplate) {
-      // remove images that aren't templates look weird on the background colour
-      CGRect circleFrame = CGRectInset(newFrame, -1.0f, -1.0f);
-      UIView *modeCircleBackground = [[UIView alloc] initWithFrame:circleFrame];
-      modeCircleBackground.backgroundColor = [UIColor whiteColor];
-      modeCircleBackground.layer.cornerRadius = CGRectGetWidth(circleFrame) / 2;
-      modeCircleBackground.alpha = alpha;
-      [self addSubview:modeCircleBackground];
       
-      // add a little bit more spacing next to the circle background
-      newFrame.origin.x += 2;
+      if (!asTemplate) {
+        // add a little bit more spacing next to the circle background
+        newFrame.origin.x += 2;
+      }
     }
 
     [self addSubview:modeImageView];
