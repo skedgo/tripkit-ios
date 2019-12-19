@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   the trip request will be disabled. To enable it set `request.expandForFavorite = true`.
 - Updated the title view of the card to bring up the new query input card on tap.
 - Fixes issue where continuations might not appear on the map
+- In long distance trips, you can now select all relevant modes
 
 `TKUIServiceCard`:
 
@@ -41,6 +42,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+- Fixes styling of some modes in dark mode (school buses, flights, and some car share)
 - Addressed some crashes
 
 ## [Version 4.0-rc1] - 2019-10-15

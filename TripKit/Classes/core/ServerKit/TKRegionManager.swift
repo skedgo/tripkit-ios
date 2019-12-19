@@ -74,6 +74,7 @@ struct ModeDetails: Codable {
     case required
     case implies
     case icon
+    case isTemplate
     case vehicleIcon
   }
   
@@ -84,6 +85,7 @@ struct ModeDetails: Codable {
   let required: Bool?
   let implies: [String]?
   let icon: String?
+  let isTemplate: Bool?
   let vehicleIcon: String?
   
   var color: TKColor {
@@ -204,6 +206,12 @@ extension TKRegionManager {
   func remoteImageName(forModeIdentifier mode: String) -> String? {
     return response?.modes?[mode]?.icon
   }
+  
+  public func remoteImageIsTemplate(forModeIdentifier mode: String) -> Bool {
+    return response?.modes?[mode]?.isTemplate ?? false
+  }
+  
+
 
   @objc(imageURLForModeIdentifier:ofIconType:)
   public func imageURL(forModeIdentifier mode: String?, iconType: TKStyleModeIconType) -> URL? {
