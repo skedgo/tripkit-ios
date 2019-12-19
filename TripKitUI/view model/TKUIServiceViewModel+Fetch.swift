@@ -1,6 +1,6 @@
 //
 //  TKUIServiceViewModel+Fetch.swift
-//  TripGoAppKit
+//  TripKitUI
 //
 //  Created by Adrian Schönig on 18.07.18.
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.

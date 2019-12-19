@@ -1,6 +1,6 @@
 //
 //  TKUITimetableViewModel+Content.swift
-//  TripGoAppKit
+//  TripKitUI
 //
 //  Created by Adrian Schönig on 20.03.19.
 //  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.

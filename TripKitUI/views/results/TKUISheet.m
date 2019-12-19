@@ -1,6 +1,6 @@
 //
 //  TKUISheet.m
-//  TripGo
+//  TripKitUI
 //
 //  Created by Adrian Schoenig on 10/04/2014.
 //

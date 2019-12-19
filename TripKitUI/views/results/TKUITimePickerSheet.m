@@ -1,6 +1,6 @@
 //
 //  TKUITimePickerSheet.m
-//  TripGo
+//  TripKitUI
 //
 //  Created by Adrian Schoenig on 24/09/13.
 //
