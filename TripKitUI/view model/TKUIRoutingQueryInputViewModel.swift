@@ -38,7 +38,7 @@ class TKUIRoutingQueryInputViewModel {
       providers: providers,
       searchText: inputs.searchText.startWith(("", forced: false)),
       selected: inputs.selected,
-      biasMapRect: biasMapRect
+      biasMapRect: .just(biasMapRect)
     )
     
     let state = Self.buildState(
