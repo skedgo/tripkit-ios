@@ -258,24 +258,32 @@ extension TripRequest {
     if let from = self.fromLocation.title, from != Loc.Location {
       originObservable = .just(from)
     } else {
-      originObservable = CLGeocoder().rx
-        .reverseGeocode(namedCoordinate: self.fromLocation)
+      originObservable = geocode(self.fromLocation, retryLimit: 5, delay: 5)
         .catchErrorJustReturn(nil)
         .startWith(nil)
     }
-    
     
     let destinationObservable: Observable<String?>
     if let to = self.toLocation.title, to != Loc.Location {
       destinationObservable = .just(to)
     } else {
-      destinationObservable = CLGeocoder().rx
-        .reverseGeocode(namedCoordinate: self.toLocation)
+      destinationObservable = geocode(self.toLocation, retryLimit: 5, delay: 5)
         .catchErrorJustReturn(nil)
         .startWith(nil)
     }
     
     return Observable.combineLatest(originObservable, destinationObservable) { (origin: $0, destination: $1) }
+  }
+  
+  private func geocode(_ location: TKNamedCoordinate, retryLimit: Int, delay: Int) -> Observable<String?> {
+    return CLGeocoder().rx
+    .reverseGeocode(namedCoordinate: location)
+    .retryWhen { errors in
+      return errors.enumerated().flatMap { (index, error) -> Observable<Int64> in
+        guard index < retryLimit else { print("reached retry limit"); return Observable.error(error) }
+        return Observable<Int64>.timer(RxTimeInterval.seconds(delay), scheduler: MainScheduler.instance)
+      }
+    }
   }
   
 }
@@ -361,7 +369,7 @@ extension Reactive where Base: CLGeocoder {
   
   func reverseGeocode(namedCoordinate: TKNamedCoordinate) -> Observable<String?> {
     return Observable.create { subscriber in
-      print("reverse geocoding \(namedCoordinate.title)")
+      print("reverse geocoding \(namedCoordinate.coordinate.latitude),\(namedCoordinate.coordinate.longitude)")
       let location = CLLocation(latitude: namedCoordinate.coordinate.latitude, longitude: namedCoordinate.coordinate.longitude)
       let geocoder = CLGeocoder()
       geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
