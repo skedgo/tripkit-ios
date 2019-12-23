@@ -280,7 +280,7 @@ extension TripRequest {
     .reverseGeocode(namedCoordinate: location)
     .retryWhen { errors in
       return errors.enumerated().flatMap { (index, error) -> Observable<Int64> in
-        guard index < retryLimit else { print("reached retry limit"); return Observable.error(error) }
+        guard index < retryLimit else { throw error }
         return Observable<Int64>.timer(RxTimeInterval.seconds(delay), scheduler: MainScheduler.instance)
       }
     }
