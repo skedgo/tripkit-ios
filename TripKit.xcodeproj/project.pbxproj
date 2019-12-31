@@ -37,6 +37,7 @@
 		3A201F2123BB86A600763948 /* TKUISegmentImpossibleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A201F1F23BB86A500763948 /* TKUISegmentImpossibleCell.xib */; };
 		3A201F2223BB86A600763948 /* TKUISegmentImpossibleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A201F2023BB86A600763948 /* TKUISegmentImpossibleCell.swift */; };
 		3A201F2423BB931A00763948 /* TKSegment+AlternativeRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */; };
+		3A201F2623BB9D0200763948 /* routing-pt-cancelled.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A201F2523BB9D0100763948 /* routing-pt-cancelled.json */; };
 		3A218773228C5B7500B44B96 /* TKAutocompletionRaceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A218772228C5B7500B44B96 /* TKAutocompletionRaceTest.swift */; };
 		3A21A4AD20690448005F411D /* alertsTransit-melbourne.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A21A4AC20690447005F411D /* alertsTransit-melbourne.json */; };
 		3A21A4B32069057D005F411D /* TKUISectionedAlertsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A21A4B22069057D005F411D /* TKUISectionedAlertsTest.swift */; };
@@ -934,6 +935,7 @@
 		3A201F1F23BB86A500763948 /* TKUISegmentImpossibleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentImpossibleCell.xib; sourceTree = "<group>"; };
 		3A201F2023BB86A600763948 /* TKUISegmentImpossibleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentImpossibleCell.swift; sourceTree = "<group>"; };
 		3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKSegment+AlternativeRoutes.swift"; sourceTree = "<group>"; };
+		3A201F2523BB9D0100763948 /* routing-pt-cancelled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-cancelled.json"; sourceTree = "<group>"; };
 		3A218772228C5B7500B44B96 /* TKAutocompletionRaceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAutocompletionRaceTest.swift; sourceTree = "<group>"; };
 		3A21A4AC20690447005F411D /* alertsTransit-melbourne.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alertsTransit-melbourne.json"; sourceTree = "<group>"; };
 		3A21A4B22069057D005F411D /* TKUISectionedAlertsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertsTest.swift; sourceTree = "<group>"; };
@@ -2069,6 +2071,7 @@
 				3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */,
 				3AA3CEA5202CD4D100E54859 /* routing-goget.json */,
 				3ADD3B9D2358BDA900CD4713 /* routing-motorbike.json */,
+				3A201F2523BB9D0100763948 /* routing-pt-cancelled.json */,
 				3AD5324F239825AC00E8EC0C /* routing-pt-continuation.json */,
 				3A8A542F2397FB69006A390F /* routing-pt-impossible.json */,
 				3AA3CEA9202CD4D100E54859 /* routing-pt-oldish.json */,
@@ -3153,6 +3156,7 @@
 				3AA3CEC6202CD4D100E54859 /* hornsbyToSkedGo.json in Resources */,
 				3AE6077E20FF4F64006D59B0 /* pelias-de.json in Resources */,
 				3ADD3B9F2358BDAF00CD4713 /* routing-motorbike.json in Resources */,
+				3A201F2623BB9D0200763948 /* routing-pt-cancelled.json in Resources */,
 				3AA3CECF202CD4D100E54859 /* alertsTransit.json in Resources */,
 				3A15DDCA2271A6C7001AC0F5 /* routing-with-stops.json in Resources */,
 				3AA3CECB202CD4D100E54859 /* berowraToHornsby.json in Resources */,

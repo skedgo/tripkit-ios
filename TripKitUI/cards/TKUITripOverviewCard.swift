@@ -110,8 +110,8 @@ public class TKUITripOverviewCard: TGTableCard {
           return self.movingCell(for: item, tableView: tv, indexPath: ip)
         case .alert(let item):
           return self.alertCell(for: item, tableView: tv, indexPath: ip)
-        case .impossible:
-          return self.impossibleCell(tableView: tv, indexPath: ip)
+        case .impossible(_, let title):
+          return self.impossibleCell(text: title, tableView: tv, indexPath: ip)
         }
     })
     
@@ -214,8 +214,10 @@ extension TKUITripOverviewCard {
     return cell
   }
 
-  private func impossibleCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+  private func impossibleCell(text: String, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentImpossibleCell.reuseIdentifier, for: indexPath) as? TKUISegmentImpossibleCell else { preconditionFailure() }
+    
+    cell.titleLabel.text = text
     
     cell.button.rx.tap
       .subscribe(onNext: { [unowned self] _ in self.alternativesTapped.onNext(indexPath) })

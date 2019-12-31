@@ -131,7 +131,19 @@ class TKUITripOverviewViewModelTest: TKTestCase {
     let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 10)
     
-    guard case .impossible = items[4] else { return XCTFail() }
+    guard case let .impossible(_, title) = items[4] else { return XCTFail() }
+    XCTAssertEqual(title, Loc.YouMightNotMakeThisTransfer)
+  }
+
+  func testImpossibleTripDueToCancellation() throws {
+    let trip = self.trip(fromFilename: "routing-pt-cancelled")
+    let viewModel = TKUITripOverviewViewModel(trip: trip)
+    
+    let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
+    XCTAssertEqual(items.count, 10)
+    
+    guard case let .impossible(_, title) = items[2] else { return XCTFail() }
+    XCTAssertEqual(title, Loc.ServiceHasBeenChancelled)
   }
 
 }

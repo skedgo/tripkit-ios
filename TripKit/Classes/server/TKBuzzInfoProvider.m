@@ -115,7 +115,7 @@
   NSString *realTimeStatus = responseDict[@"realTimeStatus"];
   if (realTimeStatus) {
     [TKCoreDataParserHelper adjustService:service
-          forRealTimeStatusString:realTimeStatus];
+                  forRealTimeStatusString:realTimeStatus];
   }
   
   // real time vehicles

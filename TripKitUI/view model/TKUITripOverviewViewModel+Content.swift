@@ -32,7 +32,7 @@ extension TKUITripOverviewViewModel {
     case stationary(StationaryItem)
     case moving(MovingItem)
     case alert(AlertItem)
-    case impossible(TKSegment)
+    case impossible(TKSegment, title: String)
   }
   
   struct TimeInfo: Equatable {
@@ -120,7 +120,7 @@ extension TKUITripOverviewViewModel.Item {
     case .stationary(let item): return item.segment
     case .moving(let item): return item.segment
     case .alert(let item): return item.segment
-    case .impossible(let segment): return segment
+    case .impossible(let segment, _): return segment
     }
   }
   
@@ -145,7 +145,8 @@ extension TKUITripOverviewViewModel {
         let next = index + 1 < segments.count ? segments[index + 1]: nil
         var items = build(segment: current, previous: previous, next: next)
         if current.isImpossible {
-          items.insert(.impossible(current), at: 0)
+          // Makes most sense before the departure, so inject in beginning
+          items.insert(.impossible(current, title: Loc.YouMightNotMakeThisTransfer), at: 0)
         }
         return items
       }
@@ -173,6 +174,9 @@ extension TKUITripOverviewViewModel {
         if !segment.alerts().isEmpty {
           items.append(.alert(segment.toAlert()))
         }
+        if segment.isCanceled {
+          items.append(.impossible(segment, title: Loc.ServiceHasBeenChancelled))
+        }
         
         items.append(.stationary(segment.toStationaryBridge(to: next)))
         return items
@@ -183,7 +187,10 @@ extension TKUITripOverviewViewModel {
         if !segment.alerts().isEmpty {
           items.append(.alert(segment.toAlert()))
         }
-        
+        if segment.isCanceled {
+          items.append(.impossible(segment, title: Loc.ServiceHasBeenChancelled))
+        }
+
         return items
       }
     }
