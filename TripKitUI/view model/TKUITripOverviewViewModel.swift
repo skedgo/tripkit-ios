@@ -18,7 +18,11 @@ import RxCocoa
 
 class TKUITripOverviewViewModel {
   
-  init(trip: Trip) {
+  struct UIInput {
+    var selected: Signal<Item> = .empty()
+  }
+  
+  init(trip: Trip, inputs: UIInput) {
     self.trip = trip
     
     titles = trip.rx.titles
@@ -29,6 +33,21 @@ class TKUITripOverviewViewModel {
     
     refreshMap = TKUITripOverviewViewModel.fetchContentOfServices(in: trip)
       .asSignal(onErrorSignalWith: .empty())
+    
+    next = inputs.selected.compactMap { item -> Next? in
+        switch item {
+        case .impossible(let segment):
+          let request = segment.insertRequestStartingHere()
+          return .showAlternativeRoutes(request)
+        
+        case .alert(let item):
+          return .showAlerts(item.alerts)
+          
+        case .moving, .stationary, .terminal:
+          guard let segment = item.segment else { return nil }
+          return .handleSelection(segment)
+        }
+      }
   }
   
   let trip: Trip
@@ -40,6 +59,8 @@ class TKUITripOverviewViewModel {
   let dataSources: Driver<[API.DataAttribution]>
   
   let refreshMap: Signal<Void>
+  
+  let next: Signal<Next>
 }
 
 fileprivate extension Reactive where Base == Trip {
@@ -58,3 +79,14 @@ fileprivate extension Reactive where Base == Trip {
   }
 }
 
+// MARK: - Navigation
+
+extension TKUITripOverviewViewModel {
+  
+  enum Next {
+    case handleSelection(TKSegment)
+    case showAlerts([TKAlert])
+    case showAlternativeRoutes(TripRequest)
+  }
+  
+}

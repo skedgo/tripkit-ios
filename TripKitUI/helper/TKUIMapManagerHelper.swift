@@ -162,5 +162,6 @@ extension TKColoredRoute {
   func absorb(_ shape: Shape) {
     append(shape.sortedCoordinates ?? [])
   }
+  
 }
 

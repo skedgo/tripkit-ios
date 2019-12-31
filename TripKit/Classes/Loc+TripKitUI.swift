@@ -161,7 +161,15 @@ extension Loc {
     }
   }
 
+  @objc public static var YouMightNotMakeThisTransfer: String {
+    return NSLocalizedString("You might not make this transfer.", tableName: "TripKit", bundle: .tripKit, comment: "Alert if service running late/early, meaning that the user might not make the next service")
+  }
   
+  @objc public static var AlternativeRoutes: String {
+    return NSLocalizedString("Alternative routes", tableName: "TripKit", bundle: .tripKit, comment: "Action button title to see alternative options for the case where you cant make the next connection")
+  }
+  
+
   // MARK: - Departures + Services
 
   @objc public static var Timetable: String {

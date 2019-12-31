@@ -12,16 +12,6 @@ import RxDataSources
 
 extension TKUITripOverviewViewModel {
   
-  func segment(for item: Item) -> TKSegment? {
-    switch item {
-    case .terminal: return nil
-    case .stationary(let item): return item.segment
-    case .moving(let item): return item.segment
-    case .alert(let item): return item.segment
-    case .impossible: return nil
-    }
-  }
-  
   struct Section {
     var header: String {
       // Sections are grouped by dates
@@ -42,7 +32,7 @@ extension TKUITripOverviewViewModel {
     case stationary(StationaryItem)
     case moving(MovingItem)
     case alert(AlertItem)
-    case impossible
+    case impossible(TKSegment)
   }
   
   struct TimeInfo: Equatable {
@@ -124,10 +114,13 @@ extension TKUITripOverviewViewModel {
 
 extension TKUITripOverviewViewModel.Item {
   
-  var isAlert: Bool {
+  var segment: TKSegment? {
     switch self {
-    case .alert: return true
-    default: return false
+    case .terminal: return nil
+    case .stationary(let item): return item.segment
+    case .moving(let item): return item.segment
+    case .alert(let item): return item.segment
+    case .impossible(let segment): return segment
     }
   }
   
@@ -152,7 +145,7 @@ extension TKUITripOverviewViewModel {
         let next = index + 1 < segments.count ? segments[index + 1]: nil
         var items = build(segment: current, previous: previous, next: next)
         if current.isImpossible {
-          items.insert(.impossible, at: 0)
+          items.insert(.impossible(current), at: 0)
         }
         return items
       }

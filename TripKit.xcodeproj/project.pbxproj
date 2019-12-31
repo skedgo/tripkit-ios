@@ -34,6 +34,9 @@
 		3A17E60022B7DC33005318D5 /* locationInfo-onStreetParking.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A17E5FF22B7DC33005318D5 /* locationInfo-onStreetParking.json */; };
 		3A1AAB3722BE199A000ED3CC /* UIImage+Variations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A1AAB3522BE199A000ED3CC /* UIImage+Variations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A1AAB3822BE199A000ED3CC /* UIImage+Variations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AAB3622BE199A000ED3CC /* UIImage+Variations.m */; };
+		3A201F2123BB86A600763948 /* TKUISegmentImpossibleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A201F1F23BB86A500763948 /* TKUISegmentImpossibleCell.xib */; };
+		3A201F2223BB86A600763948 /* TKUISegmentImpossibleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A201F2023BB86A600763948 /* TKUISegmentImpossibleCell.swift */; };
+		3A201F2423BB931A00763948 /* TKSegment+AlternativeRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */; };
 		3A218773228C5B7500B44B96 /* TKAutocompletionRaceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A218772228C5B7500B44B96 /* TKAutocompletionRaceTest.swift */; };
 		3A21A4AD20690448005F411D /* alertsTransit-melbourne.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A21A4AC20690447005F411D /* alertsTransit-melbourne.json */; };
 		3A21A4B32069057D005F411D /* TKUISectionedAlertsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A21A4B22069057D005F411D /* TKUISectionedAlertsTest.swift */; };
@@ -928,6 +931,9 @@
 		3A17E5FF22B7DC33005318D5 /* locationInfo-onStreetParking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "locationInfo-onStreetParking.json"; sourceTree = "<group>"; };
 		3A1AAB3522BE199A000ED3CC /* UIImage+Variations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Variations.h"; sourceTree = "<group>"; };
 		3A1AAB3622BE199A000ED3CC /* UIImage+Variations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Variations.m"; sourceTree = "<group>"; };
+		3A201F1F23BB86A500763948 /* TKUISegmentImpossibleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentImpossibleCell.xib; sourceTree = "<group>"; };
+		3A201F2023BB86A600763948 /* TKUISegmentImpossibleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentImpossibleCell.swift; sourceTree = "<group>"; };
+		3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKSegment+AlternativeRoutes.swift"; sourceTree = "<group>"; };
 		3A218772228C5B7500B44B96 /* TKAutocompletionRaceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAutocompletionRaceTest.swift; sourceTree = "<group>"; };
 		3A21A4AC20690447005F411D /* alertsTransit-melbourne.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alertsTransit-melbourne.json"; sourceTree = "<group>"; };
 		3A21A4B22069057D005F411D /* TKUISectionedAlertsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertsTest.swift; sourceTree = "<group>"; };
@@ -1682,6 +1688,10 @@
 				3A6DF0E8202C8EB80084CB2C /* TKUIOccupancyView.swift */,
 				3A6DF0E4202C8EB80084CB2C /* TKUIPathFriendlinessView.swift */,
 				3A6DF0F1202C8EB80084CB2C /* TKUIPathFriendlinessView.xib */,
+				D33E6C88239F11B500F2AF3B /* TKUISegmentAlertCell.swift */,
+				D33E6C89239F11B500F2AF3B /* TKUISegmentAlertCell.xib */,
+				3A201F2023BB86A600763948 /* TKUISegmentImpossibleCell.swift */,
+				3A201F1F23BB86A500763948 /* TKUISegmentImpossibleCell.xib */,
 				3A6E7D3E20EFBD4800013253 /* TKUISegmentMovingCell.swift */,
 				3A6E7D3F20EFBD4800013253 /* TKUISegmentMovingCell.xib */,
 				3A26E1B220EFAFBD00FE4DDD /* TKUISegmentStationaryCell.swift */,
@@ -1690,8 +1700,6 @@
 				3AF5F2BC20F3A818003AAEBA /* TKUITripActionsView.swift */,
 				3AF5F2C020F3A9E2003AAEBA /* TKUITripActionView.swift */,
 				3AF5F2BE20F3A829003AAEBA /* TKUITripActionView.xib */,
-				D33E6C88239F11B500F2AF3B /* TKUISegmentAlertCell.swift */,
-				D33E6C89239F11B500F2AF3B /* TKUISegmentAlertCell.xib */,
 			);
 			path = "trip overview";
 			sourceTree = "<group>";
@@ -1880,6 +1888,7 @@
 				3ACF474722981FF40096860D /* TGCardViewController+Present.swift */,
 				3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */,
 				3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */,
+				3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */,
 				3A506B28231FB403003DD234 /* Trip+Titles.swift */,
 				3A897A21234776B0004D0281 /* UIButton+SwapImageSide.swift */,
 				D39910F223334BFF004A09C8 /* UIColor+TripGoDefault.swift */,
@@ -3103,6 +3112,7 @@
 				D372268C2345A8E500DBCFC8 /* TKUIResultsTitleView.xib in Resources */,
 				3A7377CF23226921004C91CC /* TKUITimetableActionView.xib in Resources */,
 				3A0B51802240E5B6002346D6 /* TKUISegmentTitleView.xib in Resources */,
+				3A201F2123BB86A600763948 /* TKUISegmentImpossibleCell.xib in Resources */,
 				3A682F1F20F3F8A900E05195 /* TKUIRoutingSupportView.xib in Resources */,
 				3A40922D22F1E27B0049AAE7 /* TKUIServiceHeaderMiniView.xib in Resources */,
 				D32CA5AF20E34409009C9449 /* TKUIGroupedAlertCell.xib in Resources */,
@@ -3460,6 +3470,7 @@
 				3AF5F2B920F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift in Sources */,
 				D32829D3212CFC06006E3D0E /* TKUIEventTrackable.swift in Sources */,
 				D335907421EF604100CB57E3 /* TKStyleManager+TripKitUI.swift in Sources */,
+				3A201F2423BB931A00763948 /* TKSegment+AlternativeRoutes.swift in Sources */,
 				3A40922C22F1E27B0049AAE7 /* TKUIServiceHeaderMiniView.swift in Sources */,
 				3A6DF130202C8EB80084CB2C /* TKUIStyledButton.m in Sources */,
 				3A6DF117202C8EB80084CB2C /* TKUITripSegmentsView.m in Sources */,
@@ -3467,6 +3478,7 @@
 				3A65B92A22F5ADCC001ACDEB /* TKUIModePicker+TKModeInfo.swift in Sources */,
 				3A474D9F2276E79000AE82D2 /* TKUITripModeByModeViewController.swift in Sources */,
 				3A67698420EE3A6F0044663F /* TKUIAutocompletionViewModel.swift in Sources */,
+				3A201F2223BB86A600763948 /* TKUISegmentImpossibleCell.swift in Sources */,
 				3A506B29231FB403003DD234 /* Trip+Titles.swift in Sources */,
 				3A4C4202227087F0003E057E /* TKUISegmentMode.swift in Sources */,
 				3AFD394A20D9333500FDC7D0 /* TKUIRoutingResultsCard.swift in Sources */,
