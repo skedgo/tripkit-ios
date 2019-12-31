@@ -88,7 +88,7 @@ extension TKUIServiceViewModel.Item {
     }
     
     // Important to use service from `embarkation`, not the one from `visit`,
-    // as `visit.service` might a continuation of `embarkation.service`
+    // as `visit.service` might be a continuation of `embarkation.service`
     let sortedVisits = embarkation.service.visitsIncludingContinuation()
 
     let serviceColor = (visit.service.color as? UIColor) ?? .black
