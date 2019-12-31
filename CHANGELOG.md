@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 `TKUITripOverviewCard`:
 
 - Only show times in list for PT segments, highlighting real-time status of times
+- Platform information is now shown at the get on/get off parts of the trip
 - Tweaked handling when the calculated trip starts or ends not directly at the requested location,
   by adding 'near' to the wording and displaying the query's origin and/or destination on the map.
 - Adjusted logic when calculating "minutes" to ignore seconds in dates, to align with time stamps in the UI.

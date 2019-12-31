@@ -448,8 +448,9 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSString *)notes
 {
-	if (_notes)
+  if (_notes) {
 		return _notes;
+  }
 	
   NSString *raw = self.template.notesRaw;
   if (raw.length == 0) {
@@ -457,13 +458,27 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
   
   NSMutableString *notes = [NSMutableString stringWithString:raw];
-  BOOL isTimeDependent = [self fillInTemplates:notes inTitle:NO includingTime:YES];
+  BOOL isTimeDependent = [self fillInTemplates:notes
+                                       inTitle:NO
+                                 includingTime:YES
+                             includingPlatform:YES];
   if (isTimeDependent) {
     return notes;
   } else {
     _notes = notes;
     return _notes;
   }
+}
+
+- (NSString *)notesWithoutPlatforms
+{
+  NSString *raw = self.template.notesRaw;
+  NSMutableString *notes = [NSMutableString stringWithString:raw];
+  [self fillInTemplates:notes
+                inTitle:NO
+          includingTime:YES
+      includingPlatform:NO];
+  return notes;
 }
 
 - (NSSet *)shapes {
@@ -795,6 +810,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 - (BOOL)fillInTemplates:(NSMutableString *)string
                 inTitle:(BOOL)title
           includingTime:(BOOL)includeTime
+      includingPlatform:(BOOL)includePlatform
 {
   BOOL isDynamic = NO;
   NSRange range;
@@ -826,13 +842,8 @@ NSString *const UninitializedString =  @"UninitializedString";
 
   range = [string rangeOfString:@"<PLATFORM>"];
   if (range.location != NSNotFound) {
-    NSString *platform = [self scheduledStartPlatform];
-    NSString *replacement;
-    if (platform) {
-      replacement = platform;
-    } else {
-      replacement = @"";
-    }
+    NSString *platform = includePlatform ? [self scheduledStartPlatform] : nil;
+    NSString *replacement = platform ?: @"";
     [string replaceCharactersInRange:range withString:replacement];
   }
 
@@ -983,7 +994,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
 	if (_singleLineInstruction == UninitializedString) {
     BOOL isTimeDependent = NO;
-    NSString *newString = [self buildSingleLineInstructionIncludingTime:YES isTimeDependent:&isTimeDependent];
+    NSString *newString = [self buildSingleLineInstructionIncludingTime:YES includingPlatform:NO isTimeDependent:&isTimeDependent];
     if (isTimeDependent)
       // in this place we can't cache the single line instruction as it's dynamic!
       return newString;
@@ -999,7 +1010,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 {
   if (_singleLineInstructionWithoutTime == UninitializedString) {
     BOOL isTimeDependent = NO;
-    NSString *newString = [self buildSingleLineInstructionIncludingTime:NO isTimeDependent:&isTimeDependent];
+    NSString *newString = [self buildSingleLineInstructionIncludingTime:NO includingPlatform:NO isTimeDependent:&isTimeDependent];
     if (isTimeDependent)
       // in this place we can't cache the single line instruction as it's dynamic!
       return newString;
@@ -1011,7 +1022,9 @@ NSString *const UninitializedString =  @"UninitializedString";
   return _singleLineInstructionWithoutTime;
 }
 
-- (NSString *)buildSingleLineInstructionIncludingTime:(BOOL)includeTime isTimeDependent:(BOOL *)isTimeDependent {
+- (NSString *)buildSingleLineInstructionIncludingTime:(BOOL)includeTime
+                                    includingPlatform:(BOOL)includePlatform
+                                      isTimeDependent:(BOOL *)isTimeDependent {
   *isTimeDependent = NO;
   NSString *newString = nil;
   
@@ -1042,7 +1055,7 @@ NSString *const UninitializedString =  @"UninitializedString";
         return @"";
       }
       NSMutableString *actionRaw = [NSMutableString stringWithString:self.template.action];
-      *isTimeDependent = [self fillInTemplates:actionRaw inTitle:YES includingTime:includeTime];
+      *isTimeDependent = [self fillInTemplates:actionRaw inTitle:YES includingTime:includeTime includingPlatform:includePlatform];
       newString = actionRaw;
       break;
     }

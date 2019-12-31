@@ -200,7 +200,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)fillInTemplates:(NSMutableString *)string
                 inTitle:(BOOL)title
-          includingTime:(BOOL)includeTime;
+          includingTime:(BOOL)includeTime
+      includingPlatform:(BOOL)includePlatform;
 
 ///-----------------------------------------------------------------------------
 /// @name In-app and external bookings

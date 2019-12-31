@@ -71,6 +71,7 @@
               "availability": "AVAILABLE",
               "bicycleAccessible": true,
               "endTime": 1575498204,
+              "endPlatform": "Platform 2",
               "externalData": {
                 "gtfs": {
                   "directionId": 0,
@@ -79,6 +80,7 @@
                 }
               },
               "id": "tCsENgPm",
+              "platform": "Platform 1",
               "routeDirection": 0,
               "routeId": "WST_1a",
               "segmentTemplateHashCode": -121734334,

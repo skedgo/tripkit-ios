@@ -107,6 +107,10 @@ public class TKUITripOverviewCard: TGTableCard {
           return self.movingCell(for: item, tableView: tv, indexPath: ip)
         case .alert(let item):
           return self.alertCell(for: item, tableView: tv, indexPath: ip)
+        case .impossible:
+          let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+          cell.textLabel?.text = "Impossibile"
+          return cell
         }
     })
     

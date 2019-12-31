@@ -63,15 +63,21 @@ class TKUITripOverviewViewModelTest: TKTestCase {
     let items = try XCTUnwrap( viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 5)
     
-    // Platform only in subtitles
+    // Platform only in subtitles (but not at continuation itself!)
     let subtitles = items.subtitles
     XCTAssertEqual(subtitles, [
       "Platform 1",
-      "Platform 1"
+      "Platform 2"
     ])
     for item in items {
-      guard case let .moving(item) = item else { continue }
-      XCTAssertEqual(item.notes?.contains("1\n"), false)
+      if case let .moving(item) = item {
+        XCTAssertEqual(item.notes?.contains("1\n"), false)
+        XCTAssertEqual(item.notes?.contains("2\n"), false)
+      }
+      if case let .stationary(item) = item {
+        // Stationary should be marked as stop-over
+        XCTAssertTrue(item.isContinuation)
+      }
     }
     
     // Times, only at start and end
@@ -85,9 +91,6 @@ class TKUITripOverviewViewModelTest: TKTestCase {
         actualTime: Date(timeIntervalSince1970: 1575498204)
       ),
     ])
-    
-    // Stationary should be marked as stop-over
-    XCTFail("Add this")
   }
 
   func testTripWithRealTime() throws {
@@ -133,6 +136,8 @@ extension Array where Element == TKUITripOverviewViewModel.Section.Item {
       case .moving: return nil
       case .stationary(let item): return item.subtitle
       case .terminal(let item): return item.subtitle
+      case .alert(let title): return title.subtitle
+      case .impossible: return nil
       }
     }
   }
@@ -140,7 +145,7 @@ extension Array where Element == TKUITripOverviewViewModel.Section.Item {
   var timeInfos: [TKUITripOverviewViewModel.TimeInfo] {
     flatMap { item -> [TKUITripOverviewViewModel.TimeInfo] in
       switch item {
-      case .moving: return []
+      case .moving, .alert, .impossible: return []
       case .stationary(let item): return [item.startTime, item.endTime].compactMap { $0 }
       case .terminal(let item): return [item.time].compactMap { $0 }
       }
