@@ -1031,10 +1031,17 @@ NSString *const UninitializedString =  @"UninitializedString";
   switch (self.order) {
     case TKSegmentOrderingStart: {
       *isTimeDependent = includeTime && self.trip.departureTimeIsFixed;
-      NSString *name = [self.trip.request.fromLocation name]
-        ?: [self.next.start title]
-        ?: [self.trip.request.fromLocation address];
-      
+      NSString *name = [self.trip.request.fromLocation name];
+      if (!name && [self.next isPublicTransport]) {
+        name = [self.next.start title];
+      }
+      if (!name) {
+        name = [self.trip.request.fromLocation address];
+      }
+      if (!name) {
+        name = [self.next.start title];
+      }
+
       if ([self matchesQuery]) {
         NSString *time = nil;
         if (*isTimeDependent) {
@@ -1062,9 +1069,16 @@ NSString *const UninitializedString =  @"UninitializedString";
       
     case TKSegmentOrderingEnd: {
       *isTimeDependent = includeTime && self.trip.departureTimeIsFixed;
-      NSString *name = [self.trip.request.toLocation name]
-        ?: [self.previous.end title]
-        ?: [self.trip.request.toLocation address];
+      NSString *name = [self.trip.request.toLocation name];
+      if (!name && [self.previous isPublicTransport]) {
+        name = [self.previous.end title];
+      }
+      if (!name) {
+        name = [self.trip.request.toLocation address];
+      }
+      if (!name) {
+        name = [self.previous.end title];
+      }
 
       if ([self matchesQuery]) {
         NSString *time = nil;
