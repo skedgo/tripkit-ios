@@ -101,9 +101,9 @@ class TKUITripOverviewViewModelTest: TKTestCase {
     XCTAssertEqual(items.count, 9)
     
     // Should only display the times of PT segments, and then
-    // both departure + arrival for these, *plus* the ETA.
+    // both departure + arrival for these. (ETA is in the title)
     let times = items.timeInfos
-    XCTAssertEqual(times.count, 5)
+    XCTAssertEqual(times.count, 4)
     XCTAssertEqual(times, [
       TKUITripOverviewViewModel.TimeInfo(
         actualTime: Date(timeIntervalSince1970: 1575298640),
@@ -120,9 +120,6 @@ class TKUITripOverviewViewModelTest: TKTestCase {
       TKUITripOverviewViewModel.TimeInfo(
         actualTime: Date(timeIntervalSince1970: 1575299900),
         timetableTime: Date(timeIntervalSince1970: 1575299820)
-      ),
-      TKUITripOverviewViewModel.TimeInfo(
-        actualTime: Date(timeIntervalSince1970: 1575300197)
       ),
     ])
   }
