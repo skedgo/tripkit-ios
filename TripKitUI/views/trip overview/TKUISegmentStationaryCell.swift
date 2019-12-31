@@ -93,6 +93,57 @@ extension TKUITripOverviewViewModel.TimeInfo {
   }
   
   func timeString(for timeZone: TimeZone?) -> (NSAttributedString, String) {
+    timeStringWithStrike(for: timeZone)
+  }
+  
+  func timeStringWithStrike(for timeZone: TimeZone?) -> (NSAttributedString, String) {
+    let actual = TKStyleManager.timeString(actualTime, for: timeZone)
+    if let timetableTime = timetableTime, let delay = self.delay {
+      let attributed = NSMutableAttributedString(string: actual, attributes: [
+        .foregroundColor: delay.color,
+        .font: TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+      ])
+      
+      let timetable = TKStyleManager.timeString(timetableTime, for: timeZone)
+      if timetable != actual {
+        attributed.append(NSAttributedString(string: "\n"))
+        attributed.append(NSAttributedString(string: timetable, attributes: [
+          .foregroundColor: TKColor.tkLabelSecondary,
+          .font: TKStyleManager.customFont(forTextStyle: .footnote),
+          .strikethroughStyle: NSNumber(1)
+        ]))
+      }
+      return (attributed, actual)
+    }
+    
+    if let delay = self.delay {
+      var combined = actual
+      if let mins = delay.mins {
+        combined += "\n" + mins
+      }
+      return (
+        NSAttributedString(
+          string: combined,
+          attributes: [
+            .foregroundColor: delay.color,
+            .font: TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+          ]
+        ), actual
+      )
+
+    } else {
+      return (
+        NSAttributedString(
+          string: actual,
+          attributes: [
+            .foregroundColor: UIColor.tkLabelPrimary
+          ]
+        ), actual
+      )
+    }
+  }
+  
+  func timeStringWithPlus(for timeZone: TimeZone?) -> (NSAttributedString, String) {
     let actual = TKStyleManager.timeString(actualTime, for: timeZone)
     if let delay = self.delay {
       var combined = actual
