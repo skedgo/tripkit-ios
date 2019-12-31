@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 `TKUITripOverviewCard`:
 
+- Highlights when a segment is impossible due to real-time delays (with a button to get alternative routes to the destination)
 - Only show times in list for PT segments, highlighting real-time status of times
 - Platform information is now shown at the get on/get off parts of the trip
 - Tweaked handling when the calculated trip starts or ends not directly at the requested location,
