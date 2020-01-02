@@ -41,10 +41,10 @@ extension TKFoursquareGeocoder {
   @objc(addDataSourcesToCoordinate:fromJSON:)
   public func addDataSources(to coordinate: TKNamedCoordinate, from json: [String: Any]) {
     guard let id = json["id"] as? String else { return }
-    let website = API.DataAttribution(
-      provider: API.CompanyInfo(name: "Foursquare", website: URL(string: "http://foursquare.com/venue/\(id)")))
-    let app = API.DataAttribution(
-      provider: API.CompanyInfo(name: "Foursquare app", website: URL(string: "foursquare://venues/\(id)")))
+    let website = TKAPI.DataAttribution(
+      provider: TKAPI.CompanyInfo(name: "Foursquare", website: URL(string: "http://foursquare.com/venue/\(id)")))
+    let app = TKAPI.DataAttribution(
+      provider: TKAPI.CompanyInfo(name: "Foursquare app", website: URL(string: "foursquare://venues/\(id)")))
     coordinate.dataSources = [website, app]
   }
   

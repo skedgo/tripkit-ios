@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension API.VehicleOccupancy {
+extension TKAPI.VehicleOccupancy {
   
   /// - Parameter all: Nested vehicle components
   /// - Returns: Average occupancy in the provided nested list of vehicle components, `nil` if no occupancy found.
-  public static func average(in all: [[API.VehicleComponents]]?) -> API.VehicleOccupancy? {
+  public static func average(in all: [[TKAPI.VehicleComponents]]?) -> TKAPI.VehicleOccupancy? {
     let occupancies = (all ?? [])
       .reduce(into: []) { $0.append(contentsOf: $1) }
       .compactMap { $0.occupancy }
@@ -27,10 +27,10 @@ extension API.VehicleOccupancy {
   
   /// - Parameter all: List of occupancies
   /// - Returns: Average occupancy, `nil` if list was empty
-  public static func average(in all: [API.VehicleOccupancy]) -> API.VehicleOccupancy? {
+  public static func average(in all: [TKAPI.VehicleOccupancy]) -> TKAPI.VehicleOccupancy? {
     guard !all.isEmpty else { return nil }
     let sum = all.reduce(0) { $0 + $1.intValue }
-    return API.VehicleOccupancy(intValue: sum / all.count)
+    return TKAPI.VehicleOccupancy(intValue: sum / all.count)
   }
   
   public var color: TKColor? {

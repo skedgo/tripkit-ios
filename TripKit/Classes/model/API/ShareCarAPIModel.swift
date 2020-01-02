@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Data Model
 
-extension API {
+extension TKAPI {
   
   public struct SharedCar : Codable, Hashable {
     public let identifier: String?
@@ -68,12 +68,12 @@ extension API {
 
 // MARK: - Convenience functions
 
-extension API.BookingAvailability {
-  public func getAvailability(at date: Date) -> API.BookingAvailability.Interval? {
+extension TKAPI.BookingAvailability {
+  public func getAvailability(at date: Date) -> TKAPI.BookingAvailability.Interval? {
     return intervals.first { $0.contains(date) }
   }
   
-  public func getStatus(start: Date, end: Date) -> API.BookingAvailability.Status {
+  public func getStatus(start: Date, end: Date) -> TKAPI.BookingAvailability.Status {
     let overlaps = intervals
       .filter { $0.overlaps(start: start, end: end) }
       .map { $0.status }
@@ -94,7 +94,7 @@ extension API.BookingAvailability {
   }
 }
 
-extension API.BookingAvailability.Interval {
+extension TKAPI.BookingAvailability.Interval {
   fileprivate func contains(_ date: Date) -> Bool {
     if let start = start {
       if let end = end {

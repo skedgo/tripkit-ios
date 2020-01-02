@@ -71,7 +71,7 @@ class TKUIServiceHeaderView: UIView {
     accessibilityTitleLabel.text = accessibility.title
   }
   
-  private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<([[API.VehicleOccupancy]], Date)>?) {
+  private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<([[TKAPI.VehicleOccupancy]], Date)>?) {
     
     if let sampleAlert = alerts.first {
       alertWrapper.isHidden = false
@@ -96,7 +96,7 @@ class TKUIServiceHeaderView: UIView {
       .disposed(by: disposeBag)
   }
   
-  private func updateOccupancies(_ occupancies: [[API.VehicleOccupancy]], lastUpdated: Date) {
+  private func updateOccupancies(_ occupancies: [[TKAPI.VehicleOccupancy]], lastUpdated: Date) {
     
     Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
       .startWith(0)
@@ -108,7 +108,7 @@ class TKUIServiceHeaderView: UIView {
       })
       .disposed(by: disposeBag)
 
-    if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1, let average = API.VehicleOccupancy.average(in: occupancies.flatMap { $0 })
+    if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1, let average = TKAPI.VehicleOccupancy.average(in: occupancies.flatMap { $0 })
  {
       occupancyWrapper.isHidden = false
       

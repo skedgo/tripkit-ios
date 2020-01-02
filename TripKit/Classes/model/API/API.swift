@@ -10,5 +10,5 @@ import Foundation
 
 /// Top-Level Namespace for model structs that
 /// directly correspond to the TripGo API.
-public struct API {
+public struct TKAPI {
 }

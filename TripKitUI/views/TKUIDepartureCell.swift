@@ -30,7 +30,7 @@ public struct TKUIDepartureCellContent {
   public var alwaysShowAccessibilityInformation: Bool
   public var wheelchairAccessibility: TKUIWheelchairAccessibility
   public var alerts: [Alert]
-  public var vehicleOccupancies: Observable<([[API.VehicleOccupancy]], Date)>?
+  public var vehicleOccupancies: Observable<([[TKAPI.VehicleOccupancy]], Date)>?
 }
 
 public enum TKUIWheelchairAccessibility {
@@ -180,7 +180,7 @@ extension TKUIDepartureCell {
     occupancyImageView.isHidden = true
     dataSource.vehicleOccupancies?
       .subscribe(onNext: { [weak self] in
-        let average = API.VehicleOccupancy.average(in: $0.0.flatMap { $0 })
+        let average = TKAPI.VehicleOccupancy.average(in: $0.0.flatMap { $0 })
         self?.occupancyImageView.isHidden = average == nil
         self?.occupancyImageView.image = average?.standingPeople()
         self?.occupancyImageView.accessibilityLabel = average?.localizedTitle

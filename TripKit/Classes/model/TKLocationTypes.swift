@@ -13,7 +13,7 @@ public class TKBikePodLocation: TKModeCoordinate {
   /// Detailed bike-pod related information.
   ///
   /// - Note: Can change if real-time data is available. So use KVO or Rx.
-  public var bikePod: API.BikePodInfo
+  public var bikePod: TKAPI.BikePodInfo
   
   private enum CodingKeys: String, CodingKey {
     case bikePod
@@ -21,7 +21,7 @@ public class TKBikePodLocation: TKModeCoordinate {
   
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    bikePod = try values.decode(API.BikePodInfo.self, forKey: .bikePod)
+    bikePod = try values.decode(TKAPI.BikePodInfo.self, forKey: .bikePod)
     try super.init(from: decoder)
     locationID = bikePod.identifier
   }
@@ -33,7 +33,7 @@ public class TKBikePodLocation: TKModeCoordinate {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = try? aDecoder.decode(API.BikePodInfo.self, forKey: "bikePod") else { return nil }
+    guard let info = try? aDecoder.decode(TKAPI.BikePodInfo.self, forKey: "bikePod") else { return nil }
     bikePod = info
     super.init(coder: aDecoder)
     locationID = info.identifier
@@ -53,7 +53,7 @@ public class TKCarPodLocation: TKModeCoordinate {
   /// Detailed car-pod related information.
   ///
   /// - Note: Can change if real-time data is available. So use KVO or Rx.
-  public var carPod: API.CarPodInfo
+  public var carPod: TKAPI.CarPodInfo
   
   public var supportsVehicleAvailability: Bool {
     guard let mode = carPod.availabilityMode else { return false }
@@ -66,7 +66,7 @@ public class TKCarPodLocation: TKModeCoordinate {
   
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    carPod = try values.decode(API.CarPodInfo.self, forKey: .carPod)
+    carPod = try values.decode(TKAPI.CarPodInfo.self, forKey: .carPod)
     try super.init(from: decoder)
     locationID = carPod.identifier
   }
@@ -78,7 +78,7 @@ public class TKCarPodLocation: TKModeCoordinate {
   }
 
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = try? aDecoder.decode(API.CarPodInfo.self, forKey: "carPod") else { return nil }
+    guard let info = try? aDecoder.decode(TKAPI.CarPodInfo.self, forKey: "carPod") else { return nil }
     carPod = info
     super.init(coder: aDecoder)
     locationID = info.identifier
@@ -96,7 +96,7 @@ public class TKCarParkLocation: TKModeCoordinate {
   /// Detailed car-park related information.
   ///
   /// - Note: Can change if real-time data is available. So use KVO or Rx.
-  public var carPark: API.CarParkInfo
+  public var carPark: TKAPI.CarParkInfo
   
   private enum CodingKeys: String, CodingKey {
     case carPark
@@ -104,7 +104,7 @@ public class TKCarParkLocation: TKModeCoordinate {
   
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    carPark = try values.decode(API.CarParkInfo.self, forKey: .carPark)
+    carPark = try values.decode(TKAPI.CarParkInfo.self, forKey: .carPark)
     try super.init(from: decoder)
     locationID = carPark.identifier
   }
@@ -116,7 +116,7 @@ public class TKCarParkLocation: TKModeCoordinate {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = try? aDecoder.decode(API.CarParkInfo.self, forKey: "carPark") else { return nil }
+    guard let info = try? aDecoder.decode(TKAPI.CarParkInfo.self, forKey: "carPark") else { return nil }
     carPark = info
     super.init(coder: aDecoder)
     locationID = info.identifier
@@ -131,7 +131,7 @@ public class TKCarParkLocation: TKModeCoordinate {
 
 public class TKCarRentalLocation: TKModeCoordinate {
   
-  public let carRental: API.CarRentalInfo
+  public let carRental: TKAPI.CarRentalInfo
   
   private enum CodingKeys: String, CodingKey {
     case carRental
@@ -139,7 +139,7 @@ public class TKCarRentalLocation: TKModeCoordinate {
   
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    carRental = try values.decode(API.CarRentalInfo.self, forKey: .carRental)
+    carRental = try values.decode(TKAPI.CarRentalInfo.self, forKey: .carRental)
     try super.init(from: decoder)
     locationID = carRental.identifier
   }
@@ -151,7 +151,7 @@ public class TKCarRentalLocation: TKModeCoordinate {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = try? aDecoder.decode(API.CarRentalInfo.self, forKey: "carRental") else { return nil }
+    guard let info = try? aDecoder.decode(TKAPI.CarRentalInfo.self, forKey: "carRental") else { return nil }
     carRental = info
     super.init(coder: aDecoder)
     locationID = carRental.identifier
@@ -169,7 +169,7 @@ public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   /// Detailed car-pod related information.
   ///
   /// - Note: Can change if real-time data is available. So use KVO or Rx.
-  public var vehicle: API.FreeFloatingVehicleInfo
+  public var vehicle: TKAPI.FreeFloatingVehicleInfo
   
   private enum CodingKeys: String, CodingKey {
     case vehicle
@@ -177,7 +177,7 @@ public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    vehicle = try values.decode(API.FreeFloatingVehicleInfo.self, forKey: .vehicle)
+    vehicle = try values.decode(TKAPI.FreeFloatingVehicleInfo.self, forKey: .vehicle)
     try super.init(from: decoder)
     locationID = vehicle.identifier
   }
@@ -189,7 +189,7 @@ public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = try? aDecoder.decode(API.FreeFloatingVehicleInfo.self, forKey: "vehicle") else { return nil }
+    guard let info = try? aDecoder.decode(TKAPI.FreeFloatingVehicleInfo.self, forKey: "vehicle") else { return nil }
     vehicle = info
     super.init(coder: aDecoder)
     locationID = info.identifier
@@ -207,7 +207,7 @@ public class TKOnStreetParkingLocation: TKModeCoordinate {
   /// Detailed on-street parking related information.
   ///
   /// - Note: Can change if real-time data is available. So use KVO or Rx.
-  public var parking: API.OnStreetParkingInfo
+  public var parking: TKAPI.OnStreetParkingInfo
   
   private enum CodingKeys: String, CodingKey {
     case parking = "onStreetParkingDetails"
@@ -215,7 +215,7 @@ public class TKOnStreetParkingLocation: TKModeCoordinate {
   
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    parking = try values.decode(API.OnStreetParkingInfo.self, forKey: .parking)
+    parking = try values.decode(TKAPI.OnStreetParkingInfo.self, forKey: .parking)
     try super.init(from: decoder)
     locationID = parking.identifier
   }
@@ -227,7 +227,7 @@ public class TKOnStreetParkingLocation: TKModeCoordinate {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = try? aDecoder.decode(API.OnStreetParkingInfo.self, forKey: CodingKeys.parking.rawValue) else { return nil }
+    guard let info = try? aDecoder.decode(TKAPI.OnStreetParkingInfo.self, forKey: CodingKeys.parking.rawValue) else { return nil }
     parking = info
     super.init(coder: aDecoder)
     locationID = info.identifier

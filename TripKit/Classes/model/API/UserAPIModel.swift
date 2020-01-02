@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension API {
+extension TKAPI {
   
   public struct User: Codable {
     public let name: String?

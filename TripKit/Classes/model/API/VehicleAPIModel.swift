@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Real-time vehicles
 
-extension API {
+extension TKAPI {
   
   public struct Vehicle: Codable, Hashable {
     
@@ -56,7 +56,7 @@ extension API {
   
 }
 
-extension API.VehicleOccupancy {
+extension TKAPI.VehicleOccupancy {
   public init(intValue: Int) {
     switch intValue {
     case 1: self = .empty
@@ -88,7 +88,7 @@ extension API.VehicleOccupancy {
 
 // MARK: - Private vehicles
 
-extension API {
+extension TKAPI {
   public enum PrivateVehicleType: String, Codable {
     case bicycle
     case motorbike

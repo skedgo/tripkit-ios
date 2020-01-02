@@ -10,13 +10,13 @@ import Foundation
 
 extension TripGroup {
 
-  public var sources: [API.DataAttribution] {
+  public var sources: [TKAPI.DataAttribution] {
     get {
       guard let sourcesRaw = sourcesRaw else { return [] }
       
-      return sourcesRaw.compactMap { rawSource -> API.DataAttribution? in
+      return sourcesRaw.compactMap { rawSource -> TKAPI.DataAttribution? in
         let decoder = JSONDecoder()
-        return try? decoder.decode(API.DataAttribution.self, withJSONObject: rawSource)
+        return try? decoder.decode(TKAPI.DataAttribution.self, withJSONObject: rawSource)
       }
     }
   }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension API {
+extension TKAPI {
   
   public struct CompanyInfo: Codable, Hashable {
     public let name: String
@@ -111,7 +111,7 @@ extension API {
 }
 
 
-extension API.CompanyInfo {
+extension TKAPI.CompanyInfo {
   
   public var remoteIconURL: URL? {
     guard let fileNamePart = remoteIcon else {
@@ -133,7 +133,7 @@ extension API.CompanyInfo {
 
 // MARK - Helpers
 
-extension API.Location {
+extension TKAPI.Location {
   
   public init?(annotation: MKAnnotation?) {
     guard let annotation = annotation else { return nil }

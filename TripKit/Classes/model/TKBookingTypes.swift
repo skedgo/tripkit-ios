@@ -34,7 +34,7 @@ public enum TKBooking {
   
 
   public struct TSPBranding: Codable, Hashable {
-    private let rgbColor: API.RGBColor?
+    private let rgbColor: TKAPI.RGBColor?
     private let logoImageName: String?
     
     private enum CodingKeys: String, CodingKey {
@@ -64,7 +64,7 @@ public enum TKBooking {
     public let validFor:            TimeInterval?
     public let validFrom:           Date?
     public let branding:            TSPBranding?
-    public let attribution:         API.DataAttribution?
+    public let attribution:         TKAPI.DataAttribution?
     
     private enum CodingKeys: String, CodingKey {
       case id

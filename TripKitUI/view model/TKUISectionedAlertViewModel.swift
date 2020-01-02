@@ -44,7 +44,7 @@ class TKUISectionedAlertViewModel {
   struct Item {
     let alertGroup: RouteAlerts
     
-    var alerts: [API.Alert] {
+    var alerts: [TKAPI.Alert] {
       return alertGroup.alerts
     }
   }
@@ -59,7 +59,7 @@ class TKUISectionedAlertViewModel {
   
   // MARK: -
   
-  static func groupAlertMappings(_ mappings: [API.AlertMapping]) -> [ModeGroup: [RouteAlerts]] {
+  static func groupAlertMappings(_ mappings: [TKAPI.AlertMapping]) -> [ModeGroup: [RouteAlerts]] {
     
     // Firstly, we group all alerts by their mode
     let groupedModes = Dictionary(grouping: mappings) { mapping -> ModeGroup in
@@ -74,7 +74,7 @@ class TKUISectionedAlertViewModel {
     return groupedModes.mapValues { mappings -> [RouteAlerts] in
       
       // Mappings are `[Alert: [Route]]`. Here we invert this to `[Route: [Alert]]`
-      let alertsByRoute: [String: (API.Route, [API.Alert])] = mappings.reduce(into: [:]) { acc, mapping in
+      let alertsByRoute: [String: (TKAPI.Route, [TKAPI.Alert])] = mappings.reduce(into: [:]) { acc, mapping in
         mapping.routes?.forEach { route in
           let previously = acc[route.id, default: (route, [])]
           acc[route.id] = (previously.0, previously.1 + [mapping.alert])
@@ -101,7 +101,7 @@ class TKUISectionedAlertViewModel {
 
 // MARK: -
 
-extension API.Route {
+extension TKAPI.Route {
   var title: String {
     return number ?? name ?? id
   }
@@ -142,10 +142,10 @@ extension ModeGroup: Hashable {
 struct RouteAlerts {
   /// Each group is identifiable by a route. The route is affected
   /// by the alerts in the group.
-  let route: API.Route
+  let route: TKAPI.Route
   
   /// These are the alerts affecting the route.
-  var alerts: [API.Alert]
+  var alerts: [TKAPI.Alert]
   
   /// Title for the group. This is mainly used for sorting mapping groups.
   var title: String { return route.title }
@@ -153,7 +153,7 @@ struct RouteAlerts {
 
 extension RouteAlerts {
   
-  func alerts(ofType type: API.Alert.Severity) -> [API.Alert] {
+  func alerts(ofType type: TKAPI.Alert.Severity) -> [TKAPI.Alert] {
     return alerts.filter {
       if case type = $0.severity {
         return true

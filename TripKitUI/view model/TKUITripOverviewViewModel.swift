@@ -37,7 +37,7 @@ class TKUITripOverviewViewModel {
   
   let sections: Driver<[Section]>
   
-  let dataSources: Driver<[API.DataAttribution]>
+  let dataSources: Driver<[TKAPI.DataAttribution]>
   
   let refreshMap: Signal<Void>
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension API {
+extension TKAPI {
   
   public struct EventsResponse: Codable, Hashable {
     public static let empty: EventsResponse = EventsResponse(events: [])

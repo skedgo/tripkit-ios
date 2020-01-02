@@ -12,7 +12,7 @@ import Foundation
 ///
 /// Matches OpeningHours from the tripgo-api
 
-extension API {
+extension TKAPI {
   
   enum DecoderError: Error {
     case notValidTimeZoneIdentifier(String)
@@ -168,7 +168,7 @@ fileprivate enum TKOpeningHoursParserError: Error {
   case badTimeOfDay(String)
 }
 
-extension API.OpeningHours {
+extension TKAPI.OpeningHours {
   
   /// Checks if opening hour specify that the provided that is open.
   ///
@@ -211,7 +211,7 @@ extension API.OpeningHours {
   
 }
 
-extension API.OpeningHours.Day {
+extension TKAPI.OpeningHours.Day {
   
   /// Checks if provided date is covered by this particular day
   ///
