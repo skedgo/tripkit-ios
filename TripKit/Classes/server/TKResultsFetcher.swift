@@ -18,10 +18,20 @@ import RxSwift
 /// last requested query.
 public class TKResultsFetcher {
   
+  /// The progress of a single routing fetch request
   public enum Progress: Equatable {
+    
+    /// Optional step at the beginning to locate the user, if the request starts or ends
+    /// at the user's current location.
     case locating
-    case started(Int)
-    case partial(Int, Int)
+    
+    /// Results are being fetched, indiciating the total number of requests.
+    case started(total: Int)
+    
+    /// The provided number of the provided total have been fetched.
+    case partial(completed: Int, total: Int)
+    
+    /// All results have been fetched.
     case finished
   }
   
@@ -131,7 +141,7 @@ fileprivate extension Reactive where Base : TKBuzzRouter {
         modes: modes,
         classifier: classifier,
         progress: { progress in
-          observer.onNext(.partial(Int(progress), holder.count))
+          observer.onNext(.partial(completed: Int(progress), total: holder.count))
         }, completion: { _, error in
           if let error = error {
             observer.onError(error)
@@ -143,7 +153,7 @@ fileprivate extension Reactive where Base : TKBuzzRouter {
       )
       
       holder.count = Int(count)
-      observer.onNext(.started(Int(count)))
+      observer.onNext(.started(total: Int(count)))
       
       return Disposables.create() {
         holder = nil

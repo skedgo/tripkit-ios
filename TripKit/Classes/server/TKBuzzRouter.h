@@ -15,6 +15,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ The main class that talks to SkedGo's `routing.json` API.
+ */
 @interface TKBuzzRouter : TKRouter
 
 /**
@@ -29,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
  those.
  
  @param request The request specifying the query
+ @param modes The modes to enable. If set to `nil` then it'll use the modes as set in the
+                  user defaults (see `TKUserProfileHelper` for more)
  @param classifier Optional classifier to assign `TripGroup`'s `classification`
  @param progress Optional progress callback executed when each request finished,
         with the number of completed requests passed to the block.
@@ -43,6 +48,14 @@ NS_ASSUME_NONNULL_BEGIN
                                progress:(nullable void (^)(NSUInteger))progress
                              completion:(void (^)(TripRequest * __nonnull, NSError * __nullable))completion;
 
+/**
+ Kicks off the server request to fetch the best trip matching the request and the enabled
+ modes according to `TKUserProfileHelper`.
+ 
+ On success, the request's `.trips` and `.tripGroup` properties will be set. Note, that these
+ might include multiple trips (despite the naming of this method), which are variants of the
+ same trip leaving earlier or later.
+ */
 - (void)fetchBestTripForRequest:(TripRequest *)request
                         success:(TKRouterSuccess)success
                         failure:(TKRouterError)failure;

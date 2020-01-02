@@ -5,7 +5,7 @@ theme: fullwidth
 output: TripKitUI
 
 custom_categories:
-  - name: Trip planning
+  - name: Trip Planning
     children:
       - TKUIRoutingResultsViewController
       - TKUIRoutingResultsViewControllerDelegate
