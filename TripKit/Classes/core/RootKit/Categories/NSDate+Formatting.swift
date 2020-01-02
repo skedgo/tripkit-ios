@@ -80,8 +80,11 @@ extension Date {
   }
   
   public func minutesSince(_ other: Date) -> Int {
-    let rounded = round(timeIntervalSince(other) / 60)
-    return Int(rounded)
+    var o = Int(other.timeIntervalSince1970)
+    var m = Int(timeIntervalSince1970)
+    o = (o - o % 60) / 60
+    m = (m - m % 60) / 60
+    return m-o
   }
   
   public func durationSince(_ other: Date) -> String {

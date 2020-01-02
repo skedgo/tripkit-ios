@@ -105,12 +105,13 @@ public class TKUITripModeByModeCard: TGPageCard {
     let initialPage = SegmentCardsInfo.cardIndices(ofSegmentAt: segment.index, in: segmentCards)?.lowerBound ?? 0
     
     let cards = segmentCards.flatMap { $0.cards.map { $0.0 } }
-    super.init(cards: cards, initialPage: initialPage, initialPosition: initialPosition)
+    let actualInitialPage = min(initialPage, cards.count - 1)
+    super.init(cards: cards, initialPage: actualInitialPage, initialPosition: initialPosition)
 
     self.headerAccessoryView = buildSegmentsView(segments: headerSegments, selecting: segment.index, trip: trip)
     
     // Little hack for starting with selecting the first page on the map, too
-    didMoveToPage(index: initialPage)
+    didMoveToPage(index: actualInitialPage)
   }
   
   public convenience init(mapManager: TKUITripMapManager) {

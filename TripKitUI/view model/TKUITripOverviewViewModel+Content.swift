@@ -12,15 +12,6 @@ import RxDataSources
 
 extension TKUITripOverviewViewModel {
   
-  func segment(for item: Item) -> TKSegment? {
-    switch item {
-    case .terminal: return nil
-    case .stationary(let item): return item.segment
-    case .moving(let item): return item.segment
-    case .alert(let item): return item.segment
-    }
-  }
-  
   struct Section {
     var header: String {
       // Sections are grouped by dates
@@ -41,13 +32,19 @@ extension TKUITripOverviewViewModel {
     case stationary(StationaryItem)
     case moving(MovingItem)
     case alert(AlertItem)
+    case impossible(TKSegment, title: String)
+  }
+  
+  struct TimeInfo: Equatable {
+    let actualTime: Date
+    var timetableTime: Date? = nil
   }
   
   struct TerminalItem: Equatable {
     let title: String
     let subtitle: String?
 
-    let time: Date?
+    let time: TimeInfo?
     let timeZone: TimeZone
     let timesAreFixed: Bool
 
@@ -59,10 +56,11 @@ extension TKUITripOverviewViewModel {
     let title: String
     let subtitle: String?
     
-    let startTime: Date?
-    let endTime: Date?
+    let startTime: TimeInfo?
+    let endTime: TimeInfo?
     let timeZone: TimeZone
     let timesAreFixed: Bool
+    let isContinuation: Bool
 
     let topConnection: Line?
     let bottomConnection: Line?
@@ -116,10 +114,13 @@ extension TKUITripOverviewViewModel {
 
 extension TKUITripOverviewViewModel.Item {
   
-  var isAlert: Bool {
+  var segment: TKSegment? {
     switch self {
-    case .alert: return true
-    default: return false
+    case .terminal: return nil
+    case .stationary(let item): return item.segment
+    case .moving(let item): return item.segment
+    case .alert(let item): return item.segment
+    case .impossible(let segment, _): return segment
     }
   }
   
@@ -142,7 +143,12 @@ extension TKUITripOverviewViewModel {
         let (index, current) = tuple
         let previous = index > 0 ? segments[index - 1] : nil
         let next = index + 1 < segments.count ? segments[index + 1]: nil
-        return build(segment: current, previous: previous, next: next)
+        var items = build(segment: current, previous: previous, next: next)
+        if current.isImpossible {
+          // Makes most sense before the departure, so inject in beginning
+          items.insert(.impossible(current, title: Loc.YouMightNotMakeThisTransfer), at: 0)
+        }
+        return items
       }
     
     return [Section(items: items, index: 0)]
@@ -168,6 +174,9 @@ extension TKUITripOverviewViewModel {
         if !segment.alerts().isEmpty {
           items.append(.alert(segment.toAlert()))
         }
+        if segment.isCanceled {
+          items.append(.impossible(segment, title: Loc.ServiceHasBeenChancelled))
+        }
         
         items.append(.stationary(segment.toStationaryBridge(to: next)))
         return items
@@ -178,7 +187,10 @@ extension TKUITripOverviewViewModel {
         if !segment.alerts().isEmpty {
           items.append(.alert(segment.toAlert()))
         }
-        
+        if segment.isCanceled {
+          items.append(.impossible(segment, title: Loc.ServiceHasBeenChancelled))
+        }
+
         return items
       }
     }
@@ -187,12 +199,65 @@ extension TKUITripOverviewViewModel {
 }
 
 fileprivate extension TKSegment {
+  /// - [xt] Add timetable start + end times to real-time segments
+  /// - [xt] Add platforms to stationary segment
+  /// - [xt] Remove platforms from moving segment
+  /// - [xt] Remove all times except PT arrival/departure and ETA
+  /// - [xt] Make sure terminal segments take name of stations if starting/ending at a station
+  /// - [xt] Ignore simple 'wait' text
+  /// - [x ] Make sure durations make sense and add up
+  /// - [ ] Fix size of data attribution => @Brian
+  /// - [ ] Test changing at a station/platform
+  /// - [xt] Test continuation
+  /// - [ ] Test impossible segment, due to time overlap
+  /// - [ ] Test impossible segment, due to cancelled services]
+  /// - [ ] Test frequency-based trip
+  
+  func platformInfo(previous: TKSegment? = nil, next: TKSegment?) -> String? {
+    
+    func toPlatform(_ code: String) -> String {
+      // TODO: Instead tweak backend to provide these
+      code.count < 5 ? "Platform \(code)" : code
+    }
+
+    if isTerminal {
+      if order == .start, let segment = next {
+        return segment.scheduledStartPlatform.map(toPlatform)
+      } else if order == .end, let segment = previous {
+        return segment.scheduledEndPlatform.map(toPlatform)
+      } else {
+        return nil
+      }
+      
+    } else if type == .scheduled, !(next?.isContinuation == true) {
+      return scheduledEndPlatform.map(toPlatform)
+    
+    } else if let next = next, next.type == .scheduled, !next.isContinuation {
+      return next.scheduledStartPlatform.map(toPlatform)
+    
+    } else {
+      return nil
+    }
+  }
+  
+  var departureTimeInfo: TKUITripOverviewViewModel.TimeInfo? {
+    guard type == .scheduled else { return nil }
+    return departureTime.flatMap { TKUITripOverviewViewModel.TimeInfo(actualTime: $0, timetableTime: self.scheduledTimetableStartTime) }
+  }
+  
+  var arrivalTimeInfo: TKUITripOverviewViewModel.TimeInfo? {
+    guard type == .scheduled else { return nil }
+    return arrivalTime.flatMap { TKUITripOverviewViewModel.TimeInfo(actualTime: $0, timetableTime: self.scheduledTimetableEndTime) }
+  }
+  
   func toTerminal(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.TerminalItem {
     let isStart = order == .start
+    let subtitle = platformInfo(previous: previous, next: next)
+    
     return TKUITripOverviewViewModel.TerminalItem(
       title: titleWithoutTime,
-      subtitle: nil,
-      time: isStart ? departureTime : arrivalTime,
+      subtitle: subtitle,
+      time: isStart ? next?.departureTimeInfo : previous?.arrivalTimeInfo,
       timeZone: timeZone,
       timesAreFixed: trip.departureTimeIsFixed,
       connection: (isStart ? next : previous)?.line,
@@ -200,35 +265,51 @@ fileprivate extension TKSegment {
     )
   }
   
+  /// Create a stationary item for a stationary segment
   func toStationary(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.StationaryItem {
     assert(isStationary)
     
+    var subtitle = titleWithoutTime.trimmingCharacters(in: .whitespacesAndNewlines)
+    // TODO: Instead ask backend to not provide this
+    subtitle = subtitle == "Wait" ? "" : subtitle
+    if let platformInfo = platformInfo(previous: previous, next: next) {
+      if !subtitle.isEmpty {
+        subtitle += "\n"
+      }
+      subtitle += platformInfo
+    }
+    
     return TKUITripOverviewViewModel.StationaryItem(
       title: (start?.title ?? nil) ?? Loc.Location,
-      subtitle: titleWithoutTime,
-      startTime: departureTime,
-      endTime: arrivalTime,
+      subtitle: subtitle,
+      startTime: previous?.arrivalTimeInfo,
+      endTime: next?.departureTimeInfo,
       timeZone: timeZone,
       timesAreFixed: trip.departureTimeIsFixed,
+      isContinuation: false,
       topConnection: previous?.line,
       bottomConnection: next?.line,
       segment: self
     )
   }
   
+  /// Create a stationary item (bridge) for a non-stationary segment
   func toStationaryBridge(to next: TKSegment) -> TKUITripOverviewViewModel.StationaryItem {
     assert(!isStationary && !next.isStationary)
+    
     return TKUITripOverviewViewModel.StationaryItem(
       title: (next.start?.title ?? end?.title ?? nil) ?? Loc.Location,
-      subtitle: nil,
-      startTime: arrivalTime,
-      endTime: next.departureTime,
+      subtitle: platformInfo(next: next),
+      startTime: next.isContinuation ? nil : arrivalTimeInfo,
+      endTime: next.isContinuation ? nil : next.departureTimeInfo,
       timeZone: timeZone,
       timesAreFixed: trip.departureTimeIsFixed,
+      isContinuation: next.isContinuation,
       topConnection: line,
       bottomConnection: next.line,
-      segment: next // Since this is marking the start of "next", it makes most
-                    // sense to display that when tapping on it.
+      segment: next.isContinuation ? self : next // Since this is marking the
+                    // start of "next", it makes most sense to display that
+                    // when tapping on it (unless it's a continuation)
     )
   }
   
@@ -257,9 +338,9 @@ fileprivate extension TKSegment {
     
     return TKUITripOverviewViewModel.MovingItem(
       title: titleWithoutTime,
-      notes: notes,
-      icon: (self as TKTripSegment).tripSegmentModeImage,
-      iconURL: (self as TKTripSegment).tripSegmentModeImageURL,
+      notes: notesWithoutPlatforms,
+      icon: isContinuation ? nil : (self as TKTripSegment).tripSegmentModeImage,
+      iconURL: isContinuation ? nil : (self as TKTripSegment).tripSegmentModeImageURL,
       iconIsTemplate: (self as TKTripSegment).tripSegmentModeImageIsTemplate,
       connection: line,
       actions: TKUITripOverviewCard.config.segmentActionsfactory?(self) ?? [],
@@ -284,6 +365,7 @@ extension TKUITripOverviewViewModel.Item: IdentifiableType {
     case .stationary(let item): return String(describing: item.segment.templateHashCode)
     case .moving(let item): return String(describing: item.segment.templateHashCode)
     case .alert(let item): return String(describing: item.segment.templateHashCode)
+    case .impossible: return "Impossible"
     }
   }
 }

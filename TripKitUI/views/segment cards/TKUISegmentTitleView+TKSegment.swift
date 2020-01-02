@@ -25,7 +25,7 @@ extension TKUISegmentTitleView {
     let subtitle: String?
     
     if segment.isPublicTransport, mode == .getReady,
-      let destination = (segment.end?.title ?? nil),
+      let destination = (segment.finalSegmentIncludingContinuation().end?.title ?? nil),
       let origin = (segment.start?.title ?? nil) {
       title = Loc.GetOnService(To: destination)
       subtitle = Loc.From(location: origin)

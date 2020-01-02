@@ -210,17 +210,27 @@ typedef NSUInteger SGServiceFlag;
 - (NSArray *)shapesForEmbarkation:(StopVisits *)embarkation
                    disembarkingAt:(StopVisits *)disembarkation
 {
-	NSArray *waypoints = [self.shape routePath];
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index"
-																																 ascending:YES];
-	NSArray *visits = [self.visits sortedArrayUsingDescriptors:@[sortDescriptor]];
+  NSMutableArray *waypoints = [NSMutableArray array];
+  NSMutableArray *visits = [NSMutableArray array];
+  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index"
+                                                                 ascending:YES];
+
+  for (Service *service = self; service != nil; service = (disembarkation != nil ? service.continuation : nil)) {
+    [waypoints addObjectsFromArray:[service.shape routePath]];
+    [visits addObjectsFromArray:[service.visits sortedArrayUsingDescriptors:@[sortDescriptor]]];
+  }
 	
 	// determine the split
 	NSUInteger startSplit = 0;
   if (embarkation) {
-    startSplit = [[self class] indexForSplittingWaypoints:waypoints
-                                                  atVisit:embarkation
-                                            withAllVisits:visits];
+    if (embarkation.service == self) {
+      startSplit = [[self class] indexForSplittingWaypoints:waypoints
+                                                    atVisit:embarkation
+                                              withAllVisits:visits];
+    } else {
+      startSplit = 0; // we never have embarkations on an later service, so
+                      // `self` has to be a continuation of `embarkation.service`
+    }
   }
   NSInteger endSplit = -1;
   if (disembarkation) {
@@ -310,6 +320,9 @@ typedef NSUInteger SGServiceFlag;
 			} else {
 				// advance the target
 				visitIndex++;
+        if (visitIndex >= visits.count) {
+          return bestTargetIndex;
+        }
 				currentVisit = visits[visitIndex];
         coordinate = [currentVisit.stop.location coordinate];
 				bestTargetDistance = MAXFLOAT;

@@ -47,16 +47,18 @@ public class TKUITripOverviewCard: TGTableCard {
   
   public static var config = Configuration.empty
   
+  private let trip: Trip
   private let index: Int? // for restoring
   private var zoomToTrip: Bool = false // for restoring
   
-  fileprivate let viewModel: TKUITripOverviewViewModel
+  fileprivate var viewModel: TKUITripOverviewViewModel!
   private let disposeBag = DisposeBag()
   
+  private let alternativesTapped = PublishSubject<IndexPath>()
   private let highlighted = PublishSubject<IndexPath>()
 
   public init(trip: Trip, index: Int? = nil) {
-    viewModel = TKUITripOverviewViewModel(trip: trip)
+    self.trip = trip
     self.index = index
     
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
@@ -94,6 +96,7 @@ public class TKUITripOverviewCard: TGTableCard {
     tableView.register(TKUISegmentStationaryCell.nib, forCellReuseIdentifier: TKUISegmentStationaryCell.reuseIdentifier)
     tableView.register(TKUISegmentMovingCell.nib, forCellReuseIdentifier: TKUISegmentMovingCell.reuseIdentifier)
     tableView.register(TKUISegmentAlertCell.nib, forCellReuseIdentifier: TKUISegmentAlertCell.reuseIdentifier)
+    tableView.register(TKUISegmentImpossibleCell.nib, forCellReuseIdentifier: TKUISegmentImpossibleCell.reuseIdentifier)
 
     tableView.dataSource = nil
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUITripOverviewViewModel.Section>(
@@ -107,8 +110,32 @@ public class TKUITripOverviewCard: TGTableCard {
           return self.movingCell(for: item, tableView: tv, indexPath: ip)
         case .alert(let item):
           return self.alertCell(for: item, tableView: tv, indexPath: ip)
+        case .impossible(_, let title):
+          return self.impossibleCell(text: title, tableView: tv, indexPath: ip)
         }
     })
+    
+    let selected: Observable<TKUITripOverviewViewModel.Item>
+    #if targetEnvironment(macCatalyst)
+    self.clickToHighlightDoubleClickToSelect = true
+    self.handleMacSelection = highlighted.onNext
+    selected = highlighted
+      .map { dataSource[$0] }
+      .asObservable()
+    #else
+    selected = tableView.rx
+      .modelSelected(TKUITripOverviewViewModel.Item.self)
+      .asObservable()
+    #endif
+    
+    let mergedSelection = Observable.merge(selected, alternativesTapped.map { dataSource[$0] }).asSignal(onErrorSignalWith: .empty())
+    
+    viewModel = TKUITripOverviewViewModel(
+      trip: trip,
+      inputs: TKUITripOverviewViewModel.UIInput(
+        selected: mergedSelection
+      )
+    )
     
     viewModel.titles
       .drive(cardView.rx.titles)
@@ -139,38 +166,8 @@ public class TKUITripOverviewCard: TGTableCard {
       tableView.tableHeaderView = nil
     }
 
-    let selected: Observable<TKUITripOverviewViewModel.Item>
-    #if targetEnvironment(macCatalyst)
-    self.clickToHighlightDoubleClickToSelect = true
-    self.handleMacSelection = highlighted.onNext
-    selected = highlighted
-      .map { dataSource[$0] }
-      .asObservable()
-    #else
-    selected = tableView.rx
-      .modelSelected(TKUITripOverviewViewModel.Item.self)
-      .asObservable()
-    #endif
-
-    // Handling segment selections
-    if let segmentHandler = TKUITripOverviewCard.config.presentSegmentHandler {
-      selected
-        .filter { !$0.isAlert }
-        .compactMap(viewModel.segment)
-        .map { (self, $0) }
-        .subscribe(onNext: segmentHandler)
-        .disposed(by: disposeBag)
-    }
-    
-    // Handling action on alerts
-    selected
-      .compactMap {
-        switch $0 {
-        case .alert(let alertItem): return alertItem.alerts as [TKAlert]
-        default: return nil
-        }
-      }
-      .subscribe(onNext: show)
+    viewModel.next
+      .emit(onNext: { [unowned self] in self.handle($0) })
       .disposed(by: disposeBag)
   }
   
@@ -217,6 +214,17 @@ extension TKUITripOverviewCard {
     return cell
   }
 
+  private func impossibleCell(text: String, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentImpossibleCell.reuseIdentifier, for: indexPath) as? TKUISegmentImpossibleCell else { preconditionFailure() }
+    
+    cell.titleLabel.text = text
+    
+    cell.button.rx.tap
+      .subscribe(onNext: { [unowned self] _ in self.alternativesTapped.onNext(indexPath) })
+      .disposed(by: cell.disposeBag)
+    
+    return cell
+  }
 }
 
 // MARK: - Attribution
@@ -284,6 +292,21 @@ extension TKUITripOverviewCard: TKUIAttributionTableViewControllerDelegate {
 // MARK: - Navigation
 
 extension TKUITripOverviewCard {
+  
+  private func handle(_ next: TKUITripOverviewViewModel.Next) {
+    switch next {
+    case .handleSelection(let segment):
+      guard let segmentHandler = TKUITripOverviewCard.config.presentSegmentHandler else { return }
+      segmentHandler(self, segment)
+      
+    case .showAlerts(let alerts):
+      show(alerts)
+      
+    case .showAlternativeRoutes(let request):
+      let card = TKUIRoutingResultsCard(request: request)
+      controller?.push(card)
+    }
+  }
   
   private func show(_ alerts: [TKAlert]) {
     let alertController = TKUIAlertViewController()

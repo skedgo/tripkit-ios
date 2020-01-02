@@ -23,6 +23,8 @@ class TKUISegmentStationaryCell: UITableViewCell {
   @IBOutlet weak var bottomLine: UIView!
   @IBOutlet weak var linePinImageView: UIImageView!
   
+  @IBOutlet weak var lineDotWidthConstraint: NSLayoutConstraint!
+  
   /// Space from the label stack across the time stack to the superview. Ideally
   /// we wouldn't need this and instead just have a fixed space between the label
   /// stack and the time stack, but Auto Layout can't seem to handle this and
@@ -45,7 +47,9 @@ class TKUISegmentStationaryCell: UITableViewCell {
     subtitleLabel.textColor = .tkLabelSecondary
     
     timeLabel.textColor = .tkLabelPrimary
+    timeLabel.numberOfLines = 0
     timeEndLabel.textColor = .tkLabelPrimary
+    timeEndLabel.numberOfLines = 0
   }
 
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
@@ -61,28 +65,136 @@ class TKUISegmentStationaryCell: UITableViewCell {
   
 }
 
+extension TKUITripOverviewViewModel.TimeInfo {
+  var delay: (mins: String?, color: UIColor)? {
+    guard let timetable = timetableTime else { return nil }
+    let color: UIColor
+    
+    let delay = actualTime.timeIntervalSince(timetable)
+    switch delay {
+    case ...(-60):
+      color = .tkStateWarning
+    case ...120:
+      color = .tkStateSuccess
+    default:
+      color = .tkStateError
+    }
+    
+    let rounded = Int(round(abs(delay) / 60.0))
+    let mins: String?
+    if delay < -60 {
+      mins = "-\(rounded)"
+    } else if delay > 60 {
+      mins = "+\(rounded)"
+    } else {
+      mins = nil
+    }
+    return (mins, color)
+  }
+  
+  func timeString(for timeZone: TimeZone?) -> (NSAttributedString, String) {
+    timeStringWithStrike(for: timeZone)
+  }
+  
+  func timeStringWithStrike(for timeZone: TimeZone?) -> (NSAttributedString, String) {
+    let actual = TKStyleManager.timeString(actualTime, for: timeZone)
+    if let timetableTime = timetableTime, let delay = self.delay {
+      let attributed = NSMutableAttributedString(string: actual, attributes: [
+        .foregroundColor: delay.color,
+        .font: TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+      ])
+      
+      let timetable = TKStyleManager.timeString(timetableTime, for: timeZone)
+      if timetable != actual {
+        attributed.append(NSAttributedString(string: "\n"))
+        attributed.append(NSAttributedString(string: timetable, attributes: [
+          .foregroundColor: TKColor.tkLabelSecondary,
+          .font: TKStyleManager.customFont(forTextStyle: .footnote),
+          .strikethroughStyle: NSNumber(1)
+        ]))
+      }
+      return (attributed, actual)
+    }
+    
+    if let delay = self.delay {
+      var combined = actual
+      if let mins = delay.mins {
+        combined += "\n" + mins
+      }
+      return (
+        NSAttributedString(
+          string: combined,
+          attributes: [
+            .foregroundColor: delay.color,
+            .font: TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+          ]
+        ), actual
+      )
+
+    } else {
+      return (
+        NSAttributedString(
+          string: actual,
+          attributes: [
+            .foregroundColor: UIColor.tkLabelPrimary
+          ]
+        ), actual
+      )
+    }
+  }
+  
+  func timeStringWithPlus(for timeZone: TimeZone?) -> (NSAttributedString, String) {
+    let actual = TKStyleManager.timeString(actualTime, for: timeZone)
+    if let delay = self.delay {
+      var combined = actual
+      if let mins = delay.mins {
+        combined += "\n" + mins
+      }
+      return (
+        NSAttributedString(
+          string: combined,
+          attributes: [
+            .foregroundColor: delay.color,
+            .font: TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+          ]
+        ), actual
+      )
+
+    } else {
+      return (
+        NSAttributedString(
+          string: actual,
+          attributes: [
+            .foregroundColor: UIColor.tkLabelPrimary
+          ]
+        ), actual
+      )
+    }
+  }
+}
+
 extension TKUISegmentStationaryCell {
   
   func configure(with item: TKUITripOverviewViewModel.StationaryItem) {
-    let startText = item.startTime.map { TKStyleManager.timeString($0, for: item.timeZone) }
-    let endText = item.endTime.map { TKStyleManager.timeString($0, for: item.timeZone) }
+    let startText = item.startTime?.timeString(for: item.timeZone)
+    let endText = item.endTime?.timeString(for: item.timeZone)
 
     if !item.timesAreFixed {
       timeStack.isHidden = true
 
-    } else if let start = startText, let end = endText, start != end {
+    } else if let start = startText, let end = endText, start.1 != end.1 {
       timeStack.isHidden = false
       timeEndLabel.isHidden = false
-      timeLabel.text = start
-      timeLabel.accessibilityLabel = Loc.Arrives(atTime: start)
-      timeEndLabel.text = end
-      timeEndLabel.accessibilityLabel = Loc.Departs(atTime: end)
+      timeLabel.attributedText = start.0
+      timeLabel.accessibilityLabel = Loc.Arrives(atTime: start.1)
+      timeEndLabel.attributedText = end.0
+      timeEndLabel.accessibilityLabel = Loc.Departs(atTime: end.1)
 
     } else if let time = startText ?? endText {
       timeStack.isHidden = false
       timeEndLabel.isHidden = true
-      timeLabel.text = time
-      timeLabel.accessibilityLabel = Loc.At(time: time)
+      timeLabel.attributedText = time.0
+      timeLabel.accessibilityLabel = Loc.At(time: time.1)
       timeEndLabel.text = nil
     
     } else {
@@ -98,7 +210,11 @@ extension TKUISegmentStationaryCell {
     lineDot.isHidden = false
     lineDot.layer.borderColor = (item.bottomConnection?.color ?? item.topConnection?.color ?? .tkLabelPrimary).cgColor
     lineDot.layer.borderWidth = 3
-    lineDot.layer.cornerRadius = lineDot.frame.width / 2
+
+    let width: CGFloat = item.isContinuation ? 12 : 18
+    lineDotWidthConstraint.constant = width
+    lineDot.layer.cornerRadius = width / 2
+
     topLine.backgroundColor = item.topConnection?.color
     topLine.isHidden = item.topConnection?.color == nil
     bottomLine.backgroundColor = item.bottomConnection?.color
@@ -108,11 +224,10 @@ extension TKUISegmentStationaryCell {
   func configure(with item: TKUITripOverviewViewModel.TerminalItem) {
     timeEndLabel.isHidden = true
 
-    if item.timesAreFixed, let time = item.time {
-      let text = TKStyleManager.timeString(time, for: item.timeZone)
+    if item.timesAreFixed, let text = item.time?.timeString(for: item.timeZone) {
       timeStack.isHidden = false
-      timeLabel.text = text
-      timeLabel.accessibilityLabel = text
+      timeLabel.attributedText = text.0
+      timeLabel.accessibilityLabel = text.1
     } else {
       timeStack.isHidden = true
     }
@@ -130,6 +245,7 @@ extension TKUISegmentStationaryCell {
       lineDot.layer.borderColor = color.cgColor
       lineDot.layer.borderWidth = 3
       lineDot.layer.cornerRadius = lineDot.frame.width / 2
+      lineDotWidthConstraint.constant = 18
 
     } else {
       linePinImageView.isHidden = false

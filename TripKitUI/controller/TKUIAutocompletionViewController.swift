@@ -106,9 +106,7 @@ public class TKUIAutocompletionViewController: UITableViewController {
     viewModel.triggerAction
       .asObservable()
       .flatMapLatest { $0.triggerAdditional(presenter: self).asObservable() }
-      .subscribe(onNext: { result in
-        print(result)
-      })
+      .subscribe()
       .disposed(by: disposeBag)
     
     tableView.rx.setDelegate(self)

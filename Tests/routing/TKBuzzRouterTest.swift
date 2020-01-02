@@ -98,8 +98,8 @@ class TKBuzzRouterTest: TKTestCase {
         // wording should be the regular variant (not 'near')
         let startSegment = try XCTUnwrap(trip.segments.first)
         let endSegment = try XCTUnwrap(trip.segments.last)
-        XCTAssertEqual(startSegment.title, Loc.LeaveFromLocation())
-        XCTAssertEqual(endSegment.title, Loc.ArriveAtLocation())
+        XCTAssertEqual(startSegment.title, Loc.LeaveFromLocation("Mount Street & Little Walker Street"))
+        XCTAssertEqual(endSegment.title, Loc.ArriveAtLocation("2A Bligh Street, 2000 Sydney, Australia"))
 
         // Make sure CoreData is happy
         try self.tripKitContext.save()

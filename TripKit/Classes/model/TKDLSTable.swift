@@ -19,11 +19,13 @@ public class TKDLSTable: NSObject {
   @objc public let tripKitContext: NSManagedObjectContext
   
   @objc public init?(for segment: TKSegment) {
+    let endSegment = segment.finalSegmentIncludingContinuation()
+    
     guard
       let request = segment.trip?.request,
       let moc = request.managedObjectContext,
       let start = segment.scheduledStartStopCode,
-      let end = segment.scheduledEndStopCode
+      let end = endSegment.scheduledEndStopCode
       else {
         return nil
     }
@@ -32,7 +34,7 @@ public class TKDLSTable: NSObject {
     endStopCode = end
     pairIdentifiers = segment.trip?.tripGroup.pairIdentifiers(forPublicSegment: segment)
     startRegion = segment.startRegion ?? .international
-    endRegion = segment.endRegion     ?? .international
+    endRegion = endSegment.endRegion  ?? .international
     tripKitContext = moc
   }
   
