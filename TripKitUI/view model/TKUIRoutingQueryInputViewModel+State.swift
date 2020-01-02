@@ -33,8 +33,8 @@ extension TKUIRoutingQueryInputViewModel {
     let userActions: Observable<UserAction> = Observable.merge([
         selection.asObservable().map { .selectResult($0) },
         inputs.tappedSwap.asObservable().map { .swap },
-        inputs.searchText.map { .typeText($0) },
-        inputs.selectedSearchMode.asObservable().map { .selectMode($0) },
+        inputs.searchText.distinctUntilChanged().map { .typeText($0) },
+        inputs.selectedSearchMode.asObservable().distinctUntilChanged().map { .selectMode($0) },
       ])
 
     let initialState = State(
@@ -46,6 +46,7 @@ extension TKUIRoutingQueryInputViewModel {
     )
     
     return userActions
+      .debug("user actions emitted", trimOutput: true)
       .scan(into: initialState) { state, action in
         switch (action, state.mode) {
         case (.typeText(let text), .origin):

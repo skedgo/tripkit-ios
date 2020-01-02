@@ -278,6 +278,7 @@ extension TripRequest {
   private func geocode(_ location: TKNamedCoordinate, retryLimit: Int, delay: Int) -> Observable<String?> {
     return CLGeocoder().rx
     .reverseGeocode(namedCoordinate: location)
+    .asObservable()
     .retryWhen { errors in
       return errors.enumerated().flatMap { (index, error) -> Observable<Int64> in
         guard index < retryLimit else { throw error }
@@ -367,23 +368,20 @@ extension TKUIRoutingResultsViewModel.RouteBuilder: Equatable { }
 
 extension Reactive where Base: CLGeocoder {
   
-  func reverseGeocode(namedCoordinate: TKNamedCoordinate) -> Observable<String?> {
-    return Observable.create { subscriber in
-      print("reverse geocoding \(namedCoordinate.coordinate.latitude),\(namedCoordinate.coordinate.longitude)")
+  func reverseGeocode(namedCoordinate: TKNamedCoordinate) -> Single<String?> {
+    return Single.create { single in
       let location = CLLocation(latitude: namedCoordinate.coordinate.latitude, longitude: namedCoordinate.coordinate.longitude)
+      
       let geocoder = CLGeocoder()
       geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
         if let error = error {
-          print("reverse geocoding encountered error")
-          subscriber.onError(error)
+          single(.error(error))
         } else {
-          subscriber.onNext(placemarks?.first?.name)
-          subscriber.onCompleted()
+          single(.success(placemarks?.first?.name))
         }
       }
       
       return Disposables.create()
-      
     }
   }
   

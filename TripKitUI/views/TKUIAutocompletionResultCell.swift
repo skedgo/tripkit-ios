@@ -44,7 +44,7 @@ extension TKUIAutocompletionResultCell {
     guard case .currentLocation = item else { assertionFailure(); return }
     
     imageView?.image = TKAutocompletionResult.image(forType: .currentLocation)
-    imageView?.tintColor = #colorLiteral(red: 0.8500000238, green: 0.8500000238, blue: 0.8500000238, alpha: 1)
+    imageView?.tintColor = .tkLabelPrimary
     textLabel?.text = Loc.CurrentLocation
     textLabel?.textColor = .tkLabelPrimary
     detailTextLabel?.text = nil
@@ -55,7 +55,7 @@ extension TKUIAutocompletionResultCell {
     guard case .autocompletion(let autocompletion) = item else { assertionFailure(); return  }
     
     imageView?.image = autocompletion.image
-    imageView?.tintColor = #colorLiteral(red: 0.8500000238, green: 0.8500000238, blue: 0.8500000238, alpha: 1) // From SkedGo default icons
+    imageView?.tintColor = .tkLabelPrimary // From SkedGo default icons
     textLabel?.text = autocompletion.title
     textLabel?.textColor = .tkLabelPrimary
     detailTextLabel?.text = autocompletion.subtitle
