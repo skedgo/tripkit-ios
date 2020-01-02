@@ -50,7 +50,7 @@ class TKAlertModelTest: XCTestCase {
     
     let model = try apiAlertModel(from: json)
     XCTAssertNotNil(model.action)
-    XCTAssertEqual(String(describing: model.action!.type), String(describing: API.Alert.Action.ActionType.reroute(["200060"])))
+    XCTAssertEqual(String(describing: model.action!.type), String(describing: TKAPI.Alert.Action.ActionType.reroute(["200060"])))
   }
   
   func testRerouteActionWithoutStopsToAvoid() throws {
@@ -111,9 +111,9 @@ class TKAlertModelTest: XCTestCase {
   
   // MARK: - Helper
   
-  func apiAlertModel(from jsonString: String) throws -> API.Alert {
+  func apiAlertModel(from jsonString: String) throws -> TKAPI.Alert {
     let data = jsonString.data(using: .utf8)!
-    return try decoder.decode(API.Alert.self, from: data)
+    return try decoder.decode(TKAPI.Alert.self, from: data)
   }
   
 }

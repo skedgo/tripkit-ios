@@ -16,7 +16,7 @@ class TKDeparturesModelTest: XCTestCase {
   func testParsingParentStopDepartures() throws {
     let decoder = JSONDecoder()
     let data = try self.dataFromJSON(named: "departures-parentStop")
-    let departures = try decoder.decode(API.Departures.self, from: data)
+    let departures = try decoder.decode(TKAPI.Departures.self, from: data)
 
     XCTAssertNotNil(departures)
   }
