@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 @property (nonatomic, weak, nullable) TripRequest *replacement;
-@property (nonatomic, assign) TripGroupVisibility defaultVisibility;
+@property (nonatomic, assign) TKTripGroupVisibility defaultVisibility;
 
 - (void)remove;
 

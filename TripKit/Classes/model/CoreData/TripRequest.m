@@ -153,7 +153,7 @@
     
     if ([TKModeHelper modes:hidden contain:groupModeIdentifiers]) {
       // if any mode is hidden, hide the whole group
-      group.visibility = TripGroupVisibilityHidden;
+      group.visibility = TKTripGroupVisibilityHidden;
       
     } else if ([TKModeHelper modes:minimized contain:groupModeIdentifiers]) {
       id key = groupModeIdentifiers;
@@ -164,7 +164,7 @@
       }
       [groups addObject:group];
     } else {
-      group.visibility = TripGroupVisibilityFull;
+      group.visibility = TKTripGroupVisibilityFull;
     }
   }
   
@@ -174,7 +174,7 @@
     NSArray *sorted = [groups sortedArrayUsingDescriptors:sorters];
     [sorted enumerateObjectsUsingBlock:^(TripGroup *tripGroup, NSUInteger index, BOOL *stopInner) {
 #pragma unused(stopInner)
-      tripGroup.visibility = (index == 0) ? TripGroupVisibilityMini : TripGroupVisibilityHidden;
+      tripGroup.visibility = (index == 0) ? TKTripGroupVisibilityMini : TKTripGroupVisibilityHidden;
     }];
   }];
 }

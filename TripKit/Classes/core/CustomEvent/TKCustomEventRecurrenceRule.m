@@ -19,7 +19,7 @@
 @implementation TKCustomEventRecurrenceRule
 
 + (NSString *)humanReadableRecurrenceRule:(NSString *)recurrenceRule
-                           firstDayOfWeek:(WeekdayIndex)firstDayOfWeek
+                           firstDayOfWeek:(TKWeekdayIndex)firstDayOfWeek
 {
   if (! recurrenceRule) {
     return Loc.Never;
@@ -81,32 +81,32 @@
 {
   NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
 
-  if ('1' == [recurrenceRule characterAtIndex:WeekdayIndex_Sunday]) {
-    [indexes addIndex:WeekdayIndex_Sunday];
+  if ('1' == [recurrenceRule characterAtIndex:TKWeekdayIndex_Sunday]) {
+    [indexes addIndex:TKWeekdayIndex_Sunday];
   }
 
-  if ('1' == [recurrenceRule characterAtIndex:WeekdayIndex_Monday]) {
-    [indexes addIndex:WeekdayIndex_Monday];
+  if ('1' == [recurrenceRule characterAtIndex:TKWeekdayIndex_Monday]) {
+    [indexes addIndex:TKWeekdayIndex_Monday];
   }
 
-  if ('1' == [recurrenceRule characterAtIndex:WeekdayIndex_Tuesday]) {
-    [indexes addIndex:WeekdayIndex_Tuesday];
+  if ('1' == [recurrenceRule characterAtIndex:TKWeekdayIndex_Tuesday]) {
+    [indexes addIndex:TKWeekdayIndex_Tuesday];
   }
 
-  if ('1' == [recurrenceRule characterAtIndex:WeekdayIndex_Wednesday]) {
-    [indexes addIndex:WeekdayIndex_Wednesday];
+  if ('1' == [recurrenceRule characterAtIndex:TKWeekdayIndex_Wednesday]) {
+    [indexes addIndex:TKWeekdayIndex_Wednesday];
   }
 
-  if ('1' == [recurrenceRule characterAtIndex:WeekdayIndex_Thursday]) {
-    [indexes addIndex:WeekdayIndex_Thursday];
+  if ('1' == [recurrenceRule characterAtIndex:TKWeekdayIndex_Thursday]) {
+    [indexes addIndex:TKWeekdayIndex_Thursday];
   }
 
-  if ('1' == [recurrenceRule characterAtIndex:WeekdayIndex_Friday]) {
-    [indexes addIndex:WeekdayIndex_Friday];
+  if ('1' == [recurrenceRule characterAtIndex:TKWeekdayIndex_Friday]) {
+    [indexes addIndex:TKWeekdayIndex_Friday];
   }
 
-  if ('1' == [recurrenceRule characterAtIndex:WeekdayIndex_Saturday]) {
-    [indexes addIndex:WeekdayIndex_Saturday];
+  if ('1' == [recurrenceRule characterAtIndex:TKWeekdayIndex_Saturday]) {
+    [indexes addIndex:TKWeekdayIndex_Saturday];
   }
 
   return indexes;
@@ -133,12 +133,12 @@ static NSDateFormatter *sWeekdayDateFormatter = nil;
   return [[sWeekdayDateFormatter standaloneWeekdaySymbols] objectAtIndex:weekday - 1];
 }
 
-+ (WeekdayIndex)weekdayFromDate:(NSDate *)date
++ (TKWeekdayIndex)weekdayFromDate:(NSDate *)date
 {
   NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
   NSDateComponents *weekdayComponents = [gregorian components:NSCalendarUnitWeekday
                                                      fromDate:date];
-  return (WeekdayIndex) [weekdayComponents weekday];
+  return (TKWeekdayIndex) [weekdayComponents weekday];
 }
 
 

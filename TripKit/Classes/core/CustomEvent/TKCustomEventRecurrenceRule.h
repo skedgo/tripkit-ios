@@ -10,14 +10,14 @@
 
 #import <EventKit/EventKit.h>
 
-typedef NS_ENUM(NSInteger, WeekdayIndex) {
-  WeekdayIndex_Sunday = 1,
-  WeekdayIndex_Monday,
-  WeekdayIndex_Tuesday,
-  WeekdayIndex_Wednesday,
-  WeekdayIndex_Thursday,
-  WeekdayIndex_Friday,
-  WeekdayIndex_Saturday,
+typedef NS_ENUM(NSInteger, TKWeekdayIndex) {
+  TKWeekdayIndex_Sunday = 1,
+  TKWeekdayIndex_Monday,
+  TKWeekdayIndex_Tuesday,
+  TKWeekdayIndex_Wednesday,
+  TKWeekdayIndex_Thursday,
+  TKWeekdayIndex_Friday,
+  TKWeekdayIndex_Saturday,
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TKCustomEventRecurrenceRule : NSObject
 
 + (NSString *)humanReadableRecurrenceRule:(NSString *)recurrenceRule
-                           firstDayOfWeek:(WeekdayIndex)firstDayOfWeek;
+                           firstDayOfWeek:(TKWeekdayIndex)firstDayOfWeek;
 
 + (nullable NSString *)recurrenceRuleFromWeekdays:(NSIndexSet *)weekdays;
 
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)longStringForWeekday:(NSInteger)weekday;
 
-+ (WeekdayIndex)weekdayFromDate:(NSDate *)date;
++ (TKWeekdayIndex)weekdayFromDate:(NSDate *)date;
 
 
 ///-----------------------------------------------------------------------------

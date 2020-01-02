@@ -150,7 +150,7 @@ extension API {
         }
         
         
-        fileprivate func relativeWeekday(to starting: WeekdayIndex) -> Int? {
+        fileprivate func relativeWeekday(to starting: TKWeekdayIndex) -> Int? {
           guard let weekday = self.weekday else { return nil }
           if weekday < starting.rawValue {
             return weekday + 7
@@ -190,7 +190,7 @@ extension API.OpeningHours {
   ///
   /// - Parameter starting: First day of the week
   /// - Returns: Sorted days
-  public func days(starting: WeekdayIndex = .monday) -> [Day] {
+  public func days(starting: TKWeekdayIndex = .monday) -> [Day] {
     var allDays = days
     for day in Day.DayOfWeek.weekdays {
       if !allDays.contains(where: { $0.day == day }) {

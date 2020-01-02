@@ -101,11 +101,11 @@
   }
 }
 
-- (AlertSeverity)alertSeverity {
-  return (AlertSeverity) [self.severity integerValue];
+- (TKAlertSeverity)alertSeverity {
+  return (TKAlertSeverity) [self.severity integerValue];
 }
 
-- (void)setAlertSeverity:(AlertSeverity)alertSeverity {
+- (void)setTKAlertSeverity:(TKAlertSeverity)alertSeverity {
   self.severity = @(alertSeverity);
 }
 

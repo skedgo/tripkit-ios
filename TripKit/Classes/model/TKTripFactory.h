@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^TripFactoryCompletionBlock)(Trip * __nullable trip, NSError * __nullable error);
+typedef void(^TKTripFactoryCompletionBlock)(Trip * __nullable trip, NSError * __nullable error);
 
 @interface TKTripFactory : NSObject
 

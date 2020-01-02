@@ -75,7 +75,7 @@
   }
   
   // we'll adjust the visibility in the completion block
-  request.defaultVisibility = TripGroupVisibilityHidden;
+  request.defaultVisibility = TKTripGroupVisibilityHidden;
 
   for (NSSet *modeIdentifiers in groupedIdentifiers) {
     TKBuzzRouter *worker = self.workerRouters[modeIdentifiers];

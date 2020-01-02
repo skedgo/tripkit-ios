@@ -11,7 +11,15 @@
 @class TripGroup;
 
 /**
- A trip classifier is used to classify TripGroup instances within the same TripRequest.
+ A trip classifier is used to classify `TripGroup` instances within the same `TripRequest`.
+ 
+ What kind of classifications to use, is entirely up to the classifier - as long as they are `NSObject`
+ instances taht conform to `NSCoding`.
+ 
+ For examples see:
+ 
+ - `TKMetricClassifier`
+ - `TKPriceTimeTripClassifier`
  */
 @protocol TKTripClassifier <NSObject>
 
