@@ -37,9 +37,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKAlertController.h"
 #endif
 
-#import "TKCustomEvent.h"
-#import "TKCustomEventRecurrenceRule.h"
-
 // Headers
 #import "TKTripKit.h"
 #import "TKConstants.h"

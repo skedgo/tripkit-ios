@@ -22,7 +22,7 @@ extension TKAPI {
     
     /// Time zone in which the opening hours are defined
     public let timeZone: TimeZone
-    fileprivate let days: [Day]
+    public let days: [Day]
     
     private enum CodingKeys: String, CodingKey {
       case timeZone
@@ -58,6 +58,11 @@ extension TKAPI {
       
       public let day: DayOfWeek
       public let times: [Time]
+      
+      public init(day: DayOfWeek, times: [Time]) {
+        self.day = day
+        self.times = times
+      }
       
       private enum CodingKeys: String, CodingKey {
         case day = "name"
@@ -126,17 +131,9 @@ extension TKAPI {
           .monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday
         ]
         
-        public var localizedString: String {
-          if let weekday = weekday {
-            return TKCustomEventRecurrenceRule.longString(forWeekday: weekday)
-          } else {
-            return Loc.PublicHoliday
-          }
-        }
-        
         /// Integer matching `NSDateComponents.weekday` or
         /// `nil` in case of public holiday.
-        fileprivate var weekday: Int? {
+        public var weekday: Int? {
           switch self {
           case .sunday:         return 1
           case .monday:         return 2
@@ -148,18 +145,7 @@ extension TKAPI {
           case .publicHoliday:  return nil
           }
         }
-        
-        
-        fileprivate func relativeWeekday(to starting: TKWeekdayIndex) -> Int? {
-          guard let weekday = self.weekday else { return nil }
-          if weekday < starting.rawValue {
-            return weekday + 7
-          } else {
-            return weekday
-          }
-        }
       }
-      
     }
   }
 }
@@ -184,29 +170,6 @@ extension TKAPI.OpeningHours {
       }
     }
     return false
-  }
-  
-  /// Sorted days relative to provided first-day-of-week
-  ///
-  /// - Parameter starting: First day of the week
-  /// - Returns: Sorted days
-  public func days(starting: TKWeekdayIndex = .monday) -> [Day] {
-    var allDays = days
-    for day in Day.DayOfWeek.weekdays {
-      if !allDays.contains(where: { $0.day == day }) {
-        allDays.append(Day(day: day, times: []))
-      }
-    }
-    
-    return allDays.sorted { firstDay, secondDay in
-      guard let first = firstDay.day.relativeWeekday(to: starting) else {
-        return false
-      }
-      guard let second = secondDay.day.relativeWeekday(to: starting) else {
-        return true
-      }
-      return first < second
-    }
   }
   
 }

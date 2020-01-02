@@ -21,6 +21,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `TKUIRoutingResults`: Updated the title view of the card to bring up the new query input card on tap.
 - `TKUIRoutingResults`: In long distance trips, you can now select all relevant modes
 
+### Removed
+
+- Removed `TKCustomEvent`
+- Removed `TKCustomEventRecurrenceRule`
+- Removed `TKTrack`
+- Removed `TKUIDepartureView`
+
 ### Fixed
 
 - Fixes styling of some modes in dark mode (school buses, flights, and some car share)
