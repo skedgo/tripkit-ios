@@ -45,7 +45,7 @@ public enum TKGeoJSON {
 }
 
 /// Properties used by Pelias geocoders
-public struct TKPeliasProperties: Decodable {
+struct TKPeliasProperties: Decodable {
   let gid: String?
   let source: String?
   

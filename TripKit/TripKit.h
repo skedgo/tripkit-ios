@@ -59,7 +59,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 // Non-core data model classes
 #import "TKSegment.h"
 #import "TKTripFactory.h"
-#import "TKCellHelper.h"
 
 // Helpers
 #import "TKNextSegmentScorer.h"
@@ -76,7 +75,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKRoutingParser.h"
 #import "TKRouter.h"
 #import "TKBuzzRouter.h"
-#import "TKFakeRouter.h"
 #import "TKBuzzRealTime.h"
 #import "TKBuzzInfoProvider.h"
 
