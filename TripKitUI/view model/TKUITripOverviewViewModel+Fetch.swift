@@ -15,6 +15,7 @@ extension TKUITripOverviewViewModel {
   
   static func fetchContentOfServices(in trip: Trip) -> Observable<Void> {
     let queries: [(Service, Date, TKRegion)] = trip.segments
+      .filter { !$0.isContinuation } // the previous segment will provide that
       .compactMap { $0.service != nil ? ($0.service!, $0.departureTime!, $0.startRegion ?? trip.regionForRealTimeUpdates) : nil }
       .filter { $0.0.hasServiceData == false }
       

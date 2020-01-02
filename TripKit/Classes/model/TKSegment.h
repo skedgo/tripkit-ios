@@ -85,10 +85,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)resetCaches;
 
 @property (nullable, readonly) NSSet<Shape *> *shapes;
-- (nullable NSArray<Shape *> *)shortedShapes;
+- (nullable NSArray<Shape *> *)sortedShapes;
 
 - (NSTimeInterval)duration:(BOOL)includingContinuation;
 @property (nullable, readonly) NSString *notes;
+@property (nullable, readonly) NSString *notesWithoutPlatforms;
 @property (readonly) NSInteger templateHashCode;
 @property (readonly) BOOL isContinuation;
 @property (readonly) BOOL hasCarParks;
@@ -143,6 +144,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray<Alert *> *)alertsWithAction;
 
 - (TKSegment *)finalSegmentIncludingContinuation;
+- (TKSegment *)originalSegmentIncludingContinuation;
 
 /*
  A singe line instruction which is used on the map screen.
@@ -198,7 +200,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)fillInTemplates:(NSMutableString *)string
                 inTitle:(BOOL)title
-          includingTime:(BOOL)includeTime;
+          includingTime:(BOOL)includeTime
+      includingPlatform:(BOOL)includePlatform;
 
 ///-----------------------------------------------------------------------------
 /// @name In-app and external bookings

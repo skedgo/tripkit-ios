@@ -64,11 +64,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSDate *)countdownDate;
 
 /**
- Compares two visits based on which one comes before another in the same service.
+ Compares two visits based on which one comes before another one.
  
- @warning This throws an error if the visits are incomparable, i.e., if they are from
- 
- @param other `StopVisit` of the same service to compare to
+ @param other `StopVisit` of the same service (or connected service) to compare to
  
  @return ascending if self is before other, same if they are equal, descending if self is after other.
  */

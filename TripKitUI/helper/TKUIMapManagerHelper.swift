@@ -126,7 +126,7 @@ public class TKUIMapManagerHelper: NSObject {
 extension TKUIMapManagerHelper {
   
   private static func buildOverlaysForShapes(in segment: TKSegment) -> [MKOverlay] {
-    guard let shapes = segment.shortedShapes() else { return [] }
+    guard let shapes = segment.sortedShapes() else { return [] }
 
     let routes = shapes.reduce(into: [TKColoredRoute]()) { acc, shape in
         if let previous = acc.last, previous.canAbsorb(shape) {
@@ -145,7 +145,9 @@ extension TKColoredRoute {
   
   convenience init(_ shape: Shape, in segment: TKSegment) {
     shape.segment = segment // for better colouring
-    self.init(path: shape.sortedCoordinates ?? [], color: shape.routeColor, dashPattern: shape.routeDashPattern, isTravelled: shape.routeIsTravelled, identifier: String(segment.templateHashCode))
+    let identifier = segment.selectionIdentifier
+    let isTravelled = shape.routeIsTravelled
+    self.init(path: shape.sortedCoordinates ?? [], color: shape.routeColor, dashPattern: shape.routeDashPattern, isTravelled: isTravelled, identifier: identifier)
   }
   
   func canAbsorb(_ shape: Shape) -> Bool {
@@ -160,5 +162,6 @@ extension TKColoredRoute {
   func absorb(_ shape: Shape) {
     append(shape.sortedCoordinates ?? [])
   }
+  
 }
 
