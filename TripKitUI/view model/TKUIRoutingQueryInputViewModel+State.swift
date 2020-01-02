@@ -46,7 +46,6 @@ extension TKUIRoutingQueryInputViewModel {
     )
     
     return userActions
-      .debug("user actions emitted", trimOutput: true)
       .scan(into: initialState) { state, action in
         switch (action, state.mode) {
         case (.typeText(let text), .origin):
