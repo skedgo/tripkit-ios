@@ -84,24 +84,34 @@ extension TKUIRoutingResultsViewModel {
     }
   }
   
-  static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput) -> Observable<[Section]> {
+  static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput, progress: Observable<TKResultsFetcher.Progress>) -> Observable<[Section]> {
     return Observable
       .combineLatest(
         groups,
         inputs.changedSortOrder.startWith(.score).asObservable(),
-        inputs.tappedToggleButton.startWith(nil).asObservable()
+        inputs.tappedToggleButton.startWith(nil).asObservable(),
+        progress
       )
       .map(sections)
   }
   
-  private static func sections(for groups: [TripGroup], sortBy: TKTripCostType, expand: TripGroup?) -> [Section] {
-    guard let first = groups.first else { return [] }
+  private static func sections(for groups: [TripGroup], sortBy: TKTripCostType, expand: TripGroup?, progress: TKResultsFetcher.Progress) -> [Section] {
+    let progressIndicatorSection = TKUIRoutingResultsViewModel.Section(items: [.progress], badge: nil, costs: [:], toggleButton: nil)
+    
+    guard let first = groups.first else {
+      if case .finished = progress {
+        return []
+      } else {
+        // happens when progress is `locating` and `start`
+        return [progressIndicatorSection]
+      }
+    }
     
     let groupSorters = first.request.sortDescriptors(withPrimary: sortBy)
     let sorted = (groups as NSArray).sortedArray(using: groupSorters).compactMap { $0 as? TripGroup }
     
     let tripSorters = first.request.tripTimeSortDescriptors()
-    return sorted.compactMap { group -> Section? in
+    var sections = sorted.compactMap { group -> Section? in
       guard let best = group.visibleTrip else { return nil }
       let items = (Array(group.trips) as NSArray)
         .sortedArray(using: tripSorters)
@@ -114,7 +124,7 @@ extension TKUIRoutingResultsViewModel {
         show = items
         toggleButton = (title: "Less", payload: nil) // TODO: Localise
       } else if items.count > 2 {
-        let good = items.filter { !$0.trip.showFaded }
+        let good = items.filter { $0.trip != nil }.filter { !$0.trip!.showFaded }
         show = Array(good.prefix(2))
         toggleButton = (title: "More", payload: group) // TODO: Localise
       } else {
@@ -123,7 +133,15 @@ extension TKUIRoutingResultsViewModel {
       }
       return Section(items: show, badge: group.badge, costs: best.costValues, toggleButton: toggleButton)
     }
+    
+    switch progress {
+    case .finished: break
+    default: sections.insert(progressIndicatorSection, at: 0)
+    }
+    
+    return sections
   }
+  
 }
 
 extension TripRequest {
@@ -158,10 +176,13 @@ extension TKUIRoutingResultsViewModel {
     /// A minimised trip
     case nano(Trip)
     
-    var trip: Trip {
+    case progress
+    
+    var trip: Trip? {
       switch self {
       case .nano(let trip): return trip
       case .trip(let trip): return trip
+      case .progress: return nil
       }
     }
   }
@@ -264,6 +285,7 @@ public func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsVie
   switch (lhs, rhs) {
   case (.trip(let left), .trip(let right)): return left.objectID == right.objectID
   case (.nano(let left), .nano(let right)): return left.objectID == right.objectID
+  case (.progress, .progress): return true
   default: return false
   }
 }
@@ -275,6 +297,7 @@ extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
     switch self {
     case .trip(let trip): return trip.objectID.uriRepresentation().absoluteString
     case .nano(let trip): return trip.objectID.uriRepresentation().absoluteString
+    case .progress: return "progress_indicator"
     }
   }
 }

@@ -48,7 +48,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   private weak var modePicker: RoutingModePicker?
   
-  let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
+  private let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
   
   private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
     configureCell: TKUIRoutingResultsCard.cell
@@ -171,6 +171,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     // Table view configuration
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
+    tableView.register(TKUIProgressCell.nib, forCellReuseIdentifier: TKUIProgressCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
     tableView.register(TKUIResultsSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
 
@@ -303,19 +304,22 @@ public class TKUIRoutingResultsCard: TGTableCard {
 
 extension TKUIRoutingResultsCard {
   
-  static func cell(dataSource: RxDataSources.TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {
+  static func cell(dataSource: RxDataSources.TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {    
+    switch item {
+    case .progress:
+      let progressCell = tableView.dequeueReusableCell(withIdentifier: TKUIProgressCell.reuseIdentifier, for: indexPath) as! TKUIProgressCell
+      progressCell.contentView.backgroundColor = .tkBackgroundSecondary // this blends in the background beneath tiles
+      return progressCell
     
-    let showSeparator = dataSource.sectionModels[indexPath.section].items.count > 1
-    
-    let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
-    tripCell.configure(TKUITripCell.Model(item.trip))
-    tripCell.separatorView.isHidden = !showSeparator
-    
-    #if targetEnvironment(macCatalyst)
-    tripCell.accessoryType = .disclosureIndicator
-    #endif
-
-    return tripCell
+    case .nano(let trip), .trip(let trip):
+      let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
+      tripCell.configure(TKUITripCell.Model(trip))
+      tripCell.separatorView.isHidden = !(dataSource.sectionModels[indexPath.section].items.count > 1)
+      #if targetEnvironment(macCatalyst)
+      tripCell.accessoryType = .disclosureIndicator
+      #endif
+      return tripCell
+    }
   }
   
 }
@@ -362,6 +366,11 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
       assertionFailure()
       return nil
     }
+   
+    // progress cell does not need a footer
+    guard dataSource.sectionModels[section].items.first?.trip != nil else {
+      return nil
+    }
 
     let formatter = TKUITripCell.Formatter()
     formatter.costColor = footerView.costLabel.textColor
@@ -384,6 +393,15 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     }
     
     return footerView
+  }
+  
+  public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    if dataSource.sectionModels[section].items.first?.trip == nil {
+      return .leastNonzeroMagnitude
+    } else {
+      let footer = TKUIResultsSectionFooterView()
+      return footer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+    }
   }
 
   public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
