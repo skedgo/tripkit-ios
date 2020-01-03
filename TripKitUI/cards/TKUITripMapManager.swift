@@ -108,17 +108,18 @@ private extension TKUITripMapManager {
     for segment in trip.segments {
       annotations.append(contentsOf: TKUIMapManagerHelper.additionalMapAnnotations(for: segment))
       
-      // We at least add the semaphore for every segment
-      guard segment.hasVisibility(.onMap), segment.coordinate.isValid else { continue }
-      annotations.append(segment)
+      // semaphore
+      if segment.hasVisibility(.onMap), segment.coordinate.isValid {
+        annotations.append(segment)
+      }
       
-      // For non-stationary segments, we also add shape information
-      guard !segment.isStationary else { continue }
+      // shapes (+ visits)
+      if let toAdd = TKUIMapManagerHelper.shapeAnnotations(for: segment) {
+        annotations += toAdd.points
+        overlays += toAdd.overlays
+      }
       
-      guard let toAdd = TKUIMapManagerHelper.shapeAnnotations(for: segment) else { continue }
-      annotations += toAdd.points
-      overlays += toAdd.overlays
-      
+      // map style
       affectedByTraffic = affectedByTraffic || segment.isAffectedByTraffic
     }
     
@@ -139,7 +140,7 @@ private extension TKUITripMapManager {
         dynamicAnnotations.append(primary)
       }
       dynamicAnnotations.append(contentsOf: segment.realTimeAlternativeVehicles)
-      
+
       // TODO: add alerts
     }
 

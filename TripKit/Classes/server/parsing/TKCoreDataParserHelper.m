@@ -93,22 +93,29 @@
     
     // get information about the service if there's any in there
     NSString *serviceCode = shapeDict[@"serviceTripID"];
-    if (serviceCode && NO == [previousService.code isEqualToString:serviceCode]) {
+    BOOL fillService = NO;
+    if (serviceCode && previousService && NO == [previousService.code isEqualToString:serviceCode]) {
       // we need a new service
       if ([serviceCode isEqualToString:requestedService.code]) {
         currentService = requestedService;
         
       } else {
         currentService = [Service fetchOrInsertServiceWithCode:serviceCode inTripKitContext:context];
-        currentService.color = [TKParserHelper colorForDictionary:[shapeDict objectForKey:@"serviceColor"]];
-        currentService.frequency  = shapeDict[@"frequency"];
-        currentService.lineName   = shapeDict[@"serviceName"];
-        currentService.direction  = shapeDict[@"serviceDirection"];
-        currentService.number     = shapeDict[@"serviceNumber"];
+        fillService = YES;
       }
     } else {
       // just use the existing service
       currentService = requestedService;
+    }
+    
+    if (fillService || currentService.code == nil) {
+      currentService.code = serviceCode;
+      currentService.color = [TKParserHelper colorForDictionary:[shapeDict objectForKey:@"serviceColor"]] ?: requestedService.color;
+      currentService.frequency  = shapeDict[@"frequency"];
+      currentService.lineName   = shapeDict[@"serviceName"];
+      currentService.direction  = shapeDict[@"serviceDirection"];
+      currentService.number     = shapeDict[@"serviceNumber"];
+      currentService.modeInfo   = modeInfo;
     }
     
     if (previousService != currentService) {

@@ -140,7 +140,7 @@ extension TKSegment: TKUISemaphoreDisplayable {
     // Should match the definition in TripKit => Shape
     switch order {
     case .start: return "start"
-    case .regular: return String(templateHashCode)
+    case .regular: return String(originalSegmentIncludingContinuation().templateHashCode)
     case .end: return "end"
     }
   }

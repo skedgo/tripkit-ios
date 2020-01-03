@@ -110,8 +110,6 @@ class TKUIRoutingQueryInputTitleView: UIView {
       else { return }
     
     let isFirst = searchBar.becomeFirstResponder()
-    print(mode)
-    print(isFirst)
     if #available(iOS 13.0, *) {
       searchBar.searchTextField.selectedTextRange = searchBar.searchTextField.textualRange
     }
@@ -139,10 +137,24 @@ extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
     case toSearchBar: switchMode.onNext(.destination)
     default: assertionFailure()
     }
+    
+    // Before editing begins, we publish the current search text so that
+    // the autocompletion shows immediate results if available.
+    typed.onNext(searchBar.text ?? "")
+    
     return true
   }
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    // We are publishing the search mode here again because it's possible that
+    // the text change was initiated from a search bar that does not match the
+    // current search mode, see: https://redmine.buzzhives.com/issues/12017.
+    switch searchBar {
+    case fromSearchBar: switchMode.onNext(.origin)
+    case toSearchBar: switchMode.onNext(.destination)
+    default: assertionFailure()
+    }
+    
     typed.onNext(searchText)
   }
   

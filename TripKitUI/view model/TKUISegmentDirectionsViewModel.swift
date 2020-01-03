@@ -15,7 +15,7 @@ class TKUISegmentDirectionsViewModel {
   
   static func canShowInstructions(for segment: TKSegment) -> Bool {
     guard segment.isSelfNavigating else { return false }
-    guard let sorted = segment.shortedShapes() else { return false }
+    guard let sorted = segment.sortedShapes() else { return false }
     return sorted.count > 1
   }
   

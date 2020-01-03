@@ -33,17 +33,29 @@ extension TKUIAutocompletionResultCell {
     disposeBag = DisposeBag()
     
     switch item {
+    case .currentLocation: configureCurrentLocation(with: item)
     case .action: configureAction(with: item)
     case .autocompletion: configureAutocompletion(with: item, onAccessoryTapped: onAccessoryTapped)
     }
 
   }
   
+  private func configureCurrentLocation(with item: TKUIAutocompletionViewModel.Item) {
+    guard case .currentLocation = item else { assertionFailure(); return }
+    
+    imageView?.image = TKAutocompletionResult.image(forType: .currentLocation)
+    imageView?.tintColor = .tkLabelPrimary
+    textLabel?.text = Loc.CurrentLocation
+    textLabel?.textColor = .tkLabelPrimary
+    detailTextLabel?.text = nil
+    accessoryView = nil
+  }
+  
   private func configureAutocompletion(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: PublishSubject<TKUIAutocompletionViewModel.Item>?) {
     guard case .autocompletion(let autocompletion) = item else { assertionFailure(); return  }
     
     imageView?.image = autocompletion.image
-    imageView?.tintColor = #colorLiteral(red: 0.8500000238, green: 0.8500000238, blue: 0.8500000238, alpha: 1) // From SkedGo default icons
+    imageView?.tintColor = .tkLabelPrimary // From SkedGo default icons
     textLabel?.text = autocompletion.title
     textLabel?.textColor = .tkLabelPrimary
     detailTextLabel?.text = autocompletion.subtitle
@@ -60,7 +72,6 @@ extension TKUIAutocompletionResultCell {
     } else {
       accessoryView = nil
     }
-    
   }
   
   private func configureAction(with item: TKUIAutocompletionViewModel.Item) {

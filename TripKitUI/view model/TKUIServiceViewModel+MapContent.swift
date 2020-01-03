@@ -9,6 +9,7 @@
 import Foundation
 
 public protocol ServiceMapContentVisited {
+  var color: UIColor { get }
   var isVisited: Bool { get }
 }
 
@@ -77,6 +78,8 @@ extension TKUIServiceViewModel {
   class ServiceVisit: NSObject {
     fileprivate let visit: StopVisits
     let isVisited: Bool
+    
+    var color: UIColor { (visit.service.color as? UIColor) ?? .black }
 
     init(visit: StopVisits, embarkation: StopVisits, disembarkation: StopVisits?) {
       self.visit = visit
@@ -101,7 +104,6 @@ extension TKUIServiceViewModel.ServiceVisit: TKUIModeAnnotation {
   var modeInfo: TKModeInfo! { return visit.modeInfo }
   var clusterIdentifier: String? { return visit.clusterIdentifier}
 }
-
 
 // MARK: Embarkations
 

@@ -23,6 +23,7 @@ open class TKUIAnnotationViewBuilder: NSObject {
   fileprivate var preferMarker: Bool = false
   fileprivate var enableClustering: Bool = false
   fileprivate var drawImageAnnotationAsCircle: Bool = false
+  fileprivate var circleColor: UIColor? = nil
 
   @objc public let annotation: MKAnnotation
   @objc public let mapView: MKMapView
@@ -41,6 +42,12 @@ open class TKUIAnnotationViewBuilder: NSObject {
   @objc @discardableResult
   public func drawCircleAsTravelled(_ travelled: Bool) -> TKUIAnnotationViewBuilder {
     self.asTravelled = travelled
+    return self
+  }
+
+  @objc @discardableResult
+  public func circleColor(_ color: UIColor) -> TKUIAnnotationViewBuilder {
+    self.circleColor = color
     return self
   }
 
@@ -298,7 +305,7 @@ fileprivate extension TKUISemaphoreView {
 
 fileprivate extension TKUIAnnotationViewBuilder {
   
-  func buildCircle(for annotation: MKAnnotation, color: TKColor? = nil) -> MKAnnotationView {
+  func buildCircle(for annotation: MKAnnotation) -> MKAnnotationView {
     let identifier = asLarge ? "LargeCircleView" : "SmallCircleView"
     
     let circleView: TKUICircleAnnotationView
@@ -310,7 +317,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     }
     
     circleView.isFaded = !asTravelled
-    if asTravelled, let color = (annotation as? TKUIModeAnnotation)?.modeInfo.color {
+    if asTravelled, let color = circleColor ?? (annotation as? TKUIModeAnnotation)?.modeInfo.color {
       circleView.circleColor = color
     } else {
       circleView.circleColor = .routeDashColorNonTravelled

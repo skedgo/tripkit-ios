@@ -225,7 +225,7 @@ extension TKDeparturesProvider {
     var pairIdentifieres = Set<String>()
     for embarkation in departures.embarkationStops {
       guard let startStop = candidates[embarkation.stopCode]?.first else {
-        assertionFailure("Got an embarkation but no stop to add it to: \(embarkation). Stops: \(candidates)")
+        TKLog.info("TKDeparturesProvider", text: "Got an embarkation but no stop to add it to: \(embarkation). Stops: \(candidates)")
         continue
       }
       
@@ -233,7 +233,7 @@ extension TKDeparturesProvider {
         guard
           let endStopCode = serviceModel.endStopCode,
           let endStop = candidates[endStopCode]?.first else {
-            assertionFailure("Got an disembarkation but no stop to add it to: \(embarkation). Stops: \(candidates)")
+            TKLog.info("TKDeparturesProvider", text: "Got an disembarkation but no stop to add it to: \(embarkation). Stops: \(candidates)")
             continue
         }
         
@@ -245,7 +245,7 @@ extension TKDeparturesProvider {
         }
       }
     }
-    assert(!pairIdentifieres.isEmpty, "No embarkations in \(departures)")
+//    assert(!pairIdentifieres.isEmpty, "No embarkations in \(departures)")
     
     TKAPIToCoreDataConverter.updateOrAddAlerts(departures.alerts, in: context)
     

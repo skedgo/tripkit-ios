@@ -266,12 +266,13 @@ fileprivate extension TKUIRoutingQueryInputViewModel.Item {
     switch self {
     case .action(let action): return action.title
     case .autocompletion(let item): return item.title
+    case .currentLocation: return "Current Location"
     }
   }
   
   var accessory: UIImage? {
     switch self {
-    case .action: return nil
+    case .action, .currentLocation: return nil
     case .autocompletion(let item): return item.accessoryImage
     }
   }

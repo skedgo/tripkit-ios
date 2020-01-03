@@ -115,7 +115,7 @@
   NSString *realTimeStatus = responseDict[@"realTimeStatus"];
   if (realTimeStatus) {
     [TKCoreDataParserHelper adjustService:service
-          forRealTimeStatusString:realTimeStatus];
+                  forRealTimeStatusString:realTimeStatus];
   }
   
   // real time vehicles
@@ -141,8 +141,8 @@
   // parse the shapes
   NSArray *shapesArray = responseDict[@"shapes"];
   [TKCoreDataParserHelper insertNewShapes:shapesArray
-                       forService:service
-                     withModeInfo:modeInfo
+                               forService:service
+                             withModeInfo:modeInfo
                             clearRealTime:YES // These are time-table times
    ];
 }

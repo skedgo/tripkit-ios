@@ -253,6 +253,40 @@ extension TripRequest {
     
   }
   
+  func reverseGeocodeLocations() -> Observable<(origin: String?, destination: String?)> {
+    let originObservable: Observable<String?>
+    if let from = self.fromLocation.title, from != Loc.Location {
+      originObservable = .just(from)
+    } else {
+      originObservable = geocode(self.fromLocation, retryLimit: 5, delay: 5)
+        .catchErrorJustReturn(nil)
+        .startWith(nil)
+    }
+    
+    let destinationObservable: Observable<String?>
+    if let to = self.toLocation.title, to != Loc.Location {
+      destinationObservable = .just(to)
+    } else {
+      destinationObservable = geocode(self.toLocation, retryLimit: 5, delay: 5)
+        .catchErrorJustReturn(nil)
+        .startWith(nil)
+    }
+    
+    return Observable.combineLatest(originObservable, destinationObservable) { (origin: $0, destination: $1) }
+  }
+  
+  private func geocode(_ location: TKNamedCoordinate, retryLimit: Int, delay: Int) -> Observable<String?> {
+    return CLGeocoder().rx
+    .reverseGeocode(namedCoordinate: location)
+    .asObservable()
+    .retryWhen { errors in
+      return errors.enumerated().flatMap { (index, error) -> Observable<Int> in
+        guard index < retryLimit else { throw error }
+        return Observable<Int>.timer(RxTimeInterval.seconds(delay), scheduler: MainScheduler.instance)
+      }
+    }
+  }
+  
 }
 
 extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
@@ -288,12 +322,6 @@ extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
 }
 
 extension TKUIRoutingResultsViewModel.RouteBuilder {
-  
-  var originDestination: (String?, String?) {
-    let destinationName = destination?.title ?? nil
-    let originName = origin?.title ?? nil
-    return (originName, destinationName)
-  }
   
   var timeZone: TimeZone {
     switch time {
@@ -335,3 +363,27 @@ public func ==(lhs: TKUIRoutingResultsViewModel.RouteBuilder, rhs: TKUIRoutingRe
     && lhs.mode == rhs.mode
 }
 extension TKUIRoutingResultsViewModel.RouteBuilder: Equatable { }
+
+// MARK: -
+
+extension Reactive where Base: CLGeocoder {
+  
+  func reverseGeocode(namedCoordinate: TKNamedCoordinate) -> Single<String?> {
+    return Single.create { single in
+      let location = CLLocation(latitude: namedCoordinate.coordinate.latitude, longitude: namedCoordinate.coordinate.longitude)
+      
+      let geocoder = CLGeocoder()
+      geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+        if let error = error {
+          single(.error(error))
+        } else {
+          single(.success(placemarks?.first?.name))
+        }
+      }
+      
+      return Disposables.create()
+    }
+  }
+  
+}
+

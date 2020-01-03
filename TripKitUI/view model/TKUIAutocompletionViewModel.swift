@@ -21,19 +21,28 @@ class TKUIAutocompletionViewModel {
   }
   
   enum Item {
+    case currentLocation
     case autocompletion(AutocompletionItem)
     case action(ActionItem)
     
    fileprivate var result: TKAutocompletionResult? {
       switch self {
       case .autocompletion(let item): return item.completion
+      case .action, .currentLocation: return nil
+      }
+    }
+    
+    fileprivate var annotation: Single<MKAnnotation>? {
+      switch self {
+      case .currentLocation: return .just(TKLocationManager.shared.currentLocation)
+      case .autocompletion(let item): return item.completion.annotation
       case .action: return nil
       }
     }
     
     fileprivate var provider: TKAutocompleting? {
       switch self {
-      case .autocompletion: return nil
+      case .autocompletion, .currentLocation: return nil
       case .action(let item): return item.provider
       }
     }
@@ -76,8 +85,8 @@ class TKUIAutocompletionViewModel {
     
     selection = selected
       .asObservable()
-      .compactMap { $0.result }
-      .flatMapLatest { $0.annotation }
+      .compactMap { $0.annotation }
+      .flatMapLatest { $0 }
       .asSignal(onErrorSignalWith: .empty())
     
     accessorySelection = (accessorySelected  ?? .empty())
@@ -129,7 +138,12 @@ extension Array where Element == TKAutocompletionResult {
       let autocompletion = TKUIAutocompletionViewModel.AutocompletionItem(index: tuple.offset, completion: tuple.element, includeAccessory: includeAccessory)
       return .autocompletion(autocompletion)
     }
-    return [TKUIAutocompletionViewModel.Section(items: items, title: nil)]
+    
+    if items.isEmpty {
+      return [TKUIAutocompletionViewModel.Section(items: [.currentLocation], title: nil)]
+    } else {
+      return [TKUIAutocompletionViewModel.Section(items: items, title: nil)]
+    }
   }
   
 }
@@ -153,6 +167,7 @@ func == (lhs: TKUIAutocompletionViewModel.Item, rhs: TKUIAutocompletionViewModel
   switch (lhs, rhs) {
   case (.autocompletion(let left), .autocompletion(let right)): return left.completion == right.completion
   case (.action(let left), .action(let right)): return left.title == right.title
+  case (.currentLocation, .currentLocation): return true
   default: return false
   }
 }
@@ -164,6 +179,7 @@ extension TKUIAutocompletionViewModel.Item: IdentifiableType {
   typealias Identity = String
   var identity: Identity {
     switch self {
+    case .currentLocation: return Loc.CurrentLocation
     case .action(let action): return action.title
     case .autocompletion(let autocompletion): return "\(autocompletion.index)-\(autocompletion.title)"
     }
