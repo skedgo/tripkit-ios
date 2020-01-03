@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension API.VehicleOccupancy {
+extension TKAPI.VehicleOccupancy {
   
   /// A small icon showing 4 people, where some of them are drawn in the "occupied color",
   /// depending on occupancy.

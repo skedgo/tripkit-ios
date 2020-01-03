@@ -230,7 +230,7 @@ extension TKUITripOverviewCard {
 // MARK: - Attribution
 
 extension TKUITripOverviewCard {
-  private func showAttribution(for sources: [API.DataAttribution], in tableView: UITableView) {
+  private func showAttribution(for sources: [TKAPI.DataAttribution], in tableView: UITableView) {
     let footer = TKUIAttributionView.newView(sources, fitsIn: tableView)
     footer?.backgroundColor = tableView.backgroundColor
     
@@ -246,7 +246,7 @@ extension TKUITripOverviewCard {
     tableView.tableFooterView = footer
   }
   
-  private func presentAttributions(for sources: [API.DataAttribution], sender: Any?) {
+  private func presentAttributions(for sources: [TKAPI.DataAttribution], sender: Any?) {
     
     let attributor = TKUIAttributionTableViewController(attributions: sources)
     attributor.delegate = self

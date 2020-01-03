@@ -12,11 +12,11 @@ import RxSwift
 
 extension Vehicle {
   
-  public static func components(from data: Data) -> [[API.VehicleComponents]]? {
-    return try? JSONDecoder().decode([[API.VehicleComponents]].self, from: data)
+  public static func components(from data: Data) -> [[TKAPI.VehicleComponents]]? {
+    return try? JSONDecoder().decode([[TKAPI.VehicleComponents]].self, from: data)
   }
   
-  public var components: [[API.VehicleComponents]]? {
+  public var components: [[TKAPI.VehicleComponents]]? {
     get {
       if let data = componentsData {
         return Vehicle.components(from: data)
@@ -56,15 +56,15 @@ extension Vehicle {
     return segment ?? segmentAlternatives.first
   }
   
-  public var averageOccupancy: API.VehicleOccupancy? {
-    return API.VehicleOccupancy.average(in: components)
+  public var averageOccupancy: TKAPI.VehicleOccupancy? {
+    return TKAPI.VehicleOccupancy.average(in: components)
   }
   
 }
 
 extension Reactive where Base: Vehicle {
   
-  public var components: Observable<([[API.VehicleComponents]], Date)> {
+  public var components: Observable<([[TKAPI.VehicleComponents]], Date)> {
     return observeWeakly(NSData.self, "componentsData")
       .map { [weak base] _ in
         let components = base?.components ?? [[]]
@@ -73,7 +73,7 @@ extension Reactive where Base: Vehicle {
       }
   }
   
-  public var occupancies: Observable<([[API.VehicleOccupancy]], Date)> {
+  public var occupancies: Observable<([[TKAPI.VehicleOccupancy]], Date)> {
     return observeWeakly(NSData.self, "componentsData")
       .map { [weak base] _ in
         let components = base?.components ?? [[]]

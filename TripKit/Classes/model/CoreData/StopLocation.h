@@ -55,15 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
                            atLocation:(nullable TKNamedCoordinate *)location
                    intoTripKitContext:(NSManagedObjectContext *)tripKitContext;
 
-+ (nullable NSString *)platformForStopCode:(NSString *)stopCode
-                             inRegionNamed:(NSString *)regionName
-                          inTripKitContext:(NSManagedObjectContext *)tripKitContext;
-
 - (void)remove;
 
 - (nullable NSPredicate *)departuresPredicateFromDate:(nullable NSDate *)date;
-
-- (nullable StopVisits *)lastDeparture;
 
 - (NSArray<StopLocation *> *)stopsToMatchTo;
 

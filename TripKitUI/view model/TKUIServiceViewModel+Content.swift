@@ -33,7 +33,7 @@ extension TKUIServiceViewModel {
     public let timeZone: TimeZone
     
     /// Real-time satatus of the departure
-    public let realTimeStatus: StopVisitRealTime
+    public let realTimeStatus: TKStopVisitRealTime
     
     /// Whether this stop is at or after disembarkation, and, optionally,
     /// at or before the disembarkation

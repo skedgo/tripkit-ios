@@ -240,19 +240,6 @@ extension TKSegment: TKTripSegment {
     return mutable as String
   }
   
-  public var tripSegmentMainValue: Any {
-    if let rawString = template?.miniInstruction?.mainValue {
-      let mutable = NSMutableString(string: rawString)
-      fill(inTemplates: mutable, inTitle: true, includingTime: true, includingPlatform: false)
-      return mutable as String
-    } else if let date = self.departureTime {
-      return date
-    } else {
-      assertionFailure("Uh-oh. No instruction and no date?")
-      return ""
-    }
-  }
-  
   public var tripSegmentDetail: String? {
     if let rawString = template?.miniInstruction?.detail {
       let mutable = NSMutableString(string: rawString)
@@ -261,10 +248,6 @@ extension TKSegment: TKTripSegment {
     } else {
       return nil
     }
-  }
-  
-  public var tripSegmentLocalCost: TKLocalCost? {
-    return template?.localCost
   }
   
   public var tripSegmentTimesAreRealTime: Bool {

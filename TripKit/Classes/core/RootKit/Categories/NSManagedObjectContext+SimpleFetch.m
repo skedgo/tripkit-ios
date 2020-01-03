@@ -33,7 +33,7 @@
 #pragma mark - Fetch
 
 - (NSArray *)fetchObjectsForEntityName:(NSString *)entityName
-											withFetchRequest:(FetchRequestBlock)requestBlock
+											withFetchRequest:(TKFetchRequestBlock)requestBlock
 {
   ZAssert(self.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
   
@@ -66,7 +66,7 @@
 }
 
 - (NSArray *)fetchObjectsForEntityClass:(Class)entityClass
-											 withFetchRequest:(FetchRequestBlock)requestBlock
+											 withFetchRequest:(TKFetchRequestBlock)requestBlock
 {
   NSArray *array = [self fetchObjectsForEntityName:NSStringFromClass(entityClass)
                                   withFetchRequest:requestBlock];

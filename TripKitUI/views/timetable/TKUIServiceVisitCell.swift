@@ -88,7 +88,7 @@ public class TKUIServiceVisitCell: UITableViewCell {
 }
 
 extension TKUIServiceVisitCell {
-  func setTiming(_ timing: TKServiceTiming, timeZone: TimeZone, isVisited: Bool, realTime: StopVisitRealTime) {
+  func setTiming(_ timing: TKServiceTiming, timeZone: TimeZone, isVisited: Bool, realTime: TKStopVisitRealTime) {
     
     let textColor: UIColor = isVisited ? realTime.color : .tkLabelTertiary
 

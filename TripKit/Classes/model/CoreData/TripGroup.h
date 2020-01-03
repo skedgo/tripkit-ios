@@ -13,10 +13,10 @@
 @class DLSEntry, TKSegment;
 
 
-typedef NS_CLOSED_ENUM(NSInteger, TripGroupVisibility) {
-	TripGroupVisibilityFull = 0,
-  TripGroupVisibilityMini = 1,
-  TripGroupVisibilityHidden = 2,
+typedef NS_CLOSED_ENUM(NSInteger, TKTripGroupVisibility) {
+	TKTripGroupVisibilityFull = 0,
+  TKTripGroupVisibilityMini = 1,
+  TKTripGroupVisibilityHidden = 2,
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Non-CoreData properties
 
-@property (nonatomic, assign) TripGroupVisibility visibility;
+@property (nonatomic, assign) TKTripGroupVisibility visibility;
 
 - (void)adjustVisibleTrip;
 - (nullable NSDate *)earliestDeparture;

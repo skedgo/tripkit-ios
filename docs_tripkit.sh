@@ -28,10 +28,6 @@
       > jazzy-temp.TKObjc.json
   
   jazzy \
-      --author SkedGo \
-      --author_url https://developer.tripgo.com \
       --sourcekitten-sourcefile jazzy-temp.TKSwift.json,jazzy-temp.TKObjc.json \
-      --title 'TripKit iOS' \
-      --theme fullwidth \
-      --output docs/TripKit/
+      --config docs/.tripkit.jazzy.yaml
 )

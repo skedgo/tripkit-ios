@@ -16,11 +16,8 @@
 
 #import "NSDate+Helpers.h"
 #import "NSNumber+Formatter.h"
-#import "NSObject+Abstract.h"
-#import "NSString+Sizing.h"
 #import "NSManagedObjectContext+SimpleFetch.h"
 #import "NSUserDefaults+SharedDefaults.h"
-#import "MKMapView+ZoomLevel.h"
 
 #import "TKLocationHelper.h"
 

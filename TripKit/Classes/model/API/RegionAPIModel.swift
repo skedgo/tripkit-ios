@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension API {
+extension TKAPI {
   
   /// Formerly known as `TKRegionInfo`
   public struct RegionInfo: Codable, Hashable {
@@ -117,13 +117,13 @@ extension API {
   
 }
 
-extension API.RegionInfo {
+extension TKAPI.RegionInfo {
   
   /// - Parameter modeIdentifier: A mode identifier
   /// - Returns: The specific mode details for this this mode identifier
   ///     (only returns something if it's a specific mode identifier, i.e.,
   ///     one with two underscores in it.)
-  public func specificModeDetails(for modeIdentifier: String) -> API.SpecificModeDetails? {
+  public func specificModeDetails(for modeIdentifier: String) -> TKAPI.SpecificModeDetails? {
     let genericMode = TKTransportModes.genericModeIdentifier(forModeIdentifier: modeIdentifier)
     return modes[genericMode]?.specificModes?.first { modeIdentifier == $0.identifier }
   }

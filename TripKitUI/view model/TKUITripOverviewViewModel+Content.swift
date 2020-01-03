@@ -106,8 +106,8 @@ extension TKUITripOverviewViewModel {
   
   enum SegmentAccessory: Equatable {
     case wheelchairFriendly
-    case averageOccupancy(API.VehicleOccupancy)
-    case carriageOccupancies([[API.VehicleOccupancy]])
+    case averageOccupancy(TKAPI.VehicleOccupancy)
+    case carriageOccupancies([[TKAPI.VehicleOccupancy]])
     case pathFriendliness(TKSegment)
   }
 }

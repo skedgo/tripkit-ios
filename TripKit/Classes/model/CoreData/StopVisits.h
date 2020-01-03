@@ -9,13 +9,13 @@
 @import Foundation;
 @import CoreData;
 
-typedef NS_CLOSED_ENUM(NSInteger, StopVisitRealTime) {
-  StopVisitRealTimeNotApplicable, // We don't have real-time for this kind of service
-  StopVisitRealTimeNotAvailable,  // Services like this can have real-time, but this doesn't
-  StopVisitRealTimeOnTime,
-  StopVisitRealTimeEarly,
-  StopVisitRealTimeLate,
-  StopVisitRealTimeCancelled
+typedef NS_CLOSED_ENUM(NSInteger, TKStopVisitRealTime) {
+  TKStopVisitRealTimeNotApplicable, // We don't have real-time for this kind of service
+  TKStopVisitRealTimeNotAvailable,  // Services like this can have real-time, but this doesn't
+  TKStopVisitRealTimeOnTime,
+  TKStopVisitRealTimeEarly,
+  TKStopVisitRealTimeLate,
+  TKStopVisitRealTimeCancelled
 };
 
 
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Frequency information, platform, service name
 - (NSString *)secondaryInformation;
 
-- (StopVisitRealTime)realTimeStatus;
+- (TKStopVisitRealTime)realTimeStatus;
 
 - (NSString *)realTimeInformation:(BOOL)withOriginalTime;
 

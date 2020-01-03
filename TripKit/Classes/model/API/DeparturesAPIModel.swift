@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension API {
+extension TKAPI {
 
   public struct Departures: Codable, Hashable {
     

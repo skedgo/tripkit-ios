@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension StopVisitRealTime {
+extension TKStopVisitRealTime {
   var color: UIColor {
     switch self {
       case .cancelled: return .tkStateError

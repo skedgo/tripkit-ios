@@ -122,7 +122,7 @@
 	self.isFlipped = NO;
 	self.tiny = NO;
 	
-  self.objcDisposeBag = [[TKObjCDisposeBag alloc] init];
+  self.objcDisposeBag = [[TKUIObjCDisposeBag alloc] init];
   
 	[self setTimeFlagOnSide:SGSemaphoreLabelDisabled withTime:nil isRealTime:NO atTimeZone:nil orFrequency:nil];
 	

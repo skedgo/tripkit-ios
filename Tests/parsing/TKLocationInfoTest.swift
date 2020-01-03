@@ -15,7 +15,7 @@ class TKLocationInfoTest: XCTestCase {
   func testLocationInformationForBikePods() throws {
     let decoder = JSONDecoder()
     let data = try dataFromJSON(named: "locationInfo-bikePod")
-    let info = try decoder.decode(API.LocationInfo.self, from: data)
+    let info = try decoder.decode(TKAPI.LocationInfo.self, from: data)
     
     // Basic info
     XCTAssertEqual(info.details?.w3w, "ruled.item.chart")
@@ -33,7 +33,7 @@ class TKLocationInfoTest: XCTestCase {
   func testCarRental() throws {
     let decoder = JSONDecoder()
     let data = try dataFromJSON(named: "locationInfo-carRental")
-    let info = try! decoder.decode(API.LocationInfo.self, from: data)
+    let info = try! decoder.decode(TKAPI.LocationInfo.self, from: data)
 
     let MTZ = TimeZone(identifier: "Australia/Melbourne")!
 
@@ -43,22 +43,8 @@ class TKLocationInfoTest: XCTestCase {
     XCTAssertEqual(info.carRental?.source?.provider.name, "Swiftfleet")
     XCTAssertNotNil(info.carRental?.openingHours)
     XCTAssertEqual(info.carRental?.openingHours?.timeZone, MTZ)
-    XCTAssertEqual(info.carRental?.openingHours?.days().count, 7)
 
     guard let hours = info.carRental?.openingHours else { XCTFail(); return }
-
-    // Opening hour sorting
-    XCTAssertEqual(hours.days(starting: .monday).first?.day.rawValue, "MONDAY")
-    XCTAssertEqual(hours.days(starting: .monday).last?.day.rawValue, "SUNDAY")
-    XCTAssertEqual(hours.days(starting: .sunday).first?.day.rawValue, "SUNDAY")
-    XCTAssertEqual(hours.days(starting: .sunday).last?.day.rawValue, "SATURDAY")
-
-    // Opening hour logic
-    guard let aMonday = hours.days(starting: .monday).first else { XCTFail(); return }
-    XCTAssertEqual(aMonday.contains(Date(from: "16-12-04 23:59", in: MTZ), in: MTZ), false)
-    XCTAssertEqual(aMonday.contains(Date(from: "16-12-05 00:00", in: MTZ), in: MTZ), true)
-    XCTAssertEqual(aMonday.contains(Date(from: "16-12-05 23:59", in: MTZ), in: MTZ), true)
-    XCTAssertEqual(aMonday.contains(Date(from: "16-12-06 00:01", in: MTZ), in: MTZ), false)
 
     XCTAssertEqual(hours.isOpen(at: Date(from: "16-12-07 07:59", in: MTZ)), false)
     XCTAssertEqual(hours.isOpen(at: Date(from: "16-12-07 08:00", in: MTZ)), true)
@@ -69,20 +55,16 @@ class TKLocationInfoTest: XCTestCase {
   func testCarRentalSpecialDays() throws {
     let decoder = JSONDecoder()
     let data = try dataFromJSON(named: "locationInfo-carRental-days")
-    let info = try! decoder.decode(API.LocationInfo.self, from: data)
+    let info = try! decoder.decode(TKAPI.LocationInfo.self, from: data)
         
     guard let hours = info.carRental?.openingHours else { XCTFail(); return }
-
-    let sorted = hours.days(starting: .monday)
-    XCTAssertEqual(sorted.count, 8) // Including public holiday!
-    XCTAssertEqual(sorted.first?.day, .monday)
-    XCTAssertEqual(sorted.last?.day, .publicHoliday)
+    XCTAssertEqual(hours.days.isEmpty, false)
   }
 
   func testOnStreetParking() throws {
     let decoder = JSONDecoder()
     let data = try dataFromJSON(named: "locationInfo-onStreetParking")
-    let info = try! decoder.decode(API.LocationInfo.self, from: data)
+    let info = try! decoder.decode(TKAPI.LocationInfo.self, from: data)
     
     guard let parking = info.onStreetParking else { XCTFail(); return }
     XCTAssertNotNil(parking)

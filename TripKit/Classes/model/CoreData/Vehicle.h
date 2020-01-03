@@ -37,8 +37,6 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @property (nonatomic, assign) BOOL displayAsPrimary;
 
-+ (void)removeOrphansFromManagedObjectContext:(NSManagedObjectContext *)context;
-
 - (void)remove;
 
 - (void)setSubtitle:(nullable NSString *)title;

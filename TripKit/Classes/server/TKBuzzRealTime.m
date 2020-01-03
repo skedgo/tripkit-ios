@@ -12,7 +12,7 @@
 
 @interface TKBuzzRealTime ()
 
-@property (nonatomic, strong) TKBuzzRouter *helperRouter;
+@property (nonatomic, strong) TKRouter *helperRouter;
 
 @end
 
@@ -359,10 +359,10 @@
 
 #pragma mark - Lazy accessors
 
-- (TKBuzzRouter *)helperRouter
+- (TKRouter *)helperRouter
 {
   if (!_helperRouter) {
-    _helperRouter = [[TKBuzzRouter alloc] init];
+    _helperRouter = [[TKRouter alloc] init];
   }
   return _helperRouter;
 }

@@ -50,17 +50,6 @@ typedef NSUInteger SGTripFlag;
 @synthesize sortedSegments = _sortedSegments;
 @synthesize hasReminder;
 
-+ (void)removeTripsBeforeDate:(NSDate *)date
-		 fromManagedObjectContext:(NSManagedObjectContext *)context
-{
-	NSSet *objects = [context fetchObjectsForEntityClass:self
-																	 withPredicateString:@"toDelete = NO AND arrivalTime <= %@", date];
-	for (Trip *trip in objects) {
-		DLog(@"Deleting trip %@ that arrived %@.", trip, trip.arrivalTime);
-    [trip remove];
-	}
-}
-
 + (Trip *)findSimilarTripTo:(Trip *)trip
 										 inList:(id<NSFastEnumeration>)trips
 {
@@ -366,27 +355,6 @@ typedef NSUInteger SGTripFlag;
   return seconds / 60; // we'd like minutes
 }
 
-- (NSTimeInterval)calculateDurationFromQuery
-{
-  NSTimeInterval seconds;
-	TKTimeType timeType = [self tripTimeType];
-	switch (timeType) {
-		case TKTimeTypeArriveBefore:
-			seconds = [self.request.arrivalTime timeIntervalSinceDate:self.departureTime];
-			break;
-      
-		case TKTimeTypeLeaveAfter:
-			seconds = [self.arrivalTime timeIntervalSinceDate:self.request.departureTime];
-			break;
-      
-    case TKTimeTypeNone: // no selection also sort by time from now
-		case TKTimeTypeLeaveASAP:
-			seconds = [self.arrivalTime timeIntervalSinceNow];
-			break;
-	}
-  return seconds;
-}
-
 - (NSNumber *)calculateDuration
 {
   self.minutes = @([TKObjcDateHelper minutesForStart:self.departureTime end:self.arrivalTime]);
@@ -429,24 +397,6 @@ typedef NSUInteger SGTripFlag;
 - (TripRequest *)request
 {
   return self.tripGroup.request;
-}
-
-- (void)removeFromRequest
-{
-  if (self.request.preferredGroup == self.tripGroup) {
-    self.request.preferredGroup = nil;
-  }
-  
-  self.tripGroup.request = nil;
-}
-
-- (void)moveToRequest:(TripRequest *)request markAsPreferred:(BOOL)preferred
-{
-  self.tripGroup.request = request;
-  
-  if (preferred) {
-    [self setAsPreferredTrip];
-  }
 }
 
 #pragma mark - Data
@@ -572,32 +522,6 @@ typedef NSUInteger SGTripFlag;
 	}
 	
 	return publicTransport;
-}
-
-- (NSSet *)changes
-{
-  NSMutableSet *result = [NSMutableSet set];
-  for (TKSegment *segment in [self segments]) {
-    if (NO == [segment isStationary]) {
-      ZAssert(nil != segment.start, @"Segment needs a start: %@", segment);
-      [result addObject:segment.start];
-    }
-  }
-  return result;
-}
-
-- (BOOL)changesAt:(id<MKAnnotation>) annotation
-{
-	NSSet *changes = self.changes;
-	CLLocation *annoLocation = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
-	for (id<MKAnnotation> change in changes) {
-		CLLocation *candidate = [[CLLocation alloc] initWithLatitude:change.coordinate.latitude
-																											 longitude:change.coordinate.longitude];
-		if ([candidate distanceFromLocation:annoLocation] < 10) {
-			return YES;
-		}
-	}
-	return NO;
 }
 
 - (NSSet *)usedModeIdentifiers

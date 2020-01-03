@@ -48,7 +48,7 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
   @objc public var color: TKColor? {
     return rgbColor?.color
   }
-  private let rgbColor: API.RGBColor?
+  private let rgbColor: TKAPI.RGBColor?
 
   @objc(modeInfoForDictionary:)
   public class func modeInfo(for json: [String: Any]?) -> TKModeInfo? {
@@ -137,7 +137,7 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
       remoteImageName = aDecoder.decodeObject(forKey: "remoteIcon") as? String
       descriptor = aDecoder.decodeObject(forKey: "description") as? String
       if let color = aDecoder.decodeObject(forKey: "color") as? TKColor {
-        rgbColor = API.RGBColor(for: color)
+        rgbColor = TKAPI.RGBColor(for: color)
       } else {
         rgbColor = nil
       }

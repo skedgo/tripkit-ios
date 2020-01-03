@@ -56,7 +56,7 @@ public enum TKLocationProvider {
         let decoder = JSONDecoder()
         guard
           let data = data,
-          let response = try? decoder.decode(API.LocationsResponse.self, from: data)
+          let response = try? decoder.decode(TKAPI.LocationsResponse.self, from: data)
         else {
           throw Error.serverReturnedBadFormat
         }

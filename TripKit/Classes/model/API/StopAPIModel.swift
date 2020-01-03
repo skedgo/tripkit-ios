@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension API {
+extension TKAPI {
 
   public struct Stop: Codable, Hashable {
     private enum CodingKeys: String, CodingKey {

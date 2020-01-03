@@ -19,7 +19,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchRegionInformation(forRegion region: TKRegion, completion: @escaping (API.RegionInfo?) -> Void)
+  public class func fetchRegionInformation(forRegion region: TKRegion, completion: @escaping (TKAPI.RegionInfo?) -> Void)
   {
     TKServer.shared.fetch(RegionInfoResponse.self,
                            method: .POST, path: "regionInfo.json",
@@ -35,7 +35,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchParatransitInformation(forRegion region: TKRegion, completion: @escaping (API.Paratransit?) -> Void)
+  public class func fetchParatransitInformation(forRegion region: TKRegion, completion: @escaping (TKAPI.Paratransit?) -> Void)
   {
     fetchRegionInformation(forRegion: region) { info in
       completion(info?.paratransit)
@@ -61,7 +61,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchLocationInformation(_ annotation: MKAnnotation, for region: TKRegion, completion: @escaping (API.LocationInfo?) -> Void) {
+  public class func fetchLocationInformation(_ annotation: MKAnnotation, for region: TKRegion, completion: @escaping (TKAPI.LocationInfo?) -> Void) {
     
     let paras: [String: Any]
     if let named = annotation as? TKNamedCoordinate, let identifier = named.locationID {
@@ -70,7 +70,7 @@ extension TKBuzzInfoProvider {
       paras = [ "lat": annotation.coordinate.latitude, "lng": annotation.coordinate.longitude ]
     }
     
-    TKServer.shared.fetch(API.LocationInfo.self,
+    TKServer.shared.fetch(TKAPI.LocationInfo.self,
                            path: "locationInfo.json",
                            parameters: paras,
                            region: region,
@@ -82,7 +82,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, for region: TKRegion, completion: @escaping (API.LocationInfo?) -> Void) {
+  public class func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, for region: TKRegion, completion: @escaping (TKAPI.LocationInfo?) -> Void) {
     let annotation = MKPointAnnotation()
     annotation.coordinate = coordinate
     fetchLocationInformation(annotation, for: region, completion: completion)
@@ -95,7 +95,7 @@ extension TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public class func fetchTransitAlerts(forRegion region: TKRegion, completion: @escaping ([API.Alert]) -> Void) {
+  public class func fetchTransitAlerts(forRegion region: TKRegion, completion: @escaping ([TKAPI.Alert]) -> Void) {
     let paras: [String: Any] = [
       "region": region.name,
       "v": TKSettings.defaultDictionary()["v"] as! Int
@@ -114,12 +114,12 @@ extension TKBuzzInfoProvider {
   /**
    Asynchronously fetches transit alerts for the provided region using Rx.
    */
-  public class func rx_fetchTransitAlerts(forRegion region: TKRegion) -> Single<[API.Alert]> {
+  public class func rx_fetchTransitAlerts(forRegion region: TKRegion) -> Single<[TKAPI.Alert]> {
     return rx_fetchTransitAlertMappings(forRegion: region)
       .map { $0.map {$0.alert} }
   }
   
-  public class func rx_fetchTransitAlertMappings(forRegion region: TKRegion) -> Single<[API.AlertMapping]> {
+  public class func rx_fetchTransitAlertMappings(forRegion region: TKRegion) -> Single<[TKAPI.AlertMapping]> {
     let paras: [String: Any] = [
       "region": region.name,
       "v": TKSettings.defaultDictionary()["v"] as! Int
@@ -127,7 +127,7 @@ extension TKBuzzInfoProvider {
     
     return TKServer.shared.rx
       .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
-      .map { (_, _, data) -> [API.AlertMapping] in
+      .map { (_, _, data) -> [TKAPI.AlertMapping] in
         guard let data = data else { return [] }
         let decoder = JSONDecoder()
         // This will need adjusting down the track (when using ISO8601)
@@ -166,12 +166,12 @@ extension TKBuzzInfoProvider {
 extension TKBuzzInfoProvider {
   
   struct RegionInfoResponse: Codable {
-    let regions: [API.RegionInfo]
+    let regions: [TKAPI.RegionInfo]
     let server: String?
   }
   
   struct AlertsTransitResponse: Codable {
-    let alerts: [API.AlertMapping]
+    let alerts: [TKAPI.AlertMapping]
   }
   
 }

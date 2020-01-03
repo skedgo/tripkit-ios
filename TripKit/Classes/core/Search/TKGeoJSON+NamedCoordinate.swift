@@ -81,22 +81,22 @@ extension TKNamedCoordinate {
 
 extension TKPeliasProperties {
   
-  private static let mapZenAttribution = API.DataAttribution(provider: API.CompanyInfo(name: "MapZen", website: URL(string: "https://mapzen.com")))
+  private static let mapZenAttribution = TKAPI.DataAttribution(provider: TKAPI.CompanyInfo(name: "MapZen", website: URL(string: "https://mapzen.com")))
   
-  private var specificSource: API.DataAttribution? {
+  private var specificSource: TKAPI.DataAttribution? {
     guard let source = source else { return nil }
     switch source {
     case "openaddresses", "oa":
-      return API.DataAttribution(provider: API.CompanyInfo(name: "OpenAddresses", website: URL(string: "http://openaddresses.io/")))
+      return TKAPI.DataAttribution(provider: TKAPI.CompanyInfo(name: "OpenAddresses", website: URL(string: "http://openaddresses.io/")))
       
     case "whosonfirst", "wof":
-      return API.DataAttribution(provider: API.CompanyInfo(name: "Who's on First", website: URL(string: "https://whosonfirst.mapzen.com/")), disclaimer: "License available at http://whosonfirst.mapzen.com#License")
+      return TKAPI.DataAttribution(provider: TKAPI.CompanyInfo(name: "Who's on First", website: URL(string: "https://whosonfirst.mapzen.com/")), disclaimer: "License available at http://whosonfirst.mapzen.com#License")
 
     case "openstreetmap", "osm":
-      return API.DataAttribution(provider: API.CompanyInfo(name: "OpenStreetMap", website: URL(string: "https://openstreetmap.org")))
+      return TKAPI.DataAttribution(provider: TKAPI.CompanyInfo(name: "OpenStreetMap", website: URL(string: "https://openstreetmap.org")))
 
     case "geonames", "gn":
-      return API.DataAttribution(provider: API.CompanyInfo(name: "GeoNames", website: URL(string: "http://www.geonames.org/")))
+      return TKAPI.DataAttribution(provider: TKAPI.CompanyInfo(name: "GeoNames", website: URL(string: "http://www.geonames.org/")))
       
     default:
       assertionFailure("Attribution not handled: \(source)")
@@ -104,7 +104,7 @@ extension TKPeliasProperties {
     }
   }
   
-  var dataSources: [API.DataAttribution] {
+  var dataSources: [TKAPI.DataAttribution] {
     var attributions = [TKPeliasProperties.mapZenAttribution]
     if let specificSource = self.specificSource {
       attributions.append(specificSource)

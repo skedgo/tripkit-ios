@@ -210,7 +210,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
     return @[];
   }
   
-  TripGroupVisibility updateTripVisibility = tripToUpdate.tripGroup.visibility;
+  TKTripGroupVisibility updateTripVisibility = tripToUpdate.tripGroup.visibility;
   
   // At first, we need to parse the segment templates, since the trips will reference them
   NSMutableDictionary *segmentHashToTemplateDictionaryDict = [NSMutableDictionary dictionaryWithCapacity:segmentTemplatesArray.count];

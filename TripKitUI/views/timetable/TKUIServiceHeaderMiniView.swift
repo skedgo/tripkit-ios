@@ -47,7 +47,7 @@ class TKUIServiceHeaderMiniView: UIView {
     accessibilityImageView.image = accessibility.icon
   }
   
-  private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<[[API.VehicleOccupancy]]>? = nil) {
+  private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<[[TKAPI.VehicleOccupancy]]>? = nil) {
     
     let alert = alerts.first
     alertImageView.isHidden = alert == nil
@@ -57,7 +57,7 @@ class TKUIServiceHeaderMiniView: UIView {
     occupancyImageView.isHidden = true
     occupancies?
       .subscribe(onNext: { [weak self] in
-        let average = API.VehicleOccupancy.average(in: $0.flatMap { $0 })
+        let average = TKAPI.VehicleOccupancy.average(in: $0.flatMap { $0 })
         self?.occupancyImageView.isHidden = average == nil
         self?.occupancyImageView.image = average?.standingPeople()
         self?.occupancyImageView.accessibilityLabel = average?.localizedTitle

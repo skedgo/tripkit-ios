@@ -11,16 +11,20 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-public enum HTTPMethod: String {
-  case POST = "POST"
-  case GET = "GET"
-  case DELETE = "DELETE"
-  case PUT = "PUT"
-}
+public extension TKServer {
 
-public enum RepeatHandler {
-  case repeatIn(TimeInterval)
-  case repeatWithNewParameters(TimeInterval, [String: Any])
+  enum HTTPMethod: String {
+    case POST = "POST"
+    case GET = "GET"
+    case DELETE = "DELETE"
+    case PUT = "PUT"
+  }
+
+  enum RepeatHandler {
+    case repeatIn(TimeInterval)
+    case repeatWithNewParameters(TimeInterval, [String: Any])
+  }
+
 }
 
 extension Reactive where Base: TKServer {
@@ -62,7 +66,7 @@ extension Reactive where Base: TKServer {
   /// - parameter region: The region for which to hit a server. In most cases, you want to set this as not every SkedGo server has data for every region.
   /// - returns: An observable with the status code, headers and data from hitting the endpoint, all status and data will be the same as the last call to the `repeatHandler`.
   public func hit(
-    _ method: HTTPMethod,
+    _ method: TKServer.HTTPMethod,
     path: String,
     parameters: [String: Any] = [:],
     headers: [String: String] = [:],
@@ -83,12 +87,12 @@ extension Reactive where Base: TKServer {
   /// - parameter repeatHandler: Implement and return a non-negative time interval from this handler to fire the Observable again, or `nil` to stop firing.
   /// - returns: An observable with the status code, headers and data from hitting the endpoint, all status and data will be the same as the last call to the `repeatHandler`.
   public func stream(
-    _ method: HTTPMethod,
+    _ method: TKServer.HTTPMethod,
     path: String,
     parameters: [String: Any] = [:],
     headers: [String: String] = [:],
     region: TKRegion? = nil,
-    repeatHandler: ((Int, Data?) -> RepeatHandler?)? = nil
+    repeatHandler: ((Int, Data?) -> TKServer.RepeatHandler?)? = nil
     ) -> Observable<(Int, [String: Any], Data?)>
   {
     
@@ -107,7 +111,7 @@ extension Reactive where Base: TKServer {
             return nil
           }
           
-          let hitAgain: RepeatHandler?
+          let hitAgain: TKServer.RepeatHandler?
           if let repeatHandler = repeatHandler {
             hitAgain = repeatHandler(code, data)
           } else {
@@ -133,12 +137,12 @@ extension Reactive where Base: TKServer {
   }
   
   private func hitSkedGo(
-      method: HTTPMethod,
+      method: TKServer.HTTPMethod,
       path: String,
       parameters: [String: Any] = [:],
       headers: [String: String] = [:],
       region: TKRegion? = nil,
-      repeatHandler: @escaping (Int, [String: Any], Data?) -> RepeatHandler?,
+      repeatHandler: @escaping (Int, [String: Any], Data?) -> TKServer.RepeatHandler?,
       errorHandler: @escaping (Error) -> ()
     ) {
 

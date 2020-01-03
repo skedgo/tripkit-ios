@@ -42,6 +42,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Fixes issue where 
 
+### Removed
+
+- Removed `TKCellHelper`
+- Removed `TKCustomEvent`
+- Removed `TKCustomEventRecurrenceRule`
+- Removed `TKFakeRouter`
+- Removed `TKGettingLiftVehicle`
+- Removed `TKNextSegmentScorer`
+- Removed `TKTripFactory`
+- Removed `TKTrack`
+- Removed `TKUIDepartureView`
+- Removed `TKUITrackHelper`
+
 ### Fixed
 
 - Fixes styling of some modes in dark mode (school buses, flights, and some car share)

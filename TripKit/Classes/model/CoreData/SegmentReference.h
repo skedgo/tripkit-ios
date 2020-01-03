@@ -48,8 +48,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, getter = isBicycleAccessible) BOOL bicycleAccessible;
 @property (nonatomic, assign, getter = isWheelchairAccessible) BOOL wheelchairAccessible;
 
-+ (void)removeOrphansFromManagedObjectContext:(NSManagedObjectContext *)context;
-
 - (void)remove;
 
 - (null_unspecified SegmentTemplate *)template;
