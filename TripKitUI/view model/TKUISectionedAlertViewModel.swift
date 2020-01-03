@@ -132,7 +132,7 @@ func == (lhs: ModeGroup, rhs: ModeGroup) -> Bool {
 }
 extension ModeGroup: Equatable {}
 extension ModeGroup: Hashable {
-  public func hash(into hasher: inout Hasher) {
+  func hash(into hasher: inout Hasher) {
     hasher.combine(title)
   }
 }
