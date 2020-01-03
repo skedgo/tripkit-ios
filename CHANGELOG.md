@@ -44,10 +44,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+- Removed `TKCellHelper`
 - Removed `TKCustomEvent`
 - Removed `TKCustomEventRecurrenceRule`
+- Removed `TKFakeRouter`
+- Removed `TKGettingLiftVehicle`
+- Removed `TKNextSegmentScorer`
+- Removed `TKTripFactory`
 - Removed `TKTrack`
 - Removed `TKUIDepartureView`
+- Removed `TKUITrackHelper`
 
 ### Fixed
 

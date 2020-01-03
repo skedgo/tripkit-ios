@@ -44,7 +44,7 @@ extension TKUISemaphoreView {
   
   @objc
   public func observe(_ annotation: MKAnnotation) {
-    self.objcDisposeBag = TKObjCDisposeBag()
+    self.objcDisposeBag = TKUIObjCDisposeBag()
     
     guard annotation is NSObject, annotation is TKUISemaphoreDisplayable else { return }
 

@@ -12,42 +12,7 @@
 
 #import "TKTransportKit.h"
 
-@interface TKGettingLiftVehicle ()
-
-@property (nonatomic, assign) TKVehicleType vehicleType;
-
-@end
-
-@implementation TKGettingLiftVehicle
-
-+ (TKGettingLiftVehicle *)gettingLiftVehicleOfType:(TKVehicleType)vehicleType
-{
-  TKGettingLiftVehicle *liftVehicle = [[TKGettingLiftVehicle alloc] init];
-  liftVehicle.vehicleType = vehicleType;
-  return liftVehicle;
-}
-
-#pragma mark - TKVehicular
-
-- (NSString *)name
-{
-  return nil;
-}
-
-@end
-
-
 @implementation TKVehicularHelper
-
-+ (NSArray *)allVehicleTypeStrings
-{
-  return @[
-           [self stringForVehicleType:TKVehicleType_Bicycle],
-           [self stringForVehicleType:TKVehicleType_Car],
-           [self stringForVehicleType:TKVehicleType_Motorbike],
-           [self stringForVehicleType:TKVehicleType_SUV],
-         ];
-}
 
 + (TKVehicleType)vehicleTypeForString:(NSString *)string
 {

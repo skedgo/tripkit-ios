@@ -87,7 +87,7 @@ extension TKGeoJSON: Decodable {
     case collection = "FeatureCollection"
   }
   
-  public init(from decoder: Decoder) throws {
+  init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     let type = try values.decode(FeatureType.self, forKey: .type)
     
