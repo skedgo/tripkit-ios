@@ -121,31 +121,6 @@
   return newStop;
 }
 
-+ (NSString *)platformForStopCode:(NSString *)stopCode
-                    inRegionNamed:(NSString *)regionName
-                 inTripKitContext:(NSManagedObjectContext *)tripKitContext
-{
-#pragma unused(regionName)
-  // NOTE: For performance reason we're ignoring the region name. Fingers crossed!
-  
-  NSFetchRequest *request = [[NSFetchRequest alloc] init];
-  request.entity = [NSEntityDescription entityForName:NSStringFromClass(self)
-                               inManagedObjectContext:tripKitContext];
-  request.resultType = NSDictionaryResultType;
-  request.fetchLimit = 1;
-  request.propertiesToFetch = @[@"shortName"];
-  request.predicate = [NSPredicate predicateWithFormat:@"stopCode = %@", stopCode];
-  
-  NSError *error;
-  NSArray *results = [tripKitContext executeFetchRequest:request error:&error];
-  if (results.count > 0) {
-    return [[results firstObject] objectForKey:@"shortName"];
-  } else {
-    ZAssert(!error, @"Error during fetch: %@", error);
-    return nil;
-  }
-}
-
 - (void)remove
 {
   self.toDelete = YES;
@@ -160,22 +135,6 @@
   return [StopVisits departuresPredicateForStops:[self stopsToMatchTo]
                                         fromDate:date
                                           filter:self.filter];
-}
-
-- (StopVisits *)lastDeparture
-{
-	NSPredicate *ourVisits = [NSPredicate predicateWithFormat:@"toDelete = NO AND stop IN %@", self.stopsToMatchTo];
-	NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"departure"
-																													 ascending:NO];
-	NSArray *visits = [self.managedObjectContext fetchObjectsForEntityClass:[StopVisits class]
-																														withPredicate:ourVisits
-																											 andSortDescriptors:@[sorter]
-																														andFetchLimit:1];
-	if (visits.count > 0) {
-		return [visits objectAtIndex:0];
-	} else {
-		return nil;
-	}
 }
 
 - (NSArray *)stopsToMatchTo

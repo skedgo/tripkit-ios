@@ -79,7 +79,7 @@ public class TKResultsFetcher {
     return prepared
       .asObservable()
       .flatMapLatest { request -> Observable<Progress> in
-        return TKBuzzRouter.rx.multiFetchRequest(
+        return TKRouter.rx.multiFetchRequest(
           for: request, modes: modes,
           classifier: classifier, additionalParameters: additionalParameters
         )
@@ -126,11 +126,11 @@ fileprivate class CountHolder {
 
 
 
-fileprivate extension Reactive where Base : TKBuzzRouter {
+fileprivate extension Reactive where Base : TKRouter {
   
   static func multiFetchRequest(for request: TripRequest, modes: [String]?, classifier: TKTripClassifier? = nil, additionalParameters: [URLQueryItem]? = nil) -> Observable<TKResultsFetcher.Progress> {
     
-    var router: TKBuzzRouter! = TKBuzzRouter()
+    var router: TKRouter! = TKRouter()
     router.additionalParameters = additionalParameters.flatMap(Set.init)
     
     return Observable.create { observer in
