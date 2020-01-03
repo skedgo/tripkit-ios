@@ -74,6 +74,8 @@ typedef void(^TKRouterError)(NSError *error, NSSet *modeIdentifiers);
                         success:(TKRouterSuccess)success
                         failure:(TKRouterError)failure;
 
+- (void)cancelRequests;
+
 - (void)downloadTrip:(NSURL *)url
   intoTripKitContext:(NSManagedObjectContext *)tripKitContext
           completion:(void(^)(Trip * __nullable trip))completion;
