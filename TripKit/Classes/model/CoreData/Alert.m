@@ -105,7 +105,7 @@
   return (TKAlertSeverity) [self.severity integerValue];
 }
 
-- (void)setTKAlertSeverity:(TKAlertSeverity)alertSeverity {
+- (void)setAlertSeverity:(TKAlertSeverity)alertSeverity {
   self.severity = @(alertSeverity);
 }
 
