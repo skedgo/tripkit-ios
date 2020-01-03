@@ -8,8 +8,6 @@
 
 #import "Vehicle.h"
 
-#import "NSManagedObjectContext+SimpleFetch.h"
-
 @implementation Vehicle
 
 @dynamic icon;
@@ -31,15 +29,6 @@
 #pragma unused(title) // do nothing, this is just for KVO
 }
 
-+ (void)removeOrphansFromManagedObjectContext:(NSManagedObjectContext *)context
-{
-	NSSet *vehicles = [context fetchObjectsForEntityClass:self
-                                    withPredicateString:@"toDelete = NO AND service = nil"];
-	for (Vehicle *vehicle in vehicles) {
-		DLog(@"Deleting vehicle %@ which has no service.", vehicle);
-    [vehicle remove];
-	}
-}
 
 - (void)remove
 {

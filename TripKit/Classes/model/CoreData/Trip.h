@@ -49,9 +49,6 @@
 @property (nonatomic, strong, nonnull) TripGroup * tripGroup;
 @property (nonatomic, strong, nullable) NSManagedObject * tripTemplate;
 
-+ (void)removeTripsBeforeDate:(nonnull NSDate *)date
-		 fromManagedObjectContext:(nonnull NSManagedObjectContext *)context;
-
 + (nullable Trip *)findSimilarTripTo:(nonnull Trip *)trip
                               inList:(nonnull id<NSFastEnumeration>)trips;
 
@@ -84,15 +81,6 @@
 
 @property (nonatomic, assign) BOOL missedBookingWindow;
 
-
-- (void)removeFromRequest;
-
-- (void)moveToRequest:(nonnull TripRequest *)request markAsPreferred:(BOOL)preferred;
-
-/* Returns whether the annotation is one of the segment changes of this trip
- */
-- (BOOL)changesAt:(nonnull id<MKAnnotation>) annotation;
-
 /**
  @note Only includes walking if it's a walking-only trip!
  @return Set of used mode identifiers.
@@ -107,12 +95,6 @@
  * If the trip does not satisfy the requested time, it's negative.
  */
 - (NSTimeInterval)calculateOffset;
-
-/* Duration in seconds from the specified departure/arrival time.
- * E.g., if you asked for arrive-by, it'll use the departure time.
- * Can be negative.
- */
-- (NSTimeInterval)calculateDurationFromQuery;
 
 /* Trip duration, i.e., time between departure and arrival. 
  */

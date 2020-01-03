@@ -20,6 +20,8 @@ typedef NS_ENUM(NSInteger, SGSemaphoreLabel) {
   SGSemaphoreLabelOnRight
 };
 
+@class TKUIObjCDisposeBag;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TKUISemaphoreView : MKAnnotationView
