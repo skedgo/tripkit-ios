@@ -70,8 +70,10 @@ public class TKUIRoutingResultsViewModel {
     // provided with a request and `expandForFavorite` is not set; in that
     // case we just display the results.
     let requestChanged: Observable<(TripRequest, mutable: Bool)>
+    let skipRequest: Bool
     if let request = initialRequest, request.tripGroups?.isEmpty == false, request.expandForFavorite == false {
       requestChanged = .just( (request, mutable: false) )
+      skipRequest = true
     } else {
       requestChanged = Observable.merge(originOrDestinationChanged, builderChangedWithID)
         .debounce(.milliseconds(250), scheduler: MainScheduler.instance)
@@ -81,6 +83,7 @@ public class TKUIRoutingResultsViewModel {
         .compactMap { $0 }
         .map { ($0, mutable: true) }
         .share(replay: 1, scope: .forever)
+      skipRequest = false
     }
 
     let requestToShow = requestChanged.map { $0.0 }
@@ -99,13 +102,20 @@ public class TKUIRoutingResultsViewModel {
     request = requestToShow
       .asDriver(onErrorDriveWith: .empty())
     
-    fetchProgress = TKUIRoutingResultsViewModel.fetch(for: updateableRequest, errorPublisher: errorPublisher)
-      .asDriver(onErrorDriveWith: .empty())
+    let progress: Driver<TKResultsFetcher.Progress>
+    if skipRequest {
+      progress = .just(.finished)
+    } else {
+      progress = TKUIRoutingResultsViewModel
+        .fetch(for: updateableRequest, errorPublisher: errorPublisher)
+        .asDriver(onErrorDriveWith: .empty())
+    }
+    fetchProgress = progress
 
     realTimeUpdate = TKUIRoutingResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged)
       .asDriver(onErrorDriveWith: .empty())
 
-    sections = TKUIRoutingResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs, progress: fetchProgress.asObservable())
+    sections = TKUIRoutingResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs, progress: progress.asObservable())
       .asDriver(onErrorJustReturn: [])
 
     let selection = mapInput.tappedMapRoute.startOptional() // default selection
