@@ -42,6 +42,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Fixes issue where 
 
+Also:
+
+- Renamed `TKBuzzRouter` to `TKRouter`
+- Renamed TKObjCDisposeBag to TKUIObjCDisposeBag
+
 ### Removed
 
 - Removed `TKCellHelper`

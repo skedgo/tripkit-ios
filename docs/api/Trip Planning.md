@@ -2,6 +2,6 @@ TripKit's trip planning capabilities provide wrappers around SkedGo's routing AP
 
 Refer to the following classes:
 
-- For A-to-B multi-modal routing: `TKBuzzRouter`
+- For A-to-B multi-modal routing: `TKRouter`
 - Routing with waypoints: `TKWaypointRouter`
 - Real-time updates: `TKBuzzRealTime`

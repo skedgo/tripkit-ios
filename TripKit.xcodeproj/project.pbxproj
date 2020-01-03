@@ -1103,6 +1103,7 @@
 		3A922061205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift"; sourceTree = "<group>"; };
 		3A932EAC23BF2CCB004AA154 /* TKUIObjCDisposeBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIObjCDisposeBag.swift; sourceTree = "<group>"; };
 		3A932EAF23BF3721004AA154 /* TKRouter+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKRouter+Rx.swift"; sourceTree = "<group>"; };
+		3A932EB323BF3E67004AA154 /* Trip Planning.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Trip Planning.md"; sourceTree = "<group>"; };
 		3A94672A1D62B08400EEB667 /* TKLocationRealTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationRealTime.swift; sourceTree = "<group>"; };
 		3A9FF6D61DE79FA700DB4647 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Alert.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3A9FF6DA1DE79FC400DB4647 /* TKReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKReporter.swift; sourceTree = "<group>"; };
@@ -1703,6 +1704,7 @@
 		3A6DF065202C8C1F0084CB2C /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
+				3A932EB223BF3E67004AA154 /* api */,
 				3AA3CE80202CD2A700E54859 /* Cartfile */,
 				3ABA80AB204F1AC100E67BC7 /* CHANGELOG.md */,
 				3A6DF068202C8C340084CB2C /* README.md */,
@@ -1854,6 +1856,15 @@
 				3AA80D9F2267776300D7A781 /* TKInterAppExternalActionHandler.swift */,
 			);
 			path = InterApp;
+			sourceTree = "<group>";
+		};
+		3A932EB223BF3E67004AA154 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				3A932EB323BF3E67004AA154 /* Trip Planning.md */,
+			);
+			name = api;
+			path = docs/api;
 			sourceTree = "<group>";
 		};
 		3AA03E331F0BC9DB00C6B337 /* Permissions */ = {
