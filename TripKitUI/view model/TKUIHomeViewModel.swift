@@ -65,6 +65,7 @@ public class TKUIHomeViewModel {
     
     mapAnnotations = nearbyViewModel.mapAnnotations
     mapOverlays = nearbyViewModel.mapOverlays
+    mapAnnotationSelected = nearbyViewModel.next
   }
 
   // List content
@@ -82,5 +83,7 @@ public class TKUIHomeViewModel {
   let mapAnnotations: Driver<[TKUIIdentifiableAnnotation]>
   
   let mapOverlays: Driver<[MKOverlay]>
+  
+  let mapAnnotationSelected: Signal<TKUINearbyViewModel.Next>
 
 }

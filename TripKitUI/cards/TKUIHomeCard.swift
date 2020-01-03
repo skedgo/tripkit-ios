@@ -156,6 +156,14 @@ public class TKUIHomeCard: TGTableCard {
       })
       .disposed(by: disposeBag)
     
+    viewModel.mapAnnotationSelected
+      .emit(onNext:  { [weak self] selected in
+        switch selected {
+        case .stop(let stop): self?.showTimetable(for: stop)
+        case .location(let location): print("Show mode location card?")
+        }
+      })
+      .disposed(by: disposeBag)
   }
   
 }
@@ -175,7 +183,14 @@ extension TKUIHomeCard {
     // We push the timetable card. To replicate Apple Maps, we put
     // the timetable card at the peaking position when it's pushed.
     let timetableCard = TKUITimetableCard(stops: [stop], reusing: (mapManager as? TKUIMapManager), initialPosition: .peaking)
-    controller?.push(timetableCard)
+    
+    if controller?.topCard is TKUITimetableCard {
+      // If we are already showing a timetable card,
+      // instead of pushing another one, we swap it
+      controller?.swap(for: timetableCard, animated: true)
+    } else {
+      controller?.push(timetableCard)
+    }
   }
   
 }
