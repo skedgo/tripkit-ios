@@ -104,17 +104,24 @@ extension TKUINearbyViewModel {
       .map { ViewContent(locations: $0, user: nil) }
   }
   
-  static func filterNearbyContent(_ content: ViewContent, modes: Set<TKModeInfo>?, limitTo mode: String?) -> ViewContent {
-    let filtered = content.locations.filter { coordinate in
-      guard mode == nil else { return true } // no extra filtering
-      if let enabled = modes {
-        return enabled.contains { $0 == coordinate.stopModeInfo }
-      } else {
-        return !TKUserProfileHelper.hiddenAndMinimizedModeIdentifiers.contains( coordinate.modeInfo.identifier ?? "")
+  static func filterNearbyContent(_ content: ViewContent, modes: Set<TKModeInfo>?, limitTo mode: String?, focusOn annotation: MKAnnotation?) -> ViewContent {
+    if let focus = annotation {
+      let byFocus = content.locations.filter { location in
+        return location.coordinate.latitude == focus.coordinate.latitude && location.coordinate.longitude == focus.coordinate.longitude
       }
+      return ViewContent(locations: byFocus, user: content.user)
       
+    } else {
+      let byModes = content.locations.filter { location in
+        guard mode == nil else { return true } // no extra filtering
+        if let enabled = modes {
+          return enabled.contains { $0 == location.stopModeInfo }
+        } else {
+          return !TKUserProfileHelper.hiddenAndMinimizedModeIdentifiers.contains( location.modeInfo.identifier ?? "")
+        }
+      }
+      return ViewContent(locations: byModes, user: content.user)
     }
-    return ViewContent(locations: filtered, user: content.user)
   }
   
   static func buildSections(content: ViewContent, deviceLocation: Observable<CLLocation>, deviceHeading: Observable<CLLocationDirection>) -> [Section] {

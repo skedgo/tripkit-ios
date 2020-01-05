@@ -31,6 +31,8 @@ public class TKUIHomeCard: TGTableCard {
   
   private let searchTextPublisher = PublishSubject<(String, forced: Bool)>()
   
+  private let focusedAnnotationPublisher = PublishSubject<MKAnnotation?>()
+  
   private let searchResultAccessoryTapped = PublishSubject<TKUIAutocompletionViewModel.Item>()
   
   private var viewModel: TKUIHomeViewModel!
@@ -57,6 +59,7 @@ public class TKUIHomeCard: TGTableCard {
   
   public override func willAppear(animated: Bool) {
     searchTextPublisher.onNext(("", forced: true))
+    focusedAnnotationPublisher.onNext(nil)
     super.willAppear(animated: animated)
   }
   
@@ -93,7 +96,8 @@ public class TKUIHomeCard: TGTableCard {
 
     let mapInput = TKUIHomeViewModel.MapInput(
       mapRect: nearbyMapManager.mapRect,
-      selected: nearbyMapManager.mapSelection
+      selected: nearbyMapManager.mapSelection,
+      focused: focusedAnnotationPublisher.asSignal(onErrorSignalWith: .empty())
     )
     
     viewModel = TKUIHomeViewModel(
@@ -191,6 +195,8 @@ extension TKUIHomeCard {
     } else {
       controller?.push(timetableCard)
     }
+    
+    focusedAnnotationPublisher.onNext(stop)
   }
   
 }

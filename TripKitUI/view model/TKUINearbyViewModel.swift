@@ -37,10 +37,16 @@ public class TKUINearbyViewModel {
   public struct MapInput {
     public let mapRect: Driver<MKMapRect>
     public let selection: Signal<TKUIIdentifiableAnnotation?>
+    public let focus: Signal<MKAnnotation?>
     
-    public init(mapRect: Driver<MKMapRect> = .just(.null), selection: Signal<TKUIIdentifiableAnnotation?> = .empty()) {
+    public init(
+      mapRect: Driver<MKMapRect> = .just(.null),
+      selection: Signal<TKUIIdentifiableAnnotation?> = .empty(),
+      focus: Signal<MKAnnotation?> = .just(nil)
+    ) {
       self.mapRect = mapRect
       self.selection = selection
+      self.focus = focus
     }
   }
   
@@ -80,10 +86,14 @@ public class TKUINearbyViewModel {
       .map { $0 as Set<TKModeInfo>? }
       .startWith(nil)
     
+    let focused = mapInput.focus
+      .asObservable()
+      .startWith(nil)
+    
     let filteredNearby: Driver<ViewContent>
     filteredNearby = Observable
-      .combineLatest(nearby, pickedModes)
-      .map { Self.filterNearbyContent($0, modes: $1, limitTo: mode) }
+      .combineLatest(nearby, pickedModes, focused)
+      .map { TKUINearbyViewModel.filterNearbyContent($0, modes: $1, limitTo: mode, focusOn: $2) }
       .asDriver(onErrorDriveWith: .empty())
     
     // Outputs

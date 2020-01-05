@@ -28,6 +28,7 @@ public class TKUIHomeViewModel {
   struct MapInput {
     var mapRect: Driver<MKMapRect> = .just(.null)
     var selected: Signal<TKUIIdentifiableAnnotation?> = .empty()
+    var focused: Signal<MKAnnotation?> = .just(nil)
   }
   
   init(listInput: ListInput, mapInput: MapInput = MapInput()) {
@@ -50,7 +51,8 @@ public class TKUIHomeViewModel {
     nearbyViewModel = TKUINearbyViewModel(
       mapInput: TKUINearbyViewModel.MapInput(
         mapRect: mapInput.mapRect,
-        selection: mapInput.selected
+        selection: mapInput.selected,
+        focus: mapInput.focused
       )
     )
 
