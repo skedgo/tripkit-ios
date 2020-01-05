@@ -50,7 +50,7 @@ extension MKCoordinateRegion {
 }
 
 extension MKMapRect {
-  static func forCoordinateRegion(_ region: MKCoordinateRegion) -> MKMapRect
+  public static func forCoordinateRegion(_ region: MKCoordinateRegion) -> MKMapRect
   {
     let a = MKMapPoint(region.topLeft)
     let b = MKMapPoint(region.bottomRight)
