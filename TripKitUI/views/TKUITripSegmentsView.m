@@ -25,6 +25,22 @@
 #define SEGMENT_ITEM_ALPHA_SELECTED   1
 #define SEGMENT_ITEM_ALPHA_DESELECTED 0.25
 
+@implementation NSString (Sizing)
+
+- (CGSize)sizeWithFont:(TKFont *)font maximumWidth:(CGFloat)maxWidth
+{
+  NSDictionary *atts = @{NSFontAttributeName: font};
+  NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
+  context.minimumScaleFactor = 1;
+  CGRect box = [self boundingRectWithSize:CGSizeMake(maxWidth, 0)
+                                  options:NSStringDrawingUsesLineFragmentOrigin
+                               attributes:atts
+                                  context:context];
+  return CGSizeMake((CGFloat) ceil(box.size.width), (CGFloat) ceil(box.size.height));
+}
+
+@end
+
 @interface TKUITripSegmentsView ()
 
 @property (nonatomic, assign) CGSize desiredSize;

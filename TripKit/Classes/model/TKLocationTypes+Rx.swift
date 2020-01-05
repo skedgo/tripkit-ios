@@ -11,33 +11,33 @@ import Foundation
 import RxSwift
 
 extension Reactive where Base : TKBikePodLocation {
-  public var bikePod: Observable<API.BikePodInfo> {
+  public var bikePod: Observable<TKAPI.BikePodInfo> {
     return base.rx
-      .observeWeakly(API.BikePodInfo.self, "bikePod")
+      .observeWeakly(TKAPI.BikePodInfo.self, "bikePod")
       .compactMap { $0 }
   }
 }
 
 extension Reactive where Base : TKCarPodLocation {
-  public var carPod: Observable<API.CarPodInfo> {
+  public var carPod: Observable<TKAPI.CarPodInfo> {
     return base.rx
-      .observeWeakly(API.CarPodInfo.self, "carPod")
+      .observeWeakly(TKAPI.CarPodInfo.self, "carPod")
       .compactMap { $0 }
   }
 }
 
 extension Reactive where Base : TKCarParkLocation {
-  public var carPark: Observable<API.CarParkInfo> {
+  public var carPark: Observable<TKAPI.CarParkInfo> {
     return base.rx
-      .observeWeakly(API.CarParkInfo.self, "carPark")
+      .observeWeakly(TKAPI.CarParkInfo.self, "carPark")
       .compactMap { $0 }
   }
 }
 
 extension Reactive where Base : TKFreeFloatingVehicleLocation {
-  public var vehicle: Observable<API.FreeFloatingVehicleInfo> {
+  public var vehicle: Observable<TKAPI.FreeFloatingVehicleInfo> {
     return base.rx
-      .observeWeakly(API.FreeFloatingVehicleInfo.self, "vehicle")
+      .observeWeakly(TKAPI.FreeFloatingVehicleInfo.self, "vehicle")
       .compactMap { $0 }
   }
 }

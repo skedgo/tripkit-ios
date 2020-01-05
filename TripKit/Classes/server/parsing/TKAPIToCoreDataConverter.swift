@@ -19,7 +19,7 @@ public class TKAPIToCoreDataConverter: NSObject {
 
 extension StopLocation {
 
-  func update(from model: API.Stop) -> Bool {
+  func update(from model: TKAPI.Stop) -> Bool {
     guard let context = managedObjectContext else {
       assertionFailure("Stop has no context")
       return false
@@ -59,7 +59,7 @@ extension StopLocation {
 
 extension TKAPIToCoreDataConverter {
   
-  static func insertNewStopLocation(from model: API.Stop, into context: NSManagedObjectContext) -> StopLocation {
+  static func insertNewStopLocation(from model: TKAPI.Stop, into context: NSManagedObjectContext) -> StopLocation {
     let coordinate = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
     let newStop = StopLocation.insertStop(forStopCode: model.code, modeInfo: nil, atLocation: coordinate, intoTripKitContext: context)
     _ = newStop.update(from: model)
@@ -71,12 +71,12 @@ extension TKAPIToCoreDataConverter {
 // MARK: - Services
 
 extension Service {
-  convenience init(from model: API.Departure, into context: NSManagedObjectContext) {
+  convenience init(from model: TKAPI.Departure, into context: NSManagedObjectContext) {
     self.init(context: context)
 //    update(from: model)
 //  }
 //
-//  func update(from model: API.Service) {
+//  func update(from model: TKAPI.Service) {
     frequency = model.frequency != nil ? NSNumber(value: model.frequency!) : nil
     number = model.number
     lineName = model.name
@@ -93,7 +93,7 @@ extension Service {
     addVehicles(primary: model.primaryVehicle, alternatives: model.alternativeVehicles)
   }
   
-  func adjustRealTimeStatus(for status: API.RealTimeStatus) {
+  func adjustRealTimeStatus(for status: TKAPI.RealTimeStatus) {
     switch status {
     case .isRealTime:
       isRealTime = true
@@ -115,7 +115,7 @@ extension Service {
   }
   
   @discardableResult
-  func addVisits<E: StopVisits>(_ visitType: E.Type, from model: API.Departure, at stop: StopLocation) -> E? {
+  func addVisits<E: StopVisits>(_ visitType: E.Type, from model: TKAPI.Departure, at stop: StopLocation) -> E? {
     guard let context = managedObjectContext else { return nil }
     
     let visit = E(context: context)
@@ -144,7 +144,7 @@ extension Service {
     return visit
   }
   
-  func addVehicles(primary: API.Vehicle?, alternatives: [API.Vehicle]?) {
+  func addVehicles(primary: TKAPI.Vehicle?, alternatives: [TKAPI.Vehicle]?) {
     guard let context = managedObjectContext else { return }
 
     if let primary = primary {
@@ -177,13 +177,13 @@ extension TKAPIToCoreDataConverter {
   public static func updateVehicles(for service: Service, primaryVehicle: [String: Any]?, alternativeVehicles: [[String: Any]]?) {
     let decoder = JSONDecoder()
     
-    var primary: API.Vehicle? = nil
-    if let dict = primaryVehicle, let model = try? decoder.decode(API.Vehicle.self, withJSONObject: dict) {
+    var primary: TKAPI.Vehicle? = nil
+    if let dict = primaryVehicle, let model = try? decoder.decode(TKAPI.Vehicle.self, withJSONObject: dict) {
       primary = model
     }
     
-    var alternatives: [API.Vehicle]? = nil
-    if let array = alternativeVehicles, let model = try? decoder.decode([API.Vehicle].self, withJSONObject: array) {
+    var alternatives: [TKAPI.Vehicle]? = nil
+    if let array = alternativeVehicles, let model = try? decoder.decode([TKAPI.Vehicle].self, withJSONObject: array) {
       alternatives = model
     }
     
@@ -196,7 +196,7 @@ extension TKAPIToCoreDataConverter {
 
 extension Alert {
   
-  convenience init(from model: API.Alert, into context: NSManagedObjectContext) {
+  convenience init(from model: TKAPI.Alert, into context: NSManagedObjectContext) {
     self.init(context: context)
     
     hashCode = NSNumber(value: model.hashCode)
@@ -219,7 +219,7 @@ extension Alert {
     update(from: model)
   }
 
-  func update(from model: API.Alert) {
+  func update(from model: TKAPI.Alert) {
     // only takes things we deem dynamic
     text = model.text
     
@@ -235,7 +235,7 @@ extension Alert {
 
 extension TKAPIToCoreDataConverter {
   
-  static func updateOrAddAlerts(_ alerts: [API.Alert]?, in context: NSManagedObjectContext) {
+  static func updateOrAddAlerts(_ alerts: [TKAPI.Alert]?, in context: NSManagedObjectContext) {
     guard let alerts = alerts else { return }
     for alertModel in alerts {
       // first we check if have the alert already
@@ -252,7 +252,7 @@ extension TKAPIToCoreDataConverter {
   public static func updateOrAddAlerts(from array: [[String: Any]]?, in context: NSManagedObjectContext) {
     guard let array = array else { return }
     let decoder = JSONDecoder()
-    let model = try? decoder.decode([API.Alert].self, withJSONObject: array)
+    let model = try? decoder.decode([TKAPI.Alert].self, withJSONObject: array)
     self.updateOrAddAlerts(model, in: context)
   }
   
@@ -262,12 +262,12 @@ extension TKAPIToCoreDataConverter {
 
 extension Vehicle {
   
-  fileprivate convenience init(from model: API.Vehicle, into context: NSManagedObjectContext) {
+  fileprivate convenience init(from model: TKAPI.Vehicle, into context: NSManagedObjectContext) {
     self.init(context: context)
     update(with: model)
   }
   
-  fileprivate func update(with model: API.Vehicle) {
+  fileprivate func update(with model: TKAPI.Vehicle) {
     identifier = model.id
     label = model.label
     icon = model.icon?.absoluteString
@@ -289,13 +289,13 @@ extension Vehicle {
   
   fileprivate convenience init(dict: [String: Any], into context: NSManagedObjectContext) throws {
     let decoder = JSONDecoder()
-    let model = try decoder.decode(API.Vehicle.self, withJSONObject: dict)
+    let model = try decoder.decode(TKAPI.Vehicle.self, withJSONObject: dict)
     self.init(from: model, into: context)
   }
   
   fileprivate func update(with dict: [String: Any]) throws {
     let decoder = JSONDecoder()
-    let model = try decoder.decode(API.Vehicle.self, withJSONObject: dict)
+    let model = try decoder.decode(TKAPI.Vehicle.self, withJSONObject: dict)
     update(with: model)
   }
   

@@ -32,16 +32,16 @@ public class TKDeparturesProvider: NSObject {
 
 extension TKDeparturesProvider {
 
-  public class func fetchDepartures(forStopCodes stopCodes: [String], fromDate: Date, limit: Int = 10, in region: TKRegion) -> Single<API.Departures> {
+  public class func fetchDepartures(forStopCodes stopCodes: [String], fromDate: Date, limit: Int = 10, in region: TKRegion) -> Single<TKAPI.Departures> {
     return streamDepartures(forStopCodes: stopCodes, fromDate: fromDate, limit: limit, in: region, repeatHandler: nil)
       .asSingle()
   }
     
-  public class func streamDepartures(forStopCodes stopCodes: [String], limit: Int = 10, in region: TKRegion, repeatHandler: ((Int, API.Departures) -> TimeInterval?)? = nil) -> Observable<API.Departures> {
+  public class func streamDepartures(forStopCodes stopCodes: [String], limit: Int = 10, in region: TKRegion, repeatHandler: ((Int, TKAPI.Departures) -> TimeInterval?)? = nil) -> Observable<TKAPI.Departures> {
     return streamDepartures(forStopCodes: stopCodes, fromDate: nil, limit: limit, in: region, repeatHandler: repeatHandler)
   }
   
-  private class func streamDepartures(forStopCodes stopCodes: [String], fromDate: Date?, limit: Int = 10, in region: TKRegion, repeatHandler: ((Int, API.Departures) -> TimeInterval?)?) -> Observable<API.Departures> {
+  private class func streamDepartures(forStopCodes stopCodes: [String], fromDate: Date?, limit: Int = 10, in region: TKRegion, repeatHandler: ((Int, TKAPI.Departures) -> TimeInterval?)?) -> Observable<TKAPI.Departures> {
     
     assert(repeatHandler == nil || fromDate == nil, "Don't set both `fromDate` and the `repeatHandler`. It doesn't make sense to repeat, if you fix the departure time.")
     
@@ -72,7 +72,7 @@ extension TKDeparturesProvider {
         guard
           let repeatHandler = repeatHandler,
           let data = data,
-          let departures = try? JSONDecoder().decode(API.Departures.self, from: data),
+          let departures = try? JSONDecoder().decode(TKAPI.Departures.self, from: data),
           let timeInterval = repeatHandler(status, departures)
           else { return nil }
 
@@ -81,7 +81,7 @@ extension TKDeparturesProvider {
       .map { _, _, data in
         guard let data = data else { throw OutputError.noDataReturn }
         let decoder = JSONDecoder()
-        return try decoder.decode(API.Departures.self, from: data)
+        return try decoder.decode(TKAPI.Departures.self, from: data)
     }
   }
   
@@ -91,7 +91,7 @@ extension TKDeparturesProvider {
     
     return TKServer.shared.rx
       .requireRegions()
-      .flatMap { Void -> Single<API.Departures> in
+      .flatMap { Void -> Single<TKAPI.Departures> in
         guard let region = stops.first?.region else {
           throw OutputError.couldNotFetchRegions
         }
@@ -109,7 +109,7 @@ extension TKDeparturesProvider {
     }
   }
   
-  private static func addDepartures(_ departures: API.Departures, to stops: [StopLocation]) -> Bool {
+  private static func addDepartures(_ departures: TKAPI.Departures, to stops: [StopLocation]) -> Bool {
     
     guard let context = stops.first?.managedObjectContext else {
       return false
@@ -179,7 +179,7 @@ extension TKDeparturesProvider {
     ]
   }
   
-  public class func fetchDepartures(for table: TKDLSTable, fromDate: Date = Date(), limit: Int = 10) -> Single<API.Departures> {
+  public class func fetchDepartures(for table: TKDLSTable, fromDate: Date = Date(), limit: Int = 10) -> Single<TKAPI.Departures> {
     
     let paras: [String: Any] = TKDeparturesProvider.queryParameters(for: table, fromDate: fromDate, limit: limit)
     
@@ -188,7 +188,7 @@ extension TKDeparturesProvider {
       .map { _, _, data in
         guard let data = data else { throw OutputError.noDataReturn }
         let decoder = JSONDecoder()
-        return try decoder.decode(API.Departures.self, from: data)
+        return try decoder.decode(TKAPI.Departures.self, from: data)
     }
   }
   
@@ -196,7 +196,7 @@ extension TKDeparturesProvider {
     
     return TKServer.shared.rx
       .requireRegions()
-      .flatMap { Void -> Single<API.Departures> in
+      .flatMap { Void -> Single<TKAPI.Departures> in
         return TKDeparturesProvider.fetchDepartures(for: table, fromDate: fromDate, limit: limit)
       }
       .map { departures -> Set<String> in
@@ -209,7 +209,7 @@ extension TKDeparturesProvider {
     }
   }
   
-  private static func addDepartures(_ departures: API.Departures, into context: NSManagedObjectContext) -> Set<String> {
+  private static func addDepartures(_ departures: TKAPI.Departures, into context: NSManagedObjectContext) -> Set<String> {
     
     // First, we make sure we have all the stops
     let stops = (departures.stops ?? [])

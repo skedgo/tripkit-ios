@@ -13,37 +13,37 @@ import RxDataSources
 extension TKUIServiceViewModel {
   
   /// Section in a table view
-  public struct Section: Equatable {
+  struct Section: Equatable {
     /// Items in this section
-    public var items: [Item]
+    var items: [Item]
   }
   
   /// For individual cells in a table view, representing a stop along the
   /// route
-  public struct Item: Equatable {
+  struct Item: Equatable {
     let dataModel: StopVisits
     
     /// Title of the stop
-    public let title: String
+    let title: String
     
     /// Timing at this stop
-    public let timing: TKServiceTiming
+    let timing: TKServiceTiming
     
     /// Time zone of the stop
-    public let timeZone: TimeZone
+    let timeZone: TimeZone
     
     /// Real-time satatus of the departure
-    public let realTimeStatus: StopVisitRealTime
+    let realTimeStatus: TKStopVisitRealTime
     
     /// Whether this stop is at or after disembarkation, and, optionally,
     /// at or before the disembarkation
-    public let isVisited: Bool
+    let isVisited: Bool
     
     /// Colour of line to draw of the beginning of the cell to this stop
-    public let topConnection: UIColor?
+    let topConnection: UIColor?
     
     /// Colour of line to draw from the stop to the end of the cell
-    public let bottomConnection: UIColor?
+    let bottomConnection: UIColor?
   }
   
 }
@@ -123,22 +123,22 @@ extension TKUIServiceViewModel.Item {
 // MARK: - RxDataSource protocol conformance
 
 extension TKUIServiceViewModel.Item: IdentifiableType {
-  public typealias Identity = String
-  public var identity: Identity {
+  typealias Identity = String
+  var identity: Identity {
     return dataModel.objectID.uriRepresentation().absoluteString
   }
 }
 
 extension TKUIServiceViewModel.Section: AnimatableSectionModelType {
-  public typealias Identity = String
-  public typealias Item = TKUIServiceViewModel.Item
+  typealias Identity = String
+  typealias Item = TKUIServiceViewModel.Item
   
-  public init(original: TKUIServiceViewModel.Section, items: [Item]) {
+  init(original: TKUIServiceViewModel.Section, items: [Item]) {
     self = original
     self.items = items
   }
   
-  public var identity: Identity {
+  var identity: Identity {
     return "single-section"
   }
 }

@@ -50,7 +50,7 @@ public class TKUITrainOccupancyView: UIView {
   
   // Configuring with content
   
-  public var occupancies: [[API.VehicleOccupancy]] = [[]] {
+  public var occupancies: [[TKAPI.VehicleOccupancy]] = [[]] {
     didSet {
       self.updateStack()
     }

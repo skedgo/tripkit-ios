@@ -141,7 +141,7 @@ struct SegmentTemplateData: Codable {
 
 extension SegmentTemplate {
   
-  public var miniInstruction: TKMiniInstruction? {
+  var miniInstruction: TKMiniInstruction? {
     get { return segmentTemplateData.miniInstruction }
     set { edit { $0.miniInstruction = newValue} }
   }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension API {
+extension TKAPI {
   
   public struct Alert: Codable, Hashable {
     public enum Severity: String, Codable {
@@ -37,7 +37,7 @@ extension API {
     
     let hashCode: Int    
     let action: Action?    
-    let location: API.Location?
+    let location: TKAPI.Location?
     let serviceTripID: String?
     
     // MARK: - Codable
@@ -60,11 +60,11 @@ extension API {
   
   /// Replaces the previous `TKAlertWrapper`
   public struct AlertMapping: Codable, Hashable {
-    public let alert: API.Alert
+    public let alert: TKAPI.Alert
     public let operators: [String]?
     public let serviceTripIDs: [String]?
     public let stopCodes: [String]?
-    public let routes: [API.Route]?
+    public let routes: [TKAPI.Route]?
     public let modeInfo: TKModeInfo?
   }
   
@@ -80,7 +80,7 @@ extension API {
   
 }
 
-extension API.Alert.Action: Codable {
+extension TKAPI.Alert.Action: Codable {
   private enum CodingKeys: String, CodingKey {
     case text
     case type

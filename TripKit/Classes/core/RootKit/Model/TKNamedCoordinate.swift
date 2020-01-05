@@ -115,7 +115,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     _address = address
   }
   
-  convenience init(from: API.Location) {
+  convenience init(from: TKAPI.Location) {
     self.init(latitude: from.lat, longitude: from.lng, name: from.name, address: from.address)
   }
 

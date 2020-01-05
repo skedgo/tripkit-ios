@@ -32,19 +32,6 @@ typedef NSUInteger SGSegmentFlag;
 @dynamic service;
 @dynamic realTimeVehicle, realTimeVehicleAlternatives;
 
-+ (void)removeOrphansFromManagedObjectContext:(NSManagedObjectContext *)context
-{
-	NSSet *objects;
-	
-	// delete any segment references without a trip
-	objects = [context fetchObjectsForEntityClass:self
-														withPredicateString:@"toDelete = NO AND trip == nil"];
-	for (SegmentReference *reference in objects) {
-		DLog(@"Deleting segment reference without a trip: %@", reference);
-    [reference remove];
-	}
-}
-
 - (void)remove
 {
   self.toDelete = YES;

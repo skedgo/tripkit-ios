@@ -22,9 +22,7 @@ public class TKUserProfileHelper: NSObject {
   
   
   // MARK: - Simple settings
-  
-  @objc public static var showWheelchairInformationKey =  DefaultsKey.onWheelchair.rawValue
-  
+    
   /// Whether to show wheelchair information and show routes as being
   /// on a wheelchair. This will set TripKit's settings
   @objc public class var showWheelchairInformation: Bool {

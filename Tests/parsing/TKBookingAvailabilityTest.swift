@@ -12,7 +12,7 @@ import XCTest
 
 class TKBookingAvailabilityTest: XCTestCase {
   
-  let availability: API.BookingAvailability = {
+  let availability: TKAPI.BookingAvailability = {
     let json = """
     {
       "lastUpdated": "2018-10-29T14:38:00Z",
@@ -46,7 +46,7 @@ class TKBookingAvailabilityTest: XCTestCase {
     
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601
-    return try! decoder.decode(API.BookingAvailability.self, from: json.data(using: .utf8)!)
+    return try! decoder.decode(TKAPI.BookingAvailability.self, from: json.data(using: .utf8)!)
   }()
   
   func time(_ time: String) -> Date {

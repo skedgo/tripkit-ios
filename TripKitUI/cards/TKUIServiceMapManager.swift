@@ -70,7 +70,7 @@ class TKUIServiceMapManager: TKUIMapManager {
 
   override func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
     let builder = super.annotationBuilder(for: annotation, in: mapView)
-    if let visitable = annotation as? ServiceMapContentVisited {
+    if let visitable = annotation as? TKUIServiceMapContentVisited {
       builder.circleColor(visitable.color)
       builder.drawCircleAsTravelled(visitable.isVisited)
       builder.drawImageAnnotationAsCircle(true)

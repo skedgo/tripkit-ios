@@ -19,24 +19,24 @@ import CoreLocation
 ///
 /// - collection: GeoJSON's "FeatureCollection" type
 /// - feature: GeoJSON's "Feature" type
-public enum TKGeoJSON {
+enum TKGeoJSON {
 
   case collection([Feature])
   case feature(Feature)
   
   /// Details of a geometrical Feature
-  public struct Feature {
+  struct Feature {
     let geometry: Geometry
     let properties: Decodable?
   }
   
-  public struct Position {
+  struct Position {
     let latitude: CLLocationDegrees
     let longitude: CLLocationDegrees
     let altitude: CLLocationDistance?
   }
   
-  public enum Geometry {
+  enum Geometry {
     case point(Position)
     case lineString([Position])
     case polygon([Position])
@@ -45,7 +45,7 @@ public enum TKGeoJSON {
 }
 
 /// Properties used by Pelias geocoders
-public struct TKPeliasProperties: Decodable {
+struct TKPeliasProperties: Decodable {
   let gid: String?
   let source: String?
   
@@ -73,7 +73,7 @@ public struct TKPeliasProperties: Decodable {
 
 extension TKGeoJSON: Decodable {
   
-  public enum DecodingError: Error {
+  enum DecodingError: Error {
     case missingCoordinates
   }
   
@@ -87,7 +87,7 @@ extension TKGeoJSON: Decodable {
     case collection = "FeatureCollection"
   }
   
-  public init(from decoder: Decoder) throws {
+  init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     let type = try values.decode(FeatureType.self, forKey: .type)
     
@@ -110,7 +110,7 @@ extension TKGeoJSON.Feature: Decodable {
     case properties
   }
   
-  public init(from decoder: Decoder) throws {
+  init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     
     self.geometry = try values.decode(TKGeoJSON.Geometry.self, forKey: .geometry)
@@ -138,7 +138,7 @@ extension TKGeoJSON.Geometry: Decodable {
     case polygon = "Polygon"
   }
 
-  public init(from decoder: Decoder) throws {
+  init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     let type = try values.decode(GeometryType.self, forKey: .type)
     let coordinates = try values.decode(Array<CLLocationDegrees>.self, forKey: .coordinates)

@@ -13,9 +13,9 @@ import RxSwift
 public enum TKLocationRealTime {
 
   @available(*, deprecated, message: "You should manage that yourself.")
-  public static func streamRealTime(for location: TKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<API.LocationInfo> {
+  public static func streamRealTime(for location: TKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<TKAPI.LocationInfo> {
     return fetchOnlyOn
-      .flatMapLatest { fetch -> Observable<API.LocationInfo> in
+      .flatMapLatest { fetch -> Observable<TKAPI.LocationInfo> in
         if fetch {
           return streamRealTime(for: location)
         } else {
@@ -24,11 +24,11 @@ public enum TKLocationRealTime {
       }
   }
   
-  public static func streamRealTime(for location: TKNamedCoordinate) -> Observable<API.LocationInfo> {
+  public static func streamRealTime(for location: TKNamedCoordinate) -> Observable<TKAPI.LocationInfo> {
     return TKServer.shared.rx
       .requireRegion(location.coordinate)
       .asObservable()
-      .flatMapLatest { region -> Observable<API.LocationInfo> in
+      .flatMapLatest { region -> Observable<TKAPI.LocationInfo> in
 
         let paras: [String: Any]
         if let identifier = location.locationID {
@@ -49,7 +49,7 @@ public enum TKLocationRealTime {
               return nil // Client-side errors; hitting again won't help
             }
             if let data = data,
-               let info = try? JSONDecoder().decode(API.LocationInfo.self, from: data) {
+               let info = try? JSONDecoder().decode(TKAPI.LocationInfo.self, from: data) {
               return info.hasRealTime ? .repeatIn(10) : nil
             } else {
               return .repeatIn(60) // Try again in a while
@@ -57,7 +57,7 @@ public enum TKLocationRealTime {
           }
           .compactMap { status, _, data in
             guard let data = data else { return nil }
-            return try? JSONDecoder().decode(API.LocationInfo.self, from: data)
+            return try? JSONDecoder().decode(TKAPI.LocationInfo.self, from: data)
           }
       }
   }

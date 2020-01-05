@@ -13,7 +13,7 @@ protocol RealTimeUpdatable {
   var hasRealTime: Bool { get }
 }
 
-extension API {
+extension TKAPI {
   
   public enum SharedVehicleType: String, Codable {
     case bike = "BIKE"
@@ -26,8 +26,8 @@ extension API {
   public struct BikePodInfo: Codable, Hashable, RealTimeUpdatable {
     // static information
     public let identifier: String
-    public let operatorInfo: API.CompanyInfo
-    public let source: API.DataAttribution?
+    public let operatorInfo: TKAPI.CompanyInfo
+    public let source: TKAPI.DataAttribution?
     public let deepLink: URL?
 
     // availability information (usually real-time)
@@ -64,12 +64,12 @@ extension API {
   public struct CarPodInfo: Codable, Hashable, RealTimeUpdatable {
     // static information
     public let identifier: String
-    public let operatorInfo: API.CompanyInfo
+    public let operatorInfo: TKAPI.CompanyInfo
     public let deepLink: URL?
 
     // real-time availability information
-    public let availabilityMode: API.AvailabilityMode?
-    public let availabilities: [API.CarAvailability]?
+    public let availabilityMode: TKAPI.AvailabilityMode?
+    public let availabilities: [TKAPI.CarAvailability]?
     public let inService: Bool?
     public let availableVehicles: Int?
     public let availableChargingSpaces: Int?
@@ -124,8 +124,8 @@ extension API {
     public let identifier: String
     public let name: String
 
-    public let operatorInfo: API.CompanyInfo?
-    public let source: API.DataAttribution?
+    public let operatorInfo: TKAPI.CompanyInfo?
+    public let source: TKAPI.DataAttribution?
     public let deepLink: URL?
 
     /// Additional information text from the provider. Can be long and over multiple lines.
@@ -137,8 +137,8 @@ extension API {
     public let encodedParkingArea: String?
     
     public let entrances: [Entrance]?
-    public let openingHours: API.OpeningHours?
-    public let pricingTables: [API.PricingTable]?
+    public let openingHours: TKAPI.OpeningHours?
+    public let pricingTables: [TKAPI.PricingTable]?
     public let availableSpaces: Int?
     public let totalSpaces: Int?
     public let lastUpdate: TimeInterval?
@@ -167,17 +167,17 @@ extension API {
   
   public struct CarRentalInfo: Codable, Hashable, RealTimeUpdatable {
     public let identifier: String
-    public let company: API.CompanyInfo
-    public let openingHours: API.OpeningHours?
-    public let source: API.DataAttribution?
+    public let company: TKAPI.CompanyInfo
+    public let openingHours: TKAPI.OpeningHours?
+    public let source: TKAPI.DataAttribution?
     public var hasRealTime: Bool { false }
   }
 
   public struct FreeFloatingVehicleInfo: Codable, Hashable, RealTimeUpdatable {
     public let identifier: String
-    public let operatorInfo: API.CompanyInfo
+    public let operatorInfo: TKAPI.CompanyInfo
     public let vehicleType: SharedVehicleType
-    public let source: API.DataAttribution?
+    public let source: TKAPI.DataAttribution?
 
     public let name: String?
     public let isAvailable: Bool?
@@ -255,7 +255,7 @@ extension API {
     public let identifier: String
     public let description: String
     public let availableContent: [AvailableContent]?
-    public let source: API.DataAttribution?
+    public let source: TKAPI.DataAttribution?
 
     public let paymentTypes: [PaymentType]?
     public let restrictions: [Restriction]?
@@ -295,12 +295,12 @@ extension API {
     
     public let details: Details?
     public let stop: TKStopCoordinate?
-    public let bikePod: API.BikePodInfo?
-    public let carPod:  API.CarPodInfo?
-    public let carPark: API.CarParkInfo?
-    public let carRental: API.CarRentalInfo?
-    public let freeFloating: API.FreeFloatingVehicleInfo?
-    public let onStreetParking: API.OnStreetParkingInfo?
+    public let bikePod: TKAPI.BikePodInfo?
+    public let carPod:  TKAPI.CarPodInfo?
+    public let carPark: TKAPI.CarParkInfo?
+    public let carRental: TKAPI.CarRentalInfo?
+    public let freeFloating: TKAPI.FreeFloatingVehicleInfo?
+    public let onStreetParking: TKAPI.OnStreetParkingInfo?
 
     
     public var hasRealTime: Bool {

@@ -18,11 +18,11 @@ public protocol TKUIAttributionTableViewControllerDelegate: class {
 
 public class TKUIAttributionTableViewController: UITableViewController {
 
-  public var attributions: [API.DataAttribution] = []
+  public var attributions: [TKAPI.DataAttribution] = []
   
   public weak var delegate: TKUIAttributionTableViewControllerDelegate? = nil
   
-  public convenience init(attributions: [API.DataAttribution]) {
+  public convenience init(attributions: [TKAPI.DataAttribution]) {
     self.init(style: .plain)
     
     self.attributions = attributions

@@ -96,12 +96,12 @@ typedef enum {
   }
 }
 
-- (TripGroupVisibility)visibility
+- (TKTripGroupVisibility)visibility
 {
-  return (TripGroupVisibility) [self.visibilityRaw integerValue];
+  return (TKTripGroupVisibility) [self.visibilityRaw integerValue];
 }
 
-- (void)setVisibility:(TripGroupVisibility)visibility
+- (void)setVisibility:(TKTripGroupVisibility)visibility
 {
   if (self.visibility != visibility) {
     self.visibilityRaw = @(visibility);

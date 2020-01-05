@@ -47,19 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface TKGettingLiftVehicle : NSObject <TKVehicular>
-
-+ (TKGettingLiftVehicle *)gettingLiftVehicleOfType:(TKVehicleType)vehicleType;
-
-@end
-
-
 @interface TKVehicularHelper : NSObject
-
-/**
- @return All valid vehicle type strings in one array, sorted alphabetically.
- */
-+ (NSArray<NSString *> *)allVehicleTypeStrings;
 
 /**
  @return Converts the vehicle type string back to a vehicle type

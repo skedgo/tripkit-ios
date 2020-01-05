@@ -1,5 +1,5 @@
 //
-//  TKBuzzRouter+Rx.swift
+//  TKRouter+Rx.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 30/08/2016.
@@ -10,14 +10,14 @@ import Foundation
 
 import RxSwift
 
-extension TKBuzzRouter {
+extension TKRouter {
   enum RouterError : Error {
     case downloadFailed
     case noTripFound
   }
 }
 
-extension Reactive where Base : TKBuzzRouter {
+extension Reactive where Base : TKRouter {
   
   public func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext) -> Single<Trip> {
     return Single.create { observer in
@@ -25,7 +25,7 @@ extension Reactive where Base : TKBuzzRouter {
         if let trip = trip {
           observer(.success(trip))
         } else {
-          observer(.error(TKBuzzRouter.RouterError.downloadFailed))
+          observer(.error(TKRouter.RouterError.downloadFailed))
         }
       }
       return Disposables.create()
@@ -33,7 +33,7 @@ extension Reactive where Base : TKBuzzRouter {
   }
   
   public static func fetchBestTrip<C>(for request: TripRequest, modes: C) -> Single<Trip> where C: Collection, C.Element == String {
-    var router: TKBuzzRouter! = TKBuzzRouter()
+    var router: TKRouter! = TKRouter()
     if !modes.isEmpty {
       router.modeIdentifiers = Set(modes)
     }
@@ -42,7 +42,7 @@ extension Reactive where Base : TKBuzzRouter {
         if let best = request.sortedVisibleTrips().first {
           subscriber(.success(best))
         } else {
-          subscriber(.error(TKBuzzRouter.RouterError.noTripFound))
+          subscriber(.error(TKRouter.RouterError.noTripFound))
         }
       }, failure: { error, _ in
         subscriber(.error(error))

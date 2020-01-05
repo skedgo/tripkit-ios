@@ -117,14 +117,9 @@ public protocol TKTripSegmentDisplayable : NSObjectProtocol {
 public protocol TKTripSegment : TKTripSegmentDisplayable {
   
   var tripSegmentInstruction: String { get }
-  
-  /// A string to display as this segment's main value (e.g., the formatted distance or price) or a date for when this segment leaves.
-  var tripSegmentMainValue: Any { get }
-  
+    
   var tripSegmentModeInfo: TKModeInfo? { get }
-  
-  var tripSegmentLocalCost: TKLocalCost? { get }
-  
+    
   /// A short detail expanding on `tripSegmentInstruction`.
   var tripSegmentDetail: String? { get }
 }
@@ -157,7 +152,6 @@ public extension TKTripSegmentDisplayable {
 public extension TKTripSegment {
   var tripSegmentModeInfo: TKModeInfo? { return nil }
   var tripSegmentDetail: String? { return nil }
-  var tripSegmentLocalCost: TKLocalCost? { return nil }
 }
 
 @available(*, unavailable, renamed: "TKTrip")

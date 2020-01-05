@@ -59,7 +59,7 @@ extension TKRegion.RoutingMode {
 fileprivate extension TKRegionManager {
   func buildRoutingMode(modeIdentifier: String) -> TKRegion.RoutingMode? {
     guard let title = title(forModeIdentifier: modeIdentifier) else {
-      assertionFailure("A mode without a title in regions.json: \(modeIdentifier)")
+      TKLog.debug("TKRegion", text: "A mode without a title in regions.json: \(modeIdentifier)")
       return nil
     }
     

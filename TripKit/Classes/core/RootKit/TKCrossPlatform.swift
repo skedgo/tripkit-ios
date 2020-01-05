@@ -54,3 +54,6 @@ public typealias SGKGrouping = TKGrouping
 
 @available(*, unavailable, renamed: "TKStyleManager")
 public typealias SGStyleManager = TKStyleManager
+
+@available(*, unavailable, renamed: "TKRouter")
+public typealias TKBuzzRouter = TKRouter

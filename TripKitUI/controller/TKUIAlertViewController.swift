@@ -34,9 +34,9 @@ import RxSwift
 /// This is a wrapper class that converts an instance of API.Alert into
 /// an instance that can conform to object protocol `TKAlert`.
 class TKAlertAPIAlertClassWrapper {
-  private let alert: API.Alert
+  private let alert: TKAPI.Alert
 
-  init(alert: API.Alert) {
+  init(alert: TKAPI.Alert) {
     self.alert = alert
   }
 }
@@ -81,7 +81,7 @@ public class TKUIAlertViewController: UITableViewController {
   
   private let disposeBag = DisposeBag()
   
-  public func setAlerts(_ alerts: [API.Alert]) {
+  public func setAlerts(_ alerts: [TKAPI.Alert]) {
     self.alerts = alerts.map(TKAlertAPIAlertClassWrapper.init)
   }
   

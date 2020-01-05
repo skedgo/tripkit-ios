@@ -13,10 +13,10 @@ import RxCocoa
 import RxDataSources
 
 /// View model for displaying and interacting with an individual
-/// public transport service.
-public class TKUIServiceViewModel {
+/// transport service.
+class TKUIServiceViewModel {
   
-  public typealias DataInput = (
+  typealias DataInput = (
     embarkation: StopVisits,
     disembarkation: StopVisits?
   )
@@ -24,7 +24,7 @@ public class TKUIServiceViewModel {
   /// - Parameters:
   ///   - dataInput: What to show
   ///   - itemSelected: UI input of selected item
-  public init(dataInput: DataInput, itemSelected: Driver<Item>) {
+  init(dataInput: DataInput, itemSelected: Driver<Item>) {
     let errorPublisher = PublishSubject<Error>()
     
     let realTimeUpdate = TKUIServiceViewModel.fetchRealTimeUpdates(embarkation: dataInput.embarkation)
@@ -67,34 +67,34 @@ public class TKUIServiceViewModel {
   
   /// Title view with details about the embarkation.
   /// Can change with real-time data.
-  public let header: Driver<TKUIDepartureCellContent>
+  let header: Driver<TKUIDepartureCellContent>
   
   /// Sections with stops of the service, for display in a table view.
   /// Can change with real-time data.
-  public let sections: Driver<[Section]>
+  let sections: Driver<[Section]>
   
   /// Stops and route of the service, for display on a map.
   /// Can change with real-time data.
-  public let mapContent: Driver<MapContent?>
+  let mapContent: Driver<MapContent?>
   
   /// Annotation matching the user's selection in the list.
-  public let selectAnnotation: Driver<MKAnnotation>
+  let selectAnnotation: Driver<MKAnnotation>
   
   /// Status of real-time update
   ///
   /// - note: Real-updates are only enabled while you're connected
   ///         to this driver.
-  public let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Void>>
+  let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Void>>
   
   /// User-relevant errors, e.g., if service content couldn't get downloaded
-  public let error: Driver<Error>
+  let error: Driver<Error>
 }
 
 // MARK: - Scrolling to embarkation
 
 extension TKUIServiceViewModel {
   
-  public static func embarkationIndexPath(in sections: [Section]) -> IndexPath? {
+  static func embarkationIndexPath(in sections: [Section]) -> IndexPath? {
     for (s, section) in sections.enumerated() {
       for (i, item) in section.items.enumerated() {
         if item.isVisited {

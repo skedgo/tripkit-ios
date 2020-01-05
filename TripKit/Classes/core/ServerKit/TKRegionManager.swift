@@ -81,7 +81,7 @@ struct ModeDetails: Codable {
   let title: String
   let subtitle: String?
   let websiteURL: URL?
-  let rgbColor: API.RGBColor
+  let rgbColor: TKAPI.RGBColor
   let required: Bool?
   let implies: [String]?
   let icon: String?

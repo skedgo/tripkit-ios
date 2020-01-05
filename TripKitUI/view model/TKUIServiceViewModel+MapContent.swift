@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol ServiceMapContentVisited {
+protocol TKUIServiceMapContentVisited {
   var color: UIColor { get }
   var isVisited: Bool { get }
 }
@@ -16,25 +16,25 @@ public protocol ServiceMapContentVisited {
 extension TKUIServiceViewModel {
   
   /// All the content to display about a service on a map
-  public struct MapContent {
+  struct MapContent {
     
     /// Time point representing the embarkation
-    public let embarkation: TKUISemaphoreDisplayable
+    let embarkation: TKUISemaphoreDisplayable
     
     /// Time point representing the disembarkation
-    public let disembarkation: TKUISemaphoreDisplayable?
+    let disembarkation: TKUISemaphoreDisplayable?
     
     /// Shapes to draw representing the route that the service takes, with
     /// colour according to whether it is travelled or not
-    public let shapes: [TKDisplayableRoute]
+    let shapes: [TKDisplayableRoute]
     
     /// All stops along the route
-    public let stops: [TKUIModeAnnotation & ServiceMapContentVisited]
+    let stops: [TKUIModeAnnotation & TKUIServiceMapContentVisited]
     
     /// Annotations for vehicles servicing the route
     ///
     /// - note: These are dynamic and change with real-time information
-    public let vehicles: [MKAnnotation]
+    let vehicles: [MKAnnotation]
   }
   
 }
@@ -95,7 +95,7 @@ extension TKUIServiceViewModel {
   }
 }
 
-extension TKUIServiceViewModel.ServiceVisit: ServiceMapContentVisited {}
+extension TKUIServiceViewModel.ServiceVisit: TKUIServiceMapContentVisited {}
 
 extension TKUIServiceViewModel.ServiceVisit: TKUIModeAnnotation {
   var title: String? { return visit.title }

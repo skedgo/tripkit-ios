@@ -33,7 +33,7 @@ class TKUIAttributionCell: UITableViewCell {
     bodyTextView.backgroundColor = .clear
   }
   
-  func configure(for attribution: API.DataAttribution) {
+  func configure(for attribution: TKAPI.DataAttribution) {
     titleTextView.text = attribution.provider.name
     
     bodyTextView.text = attribution.disclaimer

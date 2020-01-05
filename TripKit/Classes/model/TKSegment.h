@@ -151,11 +151,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)singleLineInstruction;
 
-/**
- True if we support a UI to change the location of the segment
- */
-- (BOOL)canShowAlternativeLocation;
-
 ///-----------------------------------------------------------------------------
 /// @name Public transport
 ///-----------------------------------------------------------------------------
@@ -213,22 +208,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSArray<NSString *> *)bookingExternalActions;
 - (nullable NSDictionary<NSString*, id> *)bookingConfirmationDictionary;
 
-
-///-----------------------------------------------------------------------------
-/// @name Watch app temporary storage
-///-----------------------------------------------------------------------------
-
-/**
- Temporary storage for the semaphore image that we want to display on the map for the start of this segment. Used by watch app.
- */
-@property (nullable, nonatomic, strong) TKImage *mapImage;
-
-/**
- Temporary storage to mark the active segment, i.e., the segment that the user is on (presumably) and which should be shown immediately to the user.
- */
-@property (nonatomic, assign) BOOL isActiveSegment;
-
-///
 
 @property (nullable, readonly) NSString *tripSegmentModeTitle;
 @property (nullable, readonly) NSString *tripSegmentModeSubtitle;

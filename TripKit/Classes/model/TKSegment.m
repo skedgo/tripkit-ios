@@ -574,15 +574,6 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.reference.service.isCancelled;
 }
 
-- (BOOL)canShowAlternativeLocation
-{
-  if ([self isSharedVehicle]) {
-    return YES; // there are always alternatives for those
-  }
-  
-  return [self.template hasCarParks];
-}
-
 #pragma mark - Booking
 
 - (NSString *)bookingTitle

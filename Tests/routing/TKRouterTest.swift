@@ -1,5 +1,5 @@
 //
-//  TKBuzzRouterTest.swift
+//  TKRouterTest.swift
 //  TripKitTests
 //
 //  Created by Adrian Schoenig on 24.09.17.
@@ -13,7 +13,7 @@ import XCTest
 @testable import TripKit
 @testable import TripKitUI
 
-class TKBuzzRouterTest: TKTestCase {
+class TKRouterTest: TKTestCase {
 
   override func setUp() {
     super.setUp()
@@ -306,7 +306,7 @@ class TKBuzzRouterTest: TKTestCase {
   
   func testTripCache() throws {
     let identifier = "Test"
-    let directory = TKFileCacheDirectory.documents // where TKBuzzRouter keeps its trips
+    let directory = TKFileCacheDirectory.documents // where TKRouter keeps its trips
     let json: [String: Any] = try contentFromJSON(named: "routing-pt-oldish")
 
     // 0. Clear
@@ -319,7 +319,7 @@ class TKBuzzRouterTest: TKTestCase {
     
     // 2. Retrieve from cache
     let expectation = self.expectation(description: "Trip downloaded from cache")
-    let router = TKBuzzRouter()
+    let router = TKRouter()
     router.downloadTrip(URL(string: "http://example.com/")!, identifier: identifier, intoTripKitContext: self.tripKitContext) { trip in
       XCTAssertNotNil(trip)
       expectation.fulfill()

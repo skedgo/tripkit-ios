@@ -19,10 +19,10 @@ public extension TKNamedCoordinate {
     }
   }
   
-  var dataSources: [API.DataAttribution] {
+  var dataSources: [TKAPI.DataAttribution] {
     get {
       guard let json = data["dataSources"] as Any?, let sanitized = TKJSONSanitizer.sanitize(json) else { return [] }
-      return (try? JSONDecoder().decode([API.DataAttribution].self, withJSONObject: sanitized)) ?? []
+      return (try? JSONDecoder().decode([TKAPI.DataAttribution].self, withJSONObject: sanitized)) ?? []
     }
     set {
       data["dataSources"] = try? JSONEncoder().encodeJSONObject(newValue)

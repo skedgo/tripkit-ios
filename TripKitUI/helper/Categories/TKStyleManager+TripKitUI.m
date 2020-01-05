@@ -11,6 +11,7 @@
 #import <TripKitUI/TripKitUI-Swift.h>
 
 #import "UIFont+CustomFonts.h"
+#import "NSString+Sizing.h"
 
 @interface UIViewController (PopoverHelpers)
   

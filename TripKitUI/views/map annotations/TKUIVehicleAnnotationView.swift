@@ -143,7 +143,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
       .compactMap { data in
         guard let data = data else { return nil }
         let components = Vehicle.components(from: data)
-        return API.VehicleOccupancy.average(in: components)?.color
+        return TKAPI.VehicleOccupancy.average(in: components)?.color
       }
       .subscribe(onNext: { [weak self] color in
         self?.vehicleShape?.color = color

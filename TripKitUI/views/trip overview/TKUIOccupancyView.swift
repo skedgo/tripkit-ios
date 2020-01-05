@@ -13,7 +13,7 @@ import UIKit
   import TripKit
 #endif
 
-extension API.VehicleOccupancy {
+extension TKAPI.VehicleOccupancy {
   
   var icon: UIImage? {
     switch self {
@@ -98,7 +98,7 @@ public class TKUIOccupancyView: UIView {
 extension TKUIOccupancyView {
   
   public enum Purpose {
-    case occupancy(API.VehicleOccupancy, simple: Bool = false)
+    case occupancy(TKAPI.VehicleOccupancy, simple: Bool = false)
     case wheelchair
   }
   

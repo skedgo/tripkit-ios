@@ -3,7 +3,7 @@
 
 ![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20watchOS-333333.svg) [![CocoaPods](https://img.shields.io/cocoapods/v/TripKit.svg)]() [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-Additional documentation is available on the [TripGo Developer page](http://skedgo.github.io/tripgo-api/site/)
+Additional documentation is available on the [TripGo Developer page](https://developer.tripgo.com/)
 
 ## Components
 
@@ -69,4 +69,4 @@ If there's any trouble with that, see the example under [Project](Project).
 
 ## License
 
-TripKit is copyright 2011-2019 by SkedGo Pty Ltd
+TripKit is copyright 2011-2020 by SkedGo Pty Ltd

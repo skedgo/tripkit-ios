@@ -57,7 +57,7 @@ public class TKParserHelper: NSObject {
   
   @objc(colorForDictionary:)
   public class func color(for dictionary: [String: Any]) -> TKColor? {
-    return (try? JSONDecoder().decode(API.RGBColor.self, withJSONObject: dictionary))?.color
+    return (try? JSONDecoder().decode(TKAPI.RGBColor.self, withJSONObject: dictionary))?.color
   }
   
   @objc(namedCoordinateForDictionary:)

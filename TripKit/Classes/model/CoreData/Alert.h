@@ -11,10 +11,10 @@
 
 @class Service, StopLocation, TKNamedCoordinate;
 
-typedef NS_CLOSED_ENUM(NSInteger, AlertSeverity) {
-  AlertSeverityInfo = -1,
-  AlertSeverityWarning = 0,
-  AlertSeverityAlert = 1,
+typedef NS_CLOSED_ENUM(NSInteger, TKAlertSeverity) {
+  TKAlertSeverityInfo = -1,
+  TKAlertSeverityWarning = 0,
+  TKAlertSeverityAlert = 1,
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSString *idStopCode;
 
 // Non core-data properties
-@property (nonatomic, assign) AlertSeverity alertSeverity;
+@property (nonatomic, assign) TKAlertSeverity alertSeverity;
 @property (nonatomic, readonly, nullable) NSURL *imageURL;
 
 + (nullable instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode

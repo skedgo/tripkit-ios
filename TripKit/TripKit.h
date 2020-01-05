@@ -37,9 +37,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKAlertController.h"
 #endif
 
-#import "TKCustomEvent.h"
-#import "TKCustomEventRecurrenceRule.h"
-
 // Headers
 #import "TKTripKit.h"
 #import "TKConstants.h"
@@ -58,11 +55,8 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 // Non-core data model classes
 #import "TKSegment.h"
-#import "TKTripFactory.h"
-#import "TKCellHelper.h"
 
 // Helpers
-#import "TKNextSegmentScorer.h"
 #import "NSManagedObject+TKPersistence.h"
 #import "TripRequest+Classify.h"
 
@@ -75,8 +69,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKCoreDataParserHelper.h"
 #import "TKRoutingParser.h"
 #import "TKRouter.h"
-#import "TKBuzzRouter.h"
-#import "TKFakeRouter.h"
 #import "TKBuzzRealTime.h"
 #import "TKBuzzInfoProvider.h"
 

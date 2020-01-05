@@ -133,7 +133,7 @@ extension Trip {
   
 }
 
-extension TripGroupVisibility {
+extension TKTripGroupVisibility {
   
   fileprivate var apiString: String {
     switch self {

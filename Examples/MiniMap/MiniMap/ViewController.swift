@@ -18,7 +18,7 @@ class ViewController: NSViewController {
   var from: MKAnnotation? = nil
   var to: MKAnnotation? = nil
   
-  let router = TKBuzzRouter()
+  let router = TKRouter()
   
   override func viewDidLoad() {
     super.viewDidLoad()

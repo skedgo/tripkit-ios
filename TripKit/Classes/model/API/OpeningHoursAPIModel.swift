@@ -12,7 +12,7 @@ import Foundation
 ///
 /// Matches OpeningHours from the tripgo-api
 
-extension API {
+extension TKAPI {
   
   enum DecoderError: Error {
     case notValidTimeZoneIdentifier(String)
@@ -22,7 +22,7 @@ extension API {
     
     /// Time zone in which the opening hours are defined
     public let timeZone: TimeZone
-    fileprivate let days: [Day]
+    public let days: [Day]
     
     private enum CodingKeys: String, CodingKey {
       case timeZone
@@ -58,6 +58,11 @@ extension API {
       
       public let day: DayOfWeek
       public let times: [Time]
+      
+      public init(day: DayOfWeek, times: [Time]) {
+        self.day = day
+        self.times = times
+      }
       
       private enum CodingKeys: String, CodingKey {
         case day = "name"
@@ -126,17 +131,9 @@ extension API {
           .monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday
         ]
         
-        public var localizedString: String {
-          if let weekday = weekday {
-            return TKCustomEventRecurrenceRule.longString(forWeekday: weekday)
-          } else {
-            return Loc.PublicHoliday
-          }
-        }
-        
         /// Integer matching `NSDateComponents.weekday` or
         /// `nil` in case of public holiday.
-        fileprivate var weekday: Int? {
+        public var weekday: Int? {
           switch self {
           case .sunday:         return 1
           case .monday:         return 2
@@ -148,18 +145,7 @@ extension API {
           case .publicHoliday:  return nil
           }
         }
-        
-        
-        fileprivate func relativeWeekday(to starting: WeekdayIndex) -> Int? {
-          guard let weekday = self.weekday else { return nil }
-          if weekday < starting.rawValue {
-            return weekday + 7
-          } else {
-            return weekday
-          }
-        }
       }
-      
     }
   }
 }
@@ -168,7 +154,7 @@ fileprivate enum TKOpeningHoursParserError: Error {
   case badTimeOfDay(String)
 }
 
-extension API.OpeningHours {
+extension TKAPI.OpeningHours {
   
   /// Checks if opening hour specify that the provided that is open.
   ///
@@ -186,32 +172,9 @@ extension API.OpeningHours {
     return false
   }
   
-  /// Sorted days relative to provided first-day-of-week
-  ///
-  /// - Parameter starting: First day of the week
-  /// - Returns: Sorted days
-  public func days(starting: WeekdayIndex = .monday) -> [Day] {
-    var allDays = days
-    for day in Day.DayOfWeek.weekdays {
-      if !allDays.contains(where: { $0.day == day }) {
-        allDays.append(Day(day: day, times: []))
-      }
-    }
-    
-    return allDays.sorted { firstDay, secondDay in
-      guard let first = firstDay.day.relativeWeekday(to: starting) else {
-        return false
-      }
-      guard let second = secondDay.day.relativeWeekday(to: starting) else {
-        return true
-      }
-      return first < second
-    }
-  }
-  
 }
 
-extension API.OpeningHours.Day {
+extension TKAPI.OpeningHours.Day {
   
   /// Checks if provided date is covered by this particular day
   ///

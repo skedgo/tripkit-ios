@@ -12,7 +12,7 @@ import RxSwift
 
 extension TKBuzzInfoProvider {
   
-  public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion, start: Date? = nil, end: Date? = nil) -> Single<[API.CarAvailability]> {
+  public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion, start: Date? = nil, end: Date? = nil) -> Single<[TKAPI.CarAvailability]> {
     
     var paras: [String: Any] = [ "identifier": locationId, "region": region.name ]
     if let start = start {
@@ -24,16 +24,16 @@ extension TKBuzzInfoProvider {
     
     return TKServer.shared.rx
       .hit(.GET, path: "locationInfo.json", parameters: paras, region: region)
-      .map { _, _, data -> [API.CarAvailability] in
+      .map { _, _, data -> [TKAPI.CarAvailability] in
         guard let data = data else { return [] }
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let info = try decoder.decode(API.LocationInfo.self, from: data)
+        let info = try decoder.decode(TKAPI.LocationInfo.self, from: data)
         return info.carPod?.availabilities ?? []
       }
   }
   
-  public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion, filter: Observable<(start: Date, end: Date?)>) -> Observable<[API.CarAvailability]> {
+  public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion, filter: Observable<(start: Date, end: Date?)>) -> Observable<[TKAPI.CarAvailability]> {
     
     // TODO: We could be smarter about this, cache the previous result and only
     //   query again, if we need new data.

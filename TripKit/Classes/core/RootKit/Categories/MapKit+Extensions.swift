@@ -28,11 +28,11 @@ extension CLLocationCoordinate2D {
 }
 
 extension MKCoordinateRegion {
-  public var topLeft: CLLocationCoordinate2D {
+  var topLeft: CLLocationCoordinate2D {
     return validCoordinate(latitude: center.latitude + span.latitudeDelta / 2, longitude: center.longitude - span.longitudeDelta / 2)
   }
   
-  public var bottomRight: CLLocationCoordinate2D {
+  var bottomRight: CLLocationCoordinate2D {
     return validCoordinate(latitude: center.latitude - span.latitudeDelta / 2, longitude: center.longitude + span.longitudeDelta / 2)
   }
   
@@ -50,7 +50,7 @@ extension MKCoordinateRegion {
 }
 
 extension MKMapRect {
-  public static func forCoordinateRegion(_ region: MKCoordinateRegion) -> MKMapRect
+  static func forCoordinateRegion(_ region: MKCoordinateRegion) -> MKMapRect
   {
     let a = MKMapPoint(region.topLeft)
     let b = MKMapPoint(region.bottomRight)
@@ -59,14 +59,3 @@ extension MKMapRect {
   }
 }
 
-extension Array where Element: MKAnnotation {
-  
-  public var mapRect: MKMapRect {
-    return reduce(.null) { prior, annotation in
-      let point = MKMapPoint(annotation.coordinate)
-      let miniRect = MKMapRect(origin: point, size: MKMapSize(width: 1, height: 1))
-      return prior.union(miniRect)
-    }
-  }
-  
-}

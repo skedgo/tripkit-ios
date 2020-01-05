@@ -13,7 +13,7 @@
 
 #import <CoreData/CoreData.h>
 
-typedef void(^FetchRequestBlock)(NSFetchRequest *);
+typedef void(^TKFetchRequestBlock)(NSFetchRequest *);
 
 @interface NSManagedObjectContext(SimpleFetch)
 
@@ -25,7 +25,7 @@ typedef void(^FetchRequestBlock)(NSFetchRequest *);
 #pragma mark - Fetch
 
 - (NSArray *)fetchObjectsForEntityClass:(Class)entityClass
-                       withFetchRequest:(FetchRequestBlock)requestBlock NS_SWIFT_UNAVAILABLE("Use fetchObjects<E>");
+                       withFetchRequest:(TKFetchRequestBlock)requestBlock NS_SWIFT_UNAVAILABLE("Use fetchObjects<E>");
 
 - (NSArray *)fetchObjectsForEntityClass:(Class)entityClass
                           withPredicate:(NSPredicate *)predOrNil

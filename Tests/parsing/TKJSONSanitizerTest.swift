@@ -13,7 +13,7 @@ import XCTest
 class TKJSONSanitizerTest: XCTestCase {
 
   private struct TestStruct: Codable {
-    let color: API.RGBColor
+    let color: TKAPI.RGBColor
     let url: String
     let derp: Int?
     let number: Double
