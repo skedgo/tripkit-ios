@@ -58,24 +58,33 @@ public class TKUIHomeCard: TGTableCard {
     self.init()
   }
   
-  private func resetCard() {
-    // Remove focused map annotation and display nearbys.
+  // MARK: - TGCard overrides
+  
+  public override func willAppear(animated: Bool) {
+    // If the search text is empty when the card appears,
+    // try loading autocompletion results.
+    if let text = searchBar.text, text.isEmpty {
+      searchTextPublisher.onNext(("", forced: true))
+    }
+    
+    // Remove any focused annotation, i.e., restoring any
+    // hideen nearby annotations.
     focusedAnnotationPublisher.onNext(nil)
     
     // Remove any selection on the map
     if let selected = nearbyMapManager.mapView?.selectedAnnotations.first {
       nearbyMapManager.mapView?.deselectAnnotation(selected, animated: true)
     }
-  }
-  
-  // MARK: - TGCard overrides
-  
-  public override func willAppear(animated: Bool) {
-    resetCard()
+    
     super.willAppear(animated: animated)
   }
   
   public override func becomeFirstResponder() -> Bool {
+    // We override this method to replicate an Apple Maps behavior.
+    // Scenario: Search for a stop, then push the timetable for it
+    // . When the timetable card is dismissed and the home card is
+    // popped back in, we not only want to show the stop appearing
+    // as a search text, but also bring up the keyboard.
     if let text = searchBar.text, !text.isEmpty {
       return searchBar.becomeFirstResponder()
     } else {
@@ -173,6 +182,7 @@ extension TKUIHomeCard {
     // the routing card at the peaking position when it's pushed.
     let routingResultCard = TKUIRoutingResultsCard(destination: destination, initialPosition: .peaking)
     controller?.push(routingResultCard)
+    
     searchResultDelegate?.homeCard(self, selected: destination)
   }
   
@@ -182,7 +192,6 @@ extension TKUIHomeCard {
     // We push the timetable card. To replicate Apple Maps, we put
     // the timetable card at the peaking position when it's pushed.
     let timetableCard = TKUITimetableCard(stops: [stop], reusing: (mapManager as? TKUIMapManager), initialPosition: .peaking)
-    
     if controller?.topCard is TKUITimetableCard {
       // If we are already showing a timetable card,
       // instead of pushing another one, we swap it
