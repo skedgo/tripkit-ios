@@ -790,6 +790,7 @@
 		D3BC6731238F70C10042EFD9 /* TKUIHomeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC672F238F6F8B0042EFD9 /* TKUIHomeCard.swift */; };
 		D3BC6732238F71700042EFD9 /* TKUIHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC672C238F45940042EFD9 /* TKUIHomeViewController.swift */; };
 		D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */; };
+		D3D8C9BF23C3F4F1001E1193 /* TKUINearbyMapManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D8C9BC23C3F4E9001E1193 /* TKUINearbyMapManagerTest.swift */; };
 		D3E7C1AF21F17B7600C48248 /* TKUISectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */; };
 		D3EC9E8B22EE7D810080B0E6 /* TKUIModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC9E8A22EE7D810080B0E6 /* TKUIModePicker.swift */; };
 		D3F9CEC32064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */; };
@@ -1495,6 +1496,7 @@
 		D3BC672C238F45940042EFD9 /* TKUIHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIHomeViewController.swift; sourceTree = "<group>"; };
 		D3BC672F238F6F8B0042EFD9 /* TKUIHomeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIHomeCard.swift; sourceTree = "<group>"; };
 		D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryHistoryManager.swift; sourceTree = "<group>"; };
+		D3D8C9BC23C3F4E9001E1193 /* TKUINearbyMapManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUINearbyMapManagerTest.swift; sourceTree = "<group>"; };
 		D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertViewController.xib; sourceTree = "<group>"; };
 		D3EC9E8A22EE7D810080B0E6 /* TKUIModePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIModePicker.swift; sourceTree = "<group>"; };
 		D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertTableHeader.swift; sourceTree = "<group>"; };
@@ -1559,6 +1561,7 @@
 		3A21A4B12069057D005F411D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D3D8C9BC23C3F4E9001E1193 /* TKUINearbyMapManagerTest.swift */,
 				3A65B93122F5E329001ACDEB /* TKUIModePickerTest.swift */,
 				3A4A180C22BCCC8800CAFEC0 /* TKUIPolylineRendererStabilityTest.swift */,
 				3AC01ADD2360435600B54484 /* TKUIRoutingQueryInputViewModelTest.swift */,
@@ -3777,6 +3780,7 @@
 				3AA3CEB9202CD4D100E54859 /* TKAlertModelTest.swift in Sources */,
 				3AA3CEB7202CD4D100E54859 /* TKWaypointRouterTest.swift in Sources */,
 				3A218773228C5B7500B44B96 /* TKAutocompletionRaceTest.swift in Sources */,
+				D3D8C9BF23C3F4F1001E1193 /* TKUINearbyMapManagerTest.swift in Sources */,
 				3AE6077920FF4BB7006D59B0 /* TKPeliasTitleTest.swift in Sources */,
 				3AA3CEC2202CD4D100E54859 /* TKDeparturesModelTest.swift in Sources */,
 				3AA3CEB4202CD4D100E54859 /* TKAutocompletionResultTest.m in Sources */,
