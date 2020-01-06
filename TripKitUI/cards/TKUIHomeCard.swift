@@ -59,10 +59,6 @@ public class TKUIHomeCard: TGTableCard {
   }
   
   private func resetCard() {
-    // Clear search results and uses any default values, e.g.,
-    // past searches or favorites, if available.
-    searchTextPublisher.onNext(("", forced: true))
-    
     // Remove focused map annotation and display nearbys.
     focusedAnnotationPublisher.onNext(nil)
     
@@ -77,6 +73,14 @@ public class TKUIHomeCard: TGTableCard {
   public override func willAppear(animated: Bool) {
     resetCard()
     super.willAppear(animated: animated)
+  }
+  
+  public override func becomeFirstResponder() -> Bool {
+    if let text = searchBar.text, !text.isEmpty {
+      return searchBar.becomeFirstResponder()
+    } else {
+      return super.becomeFirstResponder()
+    }
   }
   
   public override func didBuild(tableView: UITableView, headerView: TGHeaderView?) {
@@ -153,23 +157,18 @@ public class TKUIHomeCard: TGTableCard {
 extension TKUIHomeCard {
   
   private func prepareForNewCard() {
-    // To replicate Apple Maps, once a user dismiss the routing card,
-    // the search bar is cleared and the card in which it's embedeed,
-    // i.e., Home card, is moved back to the peaking position. To do
-    // this, we call `clearSearchBar` method, however, this **must**
-    // be called before the routing card is pushed.
+    // To replicate Apple Maps, once a user dismiss the new card, the
+    // search bar is cleared.
     self.clearSearchBar()
     
-    // Also replicating Apple Maps, when the routing card is dismissed,
-    // the home card is moved back to the peak position. This **must**
-    // be done before the routing card is pushed, as the TGCardVC notes
+    // Also replicating Apple Maps, when the new card is dismissed,
+    // the home card is moved back to the peak position. This must
+    // be done before the new card is pushed, as the TGCardVC notes
     // the position of a card before a new one is pushed.
     self.controller?.moveCard(to: .peaking, animated: true)
   }
   
   private func showRoutes(to destination: MKAnnotation) {
-    prepareForNewCard()
-    
     // We push the routing card. To replicate Apple Maps, we put
     // the routing card at the peaking position when it's pushed.
     let routingResultCard = TKUIRoutingResultsCard(destination: destination, initialPosition: .peaking)
@@ -179,8 +178,6 @@ extension TKUIHomeCard {
   
   private func showTimetable(for annotation: MKAnnotation) {
     guard let stop = annotation as? TKUIStopAnnotation else { return }
-    
-    prepareForNewCard()
     
     // We push the timetable card. To replicate Apple Maps, we put
     // the timetable card at the peaking position when it's pushed.
@@ -196,6 +193,8 @@ extension TKUIHomeCard {
     
     searchResultDelegate?.homeCard(self, selected: stop)
     
+    // This removes nearby annotations and leaves only the stop
+    // visible on the map.
     focusedAnnotationPublisher.onNext(stop)
   }
   
