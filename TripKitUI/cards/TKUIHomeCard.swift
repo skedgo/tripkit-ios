@@ -145,10 +145,7 @@ public class TKUIHomeCard: TGTableCard {
           return
         }
         
-        // Push the Timetable card
-        self.showTimetable(for: stop)
-        
-        // Notify the delegate of the selection
+        self.handleTap(on: stop)
         self.searchResultDelegate?.homeCard(self, selected: annotation)
         
         // To replicate Apple Maps, once a user dismiss the timetable card,
@@ -163,8 +160,8 @@ public class TKUIHomeCard: TGTableCard {
     viewModel.mapAnnotationSelected
       .emit(onNext:  { [weak self] selected in
         switch selected {
-        case .stop(let stop): self?.showTimetable(for: stop)
-        case .location(let location): print("Show mode location card?")
+        case .stop(let stop): self?.handleTap(on: stop)
+        case .location(let location): self?.handleTap(on: location)
         }
       })
       .disposed(by: disposeBag)
@@ -183,7 +180,7 @@ extension TKUIHomeCard {
     controller?.push(routingResultCard)    
   }
   
-  private func showTimetable(for stop: TKUIStopAnnotation) {
+  private func handleTap(on stop: TKUIStopAnnotation) {
     // We push the timetable card. To replicate Apple Maps, we put
     // the timetable card at the peaking position when it's pushed.
     let timetableCard = TKUITimetableCard(stops: [stop], reusing: (mapManager as? TKUIMapManager), initialPosition: .peaking)
@@ -197,6 +194,13 @@ extension TKUIHomeCard {
     }
     
     focusedAnnotationPublisher.onNext(stop)
+  }
+  
+  private func handleTap(on location: TKModeCoordinate) {
+    guard let handler = TKUIHomeCard.config.presentLocationHandler else { return }
+    if handler(self, location) {
+      focusedAnnotationPublisher.onNext(location)
+    }
   }
   
 }
