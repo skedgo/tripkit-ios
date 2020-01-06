@@ -36,6 +36,7 @@ public class TKUIHomeCard: TGTableCard {
   private let searchResultAccessoryTapped = PublishSubject<TKUIAutocompletionViewModel.Item>()
   
   private var viewModel: TKUIHomeViewModel!
+  
   private let nearbyMapManager: TKUINearbyMapManager
 
   private let disposeBag = DisposeBag()
@@ -57,9 +58,24 @@ public class TKUIHomeCard: TGTableCard {
     self.init()
   }
   
-  public override func willAppear(animated: Bool) {
+  private func resetCard() {
+    // Clear search results and uses any default values, e.g.,
+    // past searches or favorites, if available.
     searchTextPublisher.onNext(("", forced: true))
+    
+    // Remove focused map annotation and display nearbys.
     focusedAnnotationPublisher.onNext(nil)
+    
+    // Remove any selection on the map
+    if let selected = nearbyMapManager.mapView?.selectedAnnotations.first {
+      nearbyMapManager.mapView?.deselectAnnotation(selected, animated: true)
+    }
+  }
+  
+  // MARK: - TGCard overrides
+  
+  public override func willAppear(animated: Bool) {
+    resetCard()
     super.willAppear(animated: animated)
   }
   
@@ -118,52 +134,15 @@ public class TKUIHomeCard: TGTableCard {
     // Interaction
     
     viewModel.selection
-      .emit(onNext: { [weak self] annotation in
-        guard let self = self else { return }
-        
-        // Push the Routing card
-        self.showRoutes(to: annotation)
-        
-        // Notify the delegate of the selection
-        self.searchResultDelegate?.homeCard(self, selected: annotation)
-        
-        // To replicate Apple Maps, once a user dismiss the routing card,
-        // the search bar is cleared and the card in which it's embedeed,
-        // i.e., Home card, is moved back to the peaking position. To do
-        // this, we call `clearSearchBar` method, however, this **must**
-        // be called before the routing card is pushed.
-        self.clearSearchBar()
-      })
+      .emit(onNext: { [weak self] in self?.showRoutes(to: $0) })
       .disposed(by: disposeBag)
     
     viewModel.accessorySelection
-      .emit(onNext: { [weak self] annotation in
-        guard let self = self else { return }
-        
-        guard let stop = annotation as? TKUIStopAnnotation else {
-          assertionFailure("Expecting a stop annotation, but got \(annotation)")
-          return
-        }
-        
-        self.handleTap(on: stop)
-        self.searchResultDelegate?.homeCard(self, selected: annotation)
-        
-        // To replicate Apple Maps, once a user dismiss the timetable card,
-        // the search bar is cleared and the card in which it's embedeed,
-        // i.e., Home card, is moved back to the peaking position. To do
-        // this, we call `clearSearchBar` method, however, this **must**
-        // be called before the timetable card is pushed.
-        self.clearSearchBar()
-      })
+      .emit(onNext: { [weak self] in self?.showTimetable(for: $0) })
       .disposed(by: disposeBag)
     
-    viewModel.mapAnnotationSelected
-      .emit(onNext:  { [weak self] selected in
-        switch selected {
-        case .stop(let stop): self?.handleTap(on: stop)
-        case .location(let location): self?.handleTap(on: location)
-        }
-      })
+    viewModel.nextFromMap
+      .emit(onNext:  { [weak self] in self?.handleNextFromMap($0) })
       .disposed(by: disposeBag)
   }
   
@@ -173,14 +152,36 @@ public class TKUIHomeCard: TGTableCard {
 
 extension TKUIHomeCard {
   
+  private func prepareForNewCard() {
+    // To replicate Apple Maps, once a user dismiss the routing card,
+    // the search bar is cleared and the card in which it's embedeed,
+    // i.e., Home card, is moved back to the peaking position. To do
+    // this, we call `clearSearchBar` method, however, this **must**
+    // be called before the routing card is pushed.
+    self.clearSearchBar()
+    
+    // Also replicating Apple Maps, when the routing card is dismissed,
+    // the home card is moved back to the peak position. This **must**
+    // be done before the routing card is pushed, as the TGCardVC notes
+    // the position of a card before a new one is pushed.
+    self.controller?.moveCard(to: .peaking, animated: true)
+  }
+  
   private func showRoutes(to destination: MKAnnotation) {
+    prepareForNewCard()
+    
     // We push the routing card. To replicate Apple Maps, we put
     // the routing card at the peaking position when it's pushed.
     let routingResultCard = TKUIRoutingResultsCard(destination: destination, initialPosition: .peaking)
-    controller?.push(routingResultCard)    
+    controller?.push(routingResultCard)
+    searchResultDelegate?.homeCard(self, selected: destination)
   }
   
-  private func handleTap(on stop: TKUIStopAnnotation) {
+  private func showTimetable(for annotation: MKAnnotation) {
+    guard let stop = annotation as? TKUIStopAnnotation else { return }
+    
+    prepareForNewCard()
+    
     // We push the timetable card. To replicate Apple Maps, we put
     // the timetable card at the peaking position when it's pushed.
     let timetableCard = TKUITimetableCard(stops: [stop], reusing: (mapManager as? TKUIMapManager), initialPosition: .peaking)
@@ -193,6 +194,8 @@ extension TKUIHomeCard {
       controller?.push(timetableCard)
     }
     
+    searchResultDelegate?.homeCard(self, selected: stop)
+    
     focusedAnnotationPublisher.onNext(stop)
   }
   
@@ -200,6 +203,13 @@ extension TKUIHomeCard {
     guard let handler = TKUIHomeCard.config.presentLocationHandler else { return }
     if handler(self, location) {
       focusedAnnotationPublisher.onNext(location)
+    }
+  }
+  
+  private func handleNextFromMap(_ next: TKUINearbyViewModel.Next) {
+    switch next {
+    case .stop(let stop): showTimetable(for: stop)
+    case .location(let location): handleTap(on: location)
     }
   }
   
@@ -224,6 +234,7 @@ extension TKUIHomeCard: UISearchBarDelegate {
   
   public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     clearSearchBar()
+    controller?.moveCard(to: .peaking, animated: true)
   }
   
   public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -240,9 +251,6 @@ extension TKUIHomeCard: UISearchBarDelegate {
     
     // Dismiss the keyboard
     searchBar.resignFirstResponder()
-    
-    // We don't need to be extended mode.
-    self.controller?.moveCard(to: .peaking, animated: true)
   }
   
 }
