@@ -166,9 +166,11 @@ public class TKUIHomeCard: TGTableCard {
 extension TKUIHomeCard {
   
   private func prepareForNewCard() {
-    // To replicate Apple Maps, once a user dismiss the new card, the
-    // search bar is cleared.
-    self.clearSearchBar()
+    // In Apple Maps, when we select a result without typing anything
+    // in the search bar, i.e., pick from history or favourite, the
+    // home card is returned to the peak position when the new card is
+    // popped. This is replicating such UX behaviour.
+    guard let text = searchBar.text, text.isEmpty else { return }
     
     // Also replicating Apple Maps, when the new card is dismissed,
     // the home card is moved back to the peak position. This must
@@ -178,6 +180,8 @@ extension TKUIHomeCard {
   }
   
   private func showRoutes(to destination: MKAnnotation) {
+    prepareForNewCard()
+    
     // We push the routing card. To replicate Apple Maps, we put
     // the routing card at the peaking position when it's pushed.
     let routingResultCard = TKUIRoutingResultsCard(destination: destination, initialPosition: .peaking)
@@ -188,6 +192,8 @@ extension TKUIHomeCard {
   
   private func showTimetable(for annotation: MKAnnotation) {
     guard let stop = annotation as? TKUIStopAnnotation else { return }
+    
+    prepareForNewCard()
     
     // We push the timetable card. To replicate Apple Maps, we put
     // the timetable card at the peaking position when it's pushed.
