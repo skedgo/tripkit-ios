@@ -25,7 +25,7 @@ public class TKUISectionedAlertViewController: UIViewController {
   private var viewModel: TKUISectionedAlertViewModel!
   
   private let disposeBag = DisposeBag()
-  private let searchText = PublishSubject<String>()
+  private let searchText = PublishSubject<(String, forced: Bool)>()
   
   private var dataSource: RxTableViewSectionedReloadDataSource<TKUISectionedAlertViewModel.Section>?
   
@@ -68,7 +68,7 @@ public class TKUISectionedAlertViewController: UIViewController {
 
     viewModel = TKUISectionedAlertViewModel(
       region: region,
-      searchText: searchText
+      searchText: searchText.map { $0.0 }
     )
     
     self.dataSource = dataSource
@@ -220,12 +220,12 @@ extension TKUISectionedAlertViewController: UISearchBarDelegate {
   
   public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.text = nil
-    searchText.onNext("")
+    searchText.onNext(("", forced: false))
     searchBar.resignFirstResponder()
   }
   
   public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    self.searchText.onNext(searchText)
+    self.searchText.onNext((searchText, forced: false))
   }
   
 }

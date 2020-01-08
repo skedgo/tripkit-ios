@@ -60,7 +60,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
   private let tappedToggleButton = PublishSubject<TripGroup?>()
   
-  public init(destination: MKAnnotation) {
+  public init(destination: MKAnnotation, initialPosition: TGCardPosition? = nil) {
     self.destination = destination
     self.request = nil
     
@@ -74,7 +74,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
       title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
       style: .grouped,
       mapManager: mapManager,
-      initialPosition: nil
+      initialPosition: initialPosition
     )
 
     didInit()

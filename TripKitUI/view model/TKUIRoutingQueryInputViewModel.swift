@@ -22,7 +22,7 @@ class TKUIRoutingQueryInputViewModel {
   typealias Section = TKUIAutocompletionViewModel.Section
 
   struct UIInput {
-    let searchText: Observable<String>
+    let searchText: Observable<(String, forced: Bool)>
     let tappedDone: Signal<Void>
     var selected: Signal<Item> = .empty()
     var selectedSearchMode: Signal<TKUIRoutingResultsViewModel.SearchMode> = .empty()
@@ -36,9 +36,9 @@ class TKUIRoutingQueryInputViewModel {
     
     let autocompletionModel = TKUIAutocompletionViewModel(
       providers: providers,
-      searchText: inputs.searchText.startWith(""),
+      searchText: inputs.searchText.startWith(("", forced: false)),
       selected: inputs.selected,
-      biasMapRect: biasMapRect
+      biasMapRect: .just(biasMapRect)
     )
     
     let state = Self.buildState(

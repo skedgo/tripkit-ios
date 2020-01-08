@@ -33,7 +33,7 @@ extension TKUIRoutingQueryInputViewModel {
     let userActions: Observable<UserAction> = Observable.merge([
         selection.asObservable().map { .selectResult($0) },
         inputs.tappedSwap.asObservable().map { .swap },
-        inputs.searchText.distinctUntilChanged().map { .typeText($0) },
+        inputs.searchText.distinctUntilChanged { $0.0 == $1.0 }.map { .typeText($0.0) },
         inputs.selectedSearchMode.asObservable().distinctUntilChanged().map { .selectMode($0) },
       ])
 

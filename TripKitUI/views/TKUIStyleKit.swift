@@ -1,6 +1,6 @@
 //
 //  TKUIStyleKit.swift
-//  TripGo
+//  TripKitUI
 //
 //  Created by Adrian Schönig on 01.08.19.
 //  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  TKUISegmentTitleView
-//  TripGoAppKit
+//  TripKitUI
 //
 //  Created by Adrian Schönig on 19.03.19.
 //  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.

@@ -46,7 +46,8 @@ public enum TKLocationProvider {
     var paras: [String: Any] = [
       "lat": center.latitude,
       "lng": center.longitude,
-      "radius": radius,
+      "radius": Int(radius),
+      "limit": 100
     ]
     paras["modes"] = modes
     

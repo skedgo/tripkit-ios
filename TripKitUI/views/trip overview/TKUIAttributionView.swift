@@ -1,6 +1,6 @@
 //
 //  TKUIAttributionView.swift
-//  TripGo
+//  TripKitUI
 //
 //  Created by Kuan Lun Huang on 24/10/2016.
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.

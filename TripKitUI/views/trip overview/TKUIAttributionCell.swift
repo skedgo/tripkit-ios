@@ -1,6 +1,6 @@
 //
 //  TKUIAttributionCell.swift
-//  TripGo
+//  TripKitUI
 //
 //  Created by Adrian Schoenig on 3/4/17.
 //  Copyright © 2017 SkedGo Pty Ltd. All rights reserved.

@@ -76,7 +76,7 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
       destination: destination,
       biasMapRect: biasMapRect,
       inputs: TKUIRoutingQueryInputViewModel.UIInput(
-        searchText: titleView.rx.searchText,
+        searchText: titleView.rx.searchText.map { ($0, forced: false) },
         tappedDone: titleView.rx.route,
         selected: tableView.rx.modelSelected(TKUIRoutingQueryInputViewModel.Item.self).asSignal(onErrorSignalWith: .empty()),
         selectedSearchMode: titleView.rx.selectedSearchMode,

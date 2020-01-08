@@ -17,6 +17,8 @@ class MainViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    ExampleCustomizer.configureCards()
+    
     // Customizing the look of TripKitUI, showing how to integrate the
     // inter-app actions from TripKitInterApp
      if #available(iOS 13.0, *) {
@@ -52,9 +54,14 @@ class MainViewController: UITableViewController {
     case "showRoutes":
       showRoutes()
       
+    case "showHome":
+      showHome()
+      
     default:
       preconditionFailure("Don't know what to do with \(id)")
     }
+    
+    tableView.deselectRow(at: indexPath, animated: true)
   }
   
 }
@@ -172,6 +179,33 @@ extension MainViewController {
 }
 
 extension MainViewController: TKUIRoutingResultsViewControllerDelegate {
+}
+
+// MARK: - Home
+
+extension MainViewController {
+  
+  func showHome() {
+    let homeController = TKUIHomeViewController()
+    homeController.autocompletionDataProviders = [
+      TKAppleGeocoder(),
+      TKSkedGoGeocoder(),
+      InMemoryFavoriteManager.shared
+//      InMemoryHistoryManager.shared
+    ]
+    homeController.searchResultsDelegate = self
+    navigationController?.setNavigationBarHidden(true, animated: true)
+    navigationController?.pushViewController(homeController, animated: true)
+  }
+  
+}
+
+extension MainViewController: TKUIHomeCardSearchResultsDelegate {
+  
+  func homeCard(_ card: TKUIHomeCard, selected searchResult: MKAnnotation) {
+    InMemoryHistoryManager.shared.add(searchResult)
+  }
+  
 }
 
 // MARK: - Segment actions
