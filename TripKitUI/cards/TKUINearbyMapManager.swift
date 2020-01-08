@@ -27,7 +27,7 @@ public class TKUINearbyMapManager: TKUIMapManager {
   private var mapCenterPublisher = PublishSubject<CLLocationCoordinate2D>()
   
   public var mapCenter: Driver<CLLocationCoordinate2D?> {
-    mapRect.map { MKMapRectEqualToRect($0, .null) ? nil :   MKCoordinateRegion($0).center }
+    mapRect.map { MKMapRectEqualToRect($0, .null) ? nil : MKCoordinateRegion($0).center }
   }
   
   public var mapRect: Driver<MKMapRect> {

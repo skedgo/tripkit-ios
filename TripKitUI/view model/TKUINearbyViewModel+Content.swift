@@ -54,7 +54,7 @@ extension TKUINearbyViewModel {
   
   struct ViewContent {
     let locations: [TKModeCoordinate]
-    let user: CLLocation?
+    let mapCenter: CLLocationCoordinate2D
     
     var annotations: [TKModeCoordinate] {
       return locations.filter { !($0 is TKDisplayableRoute) }
@@ -68,21 +68,25 @@ extension TKUINearbyViewModel {
     
   }
   
-  static func buildNearbyLocations(limitTo mode: String?, startLocation: MKAnnotation?, mapCenter: Driver<CLLocationCoordinate2D?>, refresh: Observable<Void>, onError errorPublisher: PublishSubject<Error>) -> Observable<ViewContent>
+  static func buildNearbyLocations(limitTo mode: String?, startLocation: MKAnnotation?, mapRect: Driver<MKMapRect?>, refresh: Observable<Void>, onError errorPublisher: PublishSubject<Error>) -> Observable<ViewContent>
   {
     /// Observable combining the user's device location and locations that are nearby.
     /// This includes all nearby locations, regardless of filtering status. To get the
     /// same thing filtered, use `filteredNearby`.
     
+    let startAsRect: MKMapRect? = startLocation.flatMap {
+      let region = MKCoordinateRegion(center: $0.coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
+      return MKMapRect.forCoordinateRegion(region)
+    }
     
-    let newCoordinate = mapCenter.asObservable()
-      .startWith(startLocation?.coordinate)
+    let newCoordinate = mapRect.asObservable()
+      .startWith(startAsRect)
       .distinctUntilChanged { prev, new in
         // Only pass on if we moved at least a certain amount
         
         if prev == nil, new == nil {
           return true
-        } else if let oldCoordinate = prev, let newCoordinate = new, let distance = oldCoordinate.distance(from: newCoordinate) {
+        } else if let oldCoordinate = prev?.centerCoordinate, let newCoordinate = new?.centerCoordinate, let distance = oldCoordinate.distance(from: newCoordinate) {
           return distance < 250
         } else {
           return false
@@ -92,16 +96,18 @@ extension TKUINearbyViewModel {
     /// *All* the locations near current coordinate (either from device location
     /// or the user moving the map).
     return Observable.combineLatest(newCoordinate, refresh.startWith(()))
-      .flatMapLatest { (coordinate, _) -> Observable<[TKModeCoordinate]> in
-        guard let coordinate = coordinate else { return .empty() }
-        return TKLocationProvider.fetchLocations(center: coordinate, radius: 750, modes: mode != nil ? [mode!] : nil)
+      .flatMapLatest { (mapRect, _) -> Observable<([TKModeCoordinate], CLLocationCoordinate2D)> in
+        guard let mapRect = mapRect else { return .just( ([], .invalid) ) }
+        let radius = mapRect.length * 1.5
+        return TKLocationProvider.fetchLocations(center: mapRect.centerCoordinate, radius: radius, modes: mode != nil ? [mode!] : nil)
           .asObservable()
           .catchError { error in
             errorPublisher.onNext(error)
-            return .empty()
-        }
+            return .just([])
+          }
+          .map { ($0, mapRect.centerCoordinate) }
       }
-      .map { ViewContent(locations: $0, user: nil) }
+      .map { ViewContent(locations: $0.0, mapCenter: $0.1) }
   }
   
   static func filterNearbyContent(_ content: ViewContent, modes: Set<TKModeInfo>?, limitTo mode: String?, focusOn annotation: MKAnnotation?) -> ViewContent {
@@ -109,7 +115,7 @@ extension TKUINearbyViewModel {
       let byFocus = content.locations.filter { location in
         return location.coordinate.latitude == focus.coordinate.latitude && location.coordinate.longitude == focus.coordinate.longitude
       }
-      return ViewContent(locations: byFocus, user: content.user)
+      return ViewContent(locations: byFocus, mapCenter: content.mapCenter)
       
     } else {
       let byModes = content.locations.filter { location in
@@ -120,13 +126,11 @@ extension TKUINearbyViewModel {
           return !TKUserProfileHelper.hiddenAndMinimizedModeIdentifiers.contains( location.modeInfo.identifier ?? "")
         }
       }
-      return ViewContent(locations: byModes, user: content.user)
+      return ViewContent(locations: byModes, mapCenter: content.mapCenter)
     }
   }
   
   static func buildSections(content: ViewContent, deviceLocation: Observable<CLLocation>, deviceHeading: Observable<CLLocationDirection>) -> [Section] {
-    
-    // TODO: Review this, it's weird that we get the user location twice?!, once as a driver and once as a value.
     
     // The items also get the device location and heading so that the UI can update accordingly
     // *even if* the number of items or their sort order isn't changing.
@@ -135,10 +139,9 @@ extension TKUINearbyViewModel {
     // us to exclude elements that are `MKOverlay`, e.g., on-street parking locations. 
     var items = content.annotations.map { Item(for: $0, distanceFrom: deviceLocation, deviceHeading: deviceHeading) }
     
-    // We sorted by the input's *current* distance. We are *not* resorting as the
-    // distances change, as we rely on `filteredNearby` to then fire again.
+    // We sort by the distance to the centre of the map; might not be idea.
     items.sort {
-      if let user = content.user?.coordinate, let first = $0.modeCoordinate.coordinate.distance(from: user), let second = $1.modeCoordinate.coordinate.distance(from: user) {
+      if let first = $0.modeCoordinate.coordinate.distance(from: content.mapCenter), let second = $1.modeCoordinate.coordinate.distance(from: content.mapCenter) {
         return first < second
       } else {
         return $0.title < $1.title
@@ -150,6 +153,17 @@ extension TKUINearbyViewModel {
 }
 
 // MARK: - Helpers
+
+fileprivate extension MKMapRect {
+  var centerCoordinate: CLLocationCoordinate2D {
+    return MKMapPoint(x: midX, y: midY).coordinate
+  }
+  
+  var length: CLLocationDistance {
+    let metres = MKMetersPerMapPointAtLatitude(centerCoordinate.latitude)
+    return max(width, height) * metres
+  }
+}
 
 fileprivate extension TKUINearbyViewModel.Item {
   init(for modeCoordinate: TKModeCoordinate, distanceFrom target: Observable<CLLocation>, deviceHeading: Observable<CLLocationDirection>) {

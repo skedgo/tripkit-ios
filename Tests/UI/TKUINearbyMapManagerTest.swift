@@ -1,6 +1,6 @@
 //
-//  NearbyMapManagerTest.swift
-//  TripGoAppKitTests
+//  TKUINearbyMapManagerTest.swift
+//  TripKitTests
 //
 //  Created by Adrian Schönig on 30.04.19.
 //  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.
@@ -14,7 +14,7 @@ import RxTest
 
 @testable import TripKitUI
 
-class NearbyMapManagerTest: XCTestCase {
+class TKUINearbyMapManagerTest: XCTestCase {
   
   func testCenterFollowingUser() throws {
     let simulated = runSimulation([
@@ -88,7 +88,7 @@ class NearbyMapManagerTest: XCTestCase {
 
 // MARK: - Running the simulations
 
-extension NearbyMapManagerTest {
+extension TKUINearbyMapManagerTest {
 
   enum UserAction {
     case track(MKUserTrackingMode)

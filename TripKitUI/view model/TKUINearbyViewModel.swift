@@ -74,12 +74,13 @@ public class TKUINearbyViewModel {
     
     // Intermediary helpers
     
-    // TODO: Use mapRect directly
-    let center = mapInput.mapRect
-      .map { MKCoordinateRegion($0).center }
-      .startOptional()
-    
-    let nearby = Self.buildNearbyLocations(limitTo: mode, startLocation: startLocation, mapCenter: center, refresh: refresh, onError: errorPublisher)
+    let nearby = Self.buildNearbyLocations(
+      limitTo: mode,
+      startLocation: startLocation,
+      mapRect: mapInput.mapRect.startOptional(),
+      refresh: refresh,
+      onError: errorPublisher
+    )
     
     /// Variant of `nearby` that's filtering according to `pickedModes`
     let pickedModes = cardInput.pickedModes.asObservable()
