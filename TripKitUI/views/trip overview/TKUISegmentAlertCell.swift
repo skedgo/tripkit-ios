@@ -17,6 +17,7 @@ class TKUISegmentAlertCell: UITableViewCell {
   @IBOutlet weak var iconView: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var subtitleLabel: UILabel!
+  @IBOutlet weak var chevronView: UIImageView!
   
   static let nib = UINib(nibName: "TKUISegmentAlertCell", bundle: Bundle(for: TKUISegmentAlertCell.self))
   
@@ -25,16 +26,33 @@ class TKUISegmentAlertCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    backgroundColor = .tkBackground
+
+    // Same styling as in TKUIServiceHeaderView
     contentWrapper.layer.borderWidth = 1.0
-    contentWrapper.layer.borderColor = #colorLiteral(red: 0.7490196078, green: 0.8509803922, blue: 0.9921568627, alpha: 1)
     contentWrapper.layer.cornerRadius = 6.0
-    contentWrapper.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0.9607843137, blue: 0.9921568627, alpha: 1)
+    if #available(iOS 13.0, *) {
+      contentWrapper.backgroundColor = UIColor { _ in UIColor.tkStateWarning.withAlphaComponent(0.12) }
+      contentWrapper.layer.borderColor = UIColor { traits in
+        switch traits.userInterfaceStyle {
+        case .dark: return UIColor.tkStateWarning.withAlphaComponent(0.3)
+        default:    return UIColor.tkStateWarning.withAlphaComponent(0.6)
+        }
+      }.cgColor
+
+    } else {
+      contentWrapper.backgroundColor = UIColor.tkStateWarning.withAlphaComponent(0.12)
+      contentWrapper.layer.borderColor = UIColor.tkStateWarning.withAlphaComponent(0.6).cgColor
+    }
     
-    titleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    titleLabel.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+    iconView.tintColor = .tkStateWarning
+    chevronView.tintColor = .tkLabelPrimary
     
-    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    subtitleLabel.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+    titleLabel.textColor = .tkLabelPrimary
+    
+//    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+//    subtitleLabel.textColor = .tkLabelPrimary
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,7 +61,7 @@ class TKUISegmentAlertCell: UITableViewCell {
   
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     UIView.animate(withDuration: animated ? 0.25 : 0) {
-      self.contentWrapper.backgroundColor = highlighted ? #colorLiteral(red: 0.05987539297, green: 0.5114932569, blue: 0.8331292794, alpha: 0.5) : #colorLiteral(red: 0.9294117647, green: 0.9607843137, blue: 0.9921568627, alpha: 1)
+      self.contentWrapper.alpha = highlighted ? 0.3 : 1
     }
   }
     
@@ -56,18 +74,9 @@ extension TKUISegmentAlertCell {
     line.backgroundColor = item.connection?.color
     line.isHidden = !hasLine
     
-    iconView.image = item.icon ?? item.defaultIcon
-    titleLabel.text = item.title ?? item.defaultTitle
-    subtitleLabel.text = item.subtitle ?? item.defaultSubtitle
+    iconView.tintColor = item.isCritical ? .tkStateError : .tkStateWarning
+    titleLabel.text = item.title
+//    subtitleLabel.text = item.subtitles.joined("\n")
   }
   
 }
-
-extension TKUITripOverviewViewModel.AlertItem {
-  
-  var defaultIcon: UIImage? { TKInfoIcon.image(for: .warning, usage: .normal) }
-  var defaultTitle: String { Loc.Information }
-  var defaultSubtitle: String? { alerts.count == 1 ? nil : Loc.Alerts(alerts.count) }
-  
-}
-

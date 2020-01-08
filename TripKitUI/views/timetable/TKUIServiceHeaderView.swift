@@ -28,12 +28,19 @@ class TKUIServiceHeaderView: UIView {
   @IBOutlet weak var alertImageView: UIImageView!
   @IBOutlet weak var alertTitleLabel: UILabel!
   @IBOutlet weak var alertBodyLabel: UILabel!
-  @IBOutlet weak var alertMoreButton: UIButton!
+  @IBOutlet weak var alertChevronView: UIImageView!
   
   @IBOutlet weak var expandyButton: UIButton!
   @IBOutlet weak var separator: UIView!
   
   private var disposeBag = DisposeBag()
+  private let alertTapper = UITapGestureRecognizer()
+  
+  var alertTapped: Observable<Void> {
+    alertTapper.rx.event
+      .filter { $0.state == .recognized }
+      .map { _ in }
+  }
   
   static func newInstance() -> TKUIServiceHeaderView {
     return Bundle(for: TKUIServiceHeaderView.self).loadNibNamed("TKUIServiceHeaderView", owner: self, options: nil)?.first as! TKUIServiceHeaderView
@@ -42,6 +49,8 @@ class TKUIServiceHeaderView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    alertWrapper.addGestureRecognizer(alertTapper)
+    
     backgroundColor = .tkBackground
     
     accessibilityTitleLabel.textColor = .tkLabelPrimary
@@ -49,9 +58,27 @@ class TKUIServiceHeaderView: UIView {
     occupancyLabel.textColor = .tkLabelPrimary
     occupancyUpdatedLabel.textColor = .tkLabelSecondary
 
+    // Same styling as in TKUISegmentAlertCell
+    alertWrapper.layer.borderWidth = 1.0
+    alertWrapper.layer.cornerRadius = 6.0
+    if #available(iOS 13.0, *) {
+      alertWrapper.backgroundColor = UIColor { _ in UIColor.tkStateWarning.withAlphaComponent(0.12) }
+      alertWrapper.layer.borderColor = UIColor { traits in
+        switch traits.userInterfaceStyle {
+        case .dark: return UIColor.tkStateWarning.withAlphaComponent(0.3)
+        default:    return UIColor.tkStateWarning.withAlphaComponent(0.6)
+        }
+      }.cgColor
+
+    } else {
+      alertWrapper.backgroundColor = UIColor.tkStateWarning.withAlphaComponent(0.12)
+      alertWrapper.layer.borderColor = UIColor.tkStateWarning.withAlphaComponent(0.6).cgColor
+    }
+    
+    alertImageView.tintColor = .tkStateWarning
     alertTitleLabel.textColor = .tkLabelPrimary
     alertBodyLabel.textColor = .tkLabelPrimary
-    alertMoreButton.setTitle(Loc.Show, for: .normal)
+    alertChevronView.tintColor = .tkLabelPrimary
     
     expandyButton.setImage(TGCard.arrowButtonImage(direction: .up, background: tintColor.withAlphaComponent(0.12), arrow: tintColor), for: .normal)
     expandyButton.setTitle(nil, for: .normal)
@@ -76,7 +103,7 @@ class TKUIServiceHeaderView: UIView {
     if let sampleAlert = alerts.first {
       alertWrapper.isHidden = false
 
-      alertImageView.image = sampleAlert.icon
+      alertImageView.tintColor = sampleAlert.isCritical() ? .tkStateError : .tkStateWarning
       alertTitleLabel.text = alerts.count > 1
         ? Loc.Alerts(alerts.count)
         : sampleAlert.title ?? Loc.Alert

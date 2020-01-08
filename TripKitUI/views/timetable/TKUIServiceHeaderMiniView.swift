@@ -49,10 +49,13 @@ class TKUIServiceHeaderMiniView: UIView {
   
   private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<[[TKAPI.VehicleOccupancy]]>? = nil) {
     
-    let alert = alerts.first
-    alertImageView.isHidden = alert == nil
-    alertImageView.image = alert?.icon
-    alertImageView.accessibilityLabel = alert?.title ?? Loc.Alert
+    if let sampleAlert = alerts.first {
+      alertImageView.isHidden = false
+      alertImageView.tintColor = sampleAlert.isCritical() ? .tkStateError : .tkStateWarning
+      alertImageView.accessibilityLabel = sampleAlert.title ?? Loc.Alert
+    } else {
+      alertImageView.isHidden = true
+    }
 
     occupancyImageView.isHidden = true
     occupancies?

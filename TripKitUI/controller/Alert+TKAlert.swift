@@ -9,30 +9,9 @@
 import Foundation
 
 extension Alert: TKAlert {
-  public var infoURL: URL? {
-    if let url = url {
-      return URL(string: url)
-    } else {
-      return nil
-    }
-  }
-  
-  public var icon: TKImage? {
-    return TKInfoIcon.image(for: infoIconType, usage: .normal)
-  }
-  
-  public var iconURL: URL? {
-    return imageURL
-  }
-  
-  public var lastUpdated: Date? {
-    return nil
-  }
-  
-  public func isCritical() -> Bool {
-    switch alertSeverity {
-    case .alert: return true
-    default: return false
-    }
-  }
+  public var infoURL: URL? { url.flatMap(URL.init) }
+  public var icon: TKImage? { TKInfoIcon.image(for: infoIconType, usage: .normal) }
+  public var iconURL: URL? { imageURL }
+  public var lastUpdated: Date? { nil }
+  public func isCritical() -> Bool { alertSeverity == .alert }
 }

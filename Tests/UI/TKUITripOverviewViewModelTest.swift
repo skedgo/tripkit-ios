@@ -152,11 +152,9 @@ extension Array where Element == TKUITripOverviewViewModel.Section.Item {
   var subtitles: [String] {
     compactMap { item -> String? in
       switch item {
-      case .moving: return nil
+      case .moving, .alert, .impossible: return nil
       case .stationary(let item): return item.subtitle
       case .terminal(let item): return item.subtitle
-      case .alert(let title): return title.subtitle
-      case .impossible: return nil
       }
     }
   }

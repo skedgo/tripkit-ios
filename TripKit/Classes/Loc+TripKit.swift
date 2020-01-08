@@ -290,10 +290,6 @@ extension Loc {
     return String(format: format, appName)
   }
   
-  public static var Information: String {
-    return NSLocalizedString("Information", tableName: "TripKit", bundle: .tripKit, comment: "")
-  }
-
   public static func Alerts(_ count: Int) -> String {
     if count == 1 {
       return NSLocalizedString("1 alert", tableName: "TripKit", bundle: .tripKit, comment: "Number of alerts, in this case, there is just one")

@@ -93,11 +93,11 @@ extension TKUITripOverviewViewModel {
       return lhs.segment.alerts() == rhs.segment.alerts()
     }
     
-    let icon: UIImage?
-    let title: String?
-    let subtitle: String?
+    var isCritical: Bool { alerts.first?.isCritical() ?? false }
+    var title: String { Loc.Alerts(alerts.count) }
+    var subtitles: [String] { alerts.compactMap { $0.title } }
     
-    let connection: Line?
+    var connection: Line? = nil
     
     var alerts: [Alert] { segment.alerts() }
     
@@ -314,7 +314,7 @@ fileprivate extension TKSegment {
   }
   
   func toAlert() -> TKUITripOverviewViewModel.AlertItem {
-    return TKUITripOverviewViewModel.AlertItem(icon: nil, title: nil, subtitle: nil, connection: line, segment: self)
+    return TKUITripOverviewViewModel.AlertItem(connection: line, segment: self)
   }
   
   func toMoving() -> TKUITripOverviewViewModel.MovingItem {

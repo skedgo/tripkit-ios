@@ -4041,6 +4041,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=250 -Xfrontend -warn-long-function-bodies=250";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.buzzhives.TripKitUI-iOS";
 				PRODUCT_NAME = TripKitUI;
 				SKIP_INSTALL = YES;
@@ -4097,6 +4098,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=250 -Xfrontend -warn-long-function-bodies=250";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.buzzhives.TripKitInterApp-iOS";
 				PRODUCT_NAME = TripKitInterApp;
 				SKIP_INSTALL = YES;
@@ -4192,7 +4194,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=250 -Xfrontend -warn-long-function-bodies=250";
 				PRODUCT_NAME = TripKit;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -4257,7 +4258,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=250 -Xfrontend -warn-long-function-bodies=250";
 				PRODUCT_NAME = TripKit;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
@@ -4287,6 +4287,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=250 -Xfrontend -warn-long-function-bodies=250";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.buzzhives.TripKit-iOS";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
