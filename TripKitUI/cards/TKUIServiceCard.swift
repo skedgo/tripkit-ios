@@ -189,7 +189,7 @@ extension TKUIServiceCard: UITableViewDelegate {
         })
         .disposed(by: disposeBag)
       
-      header.alertMoreButton.rx.tap
+      header.alertTapped
         .subscribe(onNext: { [weak self] in
           self?.showAlertsPublisher.onNext(())
         })
