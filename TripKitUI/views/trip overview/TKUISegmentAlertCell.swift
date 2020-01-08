@@ -31,7 +31,7 @@ class TKUISegmentAlertCell: UITableViewCell {
     // Same styling as in TKUIServiceHeaderView
     contentWrapper.layer.borderWidth = 1.0
     contentWrapper.layer.cornerRadius = 6.0
-    if #available(iOSApplicationExtension 13.0, *) {
+    if #available(iOS 13.0, *) {
       contentWrapper.backgroundColor = UIColor { _ in UIColor.tkStateWarning.withAlphaComponent(0.12) }
       contentWrapper.layer.borderColor = UIColor { traits in
         switch traits.userInterfaceStyle {

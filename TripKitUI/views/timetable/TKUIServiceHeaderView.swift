@@ -61,7 +61,7 @@ class TKUIServiceHeaderView: UIView {
     // Same styling as in TKUISegmentAlertCell
     alertWrapper.layer.borderWidth = 1.0
     alertWrapper.layer.cornerRadius = 6.0
-    if #available(iOSApplicationExtension 13.0, *) {
+    if #available(iOS 13.0, *) {
       alertWrapper.backgroundColor = UIColor { _ in UIColor.tkStateWarning.withAlphaComponent(0.12) }
       alertWrapper.layer.borderColor = UIColor { traits in
         switch traits.userInterfaceStyle {
