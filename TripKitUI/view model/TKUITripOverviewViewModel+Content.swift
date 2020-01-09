@@ -94,11 +94,7 @@ extension TKUITripOverviewViewModel {
     }
     
     var isCritical: Bool { alerts.first?.isCritical() ?? false }
-    var title: String { Loc.Alerts(alerts.count) }
-    var subtitles: [String] { alerts.compactMap { $0.title } }
-    
     var connection: Line? = nil
-    
     var alerts: [Alert] { segment.alerts() }
     
     fileprivate let segment: TKSegment

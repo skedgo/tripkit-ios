@@ -15,9 +15,9 @@ class TKUISegmentAlertCell: UITableViewCell {
   
   @IBOutlet weak var line: UIView!
   @IBOutlet weak var iconView: UIImageView!
-  @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var subtitleLabel: UILabel!
+  @IBOutlet weak var alertCountLabel: UILabel!
   @IBOutlet weak var chevronView: UIImageView!
+  @IBOutlet weak var titlesStackView: UIStackView!
   
   static let nib = UINib(nibName: "TKUISegmentAlertCell", bundle: Bundle(for: TKUISegmentAlertCell.self))
   
@@ -48,11 +48,8 @@ class TKUISegmentAlertCell: UITableViewCell {
     iconView.tintColor = .tkStateWarning
     chevronView.tintColor = .tkLabelPrimary
     
-    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
-    titleLabel.textColor = .tkLabelPrimary
-    
-//    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
-//    subtitleLabel.textColor = .tkLabelPrimary
+    alertCountLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+    alertCountLabel.textColor = .tkLabelPrimary
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -75,8 +72,39 @@ extension TKUISegmentAlertCell {
     line.isHidden = !hasLine
     
     iconView.tintColor = item.isCritical ? .tkStateError : .tkStateWarning
-    titleLabel.text = item.title
-//    subtitleLabel.text = item.subtitles.joined("\n")
+    alertCountLabel.text = Loc.Alerts(item.alerts.count)
+    addTitles(from: item.alerts)
+  }
+  
+  private func addTitles(from alerts: [Alert]) {
+    alerts
+      .map { alert -> [UIView] in
+        // Add a separator before title
+        let separator = UIView()
+        separator.backgroundColor = .tkSeparator
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        return [separator, titleStack(for: alert)]
+      }
+      .flatMap { $0 }
+      .forEach { titlesStackView.addArrangedSubview($0) }
+  }
+  
+  private func titleStack(for alert: Alert) -> UIStackView {
+    let stack = UIStackView()
+    stack.axis = .horizontal
+    stack.alignment = .center
+    stack.distribution = .fill
+    
+    let label = UILabel()
+    label.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    label.textColor = .tkLabelPrimary
+    label.text = alert.title
+    label.numberOfLines = 2
+    label.translatesAutoresizingMaskIntoConstraints = false
+    stack.addArrangedSubview(label)
+    
+    return stack
   }
   
 }
