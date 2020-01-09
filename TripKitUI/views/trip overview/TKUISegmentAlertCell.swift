@@ -78,7 +78,7 @@ extension TKUISegmentAlertCell {
   
   private func addTitles(from alerts: [Alert]) {
     alerts
-      .map { alert -> [UIView] in
+      .flatMap { alert -> [UIView] in
         // Add a separator before title
         let separator = UIView()
         separator.backgroundColor = .tkSeparator
@@ -86,7 +86,6 @@ extension TKUISegmentAlertCell {
         separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         return [separator, titleStack(for: alert)]
       }
-      .flatMap { $0 }
       .forEach { titlesStackView.addArrangedSubview($0) }
   }
   
