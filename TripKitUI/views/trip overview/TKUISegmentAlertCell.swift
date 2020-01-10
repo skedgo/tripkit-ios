@@ -86,7 +86,13 @@ extension TKUISegmentAlertCell {
         separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         return [separator, titleStack(for: alert)]
       }
-      .forEach { titlesStackView.addArrangedSubview($0) }
+      .enumerated()
+      .forEach { index, view in
+        // We multiply by 2 here because each "title" is consisted of a
+        // preceding separator and the title label.
+        guard index < TKUITripOverviewCard.config.maximumAlertsPerSegment*2 else { return }
+        titlesStackView.addArrangedSubview(view)
+      }
   }
   
   private func titleStack(for alert: Alert) -> UIStackView {

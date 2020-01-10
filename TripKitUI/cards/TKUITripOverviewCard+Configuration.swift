@@ -64,6 +64,9 @@ public extension TKUITripOverviewCard {
     ///
     /// Called when a trip overview card gets presented.
     public var segmentActionsfactory: ((TKSegment) -> [TKUITripOverviewCardAction])?
+    
+    /// Set this to limit how many alerts are shown for a segment
+    public var maximumAlertsPerSegment: Int = 3
   }
 }
 
