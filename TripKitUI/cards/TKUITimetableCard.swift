@@ -293,7 +293,7 @@ public class TKUITimetableCard : TGTableCard {
     guard let mapManager = mapManager as? TGMapManager else { return }
     
     if case .stops(let stops) = input, let first = stops.first {
-      mapManager.zoom(to: stops, animated: animated)
+      mapManager.setCenter(first.coordinate, animated: animated)
       mapManager.mapView?.selectAnnotation(first, animated: animated)
     }
     
