@@ -24,25 +24,14 @@ public class TKUINearbyMapManager: TKUIMapManager {
   }
   
   private var mapTrackingPublisher = PublishSubject<MKUserTrackingMode>()
-  private var mapCenterPublisher = PublishSubject<CLLocationCoordinate2D>()
+  private var mapRectPublisher = PublishSubject<MKMapRect>()
   
   public var mapCenter: Driver<CLLocationCoordinate2D?> {
     mapRect.map { MKMapRectEqualToRect($0, .null) ? nil : MKCoordinateRegion($0).center }
   }
   
   public var mapRect: Driver<MKMapRect> {
-    Self
-      .buildMapCenter(tracking: mapTrackingPublisher, center: mapCenterPublisher)
-      .map { [weak self] center in
-        if let center = center, let visible = self?.mapView?.visibleMapRect {
-          var region = MKCoordinateRegion(visible)
-          region.center = center
-          return MKMapRect.forCoordinateRegion(region)
-        } else {
-          return .null
-        }
-      }
-      .asDriver(onErrorJustReturn: .null)
+    mapRectPublisher.asDriver(onErrorJustReturn: .null)
   }
   
   private var tapRecognizer = UITapGestureRecognizer()
@@ -72,15 +61,16 @@ public class TKUINearbyMapManager: TKUIMapManager {
     mapView.showsUserLocation = showCurrentLocation
     
     if let searchResult = self.searchResult {
-      mapView.userTrackingMode = .none
+      mapView.setUserTrackingMode(.none, animated: animated)
       mapView.addAnnotation(searchResult)
       zoom(to: [searchResult], animated: animated)
+    
     } else if let start = viewModel.startLocation {
-      mapView.userTrackingMode = .none
+      mapView.setUserTrackingMode(.none, animated: animated)
       zoom(to: [start], animated: animated)
 
     } else if showCurrentLocation {
-      mapView.userTrackingMode = .follow
+      mapView.setUserTrackingMode(.follow, animated: animated)
     }
 
     
@@ -185,8 +175,7 @@ extension TKUINearbyMapManager {
   public override func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
     super.mapView(mapView, regionDidChangeAnimated: animated)
 
-    guard let center = centerCoordinate else { return }
-    mapCenterPublisher.onNext(center)
+    mapRectPublisher.onNext(mapView.visibleMapRect)
   }
   
   public override func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
