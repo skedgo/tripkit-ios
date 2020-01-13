@@ -204,6 +204,5 @@ public class TKUIAlertViewController: UITableViewController {
 @objc public protocol TKUIAlertViewControllerDelegate {
   
   @objc optional func alertViewController(_ controller: TKUIAlertViewController, didSelectAlert alert: TKAlert)
-  @objc optional func alertViewController(_ controller: TKUIAlertViewController, didTapOnURL url: URL)
   
 }
