@@ -43,13 +43,13 @@ public class TKUIHomeCard: TGTableCard {
   
   private let searchBar = UISearchBar()
   
-  init() {
+  init(initialPosition: TGCardPosition? = nil) {
     let mapManager = TKUINearbyMapManager()
     self.nearbyMapManager = mapManager
     
     // Home card requires a custom title view that includes
     // a search bar only.
-    super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager, initialPosition: .peaking)
+    super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager, initialPosition: initialPosition ?? .peaking)
     
     searchBar.delegate = self
   }
