@@ -60,7 +60,17 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
   private let tappedToggleButton = PublishSubject<TripGroup?>()
   
-  public init(destination: MKAnnotation) {
+  /// Initializes and returns a newly allocated card showing results of routing from current
+  /// location to a specified destination. The card will be placed at the specified initial
+  /// position.
+  ///
+  /// If the initial card position is not provided to the initializer, the value specified in the
+  /// global configuration will be used. The default position is `.peaking`.
+  ///
+  /// - Parameters:
+  ///   - destination: The destination of the routing request.
+  ///   - initialPosition: The initial position at which the card is placed when it's displayed.
+  public init(destination: MKAnnotation, initialPosition: TGCardPosition? = nil) {
     self.destination = destination
     self.request = nil
     
@@ -81,7 +91,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
       title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
       style: .grouped,
       mapManager: mapManager,
-      initialPosition: Self.config.initialCardPosition
+      initialPosition: initialPosition ?? Self.config.initialCardPosition
     )
 
     didInit()
