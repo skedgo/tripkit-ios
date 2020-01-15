@@ -45,16 +45,16 @@ public class TKUIRoutingResultsViewModel {
     droppedPin: Signal<CLLocationCoordinate2D>  // => call dropPin()
   )
   
-  public convenience init(destination: MKAnnotation, inputs: UIInput, mapInput: MapInput) {
+  public convenience init(destination: MKAnnotation, limitTo modes: [String]? = nil, inputs: UIInput, mapInput: MapInput) {
     let builder = RouteBuilder(destination: destination)
-    self.init(builder: builder, inputs: inputs, mapInput: mapInput)
+    self.init(builder: builder, limitTo: modes, inputs: inputs, mapInput: mapInput)
   }
   
-  public convenience init(request: TripRequest, inputs: UIInput, mapInput: MapInput) {
-    self.init(builder: request.builder, initialRequest: request, inputs: inputs, mapInput: mapInput)
+  public convenience init(request: TripRequest, limitTo modes: [String]? = nil, inputs: UIInput, mapInput: MapInput) {
+    self.init(builder: request.builder, initialRequest: request, limitTo: modes, inputs: inputs, mapInput: mapInput)
   }
   
-  private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, inputs: UIInput, mapInput: MapInput) {
+  private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, limitTo modes: [String]? = nil, inputs: UIInput, mapInput: MapInput) {
     let builderChangedWithID = TKUIRoutingResultsViewModel.watch(builder, inputs: inputs, mapInput: mapInput)
       .share(replay: 1, scope: .forever)
 
@@ -107,7 +107,7 @@ public class TKUIRoutingResultsViewModel {
       progress = .just(.finished)
     } else {
       progress = TKUIRoutingResultsViewModel
-        .fetch(for: updateableRequest, errorPublisher: errorPublisher)
+        .fetch(for: updateableRequest, limitTo: modes, errorPublisher: errorPublisher)
         .asDriver(onErrorDriveWith: .empty())
     }
     fetchProgress = progress

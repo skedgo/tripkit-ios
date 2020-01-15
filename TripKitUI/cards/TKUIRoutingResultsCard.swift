@@ -60,13 +60,20 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
   private let tappedToggleButton = PublishSubject<TripGroup?>()
   
-  public init(destination: MKAnnotation, initialPosition: TGCardPosition? = nil) {
+  public init(destination: MKAnnotation) {
     self.destination = destination
     self.request = nil
     
     let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(destination)
     
     let resultsTitle = TKUIResultsTitleView.newInstance()
+    
+    // We hide the "Transport" button if a list of transport modes
+    // is provided in the configuration.
+    if Self.config.limitToModes != nil {
+      accessoryView.hideTransportButton()
+    }
+    
     resultsTitle.accessoryView = accessoryView
     self.titleView = resultsTitle
     
@@ -74,7 +81,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
       title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
       style: .grouped,
       mapManager: mapManager,
-      initialPosition: initialPosition
+      initialPosition: Self.config.initialCardPosition
     )
 
     didInit()
@@ -87,6 +94,13 @@ public class TKUIRoutingResultsCard: TGTableCard {
     let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(request.toLocation)
     
     let resultsTitle = TKUIResultsTitleView.newInstance()
+    
+    // We hide the "Transport" button if a list of transport modes
+    // is provided in the configuration.
+    if Self.config.limitToModes != nil {
+      accessoryView.hideTransportButton()
+    }
+    
     resultsTitle.accessoryView = accessoryView
     self.titleView = resultsTitle
     
@@ -159,9 +173,9 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     let viewModel: TKUIRoutingResultsViewModel
     if let destination = self.destination {
-      viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: inputs, mapInput: mapInput)
+      viewModel = TKUIRoutingResultsViewModel(destination: destination, limitTo: Self.config.limitToModes, inputs: inputs, mapInput: mapInput)
     } else if let request = self.request {
-      viewModel = TKUIRoutingResultsViewModel(request: request, inputs: inputs, mapInput: mapInput)
+      viewModel = TKUIRoutingResultsViewModel(request: request, limitTo: Self.config.limitToModes, inputs: inputs, mapInput: mapInput)
     } else {
       preconditionFailure()
     }

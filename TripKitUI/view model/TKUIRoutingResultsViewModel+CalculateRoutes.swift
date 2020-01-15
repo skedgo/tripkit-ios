@@ -195,13 +195,13 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
 
 extension TKUIRoutingResultsViewModel {
   
-  static func fetch(for request: Observable<TripRequest>, errorPublisher: PublishSubject<Error>) -> Observable<TKResultsFetcher.Progress> {
+  static func fetch(for request: Observable<TripRequest>, limitTo modes: [String]? = nil, errorPublisher: PublishSubject<Error>) -> Observable<TKResultsFetcher.Progress> {
     return request
       .filter { $0.managedObjectContext != nil }
       .flatMapLatest { request in
         // Fetch the trip and handle errors in here, to not abort the outer observable
         return TKResultsFetcher
-          .streamTrips(for: request, classifier: TKMetricClassifier())
+          .streamTrips(for: request, modes: modes, classifier: TKMetricClassifier())
           .catchError { error in
             errorPublisher.onNext(error)
             return .just(.finished)

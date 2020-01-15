@@ -16,6 +16,7 @@ struct ExampleCustomizer {
   
   static func configureCards() {
     configureTimetableCard()
+    configureRoutingResultsCard()
   }
   
 }
@@ -23,6 +24,13 @@ struct ExampleCustomizer {
 // MARK: - Timetable cards
 
 extension ExampleCustomizer {
+  
+  private static func configureRoutingResultsCard() {
+    
+    TKUIRoutingResultsCard.config.initialCardPosition = .collapsed
+    TKUIRoutingResultsCard.config.limitToModes = ["pt_pub"]
+    
+  }
   
   private static func configureTimetableCard() {
     

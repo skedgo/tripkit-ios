@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLD-Td-WnO">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLD-Td-WnO">
                     <rect key="frame" x="16" y="0.0" width="132" height="52"/>
                     <state key="normal" title="Arriving at 9:00 am"/>
                 </button>
@@ -33,9 +33,9 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="t0Q-S8-WVt" secondAttribute="bottom" constant="8" id="0aD-sB-cuL"/>
                 <constraint firstItem="XvC-c0-UQp" firstAttribute="leading" secondItem="t0Q-S8-WVt" secondAttribute="trailing" constant="8" id="3Sp-Ot-0s0"/>
-                <constraint firstItem="XvC-c0-UQp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MLD-Td-WnO" secondAttribute="trailing" constant="8" symbolic="YES" id="5t4-Uj-ctn"/>
                 <constraint firstItem="XvC-c0-UQp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="HtY-HX-xyv"/>
                 <constraint firstAttribute="trailing" secondItem="XvC-c0-UQp" secondAttribute="trailing" constant="16" id="MBn-Md-qh0"/>
+                <constraint firstItem="t0Q-S8-WVt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MLD-Td-WnO" secondAttribute="trailing" constant="8" symbolic="YES" id="Un5-jk-zdi"/>
                 <constraint firstItem="t0Q-S8-WVt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="VXy-UB-vNM"/>
                 <constraint firstItem="MLD-Td-WnO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="j2P-qP-XPB"/>
                 <constraint firstAttribute="bottomMargin" secondItem="MLD-Td-WnO" secondAttribute="bottom" id="nzd-hp-r6C"/>

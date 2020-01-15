@@ -184,7 +184,7 @@ extension TKUIHomeCard {
     
     // We push the routing card. To replicate Apple Maps, we put
     // the routing card at the peaking position when it's pushed.
-    let routingResultCard = TKUIRoutingResultsCard(destination: destination, initialPosition: .peaking)
+    let routingResultCard = TKUIRoutingResultsCard(destination: destination)
     controller?.push(routingResultCard)
     
     searchResultDelegate?.homeCard(self, selected: destination)
