@@ -60,6 +60,16 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
   private let tappedToggleButton = PublishSubject<TripGroup?>()
   
+  /// Initializes and returns a newly allocated card showing results of routing from current
+  /// location to a specified destination. The card will be placed at the specified initial
+  /// position.
+  ///
+  /// If the initial card position is not provided to the initializer, the value specified in the
+  /// global configuration will be used. The default position is `.peaking`.
+  ///
+  /// - Parameters:
+  ///   - destination: The destination of the routing request.
+  ///   - initialPosition: The initial position at which the card is placed when it's displayed.
   public init(destination: MKAnnotation, initialPosition: TGCardPosition? = nil) {
     self.destination = destination
     self.request = nil
@@ -67,6 +77,13 @@ public class TKUIRoutingResultsCard: TGTableCard {
     let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(destination)
     
     let resultsTitle = TKUIResultsTitleView.newInstance()
+    
+    // We hide the "Transport" button if a list of transport modes
+    // is provided in the configuration.
+    if Self.config.limitToModes != nil {
+      accessoryView.hideTransportButton()
+    }
+    
     resultsTitle.accessoryView = accessoryView
     self.titleView = resultsTitle
     
@@ -74,7 +91,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
       title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
       style: .grouped,
       mapManager: mapManager,
-      initialPosition: initialPosition
+      initialPosition: initialPosition ?? Self.config.initialCardPosition
     )
 
     didInit()
@@ -87,6 +104,13 @@ public class TKUIRoutingResultsCard: TGTableCard {
     let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(request.toLocation)
     
     let resultsTitle = TKUIResultsTitleView.newInstance()
+    
+    // We hide the "Transport" button if a list of transport modes
+    // is provided in the configuration.
+    if Self.config.limitToModes != nil {
+      accessoryView.hideTransportButton()
+    }
+    
     resultsTitle.accessoryView = accessoryView
     self.titleView = resultsTitle
     
@@ -159,9 +183,9 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     let viewModel: TKUIRoutingResultsViewModel
     if let destination = self.destination {
-      viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: inputs, mapInput: mapInput)
+      viewModel = TKUIRoutingResultsViewModel(destination: destination, limitTo: Self.config.limitToModes, inputs: inputs, mapInput: mapInput)
     } else if let request = self.request {
-      viewModel = TKUIRoutingResultsViewModel(request: request, inputs: inputs, mapInput: mapInput)
+      viewModel = TKUIRoutingResultsViewModel(request: request, limitTo: Self.config.limitToModes, inputs: inputs, mapInput: mapInput)
     } else {
       preconditionFailure()
     }

@@ -21,7 +21,11 @@ public class TKUIHomeViewController: TGCardViewController {
   
   public var autocompletionDataProviders: [TKAutocompleting]?
   
-  public init() {
+  public var initialPosition: TGCardPosition?
+  
+  public init(initialPosition: TGCardPosition? = nil) {
+    self.initialPosition = initialPosition
+    
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
   }
   
@@ -43,7 +47,7 @@ public class TKUIHomeViewController: TGCardViewController {
     
     TKUIHomeCard.config.autocompletionDataProviders = autocompletionDataProviders
     
-    let homeCard = TKUIHomeCard()
+    let homeCard = TKUIHomeCard(initialPosition: initialPosition)
     homeCard.searchResultDelegate = searchResultsDelegate
     rootCard = homeCard
     

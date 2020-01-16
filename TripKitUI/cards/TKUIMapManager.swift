@@ -170,6 +170,10 @@ open class TKUIMapManager: TGMapManager {
     mapView.addAnnotations(animatedAnnotations)
     mapView.addAnnotations(dynamicAnnotations)
     
+    if #available(iOS 13.0, *) {
+      mapView.pointOfInterestFilter = MKPointOfInterestFilter(excluding: [.publicTransport])
+    }
+    
     // Fetching and updating polygons which can be slow
     if let _ = self.overlayPolygon {
       addOverlay()

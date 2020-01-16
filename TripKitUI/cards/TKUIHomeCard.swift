@@ -43,13 +43,13 @@ public class TKUIHomeCard: TGTableCard {
   
   private let searchBar = UISearchBar()
   
-  init() {
+  init(initialPosition: TGCardPosition? = nil) {
     let mapManager = TKUINearbyMapManager()
     self.nearbyMapManager = mapManager
     
     // Home card requires a custom title view that includes
     // a search bar only.
-    super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager, initialPosition: .peaking)
+    super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager, initialPosition: initialPosition ?? .peaking)
     
     searchBar.delegate = self
   }
@@ -184,7 +184,7 @@ extension TKUIHomeCard {
     
     // We push the routing card. To replicate Apple Maps, we put
     // the routing card at the peaking position when it's pushed.
-    let routingResultCard = TKUIRoutingResultsCard(destination: destination, initialPosition: .peaking)
+    let routingResultCard = TKUIRoutingResultsCard(destination: destination)
     controller?.push(routingResultCard)
     
     searchResultDelegate?.homeCard(self, selected: destination)

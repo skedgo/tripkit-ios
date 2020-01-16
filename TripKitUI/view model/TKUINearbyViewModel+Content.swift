@@ -79,27 +79,31 @@ extension TKUINearbyViewModel {
       return MKMapRect.forCoordinateRegion(region)
     }
     
-    let newCoordinate = mapRect.asObservable()
+    let newRect = mapRect.asObservable()
       .startWith(startAsRect)
-      .distinctUntilChanged { prev, new in
-        // Only pass on if we moved at least a certain amount
+      .scan(startAsRect) { good, candidate in
+        guard let prev = good, let new = candidate else { return good ?? candidate }
         
-        if prev == nil, new == nil {
-          return true
-        } else if let oldCoordinate = prev?.centerCoordinate, let newCoordinate = new?.centerCoordinate, let distance = oldCoordinate.distance(from: newCoordinate) {
-          return distance < 250
+        if let distance = prev.centerCoordinate.distance(from: new.centerCoordinate), distance > 250 {
+          return new // we moved far enough
+        } else if abs(prev.length - new.length) > 500 {
+          return new // zoomed in our out
         } else {
-          return false
+          return prev
         }
+      }
+      .distinctUntilChanged {
+        guard let old = $0, let new = $1 else { return false }
+        return MKMapRectEqualToRect(old, new)
       }
     
     /// *All* the locations near current coordinate (either from device location
     /// or the user moving the map).
-    return Observable.combineLatest(newCoordinate, refresh.startWith(()))
+    return Observable.combineLatest(newRect, refresh.startWith(()))
       .flatMapLatest { (mapRect, _) -> Observable<([TKModeCoordinate], CLLocationCoordinate2D)> in
         guard let mapRect = mapRect else { return .just( ([], .invalid) ) }
         let radius = mapRect.length * 1.5
-        return TKLocationProvider.fetchLocations(center: mapRect.centerCoordinate, radius: radius, modes: mode != nil ? [mode!] : nil)
+        return TKLocationProvider.fetchLocations(center: mapRect.centerCoordinate, radius: radius, modes: mode.flatMap { [$0] })
           .asObservable()
           .catchError { error in
             errorPublisher.onNext(error)

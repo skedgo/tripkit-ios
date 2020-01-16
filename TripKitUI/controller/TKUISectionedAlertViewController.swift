@@ -115,7 +115,6 @@ public class TKUISectionedAlertViewController: UIViewController {
   private func didSelect(_ alertItem: TKUISectionedAlertViewModel.Item) {
     let controller = TKUIAlertViewController(style: .plain)
     controller.alerts = alertItem.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0) }
-    controller.alertControllerDelegate = self
     navigationController?.setNavigationBarHidden(false, animated: true)
     navigationController?.pushViewController(controller, animated: true)
   }
@@ -189,16 +188,6 @@ extension TKUISectionedAlertViewController: UITableViewDelegate {
   public func scrollViewDidScroll(_ scrollView: UIScrollView) {
     // As soon as user starts to scroll, dismiss keyboard.
     searchBar.resignFirstResponder()
-  }
-  
-}
-
-// MARK: -
-extension TKUISectionedAlertViewController: TKUIAlertViewControllerDelegate {
-  
-  public func alertViewController(_ controller: TKUIAlertViewController, didTapOnURL url: URL) {
-    let browser = SFSafariViewController(url: url)
-    present(browser, animated: true)
   }
   
 }

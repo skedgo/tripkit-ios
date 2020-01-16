@@ -42,5 +42,10 @@ class TKUIResultsAccessoryView: UIView {
     transportButton.setImage(.iconChevronDown, for: .normal)
     transportButton.switchImageToOtherSide()
   }
-
+  
+  func hideTransportButton() {
+    transportButton.isHidden = true
+    separator.isHidden = true
+  }
+  
 }
