@@ -166,17 +166,15 @@ public class TKUIHomeCard: TGTableCard {
 extension TKUIHomeCard {
   
   private func prepareForNewCard() {
-    // In Apple Maps, when we select a result without typing anything
-    // in the search bar, i.e., pick from history or favourite, the
-    // home card is returned to the peak position when the new card is
-    // popped. This is replicating such UX behaviour.
+    searchBar.resignFirstResponder()
+    
     guard let text = searchBar.text, text.isEmpty else { return }
     
-    // Also replicating Apple Maps, when the new card is dismissed,
-    // the home card is moved back to the peak position. This must
-    // be done before the new card is pushed, as the TGCardVC notes
-    // the position of a card before a new one is pushed.
-    self.controller?.moveCard(to: .peaking, animated: true)
+    // If a user selects a result without typing anything in the search
+    // bar, i.e., from past searches or favorites, we put the home card
+    // back to its initial position, if provided, when it appears again
+    // . This is replicating a UX flow observed in Apple Maps.
+    self.controller?.moveCard(to: initialPosition ?? .peaking, animated: true)
   }
   
   private func showRoutes(to destination: MKAnnotation) {
@@ -248,7 +246,7 @@ extension TKUIHomeCard: UISearchBarDelegate {
   
   public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     clearSearchBar()
-    controller?.moveCard(to: .peaking, animated: true)
+    controller?.moveCard(to: initialPosition ?? .peaking, animated: true)
   }
   
   public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
