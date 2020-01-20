@@ -174,7 +174,7 @@ extension TKUIHomeCard {
     // bar, i.e., from past searches or favorites, we put the home card
     // back to its initial position, if provided, when it appears again
     // . This is replicating a UX flow observed in Apple Maps.
-    self.controller?.moveCard(to: initialPosition ?? .peaking, animated: true)
+    self.controller?.moveCard(to: initialPosition ?? .peaking, animated: false)
   }
   
   private func showRoutes(to destination: MKAnnotation) {
