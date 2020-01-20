@@ -102,15 +102,11 @@ extension TripRequest {
       return ""
     
     case .leaveAfter:
-      let prefix = NSLocalizedString("Leave", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Prefix for selected 'leave after' time")
-      return timeString(prefix: prefix, time: time, in: timeZone)
-      
+      return timeString(prefix: Loc.LeaveAt, time: time, in: timeZone)
+
     case .arriveBefore:
-      let prefix = NSLocalizedString("Arrive", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Prefix for selected 'arrive by' time")
-      return timeString(prefix: prefix, time: time, in: timeZone)
-      
+      return timeString(prefix: Loc.ArriveBy, time: time, in: timeZone)
     }
-    
   }
   
   private static func timeString(prefix: String, time: Date?, in timeZone: TimeZone?) -> String {

@@ -156,8 +156,7 @@ extension Loc {
   
   @objc(ArriveAtDate:)
   public static func ArriveAt(date: String) -> String {
-    let format = NSLocalizedString("Arrive at %@", tableName: "TripKit", bundle: .tripKit, comment: "'%@' will be replaced with the arrival time. (old key: ArrivalTime)")
-    return String(format: format, date)
+    return ArriveAtLocation(nil, at: date)
   }
   
   @objc(FromLocation:)

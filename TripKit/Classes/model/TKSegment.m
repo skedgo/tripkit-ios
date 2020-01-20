@@ -960,7 +960,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 		} else if ([self isStationary] || [self isContinuation]) {
 			NSString *departure = [self departureLocation];
 			if (departure.length > 0) {
-				_primaryLocationString = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"At %@", @"TripKit", [TKTripKit bundle], "'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary)"), departure];
+				_primaryLocationString = departure;
 			}
 		} else if ([self isPublicTransport]) {
 			NSString *departure = [self departureLocation];
