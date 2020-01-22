@@ -165,50 +165,57 @@ public class TKUIHomeCard: TGTableCard {
 
 extension TKUIHomeCard {
   
-  private func prepareForNewCard() {
+  private func prepareForNewCard(onCompletion handler: (() -> Void)? = nil) {
     searchBar.resignFirstResponder()
     
-    guard let text = searchBar.text, text.isEmpty else { return }
+    guard let text = searchBar.text, text.isEmpty else {
+      handler?()
+      return
+    }
     
     // If a user selects a result without typing anything in the search
     // bar, i.e., from past searches or favorites, we put the home card
     // back to its initial position, if provided, when it appears again
     // . This is replicating a UX flow observed in Apple Maps.
-    self.controller?.moveCard(to: initialPosition ?? .peaking, animated: false)
+    self.controller?.moveCard(to: initialPosition ?? .peaking, animated: false, onCompletion: handler)
   }
   
   private func showRoutes(to destination: MKAnnotation) {
-    prepareForNewCard()
-    
-    // We push the routing card. To replicate Apple Maps, we put
-    // the routing card at the peaking position when it's pushed.
-    let routingResultCard = TKUIRoutingResultsCard(destination: destination)
-    controller?.push(routingResultCard)
-    
-    searchResultDelegate?.homeCard(self, selected: destination)
+    prepareForNewCard { [weak self] in
+      guard let self = self else { return }
+      
+      // We push the routing card. To replicate Apple Maps, we put
+      // the routing card at the peaking position when it's pushed.
+      let routingResultCard = TKUIRoutingResultsCard(destination: destination)
+      self.controller?.push(routingResultCard)
+      
+      self.searchResultDelegate?.homeCard(self, selected: destination)
+    }
   }
   
   private func showTimetable(for annotation: MKAnnotation) {
     guard let stop = annotation as? TKUIStopAnnotation else { return }
     
-    prepareForNewCard()
-    
-    // We push the timetable card. To replicate Apple Maps, we put
-    // the timetable card at the peaking position when it's pushed.
-    let timetableCard = TKUITimetableCard(stops: [stop], reusing: (mapManager as? TKUIMapManager), initialPosition: .peaking)
-    if controller?.topCard is TKUITimetableCard {
-      // If we are already showing a timetable card,
-      // instead of pushing another one, we swap it
-      controller?.swap(for: timetableCard, animated: true)
-    } else {
-      controller?.push(timetableCard)
+    prepareForNewCard { [weak self] in
+      guard let self = self else { return }
+      
+      // We push the timetable card. To replicate Apple Maps, we put
+      // the timetable card at the peaking position when it's pushed.
+      let timetableCard = TKUITimetableCard(stops: [stop], reusing: (self.mapManager as? TKUIMapManager), initialPosition: .peaking)
+      if self.controller?.topCard is TKUITimetableCard {
+        // If we are already showing a timetable card,
+        // instead of pushing another one, we swap it
+        self.controller?.swap(for: timetableCard, animated: true)
+      } else {
+        self.controller?.push(timetableCard)
+      }
+      
+      self.searchResultDelegate?.homeCard(self, selected: stop)
+      
+      // This removes nearby annotations and leaves only the stop
+      // visible on the map.
+      self.focusedAnnotationPublisher.onNext(stop)
     }
-    
-    searchResultDelegate?.homeCard(self, selected: stop)
-    
-    // This removes nearby annotations and leaves only the stop
-    // visible on the map.
-    focusedAnnotationPublisher.onNext(stop)
   }
   
   private func handleTap(on location: TKModeCoordinate) {
