@@ -53,6 +53,8 @@ class TKUIRoutingQueryInputTitleView: UIView {
       TKStyleManager.style(searchBar) { textField in
         // This is to remove the space occupied by the magnifying glass.
         textField.leftView = UIImageView()
+        textField.tintColor = .tkLabelPrimary
+        textField.textColor = .tkLabelPrimary
       }
     }
     
