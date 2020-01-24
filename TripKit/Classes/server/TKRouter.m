@@ -81,7 +81,15 @@
   }
   
   NSSet *groupedIdentifiers;
-  if ([self.additionalParameters containsObject:[[NSURLQueryItem alloc] initWithName:@"allModes" value:@"true"]]) {
+  BOOL includesAllModes = NO;
+  for (NSURLQueryItem *item in self.additionalParameters) {
+    if ([item.name isEqualToString:@"allModes"]) {
+      includesAllModes = YES;
+      break;
+    }
+  }
+  
+  if (includesAllModes) {
     groupedIdentifiers = [NSSet setWithObject:[NSSet setWithArray:enabledModes]];
   } else {
     groupedIdentifiers = [TKTransportModes groupedModeIdentifiers:enabledModes includeGroupForAll:YES];
