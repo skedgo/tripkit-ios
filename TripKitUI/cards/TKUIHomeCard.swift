@@ -95,6 +95,8 @@ public class TKUIHomeCard: TGTableCard {
   public override func didBuild(tableView: UITableView, headerView: TGHeaderView?) {
     super.didBuild(tableView: tableView, headerView: headerView)
     
+    requestLocationServicesIfNeeded()
+    
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIHomeViewModel.Section>(
       configureCell: { [weak self] _, tv, ip, item in
         guard let self = self else {
@@ -157,6 +159,24 @@ public class TKUIHomeCard: TGTableCard {
     viewModel.nextFromMap
       .emit(onNext:  { [weak self] in self?.handleNextFromMap($0) })
       .disposed(by: disposeBag)
+  }
+  
+}
+
+// MARK: -
+
+extension TKUIHomeCard {
+  
+  private func requestLocationServicesIfNeeded() {
+    guard
+      Self.config.requestLocationServicesOnLoad,
+      CLLocationManager.authorizationStatus() == .notDetermined
+      else { return }
+    
+    TKLocationManager.shared.ask { (enabled) in
+      guard enabled else { return }
+      self.nearbyMapManager.mapView?.userTrackingMode = .follow
+    }
   }
   
 }
