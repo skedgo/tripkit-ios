@@ -16,6 +16,14 @@ public extension TKUIHomeCard {
     
     static let empty = Configuration()
     
+    /// Set this to indicate if permission to access location services should be
+    /// requested when the card is loaded. When setting to `true`, the map
+    /// is zoomed to a user's current location and begins displaying nearby
+    /// stops and locations.
+    ///
+    /// The default value is `true`
+    public var requestLocationServicesOnLoad: Bool = true
+    
     /// Set this to add a list of autocompletion providers to use.
     ///
     /// The default providers, if none is provided, are Apple and SkedGo geocoders.
