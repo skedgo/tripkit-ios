@@ -122,7 +122,7 @@ pages:
   script:
   - ./docs_tripkit.sh
   - ./docs_tripkitinterapp.sh
-  - ./docs_tripkit_ui.sh
+  - ./docs_tripkitui.sh
   - mkdir public
   - cp -r docs/TripKit public
   - cp -r docs/TripKitUI public
