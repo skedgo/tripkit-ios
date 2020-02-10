@@ -2,6 +2,7 @@ stages:
   - build
   - examples
   - code_quality
+  - docs
 
 variables:
   LC_ALL: "en_US.UTF-8"
@@ -128,3 +129,18 @@ code_quality:
     - docker
   artifacts:
     paths: [gl-code-quality-report.json]
+
+docs:
+  script:
+  - ./docs_tripkit.sh
+  - ./docs_tripkitinterapp.sh
+  - ./docs_tripkit_ui.sh
+  - mkdir public
+  - cp -r docs/TripKit public
+  - cp -r docs/TripKitUI public
+  - cp -r docs/TripKitInterApp public
+  artifacts:
+    paths:
+    - public
+  # only:
+  # - master
