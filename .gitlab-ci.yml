@@ -130,7 +130,8 @@ code_quality:
   artifacts:
     paths: [gl-code-quality-report.json]
 
-docs:
+pages:
+  stage: docs
   script:
   - ./docs_tripkit.sh
   - ./docs_tripkitinterapp.sh
