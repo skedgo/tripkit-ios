@@ -12,7 +12,6 @@ build_ios_base:
   script:
     - carthage bootstrap --cache-builds --platform iOS
     - xcodebuild test -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
-    - ls -lart build/reports
   retry: 1
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
@@ -21,7 +20,7 @@ build_ios_base:
       - Carthage/Checkouts
   artifacts:
     paths:
-    - build/reports/tests_ios.html
+    - build/reports/tests.html
   tags:
     - ios
 
@@ -30,15 +29,11 @@ build_ios_ui:
   script:
     - carthage bootstrap --cache-builds --platform iOS
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
-    - ls -lart build/reports
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
       - Carthage/Build
       - Carthage/Checkouts
-  artifacts:
-    paths:
-    - build/reports/build_ios_ui.html
   tags:
     - ios
 
@@ -47,15 +42,11 @@ build_ios_interapp:
   script:
     - carthage bootstrap --cache-builds --platform iOS
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
-    - ls -lart build/reports
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
       - Carthage/Build
       - Carthage/Checkouts
-  artifacts:
-    paths:
-    - build/reports/build_ios_interapp.html
   tags:
     - ios
 
@@ -68,15 +59,11 @@ build_mac_base:
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKit-macOS" | xcpretty -c -r html && exit ${PIPESTATUS[0]}
     - mv Cartfile.resolved Cartfile.resolved.macos
     - mv Cartfile.resolved.ios Cartfile.resolved
-    - ls -lart build/reports
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
       - Carthage/Build
       - Carthage/Checkouts
-  artifacts:
-    paths:
-    - build/reports/build_macos.html
   tags:
     - ios
 
@@ -86,14 +73,10 @@ build_minimap_example:
     - cd Examples/MiniMap
     - pod install
     - xcodebuild build -workspace MiniMap.xcworkspace -scheme MiniMap ONLY_ACTIVE_ARCH=NO | xcpretty -c -r html && exit ${PIPESTATUS[0]}
-    - ls -lart build/reports
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
       - Examples/MiniMap/Pods
-  artifacts:
-    paths:
-    - build/reports/examples_minimap.html
   tags:
     - ios
 
@@ -103,15 +86,11 @@ build_cocoapodstest_example:
     - cd Examples/CocoaPodsTest
     - pod install
     - xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest ONLY_ACTIVE_ARCH=NO | xcpretty -c -r html && exit ${PIPESTATUS[0]}
-    - ls -lart build/reports
   retry: 1
   cache:
     key: "$CI_BUILD_REF_NAME" # per-branch caching
     paths:
       - Examples/CocoaPodsTest/Pods
-  artifacts:
-    paths:
-    - build/reports/examples_cocoapodstest.html
   tags:
     - ios
 
