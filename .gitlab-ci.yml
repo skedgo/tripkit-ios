@@ -145,6 +145,8 @@ pages:
   - cp -r docs/TripKit public
   - cp -r docs/TripKitUI public
   - cp -r docs/TripKitInterApp public
+  tags:
+    - ios
   artifacts:
     paths:
     - public
