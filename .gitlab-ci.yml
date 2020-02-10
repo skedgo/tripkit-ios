@@ -1,8 +1,7 @@
 stages:
   - build
   - examples
-  - code_quality
-  - docs
+  - deploy
 
 variables:
   LC_ALL: "en_US.UTF-8"
@@ -111,7 +110,7 @@ build_cocoapodstest_example:
     - ios
 
 code_quality:
-  stage: code_quality
+  stage: deploy
   image: docker:stable
   variables:
     DOCKER_DRIVER: overlay2
@@ -131,7 +130,7 @@ code_quality:
     paths: [gl-code-quality-report.json]
 
 pages:
-  stage: docs
+  stage: deploy
   script:
   - ./docs_tripkit.sh
   - ./docs_tripkitinterapp.sh
