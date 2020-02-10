@@ -137,6 +137,9 @@ code_quality:
 
 pages:
   stage: deploy
+  allow_failure: true
+  before_script:
+  - brew install sourcekitten
   script:
   - ./docs_tripkit.sh
   - ./docs_tripkitinterapp.sh
