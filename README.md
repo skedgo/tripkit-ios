@@ -37,11 +37,11 @@ When doing so, you'll need to add the respective dependencies:
 
 - TripKit / TripKitInterApp:
   - ASPolygonKit
-  - RxSwift
-  - RxCocoa
+  - RxSwift (+ RxCocoa + RxRelay)
 - TripKitUI:
   - Those of TripKit, plus:
   - Kingfisher
+  - RxDataSources (+ Differentiator)
   - [TGCardViewController](https://gitlab.com/SkedGo/iOS/tripgo-cards-ios)
 
 ### Manually
