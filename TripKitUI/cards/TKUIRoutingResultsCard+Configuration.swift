@@ -12,6 +12,7 @@ import TGCardViewController
 
 public extension TKUIRoutingResultsCard {
   
+  /// Enumeration used when the user taps a button to get help, see `TKUIRoutingResultsCard.Configuration.contactCustomerSupport`
   enum SupportType {
     /// User tried querying for a from/to pair that isn't supported yet
     case unsupportedQuery(TripRequest)
@@ -20,7 +21,7 @@ public extension TKUIRoutingResultsCard {
     case routingError(Error, TripRequest)
   }
   
-  /// Configurtion of any `TKUIRoutingResultsCard`.
+  /// Configuration of any `TKUIRoutingResultsCard`.
   ///
   /// This isn't created directly, but rather you modify the static instance
   /// accessible from `TKUIRoutingResultsCard.config`.

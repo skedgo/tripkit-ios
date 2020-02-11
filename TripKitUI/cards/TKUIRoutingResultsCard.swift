@@ -29,6 +29,9 @@ public protocol TKUIRoutingResultsCardDelegate: class {
   func resultsCard(_ card: TKUIRoutingResultsCard, requestsModePickerWithModes modes: [String], for region: TKRegion, sender: Any?)
 }
 
+/// An interactive card for displaying routing results, including updating from/to location, time and selected modes.
+///
+/// Can be used standalone or via `TKUIRoutingResultsViewController`.
 public class TKUIRoutingResultsCard: TGTableCard {
   
   typealias RoutingModePicker = TKUIModePicker<TKRegion.RoutingMode>

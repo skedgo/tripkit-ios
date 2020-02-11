@@ -43,7 +43,7 @@ extension TKNamedCoordinate: TKUIIdentifiableAnnotation {
 ///
 /// The following diagram illustrates the relationships:
 ///
-/// ```
+/// ```ascii
 /// ┌────────────────────────────────────────────────────────────────────┐
 /// │ TGCardViewController                                               │
 /// │ ┏━━━━━━━━━━━━━━━━━━━┓                   ╔════════════════════════╗ │
