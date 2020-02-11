@@ -27,7 +27,8 @@
       -fmodules \
       > jazzy-temp.TKObjc.json
   
+  cd docs
   jazzy \
-      --sourcekitten-sourcefile jazzy-temp.TKSwift.json,jazzy-temp.TKObjc.json \
+      --sourcekitten-sourcefile ../jazzy-temp.TKSwift.json,../jazzy-temp.TKObjc.json \
       --config docs/.tripkit.jazzy.yaml
 )

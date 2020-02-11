@@ -1,5 +1,8 @@
 author: SkedGo
 author_url: https://skedgo.com
-title: TripKitInterApp iOS
+title: SkedGo's TripKit iOS - TripKitInterApp
 theme: fullwidth
 output: TripKitInterApp
+
+module: TripKitInterApp
+podspec: ../TripKitInterApp.podspec

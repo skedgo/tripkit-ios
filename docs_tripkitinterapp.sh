@@ -4,5 +4,6 @@
 (
   sourcekitten doc -- -project TripKit.xcodeproj -scheme TripKitInterApp-iOS -sdk iphonesimulator > jazzy-temp.TKInterApp.json
 
-  jazzy --sourcekitten-sourcefile jazzy-temp.TKInterApp.json --config docs/.tripkitinterapp.jazzy.yaml
+  cd docs
+  jazzy --sourcekitten-sourcefile ../jazzy-temp.TKInterApp.json --config docs/.tripkitinterapp.jazzy.yaml
 )

@@ -16,5 +16,6 @@
 #       -fmodules \
 #       > jazzy-temp.TKUIObjc.json
   
-  jazzy --sourcekitten-sourcefile jazzy-temp.TKUISwift.json --config docs/.tripkitui.jazzy.yaml
+  cd docs
+  jazzy --sourcekitten-sourcefile ../jazzy-temp.TKUISwift.json --config .tripkitui.jazzy.yaml
 )

@@ -1,8 +1,11 @@
 author: SkedGo
 author_url: https://skedgo.com
-title: TripKitUI iOS
+title: SkedG
 theme: fullwidth
 output: TripKitUI
+
+module: TripKitUI
+podspec: ../TripKitUI.podspec
 
 custom_categories:
   - name: Trip Planning
