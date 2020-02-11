@@ -2,7 +2,7 @@
 # Bash script to update documentation
 
 (
-  sourcekitten doc -- -project TripKit.xcodeproj -scheme TripKitUI-iOS > jazzy-temp.TKUISwift.json
+  sourcekitten doc -- -project TripKit.xcodeproj -scheme TripKitUI-iOS -sdk iphonesimulator > jazzy-temp.TKUISwift.json
 
   # This isn't quite working yet
 #   sourcekitten doc --objc $(pwd)/TripKitUI/TripKitUIUmbrella.h \
