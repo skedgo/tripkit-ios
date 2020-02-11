@@ -139,6 +139,7 @@ pages:
   - cp -r docs/TripKit public
   - cp -r docs/TripKitUI public
   - cp -r docs/TripKitInterApp public
+  retry: 1
   cache:
     key:
       files:
