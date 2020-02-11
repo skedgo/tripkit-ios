@@ -30,5 +30,5 @@
   cd docs
   jazzy \
       --sourcekitten-sourcefile ../jazzy-temp.TKSwift.json,../jazzy-temp.TKObjc.json \
-      --config docs/.tripkit.jazzy.yaml
+      --config .tripkit.jazzy.yaml
 )
