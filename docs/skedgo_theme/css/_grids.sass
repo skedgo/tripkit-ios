@@ -1,0 +1,33 @@
+@media screen and (min-width: 576px)
+	.container
+		width: 540px
+
+@media screen and (min-width: 768px)
+	.container
+		width: 720px
+
+@media screen and (min-width: 992px)
+	.container
+		width: 960px
+		display: grid
+		&.-layout-3-9
+			grid-template-columns: 1fr 3fr
+		&.-layout-6-6
+			display: grid
+			grid-template-columns: 1fr 1fr
+		&.fluid
+			width: 100%
+
+@media screen and (min-width: 1200px)
+	.container
+		width: 1140px
+
+.container
+	position: relative
+	margin: 0 auto
+	grid-gap: 2rem
+	max-width: 100%
+	padding-right: 1rem
+	padding-left: 1rem
+	box-sizing: border-box
+

@@ -1,13 +1,13 @@
 author: SkedGo
 author_url: https://skedgo.com
-title: SkedGo's TripKit iOS Documentation
+title: SkedGo's TripKit iOS - TripKit
 theme: fullwidth
-output: TripKit
+output: source/TripKit
 
 module: TripKit
-podspec: TripKit.podspec
+podspec: ../TripKit.podspec
 
-abstract: docs/api/*.md
+abstract: api/*.md
 
 custom_categories:
   - name: Setup & Configuration

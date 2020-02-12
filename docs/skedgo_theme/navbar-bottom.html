@@ -1,0 +1,28 @@
+<div class="navbar-bottom" role="navigation">
+	<div class="container -layout-6-6">
+		{%- block next_prev %}
+			{%- if page and (page.next_page or page.previous_page) %}
+			    <div class="{% if not page.previous_page %}disabled {% endif %}col">
+			        <a rel="next" {% if page.previous_page %}href="{{ page.previous_page.url }}"{% endif %} class="prev">
+			            <div class="label">
+			            	Previous
+			            </div>
+			            <div class="title">
+			            	{{ page.previous_page.title }}
+			            </div>
+			        </a>
+			    </div>
+			    <div class="{% if not page.next_page %}disabled {% endif %}col">
+			        <a rel="prev" {% if page.next_page %}href="{{ page.next_page.url }}"{% endif %} class="next">
+			            <div class="label">
+			            	Next
+			            </div>
+			            <div class="title">
+			            	{{ page.next_page.title }}
+			            </div>
+			        </a>
+			    </div>
+			{%- endif %}
+		{%- endblock %}
+	</div>
+</div>

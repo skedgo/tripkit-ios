@@ -10,8 +10,13 @@ import Foundation
 
 import TGCardViewController
 
+/// This class let's you customise various aspects of TripKitUI that apply across multiple view controllers
+/// or cards. You can do this by setting the various parts of `TKUICustomization.shared`, which should
+/// be done before displaying any view controllers or cards.
 public class TKUICustomization {
   
+  /// The shared customisation singleton. Update its properties and the customisation will then be reflected
+  /// in the different view controllers and cards.
   public static let shared = TKUICustomization()
   
   private init() { }
