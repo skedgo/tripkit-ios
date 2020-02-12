@@ -126,19 +126,33 @@ code_quality:
   artifacts:
     paths: [gl-code-quality-report.json]
 
+# pages_dryrun:
+#   stage: deploy
+#   before_script:
+#   - brew install sourcekitten
+#   script:
+#   - ./docs.sh
+#   cache:
+#     key:
+#       files:
+#         - Cartfile.resolved
+#     paths:
+#       - Carthage/Build
+#       - Carthage/Checkouts
+#   tags:
+#     - ios
+#   artifacts:
+#     paths:
+#     - public
+#   except:
+#     - master
+
 pages:
   stage: deploy
-  allow_failure: true
   before_script:
   - brew install sourcekitten
   script:
-  - ./docs_tripkit.sh
-  - ./docs_tripkitinterapp.sh
-  - ./docs_tripkitui.sh
-  - mkdir public
-  - cp -r docs/TripKit public
-  - cp -r docs/TripKitUI public
-  - cp -r docs/TripKitInterApp public
+  - ./docs.sh
   cache:
     key:
       files:

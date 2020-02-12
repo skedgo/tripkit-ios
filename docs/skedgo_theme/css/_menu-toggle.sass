@@ -1,0 +1,39 @@
+.menu-toggle
+	display: block
+	position: relative
+	z-index: 2000
+	float: left
+	padding: 19px 18px
+	background-color: none
+	-webkit-appearance: none!important
+	.bar-container
+		+transition(all)
+	span[class^='bar']
+		display: block
+		width: 16px
+		height: 2px
+		margin-bottom: 4px
+		background-color: white
+		border-radius: 2px
+		+transition(all)
+	&.-toggle
+		.bar-container
+			-webkit-transform: rotate(45deg)
+			-moz-transform: rotate(45deg)
+			-ms-transform: rotate(45deg)
+			-o-transform: rotate(45deg)
+			transform: rotate(45deg)
+		.bar-1
+			-webkit-transform: translateY(6px) rotate(90deg)
+			-moz-transform: translateY(6px) rotate(90deg)
+			-ms-transform: translateY(6px) rotate(90deg)
+			-o-transform: translateY(6px) rotate(90deg)
+			transform: translateY(6px) rotate(90deg)
+		.bar-3
+			-webkit-transform: translateY(-6px)
+			-moz-transform: translateY(-6px)
+			-ms-transform: translateY(-6px)
+			-o-transform: translateY-(6px)
+			transform: translateY(-6px)
+	@media screen and (min-width: 768px)
+		display: none

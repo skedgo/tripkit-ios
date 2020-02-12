@@ -1,0 +1,46 @@
+.sidebar
+	position: relative
+	background: #FAFBFC
+	+border-radius(4px)
+	padding-top: 1rem
+	padding-bottom: 1rem
+	@media screen and (min-width: 768px)
+		margin-top: 1rem
+	.sidenav
+		list-style-type: none
+		margin: 0
+		padding: 0
+		li
+			display: block
+			+transition(background-color)
+			a
+				text-decoration: none
+				display: block
+				font-size: 0.875rem
+				padding: 1rem 1rem 1rem 2rem
+				color: #6D7881
+				font-family: $font-medium
+				line-height: 1
+				+transition(box-shadow)
+				&.active
+					color: #25323E
+					font-family: $font-semibold
+			&.main
+				a
+					color: #3E4B56
+					font-family: $font-semibold
+					padding-left: 1rem
+			&:hover
+				background-color: #EDEEF2
+	&.affix
+		position: -webkit-sticky
+		position: sticky
+		top: 4.5rem
+	.indicator
+		position: absolute
+		width: 4px
+		left: 0
+		top: 8px
+		height: 0
+		background-color: $primary-green
+		+transition(all)

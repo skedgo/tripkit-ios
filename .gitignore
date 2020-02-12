@@ -30,8 +30,9 @@ xcshareddata
 /Examples/CocoaPodsTest/Pods
 
 # Documentation
-jazzy-temp.*
-/docs/TripKit
-/docs/TripKitUI
-/docs/TripKitInterApp
+/docs/jazzy-temp.*
+/docs/source/TripKit
+/docs/source/TripKitUI
+/docs/source/TripKitInterApp
+/docs/site
 /public

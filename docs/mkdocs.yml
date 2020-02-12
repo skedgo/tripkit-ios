@@ -1,0 +1,15 @@
+site_name: TripKit iOS
+site_author: SkedGo Pty Ltd
+nav:
+- Getting Started: index.md
+- F.A.Q.: faq.md
+- Reference:
+  - TripKit: TripKit/index.html
+  - TripKitUI: TripKitUI/index.html
+  - TripKitInterApp: TripKitInterApp/index.html
+repo_url: https://gitlab.com/skedgo/ios/tripkit-ios
+docs_dir: source
+strict: true
+theme:
+  name: null
+  custom_dir: 'skedgo_theme'

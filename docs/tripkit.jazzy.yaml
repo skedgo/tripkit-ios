@@ -2,7 +2,7 @@ author: SkedGo
 author_url: https://skedgo.com
 title: SkedGo's TripKit iOS - TripKit
 theme: fullwidth
-output: TripKit
+output: source/TripKit
 
 module: TripKit
 podspec: ../TripKit.podspec

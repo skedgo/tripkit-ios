@@ -1,0 +1,4 @@
+# Config options for 'mkdocs' theme
+
+include_search_page: false
+search_index_only: false

@@ -2,7 +2,7 @@
 # Bash script to update documentation
 
 (
-  sourcekitten doc -- -project TripKit.xcodeproj -scheme TripKit-iOS -sdk iphonesimulator > jazzy-temp.TKSwift.json
+  sourcekitten doc -- -project TripKit.xcodeproj -scheme TripKit-iOS -sdk iphonesimulator > docs/jazzy-temp.TKSwift.json
 
   sourcekitten doc --objc $(pwd)/TripKit/TripKit.h \
       -- -x objective-c  -isysroot $(xcrun --show-sdk-path --sdk iphonesimulator) \
@@ -25,10 +25,10 @@
       -I $(pwd)/TripKit/Classes/server \
       -I $(pwd)/TripKit/Classes/server/parsing \
       -fmodules \
-      > jazzy-temp.TKObjc.json
+      > docs/jazzy-temp.TKObjc.json
   
   cd docs
   jazzy \
-      --sourcekitten-sourcefile ../jazzy-temp.TKSwift.json,../jazzy-temp.TKObjc.json \
-      --config .tripkit.jazzy.yaml
+      --sourcekitten-sourcefile jazzy-temp.TKSwift.json,jazzy-temp.TKObjc.json \
+      --config tripkit.jazzy.yaml
 )

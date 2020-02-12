@@ -1,0 +1,48 @@
+<header class="navbar">
+	<div class="search-container">
+		<a class="search" href="#"></a>
+		{% if 'search' in config['plugins'] %}{%- include "search-modal.html" %}{% endif %}
+	</div>
+	<div class="container-fluid">
+		{%- block homelink %}
+		<a class="logo" href="{{ nav.homepage.url|url }}">
+			<img src="{{ base_url }}/img/tripgo-api-logo-white.svg" alt="TripGo API Logo White" height="32" width="140">
+		</a>
+		{%- endblock %}
+
+		<div class="divider"></div>
+		<a class="menu-toggle" type="button" href="#" aria-hidden="true">
+			<div class="bar-container">
+				<span class="bar-1"></span>
+				<span class="bar-2"></span>
+				<span class="bar-3"></span>
+			</div>
+		</a>
+		<div class="menu" aria-hidden="false">
+			{% if nav|length>1 %}
+				<ul>
+					{% for nav_item in nav %}
+						{% if nav_item.children %}
+							<li>
+								<a href="#" class="dropdown">{{ nav_item.title }}</a>
+								<ul class="submenu">
+									{% for nav_item in nav_item.children %}
+										<li class="{% if nav_item.active%}current{%endif%}">
+											<a href="{{ nav_item.url|url }}">{{ nav_item.title }}</a>
+										</li>
+									{% endfor %}
+								</ul>
+							</li>
+						{% else %}
+							<li class="{% if nav_item.active%}current{%endif%}">
+								<a href="{{ nav_item.url|url }}">{{ nav_item.title }}</a>
+							</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</div>
+		
+	</div>
+	
+</header>

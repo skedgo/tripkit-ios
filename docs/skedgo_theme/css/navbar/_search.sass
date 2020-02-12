@@ -1,0 +1,41 @@
+.search
+	height: 24px
+	width: 24px
+	position: relative
+	+transition(all)
+	&.cross
+		&:before
+			transform: translate(-50%,-50%) scale(1)
+		&:after
+			transform: translate(-50%,-50%) scale(0)
+	&.hide
+		transform: scale(0)
+		opacity: 0
+	&:before
+		content: ""
+		display: block
+		position: absolute
+		height: 16px
+		width: 16px
+		top: 50%
+		left: 50%
+		transform: translate(-50%,-50%) scale(0)
+		background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOSIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDE5IDE5Ij4gIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlPSIjRkZGIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS13aWR0aD0iMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMiAyKSI+ICAgIDxwYXRoIGQ9Ik0wLjA4MzYyOTc0OTgsMC4wNDQ5MjEyMzA4IEwxNS4zMTQzMTQ1LDE1LjI3NTYwNiIvPiAgICA8cGF0aCBkPSJNMC4wODM2Mjk3NDk4LDAuMDQ0OTIxMjMwOCBMMTUuMzE0MzE0NSwxNS4yNzU2MDYiIHRyYW5zZm9ybT0ibWF0cml4KC0xIDAgMCAxIDE1LjM5OCAwKSIvPiAgPC9nPjwvc3ZnPg==)
+		background-size: cover
+		background-position: center
+		background-repeat: no-repeat
+		transform: scale(0)
+		+transition(all)
+	&:after
+		content: ""
+		display: block
+		position: absolute
+		height: 24px
+		width: 24px
+		top: 50%
+		left: 50%
+		transform: translate(-50%,-50%) scale(1)
+		background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4gIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIgLTIpIj4gICAgPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+ICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMCwxNiBDNi42ODY2MTUzOCwxNiA0LDEzLjMxNTIzMDggNCwxMCBDNCw2LjY4NTY5MjMxIDYuNjg2NjE1MzgsNCAxMCw0IEMxMy4zMTMzODQ2LDQgMTYsNi42ODU2OTIzMSAxNiwxMCBDMTYsMTMuMzE1MjMwOCAxMy4zMTMzODQ2LDE2IDEwLDE2IE0xNi42MTc2MjY2LDE0LjQ5NjMwNjMgQzE3LjQ5MDAyNzEsMTMuMjE0ODk3NCAxOCwxMS42NjY5Njk1IDE4LDEwIEMxOCw1LjU4MjMxNTc5IDE0LjQxNzY4NDIsMiAxMCwyIEM1LjU4MjMxNTc5LDIgMiw1LjU4MjMxNTc5IDIsMTAgQzIsMTQuNDE4MTA1MyA1LjU4MjMxNTc5LDE4IDEwLDE4IEMxMS42NjY4ODcyLDE4IDEzLjIxNDg0MTcsMTcuNDkwMDQwMiAxNC40OTYyOTgxLDE2LjYxNzYxODQgTDE5LjMwNTM1MDcsMjEuNDI2NjcxMSBDMTkuODg5MDI4NSwyMi4wMTAzNDg5IDIwLjgzODgzNDgsMjIuMDEwNDA3NiAyMS40MjQ2MjEyLDIxLjQyNDYyMTIgQzIyLjAxNDQ5MTYsMjAuODM0NzUwOCAyMi4wMTEzMjU0LDE5Ljg5MDAwNTEgMjEuNDI2NjcxMSwxOS4zMDUzNTA3IEwxNi42MTc2MjY2LDE0LjQ5NjMwNjMgWiIvPiAgPC9nPjwvc3ZnPg==)
+		background-position: center
+		background-repeat: no-repeat
+		+transition(all)
