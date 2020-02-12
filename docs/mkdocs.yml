@@ -1,15 +1,22 @@
-site_name: TripKit iOS
+site_name: TripKit SDK for iOS
 site_author: SkedGo Pty Ltd
+site_description: Documentation of TripKit iOS - the iOS SDK of the TripGo API.
+
 nav:
 - Getting Started: index.md
 - F.A.Q.: faq.md
-- Reference:
+- SDK Reference:
   - TripKit: TripKit/index.html
   - TripKitUI: TripKitUI/index.html
   - TripKitInterApp: TripKitInterApp/index.html
+- API: https://developer.tripgo.com
+
 repo_url: https://gitlab.com/skedgo/ios/tripkit-ios
 docs_dir: source
 strict: true
 theme:
   name: null
   custom_dir: 'skedgo_theme'
+
+# Disable search, as you might expect it to search the reference, too
+plugins: []

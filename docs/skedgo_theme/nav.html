@@ -1,8 +1,10 @@
 <header class="navbar">
+	{% if 'search' in config['plugins'] %}
 	<div class="search-container">
 		<a class="search" href="#"></a>
-		{% if 'search' in config['plugins'] %}{%- include "search-modal.html" %}{% endif %}
+		{%- include "search-modal.html" %}
 	</div>
+	{% endif %}
 	<div class="container-fluid">
 		{%- block homelink %}
 		<a class="logo" href="{{ nav.homepage.url|url }}">

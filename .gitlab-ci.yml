@@ -126,33 +126,12 @@ code_quality:
   artifacts:
     paths: [gl-code-quality-report.json]
 
-# pages_dryrun:
-#   stage: deploy
-#   before_script:
-#   - brew install sourcekitten
-#   script:
-#   - ./docs.sh
-#   cache:
-#     key:
-#       files:
-#         - Cartfile.resolved
-#     paths:
-#       - Carthage/Build
-#       - Carthage/Checkouts
-#   tags:
-#     - ios
-#   artifacts:
-#     paths:
-#     - public
-#   except:
-#     - master
-
-pages:
+pages_dryrun:
   stage: deploy
   before_script:
-  - brew install sourcekitten
+    - brew install sourcekitten
   script:
-  - ./docs.sh
+    - ./docs.sh
   cache:
     key:
       files:
@@ -164,6 +143,27 @@ pages:
     - ios
   artifacts:
     paths:
-    - public
-  # only:
-  # - master
+      - public
+  except:
+    - master
+
+pages:
+  stage: deploy
+  before_script:
+    - brew install sourcekitten
+  script:
+    - ./docs.sh
+  cache:
+    key:
+      files:
+        - Cartfile.resolved
+    paths:
+      - Carthage/Build
+      - Carthage/Checkouts
+  tags:
+    - ios
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
