@@ -81,4 +81,9 @@ extension TKTripKit {
   public static func prepareForNewSession() {
     TripKit.prepareForNewSession()
   }
+  
+  @objc
+  public static func setAPIKey(_ key: String) {
+    TripKit.apiKey = key
+  }
 }
