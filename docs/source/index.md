@@ -73,7 +73,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 ```
 
 ```objc tab="Objective-C"
-@import TripKit
+@import TripKit;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
