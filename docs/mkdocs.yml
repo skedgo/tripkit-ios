@@ -20,3 +20,7 @@ theme:
 
 # Disable search, as you might expect it to search the reference, too
 plugins: []
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
