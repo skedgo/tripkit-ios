@@ -1,3 +1,7 @@
+code {
+  padding: 0;
+}
+
 .superfences-tabs {
   display: flex;
   position: relative;
@@ -5,10 +9,6 @@
   border: .05rem solid rgba(0,0,0,.07);
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-.superfences-tabs .highlight {
-  background: #ddd;
 }
 
 .superfences-tabs .superfences-content {
@@ -26,7 +26,7 @@
   width: auto;
   margin: 0 0.5em;
   padding: 0.25em;
-  font-size: 120%;
+  font-size: 80%;
   cursor: pointer;
 }
 

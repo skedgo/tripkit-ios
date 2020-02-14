@@ -17,6 +17,7 @@ strict: true
 theme:
   name: null
   custom_dir: 'skedgo_theme'
+  highlightjs: True
 
 # Disable search, as you might expect it to search the reference, too
 plugins: []
