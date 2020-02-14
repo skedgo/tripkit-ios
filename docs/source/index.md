@@ -35,13 +35,15 @@ When doing so, you'll need to add the respective dependencies:
 
 ### Cocoapods
 
-Add desired pods:
+Add desired pods to your `Podfile`:
 
 ```ruby
-pod 'TripKit',                '~> 4.0'
-pod 'TripKitUI',              '~> 4.0'
-pod 'TripKitInterApp',        '~> 4.0'
+  pod 'TripKit',          :git => 'https://gitlab.com/SkedGo/iOS/tripkit-ios.git'
+  pod 'TripKitUI',        :git => 'https://gitlab.com/SkedGo/iOS/tripkit-ios.git'
+  pod 'TripKitInterApp',  :git => 'https://gitlab.com/SkedGo/iOS/tripkit-ios.git'
 ```
+
+Then run `pod update` and you're set.
 
 ### Manually
 
@@ -54,14 +56,25 @@ If there's any trouble with that, see the examples in the repository.
 
 ## Set-up
 
-- In your app delegate, provide your API key and start a new session:
+In your app delegate, provide your API key and start a new session:
 
 ```swift
-  func applicationDidFinishLaunching(_ aNotification: Notification) {
-    
-    TripKit.apiKey = "MY_API_KEY"
-    TripKit.prepareForNewSession()
+import TripKit
 
-    // ...
-  }
+func applicationDidFinishLaunching(_ aNotification: Notification) {
+  
+  TripKit.apiKey = "MY_API_KEY"
+  TripKit.prepareForNewSession()
+
+  // ...
+}
+```
+
+You can then start using TripKit and TripKitUI, e.g.:
+
+```swift
+import TripKitUI
+
+let controller = TKUIHomeViewController()
+present(controller, animated: true)
 ```
