@@ -40,11 +40,14 @@ extension StopVisits {
     }
   }
   
+  /// :nodoc:
   @objc
   public var timeForServerRequests: Date {
     return departure ?? arrival ?? Date()
   }
-  
+
+  /// Legacy-code for TripGo. Should not be used anymore.
+  /// :nodoc:
   @objc public func grouping(previous: StopVisits?, next: StopVisits?) -> TKGrouping {
     let sameAsBefore = previous?.searchString == searchString
     let sameAsAfter = next?.searchString == searchString
@@ -135,6 +138,7 @@ extension StopVisits: MKAnnotation {
 
 // MARK: - TKRealTimeUpdatable
 
+/// :nodoc:
 extension StopVisits: TKRealTimeUpdatable {
   public var wantsRealTimeUpdates: Bool {
     return service.wantsRealTimeUpdates

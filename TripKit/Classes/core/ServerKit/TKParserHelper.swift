@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 @objc
 public enum TKParserHelperMode : Int {
   case walking
@@ -15,6 +16,7 @@ public enum TKParserHelperMode : Int {
   case vehicle
 }
 
+/// :nodoc:
 public class TKParserHelper: NSObject {
   
   private override init() {

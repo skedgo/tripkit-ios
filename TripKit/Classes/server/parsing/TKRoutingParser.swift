@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 extension TKRoutingParser {
   @objc public static func matchingSegment(in trip: Trip, order: TKSegmentOrdering, first: Bool) -> TKSegment {
     

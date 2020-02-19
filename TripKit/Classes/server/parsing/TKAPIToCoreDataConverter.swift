@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 @objc
 public class TKAPIToCoreDataConverter: NSObject {
   override private init() {
@@ -17,6 +18,7 @@ public class TKAPIToCoreDataConverter: NSObject {
 
 // MARK: - Stops
 
+/// :nodoc:
 extension StopLocation {
 
   func update(from model: TKAPI.Stop) -> Bool {
@@ -57,6 +59,7 @@ extension StopLocation {
   
 }
 
+/// :nodoc:
 extension TKAPIToCoreDataConverter {
   
   static func insertNewStopLocation(from model: TKAPI.Stop, into context: NSManagedObjectContext) -> StopLocation {
@@ -70,6 +73,7 @@ extension TKAPIToCoreDataConverter {
 
 // MARK: - Services
 
+/// :nodoc:
 extension Service {
   convenience init(from model: TKAPI.Departure, into context: NSManagedObjectContext) {
     self.init(context: context)
@@ -172,6 +176,7 @@ extension Service {
   }
 }
 
+/// :nodoc:
 extension TKAPIToCoreDataConverter {
   @objc(updateVehiclesForService:primaryVehicle:alternativeVehicles:)
   public static func updateVehicles(for service: Service, primaryVehicle: [String: Any]?, alternativeVehicles: [[String: Any]]?) {
@@ -194,6 +199,7 @@ extension TKAPIToCoreDataConverter {
 
 // MARK: - Alerts
 
+/// :nodoc:
 extension Alert {
   
   convenience init(from model: TKAPI.Alert, into context: NSManagedObjectContext) {
@@ -233,6 +239,7 @@ extension Alert {
   
 }
 
+/// :nodoc:
 extension TKAPIToCoreDataConverter {
   
   static func updateOrAddAlerts(_ alerts: [TKAPI.Alert]?, in context: NSManagedObjectContext) {
@@ -260,6 +267,7 @@ extension TKAPIToCoreDataConverter {
 
 // MARK: - Vehicles
 
+/// :nodoc:
 extension Vehicle {
   
   fileprivate convenience init(from model: TKAPI.Vehicle, into context: NSManagedObjectContext) {
@@ -301,6 +309,7 @@ extension Vehicle {
   
 }
 
+/// :nodoc:
 extension TKAPIToCoreDataConverter {
 
   @objc(insertNewVehicle:inTripKitContext:)

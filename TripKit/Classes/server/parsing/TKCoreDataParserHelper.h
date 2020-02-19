@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class Service, Shape, SegmentReference, TKModeInfo;
 
+/// :nodoc:
 @interface TKCoreDataParserHelper : NSObject
 
 #pragma mark - Services

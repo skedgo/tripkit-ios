@@ -7,6 +7,12 @@ output: source/TripKit
 module: TripKit
 podspec: ../TripKit.podspec
 
+exclude:
+  - /*/TripKit/Classes/core/RootKit/Loc.swift
+  - /*/TripKit/Classes/core/RootKit/Categories/*
+  - /*/TripKit/Classes/Loc+*.swift
+  - /*/TripKit/Classes/deprecated/*
+
 abstract: api/*.md
 
 custom_categories:

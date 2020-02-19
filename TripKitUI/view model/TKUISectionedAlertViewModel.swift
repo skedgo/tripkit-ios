@@ -165,7 +165,7 @@ extension RouteAlerts {
   
 }
 
-// MARK: - RxDataSources
+// MARK: - RxDataSources protocol conformance
 
 extension TKUISectionedAlertViewModel.Section: SectionModelType {
   typealias Item = TKUISectionedAlertViewModel.Item

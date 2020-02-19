@@ -3,9 +3,14 @@ author_url: https://skedgo.com
 title: SkedGo's TripKit iOS - TripKitUI iOS
 theme: fullwidth
 output: source/TripKitUI
+hide_documentation_coverage: true # falsely reports 100%
 
 module: TripKitUI
 podspec: ../TripKitUI.podspec
+
+exclude:
+  - /*/TripKitUI/helper/Categories/*
+  - /*/TripKitUI/view model/*
 
 custom_categories:
   - name: Trip Planning

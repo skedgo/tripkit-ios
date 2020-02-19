@@ -60,6 +60,7 @@ extension UIImage {
 }
 
 
+/// :nodoc:
 public class TripKitUIBundle: NSObject {
   @objc public static func optionalImageNamed(_ name: String) -> UIImage? {
     return UIImage(named: name, in: .tripKitUI, compatibleWith: nil)

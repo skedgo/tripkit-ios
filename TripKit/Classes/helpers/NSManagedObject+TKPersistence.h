@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// :nodoc:
 @interface NSManagedObject (TKPersistence)
 
 + (nullable instancetype)objectFromPersistentId:(NSString *)persistentId

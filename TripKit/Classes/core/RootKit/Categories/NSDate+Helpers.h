@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
 @interface NSDate (NSDate_Helpers)
 
 - (BOOL)isInBetweenStartDate:(NSDate *)start andEnd:(NSDate *)end;
@@ -26,5 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)ISO8601String;
 
 @end
+
 NS_ASSUME_NONNULL_END
 

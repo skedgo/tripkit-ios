@@ -14,6 +14,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// A time-dependent pointer to the time-independent `SegmentTemplate`
+/// :nodoc:
 @interface SegmentReference : NSManagedObject
 
 #pragma mark CoreData
@@ -60,6 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/// :nodoc:
 @interface SegmentReference (CoreDataGeneratedAccessors)
 
 - (void)addRealTimeVehicleAlternativesObject:(Vehicle *)value;

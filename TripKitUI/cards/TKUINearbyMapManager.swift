@@ -190,7 +190,7 @@ extension TKUINearbyMapManager {
 // MARK: Search result
 
 extension Reactive where Base: TKUINearbyMapManager {
-  public var searchResult: Binder<MKAnnotation?> {
+  var searchResult: Binder<MKAnnotation?> {
     return Binder(self.base) { mapManager, annotation in
       mapManager.searchResult = annotation
     }

@@ -26,13 +26,18 @@ typedef NS_ENUM(NSInteger, TKServerType) {
   TKServerTypeLocal
 };
 
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyUserToken;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyServerType;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileEnableFlights;
 
 @class TKRegion;
 
+/// Encapsulates the logic for talking to SkedGo's servers
 @interface TKServer : NSObject
 
 + (TKServer *)sharedInstance NS_REFINED_FOR_SWIFT;
