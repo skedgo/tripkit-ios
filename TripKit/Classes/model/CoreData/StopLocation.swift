@@ -51,12 +51,12 @@ extension StopLocation: MKAnnotation {
 
   extension StopLocation: UIActivityItemSource {
     public func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-      // Note: We used to return 'nil' if we don't have `lastTopVisit`, but the protocol doesn't allow that
+      // Note: We used to return 'nil' if we don't have `lastStopVisit`, but the protocol doesn't allow that
       return ""
     }
     
     public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-      guard let last = lastTopVisit else { return nil }
+      guard let last = lastStopVisit else { return nil }
       
       var output: String = self.title ?? ""
       
@@ -77,7 +77,7 @@ extension StopLocation: MKAnnotation {
     public var localizedShareString: String {
       var output = ""
       for visit in self {
-        output.append(visit.smsString())
+        output.append(visit.smsString)
         output.append("\n")
       }
       if output.contains("*") {

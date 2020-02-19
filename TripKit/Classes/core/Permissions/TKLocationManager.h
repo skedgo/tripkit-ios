@@ -19,8 +19,8 @@ typedef void (^TKLocationManagerMonitorBlock)(CLRegion * region);
 typedef void (^TKLocationManagerLocationBlock)(CLLocation * location);
 typedef void (^TKLocationManagerFailureBlock)(NSError * error);
 
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKLocationManagerBackgroundUpdatesEnabled;
-
 
 @interface TKLocationManager : TKPermissionManager <CLLocationManagerDelegate>
 

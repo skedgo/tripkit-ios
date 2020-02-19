@@ -23,26 +23,14 @@ typedef NS_CLOSED_ENUM(NSInteger, TKStopVisitRealTime) {
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// Represents a public transport service stopping at a particular stop (at a particular time)
 @interface StopVisits : NSManagedObject
 
-@property (nonatomic, retain, nullable) NSDate * arrival; // DEPRECATED_MSG_ATTRIBUTE("Ambiguous. Use .timing instead");
-@property (nonatomic, retain, nullable) NSNumber * bearing;
-@property (nonatomic, retain, nullable) NSDate * departure; // DEPRECATED_MSG_ATTRIBUTE("Ambiguous. Use .timing instead");
-@property (nonatomic, retain, nullable) NSDate * originalTime;
-@property (nonatomic, retain) NSNumber * flags;
-@property (nonatomic, retain) NSNumber * index;
-@property (nonatomic, retain) NSNumber * isActive;
-@property (nonatomic, retain, nullable) NSDate * regionDay;
-@property (nonatomic, retain, nullable) NSString * searchString;
-@property (nonatomic, assign) BOOL toDelete;
-@property (nonatomic, retain) Service *service;
-@property (nonatomic, retain) StopLocation *stop;
-@property (nonatomic, retain, nullable) NSSet *shapes;
+#pragma mark - Class methods
 
 + (NSArray<StopVisits *> *)fetchStopVisitsForStopLocation:(StopLocation *)stopLocation
                                          startingFromDate:(NSDate *)earliestDate;
 
-- (void)remove;
 
 + (NSArray<NSSortDescriptor *> *)defaultSortDescriptors;
 
@@ -50,18 +38,55 @@ NS_ASSUME_NONNULL_BEGIN
                                     fromDate:(NSDate *)date
                                       filter:(nullable NSString *)filter;
 
+#pragma mark - CoreData fields
+
+/// - warn: Ambiguous. Use .timing instead
+/// :nodoc:
+@property (nonatomic, retain, nullable) NSDate * arrival; // DEPRECATED_MSG_ATTRIBUTE("Ambiguous. Use .timing instead");
+
+@property (nonatomic, retain, nullable) NSNumber * bearing;
+
+/// - warn: Ambiguous. Use .timing instead
+/// :nodoc:
+@property (nonatomic, retain, nullable) NSDate * departure; // DEPRECATED_MSG_ATTRIBUTE("Ambiguous. Use .timing instead");
+
+@property (nonatomic, retain, nullable) NSDate * originalTime;
+
+/// :nodoc:
+@property (nonatomic, retain) NSNumber * flags;
+
+@property (nonatomic, retain) NSNumber * index;
+@property (nonatomic, retain) NSNumber * isActive;
+@property (nonatomic, retain, nullable) NSDate * regionDay;
+@property (nonatomic, retain, nullable) NSString * searchString;
+
+/// :nodoc:
+@property (nonatomic, assign) BOOL toDelete;
+
+@property (nonatomic, retain) Service *service;
+@property (nonatomic, retain) StopLocation *stop;
+@property (nonatomic, retain, nullable) NSSet *shapes;
+
+#pragma mark - Instance fields + methods
+
+/// :nodoc:
+@property (nonatomic, readonly) NSString *smsString;
+
+/// Frequency information, platform, service name
+@property (nonatomic, readonly) NSString *secondaryInformation;
+
+@property (nonatomic, readonly) TKStopVisitRealTime realTimeStatus;
+
+/// Time to count down to in a departures timetable. This is `nil` for frequency-based services, or if this is the final arrival at a stop.
+@property (nonatomic, readonly, nullable) NSDate *countdownDate;
+
+/// :nodoc:
+- (void)remove;
+
+/// :nodoc:
 - (void)adjustRegionDay;
 
-- (NSString *)smsString;
-
-// Frequency information, platform, service name
-- (NSString *)secondaryInformation;
-
-- (TKStopVisitRealTime)realTimeStatus;
-
 - (NSString *)realTimeInformation:(BOOL)withOriginalTime;
-
-- (nullable NSDate *)countdownDate;
 
 /**
  Compares two visits based on which one comes before another one.
@@ -74,6 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/// :nodoc:
 @interface StopVisits (CoreDataGeneratedAccessors)
 
 - (void)addShapesObject:(Shape *)value;

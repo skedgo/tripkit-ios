@@ -276,7 +276,7 @@ extension TKOnStreetParkingLocation: TKDisplayableRoute {
   public var routeIsTravelled: Bool { return true }
 }
 
-// MARK: - RxDataSources
+// MARK: - RxDataSources protocol conformance
 
 extension TKUINearbyViewModel.Item: Equatable {
   

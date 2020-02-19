@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 extension TKCoreDataParserHelper {
   
   @objc(configureVisit:fromShapeStopDict:timesRelativeToDate:)

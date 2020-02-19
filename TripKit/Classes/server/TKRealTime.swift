@@ -14,6 +14,7 @@ public enum TKRealTimeUpdateProgress<E> {
   case updated(E)
 }
 
+/// :nodoc:
 @objc
 public protocol TKRealTimeUpdatable {
   

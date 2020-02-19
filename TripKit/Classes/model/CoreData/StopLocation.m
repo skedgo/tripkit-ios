@@ -34,7 +34,7 @@
 @dynamic children;
 @dynamic visits;
 
-@synthesize lastTopVisit = _lastTopVisit;
+@synthesize lastStopVisit = _lastStopVisit;
 @synthesize lastEarliestDate = _lastEarliestDate;
 
 + (instancetype)fetchStopForStopCode:(NSString *)stopCode

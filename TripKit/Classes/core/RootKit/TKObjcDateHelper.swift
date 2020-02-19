@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 @objc(TKObjcDateHelper)
 public class _TKObjcDateHelper: NSObject {
   

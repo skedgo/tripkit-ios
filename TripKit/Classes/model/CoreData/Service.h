@@ -14,11 +14,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// Represents a public transport service
 @interface Service : NSManagedObject
+
+#pragma mark - CoreData fields
 
 @property (nonatomic, retain) NSString * code;
 @property (nonatomic, retain, nullable) id color;
+
+/// :nodoc:
 @property (nonatomic, retain) NSNumber * flags;
+
 @property (nonatomic, retain, nullable) TKModeInfo * modeInfo;
 @property (nonatomic, retain, nullable) NSString * name;
 @property (nonatomic, retain, nullable) NSString * number;
@@ -34,7 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSSet<StopVisits*>* visits;
 @property (nonatomic, retain, nullable) NSArray<NSNumber *> *alertHashCodes;
 
-// non-core data properties
+#pragma mark - Instance fields + methods
+
 @property (nonatomic, assign, getter = isRealTime) BOOL realTime;
 @property (nonatomic, assign, getter = isRealTimeCapable) BOOL realTimeCapable;
 @property (nonatomic, assign, getter = isCancelled) BOOL cancelled;
@@ -44,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *lineName;
 @property (nonatomic, copy, nullable) NSString *direction;
 
+/// :nodoc:
 - (void)remove;
 
 - (nullable Alert *)sampleAlert;
@@ -59,12 +67,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray<id<TKDisplayableRoute>> *)shapesForEmbarkation:(nullable StopVisits *)embarkation
                                             disembarkingAt:(nullable StopVisits *)disembarkation;
 
+/// :nodoc:
 @property (nonatomic, assign) BOOL isRequestingServiceData;
 
 - (BOOL)looksLikeAnExpress;
 
 @end
 
+/// :nodoc:
 @interface Service (CoreDataGeneratedAccessors)
 
 - (void)addSegmentsObject:(SegmentReference *)value;

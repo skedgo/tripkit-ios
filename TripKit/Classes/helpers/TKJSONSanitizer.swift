@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// :nodoc:
 public enum TKJSONSanitizer {
   
   /// Sanitizes the provided input to be JSON compatible03

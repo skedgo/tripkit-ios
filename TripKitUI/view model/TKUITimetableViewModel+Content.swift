@@ -382,7 +382,7 @@ extension Array where Element == TKUITimetableViewModel.Section {
 
 
 
-// MARK: - RxDataSources
+// MARK: - RxDataSources protocol conformance
 
 extension TKUITimetableViewModel.Item: Equatable {
   

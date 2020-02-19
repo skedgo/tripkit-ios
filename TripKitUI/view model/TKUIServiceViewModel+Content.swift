@@ -112,7 +112,7 @@ extension TKUIServiceViewModel.Item {
       title: visit.stop.title ?? visit.stop.stopCode,
       timing: visit.timing,
       timeZone: visit.timeZone,
-      realTimeStatus: visit.realTimeStatus(),
+      realTimeStatus: visit.realTimeStatus,
       isVisited: isVisited,
       topConnection: topConnectionColor,
       bottomConnection: bottomConnectionColor

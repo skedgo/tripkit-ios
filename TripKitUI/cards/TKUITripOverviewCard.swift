@@ -19,13 +19,13 @@ import TGCardViewController
 #endif
 
 
-public class TKUITripsPageCard: TGPageCard {
+class TKUITripsPageCard: TGPageCard {
   
   /// Constructs a page card configured for displaying the alternative trips
   /// of a request.
   ///
   /// - Parameter trip: Trip to focus on first
-  public init(highlighting trip: Trip) {
+  init(highlighting trip: Trip) {
     // make sure this is the visible trip in our group
     trip.setAsPreferredTrip()
     

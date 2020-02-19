@@ -133,6 +133,7 @@ extension Trip: TKTrip {
 
 // MARK: - TKRealTimeUpdatable
 
+/// :nodoc:
 extension Trip: TKRealTimeUpdatable {
   public var wantsRealTimeUpdates: Bool {
     guard updateURLString != nil else { return false }
