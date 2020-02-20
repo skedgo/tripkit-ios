@@ -110,6 +110,7 @@ class TKUIRoutingQueryInputTitleView: UIView {
       else { return }
     
     if #available(iOS 13.0, *) {
+      searchBar.becomeFirstResponder()
       searchBar.searchTextField.selectedTextRange = searchBar.searchTextField.textualRange
     }
   }
@@ -228,6 +229,8 @@ extension Reactive where Base == TKUIRoutingQueryInputTitleView {
     return Binder(self.base) { view, mode in
       view.fromButton.tintColor = mode == .origin ? .tkAppTintColor : .tkLabelSecondary
       view.toButton.tintColor = mode == .destination ? .tkAppTintColor : .tkLabelSecondary
+      
+      view.becomeFirstResponder(mode: mode)
     }
   }
   
