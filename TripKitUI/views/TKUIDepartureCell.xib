@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,7 +27,7 @@
                                         <rect key="frame" x="0.0" y="4" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="z0E-F8-bjU" secondAttribute="height" multiplier="1:1" id="HLi-ZS-F52"/>
-                                            <constraint firstAttribute="width" constant="20" id="k70-7O-A6n"/>
+                                            <constraint firstAttribute="width" priority="999" constant="20" id="k70-7O-A6n"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="253" translatesAutoresizingMaskIntoConstraints="NO" id="wWl-tx-YGV">
@@ -125,12 +125,18 @@
                     <constraint firstItem="pX8-va-QNb" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B0X-7f-TQw"/>
                     <constraint firstItem="B0C-s1-6Mr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Cm4-mS-sKJ"/>
                     <constraint firstItem="pX8-va-QNb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="LAW-T3-ceI"/>
+                    <constraint firstItem="iaM-1r-elk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="TkW-zz-PVu"/>
                     <constraint firstItem="B0C-s1-6Mr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YcF-vp-U4l"/>
                     <constraint firstItem="iaM-1r-elk" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="g8I-GO-do5"/>
                     <constraint firstAttribute="trailing" secondItem="iaM-1r-elk" secondAttribute="trailing" constant="16" id="ifP-8R-NKZ"/>
                     <constraint firstItem="pX8-va-QNb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="qgH-3B-Jmf"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pX8-va-QNb" secondAttribute="bottom" constant="16" id="s7S-9W-M6C"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="TkW-zz-PVu"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
