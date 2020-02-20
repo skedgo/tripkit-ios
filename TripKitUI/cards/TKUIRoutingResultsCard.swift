@@ -72,12 +72,13 @@ public class TKUIRoutingResultsCard: TGTableCard {
   ///
   /// - Parameters:
   ///   - destination: The destination of the routing request.
+  ///   - zoomToDestination: Whether the map should zoom to `destination` immediately. (Defaults to `true` if not provided.)
   ///   - initialPosition: The initial position at which the card is placed when it's displayed.
-  public init(destination: MKAnnotation, initialPosition: TGCardPosition? = nil) {
+  public init(destination: MKAnnotation, zoomToDestination: Bool = true, initialPosition: TGCardPosition? = nil) {
     self.destination = destination
     self.request = nil
     
-    let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(destination)
+    let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(destination, zoomToDestination)
     
     let resultsTitle = TKUIResultsTitleView.newInstance()
     
@@ -104,7 +105,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     self.destination = nil
     self.request = request
     
-    let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(request.toLocation)
+    let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(request.toLocation, true)
     
     let resultsTitle = TKUIResultsTitleView.newInstance()
     
