@@ -59,7 +59,7 @@ class TKUITimetableAccessoryView: UIView {
     serviceCollectionLayout.delegate = self
     
     customActionStack.isHidden = true
-    serviceCollectionToBottomBarConstraint.isActive = true
+    serviceCollectionToBottomBarConstraint.isActive = false
 
     bottomBar.backgroundColor = .tkBackgroundSecondary
     
