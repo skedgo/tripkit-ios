@@ -11,6 +11,7 @@ import Foundation
 
 // MARK: - TKRealTimeUpdatable
 
+/// :nodoc:
 extension DLSEntry {
   public override var wantsRealTimeUpdates: Bool {
     guard service.isRealTimeCapable,

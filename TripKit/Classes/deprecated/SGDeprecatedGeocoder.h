@@ -13,8 +13,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^SGGeocoderSuccessBlock)(NSString *query, NSArray<TKNamedCoordinate *> *results);
-typedef void(^SGGeocoderFailureBlock)(NSString *query, NSError * __nullable error);
 
+typedef void(^SGGeocoderFailureBlock)(NSString *query, NSError * __nullable error);
 
 @protocol SGDeprecatedGeocoder
   

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol SGDeprecatedAutocompletionDataProvider;
 
 typedef void(^SGAutocompletionDataResultBlock)(NSArray <TKAutocompletionResult*> * _Nullable results);
+
 typedef void(^SGAutocompletionDataActionBlock)(BOOL refreshRequired);
 
 @protocol SGDeprecatedAutocompletionDataProvider <NSObject>

@@ -10,16 +10,29 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// Discourage use of these, so remove from documentation.
+
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierFlight;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierRegularPublicTransport;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierSchoolBuses;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierTaxi;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierAutoRickshaw;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierCar;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierMotorbike;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierBicycle;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierBikeShare;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierWalking;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierWheelchair;
 
 @interface TKTransportModes : NSObject

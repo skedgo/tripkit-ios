@@ -8,6 +8,7 @@
 
 #import <CoreData/CoreData.h>
 
+/// :nodoc:
 @interface Cell : NSManagedObject
 
 ///-----------------------------------------------------------------------------

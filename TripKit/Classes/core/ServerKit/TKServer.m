@@ -12,7 +12,6 @@
 
 #import "TKServerKit.h"
 
-// User profile
 NSString *const TKDefaultsKeyServerType              = @"internalServerType";
 NSString *const TKDefaultsKeyDevelopmentServer       = @"developmentServer";
 NSString *const TKDefaultsKeyUserToken               = @"userToken";

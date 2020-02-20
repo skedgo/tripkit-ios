@@ -279,7 +279,7 @@ extension Array where Element == TKUIRoutingResultsViewModel.Section {
   }
 }
 
-// MARK: - RxDataSources
+// MARK: - RxDataSources protocol conformance
 
 public func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsViewModel.Item) -> Bool {
   switch (lhs, rhs) {

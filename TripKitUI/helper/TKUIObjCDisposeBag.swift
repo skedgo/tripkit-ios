@@ -10,6 +10,7 @@ import Foundation
 
 import RxSwift
 
+/// :nodoc:
 public class TKUIObjCDisposeBag: NSObject {
   public let disposeBag = DisposeBag()
 }

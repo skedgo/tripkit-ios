@@ -1,0 +1,43 @@
+.footer
+	display: -webkit-flex
+	display: flex
+	-webkit-flex-direction: row
+	flex-direction: column
+	padding: 3rem 0
+	background-color: #23b15e
+	border-top: 2px solid rgba(255,255,255,.1)
+	border-bottom: 2px solid transparent
+	box-sizing: border-box
+	@media screen and (min-width: 768px)
+		-webkit-flex-direction: row
+		flex-direction: row
+		padding: 0
+	>.logo
+		padding: 1rem
+		line-height: 0
+		>img
+			height: 34px
+			width: 134px
+	>.menu
+		margin: 0
+		padding: 0
+		list-style-type: none
+		display: -webkit-flex
+		display: flex
+		-webkit-flex-direction: column
+		flex-direction: column
+		@media screen and (min-width: 768px)
+			-webkit-flex-direction: row
+			flex-direction: row
+			align-items: center
+		>li
+			display: block
+			@media screen and (min-width: 768px)
+				display: inline-block
+			>a
+				display: block
+				padding: 1rem
+				font-size: .875rem
+				line-height: 1
+				font-family: $font-semibold
+				color: rgba(255,255,255,.8)

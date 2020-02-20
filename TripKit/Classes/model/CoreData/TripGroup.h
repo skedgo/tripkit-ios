@@ -25,10 +25,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) id<NSCoding, NSObject> classification;
 @property (nonatomic, strong, nullable) NSNumber * frequency;
+
+/// :nodoc:
 @property (nonatomic, strong) NSNumber * flags;
+
+/// :nodoc:
 @property (nonatomic, strong, nullable) NSArray<id<NSCoding, NSObject>> *sourcesRaw;
+
+/// :nodoc:
 @property (nonatomic, strong) NSNumber * visibilityRaw;
+
+/// :nodoc:
 @property (nonatomic, assign) BOOL toDelete;
+
 @property (nonatomic, strong, null_resettable) TripRequest *request;
 @property (nonatomic, strong) NSSet<Trip *> *trips;
 @property (nonatomic, strong, nullable) Trip *visibleTrip;
@@ -37,11 +46,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) TKTripGroupVisibility visibility;
 
+/// :nodoc:
 - (void)adjustVisibleTrip;
+
 - (nullable NSDate *)earliestDeparture;
 
 - (NSSet<NSString *> *)usedModeIdentifiers;
 
+/// :nodoc:
 - (NSString *)debugString;
 
 #pragma mark - Caches
@@ -57,11 +69,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - User interaction
 
+/// :nodoc:
 @property (nonatomic, assign) BOOL userDidSaveToCalendar;
 
 @end
 
 
+/// :nodoc:
 @interface TripGroup (CoreDataGeneratedAccessors)
 - (void)addTripsObject:(Trip *)value;
 - (void)removeTripsObject:(Trip *)value;

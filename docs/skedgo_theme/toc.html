@@ -1,0 +1,11 @@
+<div class="sidebar hidden-print affix" role="complementary" id="sidebar">
+	<div class="indicator"></div>
+    <ul class="nav sidenav">
+    {%- for toc_item in page.toc %}
+        <li class="main "><a href="{{ toc_item.url }}" class="{% if toc_item.active %}active{% endif %}">{{ toc_item.title }}</a></li>
+        {%- for toc_item in toc_item.children %}
+            <li><a href="{{ toc_item.url }}" class="{% if toc_item.active %}active{% endif %}">{{ toc_item.title }}</a></li>
+        {%- endfor %}
+    {%- endfor %}
+    </ul>
+</div>

@@ -24,8 +24,12 @@
 @property (nonatomic, strong, nonnull) NSNumber * minutes; // cache for sorting
 @property (nonatomic, strong, nonnull) NSNumber * mainSegmentHashCode;
 
+/// :nodoc:
 @property (nonatomic, retain, nullable) id data; // NSData (or NSDictionary)
+
+/// :nodoc:
 @property (nonatomic, strong, nonnull) NSNumber * flags;
+
 @property (nonatomic, strong, nullable) NSString * saveURLString;
 @property (nonatomic, strong, nullable) NSString * shareURLString;
 @property (nonatomic, strong, nullable) NSString * temporaryURLString;
@@ -44,9 +48,13 @@
 @property (nonatomic, retain, nullable) NSNumber * budgetPoints;
 @property (nonatomic, assign) BOOL toDelete;
 
+/// :nodoc:
 @property (nonatomic, retain, nonnull) NSSet *segmentReferences;
+
 @property (nonatomic, strong, nullable) TripGroup * representedGroup;
 @property (nonatomic, strong, nonnull) TripGroup * tripGroup;
+
+/// :nodoc:
 @property (nonatomic, strong, nullable) NSManagedObject * tripTemplate;
 
 + (nullable Trip *)findSimilarTripTo:(nonnull Trip *)trip
@@ -144,6 +152,7 @@
 
 @end
 
+/// :nodoc:
 @interface Trip (CoreDataGeneratedAccessors)
 
 - (void)addSegmentReferencesObject:(nonnull SegmentReference *)value;

@@ -358,15 +358,16 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
   
 }
 
-// MARK: - Protocol conformance
+// MARK: - RxDataSources protocol conformance
 
-public func ==(lhs: TKUIRoutingResultsViewModel.RouteBuilder, rhs: TKUIRoutingResultsViewModel.RouteBuilder) -> Bool {
-  return lhs.time == rhs.time
-    && lhs.origin === rhs.origin
-    && lhs.destination === rhs.destination
-    && lhs.mode == rhs.mode
+extension TKUIRoutingResultsViewModel.RouteBuilder: Equatable {
+  public static func ==(lhs: TKUIRoutingResultsViewModel.RouteBuilder, rhs: TKUIRoutingResultsViewModel.RouteBuilder) -> Bool {
+    return lhs.time == rhs.time
+      && lhs.origin === rhs.origin
+      && lhs.destination === rhs.destination
+      && lhs.mode == rhs.mode
+  }
 }
-extension TKUIRoutingResultsViewModel.RouteBuilder: Equatable { }
 
 // MARK: -
 

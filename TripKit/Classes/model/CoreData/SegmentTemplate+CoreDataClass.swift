@@ -13,7 +13,9 @@ import MapKit
 ///
 /// It is meant to be used as a template for creating "full" Segment objects which also have  time information and a sense of ordering.
 ///
-/// Also see `SegmentReference`.
+/// Also see `SegmentReference`. SDK users should just use `TKSegment` instead.
+///
+/// :nodoc:
 @objc(SegmentTemplate)
 public class SegmentTemplate: NSManagedObject {
 

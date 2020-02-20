@@ -204,7 +204,7 @@ extension TKUIServiceVisitCell {
       isVisited = true
     }
     
-    setTiming(visit.timing, timeZone: visit.timeZone, isVisited: isVisited, realTime: visit.realTimeStatus())
+    setTiming(visit.timing, timeZone: visit.timeZone, isVisited: isVisited, realTime: visit.realTimeStatus)
     
     let title = visit.stop.title ?? visit.stop.location?.title
     setTitle(title, isVisited: isVisited)

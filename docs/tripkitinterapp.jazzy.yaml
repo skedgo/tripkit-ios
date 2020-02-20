@@ -1,0 +1,9 @@
+author: SkedGo
+author_url: https://skedgo.com
+title: SkedGo's TripKit iOS - TripKitInterApp
+theme: fullwidth
+output: source/TripKitInterApp
+hide_documentation_coverage: true # falsely reports 100%
+
+module: TripKitInterApp
+podspec: ../TripKitInterApp.podspec

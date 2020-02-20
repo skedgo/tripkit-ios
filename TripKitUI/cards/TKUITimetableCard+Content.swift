@@ -42,7 +42,7 @@ extension TKUIDepartureCellContent {
       accessibilityTimeText: visit.buildTimeText(spacer: ";").string,
       timeText: visit.buildTimeText(),
       lineText: visit.buildLineText(),
-      approximateTimeToDepart: visit.countdownDate(),
+      approximateTimeToDepart: visit.countdownDate,
       alwaysShowAccessibilityInformation: TKUserProfileHelper.showWheelchairInformation,
       wheelchairAccessibility: accessibility,
       alerts: service.allAlerts(),
@@ -101,7 +101,7 @@ extension StopVisits {
       }
     }
     
-    let color = realTimeStatus().color
+    let color = realTimeStatus.color
     return NSAttributedString(string: text, attributes: [.foregroundColor: color])
   }
   

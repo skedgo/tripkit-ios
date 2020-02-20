@@ -1,0 +1,87 @@
+.navbar-bottom
+	width: 100%
+	margin-top: 5rem
+	background-color: #25b15e
+	&:before, &:after
+		+clearfix
+	>.container
+		display: block
+		width: 100%
+		padding-left: 0
+		padding-right: 0
+		@media screen and (min-width: 768px)
+			width: 720px
+			display: grid
+			grid-template-columns: 1fr 1fr
+			padding-left: 1rem
+			padding-right: 1rem
+		@media screen and (min-width: 992px)
+			width: 960px
+		@media screen and (min-width: 1200px)
+			width: 1140px
+
+	.prev, 
+	.next
+		display: block
+		position: relative
+		padding: 2rem
+		color: #ffffff
+		text-decoration: none
+		> .label
+			font-family: $font-semibold
+			font-size: 1.125rem
+			color: rgba(255, 255, 255, 0.6)
+			line-height: 1.2
+		> .title
+			font-family: $font-medium
+			font-size: 2rem
+			color: white
+			line-height: 1.1
+			+transition(color)
+		&:after
+			content: " "
+			position: absolute
+			display: block
+			top: 50%
+			transform: translateY(-50%)
+			height: 33px
+			width: 19px
+			background-repat: no-repeat
+			background-position: center
+			+transition(all)
+		&:hover
+			> .title
+				color: rgba(255, 255, 255, 0.6)
+			&:after
+				opacity: .6
+	.prev
+		@media screen and (min-width: 768px)
+			margin-left: -2rem
+			border-bottom: none
+		text-align: left
+		border-bottom: 4px solid white
+		&:after
+			left: .25rem
+			@media screen and (min-width: 768px)
+				left: 0rem
+			background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOSIgaGVpZ2h0PSIzMyIgdmlld0JveD0iMCAwIDE5IDMzIj4gIDxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9IiNGRkYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI0IiBwb2ludHM9IjE2LjQ1NiAzMC45MTIgMiAxNi40NTYgMTYuNDU2IDIgMTYuNDU2IDIiLz48L3N2Zz4=)
+		&:hover
+			&:after
+				transform: translate(-4px, -50%)
+	.next
+		@media screen and (min-width: 768px)
+			margin-right: -2rem
+		text-align: right
+		&:after
+			right: .25rem
+			@media screen and (min-width: 768px)
+				right: 0
+			background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOSIgaGVpZ2h0PSIzMyIgdmlld0JveD0iMCAwIDE5IDMzIj4gIDxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9IiNGRkYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI0IiBwb2ludHM9IjE2LjQ1NiAzMC45MTIgMiAxNi40NTYgMTYuNDU2IDIgMTYuNDU2IDIiIHRyYW5zZm9ybT0ibWF0cml4KC0xIDAgMCAxIDE4LjQ1NiAwKSIvPjwvc3ZnPg==)
+		&:hover
+			&:after
+				transform: translate(4px, -50%)
+	.disabled
+		display: none
+		@media screen and (min-width: 768px)
+			visibility: hidden
+			display: block
