@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="pX8-va-QNb">
-                        <rect key="frame" x="16" y="16" width="178" height="64"/>
+                        <rect key="frame" x="20" y="16" width="178" height="64"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Pup-Ao-bJK">
                                 <rect key="frame" x="0.0" y="0.0" width="138" height="28"/>
@@ -91,7 +91,7 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iaM-1r-elk">
-                        <rect key="frame" x="379" y="30" width="40" height="36.5"/>
+                        <rect key="frame" x="375" y="30" width="40" height="36.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yhb-5V-Syb" customClass="TKUIStyledLabel">
                                 <rect key="frame" x="3" y="0.0" width="34.5" height="20.5"/>
@@ -128,8 +128,8 @@
                     <constraint firstItem="iaM-1r-elk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="TkW-zz-PVu"/>
                     <constraint firstItem="B0C-s1-6Mr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YcF-vp-U4l"/>
                     <constraint firstItem="iaM-1r-elk" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="g8I-GO-do5"/>
-                    <constraint firstAttribute="trailing" secondItem="iaM-1r-elk" secondAttribute="trailing" constant="16" id="ifP-8R-NKZ"/>
-                    <constraint firstItem="pX8-va-QNb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="qgH-3B-Jmf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="iaM-1r-elk" secondAttribute="trailing" id="ifP-8R-NKZ"/>
+                    <constraint firstItem="pX8-va-QNb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="qgH-3B-Jmf"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pX8-va-QNb" secondAttribute="bottom" constant="16" id="s7S-9W-M6C"/>
                 </constraints>
                 <variation key="default">
