@@ -31,7 +31,11 @@ class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManager
   
   weak var viewModel: TKUIRoutingResultsViewModel?
   
-  init(destination: MKAnnotation? = nil) {
+  private let zoomToDestination: Bool
+  
+  init(destination: MKAnnotation? = nil, zoomToDestination: Bool) {
+    self.zoomToDestination = zoomToDestination
+
     super.init()
 
     self.destinationAnnotation = destination
@@ -108,7 +112,7 @@ class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManager
     guard let viewModel = viewModel else { assertionFailure(); return }
     
     let zoomTo = [originAnnotation, destinationAnnotation].compactMap { $0 }
-    if !zoomTo.isEmpty {
+    if zoomToDestination, !zoomTo.isEmpty {
       self.zoom(to: zoomTo, animated: true)
     }
     
