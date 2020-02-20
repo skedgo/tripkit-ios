@@ -57,6 +57,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     configureCell: TKUIRoutingResultsCard.cell
   )
   
+  private let showSearch = PublishSubject<Void>()
   private let highlighted = PublishSubject<IndexPath>()
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
@@ -292,9 +293,15 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     // Search places
     
-    titleView?.locationTapped
+    
+    let searchTriggers = [
+        showSearch,
+        titleView?.locationTapped.asObservable().map { _ in }
+      ].compactMap {$0 }
+    
+    Observable.merge(searchTriggers)
       .withLatestFrom(viewModel.request)
-      .emit(onNext: { [weak self] in self?.showSearch(origin: $0.fromLocation, destination: $0.toLocation) })
+      .subscribe(onNext: { [weak self] in self?.showSearch(origin: $0.fromLocation, destination: $0.toLocation) })
       .disposed(by: disposeBag)
   }
   
@@ -310,6 +317,23 @@ public class TKUIRoutingResultsCard: TGTableCard {
     super.willDisappear(animated: animated)
     
     realTimeBag = DisposeBag()
+  }
+  
+  // MARK: - Keyboard shortcuts
+  
+  public override var keyCommands: [UIKeyCommand]? {
+    var commands = super.keyCommands ?? []
+    
+    if #available(iOS 13.0, *) {
+      // ⌘+F: Search (show query input)
+      commands.append(UIKeyCommand(title: Loc.Search, image: nil, action: #selector(triggerSearch), input: "f", modifierFlags: [.command]))
+    }
+    
+    return commands
+  }
+  
+  @objc func triggerSearch() {
+    showSearch.onNext(())
   }
   
   // MARK: - Disabling interaction
