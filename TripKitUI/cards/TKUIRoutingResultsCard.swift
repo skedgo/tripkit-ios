@@ -326,14 +326,33 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     if #available(iOS 13.0, *) {
       // ⌘+F: Search (show query input)
-      commands.append(UIKeyCommand(title: Loc.Search, image: nil, action: #selector(triggerSearch), input: "f", modifierFlags: [.command]))
+      commands.append(UIKeyCommand(title: Loc.Search, image: nil, action: #selector(triggerSearch), input: "F", modifierFlags: [.command]))
     }
     
     return commands
   }
   
+  override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+    if action == #selector(TKUIDebugActionHandler.debugActionCopyPrimaryRequest) {
+      return request != nil
+    } else {
+      return super.canPerformAction(action, withSender: sender)
+    }
+  }
+  
   @objc func triggerSearch() {
     showSearch.onNext(())
+  }
+  
+  @objc
+  public func debugActionCopyPrimaryRequest(_ sender: AnyObject?) {
+    guard let request = request else { return }
+   
+    // Note: Only gets modes if picker is visible
+    let modes = modePicker?.pickedModes.map { $0.identifier }
+    
+    let url = TKRouter.url(forRoutingRequest: request, withModeIdentifiers: modes.flatMap(Set.init))
+    UIPasteboard.general.string = url
   }
   
   // MARK: - Disabling interaction

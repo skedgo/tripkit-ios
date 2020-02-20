@@ -639,6 +639,7 @@
 		3AEB47E920DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */; };
 		3AEB47EA20DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */; };
 		3AEB47EC20DCE48500F9DF83 /* RxHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */; };
+		3AF05CF823FEFF550043B2EB /* TKUIDebugActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF05CF723FEFF550043B2EB /* TKUIDebugActionHandler.swift */; };
 		3AF3F2621E04CA7C00A2EEC6 /* TKBookingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */; };
 		3AF3F2641E04CA8C00A2EEC6 /* TKLocationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */; };
 		3AF5F2B120EFF7BE003AAEBA /* TKUIAttributionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF5F2AE20EFF7BD003AAEBA /* TKUIAttributionCell.xib */; };
@@ -1334,6 +1335,7 @@
 		3AEB43EB1F757C1E00FA3289 /* TKDeparturesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKDeparturesProvider.swift; sourceTree = "<group>"; };
 		3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMultiPoint+ClosestPoint.swift"; sourceTree = "<group>"; };
 		3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxHelpers.swift; sourceTree = "<group>"; };
+		3AF05CF723FEFF550043B2EB /* TKUIDebugActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIDebugActionHandler.swift; sourceTree = "<group>"; };
 		3AF2F6F622EF27EC00559D19 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingTypes.swift; sourceTree = "<group>"; };
 		3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationTypes.swift; sourceTree = "<group>"; };
@@ -1850,6 +1852,7 @@
 				3A897A0E2344E457004D0281 /* StopVisits+RealTimeColor.swift */,
 				3ACF474722981FF40096860D /* TGCardViewController+Present.swift */,
 				3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */,
+				3AF05CF723FEFF550043B2EB /* TKUIDebugActionHandler.swift */,
 				3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */,
 				3A932EAC23BF2CCB004AA154 /* TKUIObjCDisposeBag.swift */,
 				3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */,
@@ -3434,6 +3437,7 @@
 				3AFD397320D93D9800FDC7D0 /* TKUISheet.m in Sources */,
 				3ACF46F72297E6E50096860D /* TKUITimetableViewController.swift in Sources */,
 				3A2717472327CD2F007FF59D /* TKUICollectionViewBubbleLayout.swift in Sources */,
+				3AF05CF823FEFF550043B2EB /* TKUIDebugActionHandler.swift in Sources */,
 				3A383CBB22315A4D00361596 /* TKUITripOverviewViewModel+Fetch.swift in Sources */,
 				3A6DF12A202C8EB80084CB2C /* UIView+Helpers.m in Sources */,
 				3ACF472D2297FA080096860D /* TKUITimetableViewModel.swift in Sources */,
