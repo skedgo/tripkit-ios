@@ -131,7 +131,7 @@ class TKUIRoutingQueryInputTitleView: UIView {
 
 extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
   
-  func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     switch searchBar {
     case fromSearchBar: switchMode.onNext(.origin)
     case toSearchBar: switchMode.onNext(.destination)
@@ -141,8 +141,6 @@ extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
     // Before editing begins, we publish the current search text so that
     // the autocompletion shows immediate results if available.
     typed.onNext(searchBar.text ?? "")
-    
-    return true
   }
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
