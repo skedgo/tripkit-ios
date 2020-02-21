@@ -24,8 +24,10 @@ class TKUITimetableAccessoryView: UIView {
   /// Constraint between collection view and bottom bar. Should be activated when `customActionStack` is hidden.
   @IBOutlet weak var serviceCollectionToBottomBarConstraint: NSLayoutConstraint!
   
-  @IBOutlet weak var customActionStack: UIStackView!
-
+  @IBOutlet weak var customActionView: UIView!
+  @IBOutlet weak var customActionViewToBottomBarConstraint: NSLayoutConstraint!
+  @IBOutlet weak var serviceCollectionToCustomActionViewConstraint: NSLayoutConstraint!
+  
   @IBOutlet weak var bottomBar: UIView!
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var timeButton: UIButton!
@@ -58,7 +60,9 @@ class TKUITimetableAccessoryView: UIView {
     serviceCollectionView.dataSource = self
     serviceCollectionLayout.delegate = self
     
-    customActionStack.isHidden = true
+    customActionView.isHidden = true
+    customActionViewToBottomBarConstraint.isActive = false
+    serviceCollectionToCustomActionViewConstraint.isActive = false
     serviceCollectionToBottomBarConstraint.isActive = true
 
     bottomBar.backgroundColor = .tkBackgroundSecondary
@@ -75,13 +79,26 @@ class TKUITimetableAccessoryView: UIView {
   }
   
   func setCustomActions(_ actions: [TKUITimetableCardAction], for model: [TKUIStopAnnotation], card: TKUITimetableCard) {
-    customActionStack.arrangedSubviews.forEach(customActionStack.removeArrangedSubview)
-    customActionStack.removeAllSubviews()
+    customActionView.removeAllSubviews()
     
-    customActionStack.isHidden = actions.isEmpty
-    serviceCollectionToBottomBarConstraint.isActive = actions.isEmpty
+    // We deal with empty actions separately here, since it's best to
+    // deactivate constraints first before activating. Otherwise, AL
+    // will complain about unable to satisfy simultaneously
+    if actions.isEmpty {
+      customActionView.isHidden = true
+      serviceCollectionToCustomActionViewConstraint.isActive = false
+      customActionViewToBottomBarConstraint.isActive = false
+      serviceCollectionToBottomBarConstraint.isActive = true
+    } else {
+      customActionView.isHidden = false
+      serviceCollectionToBottomBarConstraint.isActive = false
+      serviceCollectionToCustomActionViewConstraint.isActive = true
+      customActionViewToBottomBarConstraint.isActive = true
+    }
+        
+    var previousActionView: UIView?
     
-    for action in actions {
+    for (index, action) in actions.enumerated() {
       let actionView = TKUITimetableActionView.newInstance()
       actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
@@ -95,7 +112,30 @@ class TKUITimetableAccessoryView: UIView {
           actionView.label.text = action.title
         }
       }
-      customActionStack.addArrangedSubview(actionView)
+      
+      customActionView.addSubview(actionView)
+      actionView.translatesAutoresizingMaskIntoConstraints = false
+      
+      if index == 0 {
+        actionView.leadingAnchor.constraint(equalTo: customActionView.leadingAnchor).isActive = true
+        actionView.topAnchor.constraint(equalTo: customActionView.topAnchor).isActive = true
+        actionView.bottomAnchor.constraint(equalTo: customActionView.bottomAnchor).isActive = true
+      } else {
+        guard let previous = previousActionView else { preconditionFailure() }
+        actionView.leadingAnchor.constraint(equalTo: previous.trailingAnchor, constant: 8).isActive = true
+        actionView.topAnchor.constraint(equalTo: previous.topAnchor).isActive = true
+        actionView.bottomAnchor.constraint(equalTo: previous.bottomAnchor).isActive = true
+        actionView.centerYAnchor.constraint(equalTo: previous.centerYAnchor).isActive = true
+        let widthConstraint = actionView.widthAnchor.constraint(equalTo: previous.widthAnchor)
+        widthConstraint.priority = .defaultLow
+        widthConstraint.isActive = true
+      }
+      
+      if index == actions.count - 1 {
+        actionView.trailingAnchor.constraint(equalTo: customActionView.trailingAnchor).isActive = true
+      }
+      
+      previousActionView = actionView
     }
   }
   
