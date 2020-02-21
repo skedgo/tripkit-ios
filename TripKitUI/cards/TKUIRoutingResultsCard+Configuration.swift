@@ -55,7 +55,7 @@ public extension TKUIRoutingResultsCard {
     /// MapKit.
     ///
     /// Defaults to using `TKUIRoutingResultsMapManager`.
-    public var mapManagerFactory: ((MKAnnotation?) -> TKUIRoutingResultsMapManagerType) = TKUIRoutingResultsMapManager.init
+    public var mapManagerFactory: ((MKAnnotation?, Bool) -> TKUIRoutingResultsMapManagerType) = TKUIRoutingResultsMapManager.init
     
     /// An optional list of autocompletion data providers. This list will be used by an instance of
     /// `TKUILocationSearchViewController`, which is presented when users click on
