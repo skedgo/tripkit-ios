@@ -224,8 +224,9 @@ extension TKLog {
     }
   }
 
+  /// :nodoc: - Public for building CocoaPods-style
   @objc(log:request:UUID:)
-  class func log(_ identifier: String, request: URLRequest, uuid: UUID) {
+  public class func log(_ identifier: String, request: URLRequest, uuid: UUID) {
     #if BETA || DEBUG
     guard !loggers.isEmpty else { return }
 
@@ -234,8 +235,9 @@ extension TKLog {
     #endif
   }
 
+  /// :nodoc: - Public for building CocoaPods-style
   @objc(log:response:data:orError:forRequest:UUID:)
-  class func log(_ identifier: String, response: URLResponse?, data: Data?, orError error: NSError?, for request: URLRequest, uuid: UUID) {
+  public class func log(_ identifier: String, response: URLResponse?, data: Data?, orError error: NSError?, for request: URLRequest, uuid: UUID) {
     #if BETA || DEBUG
     guard !loggers.isEmpty else { return }
 
