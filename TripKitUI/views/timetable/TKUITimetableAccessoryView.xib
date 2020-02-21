@@ -26,7 +26,7 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jin-SJ-hvl">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jin-SJ-hvl">
                     <rect key="frame" x="16" y="40" width="343" height="16"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="TTR-ap-J7L"/>
@@ -63,13 +63,13 @@
                 <constraint firstItem="ouN-Ng-mBY" firstAttribute="top" secondItem="jin-SJ-hvl" secondAttribute="bottom" constant="16" id="04r-3e-IsI"/>
                 <constraint firstAttribute="trailing" secondItem="ouN-Ng-mBY" secondAttribute="trailing" id="2V4-T6-tyE"/>
                 <constraint firstItem="ouN-Ng-mBY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="63X-O3-IJt"/>
-                <constraint firstAttribute="trailing" secondItem="CuO-gT-c8T" secondAttribute="trailing" constant="16" id="H5m-nm-iHf"/>
+                <constraint firstAttribute="trailingMargin" secondItem="CuO-gT-c8T" secondAttribute="trailing" id="H5m-nm-iHf"/>
                 <constraint firstAttribute="bottom" secondItem="ouN-Ng-mBY" secondAttribute="bottom" id="I7b-lX-cWY"/>
                 <constraint firstItem="CuO-gT-c8T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MAu-K0-7GW"/>
-                <constraint firstItem="CuO-gT-c8T" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Nia-Jp-Y7E"/>
+                <constraint firstItem="CuO-gT-c8T" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="Nia-Jp-Y7E"/>
                 <constraint firstItem="jin-SJ-hvl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dDE-4f-3L0"/>
-                <constraint firstItem="jin-SJ-hvl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="kDW-9X-oto"/>
-                <constraint firstAttribute="trailing" secondItem="jin-SJ-hvl" secondAttribute="trailing" constant="16" id="nfU-IX-1LK"/>
+                <constraint firstItem="jin-SJ-hvl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="kDW-9X-oto"/>
+                <constraint firstAttribute="trailingMargin" secondItem="jin-SJ-hvl" secondAttribute="trailing" id="nfU-IX-1LK"/>
                 <constraint firstItem="ouN-Ng-mBY" firstAttribute="top" secondItem="CuO-gT-c8T" secondAttribute="bottom" constant="16" id="y8Z-cl-z3c"/>
                 <constraint firstItem="jin-SJ-hvl" firstAttribute="top" secondItem="CuO-gT-c8T" secondAttribute="bottom" constant="16" id="zeD-cS-Oun"/>
             </constraints>
