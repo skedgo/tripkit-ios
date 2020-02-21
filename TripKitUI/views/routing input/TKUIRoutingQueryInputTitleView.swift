@@ -110,6 +110,7 @@ class TKUIRoutingQueryInputTitleView: UIView {
       else { return }
     
     if #available(iOS 13.0, *) {
+      searchBar.becomeFirstResponder()
       searchBar.searchTextField.selectedTextRange = searchBar.searchTextField.textualRange
     }
   }
@@ -130,7 +131,7 @@ class TKUIRoutingQueryInputTitleView: UIView {
 
 extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
   
-  func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     switch searchBar {
     case fromSearchBar: switchMode.onNext(.origin)
     case toSearchBar: switchMode.onNext(.destination)
@@ -140,8 +141,6 @@ extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
     // Before editing begins, we publish the current search text so that
     // the autocompletion shows immediate results if available.
     typed.onNext(searchBar.text ?? "")
-    
-    return true
   }
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -228,6 +227,8 @@ extension Reactive where Base == TKUIRoutingQueryInputTitleView {
     return Binder(self.base) { view, mode in
       view.fromButton.tintColor = mode == .origin ? .tkAppTintColor : .tkLabelSecondary
       view.toButton.tintColor = mode == .destination ? .tkAppTintColor : .tkLabelSecondary
+      
+      view.becomeFirstResponder(mode: mode)
     }
   }
   

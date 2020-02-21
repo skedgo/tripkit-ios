@@ -31,8 +31,9 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
   
   private var viewModel: TKUIRoutingQueryInputViewModel!
   private let didAppear = PublishSubject<Void>()
+  private let routeTriggered = PublishSubject<Void>()
   private let disposeBag = DisposeBag()
-
+  
   private let titleView: TKUIRoutingQueryInputTitleView
 
   public init(origin: MKAnnotation? = nil, destination: MKAnnotation? = nil, biasMapRect: MKMapRect) {
@@ -71,13 +72,18 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
 
     tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
     
+    let route = Signal.merge(
+      titleView.rx.route,
+      routeTriggered.asSignal(onErrorSignalWith: .empty())
+    )
+    
     viewModel = TKUIRoutingQueryInputViewModel(
       origin: origin,
       destination: destination,
       biasMapRect: biasMapRect,
       inputs: TKUIRoutingQueryInputViewModel.UIInput(
         searchText: titleView.rx.searchText.map { ($0, forced: false) },
-        tappedDone: titleView.rx.route,
+        tappedDone: route,
         selected: tableView.rx.modelSelected(TKUIRoutingQueryInputViewModel.Item.self).asSignal(onErrorSignalWith: .empty()),
         selectedSearchMode: titleView.rx.selectedSearchMode,
         tappedSwap: titleView.swapButton.rx.tap.asSignal()
@@ -135,6 +141,21 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
     super.didAppear(animated: animated)
     
     self.didAppear.onNext(())
+  }
+  
+  public override var keyCommands: [UIKeyCommand]? {
+    var commands = super.keyCommands ?? []
+    
+    if #available(iOS 13.0, *) {
+      // ⌘+⏎: Route
+      commands.append(UIKeyCommand(title: Loc.Route, image: nil, action: #selector(triggerRoute), input: "\r", modifierFlags: [.command]))
+    }
+    
+    return commands
+  }
+  
+  @objc func triggerRoute() {
+    routeTriggered.onNext(())
   }
 }
 
