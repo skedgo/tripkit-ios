@@ -39,6 +39,14 @@ public class TKUITimetableCard : TGTableCard {
   /// using the default behaviour of pushing a card displaying the service.
   public weak var departuresDelegate: TKUITimetableCardDelegate?
   
+  /// A string used to filter timetable. If provided, the timetable card will begin
+  /// filtering immediately when is is pushed.
+  public var filter: String?
+  
+  /// This callback is invoked every time the filter string is updated, passing
+  /// through the latest value as an argument.
+  public var filterUpdatedHandler: ((String) -> Void)?
+  
   private let input: Input
 
   private var viewModel: TKUITimetableViewModel!
@@ -160,14 +168,14 @@ public class TKUITimetableCard : TGTableCard {
     self.tableView = tableView
     self.dataSource = dataSource
     
-    
     // Inputs to the VM
     
     let loadMoreAfter = loadMorePublisher
       .map { dataSource[$0] }
       .asSignal(onErrorSignalWith: .empty())
     
-    let filter = accessoryView.searchBar.rx.text.orEmpty
+    accessoryView.searchBar.text = filter
+    let filterObservable = accessoryView.searchBar.rx.text.orEmpty
     
     let selected: Signal<TKUITimetableViewModel.Item>
     #if targetEnvironment(macCatalyst)
@@ -182,12 +190,11 @@ public class TKUITimetableCard : TGTableCard {
       .modelSelected(TKUITimetableViewModel.Item.self)
       .asSignal()
     #endif
-
     
     let input: TKUITimetableViewModel.UIInput = (
       selected: selected,
       showAlerts: cellAlertPublisher.asSignal(onErrorSignalWith: .empty()),
-      filter: filter.asDriver(),
+      filter: filterObservable.asDriver(),
       date: datePublisher.asDriver(onErrorDriveWith: .empty()),
       refresh: .empty(),
       loadMoreAfter: loadMoreAfter
@@ -202,7 +209,6 @@ public class TKUITimetableCard : TGTableCard {
       viewModel = TKUITimetableViewModel(restoredState: state, input: input)
     }
     
-    
     // Bind VM outputs
     
     viewModel.sections
@@ -216,7 +222,6 @@ public class TKUITimetableCard : TGTableCard {
       })
       .disposed(by: disposeBag)
     
-
     viewModel.titles
       .drive(cardView.rx.titles)
       .disposed(by: disposeBag)
@@ -230,7 +235,6 @@ public class TKUITimetableCard : TGTableCard {
     viewModel.lines
       .drive(accessoryView.rx.lines)
       .disposed(by: disposeBag)
-
     
     // TODO: Add viewModel.embarkationStopAlerts
     
@@ -257,7 +261,6 @@ public class TKUITimetableCard : TGTableCard {
     viewModel.next
       .emit(onNext: { [weak self] in self?.navigate(to: $0) })
       .disposed(by: disposeBag)
-
     
     // Additional customisations
     
@@ -282,6 +285,12 @@ public class TKUITimetableCard : TGTableCard {
         }
       })
       .disposed(by: disposeBag)
+    
+    filterObservable
+    .subscribe(onNext: { [weak self] in
+      self?.filterUpdatedHandler?($0)
+    })
+    .disposed(by: disposeBag)
 
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
