@@ -188,10 +188,14 @@ extension TKLog {
   /// The URL request along with a UUID to identify each request sent
   public struct ServerRequest: Hashable {
     public let request: URLRequest
-    public let id: UUID
+    public let id: String
 
     public static func == (lhs: TKLog.ServerRequest, rhs: TKLog.ServerRequest) -> Bool {
       return lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+      hasher.combine(id)
     }
   }
   
@@ -230,7 +234,7 @@ extension TKLog {
     #if BETA || DEBUG
     guard !loggers.isEmpty else { return }
 
-    let serverRequest = ServerRequest(request: request, id: uuid)
+    let serverRequest = ServerRequest(request: request, id: uuid.uuidString)
     loggers.forEach { $0.log(identifier: identifier, request: serverRequest) }
     #endif
   }
@@ -241,7 +245,7 @@ extension TKLog {
     #if BETA || DEBUG
     guard !loggers.isEmpty else { return }
 
-    let serverRequest = ServerRequest(request: request, id: uuid)
+    let serverRequest = ServerRequest(request: request, id: uuid.uuidString)
     let serverResponse: ServerResponse
     if let response = response {
       serverResponse = ServerResponse(request: serverRequest, result: .success((response, data)))
