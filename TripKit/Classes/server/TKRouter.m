@@ -230,7 +230,7 @@
        } else {
          
          // failure
-         [TKLog info:NSStringFromClass([self class]) format:@"Failed to download trip, and no copy in cache. Error: %@", error];
+         [TKLog info:NSStringFromClass([self class]) text:[NSString stringWithFormat:@"Failed to download trip, and no copy in cache. Error: %@", error]];
          if (completion) {
            completion(nil);
          }
@@ -243,7 +243,7 @@
 {
   NSURL *updateURL = [NSURL URLWithString:trip.updateURLString];
   if (updateURL == nil) {
-    [TKLog info:@"TKRouter" format:@"Tried to update a trip that doesn't have a (valid) update URL: %@", trip];
+    [TKLog info:@"TKRouter" text:[NSString stringWithFormat:@"Tried to update a trip that doesn't have a (valid) update URL: %@", trip]];
     completion(trip, NO);
     return;
   }
@@ -464,8 +464,6 @@
 }
 
 
-
-
 #pragma mark - Private methods
 
 - (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *shareURL, id JSON, NSError *error))completion
@@ -492,7 +490,7 @@
     } else if (pair.count == 2) {
       [paras setValue:pair[1] forKey:pair[0]];
     } else {
-      [TKLog info:NSStringFromClass([self class]) format:@"Unknown option: %@", option];
+      [TKLog info:@"TKRouter" text:[NSString stringWithFormat:@"Unknown option: %@", option]];
     }
   }
   

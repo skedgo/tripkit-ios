@@ -69,7 +69,7 @@
                 allowDuplicatingExistingTrip:YES];
     if (added.count == 0) {
       [request remove];
-      DLog(@"Error parsing request: %@", json);
+      [TKLog warn:@"TKRoutingParser" text:[NSString stringWithFormat:@"Error parsing request: %@", json]];
       completion(nil);
       return;
     }
@@ -77,7 +77,7 @@
     BOOL success = [TKRoutingParser populate:request start:nil end:nil leaveAfter:nil arriveBy:nil queryJSON:json[@"query"]];
     if (! success) {
       [request remove];
-      DLog(@"Got trip without a segment from JSON: %@", json);
+      [TKLog info:@"TKRoutingParser" text:[NSString stringWithFormat:@"Got trip without a segment from JSON: %@", json]];
       completion(nil);
       return;
     }
@@ -173,7 +173,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
 {
   NSString *error = json[@"error"];
   if (error) {
-    DLog(@"Error while parsing: %@", error);
+    [TKLog warn:@"TKRoutingParser" text:[NSString stringWithFormat:@"Error while parsing: %@", error]];
     return @[];
   }
   

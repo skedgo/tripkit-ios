@@ -128,7 +128,7 @@
     case SGSearchSectionAutocompletion: {
       NSUInteger row = indexPath.row;
       if (row >= self.autocompletionResults.count) {
-        [TKLog warn:@"SGAutocompletionDataSource" format:@"Unexpected index path in autocompletion results: %@. Please file a bug with steps to reproduce this.", indexPath];
+        [TKLog warn:@"SGAutocompletionDataSource" text:[NSString stringWithFormat:@"Unexpected index path in autocompletion results: %@. Please file a bug with steps to reproduce this.", indexPath]];
         row = (NSUInteger) MAX(0, (NSInteger)self.autocompletionResults.count - 1);
       }
       

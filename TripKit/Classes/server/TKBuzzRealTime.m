@@ -27,7 +27,7 @@
   }
   
   if (trip.request == nil) {
-    DLog(@"Not updating trip as it doesn't have a request (anymore): %@", trip);
+    [TKLog debug:@"TKBuzzRealTime" text:[NSString stringWithFormat:@"Not updating trip as it doesn't have a request (anymore): %@", trip]];
     return;
   }
 
@@ -225,7 +225,7 @@
    }
                              failure:
    ^(NSError *error) {
-     DLog(@"Error response: %@", error);
+     [TKLog info:@"TKBuzzRealTime" text:[NSString stringWithFormat:@"Error response: %@", error]];
      failure(error);
    }];
 }
@@ -262,12 +262,12 @@
     
     
 		if (! service) {
-			DLog(@"No matching service for code: %@", serviceID);
+			[TKLog warn:@"TKBuzzRealTime" text:[NSString stringWithFormat:@"No matching service for code: %@", serviceID]];
 			continue;
 		}
 		
 		if (! service.managedObjectContext) {
-			DLog(@"Service has no context: %@", service);
+			[TKLog warn:@"TKBuzzRealTime" text:[NSString stringWithFormat:@"Service has no context: %@", service]];
 			continue;
 		}
 		
@@ -283,7 +283,7 @@
 			if (! startTime)
 				continue;
 			if (startTime.integerValue <= 0) {
-        		[TKLog info:@"TKBuzzRealTime" format:@"Ignoring bad start time '%@' in response object:\n%@", startTime, responseObject];
+        		[TKLog info:@"TKBuzzRealTime" text:[NSString stringWithFormat:@"Ignoring bad start time '%@' in response object:\n%@", startTime, responseObject]];
 				continue;
 			}
 			NSDate *departure = [NSDate dateWithTimeIntervalSince1970:startTime.integerValue];

@@ -315,7 +315,7 @@ typedef NSUInteger SGServiceFlag;
 			// we are at the target. is it the requested split?
 			if (currentVisit == split) {
 				// winner!
-//				DLog(@"Split is at %d with distance %.1f. Winning waypoint: %@.", bestTargetIndex, bestTargetDistance, waypoints[bestTargetIndex]);
+//				[TKLog debug:@"TKService" text:[NSString stringWithFormat:@"Split is at %d with distance %.1f. Winning waypoint: %@.", bestTargetIndex, bestTargetDistance, waypoints[bestTargetIndex]]];
 				return bestTargetIndex;
 			} else {
 				// advance the target
