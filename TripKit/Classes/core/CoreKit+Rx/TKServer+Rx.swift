@@ -25,6 +25,14 @@ public extension TKServer {
     case repeatWithNewParameters(TimeInterval, [String: Any])
   }
 
+  static func buildRequest(
+    _ method: TKServer.HTTPMethod,
+    path: String,
+    parameters: [String: Any] = [:],
+    region: TKRegion? = nil
+  ) -> URLRequest {
+    return shared.buildSkedGoRequest(withMethod: method.rawValue, path: path, parameters: parameters, region: region)
+  }
 }
 
 extension Reactive where Base: TKServer {

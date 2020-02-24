@@ -19,7 +19,7 @@ typedef NSUInteger SGTripFlag;
 
 @interface Trip ()
 
-@property (nonatomic, strong) NSSet *usedModeIdentifiers;
+@property (nonatomic, strong) NSSet<NSString *> *usedModeIdentifiers;
 @property (nonatomic, strong) NSMutableArray *sortedSegments;
 
 @end

@@ -139,35 +139,26 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 
 + (void)hitRequest:(NSURLRequest *)request completion:(TKServerGenericBlock)completion
 {
-#ifdef DEBUG
-  [TKLog info:@"TKServer" block:^NSString * _Nonnull {
-    return [NSString stringWithFormat:@"Sending %@ %@", request.HTTPMethod, request.URL.absoluteString];
-  }];
-  NSMutableString *output = [NSMutableString stringWithFormat:@"Headers: %@", request.allHTTPHeaderFields];
-  if ([[request HTTPBody] length] > 0) {
-    [output appendFormat:@"\nData: %@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]];
-  }
-  [TKLog verbose:@"TKServer" block:^NSString * _Nonnull {
-    return [NSString stringWithFormat:@"%@", output];
-  }];
-#endif
+  NSUUID *requestUUID = [NSUUID UUID];
+  [TKLog log:@"TKServer" request:request UUID:requestUUID];
   
   NSURLSession *defaultSession = [NSURLSession sharedSession];
   NSURLSessionDataTask *task = [defaultSession dataTaskWithRequest:request
                                                  completionHandler:
                                 ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                  [TKLog log:@"TKServer"
+                                    response:response
+                                        data:data
+                                     orError:error
+                                  forRequest:request
+                                        UUID:requestUUID];
+    
                                   NSInteger status = 0;
                                   NSDictionary *headers = nil;
                                   if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                                     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
                                     status = httpResponse.statusCode;
                                     headers = httpResponse.allHeaderFields;
-
-                                    [TKLog verbose:@"TKServer" block:^NSString * _Nonnull{
-                                      return [NSString stringWithFormat:@"Received %@ from %@.\nHeaders: %@", @(status),
-                                              httpResponse.URL.absoluteString,
-                                              httpResponse.allHeaderFields];
-                                    }];
                                   } else {
                                     headers = @{};
                                   }
@@ -180,10 +171,6 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                                     completion(status, headers, nil, nil, nil);
                                     
                                   } else {
-                                    [TKLog verbose:@"TKServer" block:^NSString * _Nonnull{
-                                      return [NSString stringWithFormat:@"Data: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
-                                    }];
-                                    
                                     NSError *parserError = nil;
                                     id responseObject = [NSJSONSerialization JSONObjectWithData:data
                                                                                         options:0
@@ -196,7 +183,7 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                                         completion(status, headers, responseObject, data, nil);
                                       }
                                     } else {
-                                      [TKLog warn:@"TKError" format:@"Could not parse: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+                                      [TKLog warn:@"TKServer" text:[NSString stringWithFormat:@"Could not parse: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]]];
                                       completion(status, headers, nil, nil, parserError);
                                     }
                                   }
@@ -400,7 +387,7 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
        }
        
      } else if (error) {
-       [TKLog warn:@"TKServer" format:@"Couldn't fetch regions. Error: %@", error];
+       [TKLog warn:@"TKServer" text:[NSString stringWithFormat:@"Couldn't fetch regions. Error: %@", error]];
        if (completion) {
          completion(NO, error);
        }
@@ -494,22 +481,7 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
     return nil;
   }
   
-  // Create the request
-  // Using the diversion over string rather than just calling
-  // `URLByAppendingPathComponent` to handle `POST`-paths that
-  // include a query-string components
-  NSString *urlString = [[baseURL absoluteString] stringByAppendingPathComponent:path];
-  NSURL *fullURL = [NSURL URLWithString: urlString];
-  
-  NSURLRequest *request = nil;
-  if ([method isEqualToString:@"GET"]) {
-    request = [TKServer GETRequestWithSkedGoHTTPHeadersForURL:fullURL paras:parameters headers:headers];
-  } else if ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"DELETE"]) {
-    // all of these work like post in terms of body and headers
-    request = [TKServer POSTLikeRequestWithSkedGoHTTPHeadersForURL:fullURL method:method paras:parameters headers:headers customData:customData];
-  } else {
-    ZAssert(false, @"Method is not supported: %@", request);
-  }
+  NSURLRequest *request = [TKServer buildSkedGoRequestWithMethod:method baseURL:baseURL path:path parameters:parameters headers:headers customData:customData region:region];
   
   // Backup handler
   void (^failOverBlock)(NSInteger, NSDictionary<NSString *, id> *,  id, NSData *, NSError *) = ^(NSInteger status, NSDictionary<NSString *, id> *headers, id responseObject, NSData *data, NSError *error) {
@@ -594,6 +566,49 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   } else {
     return nil;
   }
+}
+
+- (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
+      path:(NSString *)path
+parameters:(nullable NSDictionary<NSString *, id> *)parameters
+    region:(nullable TKRegion *)region
+{
+  return [TKServer buildSkedGoRequestWithMethod:method baseURL:self.currentBaseURL path:path parameters:parameters headers:nil customData:nil region:region];
+}
+
++ (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
+   baseURL:(NSURL *)baseURL
+      path:(NSString *)path
+parameters:(nullable NSDictionary<NSString *, id> *)parameters
+   headers:(nullable NSDictionary<NSString *, NSString *> *)headers
+    customData:(nullable NSData*)customData
+    region:(nullable TKRegion *)region
+{
+
+  NSURLRequest *request = nil;
+  if ([method isEqualToString:@"GET"]) {
+    NSURL *fullURL = [baseURL URLByAppendingPathComponent:path];
+    request = [TKServer GETRequestWithSkedGoHTTPHeadersForURL:fullURL paras:parameters headers:headers];
+
+  } else if ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"DELETE"]) {
+    
+    NSURL *fullURL;
+    if ([path containsString:@"?"]) {
+      // Using the diversion over string rather than just calling
+      // `URLByAppendingPathComponent` to handle `POST`-paths that
+      // include a query-string components
+      NSString *urlString = [[baseURL absoluteString] stringByAppendingPathComponent:path];
+      fullURL = [NSURL URLWithString: urlString];
+    } else {
+      fullURL = [baseURL URLByAppendingPathComponent:path];
+    }
+    
+    // all of these work like post in terms of body and headers
+    request = [TKServer POSTLikeRequestWithSkedGoHTTPHeadersForURL:fullURL method:method paras:parameters headers:headers customData:customData];
+  } else {
+    ZAssert(false, @"Method is not supported: %@", request);
+  }
+  return request;
 }
 
 + (nullable NSString *)xTripGoVersion

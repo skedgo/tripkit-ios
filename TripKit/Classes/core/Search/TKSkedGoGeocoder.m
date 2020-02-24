@@ -56,7 +56,7 @@
   TKServer *server = [TKServer sharedInstance];
   [server requireRegions:^(NSError *error) {
     if (error) {
-      DLog(@"Error fetching regions: %@", error);
+      [TKLog info:@"TKSkedGoGeocoder" text:[NSString stringWithFormat:@"Error fetching regions: %@", error]];
       if (failure) {
         failure(inputString, error);
       }

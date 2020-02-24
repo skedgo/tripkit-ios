@@ -78,7 +78,7 @@
                                    asAutocompletionResult:NO];
      success(inputString, results);
    } else if (failure) {
-     DLog(@"Foursquare failed with error: %@", error);
+     [TKLog debug:@"TKFoursquareGeocoder" text:[NSString stringWithFormat:@"Foursquare failed with error: %@", error]];
      failure(inputString, nil); // fail without showing error as this might be an internal issue, e.g., quota exceeded
    }
  }];

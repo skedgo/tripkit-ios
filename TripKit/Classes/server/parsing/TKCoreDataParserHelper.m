@@ -156,7 +156,7 @@
       if (visit.stop.stopCode) {
         [existingVisits setValue:visit forKey:visit.stop.stopCode];
       } else {
-        DLog(@"A stop visit without a stop code for its stop snuck in: %@", visit.stop);
+        [TKLog info:@"TKCoreDataParser" text:[NSString stringWithFormat:@"A stop visit without a stop code for its stop snuck in: %@", visit.stop]];
       }
     }
     

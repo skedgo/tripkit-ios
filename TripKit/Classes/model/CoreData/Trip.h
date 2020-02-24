@@ -93,7 +93,7 @@
  @note Only includes walking if it's a walking-only trip!
  @return Set of used mode identifiers.
  */
-- (nonnull NSSet *)usedModeIdentifiers;
+- (nonnull NSSet<NSString *> *)usedModeIdentifiers;
 
 @property (readonly) BOOL allowImpossibleSegments;
 
