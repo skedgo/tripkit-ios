@@ -138,6 +138,8 @@ extension MainViewController {
 
 extension MainViewController: TKUITimetableViewControllerDelegate {
   
+  func timetableViewController(_ controller: TKUITimetableViewController, updatedFilter filter: String) {}
+  
   func requestsDismissal(for controller: TGCardViewController) {
     navigationController?.setNavigationBarHidden(false, animated: true)
     navigationController?.popViewController(animated: true)
