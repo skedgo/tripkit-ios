@@ -97,7 +97,7 @@ completionWithFlag:(void(^)(Trip *trip, BOOL tripUpdated))completion;
         completion:(void(^)(NSURL *URL, Trip * __nullable trip, NSError * __nullable error))completion;
 
 + (nullable NSString *)urlForRoutingRequest:(TripRequest *)tripRequest
-                        withModeIdentifiers:(nullable NSSet *)modeIdentifiers;
+                        withModeIdentifiers:(nullable NSSet<NSString *> *)modeIdentifiers;
 
 @end
 

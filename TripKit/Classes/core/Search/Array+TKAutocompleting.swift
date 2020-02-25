@@ -26,7 +26,7 @@ public extension Array where Element == TKAutocompleting {
     
     return text
       .distinctUntilChanged( { $0.0 == $1.0 && $0.1 == $1.1} )
-      .throttle(.milliseconds(200), latest: true, scheduler: MainScheduler.asyncInstance)
+      .debounce(.milliseconds(200), scheduler: MainScheduler.asyncInstance)
       .flatMapLatest { input -> Observable<[TKAutocompletionResult]> in
         let autocompletions = self.map { provider in
           provider

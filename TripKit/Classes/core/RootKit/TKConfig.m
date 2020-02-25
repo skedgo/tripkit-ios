@@ -8,8 +8,6 @@
 
 #import "TKConfig.h"
 
-#import "TKLog.h"
-
 @interface TKConfig ()
 
 @property (nonatomic, strong) NSDictionary *configuration;

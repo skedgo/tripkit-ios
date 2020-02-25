@@ -120,6 +120,10 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileEnableFlights;
                                   parameters:(nullable NSDictionary<NSString *, id>  *)parameters
                                       region:(nullable TKRegion *)region DEPRECATED_ATTRIBUTE;
 
+- (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
+                                          path:(NSString *)path
+                                    parameters:(nullable NSDictionary<NSString *, id> *)parameters
+                                        region:(nullable TKRegion *)region;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -36,7 +36,7 @@
   [server requireRegions:
    ^(NSError *error) {
      if (error) {
-       DLog(@"Error fetching regions: %@", error);
+       [TKLog warn:@"TKBuzzInfoProvider" text:[NSString stringWithFormat:@"Error fetching regions: %@", error]];
        service.isRequestingServiceData = NO;
        completion(service, NO);
        return;
@@ -92,7 +92,7 @@
                          failure:
       ^(NSError *operationError) {
 #pragma unused(operationError)
-        DLog(@"Error response: %@", operationError);
+        [TKLog info:@"TKBuzzInfoProvider" text:[NSString stringWithFormat:@"Error response: %@", operationError]];
         [service.managedObjectContext performBlock:^{
           service.isRequestingServiceData = NO;
           completion(service, NO);

@@ -98,13 +98,13 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   if (appGroupName != nil) {
     directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:appGroupName];
     if (directory == nil) {
-      [TKLog warn:@"TKTripKit" format:@"Can't load container directory for app group (%@)! Check your settings.", appGroupName];
+      [TKLog warn:@"TKTripKit" text:[NSString stringWithFormat:@"Can't load container directory for app group (%@)! Check your settings.", appGroupName]];
     }
   }
   if (nil == directory) {
     directory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     if (directory == nil) {
-      [TKLog error:@"TKTripKit" format:@"Can't find local directory for TripKit!"];
+      [TKLog error:@"TKTripKit" text:[NSString stringWithFormat:@"Can't find local directory for TripKit!"]];
     }
   }
   return directory;
@@ -215,7 +215,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
       // otherwise, kill it
       ZAssert(false, @"That doesn't make sense. There's no file!");
-      [TKLog error:@"TKTripKit" format:@"Unresolved migration error %@, %@", error, [error userInfo]];
+      [TKLog error:@"TKTripKit" text:[NSString stringWithFormat:@"Unresolved migration error %@, %@", error, [error userInfo]]];
     }
   }
   

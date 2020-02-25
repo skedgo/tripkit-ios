@@ -44,7 +44,7 @@ typedef NSUInteger SGSegmentFlag;
   }
 	
 	if (! self.templateHashCode) {
-    DLog(@"Deleting segment reference without a hash coee: %@", self);
+    [TKLog debug:@"TKSegmentReference" text:[NSString stringWithFormat:@"Deleting segment reference without a hash coee: %@", self]];
 		return nil;
 	}
   

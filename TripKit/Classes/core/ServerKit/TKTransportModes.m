@@ -97,7 +97,7 @@ NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
   } else if ([typeString isEqualToString:kSGTransportModeTypeIdentifierLimitedTransit]) {
     return @"bus";
   } else {
-    DLog(@"Unexpected mode: %@", modeIdentifier);
+    [TKLog warn:@"TKTransportModes" text:[NSString stringWithFormat:@"Unexpected mode: %@", modeIdentifier]];
     // fall back to generic type
     if ([modeIdentifier hasPrefix:@"pt_"]) {
       return @"bus";

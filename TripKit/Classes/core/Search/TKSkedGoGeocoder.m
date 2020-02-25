@@ -56,7 +56,7 @@
   TKServer *server = [TKServer sharedInstance];
   [server requireRegions:^(NSError *error) {
     if (error) {
-      DLog(@"Error fetching regions: %@", error);
+      [TKLog info:@"TKSkedGoGeocoder" text:[NSString stringWithFormat:@"Error fetching regions: %@", error]];
       if (failure) {
         failure(inputString, error);
       }
@@ -226,7 +226,7 @@
          if ([object isKindOfClass:[NSDictionary class]]) {
            TKAutocompletionResult *result;
            result = [TKSkedGoGeocoder autocompletionResultForDictionary:object
-                                                        forSearchTerm:string];
+                                                          forSearchTerm:string];
            [enhanced addObject:result];
          }
        }
@@ -276,6 +276,13 @@
     }
     if (!result.image) {
       result.image = [TKAutocompletionResult imageForType:TKAutocompletionSearchIconPin];
+    }
+    if ([[json[@"code"] lowercaseString] isEqualToString:[inputString lowercaseString]]) {
+      if (result.subtitle) {
+        result.subtitle = [inputString stringByAppendingFormat:@" - %@", result.subtitle];
+      } else {
+        result.subtitle = inputString;
+      }
     }
 
   } else {
