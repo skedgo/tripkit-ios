@@ -26,6 +26,13 @@ public extension TKUITimetableCard {
     /// Called when a timetable card gets presented.
     public var timetableActionsFactory: (([TKUIStopAnnotation]) -> [TKUITimetableCardAction])?
     
+    /// You can use this to force a compact layout for timetable actions.
+    ///
+    /// By default, if there are fewer than two actions provided through
+    /// `timetableActionsFactory`, a long layout (i.e., icon and
+    /// label are stacked horizontally) is used. If there are more than two
+    /// actions, then a compact layout (i.e., icon and labels are stacked
+    /// vertically) is used. 
     public var forceCompactActionsLayout: Bool = false
 
     /// Set this to true if the services' transit icons should get the colour
