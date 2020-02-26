@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TKUITimetableActionView: UIView {
+class TKUIExtendedActionView: UIView {
 
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var label: UILabel!
@@ -21,7 +21,7 @@ class TKUITimetableActionView: UIView {
     }
   }
 
-  var onTap: ((TKUITimetableActionView) -> Void)?
+  var onTap: ((TKUIExtendedActionView) -> Void)?
   
   override var frame: CGRect {
     didSet {
@@ -29,8 +29,8 @@ class TKUITimetableActionView: UIView {
     }
   }
   
-  static func newInstance() -> TKUITimetableActionView {
-    let view = Bundle(for: self).loadNibNamed("TKUITimetableActionView", owner: self, options: nil)?.first as! TKUITimetableActionView
+  static func newInstance() -> TKUIExtendedActionView {
+    let view = Bundle(for: self).loadNibNamed("TKUIExtendedActionView", owner: self, options: nil)?.first as! TKUIExtendedActionView
     return view
   }
   

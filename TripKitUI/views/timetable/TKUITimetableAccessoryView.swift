@@ -119,8 +119,8 @@ class TKUITimetableAccessoryView: UIView {
       ]
     )
     
-    let actionViews = actions.map { action -> TKUITripActionView in
-      let actionView = TKUITripActionView.newInstance()
+    let actionViews = actions.map { action -> TKUICompactActionView in
+      let actionView = TKUICompactActionView.newInstance()
       actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
       actionView.titleLabel.text = action.title
@@ -143,7 +143,7 @@ class TKUITimetableAccessoryView: UIView {
     var previousActionView: UIView?
     
     for (index, action) in actions.enumerated() {
-      let actionView = TKUITimetableActionView.newInstance()
+      let actionView = TKUIExtendedActionView.newInstance()
       actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
       actionView.label.text = action.title

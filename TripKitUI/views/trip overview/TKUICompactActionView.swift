@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 
-class TKUITripActionView: UIView {
+class TKUICompactActionView: UIView {
     
   @IBOutlet weak var imageWrapper: UIView!
   @IBOutlet weak var imageView: UIImageView!
@@ -25,10 +25,10 @@ class TKUITripActionView: UIView {
   
   private var tapGestureRecognizer: UITapGestureRecognizer!
   
-  var onTap: ((TKUITripActionView) -> Void)?
+  var onTap: ((TKUICompactActionView) -> Void)?
   
-  static func newInstance() -> TKUITripActionView {
-    let view = Bundle(for: self).loadNibNamed("TKUITripActionView", owner: self, options: nil)?.first as! TKUITripActionView
+  static func newInstance() -> TKUICompactActionView {
+    let view = Bundle(for: self).loadNibNamed("TKUICompactActionView", owner: self, options: nil)?.first as! TKUICompactActionView
     return view
   }
   

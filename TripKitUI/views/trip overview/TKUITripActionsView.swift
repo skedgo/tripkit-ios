@@ -53,7 +53,7 @@ extension TKUITripActionsView {
     stack.removeAllSubviews()
     
     for action in actions {
-      let actionView = TKUITripActionView.newInstance()
+      let actionView = TKUICompactActionView.newInstance()
       actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
       actionView.titleLabel.text = action.title
