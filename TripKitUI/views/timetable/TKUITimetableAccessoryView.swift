@@ -97,7 +97,7 @@ class TKUITimetableAccessoryView: UIView {
       if actions.count > 2 || TKUITimetableCard.config.forceCompactActionsLayout {
         useCompactLayout(for: actions, in: card, model: model)
       } else {
-        useLongLayout(for: actions, in: card, model: model)
+        useExtendedLayout(for: actions, in: card, model: model)
       }
     }
   }
@@ -139,7 +139,7 @@ class TKUITimetableAccessoryView: UIView {
     actionViews.forEach(stack.addArrangedSubview)
   }
   
-  private func useLongLayout(for actions: [TKUITimetableCardAction], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
+  private func useExtendedLayout(for actions: [TKUITimetableCardAction], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
     var previousActionView: UIView?
     
     for (index, action) in actions.enumerated() {
