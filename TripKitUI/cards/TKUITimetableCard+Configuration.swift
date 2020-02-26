@@ -25,6 +25,8 @@ public extension TKUITimetableCard {
     ///
     /// Called when a timetable card gets presented.
     public var timetableActionsFactory: (([TKUIStopAnnotation]) -> [TKUITimetableCardAction])?
+    
+    public var forceCompactActionsLayout: Bool = false
 
     /// Set this to true if the services' transit icons should get the colour
     /// of the respective line.

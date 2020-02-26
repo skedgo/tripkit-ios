@@ -246,7 +246,7 @@ public class TKUITimetableCard : TGTableCard {
     } else {
       actions = []
     }
-    accessoryView.setCustomActions(actions, for: viewModel.departureStops, card: self)
+    accessoryView.setCustomActions(actions, for: viewModel.departureStops, card: self)   
 
     // Interactions
 

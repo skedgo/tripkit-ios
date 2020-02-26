@@ -94,8 +94,52 @@ class TKUITimetableAccessoryView: UIView {
       serviceCollectionToBottomBarConstraint.isActive = false
       serviceCollectionToCustomActionViewConstraint.isActive = true
       customActionViewToBottomBarConstraint.isActive = true
+      if actions.count > 2 || TKUITimetableCard.config.forceCompactActionsLayout {
+        useCompactLayout(for: actions, in: card, model: model)
+      } else {
+        useLongLayout(for: actions, in: card, model: model)
+      }
     }
-        
+  }
+  
+  private func useCompactLayout(for actions: [TKUITimetableCardAction], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
+    let stack = UIStackView()
+    stack.axis = .horizontal
+    stack.alignment = .center
+    stack.distribution = .fillEqually
+    stack.spacing = 8
+    customActionView.addSubview(stack)
+    
+    stack.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+        stack.leadingAnchor.constraint(equalTo: customActionView.leadingAnchor),
+        stack.topAnchor.constraint(equalTo: customActionView.topAnchor),
+        stack.trailingAnchor.constraint(equalTo: customActionView.trailingAnchor),
+        stack.bottomAnchor.constraint(equalTo: customActionView.bottomAnchor)
+      ]
+    )
+    
+    let actionViews = actions.map { action -> TKUITripActionView in
+      let actionView = TKUITripActionView.newInstance()
+      actionView.tintColor = .tkAppTintColor
+      actionView.imageView.image = action.icon
+      actionView.titleLabel.text = action.title
+      actionView.bold = action.style == .bold
+      actionView.onTap = { [weak card, unowned actionView] sender in
+        guard let card = card else { return }
+        let update = action.handler(card, model, sender)
+        if update {
+          actionView.imageView.image = action.icon
+          actionView.titleLabel.text = action.title
+        }
+      }
+      return actionView
+    }
+    
+    actionViews.forEach(stack.addArrangedSubview)
+  }
+  
+  private func useLongLayout(for actions: [TKUITimetableCardAction], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
     var previousActionView: UIView?
     
     for (index, action) in actions.enumerated() {
