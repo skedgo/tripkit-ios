@@ -114,16 +114,7 @@ public class TKUITimetableCard : TGTableCard {
       title = .default(Loc.Timetable, nil, self.accessoryView)
     }
     
-    let mapman: TGCompatibleMapManager
-    if let existing = mapManager {
-      mapman = existing
-    } else {
-      let simpleManager = TKUIMapManager()
-      simpleManager.preferredZoomLevel = .road
-      mapman = simpleManager
-    }
-    
-    super.init(title: title, mapManager: mapman, initialPosition: .extended)
+    super.init(title: title, mapManager: mapManager, initialPosition: .extended)
     didInit()
   }
   
