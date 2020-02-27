@@ -24,16 +24,7 @@ public extension TKUITimetableCard {
     /// Set this to add a list of action buttons to a timeable card.
     ///
     /// Called when a timetable card gets presented.
-    public var timetableActionsFactory: (([TKUIStopAnnotation]) -> [TKUITimetableCardAction])?
-    
-    /// You can use this to force a compact layout for timetable actions.
-    ///
-    /// By default, if there are fewer than two actions provided through
-    /// `timetableActionsFactory`, an extended layout (i.e., icon
-    /// and label are stacked horizontally) is used. If there are more than
-    /// two actions, then a compact layout (i.e., icon and labels are 
-    /// stacked vertically) is used.
-    public var forceCompactActionsLayout: Bool = false
+    public var timetableActionsFactory: (([TKUIStopAnnotation]) -> [TKUITimetableCardAction])?        
 
     /// Set this to true if the services' transit icons should get the colour
     /// of the respective line.

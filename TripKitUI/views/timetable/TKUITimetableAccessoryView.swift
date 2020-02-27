@@ -94,7 +94,7 @@ class TKUITimetableAccessoryView: UIView {
       serviceCollectionToBottomBarConstraint.isActive = false
       serviceCollectionToCustomActionViewConstraint.isActive = true
       customActionViewToBottomBarConstraint.isActive = true
-      if actions.count > 2 || TKUITimetableCard.config.forceCompactActionsLayout {
+      if actions.count > 2 || TKUICustomization.shared.forceCompactActionsLayout {
         useCompactLayout(for: actions, in: card, model: model)
       } else {
         useExtendedLayout(for: actions, in: card, model: model)
@@ -131,6 +131,7 @@ class TKUITimetableAccessoryView: UIView {
         if update {
           actionView.imageView.image = action.icon
           actionView.titleLabel.text = action.title
+          actionView.bold = action.style == .bold
         }
       }
       return actionView

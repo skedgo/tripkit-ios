@@ -41,4 +41,13 @@ public class TKUICustomization {
     print("\($1) encountered error: \($0)")
   }
   
+  /// You can use this to force a compact layout for card actions
+  ///
+  /// By default, if there are fewer than two actions provided through
+  /// a card's action factory, an extended layout (i.e., icon andd label
+  /// are stacked horizontally) is used. If there are more than two actions
+  /// then a compact layout (i.e., icon and labels are stacked vertically) is
+  /// used.
+  public var forceCompactActionsLayout: Bool = false
+  
 }
