@@ -94,12 +94,57 @@ class TKUITimetableAccessoryView: UIView {
       serviceCollectionToBottomBarConstraint.isActive = false
       serviceCollectionToCustomActionViewConstraint.isActive = true
       customActionViewToBottomBarConstraint.isActive = true
+      if actions.count > 2 || TKUICustomization.shared.forceCompactActionsLayout {
+        useCompactLayout(for: actions, in: card, model: model)
+      } else {
+        useExtendedLayout(for: actions, in: card, model: model)
+      }
     }
-        
+  }
+  
+  private func useCompactLayout(for actions: [TKUITimetableCardAction], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
+    let stack = UIStackView()
+    stack.axis = .horizontal
+    stack.alignment = .center
+    stack.distribution = .fillEqually
+    stack.spacing = 8
+    customActionView.addSubview(stack)
+    
+    stack.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+        stack.leadingAnchor.constraint(equalTo: customActionView.leadingAnchor),
+        stack.topAnchor.constraint(equalTo: customActionView.topAnchor),
+        stack.trailingAnchor.constraint(equalTo: customActionView.trailingAnchor),
+        stack.bottomAnchor.constraint(equalTo: customActionView.bottomAnchor)
+      ]
+    )
+    
+    let actionViews = actions.map { action -> TKUICompactActionView in
+      let actionView = TKUICompactActionView.newInstance()
+      actionView.tintColor = .tkAppTintColor
+      actionView.imageView.image = action.icon
+      actionView.titleLabel.text = action.title
+      actionView.bold = action.style == .bold
+      actionView.onTap = { [weak card, unowned actionView] sender in
+        guard let card = card else { return }
+        let update = action.handler(card, model, sender)
+        if update {
+          actionView.imageView.image = action.icon
+          actionView.titleLabel.text = action.title
+          actionView.bold = action.style == .bold
+        }
+      }
+      return actionView
+    }
+    
+    actionViews.forEach(stack.addArrangedSubview)
+  }
+  
+  private func useExtendedLayout(for actions: [TKUITimetableCardAction], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
     var previousActionView: UIView?
     
     for (index, action) in actions.enumerated() {
-      let actionView = TKUITimetableActionView.newInstance()
+      let actionView = TKUIExtendedActionView.newInstance()
       actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
       actionView.label.text = action.title

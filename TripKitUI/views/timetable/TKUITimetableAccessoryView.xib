@@ -55,7 +55,7 @@
                     <rect key="frame" x="16" y="40" width="343" height="16"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="44" id="plY-mS-Yir"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="80" id="plY-mS-Yir"/>
                     </constraints>
                 </view>
             </subviews>
