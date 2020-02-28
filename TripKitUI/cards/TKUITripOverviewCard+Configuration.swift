@@ -49,6 +49,9 @@ public extension TKUITripOverviewCard {
     /// Defaults to using `TKUITripMapManager`.
     public var mapManagerFactory: ((Trip) -> TKUITripMapManagerType) = TKUITripMapManager.init
     
+    
+    // MARK: - Customising trip actions
+    
     /// Set this to add a list of action buttons to a trip overview card.
     ///
     /// - warning: Only a maximum of three actions can be accomodated. Any
@@ -56,6 +59,20 @@ public extension TKUITripOverviewCard {
     ///
     /// Called when a trip overview card gets presented.
     public var tripActionsFactory: ((Trip) -> [TKUITripOverviewCardAction])?
+    
+    /// This controls whether the title is visible underneath an action icon.
+    ///
+    /// The default is `false`, which means actions are displayed as icons
+    /// only. We recommend that choosing an action icon that is immediately
+    /// obvious what it does and avoids having to set this to `true`. If this
+    /// must be set to `true`, we recommend that the titles for your actions
+    /// are short, otherwise, some of the titles may be truncated.
+    ///
+    /// - note: This only applies to actions that are arranged in a compact
+    ///     layout
+    public var showTripActionTitle: Bool = false
+    
+    // MARK: - Customising segment actions
     
     /// Set this to add a list of action buttons to a segment on the trip overview card.
     ///
