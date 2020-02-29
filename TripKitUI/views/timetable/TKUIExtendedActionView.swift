@@ -23,10 +23,9 @@ class TKUIExtendedActionView: UIView {
 
   var onTap: ((TKUIExtendedActionView) -> Void)?
   
-  override var frame: CGRect {
-    didSet {
-      layer.cornerRadius = frame.size.height / 2
-    }
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    layer.cornerRadius = frame.size.height / 2
   }
   
   static func newInstance() -> TKUIExtendedActionView {
@@ -36,6 +35,10 @@ class TKUIExtendedActionView: UIView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    
+    if #available(iOSApplicationExtension 13.0, *) {
+      layer.cornerCurve = .continuous
+    }
     
     backgroundColor = .clear
     
