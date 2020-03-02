@@ -63,6 +63,22 @@ extension TKUISemaphoreView {
       return false
     }
   }
+  
+  /// :nodoc:
+  @objc(accessibilityImageViewForDisplayable:)
+  public static func accessibilityImageView(for displayable: TKTripSegmentDisplayable) -> UIImageView? {
+    let accessibility = displayable.tripSegmentWheelchairAccessibility
+    
+    // Not using `accessibility.showInUI()` as it's a bit much to show the
+    // not accessible icons for all users here.
+    guard accessibility != .unknown, accessibility.showInUI() else { return nil }
+
+    guard let image = accessibility.miniIcon else { return nil }
+    let imageView = UIImageView(image: image)
+    imageView.tintColor = .tkLabelPrimary
+    imageView.accessibilityLabel = accessibility.title
+    return imageView
+  }
 
   @objc(updateForAnnotation:)
   public func update(for annotation: MKAnnotation) {

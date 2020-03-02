@@ -75,7 +75,7 @@ extension TKUITripOverviewCard: TKUITripModeByModeCardDelegate {
     TKLog.debug("TKUITripOverviewCard") { "Swapping page card as segments changed." }
     
     guard let mapManager = card.mapManager as? TKUITripMapManager else {
-      assertionFailure(); return
+      return assertionFailure()
     }
     let newPager = try! TKUITripModeByModeCard(startingOn: currentSegment, mapManager: mapManager)
     controller?.swap(for: newPager, animated: true)

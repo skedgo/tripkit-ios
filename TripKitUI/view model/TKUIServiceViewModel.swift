@@ -46,7 +46,7 @@ class TKUIServiceViewModel {
 
     header = withNewRealTime
       .asObservable()
-      .compactMap { TKUIDepartureCellContent.build(for: dataInput.embarkation) }
+      .compactMap { TKUIDepartureCellContent.build(embarkation: dataInput.embarkation, disembarkation: dataInput.disembarkation) }
       .asDriver(onErrorDriveWith: .empty())
 
     sections = Driver.combineLatest(withNewRealTime, withContent) { $1 }

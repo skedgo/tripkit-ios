@@ -48,7 +48,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL timesAreRealTime;
 @property (nonatomic, assign, getter = isBicycleAccessible) BOOL bicycleAccessible;
+
 @property (nonatomic, assign, getter = isWheelchairAccessible) BOOL wheelchairAccessible;
+@property (nonatomic, assign, getter = isWheelchairInaccessible) BOOL wheelchairInaccessible;
 
 - (void)remove;
 

@@ -198,6 +198,7 @@
 		3A6E7D4020EFBD4900013253 /* TKUISegmentMovingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E7D3E20EFBD4800013253 /* TKUISegmentMovingCell.swift */; };
 		3A6E7D4120EFBD4900013253 /* TKUISegmentMovingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E7D3F20EFBD4800013253 /* TKUISegmentMovingCell.xib */; };
 		3A7013AE22413A1100F07756 /* TKUISegmentTitleView+TKSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7013AD22413A1100F07756 /* TKUISegmentTitleView+TKSegment.swift */; };
+		3A703F8923FD79CB006FEC9F /* TKWheelchairAccessibility+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A703F8823FD79CB006FEC9F /* TKWheelchairAccessibility+UI.swift */; };
 		3A71027E2281A04200756FCE /* TKUISegmentDirectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71027D2281A04200756FCE /* TKUISegmentDirectionsViewModel.swift */; };
 		3A7102802281A11F00756FCE /* TKUISegmentDirectionsViewModel+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71027F2281A11F00756FCE /* TKUISegmentDirectionsViewModel+Content.swift */; };
 		3A7135FA2289695A00D4068E /* TKModeImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7135F92289695A00D4068E /* TKModeImageBuilder.swift */; };
@@ -624,6 +625,8 @@
 		3ADC803221184F7300A318B9 /* TKUITripOverviewViewModel+Restoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC803121184F7300A318B9 /* TKUITripOverviewViewModel+Restoration.swift */; };
 		3ADD3B9B2358BA3000CD4713 /* TKUIRoutingQueryAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD3B9A2358BA3000CD4713 /* TKUIRoutingQueryAnnotation.swift */; };
 		3ADD3B9F2358BDAF00CD4713 /* routing-motorbike.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD3B9D2358BDA900CD4713 /* routing-motorbike.json */; };
+		3ADDD2C923B200A1005A4406 /* TKWheelchairAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADDD2C823B200A1005A4406 /* TKWheelchairAccessibility.swift */; };
+		3ADDD2CA23B200A1005A4406 /* TKWheelchairAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADDD2C823B200A1005A4406 /* TKWheelchairAccessibility.swift */; };
 		3AE04BE61DEE392800462CB3 /* TKTripPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */; };
 		3AE09B9E20BC1C24004BF42B /* routing-drive-park-walk-train.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */; };
 		3AE09BA020BC1C7E004BF42B /* service-for-park-ride.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */; };
@@ -1081,6 +1084,7 @@
 		3A6E7D3E20EFBD4800013253 /* TKUISegmentMovingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentMovingCell.swift; sourceTree = "<group>"; };
 		3A6E7D3F20EFBD4800013253 /* TKUISegmentMovingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentMovingCell.xib; sourceTree = "<group>"; };
 		3A7013AD22413A1100F07756 /* TKUISegmentTitleView+TKSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUISegmentTitleView+TKSegment.swift"; sourceTree = "<group>"; };
+		3A703F8823FD79CB006FEC9F /* TKWheelchairAccessibility+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKWheelchairAccessibility+UI.swift"; sourceTree = "<group>"; };
 		3A71027D2281A04200756FCE /* TKUISegmentDirectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISegmentDirectionsViewModel.swift; sourceTree = "<group>"; };
 		3A71027F2281A11F00756FCE /* TKUISegmentDirectionsViewModel+Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUISegmentDirectionsViewModel+Content.swift"; sourceTree = "<group>"; };
 		3A7135F92289695A00D4068E /* TKModeImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKModeImageBuilder.swift; sourceTree = "<group>"; };
@@ -1321,6 +1325,7 @@
 		3ADC803121184F7300A318B9 /* TKUITripOverviewViewModel+Restoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripOverviewViewModel+Restoration.swift"; sourceTree = "<group>"; };
 		3ADD3B9A2358BA3000CD4713 /* TKUIRoutingQueryAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIRoutingQueryAnnotation.swift; sourceTree = "<group>"; };
 		3ADD3B9D2358BDA900CD4713 /* routing-motorbike.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-motorbike.json"; sourceTree = "<group>"; };
+		3ADDD2C823B200A1005A4406 /* TKWheelchairAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKWheelchairAccessibility.swift; sourceTree = "<group>"; };
 		3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTripPattern.swift; sourceTree = "<group>"; };
 		3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-drive-park-walk-train.json"; sourceTree = "<group>"; };
 		3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "service-for-park-ride.json"; sourceTree = "<group>"; };
@@ -1849,10 +1854,11 @@
 				3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */,
 				3A897A0E2344E457004D0281 /* StopVisits+RealTimeColor.swift */,
 				3ACF474722981FF40096860D /* TGCardViewController+Present.swift */,
+				3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */,
 				3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */,
 				3A6DF0F7202C8EB80084CB2C /* TKUIMapManagerHelper.swift */,
 				3A932EAC23BF2CCB004AA154 /* TKUIObjCDisposeBag.swift */,
-				3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */,
+				3A703F8823FD79CB006FEC9F /* TKWheelchairAccessibility+UI.swift */,
 				3A506B28231FB403003DD234 /* Trip+Titles.swift */,
 				3A897A21234776B0004D0281 /* UIButton+SwapImageSide.swift */,
 				D39910F223334BFF004A09C8 /* UIColor+TripGoDefault.swift */,
@@ -2203,6 +2209,7 @@
 				3AB6C6861D1CD08E0089F687 /* TKSegment.h */,
 				3AB6C6871D1CD08E0089F687 /* TKSegment.m */,
 				3A51402D1DEE62EE002DB39F /* TKSegment.swift */,
+				3ADDD2C823B200A1005A4406 /* TKWheelchairAccessibility.swift */,
 				3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */,
 				3A462CC02076218A00AF41EF /* TKTurnByTurnMode.swift */,
 			);
@@ -3376,6 +3383,7 @@
 				3A2F65B120E0EECC006FE49D /* DLSEntry.swift in Sources */,
 				3ABBDAE02032135A00205042 /* NSManagedObjectContext+SimpleFetch.m in Sources */,
 				3ABBDA552032132D00205042 /* TripGroup.swift in Sources */,
+				3ADDD2CA23B200A1005A4406 /* TKWheelchairAccessibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3504,6 +3512,7 @@
 				3A1AAB3822BE199A000ED3CC /* UIImage+Variations.m in Sources */,
 				3A4C420422709438003E057E /* TKSegment+Zoom.swift in Sources */,
 				3A71027E2281A04200756FCE /* TKUISegmentDirectionsViewModel.swift in Sources */,
+				3A703F8923FD79CB006FEC9F /* TKWheelchairAccessibility+UI.swift in Sources */,
 				3A8FAB7220D3F433005D4C73 /* TKUITripCell+Rx.swift in Sources */,
 				3A682F2220F3F8ED00E05195 /* TKUIRoutingResultsCard+Errors.swift in Sources */,
 				3A84A05A22F9A68A0005D0B4 /* TKUIRoutingResultsViewModel+ToggleModes.swift in Sources */,
@@ -3647,6 +3656,7 @@
 				3AFFABC81F06854F00147990 /* TKRegion.swift in Sources */,
 				3AA03E611F0BC9DB00C6B337 /* TKPermissionManager.m in Sources */,
 				3AFFABDC1F06854F00147990 /* TKTripAndSegments.swift in Sources */,
+				3ADDD2C923B200A1005A4406 /* TKWheelchairAccessibility.swift in Sources */,
 				3AFFABA91F06854F00147990 /* TKGeocodable.swift in Sources */,
 				3AF94B121F0BF79800500940 /* TKSettings.swift in Sources */,
 				3AFFABD01F06854F00147990 /* TKTransportModes.m in Sources */,

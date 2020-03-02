@@ -110,7 +110,9 @@ public protocol TKTripSegmentDisplayable : NSObjectProtocol {
   
   var tripSegmentTimesAreRealTime: Bool { get }
   
-  var tripSegmentIsWheelchairAccessible: Bool { get }
+  /// Wheelchair accessibility of the segment. If it doesn't apply, just return `.unknown`,
+  /// as an `.unknown` value will always be ignored.
+  var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility { get }
 }
 
 @objc
@@ -126,32 +128,32 @@ public protocol TKTripSegment : TKTripSegmentDisplayable {
 
 
 public extension TKTrip {
-  var isArriveBefore: Bool { return false }
-  var costValues: [NSNumber : String] { return [:] }
-  var tripPurpose: String? { return nil }
-  var hasReminder: Bool { return false }
-  var arrivalTimeZone: TimeZone? { return nil }
+  var isArriveBefore: Bool { false }
+  var costValues: [NSNumber : String] { [:] }
+  var tripPurpose: String? { nil }
+  var hasReminder: Bool { false }
+  var arrivalTimeZone: TimeZone? { nil }
 }
 
 public extension TKTripSegmentDisplayable {
-  var tripSegmentModeColor: TKColor? { return nil }
-  var tripSegmentModeImage: TKImage? { return nil }
-  var tripSegmentModeImageURL: URL? { return nil }
-  var tripSegmentModeImageIsTemplate: Bool { return false }
-  var tripSegmentModeImageIsBranding: Bool { return false }
-  var tripSegmentModeInfoIconType: TKInfoIconType { return .none }
-  var tripSegmentSubtitleIconType: TKInfoIconType { return .none }
-  var tripSegmentModeTitle: String? { return nil }
-  var tripSegmentModeSubtitle: String? { return nil }
-  var tripSegmentFixedDepartureTime: Date? { return nil }
-  var tripSegmentTimeZone: TimeZone? { return nil }
-  var tripSegmentTimesAreRealTime: Bool { return false }
-  var tripSegmentIsWheelchairAccessible: Bool { return false }
+  var tripSegmentModeColor: TKColor? { nil }
+  var tripSegmentModeImage: TKImage? { nil }
+  var tripSegmentModeImageURL: URL? { nil }
+  var tripSegmentModeImageIsTemplate: Bool { false }
+  var tripSegmentModeImageIsBranding: Bool { false }
+  var tripSegmentModeInfoIconType: TKInfoIconType { .none }
+  var tripSegmentSubtitleIconType: TKInfoIconType { .none }
+  var tripSegmentModeTitle: String? { nil }
+  var tripSegmentModeSubtitle: String? { nil }
+  var tripSegmentFixedDepartureTime: Date? { nil }
+  var tripSegmentTimeZone: TimeZone? { nil }
+  var tripSegmentTimesAreRealTime: Bool { false }
+  var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility? { nil }
 }
 
 public extension TKTripSegment {
-  var tripSegmentModeInfo: TKModeInfo? { return nil }
-  var tripSegmentDetail: String? { return nil }
+  var tripSegmentModeInfo: TKModeInfo? { nil }
+  var tripSegmentDetail: String? { nil }
 }
 
 @available(*, unavailable, renamed: "TKTrip")

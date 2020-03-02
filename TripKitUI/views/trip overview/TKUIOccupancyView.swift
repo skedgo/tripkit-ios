@@ -99,7 +99,7 @@ extension TKUIOccupancyView {
   
   public enum Purpose {
     case occupancy(TKAPI.VehicleOccupancy, simple: Bool = false)
-    case wheelchair
+    case wheelchair(TKWheelchairAccessibility)
   }
   
   public convenience init(with purpose: Purpose) {
@@ -124,8 +124,9 @@ extension TKUIOccupancyView {
       
       accessibilityLabel = title
       
-      label.text = title.localizedUppercase
-      
+      label.text = title
+      label.textColor = .tkLabelSecondary
+
       icon.image = occupancy.icon
       icon.backgroundColor = occupancy.color
       icon.tintColor = UIColor.white
@@ -141,17 +142,14 @@ extension TKUIOccupancyView {
         label.textColor = occupancy.color
       }
       
-    case .wheelchair:
-      let color = #colorLiteral(red: 0, green: 0.6078431373, blue: 0.8745098039, alpha: 1)
+    case .wheelchair(let accessibility):
+      accessibilityLabel = accessibility.title
+
+      label.text = accessibility.title
+      label.textColor = accessibility.color
       
-      accessibilityLabel = Loc.WheelchairAccessible
-      label.text = Loc.WheelchairAccessible.localizedUppercase
-      label.textColor = color
-      
-      icon.image = .iconWheelchairMini
-      icon.backgroundColor = color
-      icon.tintColor = UIColor.white
-      icon.layer.cornerRadius = 2
+      icon.image = accessibility.icon
+      icon.layer.cornerRadius = 0
     }
   }
   

@@ -93,29 +93,30 @@
     
     // get information about the service if there's any in there
     NSString *serviceCode = shapeDict[@"serviceTripID"];
-    BOOL fillService = NO;
     if (serviceCode && previousService && NO == [previousService.code isEqualToString:serviceCode]) {
       // we need a new service
       if ([serviceCode isEqualToString:requestedService.code]) {
         currentService = requestedService;
-        
       } else {
         currentService = [Service fetchOrInsertServiceWithCode:serviceCode inTripKitContext:context];
-        fillService = YES;
       }
     } else {
       // just use the existing service
       currentService = requestedService;
     }
     
-    if (fillService || currentService.code == nil) {
-      currentService.code = serviceCode;
-      currentService.color = [TKParserHelper colorForDictionary:[shapeDict objectForKey:@"serviceColor"]] ?: requestedService.color;
-      currentService.frequency  = shapeDict[@"frequency"];
-      currentService.lineName   = shapeDict[@"serviceName"];
-      currentService.direction  = shapeDict[@"serviceDirection"];
-      currentService.number     = shapeDict[@"serviceNumber"];
-      currentService.modeInfo   = modeInfo;
+    currentService.code       = serviceCode ?: currentService.code;
+    currentService.color      = [TKParserHelper colorForDictionary:[shapeDict objectForKey:@"serviceColor"]] ?: currentService.color;
+    currentService.frequency  = shapeDict[@"frequency"] ?: currentService.frequency;
+    currentService.lineName   = shapeDict[@"serviceName"] ?: currentService.lineName;
+    currentService.direction  = shapeDict[@"serviceDirection"] ?: currentService.direction;
+    currentService.number     = shapeDict[@"serviceNumber"] ?: currentService.number;
+    currentService.modeInfo   = modeInfo ?: currentService.modeInfo;
+    if (shapeDict[@"wheelchairAccessible"]) {
+      [currentService _setWheelchairAccessibility: shapeDict[@"wheelchairAccessible"]];
+    }
+    if ([shapeDict[@"bicycleAccessible"] boolValue]) {
+      currentService.bicycleAccessible = true;
     }
     
     if (previousService != currentService) {
@@ -189,6 +190,7 @@
                                                       atLocation:coordinate
                                               intoTripKitContext:context];
         stop.shortName = stopDict[@"shortName"];
+        
         stop.wheelchairAccessible = stopDict[@"wheelchairAccessible"];
         
         ZAssert(! visit.stop || visit.stop == stop, @"We shouldn't have a stop already! %@", visit.stop);

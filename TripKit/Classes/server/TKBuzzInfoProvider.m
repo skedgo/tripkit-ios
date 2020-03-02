@@ -130,14 +130,6 @@
   // mode info
   TKModeInfo *modeInfo = [TKModeInfo modeInfoForDictionary:responseDict[@"modeInfo"]];
   
-  // accessibility
-  if ([responseDict[@"wheelchairAccessible"] boolValue]) {
-    service.wheelchairAccessible = true;
-  }
-  if ([responseDict[@"bicycleAccessible"] boolValue]) {
-    service.bicycleAccessible = true;
-  }
-  
   // parse the shapes
   NSArray *shapesArray = responseDict[@"shapes"];
   [TKCoreDataParserHelper insertNewShapes:shapesArray
@@ -146,7 +138,5 @@
                             clearRealTime:YES // These are time-table times
    ];
 }
-
-
 
 @end

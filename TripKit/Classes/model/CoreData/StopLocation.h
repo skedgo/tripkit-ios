@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSString * regionName;
 @property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain, nullable) StopLocation *parent;
+
+/// :nodoc:
 @property (nonatomic, strong, nullable) NSNumber * wheelchairAccessible;
 
 /// :nodoc:

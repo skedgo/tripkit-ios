@@ -22,10 +22,6 @@ extension StopLocation {
   @objc public var modeTitle: String {
     return stopModeInfo.alt
   }
-  
-  public var isWheelchairAccessible: Bool? {
-    return wheelchairAccessible?.boolValue
-  }  
 }
 
 // MARK: - MKAnnotation

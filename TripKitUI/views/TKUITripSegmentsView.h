@@ -18,6 +18,11 @@
 
 @property (nonatomic, assign) BOOL tiny;
 
+/**
+Whether to show wheelchair accessibility and inaccessibility icons
+
+ @default `false`
+*/
 @property (nonatomic, assign) BOOL allowWheelchairIcon;
 
 /**
