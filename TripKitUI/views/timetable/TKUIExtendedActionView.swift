@@ -36,7 +36,7 @@ class TKUIExtendedActionView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    if #available(iOSApplicationExtension 13.0, *) {
+    if #available(iOS 13.0, *) {
       layer.cornerCurve = .continuous
     }
     
