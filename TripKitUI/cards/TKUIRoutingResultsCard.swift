@@ -79,7 +79,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     self.destination = destination
     self.request = nil
     
-    let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(destination, zoomToDestination)
+    let mapManager = Self.config.mapManagerFactory(destination, zoomToDestination)
     
     let resultsTitle = TKUIResultsTitleView.newInstance()
     
@@ -106,7 +106,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     self.destination = nil
     self.request = request
     
-    let mapManager = TKUIRoutingResultsCard.config.mapManagerFactory(request.toLocation, true)
+    let mapManager = Self.config.mapManagerFactory(request.toLocation, true)
     
     let resultsTitle = TKUIResultsTitleView.newInstance()
     
