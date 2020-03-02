@@ -119,18 +119,23 @@ class TKUITimetableAccessoryView: UIView {
       ]
     )
     
+    let showActionTitle = TKUITimetableCard.config.showTimetableActionTitle
+    
     let actionViews = actions.map { action -> TKUICompactActionView in
       let actionView = TKUICompactActionView.newInstance()
       actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
-      actionView.titleLabel.text = action.title
+      actionView.titleLabel.text = showActionTitle ? action.title : nil
+      actionView.accessibilityLabel = action.title
+      actionView.accessibilityTraits = .button
       actionView.bold = action.style == .bold
       actionView.onTap = { [weak card, unowned actionView] sender in
         guard let card = card else { return }
         let update = action.handler(card, model, sender)
         if update {
           actionView.imageView.image = action.icon
-          actionView.titleLabel.text = action.title
+          actionView.titleLabel.text = showActionTitle ? action.title : nil
+          actionView.accessibilityLabel = action.title
           actionView.bold = action.style == .bold
         }
       }
@@ -148,6 +153,8 @@ class TKUITimetableAccessoryView: UIView {
       actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
       actionView.label.text = action.title
+      actionView.accessibilityLabel = action.title
+      actionView.accessibilityTraits = .button
       actionView.bold = action.style == .bold
       actionView.onTap = { [weak card, unowned actionView] sender in
         guard let card = card else { return }
@@ -155,6 +162,8 @@ class TKUITimetableAccessoryView: UIView {
         if update {
           actionView.imageView.image = action.icon
           actionView.label.text = action.title
+          actionView.accessibilityLabel = action.title
+          actionView.bold = action.style == .bold
         }
       }
       

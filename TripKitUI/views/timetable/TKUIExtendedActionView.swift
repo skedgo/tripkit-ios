@@ -22,12 +22,7 @@ class TKUIExtendedActionView: UIView {
   }
 
   var onTap: ((TKUIExtendedActionView) -> Void)?
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    layer.cornerRadius = frame.size.height / 2
-  }
-  
+    
   static func newInstance() -> TKUIExtendedActionView {
     let view = Bundle(for: self).loadNibNamed("TKUIExtendedActionView", owner: self, options: nil)?.first as! TKUIExtendedActionView
     return view
@@ -36,6 +31,7 @@ class TKUIExtendedActionView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    layer.cornerRadius = 18
     if #available(iOS 13.0, *) {
       layer.cornerCurve = .continuous
     }
