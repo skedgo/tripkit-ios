@@ -51,7 +51,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSNumber * sortScore;
 @property (nonatomic, retain, nullable) NSString * filter;
 @property (nonatomic, retain, nullable) NSString * regionName;
+
+/// :nodoc:
 @property (nonatomic, assign) BOOL toDelete;
+
 @property (nonatomic, retain, nullable) StopLocation *parent;
 
 /// :nodoc:

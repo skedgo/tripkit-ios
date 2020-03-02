@@ -35,20 +35,6 @@
 @dynamic stop;
 @dynamic shapes;
 
-+ (NSArray *)fetchStopVisitsForStopLocation:(StopLocation *)stopLocation
-                           startingFromDate:(NSDate *)earliestDate
-{
-  NSArray *visits = [stopLocation.managedObjectContext fetchObjectsForEntityClass:self
-                                                                 withFetchRequest:
-                   ^(NSFetchRequest *request) {
-                     request.predicate       = [stopLocation departuresPredicateFromDate:earliestDate];
-                     request.sortDescriptors = [StopVisits defaultSortDescriptors];
-                     
-                     request.relationshipKeyPathsForPrefetching = @[@"stop"];
-                   }];
-  return visits;
-}
-
 - (void)remove
 {
   self.toDelete = YES;

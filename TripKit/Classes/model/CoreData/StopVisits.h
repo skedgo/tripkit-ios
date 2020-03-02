@@ -28,10 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Class methods
 
-+ (NSArray<StopVisits *> *)fetchStopVisitsForStopLocation:(StopLocation *)stopLocation
-                                         startingFromDate:(NSDate *)earliestDate;
-
-
 + (NSArray<NSSortDescriptor *> *)defaultSortDescriptors;
 
 + (NSPredicate *)departuresPredicateForStops:(NSArray<StopLocation *> *)stops
