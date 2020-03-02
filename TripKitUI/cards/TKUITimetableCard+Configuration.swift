@@ -21,12 +21,6 @@ public extension TKUITimetableCard {
     
     static let empty = Configuration()
     
-    /// Set this to true if the services' transit icons should get the colour
-    /// of the respective line.
-    ///
-    /// Default to `false`.
-    public var colorCodeTransitIcons: Bool = false
-    
     // MARK: - Customising timetable actions
     
     /// Set this to add a list of action buttons to a timeable card.
