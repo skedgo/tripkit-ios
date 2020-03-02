@@ -154,6 +154,9 @@ extension TKUIDepartureCell {
           self?.updateCounter()
         })
         .disposed(by: disposeBag)
+    } else {
+      timeToDepartTextLabel.isHidden = true
+      timeToDepartUnitLabel.isHidden = true 
     }
   }
   
