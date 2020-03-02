@@ -147,19 +147,29 @@ extension TKUIServiceVisitCell {
     subtitleLabel.textColor = isVisited ? .tkLabelSecondary : .tkLabelTertiary
     
     accessibilityTitleLabel.textColor = isVisited ? .tkLabelSecondary : .tkLabelTertiary
+    accessibilityImageView.alpha = isVisited ? 1 : 0.3
     
     stopNameStack.spacing = (subtitle != nil) ? 4 : 0
   }
   
-  func setStopAccessibility(accessibility: TKUIWheelchairAccessibility?) {
-    guard let accessibility = accessibility else {
+  func setStopAccessibility(_ accessibility: TKWheelchairAccessibility) {
+    guard accessibility.showInUI() else {
       accessibilityWrapper.isHidden = true
       return
     }
 
     accessibilityWrapper.isHidden = false
     accessibilityImageView.image = accessibility.icon
-    accessibilityTitleLabel.text = accessibility.title
+
+    // Not setting a title, unless inaccessible as it's very
+    // verbose otherwise
+    if accessibility == .notAccessible {
+      accessibilityTitleLabel.text = accessibility.title
+      accessibilityWrapper.accessibilityLabel = nil
+    } else {
+      accessibilityTitleLabel.text = nil
+      accessibilityWrapper.accessibilityLabel = accessibility.title
+    }
     
     stopNameStack.spacing = 4
   }
@@ -172,11 +182,10 @@ extension TKUIServiceVisitCell {
 
     setTitle(item.title, isVisited: item.isVisited)
     
-    if TKUserProfileHelper.showWheelchairInformation {
-      setStopAccessibility(accessibility: item.dataModel.stop.wheelchairAccessibility)
-    } else {
-      setStopAccessibility(accessibility: nil)
-    }
+    // NOTE: This is the accessibility of the stop-only, as the
+    // service accessibility is assumed covered by the title
+    // of the screen.
+    setStopAccessibility(item.dataModel.stop.wheelchairAccessibility)
     
     topLine.backgroundColor = item.topConnection
     topLine.isHidden = item.topConnection == nil
@@ -216,21 +225,10 @@ extension TKUIServiceVisitCell {
     topLine.isHidden = false
     bottomLine.isHidden = false
     
-    if TKUserProfileHelper.showWheelchairInformation {
-      setStopAccessibility(accessibility: visit.stop.wheelchairAccessibility)
-    } else {
-      setStopAccessibility(accessibility: nil)
-    }
+    // NOTE: This is the accessibility of the stop-only, as the
+    // service accessibility is assumed covered by the title
+    // of the screen.
+    setStopAccessibility(visit.stop.wheelchairAccessibility)
   }
   
-}
-
-fileprivate extension StopLocation {
-  var wheelchairAccessibility: TKUIWheelchairAccessibility {
-    switch isWheelchairAccessible {
-    case .some(true): return .accessible
-    case .some(false): return .notAccessible
-    case nil: return .unknown
-    }
-  }
 }

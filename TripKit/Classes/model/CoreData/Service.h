@@ -46,7 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, getter = isRealTimeCapable) BOOL realTimeCapable;
 @property (nonatomic, assign, getter = isCancelled) BOOL cancelled;
 @property (nonatomic, assign, getter = isBicycleAccessible) BOOL bicycleAccessible;
+
+/// :nodoc:
 @property (nonatomic, assign, getter = isWheelchairAccessible) BOOL wheelchairAccessible;
+/// :nodoc:
+@property (nonatomic, assign, getter = isWheelchairInaccessible) BOOL wheelchairInaccessible;
+
 @property (nonatomic, strong) NSArray<StopVisits *> *sortedVisits;
 @property (nonatomic, copy, nullable) NSString *lineName;
 @property (nonatomic, copy, nullable) NSString *direction;

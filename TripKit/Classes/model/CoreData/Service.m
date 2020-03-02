@@ -18,6 +18,7 @@ enum {
   SGServiceFlagCancelled              = 1 << 2,
   SGServiceFlagBicycleAccessible      = 1 << 3,
   SGServiceFlagWheelchairAccessible   = 1 << 4,
+  SGServiceFlagWheelchairInaccessible = 1 << 5,
 };
 typedef NSUInteger SGServiceFlag;
 
@@ -112,6 +113,22 @@ typedef NSUInteger SGServiceFlag;
 - (void)setWheelchairAccessible:(BOOL)wheelchairAccessible
 {
   [self setFlag:SGServiceFlagWheelchairAccessible to:wheelchairAccessible];
+  if (wheelchairAccessible) {
+    [self setFlag:SGServiceFlagWheelchairInaccessible to:false];
+  }
+}
+
+- (BOOL)isWheelchairInaccessible
+{
+  return 0 != (self.flags.integerValue & SGServiceFlagWheelchairInaccessible);
+}
+
+- (void)setWheelchairInaccessible:(BOOL)wheelchairInaccessible
+{
+  [self setFlag:SGServiceFlagWheelchairInaccessible to:wheelchairInaccessible];
+  if (wheelchairInaccessible) {
+    [self setFlag:SGServiceFlagWheelchairAccessible to:false];
+  }
 }
 
 - (void)setLineName:(NSString *)lineName

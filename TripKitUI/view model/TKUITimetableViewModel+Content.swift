@@ -139,7 +139,7 @@ extension TKUITimetableViewModel {
   
   static func buildSections(_ visits: [StopVisits], groupStops: Bool, selectedServiceID: String?) -> [Section] {
     let items = visits.compactMap { visit -> Item? in
-      guard let contentModel = TKUIDepartureCellContent.build(for: visit) else { return nil }
+      guard let contentModel = TKUIDepartureCellContent.build(embarkation: visit) else { return nil }
       let selected = visit.service.code == selectedServiceID
       return Item(dataModel: visit, contentModel: contentModel, isSelected: selected)
     }

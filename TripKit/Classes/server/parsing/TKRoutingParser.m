@@ -344,7 +344,8 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           reference.departurePlatform = refDict[@"platform"];
           reference.arrivalPlatform = refDict[@"endPlatform"];
           reference.bicycleAccessible = [refDict[@"bicycleAccessible"] boolValue];
-          reference.wheelchairAccessible = [refDict[@"wheelchairAccessible"] boolValue];
+
+          [reference _setWheelchairAccessibility:refDict[@"wheelchairAccessible"]];
           
           if (refDict[@"timetableStartTime"]) {
             reference.timetableStartTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"timetableStartTime"] integerValue]];

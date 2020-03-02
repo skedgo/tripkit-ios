@@ -44,6 +44,10 @@ public class TKUITripCell: UITableViewCell {
     selectionIndicator.backgroundColor = .tkAppTintColor
     
     separatorView.backgroundColor = .tkSeparatorSubtle
+    
+    // Allow showing it, which won't mean it'll always show it
+    // - just if something is known to be inaccessible
+    segmentView.allowWheelchairIcon = true
   }
 
   override public func setSelected(_ selected: Bool, animated: Bool) {

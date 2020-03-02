@@ -131,8 +131,8 @@ extension TKUISegmentMovingCell {
       pathFriendlinessView.segment = segment
       return pathFriendlinessView
 
-    case .wheelchairFriendly:
-      return TKUIOccupancyView(with: .wheelchair)
+    case .wheelchairAccessibility(let accessibility):
+      return TKUIOccupancyView(with: .wheelchair(accessibility))
     }
   }
   

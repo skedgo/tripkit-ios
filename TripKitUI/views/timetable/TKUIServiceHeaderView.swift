@@ -93,7 +93,7 @@ class TKUIServiceHeaderView: UIView {
     expandyButton.setImage(TGCard.arrowButtonImage(direction: .up, background: tintColor.withAlphaComponent(0.12), arrow: tintColor), for: .normal)
   }
   
-  private func updateAccessibility(_ accessibility: TKUIWheelchairAccessibility) {
+  private func updateAccessibility(_ accessibility: TKWheelchairAccessibility) {
     accessibilityImageView.image = accessibility.icon
     accessibilityTitleLabel.text = accessibility.title
   }

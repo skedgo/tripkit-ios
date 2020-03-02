@@ -27,38 +27,9 @@ public struct TKUIDepartureCellContent {
   public var lineText: String?
 
   public var approximateTimeToDepart: Date?
-  public var alwaysShowAccessibilityInformation: Bool
-  public var wheelchairAccessibility: TKUIWheelchairAccessibility
+  public var wheelchairAccessibility: TKWheelchairAccessibility
   public var alerts: [Alert]
   public var vehicleOccupancies: Observable<([[TKAPI.VehicleOccupancy]], Date)>?
-}
-
-public enum TKUIWheelchairAccessibility {
-  case accessible
-  case notAccessible
-  case unknown
-  
-  public var title: String {
-    switch self {
-    case .accessible:
-      return Loc.WheelchairAccessible
-    case .notAccessible:
-      return Loc.WheelchairNotAccessible
-    case .unknown:
-      return Loc.WheelchairAccessibilityUnknown
-    }
-  }
-  
-  public var icon: UIImage {
-    switch self {
-    case .accessible:
-      return TripKitUIBundle.imageNamed("icon-wheelchair-accessible")
-    case .notAccessible:
-      return TripKitUIBundle.imageNamed("icon-wheelchair-not-accessible")
-    case .unknown:
-      return TripKitUIBundle.imageNamed("icon-wheelchair-unknown")
-    }
-  }
 }
 
 class TKUIDepartureCell: UITableViewCell {
@@ -163,7 +134,7 @@ extension TKUIDepartureCell {
   private func updateAccessibilitySection() {
     guard let dataSource = dataSource else { return }
     
-    if dataSource.alwaysShowAccessibilityInformation {
+    if dataSource.wheelchairAccessibility.showInUI() {
       accessibleImageView.isHidden = false
       accessibleImageView.image = dataSource.wheelchairAccessibility.icon
       accessibleImageView.accessibilityLabel = dataSource.wheelchairAccessibility.title

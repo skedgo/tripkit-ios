@@ -11,9 +11,10 @@
 #import <TripKit/TripKit-Swift.h>
 
 enum {
-  SGSegmentFlagTimesAreRealtime     = 1 << 0,
-  SGSegmentFlagBicycleAccessible    = 1 << 1,
-  SGSegmentFlagWheelchairAccessible = 1 << 2,
+  SGSegmentFlagTimesAreRealtime       = 1 << 0,
+  SGSegmentFlagBicycleAccessible      = 1 << 1,
+  SGSegmentFlagWheelchairAccessible   = 1 << 2,
+  SGSegmentFlagWheelchairInaccessible = 1 << 3,
 };
 typedef NSUInteger SGSegmentFlag;
 
@@ -204,6 +205,16 @@ typedef NSUInteger SGSegmentFlag;
 - (void)setWheelchairAccessible:(BOOL)wheelchairAccessible
 {
   [self setFlag:SGSegmentFlagWheelchairAccessible to:wheelchairAccessible];
+}
+
+- (BOOL)isWheelchairInaccessible
+{
+  return [self hasFlag:SGSegmentFlagWheelchairInaccessible];
+}
+
+- (void)setWheelchairInaccessible:(BOOL)wheelchairInaccessible
+{
+  [self setFlag:SGSegmentFlagWheelchairInaccessible to:wheelchairInaccessible];
 }
 
 #pragma mark - Data
