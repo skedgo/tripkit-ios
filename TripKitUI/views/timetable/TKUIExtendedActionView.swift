@@ -25,7 +25,7 @@ class TKUIExtendedActionView: UIView {
   
   override var frame: CGRect {
     didSet {
-      layer.cornerRadius = frame.size.height / 2
+      layer.cornerRadius = 18
     }
   }
   

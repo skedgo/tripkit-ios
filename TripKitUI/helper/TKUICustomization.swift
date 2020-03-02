@@ -50,4 +50,10 @@ public class TKUICustomization {
   /// used.
   public var forceCompactActionsLayout: Bool = false
   
+  /// Set this to true if the services' transit icons should get the colour
+  /// of the respective line.
+  ///
+  /// Default to `false`.
+  public var colorCodeTransitIcons: Bool = false
+  
 }
