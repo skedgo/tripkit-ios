@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// :nodoc:
 public extension UIImageView {
   @objc convenience init(asRealTimeAccessoryImageAnimated animated: Bool, tintColor: UIColor? = nil) {
     self.init()
@@ -41,17 +42,5 @@ public extension UIImageView {
     } else {
       return [TripKitUIBundle.imageNamed("icon-signal-bars3")]
     }
-  }
-  
-  @objc convenience init(asWheelchairAccessoryImageWithTintColor tintColor: UIColor?) {
-    self.init()
-    
-    let image = TKStyleManager.imageNamed("icon-wheelchair")
-    if let tintColor = tintColor {
-      self.image = image.tk_image(withTintColor: tintColor)
-    } else {
-      self.image = image
-    }
-    self.accessibilityLabel = Loc.WheelchairAccessible
   }
 }

@@ -33,9 +33,9 @@ extension StopLocation {
     if let popularity = model.popularity {
       sortScore = NSNumber(value: popularity)
     }
-    if let isAccessible = model.wheelchairAccessible {
-      wheelchairAccessible = NSNumber(value: isAccessible)
-    }
+
+    self.wheelchairAccessibility = TKWheelchairAccessibility(bool: model.wheelchairAccessible)
+
     location = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
     stopModeInfo = model.modeInfo
     
@@ -89,7 +89,8 @@ extension Service {
     color = model.color?.color
     modeInfo = model.modeInfo
     operatorName = model.operatorName
-    isWheelchairAccessible = model.wheelchairAccessible ?? false // FIXME: Should be optional
+    wheelchairAccessibility = TKWheelchairAccessibility(bool: model.wheelchairAccessible)
+    
     isBicycleAccessible = model.bicycleAccessible ?? false
     alertHashCodes = model.alertHashCodes?.map { NSNumber(value: $0) }
     

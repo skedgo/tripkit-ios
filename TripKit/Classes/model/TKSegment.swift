@@ -254,8 +254,8 @@ extension TKSegment: TKTripSegment {
     return timesAreRealTime
   }
   
-  public var tripSegmentIsWheelchairAccessible: Bool {
-    return reference?.isWheelchairAccessible ?? true
+  public var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility {
+    return self.wheelchairAccessibility ?? .unknown
   }
   
   public var tripSegmentFixedDepartureTime: Date? {

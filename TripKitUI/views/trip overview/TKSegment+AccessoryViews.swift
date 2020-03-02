@@ -35,8 +35,8 @@ extension TKSegment {
       accessoryViews.append(occupancyView)
     }
     
-    if let accessible = reference?.isWheelchairAccessible, accessible && TKUserProfileHelper.showWheelchairInformation {
-      let wheelchairView = TKUIOccupancyView(with: .wheelchair)
+    if let accessibility = wheelchairAccessibility, accessibility.showInUI() {
+      let wheelchairView = TKUIOccupancyView(with: .wheelchair(accessibility))
       accessoryViews.append(wheelchairView)
     }
     

@@ -262,10 +262,8 @@
     }
     
     UIImageView *modeTitleAccessoryImageView = nil;
-    if (allowTitles
-        && self.allowWheelchairIcon
-        && [segment tripSegmentIsWheelchairAccessible]) {
-      modeTitleAccessoryImageView = [[UIImageView alloc] initAsWheelchairAccessoryImageWithTintColor:UIColor.tkLabelPrimary];
+    if (allowTitles && self.allowWheelchairIcon) {
+      modeTitleAccessoryImageView = [TKUISemaphoreView accessibilityImageViewForDisplayable:segment];
     }
     
     NSString *modeSubtitle = nil;

@@ -12,20 +12,16 @@ import RxSwift
 
 extension TKUIDepartureCellContent {
   
-  static func build(for visit: StopVisits) -> TKUIDepartureCellContent? {
-    guard let service = (visit.service as Service?) else {
+  static func build(embarkation: StopVisits, disembarkation: StopVisits? = nil) -> TKUIDepartureCellContent? {
+    guard let service = (embarkation.service as Service?) else {
       return nil
     }
-    
-    let accessibility: TKUIWheelchairAccessibility
-    if let isStopAccessible = visit.stop.isWheelchairAccessible {
-      accessibility = isStopAccessible && service.isWheelchairAccessible
-        ? .accessible
-        : .notAccessible
-    } else if service.isWheelchairAccessible {
-      accessibility = .accessible
-    } else {
-      accessibility = .unknown
+
+    // Note, for DLS entries `disembarkation` will be nil, but the accessibility
+    // is already handled then under `disembarkation`.
+    var accessibility = embarkation.wheelchairAccessibility
+    if let atEnd = disembarkation?.wheelchairAccessibility {
+      accessibility = accessibility.combine(with: atEnd)
     }
     
     let serviceColor = service.color as? UIColor
@@ -38,12 +34,11 @@ extension TKUIDepartureCellContent {
       serviceShortName: service.shortIdentifier(),
       serviceColor: serviceColor,
       serviceIsCancelled: service.isCancelled,
-      accessibilityLabel: visit.accessibilityDescription(includeRealTime: true),
-      accessibilityTimeText: visit.buildTimeText(spacer: ";").string,
-      timeText: visit.buildTimeText(),
-      lineText: visit.buildLineText(),
-      approximateTimeToDepart: visit.countdownDate,
-      alwaysShowAccessibilityInformation: TKUserProfileHelper.showWheelchairInformation,
+      accessibilityLabel: embarkation.accessibilityDescription(includeRealTime: true),
+      accessibilityTimeText: embarkation.buildTimeText(spacer: ";").string,
+      timeText: embarkation.buildTimeText(),
+      lineText: embarkation.buildLineText(),
+      approximateTimeToDepart: embarkation.countdownDate,
       wheelchairAccessibility: accessibility,
       alerts: service.allAlerts(),
       vehicleOccupancies: service.vehicle?.rx.occupancies
