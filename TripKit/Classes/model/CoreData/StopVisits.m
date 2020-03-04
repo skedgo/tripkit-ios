@@ -67,18 +67,6 @@
 	}
 }
 
-- (NSString *)smsString
-{
-	NSTimeZone *timeZone = self.stop.region.timeZone;
-  NSString *departure = self.frequency != nil
-    ? [TKStyleManager timeString:self.departure forTimeZone:timeZone]
-    : @"";
-  NSMutableString *output = [NSMutableString stringWithFormat:@"%@ %@", [self.service shortIdentifier], departure];
-  if ([self.service isRealTime])
-    [output appendString:@"*"];
-  return output;
-}
-
 - (NSString *)secondaryInformation
 {
   NSMutableString *subtitle = [NSMutableString string];

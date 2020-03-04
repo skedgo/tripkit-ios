@@ -41,6 +41,45 @@ extension StopVisits {
   }
   
   /// :nodoc:
+  public var smsString: String? {
+    guard let serviceId = service.shortIdentifier() else {
+      return nil
+    }
+    
+    var output = serviceId
+    
+    switch timing {
+    case .timetabled(let arrival, let departure):
+      if let departure = departure {
+        output += " " + Loc.Departs(atTime: TKStyleManager.timeString(departure, for: timeZone))
+      } else if let arrival = arrival {
+        output += " " + Loc.Arrives(atTime: TKStyleManager.timeString(arrival, for: timeZone))
+      }
+      
+    case .frequencyBased(let frequency, let start, let end, _):
+      let freqString = Date.durationString(forMinutes: Int(frequency/60))
+      
+      if let start = start, let end = end {
+        let formatter = DateIntervalFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        formatter.timeZone = timeZone
+        output += " \(formatter.string(from: start, to: end))" + " " + Loc.Every(repetition: freqString)
+      } else if let start = start {
+        output += " " + Loc.From(date: TKStyleManager.timeString(start, for: timeZone)) + " " + Loc.Every(repetition: freqString)
+      } else if let end = end {
+        output += " " + Loc.To(date: TKStyleManager.timeString(end, for: timeZone)) + " " + Loc.Every(repetition: freqString)
+      }
+    }
+    
+    if service.isRealTime {
+      output.append("*")
+    }
+    
+    return output
+  }
+  
+  /// :nodoc:
   @objc
   public var timeForServerRequests: Date {
     return departure ?? arrival ?? Date()
