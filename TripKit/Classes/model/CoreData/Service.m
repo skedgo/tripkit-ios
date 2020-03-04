@@ -236,6 +236,9 @@ typedef NSUInteger SGServiceFlag;
     [waypoints addObjectsFromArray:[service.shape routePath]];
     [visits addObjectsFromArray:[service.visits sortedArrayUsingDescriptors:@[sortDescriptor]]];
   }
+  if (visits.count == 0) {
+    return @[];
+  }
 	
 	// determine the split
 	NSUInteger startSplit = 0;
