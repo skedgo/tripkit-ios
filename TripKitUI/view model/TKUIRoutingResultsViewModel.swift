@@ -75,8 +75,11 @@ public class TKUIRoutingResultsViewModel {
       requestChanged = .just( (request, mutable: false) )
       skipRequest = true
     } else {
-      requestChanged = Observable.merge(originOrDestinationChanged, builderChangedWithID)
-        .debounce(.milliseconds(250), scheduler: MainScheduler.instance)
+      requestChanged = Observable.merge(
+        originOrDestinationChanged,
+        builderChangedWithID
+          .debounce(.seconds(1), scheduler: MainScheduler.instance)
+      )
         .distinctUntilChanged { $0.1 == $1.1 }
         .map { $0.0.generateRequest() }
         .startWith(initialRequest)

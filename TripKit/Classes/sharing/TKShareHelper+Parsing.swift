@@ -69,7 +69,7 @@ public extension TKShareHelper {
       case "modes", "mode":
         modes.append(value)
       default:
-//        TKLog.debug("OpenURLHelper", text: "Ignoring \(item.name)=\(value)")
+//        TKLog.debug("TKShareHelper", text: "Ignoring \(item.name)=\(value)")
         continue
       }
     }
