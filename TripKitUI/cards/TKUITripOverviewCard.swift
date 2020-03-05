@@ -159,8 +159,8 @@ public class TKUITripOverviewCard: TGTableCard {
     
     if let factory = TKUITripOverviewCard.config.tripActionsFactory {
       let actions = factory(viewModel.trip)
-      let actionsView = TKUITripActionsView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
-      actionsView.configure(with: actions, for: viewModel.trip, card: self)
+      let actionsView = TKUICardActionsView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
+      actionsView.configure(with: actions, model: viewModel.trip, card: self)
       actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
       tableView.tableHeaderView = actionsView
     } else {

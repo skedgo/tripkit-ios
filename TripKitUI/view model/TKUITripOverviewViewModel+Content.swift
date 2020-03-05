@@ -82,7 +82,7 @@ extension TKUITripOverviewViewModel {
     
     let connection: Line?
     
-    let actions: [TKUITripOverviewCardAction]
+    let actions: [TKUICardAction]
     let accessories: [SegmentAccessory]
     
     fileprivate let segment: TKSegment

@@ -78,7 +78,7 @@ class TKUITimetableAccessoryView: UIView {
     timeButton.tintColor = .tkAppTintColor
   }
   
-  func setCustomActions(_ actions: [TKUITimetableCardAction], for model: [TKUIStopAnnotation], card: TKUITimetableCard) {
+  func setCustomActions(_ actions: [TKUICardAction], for model: [TKUIStopAnnotation], card: TKUITimetableCard) {
     customActionView.removeAllSubviews()
     
     // We deal with empty actions separately here, since it's best to
@@ -102,7 +102,7 @@ class TKUITimetableAccessoryView: UIView {
     }
   }
   
-  private func useCompactLayout(for actions: [TKUITimetableCardAction], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
+  private func useCompactLayout(for actions: [TKUICardAction], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
     let stack = UIStackView()
     stack.axis = .horizontal
     stack.alignment = .center
@@ -145,7 +145,7 @@ class TKUITimetableAccessoryView: UIView {
     actionViews.forEach(stack.addArrangedSubview)
   }
   
-  private func useExtendedLayout(for actions: [TKUITimetableCardAction], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
+  private func useExtendedLayout(for actions: [TKUICardAction], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
     var previousActionView: UIView?
     
     for (index, action) in actions.enumerated() {

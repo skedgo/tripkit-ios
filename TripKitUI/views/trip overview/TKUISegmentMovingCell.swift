@@ -136,7 +136,7 @@ extension TKUISegmentMovingCell {
     }
   }
   
-  private func buildView(for action: TKUITripOverviewCardAction, for card: TKUITripOverviewCard) -> UIView {
+  private func buildView(for action: TKUICardAction, for card: TKUITripOverviewCard) -> UIView {
     let button = UIButton(type: .custom)
     button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     button.setTitleColor(tintColor, for: .normal)
@@ -148,7 +148,7 @@ extension TKUISegmentMovingCell {
     button.setTitle(action.title, for: .normal)
     button.rx.tap
       .subscribe(onNext: { [unowned card] in
-        _ = action.handler(card, button)
+        _ = action.handler(card, nil, button)        
       })
       .disposed(by: disposeBag)
     return button

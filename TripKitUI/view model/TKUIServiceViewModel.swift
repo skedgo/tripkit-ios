@@ -25,6 +25,9 @@ class TKUIServiceViewModel {
   ///   - dataInput: What to show
   ///   - itemSelected: UI input of selected item
   init(dataInput: DataInput, itemSelected: Driver<Item>) {
+    
+    embarkationPair = (dataInput.embarkation, dataInput.disembarkation)
+    
     let errorPublisher = PublishSubject<Error>()
     
     let realTimeUpdate = TKUIServiceViewModel.fetchRealTimeUpdates(embarkation: dataInput.embarkation)
@@ -65,6 +68,8 @@ class TKUIServiceViewModel {
     error = errorPublisher.asDriver(onErrorRecover: { Driver.just($0) })
   }
   
+  let embarkationPair: TKUIServiceCard.EmbarkationPair
+  
   /// Title view with details about the embarkation.
   /// Can change with real-time data.
   let header: Driver<TKUIDepartureCellContent>
@@ -88,6 +93,7 @@ class TKUIServiceViewModel {
   
   /// User-relevant errors, e.g., if service content couldn't get downloaded
   let error: Driver<Error>
+  
 }
 
 // MARK: - Scrolling to embarkation

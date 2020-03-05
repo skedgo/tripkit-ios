@@ -250,7 +250,7 @@ public class TKUITimetableCard : TGTableCard {
     
     // TODO: Add viewModel.error
 
-    let actions: [TKUITimetableCardAction]
+    let actions: [TKUICardAction]
     if let factory = TKUITimetableCard.config.timetableActionsFactory {
       actions = factory(viewModel.departureStops)
     } else {

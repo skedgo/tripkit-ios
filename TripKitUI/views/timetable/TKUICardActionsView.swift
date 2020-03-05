@@ -1,34 +1,34 @@
 //
-//  TKUITripActionsView.swift
+//  TKUICardActionsView.swift
 //  TripKitUI-iOS
 //
-//  Created by Adrian Schönig on 09.07.18.
-//  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
+//  Created by Brian Huang on 4/3/20.
+//  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
 import UIKit
 
-class TKUITripActionsView: UIView {  
+import TGCardViewController
+
+class TKUICardActionsView: UIView {
   
-  func configure(with actions: [TKUITripOverviewCardAction], for trip: Trip, card: TKUITripOverviewCard) {
+  func configure(with actions: [TKUICardAction], model: Any, card: TGCard) {
     subviews.forEach { $0.removeFromSuperview() }
     
     backgroundColor = .clear
     
     if actions.count > 2 || TKUICustomization.shared.forceCompactActionsLayout {
-      useCompactLayout(for: actions, trip: trip, in: card)
+      useCompactLayout(in: card, for: actions, model: model)
     } else {
-      useExtendedLayout(for: actions, trip: trip, in: card)
+      useExtendedLayout(in: card, for: actions, model: model)
     }
   }
   
 }
 
-// MARK: - Configuring with content
-
-extension TKUITripActionsView {
+extension TKUICardActionsView {
   
-  private func useCompactLayout(for actions: [TKUITripOverviewCardAction], trip: Trip, in card: TKUITripOverviewCard) {
+  private func useCompactLayout(in card: TGCard, for actions: [TKUICardAction], model: Any) {
     let stack = UIStackView()
     stack.axis = .horizontal
     stack.alignment = .center
@@ -57,7 +57,7 @@ extension TKUITripActionsView {
       actionView.bold = action.style == .bold
       actionView.onTap = { [weak card, unowned actionView] sender in
         guard let card = card else { return }
-        let update = action.handler(card, sender)
+        let update = action.handler(card, model, sender)
         if update {
           actionView.imageView.image = action.icon
           actionView.titleLabel.text = showActionTitle ? action.title : nil
@@ -71,7 +71,7 @@ extension TKUITripActionsView {
     actionViews.forEach(stack.addArrangedSubview)
   }
   
-  private func useExtendedLayout(for actions: [TKUITripOverviewCardAction], trip: Trip, in card: TKUITripOverviewCard) {
+  private func useExtendedLayout(in card: TGCard, for actions: [TKUICardAction], model: Any) {
     var previousActionView: UIView?
     
     for (index, action) in actions.enumerated() {
@@ -84,7 +84,7 @@ extension TKUITripActionsView {
       actionView.bold = action.style == .bold
       actionView.onTap = { [weak card, unowned actionView] sender in
         guard let card = card else { return }
-        let update = action.handler(card, sender)
+        let update = action.handler(card, model, sender)
         if update {
           actionView.imageView.image = action.icon
           actionView.label.text = action.title
@@ -97,8 +97,8 @@ extension TKUITripActionsView {
       
       actionView.translatesAutoresizingMaskIntoConstraints = false
       if index == 0 {
-        actionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        actionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        actionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        actionView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         actionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
       } else {
         guard let previous = previousActionView else { preconditionFailure() }
@@ -112,7 +112,7 @@ extension TKUITripActionsView {
       }
       
       if index == actions.count - 1 {
-        actionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
+        actionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
       }
       
       previousActionView = actionView
