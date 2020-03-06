@@ -50,9 +50,11 @@ extension ExampleCustomizer {
     
     return TKUITimetableCard.Action(
       title: title(), icon: icon()
-    ) { [unowned stop] _, _, _, _ in
+    ) { [unowned stop] action, _, _, _ in
       InMemoryFavoriteManager.shared.toggleFavorite(for: stop)
-      return true
+      action.title = title()
+      action.icon = icon()
+      return true // to refresh title + icon
     }
   }
 }
