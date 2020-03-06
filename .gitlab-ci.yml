@@ -79,7 +79,7 @@ build_tripkitui_example:
   stage: examples
   script:
     - carthage bootstrap --cache-builds --platform iOS
-    - xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample ONLY_ACTIVE_ARCH=NO | xcpretty -c && exit ${PIPESTATUS[0]}
+    - xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c && exit ${PIPESTATUS[0]}
   cache:
     key:
       files:
