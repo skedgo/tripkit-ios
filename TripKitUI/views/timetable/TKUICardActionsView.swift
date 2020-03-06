@@ -20,15 +20,15 @@ class TKUICardActionsView: UIView {
     super.init(coder: coder)
   }
   
-  func configure<A: TKUICardAction>(with actions: [A], payload: A.Payload, card: A.Card)  {
+  func configure<C, M>(with actions: [TKUICardAction<C, M>], model: M, card: C) {
     subviews.forEach { $0.removeFromSuperview() }
     
     backgroundColor = .clear
     
     if actions.count > 2 || TKUICustomization.shared.forceCompactActionsLayout {
-      useCompactLayout(in: card, for: actions, with: payload)
+      useCompactLayout(in: card, for: actions, with: model)
     } else {
-      useExtendedLayout(in: card, for: actions, with: payload)
+      useExtendedLayout(in: card, for: actions, with: model)
     }
   }
   
@@ -36,7 +36,7 @@ class TKUICardActionsView: UIView {
 
 extension TKUICardActionsView {
   
-  private func useCompactLayout<A: TKUICardAction>(in card: A.Card, for actions: [A], with payload: A.Payload) {
+  private func useCompactLayout<C, M>(in card: C, for actions: [TKUICardAction<C, M>], with model: M) {
     let stack = UIStackView()
     stack.axis = .horizontal
     stack.alignment = .center
@@ -65,7 +65,7 @@ extension TKUICardActionsView {
       actionView.bold = action.style == .bold
       actionView.onTap = { [weak card, unowned actionView] sender in
         guard let card = card else { return }
-        let update = action.handler(card, payload, sender)
+        let update = action.handler(action, card, model, sender)
         if update {
           actionView.imageView.image = action.icon
           actionView.titleLabel.text = showActionTitle ? action.title : nil
@@ -79,7 +79,7 @@ extension TKUICardActionsView {
     actionViews.forEach(stack.addArrangedSubview)
   }
   
-  private func useExtendedLayout<A: TKUICardAction>(in card: A.Card, for actions: [A], with payload: A.Payload) {
+  private func useExtendedLayout<C, M>(in card: C, for actions: [TKUICardAction<C, M>], with model: M) {
     var previousActionView: UIView?
     
     for (index, action) in actions.enumerated() {
@@ -92,7 +92,7 @@ extension TKUICardActionsView {
       actionView.bold = action.style == .bold
       actionView.onTap = { [weak card, unowned actionView] sender in
         guard let card = card else { return }
-        let update = action.handler(card, payload, sender)
+        let update = action.handler(action, card, model, sender)
         if update {
           actionView.imageView.image = action.icon
           actionView.label.text = action.title

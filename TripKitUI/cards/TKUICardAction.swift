@@ -16,18 +16,27 @@ import TGCardViewController
 /// `TKUIServiceCard.config.serviceActionsFactory`
 ///
 /// For a concerte example, see `TKUIStartTripAction`.
-public protocol TKUICardAction {
+open class TKUICardAction<Card, Model> where Card: TGCard {
   
-  associatedtype Card: TGCard
-  associatedtype Payload
+  public init(
+    title: String,
+    icon: UIImage,
+    style: TKUICardActionStyle = .normal,
+    handler: @escaping (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
+  ) {
+    self.title = title
+    self.icon = icon
+    self.style = style
+    self.handler = handler
+  }
   
   /// Title (and accessory label) of the button
-  var title: String { get }
+  open var title: String
   
   /// Icon to display as the action. Should be a template image.
-  var icon: UIImage { get }
+  open var icon: UIImage
   
-  var style: TKUICardActionStyle { get }
+  open var style: TKUICardActionStyle
 
   /// Handler executed when user taps on the button, providing the
   /// corresponding card and model instance. Should return whether the button
@@ -35,12 +44,5 @@ public protocol TKUICardAction {
   /// toggle actions such as adding or removing a reminder or favourite).
   ///
   /// Parameters are the card, the model instance, and the sender
-  var handler: (Card, Payload?, UIView) -> Bool { get }
-  
-}
-
-// MARK: - Default implementation
-
-public extension TKUICardAction {
-  var style: TKUICardActionStyle { .normal }
+  public let handler: (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
 }

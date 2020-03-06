@@ -9,6 +9,10 @@
 
 public extension TKUITripOverviewCard {
   
+  typealias TripAction = TKUICardAction<TKUITripOverviewCard, Trip>
+  typealias SegmentAction = TKUICardAction<TKUITripOverviewCard, TKSegment>
+
+  
   /// Configurtion of any `TKUITripOverviewCard`. Use this to add custom
   /// actions.
   ///
@@ -58,7 +62,7 @@ public extension TKUITripOverviewCard {
     ///     more than that will be ignored.
     ///
     /// Called when a trip overview card gets presented.
-    public var tripActionsFactory: ((Trip) -> [TKUICardAction])?
+    public var tripActionsFactory: ((Trip) -> [TripAction])?
     
     /// This controls whether the title is visible underneath an action icon.
     ///
@@ -80,7 +84,7 @@ public extension TKUITripOverviewCard {
     ///     more than that will be ignored.
     ///
     /// Called when a trip overview card gets presented.
-    public var segmentActionsfactory: ((TKSegment) -> [TKUICardAction])?
+    public var segmentActionsfactory: ((TKSegment) -> [SegmentAction])?
     
     /// Set this to limit how many alerts are shown for a segment
     public var maximumAlertsPerSegment: Int = 3

@@ -112,7 +112,7 @@ extension TKUISegmentMovingCell {
     let accessories = item.accessories.map(TKUISegmentMovingCell.buildView)
     accessoryViewStack.resetViews(accessories)
     
-    let buttons = item.actions.map { buildView(for: $0, for: card) }
+    let buttons = item.actions.map { buildView(for: $0, model: item.segment, for: card) }
     buttonStackView.resetViews(buttons)
   }
   
@@ -136,7 +136,7 @@ extension TKUISegmentMovingCell {
     }
   }
   
-  private func buildView(for action: TKUICardAction, for card: TKUITripOverviewCard) -> UIView {
+  private func buildView(for action: TKUICardAction<TKUITripOverviewCard, TKSegment>, model: TKSegment, for card: TKUITripOverviewCard) -> UIView {
     let button = UIButton(type: .custom)
     button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     button.setTitleColor(tintColor, for: .normal)
@@ -148,7 +148,8 @@ extension TKUISegmentMovingCell {
     button.setTitle(action.title, for: .normal)
     button.rx.tap
       .subscribe(onNext: { [unowned card] in
-        _ = action.handler(card, nil, button)        
+        _ = action.handler(action, card, model, button)
+        #warning("Update title")
       })
       .disposed(by: disposeBag)
     return button
