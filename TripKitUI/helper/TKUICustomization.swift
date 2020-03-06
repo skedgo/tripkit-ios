@@ -50,6 +50,15 @@ public class TKUICustomization {
   /// used.
   public var forceCompactActionsLayout: Bool = false
   
+  /// Set this to `true` to show both image and title for card actions.
+  ///
+  /// The default value is `false`, which means an action is showing
+  /// only the image.
+  ///
+  /// - note: If setting this to `true`, it's best to ensure the title is
+  /// is short, otherise, text may get truncated.
+  public var showCardActionTitle: Bool = false
+  
   /// Set this to true if the services' transit icons should get the colour
   /// of the respective line.
   ///

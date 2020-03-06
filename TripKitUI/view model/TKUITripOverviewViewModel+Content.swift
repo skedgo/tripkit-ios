@@ -82,10 +82,10 @@ extension TKUITripOverviewViewModel {
     
     let connection: Line?
     
-    let actions: [TKUITripOverviewCardAction]
+    let actions: [TKUICardAction<TKUITripOverviewCard, TKSegment>]
     let accessories: [SegmentAccessory]
     
-    fileprivate let segment: TKSegment
+    let segment: TKSegment
   }
   
   struct AlertItem: Equatable {

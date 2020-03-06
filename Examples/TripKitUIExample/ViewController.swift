@@ -23,23 +23,22 @@ class MainViewController: UITableViewController {
     // inter-app actions from TripKitInterApp
      if #available(iOS 13.0, *) {
       TKUITripOverviewCard.config.segmentActionsfactory = { segment in
-        var actions = [TKUITripOverviewCardAction]()
+        var actions = [TKUITripOverviewCard.SegmentAction]()
         
         if segment.isPublicTransport {
-          actions.append(SegmentTimetableAction(segment: segment))
+          actions.append(Self.buildTimetableAction())
         }
         
         for action in TKInterAppCommunicator.shared.externalActions(for: segment) {
-          actions.append(SegmentExternalAction(segment: segment, action: action))
+          actions.append(Self.buildExternalAction(action: action))
         }
         
         if TKInterAppCommunicator.canOpenInMapsApp(segment) {
-          actions.append(SegmentDirectionsAction(segment: segment))
+          actions.append(Self.buildDirectionsAction())
         }
         return actions
       }
     }
-    
   }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -213,68 +212,47 @@ extension MainViewController: TKUIHomeCardSearchResultsDelegate {
 // MARK: - Segment actions
 
 @available(iOS 13.0, *)
-fileprivate struct SegmentExternalAction: TKUITripOverviewCardAction {
-  let segment: TKSegment
-  let action: TKInterAppCommunicator.ExternalAction
-  
-  var title: String { action.title }
-  
-  var icon: UIImage {
-    switch action.type {
-    case .appDeepLink,
-         .appDownload:  return UIImage(systemName: "link")!
-    case .website:      return UIImage(systemName: "globe")!
-    case .message:      return UIImage(systemName: "message")!
-    case .phone:        return UIImage(systemName: "phone")!
-    case .ticket:       return UIImage(systemName: "cart")!
+extension MainViewController {
+  private static func buildExternalAction(action: TKInterAppCommunicator.ExternalAction) -> TKUITripOverviewCard.SegmentAction {
+    var icon: UIImage {
+      switch action.type {
+      case .appDeepLink,
+           .appDownload:  return UIImage(systemName: "link")!
+      case .website:      return UIImage(systemName: "globe")!
+      case .message:      return UIImage(systemName: "message")!
+      case .phone:        return UIImage(systemName: "phone")!
+      case .ticket:       return UIImage(systemName: "cart")!
+      }
     }
-  }
-  
-  var handler: (TKUITripOverviewCard, UIView) -> Bool {
-    return { [weak segment] card, sender in
-      guard
-        let segment = segment,
-        let controller = card.controller
-        else { return false }
-      
-      TKInterAppCommunicator.shared.perform(self.action, for: segment, presenter: controller, sender: sender)
+    
+    return TKUITripOverviewCard.SegmentAction(
+      title: action.title,
+      icon: icon
+    ) { _, card, segment, sender in
+      guard let controller = card.controller else { return false }
+      TKInterAppCommunicator.shared.perform(action, for: segment, presenter: controller, sender: sender)
       return false
     }
   }
-}
-
-@available(iOS 13.0, *)
-fileprivate struct SegmentDirectionsAction: TKUITripOverviewCardAction {
-  let segment: TKSegment
-
-  let title = Loc.GetDirections
-  let icon  = UIImage(systemName: "arrow.turn.up.right")!
-  let style = TKUICardActionStyle.bold
   
-  var handler: (TKUITripOverviewCard, UIView) -> Bool {
-    return { [weak segment] card, sender in
-      guard
-        let segment = segment,
-        let controller = card.controller
-        else { return false }
-      
+  private static func buildDirectionsAction() -> TKUITripOverviewCard.SegmentAction {
+    TKUITripOverviewCard.SegmentAction(
+      title: Loc.GetDirections,
+      icon: UIImage(systemName: "arrow.turn.up.right")!,
+      style: .bold
+    ) { _, card, segment, sender in
+      guard let controller = card.controller else { return false }
       TKInterAppCommunicator.openSegmentInMapsApp(segment, forViewController: controller, initiatedBy: sender, currentLocationHandler: nil)
       return false
     }
   }
-}
-
-@available(iOS 13.0, *)
-fileprivate struct SegmentTimetableAction: TKUITripOverviewCardAction {
-  let segment: TKSegment
-
-  let title = "Show timetable"
-  let icon  = UIImage(systemName: "clock")!
   
-  var handler: (TKUITripOverviewCard, UIView) -> Bool {
-    return { [weak segment] card, sender in
+  private static func buildTimetableAction() -> TKUITripOverviewCard.SegmentAction {
+    TKUITripOverviewCard.SegmentAction(
+      title: "Show timetable",
+      icon: UIImage(systemName: "clock")!
+    ) { _, card, segment, sender in
       guard
-        let segment = segment,
         let dls = TKDLSTable(for: segment),
         let controller = card.controller
         else { return false }

@@ -72,13 +72,18 @@ extension StopLocation: MKAnnotation {
   extension Array where Element: StopVisits {
     public var localizedShareString: String {
       var output = ""
-      for visit in self {
-        output.append(visit.smsString)
+      
+      let _ = self.reduce(output) { (current, next) -> String in
+        guard let smsString = next.smsString else { return current }
+        output.append(smsString)
         output.append("\n")
+        return output
       }
+      
       if output.contains("*") {
         output.append("* real-time")
       }
+      
       return output
     }
   }

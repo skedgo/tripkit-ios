@@ -65,9 +65,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields + methods
 
-/// :nodoc:
-@property (nonatomic, readonly) NSString *smsString;
-
 /// Frequency information, platform, service name
 @property (nonatomic, readonly) NSString *secondaryInformation;
 

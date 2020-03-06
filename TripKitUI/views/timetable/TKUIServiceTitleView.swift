@@ -19,10 +19,11 @@ class TKUIServiceTitleView: UIView {
   @IBOutlet weak var serviceImageView: UIImageView!
   @IBOutlet weak var serviceColorView: UIView!
   @IBOutlet weak var serviceShortNameLabel: TKUIStyledLabel!
-  
   @IBOutlet weak var serviceTimeLabel: TKUIStyledLabel!
   
   @IBOutlet weak var dismissButton: UIButton!
+  
+  @IBOutlet weak var accessoryStack: UIStackView!
   
   private let disposeBag = DisposeBag()
   

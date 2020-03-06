@@ -33,36 +33,28 @@ extension ExampleCustomizer {
   }
   
   private static func configureTimetableCard() {
-    
     TKUITimetableCard.config.timetableActionsFactory = { stops in
-      var actions: [TKUITimetableCardAction] = []
+      var actions: [TKUITimetableCard.Action] = []
       if stops.count == 1, let stop = stops.first {
-        actions.append(FavoriteStopAction(stop: stop))
+        actions.append(buildFavoriteStopAction(stop: stop))
       }
       return actions
     }
-    
   }
   
-  fileprivate struct FavoriteStopAction: TKUITimetableCardAction {
-    let stop: TKUIStopAnnotation
+  private static func buildFavoriteStopAction(stop: TKUIStopAnnotation) -> TKUITimetableCard.Action {
     
-    private var isFavorite: Bool {
-      return InMemoryFavoriteManager.shared.hasFavorite(for: stop)
-    }
+    func isFavorite() -> Bool { InMemoryFavoriteManager.shared.hasFavorite(for: stop) }
+    func title() -> String { isFavorite() ? "Remove Favorite" : "Add Favorite" }
+    func icon() -> UIImage { isFavorite() ? UIImage(named: "favorite")! : UIImage(named: "favorite-outline")! }
     
-    var title: String { return isFavorite ? "Remove Favorite" : "Add Favorite" }
-    
-    var icon: UIImage { return isFavorite ? UIImage(named: "favorite")! : UIImage(named: "favorite-outline")! }
-    
-    var handler: (TKUITimetableCard, [TKUIStopAnnotation], UIView) -> Bool {
-      return { [unowned stop] _, _, _ in
-        InMemoryFavoriteManager.shared.toggleFavorite(for: stop)
-        return true
-      }
+    return TKUITimetableCard.Action(
+      title: title(), icon: icon()
+    ) { [unowned stop] action, _, _, _ in
+      InMemoryFavoriteManager.shared.toggleFavorite(for: stop)
+      action.title = title()
+      action.icon = icon()
+      return true // to refresh title + icon
     }
   }
-  
 }
-
-

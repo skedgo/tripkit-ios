@@ -49,7 +49,7 @@ class InMemoryFavoriteManager {
       return
     }
     
-    print("Removiing a favorite: \(favorite)")
+    print("Removing a favorite: \(favorite)")
     favorites.remove(at: index)
   }
   
