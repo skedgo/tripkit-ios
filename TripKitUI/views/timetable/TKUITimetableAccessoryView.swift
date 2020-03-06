@@ -94,102 +94,18 @@ class TKUITimetableAccessoryView: UIView {
       serviceCollectionToBottomBarConstraint.isActive = false
       serviceCollectionToCustomActionViewConstraint.isActive = true
       customActionViewToBottomBarConstraint.isActive = true
-      if actions.count > 2 || TKUICustomization.shared.forceCompactActionsLayout {
-        useCompactLayout(for: actions, in: card, model: model)
-      } else {
-        useExtendedLayout(for: actions, in: card, model: model)
-      }
-    }
-  }
-  
-  private func useCompactLayout(for actions: [TKUITimetableCard.Action], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
-    let stack = UIStackView()
-    stack.axis = .horizontal
-    stack.alignment = .center
-    stack.distribution = .fillEqually
-    stack.spacing = 8
-    customActionView.addSubview(stack)
-    
-    stack.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-        stack.leadingAnchor.constraint(equalTo: customActionView.leadingAnchor),
-        stack.topAnchor.constraint(equalTo: customActionView.topAnchor),
-        stack.trailingAnchor.constraint(equalTo: customActionView.trailingAnchor),
-        stack.bottomAnchor.constraint(equalTo: customActionView.bottomAnchor)
-      ]
-    )
-    
-    let showActionTitle = TKUITimetableCard.config.showTimetableActionTitle
-    
-    let actionViews = actions.map { action -> TKUICompactActionView in
-      let actionView = TKUICompactActionView.newInstance()
-      actionView.tintColor = .tkAppTintColor
-      actionView.imageView.image = action.icon
-      actionView.titleLabel.text = showActionTitle ? action.title : nil
-      actionView.accessibilityLabel = action.title
-      actionView.accessibilityTraits = .button
-      actionView.bold = action.style == .bold
-      actionView.onTap = { [weak card, unowned actionView] sender in
-        guard let card = card else { return }
-        let update = action.handler(action, card, model, sender)
-        if update {
-          actionView.imageView.image = action.icon
-          actionView.titleLabel.text = showActionTitle ? action.title : nil
-          actionView.accessibilityLabel = action.title
-          actionView.bold = action.style == .bold
-        }
-      }
-      return actionView
-    }
-    
-    actionViews.forEach(stack.addArrangedSubview)
-  }
-  
-  private func useExtendedLayout(for actions: [TKUITimetableCard.Action], in card: TKUITimetableCard, model: [TKUIStopAnnotation]) {
-    var previousActionView: UIView?
-    
-    for (index, action) in actions.enumerated() {
-      let actionView = TKUIExtendedActionView.newInstance()
-      actionView.tintColor = .tkAppTintColor
-      actionView.imageView.image = action.icon
-      actionView.label.text = action.title
-      actionView.accessibilityLabel = action.title
-      actionView.accessibilityTraits = .button
-      actionView.bold = action.style == .bold
-      actionView.onTap = { [weak card, unowned actionView] sender in
-        guard let card = card else { return }
-        let update = action.handler(action, card, model, sender)
-        if update {
-          actionView.imageView.image = action.icon
-          actionView.label.text = action.title
-          actionView.accessibilityLabel = action.title
-          actionView.bold = action.style == .bold
-        }
-      }
       
+      let actionView = TKUICardActionsView()
+      actionView.configure(with: actions, model: model, card: card)
       customActionView.addSubview(actionView)
+      
       actionView.translatesAutoresizingMaskIntoConstraints = false
-      
-      if index == 0 {
-        actionView.leadingAnchor.constraint(equalTo: customActionView.leadingAnchor).isActive = true
-        actionView.topAnchor.constraint(equalTo: customActionView.topAnchor).isActive = true
-        actionView.bottomAnchor.constraint(equalTo: customActionView.bottomAnchor).isActive = true
-      } else {
-        guard let previous = previousActionView else { preconditionFailure() }
-        actionView.leadingAnchor.constraint(equalTo: previous.trailingAnchor, constant: 8).isActive = true
-        actionView.topAnchor.constraint(equalTo: previous.topAnchor).isActive = true
-        actionView.bottomAnchor.constraint(equalTo: previous.bottomAnchor).isActive = true
-        actionView.centerYAnchor.constraint(equalTo: previous.centerYAnchor).isActive = true
-        let widthConstraint = actionView.widthAnchor.constraint(equalTo: previous.widthAnchor)
-        widthConstraint.priority = .defaultLow
-        widthConstraint.isActive = true
-      }
-      
-      if index == actions.count - 1 {
-        actionView.trailingAnchor.constraint(equalTo: customActionView.trailingAnchor).isActive = true
-      }
-      
-      previousActionView = actionView
+      NSLayoutConstraint.activate([
+        actionView.leadingAnchor.constraint(equalTo: customActionView.leadingAnchor),
+        actionView.topAnchor.constraint(equalTo: customActionView.topAnchor),
+        actionView.trailingAnchor.constraint(equalTo: customActionView.trailingAnchor),
+        actionView.bottomAnchor.constraint(equalTo: customActionView.bottomAnchor)
+      ])
     }
   }
   
