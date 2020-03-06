@@ -18,6 +18,9 @@ import TGCardViewController
 /// For a concerte example, see `TKUIStartTripAction`.
 public protocol TKUICardAction {
   
+  associatedtype Card: TGCard
+  associatedtype Payload
+  
   /// Title (and accessory label) of the button
   var title: String { get }
   
@@ -32,7 +35,7 @@ public protocol TKUICardAction {
   /// toggle actions such as adding or removing a reminder or favourite).
   ///
   /// Parameters are the card, the model instance, and the sender
-  var handler: (TGCard, Any?, UIView) -> Bool { get }
+  var handler: (Card, Payload?, UIView) -> Bool { get }
   
 }
 
