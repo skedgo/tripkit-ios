@@ -53,7 +53,7 @@ extension TKUICardActionsView {
       ]
     )
     
-    let showActionTitle = TKUITripOverviewCard.config.showTripActionTitle
+    let showActionTitle = TKUICustomization.shared.showCardActionTitle
     
     let actionViews = actions.map { action -> TKUICompactActionView in
       let actionView = TKUICompactActionView.newInstance()
