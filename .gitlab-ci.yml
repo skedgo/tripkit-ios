@@ -62,13 +62,28 @@ build_mac_base:
     - mv Cartfile.resolved Cartfile.resolved.ios
     - mv Cartfile.resolved.macos Cartfile.resolved
     - carthage bootstrap --cache-builds --platform macOS
-    - xcodebuild build -project TripKit.xcodeproj -scheme "TripKit-macOS" | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+    - xcodebuild build -project TripKit.xcodeproj -scheme "TripKit-macOS" | xcpretty -c && exit ${PIPESTATUS[0]}
     - mv Cartfile.resolved Cartfile.resolved.macos
     - mv Cartfile.resolved.ios Cartfile.resolved
   cache:
     key:
       files:
         - Cartfile.resolved.macos
+    paths:
+      - Carthage/Build
+      - Carthage/Checkouts
+  tags:
+    - ios
+
+build_tripkitui_example:
+  stage: examples
+  script:
+    - carthage bootstrap --cache-builds --platform iOS
+    - xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample ONLY_ACTIVE_ARCH=NO | xcpretty -c && exit ${PIPESTATUS[0]}
+  cache:
+    key:
+      files:
+        - Cartfile.resolved
     paths:
       - Carthage/Build
       - Carthage/Checkouts
