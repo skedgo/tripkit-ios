@@ -8,6 +8,7 @@
 
 import Foundation
 
+import RxSwift
 import RxDataSources
 
 extension TKUITripOverviewViewModel {
@@ -126,28 +127,33 @@ extension TKUITripOverviewViewModel.Item {
 
 extension TKUITripOverviewViewModel {
   
-  static func buildSections(for trip: Trip) -> [Section] {
-    // TODO: Split by date
-    
-    let segments = trip
-      .segments(with: .inDetails)
-      .compactMap { $0 as? TKSegment }
-    
-    let items = segments
-      .enumerated()
-      .flatMap { (tuple) -> [TKUITripOverviewViewModel.Item] in
-        let (index, current) = tuple
-        let previous = index > 0 ? segments[index - 1] : nil
-        let next = index + 1 < segments.count ? segments[index + 1]: nil
-        var items = build(segment: current, previous: previous, next: next)
-        if current.isImpossible {
-          // Makes most sense before the departure, so inject in beginning
-          items.insert(.impossible(current, title: Loc.YouMightNotMakeThisTransfer), at: 0)
+  static func buildSections(for trip: Trip) -> Observable<[Section]> {
+    return Observable.create { subscriber in
+      
+      // TODO: Split by date
+      let segments = trip
+        .segments(with: .inDetails)
+        .compactMap { $0 as? TKSegment }
+      
+      let items = segments
+        .enumerated()
+        .flatMap { (tuple) -> [TKUITripOverviewViewModel.Item] in
+          let (index, current) = tuple
+          let previous = index > 0 ? segments[index - 1] : nil
+          let next = index + 1 < segments.count ? segments[index + 1]: nil
+          var items = build(segment: current, previous: previous, next: next)
+          if current.isImpossible {
+            // Makes most sense before the departure, so inject in beginning
+            items.insert(.impossible(current, title: Loc.YouMightNotMakeThisTransfer), at: 0)
+          }
+          return items
         }
-        return items
-      }
-    
-    return [Section(items: items, index: 0)]
+      
+      subscriber.onNext([Section(items: items, index: 0)])
+      subscriber.onCompleted()
+      
+      return Disposables.create()
+    }
   }
   
   private static func build(segment: TKSegment, previous: TKSegment?, next: TKSegment?) -> [TKUITripOverviewViewModel.Item] {

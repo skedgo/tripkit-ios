@@ -27,7 +27,12 @@ class TKUITripOverviewViewModel {
     
     titles = trip.rx.titles
     
-    sections = Driver.just(TKUITripOverviewViewModel.buildSections(for: trip))
+    realTimeUpdater = TKUITripRealtimeUpdater(trip: trip)
+    
+    sections = realTimeUpdater.latest
+      .startWith(trip)
+      .flatMapLatest(TKUITripOverviewViewModel.buildSections)
+      .asDriver(onErrorJustReturn: [])
     
     dataSources = Driver.just(trip.tripGroup.sources)
     
@@ -63,6 +68,10 @@ class TKUITripOverviewViewModel {
   let refreshMap: Signal<Void>
   
   let next: Signal<Next>
+  
+  private let realTimeUpdater: TKUITripRealtimeUpdater
+  
+  private let disposeBag = DisposeBag()
 }
 
 fileprivate extension Reactive where Base == Trip {
