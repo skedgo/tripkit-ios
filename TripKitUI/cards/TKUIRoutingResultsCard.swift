@@ -492,6 +492,32 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
   
 }
 
+@available(iOS 13.0, *)
+extension TKUIRoutingResultsCard {
+  public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    guard
+      let trip = dataSource[indexPath].trip,
+      let factory = TKUITripOverviewCard.config.tripActionsFactory
+      else { return nil }
+    
+    let actions = factory(trip)
+    guard !actions.isEmpty else { return nil }
+    
+    guard let cell = tableView.cellForRow(at: indexPath) else { assertionFailure(); return nil }
+    
+    let menu: ([UIMenuElement]) -> UIMenu? = { [unowned self] existing in
+      let items: [UIAction] = actions.map { [unowned self] action in
+        UIAction(title: action.title, image: action.icon) { [unowned self] _ in
+          _ = action.handler(action, self, trip, cell)
+        }
+      }
+      return UIMenu(title: "", image: nil, identifier: nil, options: [], children: items)
+    }
+    
+    return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: menu)
+  }
+}
+
 // MARK: - Mode picker
 
 private extension TKUIRoutingResultsCard {

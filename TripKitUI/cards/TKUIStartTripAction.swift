@@ -46,14 +46,16 @@ public extension TKUITripOverviewCard {
     return TKUICardAction(
       title: Loc.ActionGo,
       icon: .iconArrowUp
-    ) { _, card, _, _ in
-      guard
-        let mapManager = card.mapManager as? TKUITripMapManager,
-        let controller = card.controller
-        else { assertionFailure(); return false }
+    ) { _, card, trip, _ in
+      guard let controller = card.controller else { assertionFailure(); return false }
       
-      let modeByMode = TKUITripModeByModeCard(mapManager: mapManager)
-      modeByMode.modeByModeDelegate = card
+      let modeByMode: TKUITripModeByModeCard
+      if let overviewCard = card as? TKUITripOverviewCard, let mapManager = overviewCard.mapManager as? TKUITripMapManager {
+        modeByMode = TKUITripModeByModeCard(mapManager: mapManager)
+        modeByMode.modeByModeDelegate = overviewCard
+      } else {
+        modeByMode = TKUITripModeByModeCard(trip: trip)
+      }
       controller.push(modeByMode)
       return false
     }
