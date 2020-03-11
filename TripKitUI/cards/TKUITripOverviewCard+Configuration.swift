@@ -6,10 +6,11 @@
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
 //
 
+import TGCardViewController
 
 public extension TKUITripOverviewCard {
   
-  typealias TripAction = TKUICardAction<TKUITripOverviewCard, Trip>
+  typealias TripAction = TKUICardAction<TGCard, Trip>
   typealias SegmentAction = TKUICardAction<TKUITripOverviewCard, TKSegment>
 
   
@@ -57,6 +58,8 @@ public extension TKUITripOverviewCard {
     // MARK: - Customising trip actions
     
     /// Set this to add a list of action buttons to a trip overview card.
+    ///
+    /// These will also be exposed as context actions on the `TKUIRoutingResultsCard`.
     ///
     /// - warning: Only a maximum of three actions can be accomodated. Any
     ///     more than that will be ignored.
