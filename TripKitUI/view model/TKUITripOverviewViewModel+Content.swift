@@ -364,9 +364,9 @@ extension TKUITripOverviewViewModel.Item: IdentifiableType {
   var identity: Identity {
     switch self {
     case .terminal(let item): return item.isStart ? "Start" : "End"
-    case .stationary(let item): return String(describing: item.segment.templateHashCode)
-    case .moving(let item): return String(describing: item.segment.templateHashCode)
-    case .alert(let item): return String(describing: item.segment.templateHashCode)
+    case .stationary(let item): return "stationary-item-hashCode:" + String(describing: item.segment.templateHashCode)
+    case .moving(let item): return "moving-item-hashCode:" + String(describing: item.segment.templateHashCode)
+    case .alert(let item): return "alert-item-hashCode:" + String(describing: item.segment.templateHashCode)
     case .impossible: return "Impossible"
     }
   }
