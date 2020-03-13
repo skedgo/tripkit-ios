@@ -794,7 +794,6 @@
 		D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */; };
 		D3E7C1AF21F17B7600C48248 /* TKUISectionedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */; };
 		D3EC9E8B22EE7D810080B0E6 /* TKUIModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC9E8A22EE7D810080B0E6 /* TKUIModePicker.swift */; };
-		D3F083082418851B00985F7C /* TKUITripRealtimeUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F083072418851B00985F7C /* TKUITripRealtimeUpdater.swift */; };
 		D3F9CEC32064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */; };
 		D3F9CEC52064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */; };
 		D3FC1F11207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift */; };
@@ -1502,7 +1501,6 @@
 		D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryHistoryManager.swift; sourceTree = "<group>"; };
 		D3E7C1AE21F17B7600C48248 /* TKUISectionedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertViewController.xib; sourceTree = "<group>"; };
 		D3EC9E8A22EE7D810080B0E6 /* TKUIModePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIModePicker.swift; sourceTree = "<group>"; };
-		D3F083072418851B00985F7C /* TKUITripRealtimeUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripRealtimeUpdater.swift; sourceTree = "<group>"; };
 		D3F9CEC12064BFB5000BDB01 /* TKUISectionedAlertTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertTableHeader.swift; sourceTree = "<group>"; };
 		D3F9CEC42064BFEF000BDB01 /* TKUISectionedAlertTableHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISectionedAlertTableHeader.xib; sourceTree = "<group>"; };
 		D3FC1F10207B1B3E00D39DF9 /* TKInterAppCommunicator+TurnByTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKInterAppCommunicator+TurnByTurn.swift"; sourceTree = "<group>"; };
@@ -1866,7 +1864,6 @@
 				3A897A21234776B0004D0281 /* UIButton+SwapImageSide.swift */,
 				D39910F223334BFF004A09C8 /* UIColor+TripGoDefault.swift */,
 				3A40921322F0A7F80049AAE7 /* UIColor+TripKitUI.swift */,
-				D3F083072418851B00985F7C /* TKUITripRealtimeUpdater.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -3426,7 +3423,6 @@
 				3A4E164522B3A08B000DD2B8 /* TKUIComposingMapManager.swift in Sources */,
 				3A6DF110202C8EB80084CB2C /* UIImageView+AsAccessoryImage.swift in Sources */,
 				3A682F2420F3FAD900E05195 /* TKUIRoutingSupportView+Show.swift in Sources */,
-				D3F083082418851B00985F7C /* TKUITripRealtimeUpdater.swift in Sources */,
 				3A6DF139202C8EB80084CB2C /* TKUIAlertViewController.swift in Sources */,
 				3ACF474822981FF40096860D /* TGCardViewController+Present.swift in Sources */,
 				3ACF472C2297FA080096860D /* TKUIServiceViewModel+Content.swift in Sources */,

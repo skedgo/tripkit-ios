@@ -26,21 +26,18 @@ class TKUITripOverviewViewModel {
     self.trip = trip
     
     titles = trip.rx.titles
-    
-    realTimeUpdater = TKUITripRealtimeUpdater(trip: trip)
-    
-    sections = realTimeUpdater.latest
+        
+    sections = TKBuzzRealTime.rx.streamUpdates(trip)
       .startWith(trip)
-      .flatMapLatest(TKUITripOverviewViewModel.buildSections)
+      .map(Self.buildSections)
       .asDriver(onErrorJustReturn: [])
     
     dataSources = Driver.just(trip.tripGroup.sources)
     
-    refreshMap = TKUITripOverviewViewModel.fetchContentOfServices(in: trip)
+    refreshMap = Self.fetchContentOfServices(in: trip)
       .asSignal(onErrorSignalWith: .empty())
     
-    // LATER: This can be changed to a `compactMap` in RxSwift 6
-    next = inputs.selected.map { item -> Next? in
+    next = inputs.selected.compactMap { item -> Next? in
         switch item {
         case .impossible(let segment, _):
           let request = segment.insertRequestStartingHere()
@@ -54,11 +51,10 @@ class TKUITripOverviewViewModel {
           return .handleSelection(segment)
         }
       }
-    .filter { $0 != nil }.map { $0!}
   }
   
   let trip: Trip
-
+  
   let titles: Driver<(title: String, subtitle: String?)>
   
   let sections: Driver<[Section]>
@@ -68,8 +64,6 @@ class TKUITripOverviewViewModel {
   let refreshMap: Signal<Void>
   
   let next: Signal<Next>
-  
-  private let realTimeUpdater: TKUITripRealtimeUpdater
 }
 
 fileprivate extension Reactive where Base == Trip {

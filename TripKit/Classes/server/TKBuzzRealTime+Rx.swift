@@ -12,6 +12,16 @@ import RxSwift
 
 extension Reactive where Base: TKBuzzRealTime {
 
+  public static func streamUpdates(_ trip: Trip, updateInterval: DispatchTimeInterval = .seconds(10)) -> Observable<Trip> {
+    Observable<Int>.interval(updateInterval, scheduler: MainScheduler.instance)
+      .map { _ in trip }
+      .filter { $0.managedObjectContext != nil && $0.wantsRealTimeUpdates }
+      .flatMapLatest(Self.update(trip:))
+      .filter { $1 }
+      .map { trip, _ in trip }
+  }
+  
+
   public static func update(_ trip: Trip) -> Single<(Trip, didUpdate: Bool)> {
     guard trip.wantsRealTimeUpdates else {
       TKLog.debug("TKBuzzRealTime", text: "Don't bother calling this for trips that don't want updates")
