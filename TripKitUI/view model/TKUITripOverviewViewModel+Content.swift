@@ -71,7 +71,9 @@ extension TKUITripOverviewViewModel {
   
   struct MovingItem: Equatable {
     static func == (lhs: TKUITripOverviewViewModel.MovingItem, rhs: TKUITripOverviewViewModel.MovingItem) -> Bool {
+      // Check the segment, plus anything that can change with real-time data
       return lhs.segment == rhs.segment
+          && lhs.accessories == rhs.accessories
     }
     
     let title: String
