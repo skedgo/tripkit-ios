@@ -70,8 +70,6 @@ class TKUITripOverviewViewModel {
   let next: Signal<Next>
   
   private let realTimeUpdater: TKUITripRealtimeUpdater
-  
-  private let disposeBag = DisposeBag()
 }
 
 fileprivate extension Reactive where Base == Trip {
