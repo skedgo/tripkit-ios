@@ -56,6 +56,7 @@ public class TKUITripOverviewCard: TGTableCard {
   
   private let alternativesTapped = PublishSubject<IndexPath>()
   private let highlighted = PublishSubject<IndexPath>()
+  private let isVisible = BehaviorSubject<Bool>(value: false)
 
   public init(trip: Trip, index: Int? = nil) {
     self.trip = trip
@@ -133,7 +134,8 @@ public class TKUITripOverviewCard: TGTableCard {
     viewModel = TKUITripOverviewViewModel(
       trip: trip,
       inputs: TKUITripOverviewViewModel.UIInput(
-        selected: mergedSelection
+        selected: mergedSelection,
+        isVisible: isVisible.asDriver(onErrorJustReturn: true)
       )
     )
     
@@ -175,6 +177,7 @@ public class TKUITripOverviewCard: TGTableCard {
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
    
+    isVisible.onNext(true)
     TKUICustomization.shared.feedbackActiveItemHandler?(viewModel.trip)
     
     if zoomToTrip {
@@ -183,6 +186,12 @@ public class TKUITripOverviewCard: TGTableCard {
     } else {
       (mapManager as? TKUITripMapManager)?.deselectSegment(animated: animated)
     }
+  }
+  
+  public override func willDisappear(animated: Bool) {
+    super.willDisappear(animated: animated)
+    
+    isVisible.onNext(false)
   }
   
 }

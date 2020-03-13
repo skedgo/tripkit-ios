@@ -20,22 +20,25 @@ class TKUITripOverviewViewModel {
   
   struct UIInput {
     var selected: Signal<Item> = .empty()
+    var isVisible: Driver<Bool> = .just(true)
   }
   
   init(trip: Trip, inputs: UIInput = UIInput()) {
     self.trip = trip
     
     titles = trip.rx.titles
-    
-    sections = Driver.just(TKUITripOverviewViewModel.buildSections(for: trip))
+        
+    sections = TKBuzzRealTime.rx.streamUpdates(trip, active: inputs.isVisible.asObservable())
+      .startWith(trip)
+      .map(Self.buildSections)
+      .asDriver(onErrorJustReturn: [])
     
     dataSources = Driver.just(trip.tripGroup.sources)
     
-    refreshMap = TKUITripOverviewViewModel.fetchContentOfServices(in: trip)
+    refreshMap = Self.fetchContentOfServices(in: trip)
       .asSignal(onErrorSignalWith: .empty())
     
-    // LATER: This can be changed to a `compactMap` in RxSwift 6
-    next = inputs.selected.map { item -> Next? in
+    next = inputs.selected.compactMap { item -> Next? in
         switch item {
         case .impossible(let segment, _):
           let request = segment.insertRequestStartingHere()
@@ -49,11 +52,10 @@ class TKUITripOverviewViewModel {
           return .handleSelection(segment)
         }
       }
-    .filter { $0 != nil }.map { $0!}
   }
   
   let trip: Trip
-
+  
   let titles: Driver<(title: String, subtitle: String?)>
   
   let sections: Driver<[Section]>

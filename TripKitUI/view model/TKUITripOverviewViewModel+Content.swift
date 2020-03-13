@@ -8,6 +8,7 @@
 
 import Foundation
 
+import RxSwift
 import RxDataSources
 
 extension TKUITripOverviewViewModel {
@@ -70,7 +71,9 @@ extension TKUITripOverviewViewModel {
   
   struct MovingItem: Equatable {
     static func == (lhs: TKUITripOverviewViewModel.MovingItem, rhs: TKUITripOverviewViewModel.MovingItem) -> Bool {
+      // Check the segment, plus anything that can change with real-time data
       return lhs.segment == rhs.segment
+          && lhs.accessories == rhs.accessories
     }
     
     let title: String
@@ -358,9 +361,9 @@ extension TKUITripOverviewViewModel.Item: IdentifiableType {
   var identity: Identity {
     switch self {
     case .terminal(let item): return item.isStart ? "Start" : "End"
-    case .stationary(let item): return String(describing: item.segment.templateHashCode)
-    case .moving(let item): return String(describing: item.segment.templateHashCode)
-    case .alert(let item): return String(describing: item.segment.templateHashCode)
+    case .stationary(let item): return "stationary-item-hashCode:" + String(describing: item.segment.templateHashCode)
+    case .moving(let item): return "moving-item-hashCode:" + String(describing: item.segment.templateHashCode)
+    case .alert(let item): return "alert-item-hashCode:" + String(describing: item.segment.templateHashCode)
     case .impossible: return "Impossible"
     }
   }
