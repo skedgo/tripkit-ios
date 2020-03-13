@@ -23,8 +23,6 @@ Pod::Spec.new do |s|
   s.dependency 'TGCardViewController', '>= 1.1'
 
   s.dependency 'Kingfisher', '~> 5.8'
-  s.dependency 'RxSwift', '~> 5.0'
-  s.dependency 'RxCocoa', '~> 5.0'
   s.dependency 'RxDataSources', '~> 4.0'
 
   
