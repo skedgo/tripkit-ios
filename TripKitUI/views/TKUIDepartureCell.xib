@@ -53,21 +53,21 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert" translatesAutoresizingMaskIntoConstraints="NO" id="HF3-8f-hxP">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert" translatesAutoresizingMaskIntoConstraints="NO" id="HF3-8f-hxP">
                                         <rect key="frame" x="78" y="8" width="12" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="12" id="HU7-SD-sOw"/>
                                             <constraint firstAttribute="width" secondItem="HF3-8f-hxP" secondAttribute="height" multiplier="1:1" id="vOj-n4-bGb"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TDC-Nm-1eo">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TDC-Nm-1eo">
                                         <rect key="frame" x="94" y="4" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="9J0-L8-Ypn"/>
                                             <constraint firstAttribute="height" constant="20" id="tit-BN-2gg"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICy-nw-nCU">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICy-nw-nCU">
                                         <rect key="frame" x="118" y="4" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="GlK-cZ-cbX"/>
