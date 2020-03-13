@@ -773,6 +773,8 @@
 		D33C05272394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C05262394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift */; };
 		D33E6C8A239F11B500F2AF3B /* TKUISegmentAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33E6C88239F11B500F2AF3B /* TKUISegmentAlertCell.swift */; };
 		D33E6C8B239F11B500F2AF3B /* TKUISegmentAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33E6C89239F11B500F2AF3B /* TKUISegmentAlertCell.xib */; };
+		D37222FD241B65E100CC83F0 /* routing-scooters.json in Resources */ = {isa = PBXBuildFile; fileRef = D37222FB241B65E100CC83F0 /* routing-scooters.json */; };
+		D37222FE241B65E100CC83F0 /* routing-bus+scooter.json in Resources */ = {isa = PBXBuildFile; fileRef = D37222FC241B65E100CC83F0 /* routing-bus+scooter.json */; };
 		D372268A2345A8CF00DBCFC8 /* TKUIResultsTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37226872345A8C600DBCFC8 /* TKUIResultsTitleView.swift */; };
 		D372268C2345A8E500DBCFC8 /* TKUIResultsTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D372268B2345A8E500DBCFC8 /* TKUIResultsTitleView.xib */; };
 		D37EF6D821A7BCE80062288E /* TKLocalCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37EF6D721A7BCE80062288E /* TKLocalCost.swift */; };
@@ -1481,6 +1483,8 @@
 		D33C05262394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIHomeCard+Configuration.swift"; sourceTree = "<group>"; };
 		D33E6C88239F11B500F2AF3B /* TKUISegmentAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISegmentAlertCell.swift; sourceTree = "<group>"; };
 		D33E6C89239F11B500F2AF3B /* TKUISegmentAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISegmentAlertCell.xib; sourceTree = "<group>"; };
+		D37222FB241B65E100CC83F0 /* routing-scooters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-scooters.json"; sourceTree = "<group>"; };
+		D37222FC241B65E100CC83F0 /* routing-bus+scooter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-bus+scooter.json"; sourceTree = "<group>"; };
 		D37226872345A8C600DBCFC8 /* TKUIResultsTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIResultsTitleView.swift; sourceTree = "<group>"; };
 		D372268B2345A8E500DBCFC8 /* TKUIResultsTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIResultsTitleView.xib; sourceTree = "<group>"; };
 		D37EF6D721A7BCE80062288E /* TKLocalCost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLocalCost.swift; sourceTree = "<group>"; };
@@ -2053,6 +2057,8 @@
 				3A8A542F2397FB69006A390F /* routing-pt-impossible.json */,
 				3AA3CEA9202CD4D100E54859 /* routing-pt-oldish.json */,
 				3A8A54312397FBB7006A390F /* routing-pt-realtime.json */,
+				D37222FC241B65E100CC83F0 /* routing-bus+scooter.json */,
+				D37222FB241B65E100CC83F0 /* routing-scooters.json */,
 				3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */,
 				3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */,
 			);
@@ -3085,6 +3091,7 @@
 				3A8A54322397FBB7006A390F /* routing-pt-realtime.json in Resources */,
 				3A8A54302397FB69006A390F /* routing-pt-impossible.json in Resources */,
 				3AE6077B20FF4C1E006D59B0 /* pelias-au.json in Resources */,
+				D37222FD241B65E100CC83F0 /* routing-scooters.json in Resources */,
 				3AA3CEC5202CD4D100E54859 /* regionInfo-Sydney.json in Resources */,
 				3AA3CEC6202CD4D100E54859 /* hornsbyToSkedGo.json in Resources */,
 				3AE6077E20FF4F64006D59B0 /* pelias-de.json in Resources */,
@@ -3100,6 +3107,7 @@
 				3AA3CEC3202CD4D100E54859 /* hornsbyToSkedGoService.json in Resources */,
 				3A6DAEDA2040985B009282FE /* regionInfo-Vancouver.json in Resources */,
 				3AA3CECD202CD4D100E54859 /* routing-pt-oldish.json in Resources */,
+				D37222FE241B65E100CC83F0 /* routing-bus+scooter.json in Resources */,
 				3AA3CECE202CD4D100E54859 /* departures-parentStop.json in Resources */,
 				3A38695720EB6C2400B0A82D /* routing-cycle-train-cycle.json in Resources */,
 				3A6DAED92040985B009282FE /* regionInfo-Nuremberg.json in Resources */,
