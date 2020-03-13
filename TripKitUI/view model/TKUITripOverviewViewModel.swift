@@ -20,6 +20,7 @@ class TKUITripOverviewViewModel {
   
   struct UIInput {
     var selected: Signal<Item> = .empty()
+    var isVisible: Driver<Bool> = .just(true)
   }
   
   init(trip: Trip, inputs: UIInput = UIInput()) {
@@ -27,7 +28,7 @@ class TKUITripOverviewViewModel {
     
     titles = trip.rx.titles
         
-    sections = TKBuzzRealTime.rx.streamUpdates(trip)
+    sections = TKBuzzRealTime.rx.streamUpdates(trip, active: inputs.isVisible.asObservable())
       .startWith(trip)
       .map(Self.buildSections)
       .asDriver(onErrorJustReturn: [])
