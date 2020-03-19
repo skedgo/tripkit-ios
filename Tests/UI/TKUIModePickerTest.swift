@@ -95,6 +95,7 @@ fileprivate extension TKModeInfo {
     let json = """
       {
         "alt": "Car park",
+        "identifier": "\(TKSegment.StationaryType.parkingOffStreet.rawValue)",
         "localImageName": "parking"
       }
     """

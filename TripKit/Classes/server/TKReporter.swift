@@ -151,9 +151,7 @@ extension TKSegment {
     guard order == .regular, !isContinuation else { return nil }
 
     let mode: String
-    if isStationary {
-      mode = modeInfo?.localImageName ?? "wait"
-    } else if let identifier = modeInfo?.identifier ?? modeIdentifier {
+    if let identifier = modeInfo?.identifier ?? modeIdentifier {
       mode = identifier
     } else {
       return nil
