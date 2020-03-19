@@ -65,7 +65,7 @@ public class TKUINearbyMapManager: TKUIMapManager {
       mapView.addAnnotation(searchResult)
       zoom(to: [searchResult], animated: animated)
     
-    } else if let start = viewModel.startLocation {
+    } else if let start = viewModel.fixedLocation {
       mapView.setUserTrackingMode(.none, animated: animated)
       zoom(to: [start], animated: animated)
 
