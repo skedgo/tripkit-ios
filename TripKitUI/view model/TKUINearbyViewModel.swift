@@ -54,11 +54,12 @@ public class TKUINearbyViewModel {
   ///
   /// - Parameters:
   ///   - mode: The mode identifier to which to limit the nearby locations
+  ///   - fixedLocation: Location to fix this to; if this is proivded, `mapInput.mapRect` will be ignored
   ///   - pickedModes: The selected modes (only used if `mode == nil`)
   ///   - mapCenter: The centre of the map, if the user moved it, should drive with `nil` if map is centred on the user's current location
   public init(
       limitTo mode: String? = nil,
-      startLocation: MKAnnotation? = nil,
+      fixedLocation: MKAnnotation? = nil,
       cardInput: ListInput = ListInput(),
       mapInput: MapInput = MapInput()
     ) {
@@ -76,7 +77,7 @@ public class TKUINearbyViewModel {
     
     let nearby = Self.buildNearbyLocations(
       limitTo: mode,
-      startLocation: startLocation,
+      fixedLocation: fixedLocation,
       mapRect: mapInput.mapRect.startOptional(),
       refresh: refresh,
       onError: errorPublisher
@@ -94,13 +95,13 @@ public class TKUINearbyViewModel {
     let filteredNearby: Driver<ViewContent>
     filteredNearby = Observable
       .combineLatest(nearby, pickedModes, focused)
-      .map { TKUINearbyViewModel.filterNearbyContent($0, modes: $1, limitTo: mode, focusOn: $2) }
+      .map(Self.filterNearbyContent)
       .asDriver(onErrorDriveWith: .empty())
     
     // Outputs
     
     self.limitToMode = mode
-    self.startLocation = startLocation
+    self.fixedLocation = fixedLocation
     
     self.refreshPublisher = refresh
     
@@ -151,7 +152,7 @@ public class TKUINearbyViewModel {
 
   public let limitToMode: String?
   
-  public let startLocation: MKAnnotation?
+  public let fixedLocation: MKAnnotation?
 
   // View output
   

@@ -26,18 +26,19 @@ public enum TKLocationProvider {
   /// - Parameters:
   ///   - center: Centre coordinate of circle
   ///   - radius: Radius of circle in metres
+  ///   - limit: Maximum number of locations to fetch, defaults to 100
   ///   - modes: Modes for which to fetch locations. If not provided, will use all.
   /// - Returns: Observable of fetched locations; always returns empty array for international region; can error out
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil) -> Single<[TKModeCoordinate]> {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil) -> Single<[TKModeCoordinate]> {
     
     return TKServer.shared.rx
       .requireRegion(center)
       .flatMap { region in
-        TKLocationProvider.fetchLocations(center: center, radius: radius, modes: modes, in: region)
+        TKLocationProvider.fetchLocations(center: center, radius: radius, limit: limit, modes: modes, in: region)
       }
   }
   
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, modes: [String]? = nil, in region: TKRegion) -> Single<[TKModeCoordinate]> {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, in region: TKRegion) -> Single<[TKModeCoordinate]> {
 
     guard region != .international else {
       return Single.just([])
@@ -47,7 +48,7 @@ public enum TKLocationProvider {
       "lat": center.latitude,
       "lng": center.longitude,
       "radius": Int(radius),
-      "limit": 100
+      "limit": limit
     ]
     paras["modes"] = modes
     

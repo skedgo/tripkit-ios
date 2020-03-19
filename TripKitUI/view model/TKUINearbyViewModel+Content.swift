@@ -68,20 +68,21 @@ extension TKUINearbyViewModel {
     
   }
   
-  static func buildNearbyLocations(limitTo mode: String?, startLocation: MKAnnotation?, mapRect: Driver<MKMapRect?>, refresh: Observable<Void>, onError errorPublisher: PublishSubject<Error>) -> Observable<ViewContent>
+  static func buildNearbyLocations(limitTo mode: String?, fixedLocation: MKAnnotation?, mapRect: Driver<MKMapRect?>, refresh: Observable<Void>, onError errorPublisher: PublishSubject<Error>) -> Observable<ViewContent>
   {
     /// Observable combining the user's device location and locations that are nearby.
     /// This includes all nearby locations, regardless of filtering status. To get the
     /// same thing filtered, use `filteredNearby`.
     
-    let startAsRect: MKMapRect? = startLocation.flatMap {
-      let region = MKCoordinateRegion(center: $0.coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
-      return MKMapRect.forCoordinateRegion(region)
-    }
+    let newRect: Observable<MKMapRect?>
+      
+    if let fixed = fixedLocation {
+      let region = MKCoordinateRegion(center: fixed.coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
+      newRect = .just(MKMapRect.forCoordinateRegion(region))
     
-    let newRect = mapRect.asObservable()
-      .startWith(startAsRect)
-      .scan(startAsRect) { good, candidate in
+    } else {
+      newRect = mapRect.asObservable()
+      .scan(nil) { good, candidate in
         guard let prev = good, let new = candidate else { return good ?? candidate }
         
         if let distance = prev.centerCoordinate.distance(from: new.centerCoordinate), distance > 250 {
@@ -96,6 +97,7 @@ extension TKUINearbyViewModel {
         guard let old = $0, let new = $1 else { return false }
         return MKMapRectEqualToRect(old, new)
       }
+    }
     
     /// *All* the locations near current coordinate (either from device location
     /// or the user moving the map).
@@ -103,7 +105,12 @@ extension TKUINearbyViewModel {
       .flatMapLatest { (mapRect, _) -> Observable<([TKModeCoordinate], CLLocationCoordinate2D)> in
         guard let mapRect = mapRect else { return .just( ([], .invalid) ) }
         let radius = mapRect.length * 1.5
-        return TKLocationProvider.fetchLocations(center: mapRect.centerCoordinate, radius: radius, modes: mode.flatMap { [$0] })
+        return TKLocationProvider.fetchLocations(
+            center: mapRect.centerCoordinate,
+            radius: radius,
+            limit: fixedLocation != nil ? 1000 : 100,
+            modes: mode.flatMap { [$0] }
+          )
           .asObservable()
           .catchError { error in
             errorPublisher.onNext(error)
@@ -114,7 +121,7 @@ extension TKUINearbyViewModel {
       .map { ViewContent(locations: $0.0, mapCenter: $0.1) }
   }
   
-  static func filterNearbyContent(_ content: ViewContent, modes: Set<TKModeInfo>?, limitTo mode: String?, focusOn annotation: MKAnnotation?) -> ViewContent {
+  static func filterNearbyContent(_ content: ViewContent, modes: Set<TKModeInfo>?, focusOn annotation: MKAnnotation?) -> ViewContent {
     if let focus = annotation {
       let byFocus = content.locations.filter { location in
         return location.coordinate.latitude == focus.coordinate.latitude && location.coordinate.longitude == focus.coordinate.longitude
@@ -123,12 +130,8 @@ extension TKUINearbyViewModel {
       
     } else {
       let byModes = content.locations.filter { location in
-        guard mode == nil else { return true } // no extra filtering
-        if let enabled = modes {
-          return enabled.contains { $0 == location.stopModeInfo }
-        } else {
-          return !TKUserProfileHelper.hiddenAndMinimizedModeIdentifiers.contains( location.modeInfo.identifier ?? "")
-        }
+        guard let enabled = modes else { return true }
+        return enabled.contains { $0 == location.stopModeInfo }
       }
       return ViewContent(locations: byModes, mapCenter: content.mapCenter)
     }
