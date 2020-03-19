@@ -9,6 +9,10 @@
 import Foundation
 
 extension TKSegment {
+  
+  /// Stationary segment type
+  ///
+  /// For details see [TripGo API F.A.Q.](https://developer.tripgo.com/faq/)
   public enum StationaryType: String {
     case parkingOnStreet = "stationary_parking-onstreet"
     case parkingOffStreet = "stationary_parking-offstreet"
@@ -21,6 +25,7 @@ extension TKSegment {
     case airportTransfer = "stationary_airport-transfer"
   }
   
+  /// Type for a stationary segment;,`nil` for non-stationary segments
   public var stationaryType: StationaryType? {
     StationaryType(rawValue: modeInfo?.identifier ?? "")
   }
