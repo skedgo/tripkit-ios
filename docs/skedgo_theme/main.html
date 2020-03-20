@@ -32,18 +32,18 @@
 		<title>{% if page and page.title and not page.is_homepage %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
 		{%- endblock %}
 
-		{%- block styles %}		
+		{%- block styles %}
 			<link rel="stylesheet" href="{{ base_url }}/css/main.css">
 			<link rel="stylesheet" href="{{ base_url }}/css/superfences.css">
+			<link rel="stylesheet" href="{{ base_url }}/css/codehilite.css">
 			<link rel="stylesheet"
 				href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
 			{%- for path in config['extra_css'] %}
 				<link rel="stylesheet" href="{{ path }}"></script>
 			{%- endfor %}
-				
 		{%- endblock %}
 
-		
+
 		{%- block libs %}
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -80,7 +80,7 @@
 
 	<body {% if page and page.is_homepage %} class="homepage"{% endif %}>
 		{% include "nav.html" %}
-		
+
 		<div class="container -layout-3-9">
 			{%- block content %}
 				<div class="col" role="complementary">{% include "toc.html" %}</div>
@@ -97,6 +97,6 @@
 			{%- for path in extra_javascript %}
 				<script src="{{ path }}"></script>
 			{%- endfor %}
-		{%- endblock %}			
+		{%- endblock %}
 </body>
 </html>

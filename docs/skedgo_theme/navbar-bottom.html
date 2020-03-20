@@ -3,7 +3,7 @@
 		{%- block next_prev %}
 			{%- if page and (page.next_page or page.previous_page) %}
 			    <div class="{% if not page.previous_page %}disabled {% endif %}col">
-			        <a rel="next" {% if page.previous_page %}href="{{ page.previous_page.url }}"{% endif %} class="prev">
+			        <a rel="next" {% if page.previous_page %} href="{{ page.previous_page.url|url }}" {% endif %} class="prev">
 			            <div class="label">
 			            	Previous
 			            </div>
@@ -13,7 +13,7 @@
 			        </a>
 			    </div>
 			    <div class="{% if not page.next_page %}disabled {% endif %}col">
-			        <a rel="prev" {% if page.next_page %}href="{{ page.next_page.url }}"{% endif %} class="next">
+			        <a rel="prev" {% if page.next_page %} href="{{ page.next_page.url|url }}"{% endif %} class="next">
 			            <div class="label">
 			            	Next
 			            </div>
