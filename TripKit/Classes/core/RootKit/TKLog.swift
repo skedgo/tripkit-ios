@@ -185,11 +185,10 @@ public class TKLog : NSObject {
 extension TKLog.LogLevel {
   
   var toOSLog: OSLogType {
-    switch self {
-    case .verbose: return .default
-    case .debug: return .debug
+    switch self {      
+    case .debug, .verbose: return .debug
     case .info: return .info
-    case .warning: return .info
+    case .warning: return .default
     case .error: return .error
     }
   }
