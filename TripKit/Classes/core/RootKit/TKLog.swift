@@ -8,6 +8,8 @@
 
 import Foundation
 
+import os.log
+
 /// A `TKLogger` is used by `TKLog` to perform the outputting and processing of log statements.
 ///
 /// A default `TKConsoleLogger` is provided.
@@ -79,7 +81,7 @@ public extension TKLogger {
   }
 }
 
-/// A logger that outputs to the debugging console and the device's console (via `NSLog`)
+/// A logger that outputs to the debugging console and the device's console (via `os_log`)
 public class TKConsoleLogger: TKLogger {
   
   public let level: TKLog.LogLevel
@@ -89,7 +91,8 @@ public class TKConsoleLogger: TKLogger {
   }
 
   public func output(_ level: TKLog.LogLevel, identifier: String, message: String) {
-    NSLog("\(level.prefix) \(identifier): \(message)")
+    let message = "\(level.prefix) \(identifier): \(message)"
+    os_log("%@", log: OSLog(identifier: identifier), type: level.toOSLog, message)
   }
 }
 
@@ -177,6 +180,28 @@ public class TKLog : NSObject {
     loggers.forEach { $0.log(level, identifier: identifier, message: message) }
     #endif
   }
+}
+
+extension TKLog.LogLevel {
+  
+  var toOSLog: OSLogType {
+    switch self {
+    case .verbose: return .default
+    case .debug: return .debug
+    case .info: return .info
+    case .warning: return .info
+    case .error: return .error
+    }
+  }
+  
+}
+
+extension OSLog {
+  
+  public convenience init(identifier: String) {
+    self.init(subsystem: Bundle.main.bundleIdentifier!, category: identifier)
+  }
+  
 }
 
 // MARK: - Server requests
