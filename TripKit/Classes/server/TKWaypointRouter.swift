@@ -604,7 +604,7 @@ class WaypointParasBuilder {
     
     // 2. Use the vehicle to its destination
     waypoints.append([
-      "modes": [sharingMode],
+      "modes": [location.stopModeInfo.identifier!],
       "start": b,
       "end": c
     ])
