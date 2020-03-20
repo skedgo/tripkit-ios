@@ -223,9 +223,6 @@ extension TKWaypointRouter {
         // We group all these in the same trip group even though
         // the pattern isn't an exact match.
         self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup, completion: completion)
-        
-        #warning("TODO: Check if the resulting trip matches the requested pattern and, if not, show an error.")
-        
       } catch {
         completion(.failure(error))
       }
@@ -442,7 +439,7 @@ class WaypointParasBuilder {
       return [current.paras]
     }
     
-    paras["waypoints"] = Array(arrayParas.joined())
+    paras["segments"] = Array(arrayParas.joined())
     return paras
   }
   
@@ -547,7 +544,7 @@ class WaypointParasBuilder {
       }
     }
 
-    paras["waypoints"] = segmentParas
+    paras["segments"] = segmentParas
     return paras
   }
   
@@ -616,7 +613,7 @@ class WaypointParasBuilder {
       "end": d
     ])
 
-    paras["waypoints"] = waypoints
+    paras["segments"] = waypoints
 
     return paras
   }
