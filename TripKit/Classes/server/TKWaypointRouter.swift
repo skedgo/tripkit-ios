@@ -217,8 +217,15 @@ extension TKWaypointRouter {
       }
       
       do {
+        let moverSegment: TKSegment
+        if segment.stationaryType == .vehicleCollect, let mover = segment.next {
+          moverSegment = mover
+        } else {
+          moverSegment = segment
+        }
+        
         let builder = WaypointParasBuilder(privateVehicles: vehicles)
-        let paras = try builder.build(movingStartOf: segment, to: location)
+        let paras = try builder.build(movingStartOf: moverSegment, to: location)
 
         // We group all these in the same trip group even though
         // the pattern isn't an exact match.
