@@ -89,6 +89,8 @@
 
 @property (nonatomic, assign) BOOL missedBookingWindow;
 
+@property (nonatomic, assign) BOOL isCanceled;
+
 /**
  @note Only includes walking if it's a walking-only trip!
  @return Set of used mode identifiers.

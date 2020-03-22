@@ -103,19 +103,19 @@ extension Service {
     case .isRealTime:
       isRealTime = true
       isRealTimeCapable = true
-      isCancelled = false
+      isCanceled = false
     case .canceled:
       isRealTime = true
       isRealTimeCapable = true
-      isCancelled = true
+      isCanceled = true
     case .capable:
       isRealTime = false
       isRealTimeCapable = true
-      isCancelled = false
+      isCanceled = false
     case .incapable:
       isRealTime = false
       isRealTimeCapable = false
-      isCancelled = false
+      isCanceled = false
     }
   }
   
@@ -160,7 +160,7 @@ extension Service {
       }
       // not updating `isRealTime` here as that's related to times
       self.isRealTimeCapable = true
-      self.isCancelled = false
+      self.isCanceled = false
     }
     
     if let alternatives = alternatives {

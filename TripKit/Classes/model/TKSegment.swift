@@ -254,6 +254,10 @@ extension TKSegment: TKTripSegment {
     return timesAreRealTime
   }
   
+  public var tripSegmentIsCanceled: Bool {
+    return self.isCanceled
+  }
+  
   public var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility {
     return self.wheelchairAccessibility ?? .unknown
   }

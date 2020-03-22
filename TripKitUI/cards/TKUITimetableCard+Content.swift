@@ -33,7 +33,7 @@ extension TKUIDepartureCellContent {
       modeName: service.modeTitle ?? "",
       serviceShortName: service.shortIdentifier(),
       serviceColor: serviceColor,
-      serviceIsCancelled: service.isCancelled,
+      serviceIsCanceled: service.isCanceled,
       accessibilityLabel: embarkation.accessibilityDescription(includeRealTime: true),
       accessibilityTimeText: embarkation.buildTimeText(spacer: ";").string,
       timeText: embarkation.buildTimeText(),

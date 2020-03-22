@@ -571,7 +571,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (BOOL)isCanceled
 {
-  return self.reference.service.isCancelled;
+  return self.reference.service.isCanceled || self.trip.isCanceled;
 }
 
 #pragma mark - Booking

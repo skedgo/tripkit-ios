@@ -102,7 +102,7 @@
 
 - (TKStopVisitRealTime)realTimeStatus
 {
-  if (self.service.isCancelled) {
+  if (self.service.isCanceled) {
     return TKStopVisitRealTimeCancelled;
   } else if (!self.service.isRealTimeCapable) {
     return TKStopVisitRealTimeNotApplicable;

@@ -14,6 +14,7 @@ enum {
   SGTripFlagShowNoVehicleUUIDAsLift = 1 << 1,
   SGTripFlagHasFixedDeparture       = 1 << 3,
   SGTripFlagBookingWindowMissed     = 1 << 4,
+  SGTripFlagIsCanceled              = 1 << 5,
 };
 typedef NSUInteger SGTripFlag;
 
@@ -389,6 +390,16 @@ typedef NSUInteger SGTripFlag;
 - (BOOL)missedBookingWindow
 {
   return 0 != (self.flags.integerValue & SGTripFlagBookingWindowMissed);
+}
+
+- (void)setIsCanceled:(BOOL)isCanceled
+{
+  [self setFlag:SGTripFlagIsCanceled to:isCanceled];
+}
+
+- (BOOL)isCanceled
+{
+  return 0 != (self.flags.integerValue & SGTripFlagIsCanceled);
 }
 
 
