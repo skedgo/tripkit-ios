@@ -272,7 +272,8 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.logURLString         = tripDict[@"logURL"]               ?: trip.logURLString;
 
       if ([tripDict[@"availability"] isKindOfClass:[NSString class]]) {
-        trip.missedBookingWindow  = [@"MISSED_PREBOOKING_WINDOW" isEqualToString:tripDict[@"availability"]];
+        trip.missedBookingWindow = [@"MISSED_PREBOOKING_WINDOW" isEqualToString:tripDict[@"availability"]];
+        trip.isCanceled = [@"CANCELLED" isEqualToString:tripDict[@"availability"]];
       }
       
       if ([tripDict[@"bundleId"] isKindOfClass:[NSString class]]) {

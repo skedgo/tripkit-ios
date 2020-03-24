@@ -15,7 +15,7 @@
 enum {
   SGServiceFlagRealTime               = 1 << 0,
   SGServiceFlagRealTimeCapable        = 1 << 1,
-  SGServiceFlagCancelled              = 1 << 2,
+  SGServiceFlagCanceled               = 1 << 2,
   SGServiceFlagBicycleAccessible      = 1 << 3,
   SGServiceFlagWheelchairAccessible   = 1 << 4,
   SGServiceFlagWheelchairInaccessible = 1 << 5,
@@ -85,14 +85,14 @@ typedef NSUInteger SGServiceFlag;
 	[self setFlag:SGServiceFlagRealTimeCapable to:realTimeCapable];
 }
 
-- (BOOL)isCancelled
+- (BOOL)isCanceled
 {
-  return 0 != (self.flags.integerValue & SGServiceFlagCancelled);
+  return 0 != (self.flags.integerValue & SGServiceFlagCanceled);
 }
 
-- (void)setCancelled:(BOOL)cancelled
+- (void)setCanceled:(BOOL)canceled
 {
-	[self setFlag:SGServiceFlagCancelled to:cancelled];
+	[self setFlag:SGServiceFlagCanceled to:canceled];
 }
 
 - (BOOL)isBicycleAccessible

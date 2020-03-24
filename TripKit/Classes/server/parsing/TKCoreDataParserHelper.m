@@ -215,17 +215,17 @@
 {
   // update the real-time status
   if ([realTimeStatus isEqualToString:@"IS_REAL_TIME"]) {
-    service.realTime				= YES;
+    service.realTime        = YES;
     service.realTimeCapable = YES;
-    service.cancelled			  = NO;
+    service.canceled        = NO;
   } else if ([realTimeStatus isEqualToString:@"CAPABLE"]) {
-    service.realTime				= NO;
+    service.realTime        = NO;
     service.realTimeCapable = YES;
-    service.cancelled			  = NO;
+    service.canceled        = NO;
   } else if ([realTimeStatus isEqualToString:@"CANCELLED"]) {
-    service.realTime				= NO;
-    service.realTimeCapable	= YES;
-    service.cancelled				= YES;
+    service.realTime        = NO;
+    service.realTimeCapable = YES;
+    service.canceled        = YES;
   }
 }
 

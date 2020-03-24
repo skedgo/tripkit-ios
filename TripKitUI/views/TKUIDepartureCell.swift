@@ -19,7 +19,7 @@ public struct TKUIDepartureCellContent {
   
   public var serviceShortName: String?
   public var serviceColor: UIColor?
-  public var serviceIsCancelled: Bool
+  public var serviceIsCanceled: Bool
 
   public var accessibilityLabel: String?
   public var accessibilityTimeText: String?
@@ -188,7 +188,7 @@ extension TKUIDepartureCell {
     
     let minutesToShow = minutesToCount(till: timeToDepart)
     
-    if dataSource.serviceIsCancelled {
+    if dataSource.serviceIsCanceled {
       timeToDepartTextLabel.text = Loc.Cancelled
       timeToDepartTextLabel.textColor = .tkStateError
       timeToDepartUnitLabel.isHidden = true

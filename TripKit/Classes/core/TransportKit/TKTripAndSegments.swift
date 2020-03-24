@@ -110,6 +110,8 @@ public protocol TKTripSegmentDisplayable : NSObjectProtocol {
   
   var tripSegmentTimesAreRealTime: Bool { get }
   
+  var tripSegmentIsCanceled: Bool { get }
+  
   /// Wheelchair accessibility of the segment. If it doesn't apply, just return `.unknown`,
   /// as an `.unknown` value will always be ignored.
   var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility { get }
@@ -148,6 +150,7 @@ public extension TKTripSegmentDisplayable {
   var tripSegmentFixedDepartureTime: Date? { nil }
   var tripSegmentTimeZone: TimeZone? { nil }
   var tripSegmentTimesAreRealTime: Bool { false }
+  var tripSegmentIsCanceled: Bool { false }
   var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility? { nil }
 }
 

@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, getter = isRealTime) BOOL realTime;
 @property (nonatomic, assign, getter = isRealTimeCapable) BOOL realTimeCapable;
-@property (nonatomic, assign, getter = isCancelled) BOOL cancelled;
+@property (nonatomic, assign, getter = isCanceled) BOOL canceled;
 @property (nonatomic, assign, getter = isBicycleAccessible) BOOL bicycleAccessible;
 
 /// :nodoc:

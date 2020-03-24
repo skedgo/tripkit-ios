@@ -161,6 +161,7 @@ extension TripGroup {
 extension Trip {
   var showFaded: Bool {
     return missedBookingWindow     // shuttle, etc., departing too soon
+      || isCanceled
       || calculateOffset() < -1  // doesn't match query
   }
 }
