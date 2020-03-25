@@ -35,9 +35,9 @@ extension Reactive where Base : TKCarParkLocation {
 }
 
 extension Reactive where Base : TKFreeFloatingVehicleLocation {
-  public var vehicle: Observable<TKAPI.FreeFloatingVehicleInfo> {
+  public var vehicle: Observable<TKAPI.SharedVehicleInfo> {
     return base.rx
-      .observeWeakly(TKAPI.FreeFloatingVehicleInfo.self, "vehicle")
+      .observeWeakly(TKAPI.SharedVehicleInfo.self, "vehicle")
       .compactMap { $0 }
   }
 }

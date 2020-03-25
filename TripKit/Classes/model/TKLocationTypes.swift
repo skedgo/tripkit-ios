@@ -166,18 +166,23 @@ public class TKCarRentalLocation: TKModeCoordinate {
 
 public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   
-  /// Detailed car-pod related information.
+  /// Detailed information about the vehicle
   ///
   /// - Note: Can change if real-time data is available. So use KVO or Rx.
-  public var vehicle: TKAPI.FreeFloatingVehicleInfo
+  public var vehicle: TKAPI.SharedVehicleInfo
   
   private enum CodingKeys: String, CodingKey {
     case vehicle
   }
   
+  public init(vehicle: TKAPI.SharedVehicleInfo, modeInfo: TKModeInfo, coordinate: CLLocationCoordinate2D) {
+    self.vehicle = vehicle
+    super.init(modeInfo: modeInfo, coordinate: coordinate)
+  }
+  
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    vehicle = try values.decode(TKAPI.FreeFloatingVehicleInfo.self, forKey: .vehicle)
+    vehicle = try values.decode(TKAPI.SharedVehicleInfo.self, forKey: .vehicle)
     try super.init(from: decoder)
     locationID = vehicle.identifier
   }
@@ -189,7 +194,7 @@ public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   }
   
   public required init?(coder aDecoder: NSCoder) {
-    guard let info = try? aDecoder.decode(TKAPI.FreeFloatingVehicleInfo.self, forKey: "vehicle") else { return nil }
+    guard let info = try? aDecoder.decode(TKAPI.SharedVehicleInfo.self, forKey: "vehicle") else { return nil }
     vehicle = info
     super.init(coder: aDecoder)
     locationID = info.identifier

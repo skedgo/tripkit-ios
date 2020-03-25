@@ -42,6 +42,11 @@ open class TKModeCoordinate: TKNamedCoordinate {
     case modeInfo
   }
   
+  public init(modeInfo: TKModeInfo, coordinate: CLLocationCoordinate2D) {
+    super.init(coordinate: coordinate)
+    _stopModeInfo = modeInfo
+  }
+  
   public required init(from decoder: Decoder) throws {
     try super.init(from: decoder)
     isDraggable = false

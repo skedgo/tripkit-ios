@@ -164,7 +164,6 @@ extension TKAPI {
     }
   }
   
-  
   public struct CarRentalInfo: Codable, Hashable, RealTimeUpdatable {
     public let identifier: String
     public let company: TKAPI.CompanyInfo
@@ -172,8 +171,12 @@ extension TKAPI {
     public let source: TKAPI.DataAttribution?
     public var hasRealTime: Bool { false }
   }
+  
 
-  public struct FreeFloatingVehicleInfo: Codable, Hashable, RealTimeUpdatable {
+  @available(*, unavailable, renamed: "SharedVehicleInfo")
+  public typealias FreeFloatingVehicleInfo = SharedVehicleInfo
+
+  public struct SharedVehicleInfo: Codable, Hashable, RealTimeUpdatable {
     public let identifier: String
     public let operatorInfo: TKAPI.CompanyInfo
     public let vehicleType: SharedVehicleType
@@ -299,7 +302,7 @@ extension TKAPI {
     public let carPod:  TKAPI.CarPodInfo?
     public let carPark: TKAPI.CarParkInfo?
     public let carRental: TKAPI.CarRentalInfo?
-    public let freeFloating: TKAPI.FreeFloatingVehicleInfo?
+    public let freeFloating: TKAPI.SharedVehicleInfo? // TODO: Also add to API specs
     public let onStreetParking: TKAPI.OnStreetParkingInfo?
 
     

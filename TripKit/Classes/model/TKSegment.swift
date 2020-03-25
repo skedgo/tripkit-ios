@@ -135,7 +135,7 @@ extension TKSegment {
 extension TKSegment {
   
   @objc public var usesVehicle: Bool {
-    if template?.isSharedVehicle ?? false {
+    if template?.isSharedVehicle == true {
       return true
     } else if reference?.vehicleUUID != nil {
       return true
@@ -147,7 +147,7 @@ extension TKSegment {
   /// - Parameter vehicles: List of the user's vehicles
   /// - Returns: The used vehicle (if there are any) in SkedGo API-compatible form
   @objc public func usedVehicle(fromAll vehicles: [TKVehicular]) -> [AnyHashable: Any]? {
-    if template?.isSharedVehicle ?? false {
+    if template?.isSharedVehicle == true {
       return reference?.sharedVehicleData
     }
     
