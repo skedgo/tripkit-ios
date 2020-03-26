@@ -185,7 +185,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MiniMap/Pods-MiniMap-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MiniMap/Pods-MiniMap-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ASPolygonKit/ASPolygonKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
@@ -202,7 +202,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MiniMap/Pods-MiniMap-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MiniMap/Pods-MiniMap-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

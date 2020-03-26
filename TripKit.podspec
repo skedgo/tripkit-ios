@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'ASPolygonKit'
   s.dependency 'RxSwift', '~> 5.1.1'
-  s.dependency 'RxCocoa', '~> 5.1.1'
+  s.dependency 'RxCocoa', '~> 5.1'
 
   s.source_files = [
     "TripKit/TripKit.h",
