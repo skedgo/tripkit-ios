@@ -178,6 +178,7 @@ public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
   public init(vehicle: TKAPI.SharedVehicleInfo, modeInfo: TKModeInfo, coordinate: CLLocationCoordinate2D) {
     self.vehicle = vehicle
     super.init(modeInfo: modeInfo, coordinate: coordinate)
+    locationID = vehicle.identifier
   }
   
   public required init(from decoder: Decoder) throws {
