@@ -74,6 +74,7 @@ extension TKUISegmentDirectionsCard {
     let cell = tableView.dequeueReusableCell(withIdentifier: identifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: identifier)
 
     cell.backgroundColor = .tkBackground
+    cell.imageView?.image = item.image
     cell.textLabel?.textColor = .tkLabelPrimary
 
     if let distance = item.distance {

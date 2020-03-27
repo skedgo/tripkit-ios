@@ -84,7 +84,7 @@ extension SegmentTemplate {
       
       for shape in shapes {
         shape.template = template
-        if shape.travelled?.boolValue == true {
+        if shape.travelled {
           // Only if no previous travelled segment!
           if start == nil, let coordinate = shape.start?.coordinate {
             start = TKNamedCoordinate(coordinate: coordinate)

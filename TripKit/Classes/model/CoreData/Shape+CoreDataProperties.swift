@@ -1,8 +1,8 @@
 //
 //  Shape+CoreDataProperties.swift
-//  TripKit
+//  
 //
-//  Created by Adrian Schönig on 06.11.17.
+//  Created by Adrian Schönig on 27.03.20.
 //
 //
 
@@ -17,12 +17,13 @@ extension Shape {
     }
 
     @NSManaged public var encodedWaypoints: String?
+    @NSManaged public var flags: Int32
     @NSManaged public var index: Int16
+    @NSManaged public var metres: NSNumber?
     @NSManaged public var title: String?
     @NSManaged public var toDelete: Bool
-    @NSManaged public var travelled: NSNumber?
-    @NSManaged public var flags: Int32
-    @NSManaged public var metres: NSNumber?
+    @NSManaged public var travelled: Bool
+    @NSManaged public var rawInstruction: Int16
     @NSManaged public var services: NSSet?
     @NSManaged public var template: SegmentTemplate?
     @NSManaged public var visits: NSSet?
