@@ -64,8 +64,9 @@ extension TKCoreDataParserHelper {
 
 extension Shape {
   
+  /// :nodoc:
   @objc
-  func setInstruction(_ raw: String) {
+  public func _setInstruction(_ raw: String) {
     switch raw {
     case "HEAD_TOWARDS":        self.instruction = .headTowards
     case "CONTINUE_STRAIGHT":   self.instruction = .continueStraight

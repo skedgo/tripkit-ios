@@ -136,7 +136,7 @@
     shape.isHop = [shapeDict[@"hop"] boolValue];
     shape.metres = shapeDict[@"metres"];
     [shape setSafety: shapeDict[@"safe"]];
-    [shape setInstruction: shapeDict[@"instruction"]];
+    [shape _setInstruction: shapeDict[@"instruction"]];
     
     NSNumber *rawTravelled = shapeDict[@"travelled"];
     if (rawTravelled) {
