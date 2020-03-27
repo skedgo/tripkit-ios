@@ -14,6 +14,7 @@ import MapKit
 @objc(Shape)
 public class Shape: NSManagedObject {
   
+  /// A turn-by-turn instruction, from one shape to the next
   public enum Instruction: Int16 {
     case headTowards        = 1
     case continueStraight   = 2
@@ -60,6 +61,7 @@ public class Shape: NSManagedObject {
     return sortedCoordinates?.last
   }
   
+  /// The turn-by-turn instruction from the previous shape to this shape
   public var instruction: Instruction? {
     get {
       return Instruction(rawValue: rawInstruction)
