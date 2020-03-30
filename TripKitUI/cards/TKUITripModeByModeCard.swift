@@ -38,6 +38,17 @@ public class TKUITripModeByModeCard: TGPageCard {
       return haystack.first { $0.segmentIndex == needle }?.cardsRange
     }
     
+    static func cardIndex(ofSegmentAt needle: Int, mode: TKUISegmentMode, in haystack: [SegmentCardsInfo]) -> Array<Int>.Index? {
+      guard let segmentCardIndices = cardIndices(ofSegmentAt: needle, in: haystack) else { return nil }
+      
+      guard
+        let segmentInfo = haystack.first(where: { $0.segmentIndex == needle }),
+        let matchingModeIndex = segmentInfo.cards.firstIndex(where: { $0.1 == mode })
+        else { return segmentCardIndices.lowerBound }
+      
+      return segmentCardIndices.lowerBound + matchingModeIndex
+    }
+    
     /// What's the indices of the cards for the provided `segment.selectionIdentifier`,
     /// if all the cards in the haystack are next to each other?
     static func cardIndices(ofSegmentWithIdentifier needle: String, in haystack: [SegmentCardsInfo]) -> Range<Int>? {
@@ -101,8 +112,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     let headerSegments = trip.headerSegments
     self.headerSegmentIndices = headerSegments.map { $0.index }
     
-    // TODO: Pick the correct one according to the mode, too
-    let initialPage = SegmentCardsInfo.cardIndices(ofSegmentAt: segment.index, in: segmentCards)?.lowerBound ?? 0
+    let initialPage = SegmentCardsInfo.cardIndex(ofSegmentAt: segment.index, mode: mode, in: segmentCards) ?? 0
     
     let cards = segmentCards.flatMap { $0.cards.map { $0.0 } }
     let actualInitialPage = min(initialPage, cards.count - 1)
