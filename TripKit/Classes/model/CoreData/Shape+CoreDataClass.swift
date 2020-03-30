@@ -14,6 +14,18 @@ import MapKit
 @objc(Shape)
 public class Shape: NSManagedObject {
   
+  /// A turn-by-turn instruction, from one shape to the next
+  public enum Instruction: Int16 {
+    case headTowards        = 1
+    case continueStraight   = 2
+    case turnSlightyLeft    = 3
+    case turnSlightlyRight  = 4
+    case turnLeft           = 5
+    case turnRight          = 6
+    case turnSharplyLeft    = 7
+    case turnSharplyRight   = 8
+  }
+  
   private enum Flag: Int32 {
     case isSafe     = 1
     case isNotSafe  = 2
@@ -47,6 +59,16 @@ public class Shape: NSManagedObject {
 
   @objc public var end: MKAnnotation? {
     return sortedCoordinates?.last
+  }
+  
+  /// The turn-by-turn instruction from the previous shape to this shape
+  public var instruction: Instruction? {
+    get {
+      return Instruction(rawValue: rawInstruction)
+    }
+    set {
+      rawInstruction = newValue?.rawValue ?? 0
+    }
   }
   
   @objc
@@ -143,7 +165,7 @@ extension Shape: TKDisplayableRoute {
   }
   
   public var routeColor: TKColor? {
-    if let travelled = travelled, !travelled.boolValue {
+    if !travelled {
       // Non-travelled always gets a special colour
       return .routeDashColorNonTravelled
     }
@@ -162,7 +184,7 @@ extension Shape: TKDisplayableRoute {
   }
   
   public var routeIsTravelled: Bool {
-    return travelled?.boolValue ?? true
+    return travelled
   }
   
   public var routeDashPattern: [NSNumber]? {

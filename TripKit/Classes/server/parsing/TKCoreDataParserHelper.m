@@ -130,18 +130,22 @@
     // create the new shape
     Shape *shape = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Shape class]) inManagedObjectContext:context];
     shape.index = waypointGroupCount++;
-    shape.travelled = shapeDict[@"travelled"];
     shape.title = shapeDict[@"name"];
     shape.encodedWaypoints = encodedWaypoints;
     shape.isDismount = [shapeDict[@"dismount"] boolValue];
     shape.isHop = [shapeDict[@"hop"] boolValue];
     shape.metres = shapeDict[@"metres"];
     [shape setSafety: shapeDict[@"safe"]];
-    if (nil == shape.travelled) {
-      shape.travelled = @(YES);
+    [shape _setInstruction: shapeDict[@"instruction"]];
+    
+    NSNumber *rawTravelled = shapeDict[@"travelled"];
+    if (rawTravelled) {
+      shape.travelled = [rawTravelled boolValue];
+    } else {
+      shape.travelled = YES;
     }
     
-    if ([shape.travelled boolValue]) {
+    if (shape.travelled) {
       // we only associate the travelled section here, which isn't great
       // but better than only associating the last one...
       currentService.shape = shape;

@@ -61,3 +61,23 @@ extension TKCoreDataParserHelper {
     return relative.addingTimeInterval(offset)
   }
 }
+
+extension Shape {
+  
+  /// :nodoc:
+  @objc
+  public func _setInstruction(_ raw: String) {
+    switch raw {
+    case "HEAD_TOWARDS":        self.instruction = .headTowards
+    case "CONTINUE_STRAIGHT":   self.instruction = .continueStraight
+    case "TURN_SLIGHTLY_LEFT":  self.instruction = .turnSlightyLeft
+    case "TURN_LEFT":           self.instruction = .turnLeft
+    case "TURN_SHARPLY_LEFT":   self.instruction = .turnSharplyLeft
+    case "TURN_SLIGHTLY_RIGHT": self.instruction = .turnSlightlyRight
+    case "TURN_RIGHT":          self.instruction = .turnRight
+    case "TURN_SHARPLY_RIGHT":  self.instruction = .turnSharplyRight
+    default:                    self.instruction = nil
+    }
+  }
+  
+}

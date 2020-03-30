@@ -21,6 +21,7 @@ extension TKUISegmentDirectionsViewModel {
     fileprivate let index: Int
     
     let streetName: String?
+    let image: UIImage?
     var distance: CLLocationDistance?
     
     /// Localised textual instruction for following this street for the
@@ -55,6 +56,7 @@ fileprivate extension TKUISegmentDirectionsViewModel.Item {
     self.init(
       index: index,
       streetName: streetName,
+      image: shape.instruction?.image,
       distance: shape.metres?.doubleValue
     )
   }
@@ -80,6 +82,31 @@ fileprivate extension Array where Element == TKUISegmentDirectionsViewModel.Item
       append(last)
     } else {
       append(other)
+    }
+  }
+}
+
+fileprivate extension Shape.Instruction {
+  var image: UIImage? {
+    let part: String
+    var flip = false
+
+    switch self {
+    case .headTowards:        part = "start"
+    case .continueStraight:   part = "go-straight"
+    case .turnLeft:           flip = true; fallthrough
+    case .turnRight:          part = "quite-right"
+    case .turnSlightyLeft:    flip = true; fallthrough
+    case .turnSlightlyRight:  part = "light-right"
+    case .turnSharplyLeft:    flip = true; fallthrough
+    case .turnSharplyRight:   part = "heavy-right"
+    }
+    
+    let image = TripKitUIBundle.imageNamed("maneuver-\(part)")
+    if flip, let original = image.cgImage {
+      return UIImage(cgImage: original, scale: image.scale, orientation: .upMirrored).withRenderingMode(.alwaysTemplate)
+    } else {
+      return image
     }
   }
 }
