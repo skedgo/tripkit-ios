@@ -105,9 +105,14 @@ extension TKUICardActionsView {
       
       actionView.translatesAutoresizingMaskIntoConstraints = false
       if index == 0 {
-        actionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         actionView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         actionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        if actions.count == 1 {
+          actionView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+          actionView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75).isActive = true
+        } else {
+          actionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        }
       } else {
         guard let previous = previousActionView else { preconditionFailure() }
         actionView.leadingAnchor.constraint(equalTo: previous.trailingAnchor, constant: 8).isActive = true
@@ -119,7 +124,7 @@ extension TKUICardActionsView {
         widthConstraint.isActive = true
       }
       
-      if index == actions.count - 1 {
+      if index == actions.count - 1, actions.count > 1 {
         actionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
       }
       
