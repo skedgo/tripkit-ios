@@ -112,7 +112,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     let headerSegments = trip.headerSegments
     self.headerSegmentIndices = headerSegments.map { $0.index }
     
-    let initialPage = SegmentCardsInfo.cardIndex(ofSegmentAt: segment.index, mode: mode, in: segmentCards) ?? 0
+    let initialPage = SegmentCardsInfo.cardIndices(ofSegmentAt: segment.index, in: segmentCards)?.lowerBound ?? 0
     
     let cards = segmentCards.flatMap { $0.cards.map { $0.0 } }
     let actualInitialPage = min(initialPage, cards.count - 1)
@@ -177,6 +177,15 @@ public class TKUITripModeByModeCard: TGPageCard {
       let mode = cardsInfo.cards[offset].1
       tripMapManager.show(segment, animated: true, mode: mode)
     }
+  }
+  
+  public func offsetToReach(mode: TKUISegmentMode, in segment: TKSegment) -> Int? {
+    guard
+      let segmentInfo = segmentCards.first(where: { $0.segmentIndex == segment.index }),
+      let modeIndex = segmentInfo.cards.firstIndex(where: { $0.1 == mode })
+      else { return nil }
+    
+    return modeIndex
   }
   
 }

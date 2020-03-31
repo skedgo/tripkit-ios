@@ -20,11 +20,14 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     return TKUISegmentDirectionsViewModel.canShowInstructions(for: segment)
   }
   
+  public static var config = Configuration.empty
+  
   let segment: TKSegment
   
   let titleView: TKUISegmentTitleView
   
   private var viewModel: TKUISegmentDirectionsViewModel!
+  
   private let disposeBag = DisposeBag()
   
   var tripMapManager: TKUITripMapManager {
@@ -56,6 +59,16 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     viewModel.sections
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
+    
+    if let factory = Self.config.actionFactory {
+      let actions = factory(segment)
+      let actionsView = TKUICardActionsView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
+      actionsView.configure(with: actions, model: segment, card: self)
+      actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+      tableView.tableHeaderView = actionsView
+    } else {
+      tableView.tableHeaderView = nil
+    }
   }
   
   private func setup(_ tableView: UITableView) {

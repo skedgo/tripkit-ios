@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +14,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3c-vY-icO">
-                    <rect key="frame" x="16" y="7" width="40" height="40"/>
+                    <rect key="frame" x="16" y="12" width="40" height="40"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r1s-7w-aJM" userLabel="Mode Icon">
                             <rect key="frame" x="5" y="5" width="30" height="30"/>
@@ -41,22 +39,22 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="25R-dz-Nwr">
-                    <rect key="frame" x="64" y="0.0" width="109.5" height="56"/>
+                    <rect key="frame" x="64" y="8" width="109.5" height="48"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Walk" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEO-Bf-P7i" userLabel="Title" customClass="TKUIStyledLabel">
-                            <rect key="frame" x="0.0" y="0.0" width="109.5" height="27"/>
+                            <rect key="frame" x="0.0" y="0.0" width="109.5" height="20.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <color key="textColor" red="0.097280979160000003" green="0.090294875199999999" blue="0.23543129860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Towards Mona Vale" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccR-Sw-Z6F" userLabel="Subtitle" customClass="TKUIStyledLabel">
-                            <rect key="frame" x="0.0" y="27" width="109.5" height="14.5"/>
+                            <rect key="frame" x="0.0" y="20.5" width="109.5" height="14.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                             <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXs-Kz-Uqb" userLabel="Subsubtitle" customClass="TKUIStyledLabel">
-                            <rect key="frame" x="0.0" y="41.5" width="109.5" height="14.5"/>
+                            <rect key="frame" x="0.0" y="35" width="109.5" height="13"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                             <color key="textColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -76,12 +74,13 @@
             <constraints>
                 <constraint firstItem="nv4-5c-QYr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="25R-dz-Nwr" secondAttribute="trailing" constant="6" id="BVD-7f-ftn"/>
                 <constraint firstItem="d3c-vY-icO" firstAttribute="leading" secondItem="VGo-lB-GoV" secondAttribute="leading" constant="16" id="FCh-Zb-LLX"/>
+                <constraint firstItem="25R-dz-Nwr" firstAttribute="centerY" secondItem="r1s-7w-aJM" secondAttribute="centerY" id="JLz-kF-s3X"/>
                 <constraint firstAttribute="trailing" secondItem="nv4-5c-QYr" secondAttribute="trailing" constant="4" id="Rsk-yV-HSc"/>
-                <constraint firstItem="d3c-vY-icO" firstAttribute="centerY" secondItem="VGo-lB-GoV" secondAttribute="centerY" constant="-5" id="Vgf-oY-gsO"/>
-                <constraint firstAttribute="bottom" secondItem="25R-dz-Nwr" secondAttribute="bottom" constant="8" id="aLa-SC-a28"/>
+                <constraint firstItem="d3c-vY-icO" firstAttribute="centerY" secondItem="VGo-lB-GoV" secondAttribute="centerY" id="Vgf-oY-gsO"/>
                 <constraint firstItem="nv4-5c-QYr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" constant="-11" id="cHF-lK-bN8"/>
-                <constraint firstItem="25R-dz-Nwr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" id="dgy-wO-cUf"/>
+                <constraint firstItem="25R-dz-Nwr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" constant="8" id="dgy-wO-cUf"/>
                 <constraint firstItem="25R-dz-Nwr" firstAttribute="leading" secondItem="d3c-vY-icO" secondAttribute="trailing" constant="8" id="lwa-cr-4JX"/>
+                <constraint firstItem="d3c-vY-icO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VGo-lB-GoV" secondAttribute="top" constant="8" id="xhn-mz-HK7"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -92,7 +91,7 @@
                 <outlet property="subtitleLabel" destination="ccR-Sw-Z6F" id="gSY-nL-Ofu"/>
                 <outlet property="titleLabel" destination="wEO-Bf-P7i" id="dxg-Tr-QWO"/>
             </connections>
-            <point key="canvasLocation" x="23.199999999999999" y="-711.544227886057"/>
+            <point key="canvasLocation" x="81" y="-694"/>
         </view>
     </objects>
 </document>
