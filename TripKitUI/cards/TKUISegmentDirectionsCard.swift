@@ -62,8 +62,7 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     
     if let factory = Self.config.actionFactory {
       let actions = factory(segment)
-      guard !actions.isEmpty else { tableView.tableHeaderView = nil; return }
-      let actionsView = TKUICardActionsView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
+      let actionsView = TKUICardActionsView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
       actionsView.configure(with: actions, model: segment, card: self)
       actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
       tableView.tableHeaderView = actionsView
