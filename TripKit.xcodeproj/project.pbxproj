@@ -775,6 +775,7 @@
 		D33C05272394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C05262394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift */; };
 		D33E6C8A239F11B500F2AF3B /* TKUISegmentAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33E6C88239F11B500F2AF3B /* TKUISegmentAlertCell.swift */; };
 		D33E6C8B239F11B500F2AF3B /* TKUISegmentAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33E6C89239F11B500F2AF3B /* TKUISegmentAlertCell.xib */; };
+		D36D97C52432F6C3007649BC /* TKUISegmentDirectionCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36D97C42432F6C3007649BC /* TKUISegmentDirectionCard+Configuration.swift */; };
 		D37222FD241B65E100CC83F0 /* routing-scooters.json in Resources */ = {isa = PBXBuildFile; fileRef = D37222FB241B65E100CC83F0 /* routing-scooters.json */; };
 		D37222FE241B65E100CC83F0 /* routing-bus+scooter.json in Resources */ = {isa = PBXBuildFile; fileRef = D37222FC241B65E100CC83F0 /* routing-bus+scooter.json */; };
 		D372268A2345A8CF00DBCFC8 /* TKUIResultsTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37226872345A8C600DBCFC8 /* TKUIResultsTitleView.swift */; };
@@ -1486,6 +1487,7 @@
 		D33C05262394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIHomeCard+Configuration.swift"; sourceTree = "<group>"; };
 		D33E6C88239F11B500F2AF3B /* TKUISegmentAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISegmentAlertCell.swift; sourceTree = "<group>"; };
 		D33E6C89239F11B500F2AF3B /* TKUISegmentAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISegmentAlertCell.xib; sourceTree = "<group>"; };
+		D36D97C42432F6C3007649BC /* TKUISegmentDirectionCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUISegmentDirectionCard+Configuration.swift"; sourceTree = "<group>"; };
 		D37222FB241B65E100CC83F0 /* routing-scooters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-scooters.json"; sourceTree = "<group>"; };
 		D37222FC241B65E100CC83F0 /* routing-bus+scooter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-bus+scooter.json"; sourceTree = "<group>"; };
 		D37226872345A8C600DBCFC8 /* TKUIResultsTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIResultsTitleView.swift; sourceTree = "<group>"; };
@@ -2421,6 +2423,7 @@
 				3A682F2120F3F8ED00E05195 /* TKUIRoutingResultsCard+Errors.swift */,
 				3AFD393E20D9333500FDC7D0 /* TKUIRoutingResultsMapManager.swift */,
 				3A383CA5222FFE3200361596 /* TKUISegmentDirectionsCard.swift */,
+				D36D97C42432F6C3007649BC /* TKUISegmentDirectionCard+Configuration.swift */,
 				3A383CA3222FFE2000361596 /* TKUISegmentInstructionsCard.swift */,
 				3ACF471B2297F9F00096860D /* TKUIServiceCard.swift */,
 				D397D445240F617500069582 /* TKUIServiceCard+Configuration.swift */,
@@ -3476,6 +3479,7 @@
 				3A7377CD23226915004C91CC /* TKUIExtendedActionView.swift in Sources */,
 				3ABCA7D5225255980072EB25 /* TKUITripModeByModeCard+RealTime.swift in Sources */,
 				D39B7BB420622FD100988D8A /* TKUIAlertCell.swift in Sources */,
+				D36D97C52432F6C3007649BC /* TKUISegmentDirectionCard+Configuration.swift in Sources */,
 				3ADC803221184F7300A318B9 /* TKUITripOverviewViewModel+Restoration.swift in Sources */,
 				3ACF473C229800A70096860D /* TKUITimetableCard+Configuration.swift in Sources */,
 				D372268A2345A8CF00DBCFC8 /* TKUIResultsTitleView.swift in Sources */,
