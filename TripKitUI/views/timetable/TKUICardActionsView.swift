@@ -10,17 +10,19 @@ import UIKit
 
 import TGCardViewController
 
-class TKUICardActionsView: UIView {
+public class TKUICardActionsView: UIView {
   
-  override init(frame: CGRect) {
+  public var showActionTitleInCompactLayout: Bool?
+  
+  public override init(frame: CGRect) {
     super.init(frame: frame)
   }
   
-  required init?(coder: NSCoder) {
+  public required init?(coder: NSCoder) {
     super.init(coder: coder)
   }
   
-  func configure<C, M>(with actions: [TKUICardAction<C, M>], model: M, card: C) {
+  public func configure<C, M>(with actions: [TKUICardAction<C, M>], model: M, card: C) {
     subviews.forEach { $0.removeFromSuperview() }
     
     backgroundColor = .clear
@@ -37,6 +39,18 @@ class TKUICardActionsView: UIView {
 extension TKUICardActionsView {
   
   private func useCompactLayout<C, M>(in card: C, for actions: [TKUICardAction<C, M>], with model: M) {
+    let separator = UIView()
+    separator.backgroundColor = .tkSeparatorSubtle
+    addSubview(separator)
+    
+    separator.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      separator.leadingAnchor.constraint(equalTo: leadingAnchor),
+      separator.bottomAnchor.constraint(equalTo: bottomAnchor),
+      separator.trailingAnchor.constraint(equalTo: trailingAnchor),
+      separator.heightAnchor.constraint(equalToConstant: 0.5)
+    ])
+    
     let stack = UIStackView()
     stack.axis = .horizontal
     stack.alignment = .center
@@ -49,11 +63,11 @@ extension TKUICardActionsView {
         stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
         stack.topAnchor.constraint(equalTo: topAnchor, constant: 8),
         stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-        stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+        stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
       ]
     )
     
-    let showActionTitle = TKUICustomization.shared.showCardActionTitle
+    let showActionTitle = showActionTitleInCompactLayout ?? TKUICustomization.shared.showCardActionTitle
     
     let actionViews = actions.map { action -> TKUICompactActionView in
       let actionView = TKUICompactActionView.newInstance()
