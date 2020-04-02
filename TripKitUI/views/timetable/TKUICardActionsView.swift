@@ -51,46 +51,59 @@ extension TKUICardActionsView {
       separator.heightAnchor.constraint(equalToConstant: 0.5)
     ])
     
-    let stack = UIStackView()
-    stack.axis = .horizontal
-    stack.alignment = .center
-    stack.distribution = .fillEqually
-    stack.spacing = 8
-    addSubview(stack)
+    let showActionTitle = showActionTitleInCompactLayout ?? TKUICustomization.shared.showCardActionTitle
     
-    stack.translatesAutoresizingMaskIntoConstraints = false
+    // Split the actions into chunks of three
+    let actionChunks = actions.split(into: 3)
+    
+    // For each chunk, map out a corresponding set of action views
+    let viewChunks = actionChunks.map { actions -> [TKUICompactActionView] in
+      var actionViews = actions.map { TKUICompactActionView.newInstance(with: $0, card: card, model: model, showTitle: showActionTitle) }
+      
+      // Since these action views are distributed equally in the containing
+      // stack view (to be constructed below), to keep consistent layout for
+      // all stack views (or rows), we introduce spacer elements so all rows
+      // have the maximum number of actions views possible.
+      let spacers = (0 ..< (3 - actionViews.count)).map { _ in TKUICompactActionView.newInstance() }
+      
+      // We don't want these spacer elements visible and interative. We can't
+      // do `isHidden = true`, because that will cause it to be removed from
+      // the stack view when layout is taking place.
+      spacers.forEach { $0.alpha = 0; $0.isUserInteractionEnabled = false }
+      
+      actionViews.append(contentsOf: spacers)
+      return actionViews
+    }
+    
+    // For each chunk of action views, map out a corresponding stack view
+    let stackChunks: [UIStackView] = viewChunks.map { actionViews in
+      let stack = UIStackView()
+      stack.axis = .horizontal
+      stack.alignment = .center
+      stack.distribution = .fillEqually
+      stack.spacing = 8
+      actionViews.forEach(stack.addArrangedSubview)
+      return stack
+    }
+    
+    // Now put chunks of stack views inside a parent stack view.
+    let encompassingStack = UIStackView()
+    encompassingStack.axis = .vertical
+    encompassingStack.alignment = .fill
+    encompassingStack.distribution = .fill
+    encompassingStack.spacing = 8
+    addSubview(encompassingStack)
+    
+    encompassingStack.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-        stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-        stack.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-        stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-        stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+        encompassingStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+        encompassingStack.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+        encompassingStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+        encompassingStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
       ]
     )
     
-    let showActionTitle = showActionTitleInCompactLayout ?? TKUICustomization.shared.showCardActionTitle
-    
-    let actionViews = actions.map { action -> TKUICompactActionView in
-      let actionView = TKUICompactActionView.newInstance()
-      actionView.tintColor = .tkAppTintColor
-      actionView.imageView.image = action.icon
-      actionView.titleLabel.text = showActionTitle ? action.title : nil
-      actionView.accessibilityLabel = action.title
-      actionView.accessibilityTraits = .button
-      actionView.bold = action.style == .bold
-      actionView.onTap = { [weak card, unowned actionView] sender in
-        guard let card = card else { return }
-        let update = action.handler(action, card, model, sender)
-        if update {
-          actionView.imageView.image = action.icon
-          actionView.titleLabel.text = showActionTitle ? action.title : nil
-          actionView.accessibilityLabel = action.title
-          actionView.bold = action.style == .bold
-        }
-      }
-      return actionView
-    }
-    
-    actionViews.forEach(stack.addArrangedSubview)
+    stackChunks.forEach(encompassingStack.addArrangedSubview)
   }
   
   private func useExtendedLayout<C, M>(in card: C, for actions: [TKUICardAction<C, M>], with model: M) {
@@ -144,6 +157,45 @@ extension TKUICardActionsView {
       
       previousActionView = actionView
     }
+  }
+  
+}
+
+// MARK: -
+
+extension Array {
+  
+  func split(into size: Int) -> [[Element]] {
+    return stride(from: 0, to: count, by: size).map {
+      Array(self[$0 ..< Swift.min($0 + size, count)])
+    }
+  }
+  
+}
+
+// MARK: -
+
+extension TKUICompactActionView {
+  
+  static func newInstance<C, M>(with action: TKUICardAction<C, M>, card: C, model: M, showTitle: Bool = true) -> TKUICompactActionView {
+    let actionView = newInstance()
+    actionView.tintColor = .tkAppTintColor
+    actionView.imageView.image = action.icon
+    actionView.titleLabel.text = showTitle ? action.title : nil
+    actionView.accessibilityLabel = action.title
+    actionView.accessibilityTraits = .button
+    actionView.bold = action.style == .bold
+    actionView.onTap = { [weak card, unowned actionView] sender in
+      guard let card = card else { return }
+      let update = action.handler(action, card, model, sender)
+      if update {
+        actionView.imageView.image = action.icon
+        actionView.titleLabel.text = showTitle ? action.title : nil
+        actionView.accessibilityLabel = action.title
+        actionView.bold = action.style == .bold
+      }
+    }
+    return actionView
   }
   
 }
