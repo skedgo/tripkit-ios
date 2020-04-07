@@ -33,6 +33,18 @@ class TKUICompactActionCell: UICollectionViewCell {
     updateUI()
   }
   
+  override var isHighlighted: Bool {
+    didSet {
+      if isHighlighted {
+        imageWrapper.backgroundColor = .tkBackgroundSelected
+        imageWrapper.layer.borderColor = UIColor.tkLabelSecondary.cgColor
+      } else {
+        imageWrapper.backgroundColor = .tkBackground
+        imageWrapper.layer.borderColor = UIColor.tkLabelQuarternary.cgColor
+      }
+    }
+  }
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     
