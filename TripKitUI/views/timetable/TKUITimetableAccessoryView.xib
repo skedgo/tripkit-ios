@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -52,26 +52,26 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xph-aj-LvH">
-                    <rect key="frame" x="16" y="40" width="343" height="16"/>
+                    <rect key="frame" x="0.0" y="32" width="375" height="32"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="80" id="plY-mS-Yir"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" priority="999" constant="80" id="plY-mS-Yir"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="xph-aj-LvH" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="-16" id="20R-Bt-oNm"/>
+                <constraint firstItem="xph-aj-LvH" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="20R-Bt-oNm"/>
                 <constraint firstAttribute="trailing" secondItem="ouN-Ng-mBY" secondAttribute="trailing" id="2V4-T6-tyE"/>
                 <constraint firstItem="ouN-Ng-mBY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="63X-O3-IJt"/>
-                <constraint firstItem="xph-aj-LvH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Bok-Iy-XvD"/>
+                <constraint firstItem="xph-aj-LvH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Bok-Iy-XvD"/>
                 <constraint firstAttribute="trailing" secondItem="CuO-gT-c8T" secondAttribute="trailing" constant="16" id="H5m-nm-iHf"/>
                 <constraint firstAttribute="bottom" secondItem="ouN-Ng-mBY" secondAttribute="bottom" id="I7b-lX-cWY"/>
                 <constraint firstItem="CuO-gT-c8T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MAu-K0-7GW"/>
                 <constraint firstItem="CuO-gT-c8T" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Nia-Jp-Y7E"/>
-                <constraint firstItem="ouN-Ng-mBY" firstAttribute="top" secondItem="xph-aj-LvH" secondAttribute="bottom" constant="16" id="ZAU-NC-buK"/>
+                <constraint firstItem="ouN-Ng-mBY" firstAttribute="top" secondItem="xph-aj-LvH" secondAttribute="bottom" constant="8" id="ZAU-NC-buK"/>
                 <constraint firstItem="ouN-Ng-mBY" firstAttribute="top" secondItem="CuO-gT-c8T" secondAttribute="bottom" constant="16" id="y8Z-cl-z3c"/>
-                <constraint firstItem="xph-aj-LvH" firstAttribute="top" secondItem="CuO-gT-c8T" secondAttribute="bottom" constant="16" id="zEK-1r-yOt"/>
+                <constraint firstItem="xph-aj-LvH" firstAttribute="top" secondItem="CuO-gT-c8T" secondAttribute="bottom" constant="8" id="zEK-1r-yOt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">

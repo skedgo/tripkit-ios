@@ -12,7 +12,6 @@ public extension TKUITripOverviewCard {
   
   typealias TripAction = TKUICardAction<TGCard, Trip>
   typealias SegmentAction = TKUICardAction<TKUITripOverviewCard, TKSegment>
-
   
   /// Configurtion of any `TKUITripOverviewCard`. Use this to add custom
   /// actions.

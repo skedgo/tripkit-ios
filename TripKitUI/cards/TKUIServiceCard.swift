@@ -19,6 +19,8 @@ import TGCardViewController
 /// highlights where to get off.
 public class TKUIServiceCard: TGTableCard {
   
+  typealias ServiceCardActionsView = TKUICardActionsView<TKUIServiceCard, EmbarkationPair>
+  
   public static var config = Configuration.empty
   
   private var dataInput: TKUIServiceViewModel.DataInput
@@ -99,7 +101,7 @@ public class TKUIServiceCard: TGTableCard {
     
     if let titleView = self.titleView, let factory = Self.config.serviceActionsFactory {
       let actions = factory(viewModel.embarkationPair)
-      let actionsView = TKUICardActionsView()
+      let actionsView = ServiceCardActionsView()
       actionsView.configure(with: actions, model: viewModel.embarkationPair, card: self)
       titleView.accessoryStack.addArrangedSubview(actionsView)
     }

@@ -45,6 +45,8 @@ class TKUITripsPageCard: TGPageCard {
 
 public class TKUITripOverviewCard: TGTableCard {
   
+  typealias TripOverviewCardActionsView = TKUICardActionsView<TGCard, Trip>
+  
   public static var config = Configuration.empty
   
   private let trip: Trip
@@ -57,6 +59,8 @@ public class TKUITripOverviewCard: TGTableCard {
   private let alternativesTapped = PublishSubject<IndexPath>()
   private let highlighted = PublishSubject<IndexPath>()
   private let isVisible = BehaviorSubject<Bool>(value: false)
+  
+  private weak var tableView: UITableView?
 
   public init(trip: Trip, index: Int? = nil) {
     self.trip = trip
@@ -93,6 +97,8 @@ public class TKUITripOverviewCard: TGTableCard {
 
   override public func didBuild(tableView: UITableView, cardView: TGCardView, headerView: TGHeaderView?) {
     super.didBuild(tableView: tableView, cardView: cardView, headerView: headerView)
+    
+    self.tableView = tableView
     
     tableView.register(TKUISegmentStationaryCell.nib, forCellReuseIdentifier: TKUISegmentStationaryCell.reuseIdentifier)
     tableView.register(TKUISegmentMovingCell.nib, forCellReuseIdentifier: TKUISegmentMovingCell.reuseIdentifier)
@@ -158,20 +164,26 @@ public class TKUITripOverviewCard: TGTableCard {
         (self.mapManager as? TKUITripMapManager)?.updateTrip()
       })
       .disposed(by: disposeBag)
-    
-    if let factory = TKUITripOverviewCard.config.tripActionsFactory {
-      let actions = factory(viewModel.trip)
-      let actionsView = TKUICardActionsView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
-      actionsView.configure(with: actions, model: viewModel.trip, card: self)
-      actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-      tableView.tableHeaderView = actionsView
-    } else {
-      tableView.tableHeaderView = nil
-    }
 
     viewModel.next
       .emit(onNext: { [unowned self] in self.handle($0) })
       .disposed(by: disposeBag)
+  }
+  
+  public override func willAppear(animated: Bool) {
+    super.willAppear(animated: animated)
+    
+    guard
+      let tv = self.tableView,
+      let factory = TKUITripOverviewCard.config.tripActionsFactory,
+      tv.tableHeaderView == nil
+      else { return }
+    
+    let actions = factory(viewModel.trip)
+    let actionsView = TripOverviewCardActionsView(frame: CGRect(x: 0, y: 0, width: tv.frame.width, height: 80))
+    actionsView.configure(with: actions, model: viewModel.trip, card: self)
+    actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+    tv.tableHeaderView = actionsView
   }
   
   public override func didAppear(animated: Bool) {
