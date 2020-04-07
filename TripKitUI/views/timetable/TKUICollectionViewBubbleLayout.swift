@@ -11,7 +11,7 @@
 
 import UIKit
 
-protocol TKUICollectionViewBubbleLayoutDelegate {
+protocol TKUICollectionViewBubbleLayoutDelegate: class {
   func collectionView(_ collectionView: UICollectionView, itemSizeAt indexPath: IndexPath) -> CGSize
 }
 
@@ -22,7 +22,7 @@ class TKUICollectionViewBubbleLayout: UICollectionViewFlowLayout {
   
   private var itemAttributesCache = [UICollectionViewLayoutAttributes]()
   private var contentSize: CGSize = .zero
-  var delegate: TKUICollectionViewBubbleLayoutDelegate?
+  weak var delegate: TKUICollectionViewBubbleLayoutDelegate?
   
   override var collectionViewContentSize: CGSize {
     return contentSize
