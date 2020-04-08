@@ -14,11 +14,11 @@ public class TKUICardActionsView<C, M>: UIView where C: TGCard {
   
   public var showActionTitleInCompactLayout: Bool?
   
-  private var bottomSeparator: UIView?
+  private var separator: UIView?
   
   public var hideSeparator: Bool = false {
     didSet {
-      bottomSeparator?.isHidden = hideSeparator
+      separator?.isHidden = hideSeparator
     }
   }
   
@@ -26,8 +26,6 @@ public class TKUICardActionsView<C, M>: UIView where C: TGCard {
   private var model: M?
   private weak var card: C?
   
-  private var collectionView: UICollectionView?
-  private var collectionViewHeightConstraint: NSLayoutConstraint?
   private var compactLayoutHelper: TKUICardActionsViewLayoutHelper?
   
   public override init(frame: CGRect) {
@@ -58,11 +56,11 @@ public class TKUICardActionsView<C, M>: UIView where C: TGCard {
 
 extension TKUICardActionsView {
   
-  private func useCompactLayout<C, M>(in card: C, for actions: [TKUICardAction<C, M>], with model: M) {
+  private func addSeparator() {
     let separator = UIView()
     separator.backgroundColor = .tkSeparatorSubtle
     addSubview(separator)
-    self.bottomSeparator = separator
+    self.separator = separator
     
     separator.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
@@ -71,20 +69,28 @@ extension TKUICardActionsView {
       separator.trailingAnchor.constraint(equalTo: trailingAnchor),
       separator.heightAnchor.constraint(equalToConstant: 0.5)
     ])
+  }
+  
+  private func useCompactLayout<C, M>(in card: C, for actions: [TKUICardAction<C, M>], with model: M) {
+    addSeparator()
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let layoutHelper = TKUICardActionsViewLayoutHelper(collectionView: collectionView)
     layoutHelper.delegate = self
     self.compactLayoutHelper = layoutHelper
     addSubview(collectionView)
-    self.collectionView = collectionView
     
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    let heightConstraint = collectionView.heightAnchor.constraint(equalToConstant: 100)
-    heightConstraint.priority = UILayoutPriority(999)
-    self.collectionViewHeightConstraint = heightConstraint
+    
+    // We need to give the collection view a height constraint, or
+    // its content won't be loaded properly. This initial height is
+    // liely to be different than the parent view, so to avoid auto
+    // layout warning, we reduce its priority.
+    let collectionViewHeightConstraint = collectionView.heightAnchor.constraint(equalToConstant: 100)
+    collectionViewHeightConstraint.priority = UILayoutPriority(999)
+    
     NSLayoutConstraint.activate([
-        heightConstraint,
+        collectionViewHeightConstraint,
         collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
         collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
         collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
@@ -92,12 +98,20 @@ extension TKUICardActionsView {
       ]
     )
     
+    // Reload the collection view so it has the correct number of
+    // items to calculate its content size.
     collectionView.reloadData()
+    
+    // This causes the collection view to have the right size.
     collectionView.layoutIfNeeded()
-    self.collectionViewHeightConstraint?.constant = collectionView.collectionViewLayout.collectionViewContentSize.height
+    
+    // Now update the height constraint to the proper value
+    collectionViewHeightConstraint.constant = collectionView.collectionViewLayout.collectionViewContentSize.height
   }
   
   private func useExtendedLayout<C, M>(in card: C, for actions: [TKUICardAction<C, M>], with model: M) {
+    addSeparator()
+    
     var previousActionView: UIView?
     
     for (index, action) in actions.enumerated() {
@@ -125,12 +139,7 @@ extension TKUICardActionsView {
       if index == 0 {
         actionView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         actionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
-        if actions.count == 1 {
-          actionView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-          actionView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75).isActive = true
-        } else {
-          actionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        }
+        actionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
       } else {
         guard let previous = previousActionView else { preconditionFailure() }
         actionView.leadingAnchor.constraint(equalTo: previous.trailingAnchor, constant: 8).isActive = true

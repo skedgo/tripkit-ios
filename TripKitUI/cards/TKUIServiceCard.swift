@@ -103,6 +103,7 @@ public class TKUIServiceCard: TGTableCard {
       let actions = factory(viewModel.embarkationPair)
       let actionsView = ServiceCardActionsView()
       actionsView.configure(with: actions, model: viewModel.embarkationPair, card: self)
+      actionsView.hideSeparator = true
       titleView.accessoryStack.addArrangedSubview(actionsView)
     }
 
