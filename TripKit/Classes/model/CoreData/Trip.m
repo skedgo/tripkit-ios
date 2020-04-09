@@ -40,7 +40,6 @@ typedef NSUInteger SGTripFlag;
 @dynamic budgetPoints;
 @dynamic totalScore;
 @dynamic data;
-@dynamic toDelete;
 
 @dynamic representedGroup;
 @dynamic tripGroup;
@@ -74,11 +73,6 @@ typedef NSUInteger SGTripFlag;
       return existing;
   }
   return nil;
-}
-
-- (void)remove
-{
-  self.toDelete = YES;
 }
 
 - (BOOL)isValid

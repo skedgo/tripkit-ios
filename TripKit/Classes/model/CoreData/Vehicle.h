@@ -27,7 +27,6 @@ NS_ASSUME_NONNULL_BEGIN;
 @property (nonatomic, retain, nullable) NSString * label;
 @property (nonatomic, retain, nullable) NSString * identifier;
 @property (nonatomic, retain, nullable) NSString * icon;
-@property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain, nullable) Service *service;
 @property (nonatomic, retain) NSSet<Service *> *serviceAlternatives;
 @property (nonatomic, retain, nullable) SegmentReference *segment;

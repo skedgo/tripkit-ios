@@ -38,7 +38,6 @@ typedef NSUInteger SGServiceFlag;
 @dynamic number;
 @dynamic operatorName;
 @dynamic flags;
-@dynamic toDelete;
 @dynamic continuation, progenitor;
 @dynamic segments;
 @dynamic shape;
@@ -49,11 +48,6 @@ typedef NSUInteger SGServiceFlag;
 @synthesize sortedVisits = _sortedVisits;
 @synthesize alerts = _alerts;
 @synthesize isRequestingServiceData;
-
-- (void)remove
-{
-  self.toDelete = YES;
-}
 
 - (Alert *)sampleAlert
 {

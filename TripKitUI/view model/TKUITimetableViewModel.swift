@@ -231,10 +231,10 @@ extension StopLocation {
       return stopLocation
     } else {
       return StopLocation.fetchOrInsertStop(
-        forStopCode: stop.stopCode,
+        stopCode: stop.stopCode,
         modeInfo: stop.modeInfo,
-        atLocation: TKNamedCoordinate.namedCoordinate(for: stop),
-        intoTripKitContext: TripKit.shared.tripKitContext
+        at: TKNamedCoordinate.namedCoordinate(for: stop),
+        in: TripKit.shared.tripKitContext
       )
     }
   }

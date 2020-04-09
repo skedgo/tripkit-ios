@@ -46,7 +46,6 @@
 @property (nonatomic, retain, nonnull) NSNumber * totalCalories;
 @property (nonatomic, retain, nonnull) NSNumber * totalScore;
 @property (nonatomic, retain, nullable) NSNumber * budgetPoints;
-@property (nonatomic, assign) BOOL toDelete;
 
 /// :nodoc:
 @property (nonatomic, retain, nonnull) NSSet *segmentReferences;
@@ -59,8 +58,6 @@
 
 + (nullable Trip *)findSimilarTripTo:(nonnull Trip *)trip
                               inList:(nonnull id<NSFastEnumeration>)trips;
-
-- (void)remove;
 
 #pragma mark - Trip properties
 

@@ -32,6 +32,11 @@
 
 #pragma mark - Fetch
 
+- (NSArray *)fetchObjectsForEntityClass:(Class)entityClass
+{
+  return [self fetchObjectsForEntityClass:entityClass withFetchRequest:nil];
+}
+
 - (NSArray *)fetchObjectsForEntityName:(NSString *)entityName
 											withFetchRequest:(TKFetchRequestBlock)requestBlock
 {

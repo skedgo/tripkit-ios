@@ -148,7 +148,7 @@ extension Shape {
   @objc(fetchTravelledShapeForTemplate:atStart:)
   public static func fetchTravelledShape(for template: SegmentTemplate, atStart: Bool) -> Shape? {
     
-    let predicate = NSPredicate(format: "toDelete = NO and template = %@ AND travelled = 1", template)
+    let predicate = NSPredicate(format: "template = %@ AND travelled = 1", template)
     let sorter = NSSortDescriptor(key: "index", ascending: atStart)
     
     let shapes = template.managedObjectContext?.fetchObjects(Shape.self, sortDescriptors: [sorter], predicate: predicate, relationshipKeyPathsForPrefetching: nil, fetchLimit: 1)

@@ -27,7 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber * timeType;
 @property (nonatomic, assign) BOOL expandForFavorite;
 @property (nonatomic, retain) NSArray<NSString *> *excludedStops;
-@property (nonatomic, assign) BOOL toDelete;
 
 @property (nonatomic, strong, nullable) NSSet <TripGroup *> * tripGroups;
 
@@ -37,8 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) TripRequest *replacement;
 @property (nonatomic, assign) TKTripGroupVisibility defaultVisibility;
-
-- (void)remove;
 
 - (BOOL)resultsInSameQueryAs:(TripRequest *)other;
 

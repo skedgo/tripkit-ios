@@ -30,7 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSString * number;
 @property (nonatomic, retain, nullable) NSString * operatorName;
 @property (nonatomic, retain, nullable) NSNumber * frequency;
-@property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain, nullable) Service *continuation;
 @property (nonatomic, retain, nullable) Service *progenitor;
 @property (nonatomic, retain, nullable) NSSet<SegmentReference*>* segments;
@@ -55,9 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray<StopVisits *> *sortedVisits;
 @property (nonatomic, copy, nullable) NSString *lineName;
 @property (nonatomic, copy, nullable) NSString *direction;
-
-/// :nodoc:
-- (void)remove;
 
 - (nullable Alert *)sampleAlert;
 

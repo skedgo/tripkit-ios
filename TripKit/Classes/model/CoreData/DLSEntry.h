@@ -53,15 +53,6 @@ NS_ASSUME_NONNULL_BEGIN
                                         limit:(NSUInteger)limit
                              inTripKitContext:(NSManagedObjectContext *)context;
 
-/**
- Deletes all the entries from CoreData that have a matching pair identifier
- 
- @param pairIdentifiers Set of pair identifier string that should get deleted
- @param context         Managed object context to delete the entries in
- */
-+ (void)clearEntriesWithIdentifiers:(NSSet<NSString *> *)pairIdentifiers
-                   inTripKitContext:(NSManagedObjectContext *)context;
-
 + (void)clearAllEntriesInTripKitContext:(NSManagedObjectContext *)context;
 
 @end

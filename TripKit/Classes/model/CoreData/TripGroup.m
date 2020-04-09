@@ -30,7 +30,6 @@ typedef enum {
 @dynamic flags;
 @dynamic sourcesRaw;
 @dynamic visibilityRaw;
-@dynamic toDelete;
 @dynamic request;
 @dynamic trips;
 @dynamic visibleTrip;

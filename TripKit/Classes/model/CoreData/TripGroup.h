@@ -35,9 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// :nodoc:
 @property (nonatomic, strong) NSNumber * visibilityRaw;
 
-/// :nodoc:
-@property (nonatomic, assign) BOOL toDelete;
-
 @property (nonatomic, strong, null_resettable) TripRequest *request;
 @property (nonatomic, strong) NSSet<Trip *> *trips;
 @property (nonatomic, strong, nullable) Trip *visibleTrip;
