@@ -30,6 +30,7 @@ extension StopLocation {
     /// :nodoc:
     @NSManaged public var wheelchairAccessible: NSNumber?
 
+    /// Zone ID of this stop, as defined by GTFS. Useful for ticketing calculaations.
     @NSManaged public var zoneID: String?
     @NSManaged public var children: Set<StopLocation>?
     @NSManaged public var endVisits: Set<StopVisits>?

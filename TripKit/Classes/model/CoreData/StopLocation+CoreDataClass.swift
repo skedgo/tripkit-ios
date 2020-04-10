@@ -13,11 +13,7 @@ import CoreData
 @objc(StopLocation)
 public class StopLocation: NSManagedObject {
 
-  /// :nodoc:
   var lastStopVisit: StopVisits?
-  
-  /// :nodoc:
-  var lastEarliestDate: Date?
   
   // MARK: - Fetcher
   
@@ -68,8 +64,9 @@ public class StopLocation: NSManagedObject {
     }
   }
   
+  /// :nodoc:
   @objc(insertStopForStopCode:modeInfo:atLocation:intoTripKitContext:)
-  static func insertStop(stopCode: String, modeInfo: TKModeInfo? = nil, at location: TKNamedCoordinate? = nil, in context: NSManagedObjectContext) -> StopLocation {
+  public static func insertStop(stopCode: String, modeInfo: TKModeInfo? = nil, at location: TKNamedCoordinate? = nil, in context: NSManagedObjectContext) -> StopLocation {
     let stop = StopLocation(context: context)
     stop.name = location?.title
     stop.location = location
