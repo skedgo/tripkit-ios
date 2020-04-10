@@ -17,28 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Represents a public transport service
 @interface Service : NSManagedObject
 
-#pragma mark - CoreData fields
-
-@property (nonatomic, retain) NSString * code;
-@property (nonatomic, retain, nullable) id color;
-
-/// :nodoc:
-@property (nonatomic, retain) NSNumber * flags;
-
-@property (nonatomic, retain, nullable) TKModeInfo * modeInfo;
-@property (nonatomic, retain, nullable) NSString * name;
-@property (nonatomic, retain, nullable) NSString * number;
-@property (nonatomic, retain, nullable) NSString * operatorName;
-@property (nonatomic, retain, nullable) NSNumber * frequency;
-@property (nonatomic, retain, nullable) Service *continuation;
-@property (nonatomic, retain, nullable) Service *progenitor;
-@property (nonatomic, retain, nullable) NSSet<SegmentReference*>* segments;
-@property (nonatomic, retain, nullable) Shape *shape;
-@property (nonatomic, retain, nullable) Vehicle *vehicle;
-@property (nonatomic, retain, nullable) NSSet<Vehicle*>* vehicleAlternatives;
-@property (nonatomic, retain, nullable) NSSet<StopVisits*>* visits;
-@property (nonatomic, retain, nullable) NSArray<NSNumber *> *alertHashCodes;
-
 #pragma mark - Instance fields + methods
 
 @property (nonatomic, assign, getter = isRealTime) BOOL realTime;

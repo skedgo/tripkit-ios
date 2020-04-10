@@ -92,7 +92,7 @@ extension Trip {
 extension Trip: TKTrip {
   
   @objc public func mainSegment() -> TKTripSegment {
-    let hash = mainSegmentHashCode.intValue
+    let hash = mainSegmentHashCode
     if hash > 0 {
       for segment in segments where segment.templateHashCode == hash {
         return segment

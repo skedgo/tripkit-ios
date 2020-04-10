@@ -24,7 +24,7 @@ extension TKUIDepartureCellContent {
       accessibility = accessibility.combine(with: atEnd)
     }
     
-    let serviceColor = service.color as? UIColor
+    let serviceColor = service.color
     return TKUIDepartureCellContent(
       placeholderImage: service.modeImage(for: .listMainMode),
       imageURL: service.modeImageURL(for: .listMainMode),

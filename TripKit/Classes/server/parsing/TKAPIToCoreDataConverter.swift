@@ -29,6 +29,7 @@ extension StopLocation {
     
     stopCode  = model.code
     shortName = model.shortName
+    zoneID = model.zoneID
     
     if let popularity = model.popularity {
       sortScore = NSNumber(value: popularity)

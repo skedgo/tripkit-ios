@@ -117,10 +117,10 @@ extension Trip {
     var entry: [String: Any] = [
       "selected": tripGroup == request.preferredGroup,
       "visibility": tripGroup.visibility.apiString,
-      "score": totalScore.floatValue,
-      "hassle": totalHassle.floatValue,
-      "carbon": totalCarbon.floatValue,
-      "calories": totalCalories.floatValue,
+      "score": totalScore,
+      "hassle": totalHassle,
+      "carbon": totalCarbon,
+      "calories": totalCalories,
       "arrivalTime": arrivalTime.timeIntervalSince1970,
       "departureTime": departureTime.timeIntervalSince1970,
       "segments": (self as TKTrip).segments(with: .inDetails).compactMap { ($0 as? TKSegment)?.choiceSetEntry }

@@ -211,6 +211,10 @@
 		3A73A477243F767700EB74E5 /* StopLocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46E243F767600EB74E5 /* StopLocation+CoreDataProperties.swift */; };
 		3A73A478243F767700EB74E5 /* StopLocation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46C243F767600EB74E5 /* StopLocation+CoreDataClass.swift */; };
 		3A73A479243F767700EB74E5 /* StopLocation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46C243F767600EB74E5 /* StopLocation+CoreDataClass.swift */; };
+		3A73A480243F902300EB74E5 /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46A243F767500EB74E5 /* Trip+CoreDataProperties.swift */; };
+		3A73A481243F902400EB74E5 /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46A243F767500EB74E5 /* Trip+CoreDataProperties.swift */; };
+		3A73A488244052E300EB74E5 /* Service+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46D243F767600EB74E5 /* Service+CoreDataProperties.swift */; };
+		3A73A489244052E300EB74E5 /* Service+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46D243F767600EB74E5 /* Service+CoreDataProperties.swift */; };
 		3A7636F921F9F04700639155 /* TKUIAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636F821F9F04700639155 /* TKUIAnnotations.swift */; };
 		3A7636FB21F9F28200639155 /* TKUIAnnotations+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */; };
 		3A77B74E22F8815D0082CCAF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A77B74C22F8815D0082CCAF /* InfoPlist.strings */; };
@@ -1093,7 +1097,9 @@
 		3A7377CC23226915004C91CC /* TKUIExtendedActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIExtendedActionView.swift; sourceTree = "<group>"; };
 		3A7377CE23226921004C91CC /* TKUIExtendedActionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIExtendedActionView.xib; sourceTree = "<group>"; };
 		3A73A469243F61E800EB74E5 /* 7-CleanUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "7-CleanUp.xcdatamodel"; sourceTree = "<group>"; };
+		3A73A46A243F767500EB74E5 /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Trip+CoreDataProperties.swift"; path = "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKit/Classes/model/CoreData/Trip+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		3A73A46C243F767600EB74E5 /* StopLocation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StopLocation+CoreDataClass.swift"; path = "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKit/Classes/model/CoreData/StopLocation+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		3A73A46D243F767600EB74E5 /* Service+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Service+CoreDataProperties.swift"; path = "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKit/Classes/model/CoreData/Service+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		3A73A46E243F767600EB74E5 /* StopLocation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StopLocation+CoreDataProperties.swift"; path = "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKit/Classes/model/CoreData/StopLocation+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		3A7636F821F9F04700639155 /* TKUIAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAnnotations.swift; sourceTree = "<group>"; };
 		3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIAnnotations+TripKit.swift"; sourceTree = "<group>"; };
@@ -2240,6 +2246,7 @@
 				3AB6C66E1D1CD08E0089F687 /* Service.h */,
 				3AB6C66F1D1CD08E0089F687 /* Service.m */,
 				3AFFAE0B1F06BCF200147990 /* Service.swift */,
+				3A73A46D243F767600EB74E5 /* Service+CoreDataProperties.swift */,
 				3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */,
 				3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */,
 				3AFFADFF1F06B1D000147990 /* StopLocation.swift */,
@@ -2251,6 +2258,7 @@
 				3AB6C6761D1CD08E0089F687 /* Trip.h */,
 				3AB6C6771D1CD08E0089F687 /* Trip.m */,
 				3AFFAC5E1F068B6100147990 /* Trip.swift */,
+				3A73A46A243F767500EB74E5 /* Trip+CoreDataProperties.swift */,
 				3AB6C6781D1CD08E0089F687 /* TripGroup.h */,
 				3AB6C6791D1CD08E0089F687 /* TripGroup.m */,
 				3A84F00D1F77021200B2F9A0 /* TripGroup.swift */,
@@ -3252,6 +3260,7 @@
 				3ABBDA1F2032132400205042 /* TKRouter.m in Sources */,
 				3ABBDAE82032135A00205042 /* NSUserDefaults+SharedDefaults.m in Sources */,
 				3ABBDA242032132400205042 /* TKLocationProvider.swift in Sources */,
+				3A73A481243F902400EB74E5 /* Trip+CoreDataProperties.swift in Sources */,
 				3ABBDA572032132D00205042 /* TripRequest.m in Sources */,
 				3ABBDA752032133900205042 /* TKPriceTimeTripClassifier.m in Sources */,
 				3ABBDAE92032135A00205042 /* NSUserDefaults+SharedDefaults.swift in Sources */,
@@ -3295,6 +3304,7 @@
 				3ABBDA142032131E00205042 /* TKConstants.m in Sources */,
 				3ABBDA8F2032134000205042 /* TKVehicular.m in Sources */,
 				3ABBDA282032132400205042 /* TKQuickBookingHelper.swift in Sources */,
+				3A73A489244052E300EB74E5 /* Service+CoreDataProperties.swift in Sources */,
 				3ABBDAC92032135400205042 /* TKCrossPlatform.swift in Sources */,
 				3ABBDA942032134900205042 /* CLLocation+DecodePolylineString.m in Sources */,
 				3ABBDABD2032135400205042 /* TKNamedCoordinate.swift in Sources */,
@@ -3648,6 +3658,7 @@
 				3AFFABD91F06854F00147990 /* TKRoutePolyline.m in Sources */,
 				3AFFABAD1F06854F00147990 /* TKLocationHelper.m in Sources */,
 				3AF94B201F0BFB9E00500940 /* Shape+CoreDataProperties.swift in Sources */,
+				3A73A480243F902300EB74E5 /* Trip+CoreDataProperties.swift in Sources */,
 				3AFD397D20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift in Sources */,
 				3AFFABAB1F06854F00147990 /* TKSortableAnnotation.swift in Sources */,
 				3A3C9BA91F751FF300C8D476 /* DeparturesAPIModel.swift in Sources */,
@@ -3690,6 +3701,7 @@
 				3AC17E9D207F548E0006794F /* TKImage+TripKit.swift in Sources */,
 				3A0D46BB1FAD0EBA00B6E209 /* TKJSONSanitizer.swift in Sources */,
 				3AF3F2621E04CA7C00A2EEC6 /* TKBookingTypes.swift in Sources */,
+				3A73A488244052E300EB74E5 /* Service+CoreDataProperties.swift in Sources */,
 				3A922062205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift in Sources */,
 				3AB6C6FC1D1CD08E0089F687 /* TKBuzzInfoProvider.swift in Sources */,
 				3AA03E741F0BC9DB00C6B337 /* TKNamedCoordinate+Attribution.swift in Sources */,

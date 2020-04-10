@@ -79,7 +79,7 @@ extension TKUIServiceViewModel {
     fileprivate let visit: StopVisits
     let isVisited: Bool
     
-    var color: UIColor { (visit.service.color as? UIColor) ?? .black }
+    var color: UIColor { visit.service.color ?? .black }
 
     init(visit: StopVisits, embarkation: StopVisits, disembarkation: StopVisits?) {
       self.visit = visit

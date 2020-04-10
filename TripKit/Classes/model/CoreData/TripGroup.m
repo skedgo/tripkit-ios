@@ -72,7 +72,7 @@ typedef enum {
       continue;
     }
     
-    float score = [[trip totalScore] floatValue];
+    float score = [trip totalScore];
     if (score < bestScore) {
       bestTrip = trip;
       bestScore = score;

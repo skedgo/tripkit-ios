@@ -30,21 +30,6 @@ typedef NSUInteger SGServiceFlag;
 
 @implementation Service
 
-@dynamic code;
-@dynamic color;
-@dynamic frequency;
-@dynamic modeInfo;
-@dynamic name;
-@dynamic number;
-@dynamic operatorName;
-@dynamic flags;
-@dynamic continuation, progenitor;
-@dynamic segments;
-@dynamic shape;
-@dynamic vehicle, vehicleAlternatives;
-@dynamic visits;
-@dynamic alertHashCodes;
-
 @synthesize sortedVisits = _sortedVisits;
 @synthesize alerts = _alerts;
 @synthesize isRequestingServiceData;
@@ -61,7 +46,7 @@ typedef NSUInteger SGServiceFlag;
 
 - (BOOL)isRealTime
 {
-  return 0 != (self.flags.integerValue & SGServiceFlagRealTime);
+  return 0 != (self.flags & SGServiceFlagRealTime);
 }
 
 - (void)setRealTime:(BOOL)realTime
@@ -71,7 +56,7 @@ typedef NSUInteger SGServiceFlag;
 
 - (BOOL)isRealTimeCapable
 {
-  return 0 != (self.flags.integerValue & SGServiceFlagRealTimeCapable);
+  return 0 != (self.flags & SGServiceFlagRealTimeCapable);
 }
 
 - (void)setRealTimeCapable:(BOOL)realTimeCapable
@@ -81,7 +66,7 @@ typedef NSUInteger SGServiceFlag;
 
 - (BOOL)isCanceled
 {
-  return 0 != (self.flags.integerValue & SGServiceFlagCanceled);
+  return 0 != (self.flags & SGServiceFlagCanceled);
 }
 
 - (void)setCanceled:(BOOL)canceled
@@ -91,7 +76,7 @@ typedef NSUInteger SGServiceFlag;
 
 - (BOOL)isBicycleAccessible
 {
-  return 0 != (self.flags.integerValue & SGServiceFlagBicycleAccessible);
+  return 0 != (self.flags & SGServiceFlagBicycleAccessible);
 }
 
 - (void)setBicycleAccessible:(BOOL)bicycleAccessible
@@ -101,7 +86,7 @@ typedef NSUInteger SGServiceFlag;
 
 - (BOOL)isWheelchairAccessible
 {
-  return 0 != (self.flags.integerValue & SGServiceFlagWheelchairAccessible);
+  return 0 != (self.flags & SGServiceFlagWheelchairAccessible);
 }
 
 - (void)setWheelchairAccessible:(BOOL)wheelchairAccessible
@@ -114,7 +99,7 @@ typedef NSUInteger SGServiceFlag;
 
 - (BOOL)isWheelchairInaccessible
 {
-  return 0 != (self.flags.integerValue & SGServiceFlagWheelchairInaccessible);
+  return 0 != (self.flags & SGServiceFlagWheelchairInaccessible);
 }
 
 - (void)setWheelchairInaccessible:(BOOL)wheelchairInaccessible
@@ -294,11 +279,11 @@ typedef NSUInteger SGServiceFlag;
 
 - (void)setFlag:(SGServiceFlag)flag to:(BOOL)value
 {
-	NSInteger flags = self.flags.integerValue;
+	NSInteger flags = self.flags;
 	if (value) {
-		self.flags = @(flags | flag);
+		self.flags = flags | flag;
 	} else {
-		self.flags = @(flags & ~flag);
+		self.flags = flags & ~flag;
 	}
 }
 

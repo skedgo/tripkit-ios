@@ -36,8 +36,6 @@ NS_ASSUME_NONNULL_BEGIN;
 
 @property (nonatomic, assign) BOOL displayAsPrimary;
 
-- (void)remove;
-
 - (void)setSubtitle:(nullable NSString *)title;
 
 @end

@@ -74,10 +74,10 @@
     <entity name="Service" representedClassName="Service" syncable="YES">
         <attribute name="alertHashCodes" optional="YES" attributeType="Transformable"/>
         <attribute name="code" attributeType="String" defaultValueString="NO_CODE"/>
-        <attribute name="color" optional="YES" attributeType="Transformable"/>
-        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="color" optional="YES" attributeType="Transformable" customClassName="TKColor"/>
+        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="frequency" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
-        <attribute name="modeInfo" optional="YES" attributeType="Transformable"/>
+        <attribute name="modeInfo" optional="YES" attributeType="Transformable" customClassName="TKModeInfo"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="String"/>
         <attribute name="operatorID" optional="YES" attributeType="String"/>
@@ -164,31 +164,31 @@
         </fetchIndex>
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES">
-        <attribute name="arrivalTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="arrivalTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="budgetPoints" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
         <attribute name="currencyCode" optional="YES" attributeType="String"/>
         <attribute name="data" optional="YES" attributeType="Transformable"/>
-        <attribute name="departureTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="departureTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="logURLString" optional="YES" attributeType="String"/>
-        <attribute name="mainSegmentHashCode" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO"/>
-        <attribute name="minutes" attributeType="Integer 16" usesScalarValueType="NO"/>
+        <attribute name="mainSegmentHashCode" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="minutes" attributeType="Integer 16" usesScalarValueType="YES"/>
         <attribute name="plannedURLString" optional="YES" attributeType="String"/>
         <attribute name="progressURLString" optional="YES" attributeType="String"/>
         <attribute name="saveURLString" optional="YES" attributeType="String"/>
         <attribute name="shareURLString" optional="YES" attributeType="String"/>
         <attribute name="temporaryURLString" optional="YES" attributeType="String"/>
-        <attribute name="totalCalories" optional="YES" attributeType="Float" usesScalarValueType="NO"/>
-        <attribute name="totalCarbon" optional="YES" attributeType="Float" usesScalarValueType="NO"/>
-        <attribute name="totalHassle" optional="YES" attributeType="Float" usesScalarValueType="NO"/>
+        <attribute name="totalCalories" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalCarbon" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalHassle" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="totalPrice" optional="YES" attributeType="Float" usesScalarValueType="NO"/>
         <attribute name="totalPriceUSD" optional="YES" attributeType="Float" usesScalarValueType="NO"/>
-        <attribute name="totalScore" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
-        <attribute name="totalWalking" optional="YES" attributeType="Float" usesScalarValueType="NO"/>
+        <attribute name="totalScore" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalWalking" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="updateURLString" optional="YES" attributeType="String"/>
         <relationship name="representedGroup" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="TripGroup" inverseName="visibleTrip" inverseEntity="TripGroup"/>
         <relationship name="segmentReferences" toMany="YES" minCount="1" deletionRule="Cascade" destinationEntity="SegmentReference" inverseName="trip" inverseEntity="SegmentReference"/>
-        <relationship name="tripGroup" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TripGroup" inverseName="trips" inverseEntity="TripGroup"/>
+        <relationship name="tripGroup" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TripGroup" inverseName="trips" inverseEntity="TripGroup"/>
         <fetchIndex name="byArrivalTimeIndex">
             <fetchIndexElement property="arrivalTime" type="Binary" order="ascending"/>
         </fetchIndex>

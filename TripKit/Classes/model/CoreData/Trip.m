@@ -27,25 +27,6 @@ typedef NSUInteger SGTripFlag;
 
 @implementation Trip
 
-@dynamic arrivalTime;
-@dynamic departureTime;
-@dynamic flags;
-@dynamic mainSegmentHashCode;
-@dynamic minutes;
-@dynamic saveURLString, shareURLString, temporaryURLString;
-@dynamic updateURLString, progressURLString;
-@dynamic plannedURLString, logURLString;
-@dynamic totalCalories, totalCarbon, totalHassle, totalPrice, totalWalking, totalPriceUSD;
-@dynamic currencySymbol;
-@dynamic budgetPoints;
-@dynamic totalScore;
-@dynamic data;
-
-@dynamic representedGroup;
-@dynamic tripGroup;
-@dynamic tripTemplate;
-@dynamic segmentReferences;
-
 @synthesize usedModeIdentifiers = _usedModeIdentifiers;
 @synthesize sortedSegments = _sortedSegments;
 @synthesize hasReminder;
@@ -68,7 +49,7 @@ typedef NSUInteger SGTripFlag;
         && fabs([self percentThisHigher:trip.totalHassle than:existing.totalHassle]) < costDifference
         && (!trip.totalPrice
             || !existing.totalPrice
-            || fabs([self percentThisHigher:trip.totalPrice than:existing.totalPrice]) < costDifference)
+            || fabs([self percentThisHigher:trip.totalPrice.doubleValue than:existing.totalPrice.doubleValue]) < costDifference)
         )
       return existing;
   }
@@ -229,12 +210,13 @@ typedef NSUInteger SGTripFlag;
     }
   }
   [output appendString:@"; "];
+
+#warning TODO: Fix this
+//  if (self.totalPrice) {
+//    [output appendFormat:@"%@%.2f, ", self.currencySymbol, self.totalPrice.floatValue];
+//  }
   
-  if (self.totalPrice) {
-    [output appendFormat:@"%@%.2f, ", self.currencySymbol, self.totalPrice.floatValue];
-  }
-  
-  [output appendFormat:@"%@m, %.0fCal, %.1fkg, %.0fh => %.2f", [self calculateDuration], self.totalCalories.floatValue, self.totalCarbon.floatValue, self.totalHassle.floatValue, self.totalScore.floatValue];
+  [output appendFormat:@"%@m, %.0fCal, %.1fkg, %.0fh => %.2f", [self calculateDuration], self.totalCalories, self.totalCarbon, self.totalHassle, self.totalScore];
   
   return output;
 }
@@ -352,8 +334,8 @@ typedef NSUInteger SGTripFlag;
 
 - (NSNumber *)calculateDuration
 {
-  self.minutes = @([TKObjcDateHelper minutesForStart:self.departureTime end:self.arrivalTime]);
-  return self.minutes;
+  self.minutes = [TKObjcDateHelper minutesForStart:self.departureTime end:self.arrivalTime];
+  return @(self.minutes);
 }
 
 - (void)setShowNoVehicleUUIDAsLift:(BOOL)showNoVehicleUUIDAsLift
@@ -363,7 +345,7 @@ typedef NSUInteger SGTripFlag;
 
 - (BOOL)showNoVehicleUUIDAsLift
 {
-	return 0 != (self.flags.integerValue & SGTripFlagShowNoVehicleUUIDAsLift);
+	return 0 != (self.flags & SGTripFlagShowNoVehicleUUIDAsLift);
 }
 
 - (void)setDepartureTimeIsFixed:(BOOL)departureTimeIsFixed
@@ -373,7 +355,7 @@ typedef NSUInteger SGTripFlag;
 
 - (BOOL)departureTimeIsFixed
 {
-	return 0 != (self.flags.integerValue & SGTripFlagHasFixedDeparture);
+	return 0 != (self.flags & SGTripFlagHasFixedDeparture);
 }
 
 - (void)setMissedBookingWindow:(BOOL)missedBookingWindow
@@ -383,7 +365,7 @@ typedef NSUInteger SGTripFlag;
 
 - (BOOL)missedBookingWindow
 {
-  return 0 != (self.flags.integerValue & SGTripFlagBookingWindowMissed);
+  return 0 != (self.flags & SGTripFlagBookingWindowMissed);
 }
 
 - (void)setIsCanceled:(BOOL)isCanceled
@@ -393,7 +375,7 @@ typedef NSUInteger SGTripFlag;
 
 - (BOOL)isCanceled
 {
-  return 0 != (self.flags.integerValue & SGTripFlagIsCanceled);
+  return 0 != (self.flags & SGTripFlagIsCanceled);
 }
 
 
@@ -647,11 +629,11 @@ typedef NSUInteger SGTripFlag;
       values[@(TKTripCostTypeDuration)] = durationString;
     }
   }
-  values[@(TKTripCostTypeCalories)] = [TKStyleManager exerciseStringForCalories: self.totalCalories.doubleValue];
-  values[@(TKTripCostTypeCarbon)]   = [self.totalCarbon toCarbonString];
-  if (self.totalPrice) {
-    values[@(TKTripCostTypePrice)]  = [self.totalPrice toMoneyString:[self currencySymbol]];
-  }
+  values[@(TKTripCostTypeCalories)] = [TKStyleManager exerciseStringForCalories: self.totalCalories];
+  values[@(TKTripCostTypeCarbon)]   = [@(self.totalCarbon) toCarbonString];
+//  if (self.totalPrice) {
+//    values[@(TKTripCostTypePrice)]  = [self.totalPrice toMoneyString:[self currencySymbol]];
+//  }
   return values;
 }
 
@@ -660,22 +642,22 @@ typedef NSUInteger SGTripFlag;
 
 - (void)setFlag:(SGTripFlag)flag to:(BOOL)value
 {
-	SGTripFlag flags = (SGTripFlag) self.flags.integerValue;
+	SGTripFlag flags = (SGTripFlag) self.flags;
 	if (value) {
-		self.flags = @(flags | flag);
+		self.flags = flags | flag;
 	} else {
-		self.flags = @(flags & ~flag);
+		self.flags = flags & ~flag;
 	}
 }
 
-+ (double)percentThisHigher:(NSNumber *)this than:(NSNumber*)that
++ (double)percentThisHigher:(double)this than:(double)that
 {
-  if (this.doubleValue < 0.0001)
+  if (this < 0.0001)
     return 0.0;
-  if (that.doubleValue < 0.0001)
+  if (that < 0.0001)
     return 1.0;
   
-  return 1.0 - (this.doubleValue / that.doubleValue);
+  return 1.0 - (this / that);
 }
 
 
