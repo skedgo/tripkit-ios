@@ -346,6 +346,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           reference.arrivalPlatform = refDict[@"endPlatform"];
           reference.bicycleAccessible = [refDict[@"bicycleAccessible"] boolValue];
 
+          [reference _updateTicketWithDictionary: refDict[@"ticket"]];
           [reference _setWheelchairAccessibility:refDict[@"wheelchairAccessible"]];
           
           if (refDict[@"timetableStartTime"]) {
