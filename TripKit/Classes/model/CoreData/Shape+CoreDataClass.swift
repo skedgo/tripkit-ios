@@ -171,7 +171,7 @@ extension Shape: TKDisplayableRoute {
     }
     
     if let service = services?.anyObject() as? Service,
-      let color = service.color as? TKColor {
+      let color = service.color {
       return color
     }
     

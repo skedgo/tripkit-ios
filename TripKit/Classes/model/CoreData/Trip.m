@@ -211,10 +211,9 @@ typedef NSUInteger SGTripFlag;
   }
   [output appendString:@"; "];
 
-#warning TODO: Fix this
-//  if (self.totalPrice) {
-//    [output appendFormat:@"%@%.2f, ", self.currencySymbol, self.totalPrice.floatValue];
-//  }
+  if (self.totalPrice && self.currencyCode) {
+    [output appendFormat:@"%@, ", [self.totalPrice toMoneyStringWithCurrencyCode: self.currencyCode]];
+  }
   
   [output appendFormat:@"%@m, %.0fCal, %.1fkg, %.0fh => %.2f", [self calculateDuration], self.totalCalories, self.totalCarbon, self.totalHassle, self.totalScore];
   
