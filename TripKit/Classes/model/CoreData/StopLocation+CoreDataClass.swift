@@ -21,8 +21,9 @@ public class StopLocation: NSManagedObject {
   
   // MARK: - Fetcher
   
+  /// :nodoc:
   @objc(fetchStopForStopCode:inRegionNamed:requireCoordinate:inTripKitContext:)
-  static func fetchStop(stopCode: String, inRegion regionName: String?, requireCoordinate: Bool, in context: NSManagedObjectContext) -> StopLocation? {
+  public static func fetchStop(stopCode: String, inRegion regionName: String?, requireCoordinate: Bool, in context: NSManagedObjectContext) -> StopLocation? {
     guard let regionName = regionName else { return nil }
     
     let predicate = requireCoordinate
@@ -43,6 +44,7 @@ public class StopLocation: NSManagedObject {
     return stop
   }
 
+  /// :nodoc:
   @objc(fetchOrInsertStopForStopCode:modeInfo:atLocation:intoTripKitContext:)
   public static func fetchOrInsertStop(stopCode: String, modeInfo: TKModeInfo? = nil, at location: TKNamedCoordinate? = nil, in context: NSManagedObjectContext) -> StopLocation {
     var stop: StopLocation?
@@ -83,6 +85,7 @@ public class StopLocation: NSManagedObject {
     return StopVisits.departuresPredicate(forStops: stops, from: date, filter: self.filter)
   }
   
+  /// Stops to for displaying a timetable for this stop – includes its children
   public func stopsToMatchTo() -> [StopLocation] {
     if let children = children, children.count > 0 {
       return Array(children)
@@ -91,6 +94,7 @@ public class StopLocation: NSManagedObject {
     }
   }
   
+  /// Deletes all `StopVisits` associated with this stop, including its children
   public func clearVisits() {
     guard let context = managedObjectContext else { return }
     
