@@ -261,7 +261,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.totalScore           = [tripDict[@"weightedScore"] floatValue];
       trip.totalPrice           = tripDict[@"moneyCost"]            ?: trip.totalPrice;
       trip.totalPriceUSD        = tripDict[@"moneyUSDCost"]         ?: trip.totalPriceUSD;
-      trip.currencyCode         = tripDict[@"currencyCode"]         ?: trip.currencyCode;
+      trip.currencyCode         = tripDict[@"currency"]             ?: trip.currencyCode;
       trip.budgetPoints         = tripDict[@"budgetPoints"]         ?: trip.budgetPoints;
       trip.saveURLString        = tripDict[@"saveURL"]              ?: trip.saveURLString;
       trip.shareURLString       = tripDict[@"shareURL"]             ?: trip.shareURLString;

@@ -631,9 +631,9 @@ typedef NSUInteger SGTripFlag;
   }
   values[@(TKTripCostTypeCalories)] = [TKStyleManager exerciseStringForCalories: self.totalCalories];
   values[@(TKTripCostTypeCarbon)]   = [@(self.totalCarbon) toCarbonString];
-//  if (self.totalPrice) {
-//    values[@(TKTripCostTypePrice)]  = [self.totalPrice toMoneyString:[self currencySymbol]];
-//  }
+  if (self.totalPrice && self.currencyCode) {
+    values[@(TKTripCostTypePrice)]  = [self.totalPrice toMoneyStringWithCurrencyCode:self.currencyCode];
+  }
   return values;
 }
 

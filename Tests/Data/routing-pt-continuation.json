@@ -20,6 +20,7 @@
           "availability": "AVAILABLE",
           "caloriesCost": 0,
           "carbonCost": 0.8,
+          "currency": "AUD",
           "currencySymbol": "$",
           "depart": 1575495780,
           "hassleCost": 4,
