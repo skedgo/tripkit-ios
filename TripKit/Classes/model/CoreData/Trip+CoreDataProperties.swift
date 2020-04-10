@@ -22,7 +22,7 @@ extension Trip {
     @NSManaged public var currencyCode: String?
 
     /// :nodoc:
-    @NSManaged public var data: NSObject? // NSData (or NSDictionary)
+    @NSManaged public var data: Data? // Data with an encoded dictionary
 
     @NSManaged public var departureTime: Date
 
