@@ -15,7 +15,6 @@
 #import "TripKit/TripKit-Swift.h"
 
 #import "TKRootKit.h"
-#import "StopLocation.h"
 
 #import "TKStyleManager.h"
 
@@ -30,15 +29,9 @@
 @dynamic isActive;
 @dynamic regionDay;
 @dynamic searchString;
-@dynamic toDelete;
 @dynamic service;
 @dynamic stop;
 @dynamic shapes;
-
-- (void)remove
-{
-  self.toDelete = YES;
-}
 
 + (NSArray *)defaultSortDescriptors
 {
@@ -50,9 +43,9 @@
                                       filter:(nullable NSString *)filter
 {
 	if (filter.length > 0) {
-		return [NSPredicate predicateWithFormat:@"toDelete = NO AND stop IN %@ AND ((departure != nil AND departure > %@) OR (arrival != nil AND arrival > %@)) AND (service.number CONTAINS[c] %@ OR service.name CONTAINS[c] %@ OR stop.shortName CONTAINS[c] %@ OR searchString CONTAINS[c] %@)", stops, date, date, filter, filter, filter, filter];
+		return [NSPredicate predicateWithFormat:@"stop IN %@ AND ((departure != nil AND departure > %@) OR (arrival != nil AND arrival > %@)) AND (service.number CONTAINS[c] %@ OR service.name CONTAINS[c] %@ OR stop.shortName CONTAINS[c] %@ OR searchString CONTAINS[c] %@)", stops, date, date, filter, filter, filter, filter];
 	} else {
-		return [NSPredicate predicateWithFormat:@"toDelete = NO AND stop IN %@ AND ((departure != nil AND departure > %@) OR (arrival != nil AND arrival > %@))", stops, date, date];
+		return [NSPredicate predicateWithFormat:@"stop IN %@ AND ((departure != nil AND departure > %@) OR (arrival != nil AND arrival > %@))", stops, date, date];
 	}
 }
 

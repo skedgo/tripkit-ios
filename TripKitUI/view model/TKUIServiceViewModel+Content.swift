@@ -91,7 +91,7 @@ extension TKUIServiceViewModel.Item {
     // as `visit.service` might be a continuation of `embarkation.service`
     let sortedVisits = embarkation.service.visitsIncludingContinuation()
 
-    let serviceColor = (visit.service.color as? UIColor) ?? .black
+    let serviceColor = visit.service.color ?? .black
 
     let topConnectionColor: UIColor?
     if visit == sortedVisits.first {

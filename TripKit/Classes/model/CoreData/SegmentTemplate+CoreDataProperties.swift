@@ -35,7 +35,6 @@ extension SegmentTemplate {
     @NSManaged public var smsMessage: String?
     @NSManaged public var smsNumber: String?
     @NSManaged public var startLocation: NSObject?
-    @NSManaged public var toDelete: NSNumber?
     @NSManaged public var visibility: NSNumber?
     @NSManaged public var references: NSSet?
   

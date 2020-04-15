@@ -50,10 +50,8 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "DLSEntry.h"
 #import "SegmentReference.h"
 #import "Service.h"
-#import "StopLocation.h"
 #import "Vehicle.h"
 #import "Alert.h"
-#import "Cell.h"
 
 // Non-core data model classes
 #import "TKSegment.h"

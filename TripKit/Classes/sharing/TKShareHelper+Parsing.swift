@@ -218,7 +218,7 @@ extension TKShareHelper.StopDetails {
   /// - parameter tripKit: TripKit's managed object context into which
   ///                      to insert the stop location
   public func toStopLocation(in tripKit: NSManagedObjectContext) -> StopLocation {
-    let stop = StopLocation.fetchOrInsertStop(forStopCode: code, inRegionNamed: region, intoTripKitContext: tripKit)
+    let stop = StopLocation.fetchOrInsertStop(stopCode: code, inRegion: region, in: tripKit)
     stop.filter = filter
     return stop
   }

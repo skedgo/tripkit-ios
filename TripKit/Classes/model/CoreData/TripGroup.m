@@ -30,7 +30,6 @@ typedef enum {
 @dynamic flags;
 @dynamic sourcesRaw;
 @dynamic visibilityRaw;
-@dynamic toDelete;
 @dynamic request;
 @dynamic trips;
 @dynamic visibleTrip;
@@ -73,7 +72,7 @@ typedef enum {
       continue;
     }
     
-    float score = [[trip totalScore] floatValue];
+    float score = [trip totalScore];
     if (score < bestScore) {
       bestTrip = trip;
       bestScore = score;

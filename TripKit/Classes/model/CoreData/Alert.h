@@ -30,7 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain) NSNumber * severity; // Don't access this, use alertSeverity instead
 @property (nonatomic, retain, nullable) NSDate * startTime;
 @property (nonatomic, retain, nullable) NSDate * endTime;
-@property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain, nullable) NSDictionary<NSString *, id> *action;
 
 @property (nonatomic, retain, nullable) NSString *idService;
@@ -50,8 +49,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray<Alert *> *)fetchAlertsForService:(Service *)service;
 
 + (NSArray<Alert *> *)fetchAlertsForStopLocation:(StopLocation *)stopLocation;
-
-- (void)remove;
 
 @end
 

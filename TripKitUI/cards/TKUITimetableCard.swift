@@ -155,8 +155,8 @@ public class TKUITimetableCard : TGTableCard {
   
   // MARK: - Card Life Cycle
   
-  override public func didBuild(tableView: UITableView, cardView: TGCardView, headerView: TGHeaderView?) {
-    super.didBuild(tableView: tableView, cardView: cardView, headerView: headerView)
+  override public func didBuild(tableView: UITableView, cardView: TGCardView) {
+    super.didBuild(tableView: tableView, cardView: cardView)
     
     tableView.register(TKUIDepartureCell.nib, forCellReuseIdentifier: TKUIDepartureCell.reuseIdentifier)
     

@@ -27,13 +27,13 @@ extension SegmentTemplate {
   
   @objc(segmentTemplateHashCode:existsInTripKitContext:)
   public static func segmentTemplate(withHashCode hashCode: Int, existsIn context: NSManagedObjectContext) -> Bool {
-    let predicate = NSPredicate(format: "hashCode == %d AND toDelete = NO", hashCode)
+    let predicate = NSPredicate(format: "hashCode == %d", hashCode)
     return context.containsObject(SegmentTemplate.self, predicate: predicate)
   }
   
   @objc(fetchSegmentTemplateWithHashCode:inTripKitContext:)
   public static func fetchSegmentTemplate(withHashCode hashCode: Int, in context: NSManagedObjectContext) -> SegmentTemplate? {
-    let predicate = NSPredicate(format: "hashCode == %d AND toDelete = NO", hashCode)
+    let predicate = NSPredicate(format: "hashCode == %d", hashCode)
     return context.fetchUniqueObject(SegmentTemplate.self, predicate: predicate)
   }
   

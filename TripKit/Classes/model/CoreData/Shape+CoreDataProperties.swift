@@ -21,7 +21,6 @@ extension Shape {
     @NSManaged public var index: Int16
     @NSManaged public var metres: NSNumber?
     @NSManaged public var title: String?
-    @NSManaged public var toDelete: Bool
     @NSManaged public var travelled: Bool
     @NSManaged public var rawInstruction: Int16
     @NSManaged public var services: NSSet?

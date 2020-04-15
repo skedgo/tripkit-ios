@@ -24,6 +24,8 @@ typedef void(^TKFetchRequestBlock)(NSFetchRequest *);
 
 #pragma mark - Fetch
 
+- (NSArray *)fetchObjectsForEntityClass:(Class)entityClass NS_SWIFT_UNAVAILABLE("Use fetchObjects<E>");
+
 - (NSArray *)fetchObjectsForEntityClass:(Class)entityClass
                        withFetchRequest:(TKFetchRequestBlock)requestBlock NS_SWIFT_UNAVAILABLE("Use fetchObjects<E>");
 

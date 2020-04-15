@@ -17,50 +17,8 @@
 @interface Trip : NSManagedObject {
 }
 
-#pragma mark - CoreData elements
-
-@property (nonatomic, copy, nonnull) NSDate * arrivalTime;
-@property (nonatomic, copy, nonnull) NSDate * departureTime;
-@property (nonatomic, strong, nonnull) NSNumber * minutes; // cache for sorting
-@property (nonatomic, strong, nonnull) NSNumber * mainSegmentHashCode;
-
-/// :nodoc:
-@property (nonatomic, retain, nullable) id data; // NSData (or NSDictionary)
-
-/// :nodoc:
-@property (nonatomic, strong, nonnull) NSNumber * flags;
-
-@property (nonatomic, strong, nullable) NSString * saveURLString;
-@property (nonatomic, strong, nullable) NSString * shareURLString;
-@property (nonatomic, strong, nullable) NSString * temporaryURLString;
-@property (nonatomic, strong, nullable) NSString * updateURLString;
-@property (nonatomic, strong, nullable) NSString * progressURLString;
-@property (nonatomic, strong, nullable) NSString * plannedURLString;
-@property (nonatomic, strong, nullable) NSString * logURLString;
-@property (nonatomic, retain, nonnull) NSNumber * totalCarbon;
-@property (nonatomic, retain, nonnull) NSNumber * totalHassle;
-@property (nonatomic, retain, nullable) NSNumber * totalPrice;
-@property (nonatomic, retain, nullable) NSNumber * totalPriceUSD;
-@property (nonatomic, strong, nullable) NSString * currencySymbol;
-@property (nonatomic, retain, nullable) NSNumber * totalWalking;
-@property (nonatomic, retain, nonnull) NSNumber * totalCalories;
-@property (nonatomic, retain, nonnull) NSNumber * totalScore;
-@property (nonatomic, retain, nullable) NSNumber * budgetPoints;
-@property (nonatomic, assign) BOOL toDelete;
-
-/// :nodoc:
-@property (nonatomic, retain, nonnull) NSSet *segmentReferences;
-
-@property (nonatomic, strong, nullable) TripGroup * representedGroup;
-@property (nonatomic, strong, nonnull) TripGroup * tripGroup;
-
-/// :nodoc:
-@property (nonatomic, strong, nullable) NSManagedObject * tripTemplate;
-
 + (nullable Trip *)findSimilarTripTo:(nonnull Trip *)trip
                               inList:(nonnull id<NSFastEnumeration>)trips;
-
-- (void)remove;
 
 #pragma mark - Trip properties
 
@@ -151,15 +109,5 @@
 @property (readonly) BOOL timesAreRealTime;
 
 @property (nullable, readonly) Alert *primaryAlert;
-
-@end
-
-/// :nodoc:
-@interface Trip (CoreDataGeneratedAccessors)
-
-- (void)addSegmentReferencesObject:(nonnull SegmentReference *)value;
-- (void)removeSegmentReferencesObject:(nonnull SegmentReference *)value;
-- (void)addSegmentReferences:(nonnull NSSet *)values;
-- (void)removeSegmentReferences:(nonnull NSSet *)values;
 
 @end

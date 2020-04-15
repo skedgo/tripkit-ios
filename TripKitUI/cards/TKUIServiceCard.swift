@@ -85,8 +85,8 @@ public class TKUIServiceCard: TGTableCard {
   
   // MARK: - Card life cycle
 
-  override public func didBuild(tableView: UITableView, headerView: TGHeaderView?) {
-    super.didBuild(tableView: tableView, headerView: headerView)
+  override public func didBuild(tableView: UITableView) {
+    super.didBuild(tableView: tableView)
 
     // Build the view model
     

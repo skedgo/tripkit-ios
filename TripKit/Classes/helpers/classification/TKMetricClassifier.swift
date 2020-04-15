@@ -44,19 +44,19 @@ extension TKMetricClassifier: TKTripClassifier {
         anyHaveUnknownCost = true
       }
       
-      weighted = (min(weighted?.min ?? .infinity, trip.totalScore.floatValue),
-                  max(weighted?.max ?? .leastNormalMagnitude, trip.totalScore.floatValue))
-      hassles = (min(hassles?.min ?? .infinity, trip.totalHassle.floatValue),
-                 max(hassles?.max ?? .leastNormalMagnitude, trip.totalHassle.floatValue))
+      weighted = (min(weighted?.min ?? .infinity, trip.totalScore),
+                  max(weighted?.max ?? .leastNormalMagnitude, trip.totalScore))
+      hassles = (min(hassles?.min ?? .infinity, trip.totalHassle),
+                 max(hassles?.max ?? .leastNormalMagnitude, trip.totalHassle))
       durations = (min(durations?.min ?? .infinity, trip.calculateDuration().floatValue),
                    max(durations?.max ?? .leastNormalMagnitude, trip.calculateDuration().floatValue))
       
       // inverted!
-      calories = (min(calories?.min ?? .infinity, trip.totalCalories.floatValue * -1),
-                  max(calories?.max ?? .leastNormalMagnitude, trip.totalCalories.floatValue * -1))
+      calories = (min(calories?.min ?? .infinity, trip.totalCalories * -1),
+                  max(calories?.max ?? .leastNormalMagnitude, trip.totalCalories * -1))
       
-      carbons = (min(carbons?.min ?? .infinity, trip.totalCarbon.floatValue),
-                 max(carbons?.max ?? .leastNormalMagnitude, trip.totalCarbon.floatValue))
+      carbons = (min(carbons?.min ?? .infinity, trip.totalCarbon),
+                 max(carbons?.max ?? .leastNormalMagnitude, trip.totalCarbon))
     }
     if anyHaveUnknownCost {
       prices = nil
@@ -69,7 +69,7 @@ extension TKMetricClassifier: TKTripClassifier {
     
     guard let trip = tripGroup.visibleTrip else { return nil }
     
-    if let min = weighted?.min, let max = weighted?.max, matches(min: min, max: max, value: trip.totalScore.floatValue) {
+    if let min = weighted?.min, let max = weighted?.max, matches(min: min, max: max, value: trip.totalScore) {
       return TKMetricClassifier.Classification.recommended.rawValue as NSString
     }
     if let min = durations?.min, let max = durations?.max, matches(min: min, max: max, value: trip.calculateDuration().floatValue) {
@@ -78,13 +78,13 @@ extension TKMetricClassifier: TKTripClassifier {
     if let min = prices?.min, let max = prices?.max, matches(min: min, max: max, value: trip.totalPrice?.floatValue) {
       return TKMetricClassifier.Classification.cheapest.rawValue as NSString
     }
-    if let min = calories?.min, let max = calories?.max, matches(min: min, max: max, value: trip.totalCalories.floatValue * -1) { // inverted!
+    if let min = calories?.min, let max = calories?.max, matches(min: min, max: max, value: trip.totalCalories * -1) { // inverted!
       return TKMetricClassifier.Classification.healthiest.rawValue as NSString
     }
-    if let min = hassles?.min, let max = hassles?.max, matches(min: min, max: max, value: trip.totalHassle.floatValue) {
+    if let min = hassles?.min, let max = hassles?.max, matches(min: min, max: max, value: trip.totalHassle) {
       return TKMetricClassifier.Classification.easiest.rawValue as NSString
     }
-    if let min = carbons?.min, let max = carbons?.max, matches(min: min, max: max, value: trip.totalCarbon.floatValue) {
+    if let min = carbons?.min, let max = carbons?.max, matches(min: min, max: max, value: trip.totalCarbon) {
       return TKMetricClassifier.Classification.greenest.rawValue as NSString
     }
     return nil

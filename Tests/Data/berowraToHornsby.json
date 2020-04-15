@@ -7,6 +7,7 @@
           "arrive": 1474443720,
           "caloriesCost": 1,
           "carbonCost": 0.1,
+          "currency": "AUD",
           "currencySymbol": "$",
           "depart": 1474442941,
           "hassleCost": 2,

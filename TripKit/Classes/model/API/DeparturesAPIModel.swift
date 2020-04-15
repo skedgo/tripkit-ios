@@ -18,8 +18,8 @@ extension TKAPI {
     
     public let alerts: [Alert]?
     public let embarkationStops: [Embarkations]
-    public let parentStops: [Stop]?
-    public let stops: [Stop]?
+    let parentStops: [Stop]?
+    let stops: [Stop]?
   }
   
 }

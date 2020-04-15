@@ -28,15 +28,9 @@ typedef NSUInteger SGSegmentFlag;
 @dynamic alertHashCodes;
 @dynamic segmentTemplate;
 @dynamic data;
-@dynamic toDelete;
 @dynamic trip;
 @dynamic service;
 @dynamic realTimeVehicle, realTimeVehicleAlternatives;
-
-- (void)remove
-{
-  self.toDelete = YES;
-}
 
 - (SegmentTemplate *)template
 {

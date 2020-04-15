@@ -95,8 +95,8 @@ public class TKUITripOverviewCard: TGTableCard {
     }
   }
 
-  override public func didBuild(tableView: UITableView, cardView: TGCardView, headerView: TGHeaderView?) {
-    super.didBuild(tableView: tableView, cardView: cardView, headerView: headerView)
+  override public func didBuild(tableView: UITableView, cardView: TGCardView) {
+    super.didBuild(tableView: tableView, cardView: cardView)
     
     self.tableView = tableView
     
