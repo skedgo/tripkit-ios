@@ -9,6 +9,8 @@
 import UIKit
 
 class TKUITimetableAccessoryView: UIView {
+  
+  typealias TimetableCardActionsView = TKUICardActionsView<TKUITimetableCard, [TKUIStopAnnotation]>
 
   struct Line: Hashable {
     let text: String
@@ -95,8 +97,9 @@ class TKUITimetableAccessoryView: UIView {
       serviceCollectionToCustomActionViewConstraint.isActive = true
       customActionViewToBottomBarConstraint.isActive = true
       
-      let actionView = TKUICardActionsView()
+      let actionView = TimetableCardActionsView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 80))
       actionView.configure(with: actions, model: model, card: card)
+      actionView.hideSeparator = true
       customActionView.addSubview(actionView)
       
       actionView.translatesAutoresizingMaskIntoConstraints = false
