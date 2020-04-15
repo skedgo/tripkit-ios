@@ -49,8 +49,8 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     return nil
   }
   
-  override public func didBuild(tableView: UITableView, headerView: TGHeaderView?) {
-    super.didBuild(tableView: tableView, headerView: headerView)
+  override public func didBuild(tableView: UITableView) {
+    super.didBuild(tableView: tableView)
 
     viewModel = TKUISegmentDirectionsViewModel(segment: segment)
     

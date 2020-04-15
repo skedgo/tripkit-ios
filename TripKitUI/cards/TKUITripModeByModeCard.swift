@@ -134,7 +134,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     try! self.init(startingOn: first, initialPosition: initialPosition)
   }
   
-  public override func didBuild(cardView: TGCardView, headerView: TGHeaderView?) {
+  public override func didBuild(cardView: TGCardView?, headerView: TGHeaderView?) {
     super.didBuild(cardView: cardView, headerView: headerView)
     
     viewModel.realTimeUpdate

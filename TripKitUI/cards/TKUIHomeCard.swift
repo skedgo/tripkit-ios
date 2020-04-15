@@ -92,8 +92,8 @@ public class TKUIHomeCard: TGTableCard {
     }
   }
   
-  public override func didBuild(tableView: UITableView, headerView: TGHeaderView?) {
-    super.didBuild(tableView: tableView, headerView: headerView)
+  public override func didBuild(tableView: UITableView) {
+    super.didBuild(tableView: tableView)
     
     requestLocationServicesIfNeeded()
     
