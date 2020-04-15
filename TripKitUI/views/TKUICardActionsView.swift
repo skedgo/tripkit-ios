@@ -195,26 +195,29 @@ extension TKUICardActionsView: TKUICardActionsViewLayoutHelperDelegate {
     return self.actions?.count ?? 0
   }
   
-  func actionCellToDisplay(at indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+  func actionCellToDisplay(at indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell? {
     guard
       let action = self.actions?[indexPath.row],
       let card = self.card,
       let model = self.model
-      else { preconditionFailure() }
+      else { return nil }
     
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TKUICompactActionCell.identifier, for: indexPath) as! TKUICompactActionCell
     cell.configure(with: action, card: card, model: model)
     return cell
   }
   
-  func configure(sizingCell: TKUICompactActionCell, forUseAt indexPath: IndexPath) {
+  func size(for cell: UICollectionViewCell, at indexPath: IndexPath) -> CGSize? {
     guard
+      let actionCell = cell as? TKUICompactActionCell,
       let action = self.actions?[indexPath.row],
       let card = self.card,
       let model = self.model
-      else { preconditionFailure() }
+      else { return nil }
     
-    sizingCell.configure(with: action, card: card, model: model)
+    actionCell.configure(with: action, card: card, model: model)
+    actionCell.layoutIfNeeded()
+    return actionCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
   }
   
 }

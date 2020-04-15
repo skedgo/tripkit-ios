@@ -12,9 +12,9 @@ protocol TKUICardActionsViewLayoutHelperDelegate: class {
   
   func numberOfActionsToDisplay(in collectionView: UICollectionView) -> Int
   
-  func actionCellToDisplay(at indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell
+  func actionCellToDisplay(at indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell?
   
-  func configure(sizingCell: TKUICompactActionCell, forUseAt indexPath: IndexPath)
+  func size(for cell: UICollectionViewCell, at indexPath: IndexPath) -> CGSize?
   
 }
 
@@ -49,7 +49,7 @@ extension TKUICardActionsViewLayoutHelper: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    return delegate.actionCellToDisplay(at: indexPath, in: collectionView)
+    return delegate.actionCellToDisplay(at: indexPath, in: collectionView) ?? UICollectionViewCell()
   }
   
 }
@@ -76,9 +76,7 @@ extension TKUICardActionsViewLayoutHelper: UICollectionViewDelegate {
 extension TKUICardActionsViewLayoutHelper: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    delegate.configure(sizingCell: sizingCell, forUseAt: indexPath)
-    sizingCell.layoutIfNeeded()
-    return sizingCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    return delegate.size(for: sizingCell, at: indexPath) ?? .zero
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
