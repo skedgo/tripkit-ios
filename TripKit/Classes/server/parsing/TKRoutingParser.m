@@ -68,7 +68,7 @@
                                 orUpdateTrip:nil
                 allowDuplicatingExistingTrip:YES];
     if (added.count == 0) {
-      [request remove];
+      [self.context deleteObject:request];
       [TKLog warn:@"TKRoutingParser" text:[NSString stringWithFormat:@"Error parsing request: %@", json]];
       completion(nil);
       return;
@@ -76,7 +76,7 @@
     
     BOOL success = [TKRoutingParser populate:request start:nil end:nil leaveAfter:nil arriveBy:nil queryJSON:json[@"query"]];
     if (! success) {
-      [request remove];
+      [self.context deleteObject:request];
       [TKLog info:@"TKRoutingParser" text:[NSString stringWithFormat:@"Got trip without a segment from JSON: %@", json]];
       completion(nil);
       return;
@@ -254,15 +254,15 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       trip.departureTime = [NSDate dateWithTimeIntervalSince1970:[tripDict[@"depart"] doubleValue]];
       
       // update values if we received them, otherwise keep old
-      trip.totalCalories        = tripDict[@"caloriesCost"]         ?: trip.totalCalories;
-      trip.totalCarbon          = tripDict[@"carbonCost"]           ?: trip.totalCarbon;
+      trip.mainSegmentHashCode  = [tripDict[@"mainSegmentHashCode"] intValue];
+      trip.totalCalories        = [tripDict[@"caloriesCost"] floatValue];
+      trip.totalCarbon          = [tripDict[@"carbonCost"] floatValue];
+      trip.totalHassle          = [tripDict[@"hassleCost"] floatValue];
+      trip.totalScore           = [tripDict[@"weightedScore"] floatValue];
       trip.totalPrice           = tripDict[@"moneyCost"]            ?: trip.totalPrice;
       trip.totalPriceUSD        = tripDict[@"moneyUSDCost"]         ?: trip.totalPriceUSD;
-      trip.currencySymbol       = tripDict[@"currencySymbol"]       ?: trip.currencySymbol;
-      trip.totalHassle          = tripDict[@"hassleCost"]           ?: trip.totalHassle;
-      trip.totalScore           = tripDict[@"weightedScore"]        ?: trip.totalScore;
+      trip.currencyCode         = tripDict[@"currency"]             ?: trip.currencyCode;
       trip.budgetPoints         = tripDict[@"budgetPoints"]         ?: trip.budgetPoints;
-      trip.mainSegmentHashCode  = tripDict[@"mainSegmentHashCode"]  ?: trip.mainSegmentHashCode;
       trip.saveURLString        = tripDict[@"saveURL"]              ?: trip.saveURLString;
       trip.shareURLString       = tripDict[@"shareURL"]             ?: trip.shareURLString;
       trip.temporaryURLString   = tripDict[@"temporaryURL"]         ?: trip.temporaryURLString;
@@ -346,6 +346,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           reference.arrivalPlatform = refDict[@"endPlatform"];
           reference.bicycleAccessible = [refDict[@"bicycleAccessible"] boolValue];
 
+          [reference _updateTicketWithDictionary: refDict[@"ticket"]];
           [reference _setWheelchairAccessibility:refDict[@"wheelchairAccessible"]];
           
           if (refDict[@"timetableStartTime"]) {
@@ -450,7 +451,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           [tripsToReturn addObject:existingNearlyIdenticalTrip];
           
           // delete this
-          [trip remove];
+          [self.context deleteObject:trip];
         }
       }
       

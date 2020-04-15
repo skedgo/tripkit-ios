@@ -133,7 +133,7 @@ class TKRouterTest: TKTestCase {
         let cycleGroup = try XCTUnwrap(request?.tripGroups?.first { $0.trips.contains(where: { $0.usedModeIdentifiers().contains("cy_bic") }) })
         XCTAssertEqual(cycleGroup.sources.count, 3)
 
-        let cycleTrip = try XCTUnwrap(cycleGroup.trips.min { $0.totalScore.doubleValue < $1.totalScore.doubleValue })
+        let cycleTrip = try XCTUnwrap(cycleGroup.trips.min { $0.totalScore < $1.totalScore })
         XCTAssertEqual(cycleTrip.segments.count, 9)
         XCTAssertEqual(cycleTrip.segments[0].alerts().count, 0)
         
@@ -185,7 +185,7 @@ class TKRouterTest: TKTestCase {
       }
       
       if let best = request?.tripGroups?.first?.visibleTrip, let bestService = best.segments[2].service {
-        XCTAssertEqual(best.totalScore.doubleValue, 29.8, accuracy: 0.1)
+        XCTAssertEqual(best.totalScore, 29.8, accuracy: 0.1)
         XCTAssertEqual(bestService.code, "847016")
         
         XCTAssertEqual(bestService.visits?.count, 27)
@@ -260,7 +260,7 @@ class TKRouterTest: TKTestCase {
         XCTAssertEqual(request?.tripGroups?.count, 1)
         XCTAssertEqual(request?.trips.count, 1)
         let trip = try XCTUnwrap(request?.trips.first)
-        XCTAssertEqual(trip.totalScore.doubleValue, 64, accuracy: 0.1)
+        XCTAssertEqual(trip.totalScore, 64, accuracy: 0.1)
         XCTAssertEqual(trip.tripGroup.sources.count, 4)
         
         // terminal segments should map trip, but not query

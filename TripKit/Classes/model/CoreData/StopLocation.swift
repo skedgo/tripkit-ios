@@ -20,7 +20,7 @@ extension StopLocation {
   }
   
   @objc public var modeTitle: String {
-    return stopModeInfo.alt
+    return stopModeInfo?.alt ?? ""
   }
 }
 

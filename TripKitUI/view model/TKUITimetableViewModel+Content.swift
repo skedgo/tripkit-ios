@@ -158,7 +158,7 @@ extension TKUITimetableViewModel {
     var lines: Set<TKUITimetableAccessoryView.Line> = []
     for visit in visits {
       guard let text = visit.service.shortIdentifier() else { continue }
-      let line = TKUITimetableAccessoryView.Line(text: text, color: visit.service.color as? UIColor)
+      let line = TKUITimetableAccessoryView.Line(text: text, color: visit.service.color)
       lines.insert(line)
     }
     return Array(lines).sorted { $0.text < $1.text }

@@ -26,7 +26,6 @@
 @dynamic preferredGroup;
 @dynamic departureTime, arrivalTime, timeType;
 @dynamic timeCreated;
-@dynamic toDelete;
 @dynamic tripGroups;
 @dynamic expandForFavorite;
 @dynamic excludedStops;
@@ -34,10 +33,6 @@
 @synthesize replacement;
 @synthesize defaultVisibility;
 @synthesize localRegions = _localRegions;
-
-- (void)remove {
-  self.toDelete = YES;
-}
 
 #pragma mark - Public methods
 

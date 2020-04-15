@@ -14,7 +14,6 @@
 #import "TKCrossPlatform.h"
 
 #import "NSDate+Helpers.h"
-#import "NSNumber+Formatter.h"
 #import "NSManagedObjectContext+SimpleFetch.h"
 #import "NSUserDefaults+SharedDefaults.h"
 

@@ -10,7 +10,7 @@ import Foundation
 
 extension TKAPI {
 
-  public struct Stop: Codable, Hashable {
+  struct Stop: Codable, Hashable {
     private enum CodingKeys: String, CodingKey {
       case code
       case lat
@@ -25,6 +25,7 @@ extension TKAPI {
       case children
       case modeInfo
       case alertHashCodes
+      case zoneID
     }
 
 
@@ -38,6 +39,7 @@ extension TKAPI {
     let address: String?
     let services: String?
     let popularity: Int?
+    let zoneID: String?
     
     let wheelchairAccessible: Bool?
 

@@ -218,7 +218,7 @@ extension TKUIServiceVisitCell {
     let title = visit.stop.title ?? visit.stop.location?.title
     setTitle(title, isVisited: isVisited)
     
-    let serviceColor = (visit.service.color as? UIColor) ?? .black
+    let serviceColor = visit.service.color ?? .black
     outerDot.backgroundColor = serviceColor
     topLine.backgroundColor = (isVisited && visit != embarkation) ? serviceColor : serviceColor.withAlphaComponent(0.3)
     bottomLine.backgroundColor = (isVisited && visit != disembarkation) ? serviceColor : serviceColor.withAlphaComponent(0.3)

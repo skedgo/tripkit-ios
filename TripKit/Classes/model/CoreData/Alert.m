@@ -21,7 +21,6 @@
 @dynamic remoteIcon;
 @dynamic startTime;
 @dynamic endTime;
-@dynamic toDelete;
 @dynamic action;
 @dynamic idService, idStopCode;
 
@@ -29,7 +28,7 @@
                                inTripKitContext:(NSManagedObjectContext *)tripKitContext
 {
   NSSet *existingAlerts = [tripKitContext fetchObjectsForEntityClass:self
-                                                 withPredicateString:@"toDelete = NO AND hashCode = %@", hashCode];
+                                                 withPredicateString:@"hashCode = %@", hashCode];
   return [existingAlerts anyObject];
 }
 
@@ -37,7 +36,7 @@
                      inTripKitContext:(NSManagedObjectContext *)tripKitContext
                  sortedByDistanceFrom:(CLLocationCoordinate2D)coordinate
 {
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toDelete = NO AND hashCode in %@", hashCodes];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hashCode in %@", hashCodes];
   NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"severity" ascending:NO];
   
   // get rid of duplicates and sort by distance from start
@@ -81,7 +80,7 @@
 
 + (NSArray<Alert *> *)fetchAlertsForService:(Service *)service
 {
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toDelete = NO AND hashCode in %@", service.alertHashCodes];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hashCode in %@", service.alertHashCodes];
   NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"severity" ascending:NO];
   return [service.managedObjectContext fetchObjectsForEntityClass:self
                                                     withPredicate:predicate
@@ -93,7 +92,7 @@
   if (stopLocation.alertHashCodes.count == 0) {
     return @[];
   } else {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toDelete = NO AND hashCode in %@", stopLocation.alertHashCodes];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hashCode in %@", stopLocation.alertHashCodes];
     NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"severity" ascending:NO];
     return [stopLocation.managedObjectContext fetchObjectsForEntityClass:self
                                                            withPredicate:predicate
@@ -117,11 +116,5 @@
     return [TKServer imageURLForIconFileNamePart:self.remoteIcon ofIconType:TKStyleModeIconTypeAlert];
   }
 }
-
-- (void)remove
-{
-  self.toDelete = YES;
-}
-
 
 @end

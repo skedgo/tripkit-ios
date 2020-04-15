@@ -20,9 +20,9 @@
                                       filter:(NSString *)filter
 {
 	if (filter.length > 0) {
-		return [NSPredicate predicateWithFormat:@"toDelete = NO AND pairIdentifier IN %@ AND departure != nil AND departure > %@ AND (service.number CONTAINS[c] %@ OR service.name CONTAINS[c] %@ OR stop.shortName CONTAINS[c] %@ OR searchString CONTAINS[c] %@)", pairs, date, filter, filter, filter, filter];
+		return [NSPredicate predicateWithFormat:@"pairIdentifier IN %@ AND departure != nil AND departure > %@ AND (service.number CONTAINS[c] %@ OR service.name CONTAINS[c] %@ OR stop.shortName CONTAINS[c] %@ OR searchString CONTAINS[c] %@)", pairs, date, filter, filter, filter, filter];
 	} else {
-		return [NSPredicate predicateWithFormat:@"toDelete = NO AND pairIdentifier IN %@ AND departure != nil AND departure > %@", pairs, date];
+		return [NSPredicate predicateWithFormat:@"pairIdentifier IN %@ AND departure != nil AND departure > %@", pairs, date];
 	}
 }
 
@@ -43,25 +43,11 @@
   return visits;
 }
 
-+ (void)clearEntriesWithIdentifiers:(NSSet *)pairIdentifiers
-                   inTripKitContext:(NSManagedObjectContext *)context
-{
-  if (pairIdentifiers.count == 0)
-    return;
-  
-  NSSet *objects = [context fetchObjectsForEntityClass:self
-                                   withPredicateString:@"toDelete = NO AND pairIdentifier IN %@", pairIdentifiers];
-  for (DLSEntry *entry in objects) {
-    [entry remove];
-  }
-}
-
 + (void)clearAllEntriesInTripKitContext:(NSManagedObjectContext *)context
 {
-  NSSet *objects = [context fetchObjectsForEntityClass:self
-                                   withPredicateString:@"toDelete = NO"];
+  NSArray *objects = [context fetchObjectsForEntityClass:self];
   for (DLSEntry *entry in objects) {
-    [entry remove];
+    [context deleteObject:entry];
   }
 }
 

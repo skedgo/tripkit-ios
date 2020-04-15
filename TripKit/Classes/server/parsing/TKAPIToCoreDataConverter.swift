@@ -29,6 +29,7 @@ extension StopLocation {
     
     stopCode  = model.code
     shortName = model.shortName
+    zoneID = model.zoneID
     
     if let popularity = model.popularity {
       sortScore = NSNumber(value: popularity)
@@ -64,7 +65,7 @@ extension TKAPIToCoreDataConverter {
   
   static func insertNewStopLocation(from model: TKAPI.Stop, into context: NSManagedObjectContext) -> StopLocation {
     let coordinate = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
-    let newStop = StopLocation.insertStop(forStopCode: model.code, modeInfo: nil, atLocation: coordinate, intoTripKitContext: context)
+    let newStop = StopLocation.insertStop(stopCode: model.code, modeInfo: model.modeInfo, at: coordinate, in: context)
     _ = newStop.update(from: model)
     return newStop
   }

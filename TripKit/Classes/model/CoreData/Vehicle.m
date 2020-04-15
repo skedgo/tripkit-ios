@@ -18,7 +18,6 @@
 @dynamic bearing;
 @dynamic componentsData;
 @dynamic label;
-@dynamic toDelete;
 @dynamic service, serviceAlternatives;
 @dynamic segment, segmentAlternatives;
 
@@ -27,12 +26,6 @@
 - (void)setSubtitle:(NSString *)title
 {
 #pragma unused(title) // do nothing, this is just for KVO
-}
-
-
-- (void)remove
-{
-  self.toDelete = YES;
 }
 
 @end

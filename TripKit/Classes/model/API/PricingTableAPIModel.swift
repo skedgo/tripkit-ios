@@ -17,7 +17,6 @@ extension TKAPI {
     public let title: String
     public let subtitle: String?
     public let currency: String
-    public let currencySymbol: String
     public let entries: [Entry]
     
     /// A single entry in a pricing table

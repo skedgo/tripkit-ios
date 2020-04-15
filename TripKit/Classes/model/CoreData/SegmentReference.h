@@ -26,7 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSNumber * templateHashCode;
 @property (nonatomic, retain) id data; // NSData (or NSDictionary)
-@property (nonatomic, assign) BOOL toDelete;
 @property (nonatomic, retain, nullable) NSArray<NSNumber *> * alertHashCodes;
 @property (nonatomic, retain, nullable) SegmentTemplate *segmentTemplate;
 @property (nonatomic, retain, null_resettable) Trip *trip;
@@ -51,8 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, getter = isWheelchairAccessible) BOOL wheelchairAccessible;
 @property (nonatomic, assign, getter = isWheelchairInaccessible) BOOL wheelchairInaccessible;
-
-- (void)remove;
 
 - (null_unspecified SegmentTemplate *)template;
 

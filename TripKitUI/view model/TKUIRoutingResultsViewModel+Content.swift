@@ -77,7 +77,7 @@ extension TKUIRoutingResultsViewModel {
         .fetchObjects(
           TripGroup.self,
           sortDescriptors: [NSSortDescriptor(key: "visibleTrip.totalScore", ascending: true)],
-          predicate: NSPredicate(format: "toDelete = NO AND request = %@ AND visibilityRaw != %@", request, NSNumber(value: TKTripGroupVisibility.hidden.rawValue)),
+          predicate: NSPredicate(format: "request = %@ AND visibilityRaw != %@", request, NSNumber(value: TKTripGroupVisibility.hidden.rawValue)),
           relationshipKeyPathsForPrefetching: ["visibleTrip", "visibleTrip.segmentReferences"]
         )
         .throttle(.milliseconds(500), scheduler: MainScheduler.instance)

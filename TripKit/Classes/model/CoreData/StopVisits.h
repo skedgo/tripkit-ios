@@ -56,9 +56,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSDate * regionDay;
 @property (nonatomic, retain, nullable) NSString * searchString;
 
-/// :nodoc:
-@property (nonatomic, assign) BOOL toDelete;
-
 @property (nonatomic, retain) Service *service;
 @property (nonatomic, retain) StopLocation *stop;
 @property (nonatomic, retain, nullable) NSSet *shapes;
@@ -72,9 +69,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Time to count down to in a departures timetable. This is `nil` for frequency-based services, or if this is the final arrival at a stop.
 @property (nonatomic, readonly, nullable) NSDate *countdownDate;
-
-/// :nodoc:
-- (void)remove;
 
 /// :nodoc:
 - (void)adjustRegionDay;

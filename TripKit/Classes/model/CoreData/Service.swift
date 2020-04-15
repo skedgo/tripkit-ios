@@ -26,24 +26,10 @@ extension Service {
   @objc(fetchExistingServiceWithCode:inTripKitContext:)
   public static func fetchExistingService(code: String, in context: NSManagedObjectContext) -> Service? {
     
-    let equalServiceCode = NSPredicate(format: "toDelete = NO AND code = %@", code)
+    let equalServiceCode = NSPredicate(format: "code = %@", code)
     let match = context.fetchUniqueObject(Service.self, predicate: equalServiceCode)
     assert(match == nil || match?.managedObjectContext != nil, "Service has no context!")
     return match
-  }
-  
-  @objc(removeServicesBeforeDate:fromManagedObjectContext:)
-  public static func removeServices(before date: Date, from context: NSManagedObjectContext) {
-    
-    let withUpcomingDepartures = NSPredicate(format: "toDelete = NO AND (NONE visits.departure > %@)", date as CVarArg)
-    for service in context.fetchObjects(Service.self, predicate: withUpcomingDepartures) {
-      if let segments = service.segments, !segments.isEmpty {
-        TKLog.debug("Service", text: "Keeping service \(service.lineName ?? "") as it has \(segments.count) segments.")
-      } else {
-        service.remove()
-      }
-    }
-    
   }
   
 }
