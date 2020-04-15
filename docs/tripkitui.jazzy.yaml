@@ -32,7 +32,6 @@ custom_categories:
       - TKUITimetableViewController
       - TKUITimetableViewControllerDelegate
       - TKUITimetableCard
-      - TKUITimetableCardAction
       - TKUITimetableCardDelegate
       - TKUIServiceCard
   - name: Search

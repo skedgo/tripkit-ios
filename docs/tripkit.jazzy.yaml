@@ -27,7 +27,7 @@ custom_categories:
       - TKUserProfileHelper
   - name: Trip Planning
     children:
-      - TKBuzzRouter
+      - TKRouter
       - TKBuzzRealTime
       - TKResultsFetcher
       - TKWaypointRouter
