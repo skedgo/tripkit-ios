@@ -1,16 +1,16 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitUI"
-  s.version      = "4.0-rc1"
+  s.version      = "4.0-rc2"
   s.summary      = "SkedGo's TripKitUI"
-  s.homepage     = "https://github.com/skedgo/tripkit-ios"
+  s.homepage     = "https://gitlab.com/skedgo/ios/tripkit-ios"
   s.license      = { type: "Closed", file: "LICENSE" }
   s.authors      = {
     "Adrian Schoenig" => "adrian@skedgo.com",
     "Brian Huang" => "brian@skedgo.com"
   }
   # s.source       = { git: "." }
-  s.source       = { git: "https://github.com/skedgo/tripkit-ios.git", tag: "v#{s.version}" }
-  s.swift_version = '5.1'
+  s.source       = { git: "https://gitlab.com/skedgo/ios/tripkit-ios.git", tag: "v#{s.version}" }
+  s.swift_version = '5.2'
   s.ios.deployment_target = '10.3'
   s.requires_arc = true
   
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'TripKit', "~> #{s.version}"
 
-  s.dependency 'TGCardViewController', '>= 1.1'
+  s.dependency 'TGCardViewController', '>= 1.2'
 
   s.dependency 'Kingfisher', '~> 5.8'
   s.dependency 'RxDataSources', '~> 4.0'
