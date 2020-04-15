@@ -148,8 +148,10 @@ extension TKUISegmentMovingCell {
     button.setTitle(action.title, for: .normal)
     button.rx.tap
       .subscribe(onNext: { [unowned card] in
-        _ = action.handler(action, card, model, button)
-        #warning("Update title")
+        let update = action.handler(action, card, model, button)
+        if update {
+          button.setTitle(action.title, for: .normal)
+        }
       })
       .disposed(by: disposeBag)
     return button

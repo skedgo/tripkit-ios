@@ -37,8 +37,7 @@ extension TKWheelchairAccessibility {
       return TripKitUIBundle.imageNamed("icon-wheelchair")
     
     case .notAccessible:
-      #warning("TODO: Add this")
-      return nil
+      return nil // Can be added at a later stage, when needed
     
     case .unknown:
       return nil
