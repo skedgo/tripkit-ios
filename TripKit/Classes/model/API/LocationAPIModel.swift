@@ -297,6 +297,8 @@ extension TKAPI {
     }
     
     public let details: Details?
+    public let alerts: [Alert]?
+    
     public let stop: TKStopCoordinate?
     public let bikePod: TKAPI.BikePodInfo?
     public let carPod:  TKAPI.CarPodInfo?

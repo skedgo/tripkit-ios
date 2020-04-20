@@ -42,23 +42,13 @@ class TKAlertAPIAlertClassWrapper {
 }
 
 extension TKAlertAPIAlertClassWrapper: TKAlert {
-  var title: String? { return alert.title }
-  var iconURL: URL? { return alert.remoteIcon }
-  var text: String? { return alert.text }
-  var infoURL: URL? { return alert.url }
-  var lastUpdated: Date? { return alert.lastUpdated }
-  var startTime: Date? { return alert.fromDate }
-  
-  var icon: TKImage? {
-    let fileName: String
-    switch alert.severity {
-    case .info, .warning:
-      fileName = "icon-alert-yellow-high-res"
-    case .alert:
-      fileName = "icon-alert-red-high-res"
-    }    
-    return TripKitUIBundle.imageNamed(fileName)
-  }
+  var title: String? { alert.title }
+  var iconURL: URL? { alert.remoteIcon }
+  var text: String? { alert.text }
+  var infoURL: URL? { alert.url }
+  var lastUpdated: Date? { alert.lastUpdated }
+  var startTime: Date? { alert.fromDate }
+  var icon: TKImage? { alert.severity.icon }
   
   func isCritical() -> Bool {
     switch alert.severity {

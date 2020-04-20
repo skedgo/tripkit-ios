@@ -1,5 +1,5 @@
 //
-//  API+ViewHelpers.swift
+//  TKAPI+ViewHelpers.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 01.08.19.
@@ -31,4 +31,19 @@ extension TKAPI.VehicleOccupancy {
     return standingCount.map { TKUIStyleKit.imageOfOccupancyPeople(occupied: color, occupiedCount: CGFloat($0)) }
   }
 
+}
+
+extension TKAPI.Alert.Severity {
+
+  public var icon: UIImage {
+    let fileName: String
+    switch self {
+    case .info, .warning:
+      fileName = "icon-alert-yellow-high-res"
+    case .alert:
+      fileName = "icon-alert-red-high-res"
+    }
+    return TripKitUIBundle.imageNamed(fileName)
+  }
+  
 }
