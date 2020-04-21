@@ -27,9 +27,15 @@ class TKUICompactAlertCell: UITableViewCell {
   }
   
   private func didInit() {
-    contentView.backgroundColor = #colorLiteral(red: 0.7882352941, green: 0.3254901961, blue: 0.2745098039, alpha: 0.8997221057)
-    imageView?.image = TripKitUIBundle.imageNamed("icon-warning-desc-white")
+    imageView?.image = TripKitUIBundle.imageNamed("icon-alert")
     textLabel?.textColor = .tkLabelOnDark
+  }
+  
+  func configure(_ alert: TKAPI.Alert) {
+    contentView.backgroundColor = alert.severity.backgroundColor
+    imageView?.tintColor = alert.severity.textColor
+    textLabel?.text = alert.title
+    textLabel?.textColor = alert.severity.textColor
   }
     
 }

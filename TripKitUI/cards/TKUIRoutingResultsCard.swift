@@ -394,7 +394,7 @@ extension TKUIRoutingResultsCard {
     
     case .advisory(let alert):
       let advisoryCell = tableView.dequeueReusableCell(withIdentifier: TKUICompactAlertCell.reuseIdentifier, for: indexPath) as! TKUICompactAlertCell
-      advisoryCell.textLabel?.text = alert.title
+      advisoryCell.configure(alert)
       return advisoryCell
     }
   }
