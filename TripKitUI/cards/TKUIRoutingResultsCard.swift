@@ -201,6 +201,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
     tableView.register(TKUIProgressCell.nib, forCellReuseIdentifier: TKUIProgressCell.reuseIdentifier)
+    tableView.register(TKUICompactAlertCell.self, forCellReuseIdentifier: TKUICompactAlertCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
     tableView.register(TKUIResultsSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
 
@@ -381,7 +382,7 @@ extension TKUIRoutingResultsCard {
       let progressCell = tableView.dequeueReusableCell(withIdentifier: TKUIProgressCell.reuseIdentifier, for: indexPath) as! TKUIProgressCell
       progressCell.contentView.backgroundColor = .tkBackgroundSecondary // this blends in the background beneath tiles
       return progressCell
-    
+      
     case .nano(let trip), .trip(let trip):
       let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
       tripCell.configure(TKUITripCell.Model(trip))
@@ -390,6 +391,11 @@ extension TKUIRoutingResultsCard {
       tripCell.accessoryType = .disclosureIndicator
       #endif
       return tripCell
+    
+    case .advisory(let alert):
+      let advisoryCell = tableView.dequeueReusableCell(withIdentifier: TKUICompactAlertCell.reuseIdentifier, for: indexPath) as! TKUICompactAlertCell
+      advisoryCell.textLabel?.text = alert.title
+      return advisoryCell
     }
   }
   
@@ -589,6 +595,11 @@ private extension TKUIRoutingResultsCard {
     switch next {
     case .showTrip(let trip):
       controller?.push(TKUITripsPageCard(highlighting: trip))
+      
+    case .showAlert(let alert):
+      let alerter = TKUIAlertViewController(style: .plain)
+      alerter.alerts = [TKAlertAPIAlertClassWrapper(alert: alert)]
+      controller?.present(alerter, inNavigator: true)
       
     case .presentModeConfigurator(let modes, let region):      
       showTransportOptions(modes: modes, for: region)

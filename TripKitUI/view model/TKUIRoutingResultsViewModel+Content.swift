@@ -84,26 +84,30 @@ extension TKUIRoutingResultsViewModel {
     }
   }
   
-  static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput, progress: Observable<TKResultsFetcher.Progress>) -> Observable<[Section]> {
+  static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput, progress: Observable<TKResultsFetcher.Progress>, advisory: Observable<TKAPI.Alert?>) -> Observable<[Section]> {
+    
     return Observable
       .combineLatest(
         groups,
         inputs.changedSortOrder.startWith(.score).asObservable(),
         inputs.tappedToggleButton.startWith(nil).asObservable(),
-        progress
+        progress,
+        advisory.startWith(nil)
       )
       .map(sections)
   }
   
-  private static func sections(for groups: [TripGroup], sortBy: TKTripCostType, expand: TripGroup?, progress: TKResultsFetcher.Progress) -> [Section] {
-    let progressIndicatorSection = TKUIRoutingResultsViewModel.Section(items: [.progress], badge: nil, costs: [:], toggleButton: nil)
+  private static func sections(for groups: [TripGroup], sortBy: TKTripCostType, expand: TripGroup?, progress: TKResultsFetcher.Progress, advisory: TKAPI.Alert?) -> [Section] {
+    
+    let progressIndicatorSection = Section(items: [.progress])
+    let advisorySection = advisory.flatMap { Section(items: [.advisory($0)]) }
     
     guard let first = groups.first else {
       if case .finished = progress {
         return []
       } else {
         // happens when progress is `locating` and `start`
-        return [progressIndicatorSection]
+        return [progressIndicatorSection, advisorySection].compactMap { $0 }
       }
     }
     
@@ -132,6 +136,10 @@ extension TKUIRoutingResultsViewModel {
         toggleButton = nil
       }
       return Section(items: show, badge: group.badge, costs: best.costValues, toggleButton: toggleButton)
+    }
+
+    if let advisory = advisorySection {
+      sections.insert(advisory, at: 0)
     }
     
     switch progress {
@@ -179,13 +187,23 @@ extension TKUIRoutingResultsViewModel {
     
     case progress
     
+    case advisory(TKAPI.Alert)
+    
     var trip: Trip? {
       switch self {
       case .nano(let trip): return trip
       case .trip(let trip): return trip
-      case .progress: return nil
+      case .progress, .advisory: return nil
       }
     }
+    
+    var alert: TKAPI.Alert? {
+      switch self {
+      case .advisory(let alert): return alert
+      case .nano, .trip, .progress: return nil
+      }
+    }
+
   }
   
   public typealias SectionToggle = (title: String, payload: TripGroup?)
@@ -194,9 +212,9 @@ extension TKUIRoutingResultsViewModel {
   public struct Section {
     public var items: [Item]
     
-    public var badge: TKMetricClassifier.Classification?
-    var costs: [NSNumber: String]
-    public let toggleButton: SectionToggle?
+    public var badge: TKMetricClassifier.Classification? = nil
+    var costs: [NSNumber: String] = [:]
+    public var toggleButton: SectionToggle? = nil
   }
 }
 
@@ -296,9 +314,10 @@ extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
   public typealias Identity = String
   public var identity: Identity {
     switch self {
-    case .trip(let trip): return trip.objectID.uriRepresentation().absoluteString
-    case .nano(let trip): return trip.objectID.uriRepresentation().absoluteString
+    case .trip(let trip),
+         .nano(let trip): return trip.objectID.uriRepresentation().absoluteString
     case .progress: return "progress_indicator"
+    case .advisory(let alert): return "\(alert.hashCode)"
     }
   }
 }

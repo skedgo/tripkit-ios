@@ -34,8 +34,8 @@ extension TKAPI {
     public let lastUpdated: Date?
     public let remoteIcon: URL?
     public let severity: Severity
-    
-    let hashCode: Int    
+    public let hashCode: Int
+
     let action: Action?    
     let location: TKAPI.Location?
     let serviceTripID: String?
