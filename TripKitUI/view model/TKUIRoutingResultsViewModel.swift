@@ -55,7 +55,7 @@ public class TKUIRoutingResultsViewModel {
   }
   
   private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, limitTo modes: [String]? = nil, inputs: UIInput, mapInput: MapInput) {
-    let builderChangedWithID = TKUIRoutingResultsViewModel.watch(builder, inputs: inputs, mapInput: mapInput)
+    let builderChangedWithID = Self.watch(builder, inputs: inputs, mapInput: mapInput)
       .share(replay: 1, scope: .forever)
 
     let errorPublisher = PublishSubject<Error>()
@@ -63,7 +63,7 @@ public class TKUIRoutingResultsViewModel {
     
     // Monitor the builder's annotation's coordinates
     let originOrDestinationChanged = builderChangedWithID
-      .flatMapLatest(TKUIRoutingResultsViewModel.locationsChanged)
+      .flatMapLatest(Self.locationsChanged)
 
     // Whenever the builder is changing, i.e., when the user changes the inputs,
     // we generate a new request. However, we don't do this if the got
@@ -89,16 +89,16 @@ public class TKUIRoutingResultsViewModel {
       skipRequest = false
     }
 
-    let requestToShow = requestChanged.map { $0.0 }
+    let requestToShow = requestChanged.map(\.0)
     let updateableRequest = requestChanged.compactMap { $0.1 == true ? $0.0 : nil }
 
     let tripGroupsChanged = TKUIRoutingResultsViewModel.fetchTripGroups(requestToShow)
       .share(replay: 1, scope: .forever)
       .distinctUntilChanged()
     
-    let builderChanged = builderChangedWithID.map { $0.0 }
+    let builderChanged = builderChangedWithID.map(\.0)
 
-    requestIsMutable = requestChanged.map { $0.1 }
+    requestIsMutable = requestChanged.map(\.1)
       .startWith(true)
       .asDriver(onErrorJustReturn: true)
     
@@ -109,16 +109,18 @@ public class TKUIRoutingResultsViewModel {
     if skipRequest {
       progress = .just(.finished)
     } else {
-      progress = TKUIRoutingResultsViewModel
+      progress = Self
         .fetch(for: updateableRequest, limitTo: modes, errorPublisher: errorPublisher)
         .asDriver(onErrorDriveWith: .empty())
     }
     fetchProgress = progress
+    
+    let advisory = Self.fetchAdvisory(for: requestToShow)
 
-    realTimeUpdate = TKUIRoutingResultsViewModel.fetchRealTimeUpdates(for: tripGroupsChanged)
+    realTimeUpdate = Self.fetchRealTimeUpdates(for: tripGroupsChanged)
       .asDriver(onErrorDriveWith: .empty())
 
-    sections = TKUIRoutingResultsViewModel.buildSections(tripGroupsChanged, inputs: inputs, progress: progress.asObservable())
+    sections = Self.buildSections(tripGroupsChanged, inputs: inputs, progress: progress.asObservable(), advisory: advisory)
       .asDriver(onErrorJustReturn: [])
 
     let selection = mapInput.tappedMapRoute.startOptional() // default selection
@@ -134,11 +136,11 @@ public class TKUIRoutingResultsViewModel {
       .asDriver(onErrorDriveWith: .empty())
     
     let availableFromRequest: Observable<AvailableModes> = requestToShow
-      .compactMap(TKUIRoutingResultsViewModel.buildAvailableModes)
+      .compactMap(Self.buildAvailableModes)
     
     let availableFromChange = inputs.changedModes.asObservable()
       .withLatestFrom(requestToShow) { ($0, $1) }
-      .compactMap(TKUIRoutingResultsViewModel.updateAvailableModes)
+      .compactMap(Self.updateAvailableModes)
     
     let available = Observable.merge(availableFromRequest, availableFromChange)
       .distinctUntilChanged()
@@ -165,20 +167,19 @@ public class TKUIRoutingResultsViewModel {
       .asDriver(onErrorDriveWith: .empty())
 
     mapRoutes = Observable.combineLatest(tripGroupsChanged, mapInput.tappedMapRoute.startOptional().asObservable())
-      .map(TKUIRoutingResultsViewModel.buildMapContent)
+      .map(Self.buildMapContent)
       .asDriver(onErrorDriveWith: .empty())
 
     // Navigation
     
-    let showTrip = inputs.selected
-      .filter { $0.trip != nil }
-      .map { Next.showTrip($0.trip!) }
-    
+    let showSelection = inputs.selected
+      .compactMap(Next.init)
+
     let modeInput = Observable.combineLatest(requestToShow, builderChanged)
     let presentModes = inputs.tappedShowModeOptions.asObservable()
       .withLatestFrom(modeInput) { (_, tuple) -> Next in
         let modes = tuple.0.applicableModeIdentifiers()
-        let region = TKUIRoutingResultsViewModel.regionForModes(for: tuple.1)
+        let region = Self.regionForModes(for: tuple.1)
         return Next.presentModeConfigurator(modes: modes, region: region)
       }
       .asSignal(onErrorSignalWith: .empty())
@@ -188,7 +189,7 @@ public class TKUIRoutingResultsViewModel {
       .map { Next.presentDatePicker(time: $0.time, timeZone: $0.timeZone) }
       .asSignal(onErrorSignalWith: .empty())
     
-    next = Signal.merge(showTrip, presentTime, presentModes)
+    next = Signal.merge(showSelection, presentTime, presentModes)
   }
   
   let request: Driver<TripRequest>
@@ -247,7 +248,16 @@ public class TKUIRoutingResultsViewModel {
 extension TKUIRoutingResultsViewModel {
   enum Next {
     case showTrip(Trip)
+    case showAlert(TKAPI.Alert)
     case presentModeConfigurator(modes: [String], region: TKRegion)
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
+    
+    init?(selection: Item) {
+      switch selection {
+      case .advisory(let alert): self = .showAlert(alert)
+      case .nano(let trip), .trip(let trip): self = .showTrip(trip)
+      default: return nil
+      }
+    }
   }
 }

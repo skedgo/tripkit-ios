@@ -13,7 +13,6 @@ import CoreLocation
 @available(*, unavailable, renamed: "TKUIMapManagerHelper")
 public typealias MapManagerHelper = TKUIMapManagerHelper
 
-
 public class TKUIMapManagerHelper: NSObject {
   
   private override init() {

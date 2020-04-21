@@ -34,6 +34,22 @@ extension TKAPI.VehicleOccupancy {
 }
 
 extension TKAPI.Alert.Severity {
+  
+  public var textColor: UIColor {
+    switch self {
+    case .alert: return .tkLabelOnDark
+    case .info: return .tkBackground
+    case .warning: return .tkLabelOnLight
+    }
+  }
+  
+  public var backgroundColor: UIColor {
+    switch self {
+    case .alert: return .tkStateError
+    case .warning: return .tkStateWarning
+    case .info: return .tkLabelSecondary
+    }
+  }
 
   public var icon: UIImage {
     let fileName: String

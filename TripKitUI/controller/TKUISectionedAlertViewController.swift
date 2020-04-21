@@ -114,7 +114,7 @@ public class TKUISectionedAlertViewController: UIViewController {
   
   private func didSelect(_ alertItem: TKUISectionedAlertViewModel.Item) {
     let controller = TKUIAlertViewController(style: .plain)
-    controller.alerts = alertItem.alerts.map { TKAlertAPIAlertClassWrapper(alert: $0) }
+    controller.alerts = alertItem.alerts.map(TKAlertAPIAlertClassWrapper.init)
     navigationController?.setNavigationBarHidden(false, animated: true)
     navigationController?.pushViewController(controller, animated: true)
   }
