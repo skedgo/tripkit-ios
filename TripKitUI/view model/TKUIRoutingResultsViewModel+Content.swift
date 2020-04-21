@@ -107,7 +107,7 @@ extension TKUIRoutingResultsViewModel {
         return []
       } else {
         // happens when progress is `locating` and `start`
-        return [progressIndicatorSection, advisorySection].compactMap { $0 }
+        return [advisorySection, progressIndicatorSection].compactMap { $0 }
       }
     }
     
@@ -138,15 +138,15 @@ extension TKUIRoutingResultsViewModel {
       return Section(items: show, badge: group.badge, costs: best.costValues, toggleButton: toggleButton)
     }
 
-    if let advisory = advisorySection {
-      sections.insert(advisory, at: 0)
-    }
-    
     switch progress {
     case .finished: break
     default: sections.insert(progressIndicatorSection, at: 0)
     }
-    
+
+    if let advisory = advisorySection {
+      sections.insert(advisory, at: 0)
+    }
+
     return sections
   }
   

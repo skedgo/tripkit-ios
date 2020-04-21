@@ -16,18 +16,6 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
   @IBOutlet weak var badgeIcon: UIImageView!
   @IBOutlet weak var badgeLabel: UILabel!
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    
-    wrapper.backgroundColor = .tkBackgroundTile
-    
-    badgeIcon.image = nil
-    badgeIcon.tintColor = .tkFilledButtonTextColor
-    badgeLabel.text = nil
-    badgeLabel.textColor = .tkFilledButtonTextColor
-    badgeLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .subheadline)
-  }
-  
   override init(reuseIdentifier: String?) {
     super.init(reuseIdentifier: reuseIdentifier)
     didInit()
@@ -35,6 +23,7 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
 
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+    didInit()
   }
   
   override func prepareForReuse() {

@@ -1636,6 +1636,7 @@
 		3A682F2D20F4A42200E05195 /* results */ = {
 			isa = PBXGroup;
 			children = (
+				3AF7AFC5244F2AA400E8A831 /* TKUICompactAlertCell.swift */,
 				D38FB46123A1B86D00325F72 /* TKUIProgressCell.swift */,
 				D38FB46223A1B86D00325F72 /* TKUIProgressCell.xib */,
 				3AFD397420D93DC100FDC7D0 /* TKUIResultsAccessoryView.swift */,
@@ -1689,7 +1690,6 @@
 			children = (
 				D39B7BB220622FD100988D8A /* TKUIAlertCell.swift */,
 				D39B7BB320622FD100988D8A /* TKUIAlertCell.xib */,
-				3AF7AFC5244F2AA400E8A831 /* TKUICompactAlertCell.swift */,
 				3A6DF0ED202C8EB80084CB2C /* TKUIEmptyAlertView.swift */,
 				3A6DF0E1202C8EB80084CB2C /* TKUIEmptyAlertView.xib */,
 				D39B7BAE20622C2C00988D8A /* TKUIGroupedAlertCell.swift */,
