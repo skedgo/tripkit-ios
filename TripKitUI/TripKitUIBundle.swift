@@ -14,7 +14,6 @@ extension UIImage {
   @objc public static let backgroundNavSecondary = named("bg-nav-secondary")
 
   public static let iconCross = named("icon-cross")
-  public static let iconPinNeedle = named("pin-needle")
 
   // Occupancy
   
