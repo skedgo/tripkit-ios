@@ -145,7 +145,7 @@ public class TKUINearbyMapManager: TKUIMapManager {
     guard let mapView = self.mapView else { return nil }
     let routes = mapView.overlays.compactMap { $0 as? TKRoutePolyline }
     let mapPoint = MKMapPoint(coordinate)
-    return routes.min { $0.distance(to: mapPoint) < $1.distance(to: mapPoint) }
+    return routes.filter { $0.distance(to: mapPoint) < 50 }.min { $0.distance(to: mapPoint) < $1.distance(to: mapPoint) }
   }
   
   private func closestAnnotation(to tap: UITapGestureRecognizer) -> TKUIIdentifiableAnnotation? {
