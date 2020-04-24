@@ -16,7 +16,6 @@ extension TKUISegmentTitleView {
   
   public func configure(for segment: TKSegment, preferredTitle: String? = nil, mode: TKUISegmentMode = .onSegment) {
     update(for: segment, preferredTitle: preferredTitle, mode: mode)
-    
     monitorUpdates(for: segment, preferredTitle: preferredTitle, mode: mode)
   }
   
@@ -60,8 +59,7 @@ extension TKUISegmentTitleView {
       .subscribe(onNext: { [weak self] _ in
         self?.update(for: segment, preferredTitle: preferredTitle, mode: mode)
       })
-      .disposed(by: disposeBag)
-    
+      .disposed(by: disposeBag)    
   }
   
 }
