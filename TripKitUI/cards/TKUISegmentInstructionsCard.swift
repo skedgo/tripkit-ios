@@ -36,6 +36,8 @@ public class TKUISegmentInstructionCard: TGPlainCard {
     instructionView = TKUISegmentInstructionsView.newInstance()
     
     super.init(title: .custom(titleView, dismissButton: titleView.dismissButton), contentView: instructionView, mapManager: mapManager)
+    
+    titleView.apply(style)
   }
   
   required init?(coder: NSCoder) {
