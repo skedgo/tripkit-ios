@@ -1,0 +1,37 @@
+PODS:
+  - ASPolygonKit (0.2.1)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - TripKit (4.0-rc2):
+    - ASPolygonKit
+    - RxCocoa (~> 5.1.1)
+    - RxSwift (~> 5.1.1)
+
+DEPENDENCIES:
+  - TripKit (from `../../`)
+
+SPEC REPOS:
+  trunk:
+    - ASPolygonKit
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+
+EXTERNAL SOURCES:
+  TripKit:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  ASPolygonKit: 74419ea0bea04a702aace3cfcf6ae3abcf694f34
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  TripKit: e5cac8b20ffd79d55e351599fd70e7004ade860d
+
+PODFILE CHECKSUM: 31d8e1e54be45a9cd81fd99e78aae199855af237
+
+COCOAPODS: 1.9.1
