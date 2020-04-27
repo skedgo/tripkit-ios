@@ -69,5 +69,14 @@ extension UIColor {
   @objc public static var tkMapOverlay: UIColor = .tripgoMapOverlay
   @objc public static let tkSheetOverlay: UIColor = .tripgoSheetOverlay
   @objc public static let tkStatusBarOverlay: UIColor = .tripgoStatusBarOverlay
-
+  
+  // MARK: - Neutral
+  
+  @objc public static var tkNeutral: UIColor = .tripgoNeutral
+  @objc public static var tkNeutral1: UIColor = .tripgoNeutral1
+  @objc public static var tkNeutral2: UIColor = .tripgoNeutral2
+  @objc public static var tkNeutral3: UIColor = .tripgoNeutral3
+  @objc public static var tkNeutral4: UIColor = .tripgoNeutral4
+  @objc public static var tkNeutral5: UIColor = .tripgoNeutral5
+  
 }

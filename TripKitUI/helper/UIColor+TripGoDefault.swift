@@ -222,4 +222,56 @@ extension UIColor {
     }
   }()
   
+  // MARK: - Neutral
+  
+  private static let tripgoBlack = UIColor(red: 33/255, green: 42/255, blue: 51/255, alpha: 1)
+  
+  static let tripgoNeutral: UIColor = {
+    if #available(iOS 11, *) {
+      return UIColor(named: "TKNeutral", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return UIColor.tripgoBlack
+    }
+  }()
+  
+  static let tripgoNeutral1: UIColor = {
+    if #available(iOS 11, *) {
+      return UIColor(named: "TKNeutral1", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return UIColor.tripgoBlack.withAlphaComponent(0.6)
+    }
+  }()
+  
+  static let tripgoNeutral2: UIColor = {
+    if #available(iOS 11, *) {
+      return UIColor(named: "TKNeutral2", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return UIColor.tripgoBlack.withAlphaComponent(0.3)
+    }
+  }()
+  
+  static let tripgoNeutral3: UIColor = {
+    if #available(iOS 11, *) {
+      return UIColor(named: "TKNeutral3", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return UIColor.tripgoBlack.withAlphaComponent(0.18)
+    }
+  }()
+  
+  static let tripgoNeutral4: UIColor = {
+    if #available(iOS 11, *) {
+      return UIColor(named: "TKNeutral4", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return UIColor.tripgoBlack.withAlphaComponent(0.12)
+    }
+  }()
+  
+  static let tripgoNeutral5: UIColor = {
+    if #available(iOS 11, *) {
+      return UIColor(named: "TKNeutral5", in: .tripKitUI, compatibleWith: nil)!
+    } else {
+      return UIColor.tripgoBlack.withAlphaComponent(0.08)
+    }
+  }()
+  
 }
