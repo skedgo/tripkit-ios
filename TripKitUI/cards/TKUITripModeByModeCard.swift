@@ -28,7 +28,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   /// guarantueed to have cards, i.e., `cards` can be empty.
   fileprivate struct SegmentCardsInfo {
     let segmentIndex: Int
-    let segmentIdentifier: String
+    let segmentIdentifier: String?
     let cards: [(TGCard, TKUISegmentMode)]
     let cardsRange: Range<Int>
     
@@ -49,7 +49,7 @@ public class TKUITripModeByModeCard: TGPageCard {
       return segmentCardIndices.lowerBound + matchingModeIndex
     }
     
-    /// What's the indices of the cards for the provided `segment.selectionIdentifier`,
+    /// What's the indices of the cards for the provided `segment.segmentIdentifier`,
     /// if all the cards in the haystack are next to each other?
     static func cardIndices(ofSegmentWithIdentifier needle: String, in haystack: [SegmentCardsInfo]) -> Range<Int>? {
       return haystack.first { $0.segmentIdentifier == needle  }?.cardsRange
@@ -101,11 +101,19 @@ public class TKUITripModeByModeCard: TGPageCard {
     let tripMapManager = mapManager ?? TKUITripMapManager(trip: trip)
     self.tripMapManager = tripMapManager
     
+    let builder = TKUITripModeByModeCard.config.builder
     let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
     self.segmentCards = cardSegments.reduce( ([SegmentCardsInfo](), 0) ) { previous, segment in
-      let cards = TKUITripModeByModeCard.config.builder.cards(for: segment, mapManager: tripMapManager)
+      let identifier: String
+      if let id = builder.cardIdentifier(for: segment) {
+        identifier = id
+      } else {
+        assertionFailure("Make sure your TKUITripModeByModePageBuilder returns an identifier for every segment that gets a card.")
+        identifier = segment.selectionIdentifier ?? ""
+      }
+      let cards = builder.cards(for: segment, mapManager: tripMapManager)
       let range = previous.1 ..< previous.1 + cards.count
-      let info = SegmentCardsInfo(segmentIndex: segment.index, segmentIdentifier: segment.selectionIdentifier!, cards: cards, cardsRange: range)
+      let info = SegmentCardsInfo(segmentIndex: segment.index, segmentIdentifier: identifier, cards: cards, cardsRange: range)
       return (previous.0 + [info], range.upperBound)
     }.0
 
@@ -147,7 +155,6 @@ public class TKUITripModeByModeCard: TGPageCard {
     viewModel.tripDidUpdate
       .emit(onNext: { [unowned self] in self.reflectUpdates(of: $0) })
       .disposed(by: disposeBag)
-
     
     NotificationCenter.default.rx
       .notification(.TKUIMapManagerSelectionChanged, object: tripMapManager)
@@ -172,7 +179,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= cardsInfo.segmentIndex } // segment on card might not be in header
     headerSegmentsView?.select(segmentAtIndex: selectedHeaderIndex ?? 0)
     
-    if let segment = tripMapManager.trip.segments.first(where: { $0.selectionIdentifier == cardsInfo.segmentIdentifier }) {
+    if let segment = tripMapManager.trip.segments.first(where: { Self.config.builder.cardIdentifier(for: $0) == cardsInfo.segmentIdentifier }) {
       let offset = index - cardsInfo.cardsRange.lowerBound
       let mode = cardsInfo.cards[offset].1
       tripMapManager.show(segment, animated: true, mode: mode)
@@ -298,12 +305,8 @@ extension TKUITripModeByModeCard {
 extension TKUITripModeByModeCard {
   
   private func segmentsMatch(_ newSegments: [TKSegment]) -> Bool {
-    // TODO: This should also change if something else about the segments
-    //   such as if there are alerts inserted, which the builder might create
-    //   cards for. So ideally, we should pass this to the builder.
-    
     let oldTemplates = segmentCards.map { $0.segmentIdentifier }
-    let newTemplates = newSegments.compactMap { $0.selectionIdentifier }
+    let newTemplates = newSegments.compactMap(Self.config.builder.cardIdentifier)
     return oldTemplates == newTemplates
   }
   

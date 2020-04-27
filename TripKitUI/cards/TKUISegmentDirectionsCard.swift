@@ -44,6 +44,8 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     titleView.configure(for: segment)
     
     super.init(title: .custom(titleView, dismissButton: titleView.dismissButton), mapManager: mapManager)
+    
+    titleView.apply(style)
   }
   
   required init?(coder: NSCoder) {

@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'TripKit', "~> #{s.version}"
 
-  s.dependency 'TGCardViewController', '>= 1.2'
+  s.dependency 'TGCardViewController', '>= 1.3'
 
   s.dependency 'Kingfisher', '~> 5.8'
   s.dependency 'RxDataSources', '~> 4.0'

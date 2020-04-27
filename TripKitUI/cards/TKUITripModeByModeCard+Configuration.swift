@@ -18,6 +18,14 @@ public protocol TKUITripModeByModePageBuilder {
   /// - Returns: The cards to use for the provided segment, can be empty
   func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)]
   
+  /// Each segment should have an identifier that changes whenever the card's configuration
+  /// changes for this segment. If you return a new identifier for the same segment, the mode-by-mode
+  /// cards will be rebuilt.
+  ///
+  /// - Parameter segment: A segment to display in the mode-by-mode pager
+  /// - Returns: An identifier for the segment, should be non-nil if there's a card for it
+  func cardIdentifier(for segment: TKSegment) -> String?
+  
 }
 
 open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
@@ -33,11 +41,14 @@ open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
       return [(TKUISegmentInstructionCard(for: segment, mapManager: mapManager), .onSegment)]
     }
   }
+  
+  open func cardIdentifier(for segment: TKSegment) -> String? {
+    return segment.selectionIdentifier
+  }
 }
 
 
 extension TKUITripModeByModeCard {
-  
   
   /// Configurtion of any `TKUITripModeByModeCard`. Use this to determine how
   /// each page is built.

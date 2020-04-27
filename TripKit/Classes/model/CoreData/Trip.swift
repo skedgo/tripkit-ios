@@ -136,6 +136,10 @@ extension Trip: TKTrip {
 /// :nodoc:
 extension Trip: TKRealTimeUpdatable {
   public var wantsRealTimeUpdates: Bool {
+    if segments.contains(where: { $0.bookingConfirmation != nil }) {
+      return true // booking confirmations can update at any time
+    }
+    
     guard updateURLString != nil else { return false }
     return wantsRealTimeUpdates(forStart: departureTime, end: arrivalTime, forPreplanning: true)
   }

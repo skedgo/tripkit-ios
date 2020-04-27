@@ -1,4 +1,4 @@
-git "git@gitlab.com:SkedGo/tripgo-cards-ios.git" "bffc866eb1dc32f03f28ec4284018d38e0922ba2"
+git "git@gitlab.com:SkedGo/tripgo-cards-ios.git" "452ed9569de5112309c05b1427ef2baaffbde813"
 github "ReactiveX/RxSwift" "5.1.1"
 github "RxSwiftCommunity/RxDataSources" "4.0.1"
 github "nighthawk/ASPolygonKit" "0.2.1"

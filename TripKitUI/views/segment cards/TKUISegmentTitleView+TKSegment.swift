@@ -16,7 +16,6 @@ extension TKUISegmentTitleView {
   
   public func configure(for segment: TKSegment, preferredTitle: String? = nil, mode: TKUISegmentMode = .onSegment) {
     update(for: segment, preferredTitle: preferredTitle, mode: mode)
-    
     monitorUpdates(for: segment, preferredTitle: preferredTitle, mode: mode)
   }
   
@@ -38,9 +37,9 @@ extension TKUISegmentTitleView {
     titleLabel.text = title
     subtitleLabel.text = subtitle
     
-    modeWrapper.backgroundColor = .tkStateSuccess
+    modeWrapper.backgroundColor = .clear
     modeWrapper.layer.borderWidth = 2
-    modeWrapper.layer.borderColor = UIColor.tkStateSuccess.cgColor
+    modeWrapper.layer.borderColor = UIColor.tkNeutral3.cgColor 
     modeIcon.setImage(with: segment.tripSegmentModeImageURL, asTemplate: segment.tripSegmentModeImageIsTemplate, placeholder: segment.tripSegmentModeImage) { [weak self] success in
       guard
         let self = self,
@@ -60,8 +59,7 @@ extension TKUISegmentTitleView {
       .subscribe(onNext: { [weak self] _ in
         self?.update(for: segment, preferredTitle: preferredTitle, mode: mode)
       })
-      .disposed(by: disposeBag)
-    
+      .disposed(by: disposeBag)    
   }
   
 }
