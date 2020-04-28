@@ -208,7 +208,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSArray<NSString *> *)bookingExternalActions;
 - (nullable NSDictionary<NSString*, id> *)bookingConfirmationDictionary;
 
-
 @property (nullable, readonly) NSString *tripSegmentModeTitle;
 @property (nullable, readonly) NSString *tripSegmentModeSubtitle;
 @property (nullable, readonly) TKColor *tripSegmentModeColor;

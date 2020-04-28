@@ -9,14 +9,17 @@
 import Foundation
 
 import TGCardViewController
+import RxSwift
 
 public protocol TKUITripModeByModePageBuilder {
   
   /// - Parameters:
   ///   - segment: A segment to display in the mode-by-mode pager
   ///   - mapManager: The mode-by-mode pager's map manager
+  ///   - updates: Observable sequence that fires when there are real-time updates for the trip, in
+  ///              that any card needs to reflect them. Safe to be ignored.
   /// - Returns: The cards to use for the provided segment, can be empty
-  func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)]
+  func cards(for segment: TKSegment, mapManager: TKUITripMapManager, updates: Observable<TKRealTimeUpdateProgress<Trip>>) -> [(TGCard, TKUISegmentMode)]
   
   /// Each segment should have an identifier that changes whenever the card's configuration
   /// changes for this segment. If you return a new identifier for the same segment, the mode-by-mode
@@ -25,14 +28,18 @@ public protocol TKUITripModeByModePageBuilder {
   /// - Parameter segment: A segment to display in the mode-by-mode pager
   /// - Returns: An identifier for the segment, should be non-nil if there's a card for it
   func cardIdentifier(for segment: TKSegment) -> String?
-  
+
+  /// Gets called every second with `counter` incrementing each second.
+  ///
+  /// - Returns: If the trip should be updated with real-time data
+  func shouldUpdate(trip: Trip, counter: Int) -> Bool
 }
 
 open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
   
   public init() {}
   
-  open func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)] {
+  open func cards(for segment: TKSegment, mapManager: TKUITripMapManager, updates: Observable<TKRealTimeUpdateProgress<Trip>>) -> [(TGCard, TKUISegmentMode)] {
     if segment.order != .regular {
       return []
     } else if TKUISegmentDirectionsCard.canShowInstructions(for: segment) {
@@ -44,6 +51,10 @@ open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
   
   open func cardIdentifier(for segment: TKSegment) -> String? {
     return segment.selectionIdentifier
+  }
+  
+  open func shouldUpdate(trip: Trip, counter: Int) -> Bool {
+    return counter % 15 == 0
   }
 }
 

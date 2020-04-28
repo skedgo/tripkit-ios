@@ -96,7 +96,8 @@ public class TKUITripModeByModeCard: TGPageCard {
       throw Error.segmentTripDoesNotMatchMapManager
     }
     
-    self.viewModel = TKUITripModeByModeViewModel(trip: trip)
+    let viewModel = TKUITripModeByModeViewModel(trip: trip)
+    self.viewModel = viewModel
     
     let tripMapManager = mapManager ?? TKUITripMapManager(trip: trip)
     self.tripMapManager = tripMapManager
@@ -111,7 +112,11 @@ public class TKUITripModeByModeCard: TGPageCard {
         assertionFailure("Make sure your TKUITripModeByModePageBuilder returns an identifier for every segment that gets a card.")
         identifier = segment.selectionIdentifier ?? ""
       }
-      let cards = builder.cards(for: segment, mapManager: tripMapManager)
+      let cards = builder.cards(
+        for: segment,
+        mapManager: tripMapManager,
+        updates: viewModel.realTimeUpdate.asObservable()
+      )
       let range = previous.1 ..< previous.1 + cards.count
       let info = SegmentCardsInfo(segmentIndex: segment.index, segmentIdentifier: identifier, cards: cards, cardsRange: range)
       return (previous.0 + [info], range.upperBound)
