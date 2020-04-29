@@ -68,6 +68,8 @@ public class TKUIServiceCard: TGTableCard {
       mapManager: mapManager,
       initialPosition: .peaking
     )
+    
+    didInit()
   }
   
   required convenience public init?(coder: NSCoder) {
@@ -76,11 +78,16 @@ public class TKUIServiceCard: TGTableCard {
     }
     let disembarkation: StopVisits? = coder.decodeManaged(forKey: "disembarkation", in: TripKit.shared.tripKitContext)
     self.init(embarkation: embarkation, disembarkation: disembarkation)
+    didInit()
   }
   
   override public func encode(with aCoder: NSCoder) {
     aCoder.encodeManaged(dataInput.embarkation, forKey: "embarkation")
     aCoder.encodeManaged(dataInput.disembarkation, forKey: "disembarkation")
+  }
+  
+  private func didInit() {
+    self.titleView?.apply(style)
   }
   
   // MARK: - Card life cycle
@@ -183,7 +190,6 @@ public class TKUIServiceCard: TGTableCard {
     
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
-
   }
   
 }

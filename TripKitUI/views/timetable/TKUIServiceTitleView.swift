@@ -49,14 +49,22 @@ class TKUIServiceTitleView: UIView {
     dismissButton.setTitle(nil, for: .normal)
     dismissButton.accessibilityLabel = Loc.Close
   }
+  
+  func apply(_ style: TGCardStyle) {
+    guard dismissButton != nil else { return }
+    
+    let styledImage = TGCard.closeButtonImage(style: style)
+    dismissButton.setImage(styledImage, for: .normal)
+    dismissButton.setTitle(nil, for: .normal)
+  }
 
 }
 
 // MARK: - TKUIDepartureCellContent compatibility
 
 extension TKUIServiceTitleView {
+  
   func configure(with model: TKUIDepartureCellContent) {
-    
     serviceTitleLabel.text = model.lineText ?? Loc.Service
     
     serviceImageView.setImage(with: model.imageURL, asTemplate: model.imageIsTemplate, placeholder: model.placeholderImage)
@@ -75,4 +83,5 @@ extension TKUIServiceTitleView {
     serviceTimeLabel.attributedText = model.timeText
     serviceTimeLabel.accessibilityLabel = model.accessibilityTimeText ?? model.timeText.string
   }
+  
 }
