@@ -193,21 +193,21 @@
     BOOL asBranding = [segment tripSegmentModeImageIsBranding];
     if (modeImageURL) {
       UIView *modeCircleBackground = nil;
-      if (!asTemplate) {
-        // remote images that aren't templates look weird on the background colour
-        CGRect circleFrame = CGRectInset(newFrame, -1.0f, -1.0f);
+
+      if (asBranding) {
+        CGRect brandFrame = newFrame;
+        brandFrame.origin.x += brandFrame.size.width + 2;
+
+        // Always add a circle first as these look weird on background color
+        CGRect circleFrame = CGRectInset(brandFrame, -1.0f, -1.0f);
         modeCircleBackground = [[UIView alloc] initWithFrame:circleFrame];
         modeCircleBackground.backgroundColor = [UIColor whiteColor];
         modeCircleBackground.layer.cornerRadius = CGRectGetWidth(circleFrame) / 2;
         modeCircleBackground.alpha = alpha;
         [self addSubview:modeCircleBackground];
-      }
-      
-      if (asBranding) {
+
         // brand images are not overlaid over the mode icon, but appear next
         // to them
-        CGRect brandFrame = newFrame;
-        brandFrame.origin.x += brandFrame.size.width + 2;
         brandImageView = [[UIImageView alloc] initWithFrame:brandFrame];
         brandImageView.autoresizingMask = mask;
         brandImageView.alpha = alpha;
@@ -215,6 +215,15 @@
         newFrame = brandFrame;
         
       } else {
+        if (!asTemplate) {
+          // remote images that aren't templates look weird on the background colour
+          CGRect circleFrame = CGRectInset(newFrame, -1.0f, -1.0f);
+          modeCircleBackground = [[UIView alloc] initWithFrame:circleFrame];
+          modeCircleBackground.backgroundColor = [UIColor whiteColor];
+          modeCircleBackground.layer.cornerRadius = CGRectGetWidth(circleFrame) / 2;
+          modeCircleBackground.alpha = alpha;
+          [self addSubview:modeCircleBackground];
+        }
         [modeImageView setImageWithURL:modeImageURL asTemplate:asTemplate placeholderImage:image completionHandler:^(BOOL succeed) {
           if (!succeed) {
             [modeCircleBackground removeFromSuperview];
