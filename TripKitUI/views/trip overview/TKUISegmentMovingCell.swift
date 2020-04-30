@@ -31,7 +31,7 @@ class TKUISegmentMovingCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    backgroundColor = .tkBackground
+    backgroundColor = .clear
 
     titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
     titleLabel.textColor = .tkLabelPrimary

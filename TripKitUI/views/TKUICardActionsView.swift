@@ -75,6 +75,8 @@ extension TKUICardActionsView {
     addSeparator()
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    collectionView.showsHorizontalScrollIndicator = false
+    collectionView.showsVerticalScrollIndicator = false
     let layoutHelper = TKUICardActionsViewLayoutHelper(collectionView: collectionView)
     layoutHelper.delegate = self
     self.compactLayoutHelper = layoutHelper

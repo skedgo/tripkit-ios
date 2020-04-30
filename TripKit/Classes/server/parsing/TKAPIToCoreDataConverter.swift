@@ -286,7 +286,6 @@ extension Vehicle {
     if let lastUpdated = model.lastUpdate {
       lastUpdate = Date(timeIntervalSince1970: lastUpdated)
     } else {
-      assertionFailure("Vehicle is missing last update. Falling back to now.")
       lastUpdate = Date()
     }
     

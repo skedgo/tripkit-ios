@@ -26,7 +26,7 @@ class TKUISegmentAlertCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    backgroundColor = .tkBackground
+    backgroundColor = .clear
 
     // Same styling as in TKUIServiceHeaderView
     contentWrapper.layer.borderWidth = 1.0

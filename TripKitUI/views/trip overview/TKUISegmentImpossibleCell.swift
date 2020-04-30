@@ -24,6 +24,8 @@ class TKUISegmentImpossibleCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    backgroundColor = .clear
+    
     titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
     titleLabel.textColor = TKColor.tkLabelPrimary
     titleLabel.text = Loc.YouMightNotMakeThisTransfer

@@ -137,6 +137,7 @@ private extension TKUITripMapManager {
     for segment in trip.segments {
       // Add vehicles
       if let primary = segment.realTimeVehicle {
+        assert(primary.managedObjectContext != nil)
         dynamicAnnotations.append(primary)
       }
       dynamicAnnotations.append(contentsOf: segment.realTimeAlternativeVehicles)

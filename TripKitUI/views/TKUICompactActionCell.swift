@@ -48,7 +48,7 @@ class TKUICompactActionCell: UICollectionViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    contentView.backgroundColor = .tkBackground
+    contentView.backgroundColor = .clear
     
     imageWrapper.layer.cornerRadius = imageWrapper.bounds.width * 0.5
     

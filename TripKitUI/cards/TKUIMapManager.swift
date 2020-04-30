@@ -285,25 +285,27 @@ extension TKUIMapManager {
       return
     }
     
-    for annotation in dynamicAnnotations {
-      if let vehicle = annotation as? Vehicle {
-        // Trigger KVO for the sub-title update which has the countdown
-        vehicle.setSubtitle(nil)
+    let vehicles = dynamicAnnotations
+      .compactMap { $0 as? Vehicle }
+      .filter { $0.managedObjectContext != nil }
+    
+    for vehicle in vehicles {
+      // Trigger KVO for the sub-title update which has the countdown
+      vehicle.setSubtitle(nil)
+      
+      if let view = mapView.view(for: vehicle) as? TKUIVehicleAnnotationView {
+        // Fade in/out according to age
+        view.aged(by: CGFloat(vehicle.ageFactor))
         
-        if let view = mapView.view(for: vehicle) as? TKUIVehicleAnnotationView {
-          // Fade in/out according to age
-          view.aged(by: CGFloat(vehicle.ageFactor))
-          
-          // Move vehicle. Temporarily revert to to coordinate based on where
-          // the view is, so that we can animate properly to the new view.
-          let goodCoordinate = vehicle.coordinate
-          let center = CGPoint(x: view.frame.midX, y: view.frame.midY)
-          vehicle.setCoordinate(mapView.convert(center, toCoordinateFrom: view.superview))
-          UIView.animate(withDuration: animated ? 1 : 0) {
-            // now we can animate to the proper coordinate
-            vehicle.setCoordinate(goodCoordinate)
-            TKUIAnnotationViewBuilder.update(annotationView: view, forHeading: self.heading)
-          }
+        // Move vehicle. Temporarily revert to to coordinate based on where
+        // the view is, so that we can animate properly to the new view.
+        let goodCoordinate = vehicle.coordinate
+        let center = CGPoint(x: view.frame.midX, y: view.frame.midY)
+        vehicle.setCoordinate(mapView.convert(center, toCoordinateFrom: view.superview))
+        UIView.animate(withDuration: animated ? 1 : 0) {
+          // now we can animate to the proper coordinate
+          vehicle.setCoordinate(goodCoordinate)
+          TKUIAnnotationViewBuilder.update(annotationView: view, forHeading: self.heading)
         }
       }
     }

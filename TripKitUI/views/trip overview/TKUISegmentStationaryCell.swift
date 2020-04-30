@@ -39,8 +39,8 @@ class TKUISegmentStationaryCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    backgroundColor = .tkBackground
-    lineDot.backgroundColor = .tkBackground
+    backgroundColor = .clear
+    lineDot.backgroundColor = .clear
     
     titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
     titleLabel.textColor = .tkLabelPrimary
@@ -250,7 +250,7 @@ extension TKUISegmentStationaryCell {
     } else {
       linePinImageView.isHidden = false
       linePinImageView.tintColor = item.connection?.color ?? .tkLabelPrimary
-      linePinImageView.backgroundColor = .tkBackground
+      linePinImageView.backgroundColor = .clear
       lineDot.isHidden = true
     }
     
