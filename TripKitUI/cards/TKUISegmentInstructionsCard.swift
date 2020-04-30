@@ -37,7 +37,7 @@ public class TKUISegmentInstructionCard: TGPlainCard {
     
     super.init(title: .custom(titleView, dismissButton: titleView.dismissButton), contentView: instructionView, mapManager: mapManager)
     
-    titleView.apply(style)
+    titleView.applyStyleToCloseButton(style)
   }
   
   required init?(coder: NSCoder) {
