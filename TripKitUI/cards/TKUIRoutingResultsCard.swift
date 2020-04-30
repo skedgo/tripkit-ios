@@ -142,6 +142,14 @@ public class TKUIRoutingResultsCard: TGTableCard {
     // Don't de-select as we use a custom style and want to keep highlighting
     // the best trip (as it's also highlighted on the map still).
     self.deselectOnAppear = false
+    
+    switch self.title {
+    case .custom(_, let dismissButton):
+      let styledCloseImage = TGCard.closeButtonImage(style: style)
+      dismissButton?.setImage(styledCloseImage, for: .normal)
+      dismissButton?.setTitle(nil, for: .normal)
+    default: return
+    }
   }
   
   public override func encode(with aCoder: NSCoder) {

@@ -51,7 +51,7 @@ public class TKUISegmentTitleView: UIView {
     modeIcon.tintColor = .tkBackground
   }
   
-  public func apply(_ style: TGCardStyle) {
+  public func applyStyleToCloseButton(_ style: TGCardStyle) {
     guard dismissButton != nil else { return }
     
     let styledImage = TGCard.closeButtonImage(style: style)

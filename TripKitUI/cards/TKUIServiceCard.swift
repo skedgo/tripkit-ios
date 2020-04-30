@@ -76,8 +76,10 @@ public class TKUIServiceCard: TGTableCard {
     guard let embarkation: StopVisits = coder.decodeManaged(forKey: "embarkation", in: TripKit.shared.tripKitContext) else {
       return nil
     }
+    
     let disembarkation: StopVisits? = coder.decodeManaged(forKey: "disembarkation", in: TripKit.shared.tripKitContext)
     self.init(embarkation: embarkation, disembarkation: disembarkation)
+    
     didInit()
   }
   
@@ -87,7 +89,13 @@ public class TKUIServiceCard: TGTableCard {
   }
   
   private func didInit() {
-    self.titleView?.apply(style)
+    switch self.title {
+    case .custom(_, let dismissButton):
+      let styledButtonImage = TGCard.closeButtonImage(style: style)
+      dismissButton?.setImage(styledButtonImage, for: .normal)
+      dismissButton?.setTitle(nil, for: .normal)
+    default: return
+    }
   }
   
   // MARK: - Card life cycle
