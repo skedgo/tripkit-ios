@@ -305,6 +305,7 @@ public func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsVie
   case (.trip(let left), .trip(let right)): return left.objectID == right.objectID
   case (.nano(let left), .nano(let right)): return left.objectID == right.objectID
   case (.progress, .progress): return true
+  case (.advisory(let left), .advisory(let right)): return left.hashCode == right.hashCode
   default: return false
   }
 }
@@ -317,7 +318,7 @@ extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
     case .trip(let trip),
          .nano(let trip): return trip.objectID.uriRepresentation().absoluteString
     case .progress: return "progress_indicator"
-    case .advisory(let alert): return "\(alert.hashCode)"
+    case .advisory: return "advisory" // should only ever have one
     }
   }
 }

@@ -34,8 +34,9 @@ public class TKUISegmentTitleView: UIView {
     
     backgroundColor = .tkBackground
     
+    let primaryColor = TKUICustomization.shared.cardStyle.titleTextColor
     titleLabel.font = TKUICustomization.shared.cardStyle.titleFont
-    titleLabel.textColor = TKUICustomization.shared.cardStyle.titleTextColor
+    titleLabel.textColor = primaryColor
     titleLabel.text = nil
 
     subtitleLabel.font = TKUICustomization.shared.cardStyle.subtitleFont
@@ -48,7 +49,7 @@ public class TKUISegmentTitleView: UIView {
     dismissButton.setTitle(nil, for: .normal)
     dismissButton.accessibilityLabel = Loc.Close
 
-    modeIcon.tintColor = .tkBackground
+    modeIcon.tintColor = primaryColor
   }
   
   public func applyStyleToCloseButton(_ style: TGCardStyle) {

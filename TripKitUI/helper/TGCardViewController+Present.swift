@@ -39,7 +39,7 @@ extension TGCardViewController {
         presentation?.sourceView = view
       }
     } else {
-      presentee.modalPresentationStyle = .currentContext
+      presentee.modalPresentationStyle = actualStyle
     }
     present(presentee, animated: true)
     
