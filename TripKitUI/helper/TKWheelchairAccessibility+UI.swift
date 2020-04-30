@@ -34,7 +34,7 @@ extension TKWheelchairAccessibility {
   var miniIcon: UIImage? {
     switch self {
     case .accessible:
-      return TripKitUIBundle.imageNamed("icon-wheelchair")
+      return TripKitUIBundle.imageNamed("icon-wheelchair-mini")
     
     case .notAccessible:
       return nil // Can be added at a later stage, when needed
