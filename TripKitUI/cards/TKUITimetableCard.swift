@@ -135,6 +135,11 @@ public class TKUITimetableCard : TGTableCard {
     // Don't de-select as we use a custom style and want to keep highlighting
     // the selected departure
     self.deselectOnAppear = false
+    
+    switch self.title {
+    case .custom(let customTitle, _): (customTitle as? TKUISegmentTitleView)?.applyStyleToCloseButton(style)
+    default: return
+    }
   }
   
   override public func encode(with aCoder: NSCoder) {
