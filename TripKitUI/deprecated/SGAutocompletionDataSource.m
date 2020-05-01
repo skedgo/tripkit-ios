@@ -101,21 +101,10 @@
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellID];
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
-  
-    BOOL autoShrinkText = NO;
-    if (autoShrinkText) {
-      cell.textLabel.minimumScaleFactor = 0.5f;
-      cell.detailTextLabel.minimumScaleFactor = 0.5f;
-    } else {
-      // Forcng the minimum scale factor here, otherwise, texts would still
-      // get shrunk in some cases.
-      cell.textLabel.minimumScaleFactor = 1.0f;
-      cell.detailTextLabel.minimumScaleFactor = 1.0f;
-    }
+    cell.textLabel.numberOfLines = 2;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.accessoryView = nil;
 	}
-  
-  cell.accessoryType = UITableViewCellAccessoryNone;
-  cell.accessoryView = nil;
 	
   SGSearchSection sectionType = [self typeOfSection:indexPath.section];
   switch (sectionType) {
