@@ -17,6 +17,10 @@ class TKUIAttributionCell: UITableViewCell {
   
   static let nib = UINib(nibName: "TKUIAttributionCell", bundle: Bundle(for: TKUIAttributionCell.self))
   
+  var attribution: TKAPI.DataAttribution? {
+    didSet { updateUI() }
+  }
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     
@@ -33,11 +37,12 @@ class TKUIAttributionCell: UITableViewCell {
     bodyTextView.backgroundColor = .clear
   }
   
-  func configure(for attribution: TKAPI.DataAttribution) {
-    titleTextView.text = attribution.provider.name
-    
+  private func updateUI() {
+    guard let attribution = self.attribution else { return }
+    titleTextView.text = attribution.provider.name    
     bodyTextView.text = attribution.disclaimer
     bodyTextView.isHidden = (attribution.disclaimer?.isEmpty ?? true)
+    accessoryType = (attribution.provider.website != nil) ? .detailButton : .none
   }
 
 }

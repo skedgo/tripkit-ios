@@ -41,6 +41,7 @@ public class TKUIAttributionTableViewController: UITableViewController {
 
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 44
+    tableView.tableFooterView = UIView()
   }
   
   @objc
@@ -60,15 +61,8 @@ public class TKUIAttributionTableViewController: UITableViewController {
   }
 
   override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUIAttributionCell.reuseIdentifier, for: indexPath) as? TKUIAttributionCell else {
-      preconditionFailure()
-    }
-    
-    let attribution = attributions[indexPath.row]
-    
-    cell.configure(for: attribution)
-    cell.accessoryType = (attribution.provider.website != nil) ? .detailButton : .none
-
+    let cell = tableView.dequeueReusableCell(withIdentifier: TKUIAttributionCell.reuseIdentifier, for: indexPath) as! TKUIAttributionCell
+    cell.attribution = attributions[indexPath.row]
     return cell
   }
   
