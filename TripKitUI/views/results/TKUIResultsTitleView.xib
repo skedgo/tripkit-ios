@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,11 +20,11 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICE-3N-AiH">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="NF7-bE-gIz">
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="NF7-bE-gIz">
                                     <rect key="frame" x="16" y="0.0" width="39.5" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdn-Jf-NxY">
-                                            <rect key="frame" x="0.0" y="0.0" width="18.5" height="29.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="18.5" height="27.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -80,7 +80,7 @@
                                 <constraint firstItem="eeI-TK-YqT" firstAttribute="centerY" secondItem="RTz-uu-ici" secondAttribute="centerY" id="WwG-Fx-rrE"/>
                                 <constraint firstAttribute="bottom" secondItem="NF7-bE-gIz" secondAttribute="bottom" id="cFq-Wa-THZ"/>
                                 <constraint firstItem="eeI-TK-YqT" firstAttribute="centerX" secondItem="RTz-uu-ici" secondAttribute="centerX" id="d23-PY-JjK"/>
-                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RTz-uu-ici" secondAttribute="trailing" constant="20" symbolic="YES" id="i04-Ec-vId"/>
+                                <constraint firstItem="88I-7o-sPz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RTz-uu-ici" secondAttribute="trailing" constant="8" symbolic="YES" id="i04-Ec-vId"/>
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b37-CC-w2q">
