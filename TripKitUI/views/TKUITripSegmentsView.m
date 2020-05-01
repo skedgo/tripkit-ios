@@ -196,7 +196,7 @@
 
       if (asBranding) {
         CGRect brandFrame = newFrame;
-        brandFrame.origin.x += brandFrame.size.width + 2;
+        brandFrame.origin.x += brandFrame.size.width + 4;
 
         // Always add a circle first as these look weird on background color
         CGRect circleFrame = CGRectInset(brandFrame, -1.0f, -1.0f);
