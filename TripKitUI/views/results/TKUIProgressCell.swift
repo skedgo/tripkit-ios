@@ -20,8 +20,13 @@ public class TKUIProgressCell: UITableViewCell {
   override public func awakeFromNib() {
     super.awakeFromNib()
     
-    titleLabel.font = TKStyleManager.customFont(forTextStyle: .subheadline)
-    titleLabel.textColor = .tkLabelSecondary
+    contentView.backgroundColor = .tkBackground
+    
+    spinner.color = .tkLabelPrimary
+    spinner.startAnimating()
+    
+    titleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    titleLabel.textColor = .tkLabelPrimary
   }
   
   public override func prepareForReuse() {
