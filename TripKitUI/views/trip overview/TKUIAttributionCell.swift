@@ -37,7 +37,7 @@ class TKUIAttributionCell: UITableViewCell {
     titleTextView.text = attribution.provider.name
     
     bodyTextView.text = attribution.disclaimer
-    bodyTextView.isHidden = (attribution.disclaimer == nil)
+    bodyTextView.isHidden = (attribution.disclaimer?.isEmpty ?? true)
   }
 
 }
