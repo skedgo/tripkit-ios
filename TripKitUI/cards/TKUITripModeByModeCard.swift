@@ -245,8 +245,15 @@ extension TKUITripModeByModeCard {
     label.font = TKStyleManager.customFont(forTextStyle: .footnote)
     label.textAlignment = .center
     
+    // this is the placeholder view to create a space between the
+    // the header (what we are building here) and the botom of
+    // the view that is going to contain it.
+    let spacer = UIView()
+    spacer.backgroundColor = .clear
+    spacer.heightAnchor.constraint(equalToConstant: 8).isActive = true
+    
     // combine them
-    let stack = UIStackView(arrangedSubviews: [segmentsView, label])
+    let stack = UIStackView(arrangedSubviews: [segmentsView, label, spacer])
     stack.axis = .vertical
     stack.distribution = .fill
     
