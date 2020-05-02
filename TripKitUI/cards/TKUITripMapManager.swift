@@ -49,10 +49,14 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     add(trip)
     
     NotificationCenter.default.rx
-      .notification(.TKTripUpdatedNotification, object: trip)
-      .subscribe(onNext: { [weak self] _ in
-        guard let self = self else { return }
-        self.updateDynamicAnnotation(trip: self.trip)
+      .notification(.TKUIUpdatedRealTimeData, object: trip)
+      .subscribe(onNext: { [weak self] notification in
+        guard
+          let self = self,
+          let trip = notification.object as? Trip,
+          trip == self.trip
+          else { return }
+        self.updateDynamicAnnotation(trip: trip)
       })
       .disposed(by: disposeBag)
   }

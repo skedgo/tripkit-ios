@@ -11,17 +11,13 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-extension Notification.Name {
-  public static let TKTripUpdatedNotification = Notification.Name("TKTripUpdatedNotification")
-}
-
 class TKUITripModeByModeViewModel {
   
   init(trip: Trip) {
     self.realTimeUpdate = TKUITripModeByModeViewModel.fetchRealTime(for: trip)
     
     self.tripDidUpdate = NotificationCenter.default.rx
-      .notification(.TKTripUpdatedNotification, object: trip)
+      .notification(.TKUIUpdatedRealTimeData, object: trip)
       .compactMap { $0.object as? Trip }
       .asSignal(onErrorSignalWith: .empty())
   }

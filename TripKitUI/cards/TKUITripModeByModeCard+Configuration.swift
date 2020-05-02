@@ -16,10 +16,8 @@ public protocol TKUITripModeByModePageBuilder {
   /// - Parameters:
   ///   - segment: A segment to display in the mode-by-mode pager
   ///   - mapManager: The mode-by-mode pager's map manager
-  ///   - updates: Observable sequence that fires when there are real-time updates for the trip, in
-  ///              that any card needs to reflect them. Safe to be ignored.
   /// - Returns: The cards to use for the provided segment, can be empty
-  func cards(for segment: TKSegment, mapManager: TKUITripMapManager, updates: Observable<TKRealTimeUpdateProgress<Trip>>) -> [(TGCard, TKUISegmentMode)]
+  func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)]
   
   /// Each segment should have an identifier that changes whenever the card's configuration
   /// changes for this segment. If you return a new identifier for the same segment, the mode-by-mode
@@ -39,7 +37,7 @@ open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
   
   public init() {}
   
-  open func cards(for segment: TKSegment, mapManager: TKUITripMapManager, updates: Observable<TKRealTimeUpdateProgress<Trip>>) -> [(TGCard, TKUISegmentMode)] {
+  open func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)] {
     if segment.order != .regular {
       return []
     } else if TKUISegmentDirectionsCard.canShowInstructions(for: segment) {

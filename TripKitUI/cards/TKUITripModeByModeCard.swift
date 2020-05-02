@@ -114,8 +114,7 @@ public class TKUITripModeByModeCard: TGPageCard {
       }
       let cards = builder.cards(
         for: segment,
-        mapManager: tripMapManager,
-        updates: viewModel.realTimeUpdate.asObservable()
+        mapManager: tripMapManager
       )
       let range = previous.1 ..< previous.1 + cards.count
       let info = SegmentCardsInfo(segmentIndex: segment.index, segmentIdentifier: identifier, cards: cards, cardsRange: range)
@@ -329,24 +328,28 @@ extension TKUITripModeByModeCard {
     assert(trip == tripMapManager.trip, "Uh-oh, trip changed!")
     
     let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
-    guard segmentsMatch(cardSegments) else {
+    
+    // Always pass on generic updates, trip map manager will react itself
+    TKUITripModeByModeCard.notifyOfUpdates(in: trip)
+
+    if segmentsMatch(cardSegments) {
+      // Update segment view in header
+      headerSegmentsView?.configure(forSegments: trip.headerSegments, allowSubtitles: true, allowInfoIcons: false)
+      
+      // Update ETA in header
+      headerETALabel?.text = TKUITripModeByModeCard.headerTimeText(for: trip)
+      
+    } else if let delegate = modeByModeDelegate {
       // We use the index here as the identifier would have changed. The index
       // gives us a good guess for finding the corresponding segment in the new
       // trip.
       let segmentIndex = SegmentCardsInfo.cardsInfo(ofCardAtIndex: currentPageIndex, in: segmentCards)?.segmentIndex
       let newSegment = cardSegments.first(where: { $0.index == segmentIndex }) ?? cardSegments.first!
-      self.modeByModeDelegate?.modeByModeRequestsRebuildForNewSegments(self, trip: trip, currentSegment: newSegment)
-      return
+      delegate.modeByModeRequestsRebuildForNewSegments(self, trip: trip, currentSegment: newSegment)
+    
+    } else {
+      assertionFailure("Segments changed due to real-time data and MxM should be reset, but there's no `modeByModeDelegate` (anymore).")
     }
-    
-    // Update segment view in header
-    headerSegmentsView?.configure(forSegments: trip.headerSegments, allowSubtitles: true, allowInfoIcons: false)
-    
-    // Update ETA in header
-    headerETALabel?.text = TKUITripModeByModeCard.headerTimeText(for: trip)
-    
-    // Also pass on generic updates, trip map manager will react itself
-    TKUITripModeByModeCard.notifyOfUpdates(in: trip)
   }
   
 }
