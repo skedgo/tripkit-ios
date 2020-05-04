@@ -12,6 +12,8 @@ import TGCardViewController
 
 public extension TKUIRoutingResultsCard {
   
+  typealias TripGroupAction = TKUICardAction<TKUIRoutingResultsCard, TripGroup>
+
   /// Enumeration used when the user taps a button to get help, see `TKUIRoutingResultsCard.Configuration.contactCustomerSupport`
   enum SupportType {
     /// User tried querying for a from/to pair that isn't supported yet
@@ -44,6 +46,11 @@ public extension TKUIRoutingResultsCard {
     /// Defaults to nil, which means the SDK will read from `TKUserProfile`
     public var limitToModes: [String]? = nil
     
+    /// Set this to add a button for a trip group
+    ///
+    /// Called when a results card gets presented.
+    public var tripGroupActionFactory: ((TripGroup) -> TripGroupAction?)?
+
     /// Set this to have a button on the results card to contact customer support
     /// when the user is encountering errors.
     ///

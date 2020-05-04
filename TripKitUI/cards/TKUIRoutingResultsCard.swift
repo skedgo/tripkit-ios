@@ -64,7 +64,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
   private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
-  private let tappedToggleButton = PublishSubject<TripGroup?>()
+  private let tappedSectionButton = PublishSubject<TKUIRoutingResultsViewModel.ActionPayload>()
   
   /// Initializes and returns a newly allocated card showing results of routing from current
   /// location to a specified destination. The card will be placed at the specified initial
@@ -181,7 +181,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
 
     let inputs: TKUIRoutingResultsViewModel.UIInput = (
       selected: selected,
-      tappedToggleButton: tappedToggleButton.asSignal(onErrorSignalWith: .empty()),
+      tappedSectionButton: tappedSectionButton.asSignal(onErrorSignalWith: .empty()),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
       tappedShowModeOptions: .empty(),
@@ -466,12 +466,12 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     footerView.attributedCost = formatter.costString(costs: section.costs)
     footerView.accessibilityLabel = formatter.costAccessibilityLabel(costs: section.costs)
     
-    if let buttonContent = section.toggleButton {
+    if let buttonContent = section.action {
       footerView.button.isHidden = false
       footerView.button.setTitle(buttonContent.title, for: .normal)
       footerView.button.rx.tap
-        .subscribe(onNext: { [unowned tappedToggleButton] in
-          tappedToggleButton.onNext(buttonContent.payload)
+        .subscribe(onNext: { [unowned tappedSectionButton] in
+          tappedSectionButton.onNext(buttonContent.payload)
         })
         .disposed(by: footerView.disposeBag)
 
@@ -602,24 +602,29 @@ private extension TKUIRoutingResultsCard {
 private extension TKUIRoutingResultsCard {
   
   func navigate(to next: TKUIRoutingResultsViewModel.Next) {
+    guard let controller = controller else { return }
+    
     switch next {
     case .showTrip(let trip):
       if let onSelection = onSelection {
         onSelection(trip)
       } else {
-        controller?.push(TKUITripsPageCard(highlighting: trip))
+        controller.push(TKUITripsPageCard(highlighting: trip))
       }
       
     case .showAlert(let alert):
       let alerter = TKUIAlertViewController(style: .plain)
       alerter.alerts = [TKAlertAPIAlertClassWrapper(alert: alert)]
-      controller?.present(alerter, inNavigator: true)
+      controller.present(alerter, inNavigator: true)
       
     case .presentModeConfigurator(let modes, let region):      
       showTransportOptions(modes: modes, for: region)
       
     case .presentDatePicker(let time, let timeZone):
       showTimePicker(time: time, timeZone: timeZone)
+      
+    case .trigger(let action, let group):
+      _ = action.handler(action, self, group, controller.view)
     }
   }
   

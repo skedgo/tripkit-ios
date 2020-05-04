@@ -30,7 +30,7 @@ public class TKUIRoutingResultsViewModel {
 
   public typealias UIInput = (
     selected: Signal<Item>,                     // => do .next
-    tappedToggleButton: Signal<TripGroup?>,     // => expand/collapse
+    tappedSectionButton: Signal<ActionPayload>, // => section action
     tappedDate: Signal<Void>,                   // => return which date to show
     tappedShowModes: Signal<Void>,              // => return which modes to show
     tappedShowModeOptions: Signal<Void>,        // => trigger mode configurator
@@ -172,6 +172,14 @@ public class TKUIRoutingResultsViewModel {
 
     // Navigation
     
+    let triggerAction = inputs.tappedSectionButton
+      .compactMap { action -> Next? in
+        switch action {
+        case let .trigger(action, group): return .trigger(action, group)
+        default: return nil
+        }
+      }
+    
     let showSelection = inputs.selected
       .compactMap(Next.init)
 
@@ -189,7 +197,7 @@ public class TKUIRoutingResultsViewModel {
       .map { Next.presentDatePicker(time: $0.time, timeZone: $0.timeZone) }
       .asSignal(onErrorSignalWith: .empty())
     
-    next = Signal.merge(showSelection, presentTime, presentModes)
+    next = Signal.merge(showSelection, presentTime, presentModes, triggerAction)
   }
   
   let request: Driver<TripRequest>
@@ -251,6 +259,7 @@ extension TKUIRoutingResultsViewModel {
     case showAlert(TKAPI.Alert)
     case presentModeConfigurator(modes: [String], region: TKRegion)
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
+    case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)
     
     init?(selection: Item) {
       switch selection {

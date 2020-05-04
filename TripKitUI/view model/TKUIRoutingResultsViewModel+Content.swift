@@ -86,11 +86,24 @@ extension TKUIRoutingResultsViewModel {
   
   static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput, progress: Observable<TKResultsFetcher.Progress>, advisory: Observable<TKAPI.Alert?>) -> Observable<[Section]> {
     
+    let expand = inputs.tappedSectionButton
+      .filter { action -> Bool in
+        switch action {
+        case .trigger: return false
+        case .collapse, .expand: return true
+        }
+      }.map { action -> TripGroup? in
+        switch action {
+        case .expand(let group): return group
+        default: return nil
+        }
+      }
+    
     return Observable
       .combineLatest(
         groups,
         inputs.changedSortOrder.startWith(.score).asObservable(),
-        inputs.tappedToggleButton.startWith(nil).asObservable(),
+        expand.startWith(nil).asObservable(),
         progress,
         advisory.startWith(nil)
       )
@@ -123,19 +136,22 @@ extension TKUIRoutingResultsViewModel {
         .compactMap { Item(trip: $0, in: group) }
       
       let show: [Item]
-      let toggleButton: SectionToggle?
-      if items.count > 2, expand == group {
+      let action: SectionAction?
+      if let primaryAction = TKUIRoutingResultsCard.config.tripGroupActionFactory?(group) {
         show = items
-        toggleButton = (title: "Less", payload: nil) // TODO: Localise
+        action = (title: primaryAction.title, payload: .trigger(primaryAction, group))
+      } else if items.count > 2, expand == group {
+        show = items
+        action = (title: "Less", payload: .collapse) // TODO: Localise
       } else if items.count > 2 {
         let good = items.filter { $0.trip != nil }.filter { !$0.trip!.showFaded }
         show = Array(good.prefix(2))
-        toggleButton = (title: "More", payload: group) // TODO: Localise
+        action = (title: "More", payload: .expand(group)) // TODO: Localise
       } else {
         show = items
-        toggleButton = nil
+        action = nil
       }
-      return Section(items: show, badge: group.badge, costs: best.costValues, toggleButton: toggleButton)
+      return Section(items: show, badge: group.badge, costs: best.costValues, action: action)
     }
 
     switch progress {
@@ -206,7 +222,13 @@ extension TKUIRoutingResultsViewModel {
 
   }
   
-  public typealias SectionToggle = (title: String, payload: TripGroup?)
+  public enum ActionPayload {
+    case expand(TripGroup)
+    case collapse
+    case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)
+  }
+  
+  public typealias SectionAction = (title: String, payload: ActionPayload)
   
   /// A section on the results screen, which consists of various sorted items
   public struct Section {
@@ -214,7 +236,7 @@ extension TKUIRoutingResultsViewModel {
     
     public var badge: TKMetricClassifier.Classification? = nil
     var costs: [NSNumber: String] = [:]
-    public var toggleButton: SectionToggle? = nil
+    public var action: SectionAction? = nil
   }
 }
 
