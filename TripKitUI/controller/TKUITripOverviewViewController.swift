@@ -31,8 +31,9 @@ public class TKUITripOverviewViewController: TGCardViewController {
     let tripCard = TKUITripOverviewCard(trip: trip)
     tripCard.style = TKUICustomization.shared.cardStyle
     tripCard.selectedAlternativeTripCallback = { [weak self] trip in
-      guard let self = self, let delegate = self.delegate as? TKUITripOverviewViewControllerDelegate else { return }
+      guard let self = self, let delegate = self.delegate as? TKUITripOverviewViewControllerDelegate else { return true }
       delegate.tripOverview(self, selected: trip)
+      return false
     }
     rootCard = tripCard
   }

@@ -55,7 +55,10 @@ public class TKUITripOverviewCard: TGTableCard {
 
   /// Set this callback to include a "Show routes" button, which then presents the `TKUIRoutingResultsCard`
   /// and selecting a different trip will trigger this callback.
-  var selectedAlternativeTripCallback: ((Trip) -> Void)? = nil
+  ///
+  /// Returning `true` will lead to that trip being displayed as usual in *another* `TKUITripOverviewCard`
+  /// that gets pushed, and returning `false` will do nothing, i.e., the callback handles displaying it.
+  var selectedAlternativeTripCallback: ((Trip) -> Bool)? = nil
   
   fileprivate var viewModel: TKUITripOverviewViewModel!
   private let disposeBag = DisposeBag()
