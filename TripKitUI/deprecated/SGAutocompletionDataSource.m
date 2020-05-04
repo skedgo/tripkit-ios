@@ -165,7 +165,7 @@
   cell.detailTextLabel.text = ! [result.subtitle isEqualToString:result.title] ? result.subtitle : nil;
   cell.detailTextLabel.textColor  = UIColor.tkLabelSecondary;
   
-  if (result.isInSupportedRegion) {
+  if ([result.isInSupportedRegion boolValue]) {
     cell.contentView.alpha = result.isInSupportedRegion.boolValue ? 1.0f : 0.33f;
   } else {
     cell.contentView.alpha = 1.0f;

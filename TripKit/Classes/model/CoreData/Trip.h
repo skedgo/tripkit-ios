@@ -82,7 +82,7 @@
 
 /* The first major segment of the trip, according to segment properties (use mainSegment() instead)
  */
-- (nonnull TKSegment *)inferMainSegment;
+- (nullable TKSegment *)inferMainSegment;
 
 /* Call this before changing the segments of a trip.
  */

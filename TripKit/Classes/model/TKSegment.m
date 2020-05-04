@@ -1152,7 +1152,7 @@ NSString *const UninitializedString =  @"UninitializedString";
       _segmentVisits = segmentVisits;
     }
 	}
-	return _segmentVisits;
+  return _segmentVisits ?: @{};
 }
 
 @end

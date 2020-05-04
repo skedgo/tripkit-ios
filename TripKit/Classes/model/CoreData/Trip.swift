@@ -100,7 +100,9 @@ extension Trip: TKTrip {
       TKLog.warn("Trip", text: "Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: \(hash)")
     }
     
-    return inferMainSegment()
+    let inferred = inferMainSegment()
+    assert(inferred != nil)
+    return inferred ?? segments(with: .inSummary).first!
   }
   
   public func segments(with type: TKTripSegmentVisibility) -> [TKTripSegment] {

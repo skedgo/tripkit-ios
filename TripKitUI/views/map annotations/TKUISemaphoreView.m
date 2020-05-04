@@ -207,11 +207,13 @@
     NSString *timeString;
     if (showFrequency) {
       timeString = [TKObjcDateHelper durationStringForMinutes:frequencyInt];
-    } else {
+    } else if (time != nil) {
 			if (nil == timezone) {
 				timezone = [NSTimeZone defaultTimeZone];
 			}
 			timeString = [TKStyleManager timeString:time forTimeZone:timezone];
+    } else {
+      timeString = @"";
     }
     
     timeLabel.text = timeString;
