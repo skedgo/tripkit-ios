@@ -11,6 +11,7 @@ import Foundation
 import TGCardViewController
 
 public protocol TKUITripOverviewViewControllerDelegate: TGCardViewControllerDelegate {
+  func tripOverview(_ controller: TKUITripOverviewViewController, selected trip: Trip)
 }
 
 /// The `TKUITripOverviewViewController` class provides a user interface for viewing a individual trip.
@@ -29,6 +30,10 @@ public class TKUITripOverviewViewController: TGCardViewController {
     
     let tripCard = TKUITripOverviewCard(trip: trip)
     tripCard.style = TKUICustomization.shared.cardStyle
+    tripCard.selectedAlternativeTripCallback = { [weak self] trip in
+      guard let self = self, let delegate = self.delegate as? TKUITripOverviewViewControllerDelegate else { return }
+      delegate.tripOverview(self, selected: trip)
+    }
     rootCard = tripCard
   }
   

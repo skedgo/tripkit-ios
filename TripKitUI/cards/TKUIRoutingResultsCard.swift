@@ -40,6 +40,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
 
   public weak var resultsDelegate: TKUIRoutingResultsCardDelegate?
   
+  var onSelection: ((Trip) -> Void)? = nil
+  
   private let destination: MKAnnotation?
   private var request: TripRequest? // also for saving
 
@@ -602,7 +604,11 @@ private extension TKUIRoutingResultsCard {
   func navigate(to next: TKUIRoutingResultsViewModel.Next) {
     switch next {
     case .showTrip(let trip):
-      controller?.push(TKUITripsPageCard(highlighting: trip))
+      if let onSelection = onSelection {
+        onSelection(trip)
+      } else {
+        controller?.push(TKUITripsPageCard(highlighting: trip))
+      }
       
     case .showAlert(let alert):
       let alerter = TKUIAlertViewController(style: .plain)

@@ -52,6 +52,10 @@ public class TKUITripOverviewCard: TGTableCard {
   private let trip: Trip
   private let index: Int? // for restoring
   private var zoomToTrip: Bool = false // for restoring
+
+  /// Set this callback to include a "Show routes" button, which then presents the `TKUIRoutingResultsCard`
+  /// and selecting a different trip will trigger this callback.
+  var selectedAlternativeTripCallback: ((Trip) -> Void)? = nil
   
   fileprivate var viewModel: TKUITripOverviewViewModel!
   private let disposeBag = DisposeBag()
@@ -173,13 +177,23 @@ public class TKUITripOverviewCard: TGTableCard {
   public override func willAppear(animated: Bool) {
     super.willAppear(animated: animated)
     
-    guard
-      let tv = self.tableView,
-      let factory = TKUITripOverviewCard.config.tripActionsFactory,
-      tv.tableHeaderView == nil
-      else { return }
+    guard let tv = self.tableView, tv.tableHeaderView == nil else { return }
     
-    let actions = factory(viewModel.trip)
+    var actions: [TKUITripOverviewCard.TripAction] = []
+    if let factory = TKUITripOverviewCard.config.tripActionsFactory {
+      actions.append(contentsOf: factory(viewModel.trip))
+    }
+    
+    if selectedAlternativeTripCallback != nil {
+      actions.append(TripAction(title: "Alternatives", icon: .badgeLike) { [weak self] (_, _, trip, _) -> Bool in
+        trip.request.expandForFavorite = true
+        self?.handle(.showAlternativeRoutes(trip.request))
+        return false
+      })
+    }
+    
+    guard !actions.isEmpty else { return }
+
     let actionsView = TripOverviewCardActionsView(frame: CGRect(x: 0, y: 0, width: tv.frame.width, height: 80))
     actionsView.configure(with: actions, model: viewModel.trip, card: self)
     actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
@@ -322,18 +336,15 @@ extension TKUITripOverviewCard {
       segmentHandler(self, segment)
       
     case .showAlerts(let alerts):
-      show(alerts)
-      
+      let alertController = TKUIAlertViewController()
+      alertController.alerts = alerts
+      controller?.present(alertController, inNavigator: true)
+
     case .showAlternativeRoutes(let request):
       let card = TKUIRoutingResultsCard(request: request)
+      card.onSelection = selectedAlternativeTripCallback
       controller?.push(card)
     }
-  }
-  
-  private func show(_ alerts: [TKAlert]) {
-    let alertController = TKUIAlertViewController()
-    alertController.alerts = alerts
-    controller?.present(alertController, inNavigator: true)
   }
   
 }
