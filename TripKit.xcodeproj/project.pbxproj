@@ -615,6 +615,7 @@
 		3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47A7229EEDFE0096860D /* Main.storyboard */; };
 		3ACF47AB229EEDFF0096860D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47AA229EEDFF0096860D /* Assets.xcassets */; };
 		3ACF47AE229EEDFF0096860D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */; };
+		3AD14902246005060062D702 /* TKUISegmentCellHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD14901246005060062D702 /* TKUISegmentCellHelper.swift */; };
 		3AD1DEA61F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */; };
 		3AD53251239825AC00E8EC0C /* routing-pt-continuation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AD5324F239825AC00E8EC0C /* routing-pt-continuation.json */; };
 		3AD62B8E2243964C00069F4E /* TKModeInfo+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */; };
@@ -1325,6 +1326,7 @@
 		3ACF47AA229EEDFF0096860D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3ACF47AD229EEDFF0096860D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3ACF47AF229EEDFF0096860D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AD14901246005060062D702 /* TKUISegmentCellHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISegmentCellHelper.swift; sourceTree = "<group>"; };
 		3AD1DEA51F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKGeoJSON+NamedCoordinate.swift"; sourceTree = "<group>"; };
 		3AD5324F239825AC00E8EC0C /* routing-pt-continuation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-continuation.json"; sourceTree = "<group>"; };
 		3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKModeInfo+Image.swift"; sourceTree = "<group>"; };
@@ -1676,6 +1678,7 @@
 				3A6DF0F1202C8EB80084CB2C /* TKUIPathFriendlinessView.xib */,
 				D33E6C88239F11B500F2AF3B /* TKUISegmentAlertCell.swift */,
 				D33E6C89239F11B500F2AF3B /* TKUISegmentAlertCell.xib */,
+				3AD14901246005060062D702 /* TKUISegmentCellHelper.swift */,
 				3A201F2023BB86A600763948 /* TKUISegmentImpossibleCell.swift */,
 				3A201F1F23BB86A500763948 /* TKUISegmentImpossibleCell.xib */,
 				3A6E7D3E20EFBD4800013253 /* TKUISegmentMovingCell.swift */,
@@ -3479,6 +3482,7 @@
 				3AFD397620D93DC200FDC7D0 /* TKUIResultsAccessoryView.swift in Sources */,
 				3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */,
 				3A6DF120202C8EB80084CB2C /* UIImageView+Kingfisher.swift in Sources */,
+				3AD14902246005060062D702 /* TKUISegmentCellHelper.swift in Sources */,
 				3A6DF13E202C8EB80084CB2C /* TKUIPathFriendlinessView.swift in Sources */,
 				3A27DC6E2285FF1100BE6A96 /* TKUIImageAnnotationView.swift in Sources */,
 				3A26E1AD20EF73E800FE4DDD /* TKUITripOverviewViewModel+Content.swift in Sources */,

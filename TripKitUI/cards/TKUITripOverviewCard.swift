@@ -110,7 +110,7 @@ public class TKUITripOverviewCard: TGTableCard {
       configureCell: { [unowned self] ds, tv, ip, item in
         switch item {
         case .terminal(let item):
-          return TKUITripOverviewCard.terminalCell(for: item, tableView: tv, indexPath: ip)
+          return self.terminalCell(for: item, tableView: tv, indexPath: ip)
         case .stationary(let item):
           return TKUITripOverviewCard.stationaryCell(for: item, tableView: tv, indexPath: ip)
         case .moving(let item):
@@ -212,9 +212,9 @@ public class TKUITripOverviewCard: TGTableCard {
 
 extension TKUITripOverviewCard {
   
-  private static func terminalCell(for terminal: TKUITripOverviewViewModel.TerminalItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+  private func terminalCell(for terminal: TKUITripOverviewViewModel.TerminalItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryCell else { preconditionFailure() }
-    cell.configure(with: terminal)
+    cell.configure(with: terminal, for: self)
     return cell
   }
 

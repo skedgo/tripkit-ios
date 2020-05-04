@@ -42,6 +42,10 @@ extension TKUITripOverviewViewModel {
   }
   
   struct TerminalItem: Equatable {
+    static func == (lhs: TKUITripOverviewViewModel.TerminalItem, rhs: TKUITripOverviewViewModel.TerminalItem) -> Bool {
+      return lhs.segment == rhs.segment
+    }
+    
     let title: String
     let subtitle: String?
 
@@ -51,6 +55,9 @@ extension TKUITripOverviewViewModel {
 
     let connection: Line?
     let isStart: Bool
+
+    let actions: [TKUICardAction<TKUITripOverviewCard, TKSegment>]
+    let segment: TKSegment
   }
   
   struct StationaryItem: Equatable {
@@ -87,7 +94,6 @@ extension TKUITripOverviewViewModel {
     
     let actions: [TKUICardAction<TKUITripOverviewCard, TKSegment>]
     let accessories: [SegmentAccessory]
-    
     let segment: TKSegment
   }
   
@@ -260,7 +266,9 @@ fileprivate extension TKSegment {
       timeZone: timeZone,
       timesAreFixed: trip.departureTimeIsFixed,
       connection: (isStart ? next : previous)?.line,
-      isStart: isStart
+      isStart: isStart,
+      actions: TKUITripOverviewCard.config.segmentActionsfactory?(self) ?? [],
+      segment: self
     )
   }
   

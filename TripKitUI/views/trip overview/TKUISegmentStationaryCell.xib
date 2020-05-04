@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -75,7 +75,7 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PYC-Ry-4oR">
-                        <rect key="frame" x="64" y="30.5" width="42" height="42.5"/>
+                        <rect key="frame" x="64" y="28.5" width="174" height="46.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpZ-Mg-fai">
                                 <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
@@ -89,6 +89,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="0.0" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="5gG-PJ-YT3">
+                                <rect key="frame" x="0.0" y="46.5" width="174" height="0.0"/>
+                            </stackView>
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="EBX-LF-vMP">
@@ -134,6 +137,7 @@
             <inset key="separatorInset" minX="64" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="bottomLine" destination="bmx-KO-aL2" id="vwo-G9-EZh"/>
+                <outlet property="buttonStackView" destination="5gG-PJ-YT3" id="XBZ-Lu-dwB"/>
                 <outlet property="labelStackTrailingConstraint" destination="IfB-Lh-O5R" id="oKh-J4-1Tk"/>
                 <outlet property="lineDot" destination="QdG-jx-QtJ" id="VtP-GU-0N5"/>
                 <outlet property="lineDotWidthConstraint" destination="4m5-9u-wKd" id="yrA-KG-Ba0"/>

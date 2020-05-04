@@ -8,6 +8,8 @@
 
 import UIKit
 
+import RxSwift
+
 class TKUISegmentStationaryCell: UITableViewCell {
   
   @IBOutlet weak var timeStack: UIStackView!
@@ -16,7 +18,8 @@ class TKUISegmentStationaryCell: UITableViewCell {
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var subtitleLabel: UILabel!
-  
+  @IBOutlet weak var buttonStackView: UIStackView!
+
   @IBOutlet weak var lineWrapper: UIView!
   @IBOutlet weak var topLine: UIView!
   @IBOutlet weak var lineDot: UIView!
@@ -36,6 +39,8 @@ class TKUISegmentStationaryCell: UITableViewCell {
   
   static let reuseIdentifier = "TKUISegmentStationaryCell"
   
+  private var disposeBag = DisposeBag()
+
   override func awakeFromNib() {
     super.awakeFromNib()
     
@@ -52,6 +57,20 @@ class TKUISegmentStationaryCell: UITableViewCell {
     timeEndLabel.numberOfLines = 0
   }
 
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    disposeBag = DisposeBag()
+  }
+  
+  override func tintColorDidChange() {
+    super.tintColorDidChange()
+    
+    buttonStackView.arrangedSubviews
+      .compactMap { $0 as? UIButton }
+      .forEach { $0.setTitleColor(tintColor, for: .normal) }
+  }
+  
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     // Not calling super to not override line colors
     UIView.animate(withDuration: animated ? 0.25 : 0) {
@@ -219,9 +238,11 @@ extension TKUISegmentStationaryCell {
     topLine.isHidden = item.topConnection?.color == nil
     bottomLine.backgroundColor = item.bottomConnection?.color
     bottomLine.isHidden = item.bottomConnection?.color == nil
+
+    buttonStackView.resetViews([])
   }
   
-  func configure(with item: TKUITripOverviewViewModel.TerminalItem) {
+  func configure(with item: TKUITripOverviewViewModel.TerminalItem, for card: TKUITripOverviewCard) {
     timeEndLabel.isHidden = true
 
     if item.timesAreFixed, let text = item.time?.timeString(for: item.timeZone) {
@@ -259,6 +280,9 @@ extension TKUISegmentStationaryCell {
     topLine.isHidden = item.isStart || item.connection?.color == nil
     bottomLine.backgroundColor = item.connection?.color
     bottomLine.isHidden = !item.isStart || item.connection?.color == nil
+    
+    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, tintColor: tintColor, disposeBag: disposeBag) }
+    buttonStackView.resetViews(buttons)
   }
   
 }

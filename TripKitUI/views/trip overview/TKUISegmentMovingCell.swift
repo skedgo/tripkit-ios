@@ -39,18 +39,18 @@ class TKUISegmentMovingCell: UITableViewCell {
     subtitleLabel.textColor = .tkLabelSecondary
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    disposeBag = DisposeBag()
+  }
+  
   override func tintColorDidChange() {
     super.tintColorDidChange()
     
     buttonStackView.arrangedSubviews
       .compactMap { $0 as? UIButton }
       .forEach { $0.setTitleColor(tintColor, for: .normal) }
-  }
-  
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    
-    disposeBag = DisposeBag()
   }
   
   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
@@ -62,15 +62,6 @@ class TKUISegmentMovingCell: UITableViewCell {
   
   override func setSelected(_ selected: Bool, animated: Bool) {
     setHighlighted(selected, animated: animated);
-  }
-}
-
-fileprivate extension UIStackView {
-  func resetViews(_ views: [UIView]) {
-    arrangedSubviews.forEach(removeArrangedSubview)
-    removeAllSubviews()
-    views.forEach(addArrangedSubview)
-    isHidden = views.isEmpty
   }
 }
 
@@ -112,7 +103,7 @@ extension TKUISegmentMovingCell {
     let accessories = item.accessories.map(TKUISegmentMovingCell.buildView)
     accessoryViewStack.resetViews(accessories)
     
-    let buttons = item.actions.map { buildView(for: $0, model: item.segment, for: card) }
+    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, tintColor: tintColor, disposeBag: disposeBag) }
     buttonStackView.resetViews(buttons)
   }
   
@@ -135,25 +126,5 @@ extension TKUISegmentMovingCell {
       return TKUIOccupancyView(with: .wheelchair(accessibility))
     }
   }
-  
-  private func buildView(for action: TKUICardAction<TKUITripOverviewCard, TKSegment>, model: TKSegment, for card: TKUITripOverviewCard) -> UIView {
-    let button = UIButton(type: .custom)
-    button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
-    button.setTitleColor(tintColor, for: .normal)
 
-    // We could add an icon here, too, but that's not yet in the style guide
-    // button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: -4)
-    // button.setImage(action.icon, for: .normal)
-
-    button.setTitle(action.title, for: .normal)
-    button.rx.tap
-      .subscribe(onNext: { [unowned card] in
-        let update = action.handler(action, card, model, button)
-        if update {
-          button.setTitle(action.title, for: .normal)
-        }
-      })
-      .disposed(by: disposeBag)
-    return button
-  }
 }
