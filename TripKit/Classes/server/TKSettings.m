@@ -55,12 +55,6 @@
   if (TKSettings.ignoreCostToReturnCarHireVehicle) {
     [paras setValue:@(NO) forKey:@"2wirc"];
   }
-
-  // beta features
-  if ([sharedDefaults boolForKey:TKDefaultsKeyProfileEnableFlights]) {
-    [paras setValue:@(YES) forKey:@"ef"];
-  }
-  [paras setValue:@(YES) forKey:@"ir"];
   
 #ifdef DEBUG
   NSNumber *bsbRaw = [sharedDefaults objectForKey:TKDefaultsKeyProfileBookingsUseSandbox];
