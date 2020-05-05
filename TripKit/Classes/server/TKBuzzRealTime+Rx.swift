@@ -21,8 +21,9 @@ extension Reactive where Base: TKBuzzRealTime {
   ///
   /// - returns: Stream of the trip, *whenever* it gets updated, i.e., if there's no update the stream won't fire.
   public static func streamUpdates(_ trip: Trip, updateInterval: DispatchTimeInterval = .seconds(10), active: Observable<Bool> = .just(true)) -> Observable<Trip> {
+    guard trip.wantsRealTimeUpdates else { return .never() }
     
-    active
+    return active
       .flatMapLatest { active -> Observable<Int> in
         if active {
           return Observable<Int>
