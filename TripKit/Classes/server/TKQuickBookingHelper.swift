@@ -176,14 +176,25 @@ extension TKSegment {
   
   public var bookingConfirmation: TKBooking.Confirmation? {
     if let dictionary = bookingConfirmationDictionary() {
-      return try? JSONDecoder().decode(TKBooking.Confirmation.self, withJSONObject: dictionary)
-      
-      // Useful for debugging the confirmation screen
-//    } else if let mode = modeIdentifier() where !isStationary() && mode.hasPrefix("ps_tnc") {
-//      return TKBookingConfirmation.fakeTNC()
-//    } else if let mode = modeIdentifier() where !isStationary() && mode.hasPrefix("pt_pub") {
-//      return TKBookingConfirmation.fakePublic()
-
+      let key: NSString?
+      if let statusDict = dictionary["status"] as? [String: Any], let statusValue = statusDict["value"] as? String {
+        key = (String(templateHashCode) + "-" + statusValue) as NSString
+      } else {
+        key = nil
+      }
+      if let key = key, let cached = TripKit.shared.inMemoryCache().object(forKey: key) as? TKBooking.Confirmation {
+        return cached
+      } else {
+        do {
+          let decoded = try JSONDecoder().decode(TKBooking.Confirmation.self, withJSONObject: dictionary)
+          if let key = key {
+            TripKit.shared.inMemoryCache().setObject(decoded as AnyObject, forKey: key)
+          }
+          return decoded
+        } catch {
+          return nil
+        }
+      }
     } else {
       return nil
     }

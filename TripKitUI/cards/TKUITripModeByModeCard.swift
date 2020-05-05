@@ -12,10 +12,6 @@ import RxSwift
 import RxCocoa
 import TGCardViewController
 
-public protocol TKUITripModeByModeCardDelegate: class {
-  func modeByModeRequestsRebuildForNewSegments(_ card: TKUITripModeByModeCard, trip: Trip, currentSegment: TKSegment)
-}
-
 public class TKUITripModeByModeCard: TGPageCard {
   
   enum Error: Swift.Error {
@@ -63,9 +59,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   }
   
   public static var config = Configuration.empty
-  
-  public weak var modeByModeDelegate: TKUITripModeByModeCardDelegate?
-  
+    
   private let viewModel: TKUITripModeByModeViewModel
   
   private let segmentCards: [SegmentCardsInfo]
@@ -154,10 +148,6 @@ public class TKUITripModeByModeCard: TGPageCard {
         guard case .updated(let updatedTrip) = progress else { return }
         self.reflectUpdates(of: updatedTrip)
       })
-      .disposed(by: disposeBag)
-    
-    viewModel.tripDidUpdate
-      .emit(onNext: { [unowned self] in self.reflectUpdates(of: $0) })
       .disposed(by: disposeBag)
     
     NotificationCenter.default.rx
@@ -329,9 +319,6 @@ extension TKUITripModeByModeCard {
     
     let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
     
-    // Always pass on generic updates, trip map manager will react itself
-    TKUITripModeByModeCard.notifyOfUpdates(in: trip)
-
     if segmentsMatch(cardSegments) {
       // Update segment view in header
       headerSegmentsView?.configure(forSegments: trip.headerSegments, allowSubtitles: true, allowInfoIcons: false)
@@ -339,16 +326,23 @@ extension TKUITripModeByModeCard {
       // Update ETA in header
       headerETALabel?.text = TKUITripModeByModeCard.headerTimeText(for: trip)
       
-    } else if let delegate = modeByModeDelegate {
+    } else {
       // We use the index here as the identifier would have changed. The index
       // gives us a good guess for finding the corresponding segment in the new
       // trip.
       let segmentIndex = SegmentCardsInfo.cardsInfo(ofCardAtIndex: currentPageIndex, in: segmentCards)?.segmentIndex
       let newSegment = cardSegments.first(where: { $0.index == segmentIndex }) ?? cardSegments.first!
-      delegate.modeByModeRequestsRebuildForNewSegments(self, trip: trip, currentSegment: newSegment)
-    
-    } else {
-      assertionFailure("Segments changed due to real-time data and MxM should be reset, but there's no `modeByModeDelegate` (anymore).")
+      
+      do {
+        let newCard = try TKUITripModeByModeCard(
+          startingOn: newSegment,
+          mapManager: mapManager as? TKUITripMapManager
+        )
+        newCard.style = self.style
+        controller?.swap(for: newCard, animated: true)
+      } catch {
+        TKLog.warn("TKUITripModeByModeCard", text: "Could not rebuild due to \(error)")
+      }
     }
   }
   

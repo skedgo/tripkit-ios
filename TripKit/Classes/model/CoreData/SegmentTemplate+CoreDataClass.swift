@@ -19,6 +19,9 @@ import MapKit
 @objc(SegmentTemplate)
 public class SegmentTemplate: NSManagedObject {
 
+  // To not recreate this all the time
+  private var _segmentTemplateData: SegmentTemplateData?
+
 }
 
 // MARK: - Retrieving
@@ -171,14 +174,19 @@ extension SegmentTemplate {
   
   private var segmentTemplateData: SegmentTemplateData {
     get {
-      if let data = data as? Data {
-        return SegmentTemplateData.from(data: data)
+      if let cached = _segmentTemplateData {
+        return cached
+      } else if let data = data as? Data {
+        let parsed = SegmentTemplateData.from(data: data)
+        _segmentTemplateData = parsed
+        return parsed
       } else {
         return SegmentTemplateData()
       }
     }
     set {
       do {
+        _segmentTemplateData = nil
         data = try JSONEncoder().encode(newValue) as NSObject
       } catch {
         data = nil

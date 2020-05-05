@@ -124,7 +124,9 @@ public class TKUIRoutingResultsViewModel {
       .asDriver(onErrorJustReturn: [])
 
     let selection = mapInput.tappedMapRoute.startOptional() // default selection
-    selectedItem = Observable.combineLatest(selection.asObservable(), sections.asObservable()) { $1.find($0) ?? $1.bestItem }
+    selectedItem = Observable
+      .combineLatest(selection.asObservable(), sections.asObservable()) { $1.find($0) ?? $1.bestItem }
+      .distinctUntilChanged()
       .asDriver(onErrorDriveWith: .empty())
     
     originDestination = requestChanged

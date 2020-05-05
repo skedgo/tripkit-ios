@@ -161,19 +161,19 @@ public class TKUITripOverviewCard: TGTableCard {
       .disposed(by: disposeBag)
     
     viewModel.dataSources
-      .drive(onNext: { sources in
-        self.showAttribution(for: sources, in: tableView)
+      .drive(onNext: { [weak self] sources in
+        self?.showAttribution(for: sources, in: tableView)
       })
       .disposed(by: disposeBag)
     
     viewModel.refreshMap
-      .emit(onNext: {
-        (self.mapManager as? TKUITripMapManager)?.updateTrip()
+      .emit(onNext: { [weak self] in
+        (self?.mapManager as? TKUITripMapManager)?.updateTrip()
       })
       .disposed(by: disposeBag)
 
     viewModel.next
-      .emit(onNext: { [unowned self] in self.handle($0) })
+      .emit(onNext: { [weak self] in self?.handle($0) })
       .disposed(by: disposeBag)
   }
   

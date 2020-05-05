@@ -50,9 +50,8 @@ public extension TKUITripOverviewCard {
       guard let controller = card.controller else { assertionFailure(); return false }
       
       let modeByMode: TKUITripModeByModeCard
-      if let overviewCard = card as? TKUITripOverviewCard, let mapManager = overviewCard.mapManager as? TKUITripMapManager {
+      if let mapManager = card.mapManager as? TKUITripMapManager {
         modeByMode = TKUITripModeByModeCard(mapManager: mapManager)
-        modeByMode.modeByModeDelegate = overviewCard
       } else {
         modeByMode = TKUITripModeByModeCard(trip: trip)
       }

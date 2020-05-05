@@ -14,17 +14,20 @@ import RxCocoa
 class TKUITripModeByModeViewModel {
   
   init(trip: Trip) {
-    self.realTimeUpdate = TKUITripModeByModeViewModel.fetchRealTime(for: trip)
-    
-    self.tripDidUpdate = NotificationCenter.default.rx
-      .notification(.TKUIUpdatedRealTimeData, object: trip)
-      .compactMap { $0.object as? Trip }
-      .asSignal(onErrorSignalWith: .empty())
+    self.realTimeUpdate = TKUITripModeByModeViewModel
+      .fetchRealTime(for: trip)
+      .do(onNext: { update in
+        guard case .updated(let trip) = update else { return }
+        NotificationCenter.default.post(name: .TKUIUpdatedRealTimeData, object: trip)
+        
+        // Segment changed, too
+        trip.segments
+          .map { Notification(name: .TKUIUpdatedRealTimeData, object: $0) }
+          .forEach(NotificationCenter.default.post)
+      })
   }
   
   let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Trip>>
-  
-  let tripDidUpdate: Signal<Trip>
   
   private static func fetchRealTime(for trip: Trip) -> Driver<TKRealTimeUpdateProgress<Trip>> {
     guard trip.wantsRealTimeUpdates else { return .empty() }
