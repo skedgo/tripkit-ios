@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +21,7 @@
                         <rect key="frame" x="64" y="11" width="240" height="122"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert" translatesAutoresizingMaskIntoConstraints="NO" id="GQI-3C-bad">
-                                <rect key="frame" x="12" y="26" width="24" height="24"/>
+                                <rect key="frame" x="12" y="4" width="24" height="24"/>
                                 <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="JGL-s1-WbP"/>
@@ -29,13 +29,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Paw-tl-xq5">
-                                <rect key="frame" x="44" y="30" width="69.5" height="16"/>
+                                <rect key="frame" x="44" y="8" width="69.5" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron-right-small" translatesAutoresizingMaskIntoConstraints="NO" id="G3G-bG-srT">
-                                <rect key="frame" x="216" y="30" width="16" height="16"/>
+                                <rect key="frame" x="216" y="8" width="16" height="16"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="dw1-OQ-k4o"/>
@@ -43,7 +43,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="220" placeholderIntrinsicHeight="60" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6qy-rd-sQb">
-                                <rect key="frame" x="12" y="54" width="220" height="60"/>
+                                <rect key="frame" x="12" y="32" width="220" height="82"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -54,10 +54,11 @@
                             <constraint firstItem="Paw-tl-xq5" firstAttribute="leading" secondItem="GQI-3C-bad" secondAttribute="trailing" constant="8" id="J9n-db-fys"/>
                             <constraint firstAttribute="trailing" secondItem="G3G-bG-srT" secondAttribute="trailing" constant="8" id="LQZ-cm-aia"/>
                             <constraint firstItem="6qy-rd-sQb" firstAttribute="top" secondItem="Paw-tl-xq5" secondAttribute="bottom" constant="8" id="QvH-s7-rjK"/>
-                            <constraint firstItem="Paw-tl-xq5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vKG-L5-ifS" secondAttribute="top" constant="8" id="flX-CC-FhQ"/>
+                            <constraint firstItem="Paw-tl-xq5" firstAttribute="top" secondItem="vKG-L5-ifS" secondAttribute="top" constant="8" id="flX-CC-FhQ"/>
                             <constraint firstItem="GQI-3C-bad" firstAttribute="leading" secondItem="vKG-L5-ifS" secondAttribute="leading" constant="12" id="lgh-nE-vtT"/>
                             <constraint firstItem="G3G-bG-srT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Paw-tl-xq5" secondAttribute="trailing" constant="8" id="ntF-aL-hJA"/>
                             <constraint firstItem="6qy-rd-sQb" firstAttribute="leading" secondItem="GQI-3C-bad" secondAttribute="leading" id="qgW-tJ-kvX"/>
+                            <constraint firstItem="GQI-3C-bad" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vKG-L5-ifS" secondAttribute="top" constant="4" id="xny-PG-7RC"/>
                             <constraint firstItem="G3G-bG-srT" firstAttribute="centerY" secondItem="GQI-3C-bad" secondAttribute="centerY" id="zpY-5g-gRO"/>
                         </constraints>
                     </view>
