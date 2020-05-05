@@ -34,6 +34,7 @@ extension UIImage {
 
   // Actions
 
+  public static let iconAlternative = named("alternative")
   public static let iconArrowUp = named("arrow-up")
   public static let iconShowPassword = named("icon-show")
   public static let iconHidePassword = named("icon-hide")

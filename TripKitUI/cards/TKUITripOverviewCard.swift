@@ -188,7 +188,7 @@ public class TKUITripOverviewCard: TGTableCard {
     }
     
     if selectedAlternativeTripCallback != nil {
-      actions.append(TripAction(title: "Alternatives", icon: .badgeLike) { [weak self] (_, _, trip, _) -> Bool in
+      actions.append(TripAction(title: "Alternatives", icon: .iconAlternative) { [weak self] (_, _, trip, _) -> Bool in
         trip.request.expandForFavorite = true
         self?.handle(.showAlternativeRoutes(trip.request))
         return false
