@@ -1,0 +1,2253 @@
+{
+    "alerts": [
+        {
+            "action": {
+                "excludedStopCodes": [
+                    "200060"
+                ]
+            },
+            "hashCode": 651323214,
+            "severity": "warning",
+            "stopCode": "200060",
+            "text": "The escalator between the Grand concourse and Northern concourse is temporarily out of service. If you require assistance, please ask staff or phone 9379 1777.",
+            "title": "Escalator Availability - Central",
+            "type": "SERVICE_INFORMATION",
+            "url": "https://transportnsw.info/alerts#/train"
+        },
+        {
+            "action": {
+                "excludedStopCodes": [
+                    "200060"
+                ]
+            },
+            "hashCode": 809482494,
+            "severity": "warning",
+            "stopCode": "200060",
+            "text": "From 20 April to 31 May, the Suburban Tunnel will be temporarily closed for Sydney Metro construction works.  Access for Platforms 16 to 23 is only via the Northern Concourse or Southern Tunnel during this period. You can view a map of the stationhere  https://transportnsw.info/document/4930/central-station-map.pdf",
+            "title": "Station Update - Central",
+            "type": "SERVICE_INFORMATION",
+            "url": "https://transportnsw.info/alerts#/train"
+        },
+        {
+            "hashCode": 707713627,
+            "serviceTripID": "W571.1495.102.56.V.8.59425349",
+            "severity": "warning",
+            "text": "Until further notice:\n- Due to infrastructure damage caused by bushfires, buses continue to replace trains between Lithgow and Mount Victoria.\n- Trains continue to run between Bathurst, Lithgow, and and Central, to a changed timetable.\n\nPlease use transport apps or visit transportnsw.info for details.",
+            "title": "Trackwork - Blue Mountains Line",
+            "type": "TRACKWORK",
+            "url": "https://transportnsw.info/alerts#/train"
+        }
+    ],
+    "groups": [
+        {
+            "frequency": 70,
+            "sources": [
+                {
+                    "provider": {
+                        "name": "NSW Trains"
+                    }
+                },
+                {
+                    "disclaimer": "© OpenStreetMap contributors\n\nMap data available under the Open Database License. For more information, see http://www.openstreetmap.org/copyright.",
+                    "provider": {
+                        "name": "OpenStreetMap",
+                        "website": "https://www.openstreetmap.org"
+                    }
+                },
+                {
+                    "provider": {
+                        "name": "Sydney Trains"
+                    }
+                }
+            ],
+            "trips": [
+                {
+                    "arrive": 1588669559,
+                    "availability": "AVAILABLE",
+                    "caloriesCost": 39,
+                    "carbonCost": 7.7,
+                    "currency": "AUD",
+                    "currencySymbol": "$",
+                    "depart": 1588660794,
+                    "hassleCost": 5,
+                    "hookURL": "https://granduni.buzzhives.com/satapp/trip/hook/8b5b43c7-b4cd-47d9-b9a0-6aa611094c4c",
+                    "id": "8b5b43c7-b4cd-47d9-b9a0-6aa611094c4c",
+                    "mainSegmentHashCode": -368196986,
+                    "moneyCost": 8.86,
+                    "moneyUSDCost": 6.38,
+                    "plannedURL": "https://granduni.buzzhives.com/satapp/trip/planned/8b5b43c7-b4cd-47d9-b9a0-6aa611094c4c",
+                    "queryIsLeaveAfter": true,
+                    "queryMinimumTransferSeconds": 180,
+                    "queryTime": 1588652133,
+                    "saveURL": "https://granduni.buzzhives.com/satapp/trip/save/8b5b43c7-b4cd-47d9-b9a0-6aa611094c4c",
+                    "segments": [
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588661160,
+                            "id": "nTtrRuwl",
+                            "segmentTemplateHashCode": -2042416536,
+                            "startTime": 1588660794
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 1",
+                            "endTime": 1588661580,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 1,
+                                    "operatorName": "Sydney Trains",
+                                    "routeId": "APS_2a",
+                                    "stopId": "2020111"
+                                }
+                            },
+                            "id": "gG196YTq",
+                            "platform": "Platform 1",
+                            "routeDirection": 1,
+                            "routeId": "APS_2a",
+                            "segmentTemplateHashCode": -368196986,
+                            "serviceColor": {
+                                "blue": 76,
+                                "green": 149,
+                                "red": 0
+                            },
+                            "serviceDirection": "Central, then Parramatta",
+                            "serviceName": "T8 Airport & South Line",
+                            "serviceNumber": "T8",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "15-J.1495.102.124.B.8.59418121",
+                            "startTime": 1588661160,
+                            "stops": 2,
+                            "ticket": {
+                                "cost": 8.86,
+                                "exchange": 0.72,
+                                "name": "Opal (train)"
+                            },
+                            "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588661699,
+                            "id": "c4swqYFv",
+                            "segmentTemplateHashCode": -981324664,
+                            "startTime": 1588661580
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588662060,
+                            "id": "5vkaDFPq",
+                            "segmentTemplateHashCode": 930909205,
+                            "startTime": 1588661699
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                707713627,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 2",
+                            "endTime": 1588669260,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 0,
+                                    "operatorName": "NSW Trains",
+                                    "routeId": "BMT_1",
+                                    "stopId": "2000327"
+                                }
+                            },
+                            "id": "G1ZROnV8",
+                            "platform": "Platform 7",
+                            "routeDirection": 0,
+                            "routeId": "BMT_1",
+                            "segmentTemplateHashCode": 1048730071,
+                            "serviceColor": {
+                                "blue": 28,
+                                "green": 157,
+                                "red": 249
+                            },
+                            "serviceDirection": "Mount Victoria",
+                            "serviceName": "Blue Mountains Line",
+                            "serviceNumber": "BMT",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "W571.1495.102.56.V.8.59425349",
+                            "startTime": 1588662060,
+                            "stops": 41,
+                            "ticket": {
+                                "name": "Opal (train)"
+                            },
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588669559,
+                            "id": "WDhV32t9",
+                            "segmentTemplateHashCode": -1723497713,
+                            "startTime": 1588669260
+                        }
+                    ],
+                    "temporaryURL": "https://granduni.buzzhives.com/satapp/trip/8b5b43c7-b4cd-47d9-b9a0-6aa611094c4c",
+                    "updateURL": "https://granduni.buzzhives.com/satapp/trip/update/8b5b43c7-b4cd-47d9-b9a0-6aa611094c4c?hash=-2112783751",
+                    "weightedScore": 53.8
+                },
+                {
+                    "arrive": 1588645259,
+                    "availability": "AVAILABLE",
+                    "caloriesCost": 39,
+                    "carbonCost": 7.7,
+                    "currency": "AUD",
+                    "currencySymbol": "$",
+                    "depart": 1588636914,
+                    "hassleCost": 5.8,
+                    "hookURL": "https://granduni.buzzhives.com/satapp/trip/hook/def90b90-07b9-4ccc-bc6b-e019bdfa7143",
+                    "id": "def90b90-07b9-4ccc-bc6b-e019bdfa7143",
+                    "mainSegmentHashCode": -71357195,
+                    "moneyCost": 6.2,
+                    "moneyUSDCost": 4.46,
+                    "plannedURL": "https://granduni.buzzhives.com/satapp/trip/planned/def90b90-07b9-4ccc-bc6b-e019bdfa7143",
+                    "queryIsLeaveAfter": true,
+                    "queryMinimumTransferSeconds": 180,
+                    "queryTime": 1588652133,
+                    "saveURL": "https://granduni.buzzhives.com/satapp/trip/save/def90b90-07b9-4ccc-bc6b-e019bdfa7143",
+                    "segments": [
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588637280,
+                            "id": "BcDAdH9U",
+                            "segmentTemplateHashCode": -2042416536,
+                            "startTime": 1588636914
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 1",
+                            "endTime": 1588637700,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 1,
+                                    "operatorName": "Sydney Trains",
+                                    "routeId": "APS_2a",
+                                    "stopId": "2020111"
+                                }
+                            },
+                            "id": "krXoW62F",
+                            "platform": "Platform 1",
+                            "routeDirection": 1,
+                            "routeId": "APS_2a",
+                            "segmentTemplateHashCode": -71357195,
+                            "serviceColor": {
+                                "blue": 76,
+                                "green": 149,
+                                "red": 0
+                            },
+                            "serviceDirection": "Central, then Leppington",
+                            "serviceName": "T8 Airport & South Line",
+                            "serviceNumber": "T8",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "96-C.1495.102.60.A.8.59424665",
+                            "startTime": 1588637280,
+                            "stops": 2,
+                            "ticket": {
+                                "cost": 6.2,
+                                "exchange": 0.72,
+                                "name": "Opal (train)"
+                            },
+                            "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588637824,
+                            "id": "v0TTFJkn",
+                            "segmentTemplateHashCode": 825385024,
+                            "startTime": 1588637700
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588637880,
+                            "id": "1IERltPN",
+                            "segmentTemplateHashCode": 930909174,
+                            "startTime": 1588637824
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                707713627,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 2",
+                            "endTime": 1588644960,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 0,
+                                    "operatorName": "NSW Trains",
+                                    "routeId": "BMT_1",
+                                    "stopId": "2000326"
+                                }
+                            },
+                            "id": "X4HRMeoH",
+                            "platform": "Platform 6",
+                            "routeDirection": 0,
+                            "routeId": "BMT_1",
+                            "segmentTemplateHashCode": 1020134772,
+                            "serviceColor": {
+                                "blue": 28,
+                                "green": 157,
+                                "red": 249
+                            },
+                            "serviceDirection": "Lithgow",
+                            "serviceName": "Blue Mountains Line",
+                            "serviceNumber": "BMT",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "W539.1495.102.56.V.4.59427718",
+                            "startTime": 1588637880,
+                            "stops": 41,
+                            "ticket": {
+                                "name": "Opal (train)"
+                            },
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588645259,
+                            "id": "ytyjyRjX",
+                            "segmentTemplateHashCode": -1723497713,
+                            "startTime": 1588644960
+                        }
+                    ],
+                    "temporaryURL": "https://granduni.buzzhives.com/satapp/trip/def90b90-07b9-4ccc-bc6b-e019bdfa7143",
+                    "updateURL": "https://granduni.buzzhives.com/satapp/trip/update/def90b90-07b9-4ccc-bc6b-e019bdfa7143?hash=733908587",
+                    "weightedScore": 383.3
+                },
+                {
+                    "arrive": 1588666439,
+                    "availability": "AVAILABLE",
+                    "caloriesCost": 39,
+                    "carbonCost": 7.7,
+                    "currency": "AUD",
+                    "currencySymbol": "$",
+                    "depart": 1588658094,
+                    "hassleCost": 5,
+                    "hookURL": "https://granduni.buzzhives.com/satapp/trip/hook/3a7a3b35-9c28-4e65-a497-9044c27dc8e3",
+                    "id": "3a7a3b35-9c28-4e65-a497-9044c27dc8e3",
+                    "mainSegmentHashCode": -368196986,
+                    "moneyCost": 8.86,
+                    "moneyUSDCost": 6.38,
+                    "plannedURL": "https://granduni.buzzhives.com/satapp/trip/planned/3a7a3b35-9c28-4e65-a497-9044c27dc8e3",
+                    "queryIsLeaveAfter": true,
+                    "queryMinimumTransferSeconds": 180,
+                    "queryTime": 1588652133,
+                    "saveURL": "https://granduni.buzzhives.com/satapp/trip/save/3a7a3b35-9c28-4e65-a497-9044c27dc8e3",
+                    "segments": [
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588658460,
+                            "id": "2gX6keH6",
+                            "segmentTemplateHashCode": -2042416536,
+                            "startTime": 1588658094
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 1",
+                            "endTime": 1588658880,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 1,
+                                    "operatorName": "Sydney Trains",
+                                    "routeId": "APS_2a",
+                                    "stopId": "2020111"
+                                }
+                            },
+                            "id": "c2D15ikY",
+                            "platform": "Platform 1",
+                            "routeDirection": 1,
+                            "routeId": "APS_2a",
+                            "segmentTemplateHashCode": -368196986,
+                            "serviceColor": {
+                                "blue": 76,
+                                "green": 149,
+                                "red": 0
+                            },
+                            "serviceDirection": "Central, then Parramatta",
+                            "serviceName": "T8 Airport & South Line",
+                            "serviceNumber": "T8",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "66-R.1495.102.60.M.8.59422582",
+                            "startTime": 1588658460,
+                            "stops": 2,
+                            "ticket": {
+                                "cost": 8.86,
+                                "exchange": 0.72,
+                                "name": "Opal (train)"
+                            },
+                            "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588658999,
+                            "id": "OCD60ZZ7",
+                            "segmentTemplateHashCode": -981324664,
+                            "startTime": 1588658880
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588659420,
+                            "id": "OyEgBTC3",
+                            "segmentTemplateHashCode": 930909205,
+                            "startTime": 1588658999
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                707713627,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 2",
+                            "endTime": 1588666140,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 0,
+                                    "operatorName": "NSW Trains",
+                                    "routeId": "BMT_1",
+                                    "stopId": "2000327"
+                                }
+                            },
+                            "id": "1yfSgz2X",
+                            "platform": "Platform 7",
+                            "routeDirection": 0,
+                            "routeId": "BMT_1",
+                            "segmentTemplateHashCode": 1048725421,
+                            "serviceColor": {
+                                "blue": 28,
+                                "green": 157,
+                                "red": 249
+                            },
+                            "serviceDirection": "Lithgow",
+                            "serviceName": "Blue Mountains Line",
+                            "serviceNumber": "BMT",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "W565.1495.102.124.V.8.59425333",
+                            "startTime": 1588659420,
+                            "stops": 41,
+                            "ticket": {
+                                "name": "Opal (train)"
+                            },
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588666439,
+                            "id": "e0a0aZdd",
+                            "segmentTemplateHashCode": -1723497713,
+                            "startTime": 1588666140
+                        }
+                    ],
+                    "temporaryURL": "https://granduni.buzzhives.com/satapp/trip/3a7a3b35-9c28-4e65-a497-9044c27dc8e3",
+                    "updateURL": "https://granduni.buzzhives.com/satapp/trip/update/3a7a3b35-9c28-4e65-a497-9044c27dc8e3?hash=1762337539",
+                    "weightedScore": 49.9
+                },
+                {
+                    "arrive": 1588659659,
+                    "availability": "AVAILABLE",
+                    "caloriesCost": 39,
+                    "carbonCost": 7.7,
+                    "currency": "AUD",
+                    "currencySymbol": "$",
+                    "depart": 1588651314,
+                    "hassleCost": 5.8,
+                    "hookURL": "https://granduni.buzzhives.com/satapp/trip/hook/14c535ac-dc5c-4e7d-90e7-5cf4b12e7ea2",
+                    "id": "14c535ac-dc5c-4e7d-90e7-5cf4b12e7ea2",
+                    "mainSegmentHashCode": -71357195,
+                    "moneyCost": 6.2,
+                    "moneyUSDCost": 4.46,
+                    "plannedURL": "https://granduni.buzzhives.com/satapp/trip/planned/14c535ac-dc5c-4e7d-90e7-5cf4b12e7ea2",
+                    "queryIsLeaveAfter": true,
+                    "queryMinimumTransferSeconds": 180,
+                    "queryTime": 1588652133,
+                    "saveURL": "https://granduni.buzzhives.com/satapp/trip/save/14c535ac-dc5c-4e7d-90e7-5cf4b12e7ea2",
+                    "segments": [
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588651680,
+                            "id": "SAbkNns4",
+                            "segmentTemplateHashCode": -2042416536,
+                            "startTime": 1588651314
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 1",
+                            "endTime": 1588652100,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 1,
+                                    "operatorName": "Sydney Trains",
+                                    "routeId": "APS_2a",
+                                    "stopId": "2020111"
+                                }
+                            },
+                            "id": "8LyBASiA",
+                            "platform": "Platform 1",
+                            "routeDirection": 1,
+                            "routeId": "APS_2a",
+                            "segmentTemplateHashCode": -71357195,
+                            "serviceColor": {
+                                "blue": 76,
+                                "green": 149,
+                                "red": 0
+                            },
+                            "serviceDirection": "Central, then Leppington",
+                            "serviceName": "T8 Airport & South Line",
+                            "serviceNumber": "T8",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "88-L.1495.102.60.A.8.59423849",
+                            "startTime": 1588651680,
+                            "stops": 2,
+                            "ticket": {
+                                "cost": 6.2,
+                                "exchange": 0.72,
+                                "name": "Opal (train)"
+                            },
+                            "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588652224,
+                            "id": "PNxycGWd",
+                            "segmentTemplateHashCode": 825385024,
+                            "startTime": 1588652100
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588652280,
+                            "id": "t31MOlfB",
+                            "segmentTemplateHashCode": 930909174,
+                            "startTime": 1588652224
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                707713627,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 2",
+                            "endTime": 1588659360,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 0,
+                                    "operatorName": "NSW Trains",
+                                    "routeId": "BMT_1",
+                                    "stopId": "2000326"
+                                }
+                            },
+                            "id": "iABCioF5",
+                            "platform": "Platform 6",
+                            "routeDirection": 0,
+                            "routeId": "BMT_1",
+                            "segmentTemplateHashCode": 1020134772,
+                            "serviceColor": {
+                                "blue": 28,
+                                "green": 157,
+                                "red": 249
+                            },
+                            "serviceDirection": "Lithgow",
+                            "serviceName": "Blue Mountains Line",
+                            "serviceNumber": "BMT",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "W555.1495.102.56.V.4.59427757",
+                            "startTime": 1588652280,
+                            "stops": 41,
+                            "ticket": {
+                                "name": "Opal (train)"
+                            },
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588659659,
+                            "id": "lCo9nmQr",
+                            "segmentTemplateHashCode": -1723497713,
+                            "startTime": 1588659360
+                        }
+                    ],
+                    "temporaryURL": "https://granduni.buzzhives.com/satapp/trip/14c535ac-dc5c-4e7d-90e7-5cf4b12e7ea2",
+                    "updateURL": "https://granduni.buzzhives.com/satapp/trip/update/14c535ac-dc5c-4e7d-90e7-5cf4b12e7ea2?hash=1279958806",
+                    "weightedScore": 63.3
+                },
+                {
+                    "arrive": 1588652459,
+                    "availability": "AVAILABLE",
+                    "caloriesCost": 38,
+                    "carbonCost": 7.7,
+                    "currency": "AUD",
+                    "currencySymbol": "$",
+                    "depart": 1588644114,
+                    "hassleCost": 5.8,
+                    "hookURL": "https://granduni.buzzhives.com/satapp/trip/hook/4b727631-2ec5-4135-a80d-25dfb3d3863b",
+                    "id": "4b727631-2ec5-4135-a80d-25dfb3d3863b",
+                    "mainSegmentHashCode": -71357195,
+                    "moneyCost": 6.2,
+                    "moneyUSDCost": 4.46,
+                    "plannedURL": "https://granduni.buzzhives.com/satapp/trip/planned/4b727631-2ec5-4135-a80d-25dfb3d3863b",
+                    "queryIsLeaveAfter": true,
+                    "queryMinimumTransferSeconds": 180,
+                    "queryTime": 1588652133,
+                    "saveURL": "https://granduni.buzzhives.com/satapp/trip/save/4b727631-2ec5-4135-a80d-25dfb3d3863b",
+                    "segments": [
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588644480,
+                            "id": "Duq8v0BB",
+                            "segmentTemplateHashCode": -2042416536,
+                            "startTime": 1588644114
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 1",
+                            "endTime": 1588644900,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 1,
+                                    "operatorName": "Sydney Trains",
+                                    "routeId": "APS_2a",
+                                    "stopId": "2020111"
+                                }
+                            },
+                            "id": "5rNxj0iY",
+                            "platform": "Platform 1",
+                            "routeDirection": 1,
+                            "routeId": "APS_2a",
+                            "segmentTemplateHashCode": -71357195,
+                            "serviceColor": {
+                                "blue": 76,
+                                "green": 149,
+                                "red": 0
+                            },
+                            "serviceDirection": "Central, then Leppington",
+                            "serviceName": "T8 Airport & South Line",
+                            "serviceNumber": "T8",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "12-G.1495.102.60.B.8.59416781",
+                            "startTime": 1588644480,
+                            "stops": 2,
+                            "ticket": {
+                                "cost": 6.2,
+                                "exchange": 0.72,
+                                "name": "Opal (train)"
+                            },
+                            "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588645008,
+                            "id": "C9aI8fuE",
+                            "segmentTemplateHashCode": 1478065465,
+                            "startTime": 1588644900
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588645080,
+                            "id": "Uz0bTIyU",
+                            "segmentTemplateHashCode": 930908275,
+                            "startTime": 1588645008
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                707713627,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 2",
+                            "endTime": 1588652160,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 0,
+                                    "operatorName": "NSW Trains",
+                                    "routeId": "BMT_1",
+                                    "stopId": "2000328"
+                                }
+                            },
+                            "id": "Iy3LVccX",
+                            "platform": "Platform 8",
+                            "routeDirection": 0,
+                            "routeId": "BMT_1",
+                            "segmentTemplateHashCode": 189715824,
+                            "serviceColor": {
+                                "blue": 28,
+                                "green": 157,
+                                "red": 249
+                            },
+                            "serviceDirection": "Lithgow",
+                            "serviceName": "Blue Mountains Line",
+                            "serviceNumber": "BMT",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "W547.1495.102.124.V.4.59427738",
+                            "startTime": 1588645080,
+                            "stops": 41,
+                            "ticket": {
+                                "name": "Opal (train)"
+                            },
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588652459,
+                            "id": "oa64eQM0",
+                            "segmentTemplateHashCode": -1723497713,
+                            "startTime": 1588652160
+                        }
+                    ],
+                    "temporaryURL": "https://granduni.buzzhives.com/satapp/trip/4b727631-2ec5-4135-a80d-25dfb3d3863b",
+                    "updateURL": "https://granduni.buzzhives.com/satapp/trip/update/4b727631-2ec5-4135-a80d-25dfb3d3863b?hash=-1363064745",
+                    "weightedScore": 223.3
+                },
+                {
+                    "arrive": 1588661520,
+                    "availability": "AVAILABLE",
+                    "caloriesCost": 39,
+                    "carbonCost": 7.7,
+                    "currency": "AUD",
+                    "currencySymbol": "$",
+                    "depart": 1588653114,
+                    "hassleCost": 5.8,
+                    "hookURL": "https://granduni.buzzhives.com/satapp/trip/hook/59e6045e-5a01-4a1b-86ee-68ae5c9c8870",
+                    "id": "59e6045e-5a01-4a1b-86ee-68ae5c9c8870",
+                    "mainSegmentHashCode": -71357195,
+                    "moneyCost": 6.2,
+                    "moneyUSDCost": 4.46,
+                    "plannedURL": "https://granduni.buzzhives.com/satapp/trip/planned/59e6045e-5a01-4a1b-86ee-68ae5c9c8870",
+                    "queryIsLeaveAfter": true,
+                    "queryMinimumTransferSeconds": 180,
+                    "queryTime": 1588652133,
+                    "saveURL": "https://granduni.buzzhives.com/satapp/trip/save/59e6045e-5a01-4a1b-86ee-68ae5c9c8870",
+                    "segments": [
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588653480,
+                            "id": "OCPJHL4O",
+                            "segmentTemplateHashCode": -2042416536,
+                            "startTime": 1588653114
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 1",
+                            "endTime": 1588653900,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 1,
+                                    "operatorName": "Sydney Trains",
+                                    "routeId": "APS_2a",
+                                    "stopId": "2020111"
+                                }
+                            },
+                            "id": "dIdrKEG8",
+                            "platform": "Platform 1",
+                            "routeDirection": 1,
+                            "routeId": "APS_2a",
+                            "segmentTemplateHashCode": -71357195,
+                            "serviceColor": {
+                                "blue": 76,
+                                "green": 149,
+                                "red": 0
+                            },
+                            "serviceDirection": "Central, then Leppington",
+                            "serviceName": "T8 Airport & South Line",
+                            "serviceNumber": "T8",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "89-M.1495.102.60.A.8.59423951",
+                            "startTime": 1588653480,
+                            "stops": 2,
+                            "ticket": {
+                                "cost": 6.2,
+                                "exchange": 0.72,
+                                "name": "Opal (train)"
+                            },
+                            "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588654019,
+                            "id": "p0AU3QlN",
+                            "segmentTemplateHashCode": -981324664,
+                            "startTime": 1588653900
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588654080,
+                            "id": "afU2xrHx",
+                            "segmentTemplateHashCode": 930909205,
+                            "startTime": 1588654019
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                707713627,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 2",
+                            "endTime": 1588661220,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 0,
+                                    "operatorName": "NSW Trains",
+                                    "routeId": "BMT_1",
+                                    "stopId": "2000327"
+                                }
+                            },
+                            "id": "cyCpLq0a",
+                            "platform": "Platform 7",
+                            "routeDirection": 0,
+                            "routeId": "BMT_1",
+                            "segmentTemplateHashCode": 1049604736,
+                            "serviceColor": {
+                                "blue": 28,
+                                "green": 157,
+                                "red": 249
+                            },
+                            "serviceDirection": "Katoomba",
+                            "serviceName": "Blue Mountains Line",
+                            "serviceNumber": "BMT",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "W557.1495.102.44.V.4.59427763",
+                            "startTime": 1588654080,
+                            "stops": 41,
+                            "ticket": {
+                                "name": "Opal (train)"
+                            },
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588661520,
+                            "id": "HFyRoxf4",
+                            "segmentTemplateHashCode": -1694808980,
+                            "startTime": 1588661220
+                        }
+                    ],
+                    "temporaryURL": "https://granduni.buzzhives.com/satapp/trip/59e6045e-5a01-4a1b-86ee-68ae5c9c8870",
+                    "updateURL": "https://granduni.buzzhives.com/satapp/trip/update/59e6045e-5a01-4a1b-86ee-68ae5c9c8870?hash=5763053",
+                    "weightedScore": 43.5
+                },
+                {
+                    "arrive": 1588663259,
+                    "availability": "AVAILABLE",
+                    "caloriesCost": 38,
+                    "carbonCost": 7.7,
+                    "currency": "AUD",
+                    "currencySymbol": "$",
+                    "depart": 1588654914,
+                    "hassleCost": 5.8,
+                    "hookURL": "https://granduni.buzzhives.com/satapp/trip/hook/0dcf5c0b-9fc0-429e-bf87-4e625add3710",
+                    "id": "0dcf5c0b-9fc0-429e-bf87-4e625add3710",
+                    "mainSegmentHashCode": -71357195,
+                    "moneyCost": 6.2,
+                    "moneyUSDCost": 4.46,
+                    "plannedURL": "https://granduni.buzzhives.com/satapp/trip/planned/0dcf5c0b-9fc0-429e-bf87-4e625add3710",
+                    "queryIsLeaveAfter": true,
+                    "queryMinimumTransferSeconds": 180,
+                    "queryTime": 1588652133,
+                    "saveURL": "https://granduni.buzzhives.com/satapp/trip/save/0dcf5c0b-9fc0-429e-bf87-4e625add3710",
+                    "segments": [
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588655280,
+                            "id": "GAJ8RsYi",
+                            "segmentTemplateHashCode": -2042416536,
+                            "startTime": 1588654914
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 1",
+                            "endTime": 1588655700,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 1,
+                                    "operatorName": "Sydney Trains",
+                                    "routeId": "APS_2a",
+                                    "stopId": "2020111"
+                                }
+                            },
+                            "id": "Wqm96kzM",
+                            "platform": "Platform 1",
+                            "routeDirection": 1,
+                            "routeId": "APS_2a",
+                            "segmentTemplateHashCode": -71357195,
+                            "serviceColor": {
+                                "blue": 76,
+                                "green": 149,
+                                "red": 0
+                            },
+                            "serviceDirection": "Central, then Leppington",
+                            "serviceName": "T8 Airport & South Line",
+                            "serviceNumber": "T8",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "81-L.1495.102.60.A.8.59423182",
+                            "startTime": 1588655280,
+                            "stops": 2,
+                            "ticket": {
+                                "cost": 6.2,
+                                "exchange": 0.72,
+                                "name": "Opal (train)"
+                            },
+                            "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588655808,
+                            "id": "9m2Xey47",
+                            "segmentTemplateHashCode": 1478065465,
+                            "startTime": 1588655700
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588655880,
+                            "id": "vws5XLZr",
+                            "segmentTemplateHashCode": 930908275,
+                            "startTime": 1588655808
+                        },
+                        {
+                            "alertHashCodes": [
+                                809482494,
+                                707713627,
+                                651323214
+                            ],
+                            "availability": "AVAILABLE",
+                            "bicycleAccessible": true,
+                            "endPlatform": "Platform 2",
+                            "endTime": 1588662960,
+                            "externalData": {
+                                "gtfs": {
+                                    "directionId": 0,
+                                    "operatorName": "NSW Trains",
+                                    "routeId": "BMT_1",
+                                    "stopId": "2000328"
+                                }
+                            },
+                            "id": "fCfmSswW",
+                            "platform": "Platform 8",
+                            "routeDirection": 0,
+                            "routeId": "BMT_1",
+                            "segmentTemplateHashCode": 189715824,
+                            "serviceColor": {
+                                "blue": 28,
+                                "green": 157,
+                                "red": 249
+                            },
+                            "serviceDirection": "Lithgow",
+                            "serviceName": "Blue Mountains Line",
+                            "serviceNumber": "BMT",
+                            "serviceTextColor": {
+                                "blue": 255,
+                                "green": 255,
+                                "red": 255
+                            },
+                            "serviceTripID": "W559.1495.102.44.V.8.59425327",
+                            "startTime": 1588655880,
+                            "stops": 41,
+                            "ticket": {
+                                "name": "Opal (train)"
+                            },
+                            "wheelchairAccessible": true
+                        },
+                        {
+                            "availability": "AVAILABLE",
+                            "endTime": 1588663259,
+                            "id": "Qvp9g6Nr",
+                            "segmentTemplateHashCode": -1723497713,
+                            "startTime": 1588662960
+                        }
+                    ],
+                    "temporaryURL": "https://granduni.buzzhives.com/satapp/trip/0dcf5c0b-9fc0-429e-bf87-4e625add3710",
+                    "updateURL": "https://granduni.buzzhives.com/satapp/trip/update/0dcf5c0b-9fc0-429e-bf87-4e625add3710?hash=-1478569959",
+                    "weightedScore": 45.4
+                }
+            ]
+        }
+    ],
+    "realTimeStamp": 1576117710,
+    "region": "AU_NSW_Sydney",
+    "regions": [
+        "AU_NSW_Sydney"
+    ],
+    "segmentTemplates": [
+        {
+            "action": "<TIME>: Wheel",
+            "from": {
+                "address": "39 Kent Road, Mascot NSW 2020, Australia",
+                "class": "Location",
+                "lat": -33.92363,
+                "lng": 151.18426,
+                "timezone": "Australia/Sydney"
+            },
+            "hashCode": -2042416536,
+            "metres": 440,
+            "metresSafe": 0,
+            "metresUnsafe": 0,
+            "mini": {
+                "description": "Mascot Station Platform 1",
+                "instruction": "Wheel",
+                "mainValue": "1/4 mile"
+            },
+            "modeIdentifier": "wa_whe",
+            "modeInfo": {
+                "alt": "Wheel",
+                "color": {
+                    "blue": 240,
+                    "green": 149,
+                    "red": 66
+                },
+                "identifier": "wa_whe",
+                "localIcon": "wheelchair"
+            },
+            "notes": "<DURATION> ⋅ 1/4 mile",
+            "streets": [
+                {
+                    "encodedWaypoints": "vu`nEsdwy[O|@_AM",
+                    "instruction": "HEAD_TOWARDS",
+                    "metres": 66,
+                    "name": "Kent Road"
+                },
+                {
+                    "encodedWaypoints": "fs`nEccwy[GaALcB??JmAkAQ",
+                    "instruction": "TURN_RIGHT",
+                    "metres": 157,
+                    "name": "Jackson Drive"
+                },
+                {
+                    "encodedWaypoints": "lq`nEikwy[@?n@kI]EBWD]J?BFDJ",
+                    "instruction": "TURN_RIGHT",
+                    "metres": 216,
+                    "name": "Etherden Walk"
+                }
+            ],
+            "to": {
+                "address": "Mascot Station Platform 1",
+                "class": "StopLocation",
+                "code": "2020111",
+                "id": "pt_pub|AU_NSW_Sydney|2020111",
+                "lat": -33.9232,
+                "lng": 151.1872,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Mascot Station Platform 1",
+                "popularity": 13035,
+                "services": "T8",
+                "stopCode": "2020111",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 82,
+            "type": "unscheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Take <NUMBER>",
+            "endStopCode": "2000341",
+            "from": {
+                "address": "Mascot Station Platform 1",
+                "class": "StopLocation",
+                "code": "2020111",
+                "id": "pt_pub|AU_NSW_Sydney|2020111",
+                "lat": -33.9232,
+                "lng": 151.1872,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Mascot Station Platform 1",
+                "popularity": 13035,
+                "services": "T8",
+                "stopCode": "2020111",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": -368196986,
+            "localCost": {
+                "accuracy": "internal_estimate",
+                "cost": 8.86,
+                "costComponents": [
+                    {
+                        "cost": 8.86,
+                        "name": "Opal (train)",
+                        "type": "TICKET"
+                    }
+                ],
+                "currency": "AUD"
+            },
+            "mini": {
+                "description": "<DIRECTION>",
+                "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+            },
+            "modeIdentifier": "pt_pub",
+            "modeInfo": {
+                "alt": "Train",
+                "color": {
+                    "blue": 104,
+                    "green": 197,
+                    "red": 45
+                },
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+            },
+            "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($8.86)",
+            "operator": "Sydney Trains",
+            "operatorID": "SydneyTrains",
+            "serviceOperator": "Sydney Trains",
+            "shapes": [
+                {
+                    "encodedWaypoints": "vfbnEorky[Gu@w@qDYuCGcDt@gHvAkId@{DFwEa@yE_Kke@??gHy[c@_FAgEl@aJALhAmIDgBEgC]oCY{A`@uGJ{@[[??b@_@TaDNm@|@gARcB~a@ay@??aAvA~DyJT{@RoBDiCCuCq@{Ei@oCeAcCiEaHsAcEUoBK_Ef@uKAcP??fBiHw@}HwAsDsA}AmCgBeDiAs@i@cPaDgHOmEU{OX",
+                    "travelled": false
+                },
+                {
+                    "encodedWaypoints": "`s`nE}vwy[n@VeIgAkAYoLcAqDm@{{@iv@iI}Ps@uC[oDiBqE??H{AgBgAcAKiOKsCJ_El@iYlFuBh@yAN}A?gi@iGsDy@SQcDuGmJ{IgBqB",
+                    "travelled": true
+                },
+                {
+                    "encodedWaypoints": "z_ymEms{y[uJaEcCGeF}@{EkA_NiAsCoBk@K??yLoHoSoA??sBw@sWoB{Am@oAcB_CiCw@o@u@m@gAs@gAa@qAGsANsAj@aAhBa@vAu@tP@jB??o@pMFtBb@pApAjC|@hA`BdA|AVlAHpNmB??IhAzWsC|OmBzE_@",
+                    "travelled": false
+                }
+            ],
+            "sources": [
+                {
+                    "provider": "Sydney Trains"
+                }
+            ],
+            "stopCode": "2020111",
+            "to": {
+                "address": "Central Station Platform 21",
+                "class": "StopLocation",
+                "code": "2000341",
+                "id": "pt_pub|AU_NSW_Sydney|2000341",
+                "lat": -33.8843,
+                "lng": 151.20712,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 21",
+                "popularity": 11660,
+                "services": "T3, T2",
+                "stopCode": "2000341",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 28,
+            "type": "scheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Wheel",
+            "from": {
+                "address": "Central Station Platform 21",
+                "class": "StopLocation",
+                "code": "2000341",
+                "id": "pt_pub|AU_NSW_Sydney|2000341",
+                "lat": -33.8843,
+                "lng": 151.20712,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 21",
+                "popularity": 11660,
+                "services": "T3, T2",
+                "stopCode": "2000341",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": -981324664,
+            "metres": 136,
+            "metresSafe": 0,
+            "metresUnsafe": 0,
+            "mini": {
+                "description": "Central Station Platform 7",
+                "instruction": "Wheel",
+                "mainValue": "<1/4 mile"
+            },
+            "modeIdentifier": "wa_whe",
+            "modeInfo": {
+                "alt": "Wheel",
+                "color": {
+                    "blue": 240,
+                    "green": 149,
+                    "red": 66
+                },
+                "identifier": "wa_whe",
+                "localIcon": "wheelchair"
+            },
+            "notes": "<DURATION> ⋅ <1/4 mile",
+            "streets": [
+                {
+                    "encodedWaypoints": "z_ymEms{y[m@dAmBrBMV",
+                    "instruction": "HEAD_TOWARDS",
+                    "metres": 136,
+                    "name": "Change platform"
+                }
+            ],
+            "to": {
+                "address": "Central Station Platform 7",
+                "class": "StopLocation",
+                "code": "2000327",
+                "id": "pt_pub|AU_NSW_Sydney|2000327",
+                "lat": -33.88344,
+                "lng": 151.20606,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 7",
+                "popularity": 1320,
+                "services": "T9, T4, BMT",
+                "stopCode": "2000327",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 309,
+            "type": "unscheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Wait ",
+            "hashCode": 930909205,
+            "location": {
+                "address": "Central Station Platform 7",
+                "class": "StopLocation",
+                "code": "2000327",
+                "id": "pt_pub|AU_NSW_Sydney|2000327",
+                "lat": -33.88344,
+                "lng": 151.20606,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 7",
+                "popularity": 1320,
+                "services": "T9, T4, BMT",
+                "stopCode": "2000327",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "mini": {
+                "instruction": "Wait",
+                "mainValue": "<DURATION>"
+            },
+            "modeInfo": {
+                "alt": "Transfer",
+                "identifier": "stationary_transfer",
+                "localIcon": "transfer"
+            },
+            "notes": "<DURATION>",
+            "type": "stationary",
+            "visibility": "in details"
+        },
+        {
+            "action": "<TIME>: Take <NUMBER>",
+            "endStopCode": "2780202",
+            "from": {
+                "address": "Central Station Platform 7",
+                "class": "StopLocation",
+                "code": "2000327",
+                "id": "pt_pub|AU_NSW_Sydney|2000327",
+                "lat": -33.88344,
+                "lng": 151.20606,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 7",
+                "popularity": 1320,
+                "services": "T9, T4, BMT",
+                "stopCode": "2000327",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": 1048730071,
+            "mini": {
+                "description": "<DIRECTION>",
+                "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+            },
+            "modeIdentifier": "pt_pub",
+            "modeInfo": {
+                "alt": "Train",
+                "color": {
+                    "blue": 104,
+                    "green": 197,
+                    "red": 45
+                },
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+            },
+            "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS>",
+            "operator": "NSW Trains",
+            "operatorID": "NSWTrains",
+            "serviceOperator": "NSW Trains",
+            "shapes": [
+                {
+                    "encodedWaypoints": "pzxmE{l{y[jGjGjMfMbIxFd@RpEjDjHfIvA^??p@lBvD~HhKba@dEbP~DbP`BpIb@fDLhAJdF@zPKlECzA_@jDmAhF{@lC{DnHqBtGuDbOi@`FGbH`@vGn@pEPtI[vG_@vCu@rDaA~FYrE?xA~AlR@xHY`Ga@nDKj@m@tCMbAyF|TM`AaGtUc@pAiAnEw@~EWxC_@jPa@jKMvAuApJgIrZ}CrNuC~My@tCkElKaCpFsBpE_Ah@??cA|AmJjNeGdJsAnBgCxFeAxCyBhKy@pE_@hE??KtE}@tKs@pDuDbIu@bAcDtC_D~C{AvAiEjGsCtD??w@JqEdHuO`[gCbI??y@vAmDzOuCnOo@tFInCL|HfAzK\\zFCbHa@tI??y@|D{CpV_@xPJvJRfKrB`NBzAWd]WlZc@fEiA~E??C`AeAfCsEhHqH`GJEe_@lUwf@l\\??w@PyIfJ{SdUaPhNwK~MmJrRwD~GsAbE??NViGzLsJ~N??bAe@iHdLeCjDmCrB_DzA_ExA{EzAsDh@qDNqESsEqA??SMiFq@cGDgFlAmD`CuCjC_D~D??}AtBiAtEsDbYoBnJsAxCwC|DiClC_FtC}AjAcCtCkCdEuI~X??`@gAeBlHmAfKOzGpBnc@SrHy@pGs@fDiBnH??oP~i@wBvRi@~Gs@xEsBnGuChHqAtB??yC~B{LvJaF`CeK|B_r@|F??_@WkIhBoQhHaLdIoGbH{MdTgEzLiEbNa@rBWdH??Wj@w@nVtAzs@GrCgAzNwAlIwChJkLxUgDpH_AhCo@|DaAnFyAlHVhA??oCvNyY|}Co@tREpNj@zOnAlM???d@vCdSbj@n~B??OMr@vEbBpT?dWiPliB??mEda@oa@doE_Dr_@??sQdnB??sHdx@SrFJpKnHrvBBnBKnGWzEiCjR??u@hE_Hnd@q@xDaBrH_AzCmD|IyE|IeDzHaJ`Z{A|HgAhHE`F??}@Wq@`JqClKu@|SeAlJmA|HkC~HmK~U}@dCc@lCUrCF~DlFzc@??Wy@?IpO|tAd@vIBxDG~Bs@bEsAfDs@dAoCjC_HjD}@p@iAhAq@fA_AdDSdBChBLlBTtApA|CtJ`LxAlApAj@~B\\bABnAKlA[|FqCfDcA|CMzAFlBZrBn@~Av@rCtBzFlFxA|@pCx@lANnDClAQxHyBfAU`BE`ADfHlBxAPhABvBMfJyE|AUrAEdBJdA^pFrClA^zBLfRgD??i@JlFKfCRtBd@rA\\xB~@r@b@nB~B`AtC^dCOzMdA|Ja@nMJdC`@tChBxDtDzEj@pA\\xBRpC[vDiB|D{FnFaApAoC|HmBjCyAdAeDx@gB?wBi@}BeAiCuBiCaAcBQyBD_B\\sAn@sAlAuAxB{@hD??SjAuFt\\yD`Ho@xA}AtGoAvBwAzAkBdA}E`BmAjAaDtEkBbBiAr@uCj@kILmB~@eGfFgC~@mDd@}BMgBc@oAm@wCyDqCuLiBcEqQi\\y@}@aAq@eAa@yBa@cCDgB`@eCzAeA|A}@lBs@|CMvHSbCg@hBqAnCcA~B??mG~HsHfHwClBgCdA{C^uFYoGs@_EXiBh@qIzEkCh@uBOcDcAmCsAmDcAaL{@iEF_DVkDj@cGlCgCbBuCbDy@|C??KGqAhK_@pEEjDPlC|B`Hd@tCGdA]xDs@bB_CbC{CdA}K`AoBM{Ce@aGoB{BGmBJ{An@qDlD{@~B_@tBo@nJa@jCqAlD}BlDiApA{ApA}Bz@cLrAgFlBoHtE??uDpBeB~AcApAiA~CKlBD~B`AdJr@`MKfFYrBc@nAaA~AqAbAwLfDy@b@iAhAw@jAq@tBWxBCjC\\tGw@`KDrDn@jCjApB|@bA??lE~DvD~Gr@lBRjARzCGdCMnAq@vC_ErI_DfJiPp[eA`BaFlEgHfKaBhD[dBQ`Dl@jEr@|ApEhGn@pA^nAT|Co@nJVtClA|CtEtEt@f@??lAvArCjAhEd@`BXlAj@fAp@`DjDjBpAtFxAtBp@`B~@xDrD`FfDr@l@lB~Cz@|D^hEd@rBx@`BfA`BhBpAbJhElEbDrExF`BhDj@bBX`Cz@nPpAjHdCrQ|@~DdDvEz@tBV`CAzBMpAc@`B{AtDe@~BIpA??G?pBh]dFvSv@rAbAx@xJfFbCfDfB`BxBt@zBZtBMlCe@nDT`HlCtAx@|@bAzGhI|Ax@fAVdFLvBj@hAx@z@jAfB`DpChBrC\\lCp@pA|@`AvAp@nB^`CJpHV~AvC|Gt@|@??LbBVzCcBbQe@lBqD~HcAdDi@rDYjECrIjA~IFpDYrEi@bCu@tBsChDyAz@mDjCuAtAcAhBg@fBQ~Bm@xDy@nBiApA}PlLoCzBeCfD_BhEa@|Ai@zAcAvAYL??gJbKqDfEaDzF}@dPw@vEeDzJa@`CHzCjBtGZjDOnRe@`DuB~Io@bNH|CXjCt@xCdAbA??tOr]vIrKn@|AXzCQbDeEjL_@lD?zCLnAvAdGdA`B??d@xBl@x@j@hCdAtUCpAYvBg@bCsAhDy@fEFpBXbDz@hBhC|CnBnCnC|JV|BAhAoArGu@|FK~A^xD`ArC`ElFhAjCv@~FAnEi@vCw@jCy@dBoAzAcAbBaCrBoB|@mL|CyDV{Fo@yFPcC~@sB`BiHjIwEhG{C|IwBdEcCpDmElFsAlAiHrDaBA??eETeDpA_Av@_EpGkDlJ]fCE~DD~CZfCv@`DxDhFjAr@jJvJ~EbJb@tANnAJjc@c@dCe@bAc@t@{CrCy@xAi@nBWfB?~ANjAbC~IhAxGNtCGbODdB~CvUb@n@|ErFlAbC`@fBTfEClAoCpRApA|@lNE`BQr@??Gh@_@fA{BtDOz@IlDg@tCyN~ZaAbAsE`Do@n@i@|@[zAAzB\\jEZlBh@~Ap@rAtAtA|IrDvHbEp@h@zBtClApEL`B_@lG",
+                    "travelled": true
+                },
+                {
+                    "encodedWaypoints": "hkwlEavlt[d@S[pCm@p@}JlFoDbCiD~Di@nBY~BBbBh@rIKxBYbCu@dCu@bByAlBqChCiAlBm@|BStDFfBjAdIT~DOnBaBjFe@~@sGjIkAnAoB~@kAT{CPkCf@yB?sKgCwB?iBv@uE`Em@d@iAZy@DaCWiAi@wCmCmAu@oCg@qAB{WnD}CjAeDlBwGbHeHjDqUvS_QvIoOvFwCd@??}EpBeE`AoJxAmAHw@E{KqAoAC{AT{A^qAr@qHzGwBl@oCA_HeBoFLcBWg_@mSiBsBgEkHq@{@cGwCoASuAGgAHwi@dOw@P}ABqAImA[{BgAcAeAsDoFoBeAaBk@uAGi[dA??mHMeY|@mBt@_BlAcA`Bw@nCk@tIo@fDmAzBqEjEkIfEoA|@mAdBqBxDuB`CyO|G{AlAwAdByB~D{BvF{AjCiBdB{Br@wCNwGHcI`DmCf@yBIsGgBcC]aD^uCxA_VjRmCdBmD|@gER{Hw@qCJgDpA}UvTqJlJaDpBoBr@oBh@aCZ",
+                    "travelled": false
+                }
+            ],
+            "sources": [
+                {
+                    "provider": "NSW Trains"
+                }
+            ],
+            "stopCode": "2000327",
+            "to": {
+                "address": "Katoomba Station Platform 2",
+                "class": "StopLocation",
+                "code": "2780202",
+                "id": "pt_pub|AU_NSW_Sydney|2780202",
+                "lat": -33.71205,
+                "lng": 150.31154,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Katoomba Station Platform 2",
+                "popularity": 3100,
+                "services": "BMT, WST",
+                "stopCode": "2780202",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 281,
+            "type": "scheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Wheel",
+            "from": {
+                "address": "Katoomba Station Platform 2",
+                "class": "StopLocation",
+                "code": "2780202",
+                "id": "pt_pub|AU_NSW_Sydney|2780202",
+                "lat": -33.71205,
+                "lng": 150.31154,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Katoomba Station Platform 2",
+                "popularity": 3100,
+                "services": "BMT, WST",
+                "stopCode": "2780202",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": -1723497713,
+            "metres": 325,
+            "metresSafe": 0,
+            "metresUnsafe": 0,
+            "mini": {
+                "description": "Blue Mountains NSW, Australia",
+                "instruction": "Wheel",
+                "mainValue": "<1/4 mile"
+            },
+            "modeIdentifier": "wa_whe",
+            "modeInfo": {
+                "alt": "Wheel",
+                "color": {
+                    "blue": 240,
+                    "green": 149,
+                    "red": 66
+                },
+                "identifier": "wa_whe",
+                "localIcon": "wheelchair"
+            },
+            "notes": "<DURATION> ⋅ <1/4 mile",
+            "streets": [
+                {
+                    "encodedWaypoints": "hkwlEavlt[EIJ_@DQDYh@c@J?J??X?B@?xAJ??@?r@LdCXEP",
+                    "instruction": "HEAD_TOWARDS",
+                    "metres": 264,
+                    "name": "Change platform"
+                },
+                {
+                    "encodedWaypoints": "nvwlEwvlt[f@F`AJ?@",
+                    "instruction": "CONTINUE_STRAIGHT",
+                    "metres": 60,
+                    "name": "Katoomba Street"
+                }
+            ],
+            "to": {
+                "address": "Blue Mountains NSW, Australia",
+                "class": "Location",
+                "lat": -33.71436,
+                "lng": 150.31154,
+                "timezone": "Australia/Sydney"
+            },
+            "travelDirection": 178,
+            "type": "unscheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Take <NUMBER>",
+            "endStopCode": "2000341",
+            "from": {
+                "address": "Mascot Station Platform 1",
+                "class": "StopLocation",
+                "code": "2020111",
+                "id": "pt_pub|AU_NSW_Sydney|2020111",
+                "lat": -33.9232,
+                "lng": 151.1872,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Mascot Station Platform 1",
+                "popularity": 13035,
+                "services": "T8",
+                "stopCode": "2020111",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": -71357195,
+            "localCost": {
+                "accuracy": "internal_estimate",
+                "cost": 6.2,
+                "costComponents": [
+                    {
+                        "cost": 6.2,
+                        "name": "Opal (train)",
+                        "type": "TICKET"
+                    }
+                ],
+                "currency": "AUD"
+            },
+            "mini": {
+                "description": "<DIRECTION>",
+                "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+            },
+            "modeIdentifier": "pt_pub",
+            "modeInfo": {
+                "alt": "Train",
+                "color": {
+                    "blue": 104,
+                    "green": 197,
+                    "red": 45
+                },
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+            },
+            "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($6.20)",
+            "operator": "Sydney Trains",
+            "operatorID": "SydneyTrains",
+            "serviceOperator": "Sydney Trains",
+            "shapes": [
+                {
+                    "encodedWaypoints": "dufnE}xrx[SiEqDwl@cCk\\c@yW??ZwAiDaqCPwLtCed@GiGi@eF_^yoBQ}DDuCh@{EhKi]h@cD`@kE@sF_@iF{Rc~@oCeKeDgHaL}PmVet@eDoPqBq\\QcI]uDcBiHsCqFgJiK_C}DkFeQmFyMw@oDWuCIcDt@iHvAiId@yDHyEa@{EaTgbAc@{EAkEn@aJCNhAoIFgBGcC[sC[{A`@uGLw@g@]??b@_@TaDNm@|@gARcB~a@ay@??aAvA~DyJT{@RoBDiCCuCq@{Ei@oCeAcCiEaHsAcEUoBK_Ef@uKAcP??fBiHw@}HwAsDsA}AmCgBeDiAs@i@cPaDgHOmEU{OX",
+                    "travelled": false
+                },
+                {
+                    "encodedWaypoints": "`s`nE}vwy[n@VeIgAkAYoLcAqDm@{{@iv@iI}Ps@uC[oDiBqE??H{AgBgAcAKiOKsCJ_El@iYlFuBh@yAN}A?gi@iGsDy@SQcDuGmJ{IgBqB",
+                    "travelled": true
+                },
+                {
+                    "encodedWaypoints": "z_ymEms{y[uJaEcCGeF}@{EkA_NiAsCoBk@K??yLoHoSoA??sBw@sWoB{Am@oAcB_CiCw@o@u@m@gAs@gAa@qAGsANsAj@aAhBa@vAu@tP@jB??o@pMFtBb@pApAjC|@hA`BdA|AVlAHpNmB??IhAzWsC|OmBzE_@",
+                    "travelled": false
+                }
+            ],
+            "sources": [
+                {
+                    "provider": "Sydney Trains"
+                }
+            ],
+            "stopCode": "2020111",
+            "to": {
+                "address": "Central Station Platform 21",
+                "class": "StopLocation",
+                "code": "2000341",
+                "id": "pt_pub|AU_NSW_Sydney|2000341",
+                "lat": -33.8843,
+                "lng": 151.20712,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 21",
+                "popularity": 11660,
+                "services": "T3, T2",
+                "stopCode": "2000341",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 28,
+            "type": "scheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Wheel",
+            "from": {
+                "address": "Central Station Platform 21",
+                "class": "StopLocation",
+                "code": "2000341",
+                "id": "pt_pub|AU_NSW_Sydney|2000341",
+                "lat": -33.8843,
+                "lng": 151.20712,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 21",
+                "popularity": 11660,
+                "services": "T3, T2",
+                "stopCode": "2000341",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": 825385024,
+            "metres": 142,
+            "metresSafe": 0,
+            "metresUnsafe": 0,
+            "mini": {
+                "description": "Central Station Platform 6",
+                "instruction": "Wheel",
+                "mainValue": "<1/4 mile"
+            },
+            "modeIdentifier": "wa_whe",
+            "modeInfo": {
+                "alt": "Wheel",
+                "color": {
+                    "blue": 240,
+                    "green": 149,
+                    "red": 66
+                },
+                "identifier": "wa_whe",
+                "localIcon": "wheelchair"
+            },
+            "notes": "<DURATION> ⋅ <1/4 mile",
+            "streets": [
+                {
+                    "encodedWaypoints": "z_ymEms{y[m@dAmBrBMVEJ",
+                    "instruction": "HEAD_TOWARDS",
+                    "metres": 142,
+                    "name": "Change platform"
+                }
+            ],
+            "to": {
+                "address": "Central Station Platform 6",
+                "class": "StopLocation",
+                "code": "2000326",
+                "id": "pt_pub|AU_NSW_Sydney|2000326",
+                "lat": -33.88341,
+                "lng": 151.20601,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 6",
+                "popularity": 2065,
+                "services": "T9, BMT, SHL, STH, CCN",
+                "stopCode": "2000326",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 309,
+            "type": "unscheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Wait ",
+            "hashCode": 930909174,
+            "location": {
+                "address": "Central Station Platform 6",
+                "class": "StopLocation",
+                "code": "2000326",
+                "id": "pt_pub|AU_NSW_Sydney|2000326",
+                "lat": -33.88341,
+                "lng": 151.20601,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 6",
+                "popularity": 2065,
+                "services": "T9, BMT, SHL, STH, CCN",
+                "stopCode": "2000326",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "mini": {
+                "instruction": "Wait",
+                "mainValue": "<DURATION>"
+            },
+            "modeInfo": {
+                "alt": "Transfer",
+                "identifier": "stationary_transfer",
+                "localIcon": "transfer"
+            },
+            "notes": "<DURATION>",
+            "type": "stationary",
+            "visibility": "in details"
+        },
+        {
+            "action": "<TIME>: Take <NUMBER>",
+            "endStopCode": "2780202",
+            "from": {
+                "address": "Central Station Platform 6",
+                "class": "StopLocation",
+                "code": "2000326",
+                "id": "pt_pub|AU_NSW_Sydney|2000326",
+                "lat": -33.88341,
+                "lng": 151.20601,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 6",
+                "popularity": 2065,
+                "services": "T9, BMT, SHL, STH, CCN",
+                "stopCode": "2000326",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": 1020134772,
+            "mini": {
+                "description": "<DIRECTION>",
+                "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+            },
+            "modeIdentifier": "pt_pub",
+            "modeInfo": {
+                "alt": "Train",
+                "color": {
+                    "blue": 104,
+                    "green": 197,
+                    "red": 45
+                },
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+            },
+            "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS>",
+            "operator": "NSW Trains",
+            "operatorID": "NSWTrains",
+            "serviceOperator": "NSW Trains",
+            "shapes": [
+                {
+                    "encodedWaypoints": "jzxmEol{y[hGjGlMfMbIxFd@PpEjDjHfI|AT??p@lBvD~HhKba@dEbP~DbP`BpIb@fDLhAJdF@zPKlECzA_@jDmAhF{@lC{DnHqBtGuDbOi@`FGbH`@vGn@pEPtI[vG_@vCu@rDaA~FYrE?xA~AlR@xHY`Ga@nDKj@m@tCMbAyF|TM`AaGtUc@pAiAnEw@~EWxC_@jPa@jKMvAuApJgIrZ}CrNuC~My@tCkElKaCpFsBpE_Ah@??cA|AmJjNeGdJsAnBgCxFeAxCyBhKy@pE_@hE??KtE}@tKs@pDuDbIu@bAcDtC_D~C{AvAiEjGsCtD??w@JqEdHuO`[gCbI??y@vAmDzOuCnOo@tFInCL|HfAzK\\zFCbHa@tI??y@|D{CpV_@xPJvJRfKrB`NBzAWd]WlZc@fEiA~E??C`AeAfCsEhHqH`GJEe_@lUwf@l\\??w@PyIfJ{SdUaPhNwK~MmJrRwD~GsAbE??NViGzLsJ~N??bAe@iHdLeCjDmCrB_DzA_ExA{EzAsDh@qDNqESsEqA??SMiFq@cGDgFlAmD`CuCjC_D~D??}AtBiAtEsDbYoBnJsAxCwC|DiClC_FtC}AjAcCtCkCdEuI~X??`@gAeBlHmAfKOzGpBnc@SrHy@pGs@fDiBnH??oP~i@wBvRi@~Gs@xEsBnGuChHqAtB??yC~B{LvJaF`CeK|B_r@|F??_@WkIhBoQhHaLdIoGbH{MdTgEzLiEbNa@rBWdH??Wj@w@nVtAzs@GrCgAzNwAlIwChJkLxUgDpH_AhCo@|DaAnFyAlHVhA??oCvNyY|}Co@tREpNj@zOnAlM???d@vCdSbj@n~B??OMr@vEbBpT?dWiPliB??mEda@oa@doE_Dr_@??sQdnB??sHdx@SrFJpKnHrvBBnBKnGWzEiCjR??u@hE_Hnd@q@xDaBrH_AzCmD|IyE|IeDzHaJ`Z{A|HgAhHE`F??}@Wq@`JqClKu@|SeAlJmA|HkC~HmK~U}@dCc@lCUrCF~DlFzc@??Wy@?IpO|tAd@vIBxDG~Bs@bEsAfDs@dAoCjC_HjD}@p@iAhAq@fA_AdDSdBChBLlBTtApA|CtJ`LxAlApAj@~B\\bABnAKlA[|FqCfDcA|CMzAFlBZrBn@~Av@rCtBzFlFxA|@pCx@lANnDClAQxHyBfAU`BE`ADfHlBxAPhABvBMfJyE|AUrAEdBJdA^pFrClA^zBLfRgD??i@JlFKfCRtBd@rA\\xB~@r@b@nB~B`AtC^dCOzMdA|Ja@nMJdC`@tChBxDtDzEj@pA\\xBRpC[vDiB|D{FnFaApAoC|HmBjCyAdAeDx@gB?wBi@}BeAiCuBiCaAcBQyBD_B\\sAn@sAlAuAxB{@hD??SjAuFt\\yD`Ho@xA}AtGoAvBwAzAkBdA}E`BmAjAaDtEkBbBiAr@uCj@kILmB~@eGfFgC~@mDd@}BMgBc@oAm@wCyDqCuLiBcEqQi\\y@}@aAq@eAa@yBa@cCDgB`@eCzAeA|A}@lBs@|CMvHSbCg@hBqAnCcA~B??mG~HsHfHwClBgCdA{C^uFYoGs@_EXiBh@qIzEkCh@uBOcDcAmCsAmDcAaL{@iEF_DVkDj@cGlCgCbBuCbDy@|C??KGqAhK_@pEEjDPlC|B`Hd@tCGdA]xDs@bB_CbC{CdA}K`AoBM{Ce@aGoB{BGmBJ{An@qDlD{@~B_@tBo@nJa@jCqAlD}BlDiApA{ApA}Bz@cLrAgFlBoHtE??uDpBeB~AcApAiA~CKlBD~B`AdJr@`MKfFYrBc@nAaA~AqAbAwLfDy@b@iAhAw@jAq@tBWxBCjC\\tGw@`KDrDn@jCjApB|@bA??lE~DvD~Gr@lBRjARzCGdCMnAq@vC_ErI_DfJiPp[eA`BaFlEgHfKaBhD[dBQ`Dl@jEr@|ApEhGn@pA^nAT|Co@nJVtClA|CtEtEt@f@??lAvArCjAhEd@`BXlAj@fAp@`DjDjBpAtFxAtBp@`B~@xDrD`FfDr@l@lB~Cz@|D^hEd@rBx@`BfA`BhBpAbJhElEbDrExF`BhDj@bBX`Cz@nPpAjHdCrQ|@~DdDvEz@tBV`CAzBMpAc@`B{AtDe@~BIpA??G?pBh]dFvSv@rAbAx@xJfFbCfDfB`BxBt@zBZtBMlCe@nDT`HlCtAx@|@bAzGhI|Ax@fAVdFLvBj@hAx@z@jAfB`DpChBrC\\lCp@pA|@`AvAp@nB^`CJpHV~AvC|Gt@|@??LbBVzCcBbQe@lBqD~HcAdDi@rDYjECrIjA~IFpDYrEi@bCu@tBsChDyAz@mDjCuAtAcAhBg@fBQ~Bm@xDy@nBiApA}PlLoCzBeCfD_BhEa@|Ai@zAcAvAYL??gJbKqDfEaDzF}@dPw@vEeDzJa@`CHzCjBtGZjDOnRe@`DuB~Io@bNH|CXjCt@xCdAbA??tOr]vIrKn@|AXzCQbDeEjL_@lD?zCLnAvAdGdA`B??d@xBl@x@j@hCdAtUCpAYvBg@bCsAhDy@fEFpBXbDz@hBhC|CnBnCnC|JV|BAhAoArGu@|FK~A^xD`ArC`ElFhAjCv@~FAnEi@vCw@jCy@dBoAzAcAbBaCrBoB|@mL|CyDV{Fo@yFPcC~@sB`BiHjIwEhG{C|IwBdEcCpDmElFsAlAiHrDaBA??eETeDpA_Av@_EpGkDlJ]fCE~DD~CZfCv@`DxDhFjAr@jJvJ~EbJb@tANnAJjc@c@dCe@bAc@t@{CrCy@xAi@nBWfB?~ANjAbC~IhAxGNtCGbODdB~CvUb@n@|ErFlAbC`@fBTfEClAoCpRApA|@lNE`BQr@??Gh@_@fA{BtDOz@IlDg@tCyN~ZaAbAsE`Do@n@i@|@[zAAzB\\jEZlBh@~Ap@rAtAtA|IrDvHbEp@h@zBtClApEL`B_@lG",
+                    "travelled": true
+                },
+                {
+                    "encodedWaypoints": "hkwlEavlt[d@S[pCm@p@}JlFoDbCiD~Di@nBY~BBbBh@rIKxBYbCu@dCu@bByAlBqChCiAlBm@|BStDFfBjAdIT~DOnBaBjFe@~@sGjIkAnAoB~@kAT{CPkCf@yB?sKgCwB?iBv@uE`Em@d@iAZy@DaCWiAi@wCmCmAu@oCg@qAB{WnD}CjAeDlBwGbHeHjDqUvS_QvIoOvFwCd@??}EpBeE`AoJxAmAHw@E{KqAoAC{AT{A^qAr@qHzGwBl@oCA_HeBoFLcBWg_@mSiBsBgEkHq@{@cGwCoASuAGgAHwi@dOw@P}ABqAImA[{BgAcAeAsDoFoBeAaBk@uAGi[dA??mHMeY|@mBt@_BlAcA`Bw@nCk@tIo@fDmAzBqEjEkIfEoA|@mAdBqBxDuB`CyO|G{AlAwAdByB~D{BvF{AjCiBdB{Br@wCNwGHcI`DmCf@yBIsGgBcC]aD^uCxA_VjRmCdBmD|@gER{Hw@qCJgDpA}UvTqJlJaDpBoBr@oBh@aCZ??NMmD?sLmC}Jy@qOk@aGN_EEsCw@qA{@wIqHkBaAmBk@aDc@gDBkEbAmJfF}Al@{Bn@cBP_C@kJ}@a]_IeRuFyJcGqC{@gCa@gCScC@eTpC}GlAwBt@}LhFaFnAoM~@eBDgBUkDcAiAm@yCiCqCuAiSmEgBu@yBcBwP}TcA}AqAcFm@_He@cDq@aC_AoByAgBmBsA_C{@uAO}AGoBJiB`@kIdEqBf@qBP{A?gPeAoAWmBm@qBgA{BsB{B_DyOm]iBwCgByAcB{@}Bo@wCYiBHyCl@{YvN??n@q@}ItEeEnDaClCqErJgBfE_QbRmIdHgExCqTpHmAl@y_@b]gB~C_EpO_JrIeDdH}ExEaKtBkJxHaBdAgF`@oEJeDfA{Ax@}BjCiBrI}A`FmAfBuBhBiElCmBhByAnCu@fCMtEb@hErA~D~B~B`CbAdDh@vEy@vAy@|`@}a@hBcAhBc@fBSzEDjJtAtErBfEbD|G~IxMxRlPbt@nGxErIzBxE~BpCtGh@zFeCrNsHjOqIdNyGdL_[xH{A`BwDvKmAbF}CbEyEvAcUrS{LdOkBv@eDr@wOv@yEtAkBpA",
+                    "travelled": false
+                }
+            ],
+            "sources": [
+                {
+                    "provider": "NSW Trains"
+                }
+            ],
+            "stopCode": "2000326",
+            "to": {
+                "address": "Katoomba Station Platform 2",
+                "class": "StopLocation",
+                "code": "2780202",
+                "id": "pt_pub|AU_NSW_Sydney|2780202",
+                "lat": -33.71205,
+                "lng": 150.31154,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Katoomba Station Platform 2",
+                "popularity": 3100,
+                "services": "BMT, WST",
+                "stopCode": "2780202",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 281,
+            "type": "scheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Take <NUMBER>",
+            "endStopCode": "2780202",
+            "from": {
+                "address": "Central Station Platform 7",
+                "class": "StopLocation",
+                "code": "2000327",
+                "id": "pt_pub|AU_NSW_Sydney|2000327",
+                "lat": -33.88344,
+                "lng": 151.20606,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 7",
+                "popularity": 1320,
+                "services": "T9, T4, BMT",
+                "stopCode": "2000327",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": 1048725421,
+            "mini": {
+                "description": "<DIRECTION>",
+                "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+            },
+            "modeIdentifier": "pt_pub",
+            "modeInfo": {
+                "alt": "Train",
+                "color": {
+                    "blue": 104,
+                    "green": 197,
+                    "red": 45
+                },
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+            },
+            "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS>",
+            "operator": "NSW Trains",
+            "operatorID": "NSWTrains",
+            "serviceOperator": "NSW Trains",
+            "shapes": [
+                {
+                    "encodedWaypoints": "pzxmE{l{y[jGjGjMfMbIxFd@RpEjDjHfIvA^??p@lBvD~HhKba@dEbP~DbP`BpIb@fDLhAJdF@zPKlECzA_@jDmAhF{@lC{DnHqBtGuDbOi@`FGbH`@vGn@pEPtI[vG_@vCu@rDaA~FYrE?xA~AlR@xHY`Ga@nDKj@m@tCMbAyF|TM`AaGtUc@pAiAnEw@~EWxC_@jPa@jKMvAuApJgIrZ}CrNuC~My@tCkElKaCpFsBpE_Ah@??cA|AmJjNeGdJsAnBgCxFeAxCyBhKy@pE_@hE??KtE}@tKs@pDuDbIu@bAcDtC_D~C{AvAiEjGsCtD??w@JqEdHuO`[gCbI??y@vAmDzOuCnOo@tFInCL|HfAzK\\zFCbHa@tI??y@|D{CpV_@xPJvJRfKrB`NBzAWd]WlZc@fEiA~E??C`AeAfCsEhHqH`GJEe_@lUwf@l\\??w@PyIfJ{SdUaPhNwK~MmJrRwD~GsAbE??NViGzLsJ~N??bAe@iHdLeCjDmCrB_DzA_ExA{EzAsDh@qDNqESsEqA??SMiFq@cGDgFlAmD`CuCjC_D~D??}AtBiAtEsDbYoBnJsAxCwC|DiClC_FtC}AjAcCtCkCdEuI~X??`@gAeBlHmAfKOzGpBnc@SrHy@pGs@fDiBnH??oP~i@wBvRi@~Gs@xEsBnGuChHqAtB??yC~B{LvJaF`CeK|B_r@|F??_@WkIhBoQhHaLdIoGbH{MdTgEzLiEbNa@rBWdH??Wj@w@nVtAzs@GrCgAzNwAlIwChJkLxUgDpH_AhCo@|DaAnFyAlHVhA??oCvNyY|}Co@tREpNj@zOnAlM???d@vCdSbj@n~B??OMr@vEbBpT?dWiPliB??mEda@oa@doE_Dr_@??sQdnB??sHdx@SrFJpKnHrvBBnBKnGWzEiCjR??u@hE_Hnd@q@xDaBrH_AzCmD|IyE|IeDzHaJ`Z{A|HgAhHE`F??}@Wq@`JqClKu@|SeAlJmA|HkC~HmK~U}@dCc@lCUrCF~DlFzc@??Wy@?IpO|tAd@vIBxDG~Bs@bEsAfDs@dAoCjC_HjD}@p@iAhAq@fA_AdDSdBChBLlBTtApA|CtJ`LxAlApAj@~B\\bABnAKlA[|FqCfDcA|CMzAFlBZrBn@~Av@rCtBzFlFxA|@pCx@lANnDClAQxHyBfAU`BE`ADfHlBxAPhABvBMfJyE|AUrAEdBJdA^pFrClA^zBLfRgD??i@JlFKfCRtBd@rA\\xB~@r@b@nB~B`AtC^dCOzMdA|Ja@nMJdC`@tChBxDtDzEj@pA\\xBRpC[vDiB|D{FnFaApAoC|HmBjCyAdAeDx@gB?wBi@}BeAiCuBiCaAcBQyBD_B\\sAn@sAlAuAxB{@hD??SjAuFt\\yD`Ho@xA}AtGoAvBwAzAkBdA}E`BmAjAaDtEkBbBiAr@uCj@kILmB~@eGfFgC~@mDd@}BMgBc@oAm@wCyDqCuLiBcEqQi\\y@}@aAq@eAa@yBa@cCDgB`@eCzAeA|A}@lBs@|CMvHSbCg@hBqAnCcA~B??mG~HsHfHwClBgCdA{C^uFYoGs@_EXiBh@qIzEkCh@uBOcDcAmCsAmDcAaL{@iEF_DVkDj@cGlCgCbBuCbDy@|C??KGqAhK_@pEEjDPlC|B`Hd@tCGdA]xDs@bB_CbC{CdA}K`AoBM{Ce@aGoB{BGmBJ{An@qDlD{@~B_@tBo@nJa@jCqAlD}BlDiApA{ApA}Bz@cLrAgFlBoHtE??uDpBeB~AcApAiA~CKlBD~B`AdJr@`MKfFYrBc@nAaA~AqAbAwLfDy@b@iAhAw@jAq@tBWxBCjC\\tGw@`KDrDn@jCjApB|@bA??lE~DvD~Gr@lBRjARzCGdCMnAq@vC_ErI_DfJiPp[eA`BaFlEgHfKaBhD[dBQ`Dl@jEr@|ApEhGn@pA^nAT|Co@nJVtClA|CtEtEt@f@??lAvArCjAhEd@`BXlAj@fAp@`DjDjBpAtFxAtBp@`B~@xDrD`FfDr@l@lB~Cz@|D^hEd@rBx@`BfA`BhBpAbJhElEbDrExF`BhDj@bBX`Cz@nPpAjHdCrQ|@~DdDvEz@tBV`CAzBMpAc@`B{AtDe@~BIpA??G?pBh]dFvSv@rAbAx@xJfFbCfDfB`BxBt@zBZtBMlCe@nDT`HlCtAx@|@bAzGhI|Ax@fAVdFLvBj@hAx@z@jAfB`DpChBrC\\lCp@pA|@`AvAp@nB^`CJpHV~AvC|Gt@|@??LbBVzCcBbQe@lBqD~HcAdDi@rDYjECrIjA~IFpDYrEi@bCu@tBsChDyAz@mDjCuAtAcAhBg@fBQ~Bm@xDy@nBiApA}PlLoCzBeCfD_BhEa@|Ai@zAcAvAYL??gJbKqDfEaDzF}@dPw@vEeDzJa@`CHzCjBtGZjDOnRe@`DuB~Io@bNH|CXjCt@xCdAbA??tOr]vIrKn@|AXzCQbDeEjL_@lD?zCLnAvAdGdA`B??d@xBl@x@j@hCdAtUCpAYvBg@bCsAhDy@fEFpBXbDz@hBhC|CnBnCnC|JV|BAhAoArGu@|FK~A^xD`ArC`ElFhAjCv@~FAnEi@vCw@jCy@dBoAzAcAbBaCrBoB|@mL|CyDV{Fo@yFPcC~@sB`BiHjIwEhG{C|IwBdEcCpDmElFsAlAiHrDaBA??eETeDpA_Av@_EpGkDlJ]fCE~DD~CZfCv@`DxDhFjAr@jJvJ~EbJb@tANnAJjc@c@dCe@bAc@t@{CrCy@xAi@nBWfB?~ANjAbC~IhAxGNtCGbODdB~CvUb@n@|ErFlAbC`@fBTfEClAoCpRApA|@lNE`BQr@??Gh@_@fA{BtDOz@IlDg@tCyN~ZaAbAsE`Do@n@i@|@[zAAzB\\jEZlBh@~Ap@rAtAtA|IrDvHbEp@h@zBtClApEL`B_@lG",
+                    "travelled": true
+                },
+                {
+                    "encodedWaypoints": "hkwlEavlt[d@S[pCm@p@}JlFoDbCiD~Di@nBY~BBbBh@rIKxBYbCu@dCu@bByAlBqChCiAlBm@|BStDFfBjAdIT~DOnBaBjFe@~@sGjIkAnAoB~@kAT{CPkCf@yB?sKgCwB?iBv@uE`Em@d@iAZy@DaCWiAi@wCmCmAu@oCg@qAB{WnD}CjAeDlBwGbHeHjDqUvS_QvIoOvFwCd@??}EpBeE`AoJxAmAHw@E{KqAoAC{AT{A^qAr@qHzGwBl@oCA_HeBoFLcBWg_@mSiBsBgEkHq@{@cGwCoASuAGgAHwi@dOw@P}ABqAImA[{BgAcAeAsDoFoBeAaBk@uAGi[dA??mHMeY|@mBt@_BlAcA`Bw@nCk@tIo@fDmAzBqEjEkIfEoA|@mAdBqBxDuB`CyO|G{AlAwAdByB~D{BvF{AjCiBdB{Br@wCNwGHcI`DmCf@yBIsGgBcC]aD^uCxA_VjRmCdBmD|@gER{Hw@qCJgDpA}UvTqJlJaDpBoBr@oBh@aCZ??NMmD?sLmC}Jy@qOk@aGN_EEsCw@qA{@wIqHkBaAmBk@aDc@gDBkEbAmJfF}Al@{Bn@cBP_C@kJ}@a]_IeRuFyJcGqC{@gCa@gCScC@eTpC}GlAwBt@}LhFaFnAoM~@eBDgBUkDcAiAm@yCiCqCuAiSmEgBu@yBcBwP}TcA}AqAcFm@_He@cDq@aC_AoByAgBmBsA_C{@uAO}AGoBJiB`@kIdEqBf@qBP{A?gPeAoAWmBm@qBgA{BsB{B_DyOm]iBwCgByAcB{@}Bo@wCYiBHyCl@{YvN??n@q@}ItEeEnDaClCqErJgBfE_QbRmIdHgExCqTpHmAl@y_@b]gB~C_EpO_JrIeDdH}ExEaKtBkJxHaBdAgF`@oEJeDfA{Ax@}BjCiBrI}A`FmAfBuBhBiElCmBhByAnCu@fCMtEb@hErA~D~B~B`CbAdDh@vEy@vAy@|`@}a@hBcAhBc@fBSzEDjJtAtErBfEbD|G~IxMxRlPbt@nGxErIzBxE~BpCtGh@zFeCrNsHjOqIdNyGdL_[xH{A`BwDvKmAbF}CbEyEvAcUrS{LdOkBv@eDr@wOv@yEtAkBpA",
+                    "travelled": false
+                }
+            ],
+            "sources": [
+                {
+                    "provider": "NSW Trains"
+                }
+            ],
+            "stopCode": "2000327",
+            "to": {
+                "address": "Katoomba Station Platform 2",
+                "class": "StopLocation",
+                "code": "2780202",
+                "id": "pt_pub|AU_NSW_Sydney|2780202",
+                "lat": -33.71205,
+                "lng": 150.31154,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Katoomba Station Platform 2",
+                "popularity": 3100,
+                "services": "BMT, WST",
+                "stopCode": "2780202",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 281,
+            "type": "scheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Wheel",
+            "from": {
+                "address": "Central Station Platform 21",
+                "class": "StopLocation",
+                "code": "2000341",
+                "id": "pt_pub|AU_NSW_Sydney|2000341",
+                "lat": -33.8843,
+                "lng": 151.20712,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 21",
+                "popularity": 11660,
+                "services": "T3, T2",
+                "stopCode": "2000341",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": 1478065465,
+            "metres": 122,
+            "metresSafe": 0,
+            "metresUnsafe": 0,
+            "mini": {
+                "description": "Central Station Platform 8",
+                "instruction": "Wheel",
+                "mainValue": "<1/4 mile"
+            },
+            "modeIdentifier": "wa_whe",
+            "modeInfo": {
+                "alt": "Wheel",
+                "color": {
+                    "blue": 240,
+                    "green": 149,
+                    "red": 66
+                },
+                "identifier": "wa_whe",
+                "localIcon": "wheelchair"
+            },
+            "notes": "<DURATION> ⋅ <1/4 mile",
+            "streets": [
+                {
+                    "encodedWaypoints": "z_ymEms{y[m@dAmBrB",
+                    "instruction": "HEAD_TOWARDS",
+                    "metres": 122,
+                    "name": "Change platform"
+                }
+            ],
+            "to": {
+                "address": "Central Station Platform 8",
+                "class": "StopLocation",
+                "code": "2000328",
+                "id": "pt_pub|AU_NSW_Sydney|2000328",
+                "lat": -33.88352,
+                "lng": 151.20618,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 8",
+                "popularity": 2095,
+                "services": "CCN, T9, T1, BMT, SCO",
+                "stopCode": "2000328",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 310,
+            "type": "unscheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Wait ",
+            "hashCode": 930908275,
+            "location": {
+                "address": "Central Station Platform 8",
+                "class": "StopLocation",
+                "code": "2000328",
+                "id": "pt_pub|AU_NSW_Sydney|2000328",
+                "lat": -33.88352,
+                "lng": 151.20618,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 8",
+                "popularity": 2095,
+                "services": "CCN, T9, T1, BMT, SCO",
+                "stopCode": "2000328",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "mini": {
+                "instruction": "Wait",
+                "mainValue": "<DURATION>"
+            },
+            "modeInfo": {
+                "alt": "Transfer",
+                "identifier": "stationary_transfer",
+                "localIcon": "transfer"
+            },
+            "notes": "<DURATION>",
+            "type": "stationary",
+            "visibility": "in details"
+        },
+        {
+            "action": "<TIME>: Take <NUMBER>",
+            "endStopCode": "2780202",
+            "from": {
+                "address": "Central Station Platform 8",
+                "class": "StopLocation",
+                "code": "2000328",
+                "id": "pt_pub|AU_NSW_Sydney|2000328",
+                "lat": -33.88352,
+                "lng": 151.20618,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 8",
+                "popularity": 2095,
+                "services": "CCN, T9, T1, BMT, SCO",
+                "stopCode": "2000328",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": 189715824,
+            "mini": {
+                "description": "<DIRECTION>",
+                "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+            },
+            "modeIdentifier": "pt_pub",
+            "modeInfo": {
+                "alt": "Train",
+                "color": {
+                    "blue": 104,
+                    "green": 197,
+                    "red": 45
+                },
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+            },
+            "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS>",
+            "operator": "NSW Trains",
+            "operatorID": "NSWTrains",
+            "serviceOperator": "NSW Trains",
+            "shapes": [
+                {
+                    "encodedWaypoints": "~zxmEsm{y[jGjGjMfMbIxFd@RpEjDjHfIhAv@??p@lBvD~HhKba@dEbP~DbP`BpIb@fDLhAJdF@zPKlECzA_@jDmAhF{@lC{DnHqBtGuDbOi@`FGbH`@vGn@pEPtI[vG_@vCu@rDaA~FYrE?xA~AlR@xHY`Ga@nDKj@m@tCMbAyF|TM`AaGtUc@pAiAnEw@~EWxC_@jPa@jKMvAuApJgIrZ}CrNuC~My@tCkElKaCpFsBpE_Ah@??cA|AmJjNeGdJsAnBgCxFeAxCyBhKy@pE_@hE??KtE}@tKs@pDuDbIu@bAcDtC_D~C{AvAiEjGsCtD??w@JqEdHuO`[gCbI??y@vAmDzOuCnOo@tFInCL|HfAzK\\zFCbHa@tI??y@|D{CpV_@xPJvJRfKrB`NBzAWd]WlZc@fEiA~E??C`AeAfCsEhHqH`GJEe_@lUwf@l\\??w@PyIfJ{SdUaPhNwK~MmJrRwD~GsAbE??NViGzLsJ~N??bAe@iHdLeCjDmCrB_DzA_ExA{EzAsDh@qDNqESsEqA??SMiFq@cGDgFlAmD`CuCjC_D~D??}AtBiAtEsDbYoBnJsAxCwC|DiClC_FtC}AjAcCtCkCdEuI~X??`@gAeBlHmAfKOzGpBnc@SrHy@pGs@fDiBnH??oP~i@wBvRi@~Gs@xEsBnGuChHqAtB??yC~B{LvJaF`CeK|B_r@|F??_@WkIhBoQhHaLdIoGbH{MdTgEzLiEbNa@rBWdH??Wj@w@nVtAzs@GrCgAzNwAlIwChJkLxUgDpH_AhCo@|DaAnFyAlHVhA??oCvNyY|}Co@tREpNj@zOnAlM???d@vCdSbj@n~B??OMr@vEbBpT?dWiPliB??mEda@oa@doE_Dr_@??sQdnB??sHdx@SrFJpKnHrvBBnBKnGWzEiCjR??u@hE_Hnd@q@xDaBrH_AzCmD|IyE|IeDzHaJ`Z{A|HgAhHE`F??}@Wq@`JqClKu@|SeAlJmA|HkC~HmK~U}@dCc@lCUrCF~DlFzc@??Wy@?IpO|tAd@vIBxDG~Bs@bEsAfDs@dAoCjC_HjD}@p@iAhAq@fA_AdDSdBChBLlBTtApA|CtJ`LxAlApAj@~B\\bABnAKlA[|FqCfDcA|CMzAFlBZrBn@~Av@rCtBzFlFxA|@pCx@lANnDClAQxHyBfAU`BE`ADfHlBxAPhABvBMfJyE|AUrAEdBJdA^pFrClA^zBLfRgD??i@JlFKfCRtBd@rA\\xB~@r@b@nB~B`AtC^dCOzMdA|Ja@nMJdC`@tChBxDtDzEj@pA\\xBRpC[vDiB|D{FnFaApAoC|HmBjCyAdAeDx@gB?wBi@}BeAiCuBiCaAcBQyBD_B\\sAn@sAlAuAxB{@hD??SjAuFt\\yD`Ho@xA}AtGoAvBwAzAkBdA}E`BmAjAaDtEkBbBiAr@uCj@kILmB~@eGfFgC~@mDd@}BMgBc@oAm@wCyDqCuLiBcEqQi\\y@}@aAq@eAa@yBa@cCDgB`@eCzAeA|A}@lBs@|CMvHSbCg@hBqAnCcA~B??mG~HsHfHwClBgCdA{C^uFYoGs@_EXiBh@qIzEkCh@uBOcDcAmCsAmDcAaL{@iEF_DVkDj@cGlCgCbBuCbDy@|C??KGqAhK_@pEEjDPlC|B`Hd@tCGdA]xDs@bB_CbC{CdA}K`AoBM{Ce@aGoB{BGmBJ{An@qDlD{@~B_@tBo@nJa@jCqAlD}BlDiApA{ApA}Bz@cLrAgFlBoHtE??uDpBeB~AcApAiA~CKlBD~B`AdJr@`MKfFYrBc@nAaA~AqAbAwLfDy@b@iAhAw@jAq@tBWxBCjC\\tGw@`KDrDn@jCjApB|@bA??lE~DvD~Gr@lBRjARzCGdCMnAq@vC_ErI_DfJiPp[eA`BaFlEgHfKaBhD[dBQ`Dl@jEr@|ApEhGn@pA^nAT|Co@nJVtClA|CtEtEt@f@??lAvArCjAhEd@`BXlAj@fAp@`DjDjBpAtFxAtBp@`B~@xDrD`FfDr@l@lB~Cz@|D^hEd@rBx@`BfA`BhBpAbJhElEbDrExF`BhDj@bBX`Cz@nPpAjHdCrQ|@~DdDvEz@tBV`CAzBMpAc@`B{AtDe@~BIpA??G?pBh]dFvSv@rAbAx@xJfFbCfDfB`BxBt@zBZtBMlCe@nDT`HlCtAx@|@bAzGhI|Ax@fAVdFLvBj@hAx@z@jAfB`DpChBrC\\lCp@pA|@`AvAp@nB^`CJpHV~AvC|Gt@|@??LbBVzCcBbQe@lBqD~HcAdDi@rDYjECrIjA~IFpDYrEi@bCu@tBsChDyAz@mDjCuAtAcAhBg@fBQ~Bm@xDy@nBiApA}PlLoCzBeCfD_BhEa@|Ai@zAcAvAYL??gJbKqDfEaDzF}@dPw@vEeDzJa@`CHzCjBtGZjDOnRe@`DuB~Io@bNH|CXjCt@xCdAbA??tOr]vIrKn@|AXzCQbDeEjL_@lD?zCLnAvAdGdA`B??d@xBl@x@j@hCdAtUCpAYvBg@bCsAhDy@fEFpBXbDz@hBhC|CnBnCnC|JV|BAhAoArGu@|FK~A^xD`ArC`ElFhAjCv@~FAnEi@vCw@jCy@dBoAzAcAbBaCrBoB|@mL|CyDV{Fo@yFPcC~@sB`BiHjIwEhG{C|IwBdEcCpDmElFsAlAiHrDaBA??eETeDpA_Av@_EpGkDlJ]fCE~DD~CZfCv@`DxDhFjAr@jJvJ~EbJb@tANnAJjc@c@dCe@bAc@t@{CrCy@xAi@nBWfB?~ANjAbC~IhAxGNtCGbODdB~CvUb@n@|ErFlAbC`@fBTfEClAoCpRApA|@lNE`BQr@??Gh@_@fA{BtDOz@IlDg@tCyN~ZaAbAsE`Do@n@i@|@[zAAzB\\jEZlBh@~Ap@rAtAtA|IrDvHbEp@h@zBtClApEL`B_@lG",
+                    "travelled": true
+                },
+                {
+                    "encodedWaypoints": "hkwlEavlt[d@S[pCm@p@}JlFoDbCiD~Di@nBY~BBbBh@rIKxBYbCu@dCu@bByAlBqChCiAlBm@|BStDFfBjAdIT~DOnBaBjFe@~@sGjIkAnAoB~@kAT{CPkCf@yB?sKgCwB?iBv@uE`Em@d@iAZy@DaCWiAi@wCmCmAu@oCg@qAB{WnD}CjAeDlBwGbHeHjDqUvS_QvIoOvFwCd@??}EpBeE`AoJxAmAHw@E{KqAoAC{AT{A^qAr@qHzGwBl@oCA_HeBoFLcBWg_@mSiBsBgEkHq@{@cGwCoASuAGgAHwi@dOw@P}ABqAImA[{BgAcAeAsDoFoBeAaBk@uAGi[dA??mHMeY|@mBt@_BlAcA`Bw@nCk@tIo@fDmAzBqEjEkIfEoA|@mAdBqBxDuB`CyO|G{AlAwAdByB~D{BvF{AjCiBdB{Br@wCNwGHcI`DmCf@yBIsGgBcC]aD^uCxA_VjRmCdBmD|@gER{Hw@qCJgDpA}UvTqJlJaDpBoBr@oBh@aCZ??NMmD?sLmC}Jy@qOk@aGN_EEsCw@qA{@wIqHkBaAmBk@aDc@gDBkEbAmJfF}Al@{Bn@cBP_C@kJ}@a]_IeRuFyJcGqC{@gCa@gCScC@eTpC}GlAwBt@}LhFaFnAoM~@eBDgBUkDcAiAm@yCiCqCuAiSmEgBu@yBcBwP}TcA}AqAcFm@_He@cDq@aC_AoByAgBmBsA_C{@uAO}AGoBJiB`@kIdEqBf@qBP{A?gPeAoAWmBm@qBgA{BsB{B_DyOm]iBwCgByAcB{@}Bo@wCYiBHyCl@{YvN??n@q@}ItEeEnDaClCqErJgBfE_QbRmIdHgExCqTpHmAl@y_@b]gB~C_EpO_JrIeDdH}ExEaKtBkJxHaBdAgF`@oEJeDfA{Ax@}BjCiBrI}A`FmAfBuBhBiElCmBhByAnCu@fCMtEb@hErA~D~B~B`CbAdDh@vEy@vAy@|`@}a@hBcAhBc@fBSzEDjJtAtErBfEbD|G~IxMxRlPbt@nGxErIzBxE~BpCtGh@zFeCrNsHjOqIdNyGdL_[xH{A`BwDvKmAbF}CbEyEvAcUrS{LdOkBv@eDr@wOv@yEtAkBpA",
+                    "travelled": false
+                }
+            ],
+            "sources": [
+                {
+                    "provider": "NSW Trains"
+                }
+            ],
+            "stopCode": "2000328",
+            "to": {
+                "address": "Katoomba Station Platform 2",
+                "class": "StopLocation",
+                "code": "2780202",
+                "id": "pt_pub|AU_NSW_Sydney|2780202",
+                "lat": -33.71205,
+                "lng": 150.31154,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Katoomba Station Platform 2",
+                "popularity": 3100,
+                "services": "BMT, WST",
+                "stopCode": "2780202",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 281,
+            "type": "scheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Take <NUMBER>",
+            "endStopCode": "2780201",
+            "from": {
+                "address": "Central Station Platform 7",
+                "class": "StopLocation",
+                "code": "2000327",
+                "id": "pt_pub|AU_NSW_Sydney|2000327",
+                "lat": -33.88344,
+                "lng": 151.20606,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Central Station Platform 7",
+                "popularity": 1320,
+                "services": "T9, T4, BMT",
+                "stopCode": "2000327",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": 1049604736,
+            "mini": {
+                "description": "<DIRECTION>",
+                "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+            },
+            "modeIdentifier": "pt_pub",
+            "modeInfo": {
+                "alt": "Train",
+                "color": {
+                    "blue": 104,
+                    "green": 197,
+                    "red": 45
+                },
+                "identifier": "pt_pub_train",
+                "localIcon": "train"
+            },
+            "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS>",
+            "operator": "NSW Trains",
+            "operatorID": "NSWTrains",
+            "serviceOperator": "NSW Trains",
+            "shapes": [
+                {
+                    "encodedWaypoints": "pzxmE{l{y[jGjGjMfMbIxFd@RpEjDjHfIvA^??p@lBvD~HhKba@dEbP~DbP`BpIb@fDLhAJdF@zPKlECzA_@jDmAhF{@lC{DnHqBtGuDbOi@`FGbH`@vGn@pEPtI[vG_@vCu@rDaA~FYrE?xA~AlR@xHY`Ga@nDKj@m@tCMbAyF|TM`AaGtUc@pAiAnEw@~EWxC_@jPa@jKMvAuApJgIrZ}CrNuC~My@tCkElKaCpFsBpE_Ah@??cA|AmJjNeGdJsAnBgCxFeAxCyBhKy@pE_@hE??KtE}@tKs@pDuDbIu@bAcDtC_D~C{AvAiEjGsCtD??w@JqEdHuO`[gCbI??y@vAmDzOuCnOo@tFInCL|HfAzK\\zFCbHa@tI??y@|D{CpV_@xPJvJRfKrB`NBzAWd]WlZc@fEiA~E??C`AeAfCsEhHqH`GJEe_@lUwf@l\\??w@PyIfJ{SdUaPhNwK~MmJrRwD~GsAbE??NViGzLsJ~N??bAe@iHdLeCjDmCrB_DzA_ExA{EzAsDh@qDNqESsEqA??SMiFq@cGDgFlAmD`CuCjC_D~D??}AtBiAtEsDbYoBnJsAxCwC|DiClC_FtC}AjAcCtCkCdEuI~X??`@gAeBlHmAfKOzGpBnc@SrHy@pGs@fDiBnH??oP~i@wBvRi@~Gs@xEsBnGuChHqAtB??yC~B{LvJaF`CeK|B_r@|F??_@WkIhBoQhHaLdIoGbH{MdTgEzLiEbNa@rBWdH??Wj@w@nVtAzs@GrCgAzNwAlIwChJkLxUgDpH_AhCo@|DaAnFyAlHVhA??oCvNyY|}Co@tREpNj@zOnAlM???d@vCdSbj@n~B??OMr@vEbBpT?dWiPliB??mEda@oa@doE_Dr_@??sQdnB??sHdx@SrFJpKnHrvBBnBKnGWzEiCjR??u@hE_Hnd@q@xDaBrH_AzCmD|IyE|IeDzHaJ`Z{A|HgAhHE`F??}@Wq@`JqClKu@|SeAlJmA|HkC~HmK~U}@dCc@lCUrCF~DlFzc@??Wy@?IpO|tAd@vIBxDG~Bs@bEsAfDs@dAoCjC_HjD}@p@iAhAq@fA_AdDSdBChBLlBTtApA|CtJ`LxAlApAj@~B\\bABnAKlA[|FqCfDcA|CMzAFlBZrBn@~Av@rCtBzFlFxA|@pCx@lANnDClAQxHyBfAU`BE`ADfHlBxAPhABvBMfJyE|AUrAEdBJdA^pFrClA^zBLfRgD??i@JlFKfCRtBd@rA\\xB~@r@b@nB~B`AtC^dCOzMdA|Ja@nMJdC`@tChBxDtDzEj@pA\\xBRpC[vDiB|D{FnFaApAoC|HmBjCyAdAeDx@gB?wBi@}BeAiCuBiCaAcBQyBD_B\\sAn@sAlAuAxB{@hD??SjAuFt\\yD`Ho@xA}AtGoAvBwAzAkBdA}E`BmAjAaDtEkBbBiAr@uCj@kILmB~@eGfFgC~@mDd@}BMgBc@oAm@wCyDqCuLiBcEqQi\\y@}@aAq@eAa@yBa@cCDgB`@eCzAeA|A}@lBs@|CMvHSbCg@hBqAnCcA~B??mG~HsHfHwClBgCdA{C^uFYoGs@_EXiBh@qIzEkCh@uBOcDcAmCsAmDcAaL{@iEF_DVkDj@cGlCgCbBuCbDy@|C??KGqAhK_@pEEjDPlC|B`Hd@tCGdA]xDs@bB_CbC{CdA}K`AoBM{Ce@aGoB{BGmBJ{An@qDlD{@~B_@tBo@nJa@jCqAlD}BlDiApA{ApA}Bz@cLrAgFlBoHtE??uDpBeB~AcApAiA~CKlBD~B`AdJr@`MKfFYrBc@nAaA~AqAbAwLfDy@b@iAhAw@jAq@tBWxBCjC\\tGw@`KDrDn@jCjApB|@bA??lE~DvD~Gr@lBRjARzCGdCMnAq@vC_ErI_DfJiPp[eA`BaFlEgHfKaBhD[dBQ`Dl@jEr@|ApEhGn@pA^nAT|Co@nJVtClA|CtEtEt@f@??lAvArCjAhEd@`BXlAj@fAp@`DjDjBpAtFxAtBp@`B~@xDrD`FfDr@l@lB~Cz@|D^hEd@rBx@`BfA`BhBpAbJhElEbDrExF`BhDj@bBX`Cz@nPpAjHdCrQ|@~DdDvEz@tBV`CAzBMpAc@`B{AtDe@~BIpA??G?pBh]dFvSv@rAbAx@xJfFbCfDfB`BxBt@zBZtBMlCe@nDT`HlCtAx@|@bAzGhI|Ax@fAVdFLvBj@hAx@z@jAfB`DpChBrC\\lCp@pA|@`AvAp@nB^`CJpHV~AvC|Gt@|@??LbBVzCcBbQe@lBqD~HcAdDi@rDYjECrIjA~IFpDYrEi@bCu@tBsChDyAz@mDjCuAtAcAhBg@fBQ~Bm@xDy@nBiApA}PlLoCzBeCfD_BhEa@|Ai@zAcAvAYL??gJbKqDfEaDzF}@dPw@vEeDzJa@`CHzCjBtGZjDOnRe@`DuB~Io@bNH|CXjCt@xCdAbA??tOr]vIrKn@|AXzCQbDeEjL_@lD?zCLnAvAdGdA`B??d@xBl@x@j@hCdAtUCpAYvBg@bCsAhDy@fEFpBXbDz@hBhC|CnBnCnC|JV|BAhAoArGu@|FK~A^xD`ArC`ElFhAjCv@~FAnEi@vCw@jCy@dBoAzAcAbBaCrBoB|@mL|CyDV{Fo@yFPcC~@sB`BiHjIwEhG{C|IwBdEcCpDmElFsAlAiHrDaBA??eETeDpA_Av@_EpGkDlJ]fCE~DD~CZfCv@`DxDhFjAr@jJvJ~EbJb@tANnAJjc@c@dCe@bAc@t@{CrCy@xAi@nBWfB?~ANjAbC~IhAxGNtCGbODdB~CvUb@n@|ErFlAbC`@fBTfEClAoCpRApA|@lNE`BQr@??Gh@_@fA{BtDOz@IlDg@tCyN~ZaAbAsE`Do@n@i@|@[zAAzB\\jEZlBh@~Ap@rAtAtA|IrDvHbEp@h@zBtClApEL`Bq@bG",
+                    "travelled": true
+                }
+            ],
+            "sources": [
+                {
+                    "provider": "NSW Trains"
+                }
+            ],
+            "stopCode": "2000327",
+            "to": {
+                "address": "Katoomba Station Platform 1",
+                "class": "StopLocation",
+                "code": "2780201",
+                "id": "pt_pub|AU_NSW_Sydney|2780201",
+                "lat": -33.71196,
+                "lng": 150.31158,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Katoomba Station Platform 1",
+                "popularity": 3865,
+                "services": "BMT, WST",
+                "stopCode": "2780201",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "travelDirection": 281,
+            "type": "scheduled",
+            "visibility": "in summary"
+        },
+        {
+            "action": "<TIME>: Wheel",
+            "from": {
+                "address": "Katoomba Station Platform 1",
+                "class": "StopLocation",
+                "code": "2780201",
+                "id": "pt_pub|AU_NSW_Sydney|2780201",
+                "lat": -33.71196,
+                "lng": 150.31158,
+                "modeInfo": {
+                    "alt": "train",
+                    "identifier": "pt_pub_train",
+                    "localIcon": "train"
+                },
+                "name": "Katoomba Station Platform 1",
+                "popularity": 3865,
+                "services": "BMT, WST",
+                "stopCode": "2780201",
+                "stopType": "train",
+                "timezone": "Australia/Sydney",
+                "wheelchairAccessible": true,
+                "zoneID": "0"
+            },
+            "hashCode": -1694808980,
+            "metres": 327,
+            "metresSafe": 0,
+            "metresUnsafe": 0,
+            "mini": {
+                "description": "Blue Mountains NSW, Australia",
+                "instruction": "Wheel",
+                "mainValue": "<1/4 mile"
+            },
+            "modeIdentifier": "wa_whe",
+            "modeInfo": {
+                "alt": "Wheel",
+                "color": {
+                    "blue": 240,
+                    "green": 149,
+                    "red": 66
+                },
+                "identifier": "wa_whe",
+                "localIcon": "wheelchair"
+            },
+            "notes": "<DURATION> ⋅ <1/4 mile",
+            "streets": [
+                {
+                    "encodedWaypoints": "vjwlEkvlt[J?J_@DQDYh@c@J?J??X?B@?xAJ??@?r@LdCXEP",
+                    "instruction": "HEAD_TOWARDS",
+                    "metres": 266,
+                    "name": "Change platform"
+                },
+                {
+                    "encodedWaypoints": "nvwlEwvlt[f@F`AJ?@",
+                    "instruction": "CONTINUE_STRAIGHT",
+                    "metres": 60,
+                    "name": "Katoomba Street"
+                }
+            ],
+            "to": {
+                "address": "Blue Mountains NSW, Australia",
+                "class": "Location",
+                "lat": -33.71436,
+                "lng": 150.31154,
+                "timezone": "Australia/Sydney"
+            },
+            "travelDirection": 178,
+            "type": "unscheduled",
+            "visibility": "in summary"
+        }
+    ]
+}
