@@ -95,8 +95,8 @@ extension TKUICardActionsView {
         collectionViewHeightConstraint,
         collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
         collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-        collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+        trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: 8),
+        bottomAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 8),
       ]
     )
     

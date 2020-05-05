@@ -220,25 +220,26 @@ fileprivate extension TKSegment {
   
   func platformInfo(previous: TKSegment? = nil, next: TKSegment?) -> String? {
     
-    func toPlatform(_ code: String) -> String {
+    func toPlatform(_ code: String) -> String? {
       // TODO: Instead tweak backend to provide these
-      code.count < 5 ? "Platform \(code)" : code
+      guard !code.isEmpty else { return nil }
+      return code.count < 5 ? "Platform \(code)" : code
     }
 
     if isTerminal {
       if order == .start, let segment = next {
-        return segment.scheduledStartPlatform.map(toPlatform)
+        return segment.scheduledStartPlatform.flatMap(toPlatform)
       } else if order == .end, let segment = previous {
-        return segment.scheduledEndPlatform.map(toPlatform)
+        return segment.scheduledEndPlatform.flatMap(toPlatform)
       } else {
         return nil
       }
       
     } else if type == .scheduled, !(next?.isContinuation == true) {
-      return scheduledEndPlatform.map(toPlatform)
+      return scheduledEndPlatform.flatMap(toPlatform)
     
     } else if let next = next, next.type == .scheduled, !next.isContinuation {
-      return next.scheduledStartPlatform.map(toPlatform)
+      return next.scheduledStartPlatform.flatMap(toPlatform)
     
     } else {
       return nil
@@ -277,8 +278,13 @@ fileprivate extension TKSegment {
     assert(isStationary)
     
     var subtitle = titleWithoutTime.trimmingCharacters(in: .whitespacesAndNewlines)
-    // TODO: Instead ask backend to not provide this
-    subtitle = subtitle == "Wait" ? "" : subtitle
+    if stationaryType == .transfer {
+      subtitle = "" // this is the departure, so ignore the "wait" information
+    } else if stationaryType == .wait {
+      subtitle.append(" · ")
+      subtitle.append(arrivalTime.durationSince(departureTime))
+    }
+
     if let platformInfo = platformInfo(previous: previous, next: next) {
       if !subtitle.isEmpty {
         subtitle += "\n"
