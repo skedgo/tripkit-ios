@@ -76,7 +76,17 @@ extension TKUISegmentAlertCell {
     addTitles(from: item.alerts)
   }
   
+  private func resetTitles() {
+    titlesStackView.arrangedSubviews.forEach {
+      titlesStackView.removeArrangedSubview($0)
+      $0.removeFromSuperview()
+    }
+  }
+  
   private func addTitles(from alerts: [Alert]) {
+    // Make sure we start clean
+    resetTitles()
+    
     alerts
       .flatMap { alert -> [UIView] in
         // Add a separator before title
