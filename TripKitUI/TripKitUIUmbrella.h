@@ -34,10 +34,8 @@
 #import "TKUIPulsingAnnotationView.h"
 
 // Deprecated things
-#import "ASMapManager.h"
 #import "SGAutocompletionDataSource.h"
 #import "SGSearchDataSource.h"
-#import "SGTableCell.h"
 
 
 #endif /* TripKitUI_h */
