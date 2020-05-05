@@ -89,6 +89,7 @@ extension TKUITripOverviewViewModel {
     let icon: UIImage?
     let iconURL: URL?
     let iconIsTemplate: Bool
+    let iconIsBranding: Bool
     
     let connection: Line?
     
@@ -349,12 +350,14 @@ fileprivate extension TKSegment {
       accessories.append(.pathFriendliness(self))
     }
     
+    let tripSegment = self as TKTripSegment
     return TKUITripOverviewViewModel.MovingItem(
       title: titleWithoutTime,
       notes: notesWithoutPlatforms,
-      icon: isContinuation ? nil : (self as TKTripSegment).tripSegmentModeImage,
-      iconURL: isContinuation ? nil : (self as TKTripSegment).tripSegmentModeImageURL,
-      iconIsTemplate: (self as TKTripSegment).tripSegmentModeImageIsTemplate,
+      icon: isContinuation ? nil : tripSegment.tripSegmentModeImage,
+      iconURL: isContinuation ? nil : tripSegment.tripSegmentModeImageURL,
+      iconIsTemplate: tripSegment.tripSegmentModeImageIsTemplate,
+      iconIsBranding: tripSegment.tripSegmentModeImageIsBranding,
       connection: line,
       actions: TKUITripOverviewCard.config.segmentActionsfactory?(self) ?? [],
       accessories: accessories,

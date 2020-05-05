@@ -81,7 +81,12 @@ extension TKUISegmentMovingCell {
     
     modeWrapper.isHidden = item.icon == nil && item.iconURL == nil
     
-    if item.iconURL != nil, !item.iconIsTemplate {
+    if item.iconURL != nil, item.iconIsBranding {
+      // We have a branded icon, we have to place it light on dark
+      modeImage.tintColor = .black
+      modeWrapper.backgroundColor = .white
+
+    } else if item.iconURL != nil, !item.iconIsTemplate {
       // If we have a remote image, that's not a template, put it as is on
       // the background
       modeImage.tintColor = .tkLabelOnDark

@@ -47,7 +47,7 @@ extension TKUISegmentTitleView {
         segment.tripSegmentModeImageIsBranding
         else { return }
 
-      self.modeWrapper.backgroundColor = .tkBackground
+      self.modeWrapper.backgroundColor = .white
     }
   }
   
