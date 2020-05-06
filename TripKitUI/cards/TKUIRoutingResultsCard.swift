@@ -486,8 +486,9 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     if dataSource.sectionModels[section].items.first?.trip == nil {
       return .leastNonzeroMagnitude
     } else {
-      let footer = TKUIResultsSectionFooterView()
-      return footer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+      let sizingFooter = TKUIResultsSectionFooterView.forSizing
+      let size = sizingFooter.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+      return size.height
     }
   }
 
@@ -504,6 +505,17 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
 
     headerView.badge = content
     return headerView
+  }
+  
+  public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    let section = dataSource.sectionModels[section]
+    if section.badge?.footerContent == nil {
+      return 16
+    } else {
+      let sizingHeader = TKUIResultsSectionHeaderView.forSizing
+      let size = sizingHeader.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+      return size.height
+    }
   }
   
 }

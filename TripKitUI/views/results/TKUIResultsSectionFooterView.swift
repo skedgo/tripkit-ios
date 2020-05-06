@@ -12,6 +12,12 @@ import RxSwift
 
 class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
   
+  static let forSizing: TKUIResultsSectionFooterView = {
+    let footer = TKUIResultsSectionFooterView()
+    footer.costLabel.text = "Size me"
+    return footer
+  }()
+  
   static let reuseIdentifier = "TKUIResultsSectionFooterView"
   
   @IBOutlet weak var costLabel: UILabel!
@@ -19,22 +25,22 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
   
   var disposeBag = DisposeBag()
   
+  private init() {
+    super.init(reuseIdentifier: nil)
+    didInit()
+  }
+  
   override init(reuseIdentifier: String?) {
     super.init(reuseIdentifier: reuseIdentifier)
     didInit()
   }
   
   required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    super.init(coder: coder)
+    didInit()
   }
   
   private func didInit() {
-    // When table view animates sections in and out, the layout system somehow
-    // assumes a height that is significantly smaller than required. This is a
-    // workaround.
-    // WARNING: Important to do this first, otherwise it'll crash on 12.4
-    contentView.constraintsAffectingLayout(for: .vertical).forEach { $0.priority = UILayoutPriority(999) }
-
     contentView.backgroundColor = .tkBackground
     
     let costLabel = UILabel()
@@ -44,9 +50,10 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     costLabel.textColor = .tkLabelSecondary
     costLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     costLabel.translatesAutoresizingMaskIntoConstraints = false
-    costLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
-    costLabel.setContentCompressionResistancePriority(UILayoutPriority(750), for: .horizontal)
+    costLabel.setContentHuggingPriority(.defaultLow + 1, for: .horizontal)
+    costLabel.setContentCompressionResistancePriority(.defaultHigh + 1, for: .horizontal)
     self.costLabel = costLabel
+    contentView.addSubview(costLabel)
     
     let button = UIButton(type: .system)
     if #available(iOS 11.0, *) {
@@ -54,29 +61,24 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     } else {
       button.contentHorizontalAlignment = .right
     }
-    // TODO: Localise or should we use "Loc.MoreResults"?
-    button.setTitle("More", for: .normal)
+    button.setTitle("", for: .normal)
     button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
     button.tintColor = .tkAppTintColor
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
-    button.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
+    button.setContentHuggingPriority(.defaultLow, for: .horizontal)
+    button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
     self.button = button
+    contentView.addSubview(button)
     
-    let stack = UIStackView(arrangedSubviews: [costLabel, button])
-    stack.axis = .horizontal
-    stack.alignment = .fill
-    stack.distribution = .fill
-    stack.spacing = 16
-    stack.translatesAutoresizingMaskIntoConstraints = false
-    contentView.addSubview(stack)
     NSLayoutConstraint.activate([
-        stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-        stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
-        contentView.trailingAnchor.constraint(equalTo: stack.trailingAnchor, constant: 16),
-        contentView.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 6)
-      ]
-    )
+      costLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+      button.leadingAnchor.constraint(equalTo: costLabel.trailingAnchor, constant: 16),
+      contentView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: 16),
+      
+      costLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+      costLabel.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+      contentView.bottomAnchor.constraint(equalTo: costLabel.bottomAnchor, constant: 6)
+    ])
   }
   
   override func prepareForReuse() {

@@ -10,11 +10,22 @@ import UIKit
 
 class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
 
+  static let forSizing: TKUIResultsSectionHeaderView = {
+    let header = TKUIResultsSectionHeaderView()
+    header.badgeIcon.image = .badgeLeaf
+    return header
+  }()
+  
   static let reuseIdentifier = "TKUIResultsSectionHeaderView"
   
   @IBOutlet weak var wrapper: UIView!
   @IBOutlet weak var badgeIcon: UIImageView!
   @IBOutlet weak var badgeLabel: UILabel!
+  
+  private init() {
+    super.init(reuseIdentifier: nil)
+    didInit()
+  }
   
   override init(reuseIdentifier: String?) {
     super.init(reuseIdentifier: reuseIdentifier)
@@ -46,9 +57,6 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
   }
   
   private func didInit() {
-    // WARNING: Important to do this first, otherwise it'll crash on 12.4
-    contentView.constraintsAffectingLayout(for: .vertical).forEach { $0.priority = UILayoutPriority(999) }
-    
     let wrapper = UIView()
     wrapper.backgroundColor = .tkBackgroundTile
     wrapper.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +76,7 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
     badgeIcon.heightAnchor.constraint(equalToConstant: 16).isActive = true
     badgeIcon.translatesAutoresizingMaskIntoConstraints = false
     self.badgeIcon = badgeIcon
+    wrapper.addSubview(badgeIcon)
     
     let badgeLabel = UILabel()
     badgeLabel.numberOfLines = 1
@@ -76,21 +85,18 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
     badgeLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .subheadline)
     badgeLabel.translatesAutoresizingMaskIntoConstraints = false
     self.badgeLabel = badgeLabel
+    wrapper.addSubview(badgeLabel)
     
-    let stack = UIStackView(arrangedSubviews: [badgeIcon, badgeLabel])
-    stack.axis = .horizontal
-    stack.alignment = .center
-    stack.distribution = .fill
-    stack.spacing = 8
-    stack.translatesAutoresizingMaskIntoConstraints = false
-    wrapper.addSubview(stack)
     NSLayoutConstraint.activate([
-        stack.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 16),
-        stack.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 16),
-        wrapper.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 5),
-        wrapper.trailingAnchor.constraint(equalTo: stack.trailingAnchor, constant: 16)
-      ]
-    )
+      badgeIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+      badgeLabel.leadingAnchor.constraint(equalTo: badgeIcon.trailingAnchor, constant: 8),
+      contentView.trailingAnchor.constraint(equalTo: badgeLabel.trailingAnchor, constant: 16),
+      
+      badgeIcon.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+      badgeLabel.centerYAnchor.constraint(equalTo: badgeIcon.centerYAnchor),
+      contentView.bottomAnchor.constraint(equalTo: badgeIcon.bottomAnchor, constant: 0)
+
+    ])
   }
   
 }
