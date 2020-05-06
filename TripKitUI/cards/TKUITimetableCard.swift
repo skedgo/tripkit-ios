@@ -241,37 +241,44 @@ public class TKUITimetableCard : TGTableCard {
       .drive(cardView.rx.titles)
       .disposed(by: disposeBag)
 
-    viewModel.timeTitle
-      .drive(onNext: { [accessoryView] in
-        accessoryView.timeButton.accessibilityLabel = $0
-      })
-      .disposed(by: disposeBag)
-    
-    viewModel.lines
-      .drive(accessoryView.rx.lines)
-      .disposed(by: disposeBag)
+    // Timetable card can have non-default title view, e.g., when it
+    // is a member of a mode by mode card. The accessory view is only
+    // applicable when the default title view is used and when non
+    // default is used, it must be excluded from all layout processes
+    // to avoid AL warnings.
+    if accessoryView.superview != nil {
+      viewModel.timeTitle
+        .drive(onNext: { [accessoryView] in
+          accessoryView.timeButton.accessibilityLabel = $0
+        })
+        .disposed(by: disposeBag)
+      
+      viewModel.lines
+        .drive(accessoryView.rx.lines)
+        .disposed(by: disposeBag)
+      
+      let actions: [TKUITimetableCard.Action]
+      if let factory = TKUITimetableCard.config.timetableActionsFactory {
+        actions = factory(viewModel.departureStops)
+      } else {
+        actions = []
+      }
+      accessoryView.setCustomActions(actions, for: viewModel.departureStops, card: self)
+      
+      accessoryView.timeButton.rx.tap
+        .withLatestFrom(viewModel.time)
+        .subscribe(onNext: { [unowned self] date in
+          guard let sender = self.accessoryView.timeButton else { assertionFailure(); return }
+          self.showTimePicker(date: date, sender: sender)
+        })
+        .disposed(by: disposeBag)
+    }
     
     // TODO: Add viewModel.embarkationStopAlerts
     
     // TODO: Add viewModel.error
 
-    let actions: [TKUITimetableCard.Action]
-    if let factory = TKUITimetableCard.config.timetableActionsFactory {
-      actions = factory(viewModel.departureStops)
-    } else {
-      actions = []
-    }
-    accessoryView.setCustomActions(actions, for: viewModel.departureStops, card: self)
-
     // Interactions
-
-    accessoryView.timeButton.rx.tap
-      .withLatestFrom(viewModel.time)
-      .subscribe(onNext: { [unowned self] date in
-        guard let sender = self.accessoryView.timeButton else { assertionFailure(); return }
-        self.showTimePicker(date: date, sender: sender)
-      })
-      .disposed(by: disposeBag)
     
     viewModel.next
       .emit(onNext: { [weak self] in self?.navigate(to: $0) })
