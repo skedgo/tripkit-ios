@@ -68,7 +68,7 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileEnableFlights;
 
 - (void)registerFileBundle:(NSBundle *)bundle;
 
-- (nullable NSURL *)currentBaseURL;
+- (NSURL *)fallbackBaseURL;
 
 /**
  Fetched the list of regions and updates `TKRegionManager`'s cache

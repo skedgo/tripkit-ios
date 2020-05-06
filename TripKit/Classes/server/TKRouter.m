@@ -454,7 +454,7 @@
 {
   TKRouter *router = [[TKRouter alloc] init];
   NSDictionary *paras = [router createRequestParametersForRequest:tripRequest andModeIdentifiers:modeIdentifiers bestOnly:NO withASAPTime:nil];
-  NSURL *baseUrl = [[TKServer sharedInstance] currentBaseURL];
+  NSURL *baseUrl = [[TKServer sharedInstance] fallbackBaseURL];
   if (!baseUrl) {
     return nil;
   }

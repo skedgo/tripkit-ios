@@ -21,10 +21,7 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 @interface TKServer ()
 
 @property (nonatomic, strong) NSOperationQueue* skedGoQueryQueue;
-@property (nonatomic, strong) TKRegion* region;
-@property (nonatomic, copy)   NSArray<NSURL *>* regionServers;
 @property (nonatomic, copy)   NSArray<NSBundle *>* fileBundles;
-@property (nonatomic, assign) NSUInteger serverIndex;
 
 @property (nonatomic, assign) TKServerType lastServerType;
 @property (nonatomic, strong) NSString* lastDevelopmentServer;
@@ -320,7 +317,6 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
     // Clearing regions below will trigger a user defaults update, so we make sure we ignore it
     self.lastServerType = currentType;
     self.lastDevelopmentServer = developmentServer;
-    self.region = nil;
     
     // We're caching the server, so override the cache
     TKServer.serverType = currentType;
@@ -445,14 +441,7 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   ZAssert(wait || [[NSOperationQueue currentQueue] isEqual:self.skedGoQueryQueue], @"Should start async data tasks on dedicated queue as we're modifying local variables.");
 #endif
   
-  // update region and index first as this might invalidate the client
-  if (region != self.region) {
-    self.region = region;
-  }
-  
-  self.serverIndex = backupIndex;
-  
-  NSURL *baseURL = [self currentBaseURL];
+  NSURL *baseURL = [self baseURLForRegion:region index:backupIndex];
   if (! baseURL) {
     // don't have that many servers
     if (! previousError) {
@@ -476,8 +465,6 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
         }
       }
     }
-    
-    self.serverIndex = 0;
     return nil;
   }
   
@@ -573,7 +560,13 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 parameters:(nullable NSDictionary<NSString *, id> *)parameters
     region:(nullable TKRegion *)region
 {
-  return [TKServer buildSkedGoRequestWithMethod:method baseURL:self.currentBaseURL path:path parameters:parameters headers:nil customData:nil region:region];
+  return [TKServer buildSkedGoRequestWithMethod:method
+                                        baseURL:[self baseURLForRegion:region index:0]
+                                           path:path
+                                     parameters:parameters
+                                        headers:nil
+                                     customData:nil
+                                         region:region];
 }
 
 + (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
@@ -645,39 +638,44 @@ parameters:(nullable NSDictionary<NSString *, id> *)parameters
 
 #pragma mark - Server & Base URL
 
-- (NSURL *)currentBaseURL
+- (nullable NSURL *)baseURLForRegion:(nullable TKRegion *)region index:(NSUInteger)index
 {
-  // Create a copy for thread safety
-  NSArray<NSURL *> *servers = [self.regionServers copy];
-  NSUInteger serverIndex = _serverIndex;
-  
-  if (servers.count <= serverIndex) {
-    return nil;
+  switch ([TKServer serverType]) {
+    case TKServerTypeLocal: {
+      return [NSURL URLWithString:[TKServer developmentServer] ];
+    }
+
+    case TKServerTypeBeta: {
+      NSString *baseURL = [[TKConfig sharedInstance] betaServerBaseURL];
+      return [NSURL URLWithString:baseURL];
+    }
+      
+    case TKServerTypeProduction: {
+      if (region == nil) {
+        return [NSURL URLWithString:@"https://api.tripgo.com/v1/"];
+      }
+      
+      NSArray<NSURL *> *servers = region.urls;
+      if (servers.count <= index) {
+        return nil;
+      }
+      
+      NSURL *url = [servers objectAtIndex:index];
+      NSString *urlString = url.absoluteString;
+      
+      if (urlString.length > 0 && [urlString characterAtIndex:urlString.length - 1] != '/') {
+        urlString = [urlString stringByAppendingString:@"/"];
+        url = [NSURL URLWithString:urlString];
+      }
+      
+      return url;
+    }
   }
-  
-  NSURL *url = [servers objectAtIndex:serverIndex];
-  NSString *urlString = url.absoluteString;
-  
-  if (urlString.length > 0 && [urlString characterAtIndex:urlString.length - 1] != '/') {
-    urlString = [urlString stringByAppendingString:@"/"];
-    url = [NSURL URLWithString:urlString];
-  }
-  
-  return url;
 }
 
-- (NSArray<NSURL *> *)productionServers
+- (NSURL *)fallbackBaseURL
 {
-  // Check if we have a region specific url we want to use
-  if (_region != nil) {
-    if ([_region.urls count] > 0) {
-      return _region.urls;
-    } else {
-      return @[ [NSURL URLWithString:@"https://api.tripgo.com/v1/"] ];
-    }
-  } else {
-    return @[ [NSURL URLWithString:@"https://api.tripgo.com/v1/"] ];
-  }
+  return [self baseURLForRegion:nil index:0];
 }
 
 - (void)registerFileBundle:(NSBundle *)bundle {
@@ -862,54 +860,6 @@ parameters:(nullable NSDictionary<NSString *, id> *)parameters
   }
   
   return request;
-}
-
-#pragma mark - Custom accessors
-
-- (void)setRegion:(TKRegion *)region
-{
-  if (region != _region) {
-    _region = region;
-  }
-  
-  _regionServers = nil;
-  self.serverIndex = 0;
-}
-
-- (void)setServerIndex:(NSUInteger)serverIndex
-{
-  if (_serverIndex != serverIndex) {
-    _serverIndex = serverIndex;
-  }
-}
-
-#pragma mark - Lazy accessors
-
-- (NSArray<NSURL *> *)regionServers
-{
-  if (_regionServers != nil) {
-    return _regionServers;
-  }
-  
-  switch ([TKServer serverType]) {
-    case TKServerTypeLocal: {
-      _regionServers = @[ [NSURL URLWithString:[TKServer developmentServer] ] ];
-      break;
-    }
-      
-    case TKServerTypeBeta: {
-      NSString *baseURL = [[TKConfig sharedInstance] betaServerBaseURL];
-      _regionServers = @[ [NSURL URLWithString:baseURL] ];
-      break;
-    }
-
-    case TKServerTypeProduction: {
-      _regionServers = [self productionServers];
-      break;
-    }
-  }
-  
-  return _regionServers;
 }
 
 #pragma mark - Sending data
