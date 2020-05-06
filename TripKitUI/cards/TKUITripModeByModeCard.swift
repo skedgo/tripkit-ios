@@ -189,6 +189,10 @@ public class TKUITripModeByModeCard: TGPageCard {
     return modeIndex
   }
   
+  deinit {
+    TKUITripModeByModeCard.config.builder.reset()
+  }
+  
 }
 
 // MARK: - Segments view in header
