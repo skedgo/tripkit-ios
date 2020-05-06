@@ -29,6 +29,12 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
   }
   
   private func didInit() {
+    // When table view animates sections in and out, the layout system somehow
+    // assumes a height that is significantly smaller than required. This is a
+    // workaround.
+    // WARNING: Important to do this first, otherwise it'll crash on 12.4
+    contentView.constraintsAffectingLayout(for: .vertical).forEach { $0.priority = UILayoutPriority(999) }
+
     contentView.backgroundColor = .tkBackground
     
     let costLabel = UILabel()
@@ -71,11 +77,6 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
         contentView.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 6)
       ]
     )
-    
-    // When table view animates sections in and out, the layout system somehow
-    // assumes a height that is significantly smaller than required. This is a
-    // workaround.
-    contentView.constraintsAffectingLayout(for: .vertical).forEach { $0.priority = UILayoutPriority(999) }
   }
   
   override func prepareForReuse() {

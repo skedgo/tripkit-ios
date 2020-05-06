@@ -37,7 +37,7 @@ class TKUICompactAlertCell: UITableViewCell {
   }
   
   private func didInit() {
-
+    // WARNING: Important to do this first, otherwise it'll crash on 12.4
     contentView.constraintsAffectingLayout(for: .vertical).forEach { $0.priority = UILayoutPriority(999) }
     
     let icon = UIImageView()

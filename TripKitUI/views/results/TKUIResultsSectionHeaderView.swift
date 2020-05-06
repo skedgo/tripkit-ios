@@ -46,6 +46,9 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
   }
   
   private func didInit() {
+    // WARNING: Important to do this first, otherwise it'll crash on 12.4
+    contentView.constraintsAffectingLayout(for: .vertical).forEach { $0.priority = UILayoutPriority(999) }
+    
     let wrapper = UIView()
     wrapper.backgroundColor = .tkBackgroundTile
     wrapper.translatesAutoresizingMaskIntoConstraints = false
@@ -57,8 +60,6 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
       contentView.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: 0),
       contentView.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: 0)
     ])
-    
-    contentView.constraintsAffectingLayout(for: .vertical).forEach { $0.priority = UILayoutPriority(999) }
     
     let badgeIcon = UIImageView()
     badgeIcon.contentMode = .scaleAspectFit
