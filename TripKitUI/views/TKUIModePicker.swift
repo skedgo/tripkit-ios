@@ -154,9 +154,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     bottomAnchor.constraint(equalTo: combinedStackView.bottomAnchor, constant: Constants.viewPaddingVertical).isActive = true
 
     // Adding the mode image stack views.
-    modeButtonStackViews.forEach {
-      combinedStackView.addArrangedSubview($0)
-    }
+    modeButtonStackViews.forEach(combinedStackView.addArrangedSubview)
   }
   
   private func modeButtonStackView() -> UIStackView {
