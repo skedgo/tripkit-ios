@@ -295,6 +295,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
         // create the reference object
         SegmentReference *reference = nil;
         NSNumber *hashCode = refDict[@"segmentTemplateHashCode"];
+        ZAssert(hashCode != nil, @"No hash code in %@", refDict);
         NSDictionary *templateDict = segmentHashToTemplateDictionaryDict[[hashCode description]];
         ZAssert(templateDict != nil, @"Missing template for %@", hashCode);
         BOOL isNewTemplate = ![addedTemplateHashCodes containsObject:hashCode];
