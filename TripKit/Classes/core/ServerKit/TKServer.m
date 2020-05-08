@@ -642,12 +642,12 @@ parameters:(nullable NSDictionary<NSString *, id> *)parameters
 {
   switch ([TKServer serverType]) {
     case TKServerTypeLocal: {
-      return [NSURL URLWithString:[TKServer developmentServer] ];
+      return index == 0 ? [NSURL URLWithString:[TKServer developmentServer] ] : nil;
     }
 
     case TKServerTypeBeta: {
       NSString *baseURL = [[TKConfig sharedInstance] betaServerBaseURL];
-      return [NSURL URLWithString:baseURL];
+      return index == 0 ? [NSURL URLWithString:baseURL] : nil;
     }
       
     case TKServerTypeProduction: {
