@@ -8,8 +8,11 @@
 
 import Foundation
 
+/**
+ `TKServer` subclass that is forced to hit the provided `baseURL` for SkedGo calls.
+ */
 public class TKRoutingServer: TKServer {
-  public let baseURL: URL
+  private let baseURL: URL
   
   public init(baseURL: URL) {
     self.baseURL = baseURL

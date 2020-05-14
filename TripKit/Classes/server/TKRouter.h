@@ -24,6 +24,10 @@ typedef void(^TKRouterError)(NSError *error, NSSet *modeIdentifiers);
 @property (nonatomic, strong, nullable) TripRequest *currentRequest;
 @property (nonatomic, copy, nullable) NSSet <NSString *> *modeIdentifiers;
 @property (nonatomic, copy, nullable) NSSet <NSURLQueryItem *> *additionalParameters;
+
+/**
+ Optional server to use instead of `TKServer.shared`. Should only be used for testing or development.
+ */
 @property (nonatomic, strong, nullable) TKServer *server;
 
 /**
