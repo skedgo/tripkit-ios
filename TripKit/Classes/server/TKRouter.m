@@ -112,6 +112,7 @@
     }
     
     worker = [[TKRouter alloc] init];
+    worker.server = self.server;
     self.workerRouters[modeIdentifiers] = worker;
     worker.modeIdentifiers = modeIdentifiers;
     worker.additionalParameters = self.additionalParameters;
@@ -378,7 +379,7 @@
 	}
 
 	__weak typeof(self) weakSelf = self;
-  TKServer *server = [TKServer sharedInstance];
+  TKServer *server = self.server ?: [TKServer sharedInstance];
 	[server requireRegions:^(NSError *error) {
     typeof(weakSelf) strongSelf = weakSelf;
 		if (! strongSelf) {

@@ -70,9 +70,7 @@ extension TripRequest {
 extension TripRequest {
   @objc(insertEmptyIntoContext:)
   public static func insertEmpty(into context: NSManagedObjectContext) -> TripRequest {
-    guard
-      let request = NSEntityDescription.insertNewObject(forEntityName: "TripRequest", into: context) as? TripRequest
-      else { fatalError() }
+    let request = TripRequest(context: context)
     request.timeCreated = Date()
     return request
   }
@@ -88,6 +86,17 @@ extension TripRequest {
     if timeType == .leaveASAP {
       request.departureTime = nil // don't lock it in yet!
     }
+    return request
+  }
+  
+  public func emptyCopy() -> TripRequest {
+    guard let context = self.managedObjectContext else { fatalError() }
+    let request = Self.insertEmpty(into: context)
+    request.fromLocation = fromLocation
+    request.toLocation = toLocation
+    request.departureTime = departureTime
+    request.arrivalTime = arrivalTime
+    request.timeType = timeType
     return request
   }
   
