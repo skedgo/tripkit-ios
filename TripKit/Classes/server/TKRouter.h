@@ -8,7 +8,7 @@
 
 @import CoreData;
 
-@class Trip, TripRequest, TKTripKit;
+@class Trip, TripRequest, TKTripKit, TKServer;
 @protocol TKTripClassifier;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -24,6 +24,11 @@ typedef void(^TKRouterError)(NSError *error, NSSet *modeIdentifiers);
 @property (nonatomic, strong, nullable) TripRequest *currentRequest;
 @property (nonatomic, copy, nullable) NSSet <NSString *> *modeIdentifiers;
 @property (nonatomic, copy, nullable) NSSet <NSURLQueryItem *> *additionalParameters;
+
+/**
+ Optional server to use instead of `TKServer.shared`. Should only be used for testing or development.
+ */
+@property (nonatomic, strong, nullable) TKServer *server;
 
 /**
  The main method to call to have the router calculate trips.
