@@ -38,7 +38,7 @@ extension Vehicle {
   }
   
   @objc public var serviceColor: TKColor? {
-    return averageOccupancy?.color
+    return averageOccupancy?.0.color
   }
   
   @objc public var ageFactor: Double {
@@ -56,10 +56,9 @@ extension Vehicle {
     return segment ?? segmentAlternatives.first
   }
   
-  public var averageOccupancy: TKAPI.VehicleOccupancy? {
+  public var averageOccupancy: (TKAPI.VehicleOccupancy, title: String)? {
     return TKAPI.VehicleOccupancy.average(in: components)
   }
-  
 }
 
 extension Reactive where Base: Vehicle {
@@ -72,16 +71,6 @@ extension Reactive where Base: Vehicle {
         return (components, date)
       }
   }
-  
-  public var occupancies: Observable<([[TKAPI.VehicleOccupancy]], Date)> {
-    return observeWeakly(NSData.self, "componentsData")
-      .map { [weak base] _ in
-        let components = base?.components ?? [[]]
-        let date = base?.lastUpdate ?? Date()
-        return (components.map { $0.map { $0.occupancy ?? .unknown }}, date)
-    }
-  }
-
   
 }
 
@@ -117,7 +106,7 @@ extension Vehicle : MKAnnotation {
   }
   
   public var subtitle: String? {
-    return [updatedTitle, averageOccupancy?.localizedTitle]
+    return [updatedTitle, averageOccupancy?.title]
       .compactMap { $0 }
       .joined(separator: " - ")
   }

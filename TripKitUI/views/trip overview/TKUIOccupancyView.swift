@@ -98,7 +98,7 @@ public class TKUIOccupancyView: UIView {
 extension TKUIOccupancyView {
   
   public enum Purpose {
-    case occupancy(TKAPI.VehicleOccupancy, simple: Bool = false)
+    case occupancy(TKAPI.VehicleOccupancy, title: String, simple: Bool = false)
     case wheelchair(TKWheelchairAccessibility)
   }
   
@@ -108,9 +108,7 @@ extension TKUIOccupancyView {
     isAccessibilityElement = true
 
     switch purpose {
-    case .occupancy(let occupancy, simple: true):
-      guard let title = occupancy.localizedTitle else { return }
-
+    case .occupancy(let occupancy, let title, simple: true):
       accessibilityLabel = title
       label.text = title
       label.font = TKStyleManager.customFont(forTextStyle: .footnote)
@@ -119,11 +117,8 @@ extension TKUIOccupancyView {
       heightConstraint.constant = 24
       icon.image = occupancy.standingPeople(occupiedColor: .tkLabelPrimary) // dark as it'll get an alpha anyway
       
-    case .occupancy(let occupancy, simple: false):
-      guard let title = occupancy.localizedTitle else { return }
-      
+    case .occupancy(let occupancy, let title, simple: false):
       accessibilityLabel = title
-      
       label.text = title
       label.textColor = .tkLabelSecondary
 

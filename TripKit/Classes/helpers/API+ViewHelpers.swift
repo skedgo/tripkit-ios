@@ -12,22 +12,27 @@ extension TKAPI.VehicleOccupancy {
   
   /// - Parameter all: Nested vehicle components
   /// - Returns: Average occupancy in the provided nested list of vehicle components, `nil` if no occupancy found.
-  public static func average(in all: [[TKAPI.VehicleComponents]]?) -> TKAPI.VehicleOccupancy? {
-    let occupancies = (all ?? [])
-      .reduce(into: []) { $0.append(contentsOf: $1) }
-      .compactMap { $0.occupancy }
-    if occupancies.isEmpty {
+  public static func average(in all: [[TKAPI.VehicleComponents]]?) -> (TKAPI.VehicleOccupancy, title: String)? {
+    guard let all = all else { return nil }
+    
+    let components = all.flatMap { $0 }
+    if components.isEmpty {
       return nil
-    } else if occupancies.count == 1 {
-      return occupancies[0]
+    } else if components.count == 1, let component = components.first {
+      let occupancy = component.occupancy ?? .unknown
+      return occupancy != .unknown
+        ? (occupancy, component.occupancyText ?? occupancy.localizedTitle)
+        : nil
     }
     
-    return average(in: occupancies)
+    guard let average = average(in: components.compactMap(\.occupancy)) else { return nil }
+    #warning("Consider occupancyTitle")
+    return (average, average.localizedTitle)
   }
   
   /// - Parameter all: List of occupancies
   /// - Returns: Average occupancy, `nil` if list was empty
-  public static func average(in all: [TKAPI.VehicleOccupancy]) -> TKAPI.VehicleOccupancy? {
+  private static func average(in all: [TKAPI.VehicleOccupancy]) -> TKAPI.VehicleOccupancy? {
     guard !all.isEmpty else { return nil }
     let sum = all.reduce(0) { $0 + $1.intValue }
     return TKAPI.VehicleOccupancy(intValue: sum / all.count)
@@ -43,9 +48,9 @@ extension TKAPI.VehicleOccupancy {
     }
   }
   
-  public var localizedTitle: String? {
+  public var localizedTitle: String {
     switch self {
-    case .unknown: return nil
+    case .unknown: return NSLocalizedString("Unknown", comment: "")
     case .empty: return NSLocalizedString("Empty", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "As in 'this bus/train is empty'")
     case .manySeatsAvailable: return NSLocalizedString("Many seats available", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "As in 'this bus/train has many seats available'")
     case .fewSeatsAvailable: return NSLocalizedString("Few seats available", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "As in 'this bus/train has few seats available'")
