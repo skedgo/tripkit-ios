@@ -14,6 +14,8 @@ import RxCocoa
 class TKUITripModeByModeViewModel {
   
   init(trip: Trip) {
+    self.trip = trip
+    
     self.realTimeUpdate = TKUITripModeByModeViewModel
       .fetchRealTime(for: trip)
       .do(onNext: { update in
@@ -26,6 +28,8 @@ class TKUITripModeByModeViewModel {
           .forEach(NotificationCenter.default.post)
       })
   }
+  
+  let trip: Trip
   
   let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Trip>>
   

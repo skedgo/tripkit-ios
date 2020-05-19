@@ -12,6 +12,12 @@ import RxSwift
 import RxCocoa
 import TGCardViewController
 
+public protocol TKUITripModeByModeCardDelegate: AnyObject {
+  
+  func modeByModeCard(_ card: TKUITripModeByModeCard, started trip: Trip)
+  
+}
+
 public class TKUITripModeByModeCard: TGPageCard {
   
   enum Error: Swift.Error {
@@ -59,6 +65,8 @@ public class TKUITripModeByModeCard: TGPageCard {
   }
   
   public static var config = Configuration.empty
+  
+  public weak var modeByModeDelegate: TKUITripModeByModeCardDelegate?
     
   private let viewModel: TKUITripModeByModeViewModel
   
@@ -142,6 +150,8 @@ public class TKUITripModeByModeCard: TGPageCard {
   
   public override func didBuild(cardView: TGCardView?, headerView: TGHeaderView?) {
     super.didBuild(cardView: cardView, headerView: headerView)
+    
+    modeByModeDelegate?.modeByModeCard(self, started: viewModel.trip)
     
     viewModel.realTimeUpdate
       .drive(onNext: { [unowned self] progress in
