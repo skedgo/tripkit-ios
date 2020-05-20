@@ -12,13 +12,9 @@ import RxSwift
 import RxCocoa
 import TGCardViewController
 
-public protocol TKUITripModeByModeCardDelegate: AnyObject {
-  
-  func modeByModeCard(_ card: TKUITripModeByModeCard, started trip: Trip)
-  
-}
-
 public class TKUITripModeByModeCard: TGPageCard {
+  
+  public typealias TripStartedActionHandler = (TKUITripModeByModeCard, Trip) -> Void
   
   enum Error: Swift.Error {
     case segmentTripDoesNotMatchMapManager
@@ -66,7 +62,10 @@ public class TKUITripModeByModeCard: TGPageCard {
   
   public static var config = Configuration.empty
   
-  public weak var modeByModeDelegate: TKUITripModeByModeCardDelegate?
+  /// An action handler that is called when the mode by mode card is presented. The
+  /// first parameters is the mode by mode card launched, while the second is the
+  /// trip whose segments are presented by the mode by mode card.
+  public var tripStartedHandler: TripStartedActionHandler?
     
   private let viewModel: TKUITripModeByModeViewModel
   
@@ -151,7 +150,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   public override func didBuild(cardView: TGCardView?, headerView: TGHeaderView?) {
     super.didBuild(cardView: cardView, headerView: headerView)
     
-    modeByModeDelegate?.modeByModeCard(self, started: viewModel.trip)
+    tripStartedHandler?(self, viewModel.trip)
     
     viewModel.realTimeUpdate
       .drive(onNext: { [unowned self] progress in
