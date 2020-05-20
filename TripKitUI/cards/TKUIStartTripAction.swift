@@ -42,22 +42,27 @@ import TGCardViewController
 // MARK: - Example
 
 public extension TKUITripOverviewCard {
-  static func buildStartTripAction() -> TKUITripOverviewCard.TripAction {
+  
+  static func buildStartTripAction(actionHandler: TKUITripModeByModeCard.TripStartedActionHandler? = nil) -> TKUITripOverviewCard.TripAction {
     return TKUICardAction(
       title: Loc.ActionGo,
       icon: .iconArrowUp
     ) { _, card, trip, _ in
       guard let controller = card.controller else { assertionFailure(); return false }
       
-      let modeByMode: TKUITripModeByModeCard
+      let modeByModeCard: TKUITripModeByModeCard
       if let mapManager = card.mapManager as? TKUITripMapManager {
-        modeByMode = TKUITripModeByModeCard(mapManager: mapManager)
+        modeByModeCard = TKUITripModeByModeCard(mapManager: mapManager)
       } else {
-        modeByMode = TKUITripModeByModeCard(trip: trip)
+        modeByModeCard = TKUITripModeByModeCard(trip: trip)
       }
-      controller.push(modeByMode)
+      modeByModeCard.tripStartedHandler = actionHandler
+      
+      controller.push(modeByModeCard)
+      
       return false
     }
   }
+  
 }
 
