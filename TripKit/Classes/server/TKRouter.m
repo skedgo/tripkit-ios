@@ -687,9 +687,10 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
     paras[@"avoidStops"] = request.excludedStops;
   }
   
-  for (NSURLQueryItem *item in self.additionalParameters) {
-    paras[item.name] = item.value;
-  }
+  NSDictionary<NSString *, id> *grouped = [TKRouter mergeQueryItems:self.additionalParameters];
+  [grouped enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+    paras[key] = obj;
+  }];
   
   return paras;
 }
