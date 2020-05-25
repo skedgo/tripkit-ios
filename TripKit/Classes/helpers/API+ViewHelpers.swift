@@ -25,9 +25,18 @@ extension TKAPI.VehicleOccupancy {
         : nil
     }
     
-    guard let average = average(in: components.compactMap(\.occupancy)) else { return nil }
-    #warning("Consider occupancyTitle")
-    return (average, average.localizedTitle)
+    if components.contains(where: { $0.occupancyText != nil }),
+      let best = components.min(by: { $0.occupancy?.intValue ?? 0 < $1.occupancy?.intValue ?? 0 } ) {
+      // If any has a title, we pick the best (as we aren't guaranteed to have
+      // an appropriate title for the average value)
+      return (best, best.localizedTitle)
+      
+    } else if let average = average(in: components.compactMap(\.occupancy)) {
+      return (average, average.localizedTitle)
+
+    } else {
+      return nil
+    }
   }
   
   /// - Parameter all: List of occupancies
