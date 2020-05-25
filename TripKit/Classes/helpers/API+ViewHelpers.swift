@@ -15,23 +15,21 @@ extension TKAPI.VehicleOccupancy {
   public static func average(in all: [[TKAPI.VehicleComponents]]?) -> (TKAPI.VehicleOccupancy, title: String)? {
     guard let all = all else { return nil }
     
-    let components = all.flatMap { $0 }
-    if components.isEmpty {
+    let ocupancies = all
+      .flatMap { $0 }
+      .compactMap { ($0.occupancy != nil && $0.occupancy != .unknown) ? ($0.occupancy!, $0.occupancyText) : nil }
+    if ocupancies.isEmpty {
       return nil
-    } else if components.count == 1, let component = components.first {
-      let occupancy = component.occupancy ?? .unknown
-      return occupancy != .unknown
-        ? (occupancy, component.occupancyText ?? occupancy.localizedTitle)
-        : nil
+    } else if ocupancies.count == 1, let first = ocupancies.first {
+      return (first.0, first.1 ?? first.0.localizedTitle)
     }
     
-    if components.contains(where: { $0.occupancyText != nil }),
-      let best = components.min(by: { $0.occupancy?.intValue ?? 0 < $1.occupancy?.intValue ?? 0 } ) {
+    if ocupancies.contains(where: { $0.1 != nil }), let best = ocupancies.min(by: { $0.0.intValue < $1.0.intValue } ) {
       // If any has a title, we pick the best (as we aren't guaranteed to have
       // an appropriate title for the average value)
-      return (best, best.localizedTitle)
+      return (best.0, best.1 ?? best.0.localizedTitle)
       
-    } else if let average = average(in: components.compactMap(\.occupancy)) {
+    } else if let average = average(in: ocupancies.map(\.0)) {
       return (average, average.localizedTitle)
 
     } else {
