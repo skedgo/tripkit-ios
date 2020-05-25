@@ -98,7 +98,7 @@ class TKUIServiceHeaderView: UIView {
     accessibilityTitleLabel.text = accessibility.title
   }
   
-  private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<([[TKAPI.VehicleOccupancy]], Date)>?) {
+  private func updateRealTime(alerts: [Alert] = [], components: Observable<([[TKAPI.VehicleComponents]], Date)>?) {
     
     if let sampleAlert = alerts.first {
       alertWrapper.isHidden = false
@@ -116,14 +116,14 @@ class TKUIServiceHeaderView: UIView {
     }
     
     occupancyWrapper.isHidden = true
-    occupancies?
+    components?
       .subscribe(onNext: { [weak self] in
         self?.updateOccupancies($0.0, lastUpdated: $0.1)
       })
       .disposed(by: disposeBag)
   }
   
-  private func updateOccupancies(_ occupancies: [[TKAPI.VehicleOccupancy]], lastUpdated: Date) {
+  private func updateOccupancies(_ components: [[TKAPI.VehicleComponents]], lastUpdated: Date) {
     
     Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
       .startWith(0)
@@ -135,23 +135,23 @@ class TKUIServiceHeaderView: UIView {
       })
       .disposed(by: disposeBag)
 
-    if occupancies.count > 1 || (occupancies.first?.count ?? 0) > 1, let average = TKAPI.VehicleOccupancy.average(in: occupancies.flatMap { $0 })
- {
+    if components.count > 1 || (components.first?.count ?? 0) > 1,
+        let average = TKAPI.VehicleOccupancy.average(in: components) {
       occupancyWrapper.isHidden = false
       
-      occupancyImageView.image = average.standingPeople()
-      occupancyLabel.text = average.localizedTitle
+      occupancyImageView.image = average.0.standingPeople()
+      occupancyLabel.text = average.title
 
       trainOccupancyView.isHidden = false
-      trainOccupancyView.occupancies = occupancies
+      trainOccupancyView.occupancies = components.map { $0.map { $0.occupancy ?? .unknown } }
       trainOccupancyHeightConstraint?.isActive = true
       trainOccupancyBottomConstraint?.isActive = true
       
-    } else if let occupancy = occupancies.first?.first, occupancy != .unknown {
+    } else if let component = components.first?.first, let occupancy = component.occupancy, occupancy != .unknown {
       occupancyWrapper.isHidden = false
 
       occupancyImageView.image = occupancy.standingPeople()
-      occupancyLabel.text = occupancy.localizedTitle
+      occupancyLabel.text = component.occupancyText ?? occupancy.localizedTitle
       
       trainOccupancyView.isHidden = true
       trainOccupancyHeightConstraint?.isActive = false
@@ -173,7 +173,7 @@ extension TKUIServiceHeaderView {
     disposeBag = DisposeBag()
     
     updateAccessibility(model.wheelchairAccessibility)
-    updateRealTime(alerts: model.alerts, occupancies: model.vehicleOccupancies)
+    updateRealTime(alerts: model.alerts, components: model.vehicleComponents)
     
     // stack views are weird; this should be in the front, but sometimes
     // gets put back

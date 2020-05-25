@@ -29,7 +29,7 @@ public struct TKUIDepartureCellContent {
   public var approximateTimeToDepart: Date?
   public var wheelchairAccessibility: TKWheelchairAccessibility
   public var alerts: [Alert]
-  public var vehicleOccupancies: Observable<([[TKAPI.VehicleOccupancy]], Date)>?
+  public var vehicleComponents: Observable<([[TKAPI.VehicleComponents]], Date)>?
 }
 
 class TKUIDepartureCell: UITableViewCell {
@@ -155,12 +155,12 @@ extension TKUIDepartureCell {
     }
 
     occupancyImageView.isHidden = true
-    dataSource.vehicleOccupancies?
+    dataSource.vehicleComponents?
       .subscribe(onNext: { [weak self] in
-        let average = TKAPI.VehicleOccupancy.average(in: $0.0.flatMap { $0 })
+        let average = TKAPI.VehicleOccupancy.average(in: $0.0)
         self?.occupancyImageView.isHidden = average == nil
-        self?.occupancyImageView.image = average?.standingPeople()
-        self?.occupancyImageView.accessibilityLabel = average?.localizedTitle
+        self?.occupancyImageView.image = average?.0.standingPeople()
+        self?.occupancyImageView.accessibilityLabel = average?.title
       })
       .disposed(by: disposeBag)
   }

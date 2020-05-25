@@ -30,8 +30,8 @@ extension TKSegment {
       accessoryViews.append(trainView)
     }
     
-    if let occupancy = realTimeVehicle?.averageOccupancy, occupancy != .unknown {
-      let occupancyView = TKUIOccupancyView(with: .occupancy(occupancy))
+    if let occupancy = realTimeVehicle?.averageOccupancy {
+      let occupancyView = TKUIOccupancyView(with: .occupancy(occupancy.0, title: occupancy.title))
       accessoryViews.append(occupancyView)
     }
     

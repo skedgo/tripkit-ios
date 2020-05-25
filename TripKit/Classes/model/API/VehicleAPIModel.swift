@@ -50,8 +50,12 @@ extension TKAPI {
   /// Components of a vehicle, typically provided as a nested array, see `Vehicle.components`
   public struct VehicleComponents: Codable, Hashable {
     public let airConditioned: Bool?
-    public let wifi: Bool?
+    public let model: String?
     public let occupancy: VehicleOccupancy?
+    public let occupancyText: String?
+    public let wheelchairAccessible: Bool?
+    public let wheelchairSeats: Int?
+    public let wifi: Bool?
   }
   
 }

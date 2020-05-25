@@ -41,7 +41,7 @@ extension TKUIDepartureCellContent {
       approximateTimeToDepart: embarkation.countdownDate,
       wheelchairAccessibility: accessibility,
       alerts: service.allAlerts(),
-      vehicleOccupancies: service.vehicle?.rx.occupancies
+      vehicleComponents: service.vehicle?.rx.components
     )
   }
   

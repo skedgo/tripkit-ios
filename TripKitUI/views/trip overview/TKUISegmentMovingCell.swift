@@ -114,8 +114,8 @@ extension TKUISegmentMovingCell {
   
   private static func buildView(for segmentAccessory: TKUITripOverviewViewModel.SegmentAccessory) -> UIView {
     switch segmentAccessory {
-    case .averageOccupancy(let occupancy):
-      return TKUIOccupancyView(with: .occupancy(occupancy, simple: true))
+    case .averageOccupancy(let occupancy, let title):
+      return TKUIOccupancyView(with: .occupancy(occupancy, title: title, simple: true))
       
     case .carriageOccupancies(let occupancies):
       let trainView = TKUITrainOccupancyView()

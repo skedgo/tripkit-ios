@@ -47,7 +47,7 @@ class TKUIServiceHeaderMiniView: UIView {
     accessibilityImageView.image = accessibility.icon
   }
   
-  private func updateRealTime(alerts: [Alert] = [], occupancies: Observable<[[TKAPI.VehicleOccupancy]]>? = nil) {
+  private func updateRealTime(alerts: [Alert] = [], components: Observable<([[TKAPI.VehicleComponents]], Date)>? = nil) {
     
     if let sampleAlert = alerts.first {
       alertImageView.isHidden = false
@@ -58,12 +58,12 @@ class TKUIServiceHeaderMiniView: UIView {
     }
 
     occupancyImageView.isHidden = true
-    occupancies?
+    components?
       .subscribe(onNext: { [weak self] in
-        let average = TKAPI.VehicleOccupancy.average(in: $0.flatMap { $0 })
+        let average = TKAPI.VehicleOccupancy.average(in: $0.0)
         self?.occupancyImageView.isHidden = average == nil
-        self?.occupancyImageView.image = average?.standingPeople()
-        self?.occupancyImageView.accessibilityLabel = average?.localizedTitle
+        self?.occupancyImageView.image = average?.0.standingPeople()
+        self?.occupancyImageView.accessibilityLabel = average?.title
       })
       .disposed(by: disposeBag)
   }
@@ -76,7 +76,7 @@ extension TKUIServiceHeaderMiniView {
     disposeBag = DisposeBag()
 
     updateAccessibility(model.wheelchairAccessibility)
-    updateRealTime(alerts: model.alerts, occupancies: model.vehicleOccupancies?.map { $0.0 })
+    updateRealTime(alerts: model.alerts, components: model.vehicleComponents)
     
     // stack views are weird; this should be in the front, but sometimes
     // gets put back

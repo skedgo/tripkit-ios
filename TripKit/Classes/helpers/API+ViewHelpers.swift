@@ -12,22 +12,34 @@ extension TKAPI.VehicleOccupancy {
   
   /// - Parameter all: Nested vehicle components
   /// - Returns: Average occupancy in the provided nested list of vehicle components, `nil` if no occupancy found.
-  public static func average(in all: [[TKAPI.VehicleComponents]]?) -> TKAPI.VehicleOccupancy? {
-    let occupancies = (all ?? [])
-      .reduce(into: []) { $0.append(contentsOf: $1) }
-      .compactMap { $0.occupancy }
-    if occupancies.isEmpty {
+  public static func average(in all: [[TKAPI.VehicleComponents]]?) -> (TKAPI.VehicleOccupancy, title: String)? {
+    guard let all = all else { return nil }
+    
+    let ocupancies = all
+      .flatMap { $0 }
+      .compactMap { ($0.occupancy != nil && $0.occupancy != .unknown) ? ($0.occupancy!, $0.occupancyText) : nil }
+    if ocupancies.isEmpty {
       return nil
-    } else if occupancies.count == 1 {
-      return occupancies[0]
+    } else if ocupancies.count == 1, let first = ocupancies.first {
+      return (first.0, first.1 ?? first.0.localizedTitle)
     }
     
-    return average(in: occupancies)
+    if ocupancies.contains(where: { $0.1 != nil }), let best = ocupancies.min(by: { $0.0.intValue < $1.0.intValue } ) {
+      // If any has a title, we pick the best (as we aren't guaranteed to have
+      // an appropriate title for the average value)
+      return (best.0, best.1 ?? best.0.localizedTitle)
+      
+    } else if let average = average(in: ocupancies.map(\.0)) {
+      return (average, average.localizedTitle)
+
+    } else {
+      return nil
+    }
   }
   
   /// - Parameter all: List of occupancies
   /// - Returns: Average occupancy, `nil` if list was empty
-  public static func average(in all: [TKAPI.VehicleOccupancy]) -> TKAPI.VehicleOccupancy? {
+  private static func average(in all: [TKAPI.VehicleOccupancy]) -> TKAPI.VehicleOccupancy? {
     guard !all.isEmpty else { return nil }
     let sum = all.reduce(0) { $0 + $1.intValue }
     return TKAPI.VehicleOccupancy(intValue: sum / all.count)
@@ -43,9 +55,9 @@ extension TKAPI.VehicleOccupancy {
     }
   }
   
-  public var localizedTitle: String? {
+  public var localizedTitle: String {
     switch self {
-    case .unknown: return nil
+    case .unknown: return NSLocalizedString("Unknown", comment: "")
     case .empty: return NSLocalizedString("Empty", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "As in 'this bus/train is empty'")
     case .manySeatsAvailable: return NSLocalizedString("Many seats available", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "As in 'this bus/train has many seats available'")
     case .fewSeatsAvailable: return NSLocalizedString("Few seats available", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "As in 'this bus/train has few seats available'")
