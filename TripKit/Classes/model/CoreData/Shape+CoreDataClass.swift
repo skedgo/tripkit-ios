@@ -170,8 +170,7 @@ extension Shape: TKDisplayableRoute {
       return .routeDashColorNonTravelled
     }
     
-    if let service = services?.anyObject() as? Service,
-      let color = service.color {
+    if let color = services?.first?.color {
       return color
     }
     
@@ -205,7 +204,7 @@ extension Shape: TKDisplayableRoute {
       case .end: return "end"
       }
 
-    } else if let service = services?.anyObject() as? Service {
+    } else if let service = services?.first {
       return service.code
     } else {
       return nil

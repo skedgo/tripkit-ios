@@ -58,7 +58,8 @@ extension SegmentTemplate {
       template.scheduledStartStopCode = dict["stopCode"] as? String
       template.scheduledEndStopCode   = dict["endStopCode"] as? String
       
-      service?.operatorName = dict["serviceOperator"] as? String
+      service?.operatorName = dict["operator"] as? String
+      service?.operatorID = dict["operatorID"] as? String
     }
     
     // additional info
@@ -138,11 +139,20 @@ extension SegmentTemplate {
     
     let modeInfo = modeInfo ?? TKModeInfo.modeInfo(for: dict["modeInfo"] as? [String: Any])
     
-    return TKCoreDataParserHelper.insertNewShapes(
+    let shapes = TKCoreDataParserHelper.insertNewShapes(
       shapesArray, for: service, relativeTime: relativeTime,
       with: modeInfo, orTripKitContext: context,
       clearRealTime: false // we get real-time data here, no need to clear status
     )
+    
+    shapes
+      .flatMap { $0.services ?? [] }
+      .forEach { service in
+        service.operatorID = dict["operatorID"] as? String
+        service.operatorName = dict["operator"] as? String
+      }
+    
+    return shapes
   }
   
   private static func segmentVisibilityType(from dict: [String: Any]) -> TKTripSegmentVisibility {

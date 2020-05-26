@@ -46,7 +46,7 @@ NSString *const UninitializedString =  @"UninitializedString";
 }
 
 - (id)initAsTerminal:(TKSegmentOrdering)order
-             atLocation:(id<MKAnnotation>)location
+          atLocation:(id<MKAnnotation>)location
              forTrip:(Trip *)aTrip
 {
   NSParameterAssert(aTrip);

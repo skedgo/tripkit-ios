@@ -23,9 +23,9 @@ extension Shape {
     @NSManaged public var title: String?
     @NSManaged public var travelled: Bool
     @NSManaged public var rawInstruction: Int16
-    @NSManaged public var services: NSSet?
+    @NSManaged public var services: Set<Service>?
     @NSManaged public var template: SegmentTemplate?
-    @NSManaged public var visits: NSSet?
+    @NSManaged public var visits: Set<StopVisits>?
 
 }
 
