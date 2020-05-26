@@ -9,7 +9,11 @@
 import Foundation
 
 extension Loc {
-  
+
+  @objc public static var OpenInDotDotDot: String {
+    return NSLocalizedString("Open in…", tableName: "TripKit", bundle: .tripKit, comment: "Action button title for opening something in another app. Tapping this button will show a list of app names.")
+  }
+
   @objc public static var GetDirections: String {
     return NSLocalizedString("Get directions", tableName: "TripKit", bundle: .tripKit, comment: "Action button title for getting turn-by-turn directions")
   }

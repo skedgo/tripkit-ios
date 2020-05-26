@@ -237,7 +237,7 @@ extension MainViewController {
   
   private static func buildDirectionsAction() -> TKUITripOverviewCard.SegmentAction {
     TKUITripOverviewCard.SegmentAction(
-      title: Loc.GetDirections,
+      title: Loc.OpenInDotDotDot,
       icon: UIImage(systemName: "arrow.turn.up.right")!,
       style: .bold
     ) { _, card, segment, sender in
