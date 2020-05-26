@@ -37,7 +37,7 @@ extension TKStyleManager {
     }
     let key = "\(partName)-\(isRealTime)-\(iconType.rawValue)" as NSString
     if let cached = imageCache.object(forKey: key) {
-      return key == dummyImage ? nil : cached
+      return cached == dummyImage ? nil : cached
     }
     
     let fullName: String
