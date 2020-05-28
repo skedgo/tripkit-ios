@@ -5,7 +5,7 @@ This is the documentation of TripKit iOS, the iOS SDK for the [TripGo API](https
 The SDK consists of the following three frameworks:
 
 - [**TripKit**](TripKit/index.html) (iOS, iOS extensions, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
-- [**TripKitUI**](TripKitUI/index.html) (iOS, iOS extensions): [View controllers](view-controllers.md), as well as individual UI helpers and components.
+- [**TripKitUI**](TripKitUI/index.html) (iOS, iOS extensions) <img srcset="../assets/badge-premium.png 1x,../assets/badge-premium@2x.png 2x" style="display: inline; margin-bottom: -6px" alt="Premium SDK-only" />: [View controllers](view-controllers.md), as well as individual UI helpers and components.
 - [**TripKitInterApp** ](TripKitInterApp/index.html) (iOS): Helpers for deep linking into other apps, such as GoCatch, Ingogo, Lyft, Ola and Uber.
 
 You can use them individually, but note that the latter two depend on the first one.
