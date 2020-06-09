@@ -40,9 +40,15 @@ extension SegmentReference {
           // We have to include `NSArray` here, but not sure why; the result will
           // definitely be a dictionary, but if we don't include it, this will
           // fail with an error.
-          dictionary = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSDictionary.self, NSArray.self], from: data) as? NSDictionary
+          dictionary = try NSKeyedUnarchiver.unarchivedObject(ofClasses:
+            [
+              NSDictionary.self,
+              NSArray.self,
+              NSDate.self // timetable start + end date
+            ]
+            , from: data) as? NSDictionary
         } catch {
-          TKLog.info("TKSegment+Ticket") { "Decoding new data failed due to: \(error)" }
+          TKLog.info("TKSegment+Ticket") { "Decoding new data failed due to: \(error). Data: \(String(decoding: data, as: UTF8.self))" }
           return NSMutableDictionary()
         }
       } else {
@@ -57,7 +63,7 @@ extension SegmentReference {
         do {
           self.data = try NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: false)
         } catch {
-          TKLog.info("TKSegment+Ticket") { "Encoding new data failed due to: \(error)" }
+          TKLog.info("TKSegment+Ticket") { "Encoding new data failed due to: \(error). Dict: \(newValue)" }
         }
         
       } else {
