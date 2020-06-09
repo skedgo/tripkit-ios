@@ -255,7 +255,7 @@ extension TKLog {
   /// :nodoc: - Public for building CocoaPods-style
   @objc(log:request:UUID:)
   public class func log(_ identifier: String, request: URLRequest, uuid: UUID) {
-    #if BETA || DEBUG
+    #if BETA || DEBUG || targetEnvironment(macCatalyst)
     guard !loggers.isEmpty else { return }
 
     let serverRequest = ServerRequest(request: request, id: uuid.uuidString)
@@ -266,7 +266,7 @@ extension TKLog {
   /// :nodoc: - Public for building CocoaPods-style
   @objc(log:response:data:orError:forRequest:UUID:)
   public class func log(_ identifier: String, response: URLResponse?, data: Data?, orError error: NSError?, for request: URLRequest, uuid: UUID) {
-    #if BETA || DEBUG
+    #if BETA || DEBUG || targetEnvironment(macCatalyst)
     guard !loggers.isEmpty else { return }
 
     let serverRequest = ServerRequest(request: request, id: uuid.uuidString)

@@ -12,14 +12,10 @@
 
 + (BOOL)isBeta
 {
-#ifdef DEBUG
-  return YES;
-#else
-#ifdef BETA
+#if defined(DEBUG) || defined(BETA) || defined(TARGET_OS_MACCATALYST)
   return YES;
 #else
   return NO;
-#endif
 #endif
 }
 
