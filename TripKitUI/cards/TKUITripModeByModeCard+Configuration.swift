@@ -32,9 +32,10 @@ public protocol TKUITripModeByModePageBuilder {
   /// - Returns: If the trip should be updated with real-time data
   func shouldUpdate(trip: Trip, counter: Int) -> Bool
   
-  /// This allows the builder to reset its state and is called when a `TKUITripModeByModeCard`
-  /// is being deallocated.
-  func reset() -> Void
+  /// This provides a compatible mode by mode builder a chance to perform any
+  /// clean up tasks before a mode by mode card is disposed.
+  /// - Parameter cards: An array of cards currently displayed in the mode by mode card
+  func cleanUp(existingCards: [TGCard])
 }
 
 // MARK: - Default MxM page builder
@@ -43,8 +44,8 @@ open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
   
   public init() {}
   
-  /// The default page builder does nothing when asked to reset.
-  open func reset() {}
+  /// The default page builder does nothing during clean up
+  open func cleanUp(existingCards: [TGCard]) {}
   
   open func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)] {
     if segment.order != .regular {
