@@ -23,12 +23,39 @@ public enum TKBooking {
     public let isDestructive: Bool
     public let internalURL: URL?
     public let externalAction: String?
+    public let type: ActionType?
+    public var input: [ActionInput]?
+    
+    public enum ActionType: String, Codable, CaseIterable {
+      public init(from decoder: Decoder) throws {
+        let single = try decoder.singleValueContainer()
+        let string = try single.decode(String.self)
+        self = ActionType(rawValue: string.lowercased()) ?? .unknown
+      }
+      
+      case lock
+      case unlock
+      case cancel
+      case unknown
+    }
+    
+    public struct ActionInput: Codable, Hashable {
+      public let field: String
+      public var value: String?
+      
+      private enum CodingKeys: String, CodingKey {
+        case field
+        case value
+      }
+    }
     
     private enum CodingKeys: String, CodingKey {
       case title
       case isDestructive
       case internalURL
       case externalAction = "externalURL"
+      case type
+      case input
     }
   }
   
@@ -58,8 +85,8 @@ public enum TKBooking {
     private let rawPrice:           Double?
     public let currency:            String?
     public let budgetPoints:        Int?
-    public let productName:         String
-    public let productType:         String
+    public let productName:         String?
+    public let productType:         String?
     private let explicitValidity:   Bool?
     public let validFor:            TimeInterval?
     public let validFrom:           Date?

@@ -199,7 +199,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   }
   
   deinit {
-    TKUITripModeByModeCard.config.builder.reset()
+    TKUITripModeByModeCard.config.builder.cleanUp(existingCards: self.cards)
   }
   
 }
