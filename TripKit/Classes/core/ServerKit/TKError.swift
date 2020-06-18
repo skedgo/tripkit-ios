@@ -105,7 +105,7 @@ public class TKError: NSError {
   
   @objc
   public var isUserError: Bool {
-    return false
+    return code >= 400 && code < 500
   }
   
 }
