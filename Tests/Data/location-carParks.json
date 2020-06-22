@@ -1,0 +1,128 @@
+{
+    "address": "493-501 Anzac Pde, Kingsford, NSW, AU",
+    "carPark": {
+        "address": "493-501 Anzac Pde, Kingsford, NSW, AU",
+        "encodedParkingArea": "tyanEcz`z[I?@MWCDe@^FEn@",
+        "entrances": [
+            {
+                "lat": -33.92934320426842,
+                "lng": 151.2340504491732,
+                "street": "Irvine St",
+                "type": "ENTRANCE_EXIT"
+            }
+        ],
+        "identifier": "parking|AU_NSW_Sydney|546810",
+        "name": "Dan Murphy's",
+        "openingHours": {
+            "days": [
+                {
+                    "name": "MONDAY",
+                    "times": [
+                        {
+                            "closes": "20:00",
+                            "opens": "9:00"
+                        }
+                    ]
+                },
+                {
+                    "name": "TUESDAY",
+                    "times": [
+                        {
+                            "closes": "20:00",
+                            "opens": "9:00"
+                        }
+                    ]
+                },
+                {
+                    "name": "WEDNESDAY",
+                    "times": [
+                        {
+                            "closes": "20:00",
+                            "opens": "9:00"
+                        }
+                    ]
+                },
+                {
+                    "name": "THURSDAY",
+                    "times": [
+                        {
+                            "closes": "20:00",
+                            "opens": "9:00"
+                        }
+                    ]
+                },
+                {
+                    "name": "FRIDAY",
+                    "times": [
+                        {
+                            "closes": "20:00",
+                            "opens": "9:00"
+                        }
+                    ]
+                },
+                {
+                    "name": "SATURDAY",
+                    "times": [
+                        {
+                            "closes": "20:00",
+                            "opens": "9:00"
+                        }
+                    ]
+                },
+                {
+                    "name": "SUNDAY",
+                    "times": [
+                        {
+                            "closes": "19:00",
+                            "opens": "10:00"
+                        }
+                    ]
+                }
+            ],
+            "timeZone": "Australia/Sydney"
+        },
+        "operator": {
+            "name": "Dan Murphy's",
+            "phone": "+61 1300 723 388",
+            "website": "https://www.parkopedia.com.au/parking/carpark/dan_murphys_kingsford/2032/kingsford/?vendor=skedgo"
+        },
+        "pricingTables": [
+            {
+                "currency": "AUD",
+                "currencySymbol": "$",
+                "entries": [
+                    {
+                        "label": "Flat Rate",
+                        "price": 0.0
+                    }
+                ],
+                "subtitle": "Mon-Sat 9:00-20:00 | Sun 10:00-19:00",
+                "title": "Flat Rate"
+            }
+        ],
+        "restrictions": {
+            "allowedOnly": [
+                "CUSTOMERS"
+            ]
+        },
+        "source": {
+            "provider": {
+                "name": "Parkopedia",
+                "website": "https://www.parkopedia.com"
+            }
+        },
+        "totalSpaces": 14
+    },
+    "class": "CarParkLocation",
+    "id": "parking|AU_NSW_Sydney|546810",
+    "lat": -33.92932,
+    "lng": 151.23392,
+    "modeInfo": {
+        "alt": "Parking",
+        "identifier": "stationary_parking-offstreet",
+        "localIcon": "parking"
+    },
+    "name": "Dan Murphy's",
+    "region": "AU_NSW_Sydney",
+    "timezone": "Australia/Sydney"
+}

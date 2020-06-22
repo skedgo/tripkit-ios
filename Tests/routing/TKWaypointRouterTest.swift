@@ -191,8 +191,70 @@ class TKWaypointRouterTest: TKTestCase {
     let endLocation = CLLocation(latitude: driveEnd.latitude, longitude: driveEnd.longitude)
     let waitaraLocation = CLLocation(latitude: waitara.coordinate.latitude, longitude: waitara.coordinate.longitude)
     XCTAssertLessThan(endLocation.distance(from: waitaraLocation), 50)
-
-
+  }
+  
+  func testChangingParkWhenDrivingGoGet() throws {
+    let trip = self.trip(fromFilename: "routing-goget-park")
+    // collect - GoGet - find parking
+    
+    let driveGoGetSegment = trip.segments[1]
+    XCTAssertEqual(driveGoGetSegment.modeIdentifier, "me_car-s_GOG")
+    
+    let parkingData = try dataFromJSON(named: "location-carParks")
+    let parking = try decoder.decode(TKCarParkLocation.self, from: parkingData)
+    
+    let builder = WaypointParasBuilder()
+    let paras = try builder.build(movingEndOf: driveGoGetSegment, to: parking)
+    XCTAssertNotNil(paras)
+    
+    let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
+    XCTAssertEqual(input.segments.count, 3)
+    
+    let beforeDrive = input.segments[0]
+    XCTAssertEqual(beforeDrive.modes, ["wa_wal"])
+    
+    let drive = input.segments[1]
+    XCTAssertEqual(drive.modes, ["me_car-s_GOG"])
+    
+    let afterDrive = input.segments[2]
+    XCTAssertEqual(afterDrive.modes, ["wa_wal"])
+    
+    guard let driveEnd = drive.endCoordinate else { XCTFail(); return }
+    let endLocation = CLLocation(latitude: driveEnd.latitude, longitude: driveEnd.longitude)
+    let parkingLocation = CLLocation(latitude: parking.coordinate.latitude, longitude: parking.coordinate.longitude)
+    XCTAssertLessThan(endLocation.distance(from: parkingLocation), 50)
+  }
+  
+  func testChangingVehicleWhenDrivingGoGet() throws {
+    let trip = self.trip(fromFilename: "routing-goget-park")
+    // collect - GoGet - find parking
+    
+    let driveGoGetSegment = trip.segments[1]
+    XCTAssertEqual(driveGoGetSegment.modeIdentifier, "me_car-s_GOG")
+    
+    let vehicleData = try dataFromJSON(named: "location-carPods")
+    let vehicle = try decoder.decode(TKCarPodLocation.self, from: vehicleData)
+    
+    let builder = WaypointParasBuilder()
+    let paras = try builder.build(movingStartOf: driveGoGetSegment, to: vehicle)
+    XCTAssertNotNil(paras)
+    
+    let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
+    XCTAssertEqual(input.segments.count, 3)
+    
+    let beforeDrive = input.segments[0]
+    XCTAssertEqual(beforeDrive.modes, ["wa_wal"])
+    
+    let drive = input.segments[1]
+    XCTAssertEqual(drive.modes, ["me_car-s_GOG"])
+    
+    let afterDrive = input.segments[2]
+    XCTAssertEqual(afterDrive.modes, ["wa_wal"])
+    
+    guard let driveStart = drive.startCoordinate else { XCTFail(); return }
+    let startLocation = CLLocation(latitude: driveStart.latitude, longitude: driveStart.longitude)
+    let vehicleLocation = CLLocation(latitude: vehicle.coordinate.latitude, longitude: vehicle.coordinate.longitude)
+    XCTAssertLessThan(startLocation.distance(from: vehicleLocation), 50)
   }
 
 //  func testChangeTripWithTwoService() {
