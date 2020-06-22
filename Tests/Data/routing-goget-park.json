@@ -1,0 +1,315 @@
+{
+   "alerts":[
+      {
+         "hashCode":-2004171674,
+         "location":{
+            "address":"STAY COVID SAFE Unwell? Get tested",
+            "lat":-33.86471365410152,
+            "lng":151.20879873275754,
+            "timeZone":"Australia/Sydney"
+         },
+         "severity":"alert",
+         "text":"STAY COVID SAFE Unwell? Get tested\n\nThere have been some changes to Covid-19 rules as of Fri 15 May. Follow the link for more information on how to stay safe.",
+         "title":"STAY COVID SAFE Unwell? Get tested"
+      },
+      {
+         "hashCode":1558254423,
+         "location":{
+            "address":"CHANGED TRAFFIC CONDITIONS right-turn restriction",
+            "lat":-33.8635506,
+            "lng":151.2089459,
+            "timeZone":"Australia/Sydney"
+         },
+         "severity":"warning",
+         "text":"CHANGED TRAFFIC CONDITIONS right-turn restriction - SYDNEY Pitt Street at Bridge Street\n\nUse an alternative route\n\nPitt St pop-up cyclewayPermanent no right turn permitted from Pitt Street southbound into Bridge Street\nwestbound.",
+         "title":"CHANGED TRAFFIC CONDITIONS right-turn restriction"
+      },
+      {
+         "hashCode":1235839944,
+         "location":{
+            "address":"CHANGED TRAFFIC CONDITIONS right-turn restriction",
+            "lat":-33.8656175,
+            "lng":151.2086708,
+            "timeZone":"Australia/Sydney"
+         },
+         "severity":"warning",
+         "text":"CHANGED TRAFFIC CONDITIONS right-turn restriction - SYDNEY Pitt Street at Hunter Street\n\nUse an alternative route\n\nPitt St pop-up cyclewayPermanent no right turn permitted from Pitt Street southbound into Hunter Street westbound.",
+         "title":"CHANGED TRAFFIC CONDITIONS right-turn restriction"
+      },
+      {
+         "hashCode":1439754100,
+         "location":{
+            "address":"SCHEDULED ROADWORK",
+            "lat":-33.8642122,
+            "lng":151.2088685,
+            "timeZone":"Australia/Sydney"
+         },
+         "severity":"warning",
+         "text":"SCHEDULED ROADWORK - SYDNEY Pitt Street between Reiby Place AND King Street\n\nReduce your speed - Exercise caution\n\n2 of 4 southbound lanes closed.",
+         "title":"SCHEDULED ROADWORK"
+      }
+   ],
+   "groups":[
+      {
+         "sources":[
+            {
+               "provider":{
+                  "appInfo":{
+                     "appURLAndroid":"https://play.google.com/store/apps/details?id=com.goget&hl=en",
+                     "appURLiOS":"https://itunes.apple.com/au/app/goget/id917053598"
+                  },
+                  "color":{
+                     "blue":106,
+                     "green":63,
+                     "red":0
+                  },
+                  "name":"GoGet",
+                  "remoteDarkIcon":"goget-dark",
+                  "remoteIcon":"goget",
+                  "website":"http://www.goget.com.au/"
+               }
+            },
+            {
+               "disclaimer":"© OpenStreetMap contributors\n\nMap data available under the Open Database License. For more information, see http://www.openstreetmap.org/copyright.",
+               "provider":{
+                  "name":"OpenStreetMap",
+                  "website":"https://www.openstreetmap.org"
+               }
+            },
+            {
+               "provider":{
+                  "name":"Transport for NSW",
+                  "website":"https://opendata.transport.nsw.gov.au"
+               }
+            }
+         ],
+         "trips":[
+            {
+               "arrive":1592544187,
+               "availability":"AVAILABLE",
+               "caloriesCost":19,
+               "carbonCost":1.1,
+               "currency":"AUD",
+               "currencySymbol":"$",
+               "depart":1592542907,
+               "hasRoundTripCost":true,
+               "hassleCost":10,
+               "hookURL":"https://darkages.buzzhives.com/satapp/trip/hook/2054ab27-1e9e-4762-bdcd-46a3593a4679",
+               "id":"2054ab27-1e9e-4762-bdcd-46a3593a4679",
+               "logURL":"https://darkages.buzzhives.com/satapp/trip/log/2054ab27-1e9e-4762-bdcd-46a3593a4679",
+               "mainSegmentHashCode":-1189959199,
+               "moneyCost":26.7,
+               "moneyUSDCost":19.22,
+               "plannedURL":"https://darkages.buzzhives.com/satapp/trip/planned/2054ab27-1e9e-4762-bdcd-46a3593a4679",
+               "queryIsLeaveAfter":true,
+               "queryMinimumTransferSeconds":180,
+               "queryTime":1592542907,
+               "saveURL":"https://darkages.buzzhives.com/satapp/trip/save/2054ab27-1e9e-4762-bdcd-46a3593a4679",
+               "segments":[
+                  {
+                     "availability":"AVAILABLE",
+                     "booking":{
+                        "externalActions":[
+                           "https://app.goget.com.au/bookings/day.php"
+                        ],
+                        "title":"Book with GoGet"
+                     },
+                     "endTime":1592543027,
+                     "id":"idwtOWrP",
+                     "segmentTemplateHashCode":-891584957,
+                     "sharedVehicle":{
+                        "appInfo":{
+                           "appURLAndroid":"https://play.google.com/store/apps/details?id=com.goget&hl=en",
+                           "appURLiOS":"https://itunes.apple.com/au/app/goget/id917053598"
+                        },
+                        "available":false,
+                        "bookingTitle":"Book with GoGet",
+                        "bookingURL":"https://app.goget.com.au/bookings/day.php",
+                        "fuelType":"PETROL",
+                        "garage":{
+                           "address":"Near The Langham access & Agar Steps",
+                           "class":"Location",
+                           "lat":-33.86156,
+                           "lng":151.20383,
+                           "region":"AU_NSW_Sydney",
+                           "timezone":"Australia/Sydney"
+                        },
+                        "licensePlate":"CO14MZ",
+                        "name":"Leia the RAV4",
+                        "provider":"GOG",
+                        "rate":{
+                           "rates":[
+                              {
+                                 "extraKMFee":0.4000000059604645,
+                                 "maxKM":0,
+                                 "rate":10.35,
+                                 "secondsPerRate":3600,
+                                 "type":"regular"
+                              },
+                              {
+                                 "extraKMFee":0.25,
+                                 "maxKM":150,
+                                 "rate":85,
+                                 "secondsPerRate":86400,
+                                 "type":"regular"
+                              }
+                           ],
+                           "type":"multi"
+                        },
+                        "type":"CAR"
+                     },
+                     "startTime":1592542907
+                  },
+                  {
+                     "alertHashCodes":[
+                        1235839944,
+                        1439754100,
+                        1558254423,
+                        -2004171674
+                     ],
+                     "availability":"AVAILABLE",
+                     "endTime":1592544187,
+                     "id":"sEQ9i3Ih",
+                     "segmentTemplateHashCode":-1189959199,
+                     "startTime":1592543027
+                  },
+                  {
+                     "availability":"AVAILABLE",
+                     "endTime":1592544187,
+                     "id":"YMOy5g4s",
+                     "segmentTemplateHashCode":1699559786,
+                     "startTime":1592544187
+                  }
+               ],
+               "temporaryURL":"https://darkages.buzzhives.com/satapp/trip/2054ab27-1e9e-4762-bdcd-46a3593a4679",
+               "updateURL":"https://darkages.buzzhives.com/satapp/trip/update/2054ab27-1e9e-4762-bdcd-46a3593a4679?hash=888610397",
+               "weightedScore":38.9
+            }
+         ]
+      }
+   ],
+   "realTimeStamp":1592543626,
+   "region":"AU_NSW_Sydney",
+   "regions":[
+      "AU_NSW_Sydney"
+   ],
+   "segmentTemplates":[
+      {
+         "action":"Collect GoGet",
+         "cost":26.7,
+         "hashCode":-891584957,
+         "localCost":{
+            "accuracy":"internal_estimate",
+            "cost":26.7,
+            "currency":"AUD"
+         },
+         "location":{
+            "address":"Near The Langham access & Agar Steps",
+            "class":"Location",
+            "lat":-33.86156,
+            "lng":151.20383,
+            "region":"AU_NSW_Sydney",
+            "timezone":"Australia/Sydney"
+         },
+         "mini":{
+            "instruction":"Collect  GoGet",
+            "mainValue":"from $27 for a round trip (estimate)"
+         },
+         "modeIdentifier":"me_car-s_GOG",
+         "modeInfo":{
+            "alt":"Collect",
+            "identifier":"stationary_vehicle-collect",
+            "localIcon":"collect"
+         },
+         "notes":"Leia the RAV4\nSubject to availability\nCost: from $27 for a round trip (estimate)\nRequires paid membership\nRound-trip only",
+         "type":"stationary",
+         "visibility":"in details"
+      },
+      {
+         "action":"Drive GoGet<DURATION>",
+         "durationWithoutTraffic":729,
+         "from":{
+            "address":"Near The Langham access & Agar Steps",
+            "class":"Location",
+            "lat":-33.86156,
+            "lng":151.20383,
+            "region":"AU_NSW_Sydney",
+            "timezone":"Australia/Sydney"
+         },
+         "hashCode":-1189959199,
+         "localCost":{
+            "accuracy":"internal_estimate",
+            "cost":0,
+            "costComponents":[
+
+            ],
+            "currency":"AUD"
+         },
+         "metres":7784,
+         "mini":{
+            "description":"High Street, Randwick NSW 2031, Australia",
+            "instruction":"Drive GoGet",
+            "mainValue":"4 3/4 miles"
+         },
+         "modeIdentifier":"me_car-s_GOG",
+         "modeInfo":{
+            "alt":"GoGet",
+            "color":{
+               "blue":106,
+               "green":63,
+               "red":0
+            },
+            "description":"GoGet",
+            "identifier":"me_car-s_GOG",
+            "localIcon":"car-share",
+            "remoteDarkIcon":"goget-dark",
+            "remoteIcon":"goget",
+            "remoteIconIsBranding":true
+         },
+         "notes":"4 3/4 miles",
+         "streets":[
+            {
+               "encodedWaypoints":"xqtmE{~zy[JHfBMp@Cb@Ct@AN?d@?l@GpG[~AO?O??I{BCeAEuA@}AAgA@@BuAa@oA??_ACw@AaBGYC?{A??z@AF{C\\o@??`BNFg@???AiA}AI]A_@??GuBJe@f@w@h@y@bA}AP[l@{@r@iAFW??GY@?Bi@FgB?A??FsABUJe@Tk@\\cAjAwCv@wB????J_@f@eBX{@^s@Pa@?@n@aAt@m@v@g@z@a@A???\\KXKr@M^E\\Er@@R?lCf@rAV??`ANdD`@??dC\\lBPpBLfEZhF\\~CNdBLjBHrEVtFT??h@@b@AlAA?@|AQzFo@jEi@p@En@UjAg@nBm@AC??bEgBtHgDdImC??bCo@bCk@r@Qz@O????tAWp@KdKiAlD]vAO?BhB[fAMhK}@|D[t@KPCNCDFhAKh@o@VIRCp@Eb@ClAEz@G^AVCRAAARCRCn@OREPE^Ox@Y?@fAg@~Am@fBu@RGRKlAUh@?`@@j@BjAHl@H?AvBRvBPpAJ~AL`BJdBJABN@vAJ??bBLTBjBL|@HZ@\\@???A^ANAREn@UZQl@e@h@i@v@y@??r@y@`@c@AAj@m@p@s@HKLEJEJENCJCTCnAOdAM????RU??r@gKF_AAYESZmACI"
+            }
+         ],
+         "to":{
+            "address":"High Street, Randwick NSW 2031, Australia",
+            "class":"Location",
+            "lat":-33.91525,
+            "lng":151.22859,
+            "region":"AU_NSW_Sydney",
+            "timezone":"Australia/Sydney"
+         },
+         "travelDirection":173,
+         "turn-by-turn":"DRIVING",
+         "type":"unscheduled",
+         "visibility":"in summary"
+      },
+      {
+         "action":"Find parking nearby",
+         "hasCarParks":true,
+         "hashCode":1699559786,
+         "isParking":true,
+         "location":{
+            "address":"High Street, Randwick NSW 2031, Australia",
+            "class":"Location",
+            "lat":-33.91525,
+            "lng":151.22859,
+            "region":"AU_NSW_Sydney",
+            "timezone":"Australia/Sydney"
+         },
+         "mini":{
+            "instruction":"Find parking nearby",
+            "mainValue":"<DURATION>"
+         },
+         "modeIdentifier":"me_car-s_GOG",
+         "modeInfo":{
+            "alt":"Parking",
+            "identifier":"stationary_parking-onstreet",
+            "localIcon":"parking"
+         },
+         "type":"stationary",
+         "visibility":"in details"
+      }
+   ]
+}

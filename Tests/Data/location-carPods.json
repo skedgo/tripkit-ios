@@ -1,0 +1,118 @@
+{
+    "address": "Near Darling Island Road & Fyfe Street",
+    "carPod": {
+        "availabilities": [
+            {
+                "car": {
+                    "fuelType": "PETROL",
+                    "identifier": "1219",
+                    "licensePlate": "CO33DH",
+                    "name": "Kermit the Yaris"
+                }
+            },
+            {
+                "car": {
+                    "fuelType": "PETROL",
+                    "identifier": "1070",
+                    "licensePlate": "CL82MI",
+                    "name": "Yogie the Yaris"
+                }
+            },
+            {
+                "car": {
+                    "fuelType": "PETROL",
+                    "identifier": "866",
+                    "licensePlate": "CU79GO",
+                    "name": "Carleton the Sportage"
+                }
+            },
+            {
+                "car": {
+                    "fuelType": "PETROL",
+                    "identifier": "32",
+                    "licensePlate": "CM56ZY",
+                    "name": "Titouan the Yaris"
+                }
+            },
+            {
+                "car": {
+                    "fuelType": "PETROL",
+                    "identifier": "1723",
+                    "licensePlate": "DYB74D",
+                    "name": "Wolfgang the BMW Convertible"
+                }
+            }
+        ],
+        "availabilityMode": "NONE",
+        "identifier": "me_car-s_GOG|AU_NSW_Sydney|1219",
+        "inService": true,
+        "operator": {
+            "appInfo": {
+                "appURLAndroid": "https://play.google.com/store/apps/details?id=com.goget&hl=en",
+                "appURLiOS": "https://itunes.apple.com/au/app/goget/id917053598"
+            },
+            "color": {
+                "blue": 106,
+                "green": 63,
+                "red": 0
+            },
+            "name": "GoGet",
+            "remoteDarkIcon": "goget-dark",
+            "remoteIcon": "goget",
+            "website": "http://www.goget.com.au/"
+        },
+        "vehicles": [
+            {
+                "fuelType": "PETROL",
+                "identifier": "1219",
+                "licensePlate": "CO33DH",
+                "name": "Kermit the Yaris"
+            },
+            {
+                "fuelType": "PETROL",
+                "identifier": "1070",
+                "licensePlate": "CL82MI",
+                "name": "Yogie the Yaris"
+            },
+            {
+                "fuelType": "PETROL",
+                "identifier": "866",
+                "licensePlate": "CU79GO",
+                "name": "Carleton the Sportage"
+            },
+            {
+                "fuelType": "PETROL",
+                "identifier": "32",
+                "licensePlate": "CM56ZY",
+                "name": "Titouan the Yaris"
+            },
+            {
+                "fuelType": "PETROL",
+                "identifier": "1723",
+                "licensePlate": "DYB74D",
+                "name": "Wolfgang the BMW Convertible"
+            }
+        ]
+    },
+    "class": "CarPodLocation",
+    "id": "me_car-s_GOG|AU_NSW_Sydney|1219",
+    "lat": -33.8646,
+    "lng": 151.19617,
+    "modeInfo": {
+        "alt": "GoGet",
+        "color": {
+            "blue": 106,
+            "green": 63,
+            "red": 0
+        },
+        "description": "GoGet",
+        "identifier": "me_car-s_GOG",
+        "localIcon": "car-share",
+        "remoteDarkIcon": "goget-dark",
+        "remoteIcon": "goget",
+        "remoteIconIsBranding": true
+    },
+    "name": "GoGet",
+    "region": "AU_NSW_Sydney",
+    "timezone": "Australia/Sydney"
+}

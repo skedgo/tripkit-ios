@@ -204,38 +204,49 @@ extension TKWaypointRouter {
 
 extension TKWaypointRouter {
   
-  public static func fetchTrip(movingStartOf segment: TKSegment, to location: TKModeCoordinate, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
-    
+  public static func fetchTrip(byMoving segment: TKSegment, to location: TKModeCoordinate, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
     TKServer.shared.requireRegions { error in
       if let error = error {
         completion(.failure(error))
         return
       }
+      
       guard let region = segment.trip.request.startRegion() else {
         completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
         return
       }
       
+      let movingSegment: TKSegment
+      let isMovingStartOfSegment: Bool
+      
+      if segment.hasCarParks, let mover = segment.previous {
+        movingSegment = mover
+        isMovingStartOfSegment = false
+      } else if segment.stationaryType == .vehicleCollect, let mover = segment.next {
+        movingSegment = mover
+        isMovingStartOfSegment = true
+      } else {
+        movingSegment = segment
+        isMovingStartOfSegment = true
+      }
+      
       do {
-        let moverSegment: TKSegment
-        if segment.stationaryType == .vehicleCollect, let mover = segment.next {
-          moverSegment = mover
+        let builder = WaypointParasBuilder(privateVehicles: vehicles)
+        
+        let paras: [String: Any]
+        if isMovingStartOfSegment {
+          paras = try builder.build(movingStartOf: movingSegment, to: location)
         } else {
-          moverSegment = segment
+          paras = try builder.build(movingEndOf: movingSegment, to: location)
         }
         
-        let builder = WaypointParasBuilder(privateVehicles: vehicles)
-        let paras = try builder.build(movingStartOf: moverSegment, to: location)
-
-        // We group all these in the same trip group even though
-        // the pattern isn't an exact match.
         self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup, completion: completion)
       } catch {
         completion(.failure(error))
       }
     }
-
   }
+  
 }
 
 // MARK: - Helpers
@@ -573,8 +584,55 @@ class WaypointParasBuilder {
     ]
   }
   
-  func build(movingStartOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [String: Any] {
+  func build(movingEndOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [String: Any] {
+    guard
+      let trip = prototype.trip,
+      let sharingMode = prototype.modeIdentifier,
+      let segmentStart = prototype.start?.coordinate
+      else { throw TKWaypointRouter.WaypointError.segmentNotEligible }
     
+    var paras: [String: Any] = [
+      "config": TKSettings.defaultDictionary(),
+      "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
+    ]
+    
+    var nonSharingModes = trip.usedModeIdentifiers()
+    nonSharingModes.remove(sharingMode)
+    if nonSharingModes.isEmpty {
+      nonSharingModes.insert("wa_wal")
+    }
+    
+    var waypoints: [[String: Any]] = []
+    let a = TKParserHelper.requestString(for: trip.request.fromLocation.coordinate)
+    let b = TKParserHelper.requestString(for: segmentStart)
+    let c = TKParserHelper.requestString(for: location.coordinate)
+    let d = TKParserHelper.requestString(for: trip.request.toLocation.coordinate)
+    
+    waypoints.append([
+      "modes": Array(nonSharingModes),
+      "start": a,
+      "end": b,
+      "startTime": trip.departureTime.timeIntervalSince1970
+    ])
+    
+    waypoints.append([
+      "modes": [sharingMode],
+      "start": b,
+      "end": c
+    ])
+    
+    waypoints.append([
+      "modes": Array(nonSharingModes),
+      "start": c,
+      "end": d
+    ])
+    
+    paras["segments"] = waypoints
+    
+    return paras
+  }
+  
+  func build(movingStartOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [String: Any] {
     guard
       let trip = prototype.trip,
       let sharingMode = prototype.modeIdentifier,
@@ -597,7 +655,7 @@ class WaypointParasBuilder {
     let b = TKParserHelper.requestString(for: location.coordinate)
     let c = TKParserHelper.requestString(for: segmentEnd)
     let d = TKParserHelper.requestString(for: trip.request.toLocation.coordinate)
-
+    
     // 1. Get to the vehicle using non-sharing modes
     waypoints.append([
       "modes": Array(nonSharingModes),
