@@ -54,11 +54,13 @@ public class TKUINearbyViewModel {
   ///
   /// - Parameters:
   ///   - mode: The mode identifier to which to limit the nearby locations
+  ///   - strictModeMatch: Should `mode` be treated strictly? If not, you might request on-street parking, but also get off-street parking.
   ///   - fixedLocation: Location to fix this to; if this is proivded, `mapInput.mapRect` will be ignored
   ///   - pickedModes: The selected modes (only used if `mode == nil`)
   ///   - mapCenter: The centre of the map, if the user moved it, should drive with `nil` if map is centred on the user's current location
   public init(
       limitTo mode: String? = nil,
+      strictModeMatch: Bool = true,
       fixedLocation: MKAnnotation? = nil,
       cardInput: ListInput = ListInput(),
       mapInput: MapInput = MapInput()
@@ -77,6 +79,7 @@ public class TKUINearbyViewModel {
     
     let nearby = Self.buildNearbyLocations(
       limitTo: mode,
+      strictModeMatch: strictModeMatch,
       fixedLocation: fixedLocation,
       mapRect: mapInput.mapRect.startOptional(),
       refresh: refresh,
