@@ -58,13 +58,13 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
   
   private func didInit() {
     let wrapper = UIView()
-    wrapper.backgroundColor = .tkBackgroundTile
+    wrapper.backgroundColor = .tkBackgroundBelowTile
     wrapper.translatesAutoresizingMaskIntoConstraints = false
     self.wrapper = wrapper
     contentView.addSubview(wrapper)
     NSLayoutConstraint.activate([
       wrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-      wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+      wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
       contentView.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: 0),
       contentView.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: 0)
     ])
@@ -88,14 +88,13 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
     wrapper.addSubview(badgeLabel)
     
     NSLayoutConstraint.activate([
-      badgeIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+      badgeIcon.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 16),
       badgeLabel.leadingAnchor.constraint(equalTo: badgeIcon.trailingAnchor, constant: 8),
-      contentView.trailingAnchor.constraint(equalTo: badgeLabel.trailingAnchor, constant: 16),
+      wrapper.trailingAnchor.constraint(equalTo: badgeLabel.trailingAnchor, constant: 16),
       
-      badgeIcon.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+      badgeIcon.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 16),
       badgeLabel.centerYAnchor.constraint(equalTo: badgeIcon.centerYAnchor),
-      contentView.bottomAnchor.constraint(equalTo: badgeIcon.bottomAnchor, constant: 0)
-
+      wrapper.bottomAnchor.constraint(equalTo: badgeIcon.bottomAnchor, constant: 4)
     ])
   }
   
