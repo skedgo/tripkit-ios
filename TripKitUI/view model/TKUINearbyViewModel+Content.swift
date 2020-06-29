@@ -68,7 +68,7 @@ extension TKUINearbyViewModel {
     
   }
   
-  static func buildNearbyLocations(limitTo mode: String?, fixedLocation: MKAnnotation?, mapRect: Driver<MKMapRect?>, refresh: Observable<Void>, onError errorPublisher: PublishSubject<Error>) -> Observable<ViewContent>
+  static func buildNearbyLocations(limitTo mode: String?, strictModeMatch: Bool, fixedLocation: MKAnnotation?, mapRect: Driver<MKMapRect?>, refresh: Observable<Void>, onError errorPublisher: PublishSubject<Error>) -> Observable<ViewContent>
   {
     /// Observable combining the user's device location and locations that are nearby.
     /// This includes all nearby locations, regardless of filtering status. To get the
@@ -109,7 +109,8 @@ extension TKUINearbyViewModel {
             center: mapRect.centerCoordinate,
             radius: radius,
             limit: fixedLocation != nil ? 1000 : 100,
-            modes: mode.flatMap { [$0] }
+            modes: mode.flatMap { [$0] },
+            strictModeMatch: strictModeMatch
           )
           .asObservable()
           .catchError { error in
