@@ -170,7 +170,7 @@ extension Service {
         if let vehicle = existing {
           vehicle.update(with: model)
         } else {
-          addVehicleAlternativesObject(Vehicle(from: model, into: context))
+          addToVehicleAlternatives(Vehicle(from: model, into: context))
         }
       }
       self.isRealTimeCapable = true
