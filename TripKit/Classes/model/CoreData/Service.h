@@ -53,24 +53,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/// :nodoc:
-@interface Service (CoreDataGeneratedAccessors)
-
-- (void)addSegmentsObject:(SegmentReference *)value;
-- (void)removeSegmentsObject:(SegmentReference *)value;
-- (void)addSegments:(NSSet *)values;
-- (void)removeSegments:(NSSet *)values;
-
-- (void)addVisitsObject:(StopVisits *)value;
-- (void)removeVisitsObject:(StopVisits *)value;
-- (void)addVisits:(NSSet *)values;
-- (void)removeVisits:(NSSet *)values;
-
-- (void)addVehicleAlternativesObject:(Vehicle *)value;
-- (void)VehicleAlternatives:(Vehicle *)value;
-- (void)addVehicleAlternatives:(NSSet *)values;
-- (void)removeVehicleAlternatives:(NSSet *)values;
-
-@end
-
 NS_ASSUME_NONNULL_END
