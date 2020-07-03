@@ -12,7 +12,7 @@
 
 + (BOOL)isBeta
 {
-#if defined(DEBUG) || defined(BETA) || defined(TARGET_OS_MACCATALYST)
+#if defined(DEBUG) || defined(BETA) || TARGET_OS_MACCATALYST
   return YES;
 #else
   return NO;
