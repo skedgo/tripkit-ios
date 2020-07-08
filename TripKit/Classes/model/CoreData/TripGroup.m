@@ -68,7 +68,7 @@ typedef enum {
   float bestScore = MAXFLOAT;
   Trip *bestTrip = nil;
   for (Trip *trip in allTrips) {
-    if ([trip isImpossible]) {
+    if ([trip isImpossible] || [trip isCanceled]) {
       continue;
     }
     
