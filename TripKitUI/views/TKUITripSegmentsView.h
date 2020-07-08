@@ -19,6 +19,13 @@
 @property (nonatomic, assign) BOOL tiny;
 
 /**
+ Whether the trip should be shown as cancelled, i.e., with a line through it
+ 
+ @default `false`
+ */
+@property (nonatomic, assign) BOOL isCanceled;
+
+/**
 Whether to show wheelchair accessibility and inaccessibility icons
 
  @default `false`

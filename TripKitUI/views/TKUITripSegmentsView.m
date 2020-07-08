@@ -142,13 +142,8 @@
   
   // populate scroll view with segments
   int count = 0;
-  BOOL anyIsCancelled = NO;
   
   for (id<TKTripSegmentDisplayable> segment in segments) {
-    if ([segment tripSegmentIsCanceled]) {
-      anyIsCancelled = YES;
-    }
-
     UIViewAutoresizing mask = 0;
     CGFloat alpha = (segmentIndexToSelect == -1 || segmentIndexToSelect == count) ? SEGMENT_ITEM_ALPHA_SELECTED : SEGMENT_ITEM_ALPHA_DESELECTED;
     
@@ -422,12 +417,11 @@
     }
   }
   
-  if (anyIsCancelled) {
+  if (self.isCanceled) {
     CGFloat lineHeight = 1;
     UIView *strikethrough = [[UIView alloc] initWithFrame:CGRectMake(0, (maxHeight - lineHeight) / 2, nextX, lineHeight)];
     strikethrough.backgroundColor = UIColor.tkLabelPrimary;
     [self addSubview:strikethrough];
-    
   }
   
   self.segmentXValues = [segmentXValues copy];

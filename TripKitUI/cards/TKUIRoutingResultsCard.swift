@@ -418,7 +418,7 @@ extension TKUITripCell.Model {
       departure: trip.departureTime, arrival: trip.arrivalTime,
       departureTimeZone: trip.departureTimeZone, arrivalTimeZone: trip.arrivalTimeZone ?? trip.departureTimeZone,
       focusOnDuration: !trip.departureTimeIsFixed, isArriveBefore: trip.isArriveBefore,
-      showFaded: trip.showFaded,
+      showFaded: trip.showFaded, isCancelled: trip.isCanceled,
       segments: trip.segments(with: .inSummary),
       accessibilityLabel: trip.accessibilityLabel
     )

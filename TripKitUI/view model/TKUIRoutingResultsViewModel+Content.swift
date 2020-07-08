@@ -125,7 +125,13 @@ extension TKUIRoutingResultsViewModel {
     }
     
     let groupSorters = first.request.sortDescriptors(withPrimary: sortBy)
-    let sorted = (groups as NSArray).sortedArray(using: groupSorters).compactMap { $0 as? TripGroup }
+    let byScoring = (groups as NSArray)
+      .sortedArray(using: groupSorters)
+      .compactMap { $0 as? TripGroup }
+    
+    let notCanceled  = byScoring.filter { $0.visibleTrip?.isCanceled == false }
+    let cancelations = byScoring.filter { $0.visibleTrip?.isCanceled == true }
+    let sorted = notCanceled + cancelations
     
     let tripSorters = first.request.tripTimeSortDescriptors()
     var sections = sorted.compactMap { group -> Section? in

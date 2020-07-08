@@ -35,7 +35,7 @@ public class TKMetricClassifier: NSObject {
 extension TKMetricClassifier: TKTripClassifier {
   
   public func prepareForClassifiction(of tripGroups: Set<TripGroup>) {
-    let trips = tripGroups.compactMap { $0.visibleTrip }
+    let trips = tripGroups.compactMap(\.representativeTrip)
     var anyHaveUnknownCost = false
     for trip in trips {
       if let price = trip.totalPrice?.floatValue {
@@ -67,7 +67,7 @@ extension TKMetricClassifier: TKTripClassifier {
     // TODO: Order this by what the user cares about
     // recommended > fast > cheap > healthy > easy > green
     
-    guard let trip = tripGroup.visibleTrip else { return nil }
+    guard let trip = tripGroup.representativeTrip else { return nil }
     
     if let min = weighted?.min, let max = weighted?.max, matches(min: min, max: max, value: trip.totalScore) {
       return TKMetricClassifier.Classification.recommended.rawValue as NSString
@@ -99,4 +99,12 @@ extension TKMetricClassifier: TKTripClassifier {
     return max > min * 1.25
   }
   
+}
+
+fileprivate extension TripGroup {
+  var representativeTrip: Trip? {
+    self.trips
+      .filter { !$0.isCanceled }
+      .min { $0.totalScore < $1.totalScore }
+  }
 }

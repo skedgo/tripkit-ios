@@ -73,6 +73,7 @@ public class TKUITripCell: UITableViewCell {
     let focusOnDuration: Bool
     let isArriveBefore: Bool
     let showFaded: Bool
+    let isCancelled: Bool
     let segments: [TKTripSegmentDisplayable]
     var action: String?
     var accessibilityLabel: String?
@@ -85,6 +86,7 @@ public class TKUITripCell: UITableViewCell {
     
     subtitleLabel.attributedText = formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     
+    segmentView.isCanceled = model.isCancelled
     segmentView.configure(forSegments: model.segments, allowSubtitles: true, allowInfoIcons: true)
     
     let alpha: CGFloat = model.showFaded ? 0.2 : 1

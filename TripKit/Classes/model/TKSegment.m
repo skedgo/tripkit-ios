@@ -559,6 +559,9 @@ NSString *const UninitializedString =  @"UninitializedString";
   if ([self duration:NO] < 0) {
     return YES;
   }
+  if ([self isCanceled]) {
+    return YES;
+  }
   
   if (self.next) {
     NSTimeInterval margin = 60;
