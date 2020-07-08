@@ -139,6 +139,7 @@ public class TKUIRoutingResultsViewModel {
     
     let availableFromRequest: Observable<AvailableModes> = requestToShow
       .compactMap(Self.buildAvailableModes)
+      .distinctUntilChanged { $0.available == $1.available } // ignore any `enabled` changes in the mean-time
     
     let availableFromChange = inputs.changedModes.asObservable()
       .withLatestFrom(requestToShow) { ($0, $1) }

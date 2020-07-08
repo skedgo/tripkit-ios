@@ -47,7 +47,7 @@ extension TKUIRoutingResultsViewModel {
     let oldWheelchairOn = TKUserProfileHelper.showWheelchairInformation
 
     // handle regular modes
-    var hidden = all.map  { $0.identifier }
+    var hidden = all.map(\.identifier)
     hidden.removeAll(where: enabled.contains)
     TKUserProfileHelper.updateTransportModesWithEnabledOrder(nil, minimized: nil, hidden: Set(hidden))
     
