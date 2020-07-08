@@ -140,13 +140,22 @@ extension TKUIRoutingResultsViewModel {
       if let primaryAction = TKUIRoutingResultsCard.config.tripGroupActionFactory?(group) {
         show = items
         action = (title: primaryAction.title, payload: .trigger(primaryAction, group))
+      
       } else if items.count > 2, expand == group {
         show = items
         action = (title: "Less", payload: .collapse) // TODO: Localise
+      
       } else if items.count > 2 {
-        let good = items.filter { $0.trip != nil }.filter { !$0.trip!.showFaded }
-        show = Array(good.prefix(2))
-        action = (title: "More", payload: .expand(group)) // TODO: Localise
+        let good = items
+          .filter { $0.trip != nil }
+          .filter { !$0.trip!.showFaded }
+        if good.isEmpty {
+          show = Array(items.prefix(2))
+        } else {
+          show = Array(good.prefix(2))
+        }
+      action = (title: "More", payload: .expand(group)) // TODO: Localise
+
       } else {
         show = items
         action = nil
@@ -354,5 +363,8 @@ extension TKUIRoutingResultsViewModel.Section: AnimatableSectionModelType {
     self.items = items
   }
   
-  public var identity: Identity { return items.first?.identity ?? "Empty" }
+  public var identity: Identity {
+    let itemIdentity = items.first?.identity ?? "Empty"
+    return itemIdentity + (action?.title ?? "")
+  }
 }
