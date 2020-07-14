@@ -30,61 +30,13 @@ extension TKSegment {
 }
 
 extension SegmentReference {
-  private var dataDictionary: NSMutableDictionary {
-    get {
-      guard let data = self.data as? Data else { return NSMutableDictionary() }
 
-      let dictionary: NSDictionary?
-      if #available(iOS 11.0, *) {
-        do {
-          // We have to include `NSArray` here, but not sure why; the result will
-          // definitely be a dictionary, but if we don't include it, this will
-          // fail with an error.
-          dictionary = try NSKeyedUnarchiver.unarchivedObject(ofClasses:
-            [
-              NSDictionary.self,
-              NSArray.self,
-              NSDate.self // timetable start + end date
-            ]
-            , from: data) as? NSDictionary
-        } catch {
-          TKLog.info("TKSegment+Ticket") { "Decoding new data failed due to: \(error). Data: \(String(decoding: data, as: UTF8.self))" }
-          return NSMutableDictionary()
-        }
-      } else {
-        dictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSDictionary
-      }
-      
-      return dictionary.map(NSMutableDictionary.init(dictionary:)) ?? NSMutableDictionary()
-    }
-    
-    set {
-      if #available(iOS 11.0, *) {
-        do {
-          self.data = try NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: false)
-        } catch {
-          TKLog.info("TKSegment+Ticket") { "Encoding new data failed due to: \(error). Dict: \(newValue)" }
-        }
-        
-      } else {
-        self.data = NSKeyedArchiver.archivedData(withRootObject: newValue)
-      }
-    }
-  }
-  
   var ticket: TKSegment.Ticket? {
     get {
-      guard let ticketData = dataDictionary["ticket"] as? Data else { return nil }
-      return try? JSONDecoder().decode(TKSegment.Ticket.self, from: ticketData)
+      decode(TKSegment.Ticket.self, key: "ticket")
     }
     set {
-      let data = dataDictionary
-      if let ticketData = try? JSONEncoder().encode(newValue) {
-        data["ticket"] = ticketData
-      } else {
-        data["ticket"] = nil
-      }
-      self.dataDictionary = data
+      encode(newValue, key: "ticket")
     }
   }
    

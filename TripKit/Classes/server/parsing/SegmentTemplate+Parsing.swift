@@ -39,11 +39,12 @@ extension SegmentTemplate {
     template.hashCode = dict["hashCode"] as? NSNumber
     template.bearing = dict["travelDirection"] as? NSNumber
     
+    template.localCost        = TKLocalCost.newInstance(from: dict["localCost"] as? [String: Any])
+    template.mapTiles         = TKMapTiles.newInstance(from: dict["mapTiles"] as? [String: Any])
     template.modeIdentifier   = dict["modeIdentifier"] as? String
     template.modeInfo         = TKModeInfo.modeInfo(for: dict["modeInfo"] as? [String: Any])
     template.miniInstruction  = TKMiniInstruction.instruction(for: dict["mini"] as? [String: Any])
     template.turnByTurnMode   = TKTurnByTurnMode(rawValue: dict["turn-by-turn"] as? String ?? "")
-    template.localCost        = TKLocalCost.newInstance(from: dict["localCost"] as? [String: Any])
     
     template.notesRaw         = dict["notes"] as? String
     template.smsMessage       = dict["smsMessage"] as? String

@@ -126,7 +126,7 @@ public class TKUIAttributionView: UIView {
   public static func newView(_ sources: [TKAPI.DataAttribution], fitsIn view: UIView? = nil) -> TKUIAttributionView? {
     guard !sources.isEmpty else { return nil }
     
-    let names = sources.map { $0.provider.name }.joined(separator: ", ")
+    let names = sources.map(\.provider.name).joined(separator: ", ")
 
     let attributionView = newView(title: names, wording: .dataProvidedBy)
     

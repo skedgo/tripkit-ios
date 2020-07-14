@@ -8,19 +8,16 @@
 
 import UIKit
 
-public protocol TKUIAttributionTableViewControllerDelegate: class {
-  
-  func attributor(_ attributor: TKUIAttributionTableViewController, requestsWebsite url: URL)
-  
-  func requestsDismissal(attributor: TKUIAttributionTableViewController)
-  
-}
-
 public class TKUIAttributionTableViewController: UITableViewController {
+  
+  /// Called when the user taps on an item in the attribution view, and
+  /// requests displaying that URL. You should then either present it in an
+  /// in-app web view, or call `UIApplication.shared.open()`.
+  ///
+  /// - warning: Make sure you provide either this or a delegate
+  public static var presentAttributionHandler: ((TKUIAttributionTableViewController, URL) -> Void)?
 
   public var attributions: [TKAPI.DataAttribution] = []
-  
-  public weak var delegate: TKUIAttributionTableViewControllerDelegate? = nil
   
   public convenience init(attributions: [TKAPI.DataAttribution]) {
     self.init(style: .plain)
@@ -46,7 +43,7 @@ public class TKUIAttributionTableViewController: UITableViewController {
   
   @objc
   fileprivate func closeButtonPressed(_ sender: Any) {
-    delegate?.requestsDismissal(attributor: self)
+    presentingViewController?.dismiss(animated: true)
   }
   
 
@@ -72,7 +69,7 @@ public class TKUIAttributionTableViewController: UITableViewController {
       return
     }
 
-    delegate?.attributor(self, requestsWebsite: url)
+    Self.presentAttributionHandler?(self, url)
   }
   
 }

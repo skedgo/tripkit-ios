@@ -22,14 +22,7 @@ public extension TKUITripOverviewCard {
     private init() {}
     
     static let empty = Configuration()
-    
-    /// Called when the user taps on an item in the attribution view, and
-    /// requests displaying that URL. You should then either present it in an
-    /// in-app web view, or call `UIApplication.shared.open()`.
-    ///
-    /// - warning: Make sure you provide this.
-    public var presentAttributionHandler: ((TKUITripOverviewCard, TKUIAttributionTableViewController, URL) -> Void)?
-    
+
     /// Set this to add a tap-action to every segment in the trip overview
     /// card.
     ///
