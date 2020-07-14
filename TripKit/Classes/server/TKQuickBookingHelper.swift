@@ -94,7 +94,7 @@ public enum TKQuickBookingHelper {
       return
     }
     
-    guard let bookingsURL = segment.bookingQuickInternalURL() else {
+    guard let bookingsURL = segment.bookingQuickInternalURL else {
       completion([], nil)
       return
     }
@@ -153,7 +153,7 @@ extension TKSegment {
   }
 
   fileprivate func indexKey() -> String? {
-    if let path = bookingQuickInternalURL()?.path {
+    if let path = bookingQuickInternalURL?.path {
       return "\(path)-index"
     } else {
       return nil
@@ -161,7 +161,7 @@ extension TKSegment {
   }
 
   fileprivate func cacheKey() -> String? {
-    if let path = bookingQuickInternalURL()?.path {
+    if let path = bookingQuickInternalURL?.path {
       return "\(path)-cached"
     } else {
       return nil
@@ -174,29 +174,4 @@ extension TKSegment {
     TripKit.shared.inMemoryCache().setObject(array as AnyObject, forKey: key as AnyObject)
   }
   
-  public var bookingConfirmation: TKBooking.Confirmation? {
-    if let dictionary = bookingConfirmationDictionary() {
-      let key: NSString?
-      if let statusDict = dictionary["status"] as? [String: Any], let statusValue = statusDict["value"] as? String {
-        key = (String(templateHashCode) + "-" + statusValue) as NSString
-      } else {
-        key = nil
-      }
-      if let key = key, let cached = TripKit.shared.inMemoryCache().object(forKey: key) as? TKBooking.Confirmation {
-        return cached
-      } else {
-        do {
-          let decoded = try JSONDecoder().decode(TKBooking.Confirmation.self, withJSONObject: dictionary)
-          if let key = key {
-            TripKit.shared.inMemoryCache().setObject(decoded as AnyObject, forKey: key)
-          }
-          return decoded
-        } catch {
-          return nil
-        }
-      }
-    } else {
-      return nil
-    }
-  }
 }

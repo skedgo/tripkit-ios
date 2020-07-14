@@ -199,11 +199,7 @@ extension TKStyleManager {
         return UIFont.systemFont(ofSize: descriptor.pointSize, weight: .semibold)
     }
     
-    if #available(iOS 11.0, *) {
-      return UIFontMetrics.default.scaledFont(for: customFont)
-    } else {
-      return customFont
-    }
+    return UIFontMetrics.default.scaledFont(for: customFont)
   }
   
   /// This method returns a regular font with custom font face for a given text style.
@@ -222,11 +218,7 @@ extension TKStyleManager {
         return UIFont.systemFont(ofSize: descriptor.pointSize, weight: .regular)
     }
     
-    if #available(iOS 11.0, *) {
-      return UIFontMetrics.default.scaledFont(for: customFont)
-    } else {
-      return customFont
-    }
+    return UIFontMetrics.default.scaledFont(for: customFont)
   }
   
   /// This method returns a bold font with custom font face for a given text style.
@@ -245,11 +237,7 @@ extension TKStyleManager {
         return UIFont.systemFont(ofSize: descriptor.pointSize, weight: .bold)
     }
     
-    if #available(iOS 11.0, *) {
-      return UIFontMetrics.default.scaledFont(for: customFont)
-    } else {
-      return customFont
-    }
+    return UIFontMetrics.default.scaledFont(for: customFont)
   }
   
   /// This method returns a medium font with custom font face for a given text style.
@@ -268,11 +256,7 @@ extension TKStyleManager {
         return UIFont.systemFont(ofSize: descriptor.pointSize, weight: .medium)
     }
     
-    if #available(iOS 11.0, *) {
-      return UIFontMetrics.default.scaledFont(for: customFont)
-    } else {
-      return customFont
-    }
+    return UIFontMetrics.default.scaledFont(for: customFont)
   }
   
 }

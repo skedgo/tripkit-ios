@@ -73,19 +73,22 @@ public class TKUIServiceCard: TGTableCard {
   }
   
   required convenience public init?(coder: NSCoder) {
-    guard let embarkation: StopVisits = coder.decodeManaged(forKey: "embarkation", in: TripKit.shared.tripKitContext) else {
-      return nil
-    }
-    
-    let disembarkation: StopVisits? = coder.decodeManaged(forKey: "disembarkation", in: TripKit.shared.tripKitContext)
-    self.init(embarkation: embarkation, disembarkation: disembarkation)
-    
-    didInit()
+    // TODO: Not yet implemented
+    return nil
+
+//    guard let embarkation: StopVisits = coder.decodeManaged(forKey: "embarkation", in: TripKit.shared.tripKitContext) else {
+//      return nil
+//    }
+//    let disembarkation: StopVisits? = coder.decodeManaged(forKey: "disembarkation", in: TripKit.shared.tripKitContext)
+//    self.init(embarkation: embarkation, disembarkation: disembarkation)
+//
+//    didInit()
   }
   
   override public func encode(with aCoder: NSCoder) {
-    aCoder.encodeManaged(dataInput.embarkation, forKey: "embarkation")
-    aCoder.encodeManaged(dataInput.disembarkation, forKey: "disembarkation")
+    // TODO: Not yet implemented
+//    aCoder.encodeManaged(dataInput.embarkation, forKey: "embarkation")
+//    aCoder.encodeManaged(dataInput.disembarkation, forKey: "disembarkation")
   }
   
   private func didInit() {

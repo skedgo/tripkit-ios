@@ -48,9 +48,8 @@ extension TKUIMapManager {
     mapView.addOverlay(tileOverlay, level: .aboveRoads) // so that our other overlays can be above it
     
     let toRestore = TKUIMapSettings(mapType: mapView.mapType)
-    if #available(iOS 11.0, *) {
-      mapView.mapType = .mutedStandard
-    }
+    mapView.mapType = .mutedStandard
+
     if #available(iOS 13.0, *) {
       mapView.overrideUserInterfaceStyle = .light
       mapView.pointOfInterestFilter = .excludingAll

@@ -28,8 +28,6 @@
 
 @property (nonatomic, strong, nullable, readonly) NSURL *saveURL;
 
-@property (nonatomic, copy, nullable) NSString *bundleId;
-
 /**
  Checks if trip is in a usable state for CoreData. Bit of an ugly check to use
  in rare cases before accessing nonnull fields on a Trip object that might have

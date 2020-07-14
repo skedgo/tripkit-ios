@@ -214,32 +214,6 @@ NSString *const UninitializedString =  @"UninitializedString";
   }
 }
 
-- (id)payloadForKey:(NSString *)key
-{
-  return [self.reference payloadForKey:key];
-}
-
-- (NSString *)scheduledStartStopCode {
-  return self.template.scheduledStartStopCode;
-}
-
-- (NSString *)scheduledStartPlatform {
-  return self.reference.departurePlatform;
-}
-
-- (NSString *)scheduledEndPlatform {
-  return self.reference.arrivalPlatform;
-}
-
-- (NSDate *)scheduledTimetableStartTime {
-  return self.reference.timetableStartTime;
-}
-
-- (NSDate *)scheduledTimetableEndTime {
-  return self.reference.timetableEndTime;
-}
-
-
 - (StopLocation *)scheduledStartStop
 {
 	if (_scheduledStartStop != nil)
@@ -269,10 +243,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 	return _scheduledStartStop;
 }
 
-- (NSString *)scheduledEndStopCode {
-  return self.template.scheduledEndStopCode;
-}
-
 - (Service *)service {
 	return self.reference.service;
 }
@@ -283,11 +253,6 @@ NSString *const UninitializedString =  @"UninitializedString";
 
 - (NSString *)scheduledServiceCode {
 	return self.service.code;
-}
-
-- (nullable NSString *)ticketWebsiteURLString
-{
-  return self.reference.ticketWebsiteURLString;
 }
 
 - (NSTimeInterval)duration:(BOOL)includingContinuation
@@ -574,48 +539,6 @@ NSString *const UninitializedString =  @"UninitializedString";
   return self.reference.service.isCanceled;
 }
 
-#pragma mark - Booking
-
-- (NSString *)bookingTitle
-{
-  NSDictionary *bookingData = self.reference.bookingData;
-  return bookingData[@"title"];
-}
-
-- (NSURL *)bookingInternalURL
-{
-  NSDictionary *bookingData = self.reference.bookingData;
-  NSString *URLString = bookingData[@"url"];
-  if (URLString) {
-    return [NSURL URLWithString:URLString];
-  } else {
-    return nil;
-  }
-}
-
-- (NSURL *)bookingQuickInternalURL
-{
-  NSDictionary *bookingData = self.reference.bookingData;
-  NSString *URLString = bookingData[@"quickBookingsUrl"];
-  if (URLString) {
-    return [NSURL URLWithString:URLString];
-  } else {
-    return nil;
-  }
-}
-
-- (NSArray *)bookingExternalActions
-{
-  NSDictionary *bookingData = self.reference.bookingData;
-  return bookingData[@"externalActions"];
-}
-
-- (nullable NSDictionary<NSString*, id> *)bookingConfirmationDictionary
-{
-  NSDictionary *bookingData = self.reference.bookingData;
-  return bookingData[@"confirmation"];
-}
-
 - (void)resetCaches
 {
   _singleLineInstruction = UninitializedString;
@@ -771,7 +694,7 @@ NSString *const UninitializedString =  @"UninitializedString";
   NSUInteger stops = 0;
   TKSegment *segment = self;
   while (segment) {
-    stops += [segment.reference.serviceStops integerValue];
+    stops += segment.scheduledServiceStops;
     
     // wrap-over
     segment = [segment next];

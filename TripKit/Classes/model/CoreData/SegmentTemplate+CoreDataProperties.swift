@@ -18,7 +18,7 @@ extension SegmentTemplate {
 
     @NSManaged public var action: String?
     @NSManaged public var bearing: NSNumber?
-    @NSManaged public var data: NSObject? // NSData (previously NSDictionary / NSMutableDictionary)
+    @NSManaged public var data: Data? // NSData (previously NSDictionary / NSMutableDictionary)
     @NSManaged public var durationWithoutTraffic: NSNumber?
     @NSManaged public var endLocation: NSObject?
     @NSManaged public var flags: NSNumber?

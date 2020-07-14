@@ -105,6 +105,20 @@ extension TKSegment {
 
 extension TKSegment {
   
+  @objc public var scheduledStartStopCode: String? { template?.scheduledStartStopCode }
+
+  @objc public var scheduledEndStopCode: String? { template?.scheduledEndStopCode }
+
+  @objc public var scheduledStartPlatform: String? { reference?.departurePlatform }
+  
+  @objc public var scheduledEndPlatform: String? { reference?.arrivalPlatform }
+  
+  public var scheduledTimetableStartTime: Date? { reference?.timetableStartTime }
+
+  public var scheduledTimetableEndTime: Date? { reference?.timetableEndTime }
+  
+  public var ticketWebsiteURLString: String? { reference?.ticketWebsiteURLString }
+
   public var embarkation: StopVisits? {
     return service?.sortedVisits.first { visit in
       return self.segmentVisits()[visit.stop.stopCode]?.boolValue == true
@@ -117,6 +131,24 @@ extension TKSegment {
     }
   }
   
+  @objc var scheduledServiceStops: Int { reference?.serviceStops ?? 0 }
+  
+}
+
+// MARK: - Booking
+
+extension TKSegment {
+
+  public var bookingTitle: String? { reference?.bookingData?.title }
+  
+  public var bookingInternalURL: URL? { reference?.bookingData?.url }
+  
+  public var bookingQuickInternalURL: URL? { reference?.bookingData?.quickBookingsUrl }
+  
+  public var bookingExternalActions: [String]? { reference?.bookingData?.externalActions }
+  
+  public var bookingConfirmation: TKBooking.Confirmation? { reference?.bookingData?.confirmation }
+
 }
 
 // MARK: - Path info
@@ -148,7 +180,7 @@ extension TKSegment {
   /// - Returns: The used vehicle (if there are any) in SkedGo API-compatible form
   @objc public func usedVehicle(fromAll vehicles: [TKVehicular]) -> [AnyHashable: Any]? {
     if template?.isSharedVehicle == true {
-      return reference?.sharedVehicleData
+      return reference?.sharedVehicleData as? [AnyHashable: Any]
     }
     
     if let vehicle = reference?.vehicle(fromAllVehicles: vehicles) {

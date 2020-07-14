@@ -105,14 +105,22 @@ extension TKRegionOverlayHelper {
   private static func loadPolygonsFromCacheFile() -> [MKPolygon]? {
     guard
       let cacheURL = TKRegionOverlayHelper.cacheURL,
-      let data = try? Data(contentsOf: cacheURL),
-      let unarchived = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: AnyHashable],
-      let regionsHash = (unarchived["regionsHash"] as? NSNumber)?.intValue,
-      let polygons = unarchived["polygons"] as? [MKPolygon],
-      regionsHash == TKRegionManager.shared.regionsHash?.intValue
+      let data = try? Data(contentsOf: cacheURL)
       else { return nil }
     
-    return polygons
+    do {
+      let unarchived = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, NSDictionary.self, MKPolygon.self], from: data) as? [String: AnyHashable]
+      guard
+        let regionsHash = (unarchived?["regionsHash"] as? NSNumber)?.intValue,
+        let polygons = unarchived?["polygons"] as? [MKPolygon],
+        regionsHash == TKRegionManager.shared.regionsHash?.intValue
+        else { return nil }
+      
+      return polygons
+    } catch {
+      assertionFailure()
+      return nil
+    }
   }
   
   private static func savePolygonsToCacheFile(_ polygons: [MKPolygon & NSCoding]) {
@@ -126,7 +134,11 @@ extension TKRegionOverlayHelper {
       "polygons": polygons,
       "regionsHash": regionsHash
     ]
-    let data = NSKeyedArchiver.archivedData(withRootObject: wrapped)
-    try? data.write(to: cacheURL)
+    do {
+      let data = try NSKeyedArchiver.archivedData(withRootObject: wrapped, requiringSecureCoding: false)
+      try data.write(to: cacheURL)
+    } catch {
+      assertionFailure()
+    }
   }
 }

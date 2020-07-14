@@ -419,17 +419,13 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
         break;
     }
 #else
-    if (@available(macOS 10.12, *)) {
-      switch (status) {
-        case kCLAuthorizationStatusAuthorizedAlways:
-          enabled = YES;
-          break;
-        default:
-          enabled = NO;
-          break;
-      }
-    } else {
-      enabled = NO;
+    switch (status) {
+      case kCLAuthorizationStatusAuthorizedAlways:
+        enabled = YES;
+        break;
+      default:
+        enabled = NO;
+        break;
     }
 #endif
     

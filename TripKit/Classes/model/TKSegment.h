@@ -112,12 +112,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSArray <Vehicle *> *realTimeAlternativeVehicles;
 
 /**
- @return The payload passed on by the server for the specified key.
- */
-- (nullable id)payloadForKey:(NSString *)key;
-
-
-/**
  @return the transport mode identifier that this segment is using (if any). Can return `nil` for stationary segments such as "leave your house" or "wait between two buses" or "park your car"
  */
 @property (nullable, readonly) NSString *modeIdentifier;
@@ -158,16 +152,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly) NSString *smsMessage;
 @property (nullable, readonly) NSString *smsNumber;
 @property (nullable, readonly) NSString *scheduledServiceCode;
-@property (nullable, readonly) NSString *scheduledStartStopCode;
-@property (nullable, readonly) NSString *scheduledEndStopCode;
-@property (nullable, readonly) NSString *scheduledStartPlatform;
-@property (nullable, readonly) NSString *scheduledEndPlatform;
 @property (nullable, readonly) NSString *scheduledServiceNumber;
-@property (nullable, readonly) NSDate *scheduledTimetableStartTime;
-@property (nullable, readonly) NSDate *scheduledTimetableEndTime;
 @property (nullable, readonly) NSNumber *frequency;
 @property (nullable, readonly) Service *service;
-@property (nullable, readonly) NSString *ticketWebsiteURLString;
 
 - (BOOL)usesVisit:(StopVisits *)visit;
 - (BOOL)shouldShowVisit:(StopVisits *)visit;
@@ -201,12 +188,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///-----------------------------------------------------------------------------
 /// @name In-app and external bookings
 ///-----------------------------------------------------------------------------
-
-- (nullable NSString *)bookingTitle;
-- (nullable NSURL *)bookingInternalURL;
-- (nullable NSURL *)bookingQuickInternalURL;
-- (nullable NSArray<NSString *> *)bookingExternalActions;
-- (nullable NSDictionary<NSString*, id> *)bookingConfirmationDictionary;
 
 @property (nullable, readonly) NSString *tripSegmentModeTitle;
 @property (nullable, readonly) NSString *tripSegmentModeSubtitle;

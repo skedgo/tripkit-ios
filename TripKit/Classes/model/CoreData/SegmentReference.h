@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber * flags;
 @property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSNumber * templateHashCode;
-@property (nonatomic, retain) id data; // NSData (or NSDictionary)
+@property (nonatomic, retain, nullable) NSData * data;
 @property (nonatomic, retain, nullable) NSArray<NSNumber *> * alertHashCodes;
 @property (nonatomic, retain, nullable) SegmentTemplate *segmentTemplate;
 @property (nonatomic, retain, null_resettable) Trip *trip;
@@ -34,16 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSSet *realTimeVehicleAlternatives;
 
 #pragma mark Helper
-
-@property (nonatomic, copy, nullable) NSString *vehicleUUID;
-@property (nonatomic, copy, nullable) NSDictionary *bookingData;
-@property (nonatomic, copy, nullable) NSDictionary *sharedVehicleData;
-@property (nonatomic, copy, nullable) NSString *ticketWebsiteURLString;
-@property (nonatomic, copy, nullable) NSString *departurePlatform;
-@property (nonatomic, copy, nullable) NSString *arrivalPlatform;
-@property (nonatomic, copy, nullable) NSNumber *serviceStops;
-@property (nonatomic, retain, nullable) NSDate *timetableStartTime;
-@property (nonatomic, retain, nullable) NSDate *timetableEndTime;
 
 @property (nonatomic, assign) BOOL timesAreRealTime;
 @property (nonatomic, assign, getter = isBicycleAccessible) BOOL bicycleAccessible;
@@ -55,9 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setVehicle:(nullable id<TKVehicular>)vehicle;
 - (nullable id<TKVehicular>)vehicleFromAllVehicles:(NSArray<id<TKVehicular>> *)allVehicles;
-
-- (void)setPayload:(nullable id)payload forKey:(NSString *)key;
-- (nullable id)payloadForKey:(NSString *)key;
 
 @end
 

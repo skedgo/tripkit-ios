@@ -37,7 +37,7 @@ extension TKRealTimeUpdatable {
           && end.timeIntervalSinceNow > -60 * 60 // an hour ago
     } else {
       return start.timeIntervalSinceNow < 45 * 60 // start isn't more than 45 minutes from now
-        && end.timeIntervalSinceNow > -30 * 60 // end isn't more than 30 minutes ago
+          && end.timeIntervalSinceNow > -30 * 60 // end isn't more than 30 minutes ago
     }
   }
   

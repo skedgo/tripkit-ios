@@ -84,11 +84,6 @@
     return [placemark.areasOfInterest objectAtIndex:0];
   }
   
-  if (nil != placemark.addressDictionary) {
-    NSString *firstLineOfAddress = [[[placemark addressDictionary] objectForKey:@"FormattedAddressLines"] objectAtIndex:0];
-    return firstLineOfAddress;
-  }
-  
   return nil;
 }
 

@@ -83,8 +83,9 @@ class TKRouterTest: TKTestCase {
         let trip = try XCTUnwrap(request?.trips.first)
         XCTAssertEqual(trip.segments.count, 5)
         
-        XCTAssertNil(trip.segments[1].bookingInternalURL())
-        XCTAssertNotNil(trip.segments[1].bookingExternalActions())
+        
+        XCTAssertNil(trip.segments[1].bookingInternalURL)
+        XCTAssertNotNil(trip.segments[1].bookingExternalActions)
         
         XCTAssertEqual(trip.segments[2].alerts().count, 4)
         XCTAssertEqual(trip.segments[2].alertsWithAction().count, 0)

@@ -140,7 +140,7 @@ extension TKGeocoderTest {
   {
     let result = geocoder.passes(input, near:region, resultsInAny:any, noneOf:none, of:coordinate)
     do {
-      _ = try result.toBlocking().first()
+      _ = try result.toBlocking(timeout: 5).first()
     } catch {
       XCTFail("Failed with error: \(error)", file: file, line: line)
     }
@@ -155,7 +155,7 @@ extension TKGeocoderTest {
   {
     let result = geocoder.passes(input, near:region, bestStartsWithAny: starts)
     do {
-      _ = try result.toBlocking().first()
+      _ = try result.toBlocking(timeout: 5).first()
     } catch {
       XCTFail("Failed with error: \(error)", file: file, line: line)
     }
