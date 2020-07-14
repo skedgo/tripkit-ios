@@ -323,7 +323,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           continue;
         }
         
-        [reference populateFromDictionary:refDict];
+        [reference _populateFromDictionary:refDict];
         
         Service *service = nil;
         NSString *serviceCode = refDict[@"serviceTripID"];

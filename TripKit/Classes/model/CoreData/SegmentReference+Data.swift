@@ -81,8 +81,8 @@ extension SegmentReference {
 
 extension SegmentReference {
   /// :nodoc:
-  @objc(populateFromDictionary:)
-  func populate(from dict: [String: AnyHashable]) {
+  @objc(_populateFromDictionary:)
+  public func populate(from dict: [String: AnyHashable]) {
     // Public transport
     arrivalPlatform = dict["endPlatform"] as? String
     departurePlatform = dict["platform"] as? String
