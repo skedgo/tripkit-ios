@@ -10,7 +10,7 @@ import Foundation
 
 extension SegmentReference: DataAttachable {}
 
-struct BookingData: Codable, Hashable {
+public struct BookingData: Codable, Hashable {
   let title: String
   
   /// For in-app bookings using booking flow
@@ -20,7 +20,7 @@ struct BookingData: Codable, Hashable {
   let quickBookingsUrl: URL?
 
   /// For in-app bookings follow-up
-  let confirmation: TKBooking.Confirmation?
+  public var confirmation: TKBooking.Confirmation?
 
   /// For bookings using external apps
   let externalActions: [String]?
@@ -28,17 +28,17 @@ struct BookingData: Codable, Hashable {
 
 extension SegmentReference {
 
-  var bookingData: BookingData? {
+  public var bookingData: BookingData? {
     get { decode(BookingData.self, key: "booking") }
     set { encode(newValue, key: "booking") }
   }
 
-  var arrivalPlatform: String? {
+  public var arrivalPlatform: String? {
     get { decode(String.self, key: "arrivalPlatform") }
     set { encode(newValue, key: "arrivalPlatform") }
   }
 
-  var departurePlatform: String? {
+  public var departurePlatform: String? {
     get { decode(String.self, key: "departurePlatform") }
     set { encode(newValue, key: "departurePlatform") }
   }
@@ -48,32 +48,32 @@ extension SegmentReference {
     set { encode(newValue, key: "serviceStops") }
   }
 
-  var sharedVehicleData: NSDictionary? {
+  public var sharedVehicleData: NSDictionary? {
     get { decodeCoding(NSDictionary.self, key: "sharedVehicle") }
     set { encodeCoding(newValue, key: "sharedVehicle") }
   }
 
-  var ticket: TKSegment.Ticket? {
+  public var ticket: TKSegment.Ticket? {
     get { decode(TKSegment.Ticket.self, key: "ticket") }
     set { encode(newValue, key: "ticket") }
   }
 
-  var ticketWebsiteURLString: String? {
+  public var ticketWebsiteURLString: String? {
     get { decode(String.self, key: "ticketWebsiteURL") }
     set { encode(newValue, key: "ticketWebsiteURL") }
   }
 
-  var timetableEndTime: Date? {
+  public var timetableEndTime: Date? {
     get { decode(Date.self, key: "timetableEndTime") }
     set { encode(newValue, key: "timetableEndTime") }
   }
 
-  var timetableStartTime: Date? {
+  public var timetableStartTime: Date? {
     get { decode(Date.self, key: "timetableStartTime") }
     set { encode(newValue, key: "timetableStartTime") }
   }
 
-  @objc var vehicleUUID: String? {
+  @objc public var vehicleUUID: String? {
     get { decode(String.self, key: "vehicleUUID") }
     set { encode(newValue, key: "vehicleUUID") }
   }

@@ -131,7 +131,7 @@ extension TKSegment {
     }
   }
   
-  @objc var scheduledServiceStops: Int { reference?.serviceStops ?? 0 }
+  @objc public var scheduledServiceStops: Int { reference?.serviceStops ?? 0 }
   
 }
 
@@ -139,7 +139,7 @@ extension TKSegment {
 
 extension TKSegment {
 
-  public var bookingTitle: String? { reference?.bookingData?.title }
+  @objc public var bookingTitle: String? { reference?.bookingData?.title }
   
   public var bookingInternalURL: URL? { reference?.bookingData?.url }
   

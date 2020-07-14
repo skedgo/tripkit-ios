@@ -1,4 +1,4 @@
-platform :ios, '10.4'
+platform :ios, '12.4'
 use_frameworks!
 
 target 'CocoaPodsTest' do
