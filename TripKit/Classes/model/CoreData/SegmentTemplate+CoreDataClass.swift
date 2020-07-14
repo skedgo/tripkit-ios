@@ -122,10 +122,11 @@ extension SegmentTemplate {
 
 struct SegmentTemplateData: Codable {
   
+  var localCost: TKLocalCost? = nil
+  var mapTiles: TKMapTiles? = nil
   var miniInstruction: TKMiniInstruction? = nil
   var modeInfo: TKModeInfo? = nil
   var turnByTurnMode: TKTurnByTurnMode? = nil
-  var localCost: TKLocalCost? = nil
   
   static func from(data: Data) -> SegmentTemplateData {
     do {
@@ -146,6 +147,17 @@ struct SegmentTemplateData: Codable {
 
 extension SegmentTemplate {
   
+  public var localCost: TKLocalCost? {
+    get { return segmentTemplateData.localCost }
+    set { edit { $0.localCost = newValue } }
+  }
+  
+  /// The preferred map-tiles to use for this segment. `nil` if default.
+  public var mapTiles: TKMapTiles? {
+    get { return segmentTemplateData.mapTiles }
+    set { edit { $0.mapTiles = newValue} }
+  }
+  
   var miniInstruction: TKMiniInstruction? {
     get { return segmentTemplateData.miniInstruction }
     set { edit { $0.miniInstruction = newValue} }
@@ -159,11 +171,6 @@ extension SegmentTemplate {
   public var turnByTurnMode: TKTurnByTurnMode? {
     get { return segmentTemplateData.turnByTurnMode }
     set { edit { $0.turnByTurnMode = newValue} }
-  }
-  
-  public var localCost: TKLocalCost? {
-    get { return segmentTemplateData.localCost }
-    set { edit { $0.localCost = newValue } }
   }
   
   private func edit(_ mutator: (inout SegmentTemplateData) -> Void) {

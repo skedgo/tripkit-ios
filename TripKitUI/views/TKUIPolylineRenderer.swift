@@ -32,6 +32,9 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
     var deselectedColor: UIColor
   }
   
+  /// Whether there should be a background behind dashes
+  public var fillDashBackground: Bool = true
+  
   /// Color used for the wider border around the polyline.
   /// Defaults to black.
   public var borderColor: UIColor = .tkLabelPrimary
@@ -115,12 +118,13 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
     
     let baseWidth = self.lineWidth
     let width = zoomScale < 0.01 ? baseWidth / 2 : baseWidth
+    let includeBackground = lineDashPattern == nil || fillDashBackground
     
     // draw the border, it's slightly wider than the specified width
-    drawLine(color: borderColor.cgColor, width: width * borderMultiplier, allowDashes: false, zoomScale: zoomScale, in: context)
+    drawLine(color: borderColor.cgColor, width: width * borderMultiplier, allowDashes: !includeBackground, zoomScale: zoomScale, in: context)
     
     // background onto which to draw dashes
-    if let background = backgroundColor {
+    if includeBackground, let background = backgroundColor {
       drawLine(color: background.cgColor, width: width, allowDashes: false, zoomScale: zoomScale, in: context)
     }
     

@@ -82,6 +82,8 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   public func show(_ segment: TKSegment, animated: Bool, mode: TKUISegmentMode = .onSegment) {
     self.selectedSegment = segment
     
+    self.tiles = segment.template?.mapTiles
+    
     let annos = segment.annotationsToZoomToOnMap(mode: mode)
     zoom(to: annos, animated: animated)
     
@@ -130,6 +132,13 @@ private extension TKUITripMapManager {
     updateDynamicAnnotation(trip: trip)
     
     mapView?.showsTraffic = affectedByTraffic
+    
+    // If it's a single-modal trip with custom tiles, show them
+    if !trip.isMixedModal(ignoreWalking: true), let mainSegment = trip.mainSegment() as? TKSegment, let tiles = mainSegment.template?.mapTiles {
+      self.tiles = tiles
+    } else {
+      self.tiles = nil
+    }
     
     self.overlays = TKUIMapManagerHelper.sort(overlays)
     self.annotations = annotations

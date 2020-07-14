@@ -73,7 +73,39 @@ open class TKUIMapManager: TGMapManager {
   /// @default: TKUIAnnotationViewBuilder
   public static var annotationBuilderFactory: ((MKAnnotation, MKMapView) -> TKUIAnnotationViewBuilder) = TKUIAnnotationViewBuilder.init
   
+  /// Callback that fires when attributions need to be displayed. In particular when using `tiles`.
+  public var attributionDisplayer: (([TKAPI.DataAttribution], _ sender: UIView) -> Void)? = nil
+  
+  static var tileOverlays: [String: MKTileOverlay] = [:]
+  
+  /// Whether to show the coverage polygon which greys out areas outside the coverage
   open var showOverlayPolygon = false
+  
+  /// Tiles to use instead of Apple Maps tiles
+  var tiles: TKUIMapTiles? = nil {
+    didSet {
+      guard tiles?.id != oldValue?.id else { return }
+      if let previous = tileOverlay {
+        mapView?.removeOverlay(previous)
+        tileOverlay = nil
+      }
+      if let tiles = self.tiles {
+        self.tileOverlay = self.buildTileOverlay(tiles: tiles)
+      }
+      
+      if let mapView = mapView {
+        if let overlay = self.tileOverlay, let tiles = tiles {
+          settingsToRestore = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
+        } else if let toRestore = settingsToRestore {
+          self.restore(toRestore, on: mapView)
+          settingsToRestore = nil
+        }
+      }
+    }
+  }
+  
+  private var tileOverlay: MKTileOverlay?
+  private var settingsToRestore: TKUIMapSettings?
   
   /// Cache of renderers, used to update styling when selection changes
   private var renderers: [WeakRenderers] = []
@@ -115,6 +147,10 @@ open class TKUIMapManager: TGMapManager {
   fileprivate let disposeBag = DisposeBag()
   private var dynamicDisposeBag: DisposeBag?
 
+  /// The level for adding regular overlays. Depends on wehther we have a tile-overlay, to make sure our overlays
+  /// are then on top - both otherwise they are as low as possible.
+  private var overlayLevel: MKOverlayLevel { tileOverlay != nil ? .aboveLabels : .aboveRoads }
+
   fileprivate var overlayPolygon: MKPolygon? {
     didSet {
       guard oldValue != overlayPolygon else { return }
@@ -126,7 +162,7 @@ open class TKUIMapManager: TGMapManager {
   public var overlays = [MKOverlay]() {
     didSet {
       mapView?.removeOverlays(oldValue)
-      mapView?.addOverlays(overlays, level: .aboveRoads)
+      mapView?.addOverlays(overlays, level: overlayLevel)
     }
   }
   
@@ -165,13 +201,16 @@ open class TKUIMapManager: TGMapManager {
     // Keep heading
     heading = mapView.camera.heading
     
-    // Add content
-    mapView.addOverlays(overlays)
-    mapView.addAnnotations(animatedAnnotations)
-    mapView.addAnnotations(dynamicAnnotations)
-    
     if #available(iOS 13.0, *) {
       mapView.pointOfInterestFilter = MKPointOfInterestFilter(excluding: [.publicTransport])
+    }
+
+    // Add content
+    mapView.addOverlays(overlays, level: overlayLevel)
+    mapView.addAnnotations(animatedAnnotations)
+    mapView.addAnnotations(dynamicAnnotations)
+    if let overlay = self.tileOverlay, let tiles = self.tiles {
+      settingsToRestore = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
     }
     
     // Fetching and updating polygons which can be slow
@@ -195,10 +234,18 @@ open class TKUIMapManager: TGMapManager {
   override open func cleanUp(_ mapView: MKMapView, animated: Bool) {
     removeOverlay(overlayPolygon)
     
+    if let tileOverlay = self.tileOverlay {
+      mapView.removeOverlay(tileOverlay)
+    }
+    if let toRestore = settingsToRestore {
+      self.restore(toRestore, on: mapView)
+      settingsToRestore = nil
+    }
+
     mapView.removeOverlays(overlays)
     mapView.removeAnnotations(dynamicAnnotations)
     removeAnnotations(withSameIDsAs: animatedAnnotations)
-    
+
     super.cleanUp(mapView, animated: animated)
   }
   
@@ -399,7 +446,8 @@ extension TKUIMapManager {
       
       renderer.selectionMode = selectionMode
       renderer.selectionStyle = style
-      renderer.lineDashPattern = polyline.route.routeDashPattern
+      renderer.lineDashPattern = tileOverlay != nil ? [10, 30] : polyline.route.routeDashPattern
+      renderer.fillDashBackground = tileOverlay == nil
       renderer.selectionIdentifier = polyline.route.routeIsTravelled ? polyline.route.selectionIdentifier : nil
       renderer.selectionHandler = { [weak self] in
         guard let target = self?.selectionIdentifier else { return nil}
@@ -415,6 +463,9 @@ extension TKUIMapManager {
       renderer.fillColor = .tkMapOverlay
       renderer.lineWidth = 0
       return renderer
+    
+    } else if let tileOverlay = overlay as? MKTileOverlay {
+      return MKTileOverlayRenderer(tileOverlay: tileOverlay)
     }
     
     return MKPolygonRenderer(overlay: overlay)

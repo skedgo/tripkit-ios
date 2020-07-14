@@ -140,6 +140,13 @@ public class TKUITimetableCard : TGTableCard {
     case .custom(let customTitle, _): (customTitle as? TKUISegmentTitleView)?.applyStyleToCloseButton(style)
     default: return
     }
+
+    if let knownMapManager = mapManager as? TKUIMapManager {
+      knownMapManager.attributionDisplayer = { [weak self] sources, sender in
+        let displayer = TKUIAttributionTableViewController(attributions: sources)
+        self?.controller?.present(displayer, inNavigator: true, preferredStyle: .popover, sender: sender)
+      }
+    }
   }
   
   override public func encode(with aCoder: NSCoder) {

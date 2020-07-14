@@ -135,6 +135,11 @@ public class TKUITripModeByModeCard: TGPageCard {
     
     // Little hack for starting with selecting the first page on the map, too
     didMoveToPage(index: actualInitialPage)
+
+    tripMapManager.attributionDisplayer = { [weak self] sources, sender in
+      let displayer = TKUIAttributionTableViewController(attributions: sources)
+      self?.controller?.present(displayer, inNavigator: true, preferredStyle: .popover, sender: sender)
+    }
   }
   
   public convenience init(mapManager: TKUITripMapManager) {

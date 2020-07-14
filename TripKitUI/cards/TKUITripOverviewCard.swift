@@ -75,6 +75,7 @@ public class TKUITripOverviewCard: TGTableCard {
     
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
     super.init(title: Loc.Trip(index: index.map { $0 + 1 }), mapManager: mapManager)
+    didInit()
   }
   
   public required convenience init?(coder: NSCoder) {
@@ -90,6 +91,7 @@ public class TKUITripOverviewCard: TGTableCard {
       : nil
     
     self.init(trip: trip, index: index)
+    didInit()
 
     zoomToTrip = true
   }
@@ -99,6 +101,15 @@ public class TKUITripOverviewCard: TGTableCard {
 
     if let index = index {
       aCoder.encode(index, forKey: "index")
+    }
+  }
+  
+  private func didInit() {
+    if let knownMapManager = mapManager as? TKUIMapManager {
+      knownMapManager.attributionDisplayer = { [weak self] sources, sender in
+        let displayer = TKUIAttributionTableViewController(attributions: sources)
+        self?.controller?.present(displayer, inNavigator: true, preferredStyle: .popover, sender: sender)
+      }
     }
   }
 
@@ -285,11 +296,8 @@ extension TKUITripOverviewCard {
     tableView.tableFooterView = footer
   }
   
-  private func presentAttributions(for sources: [TKAPI.DataAttribution], sender: Any?) {
-    
-    let attributor = TKUIAttributionTableViewController(attributions: sources)
-    attributor.delegate = self
-    
+  private func presentAttributions(for sources: [TKAPI.DataAttribution], sender: Any?) {   
+    let attributor = TKUIAttributionTableViewController(attributions: sources)    
     let navigator = UINavigationController(rootViewController: attributor)
     present(navigator, sender: sender)
   }
@@ -310,20 +318,6 @@ extension TKUITripOverviewCard {
       viewController.modalPresentationStyle = .currentContext
     }
     controller.present(viewController, animated: true)
-  }
-  
-}
-
-// MARK: TKUIAttributionTableViewControllerDelegate
-
-extension TKUITripOverviewCard: TKUIAttributionTableViewControllerDelegate {
-  
-  public func attributor(_ attributor: TKUIAttributionTableViewController, requestsWebsite url: URL) {
-    TKUITripOverviewCard.config.presentAttributionHandler?(self, attributor, url)
-  }
-  
-  public func requestsDismissal(attributor: TKUIAttributionTableViewController) {
-    attributor.presentingViewController?.dismiss(animated: true)
   }
   
 }

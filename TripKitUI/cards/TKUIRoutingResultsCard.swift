@@ -100,7 +100,7 @@ public class TKUIRoutingResultsCard: TGTableCard {
       mapManager: mapManager,
       initialPosition: initialPosition ?? Self.config.initialCardPosition
     )
-
+    
     didInit()
   }
   
@@ -151,6 +151,13 @@ public class TKUIRoutingResultsCard: TGTableCard {
       dismissButton?.setImage(styledCloseImage, for: .normal)
       dismissButton?.setTitle(nil, for: .normal)
     default: return
+    }
+    
+    if let knownMapManager = mapManager as? TKUIMapManager {
+      knownMapManager.attributionDisplayer = { [weak self] sources, sender in
+        let displayer = TKUIAttributionTableViewController(attributions: sources)
+        self?.controller?.present(displayer, inNavigator: true, preferredStyle: .popover, sender: sender)
+      }
     }
   }
   
