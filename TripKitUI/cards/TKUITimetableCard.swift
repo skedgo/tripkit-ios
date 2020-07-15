@@ -284,6 +284,10 @@ public class TKUITimetableCard : TGTableCard {
     // TODO: Add viewModel.embarkationStopAlerts
     
     // TODO: Add viewModel.error
+    
+    viewModel.error
+      .emit(onNext: { [weak self] in self?.handle($0) })
+      .disposed(by: disposeBag)
 
     // Interactions
     
@@ -409,6 +413,18 @@ extension TKUITimetableCard: TKUITimePickerSheetDelegate {
     controller?.dismiss(animated: true) {
       self.datePublisher.onNext(pickerSheet.selectedDate())
     }
+  }
+  
+}
+
+// MARK: - Error handling
+
+extension TKUITimetableCard {
+  
+  func handle(_ error: Error) {
+    let alertController = UIAlertController(title: Loc.ServerError, message: error.localizedDescription, preferredStyle: .alert)
+    alertController.addAction(UIAlertAction(title: Loc.OK, style: .default, handler: nil))
+    controller?.present(alertController, animated: true, completion: nil)
   }
   
 }
