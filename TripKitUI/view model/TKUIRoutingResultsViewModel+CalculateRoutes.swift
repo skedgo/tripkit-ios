@@ -81,7 +81,7 @@ extension TKUIRoutingResultsViewModel {
   
   private static func buildId(for builder: RouteBuilder, force: Bool = false) -> String {
     guard !force else { return UUID().uuidString }
-    var id: String = "\(builder.time.timeType.rawValue)-\(Int(builder.time.date.timeIntervalSince1970) % 60)"
+    var id: String = "\(builder.time.timeType.rawValue)-\(Int(builder.time.date.timeIntervalSince1970))"
     if let origin = builder.origin?.coordinate {
       id.append("\(Int(origin.latitude * 100_000)),\(Int(origin.longitude * 100_000))")
     }
