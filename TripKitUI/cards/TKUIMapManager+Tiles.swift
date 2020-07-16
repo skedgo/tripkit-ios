@@ -44,7 +44,7 @@ extension TKUIMapManager {
     }
   }
   
-  func accommodateTileOverlay(_ tileOverlay: MKTileOverlay, sources: [TKAPI.DataAttribution], on mapView: MKMapView) -> TKUIMapSettings {
+  func accommodateTileOverlay(_ tileOverlay: MKTileOverlay, sources: [TKAPI.DataAttribution], on mapView: MKMapView) -> (TKUIMapSettings, NSLayoutConstraint?) {
     mapView.addOverlay(tileOverlay, level: .aboveRoads) // so that our other overlays can be above it
     
     let toRestore = TKUIMapSettings(mapType: mapView.mapType)
@@ -56,20 +56,43 @@ extension TKUIMapManager {
       mapView.pointOfInterestFilter = .excludingAll
     }
     
-    if let attributionView = TKUIAttributionView.newView(sources) {
+    var attributionConstraint: NSLayoutConstraint?
+    if let attributionView = TKUIAttributionView.newView(sources, wording: .mapBy, alignment: .center) {
       attributionView.translatesAutoresizingMaskIntoConstraints = false
-      mapView.addSubview(attributionView)
+      attributionView.backgroundColor = .clear
+      
+      let container = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+      container.translatesAutoresizingMaskIntoConstraints = false
+      container.contentView.addSubview(attributionView)
+      container.clipsToBounds = true
+      container.layer.cornerRadius = 16
+      if #available(iOS 11.0, *) {
+        container.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+      }
+      
+      mapView.addSubview(container)
+      
+      let verticalConstraint = container.topAnchor.constraint(equalTo: mapView
+        .topAnchor, constant: 8)
+      
       NSLayoutConstraint.activate([
-        attributionView.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
-        attributionView.bottomAnchor.constraint(equalTo: mapView.bottomAnchor),
-        attributionView.leadingAnchor.constraint(greaterThanOrEqualTo: mapView.leadingAnchor)
+        container.topAnchor.constraint(equalTo: attributionView.topAnchor),
+        container.leadingAnchor.constraint(equalTo: attributionView.leadingAnchor),
+        container.bottomAnchor.constraint(equalTo: attributionView.bottomAnchor),
+        container.trailingAnchor.constraint(equalTo: attributionView.trailingAnchor),
+
+        container.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
+        verticalConstraint,
+        container.leadingAnchor.constraint(greaterThanOrEqualTo: mapView.leadingAnchor)
       ])
       
       let tapper = UITapGestureRecognizer(target: self, action: #selector(didTapAttribution))
       attributionView.addGestureRecognizer(tapper)
+      
+      attributionConstraint = verticalConstraint
     }
     
-    return toRestore
+    return (toRestore, attributionConstraint)
   }
   
   @objc

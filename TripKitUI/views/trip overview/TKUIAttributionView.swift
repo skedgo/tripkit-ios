@@ -15,11 +15,13 @@ public class TKUIAttributionView: UIView {
   public enum Alignment {
     case leading
     case trailing
+    case center
   }
 
   public enum Wording {
     case poweredBy
     case dataProvidedBy
+    case mapBy
   }
   
   @IBOutlet public weak var title: UITextView!
@@ -80,6 +82,10 @@ public class TKUIAttributionView: UIView {
     case .trailing:
       textView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 8).isActive = true
       trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8).isActive = true
+    case .center:
+      textView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 8).isActive = true
+      trailingAnchor.constraint(greaterThanOrEqualTo: imageView.trailingAnchor, constant: 8).isActive = true
+      textView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
   }
   
@@ -101,6 +107,7 @@ public class TKUIAttributionView: UIView {
       switch wording {
       case .poweredBy: plain = Loc.PoweredBy(title)
       case .dataProvidedBy: plain = Loc.DataProvided(by: title)
+      case .mapBy: plain = Loc.MapBy(title)
       }
       
       let attributedTitle = NSMutableAttributedString(string: plain)
@@ -123,12 +130,12 @@ public class TKUIAttributionView: UIView {
     return view
   }
   
-  public static func newView(_ sources: [TKAPI.DataAttribution], fitsIn view: UIView? = nil) -> TKUIAttributionView? {
+  public static func newView(_ sources: [TKAPI.DataAttribution], wording: Wording = .dataProvidedBy, fitsIn view: UIView? = nil, alignment: Alignment = .leading) -> TKUIAttributionView? {
     guard !sources.isEmpty else { return nil }
     
     let names = sources.map(\.provider.name).joined(separator: ", ")
 
-    let attributionView = newView(title: names, wording: .dataProvidedBy)
+    let attributionView = newView(title: names, alignment: alignment, wording: wording)
     
     if let containingView = view {
       attributionView.frame.size.width = containingView.frame.width
@@ -138,8 +145,8 @@ public class TKUIAttributionView: UIView {
     return attributionView
   }
   
-  public static func newView(_ attribution: TKAPI.DataAttribution, fitsIn view: UIView? = nil) -> TKUIAttributionView {
-    let attributionView = newView(title: attribution.provider.name, iconURL: attribution.provider.remoteIconURL, url: attribution.provider.website, wording: .poweredBy)
+  public static func newView(_ attribution: TKAPI.DataAttribution, wording: Wording = .poweredBy, fitsIn view: UIView? = nil, alignment: Alignment = .leading) -> TKUIAttributionView {
+    let attributionView = newView(title: attribution.provider.name, iconURL: attribution.provider.remoteIconURL, url: attribution.provider.website, alignment: alignment, wording: wording)
     
     if let containingView = view {
       attributionView.frame.size.width = containingView.frame.width
