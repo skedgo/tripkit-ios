@@ -133,8 +133,11 @@ private extension TKUITripMapManager {
     
     mapView?.showsTraffic = affectedByTraffic
     
+    let tiles = trip.segments.compactMap { $0.template?.mapTiles }
+    self.overlayLevel = tiles.isEmpty ? .aboveRoads : .aboveLabels
+    
     // If it's a single-modal trip with custom tiles, show them
-    if !trip.isMixedModal(ignoreWalking: true), let mainSegment = trip.mainSegment() as? TKSegment, let tiles = mainSegment.template?.mapTiles {
+    if !trip.isMixedModal(ignoreWalking: true), let tiles = tiles.first {
       self.tiles = tiles
     } else {
       self.tiles = nil

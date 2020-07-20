@@ -113,7 +113,13 @@ extension TKUIMapManager {
     }
     
     mapView.subviews
-      .compactMap({ $0 as? TKUIAttributionView })
+      .compactMap { subview -> UIView? in
+        if let visual = subview as? UIVisualEffectView, visual.contentView.subviews.contains(where: { $0 is TKUIAttributionView }) {
+          return visual
+        } else {
+          return nil
+        }
+      }
       .forEach { $0.removeFromSuperview() }
   }
   

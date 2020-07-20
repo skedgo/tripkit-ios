@@ -33,7 +33,6 @@ extension TKModeCoordinate: TKUIGlyphableAnnotation {
     #else
     return image
     #endif
-    
   }
   
   public var glyphImageURL: URL? {
