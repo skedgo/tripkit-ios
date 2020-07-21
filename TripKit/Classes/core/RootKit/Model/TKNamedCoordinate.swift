@@ -192,7 +192,12 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   
   @objc
   public required init?(coder aDecoder: NSCoder) {
-    coordinate = CLLocationCoordinate2D(latitude: aDecoder.decodeDouble(forKey: "latitude"), longitude: aDecoder.decodeDouble(forKey: "longitude"))
+    let latitude = aDecoder.decodeDouble(forKey: "latitude")
+    let longitude = aDecoder.decodeDouble(forKey: "longitude")
+    if abs(latitude) < 0.01, abs(longitude) < 0.01 {
+      return nil // possiblity from when they weren't safely encoded
+    }
+    coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     name = aDecoder.decodeObject(of: NSString.self, forKey: "name") as String?
     _address = aDecoder.decodeObject(of: NSString.self, forKey: "address") as String?
     locationID = aDecoder.decodeObject(of: NSString.self, forKey: "locationID") as String?
