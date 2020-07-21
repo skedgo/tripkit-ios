@@ -13,7 +13,7 @@ extension TKAPI {
     
     // information about the service
     public let serviceTripID: String
-    public let operatorID: String
+    public let operatorID: String?
     
     public let operatorName: String
     public let number: String?

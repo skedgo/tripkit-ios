@@ -85,27 +85,34 @@ open class TKUIMapManager: TGMapManager {
   var tiles: TKUIMapTiles? = nil {
     didSet {
       guard tiles?.id != oldValue?.id else { return }
+      
+      // clean up, including attribution
       if let previous = tileOverlay {
         mapView?.removeOverlay(previous)
         tileOverlay = nil
       }
-      if let tiles = self.tiles {
-        self.tileOverlay = self.buildTileOverlay(tiles: tiles)
+      if let mapView = mapView, let toRestore = settingsToRestore {
+        self.restore(toRestore, on: mapView)
+        settingsToRestore = nil
       }
       
-      if let mapView = mapView {
-        if let overlay = self.tileOverlay, let tiles = tiles {
-          settingsToRestore = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
-        } else if let toRestore = settingsToRestore {
-          self.restore(toRestore, on: mapView)
-          settingsToRestore = nil
+      // add new content
+      if let tiles = self.tiles {
+        self.tileOverlay = self.buildTileOverlay(tiles: tiles)
+
+        if let mapView = mapView, let overlay = self.tileOverlay {
+          (settingsToRestore, attributionConstraint) = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
         }
       }
+      
+      // update the renderers
+      updateOverlays(updateMode: .updateDashPatterns)
     }
   }
   
   private var tileOverlay: MKTileOverlay?
   private var settingsToRestore: TKUIMapSettings?
+  private var attributionConstraint: NSLayoutConstraint?
   
   /// Cache of renderers, used to update styling when selection changes
   private var renderers: [WeakRenderers] = []
@@ -113,20 +120,7 @@ open class TKUIMapManager: TGMapManager {
   /// The identifier for what should be drawn as selected on the map
   public var selectionIdentifier: String? {
     didSet {
-      guard let mapView = mapView else { return }
-      
-      // this updates the renderers
-      renderers.removeAll(where: { $0.renderer == nil })
-      renderers.forEach { $0.renderer?.setNeedsDisplay() }
-      
-      // updates visible views; new views updated from `mapView(_:didAdd:)`
-      let views = mapView.annotations(in: mapView.visibleMapRect)
-        .compactMap { $0 as? MKAnnotation }
-        .compactMap { mapView.view(for: $0) }
-      updateAnnotationsViewsForSelection(views)
-      
-      // give map a chance to itself, if needed (probably not)
-      mapView.setNeedsDisplay()
+      updateOverlays(updateMode: .updateSelection)
     }
   }
   
@@ -147,9 +141,9 @@ open class TKUIMapManager: TGMapManager {
   fileprivate let disposeBag = DisposeBag()
   private var dynamicDisposeBag: DisposeBag?
 
-  /// The level for adding regular overlays. Depends on wehther we have a tile-overlay, to make sure our overlays
-  /// are then on top - both otherwise they are as low as possible.
-  private var overlayLevel: MKOverlayLevel { tileOverlay != nil ? .aboveLabels : .aboveRoads }
+  /// The level for adding regular overlays. Note that any tile overlays will have `.aboveRoads`, so if you will use tile overlays
+  /// *and* regular overlays better to set this to `.aboveLabels`.
+  var overlayLevel: MKOverlayLevel = .aboveRoads
 
   fileprivate var overlayPolygon: MKPolygon? {
     didSet {
@@ -210,7 +204,8 @@ open class TKUIMapManager: TGMapManager {
     mapView.addAnnotations(animatedAnnotations)
     mapView.addAnnotations(dynamicAnnotations)
     if let overlay = self.tileOverlay, let tiles = self.tiles {
-      settingsToRestore = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
+      (settingsToRestore, attributionConstraint) = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
+      attributionConstraint?.constant = edgePadding.top + 8
     }
     
     // Fetching and updating polygons which can be slow
@@ -229,6 +224,10 @@ open class TKUIMapManager: TGMapManager {
         TKRegionOverlayHelper.shared.regionsPolygon(forceUpdate: true, completion: updateOverlay)
       })
       .disposed(by: disposeBag)
+  }
+  
+  override open func reactToNewEdgePadding(_ edgePadding: UIEdgeInsets) {
+    attributionConstraint?.constant = edgePadding.top + 8
   }
   
   override open func cleanUp(_ mapView: MKMapView, animated: Bool) {
@@ -393,6 +392,44 @@ extension TKUIMapManager {
 
 extension TKUIMapManager {
   
+  /// Helper to have weak references for renderers
+  private struct WeakRenderers {
+    weak var renderer: TKUIPolylineRenderer?
+    var routeDashPattern: [NSNumber]?
+  }
+  
+  private enum UpdateMode {
+    case updateSelection
+    case updateDashPatterns
+  }
+  
+  private func updateOverlays(updateMode: UpdateMode) {
+    guard let mapView = mapView else { return }
+    
+    // this updates the renderers
+    renderers.removeAll(where: { $0.renderer == nil })
+    
+    switch updateMode {
+    case .updateSelection:
+      // updates visible views; new views updated from `mapView(_:didAdd:)`
+      let views = mapView.annotations(in: mapView.visibleMapRect)
+        .compactMap { $0 as? MKAnnotation }
+        .compactMap { mapView.view(for: $0) }
+      updateAnnotationsViewsForSelection(views)
+    
+    case .updateDashPatterns:
+      renderers.forEach {
+        guard let renderer = $0.renderer else { return }
+        Self.style(renderer: renderer, onOverlay: tileOverlay != nil, dashPattern: $0.routeDashPattern)
+      }
+    }
+    
+    renderers.forEach { $0.renderer?.setNeedsDisplay() }
+    
+    // give map a chance to itself, if needed (probably not)
+    mapView.setNeedsDisplay()
+  }
+  
   open func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
     TKUIMapManagerHelper.adjustZOrder(views)
 
@@ -427,11 +464,6 @@ extension TKUIMapManager {
     return builder.build()
   }
   
-  /// Helper to have weak references for renderers
-  private struct WeakRenderers {
-    weak var renderer: TKUIPolylineRenderer?
-  }
-  
   open func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     
     if let geodesic = overlay as? MKGeodesicPolyline {
@@ -446,15 +478,14 @@ extension TKUIMapManager {
       
       renderer.selectionMode = selectionMode
       renderer.selectionStyle = style
-      renderer.lineDashPattern = tileOverlay != nil ? [10, 30] : polyline.route.routeDashPattern
-      renderer.fillDashBackground = tileOverlay == nil
       renderer.selectionIdentifier = polyline.route.routeIsTravelled ? polyline.route.selectionIdentifier : nil
       renderer.selectionHandler = { [weak self] in
-        guard let target = self?.selectionIdentifier else { return nil}
+        guard let target = self?.selectionIdentifier else { return nil }
         return $0 == target
       }
+      Self.style(renderer: renderer, onOverlay: tileOverlay != nil, dashPattern: polyline.route.routeDashPattern)
       
-      renderers.append(WeakRenderers(renderer: renderer))
+      renderers.append(WeakRenderers(renderer: renderer, routeDashPattern: polyline.route.routeDashPattern))
       
       return renderer
       
@@ -469,6 +500,12 @@ extension TKUIMapManager {
     }
     
     return MKPolygonRenderer(overlay: overlay)
+  }
+  
+  private static func style(renderer: TKUIPolylineRenderer, onOverlay: Bool, dashPattern: [NSNumber]?) {
+    renderer.lineCap = onOverlay ? .round : .square
+    renderer.lineDashPattern = onOverlay ? [10, 15] : dashPattern
+    renderer.fillDashBackground = !onOverlay
   }
   
   open func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {

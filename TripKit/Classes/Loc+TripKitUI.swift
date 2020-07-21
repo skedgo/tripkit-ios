@@ -57,7 +57,12 @@ extension Loc {
     let format = NSLocalizedString("Powered by %@", tableName: "TripKit", bundle: .tripKit, comment: "")
     return String(format: format, provider)
   }
-  
+
+  public static func MapBy(_ provider: String) -> String {
+    let format = NSLocalizedString("Map by %@", tableName: "TripKit", bundle: .tripKit, comment: "")
+    return String(format: format, provider)
+  }
+
   
   // MARK: - Routing
 
