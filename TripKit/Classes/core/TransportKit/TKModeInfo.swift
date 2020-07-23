@@ -112,8 +112,8 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
     aCoder.encode(remoteImageName, forKey: "remoteIcon")
     aCoder.encode(descriptor, forKey: "description")
     aCoder.encode(color, forKey: "color")
-    aCoder.encode(remoteIconIsTemplate, forKey: "remoteIconIsTemplate")
-    aCoder.encode(remoteIconIsBranding, forKey: "remoteIconIsBranding")
+    aCoder.encode(remoteIconIsTemplate ?? false, forKey: "remoteIconIsTemplate")
+    aCoder.encode(remoteIconIsBranding ?? false, forKey: "remoteIconIsBranding")
   }
   
   @objc
@@ -127,12 +127,19 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
     localImageName = aDecoder.decodeObject(of: NSString.self, forKey: "localIcon") as String?
     remoteImageName = aDecoder.decodeObject(of: NSString.self, forKey: "remoteIcon") as String?
     descriptor = aDecoder.decodeObject(of: NSString.self, forKey: "description") as String?
+    
     if let color = aDecoder.decodeObject(of: TKColor.self, forKey: "color") {
       rgbColor = TKAPI.RGBColor(for: color)
     } else {
       rgbColor = nil
     }
-    remoteIconIsTemplate = aDecoder.decodeBool(forKey: "remoteIconIsTemplate")
-    remoteIconIsBranding = aDecoder.decodeBool(forKey: "remoteIconIsBranding")
+
+    if remoteImageName != nil {
+      remoteIconIsTemplate = aDecoder.decodeBool(forKey: "remoteIconIsTemplate")
+      remoteIconIsBranding = aDecoder.decodeBool(forKey: "remoteIconIsBranding")
+    } else {
+      remoteIconIsTemplate = nil
+      remoteIconIsBranding = nil
+    }
   }
 }
