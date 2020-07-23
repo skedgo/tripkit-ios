@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, null_resettable) Trip *trip;
 @property (nonatomic, retain, nullable) Service *service;
 @property (nonatomic, retain, nullable) Vehicle *realTimeVehicle;
-@property (nonatomic, retain, nullable) NSSet *realTimeVehicleAlternatives;
+@property (nonatomic, retain, nullable) NSSet<Vehicle *> *realTimeVehicleAlternatives;
 
 #pragma mark Helper
 

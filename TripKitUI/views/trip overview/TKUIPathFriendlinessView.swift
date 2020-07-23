@@ -66,8 +66,8 @@ public class TKUIPathFriendlinessView: UIView {
   
   fileprivate func update() {
     guard
-      let template = self.segment?.template,
-      let totalMetres = template.metres?.doubleValue
+      let segment = segment,
+      let totalMetres = segment.distanceInMetres?.doubleValue
       else { return }
     
     guard totalMetres > 0 else {
@@ -75,13 +75,13 @@ public class TKUIPathFriendlinessView: UIView {
       return
     }
     
-    let friendlyMetres = template.metresFriendly?.doubleValue ?? Double(0)
+    let friendlyMetres = segment.distanceInMetresFriendly?.doubleValue ?? 0
     let friendlyRatio = friendlyMetres / totalMetres
     
-    let unfriendlyMetres = template.metresUnfriendly?.doubleValue ?? Double(0)
+    let unfriendlyMetres = segment.distanceInMetresUnfriendly?.doubleValue ?? 0
     let unfriendlyRatio = unfriendlyMetres / totalMetres
 
-    let dismountMetres = template.metresDismount?.doubleValue ?? Double(0)
+    let dismountMetres = segment.distanceInMetresDismount?.doubleValue ?? 0
     let dismountRatio = dismountMetres / totalMetres
 
     let unknownMetres = totalMetres - friendlyMetres - dismountMetres - unfriendlyMetres - 1 // -1 for rounding issues

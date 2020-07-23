@@ -82,7 +82,7 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   public func show(_ segment: TKSegment, animated: Bool, mode: TKUISegmentMode = .onSegment) {
     self.selectedSegment = segment
     
-    self.tiles = segment.template?.mapTiles
+    self.tiles = segment.mapTiles
     
     let annos = segment.annotationsToZoomToOnMap(mode: mode)
     zoom(to: annos, animated: animated)
@@ -133,7 +133,7 @@ private extension TKUITripMapManager {
     
     mapView?.showsTraffic = affectedByTraffic
     
-    let tiles = trip.segments.compactMap { $0.template?.mapTiles }
+    let tiles = trip.segments.compactMap(\.mapTiles)
     self.overlayLevel = tiles.isEmpty ? .aboveRoads : .aboveLabels
     
     // If it's a single-modal trip with custom tiles, show them

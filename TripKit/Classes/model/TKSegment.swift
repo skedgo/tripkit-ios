@@ -8,6 +8,425 @@
 
 import Foundation
 
+@objc
+public enum TKSegmentOrdering: Int {
+  case start   = 1
+  case regular = 2
+  case end     = 4
+}
+
+@objc
+public enum TKSegmentType: Int {
+  case unknown   = 0
+  case stationary
+  case scheduled
+  case unscheduled
+}
+
+public class TKSegment: NSObject {
+  @objc public let order: TKSegmentOrdering
+  @objc public let start: MKAnnotation?
+  @objc public let end: MKAnnotation?
+  
+  @objc public weak var previous: TKSegment?
+  @objc public weak var next: TKSegment?
+  
+  @objc public private(set) var trip: Trip! // practically nonnull, but can be nulled due to weak reference
+  let reference: SegmentReference?
+  var template: SegmentTemplate? { reference?.template() }
+  
+  private lazy var primaryLocationString: String? = TKSegmentBuilder._buildPrimaryLocationString(for: self)
+  
+  // MARK: - Initialisation
+  
+  @objc(initAsTerminal:atLocation:forTrip:)
+  public init(order: TKSegmentOrdering, location: MKAnnotation, trip: Trip) {
+    assert(order != .regular, "Terminal can't be of regular order")
+    
+    self.order = order
+    self.trip = trip
+    self.start = location
+    self.end = location
+    self.reference = nil
+    
+    super.init()
+  }
+
+  @objc(initWithReference:forTrip:)
+  public init(reference: SegmentReference, trip: Trip) {
+    self.order = .regular
+    self.trip = trip
+    self.reference = reference
+    
+    let template = reference.template()
+    assert(template != nil, "Template missing for \(reference)")
+    assert(template?.start != nil, "Template is missing start: \(String(describing: template))")
+    assert(template?.end != nil, "Template is missing end: \(String(describing: template))")
+    self.start = template?.start
+    self.end = template?.end
+    
+    super.init()
+  }
+  
+  
+  // MARK: - Inferred properties: Main
+  
+  @objc public internal(set) var departureTime: Date {
+    get {
+      // A segment might lose its trip, if the trip since got updated with
+      // real-time information and the segments got rebuild
+      guard trip != nil else { return Date() }
+
+      switch order {
+      case .start:    return trip.departureTime
+      case .regular:  return reference?.startTime ?? Date()
+      case .end:      return trip.arrivalTime
+      }
+    }
+    set {
+      switch order {
+      case .start:    trip.departureTime    = newValue
+      case .regular:  reference?.startTime  = newValue
+      case .end:      trip.arrivalTime      = newValue
+      }
+    }
+  }
+
+  @objc public internal(set) var arrivalTime: Date {
+    get {
+      // A segment might lose its trip, if the trip since got updated with
+      // real-time information and the segments got rebuild
+      guard trip != nil else { return Date() }
+
+      switch order {
+      case .start:    return trip.departureTime
+      case .regular:  return reference?.endTime ?? Date()
+      case .end:      return trip.arrivalTime
+      }
+    }
+    set {
+      switch order {
+      case .start:    trip.departureTime    = newValue
+      case .regular:  reference?.endTime    = newValue
+      case .end:      trip.arrivalTime      = newValue
+      }
+    }
+  }
+  
+  lazy var localRegions: [TKRegion] = {
+    guard let start = self.start?.coordinate, let end = self.end?.coordinate else { return [] }
+    return TKRegionManager.shared.localRegions(start: start, end: end)
+  }()
+  
+  /// The local region this segment starts in. Cannot be international and thus might be nil.
+  public var startRegion: TKRegion? { localRegions.first }
+
+  /// The local region this segment starts in. Cannot be international and thus might be nil.
+  public var endRegion: TKRegion? { localRegions.last }
+
+  /// the transport mode identifier that this segment is using (if any). Can return `nil` for stationary segments such as "leave your house" or "wait between two buses" or "park your car"
+  @objc public lazy var modeIdentifier: String? = template?.modeIdentifier
+  
+  @objc public lazy var modeInfo: TKModeInfo? = template?.modeInfo
+  
+  public var templateHashCode: Int { template?.hashCode?.intValue ?? 0 }
+  
+  public var color: TKColor {
+    if let color = service?.color {
+      return color
+    } else if let color = modeInfo?.color {
+      return color
+    } else if isPublicTransport {
+      return TKColor.darkGray // was 143, 139, 138
+    } else {
+      return TKColor.lightGray // was 214, 214, 214
+    }
+    
+  }
+  
+  /// A singe line instruction which is used on the map screen.
+  @objc public var singleLineInstruction: String? {
+    if let instruction = _singleLineInstruction { return instruction }
+    
+    var isTimeDependent: ObjCBool = false
+    let newString = TKSegmentBuilder._buildSingleLineInstruction(for: self, includingTime: true, includingPlatform: false, isTimeDependent: &isTimeDependent)
+    if isTimeDependent.boolValue {
+      // Don't cache, just return, as instructions are dynamic
+      return newString
+    } else {
+      _singleLineInstruction = newString
+      return newString
+    }
+  }
+  private var _singleLineInstruction: Optional<String?> = nil
+
+
+  public var singleLineInstructionWithoutTime: String? {
+    if let instruction = _singleLineInstructionWithoutTime { return instruction }
+    
+    var isTimeDependent: ObjCBool = false
+    let newString = TKSegmentBuilder._buildSingleLineInstruction(for: self, includingTime: false, includingPlatform: false, isTimeDependent: &isTimeDependent)
+    if isTimeDependent.boolValue {
+      // Don't cache, just return, as instructions are dynamic
+      return newString
+    } else {
+      _singleLineInstructionWithoutTime = newString
+      return newString
+    }
+  }
+  private var _singleLineInstructionWithoutTime: Optional<String?> = nil
+
+  @objc public var notes: String? {
+    if let notes = _notes { return notes }
+    guard let rawString = template?.notesRaw, !rawString.isEmpty else { return nil }
+    
+    let mutable = NSMutableString(string: rawString)
+    let isTimeDependent = TKSegmentBuilder._fill(inTemplates: mutable, for: self, inTitle: false, includingTime: true, includingPlatform: true)
+    let newNotes = mutable as String
+    if isTimeDependent {
+      return newNotes
+    } else {
+      _notes = newNotes
+      return newNotes
+    }
+  }
+  private var _notes: Optional<String?> = nil
+  
+  public var notesWithoutPlatforms: String? {
+    if let notesWithoutPlatforms = _notesWithoutPlatforms { return notesWithoutPlatforms }
+    guard let rawString = template?.notesRaw, !rawString.isEmpty else { return nil }
+    
+    let mutable = NSMutableString(string: rawString)
+    let isTimeDependent = TKSegmentBuilder._fill(inTemplates: mutable, for: self, inTitle: false, includingTime: true, includingPlatform: false)
+    let newNotes = mutable as String
+    if isTimeDependent {
+      return newNotes
+    } else {
+      _notesWithoutPlatforms = newNotes
+      return newNotes
+    }
+  }
+  private var _notesWithoutPlatforms: Optional<String?> = nil
+  
+  /// All alerts for this segment
+  @objc public lazy var alerts: [Alert] = {
+    guard
+      let reference = reference,
+      let hashCodes = reference.alertHashCodes,
+      let context = reference.managedObjectContext,
+      let start = start?.coordinate
+    else { return [] }
+    return Alert.fetchAlerts(withHashCodes: hashCodes, inTripKitContext: context, sortedByDistanceFrom: start)
+  }()
+  
+  public lazy var turnByTurnMode: TKTurnByTurnMode? = template?.turnByTurnMode
+  
+  public lazy var type: TKSegmentType? = template?.segmentType.flatMap { TKSegmentType(rawValue: $0.intValue) }
+  
+  @objc public var title: String? {
+    get { singleLineInstruction }
+    set { /* just for KVO */ }
+  }
+  
+  public var titleWithoutTime: String? { singleLineInstructionWithoutTime }
+  
+
+  // MARK: - Inferred properties: Simple
+  
+  @objc public var isContinuation: Bool { template?.isContinuation ?? false }
+  @objc public var isWalking: Bool { template?.isWalking ?? false }
+  @objc public var isWheelchair: Bool { template?.isWheelchair ?? false }
+  @objc public var isCycling: Bool { template?.isCycling ?? false }
+  @objc public var isDriving: Bool { template?.isDriving ?? false }
+  @objc public var isFlight: Bool { template?.isFlight ?? false }
+  @objc public var hasCarParks: Bool { template?.hasCarParks ?? false }
+  @objc public var isPlane: Bool { TKTransportModes.modeIdentifierIsFlight(modeIdentifier ?? "") }
+  @objc public var isPublicTransport: Bool { template?.isPublicTransport ?? false }
+  @objc public var isSelfNavigating: Bool { template?.isSelfNavigating ?? false }
+  @objc public var isAffectedByTraffic: Bool { template?.isAffectedByTraffic ?? false }
+  @objc public var isSharedVehicle: Bool { template?.isSharedVehicle ?? false }
+  @objc public var isStationary: Bool { order != .regular || template?.isStationary ?? true }
+
+  @objc public var durationWithoutTraffic: TimeInterval { template?.durationWithoutTraffic?.doubleValue ?? 0 }
+
+  @objc public var distanceInMetres: NSNumber? { template?.metres }
+  @objc public var distanceInMetresFriendly: NSNumber? { template?.metresFriendly }
+  @objc public var distanceInMetresUnfriendly: NSNumber? { template?.metresUnfriendly }
+  @objc public var distanceInMetresDismount: NSNumber? { template?.metresDismount }
+
+  @objc public var _rawAction: String? { template?.action }
+
+  public var bearing: NSNumber? { template?.bearing }
+  public lazy var mapTiles: TKMapTiles? = template?.mapTiles
+  
+  // MARK: - Inferred properties: Shapes and visits
+  
+  private lazy var shapes = (template?.shapes as? Set<Shape>) ?? []
+  
+  @objc public lazy var sortedShapes: [Shape] = { shapes.sorted { $0.index < $1.index } }()
+  
+  /// Dictionary of stop code to bool of which stops along a service this segment is travelling along.
+  private var segmentVisits: [String: Bool] {
+    if let existing = _segmentVisits { return existing }
+    _segmentVisits = TKSegmentBuilder._buildSegmentVisits(for: self)?.mapValues { $0.boolValue }
+    return _segmentVisits ?? [:]
+  }
+  private var _segmentVisits: [String: Bool]? = nil
+  
+  @objc(usesVisit:)
+  public func uses(_ visit: StopVisits) -> Bool {
+    if let visits = _segmentVisits {
+      let visitInfo = visits[visit.stop.stopCode]
+      assert(visitInfo != nil, "Asked for unrelated stop. Not recommended.")
+      return visitInfo ?? false
+    } else {
+      return true // be optimistic while we haven't loaded the details yet
+    }
+  }
+  
+  @objc(shouldShowVisit:)
+  public func shouldShow(_ visit: StopVisits) -> Bool {
+    // commented out the following as it looks a bit
+    // weird if when we have bus => walk => bus and
+    // only the first bus => walk gets a dot
+    //  if ([TKLocationHelper coordinate:[visit coordinate]
+    //                            isNear:[self coordinate]]) {
+    //    return NO; // don't show the visit where we get on
+    //  }
+
+    if let visits = _segmentVisits {
+      return visits[visit.stop.stopCode] != nil
+    } else {
+      return true // be optimistic while we haven't loaded the details yet
+    }
+  }
+  
+  /// Checks if the provided visit matches this segment. This is not just for where the visit is used by this segment, but also for the parts before and after. This call deals with continuations and if the visit is part of a continuation, the visit is still considered to match this segment.
+  /// - Parameter visit: The visit to match to this segment.
+  /// - Returns: If the provided visit is matching this segment.
+  public func matches(_ visit: StopVisits) -> Bool {
+    var segment: TKSegment? = self
+    let serviceCodeToMatch = visit.service.code
+    while segment != nil {
+      if serviceCodeToMatch == segment?.service?.code {
+        return true
+      }
+      segment = segment?.next
+      guard let isContinuation = segment?.isContinuation, isContinuation else { return false }
+    }
+    return false
+  }
+  
+
+  // MARK: - Inferred properties: Real-time
+  
+  @objc public var timesAreRealTime: Bool { reference?.timesAreRealTime ?? false }
+
+  @objc public var realTimeVehicle: Vehicle? { service?.vehicle ?? reference?.realTimeVehicle }
+  
+  @objc public var realTimeAlternativeVehicles: [Vehicle] {
+    reference?.realTimeVehicleAlternatives.flatMap(Array.init)
+      ?? [] // Not showing alternatives for public transport
+  }
+  
+  @objc public var isImpossible: Bool {
+    guard order == .regular else { return false }
+    if duration(includingContinuation: false) < 0 { return true }
+    
+    if let next = self.next {
+      let margin: TimeInterval = 60
+      return next.departureTime.addingTimeInterval(margin) < arrivalTime
+    } else {
+      return false
+    }
+  }
+  
+
+  // MARK: - Inferred properties: Public transport
+  
+  @objc public var service: Service? { reference?.service }
+  @objc public var frequency: NSNumber? { service?.frequency }
+  @objc public var isCanceled: Bool { service?.isCanceled ?? false }
+  @objc public var scheduledServiceNumber: String? { service?.number }
+  @objc public var scheduledServiceCode: String? { service?.code }
+  @objc public lazy var scheduledStartStopCode: String? = template?.scheduledStartStopCode
+  @objc public lazy var scheduledEndStopCode: String? = template?.scheduledEndStopCode
+  @objc public lazy var scheduledStartPlatform: String? = reference?.departurePlatform
+  @objc public lazy var scheduledEndPlatform: String? = reference?.arrivalPlatform
+  @objc public lazy var scheduledTimetableStartTime: Date? = reference?.timetableStartTime
+  @objc public lazy var scheduledTimetableEndTime: Date? = reference?.timetableEndTime
+  @objc public lazy var ticketWebsiteURLString: String? = reference?.ticketWebsiteURLString
+  @objc public lazy var smsMessage: String? = template?.smsNumber
+  @objc public lazy var smsNumber: String? = template?.smsNumber
+
+  @objc public var embarkation: StopVisits? {
+    return service?.sortedVisits.first { visit in
+      return self.segmentVisits[visit.stop.stopCode] == true
+    }
+  }
+  
+  @objc public var disembarkation: StopVisits? {
+    return service?.sortedVisits.reversed().first { visit in
+      return self.segmentVisits[visit.stop.stopCode] == true
+    }
+  }
+  
+  @objc public var scheduledServiceStops: Int { reference?.serviceStops ?? 0 }
+  
+  
+  // MARK: - Inferred properties: Booking
+  
+  private lazy var bookingData: BookingData? = reference?.bookingData
+
+  @objc public var bookingTitle: String? { bookingData?.title }
+  public var bookingInternalURL: URL? { bookingData?.url }
+  public var bookingQuickInternalURL: URL? { bookingData?.quickBookingsUrl }
+  public var bookingExternalActions: [String]? { bookingData?.externalActions }
+  public var bookingConfirmation: TKBooking.Confirmation? { bookingData?.confirmation }
+  
+  // MARK: - Inferred properties: Shared vehicles
+  
+  public lazy var sharedVehicleData: NSDictionary? = reference?.sharedVehicleData
+}
+
+extension TKSegment: MKAnnotation {
+  @objc public var subtitle: String? { primaryLocationString }
+  @objc public var coordinate: CLLocationCoordinate2D { start?.coordinate ?? .invalid }
+}
+
+// MARK: - Helper methods
+
+extension TKSegment {
+  
+  @objc(durationIncludingContinuation:)
+  public func duration(includingContinuation: Bool) -> TimeInterval {
+    let segment = includingContinuation ? finalSegmentIncludingContinuation() : self
+    return segment.arrivalTime.timeIntervalSince(departureTime)
+  }
+  
+  @objc
+  public func finalSegmentIncludingContinuation() -> TKSegment {
+    var segment: TKSegment? = self
+    var next = segment?.next
+    while next != nil && next!.isContinuation {
+      segment = next
+      next = segment?.next
+    }
+    return segment ?? self
+  }
+  
+  @objc
+  public func originalSegmentIncludingContinuation() -> TKSegment {
+    var segment: TKSegment? = self
+    var previous = segment?.previous
+    while previous != nil && previous!.isContinuation {
+      segment = previous
+      previous = segment?.previous
+    }
+    return segment ?? self
+  }
+}
+
 extension TKSegment {
   
   public var index: Int {
@@ -40,13 +459,6 @@ extension TKSegment {
     
     // Passed all checks
     return true
-  }
-  
-  
-  @objc public func determineRegions() -> [TKRegion] {
-    guard let start = self.start?.coordinate, let end = self.end?.coordinate else { return [] }
-    
-    return TKRegionManager.shared.localRegions(start: start, end: end)
   }
   
   
@@ -86,69 +498,7 @@ extension TKSegment {
     }
   }
   
-  /// Gets the first alert that requires reroute
-  @objc public var reroutingAlert: Alert? {
-    return alertsWithAction().first { !$0.stopsExcludedFromRouting.isEmpty }
-  }
   
-  public var turnByTurnMode: TKTurnByTurnMode? {
-    return template?.turnByTurnMode
-  }
-  
-  public var type: TKSegmentType? {
-    return template?.segmentType.flatMap { TKSegmentType(rawValue: $0.intValue) }
-  }
-  
-}
-
-// MARK: - Public transport
-
-extension TKSegment {
-  
-  @objc public var scheduledStartStopCode: String? { template?.scheduledStartStopCode }
-
-  @objc public var scheduledEndStopCode: String? { template?.scheduledEndStopCode }
-
-  @objc public var scheduledStartPlatform: String? { reference?.departurePlatform }
-  
-  @objc public var scheduledEndPlatform: String? { reference?.arrivalPlatform }
-  
-  public var scheduledTimetableStartTime: Date? { reference?.timetableStartTime }
-
-  public var scheduledTimetableEndTime: Date? { reference?.timetableEndTime }
-  
-  public var ticketWebsiteURLString: String? { reference?.ticketWebsiteURLString }
-
-  public var embarkation: StopVisits? {
-    return service?.sortedVisits.first { visit in
-      return self.segmentVisits()[visit.stop.stopCode]?.boolValue == true
-    }
-  }
-  
-  public var disembarkation: StopVisits? {
-    return service?.sortedVisits.reversed().first { visit in
-      return self.segmentVisits()[visit.stop.stopCode]?.boolValue == true
-    }
-  }
-  
-  @objc public var scheduledServiceStops: Int { reference?.serviceStops ?? 0 }
-  
-}
-
-// MARK: - Booking
-
-extension TKSegment {
-
-  @objc public var bookingTitle: String? { reference?.bookingData?.title }
-  
-  public var bookingInternalURL: URL? { reference?.bookingData?.url }
-  
-  public var bookingQuickInternalURL: URL? { reference?.bookingData?.quickBookingsUrl }
-  
-  public var bookingExternalActions: [String]? { reference?.bookingData?.externalActions }
-  
-  public var bookingConfirmation: TKBooking.Confirmation? { reference?.bookingData?.confirmation }
-
 }
 
 // MARK: - Path info
@@ -212,138 +562,6 @@ extension TKSegment {
   
 }
 
-
-// MARK: - Image helpers
-
-extension TKSegment {
-  
-  fileprivate func image() -> TKImage? {
-    var localImageName = modeInfo?.localImageName
-    
-    if trip.showNoVehicleUUIDAsLift && privateVehicleType == .car && reference?.vehicleUUID == nil {
-      localImageName = "car-pool"
-    }
-    guard let imageName = localImageName else { return nil }
-    
-    if let specificImage = TKStyleManager.image(forModeImageName: imageName) {
-      return specificImage
-    
-    } else if let modeIdentifier = modeIdentifier {
-      let genericImageName = TKTransportModes.modeImageName(forModeIdentifier: modeIdentifier)
-      return TKStyleManager.image(forModeImageName: genericImageName)
-
-    } else {
-      return nil
-    }
-  }
-
-  fileprivate func imageURL(for iconType: TKStyleModeIconType) -> URL? {
-    if iconType == .vehicle, let icon = realTimeVehicle?.icon {
-      return TKServer.imageURL(iconFileNamePart: icon, iconType: iconType)
-    } else {
-      return modeInfo?.imageURL(type: iconType)
-    }
-  }
-}
-
-
-
-
-// MARK: - TKTripSegment
-
-extension TKSegment: TKTripSegment {
-  
-  public var tripSegmentTimeZone: TimeZone? {
-    return timeZone
-  }
-  
-  public var tripSegmentModeImage: TKImage? {
-    return image()
-  }
-  
-  public var tripSegmentModeInfo: TKModeInfo? {
-    return modeInfo
-  }
-  
-  public var tripSegmentInstruction: String {
-    guard let rawString = template?.miniInstruction?.instruction else { return "" }
-    let mutable = NSMutableString(string: rawString)
-    fill(inTemplates: mutable, inTitle: true, includingTime: true, includingPlatform: true)
-    return mutable as String
-  }
-  
-  public var tripSegmentDetail: String? {
-    if let rawString = template?.miniInstruction?.detail {
-      let mutable = NSMutableString(string: rawString)
-      fill(inTemplates: mutable, inTitle: true, includingTime: true, includingPlatform: true)
-      return mutable as String
-    } else {
-      return nil
-    }
-  }
-  
-  public var tripSegmentTimesAreRealTime: Bool {
-    return timesAreRealTime
-  }
-  
-  public var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility {
-    return self.wheelchairAccessibility ?? .unknown
-  }
-  
-  public var tripSegmentFixedDepartureTime: Date? {
-    if isPublicTransport {
-      if let frequency = frequency?.intValue, frequency > 0 {
-        return nil
-      } else {
-        return departureTime
-      }
-    } else {
-      return nil
-    }
-  }
-  
-  public var tripSegmentModeImageURL: URL? {
-    return imageURL(for: .listMainMode)
-  }
-  
-  public var tripSegmentModeImageIsTemplate: Bool {
-    guard let modeInfo = modeInfo else { return false }
-    return modeInfo.remoteImageIsTemplate || modeInfo.identifier.map(TKRegionManager.shared.remoteImageIsTemplate) ?? false
-  }
-  
-  public var tripSegmentModeImageIsBranding: Bool {
-    return modeInfo?.remoteImageIsBranding ?? false
-  }
-  
-  public var tripSegmentModeInfoIconType: TKInfoIconType {
-    let modeAlerts = alerts()
-      .filter { $0.isForMode }
-      .sorted { $0.alertSeverity.rawValue > $1.alertSeverity.rawValue }
-
-    return modeAlerts.first?.infoIconType ?? .none
-  }
-
-  public var tripSegmentSubtitleIconType: TKInfoIconType {
-    let nonModeAlerts = alerts()
-      .filter { !$0.isForMode }
-      .sorted { $0.alertSeverity.rawValue > $1.alertSeverity.rawValue }
-
-    return nonModeAlerts.first?.infoIconType ?? .none
-  }
-
-}
-
-extension Alert {
-  fileprivate var isForMode: Bool {
-    if idService != nil {
-      return true
-    } else if location != nil {
-      return false
-    } else {
-      return idStopCode != nil
-    }
-  }
-}
 
 // MARK: - UIActivityItemSource
 

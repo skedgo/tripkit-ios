@@ -38,6 +38,20 @@ extension DataAttachable {
     }
   }
   
+  func decodePrimitive<T>(_ type: T.Type, key: String) -> T? where T : Decodable {
+    return decode([T].self, key: key)?.first
+  }
+  
+  func encodePrimitive<T>(_ value: T?, key: String) where T : Encodable {
+    if let value = value {
+      return encode([value], key: key)
+    } else {
+      let data = dataDictionary
+      data[key] = nil
+      self.dataDictionary = data
+    }
+  }
+  
   func decodeCoding<T>(_ type: T.Type, key: String) -> T? where T : NSCoding {
     guard let data = dataDictionary[key] as? Data else { return nil }
     return data as? T
@@ -61,6 +75,7 @@ extension DataAttachable {
           ofClasses: [
             NSDictionary.self,
             NSArray.self,
+            NSMutableData.self,
             NSDate.self // timetable start + end date
           ],
           from: data) as? NSDictionary

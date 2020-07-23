@@ -9,10 +9,7 @@
 @import Foundation;
 @import CoreData;
 
-#import "TKSegment.h"
-
-
-@class Alert, TKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
+@class Alert, TKSegment, TKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 
 @interface Trip : NSManagedObject {
 }

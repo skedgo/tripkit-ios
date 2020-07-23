@@ -12,7 +12,7 @@ extension Trip: DataAttachable {}
 
 extension Trip {
   @objc public var bundleId: String? {
-    get { decode(String.self, key: "bundleId") }
-    set { encode(newValue, key: "bundleId") }
+    get { decodePrimitive(String.self, key: "bundleId") }
+    set { encodePrimitive(newValue, key: "bundleId") }
   }
 }

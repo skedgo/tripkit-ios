@@ -54,8 +54,9 @@ public class TKRegionOverlayHelper: NSObject {
         // Ignore callbacks for since outdated regions (e.g., switching servers quickly)
         guard calculationToken == self.calculationToken else { return }
         
-        // create outside polygin (to show which area we cover)
-        TKRegionOverlayHelper.savePolygonsToCacheFile(regionPolygons.compactMap { $0 as? (NSCoding & MKPolygon) })
+        // create outside polygon (to show which area we cover)
+        let encodable = regionPolygons.map(EncodablePolygon.init)
+        TKRegionOverlayHelper.savePolygonsToCacheFile(encodable)
         let overlay = MKPolygon(rectangle: .world, interiorPolygons: regionPolygons)
         for callback in self.callbacks {
           callback(overlay)
@@ -81,10 +82,55 @@ extension MKPolygon {
       MKMapPoint(x: rectangle.maxX, y: rectangle.maxY),
       MKMapPoint(x: rectangle.maxX, y: rectangle.minY),
     ]
-    
     self.init(points: points, count: points.count, interiorPolygons: interiorPolygons)
   }
   
+}
+
+class EncodablePolygon: NSObject, NSSecureCoding {
+  let polygon: MKPolygon
+  
+  init(polygon: MKPolygon) {
+    self.polygon = polygon
+    super.init()
+  }
+  
+  @objc static var supportsSecureCoding: Bool { true }
+  
+  @objc
+  required init?(coder aDecoder: NSCoder) {
+    guard
+      let degrees = aDecoder.decodeObject(of: [NSNumber.self, NSArray.self], forKey: "degrees") as? [NSNumber]
+      else { return nil }
+    
+    let coordinates = (0..<(degrees.count / 2))
+      .map { CLLocationCoordinate2D(latitude: degrees[2*$0].doubleValue, longitude: degrees[2*$0 + 1].doubleValue) }
+    
+    let interiorPolygons: [MKPolygon]?
+    if let interiors = aDecoder.decodeObject(of: [EncodablePolygon.self, NSArray.self], forKey: "interiors") as? [EncodablePolygon] {
+      interiorPolygons = interiors.map(\.polygon)
+    } else {
+      interiorPolygons = nil
+    }
+    
+    self.polygon = MKPolygon(coordinates: coordinates, count: coordinates.count, interiorPolygons: interiorPolygons)
+  }
+  
+  @objc(encodeWithCoder:)
+  func encode(with coder: NSCoder) {
+    var coordinates = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: polygon.pointCount)
+    let range = NSRange(location: 0, length: polygon.pointCount)
+    polygon.getCoordinates(&coordinates, range: range)
+    
+    let degrees = coordinates
+      .flatMap { [$0.latitude, $0.longitude] }
+      .map(NSNumber.init)
+    coder.encode(degrees, forKey: "degrees")
+    
+    if let interiors = polygon.interiorPolygons {
+      coder.encode(interiors.map(EncodablePolygon.init), forKey: "interiors")
+    }
+  }
 }
 
 // MARK: - Caching on disk
@@ -109,34 +155,37 @@ extension TKRegionOverlayHelper {
       else { return nil }
     
     do {
-      let unarchived = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, NSDictionary.self, MKPolygon.self], from: data) as? [String: AnyHashable]
+      let unarchiver = try NSKeyedUnarchiver(forReadingFrom: data)
+      unarchiver.requiresSecureCoding = false
+      
+      let regionsHash = unarchiver.decodeObject(of: NSNumber.self, forKey: "regionsHash") as NSNumber?
       guard
-        let regionsHash = (unarchived?["regionsHash"] as? NSNumber)?.intValue,
-        let polygons = unarchived?["polygons"] as? [MKPolygon],
-        regionsHash == TKRegionManager.shared.regionsHash?.intValue
+        let hash = regionsHash?.intValue,
+        hash == TKRegionManager.shared.regionsHash?.intValue
         else { return nil }
       
-      return polygons
+      
+      let wrappedPolygons = unarchiver.decodeObject(of: [EncodablePolygon.self, NSArray.self], forKey: "polygons") as? [EncodablePolygon]
+      return wrappedPolygons.map { $0.map(\.polygon) }
+      
     } catch {
-      assertionFailure()
+      assertionFailure("Unexpected error: \(error)")
       return nil
     }
   }
   
-  private static func savePolygonsToCacheFile(_ polygons: [MKPolygon & NSCoding]) {
+  private static func savePolygonsToCacheFile(_ polygons: [EncodablePolygon]) {
     guard
       let cacheURL = TKRegionOverlayHelper.cacheURL,
       !polygons.isEmpty,
       let regionsHash = TKRegionManager.shared.regionsHash
       else { return }
     
-    let wrapped: [String: Any] = [
-      "polygons": polygons,
-      "regionsHash": regionsHash
-    ]
     do {
-      let data = try NSKeyedArchiver.archivedData(withRootObject: wrapped, requiringSecureCoding: false)
-      try data.write(to: cacheURL)
+      let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+      archiver.encode(polygons, forKey: "polygons")
+      archiver.encode(regionsHash, forKey: "regionsHash")
+      try archiver.encodedData.write(to: cacheURL)
     } catch {
       assertionFailure()
     }

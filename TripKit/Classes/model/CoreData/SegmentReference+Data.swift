@@ -34,18 +34,18 @@ extension SegmentReference {
   }
 
   public var arrivalPlatform: String? {
-    get { decode(String.self, key: "arrivalPlatform") }
-    set { encode(newValue, key: "arrivalPlatform") }
+    get { decodePrimitive(String.self, key: "arrivalPlatform") }
+    set { encodePrimitive(newValue, key: "arrivalPlatform") }
   }
 
   public var departurePlatform: String? {
-    get { decode(String.self, key: "departurePlatform") }
-    set { encode(newValue, key: "departurePlatform") }
+    get { decodePrimitive(String.self, key: "departurePlatform") }
+    set { encodePrimitive(newValue, key: "departurePlatform") }
   }
   
   var serviceStops: Int? {
-    get { decode(Int.self, key: "serviceStops") }
-    set { encode(newValue, key: "serviceStops") }
+    get { decodePrimitive(Int.self, key: "serviceStops") }
+    set { encodePrimitive(newValue, key: "serviceStops") }
   }
 
   public var sharedVehicleData: NSDictionary? {
@@ -59,23 +59,23 @@ extension SegmentReference {
   }
 
   public var ticketWebsiteURLString: String? {
-    get { decode(String.self, key: "ticketWebsiteURL") }
-    set { encode(newValue, key: "ticketWebsiteURL") }
+    get { decodePrimitive(String.self, key: "ticketWebsiteURL") }
+    set { encodePrimitive(newValue, key: "ticketWebsiteURL") }
   }
 
   public var timetableEndTime: Date? {
-    get { decode(Date.self, key: "timetableEndTime") }
-    set { encode(newValue, key: "timetableEndTime") }
+    get { decodePrimitive(Date.self, key: "timetableEndTime") }
+    set { encodePrimitive(newValue, key: "timetableEndTime") }
   }
 
   public var timetableStartTime: Date? {
-    get { decode(Date.self, key: "timetableStartTime") }
-    set { encode(newValue, key: "timetableStartTime") }
+    get { decodePrimitive(Date.self, key: "timetableStartTime") }
+    set { encodePrimitive(newValue, key: "timetableStartTime") }
   }
 
   @objc public var vehicleUUID: String? {
-    get { decode(String.self, key: "vehicleUUID") }
-    set { encode(newValue, key: "vehicleUUID") }
+    get { decodePrimitive(String.self, key: "vehicleUUID") }
+    set { encodePrimitive(newValue, key: "vehicleUUID") }
   }
 }
 

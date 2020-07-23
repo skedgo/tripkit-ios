@@ -33,7 +33,7 @@ extension SegmentTemplate {
   }
 
   public var turnByTurnMode: TKTurnByTurnMode? {
-    get { decode(TKTurnByTurnMode.self, key: "turnByTurnMode") }
-    set { encode(newValue, key: "turnByTurnMode") }
+    get { decodePrimitive(TKTurnByTurnMode.self, key: "turnByTurnMode") }
+    set { encodePrimitive(newValue, key: "turnByTurnMode") }
   }
 }
