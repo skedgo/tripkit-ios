@@ -192,20 +192,40 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   
   @objc
   public required init?(coder aDecoder: NSCoder) {
-    let latitude = aDecoder.decodeDouble(forKey: "latitude")
-    let longitude = aDecoder.decodeDouble(forKey: "longitude")
-    if abs(latitude) < 0.01, abs(longitude) < 0.01 {
-      return nil // possiblity from when they weren't safely encoded
+    if let data = aDecoder.decodeData() {
+      // For backwards compatibility
+      do {
+        let decoded = try JSONDecoder().decode(TKNamedCoordinate.self, from: data)
+        self.coordinate = decoded.coordinate
+        self.name = decoded.name
+        self._address = decoded.address
+        self.locationID = decoded.locationID
+        self.clusterIdentifier = decoded.clusterIdentifier
+        self.data = decoded.data
+        self.isSuburb = decoded.isSuburb
+        self.isDraggable = decoded.isDraggable
+      } catch {
+        assertionFailure("Couldn't decode due to: \(error)")
+        return nil
+      }
+
+    } else {
+      // The new way, supporting secure coding
+      let latitude = aDecoder.decodeDouble(forKey: "latitude")
+      let longitude = aDecoder.decodeDouble(forKey: "longitude")
+      if abs(latitude) < 0.01, abs(longitude) < 0.01 {
+        return nil // possiblity from when they weren't safely encoded
+      }
+      coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+      name = aDecoder.decodeObject(of: NSString.self, forKey: "name") as String?
+      _address = aDecoder.decodeObject(of: NSString.self, forKey: "address") as String?
+      locationID = aDecoder.decodeObject(of: NSString.self, forKey: "locationID") as String?
+      clusterIdentifier = aDecoder.decodeObject(of: NSString.self, forKey: "clusterIdentifier") as String?
+      _placemark = aDecoder.decodeObject(of: CLPlacemark.self, forKey: "placemark")
+      isDraggable = aDecoder.decodeBool(forKey: "isDraggable")
+      isSuburb = aDecoder.decodeBool(forKey: "isSuburb")
+      data = aDecoder.decodeObject(of: [NSDictionary.self], forKey: "data") as? [String: Any] ?? [:]
     }
-    coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    name = aDecoder.decodeObject(of: NSString.self, forKey: "name") as String?
-    _address = aDecoder.decodeObject(of: NSString.self, forKey: "address") as String?
-    locationID = aDecoder.decodeObject(of: NSString.self, forKey: "locationID") as String?
-    clusterIdentifier = aDecoder.decodeObject(of: NSString.self, forKey: "clusterIdentifier") as String?
-    _placemark = aDecoder.decodeObject(of: CLPlacemark.self, forKey: "placemark")
-    isDraggable = aDecoder.decodeBool(forKey: "isDraggable")
-    isSuburb = aDecoder.decodeBool(forKey: "isSuburb")
-    data = aDecoder.decodeObject(of: [NSDictionary.self], forKey: "data") as? [String: Any] ?? [:]
   }
   
   @objc(encodeWithCoder:)
