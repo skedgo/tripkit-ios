@@ -482,7 +482,7 @@
   }
   
   // use our default parameters and append those from the URL
-  NSMutableDictionary *paras = [TKSettings defaultDictionary];
+  NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithDictionary:[TKSettings config]];
   NSString *query = url.query;
   for (NSString *option in [query componentsSeparatedByString:@"&"]) {
     NSArray *pair = [option componentsSeparatedByString:@"="];
@@ -637,8 +637,8 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
                                            bestOnly:(BOOL)bestOnly
                                        withASAPTime:(NSDate *)ASAPTime
 {
-	NSMutableDictionary *paras = [TKSettings defaultDictionary];
-	
+  NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithDictionary:[TKSettings config]];
+
   NSArray *sortedModes = [[modeIdentifiers allObjects] sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull mode1, NSString * _Nonnull mode2) {
     return [mode1 compare:mode2];
   }];

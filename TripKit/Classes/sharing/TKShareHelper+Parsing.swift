@@ -64,8 +64,8 @@ public extension TKShareHelper {
       case "flng":  flng = Double(value)
       case "type":  type = Int(value)
       case "time":
-        guard let since1970 = TimeInterval(value) else { continue }
-        time = Date(timeIntervalSince1970: since1970)
+        guard let date = TKParserHelper.parseDate(value) else { continue }
+        time = date
       case "modes", "mode":
         modes.append(value)
       default:

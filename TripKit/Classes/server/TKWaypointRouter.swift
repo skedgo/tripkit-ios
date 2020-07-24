@@ -108,7 +108,7 @@ extension TKWaypointRouter {
     let leaveAt = departure > now ? departure : now
     
     var paras = [String: Any]()
-    paras["config"]   = TKSettings.defaultDictionary()
+    paras["config"]   = TKSettings.config
     paras["vehicles"] = TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     paras["segments"] = pattern
     paras["leaveAt"]  = leaveAt.timeIntervalSince1970 + 60
@@ -383,7 +383,7 @@ class WaypointParasBuilder {
     guard let trip = segmentToMatch.trip else { preconditionFailure() }
     
     var paras: [String: Any] = [
-      "config": TKSettings.defaultDictionary(),
+      "config": TKSettings.config,
       "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
     
@@ -547,7 +547,7 @@ class WaypointParasBuilder {
     }
     
     var paras: [String: Any] = [
-      "config": TKSettings.defaultDictionary(),
+      "config": TKSettings.config,
       "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
 
@@ -592,7 +592,7 @@ class WaypointParasBuilder {
       else { throw TKWaypointRouter.WaypointError.segmentNotEligible }
     
     var paras: [String: Any] = [
-      "config": TKSettings.defaultDictionary(),
+      "config": TKSettings.config,
       "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
     
@@ -640,7 +640,7 @@ class WaypointParasBuilder {
       else { throw TKWaypointRouter.WaypointError.segmentNotEligible }
     
     var paras: [String: Any] = [
-      "config": TKSettings.defaultDictionary(),
+      "config": TKSettings.config,
       "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
     

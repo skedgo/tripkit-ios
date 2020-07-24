@@ -535,7 +535,8 @@ extension TKSegment {
     }
     
     if let vehicle = reference?.vehicle(fromAllVehicles: vehicles) {
-      return TKVehicularHelper.skedGoReferenceDictionary(forVehicle: vehicle)
+      let model = vehicle.toModel()
+      return (try? JSONEncoder().encodeJSONObject(model)) as? [AnyHashable: Any]
     } else {
       return nil
     }

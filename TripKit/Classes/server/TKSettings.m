@@ -14,65 +14,6 @@
 
 @implementation TKSettings
 
-+ (NSMutableDictionary *)defaultDictionary
-{
-  NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithCapacity:10];
-  NSUserDefaults *sharedDefaults = [NSUserDefaults sharedDefaults];
-  
-  // JSON version
-  [paras setValue:@(11) forKey:@"v"];
-  
-  // distance units
-  NSString *unit = [NSLocale currentLocale].usesMetricSystem ? @"metric" : @"imperial";
-  [paras setValue:unit forKey:@"unit"];
-  
-  // profile settings
-  float priceWeight   = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightMoney];
-  float carbonWeight  = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightCarbon];
-  float timeWeight    = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightTime];
-  float hassleWeight  = [sharedDefaults floatForKey:TKDefaultsKeyProfileWeightHassle];
-  if (priceWeight + carbonWeight + timeWeight + hassleWeight > 0.1) {
-    NSString *weightString = [NSString stringWithFormat:@"(%f,%f,%f,%f)", priceWeight, carbonWeight, timeWeight, hassleWeight];
-    [paras setValue:weightString forKey:@"wp"];
-  }
-  
-  // transport preferences
-  [paras setValue:[TKUserProfileHelper dislikedTransitModes] forKey:@"avoid"];
-  
-  if ([sharedDefaults boolForKey:TKDefaultsKeyProfileTransportConcessionPricing]) {
-    [paras setValue:@(YES) forKey:@"conc"];
-  }
-  if (TKUserProfileHelper.showWheelchairInformation) {
-    [paras setValue:@(YES) forKey:@"wheelchair"];
-  }
-  
-  // All optional
-  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportCyclingSpeed] forKey:@"cs"];
-  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportWalkSpeed] forKey:@"ws"];
-  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportWalkMaxDuration] forKey:@"wm"];
-  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportTransferTime] forKey:@"tt"];
-  [paras setValue:[sharedDefaults objectForKey:TKDefaultsKeyProfileTransportEmissions] forKey:@"co2"];
-  if (TKSettings.ignoreCostToReturnCarHireVehicle) {
-    [paras setValue:@(NO) forKey:@"2wirc"];
-  }
-  
-#ifdef DEBUG
-  NSNumber *bsbRaw = [sharedDefaults objectForKey:TKDefaultsKeyProfileBookingsUseSandbox];
-  if (bsbRaw) {
-    [paras setValue:bsbRaw forKey:@"bsb"];
-  } else {
-    [paras setValue:@(YES) forKey:@"bsb"]; // Default to Sandbox
-  }
-#else
-  if ([TKBetaHelper isBeta]
-      && [sharedDefaults boolForKey:TKDefaultsKeyProfileBookingsUseSandbox]) {
-    [paras setValue:@(YES) forKey:@"bsb"];
-  }
-#endif
-
-  return paras;
-}
-
 + (void)setMaximumWalkingDuration:(NSTimeInterval)duration
 {
   NSInteger minutes = (NSInteger) ((duration + 59) / 60);

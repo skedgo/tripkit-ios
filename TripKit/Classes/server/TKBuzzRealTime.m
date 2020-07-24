@@ -279,14 +279,15 @@
 		if (dls || visit) {
 			// we have supplied a start stop code, so we only want to update that
 			
-			NSNumber *startTime = serviceDict[@"startTime"];
-			if (! startTime)
+			id startTimeRaw = serviceDict[@"startTime"];
+      if (! startTimeRaw) {
 				continue;
-			if (startTime.integerValue <= 0) {
-        		[TKLog info:@"TKBuzzRealTime" text:[NSString stringWithFormat:@"Ignoring bad start time '%@' in response object:\n%@", startTime, responseObject]];
-				continue;
+      }
+      NSDate *departure = [TKParserHelper parseDate:startTimeRaw];
+			if (! departure) {
+        [TKLog info:@"TKBuzzRealTime" text:[NSString stringWithFormat:@"Ignoring bad start time '%@' in response object:\n%@", startTimeRaw, responseObject]];
+        continue;
 			}
-			NSDate *departure = [NSDate dateWithTimeIntervalSince1970:startTime.integerValue];
 			
       if (visit) {
         visit.departure = departure;
@@ -296,12 +297,8 @@
       } else if (dls) {
         NSTimeInterval previousDuration = [dls.arrival timeIntervalSinceDate:dls.departure];
         dls.departure = departure;
-        NSNumber *endTime = serviceDict[@"endTime"];
-        if (endTime && endTime.integerValue > 0) {
-          dls.arrival = [NSDate dateWithTimeIntervalSince1970:endTime.integerValue];
-        } else {
-          dls.arrival = [dls.departure dateByAddingTimeInterval:previousDuration];
-        }
+        NSDate *arrival = [TKParserHelper parseDate:serviceDict[@"endTime"]];
+        dls.arrival = arrival ?: [dls.departure dateByAddingTimeInterval:previousDuration];
         service.realTime = YES;
       }
 			
@@ -318,14 +315,8 @@
 			NSMutableDictionary *departures = [NSMutableDictionary dictionaryWithCapacity:stops.count];
 			for (NSDictionary *stopDict in stops) {
 				NSString *code = stopDict[@"stopCode"];
-				NSNumber *time = stopDict[@"arrival"];
-				if (time) {
-          arrivals[code] = [NSDate dateWithTimeIntervalSince1970:time.integerValue];
-				}
-				time = stopDict[@"departure"];
-				if (time) {
-          departures[code] = [NSDate dateWithTimeIntervalSince1970:time.integerValue];
-				}
+        arrivals[code] = [TKParserHelper parseDate:stopDict[@"arrival"]];
+        departures[code] = [TKParserHelper parseDate:stopDict[@"departure"]];
 			}
 			
 			// next update all the stops

@@ -28,17 +28,14 @@ extension TKCoreDataParserHelper {
       visit.bearing = NSNumber(value: bearing)
     }
     
-    // TODO: Handle new relative time (?)
-    //   - should then pass in a time that these are relative to, i.e.,
-    //     a departure time
-    if let arrival = dict["arrival"] as? TimeInterval {
-      visit.arrival = Date(timeIntervalSince1970: arrival)
+    if let arrival = dict["arrival"] {
+      visit.arrival = TKParserHelper.parseDate(arrival)
     } else if let offset = dict["relativeArrival"] as? TimeInterval, let arrival = relative?.addingTimeInterval(offset) {
       visit.arrival = arrival
     }
 
-    if let departure = dict["departure"] as? TimeInterval {
-      visit.departure = Date(timeIntervalSince1970: departure)
+    if let departure = dict["departure"] {
+      visit.departure = TKParserHelper.parseDate(departure)
     } else if let offset = dict["relativeDeparture"] as? TimeInterval, let departure = relative?.addingTimeInterval(offset) {
       visit.departure = departure
     }

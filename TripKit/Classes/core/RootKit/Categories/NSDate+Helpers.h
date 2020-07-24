@@ -23,9 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSDate *)dateAtSameTimeInTimeZone:(NSTimeZone *)timeZone afterAddingDays:(NSInteger)days;
 
-+ (nullable NSDate *)dateFromISO8601String:(NSString *)value;
-- (NSString *)ISO8601String;
-
 @end
 
 NS_ASSUME_NONNULL_END

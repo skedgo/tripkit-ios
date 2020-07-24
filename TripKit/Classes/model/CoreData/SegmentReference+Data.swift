@@ -91,12 +91,8 @@ extension SegmentReference {
     if let ticketDict = dict["ticket"] as? [String: AnyHashable] {
       ticket = try? JSONDecoder().decode(TKSegment.Ticket.self, withJSONObject: ticketDict)
     }
-    if let start = dict["timetableStartTime"] as? TimeInterval {
-      timetableStartTime = Date(timeIntervalSince1970: start)
-    }
-    if let end = dict["timetableEndTime"] as? TimeInterval {
-      timetableEndTime = Date(timeIntervalSince1970: end)
-    }
+    timetableStartTime = TKParserHelper.parseDate(dict["timetableStartTime"])
+    timetableEndTime = TKParserHelper.parseDate(dict["timetableEndTime"])
     
     // Private transport
     sharedVehicleData = dict["sharedVehicle"] as? NSDictionary

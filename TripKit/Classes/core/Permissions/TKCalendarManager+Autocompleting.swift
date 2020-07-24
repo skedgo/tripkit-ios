@@ -144,23 +144,13 @@ extension TKNamedCoordinate {
   }
   
   @objc public var eventStartTime: Date? {
-    get {
-      guard let interval = data["eventStartTime"] as? TimeInterval else { return nil }
-      return Date(timeIntervalSince1970: interval)
-    }
-    set {
-      data["eventStartTime"] = newValue?.timeIntervalSince1970
-    }
+    get { TKParserHelper.parseDate(data["eventStartTime"]) }
+    set { data["eventStartTime"] = newValue?.timeIntervalSince1970 }
   }
   
   @objc public var eventEndTime: Date? {
-    get {
-      guard let interval = data["eventEndTime"] as? TimeInterval else { return nil }
-      return Date(timeIntervalSince1970: interval)
-    }
-    set {
-      data["eventEndTime"] = newValue?.timeIntervalSince1970
-    }
+    get { TKParserHelper.parseDate(data["eventEndTime"]) }
+    set { data["eventEndTime"] = newValue?.timeIntervalSince1970 }
   }
   
 }

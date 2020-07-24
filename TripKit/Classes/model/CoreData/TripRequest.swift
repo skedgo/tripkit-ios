@@ -21,7 +21,8 @@ extension TripRequest {
   }
   
   @objc public var type: TKTimeType {
-    return TKTimeType(rawValue: self.timeType.intValue) ?? .leaveASAP
+    get { TKTimeType(rawValue: self.timeType.intValue) ?? .leaveASAP }
+    set { timeType = NSNumber(value: newValue.rawValue) }
   }
   
   @objc public var time: Date? {

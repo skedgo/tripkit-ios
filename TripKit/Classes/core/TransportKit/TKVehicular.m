@@ -86,39 +86,4 @@
   }
 }
 
-+ (NSDictionary *)skedGoFullDictionaryForVehicle:(id<TKVehicular>)vehicle
-{
-  NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:4];
-  dict[@"type"] = [self skedGoTypeStringForType:vehicle.vehicleType];
-  if ([vehicle respondsToSelector:@selector(vehicleUUID)] && vehicle.vehicleUUID) {
-    dict[@"UUID"] = vehicle.vehicleUUID;
-  }
-  if (vehicle.name) {
-    dict[@"name"] = vehicle.name;
-  }
-  if ([vehicle respondsToSelector:@selector(garage)] && vehicle.garage) {
-    dict[@"garage"] = [TKParserHelper dictionaryForAnnotation:vehicle.garage];
-  }
-  return dict;
-}
-
-+ (NSDictionary *)skedGoReferenceDictionaryForVehicle:(id<TKVehicular>)vehicle
-{
-  if ([vehicle respondsToSelector:@selector(vehicleUUID)] && vehicle.vehicleUUID) {
-    return @{@"UUID": vehicle.vehicleUUID};
-  } else {
-    return @{@"type": [self skedGoTypeStringForType:vehicle.vehicleType]};
-  }
-}
-  
-+ (NSString *)skedGoTypeStringForType:(TKVehicleType)vehicleType
-{
-  switch (vehicleType) {
-    case TKVehicleType_Bicycle:    return @"bicycle";
-    case TKVehicleType_Motorbike:  return @"motorbike";
-    case TKVehicleType_SUV:        return @"4wd";
-    default:                      return @"car";
-  }
-}
-
 @end
