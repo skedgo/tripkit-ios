@@ -87,10 +87,10 @@ class TKRouterTest: TKTestCase {
         XCTAssertNil(trip.segments[1].bookingInternalURL)
         XCTAssertNotNil(trip.segments[1].bookingExternalActions)
         
-        XCTAssertEqual(trip.segments[2].alerts().count, 4)
-        XCTAssertEqual(trip.segments[2].alertsWithAction().count, 0)
-        XCTAssertEqual(trip.segments[2].alertsWithContent().count, 4)
-        XCTAssertEqual(trip.segments[2].alertsWithLocation().count, 4)
+        XCTAssertEqual(trip.segments[2].alerts.count, 4)
+        XCTAssertEqual(trip.segments[2].alertsWithAction.count, 0)
+        XCTAssertEqual(trip.segments[2].alertsWithContent.count, 4)
+        XCTAssertEqual(trip.segments[2].alertsWithLocation.count, 4)
         XCTAssertEqual(trip.segments[2].timesAreRealTime, true)
         XCTAssertEqual(trip.segments[2].isSharedVehicle, true)
 
@@ -136,7 +136,7 @@ class TKRouterTest: TKTestCase {
 
         let cycleTrip = try XCTUnwrap(cycleGroup.trips.min { $0.totalScore < $1.totalScore })
         XCTAssertEqual(cycleTrip.segments.count, 9)
-        XCTAssertEqual(cycleTrip.segments[0].alerts().count, 0)
+        XCTAssertEqual(cycleTrip.segments[0].alerts.count, 0)
         
         // should not get the additional start + end annotations
         let startSegment = try XCTUnwrap(cycleTrip.segments.first)
