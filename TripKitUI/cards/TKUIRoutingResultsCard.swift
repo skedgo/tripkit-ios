@@ -446,9 +446,8 @@ extension TKUIRoutingResultsCard {
     guard let visible = tableView.indexPathsForVisibleRows else { return }
     let indices = visible.reduce(into: Set<Int>()) { $0.insert($1.section) }
     for section in indices {
-      if let badge = sections[section].badge, let header = tableView.headerView(forSection: section) as? TKUIResultsSectionHeaderView {
-        header.badge = badge.footerContent
-      }
+      guard let header = tableView.headerView(forSection: section) as? TKUIResultsSectionHeaderView else { continue }
+      header.badge = sections[section].badge?.footerContent
     }
   }
 }

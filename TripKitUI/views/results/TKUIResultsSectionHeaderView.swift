@@ -44,15 +44,15 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
     badgeLabel.text = nil
   }
   
-  var badge: (icon: UIImage?, text: String, color: UIColor) {
+  var badge: (icon: UIImage?, text: String, color: UIColor)? {
     get {
       (badgeIcon.image, badgeLabel.text ?? "", badgeLabel.textColor ?? .tkLabelPrimary)
     }
     set {
-      badgeIcon.image = newValue.icon
-      badgeIcon.tintColor = newValue.color
-      badgeLabel.text = newValue.text
-      badgeLabel.textColor = newValue.color
+      badgeIcon.image = newValue?.icon
+      badgeIcon.tintColor = newValue?.color
+      badgeLabel.text = newValue?.text
+      badgeLabel.textColor = newValue?.color
     }
   }
   
