@@ -14,7 +14,7 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
-  - TGCardViewController (1.3)
+  - TGCardViewController (1.3.1)
   - TripKit (4.0-rc2):
     - ASPolygonKit
     - RxCocoa (~> 5.1.1)
@@ -24,7 +24,7 @@ PODS:
   - TripKitUI (4.0-rc2):
     - Kingfisher (~> 5.8)
     - RxDataSources (~> 4.0)
-    - TGCardViewController (>= 1.3)
+    - TGCardViewController (>= 1.3.1)
     - TripKit (~> 4.0-rc2)
 
 DEPENDENCIES:
@@ -59,10 +59,10 @@ SPEC CHECKSUMS:
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
-  TGCardViewController: 201d3349d9a969391f02cada67116deb8f3c2c17
+  TGCardViewController: 548af9958c22deddc622857e7f215afcddfb5cec
   TripKit: 956e1131ee8a6e712bdaf65f98177112967b3e5a
   TripKitInterApp: ac1fecbfe58f4396479fc6d288555de363c5f992
-  TripKitUI: 8a0ae83ec8e907f45664f50a6b524a6128ee1d15
+  TripKitUI: 9df9f545df42df00b689b64bd2b00c2bb46c3dc4
 
 PODFILE CHECKSUM: 7090ca257005dee67683f082c97eeec14499ab9a
 
