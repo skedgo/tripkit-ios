@@ -21,19 +21,21 @@ class TKGeocoderTest: XCTestCase {
   let sydney = MKCoordinateRegion.region(latitude: -33.861412, longitude: 151.210774)
   let newYork = MKCoordinateRegion.region(latitude: 40.716688, longitude: -74.006138)
   
-  override func setUp() {
+  override func setUpWithError() throws {
+    try super.setUpWithError()
+    
     TKServer.serverType = .production
     
-    geocoder = aggregateGeocoder()
+    geocoder = try aggregateGeocoder()
   }
   
   //MARK: - The Tests
   
-  func testBrandonAveSydney() {
+  func testBrandonAveSydney() throws {
     geocoderPasses(geocoder, input: "Brandon Ave, Sydney", near: sydney, resultsInAny: ["Brandon Ave", "Brandon Avenue"], noneOf: ["Gordon Ave", "Brothel"])
 
     // We want no garbage matches from Foursquare
-    let another = aggregateGeocoder()
+    let another = try aggregateGeocoder()
     geocoderPasses(another, input: "Brandon Ave", near: sydney, noneOf: ["Gordon Ave", "Brothel"])
 }
   
@@ -61,14 +63,14 @@ class TKGeocoderTest: XCTestCase {
     geocoderPasses(geocoder, input: "Dee Why", near: sydney, bestStartsWithAny: ["Dee Why"])
   }
 
-  func testMOMA6279() {
+  func testMOMA6279() throws {
     geocoderPasses(geocoder, input: "MoMA", near: newYork, resultsInAny: ["Museum of Modern Art", "MOMA"])
     
-    let second = aggregateGeocoder()
+    let second = try aggregateGeocoder()
     geocoderPasses(second, input: "Museum of Modern Art", near: newYork, resultsInAny: ["Museum of Modern Art", "MOMA"])
 
     // Shouldn't just find it but also rank it first
-    let third = aggregateGeocoder()
+    let third = try aggregateGeocoder()
     geocoderPasses(third, input: "moma", near: newYork, bestStartsWithAny: ["Museum of Modern Art", "The Museom of Modern Art", "MoMA"])
   }
   
@@ -91,7 +93,7 @@ class TKGeocoderTest: XCTestCase {
   
   //MARK: - Private helpers
   
-  fileprivate func aggregateGeocoder() -> TKAggregateGeocoder {
+  fileprivate func aggregateGeocoder() throws -> TKAggregateGeocoder {
     var geocoders: [TKGeocoding] = [TKAppleGeocoder()]
     
     let env = ProcessInfo.processInfo.environment
@@ -100,7 +102,7 @@ class TKGeocoderTest: XCTestCase {
       geocoders.append(TKSkedGoGeocoder())
       geocoders.append(TKPeliasGeocoder())
     } else {
-      XCTFail("TripGo API key missing. Check environment variable 'TRIPGO_API_KEY'.")
+      try XCTSkipIf(true, "TripGo API key missing. Check environment variable 'TRIPGO_API_KEY'.")
     }
     
     if let clientID = env["FOURSQUARE_CLIENT_ID"], !clientID.isEmpty,
@@ -111,7 +113,7 @@ class TKGeocoderTest: XCTestCase {
       )
       geocoders.append(foursquare)
     } else {
-      XCTFail("Could not construct Foursquare geocoder. Check environment variables 'FOURSQUARE_CLIENT_ID' and 'FOURSQUARE_CLIENT_SECRET'.")
+      try XCTSkipIf(true, "Could not construct Foursquare geocoder. Check environment variables 'FOURSQUARE_CLIENT_ID' and 'FOURSQUARE_CLIENT_SECRET'.")
     }
 
     

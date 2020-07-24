@@ -15,13 +15,14 @@ import XCTest
 
 class TKRouterTest: TKTestCase {
 
-  override func setUp() {
-    super.setUp()
+  override func setUpWithError() throws {
+    try super.setUpWithError()
+    
     let env = ProcessInfo.processInfo.environment
     if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
       TripKit.apiKey = apiKey
     } else {
-      preconditionFailure("Make sure you supply a TripGo API key")
+      try XCTSkipIf(true, "No TripGo API key supplied")
     }
   }
   
