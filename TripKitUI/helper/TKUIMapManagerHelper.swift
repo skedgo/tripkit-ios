@@ -71,7 +71,7 @@ public class TKUIMapManagerHelper: NSObject {
     guard !segment.isStationary else { return nil }
     guard !segment.isFlight else { return geodesicShapeAnnotations(for: segment) }
     
-    let shapes = segment.sortedShapes
+    let shapes = segment.shapes
     let allEmpty = segment.isPublicTransport && shapes.isEmpty
     
     let overlays = buildOverlaysForShapes(in: segment)
@@ -125,7 +125,7 @@ public class TKUIMapManagerHelper: NSObject {
 extension TKUIMapManagerHelper {
   
   private static func buildOverlaysForShapes(in segment: TKSegment) -> [MKOverlay] {
-    let routes = segment.sortedShapes.reduce(into: [TKColoredRoute]()) { acc, shape in
+    let routes = segment.shapes.reduce(into: [TKColoredRoute]()) { acc, shape in
       if let previous = acc.last, previous.canAbsorb(shape) {
         previous.absorb(shape)
       } else {

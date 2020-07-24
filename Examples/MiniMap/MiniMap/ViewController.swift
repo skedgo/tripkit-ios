@@ -80,9 +80,9 @@ class ViewController: NSViewController {
       }
       
       for segment in trip.segments {
-        guard segment.hasVisibility(.onMap), let shapes = segment.shapes else { continue }
+        guard segment.hasVisibility(.onMap) else { continue }
         self.mapView.addAnnotation(segment)
-        for shape in shapes {
+        for shape in segment.shapes {
           guard let polyline = TKRoutePolyline(for: shape) else { continue }
           self.mapView.addOverlay(polyline)
         }

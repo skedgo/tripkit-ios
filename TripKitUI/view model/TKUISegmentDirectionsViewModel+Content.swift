@@ -35,7 +35,7 @@ extension TKUISegmentDirectionsViewModel {
 
 extension TKUISegmentDirectionsViewModel {
   static func buildSections(for segment: TKSegment) -> Observable<[Section]> {
-    let items = segment.sortedShapes
+    let items = segment.shapes
       .enumerated()
       .map(Item.init(index:shape:))
       .reduce(into: [Item]()) { $0.smartAppend($1) }

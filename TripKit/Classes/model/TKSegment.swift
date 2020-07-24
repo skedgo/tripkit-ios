@@ -261,9 +261,10 @@ public class TKSegment: NSObject {
   
   // MARK: - Inferred properties: Shapes and visits
   
-  private lazy var shapes = (template?.shapes as? Set<Shape>) ?? []
-  
-  @objc public lazy var sortedShapes: [Shape] = { shapes.sorted { $0.index < $1.index } }()
+  @objc public lazy var shapes: [Shape] = {
+    let unsorted = (template?.shapes as? Set<Shape>) ?? []
+    return unsorted.sorted { $0.index < $1.index }
+  }()
   
   /// Dictionary of stop code to bool of which stops along a service this segment is travelling along.
   private var segmentVisits: [String: Bool] {

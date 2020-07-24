@@ -34,7 +34,7 @@ extension TKUIRoutingResultsViewModel {
       self.selectionIdentifier = trip.objectID.uriRepresentation().absoluteString
       
       let displayableShapes = trip.segments
-        .compactMap { $0.sortedShapes.isEmpty ? nil : $0.sortedShapes }   // Only include those with shapes
+        .compactMap { $0.shapes.isEmpty ? nil : $0.shapes }   // Only include those with shapes
         .flatMap { $0.filter { $0.routeIsTravelled } } // Flat list of travelled shapes
       
       let route = displayableShapes
