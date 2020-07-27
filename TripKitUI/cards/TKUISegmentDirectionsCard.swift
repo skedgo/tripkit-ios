@@ -79,6 +79,12 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     tableView.tableFooterView = UIView()
   }
   
+  public override func didAppear(animated: Bool) {
+    super.didAppear(animated: animated)
+    
+    TKUIEventCallback.handler(.cardAppeared(self))
+  }
+  
 }
 
 // MARK: Configuring cells

@@ -344,6 +344,12 @@ public class TKUITimetableCard : TGTableCard {
       .disposed(by: realTimeDisposeBag)
   }
   
+  public override func didAppear(animated: Bool) {
+    super.didAppear(animated: animated)
+    
+    TKUIEventCallback.handler(.cardAppeared(self))
+  }
+  
   public override func willDisappear(animated: Bool) {
     super.willDisappear(animated: animated)
     

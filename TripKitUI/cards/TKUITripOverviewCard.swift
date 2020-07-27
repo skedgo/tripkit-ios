@@ -226,6 +226,9 @@ public class TKUITripOverviewCard: TGTableCard {
     } else {
       (mapManager as? TKUITripMapManager)?.deselectSegment(animated: animated)
     }
+    
+    TKUIEventCallback.handler(.cardAppeared(self))
+    TKUIEventCallback.handler(.tripSelected(trip))
   }
   
   public override func willDisappear(animated: Bool) {

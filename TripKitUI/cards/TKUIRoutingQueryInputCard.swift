@@ -140,6 +140,8 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
     
+    TKUIEventCallback.handler(.cardAppeared(self))
+
     self.didAppear.onNext(())
   }
   

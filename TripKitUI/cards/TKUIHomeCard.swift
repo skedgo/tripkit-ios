@@ -161,6 +161,11 @@ public class TKUIHomeCard: TGTableCard {
       .disposed(by: disposeBag)
   }
   
+  public override func didAppear(animated: Bool) {
+    super.didAppear(animated: animated)
+    
+    TKUIEventCallback.handler(.cardAppeared(self))
+  }
 }
 
 // MARK: -

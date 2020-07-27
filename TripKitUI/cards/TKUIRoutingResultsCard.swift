@@ -326,6 +326,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
     
+    TKUIEventCallback.handler(.cardAppeared(self))
+
     viewModel.realTimeUpdate
       .drive()
       .disposed(by: realTimeBag)
