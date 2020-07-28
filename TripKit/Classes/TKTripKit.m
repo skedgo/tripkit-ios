@@ -212,9 +212,15 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
     [self removeLocalFiles];
     
     // let's try again. this time there's no file. so it has to succeed
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
+    [[NSFileManager defaultManager] createDirectoryAtURL:[storeURL URLByDeletingLastPathComponent]
+                             withIntermediateDirectories:YES
+                                              attributes:nil
+                                                   error:&error];
+    ZAssert(error == nil, @"Couldn't create directory! Error: %@. File: %@", error, storeURL);
+    
+    if (! [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
       // otherwise, kill it
-      ZAssert(false, @"That doesn't make sense. There's no file!");
+      ZAssert(false, @"That doesn't make sense. There's no file! Error: %@. File: %@", error, storeURL);
       [TKLog error:@"TKTripKit" text:[NSString stringWithFormat:@"Unresolved migration error %@, %@", error, [error userInfo]]];
     }
   }
