@@ -26,7 +26,6 @@ public class TKUIAttributionTableViewController: UITableViewController {
     self.title = Loc.DataProviders
   }
   
-  
   override public func viewDidLoad() {
     super.viewDidLoad()
     
@@ -39,6 +38,12 @@ public class TKUIAttributionTableViewController: UITableViewController {
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 44
     tableView.tableFooterView = UIView()
+  }
+  
+  public override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    TKUIEventCallback.handler(.screenAppeared(name: "Attributions", controller: self))
   }
   
   @objc

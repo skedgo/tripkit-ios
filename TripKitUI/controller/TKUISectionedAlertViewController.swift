@@ -17,7 +17,6 @@ public typealias TKSectionedAlertViewController = TKUISectionedAlertViewControll
 public class TKUISectionedAlertViewController: UIViewController {
   
   private(set) var region: TKRegion!
-  public var eventTrackingDelegate: TKUIEventTrackable?
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var searchBar: UISearchBar!
@@ -105,9 +104,10 @@ public class TKUISectionedAlertViewController: UIViewController {
       .disposed(by: disposeBag)
   }
   
-  public override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    eventTrackingDelegate?.trackScreen(named: "ServiceDisruptions")
+  public override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    TKUIEventCallback.handler(.screenAppeared(name: "ServiceDisruptions", controller: self))
   }
   
   // MARK: - User interaction

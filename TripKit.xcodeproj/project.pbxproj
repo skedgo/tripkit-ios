@@ -781,7 +781,6 @@
 		D31C0D5B249C89F300F3EC06 /* routing-goget-park.json in Resources */ = {isa = PBXBuildFile; fileRef = D31C0D58249C81F400F3EC06 /* routing-goget-park.json */; };
 		D3211335206BBAF300E5D929 /* TKUILoadingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3211334206BBAF300E5D929 /* TKUILoadingAlertView.swift */; };
 		D3211337206BBB0600E5D929 /* TKUILoadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3211336206BBB0600E5D929 /* TKUILoadingAlertView.xib */; };
-		D32829D3212CFC06006E3D0E /* TKUIEventTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32829D2212CFC06006E3D0E /* TKUIEventTrackable.swift */; };
 		D32CA5AF20E34409009C9449 /* TKUIGroupedAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D32CA5AE20E34409009C9449 /* TKUIGroupedAlertCell.xib */; };
 		D33233982436BA7400A8E220 /* TKUICompactActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33233962436BA7400A8E220 /* TKUICompactActionCell.swift */; };
 		D33233992436BA7400A8E220 /* TKUICompactActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33233972436BA7400A8E220 /* TKUICompactActionCell.xib */; };
@@ -1507,7 +1506,6 @@
 		D31C0D58249C81F400F3EC06 /* routing-goget-park.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-goget-park.json"; sourceTree = "<group>"; };
 		D3211334206BBAF300E5D929 /* TKUILoadingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUILoadingAlertView.swift; sourceTree = "<group>"; };
 		D3211336206BBB0600E5D929 /* TKUILoadingAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUILoadingAlertView.xib; sourceTree = "<group>"; };
-		D32829D2212CFC06006E3D0E /* TKUIEventTrackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIEventTrackable.swift; sourceTree = "<group>"; };
 		D32CA5AE20E34409009C9449 /* TKUIGroupedAlertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIGroupedAlertCell.xib; sourceTree = "<group>"; };
 		D33233962436BA7400A8E220 /* TKUICompactActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICompactActionCell.swift; sourceTree = "<group>"; };
 		D33233972436BA7400A8E220 /* TKUICompactActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUICompactActionCell.xib; sourceTree = "<group>"; };
@@ -1839,7 +1837,6 @@
 				3AF5F2B520EFF91F003AAEBA /* TKUIAttributionTableViewController.swift */,
 				3AF5F2B420EFF91F003AAEBA /* TKUIAttributionTableViewController.xib */,
 				3A67698520EE3A7A0044663F /* TKUIAutocompletionViewController.swift */,
-				D32829D2212CFC06006E3D0E /* TKUIEventTrackable.swift */,
 				D3BC672C238F45940042EFD9 /* TKUIHomeViewController.swift */,
 				3AFD393A20D9333500FDC7D0 /* TKUIRoutingResultsViewController.swift */,
 				D39ECD84205A007A00E09474 /* TKUISectionedAlertViewController.swift */,
@@ -3465,7 +3462,6 @@
 				3A25C97024CEE6250007E46C /* TKUIEventCallback.swift in Sources */,
 				3A383CB3223018E300361596 /* TKSegment+AccessoryViews.swift in Sources */,
 				3AF5F2B920F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift in Sources */,
-				D32829D3212CFC06006E3D0E /* TKUIEventTrackable.swift in Sources */,
 				D335907421EF604100CB57E3 /* TKStyleManager+TripKitUI.swift in Sources */,
 				3A201F2423BB931A00763948 /* TKSegment+AlternativeRoutes.swift in Sources */,
 				3A40922C22F1E27B0049AAE7 /* TKUIServiceHeaderMiniView.swift in Sources */,
