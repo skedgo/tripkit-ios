@@ -124,6 +124,12 @@ public class TKUIAlertViewController: UITableViewController {
     }
   }
   
+  public override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    TKUIEventCallback.handler(.screenAppeared(name: "Alerts", controller: self))
+  }
+  
   @objc private func doneButtonTapped(_ sender: UIButton) {
     dismiss(animated: true)
   }
