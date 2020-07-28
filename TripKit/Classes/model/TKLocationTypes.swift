@@ -32,6 +32,8 @@ public class TKBikePodLocation: TKModeCoordinate {
     try container.encode(bikePod, forKey: .bikePod)
   }
   
+  @objc public class override var supportsSecureCoding: Bool { true }
+
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(TKAPI.BikePodInfo.self, forKey: "bikePod") else { return nil }
     bikePod = info
@@ -71,6 +73,8 @@ public class TKCarPodLocation: TKModeCoordinate {
     locationID = carPod.identifier
   }
   
+  @objc public class override var supportsSecureCoding: Bool { true }
+
   public override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
@@ -115,6 +119,8 @@ public class TKCarParkLocation: TKModeCoordinate {
     try container.encode(carPark, forKey: .carPark)
   }
   
+  @objc public class override var supportsSecureCoding: Bool { true }
+
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(TKAPI.CarParkInfo.self, forKey: "carPark") else { return nil }
     carPark = info
@@ -150,6 +156,8 @@ public class TKCarRentalLocation: TKModeCoordinate {
     try container.encode(carRental, forKey: .carRental)
   }
   
+  @objc public class override var supportsSecureCoding: Bool { true }
+
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(TKAPI.CarRentalInfo.self, forKey: "carRental") else { return nil }
     carRental = info
@@ -188,6 +196,8 @@ public class TKFreeFloatingVehicleLocation: TKModeCoordinate {
     locationID = vehicle.identifier
   }
   
+  @objc public class override var supportsSecureCoding: Bool { true }
+
   public override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
@@ -232,6 +242,8 @@ public class TKOnStreetParkingLocation: TKModeCoordinate {
     try container.encode(parking, forKey: .parking)
   }
   
+  @objc public class override var supportsSecureCoding: Bool { true }
+
   public required init?(coder aDecoder: NSCoder) {
     guard let info = try? aDecoder.decode(TKAPI.OnStreetParkingInfo.self, forKey: CodingKeys.parking.rawValue) else { return nil }
     parking = info
@@ -253,7 +265,7 @@ extension NSCoder {
   }
   
   func decode<T: Decodable>(_ type: T.Type, forKey key: String) throws -> T {
-    guard let data = decodeObject(forKey: key) as? Data
+    guard let data = decodeObject(of: NSData.self, forKey: key) as Data?
       else { throw CoderError.keyIsNotData(key) }
     return try JSONDecoder().decode(type, from: data)
   }

@@ -91,7 +91,7 @@ open class TKUIAnnotationViewBuilder: NSObject {
   @objc
   open func build() -> MKAnnotationView? {
 
-    if #available(iOS 11, *), preferMarker, let glyphable = annotation as? TKUIGlyphableAnnotation {
+    if preferMarker, let glyphable = annotation as? TKUIGlyphableAnnotation {
       return build(for: glyphable, enableClustering: enableClustering)
     } else if let vehicle = annotation as? Vehicle {
       return build(for: vehicle)      
@@ -128,7 +128,6 @@ open class TKUIAnnotationViewBuilder: NSObject {
 
 private extension TKUIAnnotationViewBuilder {
   
-  @available(iOS 11.0, *)
   private func build(for glyphable: TKUIGlyphableAnnotation, enableClustering: Bool) -> MKAnnotationView {
     let identifier = glyphable is MKClusterAnnotation ? "ClusterMarker" : "ImageMarker"
     
@@ -328,9 +327,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     circleView.canShowCallout = annotation.title != nil
     circleView.isEnabled = true
     
-    if #available(iOS 11.0, *) {
-      circleView.displayPriority = asLarge ? .defaultHigh : .defaultLow
-    }
+    circleView.displayPriority = asLarge ? .defaultHigh : .defaultLow
     
     return circleView
   }
@@ -344,7 +341,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
   func build(for modeAnnotation: TKUIModeAnnotation, enableClustering: Bool) -> MKAnnotationView {
 
     let identifier: String
-    if #available(iOS 11, *), modeAnnotation is MKClusterAnnotation {
+    if modeAnnotation is MKClusterAnnotation {
       identifier = "ClusteredModeAnnotationIdentifier"
     } else {
       identifier = "ModeAnnotationIdentifier"
@@ -364,11 +361,9 @@ fileprivate extension TKUIAnnotationViewBuilder {
     modeView.canShowCallout = annotation.title != nil
     modeView.isEnabled = true
     
-    if #available(iOS 11, *) {
-      modeView.collisionMode = .circle
-      modeView.clusteringIdentifier = enableClustering && modeAnnotation.priority.rawValue < 500 ? modeAnnotation.clusterIdentifier : nil
-      modeView.displayPriority = modeAnnotation.priority
-    }
+    modeView.collisionMode = .circle
+    modeView.clusteringIdentifier = enableClustering && modeAnnotation.priority.rawValue < 500 ? modeAnnotation.clusterIdentifier : nil
+    modeView.displayPriority = modeAnnotation.priority
     
     return modeView
   }
@@ -402,7 +397,6 @@ fileprivate extension TKUIAnnotationViewBuilder {
   
 }
 
-@available(iOS 11.0, *)
 fileprivate extension MKAnnotation {
   
   var priority: MKFeatureDisplayPriority {

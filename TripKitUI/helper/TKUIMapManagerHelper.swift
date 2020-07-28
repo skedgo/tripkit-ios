@@ -59,7 +59,7 @@ public class TKUIMapManagerHelper: NSObject {
       case (false, false): break
       }
       
-      return segmentOne.duration(true) < segmentTwo.duration(true)
+      return segmentOne.duration(includingContinuation: true) < segmentTwo.duration(includingContinuation: true)
     }
     
     sorted.forEach { $0.superview?.bringSubviewToFront($0) }
@@ -71,7 +71,7 @@ public class TKUIMapManagerHelper: NSObject {
     guard !segment.isStationary else { return nil }
     guard !segment.isFlight else { return geodesicShapeAnnotations(for: segment) }
     
-    let shapes = segment.shapes ?? []
+    let shapes = segment.shapes
     let allEmpty = segment.isPublicTransport && shapes.isEmpty
     
     let overlays = buildOverlaysForShapes(in: segment)
@@ -83,7 +83,7 @@ public class TKUIMapManagerHelper: NSObject {
     if let service = segment.service {
       if service.hasServiceData {
         let visits = service.visits ?? []
-        for visit in visits where segment.shouldShowVisit(visit) {
+        for visit in visits where segment.shouldShow(visit) {
           points.append(visit)
         }
       } else {
@@ -125,15 +125,13 @@ public class TKUIMapManagerHelper: NSObject {
 extension TKUIMapManagerHelper {
   
   private static func buildOverlaysForShapes(in segment: TKSegment) -> [MKOverlay] {
-    guard let shapes = segment.sortedShapes() else { return [] }
-
-    let routes = shapes.reduce(into: [TKColoredRoute]()) { acc, shape in
-        if let previous = acc.last, previous.canAbsorb(shape) {
-          previous.absorb(shape)
-        } else {
-          acc.append(TKColoredRoute(shape, in: segment))
-        }
+    let routes = segment.shapes.reduce(into: [TKColoredRoute]()) { acc, shape in
+      if let previous = acc.last, previous.canAbsorb(shape) {
+        previous.absorb(shape)
+      } else {
+        acc.append(TKColoredRoute(shape, in: segment))
       }
+    }
     
     return routes.compactMap(TKRoutePolyline.init)
   }

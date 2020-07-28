@@ -9,10 +9,7 @@
 @import Foundation;
 @import CoreData;
 
-#import "TKSegment.h"
-
-
-@class Alert, TKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
+@class Alert, TKSegment, TKRegion, StopVisits, TripRequest, TripGroup, BHRoutingRequest;
 
 @interface Trip : NSManagedObject {
 }
@@ -27,8 +24,6 @@
 @property (nonatomic, strong, nullable) NSURL *shareURL;
 
 @property (nonatomic, strong, nullable, readonly) NSURL *saveURL;
-
-@property (nonatomic, copy, nullable) NSString *bundleId;
 
 /**
  Checks if trip is in a usable state for CoreData. Bit of an ugly check to use

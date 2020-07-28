@@ -28,22 +28,3 @@ extension TKSegment {
   public var ticket: Ticket? {  reference?.ticket }
   
 }
-
-extension SegmentReference {
-
-  var ticket: TKSegment.Ticket? {
-    get {
-      decode(TKSegment.Ticket.self, key: "ticket")
-    }
-    set {
-      encode(newValue, key: "ticket")
-    }
-  }
-   
-  /// :nodoc:
-  @objc
-  public func _updateTicket(dictionary: [String: AnyHashable]?) {
-    guard let dictionary = dictionary else { return }
-    ticket = try? JSONDecoder().decode(TKSegment.Ticket.self, withJSONObject: dictionary)
-  }
-}

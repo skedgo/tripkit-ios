@@ -106,45 +106,40 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
 
   @objc(encodeWithCoder:)
   public func encode(with aCoder: NSCoder) {
-    guard let data = try? JSONEncoder().encode(self) else { return }
-    aCoder.encode(data)
+    aCoder.encode(alt, forKey: "alt")
+    aCoder.encode(identifier, forKey: "identifier")
+    aCoder.encode(localImageName, forKey: "localIcon")
+    aCoder.encode(remoteImageName, forKey: "remoteIcon")
+    aCoder.encode(descriptor, forKey: "description")
+    aCoder.encode(color, forKey: "color")
+    aCoder.encode(remoteIconIsTemplate ?? false, forKey: "remoteIconIsTemplate")
+    aCoder.encode(remoteIconIsBranding ?? false, forKey: "remoteIconIsBranding")
   }
   
   @objc
   public required init?(coder aDecoder: NSCoder) {
-    if let data = aDecoder.decodeData() {
-      // The new way
-      do {
-        let decoded = try JSONDecoder().decode(TKModeInfo.self, from: data)
-        identifier = decoded.identifier
-        alt = decoded.alt
-        localImageName = decoded.localImageName
-        remoteImageName = decoded.remoteImageName
-        remoteIconIsTemplate = decoded.remoteIconIsTemplate
-        remoteIconIsBranding = decoded.remoteIconIsBranding
-        descriptor = decoded.descriptor
-        rgbColor = decoded.rgbColor
-      } catch {
-        assertionFailure("Couldn't decode due to: \(error)")
-        return nil
-      }
-      
+    guard let alt = aDecoder.decodeObject(of: NSString.self, forKey: "alt") as String? else {
+      assertionFailure()
+      return nil
+    }
+    self.alt = alt
+    identifier = aDecoder.decodeObject(of: NSString.self, forKey: "identifier") as String?
+    localImageName = aDecoder.decodeObject(of: NSString.self, forKey: "localIcon") as String?
+    remoteImageName = aDecoder.decodeObject(of: NSString.self, forKey: "remoteIcon") as String?
+    descriptor = aDecoder.decodeObject(of: NSString.self, forKey: "description") as String?
+    
+    if let color = aDecoder.decodeObject(of: TKColor.self, forKey: "color") {
+      rgbColor = TKAPI.RGBColor(for: color)
     } else {
-      // For backwards compatibility
-      alt = (aDecoder.decodeObject(forKey: "alt") as? String) ?? ""
-      identifier = aDecoder.decodeObject(forKey: "identifier") as? String
-      localImageName = aDecoder.decodeObject(forKey: "localIcon") as? String
-      remoteImageName = aDecoder.decodeObject(forKey: "remoteIcon") as? String
-      descriptor = aDecoder.decodeObject(forKey: "description") as? String
-      if let color = aDecoder.decodeObject(forKey: "color") as? TKColor {
-        rgbColor = TKAPI.RGBColor(for: color)
-      } else {
-        rgbColor = nil
-      }
-      
-      // new properties
-      remoteIconIsTemplate = false
-      remoteIconIsBranding = false
+      rgbColor = nil
+    }
+
+    if remoteImageName != nil {
+      remoteIconIsTemplate = aDecoder.decodeBool(forKey: "remoteIconIsTemplate")
+      remoteIconIsBranding = aDecoder.decodeBool(forKey: "remoteIconIsBranding")
+    } else {
+      remoteIconIsTemplate = nil
+      remoteIconIsBranding = nil
     }
   }
 }

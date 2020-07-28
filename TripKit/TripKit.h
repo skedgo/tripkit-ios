@@ -54,7 +54,7 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "Alert.h"
 
 // Non-core data model classes
-#import "TKSegment.h"
+#import "TKSegmentBuilder.h"
 
 // Helpers
 #import "NSManagedObject+TKPersistence.h"

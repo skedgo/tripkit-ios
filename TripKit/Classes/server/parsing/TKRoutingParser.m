@@ -277,7 +277,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
       }
       
       if ([tripDict[@"bundleId"] isKindOfClass:[NSString class]]) {
-        [trip setBundleId:tripDict[@"bundleId"]];
+        trip.bundleId = tripDict[@"bundleId"];
       }
       
       [trip calculateDuration];
@@ -323,6 +323,8 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           continue;
         }
         
+        [reference _populateFromDictionary:refDict];
+        
         Service *service = nil;
         NSString *serviceCode = refDict[@"serviceTripID"];
         if (serviceCode) {
@@ -341,21 +343,9 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           service.number		= refDict[@"serviceNumber"]     ?: service.number;
           reference.service = service;
           
-          reference.ticketWebsiteURLString = refDict[@"ticketWebsiteURL"];
-          reference.serviceStops = refDict[@"stops"];
-          reference.departurePlatform = refDict[@"platform"];
-          reference.arrivalPlatform = refDict[@"endPlatform"];
           reference.bicycleAccessible = [refDict[@"bicycleAccessible"] boolValue];
 
-          [reference _updateTicketWithDictionary: refDict[@"ticket"]];
           [reference _setWheelchairAccessibility:refDict[@"wheelchairAccessible"]];
-          
-          if (refDict[@"timetableStartTime"]) {
-            reference.timetableStartTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"timetableStartTime"] integerValue]];
-          }
-          if (refDict[@"timetableEndTime"]) {
-            reference.timetableEndTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"timetableEndTime"] integerValue]];
-          }
           
           // set the trip status
           if (service.frequency.integerValue == 0) {
@@ -373,15 +363,10 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           
         } else {
           // private transport
-          [reference setSharedVehicleData:refDict[@"sharedVehicle"]];
-          [reference setVehicleUUID:refDict[@"vehicleUUID"]];
           [TKCoreDataParserHelper updateVehiclesForSegmentReference:reference
                                              primaryVehicle:refDict[@"realtimeVehicle"]
                                         alternativeVehicles:nil];
         }
-
-        NSDictionary *bookingData = [self mergedNewBookingData:refDict[@"booking"] into:reference.bookingData];
-        [reference setBookingData:bookingData];
 
         reference.templateHashCode = hashCode;
         reference.startTime = [NSDate dateWithTimeIntervalSince1970:[refDict[@"startTime"] integerValue]];
@@ -390,14 +375,6 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
 
         reference.alertHashCodes = refDict[@"alertHashCodes"];
         
-        // Any segment can have payloads
-        NSDictionary *payloads = refDict[@"payloads"];
-        if (payloads) {
-          [payloads enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-#pragma unused(stop)
-            [reference setPayload:obj forKey:key];
-          }];
-        }
         
         ZAssert(templateDict, @"No segment template found for code %@", hashCode);
         if (isNewTemplate) {
@@ -493,23 +470,6 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
     tripToUpdate.tripGroup.visibility = updateTripVisibility;
   }
   return tripsToReturn;
-}
-
-- (nullable NSDictionary *)mergedNewBookingData:(nullable NSDictionary *)newData into:(nullable NSDictionary *)oldData
-{
-  if (!newData) {
-    return oldData;
-  }
-  if (!oldData) {
-    return newData;
-  }
-  
-  NSMutableDictionary *merged = [oldData mutableCopy];
-  [newData enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-#pragma unused(stop)
-    [merged setObject:obj forKey:key];
-  }];
-  return merged;
 }
 
 @end

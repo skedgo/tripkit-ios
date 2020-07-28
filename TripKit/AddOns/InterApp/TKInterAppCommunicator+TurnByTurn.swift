@@ -210,11 +210,7 @@ extension TKInterAppCommunicator {
     case .driving:
       directionMode = MKLaunchOptionsDirectionsModeDriving
     default:
-      if #available(iOS 10, *) {
-        directionMode = MKLaunchOptionsDirectionsModeDefault
-      } else {
-        directionMode = MKLaunchOptionsDirectionsModeDriving
-      }
+      directionMode = MKLaunchOptionsDirectionsModeDefault
     }
     
     let options = [MKLaunchOptionsDirectionsModeKey: directionMode]

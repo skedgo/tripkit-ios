@@ -50,7 +50,7 @@ extension TKInterAppCommunicator {
   /// - Returns: Whether the action can be handled, i.e., triggering `handleExternalActions` will succeed.
   @objc(canHandleExternalActions:)
   public func canHandleExternalActions(for segment: TKSegment) -> Bool {
-    guard let actions = segment.bookingExternalActions() else { return false }
+    guard let actions = segment.bookingExternalActions else { return false }
     return actions.contains { self.canHandleExternalAction($0) }
   }
   
@@ -68,7 +68,7 @@ extension TKInterAppCommunicator {
   /// - Parameter segment: A segment
   /// - Returns: Available actions, can be empty
   public func externalActions(for segment: TKSegment) -> [ExternalAction] {
-    guard let externalActions = segment.bookingExternalActions() else { return [] }
+    guard let externalActions = segment.bookingExternalActions else { return [] }
     
     // First we build the actions, sorting them priority and dealing with the
     // case where multiple actions can be handled by the same handler (and
@@ -79,7 +79,7 @@ extension TKInterAppCommunicator {
     
     // If we only have one action, we prefer the title suggested by the backend
     // otherwise keep the per-handler titles to not duplicate them
-    if actions.count == 1, var action = actions.first, let suggestedTitle = segment.bookingTitle() {
+    if actions.count == 1, var action = actions.first, let suggestedTitle = segment.bookingTitle {
       action.title = suggestedTitle
       return [action]
     } else {
